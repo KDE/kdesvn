@@ -75,7 +75,7 @@ int LoadDmpDlg_impl::uuidAction()const
 /*!
     \fn LoadDmpDlg_impl::dumpFile()const
  */
-KUrl LoadDmpDlg_impl::dumpFile()const
+QUrl LoadDmpDlg_impl::dumpFile()const
 {
     return m_Dumpfile->url();
 }
@@ -85,7 +85,7 @@ KUrl LoadDmpDlg_impl::dumpFile()const
  */
 QString LoadDmpDlg_impl::repository()const
 {
-    return m_Repository->url().path(KUrl::RemoveTrailingSlash);
+    return m_Repository->url().toLocalFile();
 }
 
 /*!

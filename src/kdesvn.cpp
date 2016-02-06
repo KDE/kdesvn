@@ -184,12 +184,12 @@ kdesvn::~kdesvn()
 {
 }
 
-void kdesvn::loadRescent(const KUrl &url)
+void kdesvn::loadRescent(const QUrl &url)
 {
     load(url, true);
 }
 
-void kdesvn::load(const KUrl &url, bool addRescent)
+void kdesvn::load(const QUrl &url, bool addRescent)
 {
     QTimer::singleShot(100, this, SLOT(slotResetExtraStatus()));
     if (m_part) {
@@ -202,7 +202,7 @@ void kdesvn::load(const KUrl &url, bool addRescent)
             }
         }
         if (!ret) {
-            changeStatusbar(i18n("Could not open URL %1", url.prettyUrl()));
+            changeStatusbar(i18n("Could not open URL %1", url.toString()));
             if (rac) {
                 rac->removeUrl(url);
             }
@@ -230,7 +230,7 @@ void kdesvn::setupActions()
     ac->setEnabled(memberList().count() > 1);
     KStandardAction::quit(this, SLOT(close()), actionCollection());
 
-    KRecentFilesAction *rac = KStandardAction::openRecent(this, SLOT(loadRescent(KUrl)), actionCollection());
+    KRecentFilesAction *rac = KStandardAction::openRecent(this, SLOT(loadRescent(QUrl)), actionCollection());
     if (rac) {
         rac->setMaxItems(8);
 //         rac->loadEntries(KGlobal::config(),"recent_files");

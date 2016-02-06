@@ -884,7 +884,7 @@ void RevGraphView::contextMenuEvent(QContextMenuEvent *e)
     }
     break;
     case 201: {
-        QString fn = KFileDialog::getSaveFileName(KUrl(),
+        QString fn = KFileDialog::getSaveFileName(QUrl(),
                                                   i18n("image/png"),
                                                   this
                                                  );

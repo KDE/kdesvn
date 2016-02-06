@@ -37,7 +37,6 @@
 #include <QFileInfo>
 #include <QSplitter>
 
-#include <kurl.h>
 #include <ktrader.h>
 #include <klibloader.h>
 #include <kmessagebox.h>
@@ -90,7 +89,7 @@ kdesvnView::kdesvnView(KActionCollection *aCollection, QWidget *parent, bool ful
     connect(m_TreeWidget, SIGNAL(changeCaption(QString)), this, SLOT(slotSetTitle(QString)));
     connect(m_TreeWidget, SIGNAL(sigShowPopup(QString,QWidget**)), this, SLOT(slotDispPopup(QString,QWidget**)));
     connect(m_TreeWidget, SIGNAL(sigUrlOpend(bool)), parent, SLOT(slotUrlOpened(bool)));
-    connect(m_TreeWidget, SIGNAL(sigSwitchUrl(KUrl)), this, SIGNAL(sigSwitchUrl(KUrl)));
+    connect(m_TreeWidget, SIGNAL(sigSwitchUrl(QUrl)), this, SIGNAL(sigSwitchUrl(QUrl)));
     connect(m_TreeWidget, SIGNAL(sigUrlChanged(QString)), this, SLOT(slotUrlChanged(QString)));
     connect(m_TreeWidget, SIGNAL(sigCacheStatus(qlonglong,qlonglong)), this, SLOT(fillCacheStatus(qlonglong,qlonglong)));
     connect(m_TreeWidget, SIGNAL(sigExtraStatusMessage(QString)), this, SIGNAL(sigExtraStatusMessage(QString)));
@@ -141,11 +140,11 @@ QString kdesvnView::currentUrl()
     return m_currentUrl;
 }
 
-bool kdesvnView::openUrl(const KUrl &url)
+bool kdesvnView::openUrl(const QUrl &url)
 {
     /* transform of url must be done in part! otherwise we will run into different troubles! */
     m_currentUrl.clear();
-    KUrl _url(url);
+    QUrl _url(url);
     bool open = false;
     if (_url.isLocalFile()) {
         QString query = _url.query();
@@ -160,12 +159,12 @@ bool kdesvnView::openUrl(const KUrl &url)
             _url.setQuery(query);
         }
     } else {
-        if (!svn::Url::isValid(url.protocol())) {
+        if (!svn::Url::isValid(url.scheme())) {
             return open;
         }
     }
     m_LogWindow->clear();
-    slotSetTitle(url.prettyUrl());
+    slotSetTitle(url.toString());
     if (m_TreeWidget->openUrl(url)) {
         slotOnURL(i18n("Repository opened"));
         m_currentUrl = url.url();
@@ -338,7 +337,7 @@ void kdesvnView::slotLoaddump()
         break;
     }
 
-    KUrl _uri = ptr->dumpFile();
+    QUrl _uri = ptr->dumpFile();
     QString _input;
     QString tmpfile;
     bool networked = false;

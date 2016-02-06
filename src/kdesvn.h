@@ -84,12 +84,12 @@ public Q_SLOTS:
     /**
      * Use this method to load whatever file/URL you have
      */
-    virtual void load(const KUrl &_url)
+    void load(const QUrl &_url)
     {
         load(_url, true);
     }
-    virtual void loadRescent(const KUrl &);
-    virtual void load(const KUrl &, bool);
+    void loadRescent(const QUrl &);
+    void load(const QUrl &, bool);
 
 private slots:
     void fileOpen();

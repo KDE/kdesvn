@@ -47,7 +47,7 @@ void DumpRepo_impl::slotDumpRange(bool how)
  */
 QString DumpRepo_impl::reposPath() const
 {
-    return m_ReposPath->url().path(KUrl::RemoveTrailingSlash);
+    return m_ReposPath->url().toLocalFile();
 }
 
 /*!
@@ -55,7 +55,7 @@ QString DumpRepo_impl::reposPath() const
  */
 QString DumpRepo_impl::targetFile() const
 {
-    return m_OutputFile->url().path(KUrl::RemoveTrailingSlash);
+    return m_OutputFile->url().toLocalFile();
 }
 
 /*!

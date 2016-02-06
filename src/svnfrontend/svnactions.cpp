@@ -72,9 +72,8 @@
 #include <kapplication.h>
 #include <kdebug.h>
 #include <kconfig.h>
-#include <ktrader.h>
+#include <kmimetypetrader.h>
 #include <krun.h>
-#include <kstdguiitem.h>
 #include <kvbox.h>
 #include <ktoolinvocation.h>
 
@@ -627,7 +626,7 @@ void SvnActions::slotMakeCat(const svn::Revision &start, const QString &what, co
 
     if (it != offers.constEnd()) {
         content.setAutoRemove(false);
-        KRun::run(**it, KUrl(tname), KApplication::activeWindow(), true);
+        KRun::run(**it, QList<QUrl>() << QUrl(tname), KApplication::activeWindow(), true);
         return;
     }
     KTextEdit *ptr = 0;

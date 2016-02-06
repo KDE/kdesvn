@@ -1787,13 +1787,11 @@ void MainTreeWidget::slotCopyFinished(KJob *_job)
         ok = false;
     }
     if (ok) {
-        const KUrl::List lst = job->srcUrls();
-        const QString base = job->destUrl().path(KUrl::AddTrailingSlash);
+        const QList<QUrl> lst = job->srcUrls();
         svn::Paths tmp;
         tmp.reserve(lst.size());
-        Q_FOREACH(const KUrl &url, lst) {
-            QString _ne = base + url.fileName(KUrl::IgnoreTrailingSlash);
-            tmp.push_back(svn::Path(_ne));
+        Q_FOREACH(const QUrl &url, lst) {
+            tmp.push_back(svn::Path(url.toLocalFile()));
         }
         m_Data->m_Model->svnWrapper()->addItems(tmp, svn::DepthInfinity);
     }

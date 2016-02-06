@@ -71,7 +71,7 @@ Q_SIGNALS:
 public slots:
     virtual void slotDispPopup(const QString &, QWidget **target);
     virtual void slotFileProperties();
-    virtual bool openUrl(const KUrl &);
+    virtual bool openUrl(const QUrl &);
     virtual void slotSshAdd();
     virtual void showDbStatus();
 

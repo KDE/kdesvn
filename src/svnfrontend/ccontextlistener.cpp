@@ -285,14 +285,10 @@ bool CContextListener::contextSslClientCertPrompt(QString &certFile)
 {
     kDebug(9510) << certFile << endl;
     emit waitShow(true);
-//     QString afile = KFileDialog::getOpenFileName(QString(),
-//         QString(),
-//         0,
-//         i18n("Open a file with a #PKCS12 certificate"));
-    QString afile = KFileDialog::getOpenFileName(KUrl(),
-                    QString(),
-                    0,
-                    i18n("Open a file with a #PKCS12 certificate"));
+    QString afile = KFileDialog::getOpenFileName(QUrl(),
+                                                 QString(),
+                                                 0,
+                                                 i18n("Open a file with a #PKCS12 certificate"));
     emit waitShow(false);
     if (afile.isEmpty()) {
         return false;

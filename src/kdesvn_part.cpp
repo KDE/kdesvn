@@ -93,7 +93,7 @@ void kdesvnpart::init(QWidget *parentWidget, bool full)
     setXMLFile("kdesvn_part.rc");
 #endif
     connect(m_view, SIGNAL(sigShowPopup(QString,QWidget**)), this, SLOT(slotDispPopup(QString,QWidget**)));
-    connect(m_view, SIGNAL(sigSwitchUrl(KUrl)), this, SLOT(openUrl(KUrl)));
+    connect(m_view, SIGNAL(sigSwitchUrl(QUrl)), this, SLOT(openUrl(QUrl)));
     connect(this, SIGNAL(refreshTree()), m_view, SLOT(refreshCurrentTree()));
     connect(m_view, SIGNAL(setWindowCaption(QString)), this, SIGNAL(setWindowCaption(QString)));
     connect(m_view, SIGNAL(sigUrlChanged(QString)), this, SLOT(slotUrlChanged(QString)));
@@ -117,17 +117,16 @@ bool kdesvnpart::openFile()
 {
     m_view->openUrl(url());
     // just for fun, set the status bar
-    emit setStatusBarText(url().prettyUrl());
+    emit setStatusBarText(url().toString());
 
     return true;
 }
 
-bool kdesvnpart::openUrl(const KUrl &aUrl)
+bool kdesvnpart::openUrl(const QUrl &aUrl)
 {
+    QUrl _url = helpers::KTranslateUrl::translateSystemUrl(aUrl);
 
-    KUrl _url = helpers::KTranslateUrl::translateSystemUrl(aUrl);
-
-    _url.setProtocol(svn::Url::transformProtokoll(_url.protocol()));
+    _url.setScheme(svn::Url::transformProtokoll(_url.scheme()));
 
     if (!_url.isValid() || !closeUrl()) {
         return false;
@@ -137,7 +136,7 @@ bool kdesvnpart::openUrl(const KUrl &aUrl)
     bool ret = m_view->openUrl(url());
     if (ret) {
         emit completed();
-        emit setWindowCaption(url().prettyUrl());
+        emit setWindowCaption(url().toString());
     }
     return ret;
 }

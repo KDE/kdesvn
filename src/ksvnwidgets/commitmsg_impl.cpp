@@ -584,7 +584,7 @@ void Commitmsg_impl::insertFile()
         delete dlg;
         return;
     }
-    KUrl _url = dlg->selectedUrl();
+    QUrl _url = dlg->selectedUrl();
     delete dlg;
     if (_url.isEmpty() || !_url.isValid()) {
         return;

@@ -34,10 +34,10 @@ class OpenContextmenu : public KMenu
 {
     Q_OBJECT
 public:
-    OpenContextmenu(const KUrl &aPath, const KService::List &aList, QWidget *parent);
+    OpenContextmenu(const QUrl &aPath, const KService::List &aList, QWidget *parent);
     virtual ~OpenContextmenu();
 protected:
-    KUrl m_Path;
+    QUrl m_Path;
     KService::List m_List;
     QMap<int, KService::Ptr> m_mapPopup;
 

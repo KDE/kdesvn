@@ -151,7 +151,7 @@ QString MergeDlg_impl::Src1()const
 {
     KUrl uri(m_SrcOneInput->url());
     QString proto = svn::Url::transformProtokoll(uri.protocol());
-    if (proto == "file" && !m_SrcOneInput->url().prettyUrl().startsWith("ksvn+file:")) {
+    if (proto == "file" && !m_SrcOneInput->url().scheme().startsWith("ksvn+file:")) {
         uri.setProtocol(QString());
     } else {
         uri.setProtocol(proto);
@@ -166,7 +166,7 @@ QString MergeDlg_impl::Src2()const
     }
     KUrl uri(m_SrcTwoInput->url());
     QString proto = svn::Url::transformProtokoll(uri.protocol());
-    if (proto == "file" && !m_SrcTwoInput->url().prettyUrl().startsWith("ksvn+file:")) {
+    if (proto == "file" && !m_SrcTwoInput->url().scheme().startsWith("ksvn+file:")) {
         uri.setProtocol(QString());
     } else {
         uri.setProtocol(proto);

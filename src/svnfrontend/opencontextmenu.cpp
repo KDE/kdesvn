@@ -25,7 +25,7 @@
 #include <kdebug.h>
 #include <kiconloader.h>
 
-OpenContextmenu::OpenContextmenu(const KUrl &aPath, const KService::List &aList, QWidget *parent)
+OpenContextmenu::OpenContextmenu(const QUrl &aPath, const KService::List &aList, QWidget *parent)
     : KMenu(parent), m_Path(aPath), m_List(aList)
 {
     setup();
@@ -69,7 +69,7 @@ void OpenContextmenu::slotRunService(QAction *act)
 {
     QMap<int, KService::Ptr>::Iterator it = m_mapPopup.find(act->data().toInt());
     if (it != m_mapPopup.end()) {
-        KRun::run(**it, m_Path, KApplication::activeWindow());
+        KRun::run(**it, QList<QUrl>() << m_Path, KApplication::activeWindow());
     } else {
         slotOpenWith();
     }

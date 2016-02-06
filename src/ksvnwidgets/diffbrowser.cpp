@@ -93,10 +93,10 @@ void DiffBrowser::printContent()
  */
 void DiffBrowser::saveDiff()
 {
-    QString saveTo = KFileDialog::getSaveFileName(KUrl(),
-                     "text/x-patch text/plain",
-                     this
-                                                 );
+    QString saveTo = KFileDialog::getSaveFileName(QUrl(),
+                                                  "text/x-patch text/plain",
+                                                  this
+                                                  );
     if (saveTo.isEmpty()) {
         return;
     }

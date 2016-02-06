@@ -30,9 +30,9 @@ namespace helpers
 */
 namespace KTranslateUrl
 {
-KUrl translateSystemUrl(const KUrl &_url);
+QUrl translateSystemUrl(const QUrl &_url);
 QString makeKdeUrl(const QString &inUrl);
-KUrl string2Uri(const QString &what);
+QUrl string2Uri(const QString &what);
 }
 
 }

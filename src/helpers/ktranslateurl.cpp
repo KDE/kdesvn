@@ -32,12 +32,12 @@ namespace helpers
 {
 namespace KTranslateUrl
 {
-static bool parseURL(const KUrl &url, QString &name, QString &path);
+static bool parseURL(const QUrl &url, QString &name, QString &path);
 static KUrl findSystemBase(const QString &name);
 
-KUrl translateSystemUrl(const KUrl &_url)
+QUrl translateSystemUrl(const QUrl &_url)
 {
-    QString proto = _url.protocol();
+    QString proto = _url.scheme();
 
     if (proto != QLatin1String("system")) {
         return _url;
@@ -57,7 +57,7 @@ KUrl translateSystemUrl(const KUrl &_url)
     return res;
 }
 
-bool parseURL(const KUrl &url, QString &name, QString &path)
+bool parseURL(const QUrl &url, QString &name, QString &path)
 {
     const QString url_path = url.path();
     int i = url_path.indexOf(QLatin1Char('/'), 1);
@@ -120,17 +120,17 @@ QString makeKdeUrl(const QString &_proto)
     return proto;
 }
 
-KUrl string2Uri(const QString &what)
+QUrl string2Uri(const QString &what)
 {
-    KUrl uri(what);
-    if (uri.protocol() == QLatin1String("file")) {
+    QUrl uri(what);
+    if (uri.scheme() == QLatin1String("file")) {
         if (what.startsWith(QLatin1String("file:"))) {
-            uri.setProtocol(QLatin1String("ksvn+file"));
+            uri.setScheme(QLatin1String("ksvn+file"));
         } else {
-            uri.setProtocol(QString());
+            uri.setScheme(QString());
         }
     } else {
-        uri.setProtocol(makeKdeUrl(uri.protocol()));
+        uri.setScheme(makeKdeUrl(uri.scheme()));
     }
     return uri;
 }

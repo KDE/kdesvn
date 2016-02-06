@@ -32,7 +32,7 @@ public:
     bool usePre()const;
     bool validateProps()const;
     int uuidAction()const;
-    KUrl dumpFile()const;
+    QUrl dumpFile()const;
     QString repository()const;
     QString parentPath()const;
 

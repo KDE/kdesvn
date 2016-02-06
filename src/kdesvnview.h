@@ -67,7 +67,7 @@ public:
     /**
      * Random 'set' function
      */
-    virtual bool openUrl(const KUrl &url);
+    virtual bool openUrl(const QUrl &url);
 
     /* repositorylistener methods */
     virtual void sendWarning(const QString &);
@@ -91,7 +91,7 @@ Q_SIGNALS:
     void signalChangeCaption(const QString &);
 
     void sigShowPopup(const QString &, QWidget **);
-    void sigSwitchUrl(const KUrl &);
+    void sigSwitchUrl(const QUrl &);
     void setWindowCaption(const QString &);
     void sigUrlChanged(const QString &);
     void sigMakeBaseDirs();

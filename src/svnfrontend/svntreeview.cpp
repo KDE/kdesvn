@@ -33,6 +33,7 @@
 #include <KDebug>
 #include <KUrl>
 #include <KLocale>
+#include <KUrlMimeData>
 
 SvnTreeView::SvnTreeView(QWidget *parent)
     : QTreeView(parent)
@@ -94,7 +95,7 @@ void SvnTreeView::dropEvent(QDropEvent *event)
     }
 
     Qt::DropAction action = event->dropAction();
-    KUrl::List list = KUrl::List::fromMimeData(event->mimeData(), &metaMap);
+    const QList<QUrl> list = KUrlMimeData::urlsFromMimeData(event->mimeData(), KUrlMimeData::PreferLocalUrls, &metaMap);
     bool intern = false;
     if (metaMap.find("kdesvn-source") != metaMap.end()) {
         SvnItemModel *itemModel = static_cast<SvnItemModel *>(proxyModel->sourceModel());
@@ -106,7 +107,7 @@ void SvnTreeView::dropEvent(QDropEvent *event)
     Qt::KeyboardModifiers modifiers = QApplication::keyboardModifiers();
 
     QMetaObject::invokeMethod(this, "doDrop",
-                              Q_ARG(KUrl::List, list),
+                              Q_ARG(QList<QUrl>, list),
                               Q_ARG(QModelIndex, index2),
                               Q_ARG(bool, intern),
                               Q_ARG(Qt::DropAction, action),
@@ -115,7 +116,7 @@ void SvnTreeView::dropEvent(QDropEvent *event)
     event->acceptProposedAction();
 }
 
-void SvnTreeView::doDrop(const KUrl::List &list, const QModelIndex &parent, bool intern, Qt::DropAction action, Qt::KeyboardModifiers modifiers)
+void SvnTreeView::doDrop(const QList<QUrl> &list, const QModelIndex &parent, bool intern, Qt::DropAction action, Qt::KeyboardModifiers modifiers)
 {
     if (intern && ((modifiers & Qt::ControlModifier) == 0) &&
             ((modifiers & Qt::ShiftModifier) == 0)) {

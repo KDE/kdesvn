@@ -120,7 +120,7 @@ EditPropsWidget::EditPropsWidget(QWidget *parent)
                         "second expression is used to extract the bare bug ID from that string.");
 
     m_NameEdit->setAutoCompletion(true);
-    m_NameEdit->setCompletionMode(KGlobalSettings::CompletionPopupAuto);
+    m_NameEdit->setCompletionMode(KCompletion::CompletionPopupAuto);
     m_NameEdit->setDuplicatesEnabled(false);
     m_NameEdit->setHistoryItems(fileProperties, true);
     isDir = false;

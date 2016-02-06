@@ -37,7 +37,7 @@
 #include <QFileInfo>
 #include <QSplitter>
 
-#include <ktrader.h>
+#include <kmimetypetrader.h>
 #include <klibloader.h>
 #include <kmessagebox.h>
 #include <krun.h>

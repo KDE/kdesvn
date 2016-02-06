@@ -570,12 +570,16 @@ const QString &SvnItem::getToolTipText()
                 lst.append(this);
                 text = wrap->getInfo(lst, rev, peg, false, false);
                 kDebug() << text << endl;
+                // KF5: TODO
+                /*
                 if (!p_Item->m_fitem.isNull()) {
                     text += p_Item->m_fitem.getToolTipText(0);
                 }
+                */
             }
         } else if (!p_Item->m_fitem.isNull()) {
-            text = p_Item->m_fitem.getToolTipText(6);
+            // KF5: TODO
+//            text = p_Item->m_fitem.getToolTipText(6);
         }
         QMutexLocker ml(&(p_Item->_infoTextMutex));
         p_Item->m_infoText = text;
@@ -594,10 +598,11 @@ void SvnItem::generateToolTip(const svn::InfoEntry &entry)
             text = wrap->getInfo(e, fullName(), false);
         }
         if (!p_Item->m_fitem.isNull()) {
-            text += p_Item->m_fitem.getToolTipText(0);
+            // KF5: TODO
+//            text += p_Item->m_fitem.getToolTipText(0);
         }
     } else if (!p_Item->m_fitem.isNull()) {
-        text = p_Item->m_fitem.getToolTipText(6);
+//        text = p_Item->m_fitem.getToolTipText(6);
     }
     {
         QMutexLocker ml(&(p_Item->_infoTextMutex));

@@ -46,10 +46,12 @@
 #include "EditIgnorePattern.h"
 #include "setpropertywidget.h"
 
+#include <kjobwidgets.h>
+#include <kjobuidelegate.h>
 #include <kmessagebox.h>
 #include <kactioncollection.h>
 #include <kauthorized.h>
-#include <ktrader.h>
+#include <kmimetypetrader.h>
 #include <kmenu.h>
 #include <kio/deletejob.h>
 #include <kio/copyjob.h>
@@ -1682,7 +1684,8 @@ void MainTreeWidget::makeDelete(const SvnItemList &lst)
         if (!kioList.isEmpty()) {
             KIO::Job *aJob = KIO::del(kioList);
             if (!aJob->exec()) {
-                aJob->showErrorDialog(this);
+                KJobWidgets::setWindow(aJob, this);
+                aJob->ui()->showErrorMessage();
                 return;
             }
         }
@@ -1721,7 +1724,7 @@ void MainTreeWidget::internalDrop(const KUrl::List &_lst, Qt::DropAction action,
         }
         if (!nProto.isEmpty())
             (*it).setProtocol(nProto);
-        kDebug() << "Dropped: " << (*it) << endl;
+        qDebug() << "Dropped: " << (*it) << endl;
     }
 
     if (index.isValid()) {
@@ -1783,7 +1786,8 @@ void MainTreeWidget::slotCopyFinished(KJob *_job)
     }
     bool ok = true;
     if (job->error()) {
-        job->showErrorDialog(this);
+        KJobWidgets::setWindow(job, this);
+        job->ui()->showErrorMessage();
         ok = false;
     }
     if (ok) {

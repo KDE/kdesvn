@@ -103,7 +103,7 @@ kdesvn::kdesvn()
             connect(this, SIGNAL(sigSavestate()), m_part->widget(), SLOT(slotSavestate()));
             connect(m_part->widget(), SIGNAL(sigExtraStatusMessage(QString)), this, SLOT(slotExtraStatus(QString)));
 
-            KAction *tmpAction;
+            QAction *tmpAction;
             tmpAction = actionCollection()->addAction("subversion_create_repo",
                                                       m_part->widget(),
                                                       SLOT(slotCreateRepo()));
@@ -196,7 +196,6 @@ void kdesvn::load(const KUrl &url, bool addRescent)
         bool ret = m_part->openUrl(url);
         KRecentFilesAction *rac = 0;
         if (addRescent) {
-//             KAction * ac = actionCollection()->action("file_open_recent");
             QAction *ac = actionCollection()->action("file_open_recent");
             if (ac) {
                 rac = (KRecentFilesAction *)ac;
@@ -223,7 +222,7 @@ void kdesvn::load(const KUrl &url, bool addRescent)
 
 void kdesvn::setupActions()
 {
-    KAction *ac;
+    QAction *ac;
     KStandardAction::open(this, SLOT(fileOpen()), actionCollection());
     KStandardAction::openNew(this, SLOT(fileNew()), actionCollection());
     ac = KStandardAction::close(this, SLOT(fileClose()), actionCollection());

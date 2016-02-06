@@ -32,9 +32,6 @@
 
 class KActionCollection;
 class MainTreeWidgetData;
-class KShortcut;
-class KAction;
-class KActionCollection;
 class SvnItemModelNode;
 class KDialog;
 class KJob;
@@ -192,9 +189,9 @@ private:
     MainTreeWidgetData *m_Data;
     void enableAction(const QString &, bool);
 
-    KAction *add_action(const QString &actionname,
+    QAction *add_action(const QString &actionname,
                         const QString &text,
-                        const KShortcut &sequ,
+                        const QKeySequence &sequ,
                         const QIcon &,
                         QObject *,
                         const char *slot);

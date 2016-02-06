@@ -35,7 +35,6 @@
 #include "helpers/sshagent.h"
 #include "svnfrontend/database/dboverview.h"
 
-#include <kaction.h>
 #include <ktoggleaction.h>
 #include <kactioncollection.h>
 #include <kstandardaction.h>
@@ -207,17 +206,17 @@ void kdesvnpart::setupActions()
     toggletemp->setChecked(Kdesvnsettings::network_on());
     connect(toggletemp, SIGNAL(toggled(bool)), this, SLOT(slotEnableNetwork(bool)));
 
-    KAction *t = KStandardAction::preferences(this, SLOT(slotShowSettings()), actionCollection());
+    QAction *t = KStandardAction::preferences(this, SLOT(slotShowSettings()), actionCollection());
 
     t->setText(i18n("Configure Kdesvn..."));
     actionCollection()->addAction("kdesvnpart_pref", t);
 
     if (QCoreApplication::applicationName() != QLatin1String("kdesvn")) {
-        t = new KAction(QIcon::fromTheme("kdesvn"), i18n("About kdesvn part"), this);
+        t = new QAction(QIcon::fromTheme("kdesvn"), i18n("About kdesvn part"), this);
         connect(t, SIGNAL(triggered(bool)), SLOT(showAboutApplication()));
         actionCollection()->addAction("help_about_kdesvnpart", t);
 
-        t = new KAction(QIcon::fromTheme("help-contents"), i18n("Kdesvn Handbook"), this);
+        t = new QAction(QIcon::fromTheme("help-contents"), i18n("Kdesvn Handbook"), this);
         connect(t, SIGNAL(triggered(bool)), SLOT(appHelpActivated()));
         actionCollection()->addAction("help_kdesvn", t);
     }

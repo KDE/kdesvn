@@ -25,8 +25,6 @@
 
 #include <klocale.h>
 #include <kdebug.h>
-#include <kicon.h>
-#include <kiconloader.h>
 
 #include <QStringList>
 #include <QTreeWidget>
@@ -162,9 +160,9 @@ QVariant SvnLogModel::data(const QModelIndex &index, int role) const
     case Qt::DecorationRole:
         if (index.column() == 0) {
             if (index.row() == m_data->_left) {
-                return KIcon("kdesvnleft");
+                return QIcon::fromTheme("kdesvnleft");
             } else if (index.row() == m_data->_right) {
-                return KIcon("kdesvnright");
+                return QIcon::fromTheme("kdesvnright");
             } else {
                 return QString("   ");
             }

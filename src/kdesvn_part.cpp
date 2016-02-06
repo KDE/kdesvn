@@ -213,11 +213,11 @@ void kdesvnpart::setupActions()
     actionCollection()->addAction("kdesvnpart_pref", t);
 
     if (QCoreApplication::applicationName() != QLatin1String("kdesvn")) {
-        t = new KAction(KIcon("kdesvn"), i18n("About kdesvn part"), this);
+        t = new KAction(QIcon::fromTheme("kdesvn"), i18n("About kdesvn part"), this);
         connect(t, SIGNAL(triggered(bool)), SLOT(showAboutApplication()));
         actionCollection()->addAction("help_about_kdesvnpart", t);
 
-        t = new KAction(KIcon("help-contents"), i18n("Kdesvn Handbook"), this);
+        t = new KAction(QIcon::fromTheme("help-contents"), i18n("Kdesvn Handbook"), this);
         connect(t, SIGNAL(triggered(bool)), SLOT(appHelpActivated()));
         actionCollection()->addAction("help_kdesvn", t);
     }

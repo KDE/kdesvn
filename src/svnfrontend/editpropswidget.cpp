@@ -28,14 +28,13 @@
 #include <kglobalsettings.h>
 #include <kdebug.h>
 #include <klocale.h>
-#include <kicon.h>
 
 EditPropsWidget::EditPropsWidget(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
 
-    helpButton->setIcon(KIcon("help-hint"));
+    helpButton->setIcon(QIcon::fromTheme("help-hint"));
 
     /// @TODO Read these values from a text or config file
     fileProperties += ("svn:eol-style");

@@ -29,7 +29,6 @@
 #include <QAction>
 #include <QMenu>
 
-#include <KIcon>
 #include <KIconLoader>
 #include <KDebug>
 #include <KUrl>
@@ -70,7 +69,7 @@ void SvnTreeView::startDrag(Qt::DropActions supportedActions)
             SvnItemModelNode *item = itemModel->nodeForIndex(index);
             pixmap = item->getPixmap(KIconLoader::SizeMedium, false);
         } else {
-            pixmap = KIcon("document-multiple").pixmap(KIconLoader::SizeMedium, KIconLoader::SizeMedium);
+            pixmap = QIcon::fromTheme("document-multiple").pixmap(KIconLoader::SizeMedium, KIconLoader::SizeMedium);
         }
         drag->setPixmap(pixmap);
         drag->setMimeData(data);
@@ -125,13 +124,13 @@ void SvnTreeView::doDrop(const KUrl::List &list, const QModelIndex &parent, bool
         QString seq = QKeySequence(Qt::ShiftModifier).toString();
         seq.chop(1); // chop superfluous '+'
         QAction *popupMoveAction = new QAction(i18n("&Move Here") + '\t' + seq, this);
-        popupMoveAction->setIcon(KIcon("go-jump"));
+        popupMoveAction->setIcon(QIcon::fromTheme("go-jump"));
         seq = QKeySequence(Qt::ControlModifier).toString();
         seq.chop(1);
         QAction *popupCopyAction = new QAction(i18n("&Copy Here") + '\t' + seq, this);
-        popupCopyAction->setIcon(KIcon("edit-copy"));
+        popupCopyAction->setIcon(QIcon::fromTheme("edit-copy"));
         QAction *popupCancelAction = new QAction(i18n("C&ancel") + '\t' + QKeySequence(Qt::Key_Escape).toString(), this);
-        popupCancelAction->setIcon(KIcon("process-stop"));
+        popupCancelAction->setIcon(QIcon::fromTheme("process-stop"));
 
         popup.addAction(popupMoveAction);
         popup.addAction(popupCopyAction);

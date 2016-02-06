@@ -34,7 +34,7 @@
 #include <QString>
 #include <QList>
 
-#include "svnqt/cache/conversion_check.h"
+#include <ConversionCheck>
 #include "svnqt/svnqt_defines.h"
 
 namespace svn

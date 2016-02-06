@@ -20,7 +20,6 @@
 #include "propertyitem.h"
 #include <klocale.h>
 #include <kiconloader.h>
-#include <kicon.h>
 #include <kdebug.h>
 
 PropertyListViewItem::PropertyListViewItem(QTreeWidget *parent, const QString &aName, const QString &aValue)
@@ -63,7 +62,7 @@ void PropertyListViewItem::deleteIt()
 void PropertyListViewItem::unDeleteIt()
 {
     m_deleted = false;
-    setIcon(0, KIcon());
+    setIcon(0, QIcon());
 }
 
 bool PropertyListViewItem::protected_Property(const QString &what)

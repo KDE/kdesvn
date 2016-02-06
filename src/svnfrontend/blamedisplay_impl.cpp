@@ -219,7 +219,7 @@ BlameDisplay_impl::BlameDisplay_impl(QWidget *parent)
     : QWidget(parent), Ui::BlameDisplay()
 {
     setupUi(this);
-    KAction *ac = new KAction(KIcon("kdesvnlog"), i18n("Log message for revision"), this);
+    KAction *ac = new KAction(QIcon::fromTheme("kdesvnlog"), i18n("Log message for revision"), this);
     connect(ac, SIGNAL(triggered()), this, SLOT(slotShowCurrentCommit()));
     m_BlameTree->addAction(ac);
     m_Data = new BlameDisplayData();

@@ -32,7 +32,6 @@
 
 class KActionCollection;
 class MainTreeWidgetData;
-class KIcon;
 class KShortcut;
 class KAction;
 class KActionCollection;
@@ -196,7 +195,7 @@ private:
     KAction *add_action(const QString &actionname,
                         const QString &text,
                         const KShortcut &sequ,
-                        const KIcon &,
+                        const QIcon &,
                         QObject *,
                         const char *slot);
 };

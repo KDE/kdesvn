@@ -34,7 +34,6 @@
 #include <qwhatsthis.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kiconloader.h>
 #include <kdebug.h>
 
 PropertiesDlg::PropertiesDlg(SvnItem *which, const svn::ClientP &aClient, const svn::Revision &aRev, QWidget *parent)

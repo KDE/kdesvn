@@ -77,7 +77,7 @@ void UrlDlg::init_dlg()
     connect(urlRequester_->comboBox(), SIGNAL(textChanged(QString)), SLOT(slotTextChanged(QString)));
     enableButtonOk(false);
     enableButton(KDialog::User1, false);
-    setButtonGuiItem(KDialog::User1, KGuiItem(i18n("Clear"), KIcon("clear")));
+    setButtonGuiItem(KDialog::User1, KGuiItem(i18n("Clear"), QIcon::fromTheme("clear")));
     connect(this, SIGNAL(user1Clicked()), this, SLOT(slotClear()));
     urlRequester_->adjustSize();
     resize(QSize(400, sizeHint().height()));

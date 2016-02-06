@@ -23,6 +23,7 @@
 #include <klocale.h>
 #include <kapplication.h>
 #include <kdebug.h>
+#include <kiconloader.h>
 
 OpenContextmenu::OpenContextmenu(const KUrl &aPath, const KService::List &aList, QWidget *parent)
     : KMenu(parent), m_Path(aPath), m_List(aList)

@@ -46,7 +46,7 @@
 #include <kaboutdata.h>
 #include <klocale.h>
 #include <klocalizedstring.h>
-#include <ktoolinvocation.h>
+#include <khelpclient.h>
 #include <kpluginfactory.h>
 
 K_PLUGIN_FACTORY(KdesvnFactory, registerPlugin<kdesvnpart>(); registerPlugin<commandline_part>("commandline_part");)
@@ -73,7 +73,8 @@ void kdesvnpart::init(QWidget *parentWidget, bool full)
     m_aboutDlg = 0;
     KGlobal::locale()->insertCatalog("kdesvn");
     // we need an instance
-    setComponentData(KdesvnFactory::componentData());
+    // TODO: KF5 port
+    //setComponentData(KdesvnFactory::componentData());
 
     m_browserExt = new KdesvnBrowserExtension(this);
 
@@ -148,29 +149,6 @@ void kdesvnpart::slotFileProperties()
 void kdesvnpart::slotDispPopup(const QString &name, QWidget **target)
 {
     *target = hostContainer(name);
-}
-
-KAboutData *kdesvnpart::createAboutData()
-{
-    static KLocalizedString m_Extratext = ki18n("Built with Subversion library: %1\nRunning Subversion library: %2").subs(svn::Version::linked_version()).subs(svn::Version::running_version());
-
-    static KAboutData about("kdesvnpart",
-                            "kdesvn",
-                            ki18n("kdesvn Part"),
-                            version,
-                            ki18n("A Subversion Client for KDE (dynamic Part component)"),
-                            KAboutLicense::LGPL_V2,
-                            ki18n("(C) 2005-2009 Rajko Albrecht"),
-                            KLocalizedString(),
-                            QByteArray(),
-                            0L);
-
-    about.addAuthor(ki18n("Rajko Albrecht"), ki18n("Original author and maintainer"), "ral@alwins-world.de");
-    about.addAuthor(ki18n("Christian Ehrlicher"), ki18n("Developer"), "ch.ehrlicher@gmx.de");
-    about.setHomepage("https://projects.kde.org/kdesvn");
-    about.setOtherText(m_Extratext);
-    about.setProgramIconName("kdesvn");
-    return &about;
 }
 
 /*!
@@ -307,7 +285,21 @@ void KdesvnBrowserExtension::properties()
 void kdesvnpart::showAboutApplication()
 {
     if (!m_aboutDlg) {
-        m_aboutDlg = new KAboutApplicationDialog(createAboutData(), (QWidget *)0);
+        QString m_Extratext = i18n("Built with Subversion library: %1\nRunning Subversion library: %2").arg(svn::Version::linked_version()).arg(svn::Version::running_version());
+
+        KAboutData about(QLatin1String("kdesvnpart"),
+                         i18n("kdesvn Part"),
+                         version,
+                         i18n("A Subversion Client for KDE (dynamic Part component)"),
+                         KAboutLicense::LGPL_V2,
+                         i18n("(C) 2005-2009 Rajko Albrecht"),
+                         m_Extratext);
+
+        about.addAuthor(QLatin1String("Rajko Albrecht"), i18n("Original author and maintainer"), QLatin1String("ral@alwins-world.de"));
+        about.addAuthor(QLatin1String("Christian Ehrlicher"), i18n("Developer"), QLatin1String("ch.ehrlicher@gmx.de"));
+        about.setHomepage("https://projects.kde.org/kdesvn");
+        about.setProgramIconName("kdesvn");
+        m_aboutDlg = new KAboutApplicationDialog(about);
     }
     if (m_aboutDlg == 0) {
         return;
@@ -324,7 +316,7 @@ void kdesvnpart::showAboutApplication()
  */
 void kdesvnpart::appHelpActivated()
 {
-    KToolInvocation::invokeHelp(QString(), "kdesvn");
+    KHelpClient::invokeHelp(QString(), "kdesvn");
 }
 
 /*!
@@ -340,7 +332,8 @@ void kdesvnpart::slotShowSettings()
             Kdesvnsettings::self());
     dialog->setFaceType(KPageDialog::List);
 
-    dialog->setHelp("setup", "kdesvn");
+    // TODO: KF5
+    //dialog->setHelp("setup", "kdesvn");
     dialog->addPage(new DisplaySettings_impl(0),
                     i18n("General"), "configure", i18n("General Settings"), true);
     dialog->addPage(new SubversionSettings_impl(0),
@@ -391,3 +384,5 @@ void kdesvnpart::showDbStatus()
         DbOverview::showDbOverview(svn::ClientP());
     }
 }
+
+#include "kdesvn_part.moc"

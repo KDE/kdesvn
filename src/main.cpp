@@ -45,13 +45,11 @@ int main(int argc, char **argv)
     aboutData.addAuthor(i18n("Ovidiu-Florin BOGDAN"), i18n("KF5/Qt5 Porting"), QString("ovidiu.b13@gmail.com"));
     aboutData.addAuthor(i18n("Christian Ehrlicher"), i18n("Developer"), QLatin1String("ch.ehrlicher@gmx.de"));
     aboutData.setHomepage("https://projects.kde.org/kdesvn");
+    KAboutData::setApplicationData(aboutData);
 
     QCommandLineParser parser;
-    KAboutData::setApplicationData(aboutData);
     parser.addVersionOption();
     parser.addHelpOption();
-    aboutData.setupCommandLine(&parser);
-    aboutData.processCommandLine(&parser);
     parser.addOption(QCommandLineOption(QStringList() << "r startrev[:endrev]", i18n("Execute single Subversion command on specific revision(-range)")));
     parser.addOption(QCommandLineOption(QStringList() << "R", i18n("Ask for revision when executing single command")));
     parser.addOption(QCommandLineOption(QStringList() << "f", i18n("Force operation")));
@@ -59,7 +57,9 @@ int main(int argc, char **argv)
     parser.addOption(QCommandLineOption(QStringList() << "l <number>", i18n("Limit log output to <number>")));
     parser.addPositionalArgument("+exec <command>", i18n("Execute Subversion command (\"exec help\" for more information)"));
     parser.addPositionalArgument("+[URL]", i18n("Document to open"));
-    parser.process(app); // PORTING SCRIPT: move this to after any parser.addOption
+    aboutData.setupCommandLine(&parser);
+    parser.process(app);
+    aboutData.processCommandLine(&parser);
 
     // see if we are starting with session management
     if (app.isSessionRestored()) {

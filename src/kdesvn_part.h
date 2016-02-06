@@ -62,7 +62,6 @@ public:
      */
     virtual ~kdesvnpart();
     virtual bool closeUrl();
-    static KAboutData *createAboutData();
 
 Q_SIGNALS:
     void refreshTree();

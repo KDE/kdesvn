@@ -39,6 +39,7 @@
 #include <ktextedit.h>
 #include <kmenu.h>
 #include <kaction.h>
+#include <ktreewidgetsearchline.h>
 
 #include <QPixmap>
 #include <QPainter>

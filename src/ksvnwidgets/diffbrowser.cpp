@@ -50,7 +50,7 @@ DiffBrowser::DiffBrowser(QWidget *parent)
     m_Data = new DiffBrowserData;
 
     setLineWrapMode(QTextEdit::NoWrap);
-    m_Data->m_Syntax = new DiffSyntax(this);
+    m_Data->m_Syntax = new DiffSyntax(document());
     setToolTip(i18n("Ctrl-F for search, F3 or Shift-F3 for search again."));
     setWhatsThis(i18n("<b>Display differences between files</b><p>You may search inside text with Ctrl-F.</p><p>F3 for search forward again, Shift-F3 for search backward again.</p><p>You may save the (original) output with Ctrl-S.</p>"));
     setFocus();

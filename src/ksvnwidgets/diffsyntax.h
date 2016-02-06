@@ -21,12 +21,13 @@
 #define DIFFSYNTAX_H
 
 #include <QSyntaxHighlighter>
+class QTextDocument;
 
 class DiffSyntax : public QSyntaxHighlighter
 {
     Q_OBJECT
 public:
-    explicit DiffSyntax(QTextEdit *aTextEdit);
+    explicit DiffSyntax(QTextDocument *aTextEdit);
     virtual ~DiffSyntax();
 
 protected:

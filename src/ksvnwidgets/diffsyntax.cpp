@@ -23,7 +23,7 @@
 #include <kglobal.h>
 #include <qregexp.h>
 
-DiffSyntax::DiffSyntax(QTextEdit *aTextEdit)  //krazy:exclude=qclasses
+DiffSyntax::DiffSyntax(QTextDocument *aTextEdit)
     : QSyntaxHighlighter(aTextEdit)
 {}
 

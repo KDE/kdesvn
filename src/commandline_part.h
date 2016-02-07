@@ -24,7 +24,7 @@
 #include <QVariantList>
 
 class CommandExec;
-class KCmdLineArgs;
+class QCommandLineParser;
 
 /**
 @author Rajko Albrecht
@@ -35,7 +35,7 @@ class commandline_part : public QObject
 public:
     explicit commandline_part(QObject *parent, const QVariantList &args = QVariantList());
     virtual ~commandline_part();
-    virtual int exec(KCmdLineArgs *);
+    virtual int exec(const QCommandLineParser *parser);
 private:
     CommandExec *m_pCPart;
 

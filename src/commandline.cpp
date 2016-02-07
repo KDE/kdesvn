@@ -38,27 +38,27 @@ public:
     QString cmd;
 };
 
-CommandLine::CommandLine(KCmdLineArgs *_args)
-{
-    m_args = _args;
-    m_data = new CommandLineData;
-}
+CommandLine::CommandLine(const QCommandLineParser *parser)
+    : m_parser(parser)
+    , m_data(new CommandLineData)
+{}
 
 CommandLine::~CommandLine()
 {
+    delete m_data;
 }
 
 int CommandLine::exec()
 {
-    if (!m_args || m_args->count() < 1) {
+    if (m_parser->positionalArguments().isEmpty()) {
         return -1;
     }
-    if (m_args->count() < 2) {
-        m_data->cmd = "help";
+    if (m_parser->positionalArguments().count() < 2) {
+        m_data->cmd = QLatin1String("help");
     } else {
-        m_data->cmd = m_args->arg(1);
+        m_data->cmd = m_parser->positionalArguments().at(1);
     }
-    if (m_data->cmd == "help") {
+    if (m_data->cmd == QLatin1String("help")) {
         m_data->displayHelp();
         return 0;
     }
@@ -74,7 +74,7 @@ int CommandLine::exec()
             return 0;
         }
         commandline_part *cpart = static_cast<commandline_part *>(_p);
-        int res = cpart->exec(m_args);
+        int res = cpart->exec(m_parser);
         return res;
     }
     return 0;

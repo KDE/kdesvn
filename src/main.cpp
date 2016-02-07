@@ -33,55 +33,53 @@ static const char description[] =
 
 int main(int argc, char **argv)
 {
-    KAboutData about(QString("kdesvn"), QString("kdesvn"), QString(KDESVN_VERSION), i18n(description),
-                     KAboutLicense::GPL, i18n("(C) 2005-2009 Rajko Albrecht"));
-    about.addAuthor(i18n("Rajko Albrecht"), i18n("Developer"), QString("ral@alwins-world.de"));
-    about.addAuthor(i18n("Ovidiu-Florin BOGDAN"), i18n("KF5/Qt5 Porting"), QString("ovidiu.b13@gmail.com"));
-    about.addAuthor(i18n("Christian Ehrlicher"), i18n("Developer"), QLatin1String("ch.ehrlicher@gmx.de"));
-    about.setHomepage("https://projects.kde.org/kdesvn");
-
-    QApplication app(argc, argv); // PORTING SCRIPT: move this to before the KAboutData initialization
-    QCommandLineParser parser;
-    KAboutData::setApplicationData(aboutData);
-    parser.addVersionOption();
-    parser.addHelpOption();
-    //PORTING SCRIPT: adapt aboutdata variable if necessary
-    aboutData.setupCommandLine(&parser);
-    parser.process(app); // PORTING SCRIPT: move this to after any parser.addOption
-    aboutData.processCommandLine(&parser);
-    options.add("r startrev[:endrev]", i18n("Execute single Subversion command on specific revision(-range)"));
-    options.add("R", i18n("Ask for revision when executing single command"));
-    options.add("f", i18n("Force operation"));
-    options.add("o <file>", i18n("Save output of Subversion command (eg \"cat\") into file <file>"));
-    options.add("l <number>", i18n("Limit log output to <number>"));
-    options.add("+exec <command>", i18n("Execute Subversion command (\"exec help\" for more information)"));
-    options.add("+[URL]", i18n("Document to open"));
-
     QApplication app(argc, argv);
     app.setApplicationName("kdesvn");
     app.setApplicationDisplayName("kdesvn");
     app.setOrganizationDomain("kde.org");
     app.setApplicationVersion(KDESVN_VERSION);
 
+    KAboutData aboutData(QLatin1String("kdesvn"), i18n("kdesvn"), QString(KDESVN_VERSION), i18n(description),
+                         KAboutLicense::GPL, i18n("(C) 2005-2009 Rajko Albrecht"));
+    aboutData.addAuthor(i18n("Rajko Albrecht"), i18n("Developer"), QString("ral@alwins-world.de"));
+    aboutData.addAuthor(i18n("Ovidiu-Florin BOGDAN"), i18n("KF5/Qt5 Porting"), QString("ovidiu.b13@gmail.com"));
+    aboutData.addAuthor(i18n("Christian Ehrlicher"), i18n("Developer"), QLatin1String("ch.ehrlicher@gmx.de"));
+    aboutData.setHomepage("https://projects.kde.org/kdesvn");
+
+    QCommandLineParser parser;
+    KAboutData::setApplicationData(aboutData);
+    parser.addVersionOption();
+    parser.addHelpOption();
+    aboutData.setupCommandLine(&parser);
+    aboutData.processCommandLine(&parser);
+    parser.addOption(QCommandLineOption(QStringList() << "r startrev[:endrev]", i18n("Execute single Subversion command on specific revision(-range)")));
+    parser.addOption(QCommandLineOption(QStringList() << "R", i18n("Ask for revision when executing single command")));
+    parser.addOption(QCommandLineOption(QStringList() << "f", i18n("Force operation")));
+    parser.addOption(QCommandLineOption(QStringList() << "o <file>", i18n("Save output of Subversion command (eg \"cat\") into file <file>")));
+    parser.addOption(QCommandLineOption(QStringList() << "l <number>", i18n("Limit log output to <number>")));
+    parser.addPositionalArgument("+exec <command>", i18n("Execute Subversion command (\"exec help\" for more information)"));
+    parser.addPositionalArgument("+[URL]", i18n("Document to open"));
+    parser.process(app); // PORTING SCRIPT: move this to after any parser.addOption
+
     // see if we are starting with session management
     if (app.isSessionRestored()) {
         RESTORE(kdesvn);
     } else {
         // no session.. just start up normally
-        if (parser.positionalArguments().count() == 0) {
+        if (parser.positionalArguments().isEmpty()) {
             kdesvn *widget = new kdesvn;
             widget->show();
             widget->checkReload();
         } else {
-            if (QString(args->arg(0)) == QString("exec")) {
-                CommandLine cl(args);
+            if (parser.positionalArguments().at(0) == QLatin1String("exec")) {
+                CommandLine cl(&parser);
                 return cl.exec();
             } else {
                 int i = 0;
                 for (; i < parser.positionalArguments().count(); i++) {
                     kdesvn *widget = new kdesvn;
                     widget->show();
-                    widget->load(args->url(i), true);
+                    widget->load(QUrl::fromUserInput(parser.positionalArguments().at(i)), true);
                 }
             }
         }

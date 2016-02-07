@@ -21,8 +21,9 @@
 #define COMMANDLINE_H
 
 #include <QObject>
+#include <QStringList>
+#include <QCommandLineParser>
 
-class KCmdLineArgs;
 class CommandLineData;
 
 /**
@@ -32,13 +33,13 @@ class CommandLine: public QObject
 {
     Q_OBJECT
 public:
-    explicit CommandLine(KCmdLineArgs *);
+    explicit CommandLine(const QCommandLineParser *parser);
     virtual ~CommandLine();
 
     virtual int exec();
 
 protected:
-    KCmdLineArgs *m_args;
+    const QCommandLineParser *m_parser;
     CommandLineData *m_data;
 };
 

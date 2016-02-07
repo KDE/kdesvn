@@ -43,6 +43,7 @@
 
 #include <qfile.h>
 #include <QTextStream>
+#include <QCommandLineParser>
 
 class pCPart
 {
@@ -59,7 +60,8 @@ public:
     bool force;
     int log_limit;
     SvnActions *m_SvnWrapper;
-    KCmdLineArgs *args;
+    QCommandLineParser *parser;
+    QStringList args;
     svn::Revision start, end;
 
     // for output
@@ -80,7 +82,7 @@ pCPart::pCPart()
     , force(false)
     , log_limit(0)
     , m_SvnWrapper(NULL)
-    , args(NULL)
+    , parser(NULL)
     , start(svn::Revision::UNDEFINED)
     , end(svn::Revision::UNDEFINED)
     , Stdout(stdout)
@@ -101,7 +103,7 @@ CommandExec::CommandExec(QObject *parent)
     , m_lastMessagesLines(0)
 {
     m_pCPart = new pCPart;
-    m_pCPart->args = 0;
+    m_pCPart->parser = 0;
     SshAgent ag;
     ag.querySshAgent();
 
@@ -116,10 +118,11 @@ CommandExec::~CommandExec()
     delete m_pCPart;
 }
 
-int CommandExec::exec(KCmdLineArgs *args)
+int CommandExec::exec(const QCommandLineParser *parser)
 {
-    m_pCPart->args = args;
-    if (!m_pCPart->args) {
+    m_pCPart->parser = const_cast<QCommandLineParser*>(parser);
+    m_pCPart->args = parser->positionalArguments();
+    if (!m_pCPart->args.isEmpty()) {
         return -1;
     }
     m_lastMessages.clear();
@@ -131,8 +134,8 @@ int CommandExec::exec(KCmdLineArgs *args)
     bool no_revision = false;
     bool check_force = false;
 
-    if (m_pCPart->args->count() >= 2) {
-        m_pCPart->cmd = m_pCPart->args->arg(1);
+    if (m_pCPart->args.count() >= 2) {
+        m_pCPart->cmd = m_pCPart->args.at(1);
         m_pCPart->cmd = m_pCPart->cmd.toLower();
     }
     QString slotCmd;
@@ -226,12 +229,10 @@ int CommandExec::exec(KCmdLineArgs *args)
     QString tmp;
     QString mainProto;
     QString _baseurl;
-    for (int j = 2; j < m_pCPart->args->count(); ++j) {
-        KUrl tmpurl = helpers::KTranslateUrl::translateSystemUrl(m_pCPart->args->url(j).prettyUrl());
-        const QMap<QString, QString> q = m_pCPart->args->url(j).queryItems();
-        QString v = q.value("rev");
-        tmpurl.setProtocol(svn::Url::transformProtokoll(tmpurl.protocol()));
-        if (tmpurl.protocol().indexOf("ssh") != -1) {
+    for (int j = 2; j < m_pCPart->args.count(); ++j) {
+        QUrl tmpurl = helpers::KTranslateUrl::translateSystemUrl(m_pCPart->args.at(j));
+        tmpurl.setScheme(svn::Url::transformProtokoll(tmpurl.scheme()));
+        if (tmpurl.scheme().indexOf(QLatin1String("ssh")) != -1) {
             SshAgent ag;
             // this class itself checks if done before
             ag.addSshIdentities();
@@ -257,7 +258,7 @@ int CommandExec::exec(KCmdLineArgs *args)
         } else {
             tmp = tmpurl.url();
             if (j == 2) {
-                mainProto = tmpurl.protocol();
+                mainProto = tmpurl.scheme();
             }
         }
         if ((j > 2 && dont_check_second) || dont_check_all) {
@@ -276,9 +277,14 @@ int CommandExec::exec(KCmdLineArgs *args)
         if ((j > 2 && dont_check_second) || dont_check_all) {
             continue;
         }
-        svn::Revision re = v;
-        if (re) {
-            m_pCPart->extraRevisions[j - 2] = re;
+        const QList<QPair<QString, QString> > q = QUrl::fromUserInput(m_pCPart->args.at(j)).queryItems();
+        for(int i = 0; i < q.size(); ++i) {
+            if (q.at(i).first == QLatin1String("rev")) {
+                svn::Revision re = q.at(i).second;
+                if (re) {
+                    m_pCPart->extraRevisions[j - 2] = re;
+                }
+            }
         }
     }
     if (m_pCPart->urls.isEmpty()) {
@@ -286,24 +292,24 @@ int CommandExec::exec(KCmdLineArgs *args)
     }
 
     if (!no_revision) {
-        if (m_pCPart->args->isSet("R")) {
+        if (m_pCPart->parser->isSet("R")) {
             m_pCPart->ask_revision = true;
             if (!askRevision()) {
                 return 0;
             }
-        } else if (m_pCPart->args->isSet("r")) {
+        } else if (m_pCPart->parser->isSet("r")) {
             scanRevision();
         }
     }
 
-    m_pCPart->force = check_force && m_pCPart->args->isSet("f");
+    m_pCPart->force = check_force && m_pCPart->parser->isSet("f");
 
-    if (m_pCPart->args->isSet("o")) {
+    if (m_pCPart->parser->isSet("o")) {
         m_pCPart->outfile_set = true;
-        m_pCPart->outfile = m_pCPart->args->getOption("o");
+        m_pCPart->outfile = m_pCPart->parser->value("o");
     }
-    if (m_pCPart->args->isSet("l")) {
-        QString s = m_pCPart->args->getOption("l");
+    if (m_pCPart->parser->isSet("l")) {
+        QString s = m_pCPart->parser->value("l");
         m_pCPart->log_limit = s.toInt();
         if (m_pCPart->log_limit < 0) {
             m_pCPart->log_limit = 0;
@@ -573,7 +579,7 @@ void CommandExec::slotCmd_addnew()
  */
 bool CommandExec::scanRevision()
 {
-    QString revstring = m_pCPart->args->getOption("r");
+    QString revstring = m_pCPart->parser->value("r");
     QStringList revl = revstring.split(':', QString::SkipEmptyParts);
     if (revl.count() == 0) {
         return false;

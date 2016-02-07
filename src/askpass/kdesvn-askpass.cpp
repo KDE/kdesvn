@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include <qregexp.h>
-#include <kaboutdata.h>
+#include <KAboutData>
 
 
 #include <kpassworddialog.h>
@@ -34,32 +34,30 @@
 
 int main(int argc, char **argv)
 {
-    KAboutData about(QByteArray("kdesvnaskpass"), QByteArray("kdesvnaskpass"), ki18n("kdesvnaskpass"), QByteArray("0.2"),
-                     ki18n("ssh-askpass for kdesvn"),
-                     KAboutLicense::LGPL,
-                     ki18n("Copyright (c) 2005-2009 Rajko Albrecht"));
     QApplication app(argc, argv); // PORTING SCRIPT: move this to before the KAboutData initialization
+    KAboutData aboutData(QLatin1String("kdesvnaskpass"), i18n("kdesvnaskpass"), QLatin1String("0.2"),
+                         i18n("ssh-askpass for kdesvn"),
+                         KAboutLicense::LicenseKey::LGPL,
+                         i18n("Copyright (c) 2005-2009 Rajko Albrecht"));
     QCommandLineParser parser;
     KAboutData::setApplicationData(aboutData);
     parser.addVersionOption();
     parser.addHelpOption();
-    //PORTING SCRIPT: adapt aboutdata variable if necessary
     aboutData.setupCommandLine(&parser);
-    parser.process(app); // PORTING SCRIPT: move this to after any parser.addOption
     aboutData.processCommandLine(&parser);
     parser.addPositionalArgument(QLatin1String("[prompt]"), i18n("Prompt"));
+    parser.process(app);
     // no need for session management
-    app.disableSessionManagement();
-    KGlobal::locale()->insertCatalog("kdesvn");
+    //app.disableSessionManagement();
 
     QString prompt;
     QString kfile;
     bool error = false;
 
-    if (!KCmdLineArgs::parsedArgs()->count()) {
+    if (parser.positionalArguments().isEmpty()) {
         prompt = i18n("Please enter your password below.");
     } else {
-        prompt = KCmdLineArgs::parsedArgs()->arg(0);
+        prompt = parser.positionalArguments().at(0);
         if (prompt.contains("Bad passphrase", Qt::CaseInsensitive) ||
                 prompt.contains("Permission denied", Qt::CaseInsensitive)) {
             error = true;
@@ -67,7 +65,7 @@ int main(int argc, char **argv)
         kfile = prompt.section(QLatin1Char(' '), -2).remove(QLatin1Char(':')).simplified();
     }
     QString pw;
-    QString wfolder = about.appName();
+    QString wfolder = aboutData.productName();
 
     QScopedPointer<KWallet::Wallet> wallet(KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), 0));
     if (!error && wallet && wallet->hasFolder(wfolder)) {
@@ -78,7 +76,7 @@ int main(int argc, char **argv)
     if (pw.isEmpty()) {
         QPointer<KPasswordDialog> dlg(new KPasswordDialog(0, (wallet ? KPasswordDialog::ShowKeepPassword : KPasswordDialog::NoFlags)));
         dlg->setPrompt(prompt);
-        dlg->setCaption(i18n("Password"));
+        dlg->setWindowTitle(i18n("Password"));
         if (dlg->exec() != KPasswordDialog::Accepted) {
             delete dlg;
             return 1;

@@ -85,16 +85,14 @@ kdesvn::kdesvn()
     m_pBookmarkMenu = new KBookmarkMenu(m_BookmarkManager, this, m_BookmarksActionmenu->menu(), m_Bookmarkactions);
     m_pBookmarkMenu->setParent(this); // clear when kdesvn window gets destroyed
 
+#ifdef EXTRA_KDE_LIBPATH
+    QCoreApplication::addLibraryPath(QString::fromLocal8Bit(EXTRA_KDE_LIBPATH))
+#endif
     // this routine will find and load our Part.  it finds the Part by
     // name which is a bad idea usually.. but it's alright in this
     // case since our Part is made for this Shell
-    KLibFactory *factory = 0;
-#ifdef EXTRA_KDE_LIBPATH
-    factory = KLibLoader::self()->factory(EXTRA_KDE_LIBPATH + QString("/kdesvnpart.so"));
-    if (!factory)
-#endif
-        factory = KLibLoader::self()->factory("kdesvnpart");
-
+    KPluginLoader loader("kdesvnpart");
+    KPluginFactory *factory = loader.factory();
     if (factory) {
         m_part = factory->create<KParts::ReadOnlyPart>(this);
         if (m_part) {
@@ -161,7 +159,7 @@ kdesvn::kdesvn()
     } else {
         // if we couldn't find our Part, we exit since the Shell by
         // itself can't do anything useful
-        KMessageBox::error(this, i18n("Could not find our part:\n%1", KLibLoader::self()->lastErrorMessage()));
+        KMessageBox::error(this, i18n("Could not find our part:\n%1", loader.errorString()));
         kapp->quit();
         // we return here, cause kapp->quit() only means "exit the
         // next time we enter the event loop...

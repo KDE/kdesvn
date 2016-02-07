@@ -50,7 +50,6 @@
 #include <kpluginfactory.h>
 
 K_PLUGIN_FACTORY(KdesvnFactory, registerPlugin<kdesvnpart>(); registerPlugin<commandline_part>("commandline_part");)
-K_EXPORT_PLUGIN(KdesvnFactory("kdesvnpart", "kdesvn"))
 
 static const char version[] = KDESVN_VERSION;
 

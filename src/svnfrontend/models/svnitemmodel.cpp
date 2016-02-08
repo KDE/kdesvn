@@ -590,13 +590,13 @@ void SvnItemModel::makeIgnore(const QModelIndex &index)
 
 bool SvnItemModel::refreshItem(SvnItemModelNode *item)
 {
-    if (!item) {
+    if (!item || item == m_Data->m_rootNode) {
         return false;
     }
     try {
         item->setStat(m_Data->m_SvnActions->svnclient()->singleStatus(item->fullName(), false, m_Data->m_Display->baseRevision()));
     } catch (const svn::ClientException &e) {
-        item->setStat(svn::StatusPtr());
+        item->setStat(svn::StatusPtr(new svn::Status));
         return false;
     }
     return true;
@@ -755,7 +755,7 @@ bool SvnItemModel::checkRootNode()
         m_Data->m_rootNode->setStat(m_Data->m_SvnActions->svnclient()->singleStatus(m_Data->m_Display->baseUri(),
                                                                                     false, m_Data->m_Display->baseRevision()));
     } catch (const svn::ClientException &e) {
-        m_Data->m_rootNode->setStat(svn::StatusPtr());
+        m_Data->m_rootNode->setStat(svn::StatusPtr(new svn::Status));
         emit clientException(e.msg());
         return false;
     }

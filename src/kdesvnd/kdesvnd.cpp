@@ -53,10 +53,7 @@
 #include <QDBusConnection>
 #include <QApplication>
 
-K_PLUGIN_FACTORY(KdeSvndFactory,
-                 registerPlugin<kdesvnd>();
-                )
-K_EXPORT_PLUGIN(KdeSvndFactory("kio_kdesvn"))
+K_PLUGIN_FACTORY(KdeSvndFactory, registerPlugin<kdesvnd>();)
 
 #define CHECK_KIO     if (!progressJobView.contains(kioid)) { \
         return;\
@@ -65,7 +62,6 @@ K_EXPORT_PLUGIN(KdeSvndFactory("kio_kdesvn"))
 kdesvnd::kdesvnd(QObject *parent, const QList<QVariant> &) : KDEDModule(parent),
     m_uiserver("org.kde.JobViewServer", "/JobViewServer", QDBusConnection::sessionBus())
 {
-    KGlobal::locale()->insertCatalog("kdesvn");
     m_Listener = new KdesvndListener(this);
     new KdesvndAdaptor(this);
 }
@@ -228,7 +224,7 @@ QStringList kdesvnd::get_sslclientcertpw(const QString &realm)
     QStringList resList;
     QPointer<KPasswordDialog> dlg(new KPasswordDialog(0, KPasswordDialog::DomainReadOnly | KPasswordDialog::ShowKeepPassword));
     dlg->setDomain(realm);
-    dlg->setCaption(i18n("Enter password for realm %1", realm));
+    dlg->setWindowTitle(i18n("Enter password for realm %1", realm));
     dlg->setKeepPassword(true);
     if (dlg->exec() == KPasswordDialog::Accepted) {
         resList.append(dlg->password());
@@ -328,10 +324,9 @@ void kdesvnd::registerKioFeedback(qulonglong kioid)
     if (progressJobView.contains(kioid)) {
         return;
     }
-    QApplication* qapp = QApplication::instance();
-    QDBusReply<QDBusObjectPath> reply = m_uiserver.requestView(qapp->applicationName(),
-                                        qapp->applicationDisplayName(),
-                                        0x0003);
+    QDBusReply<QDBusObjectPath> reply = m_uiserver.requestView(qApp->applicationName(),
+                                                               qApp->applicationName(),
+                                                               0x0003);
     if (reply.isValid()) {
         KsvnJobView *jobView = new KsvnJobView(kioid, "org.kde.JobViewServer",
                                                reply.value().path(),
@@ -374,9 +369,9 @@ void kdesvnd::unRegisterKioFeedback(qulonglong kioid)
 void kdesvnd::notifyKioOperation(const QString &text)
 {
     KNotification::event(
-        "kdesvn-kio", text,
+        QLatin1String("kdesvn-kio"), text,
         QPixmap(), 0L, KNotification::CloseOnTimeout,
-        m_componentData);
+        QLatin1String("kdesvn"));
 }
 
 void kdesvnd::errorKioOperation(const QString &text)
@@ -405,3 +400,5 @@ void kdesvnd::setKioStatus(qulonglong kioid, int status, const QString &message)
         break;
     }
 }
+
+#include "kdesvnd.moc"

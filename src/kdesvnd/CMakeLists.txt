@@ -29,7 +29,11 @@ set(kded_kdesvnd_src
 
 qt5_add_dbus_adaptor( kded_kdesvnd_src org.kde.kdesvnd.xml kdesvnd.h kdesvnd)
 
-add_library(kded_kdesvnd MODULE ${kded_kdesvnd_src})
+kcoreaddons_add_plugin(kded_kdesvnd INSTALL_NAMESPACE "kf5/kded" JSON ${CMAKE_CURRENT_SOURCE_DIR}/kdesvnd.desktop SOURCES ${kded_kdesvnd_src})
+kcoreaddons_desktop_to_json(kded_kdesvnd ${CMAKE_CURRENT_SOURCE_DIR}/kdesvnd.desktop)
+set_target_properties(kded_kdesvnd PROPERTIES
+    OUTPUT_NAME kdesvnd
+)
 
 target_link_libraries(kded_kdesvnd
     ksvnwidgets
@@ -37,10 +41,11 @@ target_link_libraries(kded_kdesvnd
     kdesvncfgreader
     svnqt
     KF5::DBusAddons
+    KF5::KDELibs4Support
 )
 install(TARGETS kded_kdesvnd
     RUNTIME DESTINATION ${BIN_INSTALL_DIR}
-    LIBRARY DESTINATION ${PLUGIN_INSTALL_DIR})
+    LIBRARY DESTINATION ${PLUGIN_INSTALL_DIR}/kf5/kded)
 
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_subversion.desktop
     DESTINATION ${SERVICES_INSTALL_DIR}/ServiceMenus)
@@ -51,4 +56,7 @@ install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_subversion_toplevel.desktop
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvnd.desktop
     DESTINATION ${SERVICES_INSTALL_DIR}/kded)
 
-install(FILES org.kde.kdesvnd.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR})
+install(FILES org.kde.kdesvnd.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR} RENAME kf5_org.kde.kdesvnd.xml)
+
+configure_file(org.kde.kdesvnd.service.in ${CMAKE_CURRENT_BINARY_DIR}/org.kde.kdesvnd.service)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.kde.kdesvnd.service DESTINATION ${KDE_INSTALL_DBUSSERVICEDIR})

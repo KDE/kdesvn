@@ -43,9 +43,6 @@ target_link_libraries(kded_kdesvnd
     KF5::DBusAddons
     KF5::KDELibs4Support
 )
-install(TARGETS kded_kdesvnd
-    RUNTIME DESTINATION ${BIN_INSTALL_DIR}
-    LIBRARY DESTINATION ${PLUGIN_INSTALL_DIR}/kf5/kded)
 
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_subversion.desktop
     DESTINATION ${SERVICES_INSTALL_DIR}/ServiceMenus)

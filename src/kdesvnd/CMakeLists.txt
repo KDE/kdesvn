@@ -50,9 +50,6 @@ install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_subversion.desktop
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_subversion_toplevel.desktop
     DESTINATION ${SERVICES_INSTALL_DIR}/ServiceMenus)
 
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvnd.desktop
-    DESTINATION ${SERVICES_INSTALL_DIR}/kded)
-
 install(FILES org.kde.kdesvnd.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR} RENAME kf5_org.kde.kdesvnd.xml)
 
 configure_file(org.kde.kdesvnd.service.in ${CMAKE_CURRENT_BINARY_DIR}/org.kde.kdesvnd.service)

@@ -22,7 +22,7 @@
 
 #include "ksvnwidgets/jobviewinterface.h"
 
-class KsvnJobView: public org::kde::JobView
+class KsvnJobView: public org::kde::JobViewV2
 {
     Q_OBJECT
 

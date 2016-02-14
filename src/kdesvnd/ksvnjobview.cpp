@@ -21,7 +21,7 @@
 #include "ksvnjobview.h"
 
 KsvnJobView::KsvnJobView(qulonglong id, const QString &service, const QString &path, const QDBusConnection &connection, QObject *parent)
-    : org::kde::JobView(service, path, connection, parent), m_id(id), m_state(STOPPED), m_max(0)
+    : org::kde::JobViewV2(service, path, connection, parent), m_id(id), m_state(STOPPED), m_max(0)
 {
     connect(this, SIGNAL(cancelRequested()), this,
             SLOT(killJob()));

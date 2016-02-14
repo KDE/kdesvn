@@ -62,8 +62,8 @@ set(ksvnwidgethdr
     ssltrustprompt_impl.h
 )
 
-qt5_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/org.kde.JobViewServer.xml)
-qt5_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/org.kde.JobView.xml)
+qt5_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/kf5_org.kde.JobViewServer.xml)
+qt5_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/kf5_org.kde.JobView.xml)
 
 add_library(ksvnwidgets STATIC ${kdesvn_shared_ui} ${ksvnwidgetsrc} ${ksvnwidgethdr})
 target_include_directories(ksvnwidgets

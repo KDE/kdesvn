@@ -122,7 +122,7 @@ int CommandExec::exec(const QCommandLineParser *parser)
 {
     m_pCPart->parser = const_cast<QCommandLineParser*>(parser);
     m_pCPart->args = parser->positionalArguments();
-    if (!m_pCPart->args.isEmpty()) {
+    if (m_pCPart->args.isEmpty()) {
         return -1;
     }
     m_lastMessages.clear();
@@ -138,7 +138,7 @@ int CommandExec::exec(const QCommandLineParser *parser)
         m_pCPart->cmd = m_pCPart->args.at(1);
         m_pCPart->cmd = m_pCPart->cmd.toLower();
     }
-    QString slotCmd;
+    QByteArray slotCmd;
     if (!QString::compare(m_pCPart->cmd, "log")) {
         slotCmd = SLOT(slotCmd_log());
     } else if (!QString::compare(m_pCPart->cmd, "cat")) {
@@ -219,10 +219,11 @@ int CommandExec::exec(const QCommandLineParser *parser)
         check_force = true;
     }
 
-    bool found = connect(this, SIGNAL(executeMe()), this, slotCmd.toAscii());
+    bool found = connect(this, SIGNAL(executeMe()), this, slotCmd.constData());
     if (!found) {
-        slotCmd = i18n("Command \"%1\" not implemented or known", m_pCPart->cmd);
-        KMessageBox::sorry(0, slotCmd, i18n("SVN Error"));
+        KMessageBox::sorry(0,
+                           i18n("Command \"%1\" not implemented or known", m_pCPart->cmd),
+                           i18n("SVN Error"));
         return -1;
     }
 

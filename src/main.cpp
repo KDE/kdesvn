@@ -50,11 +50,11 @@ int main(int argc, char **argv)
     QCommandLineParser parser;
     parser.addVersionOption();
     parser.addHelpOption();
-    parser.addOption(QCommandLineOption(QStringList() << "r startrev[:endrev]", i18n("Execute single Subversion command on specific revision(-range)")));
-    parser.addOption(QCommandLineOption(QStringList() << "R", i18n("Ask for revision when executing single command")));
-    parser.addOption(QCommandLineOption(QStringList() << "f", i18n("Force operation")));
-    parser.addOption(QCommandLineOption(QStringList() << "o <file>", i18n("Save output of Subversion command (eg \"cat\") into file <file>")));
-    parser.addOption(QCommandLineOption(QStringList() << "l <number>", i18n("Limit log output to <number>")));
+    parser.addOption({"r", i18n("Execute single Subversion command on specific revision(-range)"), i18n("startrev[:endrev]")});
+    parser.addOption({"R", i18n("Ask for revision when executing single command")});
+    parser.addOption({"f", i18n("Force operation")});
+    parser.addOption({"o", i18n("Save output of Subversion command (eg \"cat\") into file <file>"), i18n("<file>")});
+    parser.addOption({"l", i18n("Limit log output to <number>"), i18n("<number>")});
     parser.addPositionalArgument("+exec <command>", i18n("Execute Subversion command (\"exec help\" for more information)"));
     parser.addPositionalArgument("+[URL]", i18n("Document to open"));
     aboutData.setupCommandLine(&parser);

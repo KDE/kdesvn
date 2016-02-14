@@ -62,15 +62,14 @@ int CommandLine::exec()
         m_data->displayHelp();
         return 0;
     }
-    KLibFactory *factory = 0;
 #ifdef EXTRA_KDE_LIBPATH
-    factory = KLibLoader::self()->factory(EXTRA_KDE_LIBPATH + QString("/kdesvnpart.so"));
-    if (!factory)
+    QCoreApplication::addLibraryPath(QString::fromLocal8Bit(EXTRA_KDE_LIBPATH));
 #endif
-        factory = KLibLoader::self()->factory("kdesvnpart");
+    KPluginLoader loader("kdesvnpart");
+    KPluginFactory *factory = loader.factory();
     if (factory) {
         QObject *_p = (factory->create<QObject>("commandline_part", this));
-        if (!_p || QString(_p->metaObject()->className()).compare("commandline_part") != 0) {
+        if (!_p || QString::fromLatin1(_p->metaObject()->className()) != QLatin1String("commandline_part")) {
             return 0;
         }
         commandline_part *cpart = static_cast<commandline_part *>(_p);

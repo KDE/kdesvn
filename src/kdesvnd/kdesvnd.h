@@ -32,9 +32,11 @@
 class KdesvndListener;
 class KsvnJobView;
 
-class kdesvnd :  public KDEDModule
+class kdesvnd : public KDEDModule
 {
     Q_OBJECT
+    Q_CLASSINFO("D-Bus Interface", "org.kde.kdesvnd")
+
 public:
     kdesvnd(QObject *parent, const QList<QVariant> &);
     virtual ~kdesvnd();

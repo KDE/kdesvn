@@ -53,7 +53,10 @@
 #include <QDBusConnection>
 #include <QApplication>
 
-K_PLUGIN_FACTORY(KdeSvndFactory, registerPlugin<kdesvnd>();)
+K_PLUGIN_FACTORY_WITH_JSON(KdeSvndFactory,
+                           "kdesvnd.json",
+                           registerPlugin<kdesvnd>();
+                          )
 
 #define CHECK_KIO     if (!progressJobView.contains(kioid)) { \
         return;\

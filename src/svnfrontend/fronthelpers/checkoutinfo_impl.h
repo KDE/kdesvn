@@ -23,7 +23,6 @@
 #include "ui_checkoutinfo.h"
 #include "svnqt/revision.h"
 #include "svnqt/svnqttypes.h"
-#include "kurl.h"
 
 class CheckoutInfo_impl: public QWidget, public Ui::CheckoutInfo
 {
@@ -33,7 +32,7 @@ public:
     virtual ~CheckoutInfo_impl();
 
     svn::Revision toRevision() const;
-    KUrl reposURL() const;
+    QUrl reposURL() const;
     QString targetDir() const;
 
     bool overwrite() const;

@@ -21,15 +21,6 @@
 #include "rangeinput_impl.h"
 #include "ksvnwidgets/depthselector.h"
 #include "svnqt/url.h"
-#include "helpers/ktranslateurl.h"
-#include <kurlrequester.h>
-#include <qlabel.h>
-#include <qtooltip.h>
-
-#include <klineedit.h>
-#include <qcheckbox.h>
-#include <klocale.h>
-#include <kdebug.h>
 
 CheckoutInfo_impl::CheckoutInfo_impl(QWidget *parent)
     : QWidget(parent)
@@ -52,25 +43,26 @@ svn::Revision CheckoutInfo_impl::toRevision() const
     return m_RangeInput->getRange().first;
 }
 
-KUrl CheckoutInfo_impl::reposURL() const
+QUrl CheckoutInfo_impl::reposURL() const
 {
-    KUrl uri(m_UrlEdit->url());
-    uri.setProtocol(svn::Url::transformProtokoll(uri.protocol()));
+    QUrl uri(m_UrlEdit->url());
+    uri.setScheme(svn::Url::transformProtokoll(uri.scheme()));
+    qDebug("url: %s", qPrintable(uri.toString()));
     return uri;
 }
 
 QString CheckoutInfo_impl::targetDir() const
 {
     if (!m_CreateDirButton->isChecked()) {
-        return  m_TargetSelector->url().url();
+        return  m_TargetSelector->url().toLocalFile();
     }
     // append last source url path to the target directory
-    const QString _uri = reposURL().path(KUrl::RemoveTrailingSlash);
+    const QString _uri = reposURL().toLocalFile();
     const QStringList l = _uri.split(QLatin1Char('/'), QString::SkipEmptyParts);
     if (l.isEmpty()) {
-        return m_TargetSelector->url().url();
+        return m_TargetSelector->url().toLocalFile();
     }
-    return  m_TargetSelector->url().path() + QLatin1Char('/') + l.last();
+    return  m_TargetSelector->url().toLocalFile() + QLatin1Char('/') + l.last();
 }
 
 bool CheckoutInfo_impl::overwrite() const

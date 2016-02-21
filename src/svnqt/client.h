@@ -336,7 +336,7 @@ public:
      * Import file or directory PATH into repository directory URL at
      * head.  This usually requires authentication, see Auth.
      * @param path path to import
-     * @param url
+     * @param importRepository
      * @param message log message.
      * @param depth kind of recurse operation
      * @param no_ignore if false, don't add items matching global ignore pattern (@since subversion 1.3)

@@ -21,6 +21,7 @@
 #include "rangeinput_impl.h"
 #include "ksvnwidgets/depthselector.h"
 #include "svnqt/url.h"
+#include "helpers/ktranslateurl.h"
 
 CheckoutInfo_impl::CheckoutInfo_impl(QWidget *parent)
     : QWidget(parent)
@@ -47,7 +48,6 @@ QUrl CheckoutInfo_impl::reposURL() const
 {
     QUrl uri(m_UrlEdit->url());
     uri.setScheme(svn::Url::transformProtokoll(uri.scheme()));
-    qDebug("url: %s", qPrintable(uri.toString()));
     return uri;
 }
 
@@ -80,7 +80,7 @@ void CheckoutInfo_impl::setTargetUrl(const QString &what)
 
 void CheckoutInfo_impl::setStartUrl(const QString &what)
 {
-    KUrl uri(helpers::KTranslateUrl::string2Uri(what));
+    QUrl uri(helpers::KTranslateUrl::string2Uri(what));
     m_UrlEdit->setUrl(uri);
 }
 

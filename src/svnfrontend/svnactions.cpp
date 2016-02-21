@@ -1828,21 +1828,24 @@ void SvnActions::slotRevertItems(const QStringList &displist, bool rec_default)
     EMIT_FINISHED;
 }
 
-bool SvnActions::makeSwitch(const QString &rUrl, const QString &tPath, const svn::Revision &r, svn::Depth depth, const svn::Revision &peg, bool stickydepth, bool ignore_externals, bool allow_unversioned)
+bool SvnActions::makeSwitch(const QUrl &rUrl,
+                            const QString &tPath,
+                            const svn::Revision &r,
+                            svn::Depth depth,
+                            const svn::Revision &peg,
+                            bool stickydepth,
+                            bool ignore_externals,
+                            bool allow_unversioned)
 {
     if (!m_Data->m_CurrentContext) {
         return false;
-    }
-    QString fUrl = rUrl;
-    while (fUrl.endsWith('/')) {
-        fUrl.truncate(fUrl.length() - 1);
     }
     svn::Path p(tPath);
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18n("Switch URL"), i18n("Switching URL"));
         connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
-        m_Data->m_Svnclient->doSwitch(p, fUrl, r, depth, peg, stickydepth, ignore_externals, allow_unversioned);
+        m_Data->m_Svnclient->doSwitch(p, svn::Url(rUrl), r, depth, peg, stickydepth, ignore_externals, allow_unversioned);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
         return false;
@@ -1852,25 +1855,17 @@ bool SvnActions::makeSwitch(const QString &rUrl, const QString &tPath, const svn
     return true;
 }
 
-bool SvnActions::makeRelocate(const QString &fUrl, const QString &tUrl, const QString &path, bool recursive, bool ignore_externals)
+bool SvnActions::makeRelocate(const QUrl &fUrl, const QUrl &tUrl, const QString &path, bool recursive, bool ignore_externals)
 {
     if (!m_Data->m_CurrentContext) {
         return false;
-    }
-    QString _f = fUrl;
-    QString _t = tUrl;
-    while (_f.endsWith('/')) {
-        _f.truncate(_f.length() - 1);
-    }
-    while (_t.endsWith('/')) {
-        _t.truncate(_t.length() - 1);
     }
     svn::Path p(path);
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18n("Relocate Repository"), i18n("Relocate repository to new URL"));
         connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
-        m_Data->m_Svnclient->relocate(p, _f, _t, recursive, ignore_externals);
+        m_Data->m_Svnclient->relocate(p, svn::Url(fUrl), svn::Url(tUrl), recursive, ignore_externals);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
         return false;
@@ -1925,9 +1920,7 @@ bool SvnActions::makeSwitch(const QString &path, const QString &what)
                 return false;
             }
             svn::Revision r = ptr->toRevision();
-            // svn::Path should not take a QString but a QByteArray ...
-            const QString rUrl(QString::fromUtf8(ptr->reposURL().toEncoded()));
-            done = makeSwitch(rUrl, path, r, ptr->getDepth(), r, true, ptr->ignoreExternals(), ptr->overwrite());
+            done = makeSwitch(ptr->reposURL(), path, r, ptr->getDepth(), r, true, ptr->ignoreExternals(), ptr->overwrite());
         }
         if (dlg) {
             KConfigGroup _kc(Kdesvnsettings::self()->config(), "switch_url_dlg");
@@ -2053,7 +2046,9 @@ void SvnActions::slotImport(const QString &path, const QString &target, const QS
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18n("Import"), i18n("Importing items"));
         connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
-        m_Data->m_Svnclient->import(svn::Path(path), target, message, depth, noIgnore, noUnknown);
+        // CE TODO
+        QUrl url(target);
+        m_Data->m_Svnclient->import(svn::Path(path), svn::Url(url), message, depth, noIgnore, noUnknown);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
         return;

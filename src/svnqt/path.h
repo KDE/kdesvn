@@ -32,6 +32,7 @@
 #ifndef SVNQT_PATH_H
 #define SVNQT_PATH_H
 
+#include <QUrl>
 #include <QString>
 #include <svnqt/svnqt_defines.h>
 #include <svnqt/svnqttypes.h>
@@ -62,6 +63,7 @@ public:
      * @param path Path string - when url this should NOT hold revision as @ parameter!!!!! (will filtered out)
      */
     Path(const QString &path = QString());    //krazy:exclude=explicit
+    Path(const QUrl &url);    //krazy:exclude=explicit
 
     /**
      * Copy constructor

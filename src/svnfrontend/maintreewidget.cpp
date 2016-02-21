@@ -2020,13 +2020,14 @@ void MainTreeWidget::slotRelocate()
         KMessageBox::error(0, i18n("Error getting entry to relocate"));
         return;
     }
-    QString path, fromUrl;
+    QString path;
     path = k->fullName();
-    fromUrl = k->Url();
+    // CE TODO
+    const QUrl fromUrl = k->Url();
     CheckoutInfo_impl *ptr = 0;
     QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Relocate path %1", path), true, QLatin1String("relocate_dlg"));
     if (dlg) {
-        ptr->setStartUrl(fromUrl);
+        ptr->setStartUrl(fromUrl.toString());
         ptr->disableAppend(true);
         ptr->disableTargetDir(true);
         ptr->disableRange(true);
@@ -2049,9 +2050,7 @@ void MainTreeWidget::slotRelocate()
                 delete dlg;
                 return;
             }
-            // svn::Path should not take a QString but a QByteArray ...
-            const QString rUrl(QString::fromUtf8(ptr->reposURL().toEncoded()));
-            done = m_Data->m_Model->svnWrapper()->makeRelocate(fromUrl, rUrl, path, ptr->overwrite(), ptr->ignoreExternals());
+            done = m_Data->m_Model->svnWrapper()->makeRelocate(fromUrl, ptr->reposURL(), path, ptr->overwrite(), ptr->ignoreExternals());
         }
         if (dlg) {
             dlg->saveDialogSize(_k);

@@ -128,9 +128,9 @@ public:
     void makeBlame(const svn::Revision &start, const svn::Revision &end, SvnItem *k);
     void makeBlame(const svn::Revision &start, const svn::Revision &end, const QString &, QWidget *parent = 0, const svn::Revision &peg = svn::Revision::UNDEFINED, SimpleLogCb *_acb = 0);
     void makeUpdate(const svn::Targets &targets, const svn::Revision &rev, svn::Depth depth);
-    bool makeSwitch(const QString &rUrl, const QString &tPath, const svn::Revision &r, svn::Depth depth, const svn::Revision &peg, bool stickydepth, bool ignore_externals, bool allow_unversioned);
+    bool makeSwitch(const QUrl &rUrl, const QString &tPath, const svn::Revision &r, svn::Depth depth, const svn::Revision &peg, bool stickydepth, bool ignore_externals, bool allow_unversioned);
     bool makeSwitch(const QString &path, const QString &what);
-    bool makeRelocate(const QString &fUrl, const QString &tUrl, const QString &path, bool recursive, bool ignore_externals);
+    bool makeRelocate(const QUrl &fUrl, const QUrl &tUrl, const QString &path, bool recursive, bool ignore_externals);
     bool makeCheckout(const QString &, const QString &, const svn::Revision &, const svn::Revision &, svn::Depth, bool isExport, bool openit, bool ignore_externals, bool overwrite, bool ignoreKeywords, QWidget *p);
     void makeInfo(const SvnItemList &lst, const svn::Revision &, const svn::Revision &, bool recursive = true);
     void makeInfo(const QStringList &lst, const svn::Revision &, const svn::Revision &, bool recursive = true);

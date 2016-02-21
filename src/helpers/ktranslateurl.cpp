@@ -122,7 +122,7 @@ QString makeKdeUrl(const QString &_proto)
 
 QUrl string2Uri(const QString &what)
 {
-    QUrl uri(what);
+    KUrl uri(what);
     if (uri.scheme() == QLatin1String("file")) {
         if (what.startsWith(QLatin1String("file:"))) {
             uri.setScheme(QLatin1String("ksvn+file"));

@@ -116,7 +116,7 @@ protected:
 private:
     KioSvnData *m_pData;
     static bool createUDSEntry(const QString &filename, const QString &user, long long int size, bool isdir, time_t mtime, KIO::UDSEntry &entry);
-    QString makeSvnUrl(const KUrl &url, bool check_wc = true) const;
+    QUrl makeSvnUrl(const QUrl &url, bool check_wc = true) const;
     bool checkWc(const KUrl &url) const;
     bool getLogMsg(QString &);
 

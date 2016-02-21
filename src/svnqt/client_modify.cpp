@@ -557,7 +557,7 @@ Client_impl::doSwitch(
 
 Revision
 Client_impl::import(const Path &path,
-                    const Url &url,
+                    const Url &importRepository,
                     const QString &message,
                     svn::Depth depth,
                     bool no_ignore, bool no_unknown_nodetype,
@@ -574,7 +574,7 @@ Client_impl::import(const Path &path,
     _baton.m_context = m_context;
     svn_error_t *error =
         svn_client_import4(path.cstr(),
-                           url.cstr(),
+                           importRepository.cstr(),
                            internal::DepthToSvn(depth), no_ignore, no_unknown_nodetype,
                            map2hash(revProps, pool),
                            commit_callback2, &_baton,
@@ -582,7 +582,7 @@ Client_impl::import(const Path &path,
 #else
     svn_commit_info_t *commit_info = NULL;
     svn_error_t *error =
-        svn_client_import3(&commit_info, path.cstr(), url.cstr(),
+        svn_client_import3(&commit_info, path.cstr(), importRepository.cstr(),
                            internal::DepthToSvn(depth), no_ignore, no_unknown_nodetype,
                            map2hash(revProps, pool),
                            *m_context, pool);

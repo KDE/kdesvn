@@ -58,6 +58,11 @@ Path::Path(const QString &path)
     init(path);
 }
 
+Path::Path(const QUrl &path)
+{
+    init(path.toString());
+}
+
 Path::Path(const Path &path)
     : m_path(path.m_path)
 {

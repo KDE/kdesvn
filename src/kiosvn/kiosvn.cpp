@@ -61,6 +61,7 @@
 #include <kmimetype.h>
 #include <krun.h>
 #include <kio/slaveinterface.h>
+#include <kio/global.h>
 
 namespace KIO
 {
@@ -284,7 +285,7 @@ void kio_svnProtocol::get(const QUrl &url)
     }
     KioByteStream dstream(this, url.fileName());
     try {
-        QString _url = makeSvnUrl(url);
+        QUrl _url = makeSvnUrl(url);
         svn::InfoEntries e;
         e = m_pData->m_Svnclient->info(_url, svn::DepthEmpty, rev, rev);
         if (!e.isEmpty()) {
@@ -346,7 +347,7 @@ void kio_svnProtocol::rename(const QUrl &src, const QUrl &target, KIO::JobFlags 
     //bool force  = flags&KIO::Overwrite;
     m_pData->m_CurrentContext->setLogMessage(getDefaultLog());
     try {
-        m_pData->m_Svnclient->move(svn::CopyParameter(makeSvnUrl(src), makeSvnUrl(target)));
+        m_pData->m_Svnclient->move(svn::CopyParameter(svn::Path(makeSvnUrl(src)), makeSvnUrl(target)));
     } catch (const svn::ClientException &e) {
         if (e.apr_err() == SVN_ERR_ENTRY_EXISTS) {
             error(KIO::ERR_DIR_ALREADY_EXIST, e.msg());
@@ -355,7 +356,7 @@ void kio_svnProtocol::rename(const QUrl &src, const QUrl &target, KIO::JobFlags 
         }
         return;
     }
-    notify(i18n("Renaming %1 to %2 succesfull", src.toString(), target.toString()));
+    notify(i18n("Renaming %1 to %2 succesfull", src.toDisplayString(), target.toDisplayString()));
     finished();
 }
 
@@ -451,7 +452,7 @@ void kio_svnProtocol::put(const QUrl &url, int permissions, KIO::JobFlags flags)
     written(0);
     m_pData->dispWritten = true;
     registerToDaemon();
-    startOp(processed_size, i18n("Committing %1", makeSvnUrl(url)));
+    startOp(processed_size, i18n("Committing %1", makeSvnUrl(url).toDisplayString()));
     bool err = false;
     if (exists) {
         svn::CommitParameter commit_parameters;
@@ -464,7 +465,7 @@ void kio_svnProtocol::put(const QUrl &url, int permissions, KIO::JobFlags flags)
         }
     } else  {
         try {
-            m_pData->m_Svnclient->import(tmpfile->fileName(), makeSvnUrl(url), getDefaultLog(), svn::DepthEmpty, false, false);
+            m_pData->m_Svnclient->import(tmpfile->fileName(), svn::Url(makeSvnUrl(url)), getDefaultLog(), svn::DepthEmpty, false, false);
         } catch (const svn::ClientException &e) {
             QString ex = e.msg();
             extraError(KIO::ERR_SLAVE_DEFINED, e.msg());
@@ -505,7 +506,7 @@ void kio_svnProtocol::copy(const QUrl &src, const QUrl &dest, int permissions, K
     }
     m_pData->dispProgress = false;
     kDebug(9510) << "kio_svn::copy finished" <<  endl;
-    notify(i18n("Copied %1 to %2", makeSvnUrl(src), makeSvnUrl(dest)));
+    notify(i18n("Copied %1 to %2", makeSvnUrl(src).toDisplayString(), makeSvnUrl(dest).toDisplayString()));
     finished();
 }
 
@@ -562,21 +563,21 @@ bool kio_svnProtocol::checkWc(const KUrl &url) const
     return false;
 }
 
-QString kio_svnProtocol::makeSvnUrl(const KUrl &url, bool check_Wc) const
+QUrl kio_svnProtocol::makeSvnUrl(const QUrl &url, bool check_Wc) const
 {
-    const QString proto = svn::Url::transformProtokoll(url.protocol());
-    if (proto == QLatin1String("file") && check_Wc) {
+    const QString scheme = svn::Url::transformProtokoll(url.scheme());
+    if (scheme == QLatin1String("file") && check_Wc) {
         if (checkWc(url)) {
-            return url.path();
+            return url;
         }
     }
-    KUrl tmpUrl(url);
-    tmpUrl.setProtocol(proto);
+    QUrl tmpUrl(url);
+    tmpUrl.setScheme(scheme);
 
     if (url.path().isEmpty()) {
         throw svn::ClientException(QLatin1Char('\'') + url.url() + QLatin1String("' is not a valid subversion url"));
     }
-    return tmpUrl.url();
+    return tmpUrl;
 }
 
 bool kio_svnProtocol::createUDSEntry(const QString &filename, const QString &user, long long int size, bool isdir, time_t mtime, KIO::UDSEntry &entry)
@@ -867,7 +868,7 @@ void kio_svnProtocol::svnlog(int revstart, const QString &revstringstart, int re
     for (long j = 0; j < urls.count(); ++j) {
         svn::LogEntriesMap logs;
         try {
-            m_pData->m_Svnclient->log(params.targets(makeSvnUrl(urls[j])), logs);
+            m_pData->m_Svnclient->log(params.targets(svn::Path(makeSvnUrl(urls[j]))), logs);
         } catch (const svn::ClientException &e) {
             extraError(KIO::ERR_SLAVE_DEFINED, e.msg());
             break;
@@ -923,7 +924,7 @@ void kio_svnProtocol::wc_switch(const QUrl &wc, const QUrl &target, bool rec, in
     svn::Revision where(rev, revstring);
     svn::Path wc_path(wc.path());
     try {
-        m_pData->m_Svnclient->doSwitch(wc_path, makeSvnUrl(target.url()), where, rec ? svn::DepthInfinity : svn::DepthFiles);
+        m_pData->m_Svnclient->doSwitch(wc_path, svn::Url(makeSvnUrl(target)), where, rec ? svn::DepthInfinity : svn::DepthFiles);
     } catch (const svn::ClientException &e) {
         extraError(KIO::ERR_SLAVE_DEFINED, e.msg());
     }
@@ -934,10 +935,10 @@ void kio_svnProtocol::diff(const QUrl &uri1, const QUrl &uri2, int rnum1, const 
     QByteArray ex;
     /// @todo read settings for diff (ignore contentype)
     try {
-        svn::Revision r1(rnum1, rstring1);
-        svn::Revision r2(rnum2, rstring2);
-        QString u1 = makeSvnUrl(uri1, true);
-        QString u2 = makeSvnUrl(uri2, true);
+        const svn::Revision r1(rnum1, rstring1);
+        const svn::Revision r2(rnum2, rstring2);
+        const QUrl u1 = makeSvnUrl(uri1, true);
+        const QUrl u2 = makeSvnUrl(uri2, true);
         KTempDir tdir;
         kDebug(9510) << "kio_ksvn::diff : " << u1 << " at revision " << r1.toString() << " with "
                      << u2 << " at revision " << r2.toString()
@@ -966,9 +967,9 @@ void kio_svnProtocol::diff(const QUrl &uri1, const QUrl &uri2, int rnum1, const 
 void kio_svnProtocol::import(const QUrl &repos, const QUrl &wc)
 {
     try {
-        QString target = makeSvnUrl(repos);
-        QString path = wc.path();
-        m_pData->m_Svnclient->import(svn::Path(path), target, QString(), svn::DepthInfinity, false, false);
+        const QUrl target = makeSvnUrl(repos);
+        const QString path = wc.path();
+        m_pData->m_Svnclient->import(svn::Path(path), svn::Url(target), QString(), svn::DepthInfinity, false, false);
     } catch (const svn::ClientException &e) {
         extraError(KIO::ERR_SLAVE_DEFINED, e.msg());
         return;

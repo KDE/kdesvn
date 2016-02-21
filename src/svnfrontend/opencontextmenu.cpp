@@ -19,11 +19,11 @@
  ***************************************************************************/
 #include "opencontextmenu.h"
 
-#include <krun.h>
-#include <klocale.h>
-#include <kapplication.h>
-#include <kdebug.h>
 #include <kiconloader.h>
+#include <klocale.h>
+#include <krun.h>
+#include <QAction>
+#include <QApplication>
 
 OpenContextmenu::OpenContextmenu(const QUrl &aPath, const KService::List &aList, QWidget *parent)
     : KMenu(parent), m_Path(aPath), m_List(aList)
@@ -59,7 +59,7 @@ void OpenContextmenu::setup()
     if (!m_List.isEmpty()) {
         addSeparator();
     }
-    act = new KAction(i18n("Other..."), this);
+    act = new QAction(i18n("Other..."), this);
     QVariant _data = int(0);
     act->setData(_data);
     addAction(act);
@@ -69,7 +69,7 @@ void OpenContextmenu::slotRunService(QAction *act)
 {
     QMap<int, KService::Ptr>::Iterator it = m_mapPopup.find(act->data().toInt());
     if (it != m_mapPopup.end()) {
-        KRun::run(**it, QList<QUrl>() << m_Path, KApplication::activeWindow());
+        KRun::run(**it, QList<QUrl>() << m_Path, QApplication::activeWindow());
     } else {
         slotOpenWith();
     }
@@ -78,7 +78,7 @@ void OpenContextmenu::slotRunService(QAction *act)
 
 void OpenContextmenu::slotOpenWith()
 {
-    KUrl::List lst;
+    QList<QUrl> lst;
     lst.append(m_Path);
-    KRun::displayOpenWithDialog(lst, KApplication::activeWindow());
+    KRun::displayOpenWithDialog(lst, QApplication::activeWindow());
 }

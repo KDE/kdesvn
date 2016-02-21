@@ -21,11 +21,10 @@
 #define OPENCONTEXTMENU_H
 
 #include <kservice.h>
-#include <kaction.h>
-#include <kurl.h>
 #include <kmenu.h>
 
 #include <QMap>
+#include <QUrl>
 
 /**
     @author Rajko Albrecht <ral@alwins-world.de>

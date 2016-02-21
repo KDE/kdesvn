@@ -119,22 +119,20 @@ void UrlDlg::slotClear()
 /*!
     \fn UrlDlg::selectedUrl()
  */
-KUrl UrlDlg::selectedUrl()
+QUrl UrlDlg::selectedUrl() const
 {
     if (result() == QDialog::Accepted) {
-        KUrl uri = urlRequester_->url();
-        return uri;
-    } else {
-        return KUrl();
+        return urlRequester_->url();
     }
+    return QUrl();
 }
 
 /*!
     \fn UrlDlg::getUrl(QWidget*parent)
  */
-KUrl UrlDlg::getUrl(QWidget *parent)
+QUrl UrlDlg::getUrl(QWidget *parent)
 {
-    KUrl ret;
+    QUrl ret;
     QPointer<UrlDlg> dlg(new UrlDlg(parent));
     dlg->setCaption(i18n("Open"));
     if (dlg->exec() == KDialog::Accepted) {
@@ -142,12 +140,12 @@ KUrl UrlDlg::getUrl(QWidget *parent)
         //
         // get rid of leading whitespace
         // that is %20 in encoded form
-        QString url = dlg->selectedUrl().prettyUrl();
+        QString url = dlg->selectedUrl().toString();
 
         // decodes %20 to normal spaces
         // trims the whitespace from both ends
         // of the URL
-        ret = KUrl(url.trimmed());
+        ret = QUrl(url.trimmed());
     }
     delete dlg;
     return ret;

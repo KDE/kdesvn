@@ -34,8 +34,8 @@ class UrlDlg : public KDialog
 public:
     explicit UrlDlg(QWidget *parent = 0);
     virtual ~UrlDlg();
-    KUrl selectedUrl();
-    static KUrl getUrl(QWidget *parent = 0);
+    QUrl selectedUrl() const;
+    static QUrl getUrl(QWidget *parent = 0);
 protected:
     void init_dlg();
     KUrlRequester *urlRequester_;

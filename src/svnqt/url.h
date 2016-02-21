@@ -33,34 +33,25 @@
 #define SVNQT_URL_H
 
 #include <svnqt/svnqt_defines.h>
-#include <svnqt/pool.h>
 
-#include <QString>
-#include <QByteArray>
+#include <QUrl>
 
 namespace svn
 {
 class SVNQT_EXPORT Url
 {
 private:
-    QByteArray m_Uri;
-    Pool m_Pool;
-
+    QUrl m_url;
 public:
     /** Constructor */
-    Url();
-    Url(const QString &);    //krazy:exclude=explicit
-    Url(const QByteArray &); //krazy:exclude=explicit
-    Url(const Url &);
+    Url() = default;
+    Url(const Url &) = default;
+    explicit Url(const QUrl &url);
 
     /** Destructor */
-    ~Url();
+    ~Url() = default;
 
-    void data(const QString &);
-    void data(const QByteArray &);
-
-    operator const char *()const;
-    operator const QByteArray &()const;
+    QByteArray cstr()const;
 
     /**
      * Checks if @a url is valid
@@ -70,19 +61,16 @@ public:
      * Example of an invalid URL:
      *   /home/foo/bar
      */
-    static bool
-    isValid(const QString &url);
+    static bool isValid(const QString &url);
 
     /**
      * Checks if @a url points to a local filesystem.
      *
      * @return true if url is accessed local without network.
      */
-    static bool
-    isLocal(const QString &url);
+    static bool isLocal(const QString &url);
 
-    static QString
-    transformProtokoll(const QString &);
+    static QString transformProtokoll(const QString &);
 
 };
 }

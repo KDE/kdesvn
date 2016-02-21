@@ -515,7 +515,8 @@ Client_impl::doExport(const CheckoutParameter &params) throw (ClientException)
 
 Revision
 Client_impl::doSwitch(
-    const Path &path, const Url &url,
+    const Path &path,
+    const Url &url,
     const Revision &revision,
     Depth depth,
     const Revision &peg,
@@ -535,7 +536,7 @@ Client_impl::doSwitch(
 #endif
                 &revnum,
                 path.cstr(),
-                url,
+                url.cstr(),
                 peg.revision(),
                 revision.revision(),
                 internal::DepthToSvn(depth),
@@ -572,7 +573,8 @@ Client_impl::import(const Path &path,
     mBaton _baton;
     _baton.m_context = m_context;
     svn_error_t *error =
-        svn_client_import4(path.cstr(), url,
+        svn_client_import4(path.cstr(),
+                           url.cstr(),
                            internal::DepthToSvn(depth), no_ignore, no_unknown_nodetype,
                            map2hash(revProps, pool),
                            commit_callback2, &_baton,
@@ -580,7 +582,7 @@ Client_impl::import(const Path &path,
 #else
     svn_commit_info_t *commit_info = NULL;
     svn_error_t *error =
-        svn_client_import3(&commit_info, path.cstr(), url,
+        svn_client_import3(&commit_info, path.cstr(), url.cstr(),
                            internal::DepthToSvn(depth), no_ignore, no_unknown_nodetype,
                            map2hash(revProps, pool),
                            *m_context, pool);
@@ -616,16 +618,16 @@ Client_impl::relocate(const Path &path,
     svn_error_t *error =
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
         svn_client_relocate2(path.cstr(),
-                             from_url,
-                             to_url,
+                             from_url.cstr(),
+                             to_url.cstr(),
                              ignore_externals,
                              *m_context,
                              pool);
 
 #else
         svn_client_relocate(path.cstr(),
-                            from_url,
-                            to_url,
+                            from_url.cstr(),
+                            to_url.cstr(),
                             recurse,
                             *m_context,
                             pool);

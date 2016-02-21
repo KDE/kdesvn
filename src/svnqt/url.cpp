@@ -43,52 +43,15 @@
 namespace svn
 {
 
-Url::Url(): m_Uri(), m_Pool() {}
-
-Url::Url(const QString &a_uri)
-    : m_Pool()
+Url::Url(const QUrl &url)
+    : m_url(url)
 {
-    data(a_uri);
 }
 
-Url::Url(const Url &other)
-    : m_Pool()
+QByteArray Url::cstr() const
 {
-    m_Uri = other.m_Uri;
+    return m_url.toEncoded(QUrl::FullyEncoded|QUrl::NormalizePathSegments);
 }
-
-Url::Url(const QByteArray &a_uri)
-    : m_Pool()
-{
-    data(a_uri);
-}
-
-void Url::data(const QString &a_uri)
-{
-    data(a_uri.toUtf8());
-}
-
-void Url::data(const QByteArray &a_uri)
-{
-    m_Uri = a_uri;
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
-    if (!svn_uri_is_canonical(m_Uri.constData(), m_Pool)) {
-        m_Uri = svn_uri_canonicalize(m_Uri.constData(), m_Pool);
-    }
-#endif
-}
-
-Url::operator const char *()const
-{
-    return m_Uri.constData();
-}
-
-Url::operator const QByteArray &()const
-{
-    return m_Uri;
-}
-
-Url::~Url() {}
 
 /* static helpers */
 bool Url::isLocal(const QString &url)

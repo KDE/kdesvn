@@ -122,11 +122,6 @@ Path::path() const
     return m_path;
 }
 
-Path::operator const QString &()const
-{
-    return m_path;
-}
-
 const QByteArray
 Path::cstr() const
 {

@@ -2870,7 +2870,7 @@ QString SvnActions::searchProperty(QString &Store, const QString &property, cons
         return QString();
     }
     while (pa.length() > 0) {
-        const svn::PathPropertiesMapListPtr pm = propList(pa, where, false);
+        const svn::PathPropertiesMapListPtr pm = propList(pa.path(), where, false);
         if (!pm) {
             return QString();
         }
@@ -2879,7 +2879,7 @@ QString SvnActions::searchProperty(QString &Store, const QString &property, cons
             const svn::PropertiesMap::ConstIterator it = mp.find(property);
             if (it != mp.end()) {
                 Store = *it;
-                return pa;
+                return pa.path();
             }
         }
         if (up) {

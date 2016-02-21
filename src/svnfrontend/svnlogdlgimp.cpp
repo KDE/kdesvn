@@ -480,7 +480,7 @@ void SvnLogDlgImp::slotCustomContextMenu(const QPoint &e)
     case 104: {
         svn::Revision previous(rev);
         svn::Revision current(m_CurrentModel->toRevision(ind));
-        QString _path = m_PegUrl;
+        QString _path = m_PegUrl.path();
         m_Actions->slotMergeWcRevisions(_path, current, previous, true, true, false, false, false);
     }
     break;

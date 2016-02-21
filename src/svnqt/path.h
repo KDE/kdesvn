@@ -84,11 +84,6 @@ public:
     path() const;
 
     /**
-     * @return Path string
-     */
-    operator const QString &()const;
-
-    /**
      * @return Path string as c string
      */
     const QByteArray cstr() const;
@@ -100,24 +95,21 @@ public:
      *
      * @return true if there is a path set
      */
-    bool
-    isset() const;
+    bool isset() const;
 
     /**
      * adds a new URL component to the path
      *
      * @param component new component to add
      */
-    void
-    addComponent(const QString &component);
+    void addComponent(const QString &component);
 
     /** Reduce path to its parent folder.
      * If the path length is 1 (eg., only "/") it will cleared so
      * path length will get zero.
      * @sa svn_path_remove_component
      */
-    void
-    removeLast();
+    void removeLast();
 
     /** Parse a string for a peg revision
      * @param pathorurl url to parse

@@ -613,7 +613,7 @@ bool SvnItemModel::refreshIndex(const QModelIndex &ind, bool sendSignal)
 
 SvnItemModelNode *SvnItemModel::findPath(const svn::Path &_p)
 {
-    QString ip = _p;
+    QString ip = _p.path();
     SvnItemModelNode *n1 = firstRootChild();
     if (n1) {
         if (n1->fullName().length() < ip.length()) {

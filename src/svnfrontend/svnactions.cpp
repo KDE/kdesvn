@@ -545,9 +545,10 @@ void SvnActions::makeBlame(const svn::Revision &start, const svn::Revision &end,
     }
     svn::AnnotatedFile blame;
     QWidget *_parent = _p ? _p : m_Data->m_ParentList->realWidget();
+    bool mergeinfo = hasMergeInfo(m_Data->m_ParentList->baseUri().isEmpty() ? k : m_Data->m_ParentList->baseUri());
 
     svn::AnnotateParameter params;
-    params.path(k).pegRevision(_peg == svn::Revision::UNDEFINED ? end : _peg).revisionRange(svn::RevisionRange(start, end)).includeMerged(hasMergeInfo(m_Data->m_ParentList->baseUri()));
+    params.path(k).pegRevision(_peg == svn::Revision::UNDEFINED ? end : _peg).revisionRange(svn::RevisionRange(start, end)).includeMerged(mergeinfo);
 
     try {
         CursorStack a(Qt::BusyCursor);

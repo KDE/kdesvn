@@ -539,7 +539,7 @@ QStringList SvnItemModel::mimeTypes() const
            << QLatin1String("application/x-kde-urilist");
 }
 
-bool SvnItemModel::dropUrls(const KUrl::List &data, Qt::DropAction action, int row, int column, const QModelIndex &parent, bool intern)
+bool SvnItemModel::dropUrls(const QList<QUrl> &data, Qt::DropAction action, int row, int column, const QModelIndex &parent, bool intern)
 {
     Q_UNUSED(row);
     Q_UNUSED(column);

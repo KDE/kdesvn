@@ -31,7 +31,6 @@
 #include <KBookmarks/KBookmarkMenu>
 #include <KBookmarks/KBookmarkActionMenu>
 
-class KUrl;
 class KAction;
 class KActionMenu;
 class KToggleAction;

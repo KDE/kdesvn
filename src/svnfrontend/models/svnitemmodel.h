@@ -91,7 +91,7 @@ public:
     virtual QStringList mimeTypes()const;
     QMimeData *mimeData(const QModelIndexList &indexes)const;
 
-    virtual bool dropUrls(const KUrl::List &data, Qt::DropAction action, int row, int column, const QModelIndex &parent, bool intern);
+    bool dropUrls(const QList<QUrl> &data, Qt::DropAction action, int row, int column, const QModelIndex &parent, bool intern);
 
     bool filterIndex(const QModelIndex &, int, svnmodel::ItemTypeFlag)const;
 
@@ -119,7 +119,7 @@ public:
     const QString &uniqueIdentifier()const;
 
 Q_SIGNALS:
-    void urlDropped(const KUrl::List &, Qt::DropAction, const QModelIndex &, bool);
+    void urlDropped(const QList<QUrl> &, Qt::DropAction, const QModelIndex &, bool);
     void clientException(const QString &);
     void itemsFetched(const QModelIndex &);
 

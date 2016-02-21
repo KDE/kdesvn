@@ -241,7 +241,7 @@ int CommandExec::exec(const QCommandLineParser *parser)
         m_pCPart->extraRevisions[j - 2] = svn::Revision::HEAD;
 
         if (tmpurl.isLocalFile() && (j == 2 || !dont_check_second) && !dont_check_all) {
-            if (m_pCPart->m_SvnWrapper->isLocalWorkingCopy(KUrl::fromLocalFile(tmpurl.path()), _baseurl)) {
+            if (m_pCPart->m_SvnWrapper->isLocalWorkingCopy(QUrl::fromLocalFile(tmpurl.path()), _baseurl)) {
                 tmp = tmpurl.path();
                 m_pCPart->baseUrls[j - 2] = _baseurl;
                 m_pCPart->extraRevisions[j - 2] = svn::Revision::WORKING;

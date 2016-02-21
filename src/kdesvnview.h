@@ -26,7 +26,6 @@
 #include <kparts/part.h>
 
 class QPainter;
-class KUrl;
 class KdeSvnDirList;
 class QVBoxLayout;
 class QSpacerItem;

@@ -157,7 +157,7 @@ protected Q_SLOTS:
     void slotCopyFinished(KJob *job);
     void slotUpdateLogCache();
 
-    void slotUrlDropped(const KUrl::List &, Qt::DropAction, const QModelIndex &, bool);
+    void slotUrlDropped(const QList<QUrl> &, Qt::DropAction, const QModelIndex &, bool);
     void slotRepositorySettings();
 
     void slotRightProperties();
@@ -175,7 +175,7 @@ protected:
     void copy_move(bool move);
     void itemActivated(const QModelIndex &index, bool keypress = false);
 
-    void internalDrop(const KUrl::List &_lst, Qt::DropAction action, const QModelIndex &index);
+    void internalDrop(const QList<QUrl> &_lst, Qt::DropAction action, const QModelIndex &index);
     void execContextMenu(const SvnItemList &);
     void simpleWcDiff(SvnItem *which, const svn::Revision &, const svn::Revision &);
     void doLog(bool, bool)const;

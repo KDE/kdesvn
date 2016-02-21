@@ -162,8 +162,8 @@ MainTreeWidget::MainTreeWidget(KActionCollection *aCollection, QWidget *parent, 
 
     connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigExtraStatusMessage(QString)), this, SIGNAL(sigExtraStatusMessage(QString)));
 
-    connect(m_Data->m_Model, SIGNAL(urlDropped(KUrl::List,Qt::DropAction,QModelIndex,bool)),
-            this, SLOT(slotUrlDropped(KUrl::List,Qt::DropAction,QModelIndex,bool)));
+    connect(m_Data->m_Model, SIGNAL(urlDropped(QList<QUrl>,Qt::DropAction,QModelIndex,bool)),
+            this, SLOT(slotUrlDropped(QList<QUrl>,Qt::DropAction,QModelIndex,bool)));
 
     connect(m_Data->m_Model, SIGNAL(itemsFetched(QModelIndex)), this, SLOT(slotItemsInserted(QModelIndex)));
 
@@ -906,7 +906,7 @@ void MainTreeWidget::itemActivated(const QModelIndex &index, bool keypress)
     if (index.isValid() && (item = static_cast<SvnItemModelNode *>(index.internalPointer()))) {
         if (!item->isDir()) {
             svn::Revision rev;
-            KUrl::List lst;
+            QList<QUrl> lst;
             lst.append(item->kdeName(rev));
             KService::List li = offersList(item, true);
             if (li.isEmpty() || li.first()->exec().isEmpty()) {
@@ -1224,7 +1224,7 @@ void MainTreeWidget::slotOpenWith()
         return;
     }
     svn::Revision rev(isWorkingCopy() ? svn::Revision::UNDEFINED : baseRevision());
-    KUrl::List lst;
+    QList<QUrl> lst;
     lst.append(which->kdeName(rev));
     KRun::displayOpenWithDialog(lst, KApplication::activeWindow());
 }
@@ -1660,7 +1660,7 @@ void MainTreeWidget::makeDelete(const SvnItemList &lst)
     }
     svn::Paths items;
     QStringList displist;
-    KUrl::List kioList;
+    QList<QUrl> kioList;
     SvnItemList::const_iterator liter;
     for (liter = lst.begin(); liter != lst.end(); ++liter) {
         if (!(*liter)->isRealVersioned()) {
@@ -1701,29 +1701,29 @@ void MainTreeWidget::makeDelete(const SvnItemList &lst)
     }
 }
 
-void MainTreeWidget::internalDrop(const KUrl::List &_lst, Qt::DropAction action, const QModelIndex &index)
+void MainTreeWidget::internalDrop(const QList<QUrl> &_lst, Qt::DropAction action, const QModelIndex &index)
 {
     if (_lst.isEmpty()) {
         return;
     }
-    KUrl::List lst = _lst;
+    QList<QUrl> lst = _lst;
     QString target;
     QString nProto;
 
     if (!isWorkingCopy()) {
-        nProto = svn::Url::transformProtokoll(lst[0].protocol());
+        nProto = svn::Url::transformProtokoll(lst[0].scheme());
     }
-    KUrl::List::iterator it = lst.begin();
+    QList<QUrl>::iterator it = lst.begin();
     QStringList l;
     for (; it != lst.end(); ++it) {
-        l = (*it).prettyUrl().split('?');
+        l = (*it).toString().split('?');
         if (l.size() > 1) {
             (*it) = l[0];
         } else if (isWorkingCopy()) {
             (*it) = KUrl::fromPathOrUrl((*it).path());
         }
         if (!nProto.isEmpty())
-            (*it).setProtocol(nProto);
+            (*it).setScheme(nProto);
         qDebug() << "Dropped: " << (*it) << endl;
     }
 
@@ -1741,7 +1741,7 @@ void MainTreeWidget::internalDrop(const KUrl::List &_lst, Qt::DropAction action,
     refreshCurrentTree();
 }
 
-void MainTreeWidget::slotUrlDropped(const KUrl::List &_lst, Qt::DropAction action, const QModelIndex &index, bool intern)
+void MainTreeWidget::slotUrlDropped(const QList<QUrl> &_lst, Qt::DropAction action, const QModelIndex &index, bool intern)
 {
     if (_lst.isEmpty()) {
         return;

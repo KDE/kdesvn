@@ -24,7 +24,6 @@
 #include <qstring.h>
 
 class KCmdLineArgs;
-class KUrl;
 class pCPart;
 
 namespace svn

@@ -23,10 +23,8 @@
 #include <QAbstractListModel>
 
 #include "svnitemmodelfwd.h"
-
 #include "svnqt/svnqttypes.h"
 
-#include <KUrl>
 #include <QScopedPointer>
 
 class SvnItemModelData;

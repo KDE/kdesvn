@@ -19,8 +19,6 @@
  ***************************************************************************/
 #include "hotcopydlg_impl.h"
 
-#include <kurl.h>
-
 HotcopyDlg_impl::HotcopyDlg_impl(QWidget *parent)
     : QWidget(parent), Ui::HotcopyDlg()
 {

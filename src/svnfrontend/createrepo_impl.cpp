@@ -21,13 +21,6 @@
 #include "svnqt/version_check.h"
 #include "svnqt/repoparameter.h"
 
-#include <kdebug.h>
-#include <kurl.h>
-#include <kurlrequester.h>
-#include <kcombobox.h>
-
-#include <qcheckbox.h>
-
 class RecurseCheck
 {
     bool &value;

@@ -19,14 +19,6 @@
  ***************************************************************************/
 #include "dumprepo_impl.h"
 
-#include <kdebug.h>
-#include <kurl.h>
-#include <kurlrequester.h>
-#include <kcombobox.h>
-#include <knuminput.h>
-
-#include <qcheckbox.h>
-
 DumpRepo_impl::DumpRepo_impl(QWidget *parent)
     : QWidget(parent)
 {

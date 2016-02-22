@@ -20,7 +20,6 @@
 #ifndef SVNTREEVIEW_H
 #define SVNTREEVIEW_H
 
-#include <KUrl>
 #include <QTreeView>
 
 class SvnTreeView: public QTreeView

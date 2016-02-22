@@ -26,7 +26,6 @@
 #include <klocale.h>
 #include <kglobal.h>
 #include <klineedit.h>
-#include <kurl.h>
 #include <kdebug.h>
 #include <KHistoryComboBox>
 #include <qlabel.h>

@@ -21,7 +21,6 @@
 #define URLDLG_H
 
 #include <kdialog.h>
-#include <kurl.h>
 
 class KUrlRequester;
 

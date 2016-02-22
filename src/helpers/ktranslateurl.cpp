@@ -24,6 +24,7 @@
 #include <kdebug.h>
 #include <kfileitem.h>
 #include <kdesktopfile.h>
+#include <kurl.h>
 
 #include <qstringlist.h>
 #include <qdir.h>

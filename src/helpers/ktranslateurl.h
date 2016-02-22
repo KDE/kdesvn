@@ -20,7 +20,8 @@
 #ifndef HELPERSKTRANSLATEURL_H
 #define HELPERSKTRANSLATEURL_H
 
-#include <kurl.h>
+#include <QString>
+#include <QUrl>
 
 namespace helpers
 {

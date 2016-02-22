@@ -28,6 +28,7 @@
 #include <klocale.h>
 #include <kdebug.h>
 #include <kvbox.h>
+#include <kurl.h>
 
 #include <qlabel.h>
 #include <qcheckbox.h>

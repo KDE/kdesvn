@@ -39,15 +39,12 @@
 #include "ksvnjobview.h"
 
 #include <kdebug.h>
-#include <klocale.h>
-#include <kglobal.h>
-#include <kfiledialog.h>
 #include <kpassworddialog.h>
-#include <KAboutData>
-
 #include <kpluginfactory.h>
 #include <knotification.h>
+#include <kio/global.h>
 
+#include <QFileDialog>
 #include <QVariant>
 #include <QList>
 #include <QDBusConnection>
@@ -74,17 +71,30 @@ kdesvnd::~kdesvnd()
     delete m_Listener;
 }
 
-QStringList kdesvnd::getTopLevelActionMenu(const KUrl::List &list)
+QStringList kdesvnd::getTopLevelActionMenu(const QStringList &urlList)
 {
-    return getActionMenu(list, true);
+    // we get correct urls here
+    QList<QUrl> urls;
+    urls.reserve(urlList.size());
+    Q_FOREACH(const QString &str, urlList) {
+        urls += QUrl(str);
+    }
+
+    return getActionMenu(urls, true);
 }
 
-QStringList kdesvnd::getActionMenu(const KUrl::List &list)
+QStringList kdesvnd::getActionMenu(const QStringList &urlList)
 {
-    return getActionMenu(list, false);
+    // we get correct urls here
+    QList<QUrl> urls;
+    urls.reserve(urlList.size());
+    Q_FOREACH(const QString &str, urlList) {
+        urls += QUrl(str);
+    }
+    return getActionMenu(urls, false);
 }
 
-QStringList kdesvnd::getActionMenu(const KUrl::List &list, bool toplevel)
+QStringList kdesvnd::getActionMenu(const QList<QUrl> &list, bool toplevel)
 {
     QStringList result;
     Kdesvnsettings::self()->readConfig();
@@ -93,14 +103,14 @@ QStringList kdesvnd::getActionMenu(const KUrl::List &list, bool toplevel)
             (toplevel && Kdesvnsettings::no_konqueror_toplevelmenu())) {
         return result;
     }
+
     QString base;
+    const bool itemIsWc = isWorkingCopy(list[0], base);
 
-    bool itemIsWc = isWorkingCopy(list[0], base);
+    const QUrl _dir(list.at(0).adjusted(QUrl::RemoveFilename).adjusted(QUrl::StripTrailingSlash));
+    const bool parentIsWc = isWorkingCopy(_dir, base);
+
     bool itemIsRepository = false;
-
-    QString _par = list[0].directory(KUrl::IgnoreTrailingSlash);
-    bool parentIsWc = isWorkingCopy(_par, base);
-
     if (!parentIsWc && !itemIsWc) {
         itemIsRepository = isRepository(list[0]);
     }
@@ -123,7 +133,8 @@ QStringList kdesvnd::getActionMenu(const KUrl::List &list, bool toplevel)
             result << "Log";
             if (!toplevel) {
                 result << "Info";
-                if (isRepository(list[0].upUrl())) {
+                const QUrl upUrl = KIO::upUrl(list.at(0));
+                if (isRepository(upUrl)) {
                     result << "Blame"
                            << "Rename";
                 }
@@ -143,7 +154,7 @@ QStringList kdesvnd::getActionMenu(const KUrl::List &list, bool toplevel)
                << "Rename"
                << "Revert";
 
-        KUrl url = helpers::KTranslateUrl::translateSystemUrl(list[0]);
+        QUrl url = helpers::KTranslateUrl::translateSystemUrl(list[0]);
 
         QFileInfo f(url.path());
         if (f.isFile()) {
@@ -160,8 +171,9 @@ QStringList kdesvnd::getActionMenu(const KUrl::List &list, bool toplevel)
 
 QStringList kdesvnd::getSingleActionMenu(const QString &what)
 {
-    KUrl::List l; l.append(KUrl(what));
-    return getActionMenu(l);
+    QList<QUrl> l;
+    l.append(QUrl(what));
+    return getActionMenu(l, false);
 }
 
 QStringList kdesvnd::get_saved_login(const QString &realm, const QString &user)
@@ -244,11 +256,7 @@ QStringList kdesvnd::get_sslclientcertpw(const QString &realm)
 
 QString kdesvnd::get_sslclientcertfile()
 {
-    QString afile = KFileDialog::getOpenFileName(KUrl(),
-                    QString(),
-                    0,
-                    i18n("Open a file with a #PKCS12 certificate"));
-    return afile;
+    return QFileDialog::getOpenFileName(nullptr, i18n("Open a file with a #PKCS12 certificate"));
 }
 
 QStringList kdesvnd::get_logmsg()
@@ -263,16 +271,15 @@ QStringList kdesvnd::get_logmsg()
     return res;
 }
 
-QString kdesvnd::cleanUrl(const KUrl &url)
+QString kdesvnd::cleanUrl(const QUrl &url)
 {
-    QString cleanpath = url.path(KUrl::RemoveTrailingSlash);
-    return cleanpath;
+    return url.adjusted(QUrl::StripTrailingSlash).path();
 }
 
 /* just simple name check of course - no network access! */
-bool kdesvnd::isRepository(const KUrl &url)
+bool kdesvnd::isRepository(const QUrl &url)
 {
-    QString proto = svn::Url::transformProtokoll(url.protocol());
+    QString proto = svn::Url::transformProtokoll(url.scheme());
     if (proto == QLatin1String("file")) {
         // local access - may a repository
         svn::StatusParameter params(svn::Path(QLatin1String("file://") + cleanUrl(url)));
@@ -283,17 +290,16 @@ bool kdesvnd::isRepository(const KUrl &url)
             return false;
         }
         return true;
-    } else {
-        return svn::Url::isValid(proto);
     }
+    return svn::Url::isValid(proto);
 }
 
-bool kdesvnd::isWorkingCopy(const KUrl &_url, QString &base)
+bool kdesvnd::isWorkingCopy(const QUrl &_url, QString &base)
 {
     base.clear();
-    KUrl url = helpers::KTranslateUrl::translateSystemUrl(_url);
+    const QUrl url = helpers::KTranslateUrl::translateSystemUrl(_url);
 
-    if (url.isEmpty() || !url.isLocalFile() || url.protocol() != "file") {
+    if (url.isEmpty() || !url.isLocalFile() || url.scheme() != QLatin1String("file")) {
         return false;
     }
     svn::Revision peg(svn_opt_revision_unspecified);

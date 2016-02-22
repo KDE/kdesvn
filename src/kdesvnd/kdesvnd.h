@@ -23,11 +23,11 @@
 
 #include "ksvnwidgets/jobviewserverinterface.h"
 
-#include <qstringlist.h>
-#include <qstring.h>
-#include <kurl.h>
-#include <kdedmodule.h>
+#include <KDEDModule>
 #include <QDBusVariant>
+#include <QString>
+#include <QStringList>
+#include <QUrl>
 
 class KdesvndListener;
 class KsvnJobView;
@@ -42,11 +42,11 @@ public:
     virtual ~kdesvnd();
 
 protected:
-    bool isWorkingCopy(const KUrl &url, QString &base);
-    bool isRepository(const KUrl &url);
-    static QString cleanUrl(const KUrl &url);
+    bool isWorkingCopy(const QUrl &url, QString &base);
+    bool isRepository(const QUrl &url);
+    static QString cleanUrl(const QUrl &url);
     KdesvndListener *m_Listener;
-    QStringList getActionMenu(const KUrl::List &, bool toplevel);
+    QStringList getActionMenu(const QList<QUrl> &list, bool toplevel);
 
     org::kde::JobViewServer m_uiserver;
 
@@ -81,8 +81,8 @@ public Q_SLOTS:
     QString load_sslclientcertpw(const QString &realm);
     // return pw at pos 0, maysafe at pos 1, null-size if cancel hit.
     QStringList get_sslclientcertpw(const QString &);
-    QStringList getActionMenu(const KUrl::List &);
-    QStringList getTopLevelActionMenu(const KUrl::List &);
+    QStringList getActionMenu(const QStringList &urlList);
+    QStringList getTopLevelActionMenu(const QStringList &urlList);
     QStringList getSingleActionMenu(const QString &);
 
     bool canceldKioOperation(qulonglong kioid);

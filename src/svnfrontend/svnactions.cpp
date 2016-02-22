@@ -2296,7 +2296,7 @@ bool SvnActions::makeMove(const QString &Old, const QString &New)
     return true;
 }
 
-bool SvnActions::makeMove(const KUrl::List &Old, const QString &New)
+bool SvnActions::makeMove(const QList<QUrl> &Old, const QString &New)
 {
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
@@ -2329,7 +2329,7 @@ bool SvnActions::makeCopy(const QString &Old, const QString &New, const svn::Rev
     return true;
 }
 
-bool SvnActions::makeCopy(const KUrl::List &Old, const QString &New, const svn::Revision &rev)
+bool SvnActions::makeCopy(const QList<QUrl> &Old, const QString &New, const svn::Revision &rev)
 {
     const svn::Targets t(helpers::sub2qt::fromUrlList(Old));
 

@@ -23,7 +23,6 @@
 #include "kiobytestream.h"
 
 #include <qstring.h>
-#include <kurl.h>
 
 #include <kio/global.h>
 #include <kio/slavebase.h>
@@ -82,7 +81,7 @@ protected:
     void diff(const QUrl &uri1, const QUrl &uri2, int rnum1, const QString &rstring1, int rnum2, const QString &rstring2, bool rec);
     /* looked on kio::svn from kdesdk */
     enum KSVN_METHOD {
-        /* QUrl repository, KUrl target, int revnumber, QString revkind */
+        /* QUrl repository, QUrl target, int revnumber, QString revkind */
         SVN_CHECKOUT = 1,
         /* QUrl wc, int revnumber, QString revkind */
         /* refkind may empty or HEAD or START, will get parsed if revnumber is -1 */
@@ -117,7 +116,7 @@ private:
     KioSvnData *m_pData;
     static bool createUDSEntry(const QString &filename, const QString &user, long long int size, bool isdir, time_t mtime, KIO::UDSEntry &entry);
     QUrl makeSvnUrl(const QUrl &url, bool check_wc = true) const;
-    bool checkWc(const KUrl &url) const;
+    bool checkWc(const QUrl &url) const;
     bool getLogMsg(QString &);
 
     void registerToDaemon();

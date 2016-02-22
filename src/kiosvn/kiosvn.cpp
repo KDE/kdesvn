@@ -543,7 +543,7 @@ bool kio_svnProtocol::getLogMsg(QString &t)
     return m_pData->m_Listener.contextGetLogMessage(t, _items);
 }
 
-bool kio_svnProtocol::checkWc(const KUrl &url) const
+bool kio_svnProtocol::checkWc(const QUrl &url) const
 {
     m_pData->resetListener();
     if (url.isEmpty() || !url.isLocalFile()) {
@@ -553,7 +553,7 @@ bool kio_svnProtocol::checkWc(const KUrl &url) const
     svn::Revision rev(svn_opt_revision_unspecified);
     svn::InfoEntries e;
     try {
-        e = m_pData->m_Svnclient->info(url.prettyUrl(), svn::DepthEmpty, rev, peg);
+        e = m_pData->m_Svnclient->info(svn::Path(url), svn::DepthEmpty, rev, peg);
     } catch (const svn::ClientException &e) {
         if (SVN_ERR_WC_NOT_DIRECTORY == e.apr_err()) {
             return false;

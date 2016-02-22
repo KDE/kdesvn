@@ -161,10 +161,10 @@ public:
     void getaddedItems(const QString &path, svn::StatusEntries &target);
 
     bool makeCopy(const QString &, const QString &, const svn::Revision &rev);
-    bool makeCopy(const KUrl::List &, const QString &, const svn::Revision &rev);
+    bool makeCopy(const QList<QUrl> &, const QString &, const svn::Revision &rev);
 
     bool makeMove(const QString &, const QString &);
-    bool makeMove(const KUrl::List &, const QString &);
+    bool makeMove(const QList<QUrl> &, const QString &);
 
     virtual bool makeCleanup(const QString &);
 

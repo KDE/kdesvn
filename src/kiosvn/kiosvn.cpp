@@ -47,21 +47,12 @@
 #include <netinet/in.h>
 #include <netdb.h>
 
-#include <kapplication.h>
 #include <kdebug.h>
-#include <kdemacros.h>
-#include <kmessagebox.h>
 #include <kcomponentdata.h>
 #include <kglobal.h>
-#include <kstandarddirs.h>
-#include <klocale.h>
-#include <kurl.h>
 #include <KTempDir>
 #include <KTemporaryFile>
 #include <kmimetype.h>
-#include <krun.h>
-#include <kio/slaveinterface.h>
-#include <kio/global.h>
 
 namespace KIO
 {
@@ -81,7 +72,7 @@ public:
     bool dispWritten;
     svn::ContextP m_CurrentContext;
     svn::ClientP m_Svnclient;
-    svn::Revision urlToRev(const KUrl &);
+    svn::Revision urlToRev(const QUrl &);
     QTime m_last;
     qulonglong m_Id;
 };
@@ -128,23 +119,26 @@ KioSvnData::~KioSvnData()
     m_CurrentContext->setListener(0L);
 }
 
-svn::Revision KioSvnData::urlToRev(const KUrl &url)
+svn::Revision KioSvnData::urlToRev(const QUrl &url)
 {
-    QMap<QString, QString> q = url.queryItems();
+    const QList<QPair<QString, QString>> q = QUrlQuery(url).queryItems();
 
     /* we try to check if it is ssh and try to get a password for it */
-    QString proto = url.protocol();
+    const QString proto = url.scheme();
 
-    if (proto.indexOf("ssh") != -1) {
+    if (proto.contains(QLatin1String("ssh"))) {
         SshAgent ag;
         ag.addSshIdentities();
     }
 
-    svn::Revision rev, tmp;
-    rev = svn::Revision::UNDEFINED;
-    if (q.find("rev") != q.end()) {
-        QString v = q["rev"];
-        m_Svnclient->url2Revision(v, rev, tmp);
+    svn::Revision rev = svn::Revision::UNDEFINED;
+    typedef QPair<QString, QString> myStrPair;
+    Q_FOREACH(const myStrPair &p, q) {
+        if (p.first == QLatin1String("rev")) {
+            const QString v = p.second;
+            svn::Revision tmp;
+            m_Svnclient->url2Revision(v, rev, tmp);
+        }
     }
     return rev;
 }
@@ -207,11 +201,11 @@ void kio_svnProtocol::listSendDirEntry(const svn::DirEntry &direntry)
 }
 
 /*!
-    \fn kio_svnProtocol::listDir (const KUrl&url)
+    \fn kio_svnProtocol::listDir (const QUrl&url)
  */
 void kio_svnProtocol::listDir(const QUrl &url)
 {
-    kDebug(9510) << "kio_svn::listDir(const KUrl& url) : " << url.url() << endl ;
+    kDebug(9510) << "kio_svn::listDir(const QUrl& url) : " << url.url() << endl ;
     m_pData->resetListener();
     svn::DirEntries dlist;
     svn::Revision rev = m_pData->urlToRev(url);

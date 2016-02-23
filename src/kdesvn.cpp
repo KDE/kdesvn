@@ -30,7 +30,6 @@
 #include <kstatusbar.h>
 #include <kbookmarkmenu.h>
 
-#include <kapplication.h>
 #include <kio/netaccess.h>
 #include <kconfig.h>
 #include <kurl.h>
@@ -152,15 +151,15 @@ kdesvn::kdesvn()
             connectActionCollection(m_part->actionCollection());
 
         } else {
-            KMessageBox::error(this, i18n("Could not load the part:\n%1", KLibLoader::self()->lastErrorMessage()));
-            kapp->quit();
+            KMessageBox::error(this, i18n("Could not load the part:\n%1", loader.errorString()));
+            qApp->quit();
             return;
         }
     } else {
         // if we couldn't find our Part, we exit since the Shell by
         // itself can't do anything useful
         KMessageBox::error(this, i18n("Could not find our part:\n%1", loader.errorString()));
-        kapp->quit();
+        qApp->quit();
         // we return here, cause kapp->quit() only means "exit the
         // next time we enter the event loop...
         return;

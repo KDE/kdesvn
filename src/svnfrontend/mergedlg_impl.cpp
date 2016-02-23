@@ -23,15 +23,10 @@
 #include "helpers/ktranslateurl.h"
 #include "settings/kdesvnsettings.h"
 
-#include <kurlrequester.h>
 #include <kdialog.h>
 #include <klocale.h>
-#include <kdebug.h>
 #include <kvbox.h>
-#include <kurl.h>
 
-#include <qlabel.h>
-#include <qcheckbox.h>
 #include <svnqt/version_check.h>
 
 MergeDlg_impl::MergeDlg_impl(QWidget *parent, bool src1, bool src2, bool out, bool record_only, bool reintegrate)
@@ -83,8 +78,7 @@ void MergeDlg_impl::setSrc1(const QString &what)
         m_SrcOneInput->clear();
         return;
     }
-    KUrl uri(helpers::KTranslateUrl::string2Uri(what));
-    m_SrcOneInput->setUrl(uri);
+    m_SrcOneInput->setUrl(helpers::KTranslateUrl::string2Uri(what));
 }
 
 void MergeDlg_impl::setSrc2(const QString &what)
@@ -93,8 +87,7 @@ void MergeDlg_impl::setSrc2(const QString &what)
         m_SrcTwoInput->clear();
         return;
     }
-    KUrl uri(helpers::KTranslateUrl::string2Uri(what));
-    m_SrcTwoInput->setUrl(uri);
+    m_SrcTwoInput->setUrl(helpers::KTranslateUrl::string2Uri(what));
 }
 
 void MergeDlg_impl::setDest(const QString &what)
@@ -103,9 +96,8 @@ void MergeDlg_impl::setDest(const QString &what)
         m_OutInput->clear();
         return;
     }
-    KUrl uri(what);
-    uri.setProtocol(QString());
-    m_OutInput->setUrl(uri);
+    // only local destination
+    m_OutInput->setUrl(QUrl::fromLocalFile(what));
 }
 
 bool MergeDlg_impl::recursive()const
@@ -150,13 +142,13 @@ bool MergeDlg_impl::allowmixedrevs()const
 
 QString MergeDlg_impl::Src1()const
 {
-    KUrl uri(m_SrcOneInput->url());
-    QString proto = svn::Url::transformProtokoll(uri.protocol());
-    if (proto == "file" && !m_SrcOneInput->url().scheme().startsWith("ksvn+file:")) {
-        uri.setProtocol(QString());
-    } else {
-        uri.setProtocol(proto);
+    QUrl uri(m_SrcOneInput->url());
+    const QString proto = svn::Url::transformProtokoll(uri.scheme());
+    if (proto == QLatin1String("file") && !m_SrcOneInput->url().scheme().startsWith("ksvn+file:")) {
+        return uri.toLocalFile();
     }
+
+    uri.setScheme(proto);
     return uri.url();
 }
 
@@ -165,21 +157,19 @@ QString MergeDlg_impl::Src2()const
     if (m_SrcTwoInput->url().isEmpty()) {
         return QString();
     }
-    KUrl uri(m_SrcTwoInput->url());
-    QString proto = svn::Url::transformProtokoll(uri.protocol());
-    if (proto == "file" && !m_SrcTwoInput->url().scheme().startsWith("ksvn+file:")) {
-        uri.setProtocol(QString());
-    } else {
-        uri.setProtocol(proto);
+    QUrl uri(m_SrcTwoInput->url());
+    const QString proto = svn::Url::transformProtokoll(uri.scheme());
+    if (proto == QLatin1String("file") && !m_SrcTwoInput->url().scheme().startsWith("ksvn+file:")) {
+        return uri.toLocalFile();
     }
+
+    uri.setScheme(proto);
     return uri.url();
 }
 
 QString MergeDlg_impl::Dest()const
 {
-    KUrl uri(m_OutInput->url());
-    uri.setProtocol(QString());
-    return uri.url();
+    return m_OutInput->url().toLocalFile();
 }
 
 Rangeinput_impl::revision_range MergeDlg_impl::getRange()const

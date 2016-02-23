@@ -34,6 +34,7 @@
 #include <kdebug.h>
 #include <kglobal.h>
 #include <kdirwatch.h>
+#include <kurlmimedata.h>
 
 #include <QItemSelectionModel>
 #include <QFileInfo>
@@ -555,18 +556,21 @@ bool SvnItemModel::dropUrls(const QList<QUrl> &data, Qt::DropAction action, int 
 
 QMimeData *SvnItemModel::mimeData(const QModelIndexList &indexes)const
 {
-    KUrl::List urls;
+    QList<QUrl> urls;
     foreach (const QModelIndex &index, indexes) {
         if (index.column() == 0) {
             urls << m_Data->nodeForIndex(index)->kdeName(m_Data->m_Display->baseRevision());
         }
     }
-    QMimeData *data = new QMimeData();
+    QMimeData *mimeData = new QMimeData();
+    mimeData->setUrls(urls);
+
     KUrl::MetaDataMap metaMap;
     metaMap["kdesvn-source"] = QLatin1Char('t');
     metaMap["kdesvn-id"] = uniqueIdentifier();
-    urls.populateMimeData(data, metaMap);
-    return data;
+    KUrlMimeData::setMetaData(metaMap, mimeData);
+
+    return mimeData;
 }
 
 void SvnItemModel::makeIgnore(const QModelIndex &index)

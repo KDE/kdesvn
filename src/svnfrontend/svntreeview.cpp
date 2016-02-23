@@ -28,12 +28,10 @@
 #include <QApplication>
 #include <QAction>
 #include <QMenu>
+#include <QMimeData>
 
 #include <KIconLoader>
-#include <KDebug>
-#include <KUrl>
 #include <KLocale>
-#include <KUrlMimeData>
 
 SvnTreeView::SvnTreeView(QWidget *parent)
     : QTreeView(parent)
@@ -81,7 +79,7 @@ void SvnTreeView::startDrag(Qt::DropActions supportedActions)
 
 void SvnTreeView::dropEvent(QDropEvent *event)
 {
-    if (!KUrl::List::canDecode(event->mimeData())) {
+    if (!event->mimeData()->hasUrls()) {
         return;
     }
 
@@ -95,7 +93,7 @@ void SvnTreeView::dropEvent(QDropEvent *event)
     }
 
     Qt::DropAction action = event->dropAction();
-    const QList<QUrl> list = KUrlMimeData::urlsFromMimeData(event->mimeData(), KUrlMimeData::PreferLocalUrls, &metaMap);
+    const QList<QUrl> list = event->mimeData()->urls();
     bool intern = false;
     if (metaMap.find("kdesvn-source") != metaMap.end()) {
         SvnItemModel *itemModel = static_cast<SvnItemModel *>(proxyModel->sourceModel());

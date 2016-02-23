@@ -22,6 +22,7 @@
 #include "kiolistener.h"
 
 #include <QFile>
+#include <QTemporaryDir>
 #include <QTemporaryFile>
 
 #include "svnqt/svnqttypes.h"
@@ -50,8 +51,6 @@
 #include <kdebug.h>
 #include <kcomponentdata.h>
 #include <kglobal.h>
-#include <KTempDir>
-#include <KTemporaryFile>
 #include <kmimetype.h>
 
 namespace KIO
@@ -380,14 +379,14 @@ void kio_svnProtocol::put(const QUrl &url, int permissions, KIO::JobFlags flags)
         }
     }
     QSharedPointer<QFile> tmpfile;
-    QSharedPointer<KTempDir> _codir;
+    QSharedPointer<QTemporaryDir> _codir;
     if (exists) {
         if (flags & KIO::Overwrite) {
             if (!supportOverwrite()) {
                 extraError(KIO::ERR_SLAVE_DEFINED, i18n("Overwriting existing items is disabled in settings."));
                 return;
             }
-            _codir = QSharedPointer<KTempDir>(new KTempDir);
+            _codir = QSharedPointer<QTemporaryDir>(new QTemporaryDir);
             _codir->setAutoRemove(true);
             svn::Path path = makeSvnUrl(url.url());
             path.removeLast();
@@ -397,7 +396,7 @@ void kio_svnProtocol::put(const QUrl &url, int permissions, KIO::JobFlags flags)
                 registerToDaemon();
                 startOp(-1, i18n("Checking out %1", path.native()));
                 svn::CheckoutParameter params;
-                params.moduleName(path).destination(svn::Path(_codir->name())).revision(rev).peg(peg).depth(svn::DepthFiles);
+                params.moduleName(path).destination(svn::Path(_codir->path())).revision(rev).peg(peg).depth(svn::DepthFiles);
                 m_pData->m_Svnclient->checkout(params);
             } catch (const svn::ClientException &e) {
                 extraError(KIO::ERR_SLAVE_DEFINED, e.msg());
@@ -405,14 +404,14 @@ void kio_svnProtocol::put(const QUrl &url, int permissions, KIO::JobFlags flags)
             }
             m_pData->dispWritten = false;
             stopOp(i18n("Temporary checkout done."));
-            tmpfile = QSharedPointer<QFile>(new QFile(_codir->name() + url.fileName()));
+            tmpfile = QSharedPointer<QFile>(new QFile(_codir->path() + url.fileName()));
             tmpfile->open(QIODevice::ReadWrite | QIODevice::Truncate);
         } else {
             extraError(KIO::ERR_FILE_ALREADY_EXIST, i18n("Could not write to existing item."));
             return;
         }
     } else {
-        KTemporaryFile *_tmpfile = new KTemporaryFile();
+        QTemporaryFile *_tmpfile = new QTemporaryFile();
         if (!_tmpfile->open()) {
             extraError(KIO::ERR_SLAVE_DEFINED, i18n("Could not open temporary file"));
             delete _tmpfile;
@@ -933,13 +932,13 @@ void kio_svnProtocol::diff(const QUrl &uri1, const QUrl &uri2, int rnum1, const 
         const svn::Revision r2(rnum2, rstring2);
         const QUrl u1 = makeSvnUrl(uri1, true);
         const QUrl u2 = makeSvnUrl(uri2, true);
-        KTempDir tdir;
+        QTemporaryDir tdir;
         kDebug(9510) << "kio_ksvn::diff : " << u1 << " at revision " << r1.toString() << " with "
                      << u2 << " at revision " << r2.toString()
                      << endl ;
         svn::DiffParameter _opts;
         // no peg revision required
-        _opts.path1(u1).path2(u2).tmpPath(tdir.name()).
+        _opts.path1(u1).path2(u2).tmpPath(tdir.path()).
         rev1(r1).rev2(r2).
         ignoreContentType(false).extra(svn::StringArray()).depth(rec ? svn::DepthInfinity : svn::DepthEmpty).ignoreAncestry(false).noDiffDeleted(false).
         relativeTo(svn::Path((u1 == u2 ? u1 : QString()))).changeList(svn::StringArray());

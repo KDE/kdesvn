@@ -20,13 +20,9 @@
 
 
 #include "copymoveview_impl.h"
-#include <ksqueezedtextlabel.h>
-#include <qcheckbox.h>
-#include <qlabel.h>
-#include <klineedit.h>
-#include <klocale.h>
-// #include <kdialogbase.h>
+
 #include <KDialog>
+#include <KLocale>
 #include <KVBox>
 
 CopyMoveView_impl::CopyMoveView_impl(const QString &baseName, const QString &sourceName, bool move, QWidget *parent)

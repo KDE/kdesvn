@@ -19,15 +19,7 @@
  ***************************************************************************/
 #include "editpropswidget.h"
 
-#include <QStringList>
-#include <QToolTip>
 #include <QWhatsThis>
-
-#include <ktextedit.h>
-#include <kcombobox.h>
-#include <kglobalsettings.h>
-#include <kdebug.h>
-#include <klocale.h>
 
 EditPropsWidget::EditPropsWidget(QWidget *parent)
     : QWidget(parent)

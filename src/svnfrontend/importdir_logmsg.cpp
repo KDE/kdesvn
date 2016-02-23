@@ -21,12 +21,9 @@
 
 #include "svnqt/version_check.h"
 
-#include <klocale.h>
+#include <KLocale>
+#include <QCheckBox>
 
-#include <qcheckbox.h>
-#include <qlayout.h>
-#include <qwhatsthis.h>
-#include <qtooltip.h>
 
 Importdir_logmsg::Importdir_logmsg(QWidget *parent)
     : Commitmsg_impl(parent)

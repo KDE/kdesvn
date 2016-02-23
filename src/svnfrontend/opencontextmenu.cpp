@@ -19,9 +19,9 @@
  ***************************************************************************/
 #include "opencontextmenu.h"
 
-#include <kiconloader.h>
-#include <klocale.h>
-#include <krun.h>
+#include <KIconLoader>
+#include <KLocale>
+#include <KRun>
 #include <QAction>
 #include <QApplication>
 

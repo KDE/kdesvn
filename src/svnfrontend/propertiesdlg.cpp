@@ -26,15 +26,9 @@
 #include "svnitem.h"
 #include "svnqt/client.h"
 
-#include <qvariant.h>
-#include <qlabel.h>
-#include <kpushbutton.h>
-#include <qlayout.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <kdebug.h>
+#include <KPushButton>
+#include <KLocale>
+#include <KMessageBox>
 
 PropertiesDlg::PropertiesDlg(SvnItem *which, const svn::ClientP &aClient, const svn::Revision &aRev, QWidget *parent)
     : KDialog(parent),

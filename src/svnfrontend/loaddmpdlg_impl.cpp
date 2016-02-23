@@ -19,13 +19,6 @@
  ***************************************************************************/
 #include "loaddmpdlg_impl.h"
 
-#include <qpushbutton.h>
-#include <qlabel.h>
-#include <kurlrequester.h>
-#include <klineedit.h>
-#include <qradiobutton.h>
-#include <qcheckbox.h>
-
 LoadDmpDlg_impl::LoadDmpDlg_impl(QWidget *parent)
     : QWidget(parent)
 {

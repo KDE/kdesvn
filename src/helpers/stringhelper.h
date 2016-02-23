@@ -20,17 +20,15 @@
 #ifndef STRINGHELPER_H
 #define STRINGHELPER_H
 
-#include <qstring.h>
-
-#include <kglobal.h>
-#include <klocale.h>
+#include <QString>
+#include <KFormat>
 
 namespace helpers
 {
 
 inline QString ByteToString(qulonglong value)
 {
-    return KGlobal::locale()->formatByteSize(value);
+    return KFormat().formatByteSize(value);
 }
 
 } // namespace helpers

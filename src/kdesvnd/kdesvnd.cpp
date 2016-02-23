@@ -39,6 +39,7 @@
 #include "ksvnjobview.h"
 
 #include <kdebug.h>
+#include <klocale.h>
 #include <kpassworddialog.h>
 #include <kpluginfactory.h>
 #include <knotification.h>

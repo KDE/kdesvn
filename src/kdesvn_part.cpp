@@ -256,7 +256,7 @@ void kdesvnpart::slotEnableNetwork(bool how)
 bool kdesvnpart::closeUrl()
 {
     KParts::ReadOnlyPart::closeUrl();
-    setUrl(KUrl());
+    setUrl(QUrl());
     m_view->closeMe();
     emit setWindowCaption(QString());
     return true;

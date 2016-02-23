@@ -23,6 +23,7 @@
 #include "helpers/stringhelper.h"
 
 #include <kdebug.h>
+#include <klocale.h>
 #include <ktextbrowser.h>
 
 #include <QTimer>

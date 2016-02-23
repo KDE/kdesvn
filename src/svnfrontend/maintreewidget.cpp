@@ -1772,7 +1772,7 @@ void MainTreeWidget::slotUrlDropped(const QList<QUrl> &_lst, Qt::DropAction acti
     } else {
         WidgetBlockStack w(this);
         //m_pList->stopScan();
-        KIO::Job *job = KIO::copy(_lst, target);
+        KIO::Job *job = KIO::copy(_lst, QUrl::fromLocalFile(target));
         connect(job, SIGNAL(result(KJob*)), SLOT(slotCopyFinished(KJob*)));
         job->exec();
     }
@@ -1792,10 +1792,11 @@ void MainTreeWidget::slotCopyFinished(KJob *_job)
     }
     if (ok) {
         const QList<QUrl> lst = job->srcUrls();
+        const QString base = job->destUrl().toLocalFile() + QLatin1Char('/');
         svn::Paths tmp;
         tmp.reserve(lst.size());
         Q_FOREACH(const QUrl &url, lst) {
-            tmp.push_back(svn::Path(url.toLocalFile()));
+            tmp.push_back(svn::Path(base + url.fileName()));
         }
         m_Data->m_Model->svnWrapper()->addItems(tmp, svn::DepthInfinity);
     }

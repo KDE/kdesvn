@@ -1768,7 +1768,7 @@ void MainTreeWidget::slotUrlDropped(const QList<QUrl> &_lst, Qt::DropAction acti
         if (!fi.isDir()) {
             target += '/' + _lst[0].fileName();
         }
-        slotImportIntoDir(_lst[0], target, fi.isDir());
+        slotImportIntoDir(_lst[0].toLocalFile(), target, fi.isDir());
     } else {
         WidgetBlockStack w(this);
         //m_pList->stopScan();
@@ -2077,46 +2077,47 @@ void MainTreeWidget::slotImportIntoCurrent(bool dirs)
         KMessageBox::error(this, i18n("Cannot import into multiple targets"));
         return;
     }
-    QString targetUri;
+    QString targetDir;
     if (selectionCount() == 0) {
-        targetUri = baseUri();
+        targetDir = baseUri();
     } else {
-        targetUri = SelectedNode()->Url();
+        targetDir = SelectedNode()->Url();
     }
-    KUrl uri;
+    QString source;
     if (dirs) {
-        uri = KFileDialog::getExistingDirectory(KUrl(), this, i18n("Import files from folder"));
+        source = QFileDialog::getExistingDirectory(this, i18n("Import files from folder"));
     } else {
-        uri = KFileDialog::getImageOpenUrl(KUrl(), this, i18n("Import file"));
+        source = KFileDialog::getImageOpenUrl(QUrl(), this, i18n("Import file")).toLocalFile();
     }
 
-    if (uri.url().isEmpty()) {
-        return;
-    }
-
-    slotImportIntoDir(uri, targetUri, dirs);
+    slotImportIntoDir(source, targetDir, dirs);
 }
 
-void MainTreeWidget::slotImportIntoDir(const KUrl &importUrl, const QString &target, bool dirs)
+void MainTreeWidget::slotImportIntoDir(const QString &source, const QString &targetDir, bool dirs)
 {
-    Commitmsg_impl *ptr = 0;
-    Importdir_logmsg *ptr2 = 0;
-
-    QPointer<KDialog> dlg;
-    KUrl uri = importUrl;
-    if (!uri.protocol().isEmpty() && !uri.isLocalFile()) {
-        KMessageBox::error(this, i18n("Cannot import remote URLs"));
+    QString sourceUri = source;
+    while (sourceUri.endsWith(QLatin1Char('/'))) {
+        sourceUri.chop(1);
+    }
+    if (sourceUri.isEmpty()) {
         return;
     }
-    QString targetUri = target;
+
+    QString targetUri = targetDir;
     while (targetUri.endsWith(QLatin1Char('/'))) {
         targetUri.chop(1);
     }
+    if (targetUri.isEmpty()) {
+        return;
+    }
 
+    Commitmsg_impl *ptr = 0;
+    Importdir_logmsg *ptr2 = 0;
+    QPointer<KDialog> dlg;
     if (dirs) {
         dlg = createOkDialog(&ptr2, i18n("Import log"), true, QLatin1String("import_log_msg"));
         ptr = ptr2;
-        ptr2->createDirboxDir(QLatin1Char('"') + uri.fileName() + QLatin1Char('"'));
+        ptr2->createDirboxDir(QLatin1Char('"') + QFileInfo(sourceUri).fileName() + QLatin1Char('"'));
     } else {
         dlg = createOkDialog(&ptr, i18n("Import log"), true, QLatin1String("import_log_msg"));
     }
@@ -2136,15 +2137,14 @@ void MainTreeWidget::slotImportIntoDir(const KUrl &importUrl, const QString &tar
     QString logMessage = ptr->getMessage();
     svn::Depth rec = ptr->getDepth();
     ptr->saveHistory(false);
-    uri.setProtocol(QString());
-    QString iurl = uri.path(KUrl::RemoveTrailingSlash);
+
     if (dirs && ptr2 && ptr2->createDir()) {
-        targetUri += QLatin1Char('/') + uri.fileName();
+        targetUri += QLatin1Char('/') + QFileInfo(sourceUri).fileName();
     }
     if (ptr2) {
-        m_Data->m_Model->svnWrapper()->slotImport(iurl, targetUri, logMessage, rec, ptr2->noIgnore(), ptr2->ignoreUnknownNodes());
+        m_Data->m_Model->svnWrapper()->slotImport(sourceUri, targetUri, logMessage, rec, ptr2->noIgnore(), ptr2->ignoreUnknownNodes());
     } else {
-        m_Data->m_Model->svnWrapper()->slotImport(iurl, targetUri, logMessage, rec, false, false);
+        m_Data->m_Model->svnWrapper()->slotImport(sourceUri, targetUri, logMessage, rec, false, false);
     }
     if (!isWorkingCopy()) {
         if (selectionCount() == 0) {

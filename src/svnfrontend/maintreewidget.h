@@ -135,7 +135,7 @@ protected Q_SLOTS:
     void slotRelocate();
     void slotImportIntoCurrent(bool);
     void slotImportDirsIntoCurrent();
-    void slotImportIntoDir(const KUrl &, const QString &, bool);
+    void slotImportIntoDir(const QString &source, const QString &targetDir, bool dirs);
     void slotChangeToRepository();
     void slotCheckNewItems();
 

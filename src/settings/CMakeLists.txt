@@ -21,6 +21,9 @@
 kconfig_add_kcfg_files(cfgsrc
     kdesvnsettings.kcfgc)
 add_library(kdesvncfgreader STATIC ${cfgsrc})
+target_link_libraries(kdesvncfgreader
+    KF5::ConfigGui
+)
 
 ki18n_wrap_ui(settings_ui_sources
     cmdexecsettings.ui

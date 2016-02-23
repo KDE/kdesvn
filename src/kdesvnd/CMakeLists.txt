@@ -40,7 +40,9 @@ target_link_libraries(kded_kdesvnd
     kdesvnhelpers
     kdesvncfgreader
     svnqt
+    Qt5::DBus
     KF5::DBusAddons
+    KF5::Notifications
     KF5::KDELibs4Support
 )
 

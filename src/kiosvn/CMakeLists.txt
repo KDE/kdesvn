@@ -39,7 +39,9 @@ target_link_libraries(kio_ksvn
     svnqt
     kdesvnhelpers
     kdesvncfgreader
+    Qt5::DBus
     KF5::Wallet
+    KF5::KIOCore
     KF5::KDELibs4Support
 )
 set_target_properties(kio_ksvn

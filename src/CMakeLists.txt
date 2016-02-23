@@ -65,6 +65,7 @@ target_link_libraries(kdesvnaskpass
 )
 target_link_libraries(kdesvn
     KF5::Parts
+    KF5::Bookmarks
     KF5::KDELibs4Support
 )
 

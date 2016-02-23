@@ -77,5 +77,6 @@ target_link_libraries(ksvnwidgets
         KF5::Wallet
     PUBLIC
         svnqt
+        Qt5::Widgets
         KF5::TextEditor
 )

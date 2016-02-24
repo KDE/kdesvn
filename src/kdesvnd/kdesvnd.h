@@ -42,8 +42,8 @@ public:
     virtual ~kdesvnd();
 
 protected:
-    bool isWorkingCopy(const QUrl &url, QString &base);
-    bool isRepository(const QUrl &url);
+    bool isWorkingCopy(const QUrl &url) const;
+    bool isRepository(const QUrl &url) const;
     static QString cleanUrl(const QUrl &url);
     KdesvndListener *m_Listener;
     QStringList getActionMenu(const QList<QUrl> &list, bool toplevel);

@@ -105,11 +105,10 @@ QStringList kdesvnd::getActionMenu(const QList<QUrl> &list, bool toplevel)
         return result;
     }
 
-    QString base;
-    const bool itemIsWc = isWorkingCopy(list[0], base);
+    const bool itemIsWc = isWorkingCopy(list[0]);
 
     const QUrl _dir(list.at(0).adjusted(QUrl::RemoveFilename).adjusted(QUrl::StripTrailingSlash));
-    const bool parentIsWc = isWorkingCopy(_dir, base);
+    const bool parentIsWc = isWorkingCopy(_dir);
 
     bool itemIsRepository = false;
     if (!parentIsWc && !itemIsWc) {
@@ -278,7 +277,7 @@ QString kdesvnd::cleanUrl(const QUrl &url)
 }
 
 /* just simple name check of course - no network access! */
-bool kdesvnd::isRepository(const QUrl &url)
+bool kdesvnd::isRepository(const QUrl &url) const
 {
     QString proto = svn::Url::transformProtokoll(url.scheme());
     if (proto == QLatin1String("file")) {
@@ -295,9 +294,8 @@ bool kdesvnd::isRepository(const QUrl &url)
     return svn::Url::isValid(proto);
 }
 
-bool kdesvnd::isWorkingCopy(const QUrl &_url, QString &base)
+bool kdesvnd::isWorkingCopy(const QUrl &_url) const
 {
-    base.clear();
     const QUrl url = helpers::KTranslateUrl::translateSystemUrl(_url);
 
     if (url.isEmpty() || !url.isLocalFile() || url.scheme() != QLatin1String("file")) {
@@ -311,7 +309,6 @@ bool kdesvnd::isWorkingCopy(const QUrl &_url, QString &base)
     } catch (const svn::ClientException &e) {
         return false;
     }
-    base = e[0].url();
     return true;
 }
 

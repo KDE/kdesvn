@@ -1647,7 +1647,7 @@ void SvnActions::slotExportCurrent()
     CheckoutExportCurrent(true);
 }
 
-void SvnActions::CheckoutExport(const QString &what, bool _exp, bool urlisTarget)
+void SvnActions::CheckoutExport(const QUrl &what, bool _exp, bool urlisTarget)
 {
     CheckoutInfo_impl *ptr = 0;
     QPointer<KDialog> dlg = createOkDialog(&ptr, _exp ? i18n("Export a repository") : i18n("Checkout a repository"),

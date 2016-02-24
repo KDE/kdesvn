@@ -388,7 +388,7 @@ void kio_svnProtocol::put(const QUrl &url, int permissions, KIO::JobFlags flags)
             }
             _codir = QSharedPointer<QTemporaryDir>(new QTemporaryDir);
             _codir->setAutoRemove(true);
-            svn::Path path = makeSvnUrl(url.url());
+            svn::Path path = makeSvnUrl(url);
             path.removeLast();
             try {
                 notify(i18n("Start checking out to temporary folder"));
@@ -941,7 +941,7 @@ void kio_svnProtocol::diff(const QUrl &uri1, const QUrl &uri2, int rnum1, const 
         _opts.path1(u1).path2(u2).tmpPath(tdir.path()).
         rev1(r1).rev2(r2).
         ignoreContentType(false).extra(svn::StringArray()).depth(rec ? svn::DepthInfinity : svn::DepthEmpty).ignoreAncestry(false).noDiffDeleted(false).
-        relativeTo(svn::Path((u1 == u2 ? u1 : QString()))).changeList(svn::StringArray());
+        relativeTo(svn::Path((u1 == u2 ? u1 : QUrl()))).changeList(svn::StringArray());
 
         tdir.setAutoRemove(true);
         ex = m_pData->m_Svnclient->diff(_opts);

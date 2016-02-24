@@ -231,7 +231,8 @@ int CommandExec::exec(const QCommandLineParser *parser)
     QString mainProto;
     QString _baseurl;
     for (int j = 2; j < m_pCPart->args.count(); ++j) {
-        QUrl tmpurl = helpers::KTranslateUrl::translateSystemUrl(m_pCPart->args.at(j));
+        // urls from command line -> fromUserInput
+        QUrl tmpurl = helpers::KTranslateUrl::translateSystemUrl(QUrl::fromUserInput(m_pCPart->args.at(j)));
         tmpurl.setScheme(svn::Url::transformProtokoll(tmpurl.scheme()));
         if (tmpurl.scheme().indexOf(QLatin1String("ssh")) != -1) {
             SshAgent ag;
@@ -382,22 +383,22 @@ void CommandExec::slotCmd_tree()
 
 void CommandExec::slotCmd_checkout()
 {
-    m_pCPart->m_SvnWrapper->CheckoutExport(m_pCPart->urls.at(0), false);
+    m_pCPart->m_SvnWrapper->CheckoutExport(QUrl::fromUserInput(m_pCPart->urls.at(0)), false);
 }
 
 void CommandExec::slotCmd_checkoutto()
 {
-    m_pCPart->m_SvnWrapper->CheckoutExport(m_pCPart->urls.at(0), false, true);
+    m_pCPart->m_SvnWrapper->CheckoutExport(QUrl::fromUserInput(m_pCPart->urls.at(0)), false, true);
 }
 
 void CommandExec::slotCmd_export()
 {
-    m_pCPart->m_SvnWrapper->CheckoutExport(m_pCPart->urls.at(0), true);
+    m_pCPart->m_SvnWrapper->CheckoutExport(QUrl::fromUserInput(m_pCPart->urls.at(0)), true);
 }
 
 void CommandExec::slotCmd_exportto()
 {
-    m_pCPart->m_SvnWrapper->CheckoutExport(m_pCPart->urls.at(0), true, true);
+    m_pCPart->m_SvnWrapper->CheckoutExport(QUrl::fromUserInput(m_pCPart->urls.at(0)), true, true);
 }
 
 void CommandExec::slotCmd_blame()

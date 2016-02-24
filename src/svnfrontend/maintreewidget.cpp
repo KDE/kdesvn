@@ -1716,12 +1716,7 @@ void MainTreeWidget::internalDrop(const QList<QUrl> &_lst, Qt::DropAction action
     QList<QUrl>::iterator it = lst.begin();
     QStringList l;
     for (; it != lst.end(); ++it) {
-        l = (*it).toString().split('?');
-        if (l.size() > 1) {
-            (*it) = l[0];
-        } else if (isWorkingCopy()) {
-            (*it) = KUrl::fromPathOrUrl((*it).path());
-        }
+        (*it).setQuery(QUrlQuery());
         if (!nProto.isEmpty())
             (*it).setScheme(nProto);
         qDebug() << "Dropped: " << (*it) << endl;

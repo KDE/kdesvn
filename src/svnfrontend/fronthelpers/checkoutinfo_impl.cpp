@@ -71,17 +71,16 @@ bool CheckoutInfo_impl::overwrite() const
 }
 
 /*!
-    \fn CheckoutInfo_impl::setTargetUrl(const QString&)
+    \fn CheckoutInfo_impl::setTargetUrl(const QUrl&)
  */
-void CheckoutInfo_impl::setTargetUrl(const QString &what)
+void CheckoutInfo_impl::setTargetUrl(const QUrl &what)
 {
     m_TargetSelector->setUrl(what);
 }
 
-void CheckoutInfo_impl::setStartUrl(const QString &what)
+void CheckoutInfo_impl::setStartUrl(const QUrl &what)
 {
-    QUrl uri(helpers::KTranslateUrl::string2Uri(what));
-    m_UrlEdit->setUrl(uri);
+    m_UrlEdit->setUrl(what);
 }
 
 void CheckoutInfo_impl::hideDepth(bool how)

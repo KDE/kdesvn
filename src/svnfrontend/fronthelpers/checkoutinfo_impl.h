@@ -37,7 +37,7 @@ public:
 
     bool overwrite() const;
     svn::Depth getDepth() const;
-    void setStartUrl(const QString &);
+    void setStartUrl(const QUrl &);
 
     void disableForce(bool how);
     void disableTargetDir(bool how);
@@ -46,7 +46,7 @@ public:
     void disableExternals(bool how);
     bool openAfterJob() const;
     void disableRange(bool how);
-    void setTargetUrl(const QString &);
+    void setTargetUrl(const QUrl &);
     bool ignoreExternals() const;
     void hideDepth(bool hide);
     void overwriteAsRecursive();

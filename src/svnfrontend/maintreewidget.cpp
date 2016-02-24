@@ -2023,7 +2023,7 @@ void MainTreeWidget::slotRelocate()
     CheckoutInfo_impl *ptr = 0;
     QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Relocate path %1", path), true, QLatin1String("relocate_dlg"));
     if (dlg) {
-        ptr->setStartUrl(fromUrl.toString());
+        ptr->setStartUrl(fromUrl);
         ptr->disableAppend(true);
         ptr->disableTargetDir(true);
         ptr->disableRange(true);

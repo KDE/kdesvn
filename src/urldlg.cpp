@@ -73,7 +73,7 @@ void UrlDlg::init_dlg()
     topLayout->addWidget(urlRequester_);
     urlRequester_->setFocus();
     urlRequester_->setMode(KFile::ExistingOnly | KFile::Directory);
-    connect(urlRequester_->comboBox(), SIGNAL(textChanged(QString)), SLOT(slotTextChanged(QString)));
+    connect(urlRequester_->comboBox(), SIGNAL(currentTextChanged(QString)), SLOT(slotTextChanged(QString)));
     enableButtonOk(false);
     enableButton(KDialog::User1, false);
     setButtonGuiItem(KDialog::User1, KGuiItem(i18n("Clear"), QIcon::fromTheme("clear")));

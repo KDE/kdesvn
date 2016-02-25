@@ -24,12 +24,10 @@
 #include <qlabel.h>
 #include <kdebug.h>
 #include <kglobal.h>
-#include <kapplication.h>
 #include <kconfigbase.h>
 #include <kconfig.h>
 #include <KDialog>
 #include <KVBox>
-#include <ktextbrowser.h>
 #include <QPointer>
 
 SslTrustPrompt_impl::SslTrustPrompt_impl(const QString &host, QWidget *parent)

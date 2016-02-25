@@ -23,14 +23,8 @@
 #include "settings/kdesvnsettings.h"
 #include "depthselector.h"
 
-#include <ktextedit.h>
-#include <kcombobox.h>
 #include <kdialog.h>
 #include <klocale.h>
-#include <kdebug.h>
-#include <kglobal.h>
-#include <kapplication.h>
-#include <kconfigbase.h>
 #include <kconfig.h>
 #include <kurlrequesterdialog.h>
 #include <kio/netaccess.h>

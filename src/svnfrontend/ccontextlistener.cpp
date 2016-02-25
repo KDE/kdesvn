@@ -25,8 +25,6 @@
 #include "ksvnwidgets/pwstorage.h"
 
 #include <klocale.h>
-#include <kapplication.h>
-#include <kinputdialog.h>
 #include <kpassworddialog.h>
 #include <kdebug.h>
 #include <kfiledialog.h>

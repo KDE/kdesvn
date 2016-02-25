@@ -59,6 +59,7 @@
 #include <knotification.h>
 #include <unistd.h>
 
+#include <QApplication>
 #include <QKeyEvent>
 #include <QTimer>
 #include <QMap>
@@ -914,9 +915,9 @@ void MainTreeWidget::itemActivated(const QModelIndex &index, bool keypress)
             }
             if (!li.isEmpty() && !li.first()->exec().isEmpty()) {
                 KService::Ptr ptr = li.first();
-                KRun::run(*ptr, lst, KApplication::activeWindow());
+                KRun::run(*ptr, lst, QApplication::activeWindow());
             } else {
-                KRun::displayOpenWithDialog(lst, KApplication::activeWindow());
+                KRun::displayOpenWithDialog(lst, QApplication::activeWindow());
             }
         } else if (Kdesvnsettings::show_navigation_panel()) {
             m_DirTreeView->selectionModel()->select(m_Data->m_DirSortModel->mapFromSource(index), QItemSelectionModel::ClearAndSelect);
@@ -960,7 +961,7 @@ void MainTreeWidget::readSupportData()
 void MainTreeWidget::slotClientException(const QString &what)
 {
     emit sigLogMessage(what);
-    KMessageBox::sorry(KApplication::activeModalWidget(), what, i18n("SVN Error"));
+    KMessageBox::sorry(QApplication::activeModalWidget(), what, i18n("SVN Error"));
 }
 
 void MainTreeWidget::slotCacheDataChanged()
@@ -1226,7 +1227,7 @@ void MainTreeWidget::slotOpenWith()
     svn::Revision rev(isWorkingCopy() ? svn::Revision::UNDEFINED : baseRevision());
     QList<QUrl> lst;
     lst.append(which->kdeName(rev));
-    KRun::displayOpenWithDialog(lst, KApplication::activeWindow());
+    KRun::displayOpenWithDialog(lst, QApplication::activeWindow());
 }
 
 void MainTreeWidget::slotSelectBrowsingRevision()
@@ -2167,7 +2168,7 @@ void MainTreeWidget::slotChangeToRepository()
         return;
     }
     if (i.reposRoot().isEmpty()) {
-        KMessageBox::sorry(KApplication::activeModalWidget(), i18n("Could not retrieve repository of working copy."), i18n("SVN Error"));
+        KMessageBox::sorry(QApplication::activeModalWidget(), i18n("Could not retrieve repository of working copy."), i18n("SVN Error"));
     } else {
         sigSwitchUrl(i.reposRoot());
     }
@@ -2351,7 +2352,7 @@ void MainTreeWidget::slotRepositorySettings()
         return;
     }
     if (inf.reposRoot().isEmpty()) {
-        KMessageBox::sorry(KApplication::activeModalWidget(), i18n("Could not retrieve repository."), i18n("SVN Error"));
+        KMessageBox::sorry(QApplication::activeModalWidget(), i18n("Could not retrieve repository."), i18n("SVN Error"));
     } else {
         DbSettings::showSettings(inf.reposRoot());
     }

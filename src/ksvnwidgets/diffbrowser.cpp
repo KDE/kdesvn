@@ -27,14 +27,11 @@
 #include <KDebug>
 #include <KFileDialog>
 #include <KMessageBox>
-#include <KApplication>
 #include <KLocale>
 #include <KStandardGuiItem>
 #include <KFind>
 
-#include <QFont>
-#include <QToolTip>
-#include <QWhatsThis>
+#include <QApplication>
 #include <QKeyEvent>
 #include <QTextCodec>
 
@@ -102,7 +99,7 @@ void DiffBrowser::saveDiff()
     }
     QFile tfile(saveTo);
     if (tfile.exists()) {
-        if (KMessageBox::warningYesNo(KApplication::activeModalWidget(),
+        if (KMessageBox::warningYesNo(QApplication::activeModalWidget(),
                                       i18n("File %1 exists - overwrite?", saveTo))
                 != KMessageBox::Yes) {
             return;

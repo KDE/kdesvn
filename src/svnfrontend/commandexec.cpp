@@ -30,18 +30,13 @@
 #include "svnfrontend/fronthelpers/rangeinput_impl.h"
 #include "svnfrontend/copymoveview_impl.h"
 
-#include <kapplication.h>
 #include <kglobal.h>
-#include <kdebug.h>
 #include <kmessagebox.h>
-#include <kcmdlineargs.h>
 #include <klocale.h>
-// #include <kdialogbase.h>
 #include <KDialog>
 #include <KVBox>
 #include <ktextbrowser.h>
 
-#include <qfile.h>
 #include <QTextStream>
 #include <QCommandLineParser>
 
@@ -321,7 +316,7 @@ int CommandExec::exec(const QCommandLineParser *parser)
     emit executeMe();
     if (Kdesvnsettings::self()->cmdline_show_logwindow() &&
             m_lastMessagesLines >= Kdesvnsettings::self()->cmdline_log_minline()) {
-        QPointer<KDialog> dlg(new KDialog(KApplication::activeModalWidget()));
+        QPointer<KDialog> dlg(new KDialog(QApplication::activeModalWidget()));
         KVBox *Dialog1Layout = new KVBox(dlg);
         dlg->setMainWidget(Dialog1Layout);
         KTextBrowser *ptr = new KTextBrowser(Dialog1Layout);

@@ -22,6 +22,7 @@
 #include "urldlg.h"
 #include "kdesvn_part.h"
 
+#include <QApplication>
 #include <QTimer>
 
 #include <kglobal.h>

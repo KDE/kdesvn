@@ -21,10 +21,7 @@
 #include "svnfrontend/fronthelpers/rangeinput_impl.h"
 #include "settings/kdesvnsettings.h"
 
-#include <kpushbutton.h>
 #include <kdialog.h>
-#include <kfiledialog.h>
-#include <kapplication.h>
 #include <klocale.h>
 
 #include <KVBox>

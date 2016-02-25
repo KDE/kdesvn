@@ -23,10 +23,8 @@
 
 #include "kdesvn-config.h"
 
-#include <kapplication.h>
 #include <kparts/mainwindow.h>
 #include <kparts/readonlypart.h>
-#include <qtimer.h>
 #include <KBookmarks/KBookmarkManager>
 #include <KBookmarks/KBookmarkMenu>
 #include <KBookmarks/KBookmarkActionMenu>

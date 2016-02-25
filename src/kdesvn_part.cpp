@@ -41,7 +41,6 @@
 #include <kdebug.h>
 #include <kxmlguifactory.h>
 #include <kaboutapplicationdialog.h>
-#include <kapplication.h>
 #include <kconfigdialog.h>
 #include <kaboutdata.h>
 #include <klocale.h>

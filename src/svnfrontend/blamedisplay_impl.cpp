@@ -28,28 +28,18 @@
 #include <kglobalsettings.h>
 #include <kglobal.h>
 #include <klocale.h>
-#include <kdebug.h>
 #include <kinputdialog.h>
-#include <kmessagebox.h>
 #include <kdialog.h>
-#include <kapplication.h>
-#include <ktextbrowser.h>
 #include <kvbox.h>
 #include <kcolorscheme.h>
 #include <ktextedit.h>
-#include <kmenu.h>
 #include <kaction.h>
 #include <ktreewidgetsearchline.h>
 
-#include <QPixmap>
-#include <QPainter>
 #include <QMap>
-#include <QToolTip>
-#include <QLayout>
 #include <QTextCodec>
 #include <QBrush>
 #include <QTime>
-
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <QTreeWidgetItemIterator>
@@ -432,7 +422,7 @@ void BlameDisplay_impl::slotCurrentItemChanged(QTreeWidgetItem *item, QTreeWidge
 
 void BlameDisplay_impl::displayBlame(SimpleLogCb *_cb, const QString &item, const svn::AnnotatedFile &blame, QWidget *)
 {
-    QPointer<KDialog> dlg(new KDialog(KApplication::activeModalWidget()));
+    QPointer<KDialog> dlg(new KDialog(QApplication::activeModalWidget()));
     dlg->setButtons(KDialog::Close | KDialog::User1 | KDialog::User2);
     dlg->setButtonGuiItem(KDialog::User1, KGuiItem(i18n("Go to line")));
     dlg->setButtonGuiItem(KDialog::User2, KGuiItem(i18n("Log message for revision"), "kdesvnlog"));

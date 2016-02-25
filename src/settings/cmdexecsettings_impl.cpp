@@ -20,11 +20,7 @@
 
 #include "cmdexecsettings_impl.h"
 
-#include <kdeversion.h>
 #include <klocale.h>
-#include <knuminput.h>
-#include <qcheckbox.h>
-#include <klineedit.h>
 
 CmdExecSettings_impl::CmdExecSettings_impl(QWidget *parent)
     : QWidget(parent)

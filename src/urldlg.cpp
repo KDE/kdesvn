@@ -18,14 +18,11 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "urldlg.h"
-#include <kcombobox.h>
 #include <kurlrequester.h>
-#include <qlayout.h>
 #include <QVBoxLayout>
 #include <kconfig.h>
 #include <klocale.h>
 #include <kglobal.h>
-#include <klineedit.h>
 #include <kdebug.h>
 #include <KHistoryComboBox>
 #include <qlabel.h>

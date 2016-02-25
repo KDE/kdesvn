@@ -23,7 +23,6 @@
 #include "settings/kdesvnsettings.h"
 
 #include <kpassworddialog.h>
-#include <klineedit.h>
 #include <klocale.h>
 #include <qcheckbox.h>
 #include <qlabel.h>

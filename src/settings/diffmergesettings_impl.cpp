@@ -20,10 +20,6 @@
 #include "diffmergesettings_impl.h"
 #include "settings/kdesvnsettings.h"
 
-#include <qcheckbox.h>
-#include <qradiobutton.h>
-#include <klineedit.h>
-#include <kdebug.h>
 
 DiffMergeSettings_impl::DiffMergeSettings_impl(QWidget *parent)
     : QWidget(parent)

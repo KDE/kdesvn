@@ -20,10 +20,6 @@
 #include "displaysettings_impl.h"
 #include "settings/kdesvnsettings.h"
 
-#include <qcheckbox.h>
-#include <qradiobutton.h>
-#include <klineedit.h>
-#include <kdebug.h>
 
 DisplaySettings_impl::DisplaySettings_impl(QWidget *parent)
     : QWidget(parent)

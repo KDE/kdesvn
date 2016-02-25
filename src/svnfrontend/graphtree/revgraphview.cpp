@@ -26,8 +26,6 @@
 #include "svnqt/client.h"
 
 #include <kdebug.h>
-#include <ktemporaryfile.h>
-#include <ktempdir.h>
 #include <kprocess.h>
 #include <klocale.h>
 #include <kfiledialog.h>
@@ -45,6 +43,7 @@
 #include <QDesktopWidget>
 #include <QGraphicsScene>
 #include <QScrollBar>
+#include <QTemporaryFile>
 
 #include <math.h>
 
@@ -456,8 +455,7 @@ void RevGraphView::dumpRevtree()
     }
     clear();
     m_dotOutput.clear();
-    m_dotTmpFile = new KTemporaryFile;
-    m_dotTmpFile->setSuffix(".dot");
+    m_dotTmpFile = new QTemporaryFile(QLatin1String("XXXXXX.dot"));
     m_dotTmpFile->setAutoRemove(true);
     m_dotTmpFile->open();
 

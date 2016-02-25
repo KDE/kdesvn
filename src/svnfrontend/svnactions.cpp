@@ -67,9 +67,6 @@
 #include <kglobalsettings.h>
 #include <kmessagebox.h>
 #include <kinputdialog.h>
-#include <ktempdir.h>
-#include <ktemporaryfile.h>
-#include <kapplication.h>
 #include <kdebug.h>
 #include <kconfig.h>
 #include <kmimetypetrader.h>
@@ -77,13 +74,16 @@
 #include <kvbox.h>
 #include <ktoolinvocation.h>
 
-#include <QString>
-#include <QMap>
-#include <QTimer>
+#include <QApplication>
 #include <QFileInfo>
+#include <QMap>
+#include <QReadWriteLock>
+#include <QString>
+#include <QTimer>
+#include <QTemporaryDir>
+#include <QTemporaryFile>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
-#include <QReadWriteLock>
 
 #include <sys/time.h>
 #include <unistd.h>
@@ -251,7 +251,7 @@ void SvnActions::makeLog(const svn::Revision &start, const svn::Revision &end, c
         return;
     }
     QString reposRoot = info.reposRoot();
-    bool need_modal = m_Data->runblocked || KApplication::activeModalWidget() != 0;
+    bool need_modal = m_Data->runblocked || QApplication::activeModalWidget() != 0;
     if (need_modal || !m_Data->m_LogDialog) {
         m_Data->m_LogDialog = new SvnLogDlgImp(this, need_modal);
         connect(m_Data->m_LogDialog, SIGNAL(makeDiff(QString,svn::Revision,QString,svn::Revision,QWidget*)),
@@ -596,7 +596,7 @@ bool SvnActions::makeGet(const svn::Revision &start, const QString &what, const 
 
 void SvnActions::slotMakeCat(const svn::Revision &start, const QString &what, const QString &disp, const svn::Revision &peg, QWidget *_dlgparent)
 {
-    KTemporaryFile content;
+    QTemporaryFile content;
     content.setAutoRemove(true);
     // required otherwise it will not generate a unique name...
     if (!content.open()) {
@@ -627,7 +627,7 @@ void SvnActions::slotMakeCat(const svn::Revision &start, const QString &what, co
 
     if (it != offers.constEnd()) {
         content.setAutoRemove(false);
-        KRun::run(**it, QList<QUrl>() << QUrl(tname), KApplication::activeWindow(), true);
+        KRun::run(**it, QList<QUrl>() << QUrl(tname), QApplication::activeWindow(), true);
         return;
     }
     KTextEdit *ptr = 0;
@@ -785,9 +785,9 @@ QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_wha
         if ((*it).kind() == svn_node_file) {
             text += rb + i18n("Size") + cs;
             if ((*it).size() != svn::InfoEntry::SVNQT_SIZE_UNKNOWN) {
-                text += QString("%1").arg(helpers::ByteToString((*it).size()));
+                text += helpers::ByteToString((*it).size());
             } else if ((*it).working_size() != svn::InfoEntry::SVNQT_SIZE_UNKNOWN) {
-                text += QString("%1").arg(helpers::ByteToString((*it).working_size()));
+                text += helpers::ByteToString((*it).working_size());
             }
             text += re;
         }
@@ -990,7 +990,7 @@ void SvnActions::doCommit(const SvnItemList &which)
         }
     }
     if (m_Data->m_ParentList->baseUri().length() > 0) {
-        if (chdir(m_Data->m_ParentList->baseUri().toLocal8Bit()) != 0) {
+        if (!QDir::setCurrent(m_Data->m_ParentList->baseUri())) {
             QString msg = i18n("Could not change to folder %1\n", m_Data->m_ParentList->baseUri())
                           + QString::fromLocal8Bit(strerror(errno));
             emit sendNotify(msg);
@@ -1162,17 +1162,15 @@ void SvnActions::makeDiffExternal(const QString &p1, const svn::Revision &start,
     QStringList wlist = edisp.split(' ');
     QFileInfo f1(p1);
     QFileInfo f2(p2);
-    KTemporaryFile tfile, tfile2;
-
-    tfile.setPrefix(f1.fileName() + '-' + start.toString());
-    tfile2.setPrefix(f2.fileName() + '-' + end.toString());
+    QTemporaryFile tfile(QDir::tempPath() + QLatin1Char('/') + f1.fileName() + '-' + start.toString());
+    QTemporaryFile tfile2(QDir::tempPath() + QLatin1Char('/') + f2.fileName() + '-' + end.toString());
 
     QString s1 = f1.fileName() + '-' + start.toString();
     QString s2 = f2.fileName() + '-' + end.toString();
     if (f1.fileName() == f2.fileName() && p1 != p2) {
         s2.append("-sec");
     }
-    KTempDir tdir1;
+    QTemporaryDir tdir1;
     tdir1.setAutoRemove(true);
     tfile.setAutoRemove(true);
     tfile2.setAutoRemove(true);
@@ -1184,12 +1182,12 @@ void SvnActions::makeDiffExternal(const QString &p1, const svn::Revision &start,
     svn::Revision peg = _peg;
 
     if (start != svn::Revision::WORKING) {
-        first = isDir ? tdir1.name() + '/' + s1 : tfile.fileName();
+        first = isDir ? tdir1.path() + '/' + s1 : tfile.fileName();
     } else {
         first = p1;
     }
     if (end != svn::Revision::WORKING) {
-        second = isDir ? tdir1.name() + '/' + s2 : tfile2.fileName();
+        second = isDir ? tdir1.path() + '/' + s2 : tfile2.fileName();
     } else {
         second = p2;
     }
@@ -1245,7 +1243,7 @@ void SvnActions::makeDiffExternal(const QString &p1, const svn::Revision &start,
         proc->appendTempFile(tfile2.fileName());
     } else {
         tdir1.setAutoRemove(false);
-        proc->appendTempDir(tdir1.name());
+        proc->appendTempDir(tdir1.path());
     }
     tfile.close();
     tfile2.close();
@@ -1276,10 +1274,10 @@ void SvnActions::makeDiffinternal(const QString &p1, const svn::Revision &r1, co
         return;
     }
     QByteArray ex;
-    KTempDir tdir;
+    QTemporaryDir tdir;
     tdir.setAutoRemove(true);
-    QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
-    QDir d1(tdir.name());
+    QString tn = QString("%1/%2").arg(tdir.path()).arg("/svndiff");
+    QDir d1(tdir.path());
     d1.mkdir("svndiff");
     bool ignore_content = Kdesvnsettings::diff_ignore_content();
     bool gitformat = Kdesvnsettings::diff_gitformat_default();
@@ -1340,10 +1338,10 @@ void SvnActions::makeNorecDiff(const QString &p1, const svn::Revision &r1, const
         extraOptions.append("-w");
     }
     QByteArray ex;
-    KTempDir tdir;
+    QTemporaryDir tdir;
     tdir.setAutoRemove(true);
-    QString tn = QString("%1/%2").arg(tdir.name()).arg("/svndiff");
-    QDir d1(tdir.name());
+    QString tn = QString("%1/%2").arg(tdir.path()).arg("/svndiff");
+    QDir d1(tdir.path());
     d1.mkdir("svndiff");
     bool ignore_content = Kdesvnsettings::diff_ignore_content();
     svn::DiffParameter _opts;
@@ -1381,7 +1379,7 @@ void SvnActions::dispDiff(const QByteArray &ex)
 
         for (QStringList::Iterator it = wlist.begin(); it != wlist.end(); ++it) {
             if (*it == "%f") {
-                KTemporaryFile tfile;
+                QTemporaryFile tfile;
                 tfile.setAutoRemove(false);
                 tfile.open();
                 fname_used = true;
@@ -1415,7 +1413,7 @@ void SvnActions::dispDiff(const QByteArray &ex)
             emit sendNotify(i18n("Display process could not started, check command."));
         }
     }
-    bool need_modal = m_Data->runblocked || KApplication::activeModalWidget() != 0;
+    bool need_modal = m_Data->runblocked || QApplication::activeModalWidget() != 0;
     if (need_modal || !m_Data->m_DiffBrowserPtr || !m_Data->m_DiffDialog) {
         DiffBrowser *ptr = 0;
 
@@ -2060,7 +2058,7 @@ void SvnActions::slotMergeExternal(const QString &_src1, const QString &_src2, c
                                    const svn::Revision &rev1, const svn::Revision &rev2, const svn::Revision &_peg, bool rec)
 {
     Q_UNUSED(_peg);
-    KTempDir tdir1;
+    QTemporaryDir tdir1;
     tdir1.setAutoRemove(true);
     QString src1 = _src1;
     QString src2 = _src2;
@@ -2116,13 +2114,13 @@ void SvnActions::slotMergeExternal(const QString &_src1, const QString &_src2, c
     QString s2 = f2.fileName() + '-' + rev2.toString();
     QString first, second;
     if (rev1 != svn::Revision::WORKING) {
-        first = tdir1.name() + '/' + s1;
+        first = tdir1.path() + '/' + s1;
     } else {
         first = src1;
     }
     if (!singleMerge) {
         if (rev2 != svn::Revision::WORKING) {
-            second = tdir1.name() + '/' + s2;
+            second = tdir1.path() + '/' + s2;
         } else {
             second = src2;
         }
@@ -2182,7 +2180,7 @@ void SvnActions::slotMergeExternal(const QString &_src1, const QString &_src2, c
     }
     tdir1.setAutoRemove(false);
     proc->setAutoDelete(true);
-    proc->appendTempDir(tdir1.name());
+    proc->appendTempDir(tdir1.path());
     proc->setOutputChannelMode(KProcess::MergedChannels);
     connect(proc, SIGNAL(dataStderrRead(QByteArray,WatchedProcess*)),
             this, SLOT(slotProcessDataRead(QByteArray,WatchedProcess*)));

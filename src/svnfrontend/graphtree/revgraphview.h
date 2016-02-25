@@ -34,7 +34,7 @@ namespace svn
 class LogEntry;
 }
 
-class KTemporaryFile;
+class QTemporaryFile;
 class KProcess;
 class RevisionTree;
 class GraphTreeLabel;
@@ -108,7 +108,7 @@ protected:
     GraphMark *m_Marker;
     svn::ClientP m_Client;
     GraphTreeLabel *m_Selected;
-    KTemporaryFile *m_dotTmpFile;
+    QTemporaryFile *m_dotTmpFile;
     QString m_dotOutput;
     KProcess *m_renderProcess;
     trevTree m_Tree;

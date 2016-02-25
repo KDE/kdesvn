@@ -185,13 +185,12 @@ void DiffBrowser::doSearch(const QString &to_find_string, bool back)
         QWidget *_parent = m_Data->srchdialog->isVisible() ? m_Data->srchdialog : parentWidget();
         QTextCursor tc = textCursor();
         if (!back) {
-            int query = KMessageBox::questionYesNo(
-                            _parent,
-                            i18n("End of document reached.\n"\
-                                 "Continue from the beginning?"),
-                            i18n("Find"),
-                            KStandardGuiItem::yes(),
-                            KStandardGuiItem::no());
+            KMessageBox::ButtonCode query = KMessageBox::questionYesNo(_parent,
+                                                                       i18n("End of document reached.\n"\
+                                                                            "Continue from the beginning?"),
+                                                                       i18n("Find"),
+                                                                       KStandardGuiItem::yes(),
+                                                                       KStandardGuiItem::no());
             if (query == KMessageBox::Yes) {
                 moveCursor(QTextCursor::Start);
             } else {

@@ -1344,7 +1344,9 @@ void MainTreeWidget::slotUnlock()
         KMessageBox::error(this, i18n("Nothing selected for unlock"));
         return;
     }
-    int res = KMessageBox::questionYesNoCancel(this, i18n("Break lock or ignore missing locks?"), i18n("Unlocking items"));
+    KMessageBox::ButtonCode res = KMessageBox::questionYesNoCancel(this,
+                                                                   i18n("Break lock or ignore missing locks?"),
+                                                                   i18n("Unlocking items"));
     if (res == KMessageBox::Cancel) {
         return;
     }

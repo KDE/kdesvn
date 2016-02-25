@@ -72,9 +72,9 @@
 #include <kmimetypetrader.h>
 #include <krun.h>
 #include <kvbox.h>
-#include <ktoolinvocation.h>
 
 #include <QApplication>
+#include <QDesktopServices>
 #include <QFileInfo>
 #include <QMap>
 #include <QReadWriteLock>
@@ -1600,7 +1600,10 @@ bool SvnActions::addItems(const svn::Paths &items, svn::Depth depth)
 
 bool SvnActions::makeDelete(const QStringList &w)
 {
-    int answer = KMessageBox::questionYesNoList(0, i18n("Really delete these entries?"), w, i18n("Delete from repository"));
+    KMessageBox::ButtonCode answer = KMessageBox::questionYesNoList(0,
+                                                                    i18n("Really delete these entries?"),
+                                                                    w,
+                                                                    i18n("Delete from repository"));
     if (answer != KMessageBox::Yes) {
         return false;
     }
@@ -1757,7 +1760,7 @@ bool SvnActions::makeCheckout(const QString &rUrl, const QString &tPath, const s
         if (!_exp) {
             emit sigGotourl(tPath);
         } else {
-            KToolInvocation::invokeBrowser(tPath);
+            QDesktopServices::openUrl(QUrl::fromLocalFile(tPath));
         }
     }
     EMIT_FINISHED;

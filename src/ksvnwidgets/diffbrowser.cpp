@@ -37,7 +37,7 @@
     \fn DiffBrowser::DiffBrowser(QWidget*parent=0)
  */
 DiffBrowser::DiffBrowser(QWidget *parent)
-    : KTextBrowser(parent)
+    : QTextBrowser(parent)
 {
 //     setTextFormat(Qt::PlainText);
     setLineWrapMode(QTextEdit::NoWrap);
@@ -62,7 +62,7 @@ DiffBrowser::~DiffBrowser()
 void DiffBrowser::setText(const QString &aText)
 {
     m_Data->m_content.fromRawData(aText.toLocal8Bit(), aText.toLocal8Bit().size());
-    KTextBrowser::setText(aText);
+    QTextBrowser::setText(aText);
     moveCursor(QTextCursor::Start);
 }
 
@@ -77,9 +77,9 @@ void DiffBrowser::printContent()
 {
     QTextCodec *cc = QTextCodec::codecForName(Kdesvnsettings::locale_for_diff().toLocal8Bit());
     if (!cc) {
-        KTextBrowser::setText(QString::fromLocal8Bit(m_Data->m_content, m_Data->m_content.size()));
+        QTextBrowser::setText(QString::fromLocal8Bit(m_Data->m_content, m_Data->m_content.size()));
     } else {
-        KTextBrowser::setText(cc->toUnicode(m_Data->m_content));
+        QTextBrowser::setText(cc->toUnicode(m_Data->m_content));
     }
 }
 
@@ -125,7 +125,7 @@ void DiffBrowser::keyPressEvent(QKeyEvent *ev)
     } else if (ev->key() == Qt::Key_S && ev->modifiers() == Qt::ControlModifier) {
         saveDiff();
     } else {
-        KTextBrowser::keyPressEvent(ev);
+        QTextBrowser::keyPressEvent(ev);
     }
 }
 

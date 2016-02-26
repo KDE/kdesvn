@@ -21,7 +21,7 @@
 #include "revgraphview.h"
 #include "settings/kdesvnsettings.h"
 
-#include <ktextbrowser.h>
+#include <QTextBrowser>
 
 #include <QVariant>
 #include <QSplitter>
@@ -63,9 +63,9 @@ RevTreeWidget::RevTreeWidget(const svn::ClientP &cl, QWidget *parent)
             SIGNAL(makeCat(svn::Revision,QString,QString,svn::Revision,QWidget*))
            );
 
-    m_Detailstext = new KTextBrowser(m_Splitter);
+    m_Detailstext = new QTextBrowser(m_Splitter);
     m_Detailstext->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    //m_Detailstext->setResizePolicy( KTextBrowser::Manual );
+    //m_Detailstext->setResizePolicy( QTextBrowser::Manual );
     RevTreeWidgetLayout->addWidget(m_Splitter);
     resize(QSize(600, 480).expandedTo(minimumSizeHint()));
     QList<int> list = Kdesvnsettings::tree_detail_height();

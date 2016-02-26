@@ -28,7 +28,7 @@
 class QVBoxLayout;
 class RevGraphView;
 class QSplitter;
-class KTextBrowser;
+class QTextBrowser;
 
 namespace svn
 {
@@ -51,7 +51,7 @@ public:
 
 protected:
     QVBoxLayout *RevTreeWidgetLayout;
-    KTextBrowser *m_Detailstext;
+    QTextBrowser *m_Detailstext;
 
 signals:
     void makeCat(const svn::Revision &, const QString &, const QString &, const svn::Revision &, QWidget *);

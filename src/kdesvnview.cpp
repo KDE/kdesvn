@@ -40,7 +40,7 @@
 #include <kmessagebox.h>
 #include <krun.h>
 #include <klocale.h>
-#include <ktextbrowser.h>
+#include <QTextBrowser>
 #include <kactioncollection.h>
 #include <kshortcut.h>
 #include <kdialog.h>
@@ -70,7 +70,7 @@ kdesvnView::kdesvnView(KActionCollection *aCollection, QWidget *parent, bool ful
     m_infoSplitter = new QSplitter(m_Splitter);
     m_infoSplitter->setOrientation(Qt::Horizontal);
     m_infoSplitter->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    m_LogWindow = new KTextBrowser(m_infoSplitter);
+    m_LogWindow = new QTextBrowser(m_infoSplitter);
     Propertylist *pl = new Propertylist(m_infoSplitter);
     pl->setCommitchanges(true);
     pl->addCallback(m_TreeWidget);

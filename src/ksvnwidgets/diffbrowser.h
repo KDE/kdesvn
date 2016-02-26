@@ -28,7 +28,7 @@ class DiffSyntax;
 /* FIXME TODO fix the search */
 class DiffBrowserData;
 
-class DiffBrowser : public KTextBrowser
+class DiffBrowser : public QTextBrowser
 {
     Q_OBJECT
 

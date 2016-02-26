@@ -31,7 +31,7 @@ class QVBoxLayout;
 class QSpacerItem;
 class QSplitter;
 class KActionCollection;
-class KTextBrowser;
+class QTextBrowser;
 class QProgressBar;
 class MainTreeWidget;
 
@@ -128,7 +128,7 @@ protected:
 
     QSplitter *m_Splitter, *m_infoSplitter;
     QString m_currentUrl;
-    KTextBrowser *m_LogWindow;
+    QTextBrowser *m_LogWindow;
     QVBoxLayout *m_topLayout;
     QProgressBar *m_CacheProgressBar;
 

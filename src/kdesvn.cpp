@@ -23,6 +23,7 @@
 #include "kdesvn_part.h"
 
 #include <QApplication>
+#include <QDir>
 #include <QTimer>
 
 #include <kglobal.h>
@@ -43,7 +44,6 @@
 #include <KToggleAction>
 #include <KRecentFilesAction>
 #include <kstandardaction.h>
-#include <kstandarddirs.h>
 #include <kbookmarkmanager.h>
 #include <kdebug.h>
 #include <klibloader.h>
@@ -74,8 +74,12 @@ kdesvn::kdesvn()
     // and a status bar
     statusBar()->show();
 
-    m_bookmarkFile = KStandardDirs::locateLocal("appdata", QString::fromLatin1("bookmarks.xml"), true);
+    QDir bookmarkDir(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
+    if (!bookmarkDir.exists()) {
+        bookmarkDir.mkpath(bookmarkDir.absolutePath());
+    }
 
+    m_bookmarkFile = bookmarkDir.absolutePath()+ QLatin1String("/bookmarks.xml");
     m_BookmarkManager = KBookmarkManager::managerForExternalFile(m_bookmarkFile);
     m_BookmarksActionmenu = new KBookmarkActionMenu(m_BookmarkManager->root(),
                                                     i18n("&Bookmarks"), this);

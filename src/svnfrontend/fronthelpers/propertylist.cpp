@@ -22,7 +22,6 @@
 #include "svnfrontend/fronthelpers/propertyitem.h"
 
 #include <klocale.h>
-#include <kdebug.h>
 #include <kmessagebox.h>
 
 #include <QKeyEvent>
@@ -167,7 +166,7 @@ void Propertylist::addCallback(QObject *ob)
 void Propertylist::keyPressEvent(QKeyEvent *key)
 {
     if (key->key() == Qt::Key_Return) {
-        // kDebug(9510)<<"Return pressed"<<endl;
+        // qCDebug(KDESVN_LOG)<<"Return pressed"<<endl;
     }
     key->ignore();
 }

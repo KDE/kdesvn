@@ -22,7 +22,6 @@
 #include "svnqt/log_entry.h"
 
 #include <klocale.h>
-#include <kdebug.h>
 
 #define TREE_PATH_ITEM_TYPE QTreeWidgetItem::UserType+1
 

@@ -24,7 +24,6 @@
 #include "svnqt/url.h"
 
 #include <kurl.h>
-#include <kdebug.h>
 
 SvnThread::SvnThread(QObject *_parent)
     : QThread()

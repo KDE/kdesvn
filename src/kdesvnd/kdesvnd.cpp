@@ -25,6 +25,7 @@
 #include "ksvnwidgets/ssltrustprompt_impl.h"
 #include "ksvnwidgets/commitmsg_impl.h"
 #include "ksvnwidgets/pwstorage.h"
+#include "helpers/kdesvn_debug.h"
 
 #include "settings/kdesvnsettings.h"
 #include "svnqt/client.h"
@@ -38,7 +39,6 @@
 #include "kdesvndadaptor.h"
 #include "ksvnjobview.h"
 
-#include <kdebug.h>
 #include <klocale.h>
 #include <kpassworddialog.h>
 #include <kpluginfactory.h>
@@ -286,7 +286,7 @@ bool kdesvnd::isRepository(const QUrl &url) const
         try {
             m_Listener->m_Svnclient->status(params.depth(svn::DepthEmpty).all(false).update(false).noIgnore(false).revision(svn::Revision::HEAD));
         } catch (const svn::ClientException &e) {
-            kDebug(9510) << e.msg() << endl;
+            qCDebug(KDESVN_LOG) << e.msg() << endl;
             return false;
         }
         return true;
@@ -340,9 +340,9 @@ void kdesvnd::registerKioFeedback(qulonglong kioid)
                                                reply.value().path(),
                                                QDBusConnection::sessionBus());
         progressJobView.insert(kioid, jobView);
-        kDebug() << "Register " << kioid << endl;
+        qCDebug(KDESVN_LOG) << "Register " << kioid << endl;
     } else {
-        kDebug() << "Could not register " << kioid << endl;
+        qCDebug(KDESVN_LOG) << "Could not register " << kioid << endl;
     }
 }
 
@@ -371,7 +371,7 @@ void kdesvnd::unRegisterKioFeedback(qulonglong kioid)
     CHECK_KIO;
     KsvnJobView *jobView = progressJobView.take(kioid);
     delete jobView;
-    kDebug() << "Removed " << kioid << endl;
+    qCDebug(KDESVN_LOG) << "Removed " << kioid << endl;
 }
 
 void kdesvnd::notifyKioOperation(const QString &text)

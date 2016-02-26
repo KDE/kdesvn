@@ -21,8 +21,6 @@
 
 #include <kglobal.h>
 #include <kstandarddirs.h>
-#include <kdebug.h>
-#include <kfileitem.h>
 #include <kdesktopfile.h>
 #include <kurl.h>
 

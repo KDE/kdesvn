@@ -45,7 +45,6 @@
 #include <KRecentFilesAction>
 #include <kstandardaction.h>
 #include <kbookmarkmanager.h>
-#include <kdebug.h>
 #include <klibloader.h>
 #include <kedittoolbar.h>
 #include <KShortcutsDialog>
@@ -62,7 +61,7 @@ kdesvn::kdesvn()
     m_part = 0;
 #ifdef TESTING_RC
     setXMLFile(TESTING_RC);
-    kDebug(9510) << "Using test rc file in " << TESTING_RC << endl;
+    qCDebug(KDESVN_LOG) << "Using test rc file in " << TESTING_RC << endl;
     // I hate this crashhandler in development
     KCrash::setCrashHandler(0);
 #else

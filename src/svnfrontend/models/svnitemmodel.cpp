@@ -24,6 +24,7 @@
 #include "getinfothread.h"
 #include "svnfrontend/maintreewidget.h"
 #include "settings/kdesvnsettings.h"
+#include "helpers/kdesvn_debug.h"
 
 #include "svnqt/status.h"
 #include "svnqt/client.h"
@@ -31,7 +32,6 @@
 #include "svnqt/svnqt_defines.h"
 
 #include <klocale.h>
-#include <kdebug.h>
 #include <kglobal.h>
 #include <kdirwatch.h>
 #include <kurlmimedata.h>
@@ -214,7 +214,7 @@ bool SvnItemModel::filterIndex(const QModelIndex &parent, int childRow, svnmodel
         return false;
     }
     if (!node->NodeIsDir()) {
-        kDebug() << "Parent ist kein Dir" << endl;
+        qCDebug(KDESVN_LOG) << "Parent ist kein Dir" << endl;
         return false;
     }
     SvnItemModelNode *child = static_cast<SvnItemModelNodeDir *>(node)->child(childRow);
@@ -377,7 +377,7 @@ int SvnItemModel::checkDirs(const QString &_what, SvnItemModelNode *_parent)
         return checkUnversionedDirs(_parent);
     }
 #ifdef DEBUG_TIMER
-    kDebug() << "Time for getting entries: " << _counttime.elapsed();
+    qCDebug(KDESVN_LOG) << "Time for getting entries: " << _counttime.elapsed();
     _counttime.restart();
 #endif
     svn::StatusEntries neweritems;
@@ -407,7 +407,7 @@ int SvnItemModel::checkDirs(const QString &_what, SvnItemModelNode *_parent)
         node = _parent;
     }
 #ifdef DEBUG_TIMER
-    kDebug() << "Time finding parent node: " << _counttime.elapsed();
+    qCDebug(KDESVN_LOG) << "Time finding parent node: " << _counttime.elapsed();
 #endif
     insertDirs(node, dlist);
     return dlist.size();
@@ -443,7 +443,7 @@ void SvnItemModel::insertDirs(SvnItemModelNode *_parent, svn::StatusEntries &dli
         }
         node->setStat((*it));
 #ifdef DEBUG_TIMER
-//        kDebug()<<"Time creating item: "<<_counttime.elapsed();
+//        qCDebug(KDESVN_LOG)<<"Time creating item: "<<_counttime.elapsed();
         _counttime.restart();
 #endif
         if (m_Data->m_Display->isWorkingCopy() && m_Data->m_DirWatch) {
@@ -454,12 +454,12 @@ void SvnItemModel::insertDirs(SvnItemModelNode *_parent, svn::StatusEntries &dli
             }
         }
 #ifdef DEBUG_TIMER
-//        kDebug()<<"Time add watch: "<<_counttime.elapsed();
+//        qCDebug(KDESVN_LOG)<<"Time add watch: "<<_counttime.elapsed();
         _counttime.restart();
 #endif
         parent->m_Children.append(node);
 #ifdef DEBUG_TIMER
-//        kDebug()<<"Time append node: "<<_counttime.elapsed();
+//        qCDebug(KDESVN_LOG)<<"Time append node: "<<_counttime.elapsed();
 #endif
     }
 #ifdef DEBUG_TIMER
@@ -467,7 +467,7 @@ void SvnItemModel::insertDirs(SvnItemModelNode *_parent, svn::StatusEntries &dli
 #endif
     endInsertRows();
 #ifdef DEBUG_TIMER
-//    kDebug()<<"Time append all node: "<<_counttime.elapsed();
+//    qCDebug(KDESVN_LOG)<<"Time append all node: "<<_counttime.elapsed();
 #endif
 }
 
@@ -916,5 +916,5 @@ const QString &SvnItemModel::uniqueIdentifier()const
 
 void SvnItemModel::slotNotifyMessage(const QString &msg)
 {
-    kDebug() << msg;
+    qCDebug(KDESVN_LOG) << msg;
 }

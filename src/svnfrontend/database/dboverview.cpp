@@ -30,12 +30,12 @@
 #include "svnfrontend/fronthelpers/createdlg.h"
 #include "svnqt/client.h"
 #include "helpers/stringhelper.h"
+#include "helpers/kdesvn_debug.h"
 
 #include <QPointer>
 #include <QStringListModel>
 #include <QItemSelectionModel>
 
-#include <KDebug>
 #include <KMessageBox>
 #include <KLocale>
 
@@ -66,7 +66,7 @@ DbOverview::DbOverview(QWidget *parent)
     try {
         _data->repo_model->setStringList(svn::cache::LogCache::self()->cachedRepositories());
     } catch (const svn::cache::DatabaseException &e) {
-        kDebug() << e.msg() << endl;
+        qCDebug(KDESVN_LOG) << e.msg() << endl;
     }
 
     m_ReposListView->setModel(_data->repo_model);
@@ -117,7 +117,7 @@ void DbOverview::itemActivated(const QItemSelection &indexes, const QItemSelecti
     enableButtons(false);
     QModelIndexList _indexes = indexes.indexes();
     if (_indexes.count() != 1) {
-        kDebug() << "Handle only with single selection" << endl;
+        qCDebug(KDESVN_LOG) << "Handle only with single selection" << endl;
         return;
     }
     genInfo(_indexes[0].data().toString());
@@ -152,7 +152,7 @@ void DbOverview::deleteCacheItems()
         svn::cache::ReposLog rl(_data->_Client, selectedRepository());
         rl.cleanLogEntries();
     } catch (const svn::cache::DatabaseException &e) {
-        kDebug() << e.msg();
+        qCDebug(KDESVN_LOG) << e.msg();
     }
     genInfo(selectedRepository());
 }
@@ -170,7 +170,7 @@ void DbOverview::deleteRepository()
         svn::cache::LogCache::self()->deleteRepository(selectedRepository());
         _data->repo_model->setStringList(svn::cache::LogCache::self()->cachedRepositories());
     } catch (const svn::cache::DatabaseException &e) {
-        kDebug() << e.msg() << endl;
+        qCDebug(KDESVN_LOG) << e.msg() << endl;
     }
 }
 

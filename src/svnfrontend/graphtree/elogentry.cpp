@@ -19,8 +19,6 @@
  ***************************************************************************/
 #include "elogentry.h"
 
-#include <kdebug.h>
-
 eLog_Entry::eLog_Entry(const svn::LogEntry &old)
     : svn::LogEntry(old)
 {

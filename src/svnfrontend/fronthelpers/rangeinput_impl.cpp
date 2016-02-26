@@ -19,14 +19,6 @@
  ***************************************************************************/
 #include "rangeinput_impl.h"
 
-#include <qpushbutton.h>
-#include <qlayout.h>
-#include <qradiobutton.h>
-#include <knuminput.h>
-#include <kdatetimewidget.h>
-#include <klocale.h>
-#include <kdebug.h>
-
 Rangeinput_impl::Rangeinput_impl(QWidget *parent)
     : QWidget(parent)
     , m_StartOnly(false)

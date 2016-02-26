@@ -22,7 +22,6 @@
 
 
 #include <kpassworddialog.h>
-#include <kdebug.h>
 #include <kwallet.h>
 #include <KLocalizedString>
 #include <QPointer>

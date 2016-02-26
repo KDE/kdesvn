@@ -21,10 +21,6 @@
 #include "settings/kdesvnsettings.h"
 
 #include <klocale.h>
-#include <qlabel.h>
-#include <kdebug.h>
-#include <kglobal.h>
-#include <kconfigbase.h>
 #include <kconfig.h>
 #include <KDialog>
 #include <KVBox>

@@ -21,8 +21,8 @@
 #include "kiosvn.h"
 #include "kdesvndinterface.h"
 #include "kio_macros.h"
+#include "helpers/kdesvn_debug.h"
 
-#include <kdebug.h>
 #include <klocale.h>
 
 #include <qvariant.h>
@@ -59,14 +59,14 @@ bool KioListener::contextGetLogMessage(QString &msg, const svn::CommitItemList &
     QDBusReply<QStringList> res = kdesvndInterface.get_logmsg();
 
     if (!res.isValid()) {
-        kWarning() << "Didn't get a valid reply!" << endl;
+        qWarning() << "Didn't get a valid reply!" << endl;
         return false;
     }
     QStringList lt = res.value();
 
     if (lt.count() != 1) {
         msg = "Wrong or missing log (may cancel pressed).";
-        kDebug(9510) << msg << endl;
+        qCDebug(KDESVN_LOG) << msg << endl;
         return false;
     }
     msg = lt[0];
@@ -264,7 +264,7 @@ KioListener::contextSslServerTrustPrompt(const SslServerTrustData &data, apr_uin
                                          data.fingerprint, data.validFrom, data.validUntil, data.issuerDName, data.realm);
 
     if (!res.isValid()) {
-        kWarning() << "Unexpected reply type";
+        qWarning() << "Unexpected reply type";
         return DONT_ACCEPT;
     }
 
@@ -291,7 +291,7 @@ bool KioListener::contextLoadSslClientCertPw(QString &password, const QString &r
     CON_DBUS_VAL(false);
     res = kdesvndInterface.load_sslclientcertpw(realm);
     if (!res.isValid()) {
-        kWarning() << "Unexpected reply type";
+        qWarning() << "Unexpected reply type";
         return false;
     }
     password = res.value();
@@ -305,7 +305,7 @@ bool KioListener::contextSslClientCertPrompt(QString &certFile)
     CON_DBUS_VAL(false);
     res = kdesvndInterface.get_sslclientcertfile();
     if (!res.isValid()) {
-        kWarning() << "Unexpected reply type";
+        qWarning() << "Unexpected reply type";
         return false;
     }
     certFile = res.value();
@@ -331,12 +331,12 @@ bool KioListener::contextGetSavedLogin(const QString &realm, QString &username, 
     CON_DBUS_VAL(false);
     res = kdesvndInterface.get_saved_login(realm, username);
     if (!res.isValid()) {
-        kWarning() << "Unexpected reply type";
+        qWarning() << "Unexpected reply type";
         return false;
     }
     QStringList lt = res.value();
     if (lt.count() != 2) {
-        kDebug(9510) << "Wrong or missing auth list." << endl;
+        qCDebug(KDESVN_LOG) << "Wrong or missing auth list." << endl;
         return false;
     }
     username = lt[0];
@@ -359,12 +359,12 @@ bool KioListener::contextGetLogin(const QString &realm, QString &username, QStri
     CON_DBUS_VAL(false);
     res = kdesvndInterface.get_login(realm, username);
     if (!res.isValid()) {
-        kWarning() << "Unexpected reply type";
+        qWarning() << "Unexpected reply type";
         return false;
     }
     QStringList lt = res.value();
     if (lt.count() != 3) {
-        kDebug(9510) << "Wrong or missing auth list (may cancel pressed)." << endl;
+        qCDebug(KDESVN_LOG) << "Wrong or missing auth list (may cancel pressed)." << endl;
         return false;
     }
     username = lt[0];

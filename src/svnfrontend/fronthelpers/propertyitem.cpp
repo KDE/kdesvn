@@ -18,9 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "propertyitem.h"
-#include <klocale.h>
 #include <kiconloader.h>
-#include <kdebug.h>
 
 PropertyListViewItem::PropertyListViewItem(QTreeWidget *parent, const QString &aName, const QString &aValue)
     : QTreeWidgetItem(parent, _RTTI_), m_currentName(aName), m_startName(aName), m_currentValue(aValue), m_startValue(aValue), m_deleted(false)

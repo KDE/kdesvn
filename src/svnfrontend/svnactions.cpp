@@ -58,6 +58,7 @@
 
 #include "helpers/sub2qt.h"
 #include "helpers/stringhelper.h"
+#include "helpers/kdesvn_debug.h"
 #include "fronthelpers/cursorstack.h"
 #include "cacheentry.h"
 
@@ -67,7 +68,6 @@
 #include <kglobalsettings.h>
 #include <kmessagebox.h>
 #include <kinputdialog.h>
-#include <kdebug.h>
 #include <kconfig.h>
 #include <kmimetypetrader.h>
 #include <krun.h>
@@ -457,7 +457,7 @@ bool SvnActions::singleInfo(const QString &what, const svn::Revision &_rev, svn:
             try {
                 e = (m_Data->m_Svnclient->info(url, svn::DepthEmpty, _rev, peg));
             } catch (const svn::Exception &ce) {
-                kDebug() << "single info: " << ce.msg() << endl;
+                qCDebug(KDESVN_LOG) << "single info: " << ce.msg() << endl;
                 emit clientException(ce.msg());
                 return false;
             }
@@ -480,7 +480,7 @@ bool SvnActions::singleInfo(const QString &what, const svn::Revision &_rev, svn:
         }
     }
 #ifdef DEBUG_TIMER
-    kDebug() << "Time getting info for " << cacheKey << ": " << _counttime.elapsed();
+    qCDebug(KDESVN_LOG) << "Time getting info for " << cacheKey << ": " << _counttime.elapsed();
 #endif
 
     return true;
@@ -2415,7 +2415,7 @@ bool SvnActions::makeStatus(const QString &what, svn::StatusEntries &dlist, cons
         //                                      rec all  up     noign
         dlist = m_Data->m_Svnclient->status(params.depth(_d).all(all).update(updates).noIgnore(display_ignores).revision(where).detailedRemote(disp_remote_details).ignoreExternals(false));
 #ifdef DEBUG_TIMER
-        kDebug() << "Time for getting status: " << _counttime.elapsed();
+        qCDebug(KDESVN_LOG) << "Time for getting status: " << _counttime.elapsed();
 #endif
 
     } catch (const svn::Exception &e) {
@@ -2668,7 +2668,7 @@ void SvnActions::startFillCache(const QString &path, bool startup)
 #endif
     stopFillCache();
 #ifdef DEBUG_TIMER
-    kDebug() << "Stopped cache " << _counttime.elapsed();
+    qCDebug(KDESVN_LOG) << "Stopped cache " << _counttime.elapsed();
     _counttime.restart();
 #endif
     if (!doNetworking()) {
@@ -2906,7 +2906,7 @@ bool SvnActions::makeList(const QString &url, svn::DirEntries &dlist, const svn:
     try {
         dlist = m_Data->m_Svnclient->list(url, where, where, depth, false);
     } catch (const svn::Exception &e) {
-        kDebug() << "List fehler: " << e.msg();
+        qCDebug(KDESVN_LOG) << "List fehler: " << e.msg();
         emit clientException(e.msg());
         return false;
     }

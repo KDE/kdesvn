@@ -23,8 +23,6 @@
 #include "settings/kdesvnsettings.h"
 
 #include <KGlobalSettings>
-#include <KGlobal>
-#include <KDebug>
 #include <KFileDialog>
 #include <KMessageBox>
 #include <KLocale>

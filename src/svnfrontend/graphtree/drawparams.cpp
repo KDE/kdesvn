@@ -31,14 +31,7 @@
 #include <math.h>
 
 #include <qpainter.h>
-#include <qtooltip.h>
-#include <qregexp.h>
-#include <qstyle.h>
-#include <QPixmap>
 
-#include <klocale.h>
-#include <kconfig.h>
-#include <kdebug.h>
 #include <kglobalsettings.h>
 
 // set this to 1 to enable debug output

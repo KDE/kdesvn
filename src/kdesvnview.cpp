@@ -37,13 +37,10 @@
 #include <QFileInfo>
 #include <QSplitter>
 
-#include <kmimetypetrader.h>
-#include <klibloader.h>
 #include <kmessagebox.h>
 #include <krun.h>
 #include <klocale.h>
 #include <ktextbrowser.h>
-#include <kdebug.h>
 #include <kactioncollection.h>
 #include <kshortcut.h>
 #include <kdialog.h>

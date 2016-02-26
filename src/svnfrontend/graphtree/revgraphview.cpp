@@ -25,7 +25,6 @@
 #include "../stopdlg.h"
 #include "svnqt/client.h"
 
-#include <kdebug.h>
 #include <kprocess.h>
 #include <klocale.h>
 #include <kfiledialog.h>
@@ -197,7 +196,7 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
             continue;
         }
         if (m_dotTmpFile && (cmd != "node") && (cmd != "edge")) {
-            kWarning() << "Ignoring unknown command '" << cmd << "' from dot ("
+            qWarning() << "Ignoring unknown command '" << cmd << "' from dot ("
                        << m_dotTmpFile->fileName() << ":" << lineno << ")" << endl;
             continue;
         }

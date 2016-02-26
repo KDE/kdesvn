@@ -23,7 +23,6 @@
 #include <kconfig.h>
 #include <klocale.h>
 #include <kglobal.h>
-#include <kdebug.h>
 #include <KHistoryComboBox>
 #include <qlabel.h>
 

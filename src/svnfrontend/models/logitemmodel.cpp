@@ -24,9 +24,6 @@
 #include "svnqt/client.h"
 
 #include <klocale.h>
-#include <kdebug.h>
-
-#include <QStringList>
 #include <QTreeWidget>
 #include <QMap>
 

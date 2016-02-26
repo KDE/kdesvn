@@ -26,7 +26,6 @@
 
 #include <kconfig.h>
 #include <kmenu.h>
-#include <kdebug.h>
 
 #include <QKeyEvent>
 #include <QDesktopWidget>

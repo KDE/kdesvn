@@ -26,7 +26,6 @@
 #include "helpers/stringhelper.h"
 #include "threadcontextlistenerdata.h"
 
-#include <kdebug.h>
 #include <klocale.h>
 
 // ThreadContextListenerData

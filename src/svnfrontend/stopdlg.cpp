@@ -22,7 +22,6 @@
 #include "settings/kdesvnsettings.h"
 #include "helpers/stringhelper.h"
 
-#include <kdebug.h>
 #include <klocale.h>
 #include <ktextbrowser.h>
 
@@ -118,7 +117,7 @@ void StopDlg::slotAutoShow()
     if (mShown || mWait || hasDialogs) {
         mShowTimer->setSingleShot(true);
         if (mWait) {
-            //kDebug(9510) << "Waiting for show"<<endl;
+            //qCDebug(KDESVN_LOG) << "Waiting for show"<<endl;
             mShowTimer->start(m_MinDuration);
         }
         mShowTimer->start(m_MinDuration);

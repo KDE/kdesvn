@@ -25,11 +25,11 @@
 #include "svnqt/status.h"
 #include "svnqt/url.h"
 #include "helpers/ktranslateurl.h"
+#include "helpers/kdesvn_debug.h"
 
 #include <kglobal.h>
 #include <klocale.h>
 #include <kiconloader.h>
-#include <kdebug.h>
 #include <kiconeffect.h>
 #include <kfileitem.h>
 
@@ -353,7 +353,7 @@ QPixmap SvnItem::getPixmap(int size, bool overlay)
         }
     }
 #ifdef DEBUG_TIMER
-    //kDebug()<<"Time getting icon: "<<_counttime.elapsed();
+    //qCDebug(KDESVN_LOG)<<"Time getting icon: "<<_counttime.elapsed();
 #endif
     return p;
 }
@@ -552,7 +552,7 @@ svn::Revision SvnItem::revision() const
 const QString &SvnItem::getToolTipText()
 {
     if (!hasToolTipText()) {
-        kDebug() << "Try getting text" << endl;
+        qCDebug(KDESVN_LOG) << "Try getting text" << endl;
         QString text;
         if (isRealVersioned() && !p_Item->m_Stat->entry().url().isEmpty()) {
             SvnActions *wrap = getWrapper();
@@ -569,7 +569,7 @@ const QString &SvnItem::getToolTipText()
                 SvnItemList lst;
                 lst.append(this);
                 text = wrap->getInfo(lst, rev, peg, false, false);
-                kDebug() << text << endl;
+                qCDebug(KDESVN_LOG) << text << endl;
                 // KF5: TODO
                 /*
                 if (!p_Item->m_fitem.isNull()) {

@@ -23,10 +23,10 @@
 #include "ksvnwidgets/commitmsg_impl.h"
 #include "ksvnwidgets/ssltrustprompt_impl.h"
 #include "ksvnwidgets/pwstorage.h"
+#include "helpers/kdesvn_debug.h"
 
 #include <klocale.h>
 #include <kpassworddialog.h>
-#include <kdebug.h>
 #include <kfiledialog.h>
 #include <kmessagebox.h>
 
@@ -281,7 +281,7 @@ svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTru
 
 bool CContextListener::contextSslClientCertPrompt(QString &certFile)
 {
-    kDebug(9510) << certFile << endl;
+    qCDebug(KDESVN_LOG) << certFile << endl;
     emit waitShow(true);
     QString afile = KFileDialog::getOpenFileName(QUrl(),
                                                  QString(),

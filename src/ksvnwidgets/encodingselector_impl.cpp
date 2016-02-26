@@ -18,11 +18,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "encodingselector_impl.h"
-#include <kdebug.h>
 #include <kcharsets.h>
 #include <kglobal.h>
 
-#include <qcombobox.h>
 
 EncodingSelector_impl::EncodingSelector_impl(QWidget *parent)
     : QWidget(parent)

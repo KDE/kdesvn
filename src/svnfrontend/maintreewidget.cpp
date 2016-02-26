@@ -42,6 +42,7 @@
 #include "ksvnwidgets/commitmsg_impl.h"
 #include "ksvnwidgets/deleteform_impl.h"
 #include "helpers/sub2qt.h"
+#include "helpers/kdesvn_debug.h"
 #include "opencontextmenu.h"
 #include "EditIgnorePattern.h"
 #include "setpropertywidget.h"
@@ -324,21 +325,21 @@ bool MainTreeWidget::openUrl(const KUrl &url, bool noReinit)
         m_Data->m_Model->svnWrapper()->startFillCache(baseUri(), true);
     }
 #ifdef DEBUG_TIMER
-    kDebug() << "Starting cache " << _counttime.elapsed();
+    qCDebug(KDESVN_LOG) << "Starting cache " << _counttime.elapsed();
     _counttime.restart();
 #endif
     emit changeCaption(baseUri());
     emit sigUrlOpend(result);
     emit sigUrlChanged(baseUri());
 #ifdef DEBUG_TIMER
-    kDebug() << "Fired signals " << _counttime.elapsed();
+    qCDebug(KDESVN_LOG) << "Fired signals " << _counttime.elapsed();
     _counttime.restart();
 #endif
 
     QTimer::singleShot(1, this, SLOT(readSupportData()));
     enableActions();
 #ifdef DEBUG_TIMER
-    kDebug() << "Enabled actions " << _counttime.elapsed();
+    qCDebug(KDESVN_LOG) << "Enabled actions " << _counttime.elapsed();
 #endif
     /*  KNotification * notification=new KNotification("kdesvn-open");
         notification->setText("Opened url");

@@ -23,8 +23,6 @@
 #include "svnqt/revision.h"
 #include "settings/kdesvnsettings.h"
 
-#include <kdebug.h>
-
 SvnItemModelNode::SvnItemModelNode(SvnItemModelNodeDir *aParentNode, SvnActions *bl, MainTreeWidget *id)
     : SvnItem(), _parentNode(aParentNode), _actions(bl), _display(id)
 {

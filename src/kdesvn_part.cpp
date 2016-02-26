@@ -38,7 +38,6 @@
 #include <ktoggleaction.h>
 #include <kactioncollection.h>
 #include <kstandardaction.h>
-#include <kdebug.h>
 #include <kxmlguifactory.h>
 #include <kaboutapplicationdialog.h>
 #include <kconfigdialog.h>
@@ -87,7 +86,7 @@ void kdesvnpart::init(QWidget *parentWidget, bool full)
     // set our XML-UI resource file
 #ifdef TESTING_PARTRC
     setXMLFile(TESTING_PARTRC);
-    kDebug(9510) << "Using test rc file in " << TESTING_PARTRC << endl;
+    qCDebug(KDESVN_LOG) << "Using test rc file in " << TESTING_PARTRC << endl;
 #else
     setXMLFile("kdesvn_part.rc");
 #endif

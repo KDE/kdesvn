@@ -25,7 +25,6 @@
 #include <KAboutData>
 
 #include <klocale.h>
-#include <kdebug.h>
 #include <QCommandLineParser>
 
 static const char description[] =

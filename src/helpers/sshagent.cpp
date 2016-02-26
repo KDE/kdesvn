@@ -25,8 +25,8 @@
 #include "kdesvn-config.h"
 
 #include <KProcess>
-#include <KDebug>
 #include <QRegExp>
+#include "kdesvn_debug.h"
 
 // initialize static member variables
 bool    SshAgent::m_isRunning  = false;
@@ -88,7 +88,7 @@ bool SshAgent::querySshAgent()
 void SshAgent::askPassEnv()
 {
 #ifdef FORCE_ASKPASS
-    kDebug(9510) << "Using test askpass" << endl;
+    qCDebug(KDESVN_LOG) << "Using test askpass" << endl;
     qputenv("SSH_ASKPASS", FORCE_ASKPASS);
 #else
     QByteArray pro = BIN_INSTALL_DIR;
@@ -107,7 +107,7 @@ bool SshAgent::addSshIdentities(bool force)
     }
 
     if (!m_isRunning) {
-        kWarning() << "No ssh-agent is running, can not execute ssh-add";
+        qWarning() << "No ssh-agent is running, can not execute ssh-add";
         return false;
     }
 
@@ -118,10 +118,10 @@ bool SshAgent::addSshIdentities(bool force)
     proc.setEnv("SSH_AUTH_SOCK", m_authSock);
 
 #ifdef FORCE_ASKPASS
-    kDebug(9510) << "Using test askpass" << endl;
+    qCDebug(KDESVN_LOG) << "Using test askpass" << endl;
     proc.setEnv("SSH_ASKPASS", FORCE_ASKPASS);
 #else
-    kDebug(9510) << "Using kdesvnaskpass" << endl;
+    qCDebug(KDESVN_LOG) << "Using kdesvnaskpass" << endl;
     proc.setEnv("SSH_ASKPASS", "kdesvnaskpass");
 #endif
 

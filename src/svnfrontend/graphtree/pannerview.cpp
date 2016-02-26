@@ -25,8 +25,6 @@
 #include <QGraphicsRectItem>
 #include <QStyleOptionGraphicsItem>
 
-#include <kdebug.h>
-
 class GraphPanMark: public QGraphicsRectItem
 {
 public:

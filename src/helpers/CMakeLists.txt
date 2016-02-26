@@ -19,6 +19,7 @@
  ####
 
 set(helperssrc
+    kdesvn_debug.cpp
     ktranslateurl.cpp
     sshagent.cpp
     sub2qt.cpp

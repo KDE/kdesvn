@@ -19,14 +19,13 @@
  ***************************************************************************/
 #include "encodingselector_impl.h"
 #include <kcharsets.h>
-#include <kglobal.h>
 
 
 EncodingSelector_impl::EncodingSelector_impl(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
-    m_encodingList->addItems(KGlobal::charsets()->availableEncodingNames());
+    m_encodingList->addItems(KCharsets::charsets()->availableEncodingNames());
 }
 
 void EncodingSelector_impl::setCurrentEncoding(const QString &cur)

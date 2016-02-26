@@ -49,7 +49,6 @@
 #include <netinet/in.h>
 #include <netdb.h>
 
-#include <kcomponentdata.h>
 #include <kglobal.h>
 #include <kmimetype.h>
 
@@ -164,7 +163,7 @@ extern "C"
 
 int kdemain(int argc, char **argv)
 {
-    KComponentData componentData("kio_ksvn");
+    QCoreApplication::setApplicationName(QLatin1String("kio_ksvn"));
     qCDebug(KDESVN_LOG) << "*** Starting kio_ksvn " << endl;
 
     if (argc != 4) {

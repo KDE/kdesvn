@@ -109,7 +109,7 @@ kdesvnpart::~kdesvnpart()
 
 void kdesvnpart::slotUrlChanged(const QString &url)
 {
-    setUrl(url);
+    setUrl(QUrl(url));
 }
 
 bool kdesvnpart::openFile()

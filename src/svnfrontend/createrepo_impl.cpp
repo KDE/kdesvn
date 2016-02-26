@@ -84,7 +84,8 @@ void Createrepo_impl::fsTypeChanged(int which)
 
 QString Createrepo_impl::targetDir()const
 {
-    return m_ReposPathinput->url().toString(QUrl::FullyEncoded);
+    // Local only
+    return m_ReposPathinput->url().toLocalFile();
 }
 
 bool Createrepo_impl::createMain()const

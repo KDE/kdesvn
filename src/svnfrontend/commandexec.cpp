@@ -226,7 +226,7 @@ int CommandExec::exec(const QCommandLineParser *parser)
     QString mainProto;
     QString _baseurl;
     for (int j = 2; j < m_pCPart->args.count(); ++j) {
-        // urls from command line -> fromUserInput
+        // urls from command line -> fromUserInput, TODO: does not understand relative paths (e.g. '.')
         QUrl tmpurl = helpers::KTranslateUrl::translateSystemUrl(QUrl::fromUserInput(m_pCPart->args.at(j)));
         tmpurl.setScheme(svn::Url::transformProtokoll(tmpurl.scheme()));
         if (tmpurl.scheme().indexOf(QLatin1String("ssh")) != -1) {
@@ -630,7 +630,6 @@ bool CommandExec::askRevision()
  */
 void CommandExec::slotCmd_switch()
 {
-    QString base;
     if (m_pCPart->urls.count() > 1) {
         clientException(i18n("May only switch one URL at time"));
         return;
@@ -639,7 +638,7 @@ void CommandExec::slotCmd_switch()
         clientException(i18n("Switch only on working copies"));
         return;
     }
-    base = m_pCPart->baseUrls[0];
+    const QUrl base(QUrl::fromUserInput(m_pCPart->baseUrls[0]));
     m_pCPart->m_SvnWrapper->makeSwitch(m_pCPart->urls.at(0), base);
 }
 

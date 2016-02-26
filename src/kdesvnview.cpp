@@ -244,7 +244,6 @@ void kdesvnView::slotCreateRepo()
     svn::repository::Repository *_rep = new svn::repository::Repository(this);
     bool ok = true;
     bool createdirs;
-    QString path = ptr->targetDir();
     closeMe();
     try {
         _rep->CreateOpen(ptr->parameter());
@@ -258,6 +257,8 @@ void kdesvnView::slotCreateRepo()
     if (!ok) {
         return;
     }
+    // repo is created on a local path
+    const QUrl path = QUrl::fromLocalFile(ptr->targetDir());
     openUrl(path);
     if (createdirs) {
         emit sigMakeBaseDirs();

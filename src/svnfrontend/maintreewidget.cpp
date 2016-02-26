@@ -2021,8 +2021,8 @@ void MainTreeWidget::slotRelocate()
     }
     QString path;
     path = k->fullName();
-    // CE TODO
-    const QUrl fromUrl = k->Url();
+    // CE TODO - Url() will return a QUrl later on
+    const QUrl fromUrl = QUrl(k->Url());
     CheckoutInfo_impl *ptr = 0;
     QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Relocate path %1", path), true, QLatin1String("relocate_dlg"));
     if (dlg) {
@@ -2172,7 +2172,7 @@ void MainTreeWidget::slotChangeToRepository()
     if (i.reposRoot().isEmpty()) {
         KMessageBox::sorry(QApplication::activeModalWidget(), i18n("Could not retrieve repository of working copy."), i18n("SVN Error"));
     } else {
-        sigSwitchUrl(i.reposRoot());
+        sigSwitchUrl(QUrl(i.reposRoot()));
     }
 }
 

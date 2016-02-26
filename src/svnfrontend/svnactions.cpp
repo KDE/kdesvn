@@ -1630,12 +1630,12 @@ bool SvnActions::makeDelete(const svn::Targets &target, bool keep_local, bool fo
 
 void SvnActions::slotCheckout()
 {
-    CheckoutExport(QString(), false);
+    CheckoutExport(QUrl(), false);
 }
 
 void SvnActions::slotExport()
 {
-    CheckoutExport(QString(), true);
+    CheckoutExport(QUrl(), true);
 }
 
 void SvnActions::slotCheckoutCurrent()
@@ -1695,7 +1695,8 @@ void SvnActions::CheckoutExport(const QUrl &what, bool _exp, bool urlisTarget)
 
 void SvnActions::CheckoutExportCurrent(bool _exp)
 {
-    if (!m_Data->m_ParentList || (!_exp && m_Data->m_ParentList->isWorkingCopy())) {
+    // checkout export only on repo, not wc
+    if (!m_Data->m_ParentList || m_Data->m_ParentList->isWorkingCopy()) {
         return;
     }
     SvnItem *k = m_Data->m_ParentList->Selected();
@@ -1703,11 +1704,11 @@ void SvnActions::CheckoutExportCurrent(bool _exp)
         KMessageBox::error(m_Data->m_ParentList->realWidget(), _exp ? i18n("Exporting a file?") : i18n("Checking out a file?"));
         return;
     }
-    QString what;
+    QUrl what;
     if (!k) {
-        what = m_Data->m_ParentList->baseUri();
+        what = QUrl(m_Data->m_ParentList->baseUri());
     } else {
-        what = k->fullName();
+        what = QUrl(k->fullName());
     }
     CheckoutExport(what, _exp);
 }
@@ -1897,14 +1898,14 @@ void SvnActions::slotSwitch()
         KMessageBox::error(0, i18n("Error getting entry to switch"));
         return;
     }
-    QString path = k->fullName();
-    QString what = k->Url();
+    const QString path = k->fullName();
+    const QUrl what = QUrl(k->Url());  // CE TODO - is an url and will return QUrl later
     if (makeSwitch(path, what)) {
         emit reinitItem(k);
     }
 }
 
-bool SvnActions::makeSwitch(const QString &path, const QString &what)
+bool SvnActions::makeSwitch(const QString &path, const QUrl &what)
 {
     CheckoutInfo_impl *ptr;
     QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Switch URL"), true, QLatin1String("switch_url_dlg"));

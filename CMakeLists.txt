@@ -37,7 +37,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED 11)
-set(TRANSLATION_DOMAIN "kdesvn")
+add_definitions(-DTRANSLATION_DOMAIN="kdesvn")
 
 include(KDEInstallDirs)
 include(KDECompilerSettings)

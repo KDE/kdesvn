@@ -146,7 +146,6 @@ kio_svnProtocol::kio_svnProtocol(const QByteArray &pool_socket, const QByteArray
     : SlaveBase("kio_ksvn", pool_socket, app_socket), StreamWrittenCb()
 {
     m_pData = new KioSvnData(this);
-    KGlobal::locale()->insertCatalog("kdesvn");
     m_pData->m_Id = reinterpret_cast<qulonglong>(this);
 }
 

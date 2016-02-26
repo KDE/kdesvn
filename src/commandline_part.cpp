@@ -25,9 +25,7 @@
 commandline_part::commandline_part(QObject *parent, const QVariantList &)
     : QObject(parent)
     , m_pCPart(new CommandExec(this))
-{
-    KGlobal::locale()->insertCatalog("kdesvn");
-}
+{}
 
 commandline_part::~commandline_part()
 {

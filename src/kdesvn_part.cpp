@@ -69,7 +69,7 @@ kdesvnpart::kdesvnpart(QWidget *parentWidget, QObject *parent, bool ownapp, cons
 void kdesvnpart::init(QWidget *parentWidget, bool full)
 {
     m_aboutDlg = 0;
-    KGlobal::locale()->insertCatalog("kdesvn");
+    KLocalizedString::setApplicationDomain("kdesvn");
     // we need an instance
     // TODO: KF5 port
     //setComponentData(KdesvnFactory::componentData());
@@ -263,9 +263,7 @@ bool kdesvnpart::closeUrl()
 
 KdesvnBrowserExtension::KdesvnBrowserExtension(kdesvnpart *p)
     : KParts::BrowserExtension(p)
-{
-    KGlobal::locale()->insertCatalog("kdesvn");
-}
+{}
 
 KdesvnBrowserExtension::~KdesvnBrowserExtension()
 {

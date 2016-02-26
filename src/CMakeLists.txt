@@ -49,9 +49,16 @@ add_subdirectory(icons)
 add_executable(kdesvn ${kdesvnsrc})
 add_library(kdesvnpart MODULE ${partsrc})
 
-target_link_libraries(kdesvnpart svnfrontend kdesvnhelpers ksvnwidgets settingsdlgs kdesvncfgreader svnbackground svnqt
+target_link_libraries(kdesvnpart
+    svnfrontend
+    kdesvnhelpers
+    ksvnwidgets
+    settingsdlgs
+    kdesvncfgreader
+    svnbackground
+    svnqt
     KF5::KDELibs4Support
-    )
+)
 
 set_target_properties(kdesvnpart
     PROPERTIES

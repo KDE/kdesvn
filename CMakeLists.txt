@@ -82,7 +82,7 @@ add_definitions(-DQT_USE_FAST_OPERATOR_PLUS)
 add_definitions(-DQT_NO_CAST_TO_ASCII)
 # not (yet) possible
 #add_definitions(-DQT_NO_CAST_FROM_ASCII)
-add_definitions(-DQURL_NO_CAST_FROM_QSTRING)
+add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 add_definitions(-DQT_DEPRECATED_WARNINGS)
 # not possible with kde 4.14 ...
 #add_definitions(-DQT_NO_DEPRECATED)
@@ -129,3 +129,5 @@ set(MESSAGES_DIR ${CMAKE_SOURCE_DIR}/src)
 add_custom_target(apidox
     "doxygen" "${CMAKE_BINARY_DIR}/Doxyfile"
     DEPENDS "${CMAKE_BINARY_DIR}/Doxyfile")
+
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

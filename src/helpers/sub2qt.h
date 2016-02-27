@@ -26,7 +26,7 @@
 
 #include <QDateTime>
 #include <QString>
-#include <KUrl>
+#include <QUrl>
 
 namespace helpers
 {
@@ -43,9 +43,9 @@ QString DateTime2qtString(const svn::DateTime &_time);
   */
 svn::Targets fromStringList(const QStringList &paths);
 /**
-  * Convert a KUrl::List into a QVector<Path>
+  * Convert a QList<QUrl> into a QVector<Path> (a.k.a svn::Targets)
   */
-svn::Targets fromUrlList(const KUrl::List &urls);
+svn::Targets fromUrlList(const QList<QUrl> &urls);
 }
 
 }

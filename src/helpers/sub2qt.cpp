@@ -49,11 +49,11 @@ svn::Targets fromStringList(const QStringList &paths)
     return svn::Targets(ret);
 }
 
-svn::Targets fromUrlList(const KUrl::List &urls)
+svn::Targets fromUrlList(const QList<QUrl> &urls)
 {
     svn::Paths ret;
     ret.reserve(urls.size());
-    Q_FOREACH(const KUrl &url, urls) {
+    Q_FOREACH(const QUrl &url, urls) {
         ret.push_back(svn::Path(url.isLocalFile() ? url.toLocalFile() : url.url()));
     }
     return svn::Targets(ret);

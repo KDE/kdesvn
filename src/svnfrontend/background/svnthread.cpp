@@ -23,8 +23,6 @@
 
 #include "svnqt/url.h"
 
-#include <kurl.h>
-
 SvnThread::SvnThread(QObject *_parent)
     : QThread()
     , m_CurrentContext(new svn::Context)
@@ -67,10 +65,10 @@ void SvnThread::itemInfo(const QString &what, svn::InfoEntry &target, const svn:
         peg = svn::Revision::UNDEFINED;
         cacheKey = url;
     } else {
-        KUrl _uri = what;
-        QString prot = svn::Url::transformProtokoll(_uri.protocol());
-        _uri.setProtocol(prot);
-        url = _uri.prettyUrl();
+        // valid url
+        QUrl _uri(what);
+        _uri.setScheme(svn::Url::transformProtokoll(_uri.scheme()));
+        url = _uri.toString();
         if (peg == svn::Revision::UNDEFINED) {
             peg = rev;
         }

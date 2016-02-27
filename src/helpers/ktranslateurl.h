@@ -31,7 +31,6 @@ namespace helpers
 */
 namespace KTranslateUrl
 {
-QUrl translateSystemUrl(const QUrl &_url);
 QString makeKdeUrl(const QString &inUrl);
 QUrl string2Uri(const QString &what);
 }

@@ -227,7 +227,7 @@ int CommandExec::exec(const QCommandLineParser *parser)
     QString _baseurl;
     for (int j = 2; j < m_pCPart->args.count(); ++j) {
         // urls from command line -> fromUserInput, TODO: does not understand relative paths (e.g. '.')
-        QUrl tmpurl = helpers::KTranslateUrl::translateSystemUrl(QUrl::fromUserInput(m_pCPart->args.at(j)));
+        QUrl tmpurl = QUrl::fromUserInput(m_pCPart->args.at(j));
         tmpurl.setScheme(svn::Url::transformProtokoll(tmpurl.scheme()));
         if (tmpurl.scheme().indexOf(QLatin1String("ssh")) != -1) {
             SshAgent ag;

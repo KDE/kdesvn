@@ -19,92 +19,12 @@
  ***************************************************************************/
 #include "ktranslateurl.h"
 
-#include <kglobal.h>
-#include <kstandarddirs.h>
-#include <kdesktopfile.h>
 #include <kurl.h>
-
-#include <qstringlist.h>
-#include <qdir.h>
 
 namespace helpers
 {
 namespace KTranslateUrl
 {
-static bool parseURL(const QUrl &url, QString &name, QString &path);
-static KUrl findSystemBase(const QString &name);
-
-QUrl translateSystemUrl(const QUrl &_url)
-{
-    QString proto = _url.scheme();
-
-    if (proto != QLatin1String("system")) {
-        return _url;
-    }
-    KGlobal::dirs()->addResourceType("system_entries",
-                                     KStandardDirs::kde_default("data") + "systemview");
-    QString name, path;
-    if (!parseURL(_url, name, path)) {
-        return _url;
-    }
-    KUrl res = findSystemBase(name);
-    if (!res.isValid()) {
-        return _url;
-    }
-    res.addPath(path);
-    res.setQuery(_url.query());
-    return res;
-}
-
-bool parseURL(const QUrl &url, QString &name, QString &path)
-{
-    const QString url_path = url.path();
-    int i = url_path.indexOf(QLatin1Char('/'), 1);
-    if (i > 0) {
-        name = url_path.mid(1, i - 1);
-        path = url_path.mid(i + 1);
-    } else {
-        name = url_path.mid(1);
-        path.clear();
-    }
-
-    return !name.isEmpty();
-}
-
-KUrl findSystemBase(const QString &filename)
-{
-    const QStringList dirList = KGlobal::dirs()->resourceDirs("system_entries");
-
-    QStringList::ConstIterator dirpath = dirList.constBegin();
-    QStringList::ConstIterator end = dirList.constEnd();
-    for (; dirpath != end; ++dirpath) {
-        QDir dir(*dirpath);
-        if (!dir.exists()) {
-            continue;
-        }
-
-        QStringList filenames
-            = dir.entryList(QDir::Files | QDir::Readable);
-
-        QStringList::ConstIterator name = filenames.constBegin();
-        QStringList::ConstIterator endf = filenames.constEnd();
-
-        for (; name != endf; ++name) {
-            const QString fn = filename + QLatin1String(".desktop");
-            if (*name == fn) {
-                KDesktopFile desktop(*dirpath + fn);
-                if (desktop.readUrl().isEmpty()) {
-                    KUrl url;
-                    url.setPath(desktop.readPath());
-                    return url;
-                }
-                return desktop.readUrl();
-            }
-        }
-    }
-
-    return KUrl();
-}
 
 QString makeKdeUrl(const QString &_proto)
 {

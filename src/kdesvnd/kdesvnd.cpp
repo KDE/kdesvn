@@ -154,8 +154,7 @@ QStringList kdesvnd::getActionMenu(const QList<QUrl> &list, bool toplevel)
                << "Rename"
                << "Revert";
 
-        QUrl url = helpers::KTranslateUrl::translateSystemUrl(list[0]);
-
+        const QUrl url = list.at(0);
         QFileInfo f(url.path());
         if (f.isFile()) {
             result << "Blame";
@@ -294,10 +293,8 @@ bool kdesvnd::isRepository(const QUrl &url) const
     return svn::Url::isValid(proto);
 }
 
-bool kdesvnd::isWorkingCopy(const QUrl &_url) const
+bool kdesvnd::isWorkingCopy(const QUrl &url) const
 {
-    const QUrl url = helpers::KTranslateUrl::translateSystemUrl(_url);
-
     if (url.isEmpty() || !url.isLocalFile() || url.scheme() != QLatin1String("file")) {
         return false;
     }

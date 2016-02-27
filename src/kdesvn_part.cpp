@@ -122,7 +122,7 @@ bool kdesvnpart::openFile()
 
 bool kdesvnpart::openUrl(const QUrl &aUrl)
 {
-    QUrl _url = helpers::KTranslateUrl::translateSystemUrl(aUrl);
+    QUrl _url(aUrl);
 
     _url.setScheme(svn::Url::transformProtokoll(_url.scheme()));
 

@@ -38,6 +38,11 @@ QString ItemDisplay::baseUri()const
     return m_baseUri;
 }
 
+QUrl ItemDisplay::baseUriAsUrl()const
+{
+    return m_isWorkingCopy ? QUrl::fromLocalFile(m_baseUri) : QUrl(m_baseUri);
+}
+
 /*!
     \fn ItemDisplay::isNetworked()const
  */

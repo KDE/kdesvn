@@ -238,8 +238,8 @@ bool MainTreeWidget::openUrl(const KUrl &url, bool noReinit)
     setNetworked(false);
     m_Data->m_remoteRevision = svn::Revision::HEAD;
 
-    if (!QString::compare("svn+file", url.protocol())) {
-        setBaseUri("file://" + url.path());
+    if (QLatin1String("svn+file") == url.protocol()) {
+        setBaseUri(url.path(KUrl::RemoveTrailingSlash));
     } else {
         if (url.isLocalFile()) {
             QString s = url.path(KUrl::RemoveTrailingSlash);
@@ -1748,12 +1748,12 @@ void MainTreeWidget::slotUrlDropped(const QList<QUrl> &_lst, Qt::DropAction acti
         internalDrop(_lst, action, index);
         return;
     }
-    QString target;
+    QUrl target;
     if (index.isValid()) {
         SvnItemModelNode *node = static_cast<SvnItemModelNode *>(index.internalPointer());
-        target = node->fullName();
+        target = node->Url();
     } else {
-        target = baseUri();
+        target = baseUriAsUrl();
     }
 
     if (baseUri().length() == 0) {
@@ -1764,13 +1764,12 @@ void MainTreeWidget::slotUrlDropped(const QList<QUrl> &_lst, Qt::DropAction acti
     QFileInfo fi(path);
     if (!isWorkingCopy()) {
         if (!fi.isDir()) {
-            target += '/' + _lst[0].fileName();
+            target.setPath(target.path() + QLatin1Char('/') + _lst[0].fileName());
         }
         slotImportIntoDir(_lst[0].toLocalFile(), target, fi.isDir());
     } else {
         WidgetBlockStack w(this);
-        //m_pList->stopScan();
-        KIO::Job *job = KIO::copy(_lst, QUrl::fromLocalFile(target));
+        KIO::Job *job = KIO::copy(_lst, target);
         connect(job, SIGNAL(result(KJob*)), SLOT(slotCopyFinished(KJob*)));
         job->exec();
     }
@@ -2076,9 +2075,12 @@ void MainTreeWidget::slotImportIntoCurrent(bool dirs)
         KMessageBox::error(this, i18n("Cannot import into multiple targets"));
         return;
     }
-    QString targetDir;
+    QUrl targetDir;
     if (selectionCount() == 0) {
-        targetDir = baseUri();
+        if (isNetworked())
+            targetDir = QUrl(baseUri());
+        else
+            targetDir = QUrl::fromLocalFile(baseUri());
     } else {
         targetDir = SelectedNode()->Url();
     }
@@ -2092,7 +2094,7 @@ void MainTreeWidget::slotImportIntoCurrent(bool dirs)
     slotImportIntoDir(source, targetDir, dirs);
 }
 
-void MainTreeWidget::slotImportIntoDir(const QString &source, const QString &targetDir, bool dirs)
+void MainTreeWidget::slotImportIntoDir(const QString &source, const QUrl &_targetUri, bool dirs)
 {
     QString sourceUri = source;
     while (sourceUri.endsWith(QLatin1Char('/'))) {
@@ -2102,13 +2104,10 @@ void MainTreeWidget::slotImportIntoDir(const QString &source, const QString &tar
         return;
     }
 
-    QString targetUri = targetDir;
-    while (targetUri.endsWith(QLatin1Char('/'))) {
-        targetUri.chop(1);
-    }
-    if (targetUri.isEmpty()) {
+    if (_targetUri.isEmpty()) {
         return;
     }
+    QUrl targetUri(_targetUri);
 
     Commitmsg_impl *ptr = 0;
     Importdir_logmsg *ptr2 = 0;
@@ -2138,7 +2137,7 @@ void MainTreeWidget::slotImportIntoDir(const QString &source, const QString &tar
     ptr->saveHistory(false);
 
     if (dirs && ptr2 && ptr2->createDir()) {
-        targetUri += QLatin1Char('/') + QFileInfo(sourceUri).fileName();
+        targetUri.setPath(targetUri.path() + QLatin1Char('/') + QFileInfo(sourceUri).fileName());
     }
     if (ptr2) {
         m_Data->m_Model->svnWrapper()->slotImport(sourceUri, targetUri, logMessage, rec, ptr2->noIgnore(), ptr2->ignoreUnknownNodes());
@@ -2166,13 +2165,13 @@ void MainTreeWidget::slotChangeToRepository()
         return;
     }
     svn::InfoEntry i;
-    if (!m_Data->m_Model->svnWrapper()->singleInfo(k->Url(), svn::Revision::UNDEFINED, i)) {
+    if (!m_Data->m_Model->svnWrapper()->singleInfo(k->Url().toString(), svn::Revision::UNDEFINED, i)) {
         return;
     }
     if (i.reposRoot().isEmpty()) {
         KMessageBox::sorry(QApplication::activeModalWidget(), i18n("Could not retrieve repository of working copy."), i18n("SVN Error"));
     } else {
-        sigSwitchUrl(QUrl(i.reposRoot()));
+        sigSwitchUrl(i.reposRoot());
     }
 }
 
@@ -2356,7 +2355,7 @@ void MainTreeWidget::slotRepositorySettings()
     if (inf.reposRoot().isEmpty()) {
         KMessageBox::sorry(QApplication::activeModalWidget(), i18n("Could not retrieve repository."), i18n("SVN Error"));
     } else {
-        DbSettings::showSettings(inf.reposRoot());
+        DbSettings::showSettings(inf.reposRoot().toString());
     }
 }
 

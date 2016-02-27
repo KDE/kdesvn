@@ -51,7 +51,7 @@ void FillCacheThread::fillInfo()
     svn::InfoEntry e;
     itemInfo(Path(), e);
     if (!e.reposRoot().isEmpty()) {
-        m_what = e.reposRoot();
+        m_what = e.reposRoot().toString();
     }
 }
 

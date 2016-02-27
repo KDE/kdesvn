@@ -250,7 +250,7 @@ void SvnActions::makeLog(const svn::Revision &start, const svn::Revision &end, c
     if (!singleInfo(which, peg, info)) {
         return;
     }
-    QString reposRoot = info.reposRoot();
+    const QString reposRoot = info.reposRoot().toString();
     bool need_modal = m_Data->runblocked || QApplication::activeModalWidget() != 0;
     if (need_modal || !m_Data->m_LogDialog) {
         m_Data->m_LogDialog = new SvnLogDlgImp(this, need_modal);
@@ -261,7 +261,7 @@ void SvnActions::makeLog(const svn::Revision &start, const svn::Revision &end, c
     }
 
     if (m_Data->m_LogDialog) {
-        m_Data->m_LogDialog->dispLog(logs, info.url().mid(reposRoot.length()), reposRoot,
+        m_Data->m_LogDialog->dispLog(logs, info.url().toString().mid(reposRoot.length()), reposRoot,
                                      (
                                          peg == svn::Revision::UNDEFINED ?
                                          (svn::Url::isValid(which) ? svn::Revision::HEAD : svn::Revision::UNDEFINED) :
@@ -314,19 +314,19 @@ svn::LogEntriesMapPtr SvnActions::getLog(const svn::Revision &start, const svn::
                 logs.clear();
                 return logs;
             }
-            if (svn::Url::isLocal(e.reposRoot())) {
+            if (svn::Url::isLocal(e.reposRoot().toString())) {
                 if (!m_Data->m_Svnclient->log(params, *logs)) {
                     logs.clear();
                     return logs;
                 }
             } else {
-                svn::cache::ReposLog rl(m_Data->m_Svnclient, e.reposRoot());
-                QString s1, s2, what;
-                s1 = e.url().mid(e.reposRoot().length());
+                svn::cache::ReposLog rl(m_Data->m_Svnclient, e.reposRoot().toString());
+                QString what;
+                const QString s1 = e.url().toString().mid(e.reposRoot().toString().length());
                 if (which == QLatin1String(".")) {
                     what = s1;
                 } else {
-                    s2 = which.mid(m_Data->m_ParentList->baseUri().length());
+                    const QString s2 = which.mid(m_Data->m_ParentList->baseUri().length());
                     what = s1 + QLatin1Char('/') + s2;
                 }
                 rl.log(what, start, end, peg, *logs, !follow, limit);
@@ -355,7 +355,7 @@ bool SvnActions::getSingleLog(svn::LogEntry &t, const svn::Revision &r, const QS
         if (!singleInfo(what, peg, inf)) {
             return res;
         }
-        root = inf.reposRoot();
+        root = inf.reposRoot().toString();
     }
 
     if (!svn::Url::isLocal(root)) {
@@ -396,7 +396,7 @@ bool SvnActions::hasMergeInfo(const QString &originpath)
     if (!singleInfo(originpath, svn::Revision::UNDEFINED, e)) {
         return false;
     }
-    path = e.reposRoot();
+    path = e.reposRoot().toString();
     if (!m_Data->m_MergeInfoCache.findSingleValid(path, _m)) {
         bool mergeinfo;
         try {
@@ -492,14 +492,14 @@ void SvnActions::makeTree(const QString &what, const svn::Revision &_rev, const 
     if (!singleInfo(what, _rev, info)) {
         return;
     }
-    QString reposRoot = info.reposRoot();
+    const QString reposRoot = info.reposRoot().toString();
 
     if (Kdesvnsettings::fill_cache_on_tree()) {
         stopFillCache();
     }
 
     QPointer<KDialog> dlg(new KDialog(m_Data->m_ParentList->realWidget()));
-    dlg->setCaption(i18n("History of %1", info.url().mid(reposRoot.length())));
+    dlg->setCaption(i18n("History of %1", info.url().toString().mid(reposRoot.length())));
     dlg->setButtons(KDialog::Ok);
 
     QWidget *Dialog1Layout = new KVBox(dlg);
@@ -507,7 +507,7 @@ void SvnActions::makeTree(const QString &what, const svn::Revision &_rev, const 
 
     RevisionTree rt(m_Data->m_Svnclient, m_Data->m_SvnContextListener, reposRoot,
                     startr, endr,
-                    info.prettyUrl().mid(reposRoot.length()), _rev, Dialog1Layout, m_Data->m_ParentList->realWidget());
+                    info.url().toString().mid(reposRoot.length()), _rev, Dialog1Layout, m_Data->m_ParentList->realWidget());
     if (rt.isValid()) {
         QWidget *disp = rt.getView();
         if (disp) {
@@ -757,9 +757,9 @@ QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_wha
             text += rb + i18n("Name") + cs + ((*it).Name()) + re;
         }
         if (all) {
-            text += rb + i18n("URL") + cs + ((*it).url()) + re;
-            if ((*it).reposRoot().length()) {
-                text += rb + i18n("Canonical repository URL") + cs + ((*it).reposRoot()) + re;
+            text += rb + i18n("URL") + cs + ((*it).url().toDisplayString()) + re;
+            if ((*it).reposRoot().toString().length()) {
+                text += rb + i18n("Canonical repository URL") + cs + ((*it).reposRoot().toDisplayString()) + re;
             }
             if ((*it).checksum().length()) {
                 text += rb + i18n("Checksum") + cs + ((*it).checksum()) + re;
@@ -846,8 +846,8 @@ QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_wha
                         cs + ((*it).prejfile()) + re;
             }
 
-            if ((*it).copyfromUrl().length()) {
-                text += rb + i18n("Copy from URL") + cs + ((*it).copyfromUrl()) + re;
+            if (!(*it).copyfromUrl().isEmpty()) {
+                text += rb + i18n("Copy from URL") + cs + ((*it).copyfromUrl().toDisplayString()) + re;
             }
             if ((*it).lockEntry().Locked()) {
                 text += rb + i18n("Lock token") + cs + ((*it).lockEntry().Token()) + re;
@@ -1710,7 +1710,8 @@ void SvnActions::CheckoutExportCurrent(bool _exp)
     } else {
         what = QUrl(k->fullName());
     }
-    CheckoutExport(what, _exp);
+    // what is always remote, so QUrl(what) is fine
+    CheckoutExport(QUrl(what), _exp);
 }
 
 bool SvnActions::makeCheckout(const QString &rUrl, const QString &tPath, const svn::Revision &r, const svn::Revision &_peg,
@@ -2039,7 +2040,7 @@ void SvnActions::slotResolve(const QString &p)
     }
 }
 
-void SvnActions::slotImport(const QString &path, const QString &target, const QString &message, svn::Depth depth,
+void SvnActions::slotImport(const QString &path, const QUrl &target, const QString &message, svn::Depth depth,
                             bool noIgnore, bool noUnknown)
 {
     if (!m_Data->m_CurrentContext) {
@@ -2049,9 +2050,7 @@ void SvnActions::slotImport(const QString &path, const QString &target, const QS
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18n("Import"), i18n("Importing items"));
         connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
-        // CE TODO
-        QUrl url(target);
-        m_Data->m_Svnclient->import(svn::Path(path), svn::Url(url), message, depth, noIgnore, noUnknown);
+        m_Data->m_Svnclient->import(svn::Path(path), svn::Url(target), message, depth, noIgnore, noUnknown);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
         return;
@@ -2700,7 +2699,7 @@ bool SvnActions::doNetworking()
         if (!singleInfo(m_Data->m_ParentList->baseUri(), svn::Revision::UNDEFINED, e)) {
             return false;
         }
-        is_url = !e.reposRoot().startsWith(QLatin1String("file:/"));
+        is_url = !e.reposRoot().isLocalFile();
     }
     return !is_url;
 }
@@ -2887,7 +2886,7 @@ QString SvnActions::searchProperty(QString &Store, const QString &property, cons
         }
         if (up) {
             pa.removeLast();
-            if (pa.isUrl() && inf.reposRoot().length() > pa.path().length()) {
+            if (pa.isUrl() && inf.reposRoot().toString().length() > pa.path().length()) {
                 break;
             }
 
@@ -2932,13 +2931,14 @@ bool SvnActions::isLocalWorkingCopy(const KUrl &url, QUrl &repoUrl)
     try {
         e = m_Data->m_Svnclient->info(cleanpath, svn::DepthEmpty, rev, peg);
     } catch (const svn::Exception &e) {
+
         if (SVN_ERR_WC_NOT_DIRECTORY == e.apr_err()) {
             return false;
         }
         return true;
     }
     if (!e.isEmpty())
-        repoUrl = QUrl(e.at(0).url());  // CE TODO: url() will become a QUrl
+        repoUrl = e.at(0).url();
     return true;
 }
 

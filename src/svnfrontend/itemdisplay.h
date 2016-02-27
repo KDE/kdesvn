@@ -46,7 +46,8 @@ public:
     virtual SvnItem *SelectedOrMain()const = 0;
 
     bool isWorkingCopy()const;
-    QString baseUri()const;
+    QString baseUri()const; // a local path when it's a wc, an url when it's a repo
+    QUrl baseUriAsUrl()const;
     bool isNetworked()const;
     QString lastError()const;
     static bool filterOut(const SvnItem *item);

@@ -115,7 +115,7 @@ const QString &InfoEntry::conflictWrk()const
     return m_conflict_wrk;
 }
 #endif
-const QString &InfoEntry::copyfromUrl()const
+const QUrl &InfoEntry::copyfromUrl()const
 {
     return m_copyfrom_url;
 }
@@ -123,11 +123,11 @@ const QString &InfoEntry::prejfile()const
 {
     return m_prejfile;
 }
-const QString &InfoEntry::reposRoot()const
+const QUrl &InfoEntry::reposRoot()const
 {
     return m_repos_root;
 }
-const QString &InfoEntry::url()const
+const QUrl &InfoEntry::url()const
 {
     return m_url;
 }
@@ -155,10 +155,7 @@ svn_wc_schedule_t InfoEntry::Schedule()const
 {
     return m_schedule;
 }
-const QString &InfoEntry::prettyUrl()const
-{
-    return m_pUrl;
-}
+
 bool InfoEntry::isDir()const
 {
     return kind() == svn_node_dir;
@@ -204,7 +201,6 @@ void svn::InfoEntry::init()
     m_prejfile.clear();
     m_repos_root.clear();
     m_url.clear();
-    m_pUrl.clear();
     m_UUID.clear();
     m_kind = svn_node_none;
     m_copy_from_rev = SVN_INVALID_REVNUM;
@@ -237,9 +233,8 @@ void svn::InfoEntry::init(const svn_client_info2_t *item, const QString &path)
         m_Lock = LockEntry();
     }
     m_size = item->size != SVN_INVALID_FILESIZE ? qlonglong(item->size) : SVNQT_SIZE_UNKNOWN;
-    m_repos_root = QString::fromUtf8(item->repos_root_URL);
-    m_url = QString::fromUtf8(item->URL);
-    m_pUrl = prettyUrl(item->URL);
+    m_repos_root = QUrl::fromEncoded(item->repos_root_URL);
+    m_url = QUrl::fromEncoded(item->URL);
     m_UUID = QString::fromUtf8(item->repos_UUID);
     m_kind = item->kind;
     m_revision = item->rev;
@@ -248,7 +243,10 @@ void svn::InfoEntry::init(const svn_client_info2_t *item, const QString &path)
     if (item->wc_info != 0) {
         m_hasWc = true;
         m_schedule = item->wc_info->schedule;
-        m_copyfrom_url = QString::fromUtf8(item->wc_info->copyfrom_url);
+        if (item->wc_info->copyfrom_url)
+            m_copyfrom_url = QUrl::fromEncoded(item->wc_info->copyfrom_url);
+        else
+            m_copyfrom_url.clear();
         m_copy_from_rev = item->wc_info->copyfrom_rev;
         if (item->wc_info->changelist) {
             m_changeList = QByteArray(item->wc_info->changelist, strlen(item->wc_info->changelist));
@@ -317,12 +315,11 @@ void svn::InfoEntry::init(const svn_info_t *item, const QString &path)
     m_conflict_new = QString::fromUtf8(item->conflict_new);
     m_conflict_old = QString::fromUtf8(item->conflict_old);
     m_conflict_wrk = QString::fromUtf8(item->conflict_wrk);
-    m_copyfrom_url = QString::fromUtf8(item->copyfrom_url);
+    m_copyfrom_url = QUrl::fromEncoded(item->copyfrom_url);
     m_last_author = QString::fromUtf8(item->last_changed_author);
     m_prejfile = QString::fromUtf8(item->prejfile);
-    m_repos_root = QString::fromUtf8(item->repos_root_URL);
-    m_url = QString::fromUtf8(item->URL);
-    m_pUrl = prettyUrl(item->URL);
+    m_repos_root = QUrl::fromEncoded(item->repos_root_URL);
+    m_url = QUrl::fromEncoded(item->URL);
     m_UUID = QString::fromUtf8(item->repos_UUID);
     m_kind = item->kind;
     m_copy_from_rev = item->copyfrom_rev;
@@ -372,16 +369,6 @@ void svn::InfoEntry::init(const svn_info_t *item, const QString &path)
 }
 #endif
 
-QString svn::InfoEntry::prettyUrl(const char *_url)const
-{
-    if (_url) {
-        Pool pool;
-        _url = svn_path_uri_decode(_url, pool);
-        return QString::fromUtf8(_url);
-    }
-    return QString();
-}
-
 svn::InfoEntry::InfoEntry(const InfoEntry &other)
 {
     m_name = other.m_name;
@@ -402,7 +389,6 @@ svn::InfoEntry::InfoEntry(const InfoEntry &other)
     m_prejfile = other.m_prejfile;
     m_repos_root = other.m_repos_root;
     m_url = other.m_url;
-    m_pUrl = other.m_pUrl;
     m_UUID = other.m_UUID;
     m_kind = other.m_kind;
     m_copy_from_rev = other.m_copy_from_rev;

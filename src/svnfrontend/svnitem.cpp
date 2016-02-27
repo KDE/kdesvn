@@ -52,7 +52,8 @@ public:
 
     svn::StatusPtr m_Stat;
     void init();
-    QString m_url, m_full, m_short;
+    QUrl m_url;
+    QString m_full, m_short;
     KUrl m_kdename;
     QDateTime m_fullDate;
     QString m_infoText;
@@ -182,7 +183,7 @@ const QString &SvnItem::shortName()const
     return (p_Item->m_short);
 }
 
-const QString &SvnItem::Url()const
+const QUrl &SvnItem::Url()const
 {
     return (p_Item->m_url);
 }

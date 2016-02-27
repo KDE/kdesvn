@@ -32,6 +32,7 @@
 #include <svnqt/conflictdescription.h>
 
 #include <QString>
+#include <QUrl>
 
 #include <svn_version.h>
 
@@ -93,10 +94,10 @@ public:
     const QString &conflictWrk()const;
 #endif
 
-    const QString &copyfromUrl()const;
+    const QUrl &copyfromUrl()const;
     const QString &prejfile()const;
-    const QString &reposRoot()const;
-    const QString &url()const;
+    const QUrl &reposRoot()const;
+    const QUrl &url()const;
     const QString &uuid()const;
     svn_node_kind_t kind()const;
     const Revision &cmtRev()const;
@@ -109,10 +110,7 @@ public:
     const QByteArray &changeList()const;
     svn::Depth depth()const;
 
-    const QString &prettyUrl()const;
-
     bool isDir()const;
-    QString prettyUrl(const char *)const;
 
 protected:
     DateTime m_last_changed_date;
@@ -129,12 +127,11 @@ protected:
     QString m_conflict_old;
     QString m_conflict_wrk;
 #endif
-    QString m_copyfrom_url;
+    QUrl m_copyfrom_url;
     QString m_last_author;
     QString m_prejfile;
-    QString m_repos_root;
-    QString m_url;
-    QString m_pUrl;
+    QUrl m_repos_root;
+    QUrl m_url;
     QString m_UUID;
     svn_node_kind_t m_kind;
     Revision m_copy_from_rev;

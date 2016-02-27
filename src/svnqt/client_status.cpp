@@ -243,7 +243,9 @@ dirEntryToStatus(const Path &path, const DirEntry &dirEntry)
 static StatusPtr
 infoEntryToStatus(const Path &, const InfoEntry &infoEntry)
 {
-    return StatusPtr(new Status(infoEntry.url(), infoEntry));
+    // CE TODO
+    qWarning("infoEntryToStatus %s", qPrintable(infoEntry.url().toString()));
+    return StatusPtr(new Status(infoEntry.url().toString(), infoEntry));
 }
 
 static StatusEntries

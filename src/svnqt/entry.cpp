@@ -46,7 +46,8 @@ public:
     bool m_valid;
     LockEntry m_Lock;
 
-    QString _name, _url, _repos, _uuid, _cmt_author;
+    QUrl _url, _repos;
+    QString _name, _uuid, _cmt_author;
     bool _copied;
     svn_revnum_t _revision, _cmt_rev;
     svn_node_kind_t _kind;
@@ -108,8 +109,9 @@ Entry_private::init(const svn_client_status_t *src)
         // copy & convert the contents of src
         _name = QString::fromUtf8(src->local_abspath);
         _revision = src->revision;
-        _repos = QString::fromUtf8(src->repos_root_url);
-        _url = _repos + QLatin1Char('/') + QString::fromUtf8(src->repos_relpath);
+        _repos = QUrl::fromEncoded(src->repos_root_url);
+        _url = _repos;
+        _url.setPath(_url.path() +  QLatin1Char('/') + QString::fromUtf8(src->repos_relpath));
         _uuid = QString::fromUtf8(src->repos_uuid);
         _kind = src->kind;
         _copied = src->copied != 0;
@@ -130,8 +132,8 @@ Entry_private::init(const svn_wc_entry_t *src)
         // copy & convert the contents of src
         _name = QString::fromUtf8(src->name);
         _revision = src->revision;
-        _url = QString::fromUtf8(src->url);
-        _repos = QString::fromUtf8(src->repos);
+        _url = QString::fromEncoded(src->url);
+        _repos = QString::fromEncoded(src->repos);
         _uuid = QString::fromUtf8(src->uuid);
         _kind = src->kind;
         _copied = src->copied != 0;
@@ -166,7 +168,9 @@ Entry_private::init(const Entry_private &src)
 void Entry_private::init(const QString &url, const DirEntry &dirEntry)
 {
     init(0);
-    _url = url;
+    // CE TODO
+    qWarning("init: %s", qPrintable(url));
+    _url = QUrl(url);
     if (!dirEntry.isEmpty()) {
         _name = dirEntry.name();
         _revision = dirEntry.createdRev();
@@ -183,7 +187,8 @@ void Entry_private::init(const QString &url, const InfoEntry &src)
 {
     init(0);
     _name = src.Name();
-    _url = url;
+    qWarning("init2: %s", qPrintable(url));
+    _url = QUrl(url);
     _revision = src.revision();
     _kind = src.kind();
     _cmt_rev = src.cmtRev();
@@ -284,12 +289,12 @@ Entry::uuid() const
 {
     return m_Data->_uuid;
 }
-const QString &
+const QUrl &
 Entry::repos() const
 {
     return m_Data->_repos;
 }
-const QString &
+const QUrl &
 Entry::url() const
 {
     return m_Data->_url;

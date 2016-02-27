@@ -111,14 +111,12 @@ public:
     /**
      * @return url in repository
      */
-    const QString &
-    url() const;
+    const QUrl &url() const;
 
     /**
      * @return canonical repository url
      */
-    const QString &
-    repos() const;
+    const QUrl &repos() const;
     /**
      * @return repository uuid
      */

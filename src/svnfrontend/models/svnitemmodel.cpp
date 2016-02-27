@@ -386,7 +386,7 @@ int SvnItemModel::checkDirs(const QString &_what, SvnItemModelNode *_parent)
     svn::StatusEntries::iterator it = dlist.begin();
     SvnItemModelNode *node = 0;
     for (; it != dlist.end(); ++it) {
-        if ((*it)->path() == what || QString::compare((*it)->entry().url(), what) == 0) {
+        if ((*it)->path() == what || (*it)->entry().url().toString() == what) {
             if (!_parent) {
                 // toplevel item
                 beginInsertRows(m_Data->indexForNode(m_Data->m_rootNode), 0, 0);
@@ -650,7 +650,7 @@ void SvnItemModel::initDirWatch()
         connect(m_Data->m_DirWatch, SIGNAL(created(QString)), this, SLOT(slotCreated(QString)));
         connect(m_Data->m_DirWatch, SIGNAL(deleted(QString)), this, SLOT(slotDeleted(QString)));
         if (m_Data->m_DirWatch) {
-            m_Data->m_DirWatch->addDir(m_Data->m_Display->baseUri() + '/', KDirWatch::WatchDirOnly);
+            m_Data->m_DirWatch->addDir(m_Data->m_Display->baseUri() + QLatin1Char('/'), KDirWatch::WatchDirOnly);
             m_Data->m_DirWatch->startScan(true);
         }
     }

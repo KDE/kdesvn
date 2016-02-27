@@ -38,6 +38,8 @@ int main(int argc, char **argv)
     app.setOrganizationDomain("kde.org");
     app.setApplicationVersion(KDESVN_VERSION);
 
+    KLocale::global();
+
     KAboutData aboutData(QLatin1String("kdesvn"), i18n("kdesvn"), QString(KDESVN_VERSION), i18n(description),
                          KAboutLicense::GPL, i18n("(C) 2005-2009 Rajko Albrecht"));
     aboutData.addAuthor(i18n("Rajko Albrecht"), i18n("Developer"), QString("ral@alwins-world.de"));

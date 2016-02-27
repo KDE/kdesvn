@@ -2916,7 +2916,7 @@ bool SvnActions::makeList(const QString &url, svn::DirEntries &dlist, const svn:
 /*!
     \fn SvnActions::isLocalWorkingCopy(const KUrl&url)
  */
-bool SvnActions::isLocalWorkingCopy(const KUrl &url, QString &_baseUri)
+bool SvnActions::isLocalWorkingCopy(const KUrl &url, QUrl &repoUrl)
 {
     if (url.isEmpty() || !url.isLocalFile()) {
         return false;
@@ -2925,7 +2925,7 @@ bool SvnActions::isLocalWorkingCopy(const KUrl &url, QString &_baseUri)
     while (cleanpath.endsWith('/')) {
         cleanpath.truncate(cleanpath.length() - 1);
     }
-    _baseUri.clear();
+    repoUrl.clear();
     svn::Revision peg(svn_opt_revision_unspecified);
     svn::Revision rev(svn_opt_revision_unspecified);
     svn::InfoEntries e;
@@ -2937,7 +2937,8 @@ bool SvnActions::isLocalWorkingCopy(const KUrl &url, QString &_baseUri)
         }
         return true;
     }
-    _baseUri = e[0].url();
+    if (!e.isEmpty())
+        repoUrl = QUrl(e.at(0).url());  // CE TODO: url() will become a QUrl
     return true;
 }
 

@@ -238,8 +238,6 @@ bool MainTreeWidget::openUrl(const KUrl &url, bool noReinit)
     setNetworked(false);
     m_Data->m_remoteRevision = svn::Revision::HEAD;
 
-    QString _dummy;
-
     if (!QString::compare("svn+file", url.protocol())) {
         setBaseUri("file://" + url.path());
     } else {
@@ -257,6 +255,7 @@ bool MainTreeWidget::openUrl(const KUrl &url, bool noReinit)
             } else {
                 setBaseUri(url.path());
             }
+            QUrl _dummy;
             if (m_Data->m_Model->svnWrapper()->isLocalWorkingCopy(baseUri(), _dummy)) {
                 setWorkingCopy(true);
             } else {

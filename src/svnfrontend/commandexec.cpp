@@ -64,7 +64,7 @@ public:
     QTextStream Stdout, Stderr;
     DummyDisplay *disp;
     QMap<int, svn::Revision> extraRevisions;
-    QMap<int, QString> baseUrls;
+    QMap<int, QUrl> repoUrls;
 };
 
 pCPart::pCPart()
@@ -224,7 +224,6 @@ int CommandExec::exec(const QCommandLineParser *parser)
 
     QString tmp;
     QString mainProto;
-    QString _baseurl;
     for (int j = 2; j < m_pCPart->args.count(); ++j) {
         // urls from command line -> fromUserInput, TODO: does not understand relative paths (e.g. '.')
         QUrl tmpurl = QUrl::fromUserInput(m_pCPart->args.at(j));
@@ -237,9 +236,10 @@ int CommandExec::exec(const QCommandLineParser *parser)
         m_pCPart->extraRevisions[j - 2] = svn::Revision::HEAD;
 
         if (tmpurl.isLocalFile() && (j == 2 || !dont_check_second) && !dont_check_all) {
-            if (m_pCPart->m_SvnWrapper->isLocalWorkingCopy(QUrl::fromLocalFile(tmpurl.path()), _baseurl)) {
+            QUrl repoUrl;
+            if (m_pCPart->m_SvnWrapper->isLocalWorkingCopy(QUrl::fromLocalFile(tmpurl.path()), repoUrl)) {
                 tmp = tmpurl.path();
-                m_pCPart->baseUrls[j - 2] = _baseurl;
+                m_pCPart->repoUrls[j - 2] = repoUrl;
                 m_pCPart->extraRevisions[j - 2] = svn::Revision::WORKING;
                 if (j == 2) {
                     mainProto.clear();
@@ -634,12 +634,12 @@ void CommandExec::slotCmd_switch()
         clientException(i18n("May only switch one URL at time"));
         return;
     }
-    if (m_pCPart->baseUrls.find(0) == m_pCPart->baseUrls.end()) {
+    if (m_pCPart->repoUrls.find(0) == m_pCPart->repoUrls.end()) {
         clientException(i18n("Switch only on working copies"));
         return;
     }
-    const QUrl base(QUrl::fromUserInput(m_pCPart->baseUrls[0]));
-    m_pCPart->m_SvnWrapper->makeSwitch(m_pCPart->urls.at(0), base);
+    m_pCPart->m_SvnWrapper->makeSwitch(m_pCPart->urls.at(0),
+                                       m_pCPart->repoUrls.value(0));
 }
 
 void CommandExec::slotCmd_lock()

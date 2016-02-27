@@ -50,7 +50,7 @@ public:
     virtual const QString &fullName()const;
     virtual const QString &shortName()const;
     virtual const QUrl &Url()const;
-    virtual const KUrl &kdeName(const svn::Revision &);
+    virtual const QUrl &kdeName(const svn::Revision &);
     virtual KMimeType::Ptr mimeType();
     virtual const QDateTime &fullDate()const;
     virtual bool isDir()const;

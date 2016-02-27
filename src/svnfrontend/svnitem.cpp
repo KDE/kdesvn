@@ -47,14 +47,14 @@ public:
     explicit SvnItem_p(const svn::StatusPtr &);
 
     KFileItem &createItem(const svn::Revision &peg);
-    KUrl &kdeName(const svn::Revision &);
+    QUrl &kdeName(const svn::Revision &);
     KMimeType::Ptr mimeType(bool dir);
 
     svn::StatusPtr m_Stat;
     void init();
     QUrl m_url;
     QString m_full, m_short;
-    KUrl m_kdename;
+    QUrl m_kdename;
     QDateTime m_fullDate;
     QString m_infoText;
     KFileItem m_fitem;
@@ -115,21 +115,22 @@ KMimeType::Ptr SvnItem_p::mimeType(bool dir)
     return mptr;
 }
 
-KUrl &SvnItem_p::kdeName(const svn::Revision &r)
+QUrl &SvnItem_p::kdeName(const svn::Revision &r)
 {
     isWc = !svn::Url::isValid(m_Stat->path());
     if (!(r == lRev) || m_kdename.isEmpty()) {
         lRev = r;
         if (!isWc) {
             m_kdename = m_Stat->entry().url();
-            QString proto = helpers::KTranslateUrl::makeKdeUrl(m_kdename.protocol());
-            m_kdename.setProtocol(proto);
+            QString proto = helpers::KTranslateUrl::makeKdeUrl(m_kdename.scheme());
+            m_kdename.setScheme(proto);
             QString revstr = lRev.toString();
-            if (revstr.length() > 0) {
+            if (!revstr.isEmpty()) {
                 m_kdename.setQuery("?rev=" + revstr);
             }
         } else {
-            m_kdename = KUrl::fromPathOrUrl(m_Stat->path());
+            // Working copy path() is local file
+            m_kdename = QUrl::fromLocalFile(m_Stat->path());
         }
     }
     return m_kdename;
@@ -616,7 +617,7 @@ KFileItem SvnItem::fileItem()
     return p_Item->createItem(correctPeg());
 }
 
-const KUrl &SvnItem::kdeName(const svn::Revision &r)
+const QUrl &SvnItem::kdeName(const svn::Revision &r)
 {
     return p_Item->kdeName(r);
 }

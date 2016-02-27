@@ -348,8 +348,8 @@ QPixmap SvnItem::getPixmap(int size, bool overlay)
                 p = KIconLoader::global()->loadIcon("unknown", KIconLoader::Desktop, size);
             }
         } else {
-            KUrl uri;
-            uri.setPath(fullName());
+            // local access
+            const QUrl uri(QUrl::fromLocalFile(fullName()));
             p = KIconLoader::global()->loadMimeTypeIcon(KMimeType::iconNameForUrl(uri), KIconLoader::Desktop, size);
             p = getPixmap(p, size, overlay);
         }

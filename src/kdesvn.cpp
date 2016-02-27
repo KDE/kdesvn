@@ -292,7 +292,7 @@ void kdesvn::saveProperties(KConfigGroup &config)
         return;
     }
     if (!m_part->url().isEmpty()) {
-        config.writeEntry("lastURL", m_part->url().toDisplayString());
+        config.writeEntry("lastURL", m_part->url().toString());
     }
 }
 
@@ -323,7 +323,7 @@ void kdesvn::fileNew()
 
 void kdesvn::fileOpen()
 {
-    KUrl url = UrlDlg::getUrl(this);
+    QUrl url = UrlDlg::getUrl(this);
     if (!url.isEmpty()) {
         load(url, true);
     }

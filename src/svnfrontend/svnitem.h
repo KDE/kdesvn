@@ -33,7 +33,6 @@ class SvnItemModelNode;
 class SvnItem_p;
 class SvnActions;
 class KFileItem;
-class KUrl;
 
 namespace svn
 {

@@ -1667,7 +1667,7 @@ void MainTreeWidget::makeDelete(const SvnItemList &lst)
     SvnItemList::const_iterator liter;
     for (liter = lst.begin(); liter != lst.end(); ++liter) {
         if (!(*liter)->isRealVersioned()) {
-            KUrl _uri; _uri.setPath((*liter)->fullName());
+            QUrl _uri(QUrl::fromLocalFile((*liter)->fullName()));
             kioList.append(_uri);
         } else {
             items.push_back((*liter)->fullName());
@@ -1717,12 +1717,10 @@ void MainTreeWidget::internalDrop(const QList<QUrl> &_lst, Qt::DropAction action
         nProto = svn::Url::transformProtokoll(lst[0].scheme());
     }
     QList<QUrl>::iterator it = lst.begin();
-    QStringList l;
     for (; it != lst.end(); ++it) {
         (*it).setQuery(QUrlQuery());
         if (!nProto.isEmpty())
             (*it).setScheme(nProto);
-        qDebug() << "Dropped: " << (*it) << endl;
     }
 
     if (index.isValid()) {

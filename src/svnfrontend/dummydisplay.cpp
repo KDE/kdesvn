@@ -45,7 +45,7 @@ SvnItemList DummyDisplay::SelectionList()const
     return SvnItemList();
 }
 
-bool DummyDisplay::openUrl(const KUrl &, bool)
+bool DummyDisplay::openUrl(const QUrl &, bool)
 {
     return false;
 }

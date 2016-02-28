@@ -34,7 +34,7 @@ public:
     virtual SvnItem *Selected()const;
     virtual SvnItemList SelectionList()const;
     virtual svn::Revision baseRevision()const;
-    virtual bool openUrl(const KUrl &url, bool noReinit = false);
+    virtual bool openUrl(const QUrl &url, bool noReinit = false);
     virtual SvnItem *SelectedOrMain()const;
 };
 

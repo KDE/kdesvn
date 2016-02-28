@@ -157,7 +157,7 @@ MainTreeWidget::MainTreeWidget(KActionCollection *aCollection, QWidget *parent, 
     connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigRefreshAll()), this, SLOT(refreshCurrentTree()));
     connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigRefreshCurrent(SvnItem*)), this, SLOT(refreshCurrent(SvnItem*)));
     connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigRefreshIcons()), this, SLOT(slotRescanIcons()));
-    connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigGotourl(QString)), this, SLOT(_openUrl(QString)));
+    connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigGotourl(QUrl)), this, SLOT(_openUrl(QUrl)));
     connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigCacheStatus(qlonglong,qlonglong)), this, SIGNAL(sigCacheStatus(qlonglong,qlonglong)));
     connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigThreadsChanged()), this, SLOT(enableActions()));
     connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigCacheDataChanged()), this, SLOT(slotCacheDataChanged()));
@@ -189,7 +189,7 @@ MainTreeWidget::~MainTreeWidget()
     delete m_Data;
 }
 
-void MainTreeWidget::_openUrl(const QString &url)
+void MainTreeWidget::_openUrl(const QUrl &url)
 {
     openUrl(url, true);
 }
@@ -204,7 +204,7 @@ void MainTreeWidget::resizeAllColumns()
     m_DirTreeView->resizeColumnToContents(SvnItemModel::Name);
 }
 
-bool MainTreeWidget::openUrl(const KUrl &url, bool noReinit)
+bool MainTreeWidget::openUrl(const QUrl &url, bool noReinit)
 {
 
 #ifdef DEBUG_TIMER
@@ -220,32 +220,30 @@ bool MainTreeWidget::openUrl(const KUrl &url, bool noReinit)
     if (!noReinit) {
         m_Data->m_Model->svnWrapper()->reInitClient();
     }
-    QString query = url.query();
 
-    KUrl _url = url;
-    QString proto = svn::Url::transformProtokoll(url.protocol());
-    _url.cleanPath();
-    _url.setProtocol(proto);
-    proto = _url.url(KUrl::RemoveTrailingSlash);
+    QUrl _url(url);
+    const QString proto = svn::Url::transformProtokoll(url.scheme());
+    _url = _url.adjusted(QUrl::NormalizePathSegments);
+    _url.setScheme(proto);
 
-    QStringList s = proto.split('?');
+    const QString baseUriString = _url.url(QUrl::StripTrailingSlash);
+    const QStringList s = baseUriString.split('?');
     if (s.size() > 1) {
         setBaseUri(s[0]);
     } else {
-        setBaseUri(proto);
+        setBaseUri(baseUriString);
     }
     setWorkingCopy(false);
     setNetworked(false);
     m_Data->m_remoteRevision = svn::Revision::HEAD;
 
-    if (QLatin1String("svn+file") == url.protocol()) {
-        setBaseUri(url.path(KUrl::RemoveTrailingSlash));
+    if (QLatin1String("svn+file") == url.scheme()) {
+        setBaseUri(url.path());
     } else {
         if (url.isLocalFile()) {
-            QString s = url.path(KUrl::RemoveTrailingSlash);
-            QFileInfo fi(s);
+            QFileInfo fi(url.path());
             if (fi.exists() && fi.isSymLink()) {
-                QString sl = fi.readLink();
+                const QString sl = fi.readLink();
                 if (sl.startsWith(QLatin1Char('/'))) {
                     setBaseUri(sl);
                 } else {
@@ -256,13 +254,17 @@ bool MainTreeWidget::openUrl(const KUrl &url, bool noReinit)
                 setBaseUri(url.path());
             }
             QUrl _dummy;
+            qCDebug(KDESVN_LOG) << "check if " << baseUri() << " is a local wc ...";
             if (m_Data->m_Model->svnWrapper()->isLocalWorkingCopy(baseUri(), _dummy)) {
                 setWorkingCopy(true);
+                // make sure a valid path is stored as baseuri
+                setBaseUri(url.toLocalFile());
+                qCDebug(KDESVN_LOG) << "... yes -> " << baseUri();
             } else {
-                // yes! KUrl sometimes makes a correct localfile url (file:///)
-                // to a simple file:/ - that breakes subversion lib. so we make sure
-                // that we have a correct url
-                setBaseUri("file://" + baseUri());
+                setWorkingCopy(false);
+                // make sure a valid url is stored as baseuri
+                setBaseUri(url.toString());
+                qCDebug(KDESVN_LOG) << "... no -> " << baseUri();
             }
         } else {
             setNetworked(true);
@@ -277,10 +279,11 @@ bool MainTreeWidget::openUrl(const KUrl &url, bool noReinit)
             }
         }
     }
-    if (query.length() > 1) {
-        QMap<QString, QString> q = url.queryItems();
-        if (q.find("rev") != q.end()) {
-            QString v = q["rev"];
+    const QList<QPair<QString, QString>> q = url.queryItems();
+    typedef QPair<QString, QString> queryPair;
+    Q_FOREACH(const queryPair &p, q) {
+        if (p.first == QLatin1String("rev")) {
+            const QString v = p.second;
             svn::Revision tmp;
             m_Data->m_Model->svnWrapper()->svnclient()->url2Revision(v, m_Data->m_remoteRevision, tmp);
             if (m_Data->m_remoteRevision == svn::Revision::UNDEFINED) {
@@ -288,8 +291,8 @@ bool MainTreeWidget::openUrl(const KUrl &url, bool noReinit)
             }
         }
     }
-    if (url.protocol() == "svn+ssh" ||
-            url.protocol() == "ksvn+ssh") {
+    if (url.scheme() == QLatin1String("svn+ssh") ||
+            url.scheme() == QLatin1String("ksvn+ssh")) {
         SshAgent ssh;
         ssh.addSshIdentities();
     }
@@ -1754,7 +1757,7 @@ void MainTreeWidget::slotUrlDropped(const QList<QUrl> &_lst, Qt::DropAction acti
         target = baseUriAsUrl();
     }
 
-    if (baseUri().length() == 0) {
+    if (baseUri().isEmpty()) {
         openUrl(_lst[0]);
         return;
     }

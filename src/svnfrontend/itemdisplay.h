@@ -24,7 +24,6 @@
 #include "svnqt/svnqttypes.h"
 #include "frontendtypes.h"
 #include <QString>
-#include <kurl.h>
 
 class QWidget;
 
@@ -42,7 +41,7 @@ public:
     virtual SvnItem *Selected()const = 0;
     virtual SvnItemList SelectionList()const = 0;
     virtual svn::Revision baseRevision()const = 0;
-    virtual bool openUrl(const KUrl &url, bool noReinit = false) = 0;
+    virtual bool openUrl(const QUrl &url, bool noReinit = false) = 0;
     virtual SvnItem *SelectedOrMain()const = 0;
 
     bool isWorkingCopy()const;

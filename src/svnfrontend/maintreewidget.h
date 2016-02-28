@@ -47,7 +47,7 @@ public:
     virtual SvnItem *Selected()const;
     virtual SvnItemList SelectionList()const;
     virtual svn::Revision baseRevision()const;
-    virtual bool openUrl(const KUrl &url, bool noReinit = false);
+    virtual bool openUrl(const QUrl &url, bool noReinit = false);
     virtual SvnItem *SelectedOrMain()const;
 
     SvnItem *DirSelected()const;
@@ -146,7 +146,7 @@ protected Q_SLOTS:
 
     void slotDirSelectionChanged(const QItemSelection &, const QItemSelection &);
 
-    void _openUrl(const QString &);
+    void _openUrl(const QUrl &);
     void enableActions();
     void slotUnfoldTree();
     void slotFoldTree();

@@ -1759,10 +1759,11 @@ bool SvnActions::makeCheckout(const QString &rUrl, const QString &tPath, const s
         return false;
     }
     if (openIt) {
+        const QUrl url(QUrl::fromLocalFile(tPath));
         if (!_exp) {
-            emit sigGotourl(tPath);
+            emit sigGotourl(url);
         } else {
-            QDesktopServices::openUrl(QUrl::fromLocalFile(tPath));
+            QDesktopServices::openUrl(url);
         }
     }
     EMIT_FINISHED;

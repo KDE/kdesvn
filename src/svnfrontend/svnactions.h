@@ -235,7 +235,7 @@ Q_SIGNALS:
     void sigRefreshCurrent(SvnItem *);
     void sigRefreshIcons();
     void sigExtraLogMsg(const QString &);
-    void sigGotourl(const QString &);
+    void sigGotourl(const QUrl &);
     void sigCacheStatus(qlonglong, qlonglong);
     void sigCacheDataChanged();
     void sigItemsReverted(const QStringList &);

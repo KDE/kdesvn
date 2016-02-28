@@ -21,6 +21,7 @@
 #include "kdesvn.h"
 #include "urldlg.h"
 #include "kdesvn_part.h"
+#include "helpers/ktranslateurl.h"
 
 #include <QApplication>
 #include <QDir>
@@ -34,7 +35,7 @@
 
 #include <kio/netaccess.h>
 #include <kconfig.h>
-#include <kurl.h>
+#include <kconfiggroup.h>
 #include <khelpmenu.h>
 #include <kmenubar.h>
 #include <kmenu.h>
@@ -302,11 +303,13 @@ void kdesvn::readProperties(const KConfigGroup &config)
     // config file.  this function is automatically called whenever
     // the app is being restored.  read in here whatever you wrote
     // in 'saveProperties'
+    if (!m_part) {
+        return;
+    }
 
-    QString url = config.readPathEntry("lastURL", QString());
-
-    if (!url.isEmpty() && m_part) {
-        m_part->openUrl(KUrl(url));
+    const QString url = config.readPathEntry("lastURL", QString());
+    if (!url.isEmpty()) {
+        m_part->openUrl(helpers::KTranslateUrl::string2Uri(url));
     }
 }
 
@@ -440,10 +443,9 @@ void kdesvn::checkReload()
         return;
     }
 
-    QString url = cs.readPathEntry("lastURL", QString());
-
+    const QString url = cs.readPathEntry("lastURL", QString());
     if (!url.isEmpty() && m_part) {
-        load(KUrl(url), false);
+        load(helpers::KTranslateUrl::string2Uri(url), false);
     }
 }
 

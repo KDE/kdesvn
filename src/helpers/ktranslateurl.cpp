@@ -20,6 +20,7 @@
 #include "ktranslateurl.h"
 
 #include <kurl.h>
+#include "helpers/kdesvn_debug.h"
 
 namespace helpers
 {
@@ -42,15 +43,10 @@ QString makeKdeUrl(const QString &_proto)
 QUrl string2Uri(const QString &what)
 {
     KUrl uri(what);
-    if (uri.scheme() == QLatin1String("file")) {
-        if (what.startsWith(QLatin1String("file:"))) {
-            uri.setScheme(QLatin1String("ksvn+file"));
-        } else {
-            uri.setScheme(QString());
-        }
-    } else {
+    if (!uri.isLocalFile()) {
         uri.setScheme(makeKdeUrl(uri.scheme()));
     }
+    qCDebug(KDESVN_LOG) << "string2Uri(" << what << ") -> " << uri.toString() << ", local: " << uri.isLocalFile();
     return uri;
 }
 

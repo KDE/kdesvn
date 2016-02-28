@@ -1735,7 +1735,8 @@ bool SvnActions::makeCheckout(const QString &rUrl, const QString &tPath, const s
     while (fUrl.endsWith('/')) {
         fUrl.truncate(fUrl.length() - 1);
     }
-    svn::Path p(KUrl(tPath).path());
+    // can only be a local target dir
+    svn::Path p(tPath);
     svn::Revision peg = _peg;
     if (r != svn::Revision::BASE && r != svn::Revision::WORKING && _peg == svn::Revision::UNDEFINED) {
         peg = r;
@@ -2083,12 +2084,6 @@ void SvnActions::slotMergeExternal(const QString &_src1, const QString &_src2, c
         return;
     }
 
-    KUrl url(target);
-    if (!url.isLocalFile()) {
-        emit clientException(i18n("Target for merge must be local."));
-        return;
-    }
-
     QFileInfo f1(src1);
     QFileInfo f2(src2);
     bool isDir = true;
@@ -2110,7 +2105,6 @@ void SvnActions::slotMergeExternal(const QString &_src1, const QString &_src2, c
     }
 
     QFileInfo ti(target);
-
     if (ti.isDir() != isDir) {
         emit clientException(i18n("Target for merge must same type like sources."));
         return;

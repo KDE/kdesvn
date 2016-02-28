@@ -27,8 +27,6 @@
 #include "simple_logcb.h"
 #include "frontendtypes.h"
 
-#include <kurl.h>
-
 #include <QObject>
 #include <QScopedPointer>
 #include <QStringList>

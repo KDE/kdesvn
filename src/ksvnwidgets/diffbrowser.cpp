@@ -22,7 +22,6 @@
 #include "diffbrowserdata.h"
 #include "settings/kdesvnsettings.h"
 
-#include <KGlobalSettings>
 #include <KFileDialog>
 #include <KMessageBox>
 #include <KLocale>
@@ -41,7 +40,7 @@ DiffBrowser::DiffBrowser(QWidget *parent)
 {
 //     setTextFormat(Qt::PlainText);
     setLineWrapMode(QTextEdit::NoWrap);
-    setFont(KGlobalSettings::fixedFont());
+    setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
     m_Data = new DiffBrowserData;
 
     setLineWrapMode(QTextEdit::NoWrap);

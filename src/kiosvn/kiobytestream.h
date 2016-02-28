@@ -23,9 +23,8 @@
 #include "svnqt/svnstream.h"
 
 #include <kio/global.h>
-#include <kmimetype.h>
-#include <qbuffer.h>
-#include <qdatetime.h>
+#include <QMimeType>
+#include <QTime>
 
 class StreamWrittenCb
 {
@@ -34,7 +33,7 @@ public:
     virtual ~StreamWrittenCb() {}
     virtual void streamWritten(const KIO::filesize_t current) = 0;
     virtual void streamPushData(QByteArray) = 0;
-    virtual void streamSendMime(KMimeType::Ptr) = 0;
+    virtual void streamSendMime(const QMimeType &mt) = 0;
 };
 
 /**

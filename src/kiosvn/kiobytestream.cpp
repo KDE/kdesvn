@@ -19,6 +19,8 @@
  ***************************************************************************/
 #include "kiobytestream.h"
 
+#include <QMimeDatabase>
+
 KioByteStream::KioByteStream(StreamWrittenCb *aCb, const QString &filename)
     : svn::stream::SvnStream(false, true, 0L),
       m_Cb(aCb), m_Written(0),
@@ -43,7 +45,8 @@ long KioByteStream::write(const char *data, const unsigned long max)
         if (!m_mimeSend) {
             m_mimeSend = true;
             array = QByteArray::fromRawData(data, max);
-            KMimeType::Ptr result = KMimeType::findByNameAndContent(m_Filename, array);
+            QMimeDatabase db;
+            QMimeType result = db.mimeTypeForFileNameAndData(m_Filename, array);
             m_Cb->streamSendMime(result);
             array.clear();
         }

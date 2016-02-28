@@ -1009,10 +1009,10 @@ void kio_svnProtocol::streamWritten(const KIO::filesize_t current)
     processedSize(current);
 }
 
-void kio_svnProtocol::streamSendMime(KMimeType::Ptr mt)
+void kio_svnProtocol::streamSendMime(const QMimeType &mt)
 {
-    if (mt) {
-        mimeType(mt->name());
+    if (mt.isValid()) {
+        mimeType(mt.name());
     }
 }
 

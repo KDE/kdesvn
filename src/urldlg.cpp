@@ -36,28 +36,16 @@ UrlDlg::UrlDlg(QWidget *parent)
     m_plainPage = new QWidget(this);
     setMainWidget(m_plainPage);
 
-    init_dlg();
-}
-
-UrlDlg::~UrlDlg()
-{
-}
-
-/*!
-    \fn UrlDlg::init_dlg
- */
-void UrlDlg::init_dlg()
-{
-    QVBoxLayout *topLayout = new QVBoxLayout(m_plainPage);   // /* plainPage() */, 0, spacingHint());
-    QLabel *label = new QLabel(i18n("Open repository or working copy") , m_plainPage /* plainPage() */);
+    QVBoxLayout *topLayout = new QVBoxLayout(m_plainPage);
+    QLabel *label = new QLabel(i18n("Open repository or working copy") , m_plainPage);
     topLayout->addWidget(label);
 
     KHistoryComboBox *combo = new KHistoryComboBox(this);
     combo->setDuplicatesEnabled(false);
-    KConfigGroup kc = KGlobal::config()->group("Open-repository settings");
-    int max = kc.readEntry(QString::fromLatin1("Maximum history"), 15);
+    KConfigGroup kc = KSharedConfig::openConfig()->group("Open-repository settings");
+    int max = kc.readEntry(QLatin1String("Maximum history"), 15);
     combo->setMaxCount(max);
-    QStringList list = kc.readEntry(QString::fromLatin1("History"), QStringList());
+    QStringList list = kc.readEntry(QLatin1String("History"), QStringList());
     combo->setHistoryItems(list);
     combo->setMinimumWidth(100);
     combo->adjustSize();
@@ -65,16 +53,16 @@ void UrlDlg::init_dlg()
         combo->resize(300, combo->height());
     }
 
-    urlRequester_ = new KUrlRequester(combo, m_plainPage);
-    topLayout->addWidget(urlRequester_);
-    urlRequester_->setFocus();
-    urlRequester_->setMode(KFile::ExistingOnly | KFile::Directory);
-    connect(urlRequester_->comboBox(), SIGNAL(currentTextChanged(QString)), SLOT(slotTextChanged(QString)));
+    m_urlRequester = new KUrlRequester(combo, m_plainPage);
+    topLayout->addWidget(m_urlRequester);
+    m_urlRequester->setFocus();
+    m_urlRequester->setMode(KFile::ExistingOnly | KFile::Directory);
+    connect(m_urlRequester->comboBox(), SIGNAL(currentTextChanged(QString)), SLOT(slotTextChanged(QString)));
     enableButtonOk(false);
     enableButton(KDialog::User1, false);
     setButtonGuiItem(KDialog::User1, KGuiItem(i18n("Clear"), QIcon::fromTheme("clear")));
-    connect(this, SIGNAL(user1Clicked()), this, SLOT(slotClear()));
-    urlRequester_->adjustSize();
+    connect(this, SIGNAL(user1Clicked()), m_urlRequester, SLOT(clear()));
+    m_urlRequester->adjustSize();
     resize(QSize(400, sizeHint().height()));
 }
 
@@ -83,11 +71,11 @@ void UrlDlg::init_dlg()
  */
 void UrlDlg::accept()
 {
-    KHistoryComboBox *combo = static_cast<KHistoryComboBox *>(urlRequester_->comboBox());
+    KHistoryComboBox *combo = static_cast<KHistoryComboBox *>(m_urlRequester->comboBox());
     if (combo) {
-        combo->addToHistory(urlRequester_->url().url());
-        KConfigGroup kc = KGlobal::config()->group("Open-repository settings");
-        kc.writeEntry(QString::fromLatin1("History"), combo->historyItems());
+        combo->addToHistory(m_urlRequester->url().url());
+        KConfigGroup kc = KSharedConfig::openConfig()->group("Open-repository settings");
+        kc.writeEntry(QLatin1String("History"), combo->historyItems());
         kc.sync();
     }
     KDialog::accept();
@@ -104,25 +92,6 @@ void UrlDlg::slotTextChanged(const QString &text)
 }
 
 /*!
-    \fn UrlDlg::slotClear()
- */
-void UrlDlg::slotClear()
-{
-    urlRequester_->clear();
-}
-
-/*!
-    \fn UrlDlg::selectedUrl()
- */
-QUrl UrlDlg::selectedUrl() const
-{
-    if (result() == QDialog::Accepted) {
-        return urlRequester_->url();
-    }
-    return QUrl();
-}
-
-/*!
     \fn UrlDlg::getUrl(QWidget*parent)
  */
 QUrl UrlDlg::getUrl(QWidget *parent)
@@ -135,7 +104,7 @@ QUrl UrlDlg::getUrl(QWidget *parent)
         //
         // get rid of leading whitespace
         // that is %20 in encoded form
-        QString url = dlg->selectedUrl().toString();
+        QString url = dlg->m_urlRequester->url().toString();
 
         // decodes %20 to normal spaces
         // trims the whitespace from both ends

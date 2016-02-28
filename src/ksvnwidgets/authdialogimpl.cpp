@@ -22,18 +22,31 @@
 
 #include "settings/kdesvnsettings.h"
 
-#include <kpassworddialog.h>
-#include <klocale.h>
-#include <qcheckbox.h>
-#include <qlabel.h>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 AuthDialogImpl::AuthDialogImpl(const QString &realm, const QString &user, QWidget *parent)
-    : KDialog(parent)
+    : QDialog(parent)
+    , m_AuthWidget(new AuthDialogWidget(realm, user, parent))
 {
-    m_AuthWidget = new AuthDialogWidget(realm, user, parent);
-    setMainWidget(m_AuthWidget);
-    setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Help);
-    connect(this, SIGNAL(helpClicked()), m_AuthWidget, SLOT(slotHelp()));
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    setLayout(mainLayout);
+    mainLayout->addWidget(m_AuthWidget);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(buttonBox, SIGNAL(helpRequested()), this, SLOT(slotHelp()));
+    mainLayout->addWidget(buttonBox);
+}
+
+AuthDialogImpl::~AuthDialogImpl()
+{
+    delete m_AuthWidget;
 }
 
 const QString AuthDialogImpl::Username()const

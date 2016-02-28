@@ -21,16 +21,16 @@
 #define AUTHDIALOGIMPL_H
 
 #include <QString>
-#include <kdialog.h>
+#include <QDialog>
 
 class AuthDialogWidget;
 
-class AuthDialogImpl: public KDialog
+class AuthDialogImpl: public QDialog
 {
     Q_OBJECT
 public:
-    AuthDialogImpl(const QString &realm, const QString &user, QWidget *parent = 0);
-    virtual ~AuthDialogImpl() {}
+    AuthDialogImpl(const QString &realm, const QString &user, QWidget *parent = nullptr);
+    virtual ~AuthDialogImpl();
 
     const QString Username()const;
     const QString Password();

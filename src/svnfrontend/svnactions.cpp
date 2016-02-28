@@ -59,6 +59,7 @@
 #include "helpers/sub2qt.h"
 #include "helpers/stringhelper.h"
 #include "helpers/kdesvn_debug.h"
+#include "helpers/ktranslateurl.h"
 #include "fronthelpers/cursorstack.h"
 #include "cacheentry.h"
 
@@ -435,10 +436,11 @@ bool SvnActions::singleInfo(const QString &what, const svn::Revision &_rev, svn:
         peg = svn::Revision::UNDEFINED;
         cacheKey = url;
     } else {
-        KUrl _uri = what;
-        QString prot = svn::Url::transformProtokoll(_uri.protocol());
-        _uri.setProtocol(prot);
-        url = _uri.prettyUrl();
+        // valid url
+        QUrl _uri(what);
+        QString prot = svn::Url::transformProtokoll(_uri.scheme());
+        _uri.setScheme(prot);
+        url = _uri.toString();
         if (peg == svn::Revision::UNDEFINED) {
             peg = _rev;
         }
@@ -2913,18 +2915,19 @@ bool SvnActions::makeList(const QString &url, svn::DirEntries &dlist, const svn:
     return true;
 }
 
-/*!
-    \fn SvnActions::isLocalWorkingCopy(const KUrl&url)
- */
-bool SvnActions::isLocalWorkingCopy(const KUrl &url, QUrl &repoUrl)
+bool SvnActions::isLocalWorkingCopy(const QString &path, QUrl &repoUrl)
 {
-    if (url.isEmpty() || !url.isLocalFile()) {
+    if (path.isEmpty()) {
         return false;
     }
-    QString cleanpath = url.path();
-    while (cleanpath.endsWith('/')) {
-        cleanpath.truncate(cleanpath.length() - 1);
+    const QUrl url = helpers::KTranslateUrl::string2Uri(path);
+    if (!url.isLocalFile()) {
+        qCDebug(KDESVN_LOG) << "isLocalWorkingCopy no local file: " << path << " - " << url.toString();
+        return false;
     }
+
+    QString cleanpath = url.adjusted(QUrl::StripTrailingSlash|QUrl::NormalizePathSegments).path();
+    qCDebug(KDESVN_LOG) << "isLocalWorkingCopy for " << cleanpath;
     repoUrl.clear();
     svn::Revision peg(svn_opt_revision_unspecified);
     svn::Revision rev(svn_opt_revision_unspecified);

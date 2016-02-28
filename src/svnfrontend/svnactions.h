@@ -144,7 +144,7 @@ public:
 
     QString makeMkdir(const QString &);
     bool makeMkdir(const svn::Targets &which, const QString &logMessage);
-    bool isLocalWorkingCopy(const KUrl &url, QUrl &repoUrl);
+    bool isLocalWorkingCopy(const QString &path, QUrl &repoUrl);
     bool createUpdateCache(const QString &what);
     bool checkUpdateCache(const QString &path)const;
     bool isUpdated(const QString &path)const;

@@ -27,7 +27,7 @@
 #include <QDir>
 #include <QTimer>
 
-#include <kglobal.h>
+#include <ksharedconfig.h>
 #include <klocale.h>
 #include <kdeversion.h>
 #include <kstatusbar.h>
@@ -215,8 +215,7 @@ void kdesvn::load(const QUrl &url, bool addRescent)
             }
         }
         if (rac) {
-            KConfigGroup cg(KGlobal::config(), "recent_files");
-//             rac->saveEntries(KGlobal::config(),"recent_files");
+            KConfigGroup cg(KSharedConfig::openConfig(), "recent_files");
             rac->saveEntries(cg);
         }
     }
@@ -235,8 +234,7 @@ void kdesvn::setupActions()
     KRecentFilesAction *rac = KStandardAction::openRecent(this, SLOT(loadRescent(QUrl)), actionCollection());
     if (rac) {
         rac->setMaxItems(8);
-//         rac->loadEntries(KGlobal::config(),"recent_files");
-        KConfigGroup cg(KGlobal::config(), "recent_files");
+        KConfigGroup cg(KSharedConfig::openConfig(), "recent_files");
         rac->loadEntries(cg);
         rac->setText(i18n("Recent opened URLs"));
     }
@@ -252,7 +250,7 @@ void kdesvn::setupActions()
     toggletemp = new KToggleAction(i18n("Load last opened URL on start"), this);
     actionCollection()->addAction("toggle_load_last_url", toggletemp);
     toggletemp->setToolTip(i18n("Reload last opened URL if no one is given on command line"));
-    KConfigGroup cs(KGlobal::config(), "startup");
+    KConfigGroup cs(KSharedConfig::openConfig(), "startup");
 //     toggletemp->setChecked(cs.readBoolEntry("load_last_on_start",false));
     toggletemp->setChecked(cs.readEntry("load_last_on_start", false));
     connect(toggletemp, SIGNAL(toggled(bool)), this, SLOT(slotLoadLast(bool)));
@@ -389,7 +387,7 @@ void kdesvn::slotUrlOpened(bool how)
  */
 void kdesvn::optionsConfigureToolbars()
 {
-    KConfigGroup cg(KGlobal::config(), autoSaveGroup());
+    KConfigGroup cg(KSharedConfig::openConfig(), autoSaveGroup());
     saveMainWindowSettings(cg);
 
     // use the standard toolbar editor
@@ -404,7 +402,7 @@ void kdesvn::optionsConfigureToolbars()
  */
 void kdesvn::applyNewToolbarConfig()
 {
-    KConfigGroup cg(KGlobal::config(), autoSaveGroup());
+    KConfigGroup cg(KSharedConfig::openConfig(), autoSaveGroup());
     applyMainWindowSettings(cg);
 }
 
@@ -426,7 +424,7 @@ void kdesvn::closeEvent(QCloseEvent *ev)
 {
     emit sigSavestate();
     if (m_part) {
-        KConfigGroup cs(KGlobal::config(), "startup");
+        KConfigGroup cs(KSharedConfig::openConfig(), "startup");
         cs.writeEntry("lastURL", m_part->url().toDisplayString());
         cs.sync();
     }
@@ -438,7 +436,7 @@ void kdesvn::closeEvent(QCloseEvent *ev)
  */
 void kdesvn::checkReload()
 {
-    KConfigGroup cs(KGlobal::config(), "startup");
+    KConfigGroup cs(KSharedConfig::openConfig(), "startup");
     if (!cs.readEntry("load_last_on_start", false)) {
         return;
     }
@@ -454,7 +452,7 @@ void kdesvn::checkReload()
  */
 void kdesvn::slotLoadLast(bool how)
 {
-    KConfigGroup cs(KGlobal::config(), "startup");
+    KConfigGroup cs(KSharedConfig::openConfig(), "startup");
     cs.writeEntry("load_last_on_start", how);
     cs.sync();
 }

@@ -26,6 +26,7 @@
 
 #include <klocale.h>
 #include <QCommandLineParser>
+#include <QDir>
 
 static const char description[] =
     I18N_NOOP("A Subversion Client for KDE (standalone application)");
@@ -80,7 +81,8 @@ int main(int argc, char **argv)
                 for (; i < parser.positionalArguments().count(); i++) {
                     kdesvn *widget = new kdesvn;
                     widget->show();
-                    widget->load(QUrl::fromUserInput(parser.positionalArguments().at(i)), true);
+                    widget->load(QUrl::fromUserInput(parser.positionalArguments().at(i),
+                                                     QDir::currentPath()), true);
                 }
             }
         }

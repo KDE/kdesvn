@@ -37,6 +37,7 @@
 #include <KVBox>
 #include <ktextbrowser.h>
 
+#include <QDir>
 #include <QTextStream>
 #include <QCommandLineParser>
 
@@ -225,8 +226,8 @@ int CommandExec::exec(const QCommandLineParser *parser)
     QString tmp;
     QString mainProto;
     for (int j = 2; j < m_pCPart->args.count(); ++j) {
-        // urls from command line -> fromUserInput, TODO: does not understand relative paths (e.g. '.')
-        QUrl tmpurl = QUrl::fromUserInput(m_pCPart->args.at(j));
+        QUrl tmpurl = QUrl::fromUserInput(m_pCPart->args.at(j),
+                                          QDir::currentPath());
         tmpurl.setScheme(svn::Url::transformProtokoll(tmpurl.scheme()));
         if (tmpurl.scheme().indexOf(QLatin1String("ssh")) != -1) {
             SshAgent ag;
@@ -274,7 +275,7 @@ int CommandExec::exec(const QCommandLineParser *parser)
         if ((j > 2 && dont_check_second) || dont_check_all) {
             continue;
         }
-        const QList<QPair<QString, QString> > q = QUrl::fromUserInput(m_pCPart->args.at(j)).queryItems();
+        const QList<QPair<QString, QString> > q = tmpurl.queryItems();
         for(int i = 0; i < q.size(); ++i) {
             if (q.at(i).first == QLatin1String("rev")) {
                 svn::Revision re = q.at(i).second;
@@ -358,7 +359,8 @@ void CommandExec::slotCmd_log()
         m_pCPart->extraRevisions[0] = svn::Revision::UNDEFINED;
     }
     m_pCPart->m_SvnWrapper->makeLog(m_pCPart->start, m_pCPart->end,
-                                    m_pCPart->extraRevisions.value(0), m_pCPart->urls.at(0),
+                                    m_pCPart->extraRevisions.value(0),
+                                    m_pCPart->urls.at(0),
                                     Kdesvnsettings::log_follows_nodes(),
                                     list,
                                     limit);
@@ -378,22 +380,26 @@ void CommandExec::slotCmd_tree()
 
 void CommandExec::slotCmd_checkout()
 {
-    m_pCPart->m_SvnWrapper->CheckoutExport(QUrl::fromUserInput(m_pCPart->urls.at(0)), false);
+    m_pCPart->m_SvnWrapper->CheckoutExport(QUrl::fromUserInput(m_pCPart->urls.at(0),
+                                                               QDir::currentPath()), false);
 }
 
 void CommandExec::slotCmd_checkoutto()
 {
-    m_pCPart->m_SvnWrapper->CheckoutExport(QUrl::fromUserInput(m_pCPart->urls.at(0)), false, true);
+    m_pCPart->m_SvnWrapper->CheckoutExport(QUrl::fromUserInput(m_pCPart->urls.at(0),
+                                                               QDir::currentPath()), false, true);
 }
 
 void CommandExec::slotCmd_export()
 {
-    m_pCPart->m_SvnWrapper->CheckoutExport(QUrl::fromUserInput(m_pCPart->urls.at(0)), true);
+    m_pCPart->m_SvnWrapper->CheckoutExport(QUrl::fromUserInput(m_pCPart->urls.at(0),
+                                                               QDir::currentPath()), true);
 }
 
 void CommandExec::slotCmd_exportto()
 {
-    m_pCPart->m_SvnWrapper->CheckoutExport(QUrl::fromUserInput(m_pCPart->urls.at(0)), true, true);
+    m_pCPart->m_SvnWrapper->CheckoutExport(QUrl::fromUserInput(m_pCPart->urls.at(0),
+                                                               QDir::currentPath()), true, true);
 }
 
 void CommandExec::slotCmd_blame()

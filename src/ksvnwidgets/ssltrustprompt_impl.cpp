@@ -19,6 +19,7 @@
  ***************************************************************************/
 #include "ssltrustprompt_impl.h"
 #include "settings/kdesvnsettings.h"
+#include "helpers/windowgeometryhelper.h"
 
 #include <klocale.h>
 #include <kconfig.h>
@@ -78,13 +79,10 @@ bool SslTrustPrompt_impl::sslTrust(const QString &host, const QString &fingerpri
 
     ptr = new SslTrustPrompt_impl(host, Dialog1Layout);
     ptr->m_ContentText->setText(text);
-    static const char cfg_text[] = "trustssldlg";
-    KConfigGroup _kc(Kdesvnsettings::self()->config(), QLatin1String(cfg_text));
-    dlg->restoreDialogSize(_kc);
+    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "trustssldlg");
     int i = dlg->exec();
     if (dlg) {
-        dlg->saveDialogSize(_kc);
-        _kc.sync();
+        wgh.save();
         delete dlg;
     }
 

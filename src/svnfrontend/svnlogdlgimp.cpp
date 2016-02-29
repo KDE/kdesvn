@@ -23,6 +23,7 @@
 #include "svnfrontend/fronthelpers/revisionbuttonimpl.h"
 #include "svnfrontend/models/logitemmodel.h"
 #include "svnfrontend/models/logmodelhelper.h"
+#include "helpers/windowgeometryhelper.h"
 
 #include <kconfig.h>
 #include <kmenu.h>
@@ -88,8 +89,7 @@ SvnLogDlgImp::~SvnLogDlgImp()
 
 void SvnLogDlgImp::loadSize()
 {
-    KConfigGroup _k(Kdesvnsettings::self()->config(), groupName);
-    restoreDialogSize(_k);
+    WindowGeometryHelper(this, Kdesvnsettings::self()->config(), groupName);
 }
 
 void SvnLogDlgImp::dispLog(const svn::LogEntriesMapPtr &log, const QString &what, const QString &root, const svn::Revision &peg, const QString &pegUrl)
@@ -273,12 +273,8 @@ void SvnLogDlgImp::slotDispPrevious()
  */
 void SvnLogDlgImp::saveSize()
 {
-    int scnum = QApplication::desktop()->screenNumber(parentWidget());
-    QRect desk = QApplication::desktop()->screenGeometry(scnum);
-    KConfigGroup cs(Kdesvnsettings::self()->config(), groupName);
-    QSize sizeToSave = size();
-    cs.writeEntry(QString::fromLatin1("Width %1").arg(desk.width()), QString::number(sizeToSave.width()));
-    cs.writeEntry(QString::fromLatin1("Height %1").arg(desk.height()), QString::number(sizeToSave.height()));
+    WindowGeometryHelper wgh(this, Kdesvnsettings::self()->config(), groupName, false);
+    wgh.save();
 }
 
 void SvnLogDlgImp::slotRevisionSelected()

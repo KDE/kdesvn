@@ -22,6 +22,7 @@
 #include "models/commitmodel.h"
 #include "settings/kdesvnsettings.h"
 #include "depthselector.h"
+#include "helpers/windowgeometryhelper.h"
 
 #include <kdialog.h>
 #include <klocale.h>
@@ -278,8 +279,7 @@ QString Commitmsg_impl::getLogmessage(bool *ok, svn::Depth *rec, bool *keep_lock
         ptr->m_keepLocksButton->hide();
     }
     ptr->initHistory();
-    KConfigGroup _k(Kdesvnsettings::self()->config(), groupName);
-    dlg->restoreDialogSize(_k);
+    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), groupName);
     if (dlg->exec() != QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
@@ -292,7 +292,7 @@ QString Commitmsg_impl::getLogmessage(bool *ok, svn::Depth *rec, bool *keep_lock
     }
     if (dlg) {
         ptr->saveHistory(!_ok);
-        dlg->saveDialogSize(_k);
+        wgh.save();
         delete dlg;
     }
 
@@ -332,8 +332,7 @@ QString Commitmsg_impl::getLogmessage(const svn::CommitItemList &items, bool *ok
     }
 
     ptr->initHistory();
-    KConfigGroup _k(Kdesvnsettings::self()->config(), groupName);
-    dlg->restoreDialogSize(_k);
+    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), groupName);
     if (dlg->exec() != QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
@@ -346,7 +345,7 @@ QString Commitmsg_impl::getLogmessage(const svn::CommitItemList &items, bool *ok
     }
     if (dlg) {
         ptr->saveHistory(!_ok);
-        dlg->saveDialogSize(_k);
+        wgh.save();
         delete dlg;
     }
 
@@ -394,8 +393,7 @@ QString Commitmsg_impl::getLogmessage(const CommitActionEntries &_on,
         connect(callback, SIGNAL(sigItemsReverted(QStringList)),
                 ptr, SLOT(slotItemReverted(QStringList)));
     }
-    KConfigGroup _k(Kdesvnsettings::self()->config(), groupName);
-    dlg->restoreDialogSize(_k);
+    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), groupName);
     if (dlg->exec() != QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
@@ -407,7 +405,7 @@ QString Commitmsg_impl::getLogmessage(const CommitActionEntries &_on,
     }
     if (dlg) {
         ptr->saveHistory(!_ok);
-        dlg->saveDialogSize(_k);
+        wgh.save();
     }
     if (ok) {
         *ok = _ok;

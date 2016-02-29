@@ -27,6 +27,7 @@
 #include "helpers/sub2qt.h"
 #include "helpers/ktranslateurl.h"
 #include "helpers/sshagent.h"
+#include "helpers/windowgeometryhelper.h"
 #include "svnfrontend/fronthelpers/rangeinput_impl.h"
 #include "svnfrontend/copymoveview_impl.h"
 
@@ -322,11 +323,10 @@ int CommandExec::exec(const QCommandLineParser *parser)
         dlg->setMainWidget(Dialog1Layout);
         KTextBrowser *ptr = new KTextBrowser(Dialog1Layout);
         ptr->setText(m_lastMessages);
-        KConfigGroup _k(Kdesvnsettings::self()->config(), "kdesvn_cmd_log");
-        dlg->restoreDialogSize(_k);
+        WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "kdesvn_cmd_log");
         dlg->exec();
         if (dlg) {
-            dlg->saveDialogSize(_k);
+            wgh.save();
             delete dlg;
         }
     }

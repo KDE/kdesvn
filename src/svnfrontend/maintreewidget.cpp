@@ -32,6 +32,7 @@
 #include "importdir_logmsg.h"
 #include "settings/kdesvnsettings.h"
 #include "helpers/sshagent.h"
+#include "helpers/windowgeometryhelper.h"
 #include "svnqt/url.h"
 #include "svnqt/svnqttypes.h"
 #include "fronthelpers/createdlg.h"
@@ -2040,8 +2041,7 @@ void MainTreeWidget::slotRelocate()
         ptr->disableExternals(true);
 #endif
         bool done = false;
-        KConfigGroup _k(Kdesvnsettings::self()->config(), "relocate_dlg");
-        dlg->restoreDialogSize(_k);
+        WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "relocate_dlg");
         if (dlg->exec() == QDialog::Accepted) {
             if (!ptr->reposURL().isValid()) {
                 KMessageBox::error(QApplication::activeModalWidget(), tr("Invalid url given!"),
@@ -2052,7 +2052,7 @@ void MainTreeWidget::slotRelocate()
             done = m_Data->m_Model->svnWrapper()->makeRelocate(fromUrl, ptr->reposURL(), path, ptr->overwrite(), ptr->ignoreExternals());
         }
         if (dlg) {
-            dlg->saveDialogSize(_k);
+            wgh.save();
             delete dlg;
         }
         if (!done) {

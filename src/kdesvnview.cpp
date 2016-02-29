@@ -31,6 +31,7 @@
 #include "svnqt/repository.h"
 #include "svnqt/version_check.h"
 #include "svnqt/svnqttypes.h"
+#include "helpers/windowgeometryhelper.h"
 
 #include <QPainter>
 #include <QLayout>
@@ -231,13 +232,12 @@ void kdesvnView::slotCreateRepo()
     dlg->setMainWidget(Dialog1Layout);
     //dlg->makeVBoxMainWidget();
     Createrepo_impl *ptr = new Createrepo_impl(Dialog1Layout);
-    KConfigGroup _kc(Kdesvnsettings::self()->config(), "create_repo_size");
-    dlg->restoreDialogSize(_kc);
+    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "create_repo_size");
     if (dlg->exec() != QDialog::Accepted) {
         delete dlg;
         return;
     }
-    dlg->saveDialogSize(_kc, KConfigGroup::Normal);
+    wgh.save();
     svn::repository::Repository *_rep = new svn::repository::Repository(this);
     bool ok = true;
     bool createdirs;
@@ -271,13 +271,12 @@ void kdesvnView::slotHotcopy()
     QWidget *Dialog1Layout = new KVBox(dlg);
     dlg->setMainWidget(Dialog1Layout);
     HotcopyDlg_impl *ptr = new HotcopyDlg_impl(Dialog1Layout);
-    KConfigGroup _kc(Kdesvnsettings::self()->config(), "hotcopy_repo_size");
-    dlg->restoreDialogSize(_kc);
+    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "hotcopy_repo_size");
     if (dlg->exec() != QDialog::Accepted) {
         delete dlg;
         return;
     }
-    dlg->saveDialogSize(_kc, KConfigGroup::Normal);
+    wgh.save();
     bool cleanlogs = ptr->cleanLogs();
     QString src = ptr->srcPath();
     QString dest = ptr->destPath();
@@ -302,15 +301,13 @@ void kdesvnView::slotLoaddump()
     dlg->setMainWidget(Dialog1Layout);
 
     LoadDmpDlg_impl *ptr = new LoadDmpDlg_impl(Dialog1Layout);
-
-    KConfigGroup _kc(Kdesvnsettings::self()->config(), "loaddump_repo_size");
-    dlg->restoreDialogSize(_kc);
+    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "loaddump_repo_size");
     if (dlg->exec() != QDialog::Accepted)
     {
         delete dlg;
         return;
     }
-    dlg->saveDialogSize(_kc, KConfigGroup::Normal);
+    wgh.save();
     svn::repository::Repository _rep(this);
     m_ReposCancel = false;
 
@@ -373,13 +370,12 @@ void kdesvnView::slotDumpRepo()
     dlg->setMainWidget(Dialog1Layout);
 
     DumpRepo_impl *ptr = new DumpRepo_impl(Dialog1Layout);
-    KConfigGroup _kc(Kdesvnsettings::self()->config(), "dump_repo_size");
-    dlg->restoreDialogSize(_kc);
+    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "dump_repo_size");
     if (dlg->exec() != QDialog::Accepted) {
         delete dlg;
         return;
     }
-    dlg->saveDialogSize(_kc, KConfigGroup::Normal);
+    wgh.save();
     svn::repository::Repository *_rep = new svn::repository::Repository(this);
     QString re, out;
     bool incr, diffs;

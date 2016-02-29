@@ -21,6 +21,7 @@
 #include "rangeinput_impl.h"
 #include "svnqt/url.h"
 #include "helpers/ktranslateurl.h"
+#include "helpers/windowgeometryhelper.h"
 #include "settings/kdesvnsettings.h"
 
 #include <kdialog.h>
@@ -195,9 +196,7 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range &range, bool *
 
     MergeDlg_impl *ptr = new MergeDlg_impl(Dialog1Layout, false, false, false, false, false);
     dlg->resize(QSize(480, 360).expandedTo(dlg->minimumSizeHint()));
-    KConfigGroup _kc(Kdesvnsettings::self()->config(), "merge_range");
-    dlg->restoreDialogSize(_kc);
-
+    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "merge_range");
     bool ret = false;
     if (dlg->exec() == QDialog::Accepted) {
         range = ptr->getRange();
@@ -210,8 +209,7 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range &range, bool *
         ret = true;
     }
     if (dlg) {
-        dlg->saveDialogSize(_kc);
-        _kc.sync();
+        wgh.save();
         delete dlg;
     }
 

@@ -20,6 +20,7 @@
 #include "revisionbuttonimpl.h"
 #include "svnfrontend/fronthelpers/rangeinput_impl.h"
 #include "settings/kdesvnsettings.h"
+#include "helpers/windowgeometryhelper.h"
 
 #include <kdialog.h>
 #include <klocale.h>
@@ -60,13 +61,12 @@ void RevisionButtonImpl::askRevision()
     rdlg->setStartOnly(true);
     rdlg->setNoWorking(m_noWorking);
 
-    KConfigGroup _k(Kdesvnsettings::self()->config(), "log_revisions_dlg");
-    dlg->restoreDialogSize(_k);
+    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "log_revisions_dlg");
     if (dlg->exec() == QDialog::Accepted) {
         setRevision(rdlg->getRange().first);
     }
     if (dlg) {
-        dlg->saveDialogSize(_k);
+        wgh.save();
         delete dlg;
     }
 }

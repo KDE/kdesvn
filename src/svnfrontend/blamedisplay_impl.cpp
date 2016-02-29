@@ -24,6 +24,7 @@
 #include "fronthelpers/cursorstack.h"
 #include "fronthelpers/widgetblockstack.h"
 #include "ksvnwidgets/encodingselector_impl.h"
+#include "helpers/windowgeometryhelper.h"
 
 #include <kglobalsettings.h>
 #include <kglobal.h>
@@ -391,11 +392,11 @@ void BlameDisplay_impl::showCommit(BlameTreeItem *bit)
     ptr->setReadOnly(true);
     ptr->setWordWrapMode(QTextOption::NoWrap);
     ptr->setPlainText(text);
-    KConfigGroup k(Kdesvnsettings::self()->config(), "simplelog_display");
-    dlg->restoreDialogSize(k);
+    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "simplelog_display");
     dlg->exec();
-    if (dlg)
-        dlg->saveDialogSize(k);
+    if (dlg) {
+        wgh.save();
+    }
 }
 
 void BlameDisplay_impl::slotShowCurrentCommit()
@@ -430,9 +431,7 @@ void BlameDisplay_impl::displayBlame(SimpleLogCb *_cb, const QString &item, cons
     dlg->setMainWidget(Dialog1Layout);
 
     BlameDisplay_impl *ptr = new BlameDisplay_impl(Dialog1Layout);
-
-    KConfigGroup k(Kdesvnsettings::self()->config(), "blame_dlg");
-    dlg->restoreDialogSize(k);
+   WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "blame_dlg");
 
     ptr->setContent(item, blame);
     ptr->setCb(_cb);
@@ -443,7 +442,9 @@ void BlameDisplay_impl::displayBlame(SimpleLogCb *_cb, const QString &item, cons
     Dialog1Layout->adjustSize();
     dlg->exec();
     if (dlg)
-        dlg->saveDialogSize(k);
+    {
+        wgh.save();
+    }
 }
 
 void BlameDisplay_impl::slotItemDoubleClicked(QTreeWidgetItem *item, int)

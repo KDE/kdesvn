@@ -20,12 +20,17 @@
 
 set(helperssrc
     kdesvn_debug.cpp
+    kdesvn_debug.h
     ktranslateurl.cpp
+    ktranslateurl.h
     sshagent.cpp
+    sshagent.h
+    stringhelper.h
     sub2qt.cpp
-   )
-
-file(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
+    sub2qt.h
+    windowgeometryhelper.cpp
+    windowgeometryhelper.h
+)
 
 add_library(kdesvnhelpers STATIC ${helperssrc} ${hdr})
 target_include_directories(kdesvnhelpers

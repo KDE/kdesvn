@@ -60,6 +60,7 @@
 #include "helpers/stringhelper.h"
 #include "helpers/kdesvn_debug.h"
 #include "helpers/ktranslateurl.h"
+#include "helpers/windowgeometryhelper.h"
 #include "fronthelpers/cursorstack.h"
 #include "cacheentry.h"
 
@@ -523,11 +524,10 @@ void SvnActions::makeTree(const QString &what, const svn::Revision &_rev, const 
             );
             connect(disp, SIGNAL(makeCat(svn::Revision,QString,QString,svn::Revision,QWidget*)),
                     this, SLOT(slotMakeCat(svn::Revision,QString,QString,svn::Revision,QWidget*)));
-            KConfigGroup _kc(Kdesvnsettings::self()->config(), "revisiontree_dlg");
-            dlg->restoreDialogSize(_kc);
+            WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "revisiontree_dlg");
             dlg->exec();
             if (dlg) {
-                dlg->saveDialogSize(_kc);
+                wgh.save();
             }
         }
     }
@@ -932,13 +932,12 @@ void SvnActions::editProperties(SvnItem *k, const svn::Revision &rev)
     }
     QPointer<PropertiesDlg> dlg(new PropertiesDlg(k, svnclient(), rev));
     connect(dlg, SIGNAL(clientException(QString)), m_Data->m_ParentList->realWidget(), SLOT(slotClientException(QString)));
-    KConfigGroup _kc(Kdesvnsettings::self()->config(), "properties_dlg");
-    dlg->restoreDialogSize(_kc);
+    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "revisiontree_dlg");
     if (dlg->exec() != QDialog::Accepted) {
         delete dlg;
         return;
     }
-    dlg->saveDialogSize(_kc);
+    wgh.save();
     svn::PropertiesMap setList;
     QStringList delList;
     dlg->changedItems(setList, delList);

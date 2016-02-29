@@ -1,4 +1,4 @@
-####
+ ####
  #   Copyright (C) 2005-2009 by Rajko Albrecht  ral@alwins-world.de        #
  #   http://kdesvn.alwins-world.de/                                        #
  #                                                                         #
@@ -73,6 +73,7 @@ target_include_directories(ksvnwidgets
 )
 target_link_libraries(ksvnwidgets
     PRIVATE
+        kdesvnhelpers
         kdesvncfgreader
         KF5::Wallet
     PUBLIC

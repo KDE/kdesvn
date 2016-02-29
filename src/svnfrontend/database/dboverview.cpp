@@ -31,6 +31,7 @@
 #include "svnqt/client.h"
 #include "helpers/stringhelper.h"
 #include "helpers/kdesvn_debug.h"
+#include "helpers/windowgeometryhelper.h"
 
 #include <QPointer>
 #include <QStringListModel>
@@ -85,14 +86,12 @@ void DbOverview::showDbOverview(const svn::ClientP &aClient)
 {
     DbOverview *ptr = 0;
     static const char cfg_text[] = "db_overview_dlg";
-    KConfigGroup _kc(Kdesvnsettings::self()->config(), QLatin1String(cfg_text));
     QPointer<KDialog> dlg(createDialog(&ptr, i18n("Overview about cache database content"), KDialog::Close, QLatin1String(cfg_text)));
+    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), cfg_text);
     ptr->setClient(aClient);
-    dlg->restoreDialogSize(_kc);
     dlg->exec();
     if (dlg) {
-        dlg->saveDialogSize(_kc);
-        _kc.sync();
+        wgh.save();
         delete dlg;
     }
 }

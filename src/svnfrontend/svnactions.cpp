@@ -494,7 +494,7 @@ void SvnActions::makeTree(const QString &what, const svn::Revision &_rev, const 
     }
 
     QPointer<KDialog> dlg(new KDialog(m_Data->m_ParentList->realWidget()));
-    dlg->setCaption(i18n("History of %1", info.url().toString().mid(reposRoot.length())));
+    dlg->setWindowTitle(i18n("History of %1", info.url().toString().mid(reposRoot.length())));
     dlg->setButtons(KDialog::Ok);
 
     QWidget *Dialog1Layout = new KVBox(dlg);

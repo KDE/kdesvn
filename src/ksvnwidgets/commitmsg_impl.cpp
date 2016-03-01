@@ -263,7 +263,7 @@ QString Commitmsg_impl::getLogmessage(bool *ok, svn::Depth *rec, bool *keep_lock
     QString msg;
 
     QPointer<KDialog> dlg(new KDialog(parent));
-    dlg->setCaption(i18n("Commit log"));
+    dlg->setWindowTitle(i18n("Commit log"));
     dlg->setButtons(KDialog::Ok | KDialog::Cancel);
     dlg->setDefaultButton(KDialog::Ok);
     dlg->showButtonSeparator(true);
@@ -315,7 +315,7 @@ QString Commitmsg_impl::getLogmessage(const svn::CommitItemList &items, bool *ok
     QString msg;
 
     QPointer<KDialog> dlg(new KDialog(parent));
-    dlg->setCaption(i18n("Commit log"));
+    dlg->setWindowTitle(i18n("Commit log"));
     dlg->setButtons(KDialog::Ok | KDialog::Cancel);
     dlg->setDefaultButton(KDialog::Ok);
     dlg->showButtonSeparator(true);
@@ -371,7 +371,7 @@ QString Commitmsg_impl::getLogmessage(const CommitActionEntries &_on,
     QString msg;
 
     QPointer<KDialog> dlg(new KDialog(parent));
-    dlg->setCaption(i18n("Commit log"));
+    dlg->setWindowTitle(i18n("Commit log"));
     dlg->setButtons(KDialog::Ok | KDialog::Cancel);
     dlg->setDefaultButton(KDialog::Ok);
     dlg->showButtonSeparator(true);

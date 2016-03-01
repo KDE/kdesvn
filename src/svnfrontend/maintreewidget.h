@@ -33,7 +33,6 @@
 class KActionCollection;
 class MainTreeWidgetData;
 class SvnItemModelNode;
-class KDialog;
 class KJob;
 
 class MainTreeWidget: public QWidget, public Ui::mainTreeWidget, public ItemDisplay

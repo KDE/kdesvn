@@ -50,7 +50,7 @@ void RevisionButtonImpl::askRevision()
 {
     Rangeinput_impl *rdlg;
     QPointer<KDialog> dlg(new KDialog());
-    dlg->setCaption(i18n("Select revision"));
+    dlg->setWindowTitle(i18n("Select revision"));
     dlg->setButtons(KDialog::Ok | KDialog::Cancel);
     dlg->showButtonSeparator(false);
 

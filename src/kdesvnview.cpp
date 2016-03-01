@@ -225,7 +225,7 @@ void kdesvnView::slotSettingsChanged()
 void kdesvnView::slotCreateRepo()
 {
     QPointer<KDialog> dlg(new KDialog(QApplication::activeModalWidget()));
-    dlg->setCaption(i18n("Create new repository"));
+    dlg->setWindowTitle(i18n("Create new repository"));
     dlg->setButtons(KDialog::Ok | KDialog::Cancel);
 
     QWidget *Dialog1Layout = new KVBox(dlg);
@@ -266,7 +266,7 @@ void kdesvnView::slotCreateRepo()
 void kdesvnView::slotHotcopy()
 {
     QPointer<KDialog> dlg(new KDialog(QApplication::activeModalWidget()));
-    dlg->setCaption(i18n("Hotcopy a repository"));
+    dlg->setWindowTitle(i18n("Hotcopy a repository"));
     dlg->setButtons(KDialog::Ok | KDialog::Cancel);
 
     QWidget *Dialog1Layout = new KVBox(dlg);
@@ -297,7 +297,7 @@ void kdesvnView::slotHotcopy()
 void kdesvnView::slotLoaddump()
 {
     QPointer<KDialog> dlg(new KDialog(this));
-    dlg->setCaption(i18n("Load a repository from a svndump"));
+    dlg->setWindowTitle(i18n("Load a repository from a svndump"));
     dlg->setButtons(KDialog::Ok | KDialog::Cancel);
     QWidget *Dialog1Layout = new KVBox(dlg);
     dlg->setMainWidget(Dialog1Layout);
@@ -366,7 +366,7 @@ void kdesvnView::slotLoaddump()
 void kdesvnView::slotDumpRepo()
 {
     QPointer<KDialog> dlg(new KDialog(QApplication::activeModalWidget()));
-    dlg->setCaption(i18n("Dump a repository"));
+    dlg->setWindowTitle(i18n("Dump a repository"));
     dlg->setButtons(KDialog::Ok | KDialog::Cancel);
     QWidget *Dialog1Layout = new KVBox(dlg);
     dlg->setMainWidget(Dialog1Layout);

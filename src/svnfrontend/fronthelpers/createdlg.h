@@ -43,7 +43,7 @@ inline QPointer<KDialog> createDialog(T **ptr, const QString &_head, const KDial
         buttons = buttons | KDialog::User1;
     }
     QPointer<KDialog> dlg(new KDialog(modal ? QApplication::activeModalWidget() : 0));
-    dlg->setCaption(_head);
+    dlg->setWindowTitle(_head);
     dlg->setButtons(buttons);
     if (!u1.text().isEmpty()) {
         dlg->setButtonGuiItem(KDialog::User1, u1);

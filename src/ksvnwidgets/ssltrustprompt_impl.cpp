@@ -44,7 +44,7 @@ bool SslTrustPrompt_impl::sslTrust(const QString &host, const QString &fingerpri
 {
     SslTrustPrompt_impl *ptr = 0;
     QPointer<KDialog> dlg(new KDialog(0));
-    dlg->setCaption(i18n("Trust SSL certificate"));
+    dlg->setWindowTitle(i18n("Trust SSL certificate"));
     QFlags<KDialog::ButtonCode> buttons = KDialog::Yes | KDialog::Cancel | KDialog::No;
 
     dlg->setButtons(buttons);

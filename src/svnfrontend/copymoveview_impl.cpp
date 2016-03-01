@@ -72,7 +72,7 @@ QString CopyMoveView_impl::getMoveCopyTo(bool *ok, bool move,
                                          const QString &old, const QString &base, QWidget *parent)
 {
     QPointer<KDialog> dlg(new KDialog(parent));
-    dlg->setCaption(move ? i18n("Move/Rename file/directory") : i18n("Copy file/directory"));
+    dlg->setWindowTitle(move ? i18n("Move/Rename file/directory") : i18n("Copy file/directory"));
     dlg->setButtons(KDialog::Ok | KDialog::Cancel);
     dlg->setDefaultButton(KDialog::Ok);
     dlg->showButtonSeparator(false);

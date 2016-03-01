@@ -188,7 +188,7 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range &range, bool *
 {
     QPointer<KDialog> dlg(new KDialog(parent));
     dlg->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Help);
-    dlg->setCaption(i18n("Enter merge range"));
+    dlg->setWindowTitle(i18n("Enter merge range"));
     dlg->setDefaultButton(KDialog::Ok);
     dlg->setHelp("merging-items", "kdesvn");
     KVBox *Dialog1Layout = new KVBox(dlg);

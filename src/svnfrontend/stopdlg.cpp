@@ -37,7 +37,7 @@ StopDlg::StopDlg(QObject *listener, QWidget *parent, const QString &caption, con
     , m_netBarShown(false),
     cstack(0)
 {
-    setCaption(caption);
+    setWindowTitle(caption);
 
     setButtons(KDialog::Cancel);
     m_mainWidget = new QFrame(this);

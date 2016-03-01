@@ -37,7 +37,7 @@ PropertiesDlg::PropertiesDlg(SvnItem *which, const svn::ClientP &aClient, const 
 {
     setModal(true);
     setButtons(KDialog::Ok | KDialog::Cancel);
-    setCaption(i18n("Modify properties"));
+    setWindowTitle(i18n("Modify properties"));
     QWidget *m = new QWidget(this);
     setMainWidget(m);
     PropertiesDlgLayout = new QHBoxLayout(m);
@@ -95,7 +95,7 @@ PropertiesDlg::~PropertiesDlg()
  */
 void PropertiesDlg::languageChange()
 {
-    setCaption(i18n("View and modify properties"));
+    setWindowTitle(i18n("View and modify properties"));
     m_PropertiesListview->setToolTip(i18n("List of properties set"));
     m_AddButton->setText(i18n("Add property"));
     m_ModifyButton->setText(i18n("Modify property"));

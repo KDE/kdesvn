@@ -608,7 +608,7 @@ void CommandExec::slotNotifyMessage(const QString &msg)
 bool CommandExec::askRevision()
 {
     QPointer<KDialog> dlg(new KDialog(0));
-    dlg->setCaption(i18n("Revision"));
+    dlg->setWindowTitle(i18n("Revision"));
     dlg->setButtons(KDialog::Ok | KDialog::Cancel);
     KVBox *Dialog1Layout = new KVBox(dlg);
     dlg->setMainWidget(Dialog1Layout);

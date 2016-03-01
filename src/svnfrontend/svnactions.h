@@ -33,7 +33,6 @@
 
 class ItemDisplay;
 class SvnItem;
-class KDialog;
 class QDialog;
 class CContextListener;
 class SvnActionsData;

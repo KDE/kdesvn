@@ -384,7 +384,7 @@ void BlameDisplay_impl::showCommit(BlameTreeItem *bit)
     }
     QPointer<KDialog> dlg(new KDialog(this));
     dlg->setButtons(KDialog::Close);
-    dlg->setCaption(i18n("Log message for revision %1", bit->rev()));
+    dlg->setWindowTitle(i18n("Log message for revision %1", bit->rev()));
     QWidget *Dialog1Layout = new KVBox(dlg);
     dlg->setMainWidget(Dialog1Layout);
     KTextEdit *ptr = new KTextEdit(Dialog1Layout);

@@ -232,8 +232,9 @@ void kdesvnView::slotCreateRepo()
     dlg->setMainWidget(Dialog1Layout);
     //dlg->makeVBoxMainWidget();
     Createrepo_impl *ptr = new Createrepo_impl(Dialog1Layout);
-    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "create_repo_size");
+    WindowGeometryHelper wgh(dlg, QLatin1String("create_repo_size"));
     if (dlg->exec() != QDialog::Accepted) {
+        wgh.save();
         delete dlg;
         return;
     }
@@ -271,8 +272,9 @@ void kdesvnView::slotHotcopy()
     QWidget *Dialog1Layout = new KVBox(dlg);
     dlg->setMainWidget(Dialog1Layout);
     HotcopyDlg_impl *ptr = new HotcopyDlg_impl(Dialog1Layout);
-    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "hotcopy_repo_size");
+    WindowGeometryHelper wgh(dlg, QLatin1String("hotcopy_repo_size"));
     if (dlg->exec() != QDialog::Accepted) {
+        wgh.save();
         delete dlg;
         return;
     }
@@ -301,9 +303,9 @@ void kdesvnView::slotLoaddump()
     dlg->setMainWidget(Dialog1Layout);
 
     LoadDmpDlg_impl *ptr = new LoadDmpDlg_impl(Dialog1Layout);
-    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "loaddump_repo_size");
-    if (dlg->exec() != QDialog::Accepted)
-    {
+    WindowGeometryHelper wgh(dlg, QLatin1String("loaddump_repo_size"));
+    if (dlg->exec() != QDialog::Accepted) {
+        wgh.save();
         delete dlg;
         return;
     }
@@ -370,8 +372,9 @@ void kdesvnView::slotDumpRepo()
     dlg->setMainWidget(Dialog1Layout);
 
     DumpRepo_impl *ptr = new DumpRepo_impl(Dialog1Layout);
-    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "dump_repo_size");
+    WindowGeometryHelper wgh(dlg, QLatin1String("dump_repo_size"));
     if (dlg->exec() != QDialog::Accepted) {
+        wgh.save();
         delete dlg;
         return;
     }

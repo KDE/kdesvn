@@ -89,15 +89,12 @@ void DbSettings::store()
 void DbSettings::showSettings(const QString &repository)
 {
     DbSettings *ptr = 0;
-    static const char cfg_text[] = "db_settings_dlg";
-    QPointer<KDialog> dlg(createOkDialog(&ptr, i18n("Settings for %1", repository), true, QLatin1String(cfg_text)));
-    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), cfg_text);
+    QPointer<KDialog> dlg(createOkDialog(&ptr, i18n("Settings for %1", repository), true));
+    WindowGeometryHelper wgh(dlg, QLatin1String("db_settings_dlg"));
     ptr->setRepository(repository);
     if (dlg->exec() == QDialog::Accepted) {
         ptr->store();
     }
-    if (dlg) {
-        wgh.save();
-        delete dlg;
-    }
+    wgh.save();
+    delete dlg;
 }

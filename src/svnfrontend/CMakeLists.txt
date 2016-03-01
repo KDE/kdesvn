@@ -36,8 +36,6 @@ set(svnfrontendsrc
     dummydisplay.cpp
     dumprepo_impl.cpp
     editpropswidget.cpp
-    fronthelpers/DialogStack.cpp
-    fronthelpers/DialogStack.h
     fronthelpers/checkoutinfo_impl.cpp
     fronthelpers/checkoutinfo_impl.h
     fronthelpers/createdlg.h

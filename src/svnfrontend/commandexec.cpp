@@ -323,12 +323,10 @@ int CommandExec::exec(const QCommandLineParser *parser)
         dlg->setMainWidget(Dialog1Layout);
         KTextBrowser *ptr = new KTextBrowser(Dialog1Layout);
         ptr->setText(m_lastMessages);
-        WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "kdesvn_cmd_log");
+        WindowGeometryHelper wgh(dlg, QLatin1String("kdesvn_cmd_log"));
         dlg->exec();
-        if (dlg) {
-            wgh.save();
-            delete dlg;
-        }
+        wgh.save();
+        delete dlg;
     }
     return 0;
 }

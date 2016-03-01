@@ -392,11 +392,10 @@ void BlameDisplay_impl::showCommit(BlameTreeItem *bit)
     ptr->setReadOnly(true);
     ptr->setWordWrapMode(QTextOption::NoWrap);
     ptr->setPlainText(text);
-    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "simplelog_display");
+    WindowGeometryHelper wgh(dlg, QLatin1String("simplelog_display"));
     dlg->exec();
-    if (dlg) {
-        wgh.save();
-    }
+    wgh.save();
+    delete dlg;
 }
 
 void BlameDisplay_impl::slotShowCurrentCommit()
@@ -431,7 +430,7 @@ void BlameDisplay_impl::displayBlame(SimpleLogCb *_cb, const QString &item, cons
     dlg->setMainWidget(Dialog1Layout);
 
     BlameDisplay_impl *ptr = new BlameDisplay_impl(Dialog1Layout);
-   WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "blame_dlg");
+   WindowGeometryHelper wgh(dlg, QLatin1String("blame_dlg"));
 
     ptr->setContent(item, blame);
     ptr->setCb(_cb);
@@ -441,10 +440,8 @@ void BlameDisplay_impl::displayBlame(SimpleLogCb *_cb, const QString &item, cons
     connect(dlg, SIGNAL(user2Clicked()), ptr, SLOT(slotShowCurrentCommit()));
     Dialog1Layout->adjustSize();
     dlg->exec();
-    if (dlg)
-    {
-        wgh.save();
-    }
+    wgh.save();
+    delete dlg;
 }
 
 void BlameDisplay_impl::slotItemDoubleClicked(QTreeWidgetItem *item, int)

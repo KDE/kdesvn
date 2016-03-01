@@ -18,6 +18,7 @@
  ***************************************************************************/
 
 #include "windowgeometryhelper.h"
+#include "settings/kdesvnsettings.h"
 
 #include <KConfig>
 #include <KConfigGroup>
@@ -25,9 +26,9 @@
 #include <QWidget>
 #include <QWindow>
 
-WindowGeometryHelper::WindowGeometryHelper(QWidget *w, const KConfig *config, const QString &groupName, bool bAutoRestore)
+WindowGeometryHelper::WindowGeometryHelper(QWidget *w, const QString &groupName, bool bAutoRestore)
   : m_widget(w)
-  , m_config(config)
+  , m_config(Kdesvnsettings::self()->config())
   , m_groupName(groupName)
 {
    if (bAutoRestore)
@@ -38,6 +39,9 @@ WindowGeometryHelper::WindowGeometryHelper(QWidget *w, const KConfig *config, co
 
 void WindowGeometryHelper::restore()
 {
+    if (!m_widget) {
+        return;
+    }
     KConfigGroup kcg(m_config, m_groupName);
     KWindowConfig::restoreWindowSize(m_widget->windowHandle(), kcg);
     m_widget->resize(m_widget->windowHandle()->size()); // needed, see https://git.reviewboard.kde.org/r/119594/
@@ -45,6 +49,9 @@ void WindowGeometryHelper::restore()
 
 void WindowGeometryHelper::save()
 {
+    if (!m_widget) {
+        return;
+    }
     KConfigGroup kcg(m_config, m_groupName);
     KWindowConfig::saveWindowSize(m_widget->windowHandle(), kcg);
 }

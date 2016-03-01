@@ -89,7 +89,7 @@ SvnLogDlgImp::~SvnLogDlgImp()
 
 void SvnLogDlgImp::loadSize()
 {
-    WindowGeometryHelper(this, Kdesvnsettings::self()->config(), groupName);
+    WindowGeometryHelper(this, groupName);
 }
 
 void SvnLogDlgImp::dispLog(const svn::LogEntriesMapPtr &log, const QString &what, const QString &root, const svn::Revision &peg, const QString &pegUrl)
@@ -273,7 +273,7 @@ void SvnLogDlgImp::slotDispPrevious()
  */
 void SvnLogDlgImp::saveSize()
 {
-    WindowGeometryHelper wgh(this, Kdesvnsettings::self()->config(), groupName, false);
+    WindowGeometryHelper wgh(this, groupName, false);
     wgh.save();
 }
 

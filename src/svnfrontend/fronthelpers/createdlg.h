@@ -32,7 +32,7 @@
 
 template<class T>
 inline QPointer<KDialog> createDialog(T **ptr, const QString &_head, const KDialog::ButtonCodes &_buttons,
-                                      const QString &cfg_text = QLatin1String("standard_dialog"), bool showHelp = false,
+                                      bool showHelp = false,
                                       bool modal = true, const KGuiItem &u1 = KGuiItem())
 {
     KDialog::ButtonCodes buttons = _buttons;
@@ -52,32 +52,31 @@ inline QPointer<KDialog> createDialog(T **ptr, const QString &_head, const KDial
     QWidget *Dialog1Layout = new KVBox(dlg);
     dlg->setMainWidget(Dialog1Layout);
     *ptr = new T(Dialog1Layout);
-    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), cfg_text);
     return dlg;
 }
 
 template<class T>
 inline QPointer<KDialog> createYesDialog(T **ptr, const QString &_head, bool YesNo = false,
-                                         const QString &cfg_text = QLatin1String("standard_dialog"), bool showHelp = false,
+                                         bool showHelp = false,
                                          bool modal = true, const KGuiItem &u1 = KGuiItem())
 {
     KDialog::ButtonCodes buttons = KDialog::Yes;
     if (YesNo) {
         buttons = buttons | KDialog::No;
     }
-    return createDialog(ptr, _head, buttons, cfg_text, showHelp, modal, u1);
+    return createDialog(ptr, _head, buttons, showHelp, modal, u1);
 }
 
 template<class T>
 inline QPointer<KDialog> createOkDialog(T **ptr, const QString &_head, bool OkCancel = false,
-                                        const QString &cfg_text = QLatin1String("standard_dialog"), bool showHelp = false,
+                                        bool showHelp = false,
                                         bool modal = true, const KGuiItem &u1 = KGuiItem())
 {
     KDialog::ButtonCodes buttons = KDialog::Ok;
     if (OkCancel) {
         buttons = buttons | KDialog::Cancel;
     }
-    return createDialog(ptr, _head, buttons, cfg_text, showHelp, modal, u1);
+    return createDialog(ptr, _head, buttons, showHelp, modal, u1);
 }
 
 #endif

@@ -39,7 +39,6 @@
 #include "fronthelpers/rangeinput_impl.h"
 #include "fronthelpers/widgetblockstack.h"
 #include "fronthelpers/fronthelpers.h"
-#include "fronthelpers/DialogStack.h"
 #include "ksvnwidgets/commitmsg_impl.h"
 #include "ksvnwidgets/deleteform_impl.h"
 #include "helpers/sub2qt.h"
@@ -1011,13 +1010,14 @@ void MainTreeWidget::recAddIgnore(SvnItem *item)
 {
     EditIgnorePattern *ptr = 0;
     QPointer<KDialog> dlg(createOkDialog(&ptr, i18n("Edit pattern to ignore for \"%1\"", item->shortName()),
-                                         true, "ignore_pattern_dlg"));
-    KConfigGroup _k(Kdesvnsettings::self()->config(), "ignore_pattern_dlg");
-    DialogStack _s(dlg, _k);
+                                         true));
+    WindowGeometryHelper wgh(dlg, QLatin1String("ignore_pattern_dlg"));
     if (dlg->exec() != QDialog::Accepted) {
+        wgh.save();
         delete dlg;
         return;
     }
+    wgh.save();
     svn::Depth _d = ptr->depth();
     QStringList _pattern = ptr->items();
     bool unignore = ptr->unignore();
@@ -1240,7 +1240,8 @@ void MainTreeWidget::slotSelectBrowsingRevision()
         return;
     }
     Rangeinput_impl *rdlg = 0;
-    QPointer<KDialog> dlg = createOkDialog(&rdlg, i18n("Revisions"), true, QLatin1String("revisions_dlg"));
+    QPointer<KDialog> dlg = createOkDialog(&rdlg, i18n("Revisions"), true);
+    WindowGeometryHelper wgh(dlg, QLatin1String("revisions_dlg"));
     rdlg->setNoWorking(true);
     rdlg->setStartOnly(true);
     if (dlg->exec() == QDialog::Accepted) {
@@ -1250,11 +1251,8 @@ void MainTreeWidget::slotSelectBrowsingRevision()
         m_Data->m_Model->checkDirs(baseUri(), 0);
         emit changeCaption(baseUri() + QLatin1Char('@') + r.first.toString());
     }
-    if (dlg) {
-        KConfigGroup _k(Kdesvnsettings::self()->config(), "revisions_dlg");
-        dlg->saveDialogSize(_k);
-        delete dlg;
-    }
+    wgh.save();
+    delete dlg;
 }
 
 void MainTreeWidget::slotMakeTree()
@@ -1285,17 +1283,15 @@ void MainTreeWidget::slotMakePartTree()
         return;
     }
     Rangeinput_impl *rdlg = 0;
-    QPointer<KDialog> dlg = createOkDialog(&rdlg, i18n("Revisions"), true, QLatin1String("revisions_dlg"));
+    QPointer<KDialog> dlg = createOkDialog(&rdlg, i18n("Revisions"), true);
+    WindowGeometryHelper wgh(dlg, QLatin1String("revisions_dlg"));
     if (dlg->exec() == QDialog::Accepted) {
         Rangeinput_impl::revision_range r = rdlg->getRange();
         svn::Revision rev(isWorkingCopy() ? svn::Revision::UNDEFINED : baseRevision());
         m_Data->m_Model->svnWrapper()->makeTree(what, rev, r.first, r.second);
     }
-    if (dlg) {
-        KConfigGroup _k(Kdesvnsettings::self()->config(), "revisions_dlg");
-        dlg->saveDialogSize(_k);
-        delete dlg;
-    }
+    wgh.save();
+    delete dlg;
 }
 
 void MainTreeWidget::slotLock()
@@ -1306,7 +1302,8 @@ void MainTreeWidget::slotLock()
         return;
     }
     Commitmsg_impl *ptr = 0;
-    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Lock message"), true, QLatin1String("locking_log_msg"));
+    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Lock message"), true);
+    WindowGeometryHelper wgh(dlg, QLatin1String("locking_log_msg"));
     ptr->initHistory();
     ptr->hideDepth(true);
     ptr->keepsLocks(false);
@@ -1317,11 +1314,11 @@ void MainTreeWidget::slotLock()
     if (dlg->exec() != QDialog::Accepted) {
         if (dlg)
             ptr->saveHistory(true);
+        wgh.save();
         delete dlg;
         return;
     }
-    KConfigGroup _k(Kdesvnsettings::self()->config(), "locking_log_msg");
-    dlg->saveDialogSize(_k);
+    wgh.save();
 
     QString logMessage = ptr->getMessage();
     bool steal = _stealLock->isChecked();
@@ -1450,18 +1447,15 @@ void MainTreeWidget::slotDiffRevisions()
         what = relativePath(k);
     }
     Rangeinput_impl *rdlg = 0;
-    QPointer<KDialog> dlg = createOkDialog(&rdlg, i18n("Revisions"), true, QLatin1String("revisions_dlg"));
+    QPointer<KDialog> dlg = createOkDialog(&rdlg, i18n("Revisions"), true);
+    WindowGeometryHelper wgh(dlg, QLatin1String("revisions_dlg"));
     if (dlg->exec() == QDialog::Accepted) {
         Rangeinput_impl::revision_range r = rdlg->getRange();
         svn::Revision _peg = (isWorkingCopy() ? svn::Revision::WORKING : baseRevision());
         m_Data->m_Model->svnWrapper()->makeDiff(what, r.first, r.second, _peg, k ? k->isDir() : true);
     }
-
-    if (dlg) {
-        KConfigGroup _k(Kdesvnsettings::self()->config(), "revisions_dlg");
-        dlg->saveDialogSize(_k);
-        delete dlg;
-    }
+    wgh.save();
+    delete dlg;
 }
 
 void MainTreeWidget::slotDiffPathes()
@@ -1539,16 +1533,14 @@ void MainTreeWidget::slotRangeBlame()
         return;
     }
     Rangeinput_impl *rdlg = 0;
-    QPointer<KDialog> dlg = createOkDialog(&rdlg, i18n("Revisions"), true, QLatin1String("revisions_dlg"));
+    QPointer<KDialog> dlg = createOkDialog(&rdlg, i18n("Revisions"), true);
+    WindowGeometryHelper wgh(dlg, QLatin1String("revisions_dlg"));
     if (dlg->exec() == QDialog::Accepted) {
         Rangeinput_impl::revision_range r = rdlg->getRange();
         m_Data->m_Model->svnWrapper()->makeBlame(r.first, r.second, k);
     }
-    if (dlg) {
-      KConfigGroup _k(Kdesvnsettings::self()->config(), "revisions_dlg");
-      dlg->saveDialogSize(_k);
-      delete dlg;
-    }
+    wgh.save();
+    delete dlg;
 }
 
 void MainTreeWidget::_propListTimeout()
@@ -1610,17 +1602,15 @@ void MainTreeWidget::slotRevisionCat()
         return;
     }
     Rangeinput_impl *rdlg = 0;
-    QPointer<KDialog> dlg = createOkDialog(&rdlg, i18n("Revisions"), true, QLatin1String("revisions_dlg"));
+    QPointer<KDialog> dlg = createOkDialog(&rdlg, i18n("Revisions"), true);
+    WindowGeometryHelper wgh(dlg, QLatin1String("revisions_dlg"));
     rdlg->setStartOnly(true);
     if (dlg->exec() == QDialog::Accepted) {
         Rangeinput_impl::revision_range r = rdlg->getRange();
         m_Data->m_Model->svnWrapper()->slotMakeCat(r.first, k->fullName(), k->shortName(), isWorkingCopy() ? svn::Revision::WORKING : baseRevision(), 0);
     }
-    if (dlg) {
-        KConfigGroup _k(Kdesvnsettings::self()->config(), "revisions_dlg");
-        dlg->saveDialogSize(_k);
-        delete dlg;
-    }
+    wgh.save();
+    delete dlg;
 }
 
 void MainTreeWidget::slotResolved()
@@ -1680,7 +1670,8 @@ void MainTreeWidget::makeDelete(const SvnItemList &lst)
     }
 
     DeleteForm_impl *ptr = 0;
-    QPointer<KDialog> dlg = createYesDialog(&ptr, i18n("Really delete these entries?"), true, QLatin1String("delete_items_dialog"), true);
+    QPointer<KDialog> dlg = createYesDialog(&ptr, i18n("Really delete these entries?"), true, true);
+    WindowGeometryHelper wgh(dlg, QLatin1String("delete_items_dialog"));
     ptr->setStringList(displist);
     ptr->showExtraButtons(isWorkingCopy() && !items.isEmpty());
 
@@ -1693,6 +1684,8 @@ void MainTreeWidget::makeDelete(const SvnItemList &lst)
             if (!aJob->exec()) {
                 KJobWidgets::setWindow(aJob, this);
                 aJob->ui()->showErrorMessage();
+                wgh.save();
+                delete dlg;
                 return;
             }
         }
@@ -1701,11 +1694,8 @@ void MainTreeWidget::makeDelete(const SvnItemList &lst)
         }
         refreshCurrentTree();
     }
-    if (dlg) {
-        KConfigGroup _kc(Kdesvnsettings::self()->config(), "delete_items_dialog");
-        dlg->saveDialogSize(_kc);
-        delete dlg;
-    }
+    wgh.save();
+    delete dlg;
 }
 
 void MainTreeWidget::internalDrop(const QList<QUrl> &_lst, Qt::DropAction action, const QModelIndex &index)
@@ -1962,7 +1952,8 @@ void MainTreeWidget::slotMerge()
     }
     src2 = m_Data->merge_Src2;
     MergeDlg_impl *ptr = 0;
-    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Merge"), true, QLatin1String("merge_dialog"), true);
+    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Merge"), true, true);
+    WindowGeometryHelper wgh(dlg, QLatin1String("merge_dialog"));
     dlg->setHelp("merging-items", "kdesvn");
     ptr->setDest(target);
     ptr->setSrc1(src1);
@@ -2001,12 +1992,8 @@ void MainTreeWidget::slotMerge()
             refreshCurrentTree();
         }
     }
-
-    if (dlg) {
-        KConfigGroup _k(Kdesvnsettings::self()->config(), "merge_dialog");
-        dlg->saveDialogSize(_k);
-        delete dlg;
-    }
+    wgh.save();
+    delete dlg;
     enableActions();
 }
 
@@ -2025,7 +2012,7 @@ void MainTreeWidget::slotRelocate()
     // CE TODO - Url() will return a QUrl later on
     const QUrl fromUrl = QUrl(k->Url());
     CheckoutInfo_impl *ptr = 0;
-    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Relocate path %1", path), true, QLatin1String("relocate_dlg"));
+    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Relocate path %1", path), true);
     if (dlg) {
         ptr->setStartUrl(fromUrl);
         ptr->disableAppend(true);
@@ -2041,7 +2028,7 @@ void MainTreeWidget::slotRelocate()
         ptr->disableExternals(true);
 #endif
         bool done = false;
-        WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "relocate_dlg");
+        WindowGeometryHelper wgh(dlg, QLatin1String("relocate_dlg"));
         if (dlg->exec() == QDialog::Accepted) {
             if (!ptr->reposURL().isValid()) {
                 KMessageBox::error(QApplication::activeModalWidget(), tr("Invalid url given!"),
@@ -2051,10 +2038,8 @@ void MainTreeWidget::slotRelocate()
             }
             done = m_Data->m_Model->svnWrapper()->makeRelocate(fromUrl, ptr->reposURL(), path, ptr->overwrite(), ptr->ignoreExternals());
         }
-        if (dlg) {
-            wgh.save();
-            delete dlg;
-        }
+        wgh.save();
+        delete dlg;
         if (!done) {
             return;
         }
@@ -2114,24 +2099,24 @@ void MainTreeWidget::slotImportIntoDir(const QString &source, const QUrl &_targe
     Importdir_logmsg *ptr2 = 0;
     QPointer<KDialog> dlg;
     if (dirs) {
-        dlg = createOkDialog(&ptr2, i18n("Import log"), true, QLatin1String("import_log_msg"));
+        dlg = createOkDialog(&ptr2, i18n("Import log"), true);
         ptr = ptr2;
         ptr2->createDirboxDir(QLatin1Char('"') + QFileInfo(sourceUri).fileName() + QLatin1Char('"'));
     } else {
-        dlg = createOkDialog(&ptr, i18n("Import log"), true, QLatin1String("import_log_msg"));
+        dlg = createOkDialog(&ptr, i18n("Import log"), true);
     }
+    WindowGeometryHelper wgh(dlg, QLatin1String("import_log_msg"));
 
     ptr->initHistory();
-    KConfigGroup _k(Kdesvnsettings::self()->config(), "import_log_msg");
     if (dlg->exec() != QDialog::Accepted) {
         if (dlg) {
+          wgh.save();
           ptr->saveHistory(true);
-          dlg->saveDialogSize(_k);
           delete dlg;
         }
         return;
     }
-    dlg->saveDialogSize(_k);
+    wgh.save();
 
     QString logMessage = ptr->getMessage();
     svn::Depth rec = ptr->getDepth();
@@ -2385,10 +2370,10 @@ void MainTreeWidget::slotDirRecProperty()
         return;
     }
     SetPropertyWidget *ptr = 0;
-    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Set/add property recursive"), true, QLatin1String("property_dlg"));
+    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Set/add property recursive"), true);
+    WindowGeometryHelper wgh(dlg, QLatin1String("property_dlg"));
 
-    KConfigGroup _k(Kdesvnsettings::self()->config(), "property_dlg");
-    DialogStack _s(dlg, _k);
     dlg->exec();
+    wgh.save();
     delete dlg;
 }

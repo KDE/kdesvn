@@ -85,15 +85,12 @@ DbOverview::~DbOverview()
 void DbOverview::showDbOverview(const svn::ClientP &aClient)
 {
     DbOverview *ptr = 0;
-    static const char cfg_text[] = "db_overview_dlg";
-    QPointer<KDialog> dlg(createDialog(&ptr, i18n("Overview about cache database content"), KDialog::Close, QLatin1String(cfg_text)));
-    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), cfg_text);
+    QPointer<KDialog> dlg(createDialog(&ptr, i18n("Overview about cache database content"), KDialog::Close));
+    WindowGeometryHelper wgh(dlg,  QLatin1String("db_overview_dlg"));
     ptr->setClient(aClient);
     dlg->exec();
-    if (dlg) {
-        wgh.save();
-        delete dlg;
-    }
+    wgh.save();
+    delete dlg;
 }
 
 void DbOverview::setClient(const svn::ClientP &aClient)

@@ -61,14 +61,12 @@ void RevisionButtonImpl::askRevision()
     rdlg->setStartOnly(true);
     rdlg->setNoWorking(m_noWorking);
 
-    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "log_revisions_dlg");
+    WindowGeometryHelper wgh(dlg, QLatin1String("log_revisions_dlg"));
     if (dlg->exec() == QDialog::Accepted) {
         setRevision(rdlg->getRange().first);
     }
-    if (dlg) {
-        wgh.save();
-        delete dlg;
-    }
+    wgh.save();
+    delete dlg;
 }
 
 void RevisionButtonImpl::setNoWorking(bool how)

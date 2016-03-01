@@ -20,6 +20,7 @@
 #pragma once
 
 #include <QString>
+#include <QPointer>
 
 class KConfig;
 class QWidget;
@@ -30,14 +31,14 @@ class QWidget;
 class WindowGeometryHelper
 {
 public:
-    WindowGeometryHelper(QWidget *w, const KConfig *config, const QString &groupName, bool bAutoRestore = true);
+    WindowGeometryHelper(QWidget *w, const QString &groupName, bool bAutoRestore = true);
     ~WindowGeometryHelper() = default;
 
     // no need to call restore() - already called in ctor when bAutoRestore = true
     void restore();
     void save();
 private:
-    QWidget *m_widget;
+    QPointer<QWidget> m_widget;
     const KConfig *m_config;
     QString m_groupName;
 };

@@ -279,7 +279,7 @@ QString Commitmsg_impl::getLogmessage(bool *ok, svn::Depth *rec, bool *keep_lock
         ptr->m_keepLocksButton->hide();
     }
     ptr->initHistory();
-    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), groupName);
+    WindowGeometryHelper wgh(dlg, groupName);
     if (dlg->exec() != QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
@@ -292,8 +292,6 @@ QString Commitmsg_impl::getLogmessage(bool *ok, svn::Depth *rec, bool *keep_lock
     }
     if (dlg) {
         ptr->saveHistory(!_ok);
-        wgh.save();
-        delete dlg;
     }
 
     if (ok) {
@@ -305,6 +303,8 @@ QString Commitmsg_impl::getLogmessage(bool *ok, svn::Depth *rec, bool *keep_lock
     if (keep_locks) {
         *keep_locks = _keep_locks;
     }
+    wgh.save();
+    delete dlg;
     return msg;
 }
 
@@ -332,7 +332,7 @@ QString Commitmsg_impl::getLogmessage(const svn::CommitItemList &items, bool *ok
     }
 
     ptr->initHistory();
-    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), groupName);
+    WindowGeometryHelper wgh(dlg, groupName);
     if (dlg->exec() != QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
@@ -345,8 +345,6 @@ QString Commitmsg_impl::getLogmessage(const svn::CommitItemList &items, bool *ok
     }
     if (dlg) {
         ptr->saveHistory(!_ok);
-        wgh.save();
-        delete dlg;
     }
 
     if (ok) {
@@ -358,6 +356,8 @@ QString Commitmsg_impl::getLogmessage(const svn::CommitItemList &items, bool *ok
     if (keep_locks) {
         *keep_locks = _keep_locks;
     }
+    wgh.save();
+    delete dlg;
     return msg;
 }
 
@@ -393,7 +393,7 @@ QString Commitmsg_impl::getLogmessage(const CommitActionEntries &_on,
         connect(callback, SIGNAL(sigItemsReverted(QStringList)),
                 ptr, SLOT(slotItemReverted(QStringList)));
     }
-    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), groupName);
+    WindowGeometryHelper wgh(dlg, groupName);
     if (dlg->exec() != QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
@@ -405,7 +405,6 @@ QString Commitmsg_impl::getLogmessage(const CommitActionEntries &_on,
     }
     if (dlg) {
         ptr->saveHistory(!_ok);
-        wgh.save();
     }
     if (ok) {
         *ok = _ok;
@@ -414,6 +413,7 @@ QString Commitmsg_impl::getLogmessage(const CommitActionEntries &_on,
     if (keep_locks) {
         *keep_locks = _keep_locks;
     }
+    wgh.save();
     delete dlg;
     return msg;
 }

@@ -196,7 +196,7 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range &range, bool *
 
     MergeDlg_impl *ptr = new MergeDlg_impl(Dialog1Layout, false, false, false, false, false);
     dlg->resize(QSize(480, 360).expandedTo(dlg->minimumSizeHint()));
-    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "merge_range");
+    WindowGeometryHelper wgh(dlg, QLatin1String("merge_range"));
     bool ret = false;
     if (dlg->exec() == QDialog::Accepted) {
         range = ptr->getRange();
@@ -208,10 +208,8 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range &range, bool *
         *allowmixedrevs = ptr->allowmixedrevs();
         ret = true;
     }
-    if (dlg) {
-        wgh.save();
-        delete dlg;
-    }
+    wgh.save();
+    delete dlg;
 
     return ret;
 }

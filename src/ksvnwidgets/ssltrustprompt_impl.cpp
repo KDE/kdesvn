@@ -79,12 +79,10 @@ bool SslTrustPrompt_impl::sslTrust(const QString &host, const QString &fingerpri
 
     ptr = new SslTrustPrompt_impl(host, Dialog1Layout);
     ptr->m_ContentText->setText(text);
-    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), "trustssldlg");
+    WindowGeometryHelper wgh(dlg, QLatin1String("trustssldlg"));
     int i = dlg->exec();
-    if (dlg) {
-        wgh.save();
-        delete dlg;
-    }
+    wgh.save();
+    delete dlg;
 
     *saveit = i == KDialog::Yes;
     *ok = (i == KDialog::Yes || i == KDialog::No);

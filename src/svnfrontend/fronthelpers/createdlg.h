@@ -28,6 +28,7 @@
 #include <QApplication>
 #include <QString>
 #include <QPointer>
+#include "helpers/windowgeometryhelper.h"
 
 template<class T>
 inline QPointer<KDialog> createDialog(T **ptr, const QString &_head, const KDialog::ButtonCodes &_buttons,
@@ -51,8 +52,7 @@ inline QPointer<KDialog> createDialog(T **ptr, const QString &_head, const KDial
     QWidget *Dialog1Layout = new KVBox(dlg);
     dlg->setMainWidget(Dialog1Layout);
     *ptr = new T(Dialog1Layout);
-    KConfigGroup _k(Kdesvnsettings::self()->config(), cfg_text);
-    dlg->restoreDialogSize(_k);
+    WindowGeometryHelper wgh(dlg, Kdesvnsettings::self()->config(), cfg_text);
     return dlg;
 }
 

@@ -108,15 +108,7 @@ public:
 
     ~SvnActionsData()
     {
-        if (m_DiffDialog) {
-            KConfigGroup _kc(Kdesvnsettings::self()->config(), "diff_display");
-            m_DiffDialog->saveDialogSize(_kc);
-            delete m_DiffDialog;
-        }
-        if (m_LogDialog) {
-            m_LogDialog->saveSize();
-            delete m_LogDialog;
-        }
+        cleanDialogs();
         delete m_SvnContextListener;
     }
 
@@ -143,8 +135,7 @@ public:
     void cleanDialogs()
     {
         if (m_DiffDialog) {
-            KConfigGroup _kc(Kdesvnsettings::self()->config(), "diff_display");
-            m_DiffDialog->saveDialogSize(_kc);
+            WindowGeometryHelper wgh(m_DiffDialog, Kdesvnsettings::self()->config(), "diff_display", false);
             delete m_DiffDialog;
             m_DiffDialog = 0;
         }

@@ -22,7 +22,7 @@
 
 #include "svnfrontend/ccontextlistener.h"
 
-class ThreadContextListenerData;
+struct ThreadContextListenerData;
 
 /**
   @author Rajko Albrecht

@@ -235,7 +235,6 @@ bool RevisionTree::topDownScan()
                     isParent(m_Data->m_OldHistory[j].changedPaths[i].path, m_Path)) {
                 if (!m_Data->m_OldHistory[j].changedPaths[i].copyFromPath.isEmpty()) {
                     if (m_InitialRevsion < m_Data->m_OldHistory[j].revision) {
-                        QString tmpPath = m_Path;
                         QString r = m_Path.mid(m_Data->m_OldHistory[j].changedPaths[i].path.length());
                         m_Path = m_Data->m_OldHistory[j].changedPaths[i].copyFromPath;
                         m_Path += r;

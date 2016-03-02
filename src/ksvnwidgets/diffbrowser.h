@@ -37,7 +37,6 @@ public:
     virtual ~DiffBrowser();
 
 public slots:
-    virtual void setText(const QString &aText);
     virtual void setText(const QByteArray &ex);
     virtual void saveDiff();
     virtual void slotTextCodecChanged(const QString &);

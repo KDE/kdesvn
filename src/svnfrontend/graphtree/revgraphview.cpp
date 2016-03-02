@@ -229,7 +229,7 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
             m_NodeList[nodeName] = t;
             t->setToolTip(toolTip(nodeName));
         } else {
-            QString node1Name, node2Name, label;
+            QString node1Name, node2Name;
             QString _x, _y;
             double x, y;
             QPolygonF pa;

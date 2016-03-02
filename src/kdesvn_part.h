@@ -25,8 +25,6 @@
 
 #include <kparts/readonlypart.h>
 #include <kparts/readwritepart.h>
-#include <kparts/genericfactory.h>
-#include <kparts/factory.h>
 #include <kparts/statusbarextension.h>
 #include <kparts/browserextension.h>
 

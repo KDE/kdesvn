@@ -58,13 +58,6 @@ DiffBrowser::~DiffBrowser()
     delete m_Data;
 }
 
-void DiffBrowser::setText(const QString &aText)
-{
-    m_Data->m_content.fromRawData(aText.toLocal8Bit(), aText.toLocal8Bit().size());
-    QTextBrowser::setText(aText);
-    moveCursor(QTextCursor::Start);
-}
-
 void DiffBrowser::setText(const QByteArray &aText)
 {
     m_Data->m_content = aText;

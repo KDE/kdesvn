@@ -1263,7 +1263,7 @@ void SvnActions::makeDiffinternal(const QString &p1, const svn::Revision &r1, co
     QByteArray ex;
     QTemporaryDir tdir;
     tdir.setAutoRemove(true);
-    QString tn = QString("%1/%2").arg(tdir.path()).arg("/svndiff");
+    QString tn(tdir.path() + QLatin1String("/svndiff"));
     QDir d1(tdir.path());
     d1.mkdir("svndiff");
     bool ignore_content = Kdesvnsettings::diff_ignore_content();
@@ -1327,7 +1327,7 @@ void SvnActions::makeNorecDiff(const QString &p1, const svn::Revision &r1, const
     QByteArray ex;
     QTemporaryDir tdir;
     tdir.setAutoRemove(true);
-    QString tn = QString("%1/%2").arg(tdir.path()).arg("/svndiff");
+    QString tn(tdir.path() + QLatin1String("/svndiff"));
     QDir d1(tdir.path());
     d1.mkdir("svndiff");
     bool ignore_content = Kdesvnsettings::diff_ignore_content();
@@ -2193,7 +2193,6 @@ void SvnActions::slotMerge(const QString &src1, const QString &src2, const QStri
     if (!m_Data->m_CurrentContext) {
         return;
     }
-    QString s2;
 
     svn::Revision peg = svn::Revision::HEAD;
     svn::Revision tpeg;

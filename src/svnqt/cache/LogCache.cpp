@@ -500,7 +500,7 @@ bool LogCache::setRepositoryParameter(const svn::Path &repository, const QString
     mainDB.transaction();
     QSqlQuery cur(mainDB);
     if (value.isValid()) {
-        QString _qs = qs.arg(id).arg(key);//.arg(value.toByteArray());
+        QString _qs = qs.arg(id,key);//.arg(value.toByteArray());
         cur.prepare(_qs);
         cur.bindValue(0, value);
         if (!cur.exec()) {

@@ -280,7 +280,7 @@ void KdesvnBrowserExtension::properties()
 void kdesvnpart::showAboutApplication()
 {
     if (!m_aboutDlg) {
-        QString m_Extratext = i18n("Built with Subversion library: %1\nRunning Subversion library: %2").arg(svn::Version::linked_version()).arg(svn::Version::running_version());
+        QString m_Extratext = i18n("Built with Subversion library: %1\nRunning Subversion library: %2").arg(svn::Version::linked_version(), svn::Version::running_version());
 
         KAboutData about(QLatin1String("kdesvnpart"),
                          i18n("kdesvn Part"),

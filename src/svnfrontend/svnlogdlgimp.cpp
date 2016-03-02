@@ -186,13 +186,13 @@ QString SvnLogDlgImp::genReplace(const QString &r1match)
             break;
         }
         count = _r2.matchedLength();
-        res += r1match.mid(oldpos, pos - oldpos);
+        res += r1match.midRef(oldpos, pos - oldpos);
         QString sub = r1match.mid(pos, count);
         QString _url = _bugurl;
         _url.replace("%BUGID%", sub);
         res += anf + _url + mid + sub + end;
     }
-    res += r1match.mid(oldpos);
+    res += r1match.midRef(oldpos);
     return res;
 }
 
@@ -557,7 +557,6 @@ void SvnLogDlgImp::slotSingleDoubleClicked(QTreeWidgetItem *_item, int)
 
     QString name = item->path();
     QString action = item->action();
-    QString source = item->revision() > -1 ? item->source() : item->path();
     svn::Revision start(svn::Revision::START);
     if (action != "D") {
         m_Actions->makeBlame(start, rev, _base + name, QApplication::activeModalWidget(), rev, this);

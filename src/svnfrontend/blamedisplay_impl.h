@@ -26,7 +26,6 @@
 class BlameDisplayData;
 class SimpleLogCb;
 class BlameTreeItem;
-class QAction;
 
 class BlameDisplay_impl: public QWidget, public Ui::BlameDisplay
 {
@@ -35,27 +34,24 @@ public:
     explicit BlameDisplay_impl(QWidget *parent = 0);
     virtual ~BlameDisplay_impl();
 
-    virtual void setContent(const QString &, const svn::AnnotatedFile &);
-    virtual void setCb(SimpleLogCb *);
+    void setContent(const QString &, const svn::AnnotatedFile &);
+    void setCb(SimpleLogCb *);
 
-    const QColor rev2color(svn_revnum_t)const;
-    static void displayBlame(SimpleLogCb *, const QString &, const svn::AnnotatedFile &, QWidget *parent = 0);
+    static void displayBlame(SimpleLogCb *_cb, const QString &item, const svn::AnnotatedFile &blame, QWidget *parent);
 
-public slots:
-    virtual void slotGoLine();
-    virtual void slotShowCurrentCommit();
-
-protected slots:
-    virtual void slotCurrentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *);
-    virtual void slotTextCodecChanged(const QString &);
+private Q_SLOTS:
+    void slotGoLine();
+    void slotShowCurrentCommit();
+    void slotItemDoubleClicked(QTreeWidgetItem *item, int);
+    void slotCurrentItemChanged(QTreeWidgetItem *item, QTreeWidgetItem *);
+    void slotTextCodecChanged(const QString &what);
 
 protected:
-    virtual void showCommit(BlameTreeItem *);
+    void showCommit(BlameTreeItem *bti);
 
 private:
     BlameDisplayData *m_Data;
-protected slots:
-    virtual void slotItemDoubleClicked(QTreeWidgetItem *, int);
+
 };
 
 #endif

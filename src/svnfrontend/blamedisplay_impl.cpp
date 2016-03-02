@@ -60,9 +60,7 @@ class LocalizedAnnotatedLine: public svn::AnnotateLine
 public:
     explicit LocalizedAnnotatedLine(const svn::AnnotateLine &al)
         : svn::AnnotateLine(al)
-    {
-        localeChanged();
-    }
+    {}
 
     void localeChanged()
     {
@@ -107,15 +105,23 @@ bool LocalizedAnnotatedLine::codec_searched = false;
 class BlameTreeItem: public QTreeWidgetItem
 {
 public:
-    BlameTreeItem(QTreeWidget *, const svn::AnnotateLine &, bool, BlameDisplay_impl *);
-    BlameTreeItem(const svn::AnnotateLine &, bool, BlameDisplay_impl *);
-    BlameTreeItem(QTreeWidget *, BlameTreeItem *, const svn::AnnotateLine &, bool, BlameDisplay_impl *);
-    virtual ~BlameTreeItem() {}
-    apr_int64_t lineNumber()
+    BlameTreeItem(const svn::AnnotateLine &al, bool disp)
+      : QTreeWidgetItem(TREE_ITEM_TYPE)
+      , m_Content(al)
+      , m_disp(disp)
+    {
+        for (int i = 0; i <= COL_LINE; ++i) {
+            setTextAlignment(i, Qt::AlignLeft | Qt::AlignVCenter);
+            setFont(i, KGlobalSettings::self()->fixedFont());
+        }
+        display();
+    }
+
+    qlonglong lineNumber() const
     {
         return m_Content.lineNumber();
     }
-    svn_revnum_t rev()
+    svn_revnum_t rev() const
     {
         return m_Content.revision();
     }
@@ -126,8 +132,8 @@ public:
             setText(COL_AUT, m_Content.tAuthor());
         }
         QString _line = m_Content.tLine();
-        _line.replace('\t', "    ");
-        setText(COL_LINE, QString("%1").arg(_line));
+        _line.replace(QLatin1Char('\t'), QLatin1String("    "));
+        setText(COL_LINE, _line);
     }
 
 protected:
@@ -135,49 +141,22 @@ protected:
 
     bool m_disp;
     void display();
-    BlameDisplay_impl *cb;
 };
 
-BlameTreeItem::BlameTreeItem(const svn::AnnotateLine &al, bool disp, BlameDisplay_impl *_c)
-    : QTreeWidgetItem(TREE_ITEM_TYPE), m_Content(al), m_disp(disp), cb(_c)
-{
-    display();
-}
-
-BlameTreeItem::BlameTreeItem(QTreeWidget *tv, const svn::AnnotateLine &al, bool disp, BlameDisplay_impl *_c)
-    : QTreeWidgetItem(tv, TREE_ITEM_TYPE), m_Content(al), m_disp(disp), cb(_c)
-{
-    display();
-}
-
-BlameTreeItem::BlameTreeItem(QTreeWidget *tv, BlameTreeItem *it, const svn::AnnotateLine &al, bool disp, BlameDisplay_impl *_c)
-    : QTreeWidgetItem(tv, it, TREE_ITEM_TYPE), m_Content(al), m_disp(disp), cb(_c)
-{
-    display();
-}
 
 void BlameTreeItem::display()
 {
-    setTextAlignment(COL_LINENR, Qt::AlignRight);
-    setFont(COL_LINENR, KGlobalSettings::self()->fixedFont());
-    setFont(COL_LINE, KGlobalSettings::self()->fixedFont());
+    setTextAlignment(COL_LINENR, Qt::AlignRight | Qt::AlignVCenter);
 
     if (m_disp) {
-        setTextAlignment(COL_REV, Qt::AlignRight);
-        setFont(COL_REV, KGlobalSettings::self()->fixedFont());
-        setFont(COL_AUT, KGlobalSettings::self()->fixedFont());
-
-        setText(COL_REV, QString("%1").arg(m_Content.revision()));
-        setText(COL_AUT, m_Content.tAuthor());
+        setTextAlignment(COL_REV, Qt::AlignRight | Qt::AlignVCenter);
+        setText(COL_REV, QString::number(m_Content.revision()));
         if (m_Content.date().isValid()) {
-            setFont(COL_DATE, KGlobalSettings::self()->fixedFont());
             setText(COL_DATE, KGlobal::locale()->formatDateTime(m_Content.date()));
         }
     }
-    setText(COL_LINENR, QString("%1").arg(m_Content.lineNumber() + 1));
-    QString _line = m_Content.tLine();
-    _line.replace('\t', "    ");
-    setText(COL_LINE, QString("%1").arg(_line));
+    setText(COL_LINENR, QString::number(m_Content.lineNumber() + 1));
+    localeChanged();
 }
 
 class BlameDisplayData
@@ -192,7 +171,7 @@ public:
         m_cb = 0;
         m_dlg = 0;
     }
-    ~BlameDisplayData() {}
+
     svn_revnum_t max, min;
     QMap<svn_revnum_t, QColor> m_shadingMap;
     QMap<svn_revnum_t, svn::LogEntry> m_logCache;
@@ -219,6 +198,11 @@ BlameDisplay_impl::BlameDisplay_impl(QWidget *parent)
     searchLine->addTreeWidget(m_BlameTree);
 }
 
+BlameDisplay_impl::~BlameDisplay_impl()
+{
+    delete m_Data;
+}
+
 void BlameDisplay_impl::setCb(SimpleLogCb *_cb)
 {
     m_Data->m_cb = _cb;
@@ -242,7 +226,7 @@ void BlameDisplay_impl::setContent(const QString &what, const svn::AnnotatedFile
     int r = 0; int g = 0; int b = 0;
     uint colinc = 0;
 
-    QTime t, s;
+    QTime t;
     t.start();
     QList<QTreeWidgetItem *> _list;
     QBrush _b, _bt, _bb;
@@ -259,8 +243,7 @@ void BlameDisplay_impl::setContent(const QString &what, const svn::AnnotatedFile
         if ((*bit).revision() < m_Data->min) {
             m_Data->min = (*bit).revision();
         }
-        s.start();
-        BlameTreeItem *item = new BlameTreeItem((*bit), disp, this);
+        BlameTreeItem *item = new BlameTreeItem((*bit), disp);
         _list.append(item);
 
         if (disp) {
@@ -268,7 +251,6 @@ void BlameDisplay_impl::setContent(const QString &what, const svn::AnnotatedFile
         }
         if (Kdesvnsettings::self()->colored_blame()) {
             if (m_Data->m_shadingMap.find((*bit).revision()) == m_Data->m_shadingMap.end()) {
-                m_Data->m_shadingMap[(*bit).revision()] = QColor();
                 a.setRgb(a.red() + offset, a.green() + offset, a.blue() + offset);
                 m_Data->m_shadingMap[(*bit).revision()] = a;
                 if (a.red() > 245 || a.green() > 245 || a.blue() > 245) {
@@ -311,7 +293,7 @@ void BlameDisplay_impl::setContent(const QString &what, const svn::AnnotatedFile
                 _bt = item->background(COL_REV);
                 _bt.setStyle(Qt::SolidPattern);
             }
-            _bt.setColor(m_Data->m_shadingMap[(*bit).revision()]);
+            _bt.setColor(m_Data->m_shadingMap.value((*bit).revision()));
             item->setBackground(COL_REV, _bt);
             item->setBackground(COL_DATE, _bt);
             item->setBackground(COL_AUT, _bt);
@@ -327,20 +309,6 @@ void BlameDisplay_impl::setContent(const QString &what, const svn::AnnotatedFile
     m_BlameTree->resizeColumnToContents(COL_AUT);
     m_BlameTree->resizeColumnToContents(COL_LINENR);
     m_BlameTree->resizeColumnToContents(COL_LINE);
-}
-
-const QColor BlameDisplay_impl::rev2color(svn_revnum_t r)const
-{
-    if (m_Data->m_shadingMap.find(r) != m_Data->m_shadingMap.end() && m_Data->m_shadingMap[r].isValid()) {
-        return m_Data->m_shadingMap[r];
-    } else {
-        return m_BlameTree->viewport()->palette().base().color();
-    }
-}
-
-BlameDisplay_impl::~BlameDisplay_impl()
-{
-    delete m_Data;
 }
 
 void BlameDisplay_impl::slotGoLine()
@@ -364,27 +332,27 @@ void BlameDisplay_impl::slotGoLine()
     }
 }
 
-void BlameDisplay_impl::showCommit(BlameTreeItem *bit)
+void BlameDisplay_impl::showCommit(BlameTreeItem *bti)
 {
-    if (!bit) {
+    if (!bti) {
         return;
     }
     WidgetBlockStack a(m_BlameTree);
     QString text;
-    const QMap<svn_revnum_t, svn::LogEntry>::const_iterator it = m_Data->m_logCache.constFind(bit->rev());
+    const QMap<svn_revnum_t, svn::LogEntry>::const_iterator it = m_Data->m_logCache.constFind(bti->rev());
     if (it != m_Data->m_logCache.constEnd()) {
         text = it.value().message;
     } else {
         CursorStack a(Qt::BusyCursor);
         svn::LogEntry t;
-        if (m_Data->m_cb && m_Data->m_cb->getSingleLog(t, bit->rev(), m_Data->m_File, m_Data->max, m_Data->reposRoot)) {
-            m_Data->m_logCache[bit->rev()] = t;
+        if (m_Data->m_cb && m_Data->m_cb->getSingleLog(t, bti->rev(), m_Data->m_File, m_Data->max, m_Data->reposRoot)) {
+            m_Data->m_logCache[bti->rev()] = t;
             text = t.message;
         }
     }
     QPointer<KDialog> dlg(new KDialog(this));
     dlg->setButtons(KDialog::Close);
-    dlg->setWindowTitle(i18n("Log message for revision %1", bit->rev()));
+    dlg->setWindowTitle(i18n("Log message for revision %1", bti->rev()));
     QWidget *Dialog1Layout = new KVBox(dlg);
     dlg->setMainWidget(Dialog1Layout);
     KTextEdit *ptr = new KTextEdit(Dialog1Layout);
@@ -413,16 +381,13 @@ void BlameDisplay_impl::slotCurrentItemChanged(QTreeWidgetItem *item, QTreeWidge
     if (!m_Data->m_dlg) {
         return;
     }
-    if (item == 0 || item->type() != TREE_ITEM_TYPE) {
-        m_Data->m_dlg->enableButton(KDialog::User2, false);
-    } else {
-        m_Data->m_dlg->enableButton(KDialog::User2, true);
-    }
+    const bool enabled = item && item->type() == TREE_ITEM_TYPE;
+    m_Data->m_dlg->enableButton(KDialog::User2, enabled);
 }
 
-void BlameDisplay_impl::displayBlame(SimpleLogCb *_cb, const QString &item, const svn::AnnotatedFile &blame, QWidget *)
+void BlameDisplay_impl::displayBlame(SimpleLogCb *_cb, const QString &item, const svn::AnnotatedFile &blame, QWidget *parent)
 {
-    QPointer<KDialog> dlg(new KDialog(QApplication::activeModalWidget()));
+    QPointer<KDialog> dlg(new KDialog(parent ? parent : QApplication::activeModalWidget()));
     dlg->setButtons(KDialog::Close | KDialog::User1 | KDialog::User2);
     dlg->setButtonGuiItem(KDialog::User1, KGuiItem(i18n("Go to line")));
     dlg->setButtonGuiItem(KDialog::User2, KGuiItem(i18n("Log message for revision"), "kdesvnlog"));
@@ -430,7 +395,7 @@ void BlameDisplay_impl::displayBlame(SimpleLogCb *_cb, const QString &item, cons
     dlg->setMainWidget(Dialog1Layout);
 
     BlameDisplay_impl *ptr = new BlameDisplay_impl(Dialog1Layout);
-   WindowGeometryHelper wgh(dlg, QLatin1String("blame_dlg"));
+    WindowGeometryHelper wgh(dlg, QLatin1String("blame_dlg"));
 
     ptr->setContent(item, blame);
     ptr->setCb(_cb);

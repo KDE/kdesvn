@@ -38,6 +38,8 @@ target_include_directories(kdesvnhelpers
         ${CMAKE_CURRENT_SOURCE_DIR}/../
 )
 target_link_libraries(kdesvnhelpers
+    PRIVATE
+        kdesvncfgreader
     PUBLIC
         svnqt
 )

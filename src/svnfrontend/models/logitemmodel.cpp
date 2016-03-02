@@ -89,7 +89,7 @@ void SvnLogModel::setLogData(const svn::LogEntriesMapPtr &_log, const QString &_
     m_data->_min = m_data->_max = -1;
 
     m_data->m_List.reserve(_log->count());
-    beginInsertRows(QModelIndex(), 0, _log->count());
+    beginInsertRows(QModelIndex(), 0, _log->count() - 1);
     svn::LogEntriesMap::const_iterator it = _log->constBegin();
     for (; it != _log->constEnd(); ++it) {
         SvnLogModelNodePtr np(new SvnLogModelNode((*it)));
@@ -128,7 +128,7 @@ long SvnLogModel::max() const
     return m_data->_max;
 }
 
-int SvnLogModel::rowCount(const QModelIndex &parent)const
+int SvnLogModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
     return m_data->m_List.count();

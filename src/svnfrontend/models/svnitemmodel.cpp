@@ -100,9 +100,11 @@ public:
 
     bool MustCreateDir(const svn::Status &_Stat)const
     {
-        if (isRemoteAdded(_Stat) || _Stat.entry().isValid()) {
-            return _Stat.entry().kind() == svn_node_dir ||
-                   _Stat.entry().kind() == svn_node_unknown;
+        // keep in sync with SvnItem::isDir()
+        if (_Stat.entry().isValid() || isRemoteAdded(_Stat)) {
+          if (_Stat.entry().kind() != svn_node_unknown) {
+              return _Stat.entry().kind() == svn_node_dir;
+          }
         }
         /* must be a local file */
         QFileInfo f(_Stat.path());

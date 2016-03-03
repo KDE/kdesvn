@@ -191,7 +191,7 @@ const QUrl &SvnItem::Url()const
 
 bool SvnItem::isDir()const
 {
-    if (isRemoteAdded() || p_Item->m_Stat->entry().isValid()) {
+    if (p_Item->m_Stat->entry().isValid() || isRemoteAdded()) {
         if (p_Item->m_Stat->entry().kind() != svn_node_unknown) {
             return p_Item->m_Stat->entry().kind() == svn_node_dir;
         }

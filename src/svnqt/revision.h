@@ -144,7 +144,7 @@ public:
      * @param dateTime DateTime wrapper for apr_time_t
      * @todo change it to referenced parameter (requires interface upgrade of lib)
      */
-    Revision(const DateTime dateTime);    //krazy:exclude=explicit
+    Revision(const DateTime &dateTime);    //krazy:exclude=explicit
     /**
      * Constructor
      *

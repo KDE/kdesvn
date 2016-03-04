@@ -121,7 +121,7 @@ Revision &Revision::operator=(const QString &what)
     return *this;
 }
 
-Revision::Revision(const DateTime dateTime)
+Revision::Revision(const DateTime &dateTime)
 {
     m_revision.kind = svn_opt_revision_date;
     m_revision.value.date = dateTime.GetAPRTimeT();
@@ -172,7 +172,6 @@ Revision::operator QString()const
 QString Revision::toString()const
 {
     QString value;
-    QDateTime result;
     switch (m_revision.kind) {
     case svn_opt_revision_number:
         value.sprintf("%li", m_revision.value.number);

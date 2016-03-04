@@ -333,7 +333,7 @@ localSingleStatus(const Path &path, const ContextP &context, bool update = false
 }
 
 static StatusPtr
-remoteSingleStatus(Client *client, const Path &path, const Revision revision, const ContextP &)
+remoteSingleStatus(Client *client, const Path &path, const Revision &revision, const ContextP &)
 {
     const InfoEntries infoEntries = client->info(path, DepthEmpty, revision, Revision(Revision::UNDEFINED));
     if (infoEntries.isEmpty()) {
@@ -343,7 +343,7 @@ remoteSingleStatus(Client *client, const Path &path, const Revision revision, co
 }
 
 StatusPtr
-Client_impl::singleStatus(const Path &path, bool update, const Revision revision) throw (ClientException)
+Client_impl::singleStatus(const Path &path, bool update, const Revision &revision) throw (ClientException)
 {
     if (Url::isValid(path.path())) {
         return remoteSingleStatus(this, path, revision, m_context);

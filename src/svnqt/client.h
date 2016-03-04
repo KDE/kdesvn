@@ -117,7 +117,7 @@ public:
      * @return a Status with Statis.isVersioned = FALSE
      */
     virtual StatusPtr
-    singleStatus(const Path &path, bool update = false, const Revision revision = svn::Revision::HEAD) throw (ClientException) = 0;
+    singleStatus(const Path &path, bool update = false, const Revision &revision = svn::Revision::HEAD) throw (ClientException) = 0;
 
     /**
        * Executes a revision checkout.

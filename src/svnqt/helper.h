@@ -50,7 +50,7 @@ class DepthToSvn
 protected:
     svn_depth_t _value;
 public:
-    explicit DepthToSvn(const svn::Depth &val): _value(svn_depth_unknown)
+    explicit DepthToSvn(const svn::Depth val): _value(svn_depth_unknown)
     {
         switch (val) {
         case DepthUnknown:

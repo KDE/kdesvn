@@ -39,8 +39,7 @@ RevertForm::RevertForm(const QStringList &files, QWidget *parent)
 
 RevertForm::~RevertForm()
 {
-    WindowGeometryHelper wgh(this, QLatin1String("revert_items_dialog"), false);
-    wgh.save();
+    WindowGeometryHelper::restore(this, QLatin1String("revert_items_dialog"));
     delete m_ui;
 }
 
@@ -52,5 +51,5 @@ svn::Depth RevertForm::getDepth() const
 void RevertForm::showEvent(QShowEvent *e)
 {
     QDialog::showEvent(e);
-    WindowGeometryHelper wgh(this, QLatin1String("revert_items_dialog"));
+    WindowGeometryHelper::save(this, QLatin1String("revert_items_dialog"));
 }

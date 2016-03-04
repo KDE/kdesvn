@@ -31,8 +31,11 @@ class QWidget;
 class WindowGeometryHelper
 {
 public:
-    WindowGeometryHelper(QWidget *w, const QString &groupName, bool bAutoRestore = true);
+    WindowGeometryHelper(QWidget *w, const QString &groupName);
     ~WindowGeometryHelper() = default;
+
+    static void restore(QWidget *w, const QString &groupName);
+    static void save(QWidget *w, const QString &groupName);
 
     // no need to call restore() - already called in ctor when bAutoRestore = true
     void restore();

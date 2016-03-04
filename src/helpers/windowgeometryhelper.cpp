@@ -26,15 +26,25 @@
 #include <QWidget>
 #include <QWindow>
 
-WindowGeometryHelper::WindowGeometryHelper(QWidget *w, const QString &groupName, bool bAutoRestore)
+WindowGeometryHelper::WindowGeometryHelper(QWidget *w, const QString &groupName)
   : m_widget(w)
   , m_config(Kdesvnsettings::self()->config())
   , m_groupName(groupName)
 {
-   if (bAutoRestore)
-   {
-       restore();
-   }
+   restore();
+}
+
+void WindowGeometryHelper::restore(QWidget *w, const QString &groupName)
+{
+    KConfigGroup kcg(Kdesvnsettings::self()->config(), groupName);
+    KWindowConfig::restoreWindowSize(w->windowHandle(), kcg);
+    w->resize(w->windowHandle()->size()); // needed, see https://git.reviewboard.kde.org/r/119594/
+}
+
+void WindowGeometryHelper::save(QWidget *w, const QString &groupName)
+{
+    KConfigGroup kcg(Kdesvnsettings::self()->config(), groupName);
+    KWindowConfig::saveWindowSize(w->windowHandle(), kcg);
 }
 
 void WindowGeometryHelper::restore()

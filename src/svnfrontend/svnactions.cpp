@@ -135,8 +135,7 @@ public:
     void cleanDialogs()
     {
         if (m_DiffDialog) {
-            WindowGeometryHelper wgh(m_DiffDialog,  QLatin1String("diff_display"), false);
-            wgh.save();
+            WindowGeometryHelper::save(m_DiffDialog, QLatin1String("diff_display"));
             delete m_DiffDialog;
             m_DiffDialog = 0;
         }

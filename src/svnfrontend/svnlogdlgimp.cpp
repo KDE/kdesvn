@@ -273,8 +273,7 @@ void SvnLogDlgImp::slotDispPrevious()
  */
 void SvnLogDlgImp::saveSize()
 {
-    WindowGeometryHelper wgh(this, groupName, false);
-    wgh.save();
+    WindowGeometryHelper::save(this, groupName);
 }
 
 void SvnLogDlgImp::slotRevisionSelected()

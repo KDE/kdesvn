@@ -41,8 +41,7 @@ DeleteForm::DeleteForm(const QStringList &files, QWidget *parent)
 
 DeleteForm::~DeleteForm()
 {
-    WindowGeometryHelper wgh(this, QLatin1String("delete_items_dialog"), false);
-    wgh.save();
+    WindowGeometryHelper::save(this, QLatin1String("delete_items_dialog"));
     delete m_ui;
 }
 
@@ -65,5 +64,5 @@ bool DeleteForm::force_delete() const
 void DeleteForm::showEvent(QShowEvent *e)
 {
     QDialog::showEvent(e);
-    WindowGeometryHelper wgh(this, QLatin1String("delete_items_dialog"));
+    WindowGeometryHelper::restore(this, QLatin1String("delete_items_dialog"));
 }

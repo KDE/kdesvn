@@ -22,7 +22,7 @@ qt5_wrap_ui(kdesvn_shared_ui
     authdlg.ui
     commitmessage.ui
     deleteform.ui
-    depthform.ui
+    depthselector.ui
     encodingselector.ui
     revertform.ui
     ssltrustprompt.ui
@@ -41,7 +41,7 @@ set(ksvnwidgetsrc
     models/commitmodel.cpp
     models/commitmodelhelper.cpp
     pwstorage.cpp
-    revertform_impl.cpp
+    revertform.cpp
     ssltrustprompt_impl.cpp
     )
 
@@ -58,7 +58,7 @@ set(ksvnwidgethdr
     models/commitmodel.h
     models/commitmodelhelper.h
     pwstorage.h
-    revertform_impl.h
+    revertform.h
     ssltrustprompt_impl.h
 )
 

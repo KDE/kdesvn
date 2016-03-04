@@ -1,6 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005-2009 by Rajko Albrecht                             *
- *   ral@alwins-world.de                                                   *
+ *   Copyright (C) 2106 by Christian Ehrlicher <ch.ehrlicher@gmx.de>       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,23 +16,41 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef REVERT_FORM_IMPL_H
-#define REVERT_FORM_IMPL_H
 
-#include "ksvnwidgets/ui_revertform.h"
-#include "svnqt/svnqttypes.h"
+#include "revertform.h"
+#include "depthselector.h"
+#include "ui_revertform.h"
 
-class QStringList;
+#include <QPushButton>
+#include "helpers/windowgeometryhelper.h"
 
-class RevertFormImpl: public QWidget, public Ui::RevertForm
+RevertForm::RevertForm(const QStringList &files, QWidget *parent)
+    : QDialog(parent)
+    , m_ui(new Ui::RevertForm)
 {
-    Q_OBJECT
-public:
-    explicit RevertFormImpl(QWidget *parent = 0);
-    virtual ~RevertFormImpl();
-    svn::Depth getDepth()const;
-    void setDispList(const QStringList &_list);
-    void setRecursive(bool rec);
-};
+    m_ui->setupUi(this);
+    m_ui->m_ItemsList->addItems(files);
+    QPushButton *okButton = m_ui->buttonBox->button(QDialogButtonBox::Ok);
+    okButton->setDefault(true);
+    okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    connect(m_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(m_ui->buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+}
 
-#endif
+RevertForm::~RevertForm()
+{
+    WindowGeometryHelper wgh(this, QLatin1String("revert_items_dialog"), false);
+    wgh.save();
+    delete m_ui;
+}
+
+svn::Depth RevertForm::getDepth() const
+{
+    return m_ui->m_DepthSelect->getDepth();
+}
+
+void RevertForm::showEvent(QShowEvent *e)
+{
+    QDialog::showEvent(e);
+    WindowGeometryHelper wgh(this, QLatin1String("revert_items_dialog"));
+}

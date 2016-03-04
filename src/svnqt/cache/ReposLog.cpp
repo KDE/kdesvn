@@ -511,12 +511,12 @@ bool svn::cache::ReposLog::log(const svn::Path &what, const svn::Revision &_star
     static QString s_m("select mergeditems from mergeditems where mergeditems.revision='%1'");
 
     svn::Revision peg = date2numberRev(_peg, true);
-    QString query_string = QString(s_q).arg(what.native()).arg(what.native()).arg((peg == svn::Revision::UNDEFINED ? QString() : QString(" AND revision<=%1").arg(peg.revnum())));
+    QString query_string = s_q.arg(what.native(), what.native(), (peg == svn::Revision::UNDEFINED ? QString() : QString(" AND revision<=%1").arg(peg.revnum())));
     if (peg == svn::Revision::UNDEFINED) {
         peg = latestCachedRev();
     }
     if (!itemExists(peg, what)) {
-        throw svn::cache::DatabaseException(QString("Entry '%1' does not exists at revision %2").arg(what.native()).arg(peg.toString()));
+        throw svn::cache::DatabaseException(QString("Entry '%1' does not exists at revision %2").arg(what.native(), peg.toString()));
     }
     if (limit > 0) {
         query_string += QString(" LIMIT %1").arg(limit);

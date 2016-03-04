@@ -96,7 +96,7 @@ protected:
 
 Q_SIGNALS:
     void makeDiff(const QString &, const svn::Revision &, const QString &, const svn::Revision &, QWidget *);
-    void sigRevertItem(const QStringList &, bool);
+    void sigRevertItem(const QStringList &);
 };
 
 #endif

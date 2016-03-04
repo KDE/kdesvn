@@ -388,8 +388,8 @@ QString Commitmsg_impl::getLogmessage(const CommitActionEntries &_on,
     if (callback) {
         connect(ptr, SIGNAL(makeDiff(QString,svn::Revision,QString,svn::Revision,QWidget*)),
                 callback, SLOT(makeDiff(QString,svn::Revision,QString,svn::Revision,QWidget*)));
-        connect(ptr, SIGNAL(sigRevertItem(QStringList,bool)),
-                callback, SLOT(slotRevertItems(QStringList,bool)));
+        connect(ptr, SIGNAL(sigRevertItem(QStringList)),
+                callback, SLOT(slotRevertItems(QStringList)));
         connect(callback, SIGNAL(sigItemsReverted(QStringList)),
                 ptr, SLOT(slotItemReverted(QStringList)));
     }
@@ -461,7 +461,7 @@ void Commitmsg_impl::slotRevertSelected()
         return;
     }
     QStringList what(ptr->actionEntry().name());
-    emit sigRevertItem(what, false);
+    emit sigRevertItem(what);
 }
 
 CommitModelNodePtr Commitmsg_impl::currentCommitItem(int column)

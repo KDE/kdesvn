@@ -34,7 +34,7 @@
 #include "ksvnwidgets/models/commitmodelhelper.h"
 #include "ksvnwidgets/diffbrowser.h"
 #include "ksvnwidgets/encodingselector_impl.h"
-#include "ksvnwidgets/revertform_impl.h"
+#include "ksvnwidgets/revertform.h"
 #include "graphtree/revisiontree.h"
 #include "settings/kdesvnsettings.h"
 #include "svnqt/client.h"
@@ -1775,11 +1775,11 @@ void SvnActions::slotRevert()
     } else {
         displist.push_back(m_Data->m_ParentList->baseUri());
     }
-    slotRevertItems(displist, true);
+    slotRevertItems(displist);
     EMIT_REFRESH;
 }
 
-void SvnActions::slotRevertItems(const QStringList &displist, bool rec_default)
+void SvnActions::slotRevertItems(const QStringList &displist)
 {
     if (!m_Data->m_CurrentContext) {
         return;
@@ -1788,16 +1788,12 @@ void SvnActions::slotRevertItems(const QStringList &displist, bool rec_default)
         return;
     }
 
-    svn::Depth depth;
-    RevertFormImpl *ptr = 0;
-    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Revert entries"), true);
-    ptr->setDispList(displist);
-    ptr->setRecursive(rec_default);
+    QPointer<RevertForm> dlg(new RevertForm(displist, QApplication::activeModalWidget()));
     if (dlg->exec() != QDialog::Accepted) {
         delete dlg;
         return;
     }
-    depth = ptr->getDepth();
+    const svn::Depth depth = dlg->getDepth();
     delete dlg;
 
     const svn::Targets target(helpers::sub2qt::fromStringList(displist));

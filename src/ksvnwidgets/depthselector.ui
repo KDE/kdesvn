@@ -2,19 +2,29 @@
 <ui version="4.0">
  <author>Rajko Albrecht</author>
  <comment>Selector widget for depth enumeration</comment>
- <class>DepthForm</class>
- <widget class="QWidget" name="DepthForm">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>241</width>
-    <height>45</height>
-   </rect>
-  </property>
-  <layout class="QHBoxLayout" name="hboxLayout">
+ <class>DepthSelector</class>
+ <widget class="QWidget" name="DepthSelector">
+  <layout class="QHBoxLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="sizeConstraint">
+    <enum>QLayout::SetFixedSize</enum>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item>
-    <widget class="KComboBox" name="m_DepthCombo">
+    <widget class="QComboBox" name="m_DepthCombo">
      <property name="toolTip">
       <string>Select depth of operation</string>
      </property>
@@ -71,13 +81,6 @@ Just the named directory, no entries. Updates will not pull in any files or subd
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

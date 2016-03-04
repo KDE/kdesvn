@@ -1,6 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005-2009 by Rajko Albrecht                             *
- *   ral@alwins-world.de                                                   *
+ *   Copyright (C) 2106 by Christian Ehrlicher <ch.ehrlicher@gmx.de>       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,43 +16,27 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include "revertform_impl.h"
-#include "depthselector.h"
+#pragma once
 
-#include <qstringlist.h>
+#include <QDialog>
+#include "svnqt/svnqttypes.h"
 
-/*!
-    \fn RevertFormImpl::RevertFormImpl(QWidget*parent,const char*name)
- */
-RevertFormImpl::RevertFormImpl(QWidget *parent)
-    : QWidget(parent)
+class QStringList;
+namespace Ui
 {
-    setupUi(this);
-
-    setMinimumSize(minimumSizeHint());
+class RevertForm;
 }
 
-void RevertFormImpl::setRecursive(bool rec)
+class RevertForm : public QDialog
 {
-    m_DepthSelect->setRecursive(rec);
-}
+    Q_OBJECT
+public:
+    explicit RevertForm(const QStringList &files, QWidget *parent = nullptr);
+    virtual ~RevertForm();
 
-/*!
-    \fn RevertFormImpl::~RevertFormImpl()
- */
-RevertFormImpl::~RevertFormImpl()
-{
-}
-
-svn::Depth RevertFormImpl::getDepth()const
-{
-    return m_DepthSelect->getDepth();
-}
-
-/*!
-    \fn RevertFormImpl::setDispList(const QStringList&_list)
- */
-void RevertFormImpl::setDispList(const QStringList &_list)
-{
-    m_ItemsList->addItems(_list);
-}
+    svn::Depth getDepth() const;
+protected:
+    void showEvent(QShowEvent *e) override final;
+private:
+    Ui::RevertForm *m_ui;
+};

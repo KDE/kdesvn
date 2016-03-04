@@ -18,92 +18,47 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "depthselector.h"
-#include "svnqt/version_check.h"
-
-#include <klocale.h>
-
-#include <qbuttongroup.h>
-#include <qcheckbox.h>
-#include <qlayout.h>
-#include <qcombobox.h>
+#include "ui_depthselector.h"
 
 DepthSelector::DepthSelector(QWidget *parent)
-    : QWidget(parent), Ui::DepthForm()
+    : QWidget(parent)
+    , m_ui(new Ui::DepthSelector)
 {
-    setupUi(this);
-    if (svn::Version::version_major() > 1 || svn::Version::version_minor() > 4) {
-        m_recurse = 0L;
-        m_DepthCombo->setCurrentIndex(3);
-    } else {
-        delete m_DepthCombo;
-        m_DepthCombo = 0;
-        hboxLayout->removeItem(spacerItem);
-        m_recurse = new QCheckBox(this);
-        m_recurse->setChecked(true);
-        m_recurse->setText(i18n("Recursive"));
-        hboxLayout->addWidget(m_recurse);
-        m_recurse->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        hboxLayout->addItem(spacerItem);
-    }
-    hboxLayout->setMargin(0);
-    setMinimumSize(minimumSizeHint());
-    adjustSize();
+    m_ui->setupUi(this);
+    m_ui->m_DepthCombo->setCurrentIndex(3);
 }
 
 DepthSelector::~DepthSelector()
 {
-}
-
-void DepthSelector::setRecursive(bool rec)
-{
-    if (m_DepthCombo) {
-        m_DepthCombo->setCurrentIndex(rec ? 3 : 0);
-    } else {
-        m_recurse->setChecked(rec);
-    }
+    delete m_ui;
 }
 
 void DepthSelector::addItemWidget(QWidget *aWidget)
 {
-    hboxLayout->removeItem(spacerItem);
+    m_ui->hboxLayout->removeItem(m_ui->spacerItem);
     aWidget->setParent(this);
-    hboxLayout->addWidget(aWidget);
+    m_ui->hboxLayout->addWidget(aWidget);
     aWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    hboxLayout->addItem(spacerItem);
-    setMinimumSize(minimumSizeHint());
+    m_ui->hboxLayout->addItem(m_ui->spacerItem);
 }
 
-/*!
-    \fn DepthSelector::getDepth()const
- */
-svn::Depth DepthSelector::getDepth()const
+svn::Depth DepthSelector::getDepth() const
 {
-    if (m_DepthCombo) {
-        switch (m_DepthCombo->currentIndex()) {
-        case 0:
-            return svn::DepthEmpty;
-            break;
-        case 1:
-            return svn::DepthFiles;
-            break;
-        case 2:
-            return svn::DepthImmediates;
-            break;
-        case 3:
-        default:
-            return svn::DepthInfinity;
-        }
-    } else {
-        return (m_recurse->isChecked() ? svn::DepthInfinity : svn::DepthEmpty);
+    switch (m_ui->m_DepthCombo->currentIndex()) {
+    case 0:
+        return svn::DepthEmpty;
+    case 1:
+        return svn::DepthFiles;
+    case 2:
+        return svn::DepthImmediates;
+    case 3:
+    default:
+          break;
     }
+    return svn::DepthInfinity;
 }
 
 void DepthSelector::hideDepth(bool hide)
 {
-    QWidget *w = m_DepthCombo ? (QWidget *)m_DepthCombo : (QWidget *)m_recurse;
-    if (hide) {
-        w->hide();
-    } else {
-        w->show();
-    }
+    m_ui->m_DepthCombo->setHidden(hide);
 }

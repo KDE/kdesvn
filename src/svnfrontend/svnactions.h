@@ -201,7 +201,7 @@ public Q_SLOTS:
     virtual void slotCheckout();
     virtual void slotExport();
     virtual void slotRevert();
-    virtual void slotRevertItems(const QStringList &, bool rec_default);
+    virtual void slotRevertItems(const QStringList &);
     virtual void slotSwitch();
     virtual void slotResolved(const QString &);
     virtual void slotResolve(const QString &);

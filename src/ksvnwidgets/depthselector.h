@@ -17,28 +17,27 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef DEPTHSELECTOR_H
-#define DEPTHSELECTOR_H
+#pragma once
 
-#include "ksvnwidgets/ui_depthform.h"
-
+#include <QWidget>
 #include "svnqt/svnqttypes.h"
 
-class QCheckBox;
+namespace Ui
+{
+class DepthSelector;
+}
 
-class DepthSelector: public QWidget, Ui::DepthForm
+class DepthSelector: public QWidget
 {
     Q_OBJECT
 public:
-    explicit DepthSelector(QWidget *parent = 0);
+    explicit DepthSelector(QWidget *parent = nullptr);
     virtual ~DepthSelector();
-    svn::Depth getDepth()const;
+
+    svn::Depth getDepth() const;
     void addItemWidget(QWidget *);
     void hideDepth(bool hide);
-    void setRecursive(bool rec);
 
-protected:
-    QCheckBox *m_recurse;
+private:
+    Ui::DepthSelector *m_ui;
 };
-
-#endif

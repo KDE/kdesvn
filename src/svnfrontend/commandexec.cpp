@@ -567,7 +567,7 @@ void CommandExec::slotCmd_add()
 
 void CommandExec::slotCmd_revert()
 {
-    m_pCPart->m_SvnWrapper->slotRevertItems(m_pCPart->urls, false);
+    m_pCPart->m_SvnWrapper->slotRevertItems(m_pCPart->urls);
 }
 
 void CommandExec::slotCmd_addnew()

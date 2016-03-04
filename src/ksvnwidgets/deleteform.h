@@ -17,24 +17,27 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef DELETEFORM_IMPL_H
-#define DELETEFORM_IMPL_H
+#pragma once
 
-#include "ksvnwidgets/ui_deleteform.h"
+#include <QDialog>
 
-class DeleteForm_impl: public QWidget, Ui::DeleteForm
+namespace Ui
+{
+class DeleteForm;
+}
+
+class DeleteForm : public QDialog
 {
     Q_OBJECT
 public:
-    explicit DeleteForm_impl(QWidget *parent = 0);
-    virtual ~DeleteForm_impl();
+    explicit DeleteForm(const QStringList &files, QWidget *parent = nullptr);
+    virtual ~DeleteForm();
 
-    void setStringList(const QStringList &);
-
-    bool keep_local()const;
-    bool force_delete()const;
-
+    bool keep_local() const;
+    bool force_delete() const;
     void showExtraButtons(bool show);
+protected:
+    void showEvent(QShowEvent *e) override final;
+private:
+    Ui::DeleteForm *m_ui;
 };
-
-#endif

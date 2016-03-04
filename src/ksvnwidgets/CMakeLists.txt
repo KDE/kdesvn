@@ -32,7 +32,7 @@ set(ksvnwidgetsrc
     authdialogimpl.cpp
     authdialogwidget.cpp
     commitmsg_impl.cpp
-    deleteform_impl.cpp
+    deleteform.cpp
     depthselector.cpp
     diffbrowser.cpp
     diffbrowserdata.cpp
@@ -49,7 +49,7 @@ set(ksvnwidgethdr
     authdialogimpl.h
     authdialogwidget.h
     commitmsg_impl.h
-    deleteform_impl.h
+    deleteform.h
     depthselector.h
     diffbrowser.h
     diffbrowserdata.h

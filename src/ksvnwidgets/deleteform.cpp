@@ -18,36 +18,52 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#include "deleteform_impl.h"
+#include "deleteform.h"
+#include "ui_deleteform.h"
 
-DeleteForm_impl::DeleteForm_impl(QWidget *parent)
-    : QWidget(parent), DeleteForm()
+#include <QPushButton>
+#include "helpers/windowgeometryhelper.h"
+
+DeleteForm::DeleteForm(const QStringList &files, QWidget *parent)
+    : QDialog(parent)
+    , m_ui(new Ui::DeleteForm)
 {
-    setupUi(this);
+    m_ui->setupUi(this);
+    m_ui->m_ItemsList->addItems(files);
+    QPushButton *okButton = m_ui->buttonBox->button(QDialogButtonBox::Yes);
+    if (okButton) {
+        okButton->setDefault(true);
+        okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    }
+    connect(m_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(m_ui->buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 }
 
-DeleteForm_impl::~DeleteForm_impl()
+DeleteForm::~DeleteForm()
 {
+    WindowGeometryHelper wgh(this, QLatin1String("delete_items_dialog"), false);
+    wgh.save();
+    delete m_ui;
 }
 
-void DeleteForm_impl::showExtraButtons(bool show)
+void DeleteForm::showExtraButtons(bool show)
 {
-    m_keepLocal->setVisible(show);
-    m_forceDelete->setVisible(show);
+    m_ui->m_keepLocal->setVisible(show);
+    m_ui->m_forceDelete->setVisible(show);
 }
 
-void DeleteForm_impl::setStringList(const QStringList &aList)
+bool DeleteForm::keep_local() const
 {
-    m_ItemsList->clear();
-    m_ItemsList->insertItems(0, aList);
+    return m_ui->m_keepLocal->isChecked();
 }
 
-bool DeleteForm_impl::keep_local()const
+bool DeleteForm::force_delete() const
 {
-    return m_keepLocal->isChecked();
+    return m_ui->m_forceDelete->isChecked();
 }
 
-bool DeleteForm_impl::force_delete()const
+void DeleteForm::showEvent(QShowEvent *e)
 {
-    return m_forceDelete->isChecked();
+    QDialog::showEvent(e);
+    WindowGeometryHelper wgh(this, QLatin1String("delete_items_dialog"));
 }

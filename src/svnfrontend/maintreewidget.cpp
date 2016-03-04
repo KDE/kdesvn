@@ -40,7 +40,7 @@
 #include "fronthelpers/widgetblockstack.h"
 #include "fronthelpers/fronthelpers.h"
 #include "ksvnwidgets/commitmsg_impl.h"
-#include "ksvnwidgets/deleteform_impl.h"
+#include "ksvnwidgets/deleteform.h"
 #include "helpers/sub2qt.h"
 #include "helpers/kdesvn_debug.h"
 #include "opencontextmenu.h"
@@ -1669,22 +1669,18 @@ void MainTreeWidget::makeDelete(const SvnItemList &lst)
         displist.append((*liter)->fullName());
     }
 
-    DeleteForm_impl *ptr = 0;
-    QPointer<KDialog> dlg = createYesDialog(&ptr, i18n("Really delete these entries?"), true, true);
-    WindowGeometryHelper wgh(dlg, QLatin1String("delete_items_dialog"));
-    ptr->setStringList(displist);
-    ptr->showExtraButtons(isWorkingCopy() && !items.isEmpty());
+    QPointer<DeleteForm> dlg(new DeleteForm(displist, QApplication::activeModalWidget()));
+    dlg->showExtraButtons(isWorkingCopy() && !items.isEmpty());
 
     if (dlg->exec() == KDialog::Yes) {
-        bool force = ptr->force_delete();
-        bool keep = ptr->keep_local();
+        bool force = dlg->force_delete();
+        bool keep = dlg->keep_local();
         WidgetBlockStack st(this);
         if (!kioList.isEmpty()) {
             KIO::Job *aJob = KIO::del(kioList);
             if (!aJob->exec()) {
                 KJobWidgets::setWindow(aJob, this);
                 aJob->ui()->showErrorMessage();
-                wgh.save();
                 delete dlg;
                 return;
             }
@@ -1694,7 +1690,6 @@ void MainTreeWidget::makeDelete(const SvnItemList &lst)
         }
         refreshCurrentTree();
     }
-    wgh.save();
     delete dlg;
 }
 

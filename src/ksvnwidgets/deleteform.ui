@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>DeleteForm</class>
- <widget class="QWidget" name="DeleteForm">
+ <widget class="QDialog" name="DeleteForm">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>318</width>
-    <height>222</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <property name="windowTitle">
+   <string>Really delete these entries?</string>
+  </property>
+  <layout class="QVBoxLayout">
    <item>
     <widget class="QListWidget" name="m_ItemsList"/>
    </item>
@@ -25,6 +28,13 @@
     <widget class="QCheckBox" name="m_keepLocal">
      <property name="text">
       <string>Keep local copies</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::No|QDialogButtonBox::Yes</set>
      </property>
     </widget>
    </item>

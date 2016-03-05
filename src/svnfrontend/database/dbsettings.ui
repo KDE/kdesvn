@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>DbSettings</class>
- <widget class="QWidget" name="DbSettings">
+ <widget class="QDialog" name="DbSettings">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>414</width>
-    <height>431</height>
+    <width>417</width>
+    <height>438</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
-    <widget class="KTabWidget" name="tabWidget">
+    <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
       <number>0</number>
      </property>
@@ -106,6 +106,13 @@
      </widget>
     </widget>
    </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -113,12 +120,6 @@
    <class>KEditListBox</class>
    <extends>QGroupBox</extends>
    <header>keditlistbox.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KTabWidget</class>
-   <extends>QTabWidget</extends>
-   <header>ktabwidget.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

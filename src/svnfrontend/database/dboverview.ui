@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>DBOverView</class>
- <widget class="QWidget" name="DBOverView">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>365</width>
-    <height>297</height>
-   </rect>
+ <widget class="QDialog" name="DBOverView">
+  <property name="windowTitle">
+   <string>Overview about cache database content</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
+  <layout class="QVBoxLayout">
    <item>
     <widget class="QSplitter" name="splitter">
      <property name="orientation">
@@ -26,14 +21,18 @@
         </widget>
        </item>
        <item>
-        <widget class="QListView" name="m_ReposListView"/>
+        <widget class="QListView" name="m_ReposListView">
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="layoutWidget">
+     <widget class="QWidget" name="layoutWidget1">
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
-        <widget class="KTextBrowser" name="m_RepostatusBrowser"/>
+        <widget class="QTextBrowser" name="m_RepostatusBrowser"/>
        </item>
        <item row="1" column="0">
         <widget class="QPushButton" name="m_DeleteCacheButton">
@@ -79,87 +78,15 @@
      </widget>
     </widget>
    </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Close</set>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KTextBrowser</class>
-   <extends>QTextBrowser</extends>
-   <header>ktextbrowser.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
- <connections>
-  <connection>
-   <sender>m_DeleteCacheButton</sender>
-   <signal>clicked()</signal>
-   <receiver>DBOverView</receiver>
-   <slot>deleteCacheItems()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>354</x>
-     <y>184</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>364</x>
-     <y>296</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>m_DeleteRepositoryButton</sender>
-   <signal>clicked()</signal>
-   <receiver>DBOverView</receiver>
-   <slot>deleteRepository()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>354</x>
-     <y>218</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>364</x>
-     <y>296</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>m_SettingsButton</sender>
-   <signal>clicked()</signal>
-   <receiver>DBOverView</receiver>
-   <slot>repositorySettings()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>354</x>
-     <y>252</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>364</x>
-     <y>296</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>m_StatisticButton</sender>
-   <signal>clicked()</signal>
-   <receiver>DBOverView</receiver>
-   <slot>repositoryStatistic()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>271</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>260</x>
-     <y>301</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
- <slots>
-  <slot>itemActivated(QModelIndex)</slot>
-  <slot>deleteCacheItems()</slot>
-  <slot>deleteRepository()</slot>
-  <slot>repositorySettings()</slot>
-  <slot>repositoryStatistic()</slot>
- </slots>
+ <connections/>
 </ui>

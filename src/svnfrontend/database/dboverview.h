@@ -20,23 +20,31 @@
 #ifndef DBOVERVIEW_H
 #define DBOVERVIEW_H
 
-#include "ui_dboverview.h"
+#include <QDialog>
 #include <svnqt/client.h>
 
-class DbOverViewData;
+namespace Ui
+{
+class DBOverView;
+}
+class QItemSelection;
+class QStringListModel;
 
-class DbOverview: public QWidget, public Ui::DBOverView
+class DbOverview: public QDialog
 {
     Q_OBJECT
-public:
-    explicit DbOverview(QWidget *parent = 0);
+private:
+    explicit DbOverview(const svn::ClientP &aClient, QWidget *parent = nullptr);
     virtual ~DbOverview();
 
-    static void showDbOverview(const svn::ClientP &aClient);
+public:
+    static void showDbOverview(const svn::ClientP &aClient, QWidget *parent = nullptr);
 
-protected Q_SLOTS:
+protected:
+    void showEvent(QShowEvent *e) override final;
+
+private Q_SLOTS:
     virtual void itemActivated(const QItemSelection &, const QItemSelection &);
-    virtual void setClient(const svn::ClientP &aClient);
     virtual void deleteCacheItems();
     virtual void deleteRepository();
     virtual void repositorySettings();
@@ -47,7 +55,9 @@ protected:
     void genInfo(const QString &);
 
 private:
-    DbOverViewData *_data;
+    svn::ClientP m_clientP;
+    QStringListModel *m_repo_model;
+    Ui::DBOverView *m_ui;
 };
 
 #endif

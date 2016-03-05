@@ -2336,7 +2336,7 @@ void MainTreeWidget::slotRepositorySettings()
     if (inf.reposRoot().isEmpty()) {
         KMessageBox::sorry(QApplication::activeModalWidget(), i18n("Could not retrieve repository."), i18n("SVN Error"));
     } else {
-        DbSettings::showSettings(inf.reposRoot().toString());
+        DbSettings::showSettings(inf.reposRoot().toString(), this);
     }
 }
 

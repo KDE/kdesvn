@@ -21,30 +21,33 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#ifndef DB_SETTINGS_H
-#define DB_SETTINGS_H
+#pragma once
 
-#include "ui_dbsettings.h"
+#include <QDialog>
 
-class DbSettingsData;
+namespace Ui
+{
+class DbSettings;
+}
+class KEditListBox;
 
-class DbSettings: public QWidget, Ui::DbSettings
+class DbSettings: public QDialog
 {
     Q_OBJECT
 public:
-    explicit DbSettings(QWidget *parent = 0);
-    virtual ~DbSettings();
-
-    void setRepository(const QString &repository);
-    void store();
-
-    static void showSettings(const QString &repository);
+    static void showSettings(const QString &repository, QWidget *parent = nullptr);
 
 protected:
+    void showEvent(QShowEvent *e) override final;
+protected Q_SLOTS:
+    void accept() override final;
+private:
     void init();
+    explicit DbSettings(const QString &repository, QWidget *parent = nullptr);
+    virtual ~DbSettings();
+
     void store_list(KEditListBox *, const QString &);
 private:
-    DbSettingsData *_data;
+    QString m_repository;
+    Ui::DbSettings *m_ui;
 };
-
-#endif

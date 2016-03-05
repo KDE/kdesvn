@@ -21,27 +21,19 @@
 #include "deleteform.h"
 #include "ui_deleteform.h"
 
-#include <QPushButton>
-#include "helpers/windowgeometryhelper.h"
-
 DeleteForm::DeleteForm(const QStringList &files, QWidget *parent)
-    : QDialog(parent)
+    : KSvnDialog(QLatin1String("delete_items_dialog"), parent)
     , m_ui(new Ui::DeleteForm)
 {
     m_ui->setupUi(this);
     m_ui->m_ItemsList->addItems(files);
-    QPushButton *okButton = m_ui->buttonBox->button(QDialogButtonBox::Yes);
-    if (okButton) {
-        okButton->setDefault(true);
-        okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-    }
+    setDefaultButton(m_ui->buttonBox->button(QDialogButtonBox::Yes));
     connect(m_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(m_ui->buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 }
 
 DeleteForm::~DeleteForm()
 {
-    WindowGeometryHelper::save(this, QLatin1String("delete_items_dialog"));
     delete m_ui;
 }
 
@@ -59,10 +51,4 @@ bool DeleteForm::keep_local() const
 bool DeleteForm::force_delete() const
 {
     return m_ui->m_forceDelete->isChecked();
-}
-
-void DeleteForm::showEvent(QShowEvent *e)
-{
-    QDialog::showEvent(e);
-    WindowGeometryHelper::restore(this, QLatin1String("delete_items_dialog"));
 }

@@ -38,6 +38,7 @@ set(ksvnwidgetsrc
     diffbrowserdata.cpp
     diffsyntax.cpp
     encodingselector_impl.cpp
+    ksvndialog.cpp
     models/commitmodel.cpp
     models/commitmodelhelper.cpp
     pwstorage.cpp
@@ -55,6 +56,7 @@ set(ksvnwidgethdr
     diffbrowserdata.h
     diffsyntax.h
     encodingselector_impl.h
+    ksvndialog.h
     models/commitmodel.h
     models/commitmodelhelper.h
     pwstorage.h

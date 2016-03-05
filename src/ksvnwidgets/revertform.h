@@ -18,7 +18,7 @@
  ***************************************************************************/
 #pragma once
 
-#include <QDialog>
+#include <ksvndialog.h>
 #include "svnqt/svnqttypes.h"
 
 class QStringList;
@@ -27,7 +27,7 @@ namespace Ui
 class RevertForm;
 }
 
-class RevertForm : public QDialog
+class RevertForm : public KSvnDialog
 {
     Q_OBJECT
 public:
@@ -35,8 +35,6 @@ public:
     virtual ~RevertForm();
 
     svn::Depth getDepth() const;
-protected:
-    void showEvent(QShowEvent *e) override final;
 private:
     Ui::RevertForm *m_ui;
 };

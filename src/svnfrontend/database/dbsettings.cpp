@@ -26,21 +26,15 @@
 
 #include "svnqt/cache/ReposConfig.h"
 #include "svnfrontend/fronthelpers/createdlg.h"
-#include "helpers/windowgeometryhelper.h"
 #include <QPointer>
-#include <QPushButton>
 
 DbSettings::DbSettings(const QString &repository, QWidget *parent)
-    : QDialog(parent)
+    : KSvnDialog(QLatin1String("db_settings_dlg"), parent)
     , m_repository(repository)
     , m_ui(new Ui::DbSettings)
 {
     m_ui->setupUi(this);
-    QPushButton *okButton = m_ui->buttonBox->button(QDialogButtonBox::Ok);
-    if (okButton) {
-        okButton->setDefault(true);
-        okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-    }
+    setDefaultButton(m_ui->buttonBox->button(QDialogButtonBox::Ok));
     connect(m_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(m_ui->buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
     setWindowTitle(i18n("Settings for %1", repository));
@@ -49,7 +43,6 @@ DbSettings::DbSettings(const QString &repository, QWidget *parent)
 
 DbSettings::~DbSettings()
 {
-    WindowGeometryHelper::save(this, QLatin1String("db_settings_dlg"));
     delete m_ui;
 }
 
@@ -82,7 +75,7 @@ void DbSettings::accept()
     store_list(m_ui->dbcfg_exclude_log_pattern, "exclude_log_pattern");
     svn::cache::ReposConfig::self()->setValue(m_repository, "no_update_cache", m_ui->dbcfg_noCacheUpdate->isChecked());
     svn::cache::ReposConfig::self()->setValue(m_repository, "filter_empty_author", m_ui->dbcfg_filter_empty_author->isChecked());
-    QDialog::accept();
+    KSvnDialog::accept();
 }
 
 void DbSettings::showSettings(const QString &repository, QWidget *parent)
@@ -90,10 +83,4 @@ void DbSettings::showSettings(const QString &repository, QWidget *parent)
     QPointer<DbSettings> dlg(new DbSettings(repository, parent ? parent : QApplication::activeModalWidget()));
     dlg->exec();
     delete dlg;
-}
-
-void DbSettings::showEvent(QShowEvent *e)
-{
-    QDialog::showEvent(e);
-    WindowGeometryHelper::restore(this, QLatin1String("db_settings_dlg"));
 }

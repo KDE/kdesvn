@@ -20,7 +20,7 @@
 #ifndef DBOVERVIEW_H
 #define DBOVERVIEW_H
 
-#include <QDialog>
+#include "ksvndialog.h"
 #include <svnqt/client.h>
 
 namespace Ui
@@ -30,7 +30,7 @@ class DBOverView;
 class QItemSelection;
 class QStringListModel;
 
-class DbOverview: public QDialog
+class DbOverview: public KSvnDialog
 {
     Q_OBJECT
 private:
@@ -39,9 +39,6 @@ private:
 
 public:
     static void showDbOverview(const svn::ClientP &aClient, QWidget *parent = nullptr);
-
-protected:
-    void showEvent(QShowEvent *e) override final;
 
 private Q_SLOTS:
     virtual void itemActivated(const QItemSelection &, const QItemSelection &);

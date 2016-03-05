@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2106 by Christian Ehrlicher <ch.ehrlicher@gmx.de>       *
+ *   Copyright (C) 2016 Christian Ehrlicher <ch.ehrlicher@gmx.de>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,27 +17,31 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#include "revertform.h"
-#include "depthselector.h"
-#include "ui_revertform.h"
+#include "ksvndialog.h"
 
-RevertForm::RevertForm(const QStringList &files, QWidget *parent)
-    : KSvnDialog(QLatin1String("revert_items_dialog"), parent)
-    , m_ui(new Ui::RevertForm)
+#include <QPushButton>
+#include "helpers/windowgeometryhelper.h"
+
+KSvnDialog::KSvnDialog(const QString &configGroupName, QWidget *parent)
+    : QDialog(parent)
+    , m_configGroupName(configGroupName)
+{}
+
+KSvnDialog::~KSvnDialog()
 {
-    m_ui->setupUi(this);
-    m_ui->m_ItemsList->addItems(files);
-    setDefaultButton(m_ui->buttonBox->button(QDialogButtonBox::Ok));
-    connect(m_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(m_ui->buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    WindowGeometryHelper::save(this, m_configGroupName);
 }
 
-RevertForm::~RevertForm()
+void KSvnDialog::setDefaultButton(QPushButton *defaultButton)
 {
-    delete m_ui;
+    if (defaultButton) {
+        defaultButton->setDefault(true);
+        defaultButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+    }
 }
 
-svn::Depth RevertForm::getDepth() const
+void KSvnDialog::showEvent(QShowEvent *e)
 {
-    return m_ui->m_DepthSelect->getDepth();
+    QDialog::showEvent(e);
+    WindowGeometryHelper::restore(this, m_configGroupName);
 }

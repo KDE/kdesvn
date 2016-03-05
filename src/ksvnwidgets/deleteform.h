@@ -19,14 +19,14 @@
  ***************************************************************************/
 #pragma once
 
-#include <QDialog>
+#include "ksvndialog.h"
 
 namespace Ui
 {
 class DeleteForm;
 }
 
-class DeleteForm : public QDialog
+class DeleteForm : public KSvnDialog
 {
     Q_OBJECT
 public:
@@ -36,8 +36,6 @@ public:
     bool keep_local() const;
     bool force_delete() const;
     void showExtraButtons(bool show);
-protected:
-    void showEvent(QShowEvent *e) override final;
 private:
     Ui::DeleteForm *m_ui;
 };

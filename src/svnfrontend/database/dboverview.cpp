@@ -31,7 +31,6 @@
 #include "svnqt/client.h"
 #include "helpers/stringhelper.h"
 #include "helpers/kdesvn_debug.h"
-#include "helpers/windowgeometryhelper.h"
 
 #include <QPointer>
 #include <QStringListModel>
@@ -41,18 +40,15 @@
 #include <KLocale>
 
 DbOverview::DbOverview(const svn::ClientP &aClient, QWidget *parent)
-    : QDialog(parent)
+    : KSvnDialog(QLatin1String("db_overview_dlg"), parent)
     , m_clientP(aClient)
     , m_repo_model(new QStringListModel(this))
     , m_ui(new Ui::DBOverView)
 {
     m_ui->setupUi(this);
-    QPushButton *okButton = m_ui->buttonBox->button(QDialogButtonBox::Close);
-    if (okButton) {
-        okButton->setDefault(true);
-        okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-        connect(okButton, SIGNAL(clicked(bool)), this, SLOT(accept()));
-    }
+    setDefaultButton(m_ui->buttonBox->button(QDialogButtonBox::Close));
+    connect(m_ui->buttonBox->button(QDialogButtonBox::Close), SIGNAL(clicked(bool)),
+            this, SLOT(accept()));
 
     enableButtons(false);
 
@@ -82,7 +78,6 @@ DbOverview::DbOverview(const svn::ClientP &aClient, QWidget *parent)
 
 DbOverview::~DbOverview()
 {
-    WindowGeometryHelper::save(this,  QLatin1String("db_overview_dlg"));
     delete m_ui;
 }
 
@@ -168,10 +163,4 @@ void DbOverview::deleteRepository()
 void DbOverview::repositorySettings()
 {
     DbSettings::showSettings(selectedRepository(), this);
-}
-
-void DbOverview::showEvent(QShowEvent *e)
-{
-    QDialog::showEvent(e);
-    WindowGeometryHelper::restore(this, QLatin1String("db_overview_dlg"));
 }

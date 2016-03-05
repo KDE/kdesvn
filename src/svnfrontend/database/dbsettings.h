@@ -23,7 +23,7 @@
  ***************************************************************************/
 #pragma once
 
-#include <QDialog>
+#include "ksvndialog.h"
 
 namespace Ui
 {
@@ -31,14 +31,12 @@ class DbSettings;
 }
 class KEditListBox;
 
-class DbSettings: public QDialog
+class DbSettings: public KSvnDialog
 {
     Q_OBJECT
 public:
     static void showSettings(const QString &repository, QWidget *parent = nullptr);
 
-protected:
-    void showEvent(QShowEvent *e) override final;
 protected Q_SLOTS:
     void accept() override final;
 private:

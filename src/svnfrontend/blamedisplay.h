@@ -17,26 +17,30 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef BLAMEDISPLAY_IMPL_H
-#define BLAMEDISPLAY_IMPL_H
+#pragma once
 
-#include "ui_blamedisplay.h"
+#include "ksvnwidgets/ksvndialog.h"
 #include "svnqt/client.h"
 
-class BlameDisplayData;
-class SimpleLogCb;
+namespace Ui
+{
+class BlameDisplay;
+}
 class BlameTreeItem;
+class BlameDisplayData;
+class QTreeWidgetItem;
+class SimpleLogCb;
 
-class BlameDisplay_impl: public QWidget, public Ui::BlameDisplay
+class BlameDisplay: public KSvnDialog
 {
     Q_OBJECT
+private:
+    explicit BlameDisplay(const QString &what, const svn::AnnotatedFile &blame, SimpleLogCb *cb, QWidget *parent = nullptr);
+    virtual ~BlameDisplay();
+
+    void setContent(const QString &what, const svn::AnnotatedFile &blame);
+    void showCommit(BlameTreeItem *bti);
 public:
-    explicit BlameDisplay_impl(QWidget *parent = 0);
-    virtual ~BlameDisplay_impl();
-
-    void setContent(const QString &, const svn::AnnotatedFile &);
-    void setCb(SimpleLogCb *);
-
     static void displayBlame(SimpleLogCb *_cb, const QString &item, const svn::AnnotatedFile &blame, QWidget *parent);
 
 private Q_SLOTS:
@@ -46,12 +50,9 @@ private Q_SLOTS:
     void slotCurrentItemChanged(QTreeWidgetItem *item, QTreeWidgetItem *);
     void slotTextCodecChanged(const QString &what);
 
-protected:
-    void showCommit(BlameTreeItem *bti);
-
 private:
+    Ui::BlameDisplay *m_ui;
     BlameDisplayData *m_Data;
 
 };
 
-#endif

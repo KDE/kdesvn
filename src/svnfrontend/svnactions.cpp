@@ -29,7 +29,7 @@
 #include "fillcachethread.h"
 #include "svnlogdlgimp.h"
 #include "stopdlg.h"
-#include "blamedisplay_impl.h"
+#include "blamedisplay.h"
 #include "ksvnwidgets/commitmsg_impl.h"
 #include "ksvnwidgets/models/commitmodelhelper.h"
 #include "ksvnwidgets/diffbrowser.h"
@@ -558,7 +558,7 @@ void SvnActions::makeBlame(const svn::Revision &start, const svn::Revision &end,
         return;
     }
     EMIT_FINISHED;
-    BlameDisplay_impl::displayBlame(_acb ? _acb : this, k, blame, _p);
+    BlameDisplay::displayBlame(_acb ? _acb : this, k, blame, _p);
 }
 
 bool SvnActions::makeGet(const svn::Revision &start, const QString &what, const QString &target,

@@ -24,7 +24,7 @@ include_directories(${CMAKE_SOURCE_DIR}/src/svnfrontend/fronthelpers
 set(svnfrontendsrc
     EditIgnorePattern.cpp
     EditIgnorePattern.h
-    blamedisplay_impl.cpp
+    blamedisplay.cpp
     ccontextlistener.cpp
     commandexec.cpp
     copymoveview_impl.cpp

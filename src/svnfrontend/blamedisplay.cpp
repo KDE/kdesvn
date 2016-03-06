@@ -17,29 +17,27 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include "blamedisplay_impl.h"
+#include "blamedisplay.h"
+#include "ui_blamedisplay.h"
+
 #include "simple_logcb.h"
 #include "settings/kdesvnsettings.h"
 #include "svnqt/log_entry.h"
 #include "fronthelpers/cursorstack.h"
-#include "fronthelpers/widgetblockstack.h"
 #include "ksvnwidgets/encodingselector_impl.h"
-#include "helpers/windowgeometryhelper.h"
 
 #include <kglobalsettings.h>
 #include <kglobal.h>
 #include <klocale.h>
-#include <kinputdialog.h>
-#include <kdialog.h>
-#include <kvbox.h>
 #include <kcolorscheme.h>
-#include <ktextedit.h>
-#include <kaction.h>
-#include <ktreewidgetsearchline.h>
+#include <KTreeWidgetSearchLine>
 
-#include <QMap>
-#include <QTextCodec>
 #include <QBrush>
+#include <QInputDialog>
+#include <QMap>
+#include <QPushButton>
+#include <QTextCodec>
+#include <QTextEdit>
 #include <QTime>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
@@ -163,14 +161,14 @@ class BlameDisplayData
 {
 public:
     BlameDisplayData()
-    {
-        max = -1;
-        min = INT_MAX - 1;
-        rev_count = 0;
-        up = false;
-        m_cb = 0;
-        m_dlg = 0;
-    }
+        : max(-1)
+        , min(INT_MAX - 1)
+        , rev_count(0)
+        , up(false)
+        , m_cb(nullptr)
+        , m_pbGoToLine(nullptr)
+        , m_pbShowLog(nullptr)
+    {}
 
     svn_revnum_t max, min;
     QMap<svn_revnum_t, QColor> m_shadingMap;
@@ -181,42 +179,60 @@ public:
     bool up;
     SimpleLogCb *m_cb;
     QString m_File;
-    KDialog *m_dlg;
 
     QString reposRoot;
+    QPushButton *m_pbGoToLine;
+    QPushButton *m_pbShowLog;
 };
 
-BlameDisplay_impl::BlameDisplay_impl(QWidget *parent)
-    : QWidget(parent), Ui::BlameDisplay()
+BlameDisplay::BlameDisplay(const QString &what, const svn::AnnotatedFile &blame, SimpleLogCb *cb, QWidget *parent)
+    : KSvnDialog(QLatin1String("blame_display_dlg"), parent)
+    , m_ui(new Ui::BlameDisplay)
+    , m_Data(new BlameDisplayData)
 {
-    setupUi(this);
-    KAction *ac = new KAction(QIcon::fromTheme("kdesvnlog"), i18n("Log message for revision"), this);
+    m_ui->setupUi(this);
+    m_Data->m_cb = cb;
+
+    m_Data->m_pbShowLog = new QPushButton(QIcon::fromTheme("kdesvnlog"), i18n("Log message for revision"), this);
+    connect(m_Data->m_pbShowLog, SIGNAL(clicked(bool)),
+            this, SLOT(slotShowCurrentCommit()));
+    m_ui->buttonBox->addButton(m_Data->m_pbShowLog, QDialogButtonBox::ActionRole);
+
+    m_Data->m_pbGoToLine = new QPushButton(i18n("Go to line"), this);
+    connect(m_Data->m_pbGoToLine, SIGNAL(clicked(bool)),
+            this, SLOT(slotGoLine()));
+    m_ui->buttonBox->addButton(m_Data->m_pbGoToLine, QDialogButtonBox::ActionRole);
+
+    connect(m_ui->buttonBox, SIGNAL(rejected()), this, SLOT(accept()));
+
+    QAction *ac = new QAction(QIcon::fromTheme("kdesvnlog"), i18n("Log message for revision"), this);
     connect(ac, SIGNAL(triggered()), this, SLOT(slotShowCurrentCommit()));
-    m_BlameTree->addAction(ac);
-    m_Data = new BlameDisplayData();
-    KTreeWidgetSearchLine *searchLine = m_TreeSearch->searchLine();
-    searchLine->addTreeWidget(m_BlameTree);
-}
+    m_ui->m_BlameTree->addAction(ac);
 
-BlameDisplay_impl::~BlameDisplay_impl()
-{
-    delete m_Data;
-}
+    KTreeWidgetSearchLine *searchLine = m_ui->m_TreeSearch->searchLine();
+    searchLine->addTreeWidget(m_ui->m_BlameTree);
 
-void BlameDisplay_impl::setCb(SimpleLogCb *_cb)
-{
-    m_Data->m_cb = _cb;
-}
-
-void BlameDisplay_impl::setContent(const QString &what, const svn::AnnotatedFile &blame)
-{
-    m_Data->m_File = what;
-    connect(m_encodingSel, SIGNAL(TextCodecChanged(QString)),
+    connect(m_ui->m_BlameTree, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
+            this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*,int)));
+    connect(m_ui->m_BlameTree, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
+            this, SLOT(slotCurrentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
+    connect(m_ui->m_encodingSel, SIGNAL(TextCodecChanged(QString)),
             this, SLOT(slotTextCodecChanged(QString)));
 
-    if (m_Data->m_dlg) {
-        m_Data->m_dlg->enableButton(KDialog::User2, false);
-    }
+    setContent(what, blame);
+}
+
+BlameDisplay::~BlameDisplay()
+{
+    delete m_Data;
+    delete m_ui;
+}
+
+void BlameDisplay::setContent(const QString &what, const svn::AnnotatedFile &blame)
+{
+    m_Data->m_File = what;
+    m_Data->m_pbShowLog->setEnabled(false);
+
     svn::AnnotatedFile::const_iterator bit;
     //m_BlameList->setSorting(COL_LINENR,false);
     m_Data->max = -1;
@@ -229,6 +245,7 @@ void BlameDisplay_impl::setContent(const QString &what, const svn::AnnotatedFile
     QTime t;
     t.start();
     QList<QTreeWidgetItem *> _list;
+    _list.reserve(blame.size());
     QBrush _b, _bt, _bb;
 
     bool _b_init = false, _bt_init = false;
@@ -302,42 +319,41 @@ void BlameDisplay_impl::setContent(const QString &what, const svn::AnnotatedFile
             m_Data->m_shadingMap[(*bit).revision()] = QColor();
         }
     }
-    m_BlameTree->addTopLevelItems(_list);
+    m_ui->m_BlameTree->addTopLevelItems(_list);
     qDebug("Time elapsed: %d ms", t.elapsed());
-    m_BlameTree->resizeColumnToContents(COL_REV);
-    m_BlameTree->resizeColumnToContents(COL_DATE);
-    m_BlameTree->resizeColumnToContents(COL_AUT);
-    m_BlameTree->resizeColumnToContents(COL_LINENR);
-    m_BlameTree->resizeColumnToContents(COL_LINE);
+    m_ui->m_BlameTree->resizeColumnToContents(COL_REV);
+    m_ui->m_BlameTree->resizeColumnToContents(COL_DATE);
+    m_ui->m_BlameTree->resizeColumnToContents(COL_AUT);
+    m_ui->m_BlameTree->resizeColumnToContents(COL_LINENR);
+    m_ui->m_BlameTree->resizeColumnToContents(COL_LINE);
 }
 
-void BlameDisplay_impl::slotGoLine()
+void BlameDisplay::slotGoLine()
 {
     bool ok = true;
-    int line = KInputDialog::getInteger(i18n("Show line"), i18n("Show line number"),
-                                        1, 1, m_BlameTree->topLevelItemCount(), 1, &ok, this);
+    int line = QInputDialog::getInteger(this, i18n("Show line"), i18n("Show line number"),
+                                        1, 1, m_ui->m_BlameTree->topLevelItemCount(), 1, &ok);
     if (!ok) {
         return;
     }
-    QTreeWidgetItemIterator it(m_BlameTree);
+    QTreeWidgetItemIterator it(m_ui->m_BlameTree);
     --line;
     while (*it) {
         BlameTreeItem *_it = static_cast<BlameTreeItem *>((*it));
         if (_it->lineNumber() == line) {
-            m_BlameTree->scrollToItem(*it);
-            m_BlameTree->setCurrentItem(*it);
+            m_ui->m_BlameTree->scrollToItem(*it);
+            m_ui->m_BlameTree->setCurrentItem(*it);
             return;
         }
         ++it;
     }
 }
 
-void BlameDisplay_impl::showCommit(BlameTreeItem *bti)
+void BlameDisplay::showCommit(BlameTreeItem *bti)
 {
     if (!bti) {
         return;
     }
-    WidgetBlockStack a(m_BlameTree);
     QString text;
     const QMap<svn_revnum_t, svn::LogEntry>::const_iterator it = m_Data->m_logCache.constFind(bti->rev());
     if (it != m_Data->m_logCache.constEnd()) {
@@ -350,25 +366,31 @@ void BlameDisplay_impl::showCommit(BlameTreeItem *bti)
             text = t.message;
         }
     }
-    QPointer<KDialog> dlg(new KDialog(this));
-    dlg->setButtons(KDialog::Close);
+
+    QPointer<QDialog> dlg(new KSvnDialog(QLatin1String("simplelog_display"), this));
     dlg->setWindowTitle(i18n("Log message for revision %1", bti->rev()));
-    QWidget *Dialog1Layout = new KVBox(dlg);
-    dlg->setMainWidget(Dialog1Layout);
-    KTextEdit *ptr = new KTextEdit(Dialog1Layout);
-    ptr->setFont(KGlobalSettings::fixedFont());
-    ptr->setReadOnly(true);
-    ptr->setWordWrapMode(QTextOption::NoWrap);
-    ptr->setPlainText(text);
-    WindowGeometryHelper wgh(dlg, QLatin1String("simplelog_display"));
+    QVBoxLayout *vbox = new QVBoxLayout(dlg);
+
+    QTextEdit *textEdit = new QTextEdit(dlg);
+    vbox->addWidget(textEdit);
+    textEdit->setFont(KGlobalSettings::fixedFont());
+    textEdit->setReadOnly(true);
+    textEdit->setWordWrapMode(QTextOption::NoWrap);
+    textEdit->setPlainText(text);
+
+    QDialogButtonBox *bbox = new QDialogButtonBox(dlg);
+    bbox->setStandardButtons(QDialogButtonBox::Close);
+    vbox->addWidget(bbox);
+    // QDialogButtonBox::Close is a reject role
+    connect(bbox, SIGNAL(rejected()), dlg, SLOT(accept()));
+
     dlg->exec();
-    wgh.save();
     delete dlg;
 }
 
-void BlameDisplay_impl::slotShowCurrentCommit()
+void BlameDisplay::slotShowCurrentCommit()
 {
-    QTreeWidgetItem *item = m_BlameTree->currentItem();
+    QTreeWidgetItem *item = m_ui->m_BlameTree->currentItem();
     if (item == 0 || item->type() != TREE_ITEM_TYPE) {
         return;
     }
@@ -376,40 +398,20 @@ void BlameDisplay_impl::slotShowCurrentCommit()
     showCommit(bit);
 }
 
-void BlameDisplay_impl::slotCurrentItemChanged(QTreeWidgetItem *item, QTreeWidgetItem *)
+void BlameDisplay::slotCurrentItemChanged(QTreeWidgetItem *item, QTreeWidgetItem *)
 {
-    if (!m_Data->m_dlg) {
-        return;
-    }
     const bool enabled = item && item->type() == TREE_ITEM_TYPE;
-    m_Data->m_dlg->enableButton(KDialog::User2, enabled);
+    m_Data->m_pbShowLog->setEnabled(enabled);
 }
 
-void BlameDisplay_impl::displayBlame(SimpleLogCb *_cb, const QString &item, const svn::AnnotatedFile &blame, QWidget *parent)
+void BlameDisplay::displayBlame(SimpleLogCb *_cb, const QString &item, const svn::AnnotatedFile &blame, QWidget *parent)
 {
-    QPointer<KDialog> dlg(new KDialog(parent ? parent : QApplication::activeModalWidget()));
-    dlg->setButtons(KDialog::Close | KDialog::User1 | KDialog::User2);
-    dlg->setButtonGuiItem(KDialog::User1, KGuiItem(i18n("Go to line")));
-    dlg->setButtonGuiItem(KDialog::User2, KGuiItem(i18n("Log message for revision"), "kdesvnlog"));
-    QWidget *Dialog1Layout = new KVBox(dlg);
-    dlg->setMainWidget(Dialog1Layout);
-
-    BlameDisplay_impl *ptr = new BlameDisplay_impl(Dialog1Layout);
-    WindowGeometryHelper wgh(dlg, QLatin1String("blame_dlg"));
-
-    ptr->setContent(item, blame);
-    ptr->setCb(_cb);
-    ptr->m_Data->m_dlg = dlg;
-    dlg->enableButton(KDialog::User2, false);
-    connect(dlg, SIGNAL(user1Clicked()), ptr, SLOT(slotGoLine()));
-    connect(dlg, SIGNAL(user2Clicked()), ptr, SLOT(slotShowCurrentCommit()));
-    Dialog1Layout->adjustSize();
+    QPointer<BlameDisplay> dlg(new BlameDisplay(item, blame, _cb, parent ? parent : QApplication::activeModalWidget()));
     dlg->exec();
-    wgh.save();
     delete dlg;
 }
 
-void BlameDisplay_impl::slotItemDoubleClicked(QTreeWidgetItem *item, int)
+void BlameDisplay::slotItemDoubleClicked(QTreeWidgetItem *item, int)
 {
     if (item == 0 || item->type() != TREE_ITEM_TYPE) {
         return;
@@ -418,14 +420,14 @@ void BlameDisplay_impl::slotItemDoubleClicked(QTreeWidgetItem *item, int)
     showCommit(bit);
 }
 
-void BlameDisplay_impl::slotTextCodecChanged(const QString &what)
+void BlameDisplay::slotTextCodecChanged(const QString &what)
 {
     if (Kdesvnsettings::locale_for_blame() != what) {
         Kdesvnsettings::setLocale_for_blame(what);
         Kdesvnsettings::self()->writeConfig();
         LocalizedAnnotatedLine::reset_codec();
 
-        QTreeWidgetItemIterator it(m_BlameTree);
+        QTreeWidgetItemIterator it(m_ui->m_BlameTree);
 
         while (*it) {
             BlameTreeItem *_it = static_cast<BlameTreeItem *>((*it));

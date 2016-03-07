@@ -805,15 +805,15 @@ QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_wha
         }
         text += rb + i18n("Last author") + cs + ((*it).cmtAuthor()) + re;
         if ((*it).cmtDate() > 0) {
-            text += rb + i18n("Last committed") + cs + helpers::sub2qt::DateTime2qtString((*it).cmtDate()) + re;
+            text += rb + i18n("Last committed") + cs + (*it).cmtDate().toString() + re;
         }
         text += rb + i18n("Last revision") + cs + (*it).cmtRev().toString() + re;
         if ((*it).textTime() > 0) {
-            text += rb + i18n("Content last changed") + cs + helpers::sub2qt::DateTime2qtString((*it).textTime()) + re;
+            text += rb + i18n("Content last changed") + cs + (*it).textTime().toString() + re;
         }
         if (all) {
             if ((*it).propTime() > 0) {
-                text += rb + i18n("Property last changed") + cs + helpers::sub2qt::DateTime2qtString((*it).propTime()) + re;
+                text += rb + i18n("Property last changed") + cs + (*it).propTime().toString() + re;
             }
 #ifdef SVN_INFO_SIMPLE_CONFLICT_TYPE
             if ((*it).conflictNew().length()) {
@@ -843,7 +843,7 @@ QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_wha
                 text += rb + i18n("Lock token") + cs + ((*it).lockEntry().Token()) + re;
                 text += rb + i18n("Owner") + cs + ((*it).lockEntry().Owner()) + re;
                 text += rb + i18n("Locked on") + cs +
-                        helpers::sub2qt::DateTime2qtString((*it).lockEntry().Date()) +
+                        (*it).lockEntry().Date().toString() +
                         re;
                 text += rb + i18n("Lock comment") + cs +
                         (*it).lockEntry().Comment() + re;
@@ -853,7 +853,7 @@ QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_wha
                     text += rb + i18n("Lock token") + cs + (d->lockEntry().Token()) + re;
                     text += rb + i18n("Owner") + cs + (d->lockEntry().Owner()) + re;
                     text += rb + i18n("Locked on") + cs +
-                            helpers::sub2qt::DateTime2qtString(d->lockEntry().Date()) +
+                            d->lockEntry().Date().toString() +
                             re;
                     text += rb + i18n("Lock comment") + cs +
                             d->lockEntry().Comment() + re;

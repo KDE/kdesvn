@@ -146,17 +146,19 @@ QString DateTime::toString(const QString &format)const
 {
     return m_time.toString(format);
 }
+
+QString DateTime::toString(Qt::DateFormat f) const
+{
+    return m_time.toString(f);
 }
 
-/*!
-    \fn svn::DateTime::toTime_t()
- */
-unsigned int svn::DateTime::toTime_t()const
+unsigned int DateTime::toTime_t()const
 {
     return m_time.toTime_t();
 }
 
-void svn::DateTime::setTime_t(unsigned int sec)
+void DateTime::setTime_t(unsigned int sec)
 {
     m_time.setTime_t(sec);
 }
+} // namespace svn

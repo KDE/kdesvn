@@ -150,7 +150,7 @@ void BlameTreeItem::display()
         setTextAlignment(COL_REV, Qt::AlignRight | Qt::AlignVCenter);
         setText(COL_REV, QString::number(m_Content.revision()));
         if (m_Content.date().isValid()) {
-            setText(COL_DATE, KGlobal::locale()->formatDateTime(m_Content.date()));
+            setText(COL_DATE, m_Content.date().toString(Qt::SystemLocaleShortDate));
         }
     }
     setText(COL_LINENR, QString::number(m_Content.lineNumber() + 1));

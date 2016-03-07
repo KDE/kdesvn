@@ -132,6 +132,7 @@ public:
      * @see QDateTime::toString
      */
     QString toString(const QString &format)const;
+    QString toString(Qt::DateFormat f = Qt::DefaultLocaleShortDate) const;
 
     /**
      * Set from date string of the form below, using apr_date_parse_rfc

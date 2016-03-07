@@ -22,9 +22,7 @@
 
 #include "svnqt/datetime.h"
 #include "svnqt/targets.h"
-#include <svn_time.h>
 
-#include <QDateTime>
 #include <QString>
 #include <QUrl>
 
@@ -36,8 +34,6 @@ namespace helpers
 */
 namespace sub2qt
 {
-QString apr_time2qtString(apr_time_t _time);
-QString DateTime2qtString(const svn::DateTime &_time);
 /**
   * Convert a QStringList into a QVector<Path>
   */

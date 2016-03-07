@@ -21,23 +21,11 @@
 
 #include "svnqt/datetime.h"
 #include "svnqt/path.h"
-#include "kglobal.h"
-#include "klocale.h"
 
 namespace helpers
 {
 namespace sub2qt
 {
-
-QString apr_time2qtString(apr_time_t _time)
-{
-    return DateTime2qtString(_time);
-}
-
-QString DateTime2qtString(const svn::DateTime &_time)
-{
-    return KGlobal::locale()->formatDateTime(_time);
-}
 
 svn::Targets fromStringList(const QStringList &paths)
 {

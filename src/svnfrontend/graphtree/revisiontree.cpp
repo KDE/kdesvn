@@ -25,7 +25,6 @@
 #include "svnqt/cache/ReposConfig.h"
 #include "svnqt/url.h"
 #include "svnqt/client_parameter.h"
-#include "helpers/sub2qt.h"
 #include "revtreewidget.h"
 #include "revgraphview.h"
 #include "elogentry.h"
@@ -406,7 +405,7 @@ bool RevisionTree::bottomUpScan(long startrev, unsigned recurse, const QString &
                     m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].Action = FORWARDENTRY.action;
                     m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].Author = m_Data->m_History[FORWARDENTRY.copyToRevision].author;
                     m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].Message = m_Data->m_History[FORWARDENTRY.copyToRevision].message;
-                    m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].Date = helpers::sub2qt::apr_time2qtString(m_Data->m_History[FORWARDENTRY.copyToRevision].date);
+                    m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].Date = svn::DateTime(m_Data->m_History[FORWARDENTRY.copyToRevision].date).toString();
                     if (ren) {
                         lastrev = FORWARDENTRY.copyToRevision;
                         /* skip items between */
@@ -520,11 +519,11 @@ void RevisionTree::fillItem(long rev, int pathIndex, const QString &nodeName, co
         m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Action = m_Data->m_History[rev].changedPaths[pathIndex].action;
         m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Author = m_Data->m_History[rev].author;
         m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Message = m_Data->m_History[rev].message;
-        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Date = helpers::sub2qt::apr_time2qtString(m_Data->m_History[rev].date);
+        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Date = svn::DateTime(m_Data->m_History[rev].date).toString();
     } else {
         m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Action = 0;
         m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Author.clear();
         m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Message.clear();
-        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Date = helpers::sub2qt::apr_time2qtString(0);
+        m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[nodeName].Date = svn::DateTime(0).toString();
     }
 }

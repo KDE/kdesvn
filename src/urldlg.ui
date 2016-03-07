@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Open repository / working copy</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="topLayout">
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
@@ -35,9 +35,6 @@
     </spacer>
    </item>
    <item>
-    <widget class="KUrlRequester" name="kurlrequester"/>
-   </item>
-   <item>
     <widget class="Line" name="line">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -56,13 +53,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KUrlRequester</class>
-   <extends>QWidget</extends>
-   <header>kurlrequester.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections>
   <connection>

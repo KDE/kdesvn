@@ -20,6 +20,9 @@
 
 add_executable(kdesvnaskpass askpass/kdesvn-askpass.cpp)
 
+qt5_wrap_ui(kdesvn_ui
+    urldlg.ui
+)
 set(kdesvnsrc
     commandline.cpp
     kdesvn.cpp
@@ -34,7 +37,7 @@ set(partsrc
 )
 
 set(partsrc ${partsrc} kdesvn_part.h kdesvnview.h commandline_part.h)
-set(kdesvnsrc ${kdesvnsrc} kdesvn.h urldlg.h commandline.h)
+set(kdesvnsrc ${kdesvnsrc} ${kdesvn_ui} kdesvn.h urldlg.h commandline.h)
 
 add_subdirectory(svnqt)
 add_subdirectory(ksvnwidgets)

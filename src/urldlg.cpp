@@ -18,34 +18,34 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "urldlg.h"
-#include <kurlrequester.h>
-#include <QVBoxLayout>
-#include <kconfig.h>
-#include <klocale.h>
-#include <kglobal.h>
+#include "ui_urldlg.h"
+
+#include <KUrlRequester>
+#include <KConfigGroup>
 #include <KHistoryComboBox>
-#include <qlabel.h>
+#include <KLocale>
+#include <QLabel>
+#include <QVBoxLayout>
 
 UrlDlg::UrlDlg(QWidget *parent)
-    : KDialog(parent)
+    : QDialog(parent)
+    , m_pbClear(new QPushButton(this))
+    , m_urlRequester(nullptr)
+    , m_ui(new Ui::UrlDlg)
 {
-    setButtons(Ok | Cancel | User1);
-    setDefaultButton(Ok);
-    showButtonSeparator(true);
-
-    m_plainPage = new QWidget(this);
-    setMainWidget(m_plainPage);
-
-    QVBoxLayout *topLayout = new QVBoxLayout(m_plainPage);
-    QLabel *label = new QLabel(i18n("Open repository or working copy") , m_plainPage);
-    topLayout->addWidget(label);
+    m_ui->setupUi(this);
+    m_ui->buttonBox->addButton(m_pbClear, QDialogButtonBox::DestructiveRole);
+    m_ui->buttonBox->button(QDialogButtonBox::Ok)->setDefault(true);
+    m_ui->buttonBox->button(QDialogButtonBox::Ok)->setShortcut(Qt::CTRL | Qt::Key_Return);
+    m_pbClear->setIcon(QIcon::fromTheme("clear"));
+    m_pbClear->setText(i18n("Clear"));
 
     KHistoryComboBox *combo = new KHistoryComboBox(this);
     combo->setDuplicatesEnabled(false);
     KConfigGroup kc = KSharedConfig::openConfig()->group("Open-repository settings");
     int max = kc.readEntry(QLatin1String("Maximum history"), 15);
     combo->setMaxCount(max);
-    QStringList list = kc.readEntry(QLatin1String("History"), QStringList());
+    const QStringList list = kc.readEntry(QLatin1String("History"), QStringList());
     combo->setHistoryItems(list);
     combo->setMinimumWidth(100);
     combo->adjustSize();
@@ -53,22 +53,25 @@ UrlDlg::UrlDlg(QWidget *parent)
         combo->resize(300, combo->height());
     }
 
-    m_urlRequester = new KUrlRequester(combo, m_plainPage);
-    topLayout->addWidget(m_urlRequester);
+    m_urlRequester = new KUrlRequester(combo, this);
+    m_ui->topLayout->insertWidget(1, m_urlRequester);
     m_urlRequester->setFocus();
     m_urlRequester->setMode(KFile::ExistingOnly | KFile::Directory);
-    connect(m_urlRequester->comboBox(), SIGNAL(currentTextChanged(QString)), SLOT(slotTextChanged(QString)));
-    enableButtonOk(false);
-    enableButton(KDialog::User1, false);
-    setButtonGuiItem(KDialog::User1, KGuiItem(i18n("Clear"), QIcon::fromTheme("clear")));
-    connect(this, SIGNAL(user1Clicked()), m_urlRequester, SLOT(clear()));
+    connect(m_urlRequester->comboBox(), SIGNAL(currentTextChanged(QString)),
+            this, SLOT(slotTextChanged(QString)));
+
+    slotTextChanged(QString());
     m_urlRequester->adjustSize();
-    resize(QSize(400, sizeHint().height()));
+
+    connect(m_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(m_pbClear, SIGNAL(clicked(bool)), m_urlRequester, SLOT(clear()));
 }
 
-/*!
-    \fn UrlDlg::accept()
- */
+UrlDlg::~UrlDlg()
+{
+    delete m_ui;
+}
+
 void UrlDlg::accept()
 {
     KHistoryComboBox *combo = static_cast<KHistoryComboBox *>(m_urlRequester->comboBox());
@@ -78,7 +81,7 @@ void UrlDlg::accept()
         kc.writeEntry(QLatin1String("History"), combo->historyItems());
         kc.sync();
     }
-    KDialog::accept();
+    QDialog::accept();
 }
 
 /*!
@@ -87,8 +90,8 @@ void UrlDlg::accept()
 void UrlDlg::slotTextChanged(const QString &text)
 {
     bool state = !text.trimmed().isEmpty();
-    enableButtonOk(state);
-    enableButton(KDialog::User1, state);
+    m_ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(state);
+    m_pbClear->setEnabled(state);
 }
 
 /*!
@@ -99,7 +102,7 @@ QUrl UrlDlg::getUrl(QWidget *parent)
     QUrl ret;
     QPointer<UrlDlg> dlg(new UrlDlg(parent));
     dlg->setWindowTitle(i18n("Open"));
-    if (dlg->exec() == KDialog::Accepted) {
+    if (dlg->exec() == QDialog::Accepted) {
         // added by Wellu Mäkinen <wellu@wellu.org>
         //
         // get rid of leading whitespace

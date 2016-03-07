@@ -19,9 +19,10 @@
  ***************************************************************************/
 
 #include "propertiesdlg.h"
+#include "ui_propertiesdlg.h"
+
 #include "svnfrontend/fronthelpers/propertyitem.h"
 #include "svnfrontend/fronthelpers/propertylist.h"
-#include "fronthelpers/createdlg.h"
 #include "editpropsdlg.h"
 #include "svnitem.h"
 #include "svnqt/client.h"
@@ -31,75 +32,40 @@
 #include <KMessageBox>
 
 PropertiesDlg::PropertiesDlg(SvnItem *which, const svn::ClientP &aClient, const svn::Revision &aRev, QWidget *parent)
-    : KDialog(parent),
-      m_Item(which), m_changed(false),
-      m_Client(aClient), m_Rev(aRev)
+    : KSvnDialog(QLatin1String("properties_dlg"), parent)
+    , m_Item(which)
+    , m_Client(aClient)
+    , m_Rev(aRev)
+    , m_ui(new Ui::PropertiesDlg)
 {
-    setModal(true);
-    setButtons(KDialog::Ok | KDialog::Cancel);
-    setWindowTitle(i18n("Modify properties"));
-    QWidget *m = new QWidget(this);
-    setMainWidget(m);
-    PropertiesDlgLayout = new QHBoxLayout(m);
+    m_ui->setupUi(this);
+    setDefaultButton(m_ui->buttonBox->button(QDialogButtonBox::Ok));
+    connect(m_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(m_ui->buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(m_ui->buttonBox, SIGNAL(helpRequested()), this, SLOT(slotHelp()));
 
-    m_PropertiesListview = new Propertylist(m);
-    m_PropertiesListview->setAllColumnsShowFocus(true);
-    m_PropertiesListview->setCommitchanges(false);
-    PropertiesDlgLayout->addWidget(m_PropertiesListview);
-
-    m_rightLayout = new QVBoxLayout();
-    m_AddButton = new KPushButton(m);
-    m_rightLayout->addWidget(m_AddButton);
-    m_ModifyButton = new KPushButton(m);
-    m_rightLayout->addWidget(m_ModifyButton);
-    m_DeleteButton = new KPushButton(m);
-    m_rightLayout->addWidget(m_DeleteButton);
-    m_rightSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    m_rightLayout->addItem(m_rightSpacer);
-    PropertiesDlgLayout->addLayout(m_rightLayout);
-    m_DeleteButton->setEnabled(false);
-    m_ModifyButton->setEnabled(false);
-
-    //PropertiesDlgLayout->addLayout(midLayout);
-    languageChange();
+    m_ui->tvPropertyList->setAllColumnsShowFocus(true);
+    m_ui->tvPropertyList->setCommitchanges(false);
 
     // signals and slots connections
-    connect(m_AddButton, SIGNAL(clicked()), this, SLOT(slotAdd()));
-    connect(m_ModifyButton, SIGNAL(clicked()), this, SLOT(slotModify()));
-    connect(m_DeleteButton, SIGNAL(clicked()), this, SLOT(slotDelete()));
-    connect(this, SIGNAL(helpClicked()), SLOT(slotHelp()));
-    connect(m_PropertiesListview,
+    connect(m_ui->pbAdd, SIGNAL(clicked()), this, SLOT(slotAdd()));
+    connect(m_ui->pbModify, SIGNAL(clicked()), this, SLOT(slotModify()));
+    connect(m_ui->pbDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
+
+    connect(m_ui->tvPropertyList,
             SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
             this,
-            SLOT(slotCurrentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
+            SLOT(slotCurrentItemChanged(QTreeWidgetItem*)));
     if (!m_Client) {
-        m_PropertiesListview->setEnabled(false);
+        m_ui->tvPropertyList->setEnabled(false);
     }
+    slotCurrentItemChanged(nullptr);
+    initItem();
 }
 
-bool PropertiesDlg::hasChanged()const
-{
-    return m_changed;
-}
-
-/*
- *  Destroys the object and frees any allocated resources
- */
 PropertiesDlg::~PropertiesDlg()
 {
-}
-
-/*
- *  Sets the strings of the subwidgets using the current
- *  language.
- */
-void PropertiesDlg::languageChange()
-{
-    setWindowTitle(i18n("View and modify properties"));
-    m_PropertiesListview->setToolTip(i18n("List of properties set"));
-    m_AddButton->setText(i18n("Add property"));
-    m_ModifyButton->setText(i18n("Modify property"));
-    m_DeleteButton->setText(i18n("Delete property"));
+    delete m_ui;
 }
 
 void PropertiesDlg::slotHelp()
@@ -107,29 +73,26 @@ void PropertiesDlg::slotHelp()
     qWarning("PropertiesDlg::slotHelp(): Not implemented yet");
 }
 
-void PropertiesDlg::slotCurrentItemChanged(QTreeWidgetItem *item, QTreeWidgetItem *)
+void PropertiesDlg::slotCurrentItemChanged(QTreeWidgetItem *item)
 {
-    m_DeleteButton->setEnabled(item != nullptr);
-    m_ModifyButton->setEnabled(item != nullptr);
+    m_ui->pbDelete->setEnabled(item != nullptr);
+    m_ui->pbModify->setEnabled(item != nullptr);
     if (!item || item->type() != PropertyListViewItem::_RTTI_) {
         return;
     }
     PropertyListViewItem *ki = static_cast<PropertyListViewItem *>(item);
     if (PropertyListViewItem::protected_Property(ki->currentName())) {
-        m_DeleteButton->setEnabled(false);
-        m_ModifyButton->setEnabled(false);
+        m_ui->pbDelete->setEnabled(false);
+        m_ui->pbModify->setEnabled(false);
         return;
     }
     if (ki->deleted()) {
-        m_DeleteButton->setText(i18n("Undelete property"));
+        m_ui->pbDelete->setText(i18n("Undelete property"));
     } else {
-        m_DeleteButton->setText(i18n("Delete property"));
+        m_ui->pbDelete->setText(i18n("Delete property"));
     }
 }
 
-/*!
-    \fn PropertiesDlg::initItem
- */
 void PropertiesDlg::initItem()
 {
     if (!m_Client) {
@@ -145,32 +108,7 @@ void PropertiesDlg::initItem()
         emit clientException(e.msg());
         return;
     }
-    m_PropertiesListview->displayList(propList, true, m_Item->isDir(), m_Item->fullName());
-    initDone = true;
-}
-
-/*!
-    \fn PropertiesDlg::exec()
- */
-int PropertiesDlg::exec()
-{
-    return KDialog::exec();
-}
-
-bool PropertiesDlg::event(QEvent *event)
-{
-    bool res = KDialog::event(event);
-    if (event->type() == QEvent::Polish) {
-        initItem();
-    }
-    return res;
-}
-
-/*!
-    \fn PropertiesDlg::slotSelectionExecuted(QTreeWidgetItem*)
- */
-void PropertiesDlg::slotSelectionExecuted(QTreeWidgetItem *)
-{
+    m_ui->tvPropertyList->displayList(propList, true, m_Item->isDir(), m_Item->fullName());
 }
 
 void PropertiesDlg::slotAdd()
@@ -183,11 +121,11 @@ void PropertiesDlg::slotAdd()
             KMessageBox::error(this, i18n("This property may not set by users.\nRejecting it."), i18n("Protected property"));
             return;
         }
-        if (m_PropertiesListview->checkExisting(dlg->propName())) {
+        if (m_ui->tvPropertyList->checkExisting(dlg->propName())) {
             KMessageBox::error(this, i18n("A property with that name exists.\nRejecting it."), i18n("Double property"));
             return;
         }
-        PropertyListViewItem *ki = new PropertyListViewItem(m_PropertiesListview);
+        PropertyListViewItem *ki = new PropertyListViewItem(m_ui->tvPropertyList);
         ki->setText(0, dlg->propName());
         ki->setText(1, dlg->propValue());
         ki->checkName();
@@ -196,12 +134,9 @@ void PropertiesDlg::slotAdd()
     delete dlg;
 }
 
-/*!
-    \fn PropertiesDlg::slotDelete
- */
 void PropertiesDlg::slotDelete()
 {
-    QTreeWidgetItem *qi = m_PropertiesListview->currentItem();
+    QTreeWidgetItem *qi = m_ui->tvPropertyList->currentItem();
     if (!qi) {
         return;
     }
@@ -214,15 +149,12 @@ void PropertiesDlg::slotDelete()
     } else {
         ki->deleteIt();
     }
-    m_PropertiesListview->setCurrentItem(qi);
+    slotCurrentItemChanged(qi);
 }
 
-/*!
-    \fn PropertiesDlg::slotModify()
- */
 void PropertiesDlg::slotModify()
 {
-    QTreeWidgetItem *qi = m_PropertiesListview->currentItem();
+    QTreeWidgetItem *qi = m_ui->tvPropertyList->currentItem();
     if (!qi) {
         return;
     }
@@ -240,7 +172,7 @@ void PropertiesDlg::slotModify()
             KMessageBox::error(this, i18n("This property may not set by users.\nRejecting it."), i18n("Protected property"));
             return;
         }
-        if (m_PropertiesListview->checkExisting(dlg->propName(), qi)) {
+        if (m_ui->tvPropertyList->checkExisting(dlg->propName(), qi)) {
             KMessageBox::error(this, i18n("A property with that name exists.\nRejecting it."), i18n("Double property"));
             return;
         }
@@ -256,7 +188,7 @@ void PropertiesDlg::changedItems(svn::PropertiesMap &toSet, QStringList &toDelet
 {
     toSet.clear();
     toDelete.clear();
-    QTreeWidgetItemIterator iter(m_PropertiesListview);
+    QTreeWidgetItemIterator iter(m_ui->tvPropertyList);
     while (*iter) {
         PropertyListViewItem *ki = static_cast<PropertyListViewItem *>((*iter));
         ++iter;

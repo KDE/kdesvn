@@ -17,78 +17,48 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef PROPERTIESDLG_H
-#define PROPERTIESDLG_H
+#pragma once
 
-#include <qvariant.h>
-#include <kdialog.h>
-#include <qmap.h>
-#include <qstring.h>
 #include <QStringList>
 
 #include "svnqt/client.h"
 #include "svnqt/svnqttypes.h"
 #include "svnqt/revision.h"
+#include "ksvnwidgets/ksvndialog.h"
 
-class QVBoxLayout;
-class QHBoxLayout;
-class QGridLayout;
-class QSpacerItem;
-class QLabel;
-class Propertylist;
-class QTreeWidgetItem;
-class KPushButton;
-class FileListViewItem;
 class SvnItem;
+class QTreeWidgetItem;
 
-
-class PropertiesDlg : public KDialog
+namespace Ui
+{
+class PropertiesDlg;
+}
+class PropertiesDlg : public KSvnDialog
 {
     Q_OBJECT
-
 public:
     PropertiesDlg(SvnItem *which, const svn::ClientP &aClient,
-                  const svn::Revision &aRev, QWidget *parent = 0);
+                  const svn::Revision &aRev, QWidget *parent = nullptr);
     ~PropertiesDlg();
 
-    bool hasChanged()const;
     void changedItems(svn::PropertiesMap &toSet, QStringList &toDelete);
 
 protected:
-    Propertylist *m_PropertiesListview;
-    KPushButton *m_AddButton;
-    KPushButton *m_DeleteButton;
-    KPushButton *m_ModifyButton;
-
-    QHBoxLayout *PropertiesDlgLayout;
-    QVBoxLayout *m_rightLayout;
-    QSpacerItem *m_rightSpacer;
-
     SvnItem *m_Item;
-    bool m_changed;
-    bool initDone;
     svn::ClientP m_Client;
     svn::Revision m_Rev;
+    Ui::PropertiesDlg *m_ui;
 
-protected slots:
-    virtual void languageChange();
-
-    virtual void slotHelp();
-    virtual void slotCurrentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *);
-    virtual void slotSelectionExecuted(QTreeWidgetItem *);
-    virtual void slotAdd();
-    virtual void slotDelete();
-    virtual void slotModify();
+protected Q_SLOTS:
+    void slotHelp();
+    void slotCurrentItemChanged(QTreeWidgetItem *);
+    void slotAdd();
+    void slotDelete();
+    void slotModify();
 
 protected:
-    virtual void initItem();
-    virtual bool event(QEvent *event);
+    void initItem();
 
-public slots:
-    int exec();
-
-signals:
+Q_SIGNALS:
     void clientException(const QString &);
 };
-
-#endif // PROPERTIESDLG_H

@@ -114,6 +114,7 @@ set(svnfrontendui
     hotcopydlg.ui
     loaddmpdlg.ui
     merge_dlg.ui
+    propertiesdlg.ui
     svnlogdlg.ui
     treeWidget.ui
     )

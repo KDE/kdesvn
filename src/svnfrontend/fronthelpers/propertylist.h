@@ -17,8 +17,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef PROPERTYLIST_H
-#define PROPERTYLIST_H
+#pragma once
 
 #include <QTreeWidget>
 #include <QStringList>
@@ -32,10 +31,10 @@ class Propertylist : public QTreeWidget
 {
     Q_OBJECT
 public:
-    explicit Propertylist(QWidget *parent = 0);
+    explicit Propertylist(QWidget *parent = nullptr);
     ~Propertylist();
 
-    bool checkExisting(const QString &aName, QTreeWidgetItem *it = 0);
+    bool checkExisting(const QString &aName, QTreeWidgetItem *it = nullptr);
     bool commitchanges()const
     {
         return m_commitit;
@@ -44,23 +43,20 @@ public:
     {
         m_commitit = how;
     }
-    void addCallback(QObject *);
+    void addCallback(QObject *ob);
 
-public slots:
-    virtual void displayList(const svn::PathPropertiesMapListPtr &, bool, bool, const QString &);
-    virtual void clear();
+public Q_SLOTS:
+    void displayList(const svn::PathPropertiesMapListPtr &, bool, bool, const QString &);
+    void clear();
 
-protected slots:
-    virtual void slotItemChanged(QTreeWidgetItem *item, int col);
+protected Q_SLOTS:
+    void init();
+    void slotItemChanged(QTreeWidgetItem *item, int col);
 
-signals:
+Q_SIGNALS:
     void sigSetProperty(const svn::PropertiesMap &, const QStringList &, const QString &);
 protected:
     bool m_commitit;
     QString m_current;
     bool m_Dir;
-
-    virtual void keyPressEvent(QKeyEvent *);
 };
-
-#endif

@@ -916,9 +916,7 @@ void SvnActions::editProperties(SvnItem *k, const svn::Revision &rev)
     }
     QPointer<PropertiesDlg> dlg(new PropertiesDlg(k, svnclient(), rev));
     connect(dlg, SIGNAL(clientException(QString)), m_Data->m_ParentList->realWidget(), SLOT(slotClientException(QString)));
-    WindowGeometryHelper wgh(dlg, QLatin1String("revisiontree_dlg"));
     if (dlg->exec() != QDialog::Accepted) {
-        wgh.save();
         delete dlg;
         return;
     }
@@ -928,7 +926,6 @@ void SvnActions::editProperties(SvnItem *k, const svn::Revision &rev)
     changeProperties(setList, delList, k->fullName());
     k->refreshStatus();
     EMIT_FINISHED;
-    wgh.save();
     delete dlg;
 }
 

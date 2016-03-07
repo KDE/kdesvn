@@ -21,20 +21,27 @@
 #include "kmultilinedelegate.h"
 #include "svnfrontend/fronthelpers/propertyitem.h"
 
-#include <klocale.h>
-#include <kmessagebox.h>
-
-#include <QKeyEvent>
+#include <KLocale>
+#include <KMessageBox>
+#include <QTimer>
 
 Propertylist::Propertylist(QWidget *parent)
-    : QTreeWidget(parent), m_commitit(false)
+    : QTreeWidget(parent)
+    , m_commitit(false)
+    , m_Dir(false)
 {
     setItemDelegate(new KMultilineDelegate(this));
-    m_Dir = false;
+    QTimer::singleShot(0, this, SLOT(init()));
+}
 
+Propertylist::~Propertylist()
+{
+}
+
+void Propertylist::init()
+{
     headerItem()->setText(0, i18n("Property"));
     headerItem()->setText(1, i18n("Value"));
-    //setShowSortIndicator(true);
     setAllColumnsShowFocus(true);
     setRootIsDecorated(false);
     sortItems(0, Qt::AscendingOrder);
@@ -42,11 +49,9 @@ Propertylist::Propertylist(QWidget *parent)
     setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
     setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
     setContextMenuPolicy(Qt::ActionsContextMenu);
-    connect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotItemChanged(QTreeWidgetItem*,int)));
-}
-
-Propertylist::~Propertylist()
-{
+    connect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)),
+            this, SLOT(slotItemChanged(QTreeWidgetItem*,int)), Qt::UniqueConnection);
+    resizeColumnToContents(0);
 }
 
 void Propertylist::displayList(const svn::PathPropertiesMapListPtr &propList, bool editable, bool isDir, const QString &aCur)
@@ -73,7 +78,9 @@ void Propertylist::displayList(const svn::PathPropertiesMapListPtr &propList, bo
     }
     viewport()->setUpdatesEnabled(true);
     viewport()->repaint();
-    connect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotItemChanged(QTreeWidgetItem*,int)));
+    connect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)),
+            this, SLOT(slotItemChanged(QTreeWidgetItem*,int)), Qt::UniqueConnection);
+    resizeColumnToContents(0);
 }
 
 void Propertylist::clear()
@@ -161,12 +168,4 @@ void Propertylist::addCallback(QObject *ob)
         connect(this, SIGNAL(sigSetProperty(svn::PropertiesMap,QStringList,QString)),
                 ob, SLOT(slotChangeProperties(svn::PropertiesMap,QStringList,QString)));
     }
-}
-
-void Propertylist::keyPressEvent(QKeyEvent *key)
-{
-    if (key->key() == Qt::Key_Return) {
-        // qCDebug(KDESVN_LOG)<<"Return pressed"<<endl;
-    }
-    key->ignore();
 }

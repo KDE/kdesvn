@@ -60,7 +60,6 @@ target_link_libraries(kdesvnpart
     kdesvncfgreader
     svnbackground
     svnqt
-    KF5::KDELibs4Support
 )
 
 set_target_properties(kdesvnpart
@@ -76,7 +75,6 @@ target_link_libraries(kdesvnaskpass
 target_link_libraries(kdesvn
     KF5::Parts
     KF5::Bookmarks
-    KF5::KDELibs4Support
     kdesvnhelpers
 )
 

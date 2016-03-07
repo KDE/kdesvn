@@ -47,7 +47,7 @@ void AuthDialogWidget::slotHelp()
 {
 }
 
-const QString AuthDialogWidget::Username()const
+const QString AuthDialogWidget::Username() const
 {
     return m_UsernameEdit->text();
 }
@@ -57,7 +57,7 @@ const QString AuthDialogWidget::Password() const
     return m_PasswordEdit->text();
 }
 
-bool AuthDialogWidget::maySave()const
+bool AuthDialogWidget::maySave() const
 {
     return m_StorePasswordButton->isChecked();
 }

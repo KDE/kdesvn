@@ -20,8 +20,8 @@
 #ifndef AUTHDIALOGWIDGET_H
 #define AUTHDIALOGWIDGET_H
 
-#include "ksvnwidgets/ui_authdlg.h"
-#include <qstring.h>
+#include "ui_authdlg.h"
+#include <QString>
 #include <QWidget>
 
 class AuthDialogWidget: public QWidget, public Ui::AuthDialogWidget

@@ -17,50 +17,59 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include "ssltrustprompt_impl.h"
-#include "settings/kdesvnsettings.h"
-#include "helpers/windowgeometryhelper.h"
+#include "ssltrustprompt.h"
+#include "ui_ssltrustprompt.h"
 
-#include <klocale.h>
-#include <kconfig.h>
-#include <KDialog>
-#include <KVBox>
+#include <KLocale>
 #include <QPointer>
+#include <QPushButton>
 
-SslTrustPrompt_impl::SslTrustPrompt_impl(const QString &host, QWidget *parent)
-    : QWidget(parent)
+SslTrustPrompt::SslTrustPrompt(const QString &host, const QString &text, QWidget *parent)
+    : KSvnDialog(QLatin1String("trustssldlg"), parent)
+    , m_ui(new Ui::SslTrustPrompt)
 {
-    setupUi(this);
+    m_ui->setupUi(this);
+    setDefaultButton(m_ui->buttonBox->button(QDialogButtonBox::No));
+    m_ui->buttonBox->button(QDialogButtonBox::Yes)->setText(i18n("Accept permanently"));
+    m_ui->buttonBox->button(QDialogButtonBox::No)->setText(i18n("Accept temporarily"));
+    m_ui->buttonBox->button(QDialogButtonBox::Cancel)->setText(i18n("Reject"));
+    connect(m_ui->buttonBox->button(QDialogButtonBox::Yes), &QPushButton::clicked,
+            [=]() {setResult(QDialogButtonBox::Yes);});
+    connect(m_ui->buttonBox->button(QDialogButtonBox::No), &QPushButton::clicked,
+            [=]() {setResult(QDialogButtonBox::No);});
+    connect(m_ui->buttonBox->button(QDialogButtonBox::Cancel), &QPushButton::clicked,
+            [=]() {setResult(QDialogButtonBox::Cancel);});
 
-    m_MainLabel->setText("<p align=\"center\"><b>" +
-                         i18n("Error validating server certificate for '%1'", host) +
-                         QString("</b></p>"));
+    m_ui->m_MainLabel->setText(QLatin1String("<p align=\"center\"><b>") +
+                               i18n("Error validating server certificate for '%1'", host) +
+                               QLatin1String("</b></p>"));
+    m_ui->m_ContentText->setText(text);
 }
 
-/*!
-    \fn SslTrustPrompt_impl::sslTrust(const QString&host,const QString&fingerprint,const QString&validFrom,const QString&validUntil,const QString&issuerName,const QString&realm,bool*ok,bool*saveit)
- */
-bool SslTrustPrompt_impl::sslTrust(const QString &host, const QString &fingerprint, const QString &validFrom, const QString &validUntil, const QString &issuerName, const QString &realm, const QStringList &reasons, bool *ok, bool *saveit)
+SslTrustPrompt::~SslTrustPrompt()
 {
-    SslTrustPrompt_impl *ptr = 0;
-    QPointer<KDialog> dlg(new KDialog(0));
-    dlg->setWindowTitle(i18n("Trust SSL certificate"));
-    QFlags<KDialog::ButtonCode> buttons = KDialog::Yes | KDialog::Cancel | KDialog::No;
+    delete m_ui;
+}
 
-    dlg->setButtons(buttons);
-    dlg->setButtonText(KDialog::Yes, i18n("Accept permanently"));
-    dlg->setButtonText(KDialog::No, i18n("Accept temporarily"));
-    dlg->setButtonText(KDialog::Cancel, i18n("Reject"));
-
-    static QString rb = "<tr><td>";
-    static QString rs = "</td><td>";
-    static QString re = "</td></tr>";
+bool SslTrustPrompt::sslTrust(const QString &host,
+                              const QString &fingerprint,
+                              const QString &validFrom,
+                              const QString &validUntil,
+                              const QString &issuerName,
+                              const QString &realm,
+                              const QStringList &reasons,
+                              bool *ok,
+                              bool *saveit)
+{
+    static QLatin1String rb("<tr><td>");
+    static QLatin1String rs("</td><td>");
+    static QLatin1String re("</td></tr>");
     QString text = "<html><body>";
     if (!reasons.isEmpty()) {
         text += "<p align=\"center\">";
         text += "<h2>" + i18n("Failure reasons") + "</h2><hline>";
         for (int i = 0; i < reasons.count(); ++i) {
-            text += reasons[i] + "<br><hline>";
+            text += reasons.at(i)+ "<br><hline>";
         }
         text += "</p>";
     }
@@ -74,17 +83,11 @@ bool SslTrustPrompt_impl::sslTrust(const QString &host, const QString &fingerpri
     text += rb + i18n("Fingerprint") + rs + fingerprint + re;
     text += "</table></p></body></html>";
 
-    KVBox *Dialog1Layout = new KVBox(dlg);
-    dlg->setMainWidget(Dialog1Layout);
-
-    ptr = new SslTrustPrompt_impl(host, Dialog1Layout);
-    ptr->m_ContentText->setText(text);
-    WindowGeometryHelper wgh(dlg, QLatin1String("trustssldlg"));
+    QPointer<SslTrustPrompt> dlg(new SslTrustPrompt(host, text, QApplication::activeModalWidget()));
     int i = dlg->exec();
-    wgh.save();
     delete dlg;
 
-    *saveit = i == KDialog::Yes;
-    *ok = (i == KDialog::Yes || i == KDialog::No);
+    *saveit = i == QDialogButtonBox::Yes;
+    *ok = (i == QDialogButtonBox::Yes || i == QDialogButtonBox::No);
     return *ok;
 }

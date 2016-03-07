@@ -22,7 +22,7 @@
 #include "kdesvn-config.h"
 #include "kdesvnd_listener.h"
 #include "ksvnwidgets/authdialogimpl.h"
-#include "ksvnwidgets/ssltrustprompt_impl.h"
+#include "ksvnwidgets/ssltrustprompt.h"
 #include "ksvnwidgets/commitmsg_impl.h"
 #include "ksvnwidgets/pwstorage.h"
 #include "helpers/kdesvn_debug.h"
@@ -208,7 +208,7 @@ QStringList kdesvnd::get_login(const QString &realm, const QString &user)
 int kdesvnd::get_sslaccept(const QString &hostname, const QString &fingerprint, const QString &validFrom, const QString &validUntil, const QString &issuerDName, const QString &realm)
 {
     bool ok, saveit;
-    if (!SslTrustPrompt_impl::sslTrust(
+    if (!SslTrustPrompt::sslTrust(
                 hostname,
                 fingerprint,
                 validFrom,

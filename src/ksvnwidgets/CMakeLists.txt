@@ -43,7 +43,7 @@ set(ksvnwidgetsrc
     models/commitmodelhelper.cpp
     pwstorage.cpp
     revertform.cpp
-    ssltrustprompt_impl.cpp
+    ssltrustprompt.cpp
     )
 
 set(ksvnwidgethdr
@@ -61,7 +61,7 @@ set(ksvnwidgethdr
     models/commitmodelhelper.h
     pwstorage.h
     revertform.h
-    ssltrustprompt_impl.h
+    ssltrustprompt.h
 )
 
 qt5_add_dbus_interfaces(ksvnwidgetsrc ${KDE4_DBUS_INTERFACES_DIR}/kf5_org.kde.JobViewServer.xml)

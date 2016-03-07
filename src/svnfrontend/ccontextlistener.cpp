@@ -21,7 +21,7 @@
 #include "settings/kdesvnsettings.h"
 #include "ksvnwidgets/authdialogimpl.h"
 #include "ksvnwidgets/commitmsg_impl.h"
-#include "ksvnwidgets/ssltrustprompt_impl.h"
+#include "ksvnwidgets/ssltrustprompt.h"
 #include "ksvnwidgets/pwstorage.h"
 #include "helpers/kdesvn_debug.h"
 
@@ -261,7 +261,7 @@ svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTru
 {
     bool ok, saveit;
     emit waitShow(true);
-    if (!SslTrustPrompt_impl::sslTrust(
+    if (!SslTrustPrompt::sslTrust(
                 data.hostname,
                 data.fingerprint,
                 data.validFrom,

@@ -21,7 +21,6 @@
 
 #include "svnfrontend/ccontextlistener.h"
 #include "ksvnwidgets/commitmsg_impl.h"
-#include "ksvnwidgets/ssltrustprompt_impl.h"
 #include "helpers/stringhelper.h"
 #include "threadcontextlistenerdata.h"
 

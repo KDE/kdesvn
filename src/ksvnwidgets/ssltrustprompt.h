@@ -17,18 +17,31 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef SSLTRUSTPROMPT_IMPL_H
-#define SSLTRUSTPROMPT_IMPL_H
+#pragma once
 
-// #include "ksvnwidgets/ssltrustprompt.h"
-#include "ksvnwidgets/ui_ssltrustprompt.h"
+#include "ksvndialog.h"
 
-class SslTrustPrompt_impl: public QWidget, public Ui::SslTrustPrompt  //public SslTrustPrompt {
+namespace Ui
+{
+class SslTrustPrompt;
+}
+
+class SslTrustPrompt: public KSvnDialog
 {
     Q_OBJECT
+private:
+    explicit SslTrustPrompt(const QString &, const QString &text, QWidget *parent = nullptr);
+    ~SslTrustPrompt();
 public:
-    explicit SslTrustPrompt_impl(const QString &, QWidget *parent = 0);
-    static bool sslTrust(const QString &host, const QString &fingerprint, const QString &validFrom, const QString &validUntil, const QString &issuerName, const QString &realm, const QStringList &reasons, bool *ok, bool *saveit);
+    static bool sslTrust(const QString &host,
+                         const QString &fingerprint,
+                         const QString &validFrom,
+                         const QString &validUntil,
+                         const QString &issuerName,
+                         const QString &realm,
+                         const QStringList &reasons,
+                         bool *ok,
+                         bool *saveit);
+private:
+    Ui::SslTrustPrompt *m_ui;
 };
-
-#endif

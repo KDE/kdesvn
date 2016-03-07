@@ -22,7 +22,7 @@
 #include "svnfrontend/fronthelpers/propertyitem.h"
 #include "svnfrontend/fronthelpers/propertylist.h"
 #include "fronthelpers/createdlg.h"
-#include "editpropswidget.h"
+#include "editpropsdlg.h"
 #include "svnitem.h"
 #include "svnqt/client.h"
 
@@ -109,8 +109,8 @@ void PropertiesDlg::slotHelp()
 
 void PropertiesDlg::slotCurrentItemChanged(QTreeWidgetItem *item, QTreeWidgetItem *)
 {
-    m_DeleteButton->setEnabled(item);
-    m_ModifyButton->setEnabled(item);
+    m_DeleteButton->setEnabled(item != nullptr);
+    m_ModifyButton->setEnabled(item != nullptr);
     if (!item || item->type() != PropertyListViewItem::_RTTI_) {
         return;
     }
@@ -175,28 +175,24 @@ void PropertiesDlg::slotSelectionExecuted(QTreeWidgetItem *)
 
 void PropertiesDlg::slotAdd()
 {
-    EditPropsWidget *ptr = 0L;
-    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Modify property"), true);
-    WindowGeometryHelper wgh(dlg, QLatin1String("modify_properties"));
-    ptr->setDir(m_Item->isDir());
+    QPointer<EditPropsDlg> dlg(new EditPropsDlg(true, this));
+    dlg->setDir(m_Item->isDir());
 
     if (dlg->exec() == QDialog::Accepted) {
-        if (PropertyListViewItem::protected_Property(ptr->propName())) {
+        if (PropertyListViewItem::protected_Property(dlg->propName())) {
             KMessageBox::error(this, i18n("This property may not set by users.\nRejecting it."), i18n("Protected property"));
             return;
         }
-        if (m_PropertiesListview->checkExisting(ptr->propName())) {
+        if (m_PropertiesListview->checkExisting(dlg->propName())) {
             KMessageBox::error(this, i18n("A property with that name exists.\nRejecting it."), i18n("Double property"));
             return;
         }
         PropertyListViewItem *ki = new PropertyListViewItem(m_PropertiesListview);
-        ki->setText(0, ptr->propName());
-        ki->setText(1, ptr->propValue());
+        ki->setText(0, dlg->propName());
+        ki->setText(1, dlg->propValue());
         ki->checkName();
         ki->checkValue();
     }
-
-    wgh.save();
     delete dlg;
 }
 
@@ -234,29 +230,25 @@ void PropertiesDlg::slotModify()
     if (PropertyListViewItem::protected_Property(ki->currentName())) {
         return;
     }
-    EditPropsWidget *ptr = 0L;
-    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Modify property"), true);
-    WindowGeometryHelper wgh(dlg, QLatin1String("modify_properties"));
-    ptr->setDir(m_Item->isDir());
-    ptr->setPropName(ki->currentName());
-    ptr->setPropValue(ki->currentValue());
+    QPointer<EditPropsDlg> dlg(new EditPropsDlg(false, this));
+    dlg->setDir(m_Item->isDir());
+    dlg->setPropName(ki->currentName());
+    dlg->setPropValue(ki->currentValue());
 
     if (dlg->exec() == QDialog::Accepted) {
-        if (PropertyListViewItem::protected_Property(ptr->propName())) {
+        if (PropertyListViewItem::protected_Property(dlg->propName())) {
             KMessageBox::error(this, i18n("This property may not set by users.\nRejecting it."), i18n("Protected property"));
             return;
         }
-        if (m_PropertiesListview->checkExisting(ptr->propName(), qi)) {
+        if (m_PropertiesListview->checkExisting(dlg->propName(), qi)) {
             KMessageBox::error(this, i18n("A property with that name exists.\nRejecting it."), i18n("Double property"));
             return;
         }
-        ki->setText(0, ptr->propName());
-        ki->setText(1, ptr->propValue());
+        ki->setText(0, dlg->propName());
+        ki->setText(1, dlg->propValue());
         ki->checkName();
         ki->checkValue();
     }
-
-    wgh.save();
     delete dlg;
 }
 
@@ -265,9 +257,8 @@ void PropertiesDlg::changedItems(svn::PropertiesMap &toSet, QStringList &toDelet
     toSet.clear();
     toDelete.clear();
     QTreeWidgetItemIterator iter(m_PropertiesListview);
-    PropertyListViewItem *ki;
     while (*iter) {
-        ki = static_cast<PropertyListViewItem *>((*iter));
+        PropertyListViewItem *ki = static_cast<PropertyListViewItem *>((*iter));
         ++iter;
         if (PropertyListViewItem::protected_Property(ki->currentName()) ||
                 PropertyListViewItem::protected_Property(ki->startName())) {

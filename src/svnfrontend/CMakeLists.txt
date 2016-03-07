@@ -35,7 +35,7 @@ set(svnfrontendsrc
     database/dbsettings.h
     dummydisplay.cpp
     dumprepo_impl.cpp
-    editpropswidget.cpp
+    editpropsdlg.cpp
     fronthelpers/checkoutinfo_impl.cpp
     fronthelpers/checkoutinfo_impl.h
     fronthelpers/createdlg.h
@@ -91,8 +91,6 @@ set(svnfrontendsrc
     models/svnsortfilter.h
     opencontextmenu.cpp
     propertiesdlg.cpp
-    setpropertywidget.cpp
-    setpropertywidget.h
     stopdlg.cpp
     svnactions.cpp
     svnitem.cpp
@@ -116,7 +114,6 @@ set(svnfrontendui
     hotcopydlg.ui
     loaddmpdlg.ui
     merge_dlg.ui
-    setproperty.ui
     svnlogdlg.ui
     treeWidget.ui
     )

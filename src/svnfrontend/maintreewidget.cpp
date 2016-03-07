@@ -45,7 +45,6 @@
 #include "helpers/kdesvn_debug.h"
 #include "opencontextmenu.h"
 #include "EditIgnorePattern.h"
-#include "setpropertywidget.h"
 
 #include <kjobwidgets.h>
 #include <kjobuidelegate.h>
@@ -2364,11 +2363,5 @@ void MainTreeWidget::slotDirRecProperty()
     if (!k) {
         return;
     }
-    SetPropertyWidget *ptr = 0;
-    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Set/add property recursive"), true);
-    WindowGeometryHelper wgh(dlg, QLatin1String("property_dlg"));
-
-    dlg->exec();
-    wgh.save();
-    delete dlg;
+    KMessageBox::information(this, i18n("Not yet implemented"), i18n("Edit property recursivly"));
 }

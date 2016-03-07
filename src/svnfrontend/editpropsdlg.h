@@ -1,7 +1,6 @@
 /***************************************************************************
- * setpropertywidget.h                                                     *
- *   Copyright (C) 2005-2010 by Rajko Albrecht  ral@alwins-world.de        *
- *   http://kdesvn.alwins-world.de/                                        *
+ *   Copyright (C) 2005-2009 by Rajko Albrecht                             *
+ *   ral@alwins-world.de                                                   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,25 +17,41 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
+#pragma once
 
-#ifndef SETPROPERTYWIDGET_H_
-#define SETPROPERTYWIDGET_H_
+#include "ui_editpropsdlg.h"
 
-#include "ui_setproperty.h"
-#include "svnqt/svnqttypes.h"
+#include <ksvnwidgets/ksvndialog.h>
 
-#include <QWidget>
+namespace Ui
+{
+    class EditPropsDlg;
+}
+class QStringList;
+class QString;
 
-class SetPropertyWidget: virtual public QWidget, public Ui_SetPropertyWidget
+class EditPropsDlg: public KSvnDialog
 {
     Q_OBJECT
 public:
-    explicit SetPropertyWidget(QWidget *parent = 0);
-    virtual ~SetPropertyWidget();
+    explicit EditPropsDlg(bool bAddMode, QWidget *parent = nullptr);
+    ~EditPropsDlg();
 
-    QString getPropertyName()const;
-    QString getPropertyValue()const;
-    svn::Depth getDepth()const;
+    QString propName() const;
+    QString propValue() const;
+    void setPropName(const QString &);
+    void setPropValue(const QString &);
+    void setDir(bool dir);
+
+protected Q_SLOTS:
+    void updateToolTip(const QString &);
+    void showHelp();
+
+private:
+    QStringList fileProperties;
+    QStringList fileComments;
+    QStringList dirProperties;
+    QStringList dirComments;
+    bool m_isDir;
+    Ui::EditPropsDlg *m_ui;
 };
-
-#endif /* SETPROPERTYWIDGET_H_ */

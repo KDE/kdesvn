@@ -17,16 +17,25 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include "editpropswidget.h"
+#include "editpropsdlg.h"
+#include "ui_editpropsdlg.h"
 
 #include <QWhatsThis>
 
-EditPropsWidget::EditPropsWidget(QWidget *parent)
-    : QWidget(parent)
+EditPropsDlg::EditPropsDlg(bool bAddMode, QWidget *parent)
+    : KSvnDialog(QLatin1String("modify_properties"), parent)
+    , m_isDir(false)
+    , m_ui(new Ui::EditPropsDlg)
 {
-    setupUi(this);
+    m_ui->setupUi(this);
+    if (bAddMode) {
+        setWindowTitle(i18n("Add property"));
+    }
+    connect(m_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(m_ui->buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(m_ui->helpButton, SIGNAL(clicked(bool)), this, SLOT(showHelp()));
+    m_ui->helpButton->setIcon(QIcon::fromTheme("help-hint"));
 
-    helpButton->setIcon(QIcon::fromTheme("help-hint"));
 
     /// @TODO Read these values from a text or config file
     fileProperties += ("svn:eol-style");
@@ -111,85 +120,75 @@ EditPropsWidget::EditPropsWidget(QWidget *parent)
                         "The first expression is used to find a string referring to an issue, the "
                         "second expression is used to extract the bare bug ID from that string.");
 
-    m_NameEdit->setAutoCompletion(true);
-    m_NameEdit->setCompletionMode(KCompletion::CompletionPopupAuto);
-    m_NameEdit->setDuplicatesEnabled(false);
-    m_NameEdit->setHistoryItems(fileProperties, true);
-    isDir = false;
+    m_ui->m_NameEdit->setCompletionMode(KCompletion::CompletionPopupAuto);
+    m_ui->m_NameEdit->setHistoryItems(fileProperties, true);
 
-    m_NameEdit->setToolTip("Select or enter new property");
-    connect(m_NameEdit, SIGNAL(activated(QString)), this, SLOT(updateToolTip(QString)));
+    m_ui->m_NameEdit->setToolTip("Select or enter new property");
+    connect(m_ui->m_NameEdit, SIGNAL(activated(QString)), this, SLOT(updateToolTip(QString)));
 }
 
-EditPropsWidget::~EditPropsWidget()
+EditPropsDlg::~EditPropsDlg()
 {
+    delete m_ui;
 }
 
-void EditPropsWidget::updateToolTip(const QString &selection)
+void EditPropsDlg::updateToolTip(const QString &selection)
 {
-    int i;
-
-    if (isDir) {
-        i = dirProperties.indexOf(selection);
+    QString comment;
+    if (m_isDir) {
+        int i = dirProperties.indexOf(selection);
         if (i >= 0) {
-            comment = dirComments[i];
-        } else {
-            comment = "No help for this property available";
+            comment = dirComments.at(i);
         }
     } else {
-        i = fileProperties.indexOf(selection);
+        int i = fileProperties.indexOf(selection);
         if (i >= 0) {
-            comment = fileComments[i];
-        } else {
-            comment = "No help for this property available";
+            comment = fileComments.at(i);
         }
     }
-    m_NameEdit->setToolTip(comment);
+    if (comment.isEmpty()) {
+        comment = i18n("No help for this property available");
+    }
+    m_ui->m_NameEdit->setToolTip(comment);
 }
 
-void EditPropsWidget::setDir(bool dir)
+void EditPropsDlg::setDir(bool dir)
 {
-    if (dir == isDir) {
+    if (dir == m_isDir) {
         // Change not necessary
         return;
     }
-    if (dir) {
-        m_NameEdit->clearHistory();
-        m_NameEdit->setHistoryItems(dirProperties, true);
-    } else {
-        m_NameEdit->clearHistory();
-        m_NameEdit->setHistoryItems(fileProperties, true);
-    }
+    m_ui->m_NameEdit->setHistoryItems(dir ? dirProperties : fileProperties, true);
 
-    isDir = dir;
+    m_isDir = dir;
 }
 
-QString EditPropsWidget::propName()const
+QString EditPropsDlg::propName()const
 {
-    return m_NameEdit->currentText();
+    return m_ui->m_NameEdit->currentText();
 }
 
-QString EditPropsWidget::propValue()const
+QString EditPropsDlg::propValue()const
 {
-    return m_ValueEdit->toPlainText();
+    return m_ui->m_ValueEdit->toPlainText();
 }
 
-void EditPropsWidget::setPropName(const QString &n)
+void EditPropsDlg::setPropName(const QString &n)
 {
-    m_NameEdit->addToHistory(n);
-    m_NameEdit->setCurrentItem(n);
+    m_ui->m_NameEdit->addToHistory(n);
+    m_ui->m_NameEdit->setCurrentItem(n);
     updateToolTip(n);
 }
 
-void EditPropsWidget::setPropValue(const QString &v)
+void EditPropsDlg::setPropValue(const QString &v)
 {
-    m_ValueEdit->setText(v);
+    m_ui->m_ValueEdit->setText(v);
 }
 
-void EditPropsWidget::showHelp()
+void EditPropsDlg::showHelp()
 {
-    QPoint pos = m_ValueEdit->pos();
-    pos.setX(pos.x() + m_ValueEdit->width() / 2);
-    pos.setY(pos.y() + m_ValueEdit->height() / 4);
-    QWhatsThis::showText(mapToGlobal(pos), comment);
+    QPoint pos = m_ui->m_ValueEdit->pos();
+    pos.setX(pos.x() + m_ui->m_ValueEdit->width() / 2);
+    pos.setY(pos.y() + m_ui->m_ValueEdit->height() / 4);
+    QWhatsThis::showText(mapToGlobal(pos), m_ui->m_NameEdit->toolTip());
 }

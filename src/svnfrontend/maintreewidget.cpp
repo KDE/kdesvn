@@ -878,19 +878,18 @@ void MainTreeWidget::slotSettingsChanged()
     checkUseNavigation();
 }
 
-KService::List MainTreeWidget::offersList(SvnItem *item, bool execOnly)const
+KService::List MainTreeWidget::offersList(SvnItem *item, bool execOnly) const
 {
     KService::List offers;
     if (!item) {
         return offers;
     }
-    QString constraint;
-    constraint = "(DesktopEntryName != 'kdesvn') and (Type == 'Application')";
-    if (execOnly) {
-        constraint += QString(" and (exist Exec)");
-    }
     if (!item->mimeType()) {
         return offers;
+    }
+    QString constraint(QLatin1String("(DesktopEntryName != 'kdesvn') and (Type == 'Application')"));
+    if (execOnly) {
+        constraint += QLatin1String(" and (exist Exec)");
     }
     offers = KMimeTypeTrader::self()->query(item->mimeType()->name(), QString::fromLatin1("Application"), constraint);
     return offers;
@@ -1116,9 +1115,8 @@ void MainTreeWidget::slotDirContextMenu(const QPoint &vp)
         popup.addAction(temp);
     }
 
-    OpenContextmenu *me = 0;
-    QAction *menuAction = 0;
-
+    OpenContextmenu *me = nullptr;
+    QAction *menuAction = nullptr;
     const SvnItemList l = DirSelectionList();
     if (l.count() == 1 && l.at(0)) {
         const KService::List offers = offersList(l.at(0), l.at(0)->isDir());
@@ -1135,6 +1133,7 @@ void MainTreeWidget::slotDirContextMenu(const QPoint &vp)
     }
     if (menuAction) {
         popup.removeAction(menuAction);
+        delete menuAction;
     }
     delete me;
 
@@ -1183,10 +1182,9 @@ void MainTreeWidget::execContextMenu(const SvnItemList &l)
         return;
     }
 
-    OpenContextmenu *me = 0;
-    QAction *temp = 0;
-    QAction *menuAction = 0;
-
+    OpenContextmenu *me = nullptr;
+    QAction *temp = nullptr;
+    QAction *menuAction = nullptr;
     if (l.count() == 1/*&&!l.at(0)->isDir()*/) {
         KService::List offers = offersList(l.at(0), l.at(0)->isDir());
         if (!offers.isEmpty()) {
@@ -1208,6 +1206,7 @@ void MainTreeWidget::execContextMenu(const SvnItemList &l)
     delete me;
     if (temp) {
         popup->removeAction(temp);
+        delete temp;
     }
 }
 

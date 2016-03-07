@@ -26,7 +26,9 @@
 #include <QApplication>
 
 OpenContextmenu::OpenContextmenu(const QUrl &aPath, const KService::List &aList, QWidget *parent)
-    : KMenu(parent), m_Path(aPath), m_List(aList)
+    : QMenu(parent)
+    , m_Path(aPath)
+    , m_List(aList)
 {
     setup();
 }
@@ -38,28 +40,24 @@ OpenContextmenu::~OpenContextmenu()
 void OpenContextmenu::setup()
 {
     m_mapPopup.clear();
-    KService::List::ConstIterator it = m_List.constBegin();
-    int id = 1;
-    QAction *act;
     QStringList _found;
-    for (; it != m_List.constEnd(); ++it) {
-        if (_found.indexOf((*it)->name()) != -1) {
+    Q_FOREACH(const KService::Ptr &ptr, m_List) {
+        if (_found.contains(ptr->name())) {
             continue;
         }
-        _found.append((*it)->name());
-        QString actionName((*it)->name().replace('&', "&&"));
-        act = addAction(SmallIcon((*it)->icon()), actionName);
-        QVariant _data = id;
+        _found.append(ptr->name());
+        QString actionName(ptr->name().replace(QLatin1Char('&'), QLatin1String("&&")));
+        QAction *act = addAction(SmallIcon(ptr->icon()), actionName);
+        QVariant _data = m_mapPopup.size();
         act->setData(_data);
 
-        //post increment!!!!!
-        m_mapPopup[ id++ ] = *it;
+        m_mapPopup.push_back(ptr);
     }
     connect(this, SIGNAL(triggered(QAction*)), this, SLOT(slotRunService(QAction*)));
     if (!m_List.isEmpty()) {
         addSeparator();
     }
-    act = new QAction(i18n("Other..."), this);
+    QAction *act = new QAction(i18n("Other..."), this);
     QVariant _data = int(0);
     act->setData(_data);
     addAction(act);
@@ -67,9 +65,9 @@ void OpenContextmenu::setup()
 
 void OpenContextmenu::slotRunService(QAction *act)
 {
-    QMap<int, KService::Ptr>::Iterator it = m_mapPopup.find(act->data().toInt());
-    if (it != m_mapPopup.end()) {
-        KRun::run(**it, QList<QUrl>() << m_Path, QApplication::activeWindow());
+    const int idx = act->data().toInt();
+    if (idx >= 0 && idx < m_mapPopup.size()) {
+        KRun::run(*m_mapPopup.at(idx), QList<QUrl>() << m_Path, QApplication::activeWindow());
     } else {
         slotOpenWith();
     }

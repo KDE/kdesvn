@@ -30,9 +30,8 @@
 
 #include <math.h>
 
-#include <qpainter.h>
-
-#include <kglobalsettings.h>
+#include <QFontDatabase>
+#include <QPainter>
 
 // set this to 1 to enable debug output
 #define DEBUG_DRAWING 0
@@ -107,7 +106,7 @@ int StoredDrawParams::maxLines(int f) const
 
 QFont StoredDrawParams::font() const
 {
-    return KGlobalSettings::fixedFont();
+    return QFontDatabase::systemFont(QFontDatabase::FixedFont);
 }
 
 void StoredDrawParams::ensureField(int f)

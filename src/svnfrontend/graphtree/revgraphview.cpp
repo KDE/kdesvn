@@ -30,8 +30,8 @@
 #include <kfiledialog.h>
 #include <kmessagebox.h>
 #include <kmenu.h>
-#include <kglobalsettings.h>
 
+#include <QFontDatabase>
 #include <QMatrix>
 #include <QPainter>
 #include <QRegExp>
@@ -463,8 +463,8 @@ void RevGraphView::dumpRevtree()
         return;
     }
     QTextStream stream(m_dotTmpFile);
-    QFont f = KGlobalSettings::fixedFont();
-    QFontMetrics _fm(KGlobalSettings::fixedFont());
+    QFont f = QFontDatabase::systemFont(QFontDatabase::FixedFont);
+    QFontMetrics _fm(f);
     int _fontsize = _fm.height();
     if (_fontsize < 0) {
         _fontsize = 10;

@@ -26,13 +26,13 @@
 #include "fronthelpers/cursorstack.h"
 #include "ksvnwidgets/encodingselector_impl.h"
 
-#include <kglobalsettings.h>
 #include <kglobal.h>
 #include <klocale.h>
 #include <kcolorscheme.h>
 #include <KTreeWidgetSearchLine>
 
 #include <QBrush>
+#include <QFontDatabase>
 #include <QInputDialog>
 #include <QMap>
 #include <QPushButton>
@@ -110,7 +110,7 @@ public:
     {
         for (int i = 0; i <= COL_LINE; ++i) {
             setTextAlignment(i, Qt::AlignLeft | Qt::AlignVCenter);
-            setFont(i, KGlobalSettings::self()->fixedFont());
+            setFont(i, QFontDatabase::systemFont(QFontDatabase::FixedFont));
         }
         display();
     }
@@ -373,7 +373,7 @@ void BlameDisplay::showCommit(BlameTreeItem *bti)
 
     QTextEdit *textEdit = new QTextEdit(dlg);
     vbox->addWidget(textEdit);
-    textEdit->setFont(KGlobalSettings::fixedFont());
+    textEdit->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
     textEdit->setReadOnly(true);
     textEdit->setWordWrapMode(QTextOption::NoWrap);
     textEdit->setPlainText(text);

@@ -67,7 +67,6 @@
 #include <kdialog.h>
 #include <ktextbrowser.h>
 #include <klocale.h>
-#include <kglobalsettings.h>
 #include <kmessagebox.h>
 #include <kinputdialog.h>
 #include <kconfig.h>
@@ -78,6 +77,7 @@
 #include <QApplication>
 #include <QDesktopServices>
 #include <QFileInfo>
+#include <QFontDatabase>
 #include <QMap>
 #include <QReadWriteLock>
 #include <QString>
@@ -630,7 +630,7 @@ void SvnActions::slotMakeCat(const svn::Revision &start, const QString &what, co
     if (co.size()) {
         QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Content of %1", disp), false);
         WindowGeometryHelper wgh(dlg, QLatin1String("cat_display_dlg"));
-        ptr->setFont(KGlobalSettings::fixedFont());
+        ptr->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
         ptr->setWordWrapMode(QTextOption::NoWrap);
         ptr->setReadOnly(true);
         ptr->setText(QString::fromUtf8(co, co.size()));

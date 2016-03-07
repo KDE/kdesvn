@@ -19,9 +19,9 @@
  ***************************************************************************/
 
 #include "diffsyntax.h"
-#include <kglobalsettings.h>
-#include <kglobal.h>
-#include <qregexp.h>
+
+#include <QFontDatabase>
+#include <QRegExp>
 
 DiffSyntax::DiffSyntax(QTextDocument *aTextEdit)
     : QSyntaxHighlighter(aTextEdit)
@@ -35,7 +35,7 @@ void DiffSyntax::highlightBlock(const QString &aText)
     static const QRegExp a(QLatin1String("^\\w+:\\s.*$")); // filename (Index: foo/bar.txt)
     static const QRegExp b(QLatin1String("^\\W+$"));
     QTextCharFormat format;
-    format.setFont(KGlobalSettings::fixedFont());
+    format.setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
     bool bIsModifiedLine = false;
 
     if (previousBlockState() == 1) {

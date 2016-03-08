@@ -61,7 +61,6 @@ set(SOURCES
     log_entry.cpp
     path.cpp
     pool.cpp
-    repoparameter.cpp
     repository.cpp
     repositorydata.cpp
     repositorylistener.cpp

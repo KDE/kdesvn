@@ -17,38 +17,36 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#ifndef CREATEREPO_IMPL_H
-#define CREATEREPO_IMPL_H
+#pragma once
 
-#include "ui_createrepo_dlg.h"
 
 #include "svnqt/svnqttypes.h"
 
-#include <QScopedPointer>
+#include <ksvnwidgets/ksvndialog.h>
+#include <svnqt/repoparameter.h>
 
-struct CreateRepoData;
+namespace Ui
+{
+class CreateRepoDlg;
+}
 
-class Createrepo_impl: public QWidget, public Ui::CreateRepo_Dlg
+class CreaterepoDlg: public KSvnDialog
 {
     Q_OBJECT
 public:
-    explicit Createrepo_impl(QWidget *parent = 0);
-    ~Createrepo_impl();
-    const svn::repository::CreateRepoParameter &parameter()const;
-    bool createMain()const;
-    QString targetDir()const;
+    explicit CreaterepoDlg(QWidget *parent = nullptr);
+    ~CreaterepoDlg();
+    svn::repository::CreateRepoParameter parameter() const;
+    bool createMain() const;
+    QString targetDir() const;
 
 protected Q_SLOTS:
     void fsTypeChanged(int);
-    void compatChanged15(bool);
-    void compatChanged14(bool);
-    void compatChanged13(bool);
+    void compatChanged15();
+    void compatChanged16();
+    void compatChanged18();
 
 private:
-    QScopedPointer<CreateRepoData> _data;
-
-protected:
-    void checkCompatList();
+    bool m_inChangeCompat;
+    Ui::CreateRepoDlg *m_ui;
 };
-
-#endif

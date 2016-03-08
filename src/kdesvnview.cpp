@@ -20,7 +20,7 @@
 
 #include "kdesvnview.h"
 #include "svnfrontend/maintreewidget.h"
-#include "svnfrontend/createrepo_impl.h"
+#include "svnfrontend/createrepodlg.h"
 #include "svnfrontend/dumprepo_impl.h"
 #include "svnfrontend/hotcopydlg_impl.h"
 #include "svnfrontend/loaddmpdlg_impl.h"
@@ -224,39 +224,28 @@ void kdesvnView::slotSettingsChanged()
  */
 void kdesvnView::slotCreateRepo()
 {
-    QPointer<KDialog> dlg(new KDialog(QApplication::activeModalWidget()));
-    dlg->setWindowTitle(i18n("Create new repository"));
-    dlg->setButtons(KDialog::Ok | KDialog::Cancel);
-
-    QWidget *Dialog1Layout = new KVBox(dlg);
-    dlg->setMainWidget(Dialog1Layout);
-    //dlg->makeVBoxMainWidget();
-    Createrepo_impl *ptr = new Createrepo_impl(Dialog1Layout);
-    WindowGeometryHelper wgh(dlg, QLatin1String("create_repo_size"));
+    QPointer<CreaterepoDlg> dlg(new CreaterepoDlg(this));
     if (dlg->exec() != QDialog::Accepted) {
-        wgh.save();
         delete dlg;
         return;
     }
-    wgh.save();
     svn::repository::Repository *_rep = new svn::repository::Repository(this);
     bool ok = true;
-    bool createdirs;
     closeMe();
     try {
-        _rep->CreateOpen(ptr->parameter());
+        _rep->CreateOpen(dlg->parameter());
     } catch (const svn::ClientException &e) {
         slotAppendLog(e.msg());
         ok = false;
     }
-    createdirs = ptr->createMain();
-    delete dlg;
-    delete _rep;
     if (!ok) {
+        delete dlg;
         return;
     }
+    bool createdirs = dlg->createMain();
     // repo is created on a local path
-    const QUrl path = QUrl::fromLocalFile(ptr->targetDir());
+    const QUrl path = QUrl::fromLocalFile(dlg->targetDir());
+    delete dlg;
     openUrl(path);
     if (createdirs) {
         emit sigMakeBaseDirs();

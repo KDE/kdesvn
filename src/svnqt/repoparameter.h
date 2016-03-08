@@ -21,12 +21,9 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at http://kdesvn.alwins-world.de.           *
  ***************************************************************************/
-#ifndef REPOPARAMETER_H
-#define REPOPARAMETER_H
+#pragma once
 
 #include <QString>
-#include <QScopedPointer>
-
 #include <svnqt/svnqt_defines.h>
 
 namespace svn
@@ -35,69 +32,81 @@ namespace svn
 namespace repository
 {
 
-struct CreateRepoParameterData;
+class CreateRepoParameterData;
 
 class SVNQT_EXPORT CreateRepoParameter
 {
-    QScopedPointer<CreateRepoParameterData> _data;
+    QString _path;
+    QString _fstype;
+    bool _bdbnosync;
+    bool _bdbautologremove;
+    bool _pre_1_5_compat;
+    bool _pre_1_6_compat;
+    bool _pre_1_8_compat;
 
 public:
-    CreateRepoParameter();
-    ~CreateRepoParameter();
+    CreateRepoParameter()
+        : _fstype(QLatin1String("fsfs"))
+        , _bdbnosync(false)
+        , _bdbautologremove(true)
+        , _pre_1_5_compat(false)
+        , _pre_1_6_compat(false)
+        , _pre_1_8_compat(false)
+    {}
 
     /** path to create
      * default is emtpy
      */
-    const QString &path()const;
+    const QString &path() const { return _path; }
     /** path to create
      * default is emtpy
      */
-    CreateRepoParameter &path(const QString &);
+    CreateRepoParameter &path(const QString &path) { _path = path; return *this; }
     /** fs type of repository
      *
      * default is "fsfs"
      */
-    const QString &fstype()const;
+    const QString &fstype() const { return _fstype; }
     /** fs type of repository
      *
      * default is "fsfs"
      */
-    CreateRepoParameter &fstype(const QString &);
+    CreateRepoParameter &fstype(const QString &fstype) { _fstype = fstype; return *this; }
     /** switch of syncing of bdb
      *
      * default is false
      */
-    bool bdbnosync()const;
+    bool bdbnosync() const { return _bdbnosync; }
     /** switch of syncing of bdb
      *
      * default is false
      */
-    CreateRepoParameter &bdbnosync(bool);
+    CreateRepoParameter &bdbnosync(bool b) { _bdbnosync = b; return *this; }
     /** bdb automatic remove log
      *
      * default is true
      */
-    bool bdbautologremove()const;
+    bool bdbautologremove() const { return _bdbautologremove; }
     /** bdb automatic remove log
      *
      * default is true
      */
-    CreateRepoParameter &bdbautologremove(bool);
+    CreateRepoParameter &bdbautologremove(bool b) { _bdbautologremove = b; return *this; }
+
     /** default is false */
-    bool pre14_compat()const;
+    bool pre15_compat() const { return _pre_1_5_compat; }
     /** default is false */
-    CreateRepoParameter &pre14_compat(bool);
+    CreateRepoParameter &pre15_compat(bool b) { _pre_1_5_compat = b; return *this; }
     /** default is false */
-    bool pre15_compat()const;
+    bool pre16_compat() const { return _pre_1_6_compat; }
     /** default is false */
-    CreateRepoParameter &pre15_compat(bool);
+    CreateRepoParameter &pre16_compat(bool b) { _pre_1_6_compat = b; return *this; }
     /** default is false */
-    bool pre16_compat()const;
+    bool pre18_compat() const { return _pre_1_8_compat; }
     /** default is false */
-    CreateRepoParameter &pre16_compat(bool);
+    CreateRepoParameter &pre18_compat(bool b) { _pre_1_8_compat = b; return *this; }
 
 };
 
 } // namespace repository
 } // namespace svn
-#endif

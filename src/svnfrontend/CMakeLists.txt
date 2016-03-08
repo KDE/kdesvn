@@ -28,7 +28,7 @@ set(svnfrontendsrc
     ccontextlistener.cpp
     commandexec.cpp
     copymoveview_impl.cpp
-    createrepo_impl.cpp
+    createrepodlg.cpp
     database/dboverview.cpp
     database/dboverview.h
     database/dbsettings.cpp
@@ -102,7 +102,7 @@ set(svnfrontendsrc
 set(svnfrontendui
     blamedisplay.ui
     copymoveview.ui
-    createrepo_dlg.ui
+    createrepodlg.ui
     database/dboverview.ui
     database/dbsettings.ui
     dumprepo_dlg.ui

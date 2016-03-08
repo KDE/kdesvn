@@ -183,10 +183,6 @@ svn_error_t *RepositoryData::CreateOpen(const CreateRepoParameter &params)
                  APR_HASH_KEY_STRING,
                  _type);
 
-    if (params.pre14_compat()) {
-        apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_4_COMPATIBLE,
-                     APR_HASH_KEY_STRING, "1");
-    }
     if (params.pre15_compat()) {
         apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_5_COMPATIBLE,
                      APR_HASH_KEY_STRING, "1");
@@ -194,6 +190,12 @@ svn_error_t *RepositoryData::CreateOpen(const CreateRepoParameter &params)
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     if (params.pre16_compat()) {
         apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_6_COMPATIBLE,
+                     APR_HASH_KEY_STRING, "1");
+    }
+#endif
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+    if (params.pre18_compat()) {
+        apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_8_COMPATIBLE,
                      APR_HASH_KEY_STRING, "1");
     }
 #endif

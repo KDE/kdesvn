@@ -55,17 +55,6 @@ inline QPointer<KDialog> createDialog(T **ptr, const QString &_head, const KDial
     return dlg;
 }
 
-template<class T>
-inline QPointer<KDialog> createYesDialog(T **ptr, const QString &_head, bool YesNo = false,
-                                         bool showHelp = false,
-                                         bool modal = true, const KGuiItem &u1 = KGuiItem())
-{
-    KDialog::ButtonCodes buttons = KDialog::Yes;
-    if (YesNo) {
-        buttons = buttons | KDialog::No;
-    }
-    return createDialog(ptr, _head, buttons, showHelp, modal, u1);
-}
 
 template<class T>
 inline QPointer<KDialog> createOkDialog(T **ptr, const QString &_head, bool OkCancel = false,

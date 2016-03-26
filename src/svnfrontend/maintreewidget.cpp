@@ -1006,16 +1006,15 @@ void MainTreeWidget::slotRightRecAddIgnore()
 
 void MainTreeWidget::recAddIgnore(SvnItem *item)
 {
-    EditIgnorePattern *ptr = 0;
-    QPointer<KDialog> dlg(createOkDialog(&ptr, i18n("Edit pattern to ignore for \"%1\"", item->shortName()),
-                                         true));
-    WindowGeometryHelper wgh(dlg, QLatin1String("ignore_pattern_dlg"));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("ignore_pattern_dlg")));
+    dlg->setWindowTitle(i18n("Edit pattern to ignore for \"%1\"", item->shortName()));
+    dlg->setWithCancelButton();
+    EditIgnorePattern *ptr(new EditIgnorePattern(dlg));
+    dlg->addWidget(ptr);
     if (dlg->exec() != QDialog::Accepted) {
-        wgh.save();
         delete dlg;
         return;
     }
-    wgh.save();
     svn::Depth _d = ptr->depth();
     QStringList _pattern = ptr->items();
     bool unignore = ptr->unignore();
@@ -1237,20 +1236,13 @@ void MainTreeWidget::slotSelectBrowsingRevision()
     if (isWorkingCopy()) {
         return;
     }
-    Rangeinput_impl *rdlg = 0;
-    QPointer<KDialog> dlg = createOkDialog(&rdlg, i18n("Revisions"), true);
-    WindowGeometryHelper wgh(dlg, QLatin1String("revisions_dlg"));
-    rdlg->setNoWorking(true);
-    rdlg->setStartOnly(true);
-    if (dlg->exec() == QDialog::Accepted) {
-        Rangeinput_impl::revision_range r = rdlg->getRange();
-        m_Data->m_remoteRevision = r.first;
+    Rangeinput_impl::revision_range range;
+    if (Rangeinput_impl::getRevisionRange(range, false)) {
+        m_Data->m_remoteRevision = range.first;
         clear();
         m_Data->m_Model->checkDirs(baseUri(), 0);
-        emit changeCaption(baseUri() + QLatin1Char('@') + r.first.toString());
+        emit changeCaption(baseUri() + QLatin1Char('@') + range.first.toString());
     }
-    wgh.save();
-    delete dlg;
 }
 
 void MainTreeWidget::slotMakeTree()
@@ -1280,16 +1272,11 @@ void MainTreeWidget::slotMakePartTree()
     } else {
         return;
     }
-    Rangeinput_impl *rdlg = 0;
-    QPointer<KDialog> dlg = createOkDialog(&rdlg, i18n("Revisions"), true);
-    WindowGeometryHelper wgh(dlg, QLatin1String("revisions_dlg"));
-    if (dlg->exec() == QDialog::Accepted) {
-        Rangeinput_impl::revision_range r = rdlg->getRange();
+    Rangeinput_impl::revision_range range;
+    if (Rangeinput_impl::getRevisionRange(range)) {
         svn::Revision rev(isWorkingCopy() ? svn::Revision::UNDEFINED : baseRevision());
-        m_Data->m_Model->svnWrapper()->makeTree(what, rev, r.first, r.second);
+        m_Data->m_Model->svnWrapper()->makeTree(what, rev, range.first, range.second);
     }
-    wgh.save();
-    delete dlg;
 }
 
 void MainTreeWidget::slotLock()
@@ -1444,16 +1431,11 @@ void MainTreeWidget::slotDiffRevisions()
     } else {
         what = relativePath(k);
     }
-    Rangeinput_impl *rdlg = 0;
-    QPointer<KDialog> dlg = createOkDialog(&rdlg, i18n("Revisions"), true);
-    WindowGeometryHelper wgh(dlg, QLatin1String("revisions_dlg"));
-    if (dlg->exec() == QDialog::Accepted) {
-        Rangeinput_impl::revision_range r = rdlg->getRange();
+    Rangeinput_impl::revision_range range;
+    if (Rangeinput_impl::getRevisionRange(range)) {
         svn::Revision _peg = (isWorkingCopy() ? svn::Revision::WORKING : baseRevision());
-        m_Data->m_Model->svnWrapper()->makeDiff(what, r.first, r.second, _peg, k ? k->isDir() : true);
+        m_Data->m_Model->svnWrapper()->makeDiff(what, range.first, range.second, _peg, k ? k->isDir() : true);
     }
-    wgh.save();
-    delete dlg;
 }
 
 void MainTreeWidget::slotDiffPathes()
@@ -1530,15 +1512,10 @@ void MainTreeWidget::slotRangeBlame()
     if (!k) {
         return;
     }
-    Rangeinput_impl *rdlg = 0;
-    QPointer<KDialog> dlg = createOkDialog(&rdlg, i18n("Revisions"), true);
-    WindowGeometryHelper wgh(dlg, QLatin1String("revisions_dlg"));
-    if (dlg->exec() == QDialog::Accepted) {
-        Rangeinput_impl::revision_range r = rdlg->getRange();
-        m_Data->m_Model->svnWrapper()->makeBlame(r.first, r.second, k);
+    Rangeinput_impl::revision_range range;
+    if (Rangeinput_impl::getRevisionRange(range)) {
+        m_Data->m_Model->svnWrapper()->makeBlame(range.first, range.second, k);
     }
-    wgh.save();
-    delete dlg;
 }
 
 void MainTreeWidget::_propListTimeout()
@@ -1599,16 +1576,10 @@ void MainTreeWidget::slotRevisionCat()
     if (!k) {
         return;
     }
-    Rangeinput_impl *rdlg = 0;
-    QPointer<KDialog> dlg = createOkDialog(&rdlg, i18n("Revisions"), true);
-    WindowGeometryHelper wgh(dlg, QLatin1String("revisions_dlg"));
-    rdlg->setStartOnly(true);
-    if (dlg->exec() == QDialog::Accepted) {
-        Rangeinput_impl::revision_range r = rdlg->getRange();
-        m_Data->m_Model->svnWrapper()->slotMakeCat(r.first, k->fullName(), k->shortName(), isWorkingCopy() ? svn::Revision::WORKING : baseRevision(), 0);
+    Rangeinput_impl::revision_range range;
+    if (Rangeinput_impl::getRevisionRange(range, true, true)) {
+        m_Data->m_Model->svnWrapper()->slotMakeCat(range.first, k->fullName(), k->shortName(), isWorkingCopy() ? svn::Revision::WORKING : baseRevision(), 0);
     }
-    wgh.save();
-    delete dlg;
 }
 
 void MainTreeWidget::slotResolved()

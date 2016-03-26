@@ -28,15 +28,17 @@ class Rangeinput_impl: public QWidget, public Ui::RangeInput
 {
     Q_OBJECT
 public:
-    explicit Rangeinput_impl(QWidget *parent = 0);
+    explicit Rangeinput_impl(QWidget *parent = nullptr);
     virtual ~Rangeinput_impl();
 
     typedef QPair<svn::Revision, svn::Revision> revision_range;
 
-    revision_range getRange();
+    static bool getRevisionRange(revision_range &range, bool bWithWorking = true, bool bStartOnly = false, QWidget *parent = nullptr);
 
-    virtual void setStartOnly(bool theValue);
-    virtual void setNoWorking(bool aValue);
+    revision_range getRange() const;
+
+    void setStartOnly(bool theValue);
+    void setNoWorking(bool aValue);
 
     bool StartOnly() const;
     void setHeadDefault();

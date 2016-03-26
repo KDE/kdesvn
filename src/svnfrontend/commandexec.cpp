@@ -608,24 +608,14 @@ void CommandExec::slotNotifyMessage(const QString &msg)
 
 bool CommandExec::askRevision()
 {
-    QPointer<KDialog> dlg(new KDialog(0));
-    dlg->setWindowTitle(i18n("Revision"));
-    dlg->setButtons(KDialog::Ok | KDialog::Cancel);
-    KVBox *Dialog1Layout = new KVBox(dlg);
-    dlg->setMainWidget(Dialog1Layout);
-
     bool ret = false;
-    Rangeinput_impl *rdlg = new Rangeinput_impl(Dialog1Layout);
-    dlg->resize(QSize(120, 60).expandedTo(dlg->minimumSizeHint()));
-    rdlg->setStartOnly(m_pCPart->single_revision);
-    if (dlg->exec() == KDialog::Accepted) {
-        Rangeinput_impl::revision_range range = rdlg->getRange();
+    Rangeinput_impl::revision_range range;
+    if (Rangeinput_impl::getRevisionRange(range, true, m_pCPart->single_revision)) {
         m_pCPart->start = range.first;
         m_pCPart->end = range.second;
         m_pCPart->rev_set = true;
         ret = true;
     }
-    delete dlg;
     return ret;
 }
 

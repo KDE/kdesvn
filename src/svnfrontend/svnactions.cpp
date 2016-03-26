@@ -1506,20 +1506,11 @@ void SvnActions::prepareUpdate(bool ask)
     }
     svn::Revision r(svn::Revision::HEAD);
     if (ask) {
-        Rangeinput_impl *rdlg = 0;
-        QPointer<KDialog> dlg = createOkDialog(&rdlg, i18n("Revisions"), true);
-        rdlg->setStartOnly(true);
-        /* just here cause layout has changed meanwhile */
-        dlg->resize(QSize(120, 60).expandedTo(dlg->minimumSizeHint()));
-        int result;
-        if ((result = dlg->exec()) == QDialog::Accepted) {
-            Rangeinput_impl::revision_range range = rdlg->getRange();
-            r = range.first;
-        }
-        delete dlg;
-        if (result != QDialog::Accepted) {
+        Rangeinput_impl::revision_range range;
+        if (!Rangeinput_impl::getRevisionRange(range, true, true)) {
             return;
         }
+        r = range.first;
     }
     makeUpdate(svn::Targets(what), r, svn::DepthUnknown);
 }

@@ -20,7 +20,7 @@
 #include "revisionbuttonimpl.h"
 #include "svnfrontend/fronthelpers/rangeinput_impl.h"
 #include "settings/kdesvnsettings.h"
-#include "helpers/windowgeometryhelper.h"
+#include "ksvnwidgets/ksvndialog.h"
 
 #include <kdialog.h>
 #include <klocale.h>
@@ -48,25 +48,10 @@ void RevisionButtonImpl::setRevision(const svn::Revision &aRev)
 
 void RevisionButtonImpl::askRevision()
 {
-    Rangeinput_impl *rdlg;
-    QPointer<KDialog> dlg(new KDialog());
-    dlg->setWindowTitle(i18n("Select revision"));
-    dlg->setButtons(KDialog::Ok | KDialog::Cancel);
-    dlg->showButtonSeparator(false);
-
-    KVBox *Dialog1Layout = new KVBox(dlg);
-    dlg->setMainWidget(Dialog1Layout);
-
-    rdlg = new Rangeinput_impl(Dialog1Layout);
-    rdlg->setStartOnly(true);
-    rdlg->setNoWorking(m_noWorking);
-
-    WindowGeometryHelper wgh(dlg, QLatin1String("log_revisions_dlg"));
-    if (dlg->exec() == QDialog::Accepted) {
-        setRevision(rdlg->getRange().first);
+    Rangeinput_impl::revision_range range;
+    if (Rangeinput_impl::getRevisionRange(range, !m_noWorking, true)) {
+        setRevision(range.first);
     }
-    wgh.save();
-    delete dlg;
 }
 
 void RevisionButtonImpl::setNoWorking(bool how)

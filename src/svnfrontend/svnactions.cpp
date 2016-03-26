@@ -869,44 +869,51 @@ QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_wha
 
 void SvnActions::makeInfo(const SvnItemList &lst, const svn::Revision &rev, const svn::Revision &peg, bool recursive)
 {
-    QString res = "<html><head></head><body>";
-    SvnItemList::const_iterator item;
-    for (item = lst.begin(); item != lst.end(); ++item) {
-        QString text = getInfo((*item)->fullName(), rev, peg, recursive, true);
+    QStringList infoList;
+    infoList.reserve(lst.size());
+    for (int i = 0; i < lst.size(); ++i) {
+        const QString text = getInfo(lst.at(i)->fullName(), rev, peg, recursive, true);
         if (!text.isEmpty()) {
-            res += "<h4 align=\"center\">" + (*item)->fullName() + "</h4>";
-            res += text;
+            infoList += text;
         }
     }
-    res += "</body></html>";
-    KTextBrowser *ptr = 0;
-    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Infolist"), false);
-    WindowGeometryHelper wgh(dlg, QLatin1String("info_dialog"));
-    ptr->setText(res);
-    dlg->exec();
-    wgh.save();
-    delete dlg;
+    showInfo(infoList);
 }
 
 void SvnActions::makeInfo(const QStringList &lst, const svn::Revision &rev, const svn::Revision &peg, bool recursive)
 {
-    QString text;
-    for (long i = 0; i < lst.count(); ++i) {
-        QString res = getInfo(lst[i], rev, peg, recursive, true);
-        if (!res.isEmpty()) {
-            text += "<h4 align=\"center\">" + lst[i] + "</h4>";
-            text += res;
+    QStringList infoList;
+    infoList.reserve(lst.size());
+    for (int i = 0; i < lst.size(); ++i) {
+        const QString text = getInfo(lst.at(i), rev, peg, recursive, true);
+        if (!text.isEmpty()) {
+            infoList += text;
         }
     }
-    text = "<html><head></head><body>" + text + "</body></html>";
-    KTextBrowser *ptr = 0;
-    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Infolist"), false);
-    WindowGeometryHelper wgh(dlg, QLatin1String("info_dialog"));
+    showInfo(infoList);
+}
+
+void SvnActions::showInfo(const QStringList &infoList)
+{
+    if (infoList.isEmpty()) {
+        return;
+    }
+    QString text(QLatin1String("<html><head></head><body>"));
+    for (int i = 0; i < infoList.count(); ++i) {
+        text += QLatin1String("<h4 align=\"center\">") + infoList.at(i) + QLatin1String("</h4>");
+    }
+    text += QLatin1String("</body></html>");
+
+    QPointer<KSvnSimpleOkDialog> dlg = new KSvnSimpleOkDialog(QLatin1String("info_dialog"), QApplication::activeModalWidget());
+    dlg->setWindowTitle(i18n("Infolist"));
+    QTextBrowser *ptr = new QTextBrowser(dlg);
+    dlg->addWidget(ptr);
+    ptr->setReadOnly(true);
     ptr->setText(text);
     dlg->exec();
-    wgh.save();
     delete dlg;
 }
+
 
 void SvnActions::editProperties(SvnItem *k, const svn::Revision &rev)
 {

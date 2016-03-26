@@ -182,6 +182,7 @@ public:
 protected:
     QScopedPointer<SvnActionsData> m_Data;
 
+    void showInfo(const QStringList &infoList);
     void CheckoutExportCurrent(bool _exp);
     void makeAdd(bool rec);
     CheckModifiedThread *m_CThread, *m_UThread;

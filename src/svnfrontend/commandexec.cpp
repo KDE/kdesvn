@@ -30,6 +30,7 @@
 #include "helpers/windowgeometryhelper.h"
 #include "svnfrontend/fronthelpers/rangeinput_impl.h"
 #include "svnfrontend/copymoveview_impl.h"
+#include "ksvnwidgets/ksvndialog.h"
 
 #include <kglobal.h>
 #include <kmessagebox.h>
@@ -318,14 +319,14 @@ int CommandExec::exec(const QCommandLineParser *parser)
     emit executeMe();
     if (Kdesvnsettings::self()->cmdline_show_logwindow() &&
             m_lastMessagesLines >= Kdesvnsettings::self()->cmdline_log_minline()) {
-        QPointer<KDialog> dlg(new KDialog(QApplication::activeModalWidget()));
-        KVBox *Dialog1Layout = new KVBox(dlg);
-        dlg->setMainWidget(Dialog1Layout);
-        KTextBrowser *ptr = new KTextBrowser(Dialog1Layout);
+        QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("kdesvn_cmd_log"), QApplication::activeModalWidget()));
+        QTextBrowser *ptr = new QTextBrowser(dlg);
         ptr->setText(m_lastMessages);
-        WindowGeometryHelper wgh(dlg, QLatin1String("kdesvn_cmd_log"));
+        ptr->setReadOnly(true);
+        dlg->addWidget(ptr);
+        QString cmd = qApp->arguments().join(QLatin1Char(' '));
+        dlg->setWindowTitle(cmd);
         dlg->exec();
-        wgh.save();
         delete dlg;
     }
     return 0;

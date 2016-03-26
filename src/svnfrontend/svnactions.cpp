@@ -597,17 +597,20 @@ void SvnActions::slotMakeCat(const svn::Revision &start, const QString &what, co
     }
     QString tname = content.fileName();
     content.close();
+    QWidget *parent = _dlgparent ? _dlgparent : m_Data->m_ParentList->realWidget();
 
-    if (!makeGet(start, what, tname, peg, _dlgparent)) {
+    if (!makeGet(start, what, tname, peg, parent)) {
         return;
     }
     EMIT_FINISHED;
-    KMimeType::Ptr mptr;
-    mptr = KMimeType::findByFileContent(tname);
-    KService::List offers = KMimeTypeTrader::self()->query(mptr->name(), QString::fromLatin1("Application"),
-                                                           "Type == 'Application' or (exist Exec)");
+    KMimeType::Ptr mptr(KMimeType::findByFileContent(tname));
+    KService::List offers = KMimeTypeTrader::self()->query(mptr->name(),
+                                                           QLatin1String("Application"),
+                                                           QLatin1String("Type == 'Application' or (exist Exec)"));
     if (offers.isEmpty() || offers.first()->exec().isEmpty()) {
-        offers = KMimeTypeTrader::self()->query(mptr->name(), QString::fromLatin1("Application"), "Type == 'Application'");
+        offers = KMimeTypeTrader::self()->query(mptr->name(),
+                                                QLatin1String("Application"),
+                                                QLatin1String("Type == 'Application'"));
     }
     KService::List::ConstIterator it = offers.constBegin();
     for (; it != offers.constEnd(); ++it) {
@@ -616,30 +619,29 @@ void SvnActions::slotMakeCat(const svn::Revision &start, const QString &what, co
         }
         break;
     }
-
     if (it != offers.constEnd()) {
         content.setAutoRemove(false);
-        KRun::run(**it, QList<QUrl>() << QUrl(tname), QApplication::activeWindow(), true);
+        KRun::run(**it, QList<QUrl>() << QUrl::fromLocalFile(tname), QApplication::activeWindow(), true);
         return;
     }
-    KTextEdit *ptr = 0;
+
     QFile file(tname);
     file.open(QIODevice::ReadOnly);
-    QByteArray co = file.readAll();
+    const QByteArray co = file.readAll();
 
-    if (co.size()) {
-        QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Content of %1", disp), false);
-        WindowGeometryHelper wgh(dlg, QLatin1String("cat_display_dlg"));
+    if (!co.isEmpty()) {
+        QPointer<KSvnSimpleOkDialog> dlg = new KSvnSimpleOkDialog(QLatin1String("cat_display_dlg"), parent);
+        dlg->setWindowTitle(i18n("Content of %1", disp));
+        QTextBrowser *ptr = new QTextBrowser(dlg);
         ptr->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
         ptr->setWordWrapMode(QTextOption::NoWrap);
         ptr->setReadOnly(true);
         ptr->setText(QString::fromUtf8(co, co.size()));
+        dlg->addWidget(ptr);
         dlg->exec();
-        wgh.save();
         delete dlg;
     } else {
-        KMessageBox::information(_dlgparent ? _dlgparent : m_Data->m_ParentList->realWidget(),
-                                 i18n("Got no content."));
+        KMessageBox::information(parent, i18n("Got no content."));
     }
 }
 

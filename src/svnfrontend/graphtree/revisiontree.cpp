@@ -116,8 +116,7 @@ RevisionTree::RevisionTree(const svn::ClientP &aClient,
                            const QString &reposRoot,
                            const svn::Revision &startr, const svn::Revision &endr,
                            const QString &origin,
-                           const svn::Revision &baserevision,
-                           QWidget *treeParent, QWidget *parent)
+                           const svn::Revision &baserevision, QWidget *parent)
     : m_InitialRevsion(0), m_Path(origin), m_Valid(false)
 {
     m_Data = new RtreeData;
@@ -176,7 +175,7 @@ RevisionTree::RevisionTree(const svn::ClientP &aClient,
             m_Data->progress->progressBar()->setRange(0, 100);
             m_Data->progress->progressBar()->setTextVisible(false);
             m_Data->m_stopTick.restart();
-            m_Data->m_TreeDisplay = new RevTreeWidget(m_Data->m_Client, treeParent);
+            m_Data->m_TreeDisplay = new RevTreeWidget(m_Data->m_Client);
             if (bottomUpScan(m_InitialRevsion, 0, m_Path, 0)) {
                 m_Valid = true;
                 m_Data->m_TreeDisplay->setBasePath(reposRoot);

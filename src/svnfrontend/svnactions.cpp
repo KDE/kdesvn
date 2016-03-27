@@ -64,15 +64,12 @@
 #include "fronthelpers/cursorstack.h"
 #include "cacheentry.h"
 
-#include <kdialog.h>
-#include <ktextbrowser.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kinputdialog.h>
 #include <kconfig.h>
 #include <kmimetypetrader.h>
 #include <krun.h>
-#include <kvbox.h>
 
 #include <QApplication>
 #include <QDesktopServices>
@@ -491,18 +488,15 @@ void SvnActions::makeTree(const QString &what, const svn::Revision &_rev, const 
         stopFillCache();
     }
 
-    QPointer<KDialog> dlg(new KDialog(m_Data->m_ParentList->realWidget()));
-    dlg->setWindowTitle(i18n("History of %1", info.url().toString().mid(reposRoot.length())));
-    dlg->setButtons(KDialog::Ok);
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("revisiontree_dlg"), m_Data->m_ParentList->realWidget()));
+    dlg->setWindowTitle(i18n("1History of %1", info.url().toString().mid(reposRoot.length())));
 
-    QWidget *Dialog1Layout = new KVBox(dlg);
-    dlg->setMainWidget(Dialog1Layout);
-
-    RevisionTree rt(m_Data->m_Svnclient, m_Data->m_SvnContextListener, reposRoot,
-                    startr, endr,
-                    info.url().toString().mid(reposRoot.length()), _rev, Dialog1Layout, m_Data->m_ParentList->realWidget());
-    if (rt.isValid()) {
-        QWidget *disp = rt.getView();
+    RevisionTree *rt(new RevisionTree(m_Data->m_Svnclient, m_Data->m_SvnContextListener, reposRoot,
+                                      startr, endr,
+                                      info.url().toString().mid(reposRoot.length()), _rev, dlg));
+    dlg->addWidget(rt->getView());
+    if (rt->isValid()) {
+        QWidget *disp = rt->getView();
         if (disp) {
             connect(
                 disp, SIGNAL(makeNorecDiff(QString,svn::Revision,QString,svn::Revision,QWidget*)),
@@ -514,9 +508,7 @@ void SvnActions::makeTree(const QString &what, const svn::Revision &_rev, const 
             );
             connect(disp, SIGNAL(makeCat(svn::Revision,QString,QString,svn::Revision,QWidget*)),
                     this, SLOT(slotMakeCat(svn::Revision,QString,QString,svn::Revision,QWidget*)));
-            WindowGeometryHelper wgh(dlg, QLatin1String("revisiontree_dlg"));
             dlg->exec();
-            wgh.save();
         }
     }
     delete dlg;

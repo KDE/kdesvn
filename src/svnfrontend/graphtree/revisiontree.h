@@ -46,8 +46,8 @@ public:
                  QObject *aListener,
                  const QString &reposRoot,
                  const svn::Revision &startr, const svn::Revision &endr,
-                 const QString &, const svn::Revision &baserevision, QWidget *treeParent,
-                 QWidget *parent = 0);
+                 const QString &, const svn::Revision &baserevision,
+                 QWidget *parent = nullptr);
     virtual ~RevisionTree();
 
     bool isValid()const;

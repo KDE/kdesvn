@@ -135,7 +135,6 @@ public:
     void cleanDialogs()
     {
         if (m_DiffDialog) {
-            WindowGeometryHelper::save(m_DiffDialog, QLatin1String("diff_display"));
             delete m_DiffDialog;
             m_DiffDialog = 0;
         }
@@ -178,7 +177,7 @@ public:
     helpers::itemCache<QVariant> m_MergeInfoCache;
 
     QPointer<DiffBrowser> m_DiffBrowserPtr;
-    QPointer<KDialog> m_DiffDialog;
+    QPointer<KSvnSimpleOkDialog> m_DiffDialog;
     QPointer<SvnLogDlgImp> m_LogDialog;
 
     QMap<QString, QString> m_contextData;
@@ -1364,13 +1363,13 @@ void SvnActions::dispDiff(const QByteArray &ex)
 {
     QString what = Kdesvnsettings::external_diff_display();
 
-    if (Kdesvnsettings::use_external_diff() && (what.indexOf("%1") == -1 || what.indexOf("%2") == -1)) {
-        QStringList wlist = what.split(' ');
+    if (Kdesvnsettings::use_external_diff() && (what.indexOf(QLatin1String("%1")) == -1 || what.indexOf(QLatin1String("%2")) == -1)) {
+        const QStringList wlist = what.split(QLatin1Char(' '));
         WatchedProcess *proc = new WatchedProcess(this);
         bool fname_used = false;
 
-        for (QStringList::Iterator it = wlist.begin(); it != wlist.end(); ++it) {
-            if (*it == "%f") {
+        for (QStringList::ConstIterator it = wlist.begin(); it != wlist.end(); ++it) {
+            if (*it == QLatin1String("%f")) {
                 QTemporaryFile tfile;
                 tfile.setAutoRemove(false);
                 tfile.open();
@@ -1407,34 +1406,39 @@ void SvnActions::dispDiff(const QByteArray &ex)
     }
     bool need_modal = m_Data->runblocked || QApplication::activeModalWidget() != 0;
     if (need_modal || !m_Data->m_DiffBrowserPtr || !m_Data->m_DiffDialog) {
-        DiffBrowser *ptr = 0;
 
         if (!need_modal && m_Data->m_DiffBrowserPtr) {
             delete m_Data->m_DiffBrowserPtr;
         }
-        QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Diff display"), false,
-                                               false, need_modal,
-                                               KStandardGuiItem::saveAs());
-        if (dlg) {
-            WindowGeometryHelper wgh(dlg, QLatin1String("diff_display"));
-            QWidget *wd = dlg->mainWidget();
-            if (wd) {
-                EncodingSelector_impl *ls = new EncodingSelector_impl(wd);
-                QObject::connect(ls, SIGNAL(TextCodecChanged(QString)),
-                                 ptr, SLOT(slotTextCodecChanged(QString)));
-            }
-            QObject::connect(dlg, SIGNAL(user1Clicked()), ptr, SLOT(saveDiff()));
-            ptr->setText(ex);
-            if (need_modal) {
-                ptr->setFocus();
-                dlg->exec();
-                wgh.save();
-                delete dlg;
-                return;
-            } else {
-                m_Data->m_DiffBrowserPtr = ptr;
-                m_Data->m_DiffDialog = dlg;
-            }
+        QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("diff_display")));
+        if (!need_modal) {
+            dlg->setParent(nullptr);
+        }
+        dlg->setWindowTitle(i18n("Diff display"));
+        DiffBrowser *ptr(new DiffBrowser(dlg));
+        ptr->setText(ex);
+        dlg->addWidget(ptr);
+        EncodingSelector_impl *enc(new EncodingSelector_impl(dlg));
+        dlg->addWidget(enc);
+        connect(enc, SIGNAL(TextCodecChanged(QString)),
+                ptr, SLOT(slotTextCodecChanged(QString)));
+        enc->setCurrentEncoding(Kdesvnsettings::locale_for_diff());
+        // saveAs
+        QPushButton *pbSaveAs = new QPushButton(dlg->buttonBox());
+        KStandardGuiItem::assign(pbSaveAs, KStandardGuiItem::SaveAs);
+        dlg->buttonBox()->addButton(pbSaveAs, QDialogButtonBox::ActionRole);
+        connect(pbSaveAs, SIGNAL(clicked(bool)), ptr, SLOT(saveDiff()));
+
+        dlg->buttonBox()->setStandardButtons(QDialogButtonBox::Close);
+        dlg->addButtonBox();
+        if (need_modal) {
+            ptr->setFocus();
+            dlg->exec();
+            delete dlg;
+            return;
+        } else {
+            m_Data->m_DiffBrowserPtr = ptr;
+            m_Data->m_DiffDialog = dlg;
         }
     } else {
         m_Data->m_DiffBrowserPtr->setText(ex);
@@ -1631,46 +1635,44 @@ void SvnActions::slotExportCurrent()
 
 void SvnActions::CheckoutExport(const QUrl &what, bool _exp, bool urlisTarget)
 {
-    CheckoutInfo_impl *ptr = 0;
-    QPointer<KDialog> dlg = createOkDialog(&ptr, _exp ? i18n("Export a repository") : i18n("Checkout a repository"),
-                                           true);
-    if (dlg) {
-        WindowGeometryHelper wgh(dlg, QLatin1String("checkout_export_dialog"));
-        if (!what.isEmpty()) {
-            if (!urlisTarget) {
-                ptr->setStartUrl(what);
-            } else {
-                ptr->setTargetUrl(what);
-            }
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("checkout_export_dialog")));
+    CheckoutInfo_impl *ptr(new CheckoutInfo_impl(dlg));
+    dlg->setWindowTitle(_exp ? i18n("Export a repository") : i18n("Checkout a repository"));
+    dlg->setWithCancelButton();
+
+    if (!what.isEmpty()) {
+        if (!urlisTarget) {
+            ptr->setStartUrl(what);
+        } else {
+            ptr->setTargetUrl(what);
         }
-        ptr->hideIgnoreKeywords(!_exp);
-        ptr->hideOverwrite(!_exp);
-        if (dlg->exec() == QDialog::Accepted) {
-            svn::Revision r = ptr->toRevision();
-            bool openit = ptr->openAfterJob();
-            bool ignoreExternal = ptr->ignoreExternals();
-            if (!ptr->reposURL().isValid()) {
-                KMessageBox::error(QApplication::activeModalWidget(), tr("Invalid url given!"),
-                                   _exp ? i18n("Export repository") : i18n("Checkout a repository"));
-                wgh.save();
-                delete dlg;
-                return;
-            }
-            // svn::Path should not take a QString but a QByteArray ...
-            const QString rUrl(QString::fromUtf8(ptr->reposURL().toEncoded()));
-            makeCheckout(rUrl,
-                         ptr->targetDir(), r, r,
-                         ptr->getDepth(),
-                         _exp,
-                         openit,
-                         ignoreExternal,
-                         ptr->overwrite(),
-                         ptr->ignoreKeywords(),
-                         0);
-        }
-        wgh.save();
-        delete dlg;
     }
+    ptr->hideIgnoreKeywords(!_exp);
+    ptr->hideOverwrite(!_exp);
+    dlg->addWidget(ptr);
+    if (dlg->exec() == QDialog::Accepted) {
+        svn::Revision r = ptr->toRevision();
+        bool openit = ptr->openAfterJob();
+        bool ignoreExternal = ptr->ignoreExternals();
+        if (!ptr->reposURL().isValid()) {
+            KMessageBox::error(QApplication::activeModalWidget(), tr("Invalid url given!"),
+                               _exp ? i18n("Export repository") : i18n("Checkout a repository"));
+            delete dlg;
+            return;
+        }
+        // svn::Path should not take a QString but a QByteArray ...
+        const QString rUrl(QString::fromUtf8(ptr->reposURL().toEncoded()));
+        makeCheckout(rUrl,
+                     ptr->targetDir(), r, r,
+                     ptr->getDepth(),
+                     _exp,
+                     openit,
+                     ignoreExternal,
+                     ptr->overwrite(),
+                     ptr->ignoreKeywords(),
+                     0);
+    }
+    delete dlg;
 }
 
 void SvnActions::CheckoutExportCurrent(bool _exp)
@@ -1886,29 +1888,27 @@ void SvnActions::slotSwitch()
 
 bool SvnActions::makeSwitch(const QString &path, const QUrl &what)
 {
-    CheckoutInfo_impl *ptr;
-    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Switch URL"), true);
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("switch_url_dlg")));
+    CheckoutInfo_impl *ptr(new CheckoutInfo_impl(dlg));
+    dlg->setWindowTitle(i18n("Switch URL"));
+    dlg->setWithCancelButton();
+    ptr->setStartUrl(what);
+    ptr->disableAppend(true);
+    ptr->disableTargetDir(true);
+    ptr->disableOpen(true);
+    dlg->addWidget(ptr);
     bool done = false;
-    if (dlg) {
-        WindowGeometryHelper wgh(dlg, QLatin1String("switch_url_dlg"));
-        ptr->setStartUrl(what);
-        ptr->disableAppend(true);
-        ptr->disableTargetDir(true);
-        ptr->disableOpen(true);
-        if (dlg->exec() == QDialog::Accepted) {
-            if (!ptr->reposURL().isValid()) {
-                KMessageBox::error(QApplication::activeModalWidget(), tr("Invalid url given!"),
-                                   i18n("Switch URL"));
-                wgh.save();
-                delete dlg;
-                return false;
-            }
-            svn::Revision r = ptr->toRevision();
-            done = makeSwitch(ptr->reposURL(), path, r, ptr->getDepth(), r, true, ptr->ignoreExternals(), ptr->overwrite());
+    if (dlg->exec() == QDialog::Accepted) {
+        if (!ptr->reposURL().isValid()) {
+            KMessageBox::error(QApplication::activeModalWidget(), tr("Invalid url given!"),
+                               i18n("Switch URL"));
+            delete dlg;
+            return false;
         }
-        wgh.save();
-        delete dlg;
+        svn::Revision r = ptr->toRevision();
+        done = makeSwitch(ptr->reposURL(), path, r, ptr->getDepth(), r, true, ptr->ignoreExternals(), ptr->overwrite());
     }
+    delete dlg;
     return done;
 }
 
@@ -2414,16 +2414,18 @@ void SvnActions::checkAddItems(const QString &path, bool print_error_box)
             KMessageBox::error(m_Data->m_ParentList->realWidget(), i18n("No unversioned items found."));
         }
     } else {
-        QTreeWidget *ptr = 0;
-        QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Add unversioned items"), true);
-        WindowGeometryHelper wgh(dlg, QLatin1String("add_items_dlg"));
+        QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("add_items_dlg")));
+        dlg->setWindowTitle(i18n("Add unversioned items"));
+        dlg->setWithCancelButton();
+        QTreeWidget *ptr(new QTreeWidget(dlg));
         ptr->headerItem()->setText(0, "Item");
-        for (long j = 0; j < displist.size(); ++j) {
+        for (int j = 0; j < displist.size(); ++j) {
             QTreeWidgetItem *n = new QTreeWidgetItem(ptr);
             n->setText(0, displist[j]);
             n->setCheckState(0, Qt::Checked);
         }
         ptr->resizeColumnToContents(0);
+        dlg->addWidget(ptr);
         if (dlg->exec() == QDialog::Accepted) {
             QTreeWidgetItemIterator it(ptr);
             displist.clear();
@@ -2438,7 +2440,6 @@ void SvnActions::checkAddItems(const QString &path, bool print_error_box)
                 addItems(helpers::sub2qt::fromStringList(displist).targets(), svn::DepthEmpty);
             }
         }
-        wgh.save();
         delete dlg;
     }
 }

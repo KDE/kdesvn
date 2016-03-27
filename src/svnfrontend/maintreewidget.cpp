@@ -32,7 +32,6 @@
 #include "importdir_logmsg.h"
 #include "settings/kdesvnsettings.h"
 #include "helpers/sshagent.h"
-#include "helpers/windowgeometryhelper.h"
 #include "svnqt/url.h"
 #include "svnqt/svnqttypes.h"
 #include "fronthelpers/createdlg.h"
@@ -1286,9 +1285,10 @@ void MainTreeWidget::slotLock()
         KMessageBox::error(this, i18n("Nothing selected for unlock"));
         return;
     }
-    Commitmsg_impl *ptr = 0;
-    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Lock message"), true);
-    WindowGeometryHelper wgh(dlg, QLatin1String("locking_log_msg"));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("locking_log_msg")));
+    dlg->setWindowTitle(i18n("Lock message"));
+    dlg->setWithCancelButton();
+    Commitmsg_impl *ptr(new Commitmsg_impl(dlg));
     ptr->initHistory();
     ptr->hideDepth(true);
     ptr->keepsLocks(false);
@@ -1296,14 +1296,13 @@ void MainTreeWidget::slotLock()
     QCheckBox *_stealLock = new QCheckBox(i18n("Steal lock?"));
     ptr->addItemWidget(_stealLock);
 
+    dlg->addWidget(ptr);
     if (dlg->exec() != QDialog::Accepted) {
         if (dlg)
             ptr->saveHistory(true);
-        wgh.save();
         delete dlg;
         return;
     }
-    wgh.save();
 
     QString logMessage = ptr->getMessage();
     bool steal = _stealLock->isChecked();
@@ -1641,7 +1640,7 @@ void MainTreeWidget::makeDelete(const SvnItemList &lst)
     QPointer<DeleteForm> dlg(new DeleteForm(displist, QApplication::activeModalWidget()));
     dlg->showExtraButtons(isWorkingCopy() && !items.isEmpty());
 
-    if (dlg->exec() == KDialog::Yes) {
+    if (dlg->exec() == QDialog::Accepted) {
         bool force = dlg->force_delete();
         bool keep = dlg->keep_local();
         WidgetBlockStack st(this);
@@ -1915,13 +1914,15 @@ void MainTreeWidget::slotMerge()
         target = m_Data->merge_Target;
     }
     src2 = m_Data->merge_Src2;
-    MergeDlg_impl *ptr = 0;
-    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Merge"), true, true);
-    WindowGeometryHelper wgh(dlg, QLatin1String("merge_dialog"));
-    dlg->setHelp("merging-items", "kdesvn");
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("merge_dialog")));
+    dlg->setWindowTitle(i18n("Merge"));
+    dlg->setWithCancelButton();
+    dlg->setHelp(QLatin1String("merging-items"));
+    MergeDlg_impl *ptr(new MergeDlg_impl(dlg));
     ptr->setDest(target);
     ptr->setSrc1(src1);
     ptr->setSrc2(src1);
+    dlg->addWidget(ptr);
     if (dlg->exec() == QDialog::Accepted) {
         src1 = ptr->Src1();
         src2 = ptr->Src2();
@@ -1956,7 +1957,6 @@ void MainTreeWidget::slotMerge()
             refreshCurrentTree();
         }
     }
-    wgh.save();
     delete dlg;
     enableActions();
 }
@@ -1975,40 +1975,38 @@ void MainTreeWidget::slotRelocate()
     path = k->fullName();
     // CE TODO - Url() will return a QUrl later on
     const QUrl fromUrl = QUrl(k->Url());
-    CheckoutInfo_impl *ptr = 0;
-    QPointer<KDialog> dlg = createOkDialog(&ptr, i18n("Relocate path %1", path), true);
-    if (dlg) {
-        ptr->setStartUrl(fromUrl);
-        ptr->disableAppend(true);
-        ptr->disableTargetDir(true);
-        ptr->disableRange(true);
-        ptr->disableOpen(true);
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("relocate_dlg")));
+    dlg->setWindowTitle(i18n("Relocate path %1", path));
+    dlg->setWithCancelButton();
+    CheckoutInfo_impl *ptr(new CheckoutInfo_impl(dlg));
+    ptr->setStartUrl(fromUrl);
+    ptr->disableAppend(true);
+    ptr->disableTargetDir(true);
+    ptr->disableRange(true);
+    ptr->disableOpen(true);
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
-        ptr->hideDepth(true);
-        ptr->hideOverwrite(true);
+    ptr->hideDepth(true);
+    ptr->hideOverwrite(true);
 #else
-        ptr->hideDepth(true);
-        ptr->overwriteAsRecursive();
-        ptr->disableExternals(true);
+    ptr->hideDepth(true);
+    ptr->overwriteAsRecursive();
+    ptr->disableExternals(true);
 #endif
-        bool done = false;
-        WindowGeometryHelper wgh(dlg, QLatin1String("relocate_dlg"));
-        if (dlg->exec() == QDialog::Accepted) {
-            if (!ptr->reposURL().isValid()) {
-                KMessageBox::error(QApplication::activeModalWidget(), tr("Invalid url given!"),
-                                   i18n("Relocate path %1", path));
-                delete dlg;
-                return;
-            }
-            done = m_Data->m_Model->svnWrapper()->makeRelocate(fromUrl, ptr->reposURL(), path, ptr->overwrite(), ptr->ignoreExternals());
-        }
-        wgh.save();
-        delete dlg;
-        if (!done) {
+    dlg->addWidget(ptr);
+    bool done = false;
+    if (dlg->exec() == QDialog::Accepted) {
+        if (!ptr->reposURL().isValid()) {
+            KMessageBox::error(QApplication::activeModalWidget(), tr("Invalid url given!"),
+                               i18n("Relocate path %1", path));
+            delete dlg;
             return;
         }
+        done = m_Data->m_Model->svnWrapper()->makeRelocate(fromUrl, ptr->reposURL(), path, ptr->overwrite(), ptr->ignoreExternals());
     }
-    refreshItem(k->sItem());
+    delete dlg;
+    if (done) {
+        refreshItem(k->sItem());
+    }
 }
 
 void MainTreeWidget::slotImportDirsIntoCurrent()
@@ -2059,28 +2057,27 @@ void MainTreeWidget::slotImportIntoDir(const QString &source, const QUrl &_targe
     }
     QUrl targetUri(_targetUri);
 
-    Commitmsg_impl *ptr = 0;
-    Importdir_logmsg *ptr2 = 0;
-    QPointer<KDialog> dlg;
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("import_log_msg")));
+    dlg->setWindowTitle(i18n("Import log"));
+    dlg->setWithCancelButton();
+    Commitmsg_impl *ptr = nullptr;
+    Importdir_logmsg *ptr2 = nullptr;
     if (dirs) {
-        dlg = createOkDialog(&ptr2, i18n("Import log"), true);
-        ptr = ptr2;
+        ptr2 = new Importdir_logmsg(dlg);
         ptr2->createDirboxDir(QLatin1Char('"') + QFileInfo(sourceUri).fileName() + QLatin1Char('"'));
+        ptr = ptr2;
     } else {
-        dlg = createOkDialog(&ptr, i18n("Import log"), true);
+        ptr = new Commitmsg_impl(dlg);
     }
-    WindowGeometryHelper wgh(dlg, QLatin1String("import_log_msg"));
-
     ptr->initHistory();
+    dlg->addWidget(ptr);
     if (dlg->exec() != QDialog::Accepted) {
         if (dlg) {
-          wgh.save();
-          ptr->saveHistory(true);
-          delete dlg;
+            ptr->saveHistory(true);
+            delete dlg;
         }
         return;
     }
-    wgh.save();
 
     QString logMessage = ptr->getMessage();
     svn::Depth rec = ptr->getDepth();

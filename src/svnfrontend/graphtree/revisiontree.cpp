@@ -33,7 +33,6 @@
 
 #include <kprogressdialog.h>
 #include <klocale.h>
-#include <kcodecs.h>
 #include <kmessagebox.h>
 
 #include <qwidget.h>
@@ -341,12 +340,11 @@ bool RevisionTree::isValid()const
 
 static QString uniqueNodeName(long rev, const QString &path)
 {
-    QString res = KCodecs::base64Encode(path.toLocal8Bit(), false);
-    res.replace('\"', "_quot_");
-    res.replace(' ', "_space_");
+    QString res = QString::fromUtf8(path.toLocal8Bit().toBase64());
+    res.replace(QLatin1Char('\"'), QLatin1String("_quot_"));
+    res.replace(QLatin1Char(' '), QLatin1String("_space_"));
     QString n; n.sprintf("%05ld", rev);
-    res = "\"" + n + QString("_%1\"").arg(res);
-    return res;
+    return QLatin1Char('\"') + n + QLatin1Char('_') + res + QLatin1Char('\"');
 }
 
 bool RevisionTree::bottomUpScan(long startrev, unsigned recurse, const QString &_path, long _last)

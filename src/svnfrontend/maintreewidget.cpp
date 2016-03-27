@@ -2035,7 +2035,7 @@ void MainTreeWidget::slotImportIntoCurrent(bool dirs)
     if (dirs) {
         source = QFileDialog::getExistingDirectory(this, i18n("Import files from folder"));
     } else {
-        source = KFileDialog::getImageOpenUrl(QUrl(), this, i18n("Import file")).toLocalFile();
+        source = QFileDialog::getOpenFileName(this, i18n("Import file"), QString());
     }
 
     slotImportIntoDir(source, targetDir, dirs);

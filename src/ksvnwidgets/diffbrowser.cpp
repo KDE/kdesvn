@@ -22,7 +22,7 @@
 #include "diffbrowserdata.h"
 #include "settings/kdesvnsettings.h"
 
-#include <KFileDialog>
+#include <QFileDialog>
 #include <KMessageBox>
 #include <KLocale>
 #include <KStandardGuiItem>
@@ -80,10 +80,7 @@ void DiffBrowser::printContent()
  */
 void DiffBrowser::saveDiff()
 {
-    QString saveTo = KFileDialog::getSaveFileName(QUrl(),
-                                                  "text/x-patch text/plain",
-                                                  this
-                                                  );
+    QString saveTo = QFileDialog::getSaveFileName(this, i18n("Save diff"), QString(), i18n("Patch file (*.diff *.patch)"));
     if (saveTo.isEmpty()) {
         return;
     }

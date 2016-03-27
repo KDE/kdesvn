@@ -27,9 +27,9 @@
 
 #include <klocale.h>
 #include <kpassworddialog.h>
-#include <kfiledialog.h>
 #include <kmessagebox.h>
 
+#include <QFileDialog>
 #include <QTextStream>
 #include <QMutex>
 
@@ -283,10 +283,7 @@ bool CContextListener::contextSslClientCertPrompt(QString &certFile)
 {
     qCDebug(KDESVN_LOG) << certFile << endl;
     emit waitShow(true);
-    QString afile = KFileDialog::getOpenFileName(QUrl(),
-                                                 QString(),
-                                                 0,
-                                                 i18n("Open a file with a #PKCS12 certificate"));
+    QString afile = QFileDialog::getOpenFileName(nullptr, i18n("Open a file with a #PKCS12 certificate"));
     emit waitShow(false);
     if (afile.isEmpty()) {
         return false;

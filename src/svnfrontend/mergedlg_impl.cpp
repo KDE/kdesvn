@@ -21,12 +21,10 @@
 #include "rangeinput_impl.h"
 #include "svnqt/url.h"
 #include "helpers/ktranslateurl.h"
-#include "helpers/windowgeometryhelper.h"
+#include "ksvnwidgets/ksvndialog.h"
 #include "settings/kdesvnsettings.h"
 
-#include <kdialog.h>
 #include <klocale.h>
-#include <kvbox.h>
 
 #include <svnqt/version_check.h>
 
@@ -186,17 +184,13 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range &range, bool *
                                   bool *useExternal, bool *allowmixedrevs,
                                   QWidget *parent)
 {
-    QPointer<KDialog> dlg(new KDialog(parent));
-    dlg->setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Help);
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("merge_range"), parent));
+    dlg->setWithCancelButton();
+    dlg->setHelp(QLatin1String("merging-items"));
     dlg->setWindowTitle(i18n("Enter merge range"));
-    dlg->setDefaultButton(KDialog::Ok);
-    dlg->setHelp("merging-items", "kdesvn");
-    KVBox *Dialog1Layout = new KVBox(dlg);
-    dlg->setMainWidget(Dialog1Layout);
 
-    MergeDlg_impl *ptr = new MergeDlg_impl(Dialog1Layout, false, false, false, false, false);
-    dlg->resize(QSize(480, 360).expandedTo(dlg->minimumSizeHint()));
-    WindowGeometryHelper wgh(dlg, QLatin1String("merge_range"));
+    MergeDlg_impl *ptr = new MergeDlg_impl(dlg, false, false, false, false, false);
+    dlg->addWidget(ptr);
     bool ret = false;
     if (dlg->exec() == QDialog::Accepted) {
         range = ptr->getRange();
@@ -208,7 +202,6 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range &range, bool *
         *allowmixedrevs = ptr->allowmixedrevs();
         ret = true;
     }
-    wgh.save();
     delete dlg;
 
     return ret;

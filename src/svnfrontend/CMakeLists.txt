@@ -128,6 +128,8 @@ add_subdirectory(background)
 add_library(svnfrontend STATIC ${svnfrontendsrc} ${frontend_ui_sources} ${hdr})
 
 target_link_libraries(svnfrontend
+    PRIVATE
+        KF5::IconThemes
     PUBLIC
         KF5::ItemViews
         KF5::JobWidgets

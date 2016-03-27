@@ -78,7 +78,6 @@ target_link_libraries(ksvnwidgets
         kdesvnhelpers
         kdesvncfgreader
         KF5::Wallet
-        KF5::KDELibs4Support
     PUBLIC
         svnqt
         Qt5::Widgets

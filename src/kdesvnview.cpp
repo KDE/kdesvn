@@ -33,20 +33,14 @@
 #include "svnqt/svnqttypes.h"
 #include "helpers/windowgeometryhelper.h"
 
-#include <QPainter>
-#include <QLayout>
 #include <QFileInfo>
+#include <QProgressBar>
 #include <QSplitter>
 
 #include <kmessagebox.h>
-#include <krun.h>
 #include <klocale.h>
 #include <QTextBrowser>
 #include <kactioncollection.h>
-#include <kshortcut.h>
-#include <kdialog.h>
-#include <kprogressdialog.h>
-#include <kvbox.h>
 #include <kio/netaccess.h>
 
 kdesvnView::kdesvnView(KActionCollection *aCollection, QWidget *parent, bool full)

@@ -66,7 +66,6 @@
 
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kinputdialog.h>
 #include <kconfig.h>
 #include <kmimetypetrader.h>
 #include <krun.h>
@@ -75,6 +74,7 @@
 #include <QDesktopServices>
 #include <QFileInfo>
 #include <QFontDatabase>
+#include <QInputDialog>
 #include <QMap>
 #include <QReadWriteLock>
 #include <QString>
@@ -656,8 +656,9 @@ QString SvnActions::makeMkdir(const QString &parentDir)
         return QString();
     }
     bool isOk = false;
-    QString ex = KInputDialog::getText(i18n("New folder"), i18n("Enter folder name:"), QString(), &isOk);
-    if (!isOk) {
+    const QString ex = QInputDialog::getText(m_Data->m_ParentList->realWidget(), i18n("New folder"), i18n("Enter folder name:"),
+                                             QLineEdit::Normal, QString(), &isOk);
+    if (!isOk || ex.isEmpty()) {
         return QString();
     }
     svn::Path target(parentDir);
@@ -670,8 +671,7 @@ QString SvnActions::makeMkdir(const QString &parentDir)
         return QString();
     }
 
-    ex = target.path();
-    return ex;
+    return target.path();
 }
 
 QString SvnActions::getInfo(const SvnItemList &lst, const svn::Revision &rev, const svn::Revision &peg, bool recursive, bool all)

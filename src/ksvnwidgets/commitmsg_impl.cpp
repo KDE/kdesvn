@@ -22,9 +22,8 @@
 #include "models/commitmodel.h"
 #include "settings/kdesvnsettings.h"
 #include "depthselector.h"
-#include "helpers/windowgeometryhelper.h"
+#include "ksvnwidgets/ksvndialog.h"
 
-#include <kdialog.h>
 #include <klocale.h>
 #include <kconfig.h>
 #include <kurlrequesterdialog.h>
@@ -32,7 +31,6 @@
 #include <kmessagebox.h>
 #include <kfile.h>
 #include <kurlrequester.h>
-#include <KVBox>
 
 #include <QStringList>
 #include <QSortFilterProxyModel>
@@ -258,107 +256,12 @@ void Commitmsg_impl::saveHistory(bool canceld)
 
 QString Commitmsg_impl::getLogmessage(bool *ok, svn::Depth *rec, bool *keep_locks, QWidget *parent)
 {
-    bool _ok, _keep_locks;
-    svn::Depth _depth = svn::DepthUnknown;
-    QString msg;
-
-    QPointer<KDialog> dlg(new KDialog(parent));
-    dlg->setWindowTitle(i18n("Commit log"));
-    dlg->setButtons(KDialog::Ok | KDialog::Cancel);
-    dlg->setDefaultButton(KDialog::Ok);
-    dlg->showButtonSeparator(true);
-
-    KVBox *Dialog1Layout = new KVBox(dlg);
-    dlg->setMainWidget(Dialog1Layout);
-
-    Commitmsg_impl *ptr = new Commitmsg_impl(Dialog1Layout);
-    if (!rec) {
-        ptr->m_DepthSelector->hide();
-    }
-    if (!keep_locks) {
-        ptr->m_keepLocksButton->hide();
-    }
-    ptr->initHistory();
-    WindowGeometryHelper wgh(dlg, groupName);
-    if (dlg->exec() != QDialog::Accepted) {
-        _ok = false;
-        /* avoid compiler warnings */
-        _keep_locks = false;
-    } else {
-        _ok = true;
-        _depth = ptr->getDepth();
-        _keep_locks = ptr->isKeeplocks();
-        msg = ptr->getMessage();
-    }
-    if (dlg) {
-        ptr->saveHistory(!_ok);
-    }
-
-    if (ok) {
-        *ok = _ok;
-    }
-    if (rec) {
-        *rec = _depth;
-    }
-    if (keep_locks) {
-        *keep_locks = _keep_locks;
-    }
-    wgh.save();
-    delete dlg;
-    return msg;
+    return getLogmessageInternal(new Commitmsg_impl, ok, rec, keep_locks, nullptr, parent);
 }
 
 QString Commitmsg_impl::getLogmessage(const svn::CommitItemList &items, bool *ok, svn::Depth *rec, bool *keep_locks, QWidget *parent)
 {
-    bool _ok, _keep_locks;
-    svn::Depth _depth = svn::DepthUnknown;
-    QString msg;
-
-    QPointer<KDialog> dlg(new KDialog(parent));
-    dlg->setWindowTitle(i18n("Commit log"));
-    dlg->setButtons(KDialog::Ok | KDialog::Cancel);
-    dlg->setDefaultButton(KDialog::Ok);
-    dlg->showButtonSeparator(true);
-
-    KVBox *Dialog1Layout = new KVBox(dlg);
-    dlg->setMainWidget(Dialog1Layout);
-
-    Commitmsg_impl *ptr = new Commitmsg_impl(items, Dialog1Layout);
-    if (!rec) {
-        ptr->m_DepthSelector->hide();
-    }
-    if (!keep_locks) {
-        ptr->m_keepLocksButton->hide();
-    }
-
-    ptr->initHistory();
-    WindowGeometryHelper wgh(dlg, groupName);
-    if (dlg->exec() != QDialog::Accepted) {
-        _ok = false;
-        /* avoid compiler warnings */
-        _keep_locks = false;
-    } else {
-        _ok = true;
-        _depth = ptr->getDepth();
-        _keep_locks = ptr->isKeeplocks();
-        msg = ptr->getMessage();
-    }
-    if (dlg) {
-        ptr->saveHistory(!_ok);
-    }
-
-    if (ok) {
-        *ok = _ok;
-    }
-    if (rec) {
-        *rec = _depth;
-    }
-    if (keep_locks) {
-        *keep_locks = _keep_locks;
-    }
-    wgh.save();
-    delete dlg;
-    return msg;
+    return getLogmessageInternal(new Commitmsg_impl(items), ok, rec, keep_locks, nullptr, parent);
 }
 
 QString Commitmsg_impl::getLogmessage(const CommitActionEntries &_on,
@@ -367,24 +270,7 @@ QString Commitmsg_impl::getLogmessage(const CommitActionEntries &_on,
                                       CommitActionEntries &_result,
                                       bool *ok, bool *keep_locks, QWidget *parent)
 {
-    bool _ok, _keep_locks;
-    QString msg;
-
-    QPointer<KDialog> dlg(new KDialog(parent));
-    dlg->setWindowTitle(i18n("Commit log"));
-    dlg->setButtons(KDialog::Ok | KDialog::Cancel);
-    dlg->setDefaultButton(KDialog::Ok);
-    dlg->showButtonSeparator(true);
-
-    KVBox *Dialog1Layout = new KVBox(dlg);
-    dlg->setMainWidget(Dialog1Layout);
-
-    Commitmsg_impl *ptr = new Commitmsg_impl(_on, _off, Dialog1Layout);
-    ptr->m_DepthSelector->hide();
-    if (!keep_locks) {
-        ptr->m_keepLocksButton->hide();
-    }
-    ptr->initHistory();
+    Commitmsg_impl *ptr = new Commitmsg_impl(_on, _off);
     if (callback) {
         connect(ptr, SIGNAL(makeDiff(QString,svn::Revision,QString,svn::Revision,QWidget*)),
                 callback, SLOT(makeDiff(QString,svn::Revision,QString,svn::Revision,QWidget*)));
@@ -393,27 +279,54 @@ QString Commitmsg_impl::getLogmessage(const CommitActionEntries &_on,
         connect(callback, SIGNAL(sigItemsReverted(QStringList)),
                 ptr, SLOT(slotItemReverted(QStringList)));
     }
-    WindowGeometryHelper wgh(dlg, groupName);
+    return getLogmessageInternal(ptr, ok, nullptr, keep_locks, &_result, parent);
+}
+
+QString Commitmsg_impl::getLogmessageInternal(Commitmsg_impl *ptr, bool *ok, svn::Depth *rec, bool *keep_locks, CommitActionEntries *result, QWidget *parent)
+{
+    bool _ok, _keep_locks;
+    svn::Depth _depth = svn::DepthUnknown;
+    QString msg;
+
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(groupName, parent));
+    dlg->setWindowTitle(i18n("Commit log"));
+    dlg->setWithCancelButton();
+    dlg->addWidget(ptr);
+
+    if (!rec) {
+        ptr->m_DepthSelector->hide();
+    }
+    if (!keep_locks) {
+        ptr->m_keepLocksButton->hide();
+    }
+
+    ptr->initHistory();
     if (dlg->exec() != QDialog::Accepted) {
         _ok = false;
         /* avoid compiler warnings */
         _keep_locks = false;
     } else {
         _ok = true;
-        msg = ptr->getMessage();
+        _depth = ptr->getDepth();
         _keep_locks = ptr->isKeeplocks();
+        msg = ptr->getMessage();
     }
     if (dlg) {
         ptr->saveHistory(!_ok);
     }
+
     if (ok) {
         *ok = _ok;
     }
-    _result = ptr->checkedEntries();
+    if (rec) {
+        *rec = _depth;
+    }
     if (keep_locks) {
         *keep_locks = _keep_locks;
     }
-    wgh.save();
+    if (result) {
+        *result = ptr->checkedEntries();
+    }
     delete dlg;
     return msg;
 }

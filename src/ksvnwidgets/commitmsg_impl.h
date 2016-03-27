@@ -46,7 +46,7 @@ public:
     void saveHistory(bool canceld);
     void keepsLocks(bool);
 
-    static QString getLogmessage(bool *ok, svn::Depth *rec, bool *keeps_locks, QWidget *parent = 0);
+    static QString getLogmessage(bool *ok, svn::Depth *rec, bool *keep_locks, QWidget *parent = 0);
     static QString getLogmessage(const svn::CommitItemList &, bool *ok, svn::Depth *rec, bool *keep_locks, QWidget *parent = 0);
 
     static QString getLogmessage(const CommitActionEntries &, const CommitActionEntries &,
@@ -63,6 +63,8 @@ public:
 
     CommitModelNodePtr currentCommitItem(int column = 0);
 
+private:
+    static QString getLogmessageInternal(Commitmsg_impl *ptr, bool *ok, svn::Depth *rec, bool *keep_locks, CommitActionEntries *result, QWidget *parent);
 protected Q_SLOTS:
     void slotHistoryActivated(int);
     void slotUnmarkUnversioned();

@@ -305,9 +305,9 @@ void kdesvn::readProperties(const KConfigGroup &config)
         return;
     }
 
-    const QString url = config.readPathEntry("lastURL", QString());
-    if (!url.isEmpty()) {
-        m_part->openUrl(helpers::KTranslateUrl::string2Uri(url));
+    const QUrl url(config.readPathEntry("lastURL", QString()));
+    if (url.isValid()) {
+        m_part->openUrl(url);
     }
 }
 
@@ -425,7 +425,7 @@ void kdesvn::closeEvent(QCloseEvent *ev)
     emit sigSavestate();
     if (m_part) {
         KConfigGroup cs(KSharedConfig::openConfig(), "startup");
-        cs.writeEntry("lastURL", m_part->url().toDisplayString());
+        cs.writeEntry("lastURL", m_part->url().toString());
         cs.sync();
     }
     return KParts::MainWindow::closeEvent(ev);
@@ -441,9 +441,9 @@ void kdesvn::checkReload()
         return;
     }
 
-    const QString url = cs.readPathEntry("lastURL", QString());
-    if (!url.isEmpty() && m_part) {
-        load(helpers::KTranslateUrl::string2Uri(url), false);
+    const QUrl url(cs.readPathEntry("lastURL", QString()));
+    if (url.isValid() && m_part) {
+        load(url, false);
     }
 }
 

@@ -53,7 +53,6 @@
 #include "svnqt/cache/ReposLog.h"
 #include "svnqt/cache/ReposConfig.h"
 
-#include "fronthelpers/createdlg.h"
 #include "fronthelpers/watchedprocess.h"
 
 #include "helpers/sub2qt.h"

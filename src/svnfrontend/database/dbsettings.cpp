@@ -25,7 +25,6 @@
 #include "ui_dbsettings.h"
 
 #include "svnqt/cache/ReposConfig.h"
-#include "svnfrontend/fronthelpers/createdlg.h"
 #include <QPointer>
 
 DbSettings::DbSettings(const QString &repository, QWidget *parent)

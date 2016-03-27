@@ -34,7 +34,6 @@
 #include "helpers/sshagent.h"
 #include "svnqt/url.h"
 #include "svnqt/svnqttypes.h"
-#include "fronthelpers/createdlg.h"
 #include "fronthelpers/rangeinput_impl.h"
 #include "fronthelpers/widgetblockstack.h"
 #include "fronthelpers/fronthelpers.h"

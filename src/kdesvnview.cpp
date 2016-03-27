@@ -254,20 +254,16 @@ void kdesvnView::slotCreateRepo()
 
 void kdesvnView::slotHotcopy()
 {
-    QPointer<KDialog> dlg(new KDialog(QApplication::activeModalWidget()));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("hotcopy_repo_size"), QApplication::activeModalWidget()));
     dlg->setWindowTitle(i18n("Hotcopy a repository"));
-    dlg->setButtons(KDialog::Ok | KDialog::Cancel);
+    dlg->setWithCancelButton();
 
-    QWidget *Dialog1Layout = new KVBox(dlg);
-    dlg->setMainWidget(Dialog1Layout);
-    HotcopyDlg_impl *ptr = new HotcopyDlg_impl(Dialog1Layout);
-    WindowGeometryHelper wgh(dlg, QLatin1String("hotcopy_repo_size"));
+    HotcopyDlg_impl *ptr = new HotcopyDlg_impl(dlg);
+    dlg->addWidget(ptr);
     if (dlg->exec() != QDialog::Accepted) {
-        wgh.save();
         delete dlg;
         return;
     }
-    wgh.save();
     bool cleanlogs = ptr->cleanLogs();
     QString src = ptr->srcPath();
     QString dest = ptr->destPath();
@@ -285,20 +281,16 @@ void kdesvnView::slotHotcopy()
 
 void kdesvnView::slotLoaddump()
 {
-    QPointer<KDialog> dlg(new KDialog(this));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("loaddump_repo_size"), this));
     dlg->setWindowTitle(i18n("Load a repository from a svndump"));
-    dlg->setButtons(KDialog::Ok | KDialog::Cancel);
-    QWidget *Dialog1Layout = new KVBox(dlg);
-    dlg->setMainWidget(Dialog1Layout);
+    dlg->setWithCancelButton();
 
-    LoadDmpDlg_impl *ptr = new LoadDmpDlg_impl(Dialog1Layout);
-    WindowGeometryHelper wgh(dlg, QLatin1String("loaddump_repo_size"));
+    LoadDmpDlg_impl *ptr(new LoadDmpDlg_impl(dlg));
+    dlg->addWidget(ptr);
     if (dlg->exec() != QDialog::Accepted) {
-        wgh.save();
         delete dlg;
         return;
     }
-    wgh.save();
     svn::repository::Repository _rep(this);
     m_ReposCancel = false;
 
@@ -354,29 +346,23 @@ void kdesvnView::slotLoaddump()
 
 void kdesvnView::slotDumpRepo()
 {
-    QPointer<KDialog> dlg(new KDialog(QApplication::activeModalWidget()));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("dump_repo_size"), QApplication::activeModalWidget()));
     dlg->setWindowTitle(i18n("Dump a repository"));
-    dlg->setButtons(KDialog::Ok | KDialog::Cancel);
-    QWidget *Dialog1Layout = new KVBox(dlg);
-    dlg->setMainWidget(Dialog1Layout);
+    dlg->setWithCancelButton();
 
-    DumpRepo_impl *ptr = new DumpRepo_impl(Dialog1Layout);
-    WindowGeometryHelper wgh(dlg, QLatin1String("dump_repo_size"));
+    DumpRepo_impl *ptr(new DumpRepo_impl(dlg));
+    dlg->addWidget(ptr);
     if (dlg->exec() != QDialog::Accepted) {
-        wgh.save();
         delete dlg;
         return;
     }
-    wgh.save();
-    svn::repository::Repository *_rep = new svn::repository::Repository(this);
-    QString re, out;
-    bool incr, diffs;
-    re = ptr->reposPath();
-    out = ptr->targetFile();
-    incr = ptr->incremental();
-    diffs = ptr->use_deltas();
-    int s = ptr->startNumber();
-    int e = ptr->endNumber();
+
+    const QString re = ptr->reposPath();
+    const QString out = ptr->targetFile();
+    const bool incr = ptr->incremental();
+    const bool diffs = ptr->use_deltas();
+    const int s = ptr->startNumber();
+    const int e = ptr->endNumber();
 
     delete dlg;
 
@@ -391,12 +377,13 @@ void kdesvnView::slotDumpRepo()
         en = e;
     }
 
+    svn::repository::Repository *_rep(new svn::repository::Repository(this));
     try {
         _rep->Open(re);
     } catch (const svn::ClientException &e) {
         slotAppendLog(e.msg());
         delete _rep;
-        return ;
+        return;
     }
 
     try {

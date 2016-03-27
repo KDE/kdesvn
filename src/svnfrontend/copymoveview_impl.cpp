@@ -20,10 +20,9 @@
 
 
 #include "copymoveview_impl.h"
+#include "ksvnwidgets/ksvndialog.h"
 
-#include <KDialog>
 #include <KLocale>
-#include <KVBox>
 
 CopyMoveView_impl::CopyMoveView_impl(const QString &baseName, const QString &sourceName, bool move, QWidget *parent)
     : QWidget(parent)
@@ -71,18 +70,13 @@ QString CopyMoveView_impl::newName() const
 QString CopyMoveView_impl::getMoveCopyTo(bool *ok, bool move,
                                          const QString &old, const QString &base, QWidget *parent)
 {
-    QPointer<KDialog> dlg(new KDialog(parent));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("copy_move_dlg"), parent));
     dlg->setWindowTitle(move ? i18n("Move/Rename file/directory") : i18n("Copy file/directory"));
-    dlg->setButtons(KDialog::Ok | KDialog::Cancel);
-    dlg->setDefaultButton(KDialog::Ok);
-    dlg->showButtonSeparator(false);
+    dlg->setWithCancelButton();
 
-    KVBox *Dialog1Layout = new KVBox(dlg);
-    dlg->setMainWidget(Dialog1Layout);
-
-    CopyMoveView_impl *ptr = new CopyMoveView_impl(base, old, (move), Dialog1Layout);
+    CopyMoveView_impl *ptr = new CopyMoveView_impl(base, old, (move), dlg);
+    dlg->addWidget(ptr);
     QString nName;
-    dlg->resize(QSize(500, 160).expandedTo(dlg->minimumSizeHint()));
     if (dlg->exec() != QDialog::Accepted) {
         if (ok) {
             *ok = false;

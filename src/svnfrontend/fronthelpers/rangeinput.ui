@@ -42,7 +42,7 @@
          </widget>
         </item>
         <item row="0" column="2">
-         <widget class="KIntNumInput" name="m_startRevInput">
+         <widget class="QSpinBox" name="m_startRevInput">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -112,7 +112,7 @@
          </widget>
         </item>
         <item row="0" column="2">
-         <widget class="KIntNumInput" name="m_endRevInput">
+         <widget class="QSpinBox" name="m_endRevInput">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -180,11 +180,6 @@
  </widget>
  <layoutdefault spacing="2" margin="2"/>
  <customwidgets>
-  <customwidget>
-   <class>KIntNumInput</class>
-   <extends>QWidget</extends>
-   <header>knuminput.h</header>
-  </customwidget>
   <customwidget>
    <class>KDateTimeWidget</class>
    <extends>QWidget</extends>

@@ -27,9 +27,11 @@ Rangeinput_impl::Rangeinput_impl(QWidget *parent)
 {
     setupUi(this);
 
-    m_startRevInput->setRange(0, INT_MAX, 1, false);
-    m_endRevInput->setRange(0, INT_MAX, 1, false);
+    m_startRevInput->setRange(0, INT_MAX);
+    m_startRevInput->setSingleStep(1);
     m_startRevInput->setValue(1);
+    m_endRevInput->setRange(0, INT_MAX);
+    m_endRevInput->setSingleStep(1);
     m_endRevInput->setValue(1);
     m_startDateInput->setDateTime(QDateTime::currentDateTime());
     m_stopDateInput->setDateTime(QDateTime::currentDateTime());

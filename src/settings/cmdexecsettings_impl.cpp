@@ -26,7 +26,7 @@ CmdExecSettings_impl::CmdExecSettings_impl(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
-    kcfg_cmdline_log_minline->setSuffix(ki18np(" line", " lines"));
+    kcfg_cmdline_log_minline->setSuffix(i18n(" line(s)"));
     kcfg_cmdline_log_minline->setEnabled(kcfg_cmdline_show_logwindow->isChecked());
     kcfg_kio_standard_logmsg->setEnabled(kcfg_kio_use_standard_logmsg->isChecked());
     kcfg_no_konqueror_toplevelmenu->setDisabled(kcfg_no_konqueror_contextmenu->isChecked());

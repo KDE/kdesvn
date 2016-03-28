@@ -28,7 +28,7 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="KIntNumInput" name="kcfg_cmdline_log_minline">
+        <widget class="QSpinBox" name="kcfg_cmdline_log_minline">
          <property name="toolTip">
           <string>The minimum a log output must contain before kdesvn shows a single log window</string>
          </property>
@@ -161,11 +161,6 @@ Error messages of KIO will always displayed and can &lt;i&gt;not&lt;/i&gt; switc
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
   </customwidget>
-  <customwidget>
-   <class>KIntNumInput</class>
-   <extends>QWidget</extends>
-   <header>knuminput.h</header>
-  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>kcfg_cmdline_show_logwindow</tabstop>
@@ -178,8 +173,6 @@ Error messages of KIO will always displayed and can &lt;i&gt;not&lt;/i&gt; switc
   <tabstop>kcfg_display_dockmsg</tabstop>
  </tabstops>
  <includes>
-  <include location="local">knuminput.h</include>
-  <include location="local">knuminput.h</include>
   <include location="local">klineedit.h</include>
  </includes>
  <resources/>

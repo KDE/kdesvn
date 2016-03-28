@@ -27,13 +27,15 @@
 #include <klocale.h>
 #include <kconfig.h>
 #include <kurlrequesterdialog.h>
-#include <kio/netaccess.h>
 #include <kmessagebox.h>
 #include <kfile.h>
 #include <kurlrequester.h>
+#include <kjobwidgets.h>
+#include <KIO/FileCopyJob>
 
 #include <QStringList>
 #include <QSortFilterProxyModel>
+#include <QTemporaryFile>
 #include <QCheckBox>
 #include <QLabel>
 #include <QLayout>
@@ -497,12 +499,14 @@ void Commitmsg_impl::insertFile()
     if (_url.isLocalFile()) {
         insertFile(_url.path());
     } else {
-        QString tmpFile;
-        if (KIO::NetAccess::download(_url, tmpFile, this)) {
-            insertFile(tmpFile);
-            KIO::NetAccess::removeTempFile(tmpFile);
+        QTemporaryFile tf;
+        tf.open();
+        KIO::FileCopyJob *job = KIO::file_copy(_url, QUrl::fromLocalFile(tf.fileName()));
+        KJobWidgets::setWindow(job, this);
+        if (job->exec()) {
+            insertFile(tf.fileName());
         } else {
-            KMessageBox::error(this, KIO::NetAccess::lastErrorString());
+            KMessageBox::error(this, job->errorString());
         }
     }
 }

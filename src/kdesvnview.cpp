@@ -36,12 +36,14 @@
 #include <QFileInfo>
 #include <QProgressBar>
 #include <QSplitter>
+#include <QTemporaryFile>
 
 #include <kmessagebox.h>
 #include <klocale.h>
 #include <QTextBrowser>
 #include <kactioncollection.h>
-#include <kio/netaccess.h>
+#include <KIO/FileCopyJob>
+#include <kjobwidgets.h>
 
 kdesvnView::kdesvnView(KActionCollection *aCollection, QWidget *parent, bool full)
     : QWidget(parent), svn::repository::RepositoryListener()
@@ -309,20 +311,20 @@ void kdesvnView::slotLoaddump()
         break;
     }
 
-    QUrl _uri = ptr->dumpFile();
+    const QUrl _uri = ptr->dumpFile();
     QString _input;
-    QString tmpfile;
-    bool networked = false;
+    QTemporaryFile tmpfile;
     if (_uri.isLocalFile()) {
-        _input = _uri.path();
+        _input = _uri.toLocalFile();
     } else {
-        networked = true;
-        if (! KIO::NetAccess::download(_uri, tmpfile, this)) {
-            KMessageBox::error(this, KIO::NetAccess::lastErrorString());
-            KIO::NetAccess::removeTempFile(tmpfile);
+        tmpfile.open();
+        KIO::FileCopyJob *job = KIO::file_copy(_uri, QUrl::fromLocalFile(tmpfile.fileName()));
+        KJobWidgets::setWindow(job, this);
+        if (!job->exec()) {
+            KMessageBox::error(this, job->errorString());
             return;
         }
-        _input = tmpfile;
+        _input = tmpfile.fileName();
     }
 
     try {
@@ -331,9 +333,6 @@ void kdesvnView::slotLoaddump()
         slotAppendLog(i18n("Loading dump finished."));
     } catch (const svn::ClientException &e) {
         slotAppendLog(e.msg());
-    }
-    if (networked && tmpfile.length() > 0) {
-        KIO::NetAccess::removeTempFile(tmpfile);
     }
     delete dlg;
 }

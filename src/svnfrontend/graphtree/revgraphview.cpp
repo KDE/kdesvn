@@ -28,11 +28,11 @@
 #include <kprocess.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kmenu.h>
 
 #include <QFileDialog>
 #include <QFontDatabase>
 #include <QMatrix>
+#include <QMenu>
 #include <QPainter>
 #include <QRegExp>
 #include <QContextMenuEvent>
@@ -833,7 +833,7 @@ void RevGraphView::contextMenuEvent(QContextMenuEvent *e)
 
     QAction *ac;
 
-    KMenu popup;
+    QMenu popup;
     if (i) {
         if (!i->source().isEmpty() && getAction(i->nodename()) != 'D') {
             popup.addAction(i18n("Diff to previous"))->setData(301);

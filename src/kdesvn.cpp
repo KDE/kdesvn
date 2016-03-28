@@ -31,14 +31,11 @@
 #include <klocale.h>
 #include <kdeversion.h>
 #include <kstatusbar.h>
-#include <kbookmarkmenu.h>
 
 #include <kio/netaccess.h>
 #include <kconfig.h>
 #include <kconfiggroup.h>
 #include <khelpmenu.h>
-#include <kmenubar.h>
-#include <kmenu.h>
 #include <kmessagebox.h>
 #include <kaction.h>
 #include <KActionCollection>

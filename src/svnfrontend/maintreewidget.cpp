@@ -50,7 +50,6 @@
 #include <kactioncollection.h>
 #include <kauthorized.h>
 #include <kmimetypetrader.h>
-#include <kmenu.h>
 #include <kio/deletejob.h>
 #include <kio/copyjob.h>
 #include <kfiledialog.h>
@@ -1081,7 +1080,7 @@ void MainTreeWidget::slotContextMenu(const QPoint &)
 
 void MainTreeWidget::slotDirContextMenu(const QPoint &vp)
 {
-    KMenu popup;
+    QMenu popup;
     QAction *temp = 0;
     int count = 0;
     if ((temp = filesActions()->action("make_dir_commit")) && temp->isEnabled() && ++count) {

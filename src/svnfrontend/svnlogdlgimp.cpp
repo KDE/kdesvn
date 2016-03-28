@@ -26,10 +26,10 @@
 #include "helpers/windowgeometryhelper.h"
 
 #include <kconfig.h>
-#include <kmenu.h>
 
 #include <QKeyEvent>
 #include <QDesktopWidget>
+#include <QMenu>
 #include <QSortFilterProxyModel>
 #include <QTextDocumentFragment>
 
@@ -428,7 +428,7 @@ void SvnLogDlgImp::slotCustomContextMenu(const QPoint &e)
         bel = m_SortModel->mapToSource(bel);
         rev = m_CurrentModel->toRevision(bel);
     }
-    KMenu popup;
+    QMenu popup;
     QAction *ac;
     bool unset = false;
     if (row != m_CurrentModel->rightRow()) {
@@ -498,7 +498,7 @@ void SvnLogDlgImp::slotChangedPathContextMenu(const QPoint &e)
         return;
     }
     qlonglong rev = m_CurrentModel->toRevision(ind);
-    KMenu popup;
+    QMenu popup;
     QString name = item->path();
     QString action = item->action();
     QString source = item->revision() > -1 ? item->source() : item->path();

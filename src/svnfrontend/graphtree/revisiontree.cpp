@@ -31,11 +31,11 @@
 #include "svnfrontend/fronthelpers/cursorstack.h"
 #include "settings/kdesvnsettings.h"
 
-#include <kprogressdialog.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 
-#include <qwidget.h>
+#include <QWidget>
+#include <QProgressDialog>
 
 #define INTERNALCOPY 1
 #define INTERNALRENAME 2
@@ -51,7 +51,7 @@ public:
     svn::LogEntriesMap m_OldHistory;
 
     long max_rev, min_rev;
-    KProgressDialog *progress;
+    QProgressDialog *progress;
     QTime m_stopTick;
 
     QWidget *dlgParent;
@@ -129,20 +129,18 @@ RevisionTree::RevisionTree(const svn::ClientP &aClient,
 
     long possible_rev = -1;
 
-    m_Data->progress = new KProgressDialog(parent, i18n("Scanning logs"), i18n("Scanning the logs for %1", origin));
+    m_Data->progress = new QProgressDialog(i18n("Scanning the logs for %1", origin), i18n("Cancel"), 0, m_Data->m_OldHistory.size(), parent);
+    m_Data->progress->setWindowTitle(i18n("Scanning logs"));
     m_Data->progress->setMinimumDuration(100);
-    m_Data->progress->show();
-    m_Data->progress->setAllowCancel(true);
-    m_Data->progress->progressBar()->setRange(0, m_Data->m_OldHistory.size());
     m_Data->progress->setAutoClose(false);
-    m_Data->progress->show();
+    m_Data->progress->setWindowModality(Qt::WindowModal);
     bool cancel = false;
     svn::LogEntriesMap::Iterator it;
     unsigned count = 0;
     for (it = m_Data->m_OldHistory.begin(); it != m_Data->m_OldHistory.end(); ++it) {
-        m_Data->progress->progressBar()->setValue(count);
+        m_Data->progress->setValue(count);
         QCoreApplication::processEvents();
-        if (m_Data->progress->wasCancelled()) {
+        if (m_Data->progress->wasCanceled()) {
             cancel = true;
             break;
         }
@@ -171,8 +169,7 @@ RevisionTree::RevisionTree(const svn::ClientP &aClient,
     if (!cancel) {
         if (topDownScan()) {
             m_Data->progress->setAutoReset(true);
-            m_Data->progress->progressBar()->setRange(0, 100);
-            m_Data->progress->progressBar()->setTextVisible(false);
+            m_Data->progress->setRange(0, 100);
             m_Data->m_stopTick.restart();
             m_Data->m_TreeDisplay = new RevTreeWidget(m_Data->m_Client);
             if (bottomUpScan(m_InitialRevsion, 0, m_Path, 0)) {
@@ -206,20 +203,20 @@ bool RevisionTree::isDeleted(long revision, const QString &path)
 
 bool RevisionTree::topDownScan()
 {
-    m_Data->progress->progressBar()->setRange(0, m_Data->max_rev - m_Data->min_rev);
+    m_Data->progress->setRange(0, m_Data->max_rev - m_Data->min_rev);
     bool cancel = false;
     QString label;
     QString olabel = m_Data->progress->labelText();
     for (long j = m_Data->max_rev; j >= m_Data->min_rev; --j) {
-        m_Data->progress->progressBar()->setValue(m_Data->max_rev - j);
+        m_Data->progress->setValue(m_Data->max_rev - j);
         QCoreApplication::processEvents();
-        if (m_Data->progress->wasCancelled()) {
+        if (m_Data->progress->wasCanceled()) {
             cancel = true;
             break;
         }
         for (long i = 0; i < m_Data->m_OldHistory[j].changedPaths.count(); ++i) {
             if (i > 0 && i % 100 == 0) {
-                if (m_Data->progress->wasCancelled()) {
+                if (m_Data->progress->wasCanceled()) {
                     cancel = true;
                     break;
                 }
@@ -249,15 +246,15 @@ bool RevisionTree::topDownScan()
     m_Data->progress->setLabelText(olabel);
     /* find forward references and filter them out */
     for (long j = m_Data->max_rev; j >= m_Data->min_rev; --j) {
-        m_Data->progress->progressBar()->setValue(m_Data->max_rev - j);
+        m_Data->progress->setValue(m_Data->max_rev - j);
         QCoreApplication::processEvents();
-        if (m_Data->progress->wasCancelled()) {
+        if (m_Data->progress->wasCanceled()) {
             cancel = true;
             break;
         }
         for (long i = 0; i < m_Data->m_OldHistory[j].changedPaths.count(); ++i) {
             if (i > 0 && i % 100 == 0) {
-                if (m_Data->progress->wasCancelled()) {
+                if (m_Data->progress->wasCanceled()) {
                     cancel = true;
                     break;
                 }
@@ -295,9 +292,9 @@ bool RevisionTree::topDownScan()
     }
     m_Data->progress->setLabelText(olabel);
     for (long j = m_Data->max_rev; j >= m_Data->min_rev; --j) {
-        m_Data->progress->progressBar()->setValue(m_Data->max_rev - j);
+        m_Data->progress->setValue(m_Data->max_rev - j);
         QCoreApplication::processEvents();
-        if (m_Data->progress->wasCancelled()) {
+        if (m_Data->progress->wasCanceled()) {
             cancel = true;
             break;
         }
@@ -306,7 +303,7 @@ bool RevisionTree::topDownScan()
                 continue;
             }
             if (i > 0 && i % 100 == 0) {
-                if (m_Data->progress->wasCancelled()) {
+                if (m_Data->progress->wasCanceled()) {
                     cancel = true;
                     break;
                 }
@@ -361,11 +358,11 @@ bool RevisionTree::bottomUpScan(long startrev, unsigned recurse, const QString &
     bool cancel = false;
     for (long j = startrev; j <= m_Data->max_rev; ++j) {
         if (m_Data->m_stopTick.elapsed() > 500) {
-            m_Data->progress->progressBar()->setValue(m_Data->progress->progressBar()->value() + 1);
+            m_Data->progress->setValue(m_Data->progress->value() + 1);
             QCoreApplication::processEvents();
             m_Data->m_stopTick.restart();
         }
-        if (m_Data->progress->wasCancelled()) {
+        if (m_Data->progress->wasCanceled()) {
             cancel = true;
             break;
         }

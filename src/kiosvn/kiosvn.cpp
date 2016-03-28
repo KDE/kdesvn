@@ -50,7 +50,6 @@
 #include <netdb.h>
 
 #include <kglobal.h>
-#include <kmimetype.h>
 
 namespace KIO
 {

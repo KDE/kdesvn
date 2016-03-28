@@ -882,14 +882,14 @@ KService::List MainTreeWidget::offersList(SvnItem *item, bool execOnly) const
     if (!item) {
         return offers;
     }
-    if (!item->mimeType()) {
+    if (!item->mimeType().isValid()) {
         return offers;
     }
     QString constraint(QLatin1String("(DesktopEntryName != 'kdesvn') and (Type == 'Application')"));
     if (execOnly) {
         constraint += QLatin1String(" and (exist Exec)");
     }
-    offers = KMimeTypeTrader::self()->query(item->mimeType()->name(), QString::fromLatin1("Application"), constraint);
+    offers = KMimeTypeTrader::self()->query(item->mimeType().name(), QString::fromLatin1("Application"), constraint);
     return offers;
 }
 

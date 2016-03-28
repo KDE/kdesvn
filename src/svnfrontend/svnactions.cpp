@@ -75,6 +75,7 @@
 #include <QFontDatabase>
 #include <QInputDialog>
 #include <QMap>
+#include <QMimeDatabase>
 #include <QReadWriteLock>
 #include <QString>
 #include <QTimer>
@@ -593,12 +594,13 @@ void SvnActions::slotMakeCat(const svn::Revision &start, const QString &what, co
         return;
     }
     EMIT_FINISHED;
-    KMimeType::Ptr mptr(KMimeType::findByFileContent(tname));
-    KService::List offers = KMimeTypeTrader::self()->query(mptr->name(),
+    QMimeDatabase db;
+    const QMimeType mimeType(db.mimeTypeForFile(tname));
+    KService::List offers = KMimeTypeTrader::self()->query(mimeType.name(),
                                                            QLatin1String("Application"),
                                                            QLatin1String("Type == 'Application' or (exist Exec)"));
     if (offers.isEmpty() || offers.first()->exec().isEmpty()) {
-        offers = KMimeTypeTrader::self()->query(mptr->name(),
+        offers = KMimeTypeTrader::self()->query(mimeType.name(),
                                                 QLatin1String("Application"),
                                                 QLatin1String("Type == 'Application'"));
     }

@@ -36,6 +36,7 @@
 #include <QString>
 #include <QFileInfo>
 #include <QImage>
+#include <QMimeDatabase>
 #include <QPainter>
 #include <QPixmap>
 #include <QMutexLocker>
@@ -48,7 +49,7 @@ public:
 
     KFileItem &createItem(const svn::Revision &peg);
     QUrl &kdeName(const svn::Revision &);
-    KMimeType::Ptr mimeType(bool dir);
+    QMimeType mimeType(bool dir);
 
     svn::StatusPtr m_Stat;
     void init();
@@ -60,7 +61,7 @@ public:
     KFileItem m_fitem;
     bool isWc;
     svn::Revision lRev;
-    KMimeType::Ptr mptr;
+    QMimeType m_mimeType;
     QMutex _infoTextMutex;
 };
 
@@ -82,7 +83,7 @@ void SvnItem_p::init()
     isWc = false;
     m_full = m_Stat->path();
     m_kdename.clear();
-    mptr = 0;
+    m_mimeType = QMimeType();
     lRev = svn::Revision::UNDEFINED;
     while (m_full.endsWith(QLatin1Char('/'))) {
         /* dir name possible */
@@ -100,19 +101,20 @@ void SvnItem_p::init()
     m_infoText.clear();
 }
 
-KMimeType::Ptr SvnItem_p::mimeType(bool dir)
+QMimeType SvnItem_p::mimeType(bool dir)
 {
-    if (!mptr || m_kdename.isEmpty()) {
+    if (!m_mimeType.isValid() || m_kdename.isEmpty()) {
         if (m_kdename.isEmpty()) {
             kdeName(svn::Revision::UNDEFINED);
         }
+        QMimeDatabase db;
         if (dir) {
-            mptr = KMimeType::mimeType("inode/directory");
+            m_mimeType = db.mimeTypeForName(QLatin1String("inode/directory"));
         } else {
-            mptr = KMimeType::findByUrl(m_kdename, 0, isWc, !isWc);
+            m_mimeType = db.mimeTypeForUrl(m_kdename);
         }
     }
-    return mptr;
+    return m_mimeType;
 }
 
 QUrl &SvnItem_p::kdeName(const svn::Revision &r)
@@ -324,7 +326,7 @@ QPixmap SvnItem::getPixmap(int size, bool overlay)
 #endif
     if (svn::Url::isValid(p_Item->m_Stat->path())) {
         /* remote access */
-        p = KIconLoader::global()->loadMimeTypeIcon(p_Item->mimeType(isDir())->iconName(),
+        p = KIconLoader::global()->loadMimeTypeIcon(p_Item->mimeType(isDir()).iconName(),
                 KIconLoader::Desktop,
                 size,
                 KIconLoader::DefaultState);
@@ -350,7 +352,9 @@ QPixmap SvnItem::getPixmap(int size, bool overlay)
         } else {
             // local access
             const QUrl uri(QUrl::fromLocalFile(fullName()));
-            p = KIconLoader::global()->loadMimeTypeIcon(KMimeType::iconNameForUrl(uri), KIconLoader::Desktop, size);
+            QMimeDatabase db;
+            const QMimeType mimeType(db.mimeTypeForUrl(uri));
+            p = KIconLoader::global()->loadMimeTypeIcon(mimeType.iconName(), KIconLoader::Desktop, size);
             p = getPixmap(p, size, overlay);
         }
     }
@@ -622,7 +626,7 @@ const QUrl &SvnItem::kdeName(const svn::Revision &r)
     return p_Item->kdeName(r);
 }
 
-KMimeType::Ptr SvnItem::mimeType()
+QMimeType SvnItem::mimeType()
 {
     return p_Item->mimeType(isDir());
 }

@@ -22,9 +22,9 @@
 #define SVN_ITEM_H
 
 #include "svnqt/status.h"
-#include <kmimetype.h>
 #include <QString>
 #include <QDateTime>
+#include <QMimeType>
 #include <QPixmap>
 #include <QScopedPointer>
 #include <QList>
@@ -50,7 +50,7 @@ public:
     virtual const QString &shortName()const;
     virtual const QUrl &Url()const;
     virtual const QUrl &kdeName(const svn::Revision &);
-    virtual KMimeType::Ptr mimeType();
+    virtual QMimeType mimeType();
     virtual const QDateTime &fullDate()const;
     virtual bool isDir()const;
     virtual bool isVersioned()const;

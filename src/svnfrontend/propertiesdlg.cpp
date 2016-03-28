@@ -27,7 +27,6 @@
 #include "svnitem.h"
 #include "svnqt/client.h"
 
-#include <KPushButton>
 #include <KLocale>
 #include <KMessageBox>
 

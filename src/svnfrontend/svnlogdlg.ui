@@ -58,7 +58,7 @@
          <widget class="RevisionButtonImpl" name="m_endRevButton" native="true"/>
         </item>
         <item row="1" column="2">
-         <widget class="KPushButton" name="m_goButton">
+         <widget class="QPushButton" name="m_goButton">
           <property name="text">
            <string>Get Logs</string>
           </property>
@@ -181,7 +181,7 @@
     <item>
      <layout class="QHBoxLayout" name="m_ButtonLayout">
       <item>
-       <widget class="KPushButton" name="m_DispPrevButton">
+       <widget class="QPushButton" name="m_DispPrevButton">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -200,7 +200,7 @@
        </widget>
       </item>
       <item>
-       <widget class="KPushButton" name="m_DispSpecDiff">
+       <widget class="QPushButton" name="m_DispSpecDiff">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -222,7 +222,7 @@
        </widget>
       </item>
       <item>
-       <widget class="KPushButton" name="buttonListFiles">
+       <widget class="QPushButton" name="buttonListFiles">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -241,7 +241,7 @@
        </widget>
       </item>
       <item>
-       <widget class="KPushButton" name="buttonBlame">
+       <widget class="QPushButton" name="buttonBlame">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -294,11 +294,6 @@
    <header>ktextbrowser.h</header>
   </customwidget>
   <customwidget>
-   <class>KPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
-  </customwidget>
-  <customwidget>
    <class>RevisionButtonImpl</class>
    <extends>QWidget</extends>
    <header>revisionbuttonimpl.h</header>
@@ -318,7 +313,6 @@
  </tabstops>
  <includes>
   <include location="local">kdialog.h</include>
-  <include location="local">kpushbutton.h</include>
   <include location="local">revisionbuttonimpl.h</include>
   <include location="local">ktextbrowser.h</include>
  </includes>

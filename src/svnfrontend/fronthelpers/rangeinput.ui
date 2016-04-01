@@ -62,7 +62,7 @@
          </widget>
         </item>
         <item row="1" column="1" colspan="2">
-         <widget class="KDateTimeWidget" name="m_startDateInput"/>
+         <widget class="QDateTimeEdit" name="m_startDateInput"/>
         </item>
         <item row="2" column="0" colspan="2">
          <widget class="QRadioButton" name="m_startStartButton">
@@ -132,7 +132,7 @@
          </widget>
         </item>
         <item row="1" column="1" colspan="2">
-         <widget class="KDateTimeWidget" name="m_stopDateInput"/>
+         <widget class="QDateTimeEdit" name="m_stopDateInput"/>
         </item>
         <item row="2" column="0" colspan="2">
          <widget class="QRadioButton" name="m_stopStartButton">
@@ -179,13 +179,6 @@
   </layout>
  </widget>
  <layoutdefault spacing="2" margin="2"/>
- <customwidgets>
-  <customwidget>
-   <class>KDateTimeWidget</class>
-   <extends>QWidget</extends>
-   <header>kdatetimewidget.h</header>
-  </customwidget>
- </customwidgets>
  <tabstops>
   <tabstop>m_stopNumberButton</tabstop>
   <tabstop>m_endRevInput</tabstop>

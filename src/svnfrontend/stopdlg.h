@@ -22,39 +22,33 @@
 
 #include "svnfrontend/fronthelpers/cursorstack.h"
 
-#include <kdialog.h>
+#include <QDialog>
+#include <QTime>
 
-#include <qdatetime.h>
-#include <qobject.h>
-
-#include <QVBoxLayout>
-#include <QShowEvent>
-#include <QHideEvent>
-#include <QLabel>
-
+class QDialogButtonBox;
 class QTimer;
 class QLabel;
 class QProgressBar;
-class KTextBrowser;
+class QTextBrowser;
+class QHideEvent;
+class QShowEvent;
+class QVBoxLayout;
 
 /**
 @author Rajko Albrecht
 */
-class StopDlg : public KDialog
+class StopDlg : public QDialog
 {
     Q_OBJECT
 public:
     StopDlg(QObject *listener, QWidget *parent, const QString &caption, const QString &text);
     virtual ~StopDlg();
 
-    bool cancelld();
-
 protected:
     QObject *m_Context;
     int m_MinDuration;
     bool mCancelled;
     QTimer *mShowTimer;
-    QString mCancelText;
     bool mShown, mWait;
     QLabel *mLabel;
     QProgressBar *m_ProgressBar;
@@ -62,17 +56,16 @@ protected:
     bool m_BarShown;
     bool m_netBarShown;
     QTime m_StopTick;
-    KTextBrowser *m_LogWindow;
-    QVBoxLayout *layout;
+    QTextBrowser *m_LogWindow;
+    QVBoxLayout *layout, *mainLayout;
 
     QString m_lastLog;
     unsigned int m_lastLogLines;
     CursorStack *cstack;
+    QDialogButtonBox *m_bBox;
 
-    virtual void showEvent(QShowEvent *);
-    virtual void hideEvent(QHideEvent *);
-
-    QWidget *m_mainWidget;
+    virtual void showEvent(QShowEvent *e);
+    virtual void hideEvent(QHideEvent *e);
 
 public slots:
     virtual void slotTick();

@@ -25,6 +25,7 @@
 #include <klocale.h>
 #include <ktextbrowser.h>
 
+#include <QDialogButtonBox>
 #include <QTimer>
 #include <QLabel>
 #include <QWidget>
@@ -32,33 +33,35 @@
 #include <QProgressBar>
 
 StopDlg::StopDlg(QObject *listener, QWidget *parent, const QString &caption, const QString &text)
-    : KDialog(parent)
-    , m_Context(listener), m_MinDuration(1000), mCancelled(false), mShown(false), m_BarShown(false)
-    , m_netBarShown(false),
-    cstack(0)
+    : QDialog(parent)
+    , m_Context(listener)
+    , m_MinDuration(1000)
+    , mCancelled(false)
+    , mShown(false)
+    , m_BarShown(false)
+    , m_netBarShown(false)
+    , cstack(nullptr)
+    , m_bBox(new QDialogButtonBox(QDialogButtonBox::Cancel, this))
 {
     setWindowTitle(caption);
-
-    setButtons(KDialog::Cancel);
-    m_mainWidget = new QFrame(this);
-    setMainWidget(m_mainWidget);
 
     m_lastLogLines = 0;
     m_lastLog.clear();
 
     mShowTimer = new QTimer(this);
     m_StopTick.start();
-    showButton(KDialog::Close, false);
-    mCancelText = buttonText(KDialog::Cancel);
 
-    layout = new QVBoxLayout(m_mainWidget);
-    mLabel = new QLabel(text, m_mainWidget);
+    mainLayout = new QVBoxLayout(this);
+    layout = new QVBoxLayout;
+    mainLayout->addLayout(layout);
+    mainLayout->addWidget(m_bBox);
+    mLabel = new QLabel(text, this);
     layout->addWidget(mLabel);
-    m_ProgressBar = new QProgressBar(m_mainWidget);
+    m_ProgressBar = new QProgressBar(this);
     m_ProgressBar->setRange(0, 15);
     m_ProgressBar->setTextVisible(false);
     layout->addWidget(m_ProgressBar);
-    m_NetBar = new QProgressBar(m_mainWidget);
+    m_NetBar = new QProgressBar(this);
     m_NetBar->setRange(0, 15);
     layout->addWidget(m_NetBar);
 
@@ -66,7 +69,7 @@ StopDlg::StopDlg(QObject *listener, QWidget *parent, const QString &caption, con
     m_LogWindow = 0;
 
     connect(mShowTimer, SIGNAL(timeout()), this, SLOT(slotAutoShow()));
-    connect(this, SIGNAL(cancelClicked()), this, SLOT(slotCancel()));
+    connect(m_bBox, SIGNAL(rejected()), this, SLOT(slotCancel()));
     if (m_Context) {
         connect(m_Context, SIGNAL(tickProgress()), this, SLOT(slotTick()));
         connect(m_Context, SIGNAL(waitShow(bool)), this, SLOT(slotWait(bool)));
@@ -80,14 +83,19 @@ StopDlg::StopDlg(QObject *listener, QWidget *parent, const QString &caption, con
     adjustSize();
 }
 
-void StopDlg::showEvent(QShowEvent *)
+void StopDlg::showEvent(QShowEvent *e)
 {
-    cstack = new CursorStack(Qt::BusyCursor);
+    if (!cstack) {
+        cstack = new CursorStack(Qt::BusyCursor);
+    }
+    QDialog::showEvent(e);
 }
 
-void StopDlg::hideEvent(QHideEvent *)
+void StopDlg::hideEvent(QHideEvent *e)
 {
-    delete cstack; cstack = 0;
+    delete cstack;
+    cstack = nullptr;
+    QDialog::hideEvent(e);
 }
 
 void StopDlg::slotWait(bool how)
@@ -140,11 +148,6 @@ void StopDlg::slotCancel()
     emit sigCancel(true);
 }
 
-bool StopDlg::cancelld()
-{
-    return mCancelled;
-}
-
 void StopDlg::slotTick()
 {
     if (m_StopTick.elapsed() > 500) {
@@ -166,7 +169,7 @@ void StopDlg::slotExtraMessage(const QString &msg)
 {
     ++m_lastLogLines;
     if (!m_LogWindow) {
-        m_LogWindow = new KTextBrowser(m_mainWidget);
+        m_LogWindow = new QTextBrowser(this);
         layout->addWidget(m_LogWindow);
         m_LogWindow->show();
         resize(QSize(500, 400).expandedTo(minimumSizeHint()));

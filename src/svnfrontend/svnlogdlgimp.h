@@ -25,16 +25,17 @@
 #include "svnqt/log_entry.h"
 #include "svnqt/client.h"
 
-#include <QKeyEvent>
 #include <QRegExp>
 
+class QDialogButtonBox;
+class QKeyEvent;
 class QTreeWidgetItem;
 class SvnActions;
 class SvnLogModel;
 class QSortFilterProxyModel;
 class QModelIndex;
 
-class SvnLogDlgImp: public KDialog, public Ui::LogDialog, public SimpleLogCb
+class SvnLogDlgImp: public QDialog, public Ui::LogDialog, public SimpleLogCb
 {
     Q_OBJECT
 public:
@@ -42,28 +43,31 @@ public:
     virtual ~SvnLogDlgImp();
     void dispLog(const svn::LogEntriesMapPtr &log, const QString &what, const QString &root, const svn::Revision &peg, const QString &pegUrl);
     void saveSize();
-    void loadSize();
     virtual bool getSingleLog(svn::LogEntry &t, const svn::Revision &r, const QString &what, const svn::Revision &peg, QString &root);
 
 signals:
     void makeDiff(const QString &, const svn::Revision &, const QString &, const svn::Revision &, QWidget *);
     void makeCat(const svn::Revision &, const QString &, const QString &, const svn::Revision &, QWidget *);
 
-protected slots:
-    virtual void slotDispPrevious();
-    virtual void slotDispSelected();
-    virtual void slotRevisionSelected();
-    virtual void slotPrevFifty();
-    virtual void slotBeginHead();
-
 protected:
+    virtual void keyPressEvent(QKeyEvent *e);
+    virtual void keyReleaseEvent(QKeyEvent *e);
+    virtual void showEvent(QShowEvent *e);
+
+protected slots:
+    void slotDispPrevious();
+    void slotDispSelected();
+    void slotRevisionSelected();
+    void slotPrevFifty();
+    void slotBeginHead();
+    void slotHelpRequested();
+
+private:
     QString _name;
     QString _base;
     static const char *groupName;
     SvnActions *m_Actions;
     bool m_ControlKeyDown;
-    virtual void keyPressEvent(QKeyEvent *e);
-    virtual void keyReleaseEvent(QKeyEvent *e);
     svn::LogEntriesMapPtr m_Entries;
     SvnLogModel *m_CurrentModel;
     QSortFilterProxyModel *m_SortModel;
@@ -75,14 +79,13 @@ protected:
     QRegExp _r1, _r2;
 
 protected slots:
-    virtual void slotListEntries();
-    virtual void slotChangedPathContextMenu(const QPoint &);
-    virtual void slotSingleDoubleClicked(QTreeWidgetItem *, int);
-    virtual void slotGetLogs();
-    virtual void slotBlameItem();
-
-    virtual void slotSelectionChanged(const QItemSelection &, const QItemSelection &);
-    virtual void slotCustomContextMenu(const QPoint &);
+    void slotListEntries();
+    void slotChangedPathContextMenu(const QPoint &);
+    void slotSingleDoubleClicked(QTreeWidgetItem *, int);
+    void slotGetLogs();
+    void slotBlameItem();
+    void slotSelectionChanged(const QItemSelection &, const QItemSelection &);
+    void slotCustomContextMenu(const QPoint &);
 
 protected:
     /* it works 'cause we use single selection only */

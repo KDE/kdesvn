@@ -494,10 +494,10 @@ void SvnActions::makeTree(const QString &what, const svn::Revision &_rev, const 
     RevisionTree *rt(new RevisionTree(m_Data->m_Svnclient, m_Data->m_SvnContextListener, reposRoot,
                                       startr, endr,
                                       info.url().toString().mid(reposRoot.length()), _rev, dlg));
-    dlg->addWidget(rt->getView());
     if (rt->isValid()) {
         QWidget *disp = rt->getView();
         if (disp) {
+            dlg->addWidget(rt->getView());
             connect(
                 disp, SIGNAL(makeNorecDiff(QString,svn::Revision,QString,svn::Revision,QWidget*)),
                 this, SLOT(makeNorecDiff(QString,svn::Revision,QString,svn::Revision,QWidget*))

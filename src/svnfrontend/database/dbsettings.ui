@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>417</width>
-    <height>438</height>
+    <width>415</width>
+    <height>434</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -20,7 +20,7 @@
       <attribute name="title">
        <string>Log cache settings</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
         <widget class="QCheckBox" name="dbcfg_noCacheUpdate">
          <property name="text">
@@ -29,22 +29,27 @@
         </widget>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout">
-         <item row="0" column="0">
-          <widget class="QLabel" name="m_exclude_label">
-           <property name="text">
-            <string>Prefixes to filter out in revision tree</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="KEditListBox" name="dbcfg_exclude_box">
-           <property name="buttons">
-            <set>KEditListBox::Add|KEditListBox::Remove</set>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string/>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Prefixes to filter out in revision tree</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="KEditListWidget" name="dbcfg_exclude_box">
+            <property name="buttons">
+             <set>KEditListWidget::Add|KEditListWidget::Remove</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -54,53 +59,65 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <layout class="QGridLayout" name="gridLayout_2">
-         <item row="0" column="0">
-          <widget class="QLabel" name="m_logpattern_label">
-           <property name="text">
-            <string>Hide logs containing following words</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="KEditListBox" name="dbcfg_exclude_log_pattern">
-           <property name="toolTip">
-            <string>This is a list which words/substrings a log entry must contain so it will be hidden from log and statistics</string>
-           </property>
-           <property name="buttons">
-            <set>KEditListBox::Add|KEditListBox::Remove</set>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="title">
+          <string/>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Hide logs containing following words</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="KEditListWidget" name="dbcfg_exclude_log_pattern">
+            <property name="toolTip">
+             <string>This is a list which words/substrings a log entry must contain so it will be hidden from log and statistics</string>
+            </property>
+            <property name="buttons">
+             <set>KEditListWidget::Add|KEditListWidget::Remove</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+         <zorder>dbcfg_exclude_log_pattern</zorder>
+         <zorder>label</zorder>
+        </widget>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout_3">
-         <item row="2" column="0">
-          <widget class="KEditListBox" name="dbcfg_exclude_userslog">
-           <property name="toolTip">
-            <string>Do not display commits of listed users in log window and statistics view</string>
-           </property>
-           <property name="buttons">
-            <set>KEditListBox::Add|KEditListBox::Remove</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="m_hideuser_label">
-           <property name="text">
-            <string>Do not show commits from following users</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QCheckBox" name="dbcfg_filter_empty_author">
-           <property name="text">
-            <string>Do not display commits without author</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string/>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Do not show commits from following users</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="KEditListWidget" name="dbcfg_exclude_userslog">
+            <property name="toolTip">
+             <string>Do not display commits of listed users in log window and statistics view</string>
+            </property>
+            <property name="buttons">
+             <set>KEditListWidget::Add|KEditListWidget::Remove</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="dbcfg_filter_empty_author">
+            <property name="text">
+             <string>Do not display commits without author</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -117,9 +134,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KEditListBox</class>
-   <extends>QGroupBox</extends>
-   <header>keditlistbox.h</header>
+   <class>KEditListWidget</class>
+   <extends>QWidget</extends>
+   <header>keditlistwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -54,7 +54,7 @@ void DbSettings::init()
     m_ui->dbcfg_filter_empty_author->setChecked(svn::cache::ReposConfig::self()->readEntry(m_repository, "filter_empty_author", false));
 }
 
-void DbSettings::store_list(KEditListBox *which, const QString &key)
+void DbSettings::store_list(KEditListWidget *which, const QString &key)
 {
     if (!which || key.isEmpty()) {
         return;

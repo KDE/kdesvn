@@ -6,28 +6,33 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>390</width>
-    <height>206</height>
+    <width>403</width>
+    <height>232</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QLabel" name="m_PatternLabel">
-       <property name="text">
-        <string>Patterns to add or remove:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="KEditListBox" name="m_PatternEdit">
-       <property name="buttons">
-        <set>KEditListBox::Add|KEditListBox::Remove</set>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <widget class="QLabel" name="m_PatternLabel">
+     <property name="text">
+      <string>Patterns to add or remove:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="KEditListWidget" name="m_PatternEdit">
+        <property name="buttons">
+         <set>KEditListWidget::Add|KEditListWidget::Remove</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
    <item>
     <widget class="QCheckBox" name="m_RemoveCheckBox">
@@ -61,9 +66,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KEditListBox</class>
-   <extends>QGroupBox</extends>
-   <header>keditlistbox.h</header>
+   <class>KEditListWidget</class>
+   <extends>QWidget</extends>
+   <header>keditlistwidget.h</header>
   </customwidget>
   <customwidget>
    <class>DepthSelector</class>

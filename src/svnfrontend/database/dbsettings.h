@@ -29,7 +29,7 @@ namespace Ui
 {
 class DbSettings;
 }
-class KEditListBox;
+class KEditListWidget;
 
 class DbSettings: public KSvnDialog
 {
@@ -44,7 +44,7 @@ private:
     explicit DbSettings(const QString &repository, QWidget *parent = nullptr);
     virtual ~DbSettings();
 
-    void store_list(KEditListBox *, const QString &);
+    void store_list(KEditListWidget *, const QString &);
 private:
     QString m_repository;
     Ui::DbSettings *m_ui;

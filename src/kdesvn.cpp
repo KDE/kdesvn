@@ -22,9 +22,11 @@
 #include "urldlg.h"
 #include "kdesvn_part.h"
 #include "helpers/ktranslateurl.h"
+#include "helpers/kdesvn_debug.h"
 
 #include <QApplication>
 #include <QDir>
+#include <QMenuBar>
 #include <QStatusBar>
 #include <QTimer>
 
@@ -141,7 +143,8 @@ kdesvn::kdesvn()
             tmpAction->setToolTip(i18n("Show the content of log cache database"));
 
             setHelpMenuEnabled(false);
-            (void) new KHelpMenu(this, componentData().applicationData(), false);
+            KHelpMenu *helpMenu = new KHelpMenu(this, componentData().applicationData(), false);
+            menuBar()->addMenu(helpMenu->menu());
 
             // and integrate the part's GUI with the shells
             createGUI(m_part);

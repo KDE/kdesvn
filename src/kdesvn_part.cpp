@@ -31,7 +31,7 @@
 #include "commandline_part.h"
 #include "svnqt/version_check.h"
 #include "svnqt/url.h"
-#include "helpers/ktranslateurl.h"
+#include "helpers/kdesvn_debug.h"
 #include "helpers/sshagent.h"
 #include "svnfrontend/database/dboverview.h"
 

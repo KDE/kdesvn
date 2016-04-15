@@ -31,10 +31,9 @@
 #include "svnqt/path.h"
 #include "svnqt/svnqt_defines.h"
 
-#include <klocale.h>
-#include <kglobal.h>
-#include <kdirwatch.h>
-#include <kurlmimedata.h>
+#include <KLocalizedString>
+#include <KDirWatch>
+#include <KUrlMimeData>
 
 #include <QItemSelectionModel>
 #include <QFileInfo>

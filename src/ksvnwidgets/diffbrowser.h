@@ -20,11 +20,9 @@
 #ifndef DIFF_BROWSER_H
 #define DIFF_BROWSER_H
 
-#include <ktextbrowser.h>
-#include <QKeyEvent>
+#include <QTextBrowser>
 
 class DiffSyntax;
-// class KEdFind;
 /* FIXME TODO fix the search */
 class DiffBrowserData;
 

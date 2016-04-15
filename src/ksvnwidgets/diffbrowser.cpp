@@ -24,7 +24,7 @@
 
 #include <QFileDialog>
 #include <KMessageBox>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KStandardGuiItem>
 #include <KFind>
 

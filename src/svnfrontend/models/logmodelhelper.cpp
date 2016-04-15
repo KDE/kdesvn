@@ -21,7 +21,7 @@
 #include "logmodelhelper.h"
 #include "svnqt/log_entry.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 #define TREE_PATH_ITEM_TYPE QTreeWidgetItem::UserType+1
 

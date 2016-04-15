@@ -25,9 +25,9 @@
 #include "ksvnwidgets/pwstorage.h"
 #include "helpers/kdesvn_debug.h"
 
-#include <klocale.h>
-#include <kpassworddialog.h>
-#include <kmessagebox.h>
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <KPasswordDialog>
 
 #include <QFileDialog>
 #include <QTextStream>

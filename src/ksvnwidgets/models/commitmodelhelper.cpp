@@ -20,7 +20,7 @@
 #include "commitmodelhelper.h"
 #include "svnqt/commititem.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 CommitActionEntry::CommitActionEntry(const QString &name, const QString &actiondesc, ACTION_TYPE kind)
     : _name(name), _actionDesc(actiondesc), _kind(kind)

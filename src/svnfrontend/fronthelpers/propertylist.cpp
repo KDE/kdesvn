@@ -21,7 +21,7 @@
 #include "kmultilinedelegate.h"
 #include "svnfrontend/fronthelpers/propertyitem.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KMessageBox>
 #include <QTimer>
 

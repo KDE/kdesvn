@@ -22,11 +22,7 @@
 #include "settings/kdesvnsettings.h"
 #include "ksvnwidgets/ksvndialog.h"
 
-#include <kdialog.h>
-#include <klocale.h>
-
-#include <KVBox>
-#include <QPointer>
+#include <KLocalizedString>
 
 RevisionButtonImpl::RevisionButtonImpl(QWidget *parent)
     : QWidget(parent),

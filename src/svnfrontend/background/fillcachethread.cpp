@@ -24,7 +24,7 @@
 #include "svnqt/cache/ReposConfig.h"
 #include "svnqt/url.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 
 // FillCacheThread
 FillCacheThread::FillCacheThread(QObject *_parent, const QString &aPath, bool startup)

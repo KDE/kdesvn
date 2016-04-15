@@ -25,26 +25,23 @@
 
 #include <QApplication>
 #include <QDir>
+#include <QStatusBar>
 #include <QTimer>
 
 #include <ksharedconfig.h>
-#include <klocale.h>
-#include <kdeversion.h>
-#include <kstatusbar.h>
-
-#include <kio/netaccess.h>
 #include <kconfig.h>
 #include <kconfiggroup.h>
 #include <khelpmenu.h>
-#include <kmessagebox.h>
-#include <kaction.h>
 #include <KActionCollection>
-#include <KToggleAction>
+#include <KBookmarkManager>
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <KPluginFactory>
+#include <KPluginLoader>
 #include <KRecentFilesAction>
-#include <kstandardaction.h>
-#include <kbookmarkmanager.h>
-#include <klibloader.h>
-#include <kedittoolbar.h>
+#include <KStandardAction>
+#include <KToggleAction>
+#include <KEditToolBar>
 #include <KShortcutsDialog>
 
 #ifdef TESTING_RC

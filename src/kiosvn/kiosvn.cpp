@@ -48,8 +48,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
-
-#include <kglobal.h>
+#include <klocalizedstring.h>
 
 namespace KIO
 {

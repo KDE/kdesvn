@@ -20,8 +20,6 @@
 
 #include "cmdexecsettings_impl.h"
 
-#include <klocale.h>
-
 CmdExecSettings_impl::CmdExecSettings_impl(QWidget *parent)
     : QWidget(parent)
 {

@@ -20,10 +20,7 @@
 #include "authdialogwidget.h"
 #include "settings/kdesvnsettings.h"
 
-#include <kpassworddialog.h>
-#include <klocale.h>
-#include <qcheckbox.h>
-#include <qlabel.h>
+#include <KLocalizedString>
 
 AuthDialogWidget::AuthDialogWidget(const QString &realm, const QString &user, QWidget *parent)
     : QWidget(parent), Ui::AuthDialogWidget(), curPass()

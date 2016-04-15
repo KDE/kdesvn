@@ -27,8 +27,7 @@
 #include "helpers/ktranslateurl.h"
 #include "helpers/kdesvn_debug.h"
 
-#include <kglobal.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kiconloader.h>
 #include <kiconeffect.h>
 #include <kfileitem.h>

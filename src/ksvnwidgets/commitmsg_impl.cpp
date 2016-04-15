@@ -24,14 +24,14 @@
 #include "depthselector.h"
 #include "ksvnwidgets/ksvndialog.h"
 
-#include <klocale.h>
-#include <kconfig.h>
-#include <kurlrequesterdialog.h>
-#include <kmessagebox.h>
-#include <kfile.h>
-#include <kurlrequester.h>
-#include <kjobwidgets.h>
+#include <KConfig>
+#include <KFile>
 #include <KIO/FileCopyJob>
+#include <KJobWidgets>
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <KUrlRequester>
+#include <KUrlRequesterDialog>
 
 #include <QStringList>
 #include <QSortFilterProxyModel>

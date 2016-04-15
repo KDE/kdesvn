@@ -22,7 +22,7 @@
 #include "copymoveview_impl.h"
 #include "ksvnwidgets/ksvndialog.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 
 CopyMoveView_impl::CopyMoveView_impl(const QString &baseName, const QString &sourceName, bool move, QWidget *parent)
     : QWidget(parent)

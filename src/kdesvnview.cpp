@@ -39,7 +39,7 @@
 #include <QTemporaryFile>
 
 #include <kmessagebox.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <QTextBrowser>
 #include <kactioncollection.h>
 #include <KIO/FileCopyJob>

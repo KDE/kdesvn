@@ -19,8 +19,6 @@
  ***************************************************************************/
 #include "watchedprocess.h"
 
-#include <kio/netaccess.h>
-
 #include <QDir>
 #include <QList>
 #include <QString>

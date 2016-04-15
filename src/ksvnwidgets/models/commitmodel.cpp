@@ -23,7 +23,7 @@
 
 #include "svnqt/commititem.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 CommitModel::CommitModel(const svn::CommitItemList &aList, QObject *parent)
     : QAbstractItemModel(parent)

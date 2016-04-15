@@ -20,7 +20,7 @@
 #include "ssltrustprompt.h"
 #include "ui_ssltrustprompt.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <QPointer>
 #include <QPushButton>
 

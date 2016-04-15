@@ -21,7 +21,7 @@
 
 #include "svnqt/version_check.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <QCheckBox>
 
 

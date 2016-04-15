@@ -20,11 +20,9 @@
 #include "commandline.h"
 #include "kdesvn_part.h"
 #include "commandline_part.h"
-#include <kcmdlineargs.h>
-#include <klocale.h>
 #include <QString>
-#include <ktoolinvocation.h>
-#include <klibloader.h>
+#include <KPluginFactory>
+#include <KPluginLoader>
 #include <KHelpClient>
 
 class CommandLineData

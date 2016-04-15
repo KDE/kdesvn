@@ -31,7 +31,7 @@
 #include <QMimeData>
 
 #include <KIconLoader>
-#include <KLocale>
+#include <KLocalizedString>
 
 SvnTreeView::SvnTreeView(QWidget *parent)
     : QTreeView(parent)

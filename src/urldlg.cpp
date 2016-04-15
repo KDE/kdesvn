@@ -23,7 +23,8 @@
 #include <KUrlRequester>
 #include <KConfigGroup>
 #include <KHistoryComboBox>
-#include <KLocale>
+#include <KLocalizedString>
+#include <KSharedConfig>
 #include <QLabel>
 #include <QVBoxLayout>
 

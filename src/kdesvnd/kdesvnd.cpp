@@ -39,15 +39,14 @@
 #include "kdesvndadaptor.h"
 #include "ksvnjobview.h"
 
-#include <klocale.h>
-#include <kpassworddialog.h>
-#include <kpluginfactory.h>
-#include <knotification.h>
-#include <kio/global.h>
+#include <KIO/Global>
+#include <KLocalizedString>
+#include <KNotification>
+#include <KPasswordDialog>
+#include <KPluginFactory>
 
 #include <QFileDialog>
 #include <QVariant>
-#include <QList>
 #include <QDBusConnection>
 #include <QApplication>
 

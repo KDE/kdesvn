@@ -42,7 +42,6 @@
 #include <kaboutapplicationdialog.h>
 #include <kconfigdialog.h>
 #include <kaboutdata.h>
-#include <klocale.h>
 #include <klocalizedstring.h>
 #include <khelpclient.h>
 #include <kpluginfactory.h>

@@ -24,7 +24,7 @@
 #include "helpers/stringhelper.h"
 #include "threadcontextlistenerdata.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 // ThreadContextListenerData
 QMutex *ThreadContextListenerData::callbackMutex()

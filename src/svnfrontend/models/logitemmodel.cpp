@@ -23,7 +23,7 @@
 
 #include "svnqt/client.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <QTreeWidget>
 #include <QMap>
 

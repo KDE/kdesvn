@@ -23,9 +23,7 @@
 #include "kio_macros.h"
 #include "helpers/kdesvn_debug.h"
 
-#include <klocale.h>
-
-#include <qvariant.h>
+#include <klocalizedstring.h>
 
 namespace KIO
 {

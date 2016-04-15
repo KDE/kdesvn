@@ -25,9 +25,9 @@
 #include "../stopdlg.h"
 #include "svnqt/client.h"
 
-#include <kprocess.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <KProcess>
 
 #include <QFileDialog>
 #include <QFontDatabase>

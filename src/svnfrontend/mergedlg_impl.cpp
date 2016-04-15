@@ -19,14 +19,14 @@
  ***************************************************************************/
 #include "mergedlg_impl.h"
 #include "rangeinput_impl.h"
-#include "svnqt/url.h"
+#include <svnqt/url.h>
+#include <svnqt/version_check.h>
 #include "helpers/ktranslateurl.h"
 #include "ksvnwidgets/ksvndialog.h"
 #include "settings/kdesvnsettings.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
-#include <svnqt/version_check.h>
 
 MergeDlg_impl::MergeDlg_impl(QWidget *parent, bool src1, bool src2, bool out, bool record_only, bool reintegrate)
     : QWidget(parent), Ui::MergeDlg()

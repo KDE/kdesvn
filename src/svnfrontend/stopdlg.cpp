@@ -22,12 +22,12 @@
 #include "settings/kdesvnsettings.h"
 #include "helpers/stringhelper.h"
 
-#include <klocale.h>
-#include <ktextbrowser.h>
+#include <KLocalizedString>
 
 #include <QDialogButtonBox>
 #include <QTimer>
 #include <QLabel>
+#include <QTextBrowser>
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QProgressBar>

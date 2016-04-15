@@ -32,16 +32,13 @@
 #include "svnfrontend/copymoveview_impl.h"
 #include "ksvnwidgets/ksvndialog.h"
 
-#include <kglobal.h>
-#include <kmessagebox.h>
-#include <klocale.h>
-#include <KDialog>
-#include <KVBox>
-#include <ktextbrowser.h>
+#include <KMessageBox>
 
-#include <QDir>
-#include <QTextStream>
 #include <QCommandLineParser>
+#include <QDir>
+#include <QTextBrowser>
+#include <QTextStream>
+#include <QUrlQuery>
 
 class pCPart
 {
@@ -277,7 +274,7 @@ int CommandExec::exec(const QCommandLineParser *parser)
         if ((j > 2 && dont_check_second) || dont_check_all) {
             continue;
         }
-        const QList<QPair<QString, QString> > q = tmpurl.queryItems();
+        const QList<QPair<QString, QString> > q = QUrlQuery(tmpurl).queryItems();
         for(int i = 0; i < q.size(); ++i) {
             if (q.at(i).first == QLatin1String("rev")) {
                 svn::Revision re = q.at(i).second;

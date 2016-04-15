@@ -37,7 +37,7 @@
 #include <QItemSelectionModel>
 
 #include <KMessageBox>
-#include <KLocale>
+#include <KLocalizedString>
 
 DbOverview::DbOverview(const svn::ClientP &aClient, QWidget *parent)
     : KSvnDialog(QLatin1String("db_overview_dlg"), parent)

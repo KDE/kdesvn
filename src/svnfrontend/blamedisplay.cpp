@@ -26,8 +26,6 @@
 #include "fronthelpers/cursorstack.h"
 #include "ksvnwidgets/encodingselector_impl.h"
 
-#include <kglobal.h>
-#include <klocale.h>
 #include <kcolorscheme.h>
 #include <KTreeWidgetSearchLine>
 
@@ -331,8 +329,8 @@ void BlameDisplay::setContent(const QString &what, const svn::AnnotatedFile &bla
 void BlameDisplay::slotGoLine()
 {
     bool ok = true;
-    int line = QInputDialog::getInteger(this, i18n("Show line"), i18n("Show line number"),
-                                        1, 1, m_ui->m_BlameTree->topLevelItemCount(), 1, &ok);
+    int line = QInputDialog::getInt(this, i18n("Show line"), i18n("Show line number"),
+                                    1, 1, m_ui->m_BlameTree->topLevelItemCount(), 1, &ok);
     if (!ok) {
         return;
     }

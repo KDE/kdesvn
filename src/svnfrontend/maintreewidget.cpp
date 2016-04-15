@@ -52,15 +52,14 @@
 #include <kmimetypetrader.h>
 #include <kio/deletejob.h>
 #include <kio/copyjob.h>
-#include <kfiledialog.h>
-#include <knotification.h>
 #include <unistd.h>
 
 #include <QApplication>
-#include <QKeyEvent>
-#include <QTimer>
-#include <QMap>
 #include <QCheckBox>
+#include <QKeyEvent>
+#include <QMap>
+#include <QUrlQuery>
+#include <QTimer>
 
 class MainTreeWidgetData
 {
@@ -275,7 +274,7 @@ bool MainTreeWidget::openUrl(const QUrl &url, bool noReinit)
             }
         }
     }
-    const QList<QPair<QString, QString>> q = url.queryItems();
+    const QList<QPair<QString, QString>> q = QUrlQuery(url).queryItems();
     typedef QPair<QString, QString> queryPair;
     Q_FOREACH(const queryPair &p, q) {
         if (p.first == QLatin1String("rev")) {

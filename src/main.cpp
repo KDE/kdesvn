@@ -24,9 +24,9 @@
 #include <QApplication>
 #include <KAboutData>
 
-#include <klocale.h>
 #include <QCommandLineParser>
 #include <QDir>
+#include <klocalizedstring.h>
 
 static const char description[] =
     I18N_NOOP("A Subversion Client for KDE (standalone application)");

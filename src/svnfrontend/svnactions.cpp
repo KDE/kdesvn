@@ -63,7 +63,7 @@
 #include "fronthelpers/cursorstack.h"
 #include "cacheentry.h"
 
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kmessagebox.h>
 #include <kconfig.h>
 #include <kmimetypetrader.h>

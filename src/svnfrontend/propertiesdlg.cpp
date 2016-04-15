@@ -27,7 +27,7 @@
 #include "svnitem.h"
 #include "svnqt/client.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KMessageBox>
 
 PropertiesDlg::PropertiesDlg(SvnItem *which, const svn::ClientP &aClient, const svn::Revision &aRev, QWidget *parent)

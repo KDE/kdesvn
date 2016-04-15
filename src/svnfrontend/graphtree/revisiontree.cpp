@@ -31,8 +31,8 @@
 #include "svnfrontend/fronthelpers/cursorstack.h"
 #include "settings/kdesvnsettings.h"
 
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <KLocalizedString>
+#include <KMessageBox>
 
 #include <QWidget>
 #include <QProgressDialog>

@@ -20,7 +20,7 @@
 #include "opencontextmenu.h"
 
 #include <KIconLoader>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KRun>
 #include <QAction>
 #include <QApplication>

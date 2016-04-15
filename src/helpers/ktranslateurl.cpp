@@ -19,7 +19,8 @@
  ***************************************************************************/
 #include "ktranslateurl.h"
 
-#include <kurl.h>
+#include <QFileInfo>
+#include <QUrl>
 #include "helpers/kdesvn_debug.h"
 
 namespace helpers
@@ -27,22 +28,26 @@ namespace helpers
 namespace KTranslateUrl
 {
 
-QString makeKdeUrl(const QString &_proto)
+QString makeKdeUrl(const QString &proto)
 {
-    QString proto;
-    if (_proto.startsWith(QLatin1String("svn+"))) {
-        proto = QLatin1Char('k') + _proto;
-    } else if (_proto == QLatin1String("svn")) {
-        proto = QLatin1String("ksvn");
-    } else {
-        proto = QLatin1String("ksvn+") + _proto;
+    if (proto.startsWith(QLatin1String("svn+"))) {
+        return QLatin1Char('k') + proto;
     }
-    return proto;
+    if (proto == QLatin1String("svn")) {
+        return QLatin1String("ksvn");
+    }
+    return QLatin1String("ksvn+") + proto;
 }
 
 QUrl string2Uri(const QString &what)
 {
-    KUrl uri(what);
+    // if the file is available in the local fs -> QUrl::fromLocalFile
+    QFileInfo fi(what);
+    if (fi.isAbsolute() || fi.exists()) {
+        return QUrl::fromLocalFile(fi.absoluteFilePath());
+    }
+    // not a local file, assume a url (which can also be a local file)
+    QUrl uri(what);
     if (!uri.isLocalFile()) {
         uri.setScheme(makeKdeUrl(uri.scheme()));
     }

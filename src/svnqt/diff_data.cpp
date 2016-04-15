@@ -121,9 +121,9 @@ QByteArray DiffData::content()
         return QByteArray();
     }
     close();
-    QFile fi(m_outFileName);
+    QFile fi(QString::fromUtf8(m_outFileName));
     if (!fi.open(QIODevice::ReadOnly)) {
-        throw ClientException(QString("%1 '%2'").arg(fi.errorString()).arg(m_outFileName).toLatin1().constData());
+        throw ClientException(QString("%1 '%2'").arg(fi.errorString()).arg(fi.fileName()));
     }
 
     QByteArray res = fi.readAll();

@@ -1086,8 +1086,7 @@ bool SvnActions::makeCommit(const svn::Targets &targets)
 
 void SvnActions::slotProcessDataRead(const QByteArray &data, WatchedProcess *)
 {
-    QString msg(data);
-    emit sendNotify(msg);
+    emit sendNotify(QString::fromLocal8Bit(data));
 }
 
 bool SvnActions::get(const QString &what, const QString &to, const svn::Revision &rev, const svn::Revision &peg, QWidget *p)

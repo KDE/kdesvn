@@ -35,7 +35,7 @@
 #include <QSortFilterProxyModel>
 #include <QTextDocumentFragment>
 
-const char *SvnLogDlgImp::groupName = "log_dialog_size";
+const QLatin1String groupName("log_dialog_size");
 
 SvnLogDlgImp::SvnLogDlgImp(SvnActions *ac, bool modal, QWidget *parent)
     : QDialog(parent)

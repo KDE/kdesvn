@@ -74,7 +74,7 @@ bool KioListener::contextGetLogMessage(QString &msg, const svn::CommitItemList &
 
 /*! the content of that method is taken from the notify in kio::svn in KDE SDK */
 /* this moment we don't use it full 'cause not all is made via KIO */
-void KioListener::contextNotify(const char *path, svn_wc_notify_action_t action, svn_node_kind_t kind , const char *mime_type , svn_wc_notify_state_t content_state, svn_wc_notify_state_t prop_state, svn_revnum_t revision)
+void KioListener::contextNotify(const char *_path, svn_wc_notify_action_t action, svn_node_kind_t kind , const char *mime_type , svn_wc_notify_state_t content_state, svn_wc_notify_state_t prop_state, svn_revnum_t revision)
 {
     if (par->wasKilled()) {
         return;
@@ -83,6 +83,7 @@ void KioListener::contextNotify(const char *path, svn_wc_notify_action_t action,
         m_Canceld = true;
     }
     QString userstring;
+    const QString path(_path ? QString::fromUtf8(_path) : QString());
 
     switch (action) {
     case svn_wc_notify_add: {
@@ -227,7 +228,7 @@ void KioListener::contextNotify(const char *path, svn_wc_notify_action_t action,
     default:
         break;
     }
-    par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "path" , QString::fromUtf8(path));
+    par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "path" , path);
     par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "action", QString::number(action));
     par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "kind", QString::number(kind));
     par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "mime_t", QString::fromUtf8(mime_type));

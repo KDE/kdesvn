@@ -556,13 +556,13 @@ svn_error_t *ContextData::onSslServerTrustPrompt(svn_auth_cred_ssl_server_trust_
 
     ContextListener::SslServerTrustData trustData(failures);
     if (realm != NULL) {
-        trustData.realm = realm;
+        trustData.realm = QString::fromUtf8(realm);
     }
-    trustData.hostname = info->hostname;
-    trustData.fingerprint = info->fingerprint;
-    trustData.validFrom = info->valid_from;
-    trustData.validUntil = info->valid_until;
-    trustData.issuerDName = info->issuer_dname;
+    trustData.hostname = QString::fromUtf8(info->hostname);
+    trustData.fingerprint = QString::fromUtf8(info->fingerprint);
+    trustData.validFrom = QString::fromUtf8(info->valid_from);
+    trustData.validUntil = QString::fromUtf8(info->valid_until);
+    trustData.issuerDName = QString::fromUtf8(info->issuer_dname);
     trustData.maySave = may_save != 0;
 
     apr_uint32_t acceptedFailures = failures;

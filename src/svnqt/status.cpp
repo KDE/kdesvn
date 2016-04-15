@@ -217,7 +217,7 @@ Status::Status(const Status &src)
 Status::Status(const char *path, const svn_client_status_t *status)
   : m_Data(new Status_private())
 {
-    m_Data->init(path, status);
+    m_Data->init(QString::fromUtf8(path), status);
 }
 #else
 Status::Status(const char *path, const svn_wc_status2_t *status)

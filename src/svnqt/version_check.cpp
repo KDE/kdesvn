@@ -53,7 +53,7 @@ const QString Version::running_version()
     if (curr_version_string.isEmpty()) {
         curr_version_string =
             QString("%1.%2.%3.%4").arg(svn_client_version()->major).arg(svn_client_version()->minor)
-            .arg(svn_client_version()->patch).arg(svn_client_version()->tag);
+            .arg(svn_client_version()->patch).arg(QString::fromUtf8(svn_client_version()->tag));
     }
     return curr_version_string;
 }

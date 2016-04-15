@@ -65,7 +65,6 @@ protected slots:
 private:
     QString _name;
     QString _base;
-    static const char *groupName;
     SvnActions *m_Actions;
     bool m_ControlKeyDown;
     svn::LogEntriesMapPtr m_Entries;

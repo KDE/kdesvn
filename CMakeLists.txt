@@ -50,7 +50,6 @@ find_package(KF5 REQUIRED COMPONENTS
     DBusAddons DocTools I18n IconThemes ItemViews
     JobWidgets KIO Notifications Service
     TextEditor Wallet WidgetsAddons
-    KDELibs4Support
 )
 find_package(Qt5 REQUIRED COMPONENTS
     Core DBus Gui Sql Widgets

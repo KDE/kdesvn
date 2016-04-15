@@ -45,8 +45,16 @@ include(KDECMakeSettings)
 include(FeatureSummary)
 include(ECMInstallIcons)
 
-find_package(KF5 REQUIRED COMPONENTS Bookmarks Config ConfigWidgets CoreAddons DBusAddons I18n ItemViews JobWidgets KDELibs4Support KIO Notifications Service TextEditor Wallet WidgetsAddons)
-find_package(Qt5 REQUIRED COMPONENTS Core DBus Gui Sql Widgets)
+find_package(KF5 REQUIRED COMPONENTS
+    Bookmarks Config ConfigWidgets CoreAddons
+    DBusAddons DocTools I18n IconThemes ItemViews
+    JobWidgets KIO Notifications Service
+    TextEditor Wallet WidgetsAddons
+    KDELibs4Support
+)
+find_package(Qt5 REQUIRED COMPONENTS
+    Core DBus Gui Sql Widgets
+)
 
 # Set the version
 set(KDESVN_VERSION_MAJOR 1)
@@ -93,7 +101,7 @@ include(FindSubversion)
 include(kdesvn-macros)
 
 # Enable exceptions
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
+kde_enable_exceptions()
 
 # hide deprecated warnings, for now
 # TODO remove this ↓

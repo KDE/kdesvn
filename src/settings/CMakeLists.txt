@@ -49,7 +49,12 @@ file(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
 add_library(settingsdlgs STATIC ${settings_ui_sources} ${settings_sources} ${hdr})
 target_link_libraries(settingsdlgs
-    kdesvncfgreader
+    PRIVATE
+        kdesvncfgreader
+    PUBLIC
+        KF5::WidgetsAddons
+        KF5::Completion
+        KF5::I18n
 )
 include_directories(settingsdlgs
     PUBLIC

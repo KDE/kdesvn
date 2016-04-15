@@ -140,14 +140,11 @@ kdesvn::kdesvn()
             tmpAction->setText(i18n("Show database content"));
             tmpAction->setToolTip(i18n("Show the content of log cache database"));
 
-            connectActionCollection(actionCollection());
-
             setHelpMenuEnabled(false);
             (void) new KHelpMenu(this, componentData().applicationData(), false);
 
             // and integrate the part's GUI with the shells
             createGUI(m_part);
-            connectActionCollection(m_part->actionCollection());
 
         } else {
             KMessageBox::error(this, i18n("Could not load the part:\n%1", loader.errorString()));
@@ -164,16 +161,6 @@ kdesvn::kdesvn()
         return;
     }
     setAutoSaveSettings();
-}
-
-void kdesvn::connectActionCollection(KActionCollection *coll)
-{
-    if (!coll) {
-        return;
-    }
-#if 0
-    connect(coll, SIGNAL(actionHovered(QAction*)), this, SLOT(actionHovered(QAction*)));
-#endif
 }
 
 kdesvn::~kdesvn()
@@ -254,11 +241,7 @@ void kdesvn::optionsShowStatusbar()
 {
     // this is all very cut and paste code for showing/hiding the
     // statusbar
-    if (m_statusbarAction->isChecked()) {
-        statusBar()->show();
-    } else {
-        statusBar()->hide();
-    }
+    statusBar()->setVisible(m_statusbarAction->isChecked());
 }
 
 void kdesvn::fileClose()
@@ -385,10 +368,11 @@ void kdesvn::optionsConfigureToolbars()
     saveMainWindowSettings(cg);
 
     // use the standard toolbar editor
-    KEditToolBar dlg(factory());
-    connect(&dlg, SIGNAL(newToolbarConfig()),
+    QPointer<KEditToolBar> dlg(new KEditToolBar(factory()));
+    connect(dlg, SIGNAL(newToolbarConfig()),
             this, SLOT(applyNewToolbarConfig()));
-    dlg.exec();
+    dlg->exec();
+    delete dlg;
 }
 
 /*!
@@ -402,13 +386,14 @@ void kdesvn::applyNewToolbarConfig()
 
 void kdesvn::optionsConfigureKeys()
 {
-    KShortcutsDialog kdlg(KShortcutsEditor::AllActions,
-                          KShortcutsEditor::LetterShortcutsAllowed,
-                          m_part->widget());
-    kdlg.addCollection(actionCollection());
-    kdlg.addCollection(m_part->actionCollection());
+    QPointer<KShortcutsDialog> kdlg(new KShortcutsDialog(KShortcutsEditor::AllActions,
+                                                         KShortcutsEditor::LetterShortcutsAllowed,
+                                                         m_part->widget()));
+    kdlg->addCollection(actionCollection());
+    kdlg->addCollection(m_part->actionCollection());
 
-    kdlg.configure(true);
+    kdlg->configure(true);
+    delete kdlg;
 }
 
 /*!

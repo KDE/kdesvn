@@ -95,14 +95,10 @@ private slots:
     void optionsShowStatusbar();
     void changeStatusbar(const QString &);
     void resetStatusBar();
-#if 0
-    void actionHovered(QAction *action);
-#endif
 
 private:
     void setupAccel();
     void setupActions();
-    void connectActionCollection(KActionCollection *coll);
 
     KActionMenu *m_FileMenu;
     QString m_bookmarkFile;

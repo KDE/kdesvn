@@ -186,19 +186,18 @@ Path::removeLast()
 void
 Path::parsePeg(const QString &pathorurl, Path &_path, svn::Revision &_peg)
 {
+    const QByteArray _buf = pathorurl.toUtf8();
     const char *truepath = 0;
     svn_opt_revision_t pegr;
-    svn_error_t *error = 0;
-    QByteArray _buf = pathorurl.toUtf8();
 
     Pool pool;
-    error = svn_opt_parse_path(&pegr, &truepath, _buf, pool);
+    svn_error_t *error = svn_opt_parse_path(&pegr, &truepath, _buf, pool);
     if (error != 0) {
         throw ClientException(error);
     }
     //qDebug("Path: %s",truepath);
     _peg = svn::Revision(&pegr);
-    _path = Path(truepath);
+    _path = Path(QString::fromUtf8(truepath));
 }
 
 unsigned int

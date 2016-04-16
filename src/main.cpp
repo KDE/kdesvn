@@ -43,7 +43,6 @@ int main(int argc, char **argv)
     KAboutData aboutData(QLatin1String("kdesvn"), i18n("kdesvn"), QString(KDESVN_VERSION), i18n(description),
                          KAboutLicense::GPL, i18n("(C) 2005-2009 Rajko Albrecht"));
     aboutData.addAuthor(i18n("Rajko Albrecht"), i18n("Developer"), QString("ral@alwins-world.de"));
-    aboutData.addAuthor(i18n("Ovidiu-Florin BOGDAN"), i18n("KF5/Qt5 Porting"), QString("ovidiu.b13@gmail.com"));
     aboutData.addAuthor(i18n("Christian Ehrlicher"), i18n("Developer"), QLatin1String("ch.ehrlicher@gmx.de"));
     aboutData.setHomepage("https://projects.kde.org/kdesvn");
     KAboutData::setApplicationData(aboutData);

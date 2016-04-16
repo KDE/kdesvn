@@ -32,12 +32,12 @@
 class CommitModel: public QAbstractItemModel
 {
     Q_OBJECT
+protected:
+    explicit CommitModel(const CommitActionEntries &, const CommitActionEntries &, QObject *parent = 0);
+    void setCommitData(const CommitActionEntries &, const CommitActionEntries &);
 public:
     explicit CommitModel(const svn::CommitItemList &, QObject *parent = 0);
-    explicit CommitModel(const CommitActionEntries &, const CommitActionEntries &, QObject *parent = 0);
-
     void setCommitData(const svn::CommitItemList &);
-    void setCommitData(const CommitActionEntries &, const CommitActionEntries &);
 
     virtual ~CommitModel();
 

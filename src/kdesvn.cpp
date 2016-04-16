@@ -142,10 +142,6 @@ kdesvn::kdesvn()
             tmpAction->setText(i18n("Show database content"));
             tmpAction->setToolTip(i18n("Show the content of log cache database"));
 
-            setHelpMenuEnabled(false);
-            KHelpMenu *helpMenu = new KHelpMenu(this, componentData().applicationData(), false);
-            menuBar()->addMenu(helpMenu->menu());
-
             // and integrate the part's GUI with the shells
             createGUI(m_part);
 

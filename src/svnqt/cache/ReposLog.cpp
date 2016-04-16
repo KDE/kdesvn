@@ -31,9 +31,8 @@
 #include "svnqt/cache/DatabaseException.h"
 #include "svnqt/client_parameter.h"
 
-#include <qsqldatabase.h>
-
 #include <QDataStream>
+#include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QVariant>
@@ -362,10 +361,11 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap &target, const svn::Revision 
         cur.bindValue(0, revision);
 
         if (!cur.exec()) {
-            //qDebug() << cur.lastError().text();
-            throw svn::cache::DatabaseException(QString("Could not retrieve revision values: ") + cur.lastError().text()
-                                                , cur.lastError().number());
-            return false;
+          //qDebug() << cur.lastError().text();
+          throw svn::cache::DatabaseException(QString("Could not retrieve revision values: %1, %2")
+                                              .arg(cur.lastError().text(),
+                                                   cur.lastError().nativeErrorCode()));
+          return false;
         }
         target[revision].revision = revision;
         target[revision].author = bcur.value(1).toString();
@@ -453,7 +453,7 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry &aEntry)
     if (!_q.exec()) {
         //qDebug("Could not insert values: %s",_q.lastError().text().toUtf8().data());
         //qDebug() << _q.lastQuery();
-        throw svn::cache::DatabaseException(QString("_insertLogEntry_0: Could not insert values: ") + _q.lastError().text(), _q.lastError().number());
+        throw svn::cache::DatabaseException(QString("_insertLogEntry_0: Could not insert values: %1, %2").arg(_q.lastError().text(), _q.lastError().nativeErrorCode()));
     }
     _q.prepare(qPathes);
     svn::LogChangePathEntries::ConstIterator cpit = aEntry.changedPaths.begin();
@@ -466,7 +466,7 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry &aEntry)
         if (!_q.exec()) {
             //qDebug("Could not insert values: %s",_q.lastError().text().toUtf8().data());
             //qDebug() << _q.lastQuery();
-            throw svn::cache::DatabaseException(QString("Could not insert values: ") + _q.lastError().text(), _q.lastError().number());
+            throw svn::cache::DatabaseException(QString("Could not insert values: %1, %2").arg(_q.lastError().text(), _q.lastError().nativeErrorCode()));
         }
     }
     if (!aEntry.m_MergedInRevisions.isEmpty()) {
@@ -483,7 +483,7 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry &aEntry)
         if (!_q.exec()) {
             //qDebug("Could not insert values: %s",_q.lastError().text().toUtf8().data());
             //qDebug() << _q.lastQuery();
-            throw svn::cache::DatabaseException(QString("Could not insert values: ") + _q.lastError().text(), _q.lastError().number());
+            throw svn::cache::DatabaseException(QString("Could not insert values: %1, %2").arg(_q.lastError().text(), _q.lastError().nativeErrorCode()));
         }
     }
     return true;
@@ -528,7 +528,7 @@ bool svn::cache::ReposLog::log(const svn::Path &what, const svn::Revision &_star
     if (!_q.exec()) {
         //qDebug("Could not select values: %s",_q.lastError().text().toUtf8().data());
         //qDebug() << _q.lastQuery();
-        throw svn::cache::DatabaseException(QString("Could not select values: ") + _q.lastError().text(), _q.lastError().number());
+        throw svn::cache::DatabaseException(QString("Could not select values: %1, %2").arg(_q.lastError().text(), _q.lastError().nativeErrorCode()));
     }
     while (_q.next()) {
         Q_LLONG revision = _q.value(0).toLongLong();

@@ -83,7 +83,7 @@ RevTreeWidget::~RevTreeWidget()
     QList<int> list = m_Splitter->sizes();
     if (list.count() == 2) {
         Kdesvnsettings::setTree_detail_height(list);
-        Kdesvnsettings::self()->writeConfig();
+        Kdesvnsettings::self()->save();
     }
 }
 

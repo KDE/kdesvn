@@ -207,7 +207,7 @@ void kdesvnpart::slotSshAdd()
 void kdesvnpart::slotLogFollowNodes(bool how)
 {
     Kdesvnsettings::setLog_follows_nodes(how);
-    Kdesvnsettings::self()->writeConfig();
+    Kdesvnsettings::self()->save();
 }
 
 /*!
@@ -216,7 +216,7 @@ void kdesvnpart::slotLogFollowNodes(bool how)
 void kdesvnpart::slotDisplayIgnored(bool how)
 {
     Kdesvnsettings::setDisplay_ignored_files(how);
-    Kdesvnsettings::self()->writeConfig();
+    Kdesvnsettings::self()->save();
     emit settingsChanged();
 }
 
@@ -226,7 +226,7 @@ void kdesvnpart::slotDisplayIgnored(bool how)
 void kdesvnpart::slotDisplayUnkown(bool how)
 {
     Kdesvnsettings::setDisplay_unknown_files(how);
-    Kdesvnsettings::self()->writeConfig();
+    Kdesvnsettings::self()->save();
     emit settingsChanged();
 }
 
@@ -236,14 +236,14 @@ void kdesvnpart::slotDisplayUnkown(bool how)
 void kdesvnpart::slotHideUnchanged(bool how)
 {
     Kdesvnsettings::setHide_unchanged_files(how);
-    Kdesvnsettings::self()->writeConfig();
+    Kdesvnsettings::self()->save();
     emit settingsChanged();
 }
 
 void kdesvnpart::slotEnableNetwork(bool how)
 {
     Kdesvnsettings::setNetwork_on(how);
-    Kdesvnsettings::self()->writeConfig();
+    Kdesvnsettings::self()->save();
     emit settingsChanged();
 }
 
@@ -292,7 +292,7 @@ void kdesvnpart::showAboutApplication()
         about.addAuthor(QLatin1String("Rajko Albrecht"), i18n("Original author and maintainer"), QLatin1String("ral@alwins-world.de"));
         about.addAuthor(QLatin1String("Christian Ehrlicher"), i18n("Developer"), QLatin1String("ch.ehrlicher@gmx.de"));
         about.setHomepage("https://projects.kde.org/kdesvn");
-        about.setProgramIconName("kdesvn");
+        qApp->setWindowIcon(QIcon::fromTheme(QLatin1String("kdesvn")));
         m_aboutDlg = new KAboutApplicationDialog(about);
     }
     if (m_aboutDlg == 0) {

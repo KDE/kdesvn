@@ -613,7 +613,7 @@ void SvnActions::slotMakeCat(const svn::Revision &start, const QString &what, co
     }
     if (it != offers.constEnd()) {
         content.setAutoRemove(false);
-        KRun::run(**it, QList<QUrl>() << QUrl::fromLocalFile(tname), QApplication::activeWindow(), true);
+        KRun::runService(**it, QList<QUrl>() << QUrl::fromLocalFile(tname), QApplication::activeWindow(), true);
         return;
     }
 

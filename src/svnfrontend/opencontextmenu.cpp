@@ -67,7 +67,7 @@ void OpenContextmenu::slotRunService(QAction *act)
 {
     const int idx = act->data().toInt();
     if (idx >= 0 && idx < m_mapPopup.size()) {
-        KRun::run(*m_mapPopup.at(idx), QList<QUrl>() << m_Path, QApplication::activeWindow());
+        KRun::runService(*m_mapPopup.at(idx), QList<QUrl>() << m_Path, QApplication::activeWindow());
     } else {
         slotOpenWith();
     }

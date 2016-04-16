@@ -422,7 +422,7 @@ void BlameDisplay::slotTextCodecChanged(const QString &what)
 {
     if (Kdesvnsettings::locale_for_blame() != what) {
         Kdesvnsettings::setLocale_for_blame(what);
-        Kdesvnsettings::self()->writeConfig();
+        Kdesvnsettings::self()->save();
         LocalizedAnnotatedLine::reset_codec();
 
         QTreeWidgetItemIterator it(m_ui->m_BlameTree);

@@ -97,7 +97,7 @@ QStringList kdesvnd::getActionMenu(const QStringList &urlList)
 QStringList kdesvnd::getActionMenu(const QList<QUrl> &list, bool toplevel)
 {
     QStringList result;
-    Kdesvnsettings::self()->readConfig();
+    Kdesvnsettings::self()->load();
     if (Kdesvnsettings::no_konqueror_contextmenu() || list.isEmpty() ||
             !list.at(0).isLocalFile() ||
             (toplevel && Kdesvnsettings::no_konqueror_toplevelmenu())) {

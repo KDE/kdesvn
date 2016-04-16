@@ -912,7 +912,7 @@ void MainTreeWidget::itemActivated(const QModelIndex &index, bool keypress)
             }
             if (!li.isEmpty() && !li.first()->exec().isEmpty()) {
                 KService::Ptr ptr = li.first();
-                KRun::run(*ptr, lst, QApplication::activeWindow());
+                KRun::runService(*ptr, lst, QApplication::activeWindow());
             } else {
                 KRun::displayOpenWithDialog(lst, QApplication::activeWindow());
             }

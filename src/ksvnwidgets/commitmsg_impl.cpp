@@ -112,7 +112,7 @@ Commitmsg_impl::~Commitmsg_impl()
     QList<int> list = m_MainSplitter->sizes();
     if (!m_hidden && list.count() == 2) {
         Kdesvnsettings::setCommit_splitter_height(list);
-        Kdesvnsettings::self()->writeConfig();
+        Kdesvnsettings::self()->save();
     }
     delete m_CurrentModel;
     delete m_SortModel;

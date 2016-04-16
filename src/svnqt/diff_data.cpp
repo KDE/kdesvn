@@ -123,7 +123,7 @@ QByteArray DiffData::content()
     close();
     QFile fi(QString::fromUtf8(m_outFileName));
     if (!fi.open(QIODevice::ReadOnly)) {
-        throw ClientException(QString("%1 '%2'").arg(fi.errorString()).arg(fi.fileName()));
+        throw ClientException(QString("%1 '%2'").arg(fi.errorString(), fi.fileName()));
     }
 
     QByteArray res = fi.readAll();

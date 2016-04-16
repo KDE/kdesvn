@@ -38,6 +38,7 @@ int main(int argc, char **argv)
     app.setApplicationDisplayName("kdesvn");
     app.setOrganizationDomain("kde.org");
     app.setApplicationVersion(KDESVN_VERSION);
+    app.setWindowIcon(QIcon::fromTheme(QLatin1String("kdesvn")));
 
     KAboutData aboutData(QLatin1String("kdesvn"), i18n("kdesvn"), QString(KDESVN_VERSION), i18n(description),
                          KAboutLicense::GPL, i18n("(C) 2005-2009 Rajko Albrecht"));

@@ -224,6 +224,6 @@ void DiffBrowser::slotTextCodecChanged(const QString &codec)
     if (Kdesvnsettings::locale_for_diff() != codec) {
         Kdesvnsettings::setLocale_for_diff(codec);
         printContent();
-        Kdesvnsettings::self()->writeConfig();
+        Kdesvnsettings::self()->save();
     }
 }

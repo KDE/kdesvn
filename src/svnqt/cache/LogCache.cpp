@@ -23,17 +23,15 @@
  ***************************************************************************/
 #include "LogCache.h"
 
-#include <qdir.h>
-#include <qsql.h>
-#include <qsqldatabase.h>
-
+#include <QDebug>
+#include <QDir>
+#include <QMap>
 #include <QMutex>
 #include <QThreadStorage>
+#include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QVariant>
-#include <qmap.h>
-#include <QtDebug>
 
 #include "svnqt/path.h"
 #include "svnqt/cache/DatabaseException.h"

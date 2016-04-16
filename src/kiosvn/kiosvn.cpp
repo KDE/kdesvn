@@ -191,7 +191,7 @@ void kio_svnProtocol::listSendDirEntry(const svn::DirEntry &direntry)
                        direntry.kind() == svn_node_dir ? true : false,
                        dt.toTime_t(),
                        entry)) {
-        listEntry(entry, false);
+        listEntry(entry);
     }
 }
 
@@ -217,7 +217,6 @@ void kio_svnProtocol::listDir(const QUrl &url)
         extraError(KIO::ERR_SLAVE_DEFINED, ex);
         return;
     }
-    listEntry(KIO::UDSEntry(), true);
     finished();
     qCDebug(KDESVN_LOG) << "Listing finished" << endl;
 }
@@ -1049,13 +1048,13 @@ void kio_svnProtocol::contextProgress(long long int current, long long int max)
 
 bool kio_svnProtocol::supportOverwrite()const
 {
-    Kdesvnsettings::self()->readConfig();
+    Kdesvnsettings::self()->load();
     return Kdesvnsettings::kio_can_overwrite();
 }
 
 bool kio_svnProtocol::useKioprogress()const
 {
-    Kdesvnsettings::self()->readConfig();
+    Kdesvnsettings::self()->load();
     return Kdesvnsettings::display_dockmsg();
 }
 
@@ -1065,7 +1064,7 @@ bool kio_svnProtocol::useKioprogress()const
 QString kio_svnProtocol::getDefaultLog()
 {
     QString res;
-    Kdesvnsettings::self()->readConfig();
+    Kdesvnsettings::self()->load();
     if (Kdesvnsettings::kio_use_standard_logmsg()) {
         res = Kdesvnsettings::kio_standard_logmsg();
     }

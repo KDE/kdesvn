@@ -140,7 +140,7 @@ QUrl &SvnItem_p::kdeName(const svn::Revision &r)
 KFileItem &SvnItem_p::createItem(const svn::Revision &peg)
 {
     if (m_fitem.isNull() || !(peg == lRev)) {
-        m_fitem = KFileItem(KFileItem::Unknown, KFileItem::Unknown, kdeName(peg));
+        m_fitem = KFileItem(kdeName(peg));
     }
     return m_fitem;
 }

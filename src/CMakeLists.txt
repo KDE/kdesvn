@@ -85,6 +85,6 @@ install(TARGETS kdesvn kdesvnaskpass kdesvnpart
 # the resources
 install(FILES kdesvnui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/kdesvn)
 install(FILES kdesvn_part.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/kdesvn)
-install(FILES kdesvn.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(FILES org.kde.kdesvn.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES kdesvnpart.desktop  DESTINATION ${SERVICES_INSTALL_DIR})
 install(FILES kdesvn.notifyrc DESTINATION ${DATA_INSTALL_DIR}/kdesvn)

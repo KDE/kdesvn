@@ -60,8 +60,8 @@ kdesvn is a GUI client for subversion repositories.
 
 %install
   %kf5_makeinstall -C build
-  rm -rf %{buildroot}%{_kde4_servicesdir}/svn*.protocol
-  %suse_update_desktop_file -r org.kde.kdesvn          KDE Subversion Client
+  rm -rf %{buildroot}%{_kf5_servicesdir}/svn*.protocol
+#  %suse_update_desktop_file -r org.kde.kdesvn          KDE Subversion Client
 
 %files
 %defattr(-,root,root)
@@ -72,7 +72,7 @@ kdesvn is a GUI client for subversion repositories.
 %{_kf5_plugindir}/kio_ksvn.so
 %{_kf5_plugindir}/kf5/kded/kdesvnd.so
 %{_kf5_applicationsdir}/org.kde.kdesvn.desktop
-%{_kf5_configkcfgdir}/kdesvn_part.kcfg
+%{_kf5_configkcfgdir}/
 %{_kf5_dbusinterfacesdir}/kf5_org.kde.kdesvnd.xml
 %{_kf5_sharedir}/dbus-1/services/org.kde.kdesvnd.service
 %{_kf5_htmldir}/en/kdesvn

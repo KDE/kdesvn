@@ -184,12 +184,13 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
             int w = qRound(scaleX * dotWidth);
             int h = qRound(scaleY * dotHeight);
             m_xMargin = 50;
-            if (w < QApplication::desktop()->width()) {
-                m_xMargin += (QApplication::desktop()->width() - w) / 2;
+            const QDesktopWidget *dw = QApplication::desktop();
+            if (w < dw->width()) {
+                m_xMargin += (dw->width() - w) / 2;
             }
             m_yMargin = 50;
-            if (h < QApplication::desktop()->height()) {
-                m_yMargin += (QApplication::desktop()->height() - h) / 2;
+            if (h < dw->height()) {
+                m_yMargin += (dw->height() - h) / 2;
             }
             m_Scene = new QGraphicsScene(0.0, 0.0, qreal(w + 2 * m_xMargin), qreal(h + 2 * m_yMargin));
             m_Scene->setBackgroundBrush(Qt::white);

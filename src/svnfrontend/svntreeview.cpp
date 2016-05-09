@@ -102,7 +102,7 @@ void SvnTreeView::dropEvent(QDropEvent *event)
             intern = true;
         }
     }
-    Qt::KeyboardModifiers modifiers = QApplication::keyboardModifiers();
+    Qt::KeyboardModifiers modifiers = QGuiApplication::keyboardModifiers();
 
     QMetaObject::invokeMethod(this, "doDrop",
                               Q_ARG(QList<QUrl>, list),

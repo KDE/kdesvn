@@ -26,7 +26,8 @@
 #include "fronthelpers/cursorstack.h"
 #include "ksvnwidgets/encodingselector_impl.h"
 
-#include <kcolorscheme.h>
+#include <KColorScheme>
+#include <KTextEdit>
 #include <KTreeWidgetSearchLine>
 
 #include <QBrush>
@@ -35,7 +36,6 @@
 #include <QMap>
 #include <QPushButton>
 #include <QTextCodec>
-#include <QTextEdit>
 #include <QTime>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
@@ -369,7 +369,7 @@ void BlameDisplay::showCommit(BlameTreeItem *bti)
     dlg->setWindowTitle(i18n("Log message for revision %1", bti->rev()));
     QVBoxLayout *vbox = new QVBoxLayout(dlg);
 
-    QTextEdit *textEdit = new QTextEdit(dlg);
+    KTextEdit *textEdit = new KTextEdit(dlg);
     vbox->addWidget(textEdit);
     textEdit->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
     textEdit->setReadOnly(true);

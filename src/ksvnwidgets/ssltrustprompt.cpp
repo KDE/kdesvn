@@ -69,7 +69,7 @@ bool SslTrustPrompt::sslTrust(const QString &host,
         text += "<p align=\"center\">";
         text += "<h2>" + i18n("Failure reasons") + "</h2><hline>";
         for (int i = 0; i < reasons.count(); ++i) {
-            text += reasons.at(i)+ "<br><hline>";
+            text += reasons.at(i)+ "<br/><hline>";
         }
         text += "</p>";
     }

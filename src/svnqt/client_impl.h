@@ -469,7 +469,7 @@ public:
      * repository
      *
      * @param params svn::PropertiesParameter holding required values.
-     * Following is used:<br>
+     * Following is used:<br/>
      * <ul>
      * <li> svn::PropertiesParameter::propertyName()
      * <li> svn::PropertiesParameter::propertyValue()

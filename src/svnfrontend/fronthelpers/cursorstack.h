@@ -24,7 +24,7 @@
 #ifndef CURSOR_STACK_H
 #define CURSOR_STACK_H
 
-#include <QApplication>
+#include <QGuiApplication>
 #include <QCursor>
 
 //! Change cursor on stack.
@@ -41,7 +41,7 @@ public:
      */
     explicit CursorStack(Qt::CursorShape c = Qt::WaitCursor)
     {
-        QApplication::setOverrideCursor(QCursor(c));
+        QGuiApplication::setOverrideCursor(QCursor(c));
     }
     //! Destructor.
     /*!
@@ -49,7 +49,7 @@ public:
      */
     ~CursorStack()
     {
-        QApplication::restoreOverrideCursor();
+        QGuiApplication::restoreOverrideCursor();
     }
 };
 

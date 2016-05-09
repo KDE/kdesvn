@@ -538,7 +538,7 @@ QString RevGraphView::toolTip(const QString &_nodename, bool full)const
         } else {
             for (int j = 0; j < sp.count(); ++j) {
                 if (j > 0) {
-                    sm += QLatin1String("<br>");
+                    sm += QLatin1String("<br/>");
                 }
                 sm += sp[j];
             }

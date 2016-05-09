@@ -17,17 +17,14 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
-#include <qregexp.h>
 #include <KAboutData>
-
-
-#include <kpassworddialog.h>
-#include <kwallet.h>
 #include <KLocalizedString>
+#include <KPasswordDialog>
+#include <KWallet>
+
 #include <QPointer>
 #include <QTextStream>
 #include <QApplication>
-#include <KAboutData>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 

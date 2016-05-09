@@ -24,6 +24,7 @@
 
 #include <KLocalizedString>
 
+#include <QApplication>
 #include <QDialogButtonBox>
 #include <QTimer>
 #include <QLabel>

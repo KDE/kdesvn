@@ -1347,7 +1347,7 @@ void MainTreeWidget::slotDisplayLastDiff()
     SvnItem *kitem = Selected();
     QString what;
     if (isWorkingCopy()) {
-        chdir(baseUri().toLocal8Bit());
+        QDir::setCurrent(baseUri());
     }
     svn::Revision end = svn::Revision::PREV;
     if (!kitem) {
@@ -1402,7 +1402,7 @@ void MainTreeWidget::simpleWcDiff(SvnItem *kitem, const svn::Revision &first, co
 {
     QString what;
     if (isWorkingCopy()) {
-        chdir(baseUri().toLocal8Bit());
+        QDir::setCurrent(baseUri());
     }
 
     if (!kitem) {
@@ -1419,7 +1419,7 @@ void MainTreeWidget::slotDiffRevisions()
     SvnItem *k = Selected();
     QString what;
     if (isWorkingCopy()) {
-        chdir(baseUri().toLocal8Bit());
+        QDir::setCurrent(baseUri());
     }
 
     if (!k) {
@@ -1452,14 +1452,13 @@ void MainTreeWidget::slotDiffPathes()
         return;
     }
 
-    SvnItem *k1, *k2;
-    k1 = lst[0];
-    k2 = lst[1];
+    SvnItem *k1 = lst.at(0);
+    SvnItem *k2 = lst.at(1);
     QString w1, w2;
     svn::Revision r1;
 
     if (isWorkingCopy()) {
-        chdir(baseUri().toLocal8Bit());
+        QDir::setCurrent(baseUri());
         w1 = relativePath(k1);
         w2 = relativePath(k2);
         r1 = svn::Revision::WORKING;

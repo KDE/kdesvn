@@ -936,7 +936,7 @@ bool SvnActions::changeProperties(const svn::PropertiesMap &setList, const QStri
         svn::PropertiesParameter params;
         params.path(path).depth(depth);
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
-                     i18n("Applying properties"), i18n("<center>Applying<br>hit cancel for abort</center>"));
+                     i18n("Applying properties"), i18n("<center>Applying<br/>hit cancel for abort</center>"));
         connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
         // propertyValue == QString::null -> delete property
         for (int pos = 0; pos < delList.size(); ++pos) {
@@ -1551,7 +1551,7 @@ void SvnActions::makeAdd(bool rec)
     items.reserve(lst.size());
     Q_FOREACH(const SvnItem *cur, lst) {
         if (cur->isVersioned()) {
-            KMessageBox::error(m_Data->m_ParentList->realWidget(), i18n("<center>The entry<br>%1<br>is versioned - break.</center>",
+            KMessageBox::error(m_Data->m_ParentList->realWidget(), i18n("<center>The entry<br/>%1<br/>is versioned - break.</center>",
                                                                         cur->fullName()));
             return;
         }
@@ -1757,7 +1757,7 @@ void SvnActions::slotRevert()
         displist.reserve(lst.size());
         Q_FOREACH(const SvnItem *cur, lst) {
             if (!cur->isVersioned()) {
-                KMessageBox::error(m_Data->m_ParentList->realWidget(), i18n("<center>The entry<br>%1<br>is not versioned - break.</center>", cur->fullName()));
+                KMessageBox::error(m_Data->m_ParentList->realWidget(), i18n("<center>The entry<br/>%1<br/>is not versioned - break.</center>", cur->fullName()));
                 return;
             }
             displist.append(cur->fullName());

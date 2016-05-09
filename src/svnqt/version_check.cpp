@@ -44,7 +44,7 @@ bool Version::client_version_compatible()
 
 const QString Version::linked_version()
 {
-    return QString(SVN_VERSION);
+    return QLatin1String(SVN_VERSION);
 }
 
 const QString Version::running_version()
@@ -52,7 +52,7 @@ const QString Version::running_version()
     static QString curr_version_string;
     if (curr_version_string.isEmpty()) {
         curr_version_string =
-            QString("%1.%2.%3.%4").arg(svn_client_version()->major).arg(svn_client_version()->minor)
+            QString(QLatin1String("%1.%2.%3.%4")).arg(svn_client_version()->major).arg(svn_client_version()->minor)
             .arg(svn_client_version()->patch).arg(QString::fromUtf8(svn_client_version()->tag));
     }
     return curr_version_string;

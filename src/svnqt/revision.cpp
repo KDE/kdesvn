@@ -91,14 +91,14 @@ Revision::assign(const QString &revstring)
     if (revstring.isEmpty()) {
         return;
     }
-    if (revstring == "WORKING") {
+    if (revstring == QLatin1String("WORKING")) {
         m_revision.kind = WORKING;
-    } else if (revstring == "BASE") {
+    } else if (revstring == QLatin1String("BASE")) {
         m_revision.kind = BASE;
-    } else if (revstring == "START") {
+    } else if (revstring == QLatin1String("START")) {
         m_revision.kind = Revision::START;
         m_revision.value.number = 0;
-    } else if (revstring == "PREV") {
+    } else if (revstring == QLatin1String("PREV")) {
         m_revision.kind = Revision::PREV;
     } else if (!revstring.isNull()) {
         Pool pool;
@@ -177,23 +177,23 @@ QString Revision::toString()const
         value.sprintf("%li", m_revision.value.number);
         break;
     case svn_opt_revision_date:
-        value = DateTime(m_revision.value.date).toString("{yyyy-MM-dd}");
+        value = DateTime(m_revision.value.date).toString(QLatin1String("{yyyy-MM-dd}"));
         break;
     case svn_opt_revision_base:
-        value = "BASE";
+        value = QLatin1String("BASE");
         break;
     case svn_opt_revision_head:
-        value = "HEAD";
+        value = QLatin1String("HEAD");
         break;
     case svn_opt_revision_working:
-        value = "WORKING";
+        value = QLatin1String("WORKING");
         break;
     case svn_opt_revision_previous:
-        value = "PREVIOUS";
+        value = QLatin1String("PREVIOUS");
         break;
     case svn_opt_revision_unspecified:
     default:
-        value = "-1";
+        value =QLatin1String( "-1");
         break;
     }
     return value;

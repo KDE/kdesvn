@@ -140,13 +140,13 @@ svn_client_ctx_t *SvnStream::context()
 
 long SvnStream::write(const char *, const unsigned long)
 {
-    m_Data->m_LastError = "Write not supported with that stream";
+    m_Data->m_LastError = QLatin1String("Write not supported with that stream");
     return -1;
 }
 
 long SvnStream::read(char *, const unsigned long)
 {
-    m_Data->m_LastError = "Read not supported with that stream";
+    m_Data->m_LastError = QLatin1String("Read not supported with that stream");
     return -1;
 }
 

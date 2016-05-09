@@ -79,11 +79,11 @@ Client_impl::url2Revision(const QString &revstring,
 
 void Client_impl::url2Revision(const QString &revstring, Revision &start)
 {
-    if (revstring == "WORKING") {
+    if (revstring == QLatin1String("WORKING")) {
         start = Revision::WORKING;
-    } else if (revstring == "BASE") {
+    } else if (revstring == QLatin1String("BASE")) {
         start = Revision::BASE;
-    } else if (revstring == "START") {
+    } else if (revstring == QLatin1String("START")) {
         start = Revision::START;
     } else {
         Revision end;

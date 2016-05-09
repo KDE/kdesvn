@@ -165,7 +165,7 @@ svn_error_t *RepositoryData::CreateOpen(const CreateRepoParameter &params)
 {
     Close();
     const char *_type;
-    if (params.fstype().toLower() == "bdb") {
+    if (params.fstype().compare(QLatin1String("bdb"), Qt::CaseInsensitive) == 0) {
         _type = "bdb";
     } else {
         _type = "fsfs";

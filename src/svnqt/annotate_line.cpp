@@ -78,15 +78,15 @@ AnnotateLine::AnnotateLine(qlonglong line_no,
     , m_merge_revision(merge_revision)
     , m_merge_path(merge_path ? merge_path : "")
 {
-    QString _s = revisionproperties["svn:author"];
+    QString _s = revisionproperties[QLatin1String("svn:author")];
     m_author = _s.toUtf8();
-    _s = revisionproperties["svn:date"];
+    _s = revisionproperties[QLatin1String("svn:date")];
     if (!_s.isEmpty()) {
         m_date = QDateTime::fromString(_s, Qt::ISODate);
     }
-    _s = mergeproperties["svn:author"];
+    _s = mergeproperties[QLatin1String("svn:author")];
     m_merge_author = _s.toUtf8();
-    _s = mergeproperties["svn:date"];
+    _s = mergeproperties[QLatin1String("svn:date")];
     if (!_s.isEmpty()) {
         m_merge_date = QDateTime::fromString(_s, Qt::ISODate);
     }

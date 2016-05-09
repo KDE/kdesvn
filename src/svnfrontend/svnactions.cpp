@@ -1647,7 +1647,7 @@ void SvnActions::CheckoutExport(const QUrl &what, bool _exp, bool urlisTarget)
         bool openit = ptr->openAfterJob();
         bool ignoreExternal = ptr->ignoreExternals();
         if (!ptr->reposURL().isValid()) {
-            KMessageBox::error(QApplication::activeModalWidget(), tr("Invalid url given!"),
+            KMessageBox::error(QApplication::activeModalWidget(), i18n("Invalid url given!"),
                                _exp ? i18n("Export repository") : i18n("Checkout a repository"));
             delete dlg;
             return;
@@ -1892,7 +1892,7 @@ bool SvnActions::makeSwitch(const QString &path, const QUrl &what)
     bool done = false;
     if (dlg->exec() == QDialog::Accepted) {
         if (!ptr->reposURL().isValid()) {
-            KMessageBox::error(QApplication::activeModalWidget(), tr("Invalid url given!"),
+            KMessageBox::error(QApplication::activeModalWidget(), i18n("Invalid url given!"),
                                i18n("Switch URL"));
             delete dlg;
             return false;

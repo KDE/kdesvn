@@ -1993,7 +1993,7 @@ void MainTreeWidget::slotRelocate()
     bool done = false;
     if (dlg->exec() == QDialog::Accepted) {
         if (!ptr->reposURL().isValid()) {
-            KMessageBox::error(QApplication::activeModalWidget(), tr("Invalid url given!"),
+            KMessageBox::error(QApplication::activeModalWidget(), i18n("Invalid url given!"),
                                i18n("Relocate path %1", path));
             delete dlg;
             return;

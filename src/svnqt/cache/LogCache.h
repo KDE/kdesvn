@@ -49,7 +49,6 @@ protected:
     LogCache();
     static LogCache *mSelf;
     QString m_BasePath;
-    static QString s_CACHE_FOLDER;
     void setupCachePath();
     void setupMainDb();
     int databaseVersion()const;

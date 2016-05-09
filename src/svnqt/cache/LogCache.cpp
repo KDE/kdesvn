@@ -36,11 +36,11 @@
 #include "svnqt/path.h"
 #include "svnqt/cache/DatabaseException.h"
 
-#define SQLTYPE "QSQLITE"
-#define SQLMAIN "logmain-logcache"
-#define SQLMAINTABLE "logdb"
-#define SQLREPOSPARAMETER "repoparameter"
-#define SQLSTATUS QString("logstatus")
+static const QLatin1String SQLTYPE("QSQLITE");
+static const QLatin1String SQLMAIN("logmain-logcache");
+static const QLatin1String SQLMAINTABLE("logdb");
+static const QLatin1String SQLREPOSPARAMETER("repoparameter");
+static const QLatin1String SQLSTATUS("logstatus");
 
 namespace svn
 {
@@ -109,17 +109,17 @@ public:
         }
     }
 
-    QString idToPath(const QString &id)
+    QString idToPath(const QString &id) const
     {
-        return m_BasePath + '/' + id + ".db";
+        return m_BasePath + QLatin1Char('/') + id + QLatin1String(".db");
     }
 
     bool deleteRepository(const QString &aRepository)
     {
-        QString id = getReposId(aRepository);
+        const QString id = getReposId(aRepository);
 
-        static QString s_q(QString("delete from ") + QString(SQLREPOSPARAMETER) + " where id = ?");
-        static QString r_q(QString("delete from ") + QString(SQLMAINTABLE) + " where id = ?");
+        static const QString s_q(QLatin1String("delete from ") + SQLREPOSPARAMETER + QLatin1String(" where id = ?"));
+        static const QString r_q(QLatin1String("delete from ") + SQLMAINTABLE + QLatin1String(" where id = ?"));
         QSqlDatabase mainDB = getMainDB();
         if (!mainDB.isValid()) {
             qWarning("Failed to open main database.");
@@ -167,51 +167,48 @@ public:
         QSqlQuery _q(aDb);
         QStringList list = aDb.tables();
 
-        if (list.indexOf("logentries") == -1) {
-            aDb.transaction();
-            _q.exec("CREATE TABLE \"logentries\" (\"idx\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \"revision\" INTEGER UNIQUE,\"date\" INTEGER,\"author\" TEXT, \"message\" TEXT)");
-            aDb.commit();
+        aDb.transaction();
+        if (list.indexOf(QLatin1String("logentries")) == -1) {
+            _q.exec(QLatin1String("CREATE TABLE \"logentries\" (\"idx\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \"revision\" INTEGER UNIQUE,\"date\" INTEGER,\"author\" TEXT, \"message\" TEXT)"));
         }
-        if (list.indexOf("changeditems") == -1) {
-            aDb.transaction();
-            _q.exec("CREATE TABLE \"changeditems\" (\"idx\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \"revision\" INTEGER,\"changeditem\" TEXT,\"action\" TEXT,\"copyfrom\" TEXT,\"copyfromrev\" INTEGER, UNIQUE(revision,changeditem,action))");
-            aDb.commit();
+        if (list.indexOf(QLatin1String("changeditems")) == -1) {
+            _q.exec(QLatin1String("CREATE TABLE \"changeditems\" (\"idx\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \"revision\" INTEGER,\"changeditem\" TEXT,\"action\" TEXT,\"copyfrom\" TEXT,\"copyfromrev\" INTEGER, UNIQUE(revision,changeditem,action))"));
         }
-        if (list.indexOf("mergeditems") == -1) {
-            aDb.transaction();
-            _q.exec("CREATE TABLE \"mergeditems\" (\"revision\" INTEGER,\"mergeditems\" TEXT, PRIMARY KEY(revision))");
-            aDb.commit();
+        if (list.indexOf(QLatin1String("mergeditems")) == -1) {
+            _q.exec(QLatin1String("CREATE TABLE \"mergeditems\" (\"revision\" INTEGER,\"mergeditems\" TEXT, PRIMARY KEY(revision))"));
         }
-        if (list.indexOf("dbversion") == -1) {
-            aDb.transaction();
-            _q.exec("CREATE TABLE \"dbversion\" (\"version\" INTEGER)");
+        if (list.indexOf(QLatin1String("dbversion")) == -1) {
+            _q.exec(QLatin1String("CREATE TABLE \"dbversion\" (\"version\" INTEGER)"));
             qDebug() << _q.lastError();
-            _q.exec("insert into \"dbversion\" (version) values(0)");
-            aDb.commit();
+            _q.exec(QLatin1String("insert into \"dbversion\" (version) values(0)"));
         }
+        aDb.commit();
         list = aDb.tables();
-        if (list.indexOf("logentries") == -1 || list.indexOf("changeditems") == -1 || list.indexOf("mergeditems") == -1 || list.indexOf("dbversion") == -1) {
+        if (list.indexOf(QLatin1String("logentries")) == -1 ||
+            list.indexOf(QLatin1String("changeditems")) == -1 ||
+            list.indexOf(QLatin1String("mergeditems")) == -1 ||
+            list.indexOf(QLatin1String("dbversion")) == -1) {
             qDebug() << "lists: " << list;
             return false;
         }
-        _q.exec("SELECT VERSION from dbversion limit 1");
+        _q.exec(QLatin1String("SELECT VERSION from dbversion limit 1"));
         if (_q.lastError().type() == QSqlError::NoError && _q.next()) {
             int version = _q.value(0).toInt();
             if (version == 0) {
-                _q.exec("create index if not exists main.authorindex on logentries(author)");
+                _q.exec(QLatin1String("create index if not exists main.authorindex on logentries(author)"));
                 if (_q.lastError().type() != QSqlError::NoError) {
                     qDebug() << _q.lastError();
                 } else {
-                    _q.exec("UPDATE dbversion SET VERSION=1");
+                    _q.exec(QLatin1String("UPDATE dbversion SET VERSION=1"));
                 }
                 ++version;
             }
             if (version == 1) {
-                _q.exec("create index if not exists main.dateindex on logentries(date)");
+                _q.exec(QLatin1String("create index if not exists main.dateindex on logentries(date)"));
                 if (_q.lastError().type() != QSqlError::NoError) {
                     qDebug() << _q.lastError();
                 } else {
-                    _q.exec("UPDATE dbversion SET VERSION=2");
+                    _q.exec(QLatin1String("UPDATE dbversion SET VERSION=2"));
                 }
                 ++version;
             }
@@ -229,7 +226,7 @@ public:
 
         _mdb.transaction();
         QSqlQuery query(_mdb);
-        QString q(QLatin1String("insert into ") + QLatin1String(SQLMAINTABLE) + QLatin1String(" (reposroot) VALUES('") + reposroot.path() + QLatin1String("')"));
+        QString q(QLatin1String("insert into ") + SQLMAINTABLE + QLatin1String(" (reposroot) VALUES('") + reposroot.path() + QLatin1String("')"));
 
         if (!query.exec(q)) {
             return QString();
@@ -246,11 +243,11 @@ public:
         }
         if (!db.isEmpty()) {
             QString fulldb = idToPath(db);
-            QSqlDatabase _db = QSqlDatabase::addDatabase(SQLTYPE, "tmpdb");
+            QSqlDatabase _db = QSqlDatabase::addDatabase(SQLTYPE, QLatin1String("tmpdb"));
             _db.setDatabaseName(fulldb);
             if (!checkReposDb(_db)) {
             }
-            QSqlDatabase::removeDatabase("tmpdb");
+            QSqlDatabase::removeDatabase(QLatin1String("tmpdb"));
         }
         return db;
     }
@@ -293,7 +290,7 @@ public:
         int i = 0;
         QString _key = dbFile;
         while (QSqlDatabase::contains(_key)) {
-            _key = QString("%1-%2").arg(dbFile).arg(i++);
+            _key = QString(QLatin1String("%1-%2")).arg(dbFile).arg(i++);
         }
         _db = QSqlDatabase::addDatabase(SQLTYPE, _key);
         QString fulldb = idToPath(dbFile);
@@ -312,11 +309,10 @@ public:
             unsigned i = 0;
             QString _key = SQLMAIN;
             while (QSqlDatabase::contains(_key)) {
-                _key.sprintf("%s-%i", SQLMAIN, i++);
+                _key = QString(QLatin1String("%s-%i")).arg(SQLMAIN).arg(i++);
             }
-
             QSqlDatabase db = QSqlDatabase::addDatabase(SQLTYPE, _key);
-            db.setDatabaseName(m_BasePath + "/maindb.db");
+            db.setDatabaseName(m_BasePath + QLatin1String("/maindb.db"));
             if (db.open()) {
                 m_mainDB.setLocalData(new ThreadDBStore);
                 m_mainDB.localData()->key = _key;
@@ -336,26 +332,23 @@ public:
     static const QString s_reposSelect;
 };
 
-QString LogCache::s_CACHE_FOLDER = "logcache";
-const QString LogCacheData::s_reposSelect = QString("SELECT id from ") + QString(SQLMAINTABLE) + QString(" where reposroot=? ORDER by id DESC");
+const QString LogCacheData::s_reposSelect = QLatin1String("SELECT id from ") + SQLMAINTABLE + QLatin1String(" where reposroot=? ORDER by id DESC");
 
 /*!
     \fn svn::cache::LogCache::LogCache()
  */
 LogCache::LogCache()
+    : m_BasePath(QDir::homePath() + QLatin1String("/.svnqt"))
 {
-    m_BasePath = QDir::homePath() + "/.svnqt";
     setupCachePath();
 }
 
 LogCache::LogCache(const QString &aBasePath)
 {
-    if (mSelf) {
-        delete mSelf;
-    }
+    delete mSelf;
     mSelf = this;
     if (aBasePath.isEmpty()) {
-        m_BasePath = QDir::homePath() + "/.svnqt";
+        m_BasePath = QDir::homePath() + QLatin1String("/.svnqt");
     } else {
         m_BasePath = aBasePath;
     }
@@ -377,7 +370,7 @@ void LogCache::setupCachePath()
     if (!d.exists(m_BasePath)) {
         d.mkdir(m_BasePath);
     }
-    m_BasePath = m_BasePath + '/' + s_CACHE_FOLDER;
+    m_BasePath = m_BasePath + QLatin1Char('/') + QLatin1String("logcache");
     if (!d.exists(m_BasePath)) {
         d.mkdir(m_BasePath);
     }
@@ -397,8 +390,8 @@ void LogCache::setupMainDb()
         QSqlQuery q(mainDB);
         if (list.indexOf(SQLSTATUS) == -1) {
             mainDB.transaction();
-            if (q.exec("CREATE TABLE \"" + SQLSTATUS + "\" (\"key\" TEXT PRIMARY KEY NOT NULL, \"value\" TEXT);")) {
-                q.exec("INSERT INTO \"" + SQLSTATUS + "\" (key,value) values(\"version\",\"0\");");
+            if (q.exec(QLatin1String("CREATE TABLE \"") + SQLSTATUS + QLatin1String("\" (\"key\" TEXT PRIMARY KEY NOT NULL, \"value\" TEXT);"))) {
+                q.exec(QLatin1String("INSERT INTO \"") + SQLSTATUS + QLatin1String("\" (key,value) values(\"version\",\"0\");"));
             }
             mainDB.commit();
         }
@@ -406,7 +399,7 @@ void LogCache::setupMainDb()
         if (version == 0) {
             mainDB.transaction();
             if (list.indexOf(SQLMAINTABLE) == -1) {
-                q.exec("CREATE TABLE IF NOT EXISTS \"" + QString(SQLMAINTABLE) + "\" (\"reposroot\" TEXT,\"id\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL);");
+                q.exec(QLatin1String("CREATE TABLE IF NOT EXISTS \"") + SQLMAINTABLE + QLatin1String("\" (\"reposroot\" TEXT,\"id\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL);"));
             }/* else {
                 q.exec("CREATE TABLE IF NOT EXISTS \""+QString(SQLMAINTABLE)+"new\" (\"reposroot\" TEXT,\"id\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL);");
                 q.exec("insert into \""+QString(SQLMAINTABLE)+"new\" select \"reposroot\",\"id\" from \""+QString(SQLMAINTABLE)+"\");");
@@ -417,7 +410,8 @@ void LogCache::setupMainDb()
         }
         if (version == 1) {
             mainDB.transaction();
-            if (!q.exec("CREATE TABLE IF NOT EXISTS \"" + QString(SQLREPOSPARAMETER) + "\" (\"id\" INTEGER NOT NULL, \"parameter\" TEXT, \"value\" TEXT, PRIMARY KEY(\"id\",\"parameter\"));")) {
+            if (!q.exec(QLatin1String("CREATE TABLE IF NOT EXISTS \"") + SQLREPOSPARAMETER +
+                        QLatin1String("\" (\"id\" INTEGER NOT NULL, \"parameter\" TEXT, \"value\" TEXT, PRIMARY KEY(\"id\",\"parameter\"));"))) {
                 qDebug() << "Error create: " << q.lastError().text() << "(" << q.lastQuery() << ")";
             }
             mainDB.commit();
@@ -433,7 +427,7 @@ void LogCache::databaseVersion(int newversion)
     if (!mainDB.isValid()) {
         return;
     }
-    static QString _qs("update \"" + SQLSTATUS + "\" SET value = ? WHERE \"key\" = \"version\"");
+    static const QString _qs(QLatin1String("update \"") + SQLSTATUS + QLatin1String("\" SET value = ? WHERE \"key\" = \"version\""));
     QSqlQuery cur(mainDB);
     cur.prepare(_qs);
     cur.bindValue(0, newversion);
@@ -448,7 +442,7 @@ int LogCache::databaseVersion()const
     if (!mainDB.isValid()) {
         return -1;
     }
-    static QString _qs("select value from \"" + SQLSTATUS + "\" WHERE \"key\" = \"version\"");
+    static const QString _qs(QLatin1String("select value from \"") + SQLSTATUS + QLatin1String("\" WHERE \"key\" = \"version\""));
     QSqlQuery cur(mainDB);
     cur.prepare(_qs);
     if (!cur.exec()) {
@@ -468,7 +462,10 @@ QVariant LogCache::getRepositoryParameter(const svn::Path &repository, const QSt
     if (!mainDB.isValid()) {
         return QVariant();
     }
-    static QString qs("select \"value\",\"repoparameter\".\"parameter\" as \"key\" from \"" + QString(SQLREPOSPARAMETER) + "\" INNER JOIN \"" + QString(SQLMAINTABLE) + "\" ON (\"" + QString(SQLREPOSPARAMETER) + "\".id = \"" + QString(SQLMAINTABLE) + "\".id and \"" + QString(SQLMAINTABLE) + "\".reposroot = ?)  WHERE \"parameter\" = ?;");
+    static const QString qs(QLatin1String("select \"value\",\"repoparameter\".\"parameter\" as \"key\" from \"") + SQLREPOSPARAMETER +
+                            QLatin1String("\" INNER JOIN \"") + SQLMAINTABLE + QLatin1String("\" ON (\"") + SQLREPOSPARAMETER +
+                            QLatin1String("\".id = \"") + SQLMAINTABLE + QLatin1String("\".id and \"") + SQLMAINTABLE +
+                            QLatin1String("\".reposroot = ?)  WHERE \"parameter\" = ?;"));
     QSqlQuery cur(mainDB);
     cur.prepare(qs);
     cur.bindValue(0, repository.native());
@@ -493,8 +490,10 @@ bool LogCache::setRepositoryParameter(const svn::Path &repository, const QString
     if (id.isEmpty()) {
         return false;
     }
-    static QString qs("INSERT OR REPLACE INTO \"" + QString(SQLREPOSPARAMETER) + "\" (\"id\",\"parameter\",\"value\") values (\"%1\",\"%2\",?);");
-    static QString dqs("DELETE FROM \"" + QString(SQLREPOSPARAMETER) + "\" WHERE \"id\"=? and \"parameter\" = ?");
+    static const QString qs(QLatin1String("INSERT OR REPLACE INTO \"") + SQLREPOSPARAMETER +
+                            QLatin1String("\" (\"id\",\"parameter\",\"value\") values (\"%1\",\"%2\",?);"));
+    static const QString dqs(QLatin1String("DELETE FROM \"") + SQLREPOSPARAMETER +
+                             QLatin1String("\" WHERE \"id\"=? and \"parameter\" = ?"));
     mainDB.transaction();
     QSqlQuery cur(mainDB);
     if (value.isValid()) {
@@ -550,7 +549,7 @@ QSqlDatabase  svn::cache::LogCache::reposDb(const QString &aRepository)
  */
 QStringList svn::cache::LogCache::cachedRepositories()const
 {
-    static QString s_q(QString("select \"reposroot\" from ") + QString(SQLMAINTABLE) + QString(" order by reposroot"));
+    static const QString s_q(QLatin1String("select \"reposroot\" from ") + SQLMAINTABLE + QLatin1String(" order by reposroot"));
     QSqlDatabase mainDB = m_CacheData->getMainDB();
     QStringList _res;
     if (!mainDB.isValid()) {
@@ -560,7 +559,7 @@ QStringList svn::cache::LogCache::cachedRepositories()const
     QSqlQuery cur(mainDB);
     cur.prepare(s_q);
     if (!cur.exec()) {
-        throw svn::cache::DatabaseException(QString("Could not retrieve values: ") + cur.lastError().text());
+        throw svn::cache::DatabaseException(QLatin1String("Could not retrieve values: ") + cur.lastError().text());
         return _res;
     }
     while (cur.next()) {

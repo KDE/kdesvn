@@ -96,7 +96,7 @@ QStringList ReposConfigPrivate::deserializeList(const QByteArray &data)
     bool quoted = false;
     for (int p = 0; p < data.length(); p++) {
         if (quoted) {
-            val += data[p];
+            val += QLatin1Char(data[p]);
             quoted = false;
         } else if (data[p] == '\\') {
             quoted = true;
@@ -106,7 +106,7 @@ QStringList ReposConfigPrivate::deserializeList(const QByteArray &data)
             val.clear();
             val.reserve(data.size() - p);
         } else {
-            val += data[p];
+            val += QLatin1Char(data[p]);
         }
     }
     value.append(val);

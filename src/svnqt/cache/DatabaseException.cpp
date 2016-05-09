@@ -30,6 +30,6 @@ svn::cache::DatabaseException::DatabaseException(const QString &msg, int aNumber
     : Exception(msg), m_number(aNumber)
 {
     if (aNumber > -1) {
-        setMessage(QString("(Code %1) %2").arg(aNumber).arg(msg));
+        setMessage(QString(QLatin1Literal("(Code %1) %2")).arg(aNumber).arg(msg));
     }
 }

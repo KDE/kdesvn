@@ -107,10 +107,8 @@ PwStorage *PwStorage::self()
     \fn PwStorage::PwStorageData()
  */
 PwStorage::PwStorage()
-    : QObject()
-{
-    mData = new PwStorageData;
-}
+    : mData(new PwStorageData)
+{}
 
 /*!
     \fn PwStorage::~PwStorageData()

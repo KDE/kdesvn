@@ -20,31 +20,17 @@
 #include "commandline.h"
 #include "kdesvn_part.h"
 #include "commandline_part.h"
-#include <QString>
 #include <KPluginFactory>
 #include <KPluginLoader>
 #include <KHelpClient>
-
-class CommandLineData
-{
-public:
-    CommandLineData(): cmd() {}
-    virtual ~CommandLineData() {}
-
-    void displayHelp();
-
-    QString cmd;
-};
+#include <QCommandLineParser>
 
 CommandLine::CommandLine(const QCommandLineParser *parser)
     : m_parser(parser)
-    , m_data(new CommandLineData)
 {}
 
 CommandLine::~CommandLine()
-{
-    delete m_data;
-}
+{}
 
 int CommandLine::exec()
 {
@@ -52,12 +38,12 @@ int CommandLine::exec()
         return -1;
     }
     if (m_parser->positionalArguments().count() < 2) {
-        m_data->cmd = QLatin1String("help");
+        cmd = QLatin1String("help");
     } else {
-        m_data->cmd = m_parser->positionalArguments().at(1);
+        cmd = m_parser->positionalArguments().at(1);
     }
-    if (m_data->cmd == QLatin1String("help")) {
-        m_data->displayHelp();
+    if (cmd == QLatin1String("help")) {
+        displayHelp();
         return 0;
     }
 #ifdef EXTRA_KDE_LIBPATH
@@ -66,7 +52,7 @@ int CommandLine::exec()
     KPluginLoader loader("kdesvnpart");
     KPluginFactory *factory = loader.factory();
     if (factory) {
-        QObject *_p = (factory->create<QObject>("commandline_part", this));
+        QObject *_p = (factory->create<QObject>("commandline_part", nullptr));
         if (!_p || QString::fromLatin1(_p->metaObject()->className()) != QLatin1String("commandline_part")) {
             return 0;
         }
@@ -77,7 +63,7 @@ int CommandLine::exec()
     return 0;
 }
 
-void CommandLineData::displayHelp()
+void CommandLine::displayHelp()
 {
-    KHelpClient::invokeHelp("kdesvn-commandline", "kdesvn");
+    KHelpClient::invokeHelp(QLatin1String("kdesvn-commandline"), QLatin1String("kdesvn"));
 }

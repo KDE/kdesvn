@@ -589,7 +589,7 @@ void MainTreeWidget::setupActions()
     tmp_action = add_action("make_svn_remove_left", i18n("Delete folder"), QKeySequence(), QIcon::fromTheme("kdesvndelete"), this, SLOT(slotLeftDelete()));
     tmp_action->setToolTip(i18n("Deleting selected directories from repository"));
     tmp_action->setIconText(i18n("Delete"));
-    tmp_action  = add_action("make_svn_revert", i18n("Revert current changes"), QKeySequence(), QIcon::fromTheme("kdesvnreverse"), m_Data->m_Model->svnWrapper(), SLOT(slotRevert()));
+    tmp_action  = add_action("make_svn_revert", i18n("Revert current changes"), QKeySequence(Qt::CTRL | Qt::Key_R), QIcon::fromTheme("kdesvnreverse"), m_Data->m_Model->svnWrapper(), SLOT(slotRevert()));
 
     tmp_action = add_action("make_resolved", i18n("Mark resolved"), QKeySequence(), QIcon::fromTheme("kdesvnresolved"), this, SLOT(slotResolved()));
     tmp_action->setToolTip(i18n("Marking files or dirs resolved"));
@@ -818,11 +818,10 @@ QAction *MainTreeWidget::add_action(const QString &actionname,
                                     const char *slot)
 {
     QAction *tmp_action = 0;
-    tmp_action = m_Data->m_Collection->addAction(actionname);
+    tmp_action = m_Data->m_Collection->addAction(actionname, target, slot);
     tmp_action->setText(text);
     m_Data->m_Collection->setDefaultShortcut(tmp_action, sequ);
     tmp_action->setIcon(icon);
-    connect(tmp_action, SIGNAL(triggered()), target, slot);
     return tmp_action;
 }
 

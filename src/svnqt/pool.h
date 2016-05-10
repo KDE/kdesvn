@@ -48,9 +48,11 @@ public:
      *
      * @param parent NULL -> global pool
      */
-    Pool(apr_pool_t *parent = (apr_pool_t *)0);    //krazy:exclude=explicit
+    Pool(apr_pool_t *parent = nullptr);    //krazy:exclude=explicit
+    Pool &operator=(const Pool &) = delete;
+    Pool(const Pool &) = delete;
 
-    virtual ~ Pool();
+    ~Pool();
 
     /**
      * @return apr handle to the pool
@@ -73,10 +75,6 @@ public:
 private:
     apr_pool_t *m_parent;
     apr_pool_t *m_pool;
-
-    Pool &operator=(const Pool &);
-
-    Pool(const Pool &);
 
     static bool s_initialized;
     static apr_pool_t *pool_create(apr_pool_t *parent);

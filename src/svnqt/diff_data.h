@@ -59,7 +59,9 @@ protected:
 
 public:
     DiffData(const Path &aTmpPath, const Path &, const Revision &, const Path &, const Revision &);
-    virtual ~DiffData();
+    ~DiffData();
+    DiffData(const DiffData &) = delete;
+    DiffData &operator=(const DiffData &) = delete;
 
     apr_file_t *outFile()
     {

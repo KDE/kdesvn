@@ -94,7 +94,7 @@ bool ItemDisplay::filterOut(const SvnItem *item)
 /*!
     \fn ItemDisplay::relativePath(const SvnItem*item)
  */
-QString ItemDisplay::relativePath(const SvnItem *item)
+QString ItemDisplay::relativePath(const SvnItem *item) const
 {
     if (!isWorkingCopy() || !item->fullName().startsWith(baseUri())) {
         return item->fullName();

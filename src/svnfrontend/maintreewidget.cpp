@@ -1967,10 +1967,8 @@ void MainTreeWidget::slotRelocate()
         KMessageBox::error(0, i18n("Error getting entry to relocate"));
         return;
     }
-    QString path;
-    path = k->fullName();
-    // CE TODO - Url() will return a QUrl later on
-    const QUrl fromUrl = QUrl(k->Url());
+    const QString path = k->fullName();
+    const QUrl fromUrl = k->Url();
     QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("relocate_dlg")));
     dlg->setWindowTitle(i18n("Relocate path %1", path));
     dlg->setWithCancelButton();

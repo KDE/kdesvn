@@ -50,7 +50,7 @@ public:
     bool isNetworked()const;
     QString lastError()const;
     static bool filterOut(const SvnItem *item);
-    QString relativePath(const SvnItem *item);
+    QString relativePath(const SvnItem *item) const;
 
 protected:
     void setWorkingCopy(bool);

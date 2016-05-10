@@ -168,8 +168,6 @@ Entry_private::init(const Entry_private &src)
 void Entry_private::init(const QString &url, const DirEntry &dirEntry)
 {
     init(0);
-    // CE TODO
-    qWarning("init: %s", qPrintable(url));
     _url = QUrl(url);
     if (!dirEntry.isEmpty()) {
         _name = dirEntry.name();

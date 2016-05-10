@@ -1871,9 +1871,8 @@ void SvnActions::slotSwitch()
         KMessageBox::error(0, i18n("Error getting entry to switch"));
         return;
     }
-    const QString path = k->fullName();
-    const QUrl what = QUrl(k->Url());  // CE TODO - is an url and will return QUrl later
-    if (makeSwitch(path, what)) {
+    const QUrl what = k->Url();
+    if (makeSwitch(k->fullName(), what)) {
         emit reinitItem(k);
     }
 }

@@ -225,7 +225,7 @@ void kdesvnView::slotCreateRepo()
         delete dlg;
         return;
     }
-    svn::repository::Repository *_rep = new svn::repository::Repository(this);
+    QScopedPointer<svn::repository::Repository> _rep(new svn::repository::Repository(this));
     bool ok = true;
     closeMe();
     try {

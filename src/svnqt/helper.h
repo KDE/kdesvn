@@ -75,7 +75,7 @@ public:
         }
     }
 
-    operator svn_depth_t ()
+    operator svn_depth_t() const
     {
         return _value;
     }

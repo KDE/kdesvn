@@ -25,8 +25,6 @@
 class SvnTreeView: public QTreeView
 {
     Q_OBJECT
-private:
-    static bool _isDrag;
 public:
     explicit SvnTreeView(QWidget *parent = 0);
     virtual ~SvnTreeView();

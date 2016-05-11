@@ -55,13 +55,13 @@ kdesvn is a GUI client for subversion repositories.
 %setup -q
 
 %build
-  %cmake_kf5 -d build
-  %make_jobs
+%cmake_kf5
+%make_jobs
 
 %install
-  %kf5_makeinstall -C build
-  rm -rf %{buildroot}%{_kf5_servicesdir}/svn*.protocol
-#  %suse_update_desktop_file -r org.kde.kdesvn          KDE Subversion Client
+%kf5_makeinstall
+rm -rf %{buildroot}%{_kf5_servicesdir}/svn*.protocol
+%kf5_post_install
 
 %files
 %defattr(-,root,root)
@@ -76,12 +76,19 @@ kdesvn is a GUI client for subversion repositories.
 %{_kf5_dbusinterfacesdir}/kf5_org.kde.kdesvnd.xml
 %{_kf5_sharedir}/dbus-1/services/org.kde.kdesvnd.service
 %{_kf5_htmldir}/en/kdesvn
-%{_kf5_iconsdir}/hicolor/*/*/kdesvn*
+%{_kf5_iconsdir}/hicolor/*/actions/kdesvn*
+%{_kf5_iconsdir}/hicolor/*/apps/kdesvn*
+%{_kf5_iconsdir}/hicolor/*/places/kdesvn*
 %{_kf5_sharedir}/kconf_update/
 %{_kf5_sharedir}/kdesvn/
 %{_kf5_servicesdir}/
 %{_kf5_kxmlguidir}/kdesvn/
 %{_kf5_sharedir}/man/man1/kdesvn*
+# try to make brb happy ...
+%dir %{_kf5_iconsdir}/hicolor/96x96
+%dir %{_kf5_iconsdir}/hicolor/*/actions
+%dir %{_kf5_iconsdir}/hicolor/*/apps
+%dir %{_kf5_iconsdir}/hicolor/*/places
 
 
 %changelog

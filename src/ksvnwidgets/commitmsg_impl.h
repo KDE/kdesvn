@@ -81,7 +81,6 @@ protected Q_SLOTS:
 
 protected:
     static QStringList sLogHistory;
-    static const QString groupName;
     static QString sLastMessage;
     static int smax_message_history;
     bool m_hidden;

@@ -47,7 +47,6 @@
 
 QStringList Commitmsg_impl::sLogHistory = QStringList();
 QString Commitmsg_impl::sLastMessage;
-const QString Commitmsg_impl::groupName("logmsg_dlg_size");
 
 int Commitmsg_impl::smax_message_history = 0xFFFF;
 
@@ -290,7 +289,7 @@ QString Commitmsg_impl::getLogmessageInternal(Commitmsg_impl *ptr, bool *ok, svn
     svn::Depth _depth = svn::DepthUnknown;
     QString msg;
 
-    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(groupName, parent));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("logmsg_dlg_size"), parent));
     dlg->setWindowTitle(i18n("Commit log"));
     dlg->setWithCancelButton();
     dlg->addWidget(ptr);

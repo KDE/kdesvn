@@ -37,8 +37,8 @@ enum ItemType {
     All = Dir | File
 };
 
-Q_DECLARE_FLAGS(ItemTypeFlag, ItemType);
-Q_DECLARE_OPERATORS_FOR_FLAGS(svnmodel::ItemTypeFlag);
+Q_DECLARE_FLAGS(ItemTypeFlag, ItemType)
+Q_DECLARE_OPERATORS_FOR_FLAGS(svnmodel::ItemTypeFlag)
 }
 
 #endif

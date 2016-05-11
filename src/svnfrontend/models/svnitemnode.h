@@ -75,7 +75,7 @@ public:
     virtual ~SvnItemModelNodeDir();
     virtual bool NodeIsDir() const;
 
-    const QList<SvnItemModelNode *> &childList()const;
+    const QVector<SvnItemModelNode *> &childList()const;
     SvnItemModelNode *child(int row)const;
 
     SvnItemModelNode *findPath(const QStringList &parts);
@@ -89,7 +89,7 @@ public:
     virtual bool NodeHasChilds() const;
 
 protected:
-    QList<SvnItemModelNode *> m_Children;
+    QVector<SvnItemModelNode *> m_Children;
 };
 
 #endif

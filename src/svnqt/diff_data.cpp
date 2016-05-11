@@ -33,16 +33,33 @@
 namespace svn
 {
 DiffData::DiffData(const Path &aTmpPath, const Path &_p1, const Revision &_r1, const Path &_p2, const Revision &_r2)
-    : m_Pool(), m_tmpPath(aTmpPath),
-      m_outFile(0), m_errFile(0), m_outFileName(0), m_errFileName(0),
-      m_p1(_p1), m_p2(_p2), m_r1(_r1), m_r2(_r2),
-      m_working_copy_present(false), m_url_is_present(false)
+    : m_Pool()
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+    , m_outStream(new stream::SvnByteStream)
+    , m_errStream(new stream::SvnByteStream)
+#else
+    , m_tmpPath(aTmpPath)
+    , m_outFile(nullptr)
+    , m_errFile(nullptr)
+    , m_outFileName(nullptr)
+    , m_errFileName(nullptr)
+#endif
+    , m_p1(_p1)
+    , m_p2(_p2)
+    , m_r1(_r1)
+    , m_r2(_r2)
+    , m_working_copy_present(false)
+    , m_url_is_present(false)
 {
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+    Q_UNUSED(aTmpPath)
+#endif
     init();
 }
 
 void DiffData::init()
 {
+#if SVN_API_VERSION < SVN_VERSION_CHECK(1,8,0)
     svn_error_t *error;
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     Pool scratchPool;
@@ -74,6 +91,7 @@ void DiffData::init()
         clean();
         throw ClientException(error);
     }
+#endif
     if (svn_path_is_url(m_p1.cstr())) {
         m_url_is_present = true;
     } else {
@@ -105,6 +123,7 @@ void DiffData::clean()
 
 void DiffData::close()
 {
+#if SVN_API_VERSION < SVN_VERSION_CHECK(1,8,0)
     if (m_outFile != 0) {
         svn_io_file_close(m_outFile, m_Pool);
         m_outFile = 0;
@@ -113,10 +132,14 @@ void DiffData::close()
         svn_io_file_close(m_errFile, m_Pool);
         m_errFile = 0;
     }
+#endif
 }
 
 QByteArray DiffData::content()
 {
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+    return m_outStream->content();
+#else
     if (!m_outFileName) {
         return QByteArray();
     }
@@ -129,5 +152,6 @@ QByteArray DiffData::content()
     QByteArray res = fi.readAll();
     fi.close();
     return res;
+#endif
 }
 }

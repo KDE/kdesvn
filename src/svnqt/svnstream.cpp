@@ -160,29 +160,14 @@ void SvnStream::setError(const QString &aError)const
     m_Data->m_LastError = aError;
 }
 
-class SvnByteStream_private
-{
-public:
-    SvnByteStream_private();
-    virtual ~SvnByteStream_private() {}
-
-    QByteArray m_Content;
-    QBuffer mBuf;
-};
-
-SvnByteStream_private::SvnByteStream_private()
-    : mBuf(&m_Content, 0)
-{
-    mBuf.open(QIODevice::WriteOnly);
-}
-
 /* ByteStream implementation start */
 SvnByteStream::SvnByteStream(svn_client_ctx_t *ctx)
     : SvnStream(false, true, ctx)
+    , m_ByteData(new QBuffer)
 {
-    m_ByteData = new SvnByteStream_private;
-    if (!m_ByteData->mBuf.isOpen()) {
-        setError(m_ByteData->mBuf.errorString());
+    m_ByteData->open(QIODevice::ReadWrite);
+    if (!m_ByteData->isOpen()) {
+        setError(m_ByteData->errorString());
     }
 }
 
@@ -193,21 +178,21 @@ SvnByteStream::~SvnByteStream()
 
 long SvnByteStream::write(const char *aData, const unsigned long max)
 {
-    long i = m_ByteData->mBuf.write(aData, max);
+    qint64 i = m_ByteData->write(aData, max);
     if (i < 0) {
-        setError(m_ByteData->mBuf.errorString());
+        setError(m_ByteData->errorString());
     }
     return i;
 }
 
 QByteArray SvnByteStream::content()const
 {
-    return m_ByteData->mBuf.buffer();
+    return m_ByteData->buffer();
 }
 
 bool SvnByteStream::isOk()const
 {
-    return m_ByteData->mBuf.isOpen();
+    return m_ByteData->isOpen();
 }
 
 /* ByteStream implementation end */

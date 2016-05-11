@@ -30,6 +30,7 @@
 
 #include <svn_io.h>
 struct svn_client_ctx_t;
+class QBuffer;
 
 namespace svn
 {
@@ -119,8 +120,6 @@ private:
     SvnStream();
 };
 
-class SvnByteStream_private;
-
 //! a class let subversion print into a QByteArray
 class SVNQT_EXPORT SvnByteStream: public SvnStream
 {
@@ -133,7 +132,7 @@ public:
      */
     explicit SvnByteStream(svn_client_ctx_t *ctx = 0);
     //! release internal buffer
-    virtual ~SvnByteStream();
+    ~SvnByteStream();
     //! fill internal buffer with data
     /*!
         stores the data written into the internal buffer.
@@ -141,21 +140,21 @@ public:
         \param max length of data to store
         \return data real stored or -1 if error.
     */
-    virtual long write(const char *data, const unsigned long max);
+    long write(const char *data, const unsigned long max) override final;
 
     //! return the data stored
     /*!
         \return the internal stored data
     */
-    QByteArray content()const;
+    QByteArray content() const;
     //! checks if the buffer is usable.
     /*!
      * \return true if data may written, false if not, in that case a errormessage will set.
      */
-    virtual bool isOk()const;
+    bool isOk() const override final;
 
 private:
-    SvnByteStream_private *m_ByteData;
+    QBuffer *m_ByteData;
 };
 
 } // namespace stream

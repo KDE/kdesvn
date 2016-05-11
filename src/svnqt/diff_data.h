@@ -29,10 +29,12 @@
 #include <svnqt/pool.h>
 #include <svnqt/path.h>
 #include <svnqt/revision.h>
+#include <svnqt/svnstream.h>
 
-#include <QByteArray>
+#include "helper.h"
 
 struct apr_file_t;
+struct svn_stream_t;
 
 namespace svn
 {
@@ -42,11 +44,16 @@ class SVNQT_NOEXPORT DiffData
 {
 protected:
     Pool m_Pool;
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+    stream::SvnByteStream *m_outStream;
+    stream::SvnByteStream *m_errStream;
+#else
     Path m_tmpPath;
     apr_file_t *m_outFile;
     apr_file_t *m_errFile;
     const char *m_outFileName;
     const char *m_errFileName;
+#endif
 
     Path m_p1, m_p2;
     Revision m_r1, m_r2;
@@ -63,6 +70,16 @@ public:
     DiffData(const DiffData &) = delete;
     DiffData &operator=(const DiffData &) = delete;
 
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+    svn_stream_t *outStream()
+    {
+        return *m_outStream;
+    }
+    svn_stream_t *errStream()
+    {
+        return *m_errStream;
+    }
+#else
     apr_file_t *outFile()
     {
         return m_outFile;
@@ -71,6 +88,7 @@ public:
     {
         return m_errFile;
     }
+#endif
     const Revision &r1()const
     {
         return m_r1;

@@ -59,20 +59,39 @@ Client_impl::diff_peg(const DiffParameter &options) throw (ClientException)
     _options = options.extra().array(pool);
     DiffData ddata(options.tmpPath(), options.path1(), options.rev1(), options.path1(), options.rev2());
 
-    // todo svn 1.8: svn_client_diff_peg6
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+    error = svn_client_diff_peg6(
+#else
     error = svn_client_diff_peg5(
+#endif
                 _options,
                 options.path1().cstr(),
-                options.peg(), ddata.r1().revision(), ddata.r2().revision(),
+                options.peg(),
+                ddata.r1().revision(),
+                ddata.r2().revision(),
                 options.relativeTo().length() > 0 ? options.relativeTo().cstr() : QByteArray(/*0*/),
                 internal::DepthToSvn(options.depth()),
-                options.ignoreAncestry(), options.noDiffDeleted(),
+                options.ignoreAncestry(),
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+                false, // TODO: no_diff_added
+#endif
+                options.noDiffDeleted(),
                 options.copies_as_adds(),
                 options.ignoreContentType(),
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+                false, // TODO: ignore_properties
+                false, // TODO: properties_only
+#endif
                 options.git_diff_format(),
                 APR_LOCALE_CHARSET,
-                ddata.outFile(), ddata.errFile(),
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+                ddata.outStream(),
+                ddata.errStream(),
+#else
+                ddata.outFile(),
+                ddata.errFile(),
+#endif
                 options.changeList().array(pool),
                 *m_context,
                 pool
@@ -115,19 +134,38 @@ Client_impl::diff(const DiffParameter &options) throw (ClientException)
     }
     DiffData ddata(options.tmpPath(), options.path1(), options.rev1(), options.path2(), options.rev2());
 
-    // todo svn 1.8: svn_client_diff6
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+    error = svn_client_diff6(_options,
+#else
     error = svn_client_diff5(_options,
-                             options.path1().cstr(), ddata.r1().revision(),
-                             options.path2().cstr(), ddata.r2().revision(),
+#endif
+                             options.path1().cstr(),
+                             ddata.r1().revision(),
+                             options.path2().cstr(),
+                             ddata.r2().revision(),
                              options.relativeTo().length() > 0 ? options.relativeTo().cstr() : QByteArray(/*0*/),
                              internal::DepthToSvn(options.depth()),
-                             options.ignoreAncestry(), options.noDiffDeleted(),
+                             options.ignoreAncestry(),
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+                             false, // TODO: no_diff_added
+#endif
+                             options.noDiffDeleted(),
                              options.copies_as_adds(),
                              options.ignoreContentType(),
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+                             false, // TODO: ignore_properties
+                             false, // TODO: properties_only
+#endif
                              options.git_diff_format(),
                              APR_LOCALE_CHARSET,
-                             ddata.outFile(), ddata.errFile(),
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+                             ddata.outStream(),
+                             ddata.errStream(),
+#else
+                             ddata.outFile(),
+                             ddata.errFile(),
+#endif
                              options.changeList().array(pool),
                              *m_context,
                              pool);

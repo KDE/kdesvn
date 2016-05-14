@@ -489,7 +489,7 @@ void SvnActions::makeTree(const QString &what, const svn::Revision &_rev, const 
     }
 
     QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("revisiontree_dlg"), m_Data->m_ParentList->realWidget()));
-    dlg->setWindowTitle(i18n("1History of %1", info.url().toString().mid(reposRoot.length())));
+    dlg->setWindowTitle(i18n("History of %1", info.url().toString().mid(reposRoot.length())));
 
     RevisionTree *rt(new RevisionTree(m_Data->m_Svnclient, m_Data->m_SvnContextListener, reposRoot,
                                       startr, endr,

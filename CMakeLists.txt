@@ -48,7 +48,7 @@ include(ECMInstallIcons)
 find_package(KF5 REQUIRED COMPONENTS
     Bookmarks Config ConfigWidgets CoreAddons
     DBusAddons DocTools I18n IconThemes ItemViews
-    JobWidgets KIO Notifications Service
+    JobWidgets KIO Notifications Parts Service
     TextEditor Wallet WidgetsAddons
 )
 find_package(Qt5 REQUIRED COMPONENTS
@@ -106,13 +106,8 @@ kde_enable_exceptions()
 # TODO remove this ↓
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations")
 
-# from http://www.kdedevelopers.org/node/3171 and http://kdesvn.alwins-world.de/ticket/595#comment:5
-add_definitions(-DKDE_DEFAULT_DEBUG_AREA=9510)
-
 include_directories(
     ${CMAKE_BINARY_DIR}
-    ${KDE4_INCLUDES}
-    ${QT_INCLUDE_DIR}
     ${APR_INCLUDE_DIR}
     ${APU_INCLUDE_DIR}
     ${SUBVERSION_INCLUDE_DIR}

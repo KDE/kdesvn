@@ -25,7 +25,7 @@
 #include <qsqldatabase.h>
 #include <qstringlist.h>
 #include <iostream>
-#include <qapplication.h>
+#include <qcoreapplication.h>
 #include <qtextstream.h>
 
 #include "svnqt/client.h"

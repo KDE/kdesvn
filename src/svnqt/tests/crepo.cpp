@@ -42,11 +42,11 @@ public:
     virtual ~Listener() {}
     virtual void sendWarning(const QString &msg)
     {
-        std::cout << msg.toAscii().data() << std::endl;
+        std::cout << msg.toLatin1().data() << std::endl;
     }
     virtual void sendError(const QString &msg)
     {
-        std::cout << msg.toAscii().data() << std::endl;
+        std::cout << msg.toLatin1().data() << std::endl;
     }
     virtual bool isCanceld()
     {

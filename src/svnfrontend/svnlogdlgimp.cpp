@@ -124,7 +124,7 @@ void SvnLogDlgImp::dispLog(const svn::LogEntriesMapPtr &_log)
     }
     bool must_init = false;
     if (!m_SortModel) {
-        m_SortModel = new QSortFilterProxyModel(m_LogTreeView);
+        m_SortModel = new SvnLogSortModel(m_LogTreeView);
         m_CurrentModel = new SvnLogModel(_log, _name, m_SortModel);
         m_SortModel->setSourceModel(m_CurrentModel);
         must_init = true;

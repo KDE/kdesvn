@@ -22,6 +22,7 @@
 #define LOG_ITEM_MODEL_H
 
 #include <QAbstractListModel>
+#include <QSortFilterProxyModel>
 
 #include "svnqt/svnqttypes.h"
 
@@ -71,6 +72,21 @@ public:
 
 private:
     QSharedPointer<SvnLogModelData> m_data;
+    friend class SvnLogSortModel;
+};
+
+class SvnLogSortModel : public QSortFilterProxyModel
+{
+    Q_OBJECT
+public:
+    SvnLogSortModel(QObject *parent = nullptr);
+    ~SvnLogSortModel();
+
+    void setSourceModel(QAbstractItemModel *sourceModel) override final;
+protected:
+    bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override final;
+private:
+    SvnLogModel *m_sourceModel;
 };
 
 #endif

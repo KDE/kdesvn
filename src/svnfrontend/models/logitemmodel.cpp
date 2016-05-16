@@ -271,3 +271,39 @@ void SvnLogModel::setRightRow(long v)
     }
     m_data->_right = v;
 }
+
+SvnLogSortModel::SvnLogSortModel(QObject *parent)
+    : QSortFilterProxyModel(parent)
+    , m_sourceModel(nullptr)
+{}
+
+SvnLogSortModel::~SvnLogSortModel()
+{}
+
+void SvnLogSortModel::setSourceModel(QAbstractItemModel *sourceModel)
+{
+    m_sourceModel = qobject_cast<SvnLogModel*>(sourceModel);
+    QSortFilterProxyModel::setSourceModel(sourceModel);
+}
+
+bool SvnLogSortModel::lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const
+{
+    if(source_left.column() != source_right.column() || !m_sourceModel) {
+        return QSortFilterProxyModel::lessThan(source_left, source_right);
+    }
+    const SvnLogModelNodePtr dataLeft = m_sourceModel->indexNode(source_left);
+    const SvnLogModelNodePtr dataRight = m_sourceModel->indexNode(source_right);
+    switch (source_left.column()) {
+        case SvnLogModel::Author:
+            return dataLeft->author() < dataRight->author();
+        case SvnLogModel::Revision:
+            return dataLeft->revision() < dataRight->revision();
+        case SvnLogModel::Date:
+            return dataLeft->date() < dataRight->date();
+        case SvnLogModel::Message:
+            return dataLeft->message() < dataRight->message();
+        default:
+            break;
+    }
+    return QSortFilterProxyModel::lessThan(source_left, source_right);
+}

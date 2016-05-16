@@ -46,25 +46,27 @@ namespace svn
 class SVNQT_EXPORT ConflictDescription
 {
 public:
-    enum ConflictType {
-        ConflictText,
-        ConflictProperty,
-        ConflictTree
+    enum class ConflictType {
+        Text,
+        Property,
+        Tree
     };
-    enum ConflictReason {
-        ReasonEdited,
-        ReasonObstructed,
-        ReasonDeleted,
-        ReasonMissing,
-        ReasonUnversioned,
-        ReasonAdded,
-        ReasonReplaced
+    enum class ConflictReason {
+        Edited,
+        Obstructed,
+        Deleted,
+        Missing,
+        Unversioned,
+        Added,
+        Replaced,
+        MovedAway,
+        MovedHere
     };
-    enum ConflictAction {
-        ConflictEdit,
-        ConflictAdd,
-        ConflictDelete,
-        ConflictReplace
+    enum class ConflictAction {
+        Edit,
+        Add,
+        Delete,
+        Replace
     };
     explicit ConflictDescription(const svn_wc_conflict_description_t *);
     explicit ConflictDescription(const svn_wc_conflict_description2_t *);
@@ -83,9 +85,10 @@ public:
     const QString &mimeType() const;
     const QString &mergedFile() const;
 
-protected:
     //! don't use it.
-    ConflictDescription(const ConflictDescription &);
+    ConflictDescription(const ConflictDescription &) = delete;
+    ConflictDescription &operator=(const ConflictDescription &) = delete;
+protected:
     void init();
 protected:
     Pool m_pool;

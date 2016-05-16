@@ -234,7 +234,7 @@ QPixmap SvnItem::getPixmap(const QPixmap &_p, int size, bool overlay)
     } else if (isRealVersioned()) {
         SvnActions *wrap = getWrapper();
         bool mod = false;
-        QPixmap p2 = QPixmap();
+        QPixmap p2;
         if (p_Item->m_Stat->nodeStatus() == svn_wc_status_conflicted) {
             m_bgColor = CONFLICT;
             if (overlay) {
@@ -443,7 +443,7 @@ QString SvnItem::infoText()const
             info_text = i18n("External");
             break;
         case svn_wc_status_conflicted: {
-            if (p_Item->m_Stat->textStatus() == svn_wc_status_modified)
+            if (p_Item->m_Stat->textStatus() == svn_wc_status_conflicted)
                 info_text = i18n("Conflict");
             else
                 info_text = i18n("Property conflicted");

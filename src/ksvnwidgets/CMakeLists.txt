@@ -18,7 +18,7 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
-qt5_wrap_ui(kdesvn_shared_ui
+ki18n_wrap_ui(kdesvn_shared_ui
     authdlg.ui
     commitmessage.ui
     deleteform.ui

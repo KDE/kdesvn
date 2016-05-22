@@ -20,7 +20,7 @@
 
 add_executable(kdesvnaskpass askpass/kdesvn-askpass.cpp)
 
-qt5_wrap_ui(kdesvn_ui
+ki18n_wrap_ui(kdesvn_ui
     urldlg.ui
 )
 set(kdesvnsrc

@@ -756,7 +756,7 @@ void MainTreeWidget::enableActions()
     /* local only actions */
     /* 1. actions on files AND dirs*/
     enableAction("make_svn_add", (multi || single) && isWorkingCopy());
-    enableAction("make_svn_revert", (multi || single) && isWorkingCopy() && si && (si->isChanged() || si->isLocalAdded()));
+    enableAction("make_svn_revert", (multi || single) && isWorkingCopy() && si && (si->isChanged() || si->isLocalAdded() || si->isConflicted()));
     enableAction("make_resolved", (multi || single) && isWorkingCopy());
     enableAction("make_try_resolve", conflicted && !dir);
 

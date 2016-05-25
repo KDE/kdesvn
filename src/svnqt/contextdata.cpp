@@ -166,6 +166,11 @@ ContextData::ContextData(const QString &configDir_)
     m_ctx->conflict_func = onWcConflictResolver;
     m_ctx->conflict_baton = this;
 
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+    m_ctx->conflict_func2 = onWcConflictResolver2;
+    m_ctx->conflict_baton2 = this;
+#endif
+
     m_ctx->client_name = "SvnQt wrapper client";
     initMimeTypes();
 }
@@ -725,6 +730,24 @@ svn_error_t *ContextData::onWcConflictResolver(svn_wc_conflict_result_t **result
     cresult.assignResult(result, pool);
     return SVN_NO_ERROR;
 }
+
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+svn_error_t *ContextData::onWcConflictResolver2(svn_wc_conflict_result_t **result,
+                                                const svn_wc_conflict_description2_t *description,
+                                                void *baton,
+                                                apr_pool_t *result_pool,
+                                                apr_pool_t *)
+{
+  ContextData *data = 0;
+  SVN_ERR(getContextData(baton, &data));
+  ConflictResult cresult;
+  if (!data->getListener()->contextConflictResolve(cresult, ConflictDescription(description))) {
+      return data->generate_cancel_error();
+  }
+  cresult.assignResult(result, result_pool);
+  return SVN_NO_ERROR;
+}
+#endif
 
 svn_error_t *ContextData::maySavePlaintext(svn_boolean_t *may_save_plaintext, const char *realmstring, void *baton, apr_pool_t *pool)
 {

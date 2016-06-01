@@ -120,6 +120,7 @@ protected Q_SLOTS:
     virtual void slotSetTitle(const QString &title);
     virtual void slotAppendLog(const QString &text);
     virtual void slotUrlChanged(const QString &);
+    void onCustomLogWindowContextMenuRequested(const QPoint &pos);
 
 protected:
     //kdesvnfilelist*m_flist;

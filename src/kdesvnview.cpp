@@ -31,30 +31,30 @@
 #include "svnqt/repository.h"
 #include "svnqt/version_check.h"
 #include "svnqt/svnqttypes.h"
-#include "helpers/windowgeometryhelper.h"
 
 #include <QFileInfo>
+#include <QMenu>
 #include <QProgressBar>
 #include <QSplitter>
 #include <QTemporaryFile>
-
-#include <kmessagebox.h>
-#include <KLocalizedString>
 #include <QTextBrowser>
-#include <kactioncollection.h>
+
+#include <KActionCollection>
 #include <KIO/FileCopyJob>
-#include <kjobwidgets.h>
+#include <KJobWidgets>
+#include <KLocalizedString>
+#include <KMessageBox>
 
 kdesvnView::kdesvnView(KActionCollection *aCollection, QWidget *parent, bool full)
     : QWidget(parent), svn::repository::RepositoryListener()
     , m_Collection(aCollection)
     , m_currentUrl()
+    , m_CacheProgressBar(nullptr)
     , m_ReposCancel(false)
 {
     Q_UNUSED(full);
     setFocusPolicy(Qt::StrongFocus);
     setupActions();
-    m_CacheProgressBar = 0;
 
     m_topLayout = new QVBoxLayout(this);
 
@@ -68,6 +68,9 @@ kdesvnView::kdesvnView(KActionCollection *aCollection, QWidget *parent, bool ful
     m_infoSplitter->setOrientation(Qt::Horizontal);
     m_infoSplitter->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_LogWindow = new QTextBrowser(m_infoSplitter);
+    m_LogWindow->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(m_LogWindow, SIGNAL(customContextMenuRequested(QPoint)),
+            this, SLOT(onCustomLogWindowContextMenuRequested(QPoint)));
     Propertylist *pl = new Propertylist(m_infoSplitter);
     pl->setCommitchanges(true);
     pl->addCallback(m_TreeWidget);
@@ -442,4 +445,16 @@ void kdesvnView::fillCacheStatus(qlonglong current, qlonglong max)
 void kdesvnView::stopCacheThreads()
 {
     m_TreeWidget->stopLogCache();
+}
+
+void kdesvnView::onCustomLogWindowContextMenuRequested(const QPoint &pos)
+{
+    QPointer<QMenu> menu = m_LogWindow->createStandardContextMenu();
+    QAction *clearAction = new QAction(tr("Clear"), menu.data());
+    clearAction->setEnabled(!m_LogWindow->toPlainText().isEmpty());
+    connect(clearAction, SIGNAL(triggered(bool)),
+            m_LogWindow, SLOT(clear()));
+    menu->addAction(clearAction);
+    menu->exec(m_LogWindow->mapToGlobal(pos));
+    delete menu;
 }

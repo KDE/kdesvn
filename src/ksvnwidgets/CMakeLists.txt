@@ -35,7 +35,6 @@ set(ksvnwidgetsrc
     deleteform.cpp
     depthselector.cpp
     diffbrowser.cpp
-    diffbrowserdata.cpp
     diffsyntax.cpp
     encodingselector_impl.cpp
     ksvndialog.cpp
@@ -53,7 +52,6 @@ set(ksvnwidgethdr
     deleteform.h
     depthselector.h
     diffbrowser.h
-    diffbrowserdata.h
     diffsyntax.h
     encodingselector_impl.h
     ksvndialog.h

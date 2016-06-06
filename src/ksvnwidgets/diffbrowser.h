@@ -23,8 +23,7 @@
 #include <QTextBrowser>
 
 class DiffSyntax;
-/* FIXME TODO fix the search */
-class DiffBrowserData;
+class KFindDialog;
 
 class DiffBrowser : public QTextBrowser
 {
@@ -35,19 +34,22 @@ public:
     virtual ~DiffBrowser();
 
 public slots:
-    virtual void setText(const QByteArray &ex);
-    virtual void saveDiff();
-    virtual void slotTextCodecChanged(const QString &);
+    void setText(const QByteArray &ex);
+    void saveDiff();
+    void slotTextCodecChanged(const QString &);
 
 protected:
-    virtual void keyPressEvent(QKeyEvent *);
+    void keyPressEvent(QKeyEvent *ev) override;
 
-    virtual void startSearch();
-    virtual void doSearch(const QString &to_find_string, bool back);
-    virtual void doSearchAgain(bool back);
+    void startSearch();
+    void doSearch(const QString &to_find_string, bool back);
+    void doSearchAgain(bool back);
 
 protected:
-    DiffBrowserData *m_Data;
+    DiffSyntax *m_Syntax;
+    QByteArray m_content;
+    KFindDialog *m_srchdialog;
+    QString m_pattern;
 
     void printContent();
 

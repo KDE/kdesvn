@@ -23,7 +23,7 @@
 #include <KLocalizedString>
 
 AuthDialogWidget::AuthDialogWidget(const QString &realm, const QString &user, QWidget *parent)
-    : QWidget(parent), Ui::AuthDialogWidget(), curPass()
+    : QWidget(parent), Ui::AuthDialogWidget()
 {
     setupUi(this);
 
@@ -38,10 +38,6 @@ AuthDialogWidget::AuthDialogWidget(const QString &realm, const QString &user, QW
         m_RealmLabel->setText(i18n("Enter authentication info for %1", realm));
         resize(QSize(334, 158).expandedTo(minimumSizeHint()));
     }
-}
-
-void AuthDialogWidget::slotHelp()
-{
 }
 
 const QString AuthDialogWidget::Username() const

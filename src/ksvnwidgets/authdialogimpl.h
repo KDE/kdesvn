@@ -32,12 +32,11 @@ public:
     AuthDialogImpl(const QString &realm, const QString &user, QWidget *parent = nullptr);
     virtual ~AuthDialogImpl();
 
-    const QString Username()const;
-    const QString Password();
-    bool maySave()const;
+    QString Username() const;
+    QString Password() const;
+    bool maySave() const;
 
 protected:
-    QString curPass;
     AuthDialogWidget *m_AuthWidget;
 };
 

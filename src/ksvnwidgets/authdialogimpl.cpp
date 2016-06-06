@@ -49,12 +49,12 @@ AuthDialogImpl::~AuthDialogImpl()
     delete m_AuthWidget;
 }
 
-const QString AuthDialogImpl::Username()const
+QString AuthDialogImpl::Username() const
 {
     return m_AuthWidget->Username();
 }
 
-const QString AuthDialogImpl::Password()
+QString AuthDialogImpl::Password() const
 {
     return m_AuthWidget->Password();
 }

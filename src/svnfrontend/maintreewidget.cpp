@@ -389,7 +389,6 @@ SvnItemList MainTreeWidget::SelectionList()const
         }
         return ret;
     }
-    ret.reserve(_mi.size());
     for (int i = 0; i < _mi.count(); ++i) {
         ret.push_back(m_Data->sourceNode(_mi[i], false));
     }
@@ -409,13 +408,12 @@ SvnItemList MainTreeWidget::DirSelectionList()const
 
 QModelIndex MainTreeWidget::SelectedIndex()const
 {
-    QModelIndexList _mi = m_TreeView->selectionModel()->selectedRows(0);
+    const QModelIndexList _mi = m_TreeView->selectionModel()->selectedRows(0);
     if (_mi.count() != 1) {
         if (_mi.isEmpty()) {
-            QModelIndex ind = m_TreeView->rootIndex();
+            const QModelIndex ind = m_TreeView->rootIndex();
             if (ind.isValid()) {
-                ind = m_Data->m_SortModel->mapToSource(ind);
-                return ind;
+                return m_Data->m_SortModel->mapToSource(ind);
             }
         }
         return QModelIndex();
@@ -425,7 +423,7 @@ QModelIndex MainTreeWidget::SelectedIndex()const
 
 QModelIndex MainTreeWidget::DirSelectedIndex()const
 {
-    QModelIndexList _mi = m_DirTreeView->selectionModel()->selectedRows(0);
+    const QModelIndexList _mi = m_DirTreeView->selectionModel()->selectedRows(0);
     if (_mi.count() != 1) {
         return QModelIndex();
     }
@@ -434,22 +432,22 @@ QModelIndex MainTreeWidget::DirSelectedIndex()const
 
 SvnItemModelNode *MainTreeWidget::SelectedNode()const
 {
-    QModelIndex index = SelectedIndex();
+    const QModelIndex index = SelectedIndex();
     if (index.isValid()) {
         SvnItemModelNode *item = static_cast<SvnItemModelNode *>(index.internalPointer());
         return item;
     }
-    return 0;
+    return nullptr;
 }
 
 SvnItemModelNode *MainTreeWidget::DirSelectedNode()const
 {
-    QModelIndex index = DirSelectedIndex();
+    const QModelIndex index = DirSelectedIndex();
     if (index.isValid()) {
         SvnItemModelNode *item = static_cast<SvnItemModelNode *>(index.internalPointer());
         return item;
     }
-    return 0;
+    return nullptr;
 }
 
 void MainTreeWidget::slotSelectionChanged(const QItemSelection &, const QItemSelection &)
@@ -697,73 +695,95 @@ void MainTreeWidget::enableAction(const QString &name, bool how)
 
 void MainTreeWidget::enableActions()
 {
-    bool isopen = !baseUri().isEmpty();
-    int c = m_TreeView->selectionModel()->selectedRows(0).count();
-    int d = m_DirTreeView->selectionModel()->selectedRows(0).count();
-    SvnItemModelNode *si = SelectedNode();
-    bool single = c == 1 && isopen;
-    bool multi = c > 1 && isopen;
-    bool none = c == 0 && isopen;
-    bool dir = false;
-    bool unique = uniqueTypeSelected();
-    bool remote_enabled =/*isopen&&*/m_Data->m_Model->svnWrapper()->doNetworking();
+    const bool isopen = !baseUri().isEmpty();
+    const SvnItemList fileList = SelectionList();
+    const SvnItemList dirList = DirSelectionList();
+    const SvnItemModelNode *si = SelectedNode();
 
-    if (single && si && si->isDir()) {
-        dir = true;
+    const bool single = isopen && fileList.size() == 1;
+    const bool multi = isopen && fileList.size() > 1;
+    const bool none = isopen && fileList.isEmpty();
+    const bool single_dir = single && si && si->isDir();
+    const bool unique = uniqueTypeSelected();
+    const bool remote_enabled =/*isopen&&*/m_Data->m_Model->svnWrapper()->doNetworking();
+    const bool conflicted = single && si && si->isConflicted();
+
+    bool at_least_one_changed = false;
+    bool at_least_one_conflicted = false;
+    bool at_least_one_local_added = false;
+    for(int i = 0; i < fileList.size(); ++i) {
+      const SvnItem *item = fileList.at(i);
+      if (!item) {
+          // root item
+          continue;
+      }
+      if (item->isChanged()) {
+          at_least_one_changed = true;
+      }
+      if (item->isConflicted()) {
+          at_least_one_conflicted = true;
+      }
+      if (item->isLocalAdded()) {
+          at_least_one_local_added = true;
+      }
     }
 
-    bool conflicted = single && si && si->isConflicted();
+    //qDebug("single: %d, multi: %d, none: %d, single_dir: %d, unique: %d, remove_enabled: %d, conflicted: %d, changed: %d, added: %d",
+    //       single, multi, none, single_dir, unique, remote_enabled, conflicted, si && si->isChanged(), si && si->isLocalAdded());
+    //qDebug("at_least_one_changed: %d, at_least_one_conflicted: %d, at_least_one_local_added: %d",
+    //       at_least_one_changed, at_least_one_conflicted, at_least_one_local_added);
 
     /* local and remote actions */
     /* 1. actions on dirs AND files */
     enableAction("make_svn_log_nofollow", single || none);
-    enableAction("make_svn_dir_log_nofollow", d == 1 && isopen);
+    enableAction("make_svn_dir_log_nofollow", dirList.size() == 1 && isopen);
     enableAction("make_last_change", isopen);
     enableAction("make_svn_log_full", single || none);
     enableAction("make_svn_tree", single || none);
     enableAction("make_svn_partialtree", single || none);
 
     enableAction("make_svn_property", single);
-    enableAction("make_left_svn_property", d == 1);
-    enableAction("set_rec_property_dir", d == 1);
+    enableAction("make_left_svn_property", dirList.size() == 1);
+    enableAction("set_rec_property_dir", dirList.size() == 1);
     enableAction("get_svn_property", single);
     enableAction("make_svn_remove", (multi || single));
-    enableAction("make_svn_remove_left", d > 0);
+    enableAction("make_svn_remove_left", dirList.size() > 0);
     enableAction("make_svn_lock", (multi || single));
     enableAction("make_svn_unlock", (multi || single));
 
     enableAction("make_svn_ignore", (single) && si && si->parent() != 0 && !si->isRealVersioned());
-    enableAction("make_left_add_ignore_pattern", (d == 1) && isWorkingCopy());
-    enableAction("make_right_add_ignore_pattern", dir && isWorkingCopy());
+    enableAction("make_left_add_ignore_pattern", (dirList.size() == 1) && isWorkingCopy());
+    enableAction("make_right_add_ignore_pattern", single_dir && isWorkingCopy());
 
     enableAction("make_svn_rename", single && (!isWorkingCopy() || si != m_Data->m_Model->firstRootChild()));
     enableAction("make_svn_copy", single && (!isWorkingCopy() || si != m_Data->m_Model->firstRootChild()));
 
     /* 2. only on files */
-    enableAction("make_svn_blame", single && !dir && remote_enabled);
-    enableAction("make_svn_range_blame", single && !dir && remote_enabled);
-    enableAction("make_svn_cat", single && !dir);
+    enableAction("make_svn_blame", single && !single_dir && remote_enabled);
+    enableAction("make_svn_range_blame", single && !single_dir && remote_enabled);
+    enableAction("make_svn_cat", single && !single_dir);
 
     /* 3. actions only on dirs */
-    enableAction("make_svn_mkdir", dir || (none && isopen));
+    enableAction("make_svn_mkdir", single_dir || (none && isopen));
     enableAction("make_svn_switch", isWorkingCopy() && (single || none));
     enableAction("make_switch_to_repo", isWorkingCopy());
-    enableAction("make_import_dirs_into_current", dir || d == 1);
+    enableAction("make_import_dirs_into_current", single_dir || dirList.size() == 1);
     enableAction("make_svn_relocate", isWorkingCopy() && (single || none));
 
-    enableAction("make_svn_export_current", ((single && dir) || none));
+    enableAction("make_svn_export_current", ((single && single_dir) || none));
 
     /* local only actions */
     /* 1. actions on files AND dirs*/
     enableAction("make_svn_add", (multi || single) && isWorkingCopy());
-    enableAction("make_svn_revert", (multi || single) && isWorkingCopy() && si && (si->isChanged() || si->isLocalAdded() || si->isConflicted()));
+    enableAction("make_svn_revert", (multi || single) && isWorkingCopy() && (at_least_one_changed || at_least_one_conflicted || at_least_one_local_added));
+    qDebug("Enable make_svn_revert: %d", (multi || single) && isWorkingCopy() && (at_least_one_changed || at_least_one_conflicted || at_least_one_local_added));
     enableAction("make_resolved", (multi || single) && isWorkingCopy());
-    enableAction("make_try_resolve", conflicted && !dir);
+    enableAction("make_try_resolve", conflicted && !single_dir);
 
     enableAction("make_svn_info", isopen);
-    enableAction("make_svn_merge_revisions", (single || d == 1) && isWorkingCopy());
-    enableAction("make_svn_merge", single || d == 1 || none);
-    enableAction("make_svn_addrec", (multi || single || d > 0) && isWorkingCopy());
+    enableAction("make_svn_merge_revisions", (single || dirList.size() == 1) && isWorkingCopy());
+    enableAction("make_svn_merge", single || dirList.size() == 1 || none);
+    enableAction("make_svn_addrec", (multi || single || dirList.size() > 0) && isWorkingCopy());
     enableAction("make_svn_headupdate", isWorkingCopy() && isopen && remote_enabled);
     enableAction("make_dir_update", isWorkingCopy() && isopen && remote_enabled);
 
@@ -772,29 +792,29 @@ void MainTreeWidget::enableActions()
     enableAction("make_dir_commit", isWorkingCopy() && isopen && remote_enabled);
 
     enableAction("make_svn_basediff", isWorkingCopy() && (single || none));
-    enableAction("make_svn_dirbasediff", isWorkingCopy() && (d < 2));
+    enableAction("make_svn_dirbasediff", isWorkingCopy() && (dirList.size() < 2));
     enableAction("make_svn_headdiff", isWorkingCopy() && (single || none) && remote_enabled);
 
     /// @todo check if all items have same type
-    enableAction("make_svn_itemsdiff", multi && c == 2 && unique && remote_enabled);
-    enableAction("make_svn_diritemsdiff", d == 2 && isopen && remote_enabled);
+    enableAction("make_svn_itemsdiff", multi && fileList.size() == 2 && unique && remote_enabled);
+    enableAction("make_svn_diritemsdiff", dirList.size() == 2 && isopen && remote_enabled);
 
     /* 2. on dirs only */
-    enableAction("make_cleanup", isWorkingCopy() && (dir || none));
-    enableAction("make_check_unversioned", isWorkingCopy() && ((dir && single) || none));
+    enableAction("make_cleanup", isWorkingCopy() && (single_dir || none));
+    enableAction("make_check_unversioned", isWorkingCopy() && ((single_dir && single) || none));
 
     /* remote actions only */
-    enableAction("make_svn_checkout_current", ((single && dir) || none) && !isWorkingCopy() && remote_enabled);
+    enableAction("make_svn_checkout_current", ((single && single_dir) || none) && !isWorkingCopy() && remote_enabled);
     /* independ actions */
     enableAction("make_svn_checkout", remote_enabled);
     enableAction("make_svn_export", true);
     enableAction("make_view_refresh", isopen);
 
     enableAction("make_revisions_diff", isopen);
-    enableAction("make_revisions_cat", isopen && !dir && single);
+    enableAction("make_revisions_cat", isopen && !single_dir && single);
     enableAction("switch_browse_revision", !isWorkingCopy() && isopen);
     enableAction("make_check_updates", isWorkingCopy() && isopen && remote_enabled);
-    enableAction("openwith", KAuthorized::authorizeKAction("openwith") && single && !dir);
+    enableAction("openwith", KAuthorized::authorizeKAction("openwith") && single && !single_dir);
     enableAction("show_repository_settings", isopen);
 
     enableAction("repo_statistic", isopen);
@@ -1169,6 +1189,7 @@ void MainTreeWidget::execContextMenu(const SvnItemList &l)
         }
     }
 
+    //qDebug("menuname: %s", qPrintable(menuname));
     QWidget *target;
     emit sigShowPopup(menuname, &target);
     QMenu *popup = static_cast<QMenu *>(target);

@@ -21,7 +21,7 @@
 #include "kdesvn-config.h"
 #include "settings/kdesvnsettings.h"
 
-#include <kwallet.h>
+#include <KWallet>
 
 #include <QApplication>
 #include <QWidget>

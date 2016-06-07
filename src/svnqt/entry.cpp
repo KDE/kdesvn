@@ -185,7 +185,6 @@ void Entry_private::init(const QString &url, const InfoEntry &src)
 {
     init(0);
     _name = src.Name();
-    qWarning("init2: %s", qPrintable(url));
     _url = QUrl(url);
     _revision = src.revision();
     _kind = src.kind();

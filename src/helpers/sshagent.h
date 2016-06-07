@@ -24,10 +24,9 @@
 #ifndef SSHAGENT_H
 #define SSHAGENT_H
 
-#include <qobject.h>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qprocess.h>
+#include <QObject>
+#include <QProcess>
+#include <QString>
 
 class KProcess;
 

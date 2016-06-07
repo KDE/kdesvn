@@ -20,8 +20,7 @@
 #ifndef PWSTORAGE_H
 #define PWSTORAGE_H
 
-#include <qstring.h>
-#include <qobject.h>
+#include <QString>
 
 class PwStorageData;
 

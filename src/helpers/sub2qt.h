@@ -20,7 +20,6 @@
 #ifndef HELPERSSUB2QT_H
 #define HELPERSSUB2QT_H
 
-#include "svnqt/datetime.h"
 #include "svnqt/targets.h"
 
 #include <QString>

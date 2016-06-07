@@ -281,26 +281,25 @@ public:
                 return QSqlDatabase();
             }
         }
-        QSqlDatabase _db;
         if (m_mainDB.localData()->reposCacheNames.find(dbFile) != m_mainDB.localData()->reposCacheNames.end()) {
-            _db = QSqlDatabase::database(m_mainDB.localData()->reposCacheNames[dbFile]);
-            checkReposDb(_db);
-            return _db;
+            QSqlDatabase db = QSqlDatabase::database(m_mainDB.localData()->reposCacheNames[dbFile]);
+            checkReposDb(db);
+            return db;
         }
-        int i = 0;
+        unsigned i = 0;
         QString _key = dbFile;
         while (QSqlDatabase::contains(_key)) {
             _key = QString(QLatin1String("%1-%2")).arg(dbFile).arg(i++);
         }
-        _db = QSqlDatabase::addDatabase(SQLTYPE, _key);
-        QString fulldb = idToPath(dbFile);
-        _db.setDatabaseName(fulldb);
-        if (!checkReposDb(_db)) {
-            _db = QSqlDatabase();
+        const QString fulldb = idToPath(dbFile);
+        QSqlDatabase db = QSqlDatabase::addDatabase(SQLTYPE, _key);
+        db.setDatabaseName(fulldb);
+        if (!checkReposDb(db)) {
+            db = QSqlDatabase();
         } else {
             m_mainDB.localData()->reposCacheNames[dbFile] = _key;
         }
-        return _db;
+        return db;
     }
 
     QSqlDatabase getMainDB()const
@@ -309,7 +308,7 @@ public:
             unsigned i = 0;
             QString _key = SQLMAIN;
             while (QSqlDatabase::contains(_key)) {
-                _key = QString(QLatin1String("%s-%i")).arg(SQLMAIN).arg(i++);
+                _key = QString(QLatin1String("%1-%2")).arg(SQLMAIN).arg(i++);
             }
             QSqlDatabase db = QSqlDatabase::addDatabase(SQLTYPE, _key);
             db.setDatabaseName(m_BasePath + QLatin1String("/maindb.db"));

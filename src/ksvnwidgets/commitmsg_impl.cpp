@@ -289,7 +289,7 @@ QString Commitmsg_impl::getLogmessageInternal(Commitmsg_impl *ptr, bool *ok, svn
     svn::Depth _depth = svn::DepthUnknown;
     QString msg;
 
-    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("logmsg_dlg_size"), parent));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("logmsg_dlg_size"), parent));
     dlg->setWindowTitle(i18n("Commit log"));
     dlg->setWithCancelButton();
     dlg->addWidget(ptr);

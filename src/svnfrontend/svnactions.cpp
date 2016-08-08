@@ -488,7 +488,7 @@ void SvnActions::makeTree(const QString &what, const svn::Revision &_rev, const 
         stopFillCache();
     }
 
-    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("revisiontree_dlg"), m_Data->m_ParentList->realWidget()));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("revisiontree_dlg"), m_Data->m_ParentList->realWidget()));
     dlg->setWindowTitle(i18n("History of %1", info.url().toString().mid(reposRoot.length())));
 
     RevisionTree *rt(new RevisionTree(m_Data->m_Svnclient, m_Data->m_SvnContextListener, reposRoot,
@@ -622,7 +622,7 @@ void SvnActions::slotMakeCat(const svn::Revision &start, const QString &what, co
     const QByteArray co = file.readAll();
 
     if (!co.isEmpty()) {
-        QPointer<KSvnSimpleOkDialog> dlg = new KSvnSimpleOkDialog(QLatin1String("cat_display_dlg"), parent);
+        QPointer<KSvnSimpleOkDialog> dlg = new KSvnSimpleOkDialog(QStringLiteral("cat_display_dlg"), parent);
         dlg->setWindowTitle(i18n("Content of %1", disp));
         QTextBrowser *ptr = new QTextBrowser(dlg);
         ptr->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
@@ -896,7 +896,7 @@ void SvnActions::showInfo(const QStringList &infoList)
     }
     text += QLatin1String("</body></html>");
 
-    QPointer<KSvnSimpleOkDialog> dlg = new KSvnSimpleOkDialog(QLatin1String("info_dialog"), QApplication::activeModalWidget());
+    QPointer<KSvnSimpleOkDialog> dlg = new KSvnSimpleOkDialog(QStringLiteral("info_dialog"), QApplication::activeModalWidget());
     dlg->setWindowTitle(i18n("Infolist"));
     QTextBrowser *ptr = new QTextBrowser(dlg);
     dlg->addWidget(ptr);
@@ -1402,7 +1402,7 @@ void SvnActions::dispDiff(const QByteArray &ex)
         if (!need_modal && m_Data->m_DiffBrowserPtr) {
             delete m_Data->m_DiffBrowserPtr;
         }
-        QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("diff_display")));
+        QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("diff_display")));
         if (!need_modal) {
             dlg->setParent(nullptr);
         }
@@ -1627,7 +1627,7 @@ void SvnActions::slotExportCurrent()
 
 void SvnActions::CheckoutExport(const QUrl &what, bool _exp, bool urlisTarget)
 {
-    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("checkout_export_dialog")));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("checkout_export_dialog")));
     CheckoutInfo_impl *ptr(new CheckoutInfo_impl(dlg));
     dlg->setWindowTitle(_exp ? i18n("Export a repository") : i18n("Checkout a repository"));
     dlg->setWithCancelButton();
@@ -1879,7 +1879,7 @@ void SvnActions::slotSwitch()
 
 bool SvnActions::makeSwitch(const QString &path, const QUrl &what)
 {
-    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("switch_url_dlg")));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("switch_url_dlg")));
     CheckoutInfo_impl *ptr(new CheckoutInfo_impl(dlg));
     dlg->setWindowTitle(i18n("Switch URL"));
     dlg->setWithCancelButton();
@@ -2405,7 +2405,7 @@ void SvnActions::checkAddItems(const QString &path, bool print_error_box)
             KMessageBox::error(m_Data->m_ParentList->realWidget(), i18n("No unversioned items found."));
         }
     } else {
-        QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("add_items_dlg")));
+        QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("add_items_dlg")));
         dlg->setWindowTitle(i18n("Add unversioned items"));
         dlg->setWithCancelButton();
         QTreeWidget *ptr(new QTreeWidget(dlg));

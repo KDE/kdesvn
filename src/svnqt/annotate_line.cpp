@@ -74,19 +74,19 @@ AnnotateLine::AnnotateLine(qlonglong line_no,
     : m_line_no(line_no)
     , m_revision(revision)
     , m_date(QDateTime())
-    , m_line(line ? line : "")
+    , m_line(line ? QByteArray(line) : QByteArray())
     , m_merge_revision(merge_revision)
-    , m_merge_path(merge_path ? merge_path : "")
+    , m_merge_path(merge_path ? QByteArray(merge_path) : QByteArray())
 {
-    QString _s = revisionproperties[QLatin1String("svn:author")];
+    QString _s = revisionproperties[QStringLiteral("svn:author")];
     m_author = _s.toUtf8();
-    _s = revisionproperties[QLatin1String("svn:date")];
+    _s = revisionproperties[QStringLiteral("svn:date")];
     if (!_s.isEmpty()) {
         m_date = QDateTime::fromString(_s, Qt::ISODate);
     }
-    _s = mergeproperties[QLatin1String("svn:author")];
+    _s = mergeproperties[QStringLiteral("svn:author")];
     m_merge_author = _s.toUtf8();
-    _s = mergeproperties[QLatin1String("svn:date")];
+    _s = mergeproperties[QStringLiteral("svn:date")];
     if (!_s.isEmpty()) {
         m_merge_date = QDateTime::fromString(_s, Qt::ISODate);
     }

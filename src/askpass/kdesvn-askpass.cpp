@@ -31,7 +31,7 @@
 int main(int argc, char **argv)
 {
     QApplication app(argc, argv); // PORTING SCRIPT: move this to before the KAboutData initialization
-    KAboutData aboutData(QLatin1String("kdesvnaskpass"), i18n("kdesvnaskpass"), QLatin1String("0.2"),
+    KAboutData aboutData(QStringLiteral("kdesvnaskpass"), i18n("kdesvnaskpass"), QStringLiteral("0.2"),
                          i18n("ssh-askpass for kdesvn"),
                          KAboutLicense::LicenseKey::LGPL,
                          i18n("Copyright (c) 2005-2009 Rajko Albrecht"));
@@ -41,7 +41,7 @@ int main(int argc, char **argv)
     parser.addHelpOption();
     aboutData.setupCommandLine(&parser);
     aboutData.processCommandLine(&parser);
-    parser.addPositionalArgument(QLatin1String("[prompt]"), i18n("Prompt"));
+    parser.addPositionalArgument(QStringLiteral("[prompt]"), i18n("Prompt"));
     parser.process(app);
     // no need for session management
     //app.disableSessionManagement();

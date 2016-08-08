@@ -49,7 +49,7 @@ public:
         return m_id;
     }
 
-    unsigned long percent(qulonglong amount);
+    unsigned long percent(qulonglong amount) const;
 
     virtual void setTotal(qlonglong max);
     qlonglong max()const

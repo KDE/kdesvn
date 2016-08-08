@@ -281,7 +281,7 @@ void kdesvnpart::showAboutApplication()
     if (!m_aboutDlg) {
         QString m_Extratext = i18n("Built with Subversion library: %1\nRunning Subversion library: %2", svn::Version::linked_version(), svn::Version::running_version());
 
-        KAboutData about(QLatin1String("kdesvnpart"),
+        KAboutData about(QStringLiteral("kdesvnpart"),
                          i18n("kdesvn Part"),
                          version,
                          i18n("A Subversion Client for KDE (dynamic Part component)"),
@@ -289,10 +289,10 @@ void kdesvnpart::showAboutApplication()
                          i18n("(C) 2005-2009 Rajko Albrecht"),
                          m_Extratext);
 
-        about.addAuthor(QLatin1String("Rajko Albrecht"), i18n("Original author and maintainer"), QLatin1String("ral@alwins-world.de"));
-        about.addAuthor(QLatin1String("Christian Ehrlicher"), i18n("Developer"), QLatin1String("ch.ehrlicher@gmx.de"));
+        about.addAuthor(QStringLiteral("Rajko Albrecht"), i18n("Original author and maintainer"), QStringLiteral("ral@alwins-world.de"));
+        about.addAuthor(QStringLiteral("Christian Ehrlicher"), i18n("Developer"), QStringLiteral("ch.ehrlicher@gmx.de"));
         about.setHomepage("https://projects.kde.org/kdesvn");
-        qApp->setWindowIcon(QIcon::fromTheme(QLatin1String("kdesvn")));
+        qApp->setWindowIcon(QIcon::fromTheme(QStringLiteral("kdesvn")));
         m_aboutDlg = new KAboutApplicationDialog(about);
     }
     if (m_aboutDlg == 0) {

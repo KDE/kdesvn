@@ -46,7 +46,7 @@ Rangeinput_impl::~Rangeinput_impl()
 
 bool Rangeinput_impl::getRevisionRange(revision_range &range, bool bWithWorking, bool bStartOnly, QWidget *parent)
 {
-    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("revisions_dlg"), parent));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("revisions_dlg"), parent));
     dlg->setWindowTitle(i18n("Select revisions"));
     dlg->setWithCancelButton();
     Rangeinput_impl *rdlg(new Rangeinput_impl(dlg));

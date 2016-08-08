@@ -253,7 +253,7 @@ void kdesvnView::slotCreateRepo()
 
 void kdesvnView::slotHotcopy()
 {
-    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("hotcopy_repo_size"), QApplication::activeModalWidget()));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("hotcopy_repo_size"), QApplication::activeModalWidget()));
     dlg->setWindowTitle(i18n("Hotcopy a repository"));
     dlg->setWithCancelButton();
 
@@ -280,7 +280,7 @@ void kdesvnView::slotHotcopy()
 
 void kdesvnView::slotLoaddump()
 {
-    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("loaddump_repo_size"), this));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("loaddump_repo_size"), this));
     dlg->setWindowTitle(i18n("Load a repository from a svndump"));
     dlg->setWithCancelButton();
 
@@ -342,7 +342,7 @@ void kdesvnView::slotLoaddump()
 
 void kdesvnView::slotDumpRepo()
 {
-    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("dump_repo_size"), QApplication::activeModalWidget()));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("dump_repo_size"), QApplication::activeModalWidget()));
     dlg->setWindowTitle(i18n("Dump a repository"));
     dlg->setWithCancelButton();
 

@@ -168,47 +168,47 @@ public:
         QStringList list = aDb.tables();
 
         aDb.transaction();
-        if (list.indexOf(QLatin1String("logentries")) == -1) {
-            _q.exec(QLatin1String("CREATE TABLE \"logentries\" (\"idx\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \"revision\" INTEGER UNIQUE,\"date\" INTEGER,\"author\" TEXT, \"message\" TEXT)"));
+        if (!list.contains(QStringLiteral("logentries"))) {
+            _q.exec(QStringLiteral("CREATE TABLE \"logentries\" (\"idx\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \"revision\" INTEGER UNIQUE,\"date\" INTEGER,\"author\" TEXT, \"message\" TEXT)"));
         }
-        if (list.indexOf(QLatin1String("changeditems")) == -1) {
-            _q.exec(QLatin1String("CREATE TABLE \"changeditems\" (\"idx\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \"revision\" INTEGER,\"changeditem\" TEXT,\"action\" TEXT,\"copyfrom\" TEXT,\"copyfromrev\" INTEGER, UNIQUE(revision,changeditem,action))"));
+        if (!list.contains(QStringLiteral("changeditems"))) {
+            _q.exec(QStringLiteral("CREATE TABLE \"changeditems\" (\"idx\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \"revision\" INTEGER,\"changeditem\" TEXT,\"action\" TEXT,\"copyfrom\" TEXT,\"copyfromrev\" INTEGER, UNIQUE(revision,changeditem,action))"));
         }
-        if (list.indexOf(QLatin1String("mergeditems")) == -1) {
-            _q.exec(QLatin1String("CREATE TABLE \"mergeditems\" (\"revision\" INTEGER,\"mergeditems\" TEXT, PRIMARY KEY(revision))"));
+        if (!list.contains(QStringLiteral("mergeditems"))) {
+            _q.exec(QStringLiteral("CREATE TABLE \"mergeditems\" (\"revision\" INTEGER,\"mergeditems\" TEXT, PRIMARY KEY(revision))"));
         }
-        if (list.indexOf(QLatin1String("dbversion")) == -1) {
-            _q.exec(QLatin1String("CREATE TABLE \"dbversion\" (\"version\" INTEGER)"));
+        if (!list.contains(QStringLiteral("dbversion"))) {
+            _q.exec(QStringLiteral("CREATE TABLE \"dbversion\" (\"version\" INTEGER)"));
             qDebug() << _q.lastError();
-            _q.exec(QLatin1String("insert into \"dbversion\" (version) values(0)"));
+            _q.exec(QStringLiteral("INSERT INTO \"dbversion\" (version) VALUES(0)"));
         }
         aDb.commit();
         list = aDb.tables();
-        if (list.indexOf(QLatin1String("logentries")) == -1 ||
-            list.indexOf(QLatin1String("changeditems")) == -1 ||
-            list.indexOf(QLatin1String("mergeditems")) == -1 ||
-            list.indexOf(QLatin1String("dbversion")) == -1) {
+        if (!list.contains(QStringLiteral("logentries")) ||
+            !list.contains(QStringLiteral("changeditems")) ||
+            !list.contains(QStringLiteral("mergeditems")) ||
+            !list.contains(QStringLiteral("dbversion"))) {
             qDebug() << "lists: " << list;
             return false;
         }
-        _q.exec(QLatin1String("SELECT VERSION from dbversion limit 1"));
+        _q.exec(QStringLiteral("SELECT VERSION from dbversion limit 1"));
         if (_q.lastError().type() == QSqlError::NoError && _q.next()) {
             int version = _q.value(0).toInt();
             if (version == 0) {
-                _q.exec(QLatin1String("create index if not exists main.authorindex on logentries(author)"));
+                _q.exec(QStringLiteral("create index if not exists main.authorindex on logentries(author)"));
                 if (_q.lastError().type() != QSqlError::NoError) {
                     qDebug() << _q.lastError();
                 } else {
-                    _q.exec(QLatin1String("UPDATE dbversion SET VERSION=1"));
+                    _q.exec(QStringLiteral("UPDATE dbversion SET VERSION=1"));
                 }
                 ++version;
             }
             if (version == 1) {
-                _q.exec(QLatin1String("create index if not exists main.dateindex on logentries(date)"));
+                _q.exec(QStringLiteral("create index if not exists main.dateindex on logentries(date)"));
                 if (_q.lastError().type() != QSqlError::NoError) {
                     qDebug() << _q.lastError();
                 } else {
-                    _q.exec(QLatin1String("UPDATE dbversion SET VERSION=2"));
+                    _q.exec(QStringLiteral("UPDATE dbversion SET VERSION=2"));
                 }
                 ++version;
             }
@@ -243,11 +243,11 @@ public:
         }
         if (!db.isEmpty()) {
             QString fulldb = idToPath(db);
-            QSqlDatabase _db = QSqlDatabase::addDatabase(SQLTYPE, QLatin1String("tmpdb"));
+            QSqlDatabase _db = QSqlDatabase::addDatabase(SQLTYPE, QStringLiteral("tmpdb"));
             _db.setDatabaseName(fulldb);
             if (!checkReposDb(_db)) {
             }
-            QSqlDatabase::removeDatabase(QLatin1String("tmpdb"));
+            QSqlDatabase::removeDatabase(QStringLiteral("tmpdb"));
         }
         return db;
     }
@@ -282,14 +282,14 @@ public:
             }
         }
         if (m_mainDB.localData()->reposCacheNames.find(dbFile) != m_mainDB.localData()->reposCacheNames.end()) {
-            QSqlDatabase db = QSqlDatabase::database(m_mainDB.localData()->reposCacheNames[dbFile]);
+            QSqlDatabase db = QSqlDatabase::database(m_mainDB.localData()->reposCacheNames.value(dbFile));
             checkReposDb(db);
             return db;
         }
         unsigned i = 0;
         QString _key = dbFile;
         while (QSqlDatabase::contains(_key)) {
-            _key = QString(QLatin1String("%1-%2")).arg(dbFile).arg(i++);
+            _key = QStringLiteral("%1-%2").arg(dbFile).arg(i++);
         }
         const QString fulldb = idToPath(dbFile);
         QSqlDatabase db = QSqlDatabase::addDatabase(SQLTYPE, _key);
@@ -308,7 +308,7 @@ public:
             unsigned i = 0;
             QString _key = SQLMAIN;
             while (QSqlDatabase::contains(_key)) {
-                _key = QString(QLatin1String("%1-%2")).arg(SQLMAIN).arg(i++);
+                _key = QStringLiteral("%1-%2").arg(SQLMAIN).arg(i++);
             }
             QSqlDatabase db = QSqlDatabase::addDatabase(SQLTYPE, _key);
             db.setDatabaseName(m_BasePath + QLatin1String("/maindb.db"));

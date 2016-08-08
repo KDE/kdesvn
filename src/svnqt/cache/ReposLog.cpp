@@ -273,7 +273,7 @@ bool svn::cache::ReposLog::checkFill(svn::Revision &start, svn::Revision &end, b
             if (cp && cp->getListener()) {
                 //cp->getListener()->contextProgress(++icount,_internal.size());
                 if (cp->getListener()->contextCancel()) {
-                    throw DatabaseException(QLatin1String("Could not retrieve values: User cancel."));
+                    throw DatabaseException(QStringLiteral("Could not retrieve values: User cancel."));
                 }
             }
         }
@@ -317,16 +317,14 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap &target, const svn::Revision 
     if (start == svn::Revision::HEAD) {
         start = latestCachedRev();
     }
-    static const QLatin1String sCount("select count(*) from logentries where revision<=? and revision>=?");
-    static const QLatin1String sEntry("select revision,author,date,message from logentries where revision<=? and revision>=?");
-    QString sItems(QLatin1String("select changeditem,action,copyfrom,copyfromrev from changeditems where revision=?"));
+    QString sItems(QStringLiteral("select changeditem,action,copyfrom,copyfromrev from changeditems where revision=?"));
 
     for (int i = 0; i < exclude.size(); ++i) {
         sItems += QLatin1String(" and changeditem not like '") + exclude[i] + QLatin1String("%'");
     }
 
     QSqlQuery bcount(QString(), m_Database);
-    bcount.prepare(sCount);
+    bcount.prepare(QStringLiteral("select count(*) from logentries where revision<=? and revision>=?"));
 
     QSqlQuery bcur(QString(), m_Database);
 
@@ -345,7 +343,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap &target, const svn::Revision 
     }
 
     bcur.setForwardOnly(true);
-    bcur.prepare(sEntry);
+    bcur.prepare(QStringLiteral("select revision,author,date,message from logentries where revision<=? and revision>=?"));
     bcur.bindValue(0, Q_LLONG(end.revnum()));
     bcur.bindValue(1, Q_LLONG(start.revnum()));
 
@@ -362,7 +360,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap &target, const svn::Revision 
 
         if (!cur.exec()) {
           //qDebug() << cur.lastError().text();
-          throw svn::cache::DatabaseException(QString(QLatin1String("Could not retrieve revision values: %1, %2"))
+          throw svn::cache::DatabaseException(QString(QStringLiteral("Could not retrieve revision values: %1, %2"))
                                               .arg(cur.lastError().text(),
                                                    cur.lastError().nativeErrorCode()));
           return false;
@@ -382,7 +380,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap &target, const svn::Revision 
         }
         if (cp && cp->getListener()) {
             if (cp->getListener()->contextCancel()) {
-                throw svn::cache::DatabaseException(QLatin1String("Could not retrieve values: User cancel."));
+                throw svn::cache::DatabaseException(QStringLiteral("Could not retrieve values: User cancel."));
                 return false;
             }
         }
@@ -401,8 +399,7 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision &aRev, bo
     if (!m_Database.isValid()) {
         return svn::Revision::UNDEFINED;
     }
-    static const QLatin1String _q("select revision from logentries where date<? order by revision desc");
-    QSqlQuery query(QLatin1String("select revision,date from logentries order by revision desc limit 1"), m_Database);
+    QSqlQuery query(QStringLiteral("select revision,date from logentries order by revision desc limit 1"), m_Database);
 
     if (query.lastError().type() != QSqlError::NoError) {
         //qDebug() << query.lastError().text();
@@ -420,7 +417,7 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision &aRev, bo
         }
         return e[0].revision();
     }
-    query.prepare(_q);
+    query.prepare(QStringLiteral("select revision from logentries where date<? order by revision desc"));
     query.bindValue(0, Q_LLONG(aRev.date()));
     if (query.exec() && query.next()) {
         return query.value(0).toInt();
@@ -453,7 +450,7 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry &aEntry)
     if (!_q.exec()) {
         //qDebug("Could not insert values: %s",_q.lastError().text().toUtf8().data());
         //qDebug() << _q.lastQuery();
-        throw svn::cache::DatabaseException(QString(QLatin1String("_insertLogEntry_0: Could not insert values: %1, %2")).arg(_q.lastError().text(), _q.lastError().nativeErrorCode()));
+        throw svn::cache::DatabaseException(QStringLiteral("_insertLogEntry_0: Could not insert values: %1, %2").arg(_q.lastError().text(), _q.lastError().nativeErrorCode()));
     }
     _q.prepare(qPathes);
     svn::LogChangePathEntries::ConstIterator cpit = aEntry.changedPaths.begin();
@@ -466,7 +463,7 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry &aEntry)
         if (!_q.exec()) {
             //qDebug("Could not insert values: %s",_q.lastError().text().toUtf8().data());
             //qDebug() << _q.lastQuery();
-            throw svn::cache::DatabaseException(QString(QLatin1String("Could not insert values: %1, %2")).arg(_q.lastError().text(), _q.lastError().nativeErrorCode()));
+            throw svn::cache::DatabaseException(QStringLiteral("Could not insert values: %1, %2").arg(_q.lastError().text(), _q.lastError().nativeErrorCode()));
         }
     }
     if (!aEntry.m_MergedInRevisions.isEmpty()) {
@@ -483,7 +480,7 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry &aEntry)
         if (!_q.exec()) {
             //qDebug("Could not insert values: %s",_q.lastError().text().toUtf8().data());
             //qDebug() << _q.lastQuery();
-            throw svn::cache::DatabaseException(QString(QLatin1String("Could not insert values: %1, %2")).arg(_q.lastError().text(), _q.lastError().nativeErrorCode()));
+            throw svn::cache::DatabaseException(QStringLiteral("Could not insert values: %1, %2").arg(_q.lastError().text(), _q.lastError().nativeErrorCode()));
         }
     }
     return true;
@@ -511,15 +508,15 @@ bool svn::cache::ReposLog::log(const svn::Path &what, const svn::Revision &_star
     static const QLatin1String s_m("select mergeditems from mergeditems where mergeditems.revision='%1'");
 
     svn::Revision peg = date2numberRev(_peg, true);
-    QString query_string = QString(s_q).arg(what.native(), what.native(), (peg == svn::Revision::UNDEFINED ? QString() : QString(QLatin1String(" AND revision<=%1")).arg(peg.revnum())));
+    QString query_string = QString(s_q).arg(what.native(), what.native(), (peg == svn::Revision::UNDEFINED ? QString() : QStringLiteral(" AND revision<=%1").arg(peg.revnum())));
     if (peg == svn::Revision::UNDEFINED) {
         peg = latestCachedRev();
     }
     if (!itemExists(peg, what)) {
-        throw svn::cache::DatabaseException(QString(QLatin1String("Entry '%1' does not exists at revision %2")).arg(what.native(), peg.toString()));
+        throw svn::cache::DatabaseException(QStringLiteral("Entry '%1' does not exists at revision %2").arg(what.native(), peg.toString()));
     }
     if (limit > 0) {
-        query_string += QString(QLatin1String(" LIMIT %1")).arg(limit);
+        query_string += QStringLiteral(" LIMIT %1").arg(limit);
     }
     QSqlQuery _q(m_Database);
     QSqlQuery _q2(m_Database);
@@ -528,7 +525,7 @@ bool svn::cache::ReposLog::log(const svn::Path &what, const svn::Revision &_star
     if (!_q.exec()) {
         //qDebug("Could not select values: %s",_q.lastError().text().toUtf8().data());
         //qDebug() << _q.lastQuery();
-        throw svn::cache::DatabaseException(QString(QLatin1String("Could not select values: %1, %2")).arg(_q.lastError().text(), _q.lastError().nativeErrorCode()));
+        throw svn::cache::DatabaseException(QStringLiteral("Could not select values: %1, %2").arg(_q.lastError().text(), _q.lastError().nativeErrorCode()));
     }
     while (_q.next()) {
         Q_LLONG revision = _q.value(0).toLongLong();
@@ -620,16 +617,16 @@ void svn::cache::ReposLog::cleanLogEntries()
     }
     DatabaseLocker l(&m_Database);
     QSqlQuery _q(QString(), m_Database);
-    if (!_q.exec(QLatin1String("delete from logentries"))) {
+    if (!_q.exec(QStringLiteral("delete from logentries"))) {
         return;
     }
-    if (!_q.exec(QLatin1String("delete from changeditems"))) {
+    if (!_q.exec(QStringLiteral("delete from changeditems"))) {
         return;
     }
-    if (!_q.exec(QLatin1String("delete from mergeditems"))) {
+    if (!_q.exec(QStringLiteral("delete from mergeditems"))) {
         return;
     }
 
     l.commit();
-    _q.exec(QLatin1String("vacuum"));
+    _q.exec(QStringLiteral("vacuum"));
 }

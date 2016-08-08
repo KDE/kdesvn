@@ -70,7 +70,7 @@ QString CopyMoveView_impl::newName() const
 QString CopyMoveView_impl::getMoveCopyTo(bool *ok, bool move,
                                          const QString &old, const QString &base, QWidget *parent)
 {
-    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("copy_move_dlg"), parent));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("copy_move_dlg"), parent));
     dlg->setWindowTitle(move ? i18n("Move/Rename file/directory") : i18n("Copy file/directory"));
     dlg->setWithCancelButton();
 

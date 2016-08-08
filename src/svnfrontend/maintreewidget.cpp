@@ -776,7 +776,6 @@ void MainTreeWidget::enableActions()
     /* 1. actions on files AND dirs*/
     enableAction("make_svn_add", (multi || single) && isWorkingCopy());
     enableAction("make_svn_revert", (multi || single) && isWorkingCopy() && (at_least_one_changed || at_least_one_conflicted || at_least_one_local_added));
-    qDebug("Enable make_svn_revert: %d", (multi || single) && isWorkingCopy() && (at_least_one_changed || at_least_one_conflicted || at_least_one_local_added));
     enableAction("make_resolved", (multi || single) && isWorkingCopy());
     enableAction("make_try_resolve", conflicted && !single_dir);
 
@@ -1021,7 +1020,7 @@ void MainTreeWidget::slotRightRecAddIgnore()
 
 void MainTreeWidget::recAddIgnore(SvnItem *item)
 {
-    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("ignore_pattern_dlg")));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("ignore_pattern_dlg")));
     dlg->setWindowTitle(i18n("Edit pattern to ignore for \"%1\"", item->shortName()));
     dlg->setWithCancelButton();
     EditIgnorePattern *ptr(new EditIgnorePattern(dlg));
@@ -1302,7 +1301,7 @@ void MainTreeWidget::slotLock()
         KMessageBox::error(this, i18n("Nothing selected for unlock"));
         return;
     }
-    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("locking_log_msg")));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("locking_log_msg")));
     dlg->setWindowTitle(i18n("Lock message"));
     dlg->setWithCancelButton();
     Commitmsg_impl *ptr(new Commitmsg_impl(dlg));
@@ -1930,7 +1929,7 @@ void MainTreeWidget::slotMerge()
         target = m_Data->merge_Target;
     }
     src2 = m_Data->merge_Src2;
-    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("merge_dialog")));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("merge_dialog")));
     dlg->setWindowTitle(i18n("Merge"));
     dlg->setWithCancelButton();
     dlg->setHelp(QLatin1String("merging-items"));
@@ -1989,7 +1988,7 @@ void MainTreeWidget::slotRelocate()
     }
     const QString path = k->fullName();
     const QUrl fromUrl = k->Url();
-    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("relocate_dlg")));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("relocate_dlg")));
     dlg->setWindowTitle(i18n("Relocate path %1", path));
     dlg->setWithCancelButton();
     CheckoutInfo_impl *ptr(new CheckoutInfo_impl(dlg));
@@ -2071,7 +2070,7 @@ void MainTreeWidget::slotImportIntoDir(const QString &source, const QUrl &_targe
     }
     QUrl targetUri(_targetUri);
 
-    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("import_log_msg")));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("import_log_msg")));
     dlg->setWindowTitle(i18n("Import log"));
     dlg->setWithCancelButton();
     Commitmsg_impl *ptr = nullptr;

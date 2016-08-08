@@ -93,13 +93,13 @@ public:
             case svn_repos_notify_warning: {
                 switch (_warning) {
                 case svn_repos_notify_warning_found_old_reference:
-                    _msg = QLatin1String("Old Reference: ");
+                    _msg = QStringLiteral("Old Reference: ");
                     break;
                 case svn_repos_notify_warning_found_old_mergeinfo:
-                    _msg = QLatin1String("Old mergeinfo found: ");
+                    _msg = QStringLiteral("Old mergeinfo found: ");
                     break;
                 case svn_repos_notify_warning_invalid_fspath:
-                    _msg = QLatin1String("Invalid path: ");
+                    _msg = QStringLiteral("Invalid path: ");
                     break;
                 default:
                     _msg.clear();
@@ -109,33 +109,33 @@ public:
             break;
             case svn_repos_notify_dump_rev_end:
             case svn_repos_notify_verify_rev_end: {
-                _msg = QLatin1String("Revision ") + _rev.toString() + QLatin1String(" finished.");
+                _msg = QStringLiteral("Revision %1 finished.").arg(_rev.toString());
             }
             break;
             case svn_repos_notify_dump_end: {
-                _msg = QLatin1String("Dump finished");
+                _msg = QStringLiteral("Dump finished");
             }
             break;
             case svn_repos_notify_verify_end: {
-                _msg = QLatin1String("Verification finished");
+                _msg = QStringLiteral("Verification finished");
             }
             break;
             case svn_repos_notify_pack_shard_start: {
-                _msg = QString(QLatin1String("Packing revisions in shard %ul")).arg(_shard);
+                _msg = QStringLiteral("Packing revisions in shard %1").arg(_shard);
             }
             break;
             case svn_repos_notify_pack_shard_end_revprop:
             case svn_repos_notify_pack_shard_end:
             case svn_repos_notify_load_node_done: {
-                _msg = QLatin1String("Done");
+                _msg = QStringLiteral("Done");
             }
             break;
             case svn_repos_notify_pack_shard_start_revprop: {
-                _msg = QString(QLatin1String("Packing revsion properties in shard %ul")).arg(_shard);
+                _msg = QStringLiteral("Packing revsion properties in shard %1").arg(_shard);
             }
             break;
             case svn_repos_notify_load_txn_start: {
-                _msg = QLatin1String("Start loading old revision ") + _oldrev.toString();
+                _msg = QStringLiteral("Start loading old revision ") + _oldrev.toString();
             }
             break;
             case svn_repos_notify_load_txn_committed: {
@@ -149,27 +149,27 @@ public:
                 QString action;
                 switch (_node_action) {
                 case svn_node_action_change:
-                    action = QLatin1String("changing");
+                    action = QStringLiteral("changing");
                     break;
                 case svn_node_action_add:
-                    action = QLatin1String("adding");
+                    action = QStringLiteral("adding");
                     break;
                 case svn_node_action_delete:
-                    action = QLatin1String("deletion");
+                    action = QStringLiteral("deletion");
                     break;
                 case svn_node_action_replace:
-                    action = QLatin1String("replacing");
+                    action = QStringLiteral("replacing");
                     break;
                 }
                 _msg = QLatin1String("Start ") + action + QLatin1String(" on node ") + _path.native();
             }
             break;
             case svn_repos_notify_load_copied_node: {
-                _msg = QLatin1String("Copied");
+                _msg = QStringLiteral("Copied");
             }
             break;
             case svn_repos_notify_load_normalized_mergeinfo: {
-                _msg = QLatin1String("Removing \\r from ") + QLatin1String(SVN_PROP_MERGEINFO);
+                _msg = QStringLiteral("Removing \\r from ") + QLatin1String(SVN_PROP_MERGEINFO);
             }
             break;
             case svn_repos_notify_mutex_acquired: {

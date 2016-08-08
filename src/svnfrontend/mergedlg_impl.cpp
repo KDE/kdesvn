@@ -184,7 +184,7 @@ bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range &range, bool *
                                   bool *useExternal, bool *allowmixedrevs,
                                   QWidget *parent)
 {
-    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("merge_range"), parent));
+    QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("merge_range"), parent));
     dlg->setWithCancelButton();
     dlg->setHelp(QLatin1String("merging-items"));
     dlg->setWindowTitle(i18n("Enter merge range"));

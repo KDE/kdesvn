@@ -316,7 +316,7 @@ int CommandExec::exec(const QCommandLineParser *parser)
     emit executeMe();
     if (Kdesvnsettings::self()->cmdline_show_logwindow() &&
             m_lastMessagesLines >= Kdesvnsettings::self()->cmdline_log_minline()) {
-        QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QLatin1String("kdesvn_cmd_log"), QApplication::activeModalWidget()));
+        QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("kdesvn_cmd_log"), QApplication::activeModalWidget()));
         QTextBrowser *ptr = new QTextBrowser(dlg);
         ptr->setText(m_lastMessages);
         ptr->setReadOnly(true);

@@ -45,14 +45,15 @@ void LogChangePathItem::init(const svn::LogChangePathEntry &e)
 }
 
 SvnLogModelNode::SvnLogModelNode(const svn::LogEntry &_entry)
-    : _data(_entry), _realName(QString())
+    : _data(_entry)
+    , _realName(QString())
+    , _date(svn::DateTime(_entry.date))
 {
-    _date = svn::DateTime(_entry.date);
-    const QStringList sp = _entry.message.split(QLatin1Char('\n'));
+    const QVector<QStringRef> sp = _entry.message.splitRef(QLatin1Char('\n'));
     if (sp.isEmpty()) {
         _shortMessage = _entry.message;
     } else {
-        _shortMessage = sp[0];
+        _shortMessage = sp.at(0).toString();
     }
 }
 
@@ -61,7 +62,7 @@ const svn::LogChangePathEntries &SvnLogModelNode::changedPaths()const
     return _data.changedPaths;
 }
 
-bool SvnLogModelNode::copiedFrom(QString &_n, long &_rev)const
+bool SvnLogModelNode::copiedFrom(QString &_n, qlonglong &_rev)const
 {
     for (int i = 0; i < _data.changedPaths.count(); ++i) {
         const svn::LogChangePathEntry &entry =_data.changedPaths.at(i);

@@ -27,87 +27,57 @@
 #include <QTreeWidget>
 #include <QMap>
 
-class SvnLogModelData
+SvnLogModel::SvnLogModel(const svn::LogEntriesMapPtr &_log, const QString &m_name, QObject *parent)
+    : QAbstractListModel(parent)
+    , m_emptyString()
+    , m_min(-1)
+    , m_max(-1)
+    , m_name()
+    , m_left(-1)
+    , m_right(-1)
 {
-public:
-    SvnLogModelData()
-        : m_List(), m_rowCount(-1), m_Empty(), _min(-1), _max(-1), _name(), _left(-1), _right(-1)
-    {
-    }
-    QVector<SvnLogModelNodePtr> m_List;
-    int m_rowCount;
-    QString m_Empty;
-    long _min, _max;
-    QString _name;
-    long _left, _right;
-};
-
-SvnLogModel::SvnLogModel(const svn::LogEntriesMapPtr &_log, const QString &_name, QObject *parent)
-    : QAbstractItemModel(parent), m_data(new SvnLogModelData)
-{
-    setLogData(_log, _name);
+    setLogData(_log, m_name);
 }
 
 SvnLogModel::~SvnLogModel()
-{
-}
+{}
 
-QModelIndex SvnLogModel::index(int row, int column, const QModelIndex &parent)const
+void SvnLogModel::setLogData(const svn::LogEntriesMapPtr &log, const QString &name)
 {
-    Q_UNUSED(parent);
-    if (row >= m_data->m_List.count() || row < 0) {
-        return QModelIndex();
-    }
-    SvnLogModelNodePtr n = m_data->m_List.at(row);
-    return createIndex(row, column, n.data());
-}
-
-Qt::ItemFlags SvnLogModel::flags(const QModelIndex &index) const
-{
-    if (index.isValid()) {
-        return Qt::ItemIsSelectable | Qt::ItemIsEnabled/*|Qt::ItemIsUserCheckable*/;
-    }
-    return 0;
-}
-
-QModelIndex SvnLogModel::parent(const QModelIndex &)const
-{
-    // we have no tree...
-    return QModelIndex();
-}
-
-void SvnLogModel::setLogData(const svn::LogEntriesMapPtr &_log, const QString &_name)
-{
-    beginRemoveRows(QModelIndex(), 0, m_data->m_List.count());
-    m_data->m_List.clear();
-    endRemoveRows();
-    m_data->_name = _name;
-    m_data->_left = m_data->_right = -1;
+    beginResetModel();
+    m_data.clear();
+    endResetModel();
+    m_name = name;
+    m_left = m_right = -1;
 
     QMap<long int, SvnLogModelNodePtr> itemMap;
 
-    m_data->_min = m_data->_max = -1;
+    m_min = m_max = -1;
 
-    m_data->m_List.reserve(_log->count());
-    beginInsertRows(QModelIndex(), 0, _log->count() - 1);
-    svn::LogEntriesMap::const_iterator it = _log->constBegin();
-    for (; it != _log->constEnd(); ++it) {
+    if (log->isEmpty()) {
+        return;
+    }
+
+    m_data.reserve(log->count());
+    beginInsertRows(QModelIndex(), 0, log->count() - 1);
+    svn::LogEntriesMap::const_iterator it = log->constBegin();
+    for (; it != log->constEnd(); ++it) {
         SvnLogModelNodePtr np(new SvnLogModelNode((*it)));
-        m_data->m_List.append(np);
-        if ((*it).revision > m_data->_max) {
-            m_data->_max = (*it).revision;
+        m_data.append(np);
+        if ((*it).revision > m_max) {
+            m_max = (*it).revision;
         }
-        if ((*it).revision < m_data->_min || m_data->_min == -1) {
-            m_data->_min = (*it).revision;
+        if ((*it).revision < m_min || m_min == -1) {
+            m_min = (*it).revision;
         }
         itemMap[(*it).revision] = np;
     }
     endInsertRows();
-    QString bef = m_data->_name;
-    long rev;
+    QString bef = m_name;
+    qlonglong rev;
     // YES! I'd checked it: this is much faster than getting list of keys
     // and iterating over that list!
-    for (long c = m_data->_max; c > -1; --c) {
+    for (long c = m_max; c > -1; --c) {
         if (!itemMap.contains(c)) {
             continue;
         }
@@ -118,28 +88,28 @@ void SvnLogModel::setLogData(const svn::LogEntriesMapPtr &_log, const QString &_
     }
 }
 
-long SvnLogModel::min() const
+qlonglong SvnLogModel::min() const
 {
-    return m_data->_min;
+    return m_min;
 }
 
-long SvnLogModel::max() const
+qlonglong SvnLogModel::max() const
 {
-    return m_data->_max;
+    return m_max;
 }
 
 int SvnLogModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return m_data->m_List.count();
+    return m_data.count();
 }
 
 QVariant SvnLogModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || index.row() >= m_data->m_List.count()) {
+    if (!index.isValid() || index.row() >= m_data.count()) {
         return QVariant();
     }
-    const SvnLogModelNodePtr &_l = m_data->m_List.at(index.row());
+    const SvnLogModelNodePtr &_l = m_data.at(index.row());
 
     switch (role) {
     case Qt::DisplayRole:
@@ -156,13 +126,13 @@ QVariant SvnLogModel::data(const QModelIndex &index, int role) const
         break;
     case Qt::DecorationRole:
         if (index.column() == 0) {
-            if (index.row() == m_data->_left) {
-                return QIcon::fromTheme("kdesvnleft");
-            } else if (index.row() == m_data->_right) {
-                return QIcon::fromTheme("kdesvnright");
-            } else {
-                return QString("   ");
+            if (index.row() == m_left) {
+                return QIcon::fromTheme(QStringLiteral("kdesvnleft"));
             }
+            if (index.row() == m_right) {
+                return QIcon::fromTheme(QStringLiteral("kdesvnright"));
+            }
+            return QStringLiteral("   ");
         }
         break;
     }
@@ -171,26 +141,26 @@ QVariant SvnLogModel::data(const QModelIndex &index, int role) const
 
 qlonglong SvnLogModel::toRevision(const QModelIndex &index)const
 {
-    if (!index.isValid() || index.row() >= m_data->m_List.count()) {
+    if (!index.isValid() || index.row() >= m_data.count()) {
         return -1;
     }
-    return m_data->m_List[index.row()]->revision();
+    return m_data[index.row()]->revision();
 }
 
 const QString &SvnLogModel::fullMessage(const QModelIndex &index)const
 {
-    if (!index.isValid() || index.row() >= m_data->m_List.count()) {
-        return m_data->m_Empty;
+    if (!index.isValid() || index.row() >= m_data.count()) {
+        return m_emptyString;
     }
-    return m_data->m_List[index.row()]->message();
+    return m_data[index.row()]->message();
 }
 
 const QString &SvnLogModel::realName(const QModelIndex &index)
 {
-    if (!index.isValid() || index.row() >= m_data->m_List.count()) {
-        return m_data->m_Empty;
+    if (!index.isValid() || index.row() >= m_data.count()) {
+        return m_emptyString;
     }
-    return m_data->m_List[index.row()]->realName();
+    return m_data[index.row()]->realName();
 }
 
 int SvnLogModel::columnCount(const QModelIndex &)const
@@ -219,19 +189,19 @@ QVariant SvnLogModel::headerData(int section, Qt::Orientation orientation, int r
 
 SvnLogModelNodePtr SvnLogModel::indexNode(const QModelIndex &index)const
 {
-    if (!index.isValid() || index.row() >= m_data->m_List.count()) {
+    if (!index.isValid() || index.row() >= m_data.count()) {
         return SvnLogModelNodePtr();
     }
-    return m_data->m_List.at(index.row());
+    return m_data.at(index.row());
 }
 
 void SvnLogModel::fillChangedPaths(const QModelIndex &index, QTreeWidget *where)
 {
-    if (!where || !index.isValid() || index.row() >= m_data->m_List.count()) {
+    if (!where || !index.isValid() || index.row() >= m_data.count()) {
         return;
     }
     where->clear();
-    const SvnLogModelNodePtr &_l = m_data->m_List.at(index.row());
+    const SvnLogModelNodePtr &_l = m_data.at(index.row());
     if (_l->changedPaths().isEmpty()) {
         return;
     }
@@ -246,30 +216,30 @@ void SvnLogModel::fillChangedPaths(const QModelIndex &index, QTreeWidget *where)
     where->sortByColumn(1, Qt::AscendingOrder);
 }
 
-long SvnLogModel::leftRow()const
+int SvnLogModel::leftRow()const
 {
-    return m_data->_left;
+    return m_left;
 }
 
-long SvnLogModel::rightRow()const
+int SvnLogModel::rightRow()const
 {
-    return m_data->_right;
+    return m_right;
 }
 
-void SvnLogModel::setLeftRow(long v)
+void SvnLogModel::setLeftRow(int v)
 {
-    if (m_data->_right == v) {
-        m_data->_right = -1;
+    if (m_right == v) {
+        m_right = -1;
     }
-    m_data->_left = v;
+    m_left = v;
 }
 
-void SvnLogModel::setRightRow(long v)
+void SvnLogModel::setRightRow(int v)
 {
-    if (m_data->_left == v) {
-        m_data->_left = -1;
+    if (m_left == v) {
+        m_left = -1;
     }
-    m_data->_right = v;
+    m_right = v;
 }
 
 SvnLogSortModel::SvnLogSortModel(QObject *parent)
@@ -291,15 +261,15 @@ bool SvnLogSortModel::lessThan(const QModelIndex &source_left, const QModelIndex
     if(source_left.column() != source_right.column() || !m_sourceModel) {
         return QSortFilterProxyModel::lessThan(source_left, source_right);
     }
-    const SvnLogModelNodePtr dataLeft = m_sourceModel->indexNode(source_left);
-    const SvnLogModelNodePtr dataRight = m_sourceModel->indexNode(source_right);
+    const SvnLogModelNodePtr &dataLeft = m_sourceModel->m_data.at(source_left.row());
+    const SvnLogModelNodePtr &dataRight = m_sourceModel->m_data.at(source_right.row());
     switch (source_left.column()) {
         case SvnLogModel::Author:
             return dataLeft->author() < dataRight->author();
         case SvnLogModel::Revision:
             return dataLeft->revision() < dataRight->revision();
         case SvnLogModel::Date:
-            return dataLeft->date() < dataRight->date();
+            return dataLeft->dateMSec() < dataRight->dateMSec();
         case SvnLogModel::Message:
             return dataLeft->message() < dataRight->message();
         default:

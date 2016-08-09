@@ -86,6 +86,10 @@ public:
     {
         return _date;
     }
+    const qlonglong &dateMSec() const
+    {
+        return _data.date;
+    }
     void setRealName(const QString &_n)
     {
         _realName = _n;
@@ -95,7 +99,7 @@ public:
         return _realName;
     }
 
-    bool copiedFrom(QString &_n, long &_rev)const;
+    bool copiedFrom(QString &_n, qlonglong &_rev)const;
     static bool isParent(const QString &_par, const QString &tar);
 
 protected:

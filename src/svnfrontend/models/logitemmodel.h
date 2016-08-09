@@ -26,29 +26,23 @@
 
 #include "svnqt/svnqttypes.h"
 
-class SvnLogModelData;
 class SvnLogModelNode;
 class QTreeWidget;
 
 typedef QSharedPointer<SvnLogModelNode> SvnLogModelNodePtr;
 
-class SvnLogModel: public QAbstractItemModel
+class SvnLogModel: public QAbstractListModel
 {
     Q_OBJECT
 public:
     SvnLogModel(const svn::LogEntriesMapPtr &_log, const QString &_name, QObject *parent);
     virtual ~SvnLogModel();
-    void setLogData(const svn::LogEntriesMapPtr &_log, const QString &_name);
-    QVariant data(const QModelIndex &index, int role) const;
-
-    virtual QModelIndex index(int row, int column = 0, const QModelIndex &parent = QModelIndex())const;
-    virtual QModelIndex parent(const QModelIndex &)const;
+    void setLogData(const svn::LogEntriesMapPtr &log, const QString &name);
 
     qlonglong toRevision(const QModelIndex &)const;
     const QString &fullMessage(const QModelIndex &index)const;
     void fillChangedPaths(const QModelIndex &index, QTreeWidget *target);
     const QString &realName(const QModelIndex &index);
-    virtual Qt::ItemFlags flags(const QModelIndex &index) const;
 
     enum Columns {
         Author = 0,
@@ -57,21 +51,28 @@ public:
         Message,
         Count
     };
-    virtual int rowCount(const QModelIndex &parent)const;
-    virtual SvnLogModelNodePtr indexNode(const QModelIndex &)const;
-    virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
-    virtual int columnCount(const QModelIndex &)const;
 
-    long leftRow()const;
-    long rightRow()const;
-    void setLeftRow(long);
-    void setRightRow(long);
+    QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
+    int rowCount(const QModelIndex &parent) const Q_DECL_OVERRIDE;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+    int columnCount(const QModelIndex &) const Q_DECL_OVERRIDE;
 
-    long min() const;
-    long max() const;
+    SvnLogModelNodePtr indexNode(const QModelIndex &)const;
+    int leftRow()const;
+    int rightRow()const;
+    void setLeftRow(int);
+    void setRightRow(int);
+
+    qlonglong min() const;
+    qlonglong max() const;
 
 private:
-    QSharedPointer<SvnLogModelData> m_data;
+    QVector<SvnLogModelNodePtr> m_data;
+    QString m_emptyString;
+    qlonglong m_min, m_max;
+    QString m_name;
+    int m_left, m_right;
+
     friend class SvnLogSortModel;
 };
 

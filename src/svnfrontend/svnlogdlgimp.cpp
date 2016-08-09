@@ -242,16 +242,15 @@ void SvnLogDlgImp::slotDispPrevious()
         m_DispPrevButton->setEnabled(false);
         return;
     }
-    QString s, e;
-    SvnLogModelNodePtr k = m_CurrentModel->indexNode(_index);
-    SvnLogModelNodePtr p = m_CurrentModel->indexNode(_it);
+    const SvnLogModelNodePtr k = m_CurrentModel->indexNode(_index);
+    const SvnLogModelNodePtr p = m_CurrentModel->indexNode(_it);
     if (!k || !p) {
         m_DispPrevButton->setEnabled(false);
         return;
     }
 
-    s = _base + k->realName();
-    e = _base + p->realName();
+    const QString s(_base + k->realName());
+    const QString e(_base + p->realName());
     emit makeDiff(e, p->revision(), s, k->revision(), this);
 }
 

@@ -286,12 +286,12 @@ void kdesvnpart::showAboutApplication()
                          version,
                          i18n("A Subversion Client for KDE (dynamic Part component)"),
                          KAboutLicense::LGPL_V2,
-                         i18n("(C) 2005-2009 Rajko Albrecht"),
+                         i18n("(C) 2005-2009 Rajko Albrecht,\n(C) 2015-2016 Christian Ehrlicher"),
                          m_Extratext);
 
         about.addAuthor(QStringLiteral("Rajko Albrecht"), i18n("Original author and maintainer"), QStringLiteral("ral@alwins-world.de"));
         about.addAuthor(QStringLiteral("Christian Ehrlicher"), i18n("Developer"), QStringLiteral("ch.ehrlicher@gmx.de"));
-        about.setHomepage("https://projects.kde.org/kdesvn");
+        about.setHomepage("https://quickgit.kde.org/?p=kdesvn.git");
         qApp->setWindowIcon(QIcon::fromTheme(QStringLiteral("kdesvn")));
         m_aboutDlg = new KAboutApplicationDialog(about);
     }

@@ -41,10 +41,10 @@ int main(int argc, char **argv)
     app.setWindowIcon(QIcon::fromTheme(QLatin1String("kdesvn")));
 
     KAboutData aboutData(QLatin1String("kdesvn"), i18n("kdesvn"), QString(KDESVN_VERSION), i18n(description),
-                         KAboutLicense::GPL, i18n("(C) 2005-2009 Rajko Albrecht"));
+                         KAboutLicense::GPL, i18n("(C) 2005-2009 Rajko Albrecht,\n(C) 2015-2016 Christian Ehrlicher"));
     aboutData.addAuthor(i18n("Rajko Albrecht"), i18n("Developer"), QString("ral@alwins-world.de"));
     aboutData.addAuthor(i18n("Christian Ehrlicher"), i18n("Developer"), QLatin1String("ch.ehrlicher@gmx.de"));
-    aboutData.setHomepage("https://projects.kde.org/kdesvn");
+    aboutData.setHomepage("https://quickgit.kde.org/?p=kdesvn.git");
     KAboutData::setApplicationData(aboutData);
 
     QCommandLineParser parser;

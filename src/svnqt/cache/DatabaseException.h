@@ -38,14 +38,10 @@ private:
     int m_number;
 
 public:
-    explicit DatabaseException(const QString &msg)throw()
-        : Exception(msg), m_number(-1)
-    {}
-
     DatabaseException(const DatabaseException &src)throw()
         : Exception(src.msg()), m_number(src.number())
     {}
-    DatabaseException(const QString &msg, int aNumber)throw();
+    DatabaseException(const QString &msg, int aNumber = -1)throw();
     virtual ~DatabaseException()throw() {}
     int number() const
     {

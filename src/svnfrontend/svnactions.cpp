@@ -1277,7 +1277,7 @@ void SvnActions::makeDiffinternal(const QString &p1, const svn::Revision &r1, co
     svn::DiffParameter _opts;
     _opts.path1(p1).path2(p2).tmpPath(tn).
         peg(peg).rev1(r1).rev2(r2).
-        ignoreContentType(ignore_content).extra(extraOptions).depth(svn::DepthInfinity).ignoreAncestry(false).noDiffDeleted(false).changeList(svn::StringArray()).
+        ignoreContentType(ignore_content).extra(svn::StringArray(extraOptions)).depth(svn::DepthInfinity).ignoreAncestry(false).noDiffDeleted(false).changeList(svn::StringArray()).
         git_diff_format(gitformat).copies_as_adds(copy_as_add);
 
     try {
@@ -1331,7 +1331,7 @@ void SvnActions::makeNorecDiff(const QString &p1, const svn::Revision &r1, const
     // no peg revision required
     _opts.path1(p1).path2(p2).tmpPath(tn).
     rev1(r1).rev2(r2).
-    ignoreContentType(ignore_content).extra(extraOptions).depth(svn::DepthEmpty).ignoreAncestry(false).noDiffDeleted(false).changeList(svn::StringArray());
+    ignoreContentType(ignore_content).extra(svn::StringArray(extraOptions)).depth(svn::DepthEmpty).ignoreAncestry(false).noDiffDeleted(false).changeList(svn::StringArray());
 
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, _p ? _p : m_Data->m_ParentList->realWidget(),

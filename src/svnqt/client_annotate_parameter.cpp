@@ -23,7 +23,6 @@
  ***************************************************************************/
 #include "client_annotate_parameter.h"
 #include "svnqttypes.h"
-#include "stringarray.h"
 #include "client_parameter_macros.h"
 #include "diffoptions.h"
 

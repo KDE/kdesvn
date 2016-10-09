@@ -47,8 +47,8 @@ protected:
 
 public:
     StringArray();
-    StringArray(const QStringList &);    //krazy:exclude=explicit
-    StringArray(const apr_array_header_t *apr_targets);    //krazy:exclude=explicit
+    explicit StringArray(const QStringList &);
+    explicit StringArray(const apr_array_header_t *apr_targets);
     QStringList::size_type size()const;
     const QString &operator[](QStringList::size_type which)const;
     QString &operator[](QStringList::size_type which);

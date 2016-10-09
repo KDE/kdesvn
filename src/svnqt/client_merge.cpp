@@ -30,7 +30,6 @@
 #include "pool.h"
 #include "targets.h"
 #include "svnqt_defines.h"
-#include "stringarray.h"
 #include "helper.h"
 #include "client_parameter.h"
 

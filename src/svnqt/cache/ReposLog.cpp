@@ -292,7 +292,7 @@ bool svn::cache::ReposLog::fillCache(const svn::Revision &_end)
 /*!
     \fn svn::cache::ReposLog::simpleLog(const svn::Revision&start,const svn::Revision&end,LogEntriesMap&target)
  */
-bool svn::cache::ReposLog::simpleLog(LogEntriesMap &target, const svn::Revision &_start, const svn::Revision &_end, bool noNetwork, const QStringList &exclude)
+bool svn::cache::ReposLog::simpleLog(LogEntriesMap &target, const svn::Revision &_start, const svn::Revision &_end, bool noNetwork, const StringArray &exclude)
 {
     if (!m_Client || m_ReposRoot.isEmpty()) {
         return false;

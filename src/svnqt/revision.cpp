@@ -121,12 +121,6 @@ Revision &Revision::operator=(const QString &what)
     return *this;
 }
 
-Revision::Revision(const DateTime &dateTime)
-{
-    m_revision.kind = svn_opt_revision_date;
-    m_revision.value.date = dateTime.GetAPRTimeT();
-}
-
 Revision::Revision(const QDateTime &dateTime)
 {
     assign(dateTime);

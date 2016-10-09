@@ -141,13 +141,6 @@ public:
     /**
      * Constructor
      *
-     * @param dateTime DateTime wrapper for apr_time_t
-     * @todo change it to referenced parameter (requires interface upgrade of lib)
-     */
-    Revision(const DateTime &dateTime);    //krazy:exclude=explicit
-    /**
-     * Constructor
-     *
      * @param dateTime QDateTime type
      */
     Revision(const QDateTime &dateTime);    //krazy:exclude=explicit

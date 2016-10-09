@@ -317,19 +317,9 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap &target, const svn::Revision 
     if (start == svn::Revision::HEAD) {
         start = latestCachedRev();
     }
-    QString sItems(QStringLiteral("select changeditem,action,copyfrom,copyfromrev from changeditems where revision=?"));
 
-    for (int i = 0; i < exclude.size(); ++i) {
-        sItems += QLatin1String(" and changeditem not like '") + exclude[i] + QLatin1String("%'");
-    }
-
-    QSqlQuery bcount(QString(), m_Database);
+    QSqlQuery bcount(m_Database);
     bcount.prepare(QStringLiteral("select count(*) from logentries where revision<=? and revision>=?"));
-
-    QSqlQuery bcur(QString(), m_Database);
-
-    QSqlQuery cur(QString(), m_Database);
-
     bcount.bindValue(0, Q_LLONG(end.revnum()));
     bcount.bindValue(1, Q_LLONG(start.revnum()));
     if (!bcount.exec()) {
@@ -342,6 +332,7 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap &target, const svn::Revision 
         return false;
     }
 
+    QSqlQuery bcur(m_Database);
     bcur.setForwardOnly(true);
     bcur.prepare(QStringLiteral("select revision,author,date,message from logentries where revision<=? and revision>=?"));
     bcur.bindValue(0, Q_LLONG(end.revnum()));
@@ -351,16 +342,22 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap &target, const svn::Revision 
         throw svn::cache::DatabaseException(QLatin1String("Could not retrieve values: ") + bcur.lastError().text());
         return false;
     }
-    Q_LLONG revision;
+
+    QString sItems(QStringLiteral("select changeditem,action,copyfrom,copyfromrev from changeditems where revision=?"));
+    for (int i = 0; i < exclude.size(); ++i) {
+        sItems += QLatin1String(" and changeditem not like '") + exclude[i] + QLatin1String("%'");
+    }
+    QSqlQuery cur(m_Database);
+    cur.setForwardOnly(true);
+    cur.prepare(sItems);
+
     while (bcur.next()) {
-        cur.setForwardOnly(true);
-        cur.prepare(sItems);
-        revision = bcur.value(0).toLongLong();
+        const Q_LLONG revision = bcur.value(0).toLongLong();
         cur.bindValue(0, revision);
 
         if (!cur.exec()) {
           //qDebug() << cur.lastError().text();
-          throw svn::cache::DatabaseException(QString(QStringLiteral("Could not retrieve revision values: %1, %2"))
+          throw svn::cache::DatabaseException(QStringLiteral("Could not retrieve revision values: %1, %2")
                                               .arg(cur.lastError().text(),
                                                    cur.lastError().nativeErrorCode()));
           return false;

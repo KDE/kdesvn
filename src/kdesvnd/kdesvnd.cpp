@@ -71,7 +71,7 @@ kdesvnd::~kdesvnd()
     delete m_Listener;
 }
 
-QStringList kdesvnd::getTopLevelActionMenu(const QStringList &urlList)
+QStringList kdesvnd::getTopLevelActionMenu(const QStringList &urlList) const
 {
     // we get correct urls here
     QList<QUrl> urls;
@@ -83,7 +83,7 @@ QStringList kdesvnd::getTopLevelActionMenu(const QStringList &urlList)
     return getActionMenu(urls, true);
 }
 
-QStringList kdesvnd::getActionMenu(const QStringList &urlList)
+QStringList kdesvnd::getActionMenu(const QStringList &urlList) const
 {
     // we get correct urls here
     QList<QUrl> urls;
@@ -94,7 +94,7 @@ QStringList kdesvnd::getActionMenu(const QStringList &urlList)
     return getActionMenu(urls, false);
 }
 
-QStringList kdesvnd::getActionMenu(const QList<QUrl> &list, bool toplevel)
+QStringList kdesvnd::getActionMenu(const QList<QUrl> &list, bool toplevel) const
 {
     QStringList result;
     Kdesvnsettings::self()->load();
@@ -167,7 +167,7 @@ QStringList kdesvnd::getActionMenu(const QList<QUrl> &list, bool toplevel)
     return result;
 }
 
-QStringList kdesvnd::getSingleActionMenu(const QString &what)
+QStringList kdesvnd::getSingleActionMenu(const QString &what) const
 {
     QList<QUrl> l;
     l.append(QUrl(what));
@@ -252,20 +252,19 @@ QStringList kdesvnd::get_sslclientcertpw(const QString &realm)
     return resList;
 }
 
-QString kdesvnd::get_sslclientcertfile()
+QString kdesvnd::get_sslclientcertfile() const
 {
     return QFileDialog::getOpenFileName(nullptr, i18n("Open a file with a #PKCS12 certificate"));
 }
 
-QStringList kdesvnd::get_logmsg()
+QStringList kdesvnd::get_logmsg() const
 {
     QStringList res;
     bool ok;
     QString logMessage = Commitmsg_impl::getLogmessage(&ok, 0, 0, 0);
-    if (!ok) {
-        return res;
+    if (ok) {
+        res.append(logMessage);
     }
-    res.append(logMessage);
     return res;
 }
 

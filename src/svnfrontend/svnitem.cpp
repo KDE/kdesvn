@@ -96,7 +96,7 @@ void SvnItem_p::init()
         m_short = m_full;
     }
     m_url = m_Stat->entry().url();
-    m_fullDate = svn::DateTime(m_Stat->entry().cmtDate());
+    m_fullDate = m_Stat->entry().cmtDate().toQDateTime();
     m_infoText.clear();
 }
 

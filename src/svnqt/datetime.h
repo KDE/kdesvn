@@ -63,55 +63,35 @@ public:
      *
      * @param time number of microseconds since 00:00:00 january 1, 1970 UTC
      */
-    DateTime(const apr_time_t time);    //krazy:exclude=explicit
+    explicit DateTime(const apr_time_t time);
 
     /**
      * Constructor
      *
      * @param dt QDateTime class
      */
-    DateTime(const QDateTime &dt);    //krazy:exclude=explicit
+    explicit DateTime(const QDateTime &dt);
 
     /**
      * Constructor
      * @param dt RFC822 compatible string
      */
-    DateTime(const QString &dt);    //krazy:exclude=explicit
-
-    bool
-    operator<(const DateTime &dateTime)const;
-    bool
-    operator>(const DateTime &dateTime)const;
-    bool
-    operator!=(const DateTime &dateTime)const;
-    bool
-    operator==(const DateTime &dateTime)const;
-    bool
-    operator<=(const DateTime &dateTime)const;
-    bool
-    operator>=(const DateTime &dateTime)const;
+    explicit DateTime(const QString &dt);
 
     /**
      * @return Is a valid (non-zero) date
      */
-    bool
-    IsValid() const;
+    bool IsValid() const { return m_time.isValid(); }
 
     /**
      * @return APR apr_time_t
      */
-    apr_time_t
-    GetAPRTimeT() const;
+    apr_time_t GetAPRTimeT() const;
 
     /**
      * @return QDateTime object
      */
-    operator const QDateTime &()const;
-
-    /**
-     * @return QDateTime object
-     */
-    const QDateTime &toQDateTime()const;
+    const QDateTime &toQDateTime()const { return m_time; }
 
     /**
      * @param format format string
@@ -131,12 +111,11 @@ public:
      * @see apr_date_parse_rfc
      * @return Successfully parsed
      */
-    bool
-    SetRFC822Date(const char *date);
+    bool SetRFC822Date(const char *date);
 
     void setAprTime(apr_time_t aTime);
-    unsigned int toTime_t()const;
-    void setTime_t(unsigned int sec);
+    //unsigned int toTime_t()const;
+    //void setTime_t(unsigned int sec);
 };
 }
 

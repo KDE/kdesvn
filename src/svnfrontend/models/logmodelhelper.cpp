@@ -47,7 +47,7 @@ void LogChangePathItem::init(const svn::LogChangePathEntry &e)
 SvnLogModelNode::SvnLogModelNode(const svn::LogEntry &_entry)
     : _data(_entry)
     , _realName(QString())
-    , _date(svn::DateTime(_entry.date))
+    , _date(svn::DateTime(_entry.date).toQDateTime())
 {
     const QVector<QStringRef> sp = _entry.message.splitRef(QLatin1Char('\n'));
     if (sp.isEmpty()) {

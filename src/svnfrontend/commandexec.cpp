@@ -506,7 +506,7 @@ void CommandExec::slotCmd_list()
         return;
     }
     Q_FOREACH(const svn::DirEntry &entry, res) {
-        QString d = svn::DateTime(entry.time()).toString(QString("yyyy-MM-dd hh:mm::ss"));
+        QString d = entry.time().toString(QStringLiteral("yyyy-MM-dd hh:mm::ss"));
         m_pCPart->Stdout
                 << (entry.kind() == svn_node_dir ? "D" : "F") << " "
                 << d << " "

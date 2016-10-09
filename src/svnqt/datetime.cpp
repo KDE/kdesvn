@@ -57,43 +57,6 @@ DateTime::DateTime(const QString &dt)
     SetRFC822Date(dt.toUtf8().constData());
 }
 
-bool DateTime::operator<(const DateTime &dateTime)const
-{
-    return m_time < dateTime.m_time;
-}
-
-bool DateTime::operator>(const DateTime &dateTime)const
-{
-    return dateTime < *this;
-}
-
-bool DateTime::operator!=(const DateTime &dateTime)const
-{
-    return *this < dateTime || dateTime < *this;
-}
-
-bool DateTime::operator==(const DateTime &dateTime)const
-{
-    return !(*this != dateTime);
-}
-
-bool
-DateTime::operator<=(const DateTime &dateTime)const
-{
-    return *this == dateTime || *this < dateTime;
-}
-bool
-DateTime::operator>=(const DateTime &dateTime)const
-{
-    return *this == dateTime || *this > dateTime;
-}
-
-bool
-DateTime::IsValid() const
-{
-    return m_time.isValid();
-}
-
 apr_time_t
 DateTime::GetAPRTimeT() const
 {
@@ -108,16 +71,6 @@ DateTime::SetRFC822Date(const char *date)
     apr_time_t aTime = apr_date_parse_rfc(date);
     setAprTime(aTime);
     return IsValid();
-}
-
-DateTime::operator const QDateTime &()const
-{
-    return m_time;
-}
-
-const QDateTime &DateTime::toQDateTime()const
-{
-    return *this;
 }
 
 void DateTime::setAprTime(apr_time_t aTime)
@@ -138,15 +91,5 @@ QString DateTime::toString(const QString &format)const
 QString DateTime::toString(Qt::DateFormat f) const
 {
     return m_time.toString(f);
-}
-
-unsigned int DateTime::toTime_t()const
-{
-    return m_time.toTime_t();
-}
-
-void DateTime::setTime_t(unsigned int sec)
-{
-    m_time.setTime_t(sec);
 }
 } // namespace svn

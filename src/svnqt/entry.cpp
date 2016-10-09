@@ -80,7 +80,7 @@ void Entry_private::init_clean()
     _cmt_author.clear();
     _revision = _cmt_rev = -1;
     _kind = svn_node_unknown;
-    _cmt_date = 0;
+    _cmt_date = DateTime();
     _copied = false;
 }
 
@@ -116,7 +116,7 @@ Entry_private::init(const svn_client_status_t *src)
         _kind = src->kind;
         _copied = src->copied != 0;
         _cmt_rev = src->changed_rev;
-        _cmt_date = src->changed_date;
+        _cmt_date = DateTime(src->changed_date);
         _cmt_author = QString::fromUtf8(src->changed_author);
         m_Lock.init(src->lock);
         m_valid = true;

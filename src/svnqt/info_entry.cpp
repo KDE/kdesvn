@@ -184,9 +184,9 @@ svn::Depth InfoEntry::depth()const
 void svn::InfoEntry::init()
 {
     m_name.clear();
-    m_last_changed_date = 0;
-    m_text_time = 0;
-    m_prop_time = 0;
+    m_last_changed_date = DateTime();
+    m_text_time = DateTime();
+    m_prop_time = DateTime();
     m_hasWc = false;
     m_Lock = LockEntry();
     m_checksum.clear();
@@ -226,7 +226,7 @@ void svn::InfoEntry::init(const svn_client_info2_t *item, const QString &path)
         return;
     }
     m_name = path;
-    m_last_changed_date = item->last_changed_date;
+    m_last_changed_date = DateTime(item->last_changed_date);
     if (item->lock) {
         m_Lock.init(item->lock);
     } else {

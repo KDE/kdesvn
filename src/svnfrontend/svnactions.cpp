@@ -798,15 +798,15 @@ QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_wha
             text += rb + i18n("UUID") + cs + ((*it).uuid()) + re;
         }
         text += rb + i18n("Last author") + cs + ((*it).cmtAuthor()) + re;
-        if ((*it).cmtDate() > 0) {
+        if ((*it).cmtDate().IsValid()) {
             text += rb + i18n("Last committed") + cs + (*it).cmtDate().toString() + re;
         }
         text += rb + i18n("Last revision") + cs + (*it).cmtRev().toString() + re;
-        if ((*it).textTime() > 0) {
+        if ((*it).textTime().IsValid()) {
             text += rb + i18n("Content last changed") + cs + (*it).textTime().toString() + re;
         }
         if (all) {
-            if ((*it).propTime() > 0) {
+            if ((*it).propTime().IsValid()) {
                 text += rb + i18n("Property last changed") + cs + (*it).propTime().toString() + re;
             }
 #ifdef SVN_INFO_SIMPLE_CONFLICT_TYPE

@@ -92,7 +92,7 @@ public:
 
     //! if -1 the entry is a fake entry and not real usable!
     qlonglong revision;
-    qlonglong date;
+    qlonglong date; // apr_time
     QString author;
     QString message;
     LogChangePathEntries changedPaths;

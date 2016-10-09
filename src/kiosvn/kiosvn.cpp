@@ -179,7 +179,7 @@ namespace KIO
 
 void kio_svnProtocol::listSendDirEntry(const svn::DirEntry &direntry)
 {
-    QDateTime dt = svn::DateTime(direntry.time());
+    const QDateTime dt(direntry.time().toQDateTime());
     KIO::UDSEntry entry;
     if (direntry.name().isEmpty()) {
         qCDebug(KDESVN_LOG) << "Skipping empty entry!" << endl;
@@ -246,11 +246,10 @@ void kio_svnProtocol::stat(const QUrl &url)
     }
 
     KIO::UDSEntry entry;
-    QDateTime dt;
     if (dummy) {
-        createUDSEntry(url.fileName(), QString(), 0, true, dt.toTime_t(), entry);
+        createUDSEntry(url.fileName(), QString(), 0, true, 0, entry);
     } else {
-        dt = svn::DateTime(e[0].cmtDate());
+        const QDateTime dt(e[0].cmtDate().toQDateTime());
         if (e[0].kind() == svn_node_file) {
             createUDSEntry(url.fileName(), QString(), 0, false, dt.toTime_t(), entry);
         } else {

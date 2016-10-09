@@ -1013,9 +1013,9 @@ void kio_svnProtocol::streamSendMime(const QMimeType &mt)
     }
 }
 
-void kio_svnProtocol::streamPushData(QByteArray array)
+void kio_svnProtocol::streamPushData(const QByteArray &streamData)
 {
-    data(array);
+    data(streamData);
 }
 
 void kio_svnProtocol::contextProgress(long long int current, long long int max)

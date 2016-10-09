@@ -59,7 +59,7 @@ public:
     virtual void special(const QByteArray &data) override;
     // StreamWrittenCb
     virtual void streamWritten(const KIO::filesize_t current) override;
-    virtual void streamPushData(QByteArray) override;
+    virtual void streamPushData(const QByteArray &streamData) override;
     virtual void streamSendMime(const QMimeType &mt) override;
 
     void contextProgress(long long int current, long long int max);

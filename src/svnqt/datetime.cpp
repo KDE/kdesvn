@@ -52,21 +52,9 @@ DateTime::DateTime(const QDateTime &dt)
 {
 }
 
-DateTime::DateTime(const DateTime &dateTime)
-    : m_time(dateTime.m_time)
-{
-}
-
 DateTime::DateTime(const QString &dt)
 {
     SetRFC822Date(dt.toUtf8().constData());
-}
-
-DateTime &
-DateTime::operator =(const DateTime &dateTime)
-{
-    m_time = dateTime.m_time;
-    return *this;
 }
 
 bool DateTime::operator<(const DateTime &dateTime)const

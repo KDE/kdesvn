@@ -58,7 +58,6 @@ public:
     InfoEntry(const svn_info_t *, const char *path);
     InfoEntry(const svn_info_t *, const QString &path);
 #endif
-    InfoEntry(const InfoEntry &);
     ~InfoEntry();
 
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)

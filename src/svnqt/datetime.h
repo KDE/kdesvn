@@ -78,19 +78,6 @@ public:
      */
     DateTime(const QString &dt);    //krazy:exclude=explicit
 
-    /**
-     * Copy constructor
-     *
-     * @param dateTime Source
-     */
-    DateTime(const DateTime &dateTime);
-
-    /**
-     * @param dateTime Source
-     */
-    DateTime &
-    operator =(const DateTime &dateTime);
-
     bool
     operator<(const DateTime &dateTime)const;
     bool

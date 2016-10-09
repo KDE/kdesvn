@@ -26,7 +26,7 @@
 
 #include "svnqt/svnqt_defines.h"
 
-#include <qstring.h>
+#include <QString>
 
 #include <svn_io.h>
 struct svn_client_ctx_t;
@@ -47,6 +47,10 @@ class SVNQT_EXPORT SvnStream
 {
     friend class SvnStream_private;
 public:
+    /* disable default contructor */
+    SvnStream() = delete;
+    Q_DISABLE_COPY(SvnStream)
+
     //! Constructor
     /*!
      * Setup a svn_stream_t and holds a required pool. The stream will freed
@@ -116,8 +120,6 @@ protected:
 
 private:
     SvnStream_private *m_Data;
-    /* disable default contructor */
-    SvnStream();
 };
 
 //! a class let subversion print into a QByteArray

@@ -132,11 +132,6 @@ Revision::Revision(const QDateTime &dateTime)
     assign(dateTime);
 }
 
-Revision::Revision(const Revision &revision)
-{
-    init(revision.revision());
-}
-
 void
 Revision::init(const svn_opt_revision_t *revision)
 {

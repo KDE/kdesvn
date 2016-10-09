@@ -79,6 +79,11 @@ public:
     virtual ~Context();
 
     /**
+     * disable assignment operator
+     */
+    Context &operator = (const Context &) = delete;
+
+    /**
      * enable/disable authentication caching
      *
      * @param value true=enable/false=disable
@@ -169,10 +174,6 @@ public:
 private:
     ContextData *m;
 
-    /**
-     * disable assignment operator
-     */
-    Context &operator = (const Context &);
 };
 }
 

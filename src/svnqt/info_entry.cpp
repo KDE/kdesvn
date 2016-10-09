@@ -368,36 +368,3 @@ void svn::InfoEntry::init(const svn_info_t *item, const QString &path)
     }
 }
 #endif
-
-svn::InfoEntry::InfoEntry(const InfoEntry &other)
-{
-    m_name = other.m_name;
-    m_last_changed_date = other.m_last_changed_date;
-    m_text_time = other.m_text_time;
-    m_prop_time = other.m_prop_time;
-    m_Lock = other.m_Lock;
-    m_checksum = other.m_checksum;
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
-    m_conflicts = other.m_conflicts;
-#else
-    m_conflict_new = other.m_conflict_new;
-    m_conflict_old = other.m_conflict_old;
-    m_conflict_wrk = other.m_conflict_wrk;
-#endif
-    m_copyfrom_url = other.m_copyfrom_url;
-    m_last_author = other.m_last_author;
-    m_prejfile = other.m_prejfile;
-    m_repos_root = other.m_repos_root;
-    m_url = other.m_url;
-    m_UUID = other.m_UUID;
-    m_kind = other.m_kind;
-    m_copy_from_rev = other.m_copy_from_rev;
-    m_last_changed_rev = other.m_last_changed_rev;
-    m_revision = other.m_revision;
-    m_hasWc = other.m_hasWc;
-    m_schedule = other.m_schedule;
-    m_size = other.m_size;
-    m_working_size = other.m_working_size;
-    m_changeList = other.m_changeList;
-    m_depth = other.m_depth;
-}

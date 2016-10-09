@@ -153,13 +153,6 @@ public:
     Revision(const QDateTime &dateTime);    //krazy:exclude=explicit
 
     /**
-     * Copy constructor
-     *
-     * @param revision Source
-     */
-    Revision(const Revision &revision);    //krazy:exclude=explicit
-
-    /**
      * @return revision information
      */
     const svn_opt_revision_t *

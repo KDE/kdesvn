@@ -72,6 +72,8 @@ public:
      */
     Path(const Path &path);
 
+    ~Path() = default;
+
     /**
      * Assignment operator
      */

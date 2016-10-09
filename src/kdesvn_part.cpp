@@ -291,7 +291,7 @@ void kdesvnpart::showAboutApplication()
 
         about.addAuthor(QStringLiteral("Rajko Albrecht"), i18n("Original author and maintainer"), QStringLiteral("ral@alwins-world.de"));
         about.addAuthor(QStringLiteral("Christian Ehrlicher"), i18n("Developer"), QStringLiteral("ch.ehrlicher@gmx.de"));
-        about.setHomepage("https://quickgit.kde.org/?p=kdesvn.git");
+        about.setHomepage("https://commits.kde.org/kdesvn");
         qApp->setWindowIcon(QIcon::fromTheme(QStringLiteral("kdesvn")));
         m_aboutDlg = new KAboutApplicationDialog(about);
     }

@@ -44,7 +44,7 @@ int main(int argc, char **argv)
                          KAboutLicense::GPL, i18n("(C) 2005-2009 Rajko Albrecht,\n(C) 2015-2016 Christian Ehrlicher"));
     aboutData.addAuthor(i18n("Rajko Albrecht"), i18n("Developer"), QString("ral@alwins-world.de"));
     aboutData.addAuthor(i18n("Christian Ehrlicher"), i18n("Developer"), QLatin1String("ch.ehrlicher@gmx.de"));
-    aboutData.setHomepage("https://quickgit.kde.org/?p=kdesvn.git");
+    aboutData.setHomepage("https://commits.kde.org/kdesvn");
     KAboutData::setApplicationData(aboutData);
 
     QCommandLineParser parser;

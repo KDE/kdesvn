@@ -134,7 +134,7 @@ class Hash2Map
 {
     PropertiesMap _map;
 public:
-    Hash2Map(apr_hash_t *hash, const svn::Pool &pool)
+    Hash2Map(apr_hash_t *hash, apr_pool_t *pool)
         : _map()
     {
         if (hash != 0L) {

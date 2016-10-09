@@ -48,7 +48,7 @@ public:
      *
      * @param parent NULL -> global pool
      */
-    Pool(apr_pool_t *parent = nullptr);    //krazy:exclude=explicit
+    explicit Pool(apr_pool_t *parent = nullptr);
     Pool &operator=(const Pool &) = delete;
     Pool(const Pool &) = delete;
 

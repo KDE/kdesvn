@@ -67,8 +67,8 @@ public:
     }
     void setChoice(ConflictChoice aValue);
 
-    const svn_wc_conflict_result_t *result(const Pool &pool)const;
-    void assignResult(svn_wc_conflict_result_t **aResult, const Pool &pool)const;
+    const svn_wc_conflict_result_t *result(apr_pool_t *pool)const;
+    void assignResult(svn_wc_conflict_result_t **aResult, apr_pool_t *pool)const;
 
 protected:
     ConflictChoice m_choice;

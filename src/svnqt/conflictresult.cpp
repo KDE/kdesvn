@@ -84,7 +84,7 @@ void ConflictResult::setChoice(ConflictChoice aValue)
     m_choice = aValue;
 }
 
-void ConflictResult::assignResult(svn_wc_conflict_result_t **aResult, const Pool &pool)const
+void ConflictResult::assignResult(svn_wc_conflict_result_t **aResult, apr_pool_t *pool)const
 {
     svn_wc_conflict_choice_t _choice;
     switch (choice()) {
@@ -121,7 +121,7 @@ void ConflictResult::assignResult(svn_wc_conflict_result_t **aResult, const Pool
     }
 }
 
-const svn_wc_conflict_result_t *ConflictResult::result(const Pool &pool)const
+const svn_wc_conflict_result_t *ConflictResult::result(apr_pool_t *pool)const
 {
     svn_wc_conflict_result_t *result = 0;
     assignResult(&result, pool);

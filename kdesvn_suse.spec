@@ -17,7 +17,7 @@
 
 
 Name:           kdesvn
-Version:        1.7.40
+Version:        2.0.0
 Release:        0
 Summary:        KDE Subversion Client
 License:        GPL-2.0+

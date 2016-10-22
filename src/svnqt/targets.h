@@ -38,7 +38,10 @@
 // apr api
 #include <apr_tables.h>
 
+#include <QList>
+
 class QStringList;
+class QUrl;
 
 namespace svn
 {
@@ -127,6 +130,11 @@ public:
      */
     const Path
     target(Paths::size_type which) const;
+
+    /** convenience functions
+     */
+    static Targets fromStringList(const QStringList &paths);
+    static Targets fromUrlList(const QList<QUrl> &urls);
 
 private:
     Paths m_targets;

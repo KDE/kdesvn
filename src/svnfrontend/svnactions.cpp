@@ -55,7 +55,6 @@
 
 #include "fronthelpers/watchedprocess.h"
 
-#include "helpers/sub2qt.h"
 #include "helpers/stringhelper.h"
 #include "helpers/kdesvn_debug.h"
 #include "helpers/ktranslateurl.h"
@@ -1584,7 +1583,7 @@ bool SvnActions::makeDelete(const QStringList &w)
     if (answer != KMessageBox::Yes) {
         return false;
     }
-    return makeDelete(helpers::sub2qt::fromStringList(w));
+    return makeDelete(svn::Targets::fromStringList(w));
 }
 
 /*!
@@ -1786,7 +1785,7 @@ void SvnActions::slotRevertItems(const QStringList &displist)
     const svn::Depth depth = dlg->getDepth();
     delete dlg;
 
-    const svn::Targets target(helpers::sub2qt::fromStringList(displist));
+    const svn::Targets target(svn::Targets::fromStringList(displist));
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18n("Revert"), i18n("Reverting items"));
@@ -2263,7 +2262,7 @@ bool SvnActions::makeMove(const QList<QUrl> &Old, const QString &New)
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18n("Move"), i18n("Moving entries"));
         connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
-        const svn::Targets t(helpers::sub2qt::fromUrlList(Old));
+        const svn::Targets t(svn::Targets::fromUrlList(Old));
         m_Data->m_Svnclient->move(svn::CopyParameter(t, svn::Path(New)).asChild(true).makeParent(false));
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
@@ -2292,7 +2291,7 @@ bool SvnActions::makeCopy(const QString &Old, const QString &New, const svn::Rev
 
 bool SvnActions::makeCopy(const QList<QUrl> &Old, const QString &New, const svn::Revision &rev)
 {
-    const svn::Targets t(helpers::sub2qt::fromUrlList(Old));
+    const svn::Targets t(svn::Targets::fromUrlList(Old));
 
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
@@ -2315,7 +2314,7 @@ void SvnActions::makeLock(const QStringList &what, const QString &_msg, bool bre
         return;
     }
     try {
-        m_Data->m_Svnclient->lock(helpers::sub2qt::fromStringList(what), _msg, breakit);
+        m_Data->m_Svnclient->lock(svn::Targets::fromStringList(what), _msg, breakit);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
         return;
@@ -2332,7 +2331,7 @@ void SvnActions::makeUnlock(const QStringList &what, bool breakit)
         return;
     }
     try {
-        m_Data->m_Svnclient->unlock(helpers::sub2qt::fromStringList(what), breakit);
+        m_Data->m_Svnclient->unlock(svn::Targets::fromStringList(what), breakit);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
         return;
@@ -2428,7 +2427,7 @@ void SvnActions::checkAddItems(const QString &path, bool print_error_box)
                 ++it;
             }
             if (!displist.isEmpty()) {
-                addItems(helpers::sub2qt::fromStringList(displist).targets(), svn::DepthEmpty);
+                addItems(svn::Targets::fromStringList(displist).targets(), svn::DepthEmpty);
             }
         }
         delete dlg;

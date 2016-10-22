@@ -24,7 +24,6 @@
 #include "svnqt/targets.h"
 #include "svnqt/url.h"
 #include "svnqt/dirent.h"
-#include "helpers/sub2qt.h"
 #include "helpers/ktranslateurl.h"
 #include "helpers/sshagent.h"
 #include "helpers/windowgeometryhelper.h"
@@ -441,7 +440,7 @@ void CommandExec::slotCmd_get()
 
 void CommandExec::slotCmd_update()
 {
-    const svn::Targets targets = helpers::sub2qt::fromStringList(m_pCPart->urls);
+    const svn::Targets targets = svn::Targets::fromStringList(m_pCPart->urls);
     m_pCPart->m_SvnWrapper->makeUpdate(targets,
                                        (m_pCPart->rev_set ? m_pCPart->start : svn::Revision::HEAD), svn::DepthUnknown);
 }
@@ -485,12 +484,8 @@ void CommandExec::slotCmd_info()
 
 void CommandExec::slotCmd_commit()
 {
-    svn::Paths targets;
-    targets.reserve(m_pCPart->urls.size());
-    Q_FOREACH(const QString &str, m_pCPart->urls) {
-        targets.push_back(svn::Path(str));
-    }
-    m_pCPart->m_SvnWrapper->makeCommit(svn::Targets(targets));
+    const svn::Targets targets(svn::Targets::fromStringList(m_pCPart->urls));
+    m_pCPart->m_SvnWrapper->makeCommit(targets);
 }
 
 void CommandExec::slotCmd_list()
@@ -560,7 +555,7 @@ void CommandExec::slotCmd_delete()
 
 void CommandExec::slotCmd_add()
 {
-    m_pCPart->m_SvnWrapper->addItems(helpers::sub2qt::fromStringList(m_pCPart->urls), svn::DepthInfinity);
+    m_pCPart->m_SvnWrapper->addItems(svn::Targets::fromStringList(m_pCPart->urls), svn::DepthInfinity);
 }
 
 void CommandExec::slotCmd_revert()

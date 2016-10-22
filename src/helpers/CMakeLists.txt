@@ -26,8 +26,6 @@ set(helperssrc
     sshagent.cpp
     sshagent.h
     stringhelper.h
-    sub2qt.cpp
-    sub2qt.h
     windowgeometryhelper.cpp
     windowgeometryhelper.h
 )

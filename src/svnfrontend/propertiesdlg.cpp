@@ -124,11 +124,7 @@ void PropertiesDlg::slotAdd()
             KMessageBox::error(this, i18n("A property with that name exists.\nRejecting it."), i18n("Double property"));
             return;
         }
-        PropertyListViewItem *ki = new PropertyListViewItem(m_ui->tvPropertyList);
-        ki->setText(0, dlg->propName());
-        ki->setText(1, dlg->propValue());
-        ki->checkName();
-        ki->checkValue();
+        new PropertyListViewItem(m_ui->tvPropertyList, dlg->propName(), dlg->propValue());
     }
     delete dlg;
 }

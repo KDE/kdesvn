@@ -68,7 +68,7 @@ Q_SIGNALS:
     void sigShowPopup(const QString &, QWidget **);
     void sigUrlOpend(bool);
     void sigSwitchUrl(const QUrl &);
-    void sigUrlChanged(const QString &);
+    void sigUrlChanged(const QUrl &);
     void sigProplist(const svn::PathPropertiesMapListPtr &, bool, bool, const QString &);
     void sigListError();
     void sigCacheStatus(qlonglong, qlonglong);

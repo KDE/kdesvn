@@ -93,7 +93,7 @@ void kdesvnpart::init(QWidget *parentWidget, bool full)
     connect(m_view, SIGNAL(sigSwitchUrl(QUrl)), this, SLOT(openUrl(QUrl)));
     connect(this, SIGNAL(refreshTree()), m_view, SLOT(refreshCurrentTree()));
     connect(m_view, SIGNAL(setWindowCaption(QString)), this, SIGNAL(setWindowCaption(QString)));
-    connect(m_view, SIGNAL(sigUrlChanged(QString)), this, SLOT(slotUrlChanged(QString)));
+    connect(m_view, &kdesvnView::sigUrlChanged, this, &kdesvnpart::slotUrlChanged);
     connect(this, SIGNAL(settingsChanged()), widget(), SLOT(slotSettingsChanged()));
     SshAgent ssh;
     ssh.querySshAgent();
@@ -105,9 +105,9 @@ kdesvnpart::~kdesvnpart()
     //kdesvnpartFactory::instance()->config()->sync();
 }
 
-void kdesvnpart::slotUrlChanged(const QString &url)
+void kdesvnpart::slotUrlChanged(const QUrl &url)
 {
-    setUrl(QUrl(url));
+    setUrl(url);
 }
 
 bool kdesvnpart::openFile()

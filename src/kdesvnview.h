@@ -22,7 +22,8 @@
 #define KDESVNVIEW_H
 
 #include "svnqt/repositorylistener.h"
-#include <qwidget.h>
+#include <QWidget>
+#include <QUrl>
 #include <kparts/part.h>
 
 class QPainter;
@@ -61,7 +62,7 @@ public:
     /**
      * Random 'get' function
      */
-    QString currentUrl();
+    QUrl currentUrl() const;
 
     /**
      * Random 'set' function
@@ -91,8 +92,8 @@ Q_SIGNALS:
 
     void sigShowPopup(const QString &, QWidget **);
     void sigSwitchUrl(const QUrl &);
+    void sigUrlChanged(const QUrl &url);
     void setWindowCaption(const QString &);
-    void sigUrlChanged(const QString &);
     void sigMakeBaseDirs();
 
     /* repositorylistener methods */
@@ -119,7 +120,7 @@ protected Q_SLOTS:
     virtual void slotOnURL(const QString &url);
     virtual void slotSetTitle(const QString &title);
     virtual void slotAppendLog(const QString &text);
-    virtual void slotUrlChanged(const QString &);
+    void slotUrlChanged(const QUrl &url);
     void onCustomLogWindowContextMenuRequested(const QPoint &pos);
 
 protected:
@@ -128,7 +129,7 @@ protected:
     KActionCollection *m_Collection;
 
     QSplitter *m_Splitter, *m_infoSplitter;
-    QString m_currentUrl;
+    QUrl m_currentUrl;
     QTextBrowser *m_LogWindow;
     QVBoxLayout *m_topLayout;
     QProgressBar *m_CacheProgressBar;

@@ -87,7 +87,7 @@ kdesvnView::kdesvnView(KActionCollection *aCollection, QWidget *parent, bool ful
     connect(m_TreeWidget, SIGNAL(sigShowPopup(QString,QWidget**)), this, SLOT(slotDispPopup(QString,QWidget**)));
     connect(m_TreeWidget, SIGNAL(sigUrlOpend(bool)), parent, SLOT(slotUrlOpened(bool)));
     connect(m_TreeWidget, SIGNAL(sigSwitchUrl(QUrl)), this, SIGNAL(sigSwitchUrl(QUrl)));
-    connect(m_TreeWidget, SIGNAL(sigUrlChanged(QString)), this, SLOT(slotUrlChanged(QString)));
+    connect(m_TreeWidget, &MainTreeWidget::sigUrlChanged, this, &kdesvnView::slotUrlChanged);
     connect(m_TreeWidget, SIGNAL(sigCacheStatus(qlonglong,qlonglong)), this, SLOT(fillCacheStatus(qlonglong,qlonglong)));
     connect(m_TreeWidget, SIGNAL(sigExtraStatusMessage(QString)), this, SIGNAL(sigExtraStatusMessage(QString)));
 
@@ -124,15 +124,15 @@ void kdesvnView::slotSavestate()
     }
 }
 
-void kdesvnView::slotUrlChanged(const QString &url)
+void kdesvnView::slotUrlChanged(const QUrl &url)
 {
     m_currentUrl = url;
-    slotSetTitle(url);
+    slotSetTitle(url.toString());
     emit sigUrlChanged(url);
     slotOnURL(i18n("Repository opened"));
 }
 
-QString kdesvnView::currentUrl()
+QUrl kdesvnView::currentUrl() const
 {
     return m_currentUrl;
 }
@@ -164,7 +164,7 @@ bool kdesvnView::openUrl(const QUrl &url)
     slotSetTitle(url.toString());
     if (m_TreeWidget->openUrl(url)) {
         slotOnURL(i18n("Repository opened"));
-        m_currentUrl = url.url();
+        m_currentUrl = url;
         open = true;
     } else {
         QString t = m_TreeWidget->lastError();

@@ -326,7 +326,7 @@ bool MainTreeWidget::openUrl(const QUrl &url, bool noReinit)
 #endif
     emit changeCaption(baseUri());
     emit sigUrlOpend(result);
-    emit sigUrlChanged(baseUri());
+    emit sigUrlChanged(baseUriAsUrl());
 #ifdef DEBUG_TIMER
     qCDebug(KDESVN_LOG) << "Fired signals " << _counttime.elapsed();
     _counttime.restart();
@@ -860,7 +860,7 @@ void MainTreeWidget::closeMe()
 
     emit changeCaption(QString());
     emit sigUrlOpend(false);
-    emit sigUrlChanged(QString());
+    emit sigUrlChanged(QUrl());
 
     enableActions();
     m_Data->m_Model->svnWrapper()->reInitClient();

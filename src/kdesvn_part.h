@@ -86,7 +86,7 @@ protected slots:
     virtual void slotLogFollowNodes(bool);
     virtual void slotDisplayIgnored(bool);
     virtual void slotDisplayUnkown(bool);
-    virtual void slotUrlChanged(const QString &);
+    void slotUrlChanged(const QUrl &);
     void showAboutApplication();
     void appHelpActivated();
     virtual void slotShowSettings();

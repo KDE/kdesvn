@@ -1,3 +1,9 @@
+version 2.0.0:
+    * Update to Qt5 / KF5 (completly KDELibs4Support free)
+    * minimum required subversion version is now 1.5
+    * update for subversion 1.7 API, added some 1.8 API functions
+    * Bug 358626 - KDESVN crashes when trying to checkout a repo
+    * remove a lot of unused code from libsvnqt library
 version 1.7.0:
     * Bug 322021 - Action and notification strings are not really translatable
     * Bug 322182 - kdesvn mangles options passed to external conflict resolver

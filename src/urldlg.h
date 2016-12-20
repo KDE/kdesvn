@@ -26,7 +26,6 @@ namespace Ui
 class UrlDlg;
 }
 class KUrlRequester;
-class QPushButton;
 
 /**
 @author Rajko Albrecht
@@ -44,7 +43,6 @@ private slots:
     void accept() override final;
     void slotTextChanged(const QString &);
 private:
-    QPushButton *m_pbClear;
     KUrlRequester *m_urlRequester;
     Ui::UrlDlg *m_ui;
 };

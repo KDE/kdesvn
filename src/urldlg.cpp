@@ -30,16 +30,12 @@
 
 UrlDlg::UrlDlg(QWidget *parent)
     : QDialog(parent)
-    , m_pbClear(new QPushButton(this))
     , m_urlRequester(nullptr)
     , m_ui(new Ui::UrlDlg)
 {
     m_ui->setupUi(this);
-    m_ui->buttonBox->addButton(m_pbClear, QDialogButtonBox::DestructiveRole);
     m_ui->buttonBox->button(QDialogButtonBox::Ok)->setDefault(true);
     m_ui->buttonBox->button(QDialogButtonBox::Ok)->setShortcut(Qt::CTRL | Qt::Key_Return);
-    m_pbClear->setIcon(QIcon::fromTheme("clear"));
-    m_pbClear->setText(i18n("Clear"));
 
     KHistoryComboBox *combo = new KHistoryComboBox(this);
     combo->setDuplicatesEnabled(false);
@@ -65,7 +61,6 @@ UrlDlg::UrlDlg(QWidget *parent)
     m_urlRequester->adjustSize();
 
     connect(m_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(m_pbClear, SIGNAL(clicked(bool)), m_urlRequester, SLOT(clear()));
 }
 
 UrlDlg::~UrlDlg()
@@ -92,7 +87,6 @@ void UrlDlg::slotTextChanged(const QString &text)
 {
     bool state = !text.trimmed().isEmpty();
     m_ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(state);
-    m_pbClear->setEnabled(state);
 }
 
 /*!

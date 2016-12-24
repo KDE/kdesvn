@@ -100,7 +100,7 @@ target_link_libraries(kdesvn
 )
 
 install(TARGETS kdesvn kdesvnaskpass kdesvnpart
-    RUNTIME DESTINATION ${BIN_INSTALL_DIR}
+    ${INSTALL_TARGETS_DEFAULT_ARGS}
     LIBRARY DESTINATION ${PLUGIN_INSTALL_DIR})
 
 # the resources

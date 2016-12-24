@@ -18,7 +18,11 @@
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
 
+include(ECMMarkNonGuiExecutable)
+include(ECMAddAppIcon)
+
 add_executable(kdesvnaskpass askpass/kdesvn-askpass.cpp)
+ecm_mark_nongui_executable(kdesvnaskpass)
 
 ki18n_wrap_ui(kdesvn_ui
     urldlg.ui
@@ -29,6 +33,23 @@ set(kdesvnsrc
     main.cpp
     urldlg.cpp
 )
+
+# Sets the icon on Windows and OSX
+find_program(KSVG2ICNS NAMES ksvg2icns)
+if(APPLE AND KSVG2ICNS)
+    execute_process(COMMAND ${KSVG2ICNS} "${CMAKE_CURRENT_SOURCE_DIR}/icons/sc-apps-kdesvn.svgz"
+         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} RESULT_VARIABLE KSVG2ICNS_ERROR)
+    if(${KSVG2ICNS_ERROR})
+        message(SEND_ERROR "Could not generate OS X application icon")
+    else()
+        set(MACOSX_BUNDLE_ICON_FILE sc-apps-kdesvn.icns)
+        set(kdesvnsrc "${kdesvnsrc};${CMAKE_CURRENT_BINARY_DIR}/sc-apps-kdesvn.icns")
+        set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/sc-apps-kdesvn.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+    endif()
+else()
+    file(GLOB ICONS_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/icons/*-apps-kdesvn.png")
+    ecm_add_app_icon(kdesvnsrc ICONS ${ICONS_SRCS})
+endif()
 
 set(partsrc
     commandline_part.cpp

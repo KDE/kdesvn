@@ -67,7 +67,6 @@ kdesvnpart::kdesvnpart(QWidget *parentWidget, QObject *parent, bool ownapp, cons
 void kdesvnpart::init(QWidget *parentWidget, bool full)
 {
     m_aboutDlg = 0;
-    KLocalizedString::setApplicationDomain("kdesvn");
     // we need an instance
     // TODO: KF5 port
     //setComponentData(KdesvnFactory::componentData());

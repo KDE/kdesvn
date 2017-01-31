@@ -34,6 +34,7 @@ static const char description[] =
 int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
+    KLocalizedString::setApplicationDomain("kdesvn");
     app.setApplicationName("kdesvn");
     app.setApplicationDisplayName("kdesvn");
     app.setOrganizationDomain("kde.org");

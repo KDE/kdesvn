@@ -181,13 +181,13 @@ or
 &lt;/p&gt;
 or
 &lt;p align=&quot;center&quot;&gt;
-&lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;param&amp;gt; %1 %2&lt;/tt&gt;
+&lt;tt&gt;&amp;lt;program&amp;gt; &amp;lt;param&amp;gt; %s1 %s2&lt;/tt&gt;
 &lt;/p&gt;
 &lt;br&gt;
-If using first or second form, svn itself will generate the diff. %f will replaced with a temporary filename. If %f is not given,
-the diff-display should able reading data from stdin.
+If one between the first or the second form is used, svn itself generates the diff. %f will be replaced with a temporary filename. If %f is not given,
+the diff-display should be able to read data from stdin.
 &lt;br&gt;
-When %1 and %2 is given, kdesvn let this display make the diff. For that it it makes a temporary export or get (if needed) and fill out the parameters with the right value. %1 will filled with the content of start-revision, %2 with the endrevision. On large recoursive diffs this may get real slow!
+When %s1 and %s2 are given, kdesvn lets this display make the diff. For that it makes a temporary export or get (if needed) and fills out the parameters with the right values. %s1 will be filled with the content of the initial revision, %s2 with the final revision. On large recoursive diffs this may get really slow.
 &lt;/p&gt;</string>
            </property>
           </widget>
@@ -197,7 +197,7 @@ When %1 and %2 is given, kdesvn let this display make the diff. For that it it m
        <item row="0" column="0">
         <widget class="QLabel" name="m_extern_hint">
          <property name="text">
-          <string>see &quot;Whats this&quot; for details</string>
+          <string>see &quot;What's this&quot; for details</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>

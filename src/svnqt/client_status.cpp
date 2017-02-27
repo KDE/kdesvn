@@ -419,6 +419,10 @@ Client_impl::info(const Path &_p,
                                _buf,
                                pool);
     checkErrorThrow(error);
+    if (!truepath)
+    {
+        throw ClientException("no path given!");
+    }
     if (peg_revision.kind() == svn_opt_revision_unspecified) {
         if ((svn_path_is_url(_p.cstr())) && (pegr.kind == svn_opt_revision_unspecified)) {
             pegr.kind = svn_opt_revision_head;

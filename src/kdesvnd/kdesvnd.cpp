@@ -77,7 +77,10 @@ QStringList kdesvnd::getTopLevelActionMenu(const QStringList &urlList) const
     QList<QUrl> urls;
     urls.reserve(urlList.size());
     Q_FOREACH(const QString &str, urlList) {
-        urls += QUrl(str);
+        if (str.contains(QLatin1Char('@')))
+            urls += QUrl(str + QLatin1Char('@'));
+        else
+            urls += QUrl(str);
     }
 
     return getActionMenu(urls, true);
@@ -89,7 +92,10 @@ QStringList kdesvnd::getActionMenu(const QStringList &urlList) const
     QList<QUrl> urls;
     urls.reserve(urlList.size());
     Q_FOREACH(const QString &str, urlList) {
-        urls += QUrl(str);
+        if (str.contains(QLatin1Char('@')))
+            urls += QUrl(str + QLatin1Char('@'));
+        else
+            urls += QUrl(str);
     }
     return getActionMenu(urls, false);
 }
@@ -170,7 +176,7 @@ QStringList kdesvnd::getActionMenu(const QList<QUrl> &list, bool toplevel) const
 QStringList kdesvnd::getSingleActionMenu(const QString &what) const
 {
     QList<QUrl> l;
-    l.append(QUrl(what));
+    l.append(QUrl(what.contains(QLatin1Char('@')) ? what + QLatin1Char('@') : what));
     return getActionMenu(l, false);
 }
 

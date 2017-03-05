@@ -187,7 +187,7 @@ or
 If one between the first or the second form is used, svn itself generates the diff. %f will be replaced with a temporary filename. If %f is not given,
 the diff-display should be able to read data from stdin.
 &lt;br&gt;
-When %s1 and %s2 are given, kdesvn lets this display make the diff. For that it makes a temporary export or get (if needed) and fills out the parameters with the right values. %s1 will be filled with the content of the initial revision, %s2 with the final revision. On large recoursive diffs this may get really slow.
+When %s1 and %s2 are given, kdesvn lets this display make the diff. For that it makes a temporary export or get (if needed) and fills out the parameters with the right values. %s1 will be filled with the content of the initial revision, %s2 with the final revision. On large recursive diffs this may get really slow.
 &lt;/p&gt;</string>
            </property>
           </widget>

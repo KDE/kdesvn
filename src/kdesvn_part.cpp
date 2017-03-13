@@ -283,7 +283,7 @@ void kdesvnpart::showAboutApplication()
         KAboutData about(QStringLiteral("kdesvnpart"),
                          i18n("kdesvn Part"),
                          version,
-                         i18n("A Subversion Client for KDE (dynamic Part component)"),
+                         i18n("A Subversion Client by KDE (dynamic Part component)"),
                          KAboutLicense::LGPL_V2,
                          i18n("(C) 2005-2009 Rajko Albrecht,\n(C) 2015-2016 Christian Ehrlicher"),
                          m_Extratext);

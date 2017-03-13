@@ -29,7 +29,7 @@
 #include <klocalizedstring.h>
 
 static const char description[] =
-    I18N_NOOP("A Subversion Client for KDE (standalone application)");
+    I18N_NOOP("A Subversion Client by KDE (standalone application)");
 
 int main(int argc, char **argv)
 {

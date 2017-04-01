@@ -46,13 +46,14 @@ include(FeatureSummary)
 include(ECMInstallIcons)
 
 find_package(KF5 REQUIRED COMPONENTS
-    Bookmarks Config ConfigWidgets CoreAddons
-    DBusAddons DocTools I18n IconThemes ItemViews
-    JobWidgets KIO Notifications Parts Service
-    TextEditor Wallet WidgetsAddons
+    Bookmarks Codecs Completion Config
+    ConfigWidgets CoreAddons DBusAddons DocTools
+    I18n IconThemes ItemViews JobWidgets KIO
+    Notifications Parts Service TextWidgets
+    Wallet WidgetsAddons XmlGui
 )
 find_package(Qt5 REQUIRED COMPONENTS
-    Core DBus Gui Sql Widgets
+    Core DBus Gui Sql Widgets Xml
 )
 
 # Set the version

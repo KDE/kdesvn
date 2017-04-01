@@ -79,5 +79,11 @@ target_link_libraries(ksvnwidgets
     PUBLIC
         svnqt
         Qt5::Widgets
-        KF5::TextEditor
+        KF5::Completion
+        KF5::ConfigWidgets
+        KF5::I18n
+        KF5::KIOWidgets
+        KF5::Parts
+        KF5::TextWidgets
+        KF5::XmlGui
 )

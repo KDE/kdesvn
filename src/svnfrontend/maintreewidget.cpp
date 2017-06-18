@@ -812,7 +812,7 @@ void MainTreeWidget::enableActions()
     enableAction("make_revisions_cat", isopen && !single_dir && single);
     enableAction("switch_browse_revision", !isWorkingCopy() && isopen);
     enableAction("make_check_updates", isWorkingCopy() && isopen && remote_enabled);
-    enableAction("openwith", KAuthorized::authorizeKAction("openwith") && single && !single_dir);
+    enableAction("openwith", KAuthorized::authorizeAction("openwith") && single && !single_dir);
     enableAction("show_repository_settings", isopen);
 
     enableAction("repo_statistic", isopen);
@@ -1662,7 +1662,7 @@ void MainTreeWidget::makeDelete(const SvnItemList &lst)
             KIO::Job *aJob = KIO::del(kioList);
             if (!aJob->exec()) {
                 KJobWidgets::setWindow(aJob, this);
-                aJob->ui()->showErrorMessage();
+                aJob->uiDelegate()->showErrorMessage();
                 delete dlg;
                 return;
             }
@@ -1753,7 +1753,7 @@ void MainTreeWidget::slotCopyFinished(KJob *_job)
     bool ok = true;
     if (job->error()) {
         KJobWidgets::setWindow(job, this);
-        job->ui()->showErrorMessage();
+        job->uiDelegate()->showErrorMessage();
         ok = false;
     }
     if (ok) {

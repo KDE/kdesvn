@@ -698,7 +698,6 @@ QString SvnActions::getInfo(const QString &_what, const svn::Revision &rev, cons
             StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                          i18n("Details"), i18n("Retrieving information - hit Cancel for abort"));
             connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
-            svn::InfoEntries e;
             QString path = _what;
             if (_what.indexOf(QLatin1Char('@')) > -1 && !svn::Url::isValid(_what)) {
                 path += QLatin1String("@BASE");

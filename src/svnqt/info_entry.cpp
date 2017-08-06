@@ -38,7 +38,6 @@ InfoEntry::InfoEntry()
     init();
 }
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 InfoEntry::InfoEntry(const svn_client_info2_t *info, const char *path)
 {
     init(info, path);
@@ -48,17 +47,6 @@ InfoEntry::InfoEntry(const svn_client_info2_t *info, const QString &path)
 {
     init(info, path);
 }
-#else
-InfoEntry::InfoEntry(const svn_info_t *info, const char *path)
-{
-    init(info, path);
-}
-
-InfoEntry::InfoEntry(const svn_info_t *info, const QString &path)
-{
-    init(info, path);
-}
-#endif
 
 InfoEntry::~InfoEntry()
 {
@@ -96,25 +84,12 @@ const QString &InfoEntry::checksum()const
 {
     return m_checksum;
 }
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
+
 const ConflictDescriptionList &InfoEntry::conflicts()const
 {
     return m_conflicts;
 }
-#else
-const QString &InfoEntry::conflictNew()const
-{
-    return m_conflict_new;
-}
-const QString &InfoEntry::conflictOld()const
-{
-    return m_conflict_old;
-}
-const QString &InfoEntry::conflictWrk()const
-{
-    return m_conflict_wrk;
-}
-#endif
+
 const QUrl &InfoEntry::copyfromUrl()const
 {
     return m_copyfrom_url;
@@ -190,12 +165,6 @@ void svn::InfoEntry::init()
     m_hasWc = false;
     m_Lock = LockEntry();
     m_checksum.clear();
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
-#else
-    m_conflict_new.clear();
-    m_conflict_old.clear();
-    m_conflict_wrk.clear();
-#endif
     m_copyfrom_url.clear();
     m_last_author.clear();
     m_prejfile.clear();
@@ -213,7 +182,6 @@ void svn::InfoEntry::init()
     m_depth = DepthUnknown;
 }
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 void svn::InfoEntry::init(const svn_client_info2_t *item, const char *path)
 {
     init(item, QString::fromUtf8(path));
@@ -285,86 +253,3 @@ void svn::InfoEntry::init(const svn_client_info2_t *item, const QString &path)
         m_hasWc = false;
     }
 }
-
-#else
-
-void svn::InfoEntry::init(const svn_info_t *item, const char *path)
-{
-    init(item, QString::fromUtf8(path));
-}
-
-/*!
-    \fn svn::InfoEntry::init(const svn_info_t*)
- */
-void svn::InfoEntry::init(const svn_info_t *item, const QString &path)
-{
-    if (!item) {
-        init();
-        return;
-    }
-    m_name = path;
-    m_last_changed_date = item->last_changed_date;
-    m_text_time = item->text_time;
-    m_prop_time = item->prop_time;
-    if (item->lock) {
-        m_Lock.init(item->lock);
-    } else {
-        m_Lock = LockEntry();
-    }
-    m_checksum = QString::fromUtf8(item->checksum);
-    m_conflict_new = QString::fromUtf8(item->conflict_new);
-    m_conflict_old = QString::fromUtf8(item->conflict_old);
-    m_conflict_wrk = QString::fromUtf8(item->conflict_wrk);
-    m_copyfrom_url = QUrl::fromEncoded(item->copyfrom_url);
-    m_last_author = QString::fromUtf8(item->last_changed_author);
-    m_prejfile = QString::fromUtf8(item->prejfile);
-    m_repos_root = QUrl::fromEncoded(item->repos_root_URL);
-    m_url = QUrl::fromEncoded(item->URL);
-    m_UUID = QString::fromUtf8(item->repos_UUID);
-    m_kind = item->kind;
-    m_copy_from_rev = item->copyfrom_rev;
-    m_last_changed_rev = item->last_changed_rev;
-    m_revision = item->rev;
-    m_hasWc = item->has_wc_info;
-    m_schedule = item->schedule;
-
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
-    m_size = item->size64 != SVN_INVALID_FILESIZE ? qlonglong(item->size64) : SVNQT_SIZE_UNKNOWN;
-    m_working_size = item->working_size64 != SVN_INVALID_FILESIZE ? qlonglong(item->working_size64) : SVNQT_SIZE_UNKNOWN;
-    if (m_working_size == SVNQT_SIZE_UNKNOWN) {
-        m_working_size = item->working_size != SVN_INFO_SIZE_UNKNOWN ? qlonglong(item->working_size) : SVNQT_SIZE_UNKNOWN;
-    }
-#else
-    m_size = item->size != SVN_INFO_SIZE_UNKNOWN ? qlonglong(item->size) : SVNQT_SIZE_UNKNOWN;
-    m_working_size = item->working_size != SVN_INFO_SIZE_UNKNOWN ? qlonglong(item->working_size) : SVNQT_SIZE_UNKNOWN;
-#endif
-
-    if (item->changelist) {
-        m_changeList = QByteArray(item->changelist, strlen(item->changelist));
-    } else {
-        m_changeList.clear();
-    }
-
-    switch (item->depth) {
-    case svn_depth_exclude:
-        m_depth = DepthExclude;
-        break;
-    case svn_depth_empty:
-        m_depth = DepthEmpty;
-        break;
-    case svn_depth_files:
-        m_depth = DepthFiles;
-        break;
-    case svn_depth_immediates:
-        m_depth = DepthImmediates;
-        break;
-    case svn_depth_infinity:
-        m_depth = DepthInfinity;
-        break;
-    case svn_depth_unknown:
-    default:
-        m_depth = DepthUnknown;
-        break;
-    }
-}
-#endif

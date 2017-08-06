@@ -37,7 +37,6 @@ ConflictDescription::~ConflictDescription()
 ConflictDescription::ConflictDescription(const svn_wc_conflict_description2_t *conflict)
 {
     init();
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     if (!conflict) {
         return;
     }
@@ -106,9 +105,6 @@ ConflictDescription::ConflictDescription(const svn_wc_conflict_description2_t *c
         break;
 #endif
     }
-#else
-    Q_UNUSED(conflict);
-#endif
 }
 
 ConflictDescription::ConflictDescription(const svn_wc_conflict_description_t *conflict)
@@ -135,11 +131,9 @@ ConflictDescription::ConflictDescription(const svn_wc_conflict_description_t *co
     case svn_wc_conflict_action_delete:
         m_action = ConflictAction::Delete;
         break;
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     case svn_wc_conflict_action_replace:
         m_action = ConflictAction::Replace;
         break;
-#endif
     }
     switch (conflict->kind) {
     case svn_wc_conflict_kind_text:
@@ -148,11 +142,9 @@ ConflictDescription::ConflictDescription(const svn_wc_conflict_description_t *co
     case svn_wc_conflict_kind_property:
         m_Type = ConflictType::Property;
         break;
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     case svn_wc_conflict_kind_tree:
         m_Type = ConflictType::Tree;
         break;
-#endif
     }
     m_nodeKind = conflict->node_kind;
     m_binary = conflict->is_binary;
@@ -172,16 +164,12 @@ ConflictDescription::ConflictDescription(const svn_wc_conflict_description_t *co
     case svn_wc_conflict_reason_unversioned:
         m_reason = ConflictReason::Unversioned;
         break;
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     case svn_wc_conflict_reason_added:
         m_reason = ConflictReason::Added;
         break;
-#endif
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     case svn_wc_conflict_reason_replaced:
         m_reason = ConflictReason::Replaced;
         break;
-#endif
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
     case svn_wc_conflict_reason_moved_away:
         m_reason = ConflictReason::MovedAway;

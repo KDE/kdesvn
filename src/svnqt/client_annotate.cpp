@@ -41,7 +41,6 @@
 namespace svn
 {
 static svn_error_t *
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 annotateReceiver(void *baton,
                  svn_revnum_t start_revnum,
                  svn_revnum_t end_revnum,
@@ -67,38 +66,13 @@ annotateReceiver(void *baton,
                       );
     return NULL;
 }
-#else
-annotateReceiver(void *baton,
-                 apr_int64_t line_no,
-                 svn_revnum_t revision,
-                 const char *author,
-                 const char *date,
-                 svn_revnum_t merge_revision,
-                 const char *merge_author,
-                 const char *merge_date,
-                 const char *merge_path,
-                 const char *line,
-                 apr_pool_t *)
-{
-    AnnotatedFile *entries = (AnnotatedFile *) baton;
-    entries->push_back(AnnotateLine(line_no, revision, author,
-                                    date, line, merge_revision,
-                                    merge_author, merge_date, merge_path));
-    return NULL;
-}
-#endif
+
 void
 Client_impl::annotate(AnnotatedFile &target, const AnnotateParameter &params)
 {
     Pool pool;
     svn_error_t *error;
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
-    error = svn_client_blame5
-#else
-    error = svn_client_blame4
-#endif
-
-            (
+    error = svn_client_blame5(
                 params.path().cstr(),
                 params.pegRevision().revision(),
                 params.revisionRange().first,

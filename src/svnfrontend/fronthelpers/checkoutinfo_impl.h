@@ -43,13 +43,11 @@ public:
     void disableTargetDir(bool how);
     void disableAppend(bool how);
     void disableOpen(bool how);
-    void disableExternals(bool how);
     bool openAfterJob() const;
     void disableRange(bool how);
     void setTargetUrl(const QUrl &);
     bool ignoreExternals() const;
     void hideDepth(bool hide);
-    void overwriteAsRecursive();
     void hideOverwrite(bool hide);
     void hideIgnoreKeywords(bool hide);
     bool ignoreKeywords() const;

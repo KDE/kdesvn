@@ -313,7 +313,6 @@ protected:
      */
     static svn_error_t *onWcConflictResolver(svn_wc_conflict_result_t **result, const svn_wc_conflict_description_t *description, void *baton, apr_pool_t *pool);
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     /**
      * @see svn_wc_conflict_resolver_func2_t
      * @since subversion 1.7
@@ -323,7 +322,6 @@ protected:
                                               void *baton,
                                               apr_pool_t *result_pool,
                                               apr_pool_t */*scratch_pool*/);
-#endif
 
     /**
      * @see svn_auth_plaintext_prompt_func_t

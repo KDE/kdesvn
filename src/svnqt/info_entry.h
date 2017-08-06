@@ -36,13 +36,7 @@
 
 #include <svn_version.h>
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
-#undef SVN_INFO_SIMPLE_CONFLICT_TYPE
 struct svn_client_info2_t;
-#else
-#define SVN_INFO_SIMPLE_CONFLICT_TYPE 1
-struct svn_info_t;
-#endif
 
 namespace svn
 {
@@ -51,22 +45,12 @@ class SVNQT_EXPORT InfoEntry
 public:
     static const qlonglong SVNQT_SIZE_UNKNOWN = -1;
     InfoEntry();
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     InfoEntry(const svn_client_info2_t *, const char *path);
     InfoEntry(const svn_client_info2_t *, const QString &path);
-#else
-    InfoEntry(const svn_info_t *, const char *path);
-    InfoEntry(const svn_info_t *, const QString &path);
-#endif
     ~InfoEntry();
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     void init(const svn_client_info2_t *, const char *path);
     void init(const svn_client_info2_t *, const QString &path);
-#else
-    void init(const svn_info_t *, const char *path);
-    void init(const svn_info_t *, const QString &path);
-#endif
 
     DateTime cmtDate()const;
     DateTime textTime()const;
@@ -84,15 +68,7 @@ public:
     const QString &Name()const;
 
     const QString &checksum()const;
-
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     const ConflictDescriptionList &conflicts()const;
-#else
-    const QString &conflictNew()const;
-    const QString &conflictOld()const;
-    const QString &conflictWrk()const;
-#endif
-
     const QUrl &copyfromUrl()const;
     const QString &prejfile()const;
     const QUrl &reposRoot()const;
@@ -119,13 +95,7 @@ protected:
     LockEntry m_Lock;
     QString m_name;
     QString m_checksum;
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     ConflictDescriptionList m_conflicts;
-#else
-    QString m_conflict_new;
-    QString m_conflict_old;
-    QString m_conflict_wrk;
-#endif
     QUrl m_copyfrom_url;
     QString m_last_author;
     QString m_prejfile;

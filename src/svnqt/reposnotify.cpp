@@ -24,10 +24,7 @@
 #include "svnqt/helper.h"
 
 #include <svn_props.h>
-
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 #include <svn_repos.h>
-#endif
 
 namespace svn
 {
@@ -38,7 +35,6 @@ class ReposNotifyData
 {
     QString _warning_msg;
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     /// TODO own datatype
     svn_repos_notify_action_t _action;
     svn::Revision _rev;
@@ -53,7 +49,6 @@ class ReposNotifyData
     svn_node_action _node_action;
 
     svn::Path _path;
-#endif
 
     mutable QString _msg;
 
@@ -61,7 +56,6 @@ public:
     ReposNotifyData(const svn_repos_notify_t *notify)
         : _warning_msg(QString()), _msg(QString())
     {
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
         if (!notify) {
             return;
         }
@@ -78,7 +72,6 @@ public:
         if (notify->path != 0L) {
             _path = svn::Path(QString::fromUtf8(notify->path));
         }
-#endif
     }
 
     ~ReposNotifyData()
@@ -87,7 +80,6 @@ public:
 
     const QString &toString()const
     {
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
         if (_msg.isEmpty()) {
             switch (_action) {
             case svn_repos_notify_warning: {
@@ -183,7 +175,6 @@ public:
             break;
             }
         }
-#endif
         return _msg;
     }
 };

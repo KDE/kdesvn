@@ -75,11 +75,7 @@ public:
      * @param path path for this status entry
      * @param status status entry
      */
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     explicit Status(const char *path, const svn_client_status_t *status);
-#else
-    explicit Status(const char *path, const svn_wc_status2_t *status);
-#endif
     /**
      * converting constructor
      */

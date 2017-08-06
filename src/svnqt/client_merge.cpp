@@ -64,11 +64,7 @@ void Client_impl::merge(const MergeParameter &parameters)
     } else {
       // todo svn 1.8: svn_client_merge5
         error =
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
             svn_client_merge4
-#else
-            svn_client_merge3
-#endif
             (parameters.path1().cstr(),
              parameters.revision1().revision(),
              parameters.path2().cstr(),
@@ -79,9 +75,7 @@ void Client_impl::merge(const MergeParameter &parameters)
              parameters.force(),
              parameters.record_only(),
              parameters.dry_run(),
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
              parameters.allow_mixed_rev(),
-#endif
              parameters.merge_options().array(pool),
              *m_context,
              pool);
@@ -99,11 +93,7 @@ void Client_impl::merge_peg(const MergeParameter &parameters)
 
     // todo svn 1.8: svn_client_merge_peg5
     svn_error_t *error =
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
         svn_client_merge_peg4
-#else
-        svn_client_merge_peg3
-#endif
         (
             parameters.path1().cstr(),
             _rhash.array(pool),
@@ -114,9 +104,7 @@ void Client_impl::merge_peg(const MergeParameter &parameters)
             parameters.force(),
             parameters.record_only(),
             parameters.dry_run(),
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
             parameters.allow_mixed_rev(),
-#endif
             parameters.merge_options().array(pool),
             *m_context,
             pool

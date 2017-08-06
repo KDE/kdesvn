@@ -50,17 +50,10 @@ public:
      * @param path
      * @param status if NULL isVersioned will be false
      */
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     void init(const QString &path, const svn_client_status_t *status);
-#else
-    void init(const QString &path, const svn_wc_status2_t *status);
-#endif
-    void
-    init(const QString &path, const Status_private &src);
-    void
-    init(const QString &url, const DirEntry &src);
-    void
-    init(const QString &url, const InfoEntry &src);
+    void init(const QString &path, const Status_private &src);
+    void init(const QString &url, const DirEntry &src);
+    void init(const QString &url, const InfoEntry &src);
 
     void setPath(const QString &);
 
@@ -103,11 +96,7 @@ void Status_private::setPath(const QString &aPath)
     }
 }
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 void Status_private::init(const QString &path, const svn_client_status_t *status)
-#else
-void Status_private::init(const QString &path, const svn_wc_status2_t *status)
-#endif
 {
     setPath(path);
     if (!status) {
@@ -117,24 +106,12 @@ void Status_private::init(const QString &path, const svn_wc_status2_t *status)
         m_Lock = LockEntry();
     } else {
         // now duplicate the contents
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
-        // svn 1.7 does not cound ignored entries as versioned but we do here...
+        // svn 1.7 does not count ignored entries as versioned but we do here...
         m_isVersioned = status->node_status > svn_wc_status_unversioned;
         m_hasReal = m_isVersioned &&
                     status->node_status != svn_wc_status_ignored;
         m_entry = Entry(status);
         m_node_status = status->node_status;
-#else
-        m_isVersioned = status->text_status > svn_wc_status_unversioned || status->repos_text_status > svn_wc_status_unversioned;
-        m_hasReal = m_isVersioned &&
-                    status->text_status != svn_wc_status_ignored;
-        if (status->entry) {
-            m_entry = Entry(status->entry);
-        } else {
-            m_entry = Entry();
-        }
-        m_node_status = status->text_status;
-#endif
         m_text_status = status->text_status;
         m_prop_status = status->prop_status;
         m_copied = status->copied != 0;
@@ -213,19 +190,12 @@ Status::Status(const Status &src)
     }
 }
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 Status::Status(const char *path, const svn_client_status_t *status)
   : m_Data(new Status_private())
 {
     m_Data->init(QString::fromUtf8(path), status);
 }
-#else
-Status::Status(const char *path, const svn_wc_status2_t *status)
-  : m_Data(new Status_private())
-{
-    m_Data->init(path, status);
-}
-#endif
+
 Status::Status(const QString &path)
     : m_Data(new Status_private())
 {

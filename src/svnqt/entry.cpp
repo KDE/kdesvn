@@ -56,13 +56,8 @@ public:
     /**
     * initializes the members
     */
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     void
     init(const svn_client_status_t *src);
-#else
-    void
-    init(const svn_wc_entry_t *src);
-#endif
     void
     init(const Entry_private &src);
     void
@@ -101,7 +96,6 @@ Entry_private::~Entry_private()
 {
 }
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 void
 Entry_private::init(const svn_client_status_t *src)
 {
@@ -124,29 +118,6 @@ Entry_private::init(const svn_client_status_t *src)
         init_clean();
     }
 }
-#else
-void
-Entry_private::init(const svn_wc_entry_t *src)
-{
-    if (src) {
-        // copy & convert the contents of src
-        _name = QString::fromUtf8(src->name);
-        _revision = src->revision;
-        _url = QString::fromEncoded(src->url);
-        _repos = QString::fromEncoded(src->repos);
-        _uuid = QString::fromUtf8(src->uuid);
-        _kind = src->kind;
-        _copied = src->copied != 0;
-        _cmt_rev = src->cmt_rev;
-        _cmt_date = src->cmt_date;
-        _cmt_author = QString::fromUtf8(src->cmt_author);
-        m_Lock.init(src);
-        m_valid = true;
-    } else {
-        init_clean();
-    }
-}
-#endif
 
 void
 Entry_private::init(const Entry_private &src)
@@ -195,11 +166,7 @@ void Entry_private::init(const QString &url, const InfoEntry &src)
     m_valid = true;
 }
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 Entry::Entry(const svn_client_status_t *src)
-#else
-Entry::Entry(const svn_wc_entry_t *src)
-#endif
     : m_Data(new Entry_private())
 {
     m_Data->init(src);

@@ -114,22 +114,14 @@ LogEntry::LogEntry(svn_log_entry_t *log_entry, const StringArray &excludeList)
     revision = log_entry->revision;
     if (log_entry->changed_paths) {
         bool blocked = false;
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
         for (apr_hash_index_t *hi = apr_hash_first(pool, log_entry->changed_paths2);
-#else
-        for (apr_hash_index_t *hi = apr_hash_first(pool, log_entry->changed_paths);
-#endif
                 hi != NULL;
                 hi = apr_hash_next(hi)) {
             const void *pv;
             void *val;
             blocked = false;
             apr_hash_this(hi, &pv, NULL, &val);
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
             svn_log_changed_path2_t *log_item = reinterpret_cast<svn_log_changed_path2_t *>(val);
-#else
-            svn_log_changed_path_t *log_item = reinterpret_cast<svn_log_changed_path_t *>(val);
-#endif
             const char *path = reinterpret_cast<const char *>(pv);
             QString _p(QString::fromUtf8(path));
             for (int _exnr = 0; _exnr < excludeList.size(); ++_exnr) {

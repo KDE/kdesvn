@@ -32,12 +32,9 @@
 #include <svn_fs.h>
 #include <svn_path.h>
 #include <svn_config.h>
+#include <svn_dirent_uri.h>
 #include <svn_version.h>
 #include <QCoreApplication>
-
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
-#include <svn_dirent_uri.h>
-#endif
 
 namespace svn
 {
@@ -97,7 +94,6 @@ void RepositoryData::warning_func(void *baton, svn_error_t *err)
     }
 }
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 void RepositoryData::repo_notify_func(void *baton, const svn_repos_notify_t *notify, apr_pool_t *scratch_pool)
 {
     Q_UNUSED(scratch_pool)
@@ -112,7 +108,6 @@ void RepositoryData::repo_notify_func(void *baton, const svn_repos_notify_t *not
         _r->reposFsWarning(msg);
     }
 }
-#endif
 
 void RepositoryData::reposFsWarning(const QString &msg)
 {
@@ -145,11 +140,7 @@ void RepositoryData::Close()
 svn_error_t *RepositoryData::Open(const QString &path)
 {
     Close();
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     svn_error_t *error = svn_repos_open2(&m_Repository, path.toUtf8(), NULL, m_Pool);
-#else
-    svn_error_t *error = svn_repos_open(&m_Repository, path.toUtf8(), m_Pool);
-#endif
     if (error != 0L) {
         m_Repository = 0;
         return error;
@@ -187,12 +178,10 @@ svn_error_t *RepositoryData::CreateOpen(const CreateRepoParameter &params)
         apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_5_COMPATIBLE,
                      APR_HASH_KEY_STRING, "1");
     }
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     if (params.pre16_compat()) {
         apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_6_COMPATIBLE,
                      APR_HASH_KEY_STRING, "1");
     }
-#endif
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
     if (params.pre18_compat()) {
         apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_8_COMPATIBLE,
@@ -205,11 +194,7 @@ svn_error_t *RepositoryData::CreateOpen(const CreateRepoParameter &params)
     SVN_ERR(svn_config_get_config(&config, 0, m_Pool));
     const char *repository_path = apr_pstrdup(m_Pool, params.path().toUtf8());
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     repository_path = svn_dirent_internal_style(repository_path, m_Pool);
-#else
-    repository_path = svn_path_internal_style(repository_path, m_Pool);
-#endif
 
     if (svn_path_is_url(repository_path)) {
         return svn_error_create(SVN_ERR_CL_ARG_PARSING_ERROR, NULL,
@@ -237,7 +222,6 @@ svn_error_t *RepositoryData::dump(const QString &output, const svn::Revision &st
     _s = start.revnum();
     _e = end.revnum();
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     SVN_ERR(svn_repos_dump_fs3(m_Repository,
                                out, _s, _e, incremental, use_deltas,
                                RepositoryData::repo_notify_func,
@@ -245,11 +229,6 @@ svn_error_t *RepositoryData::dump(const QString &output, const svn::Revision &st
                                RepositoryData::cancel_func,
                                m_Listener,
                                pool));
-#else
-    RepoOutStream backstream(this);
-    SVN_ERR(svn_repos_dump_fs2(m_Repository, out, backstream, _s, _e, incremental, use_deltas,
-                               RepositoryData::cancel_func, m_Listener, pool));
-#endif
     return SVN_NO_ERROR;
 }
 
@@ -268,22 +247,12 @@ svn_error_t *RepositoryData::loaddump(const QString &dump, svn_repos_load_uuid u
     } else {
         dest_path = apr_pstrdup(pool, parentFolder.toUtf8());
     }
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
-    src_path = svn_dirent_internal_style(src_path, pool);
-#else
     src_path = svn_path_internal_style(src_path, pool);
-#endif
 
     // todo svn 1.8: svn_repos_load_fs4
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     SVN_ERR(svn_repos_load_fs3(m_Repository, infile, uuida, dest_path, usePre ? 1 : 0, usePost ? 1 : 0, validateProps ? 1 : 0,
                                RepositoryData::repo_notify_func,
                                this, RepositoryData::cancel_func, m_Listener, pool));
-#else
-    Q_UNUSED(validateProps);
-    SVN_ERR(svn_repos_load_fs2(m_Repository, infile, backstream, uuida, dest_path, usePre ? 1 : 0, usePost ? 1 : 0, RepositoryData::cancel_func, m_Listener, pool));
-#endif
-
     return SVN_NO_ERROR;
 }
 
@@ -292,13 +261,8 @@ svn_error_t *RepositoryData::hotcopy(const QString &src, const QString &dest, bo
     Pool pool;
     const char *src_path = apr_pstrdup(pool, src.toUtf8());
     const char *dest_path = apr_pstrdup(pool, dest.toUtf8());
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     src_path = svn_dirent_internal_style(src_path, pool);
     dest_path = svn_dirent_internal_style(dest_path, pool);
-#else
-    src_path = svn_path_internal_style(src_path, pool);
-    dest_path = svn_path_internal_style(dest_path, pool);
-#endif
     // todo svn 1.8: svn_repos_hotcopy2
     SVN_ERR(svn_repos_hotcopy(src_path, dest_path, cleanlogs ? 1 : 0, pool));
     return SVN_NO_ERROR;

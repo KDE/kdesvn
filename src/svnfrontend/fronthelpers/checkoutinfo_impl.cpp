@@ -95,12 +95,6 @@ void CheckoutInfo_impl::hideDepth(bool how)
     adjustSize();
 }
 
-void CheckoutInfo_impl::overwriteAsRecursive()
-{
-    m_overwriteButton->setToolTip(i18n("Make operation recursive"));
-    m_overwriteButton->setText(i18n("Recursive"));
-}
-
 void CheckoutInfo_impl::hideOverwrite(bool hide)
 {
     m_overwriteButton->setHidden(hide);
@@ -190,14 +184,4 @@ void CheckoutInfo_impl::disableAppend(bool how)
 bool CheckoutInfo_impl::ignoreExternals() const
 {
     return m_ignoreExternals->isChecked();
-}
-
-void CheckoutInfo_impl::disableExternals(bool how)
-{
-    m_ignoreExternals->setChecked(!how);
-    if (how) {
-        m_ignoreExternals->hide();
-    } else {
-        m_ignoreExternals->show();
-    }
 }

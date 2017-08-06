@@ -53,7 +53,6 @@
 
 namespace svn
 {
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 struct mBaton {
     mBaton(): m_context(), m_revision(Revision::UNDEFINED), m_date(), author(), commit_error(), repos_root() {}
     ContextWP m_context;
@@ -80,7 +79,6 @@ static svn_error_t *commit_callback2(const svn_commit_info_t *commit_info, void 
     m_baton->m_revision = commit_info->revision;
     return SVN_NO_ERROR;
 }
-#endif
 
 Revision
 Client_impl::checkout(const CheckoutParameter &parameters)
@@ -114,7 +112,6 @@ Client_impl::remove(const Targets &targets,
     Pool pool;
     svn_error_t *error;
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     mBaton _baton;
     _baton.m_context = m_context;
     error = svn_client_delete4(
@@ -127,30 +124,11 @@ Client_impl::remove(const Targets &targets,
                 *m_context,
                 pool
             );
-#else
-    svn_commit_info_t *commit_info = 0;
-    error =
-        svn_client_delete3(
-            &commit_info,
-            targets.array(pool),
-            force,
-            keep_local,
-            map2hash(revProps, pool),
-            *m_context,
-            pool
-        );
-#endif
+
     if (error != 0) {
         throw ClientException(error);
     }
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     return _baton.m_revision;
-#else
-    if (commit_info) {
-        return commit_info->revision;
-    }
-    return Revision::UNDEFINED;
-#endif
 }
 
 void
@@ -202,16 +180,13 @@ Client_impl::update(const UpdateParameter &params)
     apr_array_header_t *apr_revisions = apr_array_make(apr_pool,
                                                        params.targets().size(),
                                                        sizeof(svn_revnum_t));
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     error = svn_client_update4(&apr_revisions, params.targets().array(pool), params.revision(),
                                internal::DepthToSvn(params.depth()), params.sticky_depth(),
                                params.ignore_externals(), params.allow_unversioned(),
                                params.add_as_modification(), params.make_parents(),
                                *m_context, pool
                               );
-#else
-    error = svn_client_update3(&apr_revisions, params.targets().array(pool), params.revision(), internal::DepthToSvn(params.depth()), params.sticky_depth(), params.ignore_externals(), params.allow_unversioned(), *m_context, pool);
-#endif
+
     if (error != NULL) {
         throw ClientException(error);
     }
@@ -229,15 +204,10 @@ Client_impl::commit(const CommitParameter &parameters)
 {
     Pool pool;
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     mBaton _baton;
     _baton.m_context = m_context;
-#else
-    svn_commit_info_t *commit_info = NULL;
-#endif
     m_context->setLogMessage(parameters.message());
     svn_error_t *error =
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
         svn_client_commit6(
 #else
@@ -259,29 +229,11 @@ Client_impl::commit(const CommitParameter &parameters)
             *m_context,
             pool
         );
-#else
-        svn_client_commit4(
-            &commit_info,
-            parameters.targets().array(pool),
-            internal::DepthToSvn(parameters.depth()),
-            parameters.keepLocks(),
-            parameters.keepChangeList(),
-            parameters.changeList().array(pool),
-            map2hash(parameters.revisionProperties(), pool),
-            *m_context,
-            pool);
-#endif
+
     if (error != NULL) {
         throw ClientException(error);
     }
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     return _baton.m_revision;
-#else
-    if (commit_info && SVN_IS_VALID_REVNUM(commit_info->revision)) {
-        return (commit_info->revision);
-    }
-#endif
-    return svn::Revision::UNDEFINED;
 }
 
 Revision
@@ -301,7 +253,6 @@ Client_impl::copy(const CopyParameter &parameter)
         source->peg_revision = parameter.pegRevision().revision();
         APR_ARRAY_PUSH(sources, svn_client_copy_source_t *) = source;
     }
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     mBaton _baton;
     _baton.m_context = m_context;
 
@@ -314,33 +265,10 @@ Client_impl::copy(const CopyParameter &parameter)
             commit_callback2, &_baton,
             *m_context, pool);
 
-#elif SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
-    svn_commit_info_t *commit_info = 0L;
-    svn_error_t *error =
-        svn_client_copy5(&commit_info,
-                         sources,
-                         parameter.destination().cstr(),
-                         parameter.asChild(), parameter.makeParent(), parameter.ignoreExternal(),
-                         map2hash(parameter.properties(), pool), *m_context, pool);
-#else
-    svn_commit_info_t *commit_info = 0L;
-    svn_error_t *error =
-        svn_client_copy4(&commit_info,
-                         sources,
-                         parameter.destination().cstr(),
-                         parameter.asChild(), parameter.makeParent(), map2hash(parameter.properties(), pool), *m_context, pool);
-#endif
     if (error != 0) {
         throw ClientException(error);
     }
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     return _baton.m_revision;
-#else
-    if (commit_info) {
-        return commit_info->revision;
-    }
-#endif
-    return Revision::UNDEFINED;
 }
 
 Revision
@@ -356,7 +284,6 @@ svn::Revision Client_impl::move(const CopyParameter &parameter)
     Pool pool;
 
     // todo svn 1.8: svn_client_move7
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     mBaton _baton;
     _baton.m_context = m_context;
     svn_error_t *error = svn_client_move6(
@@ -371,31 +298,10 @@ svn::Revision Client_impl::move(const CopyParameter &parameter)
                              pool
                          );
 
-#else
-    svn_commit_info_t *commit_info = 0;
-    svn_error_t *error = svn_client_move5(
-                             &commit_info,
-                             parameter.srcPath().array(pool),
-                             parameter.destination().cstr(),
-                             false, // is ignored since subversion 1.7 so we ignore it, too
-                             parameter.asChild(),
-                             parameter.makeParent(),
-                             map2hash(parameter.properties(), pool),
-                             *m_context,
-                             pool
-                         );
-#endif
     if (error != 0) {
         throw ClientException(error);
     }
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     return _baton.m_revision;
-#else
-    if (commit_info) {
-        return commit_info->revision;
-    }
-    return Revision::UNDEFINED;
-#endif
 
 }
 
@@ -412,7 +318,6 @@ Client_impl::mkdir(const Targets &targets,
 
 
     svn_error_t *error = 0;
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     mBaton _baton;
     _baton.m_context = m_context;
     error = svn_client_mkdir4
@@ -423,15 +328,6 @@ Client_impl::mkdir(const Targets &targets,
                 commit_callback2, &_baton,
                 *m_context, pool
             );
-#else
-    svn_commit_info_t *commit_info = NULL;
-    error = svn_client_mkdir3
-            (&commit_info,
-             const_cast<apr_array_header_t *>(targets.array(pool)),
-             makeParent,
-             map2hash(revProps, pool),
-             *m_context, pool);
-#endif
     /* important! otherwise next op on repository uses that logmessage again! */
     m_context->setLogMessage(QString());
 
@@ -439,14 +335,7 @@ Client_impl::mkdir(const Targets &targets,
         throw ClientException(error);
     }
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     return _baton.m_revision;
-#else
-    if (commit_info) {
-        return commit_info->revision;
-    }
-    return Revision::UNDEFINED;
-#endif
 }
 
 void
@@ -488,11 +377,7 @@ Client_impl::doExport(const CheckoutParameter &params)
         _neol = _neolBA.constData();
     }
     svn_error_t *error =
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
         svn_client_export5(
-#else
-        svn_client_export4(
-#endif
                            &revnum,
                            params.moduleName().cstr(),
                            params.destination().cstr(),
@@ -500,9 +385,7 @@ Client_impl::doExport(const CheckoutParameter &params)
                            params.revision().revision(),
                            params.overWrite(),
                            params.ignoreExternals(),
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
                            params.ignoreKeywords(),
-#endif
                            internal::DepthToSvn(params.depth()),
                            _neol,
                            *m_context,
@@ -528,12 +411,7 @@ Client_impl::doSwitch(
 {
     Pool pool;
     svn_revnum_t revnum = 0;
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     svn_error_t *error = svn_client_switch3(
-#else
-    Q_UNUSED(ignore_ancestry);
-    svn_error_t *error = svn_client_switch2(
-#endif
                 &revnum,
                 path.cstr(),
                 url.cstr(),
@@ -543,9 +421,7 @@ Client_impl::doSwitch(
                 sticky_depth,
                 ignore_externals,
                 allow_unversioned,
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
                 ignore_ancestry,
-#endif
                 *m_context,
                 pool
             );
@@ -569,7 +445,6 @@ Client_impl::import(const Path &path,
 
     m_context->setLogMessage(message);
     // todo svn 1.8: svn_client_import5
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     mBaton _baton;
     _baton.m_context = m_context;
     svn_error_t *error =
@@ -579,14 +454,6 @@ Client_impl::import(const Path &path,
                            map2hash(revProps, pool),
                            commit_callback2, &_baton,
                            *m_context, pool);
-#else
-    svn_commit_info_t *commit_info = NULL;
-    svn_error_t *error =
-        svn_client_import3(&commit_info, path.cstr(), importRepository.cstr(),
-                           internal::DepthToSvn(depth), no_ignore, no_unknown_nodetype,
-                           map2hash(revProps, pool),
-                           *m_context, pool);
-#endif
 
     /* important! otherwise next op on repository uses that logmessage again! */
     m_context->setLogMessage(QString());
@@ -594,14 +461,7 @@ Client_impl::import(const Path &path,
     if (error != 0) {
         throw ClientException(error);
     }
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     return _baton.m_revision;
-#else
-    if (commit_info) {
-        return commit_info->revision;
-    }
-    return Revision::UNDEFINED;
-#endif
 }
 
 void
@@ -611,12 +471,9 @@ Client_impl::relocate(const Path &path,
                       bool recurse,
                       bool ignore_externals)
 {
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     Q_UNUSED(recurse);
-#endif
     Pool pool;
     svn_error_t *error =
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
         svn_client_relocate2(path.cstr(),
                              from_url.cstr(),
                              to_url.cstr(),
@@ -624,14 +481,6 @@ Client_impl::relocate(const Path &path,
                              *m_context,
                              pool);
 
-#else
-        svn_client_relocate(path.cstr(),
-                            from_url.cstr(),
-                            to_url.cstr(),
-                            recurse,
-                            *m_context,
-                            pool);
-#endif
     if (error != NULL) {
         throw ClientException(error);
     }

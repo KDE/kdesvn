@@ -34,9 +34,7 @@
 
 // subversion api
 #include <svn_path.h>
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
 #include <svn_dirent_uri.h>
-#endif
 
 // apr api
 #include <apr_file_io.h>
@@ -83,11 +81,7 @@ Path::init(const QString &path)
                 int_path = svn_path_uri_encode(int_path, pool);
             }
         } else {
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
             int_path = svn_dirent_internal_style(int_path, pool.pool());
-#else
-            int_path = svn_path_internal_style(int_path, pool.pool());
-#endif
         }
 
         m_path = QString::fromUtf8(int_path);
@@ -140,11 +134,7 @@ Path::addComponent(const QString &_component)
     }
     if (Url::isValid(m_path)) {
         const char *newPath =
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
             svn_path_url_add_component2(m_path.toUtf8(), component.toUtf8(), pool);
-#else
-            svn_path_url_add_component(m_path.toUtf8(), component.toUtf8(), pool);
-#endif
         m_path = QString::fromUtf8(newPath);
     } else {
         svn_stringbuf_t *pathStringbuf =
@@ -199,11 +189,7 @@ Path::native() const
         return m_path;
     }
     Pool pool;
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     return QString::fromUtf8(svn_dirent_local_style(m_path.toUtf8(), pool));
-#else
-    return QString::fromUtf8(svn_path_local_style(m_path.toUtf8(), pool));
-#endif
 }
 
 }

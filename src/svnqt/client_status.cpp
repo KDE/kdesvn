@@ -119,11 +119,7 @@ logMapReceiver2(
 
 static svn_error_t *InfoEntryFunc(void *baton,
                                   const char *path,
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
                                   const svn_client_info2_t *info,
-#else
-                                  const svn_info_t *info,
-#endif
                                   apr_pool_t *)
 {
     InfoEntriesBaton *seb = static_cast<InfoEntriesBaton *>(baton);
@@ -142,14 +138,9 @@ static svn_error_t *InfoEntryFunc(void *baton,
     return NULL;
 }
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
 static svn_error_t *StatusEntriesFunc(void *baton,
                                       const char *path,
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
                                       const svn_client_status_t *status,
-#else
-                                      svn_wc_status2_t *status,
-#endif
                                       apr_pool_t *pool)
 {
     // use own pool - the parameter will cleared between loops!
@@ -170,15 +161,6 @@ static svn_error_t *StatusEntriesFunc(void *baton,
     seb->entries.push_back(StatusPtr(new Status(path, status)));
     return NULL;
 }
-#else
-static void StatusEntriesFunc(void *baton,
-                              const char *path,
-                              svn_wc_status2_t *status)
-{
-    StatusEntriesBaton *seb = static_cast<StatusEntriesBaton *>(baton);
-    seb->entries.push_back(StatusPtr(new Status(path, status)));
-}
-#endif
 
 static StatusEntries
 localStatus(const StatusParameter &params,
@@ -193,7 +175,6 @@ localStatus(const StatusParameter &params,
     baton.pool = pool;
 
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     error = svn_client_status5(&revnum,
                                *context,
                                params.path().path().toUtf8(),
@@ -209,26 +190,7 @@ localStatus(const StatusParameter &params,
                                &baton,
                                pool
                                );
-#else
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
-    error = svn_client_status4(
-#else
-    error = svn_client_status3(
-#endif
-                & revnum,          // revnum
-                params.path().path().toUtf8(),         // path
-                rev,
-                StatusEntriesFunc, // status func
-                &baton,            // status baton
-                internal::DepthToSvn(params.depth()), // see svn::Depth
-                params.all(),           // get all not only interesting
-                params.update(),            // check for updates
-                params.noIgnore(),         // hide ignored files or not
-                params.ignoreExternals(),    // hide external
-                params.changeList().array(pool),
-                *context,          //client ctx
-                pool);
-#endif
+
     Client_impl::checkErrorThrow(error);
     return baton.entries;
 }
@@ -285,7 +247,6 @@ localSingleStatus(const Path &path, const ContextP &context, bool update = false
 
     baton.pool = pool;
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     error = svn_client_status5(&revnum,
                                *context,
                                path.path().toUtf8(),
@@ -302,26 +263,6 @@ localSingleStatus(const Path &path, const ContextP &context, bool update = false
                                pool
                                );
 
-#else
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
-    error = svn_client_status4(
-#else
-    error = svn_client_status3(
-#endif
-                & revnum,          // revnum
-                path.path().toUtf8(),         // path
-                rev,
-                StatusEntriesFunc, // status func
-                &baton,            // status baton
-                svn_depth_empty, // not recurse
-                true,           // get all not only interesting
-                update,         // check for updates
-                false,          // hide ignored files or not
-                false,          // hide external
-                0,
-                *context,          //client ctx
-                pool);
-#endif
     Client_impl::checkErrorThrow(error);
     if (baton.entries.isEmpty()) {
         return StatusPtr(new Status());
@@ -361,7 +302,6 @@ Client_impl::log(const LogParameter &params, LogEntriesMap &log_target)
     l_baton.revstack = &revstack;
     svn_error_t *error;
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     error = svn_client_log5(
                 params.targets().array(pool),
                 params.peg().revision(),
@@ -375,22 +315,6 @@ Client_impl::log(const LogParameter &params, LogEntriesMap &log_target)
                 &l_baton,
                 *m_context, // client ctx
                 pool);
-#else
-    error = svn_client_log4(
-                params.targets().array(pool),
-                params.peg().revision(),
-                params.revisionRange().first.revision(),
-                params.revisionRange().second.revision(),
-                params.limit(),
-                params.discoverChangedPathes() ? 1 : 0,
-                params.strictNodeHistory() ? 1 : 0,
-                params.includeMergedRevisions() ? 1 : 0,
-                params.revisionProperties().array(pool),
-                logMapReceiver2,
-                &l_baton,
-                *m_context, // client ctx
-                pool);
-#endif
     checkErrorThrow(error);
     return true;
 }
@@ -431,7 +355,6 @@ Client_impl::info(const Path &_p,
     }
 
     error =
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
         svn_client_info3
         (truepath,
          internal_peg ? &pegr : peg_revision.revision(),
@@ -444,18 +367,6 @@ Client_impl::info(const Path &_p,
          &baton,
          *m_context,
          pool);
-#else
-        svn_client_info2
-        (truepath,
-         internal_peg ? &pegr : peg_revision.revision(),
-         rev.revision(),
-         &InfoEntryFunc,
-         &baton,
-         internal::DepthToSvn(depth),
-         changelists.array(pool),
-         *m_context,    //client ctx
-         pool);
-#endif
 
     checkErrorThrow(error);
     return baton.entries;

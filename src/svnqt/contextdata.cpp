@@ -79,12 +79,8 @@ ContextData::ContextData(const QString &configDir_)
     APR_ARRAY_PUSH(providers, svn_auth_provider_object_t *) = provider;
 #endif
 
-#if  SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     svn_auth_get_simple_provider2
     (&provider, maySavePlaintext, this, pool);
-#else
-    svn_auth_get_simple_provider(&provider, pool);
-#endif
     *(svn_auth_provider_object_t **)apr_array_push(providers) = provider;
 
     svn_auth_get_username_provider(&provider, pool);
@@ -109,11 +105,7 @@ ContextData::ContextData(const QString &configDir_)
     svn_auth_get_ssl_client_cert_file_provider(&provider, pool);
     *(svn_auth_provider_object_t **)apr_array_push(providers) = provider;
 
-#if  SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     svn_auth_get_ssl_client_cert_pw_file_provider2(&provider, maySavePlaintext, this, pool);
-#else
-    svn_auth_get_ssl_client_cert_pw_file_provider(&provider, pool);
-#endif
     *(svn_auth_provider_object_t **)apr_array_push(providers) = provider;
 
     svn_auth_get_ssl_server_trust_prompt_provider(&provider, onSslServerTrustPrompt, this, pool);
@@ -166,10 +158,8 @@ ContextData::ContextData(const QString &configDir_)
     m_ctx->conflict_func = onWcConflictResolver;
     m_ctx->conflict_baton = this;
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     m_ctx->conflict_func2 = onWcConflictResolver2;
     m_ctx->conflict_baton2 = this;
-#endif
 
     m_ctx->client_name = "SvnQt wrapper client";
     initMimeTypes();
@@ -731,7 +721,6 @@ svn_error_t *ContextData::onWcConflictResolver(svn_wc_conflict_result_t **result
     return SVN_NO_ERROR;
 }
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 svn_error_t *ContextData::onWcConflictResolver2(svn_wc_conflict_result_t **result,
                                                 const svn_wc_conflict_description2_t *description,
                                                 void *baton,
@@ -747,22 +736,14 @@ svn_error_t *ContextData::onWcConflictResolver2(svn_wc_conflict_result_t **resul
   cresult.assignResult(result, result_pool);
   return SVN_NO_ERROR;
 }
-#endif
 
 svn_error_t *ContextData::maySavePlaintext(svn_boolean_t *may_save_plaintext, const char *realmstring, void *baton, apr_pool_t *pool)
 {
     Q_UNUSED(pool);
-#if  SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     ContextData *data = 0;
     SVN_ERR(getContextData(baton, &data));
     data->getListener()->maySavePlaintext(may_save_plaintext, QString::fromUtf8(realmstring));
     return SVN_NO_ERROR;
-#else
-    Q_UNUSED(may_save_plaintext);
-    Q_UNUSED(realmstring);
-    Q_UNUSED(baton);
-    return svn_error_create(SVN_ERR_CANCELLED, NULL, QCoreApplication::translate("svnqt", "invalid subversion version.").toUtf8());
-#endif
 }
 
 bool ContextData::contextAddListItem(DirEntries *entries, const svn_dirent_t *dirent, const svn_lock_t *lock, const QString &path)

@@ -71,11 +71,9 @@ protected:
 
 private:
     static void warning_func(void *baton, svn_error_t *err);
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     static void repo_notify_func(void *baton,
                                  const svn_repos_notify_t *notify,
                                  apr_pool_t *scratch_pool);
-#endif
     static svn_error_t *cancel_func(void *baton);
 };
 

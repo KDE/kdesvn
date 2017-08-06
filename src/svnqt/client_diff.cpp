@@ -59,7 +59,6 @@ Client_impl::diff_peg(const DiffParameter &options)
     _options = options.extra().array(pool);
     DiffData ddata(options.tmpPath(), options.path1(), options.rev1(), options.path1(), options.rev2());
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
     error = svn_client_diff_peg6(
 #else
@@ -97,21 +96,6 @@ Client_impl::diff_peg(const DiffParameter &options)
                 pool
             );
 
-#else
-    error = svn_client_diff_peg4(
-                _options,
-                options.path1().cstr(),
-                options.peg(), ddata.r1().revision(), ddata.r2().revision(),
-                options.relativeTo().length() > 0 ? options.relativeTo().cstr() : QByteArray(/*0*/),
-                internal::DepthToSvn(options.depth()),
-                options.ignoreAncestry(), options.noDiffDeleted(), options.ignoreContentType(),
-                APR_LOCALE_CHARSET,
-                ddata.outFile(), ddata.errFile(),
-                options.changeList().array(pool),
-                *m_context,
-                pool
-            );
-#endif
     if (error != NULL) {
         throw ClientException(error);
     }
@@ -134,7 +118,6 @@ Client_impl::diff(const DiffParameter &options)
     }
     DiffData ddata(options.tmpPath(), options.path1(), options.rev1(), options.path2(), options.rev2());
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
     error = svn_client_diff6(_options,
 #else
@@ -169,19 +152,7 @@ Client_impl::diff(const DiffParameter &options)
                              options.changeList().array(pool),
                              *m_context,
                              pool);
-#else
-    error = svn_client_diff4(_options,
-                             options.path1().cstr(), ddata.r1().revision(),
-                             options.path2().cstr(), ddata.r2().revision(),
-                             options.relativeTo().length() > 0 ? options.relativeTo().cstr() : QByteArray(/*0*/),
-                             internal::DepthToSvn(options.depth()),
-                             options.ignoreAncestry(), options.noDiffDeleted(), options.ignoreContentType(),
-                             APR_LOCALE_CHARSET,
-                             ddata.outFile(), ddata.errFile(),
-                             options.changeList().array(pool),
-                             *m_context,
-                             pool);
-#endif
+
     if (error != NULL) {
         throw ClientException(error);
     }

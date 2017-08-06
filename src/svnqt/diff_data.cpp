@@ -61,32 +61,18 @@ void DiffData::init()
 {
 #if SVN_API_VERSION < SVN_VERSION_CHECK(1,8,0)
     svn_error_t *error;
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     Pool scratchPool;
     error = svn_io_open_unique_file3(&m_outFile, &m_outFileName,
                                      m_tmpPath.path().toUtf8(),
                                      svn_io_file_del_on_pool_cleanup, m_Pool, scratchPool);
 
-#else
-    error = svn_io_open_unique_file2(&m_outFile, &m_outFileName,
-                                     m_tmpPath.path().toUtf8(),
-                                     ".tmp",
-                                     svn_io_file_del_on_pool_cleanup, m_Pool);
-#endif
     if (error != 0) {
         clean();
         throw ClientException(error);
     }
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,6,0)
     error = svn_io_open_unique_file3(&m_errFile, &m_errFileName,
                                      m_tmpPath.path().toUtf8(),
                                      svn_io_file_del_on_pool_cleanup, m_Pool, scratchPool);
-#else
-    error = svn_io_open_unique_file2(&m_errFile, &m_errFileName,
-                                     m_tmpPath.path().toUtf8(),
-                                     ".tmp",
-                                     svn_io_file_del_on_pool_cleanup, m_Pool);
-#endif
     if (error != 0) {
         clean();
         throw ClientException(error);

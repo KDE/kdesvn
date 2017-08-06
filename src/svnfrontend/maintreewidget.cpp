@@ -1996,14 +1996,8 @@ void MainTreeWidget::slotRelocate()
     ptr->disableTargetDir(true);
     ptr->disableRange(true);
     ptr->disableOpen(true);
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     ptr->hideDepth(true);
     ptr->hideOverwrite(true);
-#else
-    ptr->hideDepth(true);
-    ptr->overwriteAsRecursive();
-    ptr->disableExternals(true);
-#endif
     dlg->addWidget(ptr);
     bool done = false;
     if (dlg->exec() == QDialog::Accepted) {

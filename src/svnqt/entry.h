@@ -64,11 +64,7 @@ public:
      *
      * @param src another entry to copy from
      */
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     explicit Entry(const svn_client_status_t *src = 0);
-#else
-    explicit Entry(const svn_wc_entry_t *src = 0);
-#endif
 
     /**
      * copy constructor

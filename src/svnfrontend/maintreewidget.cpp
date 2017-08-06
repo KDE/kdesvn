@@ -217,7 +217,7 @@ bool MainTreeWidget::openUrl(const QUrl &url, bool noReinit)
 
     QUrl _url(url);
     const QString proto = svn::Url::transformProtokoll(url.scheme());
-    _url = _url.adjusted(QUrl::NormalizePathSegments);
+    _url = _url.adjusted(QUrl::StripTrailingSlash|QUrl::NormalizePathSegments);
     _url.setScheme(proto);
 
     const QString baseUriString = _url.url(QUrl::StripTrailingSlash);

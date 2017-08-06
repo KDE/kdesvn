@@ -276,7 +276,7 @@ QStringList kdesvnd::get_logmsg() const
 
 QString kdesvnd::cleanUrl(const QUrl &url)
 {
-    return url.adjusted(QUrl::StripTrailingSlash).path();
+    return url.adjusted(QUrl::StripTrailingSlash|QUrl::NormalizePathSegments).path();
 }
 
 /* just simple name check of course - no network access! */

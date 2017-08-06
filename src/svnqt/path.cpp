@@ -91,21 +91,7 @@ Path::init(const QString &path)
         }
 
         m_path = QString::fromUtf8(int_path);
-        /* the following block is a problem and thats why commented out: since a while subversion raises
-         * an assert because of wrong url if replacing the @ sign with entity and kdesvn dies.
-         * So using the scheme on ubuntu that it just don't display the content of such a folder/file.
-         */
-        /*
-         if (Url::isValid(m_path) && m_path.indexOf("@")!=-1 ) {
-          /// @todo make sure that "@" is never used as revision parameter
-          QUrl uri = m_path;
-          m_path = uri.path();
-          m_path.replace('@',"%40");
-          m_path = uri.scheme()+"://"+uri.authority()+m_path;
-        }
-        */
-
-        while (m_path.endsWith(QLatin1Char('/'))) {
+        while (m_path.endsWith(QLatin1Char('/')) && m_path.size() > 1) {
             m_path.chop(1);
         }
     }

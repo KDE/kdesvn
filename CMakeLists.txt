@@ -52,6 +52,7 @@ find_package(KF5 REQUIRED COMPONENTS
     Notifications Parts Service TextWidgets
     Wallet WidgetsAddons XmlGui
 )
+set(QT_MIN_VERSION 5.6.0)
 find_package(Qt5 REQUIRED COMPONENTS
     Core DBus Gui Sql Widgets Xml
 )
@@ -92,9 +93,8 @@ add_definitions(-DQT_NO_CAST_TO_ASCII)
 add_definitions(-DQT_RESTRICTED_CAST_FROM_ASCII)
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 add_definitions(-DQT_DEPRECATED_WARNINGS)
-# not possible with Qt 5.5
-#add_definitions(-DQT_NO_DEPRECATED)
 add_definitions(-DQT_STRICT_ITERATORS)
+add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050600)
 
 # include(MacroEnsureVersion)
 include(FindSubversion)
@@ -102,10 +102,6 @@ include(kdesvn-macros)
 
 # Enable exceptions
 kde_enable_exceptions()
-
-# hide deprecated warnings, for now
-# TODO remove this ↓
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations")
 
 include_directories(
     ${CMAKE_BINARY_DIR}

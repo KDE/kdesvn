@@ -104,7 +104,7 @@ public:
      * @return vector with Status entries.
      */
     virtual StatusEntries
-    status(const StatusParameter &params) throw (ClientException) = 0;
+    status(const StatusParameter &params) = 0;
 
     /**
      * Returns the status of a single file in the path.
@@ -117,7 +117,7 @@ public:
      * @return a Status with Statis.isVersioned = FALSE
      */
     virtual StatusPtr
-    singleStatus(const Path &path, bool update = false, const Revision &revision = svn::Revision::HEAD) throw (ClientException) = 0;
+    singleStatus(const Path &path, bool update = false, const Revision &revision = svn::Revision::HEAD) = 0;
 
     /**
        * Executes a revision checkout.
@@ -126,7 +126,7 @@ public:
        * @exception ClientException
        */
     virtual Revision
-    checkout(const CheckoutParameter &params) throw (ClientException) = 0;
+    checkout(const CheckoutParameter &params) = 0;
 
     /**
      * relocate wc @a from to @a to
@@ -134,7 +134,7 @@ public:
      */
     virtual void
     relocate(const Path &path, const Url &from_url,
-             const Url &to_url, bool recurse, bool ignore_externals) throw (ClientException) = 0;
+             const Url &to_url, bool recurse, bool ignore_externals) = 0;
 
     /**
      * Sets entries for deletion.
@@ -148,7 +148,7 @@ public:
     remove(const Targets &targets,
            bool force,
            bool keep_local = true,
-           const PropertiesMap &revProps = PropertiesMap()) throw (ClientException) = 0;
+           const PropertiesMap &revProps = PropertiesMap()) = 0;
 
     /**
      * Reverts a couple of files to a pristiner state.
@@ -158,7 +158,7 @@ public:
     revert(const Targets &targets,
            Depth depth,
            const StringArray &changelist = StringArray()
-          ) throw (ClientException) = 0;
+          ) = 0;
 
     /**
      * Adds a file to the repository.
@@ -170,7 +170,7 @@ public:
      * @exception ClientException
      */
     virtual void
-    add(const Path &path, svn::Depth depth, bool force = false, bool no_ignore = false, bool add_parents = true) throw (ClientException) = 0;
+    add(const Path &path, svn::Depth depth, bool force = false, bool no_ignore = false, bool add_parents = true) = 0;
 
     /**
      * Updates the file or directory.
@@ -178,7 +178,7 @@ public:
      * @exception ClientException
      */
     virtual Revisions
-    update(const UpdateParameter &params) throw (ClientException) = 0;
+    update(const UpdateParameter &params) = 0;
 
     /**
      * Retrieves the contents for a specific @a revision of
@@ -192,7 +192,7 @@ public:
     virtual QByteArray
     cat(const Path &path,
         const Revision &revision,
-        const Revision &peg_revision = Revision::UNDEFINED) throw (ClientException) = 0;
+        const Revision &peg_revision = Revision::UNDEFINED) = 0;
     /**
      * Retrieves the contents for a specific @a revision of
      * a @a path at @a peg_revision
@@ -207,7 +207,7 @@ public:
     cat(svn::stream::SvnStream &buffer,
         const Path &path,
         const Revision &revision,
-        const Revision &peg_revision) throw (ClientException) = 0;
+        const Revision &peg_revision) = 0;
     /**
      * Retrieves the contents for a specific @a revision of
      * a @a path at @a peg_revision
@@ -222,7 +222,7 @@ public:
     get(const Path &path,
         const QString   &target,
         const Revision &revision,
-        const Revision &peg_revision = Revision::UNDEFINED) throw (ClientException) = 0;
+        const Revision &peg_revision = Revision::UNDEFINED) = 0;
 
     /**
      * Retrieves the contents for a specific @a revision of
@@ -235,7 +235,7 @@ public:
      * @param peg indicates in which revision path is valid
      */
     virtual void
-    annotate(AnnotatedFile &target, const AnnotateParameter &params) throw (ClientException) = 0;
+    annotate(AnnotatedFile &target, const AnnotateParameter &params) = 0;
 
     /**
      * Commits changes to the repository. This usually requires
@@ -245,7 +245,7 @@ public:
      * @exception ClientException
      */
     virtual svn::Revision
-    commit(const CommitParameter &parameters) throw (ClientException) = 0;
+    commit(const CommitParameter &parameters) = 0;
 
     /**
      * Copies a versioned file with the history preserved.
@@ -254,7 +254,7 @@ public:
     virtual svn::Revision
     copy(const Path &srcPath,
          const Revision &srcRevision,
-         const Path &destPath) throw (ClientException) = 0;
+         const Path &destPath) = 0;
     /**
      * Copies a versioned file with the history preserved.
      * @since subversion 1.5 api
@@ -262,14 +262,14 @@ public:
      * @exception ClientException
      */
     virtual svn::Revision
-    copy(const CopyParameter &parameter) throw (ClientException) = 0;
+    copy(const CopyParameter &parameter) = 0;
 
     /**
      * Moves or renames a file.
      * @exception ClientException
      */
     virtual svn::Revision
-    move(const CopyParameter &parameter) throw (ClientException) = 0;
+    move(const CopyParameter &parameter) = 0;
 
     /**
      * Creates a directory directly in a repository or creates a
@@ -287,7 +287,7 @@ public:
           const QString &message,
           bool makeParent = true,
           const PropertiesMap &revProps = PropertiesMap()
-         ) throw (ClientException) = 0;
+         ) = 0;
 
     /**
      * Recursively cleans up a local directory, finishing any
@@ -296,13 +296,13 @@ public:
      * @exception ClientException
      */
     virtual void
-    cleanup(const Path &path) throw (ClientException) = 0;
+    cleanup(const Path &path) = 0;
 
     /**
      * Removes the 'conflicted' state on a file.
      * @exception ClientException
      */
-    virtual void resolve(const Path &path, Depth depth, const ConflictResult &resolution = ConflictResult()) throw (ClientException) = 0;
+    virtual void resolve(const Path &path, Depth depth, const ConflictResult &resolution = ConflictResult()) = 0;
 
     /**
      * Exports the contents of either a subversion repository into a
@@ -313,7 +313,7 @@ public:
      * @return revision exported
      */
     virtual Revision
-    doExport(const CheckoutParameter &params) throw (ClientException) = 0;
+    doExport(const CheckoutParameter &params) = 0;
 
     /**
      * Update local copy to mirror a new url. This excapsulates the
@@ -330,7 +330,7 @@ public:
         bool ignore_externals = false,
         bool allow_unversioned = false,
         bool ignore_ancestry = false
-    ) throw (ClientException) = 0;
+    ) = 0;
 
     /**
      * Import file or directory PATH into repository directory URL at
@@ -348,17 +348,17 @@ public:
            const QString &message,
            svn::Depth depth,
            bool no_ignore, bool no_unknown_nodetype,
-           const PropertiesMap &revProps = PropertiesMap()) throw (ClientException) = 0;
+           const PropertiesMap &revProps = PropertiesMap()) = 0;
 
     /**
      * Merge changes from two paths into a new local path.
      * @exception ClientException
      */
     virtual void
-    merge(const MergeParameter &parameters) throw (ClientException) = 0;
+    merge(const MergeParameter &parameters) = 0;
 
     virtual void
-    merge_peg(const MergeParameter &parameters) throw (ClientException) = 0;
+    merge_peg(const MergeParameter &parameters) = 0;
 
     /**
      * Retrieve information for the given path
@@ -376,7 +376,7 @@ public:
          const Revision &rev,
          const Revision &peg_revision = Revision::UNDEFINED,
          const StringArray &changelists = StringArray()
-        ) throw (ClientException) = 0;
+        ) = 0;
 
     /**
      * Retrieve log information for the given path
@@ -392,7 +392,7 @@ public:
      * @sa LogParameter
      */
     virtual bool
-    log(const LogParameter &params, LogEntriesMap &target) throw (ClientException) = 0;
+    log(const LogParameter &params, LogEntriesMap &target) = 0;
 
     /**
      * Produce diff output which describes the delta between
@@ -407,7 +407,7 @@ public:
      * @exception ClientException
      */
     virtual QByteArray
-    diff_peg(const DiffParameter &options) throw (ClientException) = 0;
+    diff_peg(const DiffParameter &options) = 0;
 
     /**
      * Produce diff output which describes the delta between
@@ -422,7 +422,7 @@ public:
      * @exception ClientException
      */
     virtual QByteArray
-    diff(const DiffParameter &options) throw (ClientException) = 0;
+    diff(const DiffParameter &options) = 0;
 
     /**
      * lists entries in @a pathOrUrl no matter whether local or
@@ -443,7 +443,7 @@ public:
     list(const Path &pathOrUrl,
          const Revision &revision,
          const Revision &peg,
-         svn::Depth depth, bool retrieve_locks) throw (ClientException) = 0;
+         svn::Depth depth, bool retrieve_locks) = 0;
 
     /**
      * lists properties in @a path no matter whether local or
@@ -563,7 +563,7 @@ public:
     virtual void
     lock(const Targets &targets,
          const QString &message,
-         bool steal_lock) throw (ClientException) = 0;
+         bool steal_lock) = 0;
     /**
      * unlock files in repository or working copy
      * @param targets items to unlock
@@ -571,7 +571,7 @@ public:
      */
     virtual void
     unlock(const Targets &targets,
-           bool break_lock) throw (ClientException) = 0;
+           bool break_lock) = 0;
 
     virtual void
     url2Revision(const QString &revstring,

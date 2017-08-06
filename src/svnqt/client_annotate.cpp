@@ -88,7 +88,7 @@ annotateReceiver(void *baton,
 }
 #endif
 void
-Client_impl::annotate(AnnotatedFile &target, const AnnotateParameter &params) throw (ClientException)
+Client_impl::annotate(AnnotatedFile &target, const AnnotateParameter &params)
 {
     Pool pool;
     svn_error_t *error;

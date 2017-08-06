@@ -76,7 +76,7 @@ DirEntries
 Client_impl::list(const Path &pathOrUrl,
                   const Revision &revision,
                   const Revision &peg,
-                  Depth depth, bool retrieve_locks) throw (ClientException)
+                  Depth depth, bool retrieve_locks)
 {
 
     ListBaton _baton;

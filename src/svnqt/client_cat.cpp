@@ -47,7 +47,7 @@ namespace svn
 QByteArray
 Client_impl::cat(const Path &path,
                  const Revision &revision,
-                 const Revision &peg_revision) throw (ClientException)
+                 const Revision &peg_revision)
 {
     svn::stream::SvnByteStream buffer(*m_context);
     svn_error_t *error = internal_cat(path, revision, peg_revision, buffer);
@@ -62,7 +62,7 @@ void
 Client_impl::cat(svn::stream::SvnStream &buffer,
                  const Path &path,
                  const Revision &revision,
-                 const Revision &peg_revision) throw (ClientException)
+                 const Revision &peg_revision)
 {
     svn_error_t *error = internal_cat(path, revision, peg_revision, buffer);
     if (error != 0) {
@@ -74,7 +74,7 @@ void
 Client_impl::get(const Path &path,
                  const QString   &target,
                  const Revision &revision,
-                 const Revision &peg_revision) throw (ClientException)
+                 const Revision &peg_revision)
 {
     svn::stream::SvnFileOStream buffer(target, *m_context);
     svn_error_t *error = internal_cat(path, revision, peg_revision, buffer);

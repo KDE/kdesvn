@@ -49,7 +49,7 @@
 namespace svn
 {
 QByteArray
-Client_impl::diff_peg(const DiffParameter &options) throw (ClientException)
+Client_impl::diff_peg(const DiffParameter &options)
 {
     Pool pool;
     svn_error_t *error;
@@ -119,7 +119,7 @@ Client_impl::diff_peg(const DiffParameter &options) throw (ClientException)
 }
 
 QByteArray
-Client_impl::diff(const DiffParameter &options) throw (ClientException)
+Client_impl::diff(const DiffParameter &options)
 {
 
     Pool pool;

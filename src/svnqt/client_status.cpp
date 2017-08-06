@@ -266,7 +266,7 @@ remoteStatus(Client *client,
 }
 
 StatusEntries
-Client_impl::status(const StatusParameter &params) throw (ClientException)
+Client_impl::status(const StatusParameter &params)
 {
     if (Url::isValid(params.path().path())) {
         return remoteStatus(this, params, m_context);
@@ -341,7 +341,7 @@ remoteSingleStatus(Client *client, const Path &path, const Revision &revision, c
 }
 
 StatusPtr
-Client_impl::singleStatus(const Path &path, bool update, const Revision &revision) throw (ClientException)
+Client_impl::singleStatus(const Path &path, bool update, const Revision &revision)
 {
     if (Url::isValid(path.path())) {
         return remoteSingleStatus(this, path, revision, m_context);
@@ -350,7 +350,7 @@ Client_impl::singleStatus(const Path &path, bool update, const Revision &revisio
 }
 
 bool
-Client_impl::log(const LogParameter &params, LogEntriesMap &log_target) throw (ClientException)
+Client_impl::log(const LogParameter &params, LogEntriesMap &log_target)
 {
     Pool pool;
     LogBaton l_baton;
@@ -401,7 +401,7 @@ Client_impl::info(const Path &_p,
                   const Revision &rev,
                   const Revision &peg_revision,
                   const StringArray &changelists
-                 ) throw (ClientException)
+                 )
 {
 
     Pool pool;

@@ -38,7 +38,7 @@ namespace svn
 void
 Client_impl::lock(const Targets &targets,
                   const QString &message,
-                  bool steal_lock)  throw (ClientException)
+                  bool steal_lock)
 {
     Pool pool;
     svn_error_t *error =
@@ -54,7 +54,7 @@ Client_impl::lock(const Targets &targets,
 
 void
 Client_impl::unlock(const Targets &targets,
-                    bool break_lock)  throw (ClientException)
+                    bool break_lock)
 {
     Pool pool;
     svn_error_t *error =

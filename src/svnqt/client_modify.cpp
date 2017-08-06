@@ -83,7 +83,7 @@ static svn_error_t *commit_callback2(const svn_commit_info_t *commit_info, void 
 #endif
 
 Revision
-Client_impl::checkout(const CheckoutParameter &parameters) throw (ClientException)
+Client_impl::checkout(const CheckoutParameter &parameters)
 {
     Pool subPool;
     svn_revnum_t revnum = 0;
@@ -109,7 +109,7 @@ Client_impl::remove(const Targets &targets,
                     bool force,
                     bool keep_local,
                     const PropertiesMap &revProps
-                   ) throw (ClientException)
+                   )
 {
     Pool pool;
     svn_error_t *error;
@@ -157,7 +157,7 @@ void
 Client_impl::revert(const Targets &targets,
                     Depth depth,
                     const StringArray &changelist
-                   ) throw (ClientException)
+                   )
 {
     Pool pool;
 
@@ -174,7 +174,7 @@ Client_impl::revert(const Targets &targets,
 
 void
 Client_impl::add(const Path &path,
-                 svn::Depth depth, bool force, bool no_ignore, bool add_parents) throw (ClientException)
+                 svn::Depth depth, bool force, bool no_ignore, bool add_parents)
 {
     Pool pool;
     // todo svn 1.8: svn_client_add5
@@ -192,7 +192,7 @@ Client_impl::add(const Path &path,
 }
 
 Revisions
-Client_impl::update(const UpdateParameter &params) throw (ClientException)
+Client_impl::update(const UpdateParameter &params)
 {
     Pool pool;
     Revisions resulting;
@@ -225,7 +225,7 @@ Client_impl::update(const UpdateParameter &params) throw (ClientException)
 }
 
 svn::Revision
-Client_impl::commit(const CommitParameter &parameters) throw (ClientException)
+Client_impl::commit(const CommitParameter &parameters)
 {
     Pool pool;
 
@@ -285,7 +285,7 @@ Client_impl::commit(const CommitParameter &parameters) throw (ClientException)
 }
 
 Revision
-Client_impl::copy(const CopyParameter &parameter)throw (ClientException)
+Client_impl::copy(const CopyParameter &parameter)
 {
     if (parameter.srcPath().size() < 1) {
         throw ClientException("Wrong size of sources.");
@@ -346,12 +346,12 @@ Client_impl::copy(const CopyParameter &parameter)throw (ClientException)
 Revision
 Client_impl::copy(const Path &srcPath,
                   const Revision &srcRevision,
-                  const Path &destPath) throw (ClientException)
+                  const Path &destPath)
 {
     return copy(CopyParameter(srcPath, destPath).srcRevision(srcRevision).asChild(true).makeParent(false));
 }
 
-svn::Revision Client_impl::move(const CopyParameter &parameter) throw (ClientException)
+svn::Revision Client_impl::move(const CopyParameter &parameter)
 {
     Pool pool;
 
@@ -404,7 +404,7 @@ Client_impl::mkdir(const Targets &targets,
                    const QString &msg,
                    bool makeParent,
                    const PropertiesMap &revProps
-                  ) throw (ClientException)
+                  )
 {
     Pool pool;
     m_context->setLogMessage(msg);
@@ -450,7 +450,7 @@ Client_impl::mkdir(const Targets &targets,
 }
 
 void
-Client_impl::cleanup(const Path &path) throw (ClientException)
+Client_impl::cleanup(const Path &path)
 {
     Pool subPool;
     apr_pool_t *apr_pool = subPool.pool();
@@ -463,7 +463,7 @@ Client_impl::cleanup(const Path &path) throw (ClientException)
     }
 }
 
-void Client_impl::resolve(const Path &path, Depth depth, const ConflictResult &resolution) throw (ClientException)
+void Client_impl::resolve(const Path &path, Depth depth, const ConflictResult &resolution)
 {
     Pool pool;
     const svn_wc_conflict_result_t *aResult = resolution.result(pool);
@@ -475,7 +475,7 @@ void Client_impl::resolve(const Path &path, Depth depth, const ConflictResult &r
 }
 
 Revision
-Client_impl::doExport(const CheckoutParameter &params) throw (ClientException)
+Client_impl::doExport(const CheckoutParameter &params)
 {
     Pool pool;
     svn_revnum_t revnum = 0;
@@ -524,7 +524,7 @@ Client_impl::doSwitch(
     bool ignore_externals,
     bool allow_unversioned,
     bool ignore_ancestry
-) throw (ClientException)
+)
 {
     Pool pool;
     svn_revnum_t revnum = 0;
@@ -562,7 +562,7 @@ Client_impl::import(const Path &path,
                     svn::Depth depth,
                     bool no_ignore, bool no_unknown_nodetype,
                     const PropertiesMap &revProps
-                   ) throw (ClientException)
+                   )
 
 {
     Pool pool;
@@ -609,7 +609,7 @@ Client_impl::relocate(const Path &path,
                       const Url &from_url,
                       const Url &to_url,
                       bool recurse,
-                      bool ignore_externals) throw (ClientException)
+                      bool ignore_externals)
 {
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1,7,0)
     Q_UNUSED(recurse);

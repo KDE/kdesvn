@@ -38,7 +38,7 @@
 namespace svn
 {
 
-void Client_impl::merge_reintegrate(const MergeParameter &parameters) throw (ClientException)
+void Client_impl::merge_reintegrate(const MergeParameter &parameters)
 {
     Pool pool;
     svn_error_t *error = 0;
@@ -55,7 +55,7 @@ void Client_impl::merge_reintegrate(const MergeParameter &parameters) throw (Cli
     }
 }
 
-void Client_impl::merge(const MergeParameter &parameters) throw (ClientException)
+void Client_impl::merge(const MergeParameter &parameters)
 {
     Pool pool;
     svn_error_t *error = 0;
@@ -92,7 +92,7 @@ void Client_impl::merge(const MergeParameter &parameters) throw (ClientException
     }
 }
 
-void Client_impl::merge_peg(const MergeParameter &parameters) throw (ClientException)
+void Client_impl::merge_peg(const MergeParameter &parameters)
 {
     Pool pool;
     internal::RevisionRangesToHash _rhash(parameters.revisions());

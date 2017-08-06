@@ -43,7 +43,7 @@ Repository::~Repository()
 /*!
     \fn svn::Repository::Open(const QString&)
  */
-void Repository::Open(const QString &name) throw (ClientException)
+void Repository::Open(const QString &name)
 {
     svn_error_t *error = m_Data->Open(name);
     if (error != 0) {
@@ -51,7 +51,7 @@ void Repository::Open(const QString &name) throw (ClientException)
     }
 }
 
-void Repository::CreateOpen(const CreateRepoParameter &params) throw (ClientException)
+void Repository::CreateOpen(const CreateRepoParameter &params)
 {
     svn_error_t *error = m_Data->CreateOpen(params);
     if (error != 0) {
@@ -60,9 +60,9 @@ void Repository::CreateOpen(const CreateRepoParameter &params) throw (ClientExce
 }
 
 /*!
-    \fn svn::Repository::dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)throw (ClientException)
+    \fn svn::Repository::dump(const QString&output,const svn::Revision&start,const svn::Revision&end, bool incremental, bool use_deltas)
  */
-void Repository::dump(const QString &output, const svn::Revision &start, const svn::Revision &end, bool incremental, bool use_deltas)throw (ClientException)
+void Repository::dump(const QString &output, const svn::Revision &start, const svn::Revision &end, bool incremental, bool use_deltas)
 {
     svn_error_t *error = m_Data->dump(output, start, end, incremental, use_deltas);
     if (error != 0) {
@@ -70,7 +70,7 @@ void Repository::dump(const QString &output, const svn::Revision &start, const s
     }
 }
 
-void Repository::loaddump(const QString &dump, LOAD_UUID uuida, const QString &parentFolder, bool usePre, bool usePost, bool validateProps)throw (ClientException)
+void Repository::loaddump(const QString &dump, LOAD_UUID uuida, const QString &parentFolder, bool usePre, bool usePost, bool validateProps)
 {
     svn_repos_load_uuid uuid_action;
     switch (uuida) {
@@ -94,7 +94,7 @@ void Repository::loaddump(const QString &dump, LOAD_UUID uuida, const QString &p
 /*!
     \fn svn::Repository::hotcopy(const QString&src,const QString&dest,bool cleanlogs)
  */
-void Repository::hotcopy(const QString &src, const QString &dest, bool cleanlogs)throw (ClientException)
+void Repository::hotcopy(const QString &src, const QString &dest, bool cleanlogs)
 {
     svn_error_t *error = RepositoryData::hotcopy(src, dest, cleanlogs);
     if (error != 0) {

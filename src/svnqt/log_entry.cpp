@@ -42,51 +42,6 @@
 
 namespace svn
 {
-LogChangePathEntry::LogChangePathEntry(const char *path_,
-                                       char action_,
-                                       const char *copyFromPath_,
-                                       const svn_revnum_t copyFromRevision_)
-    : path(QString::fromUtf8(path_))
-    , action(action_)
-    , copyFromPath(QString::fromUtf8(copyFromPath_))
-    , copyFromRevision(copyFromRevision_)
-    , copyToRevision(SVN_INVALID_REVNUM)
-{
-}
-
-LogChangePathEntry::LogChangePathEntry(const QString &path_,
-                                       char action_,
-                                       const QString &copyFromPath_,
-                                       const svn_revnum_t copyFromRevision_)
-    : path(path_)
-    , action(action_)
-    , copyFromPath(copyFromPath_)
-    , copyToPath()
-    , copyFromRevision(copyFromRevision_)
-    , copyToRevision(SVN_INVALID_REVNUM)
-{
-}
-
-LogChangePathEntry::LogChangePathEntry()
-    : path()
-    , action(0)
-    , copyFromPath()
-    , copyToPath()
-    , copyFromRevision(SVN_INVALID_REVNUM)
-    , copyToRevision(SVN_INVALID_REVNUM)
-{
-}
-
-LogChangePathEntry::LogChangePathEntry(const QString &path_,
-                                       char action_,
-                                       const QString &copyFromPath_,
-                                       const svn_revnum_t copyFromRevision_,
-                                       const QString &copyToPath_,
-                                       const svn_revnum_t copyToRevision_)
-    : path(path_), action(action_), copyFromPath(copyFromPath_), copyToPath(copyToPath_),
-      copyFromRevision(copyFromRevision_), copyToRevision(copyToRevision_)
-{
-}
 
 LogEntry::LogEntry()
     : revision(-1), date(0)
@@ -97,14 +52,13 @@ LogEntry::LogEntry(svn_log_entry_t *log_entry, const StringArray &excludeList)
     : revision(-1), date(0)
 {
     Pool pool;
-    const char *author_;
-    const char *date_;
-    const char *message_;
-    // TODO remove this obsolete call with own method
+    const char *author_ = nullptr;
+    const char *date_ = nullptr;
+    const char *message_ = nullptr;
     svn_compat_log_revprops_out(&author_, &date_, &message_, log_entry->revprops);
 
-    author = author_ == 0 ? QString() : QString::fromUtf8(author_);
-    message = message_ == 0 ? QString() : QString::fromUtf8(message_);
+    author = author_ == nullptr ? QString() : QString::fromUtf8(author_);
+    message = message_ == nullptr ? QString() : QString::fromUtf8(message_);
     apr_time_t apr_time = 0;
     if (date_) {
         svn_error_t *err = svn_time_from_cstring(&apr_time, date_, pool);
@@ -131,7 +85,10 @@ LogEntry::LogEntry(svn_log_entry_t *log_entry, const StringArray &excludeList)
                 }
             }
             if (!blocked) {
-                changedPaths.push_back(LogChangePathEntry(path, log_item->action, log_item->copyfrom_path, log_item->copyfrom_rev));
+                changedPaths.push_back(LogChangePathEntry(_p,
+                                                          log_item->action,
+                                                          QString::fromUtf8(log_item->copyfrom_path),
+                                                          log_item->copyfrom_rev));
             }
         }
     }

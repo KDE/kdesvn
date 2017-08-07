@@ -49,30 +49,21 @@ namespace svn
 {
 
 class StringArray;
-class SVNQT_EXPORT LogChangePathEntry
+struct LogChangePathEntry
 {
-public:
-    LogChangePathEntry(const char *path_,
-                       char action_,
-                       const char *copyFromPath_,
-                       const svn_revnum_t copyFromRevision_);
-
+    LogChangePathEntry() = default;
     LogChangePathEntry(const QString &path_,
                        char action_,
                        const QString &copyFromPath_,
-                       const svn_revnum_t copyFromRevision_);
-
-    LogChangePathEntry(const QString &path_,
-                       char action_,
-                       const QString &copyFromPath_,
-                       const svn_revnum_t copyFromRevision_,
-                       const QString &copyToPath_,
-                       const svn_revnum_t copyToRevision_);
-
-    LogChangePathEntry();
+                       const svn_revnum_t copyFromRevision_)
+        : path(path_)
+        , action(action_)
+        , copyFromPath(copyFromPath_)
+        , copyFromRevision(copyFromRevision_)
+    {}
 
     QString path;
-    char action;
+    char action = '\0';
     QString copyFromPath;
     //! future use or useful in backends
     QString copyToPath;

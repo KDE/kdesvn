@@ -30,8 +30,8 @@ CopyMoveView_impl::CopyMoveView_impl(const QString &baseName, const QString &sou
     setupUi(this);
 
     m_BaseName = baseName;
-    if (!m_BaseName.isEmpty() && !m_BaseName.endsWith('/')) {
-        m_BaseName += '/';
+    if (!m_BaseName.isEmpty() && !m_BaseName.endsWith(QLatin1Char('/'))) {
+        m_BaseName += QLatin1Char('/');
     }
     m_PrefixLabel->setText(m_BaseName);
     m_OldNameLabel->setText("<b>" + sourceName + "</b>");

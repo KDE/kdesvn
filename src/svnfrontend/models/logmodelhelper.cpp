@@ -84,7 +84,7 @@ bool SvnLogModelNode::isParent(const QString &_par, const QString &tar)
     if (_par == tar) {
         return true;
     }
-    QString par = _par.endsWith('/') ? _par : _par + '/';
+    QString par = _par.endsWith(QLatin1Char('/')) ? _par : _par + QLatin1Char('/');
     return tar.startsWith(par);
 }
 

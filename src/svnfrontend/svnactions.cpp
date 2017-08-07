@@ -434,7 +434,7 @@ bool SvnActions::singleInfo(const QString &what, const svn::Revision &_rev, svn:
         if (peg == svn::Revision::UNDEFINED) {
             peg = svn::Revision::HEAD;
         }
-        cacheKey = _rev.toString() + '/' + url;
+        cacheKey = _rev.toString() + QLatin1Char('/') + url;
     }
     svn::InfoEntries e;
     bool must_write = false;
@@ -463,7 +463,7 @@ bool SvnActions::singleInfo(const QString &what, const svn::Revision &_rev, svn:
             m_Data->m_InfoCache.insertKey(e[0], cacheKey);
             if (peg != svn::Revision::UNDEFINED && peg.kind() != svn::Revision::NUMBER &&  peg.kind() != svn::Revision::DATE) {
                 // for persistent storage, store head into persistent cache makes no sense.
-                cacheKey = e[0].revision().toString() + '/' + url;
+                cacheKey = e[0].revision().toString() + QLatin1Char('/') + url;
                 m_Data->m_InfoCache.insertKey(e[0], cacheKey);
             }
         }
@@ -1128,13 +1128,13 @@ void SvnActions::makeDiffExternal(const QString &p1, const svn::Revision &start,
 {
     QFileInfo f1(p1);
     QFileInfo f2(p2);
-    QTemporaryFile tfile(QDir::tempPath() + QLatin1Char('/') + f1.fileName() + '-' + start.toString());
-    QTemporaryFile tfile2(QDir::tempPath() + QLatin1Char('/') + f2.fileName() + '-' + end.toString());
+    QTemporaryFile tfile(QDir::tempPath() + QLatin1Char('/') + f1.fileName() + QLatin1Char('-') + start.toString());
+    QTemporaryFile tfile2(QDir::tempPath() + QLatin1Char('/') + f2.fileName() + QLatin1Char('-') + end.toString());
 
-    QString s1 = f1.fileName() + '-' + start.toString();
-    QString s2 = f2.fileName() + '-' + end.toString();
+    QString s1 = f1.fileName() + QLatin1Char('-') + start.toString();
+    QString s2 = f2.fileName() + QLatin1Char('-') + end.toString();
     if (f1.fileName() == f2.fileName() && p1 != p2) {
-        s2.append("-sec");
+        s2.append(QStringLiteral("-sec"));
     }
     QTemporaryDir tdir1;
     tdir1.setAutoRemove(true);
@@ -1148,12 +1148,12 @@ void SvnActions::makeDiffExternal(const QString &p1, const svn::Revision &start,
     svn::Revision peg = _peg;
 
     if (start != svn::Revision::WORKING) {
-        first = isDir ? tdir1.path() + '/' + s1 : tfile.fileName();
+        first = isDir ? tdir1.path() + QLatin1Char('/') + s1 : tfile.fileName();
     } else {
         first = p1;
     }
     if (end != svn::Revision::WORKING) {
-        second = isDir ? tdir1.path() + '/' + s2 : tfile2.fileName();
+        second = isDir ? tdir1.path() + QLatin1Char('/') + s2 : tfile2.fileName();
     } else {
         second = p2;
     }
@@ -1689,8 +1689,8 @@ bool SvnActions::makeCheckout(const QString &rUrl, const QString &tPath, const s
                              )
 {
     QString fUrl = rUrl;
-    while (fUrl.endsWith('/')) {
-        fUrl.truncate(fUrl.length() - 1);
+    while (fUrl.endsWith(QLatin1Char('/'))) {
+        fUrl.chop(1);
     }
     // can only be a local target dir
     svn::Path p(tPath);
@@ -2040,17 +2040,17 @@ void SvnActions::slotMergeExternal(const QString &_src1, const QString &_src2, c
         return;
     }
 
-    QString s1 = f1.fileName() + '-' + rev1.toString();
-    QString s2 = f2.fileName() + '-' + rev2.toString();
+    QString s1 = f1.fileName() + QLatin1Char('-') + rev1.toString();
+    QString s2 = f2.fileName() + QLatin1Char('-') + rev2.toString();
     QString first, second;
     if (rev1 != svn::Revision::WORKING) {
-        first = tdir1.path() + '/' + s1;
+        first = tdir1.path() + QLatin1Char('/') + s1;
     } else {
         first = src1;
     }
     if (!singleMerge) {
         if (rev2 != svn::Revision::WORKING) {
-            second = tdir1.path() + '/' + s2;
+            second = tdir1.path() + QLatin1Char('/') + s2;
         } else {
             second = src2;
         }
@@ -2740,7 +2740,7 @@ svn::PathPropertiesMapListPtr SvnActions::propList(const QString &which, const s
 {
     svn::PathPropertiesMapListPtr pm;
     if (!which.isEmpty()) {
-        QString fk = where.toString() + '/' + which;
+        QString fk = where.toString() + QLatin1Char('/') + which;
         svn::Path p(which);
 
         if (where != svn::Revision::WORKING) {

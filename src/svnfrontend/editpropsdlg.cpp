@@ -38,11 +38,11 @@ EditPropsDlg::EditPropsDlg(bool bAddMode, QWidget *parent)
 
 
     /// @TODO Read these values from a text or config file
-    fileProperties += ("svn:eol-style");
-    fileProperties += ("svn:executable");
-    fileProperties += ("svn:keywords");
-    fileProperties += ("svn:needs-lock");
-    fileProperties += ("svn:mime-type");
+    fileProperties += QStringLiteral("svn:eol-style");
+    fileProperties += QStringLiteral("svn:executable");
+    fileProperties += QStringLiteral("svn:keywords");
+    fileProperties += QStringLiteral("svn:needs-lock");
+    fileProperties += QStringLiteral("svn:mime-type");
 
     fileComments += i18n("One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>.");
     fileComments += i18n("If present, make the file executable.<br/>"
@@ -67,18 +67,18 @@ EditPropsDlg::EditPropsDlg(bool bAddMode, QWidget *parent)
                          "Apache. A mimetype beginning with <b>'text/'</b> (or an absent "
                          "mimetype) is treated as text. Anything else is treated as binary.");
 
-    dirProperties += ("svn:eol-style");
-    dirProperties += ("svn:executable");
-    dirProperties += ("svn:externals");
-    dirProperties += ("svn:ignore");
-    dirProperties += ("svn:mime-type");
-    dirProperties += ("bugtraq:label");
-    dirProperties += ("bugtraq:url");
-    dirProperties += ("bugtraq:message");
-    dirProperties += ("bugtraq:warnifnoissue");
-    dirProperties += ("bugtraq:number");
-    dirProperties += ("bugtraq:append");
-    dirProperties += ("bugtraq:logregex");
+    dirProperties += QStringLiteral("svn:eol-style");
+    dirProperties += QStringLiteral("svn:executable");
+    dirProperties += QStringLiteral("svn:externals");
+    dirProperties += QStringLiteral("svn:ignore");
+    dirProperties += QStringLiteral("svn:mime-type");
+    dirProperties += QStringLiteral("bugtraq:label");
+    dirProperties += QStringLiteral("bugtraq:url");
+    dirProperties += QStringLiteral("bugtraq:message");
+    dirProperties += QStringLiteral("bugtraq:warnifnoissue");
+    dirProperties += QStringLiteral("bugtraq:number");
+    dirProperties += QStringLiteral("bugtraq:append");
+    dirProperties += QStringLiteral("bugtraq:logregex");
 
     dirComments += i18n("One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>.");
     dirComments += i18n("If present, make the file executable.<br/>"
@@ -123,7 +123,7 @@ EditPropsDlg::EditPropsDlg(bool bAddMode, QWidget *parent)
     m_ui->m_NameEdit->setCompletionMode(KCompletion::CompletionPopupAuto);
     m_ui->m_NameEdit->setHistoryItems(fileProperties, true);
 
-    m_ui->m_NameEdit->setToolTip("Select or enter new property");
+    m_ui->m_NameEdit->setToolTip(i18n("Select or enter new property"));
     connect(m_ui->m_NameEdit, SIGNAL(activated(QString)), this, SLOT(updateToolTip(QString)));
 }
 

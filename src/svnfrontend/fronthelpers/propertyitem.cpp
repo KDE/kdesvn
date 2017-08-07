@@ -54,7 +54,7 @@ bool PropertyListViewItem::different()const
 void PropertyListViewItem::deleteIt()
 {
     m_deleted = true;
-    setIcon(0, KIconLoader::global()->loadIcon("dialog-cancel", KIconLoader::Desktop, 16));
+    setIcon(0, KIconLoader::global()->loadIcon(QStringLiteral("dialog-cancel"), KIconLoader::Desktop, 16));
 }
 
 void PropertyListViewItem::unDeleteIt()
@@ -66,8 +66,8 @@ void PropertyListViewItem::unDeleteIt()
 bool PropertyListViewItem::protected_Property(const QString &what)
 {
     if (
-        what.compare("svn:mergeinfo") == 0 ||
-        what.compare("svn:special") == 0
+        what.compare(QLatin1String("svn:mergeinfo")) == 0 ||
+        what.compare(QLatin1String("svn:special")) == 0
     ) {
         return true;
     }

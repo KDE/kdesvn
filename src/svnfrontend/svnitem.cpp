@@ -238,33 +238,33 @@ QPixmap SvnItem::getPixmap(const QPixmap &_p, int size, bool overlay)
         if (p_Item->m_Stat->nodeStatus() == svn_wc_status_conflicted) {
             m_bgColor = CONFLICT;
             if (overlay) {
-                p2 = KIconLoader::global()->loadIcon("kdesvnconflicted", KIconLoader::Desktop, size);
+                p2 = KIconLoader::global()->loadIcon(QStringLiteral("kdesvnconflicted"), KIconLoader::Desktop, size);
             }
         } else if (p_Item->m_Stat->nodeStatus() == svn_wc_status_missing) {
             m_bgColor = MISSING;
         } else if (isLocked() || (wrap && wrap->checkReposLockCache(fullName()))) {
             if (overlay) {
-                p2 = KIconLoader::global()->loadIcon("kdesvnlocked", KIconLoader::Desktop, size);
+                p2 = KIconLoader::global()->loadIcon(QStringLiteral("kdesvnlocked"), KIconLoader::Desktop, size);
             }
             m_bgColor = LOCKED;
         } else if (Kdesvnsettings::check_needslock() && !isRemoteAdded() && wrap && wrap->isLockNeeded(this, svn::Revision::UNDEFINED)) {
             if (overlay) {
-                p2 = KIconLoader::global()->loadIcon("kdesvnneedlock", KIconLoader::Desktop, size);
+                p2 = KIconLoader::global()->loadIcon(QStringLiteral("kdesvnneedlock"), KIconLoader::Desktop, size);
             }
             m_bgColor = NEEDLOCK;
         } else if (wrap && wrap->isUpdated(p_Item->m_Stat->path())) {
             if (overlay) {
-                p2 = KIconLoader::global()->loadIcon("kdesvnupdates", KIconLoader::Desktop, size);
+                p2 = KIconLoader::global()->loadIcon(QStringLiteral("kdesvnupdates"), KIconLoader::Desktop, size);
             }
             m_bgColor = UPDATES;
         } else if (p_Item->m_Stat->nodeStatus() == svn_wc_status_deleted) {
             if (overlay) {
-                p2 = KIconLoader::global()->loadIcon("kdesvndeleted", KIconLoader::Desktop, size);
+                p2 = KIconLoader::global()->loadIcon(QStringLiteral("kdesvndeleted"), KIconLoader::Desktop, size);
             }
             m_bgColor = DELETED;
         } else if (p_Item->m_Stat->nodeStatus() == svn_wc_status_added) {
             if (overlay) {
-                p2 = KIconLoader::global()->loadIcon("kdesvnadded", KIconLoader::Desktop, size);
+                p2 = KIconLoader::global()->loadIcon(QStringLiteral("kdesvnadded"), KIconLoader::Desktop, size);
             }
             m_bgColor = ADDED;
         } else if (isModified()) {
@@ -272,13 +272,13 @@ QPixmap SvnItem::getPixmap(const QPixmap &_p, int size, bool overlay)
         } else if (isDir() && wrap) {
             if (isRemoteAdded() || wrap->checkUpdateCache(fullName())) {
                 if (overlay) {
-                    p2 = KIconLoader::global()->loadIcon("kdesvnupdates", KIconLoader::Desktop, size);
+                    p2 = KIconLoader::global()->loadIcon(QStringLiteral("kdesvnupdates"), KIconLoader::Desktop, size);
                 }
                 m_bgColor = UPDATES;
             } else if (wrap->checkConflictedCache(fullName())) {
                 m_bgColor = CONFLICT;
                 if (overlay) {
-                    p2 = KIconLoader::global()->loadIcon("kdesvnconflicted", KIconLoader::Desktop, size);
+                    p2 = KIconLoader::global()->loadIcon(QStringLiteral("kdesvnconflicted"), KIconLoader::Desktop, size);
                 }
             } else {
                 mod = wrap->checkModifiedCache(fullName());
@@ -287,7 +287,7 @@ QPixmap SvnItem::getPixmap(const QPixmap &_p, int size, bool overlay)
         if (mod) {
             m_bgColor = MODIFIED;
             if (overlay) {
-                p2 = KIconLoader::global()->loadIcon("kdesvnmodified", KIconLoader::Desktop, size);
+                p2 = KIconLoader::global()->loadIcon(QStringLiteral("kdesvnmodified"), KIconLoader::Desktop, size);
             }
         }
         if (!p2.isNull()) {
@@ -332,7 +332,7 @@ QPixmap SvnItem::getPixmap(int size, bool overlay)
         if (isLocked()) {
             m_bgColor = LOCKED;
             if (overlay) {
-                QPixmap p2 = KIconLoader::global()->loadIcon("kdesvnlocked", KIconLoader::Desktop, size);
+                QPixmap p2 = KIconLoader::global()->loadIcon(QStringLiteral("kdesvnlocked"), KIconLoader::Desktop, size);
                 if (!p2.isNull()) {
                     QImage i1; i1 = p.toImage();
                     QImage i2; i2 = p2.toImage();
@@ -344,9 +344,9 @@ QPixmap SvnItem::getPixmap(int size, bool overlay)
     } else {
         if (isRemoteAdded()) {
             if (isDir()) {
-                p = KIconLoader::global()->loadIcon("folder", KIconLoader::Desktop, size);
+                p = KIconLoader::global()->loadIcon(QStringLiteral("folder"), KIconLoader::Desktop, size);
             } else {
-                p = KIconLoader::global()->loadIcon("unknown", KIconLoader::Desktop, size);
+                p = KIconLoader::global()->loadIcon(QStringLiteral("unknown"), KIconLoader::Desktop, size);
             }
         } else {
             // local access

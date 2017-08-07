@@ -199,7 +199,7 @@ void Commitmsg_impl::initHistory()
         KConfigGroup cs(Kdesvnsettings::self()->config(), "log_messages");
         QString s;
         int current = 0;
-        QString key = QString("log_%0").arg(current);
+        QString key = QStringLiteral("log_%0").arg(current);
         s = cs.readEntry(key, QString());
         while (!s.isNull()) {
             if (current < smax_message_history) {
@@ -208,7 +208,7 @@ void Commitmsg_impl::initHistory()
                 cs.deleteEntry(key);
             }
             ++current;
-            key = QString("log_%0").arg(current);
+            key = QStringLiteral("log_%0").arg(current);
             s = cs.readEntry(key, QString());
         }
     }
@@ -217,7 +217,7 @@ void Commitmsg_impl::initHistory()
         if ((*it).length() <= 40) {
             m_LogHistory->addItem((*it));
         } else {
-            m_LogHistory->addItem((*it).left(37) + "...");
+            m_LogHistory->addItem((*it).left(37) + QStringLiteral("..."));
         }
     }
     if (!sLastMessage.isEmpty()) {
@@ -247,7 +247,7 @@ void Commitmsg_impl::saveHistory(bool canceld)
         }
         KConfigGroup cs(Kdesvnsettings::self()->config(), "log_messages");
         for (int i = 0; i < sLogHistory.size(); ++i) {
-            cs.writeEntry(QString("log_%0").arg(i), sLogHistory[i]);
+            cs.writeEntry(QStringLiteral("log_%0").arg(i), sLogHistory[i]);
         }
         cs.sync();
     } else {

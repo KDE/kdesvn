@@ -64,24 +64,23 @@ bool SslTrustPrompt::sslTrust(const QString &host,
     static QLatin1String rb("<tr><td>");
     static QLatin1String rs("</td><td>");
     static QLatin1String re("</td></tr>");
-    QString text = "<html><body>";
+    QString text = QStringLiteral("<html><body>");
     if (!reasons.isEmpty()) {
-        text += "<p align=\"center\">";
-        text += "<h2>" + i18n("Failure reasons") + "</h2><hline>";
+        text += QStringLiteral("<p align=\"center\"><h2>") + i18n("Failure reasons") + QStringLiteral("</h2><hline>");
         for (int i = 0; i < reasons.count(); ++i) {
-            text += reasons.at(i)+ "<br/><hline>";
+            text += reasons.at(i)+ QStringLiteral("<br/><hline>");
         }
-        text += "</p>";
+        text += QStringLiteral("</p>");
     }
 
-    text += "<p align=\"center\"><table>";
+    text += QStringLiteral("<p align=\"center\"><table>");
     text += rb + i18n("Realm") + rs + realm + re;
     text += rb + i18n("Host") + rs + host + re;
     text += rb + i18n("Valid from") + rs + validFrom + re;
     text += rb + i18n("Valid until") + rs + validUntil + re;
     text += rb + i18n("Issuer name") + rs + issuerName + re;
     text += rb + i18n("Fingerprint") + rs + fingerprint + re;
-    text += "</table></p></body></html>";
+    text += QStringLiteral("</table></p></body></html>");
 
     QPointer<SslTrustPrompt> dlg(new SslTrustPrompt(host, text, QApplication::activeModalWidget()));
     int i = dlg->exec();

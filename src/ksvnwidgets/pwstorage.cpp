@@ -86,10 +86,10 @@ KWallet::Wallet *PwStorageData::getWallet()
         m_Wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), window);
     }
     if (m_Wallet) {
-        if (!m_Wallet->hasFolder(WALLETNAME)) {
-            m_Wallet->createFolder(WALLETNAME);
+        if (!m_Wallet->hasFolder(QStringLiteral(WALLETNAME))) {
+            m_Wallet->createFolder(QStringLiteral(WALLETNAME));
         }
-        m_Wallet->setFolder(WALLETNAME);
+        m_Wallet->setFolder(QStringLiteral(WALLETNAME));
     }
     return m_Wallet;
 }
@@ -147,11 +147,11 @@ bool PwStorage::getLogin(const QString &realm, QString &user, QString &pw)
     }
     QMap<QString, QString> content;
     int j = mData->getWallet()->readMap(realm, content);
-    if (j != 0 || content.find("user") == content.end()) {
+    if (j != 0 || !content.contains(QStringLiteral("user"))) {
         return true;
     }
-    user = content["user"];
-    pw = content["password"];
+    user = content[QStringLiteral("user")];
+    pw = content[QStringLiteral("password")];
     return true;
 }
 
@@ -186,8 +186,8 @@ bool PwStorage::setLogin(const QString &realm, const QString &user, const QStrin
         return false;
     }
     QMap<QString, QString> content;
-    content["user"] = user;
-    content["password"] = pw;
+    content[QStringLiteral("user")] = user;
+    content[QStringLiteral("password")] = pw;
     return (mData->getWallet()->writeMap(realm, content) == 0);
 }
 

@@ -290,12 +290,6 @@
     </entry>
   </group>
   <group name="internals" >
-    <entry key="locale_is_casesensitive" type="Bool" >
-      <whatsthis>This value computes how case sensitive string ordering will made.
-Never overwrite the default computed value unless you know what you are doing.</whatsthis>
-      <default code="true" >QString(&quot;a&quot;).localeAwareCompare(&quot;B&quot;)>0</default>
-      <label>Check if current locale is case sensitive or not</label>
-    </entry>
     <entry key="last_node_follow" type="Bool">
         <whatsthis>This value holds for log dialog which kind of log is used, its internal only.</whatsthis>
         <default>true</default>

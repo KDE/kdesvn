@@ -32,6 +32,7 @@
 
 #include <KIconLoader>
 #include <KLocalizedString>
+#include <KUrlMimeData>
 
 SvnTreeView::SvnTreeView(QWidget *parent)
     : QTreeView(parent)
@@ -86,24 +87,21 @@ void SvnTreeView::dropEvent(QDropEvent *event)
     QAbstractProxyModel *proxyModel = static_cast<QAbstractProxyModel *>(model());
 
     const QModelIndex index = indexAt(event->pos());
-    QModelIndex index2;
-    QMap<QString, QString> metaMap;
-    if (index.isValid()) {
-        index2 = proxyModel->mapToSource(index);
-    }
+    const QModelIndex index2(index.isValid() ? proxyModel->mapToSource(index) : QModelIndex());
 
+    QMap<QString, QString> metaMap;
     Qt::DropAction action = event->dropAction();
-    const QList<QUrl> list = event->mimeData()->urls();
+    const QList<QUrl> list = KUrlMimeData::urlsFromMimeData(event->mimeData(), KUrlMimeData::PreferLocalUrls, &metaMap);
     bool intern = false;
-    if (metaMap.find("kdesvn-source") != metaMap.end()) {
+    if (metaMap.contains(QStringLiteral("kdesvn-source"))) {
         SvnItemModel *itemModel = static_cast<SvnItemModel *>(proxyModel->sourceModel());
-        QMap<QString, QString>::const_iterator it = metaMap.constFind("kdesvn-id");
+        QMap<QString, QString>::const_iterator it = metaMap.constFind(QStringLiteral("kdesvn-id"));
         if (it != metaMap.constEnd() && it.value() == itemModel->uniqueIdentifier()) {
             intern = true;
         }
     }
-    Qt::KeyboardModifiers modifiers = QGuiApplication::keyboardModifiers();
 
+    Qt::KeyboardModifiers modifiers = QGuiApplication::keyboardModifiers();
     QMetaObject::invokeMethod(this, "doDrop",
                               Q_ARG(QList<QUrl>, list),
                               Q_ARG(QModelIndex, index2),
@@ -122,13 +120,13 @@ void SvnTreeView::doDrop(const QList<QUrl> &list, const QModelIndex &parent, boo
         QMenu popup;
         QString seq = QKeySequence(Qt::ShiftModifier).toString();
         seq.chop(1); // chop superfluous '+'
-        QAction *popupMoveAction = new QAction(i18n("&Move Here") + '\t' + seq, this);
+        QAction *popupMoveAction = new QAction(i18n("&Move Here") + QLatin1Char('\t') + seq, this);
         popupMoveAction->setIcon(QIcon::fromTheme(QStringLiteral("go-jump")));
         seq = QKeySequence(Qt::ControlModifier).toString();
         seq.chop(1);
-        QAction *popupCopyAction = new QAction(i18n("&Copy Here") + '\t' + seq, this);
+        QAction *popupCopyAction = new QAction(i18n("&Copy Here") + QLatin1Char('\t') + seq, this);
         popupCopyAction->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
-        QAction *popupCancelAction = new QAction(i18n("C&ancel") + '\t' + QKeySequence(Qt::Key_Escape).toString(), this);
+        QAction *popupCancelAction = new QAction(i18n("C&ancel") + QLatin1Char('\t') + QKeySequence(Qt::Key_Escape).toString(), this);
         popupCancelAction->setIcon(QIcon::fromTheme(QStringLiteral("process-stop")));
 
         popup.addAction(popupMoveAction);

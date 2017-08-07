@@ -32,7 +32,7 @@ public:
     explicit LogChangePathItem(const svn::LogChangePathEntry &, QTreeWidget *view = 0);
     virtual ~LogChangePathItem() {}
 
-    QChar action() const
+    char action() const
     {
         return _action;
     }
@@ -51,7 +51,7 @@ public:
 
 protected:
     QString _path, _source;
-    QChar _action;
+    char _action;
     qlonglong _revision;
 
     void init(const svn::LogChangePathEntry &);

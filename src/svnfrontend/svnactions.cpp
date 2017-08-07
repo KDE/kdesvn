@@ -2683,7 +2683,7 @@ bool SvnActions::makeIgnoreEntry(const svn::Path &item, const QStringList &ignor
 
     QPair<qlonglong, svn::PathPropertiesMapList> pmp;
     try {
-        pmp = m_Data->m_Svnclient->propget("svn:ignore", item, r, r);
+        pmp = m_Data->m_Svnclient->propget(QStringLiteral("svn:ignore"), item, r, r);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
         return false;
@@ -2691,8 +2691,8 @@ bool SvnActions::makeIgnoreEntry(const svn::Path &item, const QStringList &ignor
     svn::PathPropertiesMapList pm = pmp.second;
     QString data;
     if (!pm.isEmpty()) {
-        svn::PropertiesMap &mp = pm[0].second;
-        data = mp["svn:ignore"];
+        const svn::PropertiesMap &mp = pm[0].second;
+        data = mp[QStringLiteral("svn:ignore")];
     }
     bool result = false;
     QStringList lst = data.split(QLatin1Char('\n'), QString::SkipEmptyParts);
@@ -2712,9 +2712,9 @@ bool SvnActions::makeIgnoreEntry(const svn::Path &item, const QStringList &ignor
         }
     }
     if (result) {
-        data = lst.join(QLatin1String("\n"));
+        data = lst.join(QLatin1Char('\n'));
         try {
-            m_Data->m_Svnclient->propset(svn::PropertiesParameter().propertyName("svn:ignore").propertyValue(data).path(item));
+            m_Data->m_Svnclient->propset(svn::PropertiesParameter().propertyName(QStringLiteral("svn:ignore")).propertyValue(data).path(item));
         } catch (const svn::Exception &e) {
             emit clientException(e.msg());
             return false;
@@ -2772,7 +2772,7 @@ bool SvnActions::isLockNeeded(SvnItem *which, const svn::Revision &where)
 
     QPair<qlonglong, svn::PathPropertiesMapList> pmp;
     try {
-        pmp = m_Data->m_Svnclient->propget("svn:needs-lock", p, where, where);
+        pmp = m_Data->m_Svnclient->propget(QStringLiteral("svn:needs-lock"), p, where, where);
     } catch (const svn::Exception &e) {
         /* no messagebox needed */
         //emit clientException(e.msg());
@@ -2781,7 +2781,7 @@ bool SvnActions::isLockNeeded(SvnItem *which, const svn::Revision &where)
     const svn::PathPropertiesMapList pm = pmp.second;
     if (!pm.isEmpty()) {
         const svn::PropertiesMap &mp = pm.at(0).second;
-        if (mp.contains("svn:needs-lock")) {
+        if (mp.contains(QStringLiteral("svn:needs-lock"))) {
             return true;
         }
     }

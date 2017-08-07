@@ -497,18 +497,16 @@ void SvnLogDlgImp::slotChangedPathContextMenu(const QPoint &e)
     if (!ind.isValid()) {
         return;
     }
-    qlonglong rev = m_CurrentModel->toRevision(ind);
+    const qlonglong rev = m_CurrentModel->toRevision(ind);
     QMenu popup;
-    QString name = item->path();
-    QString action = item->action();
-    QString source = item->revision() > -1 ? item->source() : item->path();
-    svn_revnum_t prev = item->revision() > 0 ? item->revision() : rev - 1;
+    const QString name = item->path();
+    const QString source = item->revision() > -1 ? item->source() : item->path();
     QAction *ac;
     ac = popup.addAction(i18n("Annotate"));
     if (ac) {
         ac->setData(101);
     }
-    if (action != "A" || item->revision() > -1) {
+    if (item->action() != 'A' || item->revision() > -1) {
         ac = popup.addAction(i18n("Diff previous"));
         if (ac) {
             ac->setData(102);
@@ -530,6 +528,7 @@ void SvnLogDlgImp::slotChangedPathContextMenu(const QPoint &e)
         break;
     }
     case 102: {
+        const svn_revnum_t prev = item->revision() > 0 ? item->revision() : rev - 1;
         emit makeDiff(_base + source, prev, _base + name, rev, this);
         break;
     }
@@ -547,17 +546,15 @@ void SvnLogDlgImp::slotSingleDoubleClicked(QTreeWidgetItem *_item, int)
         return;
     }
 
-    LogChangePathItem *item = static_cast<LogChangePathItem *>(_item);
-    QModelIndex ind = selectedRow();
+    const LogChangePathItem *item = static_cast<LogChangePathItem *>(_item);
+    const QModelIndex ind = selectedRow();
     if (!ind.isValid()) {
         return;
     }
-    qlonglong rev = m_CurrentModel->toRevision(ind);
-
-    QString name = item->path();
-    QString action = item->action();
     svn::Revision start(svn::Revision::START);
-    if (action != "D") {
+    if (item->action() != 'D') {
+        const QString name = item->path();
+        const qlonglong rev = m_CurrentModel->toRevision(ind);
         m_Actions->makeBlame(start, rev, _base + name, QApplication::activeModalWidget(), rev, this);
     }
 }

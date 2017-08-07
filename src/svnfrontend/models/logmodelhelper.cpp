@@ -33,8 +33,8 @@ LogChangePathItem::LogChangePathItem(const svn::LogChangePathEntry &e, QTreeWidg
 
 void LogChangePathItem::init(const svn::LogChangePathEntry &e)
 {
-    _action = QChar(e.action);
-    setText(0, _action);
+    _action = e.action;
+    setText(0, QString(QLatin1Char(_action)));
     _path = e.path;
     setText(1, e.path);
     _revision = e.copyFromRevision;

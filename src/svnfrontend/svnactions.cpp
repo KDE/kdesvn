@@ -417,8 +417,8 @@ bool SvnActions::singleInfo(const QString &what, const svn::Revision &_rev, svn:
         // working copy
         // url = svn::Wc::getUrl(what);
         url = what;
-        if (_rev != svn::Revision::WORKING && url.indexOf("@") != -1) {
-            url += "@BASE";
+        if (_rev != svn::Revision::WORKING && url.contains(QLatin1Char('@'))) {
+            url += QStringLiteral("@BASE");
         }
         peg = svn::Revision::UNDEFINED;
         cacheKey = url;
@@ -677,10 +677,9 @@ QString SvnActions::makeMkdir(const QString &parentDir)
 QString SvnActions::getInfo(const SvnItemList &lst, const svn::Revision &rev, const svn::Revision &peg, bool recursive, bool all)
 {
     QString res;
-    SvnItemList::const_iterator it = lst.begin();
-    for (; it != lst.end(); ++it) {
+    for (auto it = lst.cbegin(); it != lst.cend(); ++it) {
         if (all) {
-            res += "<h4 align=\"center\">" + (*it)->fullName() + "</h4>";
+            res += QStringLiteral("<h4 align=\"center\">%1</h4>").arg((*it)->fullName());
         }
         res += getInfo((*it)->fullName(), rev, peg, recursive, all);
     }
@@ -723,27 +722,26 @@ QString SvnActions::getInfo(const QString &_what, const svn::Revision &rev, cons
 QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_what, bool all)
 {
     QString text;
-    svn::InfoEntries::const_iterator it;
-    static QString rb = "<tr><td><nobr>";
-    static QString re = "</nobr></td></tr>\n";
-    static QString cs = "</nobr>:</td><td><nobr>";
+    static QString rb(QStringLiteral("<tr><td><nobr>"));
+    static QString re(QStringLiteral("</nobr></td></tr>\n"));
+    static QString cs(QStringLiteral("</nobr>:</td><td><nobr>"));
     unsigned int val = 0;
-    for (it = entries.begin(); it != entries.end(); ++it) {
+    for (auto it = entries.begin(); it != entries.end(); ++it) {
         if (val > 0) {
-            text += "<hline>";
+            text += QStringLiteral("<hline>");
         }
         ++val;
-        text += "<p align=\"center\">";
-        text += "<table cellspacing=0 cellpadding=0>";
-        if ((*it).Name().length()) {
+        text += QStringLiteral("<p align=\"center\">");
+        text += QStringLiteral("<table cellspacing=0 cellpadding=0>");
+        if (!(*it).Name().isEmpty()) {
             text += rb + i18n("Name") + cs + ((*it).Name()) + re;
         }
         if (all) {
             text += rb + i18n("URL") + cs + ((*it).url().toDisplayString()) + re;
-            if ((*it).reposRoot().toString().length()) {
+            if (!(*it).reposRoot().toString().isEmpty()) {
                 text += rb + i18n("Canonical repository URL") + cs + ((*it).reposRoot().toDisplayString()) + re;
             }
-            if ((*it).checksum().length()) {
+            if (!(*it).checksum().isEmpty()) {
                 text += rb + i18n("Checksum") + cs + ((*it).checksum()) + re;
             }
         }
@@ -839,7 +837,7 @@ QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_wha
                 }
             }
         }
-        text += "</table></p>\n";
+        text += QStringLiteral("</table></p>\n");
     }
     return text;
 }
@@ -949,7 +947,7 @@ void SvnActions::doCommit(const SvnItemList &which)
 
     svn::Paths targets;
     if (which.isEmpty()) {
-        targets.push_back(svn::Path("."));
+        targets.push_back(svn::Path(QStringLiteral(".")));
     } else {
         targets.reserve(which.size());
         for (; liter != which.end(); ++liter) {
@@ -958,7 +956,7 @@ void SvnActions::doCommit(const SvnItemList &which)
                               ));
         }
     }
-    if (m_Data->m_ParentList->baseUri().length() > 0) {
+    if (!m_Data->m_ParentList->baseUri().isEmpty()) {
         if (!QDir::setCurrent(m_Data->m_ParentList->baseUri())) {
             QString msg = i18n("Could not change to folder %1\n", m_Data->m_ParentList->baseUri())
                           + QString::fromLocal8Bit(strerror(errno));
@@ -1246,17 +1244,17 @@ void SvnActions::makeDiffinternal(const QString &p1, const svn::Revision &r1, co
     tdir.setAutoRemove(true);
     QString tn(tdir.path() + QLatin1String("/svndiff"));
     QDir d1(tdir.path());
-    d1.mkdir("svndiff");
+    d1.mkdir(QStringLiteral("svndiff"));
     bool ignore_content = Kdesvnsettings::diff_ignore_content();
     bool gitformat = Kdesvnsettings::diff_gitformat_default();
     bool copy_as_add = Kdesvnsettings::diff_copies_as_add();
     QWidget *parent = p ? p : m_Data->m_ParentList->realWidget();
     QStringList extraOptions;
     if (Kdesvnsettings::diff_ignore_spaces()) {
-        extraOptions.append("-b");
+        extraOptions.append(QStringLiteral("-b"));
     }
     if (Kdesvnsettings::diff_ignore_all_white_spaces()) {
-        extraOptions.append("-w");
+        extraOptions.append(QStringLiteral("-w"));
     }
     svn::Revision peg = _peg == svn::Revision::UNDEFINED ? r2 : _peg;
     svn::DiffParameter _opts;
@@ -1300,17 +1298,17 @@ void SvnActions::makeNorecDiff(const QString &p1, const svn::Revision &r1, const
     }
     QStringList extraOptions;
     if (Kdesvnsettings::diff_ignore_spaces()) {
-        extraOptions.append("-b");
+        extraOptions.append(QStringLiteral("-b"));
     }
     if (Kdesvnsettings::diff_ignore_all_white_spaces()) {
-        extraOptions.append("-w");
+        extraOptions.append(QStringLiteral("-w"));
     }
     QByteArray ex;
     QTemporaryDir tdir;
     tdir.setAutoRemove(true);
     QString tn(tdir.path() + QLatin1String("/svndiff"));
     QDir d1(tdir.path());
-    d1.mkdir("svndiff");
+    d1.mkdir(QStringLiteral("svndiff"));
     bool ignore_content = Kdesvnsettings::diff_ignore_content();
     svn::DiffParameter _opts;
     // no peg revision required
@@ -2375,7 +2373,7 @@ void SvnActions::checkAddItems(const QString &path, bool print_error_box)
         dlg->setWindowTitle(i18n("Add unversioned items"));
         dlg->setWithCancelButton();
         QTreeWidget *ptr(new QTreeWidget(dlg));
-        ptr->headerItem()->setText(0, "Item");
+        ptr->headerItem()->setText(0, i18n("Item"));
         for (int j = 0; j < displist.size(); ++j) {
             QTreeWidgetItem *n = new QTreeWidgetItem(ptr);
             n->setText(0, displist[j]);

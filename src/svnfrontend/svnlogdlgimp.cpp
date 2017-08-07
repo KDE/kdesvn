@@ -88,10 +88,10 @@ void SvnLogDlgImp::dispLog(const svn::LogEntriesMapPtr &log, const QString &what
     m_startRevButton->setNoWorking(m_PegUrl.isUrl());
     m_endRevButton->setNoWorking(m_PegUrl.isUrl());
     if (!m_PegUrl.isUrl() || Kdesvnsettings::remote_special_properties()) {
-        QString s = m_Actions->searchProperty(_bugurl, "bugtraq:url", pegUrl, peg, true);
+        QString s = m_Actions->searchProperty(_bugurl, QStringLiteral("bugtraq:url"), pegUrl, peg, true);
         if (!s.isEmpty()) {
             QString reg;
-            s = m_Actions->searchProperty(reg, "bugtraq:logregex", pegUrl, peg, true);
+            s = m_Actions->searchProperty(reg, QStringLiteral("bugtraq:logregex"), pegUrl, peg, true);
             if (!s.isNull() && !reg.isEmpty()) {
                 const QVector<QStringRef> s1 = reg.splitRef(QLatin1Char('\n'));
                 if (!s1.isEmpty()) {
@@ -153,13 +153,13 @@ void SvnLogDlgImp::dispLog(const svn::LogEntriesMapPtr &_log)
 
 QString SvnLogDlgImp::genReplace(const QString &r1match)
 {
-    static QString anf("<a href=\"");
-    static QString mid("\">");
-    static QString end("</a>");
+    static QString anf(QStringLiteral("<a href=\""));
+    static QString mid(QStringLiteral("\">"));
+    static QString end(QStringLiteral("</a>"));
     QString res;
     if (_r2.pattern().length() < 1) {
         res = _bugurl;
-        res.replace("%BUGID%", _r1.cap(1));
+        res.replace(QStringLiteral("%BUGID%"), _r1.cap(1));
         res = anf + res + mid + r1match + end;
         return res;
     }
@@ -177,7 +177,7 @@ QString SvnLogDlgImp::genReplace(const QString &r1match)
         res += r1match.midRef(oldpos, pos - oldpos);
         QString sub = r1match.mid(pos, count);
         QString _url = _bugurl;
-        _url.replace("%BUGID%", sub);
+        _url.replace(QStringLiteral("%BUGID%"), sub);
         res += anf + _url + mid + sub + end;
     }
     res += r1match.midRef(oldpos);

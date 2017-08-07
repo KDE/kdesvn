@@ -1190,9 +1190,9 @@ void SvnActions::makeDiffExternal(const QString &p1, const svn::Revision &start,
     const QVector<QStringRef> wlist = edisp.splitRef(QLatin1Char(' '));
     WatchedProcess *proc = new WatchedProcess(this);
     for (auto it = wlist.begin(); it != wlist.end(); ++it) {
-        if (*it == "%1") {
+        if (*it == QLatin1String("%1")) {
             *proc << first;
-        } else if (*it == "%2") {
+        } else if (*it == QLatin1String("%2")) {
             *proc << second;
         } else {
             *proc << (*it).toString();
@@ -1949,13 +1949,13 @@ void SvnActions::slotResolve(const QString &p)
 
     WatchedProcess *proc = new WatchedProcess(this);
     for (auto it = wlist.begin(); it != wlist.end(); ++it) {
-        if (*it == "%o" || *it == "%l") {
+        if (*it == QLatin1String("%o") || *it == QLatin1String("%l")) {
             *proc << i1.conflicts()[0]->baseFile();
-        } else if (*it == "%m" || *it == "%w") {
+        } else if (*it == QLatin1String("%m") || *it == QLatin1String("%w")) {
             *proc << i1.conflicts()[0]->myFile();
-        } else if (*it == "%n" || *it == "%r") {
+        } else if (*it == QLatin1String("%n") || *it == QLatin1String("%r")) {
             *proc << i1.conflicts()[0]->theirFile();
-        } else if (*it == "%t") {
+        } else if (*it == QLatin1String("%t")) {
             *proc << p;
         } else {
             *proc << (*it).toString();

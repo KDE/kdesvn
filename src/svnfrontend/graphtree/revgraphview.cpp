@@ -175,11 +175,11 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
         }
         QTextStream lineStream(&line, QIODevice::ReadOnly);
         lineStream >> cmd;
-        if (cmd == "stop") {
+        if (cmd == QLatin1String("stop")) {
             break;
         }
 
-        if (cmd == "graph") {
+        if (cmd == QLatin1String("graph")) {
             lineStream >> scale >> dotWidth >> dotHeight;
             int w = qRound(scaleX * dotWidth);
             int h = qRound(scaleY * dotHeight);
@@ -201,7 +201,7 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
                        << m_dotTmpFile->fileName() << ":" << lineno << ")" << endl;
             continue;
         }
-        if (cmd == "node") {
+        if (cmd == QLatin1String("node")) {
             QString nodeName, label;
             QString _x, _y, _w, _h;
             double x, y, width, height;

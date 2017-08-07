@@ -62,7 +62,7 @@ kdesvn::kdesvn()
     // I hate this crashhandler in development
     KCrash::setCrashHandler(0);
 #else
-    setXMLFile("kdesvnui.rc");
+    setXMLFile(QStringLiteral("kdesvnui.rc"));
 #endif
     setStandardToolBarMenuEnabled(true);
     // then, setup our actions
@@ -80,7 +80,7 @@ kdesvn::kdesvn()
     m_BookmarksActionmenu = new KBookmarkActionMenu(m_BookmarkManager->root(),
                                                     i18n("&Bookmarks"), this);
 
-    actionCollection()->addAction("bookmarks", m_BookmarksActionmenu);
+    actionCollection()->addAction(QStringLiteral("bookmarks"), m_BookmarksActionmenu);
     m_Bookmarkactions = new KActionCollection(static_cast<QWidget *>(this));
     m_pBookmarkMenu = new KBookmarkMenu(m_BookmarkManager, this, m_BookmarksActionmenu->menu(), m_Bookmarkactions);
     m_pBookmarkMenu->setParent(this); // clear when kdesvn window gets destroyed
@@ -91,7 +91,7 @@ kdesvn::kdesvn()
     // this routine will find and load our Part.  it finds the Part by
     // name which is a bad idea usually.. but it's alright in this
     // case since our Part is made for this Shell
-    KPluginLoader loader("kdesvnpart");
+    KPluginLoader loader(QStringLiteral("kdesvnpart"));
     KPluginFactory *factory = loader.factory();
     if (factory) {
         m_part = factory->create<KParts::ReadOnlyPart>(this);
@@ -102,43 +102,45 @@ kdesvn::kdesvn()
             connect(m_part->widget(), SIGNAL(sigExtraStatusMessage(QString)), this, SLOT(slotExtraStatus(QString)));
 
             QAction *tmpAction;
-            tmpAction = actionCollection()->addAction("subversion_create_repo",
+            tmpAction = actionCollection()->addAction(QStringLiteral("subversion_create_repo"),
                                                       m_part->widget(),
                                                       SLOT(slotCreateRepo()));
             tmpAction->setText(i18n("Create and open new repository"));
             tmpAction->setToolTip(i18n("Create and opens a new local Subversion repository"));
 
-            tmpAction = actionCollection()->addAction("subversion_dump_repo",
+            tmpAction = actionCollection()->addAction(QStringLiteral("subversion_dump_repo"),
                                                       m_part->widget(),
                                                       SLOT(slotDumpRepo()));
             tmpAction->setText(i18n("Dump repository to file"));
             tmpAction->setToolTip(i18n("Dump a Subversion repository to a file"));
 
-            tmpAction = actionCollection()->addAction("subversion_hotcopy_repo",
+            tmpAction = actionCollection()->addAction(QStringLiteral("subversion_hotcopy_repo"),
                                                       m_part->widget(),
                                                       SLOT(slotHotcopy()));
             tmpAction->setText(i18n("Hotcopy a repository"));
             tmpAction->setToolTip(i18n("Hotcopy a Subversion repository to a new folder"));
 
-            tmpAction = actionCollection()->addAction("subversion_load_repo",
+            tmpAction = actionCollection()->addAction(QStringLiteral("subversion_load_repo"),
                                                       m_part->widget(),
                                                       SLOT(slotLoaddump()));
             tmpAction->setText(i18n("Load dump into repository"));
             tmpAction->setToolTip(i18n("Load a dump file into a repository."));
 
-            tmpAction = actionCollection()->addAction("kdesvn_ssh_add",
+            tmpAction = actionCollection()->addAction(QStringLiteral("kdesvn_ssh_add"),
                                                       m_part,
                                                       SLOT(slotSshAdd()));
             tmpAction->setText(i18n("Add ssh identities to ssh-agent"));
             tmpAction->setToolTip(i18n("Force add ssh-identities to ssh-agent for future use."));
 
-            tmpAction = actionCollection()->addAction("help_about_kdesvnpart",
+            tmpAction = actionCollection()->addAction(QStringLiteral("help_about_kdesvnpart"),
                                                       m_part,
                                                       SLOT(showAboutApplication()));
             tmpAction->setText(i18n("Info about kdesvn part"));
             tmpAction->setToolTip(i18n("Shows info about the kdesvn plugin and not the standalone application."));
 
-            tmpAction = actionCollection()->addAction("db_show_status", m_part, SLOT(showDbStatus()));
+            tmpAction = actionCollection()->addAction(QStringLiteral("db_show_status"),
+                                                      m_part,
+                                                      SLOT(showDbStatus()));
             tmpAction->setText(i18n("Show database content"));
             tmpAction->setToolTip(i18n("Show the content of log cache database"));
 
@@ -178,7 +180,7 @@ void kdesvn::load(const QUrl &url, bool addRescent)
         bool ret = m_part->openUrl(url);
         KRecentFilesAction *rac = 0;
         if (addRescent) {
-            QAction *ac = actionCollection()->action("file_open_recent");
+            QAction *ac = actionCollection()->action(QStringLiteral("file_open_recent"));
             if (ac) {
                 rac = (KRecentFilesAction *)ac;
             }
@@ -226,7 +228,7 @@ void kdesvn::setupActions()
 
     KToggleAction *toggletemp;
     toggletemp = new KToggleAction(i18n("Load last opened URL on start"), this);
-    actionCollection()->addAction("toggle_load_last_url", toggletemp);
+    actionCollection()->addAction(QStringLiteral("toggle_load_last_url"), toggletemp);
     toggletemp->setToolTip(i18n("Reload last opened URL if no one is given on command line"));
     KConfigGroup cs(KSharedConfig::openConfig(), "startup");
     toggletemp->setChecked(cs.readEntry("load_last_on_start", false));
@@ -342,7 +344,7 @@ QString kdesvn::currentTitle() const
 void kdesvn::enableClose(bool how)
 {
     QAction *ac;
-    if ((ac = actionCollection()->action("file_close"))) {
+    if ((ac = actionCollection()->action(QStringLiteral("file_close")))) {
         ac->setEnabled(how);
     }
 }

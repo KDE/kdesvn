@@ -46,7 +46,7 @@
 #include <khelpclient.h>
 #include <kpluginfactory.h>
 
-K_PLUGIN_FACTORY(KdesvnFactory, registerPlugin<kdesvnpart>(); registerPlugin<commandline_part>("commandline_part");)
+K_PLUGIN_FACTORY(KdesvnFactory, registerPlugin<kdesvnpart>(); registerPlugin<commandline_part>(QStringLiteral("commandline_part"));)
 
 static const char version[] = KDESVN_VERSION;
 
@@ -86,7 +86,7 @@ void kdesvnpart::init(QWidget *parentWidget, bool full)
     setXMLFile(TESTING_PARTRC);
     qCDebug(KDESVN_LOG) << "Using test rc file in " << TESTING_PARTRC << endl;
 #else
-    setXMLFile("kdesvn_part.rc");
+    setXMLFile(QStringLiteral("kdesvn_part.rc"));
 #endif
     connect(m_view, SIGNAL(sigShowPopup(QString,QWidget**)), this, SLOT(slotDispPopup(QString,QWidget**)));
     connect(m_view, SIGNAL(sigSwitchUrl(QUrl)), this, SLOT(openUrl(QUrl)));
@@ -154,43 +154,43 @@ void kdesvnpart::setupActions()
     KToggleAction *toggletemp;
 
     toggletemp = new KToggleAction(i18n("Logs follow node changes"), this);
-    actionCollection()->addAction("toggle_log_follows", toggletemp);
+    actionCollection()->addAction(QStringLiteral("toggle_log_follows"), toggletemp);
     toggletemp->setChecked(Kdesvnsettings::log_follows_nodes());
     connect(toggletemp, SIGNAL(toggled(bool)), this, SLOT(slotLogFollowNodes(bool)));
 
     toggletemp = new KToggleAction(i18n("Display ignored files"), this);
-    actionCollection()->addAction("toggle_ignored_files", toggletemp);
+    actionCollection()->addAction(QStringLiteral("toggle_ignored_files"), toggletemp);
     toggletemp->setChecked(Kdesvnsettings::display_ignored_files());
     connect(toggletemp, SIGNAL(toggled(bool)), this, SLOT(slotDisplayIgnored(bool)));
 
     toggletemp = new KToggleAction(i18n("Display unknown files"), this);
-    actionCollection()->addAction("toggle_unknown_files", toggletemp);
+    actionCollection()->addAction(QStringLiteral("toggle_unknown_files"), toggletemp);
     toggletemp->setChecked(Kdesvnsettings::display_unknown_files());
     connect(toggletemp, SIGNAL(toggled(bool)), this, SLOT(slotDisplayUnkown(bool)));
 
     toggletemp = new KToggleAction(i18n("Hide unchanged files"), this);
-    actionCollection()->addAction("toggle_hide_unchanged_files", toggletemp);
+    actionCollection()->addAction(QStringLiteral("toggle_hide_unchanged_files"), toggletemp);
     toggletemp->setChecked(Kdesvnsettings::hide_unchanged_files());
     connect(toggletemp, SIGNAL(toggled(bool)), this, SLOT(slotHideUnchanged(bool)));
 
     toggletemp = new KToggleAction(i18n("Work online"), this);
-    actionCollection()->addAction("toggle_network", toggletemp);
+    actionCollection()->addAction(QStringLiteral("toggle_network"), toggletemp);
     toggletemp->setChecked(Kdesvnsettings::network_on());
     connect(toggletemp, SIGNAL(toggled(bool)), this, SLOT(slotEnableNetwork(bool)));
 
     QAction *t = KStandardAction::preferences(this, SLOT(slotShowSettings()), actionCollection());
 
     t->setText(i18n("Configure Kdesvn..."));
-    actionCollection()->addAction("kdesvnpart_pref", t);
+    actionCollection()->addAction(QStringLiteral("kdesvnpart_pref"), t);
 
     if (QCoreApplication::applicationName() != QLatin1String("kdesvn")) {
-        t = new QAction(QIcon::fromTheme("kdesvn"), i18n("About kdesvn part"), this);
+        t = new QAction(QIcon::fromTheme(QStringLiteral("kdesvn")), i18n("About kdesvn part"), this);
         connect(t, SIGNAL(triggered(bool)), SLOT(showAboutApplication()));
-        actionCollection()->addAction("help_about_kdesvnpart", t);
+        actionCollection()->addAction(QStringLiteral("help_about_kdesvnpart"), t);
 
-        t = new QAction(QIcon::fromTheme("help-contents"), i18n("Kdesvn Handbook"), this);
+        t = new QAction(QIcon::fromTheme(QStringLiteral("help-contents")), i18n("Kdesvn Handbook"), this);
         connect(t, SIGNAL(triggered(bool)), SLOT(appHelpActivated()));
-        actionCollection()->addAction("help_kdesvn", t);
+        actionCollection()->addAction(QStringLiteral("help_kdesvn"), t);
     }
 }
 
@@ -282,7 +282,7 @@ void kdesvnpart::showAboutApplication()
 
         KAboutData about(QStringLiteral("kdesvnpart"),
                          i18n("kdesvn Part"),
-                         version,
+                         QLatin1String(version),
                          i18n("A Subversion Client by KDE (dynamic Part component)"),
                          KAboutLicense::LGPL_V2,
                          i18n("(C) 2005-2009 Rajko Albrecht,\n(C) 2015-2016 Christian Ehrlicher"),
@@ -290,7 +290,7 @@ void kdesvnpart::showAboutApplication()
 
         about.addAuthor(QStringLiteral("Rajko Albrecht"), i18n("Original author and maintainer"), QStringLiteral("ral@alwins-world.de"));
         about.addAuthor(QStringLiteral("Christian Ehrlicher"), i18n("Developer"), QStringLiteral("ch.ehrlicher@gmx.de"));
-        about.setHomepage("https://commits.kde.org/kdesvn");
+        about.setHomepage(QStringLiteral("https://commits.kde.org/kdesvn"));
         qApp->setWindowIcon(QIcon::fromTheme(QStringLiteral("kdesvn"), qApp->windowIcon()));
         m_aboutDlg = new KAboutApplicationDialog(about);
     }
@@ -309,7 +309,7 @@ void kdesvnpart::showAboutApplication()
  */
 void kdesvnpart::appHelpActivated()
 {
-    KHelpClient::invokeHelp(QString(), "kdesvn");
+    KHelpClient::invokeHelp(QString(), QStringLiteral("kdesvn"));
 }
 
 /*!
@@ -317,30 +317,30 @@ void kdesvnpart::appHelpActivated()
  */
 void kdesvnpart::slotShowSettings()
 {
-    if (KConfigDialog::showDialog("kdesvnpart_settings")) {
+    if (KConfigDialog::showDialog(QStringLiteral("kdesvnpart_settings"))) {
         return;
     }
     KConfigDialog *dialog = new KConfigDialog(widget(),
-            "kdesvnpart_settings",
+            QStringLiteral("kdesvnpart_settings"),
             Kdesvnsettings::self());
     dialog->setFaceType(KPageDialog::List);
 
     // TODO: KF5
     //dialog->setHelp("setup", "kdesvn");
     dialog->addPage(new DisplaySettings_impl(0),
-                    i18n("General"), "configure", i18n("General Settings"), true);
+                    i18n("General"), QStringLiteral("configure"), i18n("General Settings"), true);
     dialog->addPage(new SubversionSettings_impl(0),
-                    i18n("Subversion"), "kdesvn", i18n("Subversion Settings"), true);
+                    i18n("Subversion"), QStringLiteral("kdesvn"), i18n("Subversion Settings"), true);
     dialog->addPage(new PollingSettings_impl(0),
-                    i18n("Timed jobs"), "kdesvnclock", i18n("Settings for timed jobs"), true);
+                    i18n("Timed jobs"), QStringLiteral("kdesvnclock"), i18n("Settings for timed jobs"), true);
     dialog->addPage(new DiffMergeSettings_impl(0),
-                    i18n("Diff & Merge"), "kdesvnmerge", i18n("Settings for diff and merge"), true);
+                    i18n("Diff & Merge"), QStringLiteral("kdesvnmerge"), i18n("Settings for diff and merge"), true);
     dialog->addPage(new DispColorSettings_impl(0),
-                    i18n("Colors"), "kdesvncolors", i18n("Color Settings"), true);
+                    i18n("Colors"), QStringLiteral("kdesvncolors"), i18n("Color Settings"), true);
     dialog->addPage(new RevisiontreeSettingsDlg_impl(0),
-                    i18n("Revision tree"), "kdesvntree", i18n("Revision tree Settings"), true);
+                    i18n("Revision tree"), QStringLiteral("kdesvntree"), i18n("Revision tree Settings"), true);
     dialog->addPage(new CmdExecSettings_impl(0),
-                    i18n("KIO / Command line"), "kdesvnterminal", i18n("Settings for command line and KIO execution"), true);
+                    i18n("KIO / Command line"), QStringLiteral("kdesvnterminal"), i18n("Settings for command line and KIO execution"), true);
 
     connect(dialog, SIGNAL(settingsChanged(QString)), this, SLOT(slotSettingsChanged(QString)));
     dialog->show();
@@ -352,11 +352,11 @@ void kdesvnpart::slotShowSettings()
 void kdesvnpart::slotSettingsChanged(const QString &)
 {
     QAction *temp;
-    temp = actionCollection()->action("toggle_log_follows");
+    temp = actionCollection()->action(QStringLiteral("toggle_log_follows"));
     if (temp) {
         temp->setChecked(Kdesvnsettings::log_follows_nodes());
     }
-    temp = actionCollection()->action("toggle_ignored_files");
+    temp = actionCollection()->action(QStringLiteral("toggle_ignored_files"));
     if (temp) {
         temp->setChecked(Kdesvnsettings::display_ignored_files());
     }

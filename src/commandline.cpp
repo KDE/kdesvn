@@ -49,10 +49,10 @@ int CommandLine::exec()
 #ifdef EXTRA_KDE_LIBPATH
     QCoreApplication::addLibraryPath(QString::fromLocal8Bit(EXTRA_KDE_LIBPATH));
 #endif
-    KPluginLoader loader("kdesvnpart");
+    KPluginLoader loader(QStringLiteral("kdesvnpart"));
     KPluginFactory *factory = loader.factory();
     if (factory) {
-        QObject *_p = (factory->create<QObject>("commandline_part", nullptr));
+        QObject *_p = (factory->create<QObject>(QStringLiteral("commandline_part"), nullptr));
         if (!_p || QString::fromLatin1(_p->metaObject()->className()) != QLatin1String("commandline_part")) {
             return 0;
         }
@@ -65,5 +65,5 @@ int CommandLine::exec()
 
 void CommandLine::displayHelp()
 {
-    KHelpClient::invokeHelp(QLatin1String("kdesvn-commandline"), QLatin1String("kdesvn"));
+    KHelpClient::invokeHelp(QStringLiteral("kdesvn-commandline"), QStringLiteral("kdesvn"));
 }

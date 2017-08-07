@@ -78,7 +78,7 @@ public:
     const QVector<SvnItemModelNode *> &childList()const;
     SvnItemModelNode *child(int row)const;
 
-    SvnItemModelNode *findPath(const QStringList &parts);
+    SvnItemModelNode *findPath(const QVector<QStringRef> &parts);
     int indexOf(const QString &fullPath) const;
     virtual char sortChar() const;
 

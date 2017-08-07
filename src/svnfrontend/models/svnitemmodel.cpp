@@ -629,7 +629,7 @@ SvnItemModelNode *SvnItemModel::findPath(const svn::Path &_p)
         if (!n1->isDir()) {
             return 0;
         }
-        QStringList lp = ip.split('/', QString::SkipEmptyParts);
+        const QVector<QStringRef> lp = ip.splitRef(QLatin1Char('/'), QString::SkipEmptyParts);
         SvnItemModelNodeDir *d1 = static_cast<SvnItemModelNodeDir *>(n1);
         return d1->findPath(lp);
     }

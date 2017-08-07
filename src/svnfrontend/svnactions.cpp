@@ -1126,8 +1126,6 @@ void SvnActions::makeDiff(const QString &p1, const svn::Revision &start, const Q
 void SvnActions::makeDiffExternal(const QString &p1, const svn::Revision &start, const QString &p2, const svn::Revision &end, const svn::Revision &_peg,
                                   bool isDir, QWidget *p, bool rec)
 {
-    QString edisp = Kdesvnsettings::external_diff_display();
-    QStringList wlist = edisp.split(' ');
     QFileInfo f1(p1);
     QFileInfo f2(p2);
     QTemporaryFile tfile(QDir::tempPath() + QLatin1Char('/') + f1.fileName() + '-' + start.toString());
@@ -1188,14 +1186,16 @@ void SvnActions::makeDiffExternal(const QString &p1, const svn::Revision &start,
         }
     }
 
+    const QString edisp = Kdesvnsettings::external_diff_display();
+    const QVector<QStringRef> wlist = edisp.splitRef(QLatin1Char(' '));
     WatchedProcess *proc = new WatchedProcess(this);
-    for (QStringList::Iterator it = wlist.begin(); it != wlist.end(); ++it) {
+    for (auto it = wlist.begin(); it != wlist.end(); ++it) {
         if (*it == "%1") {
             *proc << first;
         } else if (*it == "%2") {
             *proc << second;
         } else {
-            *proc << *it;
+            *proc << (*it).toString();
         }
     }
     proc->setAutoDelete(true);
@@ -1341,11 +1341,11 @@ void SvnActions::dispDiff(const QByteArray &ex)
     QString what = Kdesvnsettings::external_diff_display();
 
     if (Kdesvnsettings::use_external_diff() && (!what.contains(QLatin1String("%1")) || !what.contains(QLatin1String("%2")))) {
-        const QStringList wlist = what.split(QLatin1Char(' '));
+        const QVector<QStringRef> wlist = what.splitRef(QLatin1Char(' '));
         WatchedProcess *proc = new WatchedProcess(this);
         bool fname_used = false;
 
-        for (QStringList::ConstIterator it = wlist.begin(); it != wlist.end(); ++it) {
+        for (auto it = wlist.begin(); it != wlist.end(); ++it) {
             if (*it == QLatin1String("%f")) {
                 QTemporaryFile tfile;
                 tfile.setAutoRemove(false);
@@ -1357,7 +1357,7 @@ void SvnActions::dispDiff(const QByteArray &ex)
                 proc->appendTempFile(tfile.fileName());
                 tfile.close();
             } else {
-                *proc << *it;
+                *proc << (*it).toString();
             }
         }
         proc->setAutoDelete(true);
@@ -1927,8 +1927,8 @@ void SvnActions::slotResolve(const QString &p)
     if (!m_Data->m_CurrentContext) {
         return;
     }
-    QString eresolv = Kdesvnsettings::conflict_resolver();
-    QStringList wlist = eresolv.split(QLatin1Char(' '));
+    const QString eresolv = Kdesvnsettings::conflict_resolver();
+    const QVector<QStringRef> wlist = eresolv.splitRef(QLatin1Char(' '));
     if (wlist.isEmpty()) {
         return;
     }
@@ -1948,7 +1948,7 @@ void SvnActions::slotResolve(const QString &p)
     }
 
     WatchedProcess *proc = new WatchedProcess(this);
-    for (QStringList::Iterator it = wlist.begin(); it != wlist.end(); ++it) {
+    for (auto it = wlist.begin(); it != wlist.end(); ++it) {
         if (*it == "%o" || *it == "%l") {
             *proc << i1.conflicts()[0]->baseFile();
         } else if (*it == "%m" || *it == "%w") {
@@ -1958,7 +1958,7 @@ void SvnActions::slotResolve(const QString &p)
         } else if (*it == "%t") {
             *proc << p;
         } else {
-            *proc << *it;
+            *proc << (*it).toString();
         }
     }
     proc->setAutoDelete(true);
@@ -2092,20 +2092,20 @@ void SvnActions::slotMergeExternal(const QString &_src1, const QString &_src2, c
             }
         }
     }
-    QString edisp = Kdesvnsettings::external_merge_program();
-    QStringList wlist = edisp.split(' ');
+    const QString edisp = Kdesvnsettings::external_merge_program();
+    const QVector<QStringRef> wlist = edisp.splitRef(QLatin1Char(' '));
     WatchedProcess *proc = new WatchedProcess(this);
-    for (QStringList::Iterator it = wlist.begin(); it != wlist.end(); ++it) {
-        if (*it == "%s1") {
+    for (auto it = wlist.begin(); it != wlist.end(); ++it) {
+        if (*it == QLatin1String("%s1")) {
             *proc << first;
-        } else if (*it == "%s2") {
+        } else if (*it == QLatin1String("%s2")) {
             if (!second.isEmpty()) {
                 *proc << second;
             }
-        } else if (*it == "%t") {
+        } else if (*it == QLatin1String("%t")) {
             *proc << target;
         } else {
-            *proc << *it;
+            *proc << (*it).toString();
         }
     }
     tdir1.setAutoRemove(false);
@@ -2695,7 +2695,7 @@ bool SvnActions::makeIgnoreEntry(const svn::Path &item, const QStringList &ignor
         data = mp["svn:ignore"];
     }
     bool result = false;
-    QStringList lst = data.split('\n', QString::SkipEmptyParts);
+    QStringList lst = data.split(QLatin1Char('\n'), QString::SkipEmptyParts);
 
     for (int _current = 0; _current < ignorePattern.size(); ++_current) {
         int it = lst.indexOf(ignorePattern[_current]);

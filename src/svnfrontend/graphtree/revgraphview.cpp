@@ -524,24 +524,23 @@ void RevGraphView::dumpRevtree()
 QString RevGraphView::toolTip(const QString &_nodename, bool full)const
 {
     QString res;
-    trevTree::ConstIterator it;
-    it = m_Tree.constFind(_nodename);
+    trevTree::ConstIterator it = m_Tree.constFind(_nodename);
     if (it == m_Tree.constEnd()) {
         return res;
     }
-    const QStringList sp = it.value().Message.split(QLatin1Char('\n'));
+    const QVector<QStringRef> sp = it.value().Message.splitRef(QLatin1Char('\n'));
     QString sm;
     if (sp.isEmpty()) {
         sm = it.value().Message;
     } else {
         if (!full) {
-            sm = sp[0] + QLatin1String("...");
+            sm = sp[0].toString() + QLatin1String("...");
         } else {
             for (int j = 0; j < sp.count(); ++j) {
                 if (j > 0) {
                     sm += QLatin1String("<br/>");
                 }
-                sm += sp[j];
+                sm += sp[j].toString();
             }
         }
     }

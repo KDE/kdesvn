@@ -172,20 +172,18 @@ char SvnItemModelNodeDir::sortChar() const
     return 1;
 }
 
-SvnItemModelNode *SvnItemModelNodeDir::findPath(const QStringList &parts)
+SvnItemModelNode *SvnItemModelNodeDir::findPath(const QVector<QStringRef> &parts)
 {
     for (int i = 0; i < m_Children.size(); ++i) {
         if (m_Children[i]->shortName() == parts[0]) {
             if (parts.size() == 1) {
                 return m_Children[i];
             } else if (m_Children[i]->isDir()) {
-                QStringList np = parts;
-                np.removeFirst();
-                return static_cast<SvnItemModelNodeDir *>(m_Children[i])->findPath(np);
+                return static_cast<SvnItemModelNodeDir *>(m_Children[i])->findPath(parts.mid(1));
             }
         }
     }
-    return 0;
+    return nullptr;
 }
 
 bool SvnItemModelNodeDir::contains(const QString &fullName) const

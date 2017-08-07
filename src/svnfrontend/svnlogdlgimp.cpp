@@ -93,11 +93,11 @@ void SvnLogDlgImp::dispLog(const svn::LogEntriesMapPtr &log, const QString &what
             QString reg;
             s = m_Actions->searchProperty(reg, "bugtraq:logregex", pegUrl, peg, true);
             if (!s.isNull() && !reg.isEmpty()) {
-                const QStringList s1 = reg.split(QLatin1Char('\n'));
+                const QVector<QStringRef> s1 = reg.splitRef(QLatin1Char('\n'));
                 if (!s1.isEmpty()) {
-                    _r1.setPattern(s1.at(0));
+                    _r1.setPattern(s1.at(0).toString());
                     if (s1.size() > 1) {
-                        _r2.setPattern(s1.at(1));
+                        _r2.setPattern(s1.at(1).toString());
                     }
                 }
             }

@@ -58,11 +58,11 @@ QString CheckoutInfo_impl::targetDir() const
     }
     // append last source url path to the target directory
     const QString _uri = reposURL().toLocalFile();
-    const QStringList l = _uri.split(QLatin1Char('/'), QString::SkipEmptyParts);
+    const QVector<QStringRef> l = _uri.splitRef(QLatin1Char('/'), QString::SkipEmptyParts);
     if (l.isEmpty()) {
         return m_TargetSelector->url().toLocalFile();
     }
-    return  m_TargetSelector->url().toLocalFile() + QLatin1Char('/') + l.last();
+    return  m_TargetSelector->url().toLocalFile() + QLatin1Char('/') + l.last().toString();
 }
 
 bool CheckoutInfo_impl::overwrite() const

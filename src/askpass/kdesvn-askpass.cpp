@@ -55,8 +55,8 @@ int main(int argc, char **argv)
         prompt = i18n("Please enter your password below.");
     } else {
         prompt = parser.positionalArguments().at(0);
-        if (prompt.contains("Bad passphrase", Qt::CaseInsensitive) ||
-                prompt.contains("Permission denied", Qt::CaseInsensitive)) {
+        if (prompt.contains(QLatin1String("Bad passphrase"), Qt::CaseInsensitive) ||
+                prompt.contains(QLatin1String("Permission denied"), Qt::CaseInsensitive)) {
             error = true;
         }
         kfile = prompt.section(QLatin1Char(' '), -2).remove(QLatin1Char(':')).simplified();
@@ -92,7 +92,7 @@ int main(int argc, char **argv)
     QTextStream out(stdout);
     out << pw;
     /* cleanup memory */
-    pw.replace(0, pw.length(), "0");
+    pw.replace(0, pw.length(), QLatin1Char('0'));
     return 0;
 }
 

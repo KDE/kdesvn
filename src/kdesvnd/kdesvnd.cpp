@@ -60,7 +60,7 @@ K_PLUGIN_FACTORY_WITH_JSON(KdeSvndFactory,
     }
 
 kdesvnd::kdesvnd(QObject *parent, const QList<QVariant> &) : KDEDModule(parent),
-    m_uiserver("org.kde.JobViewServer", "/JobViewServer", QDBusConnection::sessionBus())
+    m_uiserver(QStringLiteral("org.kde.JobViewServer"), QStringLiteral("/JobViewServer"), QDBusConnection::sessionBus())
 {
     m_Listener = new KdesvndListener(this);
     new KdesvndAdaptor(this);
@@ -122,52 +122,52 @@ QStringList kdesvnd::getActionMenu(const QList<QUrl> &list, bool toplevel) const
 
     if (!itemIsWc) {
         if (itemIsRepository) {
-            result << "Export"
-                   << "Checkout";
+            result << QStringLiteral("Export")
+                   << QStringLiteral("Checkout");
         } else {
-            result << "Exportto"
-                   << "Checkoutto";
+            result << QStringLiteral("Exportto")
+                   << QStringLiteral("Checkoutto");
         }
     } else {
-        result << "Update"
-               << "Commit";
+        result << QStringLiteral("Update")
+               << QStringLiteral("Commit");
     }
 
     if (!parentIsWc && !itemIsWc) {
         if (itemIsRepository) {
-            result << "Log";
+            result << QStringLiteral("Log");
             if (!toplevel) {
-                result << "Info";
+                result << QStringLiteral("Info");
                 const QUrl upUrl = KIO::upUrl(list.at(0));
                 if (isRepository(upUrl)) {
-                    result << "Blame"
-                           << "Rename";
+                    result << QStringLiteral("Blame")
+                           << QStringLiteral("Rename");
                 }
-                result << "Tree";
+                result << QStringLiteral("Tree");
             }
         }
     } else if (!toplevel) {
         if (!itemIsWc) {
-            result << "Add";
+            result << QStringLiteral("Add");
             return result;
         }
 
-        result << "Log"
-               << "Tree"
-               << "Info"
-               << "Diff"
-               << "Rename"
-               << "Revert";
+        result << QStringLiteral("Log")
+               << QStringLiteral("Tree")
+               << QStringLiteral("Info")
+               << QStringLiteral("Diff")
+               << QStringLiteral("Rename")
+               << QStringLiteral("Revert");
 
         const QUrl url = list.at(0);
         QFileInfo f(url.path());
         if (f.isFile()) {
-            result << "Blame";
+            result << QStringLiteral("Blame");
         }
 
         if (f.isDir()) {
-            result << "Addnew";
-            result << "Switch";
+            result << QStringLiteral("Addnew");
+            result << QStringLiteral("Switch");
         }
     }
     return result;
@@ -201,9 +201,9 @@ QStringList kdesvnd::get_login(const QString &realm, const QString &user)
         res.append(auth->Username());
         res.append(auth->Password());
         if (auth->maySave()) {
-            res.append("true");
+            res.append(QStringLiteral("true"));
         } else {
-            res.append("false");
+            res.append(QStringLiteral("false"));
         }
     }
     delete auth;
@@ -249,9 +249,9 @@ QStringList kdesvnd::get_sslclientcertpw(const QString &realm)
     if (dlg->exec() == KPasswordDialog::Accepted) {
         resList.append(dlg->password());
         if (dlg->keepPassword()) {
-            resList.append("true");
+            resList.append(QStringLiteral("true"));
         } else {
-            resList.append("false");
+            resList.append(QStringLiteral("false"));
         }
     }
     delete dlg;
@@ -337,7 +337,7 @@ void kdesvnd::registerKioFeedback(qulonglong kioid)
                                                                qApp->applicationName(),
                                                                0x0003);
     if (reply.isValid()) {
-        KsvnJobView *jobView = new KsvnJobView(kioid, "org.kde.JobViewServer",
+        KsvnJobView *jobView = new KsvnJobView(kioid, QStringLiteral("org.kde.JobViewServer"),
                                                reply.value().path(),
                                                QDBusConnection::sessionBus());
         progressJobView.insert(kioid, jobView);
@@ -358,7 +358,7 @@ void kdesvnd::transferredKioOperation(qulonglong kioid, qulonglong transferred)
 {
     CHECK_KIO;
     if (progressJobView[kioid]->max() > -1) {
-        progressJobView[kioid]->setProcessedAmount(transferred, "bytes");
+        progressJobView[kioid]->setProcessedAmount(transferred, QStringLiteral("bytes"));
         progressJobView[kioid]->setPercent(progressJobView[kioid]->percent(transferred));
         progressJobView[kioid]->clearDescriptionField(1);
     } else {

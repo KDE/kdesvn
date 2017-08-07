@@ -61,7 +61,7 @@ bool KdesvndListener::contextGetLogin(const QString &realm,
     }
     username = res[0];
     password = res[1];
-    maySave = (res[2] == "true");
+    maySave = (res[2] == QLatin1String("true"));
     if (maySave && Kdesvnsettings::passwords_in_wallet()) {
         PwStorage::self()->setLogin(realm, username, password);
         maySave = false;
@@ -149,7 +149,7 @@ bool KdesvndListener::contextSslClientCertPwPrompt(QString &password,
         return false;
     }
     password = res[0];
-    maySave = res[1] == QString("true");
+    maySave = res[1] == QLatin1String("true");
 
     if (maySave && Kdesvnsettings::passwords_in_wallet()) {
         PwStorage::self()->setCertPw(realm, password);

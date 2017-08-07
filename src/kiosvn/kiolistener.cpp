@@ -63,7 +63,7 @@ bool KioListener::contextGetLogMessage(QString &msg, const svn::CommitItemList &
     QStringList lt = res.value();
 
     if (lt.count() != 1) {
-        msg = "Wrong or missing log (may cancel pressed).";
+        msg = i18n("Wrong or missing log (may cancel pressed).");
         qCDebug(KDESVN_LOG) << msg << endl;
         return false;
     }
@@ -228,14 +228,15 @@ void KioListener::contextNotify(const char *_path, svn_wc_notify_action_t action
     default:
         break;
     }
-    par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "path" , path);
-    par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "action", QString::number(action));
-    par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "kind", QString::number(kind));
-    par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "mime_t", QString::fromUtf8(mime_type));
-    par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "content", QString::number(content_state));
-    par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "prop", QString::number(prop_state));
-    par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "rev", QString::number(revision));
-    par->setMetaData(QString::number(counter()).rightJustified(10, '0') + "string", userstring);
+    const QString num(QString::number(counter()).rightJustified(10, QLatin1Char('0')));
+    par->setMetaData(num + QStringLiteral("path"), path);
+    par->setMetaData(num + QStringLiteral("action"), QString::number(action));
+    par->setMetaData(num + QStringLiteral("kind"), QString::number(kind));
+    par->setMetaData(num + QStringLiteral("mime_t"), QString::fromUtf8(mime_type));
+    par->setMetaData(num + QStringLiteral("content"), QString::number(content_state));
+    par->setMetaData(num + QStringLiteral("prop"), QString::number(prop_state));
+    par->setMetaData(num + QStringLiteral("rev"), QString::number(revision));
+    par->setMetaData(num + QStringLiteral("string"), userstring);
     incCounter();
 }
 
@@ -368,7 +369,7 @@ bool KioListener::contextGetLogin(const QString &realm, QString &username, QStri
     }
     username = lt[0];
     password = lt[1];
-    maySave = lt[2] == "true";
+    maySave = lt[2] == QLatin1String("true");
     return true;
 }
 

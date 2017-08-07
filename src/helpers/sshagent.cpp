@@ -114,18 +114,18 @@ bool SshAgent::addSshIdentities(bool force)
     // add identities to ssh-agent
     KProcess proc;
 
-    proc.setEnv("SSH_AGENT_PID", m_pid);
-    proc.setEnv("SSH_AUTH_SOCK", m_authSock);
+    proc.setEnv(QStringLiteral("SSH_AGENT_PID"), m_pid);
+    proc.setEnv(QStringLiteral("SSH_AUTH_SOCK"), m_authSock);
 
 #ifdef FORCE_ASKPASS
     qCDebug(KDESVN_LOG) << "Using test askpass" << endl;
     proc.setEnv("SSH_ASKPASS", FORCE_ASKPASS);
 #else
     qCDebug(KDESVN_LOG) << "Using kdesvnaskpass" << endl;
-    proc.setEnv("SSH_ASKPASS", "kdesvnaskpass");
+    proc.setEnv(QStringLiteral("SSH_ASKPASS"), QStringLiteral("kdesvnaskpass"));
 #endif
 
-    proc << "ssh-add";
+    proc << QStringLiteral("ssh-add");
     proc.start();
     // endless
     proc.waitForFinished(-1);
@@ -143,7 +143,7 @@ void SshAgent::killSshAgent()
 
     KProcess proc;
 
-    proc << "kill" << m_pid;
+    proc << QStringLiteral("kill") << m_pid;
 
     proc.start();
     proc.waitForFinished();
@@ -154,16 +154,14 @@ void SshAgent::slotProcessExited(int exitCode, QProcess::ExitStatus exitStatus)
     if (exitStatus != QProcess::NormalExit || exitCode != 0) {
         return;
     }
-    QRegExp cshPidRx("setenv SSH_AGENT_PID (\\d*);");
-    QRegExp cshSockRx("setenv SSH_AUTH_SOCK (.*);");
+    const QRegExp cshPidRx(QStringLiteral("setenv SSH_AGENT_PID (\\d*);"));
+    const QRegExp cshSockRx(QStringLiteral("setenv SSH_AUTH_SOCK (.*);"));
 
-    QRegExp bashPidRx("SSH_AGENT_PID=(\\d*).*");
-    QRegExp bashSockRx("SSH_AUTH_SOCK=(.*\\.\\d*);.*");
-    QStringList m_outputLines = m_Output.split('\n', QString::SkipEmptyParts);
+    const QRegExp bashPidRx(QStringLiteral("SSH_AGENT_PID=(\\d*).*"));
+    const QRegExp bashSockRx(QStringLiteral("SSH_AUTH_SOCK=(.*\\.\\d*);.*"));
+    const QStringList m_outputLines = m_Output.split(QLatin1Char('\n'), QString::SkipEmptyParts);
 
-    QStringList::Iterator it  = m_outputLines.begin();
-    QStringList::Iterator end = m_outputLines.end();
-    for (; it != end; ++it) {
+    for (auto it = m_outputLines.begin(); it != m_outputLines.end(); ++it) {
         if (m_pid.isEmpty()) {
             int pos = cshPidRx.indexIn(*it);
             if (pos > -1) {
@@ -209,7 +207,7 @@ bool SshAgent::startSshAgent()
         return false;
     }
     sshAgent = new KProcess();
-    *sshAgent << "ssh-agent";
+    *sshAgent << QStringLiteral("ssh-agent");
 
     sshAgent->setOutputChannelMode(KProcess::MergedChannels);
 

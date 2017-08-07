@@ -283,7 +283,7 @@ void kio_svnProtocol::get(const QUrl &url)
         // dolphin / Konqueror try to get the content without check if it is a folder when listing a folder
         // which results in a lot of error messages via kio notify
         if (e.apr_err() != SVN_ERR_CLIENT_IS_DIRECTORY) {
-            extraError(KIO::ERR_SLAVE_DEFINED, "Subversion error " + ex);
+            extraError(KIO::ERR_SLAVE_DEFINED, QStringLiteral("Subversion error ") + ex);
         }
         return;
     }
@@ -771,7 +771,7 @@ void kio_svnProtocol::status(const QUrl &wc, bool cR, bool rec)
         if (!s) {
             continue;
         }
-        const QString cntStr(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0'));
+        const QString cntStr(QString::number(m_pData->m_Listener.counter()).rightJustified(10, QLatin1Char('0')));
         //QDataStream stream(params, QIODevice::WriteOnly);
         setMetaData(cntStr + QLatin1String("path"), s->path());
         setMetaData(cntStr + QLatin1String("node"), QString::number(s->nodeStatus()));
@@ -799,7 +799,7 @@ void kio_svnProtocol::commit(const QList<QUrl> &urls)
     QStringList lt = res;
 
     if (lt.count() != 1) {
-        msg = "Wrong or missing log (may cancel pressed).";
+        msg = i18n("Wrong or missing log (may cancel pressed).");
         qCDebug(KDESVN_LOG) << msg << endl;
         return;
     }
@@ -820,14 +820,16 @@ void kio_svnProtocol::commit(const QList<QUrl> &urls)
         } else {
             userstring = i18n("Nothing to commit.");
         }
-        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "path", urls[j].path());
-        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "action", "0");
-        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "kind", "0");
-        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "mime_t", "");
-        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "content", "0");
-        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "prop", "0");
-        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "rev" , QString::number(nnum));
-        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "string", userstring);
+        const QString num(QString::number(m_pData->m_Listener.counter()).rightJustified(10, QLatin1Char('0')));
+        const QString zero(QStringLiteral("0"));
+        setMetaData(num + QLatin1String("path"), urls[j].path());
+        setMetaData(num + QLatin1String("action"), zero);
+        setMetaData(num + QLatin1String("kind"), zero);
+        setMetaData(num + QLatin1String("mime_t"), QString());
+        setMetaData(num + QLatin1String("content"), zero);
+        setMetaData(num + QLatin1String("prop"), zero);
+        setMetaData(num + QLatin1String("rev") , QString::number(nnum));
+        setMetaData(num + QLatin1String("string"), userstring);
         m_pData->m_Listener.incCounter();
     }
 }
@@ -860,8 +862,9 @@ void kio_svnProtocol::svnlog(int revstart, const QString &revstringstart, int re
             break;
         }
         if (logs.isEmpty()) {
-            setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "path", urls[j].path());
-            setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "string",
+            const QString num(QString::number(m_pData->m_Listener.counter()).rightJustified(10, QLatin1Char('0')));
+            setMetaData(num + QStringLiteral("path"), urls[j].path());
+            setMetaData(num + QStringLiteral("string"),
                         i18n("Empty logs"));
             m_pData->m_Listener.incCounter();
             continue;
@@ -869,26 +872,20 @@ void kio_svnProtocol::svnlog(int revstart, const QString &revstringstart, int re
 
         svn::LogEntriesMap::const_iterator it = logs.constBegin();
         for (; it != logs.constEnd(); ++it) {
-            setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "path", urls[j].path());
-            setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "rev",
-                        QString::number((*it).revision));
-            setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "author",
-                        (*it).author);
-            setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "logmessage",
-                        (*it).message);
+            const QString num(QString::number(m_pData->m_Listener.counter()).rightJustified(10, QLatin1Char('0')));
+            setMetaData(num + QStringLiteral("path"), urls[j].path());
+            setMetaData(num + QStringLiteral("rev"), QString::number((*it).revision));
+            setMetaData(num + QStringLiteral("author"), (*it).author);
+            setMetaData(num + QStringLiteral("logmessage"), (*it).message);
             m_pData->m_Listener.incCounter();
             for (long z = 0; z < (*it).changedPaths.count(); ++z) {
-                setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "rev",
-                            QString::number((*it).revision));
-                setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "path", urls[j].path());
-                setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "loggedpath",
-                            (*it).changedPaths[z].path);
-                setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "loggedaction",
-                            QChar((*it).changedPaths[z].action));
-                setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "loggedcopyfrompath",
-                            (*it).changedPaths[z].copyFromPath);
-                setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "loggedcopyfromrevision",
-                            QString::number((*it).changedPaths[z].copyFromRevision));
+                const QString num(QString::number(m_pData->m_Listener.counter()).rightJustified(10, QLatin1Char('0')));
+                setMetaData(num + QStringLiteral("rev"), QString::number((*it).revision));
+                setMetaData(num + QStringLiteral("path"), urls[j].path());
+                setMetaData(num + QStringLiteral("loggedpath"), (*it).changedPaths[z].path);
+                setMetaData(num + QStringLiteral("loggedaction"), QString(QLatin1Char((*it).changedPaths[z].action)));
+                setMetaData(num + QStringLiteral("loggedcopyfrompath"), (*it).changedPaths[z].copyFromPath);
+                setMetaData(num + QStringLiteral("loggedcopyfromrevision"), QString::number((*it).changedPaths[z].copyFromRevision));
                 m_pData->m_Listener.incCounter();
 
             }
@@ -943,9 +940,10 @@ void kio_svnProtocol::diff(const QUrl &uri1, const QUrl &uri2, int rnum1, const 
         return;
     }
     QString out = QString::fromUtf8(ex);
+    const QString num(QString::number(m_pData->m_Listener.counter()).rightJustified(10, QLatin1Char('0')));
     QTextStream stream(&out);
     while (!stream.atEnd()) {
-        setMetaData(QString::number(m_pData->m_Listener.counter()).rightJustified(10, '0') + "diffresult", stream.readLine());
+        setMetaData(num + QStringLiteral("diffresult"), stream.readLine());
         m_pData->m_Listener.incCounter();
     }
 }

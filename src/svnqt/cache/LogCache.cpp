@@ -389,9 +389,9 @@ void LogCache::setupMainDb()
     if (!mainDB.isValid()) {
         qWarning("Failed to open main database.");
     } else {
-        QStringList list = mainDB.tables();
+        const QStringList list = mainDB.tables();
         QSqlQuery q(mainDB);
-        if (list.indexOf(SQLSTATUS()) == -1) {
+        if (!list.contains(SQLSTATUS())) {
             mainDB.transaction();
             if (q.exec(QLatin1String("CREATE TABLE \"") + SQLSTATUS() + QLatin1String("\" (\"key\" TEXT PRIMARY KEY NOT NULL, \"value\" TEXT);"))) {
                 q.exec(QLatin1String("INSERT INTO \"") + SQLSTATUS() + QLatin1String("\" (key,value) values(\"version\",\"0\");"));
@@ -401,7 +401,7 @@ void LogCache::setupMainDb()
         int version = databaseVersion();
         if (version == 0) {
             mainDB.transaction();
-            if (list.indexOf(SQLMAINTABLE()) == -1) {
+            if (!list.contains(SQLMAINTABLE())) {
                 q.exec(QLatin1String("CREATE TABLE IF NOT EXISTS \"") + SQLMAINTABLE() + QLatin1String("\" (\"reposroot\" TEXT,\"id\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL);"));
             }/* else {
                 q.exec("CREATE TABLE IF NOT EXISTS \""+QString(SQLMAINTABLE)+"new\" (\"reposroot\" TEXT,\"id\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL);");

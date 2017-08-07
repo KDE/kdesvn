@@ -227,7 +227,7 @@ int CommandExec::exec(const QCommandLineParser *parser)
         QUrl tmpurl = QUrl::fromUserInput(m_pCPart->args.at(j),
                                           QDir::currentPath());
         tmpurl.setScheme(svn::Url::transformProtokoll(tmpurl.scheme()));
-        if (tmpurl.scheme().indexOf(QLatin1String("ssh")) != -1) {
+        if (tmpurl.scheme().contains(QLatin1String("ssh"))) {
             SshAgent ag;
             // this class itself checks if done before
             ag.addSshIdentities();

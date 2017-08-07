@@ -111,9 +111,9 @@ public:
     bool isExternalDiff() const
     {
         if (Kdesvnsettings::use_external_diff()) {
-            QString edisp = Kdesvnsettings::external_diff_display();
-            QStringList wlist = edisp.split(' ');
-            if (wlist.count() >= 3 && edisp.indexOf("%1") != -1 && edisp.indexOf("%2") != -1) {
+            const QString edisp = Kdesvnsettings::external_diff_display();
+            const QVector<QStringRef> wlist = edisp.splitRef(QLatin1Char(' '));
+            if (wlist.count() >= 3 && edisp.contains(QLatin1String("%1")) && edisp.contains(QLatin1String("%2"))) {
                 return true;
             }
         }
@@ -699,7 +699,7 @@ QString SvnActions::getInfo(const QString &_what, const svn::Revision &rev, cons
                          i18n("Details"), i18n("Retrieving information - hit Cancel for abort"));
             connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
             QString path = _what;
-            if (_what.indexOf(QLatin1Char('@')) > -1 && !svn::Url::isValid(_what)) {
+            if (_what.contains(QLatin1Char('@')) && !svn::Url::isValid(_what)) {
                 path += QLatin1String("@BASE");
             }
             entries = (m_Data->m_Svnclient->info(path,
@@ -1340,7 +1340,7 @@ void SvnActions::dispDiff(const QByteArray &ex)
 {
     QString what = Kdesvnsettings::external_diff_display();
 
-    if (Kdesvnsettings::use_external_diff() && (what.indexOf(QLatin1String("%1")) == -1 || what.indexOf(QLatin1String("%2")) == -1)) {
+    if (Kdesvnsettings::use_external_diff() && (!what.contains(QLatin1String("%1")) || !what.contains(QLatin1String("%2")))) {
         const QStringList wlist = what.split(QLatin1Char(' '));
         WatchedProcess *proc = new WatchedProcess(this);
         bool fname_used = false;

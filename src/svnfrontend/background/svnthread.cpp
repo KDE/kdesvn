@@ -59,8 +59,8 @@ void SvnThread::itemInfo(const QString &what, svn::InfoEntry &target, const svn:
         // working copy
         // url = svn::Wc::getUrl(what);
         url = what;
-        if (url.indexOf("@") != -1) {
-            url += "@BASE";
+        if (url.contains(QLatin1Char('@'))) {
+            url += QStringLiteral("@BASE");
         }
         peg = svn::Revision::UNDEFINED;
         cacheKey = url;

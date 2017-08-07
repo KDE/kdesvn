@@ -46,9 +46,9 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions *ac, bool modal, QWidget *parent)
     m_pbClose->setShortcut(Qt::CTRL | Qt::Key_Return);
     KStandardGuiItem::assign(m_pbClose, KStandardGuiItem::Close);
     KStandardGuiItem::assign(m_pbHelp, KStandardGuiItem::Help);
-    m_DispPrevButton->setIcon(QIcon::fromTheme("kdesvndiff"));
-    m_DispSpecDiff->setIcon(QIcon::fromTheme("kdesvndiff"));
-    buttonBlame->setIcon(QIcon::fromTheme("kdesvnblame"));
+    m_DispPrevButton->setIcon(QIcon::fromTheme(QStringLiteral("kdesvndiff")));
+    m_DispSpecDiff->setIcon(QIcon::fromTheme(QStringLiteral("kdesvndiff")));
+    buttonBlame->setIcon(QIcon::fromTheme(QStringLiteral("kdesvnblame")));
     m_SortModel = 0;
     m_CurrentModel = 0;
     m_ControlKeyDown = false;
@@ -432,13 +432,13 @@ void SvnLogDlgImp::slotCustomContextMenu(const QPoint &e)
     QAction *ac;
     bool unset = false;
     if (row != m_CurrentModel->rightRow()) {
-        ac = popup.addAction(QIcon::fromTheme("kdesvnright"), i18n("Set version as right side of diff"));
+        ac = popup.addAction(QIcon::fromTheme(QStringLiteral("kdesvnright")), i18n("Set version as right side of diff"));
         ac->setData(101);
     } else {
         unset = true;
     }
     if (row != m_CurrentModel->leftRow()) {
-        ac = popup.addAction(QIcon::fromTheme("kdesvnleft"), i18n("Set version as left side of diff"));
+        ac = popup.addAction(QIcon::fromTheme(QStringLiteral("kdesvnleft")), i18n("Set version as left side of diff"));
         ac->setData(102);
     } else {
         unset = true;

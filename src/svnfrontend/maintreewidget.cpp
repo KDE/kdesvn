@@ -491,163 +491,163 @@ void MainTreeWidget::setupActions()
     QAction *tmp_action;
     /* local and remote actions */
     /* 1. actions on dirs AND files */
-    tmp_action = add_action("make_svn_log_full", i18n("History of item"), QKeySequence(Qt::CTRL | Qt::Key_L), QIcon::fromTheme("kdesvnlog"), this, SLOT(slotMakeLog()));
+    tmp_action = add_action("make_svn_log_full", i18n("History of item"), QKeySequence(Qt::CTRL | Qt::Key_L), QIcon::fromTheme(QStringLiteral("kdesvnlog")), this, SLOT(slotMakeLog()));
     tmp_action->setIconText(i18n("History"));
     tmp_action->setStatusTip(i18n("Displays the history log of selected item"));
-    tmp_action = add_action("make_svn_log_nofollow", i18n("History of item ignoring copies"), QKeySequence(Qt::SHIFT | Qt::CTRL | Qt::Key_L), QIcon::fromTheme("kdesvnlog"), this, SLOT(slotMakeLogNoFollow()));
+    tmp_action = add_action("make_svn_log_nofollow", i18n("History of item ignoring copies"), QKeySequence(Qt::SHIFT | Qt::CTRL | Qt::Key_L), QIcon::fromTheme(QStringLiteral("kdesvnlog")), this, SLOT(slotMakeLogNoFollow()));
     tmp_action->setIconText(i18n("History"));
     tmp_action->setStatusTip(i18n("Displays the history log of selected item without following copies"));
 
-    tmp_action = add_action("make_svn_dir_log_nofollow", i18n("History of item ignoring copies"), QKeySequence(), QIcon::fromTheme("kdesvnlog"), this, SLOT(slotDirMakeLogNoFollow()));
+    tmp_action = add_action("make_svn_dir_log_nofollow", i18n("History of item ignoring copies"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnlog")), this, SLOT(slotDirMakeLogNoFollow()));
     tmp_action->setIconText(i18n("History"));
     tmp_action->setStatusTip(i18n("Displays the history log of selected item without following copies"));
 
-    tmp_action = add_action("make_svn_tree", i18n("Full revision tree"), QKeySequence(Qt::CTRL | Qt::Key_T), QIcon::fromTheme("kdesvntree"), this, SLOT(slotMakeTree()));
+    tmp_action = add_action("make_svn_tree", i18n("Full revision tree"), QKeySequence(Qt::CTRL | Qt::Key_T), QIcon::fromTheme(QStringLiteral("kdesvntree")), this, SLOT(slotMakeTree()));
     tmp_action->setStatusTip(i18n("Shows history of item as linked tree"));
-    tmp_action = add_action("make_svn_partialtree", i18n("Partial revision tree"), QKeySequence(Qt::SHIFT | Qt::CTRL | Qt::Key_T), QIcon::fromTheme("kdesvntree"), this, SLOT(slotMakePartTree()));
+    tmp_action = add_action("make_svn_partialtree", i18n("Partial revision tree"), QKeySequence(Qt::SHIFT | Qt::CTRL | Qt::Key_T), QIcon::fromTheme(QStringLiteral("kdesvntree")), this, SLOT(slotMakePartTree()));
     tmp_action->setStatusTip(i18n("Shows history of item as linked tree for a revision range"));
 
     tmp_action = add_action("make_svn_property", i18n("Properties"), QKeySequence(Qt::CTRL | Qt::Key_P), QIcon(), this, SLOT(slotRightProperties()));
     tmp_action = add_action("make_left_svn_property", i18n("Properties"), QKeySequence(), QIcon(), this, SLOT(slotLeftProperties()));
     add_action("get_svn_property", i18n("Display Properties"), QKeySequence(Qt::SHIFT | Qt::CTRL | Qt::Key_P), QIcon(), this, SLOT(slotDisplayProperties()));
-    tmp_action = add_action("make_last_change", i18n("Display last changes"), QKeySequence(), QIcon::fromTheme("kdesvndiff"), this, SLOT(slotDisplayLastDiff()));
+    tmp_action = add_action("make_last_change", i18n("Display last changes"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvndiff")), this, SLOT(slotDisplayLastDiff()));
     tmp_action->setToolTip(i18n("Display last changes as difference to previous commit."));
-    tmp_action = add_action("make_svn_info", i18n("Details"), QKeySequence(Qt::CTRL | Qt::Key_I), QIcon::fromTheme("kdesvninfo"), this, SLOT(slotInfo()));
+    tmp_action = add_action("make_svn_info", i18n("Details"), QKeySequence(Qt::CTRL | Qt::Key_I), QIcon::fromTheme(QStringLiteral("kdesvninfo")), this, SLOT(slotInfo()));
     tmp_action->setStatusTip(i18n("Show details about selected item"));
-    tmp_action = add_action("make_svn_rename", i18n("Move"), QKeySequence(Qt::Key_F2), QIcon::fromTheme("kdesvnmove"), this, SLOT(slotRename()));
+    tmp_action = add_action("make_svn_rename", i18n("Move"), QKeySequence(Qt::Key_F2), QIcon::fromTheme(QStringLiteral("kdesvnmove")), this, SLOT(slotRename()));
     tmp_action->setStatusTip(i18n("Moves or renames current item"));
-    tmp_action = add_action("make_svn_copy", i18n("Copy"), QKeySequence(Qt::CTRL | Qt::Key_C), QIcon::fromTheme("kdesvncopy"), this, SLOT(slotCopy()));
+    tmp_action = add_action("make_svn_copy", i18n("Copy"), QKeySequence(Qt::CTRL | Qt::Key_C), QIcon::fromTheme(QStringLiteral("kdesvncopy")), this, SLOT(slotCopy()));
     tmp_action->setStatusTip(i18n("Create a copy of current item"));
-    tmp_action = add_action("make_check_updates", i18n("Check for updates"), QKeySequence(), QIcon::fromTheme("kdesvncheckupdates"), this, SLOT(slotCheckUpdates()));
+    tmp_action = add_action("make_check_updates", i18n("Check for updates"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvncheckupdates")), this, SLOT(slotCheckUpdates()));
     tmp_action->setToolTip(i18n("Check if current working copy has items with newer version in repository"));
     tmp_action->setStatusTip(tmp_action->toolTip());
     tmp_action->setIconText(i18n("Check updates"));
 
     /* 2. actions only on files */
-    tmp_action = add_action("make_svn_blame", i18n("Blame"), QKeySequence(), QIcon::fromTheme("kdesvnblame"), this, SLOT(slotBlame()));
+    tmp_action = add_action("make_svn_blame", i18n("Blame"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnblame")), this, SLOT(slotBlame()));
     tmp_action->setToolTip(i18n("Output the content of specified files or URLs with revision and author information in-line."));
     tmp_action->setStatusTip(tmp_action->toolTip());
-    tmp_action = add_action("make_svn_range_blame", i18n("Blame range"), QKeySequence(), QIcon::fromTheme("kdesvnblame"), this, SLOT(slotRangeBlame()));
+    tmp_action = add_action("make_svn_range_blame", i18n("Blame range"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnblame")), this, SLOT(slotRangeBlame()));
     tmp_action->setToolTip(i18n("Output the content of specified files or URLs with revision and author information in-line."));
     tmp_action->setStatusTip(tmp_action->toolTip());
 
-    tmp_action = add_action("make_svn_cat", i18n("Cat head"), QKeySequence(), QIcon::fromTheme("kdesvncat"), this, SLOT(slotCat()));
+    tmp_action = add_action("make_svn_cat", i18n("Cat head"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvncat")), this, SLOT(slotCat()));
     tmp_action->setToolTip(i18n("Output the content of specified files or URLs."));
     tmp_action->setStatusTip(tmp_action->toolTip());
-    tmp_action = add_action("make_revisions_cat", i18n("Cat revision..."), QKeySequence(), QIcon::fromTheme("kdesvncat"), this, SLOT(slotRevisionCat()));
+    tmp_action = add_action("make_revisions_cat", i18n("Cat revision..."), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvncat")), this, SLOT(slotRevisionCat()));
     tmp_action->setToolTip(i18n("Output the content of specified files or URLs at specific revision."));
     tmp_action->setStatusTip(tmp_action->toolTip());
 
-    tmp_action = add_action("make_svn_lock", i18n("Lock current items"), QKeySequence(), QIcon::fromTheme("kdesvnlock"), this, SLOT(slotLock()));
+    tmp_action = add_action("make_svn_lock", i18n("Lock current items"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnlock")), this, SLOT(slotLock()));
     tmp_action->setToolTip(i18n("Try lock current item against changes from other users"));
     tmp_action->setStatusTip(tmp_action->toolTip());
-    tmp_action = add_action("make_svn_unlock", i18n("Unlock current items"), QKeySequence(), QIcon::fromTheme("kdesvnunlock"), this, SLOT(slotUnlock()));
+    tmp_action = add_action("make_svn_unlock", i18n("Unlock current items"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnunlock")), this, SLOT(slotUnlock()));
     tmp_action->setToolTip(i18n("Free existing lock on current item"));
     tmp_action->setStatusTip(tmp_action->toolTip());
 
     /* 3. actions only on dirs */
-    tmp_action = add_action("make_svn_mkdir", i18n("New folder"), QKeySequence(), QIcon::fromTheme("kdesvnnewfolder"), this, SLOT(slotMkdir()));
+    tmp_action = add_action("make_svn_mkdir", i18n("New folder"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnnewfolder")), this, SLOT(slotMkdir()));
     tmp_action->setStatusTip(i18n("Create a new folder"));
-    tmp_action = add_action("make_svn_switch", i18n("Switch repository"), QKeySequence(), QIcon::fromTheme("kdesvnswitch"), m_Data->m_Model->svnWrapper(), SLOT(slotSwitch()));
+    tmp_action = add_action("make_svn_switch", i18n("Switch repository"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnswitch")), m_Data->m_Model->svnWrapper(), SLOT(slotSwitch()));
     tmp_action->setToolTip(i18n("Switch repository path of current working copy path (\"svn switch\")"));
     tmp_action->setStatusTip(tmp_action->toolTip());
 
-    tmp_action = add_action("make_svn_relocate", i18n("Relocate current working copy URL"), QKeySequence(), QIcon::fromTheme("kdesvnrelocate"), this, SLOT(slotRelocate()));
+    tmp_action = add_action("make_svn_relocate", i18n("Relocate current working copy URL"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnrelocate")), this, SLOT(slotRelocate()));
     tmp_action->setToolTip(i18n("Relocate URL of current working copy path to other URL"));
     tmp_action->setStatusTip(tmp_action->toolTip());
 
-    tmp_action = add_action("make_check_unversioned", i18n("Check for unversioned items"), QKeySequence(), QIcon::fromTheme("kdesvnaddrecursive"), this, SLOT(slotCheckNewItems()));
+    tmp_action = add_action("make_check_unversioned", i18n("Check for unversioned items"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnaddrecursive")), this, SLOT(slotCheckNewItems()));
     tmp_action->setIconText(i18n("Unversioned"));
     tmp_action->setToolTip(i18n("Browse folder for unversioned items and add them if wanted."));
     tmp_action->setStatusTip(tmp_action->toolTip());
 
-    tmp_action = add_action("make_switch_to_repo", i18n("Open repository of working copy"), QKeySequence(), QIcon::fromTheme("kdesvnrepository"),
+    tmp_action = add_action("make_switch_to_repo", i18n("Open repository of working copy"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnrepository")),
                             this, SLOT(slotChangeToRepository()));
     tmp_action->setToolTip(i18n("Opens the repository the current working copy was checked out from"));
 
-    tmp_action = add_action("make_cleanup", i18n("Cleanup"), QKeySequence(), QIcon::fromTheme("kdesvncleanup"), this, SLOT(slotCleanupAction()));
+    tmp_action = add_action("make_cleanup", i18n("Cleanup"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvncleanup")), this, SLOT(slotCleanupAction()));
     tmp_action->setToolTip(i18n("Recursively clean up the working copy, removing locks, resuming unfinished operations, etc."));
-    tmp_action = add_action("make_import_dirs_into_current", i18n("Import folders into current"), QKeySequence(), QIcon::fromTheme("kdesvnimportfolder"),
+    tmp_action = add_action("make_import_dirs_into_current", i18n("Import folders into current"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnimportfolder")),
                             this, SLOT(slotImportDirsIntoCurrent()));
     tmp_action->setToolTip(i18n("Import folder content into current URL"));
 
     /* local only actions */
     /* 1. actions on files AND dirs*/
-    tmp_action = add_action("make_svn_add", i18n("Add selected files/dirs"), QKeySequence(Qt::Key_Insert), QIcon::fromTheme("kdesvnadd"), m_Data->m_Model->svnWrapper(), SLOT(slotAdd()));
+    tmp_action = add_action("make_svn_add", i18n("Add selected files/dirs"), QKeySequence(Qt::Key_Insert), QIcon::fromTheme(QStringLiteral("kdesvnadd")), m_Data->m_Model->svnWrapper(), SLOT(slotAdd()));
     tmp_action->setToolTip(i18n("Adding selected files and/or directories to repository"));
     tmp_action->setIconText(i18n("Add"));
-    tmp_action = add_action("make_svn_addrec", i18n("Add selected files/dirs recursive"), QKeySequence(Qt::CTRL | Qt::Key_Insert), QIcon::fromTheme("kdesvnaddrecursive"),
+    tmp_action = add_action("make_svn_addrec", i18n("Add selected files/dirs recursive"), QKeySequence(Qt::CTRL | Qt::Key_Insert), QIcon::fromTheme(QStringLiteral("kdesvnaddrecursive")),
                             m_Data->m_Model->svnWrapper(), SLOT(slotAddRec()));
     tmp_action->setToolTip(i18n("Adding selected files and/or directories to repository and all subitems of folders"));
 
-    tmp_action = add_action("make_svn_remove", i18n("Delete selected files/dirs"), QKeySequence(Qt::Key_Delete), QIcon::fromTheme("kdesvndelete"), this, SLOT(slotDelete()));
+    tmp_action = add_action("make_svn_remove", i18n("Delete selected files/dirs"), QKeySequence(Qt::Key_Delete), QIcon::fromTheme(QStringLiteral("kdesvndelete")), this, SLOT(slotDelete()));
     tmp_action->setIconText(i18n("Delete"));
     tmp_action->setToolTip(i18n("Deleting selected files and/or directories from repository"));
-    tmp_action = add_action("make_svn_remove_left", i18n("Delete folder"), QKeySequence(), QIcon::fromTheme("kdesvndelete"), this, SLOT(slotLeftDelete()));
+    tmp_action = add_action("make_svn_remove_left", i18n("Delete folder"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvndelete")), this, SLOT(slotLeftDelete()));
     tmp_action->setToolTip(i18n("Deleting selected directories from repository"));
     tmp_action->setIconText(i18n("Delete"));
-    tmp_action  = add_action("make_svn_revert", i18n("Revert current changes"), QKeySequence(Qt::CTRL | Qt::Key_R), QIcon::fromTheme("kdesvnreverse"), m_Data->m_Model->svnWrapper(), SLOT(slotRevert()));
+    tmp_action  = add_action("make_svn_revert", i18n("Revert current changes"), QKeySequence(Qt::CTRL | Qt::Key_R), QIcon::fromTheme(QStringLiteral("kdesvnreverse")), m_Data->m_Model->svnWrapper(), SLOT(slotRevert()));
 
-    tmp_action = add_action("make_resolved", i18n("Mark resolved"), QKeySequence(), QIcon::fromTheme("kdesvnresolved"), this, SLOT(slotResolved()));
+    tmp_action = add_action("make_resolved", i18n("Mark resolved"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnresolved")), this, SLOT(slotResolved()));
     tmp_action->setToolTip(i18n("Marking files or dirs resolved"));
 
-    tmp_action = add_action("make_try_resolve", i18n("Resolve conflicts"), QKeySequence(), QIcon::fromTheme("kdesvnresolved"), this, SLOT(slotTryResolve()));
+    tmp_action = add_action("make_try_resolve", i18n("Resolve conflicts"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnresolved")), this, SLOT(slotTryResolve()));
 
     tmp_action = add_action("make_svn_ignore", i18n("Ignore/Unignore current item"), QKeySequence(), QIcon(), this, SLOT(slotIgnore()));
     tmp_action = add_action("make_left_add_ignore_pattern", i18n("Add or Remove ignore pattern"), QKeySequence(), QIcon(), this, SLOT(slotLeftRecAddIgnore()));
     tmp_action = add_action("make_right_add_ignore_pattern", i18n("Add or Remove ignore pattern"), QKeySequence(), QIcon(), this, SLOT(slotRightRecAddIgnore()));
 
-    tmp_action = add_action("make_svn_headupdate", i18n("Update to head"), QKeySequence(), QIcon::fromTheme("kdesvnupdate"), m_Data->m_Model->svnWrapper(), SLOT(slotUpdateHeadRec()));
+    tmp_action = add_action("make_svn_headupdate", i18n("Update to head"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnupdate")), m_Data->m_Model->svnWrapper(), SLOT(slotUpdateHeadRec()));
     tmp_action->setIconText(i18nc("Menu item", "Update"));
-    tmp_action = add_action("make_svn_revupdate", i18n("Update to revision..."), QKeySequence(), QIcon::fromTheme("kdesvnupdate"), m_Data->m_Model->svnWrapper(), SLOT(slotUpdateTo()));
-    tmp_action = add_action("make_svn_commit", i18n("Commit"), QKeySequence("CTRL+#"), QIcon::fromTheme("kdesvncommit"), this, SLOT(slotCommit()));
+    tmp_action = add_action("make_svn_revupdate", i18n("Update to revision..."), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnupdate")), m_Data->m_Model->svnWrapper(), SLOT(slotUpdateTo()));
+    tmp_action = add_action("make_svn_commit", i18n("Commit"), QKeySequence("CTRL+#"), QIcon::fromTheme(QStringLiteral("kdesvncommit")), this, SLOT(slotCommit()));
     tmp_action->setIconText(i18n("Commit"));
 
-    tmp_action = add_action("make_svn_basediff", i18n("Diff local changes"), QKeySequence(Qt::CTRL | Qt::Key_D), QIcon::fromTheme("kdesvndiff"), this, SLOT(slotSimpleBaseDiff()));
+    tmp_action = add_action("make_svn_basediff", i18n("Diff local changes"), QKeySequence(Qt::CTRL | Qt::Key_D), QIcon::fromTheme(QStringLiteral("kdesvndiff")), this, SLOT(slotSimpleBaseDiff()));
     tmp_action->setToolTip(i18n("Diff working copy against BASE (last checked out version) - does not require access to repository"));
-    tmp_action = add_action("make_svn_dirbasediff", i18n("Diff local changes"), QKeySequence(), QIcon::fromTheme("kdesvndiff"), this, SLOT(slotDirSimpleBaseDiff()));
+    tmp_action = add_action("make_svn_dirbasediff", i18n("Diff local changes"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvndiff")), this, SLOT(slotDirSimpleBaseDiff()));
     tmp_action->setToolTip(i18n("Diff working copy against BASE (last checked out version) - does not require access to repository"));
 
     tmp_action =
-        add_action("make_svn_headdiff", i18n("Diff against HEAD"), QKeySequence(Qt::CTRL | Qt::Key_H), QIcon::fromTheme("kdesvndiff"), this, SLOT(slotSimpleHeadDiff()));
+        add_action("make_svn_headdiff", i18n("Diff against HEAD"), QKeySequence(Qt::CTRL | Qt::Key_H), QIcon::fromTheme(QStringLiteral("kdesvndiff")), this, SLOT(slotSimpleHeadDiff()));
     tmp_action->setToolTip(i18n("Diff working copy against HEAD (last checked in version)- requires access to repository"));
 
     tmp_action =
-        add_action("make_svn_itemsdiff", i18n("Diff items"), QKeySequence(), QIcon::fromTheme("kdesvndiff"), this, SLOT(slotDiffPathes()));
+        add_action("make_svn_itemsdiff", i18n("Diff items"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvndiff")), this, SLOT(slotDiffPathes()));
     tmp_action->setToolTip(i18n("Diff two items"));
     tmp_action =
-        add_action("make_svn_diritemsdiff", i18n("Diff items"), QKeySequence(), QIcon::fromTheme("kdesvndiff"), this, SLOT(slotDiffPathes()));
+        add_action("make_svn_diritemsdiff", i18n("Diff items"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvndiff")), this, SLOT(slotDiffPathes()));
     tmp_action->setToolTip(i18n("Diff two items"));
 
 
     tmp_action =
-        add_action("make_svn_merge_revisions", i18n("Merge two revisions"), QKeySequence(), QIcon::fromTheme("kdesvnmerge"), this, SLOT(slotMergeRevisions()));
+        add_action("make_svn_merge_revisions", i18n("Merge two revisions"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnmerge")), this, SLOT(slotMergeRevisions()));
     tmp_action->setIconText(i18n("Merge"));
     tmp_action->setToolTip(i18n("Merge two revisions of this entry into itself"));
 
     tmp_action =
-        add_action("make_svn_merge", i18n("Merge..."), QKeySequence(), QIcon::fromTheme("kdesvnmerge"), this, SLOT(slotMerge()));
+        add_action("make_svn_merge", i18n("Merge..."), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnmerge")), this, SLOT(slotMerge()));
     tmp_action->setToolTip(i18n("Merge repository path into current working copy path or current repository path into a target"));
     tmp_action = add_action("openwith", i18n("Open With..."), QKeySequence(), QIcon(), this, SLOT(slotOpenWith()));
 
     /* remote actions only */
     tmp_action =
-        add_action("make_svn_checkout_current", i18n("Checkout current repository path"), QKeySequence(), QIcon::fromTheme("kdesvncheckout"), m_Data->m_Model->svnWrapper(), SLOT(slotCheckoutCurrent()));
+        add_action("make_svn_checkout_current", i18n("Checkout current repository path"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvncheckout")), m_Data->m_Model->svnWrapper(), SLOT(slotCheckoutCurrent()));
     tmp_action->setIconText(i18n("Checkout"));
     tmp_action =
-        add_action("make_svn_export_current", i18n("Export current repository path"), QKeySequence(), QIcon::fromTheme("kdesvnexport"), m_Data->m_Model->svnWrapper(), SLOT(slotExportCurrent()));
+        add_action("make_svn_export_current", i18n("Export current repository path"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnexport")), m_Data->m_Model->svnWrapper(), SLOT(slotExportCurrent()));
     add_action("switch_browse_revision", i18n("Select browse revision"), QKeySequence(), QIcon(), this, SLOT(slotSelectBrowsingRevision()));
 
     /* independe actions */
     tmp_action =
-        add_action("make_svn_checkout", i18n("Checkout a repository"), QKeySequence(), QIcon::fromTheme("kdesvncheckout"), m_Data->m_Model->svnWrapper(), SLOT(slotCheckout()));
+        add_action("make_svn_checkout", i18n("Checkout a repository"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvncheckout")), m_Data->m_Model->svnWrapper(), SLOT(slotCheckout()));
     tmp_action->setIconText(i18n("Checkout"));
-    tmp_action = add_action("make_svn_export", i18n("Export a repository"), QKeySequence(), QIcon::fromTheme("kdesvnexport"), m_Data->m_Model->svnWrapper(), SLOT(slotExport()));
+    tmp_action = add_action("make_svn_export", i18n("Export a repository"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnexport")), m_Data->m_Model->svnWrapper(), SLOT(slotExport()));
     tmp_action->setIconText(i18n("Export"));
-    tmp_action = add_action("make_view_refresh", i18n("Refresh view"), QKeySequence(Qt::Key_F5), QIcon::fromTheme("kdesvnrightreload"), this, SLOT(refreshCurrentTree()));
+    tmp_action = add_action("make_view_refresh", i18n("Refresh view"), QKeySequence(Qt::Key_F5), QIcon::fromTheme(QStringLiteral("kdesvnrightreload")), this, SLOT(refreshCurrentTree()));
     tmp_action->setIconText(i18n("Refresh"));
 
-    add_action("make_revisions_diff", i18n("Diff revisions"), QKeySequence(), QIcon::fromTheme("kdesvndiff"), this, SLOT(slotDiffRevisions()));
+    add_action("make_revisions_diff", i18n("Diff revisions"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvndiff")), this, SLOT(slotDiffRevisions()));
 
     /* folding options */
     tmp_action = add_action("view_unfold_tree", i18n("Unfold File Tree"), QKeySequence(), QIcon(), this, SLOT(slotUnfoldTree()));
@@ -659,8 +659,8 @@ void MainTreeWidget::setupActions()
     tmp_action = add_action("update_log_cache", i18n("Update log cache"), QKeySequence(), QIcon(), this, SLOT(slotUpdateLogCache()));
     tmp_action->setToolTip(i18n("Update the log cache for current repository"));
 
-    tmp_action = add_action("make_dir_commit", i18n("Commit"), QKeySequence(), QIcon::fromTheme("kdesvncommit"), this, SLOT(slotDirCommit()));
-    tmp_action = add_action("make_dir_update", i18n("Update to head"), QKeySequence(), QIcon::fromTheme("kdesvnupdate"), this, SLOT(slotDirUpdate()));
+    tmp_action = add_action("make_dir_commit", i18n("Commit"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvncommit")), this, SLOT(slotDirCommit()));
+    tmp_action = add_action("make_dir_update", i18n("Update to head"), QKeySequence(), QIcon::fromTheme(QStringLiteral("kdesvnupdate")), this, SLOT(slotDirUpdate()));
     tmp_action = add_action("set_rec_property_dir", i18n("Set property recursive"), QKeySequence(), QIcon(), this, SLOT(slotDirRecProperty()));
 
     tmp_action = add_action("show_repository_settings", i18n("Settings for current repository"), QKeySequence(), QIcon(), this, SLOT(slotRepositorySettings()));

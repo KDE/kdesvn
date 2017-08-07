@@ -133,81 +133,81 @@ int CommandExec::exec(const QCommandLineParser *parser)
         m_pCPart->cmd = m_pCPart->cmd.toLower();
     }
     QByteArray slotCmd;
-    if (!QString::compare(m_pCPart->cmd, "log")) {
+    if (!QString::compare(m_pCPart->cmd, QLatin1String("log"))) {
         slotCmd = SLOT(slotCmd_log());
-    } else if (!QString::compare(m_pCPart->cmd, "cat")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("cat"))) {
         slotCmd = SLOT(slotCmd_cat());
         m_pCPart->single_revision = true;
-    } else if (!QString::compare(m_pCPart->cmd, "get")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("get"))) {
         slotCmd = SLOT(slotCmd_get());
         m_pCPart->single_revision = true;
-    } else if (!QString::compare(m_pCPart->cmd, "help")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("help"))) {
         slotCmd = SLOT(slotCmd_help());
-    } else if (!QString::compare(m_pCPart->cmd, "blame") ||
-               !QString::compare(m_pCPart->cmd, "annotate")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("blame")) ||
+               !QString::compare(m_pCPart->cmd, QLatin1String("annotate"))) {
         slotCmd = SLOT(slotCmd_blame());
-    } else if (!QString::compare(m_pCPart->cmd, "update")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("update"))) {
         slotCmd = SLOT(slotCmd_update());
         m_pCPart->single_revision = true;
-    } else if (!QString::compare(m_pCPart->cmd, "diff")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("diff"))) {
         m_pCPart->start = svn::Revision::WORKING;
         slotCmd = SLOT(slotCmd_diff());
-    } else if (!QString::compare(m_pCPart->cmd, "info")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("info"))) {
         slotCmd = SLOT(slotCmd_info());
         m_pCPart->single_revision = true;
-    } else if (!QString::compare(m_pCPart->cmd, "commit") ||
-               !QString::compare(m_pCPart->cmd, "ci")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("commit")) ||
+               !QString::compare(m_pCPart->cmd, QLatin1String("ci"))) {
         slotCmd = SLOT(slotCmd_commit());
-    } else if (!QString::compare(m_pCPart->cmd, "list") ||
-               !QString::compare(m_pCPart->cmd, "ls")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("list")) ||
+               !QString::compare(m_pCPart->cmd, QLatin1String("ls"))) {
         slotCmd = SLOT(slotCmd_list());
-    } else if (!QString::compare(m_pCPart->cmd, "copy") ||
-               !QString::compare(m_pCPart->cmd, "cp")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("copy")) ||
+               !QString::compare(m_pCPart->cmd, QLatin1String("cp"))) {
         slotCmd = SLOT(slotCmd_copy());
         dont_check_second = true;
-    } else if (!QString::compare(m_pCPart->cmd, "move") ||
-               !QString::compare(m_pCPart->cmd, "rename") ||
-               !QString::compare(m_pCPart->cmd, "mv")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("move")) ||
+               !QString::compare(m_pCPart->cmd, QLatin1String("rename")) ||
+               !QString::compare(m_pCPart->cmd, QLatin1String("mv"))) {
         slotCmd = SLOT(slotCmd_move());
         dont_check_second = true;
-    } else if (!QString::compare(m_pCPart->cmd, "checkout") ||
-               !QString::compare(m_pCPart->cmd, "co")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("checkout")) ||
+               !QString::compare(m_pCPart->cmd, QLatin1String("co"))) {
         slotCmd = SLOT(slotCmd_checkout());
         dont_check_second = true;
-    } else if (!QString::compare(m_pCPart->cmd, "checkoutto") ||
-               !QString::compare(m_pCPart->cmd, "coto")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("checkoutto")) ||
+               !QString::compare(m_pCPart->cmd, QLatin1String("coto"))) {
         slotCmd = SLOT(slotCmd_checkoutto());
         dont_check_second = true;
-    } else if (!QString::compare(m_pCPart->cmd, "export")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("export"))) {
         slotCmd = SLOT(slotCmd_export());
         dont_check_second = true;
-    } else if (!QString::compare(m_pCPart->cmd, "exportto")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("exportto"))) {
         slotCmd = SLOT(slotCmd_exportto());
         dont_check_second = true;
-    } else if (!QString::compare(m_pCPart->cmd, "delete") ||
-               !QString::compare(m_pCPart->cmd, "del") ||
-               !QString::compare(m_pCPart->cmd, "rm") ||
-               !QString::compare(m_pCPart->cmd, "remove")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("delete")) ||
+               !QString::compare(m_pCPart->cmd, QLatin1String("del")) ||
+               !QString::compare(m_pCPart->cmd, QLatin1String("rm")) ||
+               !QString::compare(m_pCPart->cmd, QLatin1String("remove"))) {
         slotCmd = SLOT(slotCmd_delete());
-    } else if (!QString::compare(m_pCPart->cmd, "add")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("add"))) {
         slotCmd = SLOT(slotCmd_add());
         dont_check_all = true;
         path_only = true;
-    } else if (!QString::compare(m_pCPart->cmd, "undo") ||
-               !QString::compare(m_pCPart->cmd, "revert")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("undo")) ||
+               !QString::compare(m_pCPart->cmd, QLatin1String("revert"))) {
         slotCmd = SLOT(slotCmd_revert());
-    } else if (!QString::compare(m_pCPart->cmd, "checknew") ||
-               !QString::compare(m_pCPart->cmd, "addnew")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("checknew")) ||
+               !QString::compare(m_pCPart->cmd, QLatin1String("addnew"))) {
         slotCmd = SLOT(slotCmd_addnew());
-    } else if (!QString::compare(m_pCPart->cmd, "switch")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("switch"))) {
         slotCmd = SLOT(slotCmd_switch());
-    } else if (!QString::compare(m_pCPart->cmd, "tree")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("tree"))) {
         slotCmd = SLOT(slotCmd_tree());
-    } else if (!QString::compare(m_pCPart->cmd, "lock")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("lock"))) {
         slotCmd = SLOT(slotCmd_lock());
         no_revision = true;
         check_force = true;
-    } else if (!QString::compare(m_pCPart->cmd, "unlock")) {
+    } else if (!QString::compare(m_pCPart->cmd, QLatin1String("unlock"))) {
         slotCmd = SLOT(slotCmd_unlock());
         no_revision = true;
         check_force = true;

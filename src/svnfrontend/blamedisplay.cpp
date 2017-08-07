@@ -191,7 +191,7 @@ BlameDisplay::BlameDisplay(const QString &what, const svn::AnnotatedFile &blame,
     m_ui->setupUi(this);
     m_Data->m_cb = cb;
 
-    m_Data->m_pbShowLog = new QPushButton(QIcon::fromTheme("kdesvnlog"), i18n("Log message for revision"), this);
+    m_Data->m_pbShowLog = new QPushButton(QIcon::fromTheme(QStringLiteral("kdesvnlog")), i18n("Log message for revision"), this);
     connect(m_Data->m_pbShowLog, SIGNAL(clicked(bool)),
             this, SLOT(slotShowCurrentCommit()));
     m_ui->buttonBox->addButton(m_Data->m_pbShowLog, QDialogButtonBox::ActionRole);
@@ -203,7 +203,7 @@ BlameDisplay::BlameDisplay(const QString &what, const svn::AnnotatedFile &blame,
 
     connect(m_ui->buttonBox, SIGNAL(rejected()), this, SLOT(accept()));
 
-    QAction *ac = new QAction(QIcon::fromTheme("kdesvnlog"), i18n("Log message for revision"), this);
+    QAction *ac = new QAction(QIcon::fromTheme(QStringLiteral("kdesvnlog")), i18n("Log message for revision"), this);
     connect(ac, SIGNAL(triggered()), this, SLOT(slotShowCurrentCommit()));
     m_ui->m_BlameTree->addAction(ac);
 

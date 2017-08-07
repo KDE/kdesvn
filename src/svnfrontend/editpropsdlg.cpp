@@ -34,7 +34,7 @@ EditPropsDlg::EditPropsDlg(bool bAddMode, QWidget *parent)
     connect(m_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(m_ui->buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
     connect(m_ui->helpButton, SIGNAL(clicked(bool)), this, SLOT(showHelp()));
-    m_ui->helpButton->setIcon(QIcon::fromTheme("help-hint"));
+    m_ui->helpButton->setIcon(QIcon::fromTheme(QStringLiteral("help-hint")));
 
 
     /// @TODO Read these values from a text or config file

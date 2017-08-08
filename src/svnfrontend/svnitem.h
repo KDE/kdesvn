@@ -77,7 +77,7 @@ public:
 
     virtual SvnItemModelNode *sItem()
     {
-        return 0;
+        return nullptr;
     }
     virtual void setStat(const svn::StatusPtr &);
     virtual const svn::StatusPtr &stat()const;

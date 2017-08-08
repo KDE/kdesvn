@@ -28,11 +28,6 @@ SvnItemModelNode::SvnItemModelNode(SvnItemModelNodeDir *aParentNode, SvnActions 
 {
 }
 
-SvnItemModelNode::~SvnItemModelNode()
-{
-    _parentNode = 0;
-}
-
 int SvnItemModelNode::rowNumber()const
 {
     if (!_parentNode) {

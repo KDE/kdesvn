@@ -28,10 +28,6 @@ SvnDirSortFilterProxy::SvnDirSortFilterProxy(QObject *parent)
     setShowFilter(svnmodel::Dir);
 }
 
-SvnDirSortFilterProxy::~SvnDirSortFilterProxy()
-{
-}
-
 int SvnDirSortFilterProxy::columnCount(const QModelIndex &parent)const
 {
     Q_UNUSED(parent);

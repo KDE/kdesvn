@@ -29,11 +29,9 @@ class SvnSortFilterProxy: public QSortFilterProxyModel
     Q_OBJECT
 public:
     explicit SvnSortFilterProxy(QObject *parent = 0);
-    virtual ~SvnSortFilterProxy();
 
-    virtual bool hasChildren(const QModelIndex &parent = QModelIndex()) const;
-    virtual void setSourceSvnModel(SvnItemModel *sourceModel);
-    virtual void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
+    bool hasChildren(const QModelIndex &parent = QModelIndex()) const override;
+    void setSourceSvnModel(SvnItemModel *sourceModel);
 
     enum ShowType {
         None = 0x0,
@@ -51,11 +49,10 @@ public:
     }
 
 protected:
-    virtual bool lessThan(const QModelIndex &left, const QModelIndex &right)const;
-    virtual bool filterAcceptsRow(int source_row, const QModelIndex &source_parent)const;
+    bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
 
     SvnItemModel *m_sourceModel;
-    Qt::SortOrder m_order;
     svnmodel::ItemTypeFlag m_ShowFilter;
 };
 

@@ -24,18 +24,8 @@
 #include "settings/kdesvnsettings.h"
 
 SvnSortFilterProxy::SvnSortFilterProxy(QObject *parent)
-    : QSortFilterProxyModel(parent), m_sourceModel(0), m_order(Qt::AscendingOrder), m_ShowFilter(svnmodel::All)
+    : QSortFilterProxyModel(parent), m_sourceModel(0), m_ShowFilter(svnmodel::All)
 {
-}
-
-SvnSortFilterProxy::~SvnSortFilterProxy()
-{
-}
-
-void SvnSortFilterProxy::sort(int column, Qt::SortOrder order)
-{
-    m_order = order;
-    QSortFilterProxyModel::sort(column, order);
 }
 
 bool SvnSortFilterProxy::hasChildren(const QModelIndex &parent)const
@@ -77,7 +67,7 @@ bool SvnSortFilterProxy::lessThan(const QModelIndex &left, const QModelIndex &ri
         return QSortFilterProxyModel::lessThan(left, right);
     }
     // we want folders always @first
-    if (m_order == Qt::AscendingOrder) {
+    if (sortOrder() == Qt::AscendingOrder) {
         return n1->sortChar() < n2->sortChar();
     } else {
         return n1->sortChar() > n2->sortChar();

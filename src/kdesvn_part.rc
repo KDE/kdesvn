@@ -152,6 +152,7 @@
  <Menu name="local_context_single_unversioned" >
      <text>Actions</text>
      <Action name="make_svn_add"/>
+     <Action name="make_svn_addrec" />
      <Action name="make_svn_ignore"/>
      <Action name="make_svn_remove" />
      <Separator/>
@@ -164,6 +165,9 @@
      <Action name="make_svn_basediff" />
      <Action name="make_svn_headdiff" />
      <Action name="make_svn_itemsdiff" />
+     <Action name="make_svn_add"/>
+     <Action name="make_svn_addrec" />
+     <Action name="make_svn_remove" />
      <Separator/>
      <Action name="make_view_refresh" />
  </Menu>

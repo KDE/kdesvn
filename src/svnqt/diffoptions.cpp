@@ -32,44 +32,26 @@
 
 namespace svn
 {
-struct DiffOptionsData {
-    DiffOptions::IgnoreSpace _ignorespace;
-    bool _ignoreeol;
-    bool _showc;
-
-    DiffOptionsData()
-    {
-        _ignorespace = DiffOptions::IgnoreSpaceNone;
-        _ignoreeol = _showc = false;
-    }
-};
-
-DiffOptions::DiffOptions()
-{
-    m_data = new DiffOptionsData;
-}
-
 void DiffOptions::init(const svn_diff_file_options_t *_diffopts)
 {
-    m_data->_ignoreeol = _diffopts->ignore_eol_style;
-    m_data->_showc = _diffopts->show_c_function;
+    _ignoreeol = _diffopts->ignore_eol_style;
+    _showc = _diffopts->show_c_function;
     switch (_diffopts->ignore_space) {
     case svn_diff_file_ignore_space_change:
-        m_data->_ignorespace = IgnoreSpaceChange;
+        _ignorespace = IgnoreSpaceChange;
         break;
     case svn_diff_file_ignore_space_all:
-        m_data->_ignorespace = IgnoreSpaceAll;
+        _ignorespace = IgnoreSpaceAll;
         break;
     case svn_diff_file_ignore_space_none:
     default:
-        m_data->_ignorespace = IgnoreSpaceNone;
+        _ignorespace = IgnoreSpaceNone;
         break;
     }
 }
 
 DiffOptions::DiffOptions(const QStringList &options)
 {
-    m_data = new DiffOptionsData;
     Pool pool;
     StringArray _ar(options);
     svn_diff_file_options_t *_diffopts =  svn_diff_file_options_create(pool);
@@ -83,7 +65,6 @@ DiffOptions::DiffOptions(const QStringList &options)
 
 DiffOptions::DiffOptions(const svn_diff_file_options_t *options)
 {
-    m_data = new DiffOptionsData;
     if (options) {
         init(options);
     }
@@ -92,9 +73,9 @@ DiffOptions::DiffOptions(const svn_diff_file_options_t *options)
 svn_diff_file_options_t *DiffOptions::options(const Pool &pool)const
 {
     svn_diff_file_options_t *_diffopts =  svn_diff_file_options_create(pool);
-    _diffopts->ignore_eol_style = m_data->_ignoreeol;
-    _diffopts->show_c_function = m_data->_showc;
-    switch (m_data->_ignorespace) {
+    _diffopts->ignore_eol_style = _ignoreeol;
+    _diffopts->show_c_function = _showc;
+    switch (_ignorespace) {
     case IgnoreSpaceChange:
         _diffopts->ignore_space = svn_diff_file_ignore_space_change;
         break;
@@ -109,17 +90,4 @@ svn_diff_file_options_t *DiffOptions::options(const Pool &pool)const
     return _diffopts;
 }
 
-DiffOptions::DiffOptions(const DiffOptions &old)
-{
-    m_data = new DiffOptionsData;
-    m_data->_showc = old.m_data->_showc;
-    m_data->_ignorespace = old.m_data->_ignorespace;
-    m_data->_ignoreeol = old.m_data->_ignoreeol;
-}
-
-DiffOptions::~DiffOptions()
-{
-    delete m_data;
-    m_data = 0;
-}
 }

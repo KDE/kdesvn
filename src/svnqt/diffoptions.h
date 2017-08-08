@@ -33,7 +33,6 @@ class QStringList;
 namespace svn
 {
 class Pool;
-struct DiffOptionsData;
 /** c++ wrapper for svn_diffoptions_t
  *
  * This is needed until svnqt stops support for subversion prior 1.4
@@ -47,11 +46,14 @@ public:
         IgnoreSpaceAll
     };
 protected:
-    DiffOptionsData *m_data;
+    DiffOptions::IgnoreSpace _ignorespace = DiffOptions::IgnoreSpaceNone;
+    bool _ignoreeol = false;
+    bool _showc = false;
+
     void init(const svn_diff_file_options_t *options);
 
 public:
-    DiffOptions();
+    DiffOptions() = default;
     /** Initialize options with values depending on options.
      * Supported types are:
      * - --ignore-space-change, -b
@@ -66,12 +68,6 @@ public:
      * Only if build against subversion 1.4 or newer.
      */
     explicit DiffOptions(const svn_diff_file_options_t *options);
-
-    /** copy operator
-     */
-    DiffOptions(const DiffOptions &old);
-
-    ~DiffOptions();
 
     svn_diff_file_options_t *options(const Pool &pool)const;
 };

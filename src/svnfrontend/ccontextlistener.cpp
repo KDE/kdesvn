@@ -304,7 +304,6 @@ bool CContextListener::contextSslClientCertPwPrompt(QString &password,
     maysave = false;
     emit waitShow(true);
     QString npass;
-    int keep = 1;
     QPointer<KPasswordDialog> dlg(new KPasswordDialog(0));
     dlg->setPrompt(i18n("Enter password for realm %1", realm));
     dlg->setWindowTitle(realm);
@@ -312,14 +311,15 @@ bool CContextListener::contextSslClientCertPwPrompt(QString &password,
     if (res == QDialog::Accepted) {
         npass = dlg->password();
     }
+    bool keepPw = (dlg ? dlg->keepPassword() : false);
     delete dlg;
 
     emit waitShow(false);
     if (res != QDialog::Accepted) {
         return false;
     }
-    maysave = (Kdesvnsettings::passwords_in_wallet() ? false : keep != 0);
-    if (Kdesvnsettings::store_passwords() && keep) {
+    maysave = (Kdesvnsettings::passwords_in_wallet() ? false : keepPw);
+    if (Kdesvnsettings::store_passwords() && keepPw) {
         PwStorage::self()->setCertPw(realm, password);
     }
     password = npass;

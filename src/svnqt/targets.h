@@ -76,18 +76,6 @@ public:
     Targets(const QString &target = QString());    //krazy:exclude=explicit
 
     /**
-     * Copy Constructor
-     *
-     * @param targets Source
-     */
-    Targets(const Targets &other);
-
-    /**
-     * Destructor
-     */
-    virtual ~Targets();
-
-    /**
      * Returns an apr array containing
      * char *.
      *

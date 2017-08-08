@@ -162,9 +162,9 @@ public:
     QFont font() const;
 
     // attribute setters
-    void setField(int f, QString t, QPixmap pm = QPixmap(),
+    void setField(int f, const QString &t, const QPixmap &pm = QPixmap(),
                   Position p = Default, int maxLines = 0);
-    void setText(int f, QString);
+    void setText(int f, const QString &);
     void setPixmap(int f, QPixmap);
     void setPosition(int f, Position);
     void setMaxLines(int f, int);

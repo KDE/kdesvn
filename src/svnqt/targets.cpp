@@ -52,11 +52,6 @@ Targets::Targets(const svn::Paths &targets)
 {
 }
 
-Targets::Targets(const Targets &other)
-    : m_targets(other.targets())
-{
-}
-
 Targets::Targets(const QString &target)
 {
     if (!target.isEmpty()) {
@@ -69,10 +64,6 @@ Targets::Targets(const Path &target)
     if (!target.cstr().isEmpty()) {
         m_targets.push_back(target);
     }
-}
-
-Targets::~Targets()
-{
 }
 
 apr_array_header_t *

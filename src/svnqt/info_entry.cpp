@@ -189,6 +189,7 @@ void svn::InfoEntry::init(const svn_client_info2_t *item, const char *path)
 
 void svn::InfoEntry::init(const svn_client_info2_t *item, const QString &path)
 {
+    m_hasWc = false;
     if (!item) {
         init();
         return;

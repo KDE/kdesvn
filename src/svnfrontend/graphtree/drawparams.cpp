@@ -127,7 +127,7 @@ void StoredDrawParams::ensureField(int f)
     }
 }
 
-void StoredDrawParams::setField(int f, QString t, QPixmap pm,
+void StoredDrawParams::setField(int f, const QString &t, const QPixmap &pm,
                                 Position p, int maxLines)
 {
     if (f < 0 || f >= MAX_FIELD) {
@@ -141,7 +141,7 @@ void StoredDrawParams::setField(int f, QString t, QPixmap pm,
     _field[f].maxLines = maxLines;
 }
 
-void StoredDrawParams::setText(int f, QString t)
+void StoredDrawParams::setText(int f, const QString &t)
 {
     if (f < 0 || f >= MAX_FIELD) {
         return;

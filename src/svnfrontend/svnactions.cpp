@@ -108,7 +108,7 @@ public:
         delete m_SvnContextListener;
     }
 
-    bool isExternalDiff() const
+    static bool isExternalDiff()
     {
         if (Kdesvnsettings::use_external_diff()) {
             const QString edisp = Kdesvnsettings::external_diff_display();

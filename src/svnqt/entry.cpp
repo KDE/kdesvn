@@ -40,8 +40,6 @@ protected:
     void init_clean();
 public:
     Entry_private();
-    Entry_private(const Entry_private &src);
-    virtual ~Entry_private();
 
     bool m_valid;
     LockEntry m_Lock;
@@ -73,7 +71,7 @@ void Entry_private::init_clean()
     _repos.clear();
     _uuid.clear();
     _cmt_author.clear();
-    _revision = _cmt_rev = -1;
+    _revision = _cmt_rev = SVN_INVALID_REVNUM;
     _kind = svn_node_unknown;
     _cmt_date = DateTime();
     _copied = false;
@@ -83,17 +81,6 @@ Entry_private::Entry_private()
     : m_valid(false), m_Lock()
 {
     init_clean();
-}
-
-Entry_private::Entry_private(const Entry_private &src)
-    : m_valid(false), m_Lock()
-{
-    init_clean();
-    init(src);
-}
-
-Entry_private::~Entry_private()
-{
 }
 
 void
@@ -138,7 +125,7 @@ Entry_private::init(const Entry_private &src)
 
 void Entry_private::init(const QString &url, const DirEntry &dirEntry)
 {
-    init(0);
+    init_clean();
     _url = QUrl(url);
     if (!dirEntry.isEmpty()) {
         _name = dirEntry.name();

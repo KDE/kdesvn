@@ -43,7 +43,6 @@ namespace svn
 {
 
 struct Exception::Data {
-private:
 public:
     QString message;
     apr_status_t apr_err;
@@ -55,11 +54,6 @@ public:
 
     Data(const QString &msg)
         : message(msg), apr_err(0)
-    {
-    }
-
-    Data(const Data &other)
-        : message(other.message), apr_err(other.apr_err)
     {
     }
 };

@@ -711,6 +711,7 @@ void MainTreeWidget::enableActions()
     bool at_least_one_conflicted = false;
     bool at_least_one_local_added = false;
     bool all_unversioned = true;
+    bool all_versioned = true;
     for(int i = 0; i < fileList.size(); ++i) {
       const SvnItem *item = fileList.at(i);
       if (!item) {
@@ -729,12 +730,15 @@ void MainTreeWidget::enableActions()
       if (item->isRealVersioned()) {
           all_unversioned = false;
       }
+      else {
+          all_versioned = false;
+      }
     }
 
     //qDebug("single: %d, multi: %d, none: %d, single_dir: %d, unique: %d, remove_enabled: %d, conflicted: %d, changed: %d, added: %d",
     //       single, multi, none, single_dir, unique, remote_enabled, conflicted, si && si->isChanged(), si && si->isLocalAdded());
-    //qDebug("at_least_one_changed: %d, at_least_one_conflicted: %d, at_least_one_local_added: %d, all_unversioned: %d",
-    //       at_least_one_changed, at_least_one_conflicted, at_least_one_local_added, all_unversioned);
+    //qDebug("at_least_one_changed: %d, at_least_one_conflicted: %d, at_least_one_local_added: %d, all_unversioned: %d, all_versioned: %d",
+    //       at_least_one_changed, at_least_one_conflicted, at_least_one_local_added, all_unversioned, all_versioned);
 
     /* local and remote actions */
     /* 1. actions on dirs AND files */
@@ -785,7 +789,7 @@ void MainTreeWidget::enableActions()
     enableAction(QStringLiteral("make_svn_info"), isopen);
     enableAction(QStringLiteral("make_svn_merge_revisions"), (single || dirList.size() == 1) && isWorkingCopy());
     enableAction(QStringLiteral("make_svn_merge"), single || dirList.size() == 1 || none);
-    enableAction(QStringLiteral("make_svn_addrec"), (multi || single || dirList.size() > 0) && isWorkingCopy());
+    enableAction(QStringLiteral("make_svn_addrec"), (multi || single || dirList.size() > 0) && isWorkingCopy() && all_unversioned);
     enableAction(QStringLiteral("make_svn_headupdate"), isWorkingCopy() && isopen && remote_enabled);
     enableAction(QStringLiteral("make_dir_update"), isWorkingCopy() && isopen && remote_enabled);
 
@@ -798,8 +802,8 @@ void MainTreeWidget::enableActions()
     enableAction(QStringLiteral("make_svn_headdiff"), isWorkingCopy() && (single || none) && remote_enabled);
 
     /// @todo check if all items have same type
-    enableAction(QStringLiteral("make_svn_itemsdiff"), multi && fileList.size() == 2 && unique && remote_enabled);
-    enableAction(QStringLiteral("make_svn_diritemsdiff"), dirList.size() == 2 && isopen && remote_enabled);
+    enableAction(QStringLiteral("make_svn_itemsdiff"), multi && fileList.size() == 2 && unique && remote_enabled && all_versioned);
+    enableAction(QStringLiteral("make_svn_diritemsdiff"), dirList.size() == 2 && isopen && remote_enabled && all_versioned);
 
     /* 2. on dirs only */
     enableAction(QStringLiteral("make_cleanup"), isWorkingCopy() && (single_dir || none));

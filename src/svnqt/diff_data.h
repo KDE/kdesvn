@@ -61,7 +61,6 @@ protected:
     bool m_working_copy_present, m_url_is_present;
 
     void init();
-    void clean();
     void close();
 
 public:

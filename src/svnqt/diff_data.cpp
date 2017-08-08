@@ -99,24 +99,24 @@ void DiffData::init()
 
 DiffData::~DiffData()
 {
-    clean();
-}
-
-void DiffData::clean()
-{
     close();
 }
 
 void DiffData::close()
 {
-#if SVN_API_VERSION < SVN_VERSION_CHECK(1,8,0)
-    if (m_outFile != 0) {
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+    delete m_outStream;
+    m_outStream = nullptr;
+    delete m_errStream;
+    m_errStream = nullptr;
+#else
+    if (m_outFile) {
         svn_io_file_close(m_outFile, m_Pool);
-        m_outFile = 0;
+        m_outFile = nullptr;
     }
-    if (m_errFile != 0) {
+    if (m_errFile) {
         svn_io_file_close(m_errFile, m_Pool);
-        m_errFile = 0;
+        m_errFile = nullptr;
     }
 #endif
 }
@@ -132,7 +132,7 @@ QByteArray DiffData::content()
     close();
     QFile fi(QString::fromUtf8(m_outFileName));
     if (!fi.open(QIODevice::ReadOnly)) {
-        throw ClientException(QString(QLatin1String("%1 '%2'")).arg(fi.errorString(), fi.fileName()));
+        throw ClientException(QStringLiteral("%1 '%2'").arg(fi.errorString(), fi.fileName()));
     }
 
     QByteArray res = fi.readAll();

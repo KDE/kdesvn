@@ -66,7 +66,7 @@ LogEntry::LogEntry(svn_log_entry_t *log_entry, const StringArray &excludeList)
     }
     date = apr_time;
     revision = log_entry->revision;
-    if (log_entry->changed_paths) {
+    if (log_entry->changed_paths2) {
         bool blocked = false;
         for (apr_hash_index_t *hi = apr_hash_first(pool, log_entry->changed_paths2);
                 hi != NULL;

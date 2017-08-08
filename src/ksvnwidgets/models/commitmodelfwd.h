@@ -27,7 +27,6 @@
 class CommitActionEntry;
 class CommitModelNode;
 
-typedef QSharedPointer<CommitActionEntry> CommitActionEntryPtr;
 typedef QSharedPointer<CommitModelNode> CommitModelNodePtr;
 
 typedef QVector<CommitActionEntry> CommitActionEntries;

@@ -22,40 +22,6 @@
 
 #include <KLocalizedString>
 
-CommitActionEntry::CommitActionEntry(const QString &name, const QString &actiondesc, ACTION_TYPE kind)
-    : _name(name), _actionDesc(actiondesc), _kind(kind)
-{
-}
-
-CommitActionEntry::CommitActionEntry()
-    : _name(), _actionDesc(), _kind(COMMIT)
-{
-}
-
-CommitActionEntry::CommitActionEntry(const CommitActionEntry &src)
-    : _name(src._name), _actionDesc(src._actionDesc), _kind(src._kind)
-{
-}
-
-CommitActionEntry::~CommitActionEntry()
-{
-}
-
-const QString &CommitActionEntry::action()const
-{
-    return _actionDesc;
-}
-
-const QString &CommitActionEntry::name()const
-{
-    return _name;
-}
-
-CommitActionEntry::ACTION_TYPE CommitActionEntry::type()const
-{
-    return _kind;
-}
-
 CommitModelNode::CommitModelNode(const svn::CommitItem &aItem)
     : m_Content(), m_Checkable(false), m_Checked(false)
 {

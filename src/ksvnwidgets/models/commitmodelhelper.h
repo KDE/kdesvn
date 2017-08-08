@@ -39,21 +39,19 @@ public:
     Q_FLAGS(ACTION_TYPE)
     Q_DECLARE_FLAGS(ActionTypes, ACTION_TYPE)
 
-    explicit CommitActionEntry(const QString &, const QString &, ACTION_TYPE kind = COMMIT);
-    explicit CommitActionEntry(const CommitActionEntry &);
-    CommitActionEntry();
+    CommitActionEntry() = default;
+    CommitActionEntry(const QString &name, const QString &actiondesc, ACTION_TYPE kind = COMMIT)
+        : _name(name), _actionDesc(actiondesc), _kind(kind)
+    {}
 
-    ~CommitActionEntry();
-
-    const QString &action()const;
-    const QString &name()const;
-    ACTION_TYPE type()const;
+    QString action() const { return _actionDesc; }
+    QString name() const { return _name; }
+    ACTION_TYPE type() const { return _kind; }
 
 protected:
     QString _name;
     QString _actionDesc;
-    ACTION_TYPE _kind;
-
+    ACTION_TYPE _kind = COMMIT;
 };
 
 class CommitModelNode

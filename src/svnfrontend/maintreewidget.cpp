@@ -879,8 +879,6 @@ void MainTreeWidget::closeMe()
 
 void MainTreeWidget::refreshCurrentTree()
 {
-    QTime t;
-    t.start();
     m_Data->m_Model->refreshCurrentTree();
     if (isWorkingCopy()) {
         m_Data->m_Model->svnWrapper()->createModifiedCache(baseUri());
@@ -895,6 +893,7 @@ void MainTreeWidget::slotSettingsChanged()
 {
     m_Data->m_SortModel->setSortCaseSensitivity(Kdesvnsettings::case_sensitive_sort() ? Qt::CaseSensitive : Qt::CaseInsensitive);
     m_Data->m_SortModel->invalidate();
+    m_Data->m_DirSortModel->invalidate();
     enableActions();
     if (m_Data->m_Model->svnWrapper() && !m_Data->m_Model->svnWrapper()->doNetworking()) {
         m_Data->m_Model->svnWrapper()->stopFillCache();
@@ -2212,7 +2211,7 @@ void MainTreeWidget::slotItemsInserted(const QModelIndex &)
 
 void MainTreeWidget::slotDirSelectionChanged(const QItemSelection &_item, const QItemSelection &)
 {
-    QModelIndexList _indexes = _item.indexes();
+    const QModelIndexList _indexes = _item.indexes();
     switch (DirselectionCount()) {
     case 1:
         m_DirTreeView->setStatusTip(i18n("Hold Ctrl key while click on selected item for unselect"));
@@ -2228,19 +2227,17 @@ void MainTreeWidget::slotDirSelectionChanged(const QItemSelection &_item, const 
         break;
     }
     if (_indexes.size() >= 1) {
-        QModelIndex ind = _indexes[0];
-        QModelIndex _t = m_Data->srcDirInd(ind);
+        const QModelIndex _t = m_Data->srcDirInd(_indexes.at(0));
         if (m_Data->m_Model->canFetchMore(_t)) {
             WidgetBlockStack st(m_TreeView);
             WidgetBlockStack st2(m_DirTreeView);
             m_Data->m_Model->fetchMore(_t);
         }
-        _t = m_Data->m_SortModel->mapFromSource(_t);
         if (Kdesvnsettings::show_navigation_panel()) {
-            m_TreeView->setRootIndex(_t);
+            m_TreeView->setRootIndex(m_Data->m_SortModel->mapFromSource(_t));
         }
     } else {
-        m_TreeView->setRootIndex(QModelIndex());
+        checkSyncTreeModel();
     }
     if (m_TreeView->selectionModel()->hasSelection()) {
         m_TreeView->selectionModel()->clearSelection();
@@ -2248,6 +2245,21 @@ void MainTreeWidget::slotDirSelectionChanged(const QItemSelection &_item, const 
         enableActions();
     }
     resizeAllColumns();
+}
+
+void MainTreeWidget::checkSyncTreeModel()
+{
+    // make sure that the treeview shows the contents of the selected directory in the directory tree view
+    // it can go out of sync when the dir tree model has no current index - then we use the first entry
+    // or when the filter settings are changed
+    QModelIndex curIdxDir = m_DirTreeView->currentIndex();
+    if (!curIdxDir.isValid() && m_Data->m_DirSortModel->columnCount() > 0)
+    {
+        m_DirTreeView->setCurrentIndex(m_Data->m_DirSortModel->index(0, 0));
+        curIdxDir = m_DirTreeView->currentIndex();
+    }
+    const QModelIndex curIdxBase = m_Data->srcDirInd(curIdxDir);
+    m_TreeView->setRootIndex(m_Data->m_SortModel->mapFromSource(curIdxBase));
 }
 
 void MainTreeWidget::slotCommit()
@@ -2283,8 +2295,15 @@ void MainTreeWidget::slotRescanIcons()
 void MainTreeWidget::checkUseNavigation(bool startup)
 {
     bool use = Kdesvnsettings::show_navigation_panel();
-    if (use) {
-        m_TreeView->collapseAll();
+    if (use)
+    {
+        checkSyncTreeModel();
+    }
+    else
+    {
+        // tree view is the only visible view, make sure to display all
+        m_TreeView->setRootIndex(QModelIndex());
+        m_TreeView->expand(QModelIndex());
     }
     m_TreeView->setExpandsOnDoubleClick(!use);
     m_TreeView->setRootIsDecorated(!use);
@@ -2297,14 +2316,12 @@ void MainTreeWidget::checkUseNavigation(bool startup)
                 si[0] = 200;
                 m_ViewSplitter->setSizes(si);
             }
-            m_DirTreeView->selectionModel()->clearSelection();
         }
     } else {
         si << 0 << 300;
         m_ViewSplitter->setSizes(si);
 
     }
-    m_TreeView->setRootIndex(QModelIndex());
 }
 
 void MainTreeWidget::slotRepositorySettings()

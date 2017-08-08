@@ -143,7 +143,8 @@ protected Q_SLOTS:
     void slotDirUpdate();
     void slotDirRecProperty();
 
-    void slotDirSelectionChanged(const QItemSelection &, const QItemSelection &);
+    void slotDirSelectionChanged(const QItemSelection &_item, const QItemSelection &);
+    void checkSyncTreeModel();
 
     void _openUrl(const QUrl &);
     void enableActions();

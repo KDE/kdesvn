@@ -710,6 +710,7 @@ void MainTreeWidget::enableActions()
     bool at_least_one_changed = false;
     bool at_least_one_conflicted = false;
     bool at_least_one_local_added = false;
+    bool all_unversioned = true;
     for(int i = 0; i < fileList.size(); ++i) {
       const SvnItem *item = fileList.at(i);
       if (!item) {
@@ -725,12 +726,15 @@ void MainTreeWidget::enableActions()
       if (item->isLocalAdded()) {
           at_least_one_local_added = true;
       }
+      if (item->isRealVersioned()) {
+          all_unversioned = false;
+      }
     }
 
     //qDebug("single: %d, multi: %d, none: %d, single_dir: %d, unique: %d, remove_enabled: %d, conflicted: %d, changed: %d, added: %d",
     //       single, multi, none, single_dir, unique, remote_enabled, conflicted, si && si->isChanged(), si && si->isLocalAdded());
-    //qDebug("at_least_one_changed: %d, at_least_one_conflicted: %d, at_least_one_local_added: %d",
-    //       at_least_one_changed, at_least_one_conflicted, at_least_one_local_added);
+    //qDebug("at_least_one_changed: %d, at_least_one_conflicted: %d, at_least_one_local_added: %d, all_unversioned: %d",
+    //       at_least_one_changed, at_least_one_conflicted, at_least_one_local_added, all_unversioned);
 
     /* local and remote actions */
     /* 1. actions on dirs AND files */
@@ -773,7 +777,7 @@ void MainTreeWidget::enableActions()
 
     /* local only actions */
     /* 1. actions on files AND dirs*/
-    enableAction(QStringLiteral("make_svn_add"), (multi || single) && isWorkingCopy());
+    enableAction(QStringLiteral("make_svn_add"), (multi || single) && isWorkingCopy() && all_unversioned);
     enableAction(QStringLiteral("make_svn_revert"), (multi || single) && isWorkingCopy() && (at_least_one_changed || at_least_one_conflicted || at_least_one_local_added));
     enableAction(QStringLiteral("make_resolved"), (multi || single) && isWorkingCopy());
     enableAction(QStringLiteral("make_try_resolve"), conflicted && !single_dir);

@@ -61,11 +61,6 @@ Path::Path(const QUrl &path)
     init(path.toString());
 }
 
-Path::Path(const Path &path)
-    : m_path(path.m_path)
-{
-}
-
 void
 Path::init(const QString &path)
 {
@@ -119,7 +114,7 @@ Path::operator=(const Path &path)
 }
 
 bool
-Path::isset() const
+Path::isSet() const
 {
     return !m_path.isEmpty();
 }

@@ -65,13 +65,6 @@ public:
     Path(const QString &path = QString());    //krazy:exclude=explicit
     Path(const QUrl &url);    //krazy:exclude=explicit
 
-    /**
-     * Copy constructor
-     *
-     * @param path Path to be copied
-     */
-    Path(const Path &path);
-
     ~Path() = default;
 
     /**
@@ -97,7 +90,7 @@ public:
      *
      * @return true if there is a path set
      */
-    bool isset() const;
+    bool isSet() const;
 
     /**
      * adds a new URL component to the path

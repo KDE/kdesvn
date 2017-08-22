@@ -2165,7 +2165,7 @@ void SvnActions::slotMerge(const QString &src1, const QString &src2, const QStri
     .dry_run(dry).record_only(recordOnly).reintegrate(reintegrate).allow_mixed_rev(allow_mixed_rev)
     .localPath(svn::Path(target)).merge_options(svn::StringArray());
 
-    if (!reintegrate && (!p2.isset() || src1 == src2)) {
+    if (!reintegrate && (!p2.isSet() || src1 == src2)) {
         // pegged merge
         pegged_merge = true;
         if (peg == svn::Revision::UNDEFINED) {

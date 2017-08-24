@@ -127,7 +127,7 @@ QUrl &SvnItem_p::kdeName(const svn::Revision &r)
             m_kdename.setScheme(proto);
             QString revstr = lRev.toString();
             if (!revstr.isEmpty()) {
-                m_kdename.setQuery(QStringLiteral("?rev=") + revstr);
+                m_kdename.setQuery(QStringLiteral("rev=") + revstr);
             }
         } else {
             // Working copy path() is local file

@@ -559,6 +559,7 @@ QUrl kio_svnProtocol::makeSvnUrl(const QUrl &url, bool check_Wc) const
     }
     QUrl tmpUrl(url);
     tmpUrl.setScheme(scheme);
+    tmpUrl.setQuery(QString()); // svn doesn't know anything about queries (e.g ?rev=X)
 
     if (url.path().isEmpty()) {
         throw svn::ClientException(QLatin1Char('\'') + url.url() + QLatin1String("' is not a valid subversion url"));

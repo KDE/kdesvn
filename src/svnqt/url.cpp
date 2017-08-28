@@ -44,13 +44,18 @@ namespace svn
 {
 
 Url::Url(const QUrl &url)
+    : m_url(url.toString(QUrl::RemoveQuery|QUrl::NormalizePathSegments))
+{
+}
+
+Url::Url(const svn::Path &url)
     : m_url(url)
 {
 }
 
 QByteArray Url::cstr() const
 {
-    return m_url.toEncoded(QUrl::FullyEncoded|QUrl::NormalizePathSegments);
+    return m_url.cstr();
 }
 
 /* static helpers */

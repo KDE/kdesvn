@@ -32,6 +32,7 @@
 namespace svn
 {
 class DirEntry;
+class Path;
 }
 
 namespace KIO
@@ -115,8 +116,8 @@ protected:
 private:
     KioSvnData *m_pData;
     static bool createUDSEntry(const QString &filename, const QString &user, long long int size, bool isdir, time_t mtime, KIO::UDSEntry &entry);
-    QUrl makeSvnUrl(const QUrl &url, bool check_wc = true) const;
-    bool checkWc(const QUrl &url) const;
+    svn::Path makeSvnPath(const QUrl &url) const;
+    bool checkWc(const svn::Path &localPath) const;
     bool getLogMsg(QString &);
 
     void registerToDaemon();

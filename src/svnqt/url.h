@@ -35,18 +35,20 @@
 #include <svnqt/svnqt_defines.h>
 
 #include <QUrl>
+#include "path.h"
 
 namespace svn
 {
 class SVNQT_EXPORT Url
 {
 private:
-    QUrl m_url;
+    svn::Path m_url;
 public:
     /** Constructor */
     Url() = default;
     Url(const Url &) = default;
     explicit Url(const QUrl &url);
+    explicit Url(const svn::Path &url);
 
     /** Destructor */
     ~Url() = default;

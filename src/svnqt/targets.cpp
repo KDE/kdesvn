@@ -44,6 +44,7 @@
 #include "svnqt_defines.h"
 
 #include <QStringList>
+#include <QUrl>
 
 namespace svn
 {

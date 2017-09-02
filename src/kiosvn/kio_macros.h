@@ -21,7 +21,7 @@
 #ifndef KIO_MACROS_H
 #define KIO_MACROS_H
 
-#define CON_DBUS_BASE OrgKdeKdesvndInterface kdesvndInterface(QStringLiteral("org.kde.kded"), QStringLiteral("/modules/kdesvnd"), QDBusConnection::sessionBus() );\
+#define CON_DBUS_BASE OrgKdeKdesvndInterface kdesvndInterface(QStringLiteral("org.kde.kdesvnd"), QStringLiteral("/modules/kdesvnd"), QDBusConnection::sessionBus() );\
     if(!kdesvndInterface.isValid()) {\
         qWarning() << "Communication with KDED:KdeSvnd failed";
 

@@ -2227,8 +2227,10 @@ bool SvnActions::makeMove(const QList<QUrl> &Old, const QString &New)
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18n("Move"), i18n("Moving entries"));
         connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
-        const svn::Targets t(svn::Targets::fromUrlList(Old));
-        m_Data->m_Svnclient->move(svn::CopyParameter(t, svn::Path(New)).asChild(true).makeParent(false));
+        const svn::Path pNew(New);
+        // either both are local paths -> move in wc, or both are urls -> move in repository
+        const svn::Targets t(svn::Targets::fromUrlList(Old, pNew.isUrl() ? svn::Targets::UrlConversion::KeepUrl : svn::Targets::UrlConversion::PreferLocalPath));
+        m_Data->m_Svnclient->move(svn::CopyParameter(t, pNew).asChild(true).makeParent(false));
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
         return false;
@@ -2256,13 +2258,14 @@ bool SvnActions::makeCopy(const QString &Old, const QString &New, const svn::Rev
 
 bool SvnActions::makeCopy(const QList<QUrl> &Old, const QString &New, const svn::Revision &rev)
 {
-    const svn::Targets t(svn::Targets::fromUrlList(Old));
-
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18n("Copy / Move"), i18n("Copy or Moving entries"));
         connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
-        m_Data->m_Svnclient->copy(svn::CopyParameter(t, svn::Path(New)).srcRevision(rev).pegRevision(rev).asChild(true));
+        const svn::Path pNew(New);
+        // either both are local paths -> copy in wc, or both are urls -> copy in repository
+        const svn::Targets t(svn::Targets::fromUrlList(Old, pNew.isUrl() ? svn::Targets::UrlConversion::KeepUrl : svn::Targets::UrlConversion::PreferLocalPath));
+        m_Data->m_Svnclient->copy(svn::CopyParameter(t, pNew).srcRevision(rev).pegRevision(rev).asChild(true));
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
         return false;

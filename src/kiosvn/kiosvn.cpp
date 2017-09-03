@@ -316,7 +316,7 @@ void kio_svnProtocol::mkdir(const QUrl &url, int)
 void kio_svnProtocol::mkdir(const QList<QUrl> &urls, int)
 {
     try {
-        m_pData->m_Svnclient->mkdir(svn::Targets::fromUrlList(urls), getDefaultLog());
+        m_pData->m_Svnclient->mkdir(svn::Targets::fromUrlList(urls, svn::Targets::UrlConversion::PreferLocalPath), getDefaultLog());
     } catch (const svn::ClientException &e) {
         extraError(KIO::ERR_SLAVE_DEFINED, e.msg());
         return;
@@ -808,7 +808,7 @@ void kio_svnProtocol::commit(const QList<QUrl> &urls)
     msg = lt[0];
     svn::Revision nnum = svn::Revision::UNDEFINED;
     svn::CommitParameter commit_parameters;
-    commit_parameters.targets(svn::Targets::fromUrlList(urls)).message(msg).depth(svn::DepthInfinity).keepLocks(false);
+    commit_parameters.targets(svn::Targets::fromUrlList(urls, svn::Targets::UrlConversion::PreferLocalPath)).message(msg).depth(svn::DepthInfinity).keepLocks(false);
 
     try {
         nnum = m_pData->m_Svnclient->commit(commit_parameters);
@@ -898,7 +898,7 @@ void kio_svnProtocol::svnlog(int revstart, const QString &revstringstart, int re
 void kio_svnProtocol::revert(const QList<QUrl> &urls)
 {
     try {
-        m_pData->m_Svnclient->revert(svn::Targets::fromUrlList(urls), svn::DepthEmpty);
+        m_pData->m_Svnclient->revert(svn::Targets::fromUrlList(urls, svn::Targets::UrlConversion::PreferLocalPath), svn::DepthEmpty);
     } catch (const svn::ClientException &e) {
         extraError(KIO::ERR_SLAVE_DEFINED, e.msg());
     }
@@ -979,7 +979,7 @@ void kio_svnProtocol::add(const QUrl &wc)
 void kio_svnProtocol::wc_delete(const QList<QUrl> &urls)
 {
     try {
-        m_pData->m_Svnclient->remove(svn::Targets::fromUrlList(urls), false);
+        m_pData->m_Svnclient->remove(svn::Targets::fromUrlList(urls, svn::Targets::UrlConversion::PreferLocalPath), false);
     } catch (const svn::ClientException &e) {
         extraError(KIO::ERR_SLAVE_DEFINED, e.msg());
         return;

@@ -127,12 +127,13 @@ svn::Targets Targets::fromStringList(const QStringList &paths)
     return svn::Targets(ret);
 }
 
-svn::Targets Targets::fromUrlList(const QList<QUrl> &urls)
+svn::Targets Targets::fromUrlList(const QList<QUrl> &urls, UrlConversion conversion)
 {
     svn::Paths ret;
     ret.reserve(urls.size());
+    const bool preferLocalFile = conversion == UrlConversion::PreferLocalPath;
     Q_FOREACH(const QUrl &url, urls) {
-        ret.push_back(svn::Path(url.isLocalFile() ? url.toLocalFile() : url.url()));
+        ret.push_back(svn::Path((preferLocalFile && url.isLocalFile()) ? url.toLocalFile() : url.url()));
     }
     return svn::Targets(ret);
 }

@@ -122,7 +122,13 @@ public:
     /** convenience functions
      */
     static Targets fromStringList(const QStringList &paths);
-    static Targets fromUrlList(const QList<QUrl> &urls);
+    enum class UrlConversion
+    {
+        KeepUrl,
+        PreferLocalPath
+    };
+
+    static Targets fromUrlList(const QList<QUrl> &urls, UrlConversion conversion);
 
 private:
     Paths m_targets;

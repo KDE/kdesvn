@@ -25,7 +25,9 @@
 #include "kdesvn-config.h"
 
 #include <KProcess>
+#include <QCoreApplication>
 #include <QRegExp>
+#include <QStandardPaths>
 #include "kdesvn_debug.h"
 
 // initialize static member variables
@@ -91,12 +93,18 @@ void SshAgent::askPassEnv()
     qCDebug(KDESVN_LOG) << "Using test askpass" << endl;
     qputenv("SSH_ASKPASS", FORCE_ASKPASS);
 #else
-    QByteArray pro = BIN_INSTALL_DIR;
-    if (!pro.endsWith('/')) {
-        pro.append('/');
+    const QString kdesvnAskPass(QStringLiteral("kdesvnaskpass"));
+    // first search nearby us
+    QString askPassPath = QStandardPaths::findExecutable(kdesvnAskPass, {QCoreApplication::applicationDirPath()});
+    if (askPassPath.isEmpty()) {
+        // now search in PATH
+        askPassPath = QStandardPaths::findExecutable(kdesvnAskPass);
     }
-    pro.append("kdesvnaskpass");
-    qputenv("SSH_ASKPASS", pro);
+    if (askPassPath.isEmpty()) {
+        // ok, not found, but maybe ssh-agent does ...
+        askPassPath = kdesvnAskPass;
+    }
+    qputenv("SSH_ASKPASS", askPassPath.toLocal8Bit());
 #endif
 }
 
@@ -141,11 +149,8 @@ void SshAgent::killSshAgent()
         return;
     }
 
-    KProcess proc;
-
-    proc << QStringLiteral("kill") << m_pid;
-
-    proc.start();
+    QProcess proc;
+    proc.start(QStringLiteral("kill"), {m_pid});
     proc.waitForFinished();
 }
 

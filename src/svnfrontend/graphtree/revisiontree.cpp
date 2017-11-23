@@ -130,7 +130,7 @@ RevisionTree::RevisionTree(const svn::ClientP &aClient,
     long possible_rev = -1;
 
     m_Data->progress = new QProgressDialog(i18n("Scanning the logs for %1", origin), i18n("Cancel"), 0, m_Data->m_OldHistory.size(), parent);
-    m_Data->progress->setWindowTitle(i18n("Scanning logs"));
+    m_Data->progress->setWindowTitle(i18nc("@title:window", "Scanning logs"));
     m_Data->progress->setMinimumDuration(100);
     m_Data->progress->setAutoClose(false);
     m_Data->progress->setWindowModality(Qt::WindowModal);

@@ -366,7 +366,7 @@ void BlameDisplay::showCommit(BlameTreeItem *bti)
     }
 
     QPointer<QDialog> dlg(new KSvnDialog(QLatin1String("simplelog_display"), this));
-    dlg->setWindowTitle(i18n("Log message for revision %1", bti->rev()));
+    dlg->setWindowTitle(i18nc("@title:window", "Log Message for Revision %1", bti->rev()));
     QVBoxLayout *vbox = new QVBoxLayout(dlg);
 
     KTextEdit *textEdit = new KTextEdit(dlg);

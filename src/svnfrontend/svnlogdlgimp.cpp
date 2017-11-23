@@ -106,9 +106,9 @@ void SvnLogDlgImp::dispLog(const svn::LogEntriesMapPtr &log, const QString &what
     _base = root;
     m_Entries = log;
     if (!what.isEmpty()) {
-        setWindowTitle(i18n("SVN Log of %1", what));
+        setWindowTitle(i18nc("@title:window", "SVN Log of %1", what));
     } else {
-        setWindowTitle(i18n("SVN Log"));
+        setWindowTitle(i18nc("@title:window", "SVN Log"));
     }
     _name = what;
     if (!_name.startsWith(QLatin1Char('/'))) {

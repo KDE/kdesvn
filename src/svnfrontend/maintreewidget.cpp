@@ -1030,7 +1030,7 @@ void MainTreeWidget::slotRightRecAddIgnore()
 void MainTreeWidget::recAddIgnore(SvnItem *item)
 {
     QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("ignore_pattern_dlg")));
-    dlg->setWindowTitle(i18n("Edit pattern to ignore for \"%1\"", item->shortName()));
+    dlg->setWindowTitle(i18nc("@title:window", "Edit Pattern to Ignore for \"%1\"", item->shortName()));
     dlg->setWithCancelButton();
     EditIgnorePattern *ptr(new EditIgnorePattern(dlg));
     dlg->addWidget(ptr);
@@ -1311,7 +1311,7 @@ void MainTreeWidget::slotLock()
         return;
     }
     QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("locking_log_msg")));
-    dlg->setWindowTitle(i18n("Lock message"));
+    dlg->setWindowTitle(i18nc("@title:window", "Lock Message"));
     dlg->setWithCancelButton();
     Commitmsg_impl *ptr(new Commitmsg_impl(dlg));
     ptr->initHistory();
@@ -1939,7 +1939,7 @@ void MainTreeWidget::slotMerge()
     }
     src2 = m_Data->merge_Src2;
     QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("merge_dialog")));
-    dlg->setWindowTitle(i18n("Merge"));
+    dlg->setWindowTitle(i18nc("@title:window", "Merge"));
     dlg->setWithCancelButton();
     dlg->setHelp(QLatin1String("merging-items"));
     MergeDlg_impl *ptr(new MergeDlg_impl(dlg));
@@ -1998,7 +1998,7 @@ void MainTreeWidget::slotRelocate()
     const QString path = k->fullName();
     const QUrl fromUrl = k->Url();
     QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("relocate_dlg")));
-    dlg->setWindowTitle(i18n("Relocate path %1", path));
+    dlg->setWindowTitle(i18nc("@title:window", "Relocate Path %1", path));
     dlg->setWithCancelButton();
     CheckoutInfo_impl *ptr(new CheckoutInfo_impl(dlg));
     ptr->setStartUrl(fromUrl);
@@ -2074,7 +2074,7 @@ void MainTreeWidget::slotImportIntoDir(const QString &source, const QUrl &_targe
     QUrl targetUri(_targetUri);
 
     QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("import_log_msg")));
-    dlg->setWindowTitle(i18n("Import log"));
+    dlg->setWindowTitle(i18nc("@title:window", "Import Log"));
     dlg->setWithCancelButton();
     Commitmsg_impl *ptr = nullptr;
     Importdir_logmsg *ptr2 = nullptr;

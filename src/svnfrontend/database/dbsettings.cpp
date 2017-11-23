@@ -36,7 +36,7 @@ DbSettings::DbSettings(const QString &repository, QWidget *parent)
     setDefaultButton(m_ui->buttonBox->button(QDialogButtonBox::Ok));
     connect(m_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(m_ui->buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    setWindowTitle(i18n("Settings for %1", repository));
+    setWindowTitle(i18nc("@title:window", "Settings for %1", repository));
     init();
 }
 

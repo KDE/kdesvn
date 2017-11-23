@@ -244,7 +244,7 @@ QStringList kdesvnd::get_sslclientcertpw(const QString &realm)
     QStringList resList;
     QPointer<KPasswordDialog> dlg(new KPasswordDialog(0, KPasswordDialog::DomainReadOnly | KPasswordDialog::ShowKeepPassword));
     dlg->setDomain(realm);
-    dlg->setWindowTitle(i18n("Enter password for realm %1", realm));
+    dlg->setWindowTitle(i18nc("@title:window", "Enter Password for Realm %1", realm));
     dlg->setKeepPassword(true);
     if (dlg->exec() == KPasswordDialog::Accepted) {
         resList.append(dlg->password());

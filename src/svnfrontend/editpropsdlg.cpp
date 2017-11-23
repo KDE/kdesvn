@@ -29,7 +29,7 @@ EditPropsDlg::EditPropsDlg(bool bAddMode, QWidget *parent)
 {
     m_ui->setupUi(this);
     if (bAddMode) {
-        setWindowTitle(i18n("Add property"));
+        setWindowTitle(i18nc("@title:window", "Add Property"));
     }
     connect(m_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(m_ui->buttonBox, SIGNAL(rejected()), this, SLOT(reject()));

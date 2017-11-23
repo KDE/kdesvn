@@ -96,7 +96,7 @@ QUrl UrlDlg::getUrl(QWidget *parent)
 {
     QUrl ret;
     QPointer<UrlDlg> dlg(new UrlDlg(parent));
-    dlg->setWindowTitle(i18n("Open"));
+    dlg->setWindowTitle(i18nc("@title:window", "Open"));
     if (dlg->exec() == QDialog::Accepted) {
         // added by Wellu Mäkinen <wellu@wellu.org>
         //

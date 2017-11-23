@@ -73,7 +73,7 @@ int main(int argc, char **argv)
     if (pw.isEmpty()) {
         QPointer<KPasswordDialog> dlg(new KPasswordDialog(0, (wallet ? KPasswordDialog::ShowKeepPassword : KPasswordDialog::NoFlags)));
         dlg->setPrompt(prompt);
-        dlg->setWindowTitle(i18n("Password"));
+        dlg->setWindowTitle(i18nc("@title:window", "Password"));
         if (dlg->exec() != KPasswordDialog::Accepted) {
             delete dlg;
             return 1;

@@ -479,12 +479,12 @@ void Commitmsg_impl::insertFile(const QString &fname)
 
 void Commitmsg_impl::insertFile()
 {
-    QString head = i18n("Select text file for insert");
-    QPointer<KUrlRequesterDialog> dlg(new KUrlRequesterDialog(QUrl(), head, this));
-    dlg->setWindowTitle(head);
+    QString windowTitle = i18nc("@title:window", "Select Text File to Insert");
+    QPointer<KUrlRequesterDialog> dlg(new KUrlRequesterDialog(QUrl(), i18n("Select text file to insert:"), this));
+    dlg->setWindowTitle(windowTitle);
     KFile::Mode mode = static_cast<KFile::Mode>(KFile::File);
     dlg->urlRequester()->setMode(mode);
-    dlg->urlRequester()->setWindowTitle(head);
+    dlg->urlRequester()->setWindowTitle(windowTitle);
 
     if (dlg->exec() != QDialog::Accepted) {
         delete dlg;

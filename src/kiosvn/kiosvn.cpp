@@ -341,7 +341,7 @@ void kio_svnProtocol::rename(const QUrl &src, const QUrl &target, KIO::JobFlags 
         }
         return;
     }
-    notify(i18n("Renaming %1 to %2 succesful", src.toDisplayString(), target.toDisplayString()));
+    notify(i18n("Renaming %1 to %2 successful", src.toDisplayString(), target.toDisplayString()));
     finished();
 }
 

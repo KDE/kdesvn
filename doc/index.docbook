@@ -332,18 +332,18 @@ when one or none item is marked in overview. Depending on your settings (see <xr
 <sect3  id="logdisplay-dlg">
 <title>The log display dialog</title>
 <para>
-  On left side you see the list of log entries &kdesvn; retrieved. The log message is stripped-down to one line to fit. The full log message appears in right upper window when marking an entry. In the right lower window you will see the list of changed files. These windows <emphasis>only</emphasis> appears if this list is fetched depending on your settings.
+  On the left side you see the list of log entries retrieved by &kdesvn;. The log message is stripped-down to one line to fit. The full log message appears in the upper-right window when marking an entry. In the lower-right window you will see the list of changed files. These windows <emphasis>only</emphasis> appear if this list is fetched, depending on your settings.
 </para>
 <para>
-With the buttons above you may select another range of logs to display.
+With the buttons on the top you may select another range of logs to display.
 
-<important><para>This range is called without any pre-limit so you have to think about yourself on large repositories.</para></important>
+<important><para>This range is called without any pre-limit, so be careful when using this feature on large repositories.</para></important>
 
 </para>
 <para>
-The buttons below displays always work on item selected for log, not on item selected in list of changed files. So when you select
-<guibutton>Diff previous</guibutton> there it makes the diff over all changed items in this revision if them are equivalent or below the subversion
-entry selected for retrieving logs before. Same for <guibutton>Diff revisions</guibutton>.
+The buttons on the bottom of the dialog always work on the item selected for log, not on the item selected in the list of changed files. So when you select
+<guibutton>Diff previous</guibutton> there, it makes the diff over all changed items in this revision if they are equivalent or below the subversion
+entry selected before for retrieving logs. Same for <guibutton>Diff revisions</guibutton>.
 </para>
 <para>
 <guibutton>Annotate</guibutton> of course works only if item to log is a file.
@@ -824,7 +824,7 @@ to the <link linkend="kdesvn-commandline">command line variant of &kdesvn;</link
 <sect2>
 <title>Usage of KIO outside &konqueror; - an example</title>
 <para>
-Every &kde; based application may use these protocols. So it would be possible to retrieve all differences between two revisions with &kdiff3; without any deep knowledge.
+Every application which uses the KIO library may use these protocols. So it would be possible to retrieve all differences between two revisions with &kdiff3; without any deep knowledge.
 </para>
 <para>
 <example>
@@ -852,8 +852,7 @@ kdiff3 \
 <title>Programmers information about KIO::ksvn</title>
 <note><para>You may skip this if not interested in KIO programming.</para></note>
 <para>
-KIO::ksvn::special knows the following operations, these are made almost equal in call to the current existing in KIO from kdesdk-kioslaves
-so, for instance, &kdevelop; may use it if kdesdk-kioslaves isn't installed but uses &kdesvn;::KIO::svn.
+KIO::ksvn::special knows the following operations.
 </para>
 <sect2>
 <title>Command list</title>
@@ -958,7 +957,7 @@ Use this with care - this may produce a lot of data.
 <entry>Status</entry>
 <entry>9</entry>
 <entry><para>KURL item, bool checkRepos, bool recurse</para>
-<para>item - the item check info about, checkRepos - check if there are newer versions in repository, recurse - check recursive or not.</para>
+<para>item - the item whos info should be checked, checkRepos - check if there are newer versions in the repository, recurse - whether to check recursive or not.</para>
 </entry>
 <entry>Yes</entry>
 </row>
@@ -1094,7 +1093,7 @@ Return values may be given via metadata, see apidoc for details.
 <sect1 id="kdesvn-commandline-overview">
 <title>Overview</title>
 <para>
-  Some subversion operations may be used via the command line, &eg;, like a standard command line client but user interaction is made via &kde; <acronym>UI</acronym>. The standard syntax is <userinput>kdesvn exec <replaceable>command</replaceable> <replaceable>parameter</replaceable> <replaceable>url</replaceable></userinput>.
+  Some subversion operations may be used via the command line, &eg;, like a standard command line client but user interaction is made through the <acronym>UI</acronym>. The standard syntax is <userinput>kdesvn exec <replaceable>command</replaceable> <replaceable>parameter</replaceable> <replaceable>url</replaceable></userinput>.
 </para>
 <para>
 If a single revision on a single &URL; is wanted it may be set as a parameter of the &URL;
@@ -1421,7 +1420,7 @@ Settings can be changed from the setup dialog. They are separated into some subd
 
 <row>
 <entry>Use internal password cache</entry>
-<entry>When a password isn't stored persistent &kdesvn; may hold is until &kdesvn; ends so you may not need enter it again on each operation. This cache is never persistent, &ie; it will not be saved anywhere.</entry>
+<entry>When a password is not stored persistent &kdesvn; may hold it until &kdesvn; ends, so you may not need to enter it again for each operation. This cache is never persistent, &ie; it will not be saved anywhere.</entry>
 </row>
 
 <row>

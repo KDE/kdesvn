@@ -56,7 +56,7 @@ target_link_libraries(settingsdlgs
         KF5::Completion
         KF5::I18n
 )
-include_directories(settingsdlgs
+target_include_directories(settingsdlgs
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/../
         ${CMAKE_CURRENT_BINARY_DIR}/../

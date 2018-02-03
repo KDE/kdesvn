@@ -47,7 +47,7 @@ int main(int, char **)
     }
     std::cout << "List 1 " << dlist.size() << std::endl;
     Q_FOREACH(const svn::DirEntry &entry, dlist) {
-        QDateTime dt = svn::DateTime(entry.time());
+        QDateTime dt(svn::DateTime(entry.time()).toQDateTime());
         std::cout << entry.name().toUtf8().data() << " "
                   << entry.lastAuthor().toUtf8().data() << " "
                   << entry.size() << " "
@@ -63,7 +63,7 @@ int main(int, char **)
     std::cout << "================" << std::endl;
     std::cout << "List 2 " << dlist.size() << std::endl;
     Q_FOREACH(const svn::DirEntry &entry, dlist) {
-        QDateTime dt = svn::DateTime(entry.time());
+        QDateTime dt = svn::DateTime(entry.time()).toQDateTime();
         std::cout << entry.name().toUtf8().data() << " "
                   << entry.lastAuthor().toUtf8().data() << " "
                   << entry.size() << " "

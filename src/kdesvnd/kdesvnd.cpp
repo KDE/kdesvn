@@ -299,7 +299,7 @@ bool kdesvnd::isRepository(const QUrl &url) const
 
 bool kdesvnd::isWorkingCopy(const QUrl &url) const
 {
-    if (url.isEmpty() || !url.isLocalFile() || url.scheme() != QLatin1String("file")) {
+    if (url.isEmpty() || !url.isLocalFile() || url.scheme() != QLatin1String("file") || url.path() == QLatin1String("/")) {
         return false;
     }
     svn::Revision peg(svn_opt_revision_unspecified);

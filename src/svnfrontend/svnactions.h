@@ -89,10 +89,10 @@ public:
     bool makeList(const QString &url, svn::DirEntries &dlist, const svn::Revision &where, svn::Depth depth = svn::DepthInfinity);
 
     bool createModifiedCache(const QString &base);
-    bool checkModifiedCache(const QString &path);
-    bool checkConflictedCache(const QString &path);
-    bool checkReposLockCache(const QString &path);
-    bool checkReposLockCache(const QString &path, svn::StatusPtr &t);
+    bool checkModifiedCache(const QString &path) const;
+    bool checkConflictedCache(const QString &path) const;
+    bool checkReposLockCache(const QString &path) const;
+    bool checkReposLockCache(const QString &path, svn::StatusPtr &t) const;
     void addModifiedCache(const svn::StatusPtr &what);
     void deleteFromModifiedCache(const QString &what);
 

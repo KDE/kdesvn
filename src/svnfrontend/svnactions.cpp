@@ -2564,23 +2564,23 @@ void SvnActions::deleteFromModifiedCache(const QString &what)
     //m_Data->m_Cache.dump_tree();
 }
 
-bool SvnActions::checkModifiedCache(const QString &path)
+bool SvnActions::checkModifiedCache(const QString &path) const
 {
     return m_Data->m_Cache.find(path);
 }
 
-bool SvnActions::checkReposLockCache(const QString &path)
+bool SvnActions::checkReposLockCache(const QString &path) const
 {
     return m_Data->m_repoLockCache.findSingleValid(path, false);
 }
 
-bool SvnActions::checkReposLockCache(const QString &path, svn::StatusPtr &t)
+bool SvnActions::checkReposLockCache(const QString &path, svn::StatusPtr &t) const
 {
     /// @todo create a method where svn::Status* will be a parameter so no copy is needed but just reading content
     return m_Data->m_repoLockCache.findSingleValid(path, t);
 }
 
-bool SvnActions::checkConflictedCache(const QString &path)
+bool SvnActions::checkConflictedCache(const QString &path) const
 {
     return m_Data->m_conflictCache.find(path);
 }

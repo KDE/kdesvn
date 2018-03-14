@@ -1919,6 +1919,7 @@ void SvnActions::slotResolved(const QString &path)
         return;
     }
     m_Data->m_conflictCache.deleteKey(path, false);
+    emit sigRefreshItem(path);
 }
 
 void SvnActions::slotResolve(const QString &p)
@@ -2496,12 +2497,12 @@ void SvnActions::checkModifiedThread()
         } else if (ptr->nodeStatus() == svn_wc_status_conflicted) {
             m_Data->m_conflictCache.insertKey(ptr, ptr->path());
         }
+        emit sigRefreshItem(ptr->path());
     }
     sigExtraStatusMessage(i18np("Found %1 modified item", "Found %1 modified items", sEntries.size()));
     delete m_CThread;
     m_CThread = nullptr;
     emit sigCacheDataChanged();
-    emit sigRefreshIcons();
 }
 
 void SvnActions::checkUpdateThread()
@@ -2526,8 +2527,8 @@ void SvnActions::checkUpdateThread()
                 !(ptr->entry().lockEntry().Locked())) {
             m_Data->m_repoLockCache.insertKey(ptr, ptr->path());
         }
+        emit sigRefreshItem(ptr->path());
     }
-    emit sigRefreshIcons();
     emit sigExtraStatusMessage(i18n("Checking for updates finished"));
     if (newer) {
         emit sigExtraStatusMessage(i18n("There are new items in repository"));
@@ -2553,6 +2554,7 @@ void SvnActions::addModifiedCache(const svn::StatusPtr &what)
 {
     if (what->nodeStatus() == svn_wc_status_conflicted) {
         m_Data->m_conflictCache.insertKey(what, what->path());
+        emit sigRefreshItem(what->path());
     } else {
         m_Data->m_Cache.insertKey(what, what->path());
     }
@@ -2563,6 +2565,7 @@ void SvnActions::deleteFromModifiedCache(const QString &what)
     m_Data->m_Cache.deleteKey(what, true);
     m_Data->m_conflictCache.deleteKey(what, true);
     //m_Data->m_Cache.dump_tree();
+    emit sigRefreshItem(what);
 }
 
 bool SvnActions::checkModifiedCache(const QString &path) const

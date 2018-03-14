@@ -150,7 +150,7 @@ MainTreeWidget::MainTreeWidget(KActionCollection *aCollection, QWidget *parent, 
     connect(m_Data->m_Model->svnWrapper(), SIGNAL(reinitItem(SvnItem*)), this, SLOT(slotReinitItem(SvnItem*)));
     connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigRefreshAll()), this, SLOT(refreshCurrentTree()));
     connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigRefreshCurrent(SvnItem*)), this, SLOT(refreshCurrent(SvnItem*)));
-    connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigRefreshIcons()), this, SLOT(slotRescanIcons()));
+    connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigRefreshItem(QString)), this, SLOT(slotRefreshItem(QString)));
     connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigGotourl(QUrl)), this, SLOT(_openUrl(QUrl)));
     connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigCacheStatus(qlonglong,qlonglong)), this, SIGNAL(sigCacheStatus(qlonglong,qlonglong)));
     connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigThreadsChanged()), this, SLOT(enableActions()));
@@ -1616,7 +1616,6 @@ void MainTreeWidget::slotResolved()
     }
     m_Data->m_Model->svnWrapper()->slotResolved(which->fullName());
     which->refreshStatus(true);
-    //slotRescanIcons(false);
 }
 
 void MainTreeWidget::slotTryResolve()
@@ -2295,9 +2294,12 @@ void MainTreeWidget::slotDirUpdate()
     m_Data->m_Model->svnWrapper()->makeUpdate(svn::Targets(what), svn::Revision::HEAD, svn::DepthUnknown);
 }
 
-void MainTreeWidget::slotRescanIcons()
+void MainTreeWidget::slotRefreshItem(const QString &path)
 {
-    m_Data->m_Model->refreshIndex(m_Data->m_Model->firstRootIndex());
+    const QModelIndex idx = m_Data->m_Model->findIndex(path);
+    if (!idx.isValid())
+        return;
+    m_Data->m_Model->emitDataChangedRow(idx);
 }
 
 void MainTreeWidget::checkUseNavigation(bool startup)

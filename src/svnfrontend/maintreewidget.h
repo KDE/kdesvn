@@ -90,7 +90,7 @@ protected Q_SLOTS:
     void slotItemActivated(const QModelIndex &);
     void slotItemExpanded(const QModelIndex &);
     void slotItemsInserted(const QModelIndex &);
-    void slotRescanIcons();
+    void slotRefreshItem(const QString &path);
     void _propListTimeout();
 
     void slotCheckUpdates();

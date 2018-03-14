@@ -110,7 +110,8 @@ public:
     bool refreshCurrentTree();
     bool refreshDirnode(SvnItemModelNodeDir *, bool check_empty = false, bool notrec = false);
     bool refreshItem(SvnItemModelNode *);
-    bool refreshIndex(const QModelIndex &, bool sendSignal = true);
+    bool refreshIndex(const QModelIndex &idx);
+    void emitDataChangedRow(const QModelIndex &idx);
 
     void clearNodeDir(SvnItemModelNodeDir *);
 

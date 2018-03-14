@@ -607,13 +607,18 @@ bool SvnItemModel::refreshItem(SvnItemModelNode *item)
     return true;
 }
 
-bool SvnItemModel::refreshIndex(const QModelIndex &ind, bool sendSignal)
+bool SvnItemModel::refreshIndex(const QModelIndex &idx)
 {
-    bool ret = refreshItem(m_Data->nodeForIndex(ind));
-    if (sendSignal) {
-        emit dataChanged(ind, ind);
-    }
+    bool ret = refreshItem(m_Data->nodeForIndex(idx));
+    emitDataChangedRow(idx);
     return ret;
+}
+
+void SvnItemModel::emitDataChangedRow(const QModelIndex &idx)
+{
+    const auto colS(index(idx.row(), 0, idx.parent()));
+    const auto colE(index(idx.row(), columnCount() - 1, idx.parent()));
+    emit dataChanged(colS, colE);
 }
 
 SvnItemModelNode *SvnItemModel::findPath(const svn::Path &_p)

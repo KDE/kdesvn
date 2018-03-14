@@ -126,7 +126,7 @@ MainTreeWidget::MainTreeWidget(KActionCollection *aCollection, QWidget *parent, 
     m_TreeView->setModel(m_Data->m_SortModel);
     m_TreeView->sortByColumn(0, Qt::AscendingOrder);
     m_Data->m_Model = new SvnItemModel(this);
-    m_Data->m_SortModel->setSourceSvnModel(m_Data->m_Model);
+    m_Data->m_SortModel->setSourceModel(m_Data->m_Model);
 
     m_Data->m_DirSortModel = new SvnDirSortFilterProxy();
     m_Data->m_DirSortModel->setDynamicSortFilter(true);
@@ -134,7 +134,7 @@ MainTreeWidget::MainTreeWidget(KActionCollection *aCollection, QWidget *parent, 
     m_Data->m_DirSortModel->setSortCaseSensitivity(Kdesvnsettings::case_sensitive_sort() ? Qt::CaseSensitive : Qt::CaseInsensitive);
 
     m_DirTreeView->setModel(m_Data->m_DirSortModel);
-    m_Data->m_DirSortModel->setSourceSvnModel(m_Data->m_Model);
+    m_Data->m_DirSortModel->setSourceModel(m_Data->m_Model);
 
     connect(m_TreeView->selectionModel(),
             SIGNAL(selectionChanged(QItemSelection,QItemSelection)),

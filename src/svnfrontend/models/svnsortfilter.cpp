@@ -24,26 +24,13 @@
 #include "settings/kdesvnsettings.h"
 
 SvnSortFilterProxy::SvnSortFilterProxy(QObject *parent)
-    : QSortFilterProxyModel(parent), m_sourceModel(0), m_ShowFilter(svnmodel::All)
+    : QSortFilterProxyModel(parent), m_sourceModel(nullptr), m_ShowFilter(svnmodel::All)
 {
 }
 
-bool SvnSortFilterProxy::hasChildren(const QModelIndex &parent)const
+void SvnSortFilterProxy::setSourceModel(QAbstractItemModel *sourceModel)
 {
-    if (!parent.isValid()) {
-        return true;
-    }
-    if (m_sourceModel) {
-        QModelIndex ind = mapToSource(parent);
-        return m_sourceModel->hasChildren(ind);
-    } else {
-        return QSortFilterProxyModel::hasChildren(parent);
-    }
-}
-
-void SvnSortFilterProxy::setSourceSvnModel(SvnItemModel *sourceModel)
-{
-    m_sourceModel = sourceModel;
+    m_sourceModel = qobject_cast<SvnItemModel*>(sourceModel);
     setSourceModel(sourceModel);
 }
 
@@ -52,9 +39,9 @@ bool SvnSortFilterProxy::lessThan(const QModelIndex &left, const QModelIndex &ri
     if (!(left.isValid() && right.isValid())) {
         return QSortFilterProxyModel::lessThan(left, right);
     }
-    SvnItemModelNode *n1, *n2;
-    n1 = static_cast<SvnItemModelNode *>(left.internalPointer());
-    n2 = static_cast<SvnItemModelNode *>(right.internalPointer());
+
+    SvnItemModelNode *n1 = static_cast<SvnItemModelNode *>(left.internalPointer());
+    SvnItemModelNode *n2 = static_cast<SvnItemModelNode *>(right.internalPointer());
     /*
      * when having valid model indexes the internal pointer MUST be valid, too.
      * so we may skip if for this.
@@ -85,4 +72,5 @@ bool SvnSortFilterProxy::filterAcceptsRow(int source_row, const QModelIndex &sou
 void SvnSortFilterProxy::setShowFilter(svnmodel::ItemTypeFlag fl)
 {
     m_ShowFilter = fl;
+    invalidateFilter();
 }

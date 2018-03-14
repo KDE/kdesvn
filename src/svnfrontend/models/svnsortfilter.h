@@ -28,10 +28,9 @@ class SvnSortFilterProxy: public QSortFilterProxyModel
 {
     Q_OBJECT
 public:
-    explicit SvnSortFilterProxy(QObject *parent = 0);
+    explicit SvnSortFilterProxy(QObject *parent = nullptr);
 
-    bool hasChildren(const QModelIndex &parent = QModelIndex()) const override;
-    void setSourceSvnModel(SvnItemModel *sourceModel);
+    void setSourceModel(QAbstractItemModel *sourceModel) override;
 
     enum ShowType {
         None = 0x0,

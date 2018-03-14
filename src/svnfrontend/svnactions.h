@@ -173,7 +173,7 @@ public:
     void clearContextData();
     QString getContextData(const QString &)const;
 
-    bool threadRunning(ThreadType which);
+    bool threadRunning(ThreadType which) const;
 
     bool doNetworking();
     virtual void doCommit(const SvnItemList &);

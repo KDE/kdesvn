@@ -132,12 +132,12 @@ public:
     {
         if (m_DiffDialog) {
             delete m_DiffDialog;
-            m_DiffDialog = 0;
+            m_DiffDialog = nullptr;
         }
         if (m_LogDialog) {
             m_LogDialog->saveSize();
             delete m_LogDialog;
-            m_LogDialog = 0;
+            m_LogDialog = nullptr;
         }
     }
 
@@ -187,11 +187,12 @@ public:
 #define DIALOGS_SIZES "display_dialogs_sizes"
 
 SvnActions::SvnActions(ItemDisplay *parent, bool processes_blocked)
-    : QObject(parent ? parent->realWidget() : 0), SimpleLogCb()
+    : QObject(parent ? parent->realWidget() : nullptr)
+    , SimpleLogCb()
+    , m_CThread(nullptr)
+    , m_UThread(nullptr)
+    , m_FCThread(nullptr)
 {
-    m_CThread = 0;
-    m_UThread = 0;
-    m_FCThread = 0;
     m_Data.reset(new SvnActionsData);
     m_Data->m_ParentList = parent;
     m_Data->m_SvnContextListener = new CContextListener(this);
@@ -2411,7 +2412,7 @@ void SvnActions::stopCheckModifiedThread()
             m_CThread->wait(MAX_THREAD_WAITTIME);
         }
         delete m_CThread;
-        m_CThread = 0;
+        m_CThread = nullptr;
     }
 }
 
@@ -2424,7 +2425,7 @@ void SvnActions::stopCheckUpdateThread()
             m_UThread->wait(MAX_THREAD_WAITTIME);
         }
         delete m_UThread;
-        m_UThread = 0;
+        m_UThread = nullptr;
     }
 }
 
@@ -2437,7 +2438,7 @@ void SvnActions::stopFillCache()
             m_FCThread->wait(MAX_THREAD_WAITTIME);
         }
         delete m_FCThread;
-        m_FCThread = 0;
+        m_FCThread = nullptr;
         emit sigThreadsChanged();
         emit sigCacheStatus(-1, -1);
     }
@@ -2498,7 +2499,7 @@ void SvnActions::checkModifiedThread()
     }
     sigExtraStatusMessage(i18np("Found %1 modified item", "Found %1 modified items", sEntries.size()));
     delete m_CThread;
-    m_CThread = 0;
+    m_CThread = nullptr;
     emit sigCacheDataChanged();
     emit sigRefreshIcons();
 }
@@ -2532,7 +2533,7 @@ void SvnActions::checkUpdateThread()
         emit sigExtraStatusMessage(i18n("There are new items in repository"));
     }
     delete m_UThread;
-    m_UThread = 0;
+    m_UThread = nullptr;
     emit sigCacheDataChanged();
 }
 
@@ -2643,7 +2644,7 @@ bool SvnActions::createUpdateCache(const QString &what)
         return false;
     }
     m_UThread = new CheckModifiedThread(this, what, true);
-    connect(m_CThread, SIGNAL(checkModifiedFinished()),
+    connect(m_UThread, SIGNAL(checkModifiedFinished()),
             this, SLOT(checkUpdateThread()));
     m_UThread->start();
     emit sigExtraStatusMessage(i18n("Checking for updates started in background"));
@@ -2907,18 +2908,15 @@ QString SvnActions::getContextData(const QString &aKey)const
     return QString();
 }
 
-bool SvnActions::threadRunning(ThreadType which)
+bool SvnActions::threadRunning(ThreadType which) const
 {
     switch (which) {
     case checkupdatethread:
         return (m_UThread && m_UThread->isRunning());
-        break;
     case fillcachethread:
         return (m_FCThread && m_FCThread->isRunning());
-        break;
     case checkmodifiedthread:
         return (m_CThread && m_CThread->isRunning());
-        break;
     }
     return false;
 }

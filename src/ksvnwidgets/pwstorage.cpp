@@ -35,13 +35,13 @@ public:
 
     PwStorageData()
     {
-        m_Wallet = 0;
+        m_Wallet = nullptr;
     }
 
     ~PwStorageData()
     {
         delete m_Wallet;
-        m_Wallet = 0;
+        m_Wallet = nullptr;
     }
 
     KWallet::Wallet *getWallet();
@@ -96,7 +96,7 @@ KWallet::Wallet *PwStorageData::getWallet()
 
 PwStorage *PwStorage::self()
 {
-    static PwStorage *_me = 0;
+    static PwStorage *_me = nullptr;
     if (!_me) {
         _me = new PwStorage();
     }
@@ -123,7 +123,7 @@ PwStorage::~PwStorage()
  */
 bool PwStorage::connectWallet()
 {
-    return mData->getWallet() != 0L;
+    return mData->getWallet() != nullptr;
 }
 
 /*!

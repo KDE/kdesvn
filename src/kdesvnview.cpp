@@ -438,7 +438,7 @@ void kdesvnView::fillCacheStatus(qlonglong current, qlonglong max)
         m_CacheProgressBar->setValue((int)current);
     } else {
         delete m_CacheProgressBar;
-        m_CacheProgressBar = 0;
+        m_CacheProgressBar = nullptr;
     }
 }
 

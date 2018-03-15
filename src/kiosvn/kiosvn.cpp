@@ -111,7 +111,7 @@ KioSvnData::~KioSvnData()
     m_Listener.setCancel(true);
     /* wait a little bit */
     sleep(1);
-    m_CurrentContext->setListener(0L);
+    m_CurrentContext->setListener(nullptr);
 }
 
 svn::Revision KioSvnData::urlToRev(const QUrl &url)

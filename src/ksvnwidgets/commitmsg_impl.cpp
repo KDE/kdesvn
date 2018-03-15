@@ -54,26 +54,26 @@ Commitmsg_impl::Commitmsg_impl(QWidget *parent)
     : QWidget(parent), CommitMessage()
 {
     setupUi(this);
-    m_CurrentModel = 0;
-    m_SortModel = 0;
+    m_CurrentModel = nullptr;
+    m_SortModel = nullptr;
     m_LogEdit->setFocus();
     m_Reviewlabel->hide();
     m_hidden = true;
     hideButtons(true);
     m_MainSplitter->insertWidget(0, m_EditFrame);
     delete m_ReviewFrame;
-    m_Reviewlabel = 0;
-    m_MarkUnversioned = 0;
-    m_UnmarkUnversioned = 0;
-    m_DiffItem = 0;
+    m_Reviewlabel = nullptr;
+    m_MarkUnversioned = nullptr;
+    m_UnmarkUnversioned = nullptr;
+    m_DiffItem = nullptr;
 }
 
 Commitmsg_impl::Commitmsg_impl(const svn::CommitItemList &_items, QWidget *parent)
     : QWidget(parent), CommitMessage()
 {
     setupUi(this);
-    m_CurrentModel = 0;
-    m_SortModel = 0;
+    m_CurrentModel = nullptr;
+    m_SortModel = nullptr;
     m_LogEdit->setFocus();
     hideButtons(true);
     if (!_items.isEmpty()) {
@@ -94,8 +94,8 @@ Commitmsg_impl::Commitmsg_impl(const CommitActionEntries &_activatedList,
     : QWidget(parent), CommitMessage()
 {
     setupUi(this);
-    m_CurrentModel = 0;
-    m_SortModel = 0;
+    m_CurrentModel = nullptr;
+    m_SortModel = nullptr;
     m_LogEdit->setFocus();
     m_hidden = false;
 

@@ -242,7 +242,7 @@ QString kdesvnd::load_sslclientcertpw(const QString &realm)
 QStringList kdesvnd::get_sslclientcertpw(const QString &realm)
 {
     QStringList resList;
-    QPointer<KPasswordDialog> dlg(new KPasswordDialog(0, KPasswordDialog::DomainReadOnly | KPasswordDialog::ShowKeepPassword));
+    QPointer<KPasswordDialog> dlg(new KPasswordDialog(nullptr, KPasswordDialog::DomainReadOnly | KPasswordDialog::ShowKeepPassword));
     dlg->setDomain(realm);
     dlg->setWindowTitle(i18nc("@title:window", "Enter Password for Realm %1", realm));
     dlg->setKeepPassword(true);
@@ -267,7 +267,7 @@ QStringList kdesvnd::get_logmsg() const
 {
     QStringList res;
     bool ok;
-    QString logMessage = Commitmsg_impl::getLogmessage(&ok, 0, 0, 0);
+    QString logMessage = Commitmsg_impl::getLogmessage(&ok, nullptr, nullptr, nullptr);
     if (ok) {
         res.append(logMessage);
     }
@@ -379,7 +379,7 @@ void kdesvnd::notifyKioOperation(const QString &text)
 {
     KNotification::event(
         QLatin1String("kdesvn-kio"), text,
-        QPixmap(), 0L, KNotification::CloseOnTimeout,
+        QPixmap(), nullptr, KNotification::CloseOnTimeout,
         QLatin1String("kdesvn"));
 }
 
@@ -387,7 +387,7 @@ void kdesvnd::errorKioOperation(const QString &text)
 {
     KNotification::event(
         KNotification::Error, text,
-        QPixmap(), 0L, KNotification::CloseOnTimeout
+        QPixmap(), nullptr, KNotification::CloseOnTimeout
     );
 }
 

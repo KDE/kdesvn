@@ -49,7 +49,7 @@ public:
 };
 
 SshAgent::SshAgent(QObject *parent)
-    : QObject(parent), sshAgent(0)
+    : QObject(parent), sshAgent(nullptr)
 {
     static SshClean st;
 }
@@ -225,7 +225,7 @@ bool SshAgent::startSshAgent()
     sshAgent->waitForFinished(-1);
     bool ok = (sshAgent->exitStatus() == QProcess::NormalExit && sshAgent->exitStatus() == 0);
     delete sshAgent;
-    sshAgent = 0;
+    sshAgent = nullptr;
 
     return ok;
 }

@@ -35,7 +35,7 @@ class SshAgent : public QObject
     Q_OBJECT
 
 public:
-    explicit SshAgent(QObject *parent = 0);
+    explicit SshAgent(QObject *parent = nullptr);
     ~SshAgent();
 
     bool querySshAgent();

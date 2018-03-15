@@ -55,7 +55,7 @@ kdesvn::kdesvn()
       KBookmarkOwner()
 {
     setAttribute(Qt::WA_DeleteOnClose);
-    m_part = 0;
+    m_part = nullptr;
 #ifdef TESTING_RC
     setXMLFile(TESTING_RC);
     qCDebug(KDESVN_LOG) << "Using test rc file in " << TESTING_RC << endl;
@@ -178,7 +178,7 @@ void kdesvn::load(const QUrl &url, bool addRescent)
     QTimer::singleShot(100, this, SLOT(slotResetExtraStatus()));
     if (m_part) {
         bool ret = m_part->openUrl(url);
-        KRecentFilesAction *rac = 0;
+        KRecentFilesAction *rac = nullptr;
         if (addRescent) {
             QAction *ac = actionCollection()->action(QStringLiteral("file_open_recent"));
             if (ac) {

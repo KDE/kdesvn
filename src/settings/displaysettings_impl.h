@@ -26,7 +26,7 @@ class DisplaySettings_impl: public QWidget, public Ui::DisplaySettings
 {
     Q_OBJECT
 public:
-    explicit DisplaySettings_impl(QWidget *parent = 0);
+    explicit DisplaySettings_impl(QWidget *parent = nullptr);
     virtual ~DisplaySettings_impl();
 };
 

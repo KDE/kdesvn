@@ -22,7 +22,7 @@
 #include <QMimeDatabase>
 
 KioByteStream::KioByteStream(StreamWrittenCb *aCb, const QString &filename)
-    : svn::stream::SvnStream(false, true, 0L),
+    : svn::stream::SvnStream(false, true, nullptr),
       m_Cb(aCb), m_Written(0),
       m_mimeSend(false), m_Filename(filename)
 {
@@ -35,7 +35,7 @@ KioByteStream::~KioByteStream()
 
 bool KioByteStream::isOk() const
 {
-    return m_Cb != 0;
+    return m_Cb != nullptr;
 }
 
 long KioByteStream::write(const char *data, const unsigned long max)

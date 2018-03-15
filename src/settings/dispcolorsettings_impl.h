@@ -26,7 +26,7 @@ class DispColorSettings_impl: public QWidget, public Ui::DispColorSettings
 {
     Q_OBJECT
 public:
-    explicit DispColorSettings_impl(QWidget *parent = 0);
+    explicit DispColorSettings_impl(QWidget *parent = nullptr);
     virtual ~DispColorSettings_impl();
 protected slots:
     virtual void coloredStateToggled(bool);

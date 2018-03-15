@@ -66,7 +66,7 @@ kdesvnpart::kdesvnpart(QWidget *parentWidget, QObject *parent, bool ownapp, cons
 
 void kdesvnpart::init(QWidget *parentWidget, bool full)
 {
-    m_aboutDlg = 0;
+    m_aboutDlg = nullptr;
     // we need an instance
     // TODO: KF5 port
     //setComponentData(KdesvnFactory::componentData());
@@ -128,7 +128,7 @@ bool kdesvnpart::openUrl(const QUrl &aUrl)
         return false;
     }
     setUrl(_url);
-    emit started(0);
+    emit started(nullptr);
     bool ret = m_view->openUrl(url());
     if (ret) {
         emit completed();
@@ -294,7 +294,7 @@ void kdesvnpart::showAboutApplication()
         qApp->setWindowIcon(QIcon::fromTheme(QStringLiteral("kdesvn"), qApp->windowIcon()));
         m_aboutDlg = new KAboutApplicationDialog(about);
     }
-    if (m_aboutDlg == 0) {
+    if (m_aboutDlg == nullptr) {
         return;
     }
     if (!m_aboutDlg->isVisible()) {
@@ -327,19 +327,19 @@ void kdesvnpart::slotShowSettings()
 
     // TODO: KF5
     //dialog->setHelp("setup", "kdesvn");
-    dialog->addPage(new DisplaySettings_impl(0),
+    dialog->addPage(new DisplaySettings_impl(nullptr),
                     i18n("General"), QStringLiteral("configure"), i18n("General Settings"), true);
-    dialog->addPage(new SubversionSettings_impl(0),
+    dialog->addPage(new SubversionSettings_impl(nullptr),
                     i18n("Subversion"), QStringLiteral("kdesvn"), i18n("Subversion Settings"), true);
-    dialog->addPage(new PollingSettings_impl(0),
+    dialog->addPage(new PollingSettings_impl(nullptr),
                     i18n("Timed jobs"), QStringLiteral("kdesvnclock"), i18n("Settings for timed jobs"), true);
-    dialog->addPage(new DiffMergeSettings_impl(0),
+    dialog->addPage(new DiffMergeSettings_impl(nullptr),
                     i18n("Diff & Merge"), QStringLiteral("kdesvnmerge"), i18n("Settings for diff and merge"), true);
-    dialog->addPage(new DispColorSettings_impl(0),
+    dialog->addPage(new DispColorSettings_impl(nullptr),
                     i18n("Colors"), QStringLiteral("kdesvncolors"), i18n("Color Settings"), true);
-    dialog->addPage(new RevisiontreeSettingsDlg_impl(0),
+    dialog->addPage(new RevisiontreeSettingsDlg_impl(nullptr),
                     i18n("Revision tree"), QStringLiteral("kdesvntree"), i18n("Revision tree Settings"), true);
-    dialog->addPage(new CmdExecSettings_impl(0),
+    dialog->addPage(new CmdExecSettings_impl(nullptr),
                     i18n("KIO / Command line"), QStringLiteral("kdesvnterminal"), i18n("Settings for command line and KIO execution"), true);
 
     connect(dialog, SIGNAL(settingsChanged(QString)), this, SLOT(slotSettingsChanged(QString)));

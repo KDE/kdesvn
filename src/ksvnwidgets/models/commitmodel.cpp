@@ -277,7 +277,7 @@ bool CommitModelCheckitem::setData(const QModelIndex &index, const QVariant &val
  ***************************/
 CommitFilterModel::CommitFilterModel(QObject *parent)
     : QSortFilterProxyModel(parent)
-    , m_sourceModel(0)
+    , m_sourceModel(nullptr)
     , m_visibleTypes(CommitActionEntry::ALL)
 {}
 

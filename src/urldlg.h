@@ -34,7 +34,7 @@ class UrlDlg : public QDialog
 {
     Q_OBJECT
 public:
-    static QUrl getUrl(QWidget *parent = 0);
+    static QUrl getUrl(QWidget *parent = nullptr);
 private:
     explicit UrlDlg(QWidget *parent = nullptr);
     virtual ~UrlDlg();

@@ -62,7 +62,7 @@ RevGraphView::RevGraphView(const svn::ClientP &_client, QWidget *parent)
     , m_CompleteView(new PannerView(this))
     , m_cvZoom(0)
     , m_LastAutoPosition(TopLeft)
-    , m_isMoving(0)
+    , m_isMoving(false)
     , m_noUpdateZoomerPos(false)
 
 {

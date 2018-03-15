@@ -152,7 +152,7 @@ void DiffBrowser::doSearch(const QString &to_find_string, bool back)
     if (!m_srchdialog) {
         return;
     }
-    while (1) {
+    while (true) {
         bool result;
         QTextDocument::FindFlags f;
         if (back) {

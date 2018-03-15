@@ -651,7 +651,7 @@ bool RectDrawing::drawField(QPainter *p, int f, DrawParams *dp)
     // that they are calculated on demand (and this can take some time)
     QString name = dp->text(f);
     if (name.isEmpty()) {
-        return 0;
+        return false;
     }
     QPixmap pix = dp->pixmap(f);
 

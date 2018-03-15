@@ -42,7 +42,7 @@ void GetInfoThread::run()
     svn::InfoEntry info;
     svn::Revision rev = svn::Revision::UNDEFINED;
     try {
-        while (1) {
+        while (true) {
             {
                 QReadLocker cl(&m_CancelLock);
                 if (m_Cancel) {

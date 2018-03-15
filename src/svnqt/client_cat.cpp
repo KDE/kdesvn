@@ -51,7 +51,7 @@ Client_impl::cat(const Path &path,
 {
     svn::stream::SvnByteStream buffer(*m_context);
     svn_error_t *error = internal_cat(path, revision, peg_revision, buffer);
-    if (error != 0) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 
@@ -65,7 +65,7 @@ Client_impl::cat(svn::stream::SvnStream &buffer,
                  const Revision &peg_revision)
 {
     svn_error_t *error = internal_cat(path, revision, peg_revision, buffer);
-    if (error != 0) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 }
@@ -78,7 +78,7 @@ Client_impl::get(const Path &path,
 {
     svn::stream::SvnFileOStream buffer(target, *m_context);
     svn_error_t *error = internal_cat(path, revision, peg_revision, buffer);
-    if (error != 0) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 }

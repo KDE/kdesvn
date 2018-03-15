@@ -56,7 +56,7 @@ static svn_error_t *s_list_func
 {
     Q_UNUSED(abs_path);
     if (!baton || !path || !dirent) {
-        return 0;
+        return nullptr;
     }
     /* check every loop for cancel of operation */
     ListBaton *l_baton = static_cast<ListBaton *>(baton);
@@ -69,7 +69,7 @@ static svn_error_t *s_list_func
         SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
     }
     l_context->contextAddListItem(&l_baton->dirEntries, dirent, lock, QString::fromUtf8(path));
-    return 0;
+    return nullptr;
 }
 
 DirEntries
@@ -94,7 +94,7 @@ Client_impl::list(const Path &pathOrUrl,
                                           *m_context,
                                           pool
                                          );
-    if (error != 0) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
     return _baton.dirEntries;

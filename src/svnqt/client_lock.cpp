@@ -47,7 +47,7 @@ Client_impl::lock(const Targets &targets,
                         steal_lock,
                         *m_context,
                         pool);
-    if (error != NULL) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 }
@@ -62,7 +62,7 @@ Client_impl::unlock(const Targets &targets,
                           break_lock,
                           *m_context,
                           pool);
-    if (error != NULL) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 }

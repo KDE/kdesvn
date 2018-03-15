@@ -66,7 +66,7 @@ static svn_error_t *commit_callback2(const svn_commit_info_t *commit_info, void 
     mBaton *m_baton = (mBaton *)baton;
     ContextP m_context = m_baton->m_context;
     if (!m_context) {
-        return svn_error_create(SVN_ERR_CANCELLED, 0, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
+        return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
     }
     svn_client_ctx_t *ctx = m_context->ctx();
     if (ctx && ctx->cancel_func) {
@@ -85,7 +85,7 @@ Client_impl::checkout(const CheckoutParameter &parameters)
 {
     Pool subPool;
     svn_revnum_t revnum = 0;
-    svn_error_t *error = 0;
+    svn_error_t *error = nullptr;
     error = svn_client_checkout3(&revnum,
                                  parameters.moduleName().cstr(),
                                  parameters.destination().cstr(),
@@ -96,7 +96,7 @@ Client_impl::checkout(const CheckoutParameter &parameters)
                                  parameters.overWrite(),
                                  *m_context,
                                  subPool);
-    if (error != NULL) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
     return Revision(revnum);
@@ -125,7 +125,7 @@ Client_impl::remove(const Targets &targets,
                 pool
             );
 
-    if (error != 0) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
     return _baton.m_revision;
@@ -145,7 +145,7 @@ Client_impl::revert(const Targets &targets,
                            changelist.array(pool),
                            *m_context,
                            pool);
-    if (error != NULL) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 }
@@ -164,7 +164,7 @@ Client_impl::add(const Path &path,
                         add_parents,
                         *m_context,
                         pool);
-    if (error != NULL) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 }
@@ -187,7 +187,7 @@ Client_impl::update(const UpdateParameter &params)
                                *m_context, pool
                               );
 
-    if (error != NULL) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
     for (int i = 0; i < apr_revisions->nelts; ++i) {
@@ -230,7 +230,7 @@ Client_impl::commit(const CommitParameter &parameters)
             pool
         );
 
-    if (error != NULL) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
     return _baton.m_revision;
@@ -265,7 +265,7 @@ Client_impl::copy(const CopyParameter &parameter)
             commit_callback2, &_baton,
             *m_context, pool);
 
-    if (error != 0) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
     return _baton.m_revision;
@@ -298,7 +298,7 @@ svn::Revision Client_impl::move(const CopyParameter &parameter)
                              pool
                          );
 
-    if (error != 0) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
     return _baton.m_revision;
@@ -317,7 +317,7 @@ Client_impl::mkdir(const Targets &targets,
 
 
 
-    svn_error_t *error = 0;
+    svn_error_t *error = nullptr;
     mBaton _baton;
     _baton.m_context = m_context;
     error = svn_client_mkdir4
@@ -331,7 +331,7 @@ Client_impl::mkdir(const Targets &targets,
     /* important! otherwise next op on repository uses that logmessage again! */
     m_context->setLogMessage(QString());
 
-    if (error != NULL) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 
@@ -347,7 +347,7 @@ Client_impl::cleanup(const Path &path)
     svn_error_t *error =
         svn_client_cleanup(path.cstr(), *m_context, apr_pool);
 
-    if (error != NULL) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 }
@@ -358,7 +358,7 @@ void Client_impl::resolve(const Path &path, Depth depth, const ConflictResult &r
     const svn_wc_conflict_result_t *aResult = resolution.result(pool);
     svn_error_t *error = svn_client_resolve(path.cstr(), internal::DepthToSvn(depth), aResult->choice, *m_context, pool);
 
-    if (error != NULL) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 }
@@ -371,7 +371,7 @@ Client_impl::doExport(const CheckoutParameter &params)
     QByteArray _neolBA;
     const char *_neol;
     if (params.nativeEol().isNull()) {
-        _neol = (const char *)0;
+        _neol = (const char *)nullptr;
     } else {
         _neolBA = params.nativeEol().toUtf8();
         _neol = _neolBA.constData();
@@ -390,7 +390,7 @@ Client_impl::doExport(const CheckoutParameter &params)
                            _neol,
                            *m_context,
                            pool);
-    if (error != NULL) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
     return Revision(revnum);
@@ -425,7 +425,7 @@ Client_impl::doSwitch(
                 *m_context,
                 pool
             );
-    if (error != NULL) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
     return Revision(revnum);
@@ -458,7 +458,7 @@ Client_impl::import(const Path &path,
     /* important! otherwise next op on repository uses that logmessage again! */
     m_context->setLogMessage(QString());
 
-    if (error != 0) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
     return _baton.m_revision;
@@ -481,7 +481,7 @@ Client_impl::relocate(const Path &path,
                              *m_context,
                              pool);
 
-    if (error != NULL) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 }

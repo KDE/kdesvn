@@ -96,7 +96,7 @@ Client_impl::diff_peg(const DiffParameter &options)
                 pool
             );
 
-    if (error != NULL) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
     return ddata.content();
@@ -153,7 +153,7 @@ Client_impl::diff(const DiffParameter &options)
                              *m_context,
                              pool);
 
-    if (error != NULL) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
     return ddata.content();

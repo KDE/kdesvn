@@ -64,7 +64,7 @@ annotateReceiver(void *baton,
                                     start_revnum, end_revnum, local_change
                                    )
                       );
-    return NULL;
+    return nullptr;
 }
 
 void
@@ -84,7 +84,7 @@ Client_impl::annotate(AnnotatedFile &target, const AnnotateParameter &params)
                 &target,
                 *m_context, // client ctx
                 pool);
-    if (error != NULL) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 }

@@ -42,11 +42,11 @@ static inline char *toAprCharPtr(const QString &str, apr_pool_t *pool)
 }
 
 ContextData::ContextData(const QString &configDir_)
-    : listener(0), logIsSet(false),
+    : listener(nullptr), logIsSet(false),
       m_promptCounter(0), m_ConfigDir(configDir_)
 {
     const QByteArray cfgDirBa = m_ConfigDir.toUtf8();
-    const char *c_configDir = cfgDirBa.isEmpty() ? NULL : cfgDirBa.constData();
+    const char *c_configDir = cfgDirBa.isEmpty() ? nullptr : cfgDirBa.constData();
 
     // make sure the configuration directory exists
     svn_config_ensure(c_configDir, pool);
@@ -198,7 +198,7 @@ void ContextData::notify(const char *path,
                          svn_wc_notify_state_t prop_state,
                          svn_revnum_t revision)
 {
-    if (listener != 0) {
+    if (listener != nullptr) {
         listener->contextNotify(path, action, kind, mime_type,
                                 content_state, prop_state, revision);
     }
@@ -206,14 +206,14 @@ void ContextData::notify(const char *path,
 
 void ContextData::notify(const svn_wc_notify_t *action)
 {
-    if (listener != 0) {
+    if (listener != nullptr) {
         listener->contextNotify(action);
     }
 }
 
 bool ContextData::cancel()
 {
-    if (listener != 0) {
+    if (listener != nullptr) {
         return listener->contextCancel();
     } else {
         // don't cancel if no listener
@@ -236,7 +236,7 @@ bool ContextData::retrieveLogin(const char *username_,
 {
     bool ok;
 
-    if (listener == 0) {
+    if (listener == nullptr) {
         return false;
     }
 
@@ -253,7 +253,7 @@ bool ContextData::retrieveSavedLogin(const char *username_,
     bool ok;
     may_save = false;
 
-    if (listener == 0) {
+    if (listener == nullptr) {
         return false;
     }
 
@@ -269,7 +269,7 @@ bool ContextData::retrieveCachedLogin(const char *username_,
     bool ok;
     may_save = false;
 
-    if (listener == 0) {
+    if (listener == nullptr) {
         return false;
     }
 
@@ -291,14 +291,14 @@ const QString &ContextData::configDir()const
 svn_error_t *
 ContextData::getContextData(void *baton, ContextData **data)
 {
-    if (baton == NULL)
-        return svn_error_create(SVN_ERR_CANCELLED, NULL,
+    if (baton == nullptr)
+        return svn_error_create(SVN_ERR_CANCELLED, nullptr,
                                 QCoreApplication::translate("svnqt", "invalid baton").toUtf8());
 
     ContextData *data_ = static_cast <ContextData *>(baton);
 
-    if (data_->listener == 0)
-        return svn_error_create(SVN_ERR_CANCELLED, NULL,
+    if (data_->listener == nullptr)
+        return svn_error_create(SVN_ERR_CANCELLED, nullptr,
                                 QCoreApplication::translate("svnqt", "invalid listener").toUtf8());
 
     *data = data_;
@@ -307,7 +307,7 @@ ContextData::getContextData(void *baton, ContextData **data)
 
 void ContextData::setAuthCache(bool value)
 {
-    void *param = 0;
+    void *param = nullptr;
     if (!value) {
         param = (void *)"1";
     }
@@ -340,7 +340,7 @@ svn_error_t *ContextData::onLogMsg(const char **log_msg,
                                    void *baton,
                                    apr_pool_t *pool)
 {
-    ContextData *data = 0;
+    ContextData *data = nullptr;
     SVN_ERR(getContextData(baton, &data));
 
     QString msg;
@@ -359,7 +359,7 @@ svn_error_t *ContextData::onLogMsg(const char **log_msg,
     }
 
     *log_msg = toAprCharPtr(msg, pool);
-    *tmp_file = NULL;
+    *tmp_file = nullptr;
     return SVN_NO_ERROR;
 }
 
@@ -369,7 +369,7 @@ svn_error_t *ContextData::onLogMsg2(const char **log_msg,
                                     void *baton,
                                     apr_pool_t *pool)
 {
-    ContextData *data = 0;
+    ContextData *data = nullptr;
     SVN_ERR(getContextData(baton, &data));
 
     QString msg;
@@ -389,7 +389,7 @@ svn_error_t *ContextData::onLogMsg2(const char **log_msg,
     }
 
     *log_msg = toAprCharPtr(msg, pool);
-    *tmp_file = NULL;
+    *tmp_file = nullptr;
     return SVN_NO_ERROR;
 }
 
@@ -399,7 +399,7 @@ svn_error_t *ContextData::onLogMsg3(const char **log_msg,
                                     void *baton,
                                     apr_pool_t *pool)
 {
-    ContextData *data = 0;
+    ContextData *data = nullptr;
     SVN_ERR(getContextData(baton, &data));
 
     QString msg;
@@ -419,7 +419,7 @@ svn_error_t *ContextData::onLogMsg3(const char **log_msg,
     }
 
     *log_msg = toAprCharPtr(msg, pool);
-    *tmp_file = NULL;
+    *tmp_file = nullptr;
     return SVN_NO_ERROR;
 }
 
@@ -432,7 +432,7 @@ void ContextData::onNotify(void *baton,
                            svn_wc_notify_state_t prop_state,
                            svn_revnum_t revision)
 {
-    if (baton == 0) {
+    if (baton == nullptr) {
         return;
     }
     ContextData *data = static_cast <ContextData *>(baton);
@@ -451,7 +451,7 @@ void ContextData::onNotify2(void *baton, const svn_wc_notify_t *action, apr_pool
 
 svn_error_t *ContextData::onCancel(void *baton)
 {
-    if (baton == 0) {
+    if (baton == nullptr) {
         return SVN_NO_ERROR;
     }
     ContextData *data = static_cast <ContextData *>(baton);
@@ -469,7 +469,7 @@ svn_error_t *ContextData::onCachedPrompt(svn_auth_cred_simple_t **cred,
                                          svn_boolean_t _may_save,
                                          apr_pool_t *pool)
 {
-    ContextData *data = 0;
+    ContextData *data = nullptr;
     SVN_ERR(getContextData(baton, &data));
     bool may_save = _may_save != 0;
     if (!data->retrieveCachedLogin(username, realm, may_save)) {
@@ -494,7 +494,7 @@ svn_error_t *ContextData::onSavedPrompt(svn_auth_cred_simple_t **cred,
                                         svn_boolean_t _may_save,
                                         apr_pool_t *pool)
 {
-    ContextData *data = 0;
+    ContextData *data = nullptr;
     SVN_ERR(getContextData(baton, &data));
     bool may_save = _may_save != 0;
     if (!data->retrieveSavedLogin(username, realm, may_save)) {
@@ -519,7 +519,7 @@ svn_error_t *ContextData::onSimplePrompt(svn_auth_cred_simple_t **cred,
                                          svn_boolean_t _may_save,
                                          apr_pool_t *pool)
 {
-    ContextData *data = 0;
+    ContextData *data = nullptr;
     SVN_ERR(getContextData(baton, &data));
     bool may_save = _may_save != 0;
     if (!data->retrieveLogin(username, realm, may_save)) {
@@ -546,11 +546,11 @@ svn_error_t *ContextData::onSslServerTrustPrompt(svn_auth_cred_ssl_server_trust_
                                                  svn_boolean_t may_save,
                                                  apr_pool_t *pool)
 {
-    ContextData *data = 0;
+    ContextData *data = nullptr;
     SVN_ERR(getContextData(baton, &data));
 
     ContextListener::SslServerTrustData trustData(failures);
-    if (realm != NULL) {
+    if (realm != nullptr) {
         trustData.realm = QString::fromUtf8(realm);
     }
     trustData.hostname = QString::fromUtf8(info->hostname);
@@ -566,7 +566,7 @@ svn_error_t *ContextData::onSslServerTrustPrompt(svn_auth_cred_ssl_server_trust_
             trustData, acceptedFailures);
 
     if (answer == ContextListener::DONT_ACCEPT) {
-        *cred = 0L;
+        *cred = nullptr;
     } else {
         svn_auth_cred_ssl_server_trust_t *cred_ =
             (svn_auth_cred_ssl_server_trust_t *)
@@ -588,7 +588,7 @@ svn_error_t *ContextData::onSslClientCertPrompt(svn_auth_cred_ssl_client_cert_t 
                                                 void *baton,
                                                 apr_pool_t *pool)
 {
-    ContextData *data = 0;
+    ContextData *data = nullptr;
     SVN_ERR(getContextData(baton, &data));
 
     QString certFile;
@@ -613,7 +613,7 @@ svn_error_t *ContextData::onFirstSslClientCertPw(
     svn_boolean_t maySave,
     apr_pool_t *pool)
 {
-    ContextData *data = 0;
+    ContextData *data = nullptr;
     SVN_ERR(getContextData(baton, &data));
 
     QString password;
@@ -640,7 +640,7 @@ svn_error_t *ContextData::onSslClientCertPwPrompt(
     svn_boolean_t maySave,
     apr_pool_t *pool)
 {
-    ContextData *data = 0;
+    ContextData *data = nullptr;
     SVN_ERR(getContextData(baton, &data));
 
     QString password;
@@ -678,12 +678,12 @@ void ContextData::reset()
 
 svn_error_t *ContextData::generate_cancel_error()
 {
-    return svn_error_create(SVN_ERR_CANCELLED, 0, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
+    return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
 }
 
 void ContextData::onProgress(apr_off_t progress, apr_off_t total, void *baton, apr_pool_t *)
 {
-    ContextData *data = 0;
+    ContextData *data = nullptr;
     if (getContextData(baton, &data) != SVN_NO_ERROR) {
         return;
     }
@@ -694,13 +694,13 @@ void ContextData::initMimeTypes()
 {
     // code take from subversion 1.5 commandline client
     const char *mimetypes_file;
-    svn_error_t *err = 0L;
+    svn_error_t *err = nullptr;
     svn_config_t *cfg = (svn_config_t *)apr_hash_get(m_ctx->config, SVN_CONFIG_CATEGORY_CONFIG,
                                                      APR_HASH_KEY_STRING);
 
     svn_config_get(cfg, &mimetypes_file,
                    SVN_CONFIG_SECTION_MISCELLANY,
-                   SVN_CONFIG_OPTION_MIMETYPES_FILE, 0);
+                   SVN_CONFIG_OPTION_MIMETYPES_FILE, nullptr);
     if (mimetypes_file && *mimetypes_file) {
         if ((err = svn_io_parse_mimetypes_file(&(m_ctx->mimetypes_map),
                                                mimetypes_file, pool))) {
@@ -711,7 +711,7 @@ void ContextData::initMimeTypes()
 
 svn_error_t *ContextData::onWcConflictResolver(svn_wc_conflict_result_t **result, const svn_wc_conflict_description_t *description, void *baton, apr_pool_t *pool)
 {
-    ContextData *data = 0;
+    ContextData *data = nullptr;
     SVN_ERR(getContextData(baton, &data));
     ConflictResult cresult;
     if (!data->getListener()->contextConflictResolve(cresult, ConflictDescription(description))) {
@@ -727,7 +727,7 @@ svn_error_t *ContextData::onWcConflictResolver2(svn_wc_conflict_result_t **resul
                                                 apr_pool_t *result_pool,
                                                 apr_pool_t *)
 {
-  ContextData *data = 0;
+  ContextData *data = nullptr;
   SVN_ERR(getContextData(baton, &data));
   ConflictResult cresult;
   if (!data->getListener()->contextConflictResolve(cresult, ConflictDescription(description))) {
@@ -740,7 +740,7 @@ svn_error_t *ContextData::onWcConflictResolver2(svn_wc_conflict_result_t **resul
 svn_error_t *ContextData::maySavePlaintext(svn_boolean_t *may_save_plaintext, const char *realmstring, void *baton, apr_pool_t *pool)
 {
     Q_UNUSED(pool);
-    ContextData *data = 0;
+    ContextData *data = nullptr;
     SVN_ERR(getContextData(baton, &data));
     data->getListener()->maySavePlaintext(may_save_plaintext, QString::fromUtf8(realmstring));
     return SVN_NO_ERROR;

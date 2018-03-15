@@ -69,7 +69,7 @@ public:
         _oldrev = notify->old_revision;
         _newrev = notify->new_revision;
         _node_action = notify->node_action;
-        if (notify->path != 0L) {
+        if (notify->path != nullptr) {
             _path = svn::Path(QString::fromUtf8(notify->path));
         }
     }

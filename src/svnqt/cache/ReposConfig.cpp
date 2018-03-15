@@ -185,7 +185,7 @@ QVariant ReposConfigPrivate::convertToQVariant(const QByteArray &value, const QV
     return QVariant();
 }
 
-ReposConfig *ReposConfig::mSelf = 0;
+ReposConfig *ReposConfig::mSelf = nullptr;
 
 ReposConfig *ReposConfig::self()
 {

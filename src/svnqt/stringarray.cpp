@@ -90,7 +90,7 @@ QString &svn::StringArray::operator[](QStringList::size_type which)
 apr_array_header_t *svn::StringArray::array(const Pool &pool) const
 {
     if (isNull()) {
-        return 0;
+        return nullptr;
     }
     QStringList::const_iterator it;
 

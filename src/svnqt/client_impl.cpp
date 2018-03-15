@@ -98,22 +98,22 @@ apr_hash_t *Client_impl::map2hash(const PropertiesMap &aMap, const Pool &pool)
 
 bool Client_impl::RepoHasCapability(const Path &repository, Capability capability)
 {
-    svn_error_t *error = 0;
+    svn_error_t *error = nullptr;
     Pool pool;
 
-    svn_ra_session_t *session = 0;
+    svn_ra_session_t *session = nullptr;
     // todo svn 1.8: svn_client_open_ra_session2
     error = svn_client_open_ra_session(&session,
                                        repository.cstr(),
                                        *m_context,
                                        pool);
-    if (error != 0) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
     if (!session) {
         return false;
     }
-    const char *capa = 0;
+    const char *capa = nullptr;
     switch (capability) {
     case CapabilityMergeinfo:
         capa = SVN_RA_CAPABILITY_MERGEINFO;
@@ -132,7 +132,7 @@ bool Client_impl::RepoHasCapability(const Path &repository, Capability capabilit
     }
     svn_boolean_t has = 0;
     error = svn_ra_has_capability(session, &has, capa, pool);
-    if (error != 0) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
     return has;

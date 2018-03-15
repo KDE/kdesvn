@@ -60,8 +60,8 @@ struct LogBaton {
     QList<qlonglong> *revstack;
     StringArray excludeList;
     LogBaton()
-        : logEntries(0)
-        , revstack(0)
+        : logEntries(nullptr)
+        , revstack(nullptr)
     {}
 };
 
@@ -69,7 +69,7 @@ struct StatusEntriesBaton {
     StatusEntries entries;
     apr_pool_t *pool;
     ContextWP m_Context;
-    StatusEntriesBaton(): entries(), pool(0)
+    StatusEntriesBaton(): entries(), pool(nullptr)
     {}
 };
 
@@ -77,7 +77,7 @@ struct InfoEntriesBaton {
     InfoEntries entries;
     apr_pool_t *pool;
     ContextWP m_Context;
-    InfoEntriesBaton(): entries(), pool(0)
+    InfoEntriesBaton(): entries(), pool(nullptr)
     {}
 };
 
@@ -127,7 +127,7 @@ static svn_error_t *InfoEntryFunc(void *baton,
         /* check every loop for cancel of operation */
         ContextP l_context = seb->m_Context;
         if (!l_context) {
-            return svn_error_create(SVN_ERR_CANCELLED, 0, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
+            return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
         }
         svn_client_ctx_t *ctx = l_context->ctx();
         if (ctx && ctx->cancel_func) {
@@ -135,7 +135,7 @@ static svn_error_t *InfoEntryFunc(void *baton,
         }
     }
     seb->entries.push_back(InfoEntry(info, path));
-    return NULL;
+    return nullptr;
 }
 
 static svn_error_t *StatusEntriesFunc(void *baton,
@@ -150,7 +150,7 @@ static svn_error_t *StatusEntriesFunc(void *baton,
         /* check every loop for cancel of operation */
         ContextP l_context = seb->m_Context;
         if (!l_context) {
-            return svn_error_create(SVN_ERR_CANCELLED, 0, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
+            return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
         }
         svn_client_ctx_t *ctx = l_context->ctx();
         if (ctx && ctx->cancel_func) {
@@ -159,7 +159,7 @@ static svn_error_t *StatusEntriesFunc(void *baton,
     }
 
     seb->entries.push_back(StatusPtr(new Status(path, status)));
-    return NULL;
+    return nullptr;
 }
 
 static StatusEntries
@@ -257,7 +257,7 @@ localSingleStatus(const Path &path, const ContextP &context, bool update = false
                                false,          // hide ignored files or not
                                false,          // hide external
                                true,          // depth as sticky
-                               0,
+                               nullptr,
                                StatusEntriesFunc,
                                &baton,
                                pool
@@ -329,13 +329,13 @@ Client_impl::info(const Path &_p,
 {
 
     Pool pool;
-    svn_error_t *error = NULL;
+    svn_error_t *error = nullptr;
     InfoEntriesBaton baton;
 
     baton.pool = pool;
     baton.m_Context = m_context;
     svn_opt_revision_t pegr;
-    const char *truepath = 0;
+    const char *truepath = nullptr;
     bool internal_peg = false;
     QByteArray _buf = _p.cstr();
 

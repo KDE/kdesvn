@@ -209,7 +209,7 @@ void svn::InfoEntry::init(const svn_client_info2_t *item, const QString &path)
     m_revision = item->rev;
     m_last_changed_rev = item->last_changed_rev;
     m_last_author = QString::fromUtf8(item->last_changed_author);
-    if (item->wc_info != 0) {
+    if (item->wc_info != nullptr) {
         m_hasWc = true;
         m_schedule = item->wc_info->schedule;
         if (item->wc_info->copyfrom_url)
@@ -222,7 +222,7 @@ void svn::InfoEntry::init(const svn_client_info2_t *item, const QString &path)
         } else {
             m_changeList = QByteArray();
         }
-        if (item->wc_info->conflicts != 0) {
+        if (item->wc_info->conflicts != nullptr) {
             for (int j = 0; j < item->wc_info->conflicts->nelts; ++j) {
                 svn_wc_conflict_description2_t *_desc = ((svn_wc_conflict_description2_t **)item->wc_info->conflicts->elts)[j];
                 m_conflicts.push_back(ConflictDescriptionP(new ConflictDescription(_desc)));

@@ -69,12 +69,12 @@ LogEntry::LogEntry(svn_log_entry_t *log_entry, const StringArray &excludeList)
     if (log_entry->changed_paths2) {
         bool blocked = false;
         for (apr_hash_index_t *hi = apr_hash_first(pool, log_entry->changed_paths2);
-                hi != NULL;
+                hi != nullptr;
                 hi = apr_hash_next(hi)) {
             const void *pv;
             void *val;
             blocked = false;
-            apr_hash_this(hi, &pv, NULL, &val);
+            apr_hash_this(hi, &pv, nullptr, &val);
             svn_log_changed_path2_t *log_item = reinterpret_cast<svn_log_changed_path2_t *>(val);
             const char *path = reinterpret_cast<const char *>(pv);
             QString _p(QString::fromUtf8(path));

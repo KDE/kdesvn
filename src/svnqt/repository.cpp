@@ -46,7 +46,7 @@ Repository::~Repository()
 void Repository::Open(const QString &name)
 {
     svn_error_t *error = m_Data->Open(name);
-    if (error != 0) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 }
@@ -54,7 +54,7 @@ void Repository::Open(const QString &name)
 void Repository::CreateOpen(const CreateRepoParameter &params)
 {
     svn_error_t *error = m_Data->CreateOpen(params);
-    if (error != 0) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 }
@@ -65,7 +65,7 @@ void Repository::CreateOpen(const CreateRepoParameter &params)
 void Repository::dump(const QString &output, const svn::Revision &start, const svn::Revision &end, bool incremental, bool use_deltas)
 {
     svn_error_t *error = m_Data->dump(output, start, end, incremental, use_deltas);
-    if (error != 0) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 }
@@ -86,7 +86,7 @@ void Repository::loaddump(const QString &dump, LOAD_UUID uuida, const QString &p
         break;
     }
     svn_error_t *error = m_Data->loaddump(dump, uuid_action, parentFolder, usePre, usePost, validateProps);
-    if (error != 0) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 }
@@ -97,7 +97,7 @@ void Repository::loaddump(const QString &dump, LOAD_UUID uuida, const QString &p
 void Repository::hotcopy(const QString &src, const QString &dest, bool cleanlogs)
 {
     svn_error_t *error = RepositoryData::hotcopy(src, dest, cleanlogs);
-    if (error != 0) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 }

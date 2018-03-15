@@ -199,7 +199,7 @@ Status::Status(const char *path, const svn_client_status_t *status)
 Status::Status(const QString &path)
     : m_Data(new Status_private())
 {
-    m_Data->init(path, NULL);
+    m_Data->init(path, nullptr);
 }
 
 Status::Status(const QString &url, const DirEntry &src)
@@ -228,7 +228,7 @@ Status::operator=(const Status &status)
     if (status.m_Data) {
         m_Data->init(status.m_Data->m_Path, *(status.m_Data));
     } else {
-        m_Data->init(status.m_Data->m_Path, 0);
+        m_Data->init(status.m_Data->m_Path, nullptr);
     }
     return *this;
 }

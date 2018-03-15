@@ -98,7 +98,7 @@ void Exception::setMessage(const QString &aMsg)
 QString Exception::error2msg(svn_error_t *error)
 {
     QString message;
-    if (error == 0) {
+    if (error == nullptr) {
         return message;
     }
     svn_error_t *next = error->child;
@@ -112,7 +112,7 @@ QString Exception::error2msg(svn_error_t *error)
             message += QLatin1String(" Line ") + QString::number(error->line);
         }
     }
-    while (next != NULL && next->message != NULL) {
+    while (next != nullptr && next->message != nullptr) {
         message = message + QLatin1Char('\n') + QString::fromUtf8(next->message);
 
         next = next->child;
@@ -136,7 +136,7 @@ ClientException::ClientException(svn_error_t *error) throw ()
     : Exception(QString())
 {
     init();
-    if (error == 0) {
+    if (error == nullptr) {
         return;
     }
 

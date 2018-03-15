@@ -41,7 +41,7 @@ namespace svn
 void Client_impl::merge_reintegrate(const MergeParameter &parameters)
 {
     Pool pool;
-    svn_error_t *error = 0;
+    svn_error_t *error = nullptr;
     error = svn_client_merge_reintegrate(parameters.path1().cstr(),
                                          parameters.peg().revision(),
                                          parameters.localPath().cstr(),
@@ -50,7 +50,7 @@ void Client_impl::merge_reintegrate(const MergeParameter &parameters)
                                          *m_context,
                                          pool
                                         );
-    if (error != 0) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 }
@@ -58,7 +58,7 @@ void Client_impl::merge_reintegrate(const MergeParameter &parameters)
 void Client_impl::merge(const MergeParameter &parameters)
 {
     Pool pool;
-    svn_error_t *error = 0;
+    svn_error_t *error = nullptr;
     if (parameters.reintegrate()) {
         merge_reintegrate(parameters);
     } else {
@@ -81,7 +81,7 @@ void Client_impl::merge(const MergeParameter &parameters)
              pool);
     }
 
-    if (error != 0) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 }
@@ -109,7 +109,7 @@ void Client_impl::merge_peg(const MergeParameter &parameters)
             *m_context,
             pool
         );
-    if (error != 0) {
+    if (error != nullptr) {
         throw ClientException(error);
     }
 }

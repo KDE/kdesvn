@@ -57,7 +57,7 @@ DiffOptions::DiffOptions(const QStringList &options)
     svn_diff_file_options_t *_diffopts =  svn_diff_file_options_create(pool);
     if (_diffopts) {
         svn_error_t *error = svn_diff_file_options_parse(_diffopts, _ar.array(pool), pool);
-        if (error == 0) {
+        if (error == nullptr) {
             init(_diffopts);
         }
     }

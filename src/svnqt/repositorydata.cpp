@@ -75,7 +75,7 @@ long RepoOutStream::write(const char *data, const unsigned long max)
 
 RepositoryData::RepositoryData(RepositoryListener *aListener)
 {
-    m_Repository = 0;
+    m_Repository = nullptr;
     m_Listener = aListener;
 }
 
@@ -120,7 +120,7 @@ svn_error_t *RepositoryData::cancel_func(void *baton)
 {
     RepositoryListener *m_L = (RepositoryListener *)baton;
     if (m_L && m_L->isCanceld()) {
-        return svn_error_create(SVN_ERR_CANCELLED, 0, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
+        return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
     }
     return SVN_NO_ERROR;
 }
@@ -131,7 +131,7 @@ svn_error_t *RepositoryData::cancel_func(void *baton)
 void RepositoryData::Close()
 {
     m_Pool.renew();
-    m_Repository = 0;
+    m_Repository = nullptr;
 }
 
 /*!
@@ -140,9 +140,9 @@ void RepositoryData::Close()
 svn_error_t *RepositoryData::Open(const QString &path)
 {
     Close();
-    svn_error_t *error = svn_repos_open2(&m_Repository, path.toUtf8(), NULL, m_Pool);
-    if (error != 0L) {
-        m_Repository = 0;
+    svn_error_t *error = svn_repos_open2(&m_Repository, path.toUtf8(), nullptr, m_Pool);
+    if (error != nullptr) {
+        m_Repository = nullptr;
         return error;
     }
     svn_fs_set_warning_func(svn_repos_fs(m_Repository), RepositoryData::warning_func, this);
@@ -191,17 +191,17 @@ svn_error_t *RepositoryData::CreateOpen(const CreateRepoParameter &params)
 
     /// @todo config as extra parameter? Meanwhile default config only
     /// (see svn::ContextData)
-    SVN_ERR(svn_config_get_config(&config, 0, m_Pool));
+    SVN_ERR(svn_config_get_config(&config, nullptr, m_Pool));
     const char *repository_path = apr_pstrdup(m_Pool, params.path().toUtf8());
 
     repository_path = svn_dirent_internal_style(repository_path, m_Pool);
 
     if (svn_path_is_url(repository_path)) {
-        return svn_error_create(SVN_ERR_CL_ARG_PARSING_ERROR, NULL,
+        return svn_error_create(SVN_ERR_CL_ARG_PARSING_ERROR, nullptr,
                                 QCoreApplication::translate("svnqt", "'%1' is an URL when it should be a path").arg(params.path()).toUtf8());
     }
     SVN_ERR(svn_repos_create(&m_Repository, repository_path,
-                             NULL, NULL, config, fs_config, m_Pool));
+                             nullptr, nullptr, config, fs_config, m_Pool));
 
     svn_fs_set_warning_func(svn_repos_fs(m_Repository), RepositoryData::warning_func, this);
 
@@ -214,7 +214,7 @@ svn_error_t *RepositoryData::CreateOpen(const CreateRepoParameter &params)
 svn_error_t *RepositoryData::dump(const QString &output, const svn::Revision &start, const svn::Revision &end, bool incremental, bool use_deltas)
 {
     if (!m_Repository) {
-        return svn_error_create(SVN_ERR_CANCELLED, 0, QCoreApplication::translate("svnqt", "No repository selected.").toUtf8());
+        return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "No repository selected.").toUtf8());
     }
     Pool pool;
     svn::stream::SvnFileOStream out(output);
@@ -235,7 +235,7 @@ svn_error_t *RepositoryData::dump(const QString &output, const svn::Revision &st
 svn_error_t *RepositoryData::loaddump(const QString &dump, svn_repos_load_uuid uuida, const QString &parentFolder, bool usePre, bool usePost, bool validateProps)
 {
     if (!m_Repository) {
-        return svn_error_create(SVN_ERR_CANCELLED, 0, QCoreApplication::translate("svnqt", "No repository selected.").toUtf8());
+        return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "No repository selected.").toUtf8());
     }
     svn::stream::SvnFileIStream infile(dump);
     RepoOutStream backstream(this);
@@ -243,7 +243,7 @@ svn_error_t *RepositoryData::loaddump(const QString &dump, svn_repos_load_uuid u
     const char *src_path = apr_pstrdup(pool, dump.toUtf8());
     const char *dest_path;
     if (parentFolder.isEmpty()) {
-        dest_path = 0;
+        dest_path = nullptr;
     } else {
         dest_path = apr_pstrdup(pool, parentFolder.toUtf8());
     }

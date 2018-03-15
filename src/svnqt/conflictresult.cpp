@@ -112,8 +112,8 @@ void ConflictResult::assignResult(svn_wc_conflict_result_t **aResult, apr_pool_t
         break;
 
     }
-    const char *_merged_file = mergedFile().isNull() ? 0 : apr_pstrdup(pool, mergedFile().toUtf8());
-    if ((*aResult) == 0) {
+    const char *_merged_file = mergedFile().isNull() ? nullptr : apr_pstrdup(pool, mergedFile().toUtf8());
+    if ((*aResult) == nullptr) {
         (*aResult) = svn_wc_create_conflict_result(_choice, _merged_file, pool);
     } else {
         (*aResult)->choice = _choice;
@@ -123,7 +123,7 @@ void ConflictResult::assignResult(svn_wc_conflict_result_t **aResult, apr_pool_t
 
 const svn_wc_conflict_result_t *ConflictResult::result(apr_pool_t *pool)const
 {
-    svn_wc_conflict_result_t *result = 0;
+    svn_wc_conflict_result_t *result = nullptr;
     assignResult(&result, pool);
     return result;
 }

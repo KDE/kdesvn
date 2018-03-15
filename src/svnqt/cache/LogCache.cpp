@@ -48,7 +48,7 @@ namespace svn
 namespace cache
 {
 
-LogCache *LogCache::mSelf = 0;
+LogCache *LogCache::mSelf = nullptr;
 
 class ThreadDBStore
 {

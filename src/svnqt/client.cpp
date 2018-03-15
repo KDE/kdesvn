@@ -54,7 +54,7 @@ ClientP Client::getobject(const ContextP &context)
 {
     static bool s_initialized = false;
     if (!s_initialized) {
-        svn_cmdline_init("svnqt", 0);
+        svn_cmdline_init("svnqt", nullptr);
         QString basePath = QDir::homePath();
         QDir d;
         if (!d.exists(basePath)) {

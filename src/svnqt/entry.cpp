@@ -141,7 +141,7 @@ void Entry_private::init(const QString &url, const DirEntry &dirEntry)
 
 void Entry_private::init(const QString &url, const InfoEntry &src)
 {
-    init(0);
+    init(nullptr);
     _name = src.Name();
     _url = QUrl(url);
     _revision = src.revision();
@@ -165,7 +165,7 @@ Entry::Entry(const Entry &src)
     if (src.m_Data) {
         m_Data->init(*(src.m_Data));
     } else {
-        m_Data->init(0);
+        m_Data->init(nullptr);
     }
 }
 
@@ -195,7 +195,7 @@ Entry::operator = (const Entry &src)
     if (src.m_Data) {
         m_Data->init(*(src.m_Data));
     } else {
-        m_Data->init(0);
+        m_Data->init(nullptr);
     }
     return *this;
 }

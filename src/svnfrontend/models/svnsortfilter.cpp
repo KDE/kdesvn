@@ -31,7 +31,7 @@ SvnSortFilterProxy::SvnSortFilterProxy(QObject *parent)
 void SvnSortFilterProxy::setSourceModel(QAbstractItemModel *sourceModel)
 {
     m_sourceModel = qobject_cast<SvnItemModel*>(sourceModel);
-    setSourceModel(sourceModel);
+    QSortFilterProxyModel::setSourceModel(sourceModel);
 }
 
 bool SvnSortFilterProxy::lessThan(const QModelIndex &left, const QModelIndex &right)const

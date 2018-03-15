@@ -32,7 +32,7 @@ class MergeDlg_impl: public QWidget, public Ui::MergeDlg
 {
     Q_OBJECT
 public:
-    explicit MergeDlg_impl(QWidget *parent = 0, bool src1 = true, bool src2 = true, bool out = true, bool record_only = true, bool reintegrate = true);
+    explicit MergeDlg_impl(QWidget *parent = nullptr, bool src1 = true, bool src2 = true, bool out = true, bool record_only = true, bool reintegrate = true);
     virtual ~MergeDlg_impl();
 
     bool recursive()const;
@@ -58,7 +58,7 @@ public:
      * This simplyfies the call if only some revision into a working copy should merged.
      */
     static bool getMergeRange(Rangeinput_impl::revision_range &range,
-                              bool *force, bool *recursive, bool *ignorerelated, bool *dry, bool *useExternal, bool *allowmixedrevs, QWidget *parent = 0);
+                              bool *force, bool *recursive, bool *ignorerelated, bool *dry, bool *useExternal, bool *allowmixedrevs, QWidget *parent = nullptr);
 protected Q_SLOTS:
     virtual void externDisplayToggled(bool);
     virtual void recordOnlyToggled(bool);

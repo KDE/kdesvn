@@ -34,7 +34,7 @@ public:
     QString newName() const;
     bool force() const;
     static QString getMoveCopyTo(bool *ok, bool move, const QString &old,
-                                 const QString &base, QWidget *parent = 0);
+                                 const QString &base, QWidget *parent = nullptr);
     /*$PUBLIC_FUNCTIONS$*/
 
 public slots:

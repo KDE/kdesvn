@@ -121,7 +121,7 @@ char SvnItemModelNode::sortChar() const
 }
 
 SvnItemModelNodeDir::SvnItemModelNodeDir(SvnActions *bl, MainTreeWidget *disp)
-    : SvnItemModelNode(0, bl, disp), m_Children()
+    : SvnItemModelNode(nullptr, bl, disp), m_Children()
 {
 }
 
@@ -157,7 +157,7 @@ bool SvnItemModelNodeDir::NodeIsDir() const
 SvnItemModelNode *SvnItemModelNodeDir::child(int row)const
 {
     if (row < 0 || row >= m_Children.size()) {
-        return 0;
+        return nullptr;
     }
     return m_Children[row];
 }

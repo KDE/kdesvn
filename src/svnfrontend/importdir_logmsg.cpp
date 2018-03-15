@@ -47,7 +47,7 @@ Importdir_logmsg::Importdir_logmsg(QWidget *parent)
         tmpLayout->addWidget(m_ignoreUnknownNodes);
         //addItemWidget(m_ignoreUnknownNodes);
     } else {
-        m_ignoreUnknownNodes = 0;
+        m_ignoreUnknownNodes = nullptr;
     }
     QSpacerItem *m_leftspacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
     tmpLayout->addItem(m_leftspacer);

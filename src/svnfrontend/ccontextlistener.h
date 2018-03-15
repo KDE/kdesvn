@@ -34,7 +34,7 @@ class CContextListener : public QObject, public svn::ContextListener
 {
     Q_OBJECT
 public:
-    explicit CContextListener(QObject *parent = 0);
+    explicit CContextListener(QObject *parent = nullptr);
     virtual ~CContextListener();
 
     /* context-listener methods */

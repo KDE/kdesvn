@@ -150,7 +150,7 @@ GraphEdge *GraphEdgeArrow::edge()
 }
 
 /* taken from KCacheGrind project */
-QPixmap *GraphMark::_p = 0;
+QPixmap *GraphMark::_p = nullptr;
 
 GraphMark::GraphMark(GraphTreeLabel *n, QGraphicsItem *p)
     : QGraphicsRectItem(p)

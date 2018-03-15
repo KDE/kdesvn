@@ -85,7 +85,7 @@ public:
     static void reset_codec()
     {
         codec_searched = false;
-        cc = 0;
+        cc = nullptr;
     }
 
 protected:
@@ -95,7 +95,7 @@ protected:
     static QTextCodec *cc;
 };
 
-QTextCodec *LocalizedAnnotatedLine::cc = 0;
+QTextCodec *LocalizedAnnotatedLine::cc = nullptr;
 bool LocalizedAnnotatedLine::codec_searched = false;
 
 class BlameTreeItem: public QTreeWidgetItem
@@ -389,7 +389,7 @@ void BlameDisplay::showCommit(BlameTreeItem *bti)
 void BlameDisplay::slotShowCurrentCommit()
 {
     QTreeWidgetItem *item = m_ui->m_BlameTree->currentItem();
-    if (item == 0 || item->type() != TREE_ITEM_TYPE) {
+    if (item == nullptr || item->type() != TREE_ITEM_TYPE) {
         return;
     }
     BlameTreeItem *bit = static_cast<BlameTreeItem *>(item);
@@ -411,7 +411,7 @@ void BlameDisplay::displayBlame(SimpleLogCb *_cb, const QString &item, const svn
 
 void BlameDisplay::slotItemDoubleClicked(QTreeWidgetItem *item, int)
 {
-    if (item == 0 || item->type() != TREE_ITEM_TYPE) {
+    if (item == nullptr || item->type() != TREE_ITEM_TYPE) {
         return;
     }
     BlameTreeItem *bit = static_cast<BlameTreeItem *>(item);

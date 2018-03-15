@@ -73,14 +73,14 @@ const char *CContextListener::action_strings[] = {
     I18N_NOOP("Update"), //svn_wc_notify_update_update
     I18N_NOOP("Update complete"),
     I18N_NOOP("Update external module"),
-    NULL, // status completed - will not send is just noisy
+    nullptr, // status completed - will not send is just noisy
     I18N_NOOP("Status on external"), //svn_wc_notify_status_external
     I18N_NOOP("Commit Modified"),
     I18N_NOOP("Commit Added"),
     I18N_NOOP("Commit Deleted"),
     I18N_NOOP("Commit Replaced"),
-    NULL, //tx delta -> making ticks instead
-    NULL, //svn_wc_notify_blame_revision - using ticks
+    nullptr, //tx delta -> making ticks instead
+    nullptr, //svn_wc_notify_blame_revision - using ticks
     I18N_NOOP("Locking"),
     I18N_NOOP("Unlocked"),
     I18N_NOOP("Lock failed"),
@@ -88,13 +88,13 @@ const char *CContextListener::action_strings[] = {
 };
 
 const char *CContextListener::notify_state_strings[] = {
-    NULL, // = 0
-    NULL,
+    nullptr, // = 0
+    nullptr,
     I18N_NOOP("unchanged"),
     I18N_NOOP("item wasn't present"),
     I18N_NOOP("unversioned item obstructed work"),
     // I18N_NOOP("Pristine state was modified."), // should send a signal with path instead of message?
-    NULL,
+    nullptr,
     I18N_NOOP("Modified state had mods merged in."),
     I18N_NOOP("Modified state got conflicting mods.")
 };
@@ -104,7 +104,7 @@ QString CContextListener::NotifyAction(svn_wc_notify_action_t action)
     if (action >= smax_actionstring || action < 0) {
         return QString();
     }
-    return (action_strings[action] == NULL) ? QString() : i18n(action_strings[action]);
+    return (action_strings[action] == nullptr) ? QString() : i18n(action_strings[action]);
 }
 
 QString CContextListener::NotifyState(svn_wc_notify_state_t state)
@@ -112,7 +112,7 @@ QString CContextListener::NotifyState(svn_wc_notify_state_t state)
     if (state > svn_wc_notify_state_conflicted || state < 0) {
         return QString();
     }
-    return (notify_state_strings[state] == NULL) ? QString() : i18n(notify_state_strings[state]);
+    return (notify_state_strings[state] == nullptr) ? QString() : i18n(notify_state_strings[state]);
 }
 
 CContextListener::CContextListener(QObject *parent)
@@ -248,7 +248,7 @@ bool CContextListener::contextGetLogMessage(QString &msg, const svn::CommitItemL
 {
     bool isOk = false;
     emit waitShow(true);
-    QString logMessage = Commitmsg_impl::getLogmessage(items, &isOk, 0, 0, 0);
+    QString logMessage = Commitmsg_impl::getLogmessage(items, &isOk, nullptr, nullptr, nullptr);
     if (isOk) {
         msg = logMessage;
     }
@@ -304,7 +304,7 @@ bool CContextListener::contextSslClientCertPwPrompt(QString &password,
     maysave = false;
     emit waitShow(true);
     QString npass;
-    QPointer<KPasswordDialog> dlg(new KPasswordDialog(0));
+    QPointer<KPasswordDialog> dlg(new KPasswordDialog(nullptr));
     dlg->setPrompt(i18n("Enter password for realm %1", realm));
     dlg->setWindowTitle(realm);
     int res = dlg->exec();
@@ -372,7 +372,7 @@ void CContextListener::maySavePlaintext(svn_boolean_t *may_save_plaintext, const
     if (may_save_plaintext) {
         QString question = i18n("%1\nReally store password as plain text?", realmstring);
         QString head = i18n("Save password");
-        if (KMessageBox::questionYesNo(0, question, head) == KMessageBox::Yes) {
+        if (KMessageBox::questionYesNo(nullptr, question, head) == KMessageBox::Yes) {
             *may_save_plaintext = true;
         } else {
             *may_save_plaintext = false;

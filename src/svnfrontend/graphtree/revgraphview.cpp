@@ -51,12 +51,12 @@
 
 RevGraphView::RevGraphView(const svn::ClientP &_client, QWidget *parent)
     : QGraphicsView(parent)
-    , m_Scene(0)
-    , m_Marker(0)
+    , m_Scene(nullptr)
+    , m_Marker(nullptr)
     , m_Client(_client)
-    , m_Selected(0)
-    , m_dotTmpFile(0)
-    , m_renderProcess(0)
+    , m_Selected(nullptr)
+    , m_dotTmpFile(nullptr)
+    , m_renderProcess(nullptr)
     , m_xMargin(0)
     , m_yMargin(0)
     , m_CompleteView(new PannerView(this))
@@ -78,7 +78,7 @@ RevGraphView::RevGraphView(const svn::ClientP &_client, QWidget *parent)
 
 RevGraphView::~RevGraphView()
 {
-    setScene(0);
+    setScene(nullptr);
     delete m_Scene;
     delete m_dotTmpFile;
     delete m_CompleteView;
@@ -99,17 +99,17 @@ void RevGraphView::clear()
 {
     if (m_Selected) {
         m_Selected->setSelected(false);
-        m_Selected = 0;
+        m_Selected = nullptr;
     }
     if (m_Marker) {
         m_Marker->hide();
         delete m_Marker;
-        m_Marker = 0;
+        m_Marker = nullptr;
     }
-    setScene(0);
-    m_CompleteView->setScene(0);
+    setScene(nullptr);
+    m_CompleteView->setScene(nullptr);
     delete m_Scene;
-    m_Scene = 0;
+    m_Scene = nullptr;
 }
 
 void RevGraphView::beginInsert()
@@ -147,7 +147,7 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
                              QString::fromLocal8Bit(m_renderProcess->readAllStandardError()));
         showText(error);
         delete m_renderProcess;
-        m_renderProcess = 0;
+        m_renderProcess = nullptr;
         return;
     }
     // remove line breaks when lines to long
@@ -322,7 +322,7 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
                 t2 *= 3;
                 a << pa[indexHead] + t1 << pa[indexHead] + arrowDir << pa[indexHead] + t2;
 
-                GraphEdgeArrow *aItem = new GraphEdgeArrow(n, 0);
+                GraphEdgeArrow *aItem = new GraphEdgeArrow(n, nullptr);
                 m_Scene->addItem(aItem);
                 aItem->setPolygon(a);
                 aItem->setBrush(arrowColor);
@@ -344,7 +344,7 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
     }
     endInsert();
     delete m_renderProcess;
-    m_renderProcess = 0;
+    m_renderProcess = nullptr;
 }
 
 bool RevGraphView::isStart(const QString &nodeName)const
@@ -732,7 +732,7 @@ void RevGraphView::makeSelected(GraphTreeLabel *gtl)
     if (m_Marker) {
         m_Marker->hide();
         delete m_Marker;
-        m_Marker = 0;
+        m_Marker = nullptr;
     }
     if (gtl) {
         m_Marker = new GraphMark(gtl);
@@ -754,7 +754,7 @@ GraphTreeLabel *RevGraphView::firstLabelAt(const QPoint &pos)const
         }
     }
 
-    return 0;
+    return nullptr;
 }
 
 void RevGraphView::mouseDoubleClickEvent(QMouseEvent *e)
@@ -762,7 +762,7 @@ void RevGraphView::mouseDoubleClickEvent(QMouseEvent *e)
     setFocus();
     if (e->button() == Qt::LeftButton) {
         GraphTreeLabel *i = firstLabelAt(e->pos());
-        if (i == 0) {
+        if (i == nullptr) {
             return;
         }
         makeSelected(i);
@@ -928,7 +928,7 @@ void RevGraphView::contextMenuEvent(QContextMenuEvent *e)
         }
         break;
     case 401:
-        makeSelected(0);
+        makeSelected(nullptr);
         break;
     case 402:
         makeSelected(i);

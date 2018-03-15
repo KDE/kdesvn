@@ -32,12 +32,12 @@ DummyDisplay::~DummyDisplay()
 
 QWidget *DummyDisplay::realWidget()
 {
-    return 0L;
+    return nullptr;
 }
 
 SvnItem *DummyDisplay::Selected()const
 {
-    return 0L;
+    return nullptr;
 }
 
 SvnItemList DummyDisplay::SelectionList()const
@@ -52,7 +52,7 @@ bool DummyDisplay::openUrl(const QUrl &, bool)
 
 SvnItem *DummyDisplay::SelectedOrMain()const
 {
-    return 0;
+    return nullptr;
 }
 
 svn::Revision DummyDisplay::baseRevision()const

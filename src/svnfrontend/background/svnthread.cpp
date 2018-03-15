@@ -40,7 +40,7 @@ SvnThread::SvnThread(QObject *_parent)
 
 SvnThread::~SvnThread()
 {
-    m_CurrentContext->setListener(0);
+    m_CurrentContext->setListener(nullptr);
     delete m_SvnContextListener;
 }
 

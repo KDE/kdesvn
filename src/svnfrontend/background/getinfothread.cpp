@@ -49,7 +49,7 @@ void GetInfoThread::run()
                     break;
                 }
             }
-            SvnItemModelNode *current = 0;
+            SvnItemModelNode *current = nullptr;
             {
                 QMutexLocker ml(&m_QueueLock);
                 if (!m_NodeQueue.isEmpty()) {

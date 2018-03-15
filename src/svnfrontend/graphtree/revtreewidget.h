@@ -40,7 +40,7 @@ class RevTreeWidget : public QWidget
     Q_OBJECT
 
 public:
-    RevTreeWidget(const svn::ClientP &cl, QWidget *parent = 0);
+    RevTreeWidget(const svn::ClientP &cl, QWidget *parent = nullptr);
     ~RevTreeWidget();
 
     QSplitter *m_Splitter;

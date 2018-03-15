@@ -54,7 +54,7 @@ public:
     /* avoid large copy operations */
     friend class RevisionTree;
 
-    RevGraphView(const svn::ClientP &_client, QWidget *parent = 0);
+    RevGraphView(const svn::ClientP &_client, QWidget *parent = nullptr);
     virtual ~RevGraphView();
 
     void showText(const QString &s);

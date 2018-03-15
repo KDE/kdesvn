@@ -28,7 +28,7 @@
 class GraphPanMark: public QGraphicsRectItem
 {
 public:
-    GraphPanMark(QGraphicsItem *p = 0);
+    GraphPanMark(QGraphicsItem *p = nullptr);
     virtual ~GraphPanMark();
     virtual int type()const;
     virtual void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
@@ -64,7 +64,7 @@ int GraphPanMark::type()const
 PannerView::PannerView(QWidget *parent)
     : QGraphicsView(parent)// KDE4 check , /*Qt::WNoAutoErase |*/ Qt::WA_StaticContents/*WStaticContents*/ )
 {
-    m_Mark = 0;
+    m_Mark = nullptr;
     m_Moving = false;
     viewport()->setFocusPolicy(Qt::NoFocus);
     setFocusPolicy(Qt::NoFocus);

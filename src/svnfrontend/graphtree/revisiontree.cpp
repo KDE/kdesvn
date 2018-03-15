@@ -66,10 +66,10 @@ public:
 RtreeData::RtreeData()
     : max_rev(-1), min_rev(-1)
 {
-    progress = 0;
-    m_TreeDisplay = 0;
-    dlgParent = 0;
-    m_Listener = 0;
+    progress = nullptr;
+    m_TreeDisplay = nullptr;
+    dlgParent = nullptr;
+    m_Listener = nullptr;
 }
 
 RtreeData::~RtreeData()
@@ -99,12 +99,12 @@ bool RtreeData::getLogs(const QString &reposRoot, const svn::Revision &startr, c
             } else if (Kdesvnsettings::network_on()) {
                 m_Client->log(params.excludeList(ex), m_OldHistory);
             } else {
-                KMessageBox::error(0, i18n("Could not retrieve logs, reason:\n%1", i18n("No log cache possible due broken database and networking not allowed.")));
+                KMessageBox::error(nullptr, i18n("Could not retrieve logs, reason:\n%1", i18n("No log cache possible due broken database and networking not allowed.")));
                 return false;
             }
         }
     } catch (const svn::Exception &ce) {
-        KMessageBox::error(0, i18n("Could not retrieve logs, reason:\n%1", ce.msg()));
+        KMessageBox::error(nullptr, i18n("Could not retrieve logs, reason:\n%1", ce.msg()));
         return false;
     }
     return true;
@@ -178,7 +178,7 @@ RevisionTree::RevisionTree(const svn::ClientP &aClient,
                 m_Data->m_TreeDisplay->dumpRevtree();
             } else {
                 delete m_Data->m_TreeDisplay;
-                m_Data->m_TreeDisplay = 0;
+                m_Data->m_TreeDisplay = nullptr;
             }
         }
     }

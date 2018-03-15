@@ -75,8 +75,8 @@ pCPart::pCPart()
     , single_revision(false)
     , force(false)
     , log_limit(0)
-    , m_SvnWrapper(NULL)
-    , parser(NULL)
+    , m_SvnWrapper(nullptr)
+    , parser(nullptr)
     , start(svn::Revision::UNDEFINED)
     , end(svn::Revision::UNDEFINED)
     , Stdout(stdout)
@@ -97,7 +97,7 @@ CommandExec::CommandExec(QObject *parent)
     , m_lastMessagesLines(0)
 {
     m_pCPart = new pCPart;
-    m_pCPart->parser = 0;
+    m_pCPart->parser = nullptr;
     SshAgent ag;
     ag.querySshAgent();
 
@@ -215,7 +215,7 @@ int CommandExec::exec(const QCommandLineParser *parser)
 
     bool found = connect(this, SIGNAL(executeMe()), this, slotCmd.constData());
     if (!found) {
-        KMessageBox::sorry(0,
+        KMessageBox::sorry(nullptr,
                            i18n("Command \"%1\" not implemented or known", m_pCPart->cmd),
                            i18n("SVN Error"));
         return -1;
@@ -336,7 +336,7 @@ int CommandExec::exec(const QCommandLineParser *parser)
 void CommandExec::clientException(const QString &what)
 {
     m_pCPart->Stderr << what << endl;
-    KMessageBox::sorry(0, what, i18n("SVN Error"));
+    KMessageBox::sorry(nullptr, what, i18n("SVN Error"));
 }
 
 
@@ -419,7 +419,7 @@ void CommandExec::slotCmd_cat()
     }
     m_pCPart->m_SvnWrapper->slotMakeCat(
         (m_pCPart->rev_set ? m_pCPart->start : m_pCPart->end), m_pCPart->urls.at(0), m_pCPart->urls.at(0)
-        , (m_pCPart->rev_set ? m_pCPart->start : m_pCPart->end), 0);
+        , (m_pCPart->rev_set ? m_pCPart->start : m_pCPart->end), nullptr);
 }
 
 void CommandExec::slotCmd_get()
@@ -515,7 +515,7 @@ void CommandExec::slotCmd_copy()
     if (m_pCPart->urls.count() < 2) {
         bool ok;
         target = CopyMoveView_impl::getMoveCopyTo(&ok, false,
-                                                  m_pCPart->urls.at(0), QString(), 0);
+                                                  m_pCPart->urls.at(0), QString(), nullptr);
         if (!ok) {
             return;
         }
@@ -538,7 +538,7 @@ void CommandExec::slotCmd_move()
     QString target;
     if (m_pCPart->urls.count() < 2) {
         target = CopyMoveView_impl::getMoveCopyTo(&ok, true,
-                                                  m_pCPart->urls.at(0), QString(), 0);
+                                                  m_pCPart->urls.at(0), QString(), nullptr);
         if (!ok) {
             return;
         }

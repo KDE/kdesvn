@@ -65,10 +65,10 @@ class MainTreeWidgetData
 public:
     MainTreeWidgetData()
     {
-        m_Collection = 0;
-        m_Model = 0;
-        m_SortModel = 0;
-        m_DirSortModel = 0;
+        m_Collection = nullptr;
+        m_Model = nullptr;
+        m_SortModel = nullptr;
+        m_DirSortModel = nullptr;
         m_remoteRevision = svn::Revision::UNDEFINED;
     }
 
@@ -92,13 +92,13 @@ public:
     SvnItemModelNode *sourceNode(const QModelIndex &index, bool left)
     {
         if (!index.isValid()) {
-            return 0;
+            return nullptr;
         }
         QModelIndex ind = left ? m_DirSortModel->mapToSource(index) : m_SortModel->mapToSource(index);
         if (ind.isValid()) {
             return static_cast<SvnItemModelNode *>(ind.internalPointer());
         }
-        return 0;
+        return nullptr;
     }
 
     KActionCollection *m_Collection;
@@ -294,7 +294,7 @@ bool MainTreeWidget::openUrl(const QUrl &url, bool noReinit)
     if (isWorkingCopy()) {
         m_Data->m_Model->initDirWatch();
     }
-    bool result = m_Data->m_Model->checkDirs(baseUri(), 0) > -1;
+    bool result = m_Data->m_Model->checkDirs(baseUri(), nullptr) > -1;
     if (result && isWorkingCopy()) {
         m_Data->m_Model->svnWrapper()->createModifiedCache(baseUri());
         m_DirTreeView->expandToDepth(0);
@@ -468,7 +468,7 @@ SvnItem *MainTreeWidget::DirSelected()const
 SvnItem *MainTreeWidget::DirSelectedOrMain()const
 {
     SvnItem *_item = DirSelected();
-    if (_item == 0 && isWorkingCopy()) {
+    if (_item == nullptr && isWorkingCopy()) {
         _item = m_Data->m_Model->firstRootChild();
     }
     return _item;
@@ -477,7 +477,7 @@ SvnItem *MainTreeWidget::DirSelectedOrMain()const
 SvnItem *MainTreeWidget::SelectedOrMain()const
 {
     SvnItem *_item = Selected();
-    if (_item == 0 && isWorkingCopy()) {
+    if (_item == nullptr && isWorkingCopy()) {
         _item = m_Data->m_Model->firstRootChild();
     }
     return _item;
@@ -761,7 +761,7 @@ void MainTreeWidget::enableActions()
     enableAction(QStringLiteral("make_svn_lock"), (multi || single));
     enableAction(QStringLiteral("make_svn_unlock"), (multi || single));
 
-    enableAction(QStringLiteral("make_svn_ignore"), (single) && si && si->parent() != 0 && !si->isRealVersioned());
+    enableAction(QStringLiteral("make_svn_ignore"), (single) && si && si->parent() != nullptr && !si->isRealVersioned());
     enableAction(QStringLiteral("make_left_add_ignore_pattern"), (dirList.size() == 1) && isWorkingCopy());
     enableAction(QStringLiteral("make_right_add_ignore_pattern"), single_dir && isWorkingCopy());
 
@@ -846,7 +846,7 @@ QAction *MainTreeWidget::add_action(const QString &actionname,
                                     QObject *target,
                                     const char *slot)
 {
-    QAction *tmp_action = 0;
+    QAction *tmp_action = nullptr;
     tmp_action = m_Data->m_Collection->addAction(actionname, target, slot);
     tmp_action->setText(text);
     m_Data->m_Collection->setDefaultShortcut(tmp_action, sequ);
@@ -1107,7 +1107,7 @@ void MainTreeWidget::slotContextMenu(const QPoint &)
 void MainTreeWidget::slotDirContextMenu(const QPoint &vp)
 {
     QMenu popup;
-    QAction *temp = 0;
+    QAction *temp = nullptr;
     int count = 0;
     if ((temp = filesActions()->action(QStringLiteral("make_dir_commit"))) && temp->isEnabled() && ++count) {
         popup.addAction(temp);
@@ -1144,7 +1144,7 @@ void MainTreeWidget::slotDirContextMenu(const QPoint &vp)
         const KService::List offers = offersList(l.at(0), l.at(0)->isDir());
         if (!offers.isEmpty()) {
             svn::Revision rev(isWorkingCopy() ? svn::Revision::UNDEFINED : baseRevision());
-            me = new OpenContextmenu(l.at(0)->kdeName(rev), offers, 0);
+            me = new OpenContextmenu(l.at(0)->kdeName(rev), offers, nullptr);
             me->setTitle(i18n("Open With..."));
             menuAction = popup.addMenu(me);
             ++count;
@@ -1212,7 +1212,7 @@ void MainTreeWidget::execContextMenu(const SvnItemList &l)
         KService::List offers = offersList(l.at(0), l.at(0)->isDir());
         if (!offers.isEmpty()) {
             svn::Revision rev(isWorkingCopy() ? svn::Revision::UNDEFINED : baseRevision());
-            me = new OpenContextmenu(l.at(0)->kdeName(rev), offers, 0);
+            me = new OpenContextmenu(l.at(0)->kdeName(rev), offers, nullptr);
             me->setTitle(i18n("Open With..."));
             menuAction = popup->addMenu(me);
         } else {
@@ -1264,7 +1264,7 @@ void MainTreeWidget::slotSelectBrowsingRevision()
     if (Rangeinput_impl::getRevisionRange(range, false)) {
         m_Data->m_remoteRevision = range.first;
         clear();
-        m_Data->m_Model->checkDirs(baseUri(), 0);
+        m_Data->m_Model->checkDirs(baseUri(), nullptr);
         emit changeCaption(baseUri() + QLatin1Char('@') + range.first.toString());
     }
 }
@@ -1590,7 +1590,7 @@ void MainTreeWidget::slotCat()
         return;
     }
     m_Data->m_Model->svnWrapper()->slotMakeCat(isWorkingCopy() ? svn::Revision::HEAD : baseRevision(), k->fullName(), k->shortName(),
-                                               isWorkingCopy() ? svn::Revision::HEAD : baseRevision(), 0);
+                                               isWorkingCopy() ? svn::Revision::HEAD : baseRevision(), nullptr);
 }
 
 void MainTreeWidget::slotRevisionCat()
@@ -1601,7 +1601,7 @@ void MainTreeWidget::slotRevisionCat()
     }
     Rangeinput_impl::revision_range range;
     if (Rangeinput_impl::getRevisionRange(range, true, true)) {
-        m_Data->m_Model->svnWrapper()->slotMakeCat(range.first, k->fullName(), k->shortName(), isWorkingCopy() ? svn::Revision::WORKING : baseRevision(), 0);
+        m_Data->m_Model->svnWrapper()->slotMakeCat(range.first, k->fullName(), k->shortName(), isWorkingCopy() ? svn::Revision::WORKING : baseRevision(), nullptr);
     }
 }
 
@@ -1830,7 +1830,7 @@ void MainTreeWidget::slotMkdir()
     QString parentDir;
     if (k) {
         if (!k->isDir()) {
-            KMessageBox::sorry(0, i18n("May not make subdirectories of a file"));
+            KMessageBox::sorry(nullptr, i18n("May not make subdirectories of a file"));
             return;
         }
         parentDir = k->fullName();
@@ -1992,7 +1992,7 @@ void MainTreeWidget::slotRelocate()
     }
     SvnItem *k = SelectedOrMain();
     if (!k) {
-        KMessageBox::error(0, i18n("Error getting entry to relocate"));
+        KMessageBox::error(nullptr, i18n("Error getting entry to relocate"));
         return;
     }
     const QString path = k->fullName();
@@ -2141,16 +2141,16 @@ void MainTreeWidget::slotChangeToRepository()
 void MainTreeWidget::slotCheckNewItems()
 {
     if (!isWorkingCopy()) {
-        KMessageBox::sorry(0, i18n("Only in working copy possible."), i18n("Error"));
+        KMessageBox::sorry(nullptr, i18n("Only in working copy possible."), i18n("Error"));
         return;
     }
     if (selectionCount() > 1) {
-        KMessageBox::sorry(0, i18n("Only on single folder possible"), i18n("Error"));
+        KMessageBox::sorry(nullptr, i18n("Only on single folder possible"), i18n("Error"));
         return;
     }
     SvnItem *w = SelectedOrMain();
     if (!w) {
-        KMessageBox::sorry(0, i18n("Sorry - internal error"), i18n("Error"));
+        KMessageBox::sorry(nullptr, i18n("Sorry - internal error"), i18n("Error"));
         return;
     }
     m_Data->m_Model->svnWrapper()->checkAddItems(w->fullName(), true);

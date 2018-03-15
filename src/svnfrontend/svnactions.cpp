@@ -95,8 +95,8 @@ class SvnActionsData
 {
 public:
     SvnActionsData()
-        : m_ParentList(NULL)
-        , m_SvnContextListener(NULL)
+        : m_ParentList(nullptr)
+        , m_SvnContextListener(nullptr)
         , m_Svnclient(svn::Client::getobject(svn::ContextP()))
         , runblocked(false)
     {
@@ -154,7 +154,7 @@ public:
             return;
         }
         svn_config_set(cfg_config, SVN_CONFIG_SECTION_HELPERS,
-                       SVN_CONFIG_OPTION_DIFF_CMD, 0L);
+                       SVN_CONFIG_OPTION_DIFF_CMD, nullptr);
     }
 
     ItemDisplay *m_ParentList;
@@ -220,7 +220,7 @@ void SvnActions::reInitClient()
     m_Data->clearCaches();
     m_Data->cleanDialogs();
     if (m_Data->m_CurrentContext) {
-        m_Data->m_CurrentContext->setListener(0L);
+        m_Data->m_CurrentContext->setListener(nullptr);
     }
     m_Data->m_CurrentContext = svn::ContextP(new svn::Context);
     m_Data->m_CurrentContext->setListener(m_Data->m_SvnContextListener);
@@ -240,7 +240,7 @@ void SvnActions::makeLog(const svn::Revision &start, const svn::Revision &end, c
         return;
     }
     const QString reposRoot = info.reposRoot().toString();
-    bool need_modal = m_Data->runblocked || QApplication::activeModalWidget() != 0;
+    bool need_modal = m_Data->runblocked || QApplication::activeModalWidget() != nullptr;
     if (need_modal || !m_Data->m_LogDialog) {
         m_Data->m_LogDialog = new SvnLogDlgImp(this, need_modal);
         connect(m_Data->m_LogDialog, SIGNAL(makeDiff(QString,svn::Revision,QString,svn::Revision,QWidget*)),
@@ -1103,7 +1103,7 @@ void SvnActions::makeDiff(const QString &what, const svn::Revision &start, const
 
 void SvnActions::makeDiff(const QString &p1, const svn::Revision &start, const QString &p2, const svn::Revision &end)
 {
-    makeDiff(p1, start, p2, end, (QWidget *)0);
+    makeDiff(p1, start, p2, end, (QWidget *)nullptr);
 }
 
 void SvnActions::makeDiff(const QString &p1, const svn::Revision &start, const QString &p2, const svn::Revision &end, QWidget *p)
@@ -1380,7 +1380,7 @@ void SvnActions::dispDiff(const QByteArray &ex)
             emit sendNotify(i18n("Display process could not started, check command."));
         }
     }
-    bool need_modal = m_Data->runblocked || QApplication::activeModalWidget() != 0;
+    bool need_modal = m_Data->runblocked || QApplication::activeModalWidget() != nullptr;
     if (need_modal || !m_Data->m_DiffBrowserPtr || !m_Data->m_DiffDialog) {
 
         if (!need_modal && m_Data->m_DiffBrowserPtr) {
@@ -1542,7 +1542,7 @@ void SvnActions::makeAdd(bool rec)
         items.push_back(svn::Path(cur->fullName()));
     }
     addItems(items, (rec ? svn::DepthInfinity : svn::DepthEmpty));
-    emit sigRefreshCurrent(0);
+    emit sigRefreshCurrent(nullptr);
 }
 
 bool SvnActions::addItems(const svn::Paths &items, svn::Depth depth)
@@ -1561,7 +1561,7 @@ bool SvnActions::addItems(const svn::Paths &items, svn::Depth depth)
 
 bool SvnActions::makeDelete(const QStringList &w)
 {
-    KMessageBox::ButtonCode answer = KMessageBox::questionYesNoList(0,
+    KMessageBox::ButtonCode answer = KMessageBox::questionYesNoList(nullptr,
                                                                     i18n("Really delete these entries?"),
                                                                     w,
                                                                     i18n("Delete from repository"));
@@ -1646,7 +1646,7 @@ void SvnActions::CheckoutExport(const QUrl &what, bool _exp, bool urlisTarget)
                      ignoreExternal,
                      ptr->overwrite(),
                      ptr->ignoreKeywords(),
-                     0);
+                     nullptr);
     }
     delete dlg;
 }
@@ -1846,13 +1846,13 @@ void SvnActions::slotSwitch()
 
     const SvnItemList lst = m_Data->m_ParentList->SelectionList();
     if (lst.count() > 1) {
-        KMessageBox::error(0, i18n("Can only switch one item at time"));
+        KMessageBox::error(nullptr, i18n("Can only switch one item at time"));
         return;
     }
 
     SvnItem *k = m_Data->m_ParentList->SelectedOrMain();
     if (!k) {
-        KMessageBox::error(0, i18n("Error getting entry to switch"));
+        KMessageBox::error(nullptr, i18n("Error getting entry to switch"));
         return;
     }
     const QUrl what = k->Url();
@@ -2066,7 +2066,7 @@ void SvnActions::slotMergeExternal(const QString &_src1, const QString &_src2, c
         if (isDir) {
             if (!makeCheckout(src1, first, rev1, svn::Revision::UNDEFINED,
                               rec ? svn::DepthInfinity : svn::DepthFiles,
-                              true, false, false, false, false, 0)) {
+                              true, false, false, false, false, nullptr)) {
                 return;
             }
         } else {
@@ -2081,7 +2081,7 @@ void SvnActions::slotMergeExternal(const QString &_src1, const QString &_src2, c
             if (isDir) {
                 if (!makeCheckout(src2, second, rev2, svn::Revision::UNDEFINED,
                                   rec ? svn::DepthInfinity : svn::DepthFiles,
-                                  true, false, false, false, false, 0)) {
+                                  true, false, false, false, false, nullptr)) {
                     return;
                 }
             } else {

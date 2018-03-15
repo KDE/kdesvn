@@ -67,7 +67,7 @@ StopDlg::StopDlg(QObject *listener, QWidget *parent, const QString &caption, con
     layout->addWidget(m_NetBar);
 
     mWait = false;
-    m_LogWindow = 0;
+    m_LogWindow = nullptr;
 
     connect(mShowTimer, SIGNAL(timeout()), this, SLOT(slotAutoShow()));
     connect(m_bBox, SIGNAL(rejected()), this, SLOT(slotCancel()));

@@ -39,7 +39,7 @@ class MainTreeWidget: public QWidget, public Ui::mainTreeWidget, public ItemDisp
 {
     Q_OBJECT
 public:
-    explicit MainTreeWidget(KActionCollection *aCollection, QWidget *parent = 0, Qt::WindowFlags f = 0);
+    explicit MainTreeWidget(KActionCollection *aCollection, QWidget *parent = nullptr, Qt::WindowFlags f = nullptr);
     virtual ~MainTreeWidget();
 
     virtual QWidget *realWidget();

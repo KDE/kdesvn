@@ -33,7 +33,7 @@ class EditIgnorePattern: public QWidget, public Ui::EditIgnorePattern
     Q_OBJECT
 
 public:
-    explicit EditIgnorePattern(QWidget *parent = 0);
+    explicit EditIgnorePattern(QWidget *parent = nullptr);
     virtual ~EditIgnorePattern();
 
     QStringList items()const;

@@ -51,7 +51,7 @@ class SvnItemModelData
     SvnItemModelData &operator=(const SvnItemModelData &);
 public:
     SvnItemModelData(SvnItemModel *aCb, MainTreeWidget *display)
-        : m_rootNode(0), m_SvnActions(NULL), m_Cb(aCb), m_Display(display), m_DirWatch(NULL)
+        : m_rootNode(nullptr), m_SvnActions(nullptr), m_Cb(aCb), m_Display(display), m_DirWatch(nullptr)
     {
         m_Uid = QUuid::createUuid().toString();
         m_InfoThread = new GetInfoThread(aCb);
@@ -67,14 +67,14 @@ public:
 
         delete m_rootNode;
         delete m_DirWatch;
-        m_rootNode = 0;
+        m_rootNode = nullptr;
     }
 
     void clear()
     {
         delete m_rootNode;
         delete m_DirWatch;
-        m_DirWatch = 0;
+        m_DirWatch = nullptr;
         m_rootNode = new SvnItemModelNodeDir(m_SvnActions, m_Display);
     }
 
@@ -150,7 +150,7 @@ SvnItemModel::~SvnItemModel()
 SvnItemModelNode *SvnItemModel::firstRootChild()
 {
     if (!m_Data->m_rootNode) {
-        return 0;
+        return nullptr;
     }
     return m_Data->m_rootNode->child(0);
 }
@@ -385,7 +385,7 @@ int SvnItemModel::checkDirs(const QString &_what, SvnItemModelNode *_parent)
     svnWrapper()->getaddedItems(what, neweritems);
     dlist += neweritems;
     svn::StatusEntries::iterator it = dlist.begin();
-    SvnItemModelNode *node = 0;
+    SvnItemModelNode *node = nullptr;
     for (; it != dlist.end(); ++it) {
         if ((*it)->path() == what || (*it)->entry().url().toString() == what) {
             if (!_parent) {
@@ -426,7 +426,7 @@ void SvnItemModel::insertDirs(SvnItemModelNode *_parent, svn::StatusEntries &dli
     } else {
         parent = static_cast<SvnItemModelNodeDir *>(_parent);
     }
-    SvnItemModelNode *node = 0;
+    SvnItemModelNode *node = nullptr;
     beginInsertRows(ind, parent->childList().count(), parent->childList().count() + dlist.count() - 1);
     svn::StatusEntries::iterator it = dlist.begin();
 #ifdef DEBUG_TIMER
@@ -627,13 +627,13 @@ SvnItemModelNode *SvnItemModel::findPath(const svn::Path &_p)
             return n1;
         }
         if (!n1->isDir()) {
-            return 0;
+            return nullptr;
         }
         const QVector<QStringRef> lp = ip.splitRef(QLatin1Char('/'), QString::SkipEmptyParts);
         SvnItemModelNodeDir *d1 = static_cast<SvnItemModelNodeDir *>(n1);
         return d1->findPath(lp);
     }
-    return 0;
+    return nullptr;
 }
 
 QModelIndex SvnItemModel::findIndex(const svn::Path &_p)
@@ -644,7 +644,7 @@ QModelIndex SvnItemModel::findIndex(const svn::Path &_p)
 void SvnItemModel::initDirWatch()
 {
     delete m_Data->m_DirWatch;
-    m_Data->m_DirWatch = 0;
+    m_Data->m_DirWatch = nullptr;
     if (m_Data->m_Display->isWorkingCopy()) {
         m_Data->m_DirWatch = new KDirWatch(this);
         connect(m_Data->m_DirWatch, SIGNAL(dirty(QString)), this, SLOT(slotDirty(QString)));

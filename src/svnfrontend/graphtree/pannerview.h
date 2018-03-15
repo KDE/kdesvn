@@ -32,7 +32,7 @@ class PannerView : public QGraphicsView
 {
     Q_OBJECT
 public:
-    explicit PannerView(QWidget *parent = 0);
+    explicit PannerView(QWidget *parent = nullptr);
     virtual ~PannerView();
 
     void setZoomRect(const QRectF &theValue);

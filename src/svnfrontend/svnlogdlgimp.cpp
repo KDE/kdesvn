@@ -49,8 +49,8 @@ SvnLogDlgImp::SvnLogDlgImp(SvnActions *ac, bool modal, QWidget *parent)
     m_DispPrevButton->setIcon(QIcon::fromTheme(QStringLiteral("kdesvndiff")));
     m_DispSpecDiff->setIcon(QIcon::fromTheme(QStringLiteral("kdesvndiff")));
     buttonBlame->setIcon(QIcon::fromTheme(QStringLiteral("kdesvnblame")));
-    m_SortModel = 0;
-    m_CurrentModel = 0;
+    m_SortModel = nullptr;
+    m_CurrentModel = nullptr;
     m_ControlKeyDown = false;
 
     if (Kdesvnsettings::self()->log_always_list_changed_files()) {

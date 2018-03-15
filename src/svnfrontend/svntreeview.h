@@ -26,7 +26,7 @@ class SvnTreeView: public QTreeView
 {
     Q_OBJECT
 public:
-    explicit SvnTreeView(QWidget *parent = 0);
+    explicit SvnTreeView(QWidget *parent = nullptr);
     virtual ~SvnTreeView();
 
 protected:

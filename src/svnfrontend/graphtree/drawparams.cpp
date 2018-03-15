@@ -111,7 +111,7 @@ QFont StoredDrawParams::font() const
 
 void StoredDrawParams::ensureField(int f)
 {
-    static Field *def = 0;
+    static Field *def = nullptr;
     if (!def) {
         def = new Field();
         def->pos = Default;
@@ -187,8 +187,8 @@ void StoredDrawParams::setMaxLines(int f, int m)
 
 RectDrawing::RectDrawing(const QRect &r)
 {
-    _fm = 0;
-    _dp = 0;
+    _fm = nullptr;
+    _dp = nullptr;
     setRect(r);
 }
 
@@ -522,7 +522,7 @@ bool RectDrawing::drawField(QPainter *p, int f, DrawParams *dp)
     bool isBottom = false;
     bool isCenter = false;
     bool isRight = false;
-    int *used = 0;
+    int *used = nullptr;
     switch (pos) {
     case DrawParams::TopLeft:
         used = &_usedTopLeft;

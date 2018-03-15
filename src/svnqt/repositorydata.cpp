@@ -46,13 +46,12 @@ class SVNQT_NOEXPORT RepoOutStream: public stream::SvnStream
 {
 public:
     RepoOutStream(RepositoryData *);
-    virtual ~RepoOutStream() {}
 
-    virtual bool isOk()const
+    bool isOk()const override
     {
         return true;
     }
-    virtual long write(const char *data, const unsigned long max);
+    long write(const char *data, const unsigned long max) override;
 
 protected:
     RepositoryData *m_Back;

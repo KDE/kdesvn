@@ -58,8 +58,8 @@ public:
     /**
      * Destructor
      */
-    virtual ~kdesvnpart();
-    virtual bool closeUrl();
+    ~kdesvnpart();
+    bool closeUrl() override;
 
 Q_SIGNALS:
     void refreshTree();
@@ -68,7 +68,7 @@ Q_SIGNALS:
 public slots:
     virtual void slotDispPopup(const QString &, QWidget **target);
     virtual void slotFileProperties();
-    virtual bool openUrl(const QUrl &);
+    bool openUrl(const QUrl &) override;
     virtual void slotSshAdd();
     virtual void showDbStatus();
 
@@ -76,7 +76,7 @@ protected:
     /**
      * This must be implemented by each part
      */
-    virtual bool openFile();
+    bool openFile() override;
     virtual void setupActions();
     KAboutApplicationDialog *m_aboutDlg;
 
@@ -111,7 +111,7 @@ class KdesvnBrowserExtension : public KParts::BrowserExtension
     Q_OBJECT
 public:
     explicit KdesvnBrowserExtension(kdesvnpart *);
-    virtual ~KdesvnBrowserExtension();
+    ~KdesvnBrowserExtension();
 
 public slots:
     void properties();

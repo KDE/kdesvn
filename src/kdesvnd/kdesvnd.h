@@ -39,7 +39,7 @@ class kdesvnd : public KDEDModule
 
 public:
     kdesvnd(QObject *parent, const QList<QVariant> &);
-    virtual ~kdesvnd();
+    ~kdesvnd();
 
 protected:
     bool isWorkingCopy(const QUrl &url) const;

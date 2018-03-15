@@ -53,11 +53,11 @@ public:
     /**
      * Default Destructor
      */
-    virtual ~kdesvn();
+    ~kdesvn();
 
-    virtual void openBookmark(const KBookmark &bm, Qt::MouseButtons mb, Qt::KeyboardModifiers km);
-    virtual QUrl currentUrl() const;
-    virtual QString currentTitle() const;
+    void openBookmark(const KBookmark &bm, Qt::MouseButtons mb, Qt::KeyboardModifiers km) override;
+    QUrl currentUrl() const override;
+    QString currentTitle() const override;
     void checkReload();
 
 protected:
@@ -65,15 +65,15 @@ protected:
      * This function is called when it is time for the app to save its
      * properties for session management purposes.
      */
-    virtual void saveProperties(KConfigGroup &);
+    void saveProperties(KConfigGroup &) override;
 
     /**
      * This function is called when this app is restored.  The KConfig
      * object points to the session management config file that was saved
      * with @ref saveProperties
      */
-    virtual void readProperties(const KConfigGroup &);
-    void closeEvent(QCloseEvent *event);
+    void readProperties(const KConfigGroup &) override;
+    void closeEvent(QCloseEvent *event) override;
     void enableClose(bool how);
 
 public Q_SLOTS:

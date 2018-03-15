@@ -37,10 +37,10 @@ public:
     static QUrl getUrl(QWidget *parent = nullptr);
 private:
     explicit UrlDlg(QWidget *parent = nullptr);
-    virtual ~UrlDlg();
+    ~UrlDlg();
 
 private slots:
-    void accept() override final;
+    void accept() final;
     void slotTextChanged(const QString &);
 private:
     KUrlRequester *m_urlRequester;

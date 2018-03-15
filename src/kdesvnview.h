@@ -57,7 +57,7 @@ public:
     /**
      * Destructor
      */
-    virtual ~kdesvnView();
+    ~kdesvnView();
 
     /**
      * Random 'get' function
@@ -70,9 +70,9 @@ public:
     virtual bool openUrl(const QUrl &url);
 
     /* repositorylistener methods */
-    virtual void sendWarning(const QString &);
-    virtual void sendError(const QString &);
-    virtual bool isCanceld();
+    void sendWarning(const QString &) override;
+    void sendError(const QString &) override;
+    bool isCanceld() override;
     virtual void stopCacheThreads();
 
 Q_SIGNALS:

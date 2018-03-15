@@ -2236,6 +2236,14 @@ void MainTreeWidget::slotDirSelectionChanged(const QItemSelection &_item, const 
         if (Kdesvnsettings::show_navigation_panel()) {
             m_TreeView->setRootIndex(m_Data->m_SortModel->mapFromSource(_t));
         }
+        // Display relative path (including name of the checkout) in the titlebar
+        auto item = m_Data->m_Model->nodeForIndex(_t);
+        if (item) {
+            const QString repoBasePath = baseUri();
+            const QString relativePath = item->fullName().mid(repoBasePath.lastIndexOf('/') + 1);
+            changeCaption(relativePath);
+        }
+
     } else {
         checkSyncTreeModel();
     }

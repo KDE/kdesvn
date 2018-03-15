@@ -201,6 +201,9 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
                        << m_dotTmpFile->fileName() << ":" << lineno << ")" << endl;
             continue;
         }
+        if (!m_Scene) {
+            continue;
+        }
         if (cmd == QLatin1String("node")) {
             QString nodeName, label;
             QString _x, _y, _w, _h;

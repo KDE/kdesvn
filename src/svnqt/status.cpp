@@ -185,7 +185,7 @@ Status::Status(const Status &src)
         if (src.m_Data) {
             m_Data->init(src.m_Data->m_Path, *(src.m_Data));
         } else {
-            m_Data->init(src.m_Data->m_Path, 0);
+            m_Data->init(QString(), nullptr);
         }
     }
 }

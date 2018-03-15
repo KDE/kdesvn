@@ -31,7 +31,7 @@ class DeleteForm : public KSvnDialog
     Q_OBJECT
 public:
     explicit DeleteForm(const QStringList &files, QWidget *parent = nullptr);
-    virtual ~DeleteForm();
+    ~DeleteForm();
 
     bool keep_local() const;
     bool force_delete() const;

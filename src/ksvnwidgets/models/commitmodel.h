@@ -39,16 +39,16 @@ public:
     explicit CommitModel(const svn::CommitItemList &, QObject *parent = nullptr);
     void setCommitData(const svn::CommitItemList &);
 
-    virtual ~CommitModel();
+    ~CommitModel();
 
-    virtual QModelIndex index(int row, int column = 0, const QModelIndex &parent = QModelIndex())const;
-    virtual QModelIndex parent(const QModelIndex &)const;
-    QVariant data(const QModelIndex &index, int role) const;
+    QModelIndex index(int row, int column = 0, const QModelIndex &parent = QModelIndex())const override;
+    QModelIndex parent(const QModelIndex &)const override;
+    QVariant data(const QModelIndex &index, int role) const override;
 
-    virtual int rowCount(const QModelIndex &) const;
-    virtual int columnCount(const QModelIndex &) const;
+    int rowCount(const QModelIndex &) const override;
+    int columnCount(const QModelIndex &) const override;
 
-    virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
     virtual int ActionColumn()const;
     virtual int ItemColumn()const;
@@ -68,14 +68,14 @@ class CommitModelCheckitem: public CommitModel
     Q_OBJECT
 public:
     CommitModelCheckitem(const CommitActionEntries &, const CommitActionEntries &, QObject *parent = nullptr);
-    virtual ~CommitModelCheckitem();
+    ~CommitModelCheckitem();
 
-    virtual Qt::ItemFlags flags(const QModelIndex &index) const;
-    QVariant data(const QModelIndex &index, int role) const;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
+    QVariant data(const QModelIndex &index, int role) const override;
 
-    virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
-    virtual int ActionColumn()const;
-    virtual int ItemColumn()const;
+    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
+    int ActionColumn()const override;
+    int ItemColumn()const override;
 
 };
 
@@ -86,8 +86,8 @@ class CommitFilterModel : public QSortFilterProxyModel
     explicit CommitFilterModel(QObject *parent);
     ~CommitFilterModel();
 
-    void setSourceModel(QAbstractItemModel *sourceModel);
-    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
+    void setSourceModel(QAbstractItemModel *sourceModel) override;
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
 
     void hideItems(bool bHide, CommitActionEntry::ACTION_TYPE aType);
 private:

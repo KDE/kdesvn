@@ -32,7 +32,7 @@ class DepthSelector: public QWidget
     Q_OBJECT
 public:
     explicit DepthSelector(QWidget *parent = nullptr);
-    virtual ~DepthSelector();
+    ~DepthSelector();
 
     svn::Depth getDepth() const;
     void addItemWidget(QWidget *);

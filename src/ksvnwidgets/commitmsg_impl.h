@@ -38,7 +38,7 @@ protected:
     explicit Commitmsg_impl(const CommitActionEntries &, const CommitActionEntries &, QWidget *parent = nullptr);
 public:
     explicit Commitmsg_impl(QWidget *parent = nullptr);
-    virtual ~Commitmsg_impl();
+    ~Commitmsg_impl();
 
     QString getMessage()const;
     bool isKeeplocks()const;

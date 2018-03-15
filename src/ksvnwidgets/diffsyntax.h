@@ -28,10 +28,10 @@ class DiffSyntax : public QSyntaxHighlighter
     Q_OBJECT
 public:
     explicit DiffSyntax(QTextDocument *aTextEdit);
-    virtual ~DiffSyntax();
+    ~DiffSyntax();
 
 protected:
-    void highlightBlock(const QString &aText);
+    void highlightBlock(const QString &aText) override;
 };
 
 #endif

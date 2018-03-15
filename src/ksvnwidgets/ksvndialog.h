@@ -28,7 +28,7 @@ class KSvnDialog : public QDialog
     Q_OBJECT
 public:
     explicit KSvnDialog(const QString &configGroupName, QWidget *parent = nullptr);
-    virtual ~KSvnDialog();
+    ~KSvnDialog();
 
 protected:
     void setDefaultButton(QPushButton *defaultButton);
@@ -42,7 +42,6 @@ class KSvnSimpleOkDialog : public KSvnDialog
     Q_OBJECT
 public:
     explicit KSvnSimpleOkDialog(const QString &configGroupName, QWidget *parent = nullptr);
-    virtual ~KSvnSimpleOkDialog() = default;
 
     /**
      * @brief Add a cancel button to the button box

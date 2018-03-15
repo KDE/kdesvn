@@ -36,9 +36,9 @@ class GetInfoThread: public SvnThread
     Q_OBJECT
 public:
     explicit GetInfoThread(QObject *parent);
-    virtual ~GetInfoThread();
-    virtual void run();
-    virtual void cancelMe();
+    ~GetInfoThread();
+    void run() override;
+    void cancelMe() override;
 
     void appendNode(SvnItemModelNode *);
     void clearNodes();

@@ -35,7 +35,7 @@ class DbOverview: public KSvnDialog
     Q_OBJECT
 private:
     explicit DbOverview(const svn::ClientP &aClient, QWidget *parent = nullptr);
-    virtual ~DbOverview();
+    ~DbOverview();
 
 public:
     static void showDbOverview(const svn::ClientP &aClient, QWidget *parent = nullptr);

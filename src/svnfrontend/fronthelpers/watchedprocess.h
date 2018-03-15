@@ -29,7 +29,7 @@ class WatchedProcess: public KProcess
     Q_OBJECT
 public:
     explicit WatchedProcess(QObject *parent = nullptr);
-    virtual ~WatchedProcess();
+    ~WatchedProcess();
 
     void appendTempFile(const QString &);
     void appendTempDir(const QString &);

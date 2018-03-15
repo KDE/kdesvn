@@ -33,7 +33,7 @@ class FillCacheThread: public SvnThread
     Q_OBJECT
 public:
     FillCacheThread(QObject *, const QString &aPath, bool startup);
-    virtual ~FillCacheThread();
+    ~FillCacheThread();
 
     const QString &reposRoot()const;
     const QString &Path()const;
@@ -43,7 +43,7 @@ Q_SIGNALS:
     void fillCacheFinished();
 
 protected:
-    virtual void run();
+    void run() override;
     void fillInfo();
 
     QString m_what;

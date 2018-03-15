@@ -32,7 +32,7 @@ class Importdir_logmsg : public Commitmsg_impl
 public:
     explicit Importdir_logmsg(QWidget *parent = nullptr);
 
-    virtual ~Importdir_logmsg();
+    ~Importdir_logmsg();
 
     bool createDir();
     bool ignoreUnknownNodes();

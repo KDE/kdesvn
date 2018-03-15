@@ -55,7 +55,7 @@ public:
     friend class RevisionTree;
 
     RevGraphView(const svn::ClientP &_client, QWidget *parent = nullptr);
-    virtual ~RevGraphView();
+    ~RevGraphView();
 
     void showText(const QString &s);
     void clear();
@@ -125,13 +125,13 @@ protected:
     double m_cvZoom;
     ZoomPosition m_LastAutoPosition;
 
-    virtual void resizeEvent(QResizeEvent *);
-    virtual void mousePressEvent(QMouseEvent *e);
-    virtual void mouseReleaseEvent(QMouseEvent *e);
-    virtual void mouseMoveEvent(QMouseEvent *e);
-    virtual void contextMenuEvent(QContextMenuEvent *e);
-    virtual void mouseDoubleClickEvent(QMouseEvent *e);
-    virtual void scrollContentsBy(int dx, int dy);
+    void resizeEvent(QResizeEvent *) override;
+    void mousePressEvent(QMouseEvent *e) override;
+    void mouseReleaseEvent(QMouseEvent *e) override;
+    void mouseMoveEvent(QMouseEvent *e) override;
+    void contextMenuEvent(QContextMenuEvent *e) override;
+    void mouseDoubleClickEvent(QMouseEvent *e) override;
+    void scrollContentsBy(int dx, int dy) override;
 
     GraphTreeLabel *firstLabelAt(const QPoint &pos)const;
 

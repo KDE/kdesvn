@@ -47,7 +47,7 @@ class SvnItemModel: public QAbstractItemModel
     Q_OBJECT
 public:
     explicit SvnItemModel(MainTreeWidget *display, QObject *parent = nullptr);
-    virtual ~SvnItemModel();
+    ~SvnItemModel();
 
     void clear();
 
@@ -61,16 +61,16 @@ public:
         ColumnCount
     };
 
-    virtual QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex())const;
-    virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole)const;
-    virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole)const;
-    virtual int columnCount(const QModelIndex &parent = QModelIndex())const;
-    virtual int rowCount(const QModelIndex &parent = QModelIndex())const;
-    virtual QModelIndex parent(const QModelIndex &index)const;
-    virtual bool hasChildren(const QModelIndex &parent = QModelIndex())const;
-    virtual bool canFetchMore(const QModelIndex &parent)const;
-    virtual void fetchMore(const QModelIndex &parent);
-    virtual Qt::ItemFlags flags(const QModelIndex &index)const;
+    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex())const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole)const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole)const override;
+    int columnCount(const QModelIndex &parent = QModelIndex())const override;
+    int rowCount(const QModelIndex &parent = QModelIndex())const override;
+    QModelIndex parent(const QModelIndex &index)const override;
+    bool hasChildren(const QModelIndex &parent = QModelIndex())const override;
+    bool canFetchMore(const QModelIndex &parent)const override;
+    void fetchMore(const QModelIndex &parent) override;
+    Qt::ItemFlags flags(const QModelIndex &index)const override;
 
     //! Returns the very first item in list.
     /*!
@@ -85,9 +85,9 @@ public:
     SvnActions *svnWrapper();
 
     int checkDirs(const QString &_what, SvnItemModelNode *parent);
-    virtual Qt::DropActions supportedDropActions()const;
-    virtual QStringList mimeTypes()const;
-    QMimeData *mimeData(const QModelIndexList &indexes)const;
+    Qt::DropActions supportedDropActions()const override;
+    QStringList mimeTypes()const override;
+    QMimeData *mimeData(const QModelIndexList &indexes)const override;
 
     bool dropUrls(const QList<QUrl> &data, Qt::DropAction action, int row, int column, const QModelIndex &parent, bool intern);
 
@@ -141,10 +141,10 @@ protected Q_SLOTS:
 private:
     friend class SvnItemModelData;
     QScopedPointer<SvnItemModelData> m_Data;
-    virtual bool insertRows(int , int, const QModelIndex & = QModelIndex());
-    virtual bool insertColumns(int, int, const QModelIndex & = QModelIndex());
-    virtual bool removeRows(int, int, const QModelIndex & = QModelIndex());
-    virtual bool removeColumns(int, int, const QModelIndex & = QModelIndex());
+    bool insertRows(int , int, const QModelIndex & = QModelIndex()) override;
+    bool insertColumns(int, int, const QModelIndex & = QModelIndex()) override;
+    bool removeRows(int, int, const QModelIndex & = QModelIndex()) override;
+    bool removeColumns(int, int, const QModelIndex & = QModelIndex()) override;
 };
 
 #endif

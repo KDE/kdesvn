@@ -40,20 +40,20 @@ class ThreadContextListener : public CContextListener
 public:
     explicit ThreadContextListener(QObject *parent);
 
-    virtual ~ThreadContextListener();
+    ~ThreadContextListener();
 
     // called from a thread != main thread
-    virtual bool contextGetLogin(const QString &realm, QString &username, QString &password, bool &maySave);
-    virtual bool contextGetSavedLogin(const QString &realm, QString &username, QString &password);
-    virtual bool contextGetLogMessage(QString &msg, const svn::CommitItemList &);
-    virtual bool contextSslClientCertPrompt(QString &certFile);
-    virtual bool contextSslClientCertPwPrompt(QString &password, const QString &realm, bool &maySave);
-    virtual svn::ContextListener::SslServerTrustAnswer contextSslServerTrustPrompt(const SslServerTrustData &data, apr_uint32_t &acceptedFailures);
-    virtual void sendTick();
-    virtual void contextProgress(long long int current, long long int max);
+    bool contextGetLogin(const QString &realm, QString &username, QString &password, bool &maySave) override;
+    bool contextGetSavedLogin(const QString &realm, QString &username, QString &password) override;
+    bool contextGetLogMessage(QString &msg, const svn::CommitItemList &) override;
+    bool contextSslClientCertPrompt(QString &certFile) override;
+    bool contextSslClientCertPwPrompt(QString &password, const QString &realm, bool &maySave) override;
+    svn::ContextListener::SslServerTrustAnswer contextSslServerTrustPrompt(const SslServerTrustData &data, apr_uint32_t &acceptedFailures) override;
+    void sendTick() override;
+    void contextProgress(long long int current, long long int max) override;
 
     using CContextListener::contextNotify;
-    virtual void contextNotify(const QString &);
+    void contextNotify(const QString &) override;
 
 Q_SIGNALS:
     void signal_contextGetLogin();

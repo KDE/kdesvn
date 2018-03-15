@@ -29,9 +29,9 @@ class GraphPanMark: public QGraphicsRectItem
 {
 public:
     GraphPanMark(QGraphicsItem *p = nullptr);
-    virtual ~GraphPanMark();
-    virtual int type()const;
-    virtual void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
+    ~GraphPanMark();
+    int type()const override;
+    void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
 };
 
 GraphPanMark::GraphPanMark(QGraphicsItem *p)

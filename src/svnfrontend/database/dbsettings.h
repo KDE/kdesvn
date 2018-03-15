@@ -38,11 +38,11 @@ public:
     static void showSettings(const QString &repository, QWidget *parent = nullptr);
 
 protected Q_SLOTS:
-    void accept() override final;
+    void accept() final;
 private:
     void init();
     explicit DbSettings(const QString &repository, QWidget *parent = nullptr);
-    virtual ~DbSettings();
+    ~DbSettings();
 
     void store_list(KEditListWidget *, const QString &);
 private:

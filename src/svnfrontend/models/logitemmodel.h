@@ -36,7 +36,7 @@ class SvnLogModel: public QAbstractListModel
     Q_OBJECT
 public:
     SvnLogModel(const svn::LogEntriesMapPtr &_log, const QString &_name, QObject *parent);
-    virtual ~SvnLogModel();
+    ~SvnLogModel();
     void setLogData(const svn::LogEntriesMapPtr &log, const QString &name);
 
     qlonglong toRevision(const QModelIndex &)const;
@@ -83,9 +83,9 @@ public:
     SvnLogSortModel(QObject *parent = nullptr);
     ~SvnLogSortModel();
 
-    void setSourceModel(QAbstractItemModel *sourceModel) override final;
+    void setSourceModel(QAbstractItemModel *sourceModel) final;
 protected:
-    bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override final;
+    bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const final;
 private:
     SvnLogModel *m_sourceModel;
 };

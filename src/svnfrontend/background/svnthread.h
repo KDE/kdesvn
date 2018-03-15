@@ -36,8 +36,8 @@ public:
      * \param parent A qobject derived class which should have a qt-slot slotNotifyMessage(const QString&)
      */
     explicit SvnThread(QObject *parent);
-    virtual ~SvnThread();
-    virtual void run() = 0;
+    ~SvnThread();
+    void run() override = 0;
     virtual void cancelMe();
 
 protected:

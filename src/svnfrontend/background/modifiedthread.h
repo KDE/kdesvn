@@ -30,12 +30,12 @@ class CheckModifiedThread: public SvnThread
     Q_OBJECT
 public:
     CheckModifiedThread(QObject *parent, const QString &what, bool updates);
-    virtual ~CheckModifiedThread();
+    ~CheckModifiedThread();
     const svn::StatusEntries &getList()const;
 Q_SIGNALS:
     void checkModifiedFinished();
 protected:
-    virtual void run();
+    void run() override;
 
     QString m_what;
     bool m_updates;

@@ -29,7 +29,7 @@ class Rangeinput_impl: public QWidget, public Ui::RangeInput
     Q_OBJECT
 public:
     explicit Rangeinput_impl(QWidget *parent = nullptr);
-    virtual ~Rangeinput_impl();
+    ~Rangeinput_impl();
 
     typedef QPair<svn::Revision, svn::Revision> revision_range;
 

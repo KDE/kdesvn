@@ -22,48 +22,28 @@
 
 #include <QTreeWidgetItem>
 
-class PropertiesDlg;
-class Propertylist;
-class QTreeWidget;
-
-class PropertyListViewItem: public QTreeWidgetItem
+class PropertyListViewItem final : public QTreeWidgetItem
 {
-    friend class PropertiesDlg;
-    friend class Propertylist;
-
 public:
     static const int _RTTI_ = QTreeWidgetItem::UserType + 2;
-    PropertyListViewItem(QTreeWidget *parent, const QString &, const QString &);
-    explicit PropertyListViewItem(QTreeWidget *parent);
-    virtual ~PropertyListViewItem();
+    explicit PropertyListViewItem(QTreeWidget *parent, const QString &aStartName = QString(), const QString &aStartValue = QString());
 
-    const QString &startName()const
-    {
-        return m_startName;
-    }
-    const QString &startValue()const
-    {
-        return m_startValue;
-    }
-    const QString &currentName()const
-    {
-        return m_currentName;
-    }
-    const QString &currentValue()const
-    {
-        return m_currentValue;
-    }
+    const QString &startName() const { return m_startName; }
+    const QString &startValue()const { return m_startValue; }
+    const QString &currentName() const { return m_currentName; }
+    const QString &currentValue() const { return m_currentValue; }
 
-    void checkValue();
-    void checkName();
+    void setName(const QString &name);
+    void setValue(const QString &value);
+
+    void checkName() { setName(text(0)); }
+    void checkValue() { setValue(text(1)); }
+
     void deleteIt();
     void unDeleteIt();
-    bool deleted()const
-    {
-        return m_deleted;
-    }
+    bool deleted() const { return m_deleted; }
 
-    bool different()const;
+    bool different() const;
 
     //! Check if a specific property may just internale
     /*!
@@ -72,9 +52,9 @@ public:
      * This moment it just checks for "svn:special"
      * \return true if protected property otherwise false
      */
-    static bool protected_Property(const QString &);
+    static bool protected_Property(const QString &what);
 
-protected:
+private:
     QString m_currentName, m_startName, m_currentValue, m_startValue;
     bool m_deleted;
 };

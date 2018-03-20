@@ -20,30 +20,28 @@
 #include "propertyitem.h"
 #include <kiconloader.h>
 
-PropertyListViewItem::PropertyListViewItem(QTreeWidget *parent, const QString &aName, const QString &aValue)
-    : QTreeWidgetItem(parent, _RTTI_), m_currentName(aName), m_startName(aName), m_currentValue(aValue), m_startValue(aValue), m_deleted(false)
+PropertyListViewItem::PropertyListViewItem(QTreeWidget *parent, const QString &aStartName, const QString &aStartValue)
+    : QTreeWidgetItem(parent, _RTTI_)
+    , m_currentName(aStartName)
+    , m_startName(aStartName)
+    , m_currentValue(aStartValue)
+    , m_startValue(aStartValue)
+    , m_deleted(false)
 {
     setText(0, startName());
     setText(1, startValue());
 }
 
-PropertyListViewItem::PropertyListViewItem(QTreeWidget *parent)
-    : QTreeWidgetItem(parent, _RTTI_), m_currentName(), m_startName(), m_currentValue(), m_startValue(), m_deleted(false)
+void PropertyListViewItem::setName(const QString &name)
 {
+    m_currentName = name;
+    setText(0, name);
 }
 
-PropertyListViewItem::~PropertyListViewItem()
+void PropertyListViewItem::setValue(const QString &value)
 {
-}
-
-void PropertyListViewItem::checkValue()
-{
-    m_currentValue = text(1);
-}
-
-void PropertyListViewItem::checkName()
-{
-    m_currentName = text(0);
+    m_currentValue = value;
+    setText(1, value);
 }
 
 bool PropertyListViewItem::different()const
@@ -65,11 +63,6 @@ void PropertyListViewItem::unDeleteIt()
 
 bool PropertyListViewItem::protected_Property(const QString &what)
 {
-    if (
-        what.compare(QLatin1String("svn:mergeinfo")) == 0 ||
-        what.compare(QLatin1String("svn:special")) == 0
-    ) {
-        return true;
-    }
-    return false;
+    return (what.compare(QLatin1String("svn:mergeinfo")) == 0 ||
+            what.compare(QLatin1String("svn:special")) == 0);
 }

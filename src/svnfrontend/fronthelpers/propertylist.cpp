@@ -100,12 +100,7 @@ void Propertylist::slotItemChanged(QTreeWidgetItem *_item, int col)
     QString text = item->text(col);
 
     if (text.isEmpty() && col == 0) {
-        // fresh added
-        if (item->currentName().isEmpty()) {
-            delete item;
-        } else {
-            item->setText(0, item->currentName());
-        }
+        item->setText(0, item->currentName());
         return;
     }
     bool fail = false;

@@ -38,45 +38,45 @@ public:
     virtual ~CContextListener();
 
     /* context-listener methods */
-    virtual bool contextGetLogin(const QString &realm,
+    bool contextGetLogin(const QString &realm,
                                  QString &username,
                                  QString &password,
-                                 bool &maySave);
-    virtual bool contextGetSavedLogin(const QString &realm, QString &username, QString &password);
-    virtual bool contextGetCachedLogin(const QString &realm, QString &username, QString &password);
+                                 bool &maySave) override;
+    bool contextGetSavedLogin(const QString &realm, QString &username, QString &password) override;
+    bool contextGetCachedLogin(const QString &realm, QString &username, QString &password) override;
 
-    virtual void contextNotify(const char *path,
+    void contextNotify(const char *path,
                                svn_wc_notify_action_t action,
                                svn_node_kind_t kind,
                                const char *mime_type,
                                svn_wc_notify_state_t content_state,
                                svn_wc_notify_state_t prop_state,
-                               svn_revnum_t revision);
-    virtual void contextNotify(const svn_wc_notify_t *action);
+                               svn_revnum_t revision) override;
+    void contextNotify(const svn_wc_notify_t *action) override;
     virtual void contextNotify(const QString &);
 
     virtual void sendTick();
 
-    virtual bool contextCancel();
+    bool contextCancel() override;
     /*!
      * Get logmessage for checkin and so on...
      */
-    virtual bool contextGetLogMessage(QString &msg, const svn::CommitItemList &);
-    virtual SslServerTrustAnswer contextSslServerTrustPrompt(const SslServerTrustData &data,
-            apr_uint32_t &acceptedFailures);
-    virtual bool contextSslClientCertPrompt(QString &certFile);
-    virtual bool contextSslClientCertPwPrompt(QString &password,
-            const QString &realm, bool &maySave);
-    virtual bool contextLoadSslClientCertPw(QString &password, const QString &realm);
-    virtual QString translate(const QString &what);
+    bool contextGetLogMessage(QString &msg, const svn::CommitItemList &) override;
+    SslServerTrustAnswer contextSslServerTrustPrompt(const SslServerTrustData &data,
+            apr_uint32_t &acceptedFailures) override;
+    bool contextSslClientCertPrompt(QString &certFile) override;
+    bool contextSslClientCertPwPrompt(QString &password,
+            const QString &realm, bool &maySave) override;
+    bool contextLoadSslClientCertPw(QString &password, const QString &realm) override;
+    QString translate(const QString &what) override;
 
     static QString NotifyAction(svn_wc_notify_action_t action);
     static QString NotifyState(svn_wc_notify_state_t);
 
     static QStringList failure2Strings(apr_uint32_t acceptedFailures);
-    virtual void contextProgress(long long int current, long long int max);
+    void contextProgress(long long int current, long long int max) override;
 
-    virtual void maySavePlaintext(svn_boolean_t *may_save_plaintext, const QString &realmstring);
+    void maySavePlaintext(svn_boolean_t *may_save_plaintext, const QString &realmstring) override;
 
     // used by SvnActions
     //! get list of updated items when svn update is called

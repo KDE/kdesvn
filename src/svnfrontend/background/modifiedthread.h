@@ -35,7 +35,7 @@ public:
 Q_SIGNALS:
     void checkModifiedFinished();
 protected:
-    virtual void run();
+    void run() override;
 
     QString m_what;
     bool m_updates;

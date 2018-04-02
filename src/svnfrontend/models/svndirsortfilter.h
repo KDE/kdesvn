@@ -29,7 +29,7 @@ public:
     explicit SvnDirSortFilterProxy(QObject *parent = 0);
     virtual ~SvnDirSortFilterProxy();
 
-    virtual int columnCount(const QModelIndex &parent = QModelIndex())const;
+    int columnCount(const QModelIndex &parent = QModelIndex())const override;
 };
 
 #endif

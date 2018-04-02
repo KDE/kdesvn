@@ -31,7 +31,7 @@ public:
     virtual ~DiffSyntax();
 
 protected:
-    void highlightBlock(const QString &aText);
+    void highlightBlock(const QString &aText) override;
 };
 
 #endif

@@ -30,8 +30,8 @@ class GraphPanMark: public QGraphicsRectItem
 public:
     GraphPanMark(QGraphicsItem *p = 0);
     virtual ~GraphPanMark();
-    virtual int type()const;
-    virtual void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
+    int type()const override;
+    void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
 };
 
 GraphPanMark::GraphPanMark(QGraphicsItem *p)

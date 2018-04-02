@@ -64,8 +64,8 @@ protected:
     CursorStack *cstack;
     QDialogButtonBox *m_bBox;
 
-    virtual void showEvent(QShowEvent *e);
-    virtual void hideEvent(QHideEvent *e);
+    void showEvent(QShowEvent *e) override;
+    void hideEvent(QHideEvent *e) override;
 
 public slots:
     virtual void slotTick();

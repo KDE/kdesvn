@@ -44,16 +44,16 @@ public:
     /************************
      * Methods from SvnItem *
      ************************/
-    virtual QString getParentDir()const;
-    virtual SvnItem *getParentItem()const;
-    virtual svn::Revision correctPeg()const;
-    virtual void refreshStatus(bool children = false);
-    virtual SvnActions *getWrapper() const;
+    QString getParentDir()const override;
+    SvnItem *getParentItem()const override;
+    svn::Revision correctPeg()const override;
+    void refreshStatus(bool children = false) override;
+    SvnActions *getWrapper() const override;
     virtual bool NodeIsDir() const;
     virtual bool NodeHasChilds() const;
 
     virtual char sortChar() const;
-    virtual SvnItemModelNode *sItem()
+    SvnItemModelNode *sItem() override
     {
         return this;
     }
@@ -73,20 +73,20 @@ public:
     SvnItemModelNodeDir(SvnActions *, MainTreeWidget *);
     SvnItemModelNodeDir(SvnItemModelNodeDir *_parent, SvnActions *, MainTreeWidget *);
     virtual ~SvnItemModelNodeDir();
-    virtual bool NodeIsDir() const;
+    bool NodeIsDir() const override;
 
     const QVector<SvnItemModelNode *> &childList()const;
     SvnItemModelNode *child(int row)const;
 
     SvnItemModelNode *findPath(const QStringList &parts);
     int indexOf(const QString &fullPath) const;
-    virtual char sortChar() const;
+    char sortChar() const override;
 
     bool contains(const QString &fullName) const;
-    virtual void refreshStatus(bool children = false);
+    void refreshStatus(bool children = false) override;
 
     void clear();
-    virtual bool NodeHasChilds() const;
+    bool NodeHasChilds() const override;
 
 protected:
     QVector<SvnItemModelNode *> m_Children;

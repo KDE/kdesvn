@@ -125,41 +125,41 @@ public:
                               bool current = false);
 
     // getters
-    QString  text(int) const;
-    QPixmap  pixmap(int) const;
-    Position position(int) const;
-    int      maxLines(int) const;
-    int      fieldCount() const
+    QString  text(int) const override;
+    QPixmap  pixmap(int) const override;
+    Position position(int) const override;
+    int      maxLines(int) const override;
+    int      fieldCount() const override
     {
         return _field.size();
     }
 
-    QColor   backColor() const
+    QColor   backColor() const override
     {
         return _backColor;
     }
-    bool selected() const
+    bool selected() const override
     {
         return _selected;
     }
-    bool current() const
+    bool current() const override
     {
         return _current;
     }
-    bool shaded() const
+    bool shaded() const override
     {
         return _shaded;
     }
-    bool rotated() const
+    bool rotated() const override
     {
         return _rotated;
     }
-    bool drawFrame() const
+    bool drawFrame() const override
     {
         return _drawFrame;
     }
 
-    QFont font() const;
+    QFont font() const override;
 
     // attribute setters
     void setField(int f, QString t, QPixmap pm = QPixmap(),

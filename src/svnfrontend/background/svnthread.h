@@ -37,7 +37,7 @@ public:
      */
     explicit SvnThread(QObject *parent);
     virtual ~SvnThread();
-    virtual void run() = 0;
+    void run() override = 0;
     virtual void cancelMe();
 
 protected:

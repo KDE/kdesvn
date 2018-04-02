@@ -30,12 +30,12 @@ class DummyDisplay : public ItemDisplay
 public:
     DummyDisplay();
     virtual ~DummyDisplay();
-    virtual QWidget *realWidget();
-    virtual SvnItem *Selected()const;
-    virtual SvnItemList SelectionList()const;
-    virtual svn::Revision baseRevision()const;
-    virtual bool openUrl(const QUrl &url, bool noReinit = false);
-    virtual SvnItem *SelectedOrMain()const;
+    QWidget *realWidget() override;
+    SvnItem *Selected()const override;
+    SvnItemList SelectionList()const override;
+    svn::Revision baseRevision()const override;
+    bool openUrl(const QUrl &url, bool noReinit = false) override;
+    SvnItem *SelectedOrMain()const override;
 };
 
 #endif

@@ -120,7 +120,7 @@ public:
     void makeLog(const svn::Revision &start, const svn::Revision &end, const svn::Revision &peg, const QString &, bool follow, bool list_files = false, int limit = 0);
     svn::LogEntriesMapPtr getLog(const svn::Revision &start, const svn::Revision &end, const svn::Revision &peg, const QString &, bool list_files, int limit, QWidget *parent = 0);
     svn::LogEntriesMapPtr getLog(const svn::Revision &start, const svn::Revision &end, const svn::Revision &peg, const QString &, bool list_files, int limit, bool follow_nodes, QWidget *parent = 0);
-    virtual bool getSingleLog(svn::LogEntry &, const svn::Revision &, const QString &, const svn::Revision &, QString &root);
+    bool getSingleLog(svn::LogEntry &, const svn::Revision &, const QString &, const svn::Revision &, QString &root) override;
 
     void makeBlame(const svn::Revision &start, const svn::Revision &end, SvnItem *k);
     void makeBlame(const svn::Revision &start, const svn::Revision &end, const QString &, QWidget *parent = 0, const svn::Revision &peg = svn::Revision::UNDEFINED, SimpleLogCb *_acb = 0);

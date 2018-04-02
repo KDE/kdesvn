@@ -43,16 +43,16 @@ public:
     virtual ~SvnLogDlgImp();
     void dispLog(const svn::LogEntriesMapPtr &log, const QString &what, const QString &root, const svn::Revision &peg, const QString &pegUrl);
     void saveSize();
-    virtual bool getSingleLog(svn::LogEntry &t, const svn::Revision &r, const QString &what, const svn::Revision &peg, QString &root);
+    bool getSingleLog(svn::LogEntry &t, const svn::Revision &r, const QString &what, const svn::Revision &peg, QString &root) override;
 
 signals:
     void makeDiff(const QString &, const svn::Revision &, const QString &, const svn::Revision &, QWidget *);
     void makeCat(const svn::Revision &, const QString &, const QString &, const svn::Revision &, QWidget *);
 
 protected:
-    virtual void keyPressEvent(QKeyEvent *e);
-    virtual void keyReleaseEvent(QKeyEvent *e);
-    virtual void showEvent(QShowEvent *e);
+    void keyPressEvent(QKeyEvent *e) override;
+    void keyReleaseEvent(QKeyEvent *e) override;
+    void showEvent(QShowEvent *e) override;
 
 protected slots:
     void slotDispPrevious();

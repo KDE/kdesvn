@@ -45,8 +45,8 @@ public:
 
     virtual ~SvnFileOStream();
 
-    virtual bool isOk() const;
-    virtual long write(const char *data, const unsigned long max);
+    bool isOk() const override;
+    long write(const char *data, const unsigned long max) override;
 private:
     SvnFileStream_private *m_FileData;
 };
@@ -61,8 +61,8 @@ public:
     explicit SvnFileIStream(const QString &fn, svn_client_ctx_t *ctx = 0);
 
     virtual ~SvnFileIStream();
-    virtual bool isOk() const;
-    virtual long read(char *data, const unsigned long max);
+    bool isOk() const override;
+    long read(char *data, const unsigned long max) override;
 
 private:
     SvnFileStream_private *m_FileData;

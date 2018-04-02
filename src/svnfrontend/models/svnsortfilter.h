@@ -31,9 +31,9 @@ public:
     explicit SvnSortFilterProxy(QObject *parent = 0);
     virtual ~SvnSortFilterProxy();
 
-    virtual bool hasChildren(const QModelIndex &parent = QModelIndex()) const;
+    bool hasChildren(const QModelIndex &parent = QModelIndex()) const override;
     virtual void setSourceSvnModel(SvnItemModel *sourceModel);
-    virtual void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
+    void sort(int column, Qt::SortOrder order = Qt::AscendingOrder) override;
 
     enum ShowType {
         None = 0x0,
@@ -51,8 +51,8 @@ public:
     }
 
 protected:
-    virtual bool lessThan(const QModelIndex &left, const QModelIndex &right)const;
-    virtual bool filterAcceptsRow(int source_row, const QModelIndex &source_parent)const;
+    bool lessThan(const QModelIndex &left, const QModelIndex &right)const override;
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent)const override;
 
     SvnItemModel *m_sourceModel;
     Qt::SortOrder m_order;

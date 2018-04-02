@@ -46,8 +46,8 @@ public:
 
     ~KioByteStream();
 
-    virtual bool isOk() const;
-    virtual long write(const char *data, const unsigned long max);
+    bool isOk() const override;
+    long write(const char *data, const unsigned long max) override;
 
     KIO::filesize_t written()
     {

@@ -43,7 +43,7 @@ Q_SIGNALS:
     void fillCacheFinished();
 
 protected:
-    virtual void run();
+    void run() override;
     void fillInfo();
 
     QString m_what;

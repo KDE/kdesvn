@@ -30,6 +30,7 @@
 #include <KTextEdit>
 #include <KTreeWidgetSearchLine>
 
+#include <QAction>
 #include <QBrush>
 #include <QFontDatabase>
 #include <QInputDialog>

@@ -34,9 +34,9 @@ public:
     GraphTreeLabel(const QString &, const QString &, const QRectF &r, QGraphicsItem *p = 0);
     virtual ~GraphTreeLabel();
 
-    virtual int type()const;
+    int type()const override;
     //virtual void drawShape(QPainter& p);
-    virtual void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
+    void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
 
     void setBgColor(const QColor &);
 
@@ -57,8 +57,8 @@ class GraphEdgeArrow: public QGraphicsPolygonItem
 public:
     explicit GraphEdgeArrow(GraphEdge *, QGraphicsItem *p = 0);
     GraphEdge *edge();
-    void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
-    virtual int type()const;
+    void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
+    int type()const override;
 
 private:
     GraphEdge *_edge;
@@ -71,10 +71,10 @@ public:
     explicit GraphEdge(QGraphicsItem *p = 0);
     virtual ~GraphEdge();
 
-    void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
+    void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
     const QPolygonF &controlPoints()const;
     void setControlPoints(const QPolygonF &a);
-    virtual int type()const;
+    int type()const override;
 
 private:
     QPolygonF _points;
@@ -85,9 +85,9 @@ class GraphMark: public QGraphicsRectItem
 public:
     explicit GraphMark(GraphTreeLabel *, QGraphicsItem *p = 0);
     virtual ~GraphMark();
-    virtual int type()const;
+    int type()const override;
     virtual bool hit(const QPoint &)const;
-    virtual void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
+    void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
 
 private:
     static QPixmap *_p;

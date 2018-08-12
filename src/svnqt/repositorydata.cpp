@@ -47,7 +47,7 @@ class SVNQT_NOEXPORT RepoOutStream: public stream::SvnStream
 public:
     RepoOutStream(RepositoryData *);
 
-    bool isOk()const override
+    bool isOk() const override
     {
         return true;
     }

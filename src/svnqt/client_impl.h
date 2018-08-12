@@ -60,8 +60,7 @@ public:
     /**
      * @return returns the Client context
      */
-    virtual const ContextP
-    getContext() const;
+    const ContextP getContext() const override;
 
     /**
      * sets the client context
@@ -70,8 +69,7 @@ public:
      *
      * @param context new context to use
      */
-    virtual void
-    setContext(const ContextP &context);
+    void setContext(const ContextP &context) override;
 
 
     /**
@@ -82,8 +80,7 @@ public:
      * @param params the parameter for this method
      * @return vector with Status entries.
      */
-    virtual StatusEntries
-    status(const StatusParameter &params);
+    StatusEntries status(const StatusParameter &params) override;
 
     /**
      * Returns the status of a single file in the path.
@@ -95,8 +92,7 @@ public:
      * @param revision list specific revision when browsing remote, on working copies parameter will ignored
      * @return a Status with Statis.isVersioned = FALSE
      */
-    virtual StatusPtr
-    singleStatus(const Path &path, bool update = false, const Revision &revision = svn::Revision::HEAD);
+    StatusPtr singleStatus(const Path &path, bool update = false, const Revision &revision = svn::Revision::HEAD) override;
 
     /**
      * Executes a revision checkout.
@@ -104,16 +100,14 @@ public:
      * @return revision number checked out
      * @exception ClientException
      */
-    virtual Revision
-    checkout(const CheckoutParameter &params);
+    Revision checkout(const CheckoutParameter &params) override;
 
     /**
      * relocate wc @a from to @a to
      * @exception ClientException
      */
-    virtual void
-    relocate(const Path &path, const Url &from_url,
-             const Url &to_url, bool recurse, bool ignore_externals);
+    void relocate(const Path &path, const Url &from_url,
+                  const Url &to_url, bool recurse, bool ignore_externals) override;
 
     /**
      * Sets files for deletion.
@@ -122,21 +116,21 @@ public:
      * @param force force if files are locally modified
      * @exception ClientException
      */
-    virtual svn::Revision
+    svn::Revision
     remove(const Targets &targets,
            bool force,
            bool keep_local = true,
-           const PropertiesMap &revProps = PropertiesMap());
+           const PropertiesMap &revProps = PropertiesMap()) override;
 
     /**
      * Reverts a couple of files to a pristiner state.
      * @exception ClientException
      */
-    virtual void
+    void
     revert(const Targets &targets,
            Depth depth,
            const StringArray &changelist = StringArray()
-          );
+          ) override;
 
 
     /**
@@ -149,15 +143,14 @@ public:
      * @exception ClientException
      * @sa svn::Depth
      */
-    virtual void add(const Path &path, svn::Depth depth, bool force = false, bool no_ignore = false, bool add_parents = true);
+    void add(const Path &path, svn::Depth depth, bool force = false, bool no_ignore = false, bool add_parents = true) override;
 
     /**
      * Updates the file or directory.
      * @param params the parameter for subversion
      * @exception ClientException
      */
-    virtual Revisions
-    update(const UpdateParameter &params);
+    Revisions update(const UpdateParameter &params) override;
 
     /**
      * Retrieves the contents for a specific @a revision of
@@ -169,10 +162,10 @@ public:
      * @param peg_revision Revision to look at
      * @return contents of the file
      */
-    virtual QByteArray
+    QByteArray
     cat(const Path &path,
         const Revision &revision,
-        const Revision &peg_revision = Revision::UNDEFINED);
+        const Revision &peg_revision = Revision::UNDEFINED) override;
     /**
      * Retrieves the contents for a specific @a revision of
      * a @a path at @a peg_revision
@@ -183,11 +176,11 @@ public:
      * @param revision revision to retrieve
      * @exception ClientException
      */
-    virtual void
+    void
     cat(svn::stream::SvnStream &buffer,
         const Path &path,
         const Revision &revision,
-        const Revision &peg_revision);
+        const Revision &peg_revision) override;
 
     /**
      * Retrieves the contents for a specific @a revision of
@@ -199,11 +192,10 @@ public:
      * @param revision revision to retrieve
      * @param peg_revision Revision to look at
      */
-    virtual void
-    get(const Path &path,
+    void get(const Path &path,
         const QString   &target,
         const Revision &revision,
-        const Revision &peg_revision = Revision::UNDEFINED);
+        const Revision &peg_revision = Revision::UNDEFINED) override;
 
     /**
      * Retrieves the contents for a specific @a revision of
@@ -215,8 +207,7 @@ public:
      * @param revisionEnd revision to retrieve
      * @param peg indicates in which revision path is valid
      */
-    virtual void
-    annotate(AnnotatedFile &target, const AnnotateParameter &params);
+    void annotate(AnnotatedFile &target, const AnnotateParameter &params) override;
 
     /**
      * Commits changes to the repository. This usually requires
@@ -225,17 +216,16 @@ public:
      * @return Returns revision transferred or svn::Revision::UNDEFINED if the revision number is invalid.
      * @exception ClientException
      */
-    virtual svn::Revision
-    commit(const CommitParameter &parameters);
+    svn::Revision commit(const CommitParameter &parameters) override;
 
     /**
      * Copies a versioned file with the history preserved.
      * @exception ClientException
      */
-    virtual svn::Revision
+    svn::Revision
     copy(const Path &srcPath,
          const Revision &srcRevision,
-         const Path &destPath);
+         const Path &destPath) override;
     /**
      * Copies a versioned file with the history preserved.
      * @since subversion 1.5 api
@@ -243,16 +233,14 @@ public:
      * @see svn_client_copy4,svn_client_copy5
      * @exception ClientException
      */
-    virtual svn::Revision
-    copy(const CopyParameter &parameter);
+    svn::Revision copy(const CopyParameter &parameter) override;
 
     /**
      * Moves or renames a file.
      * @param parameter Class holding old required parameter
      * @exception ClientException
      */
-    virtual svn::Revision
-    move(const CopyParameter &parameter);
+    svn::Revision move(const CopyParameter &parameter) override;
 
     /**
      * Creates a directory directly in a repository or creates a
@@ -264,12 +252,12 @@ public:
      * @param message log message. if it is QString::null asks when working on repository
      * @exception ClientException
      */
-    virtual svn::Revision
+    svn::Revision
     mkdir(const Targets &targets,
           const QString &message,
           bool makeParent = true,
           const PropertiesMap &revProps = PropertiesMap()
-         );
+         ) override;
 
     /**
      * Recursively cleans up a local directory, finishing any
@@ -277,14 +265,13 @@ public:
      * @param path a local directory.
      * @exception ClientException
      */
-    virtual void
-    cleanup(const Path &path);
+    void cleanup(const Path &path) override;
 
     /**
      * Removes the 'conflicted' state on a file.
      * @exception ClientException
      */
-    virtual void resolve(const Path &path, Depth depth, const ConflictResult &resolution = ConflictResult());
+    void resolve(const Path &path, Depth depth, const ConflictResult &resolution = ConflictResult()) override;
 
     /**
      * Exports the contents of either a subversion repository into a
@@ -294,15 +281,14 @@ public:
      * @param params Parameter to use
      * @return revision exported
      */
-    virtual Revision
-    doExport(const CheckoutParameter &params);
+    Revision doExport(const CheckoutParameter &params) override;
 
     /**
      * Update local copy to mirror a new url. This excapsulates the
      * svn_client_switch() client method.
      * @exception ClientException
      */
-    virtual Revision
+    Revision
     doSwitch(const Path &path, const Url &url,
         const Revision &revision,
         Depth depth,
@@ -311,7 +297,7 @@ public:
         bool ignore_externals = false,
         bool allow_unversioned = false,
         bool ignore_ancestry = false
-      );
+      ) override;
 
     /**
      * Import file or directory PATH into repository directory URL at
@@ -324,23 +310,21 @@ public:
      * @param no_unknown_nodetype if true ignore files type not known like pipes or device files
      * @exception ClientException
      */
-    virtual svn::Revision
+    svn::Revision
     import(const Path &path, const Url &importRepository,
            const QString &message,
            svn::Depth depth,
            bool no_ignore, bool no_unknown_nodetype,
-           const PropertiesMap &revProps = PropertiesMap());
+           const PropertiesMap &revProps = PropertiesMap()) override;
 
     /**
      * Merge changes from two paths into a new local path. For reintegrate merge see svn::MergeParameter!
      * @exception ClientException
      * @sa svn::MergeParameter
      */
-    virtual void
-    merge(const MergeParameter &parameters);
+    void merge(const MergeParameter &parameters) override;
 
-    virtual void
-    merge_peg(const MergeParameter &parameters);
+    void merge_peg(const MergeParameter &parameters) override;
 
     /**
      * Retrieve information for the given path
@@ -354,13 +338,13 @@ public:
      * @return InfoEntries
      * @since subversion 1.2
      */
-    virtual InfoEntries
+    InfoEntries
     info(const Path &path,
          Depth depth,
          const Revision &rev,
          const Revision &peg_revision = Revision::UNDEFINED,
          const StringArray &changelists = StringArray()
-        );
+        ) override;
 
     /**
      * Retrieve log information for the given path
@@ -375,9 +359,7 @@ public:
      * @return true if success
      * @sa LogParameter
      */
-    virtual bool
-    log(const LogParameter &params, LogEntriesMap &target);
-
+    bool log(const LogParameter &params, LogEntriesMap &target) override; 
     /**
      * Produce diff output which describes the delta between
      * @a path/@a revision1 and @a path/@a revision2. @a path
@@ -390,9 +372,7 @@ public:
      * @return delta between the files
      * @exception ClientException
      */
-    virtual QByteArray
-    diff_peg(const DiffParameter &options)
-   ;
+    QByteArray diff_peg(const DiffParameter &options) override;
 
     /**
      * Produce diff output which describes the delta between
@@ -406,9 +386,7 @@ public:
      * @return delta between the files
      * @exception ClientException
      */
-    virtual QByteArray
-    diff(const DiffParameter &options)
-   ;
+    QByteArray diff(const DiffParameter &options) override;
 
     /**
      * lists entries in @a pathOrUrl no matter whether local or
@@ -426,7 +404,7 @@ public:
     list(const Path &pathOrUrl,
          const Revision &revision,
          const Revision &peg,
-         svn::Depth depth, bool retrieve_locks);
+         svn::Depth depth, bool retrieve_locks) override;
 
     /**
      * lists properties in @a path no matter whether local or
@@ -443,7 +421,7 @@ public:
              const Revision &revision,
              const Revision &peg,
              Depth depth = DepthEmpty,
-             const StringArray &changelists = StringArray());
+             const StringArray &changelists = StringArray()) override;
 
     /**
      * lists one property in @a path no matter whether local or
@@ -462,7 +440,7 @@ public:
             const Revision &revision,
             const Revision &peg,
             Depth depth = svn::DepthEmpty,
-            const StringArray &changelists = StringArray());
+            const StringArray &changelists = StringArray()) override;
 
     /**
      * set property in @a path no matter whether local or
@@ -481,7 +459,7 @@ public:
      * </ul>
      */
     virtual void
-    propset(const PropertiesParameter &params);
+    propset(const PropertiesParameter &params) override;
 
     /**
      * lists revision properties in @a path no matter whether local or
@@ -493,7 +471,7 @@ public:
      */
     virtual QPair<qlonglong, PropertiesMap>
     revproplist(const Path &path,
-                const Revision &revision);
+                const Revision &revision) override;
 
     /**
      * lists one revision property in @a path no matter whether local or
@@ -507,7 +485,7 @@ public:
     QPair<qlonglong, QString>
     revpropget(const QString &propName,
                const Path &path,
-               const Revision &revision);
+               const Revision &revision) override;
 
     /**
      * set revision property in @a path no matter whether local or
@@ -518,7 +496,7 @@ public:
      * @sa PropertiesParameter
      */
     virtual qlonglong
-    revpropset(const PropertiesParameter &params);
+    revpropset(const PropertiesParameter &params) override;
 
     /**
      * delete revision property in @a path no matter whether local or
@@ -533,7 +511,7 @@ public:
     virtual qlonglong
     revpropdel(const QString &propName,
                const Path &path,
-               const Revision &revision);
+               const Revision &revision) override;
 
     /**
      * lock files in repository or working copy
@@ -542,27 +520,22 @@ public:
      * @param steal_lock if true locks in wc will stolen.
      * @since subversion 1.2
      */
-    virtual void
-    lock(const Targets &targets,
-         const QString &message,
-         bool steal_lock);
+    void lock(const Targets &targets, const QString &message,
+              bool steal_lock) override;
     /**
      * unlock files in repository or working copy
      * @param targets items to unlock
      * @param break_lock ignore any errors
      */
-    virtual void
-    unlock(const Targets &targets,
-           bool break_lock);
+    void unlock(const Targets &targets,
+                bool break_lock) override;
 
-    virtual void
-    url2Revision(const QString &revstring,
-                 Revision &start, Revision &end);
-    virtual void
-    url2Revision(const QString &revstring,
-                 Revision &start);
+    void url2Revision(const QString &revstring,
+                      Revision &start, Revision &end) override;
+    void url2Revision(const QString &revstring,
+                      Revision &start) override;
 
-    virtual bool RepoHasCapability(const Path &repository, Capability capability);
+    bool RepoHasCapability(const Path &repository, Capability capability) override;
 
     static void checkErrorThrow(svn_error_t *error)
     {

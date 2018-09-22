@@ -100,6 +100,7 @@ kdesvn::kdesvn()
             setCentralWidget(m_part->widget());
             connect(this, SIGNAL(sigSavestate()), m_part->widget(), SLOT(slotSavestate()));
             connect(m_part->widget(), SIGNAL(sigExtraStatusMessage(QString)), this, SLOT(slotExtraStatus(QString)));
+            connect(m_part->widget(), SIGNAL(sigUrlOpened(bool)), this, SLOT(slotUrlOpened(bool)));
 
             QAction *tmpAction;
             tmpAction = actionCollection()->addAction(QStringLiteral("subversion_create_repo"),

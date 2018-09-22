@@ -93,6 +93,7 @@ Q_SIGNALS:
     void sigShowPopup(const QString &, QWidget **);
     void sigSwitchUrl(const QUrl &);
     void sigUrlChanged(const QUrl &url);
+    void sigUrlOpend(bool);
     void setWindowCaption(const QString &);
     void sigMakeBaseDirs();
 

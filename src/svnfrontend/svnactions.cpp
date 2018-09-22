@@ -36,6 +36,7 @@
 #include "ksvnwidgets/encodingselector_impl.h"
 #include "ksvnwidgets/revertform.h"
 #include "graphtree/revisiontree.h"
+#include "graphtree/revtreewidget.h"
 #include "settings/kdesvnsettings.h"
 #include "svnqt/client.h"
 #include "svnqt/annotate_line.h"
@@ -495,7 +496,7 @@ void SvnActions::makeTree(const QString &what, const svn::Revision &_rev, const 
                                       startr, endr,
                                       info.url().toString().mid(reposRoot.length()), _rev, dlg));
     if (rt->isValid()) {
-        QWidget *disp = rt->getView();
+        RevTreeWidget *disp = rt->getView();
         if (disp) {
             dlg->addWidget(rt->getView());
             connect(

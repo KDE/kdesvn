@@ -331,7 +331,7 @@ void kdesvnView::slotLoaddump()
     }
 
     try {
-        StopDlg sdlg(this, this, i18nc("@title:window", "Load Dump"), i18n("Loading a dump into a repository."));
+        StopDlg sdlg(nullptr, this, i18nc("@title:window", "Load Dump"), i18n("Loading a dump into a repository."));
         _rep.loaddump(_input, _act, ptr->parentPath(), ptr->usePre(), ptr->usePost(), ptr->validateProps());
         slotAppendLog(i18n("Loading dump finished."));
     } catch (const svn::ClientException &e) {
@@ -383,7 +383,7 @@ void kdesvnView::slotDumpRepo()
     }
 
     try {
-        StopDlg sdlg(this, this, i18nc("@title:window", "Dump"), i18n("Dumping a repository"));
+        StopDlg sdlg(nullptr, this, i18nc("@title:window", "Dump"), i18n("Dumping a repository"));
         _rep->dump(out, st, en, incr, diffs);
         slotAppendLog(i18n("Dump finished."));
     } catch (const svn::ClientException &e) {

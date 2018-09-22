@@ -25,11 +25,10 @@
 #include "svnqt/client.h"
 
 #include <qstring.h>
-#include <qmap.h>
-#include <qpixmap.h>
 
+class CContextListener;
 class RtreeData;
-class QWidget;
+class RevTreeWidget;
 
 namespace svn
 {
@@ -39,19 +38,20 @@ class Client;
 /**
     @author Rajko Albrecht <ral@alwins-world.de>
 */
-class RevisionTree
+class RevisionTree final
 {
 public:
+    Q_DISABLE_COPY(RevisionTree)
     RevisionTree(const svn::ClientP &,
-                 QObject *aListener,
+                 CContextListener *aListener,
                  const QString &reposRoot,
                  const svn::Revision &startr, const svn::Revision &endr,
                  const QString &, const svn::Revision &baserevision,
                  QWidget *parent = nullptr);
-    virtual ~RevisionTree();
+    ~RevisionTree();
 
     bool isValid()const;
-    QWidget *getView();
+    RevTreeWidget *getView();
 
 protected:
     long m_Baserevision;
@@ -68,10 +68,6 @@ protected:
     static bool isParent(const QString &_par, const QString &tar);
 
     void fillItem(long revIndex, int pathIndex, const QString &nodeName, const QString &path);
-private:
-    RevisionTree(const RevisionTree &);
-    RevisionTree &operator=(const RevisionTree &);
-
 };
 
 #endif

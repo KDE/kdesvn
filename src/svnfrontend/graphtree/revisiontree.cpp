@@ -19,6 +19,7 @@
  ***************************************************************************/
 #include "revisiontree.h"
 #include "../stopdlg.h"
+#include "../ccontextlistener.h"
 #include "svnqt/log_entry.h"
 #include "svnqt/cache/LogCache.h"
 #include "svnqt/cache/ReposLog.h"
@@ -40,6 +41,7 @@
 #define INTERNALCOPY 1
 #define INTERNALRENAME 2
 
+class CContextListener;
 class RtreeData
 {
 public:
@@ -58,7 +60,7 @@ public:
     RevTreeWidget *m_TreeDisplay;
 
     svn::ClientP m_Client;
-    QObject *m_Listener;
+    CContextListener *m_Listener;
 
     bool getLogs(const QString &, const svn::Revision &startr, const svn::Revision &endr, const QString &origin);
 };
@@ -111,7 +113,7 @@ bool RtreeData::getLogs(const QString &reposRoot, const svn::Revision &startr, c
 }
 
 RevisionTree::RevisionTree(const svn::ClientP &aClient,
-                           QObject *aListener,
+                           CContextListener *aListener,
                            const QString &reposRoot,
                            const svn::Revision &startr, const svn::Revision &endr,
                            const QString &origin,
@@ -500,7 +502,7 @@ bool RevisionTree::bottomUpScan(long startrev, unsigned recurse, const QString &
     return !cancel;
 }
 
-QWidget *RevisionTree::getView()
+RevTreeWidget *RevisionTree::getView()
 {
     return m_Data->m_TreeDisplay;
 }

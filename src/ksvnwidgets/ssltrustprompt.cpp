@@ -34,11 +34,11 @@ SslTrustPrompt::SslTrustPrompt(const QString &host, const QString &text, QWidget
     m_ui->buttonBox->button(QDialogButtonBox::No)->setText(i18n("Accept temporarily"));
     m_ui->buttonBox->button(QDialogButtonBox::Cancel)->setText(i18n("Reject"));
     connect(m_ui->buttonBox->button(QDialogButtonBox::Yes), &QPushButton::clicked,
-            [=]() {setResult(QDialogButtonBox::Yes);});
+            this, [this]() {setResult(QDialogButtonBox::Yes);});
     connect(m_ui->buttonBox->button(QDialogButtonBox::No), &QPushButton::clicked,
-            [=]() {setResult(QDialogButtonBox::No);});
+            this, [this]() {setResult(QDialogButtonBox::No);});
     connect(m_ui->buttonBox->button(QDialogButtonBox::Cancel), &QPushButton::clicked,
-            [=]() {setResult(QDialogButtonBox::Cancel);});
+            this, [this]() {setResult(QDialogButtonBox::Cancel);});
 
     m_ui->m_MainLabel->setText(QLatin1String("<p align=\"center\"><b>") +
                                i18n("Error validating server certificate for '%1'", host) +

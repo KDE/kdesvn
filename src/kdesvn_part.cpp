@@ -285,7 +285,7 @@ void kdesvnpart::showAboutApplication()
                          QLatin1String(version),
                          i18n("A Subversion Client by KDE (dynamic Part component)"),
                          KAboutLicense::LGPL_V2,
-                         i18n("(C) 2005-2009 Rajko Albrecht,\n(C) 2015-2016 Christian Ehrlicher"),
+                         i18n("(C) 2005-2009 Rajko Albrecht,\n(C) 2015-2018 Christian Ehrlicher"),
                          m_Extratext);
 
         about.addAuthor(QStringLiteral("Rajko Albrecht"), i18n("Original author and maintainer"), QStringLiteral("ral@alwins-world.de"));

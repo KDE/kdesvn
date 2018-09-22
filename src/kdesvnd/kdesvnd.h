@@ -52,25 +52,30 @@ protected:
 
     QHash<qulonglong, KsvnJobView *> progressJobView;
 
-public Q_SLOTS:
+public:
     //! get a subversion login
     /*!
     * \param realm the realm
     * \param user default username
     * \return a stringlist containing username-password-saveit as "true" or "false" or empty list if cancel hit.
     */
-    QStringList get_login(const QString &, const QString &);
+    QStringList get_login(const QString &realm, const QString &user) const;
     //! get a saved subversion login
     /*!
     * \param realm the realm
     * \param user default username
     * \return a stringlist containing username-password
     */
-    QStringList get_saved_login(const QString &realm, const QString &user);
+    QStringList get_saved_login(const QString &realm, const QString &user) const;
 
     // return: -1 don't accept 0 accept temporary 1 accept always
     //               hostname, fingerprint, validFrom, validUntil, issuerDName, realm,
-    int get_sslaccept(const QString &, const QString &, const QString &, const QString &, const QString &, const QString &);
+    int get_sslaccept(const QString &hostname,
+                      const QString &fingerprint,
+                      const QString &validFrom,
+                      const QString &validUntil,
+                      const QString &issuerDName,
+                      const QString &realm) const;
 
     // returns cert file or empty string
     QString get_sslclientcertfile() const;
@@ -78,9 +83,9 @@ public Q_SLOTS:
     QStringList get_logmsg() const;
 
     // return pw loaded from wallet if existent
-    QString load_sslclientcertpw(const QString &realm);
+    QString load_sslclientcertpw(const QString &realm) const;
     // return pw at pos 0, maysafe at pos 1, null-size if cancel hit.
-    QStringList get_sslclientcertpw(const QString &);
+    QStringList get_sslclientcertpw(const QString &) const;
     QStringList getActionMenu(const QStringList &urlList) const;
     QStringList getTopLevelActionMenu(const QStringList &urlList) const;
     QStringList getSingleActionMenu(const QString &) const;

@@ -127,11 +127,11 @@ public:
             }
             break;
             case svn_repos_notify_load_txn_start: {
-                _msg = QStringLiteral("Start loading old revision ") + _oldrev.toString();
+                _msg = QStringLiteral("Start loading old revision %1").arg(_oldrev.toString());
             }
             break;
             case svn_repos_notify_load_txn_committed: {
-                _msg = QLatin1String("Committed new revision ") + _newrev.toString();
+                _msg = QStringLiteral("Committed new revision %1").arg(_newrev.toString());
                 if (_oldrev.isValid()) {
                     _msg.append(QLatin1String(" loaded from original revision ")).append(_oldrev.toString());
                 }

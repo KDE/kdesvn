@@ -85,7 +85,7 @@ kdesvnView::kdesvnView(KActionCollection *aCollection, QWidget *parent, bool ful
     connect(m_TreeWidget, &MainTreeWidget::sigLogMessage, this, &kdesvnView::slotAppendLog);
     connect(m_TreeWidget, &MainTreeWidget::changeCaption, this, &kdesvnView::slotSetTitle);
     connect(m_TreeWidget, &MainTreeWidget::sigShowPopup, this, &kdesvnView::slotDispPopup);
-    connect(m_TreeWidget, &MainTreeWidget::sigUrlOpend, this, &kdesvnView::sigUrlOpend);
+    connect(m_TreeWidget, &MainTreeWidget::sigUrlOpened, this, &kdesvnView::sigUrlOpened);
     connect(m_TreeWidget, &MainTreeWidget::sigSwitchUrl, this, &kdesvnView::sigSwitchUrl);
     connect(m_TreeWidget, &MainTreeWidget::sigUrlChanged, this, &kdesvnView::slotUrlChanged);
     connect(m_TreeWidget, &MainTreeWidget::sigCacheStatus, this, &kdesvnView::fillCacheStatus);

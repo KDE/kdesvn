@@ -268,7 +268,7 @@ bool MainTreeWidget::openUrl(const QUrl &url, bool noReinit)
                 clear();
                 KMessageBox::error(this, i18n("Networked URL to open but networking is disabled."));
                 emit changeCaption(QString());
-                emit sigUrlOpend(false);
+                emit sigUrlOpened(false);
                 return false;
             }
         }
@@ -325,7 +325,7 @@ bool MainTreeWidget::openUrl(const QUrl &url, bool noReinit)
     _counttime.restart();
 #endif
     emit changeCaption(baseUri());
-    emit sigUrlOpend(result);
+    emit sigUrlOpened(result);
     emit sigUrlChanged(baseUriAsUrl());
 #ifdef DEBUG_TIMER
     qCDebug(KDESVN_LOG) << "Fired signals " << _counttime.elapsed();
@@ -870,7 +870,7 @@ void MainTreeWidget::closeMe()
     setBaseUri(QString());
 
     emit changeCaption(QString());
-    emit sigUrlOpend(false);
+    emit sigUrlOpened(false);
     emit sigUrlChanged(QUrl());
 
     enableActions();

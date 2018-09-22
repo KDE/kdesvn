@@ -66,7 +66,7 @@ Q_SIGNALS:
     void sigExtraStatusMessage(const QString &);
     void changeCaption(const QString &);
     void sigShowPopup(const QString &, QWidget **);
-    void sigUrlOpend(bool);
+    void sigUrlOpened(bool);
     void sigSwitchUrl(const QUrl &);
     void sigUrlChanged(const QUrl &);
     void sigProplist(const svn::PathPropertiesMapListPtr &, bool, bool, const QString &);

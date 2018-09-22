@@ -40,7 +40,6 @@ AuthDialogImpl::AuthDialogImpl(const QString &realm, const QString &user, QWidge
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
     connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
-    connect(buttonBox, SIGNAL(helpRequested()), this, SLOT(slotHelp()));
     mainLayout->addWidget(buttonBox);
 }
 

@@ -33,9 +33,8 @@
 #include <QVBoxLayout>
 #include <QProgressBar>
 
-StopDlg::StopDlg(QObject *listener, QWidget *parent, const QString &caption, const QString &text)
+StopDlg::StopDlg(CContextListener *listener, QWidget *parent, const QString &caption, const QString &text)
     : QDialog(parent)
-    , m_Context(listener)
     , m_MinDuration(1000)
     , mCancelled(false)
     , mShown(false)
@@ -69,14 +68,14 @@ StopDlg::StopDlg(QObject *listener, QWidget *parent, const QString &caption, con
     mWait = false;
     m_LogWindow = nullptr;
 
-    connect(mShowTimer, SIGNAL(timeout()), this, SLOT(slotAutoShow()));
-    connect(m_bBox, SIGNAL(rejected()), this, SLOT(slotCancel()));
-    if (m_Context) {
-        connect(m_Context, SIGNAL(tickProgress()), this, SLOT(slotTick()));
-        connect(m_Context, SIGNAL(waitShow(bool)), this, SLOT(slotWait(bool)));
-        connect(m_Context, SIGNAL(netProgress(long long int,long long int)),
-                this, SLOT(slotNetProgres(long long int,long long int)));
-        connect(this, SIGNAL(sigCancel(bool)), m_Context, SLOT(setCanceled(bool)));
+    connect(mShowTimer, &QTimer::timeout, this, &StopDlg::slotAutoShow);
+    connect(m_bBox, &QDialogButtonBox::rejected, this, &StopDlg::slotCancel);
+    if (listener) {
+        connect(listener, &CContextListener::tickProgress, this, &StopDlg::slotTick);
+        connect(listener, &CContextListener::waitShow, this, &StopDlg::slotWait);
+        connect(listener, &CContextListener::netProgress,
+                this, &StopDlg::slotNetProgres);
+        connect(this, &StopDlg::sigCancel, listener, &CContextListener::setCanceled);
     }
     mShowTimer->setSingleShot(true);
     mShowTimer->start(m_MinDuration);

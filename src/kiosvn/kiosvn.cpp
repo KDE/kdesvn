@@ -188,7 +188,7 @@ void kio_svnProtocol::listSendDirEntry(const svn::DirEntry &direntry)
                        direntry.lastAuthor(),
                        direntry.size(),
                        direntry.kind() == svn_node_dir ? true : false,
-                       dt.toTime_t(),
+                       dt,
                        entry)) {
         listEntry(entry);
     }
@@ -246,13 +246,13 @@ void kio_svnProtocol::stat(const QUrl &url)
 
     KIO::UDSEntry entry;
     if (dummy) {
-        createUDSEntry(url.fileName(), QString(), 0, true, 0, entry);
+        createUDSEntry(url.fileName(), QString(), 0, true, QDateTime(), entry);
     } else {
         const QDateTime dt(e[0].cmtDate().toQDateTime());
         if (e[0].kind() == svn_node_file) {
-            createUDSEntry(url.fileName(), QString(), 0, false, dt.toTime_t(), entry);
+            createUDSEntry(url.fileName(), QString(), 0, false, dt, entry);
         } else {
-            createUDSEntry(url.fileName(), QString(), 0, true, dt.toTime_t(), entry);
+            createUDSEntry(url.fileName(), QString(), 0, true, dt, entry);
         }
     }
     statEntry(entry);
@@ -568,12 +568,12 @@ svn::Path kio_svnProtocol::makeSvnPath(const QUrl &url) const
     return svn::Path(tmpUrl.toString(QUrl::NormalizePathSegments));
 }
 
-bool kio_svnProtocol::createUDSEntry(const QString &filename, const QString &user, long long int size, bool isdir, time_t mtime, KIO::UDSEntry &entry)
+bool kio_svnProtocol::createUDSEntry(const QString &filename, const QString &user, long long int size, bool isdir, const QDateTime &mtime, KIO::UDSEntry &entry)
 {
     entry.insert(KIO::UDSEntry::UDS_NAME, filename);
     entry.insert(KIO::UDSEntry::UDS_FILE_TYPE, isdir ? S_IFDIR : S_IFREG);
     entry.insert(KIO::UDSEntry::UDS_SIZE, size);
-    entry.insert(KIO::UDSEntry::UDS_MODIFICATION_TIME, mtime);
+    entry.insert(KIO::UDSEntry::UDS_MODIFICATION_TIME, mtime.toSecsSinceEpoch());
     entry.insert(KIO::UDSEntry::UDS_USER, user);
     return true;
 }

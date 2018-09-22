@@ -52,7 +52,7 @@ find_package(KF5 REQUIRED COMPONENTS
     Notifications Parts Service TextWidgets
     Wallet WidgetsAddons XmlGui
 )
-set(QT_MIN_VERSION 5.6.0)
+set(QT_MIN_VERSION 5.9.0)
 find_package(Qt5 REQUIRED COMPONENTS
     Core DBus Gui Sql Widgets Xml
 )
@@ -94,7 +94,8 @@ add_definitions(-DQT_RESTRICTED_CAST_FROM_ASCII)
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 add_definitions(-DQT_DEPRECATED_WARNINGS)
 add_definitions(-DQT_STRICT_ITERATORS)
-add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050600)
+add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050900)
+add_definitions(-DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
 
 # include(MacroEnsureVersion)
 include(FindSubversion)

@@ -31,7 +31,7 @@ Propertylist::Propertylist(QWidget *parent)
     , m_Dir(false)
 {
     setItemDelegate(new KMultilineDelegate(this));
-    QTimer::singleShot(0, this, SLOT(init()));
+    QTimer::singleShot(0, this, &Propertylist::init);
 }
 
 Propertylist::~Propertylist()
@@ -49,14 +49,14 @@ void Propertylist::init()
     setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
     setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
     setContextMenuPolicy(Qt::ActionsContextMenu);
-    connect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)),
-            this, SLOT(slotItemChanged(QTreeWidgetItem*,int)), Qt::UniqueConnection);
+    connect(this, &QTreeWidget::itemChanged,
+            this, &Propertylist::slotItemChanged, Qt::UniqueConnection);
     resizeColumnToContents(0);
 }
 
 void Propertylist::displayList(const svn::PathPropertiesMapListPtr &propList, bool editable, bool isDir, const QString &aCur)
 {
-    disconnect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotItemChanged(QTreeWidgetItem*,int)));
+    disconnect(this, &QTreeWidget::itemChanged, this, &Propertylist::slotItemChanged);
     viewport()->setUpdatesEnabled(false);
     clear();
     m_Dir = isDir;
@@ -78,8 +78,8 @@ void Propertylist::displayList(const svn::PathPropertiesMapListPtr &propList, bo
     }
     viewport()->setUpdatesEnabled(true);
     viewport()->repaint();
-    connect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)),
-            this, SLOT(slotItemChanged(QTreeWidgetItem*,int)), Qt::UniqueConnection);
+    connect(this, &QTreeWidget::itemChanged,
+            this, &Propertylist::slotItemChanged, Qt::UniqueConnection);
     resizeColumnToContents(0);
 }
 
@@ -104,7 +104,7 @@ void Propertylist::slotItemChanged(QTreeWidgetItem *_item, int col)
         return;
     }
     bool fail = false;
-    disconnect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotItemChanged(QTreeWidgetItem*,int)));
+    disconnect(this, &QTreeWidget::itemChanged, this, &Propertylist::slotItemChanged);
     if (PropertyListViewItem::protected_Property(item->text(0)) ||
             PropertyListViewItem::protected_Property(item->currentName())) {
         KMessageBox::error(this, i18n("This property may not set by users.\nRejecting it."), i18n("Protected property"));
@@ -117,7 +117,7 @@ void Propertylist::slotItemChanged(QTreeWidgetItem *_item, int col)
         item->setText(1, item->currentValue());
         fail = true;
     }
-    connect(this, SIGNAL(itemChanged(QTreeWidgetItem*,int)), this, SLOT(slotItemChanged(QTreeWidgetItem*,int)));
+    connect(this, &QTreeWidget::itemChanged, this, &Propertylist::slotItemChanged);
     if (fail) {
         return;
     }

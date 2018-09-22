@@ -54,13 +54,13 @@ UrlDlg::UrlDlg(QWidget *parent)
     m_ui->topLayout->insertWidget(1, m_urlRequester);
     m_urlRequester->setFocus();
     m_urlRequester->setMode(KFile::ExistingOnly | KFile::Directory);
-    connect(m_urlRequester->comboBox(), SIGNAL(currentTextChanged(QString)),
-            this, SLOT(slotTextChanged(QString)));
+    connect(m_urlRequester->comboBox(), &KComboBox::currentTextChanged,
+            this, &UrlDlg::slotTextChanged);
 
     slotTextChanged(QString());
     m_urlRequester->adjustSize();
 
-    connect(m_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    connect(m_ui->buttonBox, &QDialogButtonBox::accepted, this, &UrlDlg::accept);
 }
 
 UrlDlg::~UrlDlg()

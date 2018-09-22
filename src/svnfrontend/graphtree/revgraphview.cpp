@@ -70,10 +70,10 @@ RevGraphView::RevGraphView(const svn::ClientP &_client, QWidget *parent)
     m_CompleteView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_CompleteView->raise();
     m_CompleteView->hide();
-    connect(m_CompleteView, SIGNAL(zoomRectMoved(qreal,qreal)),
-            this, SLOT(zoomRectMoved(qreal,qreal)));
-    connect(m_CompleteView, SIGNAL(zoomRectMoveFinished()),
-            this, SLOT(zoomRectMoveFinished()));
+    connect(m_CompleteView, &PannerView::zoomRectMoved,
+            this, &RevGraphView::zoomRectMoved);
+    connect(m_CompleteView, &PannerView::zoomRectMoveFinished,
+            this, &RevGraphView::zoomRectMoveFinished);
 }
 
 RevGraphView::~RevGraphView()
@@ -518,8 +518,8 @@ void RevGraphView::dumpRevtree()
     *m_renderProcess << m_dotTmpFile->fileName() << "-Tplain";
     connect(m_renderProcess, SIGNAL(finished(int,QProcess::ExitStatus)),
             this, SLOT(dotExit(int,QProcess::ExitStatus)));
-    connect(m_renderProcess, SIGNAL(readyReadStandardOutput()),
-            this, SLOT(readDotOutput()));
+    connect(m_renderProcess, &QProcess::readyReadStandardOutput,
+            this, &RevGraphView::readDotOutput);
     m_renderProcess->setOutputChannelMode(KProcess::SeparateChannels);
     m_renderProcess->start();
 }

@@ -216,10 +216,10 @@ bool SshAgent::startSshAgent()
 
     sshAgent->setOutputChannelMode(KProcess::MergedChannels);
 
-    connect(sshAgent, SIGNAL(finished(int,QProcess::ExitStatus)),
-            SLOT(slotProcessExited(int,QProcess::ExitStatus)));
-    connect(sshAgent, SIGNAL(readyReadStandardOutput()),
-            SLOT(slotReceivedStdout()));
+    connect(sshAgent, QOverload<int,QProcess::ExitStatus>::of(&KProcess::finished),
+            this, &SshAgent::slotProcessExited);
+    connect(sshAgent, &KProcess::readyReadStandardOutput,
+            this, &SshAgent::slotReceivedStdout);
     sshAgent->start();
     // wait for process to finish eg. backgrounding
     sshAgent->waitForFinished(-1);

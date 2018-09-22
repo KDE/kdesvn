@@ -47,8 +47,8 @@ DbOverview::DbOverview(const svn::ClientP &aClient, QWidget *parent)
 {
     m_ui->setupUi(this);
     setDefaultButton(m_ui->buttonBox->button(QDialogButtonBox::Close));
-    connect(m_ui->buttonBox->button(QDialogButtonBox::Close), SIGNAL(clicked(bool)),
-            this, SLOT(accept()));
+    connect(m_ui->buttonBox->button(QDialogButtonBox::Close), &QAbstractButton::clicked,
+            this, &QDialog::accept);
 
     enableButtons(false);
 
@@ -61,15 +61,15 @@ DbOverview::DbOverview(const svn::ClientP &aClient, QWidget *parent)
     m_ui->m_ReposListView->setModel(m_repo_model);
     QItemSelectionModel *_sel = m_ui->m_ReposListView->selectionModel();
     if (_sel) {
-        connect(_sel, SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-                this, SLOT(itemActivated(QItemSelection,QItemSelection)));
+        connect(_sel, &QItemSelectionModel::selectionChanged,
+                this, &DbOverview::itemActivated);
     }
-    connect(m_ui->m_DeleteCacheButton, SIGNAL(clicked(bool)),
-            this, SLOT(deleteCacheItems()));
-    connect(m_ui->m_DeleteRepositoryButton, SIGNAL(clicked(bool)),
-            this, SLOT(deleteRepository()));
-    connect(m_ui->m_SettingsButton, SIGNAL(clicked(bool)),
-            this, SLOT(repositorySettings()));
+    connect(m_ui->m_DeleteCacheButton, &QAbstractButton::clicked,
+            this, &DbOverview::deleteCacheItems);
+    connect(m_ui->m_DeleteRepositoryButton, &QAbstractButton::clicked,
+            this, &DbOverview::deleteRepository);
+    connect(m_ui->m_SettingsButton, &QAbstractButton::clicked,
+            this, &DbOverview::repositorySettings);
     m_ui->m_StatisticButton->setVisible(false);
     // t.b.d
     //connect(m_ui->m_StatisticButton, SIGNAL(clicked(bool)),

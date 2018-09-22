@@ -127,8 +127,8 @@ void Commitmsg_impl::setupModel()
     m_CommitItemTree->resizeColumnToContents(m_CurrentModel->ActionColumn());
 
     m_SortModel->setSortCaseSensitivity(Kdesvnsettings::case_sensitive_sort() ? Qt::CaseSensitive : Qt::CaseInsensitive);
-    connect(m_CommitItemTree->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
-            this, SLOT(slotCurrentItemChanged(QModelIndex)));
+    connect(m_CommitItemTree->selectionModel(), &QItemSelectionModel::currentChanged,
+            this, &Commitmsg_impl::slotCurrentItemChanged);
     slotCurrentItemChanged(QModelIndex()); // update pushbuttons
 }
 

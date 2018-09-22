@@ -24,8 +24,8 @@
 KsvnJobView::KsvnJobView(qulonglong id, const QString &service, const QString &path, const QDBusConnection &connection, QObject *parent)
     : org::kde::JobViewV2(service, path, connection, parent), m_id(id), m_state(STOPPED), m_max(0)
 {
-    connect(this, SIGNAL(cancelRequested()), this,
-            SLOT(killJob()));
+    connect(this, &OrgKdeJobViewV2Interface::cancelRequested, this,
+            &KsvnJobView::killJob);
 #if 0
     QObject::connect(jobView, SIGNAL(suspendRequested()), this,
                      SLOT(suspend()));

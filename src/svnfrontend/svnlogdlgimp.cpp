@@ -135,8 +135,8 @@ void SvnLogDlgImp::dispLog(const svn::LogEntriesMapPtr &_log)
     if (must_init) {
         m_LogTreeView->setModel(m_SortModel);
         m_LogTreeView->sortByColumn(SvnLogModel::Revision, Qt::DescendingOrder);
-        connect(m_LogTreeView->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-                this, SLOT(slotSelectionChanged(QItemSelection,QItemSelection)));
+        connect(m_LogTreeView->selectionModel(), &QItemSelectionModel::selectionChanged,
+                this, &SvnLogDlgImp::slotSelectionChanged);
         m_LogTreeView->resizeColumnToContents(SvnLogModel::Revision);
         m_LogTreeView->resizeColumnToContents(SvnLogModel::Author);
         m_LogTreeView->resizeColumnToContents(SvnLogModel::Date);

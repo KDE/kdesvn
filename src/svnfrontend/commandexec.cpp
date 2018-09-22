@@ -101,8 +101,8 @@ CommandExec::CommandExec(QObject *parent)
     SshAgent ag;
     ag.querySshAgent();
 
-    connect(m_pCPart->m_SvnWrapper, SIGNAL(clientException(QString)), this, SLOT(clientException(QString)));
-    connect(m_pCPart->m_SvnWrapper, SIGNAL(sendNotify(QString)), this, SLOT(slotNotifyMessage(QString)));
+    connect(m_pCPart->m_SvnWrapper, &SvnActions::clientException, this, &CommandExec::clientException);
+    connect(m_pCPart->m_SvnWrapper, &SvnActions::sendNotify, this, &CommandExec::slotNotifyMessage);
     m_pCPart->m_SvnWrapper->reInitClient();
 }
 

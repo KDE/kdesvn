@@ -53,7 +53,7 @@ void OpenContextmenu::setup()
 
         m_mapPopup.push_back(ptr);
     }
-    connect(this, SIGNAL(triggered(QAction*)), this, SLOT(slotRunService(QAction*)));
+    connect(this, &QMenu::triggered, this, &OpenContextmenu::slotRunService);
     if (!m_List.isEmpty()) {
         addSeparator();
     }

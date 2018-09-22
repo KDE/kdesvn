@@ -46,16 +46,16 @@ RevTreeWidget::RevTreeWidget(const svn::ClientP &cl, QWidget *parent)
     m_RevGraphView = new RevGraphView(cl, m_Splitter);
     m_RevGraphView->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
-    connect(m_RevGraphView, SIGNAL(dispDetails(QString)), this, SLOT(setDetailText(QString)));
+    connect(m_RevGraphView, &RevGraphView::dispDetails, this, &RevTreeWidget::setDetailText);
     connect(m_RevGraphView,
-            SIGNAL(makeNorecDiff(QString,svn::Revision,QString,svn::Revision,QWidget*)),
+            &RevGraphView::makeNorecDiff,
             this,
-            SIGNAL(makeNorecDiff(QString,svn::Revision,QString,svn::Revision,QWidget*))
+            &RevTreeWidget::makeNorecDiff
            );
     connect(m_RevGraphView,
-            SIGNAL(makeRecDiff(QString,svn::Revision,QString,svn::Revision,QWidget*)),
+            &RevGraphView::makeRecDiff,
             this,
-            SIGNAL(makeRecDiff(QString,svn::Revision,QString,svn::Revision,QWidget*))
+            &RevTreeWidget::makeRecDiff
            );
     connect(m_RevGraphView,
             SIGNAL(makeCat(svn::Revision,QString,QString,svn::Revision,QWidget*)),

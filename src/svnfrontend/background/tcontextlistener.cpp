@@ -38,27 +38,27 @@ ThreadContextListener::ThreadContextListener(QObject *parent)
     : CContextListener(parent)
     , m_Data(new ThreadContextListenerData)
 {
-    connect(this, SIGNAL(signal_contextGetLogin()),
-            this, SLOT(event_contextGetLogin()),
+    connect(this, &ThreadContextListener::signal_contextGetLogin,
+            this, &ThreadContextListener::event_contextGetLogin,
             Qt::BlockingQueuedConnection);
-    connect(this, SIGNAL(signal_contextGetSavedLogin()),
-            this, SLOT(event_contextGetSavedLogin()),
+    connect(this, &ThreadContextListener::signal_contextGetSavedLogin,
+            this, &ThreadContextListener::event_contextGetSavedLogin,
             Qt::BlockingQueuedConnection);
-    connect(this, SIGNAL(signal_contextGetLogMessage()),
-            this, SLOT(event_contextGetLogMessage()),
+    connect(this, &ThreadContextListener::signal_contextGetLogMessage,
+            this, &ThreadContextListener::event_contextGetLogMessage,
             Qt::BlockingQueuedConnection);
-    connect(this, SIGNAL(signal_contextSslClientCertPrompt()),
-            this, SLOT(event_contextSslClientCertPrompt()),
+    connect(this, &ThreadContextListener::signal_contextSslClientCertPrompt,
+            this, &ThreadContextListener::event_contextSslClientCertPrompt,
             Qt::BlockingQueuedConnection);
-    connect(this, SIGNAL(signal_contextSslClientCertPwPrompt()),
-            this, SLOT(event_contextSslClientCertPwPrompt()),
+    connect(this, &ThreadContextListener::signal_contextSslClientCertPwPrompt,
+            this, &ThreadContextListener::event_contextSslClientCertPwPrompt,
             Qt::BlockingQueuedConnection);
-    connect(this, SIGNAL(signal_contextSslServerTrustPrompt()),
-            this, SLOT(event_contextSslServerTrustPrompt()),
+    connect(this, &ThreadContextListener::signal_contextSslServerTrustPrompt,
+            this, &ThreadContextListener::event_contextSslServerTrustPrompt,
             Qt::BlockingQueuedConnection);
     // no user input, BlockingQueuedConnection not needed here
-    connect(this, SIGNAL(signal_contextNotify(QString)),
-            this, SLOT(event_contextNotify(QString)));
+    connect(this, &ThreadContextListener::signal_contextNotify,
+            this, &ThreadContextListener::event_contextNotify);
 }
 
 ThreadContextListener::~ThreadContextListener()

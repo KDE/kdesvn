@@ -128,7 +128,7 @@ void DiffBrowser::startSearch()
         m_srchdialog->setHasCursor(false);
         m_srchdialog->setHasSelection(false);
         m_srchdialog->setSupportsRegularExpressionFind(false);
-        connect(m_srchdialog, SIGNAL(okClicked()), this, SLOT(search_slot()));
+        connect(m_srchdialog, &KFindDialog::okClicked, this, &DiffBrowser::search_slot);
     }
     QString _st = m_srchdialog->pattern();
     m_srchdialog->setPattern(_st.isEmpty() ? m_pattern : _st);

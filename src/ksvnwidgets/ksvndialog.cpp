@@ -57,9 +57,9 @@ KSvnSimpleOkDialog::KSvnSimpleOkDialog(const QString &configGroupName, QWidget *
     , m_bBox(new QDialogButtonBox(QDialogButtonBox::Ok, this))
     , m_bBoxAdded(false)
 {
-    connect(m_bBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(m_bBox, SIGNAL(rejected()), this, SLOT(reject()));
-    connect(m_bBox, SIGNAL(helpRequested()), this, SLOT(onHelpRequested()));
+    connect(m_bBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+    connect(m_bBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+    connect(m_bBox, &QDialogButtonBox::helpRequested, this, &KSvnSimpleOkDialog::onHelpRequested);
     setDefaultButton(m_bBox->button(QDialogButtonBox::Ok));
 }
 

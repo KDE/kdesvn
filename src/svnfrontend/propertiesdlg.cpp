@@ -39,22 +39,22 @@ PropertiesDlg::PropertiesDlg(SvnItem *which, const svn::ClientP &aClient, const 
 {
     m_ui->setupUi(this);
     setDefaultButton(m_ui->buttonBox->button(QDialogButtonBox::Ok));
-    connect(m_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(m_ui->buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    connect(m_ui->buttonBox, SIGNAL(helpRequested()), this, SLOT(slotHelp()));
+    connect(m_ui->buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+    connect(m_ui->buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+    connect(m_ui->buttonBox, &QDialogButtonBox::helpRequested, this, &PropertiesDlg::slotHelp);
 
     m_ui->tvPropertyList->setAllColumnsShowFocus(true);
     m_ui->tvPropertyList->setCommitchanges(false);
 
     // signals and slots connections
-    connect(m_ui->pbAdd, SIGNAL(clicked()), this, SLOT(slotAdd()));
-    connect(m_ui->pbModify, SIGNAL(clicked()), this, SLOT(slotModify()));
-    connect(m_ui->pbDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
+    connect(m_ui->pbAdd, &QAbstractButton::clicked, this, &PropertiesDlg::slotAdd);
+    connect(m_ui->pbModify, &QAbstractButton::clicked, this, &PropertiesDlg::slotModify);
+    connect(m_ui->pbDelete, &QAbstractButton::clicked, this, &PropertiesDlg::slotDelete);
 
     connect(m_ui->tvPropertyList,
-            SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
+            &QTreeWidget::currentItemChanged,
             this,
-            SLOT(slotCurrentItemChanged(QTreeWidgetItem*)));
+            &PropertiesDlg::slotCurrentItemChanged);
     if (!m_Client) {
         m_ui->tvPropertyList->setEnabled(false);
     }

@@ -193,30 +193,30 @@ BlameDisplay::BlameDisplay(const QString &what, const svn::AnnotatedFile &blame,
     m_Data->m_cb = cb;
 
     m_Data->m_pbShowLog = new QPushButton(QIcon::fromTheme(QStringLiteral("kdesvnlog")), i18n("Log message for revision"), this);
-    connect(m_Data->m_pbShowLog, SIGNAL(clicked(bool)),
-            this, SLOT(slotShowCurrentCommit()));
+    connect(m_Data->m_pbShowLog, &QAbstractButton::clicked,
+            this, &BlameDisplay::slotShowCurrentCommit);
     m_ui->buttonBox->addButton(m_Data->m_pbShowLog, QDialogButtonBox::ActionRole);
 
     m_Data->m_pbGoToLine = new QPushButton(i18n("Go to line"), this);
-    connect(m_Data->m_pbGoToLine, SIGNAL(clicked(bool)),
-            this, SLOT(slotGoLine()));
+    connect(m_Data->m_pbGoToLine, &QAbstractButton::clicked,
+            this, &BlameDisplay::slotGoLine);
     m_ui->buttonBox->addButton(m_Data->m_pbGoToLine, QDialogButtonBox::ActionRole);
 
-    connect(m_ui->buttonBox, SIGNAL(rejected()), this, SLOT(accept()));
+    connect(m_ui->buttonBox, &QDialogButtonBox::rejected, this, &QDialog::accept);
 
     QAction *ac = new QAction(QIcon::fromTheme(QStringLiteral("kdesvnlog")), i18n("Log message for revision"), this);
-    connect(ac, SIGNAL(triggered()), this, SLOT(slotShowCurrentCommit()));
+    connect(ac, &QAction::triggered, this, &BlameDisplay::slotShowCurrentCommit);
     m_ui->m_BlameTree->addAction(ac);
 
     KTreeWidgetSearchLine *searchLine = m_ui->m_TreeSearch->searchLine();
     searchLine->addTreeWidget(m_ui->m_BlameTree);
 
-    connect(m_ui->m_BlameTree, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
-            this, SLOT(slotItemDoubleClicked(QTreeWidgetItem*,int)));
-    connect(m_ui->m_BlameTree, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
-            this, SLOT(slotCurrentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
-    connect(m_ui->m_encodingSel, SIGNAL(TextCodecChanged(QString)),
-            this, SLOT(slotTextCodecChanged(QString)));
+    connect(m_ui->m_BlameTree, &QTreeWidget::itemDoubleClicked,
+            this, &BlameDisplay::slotItemDoubleClicked);
+    connect(m_ui->m_BlameTree, &QTreeWidget::currentItemChanged,
+            this, &BlameDisplay::slotCurrentItemChanged);
+    connect(m_ui->m_encodingSel, &EncodingSelector_impl::TextCodecChanged,
+            this, &BlameDisplay::slotTextCodecChanged);
 
     setContent(what, blame);
 }
@@ -381,7 +381,7 @@ void BlameDisplay::showCommit(BlameTreeItem *bti)
     bbox->setStandardButtons(QDialogButtonBox::Close);
     vbox->addWidget(bbox);
     // QDialogButtonBox::Close is a reject role
-    connect(bbox, SIGNAL(rejected()), dlg, SLOT(accept()));
+    connect(bbox, &QDialogButtonBox::rejected, dlg.data(), &QDialog::accept);
 
     dlg->exec();
     delete dlg;

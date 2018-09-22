@@ -69,29 +69,29 @@ kdesvnView::kdesvnView(KActionCollection *aCollection, QWidget *parent, bool ful
     m_infoSplitter->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_LogWindow = new QTextBrowser(m_infoSplitter);
     m_LogWindow->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(m_LogWindow, SIGNAL(customContextMenuRequested(QPoint)),
-            this, SLOT(onCustomLogWindowContextMenuRequested(QPoint)));
+    connect(m_LogWindow, &QWidget::customContextMenuRequested,
+            this, &kdesvnView::onCustomLogWindowContextMenuRequested);
     Propertylist *pl = new Propertylist(m_infoSplitter);
     pl->setCommitchanges(true);
     pl->addCallback(m_TreeWidget);
-    connect(m_TreeWidget, SIGNAL(sigProplist(svn::PathPropertiesMapListPtr,bool,bool,QString)),
-            pl, SLOT(displayList(svn::PathPropertiesMapListPtr,bool,bool,QString)));
-    connect(m_TreeWidget, SIGNAL(sigProplist(svn::PathPropertiesMapListPtr,bool,bool,QString)),
-            pl, SLOT(displayList(svn::PathPropertiesMapListPtr,bool,bool,QString)));
+    connect(m_TreeWidget, &MainTreeWidget::sigProplist,
+            pl, &Propertylist::displayList);
+    connect(m_TreeWidget, &MainTreeWidget::sigProplist,
+            pl, &Propertylist::displayList);
 
     m_TreeWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     m_topLayout->addWidget(m_Splitter);
-    connect(m_TreeWidget, SIGNAL(sigLogMessage(QString)), this, SLOT(slotAppendLog(QString)));
-    connect(m_TreeWidget, SIGNAL(changeCaption(QString)), this, SLOT(slotSetTitle(QString)));
-    connect(m_TreeWidget, SIGNAL(sigShowPopup(QString,QWidget**)), this, SLOT(slotDispPopup(QString,QWidget**)));
+    connect(m_TreeWidget, &MainTreeWidget::sigLogMessage, this, &kdesvnView::slotAppendLog);
+    connect(m_TreeWidget, &MainTreeWidget::changeCaption, this, &kdesvnView::slotSetTitle);
+    connect(m_TreeWidget, &MainTreeWidget::sigShowPopup, this, &kdesvnView::slotDispPopup);
     connect(m_TreeWidget, SIGNAL(sigUrlOpend(bool)), parent, SLOT(slotUrlOpened(bool)));
-    connect(m_TreeWidget, SIGNAL(sigSwitchUrl(QUrl)), this, SIGNAL(sigSwitchUrl(QUrl)));
+    connect(m_TreeWidget, &MainTreeWidget::sigSwitchUrl, this, &kdesvnView::sigSwitchUrl);
     connect(m_TreeWidget, &MainTreeWidget::sigUrlChanged, this, &kdesvnView::slotUrlChanged);
-    connect(m_TreeWidget, SIGNAL(sigCacheStatus(qlonglong,qlonglong)), this, SLOT(fillCacheStatus(qlonglong,qlonglong)));
-    connect(m_TreeWidget, SIGNAL(sigExtraStatusMessage(QString)), this, SIGNAL(sigExtraStatusMessage(QString)));
+    connect(m_TreeWidget, &MainTreeWidget::sigCacheStatus, this, &kdesvnView::fillCacheStatus);
+    connect(m_TreeWidget, &MainTreeWidget::sigExtraStatusMessage, this, &kdesvnView::sigExtraStatusMessage);
 
-    connect(this, SIGNAL(sigMakeBaseDirs()), m_TreeWidget, SLOT(slotMkBaseDirs()));
+    connect(this, &kdesvnView::sigMakeBaseDirs, m_TreeWidget, &MainTreeWidget::slotMkBaseDirs);
 
     KConfigGroup cs(Kdesvnsettings::self()->config(), "kdesvn-mainlayout");
     QByteArray t1 = cs.readEntry("split1", QByteArray());
@@ -452,8 +452,8 @@ void kdesvnView::onCustomLogWindowContextMenuRequested(const QPoint &pos)
     QPointer<QMenu> menu = m_LogWindow->createStandardContextMenu();
     QAction *clearAction = new QAction(tr("Clear"), menu.data());
     clearAction->setEnabled(!m_LogWindow->toPlainText().isEmpty());
-    connect(clearAction, SIGNAL(triggered(bool)),
-            m_LogWindow, SLOT(clear()));
+    connect(clearAction, &QAction::triggered,
+            m_LogWindow, &QTextEdit::clear);
     menu->addAction(clearAction);
     menu->exec(m_LogWindow->mapToGlobal(pos));
     delete menu;

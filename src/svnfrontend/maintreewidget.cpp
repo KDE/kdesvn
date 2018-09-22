@@ -137,31 +137,31 @@ MainTreeWidget::MainTreeWidget(KActionCollection *aCollection, QWidget *parent, 
     m_Data->m_DirSortModel->setSourceModel(m_Data->m_Model);
 
     connect(m_TreeView->selectionModel(),
-            SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-            this, SLOT(slotSelectionChanged(QItemSelection,QItemSelection)));
+            &QItemSelectionModel::selectionChanged,
+            this, &MainTreeWidget::slotSelectionChanged);
 
     connect(m_DirTreeView->selectionModel(),
-            SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-            this, SLOT(slotDirSelectionChanged(QItemSelection,QItemSelection)));
+            &QItemSelectionModel::selectionChanged,
+            this, &MainTreeWidget::slotDirSelectionChanged);
 
-    connect(m_Data->m_Model->svnWrapper(), SIGNAL(clientException(QString)), this, SLOT(slotClientException(QString)));
-    connect(m_Data->m_Model, SIGNAL(clientException(QString)), this, SLOT(slotClientException(QString)));
-    connect(m_Data->m_Model->svnWrapper(), SIGNAL(sendNotify(QString)), this, SLOT(slotNotifyMessage(QString)));
-    connect(m_Data->m_Model->svnWrapper(), SIGNAL(reinitItem(SvnItem*)), this, SLOT(slotReinitItem(SvnItem*)));
-    connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigRefreshAll()), this, SLOT(refreshCurrentTree()));
-    connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigRefreshCurrent(SvnItem*)), this, SLOT(refreshCurrent(SvnItem*)));
-    connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigRefreshItem(QString)), this, SLOT(slotRefreshItem(QString)));
-    connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigGotourl(QUrl)), this, SLOT(_openUrl(QUrl)));
-    connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigCacheStatus(qlonglong,qlonglong)), this, SIGNAL(sigCacheStatus(qlonglong,qlonglong)));
-    connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigThreadsChanged()), this, SLOT(enableActions()));
-    connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigCacheDataChanged()), this, SLOT(slotCacheDataChanged()));
+    connect(m_Data->m_Model->svnWrapper(), &SvnActions::clientException, this, &MainTreeWidget::slotClientException);
+    connect(m_Data->m_Model, &SvnItemModel::clientException, this, &MainTreeWidget::slotClientException);
+    connect(m_Data->m_Model->svnWrapper(), &SvnActions::sendNotify, this, &MainTreeWidget::slotNotifyMessage);
+    connect(m_Data->m_Model->svnWrapper(), &SvnActions::reinitItem, this, &MainTreeWidget::slotReinitItem);
+    connect(m_Data->m_Model->svnWrapper(), &SvnActions::sigRefreshAll, this, &MainTreeWidget::refreshCurrentTree);
+    connect(m_Data->m_Model->svnWrapper(), &SvnActions::sigRefreshCurrent, this, &MainTreeWidget::refreshCurrent);
+    connect(m_Data->m_Model->svnWrapper(), &SvnActions::sigRefreshItem, this, &MainTreeWidget::slotRefreshItem);
+    connect(m_Data->m_Model->svnWrapper(), &SvnActions::sigGotourl, this, &MainTreeWidget::_openUrl);
+    connect(m_Data->m_Model->svnWrapper(), &SvnActions::sigCacheStatus, this, &MainTreeWidget::sigCacheStatus);
+    connect(m_Data->m_Model->svnWrapper(), &SvnActions::sigThreadsChanged, this, &MainTreeWidget::enableActions);
+    connect(m_Data->m_Model->svnWrapper(), &SvnActions::sigCacheDataChanged, this, &MainTreeWidget::slotCacheDataChanged);
 
-    connect(m_Data->m_Model->svnWrapper(), SIGNAL(sigExtraStatusMessage(QString)), this, SIGNAL(sigExtraStatusMessage(QString)));
+    connect(m_Data->m_Model->svnWrapper(), &SvnActions::sigExtraStatusMessage, this, &MainTreeWidget::sigExtraStatusMessage);
 
-    connect(m_Data->m_Model, SIGNAL(urlDropped(QList<QUrl>,Qt::DropAction,QModelIndex,bool)),
-            this, SLOT(slotUrlDropped(QList<QUrl>,Qt::DropAction,QModelIndex,bool)));
+    connect(m_Data->m_Model, &SvnItemModel::urlDropped,
+            this, &MainTreeWidget::slotUrlDropped);
 
-    connect(m_Data->m_Model, SIGNAL(itemsFetched(QModelIndex)), this, SLOT(slotItemsInserted(QModelIndex)));
+    connect(m_Data->m_Model, &SvnItemModel::itemsFetched, this, &MainTreeWidget::slotItemsInserted);
 
     m_TreeView->sortByColumn(0, Qt::AscendingOrder);
     m_DirTreeView->sortByColumn(0, Qt::AscendingOrder);
@@ -170,12 +170,12 @@ MainTreeWidget::MainTreeWidget(KActionCollection *aCollection, QWidget *parent, 
     setupActions();
 
     m_Data->m_TimeModified.setParent(this);
-    connect(&(m_Data->m_TimeModified), SIGNAL(timeout()), this, SLOT(slotCheckModified()));
+    connect(&(m_Data->m_TimeModified), &QTimer::timeout, this, &MainTreeWidget::slotCheckModified);
     m_Data->m_TimeUpdates.setParent(this);
-    connect(&(m_Data->m_TimeUpdates), SIGNAL(timeout()), this, SLOT(slotCheckUpdates()));
+    connect(&(m_Data->m_TimeUpdates), &QTimer::timeout, this, &MainTreeWidget::slotCheckUpdates);
     m_Data->m_resizeColumnsTimer.setSingleShot(true);
     m_Data->m_resizeColumnsTimer.setParent(this);
-    connect(&(m_Data->m_resizeColumnsTimer), SIGNAL(timeout()), this, SLOT(resizeAllColumns()));
+    connect(&(m_Data->m_resizeColumnsTimer), &QTimer::timeout, this, &MainTreeWidget::resizeAllColumns);
 }
 
 MainTreeWidget::~MainTreeWidget()
@@ -332,7 +332,7 @@ bool MainTreeWidget::openUrl(const QUrl &url, bool noReinit)
     _counttime.restart();
 #endif
 
-    QTimer::singleShot(1, this, SLOT(readSupportData()));
+    QTimer::singleShot(1, this, &MainTreeWidget::readSupportData);
     enableActions();
 #ifdef DEBUG_TIMER
     qCDebug(KDESVN_LOG) << "Enabled actions " << _counttime.elapsed();
@@ -452,7 +452,7 @@ SvnItemModelNode *MainTreeWidget::DirSelectedNode()const
 void MainTreeWidget::slotSelectionChanged(const QItemSelection &, const QItemSelection &)
 {
     enableActions();
-    QTimer::singleShot(100, this, SLOT(_propListTimeout()));
+    QTimer::singleShot(100, this, &MainTreeWidget::_propListTimeout);
 }
 
 SvnItem *MainTreeWidget::Selected()const
@@ -886,7 +886,7 @@ void MainTreeWidget::refreshCurrentTree()
     m_Data->m_SortModel->invalidate();
     setUpdatesEnabled(true);
     //viewport()->repaint();
-    QTimer::singleShot(1, this, SLOT(readSupportData()));
+    QTimer::singleShot(1, this, &MainTreeWidget::readSupportData);
 }
 
 void MainTreeWidget::slotSettingsChanged()
@@ -1748,7 +1748,7 @@ void MainTreeWidget::slotUrlDropped(const QList<QUrl> &_lst, Qt::DropAction acti
     } else {
         WidgetBlockStack w(this);
         KIO::Job *job = KIO::copy(_lst, target);
-        connect(job, SIGNAL(result(KJob*)), SLOT(slotCopyFinished(KJob*)));
+        connect(job, &KJob::result, this, &MainTreeWidget::slotCopyFinished);
         job->exec();
     }
 }

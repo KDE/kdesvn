@@ -59,11 +59,11 @@ CreaterepoDlg::CreaterepoDlg(QWidget *parent)
     m_ui->m_presvn18compat->setEnabled(bGE18);
     m_ui->m_presvn18compat->setVisible(bGE18);
 
-    connect(m_ui->m_presvn15compat, SIGNAL(clicked(bool)), this, SLOT(compatChanged15()));
-    connect(m_ui->m_presvn16compat, SIGNAL(clicked(bool)), this, SLOT(compatChanged16()));
-    connect(m_ui->m_presvn18compat, SIGNAL(clicked(bool)), this, SLOT(compatChanged18()));
-    connect(m_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(m_ui->buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(m_ui->m_presvn15compat, &QAbstractButton::clicked, this, &CreaterepoDlg::compatChanged15);
+    connect(m_ui->m_presvn16compat, &QAbstractButton::clicked, this, &CreaterepoDlg::compatChanged16);
+    connect(m_ui->m_presvn18compat, &QAbstractButton::clicked, this, &CreaterepoDlg::compatChanged18);
+    connect(m_ui->buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+    connect(m_ui->buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 }
 
 CreaterepoDlg::~CreaterepoDlg()

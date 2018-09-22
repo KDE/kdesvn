@@ -198,7 +198,8 @@ SvnActions::SvnActions(ItemDisplay *parent, bool processes_blocked)
     m_Data->m_ParentList = parent;
     m_Data->m_SvnContextListener = new CContextListener(this);
     m_Data->runblocked = processes_blocked;
-    connect(m_Data->m_SvnContextListener, SIGNAL(sendNotify(QString)), this, SLOT(slotNotifyMessage(QString)));
+    connect(m_Data->m_SvnContextListener, &CContextListener::sendNotify,
+            this, &SvnActions::slotNotifyMessage);
 }
 
 svn::ClientP SvnActions::svnclient()
@@ -244,10 +245,10 @@ void SvnActions::makeLog(const svn::Revision &start, const svn::Revision &end, c
     bool need_modal = m_Data->runblocked || QApplication::activeModalWidget() != nullptr;
     if (need_modal || !m_Data->m_LogDialog) {
         m_Data->m_LogDialog = new SvnLogDlgImp(this, need_modal);
-        connect(m_Data->m_LogDialog, SIGNAL(makeDiff(QString,svn::Revision,QString,svn::Revision,QWidget*)),
-                this, SLOT(makeDiff(QString,svn::Revision,QString,svn::Revision,QWidget*)));
-        connect(m_Data->m_LogDialog, SIGNAL(makeCat(svn::Revision,QString,QString,svn::Revision,QWidget*)),
-                this, SLOT(slotMakeCat(svn::Revision,QString,QString,svn::Revision,QWidget*)));
+        connect(m_Data->m_LogDialog, &SvnLogDlgImp::makeDiff,
+                this, QOverload<const QString&, const svn::Revision&, const QString&, const svn::Revision&, QWidget*>::of(&SvnActions::makeDiff));
+        connect(m_Data->m_LogDialog, &SvnLogDlgImp::makeCat,
+                this, &SvnActions::slotMakeCat);
     }
 
     if (m_Data->m_LogDialog) {
@@ -291,7 +292,7 @@ svn::LogEntriesMapPtr SvnActions::getLog(const svn::Revision &start, const svn::
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, (parent ? parent : m_Data->m_ParentList->realWidget()),
                      i18nc("@title:window", "Logs"), i18n("Getting logs - hit Cancel for abort"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         logs = svn::LogEntriesMapPtr(new svn::LogEntriesMap);
         if (doNetworking()) {
             if (!m_Data->m_Svnclient->log(params, *logs)) {
@@ -498,17 +499,13 @@ void SvnActions::makeTree(const QString &what, const svn::Revision &_rev, const 
     if (rt->isValid()) {
         RevTreeWidget *disp = rt->getView();
         if (disp) {
-            dlg->addWidget(rt->getView());
-            connect(
-                disp, SIGNAL(makeNorecDiff(QString,svn::Revision,QString,svn::Revision,QWidget*)),
-                this, SLOT(makeNorecDiff(QString,svn::Revision,QString,svn::Revision,QWidget*))
-            );
-            connect(
-                disp, SIGNAL(makeRecDiff(QString,svn::Revision,QString,svn::Revision,QWidget*)),
-                this, SLOT(makeDiff(QString,svn::Revision,QString,svn::Revision,QWidget*))
-            );
-            connect(disp, SIGNAL(makeCat(svn::Revision,QString,QString,svn::Revision,QWidget*)),
-                    this, SLOT(slotMakeCat(svn::Revision,QString,QString,svn::Revision,QWidget*)));
+            dlg->addWidget(disp);
+            connect(disp, &RevTreeWidget::makeNorecDiff,
+                    this, &SvnActions::makeNorecDiff);
+            connect(disp, &RevTreeWidget::makeRecDiff,
+                    this, QOverload<const QString&, const svn::Revision&, const QString&, const svn::Revision&, QWidget*>::of(&SvnActions::makeDiff));
+            connect(disp, &RevTreeWidget::makeCat,
+                    this, &SvnActions::slotMakeCat);
             dlg->exec();
         }
     }
@@ -538,7 +535,7 @@ void SvnActions::makeBlame(const svn::Revision &start, const svn::Revision &end,
         CursorStack a(Qt::BusyCursor);
         StopDlg sdlg(m_Data->m_SvnContextListener, _parent,
                      i18nc("@title:window", "Annotate"), i18n("Annotate lines - hit Cancel for abort"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         m_Data->m_Svnclient->annotate(blame, params);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
@@ -565,7 +562,7 @@ bool SvnActions::makeGet(const svn::Revision &start, const QString &what, const 
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, dlgp,
                      i18nc("@title:window", "Content Get"), i18n("Getting content - hit Cancel for abort"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         m_Data->m_Svnclient->get(p, target, start, peg);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
@@ -698,7 +695,7 @@ QString SvnActions::getInfo(const QString &_what, const svn::Revision &rev, cons
         try {
             StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                          i18nc("@title:window", "Details"), i18n("Retrieving information - hit Cancel for abort"));
-            connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+            connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
             QString path = _what;
             if (_what.contains(QLatin1Char('@')) && !svn::Url::isValid(_what)) {
                 path += QLatin1String("@BASE");
@@ -922,7 +919,7 @@ bool SvnActions::changeProperties(const svn::PropertiesMap &setList, const QStri
         params.path(path).depth(depth);
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18nc("@title:window", "Applying Properties"), i18n("<center>Applying<br/>hit cancel for abort</center>"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         // propertyValue == QString::null -> delete property
         for (int pos = 0; pos < delList.size(); ++pos) {
             m_Data->m_Svnclient->propset(params.propertyName(delList.at(pos)));
@@ -1058,7 +1055,7 @@ bool SvnActions::makeCommit(const svn::Targets &targets)
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18nc("@title:window", "Commit"), i18n("Commit - hit Cancel for abort"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         nnum = m_Data->m_Svnclient->commit(commit_parameters);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
@@ -1084,7 +1081,7 @@ bool SvnActions::get(const QString &what, const QString &to, const svn::Revision
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, p ? p : m_Data->m_ParentList->realWidget(),
                      i18nc("@title:window", "Downloading"), i18n("Download - hit Cancel for abort"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         m_Data->m_Svnclient->get(svn::Path(what),
                                  to, rev, _peg);
     } catch (const svn::Exception &e) {
@@ -1200,10 +1197,10 @@ void SvnActions::makeDiffExternal(const QString &p1, const svn::Revision &start,
     }
     proc->setAutoDelete(true);
     proc->setOutputChannelMode(KProcess::MergedChannels);
-    connect(proc, SIGNAL(dataStderrRead(QByteArray,WatchedProcess*)),
-            this, SLOT(slotProcessDataRead(QByteArray,WatchedProcess*)));
-    connect(proc, SIGNAL(dataStdoutRead(QByteArray,WatchedProcess*)),
-            this, SLOT(slotProcessDataRead(QByteArray,WatchedProcess*)));
+    connect(proc, &WatchedProcess::dataStderrRead,
+            this, &SvnActions::slotProcessDataRead);
+    connect(proc, &WatchedProcess::dataStdoutRead,
+            this, &SvnActions::slotProcessDataRead);
     if (!isDir) {
         tfile2.setAutoRemove(false);
         tfile.setAutoRemove(false);
@@ -1268,7 +1265,7 @@ void SvnActions::makeDiffinternal(const QString &p1, const svn::Revision &r1, co
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, parent,
                      i18nc("@title:window", "Diffing"), i18n("Diffing - hit Cancel for abort"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         if (p1 == p2 && (r1.isRemote() || r2.isRemote())) {
             ex = m_Data->m_Svnclient->diff_peg(_opts);
         } else {
@@ -1321,7 +1318,7 @@ void SvnActions::makeNorecDiff(const QString &p1, const svn::Revision &r1, const
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, _p ? _p : m_Data->m_ParentList->realWidget(),
                      i18nc("@title:window", "Diffing"), i18n("Diffing - hit cancel for abort"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         ex = m_Data->m_Svnclient->diff(_opts);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
@@ -1362,10 +1359,10 @@ void SvnActions::dispDiff(const QByteArray &ex)
         }
         proc->setAutoDelete(true);
         proc->setOutputChannelMode(KProcess::MergedChannels);
-        connect(proc, SIGNAL(dataStderrRead(QByteArray,WatchedProcess*)),
-                this, SLOT(slotProcessDataRead(QByteArray,WatchedProcess*)));
-        connect(proc, SIGNAL(dataStdoutRead(QByteArray,WatchedProcess*)),
-                this, SLOT(slotProcessDataRead(QByteArray,WatchedProcess*)));
+        connect(proc, &WatchedProcess::dataStderrRead,
+                this, &SvnActions::slotProcessDataRead);
+        connect(proc, &WatchedProcess::dataStdoutRead,
+                this, &SvnActions::slotProcessDataRead);
 
         proc->start();
         if (proc->waitForStarted(-1)) {
@@ -1397,14 +1394,14 @@ void SvnActions::dispDiff(const QByteArray &ex)
         dlg->addWidget(ptr);
         EncodingSelector_impl *enc(new EncodingSelector_impl(dlg));
         dlg->addWidget(enc);
-        connect(enc, SIGNAL(TextCodecChanged(QString)),
-                ptr, SLOT(slotTextCodecChanged(QString)));
+        connect(enc, &EncodingSelector_impl::TextCodecChanged,
+                ptr, &DiffBrowser::slotTextCodecChanged);
         enc->setCurrentEncoding(Kdesvnsettings::locale_for_diff());
         // saveAs
         QPushButton *pbSaveAs = new QPushButton(dlg->buttonBox());
         KStandardGuiItem::assign(pbSaveAs, KStandardGuiItem::SaveAs);
         dlg->buttonBox()->addButton(pbSaveAs, QDialogButtonBox::ActionRole);
-        connect(pbSaveAs, SIGNAL(clicked(bool)), ptr, SLOT(saveDiff()));
+        connect(pbSaveAs, &QAbstractButton::clicked, ptr, &DiffBrowser::saveDiff);
 
         dlg->buttonBox()->setStandardButtons(QDialogButtonBox::Close);
         dlg->addButtonBox();
@@ -1441,7 +1438,7 @@ void SvnActions::makeUpdate(const svn::Targets &targets, const svn::Revision &re
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18nc("@title:window", "Making update"), i18n("Making update - hit Cancel for abort"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         svn::UpdateParameter _params;
         m_Data->m_SvnContextListener->cleanUpdatedItems();
         _params.targets(targets).revision(rev).depth(depth).ignore_externals(false).allow_unversioned(false).sticky_depth(true);
@@ -1707,7 +1704,7 @@ bool SvnActions::makeCheckout(const QString &rUrl, const QString &tPath, const s
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, _p ? _p : m_Data->m_ParentList->realWidget(),
                      _exp ? i18nc("@title:window", "Export") : i18nc("@title:window", "Checkout"), _exp ? i18n("Exporting") : i18n("Checking out"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         if (_exp) {
             /// @todo setup parameter for export operation
             m_Data->m_Svnclient->doExport(cparams.nativeEol(QString()));
@@ -1775,7 +1772,7 @@ void SvnActions::slotRevertItems(const QStringList &displist)
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18nc("@title:window", "Revert"), i18n("Reverting items"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         m_Data->m_Svnclient->revert(target, depth);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
@@ -1805,7 +1802,7 @@ bool SvnActions::makeSwitch(const QUrl &rUrl,
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18nc("@title:window", "Switch URL"), i18n("Switching URL"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         m_Data->m_Svnclient->doSwitch(p, svn::Url(rUrl), r, depth, peg, stickydepth, ignore_externals, allow_unversioned);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
@@ -1825,7 +1822,7 @@ bool SvnActions::makeRelocate(const QUrl &fUrl, const QUrl &tUrl, const QString 
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18nc("@title:window", "Relocate Repository"), i18n("Relocate repository to new URL"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         m_Data->m_Svnclient->relocate(p, svn::Url(fUrl), svn::Url(tUrl), recursive, ignore_externals);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
@@ -1896,7 +1893,7 @@ bool SvnActions::makeCleanup(const QString &path)
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18nc("@title:window", "Cleanup"), i18n("Cleaning up folder"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         m_Data->m_Svnclient->cleanup(svn::Path(path));
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
@@ -1913,7 +1910,7 @@ void SvnActions::slotResolved(const QString &path)
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18nc("@title:window", "Resolve"), i18n("Marking resolved"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         m_Data->m_Svnclient->resolve(svn::Path(path), svn::DepthEmpty);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
@@ -1964,10 +1961,10 @@ void SvnActions::slotResolve(const QString &p)
     }
     proc->setAutoDelete(true);
     proc->setOutputChannelMode(KProcess::MergedChannels);
-    connect(proc, SIGNAL(dataStderrRead(QByteArray,WatchedProcess*)),
-            this, SLOT(slotProcessDataRead(QByteArray,WatchedProcess*)));
-    connect(proc, SIGNAL(dataStdoutRead(QByteArray,WatchedProcess*)),
-            this, SLOT(slotProcessDataRead(QByteArray,WatchedProcess*)));
+    connect(proc, &WatchedProcess::dataStderrRead,
+            this, &SvnActions::slotProcessDataRead);
+    connect(proc, &WatchedProcess::dataStdoutRead,
+            this, &SvnActions::slotProcessDataRead);
 
     proc->start();
     if (!proc->waitForStarted(-1)) {
@@ -1984,7 +1981,7 @@ void SvnActions::slotImport(const QString &path, const QUrl &target, const QStri
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18nc("@title:window", "Import"), i18n("Importing items"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         m_Data->m_Svnclient->import(svn::Path(path), svn::Url(target), message, depth, noIgnore, noUnknown);
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
@@ -2113,10 +2110,10 @@ void SvnActions::slotMergeExternal(const QString &_src1, const QString &_src2, c
     proc->setAutoDelete(true);
     proc->appendTempDir(tdir1.path());
     proc->setOutputChannelMode(KProcess::MergedChannels);
-    connect(proc, SIGNAL(dataStderrRead(QByteArray,WatchedProcess*)),
-            this, SLOT(slotProcessDataRead(QByteArray,WatchedProcess*)));
-    connect(proc, SIGNAL(dataStdoutRead(QByteArray,WatchedProcess*)),
-            this, SLOT(slotProcessDataRead(QByteArray,WatchedProcess*)));
+    connect(proc, &WatchedProcess::dataStderrRead,
+            this, &SvnActions::slotProcessDataRead);
+    connect(proc, &WatchedProcess::dataStdoutRead,
+            this, &SvnActions::slotProcessDataRead);
 
     proc->start();
     if (proc->waitForStarted(-1)) {
@@ -2184,7 +2181,7 @@ void SvnActions::slotMerge(const QString &src1, const QString &src2, const QStri
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18nc("@title:window", "Merge"), i18n("Merging items"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         if (pegged_merge) {
             m_Data->m_Svnclient->merge_peg(_merge_parameter);
         } else {
@@ -2211,7 +2208,7 @@ bool SvnActions::makeMove(const QString &Old, const QString &New)
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18nc("@title:window", "Move"), i18n("Moving/Rename item"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         nnum = m_Data->m_Svnclient->move(params.asChild(false).makeParent(false));
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
@@ -2229,7 +2226,7 @@ bool SvnActions::makeMove(const QList<QUrl> &Old, const QString &New)
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18nc("@title:window", "Move"), i18n("Moving entries"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         const svn::Path pNew(New);
         // either both are local paths -> move in wc, or both are urls -> move in repository
         const svn::Targets t(svn::Targets::fromUrlList(Old, pNew.isUrl() ? svn::Targets::UrlConversion::KeepUrl : svn::Targets::UrlConversion::PreferLocalPath));
@@ -2249,7 +2246,7 @@ bool SvnActions::makeCopy(const QString &Old, const QString &New, const svn::Rev
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18nc("@title:window", "Copy / Move"), i18n("Copy or Moving entries"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         m_Data->m_Svnclient->copy(svn::Path(Old), rev, svn::Path(New));
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
@@ -2264,7 +2261,7 @@ bool SvnActions::makeCopy(const QList<QUrl> &Old, const QString &New, const svn:
     try {
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18nc("@title:window", "Copy / Move"), i18n("Copy or Moving entries"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         const svn::Path pNew(New);
         // either both are local paths -> copy in wc, or both are urls -> copy in repository
         const svn::Targets t(svn::Targets::fromUrlList(Old, pNew.isUrl() ? svn::Targets::UrlConversion::KeepUrl : svn::Targets::UrlConversion::PreferLocalPath));
@@ -2340,7 +2337,7 @@ bool SvnActions::makeStatus(const QString &what, svn::StatusEntries &dlist, cons
         svn::StatusParameter params(what);
         StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                      i18nc("@title:window", "Status / List"), i18n("Creating list / check status"));
-        connect(this, SIGNAL(sigExtraLogMsg(QString)), &sdlg, SLOT(slotExtraMessage(QString)));
+        connect(this, &SvnActions::sigExtraLogMsg, &sdlg, &StopDlg::slotExtraMessage);
         //                                      rec all  up     noign
         dlist = m_Data->m_Svnclient->status(params.depth(_d).all(all).update(updates).noIgnore(display_ignores).revision(where).detailedRemote(disp_remote_details).ignoreExternals(false));
 #ifdef DEBUG_TIMER
@@ -2467,8 +2464,8 @@ bool SvnActions::createModifiedCache(const QString &what)
 {
     stopCheckModifiedThread();
     m_CThread = new CheckModifiedThread(this, what, false);
-    connect(m_CThread, SIGNAL(checkModifiedFinished()),
-            this, SLOT(checkModifiedThread()));
+    connect(m_CThread, &CheckModifiedThread::checkModifiedFinished,
+            this, &SvnActions::checkModifiedThread);
     m_CThread->start();
     return true;
 }
@@ -2479,7 +2476,7 @@ void SvnActions::checkModifiedThread()
         return;
     }
     if (m_CThread->isRunning()) {
-        QTimer::singleShot(2, this, SLOT(checkModifiedThread()));
+        QTimer::singleShot(2, this, &SvnActions::checkModifiedThread);
         return;
     }
     m_Data->m_Cache.clear();
@@ -2510,7 +2507,7 @@ void SvnActions::checkUpdateThread()
 {
     if (!m_UThread || m_UThread->isRunning()) {
         if (m_UThread) {
-            QTimer::singleShot(2, this, SLOT(checkUpdateThread()));
+            QTimer::singleShot(2, this, &SvnActions::checkUpdateThread);
         }
         return;
     }
@@ -2607,10 +2604,10 @@ void SvnActions::startFillCache(const QString &path, bool startup)
     }
 
     m_FCThread = new FillCacheThread(this, path, startup);
-    connect(m_FCThread, SIGNAL(fillCacheStatus(qlonglong,qlonglong)),
-            this, SIGNAL(sigCacheStatus(qlonglong,qlonglong)));
-    connect(m_FCThread, SIGNAL(fillCacheFinished()),
-            this, SLOT(stopFillCache()));
+    connect(m_FCThread, &FillCacheThread::fillCacheStatus,
+            this, &SvnActions::sigCacheStatus);
+    connect(m_FCThread, &FillCacheThread::fillCacheFinished,
+            this, &SvnActions::stopFillCache);
     m_FCThread->start();
 }
 
@@ -2648,8 +2645,8 @@ bool SvnActions::createUpdateCache(const QString &what)
         return false;
     }
     m_UThread = new CheckModifiedThread(this, what, true);
-    connect(m_UThread, SIGNAL(checkModifiedFinished()),
-            this, SLOT(checkUpdateThread()));
+    connect(m_UThread, &CheckModifiedThread::checkModifiedFinished,
+            this, &SvnActions::checkUpdateThread);
     m_UThread->start();
     emit sigExtraStatusMessage(i18n("Checking for updates started in background"));
     return true;

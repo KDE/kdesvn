@@ -652,9 +652,9 @@ void SvnItemModel::initDirWatch()
     m_Data->m_DirWatch = nullptr;
     if (m_Data->m_Display->isWorkingCopy()) {
         m_Data->m_DirWatch = new KDirWatch(this);
-        connect(m_Data->m_DirWatch, SIGNAL(dirty(QString)), this, SLOT(slotDirty(QString)));
-        connect(m_Data->m_DirWatch, SIGNAL(created(QString)), this, SLOT(slotCreated(QString)));
-        connect(m_Data->m_DirWatch, SIGNAL(deleted(QString)), this, SLOT(slotDeleted(QString)));
+        connect(m_Data->m_DirWatch, &KDirWatch::dirty, this, &SvnItemModel::slotDirty);
+        connect(m_Data->m_DirWatch, &KDirWatch::created, this, &SvnItemModel::slotCreated);
+        connect(m_Data->m_DirWatch, &KDirWatch::deleted, this, &SvnItemModel::slotDeleted);
         if (m_Data->m_DirWatch) {
             m_Data->m_DirWatch->addDir(m_Data->m_Display->baseUri() + QLatin1Char('/'), KDirWatch::WatchDirOnly);
             m_Data->m_DirWatch->startScan(true);

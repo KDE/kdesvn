@@ -31,9 +31,9 @@ EditPropsDlg::EditPropsDlg(bool bAddMode, QWidget *parent)
     if (bAddMode) {
         setWindowTitle(i18nc("@title:window", "Add Property"));
     }
-    connect(m_ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-    connect(m_ui->buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-    connect(m_ui->helpButton, SIGNAL(clicked(bool)), this, SLOT(showHelp()));
+    connect(m_ui->buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+    connect(m_ui->buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+    connect(m_ui->helpButton, &QAbstractButton::clicked, this, &EditPropsDlg::showHelp);
     m_ui->helpButton->setIcon(QIcon::fromTheme(QStringLiteral("help-hint")));
 
 

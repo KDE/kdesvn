@@ -24,6 +24,7 @@
 #include "ksvnwidgets/ssltrustprompt.h"
 #include "ksvnwidgets/pwstorage.h"
 #include "helpers/kdesvn_debug.h"
+#include "fronthelpers/cursorstack.h"
 
 #include <KLocalizedString>
 #include <KMessageBox>
@@ -259,6 +260,8 @@ bool CContextListener::contextGetLogMessage(QString &msg, const svn::CommitItemL
 svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTrustPrompt(
     const svn::ContextListener::SslServerTrustData &data , apr_uint32_t &acceptedFailures)
 {
+    CursorStack cs(Qt::ArrowCursor);
+
     bool ok, saveit;
     emit waitShow(true);
     if (!SslTrustPrompt::sslTrust(

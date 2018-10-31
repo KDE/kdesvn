@@ -558,7 +558,7 @@ bool SvnItemModel::dropUrls(const QList<QUrl> &data, Qt::DropAction action, int 
 QMimeData *SvnItemModel::mimeData(const QModelIndexList &indexes)const
 {
     QList<QUrl> urls;
-    foreach (const QModelIndex &index, indexes) {
+    for (const QModelIndex &index : indexes) {
         if (index.column() == 0) {
             urls << m_Data->nodeForIndex(index)->kdeName(m_Data->m_Display->baseRevision());
         }

@@ -128,7 +128,7 @@ svn::Revision KioSvnData::urlToRev(const QUrl &url)
 
     svn::Revision rev = svn::Revision::UNDEFINED;
     typedef QPair<QString, QString> myStrPair;
-    Q_FOREACH(const myStrPair &p, q) {
+    for (const myStrPair &p : q) {
         if (p.first == QLatin1String("rev")) {
             const QString v = p.second;
             svn::Revision tmp;
@@ -769,7 +769,7 @@ void kio_svnProtocol::status(const QUrl &wc, bool cR, bool rec)
         return;
     }
     qCDebug(KDESVN_LOG) << "Status got " << dlist.count() << " entries." << endl;
-    Q_FOREACH (const svn::StatusPtr &s, dlist) {
+    for (const svn::StatusPtr &s : qAsConst(dlist)) {
         if (!s) {
             continue;
         }

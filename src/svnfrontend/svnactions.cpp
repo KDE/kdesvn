@@ -1478,9 +1478,8 @@ void SvnActions::prepareUpdate(bool ask)
         what.append(svn::Path(m_Data->m_ParentList->baseUri()));
     } else {
         what.reserve(k.size());
-        Q_FOREACH(const SvnItem *item, k) {
+        for (const SvnItem *item : k)
             what.append(svn::Path(item->fullName()));
-        }
     }
     svn::Revision r(svn::Revision::HEAD);
     if (ask) {
@@ -1531,7 +1530,7 @@ void SvnActions::makeAdd(bool rec)
     }
     svn::Paths items;
     items.reserve(lst.size());
-    Q_FOREACH(const SvnItem *cur, lst) {
+    for (const SvnItem *cur : lst) {
         if (cur->isVersioned()) {
             KMessageBox::error(m_Data->m_ParentList->realWidget(), i18n("<center>The entry<br/>%1<br/>is versioned - break.</center>",
                                                                         cur->fullName()));
@@ -1737,7 +1736,7 @@ void SvnActions::slotRevert()
     QStringList displist;
     if (!lst.isEmpty()) {
         displist.reserve(lst.size());
-        Q_FOREACH(const SvnItem *cur, lst) {
+        for (const SvnItem *cur : lst) {
             if (!cur->isVersioned()) {
                 KMessageBox::error(m_Data->m_ParentList->realWidget(), i18n("<center>The entry<br/>%1<br/>is not versioned - break.</center>", cur->fullName()));
                 return;

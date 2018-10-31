@@ -41,7 +41,7 @@ void OpenContextmenu::setup()
 {
     m_mapPopup.clear();
     QStringList _found;
-    Q_FOREACH(const KService::Ptr &ptr, m_List) {
+    for (const KService::Ptr &ptr : qAsConst(m_List)) {
         if (_found.contains(ptr->name())) {
             continue;
         }

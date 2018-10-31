@@ -92,6 +92,8 @@ add_definitions(-DQT_NO_CAST_TO_ASCII)
 #add_definitions(-DQT_NO_CAST_FROM_ASCII)
 add_definitions(-DQT_RESTRICTED_CAST_FROM_ASCII)
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
+# kde headers still use Q_FOREACH... :(
+# add_definitions(-DQT_NO_FOREACH)
 add_definitions(-DQT_DEPRECATED_WARNINGS)
 add_definitions(-DQT_STRICT_ITERATORS)
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050900)

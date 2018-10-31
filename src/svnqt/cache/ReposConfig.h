@@ -95,9 +95,8 @@ void ReposConfig::writeListCheck(const QString &repository, const QString &key, 
     ConversionCheck::to_QVariant<T>();
     ConversionCheck::to_QString<T>();
     QVariantList data;
-    Q_FOREACH (const T &value, list) {
+    for (const T &value : list)
         data.append(qVariantFromValue(value));
-    }
     setValue(repository, key, data);
 }
 

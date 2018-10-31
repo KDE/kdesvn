@@ -76,7 +76,7 @@ QStringList kdesvnd::getTopLevelActionMenu(const QStringList &urlList) const
     // we get correct urls here
     QList<QUrl> urls;
     urls.reserve(urlList.size());
-    Q_FOREACH(const QString &str, urlList) {
+    for (const QString &str : urlList) {
         if (str.contains(QLatin1Char('@')))
             urls += QUrl(str + QLatin1Char('@'));
         else
@@ -91,7 +91,7 @@ QStringList kdesvnd::getActionMenu(const QStringList &urlList) const
     // we get correct urls here
     QList<QUrl> urls;
     urls.reserve(urlList.size());
-    Q_FOREACH(const QString &str, urlList) {
+    for (const QString &str : urlList) {
         if (str.contains(QLatin1Char('@')))
             urls += QUrl(str + QLatin1Char('@'));
         else

@@ -275,7 +275,7 @@ bool MainTreeWidget::openUrl(const QUrl &url, bool noReinit)
     }
     const QList<QPair<QString, QString>> q = QUrlQuery(url).queryItems();
     typedef QPair<QString, QString> queryPair;
-    Q_FOREACH(const queryPair &p, q) {
+    for (const queryPair &p : q) {
         if (p.first == QLatin1String("rev")) {
             const QString v = p.second;
             svn::Revision tmp;
@@ -1770,9 +1770,9 @@ void MainTreeWidget::slotCopyFinished(KJob *_job)
         const QString base = job->destUrl().toLocalFile() + QLatin1Char('/');
         svn::Paths tmp;
         tmp.reserve(lst.size());
-        Q_FOREACH(const QUrl &url, lst) {
+        for (const QUrl &url : lst)
             tmp.push_back(svn::Path(base + url.fileName()));
-        }
+
         m_Data->m_Model->svnWrapper()->addItems(tmp, svn::DepthInfinity);
     }
     refreshCurrentTree();
@@ -2287,9 +2287,8 @@ void MainTreeWidget::slotDirUpdate()
         what.append(svn::Path(baseUri()));
     } else {
         what.reserve(which.size());
-        Q_FOREACH(const SvnItem *item, which) {
+        for (const SvnItem *item : which)
             what.append(svn::Path(item->fullName()));
-        }
     }
     m_Data->m_Model->svnWrapper()->makeUpdate(svn::Targets(what), svn::Revision::HEAD, svn::DepthUnknown);
 }

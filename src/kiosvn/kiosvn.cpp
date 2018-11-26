@@ -48,6 +48,7 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <klocalizedstring.h>
+#include <kio_version.h>
 
 namespace KIO
 {
@@ -184,14 +185,11 @@ void kio_svnProtocol::listSendDirEntry(const svn::DirEntry &direntry)
         qCDebug(KDESVN_LOG) << "Skipping empty entry!" << endl;
         return;
     }
-    if (createUDSEntry(direntry.name(),
-                       direntry.lastAuthor(),
-                       direntry.size(),
-                       direntry.kind() == svn_node_dir ? true : false,
-                       dt,
-                       entry)) {
-        listEntry(entry);
-    }
+    listEntry(createUDSEntry(direntry.name(),
+                             direntry.lastAuthor(),
+                             direntry.size(),
+                             direntry.kind() == svn_node_dir ? true : false,
+                             dt));
 }
 
 /*!
@@ -246,13 +244,13 @@ void kio_svnProtocol::stat(const QUrl &url)
 
     KIO::UDSEntry entry;
     if (dummy) {
-        createUDSEntry(url.fileName(), QString(), 0, true, QDateTime(), entry);
+        entry = createUDSEntry(url.fileName(), QString(), 0, true, QDateTime());
     } else {
         const QDateTime dt(e[0].cmtDate().toQDateTime());
         if (e[0].kind() == svn_node_file) {
-            createUDSEntry(url.fileName(), QString(), 0, false, dt, entry);
+            entry = createUDSEntry(url.fileName(), QString(), 0, false, dt);
         } else {
-            createUDSEntry(url.fileName(), QString(), 0, true, dt, entry);
+            entry = createUDSEntry(url.fileName(), QString(), 0, true, dt);
         }
     }
     statEntry(entry);
@@ -568,14 +566,23 @@ svn::Path kio_svnProtocol::makeSvnPath(const QUrl &url) const
     return svn::Path(tmpUrl.toString(QUrl::NormalizePathSegments));
 }
 
-bool kio_svnProtocol::createUDSEntry(const QString &filename, const QString &user, long long int size, bool isdir, const QDateTime &mtime, KIO::UDSEntry &entry)
+KIO::UDSEntry kio_svnProtocol::createUDSEntry(const QString &filename, const QString &user, long long int size, bool isdir, const QDateTime &mtime)
 {
+    KIO::UDSEntry entry;
+#if KIO_VERSION <= QT_VERSION_CHECK(5, 48, 0)
     entry.insert(KIO::UDSEntry::UDS_NAME, filename);
     entry.insert(KIO::UDSEntry::UDS_FILE_TYPE, isdir ? S_IFDIR : S_IFREG);
     entry.insert(KIO::UDSEntry::UDS_SIZE, size);
     entry.insert(KIO::UDSEntry::UDS_MODIFICATION_TIME, mtime.toSecsSinceEpoch());
     entry.insert(KIO::UDSEntry::UDS_USER, user);
-    return true;
+#else
+    entry.fastInsert(KIO::UDSEntry::UDS_NAME, filename);
+    entry.fastInsert(KIO::UDSEntry::UDS_FILE_TYPE, isdir ? S_IFDIR : S_IFREG);
+    entry.fastInsert(KIO::UDSEntry::UDS_SIZE, size);
+    entry.fastInsert(KIO::UDSEntry::UDS_MODIFICATION_TIME, mtime.toSecsSinceEpoch());
+    entry.fastInsert(KIO::UDSEntry::UDS_USER, user);
+#endif
+    return entry;
 }
 
 void kio_svnProtocol::special(const QByteArray &data)

@@ -35,7 +35,7 @@ public:
     ~Propertylist();
 
     bool checkExisting(const QString &aName, QTreeWidgetItem *it = nullptr);
-    bool commitchanges()const
+    bool commitchanges() const
     {
         return m_commitit;
     }
@@ -43,7 +43,6 @@ public:
     {
         m_commitit = how;
     }
-    void addCallback(QObject *ob);
 
 public Q_SLOTS:
     void displayList(const svn::PathPropertiesMapListPtr &, bool, bool, const QString &);

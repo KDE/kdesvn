@@ -84,6 +84,7 @@ public Q_SLOTS:
     void refreshCurrent(SvnItem *);
     void slotReinitItem(SvnItem *);
     void stopLogCache();
+    void slotChangeProperties(const svn::PropertiesMap &, const QStringList &, const QString &);
 
 protected Q_SLOTS:
     void slotCacheDataChanged();
@@ -119,7 +120,6 @@ protected Q_SLOTS:
     void slotBlame();
     void slotRangeBlame();
     void slotDisplayProperties();
-    void slotChangeProperties(const svn::PropertiesMap &, const QStringList &, const QString &);
     void slotCat();
     void slotRevisionCat();
     void slotResolved();

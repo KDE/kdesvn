@@ -156,11 +156,3 @@ bool Propertylist::checkExisting(const QString &aName, QTreeWidgetItem *it)
     }
     return false;
 }
-
-void Propertylist::addCallback(QObject *ob)
-{
-    if (ob) {
-        connect(this, SIGNAL(sigSetProperty(svn::PropertiesMap,QStringList,QString)),
-                ob, SLOT(slotChangeProperties(svn::PropertiesMap,QStringList,QString)));
-    }
-}

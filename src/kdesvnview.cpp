@@ -73,7 +73,8 @@ kdesvnView::kdesvnView(KActionCollection *aCollection, QWidget *parent, bool ful
             this, &kdesvnView::onCustomLogWindowContextMenuRequested);
     Propertylist *pl = new Propertylist(m_infoSplitter);
     pl->setCommitchanges(true);
-    pl->addCallback(m_TreeWidget);
+    connect(pl, &Propertylist::sigSetProperty,
+            m_TreeWidget, &MainTreeWidget::slotChangeProperties);
     connect(m_TreeWidget, &MainTreeWidget::sigProplist,
             pl, &Propertylist::displayList);
     connect(m_TreeWidget, &MainTreeWidget::sigProplist,

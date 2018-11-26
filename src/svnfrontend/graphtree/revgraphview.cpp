@@ -512,12 +512,12 @@ void RevGraphView::dumpRevtree()
         }
     }
     stream << "}\n" << flush;
-    m_renderProcess = new KProcess();
+    m_renderProcess = new KProcess;
     m_renderProcess->setEnv("LANG", "C");
     *m_renderProcess << "dot";
     *m_renderProcess << m_dotTmpFile->fileName() << "-Tplain";
-    connect(m_renderProcess, SIGNAL(finished(int,QProcess::ExitStatus)),
-            this, SLOT(dotExit(int,QProcess::ExitStatus)));
+    connect(m_renderProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+            this, &RevGraphView::dotExit);
     connect(m_renderProcess, &QProcess::readyReadStandardOutput,
             this, &RevGraphView::readDotOutput);
     m_renderProcess->setOutputChannelMode(KProcess::SeparateChannels);

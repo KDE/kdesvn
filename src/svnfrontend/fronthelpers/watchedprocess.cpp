@@ -47,14 +47,20 @@ public:
 
 WatchedProcess::WatchedProcess(QObject *parent)
     : KProcess(parent)
+    , m_Data(new ProcessData)
 {
-    m_Data = new ProcessData;
-    connect(this, SIGNAL(error(QProcess::ProcessError)), SLOT(slotError(QProcess::ProcessError)));
-    connect(this, SIGNAL(finished(int,QProcess::ExitStatus)), SLOT(slotFinished(int,QProcess::ExitStatus)));
-    connect(this, &QProcess::readyReadStandardError, this, &WatchedProcess::slotReadyReadStandardError);
-    connect(this, &QProcess::readyReadStandardOutput, this, &WatchedProcess::slotReadyReadStandardOutput);
-    connect(this, SIGNAL(started()), SLOT(slotStarted()));
-    connect(this, SIGNAL(stateChanged(QProcess::ProcessState)), SLOT(slotStateChanged(QProcess::ProcessState)));
+    connect(this, &QProcess::errorOccurred,
+            this, &WatchedProcess::slotError);
+    connect(this, QOverload<int, QProcess::ExitStatus>::of(&KProcess::finished),
+            this, &WatchedProcess::slotFinished);
+    connect(this, &QProcess::readyReadStandardError,
+            this, &WatchedProcess::slotReadyReadStandardError);
+    connect(this, &QProcess::readyReadStandardOutput,
+            this, &WatchedProcess::slotReadyReadStandardOutput);
+    connect(this, &KProcess::started,
+            this, &WatchedProcess::slotStarted);
+    connect(this, &KProcess::stateChanged,
+            this, &WatchedProcess::slotStateChanged);
 }
 
 WatchedProcess::~WatchedProcess()

@@ -2675,7 +2675,7 @@ bool SvnActions::createUpdateCache(const QString &what)
         return false;
     }
     m_UThread = new CheckModifiedThread(this, what, true);
-    connect(m_CThread, SIGNAL(checkModifiedFinished()),
+    connect(m_UThread, SIGNAL(checkModifiedFinished()),
             this, SLOT(checkUpdateThread()));
     m_UThread->start();
     emit sigExtraStatusMessage(i18n("Checking for updates started in background"));

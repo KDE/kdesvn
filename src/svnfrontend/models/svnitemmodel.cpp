@@ -173,9 +173,11 @@ void SvnItemModel::setRootNodeStat(const svn::StatusPtr &stat)
 void SvnItemModel::clear()
 {
     int numRows = m_Data->m_rootNode->childList().count();
-    beginRemoveRows(QModelIndex(), 0, numRows);
+    if (numRows > 0)
+        beginRemoveRows(QModelIndex(), 0, numRows - 1);
     m_Data->clear();
-    endRemoveRows();
+    if (numRows > 0)
+        endRemoveRows();
 }
 
 void SvnItemModel::beginRemoveRows(const QModelIndex &parent, int first, int last)

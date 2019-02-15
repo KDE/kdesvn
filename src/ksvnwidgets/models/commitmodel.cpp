@@ -46,33 +46,42 @@ CommitModel::~CommitModel()
 
 void CommitModel::setCommitData(const svn::CommitItemList &aList)
 {
-    beginRemoveRows(QModelIndex(), 0, m_List.count());
-    m_List.clear();
-    endRemoveRows();
-
-    m_List.reserve(aList.size());
-    beginInsertRows(QModelIndex(), 0, aList.size() - 1);
-    for (int j = 0; j < aList.size(); ++j) {
-        m_List.append(CommitModelNodePtr(new CommitModelNode(aList[j])));
+    if (!m_List.isEmpty()) {
+        beginRemoveRows(QModelIndex(), 0, m_List.count() - 1);
+        m_List.clear();
+        endRemoveRows();
     }
-    endInsertRows();
+
+    if (!aList.isEmpty()) {
+        m_List.reserve(aList.size());
+        beginInsertRows(QModelIndex(), 0, aList.size() - 1);
+        for (int j = 0; j < aList.size(); ++j) {
+            m_List.append(CommitModelNodePtr(new CommitModelNode(aList[j])));
+        }
+        endInsertRows();
+    }
 }
 
 void CommitModel::setCommitData(const CommitActionEntries &checked, const CommitActionEntries &notchecked)
 {
-    beginRemoveRows(QModelIndex(), 0, m_List.count());
-    m_List.clear();
-    endRemoveRows();
+    if (!m_List.isEmpty()) {
+        beginRemoveRows(QModelIndex(), 0, m_List.count() - 1);
+        m_List.clear();
+        endRemoveRows();
+    }
 
-    m_List.reserve(checked.size() + notchecked.size());
-    beginInsertRows(QModelIndex(), 0, checked.size() + notchecked.size() - 1);
-    for (int j = 0; j < checked.size(); ++j) {
-        m_List.append(CommitModelNodePtr(new CommitModelNode(checked[j], true)));
+    const int totalSize = checked.size() + notchecked.size();
+    if (totalSize > 0) {
+        m_List.reserve(totalSize);
+        beginInsertRows(QModelIndex(), 0, totalSize - 1);
+        for (int j = 0; j < checked.size(); ++j) {
+            m_List.append(CommitModelNodePtr(new CommitModelNode(checked[j], true)));
+        }
+        for (int j = 0; j < notchecked.size(); ++j) {
+            m_List.append(CommitModelNodePtr(new CommitModelNode(notchecked[j], false)));
+        }
+        endInsertRows();
     }
-    for (int j = 0; j < notchecked.size(); ++j) {
-        m_List.append(CommitModelNodePtr(new CommitModelNode(notchecked[j], false)));
-    }
-    endInsertRows();
 }
 
 int CommitModel::ActionColumn()const

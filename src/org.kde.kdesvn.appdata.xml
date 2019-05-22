@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop">
+  <id>org.kde.kdesvn.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <name>kdesvn</name>
+  <summary>SVN Client</summary>
+  <description>
+    <p>
+        
+        kdesvn is a Subversion client using the native Subversion delevelopment 
+        API instead of just parsing the output of the commandline tool like most other 
+        clients do.
+    </p>
+    <p>
+        It tries to setup a look and feel like the standard filemanager of KDE and is
+        integrated into it via KPart.
+    </p>
+  </description>
+  <url type="homepage">https://www.kde.org</url>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=kdesvn</url>
+  <url type="help">https://docs.kde.org/trunk5/en/extragear-sdk/kdesvn/index.html</url>
+  <url type="donation">https://www.kde.org/community/donations/?app=kdesvn&amp;source=appdata</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://cdn.kde.org/screenshots/kdesvn/kdesvn.png</image>
+    </screenshot>
+  </screenshots>
+  <project_group>KDE</project_group>
+  <provides>
+    <binary>kdesvn</binary>
+  </provides>
+  <launchable type="desktop-id">org.kde.kdesvn.desktop</launchable>
+</component>

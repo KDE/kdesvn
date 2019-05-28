@@ -712,8 +712,7 @@ void MainTreeWidget::enableActions()
     bool all_unversioned = true;
     bool all_versioned = true;
     bool at_least_one_directory = false;
-    for(int i = 0; i < fileList.size(); ++i) {
-      const SvnItem *item = fileList.at(i);
+    for (auto item : fileList) {
       if (!item) {
           // root item
           continue;

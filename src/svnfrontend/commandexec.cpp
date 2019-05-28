@@ -274,9 +274,9 @@ int CommandExec::exec(const QCommandLineParser *parser)
             continue;
         }
         const QList<QPair<QString, QString> > q = QUrlQuery(tmpurl).queryItems();
-        for(int i = 0; i < q.size(); ++i) {
-            if (q.at(i).first == QLatin1String("rev")) {
-                svn::Revision re = q.at(i).second;
+        for (const auto &item : q) {
+            if (item.first == QLatin1String("rev")) {
+                svn::Revision re = item.second;
                 if (re) {
                     m_pCPart->extraRevisions[j - 2] = re;
                 }

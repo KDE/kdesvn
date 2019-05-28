@@ -55,8 +55,8 @@ void CommitModel::setCommitData(const svn::CommitItemList &aList)
     if (!aList.isEmpty()) {
         m_List.reserve(aList.size());
         beginInsertRows(QModelIndex(), 0, aList.size() - 1);
-        for (int j = 0; j < aList.size(); ++j) {
-            m_List.append(CommitModelNodePtr(new CommitModelNode(aList[j])));
+        for (const auto &item : aList) {
+            m_List.append(CommitModelNodePtr(new CommitModelNode(item)));
         }
         endInsertRows();
     }
@@ -74,11 +74,11 @@ void CommitModel::setCommitData(const CommitActionEntries &checked, const Commit
     if (totalSize > 0) {
         m_List.reserve(totalSize);
         beginInsertRows(QModelIndex(), 0, totalSize - 1);
-        for (int j = 0; j < checked.size(); ++j) {
-            m_List.append(CommitModelNodePtr(new CommitModelNode(checked[j], true)));
+        for (const auto &entry : checked) {
+            m_List.append(CommitModelNodePtr(new CommitModelNode(entry, true)));
         }
-        for (int j = 0; j < notchecked.size(); ++j) {
-            m_List.append(CommitModelNodePtr(new CommitModelNode(notchecked[j], false)));
+        for (const auto &entry : notchecked) {
+            m_List.append(CommitModelNodePtr(new CommitModelNode(entry, false)));
         }
         endInsertRows();
     }

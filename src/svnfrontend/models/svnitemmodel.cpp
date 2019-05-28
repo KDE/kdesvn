@@ -876,10 +876,10 @@ bool SvnItemModel::refreshDirnode(SvnItemModelNodeDir *node, bool check_empty, b
 
     // make sure that we do not read in the whole tree when just refreshing the current tree.
     if (!node->m_Children.isEmpty() && !notrec) {
-        for (int i = 0; i < node->m_Children.size(); ++i) {
-            if (node->m_Children[i]->NodeIsDir()) {
+        for (auto &child : node->m_Children) {
+            if (child->NodeIsDir()) {
                 // both other parameters makes no sense at this point - defaults
-                refreshDirnode(static_cast<SvnItemModelNodeDir *>(node->m_Children[i]), false, false);
+                refreshDirnode(static_cast<SvnItemModelNodeDir *>(child), false, false);
             }
         }
     }
@@ -905,9 +905,9 @@ int SvnItemModel::checkUnversionedDirs(SvnItemModelNode *_parent)
     }
     svn::StatusEntries dlist;
     SvnItemModelNodeDir *n = static_cast<SvnItemModelNodeDir *>(_parent);
-    for (QFileInfoList::size_type i = 0; i < list.size(); ++i) {
-        if (!(n->contains(list[i].absoluteFilePath()) || list[i].absoluteFilePath() == n->fullName())) {
-            svn::StatusPtr stat(new svn::Status(list[i].absoluteFilePath()));
+    for (const auto &fi : list) {
+        if (!(n->contains(fi.absoluteFilePath()) || fi.absoluteFilePath() == n->fullName())) {
+            svn::StatusPtr stat(new svn::Status(fi.absoluteFilePath()));
             dlist.append(stat);
         }
     }

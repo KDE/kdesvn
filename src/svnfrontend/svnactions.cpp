@@ -804,8 +804,8 @@ QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_wha
             if ((*it).propTime().IsValid()) {
                 text += rb + i18n("Property last changed") + cs + (*it).propTime().toString() + re;
             }
-            for (int _cfi = 0; _cfi < (*it).conflicts().size(); ++_cfi) {
-                text += rb + i18n("New version of conflicted file") + cs + ((*it).conflicts()[_cfi]->theirFile());
+            for (const auto & _cfi : (*it).conflicts()) {
+                text += rb + i18n("New version of conflicted file") + cs + (_cfi->theirFile());
             }
             if ((*it).prejfile().length()) {
                 text += rb + i18n("Property reject file") +
@@ -845,8 +845,8 @@ void SvnActions::makeInfo(const SvnItemList &lst, const svn::Revision &rev, cons
 {
     QStringList infoList;
     infoList.reserve(lst.size());
-    for (int i = 0; i < lst.size(); ++i) {
-        const QString text = getInfo(lst.at(i)->fullName(), rev, peg, recursive, true);
+    for (const auto item : lst) {
+        const QString text = getInfo(item->fullName(), rev, peg, recursive, true);
         if (!text.isEmpty()) {
             infoList += text;
         }
@@ -1033,12 +1033,12 @@ bool SvnActions::makeCommit(const svn::Targets &targets)
         }
         svn::Paths _add, _commit, _delete;
         depth = svn::DepthInfinity;
-        for (long i = 0; i < _result.count(); ++i) {
-            _commit.append(_result[i].name());
-            if (_result[i].type() == CommitActionEntry::ADD_COMMIT) {
-                _add.append(_result[i].name());
-            } else if (_result[i].type() == CommitActionEntry::MISSING_DELETE) {
-                _delete.append(_result[i].name());
+        for (const CommitActionEntry &entry : _result) {
+            _commit.append(entry.name());
+            if (entry.type() == CommitActionEntry::ADD_COMMIT) {
+                _add.append(entry.name());
+            } else if (entry.type() == CommitActionEntry::MISSING_DELETE) {
+                _delete.append(entry.name());
             }
         }
         if (!_add.isEmpty()) {
@@ -1101,7 +1101,7 @@ void SvnActions::makeDiff(const QString &what, const svn::Revision &start, const
 
 void SvnActions::makeDiff(const QString &p1, const svn::Revision &start, const QString &p2, const svn::Revision &end)
 {
-    makeDiff(p1, start, p2, end, (QWidget *)nullptr);
+    makeDiff(p1, start, p2, end, nullptr);
 }
 
 void SvnActions::makeDiff(const QString &p1, const svn::Revision &start, const QString &p2, const svn::Revision &end, QWidget *p)
@@ -2303,8 +2303,8 @@ void SvnActions::makeUnlock(const QStringList &what, bool breakit)
         emit clientException(e.msg());
         return;
     }
-    for (long i = 0; i < what.count(); ++i) {
-        m_Data->m_repoLockCache.deleteKey(what[i], true);
+    for (const QString &key : what) {
+        m_Data->m_repoLockCache.deleteKey(key, true);
     }
 //    m_Data->m_repoLockCache.dump_tree();
 }
@@ -2359,11 +2359,10 @@ void SvnActions::checkAddItems(const QString &path, bool print_error_box)
     if (!makeStatus(path, dlist, where, true, true, false, false)) {
         return;
     }
-    for (int i = 0; i < dlist.size(); ++i) {
-        const svn::StatusPtr &ptr = dlist.at(i);
-        if (!ptr->isVersioned()) {
-            rlist.append(ptr);
-            displist.append(ptr->path());
+    for (const auto &entry : dlist) {
+        if (!entry->isVersioned()) {
+            rlist.append(entry);
+            displist.append(entry->path());
         }
     }
     if (rlist.isEmpty()) {
@@ -2481,8 +2480,7 @@ void SvnActions::checkModifiedThread()
     m_Data->m_Cache.clear();
     m_Data->m_conflictCache.clear();
     const svn::StatusEntries &sEntries = m_CThread->getList();
-    for (int i = 0; i < sEntries.size(); ++i) {
-        const svn::StatusPtr ptr = sEntries.at(i);
+    for (const auto &ptr : sEntries) {
         if (ptr->isRealVersioned() && (
                     ptr->nodeStatus() == svn_wc_status_modified ||
                     ptr->nodeStatus() == svn_wc_status_added ||
@@ -2512,8 +2510,7 @@ void SvnActions::checkUpdateThread()
     }
     bool newer = false;
     const svn::StatusEntries &sEntries = m_UThread->getList();
-    for (int i = 0; i < sEntries.size(); ++i) {
-        const svn::StatusPtr ptr = sEntries.at(i);
+    for (const auto &ptr : sEntries) {
         if (ptr->validReposStatus()) {
             m_Data->m_UpdateCache.insertKey(ptr, ptr->path());
             if (!(ptr->validLocalStatus())) {

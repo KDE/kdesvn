@@ -745,12 +745,12 @@ void RevGraphView::makeSelected(GraphTreeLabel *gtl)
 
 }
 
-GraphTreeLabel *RevGraphView::firstLabelAt(const QPoint &pos)const
+GraphTreeLabel *RevGraphView::firstLabelAt(const QPoint &pos) const
 {
     QList<QGraphicsItem *> its = items(pos);
-    for (QList<QGraphicsItem *>::size_type i = 0; i < its.size(); ++i) {
-        if (its[i]->type() == GRAPHTREE_LABEL) {
-            return static_cast<GraphTreeLabel *>(its[i]);
+    for (auto &it : its) {
+        if (it->type() == GRAPHTREE_LABEL) {
+            return static_cast<GraphTreeLabel *>(it);
         }
     }
 

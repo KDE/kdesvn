@@ -38,7 +38,7 @@ public:
     static void showSettings(const QString &repository, QWidget *parent = nullptr);
 
 protected Q_SLOTS:
-    void accept() final;
+    void accept() override final;
 private:
     void init();
     explicit DbSettings(const QString &repository, QWidget *parent = nullptr);

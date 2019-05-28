@@ -40,7 +40,7 @@ private:
     ~UrlDlg();
 
 private slots:
-    void accept() final;
+    void accept() override final;
     void slotTextChanged(const QString &);
 private:
     KUrlRequester *m_urlRequester;

@@ -29,7 +29,7 @@ public:
     explicit PropertyListViewItem(QTreeWidget *parent, const QString &aStartName = QString(), const QString &aStartValue = QString());
 
     const QString &startName() const { return m_startName; }
-    const QString &startValue()const { return m_startValue; }
+    const QString &startValue() const { return m_startValue; }
     const QString &currentName() const { return m_currentName; }
     const QString &currentValue() const { return m_currentValue; }
 

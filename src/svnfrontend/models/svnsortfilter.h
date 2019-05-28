@@ -24,11 +24,11 @@
 
 #include "svnitemmodelfwd.h"
 
-class SvnSortFilterProxy: public QSortFilterProxyModel
+class SvnSortFilterProxy : public QSortFilterProxyModel
 {
     Q_OBJECT
 public:
-    explicit SvnSortFilterProxy(QObject *parent = nullptr);
+    using QSortFilterProxyModel::QSortFilterProxyModel;
 
     void setSourceModel(QAbstractItemModel *sourceModel) override;
 
@@ -42,7 +42,7 @@ public:
     Q_DECLARE_FLAGS(TypeFlag, ShowType)
 
     void setShowFilter(svnmodel::ItemTypeFlag);
-    svnmodel::ItemTypeFlag showFilter()const
+    svnmodel::ItemTypeFlag showFilter() const
     {
         return m_ShowFilter;
     }
@@ -51,8 +51,8 @@ protected:
     bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
 
-    SvnItemModel *m_sourceModel;
-    svnmodel::ItemTypeFlag m_ShowFilter;
+    SvnItemModel *m_sourceModel = nullptr;
+    svnmodel::ItemTypeFlag m_ShowFilter = svnmodel::All;
 };
 
 #endif

@@ -79,20 +79,19 @@ public:
 
 };
 
-class CommitFilterModel : public QSortFilterProxyModel
+class CommitFilterModel final : public QSortFilterProxyModel
 {
     Q_OBJECT
  public:
-    explicit CommitFilterModel(QObject *parent);
-    ~CommitFilterModel();
+    using QSortFilterProxyModel::QSortFilterProxyModel;
 
     void setSourceModel(QAbstractItemModel *sourceModel) override;
-    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
-
     void hideItems(bool bHide, CommitActionEntry::ACTION_TYPE aType);
+protected:
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
 private:
-    CommitModel *m_sourceModel;
-    CommitActionEntry::ActionTypes m_visibleTypes;
+    CommitModel *m_sourceModel = nullptr;
+    CommitActionEntry::ActionTypes m_visibleTypes = CommitActionEntry::ALL;
 };
 
 #endif

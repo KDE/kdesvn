@@ -39,9 +39,6 @@ SvnLogModel::SvnLogModel(const svn::LogEntriesMapPtr &_log, const QString &m_nam
     setLogData(_log, m_name);
 }
 
-SvnLogModel::~SvnLogModel()
-{}
-
 void SvnLogModel::setLogData(const svn::LogEntriesMapPtr &log, const QString &name)
 {
     beginResetModel();
@@ -242,14 +239,9 @@ void SvnLogModel::setRightRow(int v)
     m_right = v;
 }
 
-SvnLogSortModel::SvnLogSortModel(QObject *parent)
-    : QSortFilterProxyModel(parent)
-    , m_sourceModel(nullptr)
-{}
-
-SvnLogSortModel::~SvnLogSortModel()
-{}
-
+//
+// SvnLogSortModel
+//
 void SvnLogSortModel::setSourceModel(QAbstractItemModel *sourceModel)
 {
     m_sourceModel = qobject_cast<SvnLogModel*>(sourceModel);

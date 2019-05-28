@@ -284,15 +284,6 @@ bool CommitModelCheckitem::setData(const QModelIndex &index, const QVariant &val
 /***************************
  * Begin CommitFilterModel *
  ***************************/
-CommitFilterModel::CommitFilterModel(QObject *parent)
-    : QSortFilterProxyModel(parent)
-    , m_sourceModel(nullptr)
-    , m_visibleTypes(CommitActionEntry::ALL)
-{}
-
-CommitFilterModel::~CommitFilterModel()
-{}
-
 void CommitFilterModel::setSourceModel(QAbstractItemModel *sourceModel)
 {
     m_sourceModel = qobject_cast<CommitModel*>(sourceModel);

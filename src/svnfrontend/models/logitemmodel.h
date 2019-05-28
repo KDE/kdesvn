@@ -36,7 +36,6 @@ class SvnLogModel: public QAbstractListModel
     Q_OBJECT
 public:
     SvnLogModel(const svn::LogEntriesMapPtr &_log, const QString &_name, QObject *parent);
-    ~SvnLogModel();
     void setLogData(const svn::LogEntriesMapPtr &log, const QString &name);
 
     qlonglong toRevision(const QModelIndex &)const;
@@ -58,8 +57,8 @@ public:
     int columnCount(const QModelIndex &) const Q_DECL_OVERRIDE;
 
     SvnLogModelNodePtr indexNode(const QModelIndex &)const;
-    int leftRow()const;
-    int rightRow()const;
+    int leftRow() const;
+    int rightRow() const;
     void setLeftRow(int);
     void setRightRow(int);
 
@@ -76,18 +75,17 @@ private:
     friend class SvnLogSortModel;
 };
 
-class SvnLogSortModel : public QSortFilterProxyModel
+class SvnLogSortModel final : public QSortFilterProxyModel
 {
     Q_OBJECT
 public:
-    SvnLogSortModel(QObject *parent = nullptr);
-    ~SvnLogSortModel();
+    using QSortFilterProxyModel::QSortFilterProxyModel;
 
-    void setSourceModel(QAbstractItemModel *sourceModel) final;
+    void setSourceModel(QAbstractItemModel *sourceModel) override final;
 protected:
-    bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const final;
+    bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override final;
 private:
-    SvnLogModel *m_sourceModel;
+    SvnLogModel *m_sourceModel = nullptr;
 };
 
 #endif

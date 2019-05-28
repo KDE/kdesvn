@@ -23,11 +23,6 @@
 #include "svnitemnode.h"
 #include "settings/kdesvnsettings.h"
 
-SvnSortFilterProxy::SvnSortFilterProxy(QObject *parent)
-    : QSortFilterProxyModel(parent), m_sourceModel(nullptr), m_ShowFilter(svnmodel::All)
-{
-}
-
 void SvnSortFilterProxy::setSourceModel(QAbstractItemModel *sourceModel)
 {
     m_sourceModel = qobject_cast<SvnItemModel*>(sourceModel);

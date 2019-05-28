@@ -2,14 +2,6 @@
 <ui version="4.0">
  <class>CommitMessage</class>
  <widget class="QWidget" name="CommitMessage">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>600</width>
-    <height>400</height>
-   </rect>
-  </property>
   <property name="windowTitle">
    <string>Commit Message</string>
   </property>
@@ -168,7 +160,11 @@
         </widget>
        </item>
        <item>
-        <widget class="KTextEdit" name="m_LogEdit"/>
+        <widget class="KTextEdit" name="m_LogEdit">
+         <property name="acceptRichText">
+          <bool>false</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

@@ -236,18 +236,18 @@ public:
     void setDrawParams(DrawParams *);
 
     // draw on a given QPainter, use this class as info provider per default
-    void drawBack(QPainter *, DrawParams *dp = 0);
+    void drawBack(QPainter *, DrawParams *dp = nullptr);
     /* Draw field at position() from pixmap()/text() with maxLines().
      * Returns true if something was drawn
      */
-    bool drawField(QPainter *, int f, DrawParams *dp = 0);
+    bool drawField(QPainter *, int f, DrawParams *dp = nullptr);
 
     // resets rectangle for free space
     void setRect(QRect);
 
     // Returns the rectangle area still free of text/pixmaps after
     // a number of drawText() calls.
-    QRect remainingRect(DrawParams *dp = 0);
+    QRect remainingRect(DrawParams *dp = nullptr);
 
 private:
     int _usedTopLeft, _usedTopCenter, _usedTopRight;

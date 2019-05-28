@@ -56,7 +56,6 @@
 #include <QApplication>
 #include <QCheckBox>
 #include <QKeyEvent>
-#include <QMap>
 #include <QUrlQuery>
 #include <QTimer>
 

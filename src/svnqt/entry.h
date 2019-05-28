@@ -64,7 +64,7 @@ public:
      *
      * @param src another entry to copy from
      */
-    explicit Entry(const svn_client_status_t *src = 0);
+    explicit Entry(const svn_client_status_t *src = nullptr);
 
     /**
      * copy constructor

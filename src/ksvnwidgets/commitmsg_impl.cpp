@@ -34,13 +34,7 @@
 #include <KUrlRequesterDialog>
 
 #include <QStringList>
-#include <QSortFilterProxyModel>
 #include <QTemporaryFile>
-#include <QCheckBox>
-#include <QLabel>
-#include <QLayout>
-#include <QWidget>
-#include <QPushButton>
 #include <QFile>
 
 #define MAX_MESSAGE_HISTORY 10

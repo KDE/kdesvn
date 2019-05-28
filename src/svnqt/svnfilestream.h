@@ -41,7 +41,7 @@ class SvnFileStream_private;
 class SVNQT_EXPORT SvnFileOStream : public SvnStream
 {
 public:
-    explicit SvnFileOStream(const QString &fn, svn_client_ctx_t *ctx = 0);
+    explicit SvnFileOStream(const QString &fn, svn_client_ctx_t *ctx = nullptr);
 
     virtual ~SvnFileOStream();
 
@@ -58,7 +58,7 @@ private:
 class SVNQT_EXPORT SvnFileIStream : public SvnStream
 {
 public:
-    explicit SvnFileIStream(const QString &fn, svn_client_ctx_t *ctx = 0);
+    explicit SvnFileIStream(const QString &fn, svn_client_ctx_t *ctx = nullptr);
 
     virtual ~SvnFileIStream();
     bool isOk() const override;

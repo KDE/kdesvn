@@ -112,7 +112,7 @@ public:
     apr_hash_t *hash(const Pool &pool)const
     {
         if (_map.count() == 0) {
-            return 0L;
+            return nullptr;
         }
         apr_hash_t *hash = apr_hash_make(pool);
         PropertiesMap::ConstIterator it;
@@ -137,14 +137,14 @@ public:
     Hash2Map(apr_hash_t *hash, apr_pool_t *pool)
         : _map()
     {
-        if (hash != 0L) {
+        if (hash != nullptr) {
             apr_hash_index_t *hi;
             for (hi = apr_hash_first(pool, hash); hi;
                     hi = apr_hash_next(hi)) {
                 const void *key;
                 void *val;
 
-                apr_hash_this(hi, &key, NULL, &val);
+                apr_hash_this(hi, &key, nullptr, &val);
                 const char *_k = (const char *)key;
                 const char *_v = ((const svn_string_t *)val)->data;
 

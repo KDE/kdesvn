@@ -28,7 +28,7 @@ class RevisionButtonImpl: public QWidget, public Ui::RevisionButton
     Q_OBJECT
 
 public:
-    explicit RevisionButtonImpl(QWidget *parent = 0);
+    explicit RevisionButtonImpl(QWidget *parent = nullptr);
     virtual ~RevisionButtonImpl();
 
     virtual void setRevision(const svn::Revision &aRev);

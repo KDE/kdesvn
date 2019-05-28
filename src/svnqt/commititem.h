@@ -58,7 +58,7 @@ protected:
 
 public:
     //! constructor
-    explicit CommitItem(const svn_client_commit_item_t *aSource = 0);
+    explicit CommitItem(const svn_client_commit_item_t *aSource = nullptr);
     //! constructor
     /*!
      * This one will only do something if build against subversion 1.3

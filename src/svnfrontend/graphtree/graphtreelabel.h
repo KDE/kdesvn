@@ -31,7 +31,7 @@
 class GraphTreeLabel : public QGraphicsRectItem, StoredDrawParams
 {
 public:
-    GraphTreeLabel(const QString &, const QString &, const QRectF &r, QGraphicsItem *p = 0);
+    GraphTreeLabel(const QString &, const QString &, const QRectF &r, QGraphicsItem *p = nullptr);
     virtual ~GraphTreeLabel();
 
     int type()const override;
@@ -55,7 +55,7 @@ class GraphEdge;
 class GraphEdgeArrow: public QGraphicsPolygonItem
 {
 public:
-    explicit GraphEdgeArrow(GraphEdge *, QGraphicsItem *p = 0);
+    explicit GraphEdgeArrow(GraphEdge *, QGraphicsItem *p = nullptr);
     GraphEdge *edge();
     void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
     int type()const override;
@@ -68,7 +68,7 @@ private:
 class GraphEdge: public QGraphicsPathItem
 {
 public:
-    explicit GraphEdge(QGraphicsItem *p = 0);
+    explicit GraphEdge(QGraphicsItem *p = nullptr);
     virtual ~GraphEdge();
 
     void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
@@ -83,7 +83,7 @@ private:
 class GraphMark: public QGraphicsRectItem
 {
 public:
-    explicit GraphMark(GraphTreeLabel *, QGraphicsItem *p = 0);
+    explicit GraphMark(GraphTreeLabel *, QGraphicsItem *p = nullptr);
     virtual ~GraphMark();
     int type()const override;
     virtual bool hit(const QPoint &)const;

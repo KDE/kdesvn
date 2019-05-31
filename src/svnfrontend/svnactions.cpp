@@ -942,16 +942,15 @@ void SvnActions::doCommit(const SvnItemList &which)
     if (!m_Data->m_CurrentContext || !m_Data->m_ParentList->isWorkingCopy()) {
         return;
     }
-    SvnItemList::const_iterator liter = which.begin();
 
     svn::Paths targets;
     if (which.isEmpty()) {
         targets.push_back(svn::Path(QStringLiteral(".")));
     } else {
         targets.reserve(which.size());
-        for (; liter != which.end(); ++liter) {
+        for (const SvnItem *item : which) {
             targets.push_back(svn::Path(
-                                  m_Data->m_ParentList->relativePath((*liter))
+                                  m_Data->m_ParentList->relativePath(item)
                               ));
         }
     }
@@ -995,17 +994,16 @@ bool SvnActions::makeCommit(const svn::Targets &targets)
         svn::StatusParameter params;
         params.depth(svn::DepthInfinity).all(false).update(false).noIgnore(false).revision(svn::Revision::HEAD);
         /// @todo filter out double entries
-        for (size_t j = 0; j < targets.size(); ++j) {
+        for (const auto &tgt : targets.targets()) {
             try {
                 StopDlg sdlg(m_Data->m_SvnContextListener, m_Data->m_ParentList->realWidget(),
                              i18nc("@title:window", "Status / List"), i18n("Creating list / check status"));
-                _Cache = m_Data->m_Svnclient->status(params.path(targets.target(j).path()));
+                _Cache = m_Data->m_Svnclient->status(params.path(tgt.path()));
             } catch (const svn::Exception &e) {
                 emit clientException(e.msg());
                 return false;
             }
-            for (int i = 0; i < _Cache.count(); ++i) {
-                const svn::StatusPtr ptr = _Cache.at(i);
+            for (const svn::StatusPtr &ptr : qAsConst(_Cache)) {
                 const QString _p = ptr->path();
                 // check the node status, not the text status (it does not cover the prop status)
                 if (ptr->isRealVersioned() && (
@@ -1735,7 +1733,8 @@ void SvnActions::slotRevert()
     const SvnItemList lst = m_Data->m_ParentList->SelectionList();
     QStringList displist;
     if (!lst.isEmpty()) {
-        displist.reserve(lst.size());
+        svn::StatusParameter params;
+        params.depth(svn::DepthInfinity).all(false).update(false).noIgnore(false).revision(svn::Revision::HEAD);
         for (const SvnItem *cur : lst) {
             if (!cur->isVersioned()) {
                 KMessageBox::error(m_Data->m_ParentList->realWidget(), i18n("<center>The entry<br/>%1<br/>is not versioned - break.</center>", cur->fullName()));
@@ -1746,6 +1745,7 @@ void SvnActions::slotRevert()
     } else {
         displist.push_back(m_Data->m_ParentList->baseUri());
     }
+
     slotRevertItems(displist);
     EMIT_REFRESH;
 }
@@ -1778,8 +1778,8 @@ void SvnActions::slotRevertItems(const QStringList &displist)
         return;
     }
     // remove them from cache
-    for (size_t j = 0; j < target.size(); ++j) {
-        m_Data->m_Cache.deleteKey(target[j].path(), depth != svn::DepthInfinity);
+    for (const auto &tgt : target.targets()) {
+        m_Data->m_Cache.deleteKey(tgt.path(), depth != svn::DepthInfinity);
     }
     emit sigItemsReverted(displist);
     EMIT_FINISHED;

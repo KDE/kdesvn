@@ -1649,15 +1649,14 @@ void MainTreeWidget::makeDelete(const SvnItemList &lst)
     svn::Paths items;
     QStringList displist;
     QList<QUrl> kioList;
-    SvnItemList::const_iterator liter;
-    for (liter = lst.begin(); liter != lst.end(); ++liter) {
-        if (!(*liter)->isRealVersioned()) {
-            QUrl _uri(QUrl::fromLocalFile((*liter)->fullName()));
+    for (const SvnItem *item : lst) {
+        if (!item->isRealVersioned()) {
+            QUrl _uri(QUrl::fromLocalFile(item->fullName()));
             kioList.append(_uri);
         } else {
-            items.push_back((*liter)->fullName());
+            items.push_back(item->fullName());
         }
-        displist.append((*liter)->fullName());
+        displist.append(item->fullName());
     }
 
     QPointer<DeleteForm> dlg(new DeleteForm(displist, QApplication::activeModalWidget()));

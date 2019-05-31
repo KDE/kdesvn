@@ -24,7 +24,6 @@
 
 #include "svnfrontend/svnitem.h"
 
-#include <QAbstractItemModel>
 #include <QColor>
 
 class SvnActions;

@@ -27,7 +27,6 @@
 #include <QMimeType>
 #include <QPixmap>
 #include <QScopedPointer>
-#include <QList>
 
 class SvnItemModelNode;
 class SvnItem_p;

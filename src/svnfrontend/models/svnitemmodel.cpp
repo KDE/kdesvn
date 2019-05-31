@@ -886,7 +886,7 @@ bool SvnItemModel::refreshDirnode(SvnItemModelNodeDir *node, bool check_empty, b
     // after so we don't recurse about it.
     insertDirs(node, dlist);
     if (!dlist.isEmpty()) {
-        itemsFetched(m_Data->indexForNode(node));
+        emit itemsFetched(m_Data->indexForNode(node));
     }
     return true;
 }

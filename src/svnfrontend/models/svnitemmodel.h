@@ -20,12 +20,12 @@
 #ifndef SVNITEMMODEL_H
 #define SVNITEMMODEL_H
 
-#include <QAbstractListModel>
+#include <QAbstractItemModel>
+#include <QScopedPointer>
 
 #include "svnitemmodelfwd.h"
 #include "svnqt/svnqttypes.h"
 
-#include <QScopedPointer>
 
 class SvnItemModelData;
 class QItemSelectionModel;

@@ -40,10 +40,6 @@ CommitModel::CommitModel(const CommitActionEntries &_checked, const CommitAction
     setCommitData(_checked, _notchecked);
 }
 
-CommitModel::~CommitModel()
-{
-}
-
 void CommitModel::setCommitData(const svn::CommitItemList &aList)
 {
     if (!m_List.isEmpty()) {
@@ -84,12 +80,12 @@ void CommitModel::setCommitData(const CommitActionEntries &checked, const Commit
     }
 }
 
-int CommitModel::ActionColumn()const
+int CommitModel::ActionColumn() const
 {
     return 0;
 }
 
-int CommitModel::ItemColumn()const
+int CommitModel::ItemColumn() const
 {
     return 1;
 }
@@ -102,7 +98,7 @@ CommitModelNodePtr CommitModel::node(const QModelIndex &index)
     return m_List.at(index.row());
 }
 
-CommitActionEntries CommitModel::checkedEntries()const
+CommitActionEntries CommitModel::checkedEntries() const
 {
     CommitActionEntries res;
     for (int i = 0; i < m_List.count(); ++i) {
@@ -120,7 +116,7 @@ void CommitModel::markItems(bool mark, CommitActionEntry::ACTION_TYPE _type)
         if (m_List.at(i)->actionEntry().type() & _type) {
             QModelIndex _index = index(i, 0, QModelIndex());
             setData(_index, v, Qt::CheckStateRole);
-            dataChanged(_index, _index);
+            emit dataChanged(_index, _index, {Qt::CheckStateRole});
         }
     }
 }
@@ -227,16 +223,12 @@ CommitModelCheckitem::CommitModelCheckitem(const CommitActionEntries &_checked, 
 {
 }
 
-CommitModelCheckitem::~CommitModelCheckitem()
-{
-}
-
-int CommitModelCheckitem::ActionColumn()const
+int CommitModelCheckitem::ActionColumn() const
 {
     return 1;
 }
 
-int CommitModelCheckitem::ItemColumn()const
+int CommitModelCheckitem::ItemColumn() const
 {
     return 0;
 }
@@ -271,7 +263,7 @@ bool CommitModelCheckitem::setData(const QModelIndex &index, const QVariant &val
         bool nv = value.toInt() > 0;
         _l->setChecked(nv);
         if (old != nv) {
-            emit dataChanged(index, index);
+            emit dataChanged(index, index, {Qt::CheckStateRole});
         }
         return old != nv;
     }

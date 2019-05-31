@@ -2131,7 +2131,7 @@ void MainTreeWidget::slotChangeToRepository()
     if (i.reposRoot().isEmpty()) {
         KMessageBox::sorry(QApplication::activeModalWidget(), i18n("Could not retrieve repository of working copy."), i18n("SVN Error"));
     } else {
-        sigSwitchUrl(i.reposRoot());
+        emit sigSwitchUrl(i.reposRoot());
     }
 }
 
@@ -2238,7 +2238,7 @@ void MainTreeWidget::slotDirSelectionChanged(const QItemSelection &_item, const 
         if (item) {
             const QString repoBasePath = baseUri();
             const QString relativePath = item->fullName().mid(repoBasePath.lastIndexOf('/') + 1);
-            changeCaption(relativePath);
+            emit changeCaption(relativePath);
         }
 
     } else {

@@ -1033,7 +1033,7 @@ bool SvnActions::makeCommit(const svn::Targets &targets)
         }
         svn::Paths _add, _commit, _delete;
         depth = svn::DepthInfinity;
-        for (const CommitActionEntry &entry : _result) {
+        for (const CommitActionEntry &entry : qAsConst(_result)) {
             _commit.append(entry.name());
             if (entry.type() == CommitActionEntry::ADD_COMMIT) {
                 _add.append(entry.name());
@@ -2359,7 +2359,7 @@ void SvnActions::checkAddItems(const QString &path, bool print_error_box)
     if (!makeStatus(path, dlist, where, true, true, false, false)) {
         return;
     }
-    for (const auto &entry : dlist) {
+    for (const auto &entry : qAsConst(dlist)) {
         if (!entry->isVersioned()) {
             rlist.append(entry);
             displist.append(entry->path());
@@ -2494,7 +2494,7 @@ void SvnActions::checkModifiedThread()
         }
         emit sigRefreshItem(ptr->path());
     }
-    sigExtraStatusMessage(i18np("Found %1 modified item", "Found %1 modified items", sEntries.size()));
+    emit sigExtraStatusMessage(i18np("Found %1 modified item", "Found %1 modified items", sEntries.size()));
     delete m_CThread;
     m_CThread = nullptr;
     emit sigCacheDataChanged();
@@ -2751,7 +2751,7 @@ svn::PathPropertiesMapListPtr SvnActions::propList(const QString &which, const s
             } catch (const svn::Exception &e) {
                 /* no messagebox needed */
                 if (e.apr_err() != SVN_ERR_WC_NOT_DIRECTORY) {
-                    sendNotify(e.msg());
+                    emit sendNotify(e.msg());
                 }
             }
             if (where != svn::Revision::WORKING && pm) {

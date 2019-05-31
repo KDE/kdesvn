@@ -89,13 +89,18 @@ public:
      *
      * @return vector of paths
      */
-    const Paths &
-    targets() const;
+    const Paths &targets() const
+    {
+      return m_targets;
+    }
 
     /**
      * @return the number of targets
      */
-    size_t size() const;
+    Paths::size_type size() const
+    {
+        return m_targets.size();
+    }
 
     /**
      * operator to return the vector
@@ -107,7 +112,10 @@ public:
         return m_targets;
     }
 
-    const Path &operator [](size_t which)const;
+    const Path &operator [](Paths::size_type which) const
+    {
+        return m_targets.at(which);
+    }
     /**
      * returns one single target.
      * the first in the vector, if no parameter given if there are more

@@ -90,25 +90,7 @@ Targets::array(const Pool &pool) const
     return apr_targets;
 }
 
-const Paths &
-Targets::targets() const
-{
-    return m_targets;
-}
-
-size_t
-Targets::size() const
-{
-    return m_targets.size();
-}
-
-const Path &Targets::operator [](size_t which)const
-{
-    return m_targets[which];
-}
-
-const Path
-Targets::target(Paths::size_type which) const
+const Path Targets::target(Paths::size_type which) const
 {
     if (m_targets.size() > which) {
         return m_targets[which];

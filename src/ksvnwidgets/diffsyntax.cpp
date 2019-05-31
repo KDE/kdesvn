@@ -21,19 +21,11 @@
 #include "diffsyntax.h"
 
 #include <QFontDatabase>
-#include <QRegExp>
-
-DiffSyntax::DiffSyntax(QTextDocument *aTextEdit)
-    : QSyntaxHighlighter(aTextEdit)
-{}
-
-DiffSyntax::~DiffSyntax()
-{}
+#include <QRegularExpression>
 
 void DiffSyntax::highlightBlock(const QString &aText)
 {
-    static const QRegExp a(QLatin1String("^\\w+:\\s.*$")); // filename (Index: foo/bar.txt)
-    static const QRegExp b(QLatin1String("^\\W+$"));
+    static const QRegularExpression a(QLatin1String("^\\w+:\\s.*$")); // filename (Index: foo/bar.txt)
     QTextCharFormat format;
     format.setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
     bool bIsModifiedLine = false;
@@ -41,13 +33,13 @@ void DiffSyntax::highlightBlock(const QString &aText)
     if (previousBlockState() == 1) {
         setCurrentBlockState(2);
     } else if (previousBlockState() == 2) {
-        if (b.indexIn(aText) != 0) {
+        if (a.match(aText).capturedStart() != 0) {
             setCurrentBlockState(2);
         }
     }
 
-    if (a.indexIn(aText) > -1) {  // filename (Index: foo/bar.txt)
-        format.setForeground(QColor("#660033"));
+    if (a.match(aText).hasMatch()) {  // filename (Index: foo/bar.txt)
+        format.setForeground(QColor(0x66, 0x00, 0x33));
         if (previousBlockState() == 1 || previousBlockState() == 2) {
             format.setFontWeight(QFont::Bold);
         } else {
@@ -55,35 +47,35 @@ void DiffSyntax::highlightBlock(const QString &aText)
         }
     } else if (aText.startsWith(QLatin1String("_____"))) {
         setCurrentBlockState(1);
-        format.setForeground(QColor("#1D1D8F"));
+        format.setForeground(QColor(0x1D, 0x1D, 0x8F));
     } else if (aText.startsWith(QLatin1Char('+'))) {  // added line in new file
-        format.setForeground(QColor("#008B00"));
+        format.setForeground(QColor(0x00, 0x8B, 0x00));
         if (aText.startsWith(QLatin1String("+++"))) { // new file name
             format.setFontWeight(QFont::Bold);
         } else {
             bIsModifiedLine = true;
         }
     } else if (aText.startsWith(QLatin1Char('-'))) {  // removed line in old file
-        format.setForeground(QColor("#CD3333"));
+        format.setForeground(QColor(0xCD, 0x33, 0x33));
         if (aText.startsWith(QLatin1String("---"))) { // old file name
             format.setFontWeight(QFont::Bold);
         } else {
             bIsModifiedLine = true;
         }
     } else if (aText.startsWith(QLatin1String("@@"))) { // line numbers
-        format.setForeground(QColor("#1D1D8F"));
+        format.setForeground(QColor(0x1D, 0x1D, 0x8F));
     }
     if (previousBlockState() == 2 && currentBlockState() == 2) {
         if (aText.startsWith(QLatin1String("   +"))) {
-            format.setForeground(QColor("#008B00"));
+            format.setForeground(QColor(0x00, 0x8B, 0x00));
         } else if (aText.startsWith(QLatin1String("   -"))) {
-            format.setForeground(QColor("#CD3333"));
+            format.setForeground(QColor(0xCD, 0x33, 0x33));
         }
     }
     setFormat(0, aText.length(), format);
     // highlight trailing spaces
     if (bIsModifiedLine && aText.endsWith(QLatin1Char(' '))) {
-        static const QRegExp hlTrailingSpaceRx(QRegExp(QLatin1String("[^\\s]"))); // search the last non-space
+        static const QRegularExpression hlTrailingSpaceRx(QLatin1String("[^\\s]")); // search the last non-space
         const int idx = aText.lastIndexOf(hlTrailingSpaceRx);
         format.setBackground(format.foreground());
         setFormat(idx + 1, aText.length() - idx - 1, format); // only spaces in this range

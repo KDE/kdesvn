@@ -733,6 +733,8 @@ void MainTreeWidget::enableActions()
       }
       if (item->isDir()) {
           at_least_one_directory = true;
+          if (item->isChildModified())
+            at_least_one_changed = true;
       }
     }
 

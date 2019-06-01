@@ -20,19 +20,12 @@
 #include "revisionbuttonimpl.h"
 #include "svnfrontend/fronthelpers/rangeinput_impl.h"
 #include "settings/kdesvnsettings.h"
-#include "ksvnwidgets/ksvndialog.h"
-
-#include <KLocalizedString>
 
 RevisionButtonImpl::RevisionButtonImpl(QWidget *parent)
     : QWidget(parent),
       m_Rev(svn::Revision::UNDEFINED), m_noWorking(false)
 {
     setupUi(this);
-}
-
-RevisionButtonImpl::~RevisionButtonImpl()
-{
 }
 
 void RevisionButtonImpl::setRevision(const svn::Revision &aRev)
@@ -45,7 +38,7 @@ void RevisionButtonImpl::setRevision(const svn::Revision &aRev)
 void RevisionButtonImpl::askRevision()
 {
     Rangeinput_impl::revision_range range;
-    if (Rangeinput_impl::getRevisionRange(range, !m_noWorking, true)) {
+    if (Rangeinput_impl::getRevisionRange(range, !m_noWorking, true, m_Rev)) {
         setRevision(range.first);
     }
 }

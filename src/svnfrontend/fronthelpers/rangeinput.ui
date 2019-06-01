@@ -2,20 +2,6 @@
 <ui version="4.0">
  <class>RangeInput</class>
  <widget class="QWidget" name="RangeInput">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>517</width>
-    <height>398</height>
-   </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>517</width>
-    <height>0</height>
-   </size>
-  </property>
   <property name="windowTitle">
    <string>Revisions</string>
   </property>
@@ -31,15 +17,18 @@
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0" colspan="2">
-         <widget class="QRadioButton" name="m_startNumberButton">
-          <property name="text">
-           <string>N&amp;umber</string>
+        <item row="4" column="0" colspan="2">
+         <widget class="QRadioButton" name="m_startWorkingButton">
+          <property name="toolTip">
+           <string>Select current working copy changes</string>
           </property>
-          <property name="checked">
-           <bool>true</bool>
+          <property name="text">
+           <string>WORKING</string>
           </property>
          </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QDateTimeEdit" name="m_startDateInput"/>
         </item>
         <item row="0" column="2">
          <widget class="QSpinBox" name="m_startRevInput">
@@ -51,7 +40,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
+        <item row="1" column="0" colspan="2">
          <widget class="QRadioButton" name="m_startDateButton">
           <property name="text">
            <string>Date</string>
@@ -61,13 +50,13 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="1" colspan="2">
-         <widget class="QDateTimeEdit" name="m_startDateInput"/>
-        </item>
-        <item row="2" column="0" colspan="2">
-         <widget class="QRadioButton" name="m_startStartButton">
+        <item row="0" column="0" colspan="2">
+         <widget class="QRadioButton" name="m_startNumberButton">
           <property name="text">
-           <string>S&amp;TART</string>
+           <string>N&amp;umber</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -78,13 +67,10 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
-         <widget class="QRadioButton" name="m_startWorkingButton">
-          <property name="toolTip">
-           <string>Select current working copy changes</string>
-          </property>
+        <item row="2" column="0" colspan="2">
+         <widget class="QRadioButton" name="m_startStartButton">
           <property name="text">
-           <string>WORKING</string>
+           <string>S&amp;TART</string>
           </property>
          </widget>
         </item>
@@ -121,19 +107,6 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QRadioButton" name="m_stopDateButton">
-          <property name="text">
-           <string>Date</string>
-          </property>
-          <property name="shortcut">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1" colspan="2">
-         <widget class="QDateTimeEdit" name="m_stopDateInput"/>
-        </item>
         <item row="2" column="0" colspan="2">
          <widget class="QRadioButton" name="m_stopStartButton">
           <property name="text">
@@ -148,7 +121,20 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
+        <item row="1" column="2">
+         <widget class="QDateTimeEdit" name="m_stopDateInput"/>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QRadioButton" name="m_stopDateButton">
+          <property name="text">
+           <string>Date</string>
+          </property>
+          <property name="shortcut">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0" colspan="2">
          <widget class="QRadioButton" name="m_stopWorkingButton">
           <property name="toolTip">
            <string>Select current working copy changes</string>
@@ -171,7 +157,7 @@
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>40</height>
+       <height>0</height>
       </size>
      </property>
     </spacer>

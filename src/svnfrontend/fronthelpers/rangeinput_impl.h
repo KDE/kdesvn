@@ -22,18 +22,21 @@
 
 #include "ui_rangeinput.h"
 #include "svnqt/revision.h"
-#include <qpair.h>
+#include <QPair>
 
-class Rangeinput_impl: public QWidget, public Ui::RangeInput
+class Rangeinput_impl final : public QWidget, public Ui::RangeInput
 {
     Q_OBJECT
 public:
     explicit Rangeinput_impl(QWidget *parent = nullptr);
-    ~Rangeinput_impl();
 
     typedef QPair<svn::Revision, svn::Revision> revision_range;
 
-    static bool getRevisionRange(revision_range &range, bool bWithWorking = true, bool bStartOnly = false, QWidget *parent = nullptr);
+    static bool getRevisionRange(revision_range &range,
+                                 bool bWithWorking = true,
+                                 bool bStartOnly = false,
+                                 const svn::Revision &preset = svn::Revision(),
+                                 QWidget *parent = nullptr);
 
     revision_range getRange() const;
 
@@ -44,15 +47,15 @@ public:
     void setHeadDefault();
 
 protected slots:
-    virtual void onHelp();
-    virtual void stopHeadToggled(bool);
-    virtual void stopBaseToggled(bool);
-    virtual void stopNumberToggled(bool);
-    virtual void startHeadToggled(bool);
-    virtual void startBaseToggled(bool);
-    virtual void startNumberToggled(bool);
-    virtual void stopDateToggled(bool);
-    virtual void startDateToggled(bool);
+    void onHelp();
+    void stopHeadToggled(bool);
+    void stopBaseToggled(bool);
+    void stopNumberToggled(bool);
+    void startHeadToggled(bool);
+    void startBaseToggled(bool);
+    void startNumberToggled(bool);
+    void stopDateToggled(bool);
+    void startDateToggled(bool);
 protected:
     bool m_StartOnly;
 };

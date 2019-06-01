@@ -38,13 +38,25 @@ Rangeinput_impl::Rangeinput_impl(QWidget *parent)
     m_stopDateInput->setEnabled(false);
     m_startDateInput->setEnabled(false);
     m_stopHeadButton->setChecked(true);
+
+    const int minHeight = qMax(m_startRevInput->height(), m_startDateInput->height());
+    m_startNumberButton->setMinimumHeight(minHeight);
+    m_startDateButton->setMinimumHeight(minHeight);
+    m_startStartButton->setMinimumHeight(minHeight);
+    m_startHeadButton->setMinimumHeight(minHeight);
+    m_startWorkingButton->setMinimumHeight(minHeight);
+    m_stopNumberButton->setMinimumHeight(minHeight);
+    m_stopDateButton->setMinimumHeight(minHeight);
+    m_stopStartButton->setMinimumHeight(minHeight);
+    m_stopHeadButton->setMinimumHeight(minHeight);
+    m_stopWorkingButton->setMinimumHeight(minHeight);
 }
 
-Rangeinput_impl::~Rangeinput_impl()
-{
-}
-
-bool Rangeinput_impl::getRevisionRange(revision_range &range, bool bWithWorking, bool bStartOnly, QWidget *parent)
+bool Rangeinput_impl::getRevisionRange(revision_range &range,
+                                       bool bWithWorking,
+                                       bool bStartOnly,
+                                       const svn::Revision &preset,
+                                       QWidget *parent)
 {
     QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("revisions_dlg"), parent));
     dlg->setWindowTitle(i18nc("@title:window", "Select Revisions"));
@@ -52,6 +64,7 @@ bool Rangeinput_impl::getRevisionRange(revision_range &range, bool bWithWorking,
     Rangeinput_impl *rdlg(new Rangeinput_impl(dlg));
     rdlg->setNoWorking(!bWithWorking);
     rdlg->setStartOnly(bStartOnly);
+    rdlg->m_startRevInput->setValue(preset.revnum());
     dlg->addWidget(rdlg);
     if (dlg->exec() == QDialog::Accepted) {
         range = rdlg->getRange();

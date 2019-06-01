@@ -58,7 +58,7 @@ public:
 
     svn::Depth getDepth()const;
 
-    CommitActionEntries checkedEntries();
+    CommitActionEntries checkedEntries() const;
     void hideDepth(bool ahide);
 
     CommitModelNodePtr currentCommitItem(int column = 0);
@@ -89,8 +89,8 @@ protected:
     void markUnversioned(bool mark);
     void checkSplitterSize();
     void setupModel();
-    virtual void insertFile(const QString &);
-    virtual void hideKeepsLock(bool);
+    void insertFile(const QString &);
+    void hideKeepsLock(bool);
 
     CommitModel *m_CurrentModel;
     CommitFilterModel *m_SortModel;

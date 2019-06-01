@@ -334,7 +334,7 @@ void Commitmsg_impl::addItemWidget(QWidget *aWidget)
     m_DepthSelector->addItemWidget(aWidget);
 }
 
-CommitActionEntries Commitmsg_impl::checkedEntries()
+CommitActionEntries Commitmsg_impl::checkedEntries() const
 {
     if (m_CurrentModel) {
         return m_CurrentModel->checkedEntries();

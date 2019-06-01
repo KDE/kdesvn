@@ -41,36 +41,32 @@
 // StoredDrawParams
 //
 StoredDrawParams::StoredDrawParams()
+    : _backColor(Qt::white)
+    , _selected(false)
+    , _current(false)
+    , _shaded(true)
+    , _rotated(false)
+    , _drawFrame(false)
 {
-    _selected = false;
-    _current = false;
-    _shaded = true;
-    _rotated = false;
-    _drawFrame = false;
-
-    _backColor = Qt::white;
-
     // field array has size 0
 }
 
 StoredDrawParams::StoredDrawParams(const QColor &c,
                                    bool selected,
                                    bool current)
+    : _backColor(c)
+    , _selected(selected)
+    , _current(current)
+    , _shaded(true)
+    , _rotated(false)
+    , _drawFrame(true)
 {
-    _backColor = c;
-
-    _selected = selected;
-    _current = current;
-    _shaded = true;
-    _rotated = false;
-    _drawFrame = true;
-
     // field array has size 0
 }
 
 QString StoredDrawParams::text(int f) const
 {
-    if ((f < 0) || (f >= (int)_field.size())) {
+    if ((f < 0) || (f >= _field.size())) {
         return QString();
     }
 
@@ -79,7 +75,7 @@ QString StoredDrawParams::text(int f) const
 
 QPixmap StoredDrawParams::pixmap(int f) const
 {
-    if ((f < 0) || (f >= (int)_field.size())) {
+    if ((f < 0) || (f >= _field.size())) {
         return QPixmap();
     }
 
@@ -88,7 +84,7 @@ QPixmap StoredDrawParams::pixmap(int f) const
 
 DrawParams::Position StoredDrawParams::position(int f) const
 {
-    if ((f < 0) || (f >= (int)_field.size())) {
+    if ((f < 0) || (f >= _field.size())) {
         return Default;
     }
 
@@ -97,7 +93,7 @@ DrawParams::Position StoredDrawParams::position(int f) const
 
 int StoredDrawParams::maxLines(int f) const
 {
-    if ((f < 0) || (f >= (int)_field.size())) {
+    if ((f < 0) || (f >= _field.size())) {
         return 0;
     }
 
@@ -186,9 +182,9 @@ void StoredDrawParams::setMaxLines(int f, int m)
 //
 
 RectDrawing::RectDrawing(const QRect &r)
+  : _fm(nullptr)
+  , _dp(nullptr)
 {
-    _fm = nullptr;
-    _dp = nullptr;
     setRect(r);
 }
 
@@ -300,7 +296,7 @@ void RectDrawing::drawBack(QPainter *p, DrawParams *dp)
 
         // shade parameters:
         int d = 7;
-        float factor = 0.1, forth = 0.7, back1 = 0.9, toBack2 = .7, back2 = 0.97;
+        double factor = 0.1, forth = 0.7, back1 = 0.9, toBack2 = .7, back2 = 0.97;
 
         // coefficient corrections because of rectangle size
         int s = r.width();
@@ -320,9 +316,9 @@ void RectDrawing::drawBack(QPainter *p, DrawParams *dp)
 
         QColor shadeColor;
         while (factor < .95 && (r.width() >= 0 && r.height() >= 0)) {
-            shadeColor.setRgb((int)(rBase + factor * rDiff + .5),
-                              (int)(gBase + factor * gDiff + .5),
-                              (int)(bBase + factor * bDiff + .5));
+            shadeColor.setRgb(qRound(rBase + factor * rDiff),
+                              qRound(gBase + factor * gDiff),
+                              qRound(bBase + factor * bDiff));
             p->setPen(shadeColor);
             p->drawRect(r);
             r.setRect(r.x() + 1, r.y() + 1, r.width() - 2, r.height() - 2);
@@ -331,9 +327,9 @@ void RectDrawing::drawBack(QPainter *p, DrawParams *dp)
 
         // and back (1st half)
         while (factor > toBack2 && (r.width() >= 0 && r.height() >= 0)) {
-            shadeColor.setRgb((int)(rBase + factor * rDiff + .5),
-                              (int)(gBase + factor * gDiff + .5),
-                              (int)(bBase + factor * bDiff + .5));
+            shadeColor.setRgb(qRound(rBase + factor * rDiff),
+                              qRound(gBase + factor * gDiff),
+                              qRound(bBase + factor * bDiff));
             p->setPen(shadeColor);
             p->drawRect(r);
             r.setRect(r.x() + 1, r.y() + 1, r.width() - 2, r.height() - 2);
@@ -342,9 +338,9 @@ void RectDrawing::drawBack(QPainter *p, DrawParams *dp)
 
         // and back (2nd half)
         while (factor > .01 && (r.width() >= 0 && r.height() >= 0)) {
-            shadeColor.setRgb((int)(rBase + factor * rDiff + .5),
-                              (int)(gBase + factor * gDiff + .5),
-                              (int)(bBase + factor * bDiff + .5));
+            shadeColor.setRgb(qRound(rBase + factor * rDiff),
+                              qRound(gBase + factor * gDiff),
+                              qRound(bBase + factor * bDiff));
             p->setPen(shadeColor);
             p->drawRect(r);
             r.setRect(r.x() + 1, r.y() + 1, r.width() - 2, r.height() - 2);

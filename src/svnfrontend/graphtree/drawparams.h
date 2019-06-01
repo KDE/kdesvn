@@ -208,11 +208,11 @@ private:
     struct Field {
         QString text;
         QPixmap pix;
-        Position pos;
-        int maxLines;
+        Position pos = Unknown;
+        int maxLines = 0;
     };
 
-    QList<Field> _field;
+    QVector<Field> _field;
 };
 
 /* State for drawing on a rectangle.

@@ -176,7 +176,7 @@ GraphMark::GraphMark(GraphTreeLabel *n, QGraphicsItem *p)
 
         while (v < v1) {
             v *= f;
-            p.setBrush(QColor(265 - (int)v, 265 - (int)v, 265 - (int)v));
+            p.setBrush(QColor(qRound(265 - v), qRound(265 - v), qRound(265 - v)));
 
             p.drawRect(QRect(r.x(), r.y(), r.width(), d));
             p.drawRect(QRect(r.x(), r.bottom() - d, r.width(), d));

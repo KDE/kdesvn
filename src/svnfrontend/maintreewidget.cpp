@@ -179,6 +179,9 @@ MainTreeWidget::MainTreeWidget(KActionCollection *aCollection, QWidget *parent, 
 
 MainTreeWidget::~MainTreeWidget()
 {
+    // make sure to not get signals which affect the mmi
+    m_Data->m_Model->disconnect(this);
+    m_Data->m_Model->svnWrapper()->disconnect(this);
     delete m_Data;
 }
 

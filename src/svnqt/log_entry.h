@@ -35,6 +35,7 @@
 #include <svnqt/svnqt_defines.h>
 #include <svnqt/datetime.h>
 
+#include <QList>
 #include <QString>
 #include <QVector>
 

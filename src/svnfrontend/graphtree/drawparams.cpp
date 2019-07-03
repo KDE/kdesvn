@@ -265,14 +265,14 @@ void RectDrawing::drawBack(QPainter *p, DrawParams *dp)
     QRect r = _rect;
     QColor normal = dp->backColor();
     if (dp->selected()) {
-        normal = normal.light();
+        normal = normal.lighter();
     }
     bool isCurrent = dp->current();
 
     if (dp->drawFrame() || isCurrent) {
         // 3D raised/sunken frame effect...
-        QColor high = normal.light();
-        QColor low = normal.dark();
+        QColor high = normal.lighter();
+        QColor low = normal.darker();
         p->setPen(isCurrent ? low : high);
         p->drawLine(r.left(), r.top(), r.right(), r.top());
         p->drawLine(r.left(), r.top(), r.left(), r.bottom());
@@ -368,7 +368,7 @@ int findBreak(int &breakPos, QString text, QFontMetrics *fm, int maxWidth)
 
     // does full text fit?
     breakPos = text.length();
-    usedWidth = fm->width(text);
+    usedWidth = fm->horizontalAdvance(text);
     if (usedWidth < maxWidth) {
         return usedWidth;
     }
@@ -378,7 +378,7 @@ int findBreak(int &breakPos, QString text, QFontMetrics *fm, int maxWidth)
     int bottomPos = 0;
     while (qAbs(maxWidth - usedWidth) > 3 * fm->maxWidth()) {
         int halfPos = (bottomPos + breakPos) / 2;
-        int halfWidth = fm->width(text, halfPos);
+        int halfWidth = fm->horizontalAdvance(text, halfPos);
         if (halfWidth < maxWidth) {
             bottomPos = halfPos;
         } else {
@@ -409,7 +409,7 @@ int findBreak(int &breakPos, QString text, QFontMetrics *fm, int maxWidth)
         lastCat = cat;
 
         breakPos = pos;
-        usedWidth = fm->width(text, breakPos);
+        usedWidth = fm->horizontalAdvance(text, breakPos);
         if (usedWidth < maxWidth) {
             break;
         }
@@ -430,7 +430,7 @@ int findBreakBackwards(int &breakPos, QString text, QFontMetrics *fm, int maxWid
 
     // does full text fit?
     breakPos = 0;
-    usedWidth = fm->width(text);
+    usedWidth = fm->horizontalAdvance(text);
     if (usedWidth < maxWidth) {
         return usedWidth;
     }
@@ -440,7 +440,7 @@ int findBreakBackwards(int &breakPos, QString text, QFontMetrics *fm, int maxWid
     int topPos = text.length();
     while (qAbs(maxWidth - usedWidth) > 3 * fm->maxWidth()) {
         int halfPos = (breakPos + topPos) / 2;
-        int halfWidth = fm->width(text.mid(halfPos));
+        int halfWidth = fm->horizontalAdvance(text.mid(halfPos));
         if (halfWidth < maxWidth) {
             breakPos = halfPos;
             usedWidth = halfWidth;
@@ -471,7 +471,7 @@ int findBreakBackwards(int &breakPos, QString text, QFontMetrics *fm, int maxWid
         lastCat = cat;
 
         breakPos = pos;
-        usedWidth = fm->width(text.mid(breakPos));
+        usedWidth = fm->horizontalAdvance(text.mid(breakPos));
         if (usedWidth < maxWidth) {
             break;
         }
@@ -637,7 +637,7 @@ bool RectDrawing::drawField(QPainter *p, int f, DrawParams *dp)
     // stop as soon as possible when there is no space for "..."
     static int dotW = 0;
     if (!dotW) {
-        dotW = _fm->width("...");
+        dotW = _fm->horizontalAdvance(QLatin1String("..."));
     }
     if (width < dotW) {
         return false;
@@ -667,7 +667,7 @@ bool RectDrawing::drawField(QPainter *p, int f, DrawParams *dp)
     }
 
     // width of text and pixmap to be drawn
-    int w = pixW + _fm->width(name);
+    int w = pixW + _fm->horizontalAdvance(name);
 
     // if we have limited space at 1st line:
     // use it only if whole name does fit in last line...
@@ -745,7 +745,7 @@ bool RectDrawing::drawField(QPainter *p, int f, DrawParams *dp)
         /* truncate and add ... if needed */
         if (w > width) {
             name = _fm->elidedText(name, Qt::ElideRight, width - pixW);
-            w = _fm->width(name) + pixW;
+            w = _fm->horizontalAdvance(name) + pixW;
         }
 
         int x = 0;
@@ -776,7 +776,7 @@ bool RectDrawing::drawField(QPainter *p, int f, DrawParams *dp)
             break;
         }
         name = remaining;
-        w = pixW + _fm->width(name);
+        w = pixW + _fm->horizontalAdvance(name);
     }
 
     // make sure the pix stays visible

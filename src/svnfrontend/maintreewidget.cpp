@@ -239,7 +239,7 @@ bool MainTreeWidget::openUrl(const QUrl &url, bool noReinit)
         if (url.isLocalFile()) {
             QFileInfo fi(url.path());
             if (fi.exists() && fi.isSymLink()) {
-                const QString sl = fi.readLink();
+                const QString sl = fi.symLinkTarget();
                 if (sl.startsWith(QLatin1Char('/'))) {
                     setBaseUri(sl);
                 } else {

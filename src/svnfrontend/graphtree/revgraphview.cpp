@@ -31,7 +31,7 @@
 
 #include <QFileDialog>
 #include <QFontDatabase>
-#include <QMatrix>
+#include <QTransform>
 #include <QMenu>
 #include <QPainter>
 #include <QRegExp>
@@ -620,8 +620,7 @@ void RevGraphView::updateSizes(QSize s)
 
     if (zoom != m_cvZoom) {
         m_cvZoom = zoom;
-        QMatrix wm;
-        m_CompleteView->setMatrix(wm.scale(zoom, zoom));
+        m_CompleteView->setTransform(QTransform::fromScale(zoom, zoom));
 
         // make it a little bigger to compensate for widget frame
         m_CompleteView->resize(int(cWidth * zoom) + 4,

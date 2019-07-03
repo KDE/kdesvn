@@ -246,9 +246,9 @@ Client_impl::copy(const CopyParameter &parameter)
     Pool pool;
     apr_array_header_t *sources = apr_array_make(pool, parameter.srcPath().size(), sizeof(svn_client_copy_source_t *));
     // not using .array() 'cause some extra information is needed for copy
-    for (size_t j = 0; j < parameter.srcPath().size(); ++j) {
+    for (const Path &path : parameter.srcPath().targets()) {
         svn_client_copy_source_t *source = (svn_client_copy_source_t *)apr_palloc(pool, sizeof(svn_client_copy_source_t));
-        source->path = apr_pstrdup(pool, parameter.srcPath()[j].path().toUtf8());
+        source->path = apr_pstrdup(pool, path.path().toUtf8());
         source->revision = parameter.srcRevision().revision();
         source->peg_revision = parameter.pegRevision().revision();
         APR_ARRAY_PUSH(sources, svn_client_copy_source_t *) = source;
@@ -371,7 +371,7 @@ Client_impl::doExport(const CheckoutParameter &params)
     QByteArray _neolBA;
     const char *_neol;
     if (params.nativeEol().isNull()) {
-        _neol = (const char *)nullptr;
+        _neol = nullptr;
     } else {
         _neolBA = params.nativeEol().toUtf8();
         _neol = _neolBA.constData();

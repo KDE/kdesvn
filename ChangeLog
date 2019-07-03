@@ -1,3 +1,22 @@
+version 2.1.0:
+    * Bug 409442 - Compile with Qt5.13
+    * Bug 404734 - Don't crash on exit when log fill thread is still running
+    * Bug 406425 - Enable 'Revert' action when a single directory with modified items is selected
+    * Bug 401529 - Don't accept richtext in commit message dialog
+    * Bug 327221 - Make buttons in sslprompt actually work
+    * Bug 391804 - Display relative path (including name of the checkout) in the titlebar
+    * Bug 372423 - Hide unchanged files resets folder and doesn’t hide all elements
+    * Bug 377041 - Add buttons "Add" and "Remove" to context menu when multiple files are selected
+    * Bug 383187 - KDED5 crash after right-click in Dolphin
+    * Bug 375655 - Don't crash when the path contains a '@'
+    * Fix compilation with FreeBSD
+    * Fix adding a new property to a svn entry
+    * Removed support for subversion 1.6 and below
+    * Code cleanups:
+        * use c++11 functionality - nullptr, range-based for loops, ...
+        * use new-style connects where possible
+        * replace deprecated Qt functions
+        * set Qt5.9 as minimum allowed Qt version
 version 2.0.0:
     * Update to Qt5 / KF5 (completly KDELibs4Support free)
     * minimum required subversion version is now 1.5

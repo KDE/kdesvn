@@ -42,7 +42,7 @@ int main(int argc, char **argv)
     app.setWindowIcon(QIcon::fromTheme(QStringLiteral("kdesvn"), app.windowIcon()));
 
     KAboutData aboutData(QStringLiteral("kdesvn"), i18n("kdesvn"), QStringLiteral(KDESVN_VERSION), i18n(description),
-                         KAboutLicense::GPL, i18n("(C) 2005-2009 Rajko Albrecht,\n(C) 2015-2016 Christian Ehrlicher"));
+                         KAboutLicense::GPL, i18n("(C) 2005-2009 Rajko Albrecht,\n(C) 2015-2019 Christian Ehrlicher"));
     aboutData.addAuthor(i18n("Rajko Albrecht"), i18n("Developer"), QStringLiteral("ral@alwins-world.de"));
     aboutData.addAuthor(i18n("Christian Ehrlicher"), i18n("Developer"), QStringLiteral("ch.ehrlicher@gmx.de"));
     aboutData.setHomepage(QStringLiteral("https://commits.kde.org/kdesvn"));

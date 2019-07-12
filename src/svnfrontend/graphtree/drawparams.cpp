@@ -368,7 +368,11 @@ int findBreak(int &breakPos, QString text, QFontMetrics *fm, int maxWidth)
 
     // does full text fit?
     breakPos = text.length();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
     usedWidth = fm->horizontalAdvance(text);
+#else
+    usedWidth = fm->width(text);
+#endif
     if (usedWidth < maxWidth) {
         return usedWidth;
     }
@@ -378,7 +382,11 @@ int findBreak(int &breakPos, QString text, QFontMetrics *fm, int maxWidth)
     int bottomPos = 0;
     while (qAbs(maxWidth - usedWidth) > 3 * fm->maxWidth()) {
         int halfPos = (bottomPos + breakPos) / 2;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
         int halfWidth = fm->horizontalAdvance(text, halfPos);
+#else
+        int halfWidth = fm->width(text, halfPos);
+#endif
         if (halfWidth < maxWidth) {
             bottomPos = halfPos;
         } else {
@@ -409,7 +417,11 @@ int findBreak(int &breakPos, QString text, QFontMetrics *fm, int maxWidth)
         lastCat = cat;
 
         breakPos = pos;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
         usedWidth = fm->horizontalAdvance(text, breakPos);
+#else
+        usedWidth = fm->width(text, breakPos);
+#endif
         if (usedWidth < maxWidth) {
             break;
         }
@@ -430,7 +442,11 @@ int findBreakBackwards(int &breakPos, QString text, QFontMetrics *fm, int maxWid
 
     // does full text fit?
     breakPos = 0;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
     usedWidth = fm->horizontalAdvance(text);
+#else
+    usedWidth = fm->width(text);
+#endif
     if (usedWidth < maxWidth) {
         return usedWidth;
     }
@@ -440,7 +456,11 @@ int findBreakBackwards(int &breakPos, QString text, QFontMetrics *fm, int maxWid
     int topPos = text.length();
     while (qAbs(maxWidth - usedWidth) > 3 * fm->maxWidth()) {
         int halfPos = (breakPos + topPos) / 2;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
         int halfWidth = fm->horizontalAdvance(text.mid(halfPos));
+#else
+        int halfWidth = fm->width(text.mid(halfPos));
+#endif
         if (halfWidth < maxWidth) {
             breakPos = halfPos;
             usedWidth = halfWidth;
@@ -471,7 +491,11 @@ int findBreakBackwards(int &breakPos, QString text, QFontMetrics *fm, int maxWid
         lastCat = cat;
 
         breakPos = pos;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
         usedWidth = fm->horizontalAdvance(text.mid(breakPos));
+#else
+        usedWidth = fm->width(text.mid(breakPos));
+#endif
         if (usedWidth < maxWidth) {
             break;
         }
@@ -637,7 +661,11 @@ bool RectDrawing::drawField(QPainter *p, int f, DrawParams *dp)
     // stop as soon as possible when there is no space for "..."
     static int dotW = 0;
     if (!dotW) {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
         dotW = _fm->horizontalAdvance(QLatin1String("..."));
+#else
+        dotW = _fm->width(QLatin1String("..."));
+#endif
     }
     if (width < dotW) {
         return false;
@@ -667,7 +695,11 @@ bool RectDrawing::drawField(QPainter *p, int f, DrawParams *dp)
     }
 
     // width of text and pixmap to be drawn
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
     int w = pixW + _fm->horizontalAdvance(name);
+#else
+    int w = pixW + _fm->width(name);
+#endif
 
     // if we have limited space at 1st line:
     // use it only if whole name does fit in last line...
@@ -745,7 +777,11 @@ bool RectDrawing::drawField(QPainter *p, int f, DrawParams *dp)
         /* truncate and add ... if needed */
         if (w > width) {
             name = _fm->elidedText(name, Qt::ElideRight, width - pixW);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
             w = _fm->horizontalAdvance(name) + pixW;
+#else
+            w = _fm->width(name) + pixW;
+#endif
         }
 
         int x = 0;
@@ -776,7 +812,11 @@ bool RectDrawing::drawField(QPainter *p, int f, DrawParams *dp)
             break;
         }
         name = remaining;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
         w = pixW + _fm->horizontalAdvance(name);
+#else
+        w = pixW + _fm->width(name);
+#endif
     }
 
     // make sure the pix stays visible

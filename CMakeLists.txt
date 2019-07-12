@@ -53,7 +53,7 @@ find_package(KF5 REQUIRED COMPONENTS
     Wallet WidgetsAddons XmlGui
 )
 set(QT_MIN_VERSION 5.9.0)
-find_package(Qt5 REQUIRED COMPONENTS
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS
     Core DBus Gui Sql Widgets Xml
 )
 

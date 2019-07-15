@@ -42,8 +42,6 @@ namespace svn
 class SVNQT_NOEXPORT Status_private
 {
 public:
-    Status_private();
-    virtual ~Status_private();
     /**
      * Initialize structures
      *
@@ -58,32 +56,18 @@ public:
     void setPath(const QString &);
 
     QString m_Path;
-    bool m_isVersioned;
-    bool m_hasReal;
     LockEntry m_Lock;
     Entry m_entry;
-
-    svn_wc_status_kind m_node_status, m_text_status, m_prop_status, m_repos_text_status, m_repos_prop_status;
-    bool m_copied, m_switched;
+    svn_wc_status_kind m_node_status = svn_wc_status_none;
+    svn_wc_status_kind m_text_status = svn_wc_status_none;
+    svn_wc_status_kind m_prop_status = svn_wc_status_none;
+    svn_wc_status_kind m_repos_text_status = svn_wc_status_none;
+    svn_wc_status_kind m_repos_prop_status = svn_wc_status_none;
+    bool m_isVersioned = false;
+    bool m_hasReal = false;
+    bool m_copied = false;
+    bool m_switched = false;
 };
-
-Status_private::Status_private()
-    : m_Path()
-    , m_isVersioned(false)
-    , m_hasReal(false)
-    , m_node_status(svn_wc_status_none)
-    , m_text_status(svn_wc_status_none)
-    , m_prop_status(svn_wc_status_none)
-    , m_repos_text_status(svn_wc_status_none)
-    , m_repos_prop_status(svn_wc_status_none)
-    , m_copied(false)
-    , m_switched(false)
-{
-}
-
-Status_private::~ Status_private()
-{
-}
 
 void Status_private::setPath(const QString &aPath)
 {
@@ -136,13 +120,13 @@ Status_private::init(const QString &path, const Status_private &src)
     setPath(path);
     m_Lock = src.m_Lock;
     m_entry = src.m_entry;
-    m_isVersioned = src.m_isVersioned;
-    m_hasReal = src.m_hasReal;
     m_node_status = src.m_node_status;
     m_text_status = src.m_text_status;
     m_prop_status = src.m_prop_status;
     m_repos_text_status = src.m_repos_text_status;
     m_repos_prop_status = src.m_repos_prop_status;
+    m_isVersioned = src.m_isVersioned;
+    m_hasReal = src.m_hasReal;
     m_copied = src.m_copied;
     m_switched = src.m_switched;
 }

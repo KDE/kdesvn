@@ -38,49 +38,26 @@ class SVNQT_NOEXPORT DirEntry_Data
 {
 public:
     QString name;
-    svn_node_kind_t kind;
-    qlonglong size;
-    bool hasProps;
-    svn_revnum_t createdRev;
-    DateTime time;
     QString lastAuthor;
+    DateTime time;
     LockEntry m_Lock;
+    qlonglong size = 0;
+    svn_revnum_t createdRev = 0;
+    svn_node_kind_t kind = svn_node_unknown;
+    bool hasProps = false;
 
-    DirEntry_Data()
-        : kind(svn_node_unknown), size(0), hasProps(false),
-          createdRev(0), time(0), m_Lock()
-    {
-    }
-
+    DirEntry_Data() = default;
     DirEntry_Data(const QString &_name, const svn_dirent_t *dirEntry)
-        : name(_name), kind(dirEntry->kind), size(dirEntry->size),
-          hasProps(dirEntry->has_props != 0),
-          createdRev(dirEntry->created_rev), time(dirEntry->time), m_Lock()
+        : name(_name), time(dirEntry->time), size(dirEntry->size),
+          createdRev(dirEntry->created_rev), kind(dirEntry->kind),
+          hasProps(dirEntry->has_props != 0)
     {
         lastAuthor = dirEntry->last_author == nullptr ? QString() : QString::fromUtf8(dirEntry->last_author);
-    }
-
-    DirEntry_Data(const DirEntry &src)
-    {
-        init(src);
-    }
-
-    void
-    init(const DirEntry &src)
-    {
-        name = src.name();
-        kind = src.kind();
-        size = src.size();
-        hasProps = src.hasProps();
-        createdRev = src.createdRev();
-        time = src.time();
-        lastAuthor = src.lastAuthor();
-        m_Lock = src.lockEntry();
     }
 };
 
 DirEntry::DirEntry()
-    : m(new DirEntry_Data())
+    : m(new DirEntry_Data)
 {
 }
 
@@ -102,7 +79,7 @@ DirEntry::DirEntry(const QString &name, const svn_dirent_t *dirEntry, const Lock
 }
 
 DirEntry::DirEntry(const DirEntry &src)
-    : m(new DirEntry_Data(src))
+    : m(new DirEntry_Data(*src.m))
 {
 }
 
@@ -177,7 +154,7 @@ DirEntry::operator= (const DirEntry &dirEntry)
         return *this;
     }
 
-    m->init(dirEntry);
+    *m = *dirEntry.m;
     return *this;
 }
 }

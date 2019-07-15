@@ -58,13 +58,12 @@ struct LogChangePathEntry
                        const QString &copyFromPath_,
                        const svn_revnum_t copyFromRevision_)
         : path(path_)
-        , action(action_)
         , copyFromPath(copyFromPath_)
         , copyFromRevision(copyFromRevision_)
+        , action(action_)
     {}
 
     QString path;
-    char action = '\0';
     QString copyFromPath;
     //! future use or useful in backends
     QString copyToPath;
@@ -72,6 +71,7 @@ struct LogChangePathEntry
     qlonglong copyFromRevision;
     //! future use or useful in backends
     qlonglong copyToRevision;
+    char action = '\0';
 };
 
 typedef QVector<LogChangePathEntry> LogChangePathEntries;

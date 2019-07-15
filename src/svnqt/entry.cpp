@@ -41,15 +41,15 @@ protected:
 public:
     Entry_private();
 
-    bool m_valid;
     LockEntry m_Lock;
 
     QUrl _url, _repos;
+    DateTime _cmt_date;
     QString _name, _uuid, _cmt_author;
-    bool _copied;
     svn_revnum_t _revision, _cmt_rev;
     svn_node_kind_t _kind;
-    DateTime _cmt_date;
+    bool m_valid;
+    bool _copied;
 
     /**
     * initializes the members
@@ -78,7 +78,7 @@ void Entry_private::init_clean()
 }
 
 Entry_private::Entry_private()
-    : m_valid(false), m_Lock()
+    : m_valid(false)
 {
     init_clean();
 }

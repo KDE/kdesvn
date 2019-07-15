@@ -34,16 +34,6 @@
 #include <KLocalizedString>
 #include <KUrlMimeData>
 
-SvnTreeView::SvnTreeView(QWidget *parent)
-    : QTreeView(parent)
-{
-
-}
-
-SvnTreeView::~SvnTreeView()
-{
-}
-
 void SvnTreeView::startDrag(Qt::DropActions supportedActions)
 {
     // only one dragging at time

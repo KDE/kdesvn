@@ -22,12 +22,11 @@
 
 #include <QTreeView>
 
-class SvnTreeView: public QTreeView
+class SvnTreeView final : public QTreeView
 {
     Q_OBJECT
 public:
-    explicit SvnTreeView(QWidget *parent = nullptr);
-    ~SvnTreeView();
+  using QTreeView::QTreeView;
 
 protected:
     void startDrag(Qt::DropActions supportedActions) override;

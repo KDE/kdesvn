@@ -31,7 +31,7 @@ class QTreeWidget;
 
 typedef QSharedPointer<SvnLogModelNode> SvnLogModelNodePtr;
 
-class SvnLogModel: public QAbstractListModel
+class SvnLogModel final : public QAbstractListModel
 {
     Q_OBJECT
 public:
@@ -51,10 +51,10 @@ public:
         Count
     };
 
-    QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
-    int rowCount(const QModelIndex &parent) const Q_DECL_OVERRIDE;
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
-    int columnCount(const QModelIndex &) const Q_DECL_OVERRIDE;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+    int columnCount(const QModelIndex &idx = QModelIndex()) const override;
 
     SvnLogModelNodePtr indexNode(const QModelIndex &)const;
     int leftRow() const;

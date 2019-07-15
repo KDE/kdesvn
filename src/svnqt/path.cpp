@@ -98,16 +98,6 @@ Path::cstr() const
     return m_path.toUtf8();
 }
 
-Path &
-Path::operator=(const Path &path)
-{
-    if (this == &path) {
-        return *this;
-    }
-    m_path = path.path();
-    return *this;
-}
-
 bool
 Path::isSet() const
 {

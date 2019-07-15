@@ -66,11 +66,6 @@ public:
     ~Path() = default;
 
     /**
-     * Assignment operator
-     */
-    Path &operator=(const Path &);
-
-    /**
      * @return Path string
      */
     const QString &

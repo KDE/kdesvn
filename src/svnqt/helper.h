@@ -69,7 +69,6 @@ public:
             _value =  svn_depth_immediates;
             break;
         case DepthInfinity:
-        default:
             _value =  svn_depth_infinity;
             break;
         }
@@ -93,10 +92,10 @@ public:
         apr_array_header_t *ranges = apr_array_make(pool, m_ranges.size(), sizeof(svn_opt_revision_range_t *));
         svn_opt_revision_range_t *range;
 
-        for (long j = 0; j < m_ranges.count(); ++j) {
+        for (const RevisionRange &rr : qAsConst(m_ranges)) {
             range = (svn_opt_revision_range_t *)apr_palloc(pool, sizeof(*range));
-            range->start = *m_ranges[j].first.revision();
-            range->end  = *m_ranges[j].second.revision();
+            range->start = *rr.first.revision();
+            range->end  = *rr.second.revision();
             APR_ARRAY_PUSH(ranges, svn_opt_revision_range_t *) = range;
         }
         return ranges;
@@ -115,15 +114,11 @@ public:
             return nullptr;
         }
         apr_hash_t *hash = apr_hash_make(pool);
-        PropertiesMap::ConstIterator it;
-        const char *propval;
-        const char *propname;
-        QByteArray s, n;
-        for (it = _map.begin(); it != _map.end(); ++it) {
-            s = it.value().toUtf8();
-            n = it.key().toUtf8();
-            propval = apr_pstrndup(pool, s, s.size());
-            propname = apr_pstrndup(pool, n, n.size());
+        for (auto it = _map.begin(); it != _map.end(); ++it) {
+            const QByteArray s = it.value().toUtf8();
+            const QByteArray n = it.key().toUtf8();
+            const char *propval = apr_pstrndup(pool, s, s.size());
+            const char *propname = apr_pstrndup(pool, n, n.size());
             apr_hash_set(hash, propname, APR_HASH_KEY_STRING, propval);
         }
         return hash;

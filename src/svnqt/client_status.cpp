@@ -213,12 +213,10 @@ remoteStatus(Client *client,
              const StatusParameter &params,
              const ContextP &)
 {
-    DirEntries dirEntries = client->list(params.path(), params.revision(), params.revision(), params.depth(), params.detailedRemote());
-    DirEntries::const_iterator it;
+    const DirEntries dirEntries = client->list(params.path(), params.revision(), params.revision(), params.depth(), params.detailedRemote());
 
     StatusEntries entries;
-    for (it = dirEntries.constBegin(); it != dirEntries.constEnd(); ++it) {
-        DirEntry dirEntry = *it;
+    for (const DirEntry &dirEntry : dirEntries) {
         if (dirEntry.name().isEmpty()) {
             continue;
         }

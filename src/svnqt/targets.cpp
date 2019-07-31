@@ -70,20 +70,15 @@ Targets::Targets(const Path &target)
 apr_array_header_t *
 Targets::array(const Pool &pool) const
 {
-    Paths::const_iterator it;
-
     apr_pool_t *apr_pool = pool.pool();
     apr_array_header_t *apr_targets =
         apr_array_make(apr_pool,
                        m_targets.size(),
                        sizeof(const char *));
 
-    for (it = m_targets.begin(); it != m_targets.end(); ++it) {
-        QByteArray s = (*it).path().toUtf8();
-
-        char *t2 =
-            apr_pstrndup(apr_pool, s, s.size());
-
+    for (const svn::Path &tgt : m_targets) {
+        const QByteArray s = tgt.path().toUtf8();
+        char *t2 = apr_pstrndup(apr_pool, s.data(), s.size());
         (*((const char **) apr_array_push(apr_targets))) = t2;
     }
 

@@ -78,8 +78,8 @@ LogEntry::LogEntry(svn_log_entry_t *log_entry, const StringArray &excludeList)
             svn_log_changed_path2_t *log_item = reinterpret_cast<svn_log_changed_path2_t *>(val);
             const char *path = reinterpret_cast<const char *>(pv);
             QString _p(QString::fromUtf8(path));
-            for (int _exnr = 0; _exnr < excludeList.size(); ++_exnr) {
-                if (_p.startsWith(excludeList[_exnr])) {
+            for (const QString &exclude : excludeList.data()) {
+                if (_p.startsWith(exclude)) {
                     blocked = true;
                     break;
                 }

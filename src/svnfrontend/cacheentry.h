@@ -45,8 +45,6 @@ template<class C> class cacheEntry
 public:
     typedef cacheEntry<C> cache_type;
     typedef typename std::map<QString, cache_type> cache_map_type;
-    typedef typename cache_map_type::const_iterator citer;
-    typedef typename cache_map_type::iterator iter;
 
 protected:
     QString m_key;
@@ -59,7 +57,7 @@ public:
     cacheEntry(const QString &key);
     cacheEntry(const cacheEntry<C> &other);
 
-    virtual ~cacheEntry() {};
+    virtual ~cacheEntry() = default;
 
     virtual bool find(QStringList &, QList<C> &)const;
     //! Checks if cache contains a specific item
@@ -122,8 +120,7 @@ public:
     {
         QString pre;
         pre.fill('-', level);
-        std::map<QString, cacheEntry>::const_iterator it;
-        for (it = m_subMap.begin(); it != m_subMap.end(); ++it) {
+        for (auto it = m_subMap.begin(); it != m_subMap.end(); ++it) {
             std::cout << pre.latin1() << it->first.latin1() << " (" << it->second.m_key.latin1() << ")" << std::endl;
             it->second.dump_tree(level + 1);
         }
@@ -158,12 +155,12 @@ template<class C> inline cacheEntry<C> &cacheEntry<C>::operator=(const cacheEntr
     return *this;
 }
 
-template<class C> inline  bool cacheEntry<C>::find(QStringList &what, QList<C> &t)const
+template<class C> inline  bool cacheEntry<C>::find(QStringList &what, QList<C> &t) const
 {
     if (what.empty()) {
         return false;
     }
-    citer it = m_subMap.find(what.at(0));
+    const auto it = m_subMap.find(what.at(0));
     if (it == m_subMap.end()) {
         return false;
     }
@@ -178,12 +175,12 @@ template<class C> inline  bool cacheEntry<C>::find(QStringList &what, QList<C> &
     return it->second.find(what, t);
 }
 
-template<class C> inline bool cacheEntry<C>::find(QStringList &what)const
+template<class C> inline bool cacheEntry<C>::find(QStringList &what) const
 {
     if (what.isEmpty()) {
         return false;
     }
-    citer it = m_subMap.find(what.at(0));
+    const auto it = m_subMap.find(what.at(0));
     if (it == m_subMap.end()) {
         return false;
     }
@@ -194,12 +191,12 @@ template<class C> inline bool cacheEntry<C>::find(QStringList &what)const
     return it->second.find(what);
 }
 
-template<class C> inline bool cacheEntry<C>::findSingleValid(QStringList &what, C &t)const
+template<class C> inline bool cacheEntry<C>::findSingleValid(QStringList &what, C &t) const
 {
     if (what.isEmpty()) {
         return false;
     }
-    citer it = m_subMap.find(what.at(0));
+    const auto it = m_subMap.find(what.at(0));
     if (it == m_subMap.end()) {
         return false;
     }
@@ -211,12 +208,12 @@ template<class C> inline bool cacheEntry<C>::findSingleValid(QStringList &what, 
     return it->second.findSingleValid(what, t);
 }
 
-template<class C> inline bool cacheEntry<C>::findSingleValid(QStringList &what, bool check_valid_subs)const
+template<class C> inline bool cacheEntry<C>::findSingleValid(QStringList &what, bool check_valid_subs) const
 {
     if (what.isEmpty()) {
         return false;
     }
-    citer it = m_subMap.find(what.at(0));
+    const auto it = m_subMap.find(what.at(0));
     if (it == m_subMap.end()) {
         return false;
     }
@@ -227,14 +224,13 @@ template<class C> inline bool cacheEntry<C>::findSingleValid(QStringList &what, 
     return it->second.findSingleValid(what, check_valid_subs);
 }
 
-template<class C> inline void cacheEntry<C>::appendValidSub(QList<C> &t)const
+template<class C> inline void cacheEntry<C>::appendValidSub(QList<C> &t) const
 {
-    citer it;
-    for (it = m_subMap.begin(); it != m_subMap.end(); ++it) {
-        if (it->second.isValid()) {
-            t.append(it->second.content());
+    for (const auto &it : m_subMap) {
+        if (it.second.isValid()) {
+            t.append(it.second.content());
         }
-        it->second.appendValidSub(t);
+        it.second.appendValidSub(t);
     }
 }
 
@@ -243,7 +239,7 @@ template<class C> inline bool cacheEntry<C>::deleteKey(QStringList &what, bool e
     if (what.isEmpty()) {
         return true;
     }
-    iter it = m_subMap.find(what.at(0));
+    const auto it = m_subMap.find(what.at(0));
     if (it == m_subMap.end()) {
         return true;
     }
@@ -268,11 +264,10 @@ template<class C> inline bool cacheEntry<C>::deleteKey(QStringList &what, bool e
     return caller_must_check;
 }
 
-template<class C> inline bool cacheEntry<C>::hasValidSubs()const
+template<class C> inline bool cacheEntry<C>::hasValidSubs() const
 {
-    citer it;
-    for (it = m_subMap.begin(); it != m_subMap.end(); ++it) {
-        if (it->second.isValid() || it->second.hasValidSubs()) {
+    for (const auto &it : m_subMap) {
+        if (it.second.isValid() || it.second.hasValidSubs()) {
             return true;
         }
     }
@@ -297,7 +292,7 @@ template<class C> inline void cacheEntry<C>::insertKey(QStringList &what, const 
     m_subMap[m].insertKey(what, st);
 }
 
-template<class C> template<class T> inline void cacheEntry<C>::listsubs_if(QStringList &what, T &oper)const
+template<class C> template<class T> inline void cacheEntry<C>::listsubs_if(QStringList &what, T &oper) const
 {
     if (what.isEmpty()) {
         /* we are the one to get the list for*/
@@ -305,7 +300,7 @@ template<class C> template<class T> inline void cacheEntry<C>::listsubs_if(QStri
         return;
     }
     /* otherwise find next */
-    citer it = m_subMap.find(what.at(0));
+    const auto it = m_subMap.find(what.at(0));
     if (it == m_subMap.end()) {
         /* not found */
         return;
@@ -319,8 +314,6 @@ template<class C> class itemCache
 public:
     typedef cacheEntry<C> cache_type;
     typedef typename std::map<QString, cache_type> cache_map_type;
-    typedef typename cache_map_type::const_iterator citer;
-    typedef typename cache_map_type::iterator iter;
 
 protected:
     cache_map_type m_contentMap;
@@ -328,8 +321,8 @@ protected:
     mutable QReadWriteLock m_RWLock;
 
 public:
-    itemCache(): m_contentMap(), m_RWLock() {}
-    virtual ~itemCache() {}
+    itemCache() = default;
+    virtual ~itemCache() = default;
 
     void clear()
     {
@@ -363,8 +356,8 @@ template<class C> inline void itemCache<C>::insertKey(const C &st, const QString
     }
     QWriteLocker locker(&m_RWLock);
 
-    const QString m = _keys.at(0);
-    citer it = m_contentMap.find(m);
+    const QString &m = _keys.at(0);
+    const auto it = m_contentMap.find(m);
 
     if (it == m_contentMap.end()) {
         m_contentMap[m] = cache_type(m);
@@ -388,7 +381,7 @@ template<class C> inline bool itemCache<C>::find(const QString &what)const
     if (_keys.isEmpty()) {
         return false;
     }
-    citer it = m_contentMap.find(_keys.at(0));
+    const auto it = m_contentMap.find(_keys.at(0));
     if (it == m_contentMap.end()) {
         return false;
     }
@@ -410,7 +403,7 @@ template<class C> inline void itemCache<C>::deleteKey(const QString &_what, bool
     if (what.isEmpty()) {
         return;
     }
-    iter it = m_contentMap.find(what.at(0));
+    const auto it = m_contentMap.find(what.at(0));
     if (it == m_contentMap.end()) {
         return;
     }
@@ -437,8 +430,7 @@ template<class C> inline void itemCache<C>::deleteKey(const QString &_what, bool
 template<class C> inline void itemCache<C>::dump_tree()
 {
     QReadLocker locker(&m_RWLock);
-    citer it;
-    for (it = m_contentMap.begin(); it != m_contentMap.end(); ++it) {
+    for (auto it = m_contentMap.begin(); it != m_contentMap.end(); ++it) {
 //        std::cout<<it->first.latin1() << " (" << it->second.key().latin1() << ")"<<std::endl;
 //        it->second.dump_tree(1);
     }
@@ -455,7 +447,7 @@ template<class C> inline bool itemCache<C>::findSingleValid(const QString &_what
     if (what.isEmpty()) {
         return false;
     }
-    citer it = m_contentMap.find(what.at(0));
+    const auto it = m_contentMap.find(what.at(0));
     if (it == m_contentMap.end()) {
         return false;
     }
@@ -481,7 +473,7 @@ template<class C> inline bool itemCache<C>::findSingleValid(const QString &_what
     if (what.isEmpty()) {
         return false;
     }
-    citer it = m_contentMap.find(what.at(0));
+    const auto it = m_contentMap.find(what.at(0));
     if (it == m_contentMap.end()) {
         return false;
     }
@@ -503,8 +495,7 @@ template<class C> template<class T> inline void itemCache<C>::listsubs_if(const 
     if (what.isEmpty()) {
         return;
     }
-    citer it = m_contentMap.find(what.at(0));
-
+    const auto it = m_contentMap.find(what.at(0));
     if (it == m_contentMap.end()) {
         return;
     }

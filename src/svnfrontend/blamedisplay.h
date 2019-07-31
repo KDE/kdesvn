@@ -27,7 +27,7 @@ namespace Ui
 class BlameDisplay;
 }
 class BlameTreeItem;
-class BlameDisplayData;
+struct BlameDisplayData;
 class QTreeWidgetItem;
 class SimpleLogCb;
 

@@ -156,32 +156,22 @@ void BlameTreeItem::display()
     localeChanged();
 }
 
-class BlameDisplayData
+struct BlameDisplayData
 {
-public:
-    BlameDisplayData()
-        : max(-1)
-        , min(INT_MAX - 1)
-        , rev_count(0)
-        , up(false)
-        , m_cb(nullptr)
-        , m_pbGoToLine(nullptr)
-        , m_pbShowLog(nullptr)
-    {}
-
-    svn_revnum_t max, min;
-    QMap<svn_revnum_t, QColor> m_shadingMap;
-    QMap<svn_revnum_t, svn::LogEntry> m_logCache;
+    QHash<svn_revnum_t, QColor> m_shadingMap;
+    QHash<svn_revnum_t, svn::LogEntry> m_logCache;
 
     QColor m_lastCalcColor;
-    unsigned int rev_count;
-    bool up;
-    SimpleLogCb *m_cb;
+    SimpleLogCb *m_cb = nullptr;
     QString m_File;
 
     QString reposRoot;
-    QPushButton *m_pbGoToLine;
-    QPushButton *m_pbShowLog;
+    QPushButton *m_pbGoToLine = nullptr;
+    QPushButton *m_pbShowLog = nullptr;
+    svn_revnum_t max = -1;
+    svn_revnum_t min = std::numeric_limits<int>::max() - 1;
+    unsigned int rev_count = 0;
+    bool up = false;
 };
 
 BlameDisplay::BlameDisplay(const QString &what, const svn::AnnotatedFile &blame, SimpleLogCb *cb, QWidget *parent)
@@ -232,7 +222,6 @@ void BlameDisplay::setContent(const QString &what, const svn::AnnotatedFile &bla
     m_Data->m_File = what;
     m_Data->m_pbShowLog->setEnabled(false);
 
-    svn::AnnotatedFile::const_iterator bit;
     //m_BlameList->setSorting(COL_LINENR,false);
     m_Data->max = -1;
     svn_revnum_t lastRev(-1);
@@ -249,26 +238,28 @@ void BlameDisplay::setContent(const QString &what, const svn::AnnotatedFile &bla
 
     bool _b_init = false, _bt_init = false;
 
-    for (bit = blame.begin(); bit != blame.end(); ++bit) {
-        bool disp = (*bit).revision() != lastRev || bit == blame.begin() ;
+    for (auto bit = blame.begin(); bit != blame.end(); ++bit) {
+        const svn::AnnotateLine &line = *bit;
+        bool disp = line.revision() != lastRev || bit == blame.begin();
 
-        if ((*bit).revision() > m_Data->max) {
-            m_Data->max = (*bit).revision();
+        if (line.revision() > m_Data->max) {
+            m_Data->max = line.revision();
             ++(m_Data->rev_count);
         }
-        if ((*bit).revision() < m_Data->min) {
-            m_Data->min = (*bit).revision();
+        if (line.revision() < m_Data->min) {
+            m_Data->min = line.revision();
         }
-        BlameTreeItem *item = new BlameTreeItem((*bit), disp);
+        BlameTreeItem *item = new BlameTreeItem(line, disp);
         _list.append(item);
 
         if (disp) {
-            lastRev = (*bit).revision();
+            lastRev = line.revision();
         }
         if (Kdesvnsettings::self()->colored_blame()) {
-            if (m_Data->m_shadingMap.find((*bit).revision()) == m_Data->m_shadingMap.end()) {
+            auto it = m_Data->m_shadingMap.find(line.revision());
+            if (it == m_Data->m_shadingMap.end()) {
                 a.setRgb(a.red() + offset, a.green() + offset, a.blue() + offset);
-                m_Data->m_shadingMap[(*bit).revision()] = a;
+                m_Data->m_shadingMap.insert(line.revision(), a);
                 if (a.red() > 245 || a.green() > 245 || a.blue() > 245) {
                     if (colinc == 0) {
                         ++colinc;
@@ -309,13 +300,13 @@ void BlameDisplay::setContent(const QString &what, const svn::AnnotatedFile &bla
                 _bt = item->background(COL_REV);
                 _bt.setStyle(Qt::SolidPattern);
             }
-            _bt.setColor(m_Data->m_shadingMap.value((*bit).revision()));
+            _bt.setColor(m_Data->m_shadingMap.value(line.revision()));
             item->setBackground(COL_REV, _bt);
             item->setBackground(COL_DATE, _bt);
             item->setBackground(COL_AUT, _bt);
             item->setBackground(COL_LINE, _bt);
         } else {
-            m_Data->m_shadingMap[(*bit).revision()] = QColor();
+            m_Data->m_shadingMap[line.revision()] = QColor();
         }
     }
     m_ui->m_BlameTree->addTopLevelItems(_list);
@@ -354,7 +345,7 @@ void BlameDisplay::showCommit(BlameTreeItem *bti)
         return;
     }
     QString text;
-    const QMap<svn_revnum_t, svn::LogEntry>::const_iterator it = m_Data->m_logCache.constFind(bti->rev());
+    const auto it = m_Data->m_logCache.constFind(bti->rev());
     if (it != m_Data->m_logCache.constEnd()) {
         text = it.value().message;
     } else {

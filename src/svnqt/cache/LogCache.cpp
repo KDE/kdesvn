@@ -62,21 +62,19 @@ public:
         m_DB.commit();
         m_DB.close();
         m_DB = QSqlDatabase();
-        QMap<QString, QString>::Iterator it;
-        for (it = reposCacheNames.begin(); it != reposCacheNames.end(); ++it) {
-            if (QSqlDatabase::database(it.value()).isOpen()) {
-                QSqlDatabase::database(it.value()).commit();
-                QSqlDatabase::database(it.value()).close();
+        for (const QString &dbName : reposCacheNames) {
+            if (QSqlDatabase::database(dbName).isOpen()) {
+                QSqlDatabase::database(dbName).commit();
+                QSqlDatabase::database(dbName).close();
             }
-            QSqlDatabase::removeDatabase(it.value());
+            QSqlDatabase::removeDatabase(dbName);
         }
         QSqlDatabase::removeDatabase(key);
     }
 
     void deleteDb(const QString &path)
     {
-        QMap<QString, QString>::Iterator it;
-        for (it = reposCacheNames.begin(); it != reposCacheNames.end(); ++it) {
+        for (auto it = reposCacheNames.begin(); it != reposCacheNames.end(); ++it) {
             QSqlDatabase _db = QSqlDatabase::database(it.value());
             if (_db.databaseName() == path) {
                 qDebug() << "Removing database " << _db.databaseName() << endl;
@@ -84,8 +82,10 @@ public:
                     _db.commit();
                     _db.close();
                 }
+                _db = QSqlDatabase();
                 QSqlDatabase::removeDatabase(it.value());
-                it = reposCacheNames.begin();
+                reposCacheNames.erase(it);
+                break;
             }
         }
     }
@@ -106,7 +106,7 @@ public:
     {
         if (m_mainDB.hasLocalData()) {
             m_mainDB.localData()->m_DB.close();
-            m_mainDB.setLocalData(0L);
+            m_mainDB.setLocalData(nullptr);
         }
     }
 
@@ -248,6 +248,7 @@ public:
             _db.setDatabaseName(fulldb);
             if (!checkReposDb(_db)) {
             }
+            _db = QSqlDatabase();
             QSqlDatabase::removeDatabase(SQLTMPDB());
         }
         return db;
@@ -563,7 +564,6 @@ QStringList svn::cache::LogCache::cachedRepositories()const
     cur.prepare(s_q);
     if (!cur.exec()) {
         throw svn::cache::DatabaseException(QLatin1String("Could not retrieve values: ") + cur.lastError().text());
-        return _res;
     }
     while (cur.next()) {
         _res.append(cur.value(0).toString());

@@ -100,7 +100,7 @@ svn::Revision svn::cache::ReposLog::latestHeadRev()
     }
     /// no catch - exception has go trough...
     //qDebug("Getting headrev");
-    svn::InfoEntries e = m_Client->info(m_ReposRoot, svn::DepthEmpty, svn::Revision::HEAD, svn::Revision::HEAD);
+    const svn::InfoEntries e = m_Client->info(m_ReposRoot, svn::DepthEmpty, svn::Revision::HEAD, svn::Revision::HEAD);
     if (e.count() < 1 || e[0].reposRoot().isEmpty()) {
         return svn::Revision::UNDEFINED;
     }
@@ -265,11 +265,10 @@ bool svn::cache::ReposLog::checkFill(svn::Revision &start, svn::Revision &end, b
         if (!m_Client->log(params.targets(m_ReposRoot).revisionRange(_rstart, _rend).peg(svn::Revision::UNDEFINED).discoverChangedPathes(true).strictNodeHistory(false), _internal)) {
             return false;
         }
-        LogEntriesMap::ConstIterator it = _internal.constBegin();
 
         DatabaseLocker l(&m_Database);
-        for (; it != _internal.constEnd(); ++it) {
-            _insertLogEntry((*it));
+        for (const LogEntry &le : qAsConst(_internal)) {
+            _insertLogEntry(le);
             if (cp && cp->getListener()) {
                 //cp->getListener()->contextProgress(++icount,_internal.size());
                 if (cp->getListener()->contextCancel()) {
@@ -325,7 +324,6 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap &target, const svn::Revision 
     if (!bcount.exec()) {
         //qDebug() << bcount.lastError().text();
         throw svn::cache::DatabaseException(QLatin1String("Could not retrieve count: ") + bcount.lastError().text());
-        return false;
     }
     if (!bcount.next() || bcount.value(0).toLongLong() < 1) {
         // we didn't found logs with this parameters
@@ -340,12 +338,11 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap &target, const svn::Revision 
 
     if (!bcur.exec()) {
         throw svn::cache::DatabaseException(QLatin1String("Could not retrieve values: ") + bcur.lastError().text());
-        return false;
     }
 
     QString sItems(QStringLiteral("select changeditem,action,copyfrom,copyfromrev from changeditems where revision=?"));
-    for (int i = 0; i < exclude.size(); ++i) {
-        sItems += QLatin1String(" and changeditem not like '") + exclude[i] + QLatin1String("%'");
+    for (const QString &ex : exclude.data()) {
+        sItems += QLatin1String(" and changeditem not like '") + ex + QLatin1String("%'");
     }
     QSqlQuery cur(m_Database);
     cur.setForwardOnly(true);
@@ -360,7 +357,6 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap &target, const svn::Revision 
           throw svn::cache::DatabaseException(QStringLiteral("Could not retrieve revision values: %1, %2")
                                               .arg(cur.lastError().text(),
                                                    cur.lastError().nativeErrorCode()));
-          return false;
         }
         target[revision].revision = revision;
         target[revision].author = bcur.value(1).toString();
@@ -378,7 +374,6 @@ bool svn::cache::ReposLog::simpleLog(LogEntriesMap &target, const svn::Revision 
         if (cp && cp->getListener()) {
             if (cp->getListener()->contextCancel()) {
                 throw svn::cache::DatabaseException(QStringLiteral("Could not retrieve values: User cancel."));
-                return false;
             }
         }
     }
@@ -408,7 +403,7 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision &aRev, bo
         }
     }
     if (must_remote) {
-        svn::InfoEntries e = (m_Client->info(m_ReposRoot, svn::DepthEmpty, aRev, aRev));;
+        const svn::InfoEntries e = (m_Client->info(m_ReposRoot, svn::DepthEmpty, aRev, aRev));;
         if (e.count() < 1 || e[0].reposRoot().isEmpty()) {
             return aRev;
         }
@@ -423,7 +418,7 @@ svn::Revision svn::cache::ReposLog::date2numberRev(const svn::Revision &aRev, bo
     if (noNetwork) {
         return svn::Revision::UNDEFINED;
     }
-    svn::InfoEntries e = (m_Client->info(m_ReposRoot, svn::DepthEmpty, svn::Revision::HEAD, svn::Revision::HEAD));;
+    const svn::InfoEntries e = (m_Client->info(m_ReposRoot, svn::DepthEmpty, svn::Revision::HEAD, svn::Revision::HEAD));;
     if (e.count() < 1 || e[0].reposRoot().isEmpty()) {
         return svn::Revision::UNDEFINED;
     }
@@ -450,13 +445,12 @@ bool svn::cache::ReposLog::_insertLogEntry(const svn::LogEntry &aEntry)
         throw svn::cache::DatabaseException(QStringLiteral("_insertLogEntry_0: Could not insert values: %1, %2").arg(_q.lastError().text(), _q.lastError().nativeErrorCode()));
     }
     _q.prepare(qPathes);
-    svn::LogChangePathEntries::ConstIterator cpit = aEntry.changedPaths.begin();
-    for (; cpit != aEntry.changedPaths.end(); ++cpit) {
+    for (const LogChangePathEntry &cp : aEntry.changedPaths) {
         _q.bindValue(0, j);
-        _q.bindValue(1, (*cpit).path);
-        _q.bindValue(2, QString(QLatin1Char((*cpit).action)));
-        _q.bindValue(3, (*cpit).copyFromPath);
-        _q.bindValue(4, Q_LLONG((*cpit).copyFromRevision));
+        _q.bindValue(1, cp.path);
+        _q.bindValue(2, QString(QLatin1Char(cp.action)));
+        _q.bindValue(3, cp.copyFromPath);
+        _q.bindValue(4, Q_LLONG(cp.copyFromRevision));
         if (!_q.exec()) {
             //qDebug("Could not insert values: %s",_q.lastError().text().toUtf8().data());
             //qDebug() << _q.lastQuery();

@@ -603,8 +603,8 @@ void SvnActions::slotMakeCat(const svn::Revision &start, const QString &what, co
                                                 QLatin1String("Type == 'Application'"));
     }
     KService::List::ConstIterator it = offers.constBegin();
-    for (; it != offers.constEnd(); ++it) {
-        if ((*it)->noDisplay()) {
+    for (const auto &offer : qAsConst(offers)) {
+        if (offer->noDisplay()) {
             continue;
         }
         break;
@@ -676,11 +676,11 @@ QString SvnActions::makeMkdir(const QString &parentDir)
 QString SvnActions::getInfo(const SvnItemList &lst, const svn::Revision &rev, const svn::Revision &peg, bool recursive, bool all)
 {
     QString res;
-    for (auto it = lst.cbegin(); it != lst.cend(); ++it) {
+    for (const SvnItem *item : lst) {
         if (all) {
-            res += QStringLiteral("<h4 align=\"center\">%1</h4>").arg((*it)->fullName());
+            res += QStringLiteral("<h4 align=\"center\">%1</h4>").arg(item->fullName());
         }
-        res += getInfo((*it)->fullName(), rev, peg, recursive, all);
+        res += getInfo(item->fullName(), rev, peg, recursive, all);
     }
     return res;
 }
@@ -725,27 +725,27 @@ QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_wha
     static QString re(QStringLiteral("</nobr></td></tr>\n"));
     static QString cs(QStringLiteral("</nobr>:</td><td><nobr>"));
     unsigned int val = 0;
-    for (auto it = entries.begin(); it != entries.end(); ++it) {
+    for (const svn::InfoEntry &entry : entries) {
         if (val > 0) {
             text += QStringLiteral("<hline>");
         }
         ++val;
         text += QStringLiteral("<p align=\"center\">");
         text += QStringLiteral("<table cellspacing=0 cellpadding=0>");
-        if (!(*it).Name().isEmpty()) {
-            text += rb + i18n("Name") + cs + ((*it).Name()) + re;
+        if (!entry.Name().isEmpty()) {
+            text += rb + i18n("Name") + cs + (entry.Name()) + re;
         }
         if (all) {
-            text += rb + i18n("URL") + cs + ((*it).url().toDisplayString()) + re;
-            if (!(*it).reposRoot().toString().isEmpty()) {
-                text += rb + i18n("Canonical repository URL") + cs + ((*it).reposRoot().toDisplayString()) + re;
+            text += rb + i18n("URL") + cs + (entry.url().toDisplayString()) + re;
+            if (!entry.reposRoot().toString().isEmpty()) {
+                text += rb + i18n("Canonical repository URL") + cs + (entry.reposRoot().toDisplayString()) + re;
             }
-            if (!(*it).checksum().isEmpty()) {
-                text += rb + i18n("Checksum") + cs + ((*it).checksum()) + re;
+            if (!entry.checksum().isEmpty()) {
+                text += rb + i18n("Checksum") + cs + (entry.checksum()) + re;
             }
         }
         text += rb + i18n("Type") + cs;
-        switch ((*it).kind()) {
+        switch (entry.kind()) {
         case svn_node_none:
             text += i18n("Absent");
             break;
@@ -761,18 +761,18 @@ QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_wha
             break;
         }
         text += re;
-        if ((*it).kind() == svn_node_file) {
+        if (entry.kind() == svn_node_file) {
             text += rb + i18n("Size") + cs;
-            if ((*it).size() != svn::InfoEntry::SVNQT_SIZE_UNKNOWN) {
-                text += helpers::ByteToString((*it).size());
-            } else if ((*it).working_size() != svn::InfoEntry::SVNQT_SIZE_UNKNOWN) {
-                text += helpers::ByteToString((*it).working_size());
+            if (entry.size() != svn::InfoEntry::SVNQT_SIZE_UNKNOWN) {
+                text += helpers::ByteToString(entry.size());
+            } else if (entry.working_size() != svn::InfoEntry::SVNQT_SIZE_UNKNOWN) {
+                text += helpers::ByteToString(entry.working_size());
             }
             text += re;
         }
         if (all) {
             text += rb + i18n("Schedule") + cs;
-            switch ((*it).Schedule()) {
+            switch (entry.Schedule()) {
             case svn_wc_schedule_normal:
                 text += i18n("Normal");
                 break;
@@ -790,39 +790,39 @@ QString SvnActions::getInfo(const svn::InfoEntries &entries, const QString &_wha
                 break;
             }
             text += re;
-            text += rb + i18n("UUID") + cs + ((*it).uuid()) + re;
+            text += rb + i18n("UUID") + cs + (entry.uuid()) + re;
         }
-        text += rb + i18n("Last author") + cs + ((*it).cmtAuthor()) + re;
-        if ((*it).cmtDate().IsValid()) {
-            text += rb + i18n("Last committed") + cs + (*it).cmtDate().toString() + re;
+        text += rb + i18n("Last author") + cs + (entry.cmtAuthor()) + re;
+        if (entry.cmtDate().IsValid()) {
+            text += rb + i18n("Last committed") + cs + entry.cmtDate().toString() + re;
         }
-        text += rb + i18n("Last revision") + cs + (*it).cmtRev().toString() + re;
-        if ((*it).textTime().IsValid()) {
-            text += rb + i18n("Content last changed") + cs + (*it).textTime().toString() + re;
+        text += rb + i18n("Last revision") + cs + entry.cmtRev().toString() + re;
+        if (entry.textTime().IsValid()) {
+            text += rb + i18n("Content last changed") + cs + entry.textTime().toString() + re;
         }
         if (all) {
-            if ((*it).propTime().IsValid()) {
-                text += rb + i18n("Property last changed") + cs + (*it).propTime().toString() + re;
+            if (entry.propTime().IsValid()) {
+                text += rb + i18n("Property last changed") + cs + entry.propTime().toString() + re;
             }
-            for (const auto & _cfi : (*it).conflicts()) {
+            for (const auto & _cfi : entry.conflicts()) {
                 text += rb + i18n("New version of conflicted file") + cs + (_cfi->theirFile());
             }
-            if ((*it).prejfile().length()) {
+            if (entry.prejfile().length()) {
                 text += rb + i18n("Property reject file") +
-                        cs + ((*it).prejfile()) + re;
+                        cs + (entry.prejfile()) + re;
             }
 
-            if (!(*it).copyfromUrl().isEmpty()) {
-                text += rb + i18n("Copy from URL") + cs + ((*it).copyfromUrl().toDisplayString()) + re;
+            if (!entry.copyfromUrl().isEmpty()) {
+                text += rb + i18n("Copy from URL") + cs + (entry.copyfromUrl().toDisplayString()) + re;
             }
-            if ((*it).lockEntry().Locked()) {
-                text += rb + i18n("Lock token") + cs + ((*it).lockEntry().Token()) + re;
-                text += rb + i18n("Owner") + cs + ((*it).lockEntry().Owner()) + re;
+            if (entry.lockEntry().Locked()) {
+                text += rb + i18n("Lock token") + cs + (entry.lockEntry().Token()) + re;
+                text += rb + i18n("Owner") + cs + (entry.lockEntry().Owner()) + re;
                 text += rb + i18n("Locked on") + cs +
-                        (*it).lockEntry().Date().toString() +
+                        entry.lockEntry().Date().toString() +
                         re;
                 text += rb + i18n("Lock comment") + cs +
-                        (*it).lockEntry().Comment() + re;
+                        entry.lockEntry().Comment() + re;
             } else {
                 svn::StatusPtr d;
                 if (checkReposLockCache(_what, d) && d && d->lockEntry().Locked()) {
@@ -858,8 +858,8 @@ void SvnActions::makeInfo(const QStringList &lst, const svn::Revision &rev, cons
 {
     QStringList infoList;
     infoList.reserve(lst.size());
-    for (int i = 0; i < lst.size(); ++i) {
-        const QString text = getInfo(lst.at(i), rev, peg, recursive, true);
+    for (const QString &l : lst) {
+        const QString text = getInfo(l, rev, peg, recursive, true);
         if (!text.isEmpty()) {
             infoList += text;
         }
@@ -873,8 +873,8 @@ void SvnActions::showInfo(const QStringList &infoList)
         return;
     }
     QString text(QLatin1String("<html><head></head><body>"));
-    for (int i = 0; i < infoList.count(); ++i) {
-        text += QLatin1String("<h4 align=\"center\">") + infoList.at(i) + QLatin1String("</h4>");
+    for (const QString &info : infoList) {
+        text += QLatin1String("<h4 align=\"center\">") + info + QLatin1String("</h4>");
     }
     text += QLatin1String("</body></html>");
 
@@ -1184,13 +1184,13 @@ void SvnActions::makeDiffExternal(const QString &p1, const svn::Revision &start,
     const QString edisp = Kdesvnsettings::external_diff_display();
     const QVector<QStringRef> wlist = edisp.splitRef(QLatin1Char(' '));
     WatchedProcess *proc = new WatchedProcess(this);
-    for (auto it = wlist.begin(); it != wlist.end(); ++it) {
-        if (*it == QLatin1String("%1")) {
+    for (const QStringRef &str : wlist) {
+        if (str == QLatin1String("%1")) {
             *proc << first;
-        } else if (*it == QLatin1String("%2")) {
+        } else if (str == QLatin1String("%2")) {
             *proc << second;
         } else {
-            *proc << (*it).toString();
+            *proc << str.toString();
         }
     }
     proc->setAutoDelete(true);
@@ -1340,8 +1340,8 @@ void SvnActions::dispDiff(const QByteArray &ex)
         WatchedProcess *proc = new WatchedProcess(this);
         bool fname_used = false;
 
-        for (auto it = wlist.begin(); it != wlist.end(); ++it) {
-            if (*it == QLatin1String("%f")) {
+        for (const QStringRef &str : wlist) {
+            if (str == QLatin1String("%f")) {
                 QTemporaryFile tfile;
                 tfile.setAutoRemove(false);
                 tfile.open();
@@ -1352,7 +1352,7 @@ void SvnActions::dispDiff(const QByteArray &ex)
                 proc->appendTempFile(tfile.fileName());
                 tfile.close();
             } else {
-                *proc << (*it).toString();
+                *proc << str.toString();
             }
         }
         proc->setAutoDelete(true);
@@ -1543,9 +1543,8 @@ void SvnActions::makeAdd(bool rec)
 bool SvnActions::addItems(const svn::Paths &items, svn::Depth depth)
 {
     try {
-        svn::Paths::const_iterator piter;
-        for (piter = items.begin(); piter != items.end(); ++piter) {
-            m_Data->m_Svnclient->add((*piter), depth);
+        for (const svn::Path &item : items) {
+            m_Data->m_Svnclient->add(item, depth);
         }
     } catch (const svn::Exception &e) {
         emit clientException(e.msg());
@@ -1945,17 +1944,17 @@ void SvnActions::slotResolve(const QString &p)
     }
 
     WatchedProcess *proc = new WatchedProcess(this);
-    for (auto it = wlist.begin(); it != wlist.end(); ++it) {
-        if (*it == QLatin1String("%o") || *it == QLatin1String("%l")) {
+    for (const QStringRef &str : wlist) {
+        if (str == QLatin1String("%o") || str == QLatin1String("%l")) {
             *proc << i1.conflicts()[0]->baseFile();
-        } else if (*it == QLatin1String("%m") || *it == QLatin1String("%w")) {
+        } else if (str == QLatin1String("%m") || str == QLatin1String("%w")) {
             *proc << i1.conflicts()[0]->myFile();
-        } else if (*it == QLatin1String("%n") || *it == QLatin1String("%r")) {
+        } else if (str == QLatin1String("%n") || str == QLatin1String("%r")) {
             *proc << i1.conflicts()[0]->theirFile();
-        } else if (*it == QLatin1String("%t")) {
+        } else if (str == QLatin1String("%t")) {
             *proc << p;
         } else {
-            *proc << (*it).toString();
+            *proc << str.toString();
         }
     }
     proc->setAutoDelete(true);
@@ -2092,17 +2091,17 @@ void SvnActions::slotMergeExternal(const QString &_src1, const QString &_src2, c
     const QString edisp = Kdesvnsettings::external_merge_program();
     const QVector<QStringRef> wlist = edisp.splitRef(QLatin1Char(' '));
     WatchedProcess *proc = new WatchedProcess(this);
-    for (auto it = wlist.begin(); it != wlist.end(); ++it) {
-        if (*it == QLatin1String("%s1")) {
+    for (const QStringRef &str : wlist) {
+        if (str == QLatin1String("%s1")) {
             *proc << first;
-        } else if (*it == QLatin1String("%s2")) {
+        } else if (str == QLatin1String("%s2")) {
             if (!second.isEmpty()) {
                 *proc << second;
             }
-        } else if (*it == QLatin1String("%t")) {
+        } else if (str == QLatin1String("%t")) {
             *proc << target;
         } else {
-            *proc << (*it).toString();
+            *proc << str.toString();
         }
     }
     tdir1.setAutoRemove(false);
@@ -2375,9 +2374,9 @@ void SvnActions::checkAddItems(const QString &path, bool print_error_box)
         dlg->setWithCancelButton();
         QTreeWidget *ptr(new QTreeWidget(dlg));
         ptr->headerItem()->setText(0, i18n("Item"));
-        for (int j = 0; j < displist.size(); ++j) {
+        for (const QString &text : qAsConst(displist)) {
             QTreeWidgetItem *n = new QTreeWidgetItem(ptr);
-            n->setText(0, displist[j]);
+            n->setText(0, text);
             n->setCheckState(0, Qt::Checked);
         }
         ptr->resizeColumnToContents(0);
@@ -2655,8 +2654,8 @@ bool SvnActions::checkUpdateCache(const QString &path)const
 
 void SvnActions::removeFromUpdateCache(const QStringList &what, bool exact_only)
 {
-    for (int i = 0; i < what.size(); ++i) {
-        m_Data->m_UpdateCache.deleteKey(what.at(i), exact_only);
+    for (const QString &key : what) {
+        m_Data->m_UpdateCache.deleteKey(key, exact_only);
     }
 }
 
@@ -2696,8 +2695,8 @@ bool SvnActions::makeIgnoreEntry(const svn::Path &item, const QStringList &ignor
     bool result = false;
     QStringList lst = data.split(QLatin1Char('\n'), QString::SkipEmptyParts);
 
-    for (int _current = 0; _current < ignorePattern.size(); ++_current) {
-        int it = lst.indexOf(ignorePattern[_current]);
+    for (const QString &ignore : ignorePattern) {
+        int it = lst.indexOf(ignore);
         if (it != -1) {
             if (unignore) {
                 lst.removeAt(it);
@@ -2705,7 +2704,7 @@ bool SvnActions::makeIgnoreEntry(const svn::Path &item, const QStringList &ignor
             }
         } else {
             if (!unignore) {
-                lst.append(ignorePattern[_current]);
+                lst.append(ignore);
                 result = true;
             }
         }
@@ -2772,7 +2771,7 @@ bool SvnActions::isLockNeeded(SvnItem *which, const svn::Revision &where)
     QPair<qlonglong, svn::PathPropertiesMapList> pmp;
     try {
         pmp = m_Data->m_Svnclient->propget(QStringLiteral("svn:needs-lock"), p, where, where);
-    } catch (const svn::Exception &e) {
+    } catch (const svn::Exception &) {
         /* no messagebox needed */
         //emit clientException(e.msg());
         return false;
@@ -2883,10 +2882,7 @@ void SvnActions::slotCancel(bool how)
 void SvnActions::setContextData(const QString &aKey, const QString &aValue)
 {
     if (aValue.isNull()) {
-        QMap<QString, QString>::iterator it = m_Data->m_contextData.find(aKey);
-        if (it != m_Data->m_contextData.end()) {
-            m_Data->m_contextData.remove(aKey);
-        }
+        m_Data->m_contextData.remove(aKey);
     } else {
         m_Data->m_contextData[aKey] = aValue;
     }

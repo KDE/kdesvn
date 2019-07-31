@@ -386,19 +386,19 @@ int SvnItemModel::checkDirs(const QString &_what, SvnItemModelNode *_parent)
     svn::StatusEntries neweritems;
     svnWrapper()->getaddedItems(what, neweritems);
     dlist += neweritems;
-    svn::StatusEntries::iterator it = dlist.begin();
     SvnItemModelNode *node = nullptr;
-    for (; it != dlist.end(); ++it) {
-        if ((*it)->path() == what || (*it)->entry().url().toString() == what) {
+    for (auto it = dlist.begin(); it != dlist.end(); ++it) {
+        const svn::StatusPtr &sp = *it;
+        if (sp->path() == what || sp->entry().url().toString() == what) {
             if (!_parent) {
                 // toplevel item
                 beginInsertRows(m_Data->indexForNode(m_Data->m_rootNode), 0, 0);
-                if ((*it)->entry().kind() == svn_node_dir) {
+                if (sp->entry().kind() == svn_node_dir) {
                     node = new SvnItemModelNodeDir(m_Data->m_rootNode, svnWrapper(), m_Data->m_Display);
                 } else {
                     node = new SvnItemModelNode(m_Data->m_rootNode, svnWrapper(), m_Data->m_Display);
                 }
-                node->setStat((*it));
+                node->setStat(sp);
                 m_Data->m_rootNode->m_Children.prepend(node);
                 endInsertRows();
             }
@@ -430,21 +430,20 @@ void SvnItemModel::insertDirs(SvnItemModelNode *_parent, svn::StatusEntries &dli
     }
     SvnItemModelNode *node = nullptr;
     beginInsertRows(ind, parent->childList().count(), parent->childList().count() + dlist.count() - 1);
-    svn::StatusEntries::iterator it = dlist.begin();
 #ifdef DEBUG_TIMER
     QTime _counttime;
     _counttime.start();
 #endif
-    for (; it != dlist.end(); ++it) {
+    for (const svn::StatusPtr &sp : dlist) {
 #ifdef DEBUG_TIMER
         _counttime.restart();
 #endif
-        if (m_Data->MustCreateDir(*(*it))) {
+        if (m_Data->MustCreateDir(*sp)) {
             node = new SvnItemModelNodeDir(parent, svnWrapper(), m_Data->m_Display);
         } else {
             node = new SvnItemModelNode(parent, svnWrapper(), m_Data->m_Display);
         }
-        node->setStat((*it));
+        node->setStat(sp);
 #ifdef DEBUG_TIMER
 //        qCDebug(KDESVN_LOG)<<"Time creating item: "<<_counttime.elapsed();
         _counttime.restart();
@@ -724,14 +723,11 @@ void SvnItemModel::checkAddNewItems(const QModelIndex &ind)
     if (!svnWrapper()->makeStatus(what, dlist, m_Data->m_Display->baseRevision(), false, true, true)) {
         return;
     }
-    svn::StatusEntries::iterator it;
-    for (it = dlist.begin(); it != dlist.end();) {
-        if (n->contains((*it)->path()) || (*it)->path() == what) {
-            it = dlist.erase(it);
-        } else {
-            ++it;
-        }
-    }
+    const auto pred = [&](const svn::StatusPtr &sp) -> bool
+    {
+      return n->contains(sp->path()) || sp->path() == what;
+    };
+    dlist.erase(std::remove_if(dlist.begin(), dlist.end(), pred), dlist.end());
     if (!dlist.isEmpty()) {
         insertDirs(n, dlist);
     }
@@ -829,9 +825,7 @@ bool SvnItemModel::refreshDirnode(SvnItemModelNodeDir *node, bool check_empty, b
         dlist += neweritems;
     }
 
-    svn::StatusEntries::iterator it = dlist.begin();
-
-    for (it = dlist.begin(); it != dlist.end(); ++it) {
+    for (auto it = dlist.begin(); it != dlist.end(); ++it) {
         if ((*it)->path() == what) {
             dlist.erase(it);
             break;
@@ -839,15 +833,15 @@ bool SvnItemModel::refreshDirnode(SvnItemModelNodeDir *node, bool check_empty, b
     }
     QModelIndex ind = m_Data->indexForNode(node);
     for (int i = 0; i < node->m_Children.size(); ++i) {
+        const SvnItemModelNode *n = node->m_Children[i];
         bool found = false;
-        for (it = dlist.begin(); it != dlist.end(); ++it) {
-            if ((*it)->path() == node->m_Children[i]->fullName()) {
+        for (const auto &entry : qAsConst(dlist)) {
+            if (entry->path() == n->fullName()) {
                 found = true;
                 break;
             }
         }
         if (!found) {
-            SvnItemModelNode *n = node->m_Children[i];
             beginRemoveRows(ind, i, i);
             node->m_Children.removeAt(i);
             delete n;
@@ -856,12 +850,12 @@ bool SvnItemModel::refreshDirnode(SvnItemModelNodeDir *node, bool check_empty, b
         }
     }
 
-    for (it = dlist.begin(); it != dlist.end();) {
+    for (auto it = dlist.begin(); it != dlist.end();) {
         int index = node->indexOf((*it)->path());
         if (index != -1) {
-            node->m_Children[index]->setStat((*it));
-            if (node->m_Children[index]->NodeIsDir() != node->m_Children[index]->isDir()) {
-                SvnItemModelNode *n = node->m_Children[index];
+            SvnItemModelNode *n = node->m_Children[index];
+            n->setStat((*it));
+            if (n->NodeIsDir() != n->isDir()) {
                 beginRemoveRows(ind, index, index);
                 node->m_Children.removeAt(index);
                 delete n;

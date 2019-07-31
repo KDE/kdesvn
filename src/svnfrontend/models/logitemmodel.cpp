@@ -57,17 +57,16 @@ void SvnLogModel::setLogData(const svn::LogEntriesMapPtr &log, const QString &na
 
     m_data.reserve(log->count());
     beginInsertRows(QModelIndex(), 0, log->count() - 1);
-    svn::LogEntriesMap::const_iterator it = log->constBegin();
-    for (; it != log->constEnd(); ++it) {
-        SvnLogModelNodePtr np(new SvnLogModelNode((*it)));
+    for (const svn::LogEntry &entry : qAsConst(*log)) {
+        SvnLogModelNodePtr np(new SvnLogModelNode(entry));
         m_data.append(np);
-        if ((*it).revision > m_max) {
-            m_max = (*it).revision;
+        if (entry.revision > m_max) {
+            m_max = entry.revision;
         }
-        if ((*it).revision < m_min || m_min == -1) {
-            m_min = (*it).revision;
+        if (entry.revision < m_min || m_min == -1) {
+            m_min = entry.revision;
         }
-        itemMap[(*it).revision] = np;
+        itemMap[entry.revision] = np;
     }
     endInsertRows();
     QString bef = m_name;
@@ -97,8 +96,7 @@ qlonglong SvnLogModel::max() const
 
 int SvnLogModel::rowCount(const QModelIndex &parent) const
 {
-    Q_UNUSED(parent);
-    return m_data.count();
+    return parent.isValid() ? 0 : m_data.count();
 }
 
 QVariant SvnLogModel::data(const QModelIndex &index, int role) const
@@ -160,9 +158,9 @@ const QString &SvnLogModel::realName(const QModelIndex &index)
     return m_data[index.row()]->realName();
 }
 
-int SvnLogModel::columnCount(const QModelIndex &)const
+int SvnLogModel::columnCount(const QModelIndex &idx) const
 {
-    return Count;
+    return idx.isValid() ? 0 : Count;
 }
 
 QVariant SvnLogModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -203,8 +201,8 @@ void SvnLogModel::fillChangedPaths(const QModelIndex &index, QTreeWidget *where)
         return;
     }
     QList<QTreeWidgetItem *> _list;
-    for (int i = 0; i < _l->changedPaths().count(); ++i) {
-        _list.append(new LogChangePathItem(_l->changedPaths()[i]));
+    for (const svn::LogChangePathEntry &entry : _l->changedPaths()) {
+        _list.append(new LogChangePathItem(entry));
     }
     where->addTopLevelItems(_list);
     where->resizeColumnToContents(0);

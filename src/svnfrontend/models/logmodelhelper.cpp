@@ -64,8 +64,7 @@ const svn::LogChangePathEntries &SvnLogModelNode::changedPaths()const
 
 bool SvnLogModelNode::copiedFrom(QString &_n, qlonglong &_rev)const
 {
-    for (int i = 0; i < _data.changedPaths.count(); ++i) {
-        const svn::LogChangePathEntry &entry =_data.changedPaths.at(i);
+    for (const svn::LogChangePathEntry &entry : _data.changedPaths) {
         if (entry.action == 'A' &&
                 !entry.copyFromPath.isEmpty() &&
                 isParent(entry.path, _realName)) {

@@ -20,29 +20,26 @@
 #include "watchedprocess.h"
 
 #include <QDir>
-#include <QList>
-#include <QString>
+#include <QStringList>
 
 class ProcessData
 {
 public:
-    ProcessData()
-        : _autoDelete(false)
-    {}
+    ProcessData() = default;
     ~ProcessData()
     {
         QStringList::iterator it2;
-        for (it2 = _tempFiles.begin(); it2 != _tempFiles.end(); ++it2) {
-            QFile::remove(*it2);
+        for (const QString &fn : qAsConst(_tempFiles)) {
+            QFile::remove(fn);
         }
-        for (it2 = _tempDirs.begin(); it2 != _tempDirs.end(); ++it2) {
-            QDir(*it2).removeRecursively();
+        for (const QString &dir : qAsConst(_tempDirs)) {
+            QDir(dir).removeRecursively();
         }
     }
 
     QStringList _tempFiles;
     QStringList _tempDirs;
-    bool _autoDelete;
+    bool _autoDelete = false;
 };
 
 WatchedProcess::WatchedProcess(QObject *parent)

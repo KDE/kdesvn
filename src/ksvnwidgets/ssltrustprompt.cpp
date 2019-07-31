@@ -67,8 +67,8 @@ bool SslTrustPrompt::sslTrust(const QString &host,
     QString text = QStringLiteral("<html><body>");
     if (!reasons.isEmpty()) {
         text += QStringLiteral("<p align=\"center\"><h2>") + i18n("Failure reasons") + QStringLiteral("</h2><hline>");
-        for (int i = 0; i < reasons.count(); ++i) {
-            text += reasons.at(i)+ QStringLiteral("<br/><hline>");
+        for (const QString &reason : reasons) {
+            text += reason + QStringLiteral("<br/><hline>");
         }
         text += QStringLiteral("</p>");
     }

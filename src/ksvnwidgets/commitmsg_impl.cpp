@@ -207,11 +207,11 @@ void Commitmsg_impl::initHistory()
         }
     }
     QStringList::const_iterator it;
-    for (it = sLogHistory.constBegin(); it != sLogHistory.constEnd(); ++it) {
-        if ((*it).length() <= 40) {
-            m_LogHistory->addItem((*it));
+    for (const QString &historyEntry : qAsConst(sLogHistory)) {
+        if (historyEntry.length() <= 40) {
+            m_LogHistory->addItem(historyEntry);
         } else {
-            m_LogHistory->addItem((*it).left(37) + QStringLiteral("..."));
+            m_LogHistory->addItem(historyEntry.leftRef(37) + QStringLiteral("..."));
         }
     }
     if (!sLastMessage.isEmpty()) {

@@ -822,7 +822,7 @@ void kio_svnProtocol::commit(const QList<QUrl> &urls)
     } catch (const svn::ClientException &e) {
         extraError(KIO::ERR_SLAVE_DEFINED, e.msg());
     }
-    for (long j = 0; j < urls.count(); ++j) {
+    for (const auto &url : urls) {
         QString userstring;
         if (nnum != svn::Revision::UNDEFINED) {
             userstring = i18n("Committed revision %1.", nnum.toString());
@@ -831,7 +831,7 @@ void kio_svnProtocol::commit(const QList<QUrl> &urls)
         }
         const QString num(QString::number(m_pData->m_Listener.counter()).rightJustified(10, QLatin1Char('0')));
         const QString zero(QStringLiteral("0"));
-        setMetaData(num + QLatin1String("path"), urls[j].path());
+        setMetaData(num + QLatin1String("path"), url.path());
         setMetaData(num + QLatin1String("action"), zero);
         setMetaData(num + QLatin1String("kind"), zero);
         setMetaData(num + QLatin1String("mime_t"), QString());
@@ -862,41 +862,39 @@ void kio_svnProtocol::svnlog(int revstart, const QString &revstringstart, int re
     svn::LogParameter params;
     params.revisionRange(start, end).peg(svn::Revision::UNDEFINED).limit(0).discoverChangedPathes(true).strictNodeHistory(true);
 
-    for (long j = 0; j < urls.count(); ++j) {
+    for (const auto &url : urls) {
         svn::LogEntriesMap logs;
         try {
-            m_pData->m_Svnclient->log(params.targets(makeSvnPath(urls[j])), logs);
+            m_pData->m_Svnclient->log(params.targets(makeSvnPath(url)), logs);
         } catch (const svn::ClientException &e) {
             extraError(KIO::ERR_SLAVE_DEFINED, e.msg());
             break;
         }
         if (logs.isEmpty()) {
             const QString num(QString::number(m_pData->m_Listener.counter()).rightJustified(10, QLatin1Char('0')));
-            setMetaData(num + QStringLiteral("path"), urls[j].path());
+            setMetaData(num + QStringLiteral("path"), url.path());
             setMetaData(num + QStringLiteral("string"),
                         i18n("Empty logs"));
             m_pData->m_Listener.incCounter();
             continue;
         }
 
-        svn::LogEntriesMap::const_iterator it = logs.constBegin();
-        for (; it != logs.constEnd(); ++it) {
+        for (const svn::LogEntry &logEntry : qAsConst(logs)) {
             const QString num(QString::number(m_pData->m_Listener.counter()).rightJustified(10, QLatin1Char('0')));
-            setMetaData(num + QStringLiteral("path"), urls[j].path());
-            setMetaData(num + QStringLiteral("rev"), QString::number((*it).revision));
-            setMetaData(num + QStringLiteral("author"), (*it).author);
-            setMetaData(num + QStringLiteral("logmessage"), (*it).message);
+            setMetaData(num + QStringLiteral("path"), url.path());
+            setMetaData(num + QStringLiteral("rev"), QString::number(logEntry.revision));
+            setMetaData(num + QStringLiteral("author"), logEntry.author);
+            setMetaData(num + QStringLiteral("logmessage"), logEntry.message);
             m_pData->m_Listener.incCounter();
-            for (long z = 0; z < (*it).changedPaths.count(); ++z) {
+            for (const svn::LogChangePathEntry &logPathEntry : logEntry.changedPaths) {
                 const QString num(QString::number(m_pData->m_Listener.counter()).rightJustified(10, QLatin1Char('0')));
-                setMetaData(num + QStringLiteral("rev"), QString::number((*it).revision));
-                setMetaData(num + QStringLiteral("path"), urls[j].path());
-                setMetaData(num + QStringLiteral("loggedpath"), (*it).changedPaths[z].path);
-                setMetaData(num + QStringLiteral("loggedaction"), QString(QLatin1Char((*it).changedPaths[z].action)));
-                setMetaData(num + QStringLiteral("loggedcopyfrompath"), (*it).changedPaths[z].copyFromPath);
-                setMetaData(num + QStringLiteral("loggedcopyfromrevision"), QString::number((*it).changedPaths[z].copyFromRevision));
+                setMetaData(num + QStringLiteral("rev"), QString::number(logEntry.revision));
+                setMetaData(num + QStringLiteral("path"), url.path());
+                setMetaData(num + QStringLiteral("loggedpath"), logPathEntry.path);
+                setMetaData(num + QStringLiteral("loggedaction"), QString(QLatin1Char(logPathEntry.action)));
+                setMetaData(num + QStringLiteral("loggedcopyfrompath"), logPathEntry.copyFromPath);
+                setMetaData(num + QStringLiteral("loggedcopyfromrevision"), QString::number(logPathEntry.copyFromRevision));
                 m_pData->m_Listener.incCounter();
-
             }
         }
     }

@@ -101,9 +101,9 @@ CommitModelNodePtr CommitModel::node(const QModelIndex &index)
 CommitActionEntries CommitModel::checkedEntries() const
 {
     CommitActionEntries res;
-    for (int i = 0; i < m_List.count(); ++i) {
-        if (m_List.at(i)->checked()) {
-            res.append(m_List.at(i)->actionEntry());
+    for (const auto &entry : m_List) {
+        if (entry->checked()) {
+            res.append(entry->actionEntry());
         }
     }
     return res;
@@ -111,12 +111,11 @@ CommitActionEntries CommitModel::checkedEntries() const
 
 void CommitModel::markItems(bool mark, CommitActionEntry::ACTION_TYPE _type)
 {
-    QVariant v = mark ? int(2) : int(0);
+    QVariant v = mark ? int(Qt::Checked) : int(Qt::Unchecked);
     for (int i = 0; i < m_List.count(); ++i) {
         if (m_List.at(i)->actionEntry().type() & _type) {
             QModelIndex _index = index(i, 0, QModelIndex());
             setData(_index, v, Qt::CheckStateRole);
-            emit dataChanged(_index, _index, {Qt::CheckStateRole});
         }
     }
 }

@@ -50,8 +50,6 @@ public:
     explicit StringArray(const QStringList &);
     explicit StringArray(const apr_array_header_t *apr_targets);
     QStringList::size_type size()const;
-    const QString &operator[](QStringList::size_type which)const;
-    QString &operator[](QStringList::size_type which);
     /**
      * Returns an apr array containing char*.
      *

@@ -65,8 +65,7 @@ void Propertylist::displayList(const svn::PathPropertiesMapListPtr &propList, bo
         if (!propList->isEmpty()) {
             /* just want the first one */
             const svn::PropertiesMap pmap = propList->at(0).second;
-            svn::PropertiesMap::const_iterator pit;
-            for (pit = pmap.constBegin(); pit != pmap.constEnd(); ++pit) {
+            for (auto pit = pmap.constBegin(); pit != pmap.constEnd(); ++pit) {
                 PropertyListViewItem *ki = new PropertyListViewItem(this,
                                                                     pit.key(),
                                                                     pit.value());

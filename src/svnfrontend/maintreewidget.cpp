@@ -390,8 +390,8 @@ SvnItemList MainTreeWidget::SelectionList()const
         }
         return ret;
     }
-    for (int i = 0; i < _mi.count(); ++i) {
-        ret.push_back(m_Data->sourceNode(_mi[i], false));
+    for (const QModelIndex &idx : _mi) {
+        ret.push_back(m_Data->sourceNode(idx, false));
     }
     return ret;
 }
@@ -401,8 +401,8 @@ SvnItemList MainTreeWidget::DirSelectionList()const
     SvnItemList ret;
     const QModelIndexList _mi = m_DirTreeView->selectionModel()->selectedRows(0);
     ret.reserve(_mi.size());
-    for (int i = 0; i < _mi.count(); ++i) {
-        ret.push_back(m_Data->sourceNode(_mi[i], true));
+    for (const QModelIndex &idx : _mi) {
+        ret.push_back(m_Data->sourceNode(idx, true));
     }
     return ret;
 }
@@ -1053,11 +1053,11 @@ void MainTreeWidget::recAddIgnore(SvnItem *item)
     if (!m_Data->m_Model->svnWrapper()->makeStatus(item->fullName(), res, start, _d, true /* all entries */, false, false)) {
         return;
     }
-    for (int i = 0; i < res.count(); ++i) {
-        if (!res[i]->isRealVersioned() || res[i]->entry().kind() != svn_node_dir) {
+    for (const svn::StatusPtr &ptr: qAsConst(res)) {
+        if (!ptr->isRealVersioned() || ptr->entry().kind() != svn_node_dir) {
             continue;
         }
-        m_Data->m_Model->svnWrapper()->makeIgnoreEntry(res[i]->path(), _pattern, unignore);
+        m_Data->m_Model->svnWrapper()->makeIgnoreEntry(ptr->path(), _pattern, unignore);
     }
     refreshCurrentTree();
     delete dlg;
@@ -1337,8 +1337,8 @@ void MainTreeWidget::slotLock()
     ptr->saveHistory(false);
 
     QStringList displist;
-    for (int i = 0; i < lst.count(); ++i) {
-        displist.append(lst[i]->fullName());
+    for (const SvnItem *item : lst) {
+        displist.append(item->fullName());
     }
     m_Data->m_Model->svnWrapper()->makeLock(displist, logMessage, steal);
     refreshCurrentTree();
@@ -1366,8 +1366,8 @@ void MainTreeWidget::slotUnlock()
     bool breakit = res == KMessageBox::Yes;
 
     QStringList displist;
-    for (int i = 0; i < lst.count(); ++i) {
-        displist.append(lst[i]->fullName());
+    for (const SvnItem *item : lst) {
+        displist.append(item->fullName());
     }
     m_Data->m_Model->svnWrapper()->makeUnlock(displist, breakit);
     refreshCurrentTree();
@@ -1698,11 +1698,10 @@ void MainTreeWidget::internalDrop(const QList<QUrl> &_lst, Qt::DropAction action
     if (!isWorkingCopy()) {
         nProto = svn::Url::transformProtokoll(lst[0].scheme());
     }
-    QList<QUrl>::iterator it = lst.begin();
-    for (; it != lst.end(); ++it) {
-        (*it).setQuery(QUrlQuery());
+    for (QUrl &url : lst) {
+        url.setQuery(QUrlQuery());
         if (!nProto.isEmpty())
-            (*it).setScheme(nProto);
+            url.setScheme(nProto);
     }
 
     if (index.isValid()) {

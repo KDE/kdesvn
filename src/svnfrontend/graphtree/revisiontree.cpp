@@ -137,9 +137,8 @@ RevisionTree::RevisionTree(const svn::ClientP &aClient,
     m_Data->progress->setAutoClose(false);
     m_Data->progress->setWindowModality(Qt::WindowModal);
     bool cancel = false;
-    svn::LogEntriesMap::Iterator it;
-    unsigned count = 0;
-    for (it = m_Data->m_OldHistory.begin(); it != m_Data->m_OldHistory.end(); ++it) {
+    int count = 0;
+    for (auto it = m_Data->m_OldHistory.begin(); it != m_Data->m_OldHistory.end(); ++it) {
         m_Data->progress->setValue(count);
         QCoreApplication::processEvents();
         if (m_Data->progress->wasCanceled()) {

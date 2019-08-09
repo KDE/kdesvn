@@ -41,7 +41,6 @@ PropertiesDlg::PropertiesDlg(SvnItem *which, const svn::ClientP &aClient, const 
     setDefaultButton(m_ui->buttonBox->button(QDialogButtonBox::Ok));
     connect(m_ui->buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(m_ui->buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
-    connect(m_ui->buttonBox, &QDialogButtonBox::helpRequested, this, &PropertiesDlg::slotHelp);
 
     m_ui->tvPropertyList->setAllColumnsShowFocus(true);
     m_ui->tvPropertyList->setCommitchanges(false);
@@ -65,11 +64,6 @@ PropertiesDlg::PropertiesDlg(SvnItem *which, const svn::ClientP &aClient, const 
 PropertiesDlg::~PropertiesDlg()
 {
     delete m_ui;
-}
-
-void PropertiesDlg::slotHelp()
-{
-    qWarning("PropertiesDlg::slotHelp(): Not implemented yet");
 }
 
 void PropertiesDlg::slotCurrentItemChanged(QTreeWidgetItem *item)

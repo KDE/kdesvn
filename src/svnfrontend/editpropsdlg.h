@@ -45,7 +45,6 @@ public:
 
 protected Q_SLOTS:
     void updateToolTip(const QString &);
-    void showHelp();
 
 private:
     QStringList fileProperties;

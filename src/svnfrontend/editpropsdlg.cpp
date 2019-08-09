@@ -33,9 +33,6 @@ EditPropsDlg::EditPropsDlg(bool bAddMode, QWidget *parent)
     }
     connect(m_ui->buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(m_ui->buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
-    connect(m_ui->helpButton, &QAbstractButton::clicked, this, &EditPropsDlg::showHelp);
-    m_ui->helpButton->setIcon(QIcon::fromTheme(QStringLiteral("help-hint")));
-
 
     /// @TODO Read these values from a text or config file
     fileProperties += QStringLiteral("svn:eol-style");
@@ -184,12 +181,4 @@ void EditPropsDlg::setPropName(const QString &n)
 void EditPropsDlg::setPropValue(const QString &v)
 {
     m_ui->m_ValueEdit->setText(v);
-}
-
-void EditPropsDlg::showHelp()
-{
-    QPoint pos = m_ui->m_ValueEdit->pos();
-    pos.setX(pos.x() + m_ui->m_ValueEdit->width() / 2);
-    pos.setY(pos.y() + m_ui->m_ValueEdit->height() / 4);
-    QWhatsThis::showText(mapToGlobal(pos), m_ui->m_NameEdit->toolTip());
 }

@@ -50,7 +50,6 @@ protected:
     Ui::PropertiesDlg *m_ui;
 
 protected Q_SLOTS:
-    void slotHelp();
     void slotCurrentItemChanged(QTreeWidgetItem *);
     void slotAdd();
     void slotDelete();

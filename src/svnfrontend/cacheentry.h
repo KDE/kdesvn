@@ -356,7 +356,7 @@ template<class C> inline void itemCache<C>::insertKey(const C &st, const QString
     }
     QWriteLocker locker(&m_RWLock);
 
-    const QString &m = _keys.at(0);
+    const QString m = _keys.at(0);
     const auto it = m_contentMap.find(m);
 
     if (it == m_contentMap.end()) {

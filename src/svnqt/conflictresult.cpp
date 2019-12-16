@@ -1,6 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2007-2009 by Rajko Albrecht  ral@alwins-world.de        *
- *   http://kdesvn.alwins-world.de/                                        *
+ *   https://kde.org/applications/development/org.kde.kdesvn               *
  *                                                                         *
  * This program is free software; you can redistribute it and/or           *
  * modify it under the terms of the GNU Lesser General Public              *
@@ -19,7 +19,7 @@
  *                                                                         *
  * This software consists of voluntary contributions made by many          *
  * individuals.  For exact contribution history, see the revision          *
- * history and logs, available at http://kdesvn.alwins-world.de.           *
+ * history and logs, available at https://commits.kde.org/kdesvn.          *
  ***************************************************************************/
 
 #include "conflictresult.h"

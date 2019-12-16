@@ -19,7 +19,7 @@
  *                                                                         *
  * This software consists of voluntary contributions made by many          *
  * individuals.  For exact contribution history, see the revision          *
- * history and logs, available at http://kdesvn.alwins-world.de.           *
+ * history and logs, available at https://commits.kde.org/kdesvn.          *
  ***************************************************************************/
 #ifndef CLIENT_PARAMETER_MACROS_HPP
 #define CLIENT_PARAMETER_MACROS_HPP

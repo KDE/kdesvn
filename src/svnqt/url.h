@@ -1,7 +1,7 @@
 /*
  * Port for usage with qt-framework and development for kdesvn
  * Copyright (C) 2005-2009 by Rajko Albrecht (ral@alwins-world.de)
- * http://kdesvn.alwins-world.de
+ * https://kde.org/applications/development/org.kde.kdesvn
  */
 /*
  * ====================================================================
@@ -59,7 +59,7 @@ public:
      * Checks if @a url is valid
      *
      * Example of a valid URL:
-     *   http://svn.collab.net/repos/svn
+     *   https://svn.apache.org/repos/asf/subversion/trunk
      * Example of an invalid URL:
      *   /home/foo/bar
      */

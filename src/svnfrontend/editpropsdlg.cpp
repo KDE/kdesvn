@@ -83,7 +83,7 @@ EditPropsDlg::EditPropsDlg(bool bAddMode, QWidget *parent)
                         "A non-recursive attempt will fail, and a recursive attempt "
                         "will set the property only on the file children of the folder.");
     /* TRANSLATORS: Do not translate "example" in the URL because this is according
-       TRANSLATORS: to http://www.rfc-editor.org/rfc/rfc2606.txt a reserved URL.*/
+       TRANSLATORS: to https://www.rfc-editor.org/rfc/rfc2606.txt a reserved URL.*/
     dirComments += i18n("A newline separated list of module specifiers, each "
                         "consisting of a relative directory path, optional revision "
                         "flags, and a URL. For example:<br/>"
@@ -96,7 +96,7 @@ EditPropsDlg::EditPropsDlg(bool bAddMode, QWidget *parent)
                         "mimetype) is treated as text. Anything else is treated as binary.");
     dirComments += i18n("Label text to show for the edit box where the user enters the issue number.");
     /* TRANSLATORS: Do not translate "example" in the URL because this is according
-       TRANSLATORS: to http://www.rfc-editor.org/rfc/rfc2606.txt a reserved URL.*/
+       TRANSLATORS: to https://www.rfc-editor.org/rfc/rfc2606.txt a reserved URL.*/
     dirComments += i18n("URL pointing to the issue tracker. It must contain "
                         "<b>%BUGID%</b> which gets replaced with the bug issue number. Example:<br/>"
                         "<nobr><b>http://example.com/mantis/view.php?id=%BUGID%</b></nobr>");

@@ -29,7 +29,7 @@ struct ThreadContextListenerData;
   Same as CContextListener but make sure the user actions are executed in the main thread
   Therefore all events have to be passed through the Qt signal/slot system to make sure
   a context switch to the main thread occurs.
-  This is done by a signal 'signalFoo()' which is executed and catched inside this class.
+  This is done by a signal 'signalFoo()' which is executed and caught inside this class.
   The slot is then passed to CContextListener::foo()
 
   This Listener *must* be instanciated in the main thread!

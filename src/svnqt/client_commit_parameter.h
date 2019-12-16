@@ -19,7 +19,7 @@
  *                                                                         *
  * This software consists of voluntary contributions made by many          *
  * individuals.  For exact contribution history, see the revision          *
- * history and logs, available at http://kdesvn.alwins-world.de.           *
+ * history and logs, available at https://commits.kde.org/kdesvn.          *
  ***************************************************************************/
 /*!
  * \file client_commit_parameter.h

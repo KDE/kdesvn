@@ -106,8 +106,9 @@ if(UNIX)
   string(REGEX REPLACE "^ +" "" APU_EXTRA_LDFLAGS "${APU_EXTRA_LDFLAGS}")
   message(STATUS "Found apu extra ldflags: ${APU_EXTRA_LDFLAGS}")
 
-  check_include_files(execinfo.h HAS_BACKTRACE_H)
-  if(HAS_BACKTRACE_H)
+  find_package(Backtrace)
+  if(Backtrace_FOUND)
+    set(HAS_BACKTRACE_H true)
     option(USE_BACKTRACE "Generate a backtrace when a svnclient exception is thrown" OFF)
   endif()
 

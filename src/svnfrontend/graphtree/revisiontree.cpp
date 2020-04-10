@@ -341,7 +341,7 @@ static QString uniqueNodeName(long rev, const QString &path)
     QString res = QString::fromUtf8(path.toLocal8Bit().toBase64());
     res.replace(QLatin1Char('\"'), QLatin1String("_quot_"));
     res.replace(QLatin1Char(' '), QLatin1String("_space_"));
-    QString n; n.sprintf("%05ld", rev);
+    QString n = QString::asprintf("%05ld", rev);
     return QLatin1Char('\"') + n + QLatin1Char('_') + res + QLatin1Char('\"');
 }
 

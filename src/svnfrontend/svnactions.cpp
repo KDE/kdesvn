@@ -406,7 +406,6 @@ bool SvnActions::singleInfo(const QString &what, const svn::Revision &_rev, svn:
 {
     QString url;
     QString cacheKey;
-    QTime d; d.start();
     svn::Revision peg = _peg;
     if (!m_Data->m_CurrentContext) {
         return false;

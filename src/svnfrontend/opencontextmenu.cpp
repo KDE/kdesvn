@@ -46,7 +46,7 @@ void OpenContextmenu::setup()
         }
         _found.append(ptr->name());
         QString actionName(ptr->name().replace(QLatin1Char('&'), QLatin1String("&&")));
-        QAction *act = addAction(SmallIcon(ptr->icon()), actionName);
+        QAction *act = addAction(QIcon::fromTheme(ptr->icon()), actionName);
         act->setData(m_mapPopup.size());
 
         m_mapPopup.push_back(ptr);

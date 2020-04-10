@@ -163,7 +163,7 @@ QString Revision::toString()const
     QString value;
     switch (m_revision.kind) {
     case svn_opt_revision_number:
-        value.sprintf("%li", m_revision.value.number);
+        value = QString::asprintf("%li", m_revision.value.number);
         break;
     case svn_opt_revision_date:
         value = DateTime(m_revision.value.date).toString(QStringLiteral("{yyyy-MM-dd}"));
@@ -182,7 +182,7 @@ QString Revision::toString()const
         break;
     case svn_opt_revision_unspecified:
     default:
-        value =QLatin1String( "-1");
+        value = QLatin1String("-1");
         break;
     }
     return value;

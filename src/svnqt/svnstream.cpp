@@ -30,7 +30,7 @@
 #include <svn_client.h>
 
 #include <QBuffer>
-#include <QTime>
+#include <QElapsedTimer>
 
 namespace svn
 {
@@ -58,7 +58,7 @@ public:
     QString m_LastError;
 
     svn_client_ctx_t *_context;
-    QTime cancel_timeout;
+    QElapsedTimer cancel_timeout;
 };
 
 svn_error_t *SvnStream_private::stream_read(void *baton, char *data, apr_size_t *len)

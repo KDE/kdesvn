@@ -368,7 +368,7 @@ void kdesvn::optionsConfigureToolbars()
 
     // use the standard toolbar editor
     QPointer<KEditToolBar> dlg(new KEditToolBar(factory()));
-    connect(dlg.data(), &KEditToolBar::newToolbarConfig,
+    connect(dlg.data(), &KEditToolBar::newToolBarConfig,
             this, &kdesvn::applyNewToolbarConfig);
     dlg->exec();
     delete dlg;

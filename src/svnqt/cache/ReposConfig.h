@@ -80,7 +80,7 @@ template <typename T> inline
 void ReposConfig::writeCheck(const QString &repository, const QString &key, const T &value)
 {
     ConversionCheck::to_QVariant<T>();
-    setValue(repository, key, qVariantFromValue(value));
+    setValue(repository, key, QVariant::fromValue(value));
 }
 
 template<typename T> inline

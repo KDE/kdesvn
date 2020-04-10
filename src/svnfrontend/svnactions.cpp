@@ -1629,6 +1629,12 @@ void SvnActions::CheckoutExport(const QUrl &what, bool _exp, bool urlisTarget)
             delete dlg;
             return;
         }
+        if (ptr->targetDir().isEmpty()) {
+            KMessageBox::error(QApplication::activeModalWidget(), i18n("Invalid local path given!"),
+                               _exp ? i18n("Export repository") : i18n("Checkout a repository"));
+            delete dlg;
+            return;
+        }
         // svn::Path should not take a QString but a QByteArray ...
         const QString rUrl(QString::fromUtf8(ptr->reposURL().toEncoded()));
         makeCheckout(rUrl,

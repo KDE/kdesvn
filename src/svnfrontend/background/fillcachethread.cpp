@@ -48,6 +48,10 @@ const QString &FillCacheThread::reposRoot()const
 
 void FillCacheThread::fillInfo()
 {
+    m_what.clear();
+    if (m_path.isEmpty()) {
+        return;
+    }
     svn::InfoEntry e;
     itemInfo(Path(), e);
     if (!e.reposRoot().isEmpty()) {

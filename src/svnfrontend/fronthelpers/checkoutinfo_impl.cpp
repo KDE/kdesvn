@@ -53,16 +53,17 @@ QUrl CheckoutInfo_impl::reposURL() const
 
 QString CheckoutInfo_impl::targetDir() const
 {
-    if (!m_CreateDirButton->isChecked()) {
-        return  m_TargetSelector->url().toLocalFile();
+    const QString tgt = m_TargetSelector->url().toLocalFile();
+    if (tgt.isEmpty() || !m_CreateDirButton->isChecked()) {
+        return tgt;
     }
     // append last source url path to the target directory
-    const QString _uri = reposURL().toLocalFile();
+    const QString _uri = reposURL().path();
     const QVector<QStringRef> l = _uri.splitRef(QLatin1Char('/'), QString::SkipEmptyParts);
     if (l.isEmpty()) {
-        return m_TargetSelector->url().toLocalFile();
+        return tgt;
     }
-    return  m_TargetSelector->url().toLocalFile() + QLatin1Char('/') + l.last().toString();
+    return tgt + QLatin1Char('/') + l.last().toString();
 }
 
 bool CheckoutInfo_impl::overwrite() const

@@ -2,6 +2,7 @@
 Type=Service
 ServiceTypes=KonqPopupMenu/Plugin,inode/directory,all/all,all/allfiles
 X-KDE-Submenu=Subversion (kdesvn)
+X-KDE-Submenu[az]=Subversion (kdesvn)
 X-KDE-Submenu[bs]=Subversion (kdesvn)
 X-KDE-Submenu[ca]=Subversion (kdesvn)
 X-KDE-Submenu[ca@valencia]=Subversion (kdesvn)
@@ -33,6 +34,7 @@ Actions=Log;Info;Add;Addnew;Delete;Revert;Rename;Import;Checkout;Switch;Merge;Bl
 
 [Desktop Action Log]
 Name=Subversion log (last 100)
+Name[az]=Subversion jurnalı (son 100)
 Name[bs]=Subverzije zapisnik (zadnji 100)
 Name[ca]=Registre de Subversion (últims 100)
 Name[ca@valencia]=Registre de Subversion (últims 100)
@@ -62,6 +64,7 @@ Name[zh_CN]=Subversion 日志 (最后 100 条)
 Icon=kdesvnlog
 Exec=kdesvn exec -r HEAD:1 -l 100 log %U
 Comment=Displays the Subversion log
+Comment[az]=Subversion jurnalını göstərir
 Comment[bs]=Prikazi Subverzije zapisnik
 Comment[ca]=Mostra el registre de Subversion
 Comment[ca@valencia]=Mostra el registre de Subversion
@@ -91,6 +94,7 @@ Comment[zh_CN]=显示 Subversion 日志
 
 [Desktop Action Info]
 Name=Detailed Subversion info
+Name[az]=Ətraflı Subversion məlumatı
 Name[bs]=Detaljna Subverzija info
 Name[ca]=Informació detallada de Subversion
 Name[ca@valencia]=Informació detallada de Subversion
@@ -122,6 +126,7 @@ Exec=kdesvn exec info %U
 
 [Desktop Action Add]
 Name=Add to Repository
+Name[az]=Repazitoriyaya əlavə etmək
 Name[bs]=Dodaj u repozitorij
 Name[ca]=Afegeix al repositori
 Name[ca@valencia]=Afig al repositori
@@ -155,6 +160,7 @@ Exec=kdesvn exec add %U
 
 [Desktop Action Addnew]
 Name=Check for unversioned items
+Name[az]=versiyalanmamış elementləri yoxlamaq
 Name[bs]=Provjerite unversioned predmete
 Name[ca]=Comprova per a elements sense versió
 Name[ca@valencia]=Comprova per a elements sense versió
@@ -184,6 +190,7 @@ Exec=kdesvn exec addnew %U
 
 [Desktop Action Delete]
 Name=Delete From Repository
+Name[az]=Repazitoriyadan silmək
 Name[bs]=Briši iz repozitorija
 Name[ca]=Elimina del repositori
 Name[ca@valencia]=Elimina del repositori
@@ -215,6 +222,7 @@ Exec=kdesvn exec rm %U
 
 [Desktop Action Revert]
 Name=Revert Local Changes
+Name[az]=Yerli dəyişiklikləri geri qaytarmaq
 Name[bs]=Poništi lokalne promjene
 Name[ca]=Reverteix els canvis locals
 Name[ca@valencia]=Reverteix els canvis locals
@@ -244,6 +252,7 @@ Name[zh_CN]=还原本地更改
 Icon=kdesvnreverse
 Exec=kdesvn exec revert %U
 Comment=Remove any changes made locally. Warning - this cannot be undone.
+Comment[az]=Edilən hər hansı yerli dəyişiklikləri silmək. Xəbərdarlıq - bu geri qaytarıla bilməz.
 Comment[bs]=Ukloni bilo koje promjene napravljene lokalno. Upozorenje - ovo ne može biti ponovno vraćeno.
 Comment[ca]=Elimina qualsevol canvi local. Avís: No es pot desfer.
 Comment[ca@valencia]=Elimina qualsevol canvi local. Avís: No es pot desfer.
@@ -273,6 +282,7 @@ Comment[zh_CN]=删除本地进行的任何更改。警告 - 此操作无法撤�
 
 [Desktop Action Rename]
 Name=Rename...
+Name[az]=Yenidən adlandırmaq...
 Name[bs]=Preimenuj...
 Name[ca]=Reanomena...
 Name[ca@valencia]=Reanomena...
@@ -303,6 +313,7 @@ Name[zh_CN]=重命名…
 Icon=kdesvnmove
 Exec=kdesvn exec mv %U
 Comment=Rename a file locally and in the repository.  Use this rather than adding and deleting to rename a file.
+Comment[az]=Yerli və repazitoriyadakı faylın adını dəyişmək.  Əlavə edilmə və silinmə əvəzinə adını dəyişmək üçün bunu istifadə edin.
 Comment[bs]=Preimenuj datoteku lokalno i u spremištu. Koristi ovo radije nego dodavanje i brisanje za preimenovanje datoteke.
 Comment[ca]=Reanomena un fitxer localment i en el repositori. Useu-ho en comptes d'afegir i eliminar per a reanomenar un fitxer.
 Comment[ca@valencia]=Reanomena un fitxer localment i en el repositori. Useu-ho en comptes d'afegir i eliminar per a reanomenar un fitxer.
@@ -332,6 +343,7 @@ Comment[zh_CN]=在本地和仓库中重命名文件。使用此功能来取代�
 
 [Desktop Action Import]
 Name=Import Repository
+Name[az]=Repazitoriyanı idxal etmək
 Name[bs]=Uvezi spremište
 Name[ca]=Importa un repositori
 Name[ca@valencia]=Importa un repositori
@@ -361,6 +373,7 @@ Name[zh_CN]=导入仓库
 Icon=svn_import
 Exec=kio_svn_helper -i %U
 Comment=Put folder into an existing repository to put it under revision control.
+Comment[az]=Vaersiyaya nəzarət altına almaq üçün qovluğu cari repazitoriyaya yerləşdirin.
 Comment[bs]=Stavi direktorij na postojeće spremište radi kontrole revizija.
 Comment[ca]=Situa la carpeta en un repositori existent per a posar-la sota el control de revisions.
 Comment[ca@valencia]=Situa la carpeta en un repositori existent per a posar-la sota el control de revisions.
@@ -390,6 +403,7 @@ Comment[zh_CN]=将文件夹放入现有仓库，使其受到版本控制。
 
 [Desktop Action Checkout]
 Name=Checkout From Repository...
+Name[az]=Repazitoriyadan almaq...
 Name[bs]=Izdvoji iz spremišta...
 Name[ca]=Obtén del repositori...
 Name[ca@valencia]=Obtén del repositori...
@@ -419,6 +433,7 @@ Name[zh_CN]=从仓库中检出...
 Icon=kdesvncheckout
 Exec=kdesvn exec checkout %U
 Comment=Checkout out files from an existing repository into this folder.
+Comment[az]=Faylları bu qovluq daxilindəki mövcud repazitoriyadan almaq
 Comment[bs]=Izdvoji izlazne datoteke sa postojećeg spremišta u ovaj direktorij.
 Comment[ca]=Recupera fitxers des d'un repositori existent cap aquesta carpeta.
 Comment[ca@valencia]=Recupera fitxers des d'un repositori existent cap aquesta carpeta.
@@ -448,6 +463,7 @@ Comment[zh_CN]=从已有仓库中检出文件并存放至此文件夹。
 
 [Desktop Action Switch]
 Name=Switch...
+Name[az]=Dəyişdirmək...
 Name[bs]=Prebaci...
 Name[ca]=Canvia...
 Name[ca@valencia]=Canvia...
@@ -476,6 +492,7 @@ Name[x-test]=xxSwitch...xx
 Name[zh_CN]=切换...
 Icon=kdesvnswitch
 Comment=Switch given working copy to another branch
+Comment[az]=Verilmiş işlək nüsxəni başqa şöbəyə dəyişmək
 Comment[bs]=Prebaci radnu kopiju u drugu granu
 Comment[ca]=Canvia una còpia de treball indicada a una altra branca
 Comment[ca@valencia]=Canvia una còpia de treball indicada a una altra branca
@@ -506,6 +523,7 @@ Exec=kdesvn exec switch %U
 
 [Desktop Action Merge]
 Name=Merge...
+Name[az]=Birləşmək...
 Name[bs]=Spoji...
 Name[ca]=Fusiona...
 Name[ca@valencia]=Fusiona...
@@ -535,6 +553,7 @@ Name[x-test]=xxMerge...xx
 Name[zh_CN]=合并...
 Icon=kdesvnmerge
 Comment=Merge changes between this and another branch
+Comment[az]=Bu və başqa şöbə arasındakı dəyişiklikləri birləşdirmək
 Comment[bs]=Spoji promjene između ove i drugih grana
 Comment[ca]=Fusiona els canvis entre aquesta i una altra branca
 Comment[ca@valencia]=Fusiona els canvis entre aquesta i una altra branca
@@ -565,6 +584,7 @@ Exec=kio_svn_helper -m %U
 
 [Desktop Action Blame]
 Name=Blame...
+Name[az]=Bunu edənin kimliyi...
 Name[bs]=Okrivi...
 Name[ca]=Responsable...
 Name[ca@valencia]=Responsable...
@@ -593,6 +613,7 @@ Name[x-test]=xxBlame...xx
 Name[zh_CN]=问责...
 Icon=kdesvnblame
 Comment=See who wrote each line of the file and in what revision
+Comment[az]=Faylda hər sətrininin və hansı dəyişimdə kimin yazdığına baxmaq
 Comment[bs]=Pogledaj ko je napisao svaku liniju u datoteci i pod kakvom kontrolom
 Comment[ca]=Veu qui va escriure cada línia del fitxer i en quina revisió
 Comment[ca@valencia]=Veu qui va escriure cada línia del fitxer i en quina revisió
@@ -623,6 +644,7 @@ Exec=kdesvn exec blame %U
 
 [Desktop Action CreatePatch]
 Name=Create Patch...
+Name[az]=Yol yaratmaq...
 Name[bs]=Kreiraj zakrpu...
 Name[ca]=Crea un pedaç...
 Name[ca@valencia]=Crea un pedaç...
@@ -654,6 +676,7 @@ Exec=kio_svn_helper -p %U
 
 [Desktop Action Export]
 Name=Export...
+Name[az]=İxrac etmək...
 Name[bs]=Izvezi...
 Name[ca]=Exporta...
 Name[ca@valencia]=Exporta...
@@ -684,6 +707,7 @@ Name[zh_CN]=导出...
 Icon=kdesvnexport
 Exec=kdesvn exec export %U
 Comment=Checkout out an unversioned copy of a tree from a repository
+Comment[az]=AArdıcıllığın versiyalanmamış nüsxəsini repazitoriyadan almaq
 Comment[bs]=Izvezi bezverzijsku kopiju stabla iz repozitorija
 Comment[ca]=Exporta una còpia sense versió d'un arbre des del repositori
 Comment[ca@valencia]=Exporta una còpia sense versió d'un arbre des del repositori
@@ -713,6 +737,7 @@ Comment[zh_CN]=从仓库中检出无版本副本
 
 [Desktop Action Diff]
 Name=Diff (local)
+Name[az]=Müqayisə (yerli)
 Name[bs]=Diff (lokalno)
 Name[ca]=Diff (local)
 Name[ca@valencia]=Diff (local)
@@ -742,6 +767,7 @@ Name[zh_CN]=Diff (本地)
 Icon=kdesvndiff
 Exec=kdesvn exec diff %U
 Comment=Show local changes since last update
+Comment[az]=Sonuncu yenilənmədən sonrakı dəyişiklikləri göstərmək
 Comment[bs]=Prikaži lokalne promjene nakon zadnjeg ažuriranja
 Comment[ca]=Mostra els canvis locals des de l'última actualització
 Comment[ca@valencia]=Mostra els canvis locals des de l'última actualització
@@ -771,6 +797,7 @@ Comment[zh_CN]=显示上次更新后本地的更改
 
 [Desktop Action Update]
 Name=KDESvn Update
+Name[az]=KDESvn Yenilənmə
 Name[bs]=KDESvn Azuriranje
 Name[ca]=KDESvn Actualitza
 Name[ca@valencia]=KDESvn Actualitza
@@ -800,6 +827,7 @@ Exec=kdesvn exec update %U
 
 [Desktop Action Commit]
 Name=KDESvn Commit
+Name[az]=KDESvn Göndərmək
 Name[bs]=KDESvn obavezati
 Name[ca]=KDESvn Publica
 Name[ca@valencia]=KDESvn Publica
@@ -828,6 +856,7 @@ Exec=kdesvn exec commit %U
 
 [Desktop Action Checkoutto]
 Name=Checkout from a repository...
+Name[az]=Repazitoriyadan almaq...
 Name[bs]=Izdvoji iz spremišta...
 Name[ca]=Obtén des d'un repositori...
 Name[ca@valencia]=Obtén des d'un repositori...
@@ -855,6 +884,7 @@ Name[zh_CN]=从仓库中检出...
 Icon=kdesvncheckout
 Exec=kdesvn exec checkoutto %U
 Comment=Checkout out files from an existing repository into this folder.
+Comment[az]=Faylları bu qovluq daxilindəki mövcud repazitoriyadan almaq
 Comment[bs]=Izdvoji izlazne datoteke sa postojećeg spremišta u ovaj direktorij.
 Comment[ca]=Recupera fitxers des d'un repositori existent cap aquesta carpeta.
 Comment[ca@valencia]=Recupera fitxers des d'un repositori existent cap aquesta carpeta.
@@ -884,6 +914,7 @@ Comment[zh_CN]=从已有仓库中检出文件并存放至此文件夹。
 
 [Desktop Action Exportto]
 Name=Export from a Subversion repository...
+Name[az]=Subversion repazitoriyasından almaq...
 Name[bs]=Izvoz iz Subversion repozitorija...
 Name[ca]=Exporta des d'un repositori de Subversion...
 Name[ca@valencia]=Exporta des d'un repositori de Subversion...
@@ -912,6 +943,7 @@ Name[zh_CN]=从 Subversion 仓库导出...
 Icon=kdesvnexport
 Exec=kdesvn exec exportto %U
 Comment=Checkout out an unversioned copy of a tree from a repository
+Comment[az]=AArdıcıllığın versiyalanmamış nüsxəsini repazitoriyadan almaq
 Comment[bs]=Izvezi bezverzijsku kopiju stabla iz repozitorija
 Comment[ca]=Exporta una còpia sense versió d'un arbre des del repositori
 Comment[ca@valencia]=Exporta una còpia sense versió d'un arbre des del repositori
@@ -941,6 +973,7 @@ Comment[zh_CN]=从仓库中检出无版本副本
 
 [Desktop Action Tree]
 Name=Display revision tree
+Name[az]=Dəyişim ardıcıllığını göstərmək
 Name[bs]=Prikaz stabla revizija
 Name[ca]=Mostra l'arbre de revisions
 Name[ca@valencia]=Mostra l'arbre de revisions
@@ -969,6 +1002,7 @@ Name[zh_CN]=显示修订树
 Icon=kdesvnlog
 Exec=kdesvn exec tree %U
 Comment=Show complete revision tree
+Comment[az]=Tamamlanmış dəyişim ardıcıllığını göstərmək
 Comment[bs]=Prikazi kompletno revizija stablo
 Comment[ca]=Mostra l'arbre de revisions complet
 Comment[ca@valencia]=Mostra l'arbre de revisions complet

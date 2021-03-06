@@ -91,7 +91,7 @@ kdesvn::kdesvn()
     // this routine will find and load our Part.  it finds the Part by
     // name which is a bad idea usually.. but it's alright in this
     // case since our Part is made for this Shell
-    KPluginLoader loader(QStringLiteral("kdesvnpart"));
+    KPluginLoader loader(QStringLiteral("kf5/parts/kdesvnpart"));
     KPluginFactory *factory = loader.factory();
     if (factory) {
         m_part = factory->create<KParts::ReadOnlyPart>(this);

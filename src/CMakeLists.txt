@@ -71,6 +71,7 @@ add_subdirectory(icons)
 
 add_executable(kdesvn ${kdesvnsrc})
 add_library(kdesvnpart MODULE ${partsrc})
+kcoreaddons_desktop_to_json(kdesvnpart kdesvnpart.desktop)
 
 target_link_libraries(kdesvnpart
     svnfrontend
@@ -98,9 +99,10 @@ target_link_libraries(kdesvn
     kdesvnhelpers
 )
 
-install(TARGETS kdesvn kdesvnaskpass kdesvnpart
-    ${INSTALL_TARGETS_DEFAULT_ARGS}
-    LIBRARY DESTINATION ${PLUGIN_INSTALL_DIR})
+install(TARGETS kdesvn kdesvnaskpass
+    ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+
+install(TARGETS kdesvnpart DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/parts)
 
 # the resources
 install(FILES kdesvnui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/kdesvn)

@@ -49,7 +49,7 @@ int CommandLine::exec()
 #ifdef EXTRA_KDE_LIBPATH
     QCoreApplication::addLibraryPath(QString::fromLocal8Bit(EXTRA_KDE_LIBPATH));
 #endif
-    KPluginLoader loader(QStringLiteral("kdesvnpart"));
+    KPluginLoader loader(QStringLiteral("kf5/parts/kdesvnpart"));
     KPluginFactory *factory = loader.factory();
     if (factory) {
         QObject *_p = (factory->create<QObject>(QStringLiteral("commandline_part"), nullptr));

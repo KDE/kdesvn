@@ -46,7 +46,7 @@
 #include <khelpclient.h>
 #include <kpluginfactory.h>
 
-K_PLUGIN_FACTORY(KdesvnFactory, registerPlugin<kdesvnpart>(); registerPlugin<commandline_part>(QStringLiteral("commandline_part"));)
+K_PLUGIN_FACTORY_WITH_JSON(KdesvnFactory, "kdesvnpart.json", registerPlugin<kdesvnpart>(); registerPlugin<commandline_part>(QStringLiteral("commandline_part"));)
 
 static const char version[] = KDESVN_VERSION;
 

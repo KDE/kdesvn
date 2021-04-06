@@ -114,7 +114,7 @@ set_property(TARGET svnqt APPEND PROPERTY COMPILE_FLAGS ${APR_CPP_FLAGS})
 set_property(TARGET svnqt PROPERTY CXX_VISIBILITY_PRESET hidden)
 
 if(Backtrace_FOUND)
-     target_include_directories(svnqt PUBLIC SYSTEM ${Backtrace_INCLUDE_DIRS})
+     target_include_directories(svnqt SYSTEM PUBLIC ${Backtrace_INCLUDE_DIRS})
      target_link_libraries(svnqt PUBLIC ${Backtrace_LIBRARY})
 endif()
 

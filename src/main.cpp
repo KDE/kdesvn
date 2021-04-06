@@ -49,8 +49,6 @@ int main(int argc, char **argv)
     KAboutData::setApplicationData(aboutData);
 
     QCommandLineParser parser;
-    parser.addVersionOption();
-    parser.addHelpOption();
     parser.addOption({QStringLiteral("r"), i18n("Execute single Subversion command on specific revision(-range)"), i18n("startrev[:endrev]")});
     parser.addOption({QStringLiteral("R"), i18n("Ask for revision when executing single command")});
     parser.addOption({QStringLiteral("f"), i18n("Force operation")});

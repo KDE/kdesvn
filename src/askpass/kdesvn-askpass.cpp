@@ -38,8 +38,6 @@ int main(int argc, char **argv)
                          i18n("Copyright (c) 2005-2009 Rajko Albrecht"));
     QCommandLineParser parser;
     KAboutData::setApplicationData(aboutData);
-    parser.addVersionOption();
-    parser.addHelpOption();
     parser.addPositionalArgument(QStringLiteral("[prompt]"), i18n("Prompt"));
     aboutData.setupCommandLine(&parser);
     parser.process(app);

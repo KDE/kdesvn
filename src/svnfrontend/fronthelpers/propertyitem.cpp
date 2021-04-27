@@ -18,7 +18,6 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "propertyitem.h"
-#include <kiconloader.h>
 
 PropertyListViewItem::PropertyListViewItem(QTreeWidget *parent, const QString &aStartName, const QString &aStartValue)
     : QTreeWidgetItem(parent, _RTTI_)
@@ -52,7 +51,7 @@ bool PropertyListViewItem::different()const
 void PropertyListViewItem::deleteIt()
 {
     m_deleted = true;
-    setIcon(0, KIconLoader::global()->loadIcon(QStringLiteral("dialog-cancel"), KIconLoader::Desktop, 16));
+    setIcon(0, QIcon::fromTheme(QStringLiteral("dialog-cancel")));
 }
 
 void PropertyListViewItem::unDeleteIt()

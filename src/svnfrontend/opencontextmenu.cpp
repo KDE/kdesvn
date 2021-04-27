@@ -19,7 +19,6 @@
  ***************************************************************************/
 #include "opencontextmenu.h"
 
-#include <KIconLoader>
 #include <KLocalizedString>
 #include <KRun>
 #include <QAction>

@@ -349,6 +349,7 @@ bool MainTreeWidget::openUrl(const QUrl &url, bool noReinit)
 void MainTreeWidget::clear()
 {
     m_Data->m_Model->clear();
+    m_TreeView->setRootIndex(QModelIndex());
 }
 
 svn::Revision MainTreeWidget::baseRevision()const

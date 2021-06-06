@@ -349,6 +349,7 @@ bool MainTreeWidget::openUrl(const QUrl &url, bool noReinit)
 void MainTreeWidget::clear()
 {
     m_Data->m_Model->clear();
+    m_TreeView->setRootIndex(QModelIndex());
 }
 
 svn::Revision MainTreeWidget::baseRevision()const
@@ -381,7 +382,6 @@ SvnItemList MainTreeWidget::SelectionList()const
 {
     SvnItemList ret;
     const QModelIndexList _mi = m_TreeView->selectionModel()->selectedRows(0);
-    ret.reserve(_mi.size());
     if (_mi.isEmpty()) {
         QModelIndex ind = m_TreeView->rootIndex();
         if (ind.isValid()) {
@@ -390,6 +390,7 @@ SvnItemList MainTreeWidget::SelectionList()const
         }
         return ret;
     }
+    ret.reserve(_mi.size());
     for (const QModelIndex &idx : _mi) {
         ret.push_back(m_Data->sourceNode(idx, false));
     }

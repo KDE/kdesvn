@@ -28,8 +28,7 @@ set(kded_kdesvnd_src
 
 qt5_add_dbus_adaptor( kded_kdesvnd_src org.kde.kdesvnd.xml kdesvnd.h kdesvnd)
 
-kcoreaddons_add_plugin(kded_kdesvnd INSTALL_NAMESPACE "kf5/kded" JSON ${CMAKE_CURRENT_SOURCE_DIR}/kdesvnd.desktop SOURCES ${kded_kdesvnd_src})
-kcoreaddons_desktop_to_json(kded_kdesvnd ${CMAKE_CURRENT_SOURCE_DIR}/kdesvnd.desktop)
+kcoreaddons_add_plugin(kded_kdesvnd INSTALL_NAMESPACE "kf5/kded" SOURCES ${kded_kdesvnd_src})
 set_target_properties(kded_kdesvnd PROPERTIES
     OUTPUT_NAME kdesvnd
 )

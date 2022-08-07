@@ -215,7 +215,7 @@ int CommandExec::exec(const QCommandLineParser *parser)
 
     bool found = connect(this, SIGNAL(executeMe()), this, slotCmd.constData());
     if (!found) {
-        KMessageBox::sorry(nullptr,
+        KMessageBox::error(nullptr,
                            i18n("Command \"%1\" not implemented or known", m_pCPart->cmd),
                            i18n("SVN Error"));
         return -1;
@@ -336,7 +336,7 @@ int CommandExec::exec(const QCommandLineParser *parser)
 void CommandExec::clientException(const QString &what)
 {
     m_pCPart->Stderr << what << endl;
-    KMessageBox::sorry(nullptr, what, i18n("SVN Error"));
+    KMessageBox::error(nullptr, what, i18n("SVN Error"));
 }
 
 

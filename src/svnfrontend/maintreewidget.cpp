@@ -989,7 +989,7 @@ void MainTreeWidget::readSupportData()
 void MainTreeWidget::slotClientException(const QString &what)
 {
     emit sigLogMessage(what);
-    KMessageBox::sorry(QApplication::activeModalWidget(), what, i18n("SVN Error"));
+    KMessageBox::error(QApplication::activeModalWidget(), what, i18n("SVN Error"));
 }
 
 void MainTreeWidget::slotCacheDataChanged()
@@ -1831,7 +1831,7 @@ void MainTreeWidget::slotMkdir()
     QString parentDir;
     if (k) {
         if (!k->isDir()) {
-            KMessageBox::sorry(nullptr, i18n("May not make subdirectories of a file"));
+            KMessageBox::error(nullptr, i18n("May not make subdirectories of a file"));
             return;
         }
         parentDir = k->fullName();
@@ -2133,7 +2133,7 @@ void MainTreeWidget::slotChangeToRepository()
         return;
     }
     if (i.reposRoot().isEmpty()) {
-        KMessageBox::sorry(QApplication::activeModalWidget(), i18n("Could not retrieve repository of working copy."), i18n("SVN Error"));
+        KMessageBox::error(QApplication::activeModalWidget(), i18n("Could not retrieve repository of working copy."), i18n("SVN Error"));
     } else {
         emit sigSwitchUrl(i.reposRoot());
     }
@@ -2142,16 +2142,16 @@ void MainTreeWidget::slotChangeToRepository()
 void MainTreeWidget::slotCheckNewItems()
 {
     if (!isWorkingCopy()) {
-        KMessageBox::sorry(nullptr, i18n("Only in working copy possible."), i18n("Error"));
+        KMessageBox::error(nullptr, i18n("Only in working copy possible."), i18n("Error"));
         return;
     }
     if (selectionCount() > 1) {
-        KMessageBox::sorry(nullptr, i18n("Only on single folder possible"), i18n("Error"));
+        KMessageBox::error(nullptr, i18n("Only on single folder possible"), i18n("Error"));
         return;
     }
     SvnItem *w = SelectedOrMain();
     if (!w) {
-        KMessageBox::sorry(nullptr, i18n("Sorry - internal error"), i18n("Error"));
+        KMessageBox::error(nullptr, i18n("Sorry - internal error"), i18n("Error"));
         return;
     }
     m_Data->m_Model->svnWrapper()->checkAddItems(w->fullName(), true);
@@ -2345,7 +2345,7 @@ void MainTreeWidget::slotRepositorySettings()
         return;
     }
     if (inf.reposRoot().isEmpty()) {
-        KMessageBox::sorry(QApplication::activeModalWidget(), i18n("Could not retrieve repository."), i18n("SVN Error"));
+        KMessageBox::error(QApplication::activeModalWidget(), i18n("Could not retrieve repository."), i18n("SVN Error"));
     } else {
         DbSettings::showSettings(inf.reposRoot().toString(), this);
     }

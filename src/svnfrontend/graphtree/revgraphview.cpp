@@ -1001,5 +1001,5 @@ void RevGraphView::setBasePath(const QString &_path)
 
 void RevGraphView::slotClientException(const QString &what)
 {
-    KMessageBox::sorry(QApplication::activeModalWidget(), what, i18n("SVN Error"));
+    KMessageBox::error(QApplication::activeModalWidget(), what, i18n("SVN Error"));
 }

@@ -24,8 +24,12 @@ if(POLICY CMP0063)
   cmake_policy(SET CMP0063 NEW) # Honor visibility properties for all target types (since cmake 3.3)
 endif()
 
+set(QT_MIN_VERSION "5.15.2")
+set(KF_MIN_VERSION "5.86.0")
+set(KDE_COMPILERSETTINGS_LEVEL "5.84.0")
+
 # Where to look for Findxxx.cmake modules
-find_package(ECM 5.10.0 REQUIRED NO_MODULE)
+find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_SOURCE_DIR}/src/svnqt/cmake)
 # Automatically include the current source and binary dirs
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -41,14 +45,14 @@ include(KDECMakeSettings)
 include(FeatureSummary)
 include(ECMInstallIcons)
 
-find_package(KF5 REQUIRED COMPONENTS
+find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     Bookmarks Codecs Completion Config
     ConfigWidgets CoreAddons DBusAddons DocTools
     I18n IconThemes ItemViews JobWidgets KIO
     Notifications Parts Service TextWidgets
     Wallet WidgetsAddons XmlGui
 )
-set(QT_MIN_VERSION 5.9.0)
+
 find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS
     Core DBus Gui Sql Widgets Xml
 )

@@ -39,7 +39,6 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KPluginFactory>
-#include <KPluginLoader>
 #include <KRecentFilesAction>
 #include <KStandardAction>
 #include <KToggleAction>
@@ -91,72 +90,66 @@ kdesvn::kdesvn()
     // this routine will find and load our Part.  it finds the Part by
     // name which is a bad idea usually.. but it's alright in this
     // case since our Part is made for this Shell
-    KPluginLoader loader(QStringLiteral("kf5/parts/kdesvnpart"));
-    KPluginFactory *factory = loader.factory();
-    if (factory) {
-        m_part = factory->create<KParts::ReadOnlyPart>(this);
-        if (m_part) {
-            // tell the KParts::MainWindow that this is indeed the main widget
-            setCentralWidget(m_part->widget());
-            connect(this, SIGNAL(sigSavestate()), m_part->widget(), SLOT(slotSavestate()));
-            connect(m_part->widget(), SIGNAL(sigExtraStatusMessage(QString)), this, SLOT(slotExtraStatus(QString)));
-            connect(m_part->widget(), SIGNAL(sigUrlOpened(bool)), this, SLOT(slotUrlOpened(bool)));
+    KPluginMetaData md(QStringLiteral("kf5/parts/kdesvnpart"));
+    const auto result = KPluginFactory::instantiatePlugin<KParts::ReadOnlyPart>(md, this);
+    if (result) {
+        m_part = result.plugin;
 
-            QAction *tmpAction;
-            tmpAction = actionCollection()->addAction(QStringLiteral("subversion_create_repo"),
-                                                      m_part->widget(),
-                                                      SLOT(slotCreateRepo()));
-            tmpAction->setText(i18n("Create and open new repository"));
-            tmpAction->setToolTip(i18n("Create and opens a new local Subversion repository"));
+        // tell the KParts::MainWindow that this is indeed the main widget
+        setCentralWidget(m_part->widget());
+        connect(this, SIGNAL(sigSavestate()), m_part->widget(), SLOT(slotSavestate()));
+        connect(m_part->widget(), SIGNAL(sigExtraStatusMessage(QString)), this, SLOT(slotExtraStatus(QString)));
+        connect(m_part->widget(), SIGNAL(sigUrlOpened(bool)), this, SLOT(slotUrlOpened(bool)));
 
-            tmpAction = actionCollection()->addAction(QStringLiteral("subversion_dump_repo"),
-                                                      m_part->widget(),
-                                                      SLOT(slotDumpRepo()));
-            tmpAction->setText(i18n("Dump repository to file"));
-            tmpAction->setToolTip(i18n("Dump a Subversion repository to a file"));
+        QAction *tmpAction;
+        tmpAction = actionCollection()->addAction(QStringLiteral("subversion_create_repo"),
+                                                    m_part->widget(),
+                                                    SLOT(slotCreateRepo()));
+        tmpAction->setText(i18n("Create and open new repository"));
+        tmpAction->setToolTip(i18n("Create and opens a new local Subversion repository"));
 
-            tmpAction = actionCollection()->addAction(QStringLiteral("subversion_hotcopy_repo"),
-                                                      m_part->widget(),
-                                                      SLOT(slotHotcopy()));
-            tmpAction->setText(i18n("Hotcopy a repository"));
-            tmpAction->setToolTip(i18n("Hotcopy a Subversion repository to a new folder"));
+        tmpAction = actionCollection()->addAction(QStringLiteral("subversion_dump_repo"),
+                                                    m_part->widget(),
+                                                    SLOT(slotDumpRepo()));
+        tmpAction->setText(i18n("Dump repository to file"));
+        tmpAction->setToolTip(i18n("Dump a Subversion repository to a file"));
 
-            tmpAction = actionCollection()->addAction(QStringLiteral("subversion_load_repo"),
-                                                      m_part->widget(),
-                                                      SLOT(slotLoaddump()));
-            tmpAction->setText(i18n("Load dump into repository"));
-            tmpAction->setToolTip(i18n("Load a dump file into a repository."));
+        tmpAction = actionCollection()->addAction(QStringLiteral("subversion_hotcopy_repo"),
+                                                    m_part->widget(),
+                                                    SLOT(slotHotcopy()));
+        tmpAction->setText(i18n("Hotcopy a repository"));
+        tmpAction->setToolTip(i18n("Hotcopy a Subversion repository to a new folder"));
 
-            tmpAction = actionCollection()->addAction(QStringLiteral("kdesvn_ssh_add"),
-                                                      m_part,
-                                                      SLOT(slotSshAdd()));
-            tmpAction->setText(i18n("Add ssh identities to ssh-agent"));
-            tmpAction->setToolTip(i18n("Force add ssh-identities to ssh-agent for future use."));
+        tmpAction = actionCollection()->addAction(QStringLiteral("subversion_load_repo"),
+                                                    m_part->widget(),
+                                                    SLOT(slotLoaddump()));
+        tmpAction->setText(i18n("Load dump into repository"));
+        tmpAction->setToolTip(i18n("Load a dump file into a repository."));
 
-            tmpAction = actionCollection()->addAction(QStringLiteral("help_about_kdesvnpart"),
-                                                      m_part,
-                                                      SLOT(showAboutApplication()));
-            tmpAction->setText(i18n("Info about kdesvn part"));
-            tmpAction->setToolTip(i18n("Shows info about the kdesvn plugin and not the standalone application."));
+        tmpAction = actionCollection()->addAction(QStringLiteral("kdesvn_ssh_add"),
+                                                    m_part,
+                                                    SLOT(slotSshAdd()));
+        tmpAction->setText(i18n("Add ssh identities to ssh-agent"));
+        tmpAction->setToolTip(i18n("Force add ssh-identities to ssh-agent for future use."));
 
-            tmpAction = actionCollection()->addAction(QStringLiteral("db_show_status"),
-                                                      m_part,
-                                                      SLOT(showDbStatus()));
-            tmpAction->setText(i18n("Show database content"));
-            tmpAction->setToolTip(i18n("Show the content of log cache database"));
+        tmpAction = actionCollection()->addAction(QStringLiteral("help_about_kdesvnpart"),
+                                                    m_part,
+                                                    SLOT(showAboutApplication()));
+        tmpAction->setText(i18n("Info about kdesvn part"));
+        tmpAction->setToolTip(i18n("Shows info about the kdesvn plugin and not the standalone application."));
 
-            // and integrate the part's GUI with the shells
-            createGUI(m_part);
+        tmpAction = actionCollection()->addAction(QStringLiteral("db_show_status"),
+                                                    m_part,
+                                                    SLOT(showDbStatus()));
+        tmpAction->setText(i18n("Show database content"));
+        tmpAction->setToolTip(i18n("Show the content of log cache database"));
 
-        } else {
-            KMessageBox::error(this, i18n("Could not load the part:\n%1", loader.errorString()));
-            qApp->quit();
-            return;
-        }
+        // and integrate the part's GUI with the shells
+        createGUI(m_part);
     } else {
         // if we couldn't find our Part, we exit since the Shell by
         // itself can't do anything useful
-        KMessageBox::error(this, i18n("Could not find our part:\n%1", loader.errorString()));
+        KMessageBox::error(this, i18n("Could not load our part:\n%1", result.errorString));
         qApp->quit();
         // we return here, cause kapp->quit() only means "exit the
         // next time we enter the event loop...

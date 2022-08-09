@@ -19,9 +19,6 @@
 project(kdesvn)
 set(PACKAGENAME "${CMAKE_PROJECT_NAME}")
 cmake_minimum_required(VERSION 3.1.0)
-if(POLICY CMP0063)
-  CMAKE_POLICY(SET CMP0063 NEW) # Honor visibility properties for all target types.
-endif()
 
 if(POLICY CMP0063)
   cmake_policy(SET CMP0063 NEW) # Honor visibility properties for all target types (since cmake 3.3)

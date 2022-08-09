@@ -48,7 +48,7 @@
 #include <kmessagebox.h>
 #include <kactioncollection.h>
 #include <kauthorized.h>
-#include <kmimetypetrader.h>
+#include <kapplicationtrader.h>
 #include <kio/deletejob.h>
 #include <kio/copyjob.h>
 #include <unistd.h>
@@ -914,11 +914,11 @@ KService::List MainTreeWidget::offersList(SvnItem *item, bool execOnly) const
     if (!item->mimeType().isValid()) {
         return offers;
     }
-    QString constraint(QLatin1String("(DesktopEntryName != 'kdesvn') and (Type == 'Application')"));
-    if (execOnly) {
-        constraint += QLatin1String(" and (exist Exec)");
-    }
-    offers = KMimeTypeTrader::self()->query(item->mimeType().name(), QString::fromLatin1("Application"), constraint);
+
+    offers = KApplicationTrader::queryByMimeType(item->mimeType().name(), [](const KService::Ptr service) {
+        return service->desktopEntryName() != QLatin1String("org.kde.kdesvn");
+    });
+
     return offers;
 }
 

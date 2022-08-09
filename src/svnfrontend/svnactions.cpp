@@ -66,8 +66,8 @@
 #include <klocalizedstring.h>
 #include <kmessagebox.h>
 #include <kconfig.h>
-#include <kmimetypetrader.h>
-#include <krun.h>
+#include <KApplicationTrader>
+#include <KIO/ApplicationLauncherJob>
 
 #include <QApplication>
 #include <QDesktopServices>
@@ -593,24 +593,15 @@ void SvnActions::slotMakeCat(const svn::Revision &start, const QString &what, co
     EMIT_FINISHED;
     QMimeDatabase db;
     const QMimeType mimeType(db.mimeTypeForFile(tname));
-    KService::List offers = KMimeTypeTrader::self()->query(mimeType.name(),
-                                                           QLatin1String("Application"),
-                                                           QLatin1String("Type == 'Application' or (exist Exec)"));
-    if (offers.isEmpty() || offers.first()->exec().isEmpty()) {
-        offers = KMimeTypeTrader::self()->query(mimeType.name(),
-                                                QLatin1String("Application"),
-                                                QLatin1String("Type == 'Application'"));
-    }
-    KService::List::ConstIterator it = offers.constBegin();
-    for (const auto &offer : qAsConst(offers)) {
-        if (offer->noDisplay()) {
-            continue;
-        }
-        break;
-    }
-    if (it != offers.constEnd()) {
+
+    const auto service = KApplicationTrader::preferredService(mimeType.name());
+
+    if (service) {
         content.setAutoRemove(false);
-        KRun::runService(**it, QList<QUrl>() << QUrl::fromLocalFile(tname), QApplication::activeWindow(), true);
+        auto *job = new KIO::ApplicationLauncherJob(service);
+        job->setUrls({QUrl::fromLocalFile(tname)});
+        job->setRunFlags(KIO::ApplicationLauncherJob::DeleteTemporaryFiles);
+        job->start();
         return;
     }
 

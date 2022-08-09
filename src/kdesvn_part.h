@@ -103,7 +103,6 @@ protected slots:
     virtual void slotEnableNetwork(bool);
 };
 
-class commandline_part;
 class KCmdLineArgs;
 
 class KdesvnBrowserExtension : public KParts::BrowserExtension

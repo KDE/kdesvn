@@ -82,7 +82,6 @@ option(TESTINGBUILD "Enable/Disable special testing flags" OFF)
 if(TESTINGBUILD)
     add_definitions(-DTESTING_RC=\"\\\"${CMAKE_SOURCE_DIR}/src/kdesvnui.rc\\\"\" -DTESTING_PARTRC=\"\\\"${CMAKE_SOURCE_DIR}/src/kdesvn_part.rc\\\"\")
     add_definitions(-DFORCE_ASKPASS=\"\\\"${CMAKE_BINARY_DIR}/bin/kdesvnaskpass\\\"\")
-    add_definitions(-DEXTRA_KDE_LIBPATH=\"\\\"${PROJECT_BINARY_DIR}/lib\\\"\")
     add_definitions(-DDEBUG_TIMER=1)
 endif()
 

@@ -28,7 +28,6 @@
 #include "settings/cmdexecsettings_impl.h"
 #include "settings/polling_settings_impl.h"
 #include "kdesvnview.h"
-#include "commandline_part.h"
 #include "svnqt/version_check.h"
 #include "svnqt/url.h"
 #include "helpers/kdesvn_debug.h"
@@ -46,7 +45,7 @@
 #include <khelpclient.h>
 #include <kpluginfactory.h>
 
-K_PLUGIN_FACTORY_WITH_JSON(KdesvnFactory, "kdesvnpart.json", registerPlugin<kdesvnpart>(); registerPlugin<commandline_part>(QStringLiteral("commandline_part"));)
+K_PLUGIN_CLASS_WITH_JSON(kdesvnpart, "kdesvnpart.json")
 
 static const char version[] = KDESVN_VERSION;
 

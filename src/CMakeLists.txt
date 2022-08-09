@@ -51,12 +51,11 @@ else()
 endif()
 
 set(partsrc
-    commandline_part.cpp
     kdesvn_part.cpp
     kdesvnview.cpp
 )
 
-set(partsrc ${partsrc} kdesvn_part.h kdesvnview.h commandline_part.h)
+set(partsrc ${partsrc} kdesvn_part.h kdesvnview.h)
 set(kdesvnsrc ${kdesvnsrc} ${kdesvn_ui} kdesvn.h urldlg.h commandline.h)
 
 add_subdirectory(svnqt)
@@ -99,6 +98,8 @@ target_link_libraries(kdesvn
     KF5::Parts
     KF5::Bookmarks
     kdesvnhelpers
+    svnfrontend
+    svnbackground
 )
 
 install(TARGETS kdesvn kdesvnaskpass

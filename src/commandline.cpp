@@ -18,12 +18,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "commandline.h"
-#include "kdesvn_part.h"
-#include "commandline_part.h"
-#include <KPluginFactory>
-#include <KPluginLoader>
 #include <KHelpClient>
 #include <QCommandLineParser>
+
+#include "commandexec.h"
 
 CommandLine::CommandLine(const QCommandLineParser *parser)
     : m_parser(parser)
@@ -46,21 +44,10 @@ int CommandLine::exec()
         displayHelp();
         return 0;
     }
-#ifdef EXTRA_KDE_LIBPATH
-    QCoreApplication::addLibraryPath(QString::fromLocal8Bit(EXTRA_KDE_LIBPATH));
-#endif
-    KPluginLoader loader(QStringLiteral("kf5/parts/kdesvnpart"));
-    KPluginFactory *factory = loader.factory();
-    if (factory) {
-        QObject *_p = (factory->create<QObject>(QStringLiteral("commandline_part"), nullptr));
-        if (!_p || QString::fromLatin1(_p->metaObject()->className()) != QLatin1String("commandline_part")) {
-            return 0;
-        }
-        commandline_part *cpart = static_cast<commandline_part *>(_p);
-        int res = cpart->exec(m_parser);
-        return res;
-    }
-    return 0;
+
+    CommandExec exec(nullptr);
+
+    return exec.exec(m_parser);
 }
 
 void CommandLine::displayHelp()

@@ -84,9 +84,6 @@ kdesvn::kdesvn()
     m_pBookmarkMenu = new KBookmarkMenu(m_BookmarkManager, this, m_BookmarksActionmenu->menu(), m_Bookmarkactions);
     m_pBookmarkMenu->setParent(this); // clear when kdesvn window gets destroyed
 
-#ifdef EXTRA_KDE_LIBPATH
-    QCoreApplication::addLibraryPath(QString::fromLocal8Bit(EXTRA_KDE_LIBPATH))
-#endif
     // this routine will find and load our Part.  it finds the Part by
     // name which is a bad idea usually.. but it's alright in this
     // case since our Part is made for this Shell

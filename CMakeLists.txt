@@ -128,4 +128,6 @@ add_custom_target(apidox
     "doxygen" "${CMAKE_BINARY_DIR}/Doxyfile"
     DEPENDS "${CMAKE_BINARY_DIR}/Doxyfile")
 
+ki18n_install(po)
+
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

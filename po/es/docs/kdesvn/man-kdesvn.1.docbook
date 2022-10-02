@@ -1,0 +1,203 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Spanish "INCLUDE">
+]>
+
+<refentry lang="&language;" id='kdesvn1'>
+<refentryinfo>
+<title
+>Manual del usuario de kdesvn</title>
+<author
+><personname
+> <firstname
+>Rajko</firstname
+> <surname
+>Albrecht</surname
+> </personname
+> <email
+>ral@alwins-world.de</email
+></author>
+<date
+>2016-05-22</date>
+<releaseinfo
+>kdesvn 2.1.0</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kdesvn</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kdesvn</command
+></refname>
+<refpurpose
+>Un cliente de Subversion para KDE (aplicación autónoma)</refpurpose>
+</refnamediv>
+<!-- body begins here -->
+<refsynopsisdiv id='synopsis'>
+<cmdsynopsis
+><command
+>kdesvn</command
+> <arg choice="opt"
+><replaceable
+>opciones</replaceable
+></arg
+> <arg choice="plain"
+><replaceable
+>ejecutar</replaceable
+></arg
+> <arg choice="plain"
+><replaceable
+>&lt;orden&gt;</replaceable
+></arg
+> <arg choice="opt"
+><replaceable
+>URL</replaceable
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+
+<refsect1 id='description'
+><title
+>Descripción</title>
+<para
+>Un cliente de Subversion para KDE (aplicación autónoma)</para>
+</refsect1>
+
+<refsect1 id='options'
+><title
+>Opciones</title>
+
+<refsect2 id='ss_arguments'
+><title
+>Argumentos:</title>
+<variablelist>
+  <varlistentry>
+  <term
+><emphasis
+>exec</emphasis
+> &lt;orden&gt;</term>
+  <listitem
+><para
+>Ejecutar orden de Subversion («exec help» para más información, que abre el centro de ayuda de KDE)</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><emphasis
+>URL</emphasis
+></term>
+  <listitem>
+<para
+>Ruta a la copia de trabajo local o a un repositorio.</para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</refsect2>
+
+<refsect2 id='options2'
+><title
+>Opciones:</title>
+<variablelist>
+  <varlistentry>
+  <term
+><option
+>-r startrev[:endrev]</option
+></term>
+  <listitem>
+<para
+>Ejecuta una orden de Subversion en una revisión (o intervalo) indicada</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-R</option
+></term>
+  <listitem>
+<para
+>Preguntar por la revisión cuando se ejecute una orden</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-f</option
+></term>
+  <listitem>
+<para
+>Forzar la operación</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-o &lt;archivo&gt;</option
+></term>
+  <listitem>
+<para
+>Guardar la salida de la orden de Subversion (por ejemplo, «cat») en el &lt;archivo&gt;</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-l &lt;número&gt;</option
+></term>
+  <listitem>
+<para
+>Limitar la salida de registro a &lt;número&gt;</para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</refsect2>
+
+</refsect1>
+
+<refsect1 id='example'>
+<title
+>Ejemplo</title>
+<para
+>kdesvn file:///<replaceable
+>ruta/a/la/copia/de/trabajo/local</replaceable
+></para>
+<para
+>kdesvn http://<replaceable
+>remoto/svn/proyecto/trunk</replaceable
+></para>
+</refsect1>
+
+<refsect1 id='see_also'>
+<title
+>Consulte también</title>
+<simplelist>
+<member
+>Dispone de documentación de usuario completa a través del &khelpcenter;. También puede introducir el URL <emphasis
+>help:/kdesvn/</emphasis
+> directamente en &konqueror; o ejecutar <emphasis
+>«khelpcenter help:/kdesvn/»</emphasis
+> en la línea de órdenes.</member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
+</simplelist>
+</refsect1>
+
+<refsect1 id='authors'
+><title
+>Autores</title>
+<literallayout
+>Rajko Albrecht &lt;ral@alwins-world.de&gt;
+</literallayout
+></refsect1>
+</refentry>
+

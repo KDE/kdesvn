@@ -1,0 +1,5853 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdesvn\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-08-17 00:19+0000\n"
+"PO-Revision-Date: 2015-02-25 23:23+0100\n"
+"Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
+"Language-Team: bosanski <bs@li.org>\n"
+"Language: bs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Launchpad (build 17341)\n"
+"X-Launchpad-Export-Date: 2015-02-15 06:22+0000\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Samir Ribić,Merseda,Timur Ćerimagić"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "Samir.ribic@etf.unsa.ba,mcamdzic1@etf.unsa.ba,tcerimagic1@etf.unsa.ba"
+
+#: src/askpass/kdesvn-askpass.cpp:35
+#, kde-format
+msgid "kdesvnaskpass"
+msgstr "kdesvnaskpass"
+
+#: src/askpass/kdesvn-askpass.cpp:36
+#, kde-format
+msgid "ssh-askpass for kdesvn"
+msgstr "ssh-askpass za kdesvn"
+
+#: src/askpass/kdesvn-askpass.cpp:38
+#, kde-format
+msgid "Copyright (c) 2005-2009 Rajko Albrecht"
+msgstr "Autorska prava (c) 2005-2009 Rajko Albrecht"
+
+#: src/askpass/kdesvn-askpass.cpp:41
+#, kde-format
+msgid "Prompt"
+msgstr "Prompt"
+
+#: src/askpass/kdesvn-askpass.cpp:53
+#, kde-format
+msgid "Please enter your password below."
+msgstr "Unesite svoju lozinku."
+
+#: src/askpass/kdesvn-askpass.cpp:74
+#, fuzzy, kde-format
+#| msgid "Password"
+msgctxt "@title:window"
+msgid "Password"
+msgstr "Lozinka"
+
+#: src/kdesvn.cpp:81
+#, kde-format
+msgid "&Bookmarks"
+msgstr "&Zabilješke"
+
+#: src/kdesvn.cpp:109
+#, kde-format
+msgid "Create and open new repository"
+msgstr "Napravi i otvori novi repozitorij"
+
+#: src/kdesvn.cpp:110
+#, kde-format
+msgid "Create and opens a new local Subversion repository"
+msgstr "Kreiraj i otvori novi lokalni Subverision repozitorij"
+
+#: src/kdesvn.cpp:115
+#, kde-format
+msgid "Dump repository to file"
+msgstr "Prebaciti repozitorij u fajl"
+
+#: src/kdesvn.cpp:116
+#, kde-format
+msgid "Dump a Subversion repository to a file"
+msgstr "Prebaci subverzijski repozitorij u fajl"
+
+#: src/kdesvn.cpp:121
+#, kde-format
+msgid "Hotcopy a repository"
+msgstr "Kopija repozitorija"
+
+#: src/kdesvn.cpp:122
+#, kde-format
+msgid "Hotcopy a Subversion repository to a new folder"
+msgstr "Zamjenska podverzija aktivne kopije u novoj datoteci"
+
+#: src/kdesvn.cpp:127
+#, kde-format
+msgid "Load dump into repository"
+msgstr "Učitaj prebacivanje u repozitorij"
+
+#: src/kdesvn.cpp:128
+#, kde-format
+msgid "Load a dump file into a repository."
+msgstr "Učitaj prebacivanje dokumenta u repozitorij."
+
+#: src/kdesvn.cpp:133
+#, kde-format
+msgid "Add ssh identities to ssh-agent"
+msgstr "Dodaj ssh identitet u ssh-agent"
+
+#: src/kdesvn.cpp:134
+#, kde-format
+msgid "Force add ssh-identities to ssh-agent for future use."
+msgstr "Brzo dodavanje ssh-identiteta u ssh-agent za kasniju upotrebu."
+
+#: src/kdesvn.cpp:139
+#, kde-format
+msgid "Info about kdesvn part"
+msgstr "Informacije o kdesvn part"
+
+#: src/kdesvn.cpp:140
+#, kde-format
+msgid "Shows info about the kdesvn plugin and not the standalone application."
+msgstr "Pokaži informacije o kdesvn plugin i ne samostalnim programima."
+
+#: src/kdesvn.cpp:145
+#, kde-format
+msgid "Show database content"
+msgstr "Pokazi sadržaj baze podataka"
+
+#: src/kdesvn.cpp:146
+#, kde-format
+msgid "Show the content of log cache database"
+msgstr "Prikaži sadržaj memorije baze podataka"
+
+#: src/kdesvn.cpp:152
+#, kde-format
+msgid ""
+"Could not load the part:\n"
+"%1"
+msgstr ""
+"Nije mogao učitati dio:\n"
+" %1"
+
+#: src/kdesvn.cpp:159
+#, kde-format
+msgid ""
+"Could not find our part:\n"
+"%1"
+msgstr ""
+"Nije mogao pronaci dio:\n"
+" %1"
+
+#: src/kdesvn.cpp:190
+#, kde-format
+msgid "Could not open URL %1"
+msgstr "Nije mogao otvoriti URL %1"
+
+#: src/kdesvn.cpp:222
+#, kde-format
+msgid "Recent opened URLs"
+msgstr "Zadnje otvarani URL-ovi"
+
+#: src/kdesvn.cpp:231
+#, kde-format
+msgid "Load last opened URL on start"
+msgstr "Učitaj zadnji otvarani URL na start"
+
+#: src/kdesvn.cpp:233
+#, kde-format
+msgid "Reload last opened URL if no one is given on command line"
+msgstr ""
+"Ponovo učitaj zadnji otvarani URL ako drugi nije zadan u komandnoj liniji"
+
+#: src/kdesvn.cpp:316
+#, kde-format
+msgid "Ready"
+msgstr "Spreman"
+
+#: src/kdesvn_part.cpp:156
+#, kde-format
+msgid "Logs follow node changes"
+msgstr "Zapisi prate izmjene na čvoru"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_ignored_files)
+#. i18n: ectx: label, entry, group (subversion)
+#: src/kdesvn_part.cpp:161 src/settings/display_settings.ui:57
+#: src/settings/kdesvn_part.kcfg:80
+#, kde-format
+msgid "Display ignored files"
+msgstr "Prikaži ignorisane fajlove"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/kdesvn_part.cpp:166 src/settings/kdesvn_part.kcfg:84
+#, kde-format
+msgid "Display unknown files"
+msgstr "Prikaži nepoznate fajlove"
+
+#: src/kdesvn_part.cpp:171
+#, kde-format
+msgid "Hide unchanged files"
+msgstr "Sakriji nepromijenjene fajlove"
+
+#: src/kdesvn_part.cpp:176
+#, kde-format
+msgid "Work online"
+msgstr "Onlajn posao"
+
+#: src/kdesvn_part.cpp:183
+#, kde-format
+msgid "Configure Kdesvn..."
+msgstr "Konfiguracije Kdesvn..."
+
+#: src/kdesvn_part.cpp:187
+#, kde-format
+msgid "About kdesvn part"
+msgstr "O kdesvn"
+
+#: src/kdesvn_part.cpp:191
+#, kde-format
+msgid "Kdesvn Handbook"
+msgstr "Kdesvn priručnik"
+
+#: src/kdesvn_part.cpp:281
+#, kde-format
+msgid ""
+"Built with Subversion library: %1\n"
+"Running Subversion library: %2"
+msgstr ""
+"Sagrađeno s Subverson bibliotekom: %1\n"
+"Pokrenuta Subversion biblioteka: %2"
+
+#: src/kdesvn_part.cpp:284
+#, kde-format
+msgid "kdesvn Part"
+msgstr "kdesvn Part"
+
+#: src/kdesvn_part.cpp:286
+#, fuzzy, kde-format
+#| msgid "A Subversion Client for KDE (dynamic Part component)"
+msgid "A Subversion Client by KDE (dynamic Part component)"
+msgstr "Podverzija klijenta za KDE(dinamični dio komponente)"
+
+#: src/kdesvn_part.cpp:288
+#, fuzzy, kde-format
+#| msgid "(C) 2005-2009 Rajko Albrecht"
+msgid ""
+"(C) 2005-2009 Rajko Albrecht,\n"
+"(C) 2015-2018 Christian Ehrlicher"
+msgstr "(C) 2005-2009 Rajko Albrecht"
+
+#: src/kdesvn_part.cpp:291
+#, kde-format
+msgid "Original author and maintainer"
+msgstr "Originalni autor i održavalac"
+
+#: src/kdesvn_part.cpp:292 src/main.cpp:47 src/main.cpp:48
+#, kde-format
+msgid "Developer"
+msgstr "Razvojni programer"
+
+#. i18n: ectx: Menu (subversion_general)
+#: src/kdesvn_part.cpp:331 src/kdesvn_part.rc:19
+#, kde-format
+msgid "General"
+msgstr "Opće"
+
+#: src/kdesvn_part.cpp:331
+#, kde-format
+msgid "General Settings"
+msgstr "Opšta podešavanja"
+
+#. i18n: ectx: Menu (subversion_main)
+#: src/kdesvn_part.cpp:333 src/kdesvn_part.rc:17 src/kdesvnui.rc:25
+#, kde-format
+msgid "Subversion"
+msgstr "Subversion"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, SubversionSettings)
+#: src/kdesvn_part.cpp:333 src/settings/subversion_settings.ui:6
+#, kde-format
+msgid "Subversion Settings"
+msgstr "Podešavanja programa Subversion"
+
+#: src/kdesvn_part.cpp:335
+#, kde-format
+msgid "Timed jobs"
+msgstr "Vremenski ograničeni posao"
+
+#: src/kdesvn_part.cpp:335
+#, kde-format
+msgid "Settings for timed jobs"
+msgstr "Podešavanja za ograničeni posao"
+
+#: src/kdesvn_part.cpp:337
+#, kde-format
+msgid "Diff & Merge"
+msgstr "Poređenje i spajanje"
+
+#: src/kdesvn_part.cpp:337
+#, kde-format
+msgid "Settings for diff and merge"
+msgstr "Podešavanja za poređenje i spajanje"
+
+#: src/kdesvn_part.cpp:339
+#, kde-format
+msgid "Colors"
+msgstr "Boje"
+
+#: src/kdesvn_part.cpp:339
+#, kde-format
+msgid "Color Settings"
+msgstr "Postavke boja"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, RevisionTreeSettings)
+#: src/kdesvn_part.cpp:341 src/settings/revisiontree_settings.ui:6
+#, kde-format
+msgid "Revision tree Settings"
+msgstr "Podešavanja revizionog stabla"
+
+#: src/kdesvn_part.cpp:341
+#, kde-format
+msgid "Revision tree"
+msgstr "Reviziono stablo"
+
+#: src/kdesvn_part.cpp:343
+#, kde-format
+msgid "KIO / Command line"
+msgstr "KIO/komandna linija"
+
+#: src/kdesvn_part.cpp:343
+#, kde-format
+msgid "Settings for command line and KIO execution"
+msgstr "Podešavanja za komandnu liniju i KIO izvršenje"
+
+#. i18n: ectx: Menu (settings)
+#: src/kdesvn_part.rc:5
+#, kde-format
+msgid "Subversion settings"
+msgstr "Podešavanje programa Subversion"
+
+#. i18n: ectx: Menu (quicksettings)
+#: src/kdesvn_part.rc:7 src/kdesvnui.rc:43
+#, kde-format
+msgid "Quick settings"
+msgstr "Brza podešavanja"
+
+#. i18n: ectx: Menu (subversion_working_copy)
+#: src/kdesvn_part.rc:49
+#, kde-format
+msgid "Working copy"
+msgstr "Radna kopija"
+
+#. i18n: ectx: Menu (subversion_repo)
+#: src/kdesvn_part.rc:75
+#, kde-format
+msgid "Repository"
+msgstr "Repozitorij"
+
+#. i18n: ectx: Menu (generic_view)
+#: src/kdesvn_part.rc:82
+#, kde-format
+msgid "View"
+msgstr "Pregled"
+
+#. i18n: ectx: Menu (log_cache)
+#: src/kdesvn_part.rc:89
+#, kde-format
+msgid "Log cache"
+msgstr "Memorija zapisa"
+
+#. i18n: ectx: Menu (help)
+#: src/kdesvn_part.rc:98 src/kdesvnui.rc:52
+#, kde-format
+msgid "&Help"
+msgstr "&Pomoć"
+
+#. i18n: ectx: Menu (local_context_single_conflicted)
+#. i18n: ectx: Menu (local_context_single_versioned)
+#. i18n: ectx: Menu (local_context_single_unversioned)
+#. i18n: ectx: Menu (local_context_multi)
+#: src/kdesvn_part.rc:106 src/kdesvn_part.rc:113 src/kdesvn_part.rc:154
+#: src/kdesvn_part.rc:162
+#, kde-format
+msgid "Actions"
+msgstr "Akcije"
+
+#. i18n: ectx: ToolBar (subversionToolBar)
+#: src/kdesvn_part.rc:242 src/kdesvnui.rc:58
+#, kde-format
+msgid "Subversion toolbar"
+msgstr "Subversion alatna traka"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: src/kdesvn_part.rc:260 src/kdesvnui.rc:62
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Glavna alatna traka"
+
+#: src/kdesvnd/kdesvnd.cpp:252
+#, fuzzy, kde-format
+#| msgid "Enter password for realm %1"
+msgctxt "@title:window"
+msgid "Enter Password for Realm %1"
+msgstr "Unesite lozinku za oblast %1"
+
+#: src/kdesvnd/kdesvnd.cpp:268 src/svnfrontend/ccontextlistener.cpp:289
+#, kde-format
+msgid "Open a file with a #PKCS12 certificate"
+msgstr "Otvori fajl sa #PKCS12 certifikatom"
+
+#: src/kdesvnd/kdesvnd.cpp:359
+#, kde-format
+msgid "Current task"
+msgstr "Trenutni zadatak"
+
+#: src/kdesvnd/kdesvnd.cpp:371
+#, kde-format
+msgid "Current transfer"
+msgstr "Trenutni transfer"
+
+#: src/kdesvnd/ksvnjobview.cpp:50
+#, kde-format
+msgid "bytes"
+msgstr ""
+
+#. i18n: ectx: Menu (file)
+#: src/kdesvnui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "&Datoteka"
+
+#. i18n: ectx: Menu (subversion_admin)
+#: src/kdesvnui.rc:10
+#, kde-format
+msgid "Subversion Admin"
+msgstr "Admin podverzije"
+
+#. i18n: ectx: Menu (database_menu)
+#: src/kdesvnui.rc:30
+#, kde-format
+msgid "Database"
+msgstr "Baza podataka"
+
+#. i18n: ectx: Menu (settings)
+#: src/kdesvnui.rc:35
+#, kde-format
+msgid "&Settings"
+msgstr "&Postavke"
+
+#: src/kdesvnview.cpp:133 src/kdesvnview.cpp:167
+#, kde-format
+msgid "Repository opened"
+msgstr "Repozitorij otvoren"
+
+#: src/kdesvnview.cpp:173
+#, kde-format
+msgid "Could not open repository"
+msgstr "Nije moguće otvoriti repozitoriji"
+
+#: src/kdesvnview.cpp:198
+#, kde-format
+msgid "No repository open"
+msgstr "Nema otvorenog repozitorija"
+
+#: src/kdesvnview.cpp:258
+#, fuzzy, kde-format
+#| msgid "Hotcopy a repository"
+msgctxt "@title:window"
+msgid "Hotcopy a Repository"
+msgstr "Kopija repozitorija"
+
+#: src/kdesvnview.cpp:276
+#, kde-format
+msgid "Hotcopy finished."
+msgstr "Aktivna kopija završena."
+
+#: src/kdesvnview.cpp:285
+#, fuzzy, kde-format
+#| msgid "Load a repository from a svndump"
+msgctxt "@title:window"
+msgid "Load a Repository From an svndump"
+msgstr "Učitaj repozitorij iz svndump"
+
+#: src/kdesvnview.cpp:335
+#, fuzzy, kde-format
+#| msgid "Load Dump"
+msgctxt "@title:window"
+msgid "Load Dump"
+msgstr "Učitaj izdvojak"
+
+#: src/kdesvnview.cpp:335
+#, kde-format
+msgid "Loading a dump into a repository."
+msgstr "Učitavam deponij u repozitorij."
+
+#: src/kdesvnview.cpp:337
+#, kde-format
+msgid "Loading dump finished."
+msgstr "Učitavanje deponija završeno."
+
+#: src/kdesvnview.cpp:347
+#, fuzzy, kde-format
+#| msgid "Dump a repository"
+msgctxt "@title:window"
+msgid "Dump a Repository"
+msgstr "Izdvoji repozitorij"
+
+#: src/kdesvnview.cpp:387
+#, fuzzy, kde-format
+#| msgid "Dump"
+msgctxt "@title:window"
+msgid "Dump"
+msgstr "Izbaci"
+
+#: src/kdesvnview.cpp:387
+#, kde-format
+msgid "Dumping a repository"
+msgstr "Prebacivanje repozitorija"
+
+#: src/kdesvnview.cpp:389
+#, kde-format
+msgid "Dump finished."
+msgstr "Prebacivanje završeno."
+
+#: src/kdesvnview.cpp:434
+#, kde-format
+msgid "Inserted %v not cached log entries of %m."
+msgstr "Uneseni %v nisu privremeno spremljeni prijavni unosi od %m."
+
+#: src/kiosvn/kiolistener.cpp:66 src/kiosvn/kiosvn.cpp:811
+#, kde-format
+msgid "Wrong or missing log (may cancel pressed)."
+msgstr ""
+
+#: src/kiosvn/kiolistener.cpp:91
+#, kde-format
+msgid "A (bin) %1"
+msgstr "A (bin) %1"
+
+#: src/kiosvn/kiolistener.cpp:93 src/kiosvn/kiolistener.cpp:129
+#, kde-format
+msgid "A %1"
+msgstr "A %1"
+
+#: src/kiosvn/kiolistener.cpp:102 src/kiosvn/kiolistener.cpp:125
+#, kde-format
+msgid "D %1"
+msgstr "D %1"
+
+#: src/kiosvn/kiolistener.cpp:105
+#, kde-format
+msgid "Restored %1."
+msgstr "Obnovljeno: %1."
+
+#: src/kiosvn/kiolistener.cpp:108
+#, kde-format
+msgid "Reverted %1."
+msgstr "Vraćeno: %1."
+
+#: src/kiosvn/kiolistener.cpp:111
+#, kde-format
+msgid ""
+"Failed to revert %1.\n"
+"Try updating instead."
+msgstr ""
+"Nisam uspio da vratim %1.\n"
+"Pokušajte da ažurirate."
+
+#: src/kiosvn/kiolistener.cpp:114
+#, kde-format
+msgid "Resolved conflicted state of %1."
+msgstr "Razriješeno sukobljeno stanje za %1."
+
+#: src/kiosvn/kiolistener.cpp:118
+#, kde-format
+msgid "Skipped missing target %1."
+msgstr "Preskočen nedostajući cilj %1."
+
+#: src/kiosvn/kiolistener.cpp:120
+#, kde-format
+msgid "Skipped %1."
+msgstr "Preskočeno: %1."
+
+#: src/kiosvn/kiolistener.cpp:173
+#, kde-format
+msgid "Finished at revision %1."
+msgstr "Završeno pri reviziji %1."
+
+#: src/kiosvn/kiolistener.cpp:175
+#, kde-format
+msgid "Update finished."
+msgstr "Nadogradnja završena."
+
+#: src/kiosvn/kiolistener.cpp:179
+#, kde-format
+msgid "Finished external at revision %1."
+msgstr "Završi vanjsko na reviziji %1."
+
+#: src/kiosvn/kiolistener.cpp:181
+#, kde-format
+msgid "Finished external."
+msgstr "Spoljašnja radnja završena."
+
+#: src/kiosvn/kiolistener.cpp:191
+#, kde-format
+msgid "Fetching external item into %1."
+msgstr "Dobavljam spoljašnju stavku u %1."
+
+#: src/kiosvn/kiolistener.cpp:195
+#, kde-format
+msgid "Status against revision: %1."
+msgstr "Stanje u odnosu na reviziju: %1."
+
+#: src/kiosvn/kiolistener.cpp:199
+#, kde-format
+msgid "Performing status on external item at %1."
+msgstr "Izvršavam stanje na spoljašnjoj stavci pri %1."
+
+#: src/kiosvn/kiolistener.cpp:202
+#, kde-format
+msgid "Sending %1."
+msgstr "Slanje %1."
+
+#: src/kiosvn/kiolistener.cpp:206
+#, kde-format
+msgid "Adding (bin) %1."
+msgstr "Dodajem (bin) %1."
+
+#: src/kiosvn/kiolistener.cpp:208
+#, kde-format
+msgid "Adding %1."
+msgstr "Dodajem %1."
+
+#: src/kiosvn/kiolistener.cpp:212
+#, kde-format
+msgid "Deleting %1."
+msgstr "Brišem %1."
+
+#: src/kiosvn/kiolistener.cpp:215
+#, kde-format
+msgid "Replacing %1."
+msgstr "Zamjenjujem %1."
+
+#: src/kiosvn/kiolistener.cpp:221
+#, kde-format
+msgid "Transmitting file data "
+msgstr "Prenosim podatke datoteka "
+
+#: src/kiosvn/kiosvn.cpp:301 src/kiosvn/kiosvn.cpp:355
+#: src/kiosvn/kiosvn.cpp:507
+#, kde-format
+msgid "Can only write on HEAD revision."
+msgstr "Smije pisati samo na HEAD reviziji."
+
+#: src/kiosvn/kiosvn.cpp:342
+#, fuzzy, kde-format
+#| msgid "Renaming %1 to %2 succesfull"
+msgid "Renaming %1 to %2 successful"
+msgstr "Uspješno preimenovanje  %1 od %2"
+
+#: src/kiosvn/kiosvn.cpp:376
+#, kde-format
+msgid "Overwriting existing items is disabled in settings."
+msgstr "Prepisivanje postojećih stavki je onemogućeno u podešavanjima."
+
+#: src/kiosvn/kiosvn.cpp:384
+#, kde-format
+msgid "Start checking out to temporary folder"
+msgstr "Počni provjeravati privremeni folder"
+
+#: src/kiosvn/kiosvn.cpp:387
+#, kde-format
+msgid "Checking out %1"
+msgstr "Provjeravanje %1"
+
+#: src/kiosvn/kiosvn.cpp:396
+#, kde-format
+msgid "Temporary checkout done."
+msgstr "Privremena provjera završena."
+
+#: src/kiosvn/kiosvn.cpp:400
+#, kde-format
+msgid "Could not write to existing item."
+msgstr "Ne može pisati u postojeći artikl."
+
+#: src/kiosvn/kiosvn.cpp:406
+#, kde-format
+msgid "Could not open temporary file"
+msgstr "Ne može se otvoriti privremena datoteka"
+
+#: src/kiosvn/kiosvn.cpp:430
+#, kde-format
+msgid "Could not retrieve data for write."
+msgstr "Ne može dostaviti podatke za pisanje."
+
+#: src/kiosvn/kiosvn.cpp:438
+#, kde-format
+msgid "Committing %1"
+msgstr "Upisujem %1"
+
+#: src/kiosvn/kiosvn.cpp:461
+#, kde-format
+msgid "Wrote %1 to repository"
+msgstr "Zapisano %1 u repozitorij"
+
+#: src/kiosvn/kiosvn.cpp:492
+#, kde-format
+msgid "Copied %1 to %2"
+msgstr "Kopirano %1 od %2"
+
+#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1062
+#: src/svnfrontend/svnactions.cpp:2221
+#, kde-format
+msgid "Committed revision %1."
+msgstr "Predata revizija %1."
+
+#: src/kiosvn/kiosvn.cpp:830
+#, kde-format
+msgid "Nothing to commit."
+msgstr "Ništa za predaju."
+
+#: src/kiosvn/kiosvn.cpp:877
+#, kde-format
+msgid "Empty logs"
+msgstr "Prazni zapisi"
+
+#: src/ksvnwidgets/authdialogwidget.cpp:35
+#, kde-format
+msgid "Store password (into KDE Wallet)"
+msgstr "Sačuvana lozinka (u KDE Wallet)"
+
+#: src/ksvnwidgets/authdialogwidget.cpp:36
+#, kde-format
+msgid "Store password (into Subversion' simple storage)"
+msgstr "Sačuvana lozinka (u Subversion' simple storage)"
+
+#: src/ksvnwidgets/authdialogwidget.cpp:38
+#, kde-format
+msgid "Enter authentication info for %1"
+msgstr "Unesite autentične podatke za %1"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, AuthDialogWidget)
+#: src/ksvnwidgets/authdlg.ui:14
+#, kde-format
+msgid "Authentication"
+msgstr "Provjera autentičnosti"
+
+#. i18n: ectx: property (text), widget (QLabel, m_PasswordLabel)
+#: src/ksvnwidgets/authdlg.ui:32
+#, kde-format
+msgid "Password:"
+msgstr "Lozinka:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_UsernameLabel)
+#: src/ksvnwidgets/authdlg.ui:52
+#, kde-format
+msgid "Username:"
+msgstr "Korisničko ime:"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, CommitMessage)
+#: src/ksvnwidgets/commitmessage.ui:6
+#, kde-format
+msgid "Commit Message"
+msgstr "Potvrdna poruka"
+
+#. i18n: ectx: property (text), widget (QLabel, m_Reviewlabel)
+#: src/ksvnwidgets/commitmessage.ui:27
+#, kde-format
+msgid "Review affected items"
+msgstr "Pregled zahvaćene stavke"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_SelectAllButton)
+#: src/ksvnwidgets/commitmessage.ui:63
+#, kde-format
+msgid "Select all"
+msgstr "Odaberi sve"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_UnselectAllButton)
+#: src/ksvnwidgets/commitmessage.ui:70
+#, kde-format
+msgid "Unselect all"
+msgstr "Poništi sve"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_HideNewItems)
+#: src/ksvnwidgets/commitmessage.ui:77 src/ksvnwidgets/commitmsg_impl.cpp:453
+#, kde-format
+msgid "Hide new items"
+msgstr "Sakrij nove stavke"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_MarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:87
+#, kde-format
+msgid "Mark all new e.g. not versioned items for add and commit."
+msgstr "Ožnači sve nove e.g nepromijenjene stavke za dodati i izvršiti."
+
+#. i18n: ectx: property (text), widget (QPushButton, m_MarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:90
+#, kde-format
+msgid "Select new items"
+msgstr "Označi nove stavke"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_UnmarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:97
+#, kde-format
+msgid "Unmark all unversioned items so they will be ignored."
+msgstr "Sve odznačene nepromijenjene stavke će biti ignorisane."
+
+#. i18n: ectx: property (text), widget (QPushButton, m_UnmarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:100
+#, kde-format
+msgid "Unselect new items"
+msgstr "Skloni oznaku sa novih stavki"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_RevertItemButton)
+#: src/ksvnwidgets/commitmessage.ui:107
+#, kde-format
+msgid "Revert highlighted item"
+msgstr "Vrati istaknute stavke"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_RevertItemButton)
+#: src/ksvnwidgets/commitmessage.ui:110
+#, kde-format
+msgid "Revert item"
+msgstr "Vrati stavke"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DiffItem)
+#: src/ksvnwidgets/commitmessage.ui:117
+#, kde-format
+msgid "Generates and display difference against repository of selected item"
+msgstr "Generiši i prikaži razliku repozitorija odabranih stavki"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DiffItem)
+#: src/ksvnwidgets/commitmessage.ui:120
+#, kde-format
+msgid "Diff item"
+msgstr "Stavka poređenja"
+
+#. i18n: ectx: property (text), widget (QLabel, m_HeadLabel)
+#: src/ksvnwidgets/commitmessage.ui:152
+#, kde-format
+msgid "Enter a log message"
+msgstr "Unesite poruku za prijavu"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, m_LogHistory)
+#: src/ksvnwidgets/commitmessage.ui:184
+#, kde-format
+msgid "Last used log messages"
+msgstr "Zadnja korištena prijavna poruka"
+
+#. i18n: ectx: property (text), widget (QLabel, m_LogLabel)
+#: src/ksvnwidgets/commitmessage.ui:199
+#, kde-format
+msgid "Or insert one of the last:"
+msgstr "Ili unesite jednu od zadnjih:"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_insert_file_button)
+#: src/ksvnwidgets/commitmessage.ui:215
+#, fuzzy, kde-format
+#| msgid "Insert Text File"
+msgid "Insert Text File..."
+msgstr "Umetni tekstualnu datoteku"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_keepLocksButton)
+#: src/ksvnwidgets/commitmessage.ui:226
+#, kde-format
+msgid "If checked commit will not release locks."
+msgstr "Ako provjereno izvršenje neće omogućiti zaključane."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_keepLocksButton)
+#: src/ksvnwidgets/commitmessage.ui:229
+#, kde-format
+msgid "Keep locks"
+msgstr "Ostavi zaključano"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:287
+#, fuzzy, kde-format
+#| msgid "Commit log"
+msgctxt "@title:window"
+msgid "Commit Log"
+msgstr "Predaj dnevnik"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:453
+#, fuzzy, kde-format
+#| msgid "Select new items"
+msgid "Show new items"
+msgstr "Označi nove stavke"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:476
+#, fuzzy, kde-format
+#| msgid "Select text file for insert"
+msgctxt "@title:window"
+msgid "Select Text File to Insert"
+msgstr "Označi tekstualnu datoteku za umetanje"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:477
+#, fuzzy, kde-format
+#| msgid "Select text file for insert"
+msgid "Select text file to insert:"
+msgstr "Označi tekstualnu datoteku za umetanje"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, DeleteForm)
+#: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1558
+#, kde-format
+msgid "Really delete these entries?"
+msgstr "Da li zaista želite obrisati ove unose?"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_forceDelete)
+#: src/ksvnwidgets/deleteform.ui:23
+#, kde-format
+msgid "Force delete of changed items"
+msgstr "Brzo brisanje promijenjenih stavki"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_keepLocal)
+#: src/ksvnwidgets/deleteform.ui:30
+#, kde-format
+msgid "Keep local copies"
+msgstr "Zadrži lokalne kopije"
+
+#. i18n: ectx: property (toolTip), widget (QComboBox, m_DepthCombo)
+#. i18n: ectx: property (statusTip), widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:29 src/ksvnwidgets/depthselector.ui:32
+#, kde-format
+msgid "Select depth of operation"
+msgstr "Odaberi veličinu operacije"
+
+#. i18n: ectx: property (whatsThis), widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:41
+#, kde-format
+msgid ""
+"<p ><b>Kind of depth</b>: </p>\n"
+"<p ><i>empty depth</i><br />\n"
+"Just the named directory, no entries. Updates will not pull in any files or "
+"subdirectories not already present. </p>\n"
+"<p><i>Files depth</i><br />Folder and its file children, but not subdirs. "
+"Updates will pull in any files not already present, but not subdirectories. "
+"</p>\n"
+"<p><i>Immediate depth</i><br />Folder and its entries. Updates will pull in "
+"any files or subdirectories not already present; those subdirectories "
+"entries will have depth-empty. </p>\n"
+"<p>\n"
+"<i>Infinity depth</i><br />Updates will pull in any files or subdirectories "
+"not already present; those subdirectories' this_dir entries will have depth-"
+"infinity.<br />Equivalent to the pre-1.5 default update behavior. </p>"
+msgstr ""
+"<p ><b>Vrsta dubine</b>: </p>\n"
+"<p ><i>prazna dubina</i><br />\n"
+"Samo nazvan direktorij, nema ulaza. Ažuriranja se neće uvući ni u kakve "
+"datoteke ili poddirektorije koji već ne postoje. </p>\n"
+"<p><i>Dubina datoteka</i><br />Mapa i njena djeca, ali ne poddirektoriji."
+"Ažuriranja će se uvući u sve datoteke koje ne postoje, ali ne i u "
+"poddirektorije. </p>\n"
+"<p><i>Trenutna dubina</i><br />Mapa i njeni ulazi. Ažuriranja će se uvući u "
+"sve datoteke i poddirektorije koji ne postoje; ti ulazi poddirektorija će "
+"imati praznu dubinu. </p>\n"
+"<p>\n"
+"<i>Neograničena dubina</i><br />Ažuriranja će se uvući u sve datoteke i "
+"poddirektorije koji ne postoje; ti ulazi' this_dir poddirektorija će imati "
+"neograničenu dubinu.<br />Ekvivalent sa pre-1.5 zadanim ponašanjem "
+"ažuriranja. </p>"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:45
+#, kde-format
+msgid "Empty Depth"
+msgstr "Prazna dubina"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:50
+#, kde-format
+msgid "Files Depth"
+msgstr "Veličina datoteke"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:55
+#, kde-format
+msgid "Immediate Depth"
+msgstr "Početna veličina"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:60
+#, kde-format
+msgid "Infinity Depth (recurse)"
+msgstr "Neograničena veličina(recurse)"
+
+#: src/ksvnwidgets/diffbrowser.cpp:50
+#, kde-format
+msgid "Ctrl-F for search, F3 or Shift-F3 for search again."
+msgstr "Ctrl-F za pretragu, F3 or Shift-F3 za ponovnu pretragu."
+
+#: src/ksvnwidgets/diffbrowser.cpp:51
+#, kde-format
+msgid ""
+"<b>Display differences between files</b><p>You may search inside text with "
+"Ctrl-F.</p><p>F3 for search forward again, Shift-F3 for search backward "
+"again.</p><p>You may save the (original) output with Ctrl-S.</p>"
+msgstr ""
+"<b>Prilaži razliku između datoteka</b><p>Možete pretraživati unutar teksta "
+"sa Ctrl-F.</p><p>F3 za ponovno pretraživanje unaprijed, Shift-F3 za ponovno "
+"pretraživanje unazad.</p><p>Možete snimiti (original) sa Ctrl-S.</p>"
+
+#: src/ksvnwidgets/diffbrowser.cpp:86
+#, kde-format
+msgid "Save diff"
+msgstr ""
+
+#: src/ksvnwidgets/diffbrowser.cpp:86
+#, kde-format
+msgid "Patch file (*.diff *.patch)"
+msgstr ""
+
+#: src/ksvnwidgets/diffbrowser.cpp:93
+#, kde-format
+msgid "File %1 exists - overwrite?"
+msgstr "Datoteka %1 postoji-prepisati?"
+
+#: src/ksvnwidgets/diffbrowser.cpp:177
+#, kde-format
+msgid ""
+"End of document reached.\n"
+"Continue from the beginning?"
+msgstr ""
+"Došao sam do kraja datoteke.\n"
+"Da nastavim pretragu od početka?"
+
+#: src/ksvnwidgets/diffbrowser.cpp:179 src/ksvnwidgets/diffbrowser.cpp:192
+#, kde-format
+msgid "Find"
+msgstr "Nađi"
+
+#: src/ksvnwidgets/diffbrowser.cpp:190
+#, kde-format
+msgid ""
+"Beginning of document reached.\n"
+"Continue from the end?"
+msgstr ""
+"Došao sam do početka datoteke.\n"
+"Da nastavim pretragu od kraja?"
+
+#. i18n: ectx: property (text), widget (QLabel, m_Mainlabel)
+#: src/ksvnwidgets/encodingselector.ui:30
+#, kde-format
+msgid "Select encoding:"
+msgstr "Izaberite kodiranje:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, m_encodingList)
+#: src/ksvnwidgets/encodingselector.ui:44
+#, kde-format
+msgid "Default UTF-8"
+msgstr "Zadana UTF-8"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
+#: src/ksvnwidgets/models/commitmodel.cpp:192 src/svnfrontend/svnlogdlg.ui:158
+#, kde-format
+msgid "Action"
+msgstr "Akcija"
+
+#: src/ksvnwidgets/models/commitmodel.cpp:195
+#, kde-format
+msgid "Entry"
+msgstr "Unos"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:33
+#: src/svnfrontend/maintreewidget.cpp:581
+#, kde-format
+msgid "Add"
+msgstr "Dodaj"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:37
+#: src/svnfrontend/ccontextlistener.cpp:65
+#: src/svnfrontend/copymoveview_impl.cpp:49
+#: src/svnfrontend/maintreewidget.cpp:522
+#, kde-format
+msgid "Copy"
+msgstr "Kopiraj"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:41
+#: src/svnfrontend/ccontextlistener.cpp:66
+#: src/svnfrontend/maintreewidget.cpp:587
+#: src/svnfrontend/maintreewidget.cpp:591 src/svnfrontend/svnactions.cpp:1016
+#, kde-format
+msgid "Delete"
+msgstr "Obriši"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:45
+#, kde-format
+msgid "Modify (content or property)"
+msgstr "Izmijeniti (sadržaj ili svojstvo)"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:49
+#: src/svnfrontend/svnactions.cpp:785
+#, kde-format
+msgid "Replace"
+msgstr "Zamijeni"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:53
+#, kde-format
+msgid "(Un)Lock"
+msgstr "Otključati/Zaključati"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, RevertForm)
+#: src/ksvnwidgets/revertform.ui:14
+#, kde-format
+msgid "Revert entries"
+msgstr "Povratiti unose"
+
+#. i18n: ectx: property (text), widget (QLabel, m_headLine)
+#: src/ksvnwidgets/revertform.ui:20
+#, kde-format
+msgid "Really revert these entries to pristine state?"
+msgstr "Stvarno želite vratiti ulaze u stare oblike?"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:33
+#, kde-format
+msgid "Accept permanently"
+msgstr "Uvijek prihvati"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:34
+#, kde-format
+msgid "Accept temporarily"
+msgstr "Prihvati privremeno"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:35
+#, kde-format
+msgid "Reject"
+msgstr "Odbaci"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:44
+#, kde-format
+msgid "Error validating server certificate for '%1'"
+msgstr "Greška prilikom potrvrđivanja server certifikata za '%1'"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:69
+#, kde-format
+msgid "Failure reasons"
+msgstr "Razlog pada"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:77
+#, kde-format
+msgid "Realm"
+msgstr "Oblast"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:78
+#, kde-format
+msgid "Host"
+msgstr "Domaćin"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:79
+#, kde-format
+msgid "Valid from"
+msgstr "Vrijedi od"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:80
+#, kde-format
+msgid "Valid until"
+msgstr "Vrijedi do"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:81
+#, kde-format
+msgid "Issuer name"
+msgstr "Ime izdavatelja"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:82
+#, kde-format
+msgid "Fingerprint"
+msgstr "Otisak prsta"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, SslTrustPrompt)
+#: src/ksvnwidgets/ssltrustprompt.ui:14
+#, kde-format
+msgid "Trust SSL certificate"
+msgstr "Provjeravanje SSL certifikata"
+
+#: src/main.cpp:32
+#, fuzzy, kde-format
+#| msgid "A Subversion Client for KDE (standalone application)"
+msgid "A Subversion Client by KDE (standalone application)"
+msgstr "Subvesion klujent za KDE(samostalne aplikacije)"
+
+#: src/main.cpp:45
+#, kde-format
+msgid "kdesvn"
+msgstr "kdesvn"
+
+#: src/main.cpp:46
+#, fuzzy, kde-format
+#| msgid "(C) 2005-2009 Rajko Albrecht"
+msgid ""
+"(C) 2005-2009 Rajko Albrecht,\n"
+"(C) 2015-2019 Christian Ehrlicher"
+msgstr "(C) 2005-2009 Rajko Albrecht"
+
+#: src/main.cpp:47
+#, kde-format
+msgid "Rajko Albrecht"
+msgstr "Rajko Albrecht"
+
+#: src/main.cpp:48
+#, kde-format
+msgid "Christian Ehrlicher"
+msgstr ""
+
+#: src/main.cpp:53
+#, kde-format
+msgid "Execute single Subversion command on specific revision(-range)"
+msgstr ""
+"Izvrši naredbu samo jedne podverzije na specifičnu reviziju ( - raspon)"
+
+#: src/main.cpp:53
+#, kde-format
+msgid "startrev[:endrev]"
+msgstr ""
+
+#: src/main.cpp:54
+#, kde-format
+msgid "Ask for revision when executing single command"
+msgstr "Pitaj za reviziju kada izvršavaš jednu naredbu"
+
+#: src/main.cpp:55
+#, kde-format
+msgid "Force operation"
+msgstr "Prisili operaciju"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Save output of Subversion command (eg \"cat\") into file <file>"
+msgstr "Sačuvaj izlaz od subverzione komande (eg \"cat\") u datoteku<file>"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "<file>"
+msgstr ""
+
+#: src/main.cpp:57
+#, kde-format
+msgid "Limit log output to <number>"
+msgstr "Ograniči izlaz na <broj>"
+
+#: src/main.cpp:57
+#, fuzzy, kde-format
+#| msgid "Number"
+msgid "<number>"
+msgstr "Broj"
+
+#: src/main.cpp:58
+#, kde-format
+msgid "Execute Subversion command (\"exec help\" for more information)"
+msgstr "Izvrši podverzionu naredbu (\"exec help\"za više informacija)"
+
+#: src/main.cpp:59
+#, kde-format
+msgid "Document to open"
+msgstr "Dokument za otvaranje"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_cmdline_show_logwindow)
+#: src/settings/cmdexecsettings.ui:11
+#, kde-format
+msgid "Show a small window containing the log after command executed"
+msgstr "Prikaži mali prozor koji sadrži prijavu poslije izvršene komande"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_cmdline_show_logwindow)
+#: src/settings/cmdexecsettings.ui:14
+#, kde-format
+msgid "Show log after executing a command"
+msgstr "Prikaži prijavu poslije izvršavanja komande"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/settings/cmdexecsettings.ui:23
+#, kde-format
+msgid "Minimum log lines to show:"
+msgstr "Minimalan broj prijavnih linija za pokazati:"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_cmdline_log_minline)
+#: src/settings/cmdexecsettings.ui:33
+#, kde-format
+msgid ""
+"The minimum a log output must contain before kdesvn shows a single log window"
+msgstr ""
+"Minimalan broj izlaza mora postojati prije nego kdesvn prikaže prijavni "
+"prozor"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, kcfg_cmdline_log_minline)
+#: src/settings/cmdexecsettings.ui:39
+#, kde-format
+msgctxt "no limit"
+msgid "No minimum"
+msgstr "Bez ograničenja"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_contextmenu)
+#: src/settings/cmdexecsettings.ui:51
+#, kde-format
+msgid "If set, kdesvn will not show a menu inside \"Action\" menu of Konqueror"
+msgstr ""
+"Ako je postavljen, kdesvn neće prikazati meni unutar \"Action\" meni  "
+"Konqueror"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_contextmenu)
+#: src/settings/cmdexecsettings.ui:54
+#, kde-format
+msgid "Do not display context menu in Konqueror"
+msgstr "Ne prikazuj context meni u Konqueror-u"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
+#: src/settings/cmdexecsettings.ui:61
+#, kde-format
+msgid ""
+"If set, kdesvn will not show some extra actions inside \"Action\" menu of "
+"Konqueror/Dolphin"
+msgstr ""
+"Ako je postavljen, kdesvn neće prikazati neke dodatne akcije unutar \"Action"
+"\" meni Konqueror-a/Dolphin"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
+#: src/settings/cmdexecsettings.ui:64
+#, kde-format
+msgid "Do not display entries in toplevel action menu"
+msgstr "Ne prikazuj ulaze na najvišem nivou akcijskog menija"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_kio_use_standard_logmsg)
+#: src/settings/cmdexecsettings.ui:71
+#, kde-format
+msgid "KIO operations use standard log message"
+msgstr "KIO operacije koriste standardnu prijavnu poruku"
+
+#. i18n: ectx: property (text), widget (QLabel, stdLogmsgLabel)
+#: src/settings/cmdexecsettings.ui:80
+#, kde-format
+msgid "Standard message:"
+msgstr "Standardna poruka:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_kio_can_overwrite)
+#: src/settings/cmdexecsettings.ui:98
+#, kde-format
+msgid "Can KIO overwrite existing files?"
+msgstr "Može li KIO pisati preko postojećeg dokumenta ?"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_kio_can_overwrite)
+#: src/settings/cmdexecsettings.ui:103
+#, kde-format
+msgid ""
+"If this flag is set, you will have a simple write support for existing "
+"items. E.g. you can open files in your editor and save them direct without "
+"checking out them before (kdesvn will do it in background).\n"
+"\n"
+"Use this only if you are sure what you are doing."
+msgstr ""
+"Ako je postavljena zastava,imat ćete jednostavne napisane poruke za "
+"postojeće stavke. E.g. možete otvoriti datoteke u vašem editoru i snimiti ih "
+"direktno bez dodatnog provjeravanja (kdesvn će to obaviti u pozadini).\n"
+"Koristite ovo samo ako ste sigurni u to šta radite."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_kio_can_overwrite)
+#: src/settings/cmdexecsettings.ui:106
+#, kde-format
+msgid "KIO can overwrite"
+msgstr "KIO može pisati preko postojećeg dokumenta"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_display_dockmsg)
+#: src/settings/cmdexecsettings.ui:113
+#, kde-format
+msgid ""
+"If set KIO shows in KDE's Plasma detailed information about current operation"
+msgstr ""
+"Ako je pokrenut KIO prikazuje na KDE-u Plasma detaljne informacije o "
+"trenutnom načinu rada"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_dockmsg)
+#: src/settings/cmdexecsettings.ui:117
+#, kde-format
+msgid ""
+"<p>If set, the kdesvn KIO shows detailed messages in KDE's Plasma control "
+"area.<br/>\n"
+"Error messages of KIO will always displayed and can <i>not</i> switched off."
+"</p>"
+msgstr ""
+"<p>Ako je pokrenut,kdesvn KIO pokazuje detaljne poruke na KDE-u Plasma "
+"kontrolnog područja.<br/>\n"
+" Poruka upozorenja uvijek se prikaže i može <i>ne</i> isključiti.</p>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_dockmsg)
+#: src/settings/cmdexecsettings.ui:120
+#, kde-format
+msgid "KIO shows progress messages"
+msgstr "KIO prikazuje poruku o napretku"
+
+#: src/settings/cmdexecsettings_impl.cpp:27
+#, fuzzy, kde-format
+#| msgid " line"
+#| msgid_plural " lines"
+msgid " line(s)"
+msgstr " linija"
+
+#. i18n: ectx: label, entry, group (general_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_content)
+#: src/settings/diffmergesettings.ui:11 src/settings/kdesvn_part.kcfg:29
+#, kde-format
+msgid "Diff ignores content type"
+msgstr "Poređenje ignoriše tip sadržaja"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_tree_diff_rec)
+#: src/settings/diffmergesettings.ui:18
+#: src/svnfrontend/graphtree/revgraphview.cpp:862
+#, kde-format
+msgid "Diff in revision tree is recursive"
+msgstr "Poređenje u revizionom stablu je rekurzivno"
+
+#. i18n: ectx: label, entry, group (general_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_spaces)
+#: src/settings/diffmergesettings.ui:25 src/settings/kdesvn_part.kcfg:33
+#, kde-format
+msgid "Diff ignores white space changes"
+msgstr "Poređenje ignoriše razmake"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_all_white_spaces)
+#: src/settings/diffmergesettings.ui:32
+#, kde-format
+msgid "Diff ignores all white spaces"
+msgstr "Poređenje ignoriše sve razmake"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_external_diff)
+#: src/settings/diffmergesettings.ui:39
+#, kde-format
+msgid ""
+"If kdesvn should use an external diff display and/or generator. If not "
+"checked use internal display."
+msgstr ""
+"Ako kdesvn treba da koristi vanjski prikaz poređenja i/ ili generator. Ako "
+"nije odabran koristi interni prikaz."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_external_diff)
+#: src/settings/diffmergesettings.ui:42
+#, kde-format
+msgid "Use external diff display"
+msgstr "Koristi vanjski prikaz poređenja"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_extern_merge_default)
+#: src/settings/diffmergesettings.ui:49
+#, kde-format
+msgid ""
+"Set if merge with external program is preferred and not Subversion's merge"
+msgstr ""
+"Postavi ako je preferentno spajanje sa vanjskim programom umjesto spajanja "
+"Podverzije"
+
+#. i18n: ectx: label, entry (extern_merge_default), group (diffmerge_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_extern_merge_default)
+#: src/settings/diffmergesettings.ui:52 src/settings/kdesvn_part.kcfg:158
+#, kde-format
+msgid "Prefer external merge program"
+msgstr "Radije koristi vanjski program spajanja"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_gitformat_default)
+#: src/settings/diffmergesettings.ui:59
+#, kde-format
+msgid "Use Git diff format"
+msgstr "Koristite Git  format za poređenje"
+
+#. i18n: ectx: label, entry, group (general_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_copies_as_add)
+#: src/settings/diffmergesettings.ui:66 src/settings/kdesvn_part.kcfg:45
+#, kde-format
+msgid "Show copies as add"
+msgstr "Prikaži kopije kao dodane"
+
+#. i18n: ectx: property (text), widget (QLabel, resolveLabel)
+#: src/settings/diffmergesettings.ui:77
+#, kde-format
+msgid "Conflict resolver program:"
+msgstr "Program za rješavanje sukoba:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/settings/diffmergesettings.ui:90
+#, kde-format
+msgid "External merge program:"
+msgstr "Vanjski program spajanja:"
+
+#. i18n: ectx: property (toolTip), widget (KLineEdit, kcfg_conflict_resolver)
+#: src/settings/diffmergesettings.ui:115
+#, kde-format
+msgid "Setup an external program for conflict resolving"
+msgstr "Postavljanje vanjskog programa za rješavanje nesuglasica"
+
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_conflict_resolver)
+#: src/settings/diffmergesettings.ui:134
+#, no-c-format, kde-format
+msgid ""
+"<p>\n"
+"Enter how kdesvn should call the conflict resolver program. The form is\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;program&gt; &lt;programoptions&gt;</tt></b>\n"
+"</p>\n"
+"<p>\n"
+"Programoption may contain the place holders for substituting with "
+"filenames.\n"
+"</p>\n"
+"The substitutions means:<br>\n"
+"<b><tt>%o</tt></b> Old version<br>\n"
+"<b><tt>%m</tt></b> Mine or local edit version<br>\n"
+"<b><tt>%n</tt></b> Newest version<br>\n"
+"<b><tt>%t</tt></b> The target to save as, kdesvn will use the original file "
+"name for it.\n"
+"</p>\n"
+"<p>\n"
+"Default: <tt>kdiff3 %o %m %n -o %t</tt>\n"
+"</p>"
+msgstr ""
+"<p>\n"
+"Unesite kako bi kdesvn trebao zvati vanjski program sukoba. Obrazac je\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;program&gt; &lt;programoptions&gt;</tt></b>\n"
+"</p>\n"
+"<p>\n"
+"Programoption mogu sadržavati nositeljsko mjesto za zamjenu s nazivima "
+"datoteka. .\n"
+"</p>\n"
+"Zamjena znači:<br>\n"
+"<b><tt>%o</tt></b> Stara verzija<br>\n"
+"<b><tt>%m</tt></b> Moja ili lokalna<br>\n"
+"<b><tt>%n</tt></b> Najnovija verzija<br>\n"
+"<b><tt>%t</tt></b> Cilj je da se snimi kao, kdesvn će koristiti originalni "
+"naziv datoteke za to.\n"
+"</p>\n"
+"<p>\n"
+"Početna: <tt>kdiff3 %o %m %n -o %t</tt>\n"
+"</p>"
+
+#. i18n: ectx: property (text), widget (QLabel, mdiff_display_label)
+#: src/settings/diffmergesettings.ui:141
+#, kde-format
+msgid "External diff display:"
+msgstr "Prikaži vanjsko poređenje:"
+
+#. i18n: ectx: property (toolTip), widget (KLineEdit, kcfg_external_merge_program)
+#: src/settings/diffmergesettings.ui:154
+#, kde-format
+msgid "Setup an external program for merging"
+msgstr "Postavljanje vanjskih programa za spajanje"
+
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_external_merge_program)
+#: src/settings/diffmergesettings.ui:166
+#, no-c-format, kde-format
+msgid ""
+"<p>\n"
+"Enter how kdesvn should call the external merge program. The form is\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;program&gt; &lt;programoptions&gt; %s1 %s2 %t</tt></b>\n"
+"</p>\n"
+"The substitutions means:<br>\n"
+"<b><tt>%s1</tt></b> Source one for merge<br>\n"
+"<b><tt>%s2</tt></b> Source two for merge, if it was not set equal to source "
+"one but other revision<br>\n"
+"<b><tt>%t</tt></b> Local target for merge.\n"
+"</p>"
+msgstr ""
+"Copy text \t\n"
+"<p>\n"
+"Unesi kako bi kdesvn pozivao vanjski program spajanja. Forma je\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;program&gt; &lt;programoptions&gt; %s1 %s2 %t</tt></b>\n"
+"</p>\n"
+"Zamjena znači:<br>\n"
+"<b><tt>%s1</tt></b> Izvor jedan za spajanje<br>\n"
+"<b><tt>%s2</tt></b> Izvor dva za spajanje, if it was not set equal to source "
+"one but other revision<br>\n"
+"<b><tt>%t</tt></b> Lokalni cilj za spajanje.\n"
+"</p>"
+
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_external_diff_display)
+#: src/settings/diffmergesettings.ui:191
+#, fuzzy, no-c-format, kde-format
+#| msgid ""
+#| "<p align=\"left\">\n"
+#| "Enter an external program in form\n"
+#| "<p align=\"center\">\n"
+#| "<tt>&lt;program&gt; &lt;param&gt; %f</tt>\n"
+#| "</p>\n"
+#| "or\n"
+#| "<p align=\"center\">\n"
+#| "<tt>&lt;program&gt; &lt;param&gt;</tt>\n"
+#| "</p>\n"
+#| "or\n"
+#| "<p align=\"center\">\n"
+#| "<tt>&lt;program&gt; &lt;param&gt; %1 %2</tt>\n"
+#| "</p>\n"
+#| "<br>\n"
+#| "If using first or second form, svn itself will generate the diff. %f will "
+#| "replaced with a temporary filename. If %f is not given,\n"
+#| "the diff-display should able reading data from stdin.\n"
+#| "<br>\n"
+#| "When %1 and %2 is given, kdesvn let this display make the diff. For that "
+#| "it it makes a temporary export or get (if needed) and fill out the "
+#| "parameters with the right value. %1 will filled with the content of start-"
+#| "revision, %2 with the endrevision. On large recoursive diffs this may get "
+#| "real slow!\n"
+#| "</p>"
+msgid ""
+"<p align=\"left\">\n"
+"Enter an external program in form\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt; %f</tt>\n"
+"</p>\n"
+"or\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt;</tt>\n"
+"</p>\n"
+"or\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt; %s1 %s2</tt>\n"
+"</p>\n"
+"<br>\n"
+"If one between the first or the second form is used, svn itself generates "
+"the diff. %f will be replaced with a temporary filename. If %f is not "
+"given,\n"
+"the diff-display should be able to read data from stdin.\n"
+"<br>\n"
+"When %s1 and %s2 are given, kdesvn lets this display make the diff. For that "
+"it makes a temporary export or get (if needed) and fills out the parameters "
+"with the right values. %s1 will be filled with the content of the initial "
+"revision, %s2 with the final revision. On large recursive diffs this may get "
+"really slow.\n"
+"</p>"
+msgstr ""
+"<p align=\"left\">\n"
+"Unesite vanjski program u formi\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt; %f</tt>\n"
+"</p>\n"
+"or\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt;</tt>\n"
+"</p>\n"
+"ili\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt; %1 %2</tt>\n"
+"</p>\n"
+"<br>\n"
+"Ako koristite prvi ili drugi način, svn će samostalno generisati promjene. "
+"%f će zamjeniti sa privremenim imenom datoteke. Ako %f nije zadan,\n"
+"Prikaz razlika bi trebao moći čitati podatke sa stdin.\n"
+"<br>\n"
+"Kada su dati %1 i %2, kdesvn dopušta da ovaj prozor napravi razliku.Zato, "
+"ono pravi privremeni izvoz ili prima (ukoliko je potrebno) i puni parametre "
+"sa pravim vrijednostima. %1 će biti popunjen sa sadržajem od početne-"
+"revizije, %2 sa krajnjom revizijom. Na velikim rekurzivnim razlikama ovo "
+"može postati pravo sporo!\n"
+"</p>"
+
+#. i18n: ectx: property (text), widget (QLabel, m_extern_hint)
+#: src/settings/diffmergesettings.ui:200
+#, fuzzy, kde-format
+#| msgid "see \"Whats this\" for details"
+msgid "see \"What's this\" for details"
+msgstr "pregled \"Whats this\"  u detalje"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DispColorSettings)
+#: src/settings/dispcolor_settings.ui:6
+#, kde-format
+msgid "ColorSettings"
+msgstr "Podešavanje boje"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_colored_state)
+#: src/settings/dispcolor_settings.ui:14
+#, kde-format
+msgid "Mark changed and locked items colored"
+msgstr "Označi promijenjene i zaključane stavke u boji"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel5)
+#: src/settings/dispcolor_settings.ui:56
+#, kde-format
+msgid "Locked items:"
+msgstr "Zaključani artikli:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
+#: src/settings/dispcolor_settings.ui:76
+#, kde-format
+msgid "Not versioned items:"
+msgstr "Nepromijenjene stavke:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#: src/settings/dispcolor_settings.ui:89
+#, kde-format
+msgid "Remote changed items:"
+msgstr "Udalji promijenjene stavke:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/settings/dispcolor_settings.ui:102
+#, kde-format
+msgid "Added items:"
+msgstr "Artikli dodani:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel4)
+#: src/settings/dispcolor_settings.ui:115
+#, kde-format
+msgid "Deleted items:"
+msgstr "Artikli obrisani:"
+
+#. i18n: ectx: property (text), widget (QLabel, Conflicted_items_label)
+#: src/settings/dispcolor_settings.ui:156
+#, kde-format
+msgid "Conflicted items:"
+msgstr "Stavke u sukobu:"
+
+#. i18n: ectx: property (text), widget (QLabel, Missed_items_label)
+#: src/settings/dispcolor_settings.ui:169
+#, kde-format
+msgid "Missed items:"
+msgstr "Nedostaje artikl:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#: src/settings/dispcolor_settings.ui:182
+#, kde-format
+msgid "Local changed items:"
+msgstr "Lokalne promijenjene stavke:"
+
+#. i18n: ectx: property (text), widget (QLabel, Need_lock_label_2)
+#: src/settings/dispcolor_settings.ui:195
+#, kde-format
+msgid "Item needs lock:"
+msgstr "Artikl zahtjeva zaštitu:"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DisplaySettings)
+#: src/settings/display_settings.ui:6
+#, kde-format
+msgid "Settings"
+msgstr "Postavke"
+
+#. i18n: ectx: property (text), widget (QLabel, m_ListIconsSize_label)
+#: src/settings/display_settings.ui:14
+#, kde-format
+msgid "Size of Listviewicons"
+msgstr "Veličina  Listviewicons"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_display_overlays)
+#: src/settings/display_settings.ui:24
+#, kde-format
+msgid "Mark Subversion states with an overlayed icon"
+msgstr "Označi subverziju sa prekrivenom ikonom"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_overlays)
+#: src/settings/display_settings.ui:30
+#, kde-format
+msgid ""
+"<p align=\"left\">\n"
+"Mark items with non-normal state with an overlayed icon. When you wish to\n"
+"see which items has newer items in repository you may have to set \"Check "
+"for updates on open\" in Subversion-Dialog.\n"
+"</p>"
+msgstr ""
+"<p align=\"left\">\n"
+"Označi stavke sa ne-normalnim stanjem sa prekrivenim ikonama. Kada poželite\n"
+"vidjeti koja je stavka najnovija u repozitoriju morate namjestiti \"Check "
+"for updates on open\" u Subversion-Dialog .\n"
+"</p>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_overlays)
+#: src/settings/display_settings.ui:33
+#, kde-format
+msgid "Mark item status with icon overlay"
+msgstr "Označi status stavke sa prekrivenom ikonom"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_case_sensitive_sort)
+#: src/settings/display_settings.ui:40
+#, kde-format
+msgid "Items sorting order is case sensitive"
+msgstr "Stavke su sortirane prema velikim i malim slovima"
+
+#. i18n: ectx: property (text), widget (QLabel, m_MaxLogLabel)
+#: src/settings/display_settings.ui:47
+#, kde-format
+msgid "Maximum log messages in history:"
+msgstr "Maksimalna prijavna poruka u historiji:"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_file_tips)
+#: src/settings/display_settings.ui:67
+#, kde-format
+msgid ""
+"Here you can control if, when moving the mouse over a file, you want to see "
+"a small popup window with additional information about that file"
+msgstr ""
+"Ovdje možete podesiti prikazivanje malog prozora sa dodatnim informacijama o "
+"datoteci kada pređete mišem preko te datoteke"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_file_tips)
+#: src/settings/display_settings.ui:70
+#, kde-format
+msgid "Show file info"
+msgstr "Prikaži podatke o datoteci"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_colored_blame)
+#: src/settings/display_settings.ui:77
+#, kde-format
+msgid "Display colored annotate"
+msgstr "Prikaži obojene"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_show_navigation_panel)
+#: src/settings/display_settings.ui:84
+#, kde-format
+msgid "Use navigation panel"
+msgstr "Koristite navigacijsku ploču"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:9
+#, kde-format
+msgid "Set if items sortorder should be case sensitive or not"
+msgstr "Postavi ako sortiranje stavki treba biti prema velikom i malom slovu"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:13
+#, kde-format
+msgid "Size of the icons"
+msgstr "Veličina ikone"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:17
+#, kde-format
+msgid "Show file information in tooltip"
+msgstr "Prikaži informacije datoteke u tooltip-u"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:21
+#, kde-format
+msgid "Use an external program for diff viewing/generating"
+msgstr "Koristi vanjski program za poređenje pregled/generisanje"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:25
+#, kde-format
+msgid "Use external program for diff viewing"
+msgstr "Koristi vanjski program za diff pregled"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:37
+#, kde-format
+msgid "Diff ignores all white space"
+msgstr "Poređenje ignoriše sve razmake"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:41
+#, kde-format
+msgid "Show diff in Git format"
+msgstr "Prikaži poređenje u Git formatu"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:49
+#, kde-format
+msgid "Maximum number of log messages"
+msgstr "Maksimalan broj prijavnih poruka"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:53
+#, kde-format
+msgid "Display colored blame lines"
+msgstr "Prikaži krive linije u boji"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:68
+#, kde-format
+msgid "Display icon overlays"
+msgstr "Prikaži prekrivene ikone"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:72
+#, kde-format
+msgid "Get item information recursively"
+msgstr "Uzmi podatke o artiklu rekurzivno"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_review_commit)
+#: src/settings/kdesvn_part.kcfg:76 src/settings/subversion_settings.ui:174
+#, kde-format
+msgid "Review items before commit"
+msgstr "Pregledaj stavke prije njihovog izvršenja"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:88
+#, kde-format
+msgid "Hide versioned unchanged files"
+msgstr "Sakrij verzionisane nepromjenjene datoteke"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_follows_nodes)
+#: src/settings/kdesvn_part.kcfg:92 src/settings/subversion_settings.ui:145
+#, kde-format
+msgid "Log follows node changes"
+msgstr "Prijava prati promjenu članova"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_always_list_changed_files)
+#: src/settings/kdesvn_part.kcfg:96 src/settings/subversion_settings.ui:161
+#, kde-format
+msgid "Log always reads list of changed files"
+msgstr "Prilikom prijave se uvijek očitava lista promijenjenih datoteka"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:100
+#, kde-format
+msgid "Start check for updates when open working copy"
+msgstr "Počni provjeravati najnovije informacije kada otvorim radnu kopiju"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:104
+#, kde-format
+msgid "Start caching latest logs on open or commit"
+msgstr ""
+"Započni spremanje zadnjih logova u privremenu memoriju prilikom otvaranja "
+"ili izvršavanja"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:108
+#, kde-format
+msgid "Get detailed information when making a remote listing"
+msgstr "Pribavi detaljne informacije prilikom pravljenja daljinskog listinga"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:112
+#, kde-format
+msgid "Get properties on selected item on networked protocols"
+msgstr "Primi postavke selektovanih stavki na umreženom protokolu"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:116
+#, kde-format
+msgid "Use properties like bugtraq:url on repository listings"
+msgstr "Koristi postavke kao bugtraq:url u listama repozitorija"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:120
+#, kde-format
+msgid "Check for property svn:needs-lock on listings"
+msgstr "Provjeri za stavku svn:needs-lock u listi."
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_store_passwords)
+#: src/settings/kdesvn_part.kcfg:124 src/settings/subversion_settings.ui:107
+#, kde-format
+msgid "Store passwords for remote connections"
+msgstr "Sačuvaj lozinku za bežičnu konekciju"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:128
+#, kde-format
+msgid "Store passwords in KDE Wallet instead of Subversion' storage"
+msgstr "Sačuvaj lozinku u KDE Wallet umjesto subverzije"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_password_cache)
+#: src/settings/kdesvn_part.kcfg:132 src/settings/subversion_settings.ui:138
+#, kde-format
+msgid "Use internal password cache"
+msgstr "Koristi internu lozinku memorije"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:136
+#, kde-format
+msgid "Is networking enabled"
+msgstr "Je li omogućen internet pristup ?"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:140
+#, kde-format
+msgid "Local add results in modification instead of conflicts"
+msgstr "Lokalno dodavanje rezultata u modifikacije umjesto sukoba"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:144
+#, kde-format
+msgid "create any non-existent parent at depth=empty"
+msgstr "kreiraj bilo kojeg nepostojećeg roditelja na dubina=prazno"
+
+#. i18n: ectx: label, entry, group (diffmerge_items)
+#: src/settings/kdesvn_part.kcfg:150
+#, kde-format
+msgid "Which program to use for external merges"
+msgstr "Koji program koristiti za vanjsko spajanje"
+
+#. i18n: ectx: label, entry, group (diffmerge_items)
+#: src/settings/kdesvn_part.kcfg:154
+#, kde-format
+msgid "Which program for resolving conflicts"
+msgstr "Koji program za rješavanje sukoba"
+
+#. i18n: ectx: label, entry, group (display)
+#: src/settings/kdesvn_part.kcfg:164
+#, kde-format
+msgid "Display different then normal states colored"
+msgstr "PrikaŽi stanja drugačija od normalnih obojenim"
+
+#. i18n: ectx: label, entry, group (blame_dlg)
+#: src/settings/kdesvn_part.kcfg:197
+#, kde-format
+msgid "Locale for blame display"
+msgstr "Lokalna za prikaz krivca"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:209
+#, kde-format
+msgid "Check status of log cache when starting revision tree"
+msgstr ""
+"Provjeri status logova u privremenoj memoriji prilikom pokretanja stabla "
+"revizije"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/settings/kdesvn_part.kcfg:213 src/settings/revisiontree_settings.ui:129
+#, kde-format
+msgid "Direction of revision tree"
+msgstr "Pravac stabla revizije"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:217
+#, kde-format
+msgid "Color for added items"
+msgstr "Boja za dodane artikle"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:221
+#, kde-format
+msgid "Color for deleted items"
+msgstr "Boja za obrisane artikle"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:225
+#, kde-format
+msgid "Color for copied items"
+msgstr "Boja za kopirane artikle"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:229
+#, kde-format
+msgid "Color for renamed items"
+msgstr "Boja za preimenovane artikle"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:233
+#, kde-format
+msgid "Color for modified items"
+msgstr "Boja za promijenjene artikle"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:237
+#, kde-format
+msgid "Height of detail view in tree widget"
+msgstr "Visina prikaza detalja u dodatku stabla"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:241
+#, kde-format
+msgid "Diffs from revision tree are recursive"
+msgstr "Poređenja iz revizionog stabla su rekurzivna"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:247
+#, kde-format
+msgid "Should Konqueror not display context menus for kdesvn?"
+msgstr "Može li Konqueror ne prikazati konteksni izbornik kdesvn-u?"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:251
+#, kde-format
+msgid "Should Konqueror not display kdesvn entries in main action menu?"
+msgstr "Može li Konqueror ne prikazati ulaze kdesvn-a u main action meniju?"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:255
+#, kde-format
+msgid "Show a small log window after executing a command."
+msgstr "Prikaži mali prozor poslije izvršenja komande."
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:259
+#, kde-format
+msgid "Log must contain at least lines to show"
+msgstr "Zapis mora sadržavati bar linije za prikaz"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:263
+#, kde-format
+msgid "KIO::svn operations use a standard log message"
+msgstr "KIO::svn operations koriste standardnu prijavnu poruku"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:267
+#, kde-format
+msgid "The standard log message to use with KIO if not asking for it."
+msgstr "Standardna log poruka za korištenje sa KIO ukoliko se ne traži."
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:271
+#, kde-format
+msgid "Support overwrite for KIO module"
+msgstr "Podrži prepisivanje KIO modula."
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:275
+#, kde-format
+msgid "Print progress messages in KDE dock area"
+msgstr "Štampaj razvojnu poruku u KDE području"
+
+#. i18n: ectx: whatsthis, entry, group (internals)
+#: src/settings/kdesvn_part.kcfg:294
+#, kde-format
+msgid ""
+"This value holds for log dialog which kind of log is used, its internal only."
+msgstr ""
+"Ova vrijednost čuva za prijavni dijalog koja prijava je korištena, samo je "
+"interna."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
+#: src/settings/polling_settings.ui:11
+#, kde-format
+msgid "Check modified items every"
+msgstr "Provjeri svaki promjenjeni artikl"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/settings/polling_settings.ui:28 src/settings/polling_settings.ui:55
+#, kde-format
+msgid "minutes"
+msgstr "minute"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_poll_updates)
+#: src/settings/polling_settings.ui:35
+#, kde-format
+msgid ""
+"If set check for updates on working copy when network is enabled on regular "
+"base"
+msgstr ""
+"Ako je postavljen provjeri najnovije informacije na radnoj kopiji kada je "
+"internet odobren na regularnoj bazi"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_updates)
+#: src/settings/polling_settings.ui:38
+#, kde-format
+msgid "Check for updated items every"
+msgstr "Provjeri svaku najnoviju stavku"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:28
+#, kde-format
+msgid "Left to right"
+msgstr "S lijeva nadesno"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:33
+#, kde-format
+msgid "Bottom to top"
+msgstr "Odozdo prema gore"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:38
+#, kde-format
+msgid "Right to left"
+msgstr "S desna nalijevo"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:43
+#, kde-format
+msgid "Top to bottom"
+msgstr "Odozdo prema gore"
+
+#. i18n: ectx: property (text), widget (QLabel, m_AddColorLabel)
+#: src/settings/revisiontree_settings.ui:51
+#, kde-format
+msgid "Color for added items:"
+msgstr "Boja za dodane artikle:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#: src/settings/revisiontree_settings.ui:77
+#, kde-format
+msgid "Color for copied items:"
+msgstr "Boja za kopirane artikle:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel4)
+#: src/settings/revisiontree_settings.ui:90
+#, kde-format
+msgid "Color for renamed items:"
+msgstr "Boja za preimenovane artikle:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel5)
+#: src/settings/revisiontree_settings.ui:103
+#, kde-format
+msgid "Color for modified items:"
+msgstr "Boja za promijenjen artikl:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#: src/settings/revisiontree_settings.ui:136
+#, kde-format
+msgid "Color for deleted items:"
+msgstr "Boja za obrisane artikle:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_fill_cache_on_tree)
+#: src/settings/revisiontree_settings.ui:175
+#, kde-format
+msgid "Should kdesvn check content of log cache before starting the tree"
+msgstr ""
+"Treba li kdesvn provjeriti sadržaj keša dnevnika prije započinjanja stabla"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_fill_cache_on_tree)
+#: src/settings/revisiontree_settings.ui:180
+#, kde-format
+msgid ""
+"When starting the tree generation and reading data from log cache kdesvn may "
+"check for newer items in repository if network is enabled. \n"
+"\n"
+"But this may slow down tree generation so it is disabled by default."
+msgstr ""
+"Kada se počne generisanje stabla i očitaju se podaci sa prijavne keš "
+"memorije kdesvn provjerava najnovije stavke u repozitoriju ako je internet "
+"dostupan. \n"
+"Ali ovo može usporiti generisanje stabla pa po difoltu internet nije odobren."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_fill_cache_on_tree)
+#: src/settings/revisiontree_settings.ui:183
+#, kde-format
+msgid "Check log cache fill before reading tree"
+msgstr "Provjeri koliko je pun keš dnevnika prije čitanja stabla"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_start_updates_check_on_open)
+#: src/settings/subversion_settings.ui:14
+#, kde-format
+msgid "Select if kdesvn should check for updates when open a working copy"
+msgstr ""
+"Odaberi ako kdesvn može provjeravati najnovije informacije ako je otvorena "
+"radna kopija"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_start_updates_check_on_open)
+#: src/settings/subversion_settings.ui:17
+#, kde-format
+msgid "Start check for updates when open a working copy"
+msgstr "Počni provjeravati najnovije informacije kada je otvorena radna kopija"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_cache_on_open)
+#: src/settings/subversion_settings.ui:33
+#, kde-format
+msgid "Start refresh the log cache for repository when networking enabled"
+msgstr ""
+"Počni osvježavati keš memoriju za repozitorij kada je internet dostupan"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_cache_on_open)
+#: src/settings/subversion_settings.ui:36
+#, kde-format
+msgid "Start fill log cache on open"
+msgstr "Započni popunjavanje keša dnevnika na otvaranju"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_check_needslock)
+#: src/settings/subversion_settings.ui:43
+#, kde-format
+msgid "When listing on working copies kdesvn may check for this property"
+msgstr ""
+"Prilikom izlistavanja radećih kopija kdesvn može provjeriti ovo svojstvo"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_check_needslock)
+#: src/settings/subversion_settings.ui:46
+#, kde-format
+msgid ""
+"When listing on working copies kdesvn may check for <tt>svn:needs-lock</tt> "
+"property.<br>But due this listings/updating on folders containing lot of "
+"items may get slow. So you should only switch on if you have repositories "
+"containing lot of such entries."
+msgstr ""
+"Prilikom izlistavanja radećih kopija kdesvn može provjeriti ovo <tt>svn:svn:"
+"needs-lock</tt> svojsvo.<br>Ali zbog ovih listinga/ažuriranja sadržaja mapa "
+"koje sadrže mnogo stavki mogu postati spore. Tako da bi ga samo trebali "
+"paliti ako imate repozitorije koji sadrže mnogo takvih ulaza."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_check_needslock)
+#: src/settings/subversion_settings.ui:49
+#, kde-format
+msgid "Check if items has \"svn:needs-lock\" property set"
+msgstr "Provjeri ako stavka ima postavljeno \"svn:needs-lock\" svojstvo"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
+#: src/settings/subversion_settings.ui:56
+#, kde-format
+msgid ""
+"Whether getting details about items when making listing on repositories or "
+"not"
+msgstr ""
+"Bilo dobivanje informacija o stavkama prilikom uvrštavanja na repozitorije "
+"ili ne"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_details_on_remote_listing)
+#: src/settings/subversion_settings.ui:61
+#, kde-format
+msgid ""
+"<p align=\"left\">When checked, kdesvn get more detailed info about file "
+"items when making a listing to remote repositories. So you may see remote "
+"locks in overview.\n"
+"</p>\n"
+"<p align=\"left\"><i>Be careful: This may let listings REAL slow.</i></p>"
+msgstr ""
+"<p align=\"left\">Kad je obilježeno, kdesvn dobija detaljnije informacije o "
+"datotekama prilikom pravljenja listinga daljinskih repozitorija. Pa možete "
+"vidjeti daljinske brave u pregledu.\n"
+"</p>\n"
+"<p align=\"left\"><i>Budite pažljivi: Ovo bi moglo pustiti listinge STRAŠNO "
+"sporo.</i></p>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_details_on_remote_listing)
+#: src/settings/subversion_settings.ui:64
+#, kde-format
+msgid "Get file details while remote listing"
+msgstr "Dobavi detalje o datotekama za vrijeme daljiskog listinga"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_info_recursive)
+#: src/settings/subversion_settings.ui:74
+#, kde-format
+msgid "Gain item info recursive"
+msgstr "Dobiti informacije o stavki rekurzivno"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_properties_on_remote_items)
+#: src/settings/subversion_settings.ui:84
+#, kde-format
+msgid "Should kdesvn retrieves properties on selected item in repositories"
+msgstr "Može li kdesvn preuzeti postavke odabranih stavki u repozitoriju"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
+#: src/settings/subversion_settings.ui:88
+#, kde-format
+msgid ""
+"When browsing kdesvn may try displaying properties below itemlist from a "
+"selected item. \n"
+"On networked repositories (e.g., not opened via file:// protocol) this may "
+"get real slow. So if you have slow network connections or when browsing "
+"hangs often you should deactivate it."
+msgstr ""
+"Prilikom pregledavanja kdesvn može pokušati prikazivanje svojstava ispod "
+"liste stavki iz odabrane stavke.\n"
+"Na umreženim repozitorijima (npr, ne otvaranim preko file: // protokol) to "
+"može postati strašno sporo. Dakle, ako imate sporu mrežnu vezu ili kada "
+"pregledavanja često pucaju, treba ga deaktivirati."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_properties_on_remote_items)
+#: src/settings/subversion_settings.ui:91
+#, kde-format
+msgid "Always get properties on networked repositories"
+msgstr "Uvijek preuzmi postavke na internet repozitorijima"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_store_passwords)
+#: src/settings/subversion_settings.ui:101
+#, kde-format
+msgid "Should Subversion store passwords in default"
+msgstr "Može li Subversion sačuvati lozinku po difoltu"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_store_passwords)
+#: src/settings/subversion_settings.ui:104
+#, kde-format
+msgid ""
+"Storing passwords is often a security problem. Kdesvn itself does not store "
+"any passwords, but the Subversion itself inside the configuration area of "
+"Subversion. If this area is readable from others you should not set it, but "
+"you may select for single non critical accounts inside the authentication "
+"dialog."
+msgstr ""
+"Čuvanje lozinke je često sigurnosni problem. Kdesvn sam ne pohranjuje "
+"nikakve lozinke, nego  Subverzija unutar konfiguracijskog područja "
+"Subverzije. Ako ovo područje ima mogućnost čitanja od drugih, ne bi ga "
+"trebali postavljati, ali možete odabrati za pojedinačne nekritične račune "
+"unutar autentifikacijskog dijaloga."
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_passwords_in_wallet)
+#: src/settings/subversion_settings.ui:117
+#, kde-format
+msgid ""
+"When saving passwords, do it into KDE Wallet instead of Subversions storage?"
+msgstr "Da li se lozinka čuva unutar KDE Wallet-a umjesto Subversions storage?"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_passwords_in_wallet)
+#: src/settings/subversion_settings.ui:122
+#, kde-format
+msgid ""
+"<p>Tells if your passwords set in kdesvn should stored into KDE Wallet "
+"instead of simple clear text storage of Subversion.</p>\n"
+"<p>This would be a little bit more secure because KDE Wallet is (mostly) "
+"encrypted with a password. On other hand you must re-enter your passwords "
+"with other Subversion clients not accessing KDE wallet (e.g. svn command "
+"line itself, rapidsvn and so on).</p>\n"
+"<p>If you are HOME storage e.g. Subversion's config folder is on a network "
+"drive you should hard think about not storing passwords in a plain text file "
+"like Subversion does but put it into an encrypted storage like KDE Wallet or "
+"do not save passwords.</p>"
+msgstr ""
+"<p>Govori da li bi se vaša lozinka postavljena u kdesvn trebala sačuvati u "
+"KDE Wallet umjesto u jednostavno tekstualno skladište Subversion-a. </p>\n"
+"<p>Ovo bi bilo malo sigurnije jer je KDE Wallet (većinom) kodiran sa "
+"lozinkom . U drugu ruku trebate ponovo ukucati lozinku sa drugog Subversion "
+"klijenta koji ne pristupa KDE novčaniku(npr. svn komandna linija sama za "
+"sebe, rapidsvn i tako dalje).</p>\n"
+"<p>Ako ste u HOME skladištu npr. Subversion-ova config mapa je na mreži, "
+"trebali bi razmisliti o tome da ne spasite lozinku u običnu tekstualnu "
+"datoteku kao sto Subversion radi nego da je stavite u kodirano skladište kao "
+"što je KDE Wallet ili da ne spašavate lozinke .</p>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_passwords_in_wallet)
+#: src/settings/subversion_settings.ui:125
+#, kde-format
+msgid "Store passwords into KDE Wallet"
+msgstr "Sačuvaj lozinku unutar KDE Wallet-a"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_password_cache)
+#: src/settings/subversion_settings.ui:135
+#, kde-format
+msgid "Use an internal password cache"
+msgstr "Koristi internu lozinku keš memorije"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_always_list_changed_files)
+#: src/settings/subversion_settings.ui:155
+#, kde-format
+msgid "Read detailed change lists"
+msgstr "Čitaj detaljnije promijenjene liste"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_log_always_list_changed_files)
+#: src/settings/subversion_settings.ui:158
+#, kde-format
+msgid ""
+"Reading lists of changed files may sometimes a little bit slow down things. "
+"But if this feature is switched off, kdesvn may fail generating differences "
+"between node changes from within the log viewer."
+msgstr ""
+"Čitanje popisa promijenjenih datoteka može ponekad malo usporiti stvari. No, "
+"ako je ta značajka isključena, kdesvn može ne uspjeti u stvaraju razlika "
+"između promjena čvorova unutar preglednika dnevnika."
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_review_commit)
+#: src/settings/subversion_settings.ui:171
+#, kde-format
+msgid "List items next commit will send or not"
+msgstr "Popis stavki sljedeće obavljanje će poslati ili ne"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_commit_hide_new)
+#: src/settings/subversion_settings.ui:184
+#, kde-format
+msgid "Should unversioned items displayed in commit dialog or not."
+msgstr "Mogu li se nepromijenjene stavke prikazati u izvršnom dijalogu ili ne."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_commit_hide_new)
+#: src/settings/subversion_settings.ui:187
+#, kde-format
+msgid "Hide new items in commit box"
+msgstr "Sakrij nove stavke u izvršnu kutiju"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_add_as_modification)
+#: src/settings/subversion_settings.ui:197
+#, kde-format
+msgid ""
+"<html><head/><body><p>If set, a local addition at the same path as an "
+"incoming addition of the same node kind results in a normal node with a "
+"possible local modification, instead of a tree conflict.</p></body></html>"
+msgstr ""
+"<html><head/><body><p>Ako je postavljeno, lokalni dodatak na istoj putanji "
+"kao i dolazni dodatak istog tipa čvora rezultira normalnom čvoru sa mogućim "
+"lokalnim modifikacijama, umjesto sukoba u stablu.</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_add_as_modification)
+#: src/settings/subversion_settings.ui:200
+#, kde-format
+msgid "Update modifies instead of conflicts"
+msgstr "Ažuriraj promjene umjesto sukoba"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_make_parents)
+#: src/settings/subversion_settings.ui:207
+#, kde-format
+msgid ""
+"<html><head/><body><p>If set, create any non-existent parent directories "
+"also by checking them out at depth=empty</p></body></html>"
+msgstr ""
+"<html><head/><body><p>Ako je postavljeno, kreira bilo koji nepostojeći "
+"roditeljski direktorij također provjeravajući ih na dubini=prazno</p></"
+"body></html>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_make_parents)
+#: src/settings/subversion_settings.ui:210
+#, kde-format
+msgid "Update makes missing parents"
+msgstr "Ažuriranje čini da nedostaju roditelji"
+
+#: src/svnfrontend/background/fillcachethread.cpp:72
+#, kde-format
+msgid ""
+"Not filling log cache because it is disabled due setting for this repository."
+msgstr ""
+"Ne popunjavanje keša dnevnika iz razologa što je onemogućen; zbog "
+"postavljanja svojstva ovog repozitorija."
+
+#: src/svnfrontend/background/fillcachethread.cpp:74
+#, kde-format
+msgid "Filling log cache in background."
+msgstr "Punjenje keša dnevnika u pozadini."
+
+#: src/svnfrontend/background/fillcachethread.cpp:96
+#, kde-format
+msgid "Filling cache canceled."
+msgstr "Dodavanje keš-a otkazano."
+
+#: src/svnfrontend/background/fillcachethread.cpp:111
+#, kde-format
+msgid "Cache filled up to revision %1."
+msgstr "Keš ispunjen do rezivije %1."
+
+#: src/svnfrontend/background/fillcachethread.cpp:118
+#, kde-format
+msgid "Filling log cache in background finished."
+msgstr "Popunjavanje memorije u pozadini završeno."
+
+#: src/svnfrontend/background/tcontextlistener.cpp:182
+#, kde-format
+msgid "%1 of %2 transferred."
+msgstr "%1 od %2 premješten."
+
+#: src/svnfrontend/background/tcontextlistener.cpp:184
+#: src/svnfrontend/stopdlg.cpp:200
+#, kde-format
+msgid "%1 transferred."
+msgstr "%1 premješten."
+
+#: src/svnfrontend/blamedisplay.cpp:185 src/svnfrontend/blamedisplay.cpp:197
+#, kde-format
+msgid "Log message for revision"
+msgstr "Prijavna poruka za reviziju"
+
+#: src/svnfrontend/blamedisplay.cpp:190
+#, kde-format
+msgid "Go to line"
+msgstr "Idi na liniju"
+
+#: src/svnfrontend/blamedisplay.cpp:324
+#, kde-format
+msgid "Show line"
+msgstr "Prikaži linije"
+
+#: src/svnfrontend/blamedisplay.cpp:324
+#, kde-format
+msgid "Show line number"
+msgstr "Prikaži redni broj linija"
+
+#: src/svnfrontend/blamedisplay.cpp:361
+#, fuzzy, kde-format
+#| msgid "Log message for revision %1"
+msgctxt "@title:window"
+msgid "Log Message for Revision %1"
+msgstr "Prijavna poruka za reviziju %1"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:40
+#, kde-format
+msgid "Line"
+msgstr "Linija"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:45
+#: src/svnfrontend/models/logitemmodel.cpp:173
+#, kde-format
+msgid "Revision"
+msgstr "Posljednja izmjena"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#. i18n: ectx: property (text), widget (QRadioButton, m_startDateButton)
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopDateButton)
+#: src/svnfrontend/blamedisplay.ui:50
+#: src/svnfrontend/fronthelpers/rangeinput.ui:46
+#: src/svnfrontend/fronthelpers/rangeinput.ui:130
+#: src/svnfrontend/models/logitemmodel.cpp:177
+#, kde-format
+msgid "Date"
+msgstr "Datum"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:55
+#: src/svnfrontend/models/logitemmodel.cpp:175
+#, kde-format
+msgid "Author"
+msgstr "Autor"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:60
+#, kde-format
+msgid "Content"
+msgstr "Sadržaj"
+
+#: src/svnfrontend/ccontextlistener.cpp:64
+#, kde-format
+msgid "Add to revision control"
+msgstr "Dodaj u revizionu kontrolu"
+
+#: src/svnfrontend/ccontextlistener.cpp:67
+#, kde-format
+msgid "Restore missing"
+msgstr "Vrati šta nedostaje"
+
+#: src/svnfrontend/ccontextlistener.cpp:68
+#, kde-format
+msgid "Revert"
+msgstr "Vrati"
+
+#: src/svnfrontend/ccontextlistener.cpp:69
+#, kde-format
+msgid "Revert failed"
+msgstr "Povratak nije uspio"
+
+#: src/svnfrontend/ccontextlistener.cpp:70
+#, kde-format
+msgid "Resolved"
+msgstr "Riješeno"
+
+#: src/svnfrontend/ccontextlistener.cpp:71
+#, kde-format
+msgid "Skip"
+msgstr "Preskoči"
+
+#: src/svnfrontend/ccontextlistener.cpp:72 src/svnfrontend/svnitem.cpp:430
+#, kde-format
+msgid "Deleted"
+msgstr "Obrisano"
+
+#: src/svnfrontend/ccontextlistener.cpp:73
+#, kde-format
+msgid "Added"
+msgstr "Dodano"
+
+#: src/svnfrontend/ccontextlistener.cpp:74
+#, kde-format
+msgid "Update"
+msgstr "Ažuriranje"
+
+#: src/svnfrontend/ccontextlistener.cpp:75
+#, kde-format
+msgid "Update complete"
+msgstr "Potpuno ažuriranje"
+
+#: src/svnfrontend/ccontextlistener.cpp:76
+#, kde-format
+msgid "Update external module"
+msgstr "Ažuriraj vanjski modul"
+
+#: src/svnfrontend/ccontextlistener.cpp:78
+#, kde-format
+msgid "Status on external"
+msgstr "Status na vanjskom"
+
+#: src/svnfrontend/ccontextlistener.cpp:79
+#, kde-format
+msgid "Commit Modified"
+msgstr "Potvrdi Modificirano"
+
+#: src/svnfrontend/ccontextlistener.cpp:80
+#, kde-format
+msgid "Commit Added"
+msgstr "Potvrdi Dodano"
+
+#: src/svnfrontend/ccontextlistener.cpp:81
+#, kde-format
+msgid "Commit Deleted"
+msgstr "Potvrdi Obrisano"
+
+#: src/svnfrontend/ccontextlistener.cpp:82
+#, kde-format
+msgid "Commit Replaced"
+msgstr "Potvrdi Zamijenjeno"
+
+#: src/svnfrontend/ccontextlistener.cpp:85
+#, kde-format
+msgid "Locking"
+msgstr "Zaključavanje"
+
+#: src/svnfrontend/ccontextlistener.cpp:86
+#, kde-format
+msgid "Unlocked"
+msgstr "Otključan"
+
+#: src/svnfrontend/ccontextlistener.cpp:87
+#, kde-format
+msgid "Lock failed"
+msgstr "Zaključavanje nije uspjelo"
+
+#: src/svnfrontend/ccontextlistener.cpp:88
+#, kde-format
+msgid "Unlock failed"
+msgstr "Otključavanje nije uspjelo"
+
+#: src/svnfrontend/ccontextlistener.cpp:94
+#, kde-format
+msgid "unchanged"
+msgstr "nepromijenjeno"
+
+#: src/svnfrontend/ccontextlistener.cpp:95
+#, kde-format
+msgid "item wasn't present"
+msgstr "stavka nije prisutna"
+
+#: src/svnfrontend/ccontextlistener.cpp:96
+#, kde-format
+msgid "unversioned item obstructed work"
+msgstr "stavka bez verzije obstruira rad"
+
+#: src/svnfrontend/ccontextlistener.cpp:99
+#, kde-format
+msgid "Modified state had mods merged in."
+msgstr "Modificirano stanje ima modove spojene."
+
+#: src/svnfrontend/ccontextlistener.cpp:100
+#, kde-format
+msgid "Modified state got conflicting mods."
+msgstr "Modificirano stanje ima modove u sukobu."
+
+#: src/svnfrontend/ccontextlistener.cpp:311
+#, kde-format
+msgid "Enter password for realm %1"
+msgstr "Unesite lozinku za oblast %1"
+
+#: src/svnfrontend/ccontextlistener.cpp:342
+#, kde-format
+msgid ""
+"The certificate is not issued by a trusted authority. Use the fingerprint to "
+"validate the certificate manually."
+msgstr ""
+"Certifikat nije izdan od strane povjerljive vlasti. Koristite otisak prsta "
+"za ručnu validaciju certifikata."
+
+#: src/svnfrontend/ccontextlistener.cpp:345
+#, kde-format
+msgid "The certificate hostname does not match."
+msgstr "Ime onoga na koga je certifikat se ne podudara."
+
+#: src/svnfrontend/ccontextlistener.cpp:348
+#, kde-format
+msgid "The certificate is not yet valid."
+msgstr "Certifikat još uvijek nije važeći."
+
+#: src/svnfrontend/ccontextlistener.cpp:351
+#, kde-format
+msgid "The certificate has expired."
+msgstr "Certifikat je istekao."
+
+#: src/svnfrontend/ccontextlistener.cpp:354
+#, kde-format
+msgid "The certificate has an unknown error."
+msgstr "certifikat ima nepoznatu grešku."
+
+#: src/svnfrontend/ccontextlistener.cpp:376
+#, kde-format
+msgid ""
+"%1\n"
+"Really store password as plain text?"
+msgstr ""
+"%1\n"
+"Stvarno spasiti lozinku kao običan tekst?"
+
+#: src/svnfrontend/ccontextlistener.cpp:377
+#, kde-format
+msgid "Save password"
+msgstr "Sačuvaj lozinku"
+
+#: src/svnfrontend/commandexec.cpp:219
+#, kde-format
+msgid "Command \"%1\" not implemented or known"
+msgstr "Komanda \"%1\" nije implementirana ili poznata"
+
+#: src/svnfrontend/commandexec.cpp:220 src/svnfrontend/commandexec.cpp:339
+#: src/svnfrontend/graphtree/revgraphview.cpp:1004
+#: src/svnfrontend/maintreewidget.cpp:992
+#: src/svnfrontend/maintreewidget.cpp:2136
+#: src/svnfrontend/maintreewidget.cpp:2348
+#, kde-format
+msgid "SVN Error"
+msgstr "SVN greška"
+
+#: src/svnfrontend/commandexec.cpp:434
+#, kde-format
+msgid "\"GET\" requires output file"
+msgstr "\"GET\" zahtjevaj izlaznu datoteku"
+
+#: src/svnfrontend/commandexec.cpp:621
+#, kde-format
+msgid "May only switch one URL at time"
+msgstr "Može zamijeniti jednu URL u trenutku"
+
+#: src/svnfrontend/commandexec.cpp:625
+#, kde-format
+msgid "Switch only on working copies"
+msgstr "Zamijeni samo u radnim kopijama"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, CopyMoveView)
+#: src/svnfrontend/copymoveview.ui:14
+#, kde-format
+msgid "Copy / Move"
+msgstr "Kopiraj/premjesti"
+
+#. i18n: ectx: property (text), widget (QLabel, m_HeadOneLabel)
+#: src/svnfrontend/copymoveview.ui:20
+#, kde-format
+msgid "Rename"
+msgstr "Preimenuj"
+
+#. i18n: ectx: property (text), widget (KSqueezedTextLabel, m_OldNameLabel)
+#. i18n: ectx: property (text), widget (KSqueezedTextLabel, m_PrefixLabel)
+#: src/svnfrontend/copymoveview.ui:33 src/svnfrontend/copymoveview.ui:58
+#, kde-format
+msgid "KSqueezedTextLabel"
+msgstr "KSqueezedTextLabel"
+
+#. i18n: ectx: property (text), widget (QLabel, m_HeadTwoLabel)
+#: src/svnfrontend/copymoveview.ui:43
+#, kde-format
+msgid "to"
+msgstr "za"
+
+#: src/svnfrontend/copymoveview_impl.cpp:47
+#, kde-format
+msgid "Rename/move"
+msgstr "Preimenuj/premjesti"
+
+#: src/svnfrontend/copymoveview_impl.cpp:74
+#, fuzzy, kde-format
+#| msgid "Move/Rename file/directory"
+msgctxt "@title:window"
+msgid "Move/Rename File/Directory"
+msgstr "Premjesti/Preimenuj datoteku/direktorij"
+
+#: src/svnfrontend/copymoveview_impl.cpp:74
+#, fuzzy, kde-format
+#| msgid "Copy file/directory"
+msgctxt "@title:window"
+msgid "Copy File/Directory"
+msgstr "Kopiraj datoteku/direktorij"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, CreateRepoDlg)
+#: src/svnfrontend/createrepodlg.ui:14
+#, kde-format
+msgid "Create new repository"
+msgstr "Kreiraj novi repozitoriji"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_DisableFsync)
+#: src/svnfrontend/createrepodlg.ui:22
+#, kde-format
+msgid "Disable fsync at commit (BDB only)"
+msgstr "Onemogući fsync na učinjenom  (BDB samo)"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/svnfrontend/createrepodlg.ui:32
+#, kde-format
+msgid "Path to repository:"
+msgstr "Put do repozitorija:"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:45
+#, kde-format
+msgid "Select type of storage"
+msgstr "Odaberi tip za čuvanje podataka"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:48
+#, kde-format
+msgid "Select the storage type of repository (FSFS or Berkely DB)"
+msgstr "Odaberi tio za čuvanje podataka repozitorija (FSFS or Berkely DB)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:52
+#, kde-format
+msgid "FSFS"
+msgstr "FSFS"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:57
+#, kde-format
+msgid "BDB"
+msgstr "BDB"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_CreateMainDirs)
+#: src/svnfrontend/createrepodlg.ui:65
+#, kde-format
+msgid "Create trunk, tags and branches folders"
+msgstr "Napravite spremnik, oznake i odjeljke mapa"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_CreateMainDirs)
+#: src/svnfrontend/createrepodlg.ui:68
+#, kde-format
+msgid ""
+"If this is set then the base layout (<tt>/trunk</tt>,<tt>/branches</tt> and "
+"<tt>/tags</tt>) will created after opening the fresh repository."
+msgstr ""
+"Ako je ovo postavljeno onda je osnovni raspored (<tt>/spremnik</tt>,<tt>/"
+"odjeljci</tt> i <tt>/oznake</tt>) će se kreirati nakon otvaranja novog "
+"repozitorija."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_CreateMainDirs)
+#: src/svnfrontend/createrepodlg.ui:71
+#, kde-format
+msgid "Create main folders"
+msgstr "Kreiraj glavne foldere"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn16compat)
+#: src/svnfrontend/createrepodlg.ui:87
+#, kde-format
+msgid "Is created repository compatible to Subversion prior 1.6"
+msgstr "Je li kreirani repozitorij odgovarajući za podverziju prije 1.6"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn16compat)
+#: src/svnfrontend/createrepodlg.ui:90
+#, fuzzy, kde-format
+#| msgid ""
+#| "If set, the repository created will compatible to Subversion prior 1.5. "
+#| "This is only useful when svnqt is running with Subversion 1.5 or above."
+msgid ""
+"If set, the repository created will compatible to Subversion prior 1.5. This "
+"is only useful when svnqt is running with Subversion 1.6 or above."
+msgstr ""
+"Ako je postavljeno, kreirani repozitorij će biti kompatibilan sa Subversion-"
+"om do 1.5 verzije. Ovo je samo korisno kad je svnqt je pokrenut sa "
+"Subversion-om verzijom 1.5 i iznad."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_presvn16compat)
+#: src/svnfrontend/createrepodlg.ui:93
+#, kde-format
+msgid "Compatible to Subversion prior 1.6"
+msgstr "Odgovarajući za podverziju prije 1.6"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_LogKeep)
+#: src/svnfrontend/createrepodlg.ui:113
+#, kde-format
+msgid "Disable automatic log file removal (BDB only)"
+msgstr "Onemogući automatsko uklanjanje datoteka dnevnika (BDB samo)"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#: src/svnfrontend/createrepodlg.ui:123
+#, kde-format
+msgid "Type of repository:"
+msgstr "Tip repozitorija:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn15compat)
+#: src/svnfrontend/createrepodlg.ui:139
+#, kde-format
+msgid "Is created repository compatible to Subversion prior 1.5"
+msgstr "Je li kreirani repozitorij odgovarajući za podverziju prije 1.5"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn15compat)
+#: src/svnfrontend/createrepodlg.ui:142
+#, kde-format
+msgid ""
+"If set, the repository created will compatible to Subversion prior 1.5. This "
+"is only useful when svnqt is running with Subversion 1.5 or above."
+msgstr ""
+"Ako je postavljeno, kreirani repozitorij će biti kompatibilan sa Subversion-"
+"om do 1.5 verzije. Ovo je samo korisno kad je svnqt je pokrenut sa "
+"Subversion-om verzijom 1.5 i iznad."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_presvn15compat)
+#: src/svnfrontend/createrepodlg.ui:145
+#, kde-format
+msgid "Compatible to Subversion prior 1.5"
+msgstr "Odgovarajući za podverziju prije 1.5"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn18compat)
+#: src/svnfrontend/createrepodlg.ui:162
+#, fuzzy, kde-format
+#| msgid "Is created repository compatible to Subversion prior 1.6"
+msgid "Is created repository compatible to Subversion prior 1.8"
+msgstr "Je li kreirani repozitorij odgovarajući za podverziju prije 1.6"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn18compat)
+#: src/svnfrontend/createrepodlg.ui:165
+#, fuzzy, kde-format
+#| msgid ""
+#| "If set, the repository created will compatible to Subversion prior 1.4. "
+#| "This is only useful when svnqt is running with Subversion 1.4 or above."
+msgid ""
+"If set, the repository created will compatible to Subversion prior 1.4. This "
+"is only useful when svnqt is running with Subversion 1.8 or above."
+msgstr ""
+"Ako je postavljen, kreirani repozitorij će biti kompatibilan sa Subverzijom "
+"prije 1.4. To je samo korisno kada svnqt radi sa Subverzijom 1.4 ili iznad."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_presvn18compat)
+#: src/svnfrontend/createrepodlg.ui:168
+#, fuzzy, kde-format
+#| msgid "Compatible to Subversion prior 1.6"
+msgid "Compatible to Subversion prior 1.8"
+msgstr "Odgovarajući za podverziju prije 1.6"
+
+#: src/svnfrontend/database/dboverview.cpp:117
+#, kde-format
+msgid "Log cache holds %1 log entries and consumes %2 on disk."
+msgstr "Zabiljženi keš zadržava %1 zabilježenih unosa i koristi %2 na disku."
+
+#: src/svnfrontend/database/dboverview.cpp:133
+#, kde-format
+msgid ""
+"Really clean cache for repository\n"
+"%1?"
+msgstr ""
+"Stvarno očišćen keš za repozitorij\n"
+"%1?"
+
+#: src/svnfrontend/database/dboverview.cpp:134
+#, kde-format
+msgid "Clean repository cache"
+msgstr "Isprazni keš repozitorija"
+
+#: src/svnfrontend/database/dboverview.cpp:150
+#, kde-format
+msgid ""
+"Really clean cache and data for repository\n"
+"%1?"
+msgstr ""
+"Stvarno očišćeni keš i podaci za repozitorij\n"
+"%1?"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DeleteRepositoryButton)
+#: src/svnfrontend/database/dboverview.cpp:151
+#: src/svnfrontend/database/dboverview.ui:59
+#, kde-format
+msgid "Delete repository"
+msgstr "Obriši repozitoriji"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, DBOverView)
+#: src/svnfrontend/database/dboverview.ui:6
+#, kde-format
+msgid "Overview about cache database content"
+msgstr "Pregled sadržaja baze podataka"
+
+#. i18n: ectx: property (text), widget (QLabel, m_RepositoryLabel)
+#: src/svnfrontend/database/dboverview.ui:19
+#, kde-format
+msgid "Known repositories"
+msgstr "Poznati repozitoriji"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteCacheButton)
+#. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteCacheButton)
+#: src/svnfrontend/database/dboverview.ui:40
+#: src/svnfrontend/database/dboverview.ui:43
+#, kde-format
+msgid "Delete cache entries for current selected repository"
+msgstr "Obriši keš unose za trenutno izabrani repozitorij"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DeleteCacheButton)
+#: src/svnfrontend/database/dboverview.ui:46
+#, kde-format
+msgid "Delete cache"
+msgstr "Obriši keš"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteRepositoryButton)
+#. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteRepositoryButton)
+#: src/svnfrontend/database/dboverview.ui:53
+#: src/svnfrontend/database/dboverview.ui:56
+#, kde-format
+msgid "Delete all entries and settings for selected repository"
+msgstr "Obriši sve unose i podešavanja za odabrani repozitorij"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_SettingsButton)
+#: src/svnfrontend/database/dboverview.ui:66
+#, kde-format
+msgid "Repository Settings"
+msgstr "Podešavanja repozitorija"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_StatisticButton)
+#: src/svnfrontend/database/dboverview.ui:73
+#, kde-format
+msgid "Statistics for repository"
+msgstr "Statistika za repozitorij"
+
+#: src/svnfrontend/database/dbsettings.cpp:39
+#, fuzzy, kde-format
+#| msgid "Settings for %1"
+msgctxt "@title:window"
+msgid "Settings for %1"
+msgstr "Podešavanja za %1"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: src/svnfrontend/database/dbsettings.ui:21
+#, kde-format
+msgid "Log cache settings"
+msgstr "Zabilježi postavke keša"
+
+#. i18n: ectx: property (text), widget (QCheckBox, dbcfg_noCacheUpdate)
+#: src/svnfrontend/database/dbsettings.ui:27
+#, kde-format
+msgid "Do not update log cache on open"
+msgstr "Ne ažuriraj bilješke keša na otvaranju"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: src/svnfrontend/database/dbsettings.ui:40
+#, kde-format
+msgid "Prefixes to filter out in revision tree"
+msgstr "Prefiksi za profiltrirati u revizionom stablu"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#: src/svnfrontend/database/dbsettings.ui:58
+#, kde-format
+msgid "Log and statistics setting"
+msgstr "Postavke statistike i bilježenja"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/svnfrontend/database/dbsettings.ui:70
+#, kde-format
+msgid "Hide logs containing following words"
+msgstr "Sakrij bilješke koje sadrže sljedeće riječi"
+
+#. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_log_pattern)
+#: src/svnfrontend/database/dbsettings.ui:77
+#, kde-format
+msgid ""
+"This is a list which words/substrings a log entry must contain so it will be "
+"hidden from log and statistics"
+msgstr ""
+"Ovo je lista riječi/podstringova koje unos u bilješku mora sadržavati da bi "
+"bio sakriven u bilješkama i statistici"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/svnfrontend/database/dbsettings.ui:98
+#, kde-format
+msgid "Do not show commits from following users"
+msgstr "Ne prikazuj zahtjeve sljedećih korisnika"
+
+#. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_userslog)
+#: src/svnfrontend/database/dbsettings.ui:105
+#, kde-format
+msgid ""
+"Do not display commits of listed users in log window and statistics view"
+msgstr ""
+"Ne prikazuj zahtjeve korisnika sa liste u prozoru bilješki i pregledniku "
+"statistike"
+
+#. i18n: ectx: property (text), widget (QCheckBox, dbcfg_filter_empty_author)
+#: src/svnfrontend/database/dbsettings.ui:115
+#, kde-format
+msgid "Do not display commits without author"
+msgstr "Ne prikazuj zahtjeve bez autora"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DumpRepoDlg)
+#: src/svnfrontend/dumprepo_dlg.ui:14
+#, kde-format
+msgid "Dump repository"
+msgstr "Odbaci repozitorij"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_UseDeltas)
+#: src/svnfrontend/dumprepo_dlg.ui:35
+#, kde-format
+msgid "Use deltas"
+msgstr "Koristi deltas"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, m_StartNumber)
+#: src/svnfrontend/dumprepo_dlg.ui:54
+#, kde-format
+msgid "-1 for START"
+msgstr "-1 za START"
+
+#. i18n: ectx: property (text), widget (QLabel, m_lblEnd)
+#: src/svnfrontend/dumprepo_dlg.ui:67
+#, kde-format
+msgid "End revision:"
+msgstr "Krajnja revizija:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_incrementalDump)
+#: src/svnfrontend/dumprepo_dlg.ui:94
+#, kde-format
+msgid "incremental Dump"
+msgstr "uvećavajuće smeće"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_Rangeonly)
+#: src/svnfrontend/dumprepo_dlg.ui:107
+#, kde-format
+msgid "Dump revision range"
+msgstr "Raspon revizije smeća"
+
+#. i18n: ectx: property (text), widget (QLabel, m_OutfileLabel)
+#: src/svnfrontend/dumprepo_dlg.ui:117
+#, kde-format
+msgid "Dump into:"
+msgstr "Odbaci u:"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, m_EndNumber)
+#: src/svnfrontend/dumprepo_dlg.ui:136
+#, kde-format
+msgid "-1 for HEAD"
+msgstr "-1 za HEAD"
+
+#. i18n: ectx: property (text), widget (QLabel, m_lblStart)
+#: src/svnfrontend/dumprepo_dlg.ui:149
+#, kde-format
+msgid "Start revision:"
+msgstr "Početna revizija:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_RepoLabel)
+#: src/svnfrontend/dumprepo_dlg.ui:162
+#, kde-format
+msgid "Repository to dump:"
+msgstr "Repozitorij za odbaciti:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_PatternLabel)
+#: src/svnfrontend/editignorepattern.ui:17
+#, kde-format
+msgid "Patterns to add or remove:"
+msgstr "Patern za dodati ili zamjeniti:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RemoveCheckBox)
+#: src/svnfrontend/editignorepattern.ui:40
+#, kde-format
+msgid "Remove patterns"
+msgstr "Zamjeni patern"
+
+#. i18n: ectx: property (text), widget (QLabel, m_DepthLabel)
+#: src/svnfrontend/editignorepattern.ui:49
+#, kde-format
+msgid "Depth for ignore"
+msgstr "Dubina za ignorisati"
+
+#: src/svnfrontend/editpropsdlg.cpp:32
+#, fuzzy, kde-format
+#| msgid "Add property"
+msgctxt "@title:window"
+msgid "Add Property"
+msgstr "Dodaj svojstvo"
+
+#: src/svnfrontend/editpropsdlg.cpp:44 src/svnfrontend/editpropsdlg.cpp:80
+#, kde-format
+msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
+msgstr "Jedan od <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
+
+#: src/svnfrontend/editpropsdlg.cpp:45 src/svnfrontend/editpropsdlg.cpp:81
+#, fuzzy, kde-format
+#| msgid ""
+#| "If present, make the file executable.<br>This property can not be set on "
+#| "a directory. A non-recursive attempt will fail, and a recursive attempt "
+#| "will set the property only on the file children of the folder."
+msgid ""
+"If present, make the file executable.<br/>This property can not be set on a "
+"directory. A non-recursive attempt will fail, and a recursive attempt will "
+"set the property only on the file children of the folder."
+msgstr ""
+"Ako je prisutno, učini datoteku izvršnom.<br>Ova osobina ne može biti "
+"postavljena na direktorij. Ne rekurzivni pokušaj neće uspjeti i rekurzivni "
+"će postaviti osobinu samo na dijete datoteke unutar mape."
+
+#: src/svnfrontend/editpropsdlg.cpp:49
+#, fuzzy, kde-format
+#| msgid ""
+#| "Keywords to be expanded into the contents of a file.<br>They can be "
+#| "inserted into documents by placing a keyword anchor which is formatted as "
+#| "$KeywordName$.<br>Valid keywords are:<br><b>URL/HeadURL</b> The URL for "
+#| "the head revision of the project.<br><b>Author/LastChangedBy</b> The last "
+#| "person to change the file.<br><b>Date/LastChangedDate</b> The date/time "
+#| "the object was last modified.<br><b>Revision/Rev/LastChangedRevision</b> "
+#| "The last revision the object changed.<br><b>Id</b> A compressed summary "
+#| "of the previous 4 keywords."
+msgid ""
+"Keywords to be expanded into the contents of a file.<br/>They can be "
+"inserted into documents by placing a keyword anchor which is formatted as "
+"$KeywordName$.<br/>Valid keywords are:<br/><b>URL/HeadURL</b> The URL for "
+"the head revision of the project.<br/><b>Author/LastChangedBy</b> The last "
+"person to change the file.<br/><b>Date/LastChangedDate</b> The date/time the "
+"object was last modified.<br/><b>Revision/Rev/LastChangedRevision</b> The "
+"last revision the object changed.<br/><b>Id</b> A compressed summary of the "
+"previous 4 keywords."
+msgstr ""
+"Ključne riječi za proširiti u sadržaj datotoke.<br>One mogu biti umetnute u "
+"dokumente stavljanjem taga ključne riječi koji je formatiran kao  "
+"$KeywordName$.<br>Validne ključne riječi su:<br><b>URL/GlavniURL</b> URL za "
+"glavnu reviziju projekta.<br><b>Autor/PosljednjePromijenjenoOd</b> "
+"Posljednja osoba koja je mijenjala datoteku.<br><b>Datum/"
+"PosljednjiPromijenjeniDatum</b> Datum/vrijeme kad je objekat bio posljednji "
+"put mijenjan.<br><b>Revizija/Rev/PosljednjaPromijenjenaRevizija</b> "
+"Posljednja revizija kad je objekat promijenjen.<br><b>Id</b> Kompresovani "
+"sažetak prethodne 4 ključne riječi."
+
+#: src/svnfrontend/editpropsdlg.cpp:58
+#, fuzzy, kde-format
+#| msgid ""
+#| "Set this to any value (e.g. <b>'*'</b>) to enforce locking for this file."
+#| "<br>The file will be set read-only when checked out or updated, "
+#| "indicating that a user must acquire a lock on the file before they can "
+#| "edit and commit changes."
+msgid ""
+"Set this to any value (e.g. <b>'*'</b>) to enforce locking for this file.<br/"
+">The file will be set read-only when checked out or updated, indicating that "
+"a user must acquire a lock on the file before they can edit and commit "
+"changes."
+msgstr ""
+"Postavi ovo na bilo koju vrijednost (e.g. <b>'*'</b>) da primijenite "
+"zaključavanje ove datoteke.<br>Datoteka će biti postavljena na samo čitanje "
+"kad je označena ili ažurirana, ukazujući na to da korisnik mora dobaviti "
+"ključ datoteke prije nego što može urediti i mijenjati datoteku."
+
+#: src/svnfrontend/editpropsdlg.cpp:62 src/svnfrontend/editpropsdlg.cpp:93
+#, kde-format
+msgid ""
+"The mimetype of the file. Used to determine whether to merge the file and "
+"how to serve it from Apache. A mimetype beginning with <b>'text/'</b> (or an "
+"absent mimetype) is treated as text. Anything else is treated as binary."
+msgstr ""
+"Mime tip datoteke. Korišten za određivanje da li se treba spojiti datoteka i "
+"kako to uzeti sa Apache. Mime tip koji počinje sa <b>'text/'</b> (ili ako "
+"nema mime tipa) je tretiran kao tekst.Sve ostalo se tretira binarno."
+
+#: src/svnfrontend/editpropsdlg.cpp:87
+#, fuzzy, kde-format
+#| msgid ""
+#| "A newline separated list of module specifiers, each consisting of a "
+#| "relative directory path, optional revision flags, and a URL. For example:"
+#| "<br><nobr><b>foo http://example.com/repos/projectA</b></"
+#| "nobr><br><nobr><b>foo/bar -r 1234 http://example.com/repos/projectB</b></"
+#| "nobr>"
+msgid ""
+"A newline separated list of module specifiers, each consisting of a relative "
+"directory path, optional revision flags, and a URL. For example:<br/"
+"><nobr><b>foo http://example.com/repos/projectA</b></nobr><br/><nobr><b>foo/"
+"bar -r 1234 http://example.com/repos/projectB</b></nobr>"
+msgstr ""
+"Novom linijom odvojena lista specifikatora modula, svaki sastavljen od "
+"putanje direktorija, opcionalnoe revizijske zastavice i URL-a. Na primjer:"
+"<br><nobr><b>foo http://example.com/repos/projectA</b></"
+"nobr><br><nobr><b>foo/bar -r 1234 http://example.com/repos/projectB</b></"
+"nobr>"
+
+#: src/svnfrontend/editpropsdlg.cpp:92
+#, kde-format
+msgid "A newline separated list of file patterns to ignore."
+msgstr "Novom linijom razdvojena lista obrazaca za ignorisati."
+
+#: src/svnfrontend/editpropsdlg.cpp:97
+#, kde-format
+msgid ""
+"Label text to show for the edit box where the user enters the issue number."
+msgstr ""
+"Tekst labele koji će se pokazati za kutiju za uređivanje gdje korisnik unese "
+"broj problema."
+
+#: src/svnfrontend/editpropsdlg.cpp:100
+#, fuzzy, kde-format
+#| msgid ""
+#| "URL pointing to the issue tracker. It must contain <b>%BUGID%</b> which "
+#| "gets replaced with the bug issue number. Example:<br><nobr><b>http://"
+#| "example.com/mantis/view.php?id=%BUGID%</b></nobr>"
+msgid ""
+"URL pointing to the issue tracker. It must contain <b>%BUGID%</b> which gets "
+"replaced with the bug issue number. Example:<br/><nobr><b>http://example.com/"
+"mantis/view.php?id=%BUGID%</b></nobr>"
+msgstr ""
+"URL koji pokaazuje na tragača problema. Mora sadržzavati <b>%BUGID%</b> koji "
+"se zamijeni sa brojem problema. Na primjer:<br><nobr><b>http://example.com/"
+"mantis/view.php?id=%BUGID%</b></nobr>"
+
+#: src/svnfrontend/editpropsdlg.cpp:103
+#, kde-format
+msgid ""
+"String which is appended to a log message when an issue number is entered. "
+"The string must contain <b>%BUGID%</b> which gets replaced with the bug "
+"issue number."
+msgstr ""
+"String koji je u prilogu poruci bilješke kad je broj problema unesen. String "
+"mora sadržavati <b>%BUGID%</b> koji će biti zamijenjen sa brojem problema."
+
+#: src/svnfrontend/editpropsdlg.cpp:106
+#, fuzzy, kde-format
+#| msgid ""
+#| "Set to <b>'yes'</b> if a warning shall be shown when no issue is entered "
+#| "in the commit dialog. Possible values:<br><b>'true'</b>/<b>'yes'</b> or "
+#| "<b>'false'</b>/<b>'no'</b>."
+msgid ""
+"Set to <b>'yes'</b> if a warning shall be shown when no issue is entered in "
+"the commit dialog. Possible values:<br/><b>'true'</b>/<b>'yes'</b> or "
+"<b>'false'</b>/<b>'no'</b>."
+msgstr ""
+"Postavljeno na  <b>'yes'</b>Ako bi upozorenje trebalo biti prikazanao kad "
+"nije uneseno nikakvo pitanje u dialog kutiju. Moguće vrijednosti:"
+"<br><b>'true'</b>/<b>'yes'</b> or <b>'false'</b>/<b>'no'</b>."
+
+#: src/svnfrontend/editpropsdlg.cpp:109
+#, fuzzy, kde-format
+#| msgid ""
+#| "Set to <b>'false'</b> if your bugtracking system has issues which are "
+#| "referenced not by numbers.<br>Possible values: <b>'true'</b> or "
+#| "<b>'false'</b>."
+msgid ""
+"Set to <b>'false'</b> if your bugtracking system has issues which are "
+"referenced not by numbers.<br/>Possible values: <b>'true'</b> or <b>'false'</"
+"b>."
+msgstr ""
+"Postavljeno na <b>'false'</b> Ako vaš sistem za traženje grešaka ima "
+"problema koji nisu u vezi sa brojevima<br>Moguće vrijednosti: <b>'true'</b> "
+"or <b>'false'</b>."
+
+#: src/svnfrontend/editpropsdlg.cpp:112
+#, kde-format
+msgid ""
+"Set to <b>'false'</b> if you want the bugtracking ID to be inserted at the "
+"top of the log message. The default is <b>'true'</b> which means the "
+"bugtracking ID is appended to the log message."
+msgstr ""
+"Postavljeno na <b>'false'</b> Ako želite ID traženja grešaka da bude "
+"postavljen na vrh poruke bilješke. Zadano je <b>'true'</b> Što znači da je "
+"ID traženja grešaka u prilogu poruke bilješke."
+
+#: src/svnfrontend/editpropsdlg.cpp:116
+#, fuzzy, kde-format
+#| msgid ""
+#| "Two regular expressions separated by a newline.<br>The first expression "
+#| "is used to find a string referring to an issue, the second expression is "
+#| "used to extract the bare bug ID from that string."
+msgid ""
+"Two regular expressions separated by a newline.<br/>The first expression is "
+"used to find a string referring to an issue, the second expression is used "
+"to extract the bare bug ID from that string."
+msgstr ""
+"Dva regularna izraza odvojena novom linijom.<br> Prvi izraz je korišten za "
+"pronalaženje stringa koji se odnosi na problem, a drugi izraz je korišten za "
+"otpakivanje ID-a problema iz tog stringa."
+
+#: src/svnfrontend/editpropsdlg.cpp:123
+#, fuzzy, kde-format
+#| msgid "Delete property"
+msgid "Select or enter new property"
+msgstr "Izbriši svojstvo"
+
+#: src/svnfrontend/editpropsdlg.cpp:148
+#, kde-format
+msgid "No help for this property available"
+msgstr ""
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, EditPropsDlg)
+#: src/svnfrontend/editpropsdlg.ui:14
+#, kde-format
+msgid "Modify property"
+msgstr "Preuredi svojstvo"
+
+#. i18n: ectx: property (text), widget (QLabel, m_NameLabel)
+#: src/svnfrontend/editpropsdlg.ui:22
+#, kde-format
+msgid "Property name:"
+msgstr "Naziv svojstva:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_ValueLabel)
+#: src/svnfrontend/editpropsdlg.ui:46
+#, kde-format
+msgid "Property value:"
+msgstr "Veličina svojstva:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, helpButton)
+#: src/svnfrontend/editpropsdlg.ui:69
+#, kde-format
+msgid "Click for short info about pre-defined property name"
+msgstr "Klikni za kratki info o predefinisanim imenima svojstava"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, CheckoutInfo)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:14
+#, kde-format
+msgid "Checkout info"
+msgstr "Informacije provjerene"
+
+#. i18n: ectx: property (text), widget (QLabel, m_TargetLabel)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:26
+#, kde-format
+msgid "Select target directory:"
+msgstr "Izaberite odredišni direktorij:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_UrlLabel)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:40
+#, kde-format
+msgid "Enter URL:"
+msgstr "Unesi URL:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_ignoreExternals)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:67
+#, kde-format
+msgid "Ignore externals while operation"
+msgstr "Tokom jedne operacije ignoriši ostale"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_ignoreExternals)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:70
+#, kde-format
+msgid "Ignore externals"
+msgstr "Ignoriši vanjske operacije"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_overwriteButton)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:77
+#, kde-format
+msgid "May existing unversioned items overwritten"
+msgstr "Može li postojeća nepromjenjena stavka biti prepisana"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_overwriteButton)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:80
+#, kde-format
+msgid "Overwrite existing"
+msgstr "Prepiši postojeće"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_IgnoreKeywords)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:93
+#, fuzzy, kde-format
+#| msgid "Ignore externals"
+msgid "Ignore keywords"
+msgstr "Ignoriši vanjske operacije"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_CreateDirButton)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:110
+#, kde-format
+msgid "Append source URL name to subfolder"
+msgstr "Dodaj izvorno ime URl-a u podfolder"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_ShowExplorer)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:120
+#, kde-format
+msgid "Open after job"
+msgstr "Otvori poslije naredbe"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:43
+#, kde-format
+msgid "Property"
+msgstr "Svojstvo"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:44
+#, kde-format
+msgid "Value"
+msgstr "Vrijednost"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:109
+#: src/svnfrontend/propertiesdlg.cpp:114 src/svnfrontend/propertiesdlg.cpp:165
+#, kde-format
+msgid ""
+"This property may not set by users.\n"
+"Rejecting it."
+msgstr ""
+"Ovo svojstvo ne može postaviti korisnik.\n"
+"Odbacuj to."
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:109
+#: src/svnfrontend/propertiesdlg.cpp:114 src/svnfrontend/propertiesdlg.cpp:165
+#, kde-format
+msgid "Protected property"
+msgstr "Zaštićena svojstva"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:114
+#: src/svnfrontend/propertiesdlg.cpp:118 src/svnfrontend/propertiesdlg.cpp:169
+#, kde-format
+msgid ""
+"A property with that name exists.\n"
+"Rejecting it."
+msgstr ""
+"Svojstvo s tim nazivom postoji.\n"
+"Odbacuj to."
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:114
+#: src/svnfrontend/propertiesdlg.cpp:118 src/svnfrontend/propertiesdlg.cpp:169
+#, kde-format
+msgid "Double property"
+msgstr "Duplo svojstvo"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, RangeInput)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:6
+#, kde-format
+msgid "Revisions"
+msgstr "Revizije"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_startRevBox)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:12
+#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:209
+#, kde-format
+msgid "Start with revision"
+msgstr "Počni sa revizijama"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, m_startWorkingButton)
+#. i18n: ectx: property (toolTip), widget (QRadioButton, m_stopWorkingButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:23
+#: src/svnfrontend/fronthelpers/rangeinput.ui:140
+#, kde-format
+msgid "Select current working copy changes"
+msgstr "Odaberi trenutne promjenjene aktivne kopije"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startWorkingButton)
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopWorkingButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:26
+#: src/svnfrontend/fronthelpers/rangeinput.ui:143
+#, kde-format
+msgid "WORKING"
+msgstr "OBRADA"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startNumberButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:56
+#, kde-format
+msgid "N&umber"
+msgstr "B&roj"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startHeadButton)
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopHeadButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:66
+#: src/svnfrontend/fronthelpers/rangeinput.ui:120
+#, kde-format
+msgid "HEAD"
+msgstr "HEAD"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startStartButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:73
+#, kde-format
+msgid "S&TART"
+msgstr "P&OČETAK"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_stopRevBox)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:85
+#, kde-format
+msgid "Stop with revision"
+msgstr "Prekini sa revizijom"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopNumberButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:93
+#, kde-format
+msgid "Number"
+msgstr "Broj"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopStartButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:113
+#, kde-format
+msgid "START"
+msgstr "POČETAK"
+
+#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:62
+#, fuzzy, kde-format
+#| msgid "Select revision"
+msgctxt "@title:window"
+msgid "Select Revisions"
+msgstr "Odaberi reviziju"
+
+#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:205
+#, kde-format
+msgid "Select revision"
+msgstr "Odaberi reviziju"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_RevisionButton)
+#: src/svnfrontend/fronthelpers/revisionbutton.ui:22
+#, kde-format
+msgid "-1"
+msgstr "-1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:146
+#, kde-format
+msgid ""
+"Could not run process \"%1\".\n"
+"\n"
+"Process stopped with message:\n"
+"%2"
+msgstr ""
+"Nije se mogao pokrenuti proces\"%1\".\n"
+"Proces zaustavljen sa porukom:\n"
+"%2"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:335
+#, kde-format
+msgid "Error running the graph layouting tool.\n"
+msgstr "Greška pri izvršavanju alata za oblikovanje grafikona.\n"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:336
+#, kde-format
+msgid "Please check that 'dot' is installed (package GraphViz)."
+msgstr "Provjerite da je „dot“ instalirana (paket GraphViz)."
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:425
+#, kde-format
+msgid "Deleted at revision %1"
+msgstr "Obrisano na reviziji %1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:428
+#, kde-format
+msgid "Added at revision %1 as %2"
+msgstr "Dodano na reviziji %1 kao %2"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:434
+#, kde-format
+msgid "Copied to %1 at revision %2"
+msgstr "Kopirano %1 na reviziji %2"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:437
+#, kde-format
+msgid "Renamed to %1 at revision %2"
+msgstr "Preimenovano %1 na reviziji %2"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:440
+#, kde-format
+msgid "Modified at revision %1"
+msgstr "Promjenjeno na reviziji %1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:443
+#, kde-format
+msgid "Replaced at revision %1"
+msgstr "Premješteno na reviziji %1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:446
+#, kde-format
+msgid "Revision %1"
+msgstr "Revizija %1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:466
+#, kde-format
+msgid "Could not open temporary file %1 for writing."
+msgstr "Nije mogao otvoriti privremenu datoteku %1 za pisanje."
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:561
+#, kde-format
+msgid "<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>"
+msgstr "<br>Revizija: %1<br>Autor: %2<br>Datum: %3<br>Prijava: %4</html>"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:569
+#, kde-format
+msgid "<b>Revision</b>%1%2%3"
+msgstr "<b>Revizija</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:570
+#, kde-format
+msgid "<b>Author</b>%1%2%3"
+msgstr "<b>Autor</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:571
+#, kde-format
+msgid "<b>Date</b>%1%2%3"
+msgstr "<b>Datum</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:572
+#, kde-format
+msgid "<b>Log</b>%1%2%3"
+msgstr "<b>Prijava</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:841
+#, kde-format
+msgid "Diff to previous"
+msgstr "Poredi sa prethodnom"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:845
+#, kde-format
+msgid "Diff to selected item"
+msgstr "Poredi sa odabranom stavkom"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:848
+#: src/svnfrontend/svnlogdlgimp.cpp:515
+#, kde-format
+msgid "Cat this version"
+msgstr "Skrati ovu verziju"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:851
+#, kde-format
+msgid "Unselect item"
+msgstr "Ukloni odabir stavke"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:853
+#, kde-format
+msgid "Select item"
+msgstr "Odaberi stavku"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:856
+#, kde-format
+msgid "Display details"
+msgstr "Prikaži detalje"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:859
+#, kde-format
+msgid "Rotate counter-clockwise"
+msgstr "Okreni u suprotnom smjeru"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:860
+#, kde-format
+msgid "Rotate clockwise"
+msgstr "Okreni u desno"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:866
+#: src/svnfrontend/graphtree/revgraphview.cpp:886
+#, kde-format
+msgid "Save tree as PNG"
+msgstr "Snimi stablo kao PNG"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:886
+#, kde-format
+msgid "Image (*.png)"
+msgstr ""
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:94
+#: src/svnfrontend/svnactions.cpp:294
+#, fuzzy, kde-format
+#| msgid "Logs"
+msgctxt "@title:window"
+msgid "Logs"
+msgstr "Dnevnik"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:94
+#: src/svnfrontend/svnactions.cpp:294
+#, kde-format
+msgid "Getting logs - hit Cancel for abort"
+msgstr "Pribavljanje bilješki- pritisnite Poništi za poništavanje"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:104
+#, kde-format
+msgid "No log cache possible due broken database and networking not allowed."
+msgstr ""
+"Keš bilješke nije moguć zbog isprekidane baze podataka i mreža nije "
+"dopuštena."
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:104
+#: src/svnfrontend/graphtree/revisiontree.cpp:109
+#, kde-format
+msgid ""
+"Could not retrieve logs, reason:\n"
+"%1"
+msgstr ""
+"Nije moga vratiti prijavu, razlog:\n"
+"%1"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:134
+#, kde-format
+msgid "Scanning the logs for %1"
+msgstr "Provjera prijava za %1"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:134
+#, fuzzy, kde-format
+#| msgid "C&ancel"
+msgid "Cancel"
+msgstr "&Odustani"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:135
+#, fuzzy, kde-format
+#| msgid "Scanning logs"
+msgctxt "@title:window"
+msgid "Scanning logs"
+msgstr "Provjerava prijave"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:224
+#: src/svnfrontend/graphtree/revisiontree.cpp:262
+#: src/svnfrontend/graphtree/revisiontree.cpp:311
+#, kde-format
+msgid "%1<br>Check change entry %2 of %3"
+msgstr "%1<br>Provjeri promjenjene unose %2 od %3"
+
+#. i18n: ectx: property (text), widget (QLabel, m_Srclabel)
+#: src/svnfrontend/hotcopydlg.ui:11
+#, kde-format
+msgid "Repository to copy:"
+msgstr "Repozitorij za kopiranje:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_Destlabel)
+#: src/svnfrontend/hotcopydlg.ui:31
+#, kde-format
+msgid "Destination folder:"
+msgstr "Odredišni direktorij:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_Cleanlogs)
+#: src/svnfrontend/hotcopydlg.ui:51
+#, kde-format
+msgid "Clean logs"
+msgstr "Isprazni prijave"
+
+#: src/svnfrontend/importdir_logmsg.cpp:38
+#, kde-format
+msgid "No ignore"
+msgstr "Ne ignoriši"
+
+#: src/svnfrontend/importdir_logmsg.cpp:39
+#, kde-format
+msgid "If set, add files or directories that match ignore patterns."
+msgstr ""
+"Ako postavite, dodaj datoteke ili direktorije koji odgovaraju ignorisanim "
+"obrascima."
+
+#: src/svnfrontend/importdir_logmsg.cpp:44
+#, kde-format
+msgid "Ignore unknown node types"
+msgstr "Ignoriši nepoznate tipove člana"
+
+#: src/svnfrontend/importdir_logmsg.cpp:45
+#, kde-format
+msgid "Should files with unknown node types be ignored"
+msgstr "Da li datoteke sa nepoznatim tipovima člana trebaju biti ignorisane"
+
+#: src/svnfrontend/importdir_logmsg.cpp:46
+#, kde-format
+msgid ""
+"Ignore files of which the node type is unknown, such as device files and "
+"pipes."
+msgstr ""
+"Ignoriši datoteke kod kojih nije poznat tip člana, kao što su datoteke "
+"uređaja i vodovi."
+
+#: src/svnfrontend/importdir_logmsg.cpp:80
+#, kde-format
+msgid "(Last part)"
+msgstr "(Zadnji dio)"
+
+#: src/svnfrontend/importdir_logmsg.cpp:80
+#, kde-format
+msgid "Create subdirectory %1 on import"
+msgstr "Kreiraj poddirektorij %1 na ulazu"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel4)
+#: src/svnfrontend/loaddmpdlg.ui:11
+#, kde-format
+msgid "Load into repository:"
+msgstr "Učitaj u repozitorij:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_UuidGroup)
+#: src/svnfrontend/loaddmpdlg.ui:24
+#, kde-format
+msgid "Uuid action"
+msgstr "Uuid akcija"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_UUidForce)
+#. i18n: ectx: property (text), widget (QCheckBox, m_ForceCheck)
+#: src/svnfrontend/loaddmpdlg.ui:30 src/svnfrontend/merge_dlg.ui:116
+#, kde-format
+msgid "Force"
+msgstr "Natjeraj"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_UUidIgnore)
+#: src/svnfrontend/loaddmpdlg.ui:40
+#, kde-format
+msgid "Ignore"
+msgstr "Ignoriši"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_UUidDefault)
+#: src/svnfrontend/loaddmpdlg.ui:50
+#, kde-format
+msgid "Default"
+msgstr "Podrazumijevano"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_UsePre)
+#: src/svnfrontend/loaddmpdlg.ui:66
+#, kde-format
+msgid "Use pre-commit hook"
+msgstr "Koristi unaprijed određenu vezu"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_UsePost)
+#: src/svnfrontend/loaddmpdlg.ui:76
+#, kde-format
+msgid "Use post-commit hook"
+msgstr "Koristi unaprijed određenu vezu"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, textLabel5)
+#. i18n: ectx: property (toolTip), widget (KLineEdit, m_Rootfolder)
+#: src/svnfrontend/loaddmpdlg.ui:86 src/svnfrontend/loaddmpdlg.ui:144
+#, kde-format
+msgid "Path to load the dump into (see context help)"
+msgstr "Put očitavanja preusmjerenja u(vidi kontekst pomoć)"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, textLabel5)
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, m_Rootfolder)
+#: src/svnfrontend/loaddmpdlg.ui:89 src/svnfrontend/loaddmpdlg.ui:147
+#, kde-format
+msgid ""
+"If not empty, load the dump into a specific folder instead into root of "
+"repository. This folder must exist before loading the dump."
+msgstr ""
+"Ako nije prazan, spremi preusmjerenja u određeni folder umjesto glavnog "
+"repozitorija.Ovaj folder mora postojati prije preusmjerenja."
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel5)
+#: src/svnfrontend/loaddmpdlg.ui:92
+#, kde-format
+msgid "Load into folder:"
+msgstr "Spremi u folder:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#: src/svnfrontend/loaddmpdlg.ui:105
+#, kde-format
+msgid "Dump file:"
+msgstr "Datoteka za odbaciti:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_validateProps)
+#: src/svnfrontend/loaddmpdlg.ui:118
+#, kde-format
+msgid "Validate the properties on load (only Subversion 1.7 or newer)"
+msgstr "Provjerite podešavanja prijave (samo podverzija 1.7 ili najnovije)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_validateProps)
+#: src/svnfrontend/loaddmpdlg.ui:121
+#, kde-format
+msgid "Validate properties"
+msgstr "Provjerite podešavanja"
+
+#: src/svnfrontend/maintreewidget.cpp:271
+#, kde-format
+msgid "Networked URL to open but networking is disabled."
+msgstr "Prepoznat URL za otvoriti ali internet nije odobren."
+
+#: src/svnfrontend/maintreewidget.cpp:497
+#, kde-format
+msgid "History of item"
+msgstr "Historija stavke"
+
+#: src/svnfrontend/maintreewidget.cpp:498
+#: src/svnfrontend/maintreewidget.cpp:501
+#: src/svnfrontend/maintreewidget.cpp:505
+#, kde-format
+msgid "History"
+msgstr "Historija"
+
+#: src/svnfrontend/maintreewidget.cpp:499
+#, kde-format
+msgid "Displays the history log of selected item"
+msgstr "Prikaži historiju prijave odabrane stavke"
+
+#: src/svnfrontend/maintreewidget.cpp:500
+#: src/svnfrontend/maintreewidget.cpp:504
+#, kde-format
+msgid "History of item ignoring copies"
+msgstr "Historija stavki, kopije ignorisane"
+
+#: src/svnfrontend/maintreewidget.cpp:502
+#: src/svnfrontend/maintreewidget.cpp:506
+#, kde-format
+msgid "Displays the history log of selected item without following copies"
+msgstr "Prikaži historiju prijave odabrane stavke bez kopija"
+
+#: src/svnfrontend/maintreewidget.cpp:508
+#, kde-format
+msgid "Full revision tree"
+msgstr "Puno reviziono stablo"
+
+#: src/svnfrontend/maintreewidget.cpp:509
+#, kde-format
+msgid "Shows history of item as linked tree"
+msgstr "Pokazuje historiju elemenata kao povezano stablo"
+
+#: src/svnfrontend/maintreewidget.cpp:510
+#, kde-format
+msgid "Partial revision tree"
+msgstr "Parcijalno reviziono stablo"
+
+#: src/svnfrontend/maintreewidget.cpp:511
+#, kde-format
+msgid "Shows history of item as linked tree for a revision range"
+msgstr "Pokazuje historiju elemenata kao povezano stablo za raspon revizije"
+
+#: src/svnfrontend/maintreewidget.cpp:513
+#: src/svnfrontend/maintreewidget.cpp:514
+#, kde-format
+msgid "Properties"
+msgstr "Podešavanja"
+
+#: src/svnfrontend/maintreewidget.cpp:515
+#, kde-format
+msgid "Display Properties"
+msgstr "Prikaži podešavanja"
+
+#: src/svnfrontend/maintreewidget.cpp:516
+#, kde-format
+msgid "Display last changes"
+msgstr "Prikaži posljednju izmjenu"
+
+#: src/svnfrontend/maintreewidget.cpp:517
+#, kde-format
+msgid "Display last changes as difference to previous commit."
+msgstr "Prikaži posljednje promjene kao razliku prethodnim izvršenjima."
+
+#: src/svnfrontend/maintreewidget.cpp:518
+#, kde-format
+msgid "Details"
+msgstr "Detalji"
+
+#: src/svnfrontend/maintreewidget.cpp:519
+#, kde-format
+msgid "Show details about selected item"
+msgstr "Prikaži detalje o odabranoj stavki"
+
+#: src/svnfrontend/maintreewidget.cpp:520
+#, kde-format
+msgid "Move"
+msgstr "Premjesti"
+
+#: src/svnfrontend/maintreewidget.cpp:521
+#, kde-format
+msgid "Moves or renames current item"
+msgstr "Premješta ili preimenuje trenutnu stavku"
+
+#: src/svnfrontend/maintreewidget.cpp:523
+#, kde-format
+msgid "Create a copy of current item"
+msgstr "Kreiraj kopiju trenutne stavke"
+
+#: src/svnfrontend/maintreewidget.cpp:524
+#, kde-format
+msgid "Check for updates"
+msgstr "Provjeri najnovije informacije"
+
+#: src/svnfrontend/maintreewidget.cpp:525
+#, kde-format
+msgid ""
+"Check if current working copy has items with newer version in repository"
+msgstr ""
+"Provjeri ako trenutna radna kopija ima stavke sa novijom verzijom u "
+"repozitoriju"
+
+#: src/svnfrontend/maintreewidget.cpp:527
+#, kde-format
+msgid "Check updates"
+msgstr "Provjeri najnovije informacije"
+
+#: src/svnfrontend/maintreewidget.cpp:530
+#, kde-format
+msgid "Blame"
+msgstr "Blame"
+
+#: src/svnfrontend/maintreewidget.cpp:531
+#: src/svnfrontend/maintreewidget.cpp:534
+#, kde-format
+msgid ""
+"Output the content of specified files or URLs with revision and author "
+"information in-line."
+msgstr ""
+"Prikaži sadržaj određene datoteke ili URl sa revizijom i informacije o "
+"autoru u-liniji."
+
+#: src/svnfrontend/maintreewidget.cpp:533
+#, kde-format
+msgid "Blame range"
+msgstr "Raspon blame-a"
+
+#: src/svnfrontend/maintreewidget.cpp:537
+#, kde-format
+msgid "Cat head"
+msgstr "Mačija glava"
+
+#: src/svnfrontend/maintreewidget.cpp:538
+#, kde-format
+msgid "Output the content of specified files or URLs."
+msgstr "Prikaži sadržaj određene datoteke ili URL-ove."
+
+#: src/svnfrontend/maintreewidget.cpp:540
+#, kde-format
+msgid "Cat revision..."
+msgstr "Skrati reviziju..."
+
+#: src/svnfrontend/maintreewidget.cpp:541
+#, kde-format
+msgid "Output the content of specified files or URLs at specific revision."
+msgstr "Prikaži sadržaj određenih datoteka ili URL-ove na određenoj reviziji."
+
+#: src/svnfrontend/maintreewidget.cpp:544
+#, kde-format
+msgid "Lock current items"
+msgstr "Zaključaj trenutne stavke"
+
+#: src/svnfrontend/maintreewidget.cpp:545
+#, kde-format
+msgid "Try lock current item against changes from other users"
+msgstr "Pokušaj zaključati trenutnu stavku prema promjenama drugog korisnika"
+
+#: src/svnfrontend/maintreewidget.cpp:547
+#, kde-format
+msgid "Unlock current items"
+msgstr "Otključaj trenutne stavke"
+
+#: src/svnfrontend/maintreewidget.cpp:548
+#, kde-format
+msgid "Free existing lock on current item"
+msgstr "Oslobodi postojeći ključ na trenutnoj stavki"
+
+#: src/svnfrontend/maintreewidget.cpp:552 src/svnfrontend/svnactions.cpp:657
+#, kde-format
+msgid "New folder"
+msgstr "Novi folder"
+
+#: src/svnfrontend/maintreewidget.cpp:553
+#, kde-format
+msgid "Create a new folder"
+msgstr "Kreiraj novi folder"
+
+#: src/svnfrontend/maintreewidget.cpp:554
+#, kde-format
+msgid "Switch repository"
+msgstr "Zamjeni repozitorij"
+
+#: src/svnfrontend/maintreewidget.cpp:555
+#, kde-format
+msgid "Switch repository path of current working copy path (\"svn switch\")"
+msgstr "Zamjeni put repozitorija sa trenutnom radnom kopijom(\"svn switch\")"
+
+#: src/svnfrontend/maintreewidget.cpp:558
+#, kde-format
+msgid "Relocate current working copy URL"
+msgstr "Promjeni lokaciju URL trenutne radne kopije"
+
+#: src/svnfrontend/maintreewidget.cpp:559
+#, kde-format
+msgid "Relocate URL of current working copy path to other URL"
+msgstr "Premjesti put URL trenutne radne kopije u drugi URL"
+
+#: src/svnfrontend/maintreewidget.cpp:562
+#, kde-format
+msgid "Check for unversioned items"
+msgstr "Provjeri ne promijenjene stavke"
+
+#: src/svnfrontend/maintreewidget.cpp:563
+#, kde-format
+msgid "Unversioned"
+msgstr "Ne promijenjene"
+
+#: src/svnfrontend/maintreewidget.cpp:564
+#, kde-format
+msgid "Browse folder for unversioned items and add them if wanted."
+msgstr "Potraži mapu za ne revizirane stavke i dodaj ih po želji."
+
+#: src/svnfrontend/maintreewidget.cpp:567
+#, kde-format
+msgid "Open repository of working copy"
+msgstr "Otvori repozitorij od radne kopije"
+
+#: src/svnfrontend/maintreewidget.cpp:569
+#, kde-format
+msgid "Opens the repository the current working copy was checked out from"
+msgstr "Otvoreni repozitorij trenutne radne kopije je provjeren sa"
+
+#: src/svnfrontend/maintreewidget.cpp:571
+#, kde-format
+msgid "Cleanup"
+msgstr "Očisti"
+
+#: src/svnfrontend/maintreewidget.cpp:572
+#, kde-format
+msgid ""
+"Recursively clean up the working copy, removing locks, resuming unfinished "
+"operations, etc."
+msgstr ""
+"Rekurzivno očisti radnu kopiju, uklanjajući ključeve, nastavljajući "
+"nezavršene operacije, itd."
+
+#: src/svnfrontend/maintreewidget.cpp:573
+#, kde-format
+msgid "Import folders into current"
+msgstr "Smjesti folder u trenutni"
+
+#: src/svnfrontend/maintreewidget.cpp:575
+#, kde-format
+msgid "Import folder content into current URL"
+msgstr "Smjesti sadržaj foldera u trenutni URL"
+
+#: src/svnfrontend/maintreewidget.cpp:579
+#, kde-format
+msgid "Add selected files/dirs"
+msgstr "Dodaj odabrane datoteke/dirs"
+
+#: src/svnfrontend/maintreewidget.cpp:580
+#, kde-format
+msgid "Adding selected files and/or directories to repository"
+msgstr "Dodavanje odabranih datoteka i/ili direktorija u repozitorij"
+
+#: src/svnfrontend/maintreewidget.cpp:582
+#, kde-format
+msgid "Add selected files/dirs recursive"
+msgstr "Dodaj odabrane datoteke/dirs rekurzivno"
+
+#: src/svnfrontend/maintreewidget.cpp:584
+#, kde-format
+msgid ""
+"Adding selected files and/or directories to repository and all subitems of "
+"folders"
+msgstr ""
+"Dodavanje odabranih datoteka i/ ili direktorija u repozitorij i svih "
+"podstavki foldera"
+
+#: src/svnfrontend/maintreewidget.cpp:586
+#, kde-format
+msgid "Delete selected files/dirs"
+msgstr "Obriši odabrane datoteke/dirs"
+
+#: src/svnfrontend/maintreewidget.cpp:588
+#, kde-format
+msgid "Deleting selected files and/or directories from repository"
+msgstr "Brisanje odabranih datoteka i/ili direktorija iz repozitorija"
+
+#: src/svnfrontend/maintreewidget.cpp:589
+#, kde-format
+msgid "Delete folder"
+msgstr "Obriši folder"
+
+#: src/svnfrontend/maintreewidget.cpp:590
+#, kde-format
+msgid "Deleting selected directories from repository"
+msgstr "Brisanje odabranih direktorija iz repozitorija"
+
+#: src/svnfrontend/maintreewidget.cpp:592
+#, kde-format
+msgid "Revert current changes"
+msgstr "Vrati trenutne promjene"
+
+#: src/svnfrontend/maintreewidget.cpp:594
+#, kde-format
+msgid "Mark resolved"
+msgstr "Označi riješenim"
+
+#: src/svnfrontend/maintreewidget.cpp:595
+#, kde-format
+msgid "Marking files or dirs resolved"
+msgstr "Označavanje datoteka ili dirs riješenim"
+
+#: src/svnfrontend/maintreewidget.cpp:597
+#, kde-format
+msgid "Resolve conflicts"
+msgstr "Razriješi sukobe"
+
+#: src/svnfrontend/maintreewidget.cpp:599
+#, kde-format
+msgid "Ignore/Unignore current item"
+msgstr "Ignoriši/ponovo prihvati trenutne stavke"
+
+#: src/svnfrontend/maintreewidget.cpp:600
+#: src/svnfrontend/maintreewidget.cpp:601
+#, kde-format
+msgid "Add or Remove ignore pattern"
+msgstr "Dodaj ili premjesti ignoriši patern"
+
+#: src/svnfrontend/maintreewidget.cpp:603
+#: src/svnfrontend/maintreewidget.cpp:666
+#, kde-format
+msgid "Update to head"
+msgstr "Postavi najnovije informacije na vrh"
+
+#: src/svnfrontend/maintreewidget.cpp:604
+#, kde-format
+msgctxt "Menu item"
+msgid "Update"
+msgstr "Ažuriranje"
+
+#: src/svnfrontend/maintreewidget.cpp:605
+#, kde-format
+msgid "Update to revision..."
+msgstr "Ažuriraj na reviziju..."
+
+#: src/svnfrontend/maintreewidget.cpp:606
+#: src/svnfrontend/maintreewidget.cpp:607
+#: src/svnfrontend/maintreewidget.cpp:665 src/svnfrontend/svnactions.cpp:1018
+#, kde-format
+msgid "Commit"
+msgstr "Izvrši"
+
+#: src/svnfrontend/maintreewidget.cpp:609
+#: src/svnfrontend/maintreewidget.cpp:611
+#, kde-format
+msgid "Diff local changes"
+msgstr "Poredi lokalne promijene"
+
+#: src/svnfrontend/maintreewidget.cpp:610
+#: src/svnfrontend/maintreewidget.cpp:612
+#, kde-format
+msgid ""
+"Diff working copy against BASE (last checked out version) - does not require "
+"access to repository"
+msgstr ""
+"Usporedi radnu kopiju sa BASE (posljednja provjerena verzija)- ne zahtijeva "
+"pristup repozitoriju"
+
+#: src/svnfrontend/maintreewidget.cpp:615
+#, kde-format
+msgid "Diff against HEAD"
+msgstr "Poredi sa osnovnom"
+
+#: src/svnfrontend/maintreewidget.cpp:616
+#, kde-format
+msgid ""
+"Diff working copy against HEAD (last checked in version)- requires access to "
+"repository"
+msgstr ""
+"Usporedi radnu kopiju sa HEAD (posljednja provjerena verzija)-  zahtijeva "
+"pristup repozitoriju"
+
+#: src/svnfrontend/maintreewidget.cpp:619
+#: src/svnfrontend/maintreewidget.cpp:622
+#, kde-format
+msgid "Diff items"
+msgstr "Stavke poređenja"
+
+#: src/svnfrontend/maintreewidget.cpp:620
+#: src/svnfrontend/maintreewidget.cpp:623
+#, kde-format
+msgid "Diff two items"
+msgstr "Uporedi dvije stavke"
+
+#: src/svnfrontend/maintreewidget.cpp:627
+#, kde-format
+msgid "Merge two revisions"
+msgstr "Spoji dvije revizije"
+
+#: src/svnfrontend/maintreewidget.cpp:628
+#, kde-format
+msgid "Merge"
+msgstr "Spoji"
+
+#: src/svnfrontend/maintreewidget.cpp:629
+#, kde-format
+msgid "Merge two revisions of this entry into itself"
+msgstr "Spoji dvije revizije ulaza u jednu"
+
+#: src/svnfrontend/maintreewidget.cpp:632
+#, kde-format
+msgid "Merge..."
+msgstr "Spoji..."
+
+#: src/svnfrontend/maintreewidget.cpp:633
+#, kde-format
+msgid ""
+"Merge repository path into current working copy path or current repository "
+"path into a target"
+msgstr ""
+"Spoji put repozitorija u trenutni put radne kopije ili trenutni put "
+"repozitorija u ciljni"
+
+#: src/svnfrontend/maintreewidget.cpp:634
+#: src/svnfrontend/maintreewidget.cpp:1152
+#: src/svnfrontend/maintreewidget.cpp:1220
+#, kde-format
+msgid "Open With..."
+msgstr "Otvori sa..."
+
+#: src/svnfrontend/maintreewidget.cpp:638
+#, kde-format
+msgid "Checkout current repository path"
+msgstr "Provjeri trenutni put repozitorija"
+
+#: src/svnfrontend/maintreewidget.cpp:639
+#: src/svnfrontend/maintreewidget.cpp:647
+#, kde-format
+msgid "Checkout"
+msgstr "Provjeri"
+
+#: src/svnfrontend/maintreewidget.cpp:641
+#, kde-format
+msgid "Export current repository path"
+msgstr "Izvezi trenutnu putanju repozitorija"
+
+#: src/svnfrontend/maintreewidget.cpp:642
+#, kde-format
+msgid "Select browse revision"
+msgstr "Izaberi reviziju pretrage"
+
+#: src/svnfrontend/maintreewidget.cpp:646 src/svnfrontend/svnactions.cpp:1628
+#: src/svnfrontend/svnactions.cpp:1634
+#, kde-format
+msgid "Checkout a repository"
+msgstr "Provjeri repozitori"
+
+#: src/svnfrontend/maintreewidget.cpp:648
+#, kde-format
+msgid "Export a repository"
+msgstr "Eksportuj repozitorij"
+
+#: src/svnfrontend/maintreewidget.cpp:649
+#, kde-format
+msgid "Export"
+msgstr "Eksportuj"
+
+#: src/svnfrontend/maintreewidget.cpp:650
+#, kde-format
+msgid "Refresh view"
+msgstr "Osvježi pogled"
+
+#: src/svnfrontend/maintreewidget.cpp:651
+#, kde-format
+msgid "Refresh"
+msgstr "Osvježi"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DispSpecDiff)
+#: src/svnfrontend/maintreewidget.cpp:653 src/svnfrontend/svnlogdlg.ui:211
+#, kde-format
+msgid "Diff revisions"
+msgstr "Uporedi revizije"
+
+#: src/svnfrontend/maintreewidget.cpp:656
+#, kde-format
+msgid "Unfold File Tree"
+msgstr "Razmotriti stablo datoteke"
+
+#: src/svnfrontend/maintreewidget.cpp:657
+#, kde-format
+msgid "Opens all branches of the file tree"
+msgstr "Otvara sve grane stabla datoteke"
+
+#: src/svnfrontend/maintreewidget.cpp:658
+#, kde-format
+msgid "Fold File Tree"
+msgstr "Složiti lanac datoteka"
+
+#: src/svnfrontend/maintreewidget.cpp:659
+#, kde-format
+msgid "Closes all branches of the file tree"
+msgstr "Zatvara sve grane stabla datoteke"
+
+#: src/svnfrontend/maintreewidget.cpp:662
+#: src/svnfrontend/maintreewidget.cpp:839
+#: src/svnfrontend/maintreewidget.cpp:1788
+#: src/svnfrontend/maintreewidget.cpp:1804
+#, kde-format
+msgid "Update log cache"
+msgstr "Ažuriraj memoriju prijavljivanja"
+
+#: src/svnfrontend/maintreewidget.cpp:663
+#, kde-format
+msgid "Update the log cache for current repository"
+msgstr "Ažuriraj memoriju prijavljivanja za trenutni repozitorij"
+
+#: src/svnfrontend/maintreewidget.cpp:667
+#, kde-format
+msgid "Set property recursive"
+msgstr "Postavi svojstva rekurzivno"
+
+#: src/svnfrontend/maintreewidget.cpp:669
+#, kde-format
+msgid "Settings for current repository"
+msgstr "Podešavanja za trenutni repozitorij"
+
+#: src/svnfrontend/maintreewidget.cpp:841
+#: src/svnfrontend/maintreewidget.cpp:1799
+#, kde-format
+msgid "Stop updating the log cache"
+msgstr "Prestani sa ažuriranjem memorije prijavljivanja"
+
+#: src/svnfrontend/maintreewidget.cpp:1037
+#, fuzzy, kde-format
+#| msgid "Edit pattern to ignore for \"%1\""
+msgctxt "@title:window"
+msgid "Edit Pattern to Ignore for \"%1\""
+msgstr "Promjeni patern za ignorisat sa \"%1\""
+
+#: src/svnfrontend/maintreewidget.cpp:1314
+#: src/svnfrontend/maintreewidget.cpp:1358
+#, kde-format
+msgid "Nothing selected for unlock"
+msgstr "Ništa nije odabrano za otključati"
+
+#: src/svnfrontend/maintreewidget.cpp:1318
+#, fuzzy, kde-format
+#| msgid "Lock message"
+msgctxt "@title:window"
+msgid "Lock Message"
+msgstr "Zaključaj poruku"
+
+#: src/svnfrontend/maintreewidget.cpp:1325
+#, kde-format
+msgid "Steal lock?"
+msgstr "Provaliti?"
+
+#: src/svnfrontend/maintreewidget.cpp:1362
+#, kde-format
+msgid "Break lock or ignore missing locks?"
+msgstr "Prekinuti ključ ili ignorisati ključeve koji nedostaju?"
+
+#: src/svnfrontend/maintreewidget.cpp:1363
+#, kde-format
+msgid "Unlocking items"
+msgstr "Otključavanje stavki"
+
+#: src/svnfrontend/maintreewidget.cpp:1650
+#, kde-format
+msgid "Nothing selected for delete"
+msgstr "Ništa nije odabrano za brisanje"
+
+#: src/svnfrontend/maintreewidget.cpp:1821
+#, kde-format
+msgid "Automatic generated base layout by kdesvn"
+msgstr "Kdesvn automatski stvara bazu rasporeda"
+
+#: src/svnfrontend/maintreewidget.cpp:1834
+#, kde-format
+msgid "May not make subdirectories of a file"
+msgstr "Ne može napraviti poddirektorij datoteke"
+
+#: src/svnfrontend/maintreewidget.cpp:1943 src/svnfrontend/svnactions.cpp:2186
+#, fuzzy, kde-format
+#| msgid "Merge"
+msgctxt "@title:window"
+msgid "Merge"
+msgstr "Spoji"
+
+#: src/svnfrontend/maintreewidget.cpp:1996
+#, kde-format
+msgid "Error getting entry to relocate"
+msgstr "Greška pri uzimanju unosa za ponovno lociranje"
+
+#: src/svnfrontend/maintreewidget.cpp:2002
+#, fuzzy, kde-format
+#| msgid "Relocate path %1"
+msgctxt "@title:window"
+msgid "Relocate Path %1"
+msgstr "Relociraj put %1"
+
+#: src/svnfrontend/maintreewidget.cpp:2016 src/svnfrontend/svnactions.cpp:1627
+#: src/svnfrontend/svnactions.cpp:1879
+#, kde-format
+msgid "Invalid url given!"
+msgstr ""
+
+#: src/svnfrontend/maintreewidget.cpp:2017
+#, kde-format
+msgid "Relocate path %1"
+msgstr "Relociraj put %1"
+
+#: src/svnfrontend/maintreewidget.cpp:2040
+#, kde-format
+msgid "Cannot import into multiple targets"
+msgstr "Ne može uvesti u više odredišta"
+
+#: src/svnfrontend/maintreewidget.cpp:2054
+#, kde-format
+msgid "Import files from folder"
+msgstr "Uvezi datoteke iz direktorija"
+
+#: src/svnfrontend/maintreewidget.cpp:2056
+#, kde-format
+msgid "Import file"
+msgstr "Uvezi datoteku"
+
+#: src/svnfrontend/maintreewidget.cpp:2078
+#, fuzzy, kde-format
+#| msgid "Import log"
+msgctxt "@title:window"
+msgid "Import Log"
+msgstr "Učitaj prijavu"
+
+#: src/svnfrontend/maintreewidget.cpp:2136
+#, kde-format
+msgid "Could not retrieve repository of working copy."
+msgstr "Ne može povratiti repozitorij radne kopije."
+
+#: src/svnfrontend/maintreewidget.cpp:2145
+#, kde-format
+msgid "Only in working copy possible."
+msgstr "Moguće samo u radnoj kopiji."
+
+#: src/svnfrontend/maintreewidget.cpp:2145
+#: src/svnfrontend/maintreewidget.cpp:2149
+#: src/svnfrontend/maintreewidget.cpp:2154
+#, kde-format
+msgid "Error"
+msgstr "Greška"
+
+#: src/svnfrontend/maintreewidget.cpp:2149
+#, kde-format
+msgid "Only on single folder possible"
+msgstr "Moguće samo u jednom folderu"
+
+#: src/svnfrontend/maintreewidget.cpp:2154
+#, kde-format
+msgid "Sorry - internal error"
+msgstr "Izvinjavamo se - interna greška"
+
+#: src/svnfrontend/maintreewidget.cpp:2218
+#, kde-format
+msgid "Hold Ctrl key while click on selected item for unselect"
+msgstr "Drži tipku Ctrl dok odabirete stavku za poništiti"
+
+#. i18n: ectx: property (toolTip), widget (QTreeView, m_LogTreeView)
+#. i18n: ectx: property (toolTip), widget (QTreeWidget, m_ChangedList)
+#: src/svnfrontend/maintreewidget.cpp:2221 src/svnfrontend/svnlogdlg.ui:114
+#: src/svnfrontend/svnlogdlg.ui:148
+#, kde-format
+msgid "See context menu for more actions"
+msgstr "Pogledaj kontekst meni za više radnja"
+
+#: src/svnfrontend/maintreewidget.cpp:2224
+#, kde-format
+msgid "Click for navigate"
+msgstr "Klikni za navigaciju"
+
+#: src/svnfrontend/maintreewidget.cpp:2227
+#, kde-format
+msgid "Navigation"
+msgstr "Navigacija"
+
+#: src/svnfrontend/maintreewidget.cpp:2348
+#, kde-format
+msgid "Could not retrieve repository."
+msgstr "Ne može povratiti repozitorij."
+
+#: src/svnfrontend/maintreewidget.cpp:2378
+#, kde-format
+msgid "Not yet implemented"
+msgstr ""
+
+#: src/svnfrontend/maintreewidget.cpp:2378
+#, fuzzy, kde-format
+#| msgid "Set property recursive"
+msgid "Edit property recursively"
+msgstr "Postavi svojstva rekurzivno"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, MergeDlg)
+#: src/svnfrontend/merge_dlg.ui:14
+#, kde-format
+msgid "MergeSettings"
+msgstr "PodešavanjaSpajanja"
+
+#. i18n: ectx: property (text), widget (QLabel, m_SrcOneLabel)
+#: src/svnfrontend/merge_dlg.ui:22
+#, kde-format
+msgid "Source 1:"
+msgstr "Izvor 1:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_SrcTwoLabel)
+#: src/svnfrontend/merge_dlg.ui:38
+#, kde-format
+msgid "Source 2:"
+msgstr "Izvor 2:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_OutLabel)
+#: src/svnfrontend/merge_dlg.ui:54
+#, kde-format
+msgid "Output to:"
+msgstr "Izlaz u:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_MergeParameter)
+#: src/svnfrontend/merge_dlg.ui:72
+#, kde-format
+msgid "Merge parameter"
+msgstr "Spoji parametar"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RecursiveCheck)
+#: src/svnfrontend/merge_dlg.ui:90
+#, kde-format
+msgid "Recursive"
+msgstr "Rekurzivno"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_RelatedCheck)
+#: src/svnfrontend/merge_dlg.ui:103
+#, kde-format
+msgid "Handle unrelated as related items"
+msgstr "Rukovati nepovezanim stavka kao povezanim"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RelatedCheck)
+#: src/svnfrontend/merge_dlg.ui:106
+#, kde-format
+msgid "Ignore ancestry"
+msgstr "Zanemari porijeklo"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_ForceCheck)
+#: src/svnfrontend/merge_dlg.ui:113
+#, kde-format
+msgid "Force delete on modified/unversioned items"
+msgstr "Primoraj brisanje promjenjenih/neverzionih stavki"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_Reintegrate)
+#: src/svnfrontend/merge_dlg.ui:126
+#, kde-format
+msgid "lump-merge all of source URL's unmerged changes"
+msgstr "gruda-spajanje svih izvora URL-a nespojenih izmjenama"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_Reintegrate)
+#: src/svnfrontend/merge_dlg.ui:132
+#, kde-format
+msgid "Reintegrate merge"
+msgstr "Reintegriraj spajanje"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_DryCheck)
+#: src/svnfrontend/merge_dlg.ui:139
+#, kde-format
+msgid "Just dry run without modifications"
+msgstr "Samo suho pokretanje bez promjena"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_DryCheck)
+#: src/svnfrontend/merge_dlg.ui:142
+#, kde-format
+msgid "Dry run"
+msgstr "Suho pokretanje"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_RecordOnly)
+#: src/svnfrontend/merge_dlg.ui:152
+#, kde-format
+msgid "Only write mergeinfo"
+msgstr "Samo piši margeinfo"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_RecordOnly)
+#: src/svnfrontend/merge_dlg.ui:155
+#, kde-format
+msgid ""
+"The merge is not actually performed, but the mergeinfo for the revisions "
+"which would have been merged is recorded in the working copy"
+msgstr ""
+"Spajanje nije u biti izvršeno, ali informacije o spajanju revizija koje bi "
+"bile spojene su sačuvane u radnu kopiju"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RecordOnly)
+#: src/svnfrontend/merge_dlg.ui:158
+#, kde-format
+msgid "Record only"
+msgstr "Samo zabilježi"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_useExternMerge)
+#: src/svnfrontend/merge_dlg.ui:165
+#, kde-format
+msgid "Use external merge not Subversion's merge"
+msgstr "Koristi vanjsko spajanje ne podverziono spajanje"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_useExternMerge)
+#: src/svnfrontend/merge_dlg.ui:168
+#, kde-format
+msgid "Use external merge"
+msgstr "Koristi spoljašnje spajanje"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_AllowMixedRev)
+#: src/svnfrontend/merge_dlg.ui:175
+#, kde-format
+msgid ""
+"If checked, allow merge into mixed revision working copy, otherwise raises "
+"error in that case"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_AllowMixedRev)
+#: src/svnfrontend/merge_dlg.ui:179
+#, kde-format
+msgid ""
+"Merge into mixed revision\n"
+"working copy"
+msgstr ""
+
+#: src/svnfrontend/mergedlg_impl.cpp:190
+#, fuzzy, kde-format
+#| msgid "Enter merge range"
+msgctxt "@title:window"
+msgid "Enter Merge Range"
+msgstr "Unesi raspon spajanja"
+
+#: src/svnfrontend/models/logitemmodel.cpp:179
+#, kde-format
+msgid "Message"
+msgstr "Poruka"
+
+#: src/svnfrontend/models/logmodelhelper.cpp:43
+#, kde-format
+msgid "%1 at revision %2"
+msgstr "%1 na reviziji %2"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:314
+#: src/svnfrontend/svnactions.cpp:735
+#, kde-format
+msgid "Name"
+msgstr "Ime"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:316
+#, kde-format
+msgid "Status"
+msgstr "Status"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:318
+#, kde-format
+msgid "Last changed Revision"
+msgstr "Posljednja promjenjena revizija"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:320
+#: src/svnfrontend/svnactions.cpp:794
+#, kde-format
+msgid "Last author"
+msgstr "Posljednji pisac"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:322
+#, kde-format
+msgid "Last change date"
+msgstr "Zadnji datum promjene"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:324
+#, kde-format
+msgid "Locked by"
+msgstr "Zaključano od strane"
+
+#: src/svnfrontend/opencontextmenu.cpp:57
+#, kde-format
+msgid "Other..."
+msgstr "Ostalo..."
+
+#: src/svnfrontend/propertiesdlg.cpp:83
+#, kde-format
+msgid "Undelete property"
+msgstr "Neobrisano svojstvo"
+
+#: src/svnfrontend/propertiesdlg.cpp:85
+#, kde-format
+msgid "Delete property"
+msgstr "Izbriši svojstvo"
+
+#: src/svnfrontend/propertiesdlg.cpp:92
+#, kde-format
+msgid "Missing SVN link"
+msgstr "Nedostaje SVN link"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, PropertiesDlg)
+#: src/svnfrontend/propertiesdlg.ui:14
+#, kde-format
+msgid "View and modify properties"
+msgstr "Svojstva pregleda i promjene"
+
+#. i18n: ectx: property (text), widget (QPushButton, pbAdd)
+#: src/svnfrontend/propertiesdlg.ui:39
+#, fuzzy, kde-format
+#| msgid "Add property"
+msgid "Add Property"
+msgstr "Dodaj svojstvo"
+
+#. i18n: ectx: property (text), widget (QPushButton, pbModify)
+#: src/svnfrontend/propertiesdlg.ui:46
+#, fuzzy, kde-format
+#| msgid "Modify property"
+msgid "Modify Property"
+msgstr "Preuredi svojstvo"
+
+#. i18n: ectx: property (text), widget (QPushButton, pbDelete)
+#: src/svnfrontend/propertiesdlg.ui:53
+#, fuzzy, kde-format
+#| msgid "Delete property"
+msgid "Delete Property"
+msgstr "Izbriši svojstvo"
+
+#: src/svnfrontend/stopdlg.cpp:195
+#, kde-format
+msgid "%p% of %1"
+msgstr "%p% of %1"
+
+#: src/svnfrontend/stopdlg.cpp:203
+#, kde-format
+msgid "%1 of %2"
+msgstr "%1 od %2"
+
+#: src/svnfrontend/svnactions.cpp:186
+#, kde-format
+msgid "Finished"
+msgstr "Završeno"
+
+#: src/svnfrontend/svnactions.cpp:332
+#, kde-format
+msgid "Got no logs"
+msgstr "Bez prijave"
+
+#: src/svnfrontend/svnactions.cpp:456
+#, kde-format
+msgid "Got no info."
+msgstr "Bez informacija."
+
+#: src/svnfrontend/svnactions.cpp:493
+#, fuzzy, kde-format
+#| msgid "History of %1"
+msgctxt "@title:window"
+msgid "History of %1"
+msgstr "Historija od %1"
+
+#: src/svnfrontend/svnactions.cpp:536
+#, fuzzy, kde-format
+#| msgid "Annotate"
+msgctxt "@title:window"
+msgid "Annotate"
+msgstr "Pribilježiti"
+
+#: src/svnfrontend/svnactions.cpp:536
+#, kde-format
+msgid "Annotate lines - hit Cancel for abort"
+msgstr "Komentiraj linije- klikni Poništi za poništavanje"
+
+#: src/svnfrontend/svnactions.cpp:544
+#, kde-format
+msgid "Got no annotate"
+msgstr "Nema komentara"
+
+#: src/svnfrontend/svnactions.cpp:563
+#, fuzzy, kde-format
+#| msgid "Content get"
+msgctxt "@title:window"
+msgid "Content Get"
+msgstr "Preuzimanje sadržaja"
+
+#: src/svnfrontend/svnactions.cpp:563
+#, kde-format
+msgid "Getting content - hit Cancel for abort"
+msgstr "Učitavanje sadržaja - pritisnite cancel da prekinete"
+
+#: src/svnfrontend/svnactions.cpp:570
+#, kde-format
+msgid "Error getting content"
+msgstr "Greška prilikom učitavanja sadržaja"
+
+#: src/svnfrontend/svnactions.cpp:583
+#, kde-format
+msgid "Error while open temporary file"
+msgstr "Greška prilikom otvaranja privremene datoteke"
+
+#: src/svnfrontend/svnactions.cpp:623
+#, fuzzy, kde-format
+#| msgid "Content of %1"
+msgctxt "@title:window"
+msgid "Content of %1"
+msgstr "Sadržaj od %1"
+
+#: src/svnfrontend/svnactions.cpp:633
+#, kde-format
+msgid "Got no content."
+msgstr "Bez sadržaja."
+
+#: src/svnfrontend/svnactions.cpp:657
+#, kde-format
+msgid "Enter folder name:"
+msgstr "Unesite ime direktorija:"
+
+#: src/svnfrontend/svnactions.cpp:696
+#, fuzzy, kde-format
+#| msgid "Details"
+msgctxt "@title:window"
+msgid "Details"
+msgstr "Detalji"
+
+#: src/svnfrontend/svnactions.cpp:696
+#, kde-format
+msgid "Retrieving information - hit Cancel for abort"
+msgstr "Preuzimanje informacija - pritisnite Cancel za prekinuti"
+
+#: src/svnfrontend/svnactions.cpp:738
+#, kde-format
+msgid "URL"
+msgstr "URL"
+
+#: src/svnfrontend/svnactions.cpp:740
+#, kde-format
+msgid "Canonical repository URL"
+msgstr "Kanonski URL repozitorija"
+
+#: src/svnfrontend/svnactions.cpp:743
+#, kde-format
+msgid "Checksum"
+msgstr "Kontrolna suma"
+
+#: src/svnfrontend/svnactions.cpp:746
+#, kde-format
+msgid "Type"
+msgstr "Tip"
+
+#: src/svnfrontend/svnactions.cpp:749
+#, kde-format
+msgid "Absent"
+msgstr "Odsutan"
+
+#: src/svnfrontend/svnactions.cpp:752
+#, kde-format
+msgid "File"
+msgstr "Datoteka"
+
+#: src/svnfrontend/svnactions.cpp:755
+#, kde-format
+msgid "Folder"
+msgstr "Direktorij"
+
+#: src/svnfrontend/svnactions.cpp:759 src/svnfrontend/svnactions.cpp:788
+#, kde-format
+msgid "Unknown"
+msgstr "Nepoznato"
+
+#: src/svnfrontend/svnactions.cpp:764
+#, kde-format
+msgid "Size"
+msgstr "Veličina"
+
+#: src/svnfrontend/svnactions.cpp:773
+#, kde-format
+msgid "Schedule"
+msgstr "Raspored"
+
+#: src/svnfrontend/svnactions.cpp:776
+#, kde-format
+msgid "Normal"
+msgstr "Normalno"
+
+#: src/svnfrontend/svnactions.cpp:779
+#, kde-format
+msgid "Addition"
+msgstr "Dodavanje"
+
+#: src/svnfrontend/svnactions.cpp:782
+#, kde-format
+msgid "Deletion"
+msgstr "Brisanje"
+
+#: src/svnfrontend/svnactions.cpp:792
+#, kde-format
+msgid "UUID"
+msgstr "UUID"
+
+#: src/svnfrontend/svnactions.cpp:796
+#, kde-format
+msgid "Last committed"
+msgstr "Zadnji izvršen"
+
+#: src/svnfrontend/svnactions.cpp:798
+#, kde-format
+msgid "Last revision"
+msgstr "Zadnja revizija"
+
+#: src/svnfrontend/svnactions.cpp:800
+#, kde-format
+msgid "Content last changed"
+msgstr "Posljednji promjenjen sadržaj"
+
+#: src/svnfrontend/svnactions.cpp:804
+#, kde-format
+msgid "Property last changed"
+msgstr "Zadnje promijenjeno svojstvo"
+
+#: src/svnfrontend/svnactions.cpp:807
+#, kde-format
+msgid "New version of conflicted file"
+msgstr "Nova verzija datoteke sa konfliktima"
+
+#: src/svnfrontend/svnactions.cpp:810
+#, kde-format
+msgid "Property reject file"
+msgstr "Svojstvo ne prihvata datoteku"
+
+#: src/svnfrontend/svnactions.cpp:815
+#, kde-format
+msgid "Copy from URL"
+msgstr "Kopiraj sa URL"
+
+#: src/svnfrontend/svnactions.cpp:818 src/svnfrontend/svnactions.cpp:828
+#, kde-format
+msgid "Lock token"
+msgstr "Zaključati token"
+
+#: src/svnfrontend/svnactions.cpp:819 src/svnfrontend/svnactions.cpp:829
+#, kde-format
+msgid "Owner"
+msgstr "Vlasnik"
+
+#: src/svnfrontend/svnactions.cpp:820 src/svnfrontend/svnactions.cpp:830
+#, kde-format
+msgid "Locked on"
+msgstr "Zaključan"
+
+#: src/svnfrontend/svnactions.cpp:823 src/svnfrontend/svnactions.cpp:833
+#, kde-format
+msgid "Lock comment"
+msgstr "Zaključati komentar"
+
+#: src/svnfrontend/svnactions.cpp:881
+#, fuzzy, kde-format
+#| msgid "Infolist"
+msgctxt "@title:window"
+msgid "Infolist"
+msgstr "Infolist"
+
+#: src/svnfrontend/svnactions.cpp:920
+#, fuzzy, kde-format
+#| msgid "Applying properties"
+msgctxt "@title:window"
+msgid "Applying Properties"
+msgstr "Primjena svojstava"
+
+#: src/svnfrontend/svnactions.cpp:920
+#, fuzzy, kde-format
+#| msgid "<center>Applying<br>hit cancel for abort</center>"
+msgid "<center>Applying<br/>hit cancel for abort</center>"
+msgstr "<center>Primjena<br>pritisni odustani za prekid</center>"
+
+#: src/svnfrontend/svnactions.cpp:958
+#, kde-format
+msgid "Could not change to folder %1\n"
+msgstr "Nemoguće izmjeniti u folder %1\n"
+
+#: src/svnfrontend/svnactions.cpp:977
+#, kde-format
+msgid "Not commit because networking is disabled"
+msgstr "Nije izvrseno jer je umrežavanje onemogućeno"
+
+#: src/svnfrontend/svnactions.cpp:999 src/svnfrontend/svnactions.cpp:2342
+#, fuzzy, kde-format
+#| msgid "Status / List"
+msgctxt "@title:window"
+msgid "Status / List"
+msgstr "Status / Lista"
+
+#: src/svnfrontend/svnactions.cpp:999 src/svnfrontend/svnactions.cpp:2342
+#, kde-format
+msgid "Creating list / check status"
+msgstr "Kreiranje liste / provjeri status"
+
+#: src/svnfrontend/svnactions.cpp:1021
+#, kde-format
+msgid "Delete and Commit"
+msgstr "Obriši i izvrši"
+
+#: src/svnfrontend/svnactions.cpp:1023
+#, kde-format
+msgid "Add and Commit"
+msgstr "Dodaj i izvrši"
+
+#: src/svnfrontend/svnactions.cpp:1054
+#, fuzzy, kde-format
+#| msgid "Commit"
+msgctxt "@title:window"
+msgid "Commit"
+msgstr "Izvrši"
+
+#: src/svnfrontend/svnactions.cpp:1054
+#, kde-format
+msgid "Commit - hit Cancel for abort"
+msgstr "Izvrši - pritisni Cancel za prekinuti"
+
+#: src/svnfrontend/svnactions.cpp:1080
+#, fuzzy, kde-format
+#| msgid "Downloading"
+msgctxt "@title:window"
+msgid "Downloading"
+msgstr "Preuzimam"
+
+#: src/svnfrontend/svnactions.cpp:1080
+#, kde-format
+msgid "Download - hit Cancel for abort"
+msgstr "Preuzeti - pritisnite cancel za prekinuti"
+
+#: src/svnfrontend/svnactions.cpp:1107
+#, kde-format
+msgid "Can not do this diff because networking is disabled."
+msgstr "Nije mogao uporediti jer umrežavanje nije omogućeno."
+
+#: src/svnfrontend/svnactions.cpp:1155
+#, kde-format
+msgid "Both entries seems to be the same, can not diff."
+msgstr "Oba unosa su ista, nema potrebe da budu upoređeni."
+
+#: src/svnfrontend/svnactions.cpp:1220
+#, kde-format
+msgid "Diff-process could not started, check command."
+msgstr "Proces poređenja nije mogao početi, provjerite komande."
+
+#: src/svnfrontend/svnactions.cpp:1264 src/svnfrontend/svnactions.cpp:1317
+#, fuzzy, kde-format
+#| msgid "Diffing"
+msgctxt "@title:window"
+msgid "Diffing"
+msgstr "Razlikovanje"
+
+#: src/svnfrontend/svnactions.cpp:1264
+#, kde-format
+msgid "Diffing - hit Cancel for abort"
+msgstr "Upoređivanje - pritisnite Cancel za prekinuti"
+
+#: src/svnfrontend/svnactions.cpp:1277 src/svnfrontend/svnactions.cpp:1326
+#, kde-format
+msgid "No difference to display"
+msgstr "Nema razlike za prikazati"
+
+#: src/svnfrontend/svnactions.cpp:1317
+#, kde-format
+msgid "Diffing - hit cancel for abort"
+msgstr "Upoređivanje - pritisnite Cancel za prekinuti"
+
+#: src/svnfrontend/svnactions.cpp:1375
+#, kde-format
+msgid "Display process could not started, check command."
+msgstr "Proces prikazivanja nije mogao početi, provjerite komande."
+
+#: src/svnfrontend/svnactions.cpp:1388
+#, fuzzy, kde-format
+#| msgid "Diff display"
+msgctxt "@title:window"
+msgid "Diff Display"
+msgstr "Prikaži poređenje"
+
+#: src/svnfrontend/svnactions.cpp:1437
+#, fuzzy, kde-format
+#| msgid "Making update"
+msgctxt "@title:window"
+msgid "Making update"
+msgstr "Ažuriranje"
+
+#: src/svnfrontend/svnactions.cpp:1437
+#, kde-format
+msgid "Making update - hit Cancel for abort"
+msgstr "Ažuriranje - pritisnite Cancel za prekinuti"
+
+#: src/svnfrontend/svnactions.cpp:1525
+#, kde-format
+msgid "Which files or directories should I add?"
+msgstr "Koje datoteke ili direktorije mogu da dodam?"
+
+#: src/svnfrontend/svnactions.cpp:1532
+#, fuzzy, kde-format
+#| msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
+msgid "<center>The entry<br/>%1<br/>is versioned - break.</center>"
+msgstr "<center>Unos<br>%1<br>je verzionisan- pauza.</center>"
+
+#: src/svnfrontend/svnactions.cpp:1560
+#, kde-format
+msgid "Delete from repository"
+msgstr "Izbriši iz repozitorija"
+
+#: src/svnfrontend/svnactions.cpp:1609
+#, fuzzy, kde-format
+#| msgid "Export a repository"
+msgctxt "@title:window"
+msgid "Export a Repository"
+msgstr "Eksportuj repozitorij"
+
+#: src/svnfrontend/svnactions.cpp:1609
+#, fuzzy, kde-format
+#| msgid "Checkout a repository"
+msgctxt "@title:window"
+msgid "Checkout a Repository"
+msgstr "Provjeri repozitori"
+
+#: src/svnfrontend/svnactions.cpp:1628 src/svnfrontend/svnactions.cpp:1634
+#, kde-format
+msgid "Export repository"
+msgstr "Eksportovati repozitorij"
+
+#: src/svnfrontend/svnactions.cpp:1633
+#, kde-format
+msgid "Invalid local path given!"
+msgstr ""
+
+#: src/svnfrontend/svnactions.cpp:1661
+#, kde-format
+msgid "Exporting a file?"
+msgstr "Želite li eksportovati datoteku?"
+
+#: src/svnfrontend/svnactions.cpp:1661
+#, kde-format
+msgid "Checking out a file?"
+msgstr "Provjeravati datoteku?"
+
+#: src/svnfrontend/svnactions.cpp:1707
+#, fuzzy, kde-format
+#| msgid "Export"
+msgctxt "@title:window"
+msgid "Export"
+msgstr "Eksportuj"
+
+#: src/svnfrontend/svnactions.cpp:1707
+#, fuzzy, kde-format
+#| msgid "Checkout"
+msgctxt "@title:window"
+msgid "Checkout"
+msgstr "Provjeri"
+
+#: src/svnfrontend/svnactions.cpp:1707
+#, kde-format
+msgid "Exporting"
+msgstr "Eksportovanje"
+
+#: src/svnfrontend/svnactions.cpp:1707
+#, kde-format
+msgid "Checking out"
+msgstr "Provjeravati"
+
+#: src/svnfrontend/svnactions.cpp:1744
+#, fuzzy, kde-format
+#| msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
+msgid "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
+msgstr "<center>Unos<br>%1<br>nije verzionisan- pauza.</center>"
+
+#: src/svnfrontend/svnactions.cpp:1777
+#, fuzzy, kde-format
+#| msgid "Revert"
+msgctxt "@title:window"
+msgid "Revert"
+msgstr "Vrati"
+
+#: src/svnfrontend/svnactions.cpp:1777
+#, kde-format
+msgid "Reverting items"
+msgstr "Povratne stavke"
+
+#: src/svnfrontend/svnactions.cpp:1807 src/svnfrontend/svnactions.cpp:1869
+#, fuzzy, kde-format
+#| msgid "Switch URL"
+msgctxt "@title:window"
+msgid "Switch URL"
+msgstr "Zamijeniti URL"
+
+#: src/svnfrontend/svnactions.cpp:1807
+#, kde-format
+msgid "Switching URL"
+msgstr "Mijenjati URL"
+
+#: src/svnfrontend/svnactions.cpp:1827
+#, fuzzy, kde-format
+#| msgid "Relocate Repository"
+msgctxt "@title:window"
+msgid "Relocate Repository"
+msgstr "Relociraj repozitorij"
+
+#: src/svnfrontend/svnactions.cpp:1827
+#, kde-format
+msgid "Relocate repository to new URL"
+msgstr "Premijesti repozitorij u novi URL"
+
+#: src/svnfrontend/svnactions.cpp:1850
+#, kde-format
+msgid "Can only switch one item at time"
+msgstr "Može zamijeniti samo jednu stavku u datom vremenu"
+
+#: src/svnfrontend/svnactions.cpp:1856
+#, kde-format
+msgid "Error getting entry to switch"
+msgstr "Greška pri preuzimanju unosa za zamijenu"
+
+#: src/svnfrontend/svnactions.cpp:1880
+#, kde-format
+msgid "Switch URL"
+msgstr "Zamijeniti URL"
+
+#: src/svnfrontend/svnactions.cpp:1898
+#, fuzzy, kde-format
+#| msgid "Cleanup"
+msgctxt "@title:window"
+msgid "Cleanup"
+msgstr "Očisti"
+
+#: src/svnfrontend/svnactions.cpp:1898
+#, kde-format
+msgid "Cleaning up folder"
+msgstr "Čišćenje foldera"
+
+#: src/svnfrontend/svnactions.cpp:1915
+#, fuzzy, kde-format
+#| msgid "Resolve"
+msgctxt "@title:window"
+msgid "Resolve"
+msgstr "Riješi"
+
+#: src/svnfrontend/svnactions.cpp:1915
+#, kde-format
+msgid "Marking resolved"
+msgstr "Riješeno"
+
+#: src/svnfrontend/svnactions.cpp:1947
+#, kde-format
+msgid "Could not retrieve conflict information - giving up."
+msgstr "Nemoguce povratiti konfliktnu informaciju - odustajem."
+
+#: src/svnfrontend/svnactions.cpp:1974
+#, kde-format
+msgid "Resolve-process could not started, check command."
+msgstr "Proces riješavanja nije mogao početi, provjeri komande."
+
+#: src/svnfrontend/svnactions.cpp:1986
+#, fuzzy, kde-format
+#| msgid "Import"
+msgctxt "@title:window"
+msgid "Import"
+msgstr "Unesi"
+
+#: src/svnfrontend/svnactions.cpp:1986
+#, kde-format
+msgid "Importing items"
+msgstr "Unošenje stavki"
+
+#: src/svnfrontend/svnactions.cpp:2010
+#, kde-format
+msgid "Nothing to merge."
+msgstr "Ništa za spojiti."
+
+#: src/svnfrontend/svnactions.cpp:2014
+#, kde-format
+msgid "No destination to merge."
+msgstr "Nema odredišta za spojiti."
+
+#: src/svnfrontend/svnactions.cpp:2033
+#, kde-format
+msgid "Both sources must be same type."
+msgstr "Oba izvora moraju biti istog tipa."
+
+#: src/svnfrontend/svnactions.cpp:2040
+#, kde-format
+msgid "Target for merge must same type like sources."
+msgstr "Cilj za spajanje mora biti istog tipa kao izvor."
+
+#: src/svnfrontend/svnactions.cpp:2063
+#, kde-format
+msgid "Both entries seems to be the same, will not do a merge."
+msgstr "Oba unosa su ista, spajanje se neće izvršiti."
+
+#: src/svnfrontend/svnactions.cpp:2127
+#, kde-format
+msgid "Merge process could not started, check command."
+msgstr "Proces spajanja nije mogao početi, provjeri komande."
+
+#: src/svnfrontend/svnactions.cpp:2186
+#, kde-format
+msgid "Merging items"
+msgstr "Spajanje stavki"
+
+#: src/svnfrontend/svnactions.cpp:2213 src/svnfrontend/svnactions.cpp:2231
+#, fuzzy, kde-format
+#| msgid "Move"
+msgctxt "@title:window"
+msgid "Move"
+msgstr "Premjesti"
+
+#: src/svnfrontend/svnactions.cpp:2213
+#, kde-format
+msgid "Moving/Rename item"
+msgstr "Premještanje/preimenuj stavku"
+
+#: src/svnfrontend/svnactions.cpp:2231
+#, kde-format
+msgid "Moving entries"
+msgstr "Premještanje unosa"
+
+#: src/svnfrontend/svnactions.cpp:2251 src/svnfrontend/svnactions.cpp:2266
+#, fuzzy, kde-format
+#| msgid "Copy / Move"
+msgctxt "@title:window"
+msgid "Copy / Move"
+msgstr "Kopiraj/premjesti"
+
+#: src/svnfrontend/svnactions.cpp:2251 src/svnfrontend/svnactions.cpp:2266
+#, kde-format
+msgid "Copy or Moving entries"
+msgstr "Kopiraj ili premještaj unose"
+
+#: src/svnfrontend/svnactions.cpp:2374
+#, kde-format
+msgid "No unversioned items found."
+msgstr "Nisu pronađene neverzionisane stavke."
+
+#: src/svnfrontend/svnactions.cpp:2378
+#, fuzzy, kde-format
+#| msgid "Add unversioned items"
+msgctxt "@title:window"
+msgid "Add Unversioned Items"
+msgstr "Dodaj neverzionisane stavke"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
+#: src/svnfrontend/svnactions.cpp:2381 src/svnfrontend/svnlogdlg.ui:163
+#, kde-format
+msgid "Item"
+msgstr "Stavka"
+
+#: src/svnfrontend/svnactions.cpp:2501
+#, kde-format
+msgid "Found %1 modified item"
+msgid_plural "Found %1 modified items"
+msgstr[0] "Pronađena %1 promijenjena stavka"
+msgstr[1] "Pronađene %1 promijenjene stavke"
+msgstr[2] "Pronađeno %1 promijenjenih stavke"
+
+#: src/svnfrontend/svnactions.cpp:2530
+#, kde-format
+msgid "Checking for updates finished"
+msgstr "Provjera da li je ažuriranje završeno"
+
+#: src/svnfrontend/svnactions.cpp:2532
+#, kde-format
+msgid "There are new items in repository"
+msgstr "Prisutne su nove stavke u repozitoriju"
+
+#: src/svnfrontend/svnactions.cpp:2602
+#, kde-format
+msgid "Not filling log cache because networking is disabled"
+msgstr "Ne popunjava memoriju jer je umrežavanje onemogućeno"
+
+#: src/svnfrontend/svnactions.cpp:2644
+#, kde-format
+msgid "Not checking for updates because networking is disabled"
+msgstr "Ne provjerava ažuriranje jer umrežavanje nije omogućeno"
+
+#: src/svnfrontend/svnactions.cpp:2651
+#, kde-format
+msgid "Checking for updates started in background"
+msgstr "Provjeravanje ažuriranja počelo u pozadini"
+
+#: src/svnfrontend/svnitem.cpp:401 src/svnfrontend/svnitem.cpp:414
+#, kde-format
+msgid "Not versioned"
+msgstr "Ne verzionisani"
+
+#: src/svnfrontend/svnitem.cpp:404
+#, kde-format
+msgid "Added in repository"
+msgstr "Dodano u repozitorij"
+
+#: src/svnfrontend/svnitem.cpp:406
+#, kde-format
+msgid "Needs update"
+msgstr "Potrebno ažuriranje informacija"
+
+#: src/svnfrontend/svnitem.cpp:418
+#, kde-format
+msgid "Locally modified"
+msgstr "Lokalno izmijenjeno"
+
+#: src/svnfrontend/svnitem.cpp:420
+#, kde-format
+msgid "Property modified"
+msgstr "Svojstva promijenjena"
+
+#: src/svnfrontend/svnitem.cpp:424
+#, kde-format
+msgid "Locally added"
+msgstr "Lokalno dodano"
+
+#: src/svnfrontend/svnitem.cpp:427
+#, kde-format
+msgid "Missing"
+msgstr "Nedostaje"
+
+#: src/svnfrontend/svnitem.cpp:433
+#, kde-format
+msgid "Replaced"
+msgstr "Zamijenjeno"
+
+#: src/svnfrontend/svnitem.cpp:436
+#, kde-format
+msgid "Ignored"
+msgstr "Ignorisano"
+
+#: src/svnfrontend/svnitem.cpp:439
+#, kde-format
+msgid "External"
+msgstr "Vanjski"
+
+#: src/svnfrontend/svnitem.cpp:443
+#, kde-format
+msgid "Conflict"
+msgstr "Konflikt"
+
+#: src/svnfrontend/svnitem.cpp:445
+#, fuzzy, kde-format
+#| msgid "Property modified"
+msgid "Property conflicted"
+msgstr "Svojstva promijenjena"
+
+#: src/svnfrontend/svnitem.cpp:449
+#, kde-format
+msgid "Merged"
+msgstr "Spojene"
+
+#: src/svnfrontend/svnitem.cpp:452
+#, kde-format
+msgid "Incomplete"
+msgstr "Nepotpuno"
+
+#: src/svnfrontend/svnitem.cpp:455
+#, kde-format
+msgid "Obstructed"
+msgstr ""
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, LogDialog)
+#: src/svnfrontend/svnlogdlg.ui:18
+#, kde-format
+msgid "SVN Log"
+msgstr "Prijava SVN"
+
+#. i18n: ectx: property (text), widget (QLabel, startLabel)
+#: src/svnfrontend/svnlogdlg.ui:31
+#, kde-format
+msgid "Start revision"
+msgstr "Početna revizija"
+
+#. i18n: ectx: property (text), widget (QLabel, endLabel)
+#: src/svnfrontend/svnlogdlg.ui:41
+#, kde-format
+msgid "End revision"
+msgstr "Krajnja revizija"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_goButton)
+#: src/svnfrontend/svnlogdlg.ui:57
+#, kde-format
+msgid "Get Logs"
+msgstr "Uzmi prijave"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_PrevFiftyButton)
+#: src/svnfrontend/svnlogdlg.ui:64
+#, kde-format
+msgid "Previous entries"
+msgstr "Prethodni unosi"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_NextFiftyButton)
+#: src/svnfrontend/svnlogdlg.ui:71
+#, kde-format
+msgid "Show from HEAD"
+msgstr "Prikaži od vrha"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
+#: src/svnfrontend/svnlogdlg.ui:168
+#, kde-format
+msgid "Copy from"
+msgstr "Kopiraj iz"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DispPrevButton)
+#: src/svnfrontend/svnlogdlg.ui:189 src/svnfrontend/svnlogdlgimp.cpp:510
+#, kde-format
+msgid "Diff previous"
+msgstr "Uporedi sa prethodnim"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DispSpecDiff)
+#: src/svnfrontend/svnlogdlg.ui:208
+#, kde-format
+msgid "Select second revision with right mouse button"
+msgstr "Odaberi drugu reviziju sa desnim klikom miša"
+
+#. i18n: ectx: property (text), widget (QPushButton, buttonListFiles)
+#: src/svnfrontend/svnlogdlg.ui:230
+#, kde-format
+msgid "List entries"
+msgstr "Lista unosa"
+
+#. i18n: ectx: property (text), widget (QPushButton, buttonBlame)
+#: src/svnfrontend/svnlogdlg.ui:249 src/svnfrontend/svnlogdlgimp.cpp:505
+#, kde-format
+msgid "Annotate"
+msgstr "Pribilježiti"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_pbHelp)
+#: src/svnfrontend/svnlogdlg.ui:275
+#, fuzzy, kde-format
+#| msgid "&Help"
+msgid "Help"
+msgstr "&Pomoć"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_pbClose)
+#: src/svnfrontend/svnlogdlg.ui:282
+#, kde-format
+msgid "Close"
+msgstr ""
+
+#: src/svnfrontend/svnlogdlgimp.cpp:109
+#, fuzzy, kde-format
+#| msgid "SVN Log of %1"
+msgctxt "@title:window"
+msgid "SVN Log of %1"
+msgstr "Prijava SVN od %1"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:111
+#, fuzzy, kde-format
+#| msgid "SVN Log"
+msgctxt "@title:window"
+msgid "SVN Log"
+msgstr "Prijava SVN"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:435
+#, kde-format
+msgid "Set version as right side of diff"
+msgstr "Postavi verziju kao desnu stranu poredjenja"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:441
+#, kde-format
+msgid "Set version as left side of diff"
+msgstr "Postavi verziju kao lijevu stranu poredjenja"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:447
+#, kde-format
+msgid "Unset version for diff"
+msgstr "Nemoj podesiti poređenje"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:451
+#, kde-format
+msgid "Revert this commit"
+msgstr "Vrati ono ššto je izvršeno"
+
+#: src/svnfrontend/svntreeview.cpp:113
+#, kde-format
+msgid "&Move Here"
+msgstr "&Premjesti ovdje"
+
+#: src/svnfrontend/svntreeview.cpp:117
+#, kde-format
+msgid "&Copy Here"
+msgstr "&Kopiraj ovdje"
+
+#: src/svnfrontend/svntreeview.cpp:119
+#, kde-format
+msgid "C&ancel"
+msgstr "&Odustani"
+
+#: src/urldlg.cpp:99
+#, fuzzy, kde-format
+#| msgid "Open"
+msgctxt "@title:window"
+msgid "Open"
+msgstr "Otvori"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, UrlDlg)
+#: src/urldlg.ui:14
+#, fuzzy, kde-format
+#| msgid "Open repository of working copy"
+msgid "Open repository / working copy"
+msgstr "Otvori repozitorij od radne kopije"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/urldlg.ui:20
+#, kde-format
+msgid "Open repository or working copy"
+msgstr "Otvori repozitorij ili radnu kopiju"
+
+#, fuzzy
+#~| msgid "(C) 2005-2009 Rajko Albrecht"
+#~ msgid ""
+#~ "(C) 2005-2009 Rajko Albrecht,\n"
+#~ "(C) 2015-2016 Christian Ehrlicher"
+#~ msgstr "(C) 2005-2009 Rajko Albrecht"
+
+#~ msgid "Add property"
+#~ msgstr "Dodaj svojstvo"
+
+#~ msgid ""
+#~ "This value computes how case sensitive string ordering will made.\n"
+#~ "Never overwrite the default computed value unless you know what you are "
+#~ "doing."
+#~ msgstr ""
+#~ "Ova vrijednost računa kako će niz s velikim i malim slovima biti poredan. "
+#~ "Nikada ne prepisujte pretpostavljenu izračunatu vrijednost osim ako znate "
+#~ "šta radite."
+
+#~ msgid "Check if current locale is case sensitive or not"
+#~ msgstr "Provjeri ako je trenutno mjesto osjetljivo na promjene"
+
+#~ msgid "Make operation recursive"
+#~ msgstr "Učini operaciju rekurzivnom"
+
+#~ msgid "Old version of conflicted file"
+#~ msgstr "Stara verzija datoteke sa konfliktima"
+
+#~ msgid "Working version of conflicted file"
+#~ msgstr "Radna verzija datoteke sa konfliktima"
+
+#~ msgid "Clear"
+#~ msgstr "Očisti"
+
+#~ msgid "Is created repository compatible to Subversion prior 1.4"
+#~ msgstr "Je li kreirani repozitorij odgovarajući za podverziju prije 1.4"
+
+#~ msgid "Compatible to Subversion prior 1.4"
+#~ msgstr "Odgovarajući za podverziju prije 1.4"
+
+#~ msgid "Edit property"
+#~ msgstr "Promijeni svojstvo"
+
+#~ msgid "Cannot import remote URLs"
+#~ msgstr "Ne može uvesti daljinski URLs"
+
+#~ msgid "Set/add property recursive"
+#~ msgstr "Postavi/dodaj svojstva rekurzivno"
+
+#~ msgid "Modify properties"
+#~ msgstr "Izmijeni svojstva"
+
+#~ msgid "List of properties set"
+#~ msgstr "Lista postavki svojstava"
+
+#~ msgid "Target for merge must be local."
+#~ msgstr "Cilj za spajanje mora biti lokalni."
+
+#~ msgid "Issue-Number"
+#~ msgstr "Broj verzije"
+
+#~ msgid "DiffMergeSettings"
+#~ msgstr "PoređenjeSpajanjePodešavanja"
+
+#~ msgid "this long text"
+#~ msgstr "ovaj dugi tekst"
+
+#~ msgid "/there/"
+#~ msgstr "/tamo/"
+
+#~ msgid "RevisionButton"
+#~ msgstr "RevizionoDugme"
+
+#~ msgid "Relocate URL"
+#~ msgstr "Premjestiti URL"

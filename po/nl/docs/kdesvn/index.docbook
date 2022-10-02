@@ -1,0 +1,3491 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kdesvn "<application
+>kdesvn</application
+>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY Rajko.Albrecht '<personname
+><firstname
+>Rajko</firstname
+><surname
+>Albrecht</surname
+></personname
+>'>
+  <!ENTITY Rajko.Albrecht.mail '<email
+>ral@alwins-world.de</email
+>'>
+  <!ENTITY % Dutch "INCLUDE"
+><!-- change language only here -->
+]>
+
+<book lang="&language;">
+
+<bookinfo>
+<title
+>Het handboek van &kdesvn;</title>
+
+<authorgroup>
+<author
+><firstname
+>Rajko</firstname
+> <surname
+>Albrecht</surname
+> <affiliation
+> <address
+>&Rajko.Albrecht.mail;</address>
+</affiliation>
+</author>
+&Freek.de.Kruijf;&Ronald.Stroethoff; 
+</authorgroup>
+
+<copyright>
+<year
+>2005</year>
+<year
+>2008</year>
+<holder
+>&Rajko.Albrecht;</holder>
+</copyright>
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2016-05-22</date>
+<releaseinfo
+>kdesvn 2.0</releaseinfo>
+
+<abstract>
+<para
+>&kdesvn; - een subversion-client door &kde;. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdesvn</keyword>
+<keyword
+>subversion</keyword>
+<keyword
+>versiebeheersysteem</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Inleiding</title>
+
+<para
+>&kdesvn; is een <ulink url="http://subversion.apache.org/"
+>subversion-client</ulink
+> door &kde;. </para>
+<para
+>U zou enige kennis over subversion zelf moeten hebben, maar hopelijk zijn de meeste items zelfverklarend. </para>
+<para
+>Bugrapporten en verzoeken voor nieuw onderdelen en mogelijkheden kunt u indienen via het <ulink url="http://bugs.kde.org"
+>KDE Bugtracking Systeem</ulink
+>. </para>
+
+<sect1 id="kdesvn-terms">
+<title
+>Termen</title>
+<para
+>Als u bekent bent met versiebeheersystemen dan kunt dat overslaan - of het toch lezen en de auteur verbeteren ;) </para>
+<para>
+<variablelist>
+<varlistentry>
+<term
+>Repository</term>
+<listitem
+><para
+>Central opslag van data. Dat kan in een database of een plat bestandssysteem. Zonder speciale cliënt kunt u de data daarin niet lezen. Voor Subversion repositories is &kdesvn; een dergelijke cliënt. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Werkkopie</term>
+<listitem
+><para
+>Een platte kopie van een repository op een lokaal bestandssysteem. Dit gebruikt u in elk normaal bestandsbeheerder, bewerkt bestanden en zo voorts. RCS-informatie kunt u lezen met cliënten zoals &kdesvn;. </para>
+<para
+>Vergeet niet dat subversion niets weet over KIO, daarom moet een werkkopie op een plek zijn waar het bereikbaar is zonder een speciaal protocol, &eg; <quote
+>fish://</quote
+> of iets dergelijks is niet mogelijk. </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>WebDav</term>
+<listitem
+><para
+>WebDav is een protocol waarmee u bestanden op een webserver ver weg kunt bewerken. Subversion is een speciaal soort van WebDAV waarmee u toegang heeft tot repositories via een webserver. Bij normaal gebruik zijn deze read-only. Met speciale configuraties heeft u wellicht een WebDAV met schrijfrechten zodat u via een speciale browser toegang heeft. &kdesvn; is GEEN webdav-client, maar &konqueror; is via het <quote
+>webdav://</quote
+> protocol dat wel. Maar met &kdesvn; kunt u door de revisie-boom van een repository (via <quote
+>http://</quote
+>) heen bladeren. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect1>
+</chapter>
+
+<chapter id="using-kdesvn">
+<title
+>&kdesvn; gebruiken</title>
+<sect1 id="kdesvn-features">
+<title
+>Mogelijkheden van &kdesvn;</title>
+<para
+>&kdesvn; begrijpt de volgende protocollen voor browsing repositories: <variablelist>
+
+<varlistentry>
+<term
+>http</term>
+<listitem
+><para
+>Het standaard webbrowserprotocol. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>https</term>
+<listitem
+><para
+>Het standaard versleutelde webbrowserprotocol. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+http</term>
+<listitem
+><para
+>Het standaard webbrowserprotocol. Kan worden gebruikt om &konqueror; automatisch &kdesvn; aan te laten roepen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+https</term>
+<listitem
+><para
+>Het standaard versleutelde webbrowserprotocol. Kan worden gebruikt om &konqueror; automatisch &kdesvn; aan te laten roepen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+bestand</term>
+<listitem
+><para
+>Lokaal repositoryprotocol. Kan worden gebruikt om &konqueror; automatisch &kdesvn; aan te laten roepen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn</term>
+<listitem
+><para
+>Het eigen serverprotocol van subversion. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+ssh</term>
+<listitem
+><para
+>Subversion over ssh. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>bestand</term>
+<listitem
+><para
+>Directe toegang tot een repository. &kdesvn; controleert of een opgegeven pad een repository of een werkkopie is en opent het dan in de juiste modus. Voor subversion is <filename class="directory"
+>file:///dir</filename
+> en <filename class="directory"
+>/dir</filename
+> niet hetzelfde! </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+<para
+>Deze lijst is ook van toepassing voor het geven van &URL;s via de <link linkend="kdesvn-commandline"
+>commandoregel</link
+>. </para>
+</sect1>
+<sect1 id="first_steps">
+<title
+>Beginnen met subversion en &kdesvn;</title>
+<para
+>Deze sectie is grotendeels voor beginners die niet bekend zijn met subversion en legt uit hoe subversion en/of versiebeheersystemen (<acronym
+>RCS</acronym
+>) werken. </para>
+
+<sect2>
+<title
+>Een werkkopie aanmaken</title>
+<caution>
+<para
+>Werkkopieën MOETEN via lokale paden toegankelijk zijn. Subversion weet niets over pseudo bestandsystemen zoals <filename class="directory"
+>smb://</filename
+> of <filename class="directory"
+>fish://</filename
+>. &kdesvn; vertaalt indien mogelijk sommige daarvan (zoals <filename class="directory"
+>system:/home</filename
+>) maar dat is niet mogelijk over een netwerk. </para>
+</caution>
+<para
+>Het eerste wat u moet doen is het creëren van een werkkopie van uw repository. Hiervoor selecteert u <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Algemeen</guisubmenu
+> <guimenuitem
+>Repository uitchecken</guimenuitem
+> </menuchoice
+>. In het volgende dialoogvenster moet u de &URL; van de repository selecteren dat u wilt gebruiken, &eg;, zoiets als <literal
+>http://localhost/repos/mijnproject</literal
+>. Submappen van een repository zijn ook mogelijk, &eg;, <literal
+>http://localhost/repos/mijnproject/trunk</literal
+> of vergelijkbaar. </para>
+<para
+>Selecteer en/of creëer een lokale map, waar de werkkopie moet verblijven. </para>
+<para
+>Tenslotte, de uit te checken revisie. Meestal zal dat zijn <quote
+>HEAD</quote
+>. Dit zorgt ervoor dat de laatste opgeslagen versie de versie is waaraan gerefereerd wordt. </para>
+<para
+>Na het klikken op de knop <guibutton
+>OK</guibutton
+> zal &kdesvn; uw werkkopie creëren en (als het vakje is aangevinkt) het openen. </para>
+<para
+>Als u een respository heeft geopend om er doorheen te bladeren dan kunt u een map markeren en <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Repository</guisubmenu
+> <guimenuitem
+>Huidige repositorypad uitchecken</guimenuitem
+> </menuchoice
+> selecteren en het dialoogvenster zoals boven beschreven invullen. Dan zal alleen de gemarkeerde map worden uitgechecked. </para>
+</sect2>
+<sect2>
+<title
+>Lokale wijzigingen vastleggen (commit)</title>
+<para
+>Markeer het items of de items die u wilt verzenden en selecteer <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>#</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkkopie</guisubmenu
+> <guimenuitem
+>Vastleggen (commit)</guimenuitem
+> </menuchoice
+> </para>
+<para
+>Als u probeert om vast te leggen terwijl geen item is geselecteerd, dan gebruikt &kdesvn; het bovenste element van een geopend werkkopie, &ie;, het werkkopie pad zelf. </para>
+<para
+>Deze bewerking is altijd recursief, wat inhoud dat als u een map heeft geselecteerd &kdesvn; altijd alle gewijzigde items in de submappen daarin zal versturen. Als u heeft ingesteld dat u alle items wilt nakijken voordat u ze vastlegt dan krijgt u een lijst te zien met alle door &kdesvn; te vast te leggen items in het volgende dialoog. Daar kunt u items die u niet wilt vastleggen deselecteren. In dat geval zal &kdesvn; alle items apart versturen, &ie;, niet recursief. maar u kunt ook items selecteren die zonder versiebeheer zijn om ze toe te voegen en vast te leggen (als ze niet gemarkeerd zijn om over te slaan). hierdoor ziet u of er nieuwe items zijn die u vergeten bent. </para>
+<para
+>Voer een logbericht in over wat u verstuurt en druk op de knop <guibutton
+>OK</guibutton
+> zodat de transfer start. </para>
+</sect2>
+<sect2>
+<title
+>Werkkopie bijwerken</title>
+<para
+>Dit brengt de lokale werkkopie in sync met de repository. U kunt &kdesvn; zo instellen dat &kdesvn; bij het openen van een werkkopie controleert op nieuwere/veranderde items in de repository. Dit gebeurt in de achtergrond zodat u gewoon met &kdesvn; kan blijven werken. Als dit is gebeurt, dan zijn items met een nieuwere versie of mappen met items die een nieuwere versie hebben gemarkeerd. </para>
+<para
+>Om de wijzigingen op te halen, selecteert u <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkkopie</guisubmenu
+> <guimenuitem
+>Bijwerken naar HEAD</guimenuitem
+> </menuchoice
+>. Dit werkt bij naar de laatste versie. Als u een specifieke revisie wilt hebben dan selecteert u <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkkopie</guisubmenu
+> <guimenuitem
+>Bijwerken naar revisie</guimenuitem
+> </menuchoice
+> en selecteert u vervolgens in het volgende dialoogvenster de gewenste revisie. </para>
+<para
+>Als u geen item heeft geselecteerd, dan zal het bijwerken over de hele geopende werkkopie worden uitgevoerd, anders zal alleen de geselecteerde items recursief worden bijgewerkt. </para>
+</sect2>
+<sect2>
+<title
+>Toevoegen aan en verwijderen uit de werkkopie</title>
+<para
+>Voor beide bewerkingen zijn twee stappen nodig: eerst toevoegen of verwijderen en daarna deze wijzigingen vastleggen in de repository. Voordat u vastlegt kunt u nog de toevoeging of verwijdering ongedaan maken. </para>
+<sect3>
+<title
+>Item toevoegen</title>
+<para
+>Items toevoegen aan een werkkopie kan op drie manieren gebeuren: <variablelist>
+<varlistentry>
+<term
+>Items zonder versiebeheer selecteren en deze toevoegen</term>
+<listitem
+><para
+>Kopieer met &konqueror; of enig ander hulpmiddel naar de werkkopie. Ga door de lijst, markeer ze en selecteer <menuchoice
+> <shortcut
+><keycombo action="simul"
+><keycap
+>Insert</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkkopie</guisubmenu
+> <guimenuitem
+>Gemarkeerde bestanden/mappen toevoegen</guimenuitem
+> </menuchoice
+>. Als u nieuwe mappen met alle subitems wilt toevoegen, selecteer dan <menuchoice
+> <shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Insert</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkkopie</guisubmenu
+> <guimenuitem
+>Gemarkeerde bestanden/mappen recursief toevoegen</guimenuitem
+> </menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Controleren en recursief toevoegen</term>
+<listitem
+><para
+>U kunt in de werkkopie controleren op onbeheerde items. Ga naar <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkkopie</guisubmenu
+> <guimenuitem
+>Controleren voor onbeheerde items</guimenuitem
+> </menuchoice
+>. Een dialoog verschijnt met alle onbeheerde items in een overzicht. Door op <guibutton
+>OK</guibutton
+> te klikken, voegt u alle gemarkeerde items aan de werkkopie toe, ongewenste items moet u eerst deselecteren. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Slepen en loslaten</term>
+<listitem
+><para
+>Markeer in &konqueror; of een andere vergelijkbare bestandsbeheerder de gewenste items die u wilt toevoegen en versleep ze naar &kdesvn;. Laat ze los op de mappen in de geopende werkkopie en &kdesvn; kopieert deze items daar naar toe en voegt ze toe. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para
+></sect3>
+<sect3>
+<title
+>Items met revisie uit de werkkopie verwijderen</title>
+<para
+>Items verwijderen is altijd recursief. B.V.,wanneer een map verwijderd wordt, dan worden ook alle subitems verwijderd. Markeer de de gewenste items en kies <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Algemeen</guisubmenu
+> <guimenuitem
+>Gemarkeerde bestanden/mappen verwijderen</guimenuitem
+> </menuchoice
+> van het algemene menu. De revisiecontrole wordt van de items verwijderd en daarna worden de items van de harde schijf verwijderd. </para>
+</sect3>
+</sect2>
+
+<sect2 id="logdisplay">
+<title
+>Logs tonen</title>
+<para
+>Het tonen van de log kunt u starten met <keycombo action="simul"
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+> als u een of geen item in het overzicht heeft gemarkeerd. Afhankelijk van u instellingen (zie <xref linkend="subversion-settings" xreflabel="Instellingen van Subversion"/>) &kdesvn; haalt de log informatie startend bij <quote
+>HEAD</quote
+> en toont het . </para>
+<sect3  id="logdisplay-dlg">
+<title
+>Het log display venster</title>
+<para
+>Aan de linkerzijde is de lijst met log-items te zien die &kdesvn; ophaalde. Het logbericht is beperkt tot één regel. Wanneer een log-item wordt gekozen is het volledige logbericht rechtsboven te zien. Rechtsonder is een lijst met de veranderde bestanden. Dit venster verschijnt <emphasis
+>ALLEEN</emphasis
+> als &kdesvn; zo is ingesteld dat deze lijst wordt opgehaald. </para>
+<para
+>Met de knoppen bovenaan kunt u een andere bereik (range) voor de logs kiezen. <important
+><para
+>Dit bereik wordt zonder vooringestelde grenzen verstuurd, wees dus vorzichtig bij grote repositories.</para
+></important>
+
+</para>
+<para
+>De knoppen onderaan het dialoogvenster werken altijd op het gekozen log-item, maar niet op geselecteerde items in de lijst met veranderingen. Dus wanneer u het commando <guibutton
+>Vorige diff</guibutton
+> kiest, maakt het een diff over alle veranderde items in deze revisie als ze een gelijke of lagere revisie hebben. Hetzelfde geldt voor <guibutton
+>Diff revisie's</guibutton
+> </para>
+<para
+><guibutton
+>Annotate</guibutton
+> werkt natuurlijk alleen als het item waarvan de log is een bestand is. </para>
+<para
+>Bij alle items in beide lijsten kunt u een contextmenu openen voor extra mogelijkheden. In de linker lijst is dit <guimenuitem
+>Versie voor de linkerkant van diff</guimenuitem
+> (&ie; begin revisie) en <guimenuitem
+>Versie voor de rechterkant van diff</guimenuitem
+> (&ie; eind of doel van diff, in unified wordt dit gedeelte gemarkeerd met een <computeroutput
+>+++</computeroutput
+>). De hier gekozen revisie's worden gemarkeerd met een pijltje. </para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="working-with-repositories">
+<title
+>Werken met repositories</title>
+<para
+>Eenvoudig bladeren door de repository kunt u doen met &konqueror;, &dolphin; of vergelijkbare bestandsbeheerders: Open een URL met een protocol zoals beschreven in <xref linkend="kdesvn-features" xreflabel="Features" /> (Alle varianten die starten met <quote
+>k</quote
+>) en zij zullen de inhoud tonen. Hierdoor kunt u eenvoudige opdrachten zoals kopiëren, verplaatsen en verwijderen uitvoeren. Wanneer u het volgende filter <quote
+>?rev=<replaceable
+>xxx</replaceable
+></quote
+> instelt, zijn alleen de gegevens van een specifiek revisie te zien. De syntax van een revisie-filter is beschreven in <xref linkend="revision-syntax" />, lees meer over KIO::ksvn in <xref linkend="kdesvn-kio"/>  </para>
+<para
+>Alle opdrachten behalve <guimenuitem
+>Kopiëren</guimenuitem
+> kunt u alleen uitvoeren in de revisie HEAD </para>
+<sect2>
+<title
+>Terugplaatsen van verwijderde items</title>
+<para
+>Het terugplaatsen van verwijderde items in subversion is het kopiëren van items uit een gekozen revisie. Wanneer U dus van plan bent om items terug te plaatsen, kijk naar de revisie voordat het item werd verwijderd. Ga naar <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Repository</guisubmenu
+> <guimenuitem
+>Selecteer revisie om te bladeren</guimenuitem
+> </menuchoice
+> en kies de gewenste revisie. &kdesvn; toont nu inhoud hiervan. Markeer het de items die teruggezet moeten worden en ga naar <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Algemeen</guisubmenu
+> <guimenuitem
+>Kopiëren</guimenuitem
+> </menuchoice
+>. In de volgende dialoog is het doel altijd de revisie HEAD, de bron is de revisie waarin men aan het bladeren was. Vul het pad in en klik <guibutton
+>OK</guibutton
+> en het kopiëren start. Ga na het succesvol kopiëren terug naar de HEAD revisie en het teruggeplaatste item zou te zien moeten zijn. </para>
+</sect2>
+<sect2>
+<title
+>Mappen importeren</title>
+<para
+>Vanwege beperkingen van subversion zelf, kunt u alleen mappen en geen losse bestanden importeren. </para>
+<sect3>
+<title
+>Slepen en loslaten</title>
+<para
+>Markeer in een bestandsbeheerder de map die u wilt importeren en sleep het naar de map in &kdesvn; waar U het wilt importeren. </para>
+</sect3>
+<sect3>
+<title
+>Markeer in de bestandsbeheerder een map die u wilt importeren </title>
+<para
+>Markeer de map waar u een nieuwe map naartoe wilt importeren. En ga naar <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+> Algemeen</guisubmenu
+> <guimenuitem
+>Mappen importeren in huidige map</guimenuitem
+> </menuchoice
+> en selecteer de gewenste map. </para>
+</sect3>
+</sect2>
+</sect1>
+<sect1 id="operations">
+<title
+>Overige handelingen</title>
+<sect2 id="merging-items">
+<title
+>Samenvoegen</title>
+<para
+>Open repository of werkkopie, markeer het item dat u wilt samenvoegen (merge) en ga naar <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Algemeen</guisubmenu
+> <guisubmenu
+>Samenvoegen</guisubmenu
+> </menuchoice
+>. Vul in de volgende dialoog de gewenste waarden. Wanneer de repository is geopend, worden bron1 en bron2 gevuld, wanneer de werkkopie is geopend, dan wordt het doel gevuld met het huidige geselecteerde item. Het afhandelen van deze parameter is afhankelijk of u de interne diff, subversion dan wel een extern samenvoeg-programma zoals &kdiff3; gebruikt. Het doel moet ALTIJD een lokaal bestand of map zijn. U mag wisselen tussen extern en intern samenvoegen (merge) via het keuzevakje <guilabel
+>Externe samenvoeging gebruiken</guilabel
+>. </para>
+<sect3>
+<title
+>Intern samenvoegen</title>
+<para
+>Het doel is hetzelfde als bij subversions eigen commandoregel. Wanneer bron1 en bron2 aan elkaar gelijk zijn, moeten start- en eind-revisie verschillend zijn. Als de bronnen niet gelijk zijn, dan is start-revisie toegewezen aan bron1 en de eind-revisie aan bron2. Het doel MOET een werkkopie zijn, anders stuurt subversion een foutmelding. </para>
+<para
+>De keuzevakjes hebben de volgende betekenissen: <variablelist>
+
+<varlistentry>
+<term
+>Recursief</term>
+<listitem
+><para
+>Voer alle opdrachten op mappen recursief uit. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Ongerelateerde items behandelen als gerelateerde items</term>
+<listitem
+><para
+>Indien ingeschakeld, zullen items zonder relatie worden vergeleken (diff) alsof zij wel een relatie hebben. Anders zal subversion de ene zijde verwijderen en het aan de andere zijde toevoegen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Forceer het verwijderen van veranderde items/ items buiten versie beheer</term>
+<listitem
+><para
+>Indien niet ingeschakeld en samenvoegen (merge) verlangt het verwijderen van een veranderde item of een item zonder rivisiecontrole, zal het samenvoegen (merge) mislukken. Anders zal het item worden verwijderd. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Uitvoeren als test zonder wijzigingen</term>
+<listitem
+><para
+>Indien ingeschakeld, verstuurt subversion alleen meldingen over wat het zou doen, maar verandert de werkkopie niet. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+</sect3>
+<sect3>
+<title
+>Externe samenvoeging gebruiken</title>
+<para
+>Lees de sectie <xref linkend="diffmerge-settings"/> voor de details hoe een externe (merge) samenvoegprogramma ingesteld moet worden. &kdesvn; geeft via de commandoregel opdrachten. Alvorens het volgende wordt uitgevoerd: </para>
+<para>
+<orderedlist>
+
+<listitem
+><para
+>Wijs een start-revisie toe als bron1 en een eind-revisie als bron2. Controleer dan of er verschillen zijn (pad en/of revisie). Als dat zo is, dan is het een drievoudig samenvoegen, anders is het een eenvoudig samenvoegen van bron naar doel. Als bron2 leeg gelaten is, is het ook een eenvoudig samenvoegen (merge). </para
+></listitem>
+
+<listitem
+><para
+>Maak een export naar een tijdelijke map. Alleen de start-revisie van bron1 een simpel samenvoegen (merge) is, anders beide bronnen met hun revisies. Als het item geen map is maar een bestand, neem dan de inhoud van een aangewezen revisie. </para
+></listitem>
+
+<listitem>
+<para
+>Maakt de aanroep naar het gewenste externe (merge) samenvoeg-programma zoals ingesteld in de <link linkend="diffmerge-settings"
+>Instellingen</link
+>. De foutmeldingen worden getoond in een log-venster zodat u kunt zien wat fout is gegaan (als iets fout is gegaan). </para>
+</listitem>
+</orderedlist
+>In afwijking met het interne (merge) samenvoeg-programma, mag het doel een gewone map/bestand (zonder revisie controle) zijn, omdat externe programma's dit niet belangrijk vinden. </para>
+<para
+>Indien recursief niet is ingeschakeld, dan wordt de export uitgevoerd als een platte export. Wees voorzichtig: wanneer dit wordt gedaan met werkkopiën, worden externals <emphasis
+>NIET</emphasis
+> geëxporteerd. </para>
+</sect3>
+</sect2>
+
+<sect2 id="op-resolve">
+<title
+>Conflicten oplossen</title>
+<para
+>kdesvn heeft zelf geen module om conflicten op te lossen maar u kunt vanuit &kdesvn; een extern programma gebruiken. In <xref linkend="extern-resolve-setup"/> is een beschrijving hoe u dit kan instellen. </para>
+<para
+>Wanneer een item de status heeft van <quote
+>conflict</quote
+> ( er is dan een rood kruis te zien bij zulke items) dan kan het volgende gekozen worden <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkkopie</guisubmenu
+> <guisubmenu
+>Conflict oplossen</guisubmenu
+> </menuchoice
+>. of vanuit het contextmenu <guimenuitem
+>conflict oplossen</guimenuitem
+> (alleen bij items met een conflict) &kdesvn; start nu het programma dat door u is geïnstalleerd (of het standaard programma). Na dit opgelost te hebben, kunt u dit item als opgelost markeren (<menuchoice
+><guimenu
+>Subversion</guimenu
+><guisubmenu
+>Werkkopie</guisubmenu
+><guisubmenu
+>Markeer als opgelost</guisubmenu
+></menuchoice
+>), anders kunt u de veranderingen niet vastleggen. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="used-properties">
+<title
+>Eigenschappen van &kdesvn; instellen</title>
+<sect2>
+<title
+>Bugtracker integratie</title>
+<para
+>Het <ulink url="http://tortoisesvn.tigris.org/"
+>TortoiseSVN project</ulink
+> ontwierp een mooi systeem <ulink url="http://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-dug-bugtracker.html"
+> om bugtracker te integreren</ulink
+> in de subversion-GUI. Op dit moment ondersteund &kdesvn; geen extra velden in het vastlegvak (dit zal later volgen) en begrijpt alleen de volgende eigenschappen: </para>
+<para>
+<table id="bugtracker-properties">
+<title
+>Bugtracker Integratie Eigenschappen</title>
+<tgroup cols="3">
+
+<thead>
+<row>
+<entry
+>Eigenschap</entry>
+<entry
+>Beschrijving</entry>
+<entry
+>Voorbeeld</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><literal
+>bugtraq:url</literal
+></entry>
+<entry
+>Dit is het &URL; naar de bugtracker. Het moet het woord <literal
+>%BUGID%</literal
+> bevatten.</entry>
+<entry
+>https://bugs.kde.org/show_bug.cgi?id=%BUGID%</entry>
+</row>
+
+<row>
+<entry
+><literal
+>bugtraq:logregex</literal
+></entry>
+<entry>
+<para
+>Bevat een of twee uitdrukkingen, gescheiden door een regeleinde.</para>
+<para
+>Indien alleen een enkele uitdrukking is ingesteld, dan moet de kale bug ID overeenkomen met een groepje van de regex-regel. Indien twee uitdrukkingen zijn ingesteld, dan wordt de eerste uitdrukking gebruikt om de regel met het bug ID te vinden maar die ook meer dan alleen de bug ID kan bevatten (&eg; <quote
+>Issue #123</quote
+> of <quote
+>resolves issue 123</quote
+>). De tweede uitdrukking wordt vervolgens gebruikt om de kale bug ID te krijgen uit de regel verkregen met de eerste uitdrukking.</para>
+<para
+>Let op ongewenste spaties aan het eind van de uitdrukking en vergeet niet de haakjes om het nummer-omschrijving.</para>
+</entry>
+<entry>
+<para
+>Enkele uitdrukking (bruikbaar met TRAC): </para>
+<programlisting
+>#(\d+)
+</programlisting>
+<para
+>Niet alle nummers zoals <replaceable
+>#190</replaceable
+> zullen worden overgenomen en vertaald naar een &URL; in de log-uitvoer. </para>
+<para
+>Twee uitdrukkingen: </para>
+<programlisting
+>[Ii]ssue #?(\d+)(,? ?#(\d+))*
+(\d+)
+</programlisting>
+<important>
+  <title
+>Onthouden</title>
+  <para
+>let op de spaties na de <literal
+>(\d+)</literal
+>! Dit is een van de meest voorkomende fouten waarom deze expressie niet werkt! </para>
+</important>
+</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</para>
+<para
+>Bij lokaal geopende repositories (&ie; <filename class="directory"
+>file://</filename
+> protocol) en bij werkkopiën worden deze eigenschappen vanaf de geopende map omhoog gezocht totdat het gevonden is of het bovenste niveau van subversion is bereikt. In repositories die via een netwerk geopend zijn (alles behalve <filename class="directory"
+>file://</filename
+> protocol) wordt alleen de geopende map doorzocht. </para>
+<para
+>Ondersteuning voor meervoudige sets van deze eigenschappen volgen misschien later, (b.v. in een submap een andere waarde voor een ander item &etc;) maar meestal is het opzoeken van van een enkele item genoeg. </para>
+</sect2>
+</sect1>
+
+<sect1 id="revision-tree">
+<title
+>De revisie boom</title>
+<para
+>De revisie probeert de hele geschiedenis van een item te laten zien, zodat de gebruiker een beter idee heeft over de geschiedenis van een item. Er moet daarom de complete log van respository gescand worden omdat er informatie verzameld moet worden dat subversion niet geeft (en ik denk ook niet zal) geven. Omdat dit veel verkeer zal geven, wordt voor de revisie boom de interne <link linkend="logcache-descr"
+>log cache</link
+> gebruikt. </para>
+<sect2>
+<title
+>Vereisten</title>
+<para
+>De revisie boom wordt gegenereerd met <application
+>dot</application
+>. Dus moet voor een werkende revisie boom, het pakket <application
+>graphviz</application
+> zijn geïnstalleerd. </para>
+</sect2>
+</sect1>
+
+<sect1 id="logcache-descr">
+<title
+>Interne log cache</title>
+<para
+>&kdesvn; kan een interne logcache gebruiken voor sommige operatie´s. Meestal is dit in gebruik voor de <link linkend="revision-tree"
+>revisie boom</link
+> maar ook wanneer een eenvoudige log in de offline modus wordt bekeken. De caches zijn als <application
+>SQLite</application
+> databases opgeslagen in <filename class="directory"
+>$HOME/.sqvnqt/logcache</filename
+>. Elk genummerd bestand is een opslag voor een andere repository. </para>
+<warning>
+  <para
+>De databases kunnen groot worden! Het automatische updaten van de logcache kunt u daarom uitschakelen in de instellingen. </para>
+</warning>
+<para
+>U kunt ook eenvoudig een database verwijderen, dan zal er geen cached log terugkomen voor deze repository (en geen revisie boom!) maar als het automatisch updaten van de cache niet is uitgeschakeld, zal de cache weer opnieuw gevuld worden wanneer u de repository of een bijbehorende werkkopie opent </para>
+<sect2>
+<title
+>Offline-modus</title>
+<para
+>&kdesvn; kan werken zonder netwerk-toegang, &ie; u kunt netwerk-toegang voor &kdesvn; uitschakelen. Dit kan handig zijn als u zonder een netwerk werkt zoals met een notebook. In zulke gevallen haalt &kdesvn; altijd de logs vanuit de interne cache. Deze log is vanwege technische redenen beperkt tot basisfuncties, daarom kan de cached log (maar hoeft niet) verschillen van de echte log. Verschillen betekent dat niet alle bewerkingen te zien zijn, zelfs als <guilabel
+>Log volgt nodechanges</guilabel
+> is ingeschakeld.</para>
+</sect2>
+<sect2>
+<title
+>Logcache en revisie boom</title>
+<para
+>De revisie boom gebruikt alleen de logcache omdat anders iedere keer de logs opnieuw moeten worden opgehaald. Het ververst <emphasis
+>NIET</emphasis
+> de logcache (maar dit kan veranderen in een latere release). </para>
+</sect2>
+</sect1>
+
+<sect1 id="overlay-meaning">
+<title
+>Betekenissen van de pictogrammen</title>
+<para
+>Items die niet in een <quote
+>normale</quote
+> staat zijn, kunnen gemarkeerd zijn met een icoon. <variablelist>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnlocked.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Vergrendeld</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Dit item is vergrendeld. In de laatste kolom wordt de eigenaar van het slot genoemd. &kdesvn; kunt u instellen dat het ook naar vergrendelde items zoekt. Wees voorzichtig: afhankelijk van het type server, kan dit een lange tijd in beslag nemen! </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnneedlock.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Vergrendelen vereist</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Dit item moet u vergrendelen voordat u het weer kunt bewerken en samenvoegen. Totdat het vergrendeld is, houdt subversion het als "alleen lezen". </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnupdates.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Elementen voor bijwerken</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Dit item of (als het een map is een item daarin) heeft een nieuwere versie in repository. </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnmodified.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Gewijzigd</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Dit item (als het een map is een item daarin) is veranderd op de lokale schijf. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnadded.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Toegevoegd</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Dit item is lokaal toegevoegd aan subversion maar nog niet vastgelegd (commit). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvndeleted.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Verwijderd</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Dit item is lokaal verwijderd van subversion maar nog niet vastgelegd (commit). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnconflicted.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Verwijderd</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Dit item (als het een map is een item daarin) heeft conflicten (die u moet oplossen) gekregen met de laatste update.  </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect1>
+
+<sect1 id="kdesvn-passwords">
+<title
+>&kdesvn; en wachtwoorden</title>
+<para
+>&kdesvn;/subversion kan wachtwoorden opslaan. Het opslaan van wachtwoorden heeft altijd een risico, maar het maakt de grafische userinterface wel meer gebruiksvriendelijk. </para>
+<sect2>
+<title
+>Wachtwoorden niet opslaan</title>
+<para
+>De meest veilige manier, maar soms onhandig met GUI's zoals &kdesvn;. Speciaal de achtergrond processen van &kdesvn; zullen altijd een wachtwoord vragen als de respository de toegang heeft beperkt voor lees operaties zoals update en status. Hetzelfde geldt voor <quote
+>commit</quote
+> enzovoorts. Dus als U de wachtwoorden niet opslaat, kunt U beter <guilabel
+>Controleren voor updates wanneer een werkkopie geopend wordt</guilabel
+> en <link linkend="subversion-settings"
+>anderen</link
+> uitschakelen. </para>
+</sect2>
+<sect2>
+<title
+>Wachtwoorden opslaan in &kwallet5;</title>
+<para
+>Veilige opslag van wachtwoorden wordt veel gebruikt in &kde;-programma's zoals &kmail; en &konqueror;. Als U wachtwoorden wil opslaan (en de meeste die &kdesvn; gebruiken, willen dit), dat zou u dit willen gebruiken. Bedenk wel dat versleutelde opslag geen heel erg veilige opslag (high-secure storage) is. Voor details lees de <ulink url="help:/kwallet5"
+>&kwallet5; documentatie</ulink
+>. </para>
+</sect2>
+<sect2>
+<title
+>Wachtwoorden opslaan in subversions eigen wachtwoord opslag</title>
+<para
+>Dit word niet aanbevolen omdat het wachtwoord als leesbare tekst is opgeslagen, niet geloofwaardig? Kijk dan maar in de bestanden in <filename class="directory"
+>~/.subversion/auth/svn.simple</filename
+>. Doe dit alleen als ook regelmatig andere clients dan &kdesvn; zoals <application
+>rapidsvn</application
+> of <application
+>esvn</application
+> of de originele <application
+>svn</application
+> commandline client. Als meestal de commandline client wordt gebruikt voor checkouts of updates die geen wachtwoord nodig hebben en &kdesvn; voor commit/move/copy, gebruik in dat geval &kwallet5;. </para>
+</sect2>
+<sect2>
+<title
+>Interne wachtwoord cache</title>
+<para
+>De interne wachtwoord-cache kunt u inschakelen, zodat het wachtwoord onthouden wordt zolang &kdesvn; in het geheugen is. Het is dan niet nodig om een wachtwoord twee keer in te voeren als u het niet in &kwallet5; heeft opgeslagen. </para>
+</sect2>
+<sect2>
+<title
+>Het speciale geval svn+ssh</title>
+<para
+>Wanneer u subversion via svn+ssh gebruikt, dan kunt u wachtwoord opslaan via ssh en ssh-agent. Hiervoor is ssh-toegang tot de andere machine en en repository nodig. Wanneer u hiervan gebruik maakt dan moet u gebruik maken van de public key authentication van ssh, en niet wachtwoord authentication. (Eigenlijk geeft ssh de voorkeur aan public key authentication). Hiervoor moet de public ssh-key in het doel worden geplaatst, &eg; het repository systeem. SSH-wachtwoorden worden nooit door subversion wachtwoord opslag of &kwallet5; of de interne wachtwoord cache beheert. </para>
+<para
+>Als de vraag voor het wachtwoord van de ssh-key ongewenst is, dan kan u <application
+>ssh-agent</application
+>, met een keuze-menu gebruiken: <menuchoice
+><guimenu
+>Subversion </guimenu
+> <guimenuitem
+>Voeg de ssh identities toe aan ssh-agent</guimenuitem
+></menuchoice
+>. Hier kunt u de ssh-key-wachtwoord voor de huidige sessie bewaren, zodat het niet nodig is om iedere keer het wachtwoord in te vullen. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="kdesvn-kio">
+<title
+>&konqueror;, KIO, &kdesvn;</title>
+<sect1 id="kdesvn-kio-desc">
+<title
+>Beschrijving</title>
+<para
+>Vanaf versie 0.7.0 heeft &kdesvn;, enkele modules die enkele commando's direct in de menu's van &konqueror; integreren. <variablelist>
+<varlistentry>
+<term
+>KIO protocollen</term>
+<listitem
+><para
+>Zorgt voor het verwerken van de volgende protocols:</para>
+<itemizedlist>
+<listitem
+><para
+>ksvn+http</para
+></listitem>
+<listitem
+><para
+>ksvn+https</para
+></listitem>
+<listitem
+><para
+>ksvn+file</para
+></listitem>
+<listitem
+><para
+>ksvn+ssh</para
+></listitem>
+<listitem
+><para
+>ksvn</para
+></listitem>
+</itemizedlist>
+
+<para
+>Deze protocols zijn alleen ontworpen voor repositories, niet voor werkkopieën. B.v. <filename class="directory"
+>ksvn+file:///<replaceable
+>pad</replaceable
+></filename
+> moet naar een ander startpunt wijzen dan het programma zelf of Kpart. Werkkopieën kunt u bekijken met &konqueror;. </para>
+<para
+>Om door een specifieke revisie te bladeren, moet u de volgende zoekopdracht geven <link linkend="revision-syntax"
+><quote
+>?rev=<replaceable
+>revision</replaceable
+></quote
+></link
+> naar de &URL;. </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Contextmenu's</term>
+<listitem
+><para
+>&kdesvn; installeert context menu's voor &konqueror;. Deze zijn zichtbaar na een rechter muisklik in het het venster (alleen in het standaard venster, niet in KPart), het is daarom mogelijk om de meeste acties direct in &konqueror; uit te voeren (of elke andere bestandsbeheerder die &konqueror;s context menu's kan gebruiken zoals &dolphin;). Dit wordt gedaan via een call naar de <link linkend="kdesvn-commandline"
+>commandoregel variant van &kdesvn;</link
+>. </para>
+</listitem>
+</varlistentry>
+</variablelist>
+</para>
+<sect2>
+<title
+>Gebruik van KIO buiten &konqueror; - een voorbeeld</title>
+<para
+>Elk programma, die de KIO-biblotheek gebruikt, kan deze protocollen gebruiken. Het is daarom mogelijk om zonder veel kennis alle verschillen tussen twee revisies te verkrijgen met &kdiff3;. </para>
+<para>
+<example>
+<title
+>Het verschil verkrijgen tussen twee revisies door gebruik van &kdiff3; en KIO::ksvn</title>
+<programlisting
+>kdiff3 \
+  ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=423127 \
+  ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=455064
+</programlisting>
+<para
+>Laat kdiff3 alle verschillen tussen twee revisie's tonen. </para>
+<para>
+<note>
+  <para
+>Letop! Gebruik hiervan in &kdesvn;(diffen tussen twee revisie's) is <emphasis
+>VEEL</emphasis
+> sneller omdat het de interne mechanisme van subversion gebruikt. </para>
+</note>
+</para>
+</example>
+</para>
+</sect2>
+</sect1>
+<sect1 id="kio-svn-special">
+<title
+>Informatie over KIO::ksvn voor programmeurs</title>
+<note
+><para
+>U kunt dit gedeelte overslaan indien u niet geïnteresseerd bent in KIO-programmeren.</para
+></note>
+<para
+>KIO::ksvn::special kent de volgende bewerkingen. </para>
+<sect2>
+<title
+>Commandolijst</title>
+<para>
+<table id="kio-svn-special-commands">
+  <title
+>Commando overzicht voor <literal
+>KIO::ksvn::special</literal
+></title>
+<tgroup cols="4">
+
+<thead>
+<row>
+<entry
+>Commandonaam</entry>
+<entry
+>Numerieke id</entry>
+<entry
+>Parameter lijst</entry>
+<entry
+>In de huidige versie ingevoerd?</entry>
+</row>
+</thead>
+
+<tbody>
+
+<row>
+<entry
+>Checkout</entry>
+<entry
+>1</entry>
+<entry>
+<para
+>KURL repository, KURL target, int revnumber, QString revkind </para>
+<para
+>Het doel wordt <emphasis
+>niet</emphasis
+> veranderd, &eg;, maar de inhoud wordt uitgecheckt zonder een submap te maken! b.v. de bron is <filename
+>http://server/repos/project/trunk</filename
+> en als het doel is <filename
+>/home/user/proj/</filename
+>, dan zal de inhoud van trunk gekopieerd worden naar <filename
+>/home/user/proj/</filename
+> en niet naar <filename
+>/home/user/proj/trunk/</filename
+>! </para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Bijwerken</entry>
+<entry
+>2</entry>
+<entry
+><para
+>KURL url, int revnum, QString revstring</para>
+<para
+>Indien revnum &lt; 0 de revstring is ingevoegd. De omschrijving van de opbouw van revstring vindt u in de <link linkend="revision-syntax"
+>Appendix</link
+>. </para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Vastleggen (commit)</entry>
+<entry
+>3</entry>
+<entry
+><para
+>KURL::List urls</para>
+<para
+>Geeft een overzicht met lokale URL's om vast te leggen. Vraagt naar een log</para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Log</entry>
+<entry
+>4</entry>
+<entry>
+<para
+>int startrevnumber, QString startrevstring, int endrevnumber, QString endrevstring, KURL::List </para>
+<para
+>Gebruik dit voorzichtig - dit kan veel data produceren. </para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Importeren</entry>
+<entry
+>5</entry>
+<entry
+>KURL targetrepository, KURL sourcepath</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Toevoegen</entry>
+<entry
+>6</entry>
+<entry
+>KURL</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Del</entry>
+<entry
+>7</entry>
+<entry
+>KURL::List</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Terugdraaien</entry>
+<entry
+>8</entry>
+<entry
+><para
+>KURL::List</para>
+<para
+>Terugdraaien in KIO is altijd niet-recursief, geen vragen (aanroepend programma moet dat zelf doen)</para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Status</entry>
+<entry
+>9</entry>
+<entry
+><para
+>KURL item, bool checkRepos, bool recurse</para>
+<para
+>item - het item waarover informatie opgevraagd moet worden, checkRepos - controleert of er nieuwere versies zijn in de repository, recurse - controleert recursief of niet.</para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Mkdir</entry>
+<entry
+>10</entry>
+<entry
+>KURL::List</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Oplossen</entry>
+<entry
+>11</entry>
+<entry
+>KURL, bool recursive</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Wisselen</entry>
+<entry
+>12</entry>
+<entry
+>KURL working_copy_path, KURL new_repository_url, bool recursive,int revnumber, QString revkind</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Diff</entry>
+<entry
+>13</entry>
+<entry>
+<para
+>URL uri1, KURL uri2, int r1, QString rstring1, int r2, QString rstring 2, bool recursive</para>
+<para
+>Voor verschillen tussen het repository bestand:/// en de werkkopie, de URL van de werkkopie kan zonder protocol ingesteld worden!</para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+</tbody>
+
+</tgroup>
+</table>
+
+</para>
+</sect2>
+<sect2>
+<title
+>Teruggegeven waarden</title>
+<para
+>Return waarden mogen gegeven worden via metadata, lees apidoc voor de details. </para>
+<para>
+<table id="kio-ksvn-metadata">
+<title
+>Inhoud van metagegevens</title>
+<tgroup cols="2">
+
+<thead>
+<row>
+<entry
+>Sleutel</entry>
+<entry
+>Mogelijk waarde</entry>
+</row>
+</thead>
+
+<tbody>
+
+<row>
+<entry
+>pad</entry>
+<entry
+>Het pad van het item waarop een actie is uitgevoerd, &eg; een gegeven url.</entry>
+</row>
+
+<row>
+<entry
+>actie</entry>
+<entry
+>Numeric action type</entry>
+</row>
+
+<row>
+<entry
+>soort</entry>
+<entry
+>Soort item (meestal een map of een bestand)</entry>
+</row>
+
+<row>
+<entry
+>mime_t</entry>
+<entry
+>Subversion mimetype van item</entry>
+</row>
+
+<row>
+<entry
+>Inhoud</entry>
+<entry
+>De inhoud (subversion waarde)</entry>
+</row>
+
+<row>
+<entry
+>prop</entry>
+<entry
+>Eigenschappen (subversion waarde)</entry>
+</row>
+
+<row>
+<entry
+>rev</entry>
+<entry
+>De resulterende revisie of de revisie waarmee is gewerkt</entry>
+</row>
+
+<row>
+<entry
+>tekenreeks</entry>
+<entry
+>Intern leesbare bericht.</entry>
+</row>
+
+<row>
+<entry
+>loggedaction</entry>
+<entry
+>Door subversion gedefinieerde actie string voor item (A,M,D)</entry>
+</row>
+<row>
+<entry
+>loggedcopyfrompath</entry>
+<entry
+>Via welk pad gekopieerd? (mag leeg zijn)</entry>
+</row>
+<row>
+<entry
+>loggedcopyfromrevision</entry>
+<entry
+>Van welke revisie gekopieerd? (mag &lt; 0)</entry>
+</row>
+<row>
+<entry
+>loggedpath</entry>
+<entry
+>Via welk enkel pad de logged actie worden weggeschreven. (pad is ingesteld naar het opgeroepen url)</entry>
+</row>
+<row>
+<entry
+>diffresult</entry>
+<entry
+>Een regel van een verschil output</entry>
+</row>
+</tbody>
+
+</tgroup>
+</table>
+
+</para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="kdesvn-commandline">
+<title
+>&kdesvn; via de commandoregel gebruiken</title>
+<sect1 id="kdesvn-commandline-overview">
+<title
+>Overzicht</title>
+<para
+>Sommige subversion opdrachten kunnen via de commandoregel worden uitgevoerd, &eg;, zoals een standaard commandoregel client maar interactie met een gebruiker gebeurt via het <acronym
+>UI</acronym
+>. De standaard syntax is <userinput
+>kdesvn exec <replaceable
+>command</replaceable
+> <replaceable
+>parameter</replaceable
+> <replaceable
+>url</replaceable
+></userinput
+>. </para>
+<para
+>Als een enkele revisie van een enkele &URL; is gewenst, dan kan dit als parameter ingesteld worden via <programlisting
+>svn://your-server/path-to-repository/item?rev=&lt;your-rev&gt;</programlisting
+>. Dit overschrijft de optie <option
+>-r &lt;rev&gt;</option
+>. </para>
+<para
+>Een revisie kunt u opgeven als een nummer of als <option
+>HEAD</option
+> of <option
+>BASE</option
+> of als een datum zoals {YYYY-MM-DD}. </para>
+</sect1>
+<sect1 id="kdesvn-command-list">
+<title
+>Commandolijst</title>
+<para
+>Als in het volgende overzicht als mogelijke parameter <option
+>-r <replaceable
+>revisie</replaceable
+></option
+> is gegeven, dan kunt u dit instellen als <userinput
+><replaceable
+>url</replaceable
+>?rev=<replaceable
+>de-revisie</replaceable
+></userinput
+>. <table id="svn-commands-table">
+<title
+>Subversion commando's</title>
+<tgroup cols="3">
+
+<thead>
+<row>
+<entry
+>Commando</entry>
+<entry
+>Betekenis</entry>
+<entry
+>Geaccepteerde opties</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+<entry
+>commit (or ci)</entry>
+<entry
+>Legt veranderingen van een item vast (commit) naar de repository</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>log</entry>
+<entry
+>Geeft de log van een item</entry>
+<entry
+>-r startrevision:endrevision -l limit_display</entry>
+</row>
+<row>
+<entry
+>cat</entry>
+<entry
+>Toont de inhoud van een item.</entry>
+<entry
+>-r revision </entry>
+</row>
+<row>
+<entry
+>copy (of cp)</entry>
+<entry
+>Kopieert een item binnen een werkkopie of een repository. Als er geen doel is opgegeven, dan vraagt &kdesvn; ernaar.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>move (of mv, rename)</entry>
+<entry
+>Verplaats/Herbenoem een item binnen een werkkopie of een repository. Als er geen doel is opgegeven, dan vraagt &kdesvn; ernaar.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>get</entry>
+<entry
+>Verkrijg de inhoud van een item en slaat het op</entry>
+<entry
+>-r revision -o &lt;outputfile&gt; (output is vereist!)</entry>
+</row>
+<row>
+<entry
+>blame (of annotate)</entry>
+<entry
+>Aantekeningen bij bestand</entry>
+<entry
+>-r startrevisie:eindrevisie</entry>
+</row>
+<row>
+<entry
+>bijwerken</entry>
+<entry
+>Een item in de werkkopie updaten</entry>
+<entry
+>-r revision</entry>
+</row>
+<row>
+<entry
+>diff</entry>
+<entry
+>Vergelijk (diff) twee revisie´s van een item of vergelijk (diff) twee items bij bepaalde revisie´s.</entry>
+<entry
+>-r startrev:endrev</entry>
+</row>
+<row>
+<entry
+>info</entry>
+<entry
+>Gedetailleerde informatie over een item.</entry>
+<entry
+>-r revision</entry>
+</row>
+<row>
+<entry
+>checkout (of co)</entry>
+<entry
+>Checkout repository-pad naar een nieuw werkkopie-pad. Er wordt gevraagd naar het doelpad en de bron-revisie.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>checkoutto (of coto)</entry>
+<entry
+>Checkout repository-pad naar een nieuw werkkopie-pad. Er wordt gevraagd naar het verschil van de bronpad en bron-revisie.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>exporteren</entry>
+<entry
+>Exporteert de repository- of werkkopie-pad naar een map. Er wordt gevraagd naar het doelpad en de bron-revisie.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>exportto</entry>
+<entry
+>Exporteert repository- of werkkopie-path naar een map. Er wordt gevraagd naar het bronpad en de bron-revisie.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>delete (del, remove, rm)</entry>
+<entry
+>verwijder de url(s) van de repository of de werkkopie.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>add</entry>
+<entry
+>Voegt een &URL; toe aan een werkkopie. De &URL; moet aan een werkkopie toebehoren (het is niet een import!)</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>revert (of undo)</entry>
+<entry
+>Maakt de huidige veranderingen aan de werkkopie weer ongedaan. Mag alleen gebruikt worden bij werkkopieën!</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>checknew (of addnew)</entry>
+<entry
+>Controleert in een opgegeven &URL; voor nieuwe, items zonder revisie en voegt ze dan (indien gewenst) toe aan de werkkopie.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>boomstructuur</entry>
+<entry
+>Toont de revisie-boom van een item (alleen het eerste argument), Als de &URL; met de parameter <quote
+>?rev=<replaceable
+>xxx</replaceable
+></quote
+> wordt gegeven, dan start de revisie-boom vanaf hier.</entry>
+<entry
+>-r startrev:endrev</entry>
+</row>
+<row>
+<entry
+>vergrendelen</entry>
+<entry
+>Vergrendel url(s), als de parameter <option
+>-f</option
+> wordt meegegeven dan worden bestaande vergrendelingen verwijderd.</entry>
+<entry
+>-f</entry>
+</row>
+<row>
+<entry
+>ontgrendelen</entry>
+<entry
+>Ontgrendeld een url(s), Als de parameter <option
+>-f</option
+> wordt meegegeven worden ook vergrendelingen die niet in eigendom zijn ontgrendeld en niet bestaande vergrendelingen overgeslagen.</entry>
+<entry
+>-f</entry>
+</row>
+<row>
+<entry
+>help</entry>
+<entry
+>Toont deze pagina</entry>
+<entry
+></entry>
+</row>
+</tbody>
+</tgroup>
+
+</table>
+
+<table id="parameter-list">
+<title
+>Parameters voor subversion commando's</title>
+<tgroup cols="3">
+<thead>
+<row>
+<entry
+>Parameter</entry>
+<entry
+>Mogelijke waarden</entry>
+<entry
+>toegestaan voor</entry>
+</row>
+</thead>
+<tbody>
+<row>
+  <entry
+><option
+>-r</option
+></entry>
+<entry
+><replaceable
+>revisie</replaceable
+> of <replaceable
+>beginrev:einderev</replaceable
+></entry>
+<entry
+>alles behalve vastleggen (commit)</entry>
+</row>
+<row>
+  <entry
+><option
+>-R</option
+></entry>
+<entry
+>(geen)</entry>
+<entry
+>alles behalve vastleggen (commit)</entry>
+</row>
+<row>
+<entry
+><option
+>-o</option
+></entry>
+<entry
+><replaceable
+>bestandsnaam</replaceable
+></entry>
+<entry
+>get</entry>
+</row>
+<row>
+<entry
+><option
+>-l</option
+></entry>
+<entry
+><replaceable
+>aantal</replaceable
+></entry>
+<entry
+>log</entry>
+</row>
+<row>
+<entry
+><option
+>-f</option
+></entry>
+<entry
+>(geen)</entry>
+<entry
+>(un-)lock</entry>
+</row>
+
+</tbody>
+</tgroup>
+</table>
+
+</para>
+<sect2>
+  <title
+>Het <quote
+>log</quote
+> commando</title>
+<para
+>Het log commando geeft een venster met de log van het gegeven &URL;. Met subversion 1.2 of hoger accepteert het filters &ie; hoeveel items het moet vertonen. </para>
+<para
+>In het venster kan men log-entries selecteren en de verschillen daartussen zien. <example>
+<title
+>Toon de laatste 20 toevoeg (commit) logs</title>
+<programlisting
+>kdesvn exec log -l 20 -r HEAD&#058;1 myfile.c
+</programlisting>
+<para
+>Let op de volgorde van de revisie's: U wilt van HEAD naar START gaan voor de LAATSTE. Geef daarom revisie HEAD op als startpunt, anders krijgt u de eerste 20 entries te zien.</para>
+</example>
+</para>
+</sect2>
+<sect2>
+  <title
+>Het <quote
+>diff</quote
+> commando</title>
+<para
+>U krijgt de verschillen te zien tussen revisie's van een item of tussen items in een dezelfde werkkopie of repository. Als u de revisie's van een item vergelijkt (diff), dan mag u deze revisie's opgeven als <option
+>-r <replaceable
+>STARTREV</replaceable
+>:<replaceable
+>ENDREV</replaceable
+></option
+>. Als u een item in een werkkopie zonder een revisie vergelijkt (gediff't), dan wordt het verschil met de repository getoond. <example>
+<title
+>Toon het verschil tegen de repository, &ie; lokale wijzigingen</title>
+<programlisting
+>kdesvn exec diff myfile.c
+</programlisting>
+</example>
+<example>
+<title
+>Toont de verschillen tussen revisie's</title>
+<programlisting
+>kdesvn exec diff -r 21:20 myfile.c
+</programlisting>
+</example>
+</para>
+<para
+>Wanneer twee items worden vergeleken (gediff't), dan mogen revisie's worden toegevoegd aan de &URL; van de items. &eg;: <programlisting
+>http://server/path/item?rev=HEAD</programlisting>
+<example>
+<title
+>Vergelijken (diffing) van twee gemarkeerde versie's</title>
+<programlisting
+>kdesvn exec diff http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_2 http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_3
+</programlisting>
+</example>
+</para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="setup">
+<title
+>Instellingen</title>
+<para
+>Via het instellingenscherm kunt u de instellingen veranderen. Ze zijn ingedeeld in verschillende deelschermen. </para>
+<sect1 id="general-settings">
+<title
+>Algemeen</title>
+<para>
+<informaltable id="General-setup-items">
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+>Formaat van de pictogrammen</entry>
+<entry
+>Hoe groot (vierkant) moeten de iconen in de hoofdlijst zijn</entry>
+</row>
+<row>
+<entry
+>Bestandsinformatie tonen</entry>
+<entry
+>Schakel deze optie in als u tekstballonnen wilt zien als u uw muis op een pictogram laat rusten.</entry>
+</row>
+<row>
+<entry
+>Itemstatus met pictogramoverlay markeren</entry>
+<entry
+>Items die niet in een "normale" staat zijn, kunnen gemarkeerd worden met een icoon. (lees ook <xref linkend="overlay-meaning"/>)</entry>
+</row>
+<row>
+<entry
+>Sorteervolgorde items is hoofdlettergevoelig</entry>
+<entry
+>De volgorde in het hoofdvenster is wel of niet hoofdlettergevoelig, &ie; if <quote
+>a</quote
+> is niet gelijk aan <quote
+>A</quote
+>.</entry>
+</row>
+<row>
+<entry
+>Genegeerde bestanden tonen</entry>
+<entry
+>In subversion voor negeren gemarkeerde items wel of niet tonen.</entry>
+</row>
+<row>
+<entry
+>Maximum aantal logberichten in de history</entry>
+<entry
+>Het aantal logberichten dat &kdesvn; moet onthouden.</entry>
+</row>
+<row>
+<entry
+>Gekleurde annotatie tonen</entry>
+<entry
+>Kleuren gebruiken voor annotaties gedefinieerd in de instellingendialoog.</entry>
+</row>
+<row>
+<entry
+>Navigatie paneel gebruiken</entry>
+<entry
+>Toon of verberg de boomstructuur van de repository.</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</para>
+</sect1>
+
+<sect1 id="subversion-timedjobs-settings">
+<title
+>Subversion en getimede instellingen voor taken</title>
+
+<table id="subversion-settings">
+<title
+>Subversion</title>
+<tgroup cols="2">
+
+<tbody>
+
+<row>
+<entry
+>Controleren voor updates wanneer een werkkopie geopend wordt</entry>
+<entry
+>Bij het openen van een werkkopie onmiddellijk in de achtergrond starten van een controle voor updates.</entry>
+</row>
+<row>
+<entry
+>Beginnen met vullen van de log-cache bij openen</entry>
+<entry
+>Indien ingeschakeld, gaat &kdesvn; de logcache opnieuw vullen wanneer een repository of een werkkopie wordt geopend als de repository-&URL; niet lokaal is (<filename class="directory"
+>file://</filename
+>)</entry>
+</row>
+<row>
+  <entry
+>Controleer of items de eigenschap <quote
+>svn:needs-lock</quote
+> hebben</entry>
+<entry
+>Controleer bij werkkopieën of een item deze eigenschap heeft en toon in dat geval een speciaal icoontje ernaast. Dit inschakelen maakt het overzicht erg langzaam.</entry>
+</row>
+<row>
+<entry
+>Bestandsdetails laden wanneer bestanden op afstand getoond worden</entry>
+<entry
+>Indien ingeschakeld, haalt &kdesvn; meer gedetailleerde informatie over bestanden in de overzicht van repositories op afstand. Men kan dan vergrendelingen van anderen in het overzicht zien. Wees voorzichtig: dit inschakelen maakt de lijst <emphasis
+>ERG</emphasis
+> langzaam!</entry>
+</row>
+
+<row>
+<entry
+>Item-informatie recursief opvragen</entry>
+<entry
+>Indien ingeschakeld, zal <command
+>info</command
+> bij een map informatie over alle items in deze map verzamelen, kan erg langzaam zijn.</entry>
+</row>
+
+<row>
+<entry
+>Wachtwoorden opslaan voor verbindingen op afstand</entry>
+<entry
+>Het opslaan van wachtwoorden is vaak een veiligheidsprobleem. Subversion bewaart zijn wachtwoorden in een plat bestand, dat wil zeggen wachtwoorden in leesbare tekst! Wees daarom voorzichtig met het inschakelen hiervan en lees daarom ook het volgende item. In dit item wordt alleen verteld dat wachtwoorden opslaan de standaard is, u kunt dit voor speciale doelen veranderen in het login venster.</entry>
+</row>
+
+<row>
+<entry
+>Wachtwoorden opslaan in KDE Portefeuille</entry>
+<entry
+>Bij het bewaren van wachtwoorden is het bestand met leesbare tekst een gat in de veiligheid. &kdesvn; kan de wachtwoorden opslaan en ook weer gebruiken in de versleutelde &kde;-wallet in plaats van de normale plek (vanaf versie 0.12.0). Aan de andere kant kunnen andere subversion-cliënt's dit niet inlezen, dus moet u bij het gebruik van programma's zoal <application
+>svn</application
+>-commandline of <application
+>rapidsvn</application
+> ze toch opnieuw invoeren. Zolang subversion de opslag van wachtwoorden niet versleuteld is het misschien verstandiger om ze helemaal niet op te slaan.</entry>
+</row>
+
+<row>
+<entry
+>Interne wachtwoord cache gebruiken</entry>
+<entry
+>Als een wachtwoord niet definitief is opgeslagen dan kan &kdesvn; het onthouden totdat &kdesvn; afsluit, u hoeft het daarom niet bij iedere gebeurtenis opnieuw in te voeren. Deze cache is niet permanent, het wordt dus nergens opgeslagen.</entry>
+</row>
+
+<row>
+<entry
+>Logbestanden houden node-veranderingen bij</entry>
+<entry
+>Indien ingeschakeld, komen kopieeracties ook in de log.</entry>
+</row>
+
+<row>
+<entry
+>Log leest altijd een lijst van gewijzigde bestanden</entry>
+<entry
+>Het logcommando kan een overzicht van gewijzigde bestanden in de vastlegging (commit) opnemen. Dit is erg handig en meestal kost dit niet meer verkeer.</entry>
+</row>
+
+<row>
+<entry
+>Items nakijken voor vastleggen</entry>
+<entry
+>Wanneer toevoeging wordt uitgevoerd, kan &kdesvn; controleren wat te doen. Als bijvoorbeeld er items zonder revisie zijn toegevoegd, dan krijgt u de veranderde items te zien en legt daarna vast (commit). Dit kost afhankelijk van de boom meer of minder tijd.</entry>
+</row>
+
+<row>
+<entry
+>Nieuw items in vak voor vastleggen (commit) verbergen</entry>
+<entry
+>Moeten items zonder revisie getoond worden in vastleg dialoog.</entry>
+</row>
+
+<row>
+<entry
+>Update wijzigt in plaats van conflicten veroorzaken</entry>
+<entry
+>Indien ingesteld resulteert een lokale toevoeging op hetzelfde pad als een inkomende toevoeging van dezelfde soort node in een normale node met een mogelijk lokale wijziging, in plaats van een conflict in de boomstructuur.</entry>
+</row>
+
+<row>
+<entry
+>Bijwerken maakt ontbrekende hogere mappen</entry>
+<entry
+>Indien ingesteld, maak elke niet-bestaande hogere mappen aan, ook door ze te ze te controleren bij depth=empty</entry>
+</row>
+
+</tbody>
+
+</tgroup>
+</table>
+
+<table id="timejobs-settings">
+<title
+>Getimede jobs</title>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+><para
+>Op gewijzigde items controleren elke N seconden</para
+> <para
+>Controleer op bijgewerkte items elke N seconden</para
+></entry>
+<entry
+>Indien ingeschakeld, zal van de werk-kopie regelmatig op updates of wijzigingen gecontroleerd worden, wanneer netwerk is ingeschakeld</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="diffmerge-settings">
+<title
+>Diff &amp; Merge</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>Diff negeert inhoudstype</term>
+<listitem
+><para
+>Alleen interessant wanneer de diff is gemaakt met subversion zelf. Indien ingeschakeld, negeert subversions diff de inhoudstype van de items. Anders geeft het geen diffs van binaries. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Vergelijking (diff) in revisieboom is recursief</term>
+<listitem
+><para
+>Indien ingeschakeld, zijn vergelijkingen (diffs) in een revisieboom recursief zoals in alle andere gevallen. Anders krijgt u alleen alleen de veranderde items in die map te zien. Hoe dat wordt gedaan is afhankelijk van hoe de vergelijkingen (diff) worden gemaakt (door subversion zelf of door een extern programma). </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Diff negeert wijzigingen in witruimte</term>
+<listitem>
+<para
+>Negeert veranderingen in de hoeveelheid spaties (optie <option
+>-b</option
+> naar <application
+>diff</application
+>) </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Diff negeert alle spaties</term>
+<listitem>
+  <para
+>Negeer alle spatie's (optie <option
+>-w</option
+> van diff)</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Extern samenvoegprogramma gebruiken</term>
+<listitem>
+<para
+>Schakel dit in om een extern programma te gebruiken en niet de samenvoegmogelijkheid van Subversion</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Het git-diff-formaat gebruiken</term>
+<listitem>
+<para
+></para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Kopieën als toevoegen tonen</term>
+<listitem>
+<para
+></para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+<sect2>
+<title
+>Externe diff-weergave gebruiken</title>
+<para
+>De selectie van een extern programma voor het tonen van verschillen (diffs). De standaard is &kompare;. </para>
+</sect2>
+<sect2>
+<title
+>Externe diff-weergave</title>
+<para
+>Bepaalt wat &kdesvn; gebruikt voor de externe weergave van verschillen en hoe het aanroept. Dit kan op drie manieren: </para>
+<para>
+<variablelist>
+<varlistentry>
+<term
+>&lt;programma&gt; &lt;parameter&gt;</term>
+<listitem
+><para
+>De vergelijking wordt gemaakt door subversion en direct aan de standaard input van het externe programma doorgegeven (voordeel: geen tijdelijke bestanden nodig) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>&lt;programma&gt; &lt;parameter&gt; %f</term>
+<listitem
+><para
+>De vergelijking wordt gemaakt door subversion, bewaart in een tijdelijk bestand, waarbij de parameter <option
+>%f</option
+> wordt vervangen door het bestandsnaam. Dit kan worden gebruikt bij een eenvoudige aanroep naar <application
+>less</application
+> of een textviewer. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>&lt;programma&gt; &lt;parameter&gt; %1 %2</term>
+<listitem
+><para
+>&kdesvn; laat een extern programma de vergelijking uitvoeren. %1 en %2 worden vervangen door de verlangde waarden (bestandsnamen of mappen). &kdesvn; bewaart de inhoud die vergeleken moet worden in een tijdelijke omgeving (indien mappen een <quote
+>export</quote
+> uitvoeren, indien een enkel bestand een <quote
+>cat</quote
+> uitvoeren) wanneer nodig en ruimt op na het sluiten van het externe programma of zichzelf. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Extern samenvoegprogramma gebruiken</term>
+<listitem
+><para
+>Indien in het (merge) samenvoeg dialoog <guilabel
+>Externe samenvoeging gebruiken, niet die van Subversion</guilabel
+> is wel of niet aangevinkt.</para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect2>
+<sect2>
+<title
+>Externe samenvoeg programma</title>
+<para
+>Stelt het programma en de mogelijkheden daarvan in voor gebruik wanneer de ingebouwde mogelijkheden van subversion ongewenst zijn. De standaard is <command
+>kdiff3 %s1 %s2 %t</command
+>. De volgorde van de vervangende variabelen is niet belangrijk, en kunnen meer keren voorkomen, &eg; zoals <literal
+>kdiff3 -o %t %s1 %s2 %t</literal
+>. Dit is alleen getest met <application
+>meld</application
+> en &kdiff3;. Bedenk dat externe programma's meestal geen weet hebben van subversion <command
+>ignore</command
+>-parameters en dat daarom veel meer te zien is dan verwacht. </para>
+<sect3>
+<title
+>Vervangings-variabelen voor het externe (merge) samenvoegprogramma</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>%s1</term>
+<listitem
+><para
+>Vervangen door bron nummer een. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>%s2</term>
+<listitem
+><para
+>Vervangen door bron nummer twee. Als dit leeg is of gelijk aan bron een en begin- en eindrevisie is hetzelfde, dan wordt deze variabele overgeslagen. Wees dus voorzichtig met opstellen van commandoregels zoals <command
+>xxdiff --title1 %s1 --title2 %s2 %s1 %s2 %t</command
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>%t</term>
+<listitem
+><para
+>Vervang door doel. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect3>
+</sect2>
+<sect2 id="extern-resolve-setup">
+<title
+>Conflict oplossend programma</title>
+<para
+>U kunt een extern programma zoals &kdiff3; gebruiken voor het oplossen van conflicten, de standaard keuze is <command
+>kdiff3 %o %m %n -o %t</command
+>. </para>
+<sect3>
+<title
+>Variable substitutie voor externe conflict oplossend programma</title>
+<para
+>Tussen haakjes na elke beschrijving een voorbeeld hoe subversion de bestanden oproept. Deze keuzes zijn ontworpen voor &kdiff3;, omdat op dit moment dit het enige programma is die alle parameters ondersteund die nodig zijn om een conflict goed op te lossen. <variablelist>
+<varlistentry>
+<term
+>%o of %l</term>
+<listitem
+><para
+>Oude (lokale,links) versie. Dit betekent dat de lagere revisienummer, &ie; is bijvoorbeeld het startpunt van de veranderingen waar een conflict begint. (<filename
+>foo.cc.r2</filename
+>) </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%m of %w</term>
+<listitem
+><para
+>Mijn (werkende) versie van het bestand, &ie;. waar iets verandert is tegenover de oude versie. (<filename
+>foo.cc.mine</filename
+>) </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%n of %r</term>
+<listitem
+><para
+>Nieuwe (remote, rechts) versie van het bestand, &eg; de versie die een ander heeft gemaakt. (<filename
+>foo.cc.r3</filename
+>) </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%t</term>
+<listitem
+><para
+>Doel naam, &eg; de originele naam. Voor &kdiff3; (als voorbeeld) moet dit achter <option
+>-o</option
+> parameter (= output file). (<filename
+>foo.cc</filename
+>) </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect3>
+</sect2>
+</sect1>
+<!--FIXME
+Colors
+
+Revisions tree
+-->
+<sect1 id="kio-cmdline-settings">
+<title
+>KIO / commandoregel</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>Log tonen na het uitvoeren van een commando</term>
+<listitem
+><para
+>Moet een dialoog openen met de log van de laatste via de commandoregel of via &konqueror; gegeven subversion-commando. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Minimaal aantal getoonde logregels:</term>
+<listitem
+><para
+>Indien <guilabel
+>Toon log...</guilabel
+> is ingeschakeld, dan is dit het minimum aantal regels dat dit dialoog zal tonen. Zodat dit zo ingesteld kan worden dat alleen interessante output te zien is (vastleg-log enzovoorts). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Contextmenu niet weergeven in &konqueror;</term>
+<listitem
+><para
+>Indien ingeschakeld, dan is er geen menu-item voor &kdesvn; in &konqueror; te zien.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Items niet tonen in actie-menu op topniveau</term>
+<listitem
+><para
+>Wanneer dit is ingesteld zal kdesvn geen extra acties in het menu <guimenuitem
+>Actie</guimenuitem
+> van &konqueror; of &dolphin; tonen;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>KIO-handelingen gebruiken de standaard logberichten</term>
+<listitem
+><para
+>Bij het bewerken van een repository via het &kdesvn; KIO protocol vanuit &konqueror; (&ie; het <quote
+>ksvn+...</quote
+>-protocol) met grote operaties zoals het verplaatsen of kopiëren van mappen, dan zal &kdesvn; voor elk item een logbericht vragen. Dit is normaal gedrag van &konqueror;. Wanneer dit is ingeschakeld, dan zal de KIO-implementatie van &kdesvn; niet vragen voor een logbericht maar een standaard logbericht meegeven. Dit gebeurt niet bij acties vanuit het &kdesvn;-menu voor &konqueror; maar alleen bij het kopiëren/verplaatsen/verwijderen van mappen in &konqueror; of een andere bestandsbeheerder met een KIO-url. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Standaard bericht</term>
+<listitem
+><para
+>Het bericht dat &kdesvn;-KIO zou moeten geven bij bewerkingen vanuit &konqueror; wanneer bovenstaande vlag is gezet. Standaard is <guilabel
+>Revision made with &kdesvn; KIO</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>KIO kan overschrijven</term>
+<listitem
+><para
+>Als deze vlag is gezet hebt u een eenvoudige ondersteuning voor schrijven voor bestaande items. U kunt &eg; bestanden openen in uw editor en ze direct, zonder van te voren uitchecken, opslaan (&kdesvn; zal dat in de achtergrond doen).</para>
+<para
+>Dit alleen gebruiken als u weet wat u doet. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>KIO toont voortgangsberichten</term>
+<listitem
+><para
+>Indien geactiveerd zal KIO in Plasma van KDE gedetailleerde informatie tonen over huidige bewerkingen. Foutmeldingen van KIO zullen altijd getoond worden en kunnen <emphasis
+>niet</emphasis
+> worden uitgeschakeld. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect1>
+</chapter>
+
+<chapter id="commands">
+<title
+>Overzicht van de opdrachten</title>
+
+<sect1 id="kdesvn-mainwindow">
+<title
+>Het hoofdvenster van &kdesvn;</title>
+
+<sect2>
+<title
+>Het menu Bestand</title>
+<para>
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Openen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Opent een lokale werkkopie of een al eerder uitgecheckte repository.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Recent geopende URL's</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Dit is een sneltoets om recent geopende repositories te openen. Klikken op dit item opent een lijst aan de kant van het menu met verschillende van de meest recent geopende lokale werkkopieën of een repository. Klikken op een specifiek item zal het openen in &kdesvn; </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Nieuw</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Opent een venster met een nieuw exemplaar van &kdesvn;</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Subversion Admin</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Menu-items met beheerstaken voor subversion repositories zoals: <simplelist
+> <member
+>Een nieuwe repository maken en openen</member
+> <member
+>Dump repository naar bestand</member
+> <member
+>Hotcopy een repository</member
+> <member
+>In repository laden en dumpen</member
+> </simplelist
+> Voor meer informatie lees de uitvoer van <command
+>svnadmin --help</command
+> </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Sluiten</guimenuitem
+> </menuchoice>
+</term>
+<listitem
+><para
+><action
+>Sluit</action
+> de huidige geopende repository of werkkopie.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Afsluiten</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Beëindig</action
+> &kdesvn;</para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect2>
+<sect2>
+<title
+>Het menu Bladwijzers</title>
+<para
+>Lees de <ulink url="help:/konqueror/bookmarks.html"
+>helppagina´s van &konqueror;</ulink
+>. </para>
+</sect2>
+
+<sect2 id="kdesvn-subversion-menu">
+<title
+>Het menu Subversion</title>
+
+<variablelist id="subversion-general">
+<title
+>Algemene subversion actie's</title>
+<varlistentry>
+<term>
+<menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Algemeen</guisubmenu
+> <guimenuitem
+>Geschiedenis van item</guimenuitem
+> </menuchoice
+></term>
+<listitem>
+<para
+><action
+>Toont</action
+> de levenslange log van het geselecteerde item. Wees voorzichtig, deze lijst kan erg lang zijn!</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; &Shift;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Algemeen</guisubmenu
+> <guimenuitem
+>Geschiedenis van item met negeren van kopieën...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>De geschiedenis log voor geselecteerde item tonen zonder volgende kopieën tonen.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>I</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Algemeen</guisubmenu
+> <guimenuitem
+>Details</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Toont gedetailleerde informatie over het geselecteerde item(s)</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Algemeen</guisubmenu
+> <guimenuitem
+>Blame</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Maakt een lijst met aantekeningen (annotatie's) over alle vastleggingen (commit). Dit kan veel tijd kosten!</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Algemeen</guisubmenu
+> <guimenuitem
+>Blame bereik</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Stelt het bereik in voor de vastleggingen (commit) van een bestand.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Alge </guisubmenu
+> <guimenuitem
+>Cat head</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Toont de inhoud van de laatste vastgelegde (commit) versie van het item. (Dit kan verschillen met de werkkopie indien er gewerkt is aan de werkkopie!)</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>F2</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Algemeen</guisubmenu
+> <guimenuitem
+>Verplaatsen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Verplaats of hernoem een item in een werkkopie of in de repository.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Algemeen</guisubmenu
+> <guimenuitem
+>Kopiëren</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Kopieer een item in werkkopie of in een repository</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Del</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Algemeen</guisubmenu
+> <guimenuitem
+>Gemarkeerde bestanden/mappen verwijderen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Verwijdert de geselecteerde items. Indien men in een werkkopie werkt, u moet daarna de verwijderingen vastleggen.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Algemeen</guisubmenu
+> <guimenuitem
+>Nieuwe map</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Een nieuwe map maken.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Algemeen</guisubmenu
+> <guimenuitem
+>Mappen importeren in huidige map</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Selecteer de mappen die u wilt importeren naar de huidige geselecteerde map.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Algemeen</guisubmenu
+> <guimenuitem
+>Repository uitchecken</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Maakt een nieuwe werkkopie van een repository.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Algemeen</guisubmenu
+> <guimenuitem
+>Repository exporteren</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Exporteert een repository naar een bestandsysteem, maakt &ie; een schone boom van mappen zonder de subversion-informatie. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Algemeen</guisubmenu
+> <guimenuitem
+>Huidige items vergrendelen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Markeer de huidige items als vergrendeld. Lees voor het gebruik eerst het subversion handboek! </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Algemeen</guisubmenu
+> <guimenuitem
+>Huidige items ontgrendelen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ontgrendel de huidige items. Lees voor het gebruik eerst het subversion handboek! </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-workingcopy">
+<title
+>Werkkopie</title>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkkopie</guisubmenu
+> <guimenuitem
+>Bijwerken naar HEAD</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>De werkkopie bijwerken naar de HEAD van de repository</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkkopie</guisubmenu
+> <guimenuitem
+>Bijwerken naar revisie...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>De werkkopie bijwerken naar een bepaalde revisie van de repository.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>#</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkkopie</guisubmenu
+> <guimenuitem
+>Vastleggen (commit)</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Legt de veranderingen van de gemarkeerde items in de werkkopie vast (commit) naar de repository.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkkopie</guisubmenu
+> <guimenuitem
+>Verschil bepalen lokale wijzigingen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Toont de lokale verschillen als een diff-output (zonder toegang tot een netwerk). Dit is alleen het verschil tegen de laatste bijgewerkte stand van de werkkopie, niet tegen de versie in de repository.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkkopie</guisubmenu
+> <guimenuitem
+>Verschil met HEAD</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Diff's de huidige werkkopie tegen HEAD van de repository.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkingkopie</guisubmenu
+> <guimenuitem
+>Eigenschappen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Tonen/Bewerken van eigenschappen van het huidige item.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Insert</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkkopie</guisubmenu
+> <guimenuitem
+>Gemarkeerde bestanden/mappen toevoegen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Voeg de gemarkeerde bestanden/mappen toe aan aan revisie controle.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkkopie</guisubmenu
+> <guimenuitem
+>Huidige veranderingen terugdraaien</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Maak de veranderingen in de werkkopie ongedaan naar de laatste bijgewerkte toestand.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkkopie</guisubmenu
+> <guimenuitem
+>Opgelost markeren</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Markeer de in conflict zijnde items als "niet in conflict" en verwijder de daarbij horende bestanden.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkkopie</guisubmenu
+> <guimenuitem
+>Twee revisies samenvoegen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Voeg twee revisies van een item samen (merge )in de werkkopie.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkkopie</guisubmenu
+> <guimenuitem
+>Huidige item negeren/negeren opheffen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Bewerk de eigenschap van de bovenliggende map van dit item zo dat dit item gemarkeerd wordt als negeren of juist weer van de negeer-lijst verdwijnt.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkkopie</guisubmenu
+> <guimenuitem
+>Opruimen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ruim de werkkopie op en verwijder de aanwezig zijnde (commit-)vergrendelingen.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Werkkopie</guisubmenu
+> <guimenuitem
+>Repository switchen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Opent de repositoryboom van een andere werkkopie.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-repository">
+<title
+>Repository</title>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Repository</guisubmenu
+> <guimenuitem
+>Huidige repositorypad uitchecken</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Maakt een werkkopie van de huidige geselecteerde item als het een map is.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Repository</guisubmenu
+> <guimenuitem
+>Huidige repositorypad exporteren</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Maakt een schone kopie op het lokale bestandsysteem van de geselecteerde item als het een map is.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-view">
+<title
+>Acties bekijken</title>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>F5</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Beeld</guisubmenu
+> <guimenuitem
+>Beeld verversen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Vernieuw</action
+> de huidige weergave van alle getoonde items. Dit toont de huidige status van alle gevraagde items. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Beeld</guisubmenu
+> <guimenuitem
+>Boomweergave van bestanden uitklappen/ Boomweergave van bestanden inklappen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Meer of minder tonen van de boomstructuur van de repository. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Logcache</guisubmenu
+> <guimenuitem
+>Stop met bijwerken van de logcache</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>De log is in de cache en gebruikt om de revisieboomstructuur van een repository te tonen. Afhankelijk van de Internetverbinding, grootte van de subversion-repository en lengte van de geschiedenis kan dit veel tijd kosten. Daarom kunt u het bijwerken van de cache stoppen met deze actie. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guimenuitem
+>Ssh-identiteiten aan ssh-agent toevoegen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Sla het ssh-key-wachtwoord voor de huidige sessie op, zodat het verder niet nodig is om het wachtwoord in te voeren. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="kdesvn-database-menu">
+<title
+>Het menu Database</title>
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Database</guimenu
+> <guimenuitem
+>Inhoud van database tonen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Toont een overzicht over de cache-database-inhoud voor bekende repositories en staat toe om de cache of repository en toegang naar de instellingen van de repository. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Database</guimenu
+> <guimenuitem
+>Instellingen voor de huidige repository</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Een dialoog tonen om de instellingen voor de cache, logs en statistieken aan te passen. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>De menu's Instellingen en Help</title>
+<para
+>Los van de gemeenschappelijke &kde;menu-items <guimenu
+>Instellingen</guimenu
+> en <guimenu
+>Help</guimenu
+> beschreven in de <ulink url="help:/fundamentals/menus.html#menus-settings"
+>Menu Instellingen</ulink
+> en <ulink url="help:/fundamentals/menus.html#menus-help"
+>Help Menu</ulink
+> van de &kde; Fundamentals &kdesvn; is er dit extra menu-item:</para>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>Snelle instellingen</guimenuitem
+> </menuchoice
+></term>
+<listitem>
+
+<variablelist>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Laatst geopende URL-adres openen bij het opstarten</guimenuitem>
+</term
+><listitem>
+<para
+>Laatst geopende URL-adres herladen indien er niets via de commandoregel is opgegeven.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Logbestanden houden node-veranderingen bij</guimenuitem>
+</term
+><listitem>
+<para
+><!--FIXME What does this option do? --></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Genegeerde bestanden tonen</guimenuitem>
+</term
+><listitem>
+<para
+>In subversion voor negeren gemarkeerde items wel of niet tonen.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Onbekende bestanden tonen</guimenuitem>
+</term
+><listitem>
+<para
+>Niet aan de subversion repository toegevoegde bestanden tonen.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Ongewijzigde items verbergen</guimenuitem>
+</term
+><listitem>
+<para
+>Deze actie tonen om alleen gewijzigde bestanden te tonen en een helder en samengevat overzicht te leveren.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Online werken</guimenuitem>
+</term
+><listitem>
+<para
+>Offline werkend zal de log-cache niet worden bijgewerkt, de log in de cache kan verschillen van de echt log.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+</sect1>
+</chapter>
+<chapter id="credits-and-license">
+<title
+>Dankbetuigingen en licentie</title>
+<para
+> Auteursrecht programma: 2005-2009 &Rajko.Albrecht; &Rajko.Albrecht.mail; </para>
+<para
+>Hartelijk dank aan de volgende personen: </para>
+<itemizedlist>
+<listitem
+><para
+>Andreas Richter <email
+>ar@oszine.de</email
+> - voor qt4 port van svnqt</para>
+</listitem>
+<listitem
+><para
+>Michael Biebl <email
+>biebl@teco.edu</email
+> - voor veel hulp, ideeën, implementatie en aanwijzingen.</para>
+</listitem>
+<listitem
+><para
+>Bram Schoenmakers <email
+>bramschoenmakers@kde.nl</email
+> - voor &kde;-specifieke aanwijzingen, Nederlandstalige vertaling, opschonen van mijn code.</para>
+</listitem>
+</itemizedlist>
+<para
+>Hartelijk dank aan alle andere vertalers (Ik had nooit gedacht dat ik zo snel zoveel vertalingen zou krijgen!) en voor alle positieve en negatieve terugkoppelingen. Dat heeft veel geholpen. </para>
+<para
+>Indien U Uw eigen vertaling van &kdesvn; wilt en hulp wenst, lees meer op de <ulink url="http://l10n.kde.org/"
+>&kde; Localization page</ulink
+> of vraag hulp op de <ulink url="mailto:kde-i18n-doc@kde.org"
+><email
+>kde-i18n-doc@kde.org</email
+> mailing list</ulink
+>. </para>
+<para
+>Auteursrecht documentatie 2005-2006 &Rajko.Albrecht; &Rajko.Albrecht.mail; </para>
+&meld.fouten;&vertaling.freek;&vertaling.ronald; &underFDL; &underGPL; </chapter>
+
+<appendix id="revision-syntax">
+<title
+>Opbouw voor revisies</title>
+<para
+>Revisies kunt u in dezelfde vorm opgeven als bij de standaard <application
+>svn</application
+>-client. Dit betekent: een getal, trefwoord of een datum. </para>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>Aantal</term>
+<listitem
+><para
+>Een getal gelijk of groter dan -1. -1 betekend <quote
+>unspecified revision</quote
+>, 0 is het begin. Normaal gesproken is het beter als u deze nummers niet gebruikt (de meeste opdrachten zullen hiermee mislukken). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Trefwoord</term>
+<listitem
+><para
+>Één van <itemizedlist>
+
+<listitem
+><para
+>HEAD </para
+></listitem>
+
+<listitem
+><para
+>BASE </para
+></listitem>
+
+<listitem
+><para
+>COMMITED </para
+></listitem>
+
+<listitem
+><para
+>PREV </para
+></listitem>
+
+<listitem
+><para
+>START </para
+></listitem>
+
+<listitem
+><para
+>WORKING </para
+></listitem>
+
+</itemizedlist>
+
+</para>
+<para
+>De trefwoorden zijn hoofdlettergevoelig! Bijvoorbeeld head is niet hetzelfde als HEAD. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Datum</term>
+<listitem
+><para
+>Datums moeten in de vorm {YYYY-MM-DD} zijn. Het moet echt MM of DD zijn - &eg; 2005-1-1 moet u schrijven als {2005-01-01}. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+<para
+>Een specifieke revisie toevoegen naar &URL; moet u altijd via <quote
+>?rev=<replaceable
+>revisie</replaceable
+></quote
+> opgeven. </para>
+</appendix>
+
+&documentation.index;
+</book>

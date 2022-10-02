@@ -1,0 +1,6135 @@
+# This file is distributed under the same license as the kdesvn package.
+# Florin Cătălin RUSSEN <cfrussen@yahoo.co.uk>, 2009.
+# Sergiu Bivol <sergiu@cip.md>, 2020, 2021, 2022.
+#
+# Traducători de-a lungul timpului:
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdesvn\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-08-17 00:19+0000\n"
+"PO-Revision-Date: 2022-02-16 16:21+0000\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
+"Language-Team: Romanian\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.12.2\n"
+
+#, fuzzy, kde-format
+#| msgid "Issuer name"
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Numele emitentului"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+
+#: src/askpass/kdesvn-askpass.cpp:35
+#, kde-format
+msgid "kdesvnaskpass"
+msgstr "kdesvnaskpass"
+
+#: src/askpass/kdesvn-askpass.cpp:36
+#, kde-format
+msgid "ssh-askpass for kdesvn"
+msgstr "ssh-askpass pentru kdesvn"
+
+#: src/askpass/kdesvn-askpass.cpp:38
+#, kde-format
+msgid "Copyright (c) 2005-2009 Rajko Albrecht"
+msgstr "Drepturi de autor (c) 2005-2009 Rajko Albrecht"
+
+#: src/askpass/kdesvn-askpass.cpp:41
+#, kde-format
+msgid "Prompt"
+msgstr "Prompt"
+
+#: src/askpass/kdesvn-askpass.cpp:53
+#, kde-format
+msgid "Please enter your password below."
+msgstr "Introduceți parola mai jos."
+
+#: src/askpass/kdesvn-askpass.cpp:74
+#, fuzzy, kde-format
+#| msgid "Password"
+msgctxt "@title:window"
+msgid "Password"
+msgstr "Parolă"
+
+#: src/kdesvn.cpp:81
+#, kde-format
+msgid "&Bookmarks"
+msgstr "Semne de carte"
+
+#: src/kdesvn.cpp:109
+#, kde-format
+msgid "Create and open new repository"
+msgstr "Creează și deschide un nou depozit"
+
+#: src/kdesvn.cpp:110
+#, fuzzy, kde-format
+#| msgid "Create and opens a new local subversion repository"
+msgid "Create and opens a new local Subversion repository"
+msgstr "Creează și deschide un nou depozit subversion local"
+
+#: src/kdesvn.cpp:115
+#, kde-format
+msgid "Dump repository to file"
+msgstr "Dump depozit într-un fișier"
+
+#: src/kdesvn.cpp:116
+#, fuzzy, kde-format
+#| msgid "Dump a subversion repository to a file"
+msgid "Dump a Subversion repository to a file"
+msgstr "Videază un depozit subversion într-un fișier"
+
+#: src/kdesvn.cpp:121
+#, kde-format
+msgid "Hotcopy a repository"
+msgstr "Copiază la cald un depozit"
+
+#: src/kdesvn.cpp:122
+#, fuzzy, kde-format
+#| msgid "Hotcopy a subversion repository to a new folder"
+msgid "Hotcopy a Subversion repository to a new folder"
+msgstr "Copiază la cald un depozit subversion într-un dosar nou"
+
+#: src/kdesvn.cpp:127
+#, kde-format
+msgid "Load dump into repository"
+msgstr "Încarcă un dump într-un depozit"
+
+#: src/kdesvn.cpp:128
+#, kde-format
+msgid "Load a dump file into a repository."
+msgstr "Încarcă un fișier dump într-un depozit."
+
+#: src/kdesvn.cpp:133
+#, kde-format
+msgid "Add ssh identities to ssh-agent"
+msgstr "Adaugă identități ssh la ssh-agent"
+
+#: src/kdesvn.cpp:134
+#, kde-format
+msgid "Force add ssh-identities to ssh-agent for future use."
+msgstr ""
+"Forțează adăugarea de identități ssh la agentul ssh pentru utilizări "
+"viitoare."
+
+#: src/kdesvn.cpp:139
+#, kde-format
+msgid "Info about kdesvn part"
+msgstr "Informații despre componenta kdesvn"
+
+#: src/kdesvn.cpp:140
+#, fuzzy, kde-format
+#| msgid "Shows info about the kdesvn plugin not the standalone app."
+msgid "Shows info about the kdesvn plugin and not the standalone application."
+msgstr "Afișează detalii despre modulul kdesvn, nu despre aplicația autonomă."
+
+#: src/kdesvn.cpp:145
+#, kde-format
+msgid "Show database content"
+msgstr "Arată conținutul bazei de date"
+
+#: src/kdesvn.cpp:146
+#, fuzzy, kde-format
+#| msgid "Show the content of logcache database"
+msgid "Show the content of log cache database"
+msgstr "Arată conținutul bazei de date de prestocare"
+
+#: src/kdesvn.cpp:152
+#, fuzzy, kde-format
+#| msgid "Could not load the part:\n"
+msgid ""
+"Could not load the part:\n"
+"%1"
+msgstr "Nu s-a putut încărca componenta:\n"
+
+#: src/kdesvn.cpp:159
+#, fuzzy, kde-format
+#| msgid "Could not find our part"
+msgid ""
+"Could not find our part:\n"
+"%1"
+msgstr "Nu s-a găsit componenta noastră"
+
+#: src/kdesvn.cpp:190
+#, fuzzy, kde-format
+#| msgid "Could not open url %1"
+msgid "Could not open URL %1"
+msgstr "Nu s-a putut deschide adresa URL %1"
+
+#: src/kdesvn.cpp:222
+#, kde-format
+msgid "Recent opened URLs"
+msgstr "Adrese URL deschise recent"
+
+#: src/kdesvn.cpp:231
+#, kde-format
+msgid "Load last opened URL on start"
+msgstr "Încarcă la pornire ultima adresă URL deschisă"
+
+#: src/kdesvn.cpp:233
+#, fuzzy, kde-format
+#| msgid "Reload last opened url if no one is given on commandline"
+msgid "Reload last opened URL if no one is given on command line"
+msgstr ""
+"Reîncarcă ultima adresă URL deschisă dacă nici una nu este specificată în "
+"linia de comandă"
+
+#: src/kdesvn.cpp:316
+#, kde-format
+msgid "Ready"
+msgstr "Pregătit"
+
+#: src/kdesvn_part.cpp:156
+#, kde-format
+msgid "Logs follow node changes"
+msgstr "Intrările din jurnal corespunzătoare modificărilor nodului"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_ignored_files)
+#. i18n: ectx: label, entry, group (subversion)
+#: src/kdesvn_part.cpp:161 src/settings/display_settings.ui:57
+#: src/settings/kdesvn_part.kcfg:80
+#, kde-format
+msgid "Display ignored files"
+msgstr "Afișează fișierele ignorate"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/kdesvn_part.cpp:166 src/settings/kdesvn_part.kcfg:84
+#, kde-format
+msgid "Display unknown files"
+msgstr "Afișează fișierele necunoscute"
+
+#: src/kdesvn_part.cpp:171
+#, kde-format
+msgid "Hide unchanged files"
+msgstr "Ascunde fișierele nemodificate"
+
+#: src/kdesvn_part.cpp:176
+#, kde-format
+msgid "Work online"
+msgstr "Lucrează conectat"
+
+#: src/kdesvn_part.cpp:183
+#, fuzzy, kde-format
+#| msgid "Configure %1..."
+msgid "Configure Kdesvn..."
+msgstr "Configurare %1..."
+
+#: src/kdesvn_part.cpp:187
+#, kde-format
+msgid "About kdesvn part"
+msgstr "Despre componenta kdesvn"
+
+#: src/kdesvn_part.cpp:191
+#, kde-format
+msgid "Kdesvn Handbook"
+msgstr "Îndrumar Kdesvn"
+
+#: src/kdesvn_part.cpp:281
+#, kde-format
+msgid ""
+"Built with Subversion library: %1\n"
+"Running Subversion library: %2"
+msgstr ""
+"Compilat cu librăria Subversion: %1\n"
+"Rulează cu librăria Subversion: %2"
+
+#: src/kdesvn_part.cpp:284
+#, kde-format
+msgid "kdesvn Part"
+msgstr "Componentă kdesvn"
+
+#: src/kdesvn_part.cpp:286
+#, fuzzy, kde-format
+#| msgid "A Subversion Client for KDE (dynamic Part component)"
+msgid "A Subversion Client by KDE (dynamic Part component)"
+msgstr "Un client Subversion pentru KDE (componentă dinamică)"
+
+#: src/kdesvn_part.cpp:288
+#, fuzzy, kde-format
+msgid ""
+"(C) 2005-2009 Rajko Albrecht,\n"
+"(C) 2015-2018 Christian Ehrlicher"
+msgstr "(C) 2005-2007 Rajko Albrecht"
+
+#: src/kdesvn_part.cpp:291
+#, kde-format
+msgid "Original author and maintainer"
+msgstr "Autor inițial și menținător"
+
+#: src/kdesvn_part.cpp:292 src/main.cpp:47 src/main.cpp:48
+#, kde-format
+msgid "Developer"
+msgstr "Dezvoltator"
+
+#. i18n: ectx: Menu (subversion_general)
+#: src/kdesvn_part.cpp:331 src/kdesvn_part.rc:19
+#, kde-format
+msgid "General"
+msgstr "General"
+
+#: src/kdesvn_part.cpp:331
+#, kde-format
+msgid "General Settings"
+msgstr "Configurări generale"
+
+#. i18n: ectx: Menu (subversion_main)
+#: src/kdesvn_part.cpp:333 src/kdesvn_part.rc:17 src/kdesvnui.rc:25
+#, kde-format
+msgid "Subversion"
+msgstr "Subversion"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, SubversionSettings)
+#: src/kdesvn_part.cpp:333 src/settings/subversion_settings.ui:6
+#, kde-format
+msgid "Subversion Settings"
+msgstr "Configurări Subversion"
+
+#: src/kdesvn_part.cpp:335
+#, kde-format
+msgid "Timed jobs"
+msgstr ""
+
+#: src/kdesvn_part.cpp:335
+#, fuzzy, kde-format
+msgid "Settings for timed jobs"
+msgstr "Configurări pentru %1"
+
+#: src/kdesvn_part.cpp:337
+#, kde-format
+msgid "Diff & Merge"
+msgstr "Diferențe & Fuzionare"
+
+#: src/kdesvn_part.cpp:337
+#, kde-format
+msgid "Settings for diff and merge"
+msgstr "Configurări pentru diferențe și fuzionare"
+
+#: src/kdesvn_part.cpp:339
+#, kde-format
+msgid "Colors"
+msgstr "Culori"
+
+#: src/kdesvn_part.cpp:339
+#, kde-format
+msgid "Color Settings"
+msgstr "Configurări culori"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, RevisionTreeSettings)
+#: src/kdesvn_part.cpp:341 src/settings/revisiontree_settings.ui:6
+#, kde-format
+msgid "Revision tree Settings"
+msgstr "Configurări arboreșcență revizii"
+
+#: src/kdesvn_part.cpp:341
+#, kde-format
+msgid "Revision tree"
+msgstr "Arboreșcență revizii"
+
+#: src/kdesvn_part.cpp:343
+#, fuzzy, kde-format
+#| msgid "Commandline"
+msgid "KIO / Command line"
+msgstr "Linie de comandă"
+
+#: src/kdesvn_part.cpp:343
+#, fuzzy, kde-format
+#| msgid "Settings for commandline and KIO execution"
+msgid "Settings for command line and KIO execution"
+msgstr "Configurări pentru linia de comandă și execuțiile lui KIO"
+
+#. i18n: ectx: Menu (settings)
+#: src/kdesvn_part.rc:5
+#, kde-format
+msgid "Subversion settings"
+msgstr "Configurări Subversion"
+
+#. i18n: ectx: Menu (quicksettings)
+#: src/kdesvn_part.rc:7 src/kdesvnui.rc:43
+#, kde-format
+msgid "Quick settings"
+msgstr "Configurări rapide"
+
+#. i18n: ectx: Menu (subversion_working_copy)
+#: src/kdesvn_part.rc:49
+#, kde-format
+msgid "Working copy"
+msgstr "Copie de lucru"
+
+#. i18n: ectx: Menu (subversion_repo)
+#: src/kdesvn_part.rc:75
+#, kde-format
+msgid "Repository"
+msgstr "Depozit"
+
+#. i18n: ectx: Menu (generic_view)
+#: src/kdesvn_part.rc:82
+#, kde-format
+msgid "View"
+msgstr "Vedere"
+
+#. i18n: ectx: Menu (log_cache)
+#: src/kdesvn_part.rc:89
+#, fuzzy, kde-format
+#| msgid "Logcache"
+msgid "Log cache"
+msgstr "Jurnal prestocare"
+
+#. i18n: ectx: Menu (help)
+#: src/kdesvn_part.rc:98 src/kdesvnui.rc:52
+#, kde-format
+msgid "&Help"
+msgstr "Ajutor"
+
+#. i18n: ectx: Menu (local_context_single_conflicted)
+#. i18n: ectx: Menu (local_context_single_versioned)
+#. i18n: ectx: Menu (local_context_single_unversioned)
+#. i18n: ectx: Menu (local_context_multi)
+#: src/kdesvn_part.rc:106 src/kdesvn_part.rc:113 src/kdesvn_part.rc:154
+#: src/kdesvn_part.rc:162
+#, kde-format
+msgid "Actions"
+msgstr "Acțiuni"
+
+#. i18n: ectx: ToolBar (subversionToolBar)
+#: src/kdesvn_part.rc:242 src/kdesvnui.rc:58
+#, kde-format
+msgid "Subversion toolbar"
+msgstr "Bara de unelte subversion"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: src/kdesvn_part.rc:260 src/kdesvnui.rc:62
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Bara de unelte principală"
+
+#: src/kdesvnd/kdesvnd.cpp:252
+#, fuzzy, kde-format
+#| msgid "Enter password for realm %1"
+msgctxt "@title:window"
+msgid "Enter Password for Realm %1"
+msgstr "Introduceți parola pentru domeniul %1"
+
+#: src/kdesvnd/kdesvnd.cpp:268 src/svnfrontend/ccontextlistener.cpp:289
+#, kde-format
+msgid "Open a file with a #PKCS12 certificate"
+msgstr "Deschide un fișier cu un certificat #PKCS12"
+
+#: src/kdesvnd/kdesvnd.cpp:359
+#, fuzzy, kde-format
+msgid "Current task"
+msgstr "Blochează elementele curente"
+
+#: src/kdesvnd/kdesvnd.cpp:371
+#, kde-format
+msgid "Current transfer"
+msgstr ""
+
+#: src/kdesvnd/ksvnjobview.cpp:50
+#, kde-format
+msgid "bytes"
+msgstr ""
+
+#. i18n: ectx: Menu (file)
+#: src/kdesvnui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "&Fișier"
+
+#. i18n: ectx: Menu (subversion_admin)
+#: src/kdesvnui.rc:10
+#, kde-format
+msgid "Subversion Admin"
+msgstr "Administrator subversion"
+
+#. i18n: ectx: Menu (database_menu)
+#: src/kdesvnui.rc:30
+#, kde-format
+msgid "Database"
+msgstr "Bază de date"
+
+#. i18n: ectx: Menu (settings)
+#: src/kdesvnui.rc:35
+#, kde-format
+msgid "&Settings"
+msgstr "Configurări"
+
+#: src/kdesvnview.cpp:133 src/kdesvnview.cpp:167
+#, kde-format
+msgid "Repository opened"
+msgstr "Depozit deschis"
+
+#: src/kdesvnview.cpp:173
+#, kde-format
+msgid "Could not open repository"
+msgstr "Nu s-a putut deschide depozitul"
+
+#: src/kdesvnview.cpp:198
+#, kde-format
+msgid "No repository open"
+msgstr "Nici un depozit deschis"
+
+#: src/kdesvnview.cpp:258
+#, fuzzy, kde-format
+#| msgid "Hotcopy a repository"
+msgctxt "@title:window"
+msgid "Hotcopy a Repository"
+msgstr "Copiază la cald un depozit"
+
+#: src/kdesvnview.cpp:276
+#, kde-format
+msgid "Hotcopy finished."
+msgstr "Copiere la cald terminată."
+
+#: src/kdesvnview.cpp:285
+#, fuzzy, kde-format
+#| msgid "Repository to dump:"
+msgctxt "@title:window"
+msgid "Load a Repository From an svndump"
+msgstr "Depozit către dump:"
+
+#: src/kdesvnview.cpp:335
+#, fuzzy, kde-format
+#| msgid "Dump repo"
+msgctxt "@title:window"
+msgid "Load Dump"
+msgstr "Dump depozit"
+
+#: src/kdesvnview.cpp:335
+#, kde-format
+msgid "Loading a dump into a repository."
+msgstr "Se încarcă un dump într-un depozit."
+
+#: src/kdesvnview.cpp:337
+#, kde-format
+msgid "Loading dump finished."
+msgstr "Încărcare dump terminată."
+
+#: src/kdesvnview.cpp:347
+#, fuzzy, kde-format
+#| msgid "Dump a repository"
+msgctxt "@title:window"
+msgid "Dump a Repository"
+msgstr "Dump un depozit"
+
+#: src/kdesvnview.cpp:387
+#, fuzzy, kde-format
+#| msgid "Dump repo"
+msgctxt "@title:window"
+msgid "Dump"
+msgstr "Dump depozit"
+
+#: src/kdesvnview.cpp:387
+#, kde-format
+msgid "Dumping a repository"
+msgstr "Dump un depozit"
+
+#: src/kdesvnview.cpp:389
+#, kde-format
+msgid "Dump finished."
+msgstr "Dump terminat."
+
+#: src/kdesvnview.cpp:434
+#, kde-format
+msgid "Inserted %v not cached log entries of %m."
+msgstr "%v intrări din jurnal fără prestocare inserate pentru %m."
+
+#: src/kiosvn/kiolistener.cpp:66 src/kiosvn/kiosvn.cpp:811
+#, kde-format
+msgid "Wrong or missing log (may cancel pressed)."
+msgstr ""
+
+#: src/kiosvn/kiolistener.cpp:91
+#, kde-format
+msgid "A (bin) %1"
+msgstr "A (bin) %1"
+
+#: src/kiosvn/kiolistener.cpp:93 src/kiosvn/kiolistener.cpp:129
+#, kde-format
+msgid "A %1"
+msgstr "A %1"
+
+#: src/kiosvn/kiolistener.cpp:102 src/kiosvn/kiolistener.cpp:125
+#, kde-format
+msgid "D %1"
+msgstr "D %1"
+
+#: src/kiosvn/kiolistener.cpp:105
+#, kde-format
+msgid "Restored %1."
+msgstr "%1 restaurat."
+
+#: src/kiosvn/kiolistener.cpp:108
+#, kde-format
+msgid "Reverted %1."
+msgstr "%1 restaurat la starea inițială."
+
+#: src/kiosvn/kiolistener.cpp:111
+#, kde-format
+msgid ""
+"Failed to revert %1.\n"
+"Try updating instead."
+msgstr ""
+"Restaurarea la starea inițială a lui %1 a eșuat.\n"
+"Încercați în schimb o actualizare."
+
+#: src/kiosvn/kiolistener.cpp:114
+#, kde-format
+msgid "Resolved conflicted state of %1."
+msgstr "S-a rezolvat conflictul lui %1."
+
+#: src/kiosvn/kiolistener.cpp:118
+#, kde-format
+msgid "Skipped missing target %1."
+msgstr "S-a omis destinația lipsă %1."
+
+#: src/kiosvn/kiolistener.cpp:120
+#, kde-format
+msgid "Skipped %1."
+msgstr "%1 omis."
+
+#: src/kiosvn/kiolistener.cpp:173
+#, kde-format
+msgid "Finished at revision %1."
+msgstr "Terminare la revizia %1."
+
+#: src/kiosvn/kiolistener.cpp:175
+#, kde-format
+msgid "Update finished."
+msgstr "Actualizare terminată."
+
+#: src/kiosvn/kiolistener.cpp:179
+#, kde-format
+msgid "Finished external at revision %1."
+msgstr "Referință externă terminată la revizia %1."
+
+#: src/kiosvn/kiolistener.cpp:181
+#, kde-format
+msgid "Finished external."
+msgstr "Referință externă terminată."
+
+#: src/kiosvn/kiolistener.cpp:191
+#, kde-format
+msgid "Fetching external item into %1."
+msgstr "Se preia elementul extern în %1."
+
+#: src/kiosvn/kiolistener.cpp:195
+#, kde-format
+msgid "Status against revision: %1."
+msgstr "Stare la revizia: %1."
+
+#: src/kiosvn/kiolistener.cpp:199
+#, kde-format
+msgid "Performing status on external item at %1."
+msgstr "Recuperarea stării elementului extern %1."
+
+#: src/kiosvn/kiolistener.cpp:202
+#, kde-format
+msgid "Sending %1."
+msgstr "Se trimite %1."
+
+#: src/kiosvn/kiolistener.cpp:206
+#, kde-format
+msgid "Adding (bin) %1."
+msgstr "Se adaugă (bin) %1."
+
+#: src/kiosvn/kiolistener.cpp:208
+#, kde-format
+msgid "Adding %1."
+msgstr "Se adaugă %1."
+
+#: src/kiosvn/kiolistener.cpp:212
+#, kde-format
+msgid "Deleting %1."
+msgstr "Se șterge %1."
+
+#: src/kiosvn/kiolistener.cpp:215
+#, fuzzy, kde-format
+#| msgid "Replacing %1."
+msgid "Replacing %1."
+msgstr "Se înlocuiește"
+
+#: src/kiosvn/kiolistener.cpp:221
+#, kde-format
+msgid "Transmitting file data "
+msgstr "Se transmite fișierul de date"
+
+#: src/kiosvn/kiosvn.cpp:301 src/kiosvn/kiosvn.cpp:355
+#: src/kiosvn/kiosvn.cpp:507
+#, fuzzy, kde-format
+#| msgid "Can only write on head revision!"
+msgid "Can only write on HEAD revision."
+msgstr "Poate scrie numai în revizia HEAD!"
+
+#: src/kiosvn/kiosvn.cpp:342
+#, kde-format
+msgid "Renaming %1 to %2 successful"
+msgstr ""
+
+#: src/kiosvn/kiosvn.cpp:376
+#, kde-format
+msgid "Overwriting existing items is disabled in settings."
+msgstr "Suprascrierea elementelor existente este dezactivată în configurări."
+
+#: src/kiosvn/kiosvn.cpp:384
+#, kde-format
+msgid "Start checking out to temporary folder"
+msgstr ""
+
+#: src/kiosvn/kiosvn.cpp:387
+#, fuzzy, kde-format
+msgid "Checking out %1"
+msgstr "Verificare"
+
+#: src/kiosvn/kiosvn.cpp:396
+#, kde-format
+msgid "Temporary checkout done."
+msgstr ""
+
+#: src/kiosvn/kiosvn.cpp:400
+#, kde-format
+msgid "Could not write to existing item."
+msgstr "Nu s-a putut scrie pe elementul existent."
+
+#: src/kiosvn/kiosvn.cpp:406
+#, kde-format
+msgid "Could not open temporary file"
+msgstr "Nu s-a putut deschide fișierul temporar"
+
+#: src/kiosvn/kiosvn.cpp:430
+#, kde-format
+msgid "Could not retrieve data for write."
+msgstr "Nu s-au putut prelua datele pentru scriere."
+
+#: src/kiosvn/kiosvn.cpp:438
+#, fuzzy, kde-format
+msgid "Committing %1"
+msgstr "Comite"
+
+#: src/kiosvn/kiosvn.cpp:461
+#, fuzzy, kde-format
+msgid "Wrote %1 to repository"
+msgstr "Calea către depozit:"
+
+#: src/kiosvn/kiosvn.cpp:492
+#, fuzzy, kde-format
+msgid "Copied %1 to %2"
+msgstr "Copiat în %1 la revizia %2"
+
+#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1062
+#: src/svnfrontend/svnactions.cpp:2221
+#, kde-format
+msgid "Committed revision %1."
+msgstr "Revizie %1 propagată."
+
+#: src/kiosvn/kiosvn.cpp:830
+#, kde-format
+msgid "Nothing to commit."
+msgstr "Nimic de comis."
+
+#: src/kiosvn/kiosvn.cpp:877
+#, kde-format
+msgid "Empty logs"
+msgstr "Jurnale goale"
+
+#: src/ksvnwidgets/authdialogwidget.cpp:35
+#, fuzzy, kde-format
+#| msgid "Store passwords into KDE Wallet"
+msgid "Store password (into KDE Wallet)"
+msgstr "Stochează parolele în gestionarul de portofel din KDE"
+
+#: src/ksvnwidgets/authdialogwidget.cpp:36
+#, fuzzy, kde-format
+#| msgid "into subversions simple storage"
+msgid "Store password (into Subversion' simple storage)"
+msgstr "în spațiul de stocare subversion simplu"
+
+#: src/ksvnwidgets/authdialogwidget.cpp:38
+#, fuzzy, kde-format
+#| msgid "Enter authentication info for"
+msgid "Enter authentication info for %1"
+msgstr "Introduceți informația de autentificare pentru"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, AuthDialogWidget)
+#: src/ksvnwidgets/authdlg.ui:14
+#, kde-format
+msgid "Authentication"
+msgstr "Autentificare"
+
+#. i18n: ectx: property (text), widget (QLabel, m_PasswordLabel)
+#: src/ksvnwidgets/authdlg.ui:32
+#, kde-format
+msgid "Password:"
+msgstr "Parolă:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_UsernameLabel)
+#: src/ksvnwidgets/authdlg.ui:52
+#, kde-format
+msgid "Username:"
+msgstr "Utilizator:"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, CommitMessage)
+#: src/ksvnwidgets/commitmessage.ui:6
+#, fuzzy, kde-format
+#| msgid "Commitmessage"
+msgid "Commit Message"
+msgstr "Commitmessage"
+
+#. i18n: ectx: property (text), widget (QLabel, m_Reviewlabel)
+#: src/ksvnwidgets/commitmessage.ui:27
+#, kde-format
+msgid "Review affected items"
+msgstr "Trece în revistă elementele afectate"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_SelectAllButton)
+#: src/ksvnwidgets/commitmessage.ui:63
+#, fuzzy, kde-format
+msgid "Select all"
+msgstr "Selecționează elementul"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_UnselectAllButton)
+#: src/ksvnwidgets/commitmessage.ui:70
+#, fuzzy, kde-format
+msgid "Unselect all"
+msgstr "Selecționează elementul"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_HideNewItems)
+#: src/ksvnwidgets/commitmessage.ui:77 src/ksvnwidgets/commitmsg_impl.cpp:453
+#, kde-format
+msgid "Hide new items"
+msgstr "Ascunde elementele noi"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_MarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:87
+#, kde-format
+msgid "Mark all new e.g. not versioned items for add and commit."
+msgstr ""
+"Marchează toate ca noi, ex: elemente neversionate pentru adăugare și "
+"comitere."
+
+#. i18n: ectx: property (text), widget (QPushButton, m_MarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:90
+#, kde-format
+msgid "Select new items"
+msgstr "Selectează elementele noi"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_UnmarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:97
+#, kde-format
+msgid "Unmark all unversioned items so they will be ignored."
+msgstr "Demarchează toate elementele neversionate spre a fi ignorate."
+
+#. i18n: ectx: property (text), widget (QPushButton, m_UnmarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:100
+#, kde-format
+msgid "Unselect new items"
+msgstr "Deselectează elementele noi"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_RevertItemButton)
+#: src/ksvnwidgets/commitmessage.ui:107
+#, kde-format
+msgid "Revert highlighted item"
+msgstr "Restaurează elementul evidențiat"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_RevertItemButton)
+#: src/ksvnwidgets/commitmessage.ui:110
+#, fuzzy, kde-format
+msgid "Revert item"
+msgstr "Se restaurează elementele la starea lor inițială"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DiffItem)
+#: src/ksvnwidgets/commitmessage.ui:117
+#, kde-format
+msgid "Generates and display difference against repository of selected item"
+msgstr "Generează și afișează diferența față de depozit a elementului selectat"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DiffItem)
+#: src/ksvnwidgets/commitmessage.ui:120
+#, fuzzy, kde-format
+msgid "Diff item"
+msgstr "Diferențiază elemente"
+
+#. i18n: ectx: property (text), widget (QLabel, m_HeadLabel)
+#: src/ksvnwidgets/commitmessage.ui:152
+#, kde-format
+msgid "Enter a log message"
+msgstr "Introduceți un mesaj pentru jurnal"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, m_LogHistory)
+#: src/ksvnwidgets/commitmessage.ui:184
+#, kde-format
+msgid "Last used log messages"
+msgstr "Ultimele mesaje utilizate din jurnal"
+
+#. i18n: ectx: property (text), widget (QLabel, m_LogLabel)
+#: src/ksvnwidgets/commitmessage.ui:199
+#, kde-format
+msgid "Or insert one of the last:"
+msgstr "Sau inserează unul din ultimele:"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_insert_file_button)
+#: src/ksvnwidgets/commitmessage.ui:215
+#, fuzzy, kde-format
+#| msgid "Insert Textfile"
+msgid "Insert Text File..."
+msgstr "Inserează fișier text"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_keepLocksButton)
+#: src/ksvnwidgets/commitmessage.ui:226
+#, kde-format
+msgid "If checked commit will not release locks."
+msgstr "Dacă este bifat, comiterea nu va elibera fișierele blocate."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_keepLocksButton)
+#: src/ksvnwidgets/commitmessage.ui:229
+#, kde-format
+msgid "Keep locks"
+msgstr "Păstrează blocările"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:287
+#, fuzzy, kde-format
+#| msgid "Commit log"
+msgctxt "@title:window"
+msgid "Commit Log"
+msgstr "Jurnalul comiterilor"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:453
+#, fuzzy, kde-format
+#| msgid "Select new items"
+msgid "Show new items"
+msgstr "Selectează elementele noi"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:476
+#, fuzzy, kde-format
+#| msgid "Select textfile for insert"
+msgctxt "@title:window"
+msgid "Select Text File to Insert"
+msgstr "Selectați fișierul text pentru inserare"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:477
+#, fuzzy, kde-format
+#| msgid "Select textfile for insert"
+msgid "Select text file to insert:"
+msgstr "Selectați fișierul text pentru inserare"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, DeleteForm)
+#: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1558
+#, kde-format
+msgid "Really delete these entries?"
+msgstr "Chiar doriți să ștergeți aceste intrări?"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_forceDelete)
+#: src/ksvnwidgets/deleteform.ui:23
+#, fuzzy, kde-format
+msgid "Force delete of changed items"
+msgstr "Elemente locale modificate:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_keepLocal)
+#: src/ksvnwidgets/deleteform.ui:30
+#, fuzzy, kde-format
+msgid "Keep local copies"
+msgstr "Păstrează blocările"
+
+#. i18n: ectx: property (toolTip), widget (QComboBox, m_DepthCombo)
+#. i18n: ectx: property (statusTip), widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:29 src/ksvnwidgets/depthselector.ui:32
+#, kde-format
+msgid "Select depth of operation"
+msgstr "Selectați profunzimea operației"
+
+#. i18n: ectx: property (whatsThis), widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:41
+#, kde-format
+msgid ""
+"<p ><b>Kind of depth</b>: </p>\n"
+"<p ><i>empty depth</i><br />\n"
+"Just the named directory, no entries. Updates will not pull in any files or "
+"subdirectories not already present. </p>\n"
+"<p><i>Files depth</i><br />Folder and its file children, but not subdirs. "
+"Updates will pull in any files not already present, but not subdirectories. "
+"</p>\n"
+"<p><i>Immediate depth</i><br />Folder and its entries. Updates will pull in "
+"any files or subdirectories not already present; those subdirectories "
+"entries will have depth-empty. </p>\n"
+"<p>\n"
+"<i>Infinity depth</i><br />Updates will pull in any files or subdirectories "
+"not already present; those subdirectories' this_dir entries will have depth-"
+"infinity.<br />Equivalent to the pre-1.5 default update behavior. </p>"
+msgstr ""
+"<p ><b>Tip de profunzime</b>: </p>\n"
+"<p ><i>Profunzime vidă</i><br />\n"
+"Numai dosarul specificat, fără intrări. Actualizările nu vor prelua nici un "
+"fișier sau dosar care nu este deja prezent. </p>\n"
+"<p><i>Profunzime fișiere</i><br />Dosarul și fișierele sale, fără subdosare. "
+"Actualizările vor prelua toate fișierele care nu sunt încă prezente, dar nu "
+"și subdosarele. </p>\n"
+"<p><i>Profunzime imediată</i><br />Dosarul și intrările sale. Actualizările "
+"vor prelua toate fișierele și subdosarele care nu sunt încă prezente; acele "
+"subdosare vor avea profunzimea vidă. </p>\n"
+"<p>\n"
+"<i>Profunzime infinită</i><br />Actualizările vor prelua toate fișierele și "
+"subdosarele care nu sunt încă prezente; toate subdosarele vor avea de "
+"asemenea profunzimea infinită.<br />Echivalentul comportamentului implicit "
+"versiunilor pre-1.5. </p>"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:45
+#, kde-format
+msgid "Empty Depth"
+msgstr "Profunzime vidă"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:50
+#, kde-format
+msgid "Files Depth"
+msgstr "Profunzimea fișierelor"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:55
+#, kde-format
+msgid "Immediate Depth"
+msgstr "Profunzime imediată"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:60
+#, kde-format
+msgid "Infinity Depth (recurse)"
+msgstr "Profunzime infinită (recursie)"
+
+#: src/ksvnwidgets/diffbrowser.cpp:50
+#, kde-format
+msgid "Ctrl-F for search, F3 or Shift-F3 for search again."
+msgstr "Ctrl-F pentru căutare, F3 sau Shift-F3 pentru a căuta din nou."
+
+#: src/ksvnwidgets/diffbrowser.cpp:51
+#, kde-format
+msgid ""
+"<b>Display differences between files</b><p>You may search inside text with "
+"Ctrl-F.</p><p>F3 for search forward again, Shift-F3 for search backward "
+"again.</p><p>You may save the (original) output with Ctrl-S.</p>"
+msgstr ""
+"<b>Afișează diferențele între fișiere</b><p>Puteți căuta în text cu Ctrl-F.</"
+"p><p>F3 pentru a continua căutarea, Shift-F3 pentru a căuta înapoi.</"
+"p><p>Puteți salva ieșirea (originală) cu Ctrl-S.</p>"
+
+#: src/ksvnwidgets/diffbrowser.cpp:86
+#, kde-format
+msgid "Save diff"
+msgstr ""
+
+#: src/ksvnwidgets/diffbrowser.cpp:86
+#, kde-format
+msgid "Patch file (*.diff *.patch)"
+msgstr ""
+
+#: src/ksvnwidgets/diffbrowser.cpp:93
+#, kde-format
+msgid "File %1 exists - overwrite?"
+msgstr "Fișierul %1 există - se suprascrie?"
+
+#: src/ksvnwidgets/diffbrowser.cpp:177
+#, kde-format
+msgid ""
+"End of document reached.\n"
+"Continue from the beginning?"
+msgstr ""
+"S-a atins capătul documentului.\n"
+"Continuați de la început?"
+
+#: src/ksvnwidgets/diffbrowser.cpp:179 src/ksvnwidgets/diffbrowser.cpp:192
+#, kde-format
+msgid "Find"
+msgstr "Caută"
+
+#: src/ksvnwidgets/diffbrowser.cpp:190
+#, kde-format
+msgid ""
+"Beginning of document reached.\n"
+"Continue from the end?"
+msgstr ""
+"S-a atins începutul documentului.\n"
+"Continuați de la sfârșit?"
+
+#. i18n: ectx: property (text), widget (QLabel, m_Mainlabel)
+#: src/ksvnwidgets/encodingselector.ui:30
+#, kde-format
+msgid "Select encoding:"
+msgstr "Alegeți codarea de caractere:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, m_encodingList)
+#: src/ksvnwidgets/encodingselector.ui:44
+#, fuzzy, kde-format
+#| msgid "Default utf-8"
+msgid "Default UTF-8"
+msgstr "Implicit utf-8"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
+#: src/ksvnwidgets/models/commitmodel.cpp:192 src/svnfrontend/svnlogdlg.ui:158
+#, kde-format
+msgid "Action"
+msgstr "Acțiune"
+
+#: src/ksvnwidgets/models/commitmodel.cpp:195
+#, kde-format
+msgid "Entry"
+msgstr "Intrare"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:33
+#: src/svnfrontend/maintreewidget.cpp:581
+#, kde-format
+msgid "Add"
+msgstr "Adaugă"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:37
+#: src/svnfrontend/ccontextlistener.cpp:65
+#: src/svnfrontend/copymoveview_impl.cpp:49
+#: src/svnfrontend/maintreewidget.cpp:522
+#, kde-format
+msgid "Copy"
+msgstr "Copiază"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:41
+#: src/svnfrontend/ccontextlistener.cpp:66
+#: src/svnfrontend/maintreewidget.cpp:587
+#: src/svnfrontend/maintreewidget.cpp:591 src/svnfrontend/svnactions.cpp:1016
+#, kde-format
+msgid "Delete"
+msgstr "Șterge"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:45
+#, kde-format
+msgid "Modify (content or property)"
+msgstr "Modifică (proprietate sau conținut)"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:49
+#: src/svnfrontend/svnactions.cpp:785
+#, kde-format
+msgid "Replace"
+msgstr "Înlocuit"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:53
+#, kde-format
+msgid "(Un)Lock"
+msgstr "(De)Blochează"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, RevertForm)
+#: src/ksvnwidgets/revertform.ui:14
+#, kde-format
+msgid "Revert entries"
+msgstr "Restaurează intrările la starea inițială"
+
+#. i18n: ectx: property (text), widget (QLabel, m_headLine)
+#: src/ksvnwidgets/revertform.ui:20
+#, kde-format
+msgid "Really revert these entries to pristine state?"
+msgstr "Chiar doriți restaurarea acestor intrări la starea inițială?"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:33
+#, kde-format
+msgid "Accept permanently"
+msgstr "Acceptă permanent"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:34
+#, kde-format
+msgid "Accept temporarily"
+msgstr "Acceptă temporar"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:35
+#, kde-format
+msgid "Reject"
+msgstr "Respinge"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:44
+#, kde-format
+msgid "Error validating server certificate for '%1'"
+msgstr "Eroare la validarea certificatului de server pentru '%1'"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:69
+#, kde-format
+msgid "Failure reasons"
+msgstr "Motivele eșecului"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:77
+#, kde-format
+msgid "Realm"
+msgstr "Domeniu"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:78
+#, kde-format
+msgid "Host"
+msgstr "Gazdă"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:79
+#, kde-format
+msgid "Valid from"
+msgstr "Valid de la"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:80
+#, kde-format
+msgid "Valid until"
+msgstr "Valid până la"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:81
+#, kde-format
+msgid "Issuer name"
+msgstr "Numele emitentului"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:82
+#, kde-format
+msgid "Fingerprint"
+msgstr "Amprentă"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, SslTrustPrompt)
+#: src/ksvnwidgets/ssltrustprompt.ui:14
+#, fuzzy, kde-format
+#| msgid "Trust ssl certificate"
+msgid "Trust SSL certificate"
+msgstr "Certificat SSL de încredere"
+
+#: src/main.cpp:32
+#, fuzzy, kde-format
+#| msgid "A Subversion Client for KDE (standalone application)"
+msgid "A Subversion Client by KDE (standalone application)"
+msgstr "Un client Subversion pentru KDE (aplicație autonomă)"
+
+#: src/main.cpp:45
+#, kde-format
+msgid "kdesvn"
+msgstr "kdesvn"
+
+#: src/main.cpp:46
+#, fuzzy, kde-format
+msgid ""
+"(C) 2005-2009 Rajko Albrecht,\n"
+"(C) 2015-2019 Christian Ehrlicher"
+msgstr "(C) 2005-2007 Rajko Albrecht"
+
+#: src/main.cpp:47
+#, kde-format
+msgid "Rajko Albrecht"
+msgstr "Rajko Albrecht"
+
+#: src/main.cpp:48
+#, kde-format
+msgid "Christian Ehrlicher"
+msgstr ""
+
+#: src/main.cpp:53
+#, fuzzy, kde-format
+#| msgid "Execute single subversion command on specific revision(-range)"
+msgid "Execute single Subversion command on specific revision(-range)"
+msgstr "Execută o singură comandă subversion pe o revizie(-interval) specifică"
+
+#: src/main.cpp:53
+#, kde-format
+msgid "startrev[:endrev]"
+msgstr ""
+
+#: src/main.cpp:54
+#, kde-format
+msgid "Ask for revision when executing single command"
+msgstr "Întreabă de revizie la executarea unei singure comenzi "
+
+#: src/main.cpp:55
+#, kde-format
+msgid "Force operation"
+msgstr "Forțează operația"
+
+#: src/main.cpp:56
+#, fuzzy, kde-format
+#| msgid "Save output of subversion command (eg \"cat\") into file <file>"
+msgid "Save output of Subversion command (eg \"cat\") into file <file>"
+msgstr "Salvează ieșirea comenzii subversion (ex: \"cat\") în fișierul <file>"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "<file>"
+msgstr ""
+
+#: src/main.cpp:57
+#, kde-format
+msgid "Limit log output to <number>"
+msgstr "Limitează afișarea jurnalului la <number>"
+
+#: src/main.cpp:57
+#, fuzzy, kde-format
+#| msgid "Number"
+msgid "<number>"
+msgstr "Număr"
+
+#: src/main.cpp:58
+#, fuzzy, kde-format
+#| msgid "Execute subversion command (\"exec help\" for more information)"
+msgid "Execute Subversion command (\"exec help\" for more information)"
+msgstr ""
+"Execută o comandă subversion (\"exec help\" pentru mai multe informații)"
+
+#: src/main.cpp:59
+#, kde-format
+msgid "Document to open"
+msgstr "Document de deschis"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_cmdline_show_logwindow)
+#: src/settings/cmdexecsettings.ui:11
+#, kde-format
+msgid "Show a small window containing the log after command executed"
+msgstr "Afișează o mică fereastră cu jurnalul execuției unei comenzi"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_cmdline_show_logwindow)
+#: src/settings/cmdexecsettings.ui:14
+#, kde-format
+msgid "Show log after executing a command"
+msgstr "Afișează jurnalul execuției unei comenzi"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/settings/cmdexecsettings.ui:23
+#, kde-format
+msgid "Minimum log lines to show:"
+msgstr "Numărul minim de linii de afișat din jurnal:"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_cmdline_log_minline)
+#: src/settings/cmdexecsettings.ui:33
+#, fuzzy, kde-format
+#| msgid ""
+#| "The minimum a log output must contain before kdesvn shows a single "
+#| "logwindow"
+msgid ""
+"The minimum a log output must contain before kdesvn shows a single log window"
+msgstr ""
+"Numărul minim de linii ce trebuie să conțină o intrare din jurnal, înainte "
+"de-a fi afișată o singură fereastră jurnal de kdesvn"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, kcfg_cmdline_log_minline)
+#: src/settings/cmdexecsettings.ui:39
+#, kde-format
+msgctxt "no limit"
+msgid "No minimum"
+msgstr "Fără minimum"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_contextmenu)
+#: src/settings/cmdexecsettings.ui:51
+#, fuzzy, kde-format
+#| msgid ""
+#| "If set, kdesvn will not show a menu inside \"Action\" menu of konqueror"
+msgid "If set, kdesvn will not show a menu inside \"Action\" menu of Konqueror"
+msgstr ""
+"Dacă este definit, kdesvn nu va afișa un meniu în meniul „Acțiuni” din "
+"konqueror/dolphin"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_contextmenu)
+#: src/settings/cmdexecsettings.ui:54
+#, fuzzy, kde-format
+#| msgid "Don't display contextmenu in Konqueror"
+msgid "Do not display context menu in Konqueror"
+msgstr "Nu afișa meniul contextual în konqueror/dolphin"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
+#: src/settings/cmdexecsettings.ui:61
+#, fuzzy, kde-format
+#| msgid ""
+#| "If set, kdesvn will not show some extra actions inside \"Action\" menu of "
+#| "konqueror/dolphin"
+msgid ""
+"If set, kdesvn will not show some extra actions inside \"Action\" menu of "
+"Konqueror/Dolphin"
+msgstr ""
+"Dacă este definit, kdesvn nu va afișa acțiunile suplimentare în meniul "
+"„Acțiuni” din konqueror/dolphin"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
+#: src/settings/cmdexecsettings.ui:64
+#, fuzzy, kde-format
+#| msgid "Don't display entries in toplevel action menu"
+msgid "Do not display entries in toplevel action menu"
+msgstr "Nu afișa intrări în nivelul superior al meniului acțiuni"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_kio_use_standard_logmsg)
+#: src/settings/cmdexecsettings.ui:71
+#, fuzzy, kde-format
+#| msgid "KIO operations use standard logmessage"
+msgid "KIO operations use standard log message"
+msgstr "Operațiunile KIO utilizează jurnalul standard"
+
+#. i18n: ectx: property (text), widget (QLabel, stdLogmsgLabel)
+#: src/settings/cmdexecsettings.ui:80
+#, kde-format
+msgid "Standard message:"
+msgstr "Mesaj standard:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_kio_can_overwrite)
+#: src/settings/cmdexecsettings.ui:98
+#, kde-format
+msgid "Can KIO overwrite existing files?"
+msgstr "KIO poate suprascrie fișierele existente?"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_kio_can_overwrite)
+#: src/settings/cmdexecsettings.ui:103
+#, fuzzy, kde-format
+#| msgid ""
+#| "If this flag is set, you're have a simple write support for existing "
+#| "items. Eg. you can open files in your editor and save them direct without "
+#| "checking out them before (kdesvn will do it in background).\n"
+#| "\n"
+#| "Use this only if you're sure what you're doing!"
+msgid ""
+"If this flag is set, you will have a simple write support for existing "
+"items. E.g. you can open files in your editor and save them direct without "
+"checking out them before (kdesvn will do it in background).\n"
+"\n"
+"Use this only if you are sure what you are doing."
+msgstr ""
+"Dacă acest fanion este definit, dispuneți numai de suport simplu de scriere  "
+"pentru elementele existente. De ex: puteți deschide fișierele în editor și "
+"să le salvați fără să le verificați înainte (kdesvn o va face în fundal).\n"
+"\n"
+"Folosiți această opțiune numai cînd sînteți sigur de ceea de faceți!"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_kio_can_overwrite)
+#: src/settings/cmdexecsettings.ui:106
+#, kde-format
+msgid "KIO can overwrite"
+msgstr "KIO poate suprascrie"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_display_dockmsg)
+#: src/settings/cmdexecsettings.ui:113
+#, kde-format
+msgid ""
+"If set KIO shows in KDE's Plasma detailed information about current operation"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_dockmsg)
+#: src/settings/cmdexecsettings.ui:117
+#, kde-format
+msgid ""
+"<p>If set, the kdesvn KIO shows detailed messages in KDE's Plasma control "
+"area.<br/>\n"
+"Error messages of KIO will always displayed and can <i>not</i> switched off."
+"</p>"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_dockmsg)
+#: src/settings/cmdexecsettings.ui:120
+#, kde-format
+msgid "KIO shows progress messages"
+msgstr ""
+
+#: src/settings/cmdexecsettings_impl.cpp:27
+#, fuzzy, kde-format
+#| msgid " lines"
+msgid " line(s)"
+msgstr " linii"
+
+#. i18n: ectx: label, entry, group (general_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_content)
+#: src/settings/diffmergesettings.ui:11 src/settings/kdesvn_part.kcfg:29
+#, kde-format
+msgid "Diff ignores content type"
+msgstr "Diferențierea ignoră tipul conținutului"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_tree_diff_rec)
+#: src/settings/diffmergesettings.ui:18
+#: src/svnfrontend/graphtree/revgraphview.cpp:862
+#, fuzzy, kde-format
+#| msgid "Diff in revisiontree is recursive"
+msgid "Diff in revision tree is recursive"
+msgstr "Diferențiere recursivă în arboreșcența reviziilor"
+
+#. i18n: ectx: label, entry, group (general_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_spaces)
+#: src/settings/diffmergesettings.ui:25 src/settings/kdesvn_part.kcfg:33
+#, kde-format
+msgid "Diff ignores white space changes"
+msgstr "Diferențierea ignoră modificarea spațiilor goale"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_all_white_spaces)
+#: src/settings/diffmergesettings.ui:32
+#, kde-format
+msgid "Diff ignores all white spaces"
+msgstr "Diferențierea ignoră toate spațiile goale"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_external_diff)
+#: src/settings/diffmergesettings.ui:39
+#, kde-format
+msgid ""
+"If kdesvn should use an external diff display and/or generator. If not "
+"checked use internal display."
+msgstr ""
+"Dacă trebuie utilizat un afișor și/sau generator extern de diferențe. Dacă "
+"nu este bifat se va utiliza funcția internă kdesvn pentru afișare."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_external_diff)
+#: src/settings/diffmergesettings.ui:42
+#, kde-format
+msgid "Use external diff display"
+msgstr "Utilizează un afișor de diferențe extern"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_extern_merge_default)
+#: src/settings/diffmergesettings.ui:49
+#, fuzzy, kde-format
+#| msgid ""
+#| "Set if merge with external program is preferred and not subversions merge"
+msgid ""
+"Set if merge with external program is preferred and not Subversion's merge"
+msgstr ""
+"Specifică dacă se preferă un program extern pentru fuzionare și nu cel din "
+"subversion"
+
+#. i18n: ectx: label, entry (extern_merge_default), group (diffmerge_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_extern_merge_default)
+#: src/settings/diffmergesettings.ui:52 src/settings/kdesvn_part.kcfg:158
+#, kde-format
+msgid "Prefer external merge program"
+msgstr "Preferință pentru un program extern de fuzionare"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_gitformat_default)
+#: src/settings/diffmergesettings.ui:59
+#, kde-format
+msgid "Use Git diff format"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (general_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_copies_as_add)
+#: src/settings/diffmergesettings.ui:66 src/settings/kdesvn_part.kcfg:45
+#, kde-format
+msgid "Show copies as add"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, resolveLabel)
+#: src/settings/diffmergesettings.ui:77
+#, kde-format
+msgid "Conflict resolver program:"
+msgstr "Program de rezilvat conflicte:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/settings/diffmergesettings.ui:90
+#, kde-format
+msgid "External merge program:"
+msgstr "Program de fuzionare extern:"
+
+#. i18n: ectx: property (toolTip), widget (KLineEdit, kcfg_conflict_resolver)
+#: src/settings/diffmergesettings.ui:115
+#, kde-format
+msgid "Setup an external program for conflict resolving"
+msgstr "Configurați un program extern pentru rezolvarea conflictelor"
+
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_conflict_resolver)
+#: src/settings/diffmergesettings.ui:134
+#, no-c-format, kde-format
+msgid ""
+"<p>\n"
+"Enter how kdesvn should call the conflict resolver program. The form is\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;program&gt; &lt;programoptions&gt;</tt></b>\n"
+"</p>\n"
+"<p>\n"
+"Programoption may contain the place holders for substituting with "
+"filenames.\n"
+"</p>\n"
+"The substitutions means:<br>\n"
+"<b><tt>%o</tt></b> Old version<br>\n"
+"<b><tt>%m</tt></b> Mine or local edit version<br>\n"
+"<b><tt>%n</tt></b> Newest version<br>\n"
+"<b><tt>%t</tt></b> The target to save as, kdesvn will use the original file "
+"name for it.\n"
+"</p>\n"
+"<p>\n"
+"Default: <tt>kdiff3 %o %m %n -o %t</tt>\n"
+"</p>"
+msgstr ""
+"<p>\n"
+"Specificați cum trebuie kdesvn să lanseze programul de rezolvat conflicte. "
+"Formatul este\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;program&gt; &lt;programoptions&gt;</tt></b>\n"
+"</p>\n"
+"<p>\n"
+"Opțiunile programului pot conține  simboluri de pentru substituirea cu nume "
+"de fișiere.\n"
+"</p>\n"
+"Substituțiile posibile sunt:<br>\n"
+"<b><tt>%o</tt></b> Versiune veche<br>\n"
+"<b><tt>%m</tt></b> Versiunea mea sau locală<br>\n"
+"<b><tt>%n</tt></b> Versiunea cea mai recentă<br>\n"
+"<b><tt>%t</tt></b> Destinația pentru salvare ca, kdesvn va utiliza numele "
+"original al fișierului pentru aceasta.\n"
+"</p>\n"
+"<p>\n"
+"Implicit: <tt>kdiff3 %o %m %n -o %t</tt>\n"
+"</p>"
+
+#. i18n: ectx: property (text), widget (QLabel, mdiff_display_label)
+#: src/settings/diffmergesettings.ui:141
+#, kde-format
+msgid "External diff display:"
+msgstr "Afișor de diferențe extern:"
+
+#. i18n: ectx: property (toolTip), widget (KLineEdit, kcfg_external_merge_program)
+#: src/settings/diffmergesettings.ui:154
+#, kde-format
+msgid "Setup an external program for merging"
+msgstr "Configurați un program extern pentru fuzionări"
+
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_external_merge_program)
+#: src/settings/diffmergesettings.ui:166
+#, no-c-format, kde-format
+msgid ""
+"<p>\n"
+"Enter how kdesvn should call the external merge program. The form is\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;program&gt; &lt;programoptions&gt; %s1 %s2 %t</tt></b>\n"
+"</p>\n"
+"The substitutions means:<br>\n"
+"<b><tt>%s1</tt></b> Source one for merge<br>\n"
+"<b><tt>%s2</tt></b> Source two for merge, if it was not set equal to source "
+"one but other revision<br>\n"
+"<b><tt>%t</tt></b> Local target for merge.\n"
+"</p>"
+msgstr ""
+"<p>\n"
+"Specificați cum trebuie kdesvn să lanseze programul de fuzionare extern. "
+"Formatul este\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;program&gt; &lt;programoptions&gt; %s1 %s2 %t</tt></b>\n"
+"</p>\n"
+"Substituțiile posibile sunt:<br>\n"
+"<b><tt>%s1</tt></b> Sursa unu pentru fuziune<br>\n"
+"<b><tt>%s2</tt></b> Sursa doi pentru fuziune, dacă nu este egală cu sursa "
+"unu, dar cu o altă revizie<br>\n"
+"<b><tt>%t</tt></b> Destinația locală pentru fuziune.\n"
+"</p>"
+
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_external_diff_display)
+#: src/settings/diffmergesettings.ui:191
+#, fuzzy, no-c-format, kde-format
+#| msgid ""
+#| "<p align=\"left\">\n"
+#| "Enter an external program in form\n"
+#| "<p align=\"center\">\n"
+#| "<tt>&lt;program&gt; &lt;param&gt; %f</tt>\n"
+#| "</p>\n"
+#| "or\n"
+#| "<p align=\"center\">\n"
+#| "<tt>&lt;program&gt; &lt;param&gt;</tt>\n"
+#| "</p>\n"
+#| "or\n"
+#| "<p align=\"center\">\n"
+#| "<tt>&lt;program&gt; &lt;param&gt; %1 %2</tt>\n"
+#| "</p>\n"
+#| "<br>\n"
+#| "If using first or second form, svn itself will generate the diff. %f will "
+#| "replaced with a temporary filename. If %f is not given,\n"
+#| "the diff-display should able reading data from stdin.\n"
+#| "<br>\n"
+#| "When %1 and %2 is given, kdesvn let this display make the diff. For that "
+#| "it it makes a temporary export or get (if needed) and fill out the "
+#| "parameters with the right value. %1 will filled with the content of start-"
+#| "revision, %2 with the endrevision. On large recoursive diffs this may get "
+#| "real slow!\n"
+#| "</p>"
+msgid ""
+"<p align=\"left\">\n"
+"Enter an external program in form\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt; %f</tt>\n"
+"</p>\n"
+"or\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt;</tt>\n"
+"</p>\n"
+"or\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt; %s1 %s2</tt>\n"
+"</p>\n"
+"<br>\n"
+"If one between the first or the second form is used, svn itself generates "
+"the diff. %f will be replaced with a temporary filename. If %f is not "
+"given,\n"
+"the diff-display should be able to read data from stdin.\n"
+"<br>\n"
+"When %s1 and %s2 are given, kdesvn lets this display make the diff. For that "
+"it makes a temporary export or get (if needed) and fills out the parameters "
+"with the right values. %s1 will be filled with the content of the initial "
+"revision, %s2 with the final revision. On large recursive diffs this may get "
+"really slow.\n"
+"</p>"
+msgstr ""
+"<p align=\"left\">\n"
+"Introduceți un program extern în formular\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt; %f</tt>\n"
+"</p>\n"
+"sau\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt;</tt>\n"
+"</p>\n"
+"sau\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt; %1 %2</tt>\n"
+"</p>\n"
+"<br>\n"
+"Dacă utilizați prima sau a doua formă, svn însuși va genera diferența. %f va "
+"fi înlocuit cu un nume de fișier temporar. Dacă %f nu este specificat,\n"
+"afișorul de diferențe ar trebui să fie capabil să citească datele de la "
+"intrarea standard.\n"
+"<br>\n"
+"Cînd %1 și %2 sînt specificate, kdesvn lasă acest afișor să facă diferența. "
+"Pentru aceasta va crea un export temporar (dacă este necesar) și completa "
+"parametrii cu valorile corecte. %1 va fi completat cu conținutul reviziei de "
+"început, iar %2 cu cel al reviziei de sfîrșit. Procesul poate fi foarte "
+"încet pentru diferențele recursive!\n"
+"</p>"
+
+#. i18n: ectx: property (text), widget (QLabel, m_extern_hint)
+#: src/settings/diffmergesettings.ui:200
+#, fuzzy, kde-format
+#| msgid "see \"Whats this\" for details"
+msgid "see \"What's this\" for details"
+msgstr "vezi „Ce este aceasta” pentru detalii"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DispColorSettings)
+#: src/settings/dispcolor_settings.ui:6
+#, kde-format
+msgid "ColorSettings"
+msgstr "Configurăriculori"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_colored_state)
+#: src/settings/dispcolor_settings.ui:14
+#, kde-format
+msgid "Mark changed and locked items colored"
+msgstr "Colorează elementele marcate ca modificate sau blocate"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel5)
+#: src/settings/dispcolor_settings.ui:56
+#, kde-format
+msgid "Locked items:"
+msgstr "Elemente blocate:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
+#: src/settings/dispcolor_settings.ui:76
+#, kde-format
+msgid "Not versioned items:"
+msgstr "Elemente fără versiune:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#: src/settings/dispcolor_settings.ui:89
+#, kde-format
+msgid "Remote changed items:"
+msgstr "Elemente distante modificate:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/settings/dispcolor_settings.ui:102
+#, kde-format
+msgid "Added items:"
+msgstr "Elemente adăugate:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel4)
+#: src/settings/dispcolor_settings.ui:115
+#, kde-format
+msgid "Deleted items:"
+msgstr "Elemente șterse:"
+
+#. i18n: ectx: property (text), widget (QLabel, Conflicted_items_label)
+#: src/settings/dispcolor_settings.ui:156
+#, kde-format
+msgid "Conflicted items:"
+msgstr "Elemente conflictuale:"
+
+#. i18n: ectx: property (text), widget (QLabel, Missed_items_label)
+#: src/settings/dispcolor_settings.ui:169
+#, kde-format
+msgid "Missed items:"
+msgstr "Elemente lipsă:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#: src/settings/dispcolor_settings.ui:182
+#, kde-format
+msgid "Local changed items:"
+msgstr "Elemente locale modificate:"
+
+#. i18n: ectx: property (text), widget (QLabel, Need_lock_label_2)
+#: src/settings/dispcolor_settings.ui:195
+#, kde-format
+msgid "Item needs lock:"
+msgstr "Elemente necesitînd blocare:"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DisplaySettings)
+#: src/settings/display_settings.ui:6
+#, kde-format
+msgid "Settings"
+msgstr "Configurări"
+
+#. i18n: ectx: property (text), widget (QLabel, m_ListIconsSize_label)
+#: src/settings/display_settings.ui:14
+#, kde-format
+msgid "Size of Listviewicons"
+msgstr "Dimensiunea pictogramelor în listă"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_display_overlays)
+#: src/settings/display_settings.ui:24
+#, fuzzy, kde-format
+#| msgid "Mark subversion states with an overlayed icon"
+msgid "Mark Subversion states with an overlayed icon"
+msgstr "Marchează stările subversion cu o pictogramă suprapusă"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_overlays)
+#: src/settings/display_settings.ui:30
+#, fuzzy, kde-format
+#| msgid ""
+#| "<p align=\"left\">\n"
+#| "Mark an items with non-normal state with an overlayed icon. When you wish "
+#| "to\n"
+#| "see which items has newer items in repository you may have to set \"Check "
+#| "for updates on open\" in Subversion-Dialog.\n"
+#| "</p>"
+msgid ""
+"<p align=\"left\">\n"
+"Mark items with non-normal state with an overlayed icon. When you wish to\n"
+"see which items has newer items in repository you may have to set \"Check "
+"for updates on open\" in Subversion-Dialog.\n"
+"</p>"
+msgstr ""
+"<p align=\"left\">\n"
+"Marchează un element cu stare ne-normală cu o pictogramă suprapusă. Cînd "
+"doriți să\n"
+"vedeți care element dispune de elemente noi în depozit trebuie să "
+"specificați \"Verifică pentru actualizări la deschidere\" în dialogul "
+"subversion.\n"
+"</p>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_overlays)
+#: src/settings/display_settings.ui:33
+#, kde-format
+msgid "Mark item status with icon overlay"
+msgstr "Marchează starea elementului cu o pictogramă suprapusă"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_case_sensitive_sort)
+#: src/settings/display_settings.ui:40
+#, fuzzy, kde-format
+#| msgid "Items sortorder is case sensitive"
+msgid "Items sorting order is case sensitive"
+msgstr "Ordinea de sortare a elementelor este sensibilă la majuscule"
+
+#. i18n: ectx: property (text), widget (QLabel, m_MaxLogLabel)
+#: src/settings/display_settings.ui:47
+#, fuzzy, kde-format
+#| msgid "Maximum logmessages in history:"
+msgid "Maximum log messages in history:"
+msgstr "Numărul maxim de mesaje din jurnal în istoric:"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_file_tips)
+#: src/settings/display_settings.ui:67
+#, kde-format
+msgid ""
+"Here you can control if, when moving the mouse over a file, you want to see "
+"a small popup window with additional information about that file"
+msgstr ""
+"Aici puteți controla dacă, la trecerea cursorului șoricelului peste un "
+"fișier, doriți să se afișeze o mică fereastră popup cu informații "
+"suplimentare despre acel fișier"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_file_tips)
+#: src/settings/display_settings.ui:70
+#, kde-format
+msgid "Show file info"
+msgstr "Arată detaliile fișierului"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_colored_blame)
+#: src/settings/display_settings.ui:77
+#, kde-format
+msgid "Display colored annotate"
+msgstr "Afișează colorat adnotările"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_show_navigation_panel)
+#: src/settings/display_settings.ui:84
+#, kde-format
+msgid "Use navigation panel"
+msgstr "Utilizează panoul de navigare"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:9
+#, fuzzy, kde-format
+#| msgid "Items sortorder is case sensitive"
+msgid "Set if items sortorder should be case sensitive or not"
+msgstr "Ordinea de sortare a elementelor este sensibilă la majuscule"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:13
+#, fuzzy, kde-format
+#| msgid "Size of Listviewicons"
+msgid "Size of the icons"
+msgstr "Dimensiunea pictogramelor în listă"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:17
+#, fuzzy, kde-format
+#| msgid "Show file info"
+msgid "Show file information in tooltip"
+msgstr "Arată detaliile fișierului"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:21
+#, fuzzy, kde-format
+#| msgid "Setup an external program for merging"
+msgid "Use an external program for diff viewing/generating"
+msgstr "Configurați un program extern pentru fuzionări"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:25
+#, fuzzy, kde-format
+#| msgid "Setup an external program for merging"
+msgid "Use external program for diff viewing"
+msgstr "Configurați un program extern pentru fuzionări"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:37
+#, fuzzy, kde-format
+#| msgid "Diff ignores all white spaces"
+msgid "Diff ignores all white space"
+msgstr "Diferențierea ignoră toate spațiile goale"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:41
+#, kde-format
+msgid "Show diff in Git format"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:49
+#, fuzzy, kde-format
+#| msgid "Last used log messages"
+msgid "Maximum number of log messages"
+msgstr "Ultimele mesaje utilizate din jurnal"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:53
+#, fuzzy, kde-format
+#| msgid "Display colored annotate"
+msgid "Display colored blame lines"
+msgstr "Afișează colorat adnotările"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:68
+#, fuzzy, kde-format
+#| msgid "Display ignored files"
+msgid "Display icon overlays"
+msgstr "Afișează fișierele ignorate"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:72
+#, fuzzy, kde-format
+#| msgid "Gain item info recursive"
+msgid "Get item information recursively"
+msgstr "Obține recursiv informațiile elementelor"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_review_commit)
+#: src/settings/kdesvn_part.kcfg:76 src/settings/subversion_settings.ui:174
+#, kde-format
+msgid "Review items before commit"
+msgstr "Treceți în revistă elemente eînainte să le comiteți"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:88
+#, fuzzy, kde-format
+#| msgid "Hide unchanged files"
+msgid "Hide versioned unchanged files"
+msgstr "Ascunde fișierele nemodificate"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_follows_nodes)
+#: src/settings/kdesvn_part.kcfg:92 src/settings/subversion_settings.ui:145
+#, kde-format
+msgid "Log follows node changes"
+msgstr "Intrările din jurnal inregistrează modificările nodului"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_always_list_changed_files)
+#: src/settings/kdesvn_part.kcfg:96 src/settings/subversion_settings.ui:161
+#, fuzzy, kde-format
+#| msgid "Logs always reads list of changed files"
+msgid "Log always reads list of changed files"
+msgstr "Intrările din jurnal citesc mereu lista fișierelor modificate"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:100
+#, fuzzy, kde-format
+#| msgid "Start check for updates when open a working copy"
+msgid "Start check for updates when open working copy"
+msgstr "Pornește verificarea de actualizări la deschiderea unei copii de lucru"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:104
+#, kde-format
+msgid "Start caching latest logs on open or commit"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:108
+#, fuzzy, kde-format
+#| msgid "Get file details while remote listing"
+msgid "Get detailed information when making a remote listing"
+msgstr "Recuperează detaliile fișierelor la o listare distantă"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:112
+#, fuzzy, kde-format
+#| msgid "Should kdesvn retrieves properties on selected item in repositories"
+msgid "Get properties on selected item on networked protocols"
+msgstr ""
+"Ar trebui kdesvn să recupereze proprietățile elementului selecționat în "
+"depozite"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:116
+#, kde-format
+msgid "Use properties like bugtraq:url on repository listings"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:120
+#, fuzzy, kde-format
+#| msgid "Check if items has \"svn:needs-lock\" property set"
+msgid "Check for property svn:needs-lock on listings"
+msgstr "Verifică dacă elementele au proprietatea \"svn:needs-lock\" activată"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_store_passwords)
+#: src/settings/kdesvn_part.kcfg:124 src/settings/subversion_settings.ui:107
+#, kde-format
+msgid "Store passwords for remote connections"
+msgstr "Conservă parolele pentru conexiunile distante"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:128
+#, fuzzy, kde-format
+#| msgid ""
+#| "When saving passwords, do it into KDE wallet instead of subversions "
+#| "storage?"
+msgid "Store passwords in KDE Wallet instead of Subversion' storage"
+msgstr ""
+"Înregistrarea parolelor se face în gestionarul de portofel din KDE în locul "
+"spațiului de stocare din subversion?"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_password_cache)
+#: src/settings/kdesvn_part.kcfg:132 src/settings/subversion_settings.ui:138
+#, kde-format
+msgid "Use internal password cache"
+msgstr "Utilizează prestocarea de parole internă"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:136
+#, kde-format
+msgid "Is networking enabled"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:140
+#, kde-format
+msgid "Local add results in modification instead of conflicts"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:144
+#, kde-format
+msgid "create any non-existent parent at depth=empty"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (diffmerge_items)
+#: src/settings/kdesvn_part.kcfg:150
+#, kde-format
+msgid "Which program to use for external merges"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (diffmerge_items)
+#: src/settings/kdesvn_part.kcfg:154
+#, kde-format
+msgid "Which program for resolving conflicts"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (display)
+#: src/settings/kdesvn_part.kcfg:164
+#, kde-format
+msgid "Display different then normal states colored"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (blame_dlg)
+#: src/settings/kdesvn_part.kcfg:197
+#, kde-format
+msgid "Locale for blame display"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:209
+#, fuzzy, kde-format
+#| msgid "Should kdesvn check content of logcache before starting the tree"
+msgid "Check status of log cache when starting revision tree"
+msgstr ""
+"Ar trebui kdesvn să verifice conținutul jurnalului de prestocare înaintea "
+"generării arboreșcenței"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/settings/kdesvn_part.kcfg:213 src/settings/revisiontree_settings.ui:129
+#, kde-format
+msgid "Direction of revision tree"
+msgstr "Direcția arborelui de revizii"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:217
+#, fuzzy, kde-format
+#| msgid "Color for added items:"
+msgid "Color for added items"
+msgstr "Culoarea pentru elementele adăugate:"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:221
+#, fuzzy, kde-format
+#| msgid "Color for deleted items:"
+msgid "Color for deleted items"
+msgstr "Culoarea pentru elementele șterse:"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:225
+#, fuzzy, kde-format
+#| msgid "Color for copied items:"
+msgid "Color for copied items"
+msgstr "Culoarea pentru elemente copiate:"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:229
+#, fuzzy, kde-format
+#| msgid "Color for renamed items:"
+msgid "Color for renamed items"
+msgstr "Culoarea pentru elementele redenumite:"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:233
+#, fuzzy, kde-format
+#| msgid "Color for modified items:"
+msgid "Color for modified items"
+msgstr "Culoarea pentru elementele modificate:"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:237
+#, kde-format
+msgid "Height of detail view in tree widget"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:241
+#, fuzzy, kde-format
+#| msgid "Diff in revisiontree is recursive"
+msgid "Diffs from revision tree are recursive"
+msgstr "Diferențiere recursivă în arboreșcența reviziilor"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:247
+#, kde-format
+msgid "Should Konqueror not display context menus for kdesvn?"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:251
+#, fuzzy, kde-format
+#| msgid "Don't display entries in toplevel action menu"
+msgid "Should Konqueror not display kdesvn entries in main action menu?"
+msgstr "Nu afișa intrări în nivelul superior al meniului acțiuni"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:255
+#, fuzzy, kde-format
+#| msgid "Show log after executing a command"
+msgid "Show a small log window after executing a command."
+msgstr "Afișează jurnalul execuției unei comenzi"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:259
+#, kde-format
+msgid "Log must contain at least lines to show"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:263
+#, fuzzy, kde-format
+#| msgid "KIO operations use standard logmessage"
+msgid "KIO::svn operations use a standard log message"
+msgstr "Operațiunile KIO utilizează jurnalul standard"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:267
+#, kde-format
+msgid "The standard log message to use with KIO if not asking for it."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:271
+#, kde-format
+msgid "Support overwrite for KIO module"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:275
+#, kde-format
+msgid "Print progress messages in KDE dock area"
+msgstr ""
+
+#. i18n: ectx: whatsthis, entry, group (internals)
+#: src/settings/kdesvn_part.kcfg:294
+#, kde-format
+msgid ""
+"This value holds for log dialog which kind of log is used, its internal only."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
+#: src/settings/polling_settings.ui:11
+#, fuzzy, kde-format
+msgid "Check modified items every"
+msgstr "Culoarea pentru elementele modificate:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/settings/polling_settings.ui:28 src/settings/polling_settings.ui:55
+#, fuzzy, kde-format
+msgid "minutes"
+msgstr " linii"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_poll_updates)
+#: src/settings/polling_settings.ui:35
+#, kde-format
+msgid ""
+"If set check for updates on working copy when network is enabled on regular "
+"base"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_updates)
+#: src/settings/polling_settings.ui:38
+#, fuzzy, kde-format
+msgid "Check for updated items every"
+msgstr "Verifică dacă există actualizări"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:28
+#, kde-format
+msgid "Left to right"
+msgstr "De la stînga la dreapta"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:33
+#, kde-format
+msgid "Bottom to top"
+msgstr "De jos în sus"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:38
+#, kde-format
+msgid "Right to left"
+msgstr "De la dreapta la stînga"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:43
+#, kde-format
+msgid "Top to bottom"
+msgstr "De sus în jos"
+
+#. i18n: ectx: property (text), widget (QLabel, m_AddColorLabel)
+#: src/settings/revisiontree_settings.ui:51
+#, kde-format
+msgid "Color for added items:"
+msgstr "Culoarea pentru elementele adăugate:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#: src/settings/revisiontree_settings.ui:77
+#, kde-format
+msgid "Color for copied items:"
+msgstr "Culoarea pentru elemente copiate:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel4)
+#: src/settings/revisiontree_settings.ui:90
+#, kde-format
+msgid "Color for renamed items:"
+msgstr "Culoarea pentru elementele redenumite:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel5)
+#: src/settings/revisiontree_settings.ui:103
+#, kde-format
+msgid "Color for modified items:"
+msgstr "Culoarea pentru elementele modificate:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#: src/settings/revisiontree_settings.ui:136
+#, kde-format
+msgid "Color for deleted items:"
+msgstr "Culoarea pentru elementele șterse:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_fill_cache_on_tree)
+#: src/settings/revisiontree_settings.ui:175
+#, fuzzy, kde-format
+#| msgid "Should kdesvn check content of logcache before starting the tree"
+msgid "Should kdesvn check content of log cache before starting the tree"
+msgstr ""
+"Ar trebui kdesvn să verifice conținutul jurnalului de prestocare înaintea "
+"generării arboreșcenței"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_fill_cache_on_tree)
+#: src/settings/revisiontree_settings.ui:180
+#, kde-format
+msgid ""
+"When starting the tree generation and reading data from log cache kdesvn may "
+"check for newer items in repository if network is enabled. \n"
+"\n"
+"But this may slow down tree generation so it is disabled by default."
+msgstr ""
+"Cînd lansează generarea arboreșcenței și citirea datelor din jurnalul de "
+"prestocare, kdesvn poate verifica după elemente noi în depozit dacă rețeaua "
+"este ativată. \n"
+"\n"
+"Dar aceasta încetinește generarea arboreșcenței și este dezactivată implicit."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_fill_cache_on_tree)
+#: src/settings/revisiontree_settings.ui:183
+#, fuzzy, kde-format
+#| msgid "Check logcache fill before reading tree"
+msgid "Check log cache fill before reading tree"
+msgstr ""
+"Verifică completarea jurnalului de prestocare înainte de citirea "
+"arboreșcenței"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_start_updates_check_on_open)
+#: src/settings/subversion_settings.ui:14
+#, kde-format
+msgid "Select if kdesvn should check for updates when open a working copy"
+msgstr ""
+"Specifică dacă se vor verifica actualizările cînd o copie de lucru este "
+"deschisă cu kdesvn"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_start_updates_check_on_open)
+#: src/settings/subversion_settings.ui:17
+#, kde-format
+msgid "Start check for updates when open a working copy"
+msgstr "Pornește verificarea de actualizări la deschiderea unei copii de lucru"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_cache_on_open)
+#: src/settings/subversion_settings.ui:33
+#, fuzzy, kde-format
+#| msgid "Start refresh the logcache for repository when networking enabled"
+msgid "Start refresh the log cache for repository when networking enabled"
+msgstr ""
+"Pornește actualizarea jurnalului de prestocare a depozitului cînd rețeaua "
+"este activată"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_cache_on_open)
+#: src/settings/subversion_settings.ui:36
+#, kde-format
+msgid "Start fill log cache on open"
+msgstr "Începe completarea jurnalului de prestocare la deschidere"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_check_needslock)
+#: src/settings/subversion_settings.ui:43
+#, kde-format
+msgid "When listing on working copies kdesvn may check for this property"
+msgstr ""
+"La listarea unei copii de lcucru, kdesvn poate verifica această proprietate"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_check_needslock)
+#: src/settings/subversion_settings.ui:46
+#, kde-format
+msgid ""
+"When listing on working copies kdesvn may check for <tt>svn:needs-lock</tt> "
+"property.<br>But due this listings/updating on folders containing lot of "
+"items may get slow. So you should only switch on if you have repositories "
+"containing lot of such entries."
+msgstr ""
+"La listarea unei copii de lucru, kdesvn poate verifica proprietatea <tt>svn:"
+"needs-lock</tt>.<br>Dacă este activată, listarea și actualizarea dosarelor "
+"ce conțin multe elemente poate deveni lentă. Trebuie activată numai dacă un "
+"număr important de intrări posedă această proprietate."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_check_needslock)
+#: src/settings/subversion_settings.ui:49
+#, kde-format
+msgid "Check if items has \"svn:needs-lock\" property set"
+msgstr "Verifică dacă elementele au proprietatea \"svn:needs-lock\" activată"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
+#: src/settings/subversion_settings.ui:56
+#, kde-format
+msgid ""
+"Whether getting details about items when making listing on repositories or "
+"not"
+msgstr ""
+"Se recuperează detaliile despre elemente la listarea depozitelor sau nu?"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_details_on_remote_listing)
+#: src/settings/subversion_settings.ui:61
+#, fuzzy, kde-format
+#| msgid ""
+#| "<p align=\"left\">When checked, kdesvn get more detailed info about file "
+#| "items when making a listing to remote repositories. So you may see remote "
+#| "locks in overview.\n"
+#| "</p>\n"
+#| "<p align=\"left\"><i>Be careful: This may let listings REAL slow!</i></p>"
+msgid ""
+"<p align=\"left\">When checked, kdesvn get more detailed info about file "
+"items when making a listing to remote repositories. So you may see remote "
+"locks in overview.\n"
+"</p>\n"
+"<p align=\"left\"><i>Be careful: This may let listings REAL slow.</i></p>"
+msgstr ""
+"<p align=\"left\">La verificarea actualizării, kdesvn recuperează informații "
+"detaliate despre elementele depozitului distant. Puteți astfel vedea "
+"fișierele distante blocate în vizualizarea globală.\n"
+"</p>\n"
+"<p align=\"left\"><i>Atenție: aceasta poate face listarea FOARTE înceată!</"
+"i></p>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_details_on_remote_listing)
+#: src/settings/subversion_settings.ui:64
+#, kde-format
+msgid "Get file details while remote listing"
+msgstr "Recuperează detaliile fișierelor la o listare distantă"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_info_recursive)
+#: src/settings/subversion_settings.ui:74
+#, kde-format
+msgid "Gain item info recursive"
+msgstr "Obține recursiv informațiile elementelor"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_properties_on_remote_items)
+#: src/settings/subversion_settings.ui:84
+#, kde-format
+msgid "Should kdesvn retrieves properties on selected item in repositories"
+msgstr ""
+"Ar trebui kdesvn să recupereze proprietățile elementului selecționat în "
+"depozite"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
+#: src/settings/subversion_settings.ui:88
+#, fuzzy, kde-format
+#| msgid ""
+#| "When browsing kdesvn may try displaying properties below itemlist from a "
+#| "selected item. \n"
+#| "On networked repositories (eg., not opened via file:// protocol) this may "
+#| "get real slow. So if you have slow network connections or when browsing "
+#| "hangs often you should deactivate it."
+msgid ""
+"When browsing kdesvn may try displaying properties below itemlist from a "
+"selected item. \n"
+"On networked repositories (e.g., not opened via file:// protocol) this may "
+"get real slow. So if you have slow network connections or when browsing "
+"hangs often you should deactivate it."
+msgstr ""
+"Cînd parcurge elementele, kdesvn poate încerca să afișeze proprietățile unui "
+"element selecționat sub lista de elemente. \n"
+"Pe depozitele din rețea (ex: deschise cu un alt protocol decît file://) "
+"aceasta poate fi forate înceată. Dacă dispuneți de o conexiune înceată sau "
+"întîlniți blocări dese la parcurgerea elementelor, ar trebui să dezactivați "
+"afișarea proprietăților."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_properties_on_remote_items)
+#: src/settings/subversion_settings.ui:91
+#, kde-format
+msgid "Always get properties on networked repositories"
+msgstr "Recuperează mereu proprietățile depozitelor din rețea"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_store_passwords)
+#: src/settings/subversion_settings.ui:101
+#, fuzzy, kde-format
+#| msgid "Should subversion store passwords in default"
+msgid "Should Subversion store passwords in default"
+msgstr "Subversion ar trebui să conserve parolele implicit"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_store_passwords)
+#: src/settings/subversion_settings.ui:104
+#, fuzzy, kde-format
+#| msgid ""
+#| "Storing passwords is often a security problem. Kdesvn itself doesn't "
+#| "store any passwords, but the subversion itself inside the configuration "
+#| "area of subversion. If this area is readable from others you should not "
+#| "set it, but you may select for single non critical accounts inside the "
+#| "authentication dialog."
+msgid ""
+"Storing passwords is often a security problem. Kdesvn itself does not store "
+"any passwords, but the Subversion itself inside the configuration area of "
+"Subversion. If this area is readable from others you should not set it, but "
+"you may select for single non critical accounts inside the authentication "
+"dialog."
+msgstr ""
+"Stocarea parolelor poate isca des probleme de securitate. Kdesvn însuși nu "
+"stochează nici o parolă, dar subversion o face, în zona sa de configurație. "
+"Dacă aceasră zonă este lizibilă lentru ceilalți, nu trebuie s-o activați, "
+"dar o puteți alege pentru conturile necritice din dialogul de autentificare."
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_passwords_in_wallet)
+#: src/settings/subversion_settings.ui:117
+#, fuzzy, kde-format
+#| msgid ""
+#| "When saving passwords, do it into KDE wallet instead of subversions "
+#| "storage?"
+msgid ""
+"When saving passwords, do it into KDE Wallet instead of Subversions storage?"
+msgstr ""
+"Înregistrarea parolelor se face în gestionarul de portofel din KDE în locul "
+"spațiului de stocare din subversion?"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_passwords_in_wallet)
+#: src/settings/subversion_settings.ui:122
+#, fuzzy, kde-format
+#| msgid ""
+#| "<p>Tells if your passwords set in kdesvn should stored into kde wallet "
+#| "instead of simple cleartext storage of subversion.</p>\n"
+#| "<p>This would be a little bit more secure 'cause KDE wallet is (mostly) "
+#| "encrypted with a password. On other hand you must re-enter your passwords "
+#| "with other subversion clients not accessing KDE wallet (eg. svn "
+#| "commandline itself, rapidsvn and so on).</p>\n"
+#| "<p>If you're HOME storage eg. subversions configfolder is on a network "
+#| "drive you should hard think about not storing passwords in a plain text "
+#| "file like subversion does but put it into an encrypted storage like kde "
+#| "wallet or don't save passwords.</p>"
+msgid ""
+"<p>Tells if your passwords set in kdesvn should stored into KDE Wallet "
+"instead of simple clear text storage of Subversion.</p>\n"
+"<p>This would be a little bit more secure because KDE Wallet is (mostly) "
+"encrypted with a password. On other hand you must re-enter your passwords "
+"with other Subversion clients not accessing KDE wallet (e.g. svn command "
+"line itself, rapidsvn and so on).</p>\n"
+"<p>If you are HOME storage e.g. Subversion's config folder is on a network "
+"drive you should hard think about not storing passwords in a plain text file "
+"like Subversion does but put it into an encrypted storage like KDE Wallet or "
+"do not save passwords.</p>"
+msgstr ""
+"<p>Determină dacă parolele voastre vehihulate în kdesvn să fie stocate în "
+"gestionarul de portofel din KDE în locul stocării în text simplu din "
+"subversion.</p>\n"
+"<p>Metoda este un pic mai sigură deoarece gestionarul de portofel din KDE "
+"este (în cea mai mare parte) criptat cu o parolă. Pe altă parte, va trebui "
+"din nou să vă introduceți parola cu ceilalți clienți de subversion ce nu "
+"folosesc gestionarul de prortofel din KDE (ex: svn în linie de comandă, "
+"rapidsvn șamd).</p>\n"
+"<p>Dacă HOME, directorul de configurare subversion, se află pe un disc din "
+"rețea, trebuie să vă gîndiți serios și să nu vă stocați parolele într-un "
+"simplu fișier text așa cum o face subversion. Mai degrabă stocați-le într-un "
+"spațiu criptat precum cel din gestionarul de portofel din KDE, sau nu le "
+"stocați deloc.</p>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_passwords_in_wallet)
+#: src/settings/subversion_settings.ui:125
+#, kde-format
+msgid "Store passwords into KDE Wallet"
+msgstr "Stochează parolele în gestionarul de portofel din KDE"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_password_cache)
+#: src/settings/subversion_settings.ui:135
+#, kde-format
+msgid "Use an internal password cache"
+msgstr "Utilizează o zonă internă de prestocare pentru parole"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_always_list_changed_files)
+#: src/settings/subversion_settings.ui:155
+#, kde-format
+msgid "Read detailed change lists"
+msgstr "Citiți lista detaliată a modificărilor"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_log_always_list_changed_files)
+#: src/settings/subversion_settings.ui:158
+#, fuzzy, kde-format
+#| msgid ""
+#| "Reading lists of changed files may sometimes a little bit slow down "
+#| "things. But if this feature is switched off, kdesvn may fail generating "
+#| "differences between nodechanges from within the logviewer."
+msgid ""
+"Reading lists of changed files may sometimes a little bit slow down things. "
+"But if this feature is switched off, kdesvn may fail generating differences "
+"between node changes from within the log viewer."
+msgstr ""
+"Lectura listei de fișiere modificate poate cîteodată încetini lucrurile. Dar "
+"dacă această funcționalitate este dezactivată, kdesvn poate eșua la "
+"generarea diferențelor dintre nodurile modificate în vizualizatorul de "
+"jurnal."
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_review_commit)
+#: src/settings/subversion_settings.ui:171
+#, kde-format
+msgid "List items next commit will send or not"
+msgstr "Listează elementele pe care viitoarea propagare le va trimite sau nu"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_commit_hide_new)
+#: src/settings/subversion_settings.ui:184
+#, kde-format
+msgid "Should unversioned items displayed in commit dialog or not."
+msgstr ""
+"Elementele neversionate ar trebui afișate în căsuța dialogului de propagare "
+"sau nu. "
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_commit_hide_new)
+#: src/settings/subversion_settings.ui:187
+#, kde-format
+msgid "Hide new items in commit box"
+msgstr "Ascunde elementele noi în căsuța de propagare"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_add_as_modification)
+#: src/settings/subversion_settings.ui:197
+#, kde-format
+msgid ""
+"<html><head/><body><p>If set, a local addition at the same path as an "
+"incoming addition of the same node kind results in a normal node with a "
+"possible local modification, instead of a tree conflict.</p></body></html>"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_add_as_modification)
+#: src/settings/subversion_settings.ui:200
+#, fuzzy, kde-format
+#| msgid "Modified state got conflicting mods."
+msgid "Update modifies instead of conflicts"
+msgstr "Starea modificată conține modificări conflictuale."
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_make_parents)
+#: src/settings/subversion_settings.ui:207
+#, kde-format
+msgid ""
+"<html><head/><body><p>If set, create any non-existent parent directories "
+"also by checking them out at depth=empty</p></body></html>"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_make_parents)
+#: src/settings/subversion_settings.ui:210
+#, kde-format
+msgid "Update makes missing parents"
+msgstr ""
+
+#: src/svnfrontend/background/fillcachethread.cpp:72
+#, fuzzy, kde-format
+#| msgid ""
+#| "Not filling logcache because it is disabled due setting for this "
+#| "repository."
+msgid ""
+"Not filling log cache because it is disabled due setting for this repository."
+msgstr ""
+"Nu s-a completat jurnalul de prestocare pentru că este dezactivat din "
+"configurarea acestui depozit."
+
+#: src/svnfrontend/background/fillcachethread.cpp:74
+#, fuzzy, kde-format
+#| msgid "Filling log cache in background"
+msgid "Filling log cache in background."
+msgstr "Completare jurnal de prestocare în fundal"
+
+#: src/svnfrontend/background/fillcachethread.cpp:96
+#, kde-format
+msgid "Filling cache canceled."
+msgstr "Completarea prestocării anulată."
+
+#: src/svnfrontend/background/fillcachethread.cpp:111
+#, fuzzy, kde-format
+#| msgid "Cache filled up to revision %1"
+msgid "Cache filled up to revision %1."
+msgstr "Prestocare completată la revizia %1"
+
+#: src/svnfrontend/background/fillcachethread.cpp:118
+#, kde-format
+msgid "Filling log cache in background finished."
+msgstr "Completarea jurnalului de prestocare terminată."
+
+#: src/svnfrontend/background/tcontextlistener.cpp:182
+#, kde-format
+msgid "%1 of %2 transferred."
+msgstr "%1 din %2 transferate."
+
+#: src/svnfrontend/background/tcontextlistener.cpp:184
+#: src/svnfrontend/stopdlg.cpp:200
+#, kde-format
+msgid "%1 transferred."
+msgstr "%1 transferat."
+
+#: src/svnfrontend/blamedisplay.cpp:185 src/svnfrontend/blamedisplay.cpp:197
+#, kde-format
+msgid "Log message for revision"
+msgstr "Mesajul jurnalului pentru revizie"
+
+#: src/svnfrontend/blamedisplay.cpp:190
+#, fuzzy, kde-format
+#| msgid "Goto line"
+msgid "Go to line"
+msgstr "Megi la linia"
+
+#: src/svnfrontend/blamedisplay.cpp:324
+#, kde-format
+msgid "Show line"
+msgstr "Afișează linia"
+
+#: src/svnfrontend/blamedisplay.cpp:324
+#, kde-format
+msgid "Show line number"
+msgstr "Afișează numărul liniei"
+
+#: src/svnfrontend/blamedisplay.cpp:361
+#, fuzzy, kde-format
+#| msgid "Logmessage for revision %1"
+msgctxt "@title:window"
+msgid "Log Message for Revision %1"
+msgstr "Mesajul jurnalului pentru revizia %1"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:40
+#, kde-format
+msgid "Line"
+msgstr "Linie"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:45
+#: src/svnfrontend/models/logitemmodel.cpp:173
+#, kde-format
+msgid "Revision"
+msgstr "Revizie"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#. i18n: ectx: property (text), widget (QRadioButton, m_startDateButton)
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopDateButton)
+#: src/svnfrontend/blamedisplay.ui:50
+#: src/svnfrontend/fronthelpers/rangeinput.ui:46
+#: src/svnfrontend/fronthelpers/rangeinput.ui:130
+#: src/svnfrontend/models/logitemmodel.cpp:177
+#, kde-format
+msgid "Date"
+msgstr "Dată"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:55
+#: src/svnfrontend/models/logitemmodel.cpp:175
+#, kde-format
+msgid "Author"
+msgstr "Autor"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:60
+#, kde-format
+msgid "Content"
+msgstr "Conținut"
+
+#: src/svnfrontend/ccontextlistener.cpp:64
+#, kde-format
+msgid "Add to revision control"
+msgstr "Adaugă la controlul reviziei"
+
+#: src/svnfrontend/ccontextlistener.cpp:67
+#, kde-format
+msgid "Restore missing"
+msgstr "Restaurează ce lipsește"
+
+#: src/svnfrontend/ccontextlistener.cpp:68
+#, kde-format
+msgid "Revert"
+msgstr "Revenire la starea inițială"
+
+#: src/svnfrontend/ccontextlistener.cpp:69
+#, kde-format
+msgid "Revert failed"
+msgstr "Revenirea la starea inițială a eșuat"
+
+#: src/svnfrontend/ccontextlistener.cpp:70
+#, kde-format
+msgid "Resolved"
+msgstr "Rezolvat"
+
+#: src/svnfrontend/ccontextlistener.cpp:71
+#, kde-format
+msgid "Skip"
+msgstr "Omis"
+
+#: src/svnfrontend/ccontextlistener.cpp:72 src/svnfrontend/svnitem.cpp:430
+#, kde-format
+msgid "Deleted"
+msgstr "Șters"
+
+#: src/svnfrontend/ccontextlistener.cpp:73
+#, kde-format
+msgid "Added"
+msgstr "Adăugat"
+
+#: src/svnfrontend/ccontextlistener.cpp:74
+#, kde-format
+msgid "Update"
+msgstr "Actualizează"
+
+#: src/svnfrontend/ccontextlistener.cpp:75
+#, kde-format
+msgid "Update complete"
+msgstr "Actualizare completă"
+
+#: src/svnfrontend/ccontextlistener.cpp:76
+#, kde-format
+msgid "Update external module"
+msgstr "Actualizare modul extern"
+
+#: src/svnfrontend/ccontextlistener.cpp:78
+#, kde-format
+msgid "Status on external"
+msgstr "Stare externă"
+
+#: src/svnfrontend/ccontextlistener.cpp:79
+#, kde-format
+msgid "Commit Modified"
+msgstr "Comite elementele modificate"
+
+#: src/svnfrontend/ccontextlistener.cpp:80
+#, kde-format
+msgid "Commit Added"
+msgstr "Comite elementele adăugate"
+
+#: src/svnfrontend/ccontextlistener.cpp:81
+#, kde-format
+msgid "Commit Deleted"
+msgstr "Comite elementele șterse"
+
+#: src/svnfrontend/ccontextlistener.cpp:82
+#, kde-format
+msgid "Commit Replaced"
+msgstr "Comite elementele înlocuite"
+
+#: src/svnfrontend/ccontextlistener.cpp:85
+#, kde-format
+msgid "Locking"
+msgstr "Blocare"
+
+#: src/svnfrontend/ccontextlistener.cpp:86
+#, kde-format
+msgid "Unlocked"
+msgstr "Deblocat"
+
+#: src/svnfrontend/ccontextlistener.cpp:87
+#, kde-format
+msgid "Lock failed"
+msgstr "Blocare eșuată"
+
+#: src/svnfrontend/ccontextlistener.cpp:88
+#, kde-format
+msgid "Unlock failed"
+msgstr "Deblocare eșuată"
+
+#: src/svnfrontend/ccontextlistener.cpp:94
+#, kde-format
+msgid "unchanged"
+msgstr "nemodificat"
+
+#: src/svnfrontend/ccontextlistener.cpp:95
+#, kde-format
+msgid "item wasn't present"
+msgstr "elementul nu era prezent"
+
+#: src/svnfrontend/ccontextlistener.cpp:96
+#, kde-format
+msgid "unversioned item obstructed work"
+msgstr "un element neversionat bloca lucrul"
+
+#: src/svnfrontend/ccontextlistener.cpp:99
+#, kde-format
+msgid "Modified state had mods merged in."
+msgstr "Starea modificată conține modificări fuzionate."
+
+#: src/svnfrontend/ccontextlistener.cpp:100
+#, kde-format
+msgid "Modified state got conflicting mods."
+msgstr "Starea modificată conține modificări conflictuale."
+
+#: src/svnfrontend/ccontextlistener.cpp:311
+#, kde-format
+msgid "Enter password for realm %1"
+msgstr "Introduceți parola pentru domeniul %1"
+
+#: src/svnfrontend/ccontextlistener.cpp:342
+#, fuzzy, kde-format
+#| msgid ""
+#| "The certificate is not issued by a trusted authority. Use the fingerprint "
+#| "to validate the certificate manually!"
+msgid ""
+"The certificate is not issued by a trusted authority. Use the fingerprint to "
+"validate the certificate manually."
+msgstr ""
+"Certificatul nu a fost emis de o autoritate recunoscută. Utilizați amprenta "
+"pentru a valida manual certifcatul!"
+
+#: src/svnfrontend/ccontextlistener.cpp:345
+#, kde-format
+msgid "The certificate hostname does not match."
+msgstr "Numele gazdei certificatului nu corespunde."
+
+#: src/svnfrontend/ccontextlistener.cpp:348
+#, kde-format
+msgid "The certificate is not yet valid."
+msgstr "Certificatul nu este încă valid."
+
+#: src/svnfrontend/ccontextlistener.cpp:351
+#, kde-format
+msgid "The certificate has expired."
+msgstr "Certificatul a expirat."
+
+#: src/svnfrontend/ccontextlistener.cpp:354
+#, kde-format
+msgid "The certificate has an unknown error."
+msgstr "Certificatul conține o eroare necunoscută."
+
+#: src/svnfrontend/ccontextlistener.cpp:376
+#, fuzzy, kde-format
+#| msgid ""
+#| "%1\n"
+#| "Realy store password as plain text?"
+msgid ""
+"%1\n"
+"Really store password as plain text?"
+msgstr ""
+"%1\n"
+"Chiar doriți să salvați parola în clar?"
+
+#: src/svnfrontend/ccontextlistener.cpp:377
+#, kde-format
+msgid "Save password"
+msgstr "Salvează parola"
+
+#: src/svnfrontend/commandexec.cpp:219
+#, kde-format
+msgid "Command \"%1\" not implemented or known"
+msgstr "Conamda \"%1\" nu este implementată sau cunoscută"
+
+#: src/svnfrontend/commandexec.cpp:220 src/svnfrontend/commandexec.cpp:339
+#: src/svnfrontend/graphtree/revgraphview.cpp:1004
+#: src/svnfrontend/maintreewidget.cpp:992
+#: src/svnfrontend/maintreewidget.cpp:2136
+#: src/svnfrontend/maintreewidget.cpp:2348
+#, kde-format
+msgid "SVN Error"
+msgstr "Eroare SVN"
+
+#: src/svnfrontend/commandexec.cpp:434
+#, fuzzy, kde-format
+#| msgid "\"GET\" requires output file!"
+msgid "\"GET\" requires output file"
+msgstr "\"GET\" necesită fișier de ieșire!"
+
+#: src/svnfrontend/commandexec.cpp:621
+#, fuzzy, kde-format
+#| msgid "May only switch one url at time!"
+msgid "May only switch one URL at time"
+msgstr "Adresele URL pot fi schimbate pe rînd!"
+
+#: src/svnfrontend/commandexec.cpp:625
+#, fuzzy, kde-format
+#| msgid "Switch only on working copies!"
+msgid "Switch only on working copies"
+msgstr "Schimbare numai între copiile de lucru!"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, CopyMoveView)
+#: src/svnfrontend/copymoveview.ui:14
+#, kde-format
+msgid "Copy / Move"
+msgstr "Copiază / Mută"
+
+#. i18n: ectx: property (text), widget (QLabel, m_HeadOneLabel)
+#: src/svnfrontend/copymoveview.ui:20
+#, fuzzy, kde-format
+#| msgid "Rename/move"
+msgid "Rename"
+msgstr "Redenumește/mută"
+
+#. i18n: ectx: property (text), widget (KSqueezedTextLabel, m_OldNameLabel)
+#. i18n: ectx: property (text), widget (KSqueezedTextLabel, m_PrefixLabel)
+#: src/svnfrontend/copymoveview.ui:33 src/svnfrontend/copymoveview.ui:58
+#, kde-format
+msgid "KSqueezedTextLabel"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, m_HeadTwoLabel)
+#: src/svnfrontend/copymoveview.ui:43
+#, kde-format
+msgid "to"
+msgstr "la"
+
+#: src/svnfrontend/copymoveview_impl.cpp:47
+#, kde-format
+msgid "Rename/move"
+msgstr "Redenumește/mută"
+
+#: src/svnfrontend/copymoveview_impl.cpp:74
+#, fuzzy, kde-format
+#| msgid "Move/Rename file/dir"
+msgctxt "@title:window"
+msgid "Move/Rename File/Directory"
+msgstr "Mută/Redenumește fișier/director"
+
+#: src/svnfrontend/copymoveview_impl.cpp:74
+#, fuzzy, kde-format
+#| msgid "Copy file/dir"
+msgctxt "@title:window"
+msgid "Copy File/Directory"
+msgstr "Copiază fișier/director"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, CreateRepoDlg)
+#: src/svnfrontend/createrepodlg.ui:14
+#, kde-format
+msgid "Create new repository"
+msgstr "Creează un depozit nou"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_DisableFsync)
+#: src/svnfrontend/createrepodlg.ui:22
+#, kde-format
+msgid "Disable fsync at commit (BDB only)"
+msgstr "Dezactivează „fsync” la propagare (BDB numai)"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/svnfrontend/createrepodlg.ui:32
+#, kde-format
+msgid "Path to repository:"
+msgstr "Calea către depozit:"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:45
+#, kde-format
+msgid "Select type of storage"
+msgstr "Selecționează tipul de stocare"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:48
+#, kde-format
+msgid "Select the storage type of repository (FSFS or Berkely DB)"
+msgstr "Selecționați tipul de stocare al depozitului  (FSFS sau Berkely DB)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:52
+#, kde-format
+msgid "FSFS"
+msgstr "FSFS"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:57
+#, kde-format
+msgid "BDB"
+msgstr "BDB"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_CreateMainDirs)
+#: src/svnfrontend/createrepodlg.ui:65
+#, fuzzy, kde-format
+#| msgid "Create trunk, tags and branches folder"
+msgid "Create trunk, tags and branches folders"
+msgstr "Creează trunchiul, etichetele și directorul de ramuri"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_CreateMainDirs)
+#: src/svnfrontend/createrepodlg.ui:68
+#, kde-format
+msgid ""
+"If this is set then the base layout (<tt>/trunk</tt>,<tt>/branches</tt> and "
+"<tt>/tags</tt>) will created after opening the fresh repository."
+msgstr ""
+"Dacă este activată, atunci o organizare de bază (<tt>/trunk</tt>,<tt>/"
+"branches</tt> și <tt>/tags</tt>) va fi creată după deschiderea noului "
+"depozit."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_CreateMainDirs)
+#: src/svnfrontend/createrepodlg.ui:71
+#, kde-format
+msgid "Create main folders"
+msgstr "Creează dosarele principale"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn16compat)
+#: src/svnfrontend/createrepodlg.ui:87
+#, fuzzy, kde-format
+#| msgid "Is created repository compatible to subversion prior 1.6"
+msgid "Is created repository compatible to Subversion prior 1.6"
+msgstr "Depozit creat compatibil cu subversion anterior versiunii 1.6"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn16compat)
+#: src/svnfrontend/createrepodlg.ui:90
+#, fuzzy, kde-format
+#| msgid ""
+#| "If set, the repository created will compatible to subversion prior 1.5. "
+#| "This is only useful when svnqt is running with subversion 1.5 or above."
+msgid ""
+"If set, the repository created will compatible to Subversion prior 1.5. This "
+"is only useful when svnqt is running with Subversion 1.6 or above."
+msgstr ""
+"Dacă este definită, depozitul creat va fi compatibil cu subversion anterior "
+"versiunii 1.5. Aceasta nu este necesară decît dacă svnqt rulează cu o "
+"subversion posterior versiunii 1.5."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_presvn16compat)
+#: src/svnfrontend/createrepodlg.ui:93
+#, fuzzy, kde-format
+#| msgid "Compatible to subversion prior 1.6"
+msgid "Compatible to Subversion prior 1.6"
+msgstr "Compatibilitate cu subversion anteriror versiunii 1.6"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_LogKeep)
+#: src/svnfrontend/createrepodlg.ui:113
+#, kde-format
+msgid "Disable automatic log file removal (BDB only)"
+msgstr "Dezactivează înlăturarea automată a fișierului jurnal (BDB numai)"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#: src/svnfrontend/createrepodlg.ui:123
+#, kde-format
+msgid "Type of repository:"
+msgstr "Tipul depozitului:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn15compat)
+#: src/svnfrontend/createrepodlg.ui:139
+#, fuzzy, kde-format
+#| msgid "Is created repository compatible to subversion prior 1.5"
+msgid "Is created repository compatible to Subversion prior 1.5"
+msgstr "Depozit creat compatibil cu subversion anterior versiunii 1.5"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn15compat)
+#: src/svnfrontend/createrepodlg.ui:142
+#, fuzzy, kde-format
+#| msgid ""
+#| "If set, the repository created will compatible to subversion prior 1.5. "
+#| "This is only useful when svnqt is running with subversion 1.5 or above."
+msgid ""
+"If set, the repository created will compatible to Subversion prior 1.5. This "
+"is only useful when svnqt is running with Subversion 1.5 or above."
+msgstr ""
+"Dacă este definită, depozitul creat va fi compatibil cu subversion anterior "
+"versiunii 1.5. Aceasta nu este necesară decît dacă svnqt rulează cu o "
+"subversion posterior versiunii 1.5."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_presvn15compat)
+#: src/svnfrontend/createrepodlg.ui:145
+#, fuzzy, kde-format
+#| msgid "Compatible to subversion prior 1.5"
+msgid "Compatible to Subversion prior 1.5"
+msgstr "Compatibilitate cu subversion anteriror versiunii 1.5"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn18compat)
+#: src/svnfrontend/createrepodlg.ui:162
+#, fuzzy, kde-format
+#| msgid "Is created repository compatible to subversion prior 1.6"
+msgid "Is created repository compatible to Subversion prior 1.8"
+msgstr "Depozit creat compatibil cu subversion anterior versiunii 1.6"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn18compat)
+#: src/svnfrontend/createrepodlg.ui:165
+#, fuzzy, kde-format
+#| msgid ""
+#| "If set, the repository created will compatible to subversion prior 1.4. "
+#| "This is only useful when svnqt is running with subversion 1.4 or above."
+msgid ""
+"If set, the repository created will compatible to Subversion prior 1.4. This "
+"is only useful when svnqt is running with Subversion 1.8 or above."
+msgstr ""
+"Dacă este definită, depozitul creat va fi compatibil cu subversion anterior "
+"versiunii 1.4. Aceasta nu este necesară decît dacă svnqt rulează cu o "
+"subversion posterior versiunii 1.4."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_presvn18compat)
+#: src/svnfrontend/createrepodlg.ui:168
+#, fuzzy, kde-format
+#| msgid "Compatible to subversion prior 1.6"
+msgid "Compatible to Subversion prior 1.8"
+msgstr "Compatibilitate cu subversion anteriror versiunii 1.6"
+
+#: src/svnfrontend/database/dboverview.cpp:117
+#, fuzzy, kde-format
+#| msgid "Log cache holds %1 logentries and consumes %2 on disk."
+msgid "Log cache holds %1 log entries and consumes %2 on disk."
+msgstr "Jurnalul de prestocare conține %1 intrări și ocupă %2 spațiu pe disc."
+
+#: src/svnfrontend/database/dboverview.cpp:133
+#, fuzzy, kde-format
+#| msgid ""
+#| "Realy clean cache for repository\n"
+#| "%1?"
+msgid ""
+"Really clean cache for repository\n"
+"%1?"
+msgstr ""
+"Chiar curățati prestocarea pentru depozitul\n"
+"%1?"
+
+#: src/svnfrontend/database/dboverview.cpp:134
+#, kde-format
+msgid "Clean repository cache"
+msgstr "Curăță prestocarea depozitului"
+
+#: src/svnfrontend/database/dboverview.cpp:150
+#, fuzzy, kde-format
+#| msgid ""
+#| "Realy clean cache and data for repository\n"
+#| "%1?"
+msgid ""
+"Really clean cache and data for repository\n"
+"%1?"
+msgstr ""
+"Chiar curățați prestocarea și datele pentru depozitul\n"
+"%1?"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DeleteRepositoryButton)
+#: src/svnfrontend/database/dboverview.cpp:151
+#: src/svnfrontend/database/dboverview.ui:59
+#, kde-format
+msgid "Delete repository"
+msgstr "Șterge depozitul"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, DBOverView)
+#: src/svnfrontend/database/dboverview.ui:6
+#, kde-format
+msgid "Overview about cache database content"
+msgstr "Prezentare generală a conținutului bazei de date de prestocare"
+
+#. i18n: ectx: property (text), widget (QLabel, m_RepositoryLabel)
+#: src/svnfrontend/database/dboverview.ui:19
+#, kde-format
+msgid "Known repositories"
+msgstr "Depozite cunoscute"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteCacheButton)
+#. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteCacheButton)
+#: src/svnfrontend/database/dboverview.ui:40
+#: src/svnfrontend/database/dboverview.ui:43
+#, kde-format
+msgid "Delete cache entries for current selected repository"
+msgstr "Șterge intrările de prestocare pentru depozitul curent"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DeleteCacheButton)
+#: src/svnfrontend/database/dboverview.ui:46
+#, kde-format
+msgid "Delete cache"
+msgstr "Șterge prestocarea"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteRepositoryButton)
+#. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteRepositoryButton)
+#: src/svnfrontend/database/dboverview.ui:53
+#: src/svnfrontend/database/dboverview.ui:56
+#, kde-format
+msgid "Delete all entries and settings for selected repository"
+msgstr "Șterge toate intrările și configurările din depozitul selectat"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_SettingsButton)
+#: src/svnfrontend/database/dboverview.ui:66
+#, kde-format
+msgid "Repository Settings"
+msgstr "Configurări depozit"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_StatisticButton)
+#: src/svnfrontend/database/dboverview.ui:73
+#, fuzzy, kde-format
+#| msgid "Settings for current repository"
+msgid "Statistics for repository"
+msgstr "Configurări pentru depozitul curent"
+
+#: src/svnfrontend/database/dbsettings.cpp:39
+#, fuzzy, kde-format
+#| msgid "Settings for %1"
+msgctxt "@title:window"
+msgid "Settings for %1"
+msgstr "Configurări pentru %1"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: src/svnfrontend/database/dbsettings.ui:21
+#, fuzzy, kde-format
+#| msgid "Quick settings"
+msgid "Log cache settings"
+msgstr "Configurări rapide"
+
+#. i18n: ectx: property (text), widget (QCheckBox, dbcfg_noCacheUpdate)
+#: src/svnfrontend/database/dbsettings.ui:27
+#, fuzzy, kde-format
+#| msgid "Don't update logcache on open"
+msgid "Do not update log cache on open"
+msgstr "Nu actualiza jurnalului de prestocare la deschidere"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: src/svnfrontend/database/dbsettings.ui:40
+#, kde-format
+msgid "Prefixes to filter out in revision tree"
+msgstr "Prefixe pentru filtrarea în arborescența de revizie"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#: src/svnfrontend/database/dbsettings.ui:58
+#, kde-format
+msgid "Log and statistics setting"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/svnfrontend/database/dbsettings.ui:70
+#, kde-format
+msgid "Hide logs containing following words"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_log_pattern)
+#: src/svnfrontend/database/dbsettings.ui:77
+#, kde-format
+msgid ""
+"This is a list which words/substrings a log entry must contain so it will be "
+"hidden from log and statistics"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/svnfrontend/database/dbsettings.ui:98
+#, kde-format
+msgid "Do not show commits from following users"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_userslog)
+#: src/svnfrontend/database/dbsettings.ui:105
+#, kde-format
+msgid ""
+"Do not display commits of listed users in log window and statistics view"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, dbcfg_filter_empty_author)
+#: src/svnfrontend/database/dbsettings.ui:115
+#, fuzzy, kde-format
+#| msgid "Don't display contextmenu in Konqueror"
+msgid "Do not display commits without author"
+msgstr "Nu afișa meniul contextual în konqueror/dolphin"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DumpRepoDlg)
+#: src/svnfrontend/dumprepo_dlg.ui:14
+#, fuzzy, kde-format
+#| msgid "Dump a repository"
+msgid "Dump repository"
+msgstr "Dump un depozit"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_UseDeltas)
+#: src/svnfrontend/dumprepo_dlg.ui:35
+#, kde-format
+msgid "Use deltas"
+msgstr "Utilizează diferențiale"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, m_StartNumber)
+#: src/svnfrontend/dumprepo_dlg.ui:54
+#, fuzzy, kde-format
+#| msgid "-1 for Start"
+msgid "-1 for START"
+msgstr "-1 pentru START"
+
+#. i18n: ectx: property (text), widget (QLabel, m_lblEnd)
+#: src/svnfrontend/dumprepo_dlg.ui:67
+#, kde-format
+msgid "End revision:"
+msgstr "Revizie finală:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_incrementalDump)
+#: src/svnfrontend/dumprepo_dlg.ui:94
+#, kde-format
+msgid "incremental Dump"
+msgstr "Dump incremental"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_Rangeonly)
+#: src/svnfrontend/dumprepo_dlg.ui:107
+#, kde-format
+msgid "Dump revision range"
+msgstr "Dump un interval de revizii"
+
+#. i18n: ectx: property (text), widget (QLabel, m_OutfileLabel)
+#: src/svnfrontend/dumprepo_dlg.ui:117
+#, kde-format
+msgid "Dump into:"
+msgstr "Dump în:"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, m_EndNumber)
+#: src/svnfrontend/dumprepo_dlg.ui:136
+#, fuzzy, kde-format
+#| msgid "-1 for Head"
+msgid "-1 for HEAD"
+msgstr "-1 pentru HEAD"
+
+#. i18n: ectx: property (text), widget (QLabel, m_lblStart)
+#: src/svnfrontend/dumprepo_dlg.ui:149
+#, kde-format
+msgid "Start revision:"
+msgstr "Revizie inițială:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_RepoLabel)
+#: src/svnfrontend/dumprepo_dlg.ui:162
+#, kde-format
+msgid "Repository to dump:"
+msgstr "Depozit către dump:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_PatternLabel)
+#: src/svnfrontend/editignorepattern.ui:17
+#, kde-format
+msgid "Patterns to add or remove:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RemoveCheckBox)
+#: src/svnfrontend/editignorepattern.ui:40
+#, kde-format
+msgid "Remove patterns"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, m_DepthLabel)
+#: src/svnfrontend/editignorepattern.ui:49
+#, fuzzy, kde-format
+#| msgid "No ignore"
+msgid "Depth for ignore"
+msgstr "Fără ignorare"
+
+#: src/svnfrontend/editpropsdlg.cpp:32
+#, fuzzy, kde-format
+#| msgid "Add property"
+msgctxt "@title:window"
+msgid "Add Property"
+msgstr "Adaugă proprietate"
+
+#: src/svnfrontend/editpropsdlg.cpp:44 src/svnfrontend/editpropsdlg.cpp:80
+#, kde-format
+msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
+msgstr "Unul din <b>'nativ'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
+
+#: src/svnfrontend/editpropsdlg.cpp:45 src/svnfrontend/editpropsdlg.cpp:81
+#, fuzzy, kde-format
+#| msgid ""
+#| "If present, make the file executable.<br>This property can not be set on "
+#| "a directory. A non-recursive attempt will fail, and a recursive attempt "
+#| "will set the property only on the file children of the folder."
+msgid ""
+"If present, make the file executable.<br/>This property can not be set on a "
+"directory. A non-recursive attempt will fail, and a recursive attempt will "
+"set the property only on the file children of the folder."
+msgstr ""
+"Dacă este prezent, face fișierul executabil.<br>Această proprietate nu poate "
+"fi definită pe un director. O utilizare nerecursivă va eșua, o utilizare "
+"recursivă va defini proprietatea numai pe fișierele din director."
+
+#: src/svnfrontend/editpropsdlg.cpp:49
+#, fuzzy, kde-format
+#| msgid ""
+#| "Keywords to be expanded into the contents of a file.<br>They can be "
+#| "inserted into documents by placing a keyword anchor which is formatted as "
+#| "$KeywordName$.<br>Valid keywords are:<br><b>URL/HeadURL</b> The URL for "
+#| "the head revision of the project.<br><b>Author/LastChangedBy</b> The last "
+#| "person to change the file.<br><b>Date/LastChangedDate</b> The date/time "
+#| "the object was last modified.<br><b>Revision/Rev/LastChangedRevision</b> "
+#| "The last revision the object changed.<br><b>Id</b> A compressed summary "
+#| "of the previous 4 keywords."
+msgid ""
+"Keywords to be expanded into the contents of a file.<br/>They can be "
+"inserted into documents by placing a keyword anchor which is formatted as "
+"$KeywordName$.<br/>Valid keywords are:<br/><b>URL/HeadURL</b> The URL for "
+"the head revision of the project.<br/><b>Author/LastChangedBy</b> The last "
+"person to change the file.<br/><b>Date/LastChangedDate</b> The date/time the "
+"object was last modified.<br/><b>Revision/Rev/LastChangedRevision</b> The "
+"last revision the object changed.<br/><b>Id</b> A compressed summary of the "
+"previous 4 keywords."
+msgstr ""
+"Cuvinte cheie ce vor fi înlocuite în conținutul unui fișier.<br>Pot fi "
+"inserate în documente plasînd o ancoră de cuvînt cheie ce este formatată ca "
+"$KeywordName$.<br>Cuvintele cheie valide sînt:<br><b>URL/HeadURL</b> Adresa "
+"URL pentru revizia \"HEAD\" a proiectului.<br><b>Author/LastChangedBy</b> "
+"Ultima persoană care a modificat fișierul.<br><b>Date/LastChangedDate</b> "
+"Data și ora ultimei modificări a obiectului.<br><b>Revision/Rev/"
+"LastChangedRevision</b> Ultima revizie la care obiectul s-a schimbat."
+"<br><b>Id</b> Un sumar compact al celor 4 cuvinte cheie precedente."
+
+#: src/svnfrontend/editpropsdlg.cpp:58
+#, fuzzy, kde-format
+#| msgid ""
+#| "Set this to any value (e.g. <b>'*'</b>) to enforce locking for this file."
+#| "<br>The file will be set read-only when checked out or updated, "
+#| "indicating that a user must acquire a lock on the file before they can "
+#| "edit and commit changes."
+msgid ""
+"Set this to any value (e.g. <b>'*'</b>) to enforce locking for this file.<br/"
+">The file will be set read-only when checked out or updated, indicating that "
+"a user must acquire a lock on the file before they can edit and commit "
+"changes."
+msgstr ""
+"Poziționați-o pe orice valoare (ex: <b>'*'</b>) pentru a forța blocarea "
+"acestui fișier.<br>Fișierul va fi accesibil numai în citire la preluare sau "
+"actualizare, indicînd că utilizatorul trebuie să obțină blocarea fișierului "
+"înainte de-al putea modifica sau comite."
+
+#: src/svnfrontend/editpropsdlg.cpp:62 src/svnfrontend/editpropsdlg.cpp:93
+#, kde-format
+msgid ""
+"The mimetype of the file. Used to determine whether to merge the file and "
+"how to serve it from Apache. A mimetype beginning with <b>'text/'</b> (or an "
+"absent mimetype) is treated as text. Anything else is treated as binary."
+msgstr ""
+"Mimetype al fișierului. Utilizat pentru determinarea modului de fuzionare al "
+"fișierului și cum îl distribuie Apache. Un mimetype ce începe cu <b>'text/'</"
+"b> (sau cu mimetype absent) este tratat ca text. Orice altceva este tratat "
+"ca binar."
+
+#: src/svnfrontend/editpropsdlg.cpp:87
+#, fuzzy, kde-format
+#| msgid ""
+#| "A newline separated list of module specifiers, each consisting of a "
+#| "relative directory path, optional revision flags, and a URL. For example:"
+#| "<br><nobr><b>foo http://example.com/repos/projectA</b></"
+#| "nobr><br><nobr><b>foo/bar -r 1234 http://example.com/repos/projectB</b></"
+#| "nobr>"
+msgid ""
+"A newline separated list of module specifiers, each consisting of a relative "
+"directory path, optional revision flags, and a URL. For example:<br/"
+"><nobr><b>foo http://example.com/repos/projectA</b></nobr><br/><nobr><b>foo/"
+"bar -r 1234 http://example.com/repos/projectB</b></nobr>"
+msgstr ""
+"O listă de module separate prin linie nouă (CR), fiecare conținînd o cale "
+"relativă, o specificație de revizie opțională și o adresă URL. De exemplu:"
+"<br><nobr><b>foo http://example.com/repos/projectA</b></"
+"nobr><br><nobr><b>foo/bar -r 1234 http://example.com/repos/projectB</b></"
+"nobr>"
+
+#: src/svnfrontend/editpropsdlg.cpp:92
+#, kde-format
+msgid "A newline separated list of file patterns to ignore."
+msgstr "O linie nouă separă lista modificărilor de ignorat."
+
+#: src/svnfrontend/editpropsdlg.cpp:97
+#, kde-format
+msgid ""
+"Label text to show for the edit box where the user enters the issue number."
+msgstr ""
+"Eticheta text de afișat pentru o căsuță de editare în care utilizatorul "
+"introduce numărul emisiei."
+
+#: src/svnfrontend/editpropsdlg.cpp:100
+#, fuzzy, kde-format
+#| msgid ""
+#| "URL pointing to the issue tracker. It must contain <b>%BUGID%</b> which "
+#| "gets replaced with the bug issue number. Example:<br><nobr><b>http://"
+#| "example.com/mantis/view.php?id=%BUGID%</b></nobr>"
+msgid ""
+"URL pointing to the issue tracker. It must contain <b>%BUGID%</b> which gets "
+"replaced with the bug issue number. Example:<br/><nobr><b>http://example.com/"
+"mantis/view.php?id=%BUGID%</b></nobr>"
+msgstr ""
+"Adresă URL indicînd problema urmărită. Trebuie să conțină <b>%BUGID%</b> ce "
+"va fi înlocuit cu numărul de referință al erorii. Exemplu:"
+"<br><nobr><b>http://example.com/mantis/view.php?id=%BUGID%</b></nobr>"
+
+#: src/svnfrontend/editpropsdlg.cpp:103
+#, kde-format
+msgid ""
+"String which is appended to a log message when an issue number is entered. "
+"The string must contain <b>%BUGID%</b> which gets replaced with the bug "
+"issue number."
+msgstr ""
+"Șir adăugat unui mesaj din jurnal cînd un numrăr de referință de eroare este "
+"introdus. Acesta trebuie să conțină <b>%BUGID%</b> ce va fi înlocuit de "
+"numărul de referință al erorii."
+
+#: src/svnfrontend/editpropsdlg.cpp:106
+#, fuzzy, kde-format
+#| msgid ""
+#| "Set to <b>'yes'</b> if a warning shall be shown when no issue is entered "
+#| "in the commit dialog. Possible values:<br><b>'true'</b>/<b>'yes'</b> or "
+#| "<b>'false'</b>/<b>'no'</b>."
+msgid ""
+"Set to <b>'yes'</b> if a warning shall be shown when no issue is entered in "
+"the commit dialog. Possible values:<br/><b>'true'</b>/<b>'yes'</b> or "
+"<b>'false'</b>/<b>'no'</b>."
+msgstr ""
+"Poziționați pe <b>'yes'</b> dacă trebuie afișat un avertisment cînd nici o "
+"problemă nu este introdusă în căsuța de dialog a propagării. Valori posibile:"
+"<br><b>'true'</b>/<b>'yes'</b> or <b>'false'</b>/<b>'no'</b>."
+
+#: src/svnfrontend/editpropsdlg.cpp:109
+#, fuzzy, kde-format
+#| msgid ""
+#| "Set to <b>'false'</b> if your bugtracking system has issues which are "
+#| "referenced not by numbers.<br>Possible values: <b>'true'</b> or "
+#| "<b>'false'</b>."
+msgid ""
+"Set to <b>'false'</b> if your bugtracking system has issues which are "
+"referenced not by numbers.<br/>Possible values: <b>'true'</b> or <b>'false'</"
+"b>."
+msgstr ""
+"Poziționați pe <b>'false'</b> dacă sistemul vostru de gestiune de erori "
+"conține probleme care nu sînt referite prin numere.<br>Valori posibile: "
+"<b>'true'</b> or <b>'false'</b>."
+
+#: src/svnfrontend/editpropsdlg.cpp:112
+#, kde-format
+msgid ""
+"Set to <b>'false'</b> if you want the bugtracking ID to be inserted at the "
+"top of the log message. The default is <b>'true'</b> which means the "
+"bugtracking ID is appended to the log message."
+msgstr ""
+"Poziționați pe <b>'false'</b> dacă doriți ca identificatorul de problemă să "
+"fie inserat la începutul mesajului din jurnal. Valoarea implicită este "
+"<b>'true'</b> ce înseamnă că identificatorul de problemă este inserat la "
+"sfîrșitul mesajului din jurnal."
+
+#: src/svnfrontend/editpropsdlg.cpp:116
+#, fuzzy, kde-format
+#| msgid ""
+#| "Two regular expressions separated by a newline.<br>The first expression "
+#| "is used to find a string referring to an issue, the second expression is "
+#| "used to extract the bare bug ID from that string."
+msgid ""
+"Two regular expressions separated by a newline.<br/>The first expression is "
+"used to find a string referring to an issue, the second expression is used "
+"to extract the bare bug ID from that string."
+msgstr ""
+"Două expresii regulate separate printr-o linie nouă.<br>Prima expresie este "
+"utilizată pentru găsirea șirului referitor la o problemă, a doua expresie "
+"este utilizată pentru extragerea identificatorului erorii din acel șir."
+
+#: src/svnfrontend/editpropsdlg.cpp:123
+#, fuzzy, kde-format
+#| msgid "Delete property"
+msgid "Select or enter new property"
+msgstr "Șterge proprietate"
+
+#: src/svnfrontend/editpropsdlg.cpp:148
+#, kde-format
+msgid "No help for this property available"
+msgstr ""
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, EditPropsDlg)
+#: src/svnfrontend/editpropsdlg.ui:14
+#, kde-format
+msgid "Modify property"
+msgstr "Modifică proprietatea"
+
+#. i18n: ectx: property (text), widget (QLabel, m_NameLabel)
+#: src/svnfrontend/editpropsdlg.ui:22
+#, kde-format
+msgid "Property name:"
+msgstr "Denumirea proprietății:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_ValueLabel)
+#: src/svnfrontend/editpropsdlg.ui:46
+#, kde-format
+msgid "Property value:"
+msgstr "Valoarea proprietății:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, helpButton)
+#: src/svnfrontend/editpropsdlg.ui:69
+#, kde-format
+msgid "Click for short info about pre-defined property name"
+msgstr "Clicați pe detaliile sumare despre numele proprietății predefinite"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, CheckoutInfo)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:14
+#, kde-format
+msgid "Checkout info"
+msgstr "Detaliile verificării"
+
+#. i18n: ectx: property (text), widget (QLabel, m_TargetLabel)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:26
+#, kde-format
+msgid "Select target directory:"
+msgstr "Alege dosarul destinație:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_UrlLabel)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:40
+#, kde-format
+msgid "Enter URL:"
+msgstr "Introduceți adresa URL:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_ignoreExternals)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:67
+#, kde-format
+msgid "Ignore externals while operation"
+msgstr "Ignoră referințele externe în timpul operației"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_ignoreExternals)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:70
+#, kde-format
+msgid "Ignore externals"
+msgstr "Ignoră referințele externe"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_overwriteButton)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:77
+#, fuzzy, kde-format
+#| msgid "May existing unversioned items ovewritten"
+msgid "May existing unversioned items overwritten"
+msgstr "Elementele existente neversionate pot fi suprascrise"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_overwriteButton)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:80
+#, kde-format
+msgid "Overwrite existing"
+msgstr "Suprascrie existentul"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_IgnoreKeywords)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:93
+#, fuzzy, kde-format
+#| msgid "Ignore externals"
+msgid "Ignore keywords"
+msgstr "Ignoră referințele externe"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_CreateDirButton)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:110
+#, fuzzy, kde-format
+#| msgid "Append source url name to subfolder"
+msgid "Append source URL name to subfolder"
+msgstr "Adaugă numele adresei URL sursă la subdirector"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_ShowExplorer)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:120
+#, kde-format
+msgid "Open after job"
+msgstr "Deschide după lucru"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:43
+#, kde-format
+msgid "Property"
+msgstr "Proprietate"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:44
+#, kde-format
+msgid "Value"
+msgstr "Valoare"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:109
+#: src/svnfrontend/propertiesdlg.cpp:114 src/svnfrontend/propertiesdlg.cpp:165
+#, kde-format
+msgid ""
+"This property may not set by users.\n"
+"Rejecting it."
+msgstr ""
+"Această proprietare nu poate fi definită de utilizatori.\n"
+"Se respinge."
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:109
+#: src/svnfrontend/propertiesdlg.cpp:114 src/svnfrontend/propertiesdlg.cpp:165
+#, kde-format
+msgid "Protected property"
+msgstr "Proprietate protejată"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:114
+#: src/svnfrontend/propertiesdlg.cpp:118 src/svnfrontend/propertiesdlg.cpp:169
+#, kde-format
+msgid ""
+"A property with that name exists.\n"
+"Rejecting it."
+msgstr ""
+"Există deja o proprietate cu acest nume.\n"
+"Se respinge."
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:114
+#: src/svnfrontend/propertiesdlg.cpp:118 src/svnfrontend/propertiesdlg.cpp:169
+#, kde-format
+msgid "Double property"
+msgstr "Proprietate dublă"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, RangeInput)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:6
+#, kde-format
+msgid "Revisions"
+msgstr "Revizii"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_startRevBox)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:12
+#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:209
+#, kde-format
+msgid "Start with revision"
+msgstr "Începe cu revizia"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, m_startWorkingButton)
+#. i18n: ectx: property (toolTip), widget (QRadioButton, m_stopWorkingButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:23
+#: src/svnfrontend/fronthelpers/rangeinput.ui:140
+#, kde-format
+msgid "Select current working copy changes"
+msgstr "Selecționează modificările copiei de lucru curente"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startWorkingButton)
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopWorkingButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:26
+#: src/svnfrontend/fronthelpers/rangeinput.ui:143
+#, kde-format
+msgid "WORKING"
+msgstr "WORKING"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startNumberButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:56
+#, kde-format
+msgid "N&umber"
+msgstr "N&umăr"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startHeadButton)
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopHeadButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:66
+#: src/svnfrontend/fronthelpers/rangeinput.ui:120
+#, kde-format
+msgid "HEAD"
+msgstr "HEAD"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startStartButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:73
+#, kde-format
+msgid "S&TART"
+msgstr "S&TART"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_stopRevBox)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:85
+#, kde-format
+msgid "Stop with revision"
+msgstr "Oprire la revizia"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopNumberButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:93
+#, kde-format
+msgid "Number"
+msgstr "Număr"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopStartButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:113
+#, kde-format
+msgid "START"
+msgstr "START"
+
+#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:62
+#, fuzzy, kde-format
+#| msgid "Select revision"
+msgctxt "@title:window"
+msgid "Select Revisions"
+msgstr "Alegeți o revizie"
+
+#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:205
+#, kde-format
+msgid "Select revision"
+msgstr "Alegeți o revizie"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_RevisionButton)
+#: src/svnfrontend/fronthelpers/revisionbutton.ui:22
+#, kde-format
+msgid "-1"
+msgstr "-1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:146
+#, kde-format
+msgid ""
+"Could not run process \"%1\".\n"
+"\n"
+"Process stopped with message:\n"
+"%2"
+msgstr ""
+"Nu sa putut lansa procesul \"%1\".\n"
+"\n"
+"Procesul s-a oprit cu mesajul:\n"
+"%2"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:335
+#, kde-format
+msgid "Error running the graph layouting tool.\n"
+msgstr "Eroare la executarea uneltei de aranjare în pagină a graficelor.\n"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:336
+#, kde-format
+msgid "Please check that 'dot' is installed (package GraphViz)."
+msgstr "Verificați dacă 'dot' este instalat (pachetul GraphViz)."
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:425
+#, kde-format
+msgid "Deleted at revision %1"
+msgstr "Șters la revizia %1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:428
+#, kde-format
+msgid "Added at revision %1 as %2"
+msgstr "Adăugat la revizia %1 ca %2"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:434
+#, kde-format
+msgid "Copied to %1 at revision %2"
+msgstr "Copiat în %1 la revizia %2"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:437
+#, kde-format
+msgid "Renamed to %1 at revision %2"
+msgstr "Renumit în %1 la revizia %2"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:440
+#, kde-format
+msgid "Modified at revision %1"
+msgstr "Modificat la revizia %1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:443
+#, kde-format
+msgid "Replaced at revision %1"
+msgstr "Înlocuit la revizia %1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:446
+#, kde-format
+msgid "Revision %1"
+msgstr "Revizia %1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:466
+#, fuzzy, kde-format
+#| msgid "Could not open tempfile %1 for writing."
+msgid "Could not open temporary file %1 for writing."
+msgstr "Nu s-a putut deschide pentru scriere fișierul temporar %1."
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:561
+#, kde-format
+msgid "<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>"
+msgstr "<br>Revizie: %1<br>Autor: %2<br>Dată: %3<br>Jurnal: %4</html>"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:569
+#, kde-format
+msgid "<b>Revision</b>%1%2%3"
+msgstr "<b>Revizie</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:570
+#, kde-format
+msgid "<b>Author</b>%1%2%3"
+msgstr "<b>Autor</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:571
+#, kde-format
+msgid "<b>Date</b>%1%2%3"
+msgstr "<b>Dată</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:572
+#, kde-format
+msgid "<b>Log</b>%1%2%3"
+msgstr "<b>Jurnal</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:841
+#, kde-format
+msgid "Diff to previous"
+msgstr "Diferențe față de precedentul"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:845
+#, kde-format
+msgid "Diff to selected item"
+msgstr "Diferențe față de elementul selectat"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:848
+#: src/svnfrontend/svnlogdlgimp.cpp:515
+#, kde-format
+msgid "Cat this version"
+msgstr "Afișează această versiune"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:851
+#, kde-format
+msgid "Unselect item"
+msgstr "Deselecționează elementul"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:853
+#, kde-format
+msgid "Select item"
+msgstr "Selecționează elementul"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:856
+#, kde-format
+msgid "Display details"
+msgstr "Arată detaliile"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:859
+#, kde-format
+msgid "Rotate counter-clockwise"
+msgstr "Întoarce în sens contrar acelor de ceasornic"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:860
+#, kde-format
+msgid "Rotate clockwise"
+msgstr "Întoarce în sensul acelor de ceasornic"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:866
+#: src/svnfrontend/graphtree/revgraphview.cpp:886
+#, fuzzy, kde-format
+#| msgid "Save tree as png"
+msgid "Save tree as PNG"
+msgstr "Înregistrează arboreșcența ca png"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:886
+#, kde-format
+msgid "Image (*.png)"
+msgstr ""
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:94
+#: src/svnfrontend/svnactions.cpp:294
+#, fuzzy, kde-format
+#| msgid "Get Logs"
+msgctxt "@title:window"
+msgid "Logs"
+msgstr "Recuperează jurnalele"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:94
+#: src/svnfrontend/svnactions.cpp:294
+#, fuzzy, kde-format
+#| msgid "Getting logs - hit cancel for abort"
+msgid "Getting logs - hit Cancel for abort"
+msgstr "Preluare jurnal - anulați pentru abandonare"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:104
+#, fuzzy, kde-format
+#| msgid "No logcache possible due broken database and networking not allowed."
+msgid "No log cache possible due broken database and networking not allowed."
+msgstr ""
+"Fără jurnal de prestocare datorită bazei de date corupte și accesului "
+"interzis la rețea."
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:104
+#: src/svnfrontend/graphtree/revisiontree.cpp:109
+#, kde-format
+msgid ""
+"Could not retrieve logs, reason:\n"
+"%1"
+msgstr ""
+"Nu s-au putut prelua jurnalele, cauza:\n"
+"%1"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:134
+#, kde-format
+msgid "Scanning the logs for %1"
+msgstr "Se analizează jurnalele pentru %1"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:134
+#, kde-format
+msgid "Cancel"
+msgstr "Anulează"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:135
+#, fuzzy, kde-format
+#| msgid "Scanning logs"
+msgctxt "@title:window"
+msgid "Scanning logs"
+msgstr "Analizare jurnale"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:224
+#: src/svnfrontend/graphtree/revisiontree.cpp:262
+#: src/svnfrontend/graphtree/revisiontree.cpp:311
+#, kde-format
+msgid "%1<br>Check change entry %2 of %3"
+msgstr "%1<br>Verificarea modificărilor intrării %2 din %3"
+
+#. i18n: ectx: property (text), widget (QLabel, m_Srclabel)
+#: src/svnfrontend/hotcopydlg.ui:11
+#, kde-format
+msgid "Repository to copy:"
+msgstr "Depozit de copiat:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_Destlabel)
+#: src/svnfrontend/hotcopydlg.ui:31
+#, kde-format
+msgid "Destination folder:"
+msgstr "Dosarul destinație:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_Cleanlogs)
+#: src/svnfrontend/hotcopydlg.ui:51
+#, kde-format
+msgid "Clean logs"
+msgstr "Curăță jurnalele"
+
+#: src/svnfrontend/importdir_logmsg.cpp:38
+#, kde-format
+msgid "No ignore"
+msgstr "Fără ignorare"
+
+#: src/svnfrontend/importdir_logmsg.cpp:39
+#, kde-format
+msgid "If set, add files or directories that match ignore patterns."
+msgstr ""
+"Dacă este definit, adaugă fișierele sau dosarele ce conțin modelele de "
+"ignorat"
+
+#: src/svnfrontend/importdir_logmsg.cpp:44
+#, kde-format
+msgid "Ignore unknown node types"
+msgstr "Ignoră nodurile de tip necunoscut"
+
+#: src/svnfrontend/importdir_logmsg.cpp:45
+#, kde-format
+msgid "Should files with unknown node types be ignored"
+msgstr "Fișierele unui nod de tip necunoscut ar trebui ignorate"
+
+#: src/svnfrontend/importdir_logmsg.cpp:46
+#, kde-format
+msgid ""
+"Ignore files of which the node type is unknown, such as device files and "
+"pipes."
+msgstr ""
+"Ignoră fișierele nodurilor de tip necunoscut, precum fișierele dispozitiv și "
+"conector pipe"
+
+#: src/svnfrontend/importdir_logmsg.cpp:80
+#, kde-format
+msgid "(Last part)"
+msgstr "(Ultima parte)"
+
+#: src/svnfrontend/importdir_logmsg.cpp:80
+#, fuzzy, kde-format
+#| msgid "Create subdir %1 on import"
+msgid "Create subdirectory %1 on import"
+msgstr "Creare sub-director %1 la importare"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel4)
+#: src/svnfrontend/loaddmpdlg.ui:11
+#, kde-format
+msgid "Load into repository:"
+msgstr "Încarcă în depozitul:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_UuidGroup)
+#: src/svnfrontend/loaddmpdlg.ui:24
+#, kde-format
+msgid "Uuid action"
+msgstr "Acțiune UUID"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_UUidForce)
+#. i18n: ectx: property (text), widget (QCheckBox, m_ForceCheck)
+#: src/svnfrontend/loaddmpdlg.ui:30 src/svnfrontend/merge_dlg.ui:116
+#, kde-format
+msgid "Force"
+msgstr "Forțează"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_UUidIgnore)
+#: src/svnfrontend/loaddmpdlg.ui:40
+#, kde-format
+msgid "Ignore"
+msgstr "Ignoră"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_UUidDefault)
+#: src/svnfrontend/loaddmpdlg.ui:50
+#, kde-format
+msgid "Default"
+msgstr "Implicit"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_UsePre)
+#: src/svnfrontend/loaddmpdlg.ui:66
+#, kde-format
+msgid "Use pre-commit hook"
+msgstr "Utilizează o buclă de pre-propagare"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_UsePost)
+#: src/svnfrontend/loaddmpdlg.ui:76
+#, kde-format
+msgid "Use post-commit hook"
+msgstr "Utilizează o buclă de post-propagare"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, textLabel5)
+#. i18n: ectx: property (toolTip), widget (KLineEdit, m_Rootfolder)
+#: src/svnfrontend/loaddmpdlg.ui:86 src/svnfrontend/loaddmpdlg.ui:144
+#, fuzzy, kde-format
+#| msgid "Path to load the dump into (see contexthelp)"
+msgid "Path to load the dump into (see context help)"
+msgstr "Calea în acre trebuie încărcat dump-ul (vezi contexthelp)"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, textLabel5)
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, m_Rootfolder)
+#: src/svnfrontend/loaddmpdlg.ui:89 src/svnfrontend/loaddmpdlg.ui:147
+#, kde-format
+msgid ""
+"If not empty, load the dump into a specific folder instead into root of "
+"repository. This folder must exist before loading the dump."
+msgstr ""
+"Dacă nu este gol, încarcă dump-ul într-un dosar specific în locul rărăcinii "
+"depozitului. Acest dosar trebuie să existe înaintea încărcării dump-ului."
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel5)
+#: src/svnfrontend/loaddmpdlg.ui:92
+#, kde-format
+msgid "Load into folder:"
+msgstr "Încarcă în dosarul:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#: src/svnfrontend/loaddmpdlg.ui:105
+#, kde-format
+msgid "Dump file:"
+msgstr "Fișier dump:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_validateProps)
+#: src/svnfrontend/loaddmpdlg.ui:118
+#, kde-format
+msgid "Validate the properties on load (only Subversion 1.7 or newer)"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_validateProps)
+#: src/svnfrontend/loaddmpdlg.ui:121
+#, fuzzy, kde-format
+#| msgid "Modify properties"
+msgid "Validate properties"
+msgstr "Modifică proprietățile"
+
+#: src/svnfrontend/maintreewidget.cpp:271
+#, fuzzy, kde-format
+#| msgid "Networked URL to open but networking is disabled!"
+msgid "Networked URL to open but networking is disabled."
+msgstr "Adresa URL de deschis, dar rețeaua este dezacivată!"
+
+#: src/svnfrontend/maintreewidget.cpp:497
+#, kde-format
+msgid "History of item"
+msgstr "Istoricul elementului"
+
+#: src/svnfrontend/maintreewidget.cpp:498
+#: src/svnfrontend/maintreewidget.cpp:501
+#: src/svnfrontend/maintreewidget.cpp:505
+#, kde-format
+msgid "History"
+msgstr "Istoric"
+
+#: src/svnfrontend/maintreewidget.cpp:499
+#, kde-format
+msgid "Displays the history log of selected item"
+msgstr "Afișează jurnalul istoricului elementului slectat"
+
+#: src/svnfrontend/maintreewidget.cpp:500
+#: src/svnfrontend/maintreewidget.cpp:504
+#, kde-format
+msgid "History of item ignoring copies"
+msgstr "Istoricul elementului ignorînd copiile"
+
+#: src/svnfrontend/maintreewidget.cpp:502
+#: src/svnfrontend/maintreewidget.cpp:506
+#, kde-format
+msgid "Displays the history log of selected item without following copies"
+msgstr ""
+"Afișează jurnalul istoricului elementului selectat fără copiile următoare"
+
+#: src/svnfrontend/maintreewidget.cpp:508
+#, kde-format
+msgid "Full revision tree"
+msgstr "Arboreșcentă completă de revizie"
+
+#: src/svnfrontend/maintreewidget.cpp:509
+#, kde-format
+msgid "Shows history of item as linked tree"
+msgstr "Afișează istoricul elementului ca un arbore înlănțuit"
+
+#: src/svnfrontend/maintreewidget.cpp:510
+#, kde-format
+msgid "Partial revision tree"
+msgstr "Arboreșcență parțială de revizie"
+
+#: src/svnfrontend/maintreewidget.cpp:511
+#, kde-format
+msgid "Shows history of item as linked tree for a revision range"
+msgstr ""
+"Afișează istoricul elementului ca un arbore înlănțuit pentru un interval de "
+"revizie"
+
+#: src/svnfrontend/maintreewidget.cpp:513
+#: src/svnfrontend/maintreewidget.cpp:514
+#, kde-format
+msgid "Properties"
+msgstr "Proprietăți"
+
+#: src/svnfrontend/maintreewidget.cpp:515
+#, kde-format
+msgid "Display Properties"
+msgstr "Afișează proprietățile"
+
+#: src/svnfrontend/maintreewidget.cpp:516
+#, kde-format
+msgid "Display last changes"
+msgstr "Afisează ultimele modificări"
+
+#: src/svnfrontend/maintreewidget.cpp:517
+#, kde-format
+msgid "Display last changes as difference to previous commit."
+msgstr "Afișează ultimele modificări ca diferență față de ultima propagare."
+
+#: src/svnfrontend/maintreewidget.cpp:518
+#, kde-format
+msgid "Details"
+msgstr "Detalii"
+
+#: src/svnfrontend/maintreewidget.cpp:519
+#, kde-format
+msgid "Show details about selected item"
+msgstr "Afișează detaliile elementului selecționat"
+
+#: src/svnfrontend/maintreewidget.cpp:520
+#, kde-format
+msgid "Move"
+msgstr "Mută"
+
+#: src/svnfrontend/maintreewidget.cpp:521
+#, kde-format
+msgid "Moves or renames current item"
+msgstr "Mută sau redenumește elementul curent"
+
+#: src/svnfrontend/maintreewidget.cpp:523
+#, kde-format
+msgid "Create a copy of current item"
+msgstr "Creează o copie a elementului curent"
+
+#: src/svnfrontend/maintreewidget.cpp:524
+#, kde-format
+msgid "Check for updates"
+msgstr "Verifică dacă există actualizări"
+
+#: src/svnfrontend/maintreewidget.cpp:525
+#, kde-format
+msgid ""
+"Check if current working copy has items with newer version in repository"
+msgstr ""
+"Verifică dacă copia de lucru are elemente cu versiunea nouă din depozit"
+
+#: src/svnfrontend/maintreewidget.cpp:527
+#, kde-format
+msgid "Check updates"
+msgstr "Verificare actualizări"
+
+#: src/svnfrontend/maintreewidget.cpp:530
+#, kde-format
+msgid "Blame"
+msgstr "Blamare"
+
+#: src/svnfrontend/maintreewidget.cpp:531
+#: src/svnfrontend/maintreewidget.cpp:534
+#, kde-format
+msgid ""
+"Output the content of specified files or URLs with revision and author "
+"information in-line."
+msgstr ""
+"Afișează conținutul fișierelor sau adreselor URL specificate cu informațiile "
+"lor de revizie și autor."
+
+#: src/svnfrontend/maintreewidget.cpp:533
+#, kde-format
+msgid "Blame range"
+msgstr "Interval de blamare"
+
+#: src/svnfrontend/maintreewidget.cpp:537
+#, kde-format
+msgid "Cat head"
+msgstr "Afișează antetul"
+
+#: src/svnfrontend/maintreewidget.cpp:538
+#, kde-format
+msgid "Output the content of specified files or URLs."
+msgstr "Afișează conținutul fișierelor sau adreselor URL specificate."
+
+#: src/svnfrontend/maintreewidget.cpp:540
+#, kde-format
+msgid "Cat revision..."
+msgstr "Afișare revizie..."
+
+#: src/svnfrontend/maintreewidget.cpp:541
+#, kde-format
+msgid "Output the content of specified files or URLs at specific revision."
+msgstr ""
+"Afișează conținutul fișierelor sau adreselor URL specificate la o revizie "
+"dată."
+
+#: src/svnfrontend/maintreewidget.cpp:544
+#, kde-format
+msgid "Lock current items"
+msgstr "Blochează elementele curente"
+
+#: src/svnfrontend/maintreewidget.cpp:545
+#, kde-format
+msgid "Try lock current item against changes from other users"
+msgstr ""
+"Încearcă blocarea elementului curent împotriva modificării de către ceilalți "
+"utilizatori"
+
+#: src/svnfrontend/maintreewidget.cpp:547
+#, kde-format
+msgid "Unlock current items"
+msgstr "Deblochează elementele curente"
+
+#: src/svnfrontend/maintreewidget.cpp:548
+#, kde-format
+msgid "Free existing lock on current item"
+msgstr "Deblochează elemntul curent"
+
+#: src/svnfrontend/maintreewidget.cpp:552 src/svnfrontend/svnactions.cpp:657
+#, kde-format
+msgid "New folder"
+msgstr "Dosar nou"
+
+#: src/svnfrontend/maintreewidget.cpp:553
+#, kde-format
+msgid "Create a new folder"
+msgstr "Creează un dosar nou"
+
+#: src/svnfrontend/maintreewidget.cpp:554
+#, kde-format
+msgid "Switch repository"
+msgstr "Schimbă depozitul"
+
+#: src/svnfrontend/maintreewidget.cpp:555
+#, kde-format
+msgid "Switch repository path of current working copy path (\"svn switch\")"
+msgstr "Schimbă calea depozitului copiei de lucru curente (\"svn switch\")"
+
+#: src/svnfrontend/maintreewidget.cpp:558
+#, fuzzy, kde-format
+#| msgid "Relocate current working copy url"
+msgid "Relocate current working copy URL"
+msgstr "Restabilește adresa URL a copiei de lucru curente"
+
+#: src/svnfrontend/maintreewidget.cpp:559
+#, fuzzy, kde-format
+#| msgid "Relocate url of current working copy path to other url"
+msgid "Relocate URL of current working copy path to other URL"
+msgstr "Restabilește adresa URL a copiei de lucru curente la altă adresă URL"
+
+#: src/svnfrontend/maintreewidget.cpp:562
+#, kde-format
+msgid "Check for unversioned items"
+msgstr "Verifică după elemente neversionate"
+
+#: src/svnfrontend/maintreewidget.cpp:563
+#, kde-format
+msgid "Unversioned"
+msgstr "Neversionat"
+
+#: src/svnfrontend/maintreewidget.cpp:564
+#, kde-format
+msgid "Browse folder for unversioned items and add them if wanted."
+msgstr ""
+"Răsfoiți dosarele după elementele neversionate și adăugați-le dacă doriți"
+
+#: src/svnfrontend/maintreewidget.cpp:567
+#, kde-format
+msgid "Open repository of working copy"
+msgstr "Deschide depozitul copiei de lucru"
+
+#: src/svnfrontend/maintreewidget.cpp:569
+#, kde-format
+msgid "Opens the repository the current working copy was checked out from"
+msgstr "Deschide depozitul din care copia de lucru curentă a fost recuperată"
+
+#: src/svnfrontend/maintreewidget.cpp:571
+#, kde-format
+msgid "Cleanup"
+msgstr "Curăță"
+
+#: src/svnfrontend/maintreewidget.cpp:572
+#, kde-format
+msgid ""
+"Recursively clean up the working copy, removing locks, resuming unfinished "
+"operations, etc."
+msgstr ""
+"Curăță copia de lucru curentă în mod recursiv, deblocînd fișierele, reluînd "
+"operațiunile neterminate, etc."
+
+#: src/svnfrontend/maintreewidget.cpp:573
+#, kde-format
+msgid "Import folders into current"
+msgstr "Importă dosare în dosarul curent"
+
+#: src/svnfrontend/maintreewidget.cpp:575
+#, fuzzy, kde-format
+#| msgid "Import folder content into current url"
+msgid "Import folder content into current URL"
+msgstr "Importă conținutul unui director în adresa URL curentă"
+
+#: src/svnfrontend/maintreewidget.cpp:579
+#, kde-format
+msgid "Add selected files/dirs"
+msgstr "Adaugă fișierele/dosarele selectate"
+
+#: src/svnfrontend/maintreewidget.cpp:580
+#, kde-format
+msgid "Adding selected files and/or directories to repository"
+msgstr "Adaugă fișierele și/sau dosarele selectate la depozit"
+
+#: src/svnfrontend/maintreewidget.cpp:582
+#, kde-format
+msgid "Add selected files/dirs recursive"
+msgstr "Adaugă recursiv fișierele/dosarele selectate"
+
+#: src/svnfrontend/maintreewidget.cpp:584
+#, kde-format
+msgid ""
+"Adding selected files and/or directories to repository and all subitems of "
+"folders"
+msgstr ""
+"Adaugă fișierele și/sau dosarele selectate la depozit cît și toate sub-"
+"elementele dosarelor"
+
+#: src/svnfrontend/maintreewidget.cpp:586
+#, kde-format
+msgid "Delete selected files/dirs"
+msgstr "Șterge fișierele/dosarele selectate"
+
+#: src/svnfrontend/maintreewidget.cpp:588
+#, kde-format
+msgid "Deleting selected files and/or directories from repository"
+msgstr "Șterge fișierele și/sau dosarele selectate din depozit"
+
+#: src/svnfrontend/maintreewidget.cpp:589
+#, fuzzy, kde-format
+msgid "Delete folder"
+msgstr "Șterge proprietate"
+
+#: src/svnfrontend/maintreewidget.cpp:590
+#, fuzzy, kde-format
+msgid "Deleting selected directories from repository"
+msgstr "Șterge fișierele și/sau directoarele selectate din depozit"
+
+#: src/svnfrontend/maintreewidget.cpp:592
+#, kde-format
+msgid "Revert current changes"
+msgstr "Revenire la starea inițială"
+
+#: src/svnfrontend/maintreewidget.cpp:594
+#, kde-format
+msgid "Mark resolved"
+msgstr "Marchează ca rezolvat"
+
+#: src/svnfrontend/maintreewidget.cpp:595
+#, kde-format
+msgid "Marking files or dirs resolved"
+msgstr "Marchează fișierele sau dosarele ca rezolvate"
+
+#: src/svnfrontend/maintreewidget.cpp:597
+#, kde-format
+msgid "Resolve conflicts"
+msgstr "Rezolvă conflictele"
+
+#: src/svnfrontend/maintreewidget.cpp:599
+#, kde-format
+msgid "Ignore/Unignore current item"
+msgstr "Ignoră/Nu ignora elementul curent"
+
+#: src/svnfrontend/maintreewidget.cpp:600
+#: src/svnfrontend/maintreewidget.cpp:601
+#, kde-format
+msgid "Add or Remove ignore pattern"
+msgstr ""
+
+#: src/svnfrontend/maintreewidget.cpp:603
+#: src/svnfrontend/maintreewidget.cpp:666
+#, kde-format
+msgid "Update to head"
+msgstr "Actualizare de antet"
+
+#: src/svnfrontend/maintreewidget.cpp:604
+#, kde-format
+msgctxt "Menu item"
+msgid "Update"
+msgstr "Actualizează"
+
+#: src/svnfrontend/maintreewidget.cpp:605
+#, kde-format
+msgid "Update to revision..."
+msgstr "Actualizare la revizia..."
+
+#: src/svnfrontend/maintreewidget.cpp:606
+#: src/svnfrontend/maintreewidget.cpp:607
+#: src/svnfrontend/maintreewidget.cpp:665 src/svnfrontend/svnactions.cpp:1018
+#, kde-format
+msgid "Commit"
+msgstr "Comite"
+
+#: src/svnfrontend/maintreewidget.cpp:609
+#: src/svnfrontend/maintreewidget.cpp:611
+#, kde-format
+msgid "Diff local changes"
+msgstr "Diferențiază modificările locale"
+
+#: src/svnfrontend/maintreewidget.cpp:610
+#: src/svnfrontend/maintreewidget.cpp:612
+#, fuzzy, kde-format
+#| msgid ""
+#| "Diff working copy against BASE (last checked out version) - doesn't "
+#| "require access to repository"
+msgid ""
+"Diff working copy against BASE (last checked out version) - does not require "
+"access to repository"
+msgstr ""
+"Diferențiază copia de lucru cu BAZA (ultima versiune verificată) - nu "
+"necesită accesul la depozit"
+
+#: src/svnfrontend/maintreewidget.cpp:615
+#, kde-format
+msgid "Diff against HEAD"
+msgstr "Diferențiază față de HEAD"
+
+#: src/svnfrontend/maintreewidget.cpp:616
+#, kde-format
+msgid ""
+"Diff working copy against HEAD (last checked in version)- requires access to "
+"repository"
+msgstr ""
+"Diferențiază copia de lucru cu HEAD (ultima versiune verificată) - necesită "
+"acces la depozit"
+
+#: src/svnfrontend/maintreewidget.cpp:619
+#: src/svnfrontend/maintreewidget.cpp:622
+#, kde-format
+msgid "Diff items"
+msgstr "Diferențiază elemente"
+
+#: src/svnfrontend/maintreewidget.cpp:620
+#: src/svnfrontend/maintreewidget.cpp:623
+#, kde-format
+msgid "Diff two items"
+msgstr "Diferențiază două elemente"
+
+#: src/svnfrontend/maintreewidget.cpp:627
+#, kde-format
+msgid "Merge two revisions"
+msgstr "Fuzionează două revizii"
+
+#: src/svnfrontend/maintreewidget.cpp:628
+#, kde-format
+msgid "Merge"
+msgstr "Fuzionează"
+
+#: src/svnfrontend/maintreewidget.cpp:629
+#, kde-format
+msgid "Merge two revisions of this entry into itself"
+msgstr "Fuzionează două revizii ale acestei intrări în ea însăși"
+
+#: src/svnfrontend/maintreewidget.cpp:632
+#, kde-format
+msgid "Merge..."
+msgstr "Fuzionare..."
+
+#: src/svnfrontend/maintreewidget.cpp:633
+#, fuzzy, kde-format
+#| msgid "Switch repository path of current working copy path (\"svn switch\")"
+msgid ""
+"Merge repository path into current working copy path or current repository "
+"path into a target"
+msgstr "Schimbă calea depozitului copiei de lucru curente (\"svn switch\")"
+
+#: src/svnfrontend/maintreewidget.cpp:634
+#: src/svnfrontend/maintreewidget.cpp:1152
+#: src/svnfrontend/maintreewidget.cpp:1220
+#, kde-format
+msgid "Open With..."
+msgstr "Deschide cu..."
+
+#: src/svnfrontend/maintreewidget.cpp:638
+#, kde-format
+msgid "Checkout current repository path"
+msgstr "Verificarea căii depozitului curent"
+
+#: src/svnfrontend/maintreewidget.cpp:639
+#: src/svnfrontend/maintreewidget.cpp:647
+#, kde-format
+msgid "Checkout"
+msgstr "Preluare"
+
+#: src/svnfrontend/maintreewidget.cpp:641
+#, kde-format
+msgid "Export current repository path"
+msgstr "Exportă calea depozitului curent"
+
+#: src/svnfrontend/maintreewidget.cpp:642
+#, kde-format
+msgid "Select browse revision"
+msgstr "Alegeți revizia de răsfoit"
+
+#: src/svnfrontend/maintreewidget.cpp:646 src/svnfrontend/svnactions.cpp:1628
+#: src/svnfrontend/svnactions.cpp:1634
+#, kde-format
+msgid "Checkout a repository"
+msgstr "Verifică un depozit"
+
+#: src/svnfrontend/maintreewidget.cpp:648
+#, kde-format
+msgid "Export a repository"
+msgstr "Exportă un depozit"
+
+#: src/svnfrontend/maintreewidget.cpp:649
+#, kde-format
+msgid "Export"
+msgstr "Exportă"
+
+#: src/svnfrontend/maintreewidget.cpp:650
+#, kde-format
+msgid "Refresh view"
+msgstr "Împrospătează afișarea"
+
+#: src/svnfrontend/maintreewidget.cpp:651
+#, kde-format
+msgid "Refresh"
+msgstr "Împrospătează"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DispSpecDiff)
+#: src/svnfrontend/maintreewidget.cpp:653 src/svnfrontend/svnlogdlg.ui:211
+#, kde-format
+msgid "Diff revisions"
+msgstr "Diferențiază reviziile"
+
+#: src/svnfrontend/maintreewidget.cpp:656
+#, kde-format
+msgid "Unfold File Tree"
+msgstr "Desfășoară arboreșcența de fișiere"
+
+#: src/svnfrontend/maintreewidget.cpp:657
+#, kde-format
+msgid "Opens all branches of the file tree"
+msgstr "Deschide toate ramurile arboreșcenței de fișiere"
+
+#: src/svnfrontend/maintreewidget.cpp:658
+#, kde-format
+msgid "Fold File Tree"
+msgstr "Pliază arboreșcența de fișiere"
+
+#: src/svnfrontend/maintreewidget.cpp:659
+#, kde-format
+msgid "Closes all branches of the file tree"
+msgstr "Închide toate ramurile arboreșcenței de fișiere"
+
+#: src/svnfrontend/maintreewidget.cpp:662
+#: src/svnfrontend/maintreewidget.cpp:839
+#: src/svnfrontend/maintreewidget.cpp:1788
+#: src/svnfrontend/maintreewidget.cpp:1804
+#, kde-format
+msgid "Update log cache"
+msgstr "Actualizează prestocarea jurnalului"
+
+#: src/svnfrontend/maintreewidget.cpp:663
+#, kde-format
+msgid "Update the log cache for current repository"
+msgstr "Actualizează jurnalul prestocării pentru depozitul curent"
+
+#: src/svnfrontend/maintreewidget.cpp:667
+#, fuzzy, kde-format
+#| msgid "Make operation recursive."
+msgid "Set property recursive"
+msgstr "Efectuează operația recursiv."
+
+#: src/svnfrontend/maintreewidget.cpp:669
+#, kde-format
+msgid "Settings for current repository"
+msgstr "Configurări pentru depozitul curent"
+
+#: src/svnfrontend/maintreewidget.cpp:841
+#: src/svnfrontend/maintreewidget.cpp:1799
+#, fuzzy, kde-format
+#| msgid "Stop updating the logcache"
+msgid "Stop updating the log cache"
+msgstr "Oprește actualizarea jurnalului prestocării"
+
+#: src/svnfrontend/maintreewidget.cpp:1037
+#, fuzzy, kde-format
+#| msgid "Enter authentication info for"
+msgctxt "@title:window"
+msgid "Edit Pattern to Ignore for \"%1\""
+msgstr "Introduceți informația de autentificare pentru"
+
+#: src/svnfrontend/maintreewidget.cpp:1314
+#: src/svnfrontend/maintreewidget.cpp:1358
+#, kde-format
+msgid "Nothing selected for unlock"
+msgstr "Nimic selectat pentru deblocare"
+
+#: src/svnfrontend/maintreewidget.cpp:1318
+#, fuzzy, kde-format
+#| msgid "Lock message"
+msgctxt "@title:window"
+msgid "Lock Message"
+msgstr "Mesaj de bloacare"
+
+#: src/svnfrontend/maintreewidget.cpp:1325
+#, kde-format
+msgid "Steal lock?"
+msgstr "Depășiți blocarea?"
+
+#: src/svnfrontend/maintreewidget.cpp:1362
+#, kde-format
+msgid "Break lock or ignore missing locks?"
+msgstr "Treceți peste blocare sau ignorați blocările lipsă?"
+
+#: src/svnfrontend/maintreewidget.cpp:1363
+#, kde-format
+msgid "Unlocking items"
+msgstr "Deblochează elementele"
+
+#: src/svnfrontend/maintreewidget.cpp:1650
+#, kde-format
+msgid "Nothing selected for delete"
+msgstr "Nimic selectat pentru șters"
+
+#: src/svnfrontend/maintreewidget.cpp:1821
+#, kde-format
+msgid "Automatic generated base layout by kdesvn"
+msgstr "Generare de dispunere de bază automată de către kdesvn"
+
+#: src/svnfrontend/maintreewidget.cpp:1834
+#, fuzzy, kde-format
+#| msgid "May not make subdirs of a file"
+msgid "May not make subdirectories of a file"
+msgstr "Nu poate crea subdirectoare la un fișier"
+
+#: src/svnfrontend/maintreewidget.cpp:1943 src/svnfrontend/svnactions.cpp:2186
+#, fuzzy, kde-format
+#| msgid "Merge"
+msgctxt "@title:window"
+msgid "Merge"
+msgstr "Fuzionează"
+
+#: src/svnfrontend/maintreewidget.cpp:1996
+#, kde-format
+msgid "Error getting entry to relocate"
+msgstr "Eroare la restabilirea intrării"
+
+#: src/svnfrontend/maintreewidget.cpp:2002
+#, fuzzy, kde-format
+#| msgid "Relocate path %1"
+msgctxt "@title:window"
+msgid "Relocate Path %1"
+msgstr "Restabilește calea %1"
+
+#: src/svnfrontend/maintreewidget.cpp:2016 src/svnfrontend/svnactions.cpp:1627
+#: src/svnfrontend/svnactions.cpp:1879
+#, kde-format
+msgid "Invalid url given!"
+msgstr ""
+
+#: src/svnfrontend/maintreewidget.cpp:2017
+#, kde-format
+msgid "Relocate path %1"
+msgstr "Restabilește calea %1"
+
+#: src/svnfrontend/maintreewidget.cpp:2040
+#, fuzzy, kde-format
+#| msgid "Cannot import into multiple targets!"
+msgid "Cannot import into multiple targets"
+msgstr "Nu se poate importa in destinații multiple!"
+
+#: src/svnfrontend/maintreewidget.cpp:2054
+#, kde-format
+msgid "Import files from folder"
+msgstr ""
+
+#: src/svnfrontend/maintreewidget.cpp:2056
+#, fuzzy, kde-format
+#| msgid "Import log"
+msgid "Import file"
+msgstr "Jurnal de importare"
+
+#: src/svnfrontend/maintreewidget.cpp:2078
+#, fuzzy, kde-format
+#| msgid "Import log"
+msgctxt "@title:window"
+msgid "Import Log"
+msgstr "Jurnal de importare"
+
+#: src/svnfrontend/maintreewidget.cpp:2136
+#, kde-format
+msgid "Could not retrieve repository of working copy."
+msgstr "Nu se poate prelua depozitul copiei de lucru."
+
+#: src/svnfrontend/maintreewidget.cpp:2145
+#, kde-format
+msgid "Only in working copy possible."
+msgstr "Posibil numai în copia de lucru."
+
+#: src/svnfrontend/maintreewidget.cpp:2145
+#: src/svnfrontend/maintreewidget.cpp:2149
+#: src/svnfrontend/maintreewidget.cpp:2154
+#, kde-format
+msgid "Error"
+msgstr "Eroare"
+
+#: src/svnfrontend/maintreewidget.cpp:2149
+#, kde-format
+msgid "Only on single folder possible"
+msgstr "Posibil numai într-un singur dosar"
+
+#: src/svnfrontend/maintreewidget.cpp:2154
+#, fuzzy, kde-format
+#| msgid "Sorry - internal error!"
+msgid "Sorry - internal error"
+msgstr "Regrete - eroare internă!"
+
+#: src/svnfrontend/maintreewidget.cpp:2218
+#, fuzzy, kde-format
+#| msgid "Hold CTRL key while click on selected item for unselect"
+msgid "Hold Ctrl key while click on selected item for unselect"
+msgstr ""
+"Apăsați tasta CTRL cînd faceți clic pe un element selecționat pentru a-l "
+"deselecționa"
+
+#. i18n: ectx: property (toolTip), widget (QTreeView, m_LogTreeView)
+#. i18n: ectx: property (toolTip), widget (QTreeWidget, m_ChangedList)
+#: src/svnfrontend/maintreewidget.cpp:2221 src/svnfrontend/svnlogdlg.ui:114
+#: src/svnfrontend/svnlogdlg.ui:148
+#, kde-format
+msgid "See context menu for more actions"
+msgstr "Vedeți menul contextual pentru acțiuni suplimentare"
+
+#: src/svnfrontend/maintreewidget.cpp:2224
+#, kde-format
+msgid "Click for navigate"
+msgstr "Clic pentru navigare"
+
+#: src/svnfrontend/maintreewidget.cpp:2227
+#, kde-format
+msgid "Navigation"
+msgstr "Navigare"
+
+#: src/svnfrontend/maintreewidget.cpp:2348
+#, kde-format
+msgid "Could not retrieve repository."
+msgstr "Nu s-a putut prelua depozitul."
+
+#: src/svnfrontend/maintreewidget.cpp:2378
+#, kde-format
+msgid "Not yet implemented"
+msgstr ""
+
+#: src/svnfrontend/maintreewidget.cpp:2378
+#, fuzzy, kde-format
+#| msgid "Make operation recursive."
+msgid "Edit property recursively"
+msgstr "Efectuează operația recursiv."
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, MergeDlg)
+#: src/svnfrontend/merge_dlg.ui:14
+#, kde-format
+msgid "MergeSettings"
+msgstr "Configurare fuziune"
+
+#. i18n: ectx: property (text), widget (QLabel, m_SrcOneLabel)
+#: src/svnfrontend/merge_dlg.ui:22
+#, kde-format
+msgid "Source 1:"
+msgstr "Sursa 1:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_SrcTwoLabel)
+#: src/svnfrontend/merge_dlg.ui:38
+#, kde-format
+msgid "Source 2:"
+msgstr "Sursa 2:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_OutLabel)
+#: src/svnfrontend/merge_dlg.ui:54
+#, kde-format
+msgid "Output to:"
+msgstr "Ieșire la:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_MergeParameter)
+#: src/svnfrontend/merge_dlg.ui:72
+#, kde-format
+msgid "Merge parameter"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RecursiveCheck)
+#: src/svnfrontend/merge_dlg.ui:90
+#, kde-format
+msgid "Recursive"
+msgstr "Recursiv"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_RelatedCheck)
+#: src/svnfrontend/merge_dlg.ui:103
+#, kde-format
+msgid "Handle unrelated as related items"
+msgstr "Tratează elementele neînrudite ca înrudite"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RelatedCheck)
+#: src/svnfrontend/merge_dlg.ui:106
+#, fuzzy, kde-format
+msgid "Ignore ancestry"
+msgstr "Ignoră referințele externe"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_ForceCheck)
+#: src/svnfrontend/merge_dlg.ui:113
+#, fuzzy, kde-format
+msgid "Force delete on modified/unversioned items"
+msgstr "Forțează ștergerea fișierelor modificate/neversionate"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_Reintegrate)
+#: src/svnfrontend/merge_dlg.ui:126
+#, kde-format
+msgid "lump-merge all of source URL's unmerged changes"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_Reintegrate)
+#: src/svnfrontend/merge_dlg.ui:132
+#, fuzzy, kde-format
+msgid "Reintegrate merge"
+msgstr "Actualizare modul extern"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_DryCheck)
+#: src/svnfrontend/merge_dlg.ui:139
+#, kde-format
+msgid "Just dry run without modifications"
+msgstr "Pornire în gol fără modificări"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_DryCheck)
+#: src/svnfrontend/merge_dlg.ui:142
+#, kde-format
+msgid "Dry run"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_RecordOnly)
+#: src/svnfrontend/merge_dlg.ui:152
+#, kde-format
+msgid "Only write mergeinfo"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_RecordOnly)
+#: src/svnfrontend/merge_dlg.ui:155
+#, kde-format
+msgid ""
+"The merge is not actually performed, but the mergeinfo for the revisions "
+"which would have been merged is recorded in the working copy"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RecordOnly)
+#: src/svnfrontend/merge_dlg.ui:158
+#, kde-format
+msgid "Record only"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_useExternMerge)
+#: src/svnfrontend/merge_dlg.ui:165
+#, fuzzy, kde-format
+#| msgid "Use external merge not subversions merge"
+msgid "Use external merge not Subversion's merge"
+msgstr "Utilizează fuziune externă, nu fuziunea din subversion"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_useExternMerge)
+#: src/svnfrontend/merge_dlg.ui:168
+#, fuzzy, kde-format
+msgid "Use external merge"
+msgstr "Actualizare modul extern"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_AllowMixedRev)
+#: src/svnfrontend/merge_dlg.ui:175
+#, kde-format
+msgid ""
+"If checked, allow merge into mixed revision working copy, otherwise raises "
+"error in that case"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_AllowMixedRev)
+#: src/svnfrontend/merge_dlg.ui:179
+#, kde-format
+msgid ""
+"Merge into mixed revision\n"
+"working copy"
+msgstr ""
+
+#: src/svnfrontend/mergedlg_impl.cpp:190
+#, fuzzy, kde-format
+#| msgid "Enter merge range"
+msgctxt "@title:window"
+msgid "Enter Merge Range"
+msgstr "Introduceți intervalul de fuzionare"
+
+#: src/svnfrontend/models/logitemmodel.cpp:179
+#, kde-format
+msgid "Message"
+msgstr "Mesaj"
+
+#: src/svnfrontend/models/logmodelhelper.cpp:43
+#, kde-format
+msgid "%1 at revision %2"
+msgstr "%1 la revizia %2"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:314
+#: src/svnfrontend/svnactions.cpp:735
+#, kde-format
+msgid "Name"
+msgstr "Denumire"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:316
+#, kde-format
+msgid "Status"
+msgstr "Stare"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:318
+#, kde-format
+msgid "Last changed Revision"
+msgstr "Reviziile ultimei modificări"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:320
+#: src/svnfrontend/svnactions.cpp:794
+#, kde-format
+msgid "Last author"
+msgstr "Ultimul autor"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:322
+#, kde-format
+msgid "Last change date"
+msgstr "Data ultimei modificări"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:324
+#, kde-format
+msgid "Locked by"
+msgstr "Blocat de către"
+
+#: src/svnfrontend/opencontextmenu.cpp:57
+#, kde-format
+msgid "Other..."
+msgstr "Altul..."
+
+#: src/svnfrontend/propertiesdlg.cpp:83
+#, kde-format
+msgid "Undelete property"
+msgstr "Restaurează proprietate"
+
+#: src/svnfrontend/propertiesdlg.cpp:85
+#, kde-format
+msgid "Delete property"
+msgstr "Șterge proprietate"
+
+#: src/svnfrontend/propertiesdlg.cpp:92
+#, kde-format
+msgid "Missing SVN link"
+msgstr "Lipsește legătura SVN"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, PropertiesDlg)
+#: src/svnfrontend/propertiesdlg.ui:14
+#, kde-format
+msgid "View and modify properties"
+msgstr "Afișează și modifică proprietățile"
+
+#. i18n: ectx: property (text), widget (QPushButton, pbAdd)
+#: src/svnfrontend/propertiesdlg.ui:39
+#, fuzzy, kde-format
+#| msgid "Add property"
+msgid "Add Property"
+msgstr "Adaugă proprietate"
+
+#. i18n: ectx: property (text), widget (QPushButton, pbModify)
+#: src/svnfrontend/propertiesdlg.ui:46
+#, fuzzy, kde-format
+#| msgid "Modify property"
+msgid "Modify Property"
+msgstr "Modifică proprietate"
+
+#. i18n: ectx: property (text), widget (QPushButton, pbDelete)
+#: src/svnfrontend/propertiesdlg.ui:53
+#, fuzzy, kde-format
+#| msgid "Delete property"
+msgid "Delete Property"
+msgstr "Șterge proprietate"
+
+#: src/svnfrontend/stopdlg.cpp:195
+#, kde-format
+msgid "%p% of %1"
+msgstr "%p% din %1"
+
+#: src/svnfrontend/stopdlg.cpp:203
+#, kde-format
+msgid "%1 of %2"
+msgstr "%1 din %2"
+
+#: src/svnfrontend/svnactions.cpp:186
+#, kde-format
+msgid "Finished"
+msgstr "Terminat"
+
+#: src/svnfrontend/svnactions.cpp:332
+#, kde-format
+msgid "Got no logs"
+msgstr "Nici o intrare de jurnal obținută"
+
+#: src/svnfrontend/svnactions.cpp:456
+#, kde-format
+msgid "Got no info."
+msgstr "Nici o informație obținută"
+
+#: src/svnfrontend/svnactions.cpp:493
+#, fuzzy, kde-format
+#| msgid "History of %1"
+msgctxt "@title:window"
+msgid "History of %1"
+msgstr "Istoricul lui %1"
+
+#: src/svnfrontend/svnactions.cpp:536
+#, fuzzy, kde-format
+#| msgid "Annotate"
+msgctxt "@title:window"
+msgid "Annotate"
+msgstr "Adnotare"
+
+#: src/svnfrontend/svnactions.cpp:536
+#, fuzzy, kde-format
+#| msgid "Annotate lines - hit cancel for abort"
+msgid "Annotate lines - hit Cancel for abort"
+msgstr "Adnotare de linii - anulați pentru abandonare"
+
+#: src/svnfrontend/svnactions.cpp:544
+#, kde-format
+msgid "Got no annotate"
+msgstr "Nici o adnotare obținută"
+
+#: src/svnfrontend/svnactions.cpp:563
+#, fuzzy, kde-format
+#| msgid "Content"
+msgctxt "@title:window"
+msgid "Content Get"
+msgstr "Conținut"
+
+#: src/svnfrontend/svnactions.cpp:563
+#, fuzzy, kde-format
+#| msgid "Getting content - hit cancel for abort"
+msgid "Getting content - hit Cancel for abort"
+msgstr "Preluare conținut - anulați pentru abandonare"
+
+#: src/svnfrontend/svnactions.cpp:570
+#, kde-format
+msgid "Error getting content"
+msgstr "Eroare la preluarea conținutului"
+
+#: src/svnfrontend/svnactions.cpp:583
+#, kde-format
+msgid "Error while open temporary file"
+msgstr "Eroare la deschiderea fișierului temporar"
+
+#: src/svnfrontend/svnactions.cpp:623
+#, fuzzy, kde-format
+#| msgid "Content of %1"
+msgctxt "@title:window"
+msgid "Content of %1"
+msgstr "Conținutul lui %1"
+
+#: src/svnfrontend/svnactions.cpp:633
+#, kde-format
+msgid "Got no content."
+msgstr "Nici un conținut obținut."
+
+#: src/svnfrontend/svnactions.cpp:657
+#, kde-format
+msgid "Enter folder name:"
+msgstr "Introduceți denumirea dosarului:"
+
+#: src/svnfrontend/svnactions.cpp:696
+#, fuzzy, kde-format
+#| msgid "Details"
+msgctxt "@title:window"
+msgid "Details"
+msgstr "Detalii"
+
+#: src/svnfrontend/svnactions.cpp:696
+#, fuzzy, kde-format
+#| msgid "Retrieving infos - hit cancel for abort"
+msgid "Retrieving information - hit Cancel for abort"
+msgstr "Preluare informații - anulați pentru abandonare"
+
+#: src/svnfrontend/svnactions.cpp:738
+#, kde-format
+msgid "URL"
+msgstr "URL"
+
+#: src/svnfrontend/svnactions.cpp:740
+#, fuzzy, kde-format
+#| msgid "Canonical repository url"
+msgid "Canonical repository URL"
+msgstr "URL canonic al depozitului"
+
+#: src/svnfrontend/svnactions.cpp:743
+#, kde-format
+msgid "Checksum"
+msgstr "Sumă de control"
+
+#: src/svnfrontend/svnactions.cpp:746
+#, kde-format
+msgid "Type"
+msgstr "Tip"
+
+#: src/svnfrontend/svnactions.cpp:749
+#, kde-format
+msgid "Absent"
+msgstr "Absent"
+
+#: src/svnfrontend/svnactions.cpp:752
+#, kde-format
+msgid "File"
+msgstr "Fișier"
+
+#: src/svnfrontend/svnactions.cpp:755
+#, kde-format
+msgid "Folder"
+msgstr "Dosar"
+
+#: src/svnfrontend/svnactions.cpp:759 src/svnfrontend/svnactions.cpp:788
+#, kde-format
+msgid "Unknown"
+msgstr "Necunoscut"
+
+#: src/svnfrontend/svnactions.cpp:764
+#, kde-format
+msgid "Size"
+msgstr "Mărime"
+
+#: src/svnfrontend/svnactions.cpp:773
+#, kde-format
+msgid "Schedule"
+msgstr "Planificat"
+
+#: src/svnfrontend/svnactions.cpp:776
+#, kde-format
+msgid "Normal"
+msgstr "Normal"
+
+#: src/svnfrontend/svnactions.cpp:779
+#, kde-format
+msgid "Addition"
+msgstr "Adăugire"
+
+#: src/svnfrontend/svnactions.cpp:782
+#, kde-format
+msgid "Deletion"
+msgstr "Ștergere"
+
+#: src/svnfrontend/svnactions.cpp:792
+#, kde-format
+msgid "UUID"
+msgstr "UUID"
+
+#: src/svnfrontend/svnactions.cpp:796
+#, kde-format
+msgid "Last committed"
+msgstr "Ultima propagare"
+
+#: src/svnfrontend/svnactions.cpp:798
+#, kde-format
+msgid "Last revision"
+msgstr "Ultima revizie"
+
+#: src/svnfrontend/svnactions.cpp:800
+#, kde-format
+msgid "Content last changed"
+msgstr "Ultima modificare de conținut"
+
+#: src/svnfrontend/svnactions.cpp:804
+#, kde-format
+msgid "Property last changed"
+msgstr "Ultima modificare de proprietate"
+
+#: src/svnfrontend/svnactions.cpp:807
+#, kde-format
+msgid "New version of conflicted file"
+msgstr "Noua versiune a fișierului în conflict"
+
+#: src/svnfrontend/svnactions.cpp:810
+#, kde-format
+msgid "Property reject file"
+msgstr "Proprietate respinsă"
+
+#: src/svnfrontend/svnactions.cpp:815
+#, kde-format
+msgid "Copy from URL"
+msgstr "Copiază din URL"
+
+#: src/svnfrontend/svnactions.cpp:818 src/svnfrontend/svnactions.cpp:828
+#, kde-format
+msgid "Lock token"
+msgstr "Blochează jetonul"
+
+#: src/svnfrontend/svnactions.cpp:819 src/svnfrontend/svnactions.cpp:829
+#, kde-format
+msgid "Owner"
+msgstr "Proprietar"
+
+#: src/svnfrontend/svnactions.cpp:820 src/svnfrontend/svnactions.cpp:830
+#, kde-format
+msgid "Locked on"
+msgstr "Blocat"
+
+#: src/svnfrontend/svnactions.cpp:823 src/svnfrontend/svnactions.cpp:833
+#, kde-format
+msgid "Lock comment"
+msgstr "Comentariu de blocare"
+
+#: src/svnfrontend/svnactions.cpp:881
+#, fuzzy, kde-format
+#| msgid "Infolist"
+msgctxt "@title:window"
+msgid "Infolist"
+msgstr "Listă de informații"
+
+#: src/svnfrontend/svnactions.cpp:920
+#, fuzzy, kde-format
+#| msgid "Display Properties"
+msgctxt "@title:window"
+msgid "Applying Properties"
+msgstr "Afișează proprietățile"
+
+#: src/svnfrontend/svnactions.cpp:920
+#, kde-format
+msgid "<center>Applying<br/>hit cancel for abort</center>"
+msgstr ""
+
+#: src/svnfrontend/svnactions.cpp:958
+#, kde-format
+msgid "Could not change to folder %1\n"
+msgstr "Nu s-a putut schimba pe dosarul %1\n"
+
+#: src/svnfrontend/svnactions.cpp:977
+#, kde-format
+msgid "Not commit because networking is disabled"
+msgstr "Nu s-a propagat pentru că rețeaua este dezactivată"
+
+#: src/svnfrontend/svnactions.cpp:999 src/svnfrontend/svnactions.cpp:2342
+#, fuzzy, kde-format
+#| msgid "Status / List"
+msgctxt "@title:window"
+msgid "Status / List"
+msgstr "Stare / Listă"
+
+#: src/svnfrontend/svnactions.cpp:999 src/svnfrontend/svnactions.cpp:2342
+#, kde-format
+msgid "Creating list / check status"
+msgstr "Creare listă / verificare stare"
+
+#: src/svnfrontend/svnactions.cpp:1021
+#, kde-format
+msgid "Delete and Commit"
+msgstr "Șterge și comite"
+
+#: src/svnfrontend/svnactions.cpp:1023
+#, kde-format
+msgid "Add and Commit"
+msgstr "Adaugă și comite"
+
+#: src/svnfrontend/svnactions.cpp:1054
+#, fuzzy, kde-format
+#| msgid "Commit"
+msgctxt "@title:window"
+msgid "Commit"
+msgstr "Comite"
+
+#: src/svnfrontend/svnactions.cpp:1054
+#, fuzzy, kde-format
+#| msgid "Commit - hit cancel for abort"
+msgid "Commit - hit Cancel for abort"
+msgstr "Propagare - anulați pentru abandonare"
+
+#: src/svnfrontend/svnactions.cpp:1080
+#, kde-format
+msgctxt "@title:window"
+msgid "Downloading"
+msgstr ""
+
+#: src/svnfrontend/svnactions.cpp:1080
+#, fuzzy, kde-format
+#| msgid "Download - hit cancel for abort"
+msgid "Download - hit Cancel for abort"
+msgstr "Descărcare - anulați pentru abandonare"
+
+#: src/svnfrontend/svnactions.cpp:1107
+#, kde-format
+msgid "Can not do this diff because networking is disabled."
+msgstr "Nu se poate diferenția pentru că rețeaua este dezactivată."
+
+#: src/svnfrontend/svnactions.cpp:1155
+#, kde-format
+msgid "Both entries seems to be the same, can not diff."
+msgstr "Ambele intrări par a fi identice, nu se pot diferenția."
+
+#: src/svnfrontend/svnactions.cpp:1220
+#, kde-format
+msgid "Diff-process could not started, check command."
+msgstr "Procesul de diferențiere nu poate fi lansat, verificați comanda."
+
+#: src/svnfrontend/svnactions.cpp:1264 src/svnfrontend/svnactions.cpp:1317
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Diffing"
+msgstr "Diferențiază elemente"
+
+#: src/svnfrontend/svnactions.cpp:1264
+#, fuzzy, kde-format
+#| msgid "Diffing - hit cancel for abort"
+msgid "Diffing - hit Cancel for abort"
+msgstr "Diferențiere - anulați pentru abandonare"
+
+#: src/svnfrontend/svnactions.cpp:1277 src/svnfrontend/svnactions.cpp:1326
+#, kde-format
+msgid "No difference to display"
+msgstr "Nici o diferență de afișat."
+
+#: src/svnfrontend/svnactions.cpp:1317
+#, fuzzy, kde-format
+#| msgid "Diffing - hit cancel for abort"
+msgid "Diffing - hit cancel for abort"
+msgstr "Diferențiere - anulați pentru abandonare"
+
+#: src/svnfrontend/svnactions.cpp:1375
+#, fuzzy, kde-format
+#| msgid "Display-process could not started, check command."
+msgid "Display process could not started, check command."
+msgstr "Procesul de afișare nu a putut fi lansat, verificați comanda."
+
+#: src/svnfrontend/svnactions.cpp:1388
+#, fuzzy, kde-format
+#| msgid "Diff display"
+msgctxt "@title:window"
+msgid "Diff Display"
+msgstr "Afișor de diferențe"
+
+#: src/svnfrontend/svnactions.cpp:1437
+#, fuzzy, kde-format
+#| msgid "Check updates"
+msgctxt "@title:window"
+msgid "Making update"
+msgstr "Verificare actualizări"
+
+#: src/svnfrontend/svnactions.cpp:1437
+#, fuzzy, kde-format
+#| msgid "Making update - hit cancel for abort"
+msgid "Making update - hit Cancel for abort"
+msgstr "Actualizare - anulați pentru abandonare"
+
+#: src/svnfrontend/svnactions.cpp:1525
+#, kde-format
+msgid "Which files or directories should I add?"
+msgstr "Care fișiere și dosare trebuiesc adăugate?"
+
+#: src/svnfrontend/svnactions.cpp:1532
+#, fuzzy, kde-format
+#| msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
+msgid "<center>The entry<br/>%1<br/>is versioned - break.</center>"
+msgstr "<center>Intrarea<br>%1<br>este versionată - întrerupere.</center>"
+
+#: src/svnfrontend/svnactions.cpp:1560
+#, kde-format
+msgid "Delete from repository"
+msgstr "Șterge din depozit"
+
+#: src/svnfrontend/svnactions.cpp:1609
+#, fuzzy, kde-format
+#| msgid "Export a repository"
+msgctxt "@title:window"
+msgid "Export a Repository"
+msgstr "Exportă un depozit"
+
+#: src/svnfrontend/svnactions.cpp:1609
+#, fuzzy, kde-format
+#| msgid "Checkout a repository"
+msgctxt "@title:window"
+msgid "Checkout a Repository"
+msgstr "Verifică un depozit"
+
+#: src/svnfrontend/svnactions.cpp:1628 src/svnfrontend/svnactions.cpp:1634
+#, kde-format
+msgid "Export repository"
+msgstr "Exportă depozitul"
+
+#: src/svnfrontend/svnactions.cpp:1633
+#, kde-format
+msgid "Invalid local path given!"
+msgstr ""
+
+#: src/svnfrontend/svnactions.cpp:1661
+#, kde-format
+msgid "Exporting a file?"
+msgstr "Exportați un fișier?"
+
+#: src/svnfrontend/svnactions.cpp:1661
+#, kde-format
+msgid "Checking out a file?"
+msgstr "Verificați un fișier?"
+
+#: src/svnfrontend/svnactions.cpp:1707
+#, fuzzy, kde-format
+#| msgid "Export"
+msgctxt "@title:window"
+msgid "Export"
+msgstr "Exportă"
+
+#: src/svnfrontend/svnactions.cpp:1707
+#, fuzzy, kde-format
+#| msgid "Checkout"
+msgctxt "@title:window"
+msgid "Checkout"
+msgstr "Preluare"
+
+#: src/svnfrontend/svnactions.cpp:1707
+#, kde-format
+msgid "Exporting"
+msgstr "Exportare"
+
+#: src/svnfrontend/svnactions.cpp:1707
+#, kde-format
+msgid "Checking out"
+msgstr "Verificare"
+
+#: src/svnfrontend/svnactions.cpp:1744
+#, fuzzy, kde-format
+#| msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
+msgid "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
+msgstr "<center>Intrarea<br>%1<br>nu este versionată - întrerupere.</center>"
+
+#: src/svnfrontend/svnactions.cpp:1777
+#, fuzzy, kde-format
+#| msgid "Revert"
+msgctxt "@title:window"
+msgid "Revert"
+msgstr "Revenire la starea inițială"
+
+#: src/svnfrontend/svnactions.cpp:1777
+#, kde-format
+msgid "Reverting items"
+msgstr "Se restaurează elementele la starea lor inițială"
+
+#: src/svnfrontend/svnactions.cpp:1807 src/svnfrontend/svnactions.cpp:1869
+#, fuzzy, kde-format
+#| msgid "Switch url"
+msgctxt "@title:window"
+msgid "Switch URL"
+msgstr "Schimbare URL"
+
+#: src/svnfrontend/svnactions.cpp:1807
+#, fuzzy, kde-format
+#| msgid "Switching url"
+msgid "Switching URL"
+msgstr "Schimbare de URL"
+
+#: src/svnfrontend/svnactions.cpp:1827
+#, fuzzy, kde-format
+#| msgid "Delete repository"
+msgctxt "@title:window"
+msgid "Relocate Repository"
+msgstr "Șterge depozitul"
+
+#: src/svnfrontend/svnactions.cpp:1827
+#, kde-format
+msgid "Relocate repository to new URL"
+msgstr "Restabilește depozitul la noua adresă URL"
+
+#: src/svnfrontend/svnactions.cpp:1850
+#, kde-format
+msgid "Can only switch one item at time"
+msgstr "Elementele pot fi schimbate pe rînd"
+
+#: src/svnfrontend/svnactions.cpp:1856
+#, kde-format
+msgid "Error getting entry to switch"
+msgstr "Eroare la schimbarea intrării"
+
+#: src/svnfrontend/svnactions.cpp:1880
+#, fuzzy, kde-format
+#| msgid "Switch url"
+msgid "Switch URL"
+msgstr "Schimbare URL"
+
+#: src/svnfrontend/svnactions.cpp:1898
+#, fuzzy, kde-format
+#| msgid "Cleanup"
+msgctxt "@title:window"
+msgid "Cleanup"
+msgstr "Curăță"
+
+#: src/svnfrontend/svnactions.cpp:1898
+#, kde-format
+msgid "Cleaning up folder"
+msgstr "Curățare de dosar"
+
+#: src/svnfrontend/svnactions.cpp:1915
+#, fuzzy, kde-format
+#| msgid "Resolve"
+msgctxt "@title:window"
+msgid "Resolve"
+msgstr "Rezolvă"
+
+#: src/svnfrontend/svnactions.cpp:1915
+#, kde-format
+msgid "Marking resolved"
+msgstr "Marchează ca rezolvat"
+
+#: src/svnfrontend/svnactions.cpp:1947
+#, kde-format
+msgid "Could not retrieve conflict information - giving up."
+msgstr "Nu se pot prelua detaliile conflictului - se renunță."
+
+#: src/svnfrontend/svnactions.cpp:1974
+#, kde-format
+msgid "Resolve-process could not started, check command."
+msgstr "Procesul de rezolvare nu a putut fi lansat, verificați comanda."
+
+#: src/svnfrontend/svnactions.cpp:1986
+#, fuzzy, kde-format
+#| msgid "Import"
+msgctxt "@title:window"
+msgid "Import"
+msgstr "Importă"
+
+#: src/svnfrontend/svnactions.cpp:1986
+#, kde-format
+msgid "Importing items"
+msgstr "Importare elemente"
+
+#: src/svnfrontend/svnactions.cpp:2010
+#, kde-format
+msgid "Nothing to merge."
+msgstr "Nimic de fuzionat."
+
+#: src/svnfrontend/svnactions.cpp:2014
+#, kde-format
+msgid "No destination to merge."
+msgstr "Nici o destinație de fuzionat."
+
+#: src/svnfrontend/svnactions.cpp:2033
+#, fuzzy, kde-format
+#| msgid "Both sources must be same type!"
+msgid "Both sources must be same type."
+msgstr "Ambele surse trebuie să fie de același tip!"
+
+#: src/svnfrontend/svnactions.cpp:2040
+#, fuzzy, kde-format
+#| msgid "Target for merge must same type like sources!"
+msgid "Target for merge must same type like sources."
+msgstr "Destinația fuzionării trebuie să fie de același tip cu sursele!"
+
+#: src/svnfrontend/svnactions.cpp:2063
+#, fuzzy, kde-format
+#| msgid "Both entries seems to be the same, won't do a merge."
+msgid "Both entries seems to be the same, will not do a merge."
+msgstr "Ambele surse par a fi identice, nu se fuzionează."
+
+#: src/svnfrontend/svnactions.cpp:2127
+#, fuzzy, kde-format
+#| msgid "Merge-process could not started, check command."
+msgid "Merge process could not started, check command."
+msgstr "Procesul de fuzionare nu poate fi lansat, verificați comanda."
+
+#: src/svnfrontend/svnactions.cpp:2186
+#, kde-format
+msgid "Merging items"
+msgstr "Fuzionare elemente"
+
+#: src/svnfrontend/svnactions.cpp:2213 src/svnfrontend/svnactions.cpp:2231
+#, fuzzy, kde-format
+#| msgid "Move"
+msgctxt "@title:window"
+msgid "Move"
+msgstr "Mută"
+
+#: src/svnfrontend/svnactions.cpp:2213
+#, fuzzy, kde-format
+#| msgid "Moving/Rename item "
+msgid "Moving/Rename item"
+msgstr "Mută/Redenumește element"
+
+#: src/svnfrontend/svnactions.cpp:2231
+#, kde-format
+msgid "Moving entries"
+msgstr "Mutare intrări"
+
+#: src/svnfrontend/svnactions.cpp:2251 src/svnfrontend/svnactions.cpp:2266
+#, fuzzy, kde-format
+#| msgid "Copy / Move"
+msgctxt "@title:window"
+msgid "Copy / Move"
+msgstr "Copiază / Mută"
+
+#: src/svnfrontend/svnactions.cpp:2251 src/svnfrontend/svnactions.cpp:2266
+#, kde-format
+msgid "Copy or Moving entries"
+msgstr "Copiază sau mută intrări"
+
+#: src/svnfrontend/svnactions.cpp:2374
+#, kde-format
+msgid "No unversioned items found."
+msgstr "Nici un element neversionat găsit."
+
+#: src/svnfrontend/svnactions.cpp:2378
+#, fuzzy, kde-format
+#| msgid "Add unversioned items"
+msgctxt "@title:window"
+msgid "Add Unversioned Items"
+msgstr "Adaugă elementele neversionate"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
+#: src/svnfrontend/svnactions.cpp:2381 src/svnfrontend/svnlogdlg.ui:163
+#, kde-format
+msgid "Item"
+msgstr "Element"
+
+#: src/svnfrontend/svnactions.cpp:2501
+#, fuzzy, kde-format
+msgid "Found %1 modified item"
+msgid_plural "Found %1 modified items"
+msgstr[0] "Culoarea pentru elementele modificate:"
+msgstr[1] "Culoarea pentru elementele modificate:"
+msgstr[2] "Culoarea pentru elementele modificate:"
+
+#: src/svnfrontend/svnactions.cpp:2530
+#, kde-format
+msgid "Checking for updates finished"
+msgstr "Verificare de actualizări terminată"
+
+#: src/svnfrontend/svnactions.cpp:2532
+#, kde-format
+msgid "There are new items in repository"
+msgstr "Noi elemente sunt disponibile în depozit"
+
+#: src/svnfrontend/svnactions.cpp:2602
+#, fuzzy, kde-format
+#| msgid "Not filling logcache because networking is disabled"
+msgid "Not filling log cache because networking is disabled"
+msgstr ""
+"Nu s-a putut completa jurnalul de prestocare pentru că rețeaua este "
+"dezactivată"
+
+#: src/svnfrontend/svnactions.cpp:2644
+#, kde-format
+msgid "Not checking for updates because networking is disabled"
+msgstr ""
+"Nu s-au putut verifica actualizările pentru că rețeaua este dezactivată."
+
+#: src/svnfrontend/svnactions.cpp:2651
+#, kde-format
+msgid "Checking for updates started in background"
+msgstr "Verificarea actualizărilor lansată în fundal"
+
+#: src/svnfrontend/svnitem.cpp:401 src/svnfrontend/svnitem.cpp:414
+#, kde-format
+msgid "Not versioned"
+msgstr "Fără versiune"
+
+#: src/svnfrontend/svnitem.cpp:404
+#, kde-format
+msgid "Added in repository"
+msgstr "Adăugat in depozit"
+
+#: src/svnfrontend/svnitem.cpp:406
+#, kde-format
+msgid "Needs update"
+msgstr "Necesită actualizare"
+
+#: src/svnfrontend/svnitem.cpp:418
+#, kde-format
+msgid "Locally modified"
+msgstr "Modificat local"
+
+#: src/svnfrontend/svnitem.cpp:420
+#, kde-format
+msgid "Property modified"
+msgstr "Proprietate modificată"
+
+#: src/svnfrontend/svnitem.cpp:424
+#, kde-format
+msgid "Locally added"
+msgstr "Adăugat local"
+
+#: src/svnfrontend/svnitem.cpp:427
+#, kde-format
+msgid "Missing"
+msgstr "Lipsește"
+
+#: src/svnfrontend/svnitem.cpp:433
+#, kde-format
+msgid "Replaced"
+msgstr "Înlocuit"
+
+#: src/svnfrontend/svnitem.cpp:436
+#, kde-format
+msgid "Ignored"
+msgstr "Ignorat"
+
+#: src/svnfrontend/svnitem.cpp:439
+#, kde-format
+msgid "External"
+msgstr "Extern"
+
+#: src/svnfrontend/svnitem.cpp:443
+#, kde-format
+msgid "Conflict"
+msgstr "Conflict"
+
+#: src/svnfrontend/svnitem.cpp:445
+#, fuzzy, kde-format
+#| msgid "Property modified"
+msgid "Property conflicted"
+msgstr "Proprietate modificată"
+
+#: src/svnfrontend/svnitem.cpp:449
+#, kde-format
+msgid "Merged"
+msgstr "Fuzionat"
+
+#: src/svnfrontend/svnitem.cpp:452
+#, kde-format
+msgid "Incomplete"
+msgstr "Incomplet"
+
+#: src/svnfrontend/svnitem.cpp:455
+#, kde-format
+msgid "Obstructed"
+msgstr ""
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, LogDialog)
+#: src/svnfrontend/svnlogdlg.ui:18
+#, kde-format
+msgid "SVN Log"
+msgstr "Jurnal SVN"
+
+#. i18n: ectx: property (text), widget (QLabel, startLabel)
+#: src/svnfrontend/svnlogdlg.ui:31
+#, kde-format
+msgid "Start revision"
+msgstr "Pornește revizia"
+
+#. i18n: ectx: property (text), widget (QLabel, endLabel)
+#: src/svnfrontend/svnlogdlg.ui:41
+#, kde-format
+msgid "End revision"
+msgstr "Oprește revizia"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_goButton)
+#: src/svnfrontend/svnlogdlg.ui:57
+#, kde-format
+msgid "Get Logs"
+msgstr "Recuperează jurnalele"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_PrevFiftyButton)
+#: src/svnfrontend/svnlogdlg.ui:64
+#, kde-format
+msgid "Previous entries"
+msgstr "Intrările precedente"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_NextFiftyButton)
+#: src/svnfrontend/svnlogdlg.ui:71
+#, kde-format
+msgid "Show from HEAD"
+msgstr "Arată din HEAD"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
+#: src/svnfrontend/svnlogdlg.ui:168
+#, kde-format
+msgid "Copy from"
+msgstr "Copiază din"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DispPrevButton)
+#: src/svnfrontend/svnlogdlg.ui:189 src/svnfrontend/svnlogdlgimp.cpp:510
+#, kde-format
+msgid "Diff previous"
+msgstr "Diferențe față de precedentul"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DispSpecDiff)
+#: src/svnfrontend/svnlogdlg.ui:208
+#, kde-format
+msgid "Select second revision with right mouse button"
+msgstr "Selectați a doua revizie cu butonul drept al șoricelului"
+
+#. i18n: ectx: property (text), widget (QPushButton, buttonListFiles)
+#: src/svnfrontend/svnlogdlg.ui:230
+#, kde-format
+msgid "List entries"
+msgstr "Listează intrări"
+
+#. i18n: ectx: property (text), widget (QPushButton, buttonBlame)
+#: src/svnfrontend/svnlogdlg.ui:249 src/svnfrontend/svnlogdlgimp.cpp:505
+#, kde-format
+msgid "Annotate"
+msgstr "Adnotare"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_pbHelp)
+#: src/svnfrontend/svnlogdlg.ui:275
+#, kde-format
+msgid "Help"
+msgstr "Ajutor:"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_pbClose)
+#: src/svnfrontend/svnlogdlg.ui:282
+#, kde-format
+msgid "Close"
+msgstr ""
+
+#: src/svnfrontend/svnlogdlgimp.cpp:109
+#, fuzzy, kde-format
+#| msgid "SVN Log of %1"
+msgctxt "@title:window"
+msgid "SVN Log of %1"
+msgstr "Jurnalul SVN al %1"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:111
+#, fuzzy, kde-format
+#| msgid "SVN Log"
+msgctxt "@title:window"
+msgid "SVN Log"
+msgstr "Jurnal SVN"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:435
+#, kde-format
+msgid "Set version as right side of diff"
+msgstr "Stabilește versiunea de partea dreaptă a diferenței"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:441
+#, kde-format
+msgid "Set version as left side of diff"
+msgstr "Stabilește versiunea de partea stîngă a diferenței"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:447
+#, kde-format
+msgid "Unset version for diff"
+msgstr "Versiune nespecificată pentru diferențe"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:451
+#, fuzzy, kde-format
+#| msgid "Review items before commit"
+msgid "Revert this commit"
+msgstr "Treceți în revistă elemente eînainte să le comiteți"
+
+#: src/svnfrontend/svntreeview.cpp:113
+#, kde-format
+msgid "&Move Here"
+msgstr "&Mută aici"
+
+#: src/svnfrontend/svntreeview.cpp:117
+#, kde-format
+msgid "&Copy Here"
+msgstr "&Copiază aici"
+
+#: src/svnfrontend/svntreeview.cpp:119
+#, kde-format
+msgid "C&ancel"
+msgstr "&Anulează"
+
+#: src/urldlg.cpp:99
+#, fuzzy, kde-format
+#| msgid "Open"
+msgctxt "@title:window"
+msgid "Open"
+msgstr "Deschide"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, UrlDlg)
+#: src/urldlg.ui:14
+#, fuzzy, kde-format
+#| msgid "Open repository of working copy"
+msgid "Open repository / working copy"
+msgstr "Deschide depozitul copiei de lucru"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/urldlg.ui:20
+#, kde-format
+msgid "Open repository or working copy"
+msgstr "Deschide depozit sau copie de lucru"
+
+#, fuzzy
+#~ msgid ""
+#~ "(C) 2005-2009 Rajko Albrecht,\n"
+#~ "(C) 2015-2016 Christian Ehrlicher"
+#~ msgstr "(C) 2005-2007 Rajko Albrecht"
+
+#~ msgid "Add property"
+#~ msgstr "Adaugă proprietate"
+
+#, fuzzy
+#~| msgid "Make operation recursive."
+#~ msgid "Make operation recursive"
+#~ msgstr "Efectuează operația recursiv."
+
+#~ msgid "Old version of conflicted file"
+#~ msgstr "Vechea versiune a fișierului în conflict"
+
+#~ msgid "Working version of conflicted file"
+#~ msgstr "Versiunea în lucru a fișierului în conflict"
+
+#~ msgid "Clear"
+#~ msgstr "Curăță"
+
+#~ msgid " line"
+#~ msgid_plural " lines"
+#~ msgstr[0] " linie"
+#~ msgstr[1] " linii"
+#~ msgstr[2] " de linii"
+
+#, fuzzy
+#~| msgid "Is created repository compatible to subversion prior 1.4"
+#~ msgid "Is created repository compatible to Subversion prior 1.4"
+#~ msgstr "Depozit creat compatibil cu subversion anterior versiunii 1.4"
+
+#, fuzzy
+#~| msgid "Compatible to subversion prior 1.4"
+#~ msgid "Compatible to Subversion prior 1.4"
+#~ msgstr "Compatibilitate cu subversion anteriror versiunii 1.4"
+
+#~ msgid "Edit property"
+#~ msgstr "Editează proprietatea"
+
+#, fuzzy
+#~| msgid "Cannot import remote urls!"
+#~ msgid "Cannot import remote URLs"
+#~ msgstr "Nu se pot importa adresele URL distante!"
+
+#, fuzzy
+#~| msgid "Make operation recursive."
+#~ msgid "Set/add property recursive"
+#~ msgstr "Efectuează operația recursiv."
+
+#~ msgid "Modify properties"
+#~ msgstr "Modifică proprietățile"
+
+#~ msgid "List of properties set"
+#~ msgstr "Lista proprietăților definite"
+
+#, fuzzy
+#~| msgid "Target for merge must be local!"
+#~ msgid "Target for merge must be local."
+#~ msgstr "Destinația fuzionării trebuie să fie locală!"
+
+#, fuzzy
+#~| msgid "Number"
+#~ msgid "Issue-Number"
+#~ msgstr "Număr"
+
+#~ msgid "DiffMergeSettings"
+#~ msgstr "Configurări diferențiere fuzionare"
+
+#~ msgid "RevisionButton"
+#~ msgstr "Buton revizie"
+
+#~ msgid "this long text"
+#~ msgstr "acest text lung"
+
+#~ msgid "/there/"
+#~ msgstr "/acolo/"
+
+#, fuzzy
+#~| msgid "Relocate url"
+#~ msgid "Relocate URL"
+#~ msgstr "Restabilire URL"
+
+#~ msgid "into KDE Wallet"
+#~ msgstr "în Gestionarul de portofel KDE"
+
+#~ msgid "Store password"
+#~ msgstr "Stochează parola"
+
+#~ msgid "<p align=\"right\">Rename</p>"
+#~ msgstr "<p align=\"right\">Redenumește</p>"
+
+#~ msgid "Form"
+#~ msgstr "Formă"
+
+#~ msgid "Form1"
+#~ msgstr "Forma1"
+
+#~ msgid "Revisiontree Settings"
+#~ msgstr "Configurări arbore de revizii"
+
+#~ msgid "Send Bugreport for kdesvn"
+#~ msgstr "Raportați erori pentru kdesvn"
+
+#~ msgid ""
+#~ "_: EMAIL OF TRANSLATORS\n"
+#~ "Your emails"
+#~ msgstr ""
+#~ "_: ADRESELE ELECTRONICE ALE TRADUCĂTORILOR\n"
+#~ "cfrussen@yahoo.co.uk"
+
+#~ msgid ""
+#~ "_: NAME OF TRANSLATORS\n"
+#~ "Your names"
+#~ msgstr ""
+#~ "_: NUMELE TRADUCĂTORILOR\n"
+#~ "Florin Cătălin RUSSEN"
+
+#~ msgid "kdesvn: EMAIL OF TRANSLATORS\\nYour emails"
+#~ msgstr ""
+#~ "kdesvn: ADRESELE ELECTRONICE ALE TRADUCĂTORILOR\\ncfrussen@yahoo.co.uk"
+
+#~ msgid "kdesvn: NAME OF TRANSLATORS\\nYour names"
+#~ msgstr "kdesvn: NUMELE TRADUCĂTORILOR\\nFlorin Cătălin RUSSEN"
+
+#~ msgid "(C) 2005-2008 Rajko Albrecht"
+#~ msgstr "(C) 2005-2008 Rajko Albrecht"
+
+#~ msgid "Diff highlighted item"
+#~ msgstr "Diferențiază elementele evidențiate"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "SSH password"
+#~ msgstr "Parolă SSH"
+
+#, fuzzy
+#~ msgid "Save plain password"
+#~ msgstr "Stochează parola"

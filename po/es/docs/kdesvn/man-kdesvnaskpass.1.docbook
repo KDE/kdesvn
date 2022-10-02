@@ -1,0 +1,107 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Spanish "INCLUDE">
+]>
+
+<refentry lang="&language;" id='kdesvnaskpass1'>
+
+<refentryinfo>
+<title
+>Manual del usuario de kdesvnaskpass</title>
+<author
+><personname
+> <firstname
+>Rajko</firstname
+> <surname
+>Albrecht</surname
+> </personname
+> <email
+>ral@alwins-world.de</email
+></author>
+<date
+>2016-05-22</date>
+<releaseinfo
+>kdesvn 2.1.0</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kdesvnaskpass</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kdesvnaskpass</command
+></refname>
+<refpurpose
+>ssh-askpass para kdesvn</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id='synopsis'>
+<cmdsynopsis
+><command
+>kdesvnaskpass</command
+> <arg choice="opt"
+><replaceable
+>pregunta</replaceable
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1 id='description'
+><title
+>Descripción</title>
+<para
+>ssh-askpass para kdesvn</para>
+</refsect1>
+
+<refsect1 id='options'
+><title
+>Opciones</title>
+
+<refsect2 id='ss_arguments'
+><title
+>Argumentos:</title>
+<variablelist>
+  <varlistentry>
+  <term
+><emphasis
+>mensaje</emphasis
+></term>
+  <listitem>
+<para
+>Mensaje que se muestra al usuario.</para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</refsect2>
+
+</refsect1>
+
+<refsect1 id='see_also'
+><title
+>Consulte también</title>
+<simplelist>
+<member
+>Dispone de documentación de usuario completa a través del &khelpcenter;. También puede introducir el URL <emphasis
+>help:/kdesvn</emphasis
+> directamente en &konqueror; o ejecutar <emphasis
+>«khelpcenter help:/kdesvn»</emphasis
+> en la línea de órdenes.</member>
+</simplelist>
+</refsect1>
+
+<refsect1 id='authors'
+><title
+>Autores</title>
+<literallayout
+>Rajko Albrecht &lt;ral@alwins-world.de&gt;
+</literallayout
+></refsect1>
+</refentry>
+

@@ -1,0 +1,3501 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kdesvn "<application
+>kdesvn</application
+>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY Rajko.Albrecht '<personname
+><firstname
+>Rajko</firstname
+><surname
+>Albrecht</surname
+></personname
+>'>
+  <!ENTITY Rajko.Albrecht.mail '<email
+>ral@alwins-world.de</email
+>'>
+  <!ENTITY % Swedish "INCLUDE"
+><!-- change language only here -->
+]>
+
+<book lang="&language;">
+
+<bookinfo>
+<title
+>Handbok &kdesvn;</title>
+
+<authorgroup>
+<author
+><firstname
+>Rajko</firstname
+> <othername
+></othername
+> <surname
+>Albrecht</surname
+> <affiliation
+> <address
+>&Rajko.Albrecht.mail;</address>
+</affiliation>
+</author>
+<othercredit role="translator"
+> <firstname
+>Stefan</firstname
+> <surname
+>Asserhäll</surname
+> <affiliation
+><address
+><email
+>stefan.asserhall@bredband.net</email
+></address
+></affiliation
+> <contrib
+>Översättare</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2005</year>
+<year
+>2008</year>
+<holder
+>&Rajko.Albrecht;</holder>
+</copyright>
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2016-05-22</date>
+<releaseinfo
+>kdesvn 2.0</releaseinfo>
+
+<abstract>
+<para
+>&kdesvn; - En Subversion-klient av &kde;. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>KDESvn</keyword>
+<keyword
+>Subversion</keyword>
+<keyword
+>versionskontrollsystem</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Inledning</title>
+
+<para
+>&kdesvn; är en <ulink url="http://subversion.apache.org/"
+>Subversion-klient</ulink
+> av &kde;. </para>
+<para
+>Du bör ha en viss kunskap om själva Subversion, men förhoppningsvis är de flesta saker självförklarliga. </para>
+<para
+>Du kan skicka felrapporter och önskemål om funktioner till <ulink url="https://bugs.kde.org/"
+>&kde;:s felspårningssystem</ulink
+>. </para>
+
+<sect1 id="kdesvn-terms">
+<title
+>Termer</title>
+<para
+>Om du är bekant med versionskontrollsystem kan du hoppa över detta, eller läsa det och skicka rättningar till författaren. </para>
+<para>
+<variablelist>
+<varlistentry>
+<term
+>Arkiv</term>
+<listitem
+><para
+>Central datalagring. Det kan vara en databas eller ett enkelt filsystem. Utan särskilda klienter kan du inte läsa data i det. För Subversion är &kdesvn; en sådan klient. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Arbetskopia</term>
+<listitem
+><para
+>En enkel kopia av ett arkiv i det lokala filsystemet. Det används som vilken normal filhanterare som helst, redigering av filer ock så vidare. RCS-information som går att läsa med klienter som &kdesvn;. </para>
+<para
+>Kom ihåg att Subversion inte känner till något om KIO, så en arbetskopia måste finnas på en plats där den kan nås utan något specifikt protokoll, t.ex. är inte &quot;fish://&quot; eller liknade möjligt. </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>WebDAV</term>
+<listitem
+><para
+>WebDAV är ett protokoll som låter dig ändra filer på en fjärrwebbserver. ubversion är en särskild sorts WebDAV vid åtkomst av arkiv via en webbserver. I normal användning är det bara för läsning. Med särskilda inställningar kan man få WevDAV med läs- och skrivaktivering som går att komma åt via en specialiserad webbläsare. &kdesvn; är INTE en WebDAV-klient, men &konqueror; är det via protokollet <quote
+>webdav://</quote
+>, men man kan bläddra i ett arkivs versionsträd med &kdesvn; (via <quote
+>http://</quote
+>). </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect1>
+</chapter>
+
+<chapter id="using-kdesvn">
+<title
+>Använda &kdesvn;</title>
+<sect1 id="kdesvn-features">
+<title
+>Funktioner i &kdesvn;</title>
+<para
+>&kdesvn; känner till följande protokoll för att bläddra i arkiv: <variablelist>
+
+<varlistentry>
+<term
+>http</term>
+<listitem
+><para
+>Vanligt webbläsarprotokoll </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>https</term>
+<listitem
+><para
+>Vanligt krypterat webbläsarprotokoll. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+http</term>
+<listitem
+><para
+>Vanligt webbläsarprotokoll. Kan användas för att låta &konqueror; automatiskt anropa &kdesvn;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+https</term>
+<listitem
+><para
+>Vanligt krypterat webbläsarprotokoll. Kan användas för att låta &konqueror; automatiskt anropa &kdesvn;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+file</term>
+<listitem
+><para
+>Lokalt arkivprotokoll. Kan användas för att låta &konqueror; automatiskt anropa &kdesvn;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn</term>
+<listitem
+><para
+>Det egna serverprotokollet i Subversion. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+ssh</term>
+<listitem
+><para
+>Subversion via ssh. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>file</term>
+<listitem
+><para
+>Direkt åtkomst till arkiv. &kdesvn; kontrollerar om en given sökväg är ett arkiv eller en arbetskopia och öppnar det på rätt sätt. För Subversion är inte <prompt
+>file:///katalog</prompt
+> och <prompt
+>/katalog</prompt
+> samma sak. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+<para
+>Listan kan också användas för webbadresser angivna på <link linkend="kdesvn-commandline"
+>kommandoraden</link
+>. </para>
+</sect1>
+<sect1 id="first_steps">
+<title
+>Komma igång med Subversion och &kdesvn;</title>
+<para
+>Det här avsnittet är i huvudsak till för nybörjare som inte är bekanta med Subversion och förklarar hur Subversion och/eller versionskontrollsystem (<acronym
+>RCS</acronym
+>) fungerar. </para>
+
+<sect2>
+<title
+>Skapa en arbetskopia</title>
+<caution>
+<para
+>Arbetskopior MÅSTE gå att komma åt via lokala sökvägar. Subversion känner inte till någonting om pseudofilsystem som <filename class="directory"
+>smb://</filename
+> eller <filename class="directory"
+>fish://</filename
+>. &kdesvn; översätter vissa av dem om möjligt (som <filename class="directory"
+>system:/home</filename
+>) men det är inte möjligt via ett nätverk. </para>
+</caution>
+<para
+>För det första måste du skapa en arbetskopia av arkivet. Välj <menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allmänt</guisubmenu
+> <guimenuitem
+>Checka ut ett arkiv</guimenuitem
+></menuchoice
+> för att göra det. Inne i den följande dialogrutan måste du välja webbadress för arkivet du vill använda, t.ex. någonting som liknar <literal
+>http://localhost/arkiv/mitt-projekt</literal
+>. Underkataloger i ett arkiv är också möjliga, t.ex. <literal
+>http://localhost/arkiv/mitt-projekt/trunk</literal
+> eller liknande. </para>
+<para
+>Välj och/eller skapa en lokal katalog, där arbetskopian ska finnas. </para>
+<para
+>Sist men inte minst, versionen att checka ut. Oftast bör det vara <quote
+>HEAD</quote
+>. Det försäkrar att den senast lagrade versionen är den som refereras. </para>
+<para
+>Efter att ha klickat på <guibutton
+>Ok</guibutton
+> skapar &kdesvn; den nya arbetskopian och (om rutan var markerad) öppnar den. </para>
+<para
+>När du har öppnat ett arkiv för bläddring kan du markera en katalog och därefter välja <menuchoice
+><guimenu
+>Subversion</guimenu
+><guisubmenu
+>Arkiv</guisubmenu
+> <guimenuitem
+>Checka ut aktuell arkivsökväg</guimenuitem
+></menuchoice
+> och fylla i dialogrutorna som beskrivs ovan. Då checkas bara den markerade sökvägen ut. </para>
+</sect2>
+<sect2>
+<title
+>Arkivera lokala ändringar</title>
+<para
+>Markera posten eller posterna du vill skicka och välj <menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>#</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbetskopia</guisubmenu
+> <guimenuitem
+>Arkivera</guimenuitem
+></menuchoice
+> </para>
+<para
+>Om du försöker arkivera när inget objekt är markerat använder &kdesvn; det översta elementet i den öppnade arbetskopian, dvs. själva arbetskopians sökväg. </para>
+<para
+>Åtgärden är alltid rekursiv, vilket betyder att om en katalog är markerad skickar &kdesvn; alltid alla ändrade objekt inne i den. När du ställer in att du vill granska alla objekt innan de arkiveras, listas alla objekt som &kdesvn; skulle skicka inne i den efterföljande dialogrutan. Där kan du avmarkera objekt som du inte vill skicka. I detta fall skickar &kdesvn; alla objekt enskilt, dvs. inte rekursivt. Annars kan du välja objekt utan version att läggas till och arkivera (om de inte är markerade att ignoreras). Alltså kan du se om det finns nyare objekt du glömt. </para>
+<para
+>Ange ett loggmeddelande med vad du skickar och klicka på <guibutton
+>Ok</guibutton
+> så startas överföringen. </para>
+</sect2>
+<sect2>
+<title
+>Uppdatera arbetskopian</title>
+<para
+>Detta gör att den lokala arbetskopian synkroniseras med arkivet. Du kan ställa in att &kdesvn; utför kontroll av nyare eller ändrade objekt i arkivet när en arbetskopia öppnas. Det utförs i bakgrunden och du kan arbeta med &kdesvn; under tiden. När det är klart är objekt med nyare versioner, eller kataloger med objekt där det finns nyare objekt under, markerade. </para>
+<para
+>Välj <menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbetskopia</guisubmenu
+> <guimenuitem
+> Uppdatera till huvudversion</guimenuitem
+></menuchoice
+> för att hämta ändringarna. Det uppdaterar till den senaste versionen. Om du vill hämta en specifik version, välj <menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbetskopia</guisubmenu
+> <guimenuitem
+>Uppdatera till version...</guimenuitem
+></menuchoice
+> och välj versionen du vill ha i den efterföljande dialogrutan. </para>
+<para
+>Om inget objekt är markerat sker uppdateringen för hela den öppnade arbetskopian, annars bara rekursivt för de markerade objekten. </para>
+</sect2>
+<sect2>
+<title
+>Lägga till i och ta bort från arbetskopian</title>
+<para
+>Båda åtgärderna kräver två steg: Lägg först till eller ta bort och därefter arkivera ändringarna i arkivet. Innan du arkiverar kan du ångra tillägg eller borttagning. </para>
+<sect3>
+<title
+>Lägg till objekt</title>
+<para
+>Lägga till objekt i en arbetskopia kan göras på ett av tre sätt: <variablelist>
+<varlistentry>
+<term
+>Markera objekt utan version och lägg till dem</term>
+<listitem
+><para
+>Kopiera till arbetskopians område med &konqueror; eller något annat verktyg. Gå igenom listan, markera dem och välj <menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Insert</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+><guisubmenu
+>Arbetskopia</guisubmenu
+><guimenuitem
+>Lägg till markerade filer och kataloger</guimenuitem
+></menuchoice
+>. När du vill lägga till kataloger med alla underobjekt, välj <menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Insert</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+><guisubmenu
+>Arbetskopia</guisubmenu
+><guimenuitem
+>Lägg till markerade filer och kataloger rekursivt</guimenuitem
+></menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Markera och lägg till rekursivt</term>
+<listitem
+><para
+>Du kan kontrollera om det finns objekt utan version någonstans i arbetskopian. Efter att ha valt <menuchoice
+><guimenu
+>Subversion</guimenu
+><guisubmenu
+>Arbetskopia</guisubmenu
+> <guimenuitem
+>Kontrollera objekt utan version</guimenuitem
+></menuchoice
+> visas en dialogruta där alla objekt utan version listas. Att klicka på <guibutton
+>Ok</guibutton
+> lägger till alla markerade objekt i arbetskopian. Objekt som du inte vill ska versionshanteras ska du avmarkera innan. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Drag och släpp</term>
+<listitem
+><para
+>Markera objekt som du vill lägga till i  &konqueror; eller någon annan kompatibel filbläddrare och dra dem till &kdesvn;. Du kan släppa dem på kataloger inne i den öppnade arbetskopian och då kopierar &kdesvn; de släppta objekten till det och lägger till objekten. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para
+></sect3>
+<sect3>
+<title
+>Ta bort objekt från arbetskopia och från versionshantering</title>
+<para
+>Att ta bort objekt är alltid rekursivt. Om du exempelvis tar bort en katalog tas också alla underliggande objekt bort. Markera vad du vill och välj menyalternativet <menuchoice
+><guimenu
+>Subversion</guimenu
+><guisubmenu
+>Allmänt</guisubmenu
+> <guimenuitem
+>Ta bort markerade objekt</guimenuitem
+></menuchoice
+>. Objekten tas bort från versionshantering och från disken. </para>
+</sect3>
+</sect2>
+
+<sect2 id="logdisplay">
+<title
+>Visa loggar</title>
+<para
+>Loggvisningen kan startas med <keycombo action="simul"
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+> när något eller inget objekt är markerat i översikten. Beroende på inställningarna (se <xref linkend="subversion-settings" xreflabel="settings"/>) hämtar &kdesvn; några loggposter med början på huvudversionen och visar dem. </para>
+<sect3  id="logdisplay-dlg">
+<title
+>Dialogrutan för loggvisning</title>
+<para
+>På vänster sida visas listan med loggposter som &kdesvn; hämtade. Loggmeddelandet är avkortat till en rad för att få plats. Det fullständiga loggmeddelandet visas i övre högra fönstret när en post markeras. Listan med ändrade filer syns i det nedre högra fönstret. Dessa fönster visas <emphasis
+>bara</emphasis
+> om listan hämtas, beroende på inställningarna. </para>
+<para
+>Det går att välja ett annat loggintervall att visa med knapparna längst upp. <important
+><para
+>Intervallet anropas utan några förinställda gränser, så var försiktig när funktionen används med stora arkiv.</para
+></important>
+
+</para>
+<para
+>Knapparna under visningar fungerar alltid för objektet markerat för loggning, inte för objektet markerat i listan över ändrade filer. När du alltså klickar på <guibutton
+>Jämför med föregående</guibutton
+> där, utförs jämförelsen med alla ändrade objekt i denna version om de är lika med eller under posten i Subversion som markerades för att hämta loggar tidigare. Samma sak gäller <guibutton
+>Jämför versioner</guibutton
+>. </para>
+<para
+><guibutton
+>Förse med noter</guibutton
+> fungerar förstås bara om objektet som ska loggas är en fil. </para>
+<para
+>För alla listposter (i båda listorna) är en sammanhangsberoende meny aktiverad för några extra åtgärder. I den vänstra listan är det <guimenuitem
+>Ställ in version som vänster sida av jämförelse</guimenuitem
+> (dvs. startversion) och i den högra <guimenuitem
+>Ställ in version som höger sida av jämförelse</guimenuitem
+> (dvs. slutversion eller jämförelsens mål, i förenad jämförelse delen markerad med <computeroutput
+>+++</computeroutput
+>). Om dessa versioner valdes, är de markerade med små pilar. </para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="working-with-repositories">
+<title
+>Arbeta med arkiv</title>
+<para
+>Enkel bläddring i arkiv kan göras inne i &konqueror;, &dolphin; eller liknande filbläddrare. Öppna en webbadress med protokoll som beskrivs i <xref linkend="kdesvn-features" xreflabel="Features"/> (varianterna som börjar med <quote
+>k</quote
+>) så visar de innehållet. Enkla åtgärder som kopiera, flytta och ta bort kan alltså fungera. När frågan <quote
+>?rev=<replaceable
+>xxx</replaceable
+></quote
+> läggs till, kommer listningen från en specifik version. Formatet på versionsfrågan beskrivs i <xref linkend="revision-syntax"/>, och en del ytterligare information om KIO::ksvn finns i <xref linkend="kdesvn-kio"/>. </para>
+<para
+>Allt arbete utom <guimenuitem
+>Kopiera</guimenuitem
+> kan bara göras när man bläddrar i huvudversionen (HEAD). </para>
+<sect2>
+<title
+>Återställa borttagna objekt</title>
+<para
+>I Subversion återställs borttagna objekt med en kopieringsåtgärd av objektet med en specifik version. Om du alltså tänker återställa, titta på arkivet med versionen innan objektet togs bort. Välj <menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arkiv</guisubmenu
+> <guimenuitem
+>Välj version för bläddring</guimenuitem
+></menuchoice
+> och skriv in önskad version. Nu visar &kdesvn; innehållet vid denna termin. Markera posten du vill återställa, välj <menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allmänt</guisubmenu
+> <guimenuitem
+>Kopiera</guimenuitem
+></menuchoice
+>. I den efterföljande dialogrutan har målet alltid huvudversion (HEAD), källan har versionen du valde för bläddring. Fyll i sökvägen, och klicka på <guibutton
+>Ok</guibutton
+> så startar kopieringen. Efter lyckad kopiering, byt tillbaka bläddringen till huvudversionen (HEAD), så ska det återställda objektet visas. </para>
+</sect2>
+<sect2>
+<title
+>Importera kataloger</title>
+<para
+>På grund av begränsningar i Subversion själv, kan bara kataloger, inte enstaka filer, importeras. </para>
+<sect3>
+<title
+>Med drag och släpp</title>
+<para
+>Markera katalogen som du vill importera i någon kompatibel filhanterare, och dra den till katalogposten i &kdesvn; dit du vill importera den. </para>
+</sect3>
+<sect3>
+<title
+>Välj katalog att importera med katalogbläddraren</title>
+<para
+>Markera katalogen där du vill importera en ny katalog. Använd därefter<menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allmänt</guisubmenu
+> <guimenuitem
+>Importera kataloger till aktuell</guimenuitem
+></menuchoice
+>, och välj önskad katalog. </para>
+</sect3>
+</sect2>
+</sect1>
+<sect1 id="operations">
+<title
+>Andra åtgärder</title>
+<sect2 id="merging-items">
+<title
+>Sammanfoga</title>
+<para
+>Öppna arkiv eller arbetskopia, markera objektet som du vill sammanfoga och välj <menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allmänt</guisubmenu
+> <guisubmenu
+>Sammanfoga</guisubmenu
+></menuchoice
+>. Ange önskade värden i den efterföljande dialogrutan. Om öppnad från arkiv, är källa 1 och källa 2 ifyllda, om öppnad inifrån en arbetskopia är mål ifyllt med aktuellt markerat objekt. Hanteringen av parametern är något annorlunda mellan användning av den interna jämförelsen i Subversion och ett externt sammanfogningsprogram som &kdiff3;. Målet måste ALLTID vara en lokal katalog eller fil. Du kan byta mellan extern och intern sammanfogning med kryssrutan <guilabel
+>Använd extern sammanfogning</guilabel
+>. </para>
+<sect3>
+<title
+>Intern sammanfogning</title>
+<para
+>Betydelsen är exakt likadan som i Subversions egna kommandoradverktyg. När källa 1 och källa 2 är lika, måste start- och slutversion skilja sig åt. Om källorna inte är lika, tilldelas startversion till källa 1 och slutversion till källa 2. Målet MÅSTE vara en arbetskopia, annars ger Subversion ett felmeddelande. </para>
+<para
+>Kryssrutorna har följande betydelse: <variablelist>
+
+<varlistentry>
+<term
+>Rekursiv</term>
+<listitem
+><para
+>Gör alla åtgärder rekursivt vid arbete med kataloger. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Hantera orelaterade som relaterade objekt</term>
+<listitem
+><para
+>Om aktiverat jämförs orelaterade objekt som om de vore relaterad. Annars tar Subversion bort en sida och lägger till den på den andra sidan igen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Tvinga borttagning för ändrade objekt utan version</term>
+<listitem
+><para
+>Om inte aktiverat, och sammanfogningen skulle kräva borttagning av ett ändrat objekt eller ett objekt utan version, misslyckas sammanfogningen. Annars tas dessa objekt bort. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Utför bara försökskörning utan ändringar</term>
+<listitem
+><para
+>Om aktiverat, skickar Subversion bara underrättelser om vad som skulle göras men ändrar inte arbetskopian. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+</sect3>
+<sect3>
+<title
+>Använda externt program för sammanfogning</title>
+<para
+>Se <xref linkend="diffmerge-settings"/> för detaljerad information om hur man ställer in det externa sammanfogningsverktyget. &kdesvn; skapar kommandoraden som beskrivs där. Innan det görs följande: </para>
+<para>
+<orderedlist>
+
+<listitem
+><para
+>Tilldela startversion som version till källa 1 och slutversion till källa 2. Kontrollera därefter om de är olika (sökväg och/eller version). Om svaret är ja, är det en trevägs sammanfogning, annars en enkel sammanfogning från källa till mål. Om källa 2 lämnas tom är det också en enkel sammanfogning. </para
+></listitem>
+
+<listitem
+><para
+>Utför export till en tillfällig katalog. För en enkel sammanfogning bara källa 1 för startversion, annars båda källor med sina versioner. Om objektet är en fil istället för en katalog, hämta innehållet för en specifik version. </para
+></listitem>
+
+<listitem>
+<para
+>Skapa anropet till det externa sammanfogningsprogrammet som är angivet i <link linkend="diffmerge-settings"
+>Inställningar</link
+>. Felutskrifter visas i loggfönstret så man kan se vad som har gått fel (om någonting har gjort det). </para>
+</listitem>
+</orderedlist
+>I motsats till ett internt mål för sammanfogning, kan en enkel katalog eller fil som inte har versionskontroll användas, eftersom externa verktyg inte bryr sig om det. </para>
+<para
+>Om rekursivt inte är valt, sker exporten som en platt export. Var försiktig: När detta görs med arbetskopior exporteras <emphasis
+>inte</emphasis
+> externa objekt. </para>
+</sect3>
+</sect2>
+
+<sect2 id="op-resolve">
+<title
+>Lösa upp konflikter</title>
+<para
+>&kdesvn; har inte någon modul för konfliktupplösning själv, men du kan använda extern programvara från &kdesvn;. En beskrivning av hur programmet ställs in finns i <xref linkend="extern-resolve-setup"/>. </para>
+<para
+>När ett objekt markeras med status <quote
+>konflikt</quote
+> (ett rött kors visas för sådana objekt i listvyn), kan du välja <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbetskopia</guisubmenu
+> <guisubmenu
+>Lös upp konflikter</guisubmenu
+></menuchoice
+> eller <guimenuitem
+>Lös upp konflikter</guimenuitem
+> i den sammanhangsberoende menyn(men bara för objekt med konflikter). Nu startar &kdesvn; programmet du har ställt in (eller det förvalda). Efter att jobbet är klart måste objektet markeras som upplöst (<menuchoice
+><guimenu
+>Subversion</guimenu
+><guisubmenu
+>Arbetskopia</guisubmenu
+><guisubmenu
+>Marker som upplöst</guisubmenu
+></menuchoice
+>) annars kan du inte arkivera ändringarna. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="used-properties">
+<title
+>Egenskaper använda av &kdesvn; för inställningar</title>
+<sect2>
+<title
+>Integrering med felspårare</title>
+<para
+>Projektet <ulink url="http://tortoisesvn.tigris.org/"
+>TortoiseSVN</ulink
+> konstruerade ett bra egenskapssystem <ulink url="http://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-dug-bugtracker.html"
+>för att integrera felspårning</ulink
+> i det grafiska gränssnittet för Subversion. Den nuvarande versionen av &kdesvn; stöder inte extra fält i arkiveringsrutan (det kommer senare) och förstår inte alla egenskaper, utan bara de följande: </para>
+<para>
+<table id="bugtracker-properties">
+<title
+>Egenskaper för integrering med felspårare</title>
+<tgroup cols="3">
+
+<thead>
+<row>
+<entry
+>Egenskap</entry>
+<entry
+>Beskrivning</entry>
+<entry
+>Exempel</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><literal
+>bugtraq:webbadress</literal
+></entry>
+<entry
+>Innehåller webbadressen till felspåraren. Den måste innehålla markören <literal
+>%BUGID%</literal
+>.</entry>
+<entry
+>https://bugs.kde.org/show_bug.cgi?id=%BUGID%</entry>
+</row>
+
+<row>
+<entry
+><literal
+>bugtraq:logregex</literal
+></entry>
+<entry>
+<para
+>Innehåller ett eller två reguljära uttryck, åtskilda med en nyrad.</para>
+<para
+>Om bara ett uttryck är angivet, måste de rena felidentifikationerna matchas i det reguljära uttryckets grupper. Om två uttryck är angivna, används det första uttrycket för att hitta en sträng som har att göra med felidentifikationen, men kan innehålla mer än bara felidentifikationen (t.ex. <quote
+>Problem nummer 123</quote
+> eller <quote
+>löser problem 123</quote
+>). Det andra uttrycket används då för att extrahera den rena felidentifikationen från strängen som extraherats av det första uttrycket.</para>
+<para
+>Ta hänsyn till oönskade mellanslag efter de reguljära uttrycken och glöm inte hakparenteserna omkring nummerbeskrivningen.</para>
+</entry>
+<entry>
+<para
+>Ensam (användbar med TRAC): </para>
+<programlisting
+>#(\d+)
+</programlisting>
+<para
+>Nu tolkas alla nummer, såsom <replaceable
+>#190</replaceable
+>, och översätts till webbadresser i loggutmatningen. </para>
+<para
+>Två uttryck: </para>
+<programlisting
+>[Ii]ssue #?(\d+)(,? ?#(\d+))*
+(\d+)
+</programlisting>
+<important>
+  <title
+>Kom ihåg</title>
+  <para
+>Ta hänsyn till oönskade mellanslag efter <literal
+>(\d+)</literal
+>. Det är ett av de vanligaste felen som gör att uttrycken inte matchar. </para>
+</important>
+</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</para>
+<para
+>För lokalt öppnade arkiv (dvs. protokollet <filename class="directory"
+>file://</filename
+>) och i arbetskopior sker en sökning efter dessa egenskaper uppåt från den öppnade katalogen till de hittas, eller toppnivån i Subversion nås. För arkiv öppnade via nätverket (alla utom protokollet <filename class="directory"
+>file://</filename
+>) sker sökningen bara i den öppnade katalogen själv. </para>
+<para
+>Stöd för flera uppsättningar av dessa egenskaper kan följa senare (t.ex. extra värden för andra spårningsverktyg i underkataloger, etc.), men i de flesta fall bör det vara tillräckligt att utvärdera enstaka spårningslänkar. </para>
+</sect2>
+</sect1>
+
+<sect1 id="revision-tree">
+<title
+>Versionsträdet</title>
+<para
+>Versionsträdet försöker visa ett objekts hela historik så att användaren kan få en bättre känsla för ett objekts historik. Det måste söka igenom arkivets hela logg, eftersom det kräver viss information som Subversion inte ger (och inte kommer att ge, tror jag). Eftersom det ger upphov till mycket trafik använder versionsträdet alltid den interna <link linkend="logcache-descr"
+>loggcachen</link
+>. </para>
+<sect2>
+<title
+>Krav</title>
+<para
+>Versionsträdet skapas via <application
+>dot</application
+>, så för att ha ett fungerade versionsträd måste paketet <application
+>graphviz</application
+> vara installerat. </para>
+</sect2>
+</sect1>
+
+<sect1 id="logcache-descr">
+<title
+>Intern loggcache</title>
+<para
+>&kdesvn; kan använda en intern loggcache för vissa åtgärder. I huvudsak används den för <link linkend="revision-tree"
+>versionsträdet</link
+> men också när en förenklad logg visas i nerkopplat läge. Cacharna är organiserade som <application
+>SQLite</application
+> databaser lagrade i <filename class="directory"
+>$HOME/.sqvnqt/logcache</filename
+>. Varje numrerad fil lagrar olika arkiv. </para>
+<warning>
+  <para
+>Databaserna kan bli stora! Alltså kan man inaktivera automatisk uppdatering av loggcachen i inställningarna. </para>
+</warning>
+<para
+>Man kan helt enkelt ta bort en databas, och då returneras inte någon cachad logg för det arkivet (och inget versionsträd), men om man inte inaktiverar att fylla i cachen automatisk nästa gång arkivet eller en tillhörande arbetskopia öppnas, kommer cachen att fyllas i igen. </para>
+<sect2>
+<title
+>Nerkopplat läge</title>
+<para
+>&kdesvn; kan arbeta utan nätverksåtkomst, dvs. du kan stänga avnätverksåtkomst för &kdesvn;. Det kan vara användbart vid arbete utan nätverk, som på en bärbar dator. I sådana fall hämtar &kdesvn; alltid loggarna från den interna cachen. Loggen är reducerad till grundfunktioner av tekniska skäl, så den cachade loggen kan (men behöver inte) skilja sig från den riktiga loggen. Skilja sig betyder att den inte visar alla kopieringsåtgärder även om <guilabel
+>Loggen följer nodändringar</guilabel
+> är aktiverat.</para>
+</sect2>
+<sect2>
+<title
+>Loggcache och versionsträd</title>
+<para
+>Versionsträdet använder bara loggcachen, ty annars måste det alltid hämta loggarna igen. Det uppdaterar <emphasis
+>inte</emphasis
+> loggcachen (men det kan ändras i senare utgåvor). </para>
+</sect2>
+</sect1>
+
+<sect1 id="overlay-meaning">
+<title
+>Betydelse av överlagrade ikoner</title>
+<para
+>Poster kan markeras med överlagrade ikoner när de inte har det <quote
+>normala</quote
+> tillståndet. <variablelist>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnlocked.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Låst</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Den här posten är låst. I den sista kolumnen listas låsets ägare. Du kan ställa in om &kdesvn; också ska utföra kontroll av låsta objekt i arkivet. Men var försiktig, beroende på servertyp kan det ta lång tid. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnneedlock.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Behöver låsas</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Posten måste låsas innan redigering och arkivering. Innan du lägger till ett lås, håller Subversion den skrivskyddad. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnupdates.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Uppdateringar</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Den här posten, eller en post under den för en katalog, har en nyare version i arkivet. </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnmodified.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Ändrad</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Den här posten, eller en post under den för en katalog, ändrades på den lokala disken. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnadded.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>överlagring tillagd</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Posten är lokalt tillagd i Subversion men inte ännu arkiverad. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvndeleted.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>överlagring borttagen</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Posten är lokalt borttagen från Subversion men inte ännu arkiverad. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnconflicted.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>överlagring borttagen</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Posten (eller posten under den för en katalog) har konflikter att lösa upp efter senaste uppdateringen. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect1>
+
+<sect1 id="kdesvn-passwords">
+<title
+>&kdesvn; och lösenord</title>
+<para
+>&kdesvn; och Subversion klarar av att lagra lösenord. Att lagra lösenord är alltid en säkerhetsrisk, men kan göra att ett grafiskt gränssnitt är mer användbart. </para>
+<sect2>
+<title
+>Inte spara lösenord</title>
+<para
+>Det säkraste sättet, men ibland opraktiskt med grafiska användargränssnitt som &kdesvn;. I synnerhet måste bakgrundsprocesser i &kdesvn; alltid fråga efter ett lösenord ifall arkivet har begränsad åtkomst för läsåtgärder som uppdatering och status. Samma sak gäller för <quote
+>arkivera</quote
+> och så vidare. Om du alltså inte sparar lösenord bör du inaktivera <guilabel
+>Starta kontroll av uppdateringar när arbetskopia öppnas</guilabel
+> och <link linkend="subversion-settings"
+>så vidare</link
+>. </para>
+</sect2>
+<sect2>
+<title
+>Spara lösenord i KDE 5:s plånbok</title>
+<para
+>Säker lagring av lösenord som används av en mängd &kde;-program som &kmail; och &konqueror;. Om du sparar lösenord och i huvudsak använder &kdesvn; bör du använda det. Var medveten om att den krypterade lagringen inte har hög säkerhet. För detaljinformation se dokumentationen för <ulink url="help:/kwallet5"
+>plånboken (&kwallet5;)</ulink
+>. </para>
+</sect2>
+<sect2>
+<title
+>Spara i den egna lösenordsförvaringen i Subversion</title>
+<para
+>Detta rekommenderas inte, eftersom lösenorden lagras som klartext! Tror du inte det är sant? Ta en titt på filerna i <filename class="directory"
+>~/.subversion/auth/svn.simple</filename
+>. Det bör bara användas om du ofta använder andra klienter än &kdesvn;, som <application
+>rapidsvn</application
+>, <application
+>esvn</application
+> eller den ursprungliga kommandoradklienten <application
+>svn</application
+>. Om du i huvudsak använder kommandoradklienten för att checka ut eller uppdatera när ett lösenord inte krävs, och &kdesvn; för att arkivera, flytta eller kopiera bör &kwallet5; användas istället. </para>
+</sect2>
+<sect2>
+<title
+>Intern lösenordscache</title>
+<para
+>Du kan aktivera en intern lösenordscache, som lagrar lösenord i minnet medan &kdesvn; kör. Alltså behöver du inte mata in ett lösenord två gånger även om du inte lagrade det i plånboken. </para>
+</sect2>
+<sect2>
+<title
+>Specialfall svn+ssh</title>
+<para
+>När Subversion används via svn+ssh kan lösenord lagras via SSH och ssh-agent. För detta krävs ssh-åtkomst till fjärrdatorn och arkivet. När du vill lagra någonting ska behörighetskontrollen med öppen nyckel i SSH användas, inte behörighetskontroll med lösenord (i själva verket föredrar SSH behörighetskontroll med öppen nyckel). För detta måste din öppna ssh-nyckel finnas på målsystemet, t.ex. arkivsystemet. Lösenord för SSH hanteras aldrig av lösenordslagring i Subversion, &kwallet5; eller den interna lösenordscachen. </para>
+<para
+>Om du inte vill bli tillfrågad om lösenordet för din SSH-nyckel, kan du använda <application
+>ssh-agent</application
+>. Genom att välja menyalternativet <menuchoice
+><guimenu
+>Subversion</guimenu
+> <guimenuitem
+>Lägg till ssh-identiteter i ssh-agent</guimenuitem
+></menuchoice
+> kan du lagra SSH-nyckelns lösenord för aktuell session, så att lösenordet inte behöver anges igen. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="kdesvn-kio">
+<title
+>&konqueror;, KIO, &kdesvn;</title>
+<sect1 id="kdesvn-kio-desc">
+<title
+>Beskrivning</title>
+<para
+>Från version 0.7.0 levereras &kdesvn; med vissa moduler som direkt integrerar en del kommandon i &konqueror;s menyer. <variablelist>
+<varlistentry>
+<term
+>KIO-protokoll</term>
+<listitem
+><para
+>Implementerar hantering av följande protokoll:</para>
+<itemizedlist>
+<listitem
+><para
+>ksvn+http</para
+></listitem>
+<listitem
+><para
+>ksvn+https</para
+></listitem>
+<listitem
+><para
+>ksvn+file</para
+></listitem>
+<listitem
+><para
+>ksvn+ssh</para
+></listitem>
+<listitem
+><para
+>ksvn</para
+></listitem>
+</itemizedlist>
+
+<para
+>Protokollen är bara konstruerade för arkiv, inte för arbetskopior. Exempelvis måste  <filename class="directory"
+>ksvn+file:///<replaceable
+>sökväg</replaceable
+></filename
+> peka på början av ett arkiv som skiljer sig från själva programmet eller programdelen. &konqueror; kan användas för att bläddra i arbetskopior. </para>
+<para
+>För att bläddra i en specifik version, kan man lägga till frågan <link linkend="revision-syntax"
+><quote
+>?rev=<replaceable
+>version</replaceable
+></quote
+></link
+> i webbadressen. </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Sammanhangsberoende menyer</term>
+<listitem
+><para
+>&kdesvn; installerar sammanhangsberoende menyer i &konqueror;. De kan visas genom att högerklicka i bläddrarfönstret (bara i standardvyn, inte som delprogram), så det är möjligt att utföra de mest använda åtgärderna direkt i &konqueror; (eller någon annan filhanterare som läser &konqueror;s sammanhangsberoende menyer som &dolphin;). Det görs via ett anrop till <link linkend="kdesvn-commandline"
+>kommandoradversionen av &kdesvn;</link
+>. </para>
+</listitem>
+</varlistentry>
+</variablelist>
+</para>
+<sect2>
+<title
+>Användning av KIO utanför &konqueror;: Ett exempel</title>
+<para
+>Alla program som använder KIO-biblioteket kan använda protokollen, så det är möjligt att hämta alla skillnader mellan två versioner med &kdiff3; utan någon djupare kunskap. </para>
+<para>
+<example>
+<title
+>Hämta skillnader mellan versioner med användning av &kdiff3; och KIO::ksvn</title>
+<programlisting
+>kdiff3 \
+  ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=423127 \
+  ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=455064
+</programlisting>
+<para
+>Låt &kdiff3; skriva ut alla skillnader mellan två versioner. </para>
+<para>
+<note>
+  <para
+>Att använda det inne i &kdesvn; (jämförelse av två versioner) går MYCKET snabbare eftersom de interna mekanismerna i Subversion används. </para>
+</note>
+</para>
+</example>
+</para>
+</sect2>
+</sect1>
+<sect1 id="kio-svn-special">
+<title
+>Programmeringsinformation om KIO::ksvn</title>
+<note
+><para
+>Du kan hoppa över detta om du inte är intresserad av KIO-programmering.</para
+></note>
+<para
+>KIO::ksvn::special känner till följande åtgärder. </para>
+<sect2>
+<title
+>Kommandolista</title>
+<para>
+<table id="kio-svn-special-commands">
+  <title
+>Kommandoöversikt för <literal
+>KIO::ksvn::special</literal
+></title>
+<tgroup cols="4">
+
+<thead>
+<row>
+<entry
+>Kommandonamn</entry>
+<entry
+>Numerisk identifierare</entry>
+<entry
+>Parameterlista</entry>
+<entry
+>Implementerad i aktuell version?</entry>
+</row>
+</thead>
+
+<tbody>
+
+<row>
+<entry
+>Checkout</entry>
+<entry
+>1</entry>
+<entry>
+<para
+>KURL arkiv, KURL mål, int vernummer, QString versort </para>
+<para
+>Målet ändras <emphasis
+>inte</emphasis
+>, utan innehållet checkas ut utan att skapa en underkatalog. Källan kan exempelvis vara <filename
+>http://server/arkiv/projekt/trunk</filename
+> och målet <filename
+>/home/användare/proj/</filename
+>. Då kopieras innehållet i trunk till <filename
+>/home/användare/proj/</filename
+> inte <filename
+>/home/användare/proj/trunk/</filename
+>. </para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Update</entry>
+<entry
+>2</entry>
+<entry
+><para
+>KURL url, int vernum, QString versträng</para>
+<para
+>Om vernum &lt; 0 tolkas versträng. Formatet för versträng beskrivs i <link linkend="revision-syntax"
+>appendix</link
+>. </para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Commit</entry>
+<entry
+>3</entry>
+<entry
+><para
+>KURL::List webbadresser</para>
+<para
+>webbadresser är en lista med lokala webbadresser att arkivera. Frågar efter loggmeddelande.</para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Log</entry>
+<entry
+>4</entry>
+<entry>
+<para
+>int startvernummer, QString startversträng, int slutrevnummer, QString slutrevsträng,KURL::List </para>
+<para
+>Använd med försiktighet: det kan skapa mycket data. </para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Import</entry>
+<entry
+>5</entry>
+<entry
+>KURL målarkiv, KURL källsökväg</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Add</entry>
+<entry
+>6</entry>
+<entry
+>KURL</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Del</entry>
+<entry
+>7</entry>
+<entry
+>KURL::List</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Revert</entry>
+<entry
+>8</entry>
+<entry
+><para
+>KURL::List</para>
+<para
+>Återställ i KIO är aldrig rekursivt, utan frågor (anropande program måste sköta det själv)</para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Status</entry>
+<entry
+>9</entry>
+<entry
+><para
+>KURL objekt, bool kontrollera_arkiv, bool rekursivt</para>
+<para
+>objekt - objektet vars information ska kontrolleras, kontrollera_arkiv - kontrollera om det finns nyare versioner i arkivet, rekursivt - kontrollera rekursivt eller inte.</para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Mkdir</entry>
+<entry
+>10</entry>
+<entry
+>KURL::List</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Resolve</entry>
+<entry
+>11</entry>
+<entry
+>KURL, bool rekursivt</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Switch</entry>
+<entry
+>12</entry>
+<entry
+>KURL arbetskopia_sökväg, KURL nytt_arkiv_webbadress, bool rekursivt,int vernummer, QString versort</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Diff</entry>
+<entry
+>13</entry>
+<entry>
+<para
+>URL webbadress1, KURL webbadress2, int v1, QString vsträng1, int v2, QString vsträng 2, bool rekursivt</para>
+<para
+>För skillnad mellan arkiv file:/// och arbetskopia ange arbetskopians webbadresser utan något protokoll.</para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+</tbody>
+
+</tgroup>
+</table>
+
+</para>
+</sect2>
+<sect2>
+<title
+>Returvärden</title>
+<para
+>Returvärden kan ges via metadata, see dokumentationen av programmeringsgränssnittet för detaljerad information. </para>
+<para>
+<table id="kio-ksvn-metadata">
+<title
+>Innehåll i metadata</title>
+<tgroup cols="2">
+
+<thead>
+<row>
+<entry
+>Nyckel</entry>
+<entry
+>Möjligt värde</entry>
+</row>
+</thead>
+
+<tbody>
+
+<row>
+<entry
+>path</entry>
+<entry
+>Sökväg för objektet som åtgärden gäller, t.ex. angiven webbadress</entry>
+</row>
+
+<row>
+<entry
+>action</entry>
+<entry
+>Numerisk åtgärdstyp</entry>
+</row>
+
+<row>
+<entry
+>kind</entry>
+<entry
+>objektets sort (oftast katalog eller fil)</entry>
+</row>
+
+<row>
+<entry
+>mime_t</entry>
+<entry
+>Mime-typ för objekt i Subversion</entry>
+</row>
+
+<row>
+<entry
+>content</entry>
+<entry
+>Innehållets tillstånd (värde i Subversion)</entry>
+</row>
+
+<row>
+<entry
+>prop</entry>
+<entry
+>Egenskapers tillstånd (värde i Subversion)</entry>
+</row>
+
+<row>
+<entry
+>rev</entry>
+<entry
+>Resulterande version eller version som arbetas med</entry>
+</row>
+
+<row>
+<entry
+>string</entry>
+<entry
+>Internt definierat mänskligt läsbart meddelande.</entry>
+</row>
+
+<row>
+<entry
+>loggedaction</entry>
+<entry
+>Åtgärdssträng definierad av Subversion för objekt (A, M, D)</entry>
+</row>
+<row>
+<entry
+>loggedcopyfrompath</entry>
+<entry
+>om kopierad, från vilken sökväg (kan vara tom)?</entry>
+</row>
+<row>
+<entry
+>loggedcopyfromrevision</entry>
+<entry
+>om kopierad, med vilken version (kan vara &lt; 0)</entry>
+</row>
+<row>
+<entry
+>loggedpath</entry>
+<entry
+>För vilken enskild sökväg som posterna loggade åtgärd och så vidare är angiven (sökvägen är inställd till den anropade webbadressen).</entry>
+</row>
+<row>
+<entry
+>diffresult</entry>
+<entry
+>en rad med skillnadsutmatning</entry>
+</row>
+</tbody>
+
+</tgroup>
+</table>
+
+</para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="kdesvn-commandline">
+<title
+>Använda &kdesvn; via kommandoraden</title>
+<sect1 id="kdesvn-commandline-overview">
+<title
+>Översikt</title>
+<para
+>Vissa Subversion-kommandon kan användas via kommandoraden, t.ex. som ett vanligt kommandoradprogram, men användarinteraktion görs via användargränssnittet. Standardsyntaxen är <userinput
+>kdesvn exec <replaceable
+>kommando</replaceable
+> <replaceable
+>väljare</replaceable
+> <replaceable
+>webbadress</replaceable
+></userinput
+>. </para>
+<para
+>Om en enstaka version eller webbadress önskas kan den anges som en parameter i webbadressen, <programlisting
+>svn://din-server/sökväg-till-arkiv/objekt?rev=&lt;din-version&gt;</programlisting
+>. Det skriver över väljaren <option
+>-r &lt;version&gt;</option
+>. </para>
+<para
+>En version kan anges som ett nummer, som något av <option
+>HEAD</option
+> eller <option
+>BASE</option
+>, eller som ett datum formaterat enligt {ÅÅÅÅ-MM-DD}. </para>
+</sect1>
+<sect1 id="kdesvn-command-list">
+<title
+>Kommandolista</title>
+<para
+>Om följande översikt anger <option
+>-r <replaceable
+>version</replaceable
+></option
+> som möjlig väljare, kan versionen anges som <userinput
+><replaceable
+>webbadress</replaceable
+>?rev=<replaceable
+>versionen</replaceable
+></userinput
+>. <table id="svn-commands-table">
+<title
+>Subversion-kommandon</title>
+<tgroup cols="3">
+
+<thead>
+<row>
+<entry
+>Kommando</entry>
+<entry
+>Betydelse</entry>
+<entry
+>Accepterade väljare</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+<entry
+>commit (eller ci)</entry>
+<entry
+>Arkivera ändringar av objekt i arkiv</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>log</entry>
+<entry
+>Skriv ut objektets logg</entry>
+<entry
+>-r startversion:slutversion -l begränsning</entry>
+</row>
+<row>
+<entry
+>cat</entry>
+<entry
+>Visa objektets innehåll</entry>
+<entry
+>-r version </entry>
+</row>
+<row>
+<entry
+>copy (eller cp)</entry>
+<entry
+>Kopiera objekt inne i arbetskopia eller arkiv. Om målet inte anges, frågar &kdesvn;.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>move (eller mv, rename)</entry>
+<entry
+>Flytta eller byt namn på objekt inne i arbetskopia eller arkiv. Om målet inte anges, frågar &kdesvn;.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>get</entry>
+<entry
+>Hämta objektets innehåll och spara det</entry>
+<entry
+>-r version -o &lt;utdatafil&gt; (utdata krävs)</entry>
+</row>
+<row>
+<entry
+>blame (eller annotate)</entry>
+<entry
+>förse fil med noter</entry>
+<entry
+>-r startversion:slutversion</entry>
+</row>
+<row>
+<entry
+>update</entry>
+<entry
+>Uppdatera objekt i arbetskopian</entry>
+<entry
+>-r version</entry>
+</row>
+<row>
+<entry
+>diff</entry>
+<entry
+>Jämför två versioner av objektet eller jämför två objekt med specifika versioner</entry>
+<entry
+>-r startver:endver</entry>
+</row>
+<row>
+<entry
+>info</entry>
+<entry
+>Detaljinformation om objektet</entry>
+<entry
+>-r version</entry>
+</row>
+<row>
+<entry
+>checkout (eller co)</entry>
+<entry
+>Checka ut arkivets sökväg till en ny arbetskopia. Målets sökväg och källversion efterfrågas.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>checkoutto (eller coto)</entry>
+<entry
+>Checka ut arkivets sökväg till en ny arbetskopia. Skillnaden för källans sökväg och källversion efterfrågas.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>export</entry>
+<entry
+>Exportera arkivets sökväg eller arbetskopians sökväg till en katalog. Målets sökväg och källversion efterfrågas.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>exportto</entry>
+<entry
+>Exportera arkivets sökväg eller arbetskopians sökväg till en katalog. Källans sökväg och källversion efterfrågas.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>delete (del, remove, rm)</entry>
+<entry
+>ta bort webbadress(er) från arkiv eller arbetskopia</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>add</entry>
+<entry
+>lägg till webbadress i arbetskopian. Webbadressen måste höra till en arbetskopia (det är inte en import).</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>revert (eller undo)</entry>
+<entry
+>ångra aktuella ändringar av arbetskopian. Kan bara användas för arbetskopians webbadresser.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>checknew (eller addnew)</entry>
+<entry
+>arkivera angiven webbadress för nya objekt utan version och lägg till dem i arbetskopian om det önskas.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>tree</entry>
+<entry
+>visar versionsträd för objekt (bara första väljaren). Om webbadressen anger <quote
+>?rev=<replaceable
+>xxx</replaceable
+></quote
+>, är denna version den uppsatta versionen.</entry>
+<entry
+>-r startver:endver</entry>
+</row>
+<row>
+<entry
+>lock</entry>
+<entry
+>lås webbadress(er). Om <option
+>-f</option
+> är angivet bryts befintliga lås.</entry>
+<entry
+>-f</entry>
+</row>
+<row>
+<entry
+>unlock</entry>
+<entry
+>lås upp webbadress(er). Om <option
+>-f</option
+> är angivet bryts lås som inte ägs, och obefintliga lås ignoreras.</entry>
+<entry
+>-f</entry>
+</row>
+<row>
+<entry
+>help</entry>
+<entry
+>visar den här sidan</entry>
+<entry
+></entry>
+</row>
+</tbody>
+</tgroup>
+
+</table>
+
+<table id="parameter-list">
+<title
+>Väljare för Subversion-kommandon</title>
+<tgroup cols="3">
+<thead>
+<row>
+<entry
+>Väljare</entry>
+<entry
+>Möjliga värden</entry>
+<entry
+>tillåtet för</entry>
+</row>
+</thead>
+<tbody>
+<row>
+  <entry
+><option
+>-r</option
+></entry>
+<entry
+><replaceable
+>version</replaceable
+> eller <replaceable
+>startver:slutver</replaceable
+></entry>
+<entry
+>alla utom commit</entry>
+</row>
+<row>
+  <entry
+><option
+>-R</option
+></entry>
+<entry
+>(ingen)</entry>
+<entry
+>alla utom commit</entry>
+</row>
+<row>
+<entry
+><option
+>-o</option
+></entry>
+<entry
+><replaceable
+>filnamn</replaceable
+></entry>
+<entry
+>get</entry>
+</row>
+<row>
+<entry
+><option
+>-l</option
+></entry>
+<entry
+><replaceable
+>nummer</replaceable
+></entry>
+<entry
+>log</entry>
+</row>
+<row>
+<entry
+><option
+>-f</option
+></entry>
+<entry
+>(ingen)</entry>
+<entry
+>Lås eller lås upp</entry>
+</row>
+
+</tbody>
+</tgroup>
+</table>
+
+</para>
+<sect2>
+  <title
+>Kommandot <quote
+>log</quote
+></title>
+<para
+>Kommandot log visar en dialogruta som innehåller loggen från den angivna webbadressen. Med Subversion 1.2 eller senare accepteras en gräns, dvs. hur många poster som ska visas. </para>
+<para
+>Inne i den dialogrutan kan du välja loggposter och erhålla skillnaden mellan dem. <example>
+<title
+>Visa de 20 senaste arkiveringsloggarna</title>
+<programlisting
+>kdesvn exec log -l 20 -r HEAD&#058;1 min-fil.c
+</programlisting>
+<para
+>Se upp med versionsordningen: Du vill gå från HEAD till START för den sista, så du måste ange versionen HEAD som startpunkt, annars skulle du få de första 20 posterna.</para>
+</example>
+</para>
+</sect2>
+<sect2>
+  <title
+>Kommandot <quote
+>diff</quote
+></title>
+<para
+>Man får skillnader mellan versioner för ett objekt eller mellan två objekt i samma arbetskopia eller arkiv. När versioner av ett objekt jämförs, kan versionerna anges som <option
+>-r <replaceable
+>STARTVER</replaceable
+>:<replaceable
+>SLUTVER</replaceable
+></option
+>. När ett objekt i en arbetskopia jämförs utan några versioner, skrivs skillnaden mot arkivet ut. <example>
+<title
+>Skriv ut skillnader mot arkivet, dvs. lokala ändringar</title>
+<programlisting
+>kdesvn exec diff min-fil.c
+</programlisting>
+</example>
+<example>
+<title
+>Skriv ut skillnader mellan versioner</title>
+<programlisting
+>kdesvn exec diff -r 21:20 min-fil.c
+</programlisting>
+</example>
+</para>
+<para
+>När två objekt jämförs kan versioner läggas till i objektens webbadresser, exempelvis: <programlisting
+>http://server/path/item?rev=HEAD</programlisting>
+<example>
+<title
+>Jämförelse av två taggade versioner</title>
+<programlisting
+>kdesvn exec diff http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_2 http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_3
+</programlisting>
+</example>
+</para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="setup">
+<title
+>Inställningar</title>
+<para
+>Inställningar kan ändras från inställningsdialogrutan. De är uppdelade i ett antal deldialogrutor. </para>
+<sect1 id="general-settings">
+<title
+>Allmänt</title>
+<para>
+<informaltable id="General-setup-items">
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+>Storlek på ikoner i listvy</entry>
+<entry
+>Hur stora (i fyrkant) ikonerna i huvudlistvyn ska vara</entry>
+</row>
+<row>
+<entry
+>Visa filinformation</entry>
+<entry
+>Om ett litet verktygstips ska visas när musen hålls över ett objekt</entry>
+</row>
+<row>
+<entry
+>Markera objektstatus med överlagrad ikon</entry>
+<entry
+>När ett objekt inte har normalt tillstånd i Subversion kan det få en överlagrad ikon (se <xref linkend="overlay-meaning"/>).</entry>
+</row>
+<row>
+<entry
+>Objektens sorteringsordning är skiftlägeskänslig</entry>
+<entry
+>Om sorteringsordningen i huvudfönstret är skiftlägeskänslig eller inte, dvs. om <quote
+>a</quote
+> inte är lika med <quote
+>A</quote
+>.</entry>
+</row>
+<row>
+<entry
+>Visa ignorerade filer</entry>
+<entry
+>Visa objekt som är markerade att ignoreras i Subversion eller inte.</entry>
+</row>
+<row>
+<entry
+>Maximalt antal loggmeddelanden i historik</entry>
+<entry
+>Antal loggmeddelanden som &kdesvn; ska komma ihåg.</entry>
+</row>
+<row>
+<entry
+>Visa färglagda noter</entry>
+<entry
+>Använd färger definierade i inställningsdialogrutan för noter.</entry>
+</row>
+<row>
+<entry
+>Använd navigeringspanel</entry>
+<entry
+>Visa eller göm arkivets trädvy.</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</para>
+</sect1>
+
+<sect1 id="subversion-timedjobs-settings">
+<title
+>Inställningar av Subversion och tidsinställda jobb</title>
+
+<table id="subversion-settings">
+<title
+>Subversion</title>
+<tgroup cols="2">
+
+<tbody>
+
+<row>
+<entry
+>Starta kontroll av uppdateringar när arbetskopia öppnas</entry>
+<entry
+>Starta en kontroll av uppdateringar i bakgrunden när en arbetskopia öppnas</entry>
+</row>
+<row>
+<entry
+>Börja fylla loggcachen vid öppna</entry>
+<entry
+>Om aktiverat börjar &kdesvn; fylla i loggcachen (igen) när ett arkiv eller en arbetskopia öppnas, om arkivets webbadress inte är lokalt tilldelad (<filename class="directory"
+>file://</filename
+>).</entry>
+</row>
+<row>
+  <entry
+>Kontrollera om objekt har <quote
+>svn:needs-lock</quote
+> inställt</entry>
+<entry
+>Kontrollera i arbetskopian om ett objekt har egenskapen, och om svaret är ja, visar en särskild överlagrad ikon. Att aktivera detta kan göra att listningar blir riktigt långsamma.</entry>
+</row>
+<row>
+<entry
+>Hämta filinformation vid fjärrlistning</entry>
+<entry
+>Om markerat, hämtar &kdesvn; mer detaljerad information om filobjekt när en listning av fjärrarkiv utförs, så att fjärrlås visas i översikten. Var försiktig: Det kan få listningar att bli RIKTIGT långsamma.</entry>
+</row>
+
+<row>
+<entry
+>Erhåll objektinformation rekursivt</entry>
+<entry
+>Om aktiverat gör <command
+>info</command
+> för kataloger att informationen erhålles för alla underliggande objekt. Kan vara riktigt långsamt.</entry>
+</row>
+
+<row>
+<entry
+>Lagra lösenord för fjärranslutningar</entry>
+<entry
+>Att lagra lösenord är ofta en säkerhetsrisk. Subversion lagrar sina lösenord i en enkel fil, dvs. lösenord med vanlig text. Var försiktig med att aktivera alternativet, och ta också en titt på nästa alternativ. Alternativet anger bara om lösenord normalt lagras, det går att ändra för specifika områden inne i inloggningsdialogrutan.</entry>
+</row>
+
+<row>
+<entry
+>Lagra lösenord i KDE:s plånbok</entry>
+<entry
+>När lösenord sparas är den vanliga textfilen i Subversion ett säkerhetshål. &kdesvn; klarar av att spara dem i &kde;:s krypterade plånbok istället (från och med version 0.12.0) och använda dem därifrån. Å andra sidan kan inte andra Subversion-klienter läsa dem, så de måste skrivas in om verktyg såsom kommandoradverktyget <application
+>svn</application
+> eller <application
+>rapidsvn</application
+> också används. Medan Subversion inte krypterar lagrade lösenord bör du tänka dig för.</entry>
+</row>
+
+<row>
+<entry
+>Använd intern lösenordscache</entry>
+<entry
+>När ett lösenord inte lagras permanent kan &kdesvn; behålla det till &kdesvn; avslutas, så att man inte måste skriva in det igen för varje åtgärd. Cache är aldrig permanent, dvs. den sparas inte någonstans.</entry>
+</row>
+
+<row>
+<entry
+>Loggen följer nodändringar</entry>
+<entry
+>Om markerad följer loggen kopieringsåtgärder.</entry>
+</row>
+
+<row>
+<entry
+>Loggen läser alltid lista med ändrade filer</entry>
+<entry
+>Loggkommandot kan läsa listan med filer ändrade vid arkivering. Det är användbart, och i de flesta fall orsakar det inte särskilt mycket mer trafik.</entry>
+</row>
+
+<row>
+<entry
+>Granska objekt innan arkivering</entry>
+<entry
+>När en arkivering utförs, kan &kdesvn; göra en kontroll av vad som ska göras. Om exempelvis objekt utan version som kan läggas till finns nedanför, listas ändrade objekt och aktuell åtgärd utför arkiveringen. Detta kostar mer eller mindre tid beror på trädet.</entry>
+</row>
+
+<row>
+<entry
+>Dölj nya objekt i arkiveringsruta</entry>
+<entry
+>Ska objekt utan version visas i arkiveringsdialogrutan eller inte.</entry>
+</row>
+
+<row>
+<entry
+>Uppdatering ändrar istället för orsakar konflikt</entry>
+<entry
+>Om aktiverad, ger ett lokalt tillägg med samma sökväg som ett inkommande tillägg en normal nod möjligen med en lokal ändring, istället för en trädkonflikt.</entry>
+</row>
+
+<row>
+<entry
+>Uppdatering skapar saknade överliggande objekt</entry>
+<entry
+>Om aktiverad, skapas alla överliggande kataloger som inte finns genom att checka ut dem med tomt djup.</entry>
+</row>
+
+</tbody>
+
+</tgroup>
+</table>
+
+<table id="timejobs-settings">
+<title
+>Tidsinställda jobb</title>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+><para
+>Kontroll av ändrade objekt var N:te sekund</para
+> <para
+>Kontroll av uppdaterade objekt var N:te sekund</para
+></entry>
+<entry
+>Om aktiverat kontrolleras uppdateringar av arbetskopian regelbundet när nätverket är aktiverat</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="diffmerge-settings">
+<title
+>Jämför och sammanfoga</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>Jämförelse ignorerar innehållstyp</term>
+<listitem
+><para
+>Bara av intresse när jämförelser görs med Subversion själv. Om aktiverat, ignorerar jämförelse i Subversion posternas innehållstyp. Annars visas inte skillnader för binärfiler. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Jämförelse i versionsträd är rekursiv</term>
+<listitem
+><para
+>Om aktiverat, utförs jämförelser inifrån versionsträdets vy också rekursivt, liksom i alla andra fall. Annars visas bara ändringar som hör till den katalogens objekt. Hur det sker beror på hur jämförelser skapas (från Subversion själv eller från externa visningsprogram). </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Jämförelse ignorerar ändringar av blanktecken</term>
+<listitem>
+<para
+>Ignorera ändringar i antal blanktecken (väljaren <option
+>-b</option
+> i <application
+>diff</application
+>) </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Jämförelse ignorerar alla blanktecken</term>
+<listitem>
+  <para
+>Ignorera alla blanktecken (väljaren <option
+>-w</option
+> i diff)</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Föredra externt jämförelseprogram</term>
+<listitem>
+<para
+>Aktivera om sammanfogning med externt program föredras i stället för sammanfogning med Subversion</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Använd Git jämförelseformat</term>
+<listitem>
+<para
+></para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Visa kopior att lägga till</term>
+<listitem>
+<para
+></para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+<sect2>
+<title
+>Använd extern jämförelsevisning</title>
+<para
+>Väljer ett externt program för att visa skillnader. &kompare; är förval. </para>
+</sect2>
+<sect2>
+<title
+>Extern jämförelsevisning</title>
+<para
+>Definierar vad &kdesvn; använder för extern visning av skillnader och hur det anropas. Det finns tre sätt: </para>
+<para>
+<variablelist>
+<varlistentry>
+<term
+>&lt;program&gt; &lt;väljare&gt;</term>
+<listitem
+><para
+>Skillnaden skapas med Subversion och skickas direkt till det externa programmets standardinmatning (dvs. inga tillfälliga filer behövs). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>&lt;program&gt; &lt;väljare&gt; %f</term>
+<listitem
+><para
+>Jämförelsen skapas med Subversion, sparas i en tillfällig fil och väljaren <option
+>%f</option
+> ersätts med det filnamnet. Det kan exempelvis användas med ett enkelt anrop till <application
+>less</application
+> eller en textvisning. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>&lt;program&gt; &lt;väljare&gt; %1 %2</term>
+<listitem
+><para
+>&kdesvn; låter det externa programmet skapa jämförelsen. %1 och %2 ersätts med nödvändiga värden (filnamn eller katalognamn). &kdesvn; lagrar innehåll att jämföra i en tillfällig omgivning (för kataloger utförs <quote
+>export</quote
+>, för en enstaka fil utförs <quote
+>mata ut</quote
+>) vid behov, och städar upp efter att externa program har avslutats, eller programmet själv avslutas. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Föredra externt jämförelseprogram</term>
+<listitem
+><para
+>Välj om <guilabel
+>Använd externt program</guilabel
+> normalt ska vara markerat eller inte i dialogrutan för sammanfogning.</para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect2>
+<sect2>
+<title
+>Externt sammanfogningsprogram</title>
+<para
+>Ställ in program och alternativ att använda när den inbyggda sammanfogningen i Subversion inte önskas. Förval är <command
+>kdiff3 %s1 %s2 %t</command
+>. Ersättningsvariablernas ordning har ingen betydelse, och de kan finnas mer än en gång, t.ex. som <literal
+>kdiff3 -o %t %s1 %s2 %t</literal
+>. Grejerna har bara provats med <application
+>meld</application
+> och &kdiff3;. Tänk på att externa program oftast inte känner till något om <command
+>ignore</command
+> parametrar i Subversion, så de kan visa mycket mer än förväntat. </para>
+<sect3>
+<title
+>Variabelsubstitution för externt sammanfogningsprogram</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>%s1</term>
+<listitem
+><para
+>Ersätts med källa nummer ett. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>%s2</term>
+<listitem
+><para
+>Ersätts med källa nummer två. Om den är tom eller lika med källa ett och start- och slutversionerna är samma, hoppas variabeln över. Var alltså försiktig med att skapa kommandorader som <prompt
+>xxdiff --title1 %s1 --title2 %s2 %s1 %s2 %t</prompt
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>%t</term>
+<listitem
+><para
+>Ersätts med mål. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect3>
+</sect2>
+<sect2 id="extern-resolve-setup">
+<title
+>Program för konfliktupplösning</title>
+<para
+>Det går att använda ett externt program som &kdiff3; för konfliktupplösning. Förval är <command
+>kdiff3 %o %m %n -o %t</command
+>. </para>
+<sect3>
+<title
+>Variabelsubstitution för externt konfliktupplösningsprogram</title>
+<para
+>I parentes efter varje beskrivning anges ett exempel på hur Subversion skulle anropa filerna. Dessa väljare är konstruerad för &kdiff3;, eftersom för närvarande är det det enda program som stöder alla parametrar som krävs för bra konfliktupplösning. <variablelist>
+<varlistentry>
+<term
+>%o eller %l</term>
+<listitem
+><para
+>Gammal (lokal, vänster) version. Det betyder det lägre versionsnumret, dvs. startpunkten för ändringar med konflikt (<filename
+>exempel.cc.r2</filename
+>). </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%m eller %w</term>
+<listitem
+><para
+>Min version (arbetsversion) av filen, dvs. vad du har ändrat jämfört med den gamla versionen (<filename
+>exempel.cc.mine</filename
+>). </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%n eller %r</term>
+<listitem
+><para
+>Ny version (fjärrversion, höger version) av filen. Exempelvis en version som någon annan har skapat (<filename
+>exempel.cc.r3</filename
+>). </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%t</term>
+<listitem
+><para
+>Målnamn, t.ex. originalets namn. För &kdiff3; (som exempel) skulle det vara namnet efter väljaren <option
+>-o</option
+> = utdatafilen (<filename
+>exempel.cc</filename
+>). </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect3>
+</sect2>
+</sect1>
+<!--FIXME
+Colors
+
+Revisions tree
+-->
+<sect1 id="kio-cmdline-settings">
+<title
+>KIO och kommandorad</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>Visa logg efter ett kommando har utförts</term>
+<listitem
+><para
+>Ska en dialogruta visas med loggen från det senaste Subversion-kommandot när det utförs via kommandoraden eller åtgärdsmenyn i &konqueror;? </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Minimalt antal loggrader att visa</term>
+<listitem
+><para
+>Om <guilabel
+>Visa logg...</guilabel
+> är aktiverat, vad är det minsta antal rader innan en sådan dialogruta visas? Du kan alltså ställa in att ett sådant fönster bara visas när intressant utdata skapades (arkiveringslogg med mera). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Visa inte sammanhangsberoende meny i &konqueror;</term>
+<listitem
+><para
+>Om aktiverat, skapas inte något alternativ för &kdesvn; i åtgärdsmenyn i &konqueror;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Visa inte alternativ i åtgärdsmenyn på toppnivå</term>
+<listitem
+><para
+>Om aktiverat visar KDESvn inte några extra åtgärder under menyn <guimenuitem
+>Åtgärder</guimenuitem
+> i &konqueror; eller &dolphin;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>KIO-åtgärder använder standardloggmeddelande</term>
+<listitem
+><para
+>När åtgärder utförs i ett arkiv via &kdesvn; KIO-protokoll inifrån &konqueror; (dvs. med protokollen <quote
+>ksvn+...</quote
+>), skulle &kdesvn; fråga efter ett loggmeddelande för varje objekt vid större åtgärder som att flytta eller kopiera kataloger. Detta beteende kommer från &konqueror;. När alternativet är aktiverat, frågar inte implementeringen i &kdesvn; av KIO efter loggmeddelanden utan anger ett standardloggmeddelande. Det gäller inte åtgärderna från &kdesvn; i &konqueror;s åtgärdsmeny, utan bara kopiera, flytta, skapa katalog eller ta bort som utförs i &konqueror; eller andra filhanterare med en KIO-webbadress. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Standardmeddelande</term>
+<listitem
+><para
+>Meddelandet som &kdesvn; KIO ska ange vid åtgärder inne i &konqueror; när flaggan ovan är aktiverad. Förvalt värdet är <guilabel
+>Revision made with &kdesvn; KIO</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>KIO kan skriva över</term>
+<listitem
+><para
+>Om flaggan är aktiverad, får du ett enkelt stöd för skrivning av befintliga objekt Det går t.ex. att öppna filer direkt i en editor och spara dem utan att checka ut dem innan (&kdesvn; gör det i bakgrunden).</para>
+<para
+>Använd den bara om du är säker på vad du gör. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>KIO visar förloppsmeddelanden</term>
+<listitem
+><para
+>Om aktiverat visar KIO detaljerad information om aktuell åtgärd i KDE:s Plasma. Felmeddelanden från KIO visas alltid och kan <emphasis
+>inte</emphasis
+> stängas av. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect1>
+</chapter>
+
+<chapter id="commands">
+<title
+>Kommandoreferens</title>
+
+<sect1 id="kdesvn-mainwindow">
+<title
+>Huvudfönstret i &kdesvn;</title>
+
+<sect2>
+<title
+>Menyn Arkiv</title>
+<para>
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Öppna</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Öppna en lokal arbetskopia eller ett arkiv som tidigare checkats ut</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Senast öppnade webbadresser</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Det här är en genväg för att öppna de senast använda arkiven. Att klicka på alternativet visar en lista vid sidan av menyn med flera av de senast använda lokala arbetskopiorna eller arkiven. Att klicka på ett visst alternativ öppnar det i &kdesvn;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Ny</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Öppna ett fönster med en ny instans av &kdesvn;</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Administration av Subversion</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Menyalternativ med administrationsuppgifter för Subversion-arkiv såsom: <simplelist
+><member
+>Skapa och öppna nytt arkiv</member
+> <member
+>Dumpa arkiv i fil</member
+> <member
+>Säkerhetskopiera ett arkiv med hotcopy</member
+> <member
+>Läs in en dumpning i arkiv</member
+> </simplelist
+> För mer information läs utmatningen från <command
+>svnadmin --help</command
+>. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Stäng</guimenuitem
+> </menuchoice>
+</term>
+<listitem
+><para
+><action
+>Stäng</action
+> aktuellt öppet arkiv eller arbetskopia</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Avsluta</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Avslutar</action
+> &kdesvn;</para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect2>
+<sect2>
+<title
+>Menyn Bokmärken</title>
+<para
+>Se <ulink url="help:/konqueror/bookmarks.html"
+>hjälp för &konqueror;</ulink
+>. </para>
+</sect2>
+
+<sect2 id="kdesvn-subversion-menu">
+<title
+>Menyn Subversion</title>
+
+<variablelist id="subversion-general">
+<title
+>Allmänna åtgärder i Subversion</title>
+<varlistentry>
+<term>
+<menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allmänt</guisubmenu
+> <guimenuitem
+>Objekthistorik</guimenuitem
+> </menuchoice
+></term>
+<listitem>
+<para
+><action
+>Visa</action
+> hela livstidens logg för objektet som för närvarande är markerat. Var försiktig, listan kan vara mycket lång.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; &Shift;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allmänt</guisubmenu
+> <guimenuitem
+>Objekthistorik med kopior ignorerade</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Visar historikloggen för markerat objekt utan att följa kopior.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>I</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allmänt</guisubmenu
+> <guimenuitem
+>Detaljinformation</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Visar detaljinformation om markerade objekt</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allmänt</guisubmenu
+> <guimenuitem
+>Klandra</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Skapar en lista försedd med noter för alla arkiveringar. Det kan ta lång tid.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allmänt</guisubmenu
+> <guimenuitem
+>Klandra intervall</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Skapa ett intervall av arkiveringar försett med noter för en fil.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allmänt</guisubmenu
+> <guimenuitem
+>Mata ut huvudversion</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Visar innehållet i den senast arkiverade versionen för posten (kan skilja sig från arbetskopians version vid arbete med en arbetskopia).</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>F2</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allmänt</guisubmenu
+> <guimenuitem
+>Flytta</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Flytta eller byt namn på objekt i arbetskopian eller i arkivet</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allmänt</guisubmenu
+> <guimenuitem
+>Kopiera</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Kopiera objekt i arbetskopian eller i arkivet</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Delete</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allmänt</guisubmenu
+> <guimenuitem
+>Ta bort markerade filer och kataloger</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ta bort markerade poster. Vid arbete i en arbetskopia måste borttagningarna därefter arkiveras.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allmänt</guisubmenu
+> <guimenuitem
+>Ny katalog</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Skapa en ny katalog.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allmänt</guisubmenu
+> <guimenuitem
+>Importera kataloger till aktuell</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Välj kataloger som du vill importera i katalogen som för närvarande är markerad</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allmänt</guisubmenu
+> <guimenuitem
+>Checka ut ett arkiv</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Skapar en ny arbetskopia av ett arkiv</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allmänt</guisubmenu
+> <guimenuitem
+>Exportera ett arkiv</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Exporterar ett arkiv till filsystemet, dvs. skapar ett rent versionsträd utan Subversion-information. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allmänt</guisubmenu
+> <guimenuitem
+>Lås aktuella objekt</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Markera aktuella objekt som låsta. Läs i handboken för Subversion innan det används. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allmänt</guisubmenu
+> <guimenuitem
+>Lås upp aktuella objekt</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ta bort lås från aktuella objekt. Läs i handboken för Subversion innan det används. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-workingcopy">
+<title
+>Arbetskopia</title>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbetskopia</guisubmenu
+> <guimenuitem
+>Uppdatera till huvudversion</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Uppdatera arbetskopian till en HEAD i arkivet</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbetskopia</guisubmenu
+> <guimenuitem
+>Uppdatera till version...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Uppdatera arbetskopian till en specifik version av arkivet</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>#</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbetskopia</guisubmenu
+> <guimenuitem
+>Arkivera</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Arkivera ändringar av arbetskopian i arkivet för markerade objekt.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbetskopia</guisubmenu
+> <guimenuitem
+>Jämför lokala ändringar</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Visar lokala ändringar som utdata från diff (utan nätverksåtkomst). Det är bara skillnaden mot senaste tillståndet som arbetskopian uppdaterades till, inte mot versionen i arkivet.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbetskopia</guisubmenu
+> <guimenuitem
+>Jämför med huvudversion</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Jämför aktuell arbetskopia med huvudversionen i arkivet.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbetskopia</guisubmenu
+> <guimenuitem
+>Egenskaper</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Visa och redigera egenskaper tilldelade till aktuell post.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Insert</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbetskopia</guisubmenu
+> <guimenuitem
+>Lägg till markerade filer och kataloger</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Lägg till markerade filer och/eller kataloger i versionskontroll.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbetskopia</guisubmenu
+> <guimenuitem
+>Återställ aktuella ändringar</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ångra ändringar gjorda i arbetskopian och uppdaterar till senaste uppdaterade tillstånd.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbetskopia</guisubmenu
+> <guimenuitem
+>Markera som upplöst</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Markera objekt med konflikter som utan konflikter och ta bort tillhörande filer.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbetskopia</guisubmenu
+> <guimenuitem
+>Sammanfoga två versioner</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Sammanfoga två versioner av poster till arbetskopian.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbetskopia</guisubmenu
+> <guimenuitem
+>Ignorera eller ignorera inte aktuellt objekt</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Redigera egenskapen för det aktuella objektets överliggande katalog så att det markerade objektet ignoreras om det inte redan görs, ta annars bort det från listan med ignorerade objekt.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbetskopia</guisubmenu
+> <guimenuitem
+>Städa upp</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Städa arbetskopian och ta bort (arkiverings-)lås om några finns</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbetskopia</guisubmenu
+> <guimenuitem
+>Byt arkiv</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Byt den aktuella arbetskopians rot.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-repository">
+<title
+>Arkiv</title>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arkiv</guisubmenu
+> <guimenuitem
+>Checka ut aktuell arkivsökväg</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Skapa en arbetskopia från den aktuella markerade posten om en katalog.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arkiv</guisubmenu
+> <guimenuitem
+>Exportera aktuell arkivsökväg</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Skapa en ren kopia i det lokala filsystemet av posten som för närvarande är markerad, om en katalog.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-view">
+<title
+>Visa åtgärder</title>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>F5</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Visa</guisubmenu
+> <guimenuitem
+>Uppdatera vy</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Uppdatera</action
+> aktuell status för alla visade objekt. Det listar varje objekt och ber att det ska visas med aktuell status. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Visa</guisubmenu
+> <guimenuitem
+>Expandera filträd / Dra ihop filträd</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Expandera eller dra ihop arkivets trädvy. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Loggcache</guisubmenu
+> <guimenuitem
+>Sluta uppdatera loggcachen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Loggen lagras i cache och används för att visa ett arkivs versionsträd. Beroende på Internet-anslutningen, Subversion-arkivets storlek och historikens längd kan det ta lång tid. Därför kan du stoppa uppdatering av cachen med det här alternativet. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guimenuitem
+>Lägg till ssh-identiteter i ssh-agent</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Lagra din SSH-nyckels lösenord för aktuell session, så att lösenordet inte behöver anges igen. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="kdesvn-database-menu">
+<title
+>Menyn Databas</title>
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Databas</guimenu
+> <guimenuitem
+>Visa databasinnehåll</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Visar en översikt av cachens databasinnehåll för kända arkiv, tillåter att cachen eller arkivet tas bort, och ger tillgång till arkivinställningar. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Databas</guimenu
+> <guimenuitem
+>Inställningar för aktuellt arkiv</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Visar en dialogruta för att anpassa inställningar av cachen, loggar och statistik. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Menyerna Inställningar och Hjälp</title>
+<para
+>Förutom de vanliga menyalternativen i &kde;, <guimenu
+>Inställningar</guimenu
+> och <guimenu
+>Hjälp</guimenu
+> beskrivna i <ulink url="help:/fundamentals/menus.html#menus-settings"
+>Menyn Inställningar</ulink
+> och <ulink url="help:/fundamentals/menus.html#menus-help"
+>Menyn Hjälp</ulink
+> i &kde;:s grunder, har &kdesvn; följande menyalternativ:</para>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Snabbinställningar</guimenuitem
+> </menuchoice
+></term>
+<listitem>
+
+<variablelist>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Läs in senast öppnade webbadress vid start</guimenuitem>
+</term
+><listitem>
+<para
+>Läs in senast öppnade webbadress igen vid start om ingen anges på kommandoraden.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Loggar följer nodändringar</guimenuitem>
+</term
+><listitem>
+<para
+><!--FIXME What does this option do? --></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Visa ignorerade filer</guimenuitem>
+</term
+><listitem>
+<para
+>Visa objekt som är markerade att ignoreras i Subversion eller inte.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Visa ignorerade filer</guimenuitem>
+</term
+><listitem>
+<para
+>Visa filer som inte har lagts till i Subversion-arkivet.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Dölj oändrade filer</guimenuitem>
+</term
+><listitem>
+<para
+>Använd alternativet för att bara visa ändrade filer och ge en klar och koncis översikt.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Arbeta uppkopplad</guimenuitem>
+</term
+><listitem>
+<para
+>Vid arbete utan uppkoppling uppdateras inte loggcachen, och därför kan loggen som är lagrad i cachen skilja sig från den verkliga loggen.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+</sect1>
+</chapter>
+<chapter id="credits-and-license">
+<title
+>Bidragsgivare, licens och tack till</title>
+<para
+>Program copyright 2005-2009 &Rajko.Albrecht; &Rajko.Albrecht.mail; </para>
+<para
+>Många tack till bidragsgivarna: </para>
+<itemizedlist>
+<listitem
+><para
+>Andreas Richter <email
+>ar@oszine.de</email
+> - för överföring av svnqt till Qt-4</para>
+</listitem>
+<listitem
+><para
+>Michael Biebl <email
+>biebl@teco.edu</email
+> - för mycket hjälp, idéer, implementering och tips.</para>
+</listitem>
+<listitem
+><para
+>Bram Schoenmakers <email
+>bramschoenmakers@kde.nl</email
+> - för &kde;-specifika tips, översättning till holländska, uppstädning av min kod.</para>
+</listitem>
+</itemizedlist>
+<para
+>Och tack till alla andra översättare (jag trodde aldrig att jag skulle få så många översättningar så snabbt) och för alla både positiva och negativa synpunkter från er. De har varit till stor hjälp. </para>
+<para
+>Om du vill ha en egen översättning av &kdesvn; och kanske vill hjälpa till, läs på <ulink url="http://l10n.kde.org/"
+>&kde;:s översättningssida</ulink
+> eller fråga på <ulink url="mailto:kde-i18n-doc@kde.org"
+>e-postlistan <email
+>kde-i18n-doc@kde.org</email
+></ulink
+>. </para>
+<para
+>Dokumentation copyright 2005-2006 &Rajko.Albrecht; &Rajko.Albrecht.mail; </para>
+<para
+>Översättning Stefan Asserhäll <email
+>stefan.asserhall@bredband.net</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+<appendix id="revision-syntax">
+<title
+>Syntax för versioner</title>
+<para
+>Versioner kan anges på samma form som i den vanliga klienten <application
+>svn</application
+>. Det betyder: nummer, nyckelord eller datum. </para>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>Nummer</term>
+<listitem
+><para
+>Ett nummer större än eller lika med -1. Värdet -1 betyder <quote
+>ospecificerad version</quote
+>, 0 är början. Normalt ska dessa nummer inte användas (de flesta åtgärder misslyckas med det). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Nyckelord</term>
+<listitem
+><para
+>En av <itemizedlist>
+
+<listitem
+><para
+>HEAD </para
+></listitem>
+
+<listitem
+><para
+>BASE </para
+></listitem>
+
+<listitem
+><para
+>COMMITED </para
+></listitem>
+
+<listitem
+><para
+>PREV (Föregående) </para
+></listitem>
+
+<listitem
+><para
+>START </para
+></listitem>
+
+<listitem
+><para
+>WORKING </para
+></listitem>
+
+</itemizedlist>
+
+</para>
+<para
+>Nyckelorden är skiftlägeskänsliga. Exempelvis är inte head samma sak som HEAD. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Datum</term>
+<listitem
+><para
+>Datum på formen {ÅÅÅÅ-MM-DD}. De måste använda MM eller DD - t.ex. måste 2005-1-1 skrivas som {2005-01-01}. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+<para
+>Att lägga till en specifik version till en webbadress görs alltid via <quote
+>?rev=<replaceable
+>version</replaceable
+></quote
+>. </para>
+</appendix>
+
+&documentation.index;
+</book>

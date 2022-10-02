@@ -1,0 +1,3489 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kdesvn "<application
+>kdesvn</application
+>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY Rajko.Albrecht '<personname
+><firstname
+>Rajko</firstname
+><surname
+>Albrecht</surname
+></personname
+>'>
+  <!ENTITY Rajko.Albrecht.mail '<email
+>ral@alwins-world.de</email
+>'>
+  <!ENTITY % Catalan  "INCLUDE"
+><!-- change language only here -->
+]>
+
+<book lang="&language;">
+
+<bookinfo>
+<title
+>El manual del &kdesvn;</title>
+
+<authorgroup>
+<author
+><firstname
+>Rajko</firstname
+> <surname
+>Albrecht</surname
+> <affiliation
+> <address
+>&Rajko.Albrecht.mail;</address>
+</affiliation>
+</author>
+&traductor.Antoni.Bella; 
+</authorgroup>
+
+<copyright>
+<year
+>2005</year>
+<year
+>2008</year>
+<holder
+>&Rajko.Albrecht;</holder>
+</copyright>
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>22 de maig de 2016</date>
+<releaseinfo
+>kdesvn 2.0</releaseinfo>
+
+<abstract>
+<para
+>&kdesvn; - un client de Subversion pel &kde;. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdesvn</keyword>
+<keyword
+>subversion</keyword>
+<keyword
+>sistema de control de versions</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Introducció</title>
+
+<para
+>El &kdesvn; és un <ulink url="http://subversion.apache.org/"
+>client de Subversion</ulink
+> pel &kde;. </para>
+<para
+>Haureu de tenir algun coneixement sobre el Subversion, però esperem que la majoria dels elements s'expliquin per si mateix. </para>
+<para
+>Podeu enviar informes d'error i desitjos a través del <ulink url="https://bugs.kde.org/"
+>sistema de seguidor d'errors del &kde;</ulink
+>. </para>
+
+<sect1 id="kdesvn-terms">
+<title
+>Termes</title>
+<para
+>Si esteu familiaritzat amb els sistemes de control de revisions podeu ometre això -o llegir i corregir a l'autor- ;) </para>
+<para>
+<variablelist>
+<varlistentry>
+<term
+>Repositori</term>
+<listitem
+><para
+>És el magatzem central de les dades. Aquest pot ser una base de dades o un sistema de fitxers pla. Sense clients especials, no sereu capaç de llegir-hi les dades. Per als repositoris de Subversion, el &kdesvn; treballa com un client. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Còpia de treball</term>
+<listitem
+><para
+>Una còpia plana d'un repositori en el sistema de fitxers local. Aquesta s'utilitza amb qualsevol gestor de fitxers normal, edició dels fitxers, &etc; La informació RCS -sistema de control de revisions- es pot llegir amb clients com el &kdesvn;. </para>
+<para
+>Recordeu que el Subversion no sap res sobre el KIO, de manera que la còpia de treball haurà de residir en una àrea on es pugui arribar sense cap protocol específic, &pex; <quote
+>fish://</quote
+> o potser no serà possible. </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>WebDav</term>
+<listitem
+><para
+>El WebDav és un protocol que permet modificar els fitxers en un servidor web remot. El Subversion és un tipus especial de WebDav quan s'accedeix als repositoris a través d'un servidor web. L'ús normal d'aquest és de només lectura. Amb configuracions especials, podreu activar-hi la lectura-escriptura amb un navegador especialitzat. El &kdesvn; no és un client de WebDav, sí el &konqueror; a través del protocol <quote
+>webdav://</quote
+>. Però amb el &kdesvn; podreu navegar a través de l'arbre de versions d'un repositori (mitjançant <quote
+>http://</quote
+>). </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect1>
+</chapter>
+
+<chapter id="using-kdesvn">
+<title
+>Ús del &kdesvn;</title>
+<sect1 id="kdesvn-features">
+<title
+>Característiques del &kdesvn;</title>
+<para
+>El &kdesvn; entén els següents protocols per a la navegació en els repositoris: <variablelist>
+
+<varlistentry>
+<term
+>http</term>
+<listitem
+><para
+>Protocol del navegador web estàndard. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>https</term>
+<listitem
+><para
+>Protocol encriptat del navegador web estàndard. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+http</term>
+<listitem
+><para
+>Protocol del navegador web estàndard. Es pot utilitzar per a permetre que el &konqueror; cridi automàticament al &kdesvn;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+https</term>
+<listitem
+><para
+>Protocol encriptat del navegador web estàndard. Es pot utilitzar per a permetre que el &konqueror; cridi automàticament al &kdesvn;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+file</term>
+<listitem
+><para
+>Protocol del repositori local. Es pot utilitzar per a permetre que el &konqueror; cridi automàticament al &kdesvn;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn</term>
+<listitem
+><para
+>Protocol del servidor propi de Subversion. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+ssh</term>
+<listitem
+><para
+>Subversion sobre ssh. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>file</term>
+<listitem
+><para
+>Accés directe al repositori. El &kdesvn; comprovarà si un camí donat és un repositori o una còpia de treball, i l'obrirà en el mode correcte. Per al Subversion, <filename class="directory"
+>file:///dir</filename
+> i <filename class="directory"
+>/dir</filename
+> no són el mateix! </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+<para
+>Aquesta llista també es pot emprar per als &URL; indicats a la <link linkend="kdesvn-commandline"
+>línia d'ordres</link
+>. </para>
+</sect1>
+<sect1 id="first_steps">
+<title
+>Començant amb Subversion i el &kdesvn;</title>
+<para
+>Aquesta secció és sobretot per als principiants que no estan familiaritzats amb el Subversion, i explica com treballen els sistemes per al control de revisions (revision control system -<acronym
+>RCS</acronym
+>-). </para>
+
+<sect2>
+<title
+>Crear una còpia de treball</title>
+<caution>
+<para
+>Les còpies de treball HAN de ser accessibles a través de camins locals. El Subversion no coneix res sobre els pseudo sistemes de fitxers com <filename class="directory"
+>smb://</filename
+> o <filename class="directory"
+>fish://</filename
+>. El &kdesvn; en tradueix alguns si és possible (com <filename class="directory"
+>system:/home</filename
+>), però a través d'una xarxa, això no és possible. </para>
+</caution>
+<para
+>Primer de tot, haureu de crear una còpia de treball del repositori. Per fer-ho, seleccioneu <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>General</guisubmenu
+> <guimenuitem
+>Descarrega un repositori</guimenuitem
+> </menuchoice
+>. Dins el següent diàleg s'ha de seleccionar l'&URL; del repositori que voleu utilitzar, &pex;, quelcom com <literal
+>http://màquina_local/repos/meu_projecte</literal
+>. També estan disponibles les subcarpetes d'un repositori, &pex;, <literal
+>http://màquina_local/repos/meu_projecte/trunk</literal
+> o similar. </para>
+<para
+>Seleccioneu i/o creeu una carpeta local, on residirà la còpia de treball. </para>
+<para
+>Finalment, però no menys important, la revisió a descarregar. Majoritàriament aquesta seria <quote
+>HEAD</quote
+>. Això assegura que l'última versió emmagatzemada és la versió de referència. </para>
+<para
+>Després feu clic a <guibutton
+>D'acord</guibutton
+>, el &kdesvn; crearà la vostra còpia de treball i l'obrirà (si el quadre estava marcat). </para>
+<para
+>Quan obriu un repositori per a la navegació, podeu marcar una carpeta i després seleccionar <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Repositori</guisubmenu
+> <guimenuitem
+>Descarrega des del camí del repositori actual</guimenuitem
+> </menuchoice
+> i ompliu els diàlegs com s'ha descrit anteriorment. Només llavors es descarregarà el camí marcat. </para>
+</sect2>
+<sect2>
+<title
+>Publicar els canvis locals</title>
+<para
+>Marqueu l'entrada o entrades que voleu enviar i seleccioneu <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>#</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+> <guimenuitem
+>Publica</guimenuitem
+> </menuchoice
+> </para>
+<para
+>Si intenteu publicar sense seleccionar cap element, el &kdesvn; utilitzarà l'element de nivell superior obert a la còpia de treball, &ead;, el mateix camí de la còpia de treball. </para>
+<para
+>Aquesta operació sempre serà recursiva, vol dir que, si se selecciona una carpeta, el &kdesvn; sempre enviarà tots els elements modificats per sota seu. Quan amb la configuració vulgueu revisar tots els elements abans de publicar-los, el següent diàleg llistarà tots els elements que enviarà el &kdesvn;. És possible desmarcar els elements que no voleu enviar. En aquest cas, el &kdesvn; enviarà tots els elements ell sol, &ead;, de forma no recursiva. O podeu seleccionar els elements sense versió per afegir i publicar (si no estan marcats per a ser ignorats). De manera que podreu veure si hi ha elements nous que esteu oblidant. </para>
+<para
+>Introduïu un missatge de registre que enviareu i premeu el botó <guibutton
+>D'acord</guibutton
+> per iniciar la transferència. </para>
+</sect2>
+<sect2>
+<title
+>Actualitzar una còpia de treball</title>
+<para
+>Això farà que la còpia de treball local estigui en sincronia amb el repositori. Podeu configurar el &kdesvn; per a comprovar-ho en obrir una còpia de treball per als elements nous/modificats que hi hagi al repositori. Això s'executarà en segon pla i podreu seguir treballant amb el &kdesvn;. Quan hagi finalitzat, es marcaran els elements amb les versions més recents o les carpetes amb elements on els elements nous estiguin per sota. </para>
+<para
+>Per a rebre els canvis, seleccioneu <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+> <guimenuitem
+>Actualitza a HEAD</guimenuitem
+> </menuchoice
+>. Això actualitzarà a la versió més recent. Per obtenir una revisió específica, seleccioneu <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+> <guimenuitem
+>Actualitza a la revisió</guimenuitem
+> </menuchoice
+> i seleccioneu la revisió que vulgueu en el següent quadre. </para>
+<para
+>Si no se selecciona cap element, l'actualització es farà sobre tota la còpia de treball oberta, en cas contrari només serà recursiva sobre els elements seleccionats. </para>
+</sect2>
+<sect2>
+<title
+>Afegir i eliminar de la còpia de treball</title>
+<para
+>Ambdues operacions requereixen dos passos: El primer és afegir o eliminar per a després publicar els canvis al repositori. Abans de publicar podreu desfer les ordres afegeix o elimina. </para>
+<sect3>
+<title
+>Afegir elements</title>
+<para
+>Afegir elements en una còpia de treball pot fer-se de tres maneres: <variablelist>
+<varlistentry>
+<term
+>Seleccionar elements sense versió i afegir-los</term>
+<listitem
+><para
+>Copieu amb el &konqueror; o qualsevol altra eina dins de l'àrea de la còpia de treball. Aneu a través de la llista, marqueu-los i seleccioneu <menuchoice
+> <shortcut
+><keycombo action="simul"
+><keycap
+>Inser</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+> <guimenuitem
+>Afegeix els fitxers/directoris seleccionats</guimenuitem
+> </menuchoice
+>. Quan vulgueu afegir carpetes noves amb tots els subelements, seleccioneu <menuchoice
+> <shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Inser</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+> <guimenuitem
+>Afegeix els fitxers/directoris seleccionats recursivament</guimenuitem
+> </menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Comprovar i afegir de forma recursiva</term>
+<listitem
+><para
+>Podeu comprovar si hi ha algun element sense versió a la còpia de treball. Després seleccioneu <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+> <guimenuitem
+>Comprova per a elements sense versió</guimenuitem
+> </menuchoice
+>, apareixerà un diàleg on es llistaran tots els elements sense versió. Premeu el botó <guibutton
+>D'acord</guibutton
+> per afegir tots els elements marcats a la còpia de treball, els elements que no vulgueu amb versió hauran d'estar desmarcats. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Arrossegar i deixar anar</term>
+<listitem
+><para
+>Marqueu en el &konqueror; o qualsevol altre navegador de fitxers compatible, els elements que voleu afegir i arrossegar al &kdesvn;. És possible deixar-los anar en carpetes dins de la còpia de treball oberta, i després, el &kdesvn; copiarà els elements deixats anar a la mateixa i hi afegirà els elements. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para
+></sect3>
+<sect3>
+<title
+>Suprimir elements de la còpia de treball i manllevar la versió</title>
+<para
+>La supressió d'elements sempre serà recursiva. Per exemple, quan s'elimina una carpeta també se suprimiran tots els elements secundaris. Marqueu el que voleu i seleccioneu l'element de menú <menuchoice
+> <guimenu
+>Subversion</guimenu
+><guisubmenu
+>General</guisubmenu
+> <guimenuitem
+>Suprimeix els fitxers/directoris seleccionats</guimenuitem
+> </menuchoice
+>. Als elements se'ls manllevarà la versió i seran suprimits del disc. </para>
+</sect3>
+</sect2>
+
+<sect2 id="logdisplay">
+<title
+>Mostrar els registres</title>
+<para
+>La pantalla del registre pot iniciar-se amb <keycombo action="simul"
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+> quan un o cap element està marcat en el resum. Depenent de les vostres opcions de configuració (vegeu <xref linkend="subversion-settings" xreflabel="settings"/>), el &kdesvn; recuperarà algunes entrades del registre que comencin amb <quote
+>HEAD</quote
+> i les mostrarà. </para>
+<sect3  id="logdisplay-dlg">
+<title
+>El diàleg que mostra el registre</title>
+<para
+>Al costat esquerre veureu la llista d'entrades del registre recuperada pel &kdesvn;. El missatge del registre serà retallat a la següent línia fins que encaixi. El missatge del registre complet apareixerà a la part superior dreta de la finestra quan marqueu una entrada. A la part inferior dreta de la finestra veureu la llista de fitxers canviats. Aquestes finestres només apareixeran si aquesta llista és obtinguda, depenent de les vostres opcions de configuració. </para>
+<para
+>Amb els botons de dalt podreu seleccionar un altre interval pels registres a mostrar. <important
+><para
+>Aquest interval es crida sense cap límit preestablert, així que tingueu cura quan feu servir aquesta característica en repositoris grans.</para
+></important>
+
+</para>
+<para
+>Els botons a la part inferior del diàleg sempre treballaran en el registre sobre l'element seleccionat, no sobre l'element seleccionat a la llista de fitxers canviats. Així que quan seleccioneu <guibutton
+>Diff anterior</guibutton
+>, aquest ho farà sobre tots els elements modificats en aquesta revisió, si són equivalents o estan per sota de l'entrada de Subversion seleccionada per a recuperar els registres anteriors. El mateix per a <guibutton
+>Diff de les revisions</guibutton
+>. </para>
+<para
+><guibutton
+>Anota</guibutton
+>, per descomptat, només funciona si l'element al registre és un fitxer. </para>
+<para
+>En totes les entrades de llista (ambdues llistes) teniu activat el menú contextual per algunes operacions addicionals. A la llista de l'esquerra hi ha <guimenuitem
+>Indica la versió al costat esquerre de les diferències</guimenuitem
+> (&ead;, revisió d'inici) i <guimenuitem
+>Indica la versió al costat dret de les diferències</guimenuitem
+> (&ead;, propòsit o destinació de les diferències, en unificar la part marcada amb un <computeroutput
+>+++</computeroutput
+>). Si heu seleccionat aquestes revisions, apareixeran marcades amb algunes petites fletxes. </para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="working-with-repositories">
+<title
+>Treballar en els repositoris</title>
+<para
+>La navegació senzilla del repositori pot fer-se dins del &konqueror;, &dolphin; o un navegador de fitxers similar: Obriu un URL amb el protocol descrit a <xref linkend="kdesvn-features" xreflabel="Features"/> (les variants que comencen amb <quote
+>k</quote
+>) i es mostrarà el contingut. Per tant, les operacions senzilles com copiar, moure i eliminar poden funcionar. En annexar una consulta com <quote
+>?rev=<replaceable
+>xxx</replaceable
+></quote
+>, la llista provindrà d'una revisió específica. El format de consulta de la revisió es descriu a <xref linkend="revision-syntax"/>, alguna informació més sobre el KIO::ksvn es troba al <xref linkend="kdesvn-kio"/> </para>
+<para
+>Funciona tot, excepte <guimenuitem
+>Copia</guimenuitem
+> que només pot fer-se quan es navega per la revisió HEAD. </para>
+<sect2>
+<title
+>Restaurar els elements suprimits</title>
+<para
+>Al Subversion, la restauració dels elements suprimits és una operació de còpia de l'element a una revisió específica. Per això, planegeu restaurar la vista del repositori a una revisió anterior que quan es va suprimir l'element. Seleccioneu <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Repositori</guisubmenu
+> <guimenuitem
+>Tria la revisió del navegador</guimenuitem
+> </menuchoice
+> i introduïu la revisió desitjada. Ara, el &kdesvn; mostrarà el contingut en aquest terme. Marqueu l'entrada que voleu restaurar, seleccioneu <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>General</guisubmenu
+> <guimenuitem
+>Copia</guimenuitem
+> </menuchoice
+>. Dins del següent diàleg, l'objectiu sempre estarà a la revisió HEAD, l'origen estarà a la revisió seleccionada per a la navegació. Ompliu el camí, feu clic a <guibutton
+>D'acord</guibutton
+> i s'iniciarà la còpia. Un cop feta la còpia amb èxit, navegueu a la revisió HEAD i hauria d'aparèixer l'element restaurat. </para>
+</sect2>
+<sect2>
+<title
+>Importar les carpetes</title>
+<para
+>A causa de les restriccions del mateix Subversion, només es poden importar les carpetes, no els fitxers individuals. </para>
+<sect3>
+<title
+>Amb arrossegar i deixar anar</title>
+<para
+>Marqueu en qualsevol gestor de fitxers compatible la carpeta que voleu importar i arrossegueu-la a l'entrada de la carpeta al &kdesvn; en la qual voleu importar-la. </para>
+</sect3>
+<sect3>
+<title
+>Seleccionar la carpeta per importar amb el navegador de fitxers</title>
+<para
+>Marqueu la carpeta en la qual voleu importar una carpeta nova. A continuació, seleccioneu <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>General</guisubmenu
+> <guimenuitem
+>Importa les carpetes cap a l'actual</guimenuitem
+> </menuchoice
+> i seleccioneu la carpeta desitjada. </para>
+</sect3>
+</sect2>
+</sect1>
+<sect1 id="operations">
+<title
+>Altres operacions</title>
+<sect2 id="merging-items">
+<title
+>Fusionar</title>
+<para
+>Obriu un repositori o còpia de treball, marqueu l'element que voleu fusionar i seleccioneu <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>General</guisubmenu
+> <guisubmenu
+>Fusiona</guisubmenu
+> </menuchoice
+>. Introduïu en el diàleg següent els valors desitjats. Si s'obre des del repositori, l'origen 1 i l'origen 2 s'ompliran, quan s'obre des d'una còpia de treball, l'origen s'omplirà amb l'element seleccionat. El maneig d'aquest paràmetre és una mica diferent d'emprar la vista de diferències interna de Subversion o un programa de fusió externa com el &kdiff3;. L'origen haurà d'estar SEMPRE en una carpeta o fitxer local. Podeu canviar entre fusió externa o interna amb la casella de selecció <guilabel
+>Usa una fusió externa</guilabel
+>. </para>
+<sect3>
+<title
+>Fusió interna</title>
+<para
+>El significat és exactament igual que des de dins de la mateixa eina de línia d'ordres de Subversion. Quan origen 1 i origen 2 són iguals, la revisió d'inici i final hauran de ser diferents. Si no són iguals, la revisió d'inici s'assignarà a origen 1 i la revisió final a origen 2. La destinació HAURÀ de ser una còpia de treball, en cas contrari, el Subversion enviarà un missatge d'error. </para>
+<para
+>Les caselles de selecció tenen els següents significats: <variablelist>
+
+<varlistentry>
+<term
+>Recursiu</term>
+<listitem
+><para
+>Fa totes les operacions recursives quan es treballa amb carpetes. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Gestiona els elements sense relacionar com a relacionats</term>
+<listitem
+><para
+>Si s'estableix, els elements no relacionats seran diferenciats com si estiguessin relacionats. En cas contrari, el Subversion els eliminarà d'una banda i els afegirà a l'altra. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Força la supressió dels elements modificats/sense versió</term>
+<listitem
+><para
+>Si no s'estableix i la fusió requereix l'eliminació d'un element modificat o sense versió, fallarà la fusió de Subversion. Altrament s'esborraran aquests elements. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Simplement executa sense modificar</term>
+<listitem
+><para
+>Si s'estableix, el Subversion només enviarà les notificacions del que faria, però no modificarà la còpia de treball. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+</sect3>
+<sect3>
+<title
+>Usar un programa extern per a fusionar</title>
+<para
+>Vegeu <xref linkend="diffmerge-settings"/> per obtenir més detalls sobre com configurar l'eina de fusió externa. El &kdesvn; generarà la línia d'ordres com es descriu allà. Abans, feu el següent: </para>
+<para>
+<orderedlist>
+
+<listitem
+><para
+>Assigneu la revisió d'inici com la revisió a origen 1 i la revisió final a origen 2. A continuació, marqueu si són diferents (camí i/o revisió). Si és així, es realitzarà una fusió a tres bandes; en cas contrari serà una fusió senzilla entre l'origen i la destinació. Si es deixa en blanc origen 2, també serà una fusió senzilla. </para
+></listitem>
+
+<listitem
+><para
+>Creeu una exportació a una carpeta temporal. Si es tracta d'una fusió senzilla d'origen 1 amb la revisió final, en cas contrari s'utilitzaran els dos orígens amb les seves revisions. Si l'element és un fitxer i no una carpeta, a continuació, obtindrà el contingut d'una revisió específica. </para
+></listitem>
+
+<listitem>
+<para
+>Genereu la crida al vostre programa de fusió externa tal com l'heu establert a l'<link linkend="diffmerge-settings"
+>Arranjament</link
+>. La sortida d'error es mostrarà a la finestra del registre, de manera que pugueu veure el que està malament (si quelcom va malament). </para>
+</listitem>
+</orderedlist
+>A diferència de l'ús d'una destinació de fusió interna, pot ser una carpeta/fitxer pla que no estigui sota el control de versions, perquè les eines externes podrien estar realitzant les accions sense preocupar-se'n. </para>
+<para
+>Si no s'estableix com a recursiva, l'exportació es realitzarà com una exportació plana. Aneu amb compte: quan es fa amb còpies de treball externes, <emphasis
+>no</emphasis
+> s'exportarà. </para>
+</sect3>
+</sect2>
+
+<sect2 id="op-resolve">
+<title
+>Resoldre els conflictes</title>
+<para
+>El &kdesvn; en si, no té un mòdul per a la resolució de conflictes, però pot utilitzar programari extern des de dins. A <xref linkend="extern-resolve-setup"/> trobareu una descripció sobre com configurar aquesta aplicació. </para>
+<para
+>En marcar un element amb l'estat establert a <quote
+>conflicte</quote
+> (veureu una creu vermella a la vista de llista) podreu seleccionar <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+><guisubmenu
+>Resol el conflicte</guisubmenu
+> </menuchoice
+>. O des del menú contextual amb <guimenuitem
+>Resol el conflicte</guimenuitem
+> (només sobre els elements en conflicte) i el &kdesvn; engegarà el programa establert (o el predeterminat). Després d'acabar aquesta tasca, haureu de marcar aquest element com a resolt (<menuchoice
+><guimenu
+>Subversion</guimenu
+><guisubmenu
+>Còpia de treball</guisubmenu
+><guisubmenu
+>Marca com a resolt</guisubmenu
+></menuchoice
+>) en cas contrari no podreu publicar els vostres canvis. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="used-properties">
+<title
+>Propietats emprades per a la configuració del &kdesvn;</title>
+<sect2>
+<title
+>Integrar el seguidor d'errors</title>
+<para
+>El <ulink url="http://tortoisesvn.tigris.org/"
+>projecte TortoiseSVN</ulink
+> ha dissenyat un bonic sistema de propietats per integrar el <ulink url="http://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-dug-bugtracker.html"
+>seguidor d'errors (BugTracker)</ulink
+> a la IGU de Subversion. La versió actual del &kdesvn; no admet camps addicionals al quadre de publicació (vindrà més endavant) i no ho entén tot, a excepció de les següents propietats: </para>
+<para>
+<table id="bugtracker-properties">
+<title
+>Propietats integrades del seguidor d'errors</title>
+<tgroup cols="3">
+
+<thead>
+<row>
+<entry
+>Propietat</entry>
+<entry
+>Descripció</entry>
+<entry
+>Exemple</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><literal
+>bugtraq:url</literal
+></entry>
+<entry
+>Manté l'&URL; per al seguidor d'errors. Ha de contenir el marcador <literal
+>%BUGID%</literal
+>.</entry>
+<entry
+>https://bugs.kde.org/show_bug.cgi?id=%BUGID%</entry>
+</row>
+
+<row>
+<entry
+><literal
+>bugtraq:logregex</literal
+></entry>
+<entry>
+<para
+>Conté una o dues expressions regulars, separades per un salt de línia.</para>
+<para
+>Si només s'estableix una expressió, llavors l'ID de l'error haurà de concordar amb els grups de la cadena de l'expressió regular. Si s'estableixen dues expressions, llavors la primera expressió s'utilitzarà per trobar una cadena que es relacioni amb l'ID de l'error, però pot contenir més que l'ID de l'error (&pex;, <quote
+>Issue #123</quote
+> o <quote
+>resolves issue 123</quote
+>). La segona expressió s'utilitza per extreure l'ID real de l'error de la cadena extreta amb la primera expressió.</para>
+<para
+>Si us plau, aneu amb compte amb els espais no desitjats després de l'expressió regular i no oblideu els claudàtors a la descripció del número.</para>
+</entry>
+<entry>
+<para
+>Individual (usable amb TRAC): </para>
+<programlisting
+>#(\d+)
+</programlisting>
+<para
+>Ara tots els números com <replaceable
+>#190</replaceable
+> seran analitzats i traduïts a un &URL; a la sortida del registre. </para>
+<para
+>Dues expressions: </para>
+<programlisting
+>[Ii]ssue #?(\d+)(,? ?#(\d+))*
+(\d+)
+</programlisting>
+<important>
+  <title
+>Recordar</title>
+  <para
+>Preneu cura amb els espais en blanc després de la <literal
+>(\d+)</literal
+>! Aquest és un dels errors més comuns que causa que aquestes expressions no concordin! </para>
+</important>
+</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</para>
+<para
+>En els repositoris locals oberts (&ead;, el protocol <filename class="directory"
+>file://</filename
+>) i en còpies de treball, aquestes propietats seran cercades cap amunt des de la carpeta oberta fins que es troba o s'arribi al nivell superior de Subversion. En els repositoris oberts a través de la xarxa (tots excepte el protocol <filename class="directory"
+>file://</filename
+>) només se cerca a la carpeta oberta. </para>
+<para
+>El suport per a múltiples conjunts d'aquestes propietats pot seguir després, (&pex;, valors extres a la subcarpeta per a altres seguidors, &etc;), però en la majoria dels casos, l'avaluació individual dels enllaços del seguidor hauria de ser suficient. </para>
+</sect2>
+</sect1>
+
+<sect1 id="revision-tree">
+<title
+>L'arbre de revisions</title>
+<para
+>L'arbre de revisions pretén mostrar tot l'historial d'un element, de manera que l'usuari pugui obtenir una millor percepció sobre l'historial d'un element. Haureu d'anar a través de tot el registre del repositori, atès que us cal una mica més d'informació que la donada pel Subversion (i crec que no la coneix). Com que això produeix una gran quantitat de trànsit, l'arbre de revisions sempre utilitzarà el <link linkend="logcache-descr"
+>cau intern del registre</link
+>. </para>
+<sect2>
+<title
+>Requisits</title>
+<para
+>L'arbre de revisions és generat mitjançant el <application
+>dot</application
+>. De manera que perquè funcioni l'arbre de revisions, haurà d'estar instal·lat el paquet <application
+>graphviz</application
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="logcache-descr">
+<title
+>Cau intern del registre</title>
+<para
+>El &kdesvn; pot utilitzar un cau intern del registre per a algunes operacions. Majorment s'utilitza per a l'<link linkend="revision-tree"
+>arbre de revisions</link
+>, però també per veure el registre simplificat en el mode fora de línia. Els caus estan organitzats com a bases de dades <application
+>SQLite</application
+> emmagatzemades a <filename class="directory"
+>$HOME/.sqvnqt/logcache</filename
+>. Cada fitxer numerat és un emmagatzematge per a un repositori diferent. </para>
+<warning>
+  <para
+>Les bases de dades poden fer-se grans! Pel que podeu desactivar l'actualització automàtica del cau del registre a les opcions de configuració. </para>
+</warning>
+<para
+>Podeu simplement eliminar una base de dades, llavors el registre al cau serà reiniciat per aquest repositori (i no l'arbre de revisions!), però si es desactiva l'ompliment automàtic del cau, en la propera obertura d'aquest repositori o una còpia de treball associada, el cau serà omplert de nou. </para>
+<sect2>
+<title
+>Mode desconnectat</title>
+<para
+>El &kdesvn; pot treballar sense accés a la xarxa, &ead;, podeu desconnectar l'accés a la xarxa pel &kdesvn;. Això pot ser útil quan es treballa sense xarxa com en els portàtils. En aquests casos, el &kdesvn; sempre obté els registres del cau intern. Aquest registre està reduït a funcions base, per raons tècniques, de manera que el registre al cau pot (però no té perquè) diferir del registre real. Diferir vol dir que no mostra totes les operacions de la còpia encara que s'estableixi <guilabel
+>El registre segueix els canvis de node</guilabel
+>.</para>
+</sect2>
+<sect2>
+<title
+>Cau del registre i l'arbre de revisions</title>
+<para
+>L'arbre de revisions només utilitzarà el cau del registre, d'altra manera s'hauran d'obtenir sempre els registres de nou. <emphasis
+>No</emphasis
+> actualitzarà el cau del registre (però això pot canviar en versions posteriors). </para>
+</sect2>
+</sect1>
+
+<sect1 id="overlay-meaning">
+<title
+>Significat de les icones superposades</title>
+<para
+>Les entrades poden estar marcades amb icones superposades quan no es trobin en l'estat <quote
+>normal</quote
+>. <variablelist>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnlocked.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Blocada</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Aquesta entrada està blocada. En l'última columna apareix el propietari del bloqueig. També podeu configurar si el &kdesvn; ha de marcar els elements blocats al repositori. Però aneu amb compte: en funció del tipus de servidor, això pot trigar força estona! </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnneedlock.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Cal blocar</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Aquesta entrada s'ha de blocar abans d'editar i publicar. Fins que no s'estableixi un blocat, el Subversion la mantindrà de només lectura. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnupdates.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Actualitzacions</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Aquesta entrada o una entrada de sota -si és una carpeta-, té una versió més recent al repositori. </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnmodified.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Modificada</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Aquesta entrada o una entrada de sota -si és una carpeta-, ha estat modificada al disc local. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnadded.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Afegida superposada</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Aquesta entrada ha estat afegida localment al Subversion, però encara no s'ha publicat. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvndeleted.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Suprimida superposada</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Aquesta entrada ha estat suprimida localment de Subversion, però encara no s'ha publicat. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnconflicted.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Suprimida superposada</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Aquesta entrada o una entrada de sota -si és una carpeta-, té conflictes per resoldre amb l'última actualització. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect1>
+
+<sect1 id="kdesvn-passwords">
+<title
+>El &kdesvn; i les contrasenyes</title>
+<para
+>El &kdesvn;/Subversion són capaços de desar les contrasenyes. Desar les contrasenyes sempre és un risc per a la seguretat, però permet un frontal més usable. </para>
+<sect2>
+<title
+>No desar les contrasenyes</title>
+<para
+>La manera més segura, però de vegades maldestre amb les IGU com el &kdesvn;. En particular, els processos en segon pla del &kdesvn; sempre tornaran a demanar una contrasenya en el cas que el repositori hagi restringit l'accés de les operacions com actualització i estat. El mateix per a <quote
+>publica</quote
+> i així successivament. De manera que si no esteu desant les contrasenyes, haureu de desactivar <guilabel
+>Inicia la comprovació d'actualitzacions en obrir una còpia de treball</guilabel
+> i <link linkend="subversion-settings"
+>així successivament</link
+>. </para>
+</sect2>
+<sect2>
+<title
+>Desar les contrasenyes al &kwallet5;</title>
+<para
+>L'emmagatzematge de contrasenyes segur utilitzat per una gran quantitat de programes &kde;, com el &kmail; i el &konqueror;. Si esteu desant les contrasenyes i se solen utilitzar amb el &kdesvn;, haureu d'utilitzar això. Tingueu cura que l'emmagatzematge encriptat no és un emmagatzematge d'alta seguretat. Pels detalls, vegeu la <ulink url="help:/kwallet5"
+>documentació del &kwallet5;</ulink
+>. </para>
+</sect2>
+<sect2>
+<title
+>Desar-les a l'emmagatzematge de contrasenyes propi de Subversion</title>
+<para
+>Això no és recomanable perquè les contrasenyes s'emmagatzemen com a text clar! No us ho creieu? Doneu una ullada als fitxers a <filename class="directory"
+>~/.subversion/auth/svn.simple</filename
+>. Només haureu d'utilitzar aquesta opció si esteu utilitzant amb freqüència altres clients que el &kdesvn;, com el <application
+>rapidsvn</application
+> o l'<application
+>esvn</application
+> o el client de línia d'ordres original, el <application
+>svn</application
+>. Si utilitzeu el client de línia d'ordres, sobretot per a descarregar o actualitzar, aquest no requerirà una contrasenya i el &kdesvn; hauria d'utilitzar el &kwallet5; per a publicar/moure/copiar. </para>
+</sect2>
+<sect2>
+<title
+>Cau de contrasenyes intern</title>
+<para
+>És possible activar un cau de contrasenyes intern, el qual mantindrà les contrasenyes a la memòria sempre que s'estigui executant el &kdesvn;. Pel que no haureu d'introduir una contrasenya dues vegades, encara que no la deseu a la cartera. </para>
+</sect2>
+<sect2>
+<title
+>Cas especial de «svn+ssh»</title>
+<para
+>Quan s'utilitza el Subversion a través de svn+ssh, l'emmagatzematge de la contrasenya es farà a través de ssh i ssh-agent. Per fer això, cal tenir accés a la màquina i repositori remots. Si voleu emmagatzemar quelcom, haureu d'utilitzar l'autenticació de clau pública de ssh, no l'autenticació per contrasenya. (De fet, ssh prefereix l'autenticació per clau pública). Per fer això, cal posar la vostra clau pública ssh en l'objectiu, &pex;, al sistema del repositori. Les contrasenyes ssh mai seran manejades per l'emmagatzematge de contrasenyes de Subversion, el &kwallet5; o el cau intern de contrasenyes. </para>
+<para
+>Si no voleu que se us demani la contrasenya de la vostra clau SSH, podeu utilitzar el <application
+>ssh-agent</application
+>, seleccionant el menú <menuchoice
+><guimenu
+>Subversion</guimenu
+> <guimenuitem
+>Afegeix les identitats ssh al ssh-agent</guimenuitem
+></menuchoice
+> podreu emmagatzemar la contrasenya de la vostra clau ssh per a la sessió actual, de manera que no l'hàgiu d'introduir més quan sigui necessària. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="kdesvn-kio">
+<title
+>&konqueror;, KIO, &kdesvn;</title>
+<sect1 id="kdesvn-kio-desc">
+<title
+>Descripció</title>
+<para
+>A partir de la versió 0.7.0 del &kdesvn;, aquest tracta amb alguns mòduls que integren algunes ordres directament als menús del &konqueror;. <variablelist>
+<varlistentry>
+<term
+>Protocols KIO</term>
+<listitem
+><para
+>Implementa gestors per als següents protocols:</para>
+<itemizedlist>
+<listitem
+><para
+>ksvn+http</para
+></listitem>
+<listitem
+><para
+>ksvn+https</para
+></listitem>
+<listitem
+><para
+>ksvn+file</para
+></listitem>
+<listitem
+><para
+>ksvn+ssh</para
+></listitem>
+<listitem
+><para
+>ksvn</para
+></listitem>
+</itemizedlist>
+
+<para
+>Aquests protocols estan dissenyats només per als repositoris, no per a les còpies de treball. Per exemple, <filename class="directory"
+>ksvn+file:///<replaceable
+>camí</replaceable
+></filename
+> haurà d'apuntar al començament d'un repositori diferent de la mateixa aplicació o de la KPart. Es pot navegar per les còpies de treball amb el &konqueror;. </para>
+<para
+>Per navegar a una revisió específica, podeu annexar la consulta <link linkend="revision-syntax"
+><quote
+>?rev=<replaceable
+>revisió</replaceable
+></quote
+></link
+> a l'&URL;. </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Menús contextuals</term>
+<listitem
+><para
+>El &kdesvn; instal·la els menús contextuals del &konqueror;. Es poden veure amb el &BDR; a la finestra del navegador (només en la vista estàndard, no a qualsevol KPart) pel que és possible fer les accions més utilitzades directament des de dins del &konqueror; (o de qualsevol altre gestor de fitxers que llegeixi els menús contextuals del &konqueror;, com el &dolphin;). Això es realitza mitjançant una crida a la <link linkend="kdesvn-commandline"
+>variant de la línia d'ordres del &kdesvn;</link
+>. </para>
+</listitem>
+</varlistentry>
+</variablelist>
+</para>
+<sect2>
+<title
+>Ús del KIO fora del &konqueror; -un exemple-</title>
+<para
+>Cada aplicació que empri la biblioteca KIO pot utilitzar aquests protocols. Pel que seria possible recuperar totes les diferències entre dues revisions amb el &kdiff3; sense cap coneixement profund. </para>
+<para>
+<example>
+<title
+>Recupera les diferències entre les revisions usant el &kdiff3; i el KIO::ksvn</title>
+<programlisting
+>kdiff3 \
+  ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=423127 \
+  ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=455064
+</programlisting>
+<para
+>Permet al &kdiff3; imprimir totes les diferències entre dues revisions. </para>
+<para>
+<note>
+  <para
+>L'ús d'aquest amb el &kdesvn; (fent el diff de dues revisions) és molt més ràpid perquè s'utilitzen els mecanismes interns de Subversion. </para>
+</note>
+</para>
+</example>
+</para>
+</sect2>
+</sect1>
+<sect1 id="kio-svn-special">
+<title
+>Informació a programadors quant al KIO::ksvn</title>
+<note
+><para
+>Podeu ometre això si no esteu interessat en la programació dels KIO.</para
+></note>
+<para
+>KIO::ksvn::special coneix les següents operacions. </para>
+<sect2>
+<title
+>Llista d'ordres</title>
+<para>
+<table id="kio-svn-special-commands">
+  <title
+>Resum d'ordres per a <literal
+>KIO::ksvn::special</literal
+></title>
+<tgroup cols="4">
+
+<thead>
+<row>
+<entry
+>Nom de l'ordre</entry>
+<entry
+>ID numèric</entry>
+<entry
+>Llistat dels paràmetres</entry>
+<entry
+>Implementat a la nova versió?</entry>
+</row>
+</thead>
+
+<tbody>
+
+<row>
+<entry
+>Checkout</entry>
+<entry
+>1</entry>
+<entry>
+<para
+>KURL repository, KURL target, int revnumber, QString revkind </para>
+<para
+>L'objectiu <emphasis
+>no</emphasis
+> serà modificat, &pex;, però el contingut serà descarregat sense crear una subcarpeta! Per exemple, l'origen pot ser <filename
+>http://servidor/repositori/projecte/trunk</filename
+>, l'objectiu <filename
+>/home/usuari/projecte/</filename
+> després el contingut de trunk serà copiat a <filename
+>/home/usuari/projecte/</filename
+> no a <filename
+>/home/usuari/projecte/trunk/</filename
+>! </para>
+</entry>
+<entry
+>Sí</entry>
+</row>
+
+<row>
+<entry
+>Update</entry>
+<entry
+>2</entry>
+<entry
+><para
+>KURL url, int revnum, QString revstring</para>
+<para
+>Si «revnum» és &lt; 0, s'analitzarà la «revstring». El format de «revstring» es descriu a l'<link linkend="revision-syntax"
+>Apèndix</link
+>. </para>
+</entry>
+<entry
+>Sí</entry>
+</row>
+
+<row>
+<entry
+>Commit</entry>
+<entry
+>3</entry>
+<entry
+><para
+>KURL::List urls</para>
+<para
+>Els URL són una llista dels URL locals per publicar. Demanarà pel missatge de registre.</para>
+</entry>
+<entry
+>Sí</entry>
+</row>
+
+<row>
+<entry
+>Log</entry>
+<entry
+>4</entry>
+<entry>
+<para
+>int startrevnumber, QString startrevstring, int endrevnumber, QString endrevstring, KURL::List </para>
+<para
+>Empreu-la amb cura -pot produir una gran quantitat de dades-. </para>
+</entry>
+<entry
+>Sí</entry>
+</row>
+
+<row>
+<entry
+>Import</entry>
+<entry
+>5</entry>
+<entry
+>KURL targetrepository, KURL sourcepath</entry>
+<entry
+>Sí</entry>
+</row>
+
+<row>
+<entry
+>Add</entry>
+<entry
+>6</entry>
+<entry
+>KURL</entry>
+<entry
+>Sí</entry>
+</row>
+
+<row>
+<entry
+>Del</entry>
+<entry
+>7</entry>
+<entry
+>KURL::List</entry>
+<entry
+>Sí</entry>
+</row>
+
+<row>
+<entry
+>Revert</entry>
+<entry
+>8</entry>
+<entry
+><para
+>KURL::List</para>
+<para
+>Revertir als KIO sempre serà no recursiu, no hi ha preguntes (la crida a l'aplicació ho farà ella mateixa)</para>
+</entry>
+<entry
+>Sí</entry>
+</row>
+
+<row>
+<entry
+>Status</entry>
+<entry
+>9</entry>
+<entry
+><para
+>KURL item, bool checkRepos, bool recurse</para>
+<para
+>element - l'element per al qual comprovar la informació, checkRepos - comprova si hi ha versions noves al repositori, recurse - comprova en mode recursiu o no.</para>
+</entry>
+<entry
+>Sí</entry>
+</row>
+
+<row>
+<entry
+>Mkdir</entry>
+<entry
+>10</entry>
+<entry
+>KURL::List</entry>
+<entry
+>Sí</entry>
+</row>
+
+<row>
+<entry
+>Resolve</entry>
+<entry
+>11</entry>
+<entry
+>KURL, bool recursive</entry>
+<entry
+>Sí</entry>
+</row>
+
+<row>
+<entry
+>Switch</entry>
+<entry
+>12</entry>
+<entry
+>KURL working_copy_path, KURL new_repository_url, bool recursive,int revnumber, QString revkind</entry>
+<entry
+>Sí</entry>
+</row>
+
+<row>
+<entry
+>Diff</entry>
+<entry
+>13</entry>
+<entry>
+<para
+>URL uri1, KURL uri2, int r1, QString rstring1, int r2, QString rstring 2, bool recursive</para>
+<para
+>Per a les diferències entre repositoris locals, utilitzeu el protocol «file:///». Per a les diferències entre còpies locals, definiu els URL sense un protocol!</para>
+</entry>
+<entry
+>Sí</entry>
+</row>
+</tbody>
+
+</tgroup>
+</table>
+
+</para>
+</sect2>
+<sect2>
+<title
+>Valors retornats</title>
+<para
+>Els valors retornats es poden indicar a través de les metadades, Per a més detalls, vegeu la documentació de l'API. </para>
+<para>
+<table id="kio-ksvn-metadata">
+<title
+>Contingut de les metadades</title>
+<tgroup cols="2">
+
+<thead>
+<row>
+<entry
+>Clau</entry>
+<entry
+>Valor possible</entry>
+</row>
+</thead>
+
+<tbody>
+
+<row>
+<entry
+>path</entry>
+<entry
+>Camí de l'element on es va realitzar l'acció, &pex;, l'URL indicat.</entry>
+</row>
+
+<row>
+<entry
+>action</entry>
+<entry
+>Tipus d'acció numèric.</entry>
+</row>
+
+<row>
+<entry
+>kind</entry>
+<entry
+>Tipus d'element (majoritàriament carpeta o fitxer).</entry>
+</row>
+
+<row>
+<entry
+>mime_t</entry>
+<entry
+>Tipus MIME de Subversion de l'element.</entry>
+</row>
+
+<row>
+<entry
+>content</entry>
+<entry
+>Estat del contingut (valor de Subversion).</entry>
+</row>
+
+<row>
+<entry
+>prop</entry>
+<entry
+>Estat de les propietats (valor de Subversion).</entry>
+</row>
+
+<row>
+<entry
+>rev</entry>
+<entry
+>Dona com a resultat la revisió o la revisió de treball.</entry>
+</row>
+
+<row>
+<entry
+>string</entry>
+<entry
+>Missatge en forma intel·ligible definit internament.</entry>
+</row>
+
+<row>
+<entry
+>loggedaction</entry>
+<entry
+>Cadena d'acció definida de Subversion sobre l'element (A,M,D).</entry>
+</row>
+<row>
+<entry
+>loggedcopyfrompath</entry>
+<entry
+>Si copiat de quin camí? (pot estar buida).</entry>
+</row>
+<row>
+<entry
+>loggedcopyfromrevision</entry>
+<entry
+>Si copiat en quina revisió? (pot ser &lt; 0).</entry>
+</row>
+<row>
+<entry
+>loggedpath</entry>
+<entry
+>En quin camí únic l'acció registra les entrades i així s'estableixen successivament. (el camí s'estableix a l'URL de crida).</entry>
+</row>
+<row>
+<entry
+>diffresult</entry>
+<entry
+>Una línia de sortida de la diferència.</entry>
+</row>
+</tbody>
+
+</tgroup>
+</table>
+
+</para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="kdesvn-commandline">
+<title
+>Usar el &kdesvn; a través de la línia d'ordres</title>
+<sect1 id="kdesvn-commandline-overview">
+<title
+>Resum</title>
+<para
+>Algunes operacions de Subversion es poden utilitzar a través de la línia d'ordres, &pex;, com un client de línia d'ordres estàndard, però la interacció de l'usuari es realitza a través de la <acronym
+>IU</acronym
+> del &kde;. La sintaxi estàndard és <userinput
+>kdesvn exec <replaceable
+>ordre</replaceable
+> <replaceable
+>paràmetre</replaceable
+> <replaceable
+>URL</replaceable
+></userinput
+>. </para>
+<para
+>Si es desitja una única revisió en un únic &URL;, la podeu establir com un paràmetre de l'&URL; <programlisting
+>svn://vostre-servidor/camí-al-repositori/element?rev=&lt;vostra-revisió&gt;</programlisting
+> Això substituirà l'opció <option
+>-r &lt;revisió&gt;</option
+>. </para>
+<para
+>Una revisió es pot indicar com un número, un <option
+>HEAD</option
+> o <option
+>BASE</option
+> o com un format de data com {AAAA-MM-DD}. </para>
+</sect1>
+<sect1 id="kdesvn-command-list">
+<title
+>Llista d'ordres</title>
+<para
+>Si en el següent resum s'indica com un possible paràmetre <option
+>-r <replaceable
+>revisió</replaceable
+></option
+>, aquesta revisió es podrà establir com <userinput
+><replaceable
+>URL</replaceable
+>?rev=<replaceable
+>la-revisió</replaceable
+></userinput
+>. <table id="svn-commands-table">
+<title
+>Ordres de Subversion</title>
+<tgroup cols="3">
+
+<thead>
+<row>
+<entry
+>Ordre</entry>
+<entry
+>Significat</entry>
+<entry
+>Opcions acceptades</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+<entry
+>commit (o ci)</entry>
+<entry
+>Publica els canvis de l'element al repositori.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>log</entry>
+<entry
+>Mostra el registre de l'element.</entry>
+<entry
+>-r revisió_inici:revisió_final -l límit_a_mostrar</entry>
+</row>
+<row>
+<entry
+>cat</entry>
+<entry
+>Mostra el contingut de l'element.</entry>
+<entry
+>-r revisió </entry>
+</row>
+<row>
+<entry
+>copy (o cp)</entry>
+<entry
+>Copia un element dins de la còpia de treball o en el repositori. Si no s'indica la destinació, el &kdesvn; us la demanarà.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>move (o mv, rename)</entry>
+<entry
+>Mou/Reanomena un element dins de la còpia de treball o en el repositori. Si no s'indica la destinació, el &kdesvn; us la demanarà.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>get</entry>
+<entry
+>Obtén el contingut de l'element i el desa.</entry>
+<entry
+>-r revision -o &lt;fitxer_sortida&gt; (la sortida és requerida!)</entry>
+</row>
+<row>
+<entry
+>blame (o annotate)</entry>
+<entry
+>Anota el fitxer.</entry>
+<entry
+>-r revisió_inici:revisió_final</entry>
+</row>
+<row>
+<entry
+>update</entry>
+<entry
+>Actualitza l'element a la còpia de treball.</entry>
+<entry
+>-r revisió</entry>
+</row>
+<row>
+<entry
+>diff</entry>
+<entry
+>Crea un diff de dues revisions de l'element o el diff de dos elements en una revisió específica.</entry>
+<entry
+>-r rev_inici:rev_final</entry>
+</row>
+<row>
+<entry
+>info</entry>
+<entry
+>Informació detallada sobre l'element.</entry>
+<entry
+>-r revisió</entry>
+</row>
+<row>
+<entry
+>checkout (o co)</entry>
+<entry
+>Descarrega el camí al repositori en un nou camí de la còpia de treball. Es preguntarà pel camí de la destinació i la revisió d'origen.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>checkoutto (o coto)</entry>
+<entry
+>Descarrega el camí al repositori en un nou camí de la còpia de treball. Es preguntarà pel camí de l'origen i la revisió d'origen.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>export</entry>
+<entry
+>Exporta el camí del repositori o còpia de treball dins d'un directori. Es demanarà pel camí de destinació i la revisió de l'origen.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>exportto</entry>
+<entry
+>Exporta el camí del repositori o còpia de treball dins d'un directori. Es demanarà pel camí de l'origen i la revisió de l'origen.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>delete (del, remove, rm)</entry>
+<entry
+>Elimina el/s URL del repositori o còpia de treball.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>add</entry>
+<entry
+>Afegeix l'&URL; de la còpia de treball. L'&URL; haurà de pertànyer a una còpia de treball (no a una importació!)</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>revert (o undo)</entry>
+<entry
+>Desfà els canvis actuals per a la còpia de treball. Només es pot utilitzar en els URL de la còpia de treball!</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>checknew (o addnew)</entry>
+<entry
+>Comprova l'URL indicat per a elements nous, sense versió, i els afegeix a la còpia de treball si ho voleu.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>tree</entry>
+<entry
+>Mostra un arbre de les revisions de l'element (només el primer argument), si l'&URL; amb el <quote
+>?rev=<replaceable
+>xxx</replaceable
+></quote
+> indicat, aquesta revisió serà la revisió de referència.</entry>
+<entry
+>-r rev_inici:rev_final</entry>
+</row>
+<row>
+<entry
+>lock</entry>
+<entry
+>Bloca el/s URL, si s'indica <option
+>-f</option
+>, llavors els blocatges existents estaran trencats.</entry>
+<entry
+>-f</entry>
+</row>
+<row>
+<entry
+>unlock</entry>
+<entry
+>Desbloca el/s URL, si s'ha indicat l'opció <option
+>-f</option
+> els blocatges establerts pels altres seran cancel·lats o els blocatges inexistents seran ignorats.</entry>
+<entry
+>-f</entry>
+</row>
+<row>
+<entry
+>help</entry>
+<entry
+>Mostra aquesta pàgina.</entry>
+<entry
+></entry>
+</row>
+</tbody>
+</tgroup>
+
+</table>
+
+<table id="parameter-list">
+<title
+>Paràmetre per a les ordres de Subversion</title>
+<tgroup cols="3">
+<thead>
+<row>
+<entry
+>Paràmetre</entry>
+<entry
+>Valors possibles</entry>
+<entry
+>permès</entry>
+</row>
+</thead>
+<tbody>
+<row>
+  <entry
+><option
+>-r</option
+></entry>
+<entry
+><replaceable
+>revision</replaceable
+> o <replaceable
+>startrev:endrev</replaceable
+></entry>
+<entry
+>tots excepte «commit»</entry>
+</row>
+<row>
+  <entry
+><option
+>-R</option
+></entry>
+<entry
+>(cap)</entry>
+<entry
+>tots excepte «commit»</entry>
+</row>
+<row>
+<entry
+><option
+>-o</option
+></entry>
+<entry
+><replaceable
+>nom_de_fitxer</replaceable
+></entry>
+<entry
+>get</entry>
+</row>
+<row>
+<entry
+><option
+>-l</option
+></entry>
+<entry
+><replaceable
+>número</replaceable
+></entry>
+<entry
+>log</entry>
+</row>
+<row>
+<entry
+><option
+>-f</option
+></entry>
+<entry
+>(cap)</entry>
+<entry
+>(un-)lock</entry>
+</row>
+
+</tbody>
+</tgroup>
+</table>
+
+</para>
+<sect2>
+  <title
+>L'ordre <quote
+>log</quote
+></title>
+<para
+>L'ordre «log» mostra un diàleg que conté el registre de l'&URL; indicat. Amb el Subversion 1.2 o posterior, aquesta accepta un límit, &ead;, el nombre d'entrades que s'han de mostrar. </para>
+<para
+>Dins d'aquest diàleg podreu seleccionar les entrades de registre i obtenir les diferències entre elles. <example>
+<title
+>Visualitza el registre de les últimes 20 publicacions</title>
+<programlisting
+>kdesvn exec log -l 20 -r HEAD&#058;1 meu_fitxer.c
+</programlisting>
+<para
+>Compte amb l'ordre de les revisions: Voleu anar des de HEAD al començament cap a l'últim. Per tant, haureu d'indicar la revisió HEAD com a punt de partida, en cas contrari podríeu obtenir les primeres 20 entrades.</para>
+</example>
+</para>
+</sect2>
+<sect2>
+  <title
+>L'ordre <quote
+>diff</quote
+></title>
+<para
+>Obtindreu les diferències entre les revisions d'un element o entre dos elements dins de la mateixa còpia de treball o repositori. Quan feu el diff en les revisions d'un element, les revisions es poden indicar com <option
+>-r <replaceable
+>revisió_inici</replaceable
+>:<replaceable
+>revisió_final</replaceable
+></option
+>. Quan feu el diff d'un element dins d'una còpia de treball sense cap revisió, es mostrarà el diff contra el repositori. <example>
+<title
+>Mostra la diferència contra el repositori, &ead;, els canvis locals</title>
+<programlisting
+>kdesvn exec diff meu_fitxer.c
+</programlisting>
+</example>
+<example>
+<title
+>Mostra la diferència entre revisions</title>
+<programlisting
+>kdesvn exec diff -r 21:20 meu_fitxer.c
+</programlisting>
+</example>
+</para>
+<para
+>Quan es diferencien dues revisions dels elements, poden afegir-se a l'&URL; dels elements. &pex;: <programlisting
+>http://servidor.org/camí/element?rev=HEAD</programlisting>
+<example>
+<title
+>Diferencia dues versions etiquetades</title>
+<programlisting
+>kdesvn exec diff http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_2 http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_3
+</programlisting>
+</example>
+</para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="setup">
+<title
+>Arranjament</title>
+<para
+>Les opcions de configuració es poden canviar des del diàleg de configuració. Estan separades en alguns subdiàlegs. </para>
+<sect1 id="general-settings">
+<title
+>General</title>
+<para>
+<informaltable id="General-setup-items">
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+>Mida de les icones de la vista en llista</entry>
+<entry
+>Especifica la mida de les icones a la vista en llista principal.</entry>
+</row>
+<row>
+<entry
+>Mostra la informació del fitxer</entry>
+<entry
+>Si ha d'aparèixer un petit consell d'eina quan es mou el ratolí sobre un element.</entry>
+</row>
+<row>
+<entry
+>Marca l'estat de l'element superposant una icona</entry>
+<entry
+>Quan un element no està en l'estat normal de Subversion es pot obtenir una superposició. (Vegeu <xref linkend="overlay-meaning"/>).</entry>
+</row>
+<row>
+<entry
+>L'ordre dels elements distingeix majúscules i minúscules</entry>
+<entry
+>Si l'ordre de classificació a la finestra principal distingeix o no les majúscules i minúscules, &ead;, si <quote
+>a</quote
+> és igual que <quote
+>A</quote
+>.</entry>
+</row>
+<row>
+<entry
+>Mostra els fitxers ignorats</entry>
+<entry
+>Mostra els elements marcats al Subversion per a ignorar o no.</entry>
+</row>
+<row>
+<entry
+>Màxim de missatges de registre en l'historial</entry>
+<entry
+>Quants missatges de registre haurà de recordar el &kdesvn;.</entry>
+</row>
+<row>
+<entry
+>Mostra les anotacions en color</entry>
+<entry
+>Utilitza els colors definits al diàleg de configuració per a les anotacions.</entry>
+</row>
+<row>
+<entry
+>Usa el plafó de navegació</entry>
+<entry
+>Alterna la visualització de la vista en arbre del repositori.</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</para>
+</sect1>
+
+<sect1 id="subversion-timedjobs-settings">
+<title
+>Configuració del Subversion i dels treballs programats</title>
+
+<table id="subversion-settings">
+<title
+>Subversion</title>
+<tgroup cols="2">
+
+<tbody>
+
+<row>
+<entry
+>Inicia la comprovació d'actualitzacions en obrir una còpia de treball</entry>
+<entry
+>Quan s'obre una còpia de treball s'inicia una cerca d'actualitzacions en segon pla.</entry>
+</row>
+<row>
+<entry
+>Inicia l'ompliment del cau de registres en obrir</entry>
+<entry
+>Si s'estableix, el &kdesvn; tornarà a omplir el cau del registre quan s'obri un repositori o còpia de treball, si l'&URL; no és per a un repositori local (<filename class="directory"
+>file://</filename
+>).</entry>
+</row>
+<row>
+  <entry
+>Comprova si els elements tenen establerta la propietat <quote
+>svn:needs-lock</quote
+></entry>
+<entry
+>Comprova a les còpies de treball si un element té aquesta propietat establerta i en cas afirmatiu, mostra una icona superposada especial. Establir aquesta opció pot alentir considerablement el llistat dels elements.</entry>
+</row>
+<row>
+<entry
+>Obtén els detalls de fitxer en el llistat remot</entry>
+<entry
+>Quan està marcada, el &kdesvn; obtindrà informació més detallada sobre els elements en realitzar un llistat sobre repositoris remots. Així podreu veure els blocats remots en el resum. Precaució: Això pot tornar el llistat MOLT lent!</entry>
+</row>
+
+<row>
+<entry
+>Obtén la informació de l'element recursivament</entry>
+<entry
+>Quan s'activa, l'ordre <command
+>info</command
+> sobre les carpetes obtindrà informació sobre tots els elements, pot ser realment lent.</entry>
+</row>
+
+<row>
+<entry
+>Desa les contrasenyes per a connexions remotes</entry>
+<entry
+>L'emmagatzematge de les contrasenyes sovint és un problema de seguretat. El Subversion emmagatzema les contrasenyes en un fitxer pla, &ead;, contrasenyes en text pla! Així que aneu amb compte ajustant aquesta opció i vegeu la següent entrada. Aquest element només indica el desament de les contrasenyes és el valor per omissió, ho podreu canviar per a dominis específics dins de diàleg d'inici de sessió.</entry>
+</row>
+
+<row>
+<entry
+>Desa les contrasenyes a la cartera del KDE</entry>
+<entry
+>Quan es desen les contrasenyes, el fitxer en text pla de Subversion és un forat de seguretat. El &kdesvn; és capaç de desar-les a la cartera del &kde; encriptada (a partir de la versió 0.12.0). D'altra banda, altres clients de Subversion no són capaços de llegir-les pel que haureu d'introduir-les emprant eines de línia d'ordres com <application
+>svn</application
+> o <application
+>rapidsvn</application
+>. Mentre el Subversion no encripti l'emmagatzematge de les contrasenyes, us ho haureu de pensar dues vegades.</entry>
+</row>
+
+<row>
+<entry
+>Usa el cau de contrasenyes intern</entry>
+<entry
+>Quan no s'emmagatzema una contrasenya, el &kdesvn; serà persistent mantenint-la fins que finalitzi, de manera que no sigui necessari introduir-la de nou en cada operació. Aquest cau mai serà persistent, &ead;, no es desarà més.</entry>
+</row>
+
+<row>
+<entry
+>El registre segueix els canvis de node</entry>
+<entry
+>Si se selecciona, el registre seguirà les operacions de còpia.</entry>
+</row>
+
+<row>
+<entry
+>El registre sempre llegeix la llista de fitxers canviats</entry>
+<entry
+>L'ordre «log» pot llegir la llista de fitxers canviats en publicar. Això és útil, i en la majoria dels casos no provoca una càrrega significativa sobre el trànsit de dades.</entry>
+</row>
+
+<row>
+<entry
+>Revisa els elements abans de publicar-los</entry>
+<entry
+>En fer una publicació, el &kdesvn; pot realitzar una comprovació del que farà. Per exemple, si hi ha elements sense versió que es poden afegir, llista d'elements canviats i operació actual a publicar. Això costarà més o menys depenent de l'arbre.</entry>
+</row>
+
+<row>
+<entry
+>Oculta els elements nous al quadre de publicació</entry>
+<entry
+>S'han o no de mostrar els elements sense versió en el diàleg de publicació.</entry>
+</row>
+
+<row>
+<entry
+>Una actualització modifica en lloc de generar conflictes</entry>
+<entry
+>Si s'estableix, una addició local al mateix camí que una addició entrant de la mateixa classe de node, resultarà en un node normal amb una possible modificació local, en lloc d'un conflicte a l'arbre.</entry>
+</row>
+
+<row>
+<entry
+>Una actualització crea els elements pare que falten</entry>
+<entry
+>Si s'estableix, es crearà qualsevol directori pare no existent comprovant també la profunditat buida.</entry>
+</row>
+
+</tbody>
+
+</tgroup>
+</table>
+
+<table id="timejobs-settings">
+<title
+>Tasques programades</title>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+><para
+>Comprova els elements modificats cada N segons</para
+> <para
+>Comprova per a elements actualitzats cada N segons</para
+></entry>
+<entry
+>Si s'estableix, es comprovarà regularment si hi ha actualitzacions o elements modificats a la còpia de treball, quan la xarxa estigui activa.</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="diffmerge-settings">
+<title
+>Diff i merge</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>El «diff» ignora el tipus de contingut</term>
+<listitem
+><para
+>Només interessant quan el «diff» es fa amb el Subversion. Quan s'estableix, el «diff» de Subversion ignorarà el tipus de contingut de les entrades. Altrament, no farà diferències sobre els binaris. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>El «diff» en l'arbre de revisions serà recursiu</term>
+<listitem
+><para
+>Quan s'estableix, els «diff» fets des de dins de la vista en arbre de les revisions es realitzaran de forma recursiva, com en tots els altres casos. Altrament, només es mostraran els canvis que pertanyin als elements en aquesta carpeta. Com es farà dependrà de com es generin els «diff» (des de Subversion mateix o des de visualitzadors externs). </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>El «diff» ignora els canvis als espais en blanc</term>
+<listitem>
+<para
+>Ignora els canvis en la quantitat d'espais en blanc (opció <option
+>-b</option
+> al <application
+>diff</application
+>). </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>El «diff» ignora tots els espais en blanc</term>
+<listitem>
+  <para
+>Ignora tots els espais en blanc (opció <option
+>-w</option
+> al <application
+>diff</application
+>).</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Prefereix un programa extern de «merge»</term>
+<listitem>
+<para
+>Estableix si es prefereix fusionar amb un programa extern i no amb el Subversion.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Usa el format «diff» de Git</term>
+<listitem>
+<para
+></para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Mostra les còpies com afegits</term>
+<listitem>
+<para
+></para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+<sect2>
+<title
+>Usa un visualitzador de «diff» extern</title>
+<para
+>Selecciona una aplicació externa per a mostrar les diferències. Per omissió és el &kompare;. </para>
+</sect2>
+<sect2>
+<title
+>Visualitzador extern del «diff»</title>
+<para
+>Defineix què utilitzarà el &kdesvn; com a visualitzador extern de les diferències i com el cridarà. Hi ha tres maneres: </para>
+<para>
+<variablelist>
+<varlistentry>
+<term
+>&lt;programa&gt; &lt;paràmetre&gt;</term>
+<listitem
+><para
+>La diferència serà generada amb el Subversion i posada directament a l'entrada estàndard del programa extern (&ead;, no caldran fitxers temporals). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>&lt;programa&gt; &lt;paràmetre&gt; %f</term>
+<listitem
+><para
+>El «diff» serà generat amb el Subversion, desat en un fitxer temporal i el paràmetre <option
+>%f</option
+> serà substituït pel nom del fitxer. Es pot utilitzar, per exemple, amb una crida simple a <application
+>less</application
+> o un visualitzador de text. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>&lt;programa&gt; &lt;paràmetre&gt; %1 %2</term>
+<listitem
+><para
+>El &kdesvn; deixarà que el programa extern faci les diferències. %1 i %2 seran substituïts pels valors requerits (noms de fitxer o de carpeta). El &kdesvn; emmagatzemarà el contingut per a comparar en un entorn temporal (quan les carpetes fan una <quote
+>exportació</quote
+>, quan una sola fila, fa un <quote
+>cat</quote
+>) quan sigui necessari i netejarà després de tancar el programa extern o ell. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Prefereix un programa extern de «merge»</term>
+<listitem
+><para
+>Seleccioneu si al diàleg de fusió l'opció <guilabel
+>Usa una fusió externa</guilabel
+> hauria o no d'estar marcada per omissió.</para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect2>
+<sect2>
+<title
+>Programa extern de fusió</title>
+<para
+>La configuració del programa i les opcions a utilitzar quan no es desitja la fusió interna de Subversion. Per omissió és <command
+>kdiff3 %s1 %s2 %t</command
+>. L'ordre de les variables de substitució no és important, i només poden aparèixer-hi una vegada, &pex;, com <literal
+>kdiff3 -o %t %s1 %s2 %t</literal
+>. Aquest material només ha estat provat amb <application
+>meld</application
+> i &kdiff3;. Penseu que els programes externs majoritàriament no saben res sobre el paràmetre <command
+>ignore</command
+> de Subversion, de manera que poden mostrar molt més del que esperàveu. </para>
+<sect3>
+<title
+>La substitució de variables per a programes de fusió externs</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>%s1</term>
+<listitem
+><para
+>Substituïda amb l'origen número u. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>%s2</term>
+<listitem
+><para
+>Substituïda amb dos números d'origen. Si està buit o és igual que l'origen i inici i final de la revisió és el mateix, aquesta variable serà omesa. De manera que tingueu cura en crear línies d'ordres com <command
+>xxdiff --title1 %s1 --title2 %s2 %s1 %s2 %t</command
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>%t</term>
+<listitem
+><para
+>Substituïda amb l'objectiu. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect3>
+</sect2>
+<sect2 id="extern-resolve-setup">
+<title
+>Programa de resolució de conflictes</title>
+<para
+>Podeu utilitzar un programa extern com el &kdiff3; per resoldre els conflictes, el valor predeterminat és <command
+>kdiff3 %o %m %n -o %t</command
+>. </para>
+<sect3>
+<title
+>La substitució de variables per a resoldre conflictes externs</title>
+<para
+>Entre parèntesis després de cada descripció és un exemple de com el Subversion cridaria als fitxers. Aquestes opcions estan dissenyades per al &kdiff3;, perquè en aquest moment és l'única aplicació que admet tots els paràmetres necessaris per a una bona resolució dels conflictes. <variablelist>
+<varlistentry>
+<term
+>%o o %l</term>
+<listitem
+><para
+>La versió antiga (local, esquerra). Això significa el número de la revisió menor, &ead;, el punt d'inici dels canvis conflictius. (<filename
+>foo.cc.r2</filename
+>) </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%m o %w</term>
+<listitem
+><para
+>La seva versió (de treball) del fitxer, &ead;, el que heu canviat respecte a la versió antiga. (<filename
+>foo.cc.mine</filename
+>) </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%n o %r</term>
+<listitem
+><para
+>Versió nova (remota, dreta) del fitxer. Per exemple, la versió que algú altre ha fet. (<filename
+>foo.cc.r3</filename
+>) </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%t</term>
+<listitem
+><para
+>Nom de destinació, &pex;, el nom d'origen. Per al &kdiff3; (com a exemple), aquest serà el nom després del paràmetre <option
+>-o</option
+> (= fitxer de sortida). (<filename
+>foo.cc</filename
+>) </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect3>
+</sect2>
+</sect1>
+<!--FIXME
+Colors
+
+Revisions tree
+-->
+<sect1 id="kio-cmdline-settings">
+<title
+>KIO / Línia d'ordres</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>Mostra el registre després d'executar una ordre</term>
+<listitem
+><para
+>Si s'obre un diàleg obert amb el registre de l'última ordre de Subversion que s'ha executat a través de la línia d'ordres o el menú d'accions al &konqueror;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Nombre mínim de línies de registre a mostrar</term>
+<listitem
+><para
+>Si s'estableix <guilabel
+>Mostra el registre...</guilabel
+>, quin serà el mínim de línies abans que es mostri un diàleg. Pel que podeu establir que aquesta finestra només es mostri quan es generi una sortida interessant (registre de publicacions i així successivament). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>No mostrar menús contextuals al &konqueror;</term>
+<listitem
+><para
+>Si s'estableix, no es crearà cap entrada de menú d'accions del &kdesvn; al &konqueror;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>No mostrar entrades a la part superior del menú «Accions»</term>
+<listitem
+><para
+>Si s'estableix, el &kdesvn; no mostrarà algunes accions extres dins del menú <guimenuitem
+>Accions</guimenuitem
+> del &konqueror; o &dolphin;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Les operacions KIO usen l'estàndard per als missatges de registre</term>
+<listitem
+><para
+>En realitzar operacions en un repositori a través del protocol KIO del &kdesvn; des de dins del &konqueror; (&ead;, els protocols, <quote
+>ksvn+...</quote
+>) sobre operacions grans com moure o copiar carpetes, el &kdesvn; demanarà un missatge de registre per a cada element. Aquest és un comportament del &konqueror;. Quan s'estableix aquesta opció, la implementació KIO del &kdesvn; no demanarà un missatge de registre, sinó que n'establirà un d'estàndard. Aquesta etiqueta no fa per a les operacions del menú d'accions del &kdesvn; pel &konqueror;, sinó que només copia/mou/creadir/suprimeix amb el &konqueror; o altres gestors de fitxers en un URL en format KIO. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Missatge estàndard</term>
+<listitem
+><para
+>El missatge que el KIO del &kdesvn; hauria d'establir en les operacions dins del &konqueror; quan s'ha seleccionat l'opció anterior. Per omissió és <guilabel
+>Revisió feta amb el KIO del &kdesvn;</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>KIO pot sobreescriure</term>
+<listitem
+><para
+>Si s'estableix aquesta etiqueta, tindreu un suport simple d'escriptura per als elements existents. &pex;, podeu obrir fitxers al vostre editor i desar directament sense verificar abans (el &kdesvn; ho farà en segon pla).</para>
+<para
+>Utilitzeu aquesta opció només si sabeu el que esteu fent. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>KIO mostra els missatges de progrés</term>
+<listitem
+><para
+>Si s'estableix, el KIO mostrarà informació detallada del Plasma del KDE sobre l'operació actual. Els missatges d'error de KIO sempre es mostra i <emphasis
+>no</emphasis
+> es poden desactivar. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect1>
+</chapter>
+
+<chapter id="commands">
+<title
+>Referència d'ordres</title>
+
+<sect1 id="kdesvn-mainwindow">
+<title
+>La finestra principal del &kdesvn;</title>
+
+<sect2>
+<title
+>El menú Fitxer</title>
+<para>
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Obre...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Obre una còpia de treball local o un repositori prèviament descarregat.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Els URL oberts recentment</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Es tracta d'una drecera per obrir els repositoris oberts recentment. En fer clic sobre aquest element, s'obrirà una llista al costat del menú amb les diverses còpies de treball o repositoris locals oberts més recentment. En fer clic sobre un element específic, aquest s'obrirà en el &kdesvn;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Nou</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Obre una finestra amb una nova sessió del &kdesvn;.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Administració de Subversion</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Els elements del menú amb les tasques d'administració pels repositoris de Subversion com: <simplelist
+> <member
+>Crea i obre un repositori nou</member
+> <member
+>Bolca un repositori a un fitxer</member
+> <member
+>Copia un repositori</member
+> <member
+>Carrega un bolcat dintre d'un repositori</member
+> </simplelist
+> Per a més informació, llegiu la sortida de <command
+>svnadmin --help</command
+> </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Tanca</guimenuitem
+> </menuchoice>
+</term>
+<listitem
+><para
+><action
+>Tanca</action
+> el repositori o còpia de treball oberta.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Surt</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Surt</action
+> del &kdesvn;.</para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect2>
+<sect2>
+<title
+>El menú Adreces d'interès</title>
+<para
+>Vegeu l'<ulink url="help:/konqueror/bookmarks.html"
+>ajuda del &konqueror;</ulink
+>. </para>
+</sect2>
+
+<sect2 id="kdesvn-subversion-menu">
+<title
+>El menú Subversion</title>
+
+<variablelist id="subversion-general">
+<title
+>Accions generals de Subversion</title>
+<varlistentry>
+<term>
+<menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>General</guisubmenu
+> <guimenuitem
+>Historial de l'element</guimenuitem
+> </menuchoice
+></term>
+<listitem>
+<para
+><action
+>Mostra</action
+> el registre de temps de l'element seleccionat. Aneu amb compte, aquesta llista pot ser molt gran!</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; &Maj;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>General</guisubmenu
+> <guimenuitem
+>Historial de l'element ignorant les còpies...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mostra el registre de l'historial de l'element seleccionat sense seguir les còpies.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>I</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>General</guisubmenu
+> <guimenuitem
+>Detalls</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mostra informació detallada quant al/s element/s seleccionat/s.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>General</guisubmenu
+> <guimenuitem
+>Responsabilitat</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Crea una llista comentada sobre totes les publicacions. Això pot consumir temps!</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>General</guisubmenu
+> <guimenuitem
+>Qui va canviar la línia en l'interval</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Anota un interval de publicacions per a un fitxer.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>General</guisubmenu
+> <guimenuitem
+>Bolca (cat) el HEAD</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mostra el contingut de l'última versió publicada d'aquesta entrada. (Pot ser diferent de la versió a la còpia de treball si es treballa en una CT!)</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>F2</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>General</guisubmenu
+> <guimenuitem
+>Mou</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mou o canvia el nom de l'element dins de la còpia de treball o en el repositori.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>General</guisubmenu
+> <guimenuitem
+>Copia</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Copia un element dins de la còpia de treball o en el repositori.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Supr</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>General</guisubmenu
+><guimenuitem
+>Suprimeix els fitxers/directoris seleccionats</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Suprimeix les entrades seleccionades. Si treballeu en una còpia de treball, després haureu de publicar les supressions.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>General</guisubmenu
+> <guimenuitem
+>Carpeta nova</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Crea una carpeta nova.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>General</guisubmenu
+> <guimenuitem
+>Importa les carpetes cap a l'actual</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Selecciona les carpetes que voleu importar dins del directori seleccionat.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>General</guisubmenu
+> <guimenuitem
+>Descarrega un repositori</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Crea una còpia de treball nova d'un repositori.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>General</guisubmenu
+> <guimenuitem
+>Exporta un repositori</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Exporta un repositori al sistema de fitxers, &ead;, crea un arbre de revisions net i sense informació de Subversion. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>General</guisubmenu
+> <guimenuitem
+>Bloca els elements actuals</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Marcar els elements actuals com a bloquejats. Llegiu el manual de Subversion abans d'utilitzar això! </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>General</guisubmenu
+> <guimenuitem
+>Desbloca els elements actuals</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Elimina els blocatges dels elements actuals. Llegiu el manual de Subversion abans d'utilitzar això! </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-workingcopy">
+<title
+>Còpia de treball</title>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+> <guimenuitem
+>Actualitza a HEAD</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Actualitza la còpia de treball a HEAD del repositori.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+> <guimenuitem
+>Actualitza a la revisió...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Actualitza la còpia de treball a una revisió específica del repositori.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>núm</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+> <guimenuitem
+>Publica</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Publica els canvis dins de la còpia de treball pels elements seleccionats al repositori.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+> <guimenuitem
+>Diff dels canvis locals</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mostra els canvis locals com una sortida del «diff» (sense accés a la xarxa). Aquesta serà només la diferència contra l'últim estat de la còpia de treball que es va actualitzar, no contra la versió al repositori.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+> <guimenuitem
+>Diff contra HEAD</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Genera les diferències de la còpia de treball contra HEAD del repositori.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+> <guimenuitem
+>Propietats</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Visualitza/Edita les propietats assignades amb l'entrada actual.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Inser</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+> <guimenuitem
+>Afegeix els fitxers/directoris seleccionats</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Afegeix els fitxers i/o carpetes seleccionades al control de versions.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+> <guimenuitem
+>Reverteix els canvis actuals</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Reverteix els canvis realitzats a la còpia de treball i les actualitzacions a l'últim estat actualitzat.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+> <guimenuitem
+>Marca com a resolt</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Marca els elements en conflicte com a sense conflicte i elimina els fitxers associats.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+> <guimenuitem
+>Fusiona dues revisions</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Fusiona dues revisions de les entrades dins la còpia de treball.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+> <guimenuitem
+>Des/ignora l'element actual</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Edita les propietats de la carpeta pare de l'element actual, de manera que es marcarà l'element seleccionat com a ignorat si no s'estableix, en cas contrari s'eliminarà de la llista d'ignorats.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+> <guimenuitem
+>Neteja</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Neteja la còpia de treball i elimina els bloqueigs-(publica) si n'hi ha.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Còpia de treball</guisubmenu
+> <guimenuitem
+>Canvia al repositori</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Canvia l'arrel de la còpia de treball.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-repository">
+<title
+>Repositori</title>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Repositori</guisubmenu
+> <guimenuitem
+>Descarrega des del camí del repositori actual</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Crea una còpia de treball des de l'entrada seleccionada si és un directori.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Repositori</guisubmenu
+> <guimenuitem
+>Exporta el camí del repositori actual</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Crea una còpia neta al sistema de fitxers local des de l'entrada seleccionada si és un directori.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-view">
+<title
+>Accions de la vista</title>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>F5</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Visualitza</guisubmenu
+> <guimenuitem
+>Actualitza la vista</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Actualitza</action
+> l'estat actual de tots els elements mostrats. Això llistarà cada element demanant que es mostri amb l'estat actual. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Visualitza</guisubmenu
+> <guimenuitem
+>Desplega l'arbre de fitxers / Plega l'arbre de fitxers</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Expandeix o contrau la vista en arbre del repositori. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Cau del registre</guisubmenu
+> <guimenuitem
+>Atura l'actualització del cau del registre</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>El registre s'emmagatzema al cau i s'utilitza per a visualitzar l'arbre de revisions d'un repositori. Depenent de la connexió a Internet, la mida del repositori de Subversion i la longitud de l'historial pot ser molt gran. Per tant podreu deixar d'actualitzar el cau utilitzant aquesta acció. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guimenuitem
+>Afegeix les identitats ssh al ssh-agent</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Emmagatzema la contrasenya de la vostra clau SSH per a la sessió actual, de manera que no necessiteu introduir més la contrasenya. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="kdesvn-database-menu">
+<title
+>El menú Base de dades</title>
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Base de dades</guimenu
+> <guimenuitem
+>Mostra el contingut de la base de dades</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mostra un resum sobre el contingut de la base de dades al cau per als repositoris coneguts i permet suprimir el cau o repositori i accedir a les opcions de configuració del repositori. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Base de dades</guimenu
+> <guimenuitem
+>Configuració del repositori actual</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Mostra un diàleg per adaptar les opcions de configuració del cau, registres i estadístiques. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Els menús Arranjament i Ajuda</title>
+<para
+>El &kdesvn; té la configuració comuna al &kde; i els elements dels menús <guimenu
+>Arranjament</guimenu
+> i <guimenu
+>Ajuda</guimenu
+>. Per obtenir més informació, llegiu les seccions sobre <ulink url="help:/fundamentals/menus.html#menus-settings"
+>El menú Arranjament</ulink
+> i <ulink url="help:/fundamentals/menus.html#menus-help"
+>El menú Ajuda</ulink
+> en els Fonaments del &kde; amb aquesta entrada de menú addicional:</para>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Opcions ràpides</guimenuitem
+> </menuchoice
+></term>
+<listitem>
+
+<variablelist>
+
+<varlistentry>
+<term>
+<guimenuitem
+>A l'inici carrega l'últim URL obert</guimenuitem>
+</term
+><listitem>
+<para
+>Torna a carregar l'últim URL obert si no s'indica a la línia d'ordres.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Els registres segueixen els canvis de node</guimenuitem>
+</term
+><listitem>
+<para
+><!--FIXME What does this option do? --></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Mostra els fitxers ignorats</guimenuitem>
+</term
+><listitem>
+<para
+>Mostra els elements marcats al Subversion per a ignorar o no.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Mostra els fitxers desconeguts</guimenuitem>
+</term
+><listitem>
+<para
+>Mostra els fitxers no afegits al repositori de Subversion.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Oculta els fitxers sense canvis</guimenuitem>
+</term
+><listitem>
+<para
+>Utilitzeu aquesta acció per mostrar només els fitxers modificats i proporcionar un resum clar i concís.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Treballa en línia</guimenuitem>
+</term
+><listitem>
+<para
+>Quan es treballa fora de línia, el cau del registre no s'actualitzarà, per tant, el registre del cau podrà diferir del registre real.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+</sect1>
+</chapter>
+<chapter id="credits-and-license">
+<title
+>Crèdits i llicència amb els reconeixements</title>
+<para
+>Copyright del programa 2005-2009 &Rajko.Albrecht; &Rajko.Albrecht.mail; </para>
+<para
+>Moltes gràcies als col·laboradors: </para>
+<itemizedlist>
+<listitem
+><para
+>Andreas Richter <email
+>ar@oszine.de</email
+> - per l'adaptació a les qt4 del svnqt</para>
+</listitem>
+<listitem
+><para
+>Michael Biebl <email
+>biebl@teco.edu</email
+> - per la molta ajuda, idees, implementació i consells.</para>
+</listitem>
+<listitem
+><para
+>Bram Schoenmakers <email
+>bramschoenmakers@kde.nl</email
+> - pels consells específics sobre el &kde;, traducció al neerlandès, neteja del meu codi.</para>
+</listitem>
+</itemizedlist>
+<para
+>I gràcies a tots els altres traductors (mai vaig pensar que obtindria tan ràpidament una quantitat tan gran de traduccions!) i per tota la seva retroalimentació positiva i negativa. M'ha ajudat molt. </para>
+<para
+>Si voleu la vostra pròpia traducció del &kdesvn; i podeu ajudar, si us plau, llegiu la <ulink url="http://l10n.kde.org/"
+>pàgina de localització del &kde;</ulink
+> o pregunteu a la <ulink url="mailto:kde-i18n-doc@kde.org"
+>llista de correu <email
+>kde-i18n-doc@kde.org</email
+></ulink
+>. </para>
+<para
+>Copyright de la documentació 2005-2006 &Rajko.Albrecht; &Rajko.Albrecht.mail; </para>
+<para
+>Traductor de la documentació: &credits.Antoni.Bella;</para
+> &underFDL; &underGPL; </chapter>
+
+<appendix id="revision-syntax">
+<title
+>Sintaxi per a les revisions</title>
+<para
+>Les revisions es poden indicar en la mateixa forma que per al client <application
+>svn</application
+> estàndard. Això vol dir: número, paraula clau o data. </para>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>Número</term>
+<listitem
+><para
+>Un número més gran o igual que -1. El -1 significa <quote
+>revisió sense especificar</quote
+>, 0 és el començament. Normalment, aquests números no s'han d'utilitzar (la majoria de les operacions fallaran). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Paraula clau</term>
+<listitem
+><para
+>Un de <itemizedlist>
+
+<listitem
+><para
+>HEAD </para
+></listitem>
+
+<listitem
+><para
+>BASE </para
+></listitem>
+
+<listitem
+><para
+>COMMITED </para
+></listitem>
+
+<listitem
+><para
+>PREV </para
+></listitem>
+
+<listitem
+><para
+>START </para
+></listitem>
+
+<listitem
+><para
+>WORKING </para
+></listitem>
+
+</itemizedlist>
+
+</para>
+<para
+>Les paraules clau distingeixen majúscules i minúscules! Per exemple, «head» no és el mateix que «HEAD». </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Data</term>
+<listitem
+><para
+>Data en la forma {AAAA-MM-DD}. Els MM o DD seran reals - &pex; 2005-1-1 s'ha d'escriure com {2005-01-01}-. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+<para
+>En afegir una revisió específica a un &URL; sempre es farà <quote
+>?rev=<replaceable
+>revisió</replaceable
+></quote
+>. </para>
+</appendix>
+
+&documentation.index;
+</book>

@@ -1,0 +1,5663 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Steve Allewell <steve.allewell@gmail.com>, 2015, 2016, 2017, 2018, 2019, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-08-17 00:19+0000\n"
+"PO-Revision-Date: 2020-04-11 20:13+0100\n"
+"Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
+"Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.07.70\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Steve Allewell"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "steve.allewell@gmail.com"
+
+#: src/askpass/kdesvn-askpass.cpp:35
+#, kde-format
+msgid "kdesvnaskpass"
+msgstr "kdesvnaskpass"
+
+#: src/askpass/kdesvn-askpass.cpp:36
+#, kde-format
+msgid "ssh-askpass for kdesvn"
+msgstr "ssh-askpass for kdesvn"
+
+#: src/askpass/kdesvn-askpass.cpp:38
+#, kde-format
+msgid "Copyright (c) 2005-2009 Rajko Albrecht"
+msgstr "Copyright (c) 2005-2009 Rajko Albrecht"
+
+#: src/askpass/kdesvn-askpass.cpp:41
+#, kde-format
+msgid "Prompt"
+msgstr "Prompt"
+
+#: src/askpass/kdesvn-askpass.cpp:53
+#, kde-format
+msgid "Please enter your password below."
+msgstr "Please enter your password below."
+
+#: src/askpass/kdesvn-askpass.cpp:74
+#, kde-format
+msgctxt "@title:window"
+msgid "Password"
+msgstr "Password"
+
+#: src/kdesvn.cpp:81
+#, kde-format
+msgid "&Bookmarks"
+msgstr "&Bookmarks"
+
+#: src/kdesvn.cpp:109
+#, kde-format
+msgid "Create and open new repository"
+msgstr "Create and open new repository"
+
+#: src/kdesvn.cpp:110
+#, kde-format
+msgid "Create and opens a new local Subversion repository"
+msgstr "Create and opens a new local Subversion repository"
+
+#: src/kdesvn.cpp:115
+#, kde-format
+msgid "Dump repository to file"
+msgstr "Dump repository to file"
+
+#: src/kdesvn.cpp:116
+#, kde-format
+msgid "Dump a Subversion repository to a file"
+msgstr "Dump a Subversion repository to a file"
+
+#: src/kdesvn.cpp:121
+#, kde-format
+msgid "Hotcopy a repository"
+msgstr "Hotcopy a repository"
+
+#: src/kdesvn.cpp:122
+#, kde-format
+msgid "Hotcopy a Subversion repository to a new folder"
+msgstr "Hotcopy a Subversion repository to a new folder"
+
+#: src/kdesvn.cpp:127
+#, kde-format
+msgid "Load dump into repository"
+msgstr "Load dump into repository"
+
+#: src/kdesvn.cpp:128
+#, kde-format
+msgid "Load a dump file into a repository."
+msgstr "Load a dump file into a repository."
+
+#: src/kdesvn.cpp:133
+#, kde-format
+msgid "Add ssh identities to ssh-agent"
+msgstr "Add ssh identities to ssh-agent"
+
+#: src/kdesvn.cpp:134
+#, kde-format
+msgid "Force add ssh-identities to ssh-agent for future use."
+msgstr "Force add ssh-identities to ssh-agent for future use."
+
+#: src/kdesvn.cpp:139
+#, kde-format
+msgid "Info about kdesvn part"
+msgstr "Info about kdesvn part"
+
+#: src/kdesvn.cpp:140
+#, kde-format
+msgid "Shows info about the kdesvn plugin and not the standalone application."
+msgstr "Shows info about the kdesvn plugin and not the standalone application."
+
+#: src/kdesvn.cpp:145
+#, kde-format
+msgid "Show database content"
+msgstr "Show database content"
+
+#: src/kdesvn.cpp:146
+#, kde-format
+msgid "Show the content of log cache database"
+msgstr "Show the content of log cache database"
+
+#: src/kdesvn.cpp:152
+#, kde-format
+msgid ""
+"Could not load the part:\n"
+"%1"
+msgstr ""
+"Could not load the part:\n"
+"%1"
+
+#: src/kdesvn.cpp:159
+#, kde-format
+msgid ""
+"Could not find our part:\n"
+"%1"
+msgstr ""
+"Could not find our part:\n"
+"%1"
+
+#: src/kdesvn.cpp:190
+#, kde-format
+msgid "Could not open URL %1"
+msgstr "Could not open URL %1"
+
+#: src/kdesvn.cpp:222
+#, kde-format
+msgid "Recent opened URLs"
+msgstr "Recent opened URLs"
+
+#: src/kdesvn.cpp:231
+#, kde-format
+msgid "Load last opened URL on start"
+msgstr "Load last opened URL on start"
+
+#: src/kdesvn.cpp:233
+#, kde-format
+msgid "Reload last opened URL if no one is given on command line"
+msgstr "Reload last opened URL if no one is given on command line"
+
+#: src/kdesvn.cpp:316
+#, kde-format
+msgid "Ready"
+msgstr "Ready"
+
+#: src/kdesvn_part.cpp:156
+#, kde-format
+msgid "Logs follow node changes"
+msgstr "Logs follow node changes"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_ignored_files)
+#. i18n: ectx: label, entry, group (subversion)
+#: src/kdesvn_part.cpp:161 src/settings/display_settings.ui:57
+#: src/settings/kdesvn_part.kcfg:80
+#, kde-format
+msgid "Display ignored files"
+msgstr "Display ignored files"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/kdesvn_part.cpp:166 src/settings/kdesvn_part.kcfg:84
+#, kde-format
+msgid "Display unknown files"
+msgstr "Display unknown files"
+
+#: src/kdesvn_part.cpp:171
+#, kde-format
+msgid "Hide unchanged files"
+msgstr "Hide unchanged files"
+
+#: src/kdesvn_part.cpp:176
+#, kde-format
+msgid "Work online"
+msgstr "Work online"
+
+#: src/kdesvn_part.cpp:183
+#, kde-format
+msgid "Configure Kdesvn..."
+msgstr "Configure Kdesvn..."
+
+#: src/kdesvn_part.cpp:187
+#, kde-format
+msgid "About kdesvn part"
+msgstr "About kdesvn part"
+
+#: src/kdesvn_part.cpp:191
+#, kde-format
+msgid "Kdesvn Handbook"
+msgstr "Kdesvn Handbook"
+
+#: src/kdesvn_part.cpp:281
+#, kde-format
+msgid ""
+"Built with Subversion library: %1\n"
+"Running Subversion library: %2"
+msgstr ""
+"Built with Subversion library: %1\n"
+"Running Subversion library: %2"
+
+#: src/kdesvn_part.cpp:284
+#, kde-format
+msgid "kdesvn Part"
+msgstr "kdesvn Part"
+
+#: src/kdesvn_part.cpp:286
+#, kde-format
+msgid "A Subversion Client by KDE (dynamic Part component)"
+msgstr "A Subversion Client by KDE (dynamic Part component)"
+
+#: src/kdesvn_part.cpp:288
+#, kde-format
+msgid ""
+"(C) 2005-2009 Rajko Albrecht,\n"
+"(C) 2015-2018 Christian Ehrlicher"
+msgstr ""
+"(C) 2005-2009 Rajko Albrecht,\n"
+"(C) 2015-2018 Christian Ehrlicher"
+
+#: src/kdesvn_part.cpp:291
+#, kde-format
+msgid "Original author and maintainer"
+msgstr "Original author and maintainer"
+
+#: src/kdesvn_part.cpp:292 src/main.cpp:47 src/main.cpp:48
+#, kde-format
+msgid "Developer"
+msgstr "Developer"
+
+#. i18n: ectx: Menu (subversion_general)
+#: src/kdesvn_part.cpp:331 src/kdesvn_part.rc:19
+#, kde-format
+msgid "General"
+msgstr "General"
+
+#: src/kdesvn_part.cpp:331
+#, kde-format
+msgid "General Settings"
+msgstr "General Settings"
+
+#. i18n: ectx: Menu (subversion_main)
+#: src/kdesvn_part.cpp:333 src/kdesvn_part.rc:17 src/kdesvnui.rc:25
+#, kde-format
+msgid "Subversion"
+msgstr "Subversion"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, SubversionSettings)
+#: src/kdesvn_part.cpp:333 src/settings/subversion_settings.ui:6
+#, kde-format
+msgid "Subversion Settings"
+msgstr "Subversion Settings"
+
+#: src/kdesvn_part.cpp:335
+#, kde-format
+msgid "Timed jobs"
+msgstr "Timed jobs"
+
+#: src/kdesvn_part.cpp:335
+#, kde-format
+msgid "Settings for timed jobs"
+msgstr "Settings for timed jobs"
+
+#: src/kdesvn_part.cpp:337
+#, kde-format
+msgid "Diff & Merge"
+msgstr "Diff & Merge"
+
+#: src/kdesvn_part.cpp:337
+#, kde-format
+msgid "Settings for diff and merge"
+msgstr "Settings for diff and merge"
+
+#: src/kdesvn_part.cpp:339
+#, kde-format
+msgid "Colors"
+msgstr "Colours"
+
+#: src/kdesvn_part.cpp:339
+#, kde-format
+msgid "Color Settings"
+msgstr "Colour Settings"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, RevisionTreeSettings)
+#: src/kdesvn_part.cpp:341 src/settings/revisiontree_settings.ui:6
+#, kde-format
+msgid "Revision tree Settings"
+msgstr "Revision tree Settings"
+
+#: src/kdesvn_part.cpp:341
+#, kde-format
+msgid "Revision tree"
+msgstr "Revision tree"
+
+#: src/kdesvn_part.cpp:343
+#, kde-format
+msgid "KIO / Command line"
+msgstr "KIO / Command line"
+
+#: src/kdesvn_part.cpp:343
+#, kde-format
+msgid "Settings for command line and KIO execution"
+msgstr "Settings for command line and KIO execution"
+
+#. i18n: ectx: Menu (settings)
+#: src/kdesvn_part.rc:5
+#, kde-format
+msgid "Subversion settings"
+msgstr "Subversion settings"
+
+#. i18n: ectx: Menu (quicksettings)
+#: src/kdesvn_part.rc:7 src/kdesvnui.rc:43
+#, kde-format
+msgid "Quick settings"
+msgstr "Quick settings"
+
+#. i18n: ectx: Menu (subversion_working_copy)
+#: src/kdesvn_part.rc:49
+#, kde-format
+msgid "Working copy"
+msgstr "Working copy"
+
+#. i18n: ectx: Menu (subversion_repo)
+#: src/kdesvn_part.rc:75
+#, kde-format
+msgid "Repository"
+msgstr "Repository"
+
+#. i18n: ectx: Menu (generic_view)
+#: src/kdesvn_part.rc:82
+#, kde-format
+msgid "View"
+msgstr "View"
+
+#. i18n: ectx: Menu (log_cache)
+#: src/kdesvn_part.rc:89
+#, kde-format
+msgid "Log cache"
+msgstr "Log cache"
+
+#. i18n: ectx: Menu (help)
+#: src/kdesvn_part.rc:98 src/kdesvnui.rc:52
+#, kde-format
+msgid "&Help"
+msgstr "&Help"
+
+#. i18n: ectx: Menu (local_context_single_conflicted)
+#. i18n: ectx: Menu (local_context_single_versioned)
+#. i18n: ectx: Menu (local_context_single_unversioned)
+#. i18n: ectx: Menu (local_context_multi)
+#: src/kdesvn_part.rc:106 src/kdesvn_part.rc:113 src/kdesvn_part.rc:154
+#: src/kdesvn_part.rc:162
+#, kde-format
+msgid "Actions"
+msgstr "Actions"
+
+#. i18n: ectx: ToolBar (subversionToolBar)
+#: src/kdesvn_part.rc:242 src/kdesvnui.rc:58
+#, kde-format
+msgid "Subversion toolbar"
+msgstr "Subversion toolbar"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: src/kdesvn_part.rc:260 src/kdesvnui.rc:62
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Main Toolbar"
+
+#: src/kdesvnd/kdesvnd.cpp:252
+#, kde-format
+msgctxt "@title:window"
+msgid "Enter Password for Realm %1"
+msgstr "Enter Password for Realm %1"
+
+#: src/kdesvnd/kdesvnd.cpp:268 src/svnfrontend/ccontextlistener.cpp:289
+#, kde-format
+msgid "Open a file with a #PKCS12 certificate"
+msgstr "Open a file with a #PKCS12 certificate"
+
+#: src/kdesvnd/kdesvnd.cpp:359
+#, kde-format
+msgid "Current task"
+msgstr "Current task"
+
+#: src/kdesvnd/kdesvnd.cpp:371
+#, kde-format
+msgid "Current transfer"
+msgstr "Current transfer"
+
+#: src/kdesvnd/ksvnjobview.cpp:50
+#, kde-format
+msgid "bytes"
+msgstr "bytes"
+
+#. i18n: ectx: Menu (file)
+#: src/kdesvnui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "&File"
+
+#. i18n: ectx: Menu (subversion_admin)
+#: src/kdesvnui.rc:10
+#, kde-format
+msgid "Subversion Admin"
+msgstr "Subversion Admin"
+
+#. i18n: ectx: Menu (database_menu)
+#: src/kdesvnui.rc:30
+#, kde-format
+msgid "Database"
+msgstr "Database"
+
+#. i18n: ectx: Menu (settings)
+#: src/kdesvnui.rc:35
+#, kde-format
+msgid "&Settings"
+msgstr "&Settings"
+
+#: src/kdesvnview.cpp:133 src/kdesvnview.cpp:167
+#, kde-format
+msgid "Repository opened"
+msgstr "Repository opened"
+
+#: src/kdesvnview.cpp:173
+#, kde-format
+msgid "Could not open repository"
+msgstr "Could not open repository"
+
+#: src/kdesvnview.cpp:198
+#, kde-format
+msgid "No repository open"
+msgstr "No repository open"
+
+#: src/kdesvnview.cpp:258
+#, kde-format
+msgctxt "@title:window"
+msgid "Hotcopy a Repository"
+msgstr "Hotcopy a Repository"
+
+#: src/kdesvnview.cpp:276
+#, kde-format
+msgid "Hotcopy finished."
+msgstr "Hotcopy finished."
+
+#: src/kdesvnview.cpp:285
+#, kde-format
+msgctxt "@title:window"
+msgid "Load a Repository From an svndump"
+msgstr "Load a Repository From an svndump"
+
+#: src/kdesvnview.cpp:335
+#, kde-format
+msgctxt "@title:window"
+msgid "Load Dump"
+msgstr "Load Dump"
+
+#: src/kdesvnview.cpp:335
+#, kde-format
+msgid "Loading a dump into a repository."
+msgstr "Loading a dump into a repository."
+
+#: src/kdesvnview.cpp:337
+#, kde-format
+msgid "Loading dump finished."
+msgstr "Loading dump finished."
+
+#: src/kdesvnview.cpp:347
+#, kde-format
+msgctxt "@title:window"
+msgid "Dump a Repository"
+msgstr "Dump a Repository"
+
+#: src/kdesvnview.cpp:387
+#, kde-format
+msgctxt "@title:window"
+msgid "Dump"
+msgstr "Dump"
+
+#: src/kdesvnview.cpp:387
+#, kde-format
+msgid "Dumping a repository"
+msgstr "Dumping a repository"
+
+#: src/kdesvnview.cpp:389
+#, kde-format
+msgid "Dump finished."
+msgstr "Dump finished."
+
+#: src/kdesvnview.cpp:434
+#, kde-format
+msgid "Inserted %v not cached log entries of %m."
+msgstr "Inserted %v not cached log entries of %m."
+
+#: src/kiosvn/kiolistener.cpp:66 src/kiosvn/kiosvn.cpp:811
+#, kde-format
+msgid "Wrong or missing log (may cancel pressed)."
+msgstr "Wrong or missing log (may cancel pressed)."
+
+#: src/kiosvn/kiolistener.cpp:91
+#, kde-format
+msgid "A (bin) %1"
+msgstr "A (bin) %1"
+
+#: src/kiosvn/kiolistener.cpp:93 src/kiosvn/kiolistener.cpp:129
+#, kde-format
+msgid "A %1"
+msgstr "A %1"
+
+#: src/kiosvn/kiolistener.cpp:102 src/kiosvn/kiolistener.cpp:125
+#, kde-format
+msgid "D %1"
+msgstr "D %1"
+
+#: src/kiosvn/kiolistener.cpp:105
+#, kde-format
+msgid "Restored %1."
+msgstr "Restored %1."
+
+#: src/kiosvn/kiolistener.cpp:108
+#, kde-format
+msgid "Reverted %1."
+msgstr "Reverted %1."
+
+#: src/kiosvn/kiolistener.cpp:111
+#, kde-format
+msgid ""
+"Failed to revert %1.\n"
+"Try updating instead."
+msgstr ""
+"Failed to revert %1.\n"
+"Try updating instead."
+
+#: src/kiosvn/kiolistener.cpp:114
+#, kde-format
+msgid "Resolved conflicted state of %1."
+msgstr "Resolved conflicted state of %1."
+
+#: src/kiosvn/kiolistener.cpp:118
+#, kde-format
+msgid "Skipped missing target %1."
+msgstr "Skipped missing target %1."
+
+#: src/kiosvn/kiolistener.cpp:120
+#, kde-format
+msgid "Skipped %1."
+msgstr "Skipped %1."
+
+#: src/kiosvn/kiolistener.cpp:173
+#, kde-format
+msgid "Finished at revision %1."
+msgstr "Finished at revision %1."
+
+#: src/kiosvn/kiolistener.cpp:175
+#, kde-format
+msgid "Update finished."
+msgstr "Update finished."
+
+#: src/kiosvn/kiolistener.cpp:179
+#, kde-format
+msgid "Finished external at revision %1."
+msgstr "Finished external at revision %1."
+
+#: src/kiosvn/kiolistener.cpp:181
+#, kde-format
+msgid "Finished external."
+msgstr "Finished external."
+
+#: src/kiosvn/kiolistener.cpp:191
+#, kde-format
+msgid "Fetching external item into %1."
+msgstr "Fetching external item into %1."
+
+#: src/kiosvn/kiolistener.cpp:195
+#, kde-format
+msgid "Status against revision: %1."
+msgstr "Status against revision: %1."
+
+#: src/kiosvn/kiolistener.cpp:199
+#, kde-format
+msgid "Performing status on external item at %1."
+msgstr "Performing status on external item at %1."
+
+#: src/kiosvn/kiolistener.cpp:202
+#, kde-format
+msgid "Sending %1."
+msgstr "Sending %1."
+
+#: src/kiosvn/kiolistener.cpp:206
+#, kde-format
+msgid "Adding (bin) %1."
+msgstr "Adding (bin) %1."
+
+#: src/kiosvn/kiolistener.cpp:208
+#, kde-format
+msgid "Adding %1."
+msgstr "Adding %1."
+
+#: src/kiosvn/kiolistener.cpp:212
+#, kde-format
+msgid "Deleting %1."
+msgstr "Deleting %1."
+
+#: src/kiosvn/kiolistener.cpp:215
+#, kde-format
+msgid "Replacing %1."
+msgstr "Replacing %1."
+
+#: src/kiosvn/kiolistener.cpp:221
+#, kde-format
+msgid "Transmitting file data "
+msgstr "Transmitting file data "
+
+#: src/kiosvn/kiosvn.cpp:301 src/kiosvn/kiosvn.cpp:355
+#: src/kiosvn/kiosvn.cpp:507
+#, kde-format
+msgid "Can only write on HEAD revision."
+msgstr "Can only write on HEAD revision."
+
+#: src/kiosvn/kiosvn.cpp:342
+#, kde-format
+msgid "Renaming %1 to %2 successful"
+msgstr "Renaming %1 to %2 successful"
+
+#: src/kiosvn/kiosvn.cpp:376
+#, kde-format
+msgid "Overwriting existing items is disabled in settings."
+msgstr "Overwriting existing items is disabled in settings."
+
+#: src/kiosvn/kiosvn.cpp:384
+#, kde-format
+msgid "Start checking out to temporary folder"
+msgstr "Start checking out to temporary folder"
+
+#: src/kiosvn/kiosvn.cpp:387
+#, kde-format
+msgid "Checking out %1"
+msgstr "Checking out %1"
+
+#: src/kiosvn/kiosvn.cpp:396
+#, kde-format
+msgid "Temporary checkout done."
+msgstr "Temporary checkout done."
+
+#: src/kiosvn/kiosvn.cpp:400
+#, kde-format
+msgid "Could not write to existing item."
+msgstr "Could not write to existing item."
+
+#: src/kiosvn/kiosvn.cpp:406
+#, kde-format
+msgid "Could not open temporary file"
+msgstr "Could not open temporary file"
+
+#: src/kiosvn/kiosvn.cpp:430
+#, kde-format
+msgid "Could not retrieve data for write."
+msgstr "Could not retrieve data for write."
+
+#: src/kiosvn/kiosvn.cpp:438
+#, kde-format
+msgid "Committing %1"
+msgstr "Committing %1"
+
+#: src/kiosvn/kiosvn.cpp:461
+#, kde-format
+msgid "Wrote %1 to repository"
+msgstr "Wrote %1 to repository"
+
+#: src/kiosvn/kiosvn.cpp:492
+#, kde-format
+msgid "Copied %1 to %2"
+msgstr "Copied %1 to %2"
+
+#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1062
+#: src/svnfrontend/svnactions.cpp:2221
+#, kde-format
+msgid "Committed revision %1."
+msgstr "Committed revision %1."
+
+#: src/kiosvn/kiosvn.cpp:830
+#, kde-format
+msgid "Nothing to commit."
+msgstr "Nothing to commit."
+
+#: src/kiosvn/kiosvn.cpp:877
+#, kde-format
+msgid "Empty logs"
+msgstr "Empty logs"
+
+#: src/ksvnwidgets/authdialogwidget.cpp:35
+#, kde-format
+msgid "Store password (into KDE Wallet)"
+msgstr "Store password (into KDE Wallet)"
+
+#: src/ksvnwidgets/authdialogwidget.cpp:36
+#, kde-format
+msgid "Store password (into Subversion' simple storage)"
+msgstr "Store password (into Subversion' simple storage)"
+
+#: src/ksvnwidgets/authdialogwidget.cpp:38
+#, kde-format
+msgid "Enter authentication info for %1"
+msgstr "Enter authentication info for %1"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, AuthDialogWidget)
+#: src/ksvnwidgets/authdlg.ui:14
+#, kde-format
+msgid "Authentication"
+msgstr "Authentication"
+
+#. i18n: ectx: property (text), widget (QLabel, m_PasswordLabel)
+#: src/ksvnwidgets/authdlg.ui:32
+#, kde-format
+msgid "Password:"
+msgstr "Password:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_UsernameLabel)
+#: src/ksvnwidgets/authdlg.ui:52
+#, kde-format
+msgid "Username:"
+msgstr "Username:"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, CommitMessage)
+#: src/ksvnwidgets/commitmessage.ui:6
+#, kde-format
+msgid "Commit Message"
+msgstr "Commit Message"
+
+#. i18n: ectx: property (text), widget (QLabel, m_Reviewlabel)
+#: src/ksvnwidgets/commitmessage.ui:27
+#, kde-format
+msgid "Review affected items"
+msgstr "Review affected items"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_SelectAllButton)
+#: src/ksvnwidgets/commitmessage.ui:63
+#, kde-format
+msgid "Select all"
+msgstr "Select all"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_UnselectAllButton)
+#: src/ksvnwidgets/commitmessage.ui:70
+#, kde-format
+msgid "Unselect all"
+msgstr "Unselect all"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_HideNewItems)
+#: src/ksvnwidgets/commitmessage.ui:77 src/ksvnwidgets/commitmsg_impl.cpp:453
+#, kde-format
+msgid "Hide new items"
+msgstr "Hide new items"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_MarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:87
+#, kde-format
+msgid "Mark all new e.g. not versioned items for add and commit."
+msgstr "Mark all new e.g. not versioned items for add and commit."
+
+#. i18n: ectx: property (text), widget (QPushButton, m_MarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:90
+#, kde-format
+msgid "Select new items"
+msgstr "Select new items"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_UnmarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:97
+#, kde-format
+msgid "Unmark all unversioned items so they will be ignored."
+msgstr "Unmark all unversioned items so they will be ignored."
+
+#. i18n: ectx: property (text), widget (QPushButton, m_UnmarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:100
+#, kde-format
+msgid "Unselect new items"
+msgstr "Unselect new items"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_RevertItemButton)
+#: src/ksvnwidgets/commitmessage.ui:107
+#, kde-format
+msgid "Revert highlighted item"
+msgstr "Revert highlighted item"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_RevertItemButton)
+#: src/ksvnwidgets/commitmessage.ui:110
+#, kde-format
+msgid "Revert item"
+msgstr "Revert item"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DiffItem)
+#: src/ksvnwidgets/commitmessage.ui:117
+#, kde-format
+msgid "Generates and display difference against repository of selected item"
+msgstr "Generates and display difference against repository of selected item"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DiffItem)
+#: src/ksvnwidgets/commitmessage.ui:120
+#, kde-format
+msgid "Diff item"
+msgstr "Diff item"
+
+#. i18n: ectx: property (text), widget (QLabel, m_HeadLabel)
+#: src/ksvnwidgets/commitmessage.ui:152
+#, kde-format
+msgid "Enter a log message"
+msgstr "Enter a log message"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, m_LogHistory)
+#: src/ksvnwidgets/commitmessage.ui:184
+#, kde-format
+msgid "Last used log messages"
+msgstr "Last used log messages"
+
+#. i18n: ectx: property (text), widget (QLabel, m_LogLabel)
+#: src/ksvnwidgets/commitmessage.ui:199
+#, kde-format
+msgid "Or insert one of the last:"
+msgstr "Or insert one of the last:"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_insert_file_button)
+#: src/ksvnwidgets/commitmessage.ui:215
+#, kde-format
+msgid "Insert Text File..."
+msgstr "Insert Text File..."
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_keepLocksButton)
+#: src/ksvnwidgets/commitmessage.ui:226
+#, kde-format
+msgid "If checked commit will not release locks."
+msgstr "If checked commit will not release locks."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_keepLocksButton)
+#: src/ksvnwidgets/commitmessage.ui:229
+#, kde-format
+msgid "Keep locks"
+msgstr "Keep locks"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:287
+#, kde-format
+msgctxt "@title:window"
+msgid "Commit Log"
+msgstr "Commit Log"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:453
+#, kde-format
+msgid "Show new items"
+msgstr "Show new items"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:476
+#, kde-format
+msgctxt "@title:window"
+msgid "Select Text File to Insert"
+msgstr "Select Text File to Insert"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:477
+#, kde-format
+msgid "Select text file to insert:"
+msgstr "Select text file to insert:"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, DeleteForm)
+#: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1558
+#, kde-format
+msgid "Really delete these entries?"
+msgstr "Really delete these entries?"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_forceDelete)
+#: src/ksvnwidgets/deleteform.ui:23
+#, kde-format
+msgid "Force delete of changed items"
+msgstr "Force delete of changed items"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_keepLocal)
+#: src/ksvnwidgets/deleteform.ui:30
+#, kde-format
+msgid "Keep local copies"
+msgstr "Keep local copies"
+
+#. i18n: ectx: property (toolTip), widget (QComboBox, m_DepthCombo)
+#. i18n: ectx: property (statusTip), widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:29 src/ksvnwidgets/depthselector.ui:32
+#, kde-format
+msgid "Select depth of operation"
+msgstr "Select depth of operation"
+
+#. i18n: ectx: property (whatsThis), widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:41
+#, kde-format
+msgid ""
+"<p ><b>Kind of depth</b>: </p>\n"
+"<p ><i>empty depth</i><br />\n"
+"Just the named directory, no entries. Updates will not pull in any files or "
+"subdirectories not already present. </p>\n"
+"<p><i>Files depth</i><br />Folder and its file children, but not subdirs. "
+"Updates will pull in any files not already present, but not subdirectories. "
+"</p>\n"
+"<p><i>Immediate depth</i><br />Folder and its entries. Updates will pull in "
+"any files or subdirectories not already present; those subdirectories "
+"entries will have depth-empty. </p>\n"
+"<p>\n"
+"<i>Infinity depth</i><br />Updates will pull in any files or subdirectories "
+"not already present; those subdirectories' this_dir entries will have depth-"
+"infinity.<br />Equivalent to the pre-1.5 default update behavior. </p>"
+msgstr ""
+"<p ><b>Kind of depth</b>: </p>\n"
+"<p ><i>empty depth</i><br />\n"
+"Just the named directory, no entries. Updates will not pull in any files or "
+"subdirectories not already present. </p>\n"
+"<p><i>Files depth</i><br />Folder and its file children, but not subdirs. "
+"Updates will pull in any files not already present, but not subdirectories. "
+"</p>\n"
+"<p><i>Immediate depth</i><br />Folder and its entries. Updates will pull in "
+"any files or subdirectories not already present; those subdirectories "
+"entries will have depth-empty. </p>\n"
+"<p>\n"
+"<i>Infinity depth</i><br />Updates will pull in any files or subdirectories "
+"not already present; those subdirectories' this_dir entries will have depth-"
+"infinity.<br />Equivalent to the pre-1.5 default update behaviour. </p>"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:45
+#, kde-format
+msgid "Empty Depth"
+msgstr "Empty Depth"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:50
+#, kde-format
+msgid "Files Depth"
+msgstr "Files Depth"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:55
+#, kde-format
+msgid "Immediate Depth"
+msgstr "Immediate Depth"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:60
+#, kde-format
+msgid "Infinity Depth (recurse)"
+msgstr "Infinity Depth (recurse)"
+
+#: src/ksvnwidgets/diffbrowser.cpp:50
+#, kde-format
+msgid "Ctrl-F for search, F3 or Shift-F3 for search again."
+msgstr "Ctrl-F for search, F3 or Shift-F3 for search again."
+
+#: src/ksvnwidgets/diffbrowser.cpp:51
+#, kde-format
+msgid ""
+"<b>Display differences between files</b><p>You may search inside text with "
+"Ctrl-F.</p><p>F3 for search forward again, Shift-F3 for search backward "
+"again.</p><p>You may save the (original) output with Ctrl-S.</p>"
+msgstr ""
+"<b>Display differences between files</b><p>You may search inside text with "
+"Ctrl-F.</p><p>F3 for search forward again, Shift-F3 for search backward "
+"again.</p><p>You may save the (original) output with Ctrl-S.</p>"
+
+#: src/ksvnwidgets/diffbrowser.cpp:86
+#, kde-format
+msgid "Save diff"
+msgstr "Save diff"
+
+#: src/ksvnwidgets/diffbrowser.cpp:86
+#, kde-format
+msgid "Patch file (*.diff *.patch)"
+msgstr "Patch file (*.diff *.patch)"
+
+#: src/ksvnwidgets/diffbrowser.cpp:93
+#, kde-format
+msgid "File %1 exists - overwrite?"
+msgstr "File %1 exists - overwrite?"
+
+#: src/ksvnwidgets/diffbrowser.cpp:177
+#, kde-format
+msgid ""
+"End of document reached.\n"
+"Continue from the beginning?"
+msgstr ""
+"End of document reached.\n"
+"Continue from the beginning?"
+
+#: src/ksvnwidgets/diffbrowser.cpp:179 src/ksvnwidgets/diffbrowser.cpp:192
+#, kde-format
+msgid "Find"
+msgstr "Find"
+
+#: src/ksvnwidgets/diffbrowser.cpp:190
+#, kde-format
+msgid ""
+"Beginning of document reached.\n"
+"Continue from the end?"
+msgstr ""
+"Beginning of document reached.\n"
+"Continue from the end?"
+
+#. i18n: ectx: property (text), widget (QLabel, m_Mainlabel)
+#: src/ksvnwidgets/encodingselector.ui:30
+#, kde-format
+msgid "Select encoding:"
+msgstr "Select encoding:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, m_encodingList)
+#: src/ksvnwidgets/encodingselector.ui:44
+#, kde-format
+msgid "Default UTF-8"
+msgstr "Default UTF-8"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
+#: src/ksvnwidgets/models/commitmodel.cpp:192 src/svnfrontend/svnlogdlg.ui:158
+#, kde-format
+msgid "Action"
+msgstr "Action"
+
+#: src/ksvnwidgets/models/commitmodel.cpp:195
+#, kde-format
+msgid "Entry"
+msgstr "Entry"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:33
+#: src/svnfrontend/maintreewidget.cpp:581
+#, kde-format
+msgid "Add"
+msgstr "Add"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:37
+#: src/svnfrontend/ccontextlistener.cpp:65
+#: src/svnfrontend/copymoveview_impl.cpp:49
+#: src/svnfrontend/maintreewidget.cpp:522
+#, kde-format
+msgid "Copy"
+msgstr "Copy"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:41
+#: src/svnfrontend/ccontextlistener.cpp:66
+#: src/svnfrontend/maintreewidget.cpp:587
+#: src/svnfrontend/maintreewidget.cpp:591 src/svnfrontend/svnactions.cpp:1016
+#, kde-format
+msgid "Delete"
+msgstr "Delete"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:45
+#, kde-format
+msgid "Modify (content or property)"
+msgstr "Modify (content or property)"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:49
+#: src/svnfrontend/svnactions.cpp:785
+#, kde-format
+msgid "Replace"
+msgstr "Replace"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:53
+#, kde-format
+msgid "(Un)Lock"
+msgstr "(Un)Lock"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, RevertForm)
+#: src/ksvnwidgets/revertform.ui:14
+#, kde-format
+msgid "Revert entries"
+msgstr "Revert entries"
+
+#. i18n: ectx: property (text), widget (QLabel, m_headLine)
+#: src/ksvnwidgets/revertform.ui:20
+#, kde-format
+msgid "Really revert these entries to pristine state?"
+msgstr "Really revert these entries to pristine state?"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:33
+#, kde-format
+msgid "Accept permanently"
+msgstr "Accept permanently"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:34
+#, kde-format
+msgid "Accept temporarily"
+msgstr "Accept temporarily"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:35
+#, kde-format
+msgid "Reject"
+msgstr "Reject"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:44
+#, kde-format
+msgid "Error validating server certificate for '%1'"
+msgstr "Error validating server certificate for '%1'"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:69
+#, kde-format
+msgid "Failure reasons"
+msgstr "Failure reasons"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:77
+#, kde-format
+msgid "Realm"
+msgstr "Realm"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:78
+#, kde-format
+msgid "Host"
+msgstr "Host"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:79
+#, kde-format
+msgid "Valid from"
+msgstr "Valid from"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:80
+#, kde-format
+msgid "Valid until"
+msgstr "Valid until"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:81
+#, kde-format
+msgid "Issuer name"
+msgstr "Issuer name"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:82
+#, kde-format
+msgid "Fingerprint"
+msgstr "Fingerprint"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, SslTrustPrompt)
+#: src/ksvnwidgets/ssltrustprompt.ui:14
+#, kde-format
+msgid "Trust SSL certificate"
+msgstr "Trust SSL certificate"
+
+#: src/main.cpp:32
+#, kde-format
+msgid "A Subversion Client by KDE (standalone application)"
+msgstr "A Subversion Client by KDE (stand alone application)"
+
+#: src/main.cpp:45
+#, kde-format
+msgid "kdesvn"
+msgstr "kdesvn"
+
+#: src/main.cpp:46
+#, kde-format
+msgid ""
+"(C) 2005-2009 Rajko Albrecht,\n"
+"(C) 2015-2019 Christian Ehrlicher"
+msgstr ""
+"(C) 2005-2009 Rajko Albrecht,\n"
+"(C) 2015-2019 Christian Ehrlicher"
+
+#: src/main.cpp:47
+#, kde-format
+msgid "Rajko Albrecht"
+msgstr "Rajko Albrecht"
+
+#: src/main.cpp:48
+#, kde-format
+msgid "Christian Ehrlicher"
+msgstr "Christian Ehrlicher"
+
+#: src/main.cpp:53
+#, kde-format
+msgid "Execute single Subversion command on specific revision(-range)"
+msgstr "Execute single Subversion command on specific revision(-range)"
+
+#: src/main.cpp:53
+#, kde-format
+msgid "startrev[:endrev]"
+msgstr "startrev[:endrev]"
+
+#: src/main.cpp:54
+#, kde-format
+msgid "Ask for revision when executing single command"
+msgstr "Ask for revision when executing single command"
+
+#: src/main.cpp:55
+#, kde-format
+msgid "Force operation"
+msgstr "Force operation"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Save output of Subversion command (eg \"cat\") into file <file>"
+msgstr "Save output of Subversion command (eg \"cat\") into file <file>"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "<file>"
+msgstr "<file>"
+
+#: src/main.cpp:57
+#, kde-format
+msgid "Limit log output to <number>"
+msgstr "Limit log output to <number>"
+
+#: src/main.cpp:57
+#, kde-format
+msgid "<number>"
+msgstr "<number>"
+
+#: src/main.cpp:58
+#, kde-format
+msgid "Execute Subversion command (\"exec help\" for more information)"
+msgstr "Execute Subversion command (\"exec help\" for more information)"
+
+#: src/main.cpp:59
+#, kde-format
+msgid "Document to open"
+msgstr "Document to open"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_cmdline_show_logwindow)
+#: src/settings/cmdexecsettings.ui:11
+#, kde-format
+msgid "Show a small window containing the log after command executed"
+msgstr "Show a small window containing the log after command executed"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_cmdline_show_logwindow)
+#: src/settings/cmdexecsettings.ui:14
+#, kde-format
+msgid "Show log after executing a command"
+msgstr "Show log after executing a command"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/settings/cmdexecsettings.ui:23
+#, kde-format
+msgid "Minimum log lines to show:"
+msgstr "Minimum log lines to show:"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_cmdline_log_minline)
+#: src/settings/cmdexecsettings.ui:33
+#, kde-format
+msgid ""
+"The minimum a log output must contain before kdesvn shows a single log window"
+msgstr ""
+"The minimum a log output must contain before kdesvn shows a single log window"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, kcfg_cmdline_log_minline)
+#: src/settings/cmdexecsettings.ui:39
+#, kde-format
+msgctxt "no limit"
+msgid "No minimum"
+msgstr "No minimum"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_contextmenu)
+#: src/settings/cmdexecsettings.ui:51
+#, kde-format
+msgid "If set, kdesvn will not show a menu inside \"Action\" menu of Konqueror"
+msgstr ""
+"If set, kdesvn will not show a menu inside \"Action\" menu of Konqueror"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_contextmenu)
+#: src/settings/cmdexecsettings.ui:54
+#, kde-format
+msgid "Do not display context menu in Konqueror"
+msgstr "Do not display context menu in Konqueror"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
+#: src/settings/cmdexecsettings.ui:61
+#, kde-format
+msgid ""
+"If set, kdesvn will not show some extra actions inside \"Action\" menu of "
+"Konqueror/Dolphin"
+msgstr ""
+"If set, kdesvn will not show some extra actions inside \"Action\" menu of "
+"Konqueror/Dolphin"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
+#: src/settings/cmdexecsettings.ui:64
+#, kde-format
+msgid "Do not display entries in toplevel action menu"
+msgstr "Do not display entries in toplevel action menu"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_kio_use_standard_logmsg)
+#: src/settings/cmdexecsettings.ui:71
+#, kde-format
+msgid "KIO operations use standard log message"
+msgstr "KIO operations use standard log message"
+
+#. i18n: ectx: property (text), widget (QLabel, stdLogmsgLabel)
+#: src/settings/cmdexecsettings.ui:80
+#, kde-format
+msgid "Standard message:"
+msgstr "Standard message:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_kio_can_overwrite)
+#: src/settings/cmdexecsettings.ui:98
+#, kde-format
+msgid "Can KIO overwrite existing files?"
+msgstr "Can KIO overwrite existing files?"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_kio_can_overwrite)
+#: src/settings/cmdexecsettings.ui:103
+#, kde-format
+msgid ""
+"If this flag is set, you will have a simple write support for existing "
+"items. E.g. you can open files in your editor and save them direct without "
+"checking out them before (kdesvn will do it in background).\n"
+"\n"
+"Use this only if you are sure what you are doing."
+msgstr ""
+"If this flag is set, you will have a simple write support for existing "
+"items. E.g. you can open files in your editor and save them direct without "
+"checking out them before (kdesvn will do it in background).\n"
+"\n"
+"Use this only if you are sure what you are doing."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_kio_can_overwrite)
+#: src/settings/cmdexecsettings.ui:106
+#, kde-format
+msgid "KIO can overwrite"
+msgstr "KIO can overwrite"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_display_dockmsg)
+#: src/settings/cmdexecsettings.ui:113
+#, kde-format
+msgid ""
+"If set KIO shows in KDE's Plasma detailed information about current operation"
+msgstr ""
+"If set KIO shows in KDE's Plasma detailed information about current operation"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_dockmsg)
+#: src/settings/cmdexecsettings.ui:117
+#, kde-format
+msgid ""
+"<p>If set, the kdesvn KIO shows detailed messages in KDE's Plasma control "
+"area.<br/>\n"
+"Error messages of KIO will always displayed and can <i>not</i> switched off."
+"</p>"
+msgstr ""
+"<p>If set, the kdesvn KIO shows detailed messages in KDE's Plasma control "
+"area.<br/>\n"
+"Error messages of KIO will always displayed and can <i>not</i> switched off."
+"</p>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_dockmsg)
+#: src/settings/cmdexecsettings.ui:120
+#, kde-format
+msgid "KIO shows progress messages"
+msgstr "KIO shows progress messages"
+
+#: src/settings/cmdexecsettings_impl.cpp:27
+#, kde-format
+msgid " line(s)"
+msgstr " line(s)"
+
+#. i18n: ectx: label, entry, group (general_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_content)
+#: src/settings/diffmergesettings.ui:11 src/settings/kdesvn_part.kcfg:29
+#, kde-format
+msgid "Diff ignores content type"
+msgstr "Diff ignores content type"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_tree_diff_rec)
+#: src/settings/diffmergesettings.ui:18
+#: src/svnfrontend/graphtree/revgraphview.cpp:862
+#, kde-format
+msgid "Diff in revision tree is recursive"
+msgstr "Diff in revision tree is recursive"
+
+#. i18n: ectx: label, entry, group (general_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_spaces)
+#: src/settings/diffmergesettings.ui:25 src/settings/kdesvn_part.kcfg:33
+#, kde-format
+msgid "Diff ignores white space changes"
+msgstr "Diff ignores white space changes"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_all_white_spaces)
+#: src/settings/diffmergesettings.ui:32
+#, kde-format
+msgid "Diff ignores all white spaces"
+msgstr "Diff ignores all white spaces"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_external_diff)
+#: src/settings/diffmergesettings.ui:39
+#, kde-format
+msgid ""
+"If kdesvn should use an external diff display and/or generator. If not "
+"checked use internal display."
+msgstr ""
+"If kdesvn should use an external diff display and/or generator. If not "
+"checked use internal display."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_external_diff)
+#: src/settings/diffmergesettings.ui:42
+#, kde-format
+msgid "Use external diff display"
+msgstr "Use external diff display"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_extern_merge_default)
+#: src/settings/diffmergesettings.ui:49
+#, kde-format
+msgid ""
+"Set if merge with external program is preferred and not Subversion's merge"
+msgstr ""
+"Set if merge with external program is preferred and not Subversion's merge"
+
+#. i18n: ectx: label, entry (extern_merge_default), group (diffmerge_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_extern_merge_default)
+#: src/settings/diffmergesettings.ui:52 src/settings/kdesvn_part.kcfg:158
+#, kde-format
+msgid "Prefer external merge program"
+msgstr "Prefer external merge program"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_gitformat_default)
+#: src/settings/diffmergesettings.ui:59
+#, kde-format
+msgid "Use Git diff format"
+msgstr "Use Git diff format"
+
+#. i18n: ectx: label, entry, group (general_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_copies_as_add)
+#: src/settings/diffmergesettings.ui:66 src/settings/kdesvn_part.kcfg:45
+#, kde-format
+msgid "Show copies as add"
+msgstr "Show copies as add"
+
+#. i18n: ectx: property (text), widget (QLabel, resolveLabel)
+#: src/settings/diffmergesettings.ui:77
+#, kde-format
+msgid "Conflict resolver program:"
+msgstr "Conflict resolver program:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/settings/diffmergesettings.ui:90
+#, kde-format
+msgid "External merge program:"
+msgstr "External merge program:"
+
+#. i18n: ectx: property (toolTip), widget (KLineEdit, kcfg_conflict_resolver)
+#: src/settings/diffmergesettings.ui:115
+#, kde-format
+msgid "Setup an external program for conflict resolving"
+msgstr "Setup an external program for conflict resolving"
+
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_conflict_resolver)
+#: src/settings/diffmergesettings.ui:134
+#, no-c-format, kde-format
+msgid ""
+"<p>\n"
+"Enter how kdesvn should call the conflict resolver program. The form is\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;program&gt; &lt;programoptions&gt;</tt></b>\n"
+"</p>\n"
+"<p>\n"
+"Programoption may contain the place holders for substituting with "
+"filenames.\n"
+"</p>\n"
+"The substitutions means:<br>\n"
+"<b><tt>%o</tt></b> Old version<br>\n"
+"<b><tt>%m</tt></b> Mine or local edit version<br>\n"
+"<b><tt>%n</tt></b> Newest version<br>\n"
+"<b><tt>%t</tt></b> The target to save as, kdesvn will use the original file "
+"name for it.\n"
+"</p>\n"
+"<p>\n"
+"Default: <tt>kdiff3 %o %m %n -o %t</tt>\n"
+"</p>"
+msgstr ""
+"<p>\n"
+"Enter how kdesvn should call the conflict resolver program. The form is\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;program&gt; &lt;programoptions&gt;</tt></b>\n"
+"</p>\n"
+"<p>\n"
+"Programoption may contain the place holders for substituting with "
+"filenames.\n"
+"</p>\n"
+"The substitutions means:<br>\n"
+"<b><tt>%o</tt></b> Old version<br>\n"
+"<b><tt>%m</tt></b> Mine or local edit version<br>\n"
+"<b><tt>%n</tt></b> Newest version<br>\n"
+"<b><tt>%t</tt></b> The target to save as, kdesvn will use the original file "
+"name for it.\n"
+"</p>\n"
+"<p>\n"
+"Default: <tt>kdiff3 %o %m %n -o %t</tt>\n"
+"</p>"
+
+#. i18n: ectx: property (text), widget (QLabel, mdiff_display_label)
+#: src/settings/diffmergesettings.ui:141
+#, kde-format
+msgid "External diff display:"
+msgstr "External diff display:"
+
+#. i18n: ectx: property (toolTip), widget (KLineEdit, kcfg_external_merge_program)
+#: src/settings/diffmergesettings.ui:154
+#, kde-format
+msgid "Setup an external program for merging"
+msgstr "Setup an external program for merging"
+
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_external_merge_program)
+#: src/settings/diffmergesettings.ui:166
+#, no-c-format, kde-format
+msgid ""
+"<p>\n"
+"Enter how kdesvn should call the external merge program. The form is\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;program&gt; &lt;programoptions&gt; %s1 %s2 %t</tt></b>\n"
+"</p>\n"
+"The substitutions means:<br>\n"
+"<b><tt>%s1</tt></b> Source one for merge<br>\n"
+"<b><tt>%s2</tt></b> Source two for merge, if it was not set equal to source "
+"one but other revision<br>\n"
+"<b><tt>%t</tt></b> Local target for merge.\n"
+"</p>"
+msgstr ""
+"<p>\n"
+"Enter how kdesvn should call the external merge program. The form is\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;program&gt; &lt;programoptions&gt; %s1 %s2 %t</tt></b>\n"
+"</p>\n"
+"The substitutions means:<br>\n"
+"<b><tt>%s1</tt></b> Source one for merge<br>\n"
+"<b><tt>%s2</tt></b> Source two for merge, if it was not set equal to source "
+"one but other revision<br>\n"
+"<b><tt>%t</tt></b> Local target for merge.\n"
+"</p>"
+
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_external_diff_display)
+#: src/settings/diffmergesettings.ui:191
+#, no-c-format, kde-format
+msgid ""
+"<p align=\"left\">\n"
+"Enter an external program in form\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt; %f</tt>\n"
+"</p>\n"
+"or\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt;</tt>\n"
+"</p>\n"
+"or\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt; %s1 %s2</tt>\n"
+"</p>\n"
+"<br>\n"
+"If one between the first or the second form is used, svn itself generates "
+"the diff. %f will be replaced with a temporary filename. If %f is not "
+"given,\n"
+"the diff-display should be able to read data from stdin.\n"
+"<br>\n"
+"When %s1 and %s2 are given, kdesvn lets this display make the diff. For that "
+"it makes a temporary export or get (if needed) and fills out the parameters "
+"with the right values. %s1 will be filled with the content of the initial "
+"revision, %s2 with the final revision. On large recursive diffs this may get "
+"really slow.\n"
+"</p>"
+msgstr ""
+"<p align=\"left\">\n"
+"Enter an external program in form\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt; %f</tt>\n"
+"</p>\n"
+"or\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt;</tt>\n"
+"</p>\n"
+"or\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt; %s1 %s2</tt>\n"
+"</p>\n"
+"<br>\n"
+"If one between the first or the second form is used, svn itself generates "
+"the diff. %f will be replaced with a temporary filename. If %f is not "
+"given,\n"
+"the diff-display should be able to read data from stdin.\n"
+"<br>\n"
+"When %s1 and %s2 are given, kdesvn lets this display make the diff. For that "
+"it makes a temporary export or get (if needed) and fills out the parameters "
+"with the right values. %s1 will be filled with the content of the initial "
+"revision, %s2 with the final revision. On large recursive diffs this may get "
+"really slow.\n"
+"</p>"
+
+#. i18n: ectx: property (text), widget (QLabel, m_extern_hint)
+#: src/settings/diffmergesettings.ui:200
+#, kde-format
+msgid "see \"What's this\" for details"
+msgstr "see \"What's this\" for details"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DispColorSettings)
+#: src/settings/dispcolor_settings.ui:6
+#, kde-format
+msgid "ColorSettings"
+msgstr "Colour Settings"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_colored_state)
+#: src/settings/dispcolor_settings.ui:14
+#, kde-format
+msgid "Mark changed and locked items colored"
+msgstr "Mark changed and locked items coloured"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel5)
+#: src/settings/dispcolor_settings.ui:56
+#, kde-format
+msgid "Locked items:"
+msgstr "Locked items:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
+#: src/settings/dispcolor_settings.ui:76
+#, kde-format
+msgid "Not versioned items:"
+msgstr "Not versioned items:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#: src/settings/dispcolor_settings.ui:89
+#, kde-format
+msgid "Remote changed items:"
+msgstr "Remote changed items:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/settings/dispcolor_settings.ui:102
+#, kde-format
+msgid "Added items:"
+msgstr "Added items:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel4)
+#: src/settings/dispcolor_settings.ui:115
+#, kde-format
+msgid "Deleted items:"
+msgstr "Deleted items:"
+
+#. i18n: ectx: property (text), widget (QLabel, Conflicted_items_label)
+#: src/settings/dispcolor_settings.ui:156
+#, kde-format
+msgid "Conflicted items:"
+msgstr "Conflicted items:"
+
+#. i18n: ectx: property (text), widget (QLabel, Missed_items_label)
+#: src/settings/dispcolor_settings.ui:169
+#, kde-format
+msgid "Missed items:"
+msgstr "Missed items:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#: src/settings/dispcolor_settings.ui:182
+#, kde-format
+msgid "Local changed items:"
+msgstr "Local changed items:"
+
+#. i18n: ectx: property (text), widget (QLabel, Need_lock_label_2)
+#: src/settings/dispcolor_settings.ui:195
+#, kde-format
+msgid "Item needs lock:"
+msgstr "Item needs lock:"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DisplaySettings)
+#: src/settings/display_settings.ui:6
+#, kde-format
+msgid "Settings"
+msgstr "Settings"
+
+#. i18n: ectx: property (text), widget (QLabel, m_ListIconsSize_label)
+#: src/settings/display_settings.ui:14
+#, kde-format
+msgid "Size of Listviewicons"
+msgstr "Size of Listviewicons"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_display_overlays)
+#: src/settings/display_settings.ui:24
+#, kde-format
+msgid "Mark Subversion states with an overlayed icon"
+msgstr "Mark Subversion states with an overlayed icon"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_overlays)
+#: src/settings/display_settings.ui:30
+#, kde-format
+msgid ""
+"<p align=\"left\">\n"
+"Mark items with non-normal state with an overlayed icon. When you wish to\n"
+"see which items has newer items in repository you may have to set \"Check "
+"for updates on open\" in Subversion-Dialog.\n"
+"</p>"
+msgstr ""
+"<p align=\"left\">\n"
+"Mark items with non-normal state with an overlayed icon. When you wish to\n"
+"see which items has newer items in repository you may have to set \"Check "
+"for updates on open\" in Subversion-Dialogue.\n"
+"</p>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_overlays)
+#: src/settings/display_settings.ui:33
+#, kde-format
+msgid "Mark item status with icon overlay"
+msgstr "Mark item status with icon overlay"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_case_sensitive_sort)
+#: src/settings/display_settings.ui:40
+#, kde-format
+msgid "Items sorting order is case sensitive"
+msgstr "Items sorting order is case sensitive"
+
+#. i18n: ectx: property (text), widget (QLabel, m_MaxLogLabel)
+#: src/settings/display_settings.ui:47
+#, kde-format
+msgid "Maximum log messages in history:"
+msgstr "Maximum log messages in history:"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_file_tips)
+#: src/settings/display_settings.ui:67
+#, kde-format
+msgid ""
+"Here you can control if, when moving the mouse over a file, you want to see "
+"a small popup window with additional information about that file"
+msgstr ""
+"Here you can control if, when moving the mouse over a file, you want to see "
+"a small popup window with additional information about that file"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_file_tips)
+#: src/settings/display_settings.ui:70
+#, kde-format
+msgid "Show file info"
+msgstr "Show file info"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_colored_blame)
+#: src/settings/display_settings.ui:77
+#, kde-format
+msgid "Display colored annotate"
+msgstr "Display coloured annotate"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_show_navigation_panel)
+#: src/settings/display_settings.ui:84
+#, kde-format
+msgid "Use navigation panel"
+msgstr "Use navigation panel"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:9
+#, kde-format
+msgid "Set if items sortorder should be case sensitive or not"
+msgstr "Set if items sort order should be case sensitive or not"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:13
+#, kde-format
+msgid "Size of the icons"
+msgstr "Size of the icons"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:17
+#, kde-format
+msgid "Show file information in tooltip"
+msgstr "Show file information in tooltip"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:21
+#, kde-format
+msgid "Use an external program for diff viewing/generating"
+msgstr "Use an external program for diff viewing/generating"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:25
+#, kde-format
+msgid "Use external program for diff viewing"
+msgstr "Use external program for diff viewing"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:37
+#, kde-format
+msgid "Diff ignores all white space"
+msgstr "Diff ignores all white space"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:41
+#, kde-format
+msgid "Show diff in Git format"
+msgstr "Show diff in Git format"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:49
+#, kde-format
+msgid "Maximum number of log messages"
+msgstr "Maximum number of log messages"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:53
+#, kde-format
+msgid "Display colored blame lines"
+msgstr "Display coloured blame lines"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:68
+#, kde-format
+msgid "Display icon overlays"
+msgstr "Display icon overlays"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:72
+#, kde-format
+msgid "Get item information recursively"
+msgstr "Get item information recursively"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_review_commit)
+#: src/settings/kdesvn_part.kcfg:76 src/settings/subversion_settings.ui:174
+#, kde-format
+msgid "Review items before commit"
+msgstr "Review items before commit"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:88
+#, kde-format
+msgid "Hide versioned unchanged files"
+msgstr "Hide versioned unchanged files"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_follows_nodes)
+#: src/settings/kdesvn_part.kcfg:92 src/settings/subversion_settings.ui:145
+#, kde-format
+msgid "Log follows node changes"
+msgstr "Log follows node changes"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_always_list_changed_files)
+#: src/settings/kdesvn_part.kcfg:96 src/settings/subversion_settings.ui:161
+#, kde-format
+msgid "Log always reads list of changed files"
+msgstr "Log always reads list of changed files"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:100
+#, kde-format
+msgid "Start check for updates when open working copy"
+msgstr "Start check for updates when open working copy"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:104
+#, kde-format
+msgid "Start caching latest logs on open or commit"
+msgstr "Start caching latest logs on open or commit"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:108
+#, kde-format
+msgid "Get detailed information when making a remote listing"
+msgstr "Get detailed information when making a remote listing"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:112
+#, kde-format
+msgid "Get properties on selected item on networked protocols"
+msgstr "Get properties on selected item on networked protocols"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:116
+#, kde-format
+msgid "Use properties like bugtraq:url on repository listings"
+msgstr "Use properties like bugtraq:url on repository listings"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:120
+#, kde-format
+msgid "Check for property svn:needs-lock on listings"
+msgstr "Check for property svn:needs-lock on listings"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_store_passwords)
+#: src/settings/kdesvn_part.kcfg:124 src/settings/subversion_settings.ui:107
+#, kde-format
+msgid "Store passwords for remote connections"
+msgstr "Store passwords for remote connections"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:128
+#, kde-format
+msgid "Store passwords in KDE Wallet instead of Subversion' storage"
+msgstr "Store passwords in KDE Wallet instead of Subversion' storage"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_password_cache)
+#: src/settings/kdesvn_part.kcfg:132 src/settings/subversion_settings.ui:138
+#, kde-format
+msgid "Use internal password cache"
+msgstr "Use internal password cache"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:136
+#, kde-format
+msgid "Is networking enabled"
+msgstr "Is networking enabled"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:140
+#, kde-format
+msgid "Local add results in modification instead of conflicts"
+msgstr "Local add results in modification instead of conflicts"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:144
+#, kde-format
+msgid "create any non-existent parent at depth=empty"
+msgstr "create any non-existent parent at depth=empty"
+
+#. i18n: ectx: label, entry, group (diffmerge_items)
+#: src/settings/kdesvn_part.kcfg:150
+#, kde-format
+msgid "Which program to use for external merges"
+msgstr "Which program to use for external merges"
+
+#. i18n: ectx: label, entry, group (diffmerge_items)
+#: src/settings/kdesvn_part.kcfg:154
+#, kde-format
+msgid "Which program for resolving conflicts"
+msgstr "Which program for resolving conflicts"
+
+#. i18n: ectx: label, entry, group (display)
+#: src/settings/kdesvn_part.kcfg:164
+#, kde-format
+msgid "Display different then normal states colored"
+msgstr "Display different then normal states coloured"
+
+#. i18n: ectx: label, entry, group (blame_dlg)
+#: src/settings/kdesvn_part.kcfg:197
+#, kde-format
+msgid "Locale for blame display"
+msgstr "Locale for blame display"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:209
+#, kde-format
+msgid "Check status of log cache when starting revision tree"
+msgstr "Check status of log cache when starting revision tree"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/settings/kdesvn_part.kcfg:213 src/settings/revisiontree_settings.ui:129
+#, kde-format
+msgid "Direction of revision tree"
+msgstr "Direction of revision tree"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:217
+#, kde-format
+msgid "Color for added items"
+msgstr "Colour for added items"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:221
+#, kde-format
+msgid "Color for deleted items"
+msgstr "Colour for deleted items"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:225
+#, kde-format
+msgid "Color for copied items"
+msgstr "Colour for copied items"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:229
+#, kde-format
+msgid "Color for renamed items"
+msgstr "Colour for renamed items"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:233
+#, kde-format
+msgid "Color for modified items"
+msgstr "Colour for modified items"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:237
+#, kde-format
+msgid "Height of detail view in tree widget"
+msgstr "Height of detail view in tree widget"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:241
+#, kde-format
+msgid "Diffs from revision tree are recursive"
+msgstr "Diffs from revision tree are recursive"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:247
+#, kde-format
+msgid "Should Konqueror not display context menus for kdesvn?"
+msgstr "Should Konqueror not display context menus for kdesvn?"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:251
+#, kde-format
+msgid "Should Konqueror not display kdesvn entries in main action menu?"
+msgstr "Should Konqueror not display kdesvn entries in main action menu?"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:255
+#, kde-format
+msgid "Show a small log window after executing a command."
+msgstr "Show a small log window after executing a command."
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:259
+#, kde-format
+msgid "Log must contain at least lines to show"
+msgstr "Log must contain at least lines to show"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:263
+#, kde-format
+msgid "KIO::svn operations use a standard log message"
+msgstr "KIO::svn operations use a standard log message"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:267
+#, kde-format
+msgid "The standard log message to use with KIO if not asking for it."
+msgstr "The standard log message to use with KIO if not asking for it."
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:271
+#, kde-format
+msgid "Support overwrite for KIO module"
+msgstr "Support overwrite for KIO module"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:275
+#, kde-format
+msgid "Print progress messages in KDE dock area"
+msgstr "Print progress messages in KDE dock area"
+
+#. i18n: ectx: whatsthis, entry, group (internals)
+#: src/settings/kdesvn_part.kcfg:294
+#, kde-format
+msgid ""
+"This value holds for log dialog which kind of log is used, its internal only."
+msgstr ""
+"This value holds for log dialogue which kind of log is used, its internal "
+"only."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
+#: src/settings/polling_settings.ui:11
+#, kde-format
+msgid "Check modified items every"
+msgstr "Check modified items every"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/settings/polling_settings.ui:28 src/settings/polling_settings.ui:55
+#, kde-format
+msgid "minutes"
+msgstr "minutes"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_poll_updates)
+#: src/settings/polling_settings.ui:35
+#, kde-format
+msgid ""
+"If set check for updates on working copy when network is enabled on regular "
+"base"
+msgstr ""
+"If set check for updates on working copy when network is enabled on regular "
+"base"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_updates)
+#: src/settings/polling_settings.ui:38
+#, kde-format
+msgid "Check for updated items every"
+msgstr "Check for updated items every"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:28
+#, kde-format
+msgid "Left to right"
+msgstr "Left to right"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:33
+#, kde-format
+msgid "Bottom to top"
+msgstr "Bottom to top"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:38
+#, kde-format
+msgid "Right to left"
+msgstr "Right to left"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:43
+#, kde-format
+msgid "Top to bottom"
+msgstr "Top to bottom"
+
+#. i18n: ectx: property (text), widget (QLabel, m_AddColorLabel)
+#: src/settings/revisiontree_settings.ui:51
+#, kde-format
+msgid "Color for added items:"
+msgstr "Colour for added items:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#: src/settings/revisiontree_settings.ui:77
+#, kde-format
+msgid "Color for copied items:"
+msgstr "Colour for copied items:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel4)
+#: src/settings/revisiontree_settings.ui:90
+#, kde-format
+msgid "Color for renamed items:"
+msgstr "Colour for renamed items:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel5)
+#: src/settings/revisiontree_settings.ui:103
+#, kde-format
+msgid "Color for modified items:"
+msgstr "Colour for modified items:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#: src/settings/revisiontree_settings.ui:136
+#, kde-format
+msgid "Color for deleted items:"
+msgstr "Colour for deleted items:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_fill_cache_on_tree)
+#: src/settings/revisiontree_settings.ui:175
+#, kde-format
+msgid "Should kdesvn check content of log cache before starting the tree"
+msgstr "Should kdesvn check content of log cache before starting the tree"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_fill_cache_on_tree)
+#: src/settings/revisiontree_settings.ui:180
+#, kde-format
+msgid ""
+"When starting the tree generation and reading data from log cache kdesvn may "
+"check for newer items in repository if network is enabled. \n"
+"\n"
+"But this may slow down tree generation so it is disabled by default."
+msgstr ""
+"When starting the tree generation and reading data from log cache kdesvn may "
+"check for newer items in repository if network is enabled. \n"
+"\n"
+"But this may slow down tree generation so it is disabled by default."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_fill_cache_on_tree)
+#: src/settings/revisiontree_settings.ui:183
+#, kde-format
+msgid "Check log cache fill before reading tree"
+msgstr "Check log cache fill before reading tree"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_start_updates_check_on_open)
+#: src/settings/subversion_settings.ui:14
+#, kde-format
+msgid "Select if kdesvn should check for updates when open a working copy"
+msgstr "Select if kdesvn should check for updates when open a working copy"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_start_updates_check_on_open)
+#: src/settings/subversion_settings.ui:17
+#, kde-format
+msgid "Start check for updates when open a working copy"
+msgstr "Start check for updates when open a working copy"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_cache_on_open)
+#: src/settings/subversion_settings.ui:33
+#, kde-format
+msgid "Start refresh the log cache for repository when networking enabled"
+msgstr "Start refresh the log cache for repository when networking enabled"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_cache_on_open)
+#: src/settings/subversion_settings.ui:36
+#, kde-format
+msgid "Start fill log cache on open"
+msgstr "Start fill log cache on open"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_check_needslock)
+#: src/settings/subversion_settings.ui:43
+#, kde-format
+msgid "When listing on working copies kdesvn may check for this property"
+msgstr "When listing on working copies kdesvn may check for this property"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_check_needslock)
+#: src/settings/subversion_settings.ui:46
+#, kde-format
+msgid ""
+"When listing on working copies kdesvn may check for <tt>svn:needs-lock</tt> "
+"property.<br>But due this listings/updating on folders containing lot of "
+"items may get slow. So you should only switch on if you have repositories "
+"containing lot of such entries."
+msgstr ""
+"When listing on working copies kdesvn may check for <tt>svn:needs-lock</tt> "
+"property.<br>But due this listings/updating on folders containing lot of "
+"items may get slow. So you should only switch on if you have repositories "
+"containing lot of such entries."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_check_needslock)
+#: src/settings/subversion_settings.ui:49
+#, kde-format
+msgid "Check if items has \"svn:needs-lock\" property set"
+msgstr "Check if items has \"svn:needs-lock\" property set"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
+#: src/settings/subversion_settings.ui:56
+#, kde-format
+msgid ""
+"Whether getting details about items when making listing on repositories or "
+"not"
+msgstr ""
+"Whether getting details about items when making listing on repositories or "
+"not"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_details_on_remote_listing)
+#: src/settings/subversion_settings.ui:61
+#, kde-format
+msgid ""
+"<p align=\"left\">When checked, kdesvn get more detailed info about file "
+"items when making a listing to remote repositories. So you may see remote "
+"locks in overview.\n"
+"</p>\n"
+"<p align=\"left\"><i>Be careful: This may let listings REAL slow.</i></p>"
+msgstr ""
+"<p align=\"left\">When checked, kdesvn get more detailed info about file "
+"items when making a listing to remote repositories. So you may see remote "
+"locks in overview.\n"
+"</p>\n"
+"<p align=\"left\"><i>Be careful: This may let listings REAL slow.</i></p>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_details_on_remote_listing)
+#: src/settings/subversion_settings.ui:64
+#, kde-format
+msgid "Get file details while remote listing"
+msgstr "Get file details while remote listing"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_info_recursive)
+#: src/settings/subversion_settings.ui:74
+#, kde-format
+msgid "Gain item info recursive"
+msgstr "Gain item info recursive"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_properties_on_remote_items)
+#: src/settings/subversion_settings.ui:84
+#, kde-format
+msgid "Should kdesvn retrieves properties on selected item in repositories"
+msgstr "Should kdesvn retrieves properties on selected item in repositories"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
+#: src/settings/subversion_settings.ui:88
+#, kde-format
+msgid ""
+"When browsing kdesvn may try displaying properties below itemlist from a "
+"selected item. \n"
+"On networked repositories (e.g., not opened via file:// protocol) this may "
+"get real slow. So if you have slow network connections or when browsing "
+"hangs often you should deactivate it."
+msgstr ""
+"When browsing kdesvn may try displaying properties below itemlist from a "
+"selected item. \n"
+"On networked repositories (e.g., not opened via file:// protocol) this may "
+"get real slow. So if you have slow network connections or when browsing "
+"hangs often you should deactivate it."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_properties_on_remote_items)
+#: src/settings/subversion_settings.ui:91
+#, kde-format
+msgid "Always get properties on networked repositories"
+msgstr "Always get properties on networked repositories"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_store_passwords)
+#: src/settings/subversion_settings.ui:101
+#, kde-format
+msgid "Should Subversion store passwords in default"
+msgstr "Should Subversion store passwords in default"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_store_passwords)
+#: src/settings/subversion_settings.ui:104
+#, kde-format
+msgid ""
+"Storing passwords is often a security problem. Kdesvn itself does not store "
+"any passwords, but the Subversion itself inside the configuration area of "
+"Subversion. If this area is readable from others you should not set it, but "
+"you may select for single non critical accounts inside the authentication "
+"dialog."
+msgstr ""
+"Storing passwords is often a security problem. Kdesvn itself does not store "
+"any passwords, but the Subversion itself inside the configuration area of "
+"Subversion. If this area is readable from others you should not set it, but "
+"you may select for single non critical accounts inside the authentication "
+"dialogue."
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_passwords_in_wallet)
+#: src/settings/subversion_settings.ui:117
+#, kde-format
+msgid ""
+"When saving passwords, do it into KDE Wallet instead of Subversions storage?"
+msgstr ""
+"When saving passwords, do it into KDE Wallet instead of Subversions storage?"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_passwords_in_wallet)
+#: src/settings/subversion_settings.ui:122
+#, kde-format
+msgid ""
+"<p>Tells if your passwords set in kdesvn should stored into KDE Wallet "
+"instead of simple clear text storage of Subversion.</p>\n"
+"<p>This would be a little bit more secure because KDE Wallet is (mostly) "
+"encrypted with a password. On other hand you must re-enter your passwords "
+"with other Subversion clients not accessing KDE wallet (e.g. svn command "
+"line itself, rapidsvn and so on).</p>\n"
+"<p>If you are HOME storage e.g. Subversion's config folder is on a network "
+"drive you should hard think about not storing passwords in a plain text file "
+"like Subversion does but put it into an encrypted storage like KDE Wallet or "
+"do not save passwords.</p>"
+msgstr ""
+"<p>Tells if your passwords set in kdesvn should stored into KDE Wallet "
+"instead of simple clear text storage of Subversion.</p>\n"
+"<p>This would be a little bit more secure because KDE Wallet is (mostly) "
+"encrypted with a password. On other hand you must re-enter your passwords "
+"with other Subversion clients not accessing KDE wallet (e.g. svn command "
+"line itself, rapidsvn and so on).</p>\n"
+"<p>If you are HOME storage e.g. Subversion's config folder is on a network "
+"drive you should hard think about not storing passwords in a plain text file "
+"like Subversion does but put it into an encrypted storage like KDE Wallet or "
+"do not save passwords.</p>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_passwords_in_wallet)
+#: src/settings/subversion_settings.ui:125
+#, kde-format
+msgid "Store passwords into KDE Wallet"
+msgstr "Store passwords into KDE Wallet"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_password_cache)
+#: src/settings/subversion_settings.ui:135
+#, kde-format
+msgid "Use an internal password cache"
+msgstr "Use an internal password cache"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_always_list_changed_files)
+#: src/settings/subversion_settings.ui:155
+#, kde-format
+msgid "Read detailed change lists"
+msgstr "Read detailed change lists"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_log_always_list_changed_files)
+#: src/settings/subversion_settings.ui:158
+#, kde-format
+msgid ""
+"Reading lists of changed files may sometimes a little bit slow down things. "
+"But if this feature is switched off, kdesvn may fail generating differences "
+"between node changes from within the log viewer."
+msgstr ""
+"Reading lists of changed files may sometimes a little bit slow down things. "
+"But if this feature is switched off, kdesvn may fail generating differences "
+"between node changes from within the log viewer."
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_review_commit)
+#: src/settings/subversion_settings.ui:171
+#, kde-format
+msgid "List items next commit will send or not"
+msgstr "List items next commit will send or not"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_commit_hide_new)
+#: src/settings/subversion_settings.ui:184
+#, kde-format
+msgid "Should unversioned items displayed in commit dialog or not."
+msgstr "Should unversioned items displayed in commit dialogue or not."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_commit_hide_new)
+#: src/settings/subversion_settings.ui:187
+#, kde-format
+msgid "Hide new items in commit box"
+msgstr "Hide new items in commit box"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_add_as_modification)
+#: src/settings/subversion_settings.ui:197
+#, kde-format
+msgid ""
+"<html><head/><body><p>If set, a local addition at the same path as an "
+"incoming addition of the same node kind results in a normal node with a "
+"possible local modification, instead of a tree conflict.</p></body></html>"
+msgstr ""
+"<html><head/><body><p>If set, a local addition at the same path as an "
+"incoming addition of the same node kind results in a normal node with a "
+"possible local modification, instead of a tree conflict.</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_add_as_modification)
+#: src/settings/subversion_settings.ui:200
+#, kde-format
+msgid "Update modifies instead of conflicts"
+msgstr "Update modifies instead of conflicts"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_make_parents)
+#: src/settings/subversion_settings.ui:207
+#, kde-format
+msgid ""
+"<html><head/><body><p>If set, create any non-existent parent directories "
+"also by checking them out at depth=empty</p></body></html>"
+msgstr ""
+"<html><head/><body><p>If set, create any non-existent parent directories "
+"also by checking them out at depth=empty</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_make_parents)
+#: src/settings/subversion_settings.ui:210
+#, kde-format
+msgid "Update makes missing parents"
+msgstr "Update makes missing parents"
+
+#: src/svnfrontend/background/fillcachethread.cpp:72
+#, kde-format
+msgid ""
+"Not filling log cache because it is disabled due setting for this repository."
+msgstr ""
+"Not filling log cache because it is disabled due setting for this repository."
+
+#: src/svnfrontend/background/fillcachethread.cpp:74
+#, kde-format
+msgid "Filling log cache in background."
+msgstr "Filling log cache in background."
+
+#: src/svnfrontend/background/fillcachethread.cpp:96
+#, kde-format
+msgid "Filling cache canceled."
+msgstr "Filling cache cancelled."
+
+#: src/svnfrontend/background/fillcachethread.cpp:111
+#, kde-format
+msgid "Cache filled up to revision %1."
+msgstr "Cache filled up to revision %1."
+
+#: src/svnfrontend/background/fillcachethread.cpp:118
+#, kde-format
+msgid "Filling log cache in background finished."
+msgstr "Filling log cache in background finished."
+
+#: src/svnfrontend/background/tcontextlistener.cpp:182
+#, kde-format
+msgid "%1 of %2 transferred."
+msgstr "%1 of %2 transferred."
+
+#: src/svnfrontend/background/tcontextlistener.cpp:184
+#: src/svnfrontend/stopdlg.cpp:200
+#, kde-format
+msgid "%1 transferred."
+msgstr "%1 transferred."
+
+#: src/svnfrontend/blamedisplay.cpp:185 src/svnfrontend/blamedisplay.cpp:197
+#, kde-format
+msgid "Log message for revision"
+msgstr "Log message for revision"
+
+#: src/svnfrontend/blamedisplay.cpp:190
+#, kde-format
+msgid "Go to line"
+msgstr "Go to line"
+
+#: src/svnfrontend/blamedisplay.cpp:324
+#, kde-format
+msgid "Show line"
+msgstr "Show line"
+
+#: src/svnfrontend/blamedisplay.cpp:324
+#, kde-format
+msgid "Show line number"
+msgstr "Show line number"
+
+#: src/svnfrontend/blamedisplay.cpp:361
+#, kde-format
+msgctxt "@title:window"
+msgid "Log Message for Revision %1"
+msgstr "Log Message for Revision %1"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:40
+#, kde-format
+msgid "Line"
+msgstr "Line"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:45
+#: src/svnfrontend/models/logitemmodel.cpp:173
+#, kde-format
+msgid "Revision"
+msgstr "Revision"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#. i18n: ectx: property (text), widget (QRadioButton, m_startDateButton)
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopDateButton)
+#: src/svnfrontend/blamedisplay.ui:50
+#: src/svnfrontend/fronthelpers/rangeinput.ui:46
+#: src/svnfrontend/fronthelpers/rangeinput.ui:130
+#: src/svnfrontend/models/logitemmodel.cpp:177
+#, kde-format
+msgid "Date"
+msgstr "Date"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:55
+#: src/svnfrontend/models/logitemmodel.cpp:175
+#, kde-format
+msgid "Author"
+msgstr "Author"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:60
+#, kde-format
+msgid "Content"
+msgstr "Content"
+
+#: src/svnfrontend/ccontextlistener.cpp:64
+#, kde-format
+msgid "Add to revision control"
+msgstr "Add to revision control"
+
+#: src/svnfrontend/ccontextlistener.cpp:67
+#, kde-format
+msgid "Restore missing"
+msgstr "Restore missing"
+
+#: src/svnfrontend/ccontextlistener.cpp:68
+#, kde-format
+msgid "Revert"
+msgstr "Revert"
+
+#: src/svnfrontend/ccontextlistener.cpp:69
+#, kde-format
+msgid "Revert failed"
+msgstr "Revert failed"
+
+#: src/svnfrontend/ccontextlistener.cpp:70
+#, kde-format
+msgid "Resolved"
+msgstr "Resolved"
+
+#: src/svnfrontend/ccontextlistener.cpp:71
+#, kde-format
+msgid "Skip"
+msgstr "Skip"
+
+#: src/svnfrontend/ccontextlistener.cpp:72 src/svnfrontend/svnitem.cpp:430
+#, kde-format
+msgid "Deleted"
+msgstr "Deleted"
+
+#: src/svnfrontend/ccontextlistener.cpp:73
+#, kde-format
+msgid "Added"
+msgstr "Added"
+
+#: src/svnfrontend/ccontextlistener.cpp:74
+#, kde-format
+msgid "Update"
+msgstr "Update"
+
+#: src/svnfrontend/ccontextlistener.cpp:75
+#, kde-format
+msgid "Update complete"
+msgstr "Update complete"
+
+#: src/svnfrontend/ccontextlistener.cpp:76
+#, kde-format
+msgid "Update external module"
+msgstr "Update external module"
+
+#: src/svnfrontend/ccontextlistener.cpp:78
+#, kde-format
+msgid "Status on external"
+msgstr "Status on external"
+
+#: src/svnfrontend/ccontextlistener.cpp:79
+#, kde-format
+msgid "Commit Modified"
+msgstr "Commit Modified"
+
+#: src/svnfrontend/ccontextlistener.cpp:80
+#, kde-format
+msgid "Commit Added"
+msgstr "Commit Added"
+
+#: src/svnfrontend/ccontextlistener.cpp:81
+#, kde-format
+msgid "Commit Deleted"
+msgstr "Commit Deleted"
+
+#: src/svnfrontend/ccontextlistener.cpp:82
+#, kde-format
+msgid "Commit Replaced"
+msgstr "Commit Replaced"
+
+#: src/svnfrontend/ccontextlistener.cpp:85
+#, kde-format
+msgid "Locking"
+msgstr "Locking"
+
+#: src/svnfrontend/ccontextlistener.cpp:86
+#, kde-format
+msgid "Unlocked"
+msgstr "Unlocked"
+
+#: src/svnfrontend/ccontextlistener.cpp:87
+#, kde-format
+msgid "Lock failed"
+msgstr "Lock failed"
+
+#: src/svnfrontend/ccontextlistener.cpp:88
+#, kde-format
+msgid "Unlock failed"
+msgstr "Unlock failed"
+
+#: src/svnfrontend/ccontextlistener.cpp:94
+#, kde-format
+msgid "unchanged"
+msgstr "unchanged"
+
+#: src/svnfrontend/ccontextlistener.cpp:95
+#, kde-format
+msgid "item wasn't present"
+msgstr "item wasn't present"
+
+#: src/svnfrontend/ccontextlistener.cpp:96
+#, kde-format
+msgid "unversioned item obstructed work"
+msgstr "unversioned item obstructed work"
+
+#: src/svnfrontend/ccontextlistener.cpp:99
+#, kde-format
+msgid "Modified state had mods merged in."
+msgstr "Modified state had mods merged in."
+
+#: src/svnfrontend/ccontextlistener.cpp:100
+#, kde-format
+msgid "Modified state got conflicting mods."
+msgstr "Modified state got conflicting mods."
+
+#: src/svnfrontend/ccontextlistener.cpp:311
+#, kde-format
+msgid "Enter password for realm %1"
+msgstr "Enter password for realm %1"
+
+#: src/svnfrontend/ccontextlistener.cpp:342
+#, kde-format
+msgid ""
+"The certificate is not issued by a trusted authority. Use the fingerprint to "
+"validate the certificate manually."
+msgstr ""
+"The certificate is not issued by a trusted authority. Use the fingerprint to "
+"validate the certificate manually."
+
+#: src/svnfrontend/ccontextlistener.cpp:345
+#, kde-format
+msgid "The certificate hostname does not match."
+msgstr "The certificate hostname does not match."
+
+#: src/svnfrontend/ccontextlistener.cpp:348
+#, kde-format
+msgid "The certificate is not yet valid."
+msgstr "The certificate is not yet valid."
+
+#: src/svnfrontend/ccontextlistener.cpp:351
+#, kde-format
+msgid "The certificate has expired."
+msgstr "The certificate has expired."
+
+#: src/svnfrontend/ccontextlistener.cpp:354
+#, kde-format
+msgid "The certificate has an unknown error."
+msgstr "The certificate has an unknown error."
+
+#: src/svnfrontend/ccontextlistener.cpp:376
+#, kde-format
+msgid ""
+"%1\n"
+"Really store password as plain text?"
+msgstr ""
+"%1\n"
+"Really store password as plain text?"
+
+#: src/svnfrontend/ccontextlistener.cpp:377
+#, kde-format
+msgid "Save password"
+msgstr "Save password"
+
+#: src/svnfrontend/commandexec.cpp:219
+#, kde-format
+msgid "Command \"%1\" not implemented or known"
+msgstr "Command \"%1\" not implemented or known"
+
+#: src/svnfrontend/commandexec.cpp:220 src/svnfrontend/commandexec.cpp:339
+#: src/svnfrontend/graphtree/revgraphview.cpp:1004
+#: src/svnfrontend/maintreewidget.cpp:992
+#: src/svnfrontend/maintreewidget.cpp:2136
+#: src/svnfrontend/maintreewidget.cpp:2348
+#, kde-format
+msgid "SVN Error"
+msgstr "SVN Error"
+
+#: src/svnfrontend/commandexec.cpp:434
+#, kde-format
+msgid "\"GET\" requires output file"
+msgstr "\"GET\" requires output file"
+
+#: src/svnfrontend/commandexec.cpp:621
+#, kde-format
+msgid "May only switch one URL at time"
+msgstr "May only switch one URL at time"
+
+#: src/svnfrontend/commandexec.cpp:625
+#, kde-format
+msgid "Switch only on working copies"
+msgstr "Switch only on working copies"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, CopyMoveView)
+#: src/svnfrontend/copymoveview.ui:14
+#, kde-format
+msgid "Copy / Move"
+msgstr "Copy / Move"
+
+#. i18n: ectx: property (text), widget (QLabel, m_HeadOneLabel)
+#: src/svnfrontend/copymoveview.ui:20
+#, kde-format
+msgid "Rename"
+msgstr "Rename"
+
+#. i18n: ectx: property (text), widget (KSqueezedTextLabel, m_OldNameLabel)
+#. i18n: ectx: property (text), widget (KSqueezedTextLabel, m_PrefixLabel)
+#: src/svnfrontend/copymoveview.ui:33 src/svnfrontend/copymoveview.ui:58
+#, kde-format
+msgid "KSqueezedTextLabel"
+msgstr "KSqueezedTextLabel"
+
+#. i18n: ectx: property (text), widget (QLabel, m_HeadTwoLabel)
+#: src/svnfrontend/copymoveview.ui:43
+#, kde-format
+msgid "to"
+msgstr "to"
+
+#: src/svnfrontend/copymoveview_impl.cpp:47
+#, kde-format
+msgid "Rename/move"
+msgstr "Rename/move"
+
+#: src/svnfrontend/copymoveview_impl.cpp:74
+#, kde-format
+msgctxt "@title:window"
+msgid "Move/Rename File/Directory"
+msgstr "Move/Rename File/Directory"
+
+#: src/svnfrontend/copymoveview_impl.cpp:74
+#, kde-format
+msgctxt "@title:window"
+msgid "Copy File/Directory"
+msgstr "Copy File/Directory"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, CreateRepoDlg)
+#: src/svnfrontend/createrepodlg.ui:14
+#, kde-format
+msgid "Create new repository"
+msgstr "Create new repository"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_DisableFsync)
+#: src/svnfrontend/createrepodlg.ui:22
+#, kde-format
+msgid "Disable fsync at commit (BDB only)"
+msgstr "Disable fsync at commit (BDB only)"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/svnfrontend/createrepodlg.ui:32
+#, kde-format
+msgid "Path to repository:"
+msgstr "Path to repository:"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:45
+#, kde-format
+msgid "Select type of storage"
+msgstr "Select type of storage"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:48
+#, kde-format
+msgid "Select the storage type of repository (FSFS or Berkely DB)"
+msgstr "Select the storage type of repository (FSFS or Berkely DB)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:52
+#, kde-format
+msgid "FSFS"
+msgstr "FSFS"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:57
+#, kde-format
+msgid "BDB"
+msgstr "BDB"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_CreateMainDirs)
+#: src/svnfrontend/createrepodlg.ui:65
+#, kde-format
+msgid "Create trunk, tags and branches folders"
+msgstr "Create trunk, tags and branches folders"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_CreateMainDirs)
+#: src/svnfrontend/createrepodlg.ui:68
+#, kde-format
+msgid ""
+"If this is set then the base layout (<tt>/trunk</tt>,<tt>/branches</tt> and "
+"<tt>/tags</tt>) will created after opening the fresh repository."
+msgstr ""
+"If this is set then the base layout (<tt>/trunk</tt>,<tt>/branches</tt> and "
+"<tt>/tags</tt>) will created after opening the fresh repository."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_CreateMainDirs)
+#: src/svnfrontend/createrepodlg.ui:71
+#, kde-format
+msgid "Create main folders"
+msgstr "Create main folders"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn16compat)
+#: src/svnfrontend/createrepodlg.ui:87
+#, kde-format
+msgid "Is created repository compatible to Subversion prior 1.6"
+msgstr "Is created repository compatible to Subversion prior 1.6"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn16compat)
+#: src/svnfrontend/createrepodlg.ui:90
+#, kde-format
+msgid ""
+"If set, the repository created will compatible to Subversion prior 1.5. This "
+"is only useful when svnqt is running with Subversion 1.6 or above."
+msgstr ""
+"If set, the repository created will compatible to Subversion prior 1.5. This "
+"is only useful when svnqt is running with Subversion 1.6 or above."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_presvn16compat)
+#: src/svnfrontend/createrepodlg.ui:93
+#, kde-format
+msgid "Compatible to Subversion prior 1.6"
+msgstr "Compatible to Subversion prior 1.6"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_LogKeep)
+#: src/svnfrontend/createrepodlg.ui:113
+#, kde-format
+msgid "Disable automatic log file removal (BDB only)"
+msgstr "Disable automatic log file removal (BDB only)"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#: src/svnfrontend/createrepodlg.ui:123
+#, kde-format
+msgid "Type of repository:"
+msgstr "Type of repository:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn15compat)
+#: src/svnfrontend/createrepodlg.ui:139
+#, kde-format
+msgid "Is created repository compatible to Subversion prior 1.5"
+msgstr "Is created repository compatible to Subversion prior 1.5"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn15compat)
+#: src/svnfrontend/createrepodlg.ui:142
+#, kde-format
+msgid ""
+"If set, the repository created will compatible to Subversion prior 1.5. This "
+"is only useful when svnqt is running with Subversion 1.5 or above."
+msgstr ""
+"If set, the repository created will compatible to Subversion prior 1.5. This "
+"is only useful when svnqt is running with Subversion 1.5 or above."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_presvn15compat)
+#: src/svnfrontend/createrepodlg.ui:145
+#, kde-format
+msgid "Compatible to Subversion prior 1.5"
+msgstr "Compatible to Subversion prior 1.5"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn18compat)
+#: src/svnfrontend/createrepodlg.ui:162
+#, kde-format
+msgid "Is created repository compatible to Subversion prior 1.8"
+msgstr "Is created repository compatible to Subversion prior 1.8"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn18compat)
+#: src/svnfrontend/createrepodlg.ui:165
+#, kde-format
+msgid ""
+"If set, the repository created will compatible to Subversion prior 1.4. This "
+"is only useful when svnqt is running with Subversion 1.8 or above."
+msgstr ""
+"If set, the repository created will compatible to Subversion prior 1.4. This "
+"is only useful when svnqt is running with Subversion 1.8 or above."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_presvn18compat)
+#: src/svnfrontend/createrepodlg.ui:168
+#, kde-format
+msgid "Compatible to Subversion prior 1.8"
+msgstr "Compatible to Subversion prior 1.8"
+
+#: src/svnfrontend/database/dboverview.cpp:117
+#, kde-format
+msgid "Log cache holds %1 log entries and consumes %2 on disk."
+msgstr "Log cache holds %1 log entries and consumes %2 on disk."
+
+#: src/svnfrontend/database/dboverview.cpp:133
+#, kde-format
+msgid ""
+"Really clean cache for repository\n"
+"%1?"
+msgstr ""
+"Really clean cache for repository\n"
+"%1?"
+
+#: src/svnfrontend/database/dboverview.cpp:134
+#, kde-format
+msgid "Clean repository cache"
+msgstr "Clean repository cache"
+
+#: src/svnfrontend/database/dboverview.cpp:150
+#, kde-format
+msgid ""
+"Really clean cache and data for repository\n"
+"%1?"
+msgstr ""
+"Really clean cache and data for repository\n"
+"%1?"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DeleteRepositoryButton)
+#: src/svnfrontend/database/dboverview.cpp:151
+#: src/svnfrontend/database/dboverview.ui:59
+#, kde-format
+msgid "Delete repository"
+msgstr "Delete repository"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, DBOverView)
+#: src/svnfrontend/database/dboverview.ui:6
+#, kde-format
+msgid "Overview about cache database content"
+msgstr "Overview about cache database content"
+
+#. i18n: ectx: property (text), widget (QLabel, m_RepositoryLabel)
+#: src/svnfrontend/database/dboverview.ui:19
+#, kde-format
+msgid "Known repositories"
+msgstr "Known repositories"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteCacheButton)
+#. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteCacheButton)
+#: src/svnfrontend/database/dboverview.ui:40
+#: src/svnfrontend/database/dboverview.ui:43
+#, kde-format
+msgid "Delete cache entries for current selected repository"
+msgstr "Delete cache entries for current selected repository"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DeleteCacheButton)
+#: src/svnfrontend/database/dboverview.ui:46
+#, kde-format
+msgid "Delete cache"
+msgstr "Delete cache"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteRepositoryButton)
+#. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteRepositoryButton)
+#: src/svnfrontend/database/dboverview.ui:53
+#: src/svnfrontend/database/dboverview.ui:56
+#, kde-format
+msgid "Delete all entries and settings for selected repository"
+msgstr "Delete all entries and settings for selected repository"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_SettingsButton)
+#: src/svnfrontend/database/dboverview.ui:66
+#, kde-format
+msgid "Repository Settings"
+msgstr "Repository Settings"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_StatisticButton)
+#: src/svnfrontend/database/dboverview.ui:73
+#, kde-format
+msgid "Statistics for repository"
+msgstr "Statistics for repository"
+
+#: src/svnfrontend/database/dbsettings.cpp:39
+#, kde-format
+msgctxt "@title:window"
+msgid "Settings for %1"
+msgstr "Settings for %1"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: src/svnfrontend/database/dbsettings.ui:21
+#, kde-format
+msgid "Log cache settings"
+msgstr "Log cache settings"
+
+#. i18n: ectx: property (text), widget (QCheckBox, dbcfg_noCacheUpdate)
+#: src/svnfrontend/database/dbsettings.ui:27
+#, kde-format
+msgid "Do not update log cache on open"
+msgstr "Do not update log cache on open"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: src/svnfrontend/database/dbsettings.ui:40
+#, kde-format
+msgid "Prefixes to filter out in revision tree"
+msgstr "Prefixes to filter out in revision tree"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#: src/svnfrontend/database/dbsettings.ui:58
+#, kde-format
+msgid "Log and statistics setting"
+msgstr "Log and statistics setting"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/svnfrontend/database/dbsettings.ui:70
+#, kde-format
+msgid "Hide logs containing following words"
+msgstr "Hide logs containing following words"
+
+#. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_log_pattern)
+#: src/svnfrontend/database/dbsettings.ui:77
+#, kde-format
+msgid ""
+"This is a list which words/substrings a log entry must contain so it will be "
+"hidden from log and statistics"
+msgstr ""
+"This is a list which words/substrings a log entry must contain so it will be "
+"hidden from log and statistics"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/svnfrontend/database/dbsettings.ui:98
+#, kde-format
+msgid "Do not show commits from following users"
+msgstr "Do not show commits from following users"
+
+#. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_userslog)
+#: src/svnfrontend/database/dbsettings.ui:105
+#, kde-format
+msgid ""
+"Do not display commits of listed users in log window and statistics view"
+msgstr ""
+"Do not display commits of listed users in log window and statistics view"
+
+#. i18n: ectx: property (text), widget (QCheckBox, dbcfg_filter_empty_author)
+#: src/svnfrontend/database/dbsettings.ui:115
+#, kde-format
+msgid "Do not display commits without author"
+msgstr "Do not display commits without author"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DumpRepoDlg)
+#: src/svnfrontend/dumprepo_dlg.ui:14
+#, kde-format
+msgid "Dump repository"
+msgstr "Dump repository"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_UseDeltas)
+#: src/svnfrontend/dumprepo_dlg.ui:35
+#, kde-format
+msgid "Use deltas"
+msgstr "Use deltas"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, m_StartNumber)
+#: src/svnfrontend/dumprepo_dlg.ui:54
+#, kde-format
+msgid "-1 for START"
+msgstr "-1 for START"
+
+#. i18n: ectx: property (text), widget (QLabel, m_lblEnd)
+#: src/svnfrontend/dumprepo_dlg.ui:67
+#, kde-format
+msgid "End revision:"
+msgstr "End revision:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_incrementalDump)
+#: src/svnfrontend/dumprepo_dlg.ui:94
+#, kde-format
+msgid "incremental Dump"
+msgstr "incremental Dump"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_Rangeonly)
+#: src/svnfrontend/dumprepo_dlg.ui:107
+#, kde-format
+msgid "Dump revision range"
+msgstr "Dump revision range"
+
+#. i18n: ectx: property (text), widget (QLabel, m_OutfileLabel)
+#: src/svnfrontend/dumprepo_dlg.ui:117
+#, kde-format
+msgid "Dump into:"
+msgstr "Dump into:"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, m_EndNumber)
+#: src/svnfrontend/dumprepo_dlg.ui:136
+#, kde-format
+msgid "-1 for HEAD"
+msgstr "-1 for HEAD"
+
+#. i18n: ectx: property (text), widget (QLabel, m_lblStart)
+#: src/svnfrontend/dumprepo_dlg.ui:149
+#, kde-format
+msgid "Start revision:"
+msgstr "Start revision:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_RepoLabel)
+#: src/svnfrontend/dumprepo_dlg.ui:162
+#, kde-format
+msgid "Repository to dump:"
+msgstr "Repository to dump:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_PatternLabel)
+#: src/svnfrontend/editignorepattern.ui:17
+#, kde-format
+msgid "Patterns to add or remove:"
+msgstr "Patterns to add or remove:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RemoveCheckBox)
+#: src/svnfrontend/editignorepattern.ui:40
+#, kde-format
+msgid "Remove patterns"
+msgstr "Remove patterns"
+
+#. i18n: ectx: property (text), widget (QLabel, m_DepthLabel)
+#: src/svnfrontend/editignorepattern.ui:49
+#, kde-format
+msgid "Depth for ignore"
+msgstr "Depth for ignore"
+
+#: src/svnfrontend/editpropsdlg.cpp:32
+#, kde-format
+msgctxt "@title:window"
+msgid "Add Property"
+msgstr "Add Property"
+
+#: src/svnfrontend/editpropsdlg.cpp:44 src/svnfrontend/editpropsdlg.cpp:80
+#, kde-format
+msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
+msgstr "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
+
+#: src/svnfrontend/editpropsdlg.cpp:45 src/svnfrontend/editpropsdlg.cpp:81
+#, kde-format
+msgid ""
+"If present, make the file executable.<br/>This property can not be set on a "
+"directory. A non-recursive attempt will fail, and a recursive attempt will "
+"set the property only on the file children of the folder."
+msgstr ""
+"If present, make the file executable.<br/>This property can not be set on a "
+"directory. A non-recursive attempt will fail, and a recursive attempt will "
+"set the property only on the file children of the folder."
+
+#: src/svnfrontend/editpropsdlg.cpp:49
+#, kde-format
+msgid ""
+"Keywords to be expanded into the contents of a file.<br/>They can be "
+"inserted into documents by placing a keyword anchor which is formatted as "
+"$KeywordName$.<br/>Valid keywords are:<br/><b>URL/HeadURL</b> The URL for "
+"the head revision of the project.<br/><b>Author/LastChangedBy</b> The last "
+"person to change the file.<br/><b>Date/LastChangedDate</b> The date/time the "
+"object was last modified.<br/><b>Revision/Rev/LastChangedRevision</b> The "
+"last revision the object changed.<br/><b>Id</b> A compressed summary of the "
+"previous 4 keywords."
+msgstr ""
+"Keywords to be expanded into the contents of a file.<br/>They can be "
+"inserted into documents by placing a keyword anchor which is formatted as "
+"$KeywordName$.<br/>Valid keywords are:<br/><b>URL/HeadURL</b> The URL for "
+"the head revision of the project.<br/><b>Author/LastChangedBy</b> The last "
+"person to change the file.<br/><b>Date/LastChangedDate</b> The date/time the "
+"object was last modified.<br/><b>Revision/Rev/LastChangedRevision</b> The "
+"last revision the object changed.<br/><b>Id</b> A compressed summary of the "
+"previous 4 keywords."
+
+#: src/svnfrontend/editpropsdlg.cpp:58
+#, kde-format
+msgid ""
+"Set this to any value (e.g. <b>'*'</b>) to enforce locking for this file.<br/"
+">The file will be set read-only when checked out or updated, indicating that "
+"a user must acquire a lock on the file before they can edit and commit "
+"changes."
+msgstr ""
+"Set this to any value (e.g. <b>'*'</b>) to enforce locking for this file.<br/"
+">The file will be set read-only when checked out or updated, indicating that "
+"a user must acquire a lock on the file before they can edit and commit "
+"changes."
+
+#: src/svnfrontend/editpropsdlg.cpp:62 src/svnfrontend/editpropsdlg.cpp:93
+#, kde-format
+msgid ""
+"The mimetype of the file. Used to determine whether to merge the file and "
+"how to serve it from Apache. A mimetype beginning with <b>'text/'</b> (or an "
+"absent mimetype) is treated as text. Anything else is treated as binary."
+msgstr ""
+"The mimetype of the file. Used to determine whether to merge the file and "
+"how to serve it from Apache. A mimetype beginning with <b>'text/'</b> (or an "
+"absent mimetype) is treated as text. Anything else is treated as binary."
+
+#: src/svnfrontend/editpropsdlg.cpp:87
+#, kde-format
+msgid ""
+"A newline separated list of module specifiers, each consisting of a relative "
+"directory path, optional revision flags, and a URL. For example:<br/"
+"><nobr><b>foo http://example.com/repos/projectA</b></nobr><br/><nobr><b>foo/"
+"bar -r 1234 http://example.com/repos/projectB</b></nobr>"
+msgstr ""
+"A newline separated list of module specifiers, each consisting of a relative "
+"directory path, optional revision flags, and a URL. For example:<br/"
+"><nobr><b>foo http://example.com/repos/projectA</b></nobr><br/><nobr><b>foo/"
+"bar -r 1234 http://example.com/repos/projectB</b></nobr>"
+
+#: src/svnfrontend/editpropsdlg.cpp:92
+#, kde-format
+msgid "A newline separated list of file patterns to ignore."
+msgstr "A newline separated list of file patterns to ignore."
+
+#: src/svnfrontend/editpropsdlg.cpp:97
+#, kde-format
+msgid ""
+"Label text to show for the edit box where the user enters the issue number."
+msgstr ""
+"Label text to show for the edit box where the user enters the issue number."
+
+#: src/svnfrontend/editpropsdlg.cpp:100
+#, kde-format
+msgid ""
+"URL pointing to the issue tracker. It must contain <b>%BUGID%</b> which gets "
+"replaced with the bug issue number. Example:<br/><nobr><b>http://example.com/"
+"mantis/view.php?id=%BUGID%</b></nobr>"
+msgstr ""
+"URL pointing to the issue tracker. It must contain <b>%BUGID%</b> which gets "
+"replaced with the bug issue number. Example:<br/><nobr><b>http://example.com/"
+"mantis/view.php?id=%BUGID%</b></nobr>"
+
+#: src/svnfrontend/editpropsdlg.cpp:103
+#, kde-format
+msgid ""
+"String which is appended to a log message when an issue number is entered. "
+"The string must contain <b>%BUGID%</b> which gets replaced with the bug "
+"issue number."
+msgstr ""
+"String which is appended to a log message when an issue number is entered. "
+"The string must contain <b>%BUGID%</b> which gets replaced with the bug "
+"issue number."
+
+#: src/svnfrontend/editpropsdlg.cpp:106
+#, kde-format
+msgid ""
+"Set to <b>'yes'</b> if a warning shall be shown when no issue is entered in "
+"the commit dialog. Possible values:<br/><b>'true'</b>/<b>'yes'</b> or "
+"<b>'false'</b>/<b>'no'</b>."
+msgstr ""
+"Set to <b>'yes'</b> if a warning shall be shown when no issue is entered in "
+"the commit dialogue. Possible values:<br/><b>'true'</b>/<b>'yes'</b> or "
+"<b>'false'</b>/<b>'no'</b>."
+
+#: src/svnfrontend/editpropsdlg.cpp:109
+#, kde-format
+msgid ""
+"Set to <b>'false'</b> if your bugtracking system has issues which are "
+"referenced not by numbers.<br/>Possible values: <b>'true'</b> or <b>'false'</"
+"b>."
+msgstr ""
+"Set to <b>'false'</b> if your bugtracking system has issues which are "
+"referenced not by numbers.<br/>Possible values: <b>'true'</b> or <b>'false'</"
+"b>."
+
+#: src/svnfrontend/editpropsdlg.cpp:112
+#, kde-format
+msgid ""
+"Set to <b>'false'</b> if you want the bugtracking ID to be inserted at the "
+"top of the log message. The default is <b>'true'</b> which means the "
+"bugtracking ID is appended to the log message."
+msgstr ""
+"Set to <b>'false'</b> if you want the bugtracking ID to be inserted at the "
+"top of the log message. The default is <b>'true'</b> which means the "
+"bugtracking ID is appended to the log message."
+
+#: src/svnfrontend/editpropsdlg.cpp:116
+#, kde-format
+msgid ""
+"Two regular expressions separated by a newline.<br/>The first expression is "
+"used to find a string referring to an issue, the second expression is used "
+"to extract the bare bug ID from that string."
+msgstr ""
+"Two regular expressions separated by a newline.<br/>The first expression is "
+"used to find a string referring to an issue, the second expression is used "
+"to extract the bare bug ID from that string."
+
+#: src/svnfrontend/editpropsdlg.cpp:123
+#, kde-format
+msgid "Select or enter new property"
+msgstr "Select or enter new property"
+
+#: src/svnfrontend/editpropsdlg.cpp:148
+#, kde-format
+msgid "No help for this property available"
+msgstr "No help for this property available"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, EditPropsDlg)
+#: src/svnfrontend/editpropsdlg.ui:14
+#, kde-format
+msgid "Modify property"
+msgstr "Modify property"
+
+#. i18n: ectx: property (text), widget (QLabel, m_NameLabel)
+#: src/svnfrontend/editpropsdlg.ui:22
+#, kde-format
+msgid "Property name:"
+msgstr "Property name:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_ValueLabel)
+#: src/svnfrontend/editpropsdlg.ui:46
+#, kde-format
+msgid "Property value:"
+msgstr "Property value:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, helpButton)
+#: src/svnfrontend/editpropsdlg.ui:69
+#, kde-format
+msgid "Click for short info about pre-defined property name"
+msgstr "Click for short info about pre-defined property name"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, CheckoutInfo)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:14
+#, kde-format
+msgid "Checkout info"
+msgstr "Checkout info"
+
+#. i18n: ectx: property (text), widget (QLabel, m_TargetLabel)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:26
+#, kde-format
+msgid "Select target directory:"
+msgstr "Select target directory:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_UrlLabel)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:40
+#, kde-format
+msgid "Enter URL:"
+msgstr "Enter URL:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_ignoreExternals)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:67
+#, kde-format
+msgid "Ignore externals while operation"
+msgstr "Ignore externals while operation"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_ignoreExternals)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:70
+#, kde-format
+msgid "Ignore externals"
+msgstr "Ignore externals"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_overwriteButton)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:77
+#, kde-format
+msgid "May existing unversioned items overwritten"
+msgstr "May existing unversioned items overwritten"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_overwriteButton)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:80
+#, kde-format
+msgid "Overwrite existing"
+msgstr "Overwrite existing"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_IgnoreKeywords)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:93
+#, kde-format
+msgid "Ignore keywords"
+msgstr "Ignore keywords"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_CreateDirButton)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:110
+#, kde-format
+msgid "Append source URL name to subfolder"
+msgstr "Append source URL name to subfolder"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_ShowExplorer)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:120
+#, kde-format
+msgid "Open after job"
+msgstr "Open after job"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:43
+#, kde-format
+msgid "Property"
+msgstr "Property"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:44
+#, kde-format
+msgid "Value"
+msgstr "Value"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:109
+#: src/svnfrontend/propertiesdlg.cpp:114 src/svnfrontend/propertiesdlg.cpp:165
+#, kde-format
+msgid ""
+"This property may not set by users.\n"
+"Rejecting it."
+msgstr ""
+"This property may not set by users.\n"
+"Rejecting it."
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:109
+#: src/svnfrontend/propertiesdlg.cpp:114 src/svnfrontend/propertiesdlg.cpp:165
+#, kde-format
+msgid "Protected property"
+msgstr "Protected property"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:114
+#: src/svnfrontend/propertiesdlg.cpp:118 src/svnfrontend/propertiesdlg.cpp:169
+#, kde-format
+msgid ""
+"A property with that name exists.\n"
+"Rejecting it."
+msgstr ""
+"A property with that name exists.\n"
+"Rejecting it."
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:114
+#: src/svnfrontend/propertiesdlg.cpp:118 src/svnfrontend/propertiesdlg.cpp:169
+#, kde-format
+msgid "Double property"
+msgstr "Double property"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, RangeInput)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:6
+#, kde-format
+msgid "Revisions"
+msgstr "Revisions"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_startRevBox)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:12
+#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:209
+#, kde-format
+msgid "Start with revision"
+msgstr "Start with revision"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, m_startWorkingButton)
+#. i18n: ectx: property (toolTip), widget (QRadioButton, m_stopWorkingButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:23
+#: src/svnfrontend/fronthelpers/rangeinput.ui:140
+#, kde-format
+msgid "Select current working copy changes"
+msgstr "Select current working copy changes"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startWorkingButton)
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopWorkingButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:26
+#: src/svnfrontend/fronthelpers/rangeinput.ui:143
+#, kde-format
+msgid "WORKING"
+msgstr "WORKING"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startNumberButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:56
+#, kde-format
+msgid "N&umber"
+msgstr "N&umber"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startHeadButton)
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopHeadButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:66
+#: src/svnfrontend/fronthelpers/rangeinput.ui:120
+#, kde-format
+msgid "HEAD"
+msgstr "HEAD"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startStartButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:73
+#, kde-format
+msgid "S&TART"
+msgstr "S&TART"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_stopRevBox)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:85
+#, kde-format
+msgid "Stop with revision"
+msgstr "Stop with revision"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopNumberButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:93
+#, kde-format
+msgid "Number"
+msgstr "Number"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopStartButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:113
+#, kde-format
+msgid "START"
+msgstr "START"
+
+#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:62
+#, kde-format
+msgctxt "@title:window"
+msgid "Select Revisions"
+msgstr "Select Revisions"
+
+#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:205
+#, kde-format
+msgid "Select revision"
+msgstr "Select revision"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_RevisionButton)
+#: src/svnfrontend/fronthelpers/revisionbutton.ui:22
+#, kde-format
+msgid "-1"
+msgstr "-1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:146
+#, kde-format
+msgid ""
+"Could not run process \"%1\".\n"
+"\n"
+"Process stopped with message:\n"
+"%2"
+msgstr ""
+"Could not run process \"%1\".\n"
+"\n"
+"Process stopped with message:\n"
+"%2"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:335
+#, kde-format
+msgid "Error running the graph layouting tool.\n"
+msgstr "Error running the graph layout tool.\n"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:336
+#, kde-format
+msgid "Please check that 'dot' is installed (package GraphViz)."
+msgstr "Please check that 'dot' is installed (package GraphViz)."
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:425
+#, kde-format
+msgid "Deleted at revision %1"
+msgstr "Deleted at revision %1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:428
+#, kde-format
+msgid "Added at revision %1 as %2"
+msgstr "Added at revision %1 as %2"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:434
+#, kde-format
+msgid "Copied to %1 at revision %2"
+msgstr "Copied to %1 at revision %2"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:437
+#, kde-format
+msgid "Renamed to %1 at revision %2"
+msgstr "Renamed to %1 at revision %2"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:440
+#, kde-format
+msgid "Modified at revision %1"
+msgstr "Modified at revision %1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:443
+#, kde-format
+msgid "Replaced at revision %1"
+msgstr "Replaced at revision %1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:446
+#, kde-format
+msgid "Revision %1"
+msgstr "Revision %1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:466
+#, kde-format
+msgid "Could not open temporary file %1 for writing."
+msgstr "Could not open temporary file %1 for writing."
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:561
+#, kde-format
+msgid "<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>"
+msgstr "<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:569
+#, kde-format
+msgid "<b>Revision</b>%1%2%3"
+msgstr "<b>Revision</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:570
+#, kde-format
+msgid "<b>Author</b>%1%2%3"
+msgstr "<b>Author</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:571
+#, kde-format
+msgid "<b>Date</b>%1%2%3"
+msgstr "<b>Date</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:572
+#, kde-format
+msgid "<b>Log</b>%1%2%3"
+msgstr "<b>Log</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:841
+#, kde-format
+msgid "Diff to previous"
+msgstr "Diff to previous"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:845
+#, kde-format
+msgid "Diff to selected item"
+msgstr "Diff to selected item"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:848
+#: src/svnfrontend/svnlogdlgimp.cpp:515
+#, kde-format
+msgid "Cat this version"
+msgstr "Cat this version"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:851
+#, kde-format
+msgid "Unselect item"
+msgstr "Unselect item"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:853
+#, kde-format
+msgid "Select item"
+msgstr "Select item"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:856
+#, kde-format
+msgid "Display details"
+msgstr "Display details"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:859
+#, kde-format
+msgid "Rotate counter-clockwise"
+msgstr "Rotate counter-clockwise"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:860
+#, kde-format
+msgid "Rotate clockwise"
+msgstr "Rotate clockwise"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:866
+#: src/svnfrontend/graphtree/revgraphview.cpp:886
+#, kde-format
+msgid "Save tree as PNG"
+msgstr "Save tree as PNG"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:886
+#, kde-format
+msgid "Image (*.png)"
+msgstr "Image (*.png)"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:94
+#: src/svnfrontend/svnactions.cpp:294
+#, kde-format
+msgctxt "@title:window"
+msgid "Logs"
+msgstr "Logs"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:94
+#: src/svnfrontend/svnactions.cpp:294
+#, kde-format
+msgid "Getting logs - hit Cancel for abort"
+msgstr "Getting logs - hit Cancel for abort"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:104
+#, kde-format
+msgid "No log cache possible due broken database and networking not allowed."
+msgstr "No log cache possible due broken database and networking not allowed."
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:104
+#: src/svnfrontend/graphtree/revisiontree.cpp:109
+#, kde-format
+msgid ""
+"Could not retrieve logs, reason:\n"
+"%1"
+msgstr ""
+"Could not retrieve logs, reason:\n"
+"%1"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:134
+#, kde-format
+msgid "Scanning the logs for %1"
+msgstr "Scanning the logs for %1"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:134
+#, kde-format
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:135
+#, kde-format
+msgctxt "@title:window"
+msgid "Scanning logs"
+msgstr "Scanning logs"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:224
+#: src/svnfrontend/graphtree/revisiontree.cpp:262
+#: src/svnfrontend/graphtree/revisiontree.cpp:311
+#, kde-format
+msgid "%1<br>Check change entry %2 of %3"
+msgstr "%1<br>Check change entry %2 of %3"
+
+#. i18n: ectx: property (text), widget (QLabel, m_Srclabel)
+#: src/svnfrontend/hotcopydlg.ui:11
+#, kde-format
+msgid "Repository to copy:"
+msgstr "Repository to copy:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_Destlabel)
+#: src/svnfrontend/hotcopydlg.ui:31
+#, kde-format
+msgid "Destination folder:"
+msgstr "Destination folder:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_Cleanlogs)
+#: src/svnfrontend/hotcopydlg.ui:51
+#, kde-format
+msgid "Clean logs"
+msgstr "Clean logs"
+
+#: src/svnfrontend/importdir_logmsg.cpp:38
+#, kde-format
+msgid "No ignore"
+msgstr "No ignore"
+
+#: src/svnfrontend/importdir_logmsg.cpp:39
+#, kde-format
+msgid "If set, add files or directories that match ignore patterns."
+msgstr "If set, add files or directories that match ignore patterns."
+
+#: src/svnfrontend/importdir_logmsg.cpp:44
+#, kde-format
+msgid "Ignore unknown node types"
+msgstr "Ignore unknown node types"
+
+#: src/svnfrontend/importdir_logmsg.cpp:45
+#, kde-format
+msgid "Should files with unknown node types be ignored"
+msgstr "Should files with unknown node types be ignored"
+
+#: src/svnfrontend/importdir_logmsg.cpp:46
+#, kde-format
+msgid ""
+"Ignore files of which the node type is unknown, such as device files and "
+"pipes."
+msgstr ""
+"Ignore files of which the node type is unknown, such as device files and "
+"pipes."
+
+#: src/svnfrontend/importdir_logmsg.cpp:80
+#, kde-format
+msgid "(Last part)"
+msgstr "(Last part)"
+
+#: src/svnfrontend/importdir_logmsg.cpp:80
+#, kde-format
+msgid "Create subdirectory %1 on import"
+msgstr "Create subdirectory %1 on import"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel4)
+#: src/svnfrontend/loaddmpdlg.ui:11
+#, kde-format
+msgid "Load into repository:"
+msgstr "Load into repository:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_UuidGroup)
+#: src/svnfrontend/loaddmpdlg.ui:24
+#, kde-format
+msgid "Uuid action"
+msgstr "Uuid action"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_UUidForce)
+#. i18n: ectx: property (text), widget (QCheckBox, m_ForceCheck)
+#: src/svnfrontend/loaddmpdlg.ui:30 src/svnfrontend/merge_dlg.ui:116
+#, kde-format
+msgid "Force"
+msgstr "Force"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_UUidIgnore)
+#: src/svnfrontend/loaddmpdlg.ui:40
+#, kde-format
+msgid "Ignore"
+msgstr "Ignore"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_UUidDefault)
+#: src/svnfrontend/loaddmpdlg.ui:50
+#, kde-format
+msgid "Default"
+msgstr "Default"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_UsePre)
+#: src/svnfrontend/loaddmpdlg.ui:66
+#, kde-format
+msgid "Use pre-commit hook"
+msgstr "Use pre-commit hook"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_UsePost)
+#: src/svnfrontend/loaddmpdlg.ui:76
+#, kde-format
+msgid "Use post-commit hook"
+msgstr "Use post-commit hook"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, textLabel5)
+#. i18n: ectx: property (toolTip), widget (KLineEdit, m_Rootfolder)
+#: src/svnfrontend/loaddmpdlg.ui:86 src/svnfrontend/loaddmpdlg.ui:144
+#, kde-format
+msgid "Path to load the dump into (see context help)"
+msgstr "Path to load the dump into (see context help)"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, textLabel5)
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, m_Rootfolder)
+#: src/svnfrontend/loaddmpdlg.ui:89 src/svnfrontend/loaddmpdlg.ui:147
+#, kde-format
+msgid ""
+"If not empty, load the dump into a specific folder instead into root of "
+"repository. This folder must exist before loading the dump."
+msgstr ""
+"If not empty, load the dump into a specific folder instead into root of "
+"repository. This folder must exist before loading the dump."
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel5)
+#: src/svnfrontend/loaddmpdlg.ui:92
+#, kde-format
+msgid "Load into folder:"
+msgstr "Load into folder:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#: src/svnfrontend/loaddmpdlg.ui:105
+#, kde-format
+msgid "Dump file:"
+msgstr "Dump file:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_validateProps)
+#: src/svnfrontend/loaddmpdlg.ui:118
+#, kde-format
+msgid "Validate the properties on load (only Subversion 1.7 or newer)"
+msgstr "Validate the properties on load (only Subversion 1.7 or newer)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_validateProps)
+#: src/svnfrontend/loaddmpdlg.ui:121
+#, kde-format
+msgid "Validate properties"
+msgstr "Validate properties"
+
+#: src/svnfrontend/maintreewidget.cpp:271
+#, kde-format
+msgid "Networked URL to open but networking is disabled."
+msgstr "Networked URL to open but networking is disabled."
+
+#: src/svnfrontend/maintreewidget.cpp:497
+#, kde-format
+msgid "History of item"
+msgstr "History of item"
+
+#: src/svnfrontend/maintreewidget.cpp:498
+#: src/svnfrontend/maintreewidget.cpp:501
+#: src/svnfrontend/maintreewidget.cpp:505
+#, kde-format
+msgid "History"
+msgstr "History"
+
+#: src/svnfrontend/maintreewidget.cpp:499
+#, kde-format
+msgid "Displays the history log of selected item"
+msgstr "Displays the history log of selected item"
+
+#: src/svnfrontend/maintreewidget.cpp:500
+#: src/svnfrontend/maintreewidget.cpp:504
+#, kde-format
+msgid "History of item ignoring copies"
+msgstr "History of item ignoring copies"
+
+#: src/svnfrontend/maintreewidget.cpp:502
+#: src/svnfrontend/maintreewidget.cpp:506
+#, kde-format
+msgid "Displays the history log of selected item without following copies"
+msgstr "Displays the history log of selected item without following copies"
+
+#: src/svnfrontend/maintreewidget.cpp:508
+#, kde-format
+msgid "Full revision tree"
+msgstr "Full revision tree"
+
+#: src/svnfrontend/maintreewidget.cpp:509
+#, kde-format
+msgid "Shows history of item as linked tree"
+msgstr "Shows history of item as linked tree"
+
+#: src/svnfrontend/maintreewidget.cpp:510
+#, kde-format
+msgid "Partial revision tree"
+msgstr "Partial revision tree"
+
+#: src/svnfrontend/maintreewidget.cpp:511
+#, kde-format
+msgid "Shows history of item as linked tree for a revision range"
+msgstr "Shows history of item as linked tree for a revision range"
+
+#: src/svnfrontend/maintreewidget.cpp:513
+#: src/svnfrontend/maintreewidget.cpp:514
+#, kde-format
+msgid "Properties"
+msgstr "Properties"
+
+#: src/svnfrontend/maintreewidget.cpp:515
+#, kde-format
+msgid "Display Properties"
+msgstr "Display Properties"
+
+#: src/svnfrontend/maintreewidget.cpp:516
+#, kde-format
+msgid "Display last changes"
+msgstr "Display last changes"
+
+#: src/svnfrontend/maintreewidget.cpp:517
+#, kde-format
+msgid "Display last changes as difference to previous commit."
+msgstr "Display last changes as difference to previous commit."
+
+#: src/svnfrontend/maintreewidget.cpp:518
+#, kde-format
+msgid "Details"
+msgstr "Details"
+
+#: src/svnfrontend/maintreewidget.cpp:519
+#, kde-format
+msgid "Show details about selected item"
+msgstr "Show details about selected item"
+
+#: src/svnfrontend/maintreewidget.cpp:520
+#, kde-format
+msgid "Move"
+msgstr "Move"
+
+#: src/svnfrontend/maintreewidget.cpp:521
+#, kde-format
+msgid "Moves or renames current item"
+msgstr "Moves or renames current item"
+
+#: src/svnfrontend/maintreewidget.cpp:523
+#, kde-format
+msgid "Create a copy of current item"
+msgstr "Create a copy of current item"
+
+#: src/svnfrontend/maintreewidget.cpp:524
+#, kde-format
+msgid "Check for updates"
+msgstr "Check for updates"
+
+#: src/svnfrontend/maintreewidget.cpp:525
+#, kde-format
+msgid ""
+"Check if current working copy has items with newer version in repository"
+msgstr ""
+"Check if current working copy has items with newer version in repository"
+
+#: src/svnfrontend/maintreewidget.cpp:527
+#, kde-format
+msgid "Check updates"
+msgstr "Check updates"
+
+#: src/svnfrontend/maintreewidget.cpp:530
+#, kde-format
+msgid "Blame"
+msgstr "Blame"
+
+#: src/svnfrontend/maintreewidget.cpp:531
+#: src/svnfrontend/maintreewidget.cpp:534
+#, kde-format
+msgid ""
+"Output the content of specified files or URLs with revision and author "
+"information in-line."
+msgstr ""
+"Output the content of specified files or URLs with revision and author "
+"information in-line."
+
+#: src/svnfrontend/maintreewidget.cpp:533
+#, kde-format
+msgid "Blame range"
+msgstr "Blame range"
+
+#: src/svnfrontend/maintreewidget.cpp:537
+#, kde-format
+msgid "Cat head"
+msgstr "Cat head"
+
+#: src/svnfrontend/maintreewidget.cpp:538
+#, kde-format
+msgid "Output the content of specified files or URLs."
+msgstr "Output the content of specified files or URLs."
+
+#: src/svnfrontend/maintreewidget.cpp:540
+#, kde-format
+msgid "Cat revision..."
+msgstr "Cat revision..."
+
+#: src/svnfrontend/maintreewidget.cpp:541
+#, kde-format
+msgid "Output the content of specified files or URLs at specific revision."
+msgstr "Output the content of specified files or URLs at specific revision."
+
+#: src/svnfrontend/maintreewidget.cpp:544
+#, kde-format
+msgid "Lock current items"
+msgstr "Lock current items"
+
+#: src/svnfrontend/maintreewidget.cpp:545
+#, kde-format
+msgid "Try lock current item against changes from other users"
+msgstr "Try lock current item against changes from other users"
+
+#: src/svnfrontend/maintreewidget.cpp:547
+#, kde-format
+msgid "Unlock current items"
+msgstr "Unlock current items"
+
+#: src/svnfrontend/maintreewidget.cpp:548
+#, kde-format
+msgid "Free existing lock on current item"
+msgstr "Free existing lock on current item"
+
+#: src/svnfrontend/maintreewidget.cpp:552 src/svnfrontend/svnactions.cpp:657
+#, kde-format
+msgid "New folder"
+msgstr "New folder"
+
+#: src/svnfrontend/maintreewidget.cpp:553
+#, kde-format
+msgid "Create a new folder"
+msgstr "Create a new folder"
+
+#: src/svnfrontend/maintreewidget.cpp:554
+#, kde-format
+msgid "Switch repository"
+msgstr "Switch repository"
+
+#: src/svnfrontend/maintreewidget.cpp:555
+#, kde-format
+msgid "Switch repository path of current working copy path (\"svn switch\")"
+msgstr "Switch repository path of current working copy path (\"svn switch\")"
+
+#: src/svnfrontend/maintreewidget.cpp:558
+#, kde-format
+msgid "Relocate current working copy URL"
+msgstr "Relocate current working copy URL"
+
+#: src/svnfrontend/maintreewidget.cpp:559
+#, kde-format
+msgid "Relocate URL of current working copy path to other URL"
+msgstr "Relocate URL of current working copy path to other URL"
+
+#: src/svnfrontend/maintreewidget.cpp:562
+#, kde-format
+msgid "Check for unversioned items"
+msgstr "Check for unversioned items"
+
+#: src/svnfrontend/maintreewidget.cpp:563
+#, kde-format
+msgid "Unversioned"
+msgstr "Unversioned"
+
+#: src/svnfrontend/maintreewidget.cpp:564
+#, kde-format
+msgid "Browse folder for unversioned items and add them if wanted."
+msgstr "Browse folder for unversioned items and add them if wanted."
+
+#: src/svnfrontend/maintreewidget.cpp:567
+#, kde-format
+msgid "Open repository of working copy"
+msgstr "Open repository of working copy"
+
+#: src/svnfrontend/maintreewidget.cpp:569
+#, kde-format
+msgid "Opens the repository the current working copy was checked out from"
+msgstr "Opens the repository the current working copy was checked out from"
+
+#: src/svnfrontend/maintreewidget.cpp:571
+#, kde-format
+msgid "Cleanup"
+msgstr "Cleanup"
+
+#: src/svnfrontend/maintreewidget.cpp:572
+#, kde-format
+msgid ""
+"Recursively clean up the working copy, removing locks, resuming unfinished "
+"operations, etc."
+msgstr ""
+"Recursively clean up the working copy, removing locks, resuming unfinished "
+"operations, etc."
+
+#: src/svnfrontend/maintreewidget.cpp:573
+#, kde-format
+msgid "Import folders into current"
+msgstr "Import folders into current"
+
+#: src/svnfrontend/maintreewidget.cpp:575
+#, kde-format
+msgid "Import folder content into current URL"
+msgstr "Import folder content into current URL"
+
+#: src/svnfrontend/maintreewidget.cpp:579
+#, kde-format
+msgid "Add selected files/dirs"
+msgstr "Add selected files/dirs"
+
+#: src/svnfrontend/maintreewidget.cpp:580
+#, kde-format
+msgid "Adding selected files and/or directories to repository"
+msgstr "Adding selected files and/or directories to repository"
+
+#: src/svnfrontend/maintreewidget.cpp:582
+#, kde-format
+msgid "Add selected files/dirs recursive"
+msgstr "Add selected files/dirs recursive"
+
+#: src/svnfrontend/maintreewidget.cpp:584
+#, kde-format
+msgid ""
+"Adding selected files and/or directories to repository and all subitems of "
+"folders"
+msgstr ""
+"Adding selected files and/or directories to repository and all subitems of "
+"folders"
+
+#: src/svnfrontend/maintreewidget.cpp:586
+#, kde-format
+msgid "Delete selected files/dirs"
+msgstr "Delete selected files/dirs"
+
+#: src/svnfrontend/maintreewidget.cpp:588
+#, kde-format
+msgid "Deleting selected files and/or directories from repository"
+msgstr "Deleting selected files and/or directories from repository"
+
+#: src/svnfrontend/maintreewidget.cpp:589
+#, kde-format
+msgid "Delete folder"
+msgstr "Delete folder"
+
+#: src/svnfrontend/maintreewidget.cpp:590
+#, kde-format
+msgid "Deleting selected directories from repository"
+msgstr "Deleting selected directories from repository"
+
+#: src/svnfrontend/maintreewidget.cpp:592
+#, kde-format
+msgid "Revert current changes"
+msgstr "Revert current changes"
+
+#: src/svnfrontend/maintreewidget.cpp:594
+#, kde-format
+msgid "Mark resolved"
+msgstr "Mark resolved"
+
+#: src/svnfrontend/maintreewidget.cpp:595
+#, kde-format
+msgid "Marking files or dirs resolved"
+msgstr "Marking files or dirs resolved"
+
+#: src/svnfrontend/maintreewidget.cpp:597
+#, kde-format
+msgid "Resolve conflicts"
+msgstr "Resolve conflicts"
+
+#: src/svnfrontend/maintreewidget.cpp:599
+#, kde-format
+msgid "Ignore/Unignore current item"
+msgstr "Ignore/Unignore current item"
+
+#: src/svnfrontend/maintreewidget.cpp:600
+#: src/svnfrontend/maintreewidget.cpp:601
+#, kde-format
+msgid "Add or Remove ignore pattern"
+msgstr "Add or Remove ignore pattern"
+
+#: src/svnfrontend/maintreewidget.cpp:603
+#: src/svnfrontend/maintreewidget.cpp:666
+#, kde-format
+msgid "Update to head"
+msgstr "Update to head"
+
+#: src/svnfrontend/maintreewidget.cpp:604
+#, kde-format
+msgctxt "Menu item"
+msgid "Update"
+msgstr "Update"
+
+#: src/svnfrontend/maintreewidget.cpp:605
+#, kde-format
+msgid "Update to revision..."
+msgstr "Update to revision..."
+
+#: src/svnfrontend/maintreewidget.cpp:606
+#: src/svnfrontend/maintreewidget.cpp:607
+#: src/svnfrontend/maintreewidget.cpp:665 src/svnfrontend/svnactions.cpp:1018
+#, kde-format
+msgid "Commit"
+msgstr "Commit"
+
+#: src/svnfrontend/maintreewidget.cpp:609
+#: src/svnfrontend/maintreewidget.cpp:611
+#, kde-format
+msgid "Diff local changes"
+msgstr "Diff local changes"
+
+#: src/svnfrontend/maintreewidget.cpp:610
+#: src/svnfrontend/maintreewidget.cpp:612
+#, kde-format
+msgid ""
+"Diff working copy against BASE (last checked out version) - does not require "
+"access to repository"
+msgstr ""
+"Diff working copy against BASE (last checked out version) - does not require "
+"access to repository"
+
+#: src/svnfrontend/maintreewidget.cpp:615
+#, kde-format
+msgid "Diff against HEAD"
+msgstr "Diff against HEAD"
+
+#: src/svnfrontend/maintreewidget.cpp:616
+#, kde-format
+msgid ""
+"Diff working copy against HEAD (last checked in version)- requires access to "
+"repository"
+msgstr ""
+"Diff working copy against HEAD (last checked in version)- requires access to "
+"repository"
+
+#: src/svnfrontend/maintreewidget.cpp:619
+#: src/svnfrontend/maintreewidget.cpp:622
+#, kde-format
+msgid "Diff items"
+msgstr "Diff items"
+
+#: src/svnfrontend/maintreewidget.cpp:620
+#: src/svnfrontend/maintreewidget.cpp:623
+#, kde-format
+msgid "Diff two items"
+msgstr "Diff two items"
+
+#: src/svnfrontend/maintreewidget.cpp:627
+#, kde-format
+msgid "Merge two revisions"
+msgstr "Merge two revisions"
+
+#: src/svnfrontend/maintreewidget.cpp:628
+#, kde-format
+msgid "Merge"
+msgstr "Merge"
+
+#: src/svnfrontend/maintreewidget.cpp:629
+#, kde-format
+msgid "Merge two revisions of this entry into itself"
+msgstr "Merge two revisions of this entry into itself"
+
+#: src/svnfrontend/maintreewidget.cpp:632
+#, kde-format
+msgid "Merge..."
+msgstr "Merge..."
+
+#: src/svnfrontend/maintreewidget.cpp:633
+#, kde-format
+msgid ""
+"Merge repository path into current working copy path or current repository "
+"path into a target"
+msgstr ""
+"Merge repository path into current working copy path or current repository "
+"path into a target"
+
+#: src/svnfrontend/maintreewidget.cpp:634
+#: src/svnfrontend/maintreewidget.cpp:1152
+#: src/svnfrontend/maintreewidget.cpp:1220
+#, kde-format
+msgid "Open With..."
+msgstr "Open With..."
+
+#: src/svnfrontend/maintreewidget.cpp:638
+#, kde-format
+msgid "Checkout current repository path"
+msgstr "Checkout current repository path"
+
+#: src/svnfrontend/maintreewidget.cpp:639
+#: src/svnfrontend/maintreewidget.cpp:647
+#, kde-format
+msgid "Checkout"
+msgstr "Checkout"
+
+#: src/svnfrontend/maintreewidget.cpp:641
+#, kde-format
+msgid "Export current repository path"
+msgstr "Export current repository path"
+
+#: src/svnfrontend/maintreewidget.cpp:642
+#, kde-format
+msgid "Select browse revision"
+msgstr "Select browse revision"
+
+#: src/svnfrontend/maintreewidget.cpp:646 src/svnfrontend/svnactions.cpp:1628
+#: src/svnfrontend/svnactions.cpp:1634
+#, kde-format
+msgid "Checkout a repository"
+msgstr "Checkout a repository"
+
+#: src/svnfrontend/maintreewidget.cpp:648
+#, kde-format
+msgid "Export a repository"
+msgstr "Export a repository"
+
+#: src/svnfrontend/maintreewidget.cpp:649
+#, kde-format
+msgid "Export"
+msgstr "Export"
+
+#: src/svnfrontend/maintreewidget.cpp:650
+#, kde-format
+msgid "Refresh view"
+msgstr "Refresh view"
+
+#: src/svnfrontend/maintreewidget.cpp:651
+#, kde-format
+msgid "Refresh"
+msgstr "Refresh"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DispSpecDiff)
+#: src/svnfrontend/maintreewidget.cpp:653 src/svnfrontend/svnlogdlg.ui:211
+#, kde-format
+msgid "Diff revisions"
+msgstr "Diff revisions"
+
+#: src/svnfrontend/maintreewidget.cpp:656
+#, kde-format
+msgid "Unfold File Tree"
+msgstr "Unfold File Tree"
+
+#: src/svnfrontend/maintreewidget.cpp:657
+#, kde-format
+msgid "Opens all branches of the file tree"
+msgstr "Opens all branches of the file tree"
+
+#: src/svnfrontend/maintreewidget.cpp:658
+#, kde-format
+msgid "Fold File Tree"
+msgstr "Fold File Tree"
+
+#: src/svnfrontend/maintreewidget.cpp:659
+#, kde-format
+msgid "Closes all branches of the file tree"
+msgstr "Closes all branches of the file tree"
+
+#: src/svnfrontend/maintreewidget.cpp:662
+#: src/svnfrontend/maintreewidget.cpp:839
+#: src/svnfrontend/maintreewidget.cpp:1788
+#: src/svnfrontend/maintreewidget.cpp:1804
+#, kde-format
+msgid "Update log cache"
+msgstr "Update log cache"
+
+#: src/svnfrontend/maintreewidget.cpp:663
+#, kde-format
+msgid "Update the log cache for current repository"
+msgstr "Update the log cache for current repository"
+
+#: src/svnfrontend/maintreewidget.cpp:667
+#, kde-format
+msgid "Set property recursive"
+msgstr "Set property recursive"
+
+#: src/svnfrontend/maintreewidget.cpp:669
+#, kde-format
+msgid "Settings for current repository"
+msgstr "Settings for current repository"
+
+#: src/svnfrontend/maintreewidget.cpp:841
+#: src/svnfrontend/maintreewidget.cpp:1799
+#, kde-format
+msgid "Stop updating the log cache"
+msgstr "Stop updating the log cache"
+
+#: src/svnfrontend/maintreewidget.cpp:1037
+#, kde-format
+msgctxt "@title:window"
+msgid "Edit Pattern to Ignore for \"%1\""
+msgstr "Edit Pattern to Ignore for \"%1\""
+
+#: src/svnfrontend/maintreewidget.cpp:1314
+#: src/svnfrontend/maintreewidget.cpp:1358
+#, kde-format
+msgid "Nothing selected for unlock"
+msgstr "Nothing selected for unlock"
+
+#: src/svnfrontend/maintreewidget.cpp:1318
+#, kde-format
+msgctxt "@title:window"
+msgid "Lock Message"
+msgstr "Lock Message"
+
+#: src/svnfrontend/maintreewidget.cpp:1325
+#, kde-format
+msgid "Steal lock?"
+msgstr "Steal lock?"
+
+#: src/svnfrontend/maintreewidget.cpp:1362
+#, kde-format
+msgid "Break lock or ignore missing locks?"
+msgstr "Break lock or ignore missing locks?"
+
+#: src/svnfrontend/maintreewidget.cpp:1363
+#, kde-format
+msgid "Unlocking items"
+msgstr "Unlocking items"
+
+#: src/svnfrontend/maintreewidget.cpp:1650
+#, kde-format
+msgid "Nothing selected for delete"
+msgstr "Nothing selected for delete"
+
+#: src/svnfrontend/maintreewidget.cpp:1821
+#, kde-format
+msgid "Automatic generated base layout by kdesvn"
+msgstr "Automatic generated base layout by kdesvn"
+
+#: src/svnfrontend/maintreewidget.cpp:1834
+#, kde-format
+msgid "May not make subdirectories of a file"
+msgstr "May not make subdirectories of a file"
+
+#: src/svnfrontend/maintreewidget.cpp:1943 src/svnfrontend/svnactions.cpp:2186
+#, kde-format
+msgctxt "@title:window"
+msgid "Merge"
+msgstr "Merge"
+
+#: src/svnfrontend/maintreewidget.cpp:1996
+#, kde-format
+msgid "Error getting entry to relocate"
+msgstr "Error getting entry to relocate"
+
+#: src/svnfrontend/maintreewidget.cpp:2002
+#, kde-format
+msgctxt "@title:window"
+msgid "Relocate Path %1"
+msgstr "Relocate Path %1"
+
+#: src/svnfrontend/maintreewidget.cpp:2016 src/svnfrontend/svnactions.cpp:1627
+#: src/svnfrontend/svnactions.cpp:1879
+#, kde-format
+msgid "Invalid url given!"
+msgstr "Invalid URL given!"
+
+#: src/svnfrontend/maintreewidget.cpp:2017
+#, kde-format
+msgid "Relocate path %1"
+msgstr "Relocate path %1"
+
+#: src/svnfrontend/maintreewidget.cpp:2040
+#, kde-format
+msgid "Cannot import into multiple targets"
+msgstr "Cannot import into multiple targets"
+
+#: src/svnfrontend/maintreewidget.cpp:2054
+#, kde-format
+msgid "Import files from folder"
+msgstr "Import files from folder"
+
+#: src/svnfrontend/maintreewidget.cpp:2056
+#, kde-format
+msgid "Import file"
+msgstr "Import file"
+
+#: src/svnfrontend/maintreewidget.cpp:2078
+#, kde-format
+msgctxt "@title:window"
+msgid "Import Log"
+msgstr "Import Log"
+
+#: src/svnfrontend/maintreewidget.cpp:2136
+#, kde-format
+msgid "Could not retrieve repository of working copy."
+msgstr "Could not retrieve repository of working copy."
+
+#: src/svnfrontend/maintreewidget.cpp:2145
+#, kde-format
+msgid "Only in working copy possible."
+msgstr "Only in working copy possible."
+
+#: src/svnfrontend/maintreewidget.cpp:2145
+#: src/svnfrontend/maintreewidget.cpp:2149
+#: src/svnfrontend/maintreewidget.cpp:2154
+#, kde-format
+msgid "Error"
+msgstr "Error"
+
+#: src/svnfrontend/maintreewidget.cpp:2149
+#, kde-format
+msgid "Only on single folder possible"
+msgstr "Only on single folder possible"
+
+#: src/svnfrontend/maintreewidget.cpp:2154
+#, kde-format
+msgid "Sorry - internal error"
+msgstr "Sorry - internal error"
+
+#: src/svnfrontend/maintreewidget.cpp:2218
+#, kde-format
+msgid "Hold Ctrl key while click on selected item for unselect"
+msgstr "Hold Ctrl key while click on selected item for unselect"
+
+#. i18n: ectx: property (toolTip), widget (QTreeView, m_LogTreeView)
+#. i18n: ectx: property (toolTip), widget (QTreeWidget, m_ChangedList)
+#: src/svnfrontend/maintreewidget.cpp:2221 src/svnfrontend/svnlogdlg.ui:114
+#: src/svnfrontend/svnlogdlg.ui:148
+#, kde-format
+msgid "See context menu for more actions"
+msgstr "See context menu for more actions"
+
+#: src/svnfrontend/maintreewidget.cpp:2224
+#, kde-format
+msgid "Click for navigate"
+msgstr "Click for navigate"
+
+#: src/svnfrontend/maintreewidget.cpp:2227
+#, kde-format
+msgid "Navigation"
+msgstr "Navigation"
+
+#: src/svnfrontend/maintreewidget.cpp:2348
+#, kde-format
+msgid "Could not retrieve repository."
+msgstr "Could not retrieve repository."
+
+#: src/svnfrontend/maintreewidget.cpp:2378
+#, kde-format
+msgid "Not yet implemented"
+msgstr "Not yet implemented"
+
+#: src/svnfrontend/maintreewidget.cpp:2378
+#, kde-format
+msgid "Edit property recursively"
+msgstr "Edit property recursively"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, MergeDlg)
+#: src/svnfrontend/merge_dlg.ui:14
+#, kde-format
+msgid "MergeSettings"
+msgstr "MergeSettings"
+
+#. i18n: ectx: property (text), widget (QLabel, m_SrcOneLabel)
+#: src/svnfrontend/merge_dlg.ui:22
+#, kde-format
+msgid "Source 1:"
+msgstr "Source 1:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_SrcTwoLabel)
+#: src/svnfrontend/merge_dlg.ui:38
+#, kde-format
+msgid "Source 2:"
+msgstr "Source 2:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_OutLabel)
+#: src/svnfrontend/merge_dlg.ui:54
+#, kde-format
+msgid "Output to:"
+msgstr "Output to:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_MergeParameter)
+#: src/svnfrontend/merge_dlg.ui:72
+#, kde-format
+msgid "Merge parameter"
+msgstr "Merge parameter"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RecursiveCheck)
+#: src/svnfrontend/merge_dlg.ui:90
+#, kde-format
+msgid "Recursive"
+msgstr "Recursive"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_RelatedCheck)
+#: src/svnfrontend/merge_dlg.ui:103
+#, kde-format
+msgid "Handle unrelated as related items"
+msgstr "Handle unrelated as related items"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RelatedCheck)
+#: src/svnfrontend/merge_dlg.ui:106
+#, kde-format
+msgid "Ignore ancestry"
+msgstr "Ignore ancestry"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_ForceCheck)
+#: src/svnfrontend/merge_dlg.ui:113
+#, kde-format
+msgid "Force delete on modified/unversioned items"
+msgstr "Force delete on modified/unversioned items"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_Reintegrate)
+#: src/svnfrontend/merge_dlg.ui:126
+#, kde-format
+msgid "lump-merge all of source URL's unmerged changes"
+msgstr "lump-merge all of source URL's unmerged changes"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_Reintegrate)
+#: src/svnfrontend/merge_dlg.ui:132
+#, kde-format
+msgid "Reintegrate merge"
+msgstr "Reintegrate merge"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_DryCheck)
+#: src/svnfrontend/merge_dlg.ui:139
+#, kde-format
+msgid "Just dry run without modifications"
+msgstr "Just dry run without modifications"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_DryCheck)
+#: src/svnfrontend/merge_dlg.ui:142
+#, kde-format
+msgid "Dry run"
+msgstr "Dry run"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_RecordOnly)
+#: src/svnfrontend/merge_dlg.ui:152
+#, kde-format
+msgid "Only write mergeinfo"
+msgstr "Only write mergeinfo"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_RecordOnly)
+#: src/svnfrontend/merge_dlg.ui:155
+#, kde-format
+msgid ""
+"The merge is not actually performed, but the mergeinfo for the revisions "
+"which would have been merged is recorded in the working copy"
+msgstr ""
+"The merge is not actually performed, but the mergeinfo for the revisions "
+"which would have been merged is recorded in the working copy"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RecordOnly)
+#: src/svnfrontend/merge_dlg.ui:158
+#, kde-format
+msgid "Record only"
+msgstr "Record only"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_useExternMerge)
+#: src/svnfrontend/merge_dlg.ui:165
+#, kde-format
+msgid "Use external merge not Subversion's merge"
+msgstr "Use external merge not Subversion's merge"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_useExternMerge)
+#: src/svnfrontend/merge_dlg.ui:168
+#, kde-format
+msgid "Use external merge"
+msgstr "Use external merge"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_AllowMixedRev)
+#: src/svnfrontend/merge_dlg.ui:175
+#, kde-format
+msgid ""
+"If checked, allow merge into mixed revision working copy, otherwise raises "
+"error in that case"
+msgstr ""
+"If checked, allow merge into mixed revision working copy, otherwise raises "
+"error in that case"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_AllowMixedRev)
+#: src/svnfrontend/merge_dlg.ui:179
+#, kde-format
+msgid ""
+"Merge into mixed revision\n"
+"working copy"
+msgstr ""
+"Merge into mixed revision\n"
+"working copy"
+
+#: src/svnfrontend/mergedlg_impl.cpp:190
+#, kde-format
+msgctxt "@title:window"
+msgid "Enter Merge Range"
+msgstr "Enter Merge Range"
+
+#: src/svnfrontend/models/logitemmodel.cpp:179
+#, kde-format
+msgid "Message"
+msgstr "Message"
+
+#: src/svnfrontend/models/logmodelhelper.cpp:43
+#, kde-format
+msgid "%1 at revision %2"
+msgstr "%1 at revision %2"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:314
+#: src/svnfrontend/svnactions.cpp:735
+#, kde-format
+msgid "Name"
+msgstr "Name"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:316
+#, kde-format
+msgid "Status"
+msgstr "Status"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:318
+#, kde-format
+msgid "Last changed Revision"
+msgstr "Last changed Revision"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:320
+#: src/svnfrontend/svnactions.cpp:794
+#, kde-format
+msgid "Last author"
+msgstr "Last author"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:322
+#, kde-format
+msgid "Last change date"
+msgstr "Last change date"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:324
+#, kde-format
+msgid "Locked by"
+msgstr "Locked by"
+
+#: src/svnfrontend/opencontextmenu.cpp:57
+#, kde-format
+msgid "Other..."
+msgstr "Other..."
+
+#: src/svnfrontend/propertiesdlg.cpp:83
+#, kde-format
+msgid "Undelete property"
+msgstr "Undelete property"
+
+#: src/svnfrontend/propertiesdlg.cpp:85
+#, kde-format
+msgid "Delete property"
+msgstr "Delete property"
+
+#: src/svnfrontend/propertiesdlg.cpp:92
+#, kde-format
+msgid "Missing SVN link"
+msgstr "Missing SVN link"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, PropertiesDlg)
+#: src/svnfrontend/propertiesdlg.ui:14
+#, kde-format
+msgid "View and modify properties"
+msgstr "View and modify properties"
+
+#. i18n: ectx: property (text), widget (QPushButton, pbAdd)
+#: src/svnfrontend/propertiesdlg.ui:39
+#, kde-format
+msgid "Add Property"
+msgstr "Add Property"
+
+#. i18n: ectx: property (text), widget (QPushButton, pbModify)
+#: src/svnfrontend/propertiesdlg.ui:46
+#, kde-format
+msgid "Modify Property"
+msgstr "Modify Property"
+
+#. i18n: ectx: property (text), widget (QPushButton, pbDelete)
+#: src/svnfrontend/propertiesdlg.ui:53
+#, kde-format
+msgid "Delete Property"
+msgstr "Delete Property"
+
+#: src/svnfrontend/stopdlg.cpp:195
+#, kde-format
+msgid "%p% of %1"
+msgstr "%p% of %1"
+
+#: src/svnfrontend/stopdlg.cpp:203
+#, kde-format
+msgid "%1 of %2"
+msgstr "%1 of %2"
+
+#: src/svnfrontend/svnactions.cpp:186
+#, kde-format
+msgid "Finished"
+msgstr "Finished"
+
+#: src/svnfrontend/svnactions.cpp:332
+#, kde-format
+msgid "Got no logs"
+msgstr "Got no logs"
+
+#: src/svnfrontend/svnactions.cpp:456
+#, kde-format
+msgid "Got no info."
+msgstr "Got no info."
+
+#: src/svnfrontend/svnactions.cpp:493
+#, kde-format
+msgctxt "@title:window"
+msgid "History of %1"
+msgstr "History of %1"
+
+#: src/svnfrontend/svnactions.cpp:536
+#, kde-format
+msgctxt "@title:window"
+msgid "Annotate"
+msgstr "Annotate"
+
+#: src/svnfrontend/svnactions.cpp:536
+#, kde-format
+msgid "Annotate lines - hit Cancel for abort"
+msgstr "Annotate lines - hit Cancel for abort"
+
+#: src/svnfrontend/svnactions.cpp:544
+#, kde-format
+msgid "Got no annotate"
+msgstr "Got no annotate"
+
+#: src/svnfrontend/svnactions.cpp:563
+#, kde-format
+msgctxt "@title:window"
+msgid "Content Get"
+msgstr "Content Get"
+
+#: src/svnfrontend/svnactions.cpp:563
+#, kde-format
+msgid "Getting content - hit Cancel for abort"
+msgstr "Getting content - hit Cancel for abort"
+
+#: src/svnfrontend/svnactions.cpp:570
+#, kde-format
+msgid "Error getting content"
+msgstr "Error getting content"
+
+#: src/svnfrontend/svnactions.cpp:583
+#, kde-format
+msgid "Error while open temporary file"
+msgstr "Error while open temporary file"
+
+#: src/svnfrontend/svnactions.cpp:623
+#, kde-format
+msgctxt "@title:window"
+msgid "Content of %1"
+msgstr "Content of %1"
+
+#: src/svnfrontend/svnactions.cpp:633
+#, kde-format
+msgid "Got no content."
+msgstr "Got no content."
+
+#: src/svnfrontend/svnactions.cpp:657
+#, kde-format
+msgid "Enter folder name:"
+msgstr "Enter folder name:"
+
+#: src/svnfrontend/svnactions.cpp:696
+#, kde-format
+msgctxt "@title:window"
+msgid "Details"
+msgstr "Details"
+
+#: src/svnfrontend/svnactions.cpp:696
+#, kde-format
+msgid "Retrieving information - hit Cancel for abort"
+msgstr "Retrieving information - hit Cancel for abort"
+
+#: src/svnfrontend/svnactions.cpp:738
+#, kde-format
+msgid "URL"
+msgstr "URL"
+
+#: src/svnfrontend/svnactions.cpp:740
+#, kde-format
+msgid "Canonical repository URL"
+msgstr "Canonical repository URL"
+
+#: src/svnfrontend/svnactions.cpp:743
+#, kde-format
+msgid "Checksum"
+msgstr "Checksum"
+
+#: src/svnfrontend/svnactions.cpp:746
+#, kde-format
+msgid "Type"
+msgstr "Type"
+
+#: src/svnfrontend/svnactions.cpp:749
+#, kde-format
+msgid "Absent"
+msgstr "Absent"
+
+#: src/svnfrontend/svnactions.cpp:752
+#, kde-format
+msgid "File"
+msgstr "File"
+
+#: src/svnfrontend/svnactions.cpp:755
+#, kde-format
+msgid "Folder"
+msgstr "Folder"
+
+#: src/svnfrontend/svnactions.cpp:759 src/svnfrontend/svnactions.cpp:788
+#, kde-format
+msgid "Unknown"
+msgstr "Unknown"
+
+#: src/svnfrontend/svnactions.cpp:764
+#, kde-format
+msgid "Size"
+msgstr "Size"
+
+#: src/svnfrontend/svnactions.cpp:773
+#, kde-format
+msgid "Schedule"
+msgstr "Schedule"
+
+#: src/svnfrontend/svnactions.cpp:776
+#, kde-format
+msgid "Normal"
+msgstr "Normal"
+
+#: src/svnfrontend/svnactions.cpp:779
+#, kde-format
+msgid "Addition"
+msgstr "Addition"
+
+#: src/svnfrontend/svnactions.cpp:782
+#, kde-format
+msgid "Deletion"
+msgstr "Deletion"
+
+#: src/svnfrontend/svnactions.cpp:792
+#, kde-format
+msgid "UUID"
+msgstr "UUID"
+
+#: src/svnfrontend/svnactions.cpp:796
+#, kde-format
+msgid "Last committed"
+msgstr "Last committed"
+
+#: src/svnfrontend/svnactions.cpp:798
+#, kde-format
+msgid "Last revision"
+msgstr "Last revision"
+
+#: src/svnfrontend/svnactions.cpp:800
+#, kde-format
+msgid "Content last changed"
+msgstr "Content last changed"
+
+#: src/svnfrontend/svnactions.cpp:804
+#, kde-format
+msgid "Property last changed"
+msgstr "Property last changed"
+
+#: src/svnfrontend/svnactions.cpp:807
+#, kde-format
+msgid "New version of conflicted file"
+msgstr "New version of conflicted file"
+
+#: src/svnfrontend/svnactions.cpp:810
+#, kde-format
+msgid "Property reject file"
+msgstr "Property reject file"
+
+#: src/svnfrontend/svnactions.cpp:815
+#, kde-format
+msgid "Copy from URL"
+msgstr "Copy from URL"
+
+#: src/svnfrontend/svnactions.cpp:818 src/svnfrontend/svnactions.cpp:828
+#, kde-format
+msgid "Lock token"
+msgstr "Lock token"
+
+#: src/svnfrontend/svnactions.cpp:819 src/svnfrontend/svnactions.cpp:829
+#, kde-format
+msgid "Owner"
+msgstr "Owner"
+
+#: src/svnfrontend/svnactions.cpp:820 src/svnfrontend/svnactions.cpp:830
+#, kde-format
+msgid "Locked on"
+msgstr "Locked on"
+
+#: src/svnfrontend/svnactions.cpp:823 src/svnfrontend/svnactions.cpp:833
+#, kde-format
+msgid "Lock comment"
+msgstr "Lock comment"
+
+#: src/svnfrontend/svnactions.cpp:881
+#, kde-format
+msgctxt "@title:window"
+msgid "Infolist"
+msgstr "Infolist"
+
+#: src/svnfrontend/svnactions.cpp:920
+#, kde-format
+msgctxt "@title:window"
+msgid "Applying Properties"
+msgstr "Applying Properties"
+
+#: src/svnfrontend/svnactions.cpp:920
+#, kde-format
+msgid "<center>Applying<br/>hit cancel for abort</center>"
+msgstr "<center>Applying<br/>hit cancel for abort</center>"
+
+#: src/svnfrontend/svnactions.cpp:958
+#, kde-format
+msgid "Could not change to folder %1\n"
+msgstr "Could not change to folder %1\n"
+
+#: src/svnfrontend/svnactions.cpp:977
+#, kde-format
+msgid "Not commit because networking is disabled"
+msgstr "Not commit because networking is disabled"
+
+#: src/svnfrontend/svnactions.cpp:999 src/svnfrontend/svnactions.cpp:2342
+#, kde-format
+msgctxt "@title:window"
+msgid "Status / List"
+msgstr "Status / List"
+
+#: src/svnfrontend/svnactions.cpp:999 src/svnfrontend/svnactions.cpp:2342
+#, kde-format
+msgid "Creating list / check status"
+msgstr "Creating list / check status"
+
+#: src/svnfrontend/svnactions.cpp:1021
+#, kde-format
+msgid "Delete and Commit"
+msgstr "Delete and Commit"
+
+#: src/svnfrontend/svnactions.cpp:1023
+#, kde-format
+msgid "Add and Commit"
+msgstr "Add and Commit"
+
+#: src/svnfrontend/svnactions.cpp:1054
+#, kde-format
+msgctxt "@title:window"
+msgid "Commit"
+msgstr "Commit"
+
+#: src/svnfrontend/svnactions.cpp:1054
+#, kde-format
+msgid "Commit - hit Cancel for abort"
+msgstr "Commit - hit Cancel for abort"
+
+#: src/svnfrontend/svnactions.cpp:1080
+#, kde-format
+msgctxt "@title:window"
+msgid "Downloading"
+msgstr "Downloading"
+
+#: src/svnfrontend/svnactions.cpp:1080
+#, kde-format
+msgid "Download - hit Cancel for abort"
+msgstr "Download - hit Cancel for abort"
+
+#: src/svnfrontend/svnactions.cpp:1107
+#, kde-format
+msgid "Can not do this diff because networking is disabled."
+msgstr "Can not do this diff because networking is disabled."
+
+#: src/svnfrontend/svnactions.cpp:1155
+#, kde-format
+msgid "Both entries seems to be the same, can not diff."
+msgstr "Both entries seems to be the same, can not diff."
+
+#: src/svnfrontend/svnactions.cpp:1220
+#, kde-format
+msgid "Diff-process could not started, check command."
+msgstr "Diff-process could not started, check command."
+
+#: src/svnfrontend/svnactions.cpp:1264 src/svnfrontend/svnactions.cpp:1317
+#, kde-format
+msgctxt "@title:window"
+msgid "Diffing"
+msgstr "Diffing"
+
+#: src/svnfrontend/svnactions.cpp:1264
+#, kde-format
+msgid "Diffing - hit Cancel for abort"
+msgstr "Diffing - hit Cancel for abort"
+
+#: src/svnfrontend/svnactions.cpp:1277 src/svnfrontend/svnactions.cpp:1326
+#, kde-format
+msgid "No difference to display"
+msgstr "No difference to display"
+
+#: src/svnfrontend/svnactions.cpp:1317
+#, kde-format
+msgid "Diffing - hit cancel for abort"
+msgstr "Diffing - hit cancel for abort"
+
+#: src/svnfrontend/svnactions.cpp:1375
+#, kde-format
+msgid "Display process could not started, check command."
+msgstr "Display process could not started, check command."
+
+#: src/svnfrontend/svnactions.cpp:1388
+#, kde-format
+msgctxt "@title:window"
+msgid "Diff Display"
+msgstr "Diff Display"
+
+#: src/svnfrontend/svnactions.cpp:1437
+#, kde-format
+msgctxt "@title:window"
+msgid "Making update"
+msgstr "Making update"
+
+#: src/svnfrontend/svnactions.cpp:1437
+#, kde-format
+msgid "Making update - hit Cancel for abort"
+msgstr "Making update - hit Cancel for abort"
+
+#: src/svnfrontend/svnactions.cpp:1525
+#, kde-format
+msgid "Which files or directories should I add?"
+msgstr "Which files or directories should I add?"
+
+#: src/svnfrontend/svnactions.cpp:1532
+#, kde-format
+msgid "<center>The entry<br/>%1<br/>is versioned - break.</center>"
+msgstr "<center>The entry<br/>%1<br/>is versioned - break.</center>"
+
+#: src/svnfrontend/svnactions.cpp:1560
+#, kde-format
+msgid "Delete from repository"
+msgstr "Delete from repository"
+
+#: src/svnfrontend/svnactions.cpp:1609
+#, kde-format
+msgctxt "@title:window"
+msgid "Export a Repository"
+msgstr "Export a Repository"
+
+#: src/svnfrontend/svnactions.cpp:1609
+#, kde-format
+msgctxt "@title:window"
+msgid "Checkout a Repository"
+msgstr "Checkout a Repository"
+
+#: src/svnfrontend/svnactions.cpp:1628 src/svnfrontend/svnactions.cpp:1634
+#, kde-format
+msgid "Export repository"
+msgstr "Export repository"
+
+#: src/svnfrontend/svnactions.cpp:1633
+#, kde-format
+msgid "Invalid local path given!"
+msgstr "Invalid local path given!"
+
+#: src/svnfrontend/svnactions.cpp:1661
+#, kde-format
+msgid "Exporting a file?"
+msgstr "Exporting a file?"
+
+#: src/svnfrontend/svnactions.cpp:1661
+#, kde-format
+msgid "Checking out a file?"
+msgstr "Checking out a file?"
+
+#: src/svnfrontend/svnactions.cpp:1707
+#, kde-format
+msgctxt "@title:window"
+msgid "Export"
+msgstr "Export"
+
+#: src/svnfrontend/svnactions.cpp:1707
+#, kde-format
+msgctxt "@title:window"
+msgid "Checkout"
+msgstr "Checkout"
+
+#: src/svnfrontend/svnactions.cpp:1707
+#, kde-format
+msgid "Exporting"
+msgstr "Exporting"
+
+#: src/svnfrontend/svnactions.cpp:1707
+#, kde-format
+msgid "Checking out"
+msgstr "Checking out"
+
+#: src/svnfrontend/svnactions.cpp:1744
+#, kde-format
+msgid "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
+msgstr "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
+
+#: src/svnfrontend/svnactions.cpp:1777
+#, kde-format
+msgctxt "@title:window"
+msgid "Revert"
+msgstr "Revert"
+
+#: src/svnfrontend/svnactions.cpp:1777
+#, kde-format
+msgid "Reverting items"
+msgstr "Reverting items"
+
+#: src/svnfrontend/svnactions.cpp:1807 src/svnfrontend/svnactions.cpp:1869
+#, kde-format
+msgctxt "@title:window"
+msgid "Switch URL"
+msgstr "Switch URL"
+
+#: src/svnfrontend/svnactions.cpp:1807
+#, kde-format
+msgid "Switching URL"
+msgstr "Switching URL"
+
+#: src/svnfrontend/svnactions.cpp:1827
+#, kde-format
+msgctxt "@title:window"
+msgid "Relocate Repository"
+msgstr "Relocate Repository"
+
+#: src/svnfrontend/svnactions.cpp:1827
+#, kde-format
+msgid "Relocate repository to new URL"
+msgstr "Relocate repository to new URL"
+
+#: src/svnfrontend/svnactions.cpp:1850
+#, kde-format
+msgid "Can only switch one item at time"
+msgstr "Can only switch one item at time"
+
+#: src/svnfrontend/svnactions.cpp:1856
+#, kde-format
+msgid "Error getting entry to switch"
+msgstr "Error getting entry to switch"
+
+#: src/svnfrontend/svnactions.cpp:1880
+#, kde-format
+msgid "Switch URL"
+msgstr "Switch URL"
+
+#: src/svnfrontend/svnactions.cpp:1898
+#, kde-format
+msgctxt "@title:window"
+msgid "Cleanup"
+msgstr "Cleanup"
+
+#: src/svnfrontend/svnactions.cpp:1898
+#, kde-format
+msgid "Cleaning up folder"
+msgstr "Cleaning up folder"
+
+#: src/svnfrontend/svnactions.cpp:1915
+#, kde-format
+msgctxt "@title:window"
+msgid "Resolve"
+msgstr "Resolve"
+
+#: src/svnfrontend/svnactions.cpp:1915
+#, kde-format
+msgid "Marking resolved"
+msgstr "Marking resolved"
+
+#: src/svnfrontend/svnactions.cpp:1947
+#, kde-format
+msgid "Could not retrieve conflict information - giving up."
+msgstr "Could not retrieve conflict information - giving up."
+
+#: src/svnfrontend/svnactions.cpp:1974
+#, kde-format
+msgid "Resolve-process could not started, check command."
+msgstr "Resolve-process could not started, check command."
+
+#: src/svnfrontend/svnactions.cpp:1986
+#, kde-format
+msgctxt "@title:window"
+msgid "Import"
+msgstr "Import"
+
+#: src/svnfrontend/svnactions.cpp:1986
+#, kde-format
+msgid "Importing items"
+msgstr "Importing items"
+
+#: src/svnfrontend/svnactions.cpp:2010
+#, kde-format
+msgid "Nothing to merge."
+msgstr "Nothing to merge."
+
+#: src/svnfrontend/svnactions.cpp:2014
+#, kde-format
+msgid "No destination to merge."
+msgstr "No destination to merge."
+
+#: src/svnfrontend/svnactions.cpp:2033
+#, kde-format
+msgid "Both sources must be same type."
+msgstr "Both sources must be same type."
+
+#: src/svnfrontend/svnactions.cpp:2040
+#, kde-format
+msgid "Target for merge must same type like sources."
+msgstr "Target for merge must same type like sources."
+
+#: src/svnfrontend/svnactions.cpp:2063
+#, kde-format
+msgid "Both entries seems to be the same, will not do a merge."
+msgstr "Both entries seems to be the same, will not do a merge."
+
+#: src/svnfrontend/svnactions.cpp:2127
+#, kde-format
+msgid "Merge process could not started, check command."
+msgstr "Merge process could not started, check command."
+
+#: src/svnfrontend/svnactions.cpp:2186
+#, kde-format
+msgid "Merging items"
+msgstr "Merging items"
+
+#: src/svnfrontend/svnactions.cpp:2213 src/svnfrontend/svnactions.cpp:2231
+#, kde-format
+msgctxt "@title:window"
+msgid "Move"
+msgstr "Move"
+
+#: src/svnfrontend/svnactions.cpp:2213
+#, kde-format
+msgid "Moving/Rename item"
+msgstr "Moving/Rename item"
+
+#: src/svnfrontend/svnactions.cpp:2231
+#, kde-format
+msgid "Moving entries"
+msgstr "Moving entries"
+
+#: src/svnfrontend/svnactions.cpp:2251 src/svnfrontend/svnactions.cpp:2266
+#, kde-format
+msgctxt "@title:window"
+msgid "Copy / Move"
+msgstr "Copy / Move"
+
+#: src/svnfrontend/svnactions.cpp:2251 src/svnfrontend/svnactions.cpp:2266
+#, kde-format
+msgid "Copy or Moving entries"
+msgstr "Copy or Moving entries"
+
+#: src/svnfrontend/svnactions.cpp:2374
+#, kde-format
+msgid "No unversioned items found."
+msgstr "No unversioned items found."
+
+#: src/svnfrontend/svnactions.cpp:2378
+#, kde-format
+msgctxt "@title:window"
+msgid "Add Unversioned Items"
+msgstr "Add Unversioned Items"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
+#: src/svnfrontend/svnactions.cpp:2381 src/svnfrontend/svnlogdlg.ui:163
+#, kde-format
+msgid "Item"
+msgstr "Item"
+
+#: src/svnfrontend/svnactions.cpp:2501
+#, kde-format
+msgid "Found %1 modified item"
+msgid_plural "Found %1 modified items"
+msgstr[0] "Found %1 modified item"
+msgstr[1] "Found %1 modified items"
+
+#: src/svnfrontend/svnactions.cpp:2530
+#, kde-format
+msgid "Checking for updates finished"
+msgstr "Checking for updates finished"
+
+#: src/svnfrontend/svnactions.cpp:2532
+#, kde-format
+msgid "There are new items in repository"
+msgstr "There are new items in repository"
+
+#: src/svnfrontend/svnactions.cpp:2602
+#, kde-format
+msgid "Not filling log cache because networking is disabled"
+msgstr "Not filling log cache because networking is disabled"
+
+#: src/svnfrontend/svnactions.cpp:2644
+#, kde-format
+msgid "Not checking for updates because networking is disabled"
+msgstr "Not checking for updates because networking is disabled"
+
+#: src/svnfrontend/svnactions.cpp:2651
+#, kde-format
+msgid "Checking for updates started in background"
+msgstr "Checking for updates started in background"
+
+#: src/svnfrontend/svnitem.cpp:401 src/svnfrontend/svnitem.cpp:414
+#, kde-format
+msgid "Not versioned"
+msgstr "Not versioned"
+
+#: src/svnfrontend/svnitem.cpp:404
+#, kde-format
+msgid "Added in repository"
+msgstr "Added in repository"
+
+#: src/svnfrontend/svnitem.cpp:406
+#, kde-format
+msgid "Needs update"
+msgstr "Needs update"
+
+#: src/svnfrontend/svnitem.cpp:418
+#, kde-format
+msgid "Locally modified"
+msgstr "Locally modified"
+
+#: src/svnfrontend/svnitem.cpp:420
+#, kde-format
+msgid "Property modified"
+msgstr "Property modified"
+
+#: src/svnfrontend/svnitem.cpp:424
+#, kde-format
+msgid "Locally added"
+msgstr "Locally added"
+
+#: src/svnfrontend/svnitem.cpp:427
+#, kde-format
+msgid "Missing"
+msgstr "Missing"
+
+#: src/svnfrontend/svnitem.cpp:433
+#, kde-format
+msgid "Replaced"
+msgstr "Replaced"
+
+#: src/svnfrontend/svnitem.cpp:436
+#, kde-format
+msgid "Ignored"
+msgstr "Ignored"
+
+#: src/svnfrontend/svnitem.cpp:439
+#, kde-format
+msgid "External"
+msgstr "External"
+
+#: src/svnfrontend/svnitem.cpp:443
+#, kde-format
+msgid "Conflict"
+msgstr "Conflict"
+
+#: src/svnfrontend/svnitem.cpp:445
+#, kde-format
+msgid "Property conflicted"
+msgstr "Property conflicted"
+
+#: src/svnfrontend/svnitem.cpp:449
+#, kde-format
+msgid "Merged"
+msgstr "Merged"
+
+#: src/svnfrontend/svnitem.cpp:452
+#, kde-format
+msgid "Incomplete"
+msgstr "Incomplete"
+
+#: src/svnfrontend/svnitem.cpp:455
+#, kde-format
+msgid "Obstructed"
+msgstr "Obstructed"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, LogDialog)
+#: src/svnfrontend/svnlogdlg.ui:18
+#, kde-format
+msgid "SVN Log"
+msgstr "SVN Log"
+
+#. i18n: ectx: property (text), widget (QLabel, startLabel)
+#: src/svnfrontend/svnlogdlg.ui:31
+#, kde-format
+msgid "Start revision"
+msgstr "Start revision"
+
+#. i18n: ectx: property (text), widget (QLabel, endLabel)
+#: src/svnfrontend/svnlogdlg.ui:41
+#, kde-format
+msgid "End revision"
+msgstr "End revision"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_goButton)
+#: src/svnfrontend/svnlogdlg.ui:57
+#, kde-format
+msgid "Get Logs"
+msgstr "Get Logs"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_PrevFiftyButton)
+#: src/svnfrontend/svnlogdlg.ui:64
+#, kde-format
+msgid "Previous entries"
+msgstr "Previous entries"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_NextFiftyButton)
+#: src/svnfrontend/svnlogdlg.ui:71
+#, kde-format
+msgid "Show from HEAD"
+msgstr "Show from HEAD"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
+#: src/svnfrontend/svnlogdlg.ui:168
+#, kde-format
+msgid "Copy from"
+msgstr "Copy from"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DispPrevButton)
+#: src/svnfrontend/svnlogdlg.ui:189 src/svnfrontend/svnlogdlgimp.cpp:510
+#, kde-format
+msgid "Diff previous"
+msgstr "Diff previous"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DispSpecDiff)
+#: src/svnfrontend/svnlogdlg.ui:208
+#, kde-format
+msgid "Select second revision with right mouse button"
+msgstr "Select second revision with right mouse button"
+
+#. i18n: ectx: property (text), widget (QPushButton, buttonListFiles)
+#: src/svnfrontend/svnlogdlg.ui:230
+#, kde-format
+msgid "List entries"
+msgstr "List entries"
+
+#. i18n: ectx: property (text), widget (QPushButton, buttonBlame)
+#: src/svnfrontend/svnlogdlg.ui:249 src/svnfrontend/svnlogdlgimp.cpp:505
+#, kde-format
+msgid "Annotate"
+msgstr "Annotate"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_pbHelp)
+#: src/svnfrontend/svnlogdlg.ui:275
+#, kde-format
+msgid "Help"
+msgstr "Help"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_pbClose)
+#: src/svnfrontend/svnlogdlg.ui:282
+#, kde-format
+msgid "Close"
+msgstr "Close"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:109
+#, kde-format
+msgctxt "@title:window"
+msgid "SVN Log of %1"
+msgstr "SVN Log of %1"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:111
+#, kde-format
+msgctxt "@title:window"
+msgid "SVN Log"
+msgstr "SVN Log"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:435
+#, kde-format
+msgid "Set version as right side of diff"
+msgstr "Set version as right side of diff"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:441
+#, kde-format
+msgid "Set version as left side of diff"
+msgstr "Set version as left side of diff"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:447
+#, kde-format
+msgid "Unset version for diff"
+msgstr "Unset version for diff"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:451
+#, kde-format
+msgid "Revert this commit"
+msgstr "Revert this commit"
+
+#: src/svnfrontend/svntreeview.cpp:113
+#, kde-format
+msgid "&Move Here"
+msgstr "&Move Here"
+
+#: src/svnfrontend/svntreeview.cpp:117
+#, kde-format
+msgid "&Copy Here"
+msgstr "&Copy Here"
+
+#: src/svnfrontend/svntreeview.cpp:119
+#, kde-format
+msgid "C&ancel"
+msgstr "C&ancel"
+
+#: src/urldlg.cpp:99
+#, kde-format
+msgctxt "@title:window"
+msgid "Open"
+msgstr "Open"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, UrlDlg)
+#: src/urldlg.ui:14
+#, kde-format
+msgid "Open repository / working copy"
+msgstr "Open repository / working copy"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/urldlg.ui:20
+#, kde-format
+msgid "Open repository or working copy"
+msgstr "Open repository or working copy"
+
+#~ msgid ""
+#~ "(C) 2005-2009 Rajko Albrecht,\n"
+#~ "(C) 2015-2016 Christian Ehrlicher"
+#~ msgstr ""
+#~ "(C) 2005-2009 Rajko Albrecht,\n"
+#~ "(C) 2015-2016 Christian Ehrlicher"
+
+#~ msgid "Add property"
+#~ msgstr "Add property"
+
+#~ msgid ""
+#~ "This value computes how case sensitive string ordering will made.\n"
+#~ "Never overwrite the default computed value unless you know what you are "
+#~ "doing."
+#~ msgstr ""
+#~ "This value computes how case sensitive string ordering will made.\n"
+#~ "Never overwrite the default computed value unless you know what you are "
+#~ "doing."
+
+#~ msgid "Check if current locale is case sensitive or not"
+#~ msgstr "Check if current locale is case sensitive or not"
+
+#~ msgid "Make operation recursive"
+#~ msgstr "Make operation recursive"
+
+#~ msgid "Old version of conflicted file"
+#~ msgstr "Old version of conflicted file"
+
+#~ msgid "Working version of conflicted file"
+#~ msgstr "Working version of conflicted file"
+
+#~ msgid "Clear"
+#~ msgstr "Clear"
+
+#~ msgid "Is created repository compatible to Subversion prior 1.4"
+#~ msgstr "Is created repository compatible to Subversion prior 1.4"
+
+#~ msgid "Compatible to Subversion prior 1.4"
+#~ msgstr "Compatible to Subversion prior 1.4"
+
+#~ msgid "Edit property"
+#~ msgstr "Edit property"
+
+#~ msgid "Cannot import remote URLs"
+#~ msgstr "Cannot import remote URLs"
+
+#~ msgid "Set/add property recursive"
+#~ msgstr "Set/add property recursive"
+
+#~ msgid "Modify properties"
+#~ msgstr "Modify properties"
+
+#~ msgid "List of properties set"
+#~ msgstr "List of properties set"
+
+#~ msgid "Target for merge must be local."
+#~ msgstr "Target for merge must be local."

@@ -1,0 +1,3501 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kdesvn "<application
+>kdesvn</application
+>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY Rajko.Albrecht '<personname
+><firstname
+>Rajko</firstname
+><surname
+>Albrecht</surname
+></personname
+>'>
+  <!ENTITY Rajko.Albrecht.mail '<email
+>ral@alwins-world.de</email
+>'>
+  <!ENTITY % German "INCLUDE"
+><!-- change language only here -->
+]>
+
+<book lang="&language;">
+
+<bookinfo>
+<title
+>Das Handbuch zu &kdesvn;</title>
+
+<authorgroup>
+<author
+><firstname
+>Rajko</firstname
+> <surname
+>Albrecht</surname
+> <affiliation
+> <address
+>&Rajko.Albrecht.mail;</address>
+</affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>Burkhard</firstname
+><surname
+>Lück</surname
+><affiliation
+><address
+><email
+>lueck@hube-lueck.de</email
+></address
+></affiliation
+><contrib
+>Übersetzung</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2005</year>
+<year
+>2008</year>
+<holder
+>&Rajko.Albrecht;</holder>
+</copyright>
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2016-05-22</date>
+<releaseinfo
+>kdesvn 2.0</releaseinfo>
+
+<abstract>
+<para
+>&kdesvn; - Ein Subversion-Client von &kde;. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdesvn</keyword>
+<keyword
+>Subversion</keyword>
+<keyword
+>Versionsverwaltungssystem</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Einleitung</title>
+
+<para
+>&kdesvn; ist ein <ulink url="http://subversion.apache.org/"
+>Subversion-Client</ulink
+> von &kde;. </para>
+<para
+>Sie sollten einige Grundkenntnisse über Subversion selbst haben, aber die meisten Einträge sind selbst erklärend. </para>
+<para
+>Sie können Fehlerberichte und Wünsche für neue Funktionen über das <ulink url="https://bugs.kde.org/"
+>&kde;-Fehlerverfolgungssystems</ulink
+> senden. </para>
+
+<sect1 id="kdesvn-terms">
+<title
+>Begriffe</title>
+<para
+>Haben Sie Erfahrung mit Versionsverwaltungssysteme, dann können Sie diesen Abschnitt überspringen. </para>
+<para>
+<variablelist>
+<varlistentry>
+<term
+>Repository</term>
+<listitem
+><para
+>Zentraler Speicher von Daten. Das kann eine Datenbank oder ein flaches Dateisystem sein. Ohne besondere Programme können Sie die Daten darin darin nicht lesen. Für Subversion-Repositorien is &kdesvn; so ein Programm. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Arbeitskopie</term>
+<listitem
+><para
+>Eine flache Kopie eines Repositorys auf einem lokalen Dateisystem. Dies kann mit jeder Dateiverwaltung benutzt und bearbeitet werden. Informationen des Versionsverwaltungssystems können mit Programmen wie &kdesvn; gelesen werden. </para>
+<para
+>Denken Sie daran, dass Subversion nicht über Ein-/Ausgabemodule weiß, daher muss eine Arbeitskopie ohne ein spezielles Protokoll erreichbar sein, &eg; <quote
+>fish://</quote
+> und ähnliche Protokolle sind nicht möglich. </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>WebDAV</term>
+<listitem
+><para
+>WebDav ist ein Protokoll, mit dem Sie Dateien auf einem entfernten Webserver bearbeiten können. Subversion ist eine besondere Art von WebDav, wenn über einen Webserver auf Repositorien zugegriffen wird, normalerweise nur lesbar. Mit speziellen Einstellungen können Sie Schreib- und Lesezugriff mit WebDav erhalten und dann mit speziellen Browsern darauf zugreifen. &kdesvn; ist kein WebDav-Dienstprogramm, aber &konqueror; kann das Protokoll <quote
+>webdav://</quote
+> verwenden. Aber mit &kdesvn; können Sie den Versionsbaum eines Repositorys über das Protokoll <quote
+>http://</quote
+> durchsehen. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect1>
+</chapter>
+
+<chapter id="using-kdesvn">
+<title
+>Arbeiten mit &kdesvn;</title>
+<sect1 id="kdesvn-features">
+<title
+>Leistungsmerkmale von &kdesvn;</title>
+<para
+>&kdesvn; benutzt folgende Protokolle für das Browsen in Repositorien: <variablelist>
+
+<varlistentry>
+<term
+>http</term>
+<listitem
+><para
+>Standard-Protokoll für Webbrowser. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>https</term>
+<listitem
+><para
+>Verschlüsseltes Standard-Protokoll für Webbrowser. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+http</term>
+<listitem
+><para
+>Standard-Protokoll für Webbrowser. Kann benutzt werden, damit &konqueror; automatisch &kdesvn; aufruft. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+https</term>
+<listitem
+><para
+>Verschlüsseltes Standard-Protokoll für Webbrowser. Kann benutzt werden, damit &konqueror; automatisch &kdesvn; aufruft. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+file</term>
+<listitem
+><para
+>Protokoll für lokale Repositorien. Kann benutzt werden, damit &konqueror; automatisch &kdesvn; aufruft. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn</term>
+<listitem
+><para
+>Server-Protokoll von Subversion. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+ssh</term>
+<listitem
+><para
+>Subversion über ssh. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>file</term>
+<listitem
+><para
+>Direkter Zugriff auf das Repository. &kdesvn; überprüft, ob ein angegebener Pfad ein Repository oder eine Arbeitskopie ist und öffnet den Pfad im richtigen Modus. Für Subversion gibt es Unterschiede zwischen <filename class="directory"
+>file:///dir</filename
+> und <filename class="directory"
+>/dir</filename
+>. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+<para
+>Diese aufgelisteten Protokolle können auch für &URL;s auf der <link linkend="kdesvn-commandline"
+>Befehlszeile</link
+> verwendet werden. </para>
+</sect1>
+<sect1 id="first_steps">
+<title
+>Einführung zu Subversion und &kdesvn;</title>
+<para
+>Dieser Abschnitt ist hauptsächlich für Personen gedacht, die sich mit Subversion nicht auskennen und erklärt, wie Subversion bzw. Versionsverwaltungssysteme (<acronym
+>RCS</acronym
+>) funktionieren. </para>
+
+<sect2>
+<title
+>Erstellen einer Arbeitskopie</title>
+<caution>
+<para
+>Arbeitskopien müssen als lokale Pfade erreichbar sein. Subversion kennt keine Pseudo-Dateisysteme wie <filename class="directory"
+>smb://</filename
+> oder <filename class="directory"
+>fish://</filename
+>. &kdesvn; übersetzt einige von ihnen, wenn möglich, wie zum Beispiel <filename class="directory"
+>system:/home</filename
+>, aber das funktioniert nicht über ein Netzwerk. </para>
+</caution>
+<para
+>Als erstes müssen Sie eine Arbeitskopie Ihres Repositorys erstellen. Dazu wählen Sie <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guimenuitem
+>Auslesen eines Repositorys</guimenuitem
+> </menuchoice
+>. Im folgenden Dialog müssen Sie eine &URL; des Repositorys &eg; <literal
+>http://localhost/repos/myproject</literal
+> eingeben. Auch Unterordner eines Repositorys &eg; <literal
+>http://localhost/repos/myproject/trunk</literal
+> sind möglich. </para>
+<para
+>Wählen oder erstellen Sie einen lokalen Ordner, in dem die Arbeitskopie gespeichert wird. </para>
+<para
+>Dann müssen Sie noch die Revision zum Auslesen wählen. Meistens wird das <quote
+>HEAD</quote
+> sein. Damit haben Sie die neueste Version referenziert. </para>
+<para
+>Nachdem Sie auf <guibutton
+>OK</guibutton
+> geklickt haben, erstellt &kdesvn; Ihre neue Arbeitskopie und wird sie öffnen, wenn diese Einstellung aktiviert ist. </para>
+<para
+>Wenn Sie ein Repository zum Durchsehen geöffnet haben, können Sie einen Ordner markieren, dann <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Repository</guisubmenu
+> <guimenuitem
+>Aktuellen Repository-Pfad auslesen</guimenuitem
+> </menuchoice
+> wählen und den Dialog wie oben beschrieben ausfüllen. Dann wird nur der markierte Pfad ausgelesen. </para>
+</sect2>
+<sect2>
+<title
+>Lokale Änderungen einspielen</title>
+<para
+>Markieren Sie den oder die Einträge, die Sie einspielen möchten und wählen Sie im Menü <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>#</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guimenuitem
+>Einspielen</guimenuitem
+> </menuchoice
+> </para>
+<para
+>Haben Sie bei dieser Aktion keinen Eintrag ausgewählt, verwendet &kdesvn; das oberste Element der geöffneten Arbeitskopie, &ie; den Pfad zur Arbeitskopie selbst. </para>
+<para
+>Dieser Vorgang ist immer rekursiv, d. h. wenn ein Ordner ausgewählt ist, werden immer alle darunterliegenden geänderten Einträge gesendet. Haben Sie eingestellt, dass vor dem Einspielen alle Einträge überprüft werden sollen, werden im folgenden Dialog alle zu sendenden Einträge aufgelistet. Dann können Sie die Markierung für Einträge entfernen, die nicht gesendet werden sollen. In diesem Fall werden alle Einträge einzeln und nicht rekursiv gesendet. Sie können auch nicht versionierte Einträge zum Hinzufügen und Einspielen auswählen, wenn Sie nicht als ignoriert markiert sind. So können Sie erkennen, ob es neuere Einträge gibt, die Sie vergessen haben. </para>
+<para
+>Geben Sie einen Kommentar über die eingespielten Änderungen, drücken Sie auf <guibutton
+>OK</guibutton
+> und die Übertragung beginnt. </para>
+</sect2>
+<sect2>
+<title
+>Arbeitskopie aktualisieren</title>
+<para
+>Dies gleicht Ihre lokale Arbeitskopie mit dem Repository ab. Sie können &kdesvn; so einstellen, dass beim Öffnen einer Arbeitskopie die Überprüfung auf neuere bzw. geänderte Einträge durchgeführt wird. Dies geschieht im Hintergrund und Sie können in der Zwischenzeit mit &kdesvn; bereits arbeiten. Wenn die Überprüfung abgeschlossen ist, werden alle Einträge mit neueren Versionen und alle Ordner, die neuere Einträge enthalten, markiert. </para>
+<para
+>Um die Änderungen zu holen, wählen Sie <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guimenuitem
+>Auf HEAD-Revision aktualisieren</guimenuitem
+> </menuchoice
+>. Damit wird Ihre Arbeitskopie auf die neueste Version im Repository aktualisiert. Möchten Sie eine bestimmte Revision holen, wählen Sie <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guimenuitem
+>Auf Revision aktualisieren</guimenuitem
+> </menuchoice
+> und geben im folgenden Dialog die gewünschte Revision an. </para>
+<para
+>Ist kein Eintrag ausgewählt, wird die gesamte geöffnete Arbeitskopie aktualisiert, ansonsten nur rekursiv vom ausgewählten Eintrag aus. </para>
+</sect2>
+<sect2>
+<title
+>Hinzufügen und Löschen in der Arbeitskopie</title>
+<para
+>Für beide Operationen sind zwei Schritte erforderlich: Zuerst hinzufügen oder löschen und dann die Änderungen ins Repository einspielen. Vor dem Einspielen können Sie das Hinzufügen oder Löschen zurücknehmen. </para>
+<sect3>
+<title
+>Einträge hinzufügen</title>
+<para
+>Es gibt drei verschiedene Möglichkeiten, um Einträge in eine Arbeitskopie einzufügen. <variablelist>
+<varlistentry>
+<term
+>Wählen Sie nicht versionierte Einträge und fügen Sie sie hinzu</term>
+<listitem
+><para
+>Kopieren Sie die Einträge mit &konqueror; oder einer anderen Dateiverwaltung in den Bereich der Arbeitskopie. Gehen Sie die Liste durch und markieren die Einträge. Wählen Sie dann <menuchoice
+> <shortcut
+><keycombo action="simul"
+><keycap
+>Einfg</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guimenuitem
+>Ausgewählte Dateien/Ordner hinzufügen</guimenuitem
+> </menuchoice
+>. Möchten sie Ordner mit allen Untereinträgen hinzufügen, wählen Sie <menuchoice
+> <shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Einfg</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guimenuitem
+>Ausgewählte Dateien/Ordner rekursiv hinzufügen</guimenuitem
+> </menuchoice
+> aus. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Suchen und rekursiv hinzufügen</term>
+<listitem
+><para
+>Sie können überprüfen, ob es in der Arbeitskopie irgendwo nicht versionierte Einträge gibt. Nach der Auswahl von <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guimenuitem
+>Nach nicht versionierten Einträgen suchen</guimenuitem
+> </menuchoice
+> wird ein Dialog geöffnet, in dem alle nicht versionierten Einträge aufgelistet sind. Drücken Sie auf <guibutton
+>OK</guibutton
+>, dann werden alle markierten Einträge zur Arbeitskopie hinzugefügt. Bei Einträgen, die nicht aufgenommen werden sollen, müssen Sie vorher die Markierung entfernen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Ziehen und Ablegen</term>
+<listitem
+><para
+>Markieren Sie in &konqueror; oder anderen kompatiblen Dateiverwaltungen Einträge, die Sie hinzufügen möchten und ziehen Sie sie in &kdesvn;. Sie können diese Einträge auf Ordner innerhalb geöffneter Arbeitskopien ablegen, dann kopiert &kdesvn; die abgelegten Einträge dahin und fügt die Einträge hinzu. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para
+></sect3>
+<sect3>
+<title
+>Einträge aus der Arbeitskopie löschen und aus der Version herausnehmen</title>
+<para
+>Das Löschen von Einträgen funktioniert immer rekursiv. Wenn Sie zum Beispiel einen Ordner löschen, werden auch alle Einträge in diesem Ordner mit gelöscht. Markieren Sie Ihre Wünsche und wählen Sie den Menüeintrag <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guimenuitem
+>Ausgewählte Dateien/Ordner löschen</guimenuitem
+> </menuchoice
+>. Dann werden die Einträge aus der Version genommen und von der Festplatte gelöscht. </para>
+</sect3>
+</sect2>
+
+<sect2 id="logdisplay">
+<title
+>Anzeige der Protokolle</title>
+<para
+>Die Anzeige des Protokolls kann mit <keycombo action="simul"
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+> gestartet werden, wenn nur ein oder kein Eintrag in der Übersicht markiert ist. Abhängig von Ihren Einstellungen (siehe <xref linkend="subversion-settings" xreflabel="settings"/>), wird &kdesvn; die Protokolleinträge beginnend mit <quote
+>HEAD</quote
+> holen und sie anzeigen. </para>
+<sect3  id="logdisplay-dlg">
+<title
+>Dialog Protokollanzeige</title>
+<para
+>Auf der linken Seite sehen Sie die Liste mit den von &kdesvn; abgeholten Protokoll-Einträgen. Die Protokoll-Meldungen sind gekürzt, so dass sie in eine Zeile passen. Die vollständige Meldung erscheint im oberen rechten Fenster, wenn ein Eintrag markiert ist. Im rechten unteren Fenster sehen Sie eine Liste der geänderten Dateien. Diese Fenster erschien <emphasis
+>nur</emphasis
+>, wenn die Liste abhängig von Ihren Einstellungen geholt wird. </para>
+<para
+>Mit den Knöpfen oben können Sie einen anderen Bereich des Protokolls zur Anzeige auswählen. <important
+><para
+>Dieser Bereich wird ohne voreingestellte Begrenzung benutzt, daher sollten Sie bei großen Repositorys damit vorsichtig sein.</para
+></important>
+
+</para>
+<para
+>Die unten angezeigten Knöpfe funktionieren nur für ausgewählte Einträge im Protokoll, nicht für Einträge, die in der Liste der geänderten Dateien markiert sind. Wenn Sie <guibutton
+>Mit Vorherigen vergleichen</guibutton
+> wird der Unterschied für alle geänderten Einträge in dieser Revision  angezeigt, wenn sie gleich oder unterhalb des Subversions-Eintrags liegen, der vorher für das Abholen des Protokolle ausgewählt wurde. Das gleiche gilt für die Funktion <guibutton
+>Revisionen vergleichen</guibutton
+>. </para>
+<para
+><guibutton
+>Anmerkungen</guibutton
+> funktionieren natürlich nur, wenn es sich um eine Datei handelt. </para>
+<para
+>Für alle Listeneinträge in beiden Listen gibt es ein Kontextmenü mit einigen zusätzlichen Aktionen. In der linken Liste ist dies <guimenuitem
+>Version als linke Seite für Diff setzen</guimenuitem
+>, &ie; als Start-Revision und <guimenuitem
+>Version als rechte Seite für Diff setzen</guimenuitem
+>, &ie; als End-Revision oder Ziel für Diff, das ist im „Unified Diff“ der mit <computeroutput
+>+++</computeroutput
+> markierte Teil. Wenn Sie Revisionen für diese beiden Aktionen auswählen, werden Sie mit kleinen Pfeilen markiert. </para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="working-with-repositories">
+<title
+>Arbeiten mit Repositorien</title>
+<para
+>Das Durchsehen eines Repositorys kann mit &konqueror;, &dolphin; oder anderen Dateiverwaltungsprogramm erfolgen: Öffnen Sie eine URL mit dem in <xref linkend="kdesvn-features" xreflabel="Features"/> beschriebenen Protokoll (die Varianten mit <quote
+>k</quote
+> am Anfang). Dann wird der Inhalt angezeigt. Dann können einfache Operationen wie Kopieren, Verschieben oder Löschen ausgeführt werden. Wird eine Abfrage wie <quote
+>?rev=<replaceable
+>xxx</replaceable
+></quote
+> angehängt, wird die angegebene Revision angezeigt. Das Format der Revisions-Abfrage ist in <xref linkend="revision-syntax"/> beschrieben. Weitere Informationen über KIO::ksvn finden Sie in <xref linkend="kdesvn-kio"/>. </para>
+<para
+>Alle Arbeiten außer dem <guimenuitem
+>Kopieren</guimenuitem
+> sollten nur beim Durchsehen der Revision HEAD ausgeführt werden. </para>
+<sect2>
+<title
+>Gelöschte Einträge wiederherstellen</title>
+<para
+>In Subversion ist das Wiederherstellen eines gelöschten Eintrags tatsächlich das Kopieren dieses Eintrags von einer früheren Revision. Wenn Sie einen Eintrag wiederherstellen möchten, laden Sie eine Ansicht des Repository mit einer Version bevor der Eintrag gelöscht wurde. Dazu wählen Sie <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Repository</guisubmenu
+> <guimenuitem
+>Revision zum Durchsehen auswählen</guimenuitem
+> </menuchoice
+> und geben die gewünschte Revision ein. Dann zeigt &kdesvn; den Inhalt des Repository mit dieser Revision an. Markieren Sie den Eintrag, den Sie wiederherstellen möchten, und wählen Sie <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guimenuitem
+>Kopieren</guimenuitem
+> </menuchoice
+>. Im dadurch geöffneten Dialog ist das Ziel immer die Revision HEAD, die Quelle ist die zum Durchsehen und Kopieren ausgewählte Revision. Geben Sie den Pfad ein, klicken Sie auf <guibutton
+>OK</guibutton
+> und das Kopieren beginnt. Wechseln Sie danach zurück zur Revision HEAD, der wiederhergestellte Eintrag wird dann angezeigt. </para>
+</sect2>
+<sect2>
+<title
+>Ordner importieren</title>
+<para
+>Wegen Beschränkungen in Subversion selbst können nur Ordner, nicht aber einzelne Dateien importiert werden. </para>
+<sect3>
+<title
+>Ziehen und Ablegen</title>
+<para
+>Markieren Sie in jeder kompatiblen Dateiverwaltung die Ordner, die Sie importieren möchten, und ziehen Sie sie zum Ordnereintrag in &kdesvn;, in den Sie importieren möchten. </para>
+</sect3>
+<sect3>
+<title
+>Ordner für den Import mit dem Dateisystem-Browser auswählen</title>
+<para
+>Markieren Sie den Ordner, in den Sie einen neuen Ordner importieren möchten. Wählen Sie dann <menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guimenuitem
+>Ordner in aktuellen Ordner importieren</guimenuitem
+></menuchoice
+> und dann wählen Sie den gewünschten Ordner. </para>
+</sect3>
+</sect2>
+</sect1>
+<sect1 id="operations">
+<title
+>Andere Operationen</title>
+<sect2 id="merging-items">
+<title
+>Zusammenführen</title>
+<para
+>Öffnen Sie ein Repository oder eine Arbeitskopie, markieren Sie den gewünschten Eintrag zum Zusammenführen und wählen Sie <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guisubmenu
+>Zusammenführen</guisubmenu
+> </menuchoice
+>. Geben Sie im dann geöffneten Dialog die nötigen Werte ein. Wurde dieser Dialog von einem Repository aus geöffnet, dann sind die Angaben für Quelle 1 und Quelle 2 bereits ausgefüllt. Beim Öffnen aus einer Arbeitskopie ist das Ziel mit dem ausgewählten Eintrag ausgefüllt. Die Behandlung dieser Parameter ist für das interne Diff von Subversion anders als für ein externes Programm wie &kdiff3;. Als Ziel muss immer ein lokaler Ordner oder eine lokale Datei angegeben werden. Sie können zwischen intern und extern mit dem Ankreuzfeld <guilabel
+>Externes Zusammenführen verwenden</guilabel
+> wechseln. </para>
+<sect3>
+<title
+>Internes zusammenführen</title>
+<para
+>Die Optionen haben die gleiche Bedeutung wie das Befehlszeilenprogramm von Subversion. Wenn source1 und source2 gleich sind, müssen Start- und Endrevision unterschiedlich sein. Sind die Quellen nicht gleich, wird die Startrevision source1 und die Endrevision source2 zugewiesen. Das Ziel muss eine Arbeitskopie sein, sonst gibt Subversion eine Fehlermeldung aus. </para>
+<para
+>Die Ankreuzfelder haben folgende Bedeutungen: <variablelist>
+
+<varlistentry>
+<term
+>Rekursiv</term>
+<listitem
+><para
+>Alle Operationen bei der Bearbeitung von Ordnern rekursiv ausführen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Behandelt nicht zugehörige als zugehörige Einträge</term>
+<listitem
+><para
+>Ist dies aktiv, werden nicht zugehörige wie zugehörige Einträge bei der Generierung des Unterschieds behandelt. Ansonsten entfernt Subversion eine Seite und fügt sie auf der anderen Seite wieder hinzu. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Löschen bei bearbeiteten/nicht versionierten Einträgen erzwingen</term>
+<listitem
+><para
+>Ist dies nicht aktiviert und erfordert das Zusammenführen ein Löschen eines geänderten oder nicht versionierten Eintrags, schlägt das Zusammenführen in Subversion fehl. Ansonsten werden die Einträge gelöscht. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Nur Testausführung ohne Änderungen</term>
+<listitem
+><para
+>Ist dies aktiviert, sendet Subversion nur Benachrichtigungen darüber, was ausgeführt würde, ohne tatsächlich die Arbeitskopie zu verändern. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+</sect3>
+<sect3>
+<title
+>Externe Programme zum Zusammenführen verwenden</title>
+<para
+>In <xref linkend="diffmerge-settings"/> finden Sie weitere Details zur Einrichtung eines externen Programms zum Zusammenführen. &kdesvn; generiert die Befehlszeile wie dort beschrieben. Davor wird folgendes ausgeführt: </para>
+<para>
+<orderedlist>
+
+<listitem
+><para
+>Die Startrevision wird der Quelle 1 und die Endrevision der Quelle 2 zugewiesen. Dann wird überprüft, ob es Unterschiede im Pfad oder in der Revision gibt. Wenn ja, wird eine Drei-Wege-Zusammenführung durchgeführt, ansonsten ein einfaches Zusammenführen von Quelle zu Ziel. Ist Quelle 2 leer, wird ebenfalls ein einfaches Zusammenführen ausgeführt. </para
+></listitem>
+
+<listitem
+><para
+>Es wird ein Export in einen temporären Ordner erzeugt. Handelt es sich um eine einfache Zusammenführung, wird  Quelle 1 an der Startrevision, ansonsten beide Quellen mit ihren Revisionen exportiert. Ist der Eintrag eine Datei und kein Ordner, wird der Kontext zu einer bestimmten Revision geholt. </para
+></listitem>
+
+<listitem>
+<para
+>Aufruf eines externen Programms zum Zusammenführen wie in den <link linkend="diffmerge-settings"
+>Einstellungen</link
+> festgelegt. Die Fehlerausgabe wird im Protokollfenster angezeigt, so dass Sie mögliche Fehler erkennen können. </para>
+</listitem>
+</orderedlist
+>Im Unterschied zum internen Zusammenführen kann das Ziel eine flacher Ordner oder Datei sein, die sich nicht unter Versionskontrolle befindet, da externe Programme dies nicht beachten. </para>
+<para
+>Ist rekursiv nicht aktiviert, wird der Export als flacher Export ausgeführt. Beachte Sie, dass dabei Externals der Arbeitskopie <emphasis
+>nicht</emphasis
+> exportiert. </para>
+</sect3>
+</sect2>
+
+<sect2 id="op-resolve">
+<title
+>Auflösen von Konflikten</title>
+<para
+>&kdesvn; selbst enthält kein Modul zur Auflösung von Konflikten, Sie können jedoch ein externes Programm von &kdesvn; aus dafür aufrufen. In <xref linkend="extern-resolve-setup"/> finden Sie Informationen zur Einrichtung für dieses Programm. </para>
+<para
+>Wenn Sie einen Eintrag mit dem Status <quote
+>Konflikt</quote
+>, erkennbar an einem roten Kreuz in der Listenansicht, markieren, können Sie <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guisubmenu
+>Konflikte auflösen</guisubmenu
+> </menuchoice
+>. Diese Aktion finden Sie auch im Kontextmenü von Einträgen im Konflikt. &kdesvn; startet nun das von Ihnen dafür eingerichtete Programm. Wurde der Konflikt gelöst, sollten Sie den Konflikt für den Eintrag als aufgelöst kennzeichnen, indem Sie aus dem Menü <menuchoice
+><guimenu
+>Subversion</guimenu
+><guisubmenu
+>Arbeitskopie</guisubmenu
+><guisubmenu
+>Als gelöst markieren</guisubmenu
+></menuchoice
+> benutzen, ansonsten können Sie Ihre Änderungen nicht einspielen. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="used-properties">
+<title
+>Von &kdesvn; benutzte Eigenschaften für die Einrichtung</title>
+<sect2>
+<title
+>Einbindung des Fehlerverfolgungssystems</title>
+<para
+>Das <ulink url="http://tortoisesvn.tigris.org/"
+>TortoiseSVN-Projekt</ulink
+> hat ein Eigenschaftssystem für die <ulink url="http://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-dug-bugtracker.html"
+>Einbindung des Fehlerverfolgungssystems</ulink
+> in die grafische Bedienungsoberfläche von Subversion entwickelt. Die aktuelle Version von &kdesvn; unterstützt die zusätzlichen Felder beim Einspielen nicht und kennt nur die folgenden Eigenschaften: </para>
+<para>
+<table id="bugtracker-properties">
+<title
+>Eigenschaften der Einbindung des Fehlerverfolgungssystems</title>
+<tgroup cols="3">
+
+<thead>
+<row>
+<entry
+>Eigenschaft</entry>
+<entry
+>Beschreibung</entry>
+<entry
+>Beispiel</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><literal
+>bugtraq:url</literal
+></entry>
+<entry
+>Enthält die &URL; zum Fehlerverfolgungssystem. Die <literal
+>%BUGID%</literal
+>-Markierung muss auch enthalten sein.</entry>
+<entry
+>https://bugs.kde.org/show_bug.cgi?id=%BUGID%</entry>
+</row>
+
+<row>
+<entry
+><literal
+>bugtraq:logregex</literal
+></entry>
+<entry>
+<para
+>Enthält ein oder zwei reguläre Ausdrücke, getrennt durch Zeilenvorschubzeichen.</para>
+<para
+>Ist nur ein regulärer Ausdruck angegeben, muss die Fehlernummer (BUGID) auf den regulären Ausdruck zutreffen. Sind zwei Ausdrücke abgegeben, dann wird der erste Ausdruck verwendet, um einen Text mit Bezug zur BUGID zu finden. Daher darf der erste Ausdruck mehr als nur die BUGID &eg; <quote
+>Issue #123</quote
+> or <quote
+>resolves issue 123</quote
+> enthalten. Der zweite Ausdruck wird dann verwendet, um die BUGID in dem Text zu finden, der mit dem ersten Ausdruck extrahiert wurde.</para>
+<para
+>Bitte achten Sie auf unerwünschte Leerzeichen nach regulären Ausdrücken und vergessen Sie nicht die eckigen Klammern um Zahlen.</para>
+</entry>
+<entry>
+<para
+>Einzeln (Anwendung mit TRAC) </para>
+<programlisting
+>#(\d+)
+</programlisting>
+<para
+>Jetzt werden all Zahlen wie <replaceable
+>#190</replaceable
+> eingelesen und in eine &URL; in der Protokollausgabe übersetzt. </para>
+<para
+>Zwei Ausdrücke: </para>
+<programlisting
+>[Ii]ssue #?(\d+)(,? ?#(\d+))*
+(\d+)
+</programlisting>
+<important>
+  <title
+>Speichern</title>
+  <para
+>Achten Sie auf Leerzeichen nach dem Ausdruck <literal
+>(\d+)</literal
+>. Dies ist einer der häufigsten Fehler und führt dazu, dass diese Ausdrücke nicht zutreffen. </para>
+</important>
+</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</para>
+<para
+>Bei lokal geöffneten Repositorien, &ie; mit dem Protokoll <filename class="directory"
+>file://</filename
+>, und bei Arbeitskopien werden diese Eigenschaften vom geöffneten Ordner aufwärts gesucht, bis Sie gefunden wurden oder die oberste Ebene des Revisionsbaums erreicht ist. Bei Repositorien, die über das Netzwerk geöffnet wurden, &ie; alle außer dem Protokoll <filename class="directory"
+>file://</filename
+>, wird nur im geöffneten Ordner selbst gesucht. </para>
+<para
+>Unterstützung für mehrere Gruppen von Eigenschaften wird möglicherweise später noch hinzugefügt wie &eg; zusätzliche Werte in Unterordnern für andere Fehlerverfolgungssysteme &etc; In den meisten Fällen sollte jedoch die Evaluierung von Verknüpfungen für einzelne Fehlerverfolgungssysteme ausreichend sein. </para>
+</sect2>
+</sect1>
+
+<sect1 id="revision-tree">
+<title
+>Der Revisionsbaum</title>
+<para
+>Im Revisionsbaum wird der vollständige Verlauf eines Eintrag angezeigt, so dass Sie einen besseren Überblick über den Verlauf erhalten. Dazu muss das vollständige Protokoll des Repository eingelesen werden, weil für den Revisionsbaum einige Informationen nötig sind, die von Subversion nicht bereitgestellt werden. Da durch diesen Prozess ein erheblicher Netzwerkverkehr erzeugt wird, wird für den Revisionsbaum immer der interne <link linkend="logcache-descr"
+>Protokoll-Zwischenspeicher</link
+> benutzt. </para>
+<sect2>
+<title
+>Systemanforderungen</title>
+<para
+>Der Revisionsbaum wird mit <application
+>dot</application
+> erstellt. Daher müssen Sie für einen funktionierenden Revisionsbaum das Paket <application
+>graphviz</application
+> installieren. </para>
+</sect2>
+</sect1>
+
+<sect1 id="logcache-descr">
+<title
+>Interner Protokoll-Zwischenspeicher</title>
+<para
+>&kdesvn; kann einen internen Protokoll-Zwischenspeicher für einige Operationen verwenden, hauptsächlich für den <link linkend="revision-tree"
+>Revisionsbaum</link
+>, aber auch für die einfache Protokollanzeige im Offline-Modus. Die Zwischenspeicher werden in <application
+>SQLite</application
+>-Datenbanken im Ordner <filename class="directory"
+>$HOME/.sqvnqt/logcache</filename
+> gespeichert. Jede nummerierte Datei ist die Datenbank für ein einzelnes Repository. </para>
+<warning>
+  <para
+>Die Datenbanken können sehr groß werden. Daher sollten Sie die automatische Aktualisierung des Protokoll-Zwischenspeichers in den Einstellungen abschalten. </para>
+</warning>
+<para
+>Eine Datenbank können Sie einfach löschen, dann gibt es kein gespeichertes Protokoll und keinen Revisionsbaum für dieses Repository. Ist das automatisch Füllen des Zwischenspeichers nicht abgeschaltet, wird beim nächsten Öffnen dieses Repository oder der zugehörigen Arbeitskopie der Zwischenspeicher wieder gefüllt. </para>
+<sect2>
+<title
+>Offline-Modus</title>
+<para
+>Mit &kdesvn; kann auch ohne Netzwerkverbindung gearbeitet werden, &ie; Sie können den Zugriff auf ein Netzwerk für &kdesvn; abschalten. Dann bezieht &kdesvn; die Protokolle aus dem Zwischenspeicher. Dieses Protokoll ist aus technischen Gründen auf die wesentlichen Informationen beschränkt, daher kann sich das zwischengespeicherte Protokoll vom tatsächlichen Protokoll unterschieden. Der Unterschied besteht darin, dass nicht alle Kopier-Operationen enthalten sind, sogar wenn <guilabel
+>Protokolle folgen Knotenänderungen</guilabel
+> aktiviert wurde.</para>
+</sect2>
+<sect2>
+<title
+>Protokoll-Zwischenspeicher und Revisionsbaum</title>
+<para
+>Der Revisionsbaum verwendet nur den Protokoll-Zwischenspeicher, da ansonsten immer wieder die Protokolle eingelesen werden müssen. Der Protokoll-Zwischenspeicher wird <emphasis
+>nicht</emphasis
+> erneut eingelesen. Dieses Verhalten kann sich aber in späteren Versionen ändern. </para>
+</sect2>
+</sect1>
+
+<sect1 id="overlay-meaning">
+<title
+>Bedeutung der Einblendungen auf den Symbolen</title>
+<para
+>Einträge können mit eingeblendeten Symbolen markiert werden, wenn sie nicht im <quote
+>normalen</quote
+> Zustand sind. <variablelist>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnlocked.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Gesperrt</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Dieser Eintrag ist gesperrt. In der letzten Spalte wird der Eigentümer der Sperre aufgeführt. Sie können &kdesvn; so einstellen, dass es auch Repositorien auf gesperrte Einträge überprüft. Bedenken Sie aber, dass dies abhängig vom Server lange dauern kann. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnneedlock.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Muss gesperrt werden</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Dieser Eintrag muss vor dem Bearbeiten und Einspielen gesperrt werden. Der Eintrag bleibt in Subversion nur lesbar, bis Sie eine Sperre setzen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnupdates.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Aktualisiert</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Dieser Eintrag oder bei einem Ordner ein Eintrag darin hat eine neuere Version im Repository. </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnmodified.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Geändert</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Dieser Eintrag oder bei einem Ordner ein Eintrag darin wurde lokal geändert. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnadded.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Hinzugefügt</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Dieser Eintrag wurde lokal zu Subversion hinzugefügt, ist aber noch nicht eingespielt worden. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvndeleted.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Gelöscht</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Dieser Eintrag wurde lokal aus Subversion gelöscht, ist aber noch nicht eingespielt worden. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnconflicted.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Gelöscht</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Dieser Eintrag oder bei einem Ordner ein Eintrag darin hat einen Konflikt bei der letzten Aktualisierung, der aufgelöst werden muss. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect1>
+
+<sect1 id="kdesvn-passwords">
+<title
+>&kdesvn; und Passwörter</title>
+<para
+>&kdesvn; und Subversion können Passwörter speichern. Dies ist immer ein Sicherheitsrisiko, erleichtert aber die Arbeit mit einer grafischen Bedienungsoberfläche. </para>
+<sect2>
+<title
+>Kein Speichern von Passwörtern</title>
+<para
+>Der sicherste Weg, aber mit grafische Bedienungsoberflächen wie &kdesvn; ziemlich umständlich. Besonders der Hintergrundprozess von &kdesvn; fragt dann immer nach dem Passwort, wenn das Repository einen eingeschränkten Zugriff für lesende Operationen wie Aktualisierung und Status hat. Das gleich gilt für das <quote
+>Einspielen</quote
+>. Wenn Sie die Passwörter nicht speichern, sollten Sie die Einstellung <guilabel
+>Aktualisierungs-Überprüfung beim Öffnen einer Arbeitskopie starten</guilabel
+> und weitere <link linkend="subversion-settings"
+>Einstellungen</link
+> nicht verwenden. </para>
+</sect2>
+<sect2>
+<title
+>Passwörter in &kwallet5; speichern</title>
+<para
+>Dieser sichere Passwortspeicher wird von vielen &kde;-Programmen wie &kmail; und &konqueror; verwendet. Wenn Sie Ihr Passwort speichern möchten und meistens &kdesvn; verwenden, sollten Sie ebenfalls &kwallet5; benutzen. Einzelheiten dazu finden Sie im <ulink url="help:/kwallet"
+>Handbuch zu &kwallet5;</ulink
+> </para>
+</sect2>
+<sect2>
+<title
+>Speichern im Passwortspeicher von Subversion</title>
+<para
+>Dies wird nicht empfohlen, da die Passwörter als Klartext gespeichert werden. Sie finden die Passwörter in den Dateien in <filename class="directory"
+>~/.subversion/auth/svn.simple</filename
+>. Sie sollten diese Methode nur verwenden, wenn Sie häufig andere Subversions-Programme als &kdesvn; wie zum Beispiel <application
+>rapidsvn</application
+>, <application
+>esvn</application
+> oder das originale Befehlszeilenprogramm <application
+>svn</application
+> verwenden. Sie sollten das Befehlszeilenprogramm nur für das Auslesen und Aktualisierungen verwenden, die beide kein Passwort erfordern. Zum Einspielen, Kopieren und Verschieben benutzen Sie dann &kdesvn; mit der Speicherung des Passworts in &kwallet5;. </para>
+</sect2>
+<sect2>
+<title
+>Interner Passwort-Zwischenspeicher</title>
+<para
+>Sie können eine internen Passwort-Zwischenspeicher aktivieren, der das Passwort im Speicher behält solange &kdesvn; ausgeführt wird. Daher müssen Sie das Passwort zweimal eingeben, sogar wenn Sie es nicht im Passwortspeicher ablegen. </para>
+</sect2>
+<sect2>
+<title
+>Sonderfall „svn+ssh“</title>
+<para
+>Wenn Sie Subversion mit „svn+ssh“ benutzen, kann das Speichern von Passwörtern mit SSH und ssh-agent erfolgen. Dazu brauchen Sie Zugriff zum entfernten Rechner und dem Repository über SSH. Beim Speichern sollten Sie die Authentifizierung mit dem öffentlichen Schlüssel. Dazu müssen Sie Ihren öffentlichen SSH-Schlüssel auf dem Zielsystem mit dem Repository ablegen. SSH-Passwörter werden nicht vom Subversion-Passwortspeicher, von &kwallet5; oder vom internen  Passwortspeicher behandelt. </para>
+<para
+>Möchten Sie nicht nach dem Passwort für Ihren SSH-Schlüssel gefragt werden, können Sie das Programm <application
+>ssh-agent</application
+> benutzen, indem Sie im Menü <menuchoice
+><guimenu
+>Subversion</guimenu
+> <guimenuitem
+>SSH-Identitäten zum SSH-Agenten hinzufügen</guimenuitem
+></menuchoice
+> auswählen. Dann können Sie Ihr Passwort für den SSH-Schlüssel für Ihre aktuelle Sitzung speichern und werden nicht weiter gefragt, wenn das Passwort benötigt wird. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="kdesvn-kio">
+<title
+>&konqueror;, KIO, &kdesvn;</title>
+<sect1 id="kdesvn-kio-desc">
+<title
+>Beschreibung</title>
+<para
+>Ab Version 0.7.0 von &kdesvn; sind einige Module vorhanden, die einige Befehle direkt in die Menüs von &konqueror; einbinden. <variablelist>
+<varlistentry>
+<term
+>KIO-Protokolle</term>
+<listitem
+><para
+>Implementiert die Verarbeitung folgender Protokolle:</para>
+<itemizedlist>
+<listitem
+><para
+>ksvn+http</para
+></listitem>
+<listitem
+><para
+>ksvn+https</para
+></listitem>
+<listitem
+><para
+>ksvn+file</para
+></listitem>
+<listitem
+><para
+>ksvn+ssh</para
+></listitem>
+<listitem
+><para
+>ksvn</para
+></listitem>
+</itemizedlist>
+
+<para
+>Diese Protokoll wurden für Repositorys, nicht für Arbeitskopien entwickelt. <filename class="directory"
+>ksvn+file:///<replaceable
+>path</replaceable
+></filename
+> zum Beispiel muss auf dem Anfang eines Repositorys zeigen, verschieden in der Anwendung selbst oder in KPart. Arbeitskopien können mit &konqueror; durchgesehen werden. </para>
+<para
+>Um eine bestimmte Revision durchzusehen, können Sie<link linkend="revision-syntax"
+><quote
+>?rev=<replaceable
+>revision</replaceable
+></quote
+></link
+> an die &URL; anhängen. </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Kontextmenüs</term>
+<listitem
+><para
+>&kdesvn; installiert Kontextmenüs für &konqueror;. Sie können durch Klicken mit der &RMBn; auf einen Eintrag, der in &konqueror; im Dateiverwaltungsmodus angezeigt wird, das Kontextmenü öffnen und die meisten Standardaktionen in &konqueror; oder anderen Dateiverwaltungen wie &dolphin; ausführen. Dies wird als direkter Aufruf einer <link linkend="kdesvn-commandline"
+>Befehlszeilenvariante von &kdesvn;</link
+> ausgeführt. </para>
+</listitem>
+</varlistentry>
+</variablelist>
+</para>
+<sect2>
+<title
+>Anwendung der Ein-/Ausgabemodule außerhalb von &konqueror; - ein Beispiel</title>
+<para
+>Jedes Programm, das die Ein-Ausgabemodul-Bibliothek verwendet, kann diese Protokolle benutzen. Daher ist es möglich, mit &kdiff3; alle Unterschiede zwischen zwei Revisionen ohne tiefere Kenntnisse zu erhalten. </para>
+<para>
+<example>
+<title
+>Unterschiede zwischen Revisionen  mit &kdiff3; und KIO::ksvn ermitteln</title>
+<programlisting
+>kdiff3 \
+  ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=423127 \
+  ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=455064
+</programlisting>
+<para
+>&kdiff3; zeigt alle Unterschiede zwischen zwei Revisionen. </para>
+<para>
+<note>
+  <para
+>Verwenden Sie dies innerhalb &kdesvn; (Unterschied zwischen zwei Revisionen) ist erheblich schneller, da die internen Mechanismen von Subversion benutzt werden. </para>
+</note>
+</para>
+</example>
+</para>
+</sect2>
+</sect1>
+<sect1 id="kio-svn-special">
+<title
+>Informationen zu KIO::ksvn für Entwickler</title>
+<note
+><para
+>Sie können diesen Abschnitt überspringen, wenn Sie kein Interesse an der KIO-Programmierung haben.</para
+></note>
+<para
+>KIO::ksvn::special kennt die folgenden Operationen. </para>
+<sect2>
+<title
+>Befehlsliste</title>
+<para>
+<table id="kio-svn-special-commands">
+  <title
+>Befehlsübersicht zu <literal
+>KIO::ksvn::special</literal
+></title>
+<tgroup cols="4">
+
+<thead>
+<row>
+<entry
+>Befehlsname</entry>
+<entry
+>Numerische Kennung</entry>
+<entry
+>Parameterliste</entry>
+<entry
+>In der aktuellen Version implementiert?</entry>
+</row>
+</thead>
+
+<tbody>
+
+<row>
+<entry
+>Auslesen</entry>
+<entry
+>1</entry>
+<entry>
+<para
+>KURL repository, KURL target, int revnumber, QString revkind </para>
+<para
+>Das „target“ wird <emphasis
+>nicht</emphasis
+> verändert, aber &eg; der Inhalt wird ausgelesen, ohne einen Unterordner zu erzeugen. Wenn zum Beispiel als „source“ <filename
+>http://server/repos/project/trunk</filename
+> und als „target“ <filename
+>/home/user/proj/</filename
+> gesetzt ist, wird der Inhalt von trunk in <filename
+>/home/user/proj/</filename
+> kopiert, nicht in <filename
+>/home/user/proj/trunk/</filename
+>. </para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Aktualisieren</entry>
+<entry
+>2</entry>
+<entry
+><para
+>KURL url, int revnum, QString revstring</para>
+<para
+>Ist revnum &lt; 0 dann wird revstring verarbeitet. Das Format von revstring ist im <link linkend="revision-syntax"
+>Anhang</link
+> beschrieben. </para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Einspielen</entry>
+<entry
+>3</entry>
+<entry
+><para
+>KURL::List urls</para>
+<para
+>urls ist eine Liste von lokalen Adressen zum Einspielen. Die Protokoll-Nachricht wird abgefragt.</para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Protokoll</entry>
+<entry
+>4</entry>
+<entry>
+<para
+>int startrevnumber, QString startrevstring, int endrevnumber, QString endrevstring, KURL::List </para>
+<para
+>Vorsicht bei der Anwendung -  dies kann viele Daten produzieren </para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Importieren</entry>
+<entry
+>5</entry>
+<entry
+>KURL targetrepository, KURL sourcepath</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Hinzufügen</entry>
+<entry
+>6</entry>
+<entry
+>KURL</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Entf</entry>
+<entry
+>7</entry>
+<entry
+>KURL::List</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Zurücknehmen</entry>
+<entry
+>8</entry>
+<entry
+><para
+>KURL::List</para>
+<para
+>Zurückzunehmen wird im Ein-/Ausgabemodul immer nicht rekursiv durchgeführt. Dies muss durch die aufrufende Anwendung selbst erfolgen.</para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Status</entry>
+<entry
+>9</entry>
+<entry
+><para
+>KURL item, bool checkRepos, bool recurse</para>
+<para
+>item - Eintrag, über den Informationen geholt werden, checkRepos - überprüft, ob es neuere Versionen im Repository gibt, recurse - Ob rekursiv überprüft werden soll oder nicht..</para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Mkdir</entry>
+<entry
+>10</entry>
+<entry
+>KURL::List</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Auflösen</entry>
+<entry
+>11</entry>
+<entry
+>KURL, bool recursive</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Wechseln</entry>
+<entry
+>12</entry>
+<entry
+>KURL working_copy_path, KURL new_repository_url, bool recursive,int revnumber, QString revkind</entry>
+<entry
+>Ja</entry>
+</row>
+
+<row>
+<entry
+>Diff</entry>
+<entry
+>13</entry>
+<entry>
+<para
+>URL uri1, KURL uri2, int r1, QString rstring1, int r2, QString rstring 2, bool recursive</para>
+<para
+>Für den Unterschied zwischen Repository „file:///“ und der Arbeitskopie richten Sie die URLs der Arbeitskopie ohne Protokoll ein. </para>
+</entry>
+<entry
+>Ja</entry>
+</row>
+</tbody>
+
+</tgroup>
+</table>
+
+</para>
+</sect2>
+<sect2>
+<title
+>Rückgabewerte</title>
+<para
+>Rückgabewerte können über Metadaten angegeben werden, siehe Apidoc für weitere Details. </para>
+<para>
+<table id="kio-ksvn-metadata">
+<title
+>Inhalt der Metadaten</title>
+<tgroup cols="2">
+
+<thead>
+<row>
+<entry
+>Schlüssel</entry>
+<entry
+>Mögliche Werte</entry>
+</row>
+</thead>
+
+<tbody>
+
+<row>
+<entry
+>path</entry>
+<entry
+>Pfad des Eintrags, an dem die Aktion ausgeführt wurde, &eg; die angegebene URL</entry>
+</row>
+
+<row>
+<entry
+>action</entry>
+<entry
+>Numerischer Aktionstyp</entry>
+</row>
+
+<row>
+<entry
+>kind</entry>
+<entry
+>Art des Eintrags (meistens Ordner oder Datei)</entry>
+</row>
+
+<row>
+<entry
+>mime_t</entry>
+<entry
+>MIME-Typ des Eintrags in Subversion</entry>
+</row>
+
+<row>
+<entry
+>content</entry>
+<entry
+>Status des Inhalts (Wert von Subversion)</entry>
+</row>
+
+<row>
+<entry
+>prop</entry>
+<entry
+>Status der Eigenschaft (Wert von Subversion)</entry>
+</row>
+
+<row>
+<entry
+>rev</entry>
+<entry
+>Ergebnis-Revision oder bearbeitete Revision</entry>
+</row>
+
+<row>
+<entry
+>string</entry>
+<entry
+>Intern definierte von Menschen lesbare Nachricht.</entry>
+</row>
+
+<row>
+<entry
+>loggedaction</entry>
+<entry
+>In Subversion definierte Zeichen für Aktionen (A,M,D)</entry>
+</row>
+<row>
+<entry
+>loggedcopyfrompath</entry>
+<entry
+>Wenn kopiert von welchem Pfad? (kann leer sein)</entry>
+</row>
+<row>
+<entry
+>loggedcopyfromrevision</entry>
+<entry
+>Wenn kopiert von welcher Revision? (kann &lt; 0 sein)</entry>
+</row>
+<row>
+<entry
+>loggedpath</entry>
+<entry
+>In welchen einzelnen Pfad die protokollierte Aktion des Eintrags gesetzt ist. Der Pfad wird auf die aufrufende URL gesetzt.</entry>
+</row>
+<row>
+<entry
+>diffresult</entry>
+<entry
+>Eine Zeile mit Ausgabe des Unterschieds</entry>
+</row>
+</tbody>
+
+</tgroup>
+</table>
+
+</para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="kdesvn-commandline">
+<title
+>&kdesvn; auf der Befehlszeile verwenden</title>
+<sect1 id="kdesvn-commandline-overview">
+<title
+>Überblick</title>
+<para
+>Einige Operationen für Subversion können auf der Befehlszeile &eg; wie in einer normalen Konsole eingegeben werden, die Interaktion mit dem Benutzer findet aber über die grafische Oberfläche statt. Die normale Syntax lautet <userinput
+>kdesvn exec <replaceable
+>command</replaceable
+> <replaceable
+>parameter</replaceable
+> <replaceable
+>url</replaceable
+></userinput
+>. </para>
+<para
+>Wenn ein einzige Revision für eine einzige &URL; gewünscht wird, kann sie als Parameter der &URL; angegeben werden: <programlisting
+>svn://your-server/path-to-repository/item?rev=&lt;your-rev&gt;</programlisting
+> Dies überschreibt die Option <option
+>-r &lt;rev&gt;</option
+>. </para>
+<para
+>Eine Revision kann als Zahl, als <option
+>HEAD</option
+>, als <option
+>BASE</option
+> oder als Datumformat wie {YYYY-MM-DD} angegeben werden. </para>
+</sect1>
+<sect1 id="kdesvn-command-list">
+<title
+>Befehlsliste</title>
+<para
+>Wenn in der folgenden Übersicht als möglicher Parameter <option
+>-r <replaceable
+>revision</replaceable
+></option
+> angegeben ist, kann diese Revision als <userinput
+><replaceable
+>url</replaceable
+>?rev=<replaceable
+>the-revision</replaceable
+></userinput
+> angegeben werden. <table id="svn-commands-table">
+<title
+>Subversion-Befehle</title>
+<tgroup cols="3">
+
+<thead>
+<row>
+<entry
+>Befehl</entry>
+<entry
+>Bedeutung</entry>
+<entry
+>Akzeptierte Optionen</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+<entry
+>commit (oder ci)</entry>
+<entry
+>Änderungen an Einträgen ins Repository einspielen</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>log</entry>
+<entry
+>Protokoll des Eintrags ausgeben</entry>
+<entry
+>-r startrevision:endrevision -l limit_display</entry>
+</row>
+<row>
+<entry
+>cat</entry>
+<entry
+>Inhalt eines Eintrags anzeigen</entry>
+<entry
+>-r revision </entry>
+</row>
+<row>
+<entry
+>copy (oder cp)</entry>
+<entry
+>Kopiert Einträge in einer Arbeitskopie oder Repository. Ist das Ziel nicht angegeben, wird es von &kdesvn; abgefragt.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>move (oder mv, rename)</entry>
+<entry
+>Verschieben oder Umbenennen von Einträgen in einer Arbeitskopie oder Repository. Ist das Ziel nicht angegeben, wird es von &kdesvn; abgefragt.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>get</entry>
+<entry
+>Inhalt von Einträgen holen und speichern.</entry>
+<entry
+>-r revision -o &lt;outputfile&gt; (outputfile muss angegeben werden)</entry>
+</row>
+<row>
+<entry
+>blame (oder annotate)</entry>
+<entry
+>Anmerkungen zur Datei</entry>
+<entry
+>-r startrevision:endrevision</entry>
+</row>
+<row>
+<entry
+>update</entry>
+<entry
+>Eintrag in Arbeitskopie aktualisieren</entry>
+<entry
+>-r revision</entry>
+</row>
+<row>
+<entry
+>diff</entry>
+<entry
+>Unterschied zweier Revisionen eines Eintrags oder der Unterschied zweier Einträge von angegebenen Revisionen</entry>
+<entry
+>-r startrev:endrev</entry>
+</row>
+<row>
+<entry
+>info</entry>
+<entry
+>Detaillierte Informationen über den Eintrag</entry>
+<entry
+>-r revision</entry>
+</row>
+<row>
+<entry
+>checkout (oder co)</entry>
+<entry
+>Auslesen eines Repository-Pfads in einen Pfad zu einer neuen Arbeitskopie. Der Zielpfad und die Quell-Revision werden abgefragt.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>checkoutto (oder coto)</entry>
+<entry
+>Auslesen eines Repository-Pfads in einen Pfad zu einer neuen Arbeitskopie. Der Unterschied zwischen dem Quell-Pfad und der Quell-Revision wird abgefragt.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>export</entry>
+<entry
+>Export eines Repository-Pfads oder eines Pfad einer Arbeitskopie in einen Ordner. Der Zielpfad und die Quell-Revision werden abgefragt.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>exportto</entry>
+<entry
+>Export eines Repository-Pfads oder eines Pfad einer Arbeitskopie in einen Ordner. Der Quell-Pfad und die Quell-Revision werden abgefragt.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>delete (del, remove, rm)</entry>
+<entry
+>Löscht URL(s) aus dem Archiv oder der Arbeitskopie.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>add</entry>
+<entry
+>Fügt die &URL; zur Arbeitskopie hinzu. Die &URL; muss zu einer Arbeitskopie gehören, kein Import</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>revert (oder undo)</entry>
+<entry
+>Nimmt aktuelle Änderungen an der Arbeitskopie zurück. Kann nur mit URLs für Arbeitskopien benutzt werden</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>checknew (oder addnew)</entry>
+<entry
+>Überprüft die angegebene &URL; auf neue, nicht versionierte Einträge und fügt sie gegeben falls zur Arbeitskopie hinzu.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>tree</entry>
+<entry
+>Zeigt den Revisionsbaum der Einträge (nur das erste Argument). Wird die &URL; mit <quote
+>?rev=<replaceable
+>xxx</replaceable
+></quote
+> angegeben, wird diese Revision angezeigt.</entry>
+<entry
+>-r startrev:endrev</entry>
+</row>
+<row>
+<entry
+>lock</entry>
+<entry
+>Sperrt Url(s), wenn die Option <option
+>-f</option
+> angegeben ist, werden vorhandene Sperren aufgehoben.</entry>
+<entry
+>-f</entry>
+</row>
+<row>
+<entry
+>unlock</entry>
+<entry
+>Entsperrt Url(s), wenn die Option <option
+>-f</option
+> ist, dann werden auch fremde Sperren aufgehoben oder nicht vorhandene Sperren werden ignoriert.</entry>
+<entry
+>-f</entry>
+</row>
+<row>
+<entry
+>help</entry>
+<entry
+>Zeigt diese Seite an</entry>
+<entry
+></entry>
+</row>
+</tbody>
+</tgroup>
+
+</table>
+
+<table id="parameter-list">
+<title
+>Parameter für Subversion-Befehle</title>
+<tgroup cols="3">
+<thead>
+<row>
+<entry
+>Parameter</entry>
+<entry
+>Mögliche Werte</entry>
+<entry
+>erlaubt für</entry>
+</row>
+</thead>
+<tbody>
+<row>
+  <entry
+><option
+>-r</option
+></entry>
+<entry
+><replaceable
+>revision</replaceable
+> oder <replaceable
+>startrev:endrev</replaceable
+></entry>
+<entry
+>alle außer Einspielung</entry>
+</row>
+<row>
+  <entry
+><option
+>-R</option
+></entry>
+<entry
+>(keine)</entry>
+<entry
+>alle außer Einspielung</entry>
+</row>
+<row>
+<entry
+><option
+>-o</option
+></entry>
+<entry
+><replaceable
+>dateiname</replaceable
+></entry>
+<entry
+>get</entry>
+</row>
+<row>
+<entry
+><option
+>-l</option
+></entry>
+<entry
+><replaceable
+>Zahl</replaceable
+></entry>
+<entry
+>log</entry>
+</row>
+<row>
+<entry
+><option
+>-f</option
+></entry>
+<entry
+>(keine)</entry>
+<entry
+>(Ent)Sperren</entry>
+</row>
+
+</tbody>
+</tgroup>
+</table>
+
+</para>
+<sect2>
+  <title
+>Der Befehl <quote
+>log</quote
+></title>
+<para
+>Der Befehl „log“ zeigt einen Dialog mit dem Protokoll zu der angegebenen &URL;. Mit Subversion 1.2 oder neuer kann ein Grenzwert angegeben werden, &ie; wie viele Einträge angezeigt werden sollen. </para>
+<para
+>In diesem Dialog können Sie Protokolleinträge auswählen und sich die Unterschiede dazwischen anzeigen lassen. <example>
+<title
+>Die letzten 20 Einspiel-Protokolle anzeigen</title>
+<programlisting
+>kdesvn exec log -l 20 -r HEAD&#058;1 myfile.c
+</programlisting>
+<para
+>Beachten Sie die Reihenfolge der Revision: Sie möchten von HEAD zu START für die letzten Einträge. Daher müssen Sie HEAD als Startpunkt angeben, ansonsten würden Sie die ersten 20 Einträge erhalten.</para>
+</example>
+</para>
+</sect2>
+<sect2>
+  <title
+>Der Befehl <quote
+>diff</quote
+></title>
+<para
+>Sie erhalten die Unterschiede zwischen Revisionen für einen Eintrag oder zwischen zwei Einträgen in derselben Arbeitskopie oder demselben Repository. Beim Abfragen des Unterschieds für einen Eintrag sollten die Revisionen als <option
+>-r <replaceable
+>STARTREV</replaceable
+>:<replaceable
+>ENDREV</replaceable
+></option
+> angegeben werden. Beim Abfragen des Unterschieds für einen Eintrag in einer Arbeitskopie ohne Angabe von Revisionen wird der Unterschied zum Repository ausgegeben. <example>
+<title
+>Gibt die Unterschiede zum Repository &ie; lokale Änderungen aus</title>
+<programlisting
+>kdesvn exec diff myfile.c
+</programlisting>
+</example>
+<example>
+<title
+>Unterschied zwischen Revisionen ausgeben</title>
+<programlisting
+>kdesvn exec diff -r 21:20 myfile.c
+</programlisting>
+</example>
+</para>
+<para
+>Bei der Anzeige von Unterschieden zwischen den Revisionen zweier Einträge kann zur &URL; der Einträge angefügt werden, &eg;: <programlisting
+>http://server/path/item?rev=HEAD</programlisting>
+<example>
+<title
+>Unterschied zwischen markierten Versionen</title>
+<programlisting
+>kdesvn exec diff http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_2 http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_3
+</programlisting>
+</example>
+</para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="setup">
+<title
+>Einstellungen</title>
+<para
+>Einstellungen können im Einrichtungsdialog geändert werden. Der Dialog besteht aus mehreren Seiten. </para>
+<sect1 id="general-settings">
+<title
+>Allgemein</title>
+<para>
+<informaltable id="General-setup-items">
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+>Größe der Symbole in der Listenansicht</entry>
+<entry
+>Die Größe der Symbole in der Hauptlistenansicht </entry>
+</row>
+<row>
+<entry
+>Datei-Infos anzeigen</entry>
+<entry
+>Ob Kurzinfos beim Überfahren eines Eintrags mit dem Mauszeiger angezeigt werden</entry>
+</row>
+<row>
+<entry
+>Eintragsstatus mit überlagerten Symbolen markieren</entry>
+<entry
+>Wenn ein Eintrag nicht im normalen zustand von Subversion ist, kann ein Symbol eingeblendet werden. Siehe <xref linkend="overlay-meaning"/>.</entry>
+</row>
+<row>
+<entry
+>Sortierreihenfolge beachtet Groß-/Kleinschreibung</entry>
+<entry
+>Ob beim Sortieren im Hauptfenster die Groß- und Kleinschreibung berücksichtigt wird, &ie; ob <quote
+>a</quote
+> gleich <quote
+>A</quote
+> ist.</entry>
+</row>
+<row>
+<entry
+>Ignorierte Dateien anzeigen</entry>
+<entry
+>Einträge anzeigen, die in Subversion als ignoriert markiert sind.</entry>
+</row>
+<row>
+<entry
+>Maximale Anzahl der Protokoll-Meldungen im Verlauf</entry>
+<entry
+>Anzahl der Protokollnachrichten, die in &kdesvn; behalten werden.</entry>
+</row>
+<row>
+<entry
+>Farbige Anmerkungen anzeigen</entry>
+<entry
+>Verwendet die Farben für Anmerkungen, die im Einrichtungsdialog eingestellt wurden.</entry>
+</row>
+<row>
+<entry
+>Navigations-Bereich anzeigen</entry>
+<entry
+>Schaltet die Anzeige der Baumansicht des Repository ein und aus.</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</para>
+</sect1>
+
+<sect1 id="subversion-timedjobs-settings">
+<title
+>Einstellungen für Subversion und zeitgesteuerte Aufgaben</title>
+
+<table id="subversion-settings">
+<title
+>Subversion</title>
+<tgroup cols="2">
+
+<tbody>
+
+<row>
+<entry
+>Update-Überprüfung beim Öffnen einer Arbeitskopie starten</entry>
+<entry
+>Beim Öffnen einer Arbeitskopie wird eine Überprüfung auf Aktualisierungen im Hintergrund gestartet</entry>
+</row>
+<row>
+<entry
+>Log-Zwischenspeicher nach dem Öffnen füllen</entry>
+<entry
+>Ist dies aktiv, startet &kdesvn; das Füllen des Protokoll-Zwischenspeichers, wenn ein Repository oder eine Arbeitskopie geöffnet wird und die Repository-&URL; nicht lokal zugewiesen ist (<filename class="directory"
+>file://</filename
+>)</entry>
+</row>
+<row>
+  <entry
+>Prüfen ob Eintrag die Eigenschaft <quote
+>svn::needs-lock</quote
+> gesetzt hat</entry>
+<entry
+>Prüft in Arbeitskopien, ob ein Eintrag diese Eigenschaft hat. Wenn ja, wird ein besonderes Symbol angezeigt. Mit dieser Einstellung kann das Auflisten sehr langsam werden.</entry>
+</row>
+<row>
+<entry
+>Details bei Fernabfragen holen</entry>
+<entry
+>Wenn aktiviert, holt &kdesvn; detailliertere Informationen über Dateieinträge, wenn es eine Liste in entfernten Repositorys erstellt. So können Sie Sperren in der Übersicht erkennen. Seien Sie vorsichtig: Dies kann Listen sehr langsam werden lassen.</entry>
+</row>
+
+<row>
+<entry
+>Eintragsinformationen rekursiv holen</entry>
+<entry
+>Ist dies aktiviert, wird der Befehl <command
+>info</command
+> für Ordner Informationen über alle untergeordneten Einträge anzeigen, auch wenn das langsam ist.</entry>
+</row>
+
+<row>
+<entry
+>Passwörter für entfernte Verbindungen speichern</entry>
+<entry
+>Das Speichern von Passwörtern ist oft ein Sicherheitsproblem. Subversion speichert sein Passwörter in einer einfachen Datei. Seien Sie also vorsichtig bei dieser Einstellung und lesen Sie auch den nächsten Eintrag. Wenn Passwörter in der Voreinstellung gespeichert werden, können Sie dies für besondere Anforderungen eines Anmeldungsdialogs ändern.</entry>
+</row>
+
+<row>
+<entry
+>Passwörter in der KDE-Passwortverwaltung speichern</entry>
+<entry
+>Beim Speichern von Passwörter ist die Klartextdatei von Subversion ein Sicherheitsrisiko. &kdesvn; kann seit Version 0.12.0 Passwörter stattdessen im verschlüsselten &kde;-Passwortspeicher ablegen und diesen zu verwenden. Andererseits können andere Subversion-Programme benutzt werden, die den Passwortspeicher nicht lesen können. Daher müssen Sie in diesen Fällen die Passwörter wieder eingeben, wenn Sie Programme wie <application
+>svn</application
+> oder <application
+>rapidsvn</application
+> benutzen. Solange Subversion Passwörter nicht verschlüsselt speichert, sollten Sie hier vorsichtig sein.</entry>
+</row>
+
+<row>
+<entry
+>Internen Passwort-Zwischenspeicher verwenden</entry>
+<entry
+>Wenn ein Passwort nicht dauerhaft gesperrt ist, kann &kdesvn; das Passwort bis zum Ende des Programms im Speicher halten. Dann müssen Sie es nicht wieder für jede einzelne Operation neu eingeben. Dieser Zwischenspeicher ist nie dauerhaft, &ie; das Passwort wird nirgends gespeichert.</entry>
+</row>
+
+<row>
+<entry
+>Protokolle folgen Knotenänderungen</entry>
+<entry
+>Ist dies aktiviert, folgen die Protokolle Kopier-Operationen.</entry>
+</row>
+
+<row>
+<entry
+>Protokolle lesen immer die Liste der geänderten Einträge</entry>
+<entry
+>Mit dem Befehl „log“ können Sie eine Liste geänderter Dateien in Einspielungen lesen. Dies ist nützlich und n den meisten Fällen wird nicht wirklich viel mehr Netzwerkverkehr erzeugt.</entry>
+</row>
+
+<row>
+<entry
+>Einträge vor dem Einspielen überprüfen</entry>
+<entry
+>Beim Einspielen überprüft &kdesvn; was ausgeführt werden muss. Wenn sich zum Beispiel nicht versionierte Einträge unterhalb dieses Elements befinden, die hinzugefügt werden sollen, werden die Einträge in der Liste geändert und mit der aktuellen Operation eingespielt. Abhängig vom Revisionsbaum kann dies mehr oder weniger aufwändig sein.</entry>
+</row>
+
+<row>
+<entry
+>Neue Einträge in Übertragungsdialog ausblenden</entry>
+<entry
+>Sollen nicht versionierte Einträge im Übertragungsdialog angezeigt werden oder nicht.</entry>
+</row>
+
+<row>
+<entry
+>Aktualisieren führt zu Änderung anstatt von Konflikten</entry>
+<entry
+>Ist dies aktiviert, führt das lokale Hinzufügen im gleichen Pfad wie eine eingehende Hinzufügen der gleichen Knotenart zu einem normalen Knoten mit einer möglichen lokalen Änderung, anstatt zu einem Baumkonflikt.</entry>
+</row>
+
+<row>
+<entry
+>Aktualisierung erstellt fehlende übergeordnete Einträge</entry>
+<entry
+>Ist dies aktiviert, werden auch mit der Option „depth=empty“ alle nicht vorhandenen übergeordneten Ordner beim Auslesen erstellt</entry>
+</row>
+
+</tbody>
+
+</tgroup>
+</table>
+
+<table id="timejobs-settings">
+<title
+>Zeitlich festgelegte Aufträge</title>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+><para
+>Auf bearbeitete Einträge prüfen alle N Sekunden</para
+> <para
+>Auf aktualisierte Einträge prüfen alle N Sekunden</para
+></entry>
+<entry
+>Falls gesetzt, wird regelmäßig auf Aktualisierungen oder Änderungen in der Arbeitskopie geprüft, falls das Netzwerk aktiviert wurde</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="diffmerge-settings">
+<title
+>Vergleich &amp; Zusammenführen</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>Diff ignoriert den Inhaltstyp</term>
+<listitem
+><para
+>Nur wichtig, wenn der Unterschied mit Subversion selbst erstellt wird. Ist dies aktiviert, dann ignoriert Subversion beim Unterschied den Inhaltstyp von Einträgen. Ansonsten werden keine Unterschiede von binären Dateien erstellt. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Diff im Revisionsbaum ist rekursiv</term>
+<listitem
+><para
+>Ist dies aktiviert, werden Unterschiede in der Ansicht des Revisionsbaums rekursiv wie in allen anderen Fällen auch durchgeführt. Ansonsten werden nur Änderungen an Einträgen in diesem Ordner angezeigt. Abhängig von Ihren Einstellungen wird der Unterschied mit Subversion selbst oder mit externen Programmen erzeugt. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Diff ignoriert Änderungen der Leerzeichen</term>
+<listitem>
+<para
+>Ignoriert Änderungen bei der Anzahl von Leerzeichen (Einstellung <option
+>-b</option
+> für <application
+>diff</application
+>) </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Diff ignoriert alle Leerzeichen</term>
+<listitem>
+  <para
+>Ignoriert alle Leerzeichen (Option <option
+>-w</option
+> für diff)</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Externes Zusammenführen bevorzugen</term>
+<listitem>
+<para
+>Dies sollte gesetzt werden, falls das Zusammenführen mit einem externen Programm bevorzugt wird und nicht durch Subversion ausgeführt werden soll</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>diff-Format von Git verwenden</term>
+<listitem>
+<para
+></para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Kopien als hinzugefügt anzeigen</term>
+<listitem>
+<para
+></para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+<sect2>
+<title
+>Externe Diff-Anzeige verwenden</title>
+<para
+>Wählt eine externe Anwendung zur Anzeige von Unterschieden. Voreinstellung ist &kompare;. </para>
+</sect2>
+<sect2>
+<title
+>Externe Diff-Anzeige</title>
+<para
+>Definiert, welches Programm &kdesvn; für die externe Anzeige von Unterschieden benutzt und wie das Programm aufgerufen wird. Es gibt hier drei Möglichkeiten: </para>
+<para>
+<variablelist>
+<varlistentry>
+<term
+>&lt;program&gt; &lt;parameter&gt;</term>
+<listitem
+><para
+>Der Unterschied wird mit Subversion generiert und direkt in die Standardeingabe des externen Programms geleitet, &ie; es werden keine temporären Dateien gebraucht. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>&lt;program&gt; &lt;parameter&gt; %f</term>
+<listitem
+><para
+>Der Unterschied wird mit Subversion generiert und in eine temporäre Datei gespeichert. Der Parameter <option
+>%f</option
+> wird durch den Dateinamen ersetzt. Dies kann zum Beispiel in einem einfachen Aufruf von <application
+>less</application
+> oder einem Textbetrachter benutzt werden. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>&lt;program&gt; &lt;parameter&gt; %1 %2</term>
+<listitem
+><para
+>&kdesvn; benutzt das externe Programm für die Generierung des Unterschieds. %1 und %2 wird mit den erforderlichen Werten, Dateinamen oder Ordnernamen, ersetzt. &kdesvn; speichert den Inhalt zum Vergleichen in einer temporären Umgebung (bei Ordnern wird ein <quote
+>export</quote
+>, bei einer einzelnen Datei wird ein <quote
+>cat</quote
+> ausgeführt), wenn erforderlich und räumt nach dem Schließen des externen Programms oder dem eigenen Schließen auf. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Externes Zusammenführen bevorzugen</term>
+<listitem
+><para
+>Aktivieren Sie dies, wenn im Dialog zum Zusammenführen als Voreinstellung <guilabel
+>Externes Zusammenführen verwenden</guilabel
+> angekreuzt sein soll.</para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect2>
+<sect2>
+<title
+>Externes Programm zum Zusammenführen</title>
+<para
+>Einstellungen des Programms und der Optionen, wenn das Interne Zusammenführen von Subversion nicht verwendet wird. Die Voreinstellung ist <command
+>kdiff3 %s1 %s2 %t</command
+>. Die Reihenfolge der ersetzen Variablen ist unwichtig und Variablen können auch mehrfach verwendet werden, &eg; wie <literal
+>kdiff3 -o %t %s1 %s2 %t</literal
+>. Diese Funktion wurde nur mit <application
+>meld</application
+> und &kdiff3; getestet. Bedenken Sie, dass externe Programme nichts über den Parameter <command
+>ignore</command
+> von Subversion wissen, so dass dann viel mehr als erwartet angezeigt wird. </para>
+<sect3>
+<title
+>Variablenersetzung für externe Programme zum Zusammenführen</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>%s1</term>
+<listitem
+><para
+>Wird durch die Quelle Nummer 1 ersetzt. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>%s2</term>
+<listitem
+><para
+>Wird durch die Quelle Nummer 2 ersetzt. Wenn dies leer ist oder dies wie die Quelle Nummer 1 ist und Start- und Endrevision gleich sind, wird diese Variable ausgelassen. Seien Sie daher vorsichtig bei Befehlen wie <command
+>xxdiff --title1 %s1 --title2 %s2 %s1 %s2 %t</command
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>%t</term>
+<listitem
+><para
+>Ersetzt durch das Ziel. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect3>
+</sect2>
+<sect2 id="extern-resolve-setup">
+<title
+>Programm zur Konfliktlösung</title>
+<para
+>Sie können ein externes Programm wie &kdiff3; zur Auflösung von Konflikten benutzen, der Standard Befehl lautet <command
+>kdiff3 %o %m %n -o %t</command
+>. </para>
+<sect3>
+<title
+>Variablenersetzung für externe Programme zur Konfliktlösung</title>
+<para
+>In Klammern wird nach jeder Beschreibung ein Beispiel genannt, wie die Dateien in Subversion genannt werden. Diese Optionen wurden für &kdiff3; entwickelt, weil es zurzeit das einzige Programm ist, das alle Parameter unterstützt, die für eine erfolgreiche Konfliktlösung erforderlich ist. <variablelist>
+<varlistentry>
+<term
+>%o oder %l</term>
+<listitem
+><para
+>Alte (lokale, linke) Version. Dies bedeutet die niedriger Revisionsnummer, &ie; den Startpunkt von Änderungen im Konflikt. (<filename
+>foo.cc.r2</filename
+>) </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%m oder %w</term>
+<listitem
+><para
+>Meine (Arbeits-)Version der datei, &ie; was Sie gegenüber der alten Version geändert haben. (<filename
+>foo.cc.mine</filename
+>) </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%n oder %r</term>
+<listitem
+><para
+>Neue (entfernte, rechte) Version der Datei. Zum Beispiel die Version, die jemand anders erstellt hat. (<filename
+>foo.cc.r3</filename
+>) </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%t</term>
+<listitem
+><para
+>Zielname, &eg; der ursprüngliche Name. Für &kdiff3; zum Beispiel ist dies der Name nach dem Parameter <option
+>-o</option
+> (=Ausgabedatei), <filename
+>foo.cc</filename
+>. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect3>
+</sect2>
+</sect1>
+<!--FIXME
+Colors
+
+Revisions tree
+-->
+<sect1 id="kio-cmdline-settings">
+<title
+>KIO / Befehlszeile</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>Nach dem Ausführen eines Befehls Protokoll anzeigen</term>
+<listitem
+><para
+>Öffnet einen Dialog mit dem Protokoll des letzten Subversions-Befehls, wenn er über die Befehlszeile oder aus dem Aktionsmenü von &konqueror; ausgeführt wird. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Minimale Anzahl anzuzeigender Protokoll-Zeilen</term>
+<listitem
+><para
+>Wenn <guilabel
+>Protokoll anzeigen ...</guilabel
+> eingestellt ist, ist dies die Mindestanzahl an Zeilen, ehe der Dialog angezeigt wird. Sie sollten dies so einstellen, dass das Fenster nur dann angezeigt wird, wenn eine interessante Ausgabe generiert wurde wie zum Beispiel ein Protokoll vom Einspielen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Kein Kontextmenü in der KDE-Dateiverwaltung anzeigen;</term>
+<listitem
+><para
+>Ist dies aktiviert, wird kein Menüeintrag für &kdesvn; in &konqueror; angezeigt.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Keine Einträge im obersten "Aktionen"-Kontextmenü anzeigen</term>
+<listitem
+><para
+>Falls gesetzt, wird kdesvn kein Menü innerhalb des <guimenuitem
+>Aktionen</guimenuitem
+>-Menüs von &konqueror; oder &dolphin; anzeigen.;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>KIO-Operationen verwenden eine Standard-Protokoll-Meldung</term>
+<listitem
+><para
+>Wenn Operationen für ein Repository mit dem &kdesvn;-KIO-Protokoll von &konqueror; aus (&ie;, <quote
+>ksvn+...</quote
+> -Protokoll) ausgeführt werden, würde &kdesvn; bei großen Operationen wie Kopieren oder Verschieben von Ordnern nach einer Protokollmeldung für jeden einzelnen Eintrag fragen. Dies ist das Verhalten von &konqueror;. Ist diese Einstellung aktiv, wird die KIO-Implementation von &kdesvn; eine Standard-Protokollmeldung benutzen. Diese Einstellung wird nicht für Operationen aus dem &kdesvn;-Aktionsmenü für &konqueror; benutzt, aber nur für copy/move/mkdir/delete ausgeführt mit &konqueror; oder anderen Dateiverwaltungen an einer KIO-url. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Standardmeldung</term>
+<listitem
+><para
+>Die Meldung, die das &kdesvn;-Ein-/Ausgabemodul bei Aktionen von &konqueror; aus verwendet, wenn die oben genannte Einstellung aktiviert ist. Die Voreinstellung ist <guilabel
+>Revision made with &kdesvn; KIO</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Ein-/Ausgabemodul kann überschreiben</term>
+<listitem
+><para
+>Falls dies aktiviert ist, haben Sie eine einfache Schreibunterstützung für bestehende Eintrage. Sie können &eg;, Dateien im Editor öffnen und direkt ohne vorheriges Auslesen speichern (&kdesvn; macht dies im Hintergrund).</para>
+<para
+>Nutzen Sie das nur wenn Sie sich sicher sind, welche Auswirkungen die Aktionen haben </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Ein-/Ausgabemodul zeigt Fortschrittsmeldungen an</term>
+<listitem
+><para
+>Ist dies aktiviert, werden ausführliche Nachrichten des Ein-/Ausgabemodul über den aktuellen Vorgang in den Plasma-Benachrichtigungen angezeigt. Fehlermeldungen des Ein-/Ausgabemoduls werden immer angezeigt und können <emphasis
+>nicht</emphasis
+> abgeschaltet werden. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect1>
+</chapter>
+
+<chapter id="commands">
+<title
+>Befehlsreferenz</title>
+
+<sect1 id="kdesvn-mainwindow">
+<title
+>Das Hauptfenster von &kdesvn;</title>
+
+<sect2>
+<title
+>Das Menü Datei</title>
+<para>
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Öffnen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Öffnet eine lokale Arbeitskopie oder ein vorher geladenes Repository.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Datei</guimenu
+> <guimenuitem
+>Zuletzt geöffnete URLs</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>In diesem Untermenü finden Sie die zuletzt geöffneten Repository oder lokalen Arbeitskopien. Klicken Sie auf einen Eintrag in der Liste, um ihn in &kdesvn; zuz laden..  </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Neu</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Öffnet ein Fenster mit einer neuen Instanz von &kdesvn;</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Datei</guimenu
+> <guimenuitem
+>Subversion-Admin</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Menüeinträge mit Verwaltungsaufgaben für ein Subversion-Repository wie:<simplelist
+> <member
+>Neues Repository erstellen oder öffnen</member
+> <member
+>Repository in eine Datei archivieren</member
+> <member
+>Hotcopy eines Repositorys</member
+> <member
+>Abzug in ein Repository laden</member
+> </simplelist
+> Weitere Informationen finden Sie in der Ausgabe von <command
+>svnadmin --help</command
+> </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Schließen</guimenuitem
+> </menuchoice>
+</term>
+<listitem
+><para
+><action
+>Schließt</action
+> das gerade geöffnete Repository oder die Arbeitskopie</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datei</guimenu
+> <guimenuitem
+>Beenden</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Beendet</action
+> &kdesvn;</para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect2>
+<sect2>
+<title
+>Das Menü Lesezeichen</title>
+<para
+>Informationen dazu finden Sie im <ulink url="help:/konqueror/bookmarks.html"
+>Handbuch zu &konqueror;</ulink
+>. </para>
+</sect2>
+
+<sect2 id="kdesvn-subversion-menu">
+<title
+>Das Menü Subversion</title>
+
+<variablelist id="subversion-general">
+<title
+>Allgemeine Aktionen für Subversion</title>
+<varlistentry>
+<term>
+<menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guimenuitem
+>Verlauf des Eintrags</guimenuitem
+> </menuchoice
+></term>
+<listitem>
+<para
+><action
+>Zeigt</action
+> das Protokoll des Verlaufs für den gerade ausgewählten Eintrag. Dies kann eine lange Liste werden.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; &Shift;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guimenuitem
+>Verlauf des Eintrags ohne Kopien</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Zeigt den Verlauf des ausgewählten Eintrages ohne Kopien zu folgen.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>I</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guimenuitem
+>Details</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Zeigt ausführliche Informationen über die ausgewählten Einträge an</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guimenuitem
+>Blame</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Eine Liste der Anmerkungen für alle Einspielungen, Dies kann viel Zeit benötigen.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guimenuitem
+>Blame für Bereich</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Anmerkungen für einen Bereich von Einspielungen für eine Datei.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guimenuitem
+>HEAD ausgeben</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Zeigt den Inhalt der letzten eingespielten Version des Eintrags, Dies kann sich von der aktuell bearbeiteten Arbeitskopie unterscheiden.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>F2</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guimenuitem
+>Verschieben</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Eintrag in einer Arbeitskopie oder in einem Repository verschieben oder Umbenennen</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guimenuitem
+>Kopieren</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Kopiert einen Eintrag in einer Arbeitskopie oder einem Repository</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Entf</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guimenuitem
+>Ausgewählte Dateien/Ordner löschen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Löscht ausgewählte Einträge. Arbeiten Sie in einer Arbeitskopie, müssen Sie das Löschen hinterher einspielen.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guimenuitem
+>Neuer Ordner</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Erstellt einen neuen Ordner.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guimenuitem
+>Ordner in aktuellen Ordner importieren</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Auswahl von Ordnern, die Sie in den aktuell ausgewählten Ordner importieren möchten.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guimenuitem
+>Auslesen eines Repositorys</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Erstellt eine neue Arbeitskopie eines Repositorys</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guimenuitem
+>Repository exportieren</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Exportiert ein Repository in ein Dateisystem, &ie; erstellt einen aufgeräumten Revisionsbaum ohne Subversion-Informationen. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guimenuitem
+>Aktuelle Einträge sperren</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Markiert den aktuellen Eintrag als gesperrt. Lesen Sie das Handbuch zu Subversion, ehe Sie diese Funktion benutzen. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Allgemein</guisubmenu
+> <guimenuitem
+>Aktuelle Einträge entsperren</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Entfernt Sperren von aktuellen Einträgen. Lesen Sie das Handbuch zu Subversion, ehe Sie diese Funktion benutzen. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-workingcopy">
+<title
+>Arbeitskopie</title>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guimenuitem
+>Auf HEAD-Revision aktualisieren</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Aktualisiert die Arbeitskopie auf die neueste Version (HEAD) des Repositorys</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guimenuitem
+>Auf Revision aktualisieren ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Aktualisiert die Arbeitskopie auf eine bestimmte Version des Repositorys</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>#</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guimenuitem
+>Einspielen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Spielt Änderungen in der Arbeitskopie für ausgewählte Einträge in das Repository ein.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guimenuitem
+>Lokale Änderungen anzeigen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Zeigt die lokalen Änderungen als Diff-Ausgabe ohne Netzwerkzugriff. Dies ist nur der Unterschied zum letzten aktualisierten Stand der Arbeitskopie, nicht zur Version im Repository.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guimenuitem
+>Unterschied zu HEAD</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Zeigt die Unterschiede der Arbeitskopie zu HEAD im Repository.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guimenuitem
+>Eigenschaften</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Anzeige und Bearbeitung der Eigenschaften des aktuellen Eintrags.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Einfg</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guimenuitem
+>Ausgewählte Dateien/Ordner hinzufügen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Fügt die ausgewählten Dateien oder Ordner zur Versionskontrolle hinzu.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guimenuitem
+>Aktuelle Änderungen zurücknehmen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Nimmt alle Änderungen in der Arbeitskopie zurück und stellt den letzten aktualisierten Stand wieder her.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guimenuitem
+>Als gelöst markieren</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Entfernt die Konflikt-Markierung von Einträgen und ebenfalls die zugehörigen Dateien.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guimenuitem
+>Zwei Revisionen zusammenführen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Führt zwei Versionen von Einträgen in die Arbeitskopie zusammen.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guimenuitem
+>Aktuelle Einträge ignorieren/nicht ignorieren</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Bearbeitet die Eigenschaft des übergeordneten Ordners des aktuellen Eintrags, so dass der ausgewählte Eintrag als ignoriert markiert wird, wenn dies noch nicht gesetzt war. Ansonsten wird eine vorhandene Markierung zum Ignorieren entfernt.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guimenuitem
+>Aufräumen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Räumt die Arbeitskopie auf und entfernt eventuell vorhanden Sperren.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Arbeitskopie</guisubmenu
+> <guimenuitem
+>Repository wechseln</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Wechselt die Basis der aktuellen Arbeitskopie.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-repository">
+<title
+>Repository</title>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Repository</guisubmenu
+> <guimenuitem
+>Aktuellen Repository-Pfad auslesen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Erstellt eine Arbeitskopie aus dem aktuell ausgewählten Eintrag, wenn es sich um einen Ordner handelt.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Repository</guisubmenu
+> <guimenuitem
+>Aktuellen Repository-Pfad exportieren</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Erstellt eine aufgeräumte Arbeitskopie auf dem lokalen Dateisystem aus dem aktuell ausgewählten Eintrag, wenn es sich um einen Ordner handelt.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-view">
+<title
+>Ansichtsaktionen</title>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>F5</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Ansicht</guisubmenu
+> <guimenuitem
+>Ansicht aktualisieren</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Aktualisiert</action
+> den aktuellen Status aller angezeigten Einträge. Dies zeigt für jeden angefragten Eintrag den aktuellen Status an. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Ansicht</guisubmenu
+> <guimenuitem
+>Dateibaum ausklappen / Dateibaum einklappen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Baumansicht des Repository ein- bzw. ausklappen </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Protokoll-Zwischenspeicher</guisubmenu
+> <guimenuitem
+>Aktualisierung des Protokoll-Zwischenspeichers abbrechen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Das Protokoll wird zwischengespeichert und zur Anzeige des Revisionsbaums eines Repository benutzt. Abhängig von der Internetverbindung, der Größe des Subversion-Repository, und der Größe des Verlaufs kann diese Aktion länger dauern. Daher können Sie mit dieser Aktion die Aktualisierung abbrechen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guimenuitem
+>SSH-Identitäten zum SSH-Agenten hinzufügen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Speichert Ihr Passwort für den SSH-Schlüssel für die aktuelle Sitzung, dann müssen Sie Ihr Passwort nicht dauernd eingeben. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="kdesvn-database-menu">
+<title
+>Das Menü Datenbank</title>
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Datenbank</guimenu
+><guimenuitem
+>Inhalt der Datenbank anzeigen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Zeigt eine Übersicht des zwischengespeicherten Inhalt der Datenbank für bekannte Repository. Der Zwischenspeicher oder das Repository können gelöscht und die Einstellungen eines Repository können geändert werden. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Datenbank</guimenu
+><guimenuitem
+>Einstellungen für das aktuelle Repository</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Zeigt einen Dialog mit Einstellungen für den Zwischenspeicher, Protokolle und Statistiken. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Die Menüs Einstellungen und Hilfe</title>
+<para
+>Außer den bekannten &kde;-Menüeinträge <guimenu
+>Einstellungen</guimenu
+> und <guimenu
+>Hilfe</guimenu
+>, die in den Abschnitten zu den Menüs <ulink url="help:/fundamentals/menus.html#menus-settings"
+>Einstellungen</ulink
+> und <ulink url="help:/fundamentals/menus.html#menus-help"
+>Hilfe</ulink
+> in den &kde;-Grundlagen beschrieben werden, gibt es für &kdesvn; noch einen zusätzlichen Eintrag:</para>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Einstellungen</guimenu
+> <guimenuitem
+>Schnelleinstellungen</guimenuitem
+> </menuchoice
+></term>
+<listitem>
+
+<variablelist>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Zuletzt geöffnete URL beim Starten öffnen</guimenuitem>
+</term
+><listitem>
+<para
+>Zuletzt geöffnete URL erneut laden, wenn keine andere auf der Befehlszeile angegeben wurde..</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Protokolle folgen Knotenänderungen</guimenuitem>
+</term
+><listitem>
+<para
+><!--FIXME What does this option do? --></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Ignorierte Dateien anzeigen</guimenuitem>
+</term
+><listitem>
+<para
+>Zeigt Einträge, die in Subversion als ignoriert markiert sind.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Unbekannte Dateien anzeigen</guimenuitem>
+</term
+><listitem>
+<para
+>Dateien anzeigen, die nicht zum Subversion-Archiv hinzugefügt wurden.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Unveränderte Dateien ausblenden</guimenuitem>
+</term
+><listitem>
+<para
+>Benutzen Sie diese Aktion, um nur geänderte Dateien anzuzeigen, so dass eine einfache und kurzgefasste Übersicht entsteht.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Online arbeiten</guimenuitem>
+</term
+><listitem>
+<para
+>Wenn Sie Offline arbeiten, dann wird der Protokollzwischenspeicher nicht aktualisiert, daher kann das zwischengespeicherte Protokoll vom tatsächlichen Protokoll abweichen.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+</sect1>
+</chapter>
+<chapter id="credits-and-license">
+<title
+>Danksagungen, Mitwirkende und Lizenz</title>
+<para
+>Programm Copyright 2005-2009 &Rajko.Albrecht; &Rajko.Albrecht.mail; </para>
+<para
+>Vielen Dank an diese Mitwirkenden: </para>
+<itemizedlist>
+<listitem
+><para
+>Andreas Richter <email
+>ar@oszine.de</email
+> - für die Portierung von svnqt zu Qt4</para>
+</listitem>
+<listitem
+><para
+>Michael Biebl <email
+>biebl@teco.edu</email
+> - viele Hilfen, Ideen, Implementation and Hinweise.</para>
+</listitem>
+<listitem
+><para
+>Bram Schoenmakers <email
+>bramschoenmakers@kde.nl</email
+> - für Hinweise zu &kde;, Niederländische Übersetzung, Aufräumen des Quelltexts.</para>
+</listitem>
+</itemizedlist>
+<para
+>Vielen Dank an alle Übersetzer, auch für Ihre negativen und positiven Rückmeldungen. </para>
+<para
+>Möchten Sie die der Übersetzung von &kdesvn; mit helfen, lesen Sie die <ulink url="http://l10n.kde.org/"
+>&kde;-Lokalisierungsseite</ulink
+> oder fragen Sie auf der <ulink url="mailto:kde-i18n-doc@kde.org"
+><email
+>kde-i18n-doc@kde.org</email
+> Mailingliste</ulink
+>. </para>
+<para
+>Dokumentation Copyright 2005-2006 &Rajko.Albrecht; &Rajko.Albrecht.mail; </para>
+<para
+>Übersetzung Burkhard Lück <email
+>lueck@hube-lueck.de</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+<appendix id="revision-syntax">
+<title
+>Syntax für Revisionen</title>
+<para
+>Revisionen können in der gleichen Form wie beim normalen <application
+>svn</application
+>-Programm angegeben werden, also Nummer, Schlüsselwort oder Datum </para>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>Nummer</term>
+<listitem
+><para
+>Eine Nummer größer oder gleich -1. -1 bedeutet <quote
+>nicht spezifizierte Revision</quote
+>, 0 ist die erste Revision. Normalerweise sollten Sie dies nicht benutzen, da die meisten Operationen damit fehlschlagen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Schlüsselwort</term>
+<listitem
+><para
+>Eins von <itemizedlist>
+
+<listitem
+><para
+>HEAD </para
+></listitem>
+
+<listitem
+><para
+>BASE </para
+></listitem>
+
+<listitem
+><para
+>COMMITED </para
+></listitem>
+
+<listitem
+><para
+>PREV </para
+></listitem>
+
+<listitem
+><para
+>START </para
+></listitem>
+
+<listitem
+><para
+>WORKING </para
+></listitem>
+
+</itemizedlist>
+
+</para>
+<para
+>Bei den Schlüsselwörten wird die Groß-/Kleinschreibung beachtet, „head“ ist nicht das gleiche wie „HEAD“. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Datum</term>
+<listitem
+><para
+>Datum im Format {YYYY-MM-DD}. Es muss MM oder DD benutzt werden, &eg; für 2005-1-1 muss {2005-01-01} angegeben werden. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+<para
+>Das Anhängen einer bestimmten Revision wird immer mit <quote
+>?rev=<replaceable
+>revision</replaceable
+></quote
+> ausgeführt. </para>
+</appendix>
+
+&documentation.index;
+</book>

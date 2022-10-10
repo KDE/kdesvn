@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-08-17 00:19+0000\n"
+"POT-Creation-Date: 2022-10-10 00:48+0000\n"
 "PO-Revision-Date: 2022-07-31 23:16+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -58,70 +58,70 @@ msgctxt "@title:window"
 msgid "Password"
 msgstr "Şifrə"
 
-#: src/kdesvn.cpp:81
+#: src/kdesvn.cpp:80
 #, kde-format
 msgid "&Bookmarks"
 msgstr "&Əlfəcinlər"
 
-#: src/kdesvn.cpp:109
+#: src/kdesvn.cpp:105
 #, kde-format
 msgid "Create and open new repository"
 msgstr "Yeni repazitoriya yaradın və açın"
 
-#: src/kdesvn.cpp:110
+#: src/kdesvn.cpp:106
 #, kde-format
 msgid "Create and opens a new local Subversion repository"
 msgstr "Yeni yerli Subversion repazitoriayası yaradın və açın"
 
 # Dump: 1) Damp, ekrana çıxarış, ekrandakının fayla çevrilməsi və ya çap edilməsi 2) Faylın və ya yaddaşın bir hissəsinin yadda saxlanılması 3) Müəyyən müddət üzrə kompüterin yaddaşı haqda ətraflı informasiya.
-#: src/kdesvn.cpp:115
+#: src/kdesvn.cpp:111
 #, kde-format
 msgid "Dump repository to file"
 msgstr "Repazitoriyanı damp fayla çevirmək"
 
-#: src/kdesvn.cpp:116
+#: src/kdesvn.cpp:112
 #, kde-format
 msgid "Dump a Subversion repository to a file"
 msgstr "Subversion repazitoriyasını damp faylına yazın"
 
-#: src/kdesvn.cpp:121
+#: src/kdesvn.cpp:117
 #, kde-format
 msgid "Hotcopy a repository"
 msgstr "Repazitoriyanın canlı kopyalanması"
 
-#: src/kdesvn.cpp:122
+#: src/kdesvn.cpp:118
 #, kde-format
 msgid "Hotcopy a Subversion repository to a new folder"
 msgstr "Subversion repazitoriyasının canlı kopyalanması"
 
-#: src/kdesvn.cpp:127
+#: src/kdesvn.cpp:123
 #, kde-format
 msgid "Load dump into repository"
 msgstr "Damp-faylı repazitoriyaya yükləyin"
 
-#: src/kdesvn.cpp:128
+#: src/kdesvn.cpp:124
 #, kde-format
 msgid "Load a dump file into a repository."
 msgstr "Damp faylı repazitoriya daxilinə yükləyin."
 
-#: src/kdesvn.cpp:133
+#: src/kdesvn.cpp:129
 #, kde-format
 msgid "Add ssh identities to ssh-agent"
 msgstr "SSH istifadəçi hesabını SSH agentə əlavə edin"
 
-#: src/kdesvn.cpp:134
+#: src/kdesvn.cpp:130
 #, kde-format
 msgid "Force add ssh-identities to ssh-agent for future use."
 msgstr ""
 "İrəlidə istifadə etmək üçün SSH istifadəçi hesabının SSH agentinə məcburi "
 "əlavə edilməsi."
 
-#: src/kdesvn.cpp:139
+#: src/kdesvn.cpp:135
 #, kde-format
 msgid "Info about kdesvn part"
 msgstr "Kdesvn hissələri haq. məlumat"
 
-#: src/kdesvn.cpp:140
+#: src/kdesvn.cpp:136
 #, kde-format
 msgid "Shows info about the kdesvn plugin and not the standalone application."
 msgstr ""
@@ -129,105 +129,99 @@ msgstr ""
 "göstərir."
 
 # VB: Verilənlər Bazası
-#: src/kdesvn.cpp:145
+#: src/kdesvn.cpp:141
 #, kde-format
 msgid "Show database content"
 msgstr "VB tərkiblərini göstərmək"
 
 # VB: Verilənlər Bazası
-#: src/kdesvn.cpp:146
+#: src/kdesvn.cpp:142
 #, kde-format
 msgid "Show the content of log cache database"
 msgstr "VB keş-jurnalının tərkiblərini göstərmək"
 
-#: src/kdesvn.cpp:152
-#, kde-format
+#: src/kdesvn.cpp:149
+#, fuzzy, kde-format
+#| msgid ""
+#| "Could not load the part:\n"
+#| "%1"
 msgid ""
-"Could not load the part:\n"
+"Could not load our part:\n"
 "%1"
 msgstr ""
 "Yüklənə bilməyən tərkib hissəsi:\n"
 "%1"
 
-#: src/kdesvn.cpp:159
-#, kde-format
-msgid ""
-"Could not find our part:\n"
-"%1"
-msgstr ""
-"Tapılmayan tərkib hissəsi:\n"
-"%1"
-
-#: src/kdesvn.cpp:190
+#: src/kdesvn.cpp:180
 #, kde-format
 msgid "Could not open URL %1"
 msgstr "%1 URL ünvanı tapılmadı"
 
-#: src/kdesvn.cpp:222
+#: src/kdesvn.cpp:212
 #, kde-format
 msgid "Recent opened URLs"
 msgstr "Sonuncu açılan URL-lar"
 
-#: src/kdesvn.cpp:231
+#: src/kdesvn.cpp:221
 #, kde-format
 msgid "Load last opened URL on start"
 msgstr "Başlanğıcda son açılan URL-lar yüklənsin"
 
-#: src/kdesvn.cpp:233
+#: src/kdesvn.cpp:223
 #, kde-format
 msgid "Reload last opened URL if no one is given on command line"
 msgstr "Əmrlər sətrində heç biri verilməyibsə son açılan URL yenidən yüklənsin"
 
-#: src/kdesvn.cpp:316
+#: src/kdesvn.cpp:306
 #, kde-format
 msgid "Ready"
 msgstr "Hazırdır"
 
-#: src/kdesvn_part.cpp:156
+#: src/kdesvn_part.cpp:155
 #, kde-format
 msgid "Logs follow node changes"
 msgstr "Jurnal, qovşaqdakı dəyişiklikləri izləyir"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_ignored_files)
 #. i18n: ectx: label, entry, group (subversion)
-#: src/kdesvn_part.cpp:161 src/settings/display_settings.ui:57
+#: src/kdesvn_part.cpp:160 src/settings/display_settings.ui:57
 #: src/settings/kdesvn_part.kcfg:80
 #, kde-format
 msgid "Display ignored files"
 msgstr "Gözardı edilən faylları göstərmək"
 
 #. i18n: ectx: label, entry, group (subversion)
-#: src/kdesvn_part.cpp:166 src/settings/kdesvn_part.kcfg:84
+#: src/kdesvn_part.cpp:165 src/settings/kdesvn_part.kcfg:84
 #, kde-format
 msgid "Display unknown files"
 msgstr "Naməlum faylları göstərmək"
 
-#: src/kdesvn_part.cpp:171
+#: src/kdesvn_part.cpp:170
 #, kde-format
 msgid "Hide unchanged files"
 msgstr "Dəyişdirilməmiş faylları gizlətmək"
 
-#: src/kdesvn_part.cpp:176
+#: src/kdesvn_part.cpp:175
 #, kde-format
 msgid "Work online"
 msgstr "Onlayn işləmək"
 
-#: src/kdesvn_part.cpp:183
+#: src/kdesvn_part.cpp:182
 #, kde-format
 msgid "Configure Kdesvn..."
 msgstr "Kdesvn ayarları..."
 
-#: src/kdesvn_part.cpp:187
+#: src/kdesvn_part.cpp:186
 #, kde-format
 msgid "About kdesvn part"
 msgstr "Kdesvn hissəsi haqqında"
 
-#: src/kdesvn_part.cpp:191
+#: src/kdesvn_part.cpp:190
 #, kde-format
 msgid "Kdesvn Handbook"
 msgstr "Kdesvn sorğu kitabçası"
 
-#: src/kdesvn_part.cpp:281
+#: src/kdesvn_part.cpp:280
 #, kde-format
 msgid ""
 "Built with Subversion library: %1\n"
@@ -236,17 +230,17 @@ msgstr ""
 "Subversion kitabxanası ilə yığın: %1\n"
 "İşləyən Subversion kitabxanası: %2"
 
-#: src/kdesvn_part.cpp:284
+#: src/kdesvn_part.cpp:283
 #, kde-format
 msgid "kdesvn Part"
 msgstr "kdesvn hissələri"
 
-#: src/kdesvn_part.cpp:286
+#: src/kdesvn_part.cpp:285
 #, kde-format
 msgid "A Subversion Client by KDE (dynamic Part component)"
 msgstr "KDE tərfindən Subversion müştərisi (dinamik tərkib hissəsi)"
 
-#: src/kdesvn_part.cpp:288
+#: src/kdesvn_part.cpp:287
 #, kde-format
 msgid ""
 "(C) 2005-2009 Rajko Albrecht,\n"
@@ -255,86 +249,86 @@ msgstr ""
 "(C) 2005-2009 Rajko Albrecht,\n"
 "(C) 2015-2018 Christian Ehrlicher"
 
-#: src/kdesvn_part.cpp:291
+#: src/kdesvn_part.cpp:290
 #, kde-format
 msgid "Original author and maintainer"
 msgstr "Orijinal müəllifi və himayəçi"
 
-#: src/kdesvn_part.cpp:292 src/main.cpp:47 src/main.cpp:48
+#: src/kdesvn_part.cpp:291 src/main.cpp:47 src/main.cpp:48
 #, kde-format
 msgid "Developer"
 msgstr "Tərtibatçı"
 
 #. i18n: ectx: Menu (subversion_general)
-#: src/kdesvn_part.cpp:331 src/kdesvn_part.rc:19
+#: src/kdesvn_part.cpp:330 src/kdesvn_part.rc:19
 #, kde-format
 msgid "General"
 msgstr "Əsas"
 
-#: src/kdesvn_part.cpp:331
+#: src/kdesvn_part.cpp:330
 #, kde-format
 msgid "General Settings"
 msgstr "Ümumi Ayarlar"
 
 #. i18n: ectx: Menu (subversion_main)
-#: src/kdesvn_part.cpp:333 src/kdesvn_part.rc:17 src/kdesvnui.rc:25
+#: src/kdesvn_part.cpp:332 src/kdesvn_part.rc:17 src/kdesvnui.rc:25
 #, kde-format
 msgid "Subversion"
 msgstr "Subversion"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SubversionSettings)
-#: src/kdesvn_part.cpp:333 src/settings/subversion_settings.ui:6
+#: src/kdesvn_part.cpp:332 src/settings/subversion_settings.ui:6
 #, kde-format
 msgid "Subversion Settings"
 msgstr "Subversion Ayarları"
 
-#: src/kdesvn_part.cpp:335
+#: src/kdesvn_part.cpp:334
 #, kde-format
 msgid "Timed jobs"
 msgstr "Vaxtaşırı işlər"
 
-#: src/kdesvn_part.cpp:335
+#: src/kdesvn_part.cpp:334
 #, kde-format
 msgid "Settings for timed jobs"
 msgstr "Vaxtaşırı görülən işləri ayarlayır"
 
-#: src/kdesvn_part.cpp:337
+#: src/kdesvn_part.cpp:336
 #, kde-format
 msgid "Diff & Merge"
 msgstr "Müqayisə və birləşdirmə"
 
-#: src/kdesvn_part.cpp:337
+#: src/kdesvn_part.cpp:336
 #, kde-format
 msgid "Settings for diff and merge"
 msgstr "Müqayisə və birləşdirmə ayarları"
 
-#: src/kdesvn_part.cpp:339
+#: src/kdesvn_part.cpp:338
 #, kde-format
 msgid "Colors"
 msgstr "Rənglər"
 
-#: src/kdesvn_part.cpp:339
+#: src/kdesvn_part.cpp:338
 #, kde-format
 msgid "Color Settings"
 msgstr "Rəng ayarları"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, RevisionTreeSettings)
-#: src/kdesvn_part.cpp:341 src/settings/revisiontree_settings.ui:6
+#: src/kdesvn_part.cpp:340 src/settings/revisiontree_settings.ui:6
 #, kde-format
 msgid "Revision tree Settings"
 msgstr "Dəyişim ardıcıllığının ayarları"
 
-#: src/kdesvn_part.cpp:341
+#: src/kdesvn_part.cpp:340
 #, kde-format
 msgid "Revision tree"
 msgstr "Dəyişim ardıcıllığı"
 
-#: src/kdesvn_part.cpp:343
+#: src/kdesvn_part.cpp:342
 #, kde-format
 msgid "KIO / Command line"
 msgstr "KİO/Əmr sətri"
 
-#: src/kdesvn_part.cpp:343
+#: src/kdesvn_part.cpp:342
 #, kde-format
 msgid "Settings for command line and KIO execution"
 msgstr "Əmr sətri və KİO ilə əməliyyatın ayarları"
@@ -709,8 +703,8 @@ msgstr "%1 repazitoriyaya yazıldı"
 msgid "Copied %1 to %2"
 msgstr "%1, %2-ə/a kopyalandı"
 
-#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1062
-#: src/svnfrontend/svnactions.cpp:2221
+#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1053
+#: src/svnfrontend/svnactions.cpp:2212
 #, kde-format
 msgid "Committed revision %1."
 msgstr "%1 dəyişimi göndərildi."
@@ -898,7 +892,7 @@ msgid "Select text file to insert:"
 msgstr "Daxil etmək üçün mətn faylı:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DeleteForm)
-#: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1558
+#: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1549
 #, kde-format
 msgid "Really delete these entries?"
 msgstr "Bu obyekt silinsin?"
@@ -1076,7 +1070,7 @@ msgstr "Kopyalayın"
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:41
 #: src/svnfrontend/ccontextlistener.cpp:66
 #: src/svnfrontend/maintreewidget.cpp:587
-#: src/svnfrontend/maintreewidget.cpp:591 src/svnfrontend/svnactions.cpp:1016
+#: src/svnfrontend/maintreewidget.cpp:591 src/svnfrontend/svnactions.cpp:1007
 #, kde-format
 msgid "Delete"
 msgstr "Silin"
@@ -1087,7 +1081,7 @@ msgid "Modify (content or property)"
 msgstr "Dəyişdirin (tərkibini və ya xüsusiyyətini)"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:49
-#: src/svnfrontend/svnactions.cpp:785
+#: src/svnfrontend/svnactions.cpp:776
 #, kde-format
 msgid "Replace"
 msgstr "Əvəz edin"
@@ -4082,7 +4076,7 @@ msgstr "Cari elementi kiliddən çıxartmaq"
 msgid "Free existing lock on current item"
 msgstr "Cari elementdə azad kilidlmə"
 
-#: src/svnfrontend/maintreewidget.cpp:552 src/svnfrontend/svnactions.cpp:657
+#: src/svnfrontend/maintreewidget.cpp:552 src/svnfrontend/svnactions.cpp:648
 #, kde-format
 msgid "New folder"
 msgstr "Yeni qovluq"
@@ -4259,7 +4253,7 @@ msgstr "Bu dəyişimədək yeniləmək..."
 
 #: src/svnfrontend/maintreewidget.cpp:606
 #: src/svnfrontend/maintreewidget.cpp:607
-#: src/svnfrontend/maintreewidget.cpp:665 src/svnfrontend/svnactions.cpp:1018
+#: src/svnfrontend/maintreewidget.cpp:665 src/svnfrontend/svnactions.cpp:1009
 #, kde-format
 msgid "Commit"
 msgstr "Göndərmək"
@@ -4363,8 +4357,8 @@ msgstr "Cari repazitoriya yolunu ixrac etmək"
 msgid "Select browse revision"
 msgstr "Baxış üçün dəyişimi seçin"
 
-#: src/svnfrontend/maintreewidget.cpp:646 src/svnfrontend/svnactions.cpp:1628
-#: src/svnfrontend/svnactions.cpp:1634
+#: src/svnfrontend/maintreewidget.cpp:646 src/svnfrontend/svnactions.cpp:1619
+#: src/svnfrontend/svnactions.cpp:1625
 #, kde-format
 msgid "Checkout a repository"
 msgstr "Repazitoriyadan almaq"
@@ -4492,7 +4486,7 @@ msgstr "Kdesvn tərəfindən avtomatik yaradılan baza qatı"
 msgid "May not make subdirectories of a file"
 msgstr "Faylların alt qovluqları yaradılmaya bilər"
 
-#: src/svnfrontend/maintreewidget.cpp:1943 src/svnfrontend/svnactions.cpp:2186
+#: src/svnfrontend/maintreewidget.cpp:1943 src/svnfrontend/svnactions.cpp:2177
 #, kde-format
 msgctxt "@title:window"
 msgid "Merge"
@@ -4509,8 +4503,8 @@ msgctxt "@title:window"
 msgid "Relocate Path %1"
 msgstr "%1 yolunun dəyşdirilməsi"
 
-#: src/svnfrontend/maintreewidget.cpp:2016 src/svnfrontend/svnactions.cpp:1627
-#: src/svnfrontend/svnactions.cpp:1879
+#: src/svnfrontend/maintreewidget.cpp:2016 src/svnfrontend/svnactions.cpp:1618
+#: src/svnfrontend/svnactions.cpp:1870
 #, kde-format
 msgid "Invalid url given!"
 msgstr "Yarasız url göstərilib!"
@@ -4759,7 +4753,7 @@ msgid "%1 at revision %2"
 msgstr "%2 dəyişimində %1"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:314
-#: src/svnfrontend/svnactions.cpp:735
+#: src/svnfrontend/svnactions.cpp:726
 #, kde-format
 msgid "Name"
 msgstr "Ad"
@@ -4775,7 +4769,7 @@ msgid "Last changed Revision"
 msgstr "Son dəyişdirilmiş dəyişim"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:320
-#: src/svnfrontend/svnactions.cpp:794
+#: src/svnfrontend/svnactions.cpp:785
 #, kde-format
 msgid "Last author"
 msgstr "Sonuncu müəllif"
@@ -4902,558 +4896,558 @@ msgstr "Tərkibinin alınmasında xəta"
 msgid "Error while open temporary file"
 msgstr "Müvəqqəti faylın açılmasında xəta"
 
-#: src/svnfrontend/svnactions.cpp:623
+#: src/svnfrontend/svnactions.cpp:614
 #, kde-format
 msgctxt "@title:window"
 msgid "Content of %1"
 msgstr "%1-in tərkibi"
 
-#: src/svnfrontend/svnactions.cpp:633
+#: src/svnfrontend/svnactions.cpp:624
 #, kde-format
 msgid "Got no content."
 msgstr "Tərkibi yoxdur."
 
-#: src/svnfrontend/svnactions.cpp:657
+#: src/svnfrontend/svnactions.cpp:648
 #, kde-format
 msgid "Enter folder name:"
 msgstr "Qovluğun adını daxil edin:"
 
-#: src/svnfrontend/svnactions.cpp:696
+#: src/svnfrontend/svnactions.cpp:687
 #, kde-format
 msgctxt "@title:window"
 msgid "Details"
 msgstr "Təfərrüatlar"
 
-#: src/svnfrontend/svnactions.cpp:696
+#: src/svnfrontend/svnactions.cpp:687
 #, kde-format
 msgid "Retrieving information - hit Cancel for abort"
 msgstr "Məlumatların alınması - Ləğv etmək üçün \"İmtina\" vurun"
 
-#: src/svnfrontend/svnactions.cpp:738
+#: src/svnfrontend/svnactions.cpp:729
 #, kde-format
 msgid "URL"
 msgstr "URL"
 
-#: src/svnfrontend/svnactions.cpp:740
+#: src/svnfrontend/svnactions.cpp:731
 #, kde-format
 msgid "Canonical repository URL"
 msgstr "Canonical repazitoriyasının URL ünvanı"
 
-#: src/svnfrontend/svnactions.cpp:743
+#: src/svnfrontend/svnactions.cpp:734
 #, kde-format
 msgid "Checksum"
 msgstr "Yoxlama cəmi"
 
-#: src/svnfrontend/svnactions.cpp:746
+#: src/svnfrontend/svnactions.cpp:737
 #, kde-format
 msgid "Type"
 msgstr "Növ"
 
-#: src/svnfrontend/svnactions.cpp:749
+#: src/svnfrontend/svnactions.cpp:740
 #, kde-format
 msgid "Absent"
 msgstr "Movcud deyil"
 
-#: src/svnfrontend/svnactions.cpp:752
+#: src/svnfrontend/svnactions.cpp:743
 #, kde-format
 msgid "File"
 msgstr "Fayl"
 
-#: src/svnfrontend/svnactions.cpp:755
+#: src/svnfrontend/svnactions.cpp:746
 #, kde-format
 msgid "Folder"
 msgstr "Qovluq"
 
-#: src/svnfrontend/svnactions.cpp:759 src/svnfrontend/svnactions.cpp:788
+#: src/svnfrontend/svnactions.cpp:750 src/svnfrontend/svnactions.cpp:779
 #, kde-format
 msgid "Unknown"
 msgstr "Naməlum"
 
-#: src/svnfrontend/svnactions.cpp:764
+#: src/svnfrontend/svnactions.cpp:755
 #, kde-format
 msgid "Size"
 msgstr "Ölçü"
 
-#: src/svnfrontend/svnactions.cpp:773
+#: src/svnfrontend/svnactions.cpp:764
 #, kde-format
 msgid "Schedule"
 msgstr "Planlaşdırma"
 
-#: src/svnfrontend/svnactions.cpp:776
+#: src/svnfrontend/svnactions.cpp:767
 #, kde-format
 msgid "Normal"
 msgstr "Normal"
 
-#: src/svnfrontend/svnactions.cpp:779
+#: src/svnfrontend/svnactions.cpp:770
 #, kde-format
 msgid "Addition"
 msgstr "Əlavə edilmə"
 
-#: src/svnfrontend/svnactions.cpp:782
+#: src/svnfrontend/svnactions.cpp:773
 #, kde-format
 msgid "Deletion"
 msgstr "Silinmə"
 
-#: src/svnfrontend/svnactions.cpp:792
+#: src/svnfrontend/svnactions.cpp:783
 #, kde-format
 msgid "UUID"
 msgstr "UUID"
 
-#: src/svnfrontend/svnactions.cpp:796
+#: src/svnfrontend/svnactions.cpp:787
 #, kde-format
 msgid "Last committed"
 msgstr "Son göndərilmiş"
 
-#: src/svnfrontend/svnactions.cpp:798
+#: src/svnfrontend/svnactions.cpp:789
 #, kde-format
 msgid "Last revision"
 msgstr "Son dəyişim"
 
-#: src/svnfrontend/svnactions.cpp:800
+#: src/svnfrontend/svnactions.cpp:791
 #, kde-format
 msgid "Content last changed"
 msgstr "Son dəyişikliyin tərkibi"
 
-#: src/svnfrontend/svnactions.cpp:804
+#: src/svnfrontend/svnactions.cpp:795
 #, kde-format
 msgid "Property last changed"
 msgstr "Son dəyişdirilənin xüsusiyyəti"
 
-#: src/svnfrontend/svnactions.cpp:807
+#: src/svnfrontend/svnactions.cpp:798
 #, kde-format
 msgid "New version of conflicted file"
 msgstr "Ziddiyyətli faylın yeni xüsusiyyəti"
 
-#: src/svnfrontend/svnactions.cpp:810
+#: src/svnfrontend/svnactions.cpp:801
 #, kde-format
 msgid "Property reject file"
 msgstr "Kənarlaşdırılan faylın xüsusiyyəti"
 
-#: src/svnfrontend/svnactions.cpp:815
+#: src/svnfrontend/svnactions.cpp:806
 #, kde-format
 msgid "Copy from URL"
 msgstr "URL-dan kopyalamaq"
 
-#: src/svnfrontend/svnactions.cpp:818 src/svnfrontend/svnactions.cpp:828
+#: src/svnfrontend/svnactions.cpp:809 src/svnfrontend/svnactions.cpp:819
 #, kde-format
 msgid "Lock token"
 msgstr "Kilid nişanı"
 
-#: src/svnfrontend/svnactions.cpp:819 src/svnfrontend/svnactions.cpp:829
+#: src/svnfrontend/svnactions.cpp:810 src/svnfrontend/svnactions.cpp:820
 #, kde-format
 msgid "Owner"
 msgstr "Sahibi"
 
-#: src/svnfrontend/svnactions.cpp:820 src/svnfrontend/svnactions.cpp:830
+#: src/svnfrontend/svnactions.cpp:811 src/svnfrontend/svnactions.cpp:821
 #, kde-format
 msgid "Locked on"
 msgstr "Kilidlənib"
 
-#: src/svnfrontend/svnactions.cpp:823 src/svnfrontend/svnactions.cpp:833
+#: src/svnfrontend/svnactions.cpp:814 src/svnfrontend/svnactions.cpp:824
 #, kde-format
 msgid "Lock comment"
 msgstr "Şərhləri kilidləmək"
 
-#: src/svnfrontend/svnactions.cpp:881
+#: src/svnfrontend/svnactions.cpp:872
 #, kde-format
 msgctxt "@title:window"
 msgid "Infolist"
 msgstr "Məlumat"
 
-#: src/svnfrontend/svnactions.cpp:920
+#: src/svnfrontend/svnactions.cpp:911
 #, kde-format
 msgctxt "@title:window"
 msgid "Applying Properties"
 msgstr "Xüsusiyyətlərin tətbiq edilməsi"
 
-#: src/svnfrontend/svnactions.cpp:920
+#: src/svnfrontend/svnactions.cpp:911
 #, kde-format
 msgid "<center>Applying<br/>hit cancel for abort</center>"
 msgstr "<center>Tətbiq edilir<br/>ləğv üçün \"imtina\" vurun</center>"
 
-#: src/svnfrontend/svnactions.cpp:958
+#: src/svnfrontend/svnactions.cpp:949
 #, kde-format
 msgid "Could not change to folder %1\n"
 msgstr "%1 qovluğunda dəyişmək olmur\n"
 
-#: src/svnfrontend/svnactions.cpp:977
+#: src/svnfrontend/svnactions.cpp:968
 #, kde-format
 msgid "Not commit because networking is disabled"
 msgstr "Göndərilmədi, çünki şəbəkə söndürülüb"
 
-#: src/svnfrontend/svnactions.cpp:999 src/svnfrontend/svnactions.cpp:2342
+#: src/svnfrontend/svnactions.cpp:990 src/svnfrontend/svnactions.cpp:2333
 #, kde-format
 msgctxt "@title:window"
 msgid "Status / List"
 msgstr "Vəziyyət / Siyahı"
 
-#: src/svnfrontend/svnactions.cpp:999 src/svnfrontend/svnactions.cpp:2342
+#: src/svnfrontend/svnactions.cpp:990 src/svnfrontend/svnactions.cpp:2333
 #, kde-format
 msgid "Creating list / check status"
 msgstr "Siyahı yaradılması / vəziyyətin yoxlanılması"
 
-#: src/svnfrontend/svnactions.cpp:1021
+#: src/svnfrontend/svnactions.cpp:1012
 #, kde-format
 msgid "Delete and Commit"
 msgstr "Silmək və Göndərmək"
 
-#: src/svnfrontend/svnactions.cpp:1023
+#: src/svnfrontend/svnactions.cpp:1014
 #, kde-format
 msgid "Add and Commit"
 msgstr "Əlavə etmək və Göndərmək"
 
-#: src/svnfrontend/svnactions.cpp:1054
+#: src/svnfrontend/svnactions.cpp:1045
 #, kde-format
 msgctxt "@title:window"
 msgid "Commit"
 msgstr "Göndərmək"
 
-#: src/svnfrontend/svnactions.cpp:1054
+#: src/svnfrontend/svnactions.cpp:1045
 #, kde-format
 msgid "Commit - hit Cancel for abort"
 msgstr "Göndəriş - Ləğvi üçün \"İmtina\" vurun"
 
-#: src/svnfrontend/svnactions.cpp:1080
+#: src/svnfrontend/svnactions.cpp:1071
 #, kde-format
 msgctxt "@title:window"
 msgid "Downloading"
 msgstr "Yüklənir"
 
-#: src/svnfrontend/svnactions.cpp:1080
+#: src/svnfrontend/svnactions.cpp:1071
 #, kde-format
 msgid "Download - hit Cancel for abort"
 msgstr "Yükləmək - Ləğvi üçün \"İmtina\" vurun"
 
-#: src/svnfrontend/svnactions.cpp:1107
+#: src/svnfrontend/svnactions.cpp:1098
 #, kde-format
 msgid "Can not do this diff because networking is disabled."
 msgstr "Müqayisə edilə bilmir, çünki şəbəkə söndürülüb"
 
-#: src/svnfrontend/svnactions.cpp:1155
+#: src/svnfrontend/svnactions.cpp:1146
 #, kde-format
 msgid "Both entries seems to be the same, can not diff."
 msgstr "Görünür ki, hər iki yazı eynidir, müqayisəyə ehtiyac yoxdur"
 
-#: src/svnfrontend/svnactions.cpp:1220
+#: src/svnfrontend/svnactions.cpp:1211
 #, kde-format
 msgid "Diff-process could not started, check command."
 msgstr "Müqayisə başladıla bilmədi, əmri yoxlayın."
 
-#: src/svnfrontend/svnactions.cpp:1264 src/svnfrontend/svnactions.cpp:1317
+#: src/svnfrontend/svnactions.cpp:1255 src/svnfrontend/svnactions.cpp:1308
 #, kde-format
 msgctxt "@title:window"
 msgid "Diffing"
 msgstr "Müqayisə"
 
-#: src/svnfrontend/svnactions.cpp:1264
+#: src/svnfrontend/svnactions.cpp:1255
 #, kde-format
 msgid "Diffing - hit Cancel for abort"
 msgstr "Müqayisə edilir - ləğvi üçün \"İmtina\" vurun"
 
-#: src/svnfrontend/svnactions.cpp:1277 src/svnfrontend/svnactions.cpp:1326
+#: src/svnfrontend/svnactions.cpp:1268 src/svnfrontend/svnactions.cpp:1317
 #, kde-format
 msgid "No difference to display"
 msgstr "Göstəriləcək fərq yoxdur"
 
-#: src/svnfrontend/svnactions.cpp:1317
+#: src/svnfrontend/svnactions.cpp:1308
 #, kde-format
 msgid "Diffing - hit cancel for abort"
 msgstr "Müqayisə edilir - ləğvi üçün \"İmtina\" vurun"
 
-#: src/svnfrontend/svnactions.cpp:1375
+#: src/svnfrontend/svnactions.cpp:1366
 #, kde-format
 msgid "Display process could not started, check command."
 msgstr "Göstərmə əməliyyatı başladıla bilmir, əmri yoxlayın."
 
-#: src/svnfrontend/svnactions.cpp:1388
+#: src/svnfrontend/svnactions.cpp:1379
 #, kde-format
 msgctxt "@title:window"
 msgid "Diff Display"
 msgstr "Fərqlərə baxış"
 
-#: src/svnfrontend/svnactions.cpp:1437
+#: src/svnfrontend/svnactions.cpp:1428
 #, kde-format
 msgctxt "@title:window"
 msgid "Making update"
 msgstr "Yenilənir"
 
-#: src/svnfrontend/svnactions.cpp:1437
+#: src/svnfrontend/svnactions.cpp:1428
 #, kde-format
 msgid "Making update - hit Cancel for abort"
 msgstr "Yenilənir - ləğv etmək üçün \"İmtina\" vurun"
 
-#: src/svnfrontend/svnactions.cpp:1525
+#: src/svnfrontend/svnactions.cpp:1516
 #, kde-format
 msgid "Which files or directories should I add?"
 msgstr "Hansı faylları və qovluqları əlavə edə bilərəm?"
 
-#: src/svnfrontend/svnactions.cpp:1532
+#: src/svnfrontend/svnactions.cpp:1523
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is versioned - break.</center>"
 msgstr "<center>Yazı<br/>%1<br/>versiyalanıb - qırılma baş verdi.</center>"
 
-#: src/svnfrontend/svnactions.cpp:1560
+#: src/svnfrontend/svnactions.cpp:1551
 #, kde-format
 msgid "Delete from repository"
 msgstr "Repazitoriyadan silmək"
 
-#: src/svnfrontend/svnactions.cpp:1609
+#: src/svnfrontend/svnactions.cpp:1600
 #, kde-format
 msgctxt "@title:window"
 msgid "Export a Repository"
 msgstr "Repazitoriyaya ixrac etmək"
 
-#: src/svnfrontend/svnactions.cpp:1609
+#: src/svnfrontend/svnactions.cpp:1600
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout a Repository"
 msgstr "Repazitoriyadan almaq"
 
-#: src/svnfrontend/svnactions.cpp:1628 src/svnfrontend/svnactions.cpp:1634
+#: src/svnfrontend/svnactions.cpp:1619 src/svnfrontend/svnactions.cpp:1625
 #, kde-format
 msgid "Export repository"
 msgstr "Repazitoriyanı ixrac etmək"
 
-#: src/svnfrontend/svnactions.cpp:1633
+#: src/svnfrontend/svnactions.cpp:1624
 #, kde-format
 msgid "Invalid local path given!"
 msgstr "Yalnış yerli yol göstərilib!"
 
-#: src/svnfrontend/svnactions.cpp:1661
+#: src/svnfrontend/svnactions.cpp:1652
 #, kde-format
 msgid "Exporting a file?"
 msgstr "Fayl ixrac edilsin?"
 
-#: src/svnfrontend/svnactions.cpp:1661
+#: src/svnfrontend/svnactions.cpp:1652
 #, kde-format
 msgid "Checking out a file?"
 msgstr "Fayl alınsın?"
 
-#: src/svnfrontend/svnactions.cpp:1707
+#: src/svnfrontend/svnactions.cpp:1698
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
 msgstr "İxrac etmək"
 
-#: src/svnfrontend/svnactions.cpp:1707
+#: src/svnfrontend/svnactions.cpp:1698
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout"
 msgstr "Almaq"
 
-#: src/svnfrontend/svnactions.cpp:1707
+#: src/svnfrontend/svnactions.cpp:1698
 #, kde-format
 msgid "Exporting"
 msgstr "İxrac edilir"
 
-#: src/svnfrontend/svnactions.cpp:1707
+#: src/svnfrontend/svnactions.cpp:1698
 #, kde-format
 msgid "Checking out"
 msgstr "Alınır"
 
-#: src/svnfrontend/svnactions.cpp:1744
+#: src/svnfrontend/svnactions.cpp:1735
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
 msgstr "<center>Yazı<br/>%1<br/>versiyalanmayıb - qırılma baş verdi</center>"
 
-#: src/svnfrontend/svnactions.cpp:1777
+#: src/svnfrontend/svnactions.cpp:1768
 #, kde-format
 msgctxt "@title:window"
 msgid "Revert"
 msgstr "Geri qaytarmaq"
 
-#: src/svnfrontend/svnactions.cpp:1777
+#: src/svnfrontend/svnactions.cpp:1768
 #, kde-format
 msgid "Reverting items"
 msgstr "Elementlərin geri qaytarılması"
 
-#: src/svnfrontend/svnactions.cpp:1807 src/svnfrontend/svnactions.cpp:1869
+#: src/svnfrontend/svnactions.cpp:1798 src/svnfrontend/svnactions.cpp:1860
 #, kde-format
 msgctxt "@title:window"
 msgid "Switch URL"
 msgstr "URL-u dəyişmək"
 
-#: src/svnfrontend/svnactions.cpp:1807
+#: src/svnfrontend/svnactions.cpp:1798
 #, kde-format
 msgid "Switching URL"
 msgstr "URL dəyişdirilir"
 
-#: src/svnfrontend/svnactions.cpp:1827
+#: src/svnfrontend/svnactions.cpp:1818
 #, kde-format
 msgctxt "@title:window"
 msgid "Relocate Repository"
 msgstr "Repazitoriya ünvanını dəyişdirmək"
 
-#: src/svnfrontend/svnactions.cpp:1827
+#: src/svnfrontend/svnactions.cpp:1818
 #, kde-format
 msgid "Relocate repository to new URL"
 msgstr "Repazitoriyanı yeni ünvana dəyişmək"
 
-#: src/svnfrontend/svnactions.cpp:1850
+#: src/svnfrontend/svnactions.cpp:1841
 #, kde-format
 msgid "Can only switch one item at time"
 msgstr "Bir dəfəyə yalnız bir element dəyişmək olar"
 
-#: src/svnfrontend/svnactions.cpp:1856
+#: src/svnfrontend/svnactions.cpp:1847
 #, kde-format
 msgid "Error getting entry to switch"
 msgstr "Keçid ediləcək yazının alınmasında xəta"
 
-#: src/svnfrontend/svnactions.cpp:1880
+#: src/svnfrontend/svnactions.cpp:1871
 #, kde-format
 msgid "Switch URL"
 msgstr "URL arası keçid"
 
-#: src/svnfrontend/svnactions.cpp:1898
+#: src/svnfrontend/svnactions.cpp:1889
 #, kde-format
 msgctxt "@title:window"
 msgid "Cleanup"
 msgstr "Təmizlik"
 
-#: src/svnfrontend/svnactions.cpp:1898
+#: src/svnfrontend/svnactions.cpp:1889
 #, kde-format
 msgid "Cleaning up folder"
 msgstr "Qovluq təmizlənməsi"
 
-#: src/svnfrontend/svnactions.cpp:1915
+#: src/svnfrontend/svnactions.cpp:1906
 #, kde-format
 msgctxt "@title:window"
 msgid "Resolve"
 msgstr "Həll etmək"
 
-#: src/svnfrontend/svnactions.cpp:1915
+#: src/svnfrontend/svnactions.cpp:1906
 #, kde-format
 msgid "Marking resolved"
 msgstr "Həll edilənlərin işarələnməsi"
 
-#: src/svnfrontend/svnactions.cpp:1947
+#: src/svnfrontend/svnactions.cpp:1938
 #, kde-format
 msgid "Could not retrieve conflict information - giving up."
 msgstr "Ziddiyyət haqqında məlumatlar alına bilmir - imtina edilir."
 
-#: src/svnfrontend/svnactions.cpp:1974
+#: src/svnfrontend/svnactions.cpp:1965
 #, kde-format
 msgid "Resolve-process could not started, check command."
 msgstr "Həll etmə əməliyyatı başladıla bilmədi, əmri yoxlayın"
 
-#: src/svnfrontend/svnactions.cpp:1986
+#: src/svnfrontend/svnactions.cpp:1977
 #, kde-format
 msgctxt "@title:window"
 msgid "Import"
 msgstr "İdxal"
 
-#: src/svnfrontend/svnactions.cpp:1986
+#: src/svnfrontend/svnactions.cpp:1977
 #, kde-format
 msgid "Importing items"
 msgstr "Elementlərin idxalı"
 
-#: src/svnfrontend/svnactions.cpp:2010
+#: src/svnfrontend/svnactions.cpp:2001
 #, kde-format
 msgid "Nothing to merge."
 msgstr "Birləşdirmək üçün heç nə yoxdur."
 
-#: src/svnfrontend/svnactions.cpp:2014
+#: src/svnfrontend/svnactions.cpp:2005
 #, kde-format
 msgid "No destination to merge."
 msgstr "Birləşdirmk üçün təyinat yoxdur."
 
-#: src/svnfrontend/svnactions.cpp:2033
+#: src/svnfrontend/svnactions.cpp:2024
 #, kde-format
 msgid "Both sources must be same type."
 msgstr "Hər iki mənbə eyni növ olmalıdır."
 
-#: src/svnfrontend/svnactions.cpp:2040
+#: src/svnfrontend/svnactions.cpp:2031
 #, kde-format
 msgid "Target for merge must same type like sources."
 msgstr "Birləşdirmək üçün hədəf ilə mənbələr eyni növ olmalıdır."
 
-#: src/svnfrontend/svnactions.cpp:2063
+#: src/svnfrontend/svnactions.cpp:2054
 #, kde-format
 msgid "Both entries seems to be the same, will not do a merge."
 msgstr "Görünür ki, hər iki yazı eynidir, birləşdirməyə ehtiyac yoxdur."
 
-#: src/svnfrontend/svnactions.cpp:2127
+#: src/svnfrontend/svnactions.cpp:2118
 #, kde-format
 msgid "Merge process could not started, check command."
 msgstr "Birləşdirmə əməliyyatı başladıla bilmədi, əmri yoxlayın."
 
-#: src/svnfrontend/svnactions.cpp:2186
+#: src/svnfrontend/svnactions.cpp:2177
 #, kde-format
 msgid "Merging items"
 msgstr "Elementlər birləşdirilir"
 
-#: src/svnfrontend/svnactions.cpp:2213 src/svnfrontend/svnactions.cpp:2231
+#: src/svnfrontend/svnactions.cpp:2204 src/svnfrontend/svnactions.cpp:2222
 #, kde-format
 msgctxt "@title:window"
 msgid "Move"
 msgstr "Köçürmək"
 
-#: src/svnfrontend/svnactions.cpp:2213
+#: src/svnfrontend/svnactions.cpp:2204
 #, kde-format
 msgid "Moving/Rename item"
 msgstr "Elementi köçürmək/adını dəyişmək"
 
-#: src/svnfrontend/svnactions.cpp:2231
+#: src/svnfrontend/svnactions.cpp:2222
 #, kde-format
 msgid "Moving entries"
 msgstr "Yazıların silinməsi"
 
-#: src/svnfrontend/svnactions.cpp:2251 src/svnfrontend/svnactions.cpp:2266
+#: src/svnfrontend/svnactions.cpp:2242 src/svnfrontend/svnactions.cpp:2257
 #, kde-format
 msgctxt "@title:window"
 msgid "Copy / Move"
 msgstr "Kopyalamaq/Köçürmək"
 
-#: src/svnfrontend/svnactions.cpp:2251 src/svnfrontend/svnactions.cpp:2266
+#: src/svnfrontend/svnactions.cpp:2242 src/svnfrontend/svnactions.cpp:2257
 #, kde-format
 msgid "Copy or Moving entries"
 msgstr "Yazıları kopyalamaq və ya köçürmək"
 
-#: src/svnfrontend/svnactions.cpp:2374
+#: src/svnfrontend/svnactions.cpp:2365
 #, kde-format
 msgid "No unversioned items found."
 msgstr "Versiyalanmamış elementlər tapılmadı"
 
-#: src/svnfrontend/svnactions.cpp:2378
+#: src/svnfrontend/svnactions.cpp:2369
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Unversioned Items"
 msgstr "Versiyalanmamış elementlər əlavə etmək"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
-#: src/svnfrontend/svnactions.cpp:2381 src/svnfrontend/svnlogdlg.ui:163
+#: src/svnfrontend/svnactions.cpp:2372 src/svnfrontend/svnlogdlg.ui:163
 #, kde-format
 msgid "Item"
 msgstr "Element"
 
-#: src/svnfrontend/svnactions.cpp:2501
+#: src/svnfrontend/svnactions.cpp:2492
 #, kde-format
 msgid "Found %1 modified item"
 msgid_plural "Found %1 modified items"
 msgstr[0] "%1 dəyişdirilmiş element tapıldı"
 msgstr[1] "%1 dəyişdirilmiş element tapıldı"
 
-#: src/svnfrontend/svnactions.cpp:2530
+#: src/svnfrontend/svnactions.cpp:2521
 #, kde-format
 msgid "Checking for updates finished"
 msgstr "Yenilənmələrin yoxlanılması başa çatdı"
 
-#: src/svnfrontend/svnactions.cpp:2532
+#: src/svnfrontend/svnactions.cpp:2523
 #, kde-format
 msgid "There are new items in repository"
 msgstr "Repazitoriyada yeni elementlər var"
 
-#: src/svnfrontend/svnactions.cpp:2602
+#: src/svnfrontend/svnactions.cpp:2593
 #, kde-format
 msgid "Not filling log cache because networking is disabled"
 msgstr "Jurnal keşi doldurlmadı, çünki şəbəkə söndürülüb"
 
-#: src/svnfrontend/svnactions.cpp:2644
+#: src/svnfrontend/svnactions.cpp:2635
 #, kde-format
 msgid "Not checking for updates because networking is disabled"
 msgstr "Yenilənmlər yoxlanılmadı, çünki şəbəkə söndürülüb"
 
-#: src/svnfrontend/svnactions.cpp:2651
+#: src/svnfrontend/svnactions.cpp:2642
 #, kde-format
 msgid "Checking for updates started in background"
 msgstr "Yenilənmlərin yoxlanılması arxa planda icra olunur"
@@ -5675,3 +5669,10 @@ msgstr "Repazitoriyanı/işlək qovluğu açmaq"
 #, kde-format
 msgid "Open repository or working copy"
 msgstr "Repazitoriyanı və ya işlək qovluğu açmaq"
+
+#~ msgid ""
+#~ "Could not find our part:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Tapılmayan tərkib hissəsi:\n"
+#~ "%1"

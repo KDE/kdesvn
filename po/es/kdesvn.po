@@ -5,20 +5,20 @@
 # Mario Palomo Torrero <mariopal@gmail.com>, 2008, 2009.
 # Alvaro Soliverez <asoliverez@gmail.com>, 2010.
 # Javier Viñal <fjvinal@gmail.com>, 2013.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020.
+# Eloy Cuadra <ecuadra@eloihr.net>, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-10 00:48+0000\n"
-"PO-Revision-Date: 2020-04-14 19:26+0200\n"
+"PO-Revision-Date: 2022-10-10 23:56+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.03.90\n"
+"X-Generator: Lokalize 22.08.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -140,15 +140,12 @@ msgid "Show the content of log cache database"
 msgstr "Muestra el contenido de la base de datos de la caché de registro"
 
 #: src/kdesvn.cpp:149
-#, fuzzy, kde-format
-#| msgid ""
-#| "Could not load the part:\n"
-#| "%1"
+#, kde-format
 msgid ""
 "Could not load our part:\n"
 "%1"
 msgstr ""
-"No se ha podido cargar el componente:\n"
+"No se ha podido cargar nuestro componente:\n"
 "%1"
 
 #: src/kdesvn.cpp:180

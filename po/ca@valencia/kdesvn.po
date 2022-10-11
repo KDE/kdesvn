@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-10 00:48+0000\n"
-"PO-Revision-Date: 2022-09-07 19:28+0200\n"
+"PO-Revision-Date: 2022-10-10 09:42+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -139,15 +139,12 @@ msgid "Show the content of log cache database"
 msgstr "Mostra el contingut de la base de dades del cau de registre"
 
 #: src/kdesvn.cpp:149
-#, fuzzy, kde-format
-#| msgid ""
-#| "Could not load the part:\n"
-#| "%1"
+#, kde-format
 msgid ""
 "Could not load our part:\n"
 "%1"
 msgstr ""
-"No s'ha pogut carregar la part:\n"
+"No s'ha pogut carregar la nostra part:\n"
 "%1"
 
 #: src/kdesvn.cpp:180
@@ -5688,10 +5685,3 @@ msgstr "Obri un repositori/còpia de treball"
 #, kde-format
 msgid "Open repository or working copy"
 msgstr "Obri el repositori o còpia de treball"
-
-#~ msgid ""
-#~ "Could not find our part:\n"
-#~ "%1"
-#~ msgstr ""
-#~ "No s'ha pogut trobar la nostra part:\n"
-#~ "%1"

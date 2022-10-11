@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-10 00:48+0000\n"
-"PO-Revision-Date: 2022-10-08 12:52+0300\n"
+"PO-Revision-Date: 2022-10-10 21:14+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -135,15 +135,12 @@ msgid "Show the content of log cache database"
 msgstr "Günlük kaydı önbelleği veritabanı içeriğini göster"
 
 #: src/kdesvn.cpp:149
-#, fuzzy, kde-format
-#| msgid ""
-#| "Could not load the part:\n"
-#| "%1"
+#, kde-format
 msgid ""
 "Could not load our part:\n"
 "%1"
 msgstr ""
-"Kısım yüklenemedi:\n"
+"Bizim kısmımız yüklenemedi:\n"
 "%1"
 
 #: src/kdesvn.cpp:180
@@ -175,7 +172,7 @@ msgstr "Hazır"
 #: src/kdesvn_part.cpp:155
 #, kde-format
 msgid "Logs follow node changes"
-msgstr "Kayıtlar düğüm değişikliklerini takip eder"
+msgstr "Günlükler, düğüm değişikliklerini takip eder"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_ignored_files)
 #. i18n: ectx: label, entry, group (subversion)
@@ -214,7 +211,7 @@ msgstr "kdesvn kısmı hakkında"
 #: src/kdesvn_part.cpp:190
 #, kde-format
 msgid "Kdesvn Handbook"
-msgstr "Kdesvn El kitabı"
+msgstr "Kdesvn El Kitabı"
 
 #: src/kdesvn_part.cpp:280
 #, kde-format
@@ -311,12 +308,12 @@ msgstr "Renk Ayarları"
 #: src/kdesvn_part.cpp:340 src/settings/revisiontree_settings.ui:6
 #, kde-format
 msgid "Revision tree Settings"
-msgstr "Gözden geçirme ağacı Ayarları"
+msgstr "Revizyon Ağacı Ayarları"
 
 #: src/kdesvn_part.cpp:340
 #, kde-format
 msgid "Revision tree"
-msgstr "Gözden geçirme ağacı"
+msgstr "Revizyon ağacı"
 
 #: src/kdesvn_part.cpp:342
 #, kde-format
@@ -520,7 +517,7 @@ msgstr "%m'nin %v önbelleklenmemiş günlük kaydı eklendi."
 #: src/kiosvn/kiolistener.cpp:66 src/kiosvn/kiosvn.cpp:811
 #, kde-format
 msgid "Wrong or missing log (may cancel pressed)."
-msgstr "Yanlış ya da eksik kayıt (basılıyı iptal edebilir)."
+msgstr "Yanlış ya da eksik günlük (basılıyı iptal edebilir)."
 
 #: src/kiosvn/kiolistener.cpp:91
 #, kde-format
@@ -574,7 +571,7 @@ msgstr "%1 atlandı."
 #: src/kiosvn/kiolistener.cpp:173
 #, kde-format
 msgid "Finished at revision %1."
-msgstr "%1 sürümünde tamamlandı."
+msgstr "%1 revizyonunda tamamlandı."
 
 #: src/kiosvn/kiolistener.cpp:175
 #, kde-format
@@ -584,7 +581,7 @@ msgstr "Güncelleme tamamlandı."
 #: src/kiosvn/kiolistener.cpp:179
 #, kde-format
 msgid "Finished external at revision %1."
-msgstr "Harici %1 sürümünde tamamlandı."
+msgstr "Dış, %1 revizyonunda tamamlandı."
 
 #: src/kiosvn/kiolistener.cpp:181
 #, kde-format
@@ -599,7 +596,7 @@ msgstr "Harici öge %1 içine getiriliyor."
 #: src/kiosvn/kiolistener.cpp:195
 #, kde-format
 msgid "Status against revision: %1."
-msgstr "Sürüme karşı durum: %1."
+msgstr "Revizyona karşı durum: %1."
 
 #: src/kiosvn/kiolistener.cpp:199
 #, kde-format
@@ -640,7 +637,7 @@ msgstr "Dosya verisi aktarılıyor "
 #: src/kiosvn/kiosvn.cpp:507
 #, kde-format
 msgid "Can only write on HEAD revision."
-msgstr "Yalnızca HEAD baskısına yazılabilir."
+msgstr "Yalnızca HEAD revizyonuna yazılabilir."
 
 #: src/kiosvn/kiosvn.cpp:342
 #, kde-format
@@ -701,7 +698,7 @@ msgstr "%1 %2 ye kopyalandı"
 #: src/svnfrontend/svnactions.cpp:2212
 #, kde-format
 msgid "Committed revision %1."
-msgstr "%1 sürümü işlendi."
+msgstr "%1 revizyonu işlendi."
 
 #: src/kiosvn/kiosvn.cpp:830
 #, kde-format
@@ -711,7 +708,7 @@ msgstr "İşlenecek bir şey yok."
 #: src/kiosvn/kiosvn.cpp:877
 #, kde-format
 msgid "Empty logs"
-msgstr "Boş kayıtlar"
+msgstr "Boş günlükler"
 
 #: src/ksvnwidgets/authdialogwidget.cpp:35
 #, kde-format
@@ -1187,7 +1184,8 @@ msgstr "Christian Ehrlicher"
 #: src/main.cpp:53
 #, kde-format
 msgid "Execute single Subversion command on specific revision(-range)"
-msgstr "Belirli bir sürüm (aralığında) tek bir Subversion komutu çalıştır"
+msgstr ""
+"Belirli bir revizyonda veya eriminde, tek bir Subversion komutu çalıştır"
 
 #: src/main.cpp:53
 #, kde-format
@@ -1197,7 +1195,7 @@ msgstr "başlangıçsürümü[:bitişsürümü]"
 #: src/main.cpp:54
 #, kde-format
 msgid "Ask for revision when executing single command"
-msgstr "Tek komut çalıştırırken sürüm sor"
+msgstr "Tek komut çalıştırırken revizyon sor"
 
 #: src/main.cpp:55
 #, kde-format
@@ -1217,7 +1215,7 @@ msgstr "<file>"
 #: src/main.cpp:57
 #, kde-format
 msgid "Limit log output to <number>"
-msgstr "Kayıt çıktısını <number> ile sınırlandır"
+msgstr "Günlük çıktısını <number> ile sınırlandır"
 
 #: src/main.cpp:57
 #, kde-format
@@ -1252,7 +1250,7 @@ msgstr "Bir komut çalıştırıldıktan sonra günlük kaydını göster"
 #: src/settings/cmdexecsettings.ui:23
 #, kde-format
 msgid "Minimum log lines to show:"
-msgstr "Gösterilecek asgari kayıt satırı:"
+msgstr "Gösterilecek en az günlük sayısı:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_cmdline_log_minline)
 #: src/settings/cmdexecsettings.ui:33
@@ -1260,8 +1258,8 @@ msgstr "Gösterilecek asgari kayıt satırı:"
 msgid ""
 "The minimum a log output must contain before kdesvn shows a single log window"
 msgstr ""
-"kdesvn tek bir kayıt penceresi göstermeden önce kayıt çıktısının içermesi "
-"gereken asgari kayıt"
+"kdesvn, tek bir günlük penceresi göstermeden önce kayıt çıktısının içermesi "
+"gereken en az günlük çıktısı"
 
 #. i18n: ectx: property (specialValueText), widget (QSpinBox, kcfg_cmdline_log_minline)
 #: src/settings/cmdexecsettings.ui:39
@@ -1302,7 +1300,7 @@ msgstr "Üst seviye eylem menüsünde girdileri görüntüleme"
 #: src/settings/cmdexecsettings.ui:71
 #, kde-format
 msgid "KIO operations use standard log message"
-msgstr "KIO işlemleri standart kayıt iletileri kullanır"
+msgstr "KIO işlemleri standart günlük iletileri kullanır"
 
 #. i18n: ectx: property (text), widget (QLabel, stdLogmsgLabel)
 #: src/settings/cmdexecsettings.ui:80
@@ -1383,7 +1381,7 @@ msgstr "Fark içerik türünü yok sayar"
 #: src/svnfrontend/graphtree/revgraphview.cpp:862
 #, kde-format
 msgid "Diff in revision tree is recursive"
-msgstr "Baskı ağacındaki fark yinelemelidir"
+msgstr "Revizyon ağacındaki Diff özyinelidir"
 
 #. i18n: ectx: label, entry, group (general_items)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_spaces)
@@ -1534,7 +1532,7 @@ msgid ""
 "</p>"
 msgstr ""
 "<p>\n"
-"Kdesvn'nin harici birleştirme programını nasıl çalıştıracağını girin. Biçim "
+"Kdesvn'nin dış birleştirme programını nasıl çalıştıracağını girin. Biçim "
 "şöyledir\n"
 "<p align=\"center\">\n"
 "<b><tt>&lt;program&gt; &lt;programseçenekleri&gt; %s1 %s2 %t</tt></b>\n"
@@ -1542,7 +1540,7 @@ msgstr ""
 "Anlamları şöyledir:<br>\n"
 "<b><tt>%s1</tt></b> Birleştirme için ilk kaynak<br>\n"
 "<b><tt>%s2</tt></b> Birleştirme için ikinci kaynak, ayarlanmamışsa ilk "
-"kaynağın başka bir sürümüne eşittir<br>\n"
+"kaynağın başka bir revizyonuna eşittir<br>\n"
 "<b><tt>%t</tt></b> Birleştirme için yerel hedef.\n"
 "</p>"
 
@@ -1577,7 +1575,7 @@ msgid ""
 "</p>"
 msgstr ""
 "<p align=\"left\">\n"
-"Şu biçimde harici bir program girin\n"
+"Şöyle bir dış program girin\n"
 "<p align=\"center\">\n"
 "<tt>&lt;program&gt; &lt;param&gt; %f</tt>\n"
 "</p>\n"
@@ -1591,13 +1589,13 @@ msgstr ""
 "</p>\n"
 "<br>\n"
 "İlk ve ikinci biçimden biri kullanılırsa svn kendisi farkı üretir. %f geçici "
-"bir dosya adıyla değiştirilir. %f verilmemişse,\n"
+"bir dosya adıyla değiştirilir. %f verilmemişse\n"
 "fark-görüntüleyici stdin'den veri okuyabilmelidir.\n"
 "<br>\n"
 "%s1 ve %s2 verildiğinde, kdesvn bu görünümün farkı yapmasına izin verir. "
 "Bunun için geçici bir dışa aktarım veya alma (gerekiyorsa) yapar ve "
-"parametreleri uygun değerlerle doldurur. %s1 ilk sürümün içeriğiyle "
-"doldurulacaktır, %s2 ise son sürümle. Büyük yinelemeli farklarda bu oldukça "
+"parametreleri uygun değerlerle doldurur. %s1 ilk revizyonun içeriğiyle "
+"doldurulacaktır, %s2 ise son revizyonla. Büyük özyineli farklarda bu oldukça "
 "yavaş olabilir.\n"
 "</p>"
 
@@ -1840,14 +1838,14 @@ msgstr "Sürümlendirilmiş değiştirilmemiş dosyaları sakla"
 #: src/settings/kdesvn_part.kcfg:92 src/settings/subversion_settings.ui:145
 #, kde-format
 msgid "Log follows node changes"
-msgstr "Kayıt düğüm değişikliklerini takip eder"
+msgstr "Günlük, düğüm değişikliklerini takip eder"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_always_list_changed_files)
 #: src/settings/kdesvn_part.kcfg:96 src/settings/subversion_settings.ui:161
 #, kde-format
 msgid "Log always reads list of changed files"
-msgstr "Kayıt her zaman değişen dosyaların listesini okur"
+msgstr "Günlük, her zaman değişen dosyaların listesini okur"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:100
@@ -1859,7 +1857,7 @@ msgstr "Çalışan kopya açıldığında güncellemeleri denetime başla"
 #: src/settings/kdesvn_part.kcfg:104
 #, kde-format
 msgid "Start caching latest logs on open or commit"
-msgstr "Açma veya işlemede son kayıtları önbelleğe almaya başla"
+msgstr "Açma veya işlemede son günlükleri önbelleğe almaya başla"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:108
@@ -1951,14 +1949,15 @@ msgstr "Suçlama görüntüsü için yerel"
 #: src/settings/kdesvn_part.kcfg:209
 #, kde-format
 msgid "Check status of log cache when starting revision tree"
-msgstr "Sürüm ağacını başlatırken günlük kaydı önbelleğinin durumunu denetle"
+msgstr ""
+"Revizyon ağacını başlatırken günlük kaydı önbelleğinin durumunu denetle"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/settings/kdesvn_part.kcfg:213 src/settings/revisiontree_settings.ui:129
 #, kde-format
 msgid "Direction of revision tree"
-msgstr "Sürüm ağacının yönü"
+msgstr "Revizyon ağacının yönü"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:217
@@ -2000,7 +1999,7 @@ msgstr "Ağaç penceresindeki ayrıntı görünümünün yüksekliği"
 #: src/settings/kdesvn_part.kcfg:241
 #, kde-format
 msgid "Diffs from revision tree are recursive"
-msgstr "Sürüm ağacındaki farklar yineler"
+msgstr "Revizyon ağacındaki farklar özyinelidir"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:247
@@ -2018,25 +2017,25 @@ msgstr "Konqueror kdesvn girdilerini ana eylem menüsünde göstermemli mi?"
 #: src/settings/kdesvn_part.kcfg:255
 #, kde-format
 msgid "Show a small log window after executing a command."
-msgstr "Bir komut çalıştırdıktan sonra küçük bir kayıt penceresi göster."
+msgstr "Bir komut çalıştırdıktan sonra küçük bir günlük penceresi göster."
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:259
 #, kde-format
 msgid "Log must contain at least lines to show"
-msgstr "Kayıt gösterecek en az bu kadar satır içermeli"
+msgstr "Günlük, gösterecek en az bu kadar satır içermeli"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:263
 #, kde-format
 msgid "KIO::svn operations use a standard log message"
-msgstr "KIO::svn işlemleri standart kayıt iletisi kullanır"
+msgstr "KIO::svn işlemleri standart günlük iletisi kullanır"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:267
 #, kde-format
 msgid "The standard log message to use with KIO if not asking for it."
-msgstr "Sormuyorsa KIO ile birlikte kullanılacak standart kayıt iletisi."
+msgstr "Sormuyorsa KIO ile birlikte kullanılacak standart günlük iletisi."
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:271
@@ -2056,8 +2055,8 @@ msgstr "İlerleme iletilerini KDE kilit alanında yazdır"
 msgid ""
 "This value holds for log dialog which kind of log is used, its internal only."
 msgstr ""
-"Bu değer kayıt penceresi için ne tür kaydın kullanıldığını tutar, yalnızca "
-"dahilidir."
+"Bu değer, günlük penceresi için ne tür günlük kullanıldığını tutar, yalnızca "
+"içsel."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
 #: src/settings/polling_settings.ui:11
@@ -2147,7 +2146,7 @@ msgstr "Silinen ögeler için renk:"
 #, kde-format
 msgid "Should kdesvn check content of log cache before starting the tree"
 msgstr ""
-"Kdesvn ağacı başlatmadan önce kayıt önbelleğinin içeriğini denetlemeli mi"
+"Kdesvn, ağacı başlatmadan önce günlük önbelleğinin içeriğini denetlemeli mi"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_fill_cache_on_tree)
 #: src/settings/revisiontree_settings.ui:180
@@ -2158,16 +2157,16 @@ msgid ""
 "\n"
 "But this may slow down tree generation so it is disabled by default."
 msgstr ""
-"Ağaç üretmeye başlarken ve kayıt önbelleğinden veri okurken kdesvn ağ "
+"Ağaç üretmeye başlarken ve günlük önbelleğinden veri okurken kdesvn ağ "
 "etkinse depodaki yeni ögeleri denetleyebilir. \n"
 "\n"
-"Ama bu ağaç üretimini yavaşlatabilir bu yüzden ötanımlı olarak kapalıdır."
+"Ama bu ağaç üretimini yavaşlatabilir; bu yüzden ötanımlı olarak kapalıdır."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_fill_cache_on_tree)
 #: src/settings/revisiontree_settings.ui:183
 #, kde-format
 msgid "Check log cache fill before reading tree"
-msgstr "Ağacı okumadan önce kayıt önbelleği doluluğunu denetle"
+msgstr "Ağacı okumadan önce günlük önbelleği doluluğunu denetle"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_start_updates_check_on_open)
 #: src/settings/subversion_settings.ui:14
@@ -2186,13 +2185,13 @@ msgstr "Bir çalışma kopyası açarken güncellemeleri denetlemeye başla"
 #: src/settings/subversion_settings.ui:33
 #, kde-format
 msgid "Start refresh the log cache for repository when networking enabled"
-msgstr "Ağ etkinken depo için kayıt önbelleğini yenilemeyi başlat"
+msgstr "Ağ etkinken depo için günlük önbelleğini yenilemeyi başlat"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:36
 #, kde-format
 msgid "Start fill log cache on open"
-msgstr "Açarken kayıt önbelleğini doldurmaya başla"
+msgstr "Açarken günlük önbelleğini doldurmaya başla"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:43
@@ -2370,7 +2369,7 @@ msgid ""
 "between node changes from within the log viewer."
 msgstr ""
 "Değişen dosyaların listesini okumak bazen yavaşlığa sebep olabilir. Ama bu "
-"özellik kapatılırsa kdesvn kayıt görüntüleyici içinde düğümler arasında "
+"özellik kapatılırsa kdesvn günlük görüntüleyici içinde düğümler arasında "
 "farkları üretmede başarısız olabilir."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_review_commit)
@@ -2431,12 +2430,12 @@ msgstr "Güncelleme eksik üstleri yapar"
 #, kde-format
 msgid ""
 "Not filling log cache because it is disabled due setting for this repository."
-msgstr "Kayıt önbelleği bu deponun ayarları gereğince doldurulmuyor."
+msgstr "Günlük önbelleği bu deponun ayarları gereğince doldurulmuyor."
 
 #: src/svnfrontend/background/fillcachethread.cpp:74
 #, kde-format
 msgid "Filling log cache in background."
-msgstr "Kayıt önbelleği arka planda dolduruluyor."
+msgstr "Günlük önbelleği arka planda dolduruluyor."
 
 #: src/svnfrontend/background/fillcachethread.cpp:96
 #, kde-format
@@ -2446,12 +2445,12 @@ msgstr "Önbellek doldurma iptal edildi."
 #: src/svnfrontend/background/fillcachethread.cpp:111
 #, kde-format
 msgid "Cache filled up to revision %1."
-msgstr "Önbellek %1 sürümüne kadar dolduruldu."
+msgstr "Önbellek, %1 revizyonuna kadar dolduruldu."
 
 #: src/svnfrontend/background/fillcachethread.cpp:118
 #, kde-format
 msgid "Filling log cache in background finished."
-msgstr "Kayıt önbelleğinin arka planda doldurulması tamamlandı."
+msgstr "Günlük önbelleğinin arka planda doldurulması tamamlandı."
 
 #: src/svnfrontend/background/tcontextlistener.cpp:182
 #, kde-format
@@ -2467,7 +2466,7 @@ msgstr "%1 aktarıldı."
 #: src/svnfrontend/blamedisplay.cpp:185 src/svnfrontend/blamedisplay.cpp:197
 #, kde-format
 msgid "Log message for revision"
-msgstr "Sürüm için kayıt iletisi"
+msgstr "Revizyon için günlük iletisi"
 
 #: src/svnfrontend/blamedisplay.cpp:190
 #, kde-format
@@ -2488,7 +2487,7 @@ msgstr "Satır numarasını göster"
 #, kde-format
 msgctxt "@title:window"
 msgid "Log Message for Revision %1"
-msgstr "%1 Sürümü için Kayıt İletisi"
+msgstr "%1 Revizyonu için Günlük İletisi"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #: src/svnfrontend/blamedisplay.ui:40
@@ -2501,7 +2500,7 @@ msgstr "Satır"
 #: src/svnfrontend/models/logitemmodel.cpp:173
 #, kde-format
 msgid "Revision"
-msgstr "Sürüm"
+msgstr "Revizyon"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #. i18n: ectx: property (text), widget (QRadioButton, m_startDateButton)
@@ -2530,7 +2529,7 @@ msgstr "İçerik"
 #: src/svnfrontend/ccontextlistener.cpp:64
 #, kde-format
 msgid "Add to revision control"
-msgstr "Sürüm denetimine ekle"
+msgstr "Revizyon denetimine ekle"
 
 #: src/svnfrontend/ccontextlistener.cpp:67
 #, kde-format
@@ -2861,7 +2860,7 @@ msgstr "1.6 öncesi Subversion ile uyumlu"
 #: src/svnfrontend/createrepodlg.ui:113
 #, kde-format
 msgid "Disable automatic log file removal (BDB only)"
-msgstr "Otomatik kayıt dosyası silmeyi kapat (sadece BDB)"
+msgstr "Otomatik günlük dosyası silmeyi kapat (sadece BDB)"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: src/svnfrontend/createrepodlg.ui:123
@@ -2916,7 +2915,7 @@ msgstr "1.8 öncesi Subversion ile uyumlu"
 #: src/svnfrontend/database/dboverview.cpp:117
 #, kde-format
 msgid "Log cache holds %1 log entries and consumes %2 on disk."
-msgstr "Kayıt önbelleği %1 kayıt girdisi tutuyor ve diskte %2 yer kaplıyor."
+msgstr "Günlük önbelleği %1 kayıt girdisi tutuyor ve diskte %2 yer kaplıyor."
 
 #: src/svnfrontend/database/dboverview.cpp:133
 #, kde-format
@@ -3004,31 +3003,31 @@ msgstr "%1 için Ayarlar"
 #: src/svnfrontend/database/dbsettings.ui:21
 #, kde-format
 msgid "Log cache settings"
-msgstr "Kayıt önbelleği ayarları"
+msgstr "Günlük önbelleği ayarları"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dbcfg_noCacheUpdate)
 #: src/svnfrontend/database/dbsettings.ui:27
 #, kde-format
 msgid "Do not update log cache on open"
-msgstr "Açarken kayıt önbelleğini güncelleme"
+msgstr "Açarken günlük önbelleğini güncelleme"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: src/svnfrontend/database/dbsettings.ui:40
 #, kde-format
 msgid "Prefixes to filter out in revision tree"
-msgstr "Sürüm ağacında süzülecek önekler"
+msgstr "Revizyon ağacında süzülecek önekler"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: src/svnfrontend/database/dbsettings.ui:58
 #, kde-format
 msgid "Log and statistics setting"
-msgstr "Kayıt ve istatistik ayarları"
+msgstr "Günlük ve istatistik ayarları"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/svnfrontend/database/dbsettings.ui:70
 #, kde-format
 msgid "Hide logs containing following words"
-msgstr "Aşağıdaki sözcükleri içeren kayıtları gizle"
+msgstr "Aşağıdaki sözcükleri içeren günlükleri gizle"
 
 #. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_log_pattern)
 #: src/svnfrontend/database/dbsettings.ui:77
@@ -3037,7 +3036,7 @@ msgid ""
 "This is a list which words/substrings a log entry must contain so it will be "
 "hidden from log and statistics"
 msgstr ""
-"Bu kayıtlardan ve istatistiklerden gizlenmesi için bir kayıt girdisinin "
+"Bu, günlüklerden ve istatistiklerden gizlenmesi için bir günlük girdisinin "
 "hangi sözcükleri/alt sözcükleri içermesi gerektiğini söyleyen listedir"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -3052,7 +3051,7 @@ msgstr "Şu kullanıcılardan işlemeleri gösterme"
 msgid ""
 "Do not display commits of listed users in log window and statistics view"
 msgstr ""
-"Listelenen kullanıcıların işlemelerini kayıt penceresinde ve istatistik "
+"Listelenen kullanıcıların işlemelerini günlük penceresinde ve istatistik "
 "görünümünde görüntüleme"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dbcfg_filter_empty_author)
@@ -3083,7 +3082,7 @@ msgstr "BAŞLANGIÇ için -1"
 #: src/svnfrontend/dumprepo_dlg.ui:67
 #, kde-format
 msgid "End revision:"
-msgstr "Bitiş sürümü:"
+msgstr "Bitiş revizyonu:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_incrementalDump)
 #: src/svnfrontend/dumprepo_dlg.ui:94
@@ -3095,7 +3094,7 @@ msgstr "Artarak Döküm"
 #: src/svnfrontend/dumprepo_dlg.ui:107
 #, kde-format
 msgid "Dump revision range"
-msgstr "Sürüm aralığını dök"
+msgstr "Revizyon erimini dök"
 
 #. i18n: ectx: property (text), widget (QLabel, m_OutfileLabel)
 #: src/svnfrontend/dumprepo_dlg.ui:117
@@ -3176,11 +3175,11 @@ msgid ""
 msgstr ""
 "Bir dosyanın içeriğine genişletilecek anahtar sözcükler.<br/>Belgelere "
 "$AnahtarSözcük$ olarak biçimlenmiş bir anahtar sözcük konarak eklenebilirler."
-"<br/>Geçerli anahtar sözcükler:<br/><b>URL/HeadURL</b> Projenin head sürümü "
-"için URL.<br/><b>Author/LastChangedBy</b> Dosyayı son değiştiren kişi.<br/"
-"><b>Date/LastChangedDate</b> Nesnenin son değiştirilme tarihi/zamanı.<br/"
-"><b>Revision/Rev/LastChangedRevision</b> Nesnenin değiştiği son sürüm.<br/"
-"><b>Id</b> Önceki 4 anahtar sözcüğün sıkıştırılmış özeti."
+"<br/>Geçerli anahtar sözcükler:<br/><b>URL/HeadURL</b> Projenin head "
+"revizyonu için URL.<br/><b>Author/LastChangedBy</b> Dosyayı son değiştiren "
+"kişi.<br/><b>Date/LastChangedDate</b> Nesnenin son değiştirilme tarihi/"
+"zamanı.<br/><b>Revision/Rev/LastChangedRevision</b> Nesnenin değiştiği son "
+"revizyon.<br/><b>Id</b> Önceki 4 anahtar sözcüğün sıkıştırılmış özeti."
 
 #: src/svnfrontend/editpropsdlg.cpp:58
 #, kde-format
@@ -3215,7 +3214,7 @@ msgid ""
 "><nobr><b>foo http://example.com/repos/projectA</b></nobr><br/><nobr><b>foo/"
 "bar -r 1234 http://example.com/repos/projectB</b></nobr>"
 msgstr ""
-"Her biri göreceli dizin yolu, isteğe bağlı sürüm bayrağı, ve bir URL'den "
+"Her biri göreceli dizin yolu, isteğe bağlı revizyon bayrağı, ve bir URL'den "
 "oluşan yen satırla ayrılmış modül belirtici listesi. Örneğin: <br/"
 "><nobr><b>foo http://example.com/repos/projectA</b></nobr><br/><nobr><b>foo/"
 "bar -r 1234 http://example.com/repos/projectB</b></nobr>"
@@ -3251,7 +3250,7 @@ msgid ""
 "The string must contain <b>%BUGID%</b> which gets replaced with the bug "
 "issue number."
 msgstr ""
-"Bir sorun numarası girildiğinde kayıt iletisine eklenmesi gereken karakter "
+"Bir sorun numarası girildiğinde günlük iletisine eklenmesi gereken karakter "
 "dizisi. Karakter dizisi hata sorun numarasıyla değiştirilecek olan <b>%BUGID"
 "%</b> değerini içermelidir."
 
@@ -3284,9 +3283,9 @@ msgid ""
 "top of the log message. The default is <b>'true'</b> which means the "
 "bugtracking ID is appended to the log message."
 msgstr ""
-"Hata izleme kimliğinin kayıt iletisinin üstüne eklenmesini istiyorsanız "
+"Hata izleme kimliğinin günlük iletisinin üstüne eklenmesini istiyorsanız "
 "<b>'false'</b> olarak ayarlayın. Öntanımlı değer hata izleme kimliğinin "
-"kayıt iletisine ekleneceği anlamına gelen <b>'true'</b> değeridir."
+"günlük iletisine ekleneceği anlamına gelen <b>'true'</b> değeridir."
 
 #: src/svnfrontend/editpropsdlg.cpp:116
 #, kde-format
@@ -3439,14 +3438,14 @@ msgstr "Çifte özellik"
 #: src/svnfrontend/fronthelpers/rangeinput.ui:6
 #, kde-format
 msgid "Revisions"
-msgstr "Sürümler"
+msgstr "Revizyonlar"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_startRevBox)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:12
 #: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:209
 #, kde-format
 msgid "Start with revision"
-msgstr "Sürümle başla"
+msgstr "Revizyonla başla"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, m_startWorkingButton)
 #. i18n: ectx: property (toolTip), widget (QRadioButton, m_stopWorkingButton)
@@ -3488,7 +3487,7 @@ msgstr "&BAŞLANGIÇ"
 #: src/svnfrontend/fronthelpers/rangeinput.ui:85
 #, kde-format
 msgid "Stop with revision"
-msgstr "Sürümle dur"
+msgstr "Revizyonla dur"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_stopNumberButton)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:93
@@ -3506,12 +3505,12 @@ msgstr "BAŞLANGIÇ"
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Revisions"
-msgstr "Sürümleri Seç"
+msgstr "Revizyonları Seç"
 
 #: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:205
 #, kde-format
 msgid "Select revision"
-msgstr "Sürüm seçin"
+msgstr "Revizyon seç"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_RevisionButton)
 #: src/svnfrontend/fronthelpers/revisionbutton.ui:22
@@ -3545,37 +3544,37 @@ msgstr "Lütfen 'dot'un yüklü olduğunu denetleyin (GraphViz paketi)."
 #: src/svnfrontend/graphtree/revgraphview.cpp:425
 #, kde-format
 msgid "Deleted at revision %1"
-msgstr "%1 sürümünde silindi"
+msgstr "%1 revizyonunda silindi"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:428
 #, kde-format
 msgid "Added at revision %1 as %2"
-msgstr "%1 sürümünde %2 olarak eklendi"
+msgstr "%1 revizyonunda %2 olarak eklendi"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:434
 #, kde-format
 msgid "Copied to %1 at revision %2"
-msgstr "%2 sürümünde %1 e kopyalandı"
+msgstr "%2 revizyonunda %1 e kopyalandı"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:437
 #, kde-format
 msgid "Renamed to %1 at revision %2"
-msgstr "%2 sürümünde %1 olarak yeniden adlandırıldı"
+msgstr "%2 revizyonunda %1 olarak yeniden adlandırıldı"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:440
 #, kde-format
 msgid "Modified at revision %1"
-msgstr "%1 sürümünde değiştirildi"
+msgstr "%1 revizyonunda değiştirildi"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:443
 #, kde-format
 msgid "Replaced at revision %1"
-msgstr "%1 sürümünde yer değiştirildi"
+msgstr "%1 revizyonunda yer değiştirildi"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:446
 #, kde-format
 msgid "Revision %1"
-msgstr "Sürüm %1"
+msgstr "Revizyon %1"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:466
 #, kde-format
@@ -3585,12 +3584,12 @@ msgstr "%1 geçici dosyası yazma için açılamadı."
 #: src/svnfrontend/graphtree/revgraphview.cpp:561
 #, kde-format
 msgid "<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>"
-msgstr "<br>Sürüm: %1<br>Yazar: %2<br>Tarih: %3<br>Kayıt: %4</html>"
+msgstr "<br>Revizyon: %1<br>Yazar: %2<br>Tarih: %3<br>Günlük: %4</html>"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:569
 #, kde-format
 msgid "<b>Revision</b>%1%2%3"
-msgstr "<b>Sürüm</b>%1%2%3"
+msgstr "<b>Revizyon</b>%1%2%3"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:570
 #, kde-format
@@ -3605,7 +3604,7 @@ msgstr "<b>Tarih</b>%1%2%3"
 #: src/svnfrontend/graphtree/revgraphview.cpp:572
 #, kde-format
 msgid "<b>Log</b>%1%2%3"
-msgstr "<b>Kayıt</b>%1%2%3"
+msgstr "<b>Günlük</b>%1%2%3"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:841
 #, kde-format
@@ -3664,18 +3663,18 @@ msgstr "Resim (*.png)"
 #, kde-format
 msgctxt "@title:window"
 msgid "Logs"
-msgstr "Kayıtlar"
+msgstr "Günlükler"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:94
 #: src/svnfrontend/svnactions.cpp:294
 #, kde-format
 msgid "Getting logs - hit Cancel for abort"
-msgstr "Kayıtlar alınıyor - iptal için İptale tıklayın"
+msgstr "Günlükler alınıyor - durdurmak için İptal'e tıklayın"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:104
 #, kde-format
 msgid "No log cache possible due broken database and networking not allowed."
-msgstr "Veritabanı ve ağa izin verilmediğinden uygun kayıt önbelleği yok."
+msgstr "Veritabanı ve ağa izin verilmediğinden uygun günlük önbelleği yok."
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:104
 #: src/svnfrontend/graphtree/revisiontree.cpp:109
@@ -3684,13 +3683,13 @@ msgid ""
 "Could not retrieve logs, reason:\n"
 "%1"
 msgstr ""
-"Kayıtlar alınamadı, sebep:\n"
+"Günlükler alınamadı, neden:\n"
 "%1"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:134
 #, kde-format
 msgid "Scanning the logs for %1"
-msgstr "Kayıtlar %1 için taranıyor"
+msgstr "Günlükler, %1 için taranıyor"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:134
 #, kde-format
@@ -3701,7 +3700,7 @@ msgstr "İptal"
 #, kde-format
 msgctxt "@title:window"
 msgid "Scanning logs"
-msgstr "Kayıtlar taranıyor"
+msgstr "Günlükler taranıyor"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:224
 #: src/svnfrontend/graphtree/revisiontree.cpp:262
@@ -3726,7 +3725,7 @@ msgstr "Hedef dizin:"
 #: src/svnfrontend/hotcopydlg.ui:51
 #, kde-format
 msgid "Clean logs"
-msgstr "Kayıtları temizle"
+msgstr "Günlükleri temizle"
 
 #: src/svnfrontend/importdir_logmsg.cpp:38
 #, kde-format
@@ -3889,7 +3888,7 @@ msgstr "Seçili ögenin geçmiş kaydını kopyaları takip etmeden görüntüle
 #: src/svnfrontend/maintreewidget.cpp:508
 #, kde-format
 msgid "Full revision tree"
-msgstr "Tam sürüm ağacı"
+msgstr "Tam revizyon ağacı"
 
 #: src/svnfrontend/maintreewidget.cpp:509
 #, kde-format
@@ -3899,12 +3898,12 @@ msgstr "Öge geçmişini bağlı ağaç olarak gösterir"
 #: src/svnfrontend/maintreewidget.cpp:510
 #, kde-format
 msgid "Partial revision tree"
-msgstr "Kısmi sürüm ağacı"
+msgstr "Kısmi revizyon ağacı"
 
 #: src/svnfrontend/maintreewidget.cpp:511
 #, kde-format
 msgid "Shows history of item as linked tree for a revision range"
-msgstr "Öge geçmişini bir sürüm aralığı için bağlı ağaç olarak gösterir"
+msgstr "Öge geçmişini bir revizyon erimi için bağlı ağaç olarak gösterir"
 
 #: src/svnfrontend/maintreewidget.cpp:513
 #: src/svnfrontend/maintreewidget.cpp:514
@@ -3981,13 +3980,13 @@ msgid ""
 "Output the content of specified files or URLs with revision and author "
 "information in-line."
 msgstr ""
-"Belirtilen dosyaların veya URL'lerin içeriklerini sürüm ve yazar bilgisi ile "
-"satır içi çıktıla."
+"Belirtilen dosyaların veya URL'lerin içeriklerini revizyon ve yazar bilgisi "
+"ile satır içi çıktıla."
 
 #: src/svnfrontend/maintreewidget.cpp:533
 #, kde-format
 msgid "Blame range"
-msgstr "Suçlama aralığı"
+msgstr "Suçlama erimi"
 
 #: src/svnfrontend/maintreewidget.cpp:537
 #, kde-format
@@ -4002,13 +4001,13 @@ msgstr "Belirtilen dosyaların veya URL'lerin içeriğini çıktıla."
 #: src/svnfrontend/maintreewidget.cpp:540
 #, kde-format
 msgid "Cat revision..."
-msgstr "Sürümü birleştir..."
+msgstr "Revizyonu cat yap..."
 
 #: src/svnfrontend/maintreewidget.cpp:541
 #, kde-format
 msgid "Output the content of specified files or URLs at specific revision."
 msgstr ""
-"Belirtilen dosyaların veya URL'lerin içeriğini belirli sürümde çıktıla."
+"Belirtilen dosyaların veya URL'lerin içeriğini belirli revizyonda çıktıla."
 
 #: src/svnfrontend/maintreewidget.cpp:544
 #, kde-format
@@ -4199,7 +4198,7 @@ msgstr "Güncelle"
 #: src/svnfrontend/maintreewidget.cpp:605
 #, kde-format
 msgid "Update to revision..."
-msgstr "Sürüme güncelle..."
+msgstr "Revizyona güncelle..."
 
 #: src/svnfrontend/maintreewidget.cpp:606
 #: src/svnfrontend/maintreewidget.cpp:607
@@ -4253,7 +4252,7 @@ msgstr "İki ögenin farkını al"
 #: src/svnfrontend/maintreewidget.cpp:627
 #, kde-format
 msgid "Merge two revisions"
-msgstr "İki sürümü birleştir"
+msgstr "İki revizyonu birleştir"
 
 #: src/svnfrontend/maintreewidget.cpp:628
 #, kde-format
@@ -4263,7 +4262,7 @@ msgstr "Birleştir"
 #: src/svnfrontend/maintreewidget.cpp:629
 #, kde-format
 msgid "Merge two revisions of this entry into itself"
-msgstr "Bu girdinin iki sürümünü kendine birleştir"
+msgstr "Bu girdinin iki revizyonunu kendine birleştir"
 
 #: src/svnfrontend/maintreewidget.cpp:632
 #, kde-format
@@ -4305,7 +4304,7 @@ msgstr "Mevcut depo yolunu dışa aktar"
 #: src/svnfrontend/maintreewidget.cpp:642
 #, kde-format
 msgid "Select browse revision"
-msgstr "Tarama sürümü seç"
+msgstr "Tarama revizyonu seç"
 
 #: src/svnfrontend/maintreewidget.cpp:646 src/svnfrontend/svnactions.cpp:1619
 #: src/svnfrontend/svnactions.cpp:1625
@@ -4337,7 +4336,7 @@ msgstr "Yenile"
 #: src/svnfrontend/maintreewidget.cpp:653 src/svnfrontend/svnlogdlg.ui:211
 #, kde-format
 msgid "Diff revisions"
-msgstr "Sürümlerin farkını al"
+msgstr "Revizyonları Diff'le"
 
 #: src/svnfrontend/maintreewidget.cpp:656
 #, kde-format
@@ -4365,12 +4364,12 @@ msgstr "Dosya ağacının tüm dallarını kapatır"
 #: src/svnfrontend/maintreewidget.cpp:1804
 #, kde-format
 msgid "Update log cache"
-msgstr "Kayıt önbelleğini güncelle"
+msgstr "Günlük önbelleğini güncelle"
 
 #: src/svnfrontend/maintreewidget.cpp:663
 #, kde-format
 msgid "Update the log cache for current repository"
-msgstr "Mevcut depo için kayıt önbelleğini güncelle"
+msgstr "Geçerli depo için günlük önbelleğini güncelle"
 
 #: src/svnfrontend/maintreewidget.cpp:667
 #, kde-format
@@ -4386,7 +4385,7 @@ msgstr "Mevcut depo için ayarlar"
 #: src/svnfrontend/maintreewidget.cpp:1799
 #, kde-format
 msgid "Stop updating the log cache"
-msgstr "Kayıt önbelleğini güncellemeyi durdur"
+msgstr "Günlük önbelleğini güncellemeyi durdur"
 
 #: src/svnfrontend/maintreewidget.cpp:1037
 #, kde-format
@@ -4641,7 +4640,7 @@ msgid ""
 "The merge is not actually performed, but the mergeinfo for the revisions "
 "which would have been merged is recorded in the working copy"
 msgstr ""
-"Birleştirme gerçekten yapılmaz, ama birleştirilecek olan sürümler için "
+"Birleştirme gerçekten yapılmaz; ancak birleştirilecek olan revizyonlar için "
 "birleştirme bilgisi çalışma kopyasında kaydedilir"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_RecordOnly)
@@ -4669,8 +4668,8 @@ msgid ""
 "If checked, allow merge into mixed revision working copy, otherwise raises "
 "error in that case"
 msgstr ""
-"İşaretliyse karışık sürümlü çalışma kopyasına birleştirmeye izin ver, aksi "
-"halde bir hata yükselt"
+"İşaretliyse karışık revizyonlu çalışma kopyasına birleştirmeye izin ver, "
+"aksi halde bir hata yükselt"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_AllowMixedRev)
 #: src/svnfrontend/merge_dlg.ui:179
@@ -4679,14 +4678,14 @@ msgid ""
 "Merge into mixed revision\n"
 "working copy"
 msgstr ""
-"Karışık sürümlü çalışma\n"
+"Karışık revizyon çalışma\n"
 "kopyasına birleştir"
 
 #: src/svnfrontend/mergedlg_impl.cpp:190
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter Merge Range"
-msgstr "Birleştirme Aralığı Girin"
+msgstr "Birleştirme Erimi Girin"
 
 #: src/svnfrontend/models/logitemmodel.cpp:179
 #, kde-format
@@ -4696,7 +4695,7 @@ msgstr "İleti"
 #: src/svnfrontend/models/logmodelhelper.cpp:43
 #, kde-format
 msgid "%1 at revision %2"
-msgstr "%2 sürümünde %1"
+msgstr "%2 revizyonunda %1"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:314
 #: src/svnfrontend/svnactions.cpp:726
@@ -4712,7 +4711,7 @@ msgstr "Durum"
 #: src/svnfrontend/models/svnitemmodel.cpp:318
 #, kde-format
 msgid "Last changed Revision"
-msgstr "Son değişen Sürüm"
+msgstr "Son değişen revizyon"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:320
 #: src/svnfrontend/svnactions.cpp:785
@@ -4792,7 +4791,7 @@ msgstr "Bitti"
 #: src/svnfrontend/svnactions.cpp:332
 #, kde-format
 msgid "Got no logs"
-msgstr "Kayıt alınamadı"
+msgstr "Günlük alınamadı"
 
 #: src/svnfrontend/svnactions.cpp:456
 #, kde-format
@@ -4947,7 +4946,7 @@ msgstr "Son işlenen"
 #: src/svnfrontend/svnactions.cpp:789
 #, kde-format
 msgid "Last revision"
-msgstr "Son sürüm"
+msgstr "Son revizyon"
 
 #: src/svnfrontend/svnactions.cpp:791
 #, kde-format
@@ -5386,7 +5385,7 @@ msgstr "Depoda yeni ögeler var"
 #: src/svnfrontend/svnactions.cpp:2593
 #, kde-format
 msgid "Not filling log cache because networking is disabled"
-msgstr "Ağ kapalı olduğundan kayıt önbelleği doldurulmuyor"
+msgstr "Ağ kapalı olduğundan günlük önbelleği doldurulmuyor"
 
 #: src/svnfrontend/svnactions.cpp:2635
 #, kde-format
@@ -5483,19 +5482,19 @@ msgstr "SVN Kaydı"
 #: src/svnfrontend/svnlogdlg.ui:31
 #, kde-format
 msgid "Start revision"
-msgstr "Başlangıç sürümü"
+msgstr "Başlangıç revizyonu"
 
 #. i18n: ectx: property (text), widget (QLabel, endLabel)
 #: src/svnfrontend/svnlogdlg.ui:41
 #, kde-format
 msgid "End revision"
-msgstr "Bitiş sürümü"
+msgstr "Bitiş revizyonu"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_goButton)
 #: src/svnfrontend/svnlogdlg.ui:57
 #, kde-format
 msgid "Get Logs"
-msgstr "Kayıtları Al"
+msgstr "Günlükleri Al"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_PrevFiftyButton)
 #: src/svnfrontend/svnlogdlg.ui:64
@@ -5525,7 +5524,7 @@ msgstr "Öncekiyle fark al"
 #: src/svnfrontend/svnlogdlg.ui:208
 #, kde-format
 msgid "Select second revision with right mouse button"
-msgstr "İkinci sürümü sağ tıklayarak seçin"
+msgstr "İkinci revizyonu sağ tıklayarak seçin"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonListFiles)
 #: src/svnfrontend/svnlogdlg.ui:230

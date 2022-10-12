@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-10 00:48+0000\n"
-"PO-Revision-Date: 2020-04-11 13:17+0100\n"
+"PO-Revision-Date: 2022-10-11 19:28+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -150,15 +150,12 @@ msgid "Show the content of log cache database"
 msgstr "Mostrar o conteúdo da base de dados da 'cache' do histórico"
 
 #: src/kdesvn.cpp:149
-#, fuzzy, kde-format
-#| msgid ""
-#| "Could not load the part:\n"
-#| "%1"
+#, kde-format
 msgid ""
 "Could not load our part:\n"
 "%1"
 msgstr ""
-"Não foi possível carregar a componente:\n"
+"Não foi possível carregar a nossa componente:\n"
 "%1"
 
 #: src/kdesvn.cpp:180
@@ -5698,10 +5695,3 @@ msgstr "Abrir o repositório / cópia local"
 #, kde-format
 msgid "Open repository or working copy"
 msgstr "Abrir o repositório ou a cópia local"
-
-#~ msgid ""
-#~ "Could not find our part:\n"
-#~ "%1"
-#~ msgstr ""
-#~ "Não foi possível carregar a nossa componente:\n"
-#~ "%1"

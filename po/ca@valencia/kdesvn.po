@@ -708,7 +708,7 @@ msgstr "S'ha publicat la revisió %1."
 #: src/kiosvn/kiosvn.cpp:830
 #, kde-format
 msgid "Nothing to commit."
-msgstr "Encara no hi ha res per a publicar."
+msgstr "Encara no hi ha res que s'haja de publicar."
 
 #: src/kiosvn/kiosvn.cpp:877
 #, kde-format
@@ -878,7 +878,7 @@ msgstr "Mostra els elements nous"
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Text File to Insert"
-msgstr "Seleccioneu un fitxer de text que s'inserirà"
+msgstr "Seleccioneu un fitxer de text que s'haja d'inserir"
 
 #: src/ksvnwidgets/commitmsg_impl.cpp:477
 #, kde-format
@@ -1241,7 +1241,7 @@ msgstr "Executa una ordre de Subversion (per a més informació «exec help»)"
 #: src/main.cpp:59
 #, kde-format
 msgid "Document to open"
-msgstr "Document que s'obrirà"
+msgstr "Document que s'ha d'obrir"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_cmdline_show_logwindow)
 #: src/settings/cmdexecsettings.ui:11
@@ -1260,7 +1260,7 @@ msgstr "Mostra el registre després d'executar una ordre"
 #: src/settings/cmdexecsettings.ui:23
 #, kde-format
 msgid "Minimum log lines to show:"
-msgstr "Nombre mínim de línies de registre que es mostraran:"
+msgstr "Nombre mínim de línies de registre que s'han de mostrar:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_cmdline_log_minline)
 #: src/settings/cmdexecsettings.ui:33
@@ -1554,7 +1554,7 @@ msgstr ""
 "<b><tt>%s1</tt></b> La primera font que s'ha de fusionar<br>\n"
 "<b><tt>%s2</tt></b> La segona font que s'ha de fusionar, si no s'establix "
 "igual que la primera, sinó una altra revisió<br>\n"
-"<b><tt>%t</tt></b> Destinació local que s'ha de fusionar.\n"
+"<b><tt>%t</tt></b> Destinació local que es fusionarà.\n"
 "</p>"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_external_diff_display)
@@ -2038,7 +2038,7 @@ msgstr "Mostra una xicoteta finestra de registre després d'executar una ordre."
 #: src/settings/kdesvn_part.kcfg:259
 #, kde-format
 msgid "Log must contain at least lines to show"
-msgstr "El registre ha de contindre almenys les línies que es mostraran"
+msgstr "El registre ha de contindre almenys les línies que s'han de mostrar"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:263
@@ -2176,7 +2176,7 @@ msgid ""
 "But this may slow down tree generation so it is disabled by default."
 msgstr ""
 "Quan s'inicia la generació de l'arbre i es lligen les dades des del cau de "
-"registre, Kdesvn podrà comprovar si hi ha nous elements al repositori si la "
+"registre, Kdesvn podrà comprovar si hi ha elements nous al repositori si la "
 "xarxa està activada.\n"
 "\n"
 "Però açò pot retardar la generació de l'arbre, de manera predeterminada està "
@@ -3054,7 +3054,7 @@ msgstr "No actualitzar el cau del registre en obrir"
 #: src/svnfrontend/database/dbsettings.ui:40
 #, kde-format
 msgid "Prefixes to filter out in revision tree"
-msgstr "Prefixos que cal filtrar en l'arbre de revisions"
+msgstr "Prefixos que s'han de filtrar en l'arbre de revisions"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: src/svnfrontend/database/dbsettings.ui:58
@@ -3175,7 +3175,7 @@ msgstr "Elimina els patrons"
 #: src/svnfrontend/editignorepattern.ui:49
 #, kde-format
 msgid "Depth for ignore"
-msgstr "Profunditat que s'ignorarà"
+msgstr "Profunditat per a ignorar"
 
 #: src/svnfrontend/editpropsdlg.cpp:32
 #, kde-format
@@ -3211,7 +3211,7 @@ msgid ""
 "last revision the object changed.<br/><b>Id</b> A compressed summary of the "
 "previous 4 keywords."
 msgstr ""
-"Paraules clau que cal expandir en el contingut d'un fitxer.<br/>Es poden "
+"Paraules clau que s'expandiran en el contingut d'un fitxer.<br/>Es poden "
 "inserir en els documents posant un ancoratge de paraula clau, el qual es "
 "dona format com a $NomClau$.<br/>Paraules clau vàlides són:<br/><b>URL/"
 "HeadURL</b> L'URL de la revisió «HEAD» del projecte.<br/><b>Author/"
@@ -3264,8 +3264,7 @@ msgstr ""
 #, kde-format
 msgid "A newline separated list of file patterns to ignore."
 msgstr ""
-"Una llista separada per salts de línia de patrons de fitxer que s'han "
-"d'ignorar."
+"Una llista separada per salts de línia de patrons de fitxer que s'ignoraran."
 
 #: src/svnfrontend/editpropsdlg.cpp:97
 #, kde-format
@@ -3786,7 +3785,7 @@ msgstr "No ignorar"
 msgid "If set, add files or directories that match ignore patterns."
 msgstr ""
 "Si està establida, s'afegiran els fitxers o directoris que coincidisquen amb "
-"els patrons que s'han d'ignorar."
+"els patrons que s'ignoraran."
 
 #: src/svnfrontend/importdir_logmsg.cpp:44
 #, kde-format
@@ -4453,7 +4452,7 @@ msgstr "Para l'actualització del cau del registre"
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Pattern to Ignore for \"%1\""
-msgstr "Edició del patró que s'ha d'ignorar per a «%1»"
+msgstr "Edició del patró que s'ignorarà per a «%1»"
 
 #: src/svnfrontend/maintreewidget.cpp:1314
 #: src/svnfrontend/maintreewidget.cpp:1358
@@ -5160,7 +5159,7 @@ msgstr "S'estan creant les diferències -premeu «Cancel·la» per a interrompre
 #: src/svnfrontend/svnactions.cpp:1268 src/svnfrontend/svnactions.cpp:1317
 #, kde-format
 msgid "No difference to display"
-msgstr "No hi ha cap diferència per a mostrar"
+msgstr "No hi ha diferències que s'hagen de mostrar"
 
 #: src/svnfrontend/svnactions.cpp:1308
 #, kde-format
@@ -5449,7 +5448,7 @@ msgstr "La comprovació d'actualitzacions ha finalitzat"
 #: src/svnfrontend/svnactions.cpp:2523
 #, kde-format
 msgid "There are new items in repository"
-msgstr "Hi ha nous elements en el repositori"
+msgstr "Hi ha elements nous en el repositori"
 
 #: src/svnfrontend/svnactions.cpp:2593
 #, kde-format

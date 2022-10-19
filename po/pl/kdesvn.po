@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-10 00:48+0000\n"
-"PO-Revision-Date: 2022-09-28 20:47+0200\n"
+"PO-Revision-Date: 2022-10-18 18:01+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 22.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -136,15 +136,12 @@ msgid "Show the content of log cache database"
 msgstr "Pokaż zawartość bazy danych dziennika"
 
 #: src/kdesvn.cpp:149
-#, fuzzy, kde-format
-#| msgid ""
-#| "Could not load the part:\n"
-#| "%1"
+#, kde-format
 msgid ""
 "Could not load our part:\n"
 "%1"
 msgstr ""
-"Nie można wczytać modułu:\n"
+"Nie można wczytać naszej części:\n"
 "%1"
 
 #: src/kdesvn.cpp:180

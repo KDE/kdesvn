@@ -552,7 +552,7 @@ svn::Revision SvnItem::revision() const
 const QString &SvnItem::getToolTipText()
 {
     if (!hasToolTipText()) {
-        qCDebug(KDESVN_LOG) << "Try getting text" << endl;
+        qCDebug(KDESVN_LOG) << "Try getting text" << Qt::endl;
         QString text;
         if (isRealVersioned() && !p_Item->m_Stat->entry().url().isEmpty()) {
             SvnActions *wrap = getWrapper();
@@ -569,7 +569,7 @@ const QString &SvnItem::getToolTipText()
                 SvnItemList lst;
                 lst.append(this);
                 text = wrap->getInfo(lst, rev, peg, false, false);
-                qCDebug(KDESVN_LOG) << text << endl;
+                qCDebug(KDESVN_LOG) << text << Qt::endl;
                 // KF5: TODO
                 /*
                 if (!p_Item->m_fitem.isNull()) {

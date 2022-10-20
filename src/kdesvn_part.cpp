@@ -83,7 +83,7 @@ void kdesvnpart::init(QWidget *parentWidget, bool full)
     // set our XML-UI resource file
 #ifdef TESTING_PARTRC
     setXMLFile(TESTING_PARTRC);
-    qCDebug(KDESVN_LOG) << "Using test rc file in " << TESTING_PARTRC << endl;
+    qCDebug(KDESVN_LOG) << "Using test rc file in " << TESTING_PARTRC << Qt::endl;
 #else
     setXMLFile(QStringLiteral("kdesvn_part.rc"));
 #endif

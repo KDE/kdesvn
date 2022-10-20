@@ -57,7 +57,7 @@ kdesvn::kdesvn()
     m_part = nullptr;
 #ifdef TESTING_RC
     setXMLFile(TESTING_RC);
-    qCDebug(KDESVN_LOG) << "Using test rc file in " << TESTING_RC << endl;
+    qCDebug(KDESVN_LOG) << "Using test rc file in " << TESTING_RC << Qt::endl;
     // I hate this crashhandler in development
     KCrash::setCrashHandler(0);
 #else

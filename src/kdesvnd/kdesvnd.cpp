@@ -275,7 +275,7 @@ bool kdesvnd::isRepository(const QUrl &url) const
         try {
             m_Listener->m_Svnclient->status(params.depth(svn::DepthEmpty).all(false).update(false).noIgnore(false).revision(svn::Revision::HEAD));
         } catch (const svn::ClientException &e) {
-            qCDebug(KDESVN_LOG) << e.msg() << endl;
+            qCDebug(KDESVN_LOG) << e.msg() << Qt::endl;
             return false;
         }
         return true;
@@ -323,9 +323,9 @@ void kdesvnd::registerKioFeedback(qulonglong kioid)
     if (reply.isValid()) {
         KsvnJobView *jobView = new KsvnJobView(kioid, QStringLiteral("org.kde.JobViewServer"), reply.value().path(), QDBusConnection::sessionBus());
         progressJobView.insert(kioid, jobView);
-        qCDebug(KDESVN_LOG) << "Register " << kioid << endl;
+        qCDebug(KDESVN_LOG) << "Register " << kioid << Qt::endl;
     } else {
-        qCDebug(KDESVN_LOG) << "Could not register " << kioid << endl;
+        qCDebug(KDESVN_LOG) << "Could not register " << kioid << Qt::endl;
     }
 }
 
@@ -354,7 +354,7 @@ void kdesvnd::unRegisterKioFeedback(qulonglong kioid)
     CHECK_KIO;
     KsvnJobView *jobView = progressJobView.take(kioid);
     delete jobView;
-    qCDebug(KDESVN_LOG) << "Removed " << kioid << endl;
+    qCDebug(KDESVN_LOG) << "Removed " << kioid << Qt::endl;
 }
 
 void kdesvnd::notifyKioOperation(const QString &text)

@@ -278,7 +278,7 @@ svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTru
 
 bool CContextListener::contextSslClientCertPrompt(QString &certFile)
 {
-    qCDebug(KDESVN_LOG) << certFile << endl;
+    qCDebug(KDESVN_LOG) << certFile << Qt::endl;
     emit waitShow(true);
     QString afile = QFileDialog::getOpenFileName(nullptr, i18n("Open a file with a #PKCS12 certificate"));
     emit waitShow(false);

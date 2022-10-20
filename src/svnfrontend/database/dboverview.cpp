@@ -54,7 +54,7 @@ DbOverview::DbOverview(const svn::ClientP &aClient, QWidget *parent)
     try {
         m_repo_model->setStringList(svn::cache::LogCache::self()->cachedRepositories());
     } catch (const svn::cache::DatabaseException &e) {
-        qCDebug(KDESVN_LOG) << e.msg() << endl;
+        qCDebug(KDESVN_LOG) << e.msg() << Qt::endl;
     }
 
     m_ui->m_ReposListView->setModel(m_repo_model);
@@ -99,7 +99,7 @@ void DbOverview::itemActivated(const QItemSelection &indexes, const QItemSelecti
     enableButtons(false);
     QModelIndexList _indexes = indexes.indexes();
     if (_indexes.count() != 1) {
-        qCDebug(KDESVN_LOG) << "Handle only with single selection" << endl;
+        qCDebug(KDESVN_LOG) << "Handle only with single selection" << Qt::endl;
         return;
     }
     genInfo(_indexes[0].data().toString());
@@ -149,7 +149,7 @@ void DbOverview::deleteRepository()
         svn::cache::LogCache::self()->deleteRepository(selectedRepository());
         m_repo_model->setStringList(svn::cache::LogCache::self()->cachedRepositories());
     } catch (const svn::cache::DatabaseException &e) {
-        qCDebug(KDESVN_LOG) << e.msg() << endl;
+        qCDebug(KDESVN_LOG) << e.msg() << Qt::endl;
     }
 }
 

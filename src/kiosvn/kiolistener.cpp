@@ -62,14 +62,14 @@ bool KioListener::contextGetLogMessage(QString &msg, const svn::CommitItemList &
     QDBusReply<QStringList> res = kdesvndInterface.get_logmsg();
 
     if (!res.isValid()) {
-        qWarning() << "Didn't get a valid reply!" << endl;
+        qWarning() << "Didn't get a valid reply!" << Qt::endl;
         return false;
     }
     QStringList lt = res.value();
 
     if (lt.count() != 1) {
         msg = i18n("Wrong or missing log (may cancel pressed).");
-        qCDebug(KDESVN_LOG) << msg << endl;
+        qCDebug(KDESVN_LOG) << msg << Qt::endl;
         return false;
     }
     msg = lt[0];
@@ -339,7 +339,7 @@ bool KioListener::contextGetSavedLogin(const QString &realm, QString &username, 
     }
     QStringList lt = res.value();
     if (lt.count() != 2) {
-        qCDebug(KDESVN_LOG) << "Wrong or missing auth list." << endl;
+        qCDebug(KDESVN_LOG) << "Wrong or missing auth list." << Qt::endl;
         return false;
     }
     username = lt[0];
@@ -367,7 +367,7 @@ bool KioListener::contextGetLogin(const QString &realm, QString &username, QStri
     }
     QStringList lt = res.value();
     if (lt.count() != 3) {
-        qCDebug(KDESVN_LOG) << "Wrong or missing auth list (may cancel pressed)." << endl;
+        qCDebug(KDESVN_LOG) << "Wrong or missing auth list (may cancel pressed)." << Qt::endl;
         return false;
     }
     username = lt[0];

@@ -196,7 +196,7 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
             continue;
         }
         if (m_dotTmpFile && (cmd != "node") && (cmd != "edge")) {
-            qWarning() << "Ignoring unknown command '" << cmd << "' from dot (" << m_dotTmpFile->fileName() << ":" << lineno << ")" << endl;
+            qWarning() << "Ignoring unknown command '" << cmd << "' from dot (" << m_dotTmpFile->fileName() << ":" << lineno << ")" << Qt::endl;
             continue;
         }
         if (!m_Scene) {

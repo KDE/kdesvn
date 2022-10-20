@@ -95,7 +95,7 @@ public:
         for (auto it = reposCacheNames.begin(); it != reposCacheNames.end(); ++it) {
             QSqlDatabase _db = QSqlDatabase::database(it.value());
             if (_db.databaseName() == path) {
-                qDebug() << "Removing database " << _db.databaseName() << endl;
+                qDebug() << "Removing database " << _db.databaseName() << Qt::endl;
                 if (_db.isOpen()) {
                     _db.commit();
                     _db.close();
@@ -155,7 +155,7 @@ public:
                 return false;
             }
         }
-        qDebug() << "Removed " << fi.fileName() << endl;
+        qDebug() << "Removed " << fi.fileName() << Qt::endl;
         mainDB.transaction();
         QSqlQuery _q(mainDB);
         _q.prepare(s_q);

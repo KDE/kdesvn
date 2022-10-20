@@ -94,7 +94,7 @@ bool SshAgent::querySshAgent()
 void SshAgent::askPassEnv()
 {
 #ifdef FORCE_ASKPASS
-    qCDebug(KDESVN_LOG) << "Using test askpass" << endl;
+    qCDebug(KDESVN_LOG) << "Using test askpass" << Qt::endl;
     qputenv("SSH_ASKPASS", FORCE_ASKPASS);
 #else
     const QString kdesvnAskPass(QStringLiteral("kdesvnaskpass"));
@@ -130,10 +130,10 @@ bool SshAgent::addSshIdentities(bool force)
     proc.setEnv(QStringLiteral("SSH_AUTH_SOCK"), m_authSock);
 
 #ifdef FORCE_ASKPASS
-    qCDebug(KDESVN_LOG) << "Using test askpass" << endl;
+    qCDebug(KDESVN_LOG) << "Using test askpass" << Qt::endl;
     proc.setEnv("SSH_ASKPASS", FORCE_ASKPASS);
 #else
-    qCDebug(KDESVN_LOG) << "Using kdesvnaskpass" << endl;
+    qCDebug(KDESVN_LOG) << "Using kdesvnaskpass" << Qt::endl;
     proc.setEnv(QStringLiteral("SSH_ASKPASS"), QStringLiteral("kdesvnaskpass"));
 #endif
 

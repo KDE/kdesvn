@@ -355,7 +355,7 @@ bool RevisionTree::bottomUpScan(long startrev, unsigned recurse, const QString &
     QString path = _path;
     long lastrev = _last;
 #ifdef DEBUG_PARSE
-    qCDebug(KDESVN_LOG) << "Searching for " << path << " at revision " << startrev << " recursion " << recurse << endl;
+    qCDebug(KDESVN_LOG) << "Searching for " << path << " at revision " << startrev << " recursion " << recurse << Qt::endl;
 #endif
     bool cancel = false;
     for (long j = startrev; j <= m_Data->max_rev; ++j) {
@@ -378,7 +378,7 @@ bool RevisionTree::bottomUpScan(long startrev, unsigned recurse, const QString &
                 if (FORWARDENTRY.path != path) {
 #ifdef DEBUG_PARSE
                     qCDebug(KDESVN_LOG) << "Parent rename? " << FORWARDENTRY.path << " -> " << FORWARDENTRY.copyToPath << " -> " << FORWARDENTRY.copyFromPath
-                                        << endl;
+                                        << Qt::endl;
 #endif
                 }
                 if (FORWARDENTRY.action == INTERNALCOPY || FORWARDENTRY.action == INTERNALRENAME) {
@@ -406,13 +406,13 @@ bool RevisionTree::bottomUpScan(long startrev, unsigned recurse, const QString &
                         lastrev = FORWARDENTRY.copyToRevision;
                         /* skip items between */
 #ifdef DEBUG_PARSE
-                        qCDebug(KDESVN_LOG) << "Renamed to " << recPath << " at revision " << FORWARDENTRY.copyToRevision << endl;
+                        qCDebug(KDESVN_LOG) << "Renamed to " << recPath << " at revision " << FORWARDENTRY.copyToRevision << Qt::endl;
 #endif
                         j = lastrev;
                         path = recPath;
                     } else {
 #ifdef DEBUG_PARSE
-                        qCDebug(KDESVN_LOG) << "Copy to " << recPath << endl;
+                        qCDebug(KDESVN_LOG) << "Copy to " << recPath << Qt::endl;
 #endif
                         if (!bottomUpScan(FORWARDENTRY.copyToRevision, recurse + 1, recPath, FORWARDENTRY.copyToRevision)) {
                             return false;
@@ -422,7 +422,7 @@ bool RevisionTree::bottomUpScan(long startrev, unsigned recurse, const QString &
                     switch (FORWARDENTRY.action) {
                     case 'A':
 #ifdef DEBUG_PARSE
-                        qCDebug(KDESVN_LOG) << "Inserting adding base item" << endl;
+                        qCDebug(KDESVN_LOG) << "Inserting adding base item" << Qt::endl;
 #endif
                         n1 = uniqueNodeName(j, FORWARDENTRY.path);
                         m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n1].Action = FORWARDENTRY.action;
@@ -432,7 +432,7 @@ bool RevisionTree::bottomUpScan(long startrev, unsigned recurse, const QString &
                     case 'M':
                     case 'R':
 #ifdef DEBUG_PARSE
-                        qCDebug(KDESVN_LOG) << "Item modified at revision " << j << " recurse " << recurse << endl;
+                        qCDebug(KDESVN_LOG) << "Item modified at revision " << j << " recurse " << recurse << Qt::endl;
 #endif
                         n1 = uniqueNodeName(j, FORWARDENTRY.path);
                         n2 = uniqueNodeName(lastrev, FORWARDENTRY.path);
@@ -448,7 +448,7 @@ bool RevisionTree::bottomUpScan(long startrev, unsigned recurse, const QString &
                         break;
                     case 'D':
 #ifdef DEBUG_PARSE
-                        qCDebug(KDESVN_LOG) << "(Sloppy match) Item deleted at revision " << j << " recurse " << recurse << endl;
+                        qCDebug(KDESVN_LOG) << "(Sloppy match) Item deleted at revision " << j << " recurse " << recurse << Qt::endl;
 #endif
                         n1 = uniqueNodeName(j, path);
                         n2 = uniqueNodeName(lastrev, path);
@@ -472,7 +472,7 @@ bool RevisionTree::bottomUpScan(long startrev, unsigned recurse, const QString &
                     switch (FORWARDENTRY.action) {
                     case 'D':
 #ifdef DEBUG_PARSE
-                        qCDebug(KDESVN_LOG) << "(Exact match) Item deleted at revision " << j << " recurse " << recurse << endl;
+                        qCDebug(KDESVN_LOG) << "(Exact match) Item deleted at revision " << j << " recurse " << recurse << Qt::endl;
 #endif
                         n1 = uniqueNodeName(j, path);
                         n2 = uniqueNodeName(lastrev, path);

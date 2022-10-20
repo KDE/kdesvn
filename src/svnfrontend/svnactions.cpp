@@ -470,7 +470,7 @@ bool SvnActions::singleInfo(const QString &what, const svn::Revision &_rev, svn:
             try {
                 e = (m_Data->m_Svnclient->info(url, svn::DepthEmpty, _rev, peg));
             } catch (const svn::Exception &ce) {
-                qCDebug(KDESVN_LOG) << "single info: " << ce.msg() << endl;
+                qCDebug(KDESVN_LOG) << "single info: " << ce.msg() << Qt::endl;
                 emit clientException(ce.msg());
                 return false;
             }

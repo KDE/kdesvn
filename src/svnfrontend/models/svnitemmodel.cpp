@@ -220,7 +220,7 @@ bool SvnItemModel::filterIndex(const QModelIndex &parent, int childRow, svnmodel
         return false;
     }
     if (!node->NodeIsDir()) {
-        qCDebug(KDESVN_LOG) << "Parent ist kein Dir" << endl;
+        qCDebug(KDESVN_LOG) << "Parent ist kein Dir" << Qt::endl;
         return false;
     }
     SvnItemModelNode *child = static_cast<SvnItemModelNodeDir *>(node)->child(childRow);

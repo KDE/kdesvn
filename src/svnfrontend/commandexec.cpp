@@ -317,7 +317,7 @@ int CommandExec::exec(const QCommandLineParser *parser)
  */
 void CommandExec::clientException(const QString &what)
 {
-    m_pCPart->Stderr << what << endl;
+    m_pCPart->Stderr << what << Qt::endl;
     KMessageBox::error(nullptr, what, i18n("SVN Error"));
 }
 
@@ -476,7 +476,7 @@ void CommandExec::slotCmd_list()
     }
     for (const svn::DirEntry &entry : qAsConst(res)) {
         QString d = entry.time().toString(QStringLiteral("yyyy-MM-dd hh:mm::ss"));
-        m_pCPart->Stdout << (entry.kind() == svn_node_dir ? "D" : "F") << " " << d << " " << entry.name() << endl;
+        m_pCPart->Stdout << (entry.kind() == svn_node_dir ? "D" : "F") << " " << d << " " << entry.name() << Qt::endl;
     }
 }
 

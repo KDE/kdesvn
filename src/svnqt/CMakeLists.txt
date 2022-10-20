@@ -102,8 +102,8 @@ target_link_libraries(svnqt
     PUBLIC
         ${SUBVERSION_ALL_LIBS}
         KF5::ConfigCore
-        Qt5::Core
-        Qt5::Sql
+        Qt::Core
+        Qt::Sql
 )
 target_include_directories(svnqt
     PUBLIC

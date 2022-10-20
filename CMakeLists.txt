@@ -55,7 +55,7 @@ find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     Wallet WidgetsAddons XmlGui
 )
 
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED COMPONENTS
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS
     Core DBus Gui Sql Widgets Xml
 )
 

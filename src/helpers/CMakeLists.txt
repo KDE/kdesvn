@@ -38,7 +38,7 @@ target_link_libraries(kdesvnhelpers
     PRIVATE
         kdesvncfgreader
         KF5::CoreAddons
-        Qt5::Widgets
+        Qt::Widgets
     PUBLIC
         svnqt
 )

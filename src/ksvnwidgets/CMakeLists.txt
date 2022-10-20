@@ -61,8 +61,8 @@ set(ksvnwidgethdr
     ssltrustprompt.h
 )
 
-qt5_add_dbus_interfaces(ksvnwidgetsrc ${KJOBWIDGETS_DBUS_INTERFACES_DIR}/kf5_org.kde.JobViewServer.xml)
-qt5_add_dbus_interfaces(ksvnwidgetsrc ${KJOBWIDGETS_DBUS_INTERFACES_DIR}/kf5_org.kde.JobView.xml)
+qt_add_dbus_interfaces(ksvnwidgetsrc ${KJOBWIDGETS_DBUS_INTERFACES_DIR}/kf5_org.kde.JobViewServer.xml)
+qt_add_dbus_interfaces(ksvnwidgetsrc ${KJOBWIDGETS_DBUS_INTERFACES_DIR}/kf5_org.kde.JobView.xml)
 
 add_library(ksvnwidgets STATIC ${kdesvn_shared_ui} ${ksvnwidgetsrc} ${ksvnwidgethdr})
 target_include_directories(ksvnwidgets
@@ -77,7 +77,7 @@ target_link_libraries(ksvnwidgets
         KF5::Wallet
     PUBLIC
         svnqt
-        Qt5::Widgets
+        Qt::Widgets
         KF5::Completion
         KF5::ConfigWidgets
         KF5::I18n

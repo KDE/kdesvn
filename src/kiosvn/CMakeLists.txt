@@ -30,7 +30,7 @@ set(kiosvn_hdr
     kiobytestream.h
     ../ksvnwidgets/pwstorage.h
 )
-qt5_add_dbus_interfaces( kiosvn_src ../kdesvnd/org.kde.kdesvnd.xml )
+qt_add_dbus_interfaces( kiosvn_src ../kdesvnd/org.kde.kdesvnd.xml )
 
 add_library(kio_ksvn MODULE ${kiosvn_src} ${kiosvn_hdr})
 
@@ -38,8 +38,8 @@ target_link_libraries(kio_ksvn
     svnqt
     kdesvnhelpers
     kdesvncfgreader
-    Qt5::DBus
-    Qt5::Widgets
+    Qt::DBus
+    Qt::Widgets
     KF5::I18n
     KF5::KIOCore
     KF5::Wallet

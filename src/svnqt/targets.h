@@ -39,8 +39,8 @@
 #include <apr_tables.h>
 
 #include <QList>
+#include <QtContainerFwd>
 
-class QStringList;
 class QUrl;
 
 namespace svn

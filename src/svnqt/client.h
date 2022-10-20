@@ -48,7 +48,7 @@
 #include <svnqt/svnqttypes.h>
 #include <svnqt/svnstream.h>
 
-class QStringList;
+#include <QtContainerFwd>
 
 namespace svn
 {

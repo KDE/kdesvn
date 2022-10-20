@@ -23,11 +23,12 @@
 
 #include <ksvnwidgets/ksvndialog.h>
 
+#include <QtContainerFwd>
+
 namespace Ui
 {
 class EditPropsDlg;
 }
-class QStringList;
 class QString;
 
 class EditPropsDlg : public KSvnDialog

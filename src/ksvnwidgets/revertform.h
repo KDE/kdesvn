@@ -21,7 +21,8 @@
 #include "svnqt/svnqttypes.h"
 #include <ksvndialog.h>
 
-class QStringList;
+#include <QtContainerFwd>
+
 namespace Ui
 {
 class RevertForm;

@@ -35,7 +35,7 @@
 #include <svnqt/client.h>
 #include <svnqt/svnqt_defines.h>
 
-class QStringList;
+#include <QtContainerFwd>
 
 namespace svn
 {

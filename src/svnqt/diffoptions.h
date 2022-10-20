@@ -28,7 +28,8 @@
 #include <svnqt/svnqt_defines.h>
 
 struct svn_diff_file_options_t;
-class QStringList;
+
+#include <QtContainerFwd>
 
 namespace svn
 {

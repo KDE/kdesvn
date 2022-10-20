@@ -24,7 +24,8 @@
 #include "ksvnwidgets/ui_commitmessage.h"
 #include "svnqt/commititem.h"
 
-class QStringList;
+#include <QtContainerFwd>
+
 class CommitModel;
 class CommitFilterModel;
 

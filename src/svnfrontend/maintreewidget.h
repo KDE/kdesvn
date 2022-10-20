@@ -28,7 +28,6 @@
 #include "svnqt/client.h"
 
 #include <kservice.h>
-#include <krun.h>
 
 class KActionCollection;
 class MainTreeWidgetData;

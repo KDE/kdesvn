@@ -25,7 +25,7 @@ if(POLICY CMP0063)
 endif()
 
 set(QT_MIN_VERSION "5.15.2")
-set(KF_MIN_VERSION "5.86.0")
+set(KF_MIN_VERSION "5.98.0")
 set(KDE_COMPILERSETTINGS_LEVEL "5.84.0")
 
 # Where to look for Findxxx.cmake modules

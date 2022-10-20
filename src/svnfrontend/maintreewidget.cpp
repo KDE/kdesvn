@@ -51,6 +51,8 @@
 #include <kapplicationtrader.h>
 #include <kio/deletejob.h>
 #include <kio/copyjob.h>
+#include <kio/applicationlauncherjob.h>
+#include <kio/jobuidelegatefactory.h>
 #include <unistd.h>
 
 #include <QApplication>
@@ -943,9 +945,15 @@ void MainTreeWidget::itemActivated(const QModelIndex &index, bool keypress)
             }
             if (!li.isEmpty() && !li.first()->exec().isEmpty()) {
                 KService::Ptr ptr = li.first();
-                KRun::runService(*ptr, lst, QApplication::activeWindow());
+                auto *job = new KIO::ApplicationLauncherJob(ptr);
+                job->setUrls(lst);
+                job->setUiDelegate(KIO::createDefaultJobUiDelegate(KJobUiDelegate::AutoErrorHandlingEnabled, QApplication::activeWindow()));
+                job->start();
             } else {
-                KRun::displayOpenWithDialog(lst, QApplication::activeWindow());
+                auto *job = new KIO::ApplicationLauncherJob;
+                job->setUrls(lst);
+                job->setUiDelegate(KIO::createDefaultJobUiDelegate(KJobUiDelegate::AutoErrorHandlingEnabled, QApplication::activeWindow()));
+                job->start();
             }
         } else if (Kdesvnsettings::show_navigation_panel()) {
             m_DirTreeView->selectionModel()->select(m_Data->m_DirSortModel->mapFromSource(index), QItemSelectionModel::ClearAndSelect);
@@ -1256,7 +1264,10 @@ void MainTreeWidget::slotOpenWith()
     svn::Revision rev(isWorkingCopy() ? svn::Revision::UNDEFINED : baseRevision());
     QList<QUrl> lst;
     lst.append(which->kdeName(rev));
-    KRun::displayOpenWithDialog(lst, QApplication::activeWindow());
+    auto *job = new KIO::ApplicationLauncherJob;
+    job->setUrls(lst);
+    job->setUiDelegate(KIO::createDefaultJobUiDelegate(KJobUiDelegate::AutoErrorHandlingEnabled, QApplication::activeWindow()));
+    job->start();
 }
 
 void MainTreeWidget::slotSelectBrowsingRevision()

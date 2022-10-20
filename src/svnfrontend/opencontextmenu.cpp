@@ -20,7 +20,9 @@
 #include "opencontextmenu.h"
 
 #include <KLocalizedString>
-#include <KRun>
+#include <KIO/ApplicationLauncherJob>
+#include <KIO/JobUiDelegateFactory>
+
 #include <QAction>
 
 OpenContextmenu::OpenContextmenu(const QUrl &aPath, const KService::List &aList, QWidget *parent)
@@ -63,7 +65,10 @@ void OpenContextmenu::slotRunService(QAction *act)
 {
     const int idx = act->data().toInt();
     if (idx >= 0 && idx < m_mapPopup.size()) {
-        KRun::runService(*m_mapPopup.at(idx), {m_Path}, parentWidget());
+        auto *job = new KIO::ApplicationLauncherJob(m_mapPopup.at(idx));
+        job->setUrls({m_Path});
+        job->setUiDelegate(KIO::createDefaultJobUiDelegate(KJobUiDelegate::AutoErrorHandlingEnabled, parentWidget()));
+        job->start();
     } else {
         slotOpenWith();
     }
@@ -72,7 +77,8 @@ void OpenContextmenu::slotRunService(QAction *act)
 
 void OpenContextmenu::slotOpenWith()
 {
-    QList<QUrl> lst;
-    lst.append(m_Path);
-    KRun::displayOpenWithDialog({m_Path}, parentWidget());
+    auto *job = new KIO::ApplicationLauncherJob;
+    job->setUrls({m_Path});
+    job->setUiDelegate(KIO::createDefaultJobUiDelegate(KJobUiDelegate::AutoErrorHandlingEnabled, parentWidget()));
+    job->start();
 }

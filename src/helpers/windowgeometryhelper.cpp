@@ -27,11 +27,11 @@
 #include <QWindow>
 
 WindowGeometryHelper::WindowGeometryHelper(QWidget *w, const QString &groupName)
-  : m_widget(w)
-  , m_config(Kdesvnsettings::self()->config())
-  , m_groupName(groupName)
+    : m_widget(w)
+    , m_config(Kdesvnsettings::self()->config())
+    , m_groupName(groupName)
 {
-   restore();
+    restore();
 }
 
 void WindowGeometryHelper::restore(QWidget *w, const QString &groupName)

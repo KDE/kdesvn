@@ -23,17 +23,16 @@
 #include <KLocalizedString>
 
 AuthDialogWidget::AuthDialogWidget(const QString &realm, const QString &user, QWidget *parent)
-    : QWidget(parent), Ui::AuthDialogWidget()
+    : QWidget(parent)
+    , Ui::AuthDialogWidget()
 {
     setupUi(this);
 
     m_UsernameEdit->setText(user);
     m_PasswordEdit->clear();
     m_StorePasswordButton->setChecked(Kdesvnsettings::store_passwords());
-    m_StorePasswordButton->setText(
-        Kdesvnsettings::passwords_in_wallet()
-        ? i18n("Store password (into KDE Wallet)")
-        : i18n("Store password (into Subversion' simple storage)"));
+    m_StorePasswordButton->setText(Kdesvnsettings::passwords_in_wallet() ? i18n("Store password (into KDE Wallet)")
+                                                                         : i18n("Store password (into Subversion' simple storage)"));
     if (!realm.isEmpty()) {
         m_RealmLabel->setText(i18n("Enter authentication info for %1", realm));
         resize(QSize(334, 158).expandedTo(minimumSizeHint()));

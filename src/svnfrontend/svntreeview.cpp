@@ -22,11 +22,11 @@
 #include "models/svnitemmodel.h"
 #include "models/svnitemnode.h"
 
-#include <QDrag>
 #include <QAbstractProxyModel>
-#include <QDropEvent>
-#include <QApplication>
 #include <QAction>
+#include <QApplication>
+#include <QDrag>
+#include <QDropEvent>
 #include <QMenu>
 #include <QMimeData>
 
@@ -92,21 +92,19 @@ void SvnTreeView::dropEvent(QDropEvent *event)
     }
 
     Qt::KeyboardModifiers modifiers = QGuiApplication::keyboardModifiers();
-    QMetaObject::invokeMethod(this, "doDrop",
+    QMetaObject::invokeMethod(this,
+                              "doDrop",
                               Q_ARG(QList<QUrl>, list),
                               Q_ARG(QModelIndex, index2),
                               Q_ARG(bool, intern),
                               Q_ARG(Qt::DropAction, action),
-                              Q_ARG(Qt::KeyboardModifiers, modifiers)
-                             );
+                              Q_ARG(Qt::KeyboardModifiers, modifiers));
     event->acceptProposedAction();
 }
 
 void SvnTreeView::doDrop(const QList<QUrl> &list, const QModelIndex &parent, bool intern, Qt::DropAction action, Qt::KeyboardModifiers modifiers)
 {
-    if (intern && ((modifiers & Qt::ControlModifier) == 0) &&
-            ((modifiers & Qt::ShiftModifier) == 0)) {
-
+    if (intern && ((modifiers & Qt::ControlModifier) == 0) && ((modifiers & Qt::ShiftModifier) == 0)) {
         QMenu popup;
         QString seq = QKeySequence(Qt::ShiftModifier).toString();
         seq.chop(1); // chop superfluous '+'

@@ -20,12 +20,12 @@
 #ifndef MAINTREEWIDGET_H
 #define MAINTREEWIDGET_H
 
-#include "ui_treeWidget.h"
-#include "itemdisplay.h"
 #include "frontendtypes.h"
+#include "itemdisplay.h"
+#include "ui_treeWidget.h"
 
-#include "svnqt/status.h"
 #include "svnqt/client.h"
+#include "svnqt/status.h"
 
 #include <kservice.h>
 
@@ -34,7 +34,7 @@ class MainTreeWidgetData;
 class SvnItemModelNode;
 class KJob;
 
-class MainTreeWidget: public QWidget, public Ui::mainTreeWidget, public ItemDisplay
+class MainTreeWidget : public QWidget, public Ui::mainTreeWidget, public ItemDisplay
 {
     Q_OBJECT
 public:
@@ -42,19 +42,19 @@ public:
     ~MainTreeWidget();
 
     QWidget *realWidget() override;
-    SvnItem *Selected()const override;
-    SvnItemList SelectionList()const override;
-    svn::Revision baseRevision()const override;
+    SvnItem *Selected() const override;
+    SvnItemList SelectionList() const override;
+    svn::Revision baseRevision() const override;
     bool openUrl(const QUrl &url, bool noReinit = false) override;
-    SvnItem *SelectedOrMain()const override;
+    SvnItem *SelectedOrMain() const override;
 
-    SvnItem *DirSelected()const;
-    QModelIndex SelectedIndex()const;
-    QModelIndex DirSelectedIndex()const;
-    SvnItemModelNode *SelectedNode()const;
-    SvnItemModelNode *DirSelectedNode()const;
-    SvnItemList DirSelectionList()const;
-    SvnItem *DirSelectedOrMain()const;
+    SvnItem *DirSelected() const;
+    QModelIndex SelectedIndex() const;
+    QModelIndex DirSelectedIndex() const;
+    SvnItemModelNode *SelectedNode() const;
+    SvnItemModelNode *DirSelectedNode() const;
+    SvnItemList DirSelectionList() const;
+    SvnItem *DirSelectedOrMain() const;
     void refreshItem(SvnItemModelNode *node);
 
     void clear();
@@ -101,9 +101,9 @@ protected Q_SLOTS:
     void slotIgnore();
     void slotLeftRecAddIgnore();
     void slotRightRecAddIgnore();
-    void slotMakeLog()const;
-    void slotMakeLogNoFollow()const;
-    void slotDirMakeLogNoFollow()const;
+    void slotMakeLog() const;
+    void slotMakeLogNoFollow() const;
+    void slotDirMakeLogNoFollow() const;
     void slotMakeTree();
     void slotMakePartTree();
     void slotSelectBrowsingRevision();
@@ -163,13 +163,14 @@ protected Q_SLOTS:
     void slotLeftProperties();
 
     void resizeAllColumns();
+
 protected:
     void keyPressEvent(QKeyEvent *) override;
     void setupActions();
     bool uniqueTypeSelected();
-    KService::List offersList(SvnItem *item, bool execOnly = false)const;
-    int selectionCount()const;
-    int DirselectionCount()const;
+    KService::List offersList(SvnItem *item, bool execOnly = false) const;
+    int selectionCount() const;
+    int DirselectionCount() const;
     void dispProperties(bool);
     void copy_move(bool move);
     void itemActivated(const QModelIndex &index, bool keypress = false);
@@ -177,7 +178,7 @@ protected:
     void internalDrop(const QList<QUrl> &_lst, Qt::DropAction action, const QModelIndex &index);
     void execContextMenu(const SvnItemList &);
     void simpleWcDiff(SvnItem *which, const svn::Revision &, const svn::Revision &);
-    void doLog(bool, bool)const;
+    void doLog(bool, bool) const;
 
     void checkUseNavigation(bool startup = false);
     void makeDelete(const SvnItemList &lst);
@@ -188,12 +189,7 @@ private:
     MainTreeWidgetData *m_Data;
     void enableAction(const QString &, bool);
 
-    QAction *add_action(const QString &actionname,
-                        const QString &text,
-                        const QKeySequence &sequ,
-                        const QIcon &,
-                        QObject *,
-                        const char *slot);
+    QAction *add_action(const QString &actionname, const QString &text, const QKeySequence &sequ, const QIcon &, QObject *, const char *slot);
 };
 
 #endif

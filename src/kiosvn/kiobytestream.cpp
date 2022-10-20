@@ -22,9 +22,11 @@
 #include <QMimeDatabase>
 
 KioByteStream::KioByteStream(StreamWrittenCb *aCb, const QString &filename)
-    : svn::stream::SvnStream(false, true, nullptr),
-      m_Cb(aCb), m_Written(0),
-      m_mimeSend(false), m_Filename(filename)
+    : svn::stream::SvnStream(false, true, nullptr)
+    , m_Cb(aCb)
+    , m_Written(0)
+    , m_mimeSend(false)
+    , m_Filename(filename)
 {
     m_MessageTick.start();
 }

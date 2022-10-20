@@ -34,14 +34,14 @@ public:
     GraphTreeLabel(const QString &, const QString &, const QRectF &r, QGraphicsItem *p = nullptr);
     virtual ~GraphTreeLabel();
 
-    int type()const override;
-    //virtual void drawShape(QPainter& p);
+    int type() const override;
+    // virtual void drawShape(QPainter& p);
     void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
 
     void setBgColor(const QColor &);
 
-    const QString &nodename()const;
-    const QString &source()const;
+    const QString &nodename() const;
+    const QString &source() const;
     void setSource(const QString &);
     virtual void setSelected(bool);
 
@@ -52,41 +52,41 @@ protected:
 
 class GraphEdge;
 
-class GraphEdgeArrow: public QGraphicsPolygonItem
+class GraphEdgeArrow : public QGraphicsPolygonItem
 {
 public:
     explicit GraphEdgeArrow(GraphEdge *, QGraphicsItem *p = nullptr);
     GraphEdge *edge();
     void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
-    int type()const override;
+    int type() const override;
 
 private:
     GraphEdge *_edge;
 };
 
 /* line */
-class GraphEdge: public QGraphicsPathItem
+class GraphEdge : public QGraphicsPathItem
 {
 public:
     explicit GraphEdge(QGraphicsItem *p = nullptr);
     virtual ~GraphEdge();
 
     void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
-    const QPolygonF &controlPoints()const;
+    const QPolygonF &controlPoints() const;
     void setControlPoints(const QPolygonF &a);
-    int type()const override;
+    int type() const override;
 
 private:
     QPolygonF _points;
 };
 
-class GraphMark: public QGraphicsRectItem
+class GraphMark : public QGraphicsRectItem
 {
 public:
     explicit GraphMark(GraphTreeLabel *, QGraphicsItem *p = nullptr);
     virtual ~GraphMark();
-    int type()const override;
-    virtual bool hit(const QPoint &)const;
+    int type() const override;
+    virtual bool hit(const QPoint &) const;
     void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
 
 private:

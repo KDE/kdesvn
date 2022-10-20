@@ -19,26 +19,27 @@
  ***************************************************************************/
 
 #include "itemdisplay.h"
-#include "svnitem.h"
 #include "settings/kdesvnsettings.h"
+#include "svnitem.h"
 #include "svnqt/status.h"
 
 ItemDisplay::ItemDisplay()
-    : m_isWorkingCopy(false), m_isNetworked(false)
+    : m_isWorkingCopy(false)
+    , m_isNetworked(false)
 {
 }
 
-bool ItemDisplay::isWorkingCopy()const
+bool ItemDisplay::isWorkingCopy() const
 {
     return m_isWorkingCopy;
 }
 
-QString ItemDisplay::baseUri()const
+QString ItemDisplay::baseUri() const
 {
     return m_baseUri;
 }
 
-QUrl ItemDisplay::baseUriAsUrl()const
+QUrl ItemDisplay::baseUriAsUrl() const
 {
     return m_isWorkingCopy ? QUrl::fromLocalFile(m_baseUri) : QUrl(m_baseUri);
 }
@@ -46,7 +47,7 @@ QUrl ItemDisplay::baseUriAsUrl()const
 /*!
     \fn ItemDisplay::isNetworked()const
  */
-bool ItemDisplay::isNetworked()const
+bool ItemDisplay::isNetworked() const
 {
     return m_isNetworked;
 }
@@ -70,7 +71,7 @@ void ItemDisplay::setBaseUri(const QString &uri)
     }
 }
 
-QString ItemDisplay::lastError()const
+QString ItemDisplay::lastError() const
 {
     return m_LastException;
 }
@@ -81,10 +82,9 @@ QString ItemDisplay::lastError()const
 bool ItemDisplay::filterOut(const SvnItem *item)
 {
     if (!item->stat()->validReposStatus()) {
-        if ((item->isIgnored() && !Kdesvnsettings::display_ignored_files()) ||
-                (Kdesvnsettings::hide_unchanged_files() && item->isRealVersioned() && !item->isModified() && !item->isChildModified()) ||
-                (!Kdesvnsettings::display_unknown_files() && !item->stat()->isVersioned())
-           ) {
+        if ((item->isIgnored() && !Kdesvnsettings::display_ignored_files())
+            || (Kdesvnsettings::hide_unchanged_files() && item->isRealVersioned() && !item->isModified() && !item->isChildModified())
+            || (!Kdesvnsettings::display_unknown_files() && !item->stat()->isVersioned())) {
             return true;
         }
     }

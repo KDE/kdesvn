@@ -36,8 +36,7 @@ namespace svn
 {
 bool Pool::s_initialized = false;
 
-apr_pool_t *
-Pool::pool_create(apr_pool_t *parent)
+apr_pool_t *Pool::pool_create(apr_pool_t *parent)
 {
     if (!s_initialized) {
         apr_pool_initialize();
@@ -47,7 +46,8 @@ Pool::pool_create(apr_pool_t *parent)
 }
 
 Pool::Pool(apr_pool_t *parent)
-    : m_parent(parent), m_pool(pool_create(parent))
+    : m_parent(parent)
+    , m_pool(pool_create(parent))
 {
 }
 
@@ -58,14 +58,12 @@ Pool::~Pool()
     }
 }
 
-apr_pool_t *
-Pool::pool() const
+apr_pool_t *Pool::pool() const
 {
     return m_pool;
 }
 
-void
-Pool::renew()
+void Pool::renew()
 {
     if (m_pool) {
         svn_pool_destroy(m_pool);

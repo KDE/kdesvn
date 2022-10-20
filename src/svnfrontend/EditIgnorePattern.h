@@ -25,10 +25,10 @@
 
 #include "svnqt/svnqttypes.h"
 
-#include <QWidget>
 #include <QStringList>
+#include <QWidget>
 
-class EditIgnorePattern: public QWidget, public Ui::EditIgnorePattern
+class EditIgnorePattern : public QWidget, public Ui::EditIgnorePattern
 {
     Q_OBJECT
 
@@ -36,9 +36,9 @@ public:
     explicit EditIgnorePattern(QWidget *parent = nullptr);
     ~EditIgnorePattern();
 
-    QStringList items()const;
-    svn::Depth depth()const;
-    bool unignore()const;
+    QStringList items() const;
+    svn::Depth depth() const;
+    bool unignore() const;
 };
 
 #endif /* EDITIGNOREPATTERN_H_ */

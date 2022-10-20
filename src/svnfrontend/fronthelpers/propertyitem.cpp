@@ -43,7 +43,7 @@ void PropertyListViewItem::setValue(const QString &value)
     setText(1, value);
 }
 
-bool PropertyListViewItem::different()const
+bool PropertyListViewItem::different() const
 {
     return m_currentName != m_startName || m_currentValue != m_startValue || deleted();
 }
@@ -62,6 +62,5 @@ void PropertyListViewItem::unDeleteIt()
 
 bool PropertyListViewItem::protected_Property(const QString &what)
 {
-    return (what.compare(QLatin1String("svn:mergeinfo")) == 0 ||
-            what.compare(QLatin1String("svn:special")) == 0);
+    return (what.compare(QLatin1String("svn:mergeinfo")) == 0 || what.compare(QLatin1String("svn:special")) == 0);
 }

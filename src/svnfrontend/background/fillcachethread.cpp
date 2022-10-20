@@ -20,8 +20,8 @@
 #include "fillcachethread.h"
 #include "tcontextlistener.h"
 
-#include "svnqt/cache/ReposLog.h"
 #include "svnqt/cache/ReposConfig.h"
+#include "svnqt/cache/ReposLog.h"
 #include "svnqt/url.h"
 
 #include <KLocalizedString>
@@ -31,17 +31,19 @@ FillCacheThread::FillCacheThread(QObject *_parent, const QString &aPath, bool st
     : SvnThread(_parent)
     , m_path(aPath)
     , m_startup(startup)
-{}
+{
+}
 
 FillCacheThread::~FillCacheThread()
-{}
+{
+}
 
-const QString &FillCacheThread::Path()const
+const QString &FillCacheThread::Path() const
 {
     return m_path;
 }
 
-const QString &FillCacheThread::reposRoot()const
+const QString &FillCacheThread::reposRoot() const
 {
     return m_what;
 }

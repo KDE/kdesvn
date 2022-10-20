@@ -22,10 +22,10 @@
  * history and logs, available at https://commits.kde.org/kdesvn.          *
  ***************************************************************************/
 #include "client.h"
-#include "repository.h"
+#include "client_parameter.h"
 #include "context.h"
 #include "datetime.h"
-#include "client_parameter.h"
+#include "repository.h"
 
 int main(int, char **)
 {
@@ -40,8 +40,13 @@ int main(int, char **)
     s.append(svn::Path(QLatin1String("svn://anonsvn.kde.org/home/kde/")));
 
     try {
-        m_Svnclient->log(params.targets(svn::Targets(s)).revisionRange(svn::Revision::HEAD, 20).peg(svn::Revision::UNDEFINED).discoverChangedPathes(true).
-                         strictNodeHistory(false).limit(0), m_OldHistory);
+        m_Svnclient->log(params.targets(svn::Targets(s))
+                             .revisionRange(svn::Revision::HEAD, 20)
+                             .peg(svn::Revision::UNDEFINED)
+                             .discoverChangedPathes(true)
+                             .strictNodeHistory(false)
+                             .limit(0),
+                         m_OldHistory);
     } catch (const svn::ClientException &ce) {
         gotit = false;
     }

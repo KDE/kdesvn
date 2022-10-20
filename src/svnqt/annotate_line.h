@@ -34,8 +34,8 @@
 #include "svnqt/svnqt_defines.h"
 #include "svnqt/svnqttypes.h"
 
-#include <qstring.h>
 #include <qdatetime.h>
+#include <qstring.h>
 
 namespace svn
 {
@@ -54,8 +54,7 @@ public:
                  qlonglong merge_revision,
                  const char *merge_author,
                  const char *merge_date,
-                 const char *merge_path
-                );
+                 const char *merge_path);
 
     AnnotateLine(qlonglong line_no,
                  qlonglong revision,
@@ -66,34 +65,28 @@ public:
                  const char *merge_path,
                  qlonglong revstart,
                  qlonglong revend,
-                 bool local
-                 );
+                 bool local);
 
-    qlonglong
-    lineNumber() const
+    qlonglong lineNumber() const
     {
         return m_line_no;
     }
-    qlonglong
-    revision() const
+    qlonglong revision() const
     {
         return m_revision;
     }
 
-    const QByteArray &
-    author() const
+    const QByteArray &author() const
     {
         return m_author;
     }
 
-    const QDateTime &
-    date() const
+    const QDateTime &date() const
     {
         return m_date;
     }
 
-    const QByteArray &
-    line() const
+    const QByteArray &line() const
     {
         return m_line;
     }

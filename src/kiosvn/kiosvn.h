@@ -65,7 +65,8 @@ public:
 
     void contextProgress(long long int current, long long int max);
     void listSendDirEntry(const svn::DirEntry &);
-    bool checkKioCancel()const;
+    bool checkKioCancel() const;
+
 protected:
     void checkout(const QUrl &src, const QUrl &target, const int rev, const QString &revstring);
     void update(const QUrl &url, int revnumber, const QString &revkind);
@@ -127,8 +128,8 @@ private:
 
 protected:
     QString getDefaultLog();
-    bool supportOverwrite()const;
-    bool useKioprogress()const;
+    bool supportOverwrite() const;
+    bool useKioprogress() const;
 };
 
 }

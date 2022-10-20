@@ -34,7 +34,7 @@ AuthDialogImpl::AuthDialogImpl(const QString &realm, const QString &user, QWidge
     setLayout(mainLayout);
     mainLayout->addWidget(m_AuthWidget);
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Help);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel | QDialogButtonBox::Help);
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
     okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
@@ -58,7 +58,7 @@ QString AuthDialogImpl::Password() const
     return m_AuthWidget->Password();
 }
 
-bool AuthDialogImpl::maySave()const
+bool AuthDialogImpl::maySave() const
 {
     return m_AuthWidget->maySave();
 }

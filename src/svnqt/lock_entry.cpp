@@ -40,44 +40,42 @@
 namespace svn
 {
 LockEntry::LockEntry()
-    : date(0), exp(0), locked(false)
+    : date(0)
+    , exp(0)
+    , locked(false)
 {
 }
 
-LockEntry::LockEntry(
-    const apr_time_t lock_time,
-    const apr_time_t expiration_time,
-    const char *lock_owner,
-    const char *lock_comment,
-    const char *lock_token)
-    : date(lock_time), exp(expiration_time),
-      owner(lock_owner ? QString::fromUtf8(lock_owner) : QString()),
-      comment(lock_comment ? QString::fromUtf8(lock_comment) : QString()),
-      token(lock_token ? QString::fromUtf8(lock_token) : QString()),
-      locked(lock_token ? true : false)
+LockEntry::LockEntry(const apr_time_t lock_time, const apr_time_t expiration_time, const char *lock_owner, const char *lock_comment, const char *lock_token)
+    : date(lock_time)
+    , exp(expiration_time)
+    , owner(lock_owner ? QString::fromUtf8(lock_owner) : QString())
+    , comment(lock_comment ? QString::fromUtf8(lock_comment) : QString())
+    , token(lock_token ? QString::fromUtf8(lock_token) : QString())
+    , locked(lock_token ? true : false)
 {
 }
-const QString &LockEntry::Comment()const
+const QString &LockEntry::Comment() const
 {
     return comment;
 }
-const QString &LockEntry::Owner()const
+const QString &LockEntry::Owner() const
 {
     return owner;
 }
-const QString &LockEntry::Token()const
+const QString &LockEntry::Token() const
 {
     return token;
 }
-const DateTime &LockEntry::Date()const
+const DateTime &LockEntry::Date() const
 {
     return date;
 }
-const DateTime &LockEntry::Expiration()const
+const DateTime &LockEntry::Expiration() const
 {
     return exp;
 }
-bool LockEntry::Locked()const
+bool LockEntry::Locked() const
 {
     return locked;
 }
@@ -117,12 +115,7 @@ void LockEntry::init(const svn_lock_t *src)
     exp = DateTime();
 }
 
-void LockEntry::init(
-    const apr_time_t lock_time,
-    const apr_time_t expiration_time,
-    const char *lock_owner,
-    const char *lock_comment,
-    const char *lock_token)
+void LockEntry::init(const apr_time_t lock_time, const apr_time_t expiration_time, const char *lock_owner, const char *lock_comment, const char *lock_token)
 {
     date = DateTime(lock_time);
     exp = DateTime(expiration_time);

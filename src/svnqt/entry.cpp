@@ -38,6 +38,7 @@ class SVNQT_NOEXPORT Entry_private
 {
 protected:
     void init_clean();
+
 public:
     Entry_private();
 
@@ -52,16 +53,12 @@ public:
     bool _copied;
 
     /**
-    * initializes the members
-    */
-    void
-    init(const svn_client_status_t *src);
-    void
-    init(const Entry_private &src);
-    void
-    init(const QString &url, const DirEntry &src);
-    void
-    init(const QString &url, const InfoEntry &src);
+     * initializes the members
+     */
+    void init(const svn_client_status_t *src);
+    void init(const Entry_private &src);
+    void init(const QString &url, const DirEntry &src);
+    void init(const QString &url, const InfoEntry &src);
 };
 
 void Entry_private::init_clean()
@@ -83,8 +80,7 @@ Entry_private::Entry_private()
     init_clean();
 }
 
-void
-Entry_private::init(const svn_client_status_t *src)
+void Entry_private::init(const svn_client_status_t *src)
 {
     if (src) {
         // copy & convert the contents of src
@@ -92,7 +88,7 @@ Entry_private::init(const svn_client_status_t *src)
         _revision = src->revision;
         _repos = QUrl::fromEncoded(src->repos_root_url);
         _url = _repos;
-        _url.setPath(_url.path() +  QLatin1Char('/') + QString::fromUtf8(src->repos_relpath));
+        _url.setPath(_url.path() + QLatin1Char('/') + QString::fromUtf8(src->repos_relpath));
         _uuid = QString::fromUtf8(src->repos_uuid);
         _kind = src->kind;
         _copied = src->copied != 0;
@@ -106,8 +102,7 @@ Entry_private::init(const svn_client_status_t *src)
     }
 }
 
-void
-Entry_private::init(const Entry_private &src)
+void Entry_private::init(const Entry_private &src)
 {
     _name = src._name;
     _url = src._url;
@@ -186,8 +181,7 @@ Entry::~Entry()
     delete m_Data;
 }
 
-Entry &
-Entry::operator = (const Entry &src)
+Entry &Entry::operator=(const Entry &src)
 {
     if (this == &src) {
         return *this;
@@ -200,63 +194,52 @@ Entry::operator = (const Entry &src)
     return *this;
 }
 
-const LockEntry &
-Entry::lockEntry()const
+const LockEntry &Entry::lockEntry() const
 {
     return m_Data->m_Lock;
 }
 
-const QString &
-Entry::cmtAuthor() const
+const QString &Entry::cmtAuthor() const
 {
     return m_Data->_cmt_author;
 }
 
-const DateTime &
-Entry::cmtDate() const
+const DateTime &Entry::cmtDate() const
 {
     return m_Data->_cmt_date;
 }
 
-svn_revnum_t
-Entry::cmtRev() const
+svn_revnum_t Entry::cmtRev() const
 {
     return m_Data->_cmt_rev;
 }
 
-bool
-Entry::isCopied() const
+bool Entry::isCopied() const
 {
     return m_Data->_copied != 0;
 }
 
-svn_node_kind_t
-Entry::kind() const
+svn_node_kind_t Entry::kind() const
 {
     return m_Data->_kind;
 }
-const QString &
-Entry::uuid() const
+const QString &Entry::uuid() const
 {
     return m_Data->_uuid;
 }
-const QUrl &
-Entry::repos() const
+const QUrl &Entry::repos() const
 {
     return m_Data->_repos;
 }
-const QUrl &
-Entry::url() const
+const QUrl &Entry::url() const
 {
     return m_Data->_url;
 }
-svn_revnum_t
-Entry::revision() const
+svn_revnum_t Entry::revision() const
 {
     return m_Data->_revision;
 }
-const QString &
-Entry::name() const
+const QString &Entry::name() const
 {
     return m_Data->_name;
 }

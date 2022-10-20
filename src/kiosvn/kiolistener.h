@@ -20,8 +20,8 @@
 #ifndef KIOLISTENER_H
 #define KIOLISTENER_H
 
-#include "svnqt/context_listener.h"
 #include "ksvnwidgets/pwstorage.h"
+#include "svnqt/context_listener.h"
 
 namespace KIO
 {
@@ -38,32 +38,27 @@ public:
     virtual ~KioListener();
 
     /* context-listener methods */
-    bool contextGetLogin(const QString &realm,
-                                 QString &username,
-                                 QString &password,
-                                 bool &maySave) override;
+    bool contextGetLogin(const QString &realm, QString &username, QString &password, bool &maySave) override;
     bool contextGetSavedLogin(const QString &realm, QString &username, QString &password) override;
     bool contextGetCachedLogin(const QString &realm, QString &username, QString &password) override;
 
     void contextNotify(const char *path,
-                               svn_wc_notify_action_t action,
-                               svn_node_kind_t kind,
-                               const char *mime_type,
-                               svn_wc_notify_state_t content_state,
-                               svn_wc_notify_state_t prop_state,
-                               svn_revnum_t revision) override;
+                       svn_wc_notify_action_t action,
+                       svn_node_kind_t kind,
+                       const char *mime_type,
+                       svn_wc_notify_state_t content_state,
+                       svn_wc_notify_state_t prop_state,
+                       svn_revnum_t revision) override;
     void contextNotify(const svn_wc_notify_t *action) override;
 
     bool contextCancel() override;
     bool contextGetLogMessage(QString &msg, const svn::CommitItemList &) override;
-    SslServerTrustAnswer contextSslServerTrustPrompt(const SslServerTrustData &data,
-            apr_uint32_t &acceptedFailures) override;
+    SslServerTrustAnswer contextSslServerTrustPrompt(const SslServerTrustData &data, apr_uint32_t &acceptedFailures) override;
     bool contextSslClientCertPrompt(QString &certFile) override;
-    bool contextSslClientCertPwPrompt(QString &password,
-            const QString &realm, bool &maySave) override;
+    bool contextSslClientCertPwPrompt(QString &password, const QString &realm, bool &maySave) override;
     bool contextLoadSslClientCertPw(QString &password, const QString &realm) override;
     /* context listener virtuals end */
-    unsigned int counter()const
+    unsigned int counter() const
     {
         return m_notifyCounter;
     }
@@ -97,7 +92,7 @@ private:
     KIO::kio_svnProtocol *par;
 
 protected:
-    unsigned int  m_notifyCounter;
+    unsigned int m_notifyCounter;
     bool m_External;
     bool m_HasChanges;
     bool m_FirstTxDelta;

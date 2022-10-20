@@ -22,19 +22,19 @@
 
 #include "ui_loaddmpdlg.h"
 
-class LoadDmpDlg_impl: public QWidget, public Ui::LoadDmpDlg
+class LoadDmpDlg_impl : public QWidget, public Ui::LoadDmpDlg
 {
     Q_OBJECT
 public:
     explicit LoadDmpDlg_impl(QWidget *parent = nullptr);
     ~LoadDmpDlg_impl();
-    bool usePost()const;
-    bool usePre()const;
-    bool validateProps()const;
-    int uuidAction()const;
-    QUrl dumpFile()const;
-    QString repository()const;
-    QString parentPath()const;
+    bool usePost() const;
+    bool usePre() const;
+    bool validateProps() const;
+    int uuidAction() const;
+    QUrl dumpFile() const;
+    QString repository() const;
+    QString parentPath() const;
 
 public slots:
 };

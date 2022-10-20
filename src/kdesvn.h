@@ -23,12 +23,12 @@
 
 #include "kdesvn-config.h"
 
-#include <kparts/mainwindow.h>
-#include <kparts/readonlypart.h>
+#include <KBookmarks/KBookmarkActionMenu>
 #include <KBookmarks/KBookmarkManager>
 #include <KBookmarks/KBookmarkMenu>
-#include <KBookmarks/KBookmarkActionMenu>
 #include <KBookmarks/KBookmarkOwner>
+#include <kparts/mainwindow.h>
+#include <kparts/readonlypart.h>
 
 class KAction;
 class KActionMenu;

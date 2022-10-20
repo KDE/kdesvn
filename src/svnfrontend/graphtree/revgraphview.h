@@ -25,9 +25,9 @@
 
 #include <QContextMenuEvent>
 #include <QGraphicsView>
-#include <QResizeEvent>
 #include <QMouseEvent>
 #include <QProcess>
+#include <QResizeEvent>
 
 namespace svn
 {
@@ -83,7 +83,7 @@ public:
 
     typedef QMap<QString, keyData> trevTree;
 
-    QString toolTip(const QString &nodename, bool full = false)const;
+    QString toolTip(const QString &nodename, bool full = false) const;
 
     void setBasePath(const QString &);
     void dumpRevtree();
@@ -112,9 +112,9 @@ protected:
     QString m_dotOutput;
     KProcess *m_renderProcess;
     trevTree m_Tree;
-    QColor getBgColor(const QString &nodeName)const;
-    bool isStart(const QString &nodeName)const;
-    char getAction(const QString &)const;
+    QColor getBgColor(const QString &nodeName) const;
+    bool isStart(const QString &nodeName) const;
+    char getAction(const QString &) const;
     QString getLabelstring(const QString &nodeName);
 
     QMap<QString, GraphTreeLabel *> m_NodeList;
@@ -133,7 +133,7 @@ protected:
     void mouseDoubleClickEvent(QMouseEvent *e) override;
     void scrollContentsBy(int dx, int dy) override;
 
-    GraphTreeLabel *firstLabelAt(const QPoint &pos)const;
+    GraphTreeLabel *firstLabelAt(const QPoint &pos) const;
 
     bool m_isMoving;
     QPoint m_lastPos;

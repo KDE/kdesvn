@@ -20,16 +20,20 @@
 
 #include "getinfothread.h"
 #include "svnfrontend/models/svnitemnode.h"
-#include "tcontextlistener.h"
 #include "svnqt/status.h"
 #include "svnqt/url.h"
+#include "tcontextlistener.h"
 
 #include <QMutexLocker>
 #include <QReadLocker>
 #include <QWriteLocker>
 
 GetInfoThread::GetInfoThread(QObject *_parent)
-    : SvnThread(_parent), m_NodeQueue(), m_Cancel(false), m_QueueLock(), m_CancelLock()
+    : SvnThread(_parent)
+    , m_NodeQueue()
+    , m_Cancel(false)
+    , m_QueueLock()
+    , m_CancelLock()
 {
 }
 

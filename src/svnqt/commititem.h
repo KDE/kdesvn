@@ -26,8 +26,8 @@
 
 #include <svnqt/client.h>
 
-#include <svn_types.h>
 #include <apr.h>
+#include <svn_types.h>
 
 // forward declarations
 struct svn_client_commit_item_t;
@@ -44,7 +44,6 @@ namespace svn
 */
 class SVNQT_EXPORT CommitItem
 {
-
 private:
     void init();
     void convertprop(apr_array_header_t *);
@@ -74,14 +73,14 @@ public:
      */
     ~CommitItem();
 
-    const QString &path()const;
-    const QString &url()const;
-    const QString &copyfromurl()const;
-    const PropertiesMap &properties()const;
-    svn_revnum_t revision()const;
-    svn_revnum_t copyfromrevision()const;
-    svn_node_kind_t kind()const;
-    apr_byte_t state()const;
+    const QString &path() const;
+    const QString &url() const;
+    const QString &copyfromurl() const;
+    const PropertiesMap &properties() const;
+    svn_revnum_t revision() const;
+    svn_revnum_t copyfromrevision() const;
+    svn_node_kind_t kind() const;
+    apr_byte_t state() const;
     //! Kind of action
     /*!
      * \return Char for type of action or 0 if unknown. Currently known is
@@ -94,9 +93,8 @@ public:
      * <LI>L - (un-)lock</LI>
      * </UL>
      */
-    char actionType()const;
+    char actionType() const;
 };
-
 }
 
 #endif

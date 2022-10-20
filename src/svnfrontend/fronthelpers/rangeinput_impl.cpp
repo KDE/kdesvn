@@ -52,11 +52,7 @@ Rangeinput_impl::Rangeinput_impl(QWidget *parent)
     m_stopWorkingButton->setMinimumHeight(minHeight);
 }
 
-bool Rangeinput_impl::getRevisionRange(revision_range &range,
-                                       bool bWithWorking,
-                                       bool bStartOnly,
-                                       const svn::Revision &preset,
-                                       QWidget *parent)
+bool Rangeinput_impl::getRevisionRange(revision_range &range, bool bWithWorking, bool bStartOnly, const svn::Revision &preset, QWidget *parent)
 {
     QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("revisions_dlg"), parent));
     dlg->setWindowTitle(i18nc("@title:window", "Select Revisions"));

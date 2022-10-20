@@ -24,40 +24,35 @@
 
 class kdesvnd;
 
-class KdesvndListener: public svn::ContextListener
+class KdesvndListener : public svn::ContextListener
 {
     friend class kdesvnd;
 
     kdesvnd *m_back;
+
 public:
     explicit KdesvndListener(kdesvnd *p);
     virtual ~KdesvndListener();
     /* context-listener methods */
-    bool contextGetLogin(const QString &realm,
-                                 QString &username,
-                                 QString &password,
-                                 bool &maySave) override;
+    bool contextGetLogin(const QString &realm, QString &username, QString &password, bool &maySave) override;
     bool contextGetSavedLogin(const QString &realm, QString &username, QString &password) override;
     bool contextGetCachedLogin(const QString &realm, QString &username, QString &password) override;
 
     void contextNotify(const char *path,
-                               svn_wc_notify_action_t action,
-                               svn_node_kind_t kind,
-                               const char *mime_type,
-                               svn_wc_notify_state_t content_state,
-                               svn_wc_notify_state_t prop_state,
-                               svn_revnum_t revision) override;
+                       svn_wc_notify_action_t action,
+                       svn_node_kind_t kind,
+                       const char *mime_type,
+                       svn_wc_notify_state_t content_state,
+                       svn_wc_notify_state_t prop_state,
+                       svn_revnum_t revision) override;
     void contextNotify(const svn_wc_notify_t *action) override;
 
     bool contextCancel() override;
     bool contextGetLogMessage(QString &msg, const svn::CommitItemList &) override;
-    virtual svn::ContextListener::SslServerTrustAnswer
-    contextSslServerTrustPrompt(const SslServerTrustData &data,
-                                apr_uint32_t &acceptedFailures) override;
+    virtual svn::ContextListener::SslServerTrustAnswer contextSslServerTrustPrompt(const SslServerTrustData &data, apr_uint32_t &acceptedFailures) override;
     bool contextSslClientCertPrompt(QString &certFile) override;
     bool contextLoadSslClientCertPw(QString &password, const QString &realm) override;
-    bool contextSslClientCertPwPrompt(QString &password,
-            const QString &realm, bool &maySave) override;
+    bool contextSslClientCertPwPrompt(QString &password, const QString &realm, bool &maySave) override;
     void contextProgress(long long int current, long long int max) override;
 
     /* context listener virtuals end */

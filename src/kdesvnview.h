@@ -22,8 +22,8 @@
 #define KDESVNVIEW_H
 
 #include "svnqt/repositorylistener.h"
-#include <QWidget>
 #include <QUrl>
+#include <QWidget>
 #include <kparts/part.h>
 
 class QPainter;
@@ -125,7 +125,7 @@ protected Q_SLOTS:
     void onCustomLogWindowContextMenuRequested(const QPoint &pos);
 
 protected:
-    //kdesvnfilelist*m_flist;
+    // kdesvnfilelist*m_flist;
     MainTreeWidget *m_TreeWidget;
     KActionCollection *m_Collection;
 

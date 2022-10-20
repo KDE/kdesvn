@@ -18,18 +18,18 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "mergedlg_impl.h"
-#include "rangeinput_impl.h"
-#include <svnqt/url.h>
-#include <svnqt/version_check.h>
 #include "helpers/ktranslateurl.h"
 #include "ksvnwidgets/ksvndialog.h"
+#include "rangeinput_impl.h"
 #include "settings/kdesvnsettings.h"
+#include <svnqt/url.h>
+#include <svnqt/version_check.h>
 
 #include <KLocalizedString>
 
-
 MergeDlg_impl::MergeDlg_impl(QWidget *parent, bool src1, bool src2, bool out, bool record_only, bool reintegrate)
-    : QWidget(parent), Ui::MergeDlg()
+    : QWidget(parent)
+    , Ui::MergeDlg()
 {
     setupUi(this);
     m_SrcOneInput->setMode(KFile::Directory | KFile::File);
@@ -99,47 +99,47 @@ void MergeDlg_impl::setDest(const QString &what)
     m_OutInput->setUrl(QUrl::fromLocalFile(what));
 }
 
-bool MergeDlg_impl::recursive()const
+bool MergeDlg_impl::recursive() const
 {
     return m_RecursiveCheck->isChecked();
 }
 
-bool MergeDlg_impl::force()const
+bool MergeDlg_impl::force() const
 {
     return m_ForceCheck->isChecked();
 }
 
-bool MergeDlg_impl::ignorerelated()const
+bool MergeDlg_impl::ignorerelated() const
 {
     return m_RelatedCheck->isChecked();
 }
 
-bool MergeDlg_impl::dryrun()const
+bool MergeDlg_impl::dryrun() const
 {
     return m_DryCheck->isChecked();
 }
 
-bool MergeDlg_impl::useExtern()const
+bool MergeDlg_impl::useExtern() const
 {
     return m_useExternMerge->isChecked();
 }
 
-bool MergeDlg_impl::recordOnly()const
+bool MergeDlg_impl::recordOnly() const
 {
     return m_RecordOnly->isChecked();
 }
 
-bool MergeDlg_impl::reintegrate()const
+bool MergeDlg_impl::reintegrate() const
 {
     return m_Reintegrate->isChecked();
 }
 
-bool MergeDlg_impl::allowmixedrevs()const
+bool MergeDlg_impl::allowmixedrevs() const
 {
     return m_AllowMixedRev->isChecked();
 }
 
-QString MergeDlg_impl::Src1()const
+QString MergeDlg_impl::Src1() const
 {
     QUrl uri(m_SrcOneInput->url());
     const QString proto = svn::Url::transformProtokoll(uri.scheme());
@@ -151,7 +151,7 @@ QString MergeDlg_impl::Src1()const
     return uri.url();
 }
 
-QString MergeDlg_impl::Src2()const
+QString MergeDlg_impl::Src2() const
 {
     if (m_SrcTwoInput->url().isEmpty()) {
         return QString();
@@ -166,22 +166,26 @@ QString MergeDlg_impl::Src2()const
     return uri.url();
 }
 
-QString MergeDlg_impl::Dest()const
+QString MergeDlg_impl::Dest() const
 {
     return m_OutInput->url().toLocalFile();
 }
 
-Rangeinput_impl::revision_range MergeDlg_impl::getRange()const
+Rangeinput_impl::revision_range MergeDlg_impl::getRange() const
 {
     return m_RangeInput->getRange();
 }
 
-
 /*!
     \fn MergeDlg_impl::getMergeRange(bool*force,bool*recursive,bool*related,bool*dry)
  */
-bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range &range, bool *force, bool *recursive, bool *ignorerelated, bool *dry,
-                                  bool *useExternal, bool *allowmixedrevs,
+bool MergeDlg_impl::getMergeRange(Rangeinput_impl::revision_range &range,
+                                  bool *force,
+                                  bool *recursive,
+                                  bool *ignorerelated,
+                                  bool *dry,
+                                  bool *useExternal,
+                                  bool *allowmixedrevs,
                                   QWidget *parent)
 {
     QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("merge_range"), parent));

@@ -20,23 +20,23 @@
 #ifndef FILLCACHE_THREAD_H
 #define FILLCACHE_THREAD_H
 
+#include "svnfrontend/frontendtypes.h"
 #include "svnqt/client.h"
 #include "svnqt/revision.h"
 #include "svnqt/status.h"
-#include "svnfrontend/frontendtypes.h"
 #include "svnthread.h"
 
 class QObject;
 
-class FillCacheThread: public SvnThread
+class FillCacheThread : public SvnThread
 {
     Q_OBJECT
 public:
     FillCacheThread(QObject *, const QString &aPath, bool startup);
     ~FillCacheThread();
 
-    const QString &reposRoot()const;
-    const QString &Path()const;
+    const QString &reposRoot() const;
+    const QString &Path() const;
 
 Q_SIGNALS:
     void fillCacheStatus(qlonglong current, qlonglong max);

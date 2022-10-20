@@ -18,38 +18,42 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 /*
-* Copyright (c) 2003 Christian Loose <christian.loose@hamburg.de>
-*/
+ * Copyright (c) 2003 Christian Loose <christian.loose@hamburg.de>
+ */
 
 #include "sshagent.h"
 #include "kdesvn-config.h"
 
+#include "kdesvn_debug.h"
 #include <KProcess>
 #include <QCoreApplication>
 #include <QRegExp>
 #include <QStandardPaths>
-#include "kdesvn_debug.h"
 
 // initialize static member variables
-bool    SshAgent::m_isRunning  = false;
-bool    SshAgent::m_isOurAgent = false;
-bool    SshAgent::m_addIdentitiesDone = false;
+bool SshAgent::m_isRunning = false;
+bool SshAgent::m_isOurAgent = false;
+bool SshAgent::m_addIdentitiesDone = false;
 QString SshAgent::m_authSock;
 QString SshAgent::m_pid;
 
 class SshClean
 {
 public:
-    SshClean() {}
+    SshClean()
+    {
+    }
 
     ~SshClean()
     {
-        SshAgent ssh; ssh.killSshAgent();
+        SshAgent ssh;
+        ssh.killSshAgent();
     }
 };
 
 SshAgent::SshAgent(QObject *parent)
-    : QObject(parent), sshAgent(nullptr)
+    : QObject(parent)
+    , sshAgent(nullptr)
 {
     static SshClean st;
 }
@@ -76,12 +80,12 @@ bool SshAgent::querySshAgent()
         /* make sure that we have a askpass program.
          * on some systems something like that isn't installed.*/
         m_isOurAgent = false;
-        m_isRunning  = true;
+        m_isRunning = true;
     }
     // We have to start a new ssh-agent process
     else {
         m_isOurAgent = true;
-        m_isRunning  = startSshAgent();
+        m_isRunning = startSshAgent();
     }
     askPassEnv();
     return m_isRunning;
@@ -195,7 +199,6 @@ void SshAgent::slotProcessExited(int exitCode, QProcess::ExitStatus exitStatus)
             }
         }
     }
-
 }
 
 void SshAgent::slotReceivedStdout()
@@ -216,10 +219,8 @@ bool SshAgent::startSshAgent()
 
     sshAgent->setOutputChannelMode(KProcess::MergedChannels);
 
-    connect(sshAgent, QOverload<int,QProcess::ExitStatus>::of(&KProcess::finished),
-            this, &SshAgent::slotProcessExited);
-    connect(sshAgent, &KProcess::readyReadStandardOutput,
-            this, &SshAgent::slotReceivedStdout);
+    connect(sshAgent, QOverload<int, QProcess::ExitStatus>::of(&KProcess::finished), this, &SshAgent::slotProcessExited);
+    connect(sshAgent, &KProcess::readyReadStandardOutput, this, &SshAgent::slotReceivedStdout);
     sshAgent->start();
     // wait for process to finish eg. backgrounding
     sshAgent->waitForFinished(-1);

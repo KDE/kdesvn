@@ -20,11 +20,11 @@
 #include "urldlg.h"
 #include "ui_urldlg.h"
 
-#include <KUrlRequester>
 #include <KConfigGroup>
 #include <KHistoryComboBox>
 #include <KLocalizedString>
 #include <KSharedConfig>
+#include <KUrlRequester>
 #include <QLabel>
 #include <QVBoxLayout>
 
@@ -54,8 +54,7 @@ UrlDlg::UrlDlg(QWidget *parent)
     m_ui->topLayout->insertWidget(1, m_urlRequester);
     m_urlRequester->setFocus();
     m_urlRequester->setMode(KFile::ExistingOnly | KFile::Directory);
-    connect(m_urlRequester->comboBox(), &KComboBox::currentTextChanged,
-            this, &UrlDlg::slotTextChanged);
+    connect(m_urlRequester->comboBox(), &KComboBox::currentTextChanged, this, &UrlDlg::slotTextChanged);
 
     slotTextChanged(QString());
     m_urlRequester->adjustSize();

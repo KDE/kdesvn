@@ -34,8 +34,8 @@
 
 #include <svnqt/svnqt_defines.h>
 
-#include <QUrl>
 #include "path.h"
+#include <QUrl>
 
 namespace svn
 {
@@ -43,6 +43,7 @@ class SVNQT_EXPORT Url
 {
 private:
     svn::Path m_url;
+
 public:
     /** Constructor */
     Url() = default;
@@ -53,7 +54,7 @@ public:
     /** Destructor */
     ~Url() = default;
 
-    QByteArray cstr()const;
+    QByteArray cstr() const;
 
     /**
      * Checks if @a url is valid
@@ -73,7 +74,6 @@ public:
     static bool isLocal(const QString &url);
 
     static QString transformProtokoll(const QString &);
-
 };
 }
 
@@ -83,4 +83,3 @@ public:
  * eval: (load-file "../../rapidsvn-dev.el")
  * end:
  */
-

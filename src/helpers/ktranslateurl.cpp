@@ -19,9 +19,9 @@
  ***************************************************************************/
 #include "ktranslateurl.h"
 
+#include "helpers/kdesvn_debug.h"
 #include <QFileInfo>
 #include <QUrl>
-#include "helpers/kdesvn_debug.h"
 
 namespace helpers
 {
@@ -55,6 +55,6 @@ QUrl string2Uri(const QString &what)
     return uri;
 }
 
-}   // namespace KTranslateUrl
+} // namespace KTranslateUrl
 
-}   // namespace helpers
+} // namespace helpers

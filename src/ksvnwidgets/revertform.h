@@ -18,8 +18,8 @@
  ***************************************************************************/
 #pragma once
 
-#include <ksvndialog.h>
 #include "svnqt/svnqttypes.h"
+#include <ksvndialog.h>
 
 class QStringList;
 namespace Ui
@@ -35,6 +35,7 @@ public:
     ~RevertForm();
 
     svn::Depth getDepth() const;
+
 private:
     Ui::RevertForm *m_ui;
 };

@@ -26,8 +26,8 @@
 
 #include "svnqt_defines.h"
 
-#include <svn_wc.h>
 #include <svn_version.h>
+#include <svn_wc.h>
 
 namespace svn
 {
@@ -84,7 +84,7 @@ void ConflictResult::setChoice(ConflictChoice aValue)
     m_choice = aValue;
 }
 
-void ConflictResult::assignResult(svn_wc_conflict_result_t **aResult, apr_pool_t *pool)const
+void ConflictResult::assignResult(svn_wc_conflict_result_t **aResult, apr_pool_t *pool) const
 {
     svn_wc_conflict_choice_t _choice;
     switch (choice()) {
@@ -110,7 +110,6 @@ void ConflictResult::assignResult(svn_wc_conflict_result_t **aResult, apr_pool_t
     default:
         _choice = svn_wc_conflict_choose_postpone;
         break;
-
     }
     const char *_merged_file = mergedFile().isNull() ? nullptr : apr_pstrdup(pool, mergedFile().toUtf8());
     if ((*aResult) == nullptr) {
@@ -121,7 +120,7 @@ void ConflictResult::assignResult(svn_wc_conflict_result_t **aResult, apr_pool_t
     }
 }
 
-const svn_wc_conflict_result_t *ConflictResult::result(apr_pool_t *pool)const
+const svn_wc_conflict_result_t *ConflictResult::result(apr_pool_t *pool) const
 {
     svn_wc_conflict_result_t *result = nullptr;
     assignResult(&result, pool);

@@ -19,16 +19,19 @@
  ***************************************************************************/
 
 #include "svnitemnode.h"
+#include "settings/kdesvnsettings.h"
 #include "svnfrontend/maintreewidget.h"
 #include "svnqt/revision.h"
-#include "settings/kdesvnsettings.h"
 
 SvnItemModelNode::SvnItemModelNode(SvnItemModelNodeDir *aParentNode, SvnActions *bl, MainTreeWidget *id)
-    : SvnItem(), _parentNode(aParentNode), _actions(bl), _display(id)
+    : SvnItem()
+    , _parentNode(aParentNode)
+    , _actions(bl)
+    , _display(id)
 {
 }
 
-int SvnItemModelNode::rowNumber()const
+int SvnItemModelNode::rowNumber() const
 {
     if (!_parentNode) {
         return -1;
@@ -41,7 +44,7 @@ bool SvnItemModelNode::NodeIsDir() const
     return false;
 }
 
-SvnItemModelNodeDir *SvnItemModelNode::parent()const
+SvnItemModelNodeDir *SvnItemModelNode::parent() const
 {
     return _parentNode;
 }
@@ -52,13 +55,13 @@ QColor SvnItemModelNode::backgroundColor() const
         switch (m_bgColor) {
         case UPDATES:
             return Kdesvnsettings::color_need_update();
-        case  LOCKED:
+        case LOCKED:
             return Kdesvnsettings::color_locked_item();
-        case  ADDED:
+        case ADDED:
             return Kdesvnsettings::color_item_added();
-        case  DELETED:
+        case DELETED:
             return Kdesvnsettings::color_item_deleted();
-        case  MODIFIED:
+        case MODIFIED:
             return Kdesvnsettings::color_changed_item();
         case MISSING:
             return Kdesvnsettings::color_missed_item();
@@ -83,7 +86,7 @@ bool SvnItemModelNode::NodeHasChilds() const
 /************************
  * Methods from SvnItem *
  ************************/
-QString SvnItemModelNode::getParentDir()const
+QString SvnItemModelNode::getParentDir() const
 {
     if (parent()) {
         return parent()->fullName();
@@ -91,12 +94,12 @@ QString SvnItemModelNode::getParentDir()const
     return QString();
 }
 
-SvnItem *SvnItemModelNode::getParentItem()const
+SvnItem *SvnItemModelNode::getParentItem() const
 {
     return _parentNode;
 }
 
-svn::Revision SvnItemModelNode::correctPeg()const
+svn::Revision SvnItemModelNode::correctPeg() const
 {
     /// @todo backlink to remote revision storage
     return _display->baseRevision();
@@ -121,12 +124,14 @@ char SvnItemModelNode::sortChar() const
 }
 
 SvnItemModelNodeDir::SvnItemModelNodeDir(SvnActions *bl, MainTreeWidget *disp)
-    : SvnItemModelNode(nullptr, bl, disp), m_Children()
+    : SvnItemModelNode(nullptr, bl, disp)
+    , m_Children()
 {
 }
 
 SvnItemModelNodeDir::SvnItemModelNodeDir(SvnItemModelNodeDir *_parent, SvnActions *bl, MainTreeWidget *disp)
-    : SvnItemModelNode(_parent, bl, disp), m_Children()
+    : SvnItemModelNode(_parent, bl, disp)
+    , m_Children()
 {
 }
 
@@ -141,7 +146,7 @@ void SvnItemModelNodeDir::clear()
     m_Children.clear();
 }
 
-const QVector<SvnItemModelNode *> &SvnItemModelNodeDir::childList()const
+const QVector<SvnItemModelNode *> &SvnItemModelNodeDir::childList() const
 {
     return m_Children;
 }
@@ -154,7 +159,7 @@ bool SvnItemModelNodeDir::NodeIsDir() const
     return true;
 }
 
-SvnItemModelNode *SvnItemModelNodeDir::child(int row)const
+SvnItemModelNode *SvnItemModelNodeDir::child(int row) const
 {
     if (row < 0 || row >= m_Children.size()) {
         return nullptr;

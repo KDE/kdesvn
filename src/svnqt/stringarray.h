@@ -49,7 +49,7 @@ public:
     StringArray();
     explicit StringArray(const QStringList &);
     explicit StringArray(const apr_array_header_t *apr_targets);
-    QStringList::size_type size()const;
+    QStringList::size_type size() const;
     /**
      * Returns an apr array containing char*.
      *
@@ -65,7 +65,7 @@ public:
     }
 
     /** if array should return 0 instead of empty array */
-    bool isNull()const;
+    bool isNull() const;
     void setNull(bool _n);
 };
 }

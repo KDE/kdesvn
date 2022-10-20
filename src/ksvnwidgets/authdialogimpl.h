@@ -20,12 +20,12 @@
 #ifndef AUTHDIALOGIMPL_H
 #define AUTHDIALOGIMPL_H
 
-#include <QString>
 #include <QDialog>
+#include <QString>
 
 class AuthDialogWidget;
 
-class AuthDialogImpl: public QDialog
+class AuthDialogImpl : public QDialog
 {
     Q_OBJECT
 public:

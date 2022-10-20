@@ -20,7 +20,6 @@
 #include "encodingselector_impl.h"
 #include <kcharsets.h>
 
-
 EncodingSelector_impl::EncodingSelector_impl(QWidget *parent)
     : QWidget(parent)
 {

@@ -22,18 +22,18 @@
 
 #include "svnqt/context_listener.h"
 
-#include <QString>
 #include <QMutex>
+#include <QString>
 
 /**
 @author Rajko Albrecht
 */
-struct ThreadContextListenerData
-{
+struct ThreadContextListenerData {
     ThreadContextListenerData()
         : noProgress(true)
         , bReturnValue(false)
-    {}
+    {
+    }
 
     /* sometimes suppress progress messages */
     bool noProgress;
@@ -48,7 +48,8 @@ struct ThreadContextListenerData
         svn::ContextListener::SslServerTrustData trustdata;
         strust_answer()
             : sslTrustAnswer(svn::ContextListener::DONT_ACCEPT)
-        {}
+        {
+        }
     } m_strust_answer;
 
     /* login into server */
@@ -57,7 +58,8 @@ struct ThreadContextListenerData
         bool maysave;
         slogin_data()
             : maysave(false)
-        {}
+        {
+        }
     } m_slogin_data;
 
     struct slog_message {
@@ -70,7 +72,8 @@ struct ThreadContextListenerData
         bool maysave;
         scert_pw()
             : maysave(false)
-        {}
+        {
+        }
     } m_scert_pw;
 
     struct scert_file {

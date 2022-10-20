@@ -19,9 +19,9 @@
  ***************************************************************************/
 #include "opencontextmenu.h"
 
-#include <KLocalizedString>
 #include <KIO/ApplicationLauncherJob>
 #include <KIO/JobUiDelegateFactory>
+#include <KLocalizedString>
 
 #include <QAction>
 
@@ -72,7 +72,6 @@ void OpenContextmenu::slotRunService(QAction *act)
     } else {
         slotOpenWith();
     }
-
 }
 
 void OpenContextmenu::slotOpenWith()

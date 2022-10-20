@@ -27,9 +27,9 @@
 
 struct svn_wc_conflict_result_t;
 
+#include <svn_types.h>
 #include <svnqt/pool.h>
 #include <svnqt/svnqt_defines.h>
-#include <svn_types.h>
 
 #include <QString>
 
@@ -55,20 +55,20 @@ public:
      */
     explicit ConflictResult(const svn_wc_conflict_result_t *);
 
-    const QString &mergedFile()const
+    const QString &mergedFile() const
     {
         return m_MergedFile;
     }
     void setMergedFile(const QString &aMergedfile);
 
-    ConflictChoice choice()const
+    ConflictChoice choice() const
     {
         return m_choice;
     }
     void setChoice(ConflictChoice aValue);
 
-    const svn_wc_conflict_result_t *result(apr_pool_t *pool)const;
-    void assignResult(svn_wc_conflict_result_t **aResult, apr_pool_t *pool)const;
+    const svn_wc_conflict_result_t *result(apr_pool_t *pool) const;
+    void assignResult(svn_wc_conflict_result_t **aResult, apr_pool_t *pool) const;
 
 protected:
     ConflictChoice m_choice;

@@ -25,15 +25,16 @@
 #include "svnqt/status.h"
 #include "svnthread.h"
 
-class CheckModifiedThread: public SvnThread
+class CheckModifiedThread : public SvnThread
 {
     Q_OBJECT
 public:
     CheckModifiedThread(QObject *parent, const QString &what, bool updates);
     ~CheckModifiedThread();
-    const svn::StatusEntries &getList()const;
+    const svn::StatusEntries &getList() const;
 Q_SIGNALS:
     void checkModifiedFinished();
+
 protected:
     void run() override;
 
@@ -43,4 +44,3 @@ protected:
 };
 
 #endif
-

@@ -57,8 +57,7 @@ private:
     Apr(const Apr &);
 
     /** Disallow assignment operator */
-    Apr &
-    operator = (const Apr &);
+    Apr &operator=(const Apr &);
 };
 }
 

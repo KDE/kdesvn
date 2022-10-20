@@ -20,17 +20,17 @@
 #include "pannerview.h"
 #include "graphtree_defines.h"
 
-#include <QPainter>
-#include <QMouseEvent>
 #include <QGraphicsRectItem>
+#include <QMouseEvent>
+#include <QPainter>
 #include <QStyleOptionGraphicsItem>
 
-class GraphPanMark: public QGraphicsRectItem
+class GraphPanMark : public QGraphicsRectItem
 {
 public:
     GraphPanMark(QGraphicsItem *p = nullptr);
     ~GraphPanMark();
-    int type()const override;
+    int type() const override;
     void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
 };
 
@@ -56,13 +56,13 @@ void GraphPanMark::paint(QPainter *p, const QStyleOptionGraphicsItem *option, QW
     }
 }
 
-int GraphPanMark::type()const
+int GraphPanMark::type() const
 {
     return GRAPHTREE_PANMARK;
 }
 
 PannerView::PannerView(QWidget *parent)
-    : QGraphicsView(parent)// KDE4 check , /*Qt::WNoAutoErase |*/ Qt::WA_StaticContents/*WStaticContents*/ )
+    : QGraphicsView(parent) // KDE4 check , /*Qt::WNoAutoErase |*/ Qt::WA_StaticContents/*WStaticContents*/ )
 {
     m_Mark = nullptr;
     m_Moving = false;
@@ -108,8 +108,7 @@ void PannerView::mouseMoveEvent(QMouseEvent *e)
 {
     if (m_Moving) {
         QPointF sPos = mapToScene(e->pos());
-        emit zoomRectMoved(sPos.x() - m_ZoomRect.center().x(),
-                           sPos.y() - m_ZoomRect.center().y());
+        emit zoomRectMoved(sPos.x() - m_ZoomRect.center().x(), sPos.y() - m_ZoomRect.center().y());
 
         m_LastPos = e->pos();
     }
@@ -123,8 +122,7 @@ void PannerView::mousePressEvent(QMouseEvent *e)
     if (m_ZoomRect.isValid()) {
         QPointF sPos = mapToScene(e->pos());
         if (!m_ZoomRect.contains(sPos)) {
-            emit zoomRectMoved(sPos.x() - m_ZoomRect.center().x(),
-                               sPos.y() - m_ZoomRect.center().y());
+            emit zoomRectMoved(sPos.x() - m_ZoomRect.center().x(), sPos.y() - m_ZoomRect.center().y());
         }
         m_Moving = true;
         m_LastPos = e->pos();
@@ -145,6 +143,5 @@ void PannerView::mouseReleaseEvent(QMouseEvent *)
  */
 void PannerView::updateCurrentRect()
 {
-    if (m_ZoomRect.isValid()) {
-    }
+    if (m_ZoomRect.isValid()) { }
 }

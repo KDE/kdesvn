@@ -30,13 +30,13 @@
  */
 // svncpp
 #include "log_entry.h"
+#include "helper.h"
 #include "pool.h"
 #include "stringarray.h"
-#include "helper.h"
 
 // subversion api
-#include "svn_time.h"
 #include "svn_compat.h"
+#include "svn_time.h"
 
 #include <QDataStream>
 
@@ -44,12 +44,14 @@ namespace svn
 {
 
 LogEntry::LogEntry()
-    : revision(-1), date(0)
+    : revision(-1)
+    , date(0)
 {
 }
 
 LogEntry::LogEntry(svn_log_entry_t *log_entry, const StringArray &excludeList)
-    : revision(-1), date(0)
+    : revision(-1)
+    , date(0)
 {
     Pool pool;
     const char *author_ = nullptr;
@@ -68,9 +70,7 @@ LogEntry::LogEntry(svn_log_entry_t *log_entry, const StringArray &excludeList)
     revision = log_entry->revision;
     if (log_entry->changed_paths2) {
         bool blocked = false;
-        for (apr_hash_index_t *hi = apr_hash_first(pool, log_entry->changed_paths2);
-                hi != nullptr;
-                hi = apr_hash_next(hi)) {
+        for (apr_hash_index_t *hi = apr_hash_first(pool, log_entry->changed_paths2); hi != nullptr; hi = apr_hash_next(hi)) {
             const void *pv;
             void *val;
             blocked = false;
@@ -85,58 +85,36 @@ LogEntry::LogEntry(svn_log_entry_t *log_entry, const StringArray &excludeList)
                 }
             }
             if (!blocked) {
-                changedPaths.push_back(LogChangePathEntry(_p,
-                                                          log_item->action,
-                                                          QString::fromUtf8(log_item->copyfrom_path),
-                                                          log_item->copyfrom_rev));
+                changedPaths.push_back(LogChangePathEntry(_p, log_item->action, QString::fromUtf8(log_item->copyfrom_path), log_item->copyfrom_rev));
             }
         }
     }
 }
 }
 
-
 SVNQT_EXPORT QDataStream &operator<<(QDataStream &s, const svn::LogEntry &r)
 {
-    s << r.revision
-      << r.author
-      << r.message
-      << r.changedPaths
-      << r.date;
+    s << r.revision << r.author << r.message << r.changedPaths << r.date;
     return s;
 }
 
 SVNQT_EXPORT QDataStream &operator<<(QDataStream &s, const svn::LogChangePathEntry &r)
 {
     short ac = r.action;
-    s << r.path
-      << ac
-      << r.copyFromPath
-      << r.copyFromRevision
-      << r.copyToPath
-      << r.copyToRevision;
+    s << r.path << ac << r.copyFromPath << r.copyFromRevision << r.copyToPath << r.copyToRevision;
     return s;
 }
 
 SVNQT_EXPORT QDataStream &operator>>(QDataStream &s, svn::LogEntry &r)
 {
-    s >> r.revision
-      >> r.author
-      >> r.message
-      >> r.changedPaths
-      >> r.date;
+    s >> r.revision >> r.author >> r.message >> r.changedPaths >> r.date;
     return s;
 }
 
 SVNQT_EXPORT QDataStream &operator>>(QDataStream &s, svn::LogChangePathEntry &r)
 {
     short ac;
-    s >> r.path
-      >> ac
-      >> r.copyFromPath
-      >> r.copyFromRevision
-      >> r.copyToPath
-      >> r.copyToRevision;
+    s >> r.path >> ac >> r.copyFromPath >> r.copyFromRevision >> r.copyToPath >> r.copyToRevision;
     r.action = ac;
     return s;
 }

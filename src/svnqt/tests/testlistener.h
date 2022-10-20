@@ -26,13 +26,17 @@
 
 #include "svnqt/context_listener.h"
 
-class TestListener: public svn::ContextListener
+class TestListener : public svn::ContextListener
 {
 public:
-    TestListener() {}
-    virtual ~TestListener() {}
+    TestListener()
+    {
+    }
+    virtual ~TestListener()
+    {
+    }
 
-    virtual void contextProgress(long long int , long long int) {};
+    virtual void contextProgress(long long int, long long int){};
     virtual bool contextSslClientCertPwPrompt(QString &, const QString &, bool &)
     {
         return false;
@@ -45,9 +49,7 @@ public:
     {
         return false;
     }
-    virtual svn::ContextListener::SslServerTrustAnswer
-    contextSslServerTrustPrompt(const SslServerTrustData &,
-                                apr_uint32_t &)
+    virtual svn::ContextListener::SslServerTrustAnswer contextSslServerTrustPrompt(const SslServerTrustData &, apr_uint32_t &)
     {
         return svn::ContextListener::SslServerTrustAnswer();
     }
@@ -59,13 +61,12 @@ public:
     {
         return false;
     }
-    virtual void contextNotify(const svn_wc_notify_t *) {}
-    virtual void contextNotify(const char *, svn_wc_notify_action_t,
-                               svn_node_kind_t,
-                               const char *,
-                               svn_wc_notify_state_t,
-                               svn_wc_notify_state_t,
-                               svn_revnum_t) {}
+    virtual void contextNotify(const svn_wc_notify_t *)
+    {
+    }
+    virtual void contextNotify(const char *, svn_wc_notify_action_t, svn_node_kind_t, const char *, svn_wc_notify_state_t, svn_wc_notify_state_t, svn_revnum_t)
+    {
+    }
     virtual bool contextGetSavedLogin(const QString &, QString &, QString &)
     {
         return false;
@@ -74,15 +75,11 @@ public:
     {
         return false;
     }
-    virtual bool contextGetLogin(const QString &,
-                                 QString &,
-                                 QString &,
-                                 bool &maySave)
+    virtual bool contextGetLogin(const QString &, QString &, QString &, bool &maySave)
     {
         maySave = false;
         return false;
     }
-
 };
 
 #endif

@@ -20,9 +20,9 @@
 #ifndef REVISIONTREE_H
 #define REVISIONTREE_H
 
+#include "svnqt/client.h"
 #include "svnqt/log_entry.h"
 #include "svnqt/revision.h"
-#include "svnqt/client.h"
 
 #include <qstring.h>
 
@@ -45,12 +45,14 @@ public:
     RevisionTree(const svn::ClientP &,
                  CContextListener *aListener,
                  const QString &reposRoot,
-                 const svn::Revision &startr, const svn::Revision &endr,
-                 const QString &, const svn::Revision &baserevision,
+                 const svn::Revision &startr,
+                 const svn::Revision &endr,
+                 const QString &,
+                 const svn::Revision &baserevision,
                  QWidget *parent = nullptr);
     ~RevisionTree();
 
-    bool isValid()const;
+    bool isValid() const;
     RevTreeWidget *getView();
 
 protected:

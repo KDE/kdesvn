@@ -23,9 +23,9 @@
  ***************************************************************************/
 
 #include "diffoptions.h"
-#include "svnqt_defines.h"
-#include "stringarray.h"
 #include "pool.h"
+#include "stringarray.h"
+#include "svnqt_defines.h"
 
 #include <svn_diff.h>
 #include <svn_version.h>
@@ -54,7 +54,7 @@ DiffOptions::DiffOptions(const QStringList &options)
 {
     Pool pool;
     StringArray _ar(options);
-    svn_diff_file_options_t *_diffopts =  svn_diff_file_options_create(pool);
+    svn_diff_file_options_t *_diffopts = svn_diff_file_options_create(pool);
     if (_diffopts) {
         svn_error_t *error = svn_diff_file_options_parse(_diffopts, _ar.array(pool), pool);
         if (error == nullptr) {
@@ -70,9 +70,9 @@ DiffOptions::DiffOptions(const svn_diff_file_options_t *options)
     }
 }
 
-svn_diff_file_options_t *DiffOptions::options(const Pool &pool)const
+svn_diff_file_options_t *DiffOptions::options(const Pool &pool) const
 {
-    svn_diff_file_options_t *_diffopts =  svn_diff_file_options_create(pool);
+    svn_diff_file_options_t *_diffopts = svn_diff_file_options_create(pool);
     _diffopts->ignore_eol_style = _ignoreeol;
     _diffopts->show_c_function = _showc;
     switch (_ignorespace) {

@@ -55,8 +55,7 @@ svn::StringArray::StringArray(const apr_array_header_t *apr_targets)
     : m_content()
 {
     for (int i = 0; i < apr_targets->nelts; i++) {
-        const char **target =
-            &APR_ARRAY_IDX(apr_targets, i, const char *);
+        const char **target = &APR_ARRAY_IDX(apr_targets, i, const char *);
 
         m_content.push_back(QString::fromUtf8(*target));
     }
@@ -66,7 +65,7 @@ svn::StringArray::StringArray(const apr_array_header_t *apr_targets)
 /*!
     \fn svn::StringArray::size()const
  */
-QStringList::size_type svn::StringArray::size()const
+QStringList::size_type svn::StringArray::size() const
 {
     if (isNull()) {
         return 0;
@@ -83,18 +82,17 @@ apr_array_header_t *svn::StringArray::array(const Pool &pool) const
         return nullptr;
     }
     apr_pool_t *apr_pool = pool.pool();
-    apr_array_header_t *apr_targets =
-        apr_array_make(apr_pool, m_content.size(), sizeof(const char *));
+    apr_array_header_t *apr_targets = apr_array_make(apr_pool, m_content.size(), sizeof(const char *));
 
     for (const QString &content : m_content) {
         const QByteArray s = content.toUtf8();
         char *t2 = apr_pstrndup(apr_pool, s.data(), s.size());
-        (*((const char **) apr_array_push(apr_targets))) = t2;
+        (*((const char **)apr_array_push(apr_targets))) = t2;
     }
     return apr_targets;
 }
 
-bool svn::StringArray::isNull()const
+bool svn::StringArray::isNull() const
 {
     return m_isNull;
 }

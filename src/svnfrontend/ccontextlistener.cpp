@@ -18,21 +18,21 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "ccontextlistener.h"
-#include "settings/kdesvnsettings.h"
+#include "fronthelpers/cursorstack.h"
+#include "helpers/kdesvn_debug.h"
 #include "ksvnwidgets/authdialogimpl.h"
 #include "ksvnwidgets/commitmsg_impl.h"
-#include "ksvnwidgets/ssltrustprompt.h"
 #include "ksvnwidgets/pwstorage.h"
-#include "helpers/kdesvn_debug.h"
-#include "fronthelpers/cursorstack.h"
+#include "ksvnwidgets/ssltrustprompt.h"
+#include "settings/kdesvnsettings.h"
 
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KPasswordDialog>
 
 #include <QFileDialog>
-#include <QTextStream>
 #include <QMutex>
+#include <QTextStream>
 
 class CContextListenerData
 {
@@ -50,7 +50,10 @@ public:
 };
 
 CContextListenerData::CContextListenerData()
-    : m_cancelMe(false), m_CancelMutex(), noDialogs(false), m_updatedItems()
+    : m_cancelMe(false)
+    , m_CancelMutex()
+    , noDialogs(false)
+    , m_updatedItems()
 {
 }
 
@@ -60,45 +63,41 @@ CContextListenerData::~CContextListenerData()
 
 const int CContextListener::smax_actionstring = svn_wc_notify_failed_unlock + 1;
 
-const char *CContextListener::action_strings[] = {
-    I18N_NOOP("Add to revision control"),
-    I18N_NOOP("Copy"),
-    I18N_NOOP("Delete"),
-    I18N_NOOP("Restore missing"),
-    I18N_NOOP("Revert"),
-    I18N_NOOP("Revert failed"),
-    I18N_NOOP("Resolved"),
-    I18N_NOOP("Skip"),
-    I18N_NOOP("Deleted"),
-    I18N_NOOP("Added"),
-    I18N_NOOP("Update"), //svn_wc_notify_update_update
-    I18N_NOOP("Update complete"),
-    I18N_NOOP("Update external module"),
-    nullptr, // status completed - will not send is just noisy
-    I18N_NOOP("Status on external"), //svn_wc_notify_status_external
-    I18N_NOOP("Commit Modified"),
-    I18N_NOOP("Commit Added"),
-    I18N_NOOP("Commit Deleted"),
-    I18N_NOOP("Commit Replaced"),
-    nullptr, //tx delta -> making ticks instead
-    nullptr, //svn_wc_notify_blame_revision - using ticks
-    I18N_NOOP("Locking"),
-    I18N_NOOP("Unlocked"),
-    I18N_NOOP("Lock failed"),
-    I18N_NOOP("Unlock failed")
-};
+const char *CContextListener::action_strings[] = {I18N_NOOP("Add to revision control"),
+                                                  I18N_NOOP("Copy"),
+                                                  I18N_NOOP("Delete"),
+                                                  I18N_NOOP("Restore missing"),
+                                                  I18N_NOOP("Revert"),
+                                                  I18N_NOOP("Revert failed"),
+                                                  I18N_NOOP("Resolved"),
+                                                  I18N_NOOP("Skip"),
+                                                  I18N_NOOP("Deleted"),
+                                                  I18N_NOOP("Added"),
+                                                  I18N_NOOP("Update"), // svn_wc_notify_update_update
+                                                  I18N_NOOP("Update complete"),
+                                                  I18N_NOOP("Update external module"),
+                                                  nullptr, // status completed - will not send is just noisy
+                                                  I18N_NOOP("Status on external"), // svn_wc_notify_status_external
+                                                  I18N_NOOP("Commit Modified"),
+                                                  I18N_NOOP("Commit Added"),
+                                                  I18N_NOOP("Commit Deleted"),
+                                                  I18N_NOOP("Commit Replaced"),
+                                                  nullptr, // tx delta -> making ticks instead
+                                                  nullptr, // svn_wc_notify_blame_revision - using ticks
+                                                  I18N_NOOP("Locking"),
+                                                  I18N_NOOP("Unlocked"),
+                                                  I18N_NOOP("Lock failed"),
+                                                  I18N_NOOP("Unlock failed")};
 
-const char *CContextListener::notify_state_strings[] = {
-    nullptr, // = 0
-    nullptr,
-    I18N_NOOP("unchanged"),
-    I18N_NOOP("item wasn't present"),
-    I18N_NOOP("unversioned item obstructed work"),
-    // I18N_NOOP("Pristine state was modified."), // should send a signal with path instead of message?
-    nullptr,
-    I18N_NOOP("Modified state had mods merged in."),
-    I18N_NOOP("Modified state got conflicting mods.")
-};
+const char *CContextListener::notify_state_strings[] = {nullptr, // = 0
+                                                        nullptr,
+                                                        I18N_NOOP("unchanged"),
+                                                        I18N_NOOP("item wasn't present"),
+                                                        I18N_NOOP("unversioned item obstructed work"),
+                                                        // I18N_NOOP("Pristine state was modified."), // should send a signal with path instead of message?
+                                                        nullptr,
+                                                        I18N_NOOP("Modified state had mods merged in."),
+                                                        I18N_NOOP("Modified state got conflicting mods.")};
 
 QString CContextListener::NotifyAction(svn_wc_notify_action_t action)
 {
@@ -148,11 +147,7 @@ bool CContextListener::contextGetSavedLogin(const QString &realm, QString &usern
     return true;
 }
 
-bool CContextListener::contextGetLogin(
-    const QString &realm,
-    QString &username,
-    QString &password,
-    bool &maySave)
+bool CContextListener::contextGetLogin(const QString &realm, QString &username, QString &password, bool &maySave)
 {
     bool ret = false;
     maySave = false;
@@ -218,12 +213,11 @@ void CContextListener::contextNotify(const svn_wc_notify_t *action)
     if (!action) {
         return;
     }
-//    if (action->action<svn_wc_notify_locked) {
-    contextNotify(action->path, action->action, action->kind, action->mime_type,
-                  action->content_state, action->prop_state, action->revision);
-//        return;
-//    }
-//    QString aString = NotifyAction(action->action);
+    //    if (action->action<svn_wc_notify_locked) {
+    contextNotify(action->path, action->action, action->kind, action->mime_type, action->content_state, action->prop_state, action->revision);
+    //        return;
+    //    }
+    //    QString aString = NotifyAction(action->action);
 }
 
 void CContextListener::sendTick()
@@ -257,22 +251,22 @@ bool CContextListener::contextGetLogMessage(QString &msg, const svn::CommitItemL
     return isOk;
 }
 
-svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTrustPrompt(
-    const svn::ContextListener::SslServerTrustData &data , apr_uint32_t &acceptedFailures)
+svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTrustPrompt(const svn::ContextListener::SslServerTrustData &data,
+                                                                                         apr_uint32_t &acceptedFailures)
 {
     CursorStack cs(Qt::ArrowCursor);
 
     bool ok, saveit;
     emit waitShow(true);
-    if (!SslTrustPrompt::sslTrust(
-                data.hostname,
-                data.fingerprint,
-                data.validFrom,
-                data.validUntil,
-                data.issuerDName,
-                data.realm,
-                failure2Strings(acceptedFailures),
-                &ok, &saveit)) {
+    if (!SslTrustPrompt::sslTrust(data.hostname,
+                                  data.fingerprint,
+                                  data.validFrom,
+                                  data.validUntil,
+                                  data.issuerDName,
+                                  data.realm,
+                                  failure2Strings(acceptedFailures),
+                                  &ok,
+                                  &saveit)) {
         return DONT_ACCEPT;
     }
     emit waitShow(false);
@@ -301,8 +295,7 @@ bool CContextListener::contextLoadSslClientCertPw(QString &password, const QStri
     return true;
 }
 
-bool CContextListener::contextSslClientCertPwPrompt(QString &password,
-        const QString &realm, bool &maysave)
+bool CContextListener::contextSslClientCertPwPrompt(QString &password, const QString &realm, bool &maysave)
 {
     maysave = false;
     emit waitShow(true);
@@ -384,7 +377,7 @@ void CContextListener::maySavePlaintext(svn_boolean_t *may_save_plaintext, const
     emit waitShow(false);
 }
 
-const QStringList &CContextListener::updatedItems()const
+const QStringList &CContextListener::updatedItems() const
 {
     return m_Data->m_updatedItems;
 }

@@ -20,11 +20,11 @@
 #ifndef CHECKOUTINFO_IMPL_H
 #define CHECKOUTINFO_IMPL_H
 
-#include "ui_checkoutinfo.h"
 #include "svnqt/revision.h"
 #include "svnqt/svnqttypes.h"
+#include "ui_checkoutinfo.h"
 
-class CheckoutInfo_impl: public QWidget, public Ui::CheckoutInfo
+class CheckoutInfo_impl : public QWidget, public Ui::CheckoutInfo
 {
     Q_OBJECT
 public:

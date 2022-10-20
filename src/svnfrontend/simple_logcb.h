@@ -33,9 +33,13 @@ class SimpleLogCb
 {
 public:
     //! empty constructor
-    SimpleLogCb() {}
+    SimpleLogCb()
+    {
+    }
     //! destructor
-    virtual ~SimpleLogCb() {}
+    virtual ~SimpleLogCb()
+    {
+    }
     //! retrieve a logentry
     /*!
      * @param logtarget target buffer where to store logentry

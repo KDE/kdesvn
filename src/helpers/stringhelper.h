@@ -20,8 +20,8 @@
 #ifndef STRINGHELPER_H
 #define STRINGHELPER_H
 
-#include <QString>
 #include <KFormat>
+#include <QString>
 
 namespace helpers
 {

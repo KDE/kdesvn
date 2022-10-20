@@ -18,10 +18,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "checkoutinfo_impl.h"
-#include "rangeinput_impl.h"
-#include "ksvnwidgets/depthselector.h"
-#include "svnqt/url.h"
 #include "helpers/ktranslateurl.h"
+#include "ksvnwidgets/depthselector.h"
+#include "rangeinput_impl.h"
+#include "svnqt/url.h"
 
 CheckoutInfo_impl::CheckoutInfo_impl(QWidget *parent)
     : QWidget(parent)

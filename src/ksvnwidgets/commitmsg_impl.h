@@ -20,28 +20,28 @@
 #ifndef COMMITMSG_IMPL_H
 #define COMMITMSG_IMPL_H
 
-#include "ksvnwidgets/ui_commitmessage.h"
 #include "ksvnwidgets/models/commitmodelfwd.h"
+#include "ksvnwidgets/ui_commitmessage.h"
 #include "svnqt/commititem.h"
-
 
 class QStringList;
 class CommitModel;
 class CommitFilterModel;
 
-class Commitmsg_impl: public QWidget, Ui::CommitMessage
+class Commitmsg_impl : public QWidget, Ui::CommitMessage
 {
     Q_OBJECT
 
 protected:
     explicit Commitmsg_impl(const svn::CommitItemList &_items, QWidget *parent = nullptr);
     explicit Commitmsg_impl(const CommitActionEntries &, const CommitActionEntries &, QWidget *parent = nullptr);
+
 public:
     explicit Commitmsg_impl(QWidget *parent = nullptr);
     ~Commitmsg_impl();
 
-    QString getMessage()const;
-    bool isKeeplocks()const;
+    QString getMessage() const;
+    bool isKeeplocks() const;
     void initHistory();
     void saveHistory(bool canceld);
     void keepsLocks(bool);
@@ -49,14 +49,17 @@ public:
     static QString getLogmessage(bool *ok, svn::Depth *rec, bool *keep_locks, QWidget *parent = nullptr);
     static QString getLogmessage(const svn::CommitItemList &, bool *ok, svn::Depth *rec, bool *keep_locks, QWidget *parent = nullptr);
 
-    static QString getLogmessage(const CommitActionEntries &, const CommitActionEntries &,
+    static QString getLogmessage(const CommitActionEntries &,
+                                 const CommitActionEntries &,
                                  QObject *callback,
                                  CommitActionEntries &,
-                                 bool *ok, bool *keep_locks, QWidget *parent = nullptr);
+                                 bool *ok,
+                                 bool *keep_locks,
+                                 QWidget *parent = nullptr);
 
     void addItemWidget(QWidget *);
 
-    svn::Depth getDepth()const;
+    svn::Depth getDepth() const;
 
     CommitActionEntries checkedEntries() const;
     void hideDepth(bool ahide);

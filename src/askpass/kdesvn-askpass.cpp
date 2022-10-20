@@ -22,17 +22,19 @@
 #include <KPasswordDialog>
 #include <KWallet>
 
+#include <QApplication>
+#include <QCommandLineOption>
+#include <QCommandLineParser>
 #include <QPointer>
 #include <QTextStream>
-#include <QApplication>
-#include <QCommandLineParser>
-#include <QCommandLineOption>
 
 int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
     KLocalizedString::setApplicationDomain("kdesvn");
-    KAboutData aboutData(QStringLiteral("kdesvnaskpass"), i18n("kdesvnaskpass"), QStringLiteral("0.2"),
+    KAboutData aboutData(QStringLiteral("kdesvnaskpass"),
+                         i18n("kdesvnaskpass"),
+                         QStringLiteral("0.2"),
                          i18n("ssh-askpass for kdesvn"),
                          KAboutLicense::LicenseKey::LGPL,
                          i18n("Copyright (c) 2005-2009 Rajko Albrecht"));
@@ -43,7 +45,7 @@ int main(int argc, char **argv)
     parser.process(app);
     aboutData.processCommandLine(&parser);
     // no need for session management
-    //app.disableSessionManagement();
+    // app.disableSessionManagement();
 
     QString prompt;
     QString kfile;
@@ -53,8 +55,7 @@ int main(int argc, char **argv)
         prompt = i18n("Please enter your password below.");
     } else {
         prompt = parser.positionalArguments().at(0);
-        if (prompt.contains(QLatin1String("Bad passphrase"), Qt::CaseInsensitive) ||
-                prompt.contains(QLatin1String("Permission denied"), Qt::CaseInsensitive)) {
+        if (prompt.contains(QLatin1String("Bad passphrase"), Qt::CaseInsensitive) || prompt.contains(QLatin1String("Permission denied"), Qt::CaseInsensitive)) {
             error = true;
         }
         kfile = prompt.section(QLatin1Char(' '), -2).remove(QLatin1Char(':')).simplified();
@@ -93,4 +94,3 @@ int main(int argc, char **argv)
     pw.replace(0, pw.length(), QLatin1Char('0'));
     return 0;
 }
-

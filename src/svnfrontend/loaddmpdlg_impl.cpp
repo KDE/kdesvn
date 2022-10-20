@@ -34,7 +34,7 @@ LoadDmpDlg_impl::~LoadDmpDlg_impl()
 /*!
     \fn LoadDmpDlg_impl::usePost()const
  */
-bool LoadDmpDlg_impl::usePost()const
+bool LoadDmpDlg_impl::usePost() const
 {
     return m_UsePost->isChecked();
 }
@@ -42,12 +42,12 @@ bool LoadDmpDlg_impl::usePost()const
 /*!
     \fn LoadDmpDlg_impl::usePre()const
  */
-bool LoadDmpDlg_impl::usePre()const
+bool LoadDmpDlg_impl::usePre() const
 {
     return m_UsePre->isChecked();
 }
 
-bool LoadDmpDlg_impl::validateProps()const
+bool LoadDmpDlg_impl::validateProps() const
 {
     return m_validateProps->isChecked();
 }
@@ -55,7 +55,7 @@ bool LoadDmpDlg_impl::validateProps()const
 /*!
     \fn LoadDmpDlg_impl::uuidAction()const
  */
-int LoadDmpDlg_impl::uuidAction()const
+int LoadDmpDlg_impl::uuidAction() const
 {
     if (m_UUidForce->isChecked()) {
         return 2;
@@ -68,7 +68,7 @@ int LoadDmpDlg_impl::uuidAction()const
 /*!
     \fn LoadDmpDlg_impl::dumpFile()const
  */
-QUrl LoadDmpDlg_impl::dumpFile()const
+QUrl LoadDmpDlg_impl::dumpFile() const
 {
     return m_Dumpfile->url();
 }
@@ -76,7 +76,7 @@ QUrl LoadDmpDlg_impl::dumpFile()const
 /*!
     \fn LoadDmpDlg_impl::repository()const
  */
-QString LoadDmpDlg_impl::repository()const
+QString LoadDmpDlg_impl::repository() const
 {
     return m_Repository->url().toLocalFile();
 }
@@ -84,7 +84,7 @@ QString LoadDmpDlg_impl::repository()const
 /*!
     \fn LoadDmpDlg_impl::parentPath()const
  */
-QString LoadDmpDlg_impl::parentPath()const
+QString LoadDmpDlg_impl::parentPath() const
 {
     QString res = m_Rootfolder->text();
     while (res.endsWith(QLatin1Char('/'))) {

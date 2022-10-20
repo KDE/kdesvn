@@ -24,8 +24,8 @@
 #include "conflictdescription.h"
 #include "svnqt_defines.h"
 
-#include <svn_wc.h>
 #include "helper.h"
+#include <svn_wc.h>
 
 namespace svn
 {
@@ -96,7 +96,7 @@ ConflictDescription::ConflictDescription(const svn_wc_conflict_description2_t *c
     case svn_wc_conflict_reason_replaced:
         m_reason = ConflictReason::Replaced;
         break;
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
     case svn_wc_conflict_reason_moved_away:
         m_reason = ConflictReason::MovedAway;
         break;
@@ -170,7 +170,7 @@ ConflictDescription::ConflictDescription(const svn_wc_conflict_description_t *co
     case svn_wc_conflict_reason_replaced:
         m_reason = ConflictReason::Replaced;
         break;
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
     case svn_wc_conflict_reason_moved_away:
         m_reason = ConflictReason::MovedAway;
         break;
@@ -193,7 +193,6 @@ const QString &svn::ConflictDescription::baseFile() const
     return m_baseFile;
 }
 
-
 /*!
     \fn svn::ConflictDescription::init()
  */
@@ -206,60 +205,50 @@ void svn::ConflictDescription::init()
     m_nodeKind = svn_node_unknown;
 }
 
-
 bool svn::ConflictDescription::binary() const
 {
     return m_binary;
 }
-
 
 const QString &svn::ConflictDescription::mergedFile() const
 {
     return m_mergedFile;
 }
 
-
 const QString &svn::ConflictDescription::mimeType() const
 {
     return m_mimeType;
 }
-
 
 const QString &svn::ConflictDescription::myFile() const
 {
     return m_myFile;
 }
 
-
 svn_node_kind_t svn::ConflictDescription::nodeKind() const
 {
     return m_nodeKind;
 }
-
 
 const QString &svn::ConflictDescription::Path() const
 {
     return m_Path;
 }
 
-
 const QString &svn::ConflictDescription::propertyName() const
 {
     return m_propertyName;
 }
-
 
 svn::ConflictDescription::ConflictReason svn::ConflictDescription::reason() const
 {
     return m_reason;
 }
 
-
 const QString &svn::ConflictDescription::theirFile() const
 {
     return m_theirFile;
 }
-
 
 svn::ConflictDescription::ConflictType svn::ConflictDescription::Type() const
 {

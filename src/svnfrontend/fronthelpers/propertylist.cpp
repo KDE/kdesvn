@@ -49,8 +49,7 @@ void Propertylist::init()
     setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
     setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
     setContextMenuPolicy(Qt::ActionsContextMenu);
-    connect(this, &QTreeWidget::itemChanged,
-            this, &Propertylist::slotItemChanged, Qt::UniqueConnection);
+    connect(this, &QTreeWidget::itemChanged, this, &Propertylist::slotItemChanged, Qt::UniqueConnection);
     resizeColumnToContents(0);
 }
 
@@ -66,9 +65,7 @@ void Propertylist::displayList(const svn::PathPropertiesMapListPtr &propList, bo
             /* just want the first one */
             const svn::PropertiesMap pmap = propList->at(0).second;
             for (auto pit = pmap.constBegin(); pit != pmap.constEnd(); ++pit) {
-                PropertyListViewItem *ki = new PropertyListViewItem(this,
-                                                                    pit.key(),
-                                                                    pit.value());
+                PropertyListViewItem *ki = new PropertyListViewItem(this, pit.key(), pit.value());
                 if (editable && !PropertyListViewItem::protected_Property(ki->currentName())) {
                     ki->setFlags(ki->flags() | Qt::ItemIsEditable);
                 }
@@ -77,8 +74,7 @@ void Propertylist::displayList(const svn::PathPropertiesMapListPtr &propList, bo
     }
     viewport()->setUpdatesEnabled(true);
     viewport()->repaint();
-    connect(this, &QTreeWidget::itemChanged,
-            this, &Propertylist::slotItemChanged, Qt::UniqueConnection);
+    connect(this, &QTreeWidget::itemChanged, this, &Propertylist::slotItemChanged, Qt::UniqueConnection);
     resizeColumnToContents(0);
 }
 
@@ -104,8 +100,7 @@ void Propertylist::slotItemChanged(QTreeWidgetItem *_item, int col)
     }
     bool fail = false;
     disconnect(this, &QTreeWidget::itemChanged, this, &Propertylist::slotItemChanged);
-    if (PropertyListViewItem::protected_Property(item->text(0)) ||
-            PropertyListViewItem::protected_Property(item->currentName())) {
+    if (PropertyListViewItem::protected_Property(item->text(0)) || PropertyListViewItem::protected_Property(item->currentName())) {
         KMessageBox::error(this, i18n("This property may not set by users.\nRejecting it."), i18n("Protected property"));
         item->setText(0, item->currentName());
         item->setText(1, item->currentValue());

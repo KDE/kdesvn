@@ -33,16 +33,18 @@ SslTrustPrompt::SslTrustPrompt(const QString &host, const QString &text, QWidget
     m_ui->buttonBox->button(QDialogButtonBox::Yes)->setText(i18n("Accept permanently"));
     m_ui->buttonBox->button(QDialogButtonBox::No)->setText(i18n("Accept temporarily"));
     m_ui->buttonBox->button(QDialogButtonBox::Cancel)->setText(i18n("Reject"));
-    connect(m_ui->buttonBox->button(QDialogButtonBox::Yes), &QPushButton::clicked,
-            this, [this]() {done(QDialogButtonBox::Yes);});
-    connect(m_ui->buttonBox->button(QDialogButtonBox::No), &QPushButton::clicked,
-            this, [this]() {done(QDialogButtonBox::No);});
-    connect(m_ui->buttonBox->button(QDialogButtonBox::Cancel), &QPushButton::clicked,
-            this, [this]() {done(QDialogButtonBox::Cancel);});
+    connect(m_ui->buttonBox->button(QDialogButtonBox::Yes), &QPushButton::clicked, this, [this]() {
+        done(QDialogButtonBox::Yes);
+    });
+    connect(m_ui->buttonBox->button(QDialogButtonBox::No), &QPushButton::clicked, this, [this]() {
+        done(QDialogButtonBox::No);
+    });
+    connect(m_ui->buttonBox->button(QDialogButtonBox::Cancel), &QPushButton::clicked, this, [this]() {
+        done(QDialogButtonBox::Cancel);
+    });
 
-    m_ui->m_MainLabel->setText(QLatin1String("<p align=\"center\"><b>") +
-                               i18n("Error validating server certificate for '%1'", host) +
-                               QLatin1String("</b></p>"));
+    m_ui->m_MainLabel->setText(QLatin1String("<p align=\"center\"><b>") + i18n("Error validating server certificate for '%1'", host)
+                               + QLatin1String("</b></p>"));
     m_ui->m_ContentText->setText(text);
 }
 

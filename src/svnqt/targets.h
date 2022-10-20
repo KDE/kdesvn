@@ -65,7 +65,7 @@ public:
      * Constructor
      * @param path a single paths
      */
-    Targets(const svn::Path &target);    //krazy:exclude=explicit
+    Targets(const svn::Path &target); // krazy:exclude=explicit
 
     /**
      * Constructor. Initializes list with just
@@ -73,7 +73,7 @@ public:
      *
      * @param target
      */
-    Targets(const QString &target = QString());    //krazy:exclude=explicit
+    Targets(const QString &target = QString()); // krazy:exclude=explicit
 
     /**
      * Returns an apr array containing
@@ -81,8 +81,7 @@ public:
      *
      * @param pool Pool used for conversion
      */
-    apr_array_header_t *
-    array(const Pool &pool) const;
+    apr_array_header_t *array(const Pool &pool) const;
 
     /**
      * Returns a vector of paths
@@ -91,7 +90,7 @@ public:
      */
     const Paths &targets() const
     {
-      return m_targets;
+        return m_targets;
     }
 
     /**
@@ -112,7 +111,7 @@ public:
         return m_targets;
     }
 
-    const Path &operator [](Paths::size_type which) const
+    const Path &operator[](Paths::size_type which) const
     {
         return m_targets.at(which);
     }
@@ -124,17 +123,12 @@ public:
      * \param which which item we want
      * @return single path
      */
-    const Path
-    target(Paths::size_type which) const;
+    const Path target(Paths::size_type which) const;
 
     /** convenience functions
      */
     static Targets fromStringList(const QStringList &paths);
-    enum class UrlConversion
-    {
-        KeepUrl,
-        PreferLocalPath
-    };
+    enum class UrlConversion { KeepUrl, PreferLocalPath };
 
     static Targets fromUrlList(const QList<QUrl> &urls, UrlConversion conversion);
 

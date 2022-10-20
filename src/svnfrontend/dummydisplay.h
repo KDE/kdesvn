@@ -31,11 +31,11 @@ public:
     DummyDisplay();
     virtual ~DummyDisplay();
     QWidget *realWidget() override;
-    SvnItem *Selected()const override;
-    SvnItemList SelectionList()const override;
-    svn::Revision baseRevision()const override;
+    SvnItem *Selected() const override;
+    SvnItemList SelectionList() const override;
+    svn::Revision baseRevision() const override;
     bool openUrl(const QUrl &url, bool noReinit = false) override;
-    SvnItem *SelectedOrMain()const override;
+    SvnItem *SelectedOrMain() const override;
 };
 
 #endif

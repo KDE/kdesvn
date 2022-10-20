@@ -22,9 +22,9 @@
 
 #include "svnqt/svnstream.h"
 
-#include <kio/global.h>
-#include <QMimeType>
 #include <QElapsedTimer>
+#include <QMimeType>
+#include <kio/global.h>
 
 class StreamWrittenCb
 {

@@ -25,12 +25,12 @@
 
 namespace Ui
 {
-    class EditPropsDlg;
+class EditPropsDlg;
 }
 class QStringList;
 class QString;
 
-class EditPropsDlg: public KSvnDialog
+class EditPropsDlg : public KSvnDialog
 {
     Q_OBJECT
 public:

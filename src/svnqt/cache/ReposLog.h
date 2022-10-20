@@ -24,10 +24,10 @@
 #ifndef REPOS_LOG_H
 #define REPOS_LOG_H
 
+#include "svnqt/client.h"
+#include "svnqt/revision.h"
 #include "svnqt/svnqt_defines.h"
 #include "svnqt/svnqttypes.h"
-#include "svnqt/revision.h"
-#include "svnqt/client.h"
 
 #include <QSqlDatabase>
 #include <QString>
@@ -77,19 +77,26 @@ public:
      * @return true if entries found and no error, if no entries found false
      * @exception svn::DatabaseException in case of errors
      */
-    bool simpleLog(LogEntriesMap &target, const svn::Revision &start, const svn::Revision &end, bool noNetwork = false, const StringArray &exclude = StringArray());
+    bool
+    simpleLog(LogEntriesMap &target, const svn::Revision &start, const svn::Revision &end, bool noNetwork = false, const StringArray &exclude = StringArray());
     svn::Revision date2numberRev(const svn::Revision &, bool noNetwork = false);
     bool fillCache(const svn::Revision &end);
     bool insertLogEntry(const svn::LogEntry &);
     void cleanLogEntries();
-    bool log(const svn::Path &, const svn::Revision &start, const svn::Revision &end, const svn::Revision &peg, svn::LogEntriesMap &target, bool strictNodeHistory, int limit);
+    bool log(const svn::Path &,
+             const svn::Revision &start,
+             const svn::Revision &end,
+             const svn::Revision &peg,
+             svn::LogEntriesMap &target,
+             bool strictNodeHistory,
+             int limit);
     bool itemExists(const svn::Revision &, const svn::Path &);
 
-    qlonglong count()const;
-    qlonglong itemCount()const;
-    qlonglong fileSize()const;
+    qlonglong count() const;
+    qlonglong itemCount() const;
+    qlonglong fileSize() const;
 
-    bool isValid()const;
+    bool isValid() const;
 };
 
 }

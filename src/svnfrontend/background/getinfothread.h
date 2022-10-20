@@ -23,15 +23,15 @@
 
 #include "svnthread.h"
 
-#include <QThread>
 #include <QEvent>
-#include <QQueue>
 #include <QMutex>
+#include <QQueue>
 #include <QReadWriteLock>
+#include <QThread>
 
 class SvnItemModelNode;
 
-class GetInfoThread: public SvnThread
+class GetInfoThread : public SvnThread
 {
     Q_OBJECT
 public:

@@ -24,7 +24,7 @@
 
 class QTextCodec;
 
-class EncodingSelector_impl: public QWidget, public Ui::EncodingSelector
+class EncodingSelector_impl : public QWidget, public Ui::EncodingSelector
 {
     Q_OBJECT
 public:

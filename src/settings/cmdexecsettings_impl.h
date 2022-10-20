@@ -36,11 +36,8 @@ public slots:
     /*$PUBLIC_SLOTS$*/
 
 protected:
-
 protected slots:
     /*$PROTECTED_SLOTS$*/
-
 };
 
 #endif
-

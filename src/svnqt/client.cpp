@@ -34,8 +34,8 @@
 #include "client_impl.h"
 #include "svnqt_defines.h"
 
-#include <svn_opt.h>
 #include <svn_cmdline.h>
+#include <svn_opt.h>
 
 #include <QDir>
 

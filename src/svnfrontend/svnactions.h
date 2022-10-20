@@ -24,8 +24,8 @@
 #include "svnqt/revision.h"
 #include "svnqt/svnqttypes.h"
 
-#include "simple_logcb.h"
 #include "frontendtypes.h"
+#include "simple_logcb.h"
 
 #include <QObject>
 #include <QScopedPointer>
@@ -59,11 +59,7 @@ class SvnActions : public QObject, public SimpleLogCb
 {
     Q_OBJECT
 public:
-    enum ThreadType {
-        checkupdatethread,
-        fillcachethread,
-        checkmodifiedthread
-    };
+    enum ThreadType { checkupdatethread, fillcachethread, checkmodifiedthread };
 
     explicit SvnActions(ItemDisplay *parent, bool processes_blocked = false);
     ~SvnActions();
@@ -71,8 +67,11 @@ public:
     svn::ClientP svnclient();
     void prepareUpdate(bool ask);
 
-    bool makeGet(const svn::Revision &start, const QString &what, const QString &target,
-                 const svn::Revision &peg = svn::Revision::UNDEFINED, QWidget *dlgparent = nullptr);
+    bool makeGet(const svn::Revision &start,
+                 const QString &what,
+                 const QString &target,
+                 const svn::Revision &peg = svn::Revision::UNDEFINED,
+                 QWidget *dlgparent = nullptr);
 
     bool addItems(const svn::Paths &items, svn::Depth depth = svn::DepthEmpty);
     void checkAddItems(const QString &path, bool print_error_box = true);
@@ -84,7 +83,13 @@ public:
 
     bool makeStatus(const QString &what, svn::StatusEntries &dlist, const svn::Revision &where, bool rec = false, bool all = true);
     bool makeStatus(const QString &what, svn::StatusEntries &dlist, const svn::Revision &where, bool rec, bool all, bool display_ignored, bool updates = false);
-    bool makeStatus(const QString &what, svn::StatusEntries &dlist, const svn::Revision &where, svn::Depth depth, bool all, bool display_ignored, bool updates = false);
+    bool makeStatus(const QString &what,
+                    svn::StatusEntries &dlist,
+                    const svn::Revision &where,
+                    svn::Depth depth,
+                    bool all,
+                    bool display_ignored,
+                    bool updates = false);
 
     bool makeList(const QString &url, svn::DirEntries &dlist, const svn::Revision &where, svn::Depth depth = svn::DepthInfinity);
 
@@ -114,21 +119,61 @@ public:
      * \param startr startrevision for log
      * \param endr endrevision for log
      */
-    void makeTree(const QString &what, const svn::Revision &rev,
-                  const svn::Revision &startr = svn::Revision(1),
-                  const svn::Revision &endr = svn::Revision::HEAD);
-    void makeLog(const svn::Revision &start, const svn::Revision &end, const svn::Revision &peg, const QString &, bool follow, bool list_files = false, int limit = 0);
-    svn::LogEntriesMapPtr getLog(const svn::Revision &start, const svn::Revision &end, const svn::Revision &peg, const QString &, bool list_files, int limit, QWidget *parent = nullptr);
-    svn::LogEntriesMapPtr getLog(const svn::Revision &start, const svn::Revision &end, const svn::Revision &peg, const QString &, bool list_files, int limit, bool follow_nodes, QWidget *parent = nullptr);
+    void
+    makeTree(const QString &what, const svn::Revision &rev, const svn::Revision &startr = svn::Revision(1), const svn::Revision &endr = svn::Revision::HEAD);
+    void makeLog(const svn::Revision &start,
+                 const svn::Revision &end,
+                 const svn::Revision &peg,
+                 const QString &,
+                 bool follow,
+                 bool list_files = false,
+                 int limit = 0);
+    svn::LogEntriesMapPtr getLog(const svn::Revision &start,
+                                 const svn::Revision &end,
+                                 const svn::Revision &peg,
+                                 const QString &,
+                                 bool list_files,
+                                 int limit,
+                                 QWidget *parent = nullptr);
+    svn::LogEntriesMapPtr getLog(const svn::Revision &start,
+                                 const svn::Revision &end,
+                                 const svn::Revision &peg,
+                                 const QString &,
+                                 bool list_files,
+                                 int limit,
+                                 bool follow_nodes,
+                                 QWidget *parent = nullptr);
     bool getSingleLog(svn::LogEntry &, const svn::Revision &, const QString &, const svn::Revision &, QString &root) override;
 
     void makeBlame(const svn::Revision &start, const svn::Revision &end, SvnItem *k);
-    void makeBlame(const svn::Revision &start, const svn::Revision &end, const QString &, QWidget *parent = nullptr, const svn::Revision &peg = svn::Revision::UNDEFINED, SimpleLogCb *_acb = nullptr);
+    void makeBlame(const svn::Revision &start,
+                   const svn::Revision &end,
+                   const QString &,
+                   QWidget *parent = nullptr,
+                   const svn::Revision &peg = svn::Revision::UNDEFINED,
+                   SimpleLogCb *_acb = nullptr);
     void makeUpdate(const svn::Targets &targets, const svn::Revision &rev, svn::Depth depth);
-    bool makeSwitch(const QUrl &rUrl, const QString &tPath, const svn::Revision &r, svn::Depth depth, const svn::Revision &peg, bool stickydepth, bool ignore_externals, bool allow_unversioned);
+    bool makeSwitch(const QUrl &rUrl,
+                    const QString &tPath,
+                    const svn::Revision &r,
+                    svn::Depth depth,
+                    const svn::Revision &peg,
+                    bool stickydepth,
+                    bool ignore_externals,
+                    bool allow_unversioned);
     bool makeSwitch(const QString &path, const QUrl &what);
     bool makeRelocate(const QUrl &fUrl, const QUrl &tUrl, const QString &path, bool recursive, bool ignore_externals);
-    bool makeCheckout(const QString &, const QString &, const svn::Revision &, const svn::Revision &, svn::Depth, bool isExport, bool openit, bool ignore_externals, bool overwrite, bool ignoreKeywords, QWidget *p);
+    bool makeCheckout(const QString &,
+                      const QString &,
+                      const svn::Revision &,
+                      const svn::Revision &,
+                      svn::Depth,
+                      bool isExport,
+                      bool openit,
+                      bool ignore_externals,
+                      bool overwrite,
+                      bool ignoreKeywords,
+                      QWidget *p);
     void makeInfo(const SvnItemList &lst, const svn::Revision &, const svn::Revision &, bool recursive = true);
     void makeInfo(const QStringList &lst, const svn::Revision &, const svn::Revision &, bool recursive = true);
     bool makeCommit(const svn::Targets &);
@@ -138,14 +183,13 @@ public:
     QString getInfo(const QString &_what, const svn::Revision &rev, const svn::Revision &peg, bool recursive, bool all = true);
     QString getInfo(const svn::InfoEntries &entries, const QString &what, bool all);
 
-
     QString makeMkdir(const QString &);
     bool makeMkdir(const svn::Targets &which, const QString &logMessage);
     bool isLocalWorkingCopy(const QString &path, QUrl &repoUrl);
     bool createUpdateCache(const QString &what);
-    bool checkUpdateCache(const QString &path)const;
-    bool isUpdated(const QString &path)const;
-    bool getUpdated(const QString &path, svn::StatusPtr &d)const;
+    bool checkUpdateCache(const QString &path) const;
+    bool isUpdated(const QString &path) const;
+    bool getUpdated(const QString &path, svn::StatusPtr &d) const;
     void clearUpdateCache();
     void removeFromUpdateCache(const QStringList &what, bool exact_only);
     void stopCheckModifiedThread();
@@ -171,7 +215,7 @@ public:
 
     void setContextData(const QString &, const QString &);
     void clearContextData();
-    QString getContextData(const QString &)const;
+    QString getContextData(const QString &) const;
 
     bool threadRunning(ThreadType which) const;
 
@@ -187,8 +231,20 @@ protected:
     void makeAdd(bool rec);
     CheckModifiedThread *m_CThread, *m_UThread;
     FillCacheThread *m_FCThread;
-    void makeDiffinternal(const QString &, const svn::Revision &, const QString &, const svn::Revision &, QWidget *, const svn::Revision &peg = svn::Revision::UNDEFINED);
-    void makeDiffExternal(const QString &p1, const svn::Revision &start, const QString &p2, const svn::Revision &end, const svn::Revision &_peg, bool isDir, QWidget *p, bool rec = true);
+    void makeDiffinternal(const QString &,
+                          const svn::Revision &,
+                          const QString &,
+                          const svn::Revision &,
+                          QWidget *,
+                          const svn::Revision &peg = svn::Revision::UNDEFINED);
+    void makeDiffExternal(const QString &p1,
+                          const svn::Revision &start,
+                          const QString &p2,
+                          const svn::Revision &end,
+                          const svn::Revision &_peg,
+                          bool isDir,
+                          QWidget *p,
+                          bool rec = true);
 
 public Q_SLOTS:
     virtual void dispDiff(const QByteArray &);
@@ -213,11 +269,26 @@ public Q_SLOTS:
     virtual void makeNorecDiff(const QString &, const svn::Revision &, const QString &, const svn::Revision &, QWidget *);
     virtual void slotImport(const QString &, const QUrl &, const QString &, svn::Depth, bool noIgnore, bool noUnknown);
     virtual void slotMergeWcRevisions(const QString &, const svn::Revision &, const svn::Revision &, bool, bool, bool, bool, bool);
-    virtual void slotMerge(const QString &, const QString &, const QString &,
-                           const svn::Revision &, const svn::Revision &, const svn::Revision &,
-                           bool, bool, bool, bool, bool, bool, bool);
-    virtual void slotMergeExternal(const QString &src1, const QString &src2, const QString &target,
-                                   const svn::Revision &rev1, const svn::Revision &rev2, const svn::Revision &_peg, bool);
+    virtual void slotMerge(const QString &,
+                           const QString &,
+                           const QString &,
+                           const svn::Revision &,
+                           const svn::Revision &,
+                           const svn::Revision &,
+                           bool,
+                           bool,
+                           bool,
+                           bool,
+                           bool,
+                           bool,
+                           bool);
+    virtual void slotMergeExternal(const QString &src1,
+                                   const QString &src2,
+                                   const QString &target,
+                                   const svn::Revision &rev1,
+                                   const svn::Revision &rev2,
+                                   const svn::Revision &_peg,
+                                   bool);
     virtual void slotExtraLogMsg(const QString &);
     virtual void slotMakeCat(const svn::Revision &start, const QString &what, const QString &disp, const svn::Revision &peg, QWidget *dlgparent);
 

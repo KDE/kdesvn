@@ -28,13 +28,11 @@ class CopyMoveView_impl : public QWidget, public Ui::CopyMoveView
     Q_OBJECT
 
 public:
-    CopyMoveView_impl(const QString &baseName, const QString &sourceName, bool move,
-                      QWidget *parent);
+    CopyMoveView_impl(const QString &baseName, const QString &sourceName, bool move, QWidget *parent);
     ~CopyMoveView_impl();
     QString newName() const;
     bool force() const;
-    static QString getMoveCopyTo(bool *ok, bool move, const QString &old,
-                                 const QString &base, QWidget *parent = nullptr);
+    static QString getMoveCopyTo(bool *ok, bool move, const QString &old, const QString &base, QWidget *parent = nullptr);
     /*$PUBLIC_FUNCTIONS$*/
 
 public slots:
@@ -52,4 +50,3 @@ protected:
 };
 
 #endif
-

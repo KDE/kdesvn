@@ -33,12 +33,12 @@
 #ifndef CLIENT_PARAMETER_H
 #define CLIENT_PARAMETER_H
 
+#include <QScopedPointer>
+#include <svnqt/path.h>
+#include <svnqt/revision.h>
 #include <svnqt/svnqt_defines.h>
 #include <svnqt/svnqttypes.h>
-#include <svnqt/revision.h>
 #include <svnqt/targets.h>
-#include <svnqt/path.h>
-#include <QScopedPointer>
 
 namespace svn
 {
@@ -54,23 +54,24 @@ class SVNQT_EXPORT CopyParameter
 {
 private:
     QScopedPointer<CopyParameterData> _data;
+
 public:
     CopyParameter(const Targets &_srcPath, const Path &_destPath);
     ~CopyParameter();
 
     //! Targets for copy operation
-    const Targets &srcPath()const;
+    const Targets &srcPath() const;
     //! Targets for copy operation
     CopyParameter &srcPath(const Targets &_srcPath);
     //! Destination path for copy operation
-    const Path &destination()const;
+    const Path &destination() const;
     //! Destination path for copy operation
     CopyParameter &destination(const Path &destination);
 
     //! set copy operation parameter asChild to true
     CopyParameter &asChild(bool);
     //! return value for asChild
-    bool asChild()const;
+    bool asChild() const;
 
     //! copy should ignore externals
     /*!
@@ -81,27 +82,26 @@ public:
     /*!
      * \since subversion 1.6
      */
-    bool ignoreExternal()const;
+    bool ignoreExternal() const;
 
     //! set copy/move operation parameter makeParent
     CopyParameter &makeParent(bool);
     //! return value for asChild
-    bool makeParent()const;
+    bool makeParent() const;
 
     //! set the source revision for the copy operation
     CopyParameter &srcRevision(const Revision &);
     //! get the source revision for the copy operation
-    const Revision &srcRevision()const;
+    const Revision &srcRevision() const;
     //! set the peg revision for the copy operation
     CopyParameter &pegRevision(const Revision &);
     //! get the peg revision for the copy operation
-    const Revision &pegRevision()const;
+    const Revision &pegRevision() const;
 
     //! set the properties map for the copy operation
     CopyParameter &properties(const PropertiesMap &);
     //! get the properties map for the copy operation
-    const PropertiesMap &properties()const;
-
+    const PropertiesMap &properties() const;
 };
 
 struct DiffParameterData;
@@ -115,6 +115,7 @@ class SVNQT_EXPORT DiffParameter
 {
 private:
     QScopedPointer<DiffParameterData> _data;
+
 public:
     DiffParameter();
     ~DiffParameter();
@@ -125,44 +126,44 @@ public:
      * \since subversion 1.5
      * \sa svn_client_diff4
      */
-    const svn::StringArray &changeList()const;
+    const svn::StringArray &changeList() const;
     //! type of recurse operation
     /*!
      * \sa svn::Depth
      */
-    Depth depth()const;
+    Depth depth() const;
     //! extra options for diff ("-b", "-w","--ignore-eol-style")
-    const svn::StringArray &extra()const;
+    const svn::StringArray &extra() const;
     //! whether the files will be checked for relatedness.
-    bool ignoreAncestry()const;
+    bool ignoreAncestry() const;
     //! if true generate diff even the items are marked as binaries
-    bool ignoreContentType()const;
+    bool ignoreContentType() const;
     //! if true, no diff output will be generated on deleted files.
-    bool noDiffDeleted()const;
+    bool noDiffDeleted() const;
     //! first file or folder to diff.
-    const Path &path1()const;
+    const Path &path1() const;
     //! second file or folder to diff.
     /*!
      * this is ignored for diff_peg calls
      */
-    const Path &path2()const;
+    const Path &path2() const;
     //! peg revision (only used for diff_peg)
-    const svn::Revision &peg()const;
+    const svn::Revision &peg() const;
     //! if set, all pathes are related to this folder
     /*!
      * Must not be an url! May be empty
      */
-    const Path &relativeTo()const;
+    const Path &relativeTo() const;
     //! one of the revisions to check (path1).
-    const svn::Revision &rev1()const;
+    const svn::Revision &rev1() const;
     //! the other revision (path2 for non peg diff).
-    const svn::Revision &rev2()const;
+    const svn::Revision &rev2() const;
     //! prefix for a temporary directory needed by diff.
     /*!
      * Filenames will have ".tmp" and similar added to this prefix in
      * order to ensure uniqueness.
      */
-    const Path &tmpPath()const;
+    const Path &tmpPath() const;
 
     DiffParameter &path1(const Path &path);
     DiffParameter &path2(const Path &path);
@@ -189,7 +190,7 @@ public:
      * \since subversion  1.7
      * \sa svn_client_diff_peg5,svn_client_diff5
      */
-    bool git_diff_format()const;
+    bool git_diff_format() const;
 
     //! show copies as new add
     /*!
@@ -202,9 +203,7 @@ public:
      * \since subversion  1.7
      * \sa svn_client_diff_peg5,svn_client_diff5
      */
-    bool copies_as_adds()const;
-
-
+    bool copies_as_adds() const;
 };
 
 struct StatusParameterData;
@@ -213,37 +212,38 @@ class SVNQT_EXPORT StatusParameter
 {
 private:
     QScopedPointer<StatusParameterData> _data;
+
 public:
     explicit StatusParameter(const Path &_path = Path());
     ~StatusParameter();
 
     //! path to explore
-    const Path &path()const;
+    const Path &path() const;
     StatusParameter &path(const Path &_path);
     //! list specific revision when browsing remote, on working copies parameter will ignored
-    const Revision &revision()const;
+    const Revision &revision() const;
     StatusParameter &revision(const Revision &rev);
     //! recursion level
-    Depth depth()const;
+    Depth depth() const;
     StatusParameter &depth(Depth d);
     //! Return all entries, not just the interesting ones.
-    bool all()const;
+    bool all() const;
     StatusParameter &all(bool getall);
     //! Query the repository for updates.
-    bool update()const;
+    bool update() const;
     StatusParameter &update(bool updates);
     //! Disregard default and svn:ignore property ignores.
-    bool noIgnore()const;
+    bool noIgnore() const;
     StatusParameter &noIgnore(bool noignore);
     //! don't recurse into external definitions
-    bool ignoreExternals()const;
+    bool ignoreExternals() const;
     StatusParameter &ignoreExternals(bool noexternals);
-    const StringArray &changeList()const;
+    const StringArray &changeList() const;
     StatusParameter &changeList(const StringArray &list);
-    //!if on remote listing detailed item info should get if possible
+    //! if on remote listing detailed item info should get if possible
     /*! that may slow so should configureable in frontends!
      */
-    bool detailedRemote()const;
+    bool detailedRemote() const;
     StatusParameter &detailedRemote(bool value);
 };
 
@@ -259,21 +259,21 @@ public:
     ~LogParameter();
 
     //! items to get the logs for
-    const Targets &targets()const;
+    const Targets &targets() const;
     //! set items to get the logs for
     LogParameter &targets(const Targets &targets);
     //! range of revisions getting logs for
     /*!
      * when build against subversion prior 1.6 only the first pair is used!
      */
-    const RevisionRanges &revisions()const;
+    const RevisionRanges &revisions() const;
     //! set range of revisions getting logs for
     LogParameter &revisions(const RevisionRanges &revisions);
     //! simple start-end range.
     /*!
      * in fact it is the first item in internal revision range. May used when only one pair is required.
      */
-    const RevisionRange &revisionRange()const;
+    const RevisionRange &revisionRange() const;
     //! set a simple start-end range
     /*!
      * this is useful if only one range is required. This will converted into internal ranges when set.
@@ -281,21 +281,21 @@ public:
     LogParameter &revisionRange(const Revision &start, const Revision &end);
 
     //! the peg revision to use
-    const Revision &peg()const;
+    const Revision &peg() const;
     //! set the peg revision to use
     LogParameter &peg(const Revision &peg);
     //! if not zero limit logs to this count
-    int limit()const;
+    int limit() const;
     LogParameter &limit(int limit);
-    bool discoverChangedPathes()const;
+    bool discoverChangedPathes() const;
     LogParameter &discoverChangedPathes(bool value);
-    bool strictNodeHistory()const;
+    bool strictNodeHistory() const;
     LogParameter &strictNodeHistory(bool value);
-    bool includeMergedRevisions()const;
+    bool includeMergedRevisions() const;
     LogParameter &includeMergedRevisions(bool value);
-    const StringArray &revisionProperties()const;
+    const StringArray &revisionProperties() const;
     LogParameter &revisionProperties(const StringArray &props);
-    const StringArray &excludeList()const;
+    const StringArray &excludeList() const;
     LogParameter &excludeList(const StringArray &props);
 };
 
@@ -305,26 +305,27 @@ class SVNQT_EXPORT PropertiesParameter
 {
 private:
     QScopedPointer<PropertiesParameterData> _data;
+
 public:
     PropertiesParameter();
     ~PropertiesParameter();
 
     PropertiesParameter &propertyName(const QString &);
-    const QString &propertyName()const;
+    const QString &propertyName() const;
 
     PropertiesParameter &propertyValue(const QString &);
-    const QString &propertyValue()const;
+    const QString &propertyValue() const;
 
     //! Old value to check against
     /*!
      * used for revpropset only
      */
     PropertiesParameter &propertyOriginalValue(const QString &);
-    const QString &propertyOriginalValue()const;
+    const QString &propertyOriginalValue() const;
 
     //! path or url
     PropertiesParameter &path(const Path &);
-    const Path &path()const;
+    const Path &path() const;
 
     //! set on revision
     /*! for revpropset it should be a valid Revision, for propset it should be INVALID
@@ -335,7 +336,7 @@ public:
     /*! for revpropset it should be a valid Revision, for propset it should be INVALID
      * if url is a local path otherwise it must be a valid revision.
      */
-    const Revision &revision()const;
+    const Revision &revision() const;
 
     //! allow newlines in author property
     /*!
@@ -346,7 +347,7 @@ public:
     /*!
      * used for revprop_set only
      */
-    bool force()const;
+    bool force() const;
 
     //! set depth of operation
     /*!
@@ -357,7 +358,7 @@ public:
     /*!
      * used for local propset only
      */
-    Depth depth()const;
+    Depth depth() const;
 
     //! set skip check
     /*!
@@ -368,7 +369,7 @@ public:
     /*!
      * used for local propset only
      */
-    bool skipCheck()const;
+    bool skipCheck() const;
 
     //! set filter list. if empty no filtering is done
     /*!
@@ -379,10 +380,10 @@ public:
     /*!
      * used for local propset only
      */
-    const StringArray &changeList()const;
+    const StringArray &changeList() const;
 
     PropertiesParameter &revisionProperties(const PropertiesMap &props);
-    const PropertiesMap &revisionProperties()const;
+    const PropertiesMap &revisionProperties() const;
 };
 
 struct MergeParameterData;
@@ -394,16 +395,17 @@ class SVNQT_EXPORT MergeParameter
 {
 private:
     QScopedPointer<MergeParameterData> _data;
+
 public:
     MergeParameter();
     ~MergeParameter();
 
     MergeParameter &path1(const Path &path);
-    const Path &path1()const;
+    const Path &path1() const;
     MergeParameter &path2(const Path &path);
-    const Path &path2()const;
+    const Path &path2() const;
     MergeParameter &localPath(const Path &path);
-    const Path &localPath()const;
+    const Path &localPath() const;
 
     /*!
      * used for Client::merge_peg only, when build against subversion prior 1.6 only the first pair is used!
@@ -412,7 +414,7 @@ public:
     /*!
      * used for Client::merge_peg only or reintegrate merge
      */
-    const Revision &peg()const;
+    const Revision &peg() const;
     /*!
      * used for Client::merge_peg only, when build against subversion prior 1.6 only the first pair is used!
      */
@@ -420,13 +422,13 @@ public:
     /*!
      * used for Client::merge_peg only, when build against subversion prior 1.6 only the first pair is used!
      */
-    const RevisionRanges &revisions()const;
+    const RevisionRanges &revisions() const;
     //! simple start-end range.
     /*!
      * in fact it is the first item in internal revision range. May used when only one pair is required.
      * used for Client::merge, pair is [start,end], with subversion prior 1.6 for Client::merge_peg, too.
      */
-    const RevisionRange &revisionRange()const;
+    const RevisionRange &revisionRange() const;
     //! set a simple start-end range
     /*!
      * this is useful if only one range is required. This will converted into internal ranges when set.
@@ -438,27 +440,27 @@ public:
     /*!
      * used for Client::merge. Revision1 is the first item in first pair of Revision ranges
      */
-    const Revision &revision1()const;
+    const Revision &revision1() const;
     //! get end revision
     /*!
      * used for Client::merge. Revision2 is the second item in first pair of Revision ranges
      */
-    const Revision &revision2()const;
+    const Revision &revision2() const;
 
     MergeParameter &force(bool how);
-    bool force()const;
+    bool force() const;
     MergeParameter &notice_ancestry(bool how);
-    bool notice_ancestry()const;
+    bool notice_ancestry() const;
     MergeParameter &dry_run(bool how);
-    bool dry_run()const;
+    bool dry_run() const;
     MergeParameter &record_only(bool how);
-    bool record_only()const;
+    bool record_only() const;
 
     MergeParameter &depth(Depth depth);
-    Depth depth()const;
+    Depth depth() const;
 
     MergeParameter &merge_options(const StringArray &options);
-    const StringArray &merge_options()const;
+    const StringArray &merge_options() const;
 
     /**
      * @param reintegrate must be true if this parameter are for a reintegrate merge.
@@ -474,14 +476,14 @@ public:
      *
      * All other parameters are ignored in that case.
      */
-    bool reintegrate()const;
+    bool reintegrate() const;
 
     /**
      * @param allow_mixed_rev true if merging into mixed rev working copy is allowed. If false, merge fails if mixed rev WC
      * @since subversion 1.7
      */
     MergeParameter &allow_mixed_rev(bool allow_mixed_rev);
-    bool allow_mixed_rev()const;
+    bool allow_mixed_rev() const;
 };
 
 struct CheckoutParameterData;
@@ -495,28 +497,28 @@ public:
     CheckoutParameter();
     ~CheckoutParameter();
 
-    //!name of the module to checkout.
+    //! name of the module to checkout.
     CheckoutParameter &moduleName(const Path &path);
-    //!name of the module to checkout.
-    const Path &moduleName()const;
-    //!destination directory for checkout.
+    //! name of the module to checkout.
+    const Path &moduleName() const;
+    //! destination directory for checkout.
     CheckoutParameter &destination(const Path &path);
-    //!destination directory for checkout.
-    const Path &destination()const;
-    //!the revision number to checkout.
+    //! destination directory for checkout.
+    const Path &destination() const;
+    //! the revision number to checkout.
     /*! If the number is -1
      *  then it will checkout the latest revision.
      */
     CheckoutParameter &revision(const Revision &rev);
-    //!the revision number to checkout.
+    //! the revision number to checkout.
     /*! If the number is -1
      *  then it will checkout the latest revision.
      */
-    const Revision &revision()const;
+    const Revision &revision() const;
     //! Revision to look up
     CheckoutParameter &peg(const Revision &rev);
     //! Revision to look up
-    const Revision &peg()const;
+    const Revision &peg() const;
     //! depth of operation
     /*!
      * \sa svn::Depth
@@ -526,31 +528,30 @@ public:
     /*!
      * \sa svn::Depth
      */
-    Depth depth()const;
-    //!if true don't process externals definitions.
+    Depth depth() const;
+    //! if true don't process externals definitions.
     CheckoutParameter &ignoreExternals(bool ignore);
-    //!if true don't process externals definitions.
-    bool ignoreExternals()const;
-    //!if true overwrite existing not versioned items.
+    //! if true don't process externals definitions.
+    bool ignoreExternals() const;
+    //! if true overwrite existing not versioned items.
     CheckoutParameter &overWrite(bool overwrite);
-    //!if true overwrite existing not versioned items.
-    bool overWrite()const;
+    //! if true overwrite existing not versioned items.
+    bool overWrite() const;
     //! do not replace svn:keywords on export
-    bool ignoreKeywords()const;
+    bool ignoreKeywords() const;
     CheckoutParameter &ignoreKeywords(bool ignorekeywords);
 
-    //!Either "LF", "CR" or "CRLF" or QString().
+    //! Either "LF", "CR" or "CRLF" or QString().
     /*!
      * Used only from Client::doExport, QString() is default (will used as NULL for subversion)
      */
     CheckoutParameter &nativeEol(const QString &native);
-    //!Either "LF", "CR" or "CRLF" or QString().
+    //! Either "LF", "CR" or "CRLF" or QString().
     /*!
      * Used only from Client::doExport, QString() is default (will used as NULL for subversion)
      */
-    const QString &nativeEol()const;
+    const QString &nativeEol() const;
 };
 }
-
 
 #endif

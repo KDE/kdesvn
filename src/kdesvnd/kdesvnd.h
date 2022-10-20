@@ -55,17 +55,17 @@ protected:
 public:
     //! get a subversion login
     /*!
-    * \param realm the realm
-    * \param user default username
-    * \return a stringlist containing username-password-saveit as "true" or "false" or empty list if cancel hit.
-    */
+     * \param realm the realm
+     * \param user default username
+     * \return a stringlist containing username-password-saveit as "true" or "false" or empty list if cancel hit.
+     */
     QStringList get_login(const QString &realm, const QString &user) const;
     //! get a saved subversion login
     /*!
-    * \param realm the realm
-    * \param user default username
-    * \return a stringlist containing username-password
-    */
+     * \param realm the realm
+     * \param user default username
+     * \return a stringlist containing username-password
+     */
     QStringList get_saved_login(const QString &realm, const QString &user) const;
 
     // return: -1 don't accept 0 accept temporary 1 accept always

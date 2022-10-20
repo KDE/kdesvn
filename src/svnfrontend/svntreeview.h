@@ -26,7 +26,7 @@ class SvnTreeView final : public QTreeView
 {
     Q_OBJECT
 public:
-  using QTreeView::QTreeView;
+    using QTreeView::QTreeView;
 
 protected:
     void startDrag(Qt::DropActions supportedActions) override;

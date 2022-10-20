@@ -48,44 +48,44 @@ public:
     apr_status_t apr_err;
 
     Data(const char *msg)
-        : message(QString::fromUtf8(msg)), apr_err(0)
+        : message(QString::fromUtf8(msg))
+        , apr_err(0)
     {
     }
 
     Data(const QString &msg)
-        : message(msg), apr_err(0)
+        : message(msg)
+        , apr_err(0)
     {
     }
 };
 
-Exception::Exception(const char *message) throw ()
+Exception::Exception(const char *message) throw()
 {
     m = new Data(message);
 }
 
-Exception::Exception(const QString &message) throw ()
+Exception::Exception(const QString &message) throw()
 {
     m = new Data(message);
 }
 
-Exception::Exception(const Exception &other) throw ()
+Exception::Exception(const Exception &other) throw()
 {
     m = new Data(*other.m);
 }
 
-Exception::~Exception() throw ()
+Exception::~Exception() throw()
 {
     delete m;
 }
 
-apr_status_t
-Exception::apr_err() const
+apr_status_t Exception::apr_err() const
 {
     return m->apr_err;
 }
 
-const QString &
-Exception::msg() const
+const QString &Exception::msg() const
 {
     return m->message;
 }
@@ -119,20 +119,19 @@ QString Exception::error2msg(svn_error_t *error)
     }
 
     return message;
-
 }
 
-ClientException::ClientException(const char *msg) throw ()
+ClientException::ClientException(const char *msg) throw()
     : Exception(msg)
 {
 }
 
-ClientException::ClientException(const QString &msg) throw ()
+ClientException::ClientException(const QString &msg) throw()
     : Exception(msg)
 {
 }
 
-ClientException::ClientException(svn_error_t *error) throw ()
+ClientException::ClientException(svn_error_t *error) throw()
     : Exception(QString())
 {
     init();
@@ -145,18 +144,18 @@ ClientException::ClientException(svn_error_t *error) throw ()
     svn_error_clear(error);
 }
 
-ClientException::ClientException(apr_status_t status) throw ()
+ClientException::ClientException(apr_status_t status) throw()
     : Exception(QString())
 {
     init();
     m->apr_err = status;
 }
 
-ClientException::~ClientException() throw ()
+ClientException::~ClientException() throw()
 {
 }
 
-ClientException::ClientException(const ClientException &src) throw ()
+ClientException::ClientException(const ClientException &src) throw()
     : Exception(src.msg())
 {
     m->apr_err = src.apr_err();
@@ -191,13 +190,9 @@ QString ClientException::getBackTrace()
     QStringList r;
     r.reserve(size);
     for (int i = 0; i < size; ++i) {
-        r.push_back(QString::number(i) +
-                    QLatin1String(": ") +
-                    QString::fromUtf8(strings[i]));
+        r.push_back(QString::number(i) + QLatin1String(": ") + QString::fromUtf8(strings[i]));
     }
-    Result = QLatin1String("[\n") +
-             r.join(QLatin1String("\n")) +
-             QLatin1String("]\n");
+    Result = QLatin1String("[\n") + r.join(QLatin1String("\n")) + QLatin1String("]\n");
     free(strings);
 #endif
     return Result;

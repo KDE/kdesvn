@@ -57,16 +57,14 @@ DateTime::DateTime(const QString &dt)
     SetRFC822Date(dt.toUtf8().constData());
 }
 
-apr_time_t
-DateTime::GetAPRTimeT() const
+apr_time_t DateTime::GetAPRTimeT() const
 {
     apr_time_t aTime;
     apr_time_ansi_put(&aTime, m_time.toSecsSinceEpoch());
     return aTime;
 }
 
-bool
-DateTime::SetRFC822Date(const char *date)
+bool DateTime::SetRFC822Date(const char *date)
 {
     apr_time_t aTime = apr_date_parse_rfc(date);
     setAprTime(aTime);
@@ -78,12 +76,12 @@ void DateTime::setAprTime(apr_time_t aTime)
     if (aTime < 0) {
         m_time = QDateTime();
     } else {
-        m_time = QDateTime::fromMSecsSinceEpoch(aTime / 1000);  // microsec -> millisec
+        m_time = QDateTime::fromMSecsSinceEpoch(aTime / 1000); // microsec -> millisec
     }
     m_time.setTimeSpec(Qt::LocalTime);
 }
 
-QString DateTime::toString(const QString &format)const
+QString DateTime::toString(const QString &format) const
 {
     return m_time.toString(format);
 }

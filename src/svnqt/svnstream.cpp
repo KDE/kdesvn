@@ -23,8 +23,8 @@
  ***************************************************************************/
 #include "svnstream.h"
 
-#include "pool.h"
 #include "apr.h"
+#include "pool.h"
 
 // Subversion api
 #include <svn_client.h>
@@ -43,7 +43,7 @@ public:
     SvnStream_private()
     {
         m_Stream = nullptr;
-        _context = nullptr;/*cancel_timeout.start();*/
+        _context = nullptr; /*cancel_timeout.start();*/
     }
     ~SvnStream_private()
     {
@@ -86,7 +86,7 @@ svn_error_t *SvnStream_private::stream_write(void *baton, const char *data, apr_
     svn_client_ctx_t *ctx = b->context();
 
     if (ctx && ctx->cancel_func && b->cancelElapsed() > 50) {
-        //qDebug("Check cancel");
+        // qDebug("Check cancel");
         SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
         b->cancelTimeReset();
     }
@@ -118,7 +118,7 @@ SvnStream::~SvnStream()
     delete m_Data;
 }
 
-int SvnStream::cancelElapsed()const
+int SvnStream::cancelElapsed() const
 {
     return m_Data->cancel_timeout.elapsed();
 }
@@ -128,7 +128,7 @@ void SvnStream::cancelTimeReset()
     m_Data->cancel_timeout.restart();
 }
 
-SvnStream::operator svn_stream_t *()const
+SvnStream::operator svn_stream_t *() const
 {
     return m_Data->m_Stream;
 }
@@ -150,12 +150,12 @@ long SvnStream::read(char *, const unsigned long)
     return -1;
 }
 
-const QString &SvnStream::lastError()const
+const QString &SvnStream::lastError() const
 {
     return m_Data->m_LastError;
 }
 
-void SvnStream::setError(const QString &aError)const
+void SvnStream::setError(const QString &aError) const
 {
     m_Data->m_LastError = aError;
 }
@@ -185,12 +185,12 @@ long SvnByteStream::write(const char *aData, const unsigned long max)
     return i;
 }
 
-QByteArray SvnByteStream::content()const
+QByteArray SvnByteStream::content() const
 {
     return m_ByteData->buffer();
 }
 
-bool SvnByteStream::isOk()const
+bool SvnByteStream::isOk() const
 {
     return m_ByteData->isOpen();
 }

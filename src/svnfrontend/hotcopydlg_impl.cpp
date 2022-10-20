@@ -20,7 +20,8 @@
 #include "hotcopydlg_impl.h"
 
 HotcopyDlg_impl::HotcopyDlg_impl(QWidget *parent)
-    : QWidget(parent), Ui::HotcopyDlg()
+    : QWidget(parent)
+    , Ui::HotcopyDlg()
 {
     setupUi(this);
     m_SrcpathEditor->setMode(KFile::Directory | KFile::LocalOnly);
@@ -31,17 +32,17 @@ HotcopyDlg_impl::~HotcopyDlg_impl()
 {
 }
 
-QString HotcopyDlg_impl::srcPath()const
+QString HotcopyDlg_impl::srcPath() const
 {
     return m_SrcpathEditor->url().toLocalFile();
 }
 
-QString HotcopyDlg_impl::destPath()const
+QString HotcopyDlg_impl::destPath() const
 {
     return m_DestpathEditor->url().toLocalFile();
 }
 
-bool HotcopyDlg_impl::cleanLogs()const
+bool HotcopyDlg_impl::cleanLogs() const
 {
     return m_Cleanlogs->isChecked();
 }

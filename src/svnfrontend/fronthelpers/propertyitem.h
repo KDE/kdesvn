@@ -28,20 +28,41 @@ public:
     static const int _RTTI_ = QTreeWidgetItem::UserType + 2;
     explicit PropertyListViewItem(QTreeWidget *parent, const QString &aStartName = QString(), const QString &aStartValue = QString());
 
-    const QString &startName() const { return m_startName; }
-    const QString &startValue() const { return m_startValue; }
-    const QString &currentName() const { return m_currentName; }
-    const QString &currentValue() const { return m_currentValue; }
+    const QString &startName() const
+    {
+        return m_startName;
+    }
+    const QString &startValue() const
+    {
+        return m_startValue;
+    }
+    const QString &currentName() const
+    {
+        return m_currentName;
+    }
+    const QString &currentValue() const
+    {
+        return m_currentValue;
+    }
 
     void setName(const QString &name);
     void setValue(const QString &value);
 
-    void checkName() { setName(text(0)); }
-    void checkValue() { setValue(text(1)); }
+    void checkName()
+    {
+        setName(text(0));
+    }
+    void checkValue()
+    {
+        setValue(text(1));
+    }
 
     void deleteIt();
     void unDeleteIt();
-    bool deleted() const { return m_deleted; }
+    bool deleted() const
+    {
+        return m_deleted;
+    }
 
     bool different() const;
 

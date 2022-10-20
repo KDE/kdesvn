@@ -20,8 +20,8 @@
 #ifndef RANGEINPUT_IMPL_H
 #define RANGEINPUT_IMPL_H
 
-#include "ui_rangeinput.h"
 #include "svnqt/revision.h"
+#include "ui_rangeinput.h"
 #include <QPair>
 
 class Rangeinput_impl final : public QWidget, public Ui::RangeInput
@@ -56,6 +56,7 @@ protected slots:
     void startNumberToggled(bool);
     void stopDateToggled(bool);
     void startDateToggled(bool);
+
 protected:
     bool m_StartOnly;
 };

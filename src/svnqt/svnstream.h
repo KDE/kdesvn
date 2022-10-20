@@ -46,6 +46,7 @@ class SvnStream_private;
 class SVNQT_EXPORT SvnStream
 {
     friend class SvnStream_private;
+
 public:
     /* disable default contructor */
     SvnStream() = delete;
@@ -68,7 +69,7 @@ public:
     /*!
         \return a svn_stream_t structure for use with subversion api.
      */
-    operator svn_stream_t *()const;
+    operator svn_stream_t *() const;
 
     //! write operation
     /*!
@@ -95,13 +96,13 @@ public:
     /*!
         \return a human readable message about the reason the last operation failed.
      */
-    virtual const QString &lastError()const;
+    virtual const QString &lastError() const;
     //! is that stream usable
     /*!
         Gives information about if the stream object is usable. May if the file is real open or such.
         \return true if stream is usable, false if not.
      */
-    virtual bool isOk()const = 0;
+    virtual bool isOk() const = 0;
 
     svn_client_ctx_t *context();
 
@@ -112,10 +113,10 @@ protected:
         write and/or read if them will return -1 (for error)
         \param error the errormessage assigned.
      */
-    virtual void setError(const QString &error)const;
+    virtual void setError(const QString &error) const;
 
 protected:
-    int cancelElapsed()const;
+    int cancelElapsed() const;
     void cancelTimeReset();
 
 private:
@@ -123,7 +124,7 @@ private:
 };
 
 //! a class let subversion print into a QByteArray
-class SVNQT_EXPORT SvnByteStream: public SvnStream
+class SVNQT_EXPORT SvnByteStream : public SvnStream
 {
 public:
     //! constructor

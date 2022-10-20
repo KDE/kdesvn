@@ -18,11 +18,11 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "commitmsg_impl.h"
-#include "models/commitmodelhelper.h"
-#include "models/commitmodel.h"
-#include "settings/kdesvnsettings.h"
 #include "depthselector.h"
 #include "ksvnwidgets/ksvndialog.h"
+#include "models/commitmodel.h"
+#include "models/commitmodelhelper.h"
+#include "settings/kdesvnsettings.h"
 
 #include <KConfig>
 #include <KFile>
@@ -33,9 +33,9 @@
 #include <KUrlRequester>
 #include <KUrlRequesterDialog>
 
+#include <QFile>
 #include <QStringList>
 #include <QTemporaryFile>
-#include <QFile>
 
 #define MAX_MESSAGE_HISTORY 10
 
@@ -45,7 +45,8 @@ QString Commitmsg_impl::sLastMessage;
 int Commitmsg_impl::smax_message_history = 0xFFFF;
 
 Commitmsg_impl::Commitmsg_impl(QWidget *parent)
-    : QWidget(parent), CommitMessage()
+    : QWidget(parent)
+    , CommitMessage()
 {
     setupUi(this);
     m_CurrentModel = nullptr;
@@ -63,7 +64,8 @@ Commitmsg_impl::Commitmsg_impl(QWidget *parent)
 }
 
 Commitmsg_impl::Commitmsg_impl(const svn::CommitItemList &_items, QWidget *parent)
-    : QWidget(parent), CommitMessage()
+    : QWidget(parent)
+    , CommitMessage()
 {
     setupUi(this);
     m_CurrentModel = nullptr;
@@ -82,10 +84,9 @@ Commitmsg_impl::Commitmsg_impl(const svn::CommitItemList &_items, QWidget *paren
     checkSplitterSize();
 }
 
-Commitmsg_impl::Commitmsg_impl(const CommitActionEntries &_activatedList,
-                               const CommitActionEntries &_notActivatedList,
-                               QWidget *parent)
-    : QWidget(parent), CommitMessage()
+Commitmsg_impl::Commitmsg_impl(const CommitActionEntries &_activatedList, const CommitActionEntries &_notActivatedList, QWidget *parent)
+    : QWidget(parent)
+    , CommitMessage()
 {
     setupUi(this);
     m_CurrentModel = nullptr;
@@ -121,8 +122,7 @@ void Commitmsg_impl::setupModel()
     m_CommitItemTree->resizeColumnToContents(m_CurrentModel->ActionColumn());
 
     m_SortModel->setSortCaseSensitivity(Kdesvnsettings::case_sensitive_sort() ? Qt::CaseSensitive : Qt::CaseInsensitive);
-    connect(m_CommitItemTree->selectionModel(), &QItemSelectionModel::currentChanged,
-            this, &Commitmsg_impl::slotCurrentItemChanged);
+    connect(m_CommitItemTree->selectionModel(), &QItemSelectionModel::currentChanged, this, &Commitmsg_impl::slotCurrentItemChanged);
     slotCurrentItemChanged(QModelIndex()); // update pushbuttons
 }
 
@@ -153,7 +153,7 @@ void Commitmsg_impl::slotHistoryActivated(int number)
 /*!
     \fn Commitmsg_impl::getMessage()const
  */
-QString Commitmsg_impl::getMessage()const
+QString Commitmsg_impl::getMessage() const
 {
     return m_LogEdit->toPlainText();
 }
@@ -161,7 +161,7 @@ QString Commitmsg_impl::getMessage()const
 /*!
     \fn Commitmsg_impl::isRecursive()const
  */
-svn::Depth Commitmsg_impl::getDepth()const
+svn::Depth Commitmsg_impl::getDepth() const
 {
     return m_DepthSelector->getDepth();
 }
@@ -178,7 +178,7 @@ void Commitmsg_impl::keepsLocks(bool keeps_lock)
 /*!
     \fn Commitmsg_impl::isRecursive()const
  */
-bool Commitmsg_impl::isKeeplocks()const
+bool Commitmsg_impl::isKeeplocks() const
 {
     return m_keepLocksButton->isChecked();
 }
@@ -263,16 +263,18 @@ QString Commitmsg_impl::getLogmessage(const CommitActionEntries &_on,
                                       const CommitActionEntries &_off,
                                       QObject *callback,
                                       CommitActionEntries &_result,
-                                      bool *ok, bool *keep_locks, QWidget *parent)
+                                      bool *ok,
+                                      bool *keep_locks,
+                                      QWidget *parent)
 {
     Commitmsg_impl *ptr = new Commitmsg_impl(_on, _off);
     if (callback) {
-        connect(ptr, SIGNAL(makeDiff(QString,svn::Revision,QString,svn::Revision,QWidget*)),
-                callback, SLOT(makeDiff(QString,svn::Revision,QString,svn::Revision,QWidget*)));
-        connect(ptr, SIGNAL(sigRevertItem(QStringList)),
-                callback, SLOT(slotRevertItems(QStringList)));
-        connect(callback, SIGNAL(sigItemsReverted(QStringList)),
-                ptr, SLOT(slotItemReverted(QStringList)));
+        connect(ptr,
+                SIGNAL(makeDiff(QString, svn::Revision, QString, svn::Revision, QWidget *)),
+                callback,
+                SLOT(makeDiff(QString, svn::Revision, QString, svn::Revision, QWidget *)));
+        connect(ptr, SIGNAL(sigRevertItem(QStringList)), callback, SLOT(slotRevertItems(QStringList)));
+        connect(callback, SIGNAL(sigItemsReverted(QStringList)), ptr, SLOT(slotItemReverted(QStringList)));
     }
     return getLogmessageInternal(ptr, ok, nullptr, keep_locks, &_result, parent);
 }

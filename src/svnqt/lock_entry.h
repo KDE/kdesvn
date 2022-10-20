@@ -32,8 +32,8 @@
 #ifndef SVNQT_LOCK_ENTRY_H
 #define SVNQT_LOCK_ENTRY_H
 
-#include <svnqt/svnqt_defines.h>
 #include <svnqt/datetime.h>
+#include <svnqt/svnqt_defines.h>
 
 #include <QString>
 
@@ -51,26 +51,18 @@ class SVNQT_EXPORT LockEntry
 public:
     LockEntry();
 
-    LockEntry(const apr_time_t lock_time,
-              const apr_time_t expiration_time,
-              const char *lock_owner,
-              const char *lock_comment,
-              const char *lock_token);
+    LockEntry(const apr_time_t lock_time, const apr_time_t expiration_time, const char *lock_owner, const char *lock_comment, const char *lock_token);
 
     void init(const svn_wc_entry_t *src);
 
-    void init(const apr_time_t lock_time,
-              const apr_time_t expiration_time,
-              const char *lock_owner,
-              const char *lock_comment,
-              const char *lock_token);
+    void init(const apr_time_t lock_time, const apr_time_t expiration_time, const char *lock_owner, const char *lock_comment, const char *lock_token);
     void init(const svn_lock_t *);
-    const QString &Comment()const;
-    const QString &Owner()const;
-    const QString &Token()const;
-    const DateTime &Date()const;
-    const DateTime &Expiration()const;
-    bool Locked()const;
+    const QString &Comment() const;
+    const QString &Owner() const;
+    const QString &Token() const;
+    const DateTime &Date() const;
+    const DateTime &Expiration() const;
+    bool Locked() const;
 
 protected:
     DateTime date;
@@ -88,4 +80,3 @@ protected:
  * eval: (load-file "../../rapidsvn-dev.el")
  * end:
  */
-

@@ -21,9 +21,9 @@
 #include "propertiesdlg.h"
 #include "ui_propertiesdlg.h"
 
+#include "editpropsdlg.h"
 #include "svnfrontend/fronthelpers/propertyitem.h"
 #include "svnfrontend/fronthelpers/propertylist.h"
-#include "editpropsdlg.h"
 #include "svnitem.h"
 #include "svnqt/client.h"
 
@@ -50,10 +50,7 @@ PropertiesDlg::PropertiesDlg(SvnItem *which, const svn::ClientP &aClient, const 
     connect(m_ui->pbModify, &QAbstractButton::clicked, this, &PropertiesDlg::slotModify);
     connect(m_ui->pbDelete, &QAbstractButton::clicked, this, &PropertiesDlg::slotDelete);
 
-    connect(m_ui->tvPropertyList,
-            &QTreeWidget::currentItemChanged,
-            this,
-            &PropertiesDlg::slotCurrentItemChanged);
+    connect(m_ui->tvPropertyList, &QTreeWidget::currentItemChanged, this, &PropertiesDlg::slotCurrentItemChanged);
     if (!m_Client) {
         m_ui->tvPropertyList->setEnabled(false);
     }
@@ -183,8 +180,7 @@ void PropertiesDlg::changedItems(svn::PropertiesMap &toSet, QStringList &toDelet
     while (*iter) {
         PropertyListViewItem *ki = static_cast<PropertyListViewItem *>((*iter));
         ++iter;
-        if (PropertyListViewItem::protected_Property(ki->currentName()) ||
-                PropertyListViewItem::protected_Property(ki->startName())) {
+        if (PropertyListViewItem::protected_Property(ki->currentName()) || PropertyListViewItem::protected_Property(ki->startName())) {
             continue;
         }
         if (ki->deleted()) {

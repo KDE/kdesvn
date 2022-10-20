@@ -52,7 +52,6 @@ private:
     QDateTime m_time;
 
 public:
-
     /**
      * Default Constructor
      */
@@ -81,7 +80,10 @@ public:
     /**
      * @return Is a valid (non-zero) date
      */
-    bool IsValid() const { return m_time.isValid(); }
+    bool IsValid() const
+    {
+        return m_time.isValid();
+    }
 
     /**
      * @return APR apr_time_t
@@ -91,14 +93,17 @@ public:
     /**
      * @return QDateTime object
      */
-    const QDateTime &toQDateTime()const { return m_time; }
+    const QDateTime &toQDateTime() const
+    {
+        return m_time;
+    }
 
     /**
      * @param format format string
      * @return formatted string
      * @see QDateTime::toString
      */
-    QString toString(const QString &format)const;
+    QString toString(const QString &format) const;
     QString toString(Qt::DateFormat f = Qt::DefaultLocaleShortDate) const;
 
     /**
@@ -114,8 +119,8 @@ public:
     bool SetRFC822Date(const char *date);
 
     void setAprTime(apr_time_t aTime);
-    //unsigned int toTime_t()const;
-    //void setTime_t(unsigned int sec);
+    // unsigned int toTime_t()const;
+    // void setTime_t(unsigned int sec);
 };
 }
 

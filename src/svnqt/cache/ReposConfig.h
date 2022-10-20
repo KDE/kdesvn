@@ -30,12 +30,12 @@
 #ifndef REPOSCONFIG_HPP
 #define REPOSCONFIG_HPP
 
-#include <QVariant>
-#include <QString>
 #include <QList>
+#include <QString>
+#include <QVariant>
 
-#include <ConversionCheck>
 #include "svnqt/svnqt_defines.h"
+#include <ConversionCheck>
 
 namespace svn
 {
@@ -44,19 +44,23 @@ namespace cache
 
 class SVNQT_EXPORT ReposConfig
 {
-
 private:
     static ReposConfig *mSelf;
+
 protected:
     ReposConfig();
-    template <typename T> void writeCheck(const QString &repository, const QString &key, const T &value);
-    template <typename T> void writeListCheck(const QString &repository, const QString &key, const QList<T> &value);
+    template<typename T>
+    void writeCheck(const QString &repository, const QString &key, const T &value);
+    template<typename T>
+    void writeListCheck(const QString &repository, const QString &key, const QList<T> &value);
 
 public:
     static ReposConfig *self();
 
-    template<typename T> void setValue(const QString &repository, const QString &key, const T &value);
-    template<typename T> void setValue(const QString &repository, const QString &key, const QList<T> &value);
+    template<typename T>
+    void setValue(const QString &repository, const QString &key, const T &value);
+    template<typename T>
+    void setValue(const QString &repository, const QString &key, const QList<T> &value);
     void setValue(const QString &repository, const QString &key, const QStringList &value);
     void setValue(const QString &repository, const QString &key, const QVariant &value);
     void setValue(const QString &repository, const QString &key, const QVariantList &list);
@@ -71,26 +75,27 @@ public:
     QStringList readEntry(const QString &repository, const QString &key, const QStringList &aDefault);
 };
 
-template<typename T> inline void ReposConfig::setValue(const QString &repository, const QString &key, const T &value)
+template<typename T>
+inline void ReposConfig::setValue(const QString &repository, const QString &key, const T &value)
 {
     writeCheck(repository, key, value);
 }
 
-template <typename T> inline
-void ReposConfig::writeCheck(const QString &repository, const QString &key, const T &value)
+template<typename T>
+inline void ReposConfig::writeCheck(const QString &repository, const QString &key, const T &value)
 {
     ConversionCheck::to_QVariant<T>();
     setValue(repository, key, QVariant::fromValue(value));
 }
 
-template<typename T> inline
-void ReposConfig::setValue(const QString &repository, const QString &key, const QList<T> &value)
+template<typename T>
+inline void ReposConfig::setValue(const QString &repository, const QString &key, const QList<T> &value)
 {
     writeListCheck(repository, key, value);
 }
 
-template <typename T> inline
-void ReposConfig::writeListCheck(const QString &repository, const QString &key, const QList<T> &list)
+template<typename T>
+inline void ReposConfig::writeListCheck(const QString &repository, const QString &key, const QList<T> &list)
 {
     ConversionCheck::to_QVariant<T>();
     ConversionCheck::to_QString<T>();

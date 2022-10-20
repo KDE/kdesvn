@@ -35,6 +35,7 @@ class UrlDlg : public QDialog
     Q_OBJECT
 public:
     static QUrl getUrl(QWidget *parent = nullptr);
+
 private:
     explicit UrlDlg(QWidget *parent = nullptr);
     ~UrlDlg();
@@ -42,6 +43,7 @@ private:
 private slots:
     void accept() override final;
     void slotTextChanged(const QString &);
+
 private:
     KUrlRequester *m_urlRequester;
     Ui::UrlDlg *m_ui;

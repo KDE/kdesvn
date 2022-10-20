@@ -19,17 +19,18 @@
 
 #include "ksvndialog.h"
 
-#include <QApplication>
-#include <QPushButton>
-#include <QDialogButtonBox>
-#include <QVBoxLayout>
-#include <KHelpClient>
 #include "helpers/windowgeometryhelper.h"
+#include <KHelpClient>
+#include <QApplication>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 KSvnDialog::KSvnDialog(const QString &configGroupName, QWidget *parent)
     : QDialog(parent ? parent : QApplication::activeModalWidget())
     , m_configGroupName(configGroupName)
-{}
+{
+}
 
 KSvnDialog::~KSvnDialog()
 {
@@ -70,7 +71,7 @@ void KSvnSimpleOkDialog::setWithCancelButton()
 
 void KSvnSimpleOkDialog::addWidget(QWidget *widget)
 {
-     m_layout->addWidget(widget);
+    m_layout->addWidget(widget);
 }
 
 void KSvnSimpleOkDialog::addButtonBox()

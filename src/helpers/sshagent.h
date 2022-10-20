@@ -63,11 +63,11 @@ private:
     bool startSshAgent();
     void askPassEnv();
 
-    QString        m_Output;
+    QString m_Output;
 
-    static bool    m_isRunning;
-    static bool    m_isOurAgent;
-    static bool    m_addIdentitiesDone;
+    static bool m_isRunning;
+    static bool m_isOurAgent;
+    static bool m_addIdentitiesDone;
     static QString m_authSock;
     static QString m_pid;
 

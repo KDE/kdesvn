@@ -20,10 +20,10 @@
 #ifndef SVNLOGDLGIMP_H
 #define SVNLOGDLGIMP_H
 
-#include "ui_svnlogdlg.h"
 #include "simple_logcb.h"
-#include "svnqt/log_entry.h"
 #include "svnqt/client.h"
+#include "svnqt/log_entry.h"
+#include "ui_svnlogdlg.h"
 
 #include <QRegExp>
 
@@ -35,7 +35,7 @@ class SvnLogModel;
 class QSortFilterProxyModel;
 class QModelIndex;
 
-class SvnLogDlgImp: public QDialog, public Ui::LogDialog, public SimpleLogCb
+class SvnLogDlgImp : public QDialog, public Ui::LogDialog, public SimpleLogCb
 {
     Q_OBJECT
 public:

@@ -35,8 +35,8 @@
 #include <svnqt/svnqt_defines.h>
 
 // subversion api
-#include <svn_client.h>
 #include <QString>
+#include <svn_client.h>
 
 namespace svn
 {
@@ -50,10 +50,10 @@ public:
     /**
      * Constructor.  Assigns the exception reason.
      */
-    explicit Exception(const char *message) throw ();
+    explicit Exception(const char *message) throw();
     explicit Exception(const QString &message) throw();
 
-    virtual ~Exception() throw ();
+    virtual ~Exception() throw();
 
     /**
      * @return the exception message.
@@ -73,13 +73,11 @@ protected:
     void setMessage(const QString &);
 
 private:
+    Exception(const Exception &) throw();
 
-    Exception(const Exception &) throw ();
+    Exception() throw();
 
-    Exception() throw ();
-
-    Exception &operator = (const Exception &);
-
+    Exception &operator=(const Exception &);
 };
 
 /**
@@ -93,17 +91,17 @@ public:
      * @param error the error to display. This will get cleared inside with svn_error_clear
      * so it isn't usable after that!
      */
-    explicit ClientException(svn_error_t *error) throw ();
+    explicit ClientException(svn_error_t *error) throw();
 
     /**
      * Constructor that takes only an apr errorcode
      */
-    explicit ClientException(apr_status_t status) throw ();
+    explicit ClientException(apr_status_t status) throw();
 
     /**
      * Constructor
      */
-    explicit ClientException(const char *msg) throw ();
+    explicit ClientException(const char *msg) throw();
 
     /**
      * Constructor
@@ -113,20 +111,19 @@ public:
     /**
      * Copy constructor
      */
-    ClientException(const ClientException &src) throw ();
+    ClientException(const ClientException &src) throw();
 
-    virtual ~ClientException() throw ();
+    virtual ~ClientException() throw();
 
 private:
-    ClientException() throw ();
+    ClientException() throw();
 
-    ClientException &operator = (ClientException &);
+    ClientException &operator=(ClientException &);
     static QString getBackTrace();
 
     void init();
     /// backtrace from constructor;
     QString m_backTraceConstr;
-
 };
 
 }

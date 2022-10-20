@@ -23,5 +23,4 @@
 #include <QLoggingCategory>
 Q_DECLARE_LOGGING_CATEGORY(KDESVN_LOG)
 
-#endif 
-
+#endif

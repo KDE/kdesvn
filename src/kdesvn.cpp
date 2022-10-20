@@ -19,10 +19,10 @@
  ***************************************************************************/
 
 #include "kdesvn.h"
-#include "urldlg.h"
-#include "kdesvn_part.h"
-#include "helpers/ktranslateurl.h"
 #include "helpers/kdesvn_debug.h"
+#include "helpers/ktranslateurl.h"
+#include "kdesvn_part.h"
+#include "urldlg.h"
 
 #include <QApplication>
 #include <QDir>
@@ -30,28 +30,28 @@
 #include <QStatusBar>
 #include <QTimer>
 
-#include <ksharedconfig.h>
-#include <kconfig.h>
-#include <kconfiggroup.h>
-#include <khelpmenu.h>
 #include <KActionCollection>
 #include <KBookmarkManager>
+#include <KEditToolBar>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KPluginFactory>
 #include <KRecentFilesAction>
+#include <KShortcutsDialog>
 #include <KStandardAction>
 #include <KToggleAction>
-#include <KEditToolBar>
-#include <KShortcutsDialog>
+#include <kconfig.h>
+#include <kconfiggroup.h>
+#include <khelpmenu.h>
+#include <ksharedconfig.h>
 
 #ifdef TESTING_RC
 #include <kcrash.h>
 #endif
 
 kdesvn::kdesvn()
-    : KParts::MainWindow(),
-      KBookmarkOwner()
+    : KParts::MainWindow()
+    , KBookmarkOwner()
 {
     setAttribute(Qt::WA_DeleteOnClose);
     m_part = nullptr;
@@ -74,10 +74,9 @@ kdesvn::kdesvn()
         bookmarkDir.mkpath(bookmarkDir.absolutePath());
     }
 
-    m_bookmarkFile = bookmarkDir.absolutePath()+ QLatin1String("/bookmarks.xml");
+    m_bookmarkFile = bookmarkDir.absolutePath() + QLatin1String("/bookmarks.xml");
     m_BookmarkManager = KBookmarkManager::managerForExternalFile(m_bookmarkFile);
-    m_BookmarksActionmenu = new KBookmarkActionMenu(m_BookmarkManager->root(),
-                                                    i18n("&Bookmarks"), this);
+    m_BookmarksActionmenu = new KBookmarkActionMenu(m_BookmarkManager->root(), i18n("&Bookmarks"), this);
 
     actionCollection()->addAction(QStringLiteral("bookmarks"), m_BookmarksActionmenu);
     m_Bookmarkactions = new KActionCollection(static_cast<QWidget *>(this));
@@ -99,45 +98,31 @@ kdesvn::kdesvn()
         connect(m_part->widget(), SIGNAL(sigUrlOpened(bool)), this, SLOT(slotUrlOpened(bool)));
 
         QAction *tmpAction;
-        tmpAction = actionCollection()->addAction(QStringLiteral("subversion_create_repo"),
-                                                    m_part->widget(),
-                                                    SLOT(slotCreateRepo()));
+        tmpAction = actionCollection()->addAction(QStringLiteral("subversion_create_repo"), m_part->widget(), SLOT(slotCreateRepo()));
         tmpAction->setText(i18n("Create and open new repository"));
         tmpAction->setToolTip(i18n("Create and opens a new local Subversion repository"));
 
-        tmpAction = actionCollection()->addAction(QStringLiteral("subversion_dump_repo"),
-                                                    m_part->widget(),
-                                                    SLOT(slotDumpRepo()));
+        tmpAction = actionCollection()->addAction(QStringLiteral("subversion_dump_repo"), m_part->widget(), SLOT(slotDumpRepo()));
         tmpAction->setText(i18n("Dump repository to file"));
         tmpAction->setToolTip(i18n("Dump a Subversion repository to a file"));
 
-        tmpAction = actionCollection()->addAction(QStringLiteral("subversion_hotcopy_repo"),
-                                                    m_part->widget(),
-                                                    SLOT(slotHotcopy()));
+        tmpAction = actionCollection()->addAction(QStringLiteral("subversion_hotcopy_repo"), m_part->widget(), SLOT(slotHotcopy()));
         tmpAction->setText(i18n("Hotcopy a repository"));
         tmpAction->setToolTip(i18n("Hotcopy a Subversion repository to a new folder"));
 
-        tmpAction = actionCollection()->addAction(QStringLiteral("subversion_load_repo"),
-                                                    m_part->widget(),
-                                                    SLOT(slotLoaddump()));
+        tmpAction = actionCollection()->addAction(QStringLiteral("subversion_load_repo"), m_part->widget(), SLOT(slotLoaddump()));
         tmpAction->setText(i18n("Load dump into repository"));
         tmpAction->setToolTip(i18n("Load a dump file into a repository."));
 
-        tmpAction = actionCollection()->addAction(QStringLiteral("kdesvn_ssh_add"),
-                                                    m_part,
-                                                    SLOT(slotSshAdd()));
+        tmpAction = actionCollection()->addAction(QStringLiteral("kdesvn_ssh_add"), m_part, SLOT(slotSshAdd()));
         tmpAction->setText(i18n("Add ssh identities to ssh-agent"));
         tmpAction->setToolTip(i18n("Force add ssh-identities to ssh-agent for future use."));
 
-        tmpAction = actionCollection()->addAction(QStringLiteral("help_about_kdesvnpart"),
-                                                    m_part,
-                                                    SLOT(showAboutApplication()));
+        tmpAction = actionCollection()->addAction(QStringLiteral("help_about_kdesvnpart"), m_part, SLOT(showAboutApplication()));
         tmpAction->setText(i18n("Info about kdesvn part"));
         tmpAction->setToolTip(i18n("Shows info about the kdesvn plugin and not the standalone application."));
 
-        tmpAction = actionCollection()->addAction(QStringLiteral("db_show_status"),
-                                                    m_part,
-                                                    SLOT(showDbStatus()));
+        tmpAction = actionCollection()->addAction(QStringLiteral("db_show_status"), m_part, SLOT(showDbStatus()));
         tmpAction->setText(i18n("Show database content"));
         tmpAction->setToolTip(i18n("Show the content of log cache database"));
 
@@ -200,7 +185,7 @@ void kdesvn::setupActions()
     KStandardAction::open(this, SLOT(fileOpen()), actionCollection());
     KStandardAction::openNew(this, SLOT(fileNew()), actionCollection());
     ac = KStandardAction::close(this, SLOT(fileClose()), actionCollection());
-//     ac->setEnabled(getMemberList()->count()>1);
+    //     ac->setEnabled(getMemberList()->count()>1);
     ac->setEnabled(memberList().count() > 1);
     KStandardAction::quit(this, SLOT(close()), actionCollection());
 
@@ -238,7 +223,7 @@ void kdesvn::fileClose()
     if (m_part) {
         m_part->closeUrl();
     }
-//     if (getMemberList()->count()>1) {
+    //     if (getMemberList()->count()>1) {
     if (memberList().count() > 1) {
         close();
     } else {
@@ -358,8 +343,7 @@ void kdesvn::optionsConfigureToolbars()
 
     // use the standard toolbar editor
     QPointer<KEditToolBar> dlg(new KEditToolBar(factory()));
-    connect(dlg.data(), &KEditToolBar::newToolBarConfig,
-            this, &kdesvn::applyNewToolbarConfig);
+    connect(dlg.data(), &KEditToolBar::newToolBarConfig, this, &kdesvn::applyNewToolbarConfig);
     dlg->exec();
     delete dlg;
 }
@@ -375,9 +359,7 @@ void kdesvn::applyNewToolbarConfig()
 
 void kdesvn::optionsConfigureKeys()
 {
-    QPointer<KShortcutsDialog> kdlg(new KShortcutsDialog(KShortcutsEditor::AllActions,
-                                                         KShortcutsEditor::LetterShortcutsAllowed,
-                                                         m_part->widget()));
+    QPointer<KShortcutsDialog> kdlg(new KShortcutsDialog(KShortcutsEditor::AllActions, KShortcutsEditor::LetterShortcutsAllowed, m_part->widget()));
     kdlg->addCollection(actionCollection());
     kdlg->addCollection(m_part->actionCollection());
 

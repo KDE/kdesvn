@@ -24,15 +24,14 @@
 #include <KWallet>
 
 #include <QApplication>
-#include <QWidget>
-#include <QMutex>
 #include <QMap>
+#include <QMutex>
 #include <QPair>
+#include <QWidget>
 
 class PwStorageData
 {
 public:
-
     PwStorageData()
     {
         m_Wallet = nullptr;
@@ -55,7 +54,6 @@ public:
 
 protected:
     KWallet::Wallet *m_Wallet;
-
 };
 
 QMutex *PwStorageData::getCacheMutex()
@@ -108,7 +106,8 @@ PwStorage *PwStorage::self()
  */
 PwStorage::PwStorage()
     : mData(new PwStorageData)
-{}
+{
+}
 
 /*!
     \fn PwStorage::~PwStorageData()

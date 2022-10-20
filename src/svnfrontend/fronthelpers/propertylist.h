@@ -19,9 +19,9 @@
  ***************************************************************************/
 #pragma once
 
-#include <QTreeWidget>
-#include <QStringList>
 #include "svnqt/svnqttypes.h"
+#include <QStringList>
+#include <QTreeWidget>
 
 class SvnItem;
 /**
@@ -54,6 +54,7 @@ protected Q_SLOTS:
 
 Q_SIGNALS:
     void sigSetProperty(const svn::PropertiesMap &, const QStringList &, const QString &);
+
 protected:
     bool m_commitit;
     QString m_current;

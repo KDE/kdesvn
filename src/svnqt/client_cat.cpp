@@ -38,16 +38,13 @@
 #include "exception.h"
 #include "pool.h"
 #include "status.h"
+#include "svnfilestream.h"
 #include "svnqt_defines.h"
 #include "svnstream.h"
-#include "svnfilestream.h"
 
 namespace svn
 {
-QByteArray
-Client_impl::cat(const Path &path,
-                 const Revision &revision,
-                 const Revision &peg_revision)
+QByteArray Client_impl::cat(const Path &path, const Revision &revision, const Revision &peg_revision)
 {
     svn::stream::SvnByteStream buffer(*m_context);
     svn_error_t *error = internal_cat(path, revision, peg_revision, buffer);
@@ -58,11 +55,7 @@ Client_impl::cat(const Path &path,
     return buffer.content();
 }
 
-void
-Client_impl::cat(svn::stream::SvnStream &buffer,
-                 const Path &path,
-                 const Revision &revision,
-                 const Revision &peg_revision)
+void Client_impl::cat(svn::stream::SvnStream &buffer, const Path &path, const Revision &revision, const Revision &peg_revision)
 {
     svn_error_t *error = internal_cat(path, revision, peg_revision, buffer);
     if (error != nullptr) {
@@ -70,11 +63,7 @@ Client_impl::cat(svn::stream::SvnStream &buffer,
     }
 }
 
-void
-Client_impl::get(const Path &path,
-                 const QString   &target,
-                 const Revision &revision,
-                 const Revision &peg_revision)
+void Client_impl::get(const Path &path, const QString &target, const Revision &revision, const Revision &peg_revision)
 {
     svn::stream::SvnFileOStream buffer(target, *m_context);
     svn_error_t *error = internal_cat(path, revision, peg_revision, buffer);
@@ -83,18 +72,10 @@ Client_impl::get(const Path &path,
     }
 }
 
-svn_error_t *Client_impl::internal_cat(const Path &path,
-                                       const Revision &revision,
-                                       const Revision &peg_revision,
-                                       svn::stream::SvnStream &buffer)
+svn_error_t *Client_impl::internal_cat(const Path &path, const Revision &revision, const Revision &peg_revision, svn::stream::SvnStream &buffer)
 {
     Pool pool;
-    return svn_client_cat2(buffer,
-                           path.path().toUtf8(),
-                           peg_revision.revision(),
-                           revision.revision(),
-                           *m_context,
-                           pool);
+    return svn_client_cat2(buffer, path.path().toUtf8(), peg_revision.revision(), revision.revision(), *m_context, pool);
 }
 
 }

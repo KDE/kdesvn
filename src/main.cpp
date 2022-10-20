@@ -18,18 +18,17 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#include "kdesvn.h"
 #include "commandline.h"
 #include "kdesvn-config.h"
-#include <QApplication>
+#include "kdesvn.h"
 #include <KAboutData>
+#include <QApplication>
 
 #include <QCommandLineParser>
 #include <QDir>
 #include <klocalizedstring.h>
 
-static const char description[] =
-    I18N_NOOP("A Subversion Client by KDE (standalone application)");
+static const char description[] = I18N_NOOP("A Subversion Client by KDE (standalone application)");
 
 int main(int argc, char **argv)
 {
@@ -42,8 +41,12 @@ int main(int argc, char **argv)
     app.setApplicationVersion(QStringLiteral(KDESVN_VERSION));
     app.setWindowIcon(QIcon::fromTheme(QStringLiteral("kdesvn"), app.windowIcon()));
 
-    KAboutData aboutData(QStringLiteral("kdesvn"), i18n("kdesvn"), QStringLiteral(KDESVN_VERSION), i18n(description),
-                         KAboutLicense::GPL, i18n("(C) 2005-2009 Rajko Albrecht,\n(C) 2015-2019 Christian Ehrlicher"));
+    KAboutData aboutData(QStringLiteral("kdesvn"),
+                         i18n("kdesvn"),
+                         QStringLiteral(KDESVN_VERSION),
+                         i18n(description),
+                         KAboutLicense::GPL,
+                         i18n("(C) 2005-2009 Rajko Albrecht,\n(C) 2015-2019 Christian Ehrlicher"));
     aboutData.addAuthor(i18n("Rajko Albrecht"), i18n("Developer"), QStringLiteral("ral@alwins-world.de"));
     aboutData.addAuthor(i18n("Christian Ehrlicher"), i18n("Developer"), QStringLiteral("ch.ehrlicher@gmx.de"));
     aboutData.setHomepage(QStringLiteral("https://commits.kde.org/kdesvn"));
@@ -79,8 +82,7 @@ int main(int argc, char **argv)
                 for (; i < parser.positionalArguments().count(); i++) {
                     kdesvn *widget = new kdesvn;
                     widget->show();
-                    widget->load(QUrl::fromUserInput(parser.positionalArguments().at(i),
-                                                     QDir::currentPath()), true);
+                    widget->load(QUrl::fromUserInput(parser.positionalArguments().at(i), QDir::currentPath()), true);
                 }
             }
         }

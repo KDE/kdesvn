@@ -33,6 +33,7 @@ public:
 protected:
     void setDefaultButton(QPushButton *defaultButton);
     void showEvent(QShowEvent *e) override;
+
 private:
     QString m_configGroupName;
 };
@@ -63,10 +64,14 @@ public:
     void setHelp(const QString &context);
     int exec() override;
 
-    QDialogButtonBox *buttonBox() { return m_bBox; }
+    QDialogButtonBox *buttonBox()
+    {
+        return m_bBox;
+    }
 
 private Q_SLOTS:
     void onHelpRequested();
+
 private:
     QVBoxLayout *m_layout;
     QDialogButtonBox *m_bBox;

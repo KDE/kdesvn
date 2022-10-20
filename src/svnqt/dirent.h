@@ -32,9 +32,9 @@
 #ifndef SVNQT_DIRENT_H
 #define SVNQT_DIRENT_H
 
-#include <svnqt/svnqt_defines.h>
-#include <svnqt/lock_entry.h>
 #include <svnqt/datetime.h>
+#include <svnqt/lock_entry.h>
+#include <svnqt/svnqt_defines.h>
 
 // subversion api
 #include <svn_client.h>
@@ -76,41 +76,35 @@ public:
     /**
      * assignment operator
      */
-    DirEntry &
-    operator = (const DirEntry &);
+    DirEntry &operator=(const DirEntry &);
 
-    bool isEmpty() const { return name().isEmpty(); }
+    bool isEmpty() const
+    {
+        return name().isEmpty();
+    }
 
-    const QString &
-    name() const;
+    const QString &name() const;
 
-    svn_node_kind_t
-    kind() const;
+    svn_node_kind_t kind() const;
 
-    bool isDir()const;
+    bool isDir() const;
 
-    qlonglong
-    size() const;
+    qlonglong size() const;
 
-    bool
-    hasProps() const;
+    bool hasProps() const;
 
-    svn_revnum_t
-    createdRev() const;
+    svn_revnum_t createdRev() const;
 
-    const DateTime &
-    time() const;
+    const DateTime &time() const;
 
-    const QString &
-    lastAuthor() const;
+    const QString &lastAuthor() const;
 
     //! The assigned lock entry
     /*!
      * returns the assigned lock entry if set
      * \return a valid or an empty lock
      */
-    const LockEntry &
-    lockEntry() const;
+    const LockEntry &lockEntry() const;
 
     //! initialize and convert the internal lock entry
     /*!
@@ -118,12 +112,10 @@ public:
      * inside svn::Client::ls.
      * \param aLock the subversion lock description to convert.
      */
-    void
-    setLock(const svn_lock_t *aLock);
+    void setLock(const svn_lock_t *aLock);
 
 private:
     DirEntry_Data *m;
-
 };
 }
 

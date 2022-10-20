@@ -24,15 +24,15 @@
 #include <QString>
 #include <QWidget>
 
-class AuthDialogWidget: public QWidget, public Ui::AuthDialogWidget
+class AuthDialogWidget : public QWidget, public Ui::AuthDialogWidget
 {
     Q_OBJECT
 public:
     AuthDialogWidget(const QString &realm, const QString &user, QWidget *parent = nullptr);
 
-    const QString Username()const;
-    const QString Password()const;
-    bool maySave()const;
+    const QString Username() const;
+    const QString Password() const;
+    bool maySave() const;
 };
 
 #endif

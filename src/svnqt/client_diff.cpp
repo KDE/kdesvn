@@ -38,18 +38,17 @@
 // apr
 #include <apr_xlate.h>
 
+#include "client_parameter.h"
+#include "diff_data.h"
 #include "exception.h"
+#include "helper.h"
 #include "pool.h"
 #include "status.h"
 #include "svnqt_defines.h"
-#include "helper.h"
-#include "diff_data.h"
-#include "client_parameter.h"
 
 namespace svn
 {
-QByteArray
-Client_impl::diff_peg(const DiffParameter &options)
+QByteArray Client_impl::diff_peg(const DiffParameter &options)
 {
     Pool pool;
     svn_error_t *error;
@@ -59,42 +58,41 @@ Client_impl::diff_peg(const DiffParameter &options)
     _options = options.extra().array(pool);
     DiffData ddata(options.tmpPath(), options.path1(), options.rev1(), options.path1(), options.rev2());
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
     error = svn_client_diff_peg6(
 #else
     error = svn_client_diff_peg5(
 #endif
-                _options,
-                options.path1().cstr(),
-                options.peg(),
-                ddata.r1().revision(),
-                ddata.r2().revision(),
-                options.relativeTo().length() > 0 ? options.relativeTo().cstr() : QByteArray(/*0*/),
-                internal::DepthToSvn(options.depth()),
-                options.ignoreAncestry(),
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
-                false, // TODO: no_diff_added
+        _options,
+        options.path1().cstr(),
+        options.peg(),
+        ddata.r1().revision(),
+        ddata.r2().revision(),
+        options.relativeTo().length() > 0 ? options.relativeTo().cstr() : QByteArray(/*0*/),
+        internal::DepthToSvn(options.depth()),
+        options.ignoreAncestry(),
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
+        false, // TODO: no_diff_added
 #endif
-                options.noDiffDeleted(),
-                options.copies_as_adds(),
-                options.ignoreContentType(),
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
-                false, // TODO: ignore_properties
-                false, // TODO: properties_only
+        options.noDiffDeleted(),
+        options.copies_as_adds(),
+        options.ignoreContentType(),
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
+        false, // TODO: ignore_properties
+        false, // TODO: properties_only
 #endif
-                options.git_diff_format(),
-                APR_LOCALE_CHARSET,
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
-                ddata.outStream(),
-                ddata.errStream(),
+        options.git_diff_format(),
+        APR_LOCALE_CHARSET,
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
+        ddata.outStream(),
+        ddata.errStream(),
 #else
-                ddata.outFile(),
-                ddata.errFile(),
+        ddata.outFile(),
+        ddata.errFile(),
 #endif
-                options.changeList().array(pool),
-                *m_context,
-                pool
-            );
+        options.changeList().array(pool),
+        *m_context,
+        pool);
 
     if (error != nullptr) {
         throw ClientException(error);
@@ -102,10 +100,8 @@ Client_impl::diff_peg(const DiffParameter &options)
     return ddata.content();
 }
 
-QByteArray
-Client_impl::diff(const DiffParameter &options)
+QByteArray Client_impl::diff(const DiffParameter &options)
 {
-
     Pool pool;
     svn_error_t *error;
     const apr_array_header_t *_options;
@@ -118,7 +114,7 @@ Client_impl::diff(const DiffParameter &options)
     }
     DiffData ddata(options.tmpPath(), options.path1(), options.rev1(), options.path2(), options.rev2());
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
     error = svn_client_diff6(_options,
 #else
     error = svn_client_diff5(_options,
@@ -130,19 +126,19 @@ Client_impl::diff(const DiffParameter &options)
                              options.relativeTo().length() > 0 ? options.relativeTo().cstr() : QByteArray(/*0*/),
                              internal::DepthToSvn(options.depth()),
                              options.ignoreAncestry(),
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
                              false, // TODO: no_diff_added
 #endif
                              options.noDiffDeleted(),
                              options.copies_as_adds(),
                              options.ignoreContentType(),
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
                              false, // TODO: ignore_properties
                              false, // TODO: properties_only
 #endif
                              options.git_diff_format(),
                              APR_LOCALE_CHARSET,
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
                              ddata.outStream(),
                              ddata.errStream(),
 #else
@@ -157,7 +153,6 @@ Client_impl::diff(const DiffParameter &options)
         throw ClientException(error);
     }
     return ddata.content();
-
 }
 }
 

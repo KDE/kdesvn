@@ -24,7 +24,6 @@
 #include <KLocalizedString>
 #include <QCheckBox>
 
-
 Importdir_logmsg::Importdir_logmsg(QWidget *parent)
     : Commitmsg_impl(parent)
 {
@@ -38,14 +37,14 @@ Importdir_logmsg::Importdir_logmsg(QWidget *parent)
     m_noIgnore->setText(i18n("No ignore"));
     m_noIgnore->setToolTip(i18n("If set, add files or directories that match ignore patterns."));
     tmpLayout->addWidget(m_noIgnore);
-    //LogmessageDataLayout->addWidget(m_createDirBox);
+    // LogmessageDataLayout->addWidget(m_createDirBox);
     if (svn::Version::version_major() > 1 || svn::Version::version_minor() > 4) {
         m_ignoreUnknownNodes = new QCheckBox(this);
         m_ignoreUnknownNodes->setText(i18n("Ignore unknown node types"));
         m_ignoreUnknownNodes->setToolTip(i18n("Should files with unknown node types be ignored"));
         m_ignoreUnknownNodes->setWhatsThis(i18n("Ignore files of which the node type is unknown, such as device files and pipes."));
         tmpLayout->addWidget(m_ignoreUnknownNodes);
-        //addItemWidget(m_ignoreUnknownNodes);
+        // addItemWidget(m_ignoreUnknownNodes);
     } else {
         m_ignoreUnknownNodes = nullptr;
     }

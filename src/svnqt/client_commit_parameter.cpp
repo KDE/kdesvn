@@ -22,17 +22,24 @@
  * history and logs, available at https://commits.kde.org/kdesvn.          *
  ***************************************************************************/
 #include "client_commit_parameter.h"
-#include "svnqttypes.h"
-#include "stringarray.h"
 #include "client_parameter_macros.h"
+#include "stringarray.h"
+#include "svnqttypes.h"
 
 namespace svn
 {
 struct CommitParameterData {
     CommitParameterData()
-        : _targets(), _message(QString()), _depth(DepthInfinity), _changeList(StringArray()),
-          _revProps(PropertiesMap()), _keepLocks(false), _keepChangeList(false), _commit_as_operations(false)
-    {}
+        : _targets()
+        , _message(QString())
+        , _depth(DepthInfinity)
+        , _changeList(StringArray())
+        , _revProps(PropertiesMap())
+        , _keepLocks(false)
+        , _keepChangeList(false)
+        , _commit_as_operations(false)
+    {
+    }
     Targets _targets;
     QString _message;
     Depth _depth;
@@ -43,10 +50,12 @@ struct CommitParameterData {
 
 CommitParameter::CommitParameter()
     : _data(new CommitParameterData)
-{}
+{
+}
 
 CommitParameter::~CommitParameter()
-{}
+{
+}
 
 GETSET(CommitParameter, Targets, _targets, targets)
 GETSET(CommitParameter, QString, _message, message)

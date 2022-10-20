@@ -24,7 +24,7 @@
 
 class ProcessData;
 
-class WatchedProcess: public KProcess
+class WatchedProcess : public KProcess
 {
     Q_OBJECT
 public:
@@ -34,7 +34,7 @@ public:
     void appendTempFile(const QString &);
     void appendTempDir(const QString &);
     void setAutoDelete(bool);
-    bool autoDelete()const;
+    bool autoDelete() const;
 
 private:
     ProcessData *m_Data;

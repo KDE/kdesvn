@@ -33,8 +33,7 @@ eLog_Entry::~eLog_Entry()
 {
 }
 
-void eLog_Entry::addCopyTo(const QString &current, const QString &target,
-                           svn_revnum_t target_rev, char _action, svn_revnum_t from_rev)
+void eLog_Entry::addCopyTo(const QString &current, const QString &target, svn_revnum_t target_rev, char _action, svn_revnum_t from_rev)
 {
     svn::LogChangePathEntry _entry;
     _entry.copyToPath = target;

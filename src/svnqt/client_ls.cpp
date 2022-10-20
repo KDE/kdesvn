@@ -29,7 +29,6 @@
  * ====================================================================
  */
 
-
 // svncpp
 #include "client_impl.h"
 
@@ -40,8 +39,8 @@
 
 #include "dirent.h"
 #include "exception.h"
-#include "svnqt_defines.h"
 #include "helper.h"
+#include "svnqt_defines.h"
 
 namespace svn
 {
@@ -51,8 +50,7 @@ struct ListBaton {
     DirEntries dirEntries;
 };
 
-static svn_error_t *s_list_func
-(void *baton, const char *path, const svn_dirent_t *dirent, const svn_lock_t *lock, const char *abs_path, apr_pool_t *)
+static svn_error_t *s_list_func(void *baton, const char *path, const svn_dirent_t *dirent, const svn_lock_t *lock, const char *abs_path, apr_pool_t *)
 {
     Q_UNUSED(abs_path);
     if (!baton || !path || !dirent) {
@@ -72,13 +70,8 @@ static svn_error_t *s_list_func
     return nullptr;
 }
 
-DirEntries
-Client_impl::list(const Path &pathOrUrl,
-                  const Revision &revision,
-                  const Revision &peg,
-                  Depth depth, bool retrieve_locks)
+DirEntries Client_impl::list(const Path &pathOrUrl, const Revision &revision, const Revision &peg, Depth depth, bool retrieve_locks)
 {
-
     ListBaton _baton;
     Pool pool;
     // todo svn 1.8: svn_client_list3
@@ -92,8 +85,7 @@ Client_impl::list(const Path &pathOrUrl,
                                           s_list_func,
                                           &_baton,
                                           *m_context,
-                                          pool
-                                         );
+                                          pool);
     if (error != nullptr) {
         throw ClientException(error);
     }

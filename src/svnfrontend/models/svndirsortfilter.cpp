@@ -19,8 +19,8 @@
  ***************************************************************************/
 
 #include "svndirsortfilter.h"
-#include "svnitemnode.h"
 #include "settings/kdesvnsettings.h"
+#include "svnitemnode.h"
 
 SvnDirSortFilterProxy::SvnDirSortFilterProxy(QObject *parent)
     : SvnSortFilterProxy(parent)
@@ -28,7 +28,7 @@ SvnDirSortFilterProxy::SvnDirSortFilterProxy(QObject *parent)
     setShowFilter(svnmodel::Dir);
 }
 
-int SvnDirSortFilterProxy::columnCount(const QModelIndex &parent)const
+int SvnDirSortFilterProxy::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
     return 1;

@@ -31,8 +31,8 @@
 
 // svncpp
 #include "status.h"
-#include "svnqt/svnqt_defines.h"
 #include "svnqt/path.h"
+#include "svnqt/svnqt_defines.h"
 #include "svnqt/url.h"
 
 #include "svn_path.h"
@@ -92,8 +92,7 @@ void Status_private::init(const QString &path, const svn_client_status_t *status
         // now duplicate the contents
         // svn 1.7 does not count ignored entries as versioned but we do here...
         m_isVersioned = status->node_status > svn_wc_status_unversioned;
-        m_hasReal = m_isVersioned &&
-                    status->node_status != svn_wc_status_ignored;
+        m_hasReal = m_isVersioned && status->node_status != svn_wc_status_ignored;
         m_entry = Entry(status);
         m_node_status = status->node_status;
         m_text_status = status->text_status;
@@ -114,8 +113,7 @@ void Status_private::init(const QString &path, const svn_client_status_t *status
     }
 }
 
-void
-Status_private::init(const QString &path, const Status_private &src)
+void Status_private::init(const QString &path, const Status_private &src)
 {
     setPath(path);
     m_Lock = src.m_Lock;
@@ -175,7 +173,7 @@ Status::Status(const Status &src)
 }
 
 Status::Status(const char *path, const svn_client_status_t *status)
-  : m_Data(new Status_private())
+    : m_Data(new Status_private())
 {
     m_Data->init(QString::fromUtf8(path), status);
 }
@@ -203,8 +201,7 @@ Status::~Status()
     delete m_Data;
 }
 
-Status &
-Status::operator=(const Status &status)
+Status &Status::operator=(const Status &status)
 {
     if (this == &status) {
         return *this;
@@ -217,95 +214,78 @@ Status::operator=(const Status &status)
     return *this;
 }
 
-const LockEntry &
-Status::lockEntry() const
+const LockEntry &Status::lockEntry() const
 {
     return m_Data->m_Lock;
 }
-svn_wc_status_kind
-Status::reposPropStatus() const
+svn_wc_status_kind Status::reposPropStatus() const
 {
     return m_Data->m_repos_prop_status;
 }
-svn_wc_status_kind
-Status::reposTextStatus() const
+svn_wc_status_kind Status::reposTextStatus() const
 {
     return m_Data->m_repos_text_status;
 }
-bool
-Status::isSwitched() const
+bool Status::isSwitched() const
 {
     return m_Data->m_switched != 0;
 }
-bool
-Status::isCopied() const
+bool Status::isCopied() const
 {
     return m_Data->m_copied;
 }
 
-bool
-Status::isLocked() const
+bool Status::isLocked() const
 {
     return m_Data->m_Lock.Locked();
 }
 
-bool
-Status::isModified()const
+bool Status::isModified() const
 {
-    return textStatus() == svn_wc_status_modified || propStatus() == svn_wc_status_modified
-           || textStatus() == svn_wc_status_replaced;
+    return textStatus() == svn_wc_status_modified || propStatus() == svn_wc_status_modified || textStatus() == svn_wc_status_replaced;
 }
 
-bool
-Status::isRealVersioned()const
+bool Status::isRealVersioned() const
 {
     return m_Data->m_hasReal;
 }
 
-bool
-Status::isVersioned() const
+bool Status::isVersioned() const
 {
     return m_Data->m_isVersioned;
 }
 
-svn_wc_status_kind
-Status::nodeStatus() const
+svn_wc_status_kind Status::nodeStatus() const
 {
     return m_Data->m_node_status;
 }
 
-svn_wc_status_kind
-Status::propStatus() const
+svn_wc_status_kind Status::propStatus() const
 {
     return m_Data->m_prop_status;
 }
 
-svn_wc_status_kind
-Status::textStatus() const
+svn_wc_status_kind Status::textStatus() const
 {
     return m_Data->m_text_status;
 }
 
-const Entry &
-Status::entry() const
+const Entry &Status::entry() const
 {
     return m_Data->m_entry;
 }
 
-const QString &
-Status::path() const
+const QString &Status::path() const
 {
     return m_Data->m_Path;
 }
 
-bool
-Status::validReposStatus()const
+bool Status::validReposStatus() const
 {
     return reposTextStatus() != svn_wc_status_none || reposPropStatus() != svn_wc_status_none;
 }
 
-bool
-Status::validLocalStatus()const
+bool Status::validLocalStatus() const
 {
     return textStatus() != svn_wc_status_none || propStatus() != svn_wc_status_none;
 }

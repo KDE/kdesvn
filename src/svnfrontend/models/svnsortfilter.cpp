@@ -19,17 +19,17 @@
  ***************************************************************************/
 
 #include "svnsortfilter.h"
+#include "settings/kdesvnsettings.h"
 #include "svnitemmodel.h"
 #include "svnitemnode.h"
-#include "settings/kdesvnsettings.h"
 
 void SvnSortFilterProxy::setSourceModel(QAbstractItemModel *sourceModel)
 {
-    m_sourceModel = qobject_cast<SvnItemModel*>(sourceModel);
+    m_sourceModel = qobject_cast<SvnItemModel *>(sourceModel);
     QSortFilterProxyModel::setSourceModel(sourceModel);
 }
 
-bool SvnSortFilterProxy::lessThan(const QModelIndex &left, const QModelIndex &right)const
+bool SvnSortFilterProxy::lessThan(const QModelIndex &left, const QModelIndex &right) const
 {
     if (!(left.isValid() && right.isValid())) {
         return QSortFilterProxyModel::lessThan(left, right);
@@ -56,7 +56,7 @@ bool SvnSortFilterProxy::lessThan(const QModelIndex &left, const QModelIndex &ri
     }
 }
 
-bool SvnSortFilterProxy::filterAcceptsRow(int source_row, const QModelIndex &source_parent)const
+bool SvnSortFilterProxy::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
     if (m_sourceModel->filterIndex(source_parent, source_row, m_ShowFilter)) {
         return false;

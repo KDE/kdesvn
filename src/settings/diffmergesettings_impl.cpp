@@ -20,7 +20,6 @@
 #include "diffmergesettings_impl.h"
 #include "settings/kdesvnsettings.h"
 
-
 DiffMergeSettings_impl::DiffMergeSettings_impl(QWidget *parent)
     : QWidget(parent)
 {

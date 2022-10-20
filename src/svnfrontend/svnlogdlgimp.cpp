@@ -18,12 +18,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "svnlogdlgimp.h"
+#include "helpers/windowgeometryhelper.h"
 #include "settings/kdesvnsettings.h"
 #include "svnactions.h"
 #include "svnfrontend/fronthelpers/revisionbuttonimpl.h"
 #include "svnfrontend/models/logitemmodel.h"
 #include "svnfrontend/models/logmodelhelper.h"
-#include "helpers/windowgeometryhelper.h"
 
 #include <kconfig.h>
 
@@ -135,8 +135,7 @@ void SvnLogDlgImp::dispLog(const svn::LogEntriesMapPtr &_log)
     if (must_init) {
         m_LogTreeView->setModel(m_SortModel);
         m_LogTreeView->sortByColumn(SvnLogModel::Revision, Qt::DescendingOrder);
-        connect(m_LogTreeView->selectionModel(), &QItemSelectionModel::selectionChanged,
-                this, &SvnLogDlgImp::slotSelectionChanged);
+        connect(m_LogTreeView->selectionModel(), &QItemSelectionModel::selectionChanged, this, &SvnLogDlgImp::slotSelectionChanged);
         m_LogTreeView->resizeColumnToContents(SvnLogModel::Revision);
         m_LogTreeView->resizeColumnToContents(SvnLogModel::Author);
         m_LogTreeView->resizeColumnToContents(SvnLogModel::Date);
@@ -145,8 +144,7 @@ void SvnLogDlgImp::dispLog(const svn::LogEntriesMapPtr &_log)
     m_endRevButton->setRevision(m_CurrentModel->min());
     QModelIndex ind = m_CurrentModel->index(m_CurrentModel->rowCount(QModelIndex()) - 1);
     if (ind.isValid()) {
-        m_LogTreeView->selectionModel()->select(m_SortModel->mapFromSource(ind),
-                                                QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows);
+        m_LogTreeView->selectionModel()->select(m_SortModel->mapFromSource(ind), QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows);
     }
     m_LogTreeView->setFocus();
 }
@@ -226,7 +224,6 @@ void SvnLogDlgImp::slotSelectionChanged(const QItemSelection &current, const QIt
     buttonBlame->setEnabled(true);
 }
 
-
 /*!
     \fn SvnLogDlgImp::slotDispPrevious()
  */
@@ -254,7 +251,6 @@ void SvnLogDlgImp::slotDispPrevious()
     emit makeDiff(e, p->revision(), s, k->revision(), this);
 }
 
-
 /*!
     \fn SvnLogDlgImp::saveSize()
  */
@@ -266,7 +262,7 @@ void SvnLogDlgImp::saveSize()
 void SvnLogDlgImp::slotRevisionSelected()
 {
     m_goButton->setFocus();
-    //m_DispSpecDiff->setEnabled( m_first && m_second && m_first != m_second);
+    // m_DispSpecDiff->setEnabled( m_first && m_second && m_first != m_second);
 }
 
 void SvnLogDlgImp::slotDispSelected()
@@ -292,8 +288,13 @@ bool SvnLogDlgImp::getSingleLog(svn::LogEntry &t, const svn::Revision &r, const 
 void SvnLogDlgImp::slotGetLogs()
 {
     svn::LogEntriesMapPtr lm = m_Actions->getLog(m_startRevButton->revision(),
-                                                 m_endRevButton->revision(), m_peg,
-                                                 _base + _name, Kdesvnsettings::self()->log_always_list_changed_files(), 0, Kdesvnsettings::last_node_follow(), this);
+                                                 m_endRevButton->revision(),
+                                                 m_peg,
+                                                 _base + _name,
+                                                 Kdesvnsettings::self()->log_always_list_changed_files(),
+                                                 0,
+                                                 Kdesvnsettings::last_node_follow(),
+                                                 this);
     if (lm) {
         dispLog(lm);
     }
@@ -310,8 +311,13 @@ void SvnLogDlgImp::slotPrevFifty()
         begin = 1;
     }
     svn::LogEntriesMapPtr lm = m_Actions->getLog(begin,
-                                                 (begin.revnum() > 50 ? svn::Revision::START : svn::Revision::HEAD), m_peg,
-                                                 _base + _name, Kdesvnsettings::self()->log_always_list_changed_files(), 50, Kdesvnsettings::last_node_follow(), this);
+                                                 (begin.revnum() > 50 ? svn::Revision::START : svn::Revision::HEAD),
+                                                 m_peg,
+                                                 _base + _name,
+                                                 Kdesvnsettings::self()->log_always_list_changed_files(),
+                                                 50,
+                                                 Kdesvnsettings::last_node_follow(),
+                                                 this);
     if (lm) {
         dispLog(lm);
     }
@@ -320,8 +326,13 @@ void SvnLogDlgImp::slotPrevFifty()
 void SvnLogDlgImp::slotBeginHead()
 {
     svn::LogEntriesMapPtr lm = m_Actions->getLog(svn::Revision::HEAD,
-                                                 1, m_peg,
-                                                 _base + _name, Kdesvnsettings::self()->log_always_list_changed_files(), 50, Kdesvnsettings::last_node_follow(), this);
+                                                 1,
+                                                 m_peg,
+                                                 _base + _name,
+                                                 Kdesvnsettings::self()->log_always_list_changed_files(),
+                                                 50,
+                                                 Kdesvnsettings::last_node_follow(),
+                                                 this);
     if (lm) {
         dispLog(lm);
     }
@@ -332,7 +343,6 @@ void SvnLogDlgImp::slotHelpRequested()
     KHelpClient::invokeHelp(QLatin1String("logdisplay-dlg"), QLatin1String("kdesvn"));
 }
 
-
 void SvnLogDlgImp::slotListEntries()
 {
     QModelIndex _index = selectedRow();
@@ -342,8 +352,7 @@ void SvnLogDlgImp::slotListEntries()
         return;
     }
     if (ptr->changedPaths().isEmpty()) {
-        svn::LogEntriesMapPtr _log = m_Actions->getLog(ptr->revision(), ptr->revision(), ptr->revision(),
-                                                       _name, true, 0, Kdesvnsettings::last_node_follow());
+        svn::LogEntriesMapPtr _log = m_Actions->getLog(ptr->revision(), ptr->revision(), ptr->revision(), _name, true, 0, Kdesvnsettings::last_node_follow());
         if (!_log) {
             return;
         }
@@ -384,7 +393,6 @@ void SvnLogDlgImp::showEvent(QShowEvent *e)
     QDialog::showEvent(e);
     WindowGeometryHelper::restore(this, groupName);
 }
-
 
 void SvnLogDlgImp::slotBlameItem()
 {
@@ -476,8 +484,7 @@ void SvnLogDlgImp::slotCustomContextMenu(const QPoint &e)
         svn::Revision current(m_CurrentModel->toRevision(ind));
         QString _path = m_PegUrl.path();
         m_Actions->slotMergeWcRevisions(_path, current, previous, true, true, false, false, false);
-    }
-    break;
+    } break;
     }
     m_DispSpecDiff->setEnabled(m_CurrentModel->leftRow() != -1 && m_CurrentModel->rightRow() != -1 && m_CurrentModel->leftRow() != m_CurrentModel->rightRow());
 }

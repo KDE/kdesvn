@@ -23,9 +23,9 @@
  ***************************************************************************/
 
 #include "info_entry.h"
-#include "svnqt_defines.h"
-#include "pool.h"
 #include "conflictdescription.h"
+#include "pool.h"
+#include "svnqt_defines.h"
 #include <svn_client.h>
 #include <svn_path.h>
 #include <svn_version.h>
@@ -52,23 +52,23 @@ InfoEntry::~InfoEntry()
 {
 }
 
-DateTime InfoEntry::cmtDate()const
+DateTime InfoEntry::cmtDate() const
 {
     return m_last_changed_date;
 }
-DateTime InfoEntry::textTime()const
+DateTime InfoEntry::textTime() const
 {
     return m_text_time;
 }
-DateTime InfoEntry::propTime()const
+DateTime InfoEntry::propTime() const
 {
     return m_prop_time;
 }
-bool InfoEntry::hasWc()const
+bool InfoEntry::hasWc() const
 {
     return m_hasWc;
 }
-const LockEntry &InfoEntry::lockEntry()const
+const LockEntry &InfoEntry::lockEntry() const
 {
     return m_Lock;
 }
@@ -76,78 +76,78 @@ const QString &InfoEntry::cmtAuthor() const
 {
     return m_last_author;
 }
-const QString &InfoEntry::Name()const
+const QString &InfoEntry::Name() const
 {
     return m_name;
 }
-const QString &InfoEntry::checksum()const
+const QString &InfoEntry::checksum() const
 {
     return m_checksum;
 }
 
-const ConflictDescriptionList &InfoEntry::conflicts()const
+const ConflictDescriptionList &InfoEntry::conflicts() const
 {
     return m_conflicts;
 }
 
-const QUrl &InfoEntry::copyfromUrl()const
+const QUrl &InfoEntry::copyfromUrl() const
 {
     return m_copyfrom_url;
 }
-const QString &InfoEntry::prejfile()const
+const QString &InfoEntry::prejfile() const
 {
     return m_prejfile;
 }
-const QUrl &InfoEntry::reposRoot()const
+const QUrl &InfoEntry::reposRoot() const
 {
     return m_repos_root;
 }
-const QUrl &InfoEntry::url()const
+const QUrl &InfoEntry::url() const
 {
     return m_url;
 }
-const QString &InfoEntry::uuid()const
+const QString &InfoEntry::uuid() const
 {
     return m_UUID;
 }
-svn_node_kind_t InfoEntry::kind()const
+svn_node_kind_t InfoEntry::kind() const
 {
     return m_kind;
 }
-const Revision &InfoEntry::cmtRev()const
+const Revision &InfoEntry::cmtRev() const
 {
     return m_last_changed_rev;
 }
-const Revision &InfoEntry::copyfromRev()const
+const Revision &InfoEntry::copyfromRev() const
 {
     return m_copy_from_rev;
 }
-const Revision &InfoEntry::revision()const
+const Revision &InfoEntry::revision() const
 {
     return m_revision;
 }
-svn_wc_schedule_t InfoEntry::Schedule()const
+svn_wc_schedule_t InfoEntry::Schedule() const
 {
     return m_schedule;
 }
 
-bool InfoEntry::isDir()const
+bool InfoEntry::isDir() const
 {
     return kind() == svn_node_dir;
 }
-const QByteArray &InfoEntry::changeList()const
+const QByteArray &InfoEntry::changeList() const
 {
     return m_changeList;
 }
-qlonglong InfoEntry::size()const
+qlonglong InfoEntry::size() const
 {
     return m_size;
 }
-qlonglong InfoEntry::working_size()const
+qlonglong InfoEntry::working_size() const
 {
     return m_working_size;
 }
-svn::Depth InfoEntry::depth()const
+svn::Depth InfoEntry::depth() const
 {
     return m_depth;
 }

@@ -19,7 +19,6 @@
  ***************************************************************************/
 #pragma once
 
-
 #include "svnqt/svnqttypes.h"
 
 #include <ksvnwidgets/ksvndialog.h>
@@ -30,7 +29,7 @@ namespace Ui
 class CreateRepoDlg;
 }
 
-class CreaterepoDlg: public KSvnDialog
+class CreaterepoDlg : public KSvnDialog
 {
     Q_OBJECT
 public:

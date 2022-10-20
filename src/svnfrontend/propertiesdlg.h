@@ -21,10 +21,10 @@
 
 #include <QStringList>
 
-#include "svnqt/client.h"
-#include "svnqt/svnqttypes.h"
-#include "svnqt/revision.h"
 #include "ksvnwidgets/ksvndialog.h"
+#include "svnqt/client.h"
+#include "svnqt/revision.h"
+#include "svnqt/svnqttypes.h"
 
 class SvnItem;
 class QTreeWidgetItem;
@@ -37,8 +37,7 @@ class PropertiesDlg : public KSvnDialog
 {
     Q_OBJECT
 public:
-    PropertiesDlg(SvnItem *which, const svn::ClientP &aClient,
-                  const svn::Revision &aRev, QWidget *parent = nullptr);
+    PropertiesDlg(SvnItem *which, const svn::ClientP &aClient, const svn::Revision &aRev, QWidget *parent = nullptr);
     ~PropertiesDlg();
 
     void changedItems(svn::PropertiesMap &toSet, QStringList &toDelete);

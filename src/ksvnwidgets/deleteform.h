@@ -36,6 +36,7 @@ public:
     bool keep_local() const;
     bool force_delete() const;
     void showExtraButtons(bool show);
+
 private:
     Ui::DeleteForm *m_ui;
 };

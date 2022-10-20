@@ -53,7 +53,7 @@ svn::Depth DepthSelector::getDepth() const
         return svn::DepthImmediates;
     case 3:
     default:
-          break;
+        break;
     }
     return svn::DepthInfinity;
 }

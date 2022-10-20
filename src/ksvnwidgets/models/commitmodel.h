@@ -28,18 +28,19 @@
 #include <QAbstractItemModel>
 #include <QSortFilterProxyModel>
 
-class CommitModel: public QAbstractItemModel
+class CommitModel : public QAbstractItemModel
 {
     Q_OBJECT
 protected:
     explicit CommitModel(const CommitActionEntries &, const CommitActionEntries &, QObject *parent = nullptr);
     void setCommitData(const CommitActionEntries &, const CommitActionEntries &);
+
 public:
     explicit CommitModel(const svn::CommitItemList &, QObject *parent = nullptr);
     void setCommitData(const svn::CommitItemList &);
 
-    QModelIndex index(int row, int column = 0, const QModelIndex &parent = QModelIndex())const override;
-    QModelIndex parent(const QModelIndex &)const override;
+    QModelIndex index(int row, int column = 0, const QModelIndex &parent = QModelIndex()) const override;
+    QModelIndex parent(const QModelIndex &) const override;
     QVariant data(const QModelIndex &index, int role) const override;
 
     int rowCount(const QModelIndex &) const override;
@@ -47,15 +48,16 @@ public:
 
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
-    virtual int ActionColumn()const;
-    virtual int ItemColumn()const;
+    virtual int ActionColumn() const;
+    virtual int ItemColumn() const;
 
     CommitModelNodePtr node(const QModelIndex &);
-    CommitActionEntries checkedEntries()const;
+    CommitActionEntries checkedEntries() const;
     void markItems(bool mark, CommitActionEntry::ACTION_TYPE _type);
     void removeEntries(const QStringList &_items);
 
     const CommitModelNodePtr dataForRow(int row) const;
+
 protected:
     CommitModelNodeList m_List;
 };
@@ -72,19 +74,20 @@ public:
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
     int ActionColumn() const override;
     int ItemColumn() const override;
-
 };
 
 class CommitFilterModel final : public QSortFilterProxyModel
 {
     Q_OBJECT
- public:
+public:
     using QSortFilterProxyModel::QSortFilterProxyModel;
 
     void setSourceModel(QAbstractItemModel *sourceModel) override;
     void hideItems(bool bHide, CommitActionEntry::ACTION_TYPE aType);
+
 protected:
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
+
 private:
     CommitModel *m_sourceModel = nullptr;
     CommitActionEntry::ActionTypes m_visibleTypes = CommitActionEntry::ALL;

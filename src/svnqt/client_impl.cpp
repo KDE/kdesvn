@@ -31,9 +31,9 @@
 
 // svncpp
 #include "client_impl.h"
-#include "svnqt_defines.h"
 #include "exception.h"
 #include "helper.h"
+#include "svnqt_defines.h"
 
 #include <svn_opt.h>
 #include <svn_ra.h>
@@ -51,22 +51,17 @@ Client_impl::~Client_impl()
 {
 }
 
-const ContextP
-Client_impl::getContext() const
+const ContextP Client_impl::getContext() const
 {
     return m_context;
 }
 
-void
-Client_impl::setContext(const ContextP &context)
+void Client_impl::setContext(const ContextP &context)
 {
     m_context = context;
 }
 
-
-void
-Client_impl::url2Revision(const QString &revstring,
-                          Revision &start, Revision &end)
+void Client_impl::url2Revision(const QString &revstring, Revision &start, Revision &end)
 {
     Pool pool;
     int n = svn_opt_parse_revision(start, end, revstring.toUtf8(), pool);
@@ -103,10 +98,7 @@ bool Client_impl::RepoHasCapability(const Path &repository, Capability capabilit
 
     svn_ra_session_t *session = nullptr;
     // todo svn 1.8: svn_client_open_ra_session2
-    error = svn_client_open_ra_session(&session,
-                                       repository.cstr(),
-                                       *m_context,
-                                       pool);
+    error = svn_client_open_ra_session(&session, repository.cstr(), *m_context, pool);
     if (error != nullptr) {
         throw ClientException(error);
     }

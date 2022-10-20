@@ -97,14 +97,7 @@ typedef QVector<CommitItem> CommitItemList;
  * \since subversion 1.5 / svnqt 1.0
  * \sa svn_depth_t
  */
-enum Depth {
-    DepthUnknown,
-    DepthExclude,
-    DepthEmpty,
-    DepthFiles,
-    DepthImmediates,
-    DepthInfinity
-};
+enum Depth { DepthUnknown, DepthExclude, DepthEmpty, DepthFiles, DepthImmediates, DepthInfinity };
 
 //! For search specific server capabilities
 /*!
@@ -112,12 +105,7 @@ enum Depth {
  * when build with subversion earlier 1.5 this will not used.
  * \sa svn_repos_has_capability
  */
-enum Capability {
-    CapabilityMergeinfo = 0,
-    CapabilityDepth,
-    CapabilityCommitRevProps,
-    CapabilityLogRevProps
-};
+enum Capability { CapabilityMergeinfo = 0, CapabilityDepth, CapabilityCommitRevProps, CapabilityLogRevProps };
 
 namespace repository
 {

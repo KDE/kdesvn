@@ -38,25 +38,19 @@ public:
     SvnLogModel(const svn::LogEntriesMapPtr &_log, const QString &_name, QObject *parent);
     void setLogData(const svn::LogEntriesMapPtr &log, const QString &name);
 
-    qlonglong toRevision(const QModelIndex &)const;
-    const QString &fullMessage(const QModelIndex &index)const;
+    qlonglong toRevision(const QModelIndex &) const;
+    const QString &fullMessage(const QModelIndex &index) const;
     void fillChangedPaths(const QModelIndex &index, QTreeWidget *target);
     const QString &realName(const QModelIndex &index);
 
-    enum Columns {
-        Author = 0,
-        Revision,
-        Date,
-        Message,
-        Count
-    };
+    enum Columns { Author = 0, Revision, Date, Message, Count };
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
     int columnCount(const QModelIndex &idx = QModelIndex()) const override;
 
-    SvnLogModelNodePtr indexNode(const QModelIndex &)const;
+    SvnLogModelNodePtr indexNode(const QModelIndex &) const;
     int leftRow() const;
     int rightRow() const;
     void setLeftRow(int);
@@ -82,8 +76,10 @@ public:
     using QSortFilterProxyModel::QSortFilterProxyModel;
 
     void setSourceModel(QAbstractItemModel *sourceModel) override final;
+
 protected:
     bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override final;
+
 private:
     SvnLogModel *m_sourceModel = nullptr;
 };

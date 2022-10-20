@@ -25,10 +25,10 @@
 #ifndef SVNQT_DIFF_DATA_H
 #define SVNQT_DIFF_DATA_H
 
-#include <svnqt/svnqt_defines.h>
-#include <svnqt/pool.h>
 #include <svnqt/path.h>
+#include <svnqt/pool.h>
 #include <svnqt/revision.h>
+#include <svnqt/svnqt_defines.h>
 #include <svnqt/svnstream.h>
 
 #include "helper.h"
@@ -44,7 +44,7 @@ class SVNQT_NOEXPORT DiffData
 {
 protected:
     Pool m_Pool;
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
     stream::SvnByteStream *m_outStream;
     stream::SvnByteStream *m_errStream;
 #else
@@ -69,7 +69,7 @@ public:
     DiffData(const DiffData &) = delete;
     DiffData &operator=(const DiffData &) = delete;
 
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
     svn_stream_t *outStream()
     {
         return *m_outStream;
@@ -88,11 +88,11 @@ public:
         return m_errFile;
     }
 #endif
-    const Revision &r1()const
+    const Revision &r1() const
     {
         return m_r1;
     }
-    const Revision &r2()const
+    const Revision &r2() const
     {
         return m_r2;
     }

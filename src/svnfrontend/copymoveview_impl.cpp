@@ -18,7 +18,6 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-
 #include "copymoveview_impl.h"
 #include "ksvnwidgets/ksvndialog.h"
 
@@ -54,7 +53,6 @@ CopyMoveView_impl::~CopyMoveView_impl()
 {
 }
 
-
 /*!
     \fn CopyMoveView_impl::newName()
  */
@@ -63,12 +61,10 @@ QString CopyMoveView_impl::newName() const
     return m_BaseName + m_NewNameInput->text();
 }
 
-
 /*!
     \fn CopyMoveView_impl::getMoveCopyTo(bool*ok,const QString&old,const QString&base,QWidget*)
  */
-QString CopyMoveView_impl::getMoveCopyTo(bool *ok, bool move,
-                                         const QString &old, const QString &base, QWidget *parent)
+QString CopyMoveView_impl::getMoveCopyTo(bool *ok, bool move, const QString &old, const QString &base, QWidget *parent)
 {
     QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("copy_move_dlg"), parent));
     dlg->setWindowTitle(move ? i18nc("@title:window", "Move/Rename File/Directory") : i18nc("@title:window", "Copy File/Directory"));

@@ -23,10 +23,10 @@
 
 #include "kdesvn-config.h"
 
+#include <kparts/browserextension.h>
 #include <kparts/readonlypart.h>
 #include <kparts/readwritepart.h>
 #include <kparts/statusbarextension.h>
-#include <kparts/browserextension.h>
 
 #include <KAboutData>
 
@@ -49,11 +49,9 @@ public:
     /**
      * Default constructor
      */
-    kdesvnpart(QWidget *parentWidget,
-               QObject *parent, const QVariantList &args = QVariantList());
+    kdesvnpart(QWidget *parentWidget, QObject *parent, const QVariantList &args = QVariantList());
 
-    kdesvnpart(QWidget *parentWidget,
-               QObject *parent, bool ownapp, const QVariantList &args = QVariantList());
+    kdesvnpart(QWidget *parentWidget, QObject *parent, bool ownapp, const QVariantList &args = QVariantList());
 
     /**
      * Destructor

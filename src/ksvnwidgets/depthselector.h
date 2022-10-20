@@ -19,15 +19,15 @@
  ***************************************************************************/
 #pragma once
 
-#include <QWidget>
 #include "svnqt/svnqttypes.h"
+#include <QWidget>
 
 namespace Ui
 {
 class DepthSelector;
 }
 
-class DepthSelector: public QWidget
+class DepthSelector : public QWidget
 {
     Q_OBJECT
 public:

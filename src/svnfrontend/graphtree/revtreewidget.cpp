@@ -23,14 +23,14 @@
 
 #include <QTextBrowser>
 
-#include <QVariant>
-#include <QSplitter>
 #include <QList>
+#include <QSplitter>
+#include <QVariant>
 
 #include <QLayout>
+#include <QSizePolicy>
 #include <QToolTip>
 #include <QWhatsThis>
-#include <QSizePolicy>
 
 /*
  *  Constructs a RevTreeWidget as a child of 'parent', with the
@@ -39,7 +39,7 @@
 RevTreeWidget::RevTreeWidget(const svn::ClientP &cl, QWidget *parent)
     : QWidget(parent)
 {
-    RevTreeWidgetLayout = new QVBoxLayout(this);//, 11, 6, "RevTreeWidgetLayout");
+    RevTreeWidgetLayout = new QVBoxLayout(this); //, 11, 6, "RevTreeWidgetLayout");
 
     m_Splitter = new QSplitter(Qt::Vertical, this);
 
@@ -47,25 +47,16 @@ RevTreeWidget::RevTreeWidget(const svn::ClientP &cl, QWidget *parent)
     m_RevGraphView->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 
     connect(m_RevGraphView, &RevGraphView::dispDetails, this, &RevTreeWidget::setDetailText);
+    connect(m_RevGraphView, &RevGraphView::makeNorecDiff, this, &RevTreeWidget::makeNorecDiff);
+    connect(m_RevGraphView, &RevGraphView::makeRecDiff, this, &RevTreeWidget::makeRecDiff);
     connect(m_RevGraphView,
-            &RevGraphView::makeNorecDiff,
+            SIGNAL(makeCat(svn::Revision, QString, QString, svn::Revision, QWidget *)),
             this,
-            &RevTreeWidget::makeNorecDiff
-           );
-    connect(m_RevGraphView,
-            &RevGraphView::makeRecDiff,
-            this,
-            &RevTreeWidget::makeRecDiff
-           );
-    connect(m_RevGraphView,
-            SIGNAL(makeCat(svn::Revision,QString,QString,svn::Revision,QWidget*)),
-            this,
-            SIGNAL(makeCat(svn::Revision,QString,QString,svn::Revision,QWidget*))
-           );
+            SIGNAL(makeCat(svn::Revision, QString, QString, svn::Revision, QWidget *)));
 
     m_Detailstext = new QTextBrowser(m_Splitter);
     m_Detailstext->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    //m_Detailstext->setResizePolicy( QTextBrowser::Manual );
+    // m_Detailstext->setResizePolicy( QTextBrowser::Manual );
     RevTreeWidgetLayout->addWidget(m_Splitter);
     resize(QSize(600, 480).expandedTo(minimumSizeHint()));
     QList<int> list = Kdesvnsettings::tree_detail_height();

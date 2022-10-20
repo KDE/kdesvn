@@ -19,8 +19,8 @@
 
 #pragma once
 
-#include <QString>
 #include <QPointer>
+#include <QString>
 
 class KConfig;
 class QWidget;
@@ -40,6 +40,7 @@ public:
     // no need to call restore() - already called in ctor when bAutoRestore = true
     void restore();
     void save();
+
 private:
     QPointer<QWidget> m_widget;
     const KConfig *m_config;

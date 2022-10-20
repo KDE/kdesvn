@@ -33,11 +33,11 @@
 #ifndef CLIENT_ANNOTATE_PARAMETER_H
 #define CLIENT_ANNOTATE_PARAMETER_H
 
+#include <QScopedPointer>
+#include <svnqt/path.h>
+#include <svnqt/revision.h>
 #include <svnqt/svnqt_defines.h>
 #include <svnqt/svnqttypes.h>
-#include <svnqt/revision.h>
-#include <svnqt/path.h>
-#include <QScopedPointer>
 
 namespace svn
 {
@@ -52,21 +52,21 @@ public:
     AnnotateParameter();
     ~AnnotateParameter();
 
-    //!file to annotate.
+    //! file to annotate.
     AnnotateParameter &path(const Path &path);
-    //!file to annotate.
-    const Path &path()const;
+    //! file to annotate.
+    const Path &path() const;
 
     AnnotateParameter &revisionRange(const RevisionRange &range);
-    const RevisionRange &revisionRange()const;
+    const RevisionRange &revisionRange() const;
     AnnotateParameter &pegRevision(const Revision &peg);
-    const Revision &pegRevision()const;
+    const Revision &pegRevision() const;
     AnnotateParameter &diffOptions(const DiffOptions &options);
-    const DiffOptions &diffOptions()const;
+    const DiffOptions &diffOptions() const;
     AnnotateParameter &ignoreMimeTypes(bool ignore);
-    bool ignoreMimeTypes()const;
+    bool ignoreMimeTypes() const;
     AnnotateParameter &includeMerged(bool inc);
-    bool includeMerged()const;
+    bool includeMerged() const;
 };
 }
 

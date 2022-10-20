@@ -24,16 +24,16 @@
 #ifndef SVNREPOSITORYDATA_H
 #define SVNREPOSITORYDATA_H
 
+#include <svnqt/apr.h>
+#include <svnqt/helper.h>
 #include <svnqt/pool.h>
 #include <svnqt/revision.h>
-#include <svnqt/apr.h>
 #include <svnqt/svnqt_defines.h>
-#include <svnqt/helper.h>
 
 #include <QString>
 
-#include <svn_repos.h>
 #include <svn_error.h>
+#include <svn_repos.h>
 
 namespace svn
 {
@@ -71,9 +71,7 @@ protected:
 
 private:
     static void warning_func(void *baton, svn_error_t *err);
-    static void repo_notify_func(void *baton,
-                                 const svn_repos_notify_t *notify,
-                                 apr_pool_t *scratch_pool);
+    static void repo_notify_func(void *baton, const svn_repos_notify_t *notify, apr_pool_t *scratch_pool);
     static svn_error_t *cancel_func(void *baton);
 };
 

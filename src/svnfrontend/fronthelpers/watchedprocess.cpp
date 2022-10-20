@@ -46,18 +46,12 @@ WatchedProcess::WatchedProcess(QObject *parent)
     : KProcess(parent)
     , m_Data(new ProcessData)
 {
-    connect(this, &QProcess::errorOccurred,
-            this, &WatchedProcess::slotError);
-    connect(this, QOverload<int, QProcess::ExitStatus>::of(&KProcess::finished),
-            this, &WatchedProcess::slotFinished);
-    connect(this, &QProcess::readyReadStandardError,
-            this, &WatchedProcess::slotReadyReadStandardError);
-    connect(this, &QProcess::readyReadStandardOutput,
-            this, &WatchedProcess::slotReadyReadStandardOutput);
-    connect(this, &KProcess::started,
-            this, &WatchedProcess::slotStarted);
-    connect(this, &KProcess::stateChanged,
-            this, &WatchedProcess::slotStateChanged);
+    connect(this, &QProcess::errorOccurred, this, &WatchedProcess::slotError);
+    connect(this, QOverload<int, QProcess::ExitStatus>::of(&KProcess::finished), this, &WatchedProcess::slotFinished);
+    connect(this, &QProcess::readyReadStandardError, this, &WatchedProcess::slotReadyReadStandardError);
+    connect(this, &QProcess::readyReadStandardOutput, this, &WatchedProcess::slotReadyReadStandardOutput);
+    connect(this, &KProcess::started, this, &WatchedProcess::slotStarted);
+    connect(this, &KProcess::stateChanged, this, &WatchedProcess::slotStateChanged);
 }
 
 WatchedProcess::~WatchedProcess()
@@ -76,7 +70,7 @@ void WatchedProcess::setAutoDelete(bool autodel)
     m_Data->_autoDelete = autodel;
 }
 
-bool WatchedProcess::autoDelete()const
+bool WatchedProcess::autoDelete() const
 {
     return m_Data->_autoDelete;
 }

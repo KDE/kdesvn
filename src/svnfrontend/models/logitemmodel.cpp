@@ -24,8 +24,8 @@
 #include "svnqt/client.h"
 
 #include <KLocalizedString>
-#include <QTreeWidget>
 #include <QMap>
+#include <QTreeWidget>
 
 SvnLogModel::SvnLogModel(const svn::LogEntriesMapPtr &_log, const QString &m_name, QObject *parent)
     : QAbstractListModel(parent)
@@ -134,7 +134,7 @@ QVariant SvnLogModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-qlonglong SvnLogModel::toRevision(const QModelIndex &index)const
+qlonglong SvnLogModel::toRevision(const QModelIndex &index) const
 {
     if (!index.isValid() || index.row() >= m_data.count()) {
         return -1;
@@ -142,7 +142,7 @@ qlonglong SvnLogModel::toRevision(const QModelIndex &index)const
     return m_data[index.row()]->revision();
 }
 
-const QString &SvnLogModel::fullMessage(const QModelIndex &index)const
+const QString &SvnLogModel::fullMessage(const QModelIndex &index) const
 {
     if (!index.isValid() || index.row() >= m_data.count()) {
         return m_emptyString;
@@ -182,7 +182,7 @@ QVariant SvnLogModel::headerData(int section, Qt::Orientation orientation, int r
     return QVariant();
 }
 
-SvnLogModelNodePtr SvnLogModel::indexNode(const QModelIndex &index)const
+SvnLogModelNodePtr SvnLogModel::indexNode(const QModelIndex &index) const
 {
     if (!index.isValid() || index.row() >= m_data.count()) {
         return SvnLogModelNodePtr();
@@ -211,12 +211,12 @@ void SvnLogModel::fillChangedPaths(const QModelIndex &index, QTreeWidget *where)
     where->sortByColumn(1, Qt::AscendingOrder);
 }
 
-int SvnLogModel::leftRow()const
+int SvnLogModel::leftRow() const
 {
     return m_left;
 }
 
-int SvnLogModel::rightRow()const
+int SvnLogModel::rightRow() const
 {
     return m_right;
 }
@@ -242,28 +242,28 @@ void SvnLogModel::setRightRow(int v)
 //
 void SvnLogSortModel::setSourceModel(QAbstractItemModel *sourceModel)
 {
-    m_sourceModel = qobject_cast<SvnLogModel*>(sourceModel);
+    m_sourceModel = qobject_cast<SvnLogModel *>(sourceModel);
     QSortFilterProxyModel::setSourceModel(sourceModel);
 }
 
 bool SvnLogSortModel::lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const
 {
-    if(source_left.column() != source_right.column() || !m_sourceModel) {
+    if (source_left.column() != source_right.column() || !m_sourceModel) {
         return QSortFilterProxyModel::lessThan(source_left, source_right);
     }
     const SvnLogModelNodePtr &dataLeft = m_sourceModel->m_data.at(source_left.row());
     const SvnLogModelNodePtr &dataRight = m_sourceModel->m_data.at(source_right.row());
     switch (source_left.column()) {
-        case SvnLogModel::Author:
-            return dataLeft->author() < dataRight->author();
-        case SvnLogModel::Revision:
-            return dataLeft->revision() < dataRight->revision();
-        case SvnLogModel::Date:
-            return dataLeft->dateMSec() < dataRight->dateMSec();
-        case SvnLogModel::Message:
-            return dataLeft->message() < dataRight->message();
-        default:
-            break;
+    case SvnLogModel::Author:
+        return dataLeft->author() < dataRight->author();
+    case SvnLogModel::Revision:
+        return dataLeft->revision() < dataRight->revision();
+    case SvnLogModel::Date:
+        return dataLeft->dateMSec() < dataRight->dateMSec();
+    case SvnLogModel::Message:
+        return dataLeft->message() < dataRight->message();
+    default:
+        break;
     }
     return QSortFilterProxyModel::lessThan(source_left, source_right);
 }

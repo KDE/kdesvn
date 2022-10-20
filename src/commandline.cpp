@@ -25,10 +25,12 @@
 
 CommandLine::CommandLine(const QCommandLineParser *parser)
     : m_parser(parser)
-{}
+{
+}
 
 CommandLine::~CommandLine()
-{}
+{
+}
 
 int CommandLine::exec()
 {

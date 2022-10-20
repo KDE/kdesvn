@@ -47,11 +47,7 @@ class CreateRepoParameter;
 class SVNQT_EXPORT Repository
 {
 public:
-    enum LOAD_UUID {
-        UUID_DEFAULT_ACTION = 0,
-        UUID_IGNORE_ACTION = 1,
-        UUID_FORCE_ACTION = 2
-    };
+    enum LOAD_UUID { UUID_DEFAULT_ACTION = 0, UUID_IGNORE_ACTION = 1, UUID_FORCE_ACTION = 2 };
     //! constructor
     /*!
      * \param aListener callback object, the object will NOT take the ownership.

@@ -19,28 +19,28 @@
  ***************************************************************************/
 
 #include "svnitemmodel.h"
-#include "svnitemnode.h"
-#include "svnactions.h"
 #include "getinfothread.h"
-#include "svnfrontend/maintreewidget.h"
-#include "settings/kdesvnsettings.h"
 #include "helpers/kdesvn_debug.h"
+#include "settings/kdesvnsettings.h"
+#include "svnactions.h"
+#include "svnfrontend/maintreewidget.h"
+#include "svnitemnode.h"
 
-#include "svnqt/status.h"
 #include "svnqt/client.h"
 #include "svnqt/path.h"
+#include "svnqt/status.h"
 #include "svnqt/svnqt_defines.h"
 
-#include <KLocalizedString>
 #include <KDirWatch>
+#include <KLocalizedString>
 #include <KUrlMimeData>
 
-#include <QItemSelectionModel>
-#include <QFileInfo>
 #include <QBrush>
-#include <QUuid>
-#include <QMimeData>
 #include <QDir>
+#include <QFileInfo>
+#include <QItemSelectionModel>
+#include <QMimeData>
+#include <QUuid>
 
 /*****************************
  * Internal data class begin *
@@ -49,9 +49,14 @@ class SvnItemModelData
 {
     SvnItemModelData(const SvnItemModelData &);
     SvnItemModelData &operator=(const SvnItemModelData &);
+
 public:
     SvnItemModelData(SvnItemModel *aCb, MainTreeWidget *display)
-        : m_rootNode(nullptr), m_SvnActions(nullptr), m_Cb(aCb), m_Display(display), m_DirWatch(nullptr)
+        : m_rootNode(nullptr)
+        , m_SvnActions(nullptr)
+        , m_Cb(aCb)
+        , m_Display(display)
+        , m_DirWatch(nullptr)
     {
         m_Uid = QUuid::createUuid().toString();
         m_InfoThread = new GetInfoThread(aCb);
@@ -78,12 +83,12 @@ public:
         m_rootNode = new SvnItemModelNodeDir(m_SvnActions, m_Display);
     }
 
-    SvnItemModelNode *nodeForIndex(const QModelIndex &index)const
+    SvnItemModelNode *nodeForIndex(const QModelIndex &index) const
     {
         return index.isValid() ? static_cast<SvnItemModelNode *>(index.internalPointer()) : m_rootNode;
     }
 
-    QModelIndex indexForNode(SvnItemModelNode *node, int rowNumber = -1)const
+    QModelIndex indexForNode(SvnItemModelNode *node, int rowNumber = -1) const
     {
         if (!node || node == m_rootNode) {
             return QModelIndex();
@@ -91,19 +96,18 @@ public:
         return m_Cb->createIndex(rowNumber == -1 ? node->rowNumber() : rowNumber, 0, node);
     }
 
-    bool isRemoteAdded(const svn::Status &_Stat)const
+    bool isRemoteAdded(const svn::Status &_Stat) const
     {
-        return m_SvnActions->isUpdated(_Stat.path()) &&
-               _Stat.validReposStatus() && !_Stat.validLocalStatus();
+        return m_SvnActions->isUpdated(_Stat.path()) && _Stat.validReposStatus() && !_Stat.validLocalStatus();
     }
 
-    bool MustCreateDir(const svn::Status &_Stat)const
+    bool MustCreateDir(const svn::Status &_Stat) const
     {
         // keep in sync with SvnItem::isDir()
         if (_Stat.entry().isValid() || isRemoteAdded(_Stat)) {
-          if (_Stat.entry().kind() != svn_node_unknown) {
-              return _Stat.entry().kind() == svn_node_dir;
-          }
+            if (_Stat.entry().kind() != svn_node_unknown) {
+                return _Stat.entry().kind() == svn_node_dir;
+            }
         }
         /* must be a local file */
         QFileInfo f(_Stat.path());
@@ -137,7 +141,8 @@ public:
  *****************************/
 
 SvnItemModel::SvnItemModel(MainTreeWidget *display, QObject *parent)
-    : QAbstractItemModel(parent), m_Data(new SvnItemModelData(this, display))
+    : QAbstractItemModel(parent)
+    , m_Data(new SvnItemModelData(this, display))
 {
     m_Data->m_SvnActions = new SvnActions(display);
     m_Data->m_rootNode = new SvnItemModelNodeDir(m_Data->m_SvnActions, display);
@@ -184,9 +189,7 @@ void SvnItemModel::beginRemoveRows(const QModelIndex &parent, int first, int las
 {
     m_Data->m_InfoThread->clearNodes();
     m_Data->m_InfoThread->cancelMe();
-    if (!m_Data->m_InfoThread->wait(1000)) {
-
-    }
+    if (!m_Data->m_InfoThread->wait(1000)) { }
     QAbstractItemModel::beginRemoveRows(parent, first, last);
 }
 
@@ -202,7 +205,7 @@ void SvnItemModel::clearNodeDir(SvnItemModelNodeDir *node)
     endRemoveRows();
 }
 
-bool SvnItemModel::hasChildren(const QModelIndex &parent)const
+bool SvnItemModel::hasChildren(const QModelIndex &parent) const
 {
     if (!parent.isValid()) {
         return true;
@@ -210,7 +213,7 @@ bool SvnItemModel::hasChildren(const QModelIndex &parent)const
     return static_cast<SvnItemModelNode *>(parent.internalPointer())->NodeHasChilds();
 }
 
-bool SvnItemModel::filterIndex(const QModelIndex &parent, int childRow, svnmodel::ItemTypeFlag showOnly)const
+bool SvnItemModel::filterIndex(const QModelIndex &parent, int childRow, svnmodel::ItemTypeFlag showOnly) const
 {
     SvnItemModelNode *node = m_Data->nodeForIndex(parent);
     if (childRow < 0) {
@@ -222,7 +225,7 @@ bool SvnItemModel::filterIndex(const QModelIndex &parent, int childRow, svnmodel
     }
     SvnItemModelNode *child = static_cast<SvnItemModelNodeDir *>(node)->child(childRow);
     if (child) {
-        if ((child->isDir() && !showOnly.testFlag(svnmodel::Dir))  || (!child->isDir() && !showOnly.testFlag(svnmodel::File))) {
+        if ((child->isDir() && !showOnly.testFlag(svnmodel::Dir)) || (!child->isDir() && !showOnly.testFlag(svnmodel::File))) {
             return true;
         }
         return ItemDisplay::filterOut(child);
@@ -230,7 +233,7 @@ bool SvnItemModel::filterIndex(const QModelIndex &parent, int childRow, svnmodel
     return false;
 }
 
-QVariant SvnItemModel::data(const QModelIndex &index, int role)const
+QVariant SvnItemModel::data(const QModelIndex &index, int role) const
 {
     SvnItemModelNode *node = m_Data->nodeForIndex(index);
     switch (role) {
@@ -287,7 +290,7 @@ QVariant SvnItemModel::data(const QModelIndex &index, int role)const
     return QVariant();
 }
 
-QModelIndex SvnItemModel::index(int row, int column, const QModelIndex &parent)const
+QModelIndex SvnItemModel::index(int row, int column, const QModelIndex &parent) const
 {
     SvnItemModelNode *node = m_Data->nodeForIndex(parent);
     if (row < 0) {
@@ -327,12 +330,12 @@ QVariant SvnItemModel::headerData(int section, Qt::Orientation orientation, int 
     return QVariant();
 }
 
-int SvnItemModel::columnCount(const QModelIndex & /*parent*/)const
+int SvnItemModel::columnCount(const QModelIndex & /*parent*/) const
 {
     return ColumnCount;
 }
 
-int SvnItemModel::rowCount(const QModelIndex &parent)const
+int SvnItemModel::rowCount(const QModelIndex &parent) const
 {
     if (!m_Data || !m_Data->m_rootNode) {
         return 0;
@@ -345,7 +348,7 @@ int SvnItemModel::rowCount(const QModelIndex &parent)const
     return node->childList().count();
 }
 
-QModelIndex SvnItemModel::parent(const QModelIndex &index)const
+QModelIndex SvnItemModel::parent(const QModelIndex &index) const
 {
     if (!index.isValid()) {
         return QModelIndex();
@@ -445,7 +448,7 @@ void SvnItemModel::insertDirs(SvnItemModelNode *_parent, svn::StatusEntries &dli
         }
         node->setStat(sp);
 #ifdef DEBUG_TIMER
-//        qCDebug(KDESVN_LOG)<<"Time creating item: "<<_counttime.elapsed();
+        //        qCDebug(KDESVN_LOG)<<"Time creating item: "<<_counttime.elapsed();
         _counttime.restart();
 #endif
         if (m_Data->m_Display->isWorkingCopy() && m_Data->m_DirWatch) {
@@ -456,7 +459,7 @@ void SvnItemModel::insertDirs(SvnItemModelNode *_parent, svn::StatusEntries &dli
             }
         }
 #ifdef DEBUG_TIMER
-//        qCDebug(KDESVN_LOG)<<"Time add watch: "<<_counttime.elapsed();
+        //        qCDebug(KDESVN_LOG)<<"Time add watch: "<<_counttime.elapsed();
         _counttime.restart();
 #endif
         parent->m_Children.append(node);
@@ -473,7 +476,7 @@ void SvnItemModel::insertDirs(SvnItemModelNode *_parent, svn::StatusEntries &dli
 #endif
 }
 
-bool SvnItemModel::canFetchMore(const QModelIndex &parent)const
+bool SvnItemModel::canFetchMore(const QModelIndex &parent) const
 {
     if (!parent.isValid()) {
         return false;
@@ -493,7 +496,7 @@ void SvnItemModel::fetchMore(const QModelIndex &parent)
     }
 }
 
-bool SvnItemModel::insertRows(int , int, const QModelIndex &)
+bool SvnItemModel::insertRows(int, int, const QModelIndex &)
 {
     return false;
 }
@@ -516,7 +519,7 @@ Qt::ItemFlags SvnItemModel::flags(const QModelIndex &index) const
 {
     Qt::ItemFlags f = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
     if (index.column() == Name) {
-        f |=  /*Qt::ItemIsEditable |*/ Qt::ItemIsDragEnabled;
+        f |= /*Qt::ItemIsEditable |*/ Qt::ItemIsDragEnabled;
     }
     if (!index.isValid()) {
         f |= Qt::ItemIsDropEnabled;
@@ -529,7 +532,7 @@ Qt::ItemFlags SvnItemModel::flags(const QModelIndex &index) const
     return f;
 }
 
-Qt::DropActions SvnItemModel::supportedDropActions()const
+Qt::DropActions SvnItemModel::supportedDropActions() const
 {
     return Qt::CopyAction | Qt::MoveAction;
 }
@@ -537,9 +540,9 @@ Qt::DropActions SvnItemModel::supportedDropActions()const
 QStringList SvnItemModel::mimeTypes() const
 {
     return QStringList() << QLatin1String("text/uri-list")
-           /*                         << QLatin1String( "application/x-kde-cutselection" ) */ // TODO
-           //<< QLatin1String( "text/plain" )
-           << QLatin1String("application/x-kde-urilist");
+                         /*                         << QLatin1String( "application/x-kde-cutselection" ) */ // TODO
+                         //<< QLatin1String( "text/plain" )
+                         << QLatin1String("application/x-kde-urilist");
 }
 
 bool SvnItemModel::dropUrls(const QList<QUrl> &data, Qt::DropAction action, int row, int column, const QModelIndex &parent, bool intern)
@@ -556,7 +559,7 @@ bool SvnItemModel::dropUrls(const QList<QUrl> &data, Qt::DropAction action, int 
     return true;
 }
 
-QMimeData *SvnItemModel::mimeData(const QModelIndexList &indexes)const
+QMimeData *SvnItemModel::mimeData(const QModelIndexList &indexes) const
 {
     QList<QUrl> urls;
     for (const QModelIndex &index : indexes) {
@@ -723,9 +726,8 @@ void SvnItemModel::checkAddNewItems(const QModelIndex &ind)
     if (!svnWrapper()->makeStatus(what, dlist, m_Data->m_Display->baseRevision(), false, true, true)) {
         return;
     }
-    const auto pred = [&](const svn::StatusPtr &sp) -> bool
-    {
-      return n->contains(sp->path()) || sp->path() == what;
+    const auto pred = [&](const svn::StatusPtr &sp) -> bool {
+        return n->contains(sp->path()) || sp->path() == what;
     };
     dlist.erase(std::remove_if(dlist.begin(), dlist.end(), pred), dlist.end());
     if (!dlist.isEmpty()) {
@@ -760,8 +762,7 @@ bool SvnItemModel::checkRootNode()
         return false;
     }
     try {
-        m_Data->m_rootNode->setStat(m_Data->m_SvnActions->svnclient()->singleStatus(m_Data->m_Display->baseUri(),
-                                                                                    false, m_Data->m_Display->baseRevision()));
+        m_Data->m_rootNode->setStat(m_Data->m_SvnActions->svnclient()->singleStatus(m_Data->m_Display->baseUri(), false, m_Data->m_Display->baseRevision()));
     } catch (const svn::ClientException &e) {
         m_Data->m_rootNode->setStat(svn::StatusPtr(new svn::Status));
         emit clientException(e.msg());
@@ -911,7 +912,7 @@ int SvnItemModel::checkUnversionedDirs(SvnItemModelNode *_parent)
     return dlist.size();
 }
 
-const QString &SvnItemModel::uniqueIdentifier()const
+const QString &SvnItemModel::uniqueIdentifier() const
 {
     return m_Data->m_Uid;
 }

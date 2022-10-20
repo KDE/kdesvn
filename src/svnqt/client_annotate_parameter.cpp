@@ -22,17 +22,22 @@
  * history and logs, available at https://commits.kde.org/kdesvn.          *
  ***************************************************************************/
 #include "client_annotate_parameter.h"
-#include "svnqttypes.h"
 #include "client_parameter_macros.h"
 #include "diffoptions.h"
+#include "svnqttypes.h"
 
 namespace svn
 {
 struct AnnotateParameterData {
     AnnotateParameterData()
-        : _path(), _revisions(Revision::UNDEFINED, Revision::UNDEFINED), _peg(Revision::UNDEFINED), _opts(),
-          _ignoreMimeTypes(false), _includeMerged(true)
-    {}
+        : _path()
+        , _revisions(Revision::UNDEFINED, Revision::UNDEFINED)
+        , _peg(Revision::UNDEFINED)
+        , _opts()
+        , _ignoreMimeTypes(false)
+        , _includeMerged(true)
+    {
+    }
     Path _path;
     RevisionRange _revisions;
     Revision _peg;
@@ -42,10 +47,12 @@ struct AnnotateParameterData {
 
 AnnotateParameter::AnnotateParameter()
     : _data(new AnnotateParameterData)
-{}
+{
+}
 
 AnnotateParameter::~AnnotateParameter()
-{}
+{
+}
 
 GETSET(AnnotateParameter, Path, _path, path)
 GETSET(AnnotateParameter, RevisionRange, _revisions, revisionRange)

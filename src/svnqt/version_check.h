@@ -32,12 +32,12 @@ namespace svn
 {
 namespace Version
 {
-    SVNQT_EXPORT bool client_version_compatible();
-    SVNQT_EXPORT const QString linked_version();
-    SVNQT_EXPORT const QString running_version();
+SVNQT_EXPORT bool client_version_compatible();
+SVNQT_EXPORT const QString linked_version();
+SVNQT_EXPORT const QString running_version();
 
-    SVNQT_EXPORT int version_major();
-    SVNQT_EXPORT int version_minor();
+SVNQT_EXPORT int version_major();
+SVNQT_EXPORT int version_minor();
 }
 }
 

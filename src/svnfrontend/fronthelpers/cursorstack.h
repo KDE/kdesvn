@@ -24,8 +24,8 @@
 #ifndef CURSOR_STACK_H
 #define CURSOR_STACK_H
 
-#include <QGuiApplication>
 #include <QCursor>
+#include <QGuiApplication>
 
 //! Change cursor on stack.
 /*! May used in methods where more than returns exists. Cursor will restored on destruction

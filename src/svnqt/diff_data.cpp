@@ -34,7 +34,7 @@ namespace svn
 {
 DiffData::DiffData(const Path &aTmpPath, const Path &_p1, const Revision &_r1, const Path &_p2, const Revision &_r2)
     : m_Pool()
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
     , m_outStream(new stream::SvnByteStream)
     , m_errStream(new stream::SvnByteStream)
 #else
@@ -51,7 +51,7 @@ DiffData::DiffData(const Path &aTmpPath, const Path &_p1, const Revision &_r1, c
     , m_working_copy_present(false)
     , m_url_is_present(false)
 {
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
     Q_UNUSED(aTmpPath)
 #endif
     init();
@@ -59,20 +59,16 @@ DiffData::DiffData(const Path &aTmpPath, const Path &_p1, const Revision &_r1, c
 
 void DiffData::init()
 {
-#if SVN_API_VERSION < SVN_VERSION_CHECK(1,8,0)
+#if SVN_API_VERSION < SVN_VERSION_CHECK(1, 8, 0)
     svn_error_t *error;
     Pool scratchPool;
-    error = svn_io_open_unique_file3(&m_outFile, &m_outFileName,
-                                     m_tmpPath.path().toUtf8(),
-                                     svn_io_file_del_on_pool_cleanup, m_Pool, scratchPool);
+    error = svn_io_open_unique_file3(&m_outFile, &m_outFileName, m_tmpPath.path().toUtf8(), svn_io_file_del_on_pool_cleanup, m_Pool, scratchPool);
 
     if (error != 0) {
         clean();
         throw ClientException(error);
     }
-    error = svn_io_open_unique_file3(&m_errFile, &m_errFileName,
-                                     m_tmpPath.path().toUtf8(),
-                                     svn_io_file_del_on_pool_cleanup, m_Pool, scratchPool);
+    error = svn_io_open_unique_file3(&m_errFile, &m_errFileName, m_tmpPath.path().toUtf8(), svn_io_file_del_on_pool_cleanup, m_Pool, scratchPool);
     if (error != 0) {
         clean();
         throw ClientException(error);
@@ -104,7 +100,7 @@ DiffData::~DiffData()
 
 void DiffData::close()
 {
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
     delete m_outStream;
     m_outStream = nullptr;
     delete m_errStream;
@@ -123,7 +119,7 @@ void DiffData::close()
 
 QByteArray DiffData::content()
 {
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
     return m_outStream->content();
 #else
     if (!m_outFileName) {

@@ -23,19 +23,14 @@
  ***************************************************************************/
 #include "version_check.h"
 
-#include <svn_version.h>
 #include <svn_client.h>
+#include <svn_version.h>
 
 #include <QString>
 
 namespace svn
 {
-static const svn_version_t Linkedtag = {
-    SVN_VER_MAJOR,
-    SVN_VER_MINOR,
-    SVN_VER_PATCH,
-    SVN_VER_NUMTAG
-};
+static const svn_version_t Linkedtag = {SVN_VER_MAJOR, SVN_VER_MINOR, SVN_VER_PATCH, SVN_VER_NUMTAG};
 
 bool Version::client_version_compatible()
 {
@@ -51,9 +46,11 @@ const QString Version::running_version()
 {
     static QString curr_version_string;
     if (curr_version_string.isEmpty()) {
-        curr_version_string =
-            QString(QLatin1String("%1.%2.%3.%4")).arg(svn_client_version()->major).arg(svn_client_version()->minor)
-            .arg(svn_client_version()->patch).arg(QString::fromUtf8(svn_client_version()->tag));
+        curr_version_string = QString(QLatin1String("%1.%2.%3.%4"))
+                                  .arg(svn_client_version()->major)
+                                  .arg(svn_client_version()->minor)
+                                  .arg(svn_client_version()->patch)
+                                  .arg(QString::fromUtf8(svn_client_version()->tag));
     }
     return curr_version_string;
 }

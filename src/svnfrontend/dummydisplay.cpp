@@ -35,12 +35,12 @@ QWidget *DummyDisplay::realWidget()
     return nullptr;
 }
 
-SvnItem *DummyDisplay::Selected()const
+SvnItem *DummyDisplay::Selected() const
 {
     return nullptr;
 }
 
-SvnItemList DummyDisplay::SelectionList()const
+SvnItemList DummyDisplay::SelectionList() const
 {
     return SvnItemList();
 }
@@ -50,12 +50,12 @@ bool DummyDisplay::openUrl(const QUrl &, bool)
     return false;
 }
 
-SvnItem *DummyDisplay::SelectedOrMain()const
+SvnItem *DummyDisplay::SelectedOrMain() const
 {
     return nullptr;
 }
 
-svn::Revision DummyDisplay::baseRevision()const
+svn::Revision DummyDisplay::baseRevision() const
 {
     static svn::Revision fake(svn::Revision::UNDEFINED);
     return fake;

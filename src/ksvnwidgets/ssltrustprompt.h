@@ -26,12 +26,13 @@ namespace Ui
 class SslTrustPrompt;
 }
 
-class SslTrustPrompt: public KSvnDialog
+class SslTrustPrompt : public KSvnDialog
 {
     Q_OBJECT
 private:
     explicit SslTrustPrompt(const QString &, const QString &text, QWidget *parent = nullptr);
     ~SslTrustPrompt();
+
 public:
     static bool sslTrust(const QString &host,
                          const QString &fingerprint,
@@ -42,6 +43,7 @@ public:
                          const QStringList &reasons,
                          bool *ok,
                          bool *saveit);
+
 private:
     Ui::SslTrustPrompt *m_ui;
 };

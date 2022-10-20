@@ -20,15 +20,16 @@
 #include "createrepodlg.h"
 #include "ui_createrepodlg.h"
 
-#include "svnqt/version_check.h"
 #include "svnqt/repoparameter.h"
+#include "svnqt/version_check.h"
 
 class RecurseCheck
 {
     bool &value;
+
 public:
     explicit RecurseCheck(bool &aValue)
-      : value(aValue)
+        : value(aValue)
     {
         value = true;
     }
@@ -37,7 +38,6 @@ public:
         value = false;
     }
 };
-
 
 CreaterepoDlg::CreaterepoDlg(QWidget *parent)
     : KSvnDialog(QLatin1String("create_repo"), parent)
@@ -77,7 +77,7 @@ void CreaterepoDlg::fsTypeChanged(int which)
     m_ui->m_LogKeep->setEnabled(which == 1);
 }
 
-QString CreaterepoDlg::targetDir()const
+QString CreaterepoDlg::targetDir() const
 {
     // Local only
     return m_ui->m_ReposPathinput->url().toLocalFile();
@@ -136,4 +136,3 @@ svn::repository::CreateRepoParameter CreaterepoDlg::parameter() const
     params.bdbautologremove(!m_ui->m_LogKeep->isChecked());
     return params;
 }
-

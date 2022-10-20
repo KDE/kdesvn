@@ -21,8 +21,8 @@
 #include "kdesvnd_listener.h"
 #include "kdesvnd.h"
 
-#include "settings/kdesvnsettings.h"
 #include "ksvnwidgets/pwstorage.h"
+#include "settings/kdesvnsettings.h"
 
 KdesvndListener::KdesvndListener(kdesvnd *p)
     : svn::ContextListener()
@@ -49,10 +49,7 @@ bool KdesvndListener::contextGetCachedLogin(const QString &realm, QString &usern
     return true;
 }
 
-bool KdesvndListener::contextGetLogin(const QString &realm,
-                                      QString &username,
-                                      QString &password,
-                                      bool &maySave)
+bool KdesvndListener::contextGetLogin(const QString &realm, QString &username, QString &password, bool &maySave)
 {
     maySave = false;
     QStringList res = m_back->get_login(realm, username);
@@ -72,7 +69,7 @@ bool KdesvndListener::contextGetLogin(const QString &realm,
 void KdesvndListener::contextNotify(const char * /*path*/,
                                     svn_wc_notify_action_t /*action*/,
                                     svn_node_kind_t /*kind*/,
-                                    const char */*mime_type*/,
+                                    const char * /*mime_type*/,
                                     svn_wc_notify_state_t /*content_state*/,
                                     svn_wc_notify_state_t /*prop_state*/,
                                     svn_revnum_t /*revision*/)
@@ -98,15 +95,9 @@ bool KdesvndListener::contextGetLogMessage(QString &msg, const svn::CommitItemLi
     return true;
 }
 
-svn::ContextListener::SslServerTrustAnswer KdesvndListener::contextSslServerTrustPrompt(const SslServerTrustData &data,
-        apr_uint32_t & /*acceptedFailures*/)
+svn::ContextListener::SslServerTrustAnswer KdesvndListener::contextSslServerTrustPrompt(const SslServerTrustData &data, apr_uint32_t & /*acceptedFailures*/)
 {
-    int res = m_back->get_sslaccept(data.hostname,
-                                    data.fingerprint,
-                                    data.validFrom,
-                                    data.validUntil,
-                                    data.issuerDName,
-                                    data.realm);
+    int res = m_back->get_sslaccept(data.hostname, data.fingerprint, data.validFrom, data.validUntil, data.issuerDName, data.realm);
     switch (res) {
     case -1:
         return DONT_ACCEPT;
@@ -137,8 +128,7 @@ bool KdesvndListener::contextLoadSslClientCertPw(QString &password, const QStrin
     return PwStorage::self()->getCertPw(realm, password);
 }
 
-bool KdesvndListener::contextSslClientCertPwPrompt(QString &password,
-        const QString &realm, bool &maySave)
+bool KdesvndListener::contextSslClientCertPwPrompt(QString &password, const QString &realm, bool &maySave)
 {
     maySave = false;
     if (PwStorage::self()->getCertPw(realm, password)) {

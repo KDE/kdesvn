@@ -19,9 +19,9 @@
  ***************************************************************************/
 #include "tcontextlistener.h"
 
-#include "svnfrontend/ccontextlistener.h"
-#include "ksvnwidgets/commitmsg_impl.h"
 #include "helpers/stringhelper.h"
+#include "ksvnwidgets/commitmsg_impl.h"
+#include "svnfrontend/ccontextlistener.h"
 #include "threadcontextlistenerdata.h"
 
 #include <KLocalizedString>
@@ -38,27 +38,26 @@ ThreadContextListener::ThreadContextListener(QObject *parent)
     : CContextListener(parent)
     , m_Data(new ThreadContextListenerData)
 {
-    connect(this, &ThreadContextListener::signal_contextGetLogin,
-            this, &ThreadContextListener::event_contextGetLogin,
+    connect(this, &ThreadContextListener::signal_contextGetLogin, this, &ThreadContextListener::event_contextGetLogin, Qt::BlockingQueuedConnection);
+    connect(this, &ThreadContextListener::signal_contextGetSavedLogin, this, &ThreadContextListener::event_contextGetSavedLogin, Qt::BlockingQueuedConnection);
+    connect(this, &ThreadContextListener::signal_contextGetLogMessage, this, &ThreadContextListener::event_contextGetLogMessage, Qt::BlockingQueuedConnection);
+    connect(this,
+            &ThreadContextListener::signal_contextSslClientCertPrompt,
+            this,
+            &ThreadContextListener::event_contextSslClientCertPrompt,
             Qt::BlockingQueuedConnection);
-    connect(this, &ThreadContextListener::signal_contextGetSavedLogin,
-            this, &ThreadContextListener::event_contextGetSavedLogin,
+    connect(this,
+            &ThreadContextListener::signal_contextSslClientCertPwPrompt,
+            this,
+            &ThreadContextListener::event_contextSslClientCertPwPrompt,
             Qt::BlockingQueuedConnection);
-    connect(this, &ThreadContextListener::signal_contextGetLogMessage,
-            this, &ThreadContextListener::event_contextGetLogMessage,
-            Qt::BlockingQueuedConnection);
-    connect(this, &ThreadContextListener::signal_contextSslClientCertPrompt,
-            this, &ThreadContextListener::event_contextSslClientCertPrompt,
-            Qt::BlockingQueuedConnection);
-    connect(this, &ThreadContextListener::signal_contextSslClientCertPwPrompt,
-            this, &ThreadContextListener::event_contextSslClientCertPwPrompt,
-            Qt::BlockingQueuedConnection);
-    connect(this, &ThreadContextListener::signal_contextSslServerTrustPrompt,
-            this, &ThreadContextListener::event_contextSslServerTrustPrompt,
+    connect(this,
+            &ThreadContextListener::signal_contextSslServerTrustPrompt,
+            this,
+            &ThreadContextListener::event_contextSslServerTrustPrompt,
             Qt::BlockingQueuedConnection);
     // no user input, BlockingQueuedConnection not needed here
-    connect(this, &ThreadContextListener::signal_contextNotify,
-            this, &ThreadContextListener::event_contextNotify);
+    connect(this, &ThreadContextListener::signal_contextNotify, this, &ThreadContextListener::event_contextNotify);
 }
 
 ThreadContextListener::~ThreadContextListener()
@@ -147,7 +146,8 @@ bool ThreadContextListener::contextSslClientCertPwPrompt(QString &password, cons
     return m_Data->bReturnValue;
 }
 
-svn::ContextListener::SslServerTrustAnswer ThreadContextListener::contextSslServerTrustPrompt(const SslServerTrustData &data, apr_uint32_t &/* acceptedFailures*/)
+svn::ContextListener::SslServerTrustAnswer ThreadContextListener::contextSslServerTrustPrompt(const SslServerTrustData &data,
+                                                                                              apr_uint32_t & /* acceptedFailures*/)
 {
     QMutexLocker lock(ThreadContextListenerData::callbackMutex());
 
@@ -202,15 +202,12 @@ void ThreadContextListener::event_contextGetLogin()
 
 void ThreadContextListener::event_contextGetSavedLogin()
 {
-    m_Data->bReturnValue = CContextListener::contextGetSavedLogin(m_Data->m_slogin_data.realm,
-                                                                  m_Data->m_slogin_data.user,
-                                                                  m_Data->m_slogin_data.password);
+    m_Data->bReturnValue = CContextListener::contextGetSavedLogin(m_Data->m_slogin_data.realm, m_Data->m_slogin_data.user, m_Data->m_slogin_data.password);
 }
 
 void ThreadContextListener::event_contextGetLogMessage()
 {
-    m_Data->bReturnValue = CContextListener::contextGetLogMessage(m_Data->m_slog_message.msg,
-                                                                  m_Data->m_slog_message.items);
+    m_Data->bReturnValue = CContextListener::contextGetLogMessage(m_Data->m_slog_message.msg, m_Data->m_slog_message.items);
 }
 
 void ThreadContextListener::event_contextSslClientCertPrompt()
@@ -220,15 +217,13 @@ void ThreadContextListener::event_contextSslClientCertPrompt()
 
 void ThreadContextListener::event_contextSslClientCertPwPrompt()
 {
-    m_Data->bReturnValue = CContextListener::contextSslClientCertPwPrompt(m_Data->m_scert_pw.password,
-                                                                          m_Data->m_scert_pw.realm,
-                                                                          m_Data->m_scert_pw.maysave);
+    m_Data->bReturnValue = CContextListener::contextSslClientCertPwPrompt(m_Data->m_scert_pw.password, m_Data->m_scert_pw.realm, m_Data->m_scert_pw.maysave);
 }
 
 void ThreadContextListener::event_contextSslServerTrustPrompt()
 {
-    m_Data->m_strust_answer.sslTrustAnswer = CContextListener::contextSslServerTrustPrompt(m_Data->m_strust_answer.trustdata,
-                                                                                           m_Data->m_strust_answer.trustdata.failures);
+    m_Data->m_strust_answer.sslTrustAnswer =
+        CContextListener::contextSslServerTrustPrompt(m_Data->m_strust_answer.trustdata, m_Data->m_strust_answer.trustdata.failures);
 }
 
 void ThreadContextListener::event_contextNotify(const QString &msg)

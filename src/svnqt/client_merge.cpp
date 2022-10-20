@@ -26,12 +26,12 @@
 // subversion api
 #include <svn_client.h>
 
-#include "exception.h"
-#include "pool.h"
-#include "targets.h"
-#include "svnqt_defines.h"
-#include "helper.h"
 #include "client_parameter.h"
+#include "exception.h"
+#include "helper.h"
+#include "pool.h"
+#include "svnqt_defines.h"
+#include "targets.h"
 
 #include <QDebug>
 
@@ -48,8 +48,7 @@ void Client_impl::merge_reintegrate(const MergeParameter &parameters)
                                          parameters.dry_run(),
                                          parameters.merge_options().array(pool),
                                          *m_context,
-                                         pool
-                                        );
+                                         pool);
     if (error != nullptr) {
         throw ClientException(error);
     }
@@ -62,23 +61,21 @@ void Client_impl::merge(const MergeParameter &parameters)
     if (parameters.reintegrate()) {
         merge_reintegrate(parameters);
     } else {
-      // todo svn 1.8: svn_client_merge5
-        error =
-            svn_client_merge4
-            (parameters.path1().cstr(),
-             parameters.revision1().revision(),
-             parameters.path2().cstr(),
-             parameters.revision2().revision(),
-             parameters.localPath().cstr(),
-             internal::DepthToSvn(parameters.depth()),
-             !parameters.notice_ancestry(),
-             parameters.force(),
-             parameters.record_only(),
-             parameters.dry_run(),
-             parameters.allow_mixed_rev(),
-             parameters.merge_options().array(pool),
-             *m_context,
-             pool);
+        // todo svn 1.8: svn_client_merge5
+        error = svn_client_merge4(parameters.path1().cstr(),
+                                  parameters.revision1().revision(),
+                                  parameters.path2().cstr(),
+                                  parameters.revision2().revision(),
+                                  parameters.localPath().cstr(),
+                                  internal::DepthToSvn(parameters.depth()),
+                                  !parameters.notice_ancestry(),
+                                  parameters.force(),
+                                  parameters.record_only(),
+                                  parameters.dry_run(),
+                                  parameters.allow_mixed_rev(),
+                                  parameters.merge_options().array(pool),
+                                  *m_context,
+                                  pool);
     }
 
     if (error != nullptr) {
@@ -92,23 +89,19 @@ void Client_impl::merge_peg(const MergeParameter &parameters)
     internal::RevisionRangesToHash _rhash(parameters.revisions());
 
     // todo svn 1.8: svn_client_merge_peg5
-    svn_error_t *error =
-        svn_client_merge_peg4
-        (
-            parameters.path1().cstr(),
-            _rhash.array(pool),
-            parameters.peg(),
-            parameters.localPath().cstr(),
-            internal::DepthToSvn(parameters.depth()),
-            !parameters.notice_ancestry(),
-            parameters.force(),
-            parameters.record_only(),
-            parameters.dry_run(),
-            parameters.allow_mixed_rev(),
-            parameters.merge_options().array(pool),
-            *m_context,
-            pool
-        );
+    svn_error_t *error = svn_client_merge_peg4(parameters.path1().cstr(),
+                                               _rhash.array(pool),
+                                               parameters.peg(),
+                                               parameters.localPath().cstr(),
+                                               internal::DepthToSvn(parameters.depth()),
+                                               !parameters.notice_ancestry(),
+                                               parameters.force(),
+                                               parameters.record_only(),
+                                               parameters.dry_run(),
+                                               parameters.allow_mixed_rev(),
+                                               parameters.merge_options().array(pool),
+                                               *m_context,
+                                               pool);
     if (error != nullptr) {
         throw ClientException(error);
     }

@@ -18,31 +18,31 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "revgraphview.h"
+#include "../stopdlg.h"
+#include "graphtree_defines.h"
 #include "graphtreelabel.h"
 #include "pannerview.h"
-#include "graphtree_defines.h"
 #include "settings/kdesvnsettings.h"
-#include "../stopdlg.h"
 #include "svnqt/client.h"
 
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KProcess>
 
+#include <QContextMenuEvent>
+#include <QDesktopWidget>
 #include <QFileDialog>
 #include <QFontDatabase>
-#include <QTransform>
-#include <QMenu>
-#include <QPainter>
-#include <QRegExp>
-#include <QContextMenuEvent>
-#include <QPixmap>
-#include <QResizeEvent>
-#include <QMouseEvent>
-#include <QDesktopWidget>
 #include <QGraphicsScene>
+#include <QMenu>
+#include <QMouseEvent>
+#include <QPainter>
+#include <QPixmap>
+#include <QRegExp>
+#include <QResizeEvent>
 #include <QScrollBar>
 #include <QTemporaryFile>
+#include <QTransform>
 
 #include <math.h>
 
@@ -70,10 +70,8 @@ RevGraphView::RevGraphView(const svn::ClientP &_client, QWidget *parent)
     m_CompleteView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_CompleteView->raise();
     m_CompleteView->hide();
-    connect(m_CompleteView, &PannerView::zoomRectMoved,
-            this, &RevGraphView::zoomRectMoved);
-    connect(m_CompleteView, &PannerView::zoomRectMoveFinished,
-            this, &RevGraphView::zoomRectMoveFinished);
+    connect(m_CompleteView, &PannerView::zoomRectMoved, this, &RevGraphView::zoomRectMoved);
+    connect(m_CompleteView, &PannerView::zoomRectMoveFinished, this, &RevGraphView::zoomRectMoveFinished);
 }
 
 RevGraphView::~RevGraphView()
@@ -143,7 +141,8 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
         return;
     }
     if (exitStatus != QProcess::NormalExit || exitcode != 0) {
-        QString error = i18n("Could not run process \"%1\".\n\nProcess stopped with message:\n%2", m_renderProcess->program().join(" "),
+        QString error = i18n("Could not run process \"%1\".\n\nProcess stopped with message:\n%2",
+                             m_renderProcess->program().join(" "),
                              QString::fromLocal8Bit(m_renderProcess->readAllStandardError()));
         showText(error);
         delete m_renderProcess;
@@ -197,8 +196,7 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
             continue;
         }
         if (m_dotTmpFile && (cmd != "node") && (cmd != "edge")) {
-            qWarning() << "Ignoring unknown command '" << cmd << "' from dot ("
-                       << m_dotTmpFile->fileName() << ":" << lineno << ")" << endl;
+            qWarning() << "Ignoring unknown command '" << cmd << "' from dot (" << m_dotTmpFile->fileName() << ":" << lineno << ")" << endl;
             continue;
         }
         if (!m_Scene) {
@@ -257,8 +255,7 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
                 pa[i] = QPointF(xx, yy);
             }
             if (i < points) {
-                qDebug("CallGraphView: Can't read %d spline points (%d)",
-                       points,  lineno);
+                qDebug("CallGraphView: Can't read %d spline points (%d)", points, lineno);
                 continue;
             }
 
@@ -347,7 +344,7 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
     m_renderProcess = nullptr;
 }
 
-bool RevGraphView::isStart(const QString &nodeName)const
+bool RevGraphView::isStart(const QString &nodeName) const
 {
     bool res = false;
     trevTree::ConstIterator it;
@@ -363,7 +360,7 @@ bool RevGraphView::isStart(const QString &nodeName)const
     return res;
 }
 
-char RevGraphView::getAction(const QString &nodeName)const
+char RevGraphView::getAction(const QString &nodeName) const
 {
     trevTree::ConstIterator it;
     it = m_Tree.find(nodeName);
@@ -373,7 +370,7 @@ char RevGraphView::getAction(const QString &nodeName)const
     return it.value().Action;
 }
 
-QColor RevGraphView::getBgColor(const QString &nodeName)const
+QColor RevGraphView::getBgColor(const QString &nodeName) const
 {
     trevTree::ConstIterator it;
     it = m_Tree.find(nodeName);
@@ -425,9 +422,7 @@ QString RevGraphView::getLabelstring(const QString &nodeName)
         res = i18n("Deleted at revision %1", revstring);
         break;
     case 'A':
-        res = i18n("Added at revision %1 as %2",
-                   revstring,
-                   it1.value().name);
+        res = i18n("Added at revision %1 as %2", revstring, it1.value().name);
         break;
     case 'C':
     case 1:
@@ -495,20 +490,20 @@ void RevGraphView::dumpRevtree()
     }
     stream << "\";\n";
 
-    //stream << QString("  overlap=false;\n  splines=true;\n");
+    // stream << QString("  overlap=false;\n  splines=true;\n");
 
     RevGraphView::trevTree::ConstIterator it1;
     for (it1 = m_Tree.constBegin(); it1 != m_Tree.constEnd(); ++it1) {
-        stream << "  " << it1.key()
-               << "[ "
+        stream << "  " << it1.key() << "[ "
                << "shape=box, "
-               << "label=\"" << "Zeile 1 geht ab Zeile 2 geht ab"/*getLabelstring(it1.key())*/ << "\","
+               << "label=\""
+               << "Zeile 1 geht ab Zeile 2 geht ab" /*getLabelstring(it1.key())*/ << "\","
                << "fontsize=" << _fontsize << ",fontname=\"" << f.family() << "\","
                << "];\n";
         for (int j = 0; j < it1.value().targets.count(); ++j) {
             stream << "  " << it1.key().toLatin1() << " "
-                   << "->" << " " << it1.value().targets[j].key
-                   << " [fontsize=" << _fontsize << ",fontname=\"" << f.family() << "\",style=\"solid\"];\n";
+                   << "->"
+                   << " " << it1.value().targets[j].key << " [fontsize=" << _fontsize << ",fontname=\"" << f.family() << "\",style=\"solid\"];\n";
         }
     }
     stream << "}\n" << flush;
@@ -516,15 +511,13 @@ void RevGraphView::dumpRevtree()
     m_renderProcess->setEnv("LANG", "C");
     *m_renderProcess << "dot";
     *m_renderProcess << m_dotTmpFile->fileName() << "-Tplain";
-    connect(m_renderProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
-            this, &RevGraphView::dotExit);
-    connect(m_renderProcess, &QProcess::readyReadStandardOutput,
-            this, &RevGraphView::readDotOutput);
+    connect(m_renderProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &RevGraphView::dotExit);
+    connect(m_renderProcess, &QProcess::readyReadStandardOutput, this, &RevGraphView::readDotOutput);
     m_renderProcess->setOutputChannelMode(KProcess::SeparateChannels);
     m_renderProcess->start();
 }
 
-QString RevGraphView::toolTip(const QString &_nodename, bool full)const
+QString RevGraphView::toolTip(const QString &_nodename, bool full) const
 {
     QString res;
     trevTree::ConstIterator it = m_Tree.constFind(_nodename);
@@ -558,19 +551,12 @@ QString RevGraphView::toolTip(const QString &_nodename, bool full)const
 
     if (!full) {
         res += QString(QLatin1String("<b>%1</b>")).arg(it.value().name);
-        res += i18n("<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>",
-                    it.value().rev,
-                    it.value().Author,
-                    it.value().Date,
-                    sm);
+        res += i18n("<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>", it.value().rev, it.value().Author, it.value().Date, sm);
     } else {
-        res += QLatin1String("<table><tr><th colspan=\"2\"><b>") + it.value().name + QLatin1String("</b></th></tr>") +
-            rstart +
-            i18n("<b>Revision</b>%1%2%3", csep, it.value().rev, rend) +
-            rstart + i18n("<b>Author</b>%1%2%3", csep, it.value().Author, rend) +
-            rstart + i18n("<b>Date</b>%1%2%3", csep, it.value().Date, rend) +
-            rstart + i18n("<b>Log</b>%1%2%3", csep, sm, rend) +
-            QLatin1String("</table></body></html>");
+        res += QLatin1String("<table><tr><th colspan=\"2\"><b>") + it.value().name + QLatin1String("</b></th></tr>") + rstart
+            + i18n("<b>Revision</b>%1%2%3", csep, it.value().rev, rend) + rstart + i18n("<b>Author</b>%1%2%3", csep, it.value().Author, rend) + rstart
+            + i18n("<b>Date</b>%1%2%3", csep, it.value().Date, rend) + rstart + i18n("<b>Log</b>%1%2%3", csep, sm, rend)
+            + QLatin1String("</table></body></html>");
     }
     return res;
 }
@@ -585,7 +571,7 @@ void RevGraphView::updateSizes(QSize s)
     }
 
     // the part of the canvas that should be visible
-    qreal cWidth  = m_Scene->width()  - 2 * m_xMargin + 100;
+    qreal cWidth = m_Scene->width() - 2 * m_xMargin + 100;
     qreal cHeight = m_Scene->height() - 2 * m_yMargin + 100;
 
     // hide birds eye view if no overview needed
@@ -603,10 +589,10 @@ void RevGraphView::updateSizes(QSize s)
     }
 
     // fit to widget size
-    if (cWidth  * zoom  > s.width()) {
+    if (cWidth * zoom > s.width()) {
         zoom = s.width() / (double)cWidth;
     }
-    if (cHeight * zoom  > s.height()) {
+    if (cHeight * zoom > s.height()) {
         zoom = s.height() / (double)cHeight;
     }
 
@@ -623,8 +609,7 @@ void RevGraphView::updateSizes(QSize s)
         m_CompleteView->setTransform(QTransform::fromScale(zoom, zoom));
 
         // make it a little bigger to compensate for widget frame
-        m_CompleteView->resize(int(cWidth * zoom) + 4,
-                               int(cHeight * zoom) + 4);
+        m_CompleteView->resize(int(cWidth * zoom) + 4, int(cHeight * zoom) + 4);
 
         // update ZoomRect in completeView
         scrollContentsBy(0, 0);
@@ -638,7 +623,7 @@ void RevGraphView::updateZoomerPos()
 {
     int cvW = m_CompleteView->width();
     int cvH = m_CompleteView->height();
-    int x = width() - cvW - verticalScrollBar()->width()    - 2;
+    int x = width() - cvW - verticalScrollBar()->width() - 2;
     int y = height() - cvH - horizontalScrollBar()->height() - 2;
 
     QPoint oldZoomPos = m_CompleteView->pos();
@@ -652,11 +637,19 @@ void RevGraphView::updateZoomerPos()
 
     ZoomPosition zp = m_LastAutoPosition;
     switch (zp) {
-    case TopRight:    minCols = trCols; break;
-    case BottomLeft:  minCols = blCols; break;
-    case BottomRight: minCols = brCols; break;
+    case TopRight:
+        minCols = trCols;
+        break;
+    case BottomLeft:
+        minCols = blCols;
+        break;
+    case BottomRight:
+        minCols = brCols;
+        break;
     default:
-    case TopLeft:     minCols = tlCols; break;
+    case TopLeft:
+        minCols = tlCols;
+        break;
     }
     if (minCols > tlCols) {
         minCols = tlCols;
@@ -696,8 +689,8 @@ void RevGraphView::updateZoomerPos()
 
 void RevGraphView::zoomRectMoved(qreal dx, qreal dy)
 {
-    //if (leftMargin()>0) dx = 0;
-    //if (topMargin()>0) dy = 0;
+    // if (leftMargin()>0) dx = 0;
+    // if (topMargin()>0) dy = 0;
     m_noUpdateZoomerPos = true;
     QScrollBar *hBar = horizontalScrollBar();
     QScrollBar *vBar = verticalScrollBar();
@@ -711,7 +704,7 @@ void RevGraphView::zoomRectMoveFinished()
 #if 0
     if (_zoomPosition == Auto)
 #endif
-        updateZoomerPos();
+    updateZoomerPos();
 }
 
 void RevGraphView::resizeEvent(QResizeEvent *e)
@@ -741,7 +734,6 @@ void RevGraphView::makeSelected(GraphTreeLabel *gtl)
     }
     m_Scene->update();
     m_CompleteView->update();
-
 }
 
 GraphTreeLabel *RevGraphView::firstLabelAt(const QPoint &pos) const
@@ -840,8 +832,7 @@ void RevGraphView::contextMenuEvent(QContextMenuEvent *e)
         if (!i->source().isEmpty() && getAction(i->nodename()) != 'D') {
             popup.addAction(i18n("Diff to previous"))->setData(301);
         }
-        if (m_Selected && m_Selected != i && getAction(m_Selected->nodename()) != 'D'
-                && getAction(i->nodename()) != 'D') {
+        if (m_Selected && m_Selected != i && getAction(m_Selected->nodename()) != 'D' && getAction(i->nodename()) != 'D') {
             popup.addAction(i18n("Diff to selected item"))->setData(302);
         }
         if (getAction(i->nodename()) != 'D') {
@@ -875,13 +866,11 @@ void RevGraphView::contextMenuEvent(QContextMenuEvent *e)
     case 101: {
         int dir = Kdesvnsettings::tree_direction();
         setNewDirection(++dir);
-    }
-    break;
+    } break;
     case 102: {
         int dir = Kdesvnsettings::tree_direction();
         setNewDirection(--dir);
-    }
-    break;
+    } break;
     case 201: {
         QString fn = QFileDialog::getSaveFileName(this, i18n("Save tree as PNG"), QString(), i18n("Image (*.png)"));
         if (!fn.isEmpty()) {
@@ -906,8 +895,7 @@ void RevGraphView::contextMenuEvent(QContextMenuEvent *e)
                 m_CompleteView->updateCurrentRect();
             }
         }
-    }
-    break;
+    } break;
     case 202:
         Kdesvnsettings::setTree_diff_rec(!Kdesvnsettings::tree_diff_rec());
         break;

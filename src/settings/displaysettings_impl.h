@@ -22,7 +22,7 @@
 
 #include "settings/ui_display_settings.h"
 
-class DisplaySettings_impl: public QWidget, public Ui::DisplaySettings
+class DisplaySettings_impl : public QWidget, public Ui::DisplaySettings
 {
     Q_OBJECT
 public:

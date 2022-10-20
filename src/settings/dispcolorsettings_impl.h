@@ -22,7 +22,7 @@
 
 #include "settings/ui_dispcolor_settings.h"
 
-class DispColorSettings_impl: public QWidget, public Ui::DispColorSettings
+class DispColorSettings_impl : public QWidget, public Ui::DispColorSettings
 {
     Q_OBJECT
 public:

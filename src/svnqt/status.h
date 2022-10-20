@@ -35,13 +35,13 @@
 #include <svn_wc.h>
 
 // svncpp
-#include <svnqt/svnqttypes.h>
-#include <svnqt/entry.h>
-#include <svnqt/pool.h>
-#include <svnqt/lock_entry.h>
 #include <svnqt/dirent.h>
+#include <svnqt/entry.h>
 #include <svnqt/info_entry.h>
+#include <svnqt/lock_entry.h>
+#include <svnqt/pool.h>
 #include <svnqt/svnqt_defines.h>
+#include <svnqt/svnqttypes.h>
 
 namespace svn
 {
@@ -93,94 +93,78 @@ public:
     /**
      * @return path of status entry
      */
-    const QString &
-    path() const;
+    const QString &path() const;
 
     /**
      * @return entry for this path
      * @retval entry.isValid () = false item is not versioned
      */
-    const Entry &
-    entry() const;
+    const Entry &entry() const;
     /**
      * @return The status of the node, based on the restructuring changes and if the
      * node has no restructuring changes the text and prop status
      */
-    svn_wc_status_kind
-    nodeStatus() const;
+    svn_wc_status_kind nodeStatus() const;
 
     /**
      * @return file status property enum of the "textual" component.
      */
-    svn_wc_status_kind
-    textStatus() const;
+    svn_wc_status_kind textStatus() const;
 
     /**
      * @return file status property enum of the "property" component.
      */
-    svn_wc_status_kind
-    propStatus() const;
+    svn_wc_status_kind propStatus() const;
 
     /**
      * @retval TRUE if under version control
      */
-    bool
-    isVersioned() const;
+    bool isVersioned() const;
 
     /**
      * @retval TRUE if under version control and not ignored
      */
-    bool
-    isRealVersioned()const;
+    bool isRealVersioned() const;
 
     /**
      * @retval TRUE if under version control and local modified
      */
-    bool
-    isModified()const;
+    bool isModified() const;
 
     /**
      * @retval TRUE if locked
      */
-    bool
-    isLocked() const;
+    bool isLocked() const;
 
     /**
      * @retval TRUE if copied
      */
-    bool
-    isCopied() const;
+    bool isCopied() const;
 
     /**
      * @retval TRUE if switched
      */
-    bool
-    isSwitched() const;
+    bool isSwitched() const;
     /**
      * @return the entry's text status in the repository
      */
-    svn_wc_status_kind
-    reposTextStatus() const;
+    svn_wc_status_kind reposTextStatus() const;
     /**
      * @return the entry's prop status in the repository
      */
-    svn_wc_status_kind
-    reposPropStatus() const;
+    svn_wc_status_kind reposPropStatus() const;
 
-    const LockEntry &
-    lockEntry() const;
+    const LockEntry &lockEntry() const;
 
-    bool
-    validReposStatus()const;
+    bool validReposStatus() const;
 
-    bool
-    validLocalStatus()const;
+    bool validLocalStatus() const;
 
     /**
      * assignment operator
      */
-    Status &
-    operator = (const Status &);
+    Status &operator=(const Status &);
+
 private:
     Status_private *m_Data;
 };

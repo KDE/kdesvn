@@ -26,11 +26,10 @@ class DiffSyntax : public QSyntaxHighlighter
 {
     Q_OBJECT
 public:
-  using QSyntaxHighlighter::QSyntaxHighlighter;
+    using QSyntaxHighlighter::QSyntaxHighlighter;
 
 protected:
     void highlightBlock(const QString &aText) override;
 };
 
 #endif
-

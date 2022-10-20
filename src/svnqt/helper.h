@@ -25,16 +25,16 @@
 #ifndef SVNQT_HELPER_H
 #define SVNQT_HELPER_H
 
-#include "svnqttypes.h"
 #include "pool.h"
 #include "revision.h"
+#include "svnqttypes.h"
 #include <svn_string.h>
 #include <svn_types.h>
 #include <svn_version.h>
 
 #include <iostream>
 
-#define SVN_VERSION_CHECK(major, minor, patch) ((major<<16)|(minor<<8)|(patch))
+#define SVN_VERSION_CHECK(major, minor, patch) ((major << 16) | (minor << 8) | (patch))
 #ifdef OVERRIDE_SVN_API_VERSION
 #define SVN_API_VERSION OVERRIDE_SVN_API_VERSION
 #else
@@ -49,27 +49,29 @@ class DepthToSvn
 {
 protected:
     svn_depth_t _value;
+
 public:
-    explicit DepthToSvn(const svn::Depth val): _value(svn_depth_unknown)
+    explicit DepthToSvn(const svn::Depth val)
+        : _value(svn_depth_unknown)
     {
         switch (val) {
         case DepthUnknown:
             _value = svn_depth_unknown;
             break;
         case DepthExclude:
-            _value =  svn_depth_exclude;
+            _value = svn_depth_exclude;
             break;
         case DepthEmpty:
-            _value =  svn_depth_empty;
+            _value = svn_depth_empty;
             break;
         case DepthFiles:
-            _value =  svn_depth_files;
+            _value = svn_depth_files;
             break;
         case DepthImmediates:
-            _value =  svn_depth_immediates;
+            _value = svn_depth_immediates;
             break;
         case DepthInfinity:
-            _value =  svn_depth_infinity;
+            _value = svn_depth_infinity;
             break;
         }
     }
@@ -84,8 +86,12 @@ class RevisionRangesToHash
 {
 protected:
     RevisionRanges m_ranges;
+
 public:
-    explicit RevisionRangesToHash(const RevisionRanges &_input): m_ranges(_input) {}
+    explicit RevisionRangesToHash(const RevisionRanges &_input)
+        : m_ranges(_input)
+    {
+    }
 
     apr_array_header_t *array(const Pool &pool)
     {
@@ -95,7 +101,7 @@ public:
         for (const RevisionRange &rr : qAsConst(m_ranges)) {
             range = (svn_opt_revision_range_t *)apr_palloc(pool, sizeof(*range));
             range->start = *rr.first.revision();
-            range->end  = *rr.second.revision();
+            range->end = *rr.second.revision();
             APR_ARRAY_PUSH(ranges, svn_opt_revision_range_t *) = range;
         }
         return ranges;
@@ -105,10 +111,14 @@ public:
 class Map2Hash
 {
     PropertiesMap _map;
-public:
-    explicit Map2Hash(const PropertiesMap &aMap): _map(aMap) {}
 
-    apr_hash_t *hash(const Pool &pool)const
+public:
+    explicit Map2Hash(const PropertiesMap &aMap)
+        : _map(aMap)
+    {
+    }
+
+    apr_hash_t *hash(const Pool &pool) const
     {
         if (_map.count() == 0) {
             return nullptr;
@@ -128,14 +138,14 @@ public:
 class Hash2Map
 {
     PropertiesMap _map;
+
 public:
     Hash2Map(apr_hash_t *hash, apr_pool_t *pool)
         : _map()
     {
         if (hash != nullptr) {
             apr_hash_index_t *hi;
-            for (hi = apr_hash_first(pool, hash); hi;
-                    hi = apr_hash_next(hi)) {
+            for (hi = apr_hash_first(pool, hash); hi; hi = apr_hash_next(hi)) {
                 const void *key;
                 void *val;
 
@@ -143,13 +153,12 @@ public:
                 const char *_k = (const char *)key;
                 const char *_v = ((const svn_string_t *)val)->data;
 
-                _map[ QString::fromUtf8(_k)] =
-                    QString::fromUtf8(_v);
+                _map[QString::fromUtf8(_k)] = QString::fromUtf8(_v);
             }
         }
     }
 
-    operator const PropertiesMap &()const
+    operator const PropertiesMap &() const
     {
         return _map;
     }

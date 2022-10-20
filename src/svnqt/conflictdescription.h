@@ -27,12 +27,12 @@
 struct svn_wc_conflict_description_t;
 struct svn_wc_conflict_description2_t;
 
+#include <svn_types.h>
 #include <svnqt/pool.h>
 #include <svnqt/svnqt_defines.h>
-#include <svn_types.h>
 
-#include <QString>
 #include <QSharedPointer>
+#include <QString>
 #include <QVector>
 
 namespace svn
@@ -42,32 +42,13 @@ namespace svn
  * does nothing when build against subversion prior 1.5
  * @since subversion 1.5
  * @author Rajko Albrecht (ral@alwins-world.de)
-*/
+ */
 class SVNQT_EXPORT ConflictDescription
 {
 public:
-    enum class ConflictType {
-        Text,
-        Property,
-        Tree
-    };
-    enum class ConflictReason {
-        Edited,
-        Obstructed,
-        Deleted,
-        Missing,
-        Unversioned,
-        Added,
-        Replaced,
-        MovedAway,
-        MovedHere
-    };
-    enum class ConflictAction {
-        Edit,
-        Add,
-        Delete,
-        Replace
-    };
+    enum class ConflictType { Text, Property, Tree };
+    enum class ConflictReason { Edited, Obstructed, Deleted, Missing, Unversioned, Added, Replaced, MovedAway, MovedHere };
+    enum class ConflictAction { Edit, Add, Delete, Replace };
     explicit ConflictDescription(const svn_wc_conflict_description_t *);
     explicit ConflictDescription(const svn_wc_conflict_description2_t *);
     ~ConflictDescription();
@@ -88,8 +69,10 @@ public:
     //! don't use it.
     ConflictDescription(const ConflictDescription &) = delete;
     ConflictDescription &operator=(const ConflictDescription &) = delete;
+
 protected:
     void init();
+
 protected:
     Pool m_pool;
     bool m_binary;

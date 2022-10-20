@@ -36,16 +36,15 @@
 #include <svn_client.h>
 #include <svn_path.h>
 
-#include "path.h"
+#include "client_parameter.h"
 #include "exception.h"
+#include "helper.h"
+#include "path.h"
 #include "pool.h"
 #include "revision.h"
 #include "svnqt_defines.h"
-#include "client_parameter.h"
-#include "helper.h"
 #include <QCoreApplication>
 #include <QDir>
-
 
 namespace svn
 {
@@ -73,12 +72,7 @@ static svn_error_t *ProplistReceiver(void *baton, const char *path, apr_hash_t *
     return SVN_NO_ERROR;
 }
 
-PathPropertiesMapListPtr
-Client_impl::proplist(const Path &path,
-                      const Revision &revision,
-                      const Revision &peg,
-                      Depth depth,
-                      const StringArray &changelists)
+PathPropertiesMapListPtr Client_impl::proplist(const Path &path, const Revision &revision, const Revision &peg, Depth depth, const StringArray &changelists)
 {
     Pool pool;
 
@@ -88,17 +82,15 @@ Client_impl::proplist(const Path &path,
     baton.m_context = m_context;
     baton.resultlist = path_prop_map_list;
     // todo svn 1.8: svn_client_proplist4
-    svn_error_t *error =
-        svn_client_proplist3(
-            path.cstr(),
-            peg.revision(),
-            revision.revision(),
-            internal::DepthToSvn(depth),
-            changelists.array(pool),
-            ProplistReceiver,
-            &baton,
-            *m_context,
-            pool);
+    svn_error_t *error = svn_client_proplist3(path.cstr(),
+                                              peg.revision(),
+                                              revision.revision(),
+                                              internal::DepthToSvn(depth),
+                                              changelists.array(pool),
+                                              ProplistReceiver,
+                                              &baton,
+                                              *m_context,
+                                              pool);
     if (error != nullptr) {
         throw ClientException(error);
     }
@@ -107,13 +99,7 @@ Client_impl::proplist(const Path &path,
 }
 
 QPair<qlonglong, PathPropertiesMapList>
-Client_impl::propget(const QString &propName,
-                     const Path &path,
-                     const Revision &revision,
-                     const Revision &peg,
-                     Depth depth,
-                     const StringArray &changelists
-                    )
+Client_impl::propget(const QString &propName, const Path &path, const Revision &revision, const Revision &peg, Depth depth, const StringArray &changelists)
 {
     Pool pool;
 
@@ -130,8 +116,7 @@ Client_impl::propget(const QString &propName,
                                              changelists.array(pool),
                                              *m_context,
                                              pool,
-                                             pool
-                                            );
+                                             pool);
 
     if (error != nullptr) {
         throw ClientException(error);
@@ -140,8 +125,7 @@ Client_impl::propget(const QString &propName,
     PathPropertiesMapList path_prop_map_list;
 
     apr_hash_index_t *hi;
-    for (hi = apr_hash_first(pool, props); hi;
-            hi = apr_hash_next(hi)) {
+    for (hi = apr_hash_first(pool, props); hi; hi = apr_hash_next(hi)) {
         PropertiesMap prop_map;
 
         const void *key;
@@ -156,8 +140,7 @@ Client_impl::propget(const QString &propName,
     return QPair<qlonglong, PathPropertiesMapList>(actual, path_prop_map_list);
 }
 
-void
-Client_impl::propset(const PropertiesParameter &params)
+void Client_impl::propset(const PropertiesParameter &params)
 {
     Pool pool;
     const svn_string_t *propval;
@@ -180,11 +163,9 @@ Client_impl::propset(const PropertiesParameter &params)
                                           nullptr, // we don't need a commit info - ignore
                                           nullptr,
                                           *m_context,
-                                          pool
-                                          );
+                                          pool);
     } else {
-        apr_array_header_t *targets = apr_array_make(pool, 1,
-                                                     sizeof(const char *));
+        apr_array_header_t *targets = apr_array_make(pool, 1, sizeof(const char *));
         APR_ARRAY_PUSH(targets, const char *) = tgtTmp;
         error = svn_client_propset_local(params.propertyName().toUtf8(),
                                          propval,
@@ -194,7 +175,6 @@ Client_impl::propset(const PropertiesParameter &params)
                                          params.changeList().array(pool),
                                          *m_context,
                                          pool);
-
     }
 
     if (error != nullptr) {
@@ -216,21 +196,13 @@ Client_impl::propset(const PropertiesParameter &params)
  * @param recurse
  * @return PropertiesList
  */
-QPair<qlonglong, PropertiesMap>
-Client_impl::revproplist(const Path &path,
-                         const Revision &revision)
+QPair<qlonglong, PropertiesMap> Client_impl::revproplist(const Path &path, const Revision &revision)
 {
     Pool pool;
 
     apr_hash_t *props;
     svn_revnum_t revnum;
-    svn_error_t *error =
-        svn_client_revprop_list(&props,
-                                path.cstr(),
-                                revision.revision(),
-                                &revnum,
-                                *m_context,
-                                pool);
+    svn_error_t *error = svn_client_revprop_list(&props, path.cstr(), revision.revision(), &revnum, *m_context, pool);
     if (error != nullptr) {
         throw ClientException(error);
     }
@@ -238,13 +210,12 @@ Client_impl::revproplist(const Path &path,
     PropertiesMap prop_map;
 
     apr_hash_index_t *hi;
-    for (hi = apr_hash_first(pool, props); hi;
-            hi = apr_hash_next(hi)) {
+    for (hi = apr_hash_first(pool, props); hi; hi = apr_hash_next(hi)) {
         const void *key;
         void *val;
 
         apr_hash_this(hi, &key, nullptr, &val);
-        prop_map[ QString::fromUtf8((const char *)key) ] = QString::fromUtf8(((const svn_string_t *)val)->data);
+        prop_map[QString::fromUtf8((const char *)key)] = QString::fromUtf8(((const svn_string_t *)val)->data);
     }
 
     return QPair<qlonglong, PropertiesMap>(revnum, prop_map);
@@ -260,24 +231,13 @@ Client_impl::revproplist(const Path &path,
  * @return PropertiesList
  */
 
-QPair<qlonglong, QString>
-Client_impl::revpropget(const QString &propName,
-                        const Path &path,
-                        const Revision &revision)
+QPair<qlonglong, QString> Client_impl::revpropget(const QString &propName, const Path &path, const Revision &revision)
 {
     Pool pool;
 
     svn_string_t *propval;
     svn_revnum_t revnum;
-    svn_error_t *error =
-        svn_client_revprop_get(
-            propName.toUtf8(),
-            &propval,
-            path.cstr(),
-            revision.revision(),
-            &revnum,
-            *m_context,
-            pool);
+    svn_error_t *error = svn_client_revprop_get(propName.toUtf8(), &propval, path.cstr(), revision.revision(), &revnum, *m_context, pool);
     if (error != nullptr) {
         throw ClientException(error);
     }
@@ -290,27 +250,24 @@ Client_impl::revpropget(const QString &propName,
     return QPair<qlonglong, QString>(revnum, QString::fromUtf8(propval->data));
 }
 
-qlonglong
-Client_impl::revpropset(const PropertiesParameter &param)
+qlonglong Client_impl::revpropset(const PropertiesParameter &param)
 {
     Pool pool;
 
-    const svn_string_t *propval
-        = param.propertyValue().isNull() ? nullptr : svn_string_create(param.propertyValue().toUtf8(), pool);
+    const svn_string_t *propval = param.propertyValue().isNull() ? nullptr : svn_string_create(param.propertyValue().toUtf8(), pool);
 
     svn_revnum_t revnum;
 
     const svn_string_t *oldpropval = param.propertyOriginalValue().isNull() ? nullptr : svn_string_create(param.propertyOriginalValue().toUtf8(), pool);
-    svn_error_t *error = svn_client_revprop_set2(
-                             param.propertyName().toUtf8(),
-                             propval,
-                             oldpropval,
-                             param.path().cstr(),
-                             param.revision().revision(),
-                             &revnum,
-                             param.force(),
-                             *m_context,
-                             pool);
+    svn_error_t *error = svn_client_revprop_set2(param.propertyName().toUtf8(),
+                                                 propval,
+                                                 oldpropval,
+                                                 param.path().cstr(),
+                                                 param.revision().revision(),
+                                                 &revnum,
+                                                 param.force(),
+                                                 *m_context,
+                                                 pool);
 
     if (error != nullptr) {
         throw ClientException(error);
@@ -319,25 +276,20 @@ Client_impl::revpropset(const PropertiesParameter &param)
     return revnum;
 }
 
-qlonglong
-Client_impl::revpropdel(const QString &propName,
-                        const Path &path,
-                        const Revision &revision)
+qlonglong Client_impl::revpropdel(const QString &propName, const Path &path, const Revision &revision)
 {
     Pool pool;
 
     svn_revnum_t revnum;
-    svn_error_t *error =
-        svn_client_revprop_set2(
-            propName.toUtf8(),
-            nullptr, // value = NULL
-            nullptr,
-            path.cstr(),
-            revision.revision(),
-            &revnum,
-            false,
-            *m_context,
-            pool);
+    svn_error_t *error = svn_client_revprop_set2(propName.toUtf8(),
+                                                 nullptr, // value = NULL
+                                                 nullptr,
+                                                 path.cstr(),
+                                                 revision.revision(),
+                                                 &revnum,
+                                                 false,
+                                                 *m_context,
+                                                 pool);
 
     if (error != nullptr) {
         throw ClientException(error);

@@ -31,7 +31,7 @@ class DbSettings;
 }
 class KEditListWidget;
 
-class DbSettings: public KSvnDialog
+class DbSettings : public KSvnDialog
 {
     Q_OBJECT
 public:
@@ -39,12 +39,14 @@ public:
 
 protected Q_SLOTS:
     void accept() override final;
+
 private:
     void init();
     explicit DbSettings(const QString &repository, QWidget *parent = nullptr);
     ~DbSettings();
 
     void store_list(KEditListWidget *, const QString &);
+
 private:
     QString m_repository;
     Ui::DbSettings *m_ui;

@@ -35,12 +35,12 @@
 #ifndef DRAWPARAMS_H
 #define DRAWPARAMS_H
 
-#include <qstring.h>
-#include <qwidget.h>
-#include <qpixmap.h>
-#include <qcolor.h>
 #include <qapplication.h>
+#include <qcolor.h>
+#include <qpixmap.h>
+#include <qstring.h>
 #include <qstringlist.h>
+#include <qwidget.h>
 
 class QString;
 
@@ -64,28 +64,27 @@ public:
      * drawing at bottom positions cuts from bottom.
      * Default usually gives positions clockwise according to field number.
      */
-    enum Position { TopLeft, TopCenter, TopRight,
-                    BottomLeft, BottomCenter, BottomRight,
-                    Default, Unknown
-                  };
+    enum Position { TopLeft, TopCenter, TopRight, BottomLeft, BottomCenter, BottomRight, Default, Unknown };
 
     // no constructor as this is an abstract class
-    virtual ~DrawParams() {}
+    virtual ~DrawParams()
+    {
+    }
 
-    virtual QString  text(int) const = 0;
-    virtual QPixmap  pixmap(int) const = 0;
+    virtual QString text(int) const = 0;
+    virtual QPixmap pixmap(int) const = 0;
     virtual Position position(int) const = 0;
     // 0: no limit, negative: leave at least -maxLines() free
-    virtual int      maxLines(int) const
+    virtual int maxLines(int) const
     {
         return 0;
     }
-    virtual int      fieldCount() const
+    virtual int fieldCount() const
     {
         return 0;
     }
 
-    virtual QColor   backColor() const
+    virtual QColor backColor() const
     {
         return Qt::white;
     }
@@ -116,25 +115,23 @@ public:
 /*
  * DrawParam with attributes stored
  */
-class StoredDrawParams: public DrawParams
+class StoredDrawParams : public DrawParams
 {
 public:
     explicit StoredDrawParams();
-    explicit StoredDrawParams(const QColor &c,
-                              bool selected = false,
-                              bool current = false);
+    explicit StoredDrawParams(const QColor &c, bool selected = false, bool current = false);
 
     // getters
-    QString  text(int) const override;
-    QPixmap  pixmap(int) const override;
+    QString text(int) const override;
+    QPixmap pixmap(int) const override;
     Position position(int) const override;
-    int      maxLines(int) const override;
-    int      fieldCount() const override
+    int maxLines(int) const override;
+    int fieldCount() const override
     {
         return _field.size();
     }
 
-    QColor   backColor() const override
+    QColor backColor() const override
     {
         return _backColor;
     }
@@ -162,8 +159,7 @@ public:
     QFont font() const override;
 
     // attribute setters
-    void setField(int f, const QString &t, const QPixmap &pm = QPixmap(),
-                  Position p = Default, int maxLines = 0);
+    void setField(int f, const QString &t, const QPixmap &pm = QPixmap(), Position p = Default, int maxLines = 0);
     void setText(int f, const QString &);
     void setPixmap(int f, QPixmap);
     void setPosition(int f, Position);

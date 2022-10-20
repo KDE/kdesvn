@@ -47,6 +47,7 @@ public:
 
     bool isOk() const override;
     long write(const char *data, const unsigned long max) override;
+
 private:
     SvnFileStream_private *m_FileData;
 };

@@ -19,25 +19,25 @@
  ***************************************************************************/
 
 #include "svnitem.h"
-#include "svnactions.h"
+#include "helpers/kdesvn_debug.h"
+#include "helpers/ktranslateurl.h"
 #include "kdesvn_part.h"
 #include "settings/kdesvnsettings.h"
+#include "svnactions.h"
 #include "svnqt/status.h"
 #include "svnqt/url.h"
-#include "helpers/ktranslateurl.h"
-#include "helpers/kdesvn_debug.h"
 
-#include <klocalizedstring.h>
-#include <kiconeffect.h>
 #include <kfileitem.h>
+#include <kiconeffect.h>
+#include <klocalizedstring.h>
 
-#include <QString>
 #include <QFileInfo>
 #include <QImage>
 #include <QMimeDatabase>
+#include <QMutexLocker>
 #include <QPainter>
 #include <QPixmap>
-#include <QMutexLocker>
+#include <QString>
 
 class SvnItem_p
 {
@@ -74,7 +74,6 @@ SvnItem_p::SvnItem_p(const svn::StatusPtr &aStat)
 {
     init();
 }
-
 
 void SvnItem_p::init()
 {
@@ -174,22 +173,22 @@ void SvnItem::setStat(const svn::StatusPtr &aStat)
     }
 }
 
-const QString &SvnItem::fullName()const
+const QString &SvnItem::fullName() const
 {
     return (p_Item->m_full);
 }
 
-const QString &SvnItem::shortName()const
+const QString &SvnItem::shortName() const
 {
     return (p_Item->m_short);
 }
 
-const QUrl &SvnItem::Url()const
+const QUrl &SvnItem::Url() const
 {
     return (p_Item->m_url);
 }
 
-bool SvnItem::isDir()const
+bool SvnItem::isDir() const
 {
     if (p_Item->m_Stat->entry().isValid() || isRemoteAdded()) {
         if (p_Item->m_Stat->entry().kind() != svn_node_unknown) {
@@ -201,7 +200,7 @@ bool SvnItem::isDir()const
     return f.isDir();
 }
 
-const QDateTime &SvnItem::fullDate()const
+const QDateTime &SvnItem::fullDate() const
 {
     return (p_Item->m_fullDate);
 }
@@ -330,8 +329,10 @@ QPixmap SvnItem::getPixmap(int size, bool overlay)
             if (overlay) {
                 QPixmap p2 = QIcon::fromTheme(QStringLiteral("kdesvnlocked")).pixmap(size);
                 if (!p2.isNull()) {
-                    QImage i1; i1 = p.toImage();
-                    QImage i2; i2 = p2.toImage();
+                    QImage i1;
+                    i1 = p.toImage();
+                    QImage i2;
+                    i2 = p2.toImage();
                     KIconEffect::overlay(i1, i2);
                     p.fromImage(i1);
                 }
@@ -354,17 +355,17 @@ QPixmap SvnItem::getPixmap(int size, bool overlay)
         }
     }
 #ifdef DEBUG_TIMER
-    //qCDebug(KDESVN_LOG)<<"Time getting icon: "<<_counttime.elapsed();
+    // qCDebug(KDESVN_LOG)<<"Time getting icon: "<<_counttime.elapsed();
 #endif
     return p;
 }
 
-bool SvnItem::isVersioned()const
+bool SvnItem::isVersioned() const
 {
     return p_Item->m_Stat->isVersioned();
 }
 
-bool SvnItem::isValid()const
+bool SvnItem::isValid() const
 {
     if (isVersioned()) {
         return true;
@@ -373,28 +374,27 @@ bool SvnItem::isValid()const
     return f.exists();
 }
 
-bool SvnItem::isRealVersioned()const
+bool SvnItem::isRealVersioned() const
 {
     return p_Item->m_Stat->isRealVersioned();
 }
 
-bool SvnItem::isIgnored()const
+bool SvnItem::isIgnored() const
 {
     return p_Item->m_Stat->nodeStatus() == svn_wc_status_ignored;
 }
 
-bool SvnItem::isRemoteAdded()const
+bool SvnItem::isRemoteAdded() const
 {
-    return getWrapper()->isUpdated(p_Item->m_Stat->path()) &&
-           p_Item->m_Stat->validReposStatus() && !p_Item->m_Stat->validLocalStatus();
+    return getWrapper()->isUpdated(p_Item->m_Stat->path()) && p_Item->m_Stat->validReposStatus() && !p_Item->m_Stat->validLocalStatus();
 }
 
-bool SvnItem::isLocalAdded()const
+bool SvnItem::isLocalAdded() const
 {
     return p_Item->m_Stat->nodeStatus() == svn_wc_status_added;
 }
 
-QString SvnItem::infoText()const
+QString SvnItem::infoText() const
 {
     QString info_text;
     if (!isVersioned()) {
@@ -459,22 +459,22 @@ QString SvnItem::infoText()const
     return info_text;
 }
 
-QString SvnItem::cmtAuthor()const
+QString SvnItem::cmtAuthor() const
 {
     return p_Item->m_Stat->entry().cmtAuthor();
 }
 
-long int SvnItem::cmtRev()const
+long int SvnItem::cmtRev() const
 {
     return p_Item->m_Stat->entry().cmtRev();
 }
 
-bool SvnItem::isLocked()const
+bool SvnItem::isLocked() const
 {
     return p_Item->m_Stat->entry().lockEntry().Locked();
 }
 
-QString SvnItem::lockOwner()const
+QString SvnItem::lockOwner() const
 {
     if (p_Item->m_Stat->entry().lockEntry().Locked()) {
         return p_Item->m_Stat->entry().lockEntry().Owner();
@@ -489,23 +489,22 @@ QString SvnItem::lockOwner()const
 /*!
     \fn SvnItem::isModified()
  */
-bool SvnItem::isModified()const
+bool SvnItem::isModified() const
 {
-    return p_Item->m_Stat->nodeStatus() == svn_wc_status_modified
-           || p_Item->m_Stat->nodeStatus() == svn_wc_status_replaced;
+    return p_Item->m_Stat->nodeStatus() == svn_wc_status_modified || p_Item->m_Stat->nodeStatus() == svn_wc_status_replaced;
 }
 
-bool SvnItem::isChanged()const
+bool SvnItem::isChanged() const
 {
     return isRealVersioned() && (isModified() || isDeleted() || isLocalAdded());
 }
 
-bool SvnItem::isChildModified()const
+bool SvnItem::isChildModified() const
 {
     return getWrapper()->checkModifiedCache(fullName());
 }
 
-const svn::StatusPtr &SvnItem::stat()const
+const svn::StatusPtr &SvnItem::stat() const
 {
     return p_Item->m_Stat;
 }
@@ -513,22 +512,22 @@ const svn::StatusPtr &SvnItem::stat()const
 /*!
     \fn SvnItem::isNormal()const
  */
-bool SvnItem::isNormal()const
+bool SvnItem::isNormal() const
 {
     return p_Item->m_Stat->nodeStatus() == svn_wc_status_normal;
 }
 
-bool SvnItem::isMissing()const
+bool SvnItem::isMissing() const
 {
     return p_Item->m_Stat->nodeStatus() == svn_wc_status_missing;
 }
 
-bool SvnItem::isDeleted()const
+bool SvnItem::isDeleted() const
 {
     return p_Item->m_Stat->nodeStatus() == svn_wc_status_deleted;
 }
 
-bool SvnItem::isConflicted()const
+bool SvnItem::isConflicted() const
 {
     return p_Item->m_Stat->nodeStatus() == svn_wc_status_conflicted;
 }
@@ -580,7 +579,7 @@ const QString &SvnItem::getToolTipText()
             }
         } else if (!p_Item->m_fitem.isNull()) {
             // KF5: TODO
-//            text = p_Item->m_fitem.getToolTipText(6);
+            //            text = p_Item->m_fitem.getToolTipText(6);
         }
         QMutexLocker ml(&(p_Item->_infoTextMutex));
         p_Item->m_infoText = text;
@@ -592,18 +591,19 @@ const QString &SvnItem::getToolTipText()
 void SvnItem::generateToolTip(const svn::InfoEntry &entry)
 {
     QString text;
-    if (isRealVersioned() &&  !p_Item->m_Stat->entry().url().isEmpty()) {
+    if (isRealVersioned() && !p_Item->m_Stat->entry().url().isEmpty()) {
         SvnActions *wrap = getWrapper();
         if (wrap) {
-            svn::InfoEntries e; e.append(entry);
+            svn::InfoEntries e;
+            e.append(entry);
             text = wrap->getInfo(e, fullName(), false);
         }
         if (!p_Item->m_fitem.isNull()) {
             // KF5: TODO
-//            text += p_Item->m_fitem.getToolTipText(0);
+            //            text += p_Item->m_fitem.getToolTipText(0);
         }
     } else if (!p_Item->m_fitem.isNull()) {
-//        text = p_Item->m_fitem.getToolTipText(6);
+        //        text = p_Item->m_fitem.getToolTipText(6);
     }
     {
         QMutexLocker ml(&(p_Item->_infoTextMutex));

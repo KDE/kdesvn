@@ -22,20 +22,19 @@
 
 #include "ui_hotcopydlg.h"
 
-#include <QWidget>
 #include <QString>
+#include <QWidget>
 
-class HotcopyDlg_impl: public QWidget, public Ui::HotcopyDlg
+class HotcopyDlg_impl : public QWidget, public Ui::HotcopyDlg
 {
     Q_OBJECT
 public:
     explicit HotcopyDlg_impl(QWidget *parent = nullptr);
     ~HotcopyDlg_impl();
 
-    QString srcPath()const;
-    QString destPath()const;
-    bool cleanLogs()const;
-
+    QString srcPath() const;
+    QString destPath() const;
+    bool cleanLogs() const;
 };
 
 #endif

@@ -40,7 +40,7 @@ public:
     explicit ReposNotify(const svn_repos_notify_t *notify);
     ~ReposNotify();
 
-    operator const QString &()const;
+    operator const QString &() const;
 };
 }
 }

@@ -40,8 +40,6 @@ protected:
 
 protected slots:
     /*$PROTECTED_SLOTS$*/
-
 };
 
 #endif
-

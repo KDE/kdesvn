@@ -23,18 +23,26 @@
  ***************************************************************************/
 
 #include "client_update_parameter.h"
+#include "path.h"
 #include "svnqttypes.h"
 #include "targets.h"
-#include "path.h"
 
 #include "client_parameter_macros.h"
 
 namespace svn
 {
-struct  SVNQT_NOEXPORT UpdateParameterData {
+struct SVNQT_NOEXPORT UpdateParameterData {
     UpdateParameterData()
-        : _destPaths(), _srcRevision(), _depth(DepthInfinity), _ignore_externals(false), _allow_unversioned(false), _sticky_depth(true), _make_parents(false), _add_as_modification(true)
-    {}
+        : _destPaths()
+        , _srcRevision()
+        , _depth(DepthInfinity)
+        , _ignore_externals(false)
+        , _allow_unversioned(false)
+        , _sticky_depth(true)
+        , _make_parents(false)
+        , _add_as_modification(true)
+    {
+    }
     Targets _destPaths;
     Revision _srcRevision;
     Depth _depth;
@@ -47,10 +55,12 @@ struct  SVNQT_NOEXPORT UpdateParameterData {
 
 UpdateParameter::UpdateParameter()
     : _data(new UpdateParameterData)
-{}
+{
+}
 
 UpdateParameter::~UpdateParameter()
-{}
+{
+}
 
 GETSET(UpdateParameter, Targets, _destPaths, targets)
 GETSET(UpdateParameter, Revision, _srcRevision, revision)
@@ -62,4 +72,3 @@ GETSETSI(UpdateParameter, bool, _sticky_depth, sticky_depth)
 GETSETSI(UpdateParameter, bool, _make_parents, make_parents)
 GETSETSI(UpdateParameter, bool, _add_as_modification, add_as_modification)
 }
-

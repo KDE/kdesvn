@@ -20,12 +20,15 @@
 #include "graphtreelabel.h"
 #include "graphtree_defines.h"
 
-#include <QStyleOptionGraphicsItem>
 #include <QPainter>
 #include <QPixmap>
+#include <QStyleOptionGraphicsItem>
 
 GraphTreeLabel::GraphTreeLabel(const QString &text, const QString &_nodename, const QRectF &r, QGraphicsItem *p)
-    : QGraphicsRectItem(r, p), StoredDrawParams(), m_Nodename(_nodename), m_SourceNode()
+    : QGraphicsRectItem(r, p)
+    , StoredDrawParams()
+    , m_Nodename(_nodename)
+    , m_SourceNode()
 {
     m_Nodename = _nodename;
     setText(0, text);
@@ -37,12 +40,12 @@ GraphTreeLabel::~GraphTreeLabel()
 {
 }
 
-const QString &GraphTreeLabel::nodename()const
+const QString &GraphTreeLabel::nodename() const
 {
     return m_Nodename;
 }
 
-int GraphTreeLabel::type()const
+int GraphTreeLabel::type() const
 {
     return GRAPHTREE_LABEL;
 }
@@ -70,7 +73,7 @@ void GraphTreeLabel::setSelected(bool s)
     update();
 }
 
-const QString &GraphTreeLabel::source()const
+const QString &GraphTreeLabel::source() const
 {
     return m_SourceNode;
 }
@@ -102,7 +105,7 @@ void GraphEdge::paint(QPainter *p, const QStyleOptionGraphicsItem *options, QWid
     p->restore();
 }
 
-const QPolygonF &GraphEdge::controlPoints()const
+const QPolygonF &GraphEdge::controlPoints() const
 {
     return _points;
 }
@@ -120,13 +123,14 @@ void GraphEdge::setControlPoints(const QPolygonF &pa)
     setPath(path);
 }
 
-int GraphEdge::type()const
+int GraphEdge::type() const
 {
     return GRAPHTREE_LINE;
 }
 
 GraphEdgeArrow::GraphEdgeArrow(GraphEdge *_parent, QGraphicsItem *p)
-    : QGraphicsPolygonItem(p), _edge(_parent)
+    : QGraphicsPolygonItem(p)
+    , _edge(_parent)
 {
 }
 
@@ -139,7 +143,7 @@ void GraphEdgeArrow::paint(QPainter *p, const QStyleOptionGraphicsItem *, QWidge
     p->restore();
 }
 
-int GraphEdgeArrow::type()const
+int GraphEdgeArrow::type() const
 {
     return GRAPHTREE_ARROW;
 }
@@ -156,7 +160,6 @@ GraphMark::GraphMark(GraphTreeLabel *n, QGraphicsItem *p)
     : QGraphicsRectItem(p)
 {
     if (!_p) {
-
         int d = 5;
         float v1 = 130.0f, v2 = 10.0f, v = v1, f = 1.03f;
 
@@ -187,20 +190,19 @@ GraphMark::GraphMark(GraphTreeLabel *n, QGraphicsItem *p)
         }
     }
 
-    setRect(QRectF(n->rect().center().x() - _p->width() / 2,
-                   n->rect().center().y() - _p->height() / 2, _p->width(), _p->height()));
+    setRect(QRectF(n->rect().center().x() - _p->width() / 2, n->rect().center().y() - _p->height() / 2, _p->width(), _p->height()));
 }
 
-GraphMark::~ GraphMark()
+GraphMark::~GraphMark()
 {
 }
 
-bool GraphMark::hit(const QPoint &)const
+bool GraphMark::hit(const QPoint &) const
 {
     return false;
 }
 
-int GraphMark::type()const
+int GraphMark::type() const
 {
     return GRAPHTREE_MARK;
 }

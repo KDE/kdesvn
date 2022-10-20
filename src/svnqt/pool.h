@@ -57,8 +57,7 @@ public:
     /**
      * @return apr handle to the pool
      */
-    apr_pool_t *
-    pool() const;
+    apr_pool_t *pool() const;
 
     /**
      * operator to return apr handle to the pool
@@ -72,6 +71,7 @@ public:
      * release pool and create a new one
      */
     void renew();
+
 private:
     apr_pool_t *m_parent;
     apr_pool_t *m_pool;

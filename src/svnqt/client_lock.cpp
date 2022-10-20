@@ -29,39 +29,25 @@
 
 #include "exception.h"
 #include "pool.h"
-#include "targets.h"
 #include "svnqt_defines.h"
+#include "targets.h"
 
 namespace svn
 {
 
-void
-Client_impl::lock(const Targets &targets,
-                  const QString &message,
-                  bool steal_lock)
+void Client_impl::lock(const Targets &targets, const QString &message, bool steal_lock)
 {
     Pool pool;
-    svn_error_t *error =
-        svn_client_lock(const_cast<apr_array_header_t *>(targets.array(pool)),
-                        message.toUtf8(),
-                        steal_lock,
-                        *m_context,
-                        pool);
+    svn_error_t *error = svn_client_lock(const_cast<apr_array_header_t *>(targets.array(pool)), message.toUtf8(), steal_lock, *m_context, pool);
     if (error != nullptr) {
         throw ClientException(error);
     }
 }
 
-void
-Client_impl::unlock(const Targets &targets,
-                    bool break_lock)
+void Client_impl::unlock(const Targets &targets, bool break_lock)
 {
     Pool pool;
-    svn_error_t *error =
-        svn_client_unlock(const_cast<apr_array_header_t *>(targets.array(pool)),
-                          break_lock,
-                          *m_context,
-                          pool);
+    svn_error_t *error = svn_client_unlock(const_cast<apr_array_header_t *>(targets.array(pool)), break_lock, *m_context, pool);
     if (error != nullptr) {
         throw ClientException(error);
     }

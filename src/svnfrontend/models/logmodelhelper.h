@@ -20,17 +20,19 @@
 #ifndef LOGMODELHELPER_H
 #define LOGMODELHELPER_H
 
-#include <QTreeWidgetItem>
 #include <QString>
+#include <QTreeWidgetItem>
 
-#include "svnqt/svnqttypes.h"
 #include "svnqt/log_entry.h"
+#include "svnqt/svnqttypes.h"
 
-class LogChangePathItem: public QTreeWidgetItem
+class LogChangePathItem : public QTreeWidgetItem
 {
 public:
     explicit LogChangePathItem(const svn::LogChangePathEntry &, QTreeWidget *view = nullptr);
-    virtual ~LogChangePathItem() {}
+    virtual ~LogChangePathItem()
+    {
+    }
 
     char action() const
     {
@@ -59,30 +61,29 @@ protected:
 
 class SvnLogModelNode
 {
-
 public:
     explicit SvnLogModelNode(const svn::LogEntry &_entry);
 
-    const svn::LogChangePathEntries &changedPaths()const;
+    const svn::LogChangePathEntries &changedPaths() const;
     void setChangedPaths(const svn::LogEntry &);
 
-    qlonglong revision()const
+    qlonglong revision() const
     {
         return _data.revision;
     }
-    const QString &author()const
+    const QString &author() const
     {
         return _data.author;
     }
-    const QString &message()const
+    const QString &message() const
     {
         return _data.message;
     }
-    const QString &shortMessage()const
+    const QString &shortMessage() const
     {
         return _shortMessage;
     }
-    const QDateTime &date()const
+    const QDateTime &date() const
     {
         return _date;
     }
@@ -94,16 +95,16 @@ public:
     {
         _realName = _n;
     }
-    const QString &realName()const
+    const QString &realName() const
     {
         return _realName;
     }
 
-    bool copiedFrom(QString &_n, qlonglong &_rev)const;
+    bool copiedFrom(QString &_n, qlonglong &_rev) const;
     static bool isParent(const QString &_par, const QString &tar);
 
 protected:
-    //we require the ownership!
+    // we require the ownership!
     svn::LogEntry _data;
     QString _realName;
     QDateTime _date;
@@ -111,4 +112,3 @@ protected:
 };
 
 #endif
-

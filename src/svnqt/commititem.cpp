@@ -109,47 +109,47 @@ CommitItem::~CommitItem()
 {
 }
 
-const QString &CommitItem::path()const
+const QString &CommitItem::path() const
 {
     return m_Path;
 }
 
-const QString &CommitItem::url()const
+const QString &CommitItem::url() const
 {
     return m_Url;
 }
 
-const QString &CommitItem::copyfromurl()const
+const QString &CommitItem::copyfromurl() const
 {
     return m_CopyFromUrl;
 }
 
-const PropertiesMap &CommitItem::properties()const
+const PropertiesMap &CommitItem::properties() const
 {
     return m_CommitProperties;
 }
 
-svn_revnum_t CommitItem::revision()const
+svn_revnum_t CommitItem::revision() const
 {
     return m_Revision;
 }
 
-svn_revnum_t CommitItem::copyfromrevision()const
+svn_revnum_t CommitItem::copyfromrevision() const
 {
     return m_CopyFromRevision;
 }
 
-svn_node_kind_t CommitItem::kind()const
+svn_node_kind_t CommitItem::kind() const
 {
     return m_Kind;
 }
 
-apr_byte_t CommitItem::state()const
+apr_byte_t CommitItem::state() const
 {
     return m_State;
 }
 
-char CommitItem::actionType()const
+char CommitItem::actionType() const
 {
     char r = 0;
     if (m_State & SVN_CLIENT_COMMIT_ITEM_IS_COPY) {
@@ -158,8 +158,7 @@ char CommitItem::actionType()const
         r = 'A';
     } else if (m_State & SVN_CLIENT_COMMIT_ITEM_DELETE) {
         r = 'D';
-    } else if (m_State & SVN_CLIENT_COMMIT_ITEM_PROP_MODS ||
-               m_State & SVN_CLIENT_COMMIT_ITEM_TEXT_MODS) {
+    } else if (m_State & SVN_CLIENT_COMMIT_ITEM_PROP_MODS || m_State & SVN_CLIENT_COMMIT_ITEM_TEXT_MODS) {
         r = 'M';
     } else if (m_State & SVN_CLIENT_COMMIT_ITEM_LOCK_TOKEN) {
         r = 'L';

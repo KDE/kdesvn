@@ -22,7 +22,7 @@
 
 #include "settings/ui_diffmergesettings.h"
 
-class DiffMergeSettings_impl: public QWidget, public Ui::DiffMergeSettings
+class DiffMergeSettings_impl : public QWidget, public Ui::DiffMergeSettings
 {
     Q_OBJECT
 public:

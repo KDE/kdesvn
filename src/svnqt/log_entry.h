@@ -32,8 +32,8 @@
 #ifndef SVNQT_LOG_ENTRY_H
 #define SVNQT_LOG_ENTRY_H
 
-#include <svnqt/svnqt_defines.h>
 #include <svnqt/datetime.h>
+#include <svnqt/svnqt_defines.h>
 
 #include <QList>
 #include <QString>
@@ -50,18 +50,15 @@ namespace svn
 {
 
 class StringArray;
-struct LogChangePathEntry
-{
+struct LogChangePathEntry {
     LogChangePathEntry() = default;
-    LogChangePathEntry(const QString &path_,
-                       char action_,
-                       const QString &copyFromPath_,
-                       const svn_revnum_t copyFromRevision_)
+    LogChangePathEntry(const QString &path_, char action_, const QString &copyFromPath_, const svn_revnum_t copyFromRevision_)
         : path(path_)
         , copyFromPath(copyFromPath_)
         , copyFromRevision(copyFromRevision_)
         , action(action_)
-    {}
+    {
+    }
 
     QString path;
     QString copyFromPath;

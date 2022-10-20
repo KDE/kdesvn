@@ -71,6 +71,7 @@ protected slots:
 
 signals:
     void executeMe();
+
 protected:
     virtual bool scanRevision();
     virtual bool askRevision();

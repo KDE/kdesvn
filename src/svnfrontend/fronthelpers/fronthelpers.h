@@ -24,9 +24,13 @@
 class MinutesToMsec
 {
     int m;
+
 public:
-    explicit MinutesToMsec(int minutes): m(minutes * 60 * 1000) {}
-    operator int ()const
+    explicit MinutesToMsec(int minutes)
+        : m(minutes * 60 * 1000)
+    {
+    }
+    operator int() const
     {
         return m;
     }

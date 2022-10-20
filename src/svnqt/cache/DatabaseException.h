@@ -31,18 +31,22 @@ namespace svn
 namespace cache
 {
 
-class SVNQT_EXPORT DatabaseException: public svn::Exception
+class SVNQT_EXPORT DatabaseException : public svn::Exception
 {
 private:
-    DatabaseException()throw();
+    DatabaseException() throw();
     int m_number;
 
 public:
-    DatabaseException(const DatabaseException &src)throw()
-        : Exception(src.msg()), m_number(src.number())
-    {}
-    DatabaseException(const QString &msg, int aNumber = -1)throw();
-    virtual ~DatabaseException()throw() {}
+    DatabaseException(const DatabaseException &src) throw()
+        : Exception(src.msg())
+        , m_number(src.number())
+    {
+    }
+    DatabaseException(const QString &msg, int aNumber = -1) throw();
+    virtual ~DatabaseException() throw()
+    {
+    }
     int number() const
     {
         return m_number;

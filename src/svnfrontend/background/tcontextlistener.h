@@ -63,7 +63,7 @@ Q_SIGNALS:
     void signal_contextSslClientCertPwPrompt();
     void signal_contextSslServerTrustPrompt();
     void signal_contextNotify(const QString &msg);
-protected Q_SLOTS:  // executed in main thread
+protected Q_SLOTS: // executed in main thread
     virtual void event_contextGetLogin();
     virtual void event_contextGetSavedLogin();
     virtual void event_contextGetLogMessage();

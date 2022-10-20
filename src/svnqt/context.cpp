@@ -62,67 +62,57 @@ Context::~Context()
     delete m;
 }
 
-void
-Context::setAuthCache(bool value)
+void Context::setAuthCache(bool value)
 {
     m->setAuthCache(value);
 }
 
-void
-Context::setLogin(const QString &username, const QString &password)
+void Context::setLogin(const QString &username, const QString &password)
 {
     m->setLogin(username, password);
 }
 
-Context::operator svn_client_ctx_t *()const
+Context::operator svn_client_ctx_t *() const
 {
     return m->ctx();
 }
 
-svn_client_ctx_t *
-Context::ctx()const
+svn_client_ctx_t *Context::ctx() const
 {
     return m->ctx();
 }
 
-void
-Context::setLogMessage(const QString &msg)
+void Context::setLogMessage(const QString &msg)
 {
     m->setLogMessage(msg);
 }
 
-const QString &
-Context::getUsername() const
+const QString &Context::getUsername() const
 {
     return m->getUsername();
 }
 
-const QString &
-Context::getPassword() const
+const QString &Context::getPassword() const
 {
     return m->getPassword();
 }
 
-const QString &
-Context::getLogMessage() const
+const QString &Context::getLogMessage() const
 {
     return m->getLogMessage();
 }
 
-void
-Context::setListener(ContextListener *listener)
+void Context::setListener(ContextListener *listener)
 {
     m->setListener(listener);
 }
 
-ContextListener *
-Context::getListener() const
+ContextListener *Context::getListener() const
 {
     return m->getListener();
 }
 
-void
-Context::reset()
+void Context::reset()
 {
     m->reset();
 }

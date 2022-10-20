@@ -19,31 +19,31 @@
  ***************************************************************************/
 
 #include "kdesvn_part.h"
-#include "settings/kdesvnsettings.h"
-#include "settings/displaysettings_impl.h"
-#include "settings/dispcolorsettings_impl.h"
-#include "settings/revisiontreesettingsdlg_impl.h"
-#include "settings/diffmergesettings_impl.h"
-#include "settings/subversionsettings_impl.h"
-#include "settings/cmdexecsettings_impl.h"
-#include "settings/polling_settings_impl.h"
-#include "kdesvnview.h"
-#include "svnqt/version_check.h"
-#include "svnqt/url.h"
 #include "helpers/kdesvn_debug.h"
 #include "helpers/sshagent.h"
+#include "kdesvnview.h"
+#include "settings/cmdexecsettings_impl.h"
+#include "settings/diffmergesettings_impl.h"
+#include "settings/dispcolorsettings_impl.h"
+#include "settings/displaysettings_impl.h"
+#include "settings/kdesvnsettings.h"
+#include "settings/polling_settings_impl.h"
+#include "settings/revisiontreesettingsdlg_impl.h"
+#include "settings/subversionsettings_impl.h"
 #include "svnfrontend/database/dboverview.h"
+#include "svnqt/url.h"
+#include "svnqt/version_check.h"
 
-#include <ktoggleaction.h>
-#include <kactioncollection.h>
-#include <kstandardaction.h>
-#include <kxmlguifactory.h>
 #include <kaboutapplicationdialog.h>
-#include <kconfigdialog.h>
 #include <kaboutdata.h>
-#include <klocalizedstring.h>
+#include <kactioncollection.h>
+#include <kconfigdialog.h>
 #include <khelpclient.h>
+#include <klocalizedstring.h>
 #include <kpluginfactory.h>
+#include <kstandardaction.h>
+#include <ktoggleaction.h>
+#include <kxmlguifactory.h>
 
 K_PLUGIN_CLASS_WITH_JSON(kdesvnpart, "kdesvnpart.json")
 
@@ -68,7 +68,7 @@ void kdesvnpart::init(QWidget *parentWidget, bool full)
     m_aboutDlg = nullptr;
     // we need an instance
     // TODO: KF5 port
-    //setComponentData(KdesvnFactory::componentData());
+    // setComponentData(KdesvnFactory::componentData());
 
     m_browserExt = new KdesvnBrowserExtension(this);
 
@@ -100,7 +100,7 @@ void kdesvnpart::init(QWidget *parentWidget, bool full)
 kdesvnpart::~kdesvnpart()
 {
     ///@todo replace with KDE4 like stuff
-    //kdesvnpartFactory::instance()->config()->sync();
+    // kdesvnpartFactory::instance()->config()->sync();
 }
 
 void kdesvnpart::slotUrlChanged(const QUrl &url)
@@ -259,11 +259,11 @@ bool kdesvnpart::closeUrl()
 
 KdesvnBrowserExtension::KdesvnBrowserExtension(kdesvnpart *p)
     : KParts::BrowserExtension(p)
-{}
+{
+}
 
 KdesvnBrowserExtension::~KdesvnBrowserExtension()
 {
-
 }
 
 void KdesvnBrowserExtension::properties()
@@ -277,7 +277,8 @@ void KdesvnBrowserExtension::properties()
 void kdesvnpart::showAboutApplication()
 {
     if (!m_aboutDlg) {
-        QString m_Extratext = i18n("Built with Subversion library: %1\nRunning Subversion library: %2", svn::Version::linked_version(), svn::Version::running_version());
+        QString m_Extratext =
+            i18n("Built with Subversion library: %1\nRunning Subversion library: %2", svn::Version::linked_version(), svn::Version::running_version());
 
         KAboutData about(QStringLiteral("kdesvnpart"),
                          i18n("kdesvn Part"),
@@ -319,27 +320,22 @@ void kdesvnpart::slotShowSettings()
     if (KConfigDialog::showDialog(QStringLiteral("kdesvnpart_settings"))) {
         return;
     }
-    KConfigDialog *dialog = new KConfigDialog(widget(),
-            QStringLiteral("kdesvnpart_settings"),
-            Kdesvnsettings::self());
+    KConfigDialog *dialog = new KConfigDialog(widget(), QStringLiteral("kdesvnpart_settings"), Kdesvnsettings::self());
     dialog->setFaceType(KPageDialog::List);
 
     // TODO: KF5
-    //dialog->setHelp("setup", "kdesvn");
-    dialog->addPage(new DisplaySettings_impl(nullptr),
-                    i18n("General"), QStringLiteral("configure"), i18n("General Settings"), true);
-    dialog->addPage(new SubversionSettings_impl(nullptr),
-                    i18n("Subversion"), QStringLiteral("kdesvn"), i18n("Subversion Settings"), true);
-    dialog->addPage(new PollingSettings_impl(nullptr),
-                    i18n("Timed jobs"), QStringLiteral("kdesvnclock"), i18n("Settings for timed jobs"), true);
-    dialog->addPage(new DiffMergeSettings_impl(nullptr),
-                    i18n("Diff & Merge"), QStringLiteral("kdesvnmerge"), i18n("Settings for diff and merge"), true);
-    dialog->addPage(new DispColorSettings_impl(nullptr),
-                    i18n("Colors"), QStringLiteral("kdesvncolors"), i18n("Color Settings"), true);
-    dialog->addPage(new RevisiontreeSettingsDlg_impl(nullptr),
-                    i18n("Revision tree"), QStringLiteral("kdesvntree"), i18n("Revision tree Settings"), true);
+    // dialog->setHelp("setup", "kdesvn");
+    dialog->addPage(new DisplaySettings_impl(nullptr), i18n("General"), QStringLiteral("configure"), i18n("General Settings"), true);
+    dialog->addPage(new SubversionSettings_impl(nullptr), i18n("Subversion"), QStringLiteral("kdesvn"), i18n("Subversion Settings"), true);
+    dialog->addPage(new PollingSettings_impl(nullptr), i18n("Timed jobs"), QStringLiteral("kdesvnclock"), i18n("Settings for timed jobs"), true);
+    dialog->addPage(new DiffMergeSettings_impl(nullptr), i18n("Diff & Merge"), QStringLiteral("kdesvnmerge"), i18n("Settings for diff and merge"), true);
+    dialog->addPage(new DispColorSettings_impl(nullptr), i18n("Colors"), QStringLiteral("kdesvncolors"), i18n("Color Settings"), true);
+    dialog->addPage(new RevisiontreeSettingsDlg_impl(nullptr), i18n("Revision tree"), QStringLiteral("kdesvntree"), i18n("Revision tree Settings"), true);
     dialog->addPage(new CmdExecSettings_impl(nullptr),
-                    i18n("KIO / Command line"), QStringLiteral("kdesvnterminal"), i18n("Settings for command line and KIO execution"), true);
+                    i18n("KIO / Command line"),
+                    QStringLiteral("kdesvnterminal"),
+                    i18n("Settings for command line and KIO execution"),
+                    true);
 
     connect(dialog, &KConfigDialog::settingsChanged, this, &kdesvnpart::slotSettingsChanged);
     dialog->show();

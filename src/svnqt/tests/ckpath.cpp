@@ -22,9 +22,9 @@
  * history and logs, available at https://commits.kde.org/kdesvn.          *
  ***************************************************************************/
 #include "svnqt/path.h"
-#include <qstring.h>
 #include "svnqt/svnqt_defines.h"
 #include <iostream>
+#include <qstring.h>
 
 int main(int, char **)
 {
@@ -46,4 +46,3 @@ int main(int, char **)
     }
     return 0;
 }
-

@@ -20,11 +20,11 @@
 #include "blamedisplay.h"
 #include "ui_blamedisplay.h"
 
-#include "simple_logcb.h"
-#include "settings/kdesvnsettings.h"
-#include "svnqt/log_entry.h"
 #include "fronthelpers/cursorstack.h"
 #include "ksvnwidgets/encodingselector_impl.h"
+#include "settings/kdesvnsettings.h"
+#include "simple_logcb.h"
+#include "svnqt/log_entry.h"
 
 #include <KColorScheme>
 #include <KTextEdit>
@@ -48,16 +48,17 @@
 #define COL_AUT 3
 #define COL_LINE 4
 
-#define TREE_ITEM_TYPE QTreeWidgetItem::UserType+1
+#define TREE_ITEM_TYPE QTreeWidgetItem::UserType + 1
 
 #define BORDER 4
 
-class LocalizedAnnotatedLine: public svn::AnnotateLine
+class LocalizedAnnotatedLine : public svn::AnnotateLine
 {
 public:
     explicit LocalizedAnnotatedLine(const svn::AnnotateLine &al)
         : svn::AnnotateLine(al)
-    {}
+    {
+    }
 
     void localeChanged()
     {
@@ -74,11 +75,11 @@ public:
         }
     }
 
-    const QString &tAuthor()const
+    const QString &tAuthor() const
     {
         return m_tAuthor;
     }
-    const QString &tLine()const
+    const QString &tLine() const
     {
         return m_tLine;
     }
@@ -99,13 +100,13 @@ protected:
 QTextCodec *LocalizedAnnotatedLine::cc = nullptr;
 bool LocalizedAnnotatedLine::codec_searched = false;
 
-class BlameTreeItem: public QTreeWidgetItem
+class BlameTreeItem : public QTreeWidgetItem
 {
 public:
     BlameTreeItem(const svn::AnnotateLine &al, bool disp)
-      : QTreeWidgetItem(TREE_ITEM_TYPE)
-      , m_Content(al)
-      , m_disp(disp)
+        : QTreeWidgetItem(TREE_ITEM_TYPE)
+        , m_Content(al)
+        , m_disp(disp)
     {
         for (int i = 0; i <= COL_LINE; ++i) {
             setTextAlignment(i, Qt::AlignLeft | Qt::AlignVCenter);
@@ -140,7 +141,6 @@ protected:
     void display();
 };
 
-
 void BlameTreeItem::display()
 {
     setTextAlignment(COL_LINENR, Qt::AlignRight | Qt::AlignVCenter);
@@ -156,8 +156,7 @@ void BlameTreeItem::display()
     localeChanged();
 }
 
-struct BlameDisplayData
-{
+struct BlameDisplayData {
     QHash<svn_revnum_t, QColor> m_shadingMap;
     QHash<svn_revnum_t, svn::LogEntry> m_logCache;
 
@@ -183,13 +182,11 @@ BlameDisplay::BlameDisplay(const QString &what, const svn::AnnotatedFile &blame,
     m_Data->m_cb = cb;
 
     m_Data->m_pbShowLog = new QPushButton(QIcon::fromTheme(QStringLiteral("kdesvnlog")), i18n("Log message for revision"), this);
-    connect(m_Data->m_pbShowLog, &QAbstractButton::clicked,
-            this, &BlameDisplay::slotShowCurrentCommit);
+    connect(m_Data->m_pbShowLog, &QAbstractButton::clicked, this, &BlameDisplay::slotShowCurrentCommit);
     m_ui->buttonBox->addButton(m_Data->m_pbShowLog, QDialogButtonBox::ActionRole);
 
     m_Data->m_pbGoToLine = new QPushButton(i18n("Go to line"), this);
-    connect(m_Data->m_pbGoToLine, &QAbstractButton::clicked,
-            this, &BlameDisplay::slotGoLine);
+    connect(m_Data->m_pbGoToLine, &QAbstractButton::clicked, this, &BlameDisplay::slotGoLine);
     m_ui->buttonBox->addButton(m_Data->m_pbGoToLine, QDialogButtonBox::ActionRole);
 
     connect(m_ui->buttonBox, &QDialogButtonBox::rejected, this, &QDialog::accept);
@@ -201,12 +198,9 @@ BlameDisplay::BlameDisplay(const QString &what, const svn::AnnotatedFile &blame,
     KTreeWidgetSearchLine *searchLine = m_ui->m_TreeSearch->searchLine();
     searchLine->addTreeWidget(m_ui->m_BlameTree);
 
-    connect(m_ui->m_BlameTree, &QTreeWidget::itemDoubleClicked,
-            this, &BlameDisplay::slotItemDoubleClicked);
-    connect(m_ui->m_BlameTree, &QTreeWidget::currentItemChanged,
-            this, &BlameDisplay::slotCurrentItemChanged);
-    connect(m_ui->m_encodingSel, &EncodingSelector_impl::TextCodecChanged,
-            this, &BlameDisplay::slotTextCodecChanged);
+    connect(m_ui->m_BlameTree, &QTreeWidget::itemDoubleClicked, this, &BlameDisplay::slotItemDoubleClicked);
+    connect(m_ui->m_BlameTree, &QTreeWidget::currentItemChanged, this, &BlameDisplay::slotCurrentItemChanged);
+    connect(m_ui->m_encodingSel, &EncodingSelector_impl::TextCodecChanged, this, &BlameDisplay::slotTextCodecChanged);
 
     setContent(what, blame);
 }
@@ -222,12 +216,14 @@ void BlameDisplay::setContent(const QString &what, const svn::AnnotatedFile &bla
     m_Data->m_File = what;
     m_Data->m_pbShowLog->setEnabled(false);
 
-    //m_BlameList->setSorting(COL_LINENR,false);
+    // m_BlameList->setSorting(COL_LINENR,false);
     m_Data->max = -1;
     svn_revnum_t lastRev(-1);
     QColor a(160, 160, 160);
     int offset = 10;
-    int r = 0; int g = 0; int b = 0;
+    int r = 0;
+    int g = 0;
+    int b = 0;
     uint colinc = 0;
 
     QTime t;
@@ -321,8 +317,7 @@ void BlameDisplay::setContent(const QString &what, const svn::AnnotatedFile &bla
 void BlameDisplay::slotGoLine()
 {
     bool ok = true;
-    int line = QInputDialog::getInt(this, i18n("Show line"), i18n("Show line number"),
-                                    1, 1, m_ui->m_BlameTree->topLevelItemCount(), 1, &ok);
+    int line = QInputDialog::getInt(this, i18n("Show line"), i18n("Show line number"), 1, 1, m_ui->m_BlameTree->topLevelItemCount(), 1, &ok);
     if (!ok) {
         return;
     }

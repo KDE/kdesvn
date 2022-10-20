@@ -29,24 +29,36 @@ class CommitActionEntry
 {
 public:
     enum ACTION_TYPE {
-        COMMIT         = 1,
-        ADD_COMMIT     = 2,
-        DELETE         = 4,
+        COMMIT = 1,
+        ADD_COMMIT = 2,
+        DELETE = 4,
         MISSING_DELETE = 8,
 
-        ALL            = COMMIT | ADD_COMMIT | DELETE | MISSING_DELETE,
+        ALL = COMMIT | ADD_COMMIT | DELETE | MISSING_DELETE,
     };
     Q_FLAGS(ACTION_TYPE)
     Q_DECLARE_FLAGS(ActionTypes, ACTION_TYPE)
 
     CommitActionEntry() = default;
     CommitActionEntry(const QString &name, const QString &actiondesc, ACTION_TYPE kind = COMMIT)
-        : _name(name), _actionDesc(actiondesc), _kind(kind)
-    {}
+        : _name(name)
+        , _actionDesc(actiondesc)
+        , _kind(kind)
+    {
+    }
 
-    QString action() const { return _actionDesc; }
-    QString name() const { return _name; }
-    ACTION_TYPE type() const { return _kind; }
+    QString action() const
+    {
+        return _actionDesc;
+    }
+    QString name() const
+    {
+        return _name;
+    }
+    ACTION_TYPE type() const
+    {
+        return _kind;
+    }
 
 protected:
     QString _name;
@@ -66,7 +78,7 @@ public:
     {
         m_Checkable = how;
     }
-    bool checkable()const
+    bool checkable() const
     {
         return m_Checkable;
     }
@@ -75,12 +87,12 @@ public:
     {
         m_Checked = how;
     }
-    bool checked()const
+    bool checked() const
     {
         return m_Checked;
     }
 
-    const CommitActionEntry &actionEntry()const
+    const CommitActionEntry &actionEntry() const
     {
         return m_Content;
     }

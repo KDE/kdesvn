@@ -23,10 +23,10 @@
  ***************************************************************************/
 
 #include "svnqt/client.h"
-#include "svnqt/tests/testconfig.h"
+#include "svnqt/client_parameter.h"
 #include "svnqt/status.h"
 #include "svnqt/svnqttypes.h"
-#include "svnqt/client_parameter.h"
+#include "svnqt/tests/testconfig.h"
 #include <iostream>
 
 int main(int, char **)
@@ -46,12 +46,9 @@ int main(int, char **)
         return -1;
     }
     std::cout << "List 1 " << dlist.size() << std::endl;
-    Q_FOREACH(const svn::DirEntry &entry, dlist) {
+    Q_FOREACH (const svn::DirEntry &entry, dlist) {
         QDateTime dt(svn::DateTime(entry.time()).toQDateTime());
-        std::cout << entry.name().toUtf8().data() << " "
-                  << entry.lastAuthor().toUtf8().data() << " "
-                  << entry.size() << " "
-                  << dt.toTime_t() << std::endl;
+        std::cout << entry.name().toUtf8().data() << " " << entry.lastAuthor().toUtf8().data() << " " << entry.size() << " " << dt.toTime_t() << std::endl;
     }
     try {
         dlist = m_Svnclient->list(svn::Path(p), svn::Revision::HEAD, svn::Revision::HEAD, svn::DepthImmediates, false);
@@ -62,18 +59,16 @@ int main(int, char **)
     }
     std::cout << "================" << std::endl;
     std::cout << "List 2 " << dlist.size() << std::endl;
-    Q_FOREACH(const svn::DirEntry &entry, dlist) {
+    Q_FOREACH (const svn::DirEntry &entry, dlist) {
         QDateTime dt = svn::DateTime(entry.time()).toQDateTime();
-        std::cout << entry.name().toUtf8().data() << " "
-                  << entry.lastAuthor().toUtf8().data() << " "
-                  << entry.size() << " "
-                  << dt.toTime_t() << std::endl;
+        std::cout << entry.name().toUtf8().data() << " " << entry.lastAuthor().toUtf8().data() << " " << entry.size() << " " << dt.toTime_t() << std::endl;
     }
     std::cout << "================" << std::endl;
     svn::StatusEntries slist;
     svn::StatusParameter params(p);
     try {
-        slist = m_Svnclient->status(params.depth(svn::DepthInfinity).all(true).update(true).noIgnore(true).revision(svn::Revision::HEAD).detailedRemote(true).ignoreExternals(false));
+        slist = m_Svnclient->status(
+            params.depth(svn::DepthInfinity).all(true).update(true).noIgnore(true).revision(svn::Revision::HEAD).detailedRemote(true).ignoreExternals(false));
     } catch (const svn::ClientException &e) {
         QString ex = e.msg();
         std::cout << ex.toUtf8().data() << std::endl;
@@ -86,7 +81,14 @@ int main(int, char **)
     std::cout << "Second status:" << std::endl;
 
     try {
-        slist = m_Svnclient->status(params.path(l).depth(svn::DepthInfinity).all(true).update(true).noIgnore(true).revision(svn::Revision::WORKING).detailedRemote(true).ignoreExternals(false));
+        slist = m_Svnclient->status(params.path(l)
+                                        .depth(svn::DepthInfinity)
+                                        .all(true)
+                                        .update(true)
+                                        .noIgnore(true)
+                                        .revision(svn::Revision::WORKING)
+                                        .detailedRemote(true)
+                                        .ignoreExternals(false));
     } catch (const svn::ClientException &e) {
         QString ex = e.msg();
         std::cout << ex.toUtf8().data() << std::endl;

@@ -30,7 +30,7 @@ class DBOverView;
 class QItemSelection;
 class QStringListModel;
 
-class DbOverview: public KSvnDialog
+class DbOverview : public KSvnDialog
 {
     Q_OBJECT
 private:
@@ -47,7 +47,7 @@ private Q_SLOTS:
     virtual void repositorySettings();
 
 protected:
-    QString selectedRepository()const;
+    QString selectedRepository() const;
     void enableButtons(bool);
     void genInfo(const QString &);
 

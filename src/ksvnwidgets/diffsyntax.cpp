@@ -38,7 +38,7 @@ void DiffSyntax::highlightBlock(const QString &aText)
         }
     }
 
-    if (a.match(aText).hasMatch()) {  // filename (Index: foo/bar.txt)
+    if (a.match(aText).hasMatch()) { // filename (Index: foo/bar.txt)
         format.setForeground(QColor(0x66, 0x00, 0x33));
         if (previousBlockState() == 1 || previousBlockState() == 2) {
             format.setFontWeight(QFont::Bold);
@@ -48,14 +48,14 @@ void DiffSyntax::highlightBlock(const QString &aText)
     } else if (aText.startsWith(QLatin1String("_____"))) {
         setCurrentBlockState(1);
         format.setForeground(QColor(0x1D, 0x1D, 0x8F));
-    } else if (aText.startsWith(QLatin1Char('+'))) {  // added line in new file
+    } else if (aText.startsWith(QLatin1Char('+'))) { // added line in new file
         format.setForeground(QColor(0x00, 0x8B, 0x00));
         if (aText.startsWith(QLatin1String("+++"))) { // new file name
             format.setFontWeight(QFont::Bold);
         } else {
             bIsModifiedLine = true;
         }
-    } else if (aText.startsWith(QLatin1Char('-'))) {  // removed line in old file
+    } else if (aText.startsWith(QLatin1Char('-'))) { // removed line in old file
         format.setForeground(QColor(0xCD, 0x33, 0x33));
         if (aText.startsWith(QLatin1String("---"))) { // old file name
             format.setFontWeight(QFont::Bold);

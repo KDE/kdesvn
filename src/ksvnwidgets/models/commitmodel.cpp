@@ -136,11 +136,11 @@ void CommitModel::removeEntries(const QStringList &_items)
                 m_List.remove(j);
                 endRemoveRows();
                 items.removeAt(i);
-                break;  // break inner loop
+                break; // break inner loop
             }
         }
         if (items.isEmpty())
-          break;
+            break;
     }
 }
 
@@ -151,11 +151,10 @@ const CommitModelNodePtr CommitModel::dataForRow(int row) const
     return m_List.at(row);
 }
 
-
 /************************************
  * begin overload of Model methods  *
  ************************************/
-QModelIndex CommitModel::index(int row, int column, const QModelIndex & /*parent*/)const
+QModelIndex CommitModel::index(int row, int column, const QModelIndex & /*parent*/) const
 {
     if (row < 0 || row >= m_List.count()) {
         return QModelIndex();
@@ -164,7 +163,7 @@ QModelIndex CommitModel::index(int row, int column, const QModelIndex & /*parent
     return createIndex(row, column, n.data());
 }
 
-QModelIndex CommitModel::parent(const QModelIndex &)const
+QModelIndex CommitModel::parent(const QModelIndex &) const
 {
     // we have no tree...
     return QModelIndex();
@@ -277,7 +276,7 @@ bool CommitModelCheckitem::setData(const QModelIndex &index, const QVariant &val
  ***************************/
 void CommitFilterModel::setSourceModel(QAbstractItemModel *sourceModel)
 {
-    m_sourceModel = qobject_cast<CommitModel*>(sourceModel);
+    m_sourceModel = qobject_cast<CommitModel *>(sourceModel);
     QSortFilterProxyModel::setSourceModel(sourceModel);
 }
 

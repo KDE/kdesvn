@@ -37,7 +37,7 @@ public:
 
     int rowNumber() const;
 
-    SvnItemModelNodeDir *parent()const;
+    SvnItemModelNodeDir *parent() const;
 
     /************************
      * Methods from SvnItem *
@@ -68,6 +68,7 @@ protected:
 class SvnItemModelNodeDir final : public SvnItemModelNode
 {
     friend class SvnItemModel;
+
 public:
     SvnItemModelNodeDir(SvnActions *, MainTreeWidget *);
     SvnItemModelNodeDir(SvnItemModelNodeDir *_parent, SvnActions *, MainTreeWidget *);
@@ -78,8 +79,8 @@ public:
     bool NodeHasChilds() const override;
     char sortChar() const override;
 
-    const QVector<SvnItemModelNode *> &childList()const;
-    SvnItemModelNode *child(int row)const;
+    const QVector<SvnItemModelNode *> &childList() const;
+    SvnItemModelNode *child(int row) const;
 
     SvnItemModelNode *findPath(const QVector<QStringRef> &parts);
     int indexOf(const QString &fullPath) const;

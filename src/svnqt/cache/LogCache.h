@@ -24,10 +24,10 @@
 #ifndef LOG_CACHE_H
 #define LOG_CACHE_H
 
-#include <QString>
 #include <QDir>
-#include <QVariant>
 #include <QSqlDatabase>
+#include <QString>
+#include <QVariant>
 
 #include "svnqt/svnqt_defines.h"
 #include <QScopedPointer>
@@ -51,7 +51,7 @@ protected:
     QString m_BasePath;
     void setupCachePath();
     void setupMainDb();
-    int databaseVersion()const;
+    int databaseVersion() const;
     void databaseVersion(int newversion);
 
 public:
@@ -60,11 +60,11 @@ public:
     virtual ~LogCache();
     static LogCache *self();
     QSqlDatabase reposDb(const QString &aRepository);
-    QStringList cachedRepositories()const;
+    QStringList cachedRepositories() const;
 
-    bool valid()const;
+    bool valid() const;
 
-    QVariant getRepositoryParameter(const svn::Path &repository, const QString &key)const;
+    QVariant getRepositoryParameter(const svn::Path &repository, const QString &key) const;
     //! set or delete parameter
     /*!
      * if value is invalid the parameter will removed from database

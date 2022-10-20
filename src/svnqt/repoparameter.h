@@ -52,60 +52,109 @@ public:
         , _pre_1_5_compat(false)
         , _pre_1_6_compat(false)
         , _pre_1_8_compat(false)
-    {}
+    {
+    }
 
     /** path to create
      * default is emtpy
      */
-    const QString &path() const { return _path; }
+    const QString &path() const
+    {
+        return _path;
+    }
     /** path to create
      * default is emtpy
      */
-    CreateRepoParameter &path(const QString &path) { _path = path; return *this; }
+    CreateRepoParameter &path(const QString &path)
+    {
+        _path = path;
+        return *this;
+    }
     /** fs type of repository
      *
      * default is "fsfs"
      */
-    const QString &fstype() const { return _fstype; }
+    const QString &fstype() const
+    {
+        return _fstype;
+    }
     /** fs type of repository
      *
      * default is "fsfs"
      */
-    CreateRepoParameter &fstype(const QString &fstype) { _fstype = fstype; return *this; }
+    CreateRepoParameter &fstype(const QString &fstype)
+    {
+        _fstype = fstype;
+        return *this;
+    }
     /** switch of syncing of bdb
      *
      * default is false
      */
-    bool bdbnosync() const { return _bdbnosync; }
+    bool bdbnosync() const
+    {
+        return _bdbnosync;
+    }
     /** switch of syncing of bdb
      *
      * default is false
      */
-    CreateRepoParameter &bdbnosync(bool b) { _bdbnosync = b; return *this; }
+    CreateRepoParameter &bdbnosync(bool b)
+    {
+        _bdbnosync = b;
+        return *this;
+    }
     /** bdb automatic remove log
      *
      * default is true
      */
-    bool bdbautologremove() const { return _bdbautologremove; }
+    bool bdbautologremove() const
+    {
+        return _bdbautologremove;
+    }
     /** bdb automatic remove log
      *
      * default is true
      */
-    CreateRepoParameter &bdbautologremove(bool b) { _bdbautologremove = b; return *this; }
+    CreateRepoParameter &bdbautologremove(bool b)
+    {
+        _bdbautologremove = b;
+        return *this;
+    }
 
     /** default is false */
-    bool pre15_compat() const { return _pre_1_5_compat; }
+    bool pre15_compat() const
+    {
+        return _pre_1_5_compat;
+    }
     /** default is false */
-    CreateRepoParameter &pre15_compat(bool b) { _pre_1_5_compat = b; return *this; }
+    CreateRepoParameter &pre15_compat(bool b)
+    {
+        _pre_1_5_compat = b;
+        return *this;
+    }
     /** default is false */
-    bool pre16_compat() const { return _pre_1_6_compat; }
+    bool pre16_compat() const
+    {
+        return _pre_1_6_compat;
+    }
     /** default is false */
-    CreateRepoParameter &pre16_compat(bool b) { _pre_1_6_compat = b; return *this; }
+    CreateRepoParameter &pre16_compat(bool b)
+    {
+        _pre_1_6_compat = b;
+        return *this;
+    }
     /** default is false */
-    bool pre18_compat() const { return _pre_1_8_compat; }
+    bool pre18_compat() const
+    {
+        return _pre_1_8_compat;
+    }
     /** default is false */
-    CreateRepoParameter &pre18_compat(bool b) { _pre_1_8_compat = b; return *this; }
-
+    CreateRepoParameter &pre18_compat(bool b)
+    {
+        _pre_1_8_compat = b;
+        return *this;
+    }
 };
 
 } // namespace repository

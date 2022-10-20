@@ -21,25 +21,25 @@
  * individuals.  For exact contribution history, see the revision          *
  * history and logs, available at https://commits.kde.org/kdesvn.          *
  ***************************************************************************/
+#include <iostream>
+#include <qcoreapplication.h>
 #include <qsql.h>
 #include <qsqldatabase.h>
 #include <qstringlist.h>
-#include <iostream>
-#include <qcoreapplication.h>
 #include <qtextstream.h>
 
 #include "svnqt/client.h"
-#include "svnqt/svnqttypes.h"
 #include "svnqt/log_entry.h"
+#include "svnqt/svnqttypes.h"
 
-#include "svnqt/cache/LogCache.h"
-#include "svnqt/cache/ReposLog.h"
-#include "svnqt/cache/ReposConfig.h"
-#include "svnqt/cache/test/testconfig.h"
 #include "svnqt/cache/DatabaseException.h"
+#include "svnqt/cache/LogCache.h"
+#include "svnqt/cache/ReposConfig.h"
+#include "svnqt/cache/ReposLog.h"
+#include "svnqt/cache/test/testconfig.h"
 
-#include <QSqlQuery>
 #include <QSqlError>
+#include <QSqlQuery>
 
 int main(int argc, char **argv)
 {
@@ -127,7 +127,10 @@ int main(int argc, char **argv)
     }
     std::cout << "Count: " << lm.count() << std::endl;
 
-    QStringList s; s << "a" << "b" << "c";
+    QStringList s;
+    s << "a"
+      << "b"
+      << "c";
 
     svn::cache::ReposConfig::self()->setValue("http://www.alwins-world.de/repos/kdesvn", "bommel", s);
     list = svn::cache::ReposConfig::self()->readEntry("http://www.alwins-world.de/repos/kdesvn", "bommel", QStringList());

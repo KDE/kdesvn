@@ -44,6 +44,8 @@ include(KDECompilerSettings)
 include(KDECMakeSettings)
 include(FeatureSummary)
 include(ECMInstallIcons)
+include(KDEClangFormat)
+include(KDEGitCommitHooks)
 
 find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     Bookmarks Codecs Completion Config
@@ -132,5 +134,10 @@ add_custom_target(apidox
     DEPENDS "${CMAKE_BINARY_DIR}/Doxyfile")
 
 ki18n_install(po)
+
+file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
+kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
+
+kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

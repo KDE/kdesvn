@@ -28,8 +28,8 @@
     @author Rajko Albrecht <ral@alwins-world.de>
 */
 
-#include <svnqt/svnqt_defines.h>
 #include <QString>
+#include <svnqt/svnqt_defines.h>
 
 namespace svn
 {
@@ -40,7 +40,6 @@ namespace repository
 //! class for callbacks on repository operations
 class SVNQT_EXPORT RepositoryListener
 {
-
 public:
     //! constructor
     RepositoryListener();
@@ -53,9 +52,7 @@ public:
     virtual void sendError(const QString &) = 0;
     //! check if running operation should cancelled
     virtual bool isCanceld() = 0;
-
 };
-
 }
 
 }

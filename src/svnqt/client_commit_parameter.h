@@ -33,12 +33,12 @@
 #ifndef CLIENT_COMMIT_PARAMETER_H
 #define CLIENT_COMMIT_PARAMETER_H
 
+#include <QScopedPointer>
+#include <svnqt/path.h>
+#include <svnqt/revision.h>
 #include <svnqt/svnqt_defines.h>
 #include <svnqt/svnqttypes.h>
-#include <svnqt/revision.h>
 #include <svnqt/targets.h>
-#include <svnqt/path.h>
-#include <QScopedPointer>
 
 namespace svn
 {
@@ -52,41 +52,39 @@ public:
     CommitParameter();
     ~CommitParameter();
 
-    //!files to commit.
+    //! files to commit.
     CommitParameter &targets(const Targets &targets);
-    //!files to commit.
-    const Targets &targets()const;
+    //! files to commit.
+    const Targets &targets() const;
     //! log message. if QString() svnqt ask for a message
     CommitParameter &message(const QString &message);
     //! log message. if QString() svnqt ask for a message
-    const QString &message()const;
+    const QString &message() const;
     //! default empty
     CommitParameter &changeList(const StringArray &_changeList);
     //! default empty
-    const StringArray &changeList()const;
+    const StringArray &changeList() const;
     //! default empty
     CommitParameter &revisionProperties(const PropertiesMap &_revProps);
     //! default empty
-    const PropertiesMap &revisionProperties()const;
+    const PropertiesMap &revisionProperties() const;
     //! default DepthInfinity
     CommitParameter &depth(Depth depth);
     //! default DepthInfinity
-    Depth depth()const;
+    Depth depth() const;
     //! if false unlock items in path (default)
     CommitParameter &keepLocks(bool _keep);
     //! if false unlock items in path (default)
-    bool keepLocks()const;
+    bool keepLocks() const;
     //! default false
     CommitParameter &keepChangeList(bool _keep);
     //! default false
-    bool keepChangeList()const;
+    bool keepChangeList() const;
     //! default false
     CommitParameter &commitAsOperations(bool _keep);
     //! default false
-    bool commitAsOperations()const;
-
+    bool commitAsOperations() const;
 };
 }
-
 
 #endif

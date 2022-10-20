@@ -32,12 +32,7 @@ public:
 
     void setSourceModel(QAbstractItemModel *sourceModel) override;
 
-    enum ShowType {
-        None = 0x0,
-        Dir  = 1,
-        File = 2,
-        All = Dir | File
-    };
+    enum ShowType { None = 0x0, Dir = 1, File = 2, All = Dir | File };
 
     Q_DECLARE_FLAGS(TypeFlag, ShowType)
 
@@ -56,4 +51,3 @@ protected:
 };
 
 #endif
-

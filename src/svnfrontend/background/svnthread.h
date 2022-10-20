@@ -21,13 +21,13 @@
 #ifndef SVNTHREAD_H
 #define SVNTHREAD_H
 
-#include "tcontextlistener.h"
 #include "svnfrontend/frontendtypes.h"
+#include "tcontextlistener.h"
 
 #include <QThread>
 
 //! Base class for creating threads holding an subversion connection
-class SvnThread: public QThread
+class SvnThread : public QThread
 {
     Q_OBJECT
 public:
@@ -50,7 +50,10 @@ protected:
     /*!
      * Exceptions will NOT be caught, the caller has to do it!
      */
-    void itemInfo(const QString &what, svn::InfoEntry &target, const svn::Revision &_rev = svn::Revision::UNDEFINED, const svn::Revision &_peg = svn::Revision::UNDEFINED);
+    void itemInfo(const QString &what,
+                  svn::InfoEntry &target,
+                  const svn::Revision &_rev = svn::Revision::UNDEFINED,
+                  const svn::Revision &_peg = svn::Revision::UNDEFINED);
 };
 
 #endif

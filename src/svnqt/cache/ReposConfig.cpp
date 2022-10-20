@@ -165,7 +165,7 @@ QVariant ReposConfigPrivate::convertToQVariant(const QByteArray &value, const QV
     case QVariant::Date: {
         QVector<int> list = asIntVec(value);
         if (list.count() == 6) {
-            list = list.mid(0, 3);    // don't break config files that stored QDate as QDateTime
+            list = list.mid(0, 3); // don't break config files that stored QDate as QDateTime
         }
         if (list.count() != 3) {
             return aDefault;
@@ -200,7 +200,6 @@ ReposConfig::ReposConfig()
 
 void ReposConfig::setValue(const QString &repository, const QString &key, const QVariant &value)
 {
-
     QByteArray data;
     switch (value.type()) {
     case QVariant::Invalid:

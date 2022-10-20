@@ -39,9 +39,9 @@
 #include <svn_client.h>
 
 // svncpp
+#include <svnqt/pool.h>
 #include <svnqt/svnqt_defines.h>
 #include <svnqt/svnqttypes.h>
-#include <svnqt/pool.h>
 
 namespace svn
 {
@@ -81,7 +81,7 @@ public:
     /**
      * disable assignment operator
      */
-    Context &operator = (const Context &) = delete;
+    Context &operator=(const Context &) = delete;
 
     /**
      * enable/disable authentication caching
@@ -98,12 +98,12 @@ public:
     /**
      * operator to get svn_client_ctx object
      */
-    operator svn_client_ctx_t *()const;
+    operator svn_client_ctx_t *() const;
 
     /**
      * return the svn_client_ctx object
      */
-    svn_client_ctx_t *ctx()const;
+    svn_client_ctx_t *ctx() const;
 
     /**
      * this will be called at the beginning of an action.
@@ -123,24 +123,21 @@ public:
      *
      * @return log message
      */
-    const QString &
-    getLogMessage() const;
+    const QString &getLogMessage() const;
 
     /**
      * get username
      *
      * @return username
      */
-    const QString &
-    getUsername() const;
+    const QString &getUsername() const;
 
     /**
      * get password
      *
      * @return password
      */
-    const QString &
-    getPassword() const;
+    const QString &getPassword() const;
 
     /**
      * set the listener for the context. The listener will be
@@ -149,16 +146,14 @@ public:
      *
      * @param listener
      */
-    void
-    setListener(ContextListener *listener);
+    void setListener(ContextListener *listener);
 
     /**
      * get the listener
      *
      * @return the listener
      */
-    ContextListener *
-    getListener() const;
+    ContextListener *getListener() const;
 
     /** Callback for generating list entries
      * This base implementation just adds items to @a entries. This may used for special listener like the one from KIO
@@ -173,7 +168,6 @@ public:
 
 private:
     ContextData *m;
-
 };
 }
 

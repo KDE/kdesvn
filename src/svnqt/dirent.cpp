@@ -48,9 +48,12 @@ public:
 
     DirEntry_Data() = default;
     DirEntry_Data(const QString &_name, const svn_dirent_t *dirEntry)
-        : name(_name), time(dirEntry->time), size(dirEntry->size),
-          createdRev(dirEntry->created_rev), kind(dirEntry->kind),
-          hasProps(dirEntry->has_props != 0)
+        : name(_name)
+        , time(dirEntry->time)
+        , size(dirEntry->size)
+        , createdRev(dirEntry->created_rev)
+        , kind(dirEntry->kind)
+        , hasProps(dirEntry->has_props != 0)
     {
         lastAuthor = dirEntry->last_author == nullptr ? QString() : QString::fromUtf8(dirEntry->last_author);
     }
@@ -88,67 +91,57 @@ DirEntry::~DirEntry()
     delete m;
 }
 
-svn_node_kind_t
-DirEntry::kind() const
+svn_node_kind_t DirEntry::kind() const
 {
     return m->kind;
 }
 
-bool DirEntry::isDir()const
+bool DirEntry::isDir() const
 {
     return kind() == svn_node_dir;
 }
 
-qlonglong
-DirEntry::size() const
+qlonglong DirEntry::size() const
 {
     return m->size;
 }
 
-bool
-DirEntry::hasProps() const
+bool DirEntry::hasProps() const
 {
     return m->hasProps;
 }
 
-svn_revnum_t
-DirEntry::createdRev() const
+svn_revnum_t DirEntry::createdRev() const
 {
     return m->createdRev;
 }
 
-const DateTime &
-DirEntry::time() const
+const DateTime &DirEntry::time() const
 {
     return m->time;
 }
 
-const QString &
-DirEntry::lastAuthor() const
+const QString &DirEntry::lastAuthor() const
 {
     return m->lastAuthor;
 }
 
-const QString &
-DirEntry::name() const
+const QString &DirEntry::name() const
 {
     return m->name;
 }
 
-const LockEntry &
-DirEntry::lockEntry() const
+const LockEntry &DirEntry::lockEntry() const
 {
     return m->m_Lock;
 }
 
-void
-DirEntry::setLock(const svn_lock_t *_l)
+void DirEntry::setLock(const svn_lock_t *_l)
 {
     m->m_Lock.init(_l);
 }
 
-DirEntry &
-DirEntry::operator= (const DirEntry &dirEntry)
+DirEntry &DirEntry::operator=(const DirEntry &dirEntry)
 {
     if (this == &dirEntry) {
         return *this;

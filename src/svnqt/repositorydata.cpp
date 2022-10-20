@@ -22,19 +22,19 @@
  * history and logs, available at https://commits.kde.org/kdesvn.          *
  ***************************************************************************/
 #include "svnqt/repositorydata.h"
-#include "svnqt/svnqt_defines.h"
 #include "svnqt/exception.h"
-#include "svnqt/repositorylistener.h"
-#include "svnqt/svnfilestream.h"
 #include "svnqt/repoparameter.h"
+#include "svnqt/repositorylistener.h"
 #include "svnqt/reposnotify.h"
+#include "svnqt/svnfilestream.h"
+#include "svnqt/svnqt_defines.h"
 
-#include <svn_fs.h>
-#include <svn_path.h>
+#include <QCoreApplication>
 #include <svn_config.h>
 #include <svn_dirent_uri.h>
+#include <svn_fs.h>
+#include <svn_path.h>
 #include <svn_version.h>
-#include <QCoreApplication>
 
 namespace svn
 {
@@ -42,7 +42,7 @@ namespace svn
 namespace repository
 {
 
-class SVNQT_NOEXPORT RepoOutStream: public stream::SvnStream
+class SVNQT_NOEXPORT RepoOutStream : public stream::SvnStream
 {
 public:
     RepoOutStream(RepositoryData *);
@@ -163,28 +163,19 @@ svn_error_t *RepositoryData::CreateOpen(const CreateRepoParameter &params)
     apr_hash_t *config;
     apr_hash_t *fs_config = apr_hash_make(m_Pool);
 
-    apr_hash_set(fs_config, SVN_FS_CONFIG_BDB_TXN_NOSYNC,
-                 APR_HASH_KEY_STRING,
-                 (params.bdbnosync() ? "1" : "0"));
-    apr_hash_set(fs_config, SVN_FS_CONFIG_BDB_LOG_AUTOREMOVE,
-                 APR_HASH_KEY_STRING,
-                 (params.bdbautologremove() ? "1" : "0"));
-    apr_hash_set(fs_config, SVN_FS_CONFIG_FS_TYPE,
-                 APR_HASH_KEY_STRING,
-                 _type);
+    apr_hash_set(fs_config, SVN_FS_CONFIG_BDB_TXN_NOSYNC, APR_HASH_KEY_STRING, (params.bdbnosync() ? "1" : "0"));
+    apr_hash_set(fs_config, SVN_FS_CONFIG_BDB_LOG_AUTOREMOVE, APR_HASH_KEY_STRING, (params.bdbautologremove() ? "1" : "0"));
+    apr_hash_set(fs_config, SVN_FS_CONFIG_FS_TYPE, APR_HASH_KEY_STRING, _type);
 
     if (params.pre15_compat()) {
-        apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_5_COMPATIBLE,
-                     APR_HASH_KEY_STRING, "1");
+        apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_5_COMPATIBLE, APR_HASH_KEY_STRING, "1");
     }
     if (params.pre16_compat()) {
-        apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_6_COMPATIBLE,
-                     APR_HASH_KEY_STRING, "1");
+        apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_6_COMPATIBLE, APR_HASH_KEY_STRING, "1");
     }
-#if SVN_API_VERSION >= SVN_VERSION_CHECK(1,8,0)
+#if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
     if (params.pre18_compat()) {
-        apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_8_COMPATIBLE,
-                     APR_HASH_KEY_STRING, "1");
+        apr_hash_set(fs_config, SVN_FS_CONFIG_PRE_1_8_COMPATIBLE, APR_HASH_KEY_STRING, "1");
     }
 #endif
 
@@ -196,11 +187,11 @@ svn_error_t *RepositoryData::CreateOpen(const CreateRepoParameter &params)
     repository_path = svn_dirent_internal_style(repository_path, m_Pool);
 
     if (svn_path_is_url(repository_path)) {
-        return svn_error_create(SVN_ERR_CL_ARG_PARSING_ERROR, nullptr,
+        return svn_error_create(SVN_ERR_CL_ARG_PARSING_ERROR,
+                                nullptr,
                                 QCoreApplication::translate("svnqt", "'%1' is an URL when it should be a path").arg(params.path()).toUtf8());
     }
-    SVN_ERR(svn_repos_create(&m_Repository, repository_path,
-                             nullptr, nullptr, config, fs_config, m_Pool));
+    SVN_ERR(svn_repos_create(&m_Repository, repository_path, nullptr, nullptr, config, fs_config, m_Pool));
 
     svn_fs_set_warning_func(svn_repos_fs(m_Repository), RepositoryData::warning_func, this);
 
@@ -222,7 +213,11 @@ svn_error_t *RepositoryData::dump(const QString &output, const svn::Revision &st
     _e = end.revnum();
 
     SVN_ERR(svn_repos_dump_fs3(m_Repository,
-                               out, _s, _e, incremental, use_deltas,
+                               out,
+                               _s,
+                               _e,
+                               incremental,
+                               use_deltas,
                                RepositoryData::repo_notify_func,
                                this,
                                RepositoryData::cancel_func,
@@ -231,7 +226,8 @@ svn_error_t *RepositoryData::dump(const QString &output, const svn::Revision &st
     return SVN_NO_ERROR;
 }
 
-svn_error_t *RepositoryData::loaddump(const QString &dump, svn_repos_load_uuid uuida, const QString &parentFolder, bool usePre, bool usePost, bool validateProps)
+svn_error_t *
+RepositoryData::loaddump(const QString &dump, svn_repos_load_uuid uuida, const QString &parentFolder, bool usePre, bool usePost, bool validateProps)
 {
     if (!m_Repository) {
         return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "No repository selected.").toUtf8());
@@ -249,9 +245,18 @@ svn_error_t *RepositoryData::loaddump(const QString &dump, svn_repos_load_uuid u
     src_path = svn_path_internal_style(src_path, pool);
 
     // todo svn 1.8: svn_repos_load_fs4
-    SVN_ERR(svn_repos_load_fs3(m_Repository, infile, uuida, dest_path, usePre ? 1 : 0, usePost ? 1 : 0, validateProps ? 1 : 0,
+    SVN_ERR(svn_repos_load_fs3(m_Repository,
+                               infile,
+                               uuida,
+                               dest_path,
+                               usePre ? 1 : 0,
+                               usePost ? 1 : 0,
+                               validateProps ? 1 : 0,
                                RepositoryData::repo_notify_func,
-                               this, RepositoryData::cancel_func, m_Listener, pool));
+                               this,
+                               RepositoryData::cancel_func,
+                               m_Listener,
+                               pool));
     return SVN_NO_ERROR;
 }
 

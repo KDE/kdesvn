@@ -23,7 +23,7 @@
 
 #include <KLocalizedString>
 
-#define TREE_PATH_ITEM_TYPE QTreeWidgetItem::UserType+1
+#define TREE_PATH_ITEM_TYPE QTreeWidgetItem::UserType + 1
 
 LogChangePathItem::LogChangePathItem(const svn::LogChangePathEntry &e, QTreeWidget *view)
     : QTreeWidgetItem(view, TREE_PATH_ITEM_TYPE)
@@ -57,17 +57,15 @@ SvnLogModelNode::SvnLogModelNode(const svn::LogEntry &_entry)
     }
 }
 
-const svn::LogChangePathEntries &SvnLogModelNode::changedPaths()const
+const svn::LogChangePathEntries &SvnLogModelNode::changedPaths() const
 {
     return _data.changedPaths;
 }
 
-bool SvnLogModelNode::copiedFrom(QString &_n, qlonglong &_rev)const
+bool SvnLogModelNode::copiedFrom(QString &_n, qlonglong &_rev) const
 {
     for (const svn::LogChangePathEntry &entry : _data.changedPaths) {
-        if (entry.action == 'A' &&
-                !entry.copyFromPath.isEmpty() &&
-                isParent(entry.path, _realName)) {
+        if (entry.action == 'A' && !entry.copyFromPath.isEmpty() && isParent(entry.path, _realName)) {
             QString r = _realName.mid(entry.path.length());
             _n = entry.copyFromPath;
             _n += r;

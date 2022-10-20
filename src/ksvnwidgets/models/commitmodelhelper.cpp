@@ -23,7 +23,9 @@
 #include <KLocalizedString>
 
 CommitModelNode::CommitModelNode(const svn::CommitItem &aItem)
-    : m_Content(), m_Checkable(false), m_Checked(false)
+    : m_Content()
+    , m_Checkable(false)
+    , m_Checked(false)
 {
     QString what;
     QString action;
@@ -62,7 +64,9 @@ CommitModelNode::CommitModelNode(const svn::CommitItem &aItem)
 }
 
 CommitModelNode::CommitModelNode(const CommitActionEntry &aContent, bool checked)
-    : m_Content(aContent), m_Checkable(true), m_Checked(checked)
+    : m_Content(aContent)
+    , m_Checkable(true)
+    , m_Checked(checked)
 {
 }
 

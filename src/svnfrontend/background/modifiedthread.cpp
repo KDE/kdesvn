@@ -20,20 +20,22 @@
 
 #include "modifiedthread.h"
 
-#include "svnqt/svnqttypes.h"
 #include "svnqt/client_parameter.h"
+#include "svnqt/svnqttypes.h"
 
 // CheckModifiedThread
 CheckModifiedThread::CheckModifiedThread(QObject *parent, const QString &what, bool updates)
     : SvnThread(parent)
     , m_what(what)
     , m_updates(updates)
-{}
+{
+}
 
 CheckModifiedThread::~CheckModifiedThread()
-{}
+{
+}
 
-const svn::StatusEntries &CheckModifiedThread::getList()const
+const svn::StatusEntries &CheckModifiedThread::getList() const
 {
     return m_Cache;
 }

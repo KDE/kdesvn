@@ -18,25 +18,25 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "revisiontree.h"
-#include "../stopdlg.h"
 #include "../ccontextlistener.h"
-#include "svnqt/log_entry.h"
-#include "svnqt/cache/LogCache.h"
-#include "svnqt/cache/ReposLog.h"
-#include "svnqt/cache/ReposConfig.h"
-#include "svnqt/url.h"
-#include "svnqt/client_parameter.h"
-#include "revtreewidget.h"
-#include "revgraphview.h"
+#include "../stopdlg.h"
 #include "elogentry.h"
-#include "svnfrontend/fronthelpers/cursorstack.h"
+#include "revgraphview.h"
+#include "revtreewidget.h"
 #include "settings/kdesvnsettings.h"
+#include "svnfrontend/fronthelpers/cursorstack.h"
+#include "svnqt/cache/LogCache.h"
+#include "svnqt/cache/ReposConfig.h"
+#include "svnqt/cache/ReposLog.h"
+#include "svnqt/client_parameter.h"
+#include "svnqt/log_entry.h"
+#include "svnqt/url.h"
 
 #include <KLocalizedString>
 #include <KMessageBox>
 
-#include <QWidget>
 #include <QProgressDialog>
+#include <QWidget>
 
 #define INTERNALCOPY 1
 #define INTERNALRENAME 2
@@ -66,7 +66,8 @@ public:
 };
 
 RtreeData::RtreeData()
-    : max_rev(-1), min_rev(-1)
+    : max_rev(-1)
+    , min_rev(-1)
 {
     progress = nullptr;
     m_TreeDisplay = nullptr;
@@ -90,8 +91,7 @@ bool RtreeData::getLogs(const QString &reposRoot, const svn::Revision &startr, c
     const svn::StringArray ex(svn::cache::ReposConfig::self()->readEntry(reposRoot, "tree_exclude_list", QStringList()));
     try {
         CursorStack a(Qt::BusyCursor);
-        StopDlg sdlg(m_Listener, dlgParent,
-                     i18nc("@title:window", "Logs"), i18n("Getting logs - hit Cancel for abort"));
+        StopDlg sdlg(m_Listener, dlgParent, i18nc("@title:window", "Logs"), i18n("Getting logs - hit Cancel for abort"));
         if (svn::Url::isLocal(reposRoot)) {
             m_Client->log(params.excludeList(ex), m_OldHistory);
         } else {
@@ -101,7 +101,8 @@ bool RtreeData::getLogs(const QString &reposRoot, const svn::Revision &startr, c
             } else if (Kdesvnsettings::network_on()) {
                 m_Client->log(params.excludeList(ex), m_OldHistory);
             } else {
-                KMessageBox::error(nullptr, i18n("Could not retrieve logs, reason:\n%1", i18n("No log cache possible due broken database and networking not allowed.")));
+                KMessageBox::error(nullptr,
+                                   i18n("Could not retrieve logs, reason:\n%1", i18n("No log cache possible due broken database and networking not allowed.")));
                 return false;
             }
         }
@@ -115,10 +116,14 @@ bool RtreeData::getLogs(const QString &reposRoot, const svn::Revision &startr, c
 RevisionTree::RevisionTree(const svn::ClientP &aClient,
                            CContextListener *aListener,
                            const QString &reposRoot,
-                           const svn::Revision &startr, const svn::Revision &endr,
+                           const svn::Revision &startr,
+                           const svn::Revision &endr,
                            const QString &origin,
-                           const svn::Revision &baserevision, QWidget *parent)
-    : m_InitialRevsion(0), m_Path(origin), m_Valid(false)
+                           const svn::Revision &baserevision,
+                           QWidget *parent)
+    : m_InitialRevsion(0)
+    , m_Path(origin)
+    , m_Valid(false)
 {
     m_Data = new RtreeData;
     m_Data->m_Client = aClient;
@@ -194,8 +199,7 @@ RevisionTree::~RevisionTree()
 bool RevisionTree::isDeleted(long revision, const QString &path)
 {
     for (long i = 0; i < m_Data->m_History[revision].changedPaths.count(); ++i) {
-        if (isParent(m_Data->m_History[revision].changedPaths[i].path, path) &&
-                m_Data->m_History[revision].changedPaths[i].action == 'D') {
+        if (isParent(m_Data->m_History[revision].changedPaths[i].path, path) && m_Data->m_History[revision].changedPaths[i].action == 'D') {
             return true;
         }
     }
@@ -226,8 +230,7 @@ bool RevisionTree::topDownScan()
                 QCoreApplication::processEvents();
             }
             /* find min revision of item */
-            if (m_Data->m_OldHistory[j].changedPaths[i].action == 'A' &&
-                    isParent(m_Data->m_OldHistory[j].changedPaths[i].path, m_Path)) {
+            if (m_Data->m_OldHistory[j].changedPaths[i].action == 'A' && isParent(m_Data->m_OldHistory[j].changedPaths[i].path, m_Path)) {
                 if (!m_Data->m_OldHistory[j].changedPaths[i].copyFromPath.isEmpty()) {
                     if (m_InitialRevsion < m_Data->m_OldHistory[j].revision) {
                         QString r = m_Path.mid(m_Data->m_OldHistory[j].changedPaths[i].path.length());
@@ -275,8 +278,7 @@ bool RevisionTree::topDownScan()
                 } else if (a == 'A') {
                     a = INTERNALCOPY;
                     for (long z = 0; z < m_Data->m_OldHistory[j].changedPaths.count(); ++z) {
-                        if (m_Data->m_OldHistory[j].changedPaths[z].action == 'D'
-                                && isParent(m_Data->m_OldHistory[j].changedPaths[z].path, sourcepath)) {
+                        if (m_Data->m_OldHistory[j].changedPaths[z].action == 'D' && isParent(m_Data->m_OldHistory[j].changedPaths[z].path, sourcepath)) {
                             a = INTERNALRENAME;
                             m_Data->m_OldHistory[j].changedPaths[z].action = 0;
                             break;
@@ -331,7 +333,7 @@ bool RevisionTree::isParent(const QString &_par, const QString &tar)
     return tar.startsWith(par);
 }
 
-bool RevisionTree::isValid()const
+bool RevisionTree::isValid() const
 {
     return m_Valid;
 }
@@ -353,8 +355,7 @@ bool RevisionTree::bottomUpScan(long startrev, unsigned recurse, const QString &
     QString path = _path;
     long lastrev = _last;
 #ifdef DEBUG_PARSE
-    qCDebug(KDESVN_LOG) << "Searching for " << path << " at revision " << startrev
-                 << " recursion " << recurse << endl;
+    qCDebug(KDESVN_LOG) << "Searching for " << path << " at revision " << startrev << " recursion " << recurse << endl;
 #endif
     bool cancel = false;
     for (long j = startrev; j <= m_Data->max_rev; ++j) {
@@ -376,11 +377,11 @@ bool RevisionTree::bottomUpScan(long startrev, unsigned recurse, const QString &
                 bool get_out = false;
                 if (FORWARDENTRY.path != path) {
 #ifdef DEBUG_PARSE
-                    qCDebug(KDESVN_LOG) << "Parent rename? " << FORWARDENTRY.path << " -> " << FORWARDENTRY.copyToPath << " -> " << FORWARDENTRY.copyFromPath << endl;
+                    qCDebug(KDESVN_LOG) << "Parent rename? " << FORWARDENTRY.path << " -> " << FORWARDENTRY.copyToPath << " -> " << FORWARDENTRY.copyFromPath
+                                        << endl;
 #endif
                 }
-                if (FORWARDENTRY.action == INTERNALCOPY ||
-                        FORWARDENTRY.action == INTERNALRENAME) {
+                if (FORWARDENTRY.action == INTERNALCOPY || FORWARDENTRY.action == INTERNALRENAME) {
                     bool ren = FORWARDENTRY.action == INTERNALRENAME;
                     QString tmpPath = path;
                     QString recPath;

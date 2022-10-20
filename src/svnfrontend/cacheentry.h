@@ -20,17 +20,17 @@
 #ifndef HELPERSCACHEENTRY_H
 #define HELPERSCACHEENTRY_H
 
-#include "svnqt/svnqttypes.h"
 #include "svnqt/status.h"
+#include "svnqt/svnqttypes.h"
 
 // std::map 'cause QMap isn't usable, it don't work with with the typenames in class
-#include <map>
-#include <algorithm>
+#include <QReadLocker>
+#include <QReadWriteLock>
 #include <QString>
 #include <QStringList>
-#include <QReadWriteLock>
-#include <QReadLocker>
 #include <QWriteLocker>
+#include <algorithm>
+#include <map>
 
 namespace helpers
 {
@@ -40,7 +40,8 @@ namespace helpers
 
     @author Rajko Albrecht <ral@alwins-world.de>
 */
-template<class C> class cacheEntry
+template<class C>
+class cacheEntry
 {
 public:
     typedef cacheEntry<C> cache_type;
@@ -59,14 +60,14 @@ public:
 
     virtual ~cacheEntry() = default;
 
-    virtual bool find(QStringList &, QList<C> &)const;
+    virtual bool find(QStringList &, QList<C> &) const;
     //! Checks if cache contains a specific item
     /*!
      * the keylist will manipulated - so copy-operations aren't needed.
      * \param what Stringlist containing the components to search for
      * \return true if found (may or may not valid!) otherwise false
      */
-    virtual bool find(QStringList &what)const;
+    virtual bool find(QStringList &what) const;
     //! Checks if cache contains a specific valid item
     /*!
      * if yes, the content will stored in st
@@ -74,7 +75,7 @@ public:
      * \param st target status to store content if found
      * \return true if found
      */
-    virtual bool findSingleValid(QStringList &what, C &st)const;
+    virtual bool findSingleValid(QStringList &what, C &st) const;
     //! Checks if cache contains a specific valid item
     /*!
      * in difference to virtual bool find(QStringList&,svn::StatusEntries&)const no copy operations
@@ -83,15 +84,16 @@ public:
      * \param check_valid_subs if true, return true if a subitem is valid even the item isn't valid
      * \return true if found
      */
-    virtual bool findSingleValid(QStringList &what, bool check_valid_subs)const;
-    template<class T> void listsubs_if(QStringList &_what, T &oper)const;
+    virtual bool findSingleValid(QStringList &what, bool check_valid_subs) const;
+    template<class T>
+    void listsubs_if(QStringList &_what, T &oper) const;
 
-    virtual void appendValidSub(QList<C> &)const;
-    virtual bool isValid()const
+    virtual void appendValidSub(QList<C> &) const;
+    virtual bool isValid() const
     {
         return m_isValid;
     }
-    virtual const C &content()const
+    virtual const C &content() const
     {
         return m_content;
     }
@@ -103,13 +105,13 @@ public:
         m_isValid = true;
         m_content = st;
     }
-    virtual bool hasValidSubs()const;
+    virtual bool hasValidSubs() const;
     virtual void markInvalid()
     {
         m_content = C();
         m_isValid = false;
     }
-    const QString &key()const
+    const QString &key() const
     {
         return m_key;
     }
@@ -130,23 +132,33 @@ public:
 
 typedef cacheEntry<svn::StatusPtr> statusEntry;
 
-template<class C> inline cacheEntry<C>::cacheEntry()
-    : m_key(), m_isValid(false), m_content()
+template<class C>
+inline cacheEntry<C>::cacheEntry()
+    : m_key()
+    , m_isValid(false)
+    , m_content()
 {
 }
 
-template<class C> inline cacheEntry<C>::cacheEntry(const QString &key)
-    : m_key(key), m_isValid(false), m_content()
+template<class C>
+inline cacheEntry<C>::cacheEntry(const QString &key)
+    : m_key(key)
+    , m_isValid(false)
+    , m_content()
 {
 }
 
-template<class C> inline cacheEntry<C>::cacheEntry(const cacheEntry<C> &other)
-    : m_key(other.m_key), m_isValid(other.m_isValid),
-      m_content(other.m_content), m_subMap(other.m_subMap)
+template<class C>
+inline cacheEntry<C>::cacheEntry(const cacheEntry<C> &other)
+    : m_key(other.m_key)
+    , m_isValid(other.m_isValid)
+    , m_content(other.m_content)
+    , m_subMap(other.m_subMap)
 {
 }
 
-template<class C> inline cacheEntry<C> &cacheEntry<C>::operator=(const cacheEntry<C> &other)
+template<class C>
+inline cacheEntry<C> &cacheEntry<C>::operator=(const cacheEntry<C> &other)
 {
     m_key = other.m_key;
     m_isValid = other.m_isValid;
@@ -155,7 +167,8 @@ template<class C> inline cacheEntry<C> &cacheEntry<C>::operator=(const cacheEntr
     return *this;
 }
 
-template<class C> inline  bool cacheEntry<C>::find(QStringList &what, QList<C> &t) const
+template<class C>
+inline bool cacheEntry<C>::find(QStringList &what, QList<C> &t) const
 {
     if (what.empty()) {
         return false;
@@ -175,7 +188,8 @@ template<class C> inline  bool cacheEntry<C>::find(QStringList &what, QList<C> &
     return it->second.find(what, t);
 }
 
-template<class C> inline bool cacheEntry<C>::find(QStringList &what) const
+template<class C>
+inline bool cacheEntry<C>::find(QStringList &what) const
 {
     if (what.isEmpty()) {
         return false;
@@ -191,7 +205,8 @@ template<class C> inline bool cacheEntry<C>::find(QStringList &what) const
     return it->second.find(what);
 }
 
-template<class C> inline bool cacheEntry<C>::findSingleValid(QStringList &what, C &t) const
+template<class C>
+inline bool cacheEntry<C>::findSingleValid(QStringList &what, C &t) const
 {
     if (what.isEmpty()) {
         return false;
@@ -208,7 +223,8 @@ template<class C> inline bool cacheEntry<C>::findSingleValid(QStringList &what, 
     return it->second.findSingleValid(what, t);
 }
 
-template<class C> inline bool cacheEntry<C>::findSingleValid(QStringList &what, bool check_valid_subs) const
+template<class C>
+inline bool cacheEntry<C>::findSingleValid(QStringList &what, bool check_valid_subs) const
 {
     if (what.isEmpty()) {
         return false;
@@ -224,7 +240,8 @@ template<class C> inline bool cacheEntry<C>::findSingleValid(QStringList &what, 
     return it->second.findSingleValid(what, check_valid_subs);
 }
 
-template<class C> inline void cacheEntry<C>::appendValidSub(QList<C> &t) const
+template<class C>
+inline void cacheEntry<C>::appendValidSub(QList<C> &t) const
 {
     for (const auto &it : m_subMap) {
         if (it.second.isValid()) {
@@ -234,7 +251,8 @@ template<class C> inline void cacheEntry<C>::appendValidSub(QList<C> &t) const
     }
 }
 
-template<class C> inline bool cacheEntry<C>::deleteKey(QStringList &what, bool exact)
+template<class C>
+inline bool cacheEntry<C>::deleteKey(QStringList &what, bool exact)
 {
     if (what.isEmpty()) {
         return true;
@@ -264,7 +282,8 @@ template<class C> inline bool cacheEntry<C>::deleteKey(QStringList &what, bool e
     return caller_must_check;
 }
 
-template<class C> inline bool cacheEntry<C>::hasValidSubs() const
+template<class C>
+inline bool cacheEntry<C>::hasValidSubs() const
 {
     for (const auto &it : m_subMap) {
         if (it.second.isValid() || it.second.hasValidSubs()) {
@@ -274,7 +293,8 @@ template<class C> inline bool cacheEntry<C>::hasValidSubs() const
     return false;
 }
 
-template<class C> inline void cacheEntry<C>::insertKey(QStringList &what, const C &st)
+template<class C>
+inline void cacheEntry<C>::insertKey(QStringList &what, const C &st)
 {
     if (what.isEmpty()) {
         return;
@@ -292,7 +312,9 @@ template<class C> inline void cacheEntry<C>::insertKey(QStringList &what, const 
     m_subMap[m].insertKey(what, st);
 }
 
-template<class C> template<class T> inline void cacheEntry<C>::listsubs_if(QStringList &what, T &oper) const
+template<class C>
+template<class T>
+inline void cacheEntry<C>::listsubs_if(QStringList &what, T &oper) const
 {
     if (what.isEmpty()) {
         /* we are the one to get the list for*/
@@ -309,7 +331,8 @@ template<class C> template<class T> inline void cacheEntry<C>::listsubs_if(QStri
     it->second.listsubs_if(what, oper);
 }
 
-template<class C> class itemCache
+template<class C>
+class itemCache
 {
 public:
     typedef cacheEntry<C> cache_type;
@@ -335,20 +358,21 @@ public:
      * \param what Stringlist containing the components to search for
      * \return true if found (may or may not valid!) otherwise false
      */
-    virtual bool find(const QString &what)const;
+    virtual bool find(const QString &what) const;
 
     virtual void deleteKey(const QString &what, bool exact);
     virtual void insertKey(const C &, const QString &path);
-    virtual bool findSingleValid(const QString &what, C &)const;
-    virtual bool findSingleValid(const QString &what, bool check_valid_subs)const;
+    virtual bool findSingleValid(const QString &what, C &) const;
+    virtual bool findSingleValid(const QString &what, bool check_valid_subs) const;
 
-    template<class T>void listsubs_if(const QString &what, T &oper)const;
+    template<class T>
+    void listsubs_if(const QString &what, T &oper) const;
 
     void dump_tree();
 };
 
-
-template<class C> inline void itemCache<C>::insertKey(const C &st, const QString &path)
+template<class C>
+inline void itemCache<C>::insertKey(const C &st, const QString &path)
 {
     QStringList _keys = path.split(QLatin1Char('/'));
     if (_keys.isEmpty()) {
@@ -370,7 +394,8 @@ template<class C> inline void itemCache<C>::insertKey(const C &st, const QString
     }
 }
 
-template<class C> inline bool itemCache<C>::find(const QString &what)const
+template<class C>
+inline bool itemCache<C>::find(const QString &what) const
 {
     QReadLocker locker(&m_RWLock);
 
@@ -392,7 +417,8 @@ template<class C> inline bool itemCache<C>::find(const QString &what)const
     return it->second.find(_keys);
 }
 
-template<class C> inline void itemCache<C>::deleteKey(const QString &_what, bool exact)
+template<class C>
+inline void itemCache<C>::deleteKey(const QString &_what, bool exact)
 {
     QWriteLocker locker(&m_RWLock);
 
@@ -427,16 +453,18 @@ template<class C> inline void itemCache<C>::deleteKey(const QString &_what, bool
     }
 }
 
-template<class C> inline void itemCache<C>::dump_tree()
+template<class C>
+inline void itemCache<C>::dump_tree()
 {
     QReadLocker locker(&m_RWLock);
     for (auto it = m_contentMap.begin(); it != m_contentMap.end(); ++it) {
-//        std::cout<<it->first.latin1() << " (" << it->second.key().latin1() << ")"<<std::endl;
-//        it->second.dump_tree(1);
+        //        std::cout<<it->first.latin1() << " (" << it->second.key().latin1() << ")"<<std::endl;
+        //        it->second.dump_tree(1);
     }
 }
 
-template<class C> inline bool itemCache<C>::findSingleValid(const QString &_what, C &st)const
+template<class C>
+inline bool itemCache<C>::findSingleValid(const QString &_what, C &st) const
 {
     QReadLocker locker(&m_RWLock);
 
@@ -462,7 +490,8 @@ template<class C> inline bool itemCache<C>::findSingleValid(const QString &_what
     return it->second.findSingleValid(what, st);
 }
 
-template<class C> inline bool itemCache<C>::findSingleValid(const QString &_what, bool check_valid_subs)const
+template<class C>
+inline bool itemCache<C>::findSingleValid(const QString &_what, bool check_valid_subs) const
 {
     QReadLocker locker(&m_RWLock);
 
@@ -484,7 +513,9 @@ template<class C> inline bool itemCache<C>::findSingleValid(const QString &_what
     return it->second.findSingleValid(what, check_valid_subs);
 }
 
-template<class C> template<class T> inline void itemCache<C>::listsubs_if(const QString &_what, T &oper)const
+template<class C>
+template<class T>
+inline void itemCache<C>::listsubs_if(const QString &_what, T &oper) const
 {
     QReadLocker locker(&m_RWLock);
 
@@ -513,15 +544,19 @@ typedef itemCache<svn::StatusPtr> statusCache;
 class ValidRemoteOnly
 {
     svn::StatusEntries m_List;
+
 public:
-    ValidRemoteOnly(): m_List() {}
+    ValidRemoteOnly()
+        : m_List()
+    {
+    }
     void operator()(const std::pair<QString, helpers::ptrEntry> &_data)
     {
         if (_data.second.isValid() && _data.second.content()->validReposStatus() && !_data.second.content()->validLocalStatus()) {
             m_List.push_back(_data.second.content());
         }
     }
-    const svn::StatusEntries &liste()const
+    const svn::StatusEntries &liste() const
     {
         return m_List;
     }

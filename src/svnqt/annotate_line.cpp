@@ -37,7 +37,8 @@ AnnotateLine::AnnotateLine()
     : m_line_no(0)
     , m_revision(0)
     , m_merge_revision(0)
-{}
+{
+}
 
 AnnotateLine::AnnotateLine(qlonglong line_no,
                            qlonglong revision,
@@ -47,18 +48,18 @@ AnnotateLine::AnnotateLine(qlonglong line_no,
                            qlonglong merge_revision,
                            const char *merge_author,
                            const char *merge_date,
-                           const char *merge_path
-                          )
+                           const char *merge_path)
     : m_line_no(line_no)
     , m_revision(revision)
-    , m_date((date &&strlen(date)) ? QDateTime::fromString(QString::fromUtf8(date), Qt::ISODate) : QDateTime())
+    , m_date((date && strlen(date)) ? QDateTime::fromString(QString::fromUtf8(date), Qt::ISODate) : QDateTime())
     , m_line(line ? line : "")
     , m_author(author ? author : "")
     , m_merge_revision(merge_revision)
-    , m_merge_date((merge_date &&strlen(merge_date)) ? QDateTime::fromString(QString::fromUtf8(merge_date), Qt::ISODate) : QDateTime())
+    , m_merge_date((merge_date && strlen(merge_date)) ? QDateTime::fromString(QString::fromUtf8(merge_date), Qt::ISODate) : QDateTime())
     , m_merge_author(merge_author ? merge_author : "")
     , m_merge_path(merge_path ? merge_path : "")
-{}
+{
+}
 
 AnnotateLine::AnnotateLine(qlonglong line_no,
                            qlonglong revision,
@@ -69,8 +70,7 @@ AnnotateLine::AnnotateLine(qlonglong line_no,
                            const char *merge_path,
                            qlonglong revstart,
                            qlonglong revend,
-                           bool local
-                           )
+                           bool local)
     : m_line_no(line_no)
     , m_revision(revision)
     , m_date(QDateTime())

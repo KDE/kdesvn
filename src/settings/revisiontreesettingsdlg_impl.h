@@ -22,7 +22,7 @@
 
 #include "settings/ui_revisiontree_settings.h"
 
-class RevisiontreeSettingsDlg_impl: public QWidget, public Ui::RevisionTreeSettings
+class RevisiontreeSettingsDlg_impl : public QWidget, public Ui::RevisionTreeSettings
 {
     Q_OBJECT
 public:

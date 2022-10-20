@@ -18,10 +18,10 @@
 */
 
 #include "svnqt/reposnotify.h"
-#include "svnqt/svnqt_defines.h"
-#include "svnqt/revision.h"
-#include "svnqt/path.h"
 #include "svnqt/helper.h"
+#include "svnqt/path.h"
+#include "svnqt/revision.h"
+#include "svnqt/svnqt_defines.h"
 
 #include <svn_props.h>
 #include <svn_repos.h>
@@ -54,7 +54,8 @@ class ReposNotifyData
 
 public:
     ReposNotifyData(const svn_repos_notify_t *notify)
-        : _warning_msg(QString()), _msg(QString())
+        : _warning_msg(QString())
+        , _msg(QString())
     {
         if (!notify) {
             return;
@@ -78,7 +79,7 @@ public:
     {
     }
 
-    const QString &toString()const
+    const QString &toString() const
     {
         if (_msg.isEmpty()) {
             switch (_action) {
@@ -97,46 +98,37 @@ public:
                     _msg.clear();
                 }
                 _msg += _warning_msg;
-            }
-            break;
+            } break;
             case svn_repos_notify_dump_rev_end:
             case svn_repos_notify_verify_rev_end: {
                 _msg = QStringLiteral("Revision %1 finished.").arg(_rev.toString());
-            }
-            break;
+            } break;
             case svn_repos_notify_dump_end: {
                 _msg = QStringLiteral("Dump finished");
-            }
-            break;
+            } break;
             case svn_repos_notify_verify_end: {
                 _msg = QStringLiteral("Verification finished");
-            }
-            break;
+            } break;
             case svn_repos_notify_pack_shard_start: {
                 _msg = QStringLiteral("Packing revisions in shard %1").arg(_shard);
-            }
-            break;
+            } break;
             case svn_repos_notify_pack_shard_end_revprop:
             case svn_repos_notify_pack_shard_end:
             case svn_repos_notify_load_node_done: {
                 _msg = QStringLiteral("Done");
-            }
-            break;
+            } break;
             case svn_repos_notify_pack_shard_start_revprop: {
                 _msg = QStringLiteral("Packing revsion properties in shard %1").arg(_shard);
-            }
-            break;
+            } break;
             case svn_repos_notify_load_txn_start: {
                 _msg = QStringLiteral("Start loading old revision %1").arg(_oldrev.toString());
-            }
-            break;
+            } break;
             case svn_repos_notify_load_txn_committed: {
                 _msg = QStringLiteral("Committed new revision %1").arg(_newrev.toString());
                 if (_oldrev.isValid()) {
                     _msg.append(QLatin1String(" loaded from original revision ")).append(_oldrev.toString());
                 }
-            }
-            break;
+            } break;
             case svn_repos_notify_load_node_start: {
                 QString action;
                 switch (_node_action) {
@@ -154,25 +146,19 @@ public:
                     break;
                 }
                 _msg = QLatin1String("Start ") + action + QLatin1String(" on node ") + _path.native();
-            }
-            break;
+            } break;
             case svn_repos_notify_load_copied_node: {
                 _msg = QStringLiteral("Copied");
-            }
-            break;
+            } break;
             case svn_repos_notify_load_normalized_mergeinfo: {
                 _msg = QStringLiteral("Removing \\r from ") + QLatin1String(SVN_PROP_MERGEINFO);
-            }
-            break;
+            } break;
             case svn_repos_notify_mutex_acquired: {
-            }
-            break;
+            } break;
             case svn_repos_notify_recover_start: {
-            }
-            break;
+            } break;
             case svn_repos_notify_upgrade_start: {
-            }
-            break;
+            } break;
             }
         }
         return _msg;
@@ -189,11 +175,10 @@ ReposNotify::~ReposNotify()
     delete m_data;
 }
 
-ReposNotify::operator const QString &()const
+ReposNotify::operator const QString &() const
 {
     return m_data->toString();
 }
 
 }
 }
-

@@ -24,12 +24,12 @@
 #ifndef SVNQT_INFO_ENTRY_H
 #define SVNQT_INFO_ENTRY_H
 
+#include <svnqt/conflictdescription.h>
+#include <svnqt/datetime.h>
 #include <svnqt/helper.h>
 #include <svnqt/lock_entry.h>
-#include <svnqt/datetime.h>
 #include <svnqt/revision.h>
 #include <svnqt/svnqttypes.h>
-#include <svnqt/conflictdescription.h>
 
 #include <QString>
 #include <QUrl>
@@ -52,40 +52,40 @@ public:
     void init(const svn_client_info2_t *, const char *path);
     void init(const svn_client_info2_t *, const QString &path);
 
-    DateTime cmtDate()const;
-    DateTime textTime()const;
-    DateTime propTime()const;
-    bool hasWc()const;
+    DateTime cmtDate() const;
+    DateTime textTime() const;
+    DateTime propTime() const;
+    bool hasWc() const;
     /**
      * @return lock for that entry
      * @since subversion 1.2
      */
-    const LockEntry &lockEntry()const;
+    const LockEntry &lockEntry() const;
     /**
      * @return last commit author of this file
      */
     const QString &cmtAuthor() const;
-    const QString &Name()const;
+    const QString &Name() const;
 
-    const QString &checksum()const;
-    const ConflictDescriptionList &conflicts()const;
-    const QUrl &copyfromUrl()const;
-    const QString &prejfile()const;
-    const QUrl &reposRoot()const;
-    const QUrl &url()const;
-    const QString &uuid()const;
-    svn_node_kind_t kind()const;
-    const Revision &cmtRev()const;
-    const Revision &copyfromRev()const;
-    const Revision &revision()const;
-    svn_wc_schedule_t Schedule()const;
+    const QString &checksum() const;
+    const ConflictDescriptionList &conflicts() const;
+    const QUrl &copyfromUrl() const;
+    const QString &prejfile() const;
+    const QUrl &reposRoot() const;
+    const QUrl &url() const;
+    const QString &uuid() const;
+    svn_node_kind_t kind() const;
+    const Revision &cmtRev() const;
+    const Revision &copyfromRev() const;
+    const Revision &revision() const;
+    svn_wc_schedule_t Schedule() const;
 
-    qlonglong size()const;
-    qlonglong working_size()const;
-    const QByteArray &changeList()const;
-    svn::Depth depth()const;
+    qlonglong size() const;
+    qlonglong working_size() const;
+    const QByteArray &changeList() const;
+    svn::Depth depth() const;
 
-    bool isDir()const;
+    bool isDir() const;
 
 protected:
     DateTime m_last_changed_date;

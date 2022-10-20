@@ -31,8 +31,7 @@ SvnThread::SvnThread(QObject *_parent)
     , m_Parent(_parent)
 {
     if (m_Parent) {
-        QObject::connect(m_SvnContextListener, SIGNAL(sendNotify(QString)),
-                         m_Parent, SLOT(slotNotifyMessage(QString)));
+        QObject::connect(m_SvnContextListener, SIGNAL(sendNotify(QString)), m_Parent, SLOT(slotNotifyMessage(QString)));
     }
 
     m_CurrentContext->setListener(m_SvnContextListener);

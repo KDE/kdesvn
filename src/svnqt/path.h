@@ -61,15 +61,14 @@ public:
      *
      * @param path Path string - when url this should NOT hold revision as @ parameter!!!!! (will filtered out)
      */
-    Path(const QString &path = QString());    //krazy:exclude=explicit
+    Path(const QString &path = QString()); // krazy:exclude=explicit
 
     ~Path() = default;
 
     /**
      * @return Path string
      */
-    const QString &
-    path() const;
+    const QString &path() const;
 
     /**
      * @return Path string as c string
@@ -105,19 +104,16 @@ public:
      * @param _peg target where to store the peg url.
      * @throw svn::ClientException on errors
      */
-    static void
-    parsePeg(const QString &pathorurl, Path &_path, svn::Revision &_peg);
+    static void parsePeg(const QString &pathorurl, Path &_path, svn::Revision &_peg);
 
     /** return the length of the path-string */
-    unsigned int
-    length() const;
+    unsigned int length() const;
 
     /** returns the path with native separators */
-    QString
-    native() const;
+    QString native() const;
 
     /** returns if the path is a valid url, eg. points to a remote */
-    bool isUrl()const;
+    bool isUrl() const;
 };
 }
 

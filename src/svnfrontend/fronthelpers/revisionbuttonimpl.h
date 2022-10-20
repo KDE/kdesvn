@@ -20,8 +20,8 @@
 #ifndef REVISIONBUTTONIMPL_H
 #define REVISIONBUTTONIMPL_H
 
-#include "ui_revisionbutton.h"
 #include "svnqt/revision.h"
+#include "ui_revisionbutton.h"
 
 class RevisionButtonImpl final : public QWidget, public Ui::RevisionButton
 {
@@ -32,7 +32,10 @@ public:
 
     void setRevision(const svn::Revision &aRev);
     void setNoWorking(bool);
-    const svn::Revision &revision() const { return m_Rev; }
+    const svn::Revision &revision() const
+    {
+        return m_Rev;
+    }
 
 protected:
     svn::Revision m_Rev;
@@ -42,7 +45,6 @@ public slots:
     void askRevision();
 signals:
     void revisionChanged();
-
 };
 
 #endif

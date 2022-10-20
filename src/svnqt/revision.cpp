@@ -84,8 +84,7 @@ Revision::Revision(const QString &revstring)
     assign(revstring);
 }
 
-void
-Revision::assign(const QString &revstring)
+void Revision::assign(const QString &revstring)
 {
     m_revision.kind = svn_opt_revision_unspecified;
     if (revstring.isEmpty()) {
@@ -107,8 +106,7 @@ Revision::assign(const QString &revstring)
     }
 }
 
-void
-Revision::assign(const QDateTime &dateTime)
+void Revision::assign(const QDateTime &dateTime)
 {
     m_revision.kind = svn_opt_revision_date;
     DateTime dt(dateTime);
@@ -126,8 +124,7 @@ Revision::Revision(const QDateTime &dateTime)
     assign(dateTime);
 }
 
-void
-Revision::init(const svn_opt_revision_t *revision)
+void Revision::init(const svn_opt_revision_t *revision)
 {
     if (!revision) {
         m_revision.kind = svn_opt_revision_unspecified;
@@ -153,12 +150,12 @@ Revision::init(const svn_opt_revision_t *revision)
     }
 }
 
-Revision::operator QString()const
+Revision::operator QString() const
 {
     return toString();
 }
 
-QString Revision::toString()const
+QString Revision::toString() const
 {
     QString value;
     switch (m_revision.kind) {
@@ -188,14 +185,12 @@ QString Revision::toString()const
     return value;
 }
 
-const svn_opt_revision_t *
-Revision::revision() const
+const svn_opt_revision_t *Revision::revision() const
 {
     return &m_revision;
 }
 
-svn_revnum_t
-Revision::revnum() const
+svn_revnum_t Revision::revnum() const
 {
     if (m_revision.kind == svn_opt_revision_number) {
         return m_revision.value.number;
@@ -203,19 +198,17 @@ Revision::revnum() const
     return SVN_INVALID_REVNUM;
 }
 
-apr_time_t
-Revision::date() const
+apr_time_t Revision::date() const
 {
     return m_revision.value.date;
 }
 
-svn_opt_revision_kind
-Revision::kind() const
+svn_opt_revision_kind Revision::kind() const
 {
     return m_revision.kind;
 }
 
-bool Revision::operator==(const Revision &r)const
+bool Revision::operator==(const Revision &r) const
 {
     if (r.kind() != kind()) {
         return false;
@@ -228,7 +221,7 @@ bool Revision::operator==(const Revision &r)const
     return true;
 }
 
-bool Revision::operator==(int value)const
+bool Revision::operator==(int value) const
 {
     if (m_revision.kind != svn_opt_revision_number || value != revnum()) {
         return false;
@@ -236,16 +229,16 @@ bool Revision::operator==(int value)const
     return true;
 }
 
-bool Revision::operator!=(const svn_opt_revision_kind t)const
+bool Revision::operator!=(const svn_opt_revision_kind t) const
 {
     return kind() != t;
 }
-bool Revision::operator==(const svn_opt_revision_kind t)const
+bool Revision::operator==(const svn_opt_revision_kind t) const
 {
     return kind() == t;
 }
 
-bool Revision::operator!()const
+bool Revision::operator!() const
 {
     return kind() == UNDEFINED;
 }
@@ -255,7 +248,7 @@ bool Revision::operator!()
     return kind() == UNDEFINED;
 }
 
-Revision::operator bool()const
+Revision::operator bool() const
 {
     return kind() != UNDEFINED;
 }
@@ -265,7 +258,7 @@ Revision::operator bool()
     return kind() != UNDEFINED;
 }
 
-bool Revision::isRemote()const
+bool Revision::isRemote() const
 {
     return kind() != UNDEFINED && kind() != BASE && kind() != WORKING;
 }

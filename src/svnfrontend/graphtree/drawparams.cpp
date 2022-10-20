@@ -51,9 +51,7 @@ StoredDrawParams::StoredDrawParams()
     // field array has size 0
 }
 
-StoredDrawParams::StoredDrawParams(const QColor &c,
-                                   bool selected,
-                                   bool current)
+StoredDrawParams::StoredDrawParams(const QColor &c, bool selected, bool current)
     : _backColor(c)
     , _selected(selected)
     , _current(current)
@@ -123,8 +121,7 @@ void StoredDrawParams::ensureField(int f)
     }
 }
 
-void StoredDrawParams::setField(int f, const QString &t, const QPixmap &pm,
-                                Position p, int maxLines)
+void StoredDrawParams::setField(int f, const QString &t, const QPixmap &pm, Position p, int maxLines)
 {
     if (f < 0 || f >= MAX_FIELD) {
         return;
@@ -132,8 +129,8 @@ void StoredDrawParams::setField(int f, const QString &t, const QPixmap &pm,
     ensureField(f);
 
     _field[f].text = t;
-    _field[f].pix  = pm;
-    _field[f].pos  = p;
+    _field[f].pix = pm;
+    _field[f].pos = p;
     _field[f].maxLines = maxLines;
 }
 
@@ -182,8 +179,8 @@ void StoredDrawParams::setMaxLines(int f, int m)
 //
 
 RectDrawing::RectDrawing(const QRect &r)
-  : _fm(nullptr)
-  , _dp(nullptr)
+    : _fm(nullptr)
+    , _dp(nullptr)
 {
     setRect(r);
 }
@@ -231,9 +228,7 @@ QRect RectDrawing::remainingRect(DrawParams *dp)
         dp = drawParams();
     }
 
-    if ((_usedTopLeft > 0) ||
-            (_usedTopCenter > 0) ||
-            (_usedTopRight > 0)) {
+    if ((_usedTopLeft > 0) || (_usedTopCenter > 0) || (_usedTopRight > 0)) {
         if (dp->rotated()) {
             _rect.setLeft(_rect.left() + _fontHeight);
         } else {
@@ -241,9 +236,7 @@ QRect RectDrawing::remainingRect(DrawParams *dp)
         }
     }
 
-    if ((_usedBottomLeft > 0) ||
-            (_usedBottomCenter > 0) ||
-            (_usedBottomRight > 0)) {
+    if ((_usedBottomLeft > 0) || (_usedBottomCenter > 0) || (_usedBottomRight > 0)) {
         if (dp->rotated()) {
             _rect.setRight(_rect.right() - _fontHeight);
         } else {
@@ -304,8 +297,8 @@ void RectDrawing::drawBack(QPainter *p, DrawParams *dp)
             s = r.height();
         }
         if (s < 100) {
-            forth -= .3  * (100 - s) / 100;
-            back1 -= .2  * (100 - s) / 100;
+            forth -= .3 * (100 - s) / 100;
+            back1 -= .2 * (100 - s) / 100;
             back2 -= .02 * (100 - s) / 100;
         }
 
@@ -316,9 +309,7 @@ void RectDrawing::drawBack(QPainter *p, DrawParams *dp)
 
         QColor shadeColor;
         while (factor < .95 && (r.width() >= 0 && r.height() >= 0)) {
-            shadeColor.setRgb(qRound(rBase + factor * rDiff),
-                              qRound(gBase + factor * gDiff),
-                              qRound(bBase + factor * bDiff));
+            shadeColor.setRgb(qRound(rBase + factor * rDiff), qRound(gBase + factor * gDiff), qRound(bBase + factor * bDiff));
             p->setPen(shadeColor);
             p->drawRect(r);
             r.setRect(r.x() + 1, r.y() + 1, r.width() - 2, r.height() - 2);
@@ -327,9 +318,7 @@ void RectDrawing::drawBack(QPainter *p, DrawParams *dp)
 
         // and back (1st half)
         while (factor > toBack2 && (r.width() >= 0 && r.height() >= 0)) {
-            shadeColor.setRgb(qRound(rBase + factor * rDiff),
-                              qRound(gBase + factor * gDiff),
-                              qRound(bBase + factor * bDiff));
+            shadeColor.setRgb(qRound(rBase + factor * rDiff), qRound(gBase + factor * gDiff), qRound(bBase + factor * bDiff));
             p->setPen(shadeColor);
             p->drawRect(r);
             r.setRect(r.x() + 1, r.y() + 1, r.width() - 2, r.height() - 2);
@@ -338,9 +327,7 @@ void RectDrawing::drawBack(QPainter *p, DrawParams *dp)
 
         // and back (2nd half)
         while (factor > .01 && (r.width() >= 0 && r.height() >= 0)) {
-            shadeColor.setRgb(qRound(rBase + factor * rDiff),
-                              qRound(gBase + factor * gDiff),
-                              qRound(bBase + factor * bDiff));
+            shadeColor.setRgb(qRound(rBase + factor * rDiff), qRound(gBase + factor * gDiff), qRound(bBase + factor * bDiff));
             p->setPen(shadeColor);
             p->drawRect(r);
             r.setRect(r.x() + 1, r.y() + 1, r.width() - 2, r.height() - 2);
@@ -357,12 +344,11 @@ void RectDrawing::drawBack(QPainter *p, DrawParams *dp)
 }
 
 /* Helper for drawField
-* Find a line break position in a string, given a font and maximum width
-*
-* Returns the actually used width, and sets <breakPos>
-*/
-static
-int findBreak(int &breakPos, QString text, QFontMetrics *fm, int maxWidth)
+ * Find a line break position in a string, given a font and maximum width
+ *
+ * Returns the actually used width, and sets <breakPos>
+ */
+static int findBreak(int &breakPos, QString text, QFontMetrics *fm, int maxWidth)
 {
     int usedWidth;
 
@@ -409,8 +395,7 @@ int findBreak(int &breakPos, QString text, QFontMetrics *fm, int maxWidth)
         }
 
         // "Aa" has not a possible break inbetween
-        if ((cat == QChar::Letter_Uppercase) &&
-                (lastCat == QChar::Letter_Lowercase)) {
+        if ((cat == QChar::Letter_Uppercase) && (lastCat == QChar::Letter_Lowercase)) {
             lastCat = cat;
             continue;
         }
@@ -430,13 +415,12 @@ int findBreak(int &breakPos, QString text, QFontMetrics *fm, int maxWidth)
 }
 
 /* Helper for drawField
-* Find last line break position in a string from backwards,
-* given a font and maximum width
-*
-* Returns the actually used width, and sets <breakPos>
-*/
-static
-int findBreakBackwards(int &breakPos, QString text, QFontMetrics *fm, int maxWidth)
+ * Find last line break position in a string from backwards,
+ * given a font and maximum width
+ *
+ * Returns the actually used width, and sets <breakPos>
+ */
+static int findBreakBackwards(int &breakPos, QString text, QFontMetrics *fm, int maxWidth)
 {
     int usedWidth;
 
@@ -483,8 +467,7 @@ int findBreakBackwards(int &breakPos, QString text, QFontMetrics *fm, int maxWid
         }
 
         // "Aa" has not a possible break inbetween
-        if ((lastCat == QChar::Letter_Uppercase) &&
-                (cat == QChar::Letter_Lowercase)) {
+        if ((lastCat == QChar::Letter_Uppercase) && (cat == QChar::Letter_Lowercase)) {
             lastCat = cat;
             continue;
         }
@@ -518,9 +501,9 @@ bool RectDrawing::drawField(QPainter *p, int f, DrawParams *dp)
 
     int h = _fontHeight;
     bool rotate = dp->rotated();
-    int width   = (rotate ? r.height() : r.width()) - 4;
-    int height  = (rotate ? r.width() : r.height());
-    int lines   = height / h;
+    int width = (rotate ? r.height() : r.width()) - 4;
+    int height = (rotate ? r.width() : r.height());
+    int lines = height / h;
 
     // stop if there is no space available
     if (lines < 1) {
@@ -531,10 +514,18 @@ bool RectDrawing::drawField(QPainter *p, int f, DrawParams *dp)
     int pos = dp->position(f);
     if (pos == DrawParams::Default) {
         switch (f % 4) {
-        case 0: pos = DrawParams::TopLeft; break;
-        case 1: pos = DrawParams::TopRight; break;
-        case 2: pos = DrawParams::BottomRight; break;
-        case 3: pos = DrawParams::BottomLeft; break;
+        case 0:
+            pos = DrawParams::TopLeft;
+            break;
+        case 1:
+            pos = DrawParams::TopRight;
+            break;
+        case 2:
+            pos = DrawParams::BottomRight;
+            break;
+        case 3:
+            pos = DrawParams::BottomLeft;
+            break;
         }
     }
 
@@ -618,15 +609,11 @@ bool RectDrawing::drawField(QPainter *p, int f, DrawParams *dp)
         break;
     }
     if (isBottom) {
-        if ((_usedTopLeft > 0) ||
-                (_usedTopCenter > 0) ||
-                (_usedTopRight > 0)) {
+        if ((_usedTopLeft > 0) || (_usedTopCenter > 0) || (_usedTopRight > 0)) {
             lines--;
         }
     } else if (!isBottom) {
-        if ((_usedBottomLeft > 0) ||
-                (_usedBottomCenter > 0) ||
-                (_usedBottomRight > 0)) {
+        if ((_usedBottomLeft > 0) || (_usedBottomCenter > 0) || (_usedBottomRight > 0)) {
             lines--;
         }
     }
@@ -723,7 +710,7 @@ bool RectDrawing::drawField(QPainter *p, int f, DrawParams *dp)
     p->setPen((qGray(dp->backColor().rgb()) > 100) ? Qt::black : Qt::white);
     p->setFont(dp->font());
     if (rotate) {
-        //p->translate(r.x()+2, r.y()+r.height());
+        // p->translate(r.x()+2, r.y()+r.height());
         p->translate(r.x(), r.y() + r.height() - 2);
         p->rotate(270);
     } else {
@@ -741,11 +728,10 @@ bool RectDrawing::drawField(QPainter *p, int f, DrawParams *dp)
      *
      * If the text is to be written at the bottom, we start with the
      * end of the string (so everything is reverted)
-    */
+     */
     QString remaining;
     int origLines = lines;
     while (lines > 0) {
-
         // more than one line: search for line break
         if (w > width && lines > 1) {
             int breakPos;
@@ -802,9 +788,7 @@ bool RectDrawing::drawField(QPainter *p, int f, DrawParams *dp)
             pixY = isBottom ? (pixY - h - 2) : (pixY + pixH + 2);
             pixDrawn = true;
         }
-        p->drawText(x + pixW, y,
-                    width - pixW, h,
-                    Qt::AlignLeft, name);
+        p->drawText(x + pixW, y, width - pixW, h, Qt::AlignLeft, name);
         y = isBottom ? (y - h) : (y + h);
         lines--;
 

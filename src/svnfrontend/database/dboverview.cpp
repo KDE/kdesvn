@@ -25,19 +25,19 @@
 #include "ui_dboverview.h"
 
 #include "dbsettings.h"
+#include "helpers/kdesvn_debug.h"
+#include "helpers/stringhelper.h"
+#include "svnqt/cache/DatabaseException.h"
 #include "svnqt/cache/LogCache.h"
 #include "svnqt/cache/ReposLog.h"
-#include "svnqt/cache/DatabaseException.h"
 #include "svnqt/client.h"
-#include "helpers/stringhelper.h"
-#include "helpers/kdesvn_debug.h"
 
+#include <QItemSelectionModel>
 #include <QPointer>
 #include <QStringListModel>
-#include <QItemSelectionModel>
 
-#include <KMessageBox>
 #include <KLocalizedString>
+#include <KMessageBox>
 
 DbOverview::DbOverview(const svn::ClientP &aClient, QWidget *parent)
     : KSvnDialog(QLatin1String("db_overview_dlg"), parent)
@@ -47,8 +47,7 @@ DbOverview::DbOverview(const svn::ClientP &aClient, QWidget *parent)
 {
     m_ui->setupUi(this);
     setDefaultButton(m_ui->buttonBox->button(QDialogButtonBox::Close));
-    connect(m_ui->buttonBox->button(QDialogButtonBox::Close), &QAbstractButton::clicked,
-            this, &QDialog::accept);
+    connect(m_ui->buttonBox->button(QDialogButtonBox::Close), &QAbstractButton::clicked, this, &QDialog::accept);
 
     enableButtons(false);
 
@@ -61,18 +60,14 @@ DbOverview::DbOverview(const svn::ClientP &aClient, QWidget *parent)
     m_ui->m_ReposListView->setModel(m_repo_model);
     QItemSelectionModel *_sel = m_ui->m_ReposListView->selectionModel();
     if (_sel) {
-        connect(_sel, &QItemSelectionModel::selectionChanged,
-                this, &DbOverview::itemActivated);
+        connect(_sel, &QItemSelectionModel::selectionChanged, this, &DbOverview::itemActivated);
     }
-    connect(m_ui->m_DeleteCacheButton, &QAbstractButton::clicked,
-            this, &DbOverview::deleteCacheItems);
-    connect(m_ui->m_DeleteRepositoryButton, &QAbstractButton::clicked,
-            this, &DbOverview::deleteRepository);
-    connect(m_ui->m_SettingsButton, &QAbstractButton::clicked,
-            this, &DbOverview::repositorySettings);
+    connect(m_ui->m_DeleteCacheButton, &QAbstractButton::clicked, this, &DbOverview::deleteCacheItems);
+    connect(m_ui->m_DeleteRepositoryButton, &QAbstractButton::clicked, this, &DbOverview::deleteRepository);
+    connect(m_ui->m_SettingsButton, &QAbstractButton::clicked, this, &DbOverview::repositorySettings);
     m_ui->m_StatisticButton->setVisible(false);
     // t.b.d
-    //connect(m_ui->m_StatisticButton, SIGNAL(clicked(bool)),
+    // connect(m_ui->m_StatisticButton, SIGNAL(clicked(bool)),
     //        this, SLOT(repositoryStatistics()));
 }
 
@@ -83,7 +78,7 @@ DbOverview::~DbOverview()
 
 void DbOverview::showDbOverview(const svn::ClientP &aClient, QWidget *parent)
 {
-//  i18n("Overview about cache database content")
+    //  i18n("Overview about cache database content")
     QPointer<DbOverview> dlg(new DbOverview(aClient, parent ? parent : QApplication::activeModalWidget()));
     dlg->exec();
     delete dlg;
@@ -118,7 +113,7 @@ void DbOverview::genInfo(const QString &repo)
     m_ui->m_RepostatusBrowser->setText(msg);
 }
 
-QString DbOverview::selectedRepository()const
+QString DbOverview::selectedRepository() const
 {
     const QModelIndexList _indexes = m_ui->m_ReposListView->selectionModel()->selectedIndexes();
     if (_indexes.size() != 1) {
@@ -128,10 +123,9 @@ QString DbOverview::selectedRepository()const
 }
 
 void DbOverview::deleteCacheItems()
-  {
-    KMessageBox::ButtonCode i = KMessageBox::questionYesNo(this,
-                                                           i18n("Really clean cache for repository\n%1?", selectedRepository()),
-                                                           i18n("Clean repository cache"));
+{
+    KMessageBox::ButtonCode i =
+        KMessageBox::questionYesNo(this, i18n("Really clean cache for repository\n%1?", selectedRepository()), i18n("Clean repository cache"));
     if (i != KMessageBox::Yes) {
         return;
     }
@@ -146,9 +140,8 @@ void DbOverview::deleteCacheItems()
 
 void DbOverview::deleteRepository()
 {
-    KMessageBox::ButtonCode i = KMessageBox::questionYesNo(this,
-                                                           i18n("Really clean cache and data for repository\n%1?", selectedRepository()),
-                                                           i18n("Delete repository"));
+    KMessageBox::ButtonCode i =
+        KMessageBox::questionYesNo(this, i18n("Really clean cache and data for repository\n%1?", selectedRepository()), i18n("Delete repository"));
     if (i != KMessageBox::Yes) {
         return;
     }

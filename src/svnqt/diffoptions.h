@@ -40,11 +40,8 @@ class Pool;
 class SVNQT_EXPORT DiffOptions
 {
 public:
-    enum IgnoreSpace {
-        IgnoreSpaceNone,
-        IgnoreSpaceChange,
-        IgnoreSpaceAll
-    };
+    enum IgnoreSpace { IgnoreSpaceNone, IgnoreSpaceChange, IgnoreSpaceAll };
+
 protected:
     DiffOptions::IgnoreSpace _ignorespace = DiffOptions::IgnoreSpaceNone;
     bool _ignoreeol = false;
@@ -69,7 +66,7 @@ public:
      */
     explicit DiffOptions(const svn_diff_file_options_t *options);
 
-    svn_diff_file_options_t *options(const Pool &pool)const;
+    svn_diff_file_options_t *options(const Pool &pool) const;
 };
 }
 

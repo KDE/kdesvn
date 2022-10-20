@@ -31,6 +31,7 @@ class PwStorage
 {
 protected:
     PwStorageData *mData;
+
 public:
     bool getCertPw(const QString &realm, QString &pw);
     bool getLogin(const QString &realm, QString &user, QString &pw);
@@ -48,4 +49,3 @@ protected:
 };
 
 #endif
-

@@ -32,10 +32,10 @@
 #define SVNQT_ENTRY_H
 
 // svncpp
-#include <svnqt/pool.h>
-#include <svnqt/lock_entry.h>
 #include <svnqt/dirent.h>
 #include <svnqt/info_entry.h>
+#include <svnqt/lock_entry.h>
+#include <svnqt/pool.h>
 #include <svnqt/svnqt_defines.h>
 #include <svnqt/svnqttypes.h>
 
@@ -97,13 +97,11 @@ public:
     /**
      * @return entry's name
      */
-    const QString &
-    name() const;
+    const QString &name() const;
     /**
      * @return base revision
      */
-    svn_revnum_t
-    revision() const;
+    svn_revnum_t revision() const;
     /**
      * @return url in repository
      */
@@ -116,55 +114,47 @@ public:
     /**
      * @return repository uuid
      */
-    const QString &
-    uuid() const;
+    const QString &uuid() const;
     /**
      * @return node kind (file, dir, ...)
      */
-    svn_node_kind_t
-    kind() const;
+    svn_node_kind_t kind() const;
 
     /**
      * @return TRUE if copied
      */
-    bool
-    isCopied() const;
+    bool isCopied() const;
 
     /**
      * @return last revision this was changed
      */
-    svn_revnum_t
-    cmtRev() const;
+    svn_revnum_t cmtRev() const;
 
     /**
      * @return last date this was changed
      */
-    const DateTime &
-    cmtDate() const;
+    const DateTime &cmtDate() const;
 
     /**
      * @return last commit author of this file
      */
-    const QString &
-    cmtAuthor() const;
+    const QString &cmtAuthor() const;
 
     /**
      * @return lock for that entry
      * @since subversion 1.2
      */
-    const LockEntry &
-    lockEntry()const;
+    const LockEntry &lockEntry() const;
 
     /**
      * @return true if entry is marked as dir
      */
-    bool isDir()const;
+    bool isDir() const;
     /**
      * assignment operator
      */
-    Entry &
-    operator = (const Entry &);
-    bool isFile()const;
+    Entry &operator=(const Entry &);
+    bool isFile() const;
 
 private:
     Entry_private *m_Data;

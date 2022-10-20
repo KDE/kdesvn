@@ -19,5 +19,3 @@
 
 #include "kdesvn_debug.h"
 Q_LOGGING_CATEGORY(KDESVN_LOG, "log_kdesvn")
-
-

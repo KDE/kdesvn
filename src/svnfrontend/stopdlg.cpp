@@ -19,19 +19,19 @@
  ***************************************************************************/
 #include "stopdlg.h"
 #include "ccontextlistener.h"
-#include "settings/kdesvnsettings.h"
 #include "helpers/stringhelper.h"
+#include "settings/kdesvnsettings.h"
 
 #include <KLocalizedString>
 
 #include <QApplication>
 #include <QDialogButtonBox>
-#include <QTimer>
 #include <QLabel>
-#include <QTextBrowser>
-#include <QWidget>
-#include <QVBoxLayout>
 #include <QProgressBar>
+#include <QTextBrowser>
+#include <QTimer>
+#include <QVBoxLayout>
+#include <QWidget>
 
 StopDlg::StopDlg(CContextListener *listener, QWidget *parent, const QString &caption, const QString &text)
     : QDialog(parent)
@@ -73,8 +73,7 @@ StopDlg::StopDlg(CContextListener *listener, QWidget *parent, const QString &cap
     if (listener) {
         connect(listener, &CContextListener::tickProgress, this, &StopDlg::slotTick);
         connect(listener, &CContextListener::waitShow, this, &StopDlg::slotWait);
-        connect(listener, &CContextListener::netProgress,
-                this, &StopDlg::slotNetProgres);
+        connect(listener, &CContextListener::netProgress, this, &StopDlg::slotNetProgres);
         connect(this, &StopDlg::sigCancel, listener, &CContextListener::setCanceled);
     }
     mShowTimer->setSingleShot(true);
@@ -125,7 +124,7 @@ void StopDlg::slotAutoShow()
     if (mShown || mWait || hasDialogs) {
         mShowTimer->setSingleShot(true);
         if (mWait) {
-            //qCDebug(KDESVN_LOG) << "Waiting for show"<<endl;
+            // qCDebug(KDESVN_LOG) << "Waiting for show"<<endl;
             mShowTimer->start(m_MinDuration);
         }
         mShowTimer->start(m_MinDuration);
@@ -174,8 +173,7 @@ void StopDlg::slotExtraMessage(const QString &msg)
         m_LogWindow->show();
         resize(QSize(500, 400).expandedTo(minimumSizeHint()));
     }
-    if (m_lastLogLines >= Kdesvnsettings::self()->cmdline_log_minline() &&
-            isHidden()) {
+    if (m_lastLogLines >= Kdesvnsettings::self()->cmdline_log_minline() && isHidden()) {
         slotAutoShow();
     }
     m_LogWindow->append(msg);

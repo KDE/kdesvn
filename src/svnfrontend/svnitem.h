@@ -22,11 +22,11 @@
 #define SVN_ITEM_H
 
 #include "svnqt/status.h"
-#include <QString>
 #include <QDateTime>
 #include <QMimeType>
 #include <QPixmap>
 #include <QScopedPointer>
+#include <QString>
 
 class SvnItemModelNode;
 class SvnItem_p;
@@ -45,30 +45,30 @@ public:
     explicit SvnItem(const svn::StatusPtr &);
     virtual ~SvnItem();
 
-    virtual const QString &fullName()const;
-    virtual const QString &shortName()const;
-    virtual const QUrl &Url()const;
+    virtual const QString &fullName() const;
+    virtual const QString &shortName() const;
+    virtual const QUrl &Url() const;
     virtual const QUrl &kdeName(const svn::Revision &);
     virtual QMimeType mimeType();
-    virtual const QDateTime &fullDate()const;
-    virtual bool isDir()const;
-    virtual bool isVersioned()const;
-    virtual bool isConflicted()const;
-    virtual bool isValid()const;
-    virtual bool isRealVersioned()const;
-    virtual bool isIgnored()const;
-    virtual bool isRemoteAdded()const;
-    virtual bool isChanged()const;
-    virtual bool isLocalAdded()const;
-    virtual QString infoText()const;
-    virtual QString cmtAuthor()const;
-    virtual long int cmtRev()const;
-    virtual bool isLocked()const;
-    virtual QString lockOwner()const;
-    virtual QString getParentDir()const = 0;
-    virtual SvnItem *getParentItem()const = 0;
-    virtual svn::Revision correctPeg()const = 0;
-    virtual svn::Revision revision()const;
+    virtual const QDateTime &fullDate() const;
+    virtual bool isDir() const;
+    virtual bool isVersioned() const;
+    virtual bool isConflicted() const;
+    virtual bool isValid() const;
+    virtual bool isRealVersioned() const;
+    virtual bool isIgnored() const;
+    virtual bool isRemoteAdded() const;
+    virtual bool isChanged() const;
+    virtual bool isLocalAdded() const;
+    virtual QString infoText() const;
+    virtual QString cmtAuthor() const;
+    virtual long int cmtRev() const;
+    virtual bool isLocked() const;
+    virtual QString lockOwner() const;
+    virtual QString getParentDir() const = 0;
+    virtual SvnItem *getParentItem() const = 0;
+    virtual svn::Revision correctPeg() const = 0;
+    virtual svn::Revision revision() const;
     virtual void refreshStatus(bool children = false) = 0;
 
     QPixmap getPixmap(int size, bool overlay = true);
@@ -79,12 +79,12 @@ public:
         return nullptr;
     }
     virtual void setStat(const svn::StatusPtr &);
-    virtual const svn::StatusPtr &stat()const;
-    virtual bool isModified()const;
-    virtual bool isChildModified()const;
-    bool isNormal()const;
-    bool isMissing()const;
-    bool isDeleted()const;
+    virtual const svn::StatusPtr &stat() const;
+    virtual bool isModified() const;
+    virtual bool isChildModified() const;
+    bool isNormal() const;
+    bool isMissing() const;
+    bool isDeleted() const;
     const QString &getToolTipText();
     virtual void generateToolTip(const svn::InfoEntry &entry);
     bool hasToolTipText();
@@ -92,24 +92,12 @@ public:
 
 protected:
     bool m_overlaycolor;
-    enum color_type {
-        NONE = 0,
-        UPDATES = 1,
-        MODIFIED = 2,
-        LOCKED = 3,
-        ADDED = 4,
-        DELETED = 5,
-        MISSING = 6,
-        NOTVERSIONED = 7,
-        CONFLICT = 8,
-        NEEDLOCK = 9
-    };
+    enum color_type { NONE = 0, UPDATES = 1, MODIFIED = 2, LOCKED = 3, ADDED = 4, DELETED = 5, MISSING = 6, NOTVERSIONED = 7, CONFLICT = 8, NEEDLOCK = 9 };
     color_type m_bgColor;
     QScopedPointer<SvnItem_p> p_Item;
-    virtual SvnActions *getWrapper()const = 0;
+    virtual SvnActions *getWrapper() const = 0;
 
     static QPixmap internalTransform(const QPixmap &, int size);
-
 };
 
 #endif

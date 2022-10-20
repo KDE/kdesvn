@@ -20,7 +20,6 @@
 #include "displaysettings_impl.h"
 #include "settings/kdesvnsettings.h"
 
-
 DisplaySettings_impl::DisplaySettings_impl(QWidget *parent)
     : QWidget(parent)
 {

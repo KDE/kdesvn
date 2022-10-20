@@ -31,7 +31,7 @@ struct BlameDisplayData;
 class QTreeWidgetItem;
 class SimpleLogCb;
 
-class BlameDisplay: public KSvnDialog
+class BlameDisplay : public KSvnDialog
 {
     Q_OBJECT
 private:
@@ -40,6 +40,7 @@ private:
 
     void setContent(const QString &what, const svn::AnnotatedFile &blame);
     void showCommit(BlameTreeItem *bti);
+
 public:
     static void displayBlame(SimpleLogCb *_cb, const QString &item, const svn::AnnotatedFile &blame, QWidget *parent);
 
@@ -53,6 +54,4 @@ private Q_SLOTS:
 private:
     Ui::BlameDisplay *m_ui;
     BlameDisplayData *m_Data;
-
 };
-

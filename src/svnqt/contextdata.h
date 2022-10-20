@@ -24,13 +24,13 @@
 #ifndef SVNCONTEXTDATA_HPP
 #define SVNCONTEXTDATA_HPP
 
-#include <svnqt/pool.h>
 #include <svnqt/apr.h>
 #include <svnqt/commititem.h>
+#include <svnqt/pool.h>
 #include <svnqt/svnqt_defines.h>
 
-#include <svn_client.h>
 #include <svn_auth.h>
+#include <svn_client.h>
 
 #include <QString>
 
@@ -53,7 +53,7 @@ public:
 
     // data methods
     svn_client_ctx_t *ctx();
-    const QString &configDir()const;
+    const QString &configDir() const;
     void setListener(ContextListener *listener);
     ContextListener *getListener() const;
     void reset();
@@ -64,7 +64,7 @@ public:
     void setLogin(const QString &usr, const QString &pwd);
     /** @see Context::setLogMessage */
     void setLogMessage(const QString &msg);
-    const QString &getLogMessage()const;
+    const QString &getLogMessage() const;
     /**
      * if the @a listener is set, use it to retrieve the log
      * message using ContextListener::contextGetLogMessage.
@@ -112,10 +112,7 @@ public:
      * @return continue?
      * @retval false cancel
      */
-    bool
-    retrieveLogin(const char *username_,
-                  const char *realm,
-                  bool &may_save);
+    bool retrieveLogin(const char *username_, const char *realm, bool &may_save);
     /**
      * if the @a listener is set and no password has been
      * set yet, use it to retrieve login and password using
@@ -127,10 +124,7 @@ public:
      * @return continue?
      * @retval false cancel
      */
-    bool
-    retrieveSavedLogin(const char *username_,
-                       const char *realm,
-                       bool &may_save);
+    bool retrieveSavedLogin(const char *username_, const char *realm, bool &may_save);
     /**
      * if the @a listener is set and no password has been
      * set yet, use it to retrieve login and password using
@@ -142,10 +136,7 @@ public:
      * @return continue?
      * @retval false cancel
      */
-    bool
-    retrieveCachedLogin(const char *username_,
-                        const char *realm,
-                        bool &may_save);
+    bool retrieveCachedLogin(const char *username_, const char *realm, bool &may_save);
 
 protected:
     // static methods
@@ -161,58 +152,41 @@ protected:
      * @retval SVN_NO_ERROR if everything is fine
      * @retval SVN_ERR_CANCELLED on invalid values
      */
-    static svn_error_t *
-    getContextData(void *baton, ContextData **data);
+    static svn_error_t *getContextData(void *baton, ContextData **data);
 
     /**
      * this function gets called by the subversion api function
      * when a log message is needed. This is the case on a commit
      * for example
      */
-    static svn_error_t *
-    onLogMsg(const char **log_msg,
-             const char **tmp_file,
-             apr_array_header_t *commit_items,
-             void *baton,
-             apr_pool_t *pool);
+    static svn_error_t *onLogMsg(const char **log_msg, const char **tmp_file, apr_array_header_t *commit_items, void *baton, apr_pool_t *pool);
 
     /**
      * this function gets called by the subversion api function
      * when a log message is needed. This is the case on a commit
      * for example
      */
-    static svn_error_t *
-    onLogMsg2(const char **log_msg,
-              const char **tmp_file,
-              const apr_array_header_t *commit_items,
-              void *baton,
-              apr_pool_t *pool);
+    static svn_error_t *onLogMsg2(const char **log_msg, const char **tmp_file, const apr_array_header_t *commit_items, void *baton, apr_pool_t *pool);
 
     /**
      * this function gets called by the subversion api function
      * when a log message is needed. This is the case on a commit
      * for example
      */
-    static svn_error_t *
-    onLogMsg3(const char **log_msg,
-              const char **tmp_file,
-              const apr_array_header_t *commit_items,
-              void *baton,
-              apr_pool_t *pool);
+    static svn_error_t *onLogMsg3(const char **log_msg, const char **tmp_file, const apr_array_header_t *commit_items, void *baton, apr_pool_t *pool);
 
     /**
      * this is the callback function for the subversion
      * api functions to signal the progress of an action
      */
-    static void
-    onNotify(void *baton,
-             const char *path,
-             svn_wc_notify_action_t action,
-             svn_node_kind_t kind,
-             const char *mime_type,
-             svn_wc_notify_state_t content_state,
-             svn_wc_notify_state_t prop_state,
-             svn_revnum_t revision);
+    static void onNotify(void *baton,
+                         const char *path,
+                         svn_wc_notify_action_t action,
+                         svn_node_kind_t kind,
+                         const char *mime_type,
+                         svn_wc_notify_state_t content_state,
+                         svn_wc_notify_state_t prop_state,
+                         svn_revnum_t revision);
     /**
      * this is the callback function for the subversion 1.2
      * api functions to signal the progress of an action
@@ -221,8 +195,7 @@ protected:
      *       but maybe we should a notify2 to the listener
      * @since subversion 1.2
      */
-    static void
-    onNotify2(void *baton, const svn_wc_notify_t *action, apr_pool_t */*tpool*/);
+    static void onNotify2(void *baton, const svn_wc_notify_t *action, apr_pool_t * /*tpool*/);
     /**
      * this is the callback function for the subversion
      * api functions to signal the progress of an action
@@ -236,12 +209,7 @@ protected:
      * So we can try load password from other source.
      */
     static svn_error_t *
-    onCachedPrompt(svn_auth_cred_simple_t **cred,
-                   void *baton,
-                   const char *realm,
-                   const char *username,
-                   svn_boolean_t _may_save,
-                   apr_pool_t *pool);
+    onCachedPrompt(svn_auth_cred_simple_t **cred, void *baton, const char *realm, const char *username, svn_boolean_t _may_save, apr_pool_t *pool);
 
     /**
      * @see svn_auth_simple_prompt_func_t
@@ -249,58 +217,34 @@ protected:
      * So we can try load password from other source.
      */
     static svn_error_t *
-    onSavedPrompt(svn_auth_cred_simple_t **cred,
-                  void *baton,
-                  const char *realm,
-                  const char *username,
-                  svn_boolean_t _may_save,
-                  apr_pool_t *pool);
+    onSavedPrompt(svn_auth_cred_simple_t **cred, void *baton, const char *realm, const char *username, svn_boolean_t _may_save, apr_pool_t *pool);
     /**
      * @see svn_auth_simple_prompt_func_t
      */
     static svn_error_t *
-    onSimplePrompt(svn_auth_cred_simple_t **cred,
-                   void *baton,
-                   const char *realm,
-                   const char *username,
-                   svn_boolean_t _may_save,
-                   apr_pool_t *pool);
+    onSimplePrompt(svn_auth_cred_simple_t **cred, void *baton, const char *realm, const char *username, svn_boolean_t _may_save, apr_pool_t *pool);
     /**
      * @see svn_auth_ssl_server_trust_prompt_func_t
      */
-    static svn_error_t *
-    onSslServerTrustPrompt(svn_auth_cred_ssl_server_trust_t **cred,
-                           void *baton,
-                           const char *realm,
-                           apr_uint32_t failures,
-                           const svn_auth_ssl_server_cert_info_t *info,
-                           svn_boolean_t may_save,
-                           apr_pool_t *pool);
-    static svn_error_t *
-    onSslClientCertPrompt(svn_auth_cred_ssl_client_cert_t **cred,
-                          void *baton,
-                          apr_pool_t *pool);
+    static svn_error_t *onSslServerTrustPrompt(svn_auth_cred_ssl_server_trust_t **cred,
+                                               void *baton,
+                                               const char *realm,
+                                               apr_uint32_t failures,
+                                               const svn_auth_ssl_server_cert_info_t *info,
+                                               svn_boolean_t may_save,
+                                               apr_pool_t *pool);
+    static svn_error_t *onSslClientCertPrompt(svn_auth_cred_ssl_client_cert_t **cred, void *baton, apr_pool_t *pool);
     /**
      * @see svn_auth_ssl_client_cert_pw_prompt_func_t
      */
     static svn_error_t *
-    onFirstSslClientCertPw(
-        svn_auth_cred_ssl_client_cert_pw_t **cred,
-        void *baton,
-        const char *realm,
-        svn_boolean_t maySave,
-        apr_pool_t *pool);
+    onFirstSslClientCertPw(svn_auth_cred_ssl_client_cert_pw_t **cred, void *baton, const char *realm, svn_boolean_t maySave, apr_pool_t *pool);
 
     /**
      * @see svn_auth_ssl_client_cert_pw_prompt_func_t
      */
     static svn_error_t *
-    onSslClientCertPwPrompt(
-        svn_auth_cred_ssl_client_cert_pw_t **cred,
-        void *baton,
-        const char *realm,
-        svn_boolean_t maySave,
-        apr_pool_t *pool);
+    onSslClientCertPwPrompt(svn_auth_cred_ssl_client_cert_pw_t **cred, void *baton, const char *realm, svn_boolean_t maySave, apr_pool_t *pool);
 
     /**
      * @see svn_client_ctx_t::progress_func
@@ -311,7 +255,8 @@ protected:
      * @see svn_wc_conflict_resolver_func_t
      * @since subversion 1.5
      */
-    static svn_error_t *onWcConflictResolver(svn_wc_conflict_result_t **result, const svn_wc_conflict_description_t *description, void *baton, apr_pool_t *pool);
+    static svn_error_t *
+    onWcConflictResolver(svn_wc_conflict_result_t **result, const svn_wc_conflict_description_t *description, void *baton, apr_pool_t *pool);
 
     /**
      * @see svn_wc_conflict_resolver_func2_t
@@ -321,7 +266,7 @@ protected:
                                               const svn_wc_conflict_description2_t *description,
                                               void *baton,
                                               apr_pool_t *result_pool,
-                                              apr_pool_t */*scratch_pool*/);
+                                              apr_pool_t * /*scratch_pool*/);
 
     /**
      * @see svn_auth_plaintext_prompt_func_t
@@ -330,8 +275,7 @@ protected:
     static svn_error_t *maySavePlaintext(svn_boolean_t *may_save_plaintext, const char *realmstring, void *baton, apr_pool_t *pool);
 
     // extra methods
-    svn_error_t *
-    generate_cancel_error();
+    svn_error_t *generate_cancel_error();
 
     /** read in mimetypes map
      * @since subversion 1.5
@@ -350,7 +294,6 @@ protected:
     QString password;
     QString logMessage;
     QString m_ConfigDir;
-
 };
 
 }

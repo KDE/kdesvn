@@ -33,8 +33,8 @@
 #define SVNQT_CONTEXT_LISTENER_H
 
 // svncpp
-#include <svnqt/pool.h>
 #include <svnqt/commititem.h>
+#include <svnqt/pool.h>
 #include <svnqt/svnqt_defines.h>
 // qt
 #include <QString>
@@ -57,7 +57,9 @@ public:
     /**
      * empty destructor avoids a lot of compiler warnings
      */
-    virtual ~ContextListener() {}
+    virtual ~ContextListener()
+    {
+    }
     /**
      * this method will be called to retrieve
      * authentication information. This will called until valid information were
@@ -70,11 +72,7 @@ public:
      * @return continue action?
      * @retval true continue
      */
-    virtual bool
-    contextGetLogin(const QString &realm,
-                    QString &username,
-                    QString &password,
-                    bool &maySave) = 0;
+    virtual bool contextGetLogin(const QString &realm, QString &username, QString &password, bool &maySave) = 0;
     /**
      * this method will be called to retrieve
      * authentication information stored not by subversion. This
@@ -86,10 +84,7 @@ public:
      * @return continue action? should only in case of emergency return false.
      * @retval true continue
      */
-    virtual bool
-    contextGetSavedLogin(const QString &realm,
-                         QString &username,
-                         QString &password) = 0;
+    virtual bool contextGetSavedLogin(const QString &realm, QString &username, QString &password) = 0;
     /**
      * this method will be called to retrieve
      * authentication information stored not persistent. This
@@ -101,10 +96,7 @@ public:
      * @return continue action? should only in case of emergency return false.
      * @retval true continue
      */
-    virtual bool
-    contextGetCachedLogin(const QString &realm,
-                          QString &username,
-                          QString &password) = 0;
+    virtual bool contextGetCachedLogin(const QString &realm, QString &username, QString &password) = 0;
 
     /**
      * this method will be called to notify about
@@ -118,14 +110,13 @@ public:
      * @param prop_state
      * @param revision
      */
-    virtual void
-    contextNotify(const char *path,
-                  svn_wc_notify_action_t action,
-                  svn_node_kind_t kind,
-                  const char *mime_type,
-                  svn_wc_notify_state_t content_state,
-                  svn_wc_notify_state_t prop_state,
-                  svn_revnum_t revision) = 0;
+    virtual void contextNotify(const char *path,
+                               svn_wc_notify_action_t action,
+                               svn_node_kind_t kind,
+                               const char *mime_type,
+                               svn_wc_notify_state_t content_state,
+                               svn_wc_notify_state_t prop_state,
+                               svn_revnum_t revision) = 0;
     /**
      * this method will be called to notify about
      * the progress of an ongoing action
@@ -142,8 +133,7 @@ public:
      * @return cancel action?
      * @retval true cancel
      */
-    virtual bool
-    contextCancel() = 0;
+    virtual bool contextCancel() = 0;
 
     /**
      * this method will be called to retrieve
@@ -156,14 +146,9 @@ public:
      * @return continue action?
      * @retval true continue
      */
-    virtual bool
-    contextGetLogMessage(QString &msg, const CommitItemList &) = 0;
+    virtual bool contextGetLogMessage(QString &msg, const CommitItemList &) = 0;
 
-    typedef enum {
-        DONT_ACCEPT = 0,
-        ACCEPT_TEMPORARILY,
-        ACCEPT_PERMANENTLY
-    } SslServerTrustAnswer;
+    typedef enum { DONT_ACCEPT = 0, ACCEPT_TEMPORARILY, ACCEPT_PERMANENTLY } SslServerTrustAnswer;
 
     /**
      * @see contextSslServerTrust
@@ -184,9 +169,14 @@ public:
         bool maySave;
 
         SslServerTrustData(const apr_uint32_t failures_ = 0)
-            : failures(failures_), hostname(), fingerprint(),
-              validFrom(), validUntil(), issuerDName(),
-              realm(), maySave(true)
+            : failures(failures_)
+            , hostname()
+            , fingerprint()
+            , validFrom()
+            , validUntil()
+            , issuerDName()
+            , realm()
+            , maySave(true)
         {
         }
     };
@@ -199,16 +189,13 @@ public:
      * @param acceptedFailures
      * @return @a SslServerTrustAnswer
      */
-    virtual SslServerTrustAnswer
-    contextSslServerTrustPrompt(const SslServerTrustData &data,
-                                apr_uint32_t &acceptedFailures) = 0;
+    virtual SslServerTrustAnswer contextSslServerTrustPrompt(const SslServerTrustData &data, apr_uint32_t &acceptedFailures) = 0;
 
     /**
      * this method is called to retrieve client side
      * information
      */
-    virtual bool
-    contextSslClientCertPrompt(QString &certFile) = 0;
+    virtual bool contextSslClientCertPrompt(QString &certFile) = 0;
 
     /**
      * this method is called to retrieve the password
@@ -218,10 +205,7 @@ public:
      * @param realm
      * @param maySave
      */
-    virtual bool
-    contextSslClientCertPwPrompt(QString &password,
-                                 const QString &realm,
-                                 bool &maySave) = 0;
+    virtual bool contextSslClientCertPwPrompt(QString &password, const QString &realm, bool &maySave) = 0;
     /**
      * this method is called to retrieve the password
      * for the client certificate from a local storage or such. it will called only once.
@@ -229,11 +213,9 @@ public:
      * @param password
      * @param realm
      */
-    virtual bool
-    contextLoadSslClientCertPw(QString &password, const QString &realm) = 0;
+    virtual bool contextLoadSslClientCertPw(QString &password, const QString &realm) = 0;
 
-    virtual void
-    contextProgress(long long int current, long long int max) = 0;
+    virtual void contextProgress(long long int current, long long int max) = 0;
 
     /**
      * try to translate a text. In current implementation does

@@ -29,26 +29,25 @@
  * ====================================================================
  */
 
-
 // svncpp
 #include "client_impl.h"
 #include "helper.h"
 
 // Subversion api
 #include <svn_client.h>
-#include <svn_sorts.h>
 #include <svn_path.h>
+#include <svn_sorts.h>
 
+#include "client_parameter.h"
+#include "context_listener.h"
 #include "dirent.h"
 #include "exception.h"
+#include "info_entry.h"
 #include "pool.h"
 #include "status.h"
-#include "targets.h"
-#include "info_entry.h"
-#include "url.h"
 #include "svnqt_defines.h"
-#include "context_listener.h"
-#include "client_parameter.h"
+#include "targets.h"
+#include "url.h"
 #include <QCoreApplication>
 
 namespace svn
@@ -62,34 +61,36 @@ struct LogBaton {
     LogBaton()
         : logEntries(nullptr)
         , revstack(nullptr)
-    {}
+    {
+    }
 };
 
 struct StatusEntriesBaton {
     StatusEntries entries;
     apr_pool_t *pool;
     ContextWP m_Context;
-    StatusEntriesBaton(): entries(), pool(nullptr)
-    {}
+    StatusEntriesBaton()
+        : entries()
+        , pool(nullptr)
+    {
+    }
 };
 
 struct InfoEntriesBaton {
     InfoEntries entries;
     apr_pool_t *pool;
     ContextWP m_Context;
-    InfoEntriesBaton(): entries(), pool(nullptr)
-    {}
+    InfoEntriesBaton()
+        : entries()
+        , pool(nullptr)
+    {
+    }
 };
 
-static svn_error_t *
-logMapReceiver2(
-    void *baton,
-    svn_log_entry_t *log_entry,
-    apr_pool_t *pool
-)
+static svn_error_t *logMapReceiver2(void *baton, svn_log_entry_t *log_entry, apr_pool_t *pool)
 {
     Q_UNUSED(pool);
-    LogBaton *l_baton = static_cast<LogBaton*>(baton);
+    LogBaton *l_baton = static_cast<LogBaton *>(baton);
     ContextP l_context = l_baton->context;
     if (l_context.isNull()) {
         return SVN_NO_ERROR;
@@ -99,7 +100,7 @@ logMapReceiver2(
         SVN_ERR(ctx->cancel_func(ctx->cancel_baton));
     }
     QList<qlonglong> *rstack = l_baton->revstack;
-    if (! SVN_IS_VALID_REVNUM(log_entry->revision)) {
+    if (!SVN_IS_VALID_REVNUM(log_entry->revision)) {
         if (rstack && !rstack->isEmpty()) {
             rstack->pop_front();
         }
@@ -117,10 +118,7 @@ logMapReceiver2(
     return SVN_NO_ERROR;
 }
 
-static svn_error_t *InfoEntryFunc(void *baton,
-                                  const char *path,
-                                  const svn_client_info2_t *info,
-                                  apr_pool_t *)
+static svn_error_t *InfoEntryFunc(void *baton, const char *path, const svn_client_info2_t *info, apr_pool_t *)
 {
     InfoEntriesBaton *seb = static_cast<InfoEntriesBaton *>(baton);
     if (seb->m_Context) {
@@ -138,10 +136,7 @@ static svn_error_t *InfoEntryFunc(void *baton,
     return nullptr;
 }
 
-static svn_error_t *StatusEntriesFunc(void *baton,
-                                      const char *path,
-                                      const svn_client_status_t *status,
-                                      apr_pool_t *pool)
+static svn_error_t *StatusEntriesFunc(void *baton, const char *path, const svn_client_status_t *status, apr_pool_t *pool)
 {
     // use own pool - the parameter will cleared between loops!
     Q_UNUSED(pool);
@@ -162,9 +157,7 @@ static svn_error_t *StatusEntriesFunc(void *baton,
     return nullptr;
 }
 
-static StatusEntries
-localStatus(const StatusParameter &params,
-            const ContextP &context)
+static StatusEntries localStatus(const StatusParameter &params, const ContextP &context)
 {
     svn_error_t *error;
     svn_revnum_t revnum;
@@ -174,44 +167,37 @@ localStatus(const StatusParameter &params,
 
     baton.pool = pool;
 
-
     error = svn_client_status5(&revnum,
                                *context,
                                params.path().path().toUtf8(),
                                rev,
                                internal::DepthToSvn(params.depth()), // see svn::Depth
-                               params.all(),           // get all not only interesting
-                               params.update(),            // check for updates
-                               params.noIgnore(),         // hide ignored files or not
-                               params.ignoreExternals(),    // hide external
-                               true,          // depth as sticky  - TODO
+                               params.all(), // get all not only interesting
+                               params.update(), // check for updates
+                               params.noIgnore(), // hide ignored files or not
+                               params.ignoreExternals(), // hide external
+                               true, // depth as sticky  - TODO
                                params.changeList().array(pool),
                                StatusEntriesFunc,
                                &baton,
-                               pool
-                               );
+                               pool);
 
     Client_impl::checkErrorThrow(error);
     return baton.entries;
 }
 
-static StatusPtr
-dirEntryToStatus(const Path &path, const DirEntry &dirEntry)
+static StatusPtr dirEntryToStatus(const Path &path, const DirEntry &dirEntry)
 {
     QString url = path.path() + QLatin1Char('/') + dirEntry.name();
     return StatusPtr(new Status(url, dirEntry));
 }
 
-static StatusPtr
-infoEntryToStatus(const Path &, const InfoEntry &infoEntry)
+static StatusPtr infoEntryToStatus(const Path &, const InfoEntry &infoEntry)
 {
     return StatusPtr(new Status(infoEntry.url().toString(), infoEntry));
 }
 
-static StatusEntries
-remoteStatus(Client *client,
-             const StatusParameter &params,
-             const ContextP &)
+static StatusEntries remoteStatus(Client *client, const StatusParameter &params, const ContextP &)
 {
     const DirEntries dirEntries = client->list(params.path(), params.revision(), params.revision(), params.depth(), params.detailedRemote());
 
@@ -225,8 +211,7 @@ remoteStatus(Client *client,
     return entries;
 }
 
-StatusEntries
-Client_impl::status(const StatusParameter &params)
+StatusEntries Client_impl::status(const StatusParameter &params)
 {
     if (Url::isValid(params.path().path())) {
         return remoteStatus(this, params, m_context);
@@ -234,8 +219,7 @@ Client_impl::status(const StatusParameter &params)
     return localStatus(params, m_context);
 }
 
-static StatusPtr
-localSingleStatus(const Path &path, const ContextP &context, bool update = false)
+static StatusPtr localSingleStatus(const Path &path, const ContextP &context, bool update = false)
 {
     svn_error_t *error;
     Pool pool;
@@ -250,16 +234,15 @@ localSingleStatus(const Path &path, const ContextP &context, bool update = false
                                path.path().toUtf8(),
                                rev,
                                svn_depth_empty, // not recurse
-                               true,           // get all not only interesting
-                               update,         // check for updates
-                               false,          // hide ignored files or not
-                               false,          // hide external
-                               true,          // depth as sticky
+                               true, // get all not only interesting
+                               update, // check for updates
+                               false, // hide ignored files or not
+                               false, // hide external
+                               true, // depth as sticky
                                nullptr,
                                StatusEntriesFunc,
                                &baton,
-                               pool
-                               );
+                               pool);
 
     Client_impl::checkErrorThrow(error);
     if (baton.entries.isEmpty()) {
@@ -269,8 +252,7 @@ localSingleStatus(const Path &path, const ContextP &context, bool update = false
     return baton.entries.at(0);
 }
 
-static StatusPtr
-remoteSingleStatus(Client *client, const Path &path, const Revision &revision, const ContextP &)
+static StatusPtr remoteSingleStatus(Client *client, const Path &path, const Revision &revision, const ContextP &)
 {
     const InfoEntries infoEntries = client->info(path, DepthEmpty, revision, Revision(Revision::UNDEFINED));
     if (infoEntries.isEmpty()) {
@@ -279,8 +261,7 @@ remoteSingleStatus(Client *client, const Path &path, const Revision &revision, c
     return infoEntryToStatus(path, infoEntries.at(0));
 }
 
-StatusPtr
-Client_impl::singleStatus(const Path &path, bool update, const Revision &revision)
+StatusPtr Client_impl::singleStatus(const Path &path, bool update, const Revision &revision)
 {
     if (Url::isValid(path.path())) {
         return remoteSingleStatus(this, path, revision, m_context);
@@ -288,8 +269,7 @@ Client_impl::singleStatus(const Path &path, bool update, const Revision &revisio
     return localSingleStatus(path, m_context, update);
 }
 
-bool
-Client_impl::log(const LogParameter &params, LogEntriesMap &log_target)
+bool Client_impl::log(const LogParameter &params, LogEntriesMap &log_target)
 {
     Pool pool;
     LogBaton l_baton;
@@ -300,32 +280,24 @@ Client_impl::log(const LogParameter &params, LogEntriesMap &log_target)
     l_baton.revstack = &revstack;
     svn_error_t *error;
 
-    error = svn_client_log5(
-                params.targets().array(pool),
-                params.peg().revision(),
-                svn::internal::RevisionRangesToHash(params.revisions()).array(pool),
-                params.limit(),
-                params.discoverChangedPathes() ? 1 : 0,
-                params.strictNodeHistory() ? 1 : 0,
-                params.includeMergedRevisions() ? 1 : 0,
-                params.revisionProperties().array(pool),
-                logMapReceiver2,
-                &l_baton,
-                *m_context, // client ctx
-                pool);
+    error = svn_client_log5(params.targets().array(pool),
+                            params.peg().revision(),
+                            svn::internal::RevisionRangesToHash(params.revisions()).array(pool),
+                            params.limit(),
+                            params.discoverChangedPathes() ? 1 : 0,
+                            params.strictNodeHistory() ? 1 : 0,
+                            params.includeMergedRevisions() ? 1 : 0,
+                            params.revisionProperties().array(pool),
+                            logMapReceiver2,
+                            &l_baton,
+                            *m_context, // client ctx
+                            pool);
     checkErrorThrow(error);
     return true;
 }
 
-InfoEntries
-Client_impl::info(const Path &_p,
-                  Depth depth,
-                  const Revision &rev,
-                  const Revision &peg_revision,
-                  const StringArray &changelists
-                 )
+InfoEntries Client_impl::info(const Path &_p, Depth depth, const Revision &rev, const Revision &peg_revision, const StringArray &changelists)
 {
-
     Pool pool;
     svn_error_t *error = nullptr;
     InfoEntriesBaton baton;
@@ -337,12 +309,9 @@ Client_impl::info(const Path &_p,
     bool internal_peg = false;
     QByteArray _buf = _p.cstr();
 
-    error = svn_opt_parse_path(&pegr, &truepath,
-                               _buf,
-                               pool);
+    error = svn_opt_parse_path(&pegr, &truepath, _buf, pool);
     checkErrorThrow(error);
-    if (!truepath)
-    {
+    if (!truepath) {
         throw ClientException("no path given!");
     }
     if (peg_revision.kind() == svn_opt_revision_unspecified) {
@@ -352,24 +321,21 @@ Client_impl::info(const Path &_p,
         }
     }
 
-    error =
-        svn_client_info3
-        (truepath,
-         internal_peg ? &pegr : peg_revision.revision(),
-         rev.revision(),
-         internal::DepthToSvn(depth),
-         false, // TODO parameter for fetch exclueded
-         false, // TODO parameter for fetch_actual_only
-         changelists.array(pool),
-         &InfoEntryFunc,
-         &baton,
-         *m_context,
-         pool);
+    error = svn_client_info3(truepath,
+                             internal_peg ? &pegr : peg_revision.revision(),
+                             rev.revision(),
+                             internal::DepthToSvn(depth),
+                             false, // TODO parameter for fetch exclueded
+                             false, // TODO parameter for fetch_actual_only
+                             changelists.array(pool),
+                             &InfoEntryFunc,
+                             &baton,
+                             *m_context,
+                             pool);
 
     checkErrorThrow(error);
     return baton.entries;
 }
-
 }
 
 /* -----------------------------------------------------------------

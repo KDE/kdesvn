@@ -26,7 +26,6 @@
 #include "svnitemmodelfwd.h"
 #include "svnqt/svnqttypes.h"
 
-
 class SvnItemModelData;
 class QItemSelectionModel;
 class MainTreeWidget;
@@ -38,11 +37,11 @@ namespace svn
 class Path;
 }
 
-#define SORT_ROLE Qt::UserRole+1
-#define FILTER_ROLE Qt::UserRole+2
-#define BG_ROLE Qt::UserRole+3
+#define SORT_ROLE Qt::UserRole + 1
+#define FILTER_ROLE Qt::UserRole + 2
+#define BG_ROLE Qt::UserRole + 3
 
-class SvnItemModel: public QAbstractItemModel
+class SvnItemModel : public QAbstractItemModel
 {
     Q_OBJECT
 public:
@@ -51,26 +50,18 @@ public:
 
     void clear();
 
-    enum Column {
-        Name = 0,
-        Status,
-        LastRevision,
-        LastAuthor,
-        LastDate,
-        Locked,
-        ColumnCount
-    };
+    enum Column { Name = 0, Status, LastRevision, LastAuthor, LastDate, Locked, ColumnCount };
 
-    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex())const override;
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole)const override;
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole)const override;
-    int columnCount(const QModelIndex &parent = QModelIndex())const override;
-    int rowCount(const QModelIndex &parent = QModelIndex())const override;
-    QModelIndex parent(const QModelIndex &index)const override;
-    bool hasChildren(const QModelIndex &parent = QModelIndex())const override;
-    bool canFetchMore(const QModelIndex &parent)const override;
+    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QModelIndex parent(const QModelIndex &index) const override;
+    bool hasChildren(const QModelIndex &parent = QModelIndex()) const override;
+    bool canFetchMore(const QModelIndex &parent) const override;
     void fetchMore(const QModelIndex &parent) override;
-    Qt::ItemFlags flags(const QModelIndex &index)const override;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
 
     //! Returns the very first item in list.
     /*!
@@ -85,13 +76,13 @@ public:
     SvnActions *svnWrapper();
 
     int checkDirs(const QString &_what, SvnItemModelNode *parent);
-    Qt::DropActions supportedDropActions()const override;
-    QStringList mimeTypes()const override;
-    QMimeData *mimeData(const QModelIndexList &indexes)const override;
+    Qt::DropActions supportedDropActions() const override;
+    QStringList mimeTypes() const override;
+    QMimeData *mimeData(const QModelIndexList &indexes) const override;
 
     bool dropUrls(const QList<QUrl> &data, Qt::DropAction action, int row, int column, const QModelIndex &parent, bool intern);
 
-    bool filterIndex(const QModelIndex &, int, svnmodel::ItemTypeFlag)const;
+    bool filterIndex(const QModelIndex &, int, svnmodel::ItemTypeFlag) const;
 
     /* svn actions starts here */
     void makeIgnore(const QModelIndex &);
@@ -115,7 +106,7 @@ public:
 
     void clearNodeDir(SvnItemModelNodeDir *);
 
-    const QString &uniqueIdentifier()const;
+    const QString &uniqueIdentifier() const;
 
 Q_SIGNALS:
     void urlDropped(const QList<QUrl> &, Qt::DropAction, const QModelIndex &, bool);
@@ -142,7 +133,7 @@ protected Q_SLOTS:
 private:
     friend class SvnItemModelData;
     QScopedPointer<SvnItemModelData> m_Data;
-    bool insertRows(int , int, const QModelIndex & = QModelIndex()) override;
+    bool insertRows(int, int, const QModelIndex & = QModelIndex()) override;
     bool insertColumns(int, int, const QModelIndex & = QModelIndex()) override;
     bool removeRows(int, int, const QModelIndex & = QModelIndex()) override;
     bool removeColumns(int, int, const QModelIndex & = QModelIndex()) override;

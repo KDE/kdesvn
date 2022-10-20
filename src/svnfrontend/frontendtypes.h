@@ -27,4 +27,3 @@ class SvnItem;
 typedef QVector<SvnItem *> SvnItemList;
 
 #endif
-

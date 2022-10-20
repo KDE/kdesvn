@@ -22,24 +22,28 @@
  * history and logs, available at https://commits.kde.org/kdesvn.          *
  ***************************************************************************/
 #include "svnqt/client.h"
-#include "svnqt/tests/testconfig.h"
+#include "svnqt/client_parameter.h"
+#include "svnqt/repoparameter.h"
 #include "svnqt/repository.h"
 #include "svnqt/repositorylistener.h"
-#include "svnqt/repoparameter.h"
 #include "svnqt/targets.h"
-#include "svnqt/client_parameter.h"
+#include "svnqt/tests/testconfig.h"
 
 #include "testlistener.h"
 
 #include <iostream>
-#include <unistd.h>
 #include <qstringlist.h>
+#include <unistd.h>
 
-class Listener: public svn::repository::RepositoryListener
+class Listener : public svn::repository::RepositoryListener
 {
 public:
-    Listener() {}
-    virtual ~Listener() {}
+    Listener()
+    {
+    }
+    virtual ~Listener()
+    {
+    }
     virtual void sendWarning(const QString &msg)
     {
         std::cout << msg.toLatin1().data() << std::endl;

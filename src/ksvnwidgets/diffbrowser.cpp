@@ -22,12 +22,12 @@
 #include "diffsyntax.h"
 #include "settings/kdesvnsettings.h"
 
-#include <QFileDialog>
-#include <KMessageBox>
-#include <KLocalizedString>
-#include <KStandardGuiItem>
 #include <KFind>
 #include <KFindDialog>
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <KStandardGuiItem>
+#include <QFileDialog>
 
 #include <QApplication>
 #include <QFontDatabase>
@@ -41,14 +41,16 @@ DiffBrowser::DiffBrowser(QWidget *parent)
     : QTextBrowser(parent)
     , m_srchdialog(nullptr)
 {
-//     setTextFormat(Qt::PlainText);
+    //     setTextFormat(Qt::PlainText);
     setLineWrapMode(QTextEdit::NoWrap);
     setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
 
     setLineWrapMode(QTextEdit::NoWrap);
     m_Syntax = new DiffSyntax(document());
     setToolTip(i18n("Ctrl-F for search, F3 or Shift-F3 for search again."));
-    setWhatsThis(i18n("<b>Display differences between files</b><p>You may search inside text with Ctrl-F.</p><p>F3 for search forward again, Shift-F3 for search backward again.</p><p>You may save the (original) output with Ctrl-S.</p>"));
+    setWhatsThis(
+        i18n("<b>Display differences between files</b><p>You may search inside text with Ctrl-F.</p><p>F3 for search forward again, Shift-F3 for search "
+             "backward again.</p><p>You may save the (original) output with Ctrl-S.</p>"));
     setFocus();
 }
 
@@ -89,9 +91,7 @@ void DiffBrowser::saveDiff()
     }
     QFile tfile(saveTo);
     if (tfile.exists()) {
-        if (KMessageBox::warningYesNo(QApplication::activeModalWidget(),
-                                      i18n("File %1 exists - overwrite?", saveTo))
-                != KMessageBox::Yes) {
+        if (KMessageBox::warningYesNo(QApplication::activeModalWidget(), i18n("File %1 exists - overwrite?", saveTo)) != KMessageBox::Yes) {
             return;
         }
     }
@@ -143,8 +143,7 @@ void DiffBrowser::search_slot()
     if (!m_srchdialog) {
         return;
     }
-    doSearch(m_srchdialog->pattern(),
-             (m_srchdialog->options() & KFind::FindBackwards) == KFind::FindBackwards);
+    doSearch(m_srchdialog->pattern(), (m_srchdialog->options() & KFind::FindBackwards) == KFind::FindBackwards);
 }
 
 void DiffBrowser::doSearch(const QString &to_find_string, bool back)
@@ -158,10 +157,10 @@ void DiffBrowser::doSearch(const QString &to_find_string, bool back)
         if (back) {
             f = QTextDocument::FindBackward;
         }
-        if (m_srchdialog->options()&KFind::WholeWordsOnly) {
+        if (m_srchdialog->options() & KFind::WholeWordsOnly) {
             f |= QTextDocument::FindWholeWords;
         }
-        if (m_srchdialog->options()&KFind::CaseSensitive) {
+        if (m_srchdialog->options() & KFind::CaseSensitive) {
             f |= QTextDocument::FindCaseSensitively;
         }
 
@@ -174,7 +173,7 @@ void DiffBrowser::doSearch(const QString &to_find_string, bool back)
         QWidget *_parent = m_srchdialog->isVisible() ? m_srchdialog : parentWidget();
         if (!back) {
             KMessageBox::ButtonCode query = KMessageBox::questionYesNo(_parent,
-                                                                       i18n("End of document reached.\n"\
+                                                                       i18n("End of document reached.\n"
                                                                             "Continue from the beginning?"),
                                                                        i18n("Find"),
                                                                        KStandardGuiItem::yes(),
@@ -185,13 +184,12 @@ void DiffBrowser::doSearch(const QString &to_find_string, bool back)
                 break;
             }
         } else {
-            int query = KMessageBox::questionYesNo(
-                            _parent,
-                            i18n("Beginning of document reached.\n"\
-                                 "Continue from the end?"),
-                            i18n("Find"),
-                            KStandardGuiItem::yes(),
-                            KStandardGuiItem::no());
+            int query = KMessageBox::questionYesNo(_parent,
+                                                   i18n("Beginning of document reached.\n"
+                                                        "Continue from the end?"),
+                                                   i18n("Find"),
+                                                   KStandardGuiItem::yes(),
+                                                   KStandardGuiItem::no());
             if (query == KMessageBox::Yes) {
                 moveCursor(QTextCursor::End);
             } else {

@@ -78,7 +78,7 @@ void Repository::loaddump(const QString &dump, LOAD_UUID uuida, const QString &p
         uuid_action = svn_repos_load_uuid_ignore;
         break;
     case UUID_FORCE_ACTION:
-        uuid_action = svn_repos_load_uuid_force ;
+        uuid_action = svn_repos_load_uuid_force;
         break;
     case UUID_DEFAULT_ACTION:
     default:

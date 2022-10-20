@@ -18,12 +18,13 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 #include "revisionbuttonimpl.h"
-#include "svnfrontend/fronthelpers/rangeinput_impl.h"
 #include "settings/kdesvnsettings.h"
+#include "svnfrontend/fronthelpers/rangeinput_impl.h"
 
 RevisionButtonImpl::RevisionButtonImpl(QWidget *parent)
-    : QWidget(parent),
-      m_Rev(svn::Revision::UNDEFINED), m_noWorking(false)
+    : QWidget(parent)
+    , m_Rev(svn::Revision::UNDEFINED)
+    , m_noWorking(false)
 {
     setupUi(this);
 }

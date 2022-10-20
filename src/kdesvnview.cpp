@@ -19,18 +19,18 @@
  ***************************************************************************/
 
 #include "kdesvnview.h"
-#include "svnfrontend/maintreewidget.h"
+#include "settings/kdesvnsettings.h"
 #include "svnfrontend/createrepodlg.h"
 #include "svnfrontend/dumprepo_impl.h"
+#include "svnfrontend/fronthelpers/propertylist.h"
 #include "svnfrontend/hotcopydlg_impl.h"
 #include "svnfrontend/loaddmpdlg_impl.h"
+#include "svnfrontend/maintreewidget.h"
 #include "svnfrontend/stopdlg.h"
-#include "svnfrontend/fronthelpers/propertylist.h"
-#include "settings/kdesvnsettings.h"
-#include "svnqt/url.h"
 #include "svnqt/repository.h"
-#include "svnqt/version_check.h"
 #include "svnqt/svnqttypes.h"
+#include "svnqt/url.h"
+#include "svnqt/version_check.h"
 
 #include <QFileInfo>
 #include <QMenu>
@@ -46,7 +46,8 @@
 #include <KMessageBox>
 
 kdesvnView::kdesvnView(KActionCollection *aCollection, QWidget *parent, bool full)
-    : QWidget(parent), svn::repository::RepositoryListener()
+    : QWidget(parent)
+    , svn::repository::RepositoryListener()
     , m_Collection(aCollection)
     , m_currentUrl()
     , m_CacheProgressBar(nullptr)
@@ -61,7 +62,7 @@ kdesvnView::kdesvnView(KActionCollection *aCollection, QWidget *parent, bool ful
     m_Splitter = new QSplitter(this);
     m_Splitter->setOrientation(Qt::Vertical);
 
-    //m_TreeWidget=new kdesvnfilelist(m_Collection,m_Splitter);
+    // m_TreeWidget=new kdesvnfilelist(m_Collection,m_Splitter);
     m_TreeWidget = new MainTreeWidget(m_Collection, m_Splitter);
 
     m_infoSplitter = new QSplitter(m_Splitter);
@@ -69,16 +70,12 @@ kdesvnView::kdesvnView(KActionCollection *aCollection, QWidget *parent, bool ful
     m_infoSplitter->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_LogWindow = new QTextBrowser(m_infoSplitter);
     m_LogWindow->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(m_LogWindow, &QWidget::customContextMenuRequested,
-            this, &kdesvnView::onCustomLogWindowContextMenuRequested);
+    connect(m_LogWindow, &QWidget::customContextMenuRequested, this, &kdesvnView::onCustomLogWindowContextMenuRequested);
     Propertylist *pl = new Propertylist(m_infoSplitter);
     pl->setCommitchanges(true);
-    connect(pl, &Propertylist::sigSetProperty,
-            m_TreeWidget, &MainTreeWidget::slotChangeProperties);
-    connect(m_TreeWidget, &MainTreeWidget::sigProplist,
-            pl, &Propertylist::displayList);
-    connect(m_TreeWidget, &MainTreeWidget::sigProplist,
-            pl, &Propertylist::displayList);
+    connect(pl, &Propertylist::sigSetProperty, m_TreeWidget, &MainTreeWidget::slotChangeProperties);
+    connect(m_TreeWidget, &MainTreeWidget::sigProplist, pl, &Propertylist::displayList);
+    connect(m_TreeWidget, &MainTreeWidget::sigProplist, pl, &Propertylist::displayList);
 
     m_TreeWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
@@ -184,7 +181,7 @@ void kdesvnView::slotOnURL(const QString &url)
 
 void kdesvnView::slotSetTitle(const QString &title)
 {
-    //emit signalChangeCaption(title);
+    // emit signalChangeCaption(title);
     emit setWindowCaption(title);
 }
 
@@ -298,7 +295,7 @@ void kdesvnView::slotLoaddump()
         _rep.Open(ptr->repository());
     } catch (const svn::ClientException &e) {
         slotAppendLog(e.msg());
-        return ;
+        return;
     }
 
     svn::repository::Repository::LOAD_UUID _act;
@@ -453,8 +450,7 @@ void kdesvnView::onCustomLogWindowContextMenuRequested(const QPoint &pos)
     QPointer<QMenu> menu = m_LogWindow->createStandardContextMenu();
     QAction *clearAction = new QAction(tr("Clear"), menu.data());
     clearAction->setEnabled(!m_LogWindow->toPlainText().isEmpty());
-    connect(clearAction, &QAction::triggered,
-            m_LogWindow, &QTextEdit::clear);
+    connect(clearAction, &QAction::triggered, m_LogWindow, &QTextEdit::clear);
     menu->addAction(clearAction);
     menu->exec(m_LogWindow->mapToGlobal(pos));
     delete menu;

@@ -61,19 +61,19 @@ target_include_directories(settingsdlgs
         ${CMAKE_CURRENT_BINARY_DIR}/../
 )
 
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_part.kcfg DESTINATION ${KCFG_INSTALL_DIR})
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_part.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})
 
 install(
     FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/kdesvnpartrc-use-external.upd
     DESTINATION
-    ${DATA_INSTALL_DIR}/kconf_update
+    ${KDE_INSTALL_DATADIR}/kconf_update
 )
 
 install(
     FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn-use-external-update.sh
     DESTINATION
-    ${DATA_INSTALL_DIR}/kconf_update
+    ${KDE_INSTALL_DATADIR}/kconf_update
     PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ GROUP_EXECUTE GROUP_READ WORLD_EXECUTE WORLD_READ
 )

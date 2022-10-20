@@ -25,7 +25,7 @@ ecm_install_icons(ICONS
     48-apps-kdesvn.png
     64-apps-kdesvn.png
     sc-apps-kdesvn.svgz
-    DESTINATION ${ICON_INSTALL_DIR}
+    DESTINATION ${KDE_INSTALL_ICONDIR}
     THEME hicolor
 )
 

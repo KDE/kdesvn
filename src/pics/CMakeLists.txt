@@ -296,6 +296,6 @@ ecm_install_icons(ICONS
     sc-places-kdesvnmodified.svgz
     sc-places-kdesvnneedlock.svgz
     sc-places-kdesvnupdates.svgz
-    DESTINATION ${ICON_INSTALL_DIR}
+    DESTINATION ${KDE_INSTALL_ICONDIR}
     THEME hicolor
 )

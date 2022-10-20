@@ -38,7 +38,7 @@ class MainTreeWidget: public QWidget, public Ui::mainTreeWidget, public ItemDisp
 {
     Q_OBJECT
 public:
-    explicit MainTreeWidget(KActionCollection *aCollection, QWidget *parent = nullptr, Qt::WindowFlags f = nullptr);
+    explicit MainTreeWidget(KActionCollection *aCollection, QWidget *parent = nullptr, Qt::WindowFlags f = {});
     ~MainTreeWidget();
 
     QWidget *realWidget() override;

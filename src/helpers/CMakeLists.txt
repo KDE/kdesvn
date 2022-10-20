@@ -43,3 +43,6 @@ target_link_libraries(kdesvnhelpers
         svnqt
 )
 
+if (QT_MAJOR_VERSION STREQUAL "6")
+    target_link_libraries(kdesvnhelpers PRIVATE Qt6::Core5Compat) # QRegExp
+endif()

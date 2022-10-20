@@ -28,6 +28,7 @@
 #include <KBookmarks/KBookmarkManager>
 #include <KBookmarks/KBookmarkMenu>
 #include <KBookmarks/KBookmarkActionMenu>
+#include <KBookmarks/KBookmarkOwner>
 
 class KAction;
 class KActionMenu;

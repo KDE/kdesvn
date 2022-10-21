@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-10 00:48+0000\n"
+"POT-Creation-Date: 2022-10-21 00:49+0000\n"
 "PO-Revision-Date: 2013-07-06 03:18-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -25,101 +25,101 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
 
-#: src/askpass/kdesvn-askpass.cpp:35
+#: src/askpass/kdesvn-askpass.cpp:36
 #, fuzzy, kde-format
 msgid "kdesvnaskpass"
 msgstr "kdesvnaskpass"
 
-#: src/askpass/kdesvn-askpass.cpp:36
+#: src/askpass/kdesvn-askpass.cpp:38
 #, fuzzy, kde-format
 msgid "ssh-askpass for kdesvn"
 msgstr "kdesvn に対する ssh-askpass"
 
-#: src/askpass/kdesvn-askpass.cpp:38
+#: src/askpass/kdesvn-askpass.cpp:40
 #, fuzzy, kde-format
 msgid "Copyright (c) 2005-2009 Rajko Albrecht"
 msgstr "Copyright (c) 2005-2009 Rajko Albrecht"
 
-#: src/askpass/kdesvn-askpass.cpp:41
+#: src/askpass/kdesvn-askpass.cpp:43
 #, fuzzy, kde-format
 msgid "Prompt"
 msgstr "プロンプト"
 
-#: src/askpass/kdesvn-askpass.cpp:53
+#: src/askpass/kdesvn-askpass.cpp:55
 #, fuzzy, kde-format
 msgid "Please enter your password below."
 msgstr "下にパスワードを入力してください。"
 
-#: src/askpass/kdesvn-askpass.cpp:74
+#: src/askpass/kdesvn-askpass.cpp:75
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Password"
 msgstr "パスワード："
 
-#: src/kdesvn.cpp:80
+#: src/kdesvn.cpp:79
 #, fuzzy, kde-format
 msgid "&Bookmarks"
 msgstr "ブックマーク(&B)"
 
-#: src/kdesvn.cpp:105
+#: src/kdesvn.cpp:102
 #, fuzzy, kde-format
 msgid "Create and open new repository"
 msgstr "新しいリポジトリを作成して開く(&C)"
 
-#: src/kdesvn.cpp:106
+#: src/kdesvn.cpp:103
 #, fuzzy, kde-format
 #| msgid "Create and opens a new local subversion repository"
 msgid "Create and opens a new local Subversion repository"
 msgstr "新しいローカルの subversion リポジトリを作成して開きます"
 
-#: src/kdesvn.cpp:111
+#: src/kdesvn.cpp:106
 #, fuzzy, kde-format
 msgid "Dump repository to file"
 msgstr "リポジトリをファイルにダンプ(&D)"
 
-#: src/kdesvn.cpp:112
+#: src/kdesvn.cpp:107
 #, fuzzy, kde-format
 #| msgid "Dump a subversion repository to a file"
 msgid "Dump a Subversion repository to a file"
 msgstr "subversion リポジトリをファイルにダンプします"
 
-#: src/kdesvn.cpp:117
+#: src/kdesvn.cpp:110
 #, fuzzy, kde-format
 msgid "Hotcopy a repository"
 msgstr "リポジトリをハードコピー(&H)"
 
-#: src/kdesvn.cpp:118
+#: src/kdesvn.cpp:111
 #, fuzzy, kde-format
 #| msgid "Hotcopy a subversion repository to a new folder"
 msgid "Hotcopy a Subversion repository to a new folder"
 msgstr "subversion リポジトリを新しいフォルダにハードコピーします"
 
-#: src/kdesvn.cpp:123
+#: src/kdesvn.cpp:114
 #, fuzzy, kde-format
 msgid "Load dump into repository"
 msgstr "リポジトリにダンプを読み込む(&L)"
 
-#: src/kdesvn.cpp:124
+#: src/kdesvn.cpp:115
 #, fuzzy, kde-format
 msgid "Load a dump file into a repository."
 msgstr "リポジトリにダンプファイルを読み込みます。"
 
-#: src/kdesvn.cpp:129
+#: src/kdesvn.cpp:118
 #, fuzzy, kde-format
 msgid "Add ssh identities to ssh-agent"
 msgstr "ssh-agent に ssh identity を追加(&A)"
 
-#: src/kdesvn.cpp:130
+#: src/kdesvn.cpp:119
 #, fuzzy, kde-format
 msgid "Force add ssh-identities to ssh-agent for future use."
 msgstr "将来使うために ssh-agent に ssh-identity を強制的に追加します。"
 
-#: src/kdesvn.cpp:135
+#: src/kdesvn.cpp:122
 #, fuzzy, kde-format
 msgid "Info about kdesvn part"
 msgstr "kdesvn part についての情報"
 
-#: src/kdesvn.cpp:136
+#: src/kdesvn.cpp:123
 #, fuzzy, kde-format
 #| msgid "Shows info about the kdesvn plugin not the standalone app."
 msgid "Shows info about the kdesvn plugin and not the standalone application."
@@ -127,18 +127,18 @@ msgstr ""
 "スタンドアロンアプリケーションではない kdesvn プラグインについての情報を表示"
 "します。"
 
-#: src/kdesvn.cpp:141
+#: src/kdesvn.cpp:126
 #, fuzzy, kde-format
 msgid "Show database content"
 msgstr "データベースの中身を表示(&S)"
 
-#: src/kdesvn.cpp:142
+#: src/kdesvn.cpp:127
 #, fuzzy, kde-format
 #| msgid "Show the content of logcache database"
 msgid "Show the content of log cache database"
 msgstr "ログキャッシュデータベースの中身を表示します"
 
-#: src/kdesvn.cpp:149
+#: src/kdesvn.cpp:134
 #, fuzzy, kde-format
 #| msgid "Could not load the part:\n"
 msgid ""
@@ -146,30 +146,30 @@ msgid ""
 "%1"
 msgstr "part を読み込めませんでした:\n"
 
-#: src/kdesvn.cpp:180
+#: src/kdesvn.cpp:165
 #, fuzzy, kde-format
 #| msgid "Could not open url %1"
 msgid "Could not open URL %1"
 msgstr "url %1 を開けませんでした"
 
-#: src/kdesvn.cpp:212
+#: src/kdesvn.cpp:197
 #, fuzzy, kde-format
 msgid "Recent opened URLs"
 msgstr "最近開いた URL"
 
-#: src/kdesvn.cpp:221
+#: src/kdesvn.cpp:206
 #, fuzzy, kde-format
 msgid "Load last opened URL on start"
 msgstr "起動時に最後に開いた URL を読み込む(&L)"
 
-#: src/kdesvn.cpp:223
+#: src/kdesvn.cpp:208
 #, fuzzy, kde-format
 #| msgid "Reload last opened url if no one is given on commandline"
 msgid "Reload last opened URL if no one is given on command line"
 msgstr ""
 "コマンドライン上で誰も与えられていなければ最後に開いた url を再読み込みします"
 
-#: src/kdesvn.cpp:306
+#: src/kdesvn.cpp:291
 #, fuzzy, kde-format
 msgid "Ready"
 msgstr "待機中"
@@ -219,7 +219,7 @@ msgstr "kdesvn part について"
 msgid "Kdesvn Handbook"
 msgstr "Kdesvn ハンドブック"
 
-#: src/kdesvn_part.cpp:280
+#: src/kdesvn_part.cpp:281
 #, fuzzy, kde-format
 msgid ""
 "Built with Subversion library: %1\n"
@@ -228,104 +228,104 @@ msgstr ""
 "右の Subversion ライブラリでビルドされました: %1\n"
 "右の Subversion ライブラリで動作しています: %2"
 
-#: src/kdesvn_part.cpp:283
+#: src/kdesvn_part.cpp:284
 #, fuzzy, kde-format
 msgid "kdesvn Part"
 msgstr "kdesvn Part"
 
-#: src/kdesvn_part.cpp:285
+#: src/kdesvn_part.cpp:286
 #, fuzzy, kde-format
 msgid "A Subversion Client by KDE (dynamic Part component)"
 msgstr "KDE 向けの Subversion クライアント（動的 Part コンポーネント）"
 
-#: src/kdesvn_part.cpp:287
+#: src/kdesvn_part.cpp:288
 #, fuzzy, kde-format
 msgid ""
 "(C) 2005-2009 Rajko Albrecht,\n"
 "(C) 2015-2018 Christian Ehrlicher"
 msgstr "(C) 2005-2007 Rajko Albrecht"
 
-#: src/kdesvn_part.cpp:290
+#: src/kdesvn_part.cpp:291
 #, fuzzy, kde-format
 msgid "Original author and maintainer"
 msgstr "オリジナル作者とメンテナ"
 
-#: src/kdesvn_part.cpp:291 src/main.cpp:47 src/main.cpp:48
+#: src/kdesvn_part.cpp:292 src/main.cpp:50 src/main.cpp:51
 #, fuzzy, kde-format
 msgid "Developer"
 msgstr "開発者"
 
 #. i18n: ectx: Menu (subversion_general)
-#: src/kdesvn_part.cpp:330 src/kdesvn_part.rc:19
+#: src/kdesvn_part.cpp:328 src/kdesvn_part.rc:19
 #, fuzzy, kde-format
 msgid "General"
 msgstr "一般"
 
-#: src/kdesvn_part.cpp:330
+#: src/kdesvn_part.cpp:328
 #, fuzzy, kde-format
 msgid "General Settings"
 msgstr "全般設定"
 
 #. i18n: ectx: Menu (subversion_main)
-#: src/kdesvn_part.cpp:332 src/kdesvn_part.rc:17 src/kdesvnui.rc:25
+#: src/kdesvn_part.cpp:329 src/kdesvn_part.rc:17 src/kdesvnui.rc:25
 #, fuzzy, kde-format
 msgid "Subversion"
 msgstr "Subversion"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SubversionSettings)
-#: src/kdesvn_part.cpp:332 src/settings/subversion_settings.ui:6
+#: src/kdesvn_part.cpp:329 src/settings/subversion_settings.ui:6
 #, fuzzy, kde-format
 msgid "Subversion Settings"
 msgstr "Subversion 設定"
 
-#: src/kdesvn_part.cpp:334
+#: src/kdesvn_part.cpp:330
 #, kde-format
 msgid "Timed jobs"
 msgstr ""
 
-#: src/kdesvn_part.cpp:334
+#: src/kdesvn_part.cpp:330
 #, fuzzy, kde-format
 msgid "Settings for timed jobs"
 msgstr "%1 に対する設定"
 
-#: src/kdesvn_part.cpp:336
+#: src/kdesvn_part.cpp:331
 #, fuzzy, kde-format
 msgid "Diff & Merge"
 msgstr "Diff & マージ"
 
-#: src/kdesvn_part.cpp:336
+#: src/kdesvn_part.cpp:331
 #, fuzzy, kde-format
 msgid "Settings for diff and merge"
 msgstr "diff とマージに関する設定"
 
-#: src/kdesvn_part.cpp:338
+#: src/kdesvn_part.cpp:332
 #, fuzzy, kde-format
 msgid "Colors"
 msgstr "色"
 
-#: src/kdesvn_part.cpp:338
+#: src/kdesvn_part.cpp:332
 #, fuzzy, kde-format
 msgid "Color Settings"
 msgstr "色設定"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, RevisionTreeSettings)
-#: src/kdesvn_part.cpp:340 src/settings/revisiontree_settings.ui:6
+#: src/kdesvn_part.cpp:333 src/settings/revisiontree_settings.ui:6
 #, fuzzy, kde-format
 msgid "Revision tree Settings"
 msgstr "リビジョンツリー設定"
 
-#: src/kdesvn_part.cpp:340
+#: src/kdesvn_part.cpp:333
 #, fuzzy, kde-format
 msgid "Revision tree"
 msgstr "リビジョンツリー"
 
-#: src/kdesvn_part.cpp:342
+#: src/kdesvn_part.cpp:335
 #, fuzzy, kde-format
 #| msgid "Commandline"
 msgid "KIO / Command line"
 msgstr "コマンドライン"
 
-#: src/kdesvn_part.cpp:342
+#: src/kdesvn_part.cpp:337
 #, fuzzy, kde-format
 #| msgid "Settings for commandline and KIO execution"
 msgid "Settings for command line and KIO execution"
@@ -396,28 +396,28 @@ msgstr "Subversion ツールバー"
 msgid "Main Toolbar"
 msgstr "メインツールバー"
 
-#: src/kdesvnd/kdesvnd.cpp:252
+#: src/kdesvnd/kdesvnd.cpp:233
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Enter Password for Realm %1"
 msgstr "アドレス %1 に対するパスワードを入力してください"
 
-#: src/kdesvnd/kdesvnd.cpp:268 src/svnfrontend/ccontextlistener.cpp:289
+#: src/kdesvnd/kdesvnd.cpp:249 src/svnfrontend/ccontextlistener.cpp:283
 #, fuzzy, kde-format
 msgid "Open a file with a #PKCS12 certificate"
 msgstr "#PKCS12 証明書でファイルを開く"
 
-#: src/kdesvnd/kdesvnd.cpp:359
+#: src/kdesvnd/kdesvnd.cpp:336
 #, fuzzy, kde-format
 msgid "Current task"
 msgstr "現在の項目をロック(&L)"
 
-#: src/kdesvnd/kdesvnd.cpp:371
+#: src/kdesvnd/kdesvnd.cpp:348
 #, kde-format
 msgid "Current transfer"
 msgstr ""
 
-#: src/kdesvnd/ksvnjobview.cpp:50
+#: src/kdesvnd/ksvnjobview.cpp:52
 #, kde-format
 msgid "bytes"
 msgstr ""
@@ -446,112 +446,112 @@ msgstr "データベース(&D)"
 msgid "&Settings"
 msgstr "設定(&S)"
 
-#: src/kdesvnview.cpp:133 src/kdesvnview.cpp:167
+#: src/kdesvnview.cpp:130 src/kdesvnview.cpp:164
 #, fuzzy, kde-format
 msgid "Repository opened"
 msgstr "リポジトリが開かれました"
 
-#: src/kdesvnview.cpp:173
+#: src/kdesvnview.cpp:170
 #, fuzzy, kde-format
 msgid "Could not open repository"
 msgstr "リポジトリを開けませんでした"
 
-#: src/kdesvnview.cpp:198
+#: src/kdesvnview.cpp:195
 #, fuzzy, kde-format
 msgid "No repository open"
 msgstr "どのリポジトリも開いていません"
 
-#: src/kdesvnview.cpp:258
+#: src/kdesvnview.cpp:255
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Hotcopy a Repository"
 msgstr "リポジトリをハードコピー(&H)"
 
-#: src/kdesvnview.cpp:276
+#: src/kdesvnview.cpp:273
 #, fuzzy, kde-format
 msgid "Hotcopy finished."
 msgstr "ハードコピーが完了しました。"
 
-#: src/kdesvnview.cpp:285
+#: src/kdesvnview.cpp:282
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Load a Repository From an svndump"
 msgstr "ダンプするリポジトリ："
 
-#: src/kdesvnview.cpp:335
+#: src/kdesvnview.cpp:332
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Dump"
 msgstr ""
 
-#: src/kdesvnview.cpp:335
+#: src/kdesvnview.cpp:332
 #, fuzzy, kde-format
 msgid "Loading a dump into a repository."
 msgstr "リポジトリにダンプを読み込んでいます。"
 
-#: src/kdesvnview.cpp:337
+#: src/kdesvnview.cpp:334
 #, fuzzy, kde-format
 msgid "Loading dump finished."
 msgstr "ダンプの読み込みが完了しました。"
 
-#: src/kdesvnview.cpp:347
+#: src/kdesvnview.cpp:344
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Dump a Repository"
 msgstr "リポジトリをダンプ"
 
-#: src/kdesvnview.cpp:387
+#: src/kdesvnview.cpp:384
 #, kde-format
 msgctxt "@title:window"
 msgid "Dump"
 msgstr ""
 
-#: src/kdesvnview.cpp:387
+#: src/kdesvnview.cpp:384
 #, fuzzy, kde-format
 msgid "Dumping a repository"
 msgstr "リポジトリをダンプしています"
 
-#: src/kdesvnview.cpp:389
+#: src/kdesvnview.cpp:386
 #, fuzzy, kde-format
 msgid "Dump finished."
 msgstr "ダンプが完了しました。"
 
-#: src/kdesvnview.cpp:434
+#: src/kdesvnview.cpp:431
 #, fuzzy, kde-format
 msgid "Inserted %v not cached log entries of %m."
 msgstr "%m のうちキャッシュされていないログエントリ %v が挿入されました"
 
-#: src/kiosvn/kiolistener.cpp:66 src/kiosvn/kiosvn.cpp:811
+#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:807
 #, kde-format
 msgid "Wrong or missing log (may cancel pressed)."
 msgstr ""
 
-#: src/kiosvn/kiolistener.cpp:91
+#: src/kiosvn/kiolistener.cpp:102
 #, fuzzy, kde-format
 msgid "A (bin) %1"
 msgstr "A（バイナリ）%1"
 
-#: src/kiosvn/kiolistener.cpp:93 src/kiosvn/kiolistener.cpp:129
+#: src/kiosvn/kiolistener.cpp:104 src/kiosvn/kiolistener.cpp:139
 #, fuzzy, kde-format
 msgid "A %1"
 msgstr "A %1"
 
-#: src/kiosvn/kiolistener.cpp:102 src/kiosvn/kiolistener.cpp:125
+#: src/kiosvn/kiolistener.cpp:112 src/kiosvn/kiolistener.cpp:135
 #, fuzzy, kde-format
 msgid "D %1"
 msgstr "D %1"
 
-#: src/kiosvn/kiolistener.cpp:105
+#: src/kiosvn/kiolistener.cpp:115
 #, fuzzy, kde-format
 msgid "Restored %1."
 msgstr "%1 を復元しました。"
 
-#: src/kiosvn/kiolistener.cpp:108
+#: src/kiosvn/kiolistener.cpp:118
 #, fuzzy, kde-format
 msgid "Reverted %1."
 msgstr "%1 を元に戻しました。"
 
-#: src/kiosvn/kiolistener.cpp:111
+#: src/kiosvn/kiolistener.cpp:121
 #, fuzzy, kde-format
 msgid ""
 "Failed to revert %1.\n"
@@ -560,177 +560,177 @@ msgstr ""
 "%1 の復元に失敗しました。\n"
 "代わりに、アップデートを試してください。"
 
-#: src/kiosvn/kiolistener.cpp:114
+#: src/kiosvn/kiolistener.cpp:124
 #, fuzzy, kde-format
 msgid "Resolved conflicted state of %1."
 msgstr "%1 の衝突を解消しました。"
 
-#: src/kiosvn/kiolistener.cpp:118
+#: src/kiosvn/kiolistener.cpp:128
 #, fuzzy, kde-format
 msgid "Skipped missing target %1."
 msgstr "紛失したターゲット %1 をスキップしました。"
 
-#: src/kiosvn/kiolistener.cpp:120
+#: src/kiosvn/kiolistener.cpp:130
 #, fuzzy, kde-format
 msgid "Skipped %1."
 msgstr "%1 をスキップしました。"
 
-#: src/kiosvn/kiolistener.cpp:173
+#: src/kiosvn/kiolistener.cpp:180
 #, fuzzy, kde-format
 msgid "Finished at revision %1."
 msgstr "リビジョン %1 で完了しました。"
 
-#: src/kiosvn/kiolistener.cpp:175
+#: src/kiosvn/kiolistener.cpp:182
 #, fuzzy, kde-format
 msgid "Update finished."
 msgstr "更新が完了しました。"
 
-#: src/kiosvn/kiolistener.cpp:179
+#: src/kiosvn/kiolistener.cpp:186
 #, fuzzy, kde-format
 msgid "Finished external at revision %1."
 msgstr "リビジョン %1 で外部が完了しました。"
 
-#: src/kiosvn/kiolistener.cpp:181
+#: src/kiosvn/kiolistener.cpp:188
 #, fuzzy, kde-format
 msgid "Finished external."
 msgstr "外部が完了しました。"
 
-#: src/kiosvn/kiolistener.cpp:191
+#: src/kiosvn/kiolistener.cpp:198
 #, fuzzy, kde-format
 msgid "Fetching external item into %1."
 msgstr "%1 に外部の項目を取得しています。"
 
-#: src/kiosvn/kiolistener.cpp:195
+#: src/kiosvn/kiolistener.cpp:202
 #, fuzzy, kde-format
 msgid "Status against revision: %1."
 msgstr "リビジョン %1 に対するステータス。"
 
-#: src/kiosvn/kiolistener.cpp:199
+#: src/kiosvn/kiolistener.cpp:206
 #, fuzzy, kde-format
 msgid "Performing status on external item at %1."
 msgstr "%1 の外部の項目のステータスを実行しています。"
 
-#: src/kiosvn/kiolistener.cpp:202
+#: src/kiosvn/kiolistener.cpp:209
 #, fuzzy, kde-format
 msgid "Sending %1."
 msgstr "%1 を送信しています。"
 
-#: src/kiosvn/kiolistener.cpp:206
+#: src/kiosvn/kiolistener.cpp:213
 #, fuzzy, kde-format
 msgid "Adding (bin) %1."
 msgstr "%1（バイナリ）を追加しています。"
 
-#: src/kiosvn/kiolistener.cpp:208
+#: src/kiosvn/kiolistener.cpp:215
 #, fuzzy, kde-format
 msgid "Adding %1."
 msgstr "%1 を追加しています。"
 
-#: src/kiosvn/kiolistener.cpp:212
+#: src/kiosvn/kiolistener.cpp:219
 #, fuzzy, kde-format
 msgid "Deleting %1."
 msgstr "%1 を削除しています。"
 
-#: src/kiosvn/kiolistener.cpp:215
+#: src/kiosvn/kiolistener.cpp:222
 #, fuzzy, kde-format
 msgid "Replacing %1."
 msgstr "%1 を置換しています。"
 
-#: src/kiosvn/kiolistener.cpp:221
+#: src/kiosvn/kiolistener.cpp:228
 #, fuzzy, kde-format
 msgid "Transmitting file data "
 msgstr "ファイルデータを転送しています"
 
-#: src/kiosvn/kiosvn.cpp:301 src/kiosvn/kiosvn.cpp:355
-#: src/kiosvn/kiosvn.cpp:507
+#: src/kiosvn/kiosvn.cpp:297 src/kiosvn/kiosvn.cpp:351
+#: src/kiosvn/kiosvn.cpp:502
 #, fuzzy, kde-format
 #| msgid "Can only write on head revision!"
 msgid "Can only write on HEAD revision."
 msgstr "head リビジョンにだけ書き込めます！"
 
-#: src/kiosvn/kiosvn.cpp:342
+#: src/kiosvn/kiosvn.cpp:338
 #, kde-format
 msgid "Renaming %1 to %2 successful"
 msgstr ""
 
-#: src/kiosvn/kiosvn.cpp:376
+#: src/kiosvn/kiosvn.cpp:372
 #, fuzzy, kde-format
 msgid "Overwriting existing items is disabled in settings."
 msgstr "設定で既存の項目に対する上書きは無効です。"
 
-#: src/kiosvn/kiosvn.cpp:384
+#: src/kiosvn/kiosvn.cpp:380
 #, kde-format
 msgid "Start checking out to temporary folder"
 msgstr ""
 
-#: src/kiosvn/kiosvn.cpp:387
+#: src/kiosvn/kiosvn.cpp:383
 #, fuzzy, kde-format
 msgid "Checking out %1"
 msgstr "チェックアウトしています"
 
-#: src/kiosvn/kiosvn.cpp:396
+#: src/kiosvn/kiosvn.cpp:392
 #, kde-format
 msgid "Temporary checkout done."
 msgstr ""
 
-#: src/kiosvn/kiosvn.cpp:400
+#: src/kiosvn/kiosvn.cpp:396
 #, fuzzy, kde-format
 msgid "Could not write to existing item."
 msgstr "既存の項目に書き込めませんでした。"
 
-#: src/kiosvn/kiosvn.cpp:406
+#: src/kiosvn/kiosvn.cpp:402
 #, fuzzy, kde-format
 msgid "Could not open temporary file"
 msgstr "一時ファイルを開けませんでした"
 
-#: src/kiosvn/kiosvn.cpp:430
+#: src/kiosvn/kiosvn.cpp:425
 #, fuzzy, kde-format
 msgid "Could not retrieve data for write."
 msgstr "書き込むためのデータを取得できませんでした。"
 
-#: src/kiosvn/kiosvn.cpp:438
+#: src/kiosvn/kiosvn.cpp:433
 #, fuzzy, kde-format
 msgid "Committing %1"
 msgstr "コミットしています"
 
-#: src/kiosvn/kiosvn.cpp:461
+#: src/kiosvn/kiosvn.cpp:456
 #, fuzzy, kde-format
 msgid "Wrote %1 to repository"
 msgstr "リポジトリへのパス："
 
-#: src/kiosvn/kiosvn.cpp:492
+#: src/kiosvn/kiosvn.cpp:487
 #, fuzzy, kde-format
 msgid "Copied %1 to %2"
 msgstr "リビジョン %2 で %1 にコピーされました"
 
-#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1053
-#: src/svnfrontend/svnactions.cpp:2212
+#: src/kiosvn/kiosvn.cpp:827 src/svnfrontend/svnactions.cpp:1058
+#: src/svnfrontend/svnactions.cpp:2272
 #, fuzzy, kde-format
 msgid "Committed revision %1."
 msgstr "リビジョン %1 をコミットしました。"
 
-#: src/kiosvn/kiosvn.cpp:830
+#: src/kiosvn/kiosvn.cpp:829
 #, fuzzy, kde-format
 msgid "Nothing to commit."
 msgstr "コミットするものがありません。"
 
-#: src/kiosvn/kiosvn.cpp:877
+#: src/kiosvn/kiosvn.cpp:875
 #, fuzzy, kde-format
 msgid "Empty logs"
 msgstr "空のログ"
 
-#: src/ksvnwidgets/authdialogwidget.cpp:35
+#: src/ksvnwidgets/authdialogwidget.cpp:34
 #, fuzzy, kde-format
 #| msgid "Store passwords into KDE Wallet"
 msgid "Store password (into KDE Wallet)"
 msgstr "&KDE ウォレットの中へパスワードを保存する"
 
-#: src/ksvnwidgets/authdialogwidget.cpp:36
+#: src/ksvnwidgets/authdialogwidget.cpp:35
 #, fuzzy, kde-format
 #| msgid "into subversions simple storage"
 msgid "Store password (into Subversion' simple storage)"
 msgstr "subversion の単純な保存場所へ"
 
-#: src/ksvnwidgets/authdialogwidget.cpp:38
+#: src/ksvnwidgets/authdialogwidget.cpp:37
 #, fuzzy, kde-format
 #| msgid "Enter authentication info for"
 msgid "Enter authentication info for %1"
@@ -780,7 +780,7 @@ msgid "Unselect all"
 msgstr "項目を選択"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_HideNewItems)
-#: src/ksvnwidgets/commitmessage.ui:77 src/ksvnwidgets/commitmsg_impl.cpp:453
+#: src/ksvnwidgets/commitmessage.ui:77 src/ksvnwidgets/commitmsg_impl.cpp:455
 #, fuzzy, kde-format
 msgid "Hide new items"
 msgstr "新しい項目を隠す"
@@ -873,32 +873,32 @@ msgstr "チェックすればコミットはロックを解除しません。"
 msgid "Keep locks"
 msgstr "ロックを保つ"
 
-#: src/ksvnwidgets/commitmsg_impl.cpp:287
+#: src/ksvnwidgets/commitmsg_impl.cpp:289
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Commit Log"
 msgstr "コミットログ"
 
-#: src/ksvnwidgets/commitmsg_impl.cpp:453
+#: src/ksvnwidgets/commitmsg_impl.cpp:455
 #, fuzzy, kde-format
 msgid "Show new items"
 msgstr "新しい項目を選択"
 
-#: src/ksvnwidgets/commitmsg_impl.cpp:476
+#: src/ksvnwidgets/commitmsg_impl.cpp:478
 #, fuzzy, kde-format
 #| msgid "Select textfile for insert"
 msgctxt "@title:window"
 msgid "Select Text File to Insert"
 msgstr "挿入するテキストファイルを選択"
 
-#: src/ksvnwidgets/commitmsg_impl.cpp:477
+#: src/ksvnwidgets/commitmsg_impl.cpp:479
 #, fuzzy, kde-format
 #| msgid "Select textfile for insert"
 msgid "Select text file to insert:"
 msgstr "挿入するテキストファイルを選択"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DeleteForm)
-#: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1549
+#: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1574
 #, fuzzy, kde-format
 msgid "Really delete these entries?"
 msgstr "本当にこれらのエントリを削除しますか？"
@@ -985,7 +985,7 @@ msgstr "無限の深さ（再帰）"
 msgid "Ctrl-F for search, F3 or Shift-F3 for search again."
 msgstr "検索には Ctrl-F、再検索には F3 または Shift-F3。"
 
-#: src/ksvnwidgets/diffbrowser.cpp:51
+#: src/ksvnwidgets/diffbrowser.cpp:52
 #, fuzzy, kde-format
 msgid ""
 "<b>Display differences between files</b><p>You may search inside text with "
@@ -996,22 +996,22 @@ msgstr ""
 "p><p>前方再検索には F3、後方再検索には Shift-F3。</p><p>Ctrl-S で（元の）出力"
 "を保存できます。</p>"
 
-#: src/ksvnwidgets/diffbrowser.cpp:86
+#: src/ksvnwidgets/diffbrowser.cpp:88
 #, kde-format
 msgid "Save diff"
 msgstr ""
 
-#: src/ksvnwidgets/diffbrowser.cpp:86
+#: src/ksvnwidgets/diffbrowser.cpp:88
 #, kde-format
 msgid "Patch file (*.diff *.patch)"
 msgstr ""
 
-#: src/ksvnwidgets/diffbrowser.cpp:93
+#: src/ksvnwidgets/diffbrowser.cpp:94
 #, fuzzy, kde-format
 msgid "File %1 exists - overwrite?"
 msgstr "ファイル %1 が存在します - 上書きしますか？"
 
-#: src/ksvnwidgets/diffbrowser.cpp:177
+#: src/ksvnwidgets/diffbrowser.cpp:176
 #, fuzzy, kde-format
 msgid ""
 "End of document reached.\n"
@@ -1020,12 +1020,12 @@ msgstr ""
 "文書の末尾です。\n"
 "先頭から続けますか？"
 
-#: src/ksvnwidgets/diffbrowser.cpp:179 src/ksvnwidgets/diffbrowser.cpp:192
+#: src/ksvnwidgets/diffbrowser.cpp:178 src/ksvnwidgets/diffbrowser.cpp:190
 #, fuzzy, kde-format
 msgid "Find"
 msgstr "検索"
 
-#: src/ksvnwidgets/diffbrowser.cpp:190
+#: src/ksvnwidgets/diffbrowser.cpp:188
 #, fuzzy, kde-format
 msgid ""
 "Beginning of document reached.\n"
@@ -1048,50 +1048,50 @@ msgid "Default UTF-8"
 msgstr "標準 utf-8"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
-#: src/ksvnwidgets/models/commitmodel.cpp:192 src/svnfrontend/svnlogdlg.ui:158
+#: src/ksvnwidgets/models/commitmodel.cpp:191 src/svnfrontend/svnlogdlg.ui:158
 #, fuzzy, kde-format
 msgid "Action"
 msgstr "アクション"
 
-#: src/ksvnwidgets/models/commitmodel.cpp:195
+#: src/ksvnwidgets/models/commitmodel.cpp:194
 #, fuzzy, kde-format
 msgid "Entry"
 msgstr "エントリ"
 
-#: src/ksvnwidgets/models/commitmodelhelper.cpp:33
-#: src/svnfrontend/maintreewidget.cpp:581
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:35
+#: src/svnfrontend/maintreewidget.cpp:693
 #, fuzzy, kde-format
 msgid "Add"
 msgstr "追加"
 
-#: src/ksvnwidgets/models/commitmodelhelper.cpp:37
-#: src/svnfrontend/ccontextlistener.cpp:65
-#: src/svnfrontend/copymoveview_impl.cpp:49
-#: src/svnfrontend/maintreewidget.cpp:522
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:39
+#: src/svnfrontend/ccontextlistener.cpp:67
+#: src/svnfrontend/copymoveview_impl.cpp:48
+#: src/svnfrontend/maintreewidget.cpp:565
 #, fuzzy, kde-format
 msgid "Copy"
 msgstr "コピー"
 
-#: src/ksvnwidgets/models/commitmodelhelper.cpp:41
-#: src/svnfrontend/ccontextlistener.cpp:66
-#: src/svnfrontend/maintreewidget.cpp:587
-#: src/svnfrontend/maintreewidget.cpp:591 src/svnfrontend/svnactions.cpp:1007
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:43
+#: src/svnfrontend/ccontextlistener.cpp:68
+#: src/svnfrontend/maintreewidget.cpp:708
+#: src/svnfrontend/maintreewidget.cpp:717 src/svnfrontend/svnactions.cpp:1013
 #, fuzzy, kde-format
 msgid "Delete"
 msgstr "削除"
 
-#: src/ksvnwidgets/models/commitmodelhelper.cpp:45
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:47
 #, fuzzy, kde-format
 msgid "Modify (content or property)"
 msgstr "変更（中身または属性）"
 
-#: src/ksvnwidgets/models/commitmodelhelper.cpp:49
-#: src/svnfrontend/svnactions.cpp:776
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:51
+#: src/svnfrontend/svnactions.cpp:793
 #, fuzzy, kde-format
 msgid "Replace"
 msgstr "置換"
 
-#: src/ksvnwidgets/models/commitmodelhelper.cpp:53
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:55
 #, fuzzy, kde-format
 msgid "(Un)Lock"
 msgstr "ロック（解除）"
@@ -1123,42 +1123,42 @@ msgstr "一時的に受け入れる"
 msgid "Reject"
 msgstr "拒否"
 
-#: src/ksvnwidgets/ssltrustprompt.cpp:44
+#: src/ksvnwidgets/ssltrustprompt.cpp:46
 #, fuzzy, kde-format
 msgid "Error validating server certificate for '%1'"
 msgstr "エラー「%1」に対するサーバ認証の検証"
 
-#: src/ksvnwidgets/ssltrustprompt.cpp:69
+#: src/ksvnwidgets/ssltrustprompt.cpp:71
 #, fuzzy, kde-format
 msgid "Failure reasons"
 msgstr "失敗理由"
 
-#: src/ksvnwidgets/ssltrustprompt.cpp:77
+#: src/ksvnwidgets/ssltrustprompt.cpp:79
 #, fuzzy, kde-format
 msgid "Realm"
 msgstr "領域"
 
-#: src/ksvnwidgets/ssltrustprompt.cpp:78
+#: src/ksvnwidgets/ssltrustprompt.cpp:80
 #, fuzzy, kde-format
 msgid "Host"
 msgstr "ホスト"
 
-#: src/ksvnwidgets/ssltrustprompt.cpp:79
+#: src/ksvnwidgets/ssltrustprompt.cpp:81
 #, fuzzy, kde-format
 msgid "Valid from"
 msgstr "有効期間開始"
 
-#: src/ksvnwidgets/ssltrustprompt.cpp:80
+#: src/ksvnwidgets/ssltrustprompt.cpp:82
 #, fuzzy, kde-format
 msgid "Valid until"
 msgstr "有効期間終了"
 
-#: src/ksvnwidgets/ssltrustprompt.cpp:81
+#: src/ksvnwidgets/ssltrustprompt.cpp:83
 #, fuzzy, kde-format
 msgid "Issuer name"
 msgstr "発行者名"
 
-#: src/ksvnwidgets/ssltrustprompt.cpp:82
+#: src/ksvnwidgets/ssltrustprompt.cpp:84
 #, fuzzy, kde-format
 msgid "Fingerprint"
 msgstr "フィンガープリント"
@@ -1170,7 +1170,7 @@ msgstr "フィンガープリント"
 msgid "Trust SSL certificate"
 msgstr "信頼済み ssl 認証"
 
-#: src/main.cpp:32
+#: src/main.cpp:31
 #, fuzzy, kde-format
 msgid "A Subversion Client by KDE (standalone application)"
 msgstr "KDE 向けの Subversion クライアント（スタンドアロンアプリケーション）"
@@ -1180,72 +1180,72 @@ msgstr "KDE 向けの Subversion クライアント（スタンドアロンア�
 msgid "kdesvn"
 msgstr "kdesvn"
 
-#: src/main.cpp:46
+#: src/main.cpp:49
 #, fuzzy, kde-format
 msgid ""
 "(C) 2005-2009 Rajko Albrecht,\n"
 "(C) 2015-2019 Christian Ehrlicher"
 msgstr "(C) 2005-2007 Rajko Albrecht"
 
-#: src/main.cpp:47
+#: src/main.cpp:50
 #, fuzzy, kde-format
 msgid "Rajko Albrecht"
 msgstr "Rajko Albrecht"
 
-#: src/main.cpp:48
+#: src/main.cpp:51
 #, kde-format
 msgid "Christian Ehrlicher"
 msgstr ""
 
-#: src/main.cpp:53
+#: src/main.cpp:56
 #, fuzzy, kde-format
 #| msgid "Execute single subversion command on specific revision(-range)"
 msgid "Execute single Subversion command on specific revision(-range)"
 msgstr "特定のリビジョン（-範囲）について単一の subversion コマンドを実行する"
 
-#: src/main.cpp:53
+#: src/main.cpp:56
 #, kde-format
 msgid "startrev[:endrev]"
 msgstr ""
 
-#: src/main.cpp:54
+#: src/main.cpp:57
 #, fuzzy, kde-format
 msgid "Ask for revision when executing single command"
 msgstr "単一のコマンドを実行するときにリビジョンを尋ねる"
 
-#: src/main.cpp:55
+#: src/main.cpp:58
 #, fuzzy, kde-format
 msgid "Force operation"
 msgstr "操作を強制"
 
-#: src/main.cpp:56
+#: src/main.cpp:59
 #, fuzzy, kde-format
 #| msgid "Save output of subversion command (eg \"cat\") into file <file>"
 msgid "Save output of Subversion command (eg \"cat\") into file <file>"
 msgstr "subversion コマンド（例えば「cat」）の出力をファイル <file> に保存"
 
-#: src/main.cpp:56
+#: src/main.cpp:59
 #, kde-format
 msgid "<file>"
 msgstr ""
 
-#: src/main.cpp:57
+#: src/main.cpp:60
 #, fuzzy, kde-format
 msgid "Limit log output to <number>"
 msgstr "ログ出力を <number> に制限"
 
-#: src/main.cpp:57
+#: src/main.cpp:60
 #, fuzzy, kde-format
 msgid "<number>"
 msgstr "数"
 
-#: src/main.cpp:58
+#: src/main.cpp:61
 #, fuzzy, kde-format
 #| msgid "Execute subversion command (\"exec help\" for more information)"
 msgid "Execute Subversion command (\"exec help\" for more information)"
 msgstr "subversion コマンドを実行（更なる情報については「exec help」）"
 
-#: src/main.cpp:59
+#: src/main.cpp:62
 #, fuzzy, kde-format
 msgid "Document to open"
 msgstr "開く文書"
@@ -1408,7 +1408,7 @@ msgstr "Diff はコンテンツタイプを無視する(&I)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_tree_diff_rec)
 #: src/settings/diffmergesettings.ui:18
-#: src/svnfrontend/graphtree/revgraphview.cpp:862
+#: src/svnfrontend/graphtree/revgraphview.cpp:853
 #, fuzzy, kde-format
 #| msgid "Diff in revisiontree is recursive"
 msgid "Diff in revision tree is recursive"
@@ -2526,7 +2526,7 @@ msgstr ""
 msgid "Update makes missing parents"
 msgstr ""
 
-#: src/svnfrontend/background/fillcachethread.cpp:72
+#: src/svnfrontend/background/fillcachethread.cpp:74
 #, fuzzy, kde-format
 #| msgid ""
 #| "Not filling logcache because it is disabled due setting for this "
@@ -2537,24 +2537,24 @@ msgstr ""
 "このリポジトリに対する設定により無効になっているのでログキャッシュを充填して"
 "いません"
 
-#: src/svnfrontend/background/fillcachethread.cpp:74
+#: src/svnfrontend/background/fillcachethread.cpp:76
 #, fuzzy, kde-format
 #| msgid "Filling log cache in background"
 msgid "Filling log cache in background."
 msgstr "バックグラウンドでログキャッシュを充填しています"
 
-#: src/svnfrontend/background/fillcachethread.cpp:96
+#: src/svnfrontend/background/fillcachethread.cpp:98
 #, fuzzy, kde-format
 msgid "Filling cache canceled."
 msgstr "キャッシュの充填がキャンセルされました。"
 
-#: src/svnfrontend/background/fillcachethread.cpp:111
+#: src/svnfrontend/background/fillcachethread.cpp:113
 #, fuzzy, kde-format
 #| msgid "Cache filled up to revision %1"
 msgid "Cache filled up to revision %1."
 msgstr "リビジョン %1 までキャッシュが充填されました"
 
-#: src/svnfrontend/background/fillcachethread.cpp:118
+#: src/svnfrontend/background/fillcachethread.cpp:120
 #, fuzzy, kde-format
 msgid "Filling log cache in background finished."
 msgstr "バックグラウンドでのログキャッシュの充填が完了しました。"
@@ -2565,33 +2565,33 @@ msgid "%1 of %2 transferred."
 msgstr "%2 のうち %1 が転送されました。"
 
 #: src/svnfrontend/background/tcontextlistener.cpp:184
-#: src/svnfrontend/stopdlg.cpp:200
+#: src/svnfrontend/stopdlg.cpp:198
 #, fuzzy, kde-format
 msgid "%1 transferred."
 msgstr "%1 が転送されました。"
 
-#: src/svnfrontend/blamedisplay.cpp:185 src/svnfrontend/blamedisplay.cpp:197
+#: src/svnfrontend/blamedisplay.cpp:184 src/svnfrontend/blamedisplay.cpp:194
 #, fuzzy, kde-format
 msgid "Log message for revision"
 msgstr "リビジョンに対するログメッセージ"
 
-#: src/svnfrontend/blamedisplay.cpp:190
+#: src/svnfrontend/blamedisplay.cpp:188
 #, fuzzy, kde-format
 #| msgid "Goto line"
 msgid "Go to line"
 msgstr "行へ移動"
 
-#: src/svnfrontend/blamedisplay.cpp:324
+#: src/svnfrontend/blamedisplay.cpp:320
 #, fuzzy, kde-format
 msgid "Show line"
 msgstr "行を表示"
 
-#: src/svnfrontend/blamedisplay.cpp:324
+#: src/svnfrontend/blamedisplay.cpp:320
 #, fuzzy, kde-format
 msgid "Show line number"
 msgstr "行番号を表示"
 
-#: src/svnfrontend/blamedisplay.cpp:361
+#: src/svnfrontend/blamedisplay.cpp:356
 #, fuzzy, kde-format
 #| msgid "Logmessage for revision %1"
 msgctxt "@title:window"
@@ -2635,102 +2635,102 @@ msgstr "作成者"
 msgid "Content"
 msgstr "内容"
 
-#: src/svnfrontend/ccontextlistener.cpp:64
+#: src/svnfrontend/ccontextlistener.cpp:66
 #, fuzzy, kde-format
 msgid "Add to revision control"
 msgstr "リビジョン管理に追加"
 
-#: src/svnfrontend/ccontextlistener.cpp:67
+#: src/svnfrontend/ccontextlistener.cpp:69
 #, fuzzy, kde-format
 msgid "Restore missing"
 msgstr "失われた項目を元に戻す"
 
-#: src/svnfrontend/ccontextlistener.cpp:68
+#: src/svnfrontend/ccontextlistener.cpp:70
 #, fuzzy, kde-format
 msgid "Revert"
 msgstr "取り消し"
 
-#: src/svnfrontend/ccontextlistener.cpp:69
+#: src/svnfrontend/ccontextlistener.cpp:71
 #, fuzzy, kde-format
 msgid "Revert failed"
 msgstr "元に戻すのに失敗しました"
 
-#: src/svnfrontend/ccontextlistener.cpp:70
+#: src/svnfrontend/ccontextlistener.cpp:72
 #, fuzzy, kde-format
 msgid "Resolved"
 msgstr "解消しました"
 
-#: src/svnfrontend/ccontextlistener.cpp:71
+#: src/svnfrontend/ccontextlistener.cpp:73
 #, fuzzy, kde-format
 msgid "Skip"
 msgstr "スキップ"
 
-#: src/svnfrontend/ccontextlistener.cpp:72 src/svnfrontend/svnitem.cpp:430
+#: src/svnfrontend/ccontextlistener.cpp:74 src/svnfrontend/svnitem.cpp:430
 #, fuzzy, kde-format
 msgid "Deleted"
 msgstr "削除されました"
 
-#: src/svnfrontend/ccontextlistener.cpp:73
+#: src/svnfrontend/ccontextlistener.cpp:75
 #, fuzzy, kde-format
 msgid "Added"
 msgstr "追加されました"
 
-#: src/svnfrontend/ccontextlistener.cpp:74
+#: src/svnfrontend/ccontextlistener.cpp:76
 #, fuzzy, kde-format
 msgid "Update"
 msgstr "更新"
 
-#: src/svnfrontend/ccontextlistener.cpp:75
+#: src/svnfrontend/ccontextlistener.cpp:77
 #, fuzzy, kde-format
 msgid "Update complete"
 msgstr "更新完了"
 
-#: src/svnfrontend/ccontextlistener.cpp:76
+#: src/svnfrontend/ccontextlistener.cpp:78
 #, fuzzy, kde-format
 msgid "Update external module"
 msgstr "外部モジュールを更新"
 
-#: src/svnfrontend/ccontextlistener.cpp:78
+#: src/svnfrontend/ccontextlistener.cpp:80
 #, fuzzy, kde-format
 msgid "Status on external"
 msgstr "外部についての状態"
 
-#: src/svnfrontend/ccontextlistener.cpp:79
+#: src/svnfrontend/ccontextlistener.cpp:81
 #, fuzzy, kde-format
 msgid "Commit Modified"
 msgstr "コミット 変更されました"
 
-#: src/svnfrontend/ccontextlistener.cpp:80
+#: src/svnfrontend/ccontextlistener.cpp:82
 #, fuzzy, kde-format
 msgid "Commit Added"
 msgstr "コミット 追加されました"
 
-#: src/svnfrontend/ccontextlistener.cpp:81
+#: src/svnfrontend/ccontextlistener.cpp:83
 #, fuzzy, kde-format
 msgid "Commit Deleted"
 msgstr "コミット 削除されました"
 
-#: src/svnfrontend/ccontextlistener.cpp:82
+#: src/svnfrontend/ccontextlistener.cpp:84
 #, fuzzy, kde-format
 msgid "Commit Replaced"
 msgstr "コミット 置換されました"
 
-#: src/svnfrontend/ccontextlistener.cpp:85
+#: src/svnfrontend/ccontextlistener.cpp:87
 #, fuzzy, kde-format
 msgid "Locking"
 msgstr "ロックしています"
 
-#: src/svnfrontend/ccontextlistener.cpp:86
+#: src/svnfrontend/ccontextlistener.cpp:88
 #, fuzzy, kde-format
 msgid "Unlocked"
 msgstr "ロック解除されました"
 
-#: src/svnfrontend/ccontextlistener.cpp:87
+#: src/svnfrontend/ccontextlistener.cpp:89
 #, fuzzy, kde-format
 msgid "Lock failed"
 msgstr "ロック失敗"
 
-#: src/svnfrontend/ccontextlistener.cpp:88
+#: src/svnfrontend/ccontextlistener.cpp:90
 #, fuzzy, kde-format
 msgid "Unlock failed"
 msgstr "ロック解除失敗"
@@ -2760,12 +2760,12 @@ msgstr "変更された状態はマージされたモードになりました。
 msgid "Modified state got conflicting mods."
 msgstr "変更された状態は衝突モードになりました。"
 
-#: src/svnfrontend/ccontextlistener.cpp:311
+#: src/svnfrontend/ccontextlistener.cpp:304
 #, fuzzy, kde-format
 msgid "Enter password for realm %1"
 msgstr "アドレス %1 に対するパスワードを入力してください"
 
-#: src/svnfrontend/ccontextlistener.cpp:342
+#: src/svnfrontend/ccontextlistener.cpp:335
 #, fuzzy, kde-format
 #| msgid ""
 #| "The certificate is not issued by a trusted authority. Use the fingerprint "
@@ -2777,27 +2777,27 @@ msgstr ""
 "証明書が信頼された認証局によって発行されていません。手動で証明書を検証するた"
 "めにフィンガープリントを使ってください！"
 
-#: src/svnfrontend/ccontextlistener.cpp:345
+#: src/svnfrontend/ccontextlistener.cpp:338
 #, fuzzy, kde-format
 msgid "The certificate hostname does not match."
 msgstr "証明書のホスト名が一致しません。"
 
-#: src/svnfrontend/ccontextlistener.cpp:348
+#: src/svnfrontend/ccontextlistener.cpp:341
 #, fuzzy, kde-format
 msgid "The certificate is not yet valid."
 msgstr "証明書はまだ無効です。"
 
-#: src/svnfrontend/ccontextlistener.cpp:351
+#: src/svnfrontend/ccontextlistener.cpp:344
 #, fuzzy, kde-format
 msgid "The certificate has expired."
 msgstr "証明書は失効しています。"
 
-#: src/svnfrontend/ccontextlistener.cpp:354
+#: src/svnfrontend/ccontextlistener.cpp:347
 #, fuzzy, kde-format
 msgid "The certificate has an unknown error."
 msgstr "証明書には不明なエラーがあります。"
 
-#: src/svnfrontend/ccontextlistener.cpp:376
+#: src/svnfrontend/ccontextlistener.cpp:369
 #, fuzzy, kde-format
 #| msgid ""
 #| "%1\n"
@@ -2809,38 +2809,38 @@ msgstr ""
 "%1\n"
 "本当にパスワードをプレーンテキストとして保存しますか？"
 
-#: src/svnfrontend/ccontextlistener.cpp:377
+#: src/svnfrontend/ccontextlistener.cpp:370
 #, fuzzy, kde-format
 msgid "Save password"
 msgstr "パスワードを保存"
 
-#: src/svnfrontend/commandexec.cpp:219
-#, fuzzy, kde-format
-msgid "Command \"%1\" not implemented or known"
-msgstr "コマンド「%1」は実装されていないか不明です"
-
-#: src/svnfrontend/commandexec.cpp:220 src/svnfrontend/commandexec.cpp:339
-#: src/svnfrontend/graphtree/revgraphview.cpp:1004
-#: src/svnfrontend/maintreewidget.cpp:992
-#: src/svnfrontend/maintreewidget.cpp:2136
-#: src/svnfrontend/maintreewidget.cpp:2348
+#: src/svnfrontend/commandexec.cpp:206 src/svnfrontend/commandexec.cpp:321
+#: src/svnfrontend/graphtree/revgraphview.cpp:992
+#: src/svnfrontend/maintreewidget.cpp:1232
+#: src/svnfrontend/maintreewidget.cpp:2392
+#: src/svnfrontend/maintreewidget.cpp:2599
 #, fuzzy, kde-format
 msgid "SVN Error"
 msgstr "SVN エラー"
 
-#: src/svnfrontend/commandexec.cpp:434
+#: src/svnfrontend/commandexec.cpp:206
+#, fuzzy, kde-format
+msgid "Command \"%1\" not implemented or known"
+msgstr "コマンド「%1」は実装されていないか不明です"
+
+#: src/svnfrontend/commandexec.cpp:408
 #, fuzzy, kde-format
 #| msgid "\"GET\" requires output file!"
 msgid "\"GET\" requires output file"
 msgstr "「GET」は出力ファイルを必要とします！"
 
-#: src/svnfrontend/commandexec.cpp:621
+#: src/svnfrontend/commandexec.cpp:589
 #, fuzzy, kde-format
 #| msgid "May only switch one url at time!"
 msgid "May only switch one URL at time"
 msgstr "一度に一つだけの url に切り替えられます！"
 
-#: src/svnfrontend/commandexec.cpp:625
+#: src/svnfrontend/commandexec.cpp:593
 #, fuzzy, kde-format
 #| msgid "Switch only on working copies!"
 msgid "Switch only on working copies"
@@ -2872,19 +2872,19 @@ msgstr ""
 msgid "to"
 msgstr "を"
 
-#: src/svnfrontend/copymoveview_impl.cpp:47
+#: src/svnfrontend/copymoveview_impl.cpp:46
 #, fuzzy, kde-format
 msgid "Rename/move"
 msgstr "名前変更と移動"
 
-#: src/svnfrontend/copymoveview_impl.cpp:74
+#: src/svnfrontend/copymoveview_impl.cpp:70
 #, fuzzy, kde-format
 #| msgid "Move/Rename file/dir"
 msgctxt "@title:window"
 msgid "Move/Rename File/Directory"
 msgstr "ファイルやディレクトリの移動と名前変更"
 
-#: src/svnfrontend/copymoveview_impl.cpp:74
+#: src/svnfrontend/copymoveview_impl.cpp:70
 #, fuzzy, kde-format
 #| msgid "Copy file/dir"
 msgctxt "@title:window"
@@ -3049,14 +3049,14 @@ msgstr ""
 msgid "Compatible to Subversion prior 1.8"
 msgstr "subversion 1.6 以前と互換性がある"
 
-#: src/svnfrontend/database/dboverview.cpp:117
+#: src/svnfrontend/database/dboverview.cpp:112
 #, fuzzy, kde-format
 #| msgid "Log cache holds %1 logentries and consumes %2 on disk."
 msgid "Log cache holds %1 log entries and consumes %2 on disk."
 msgstr ""
 "ログキャッシュは %1 のログエントリを持ちディスク上に %2 消費しています。"
 
-#: src/svnfrontend/database/dboverview.cpp:133
+#: src/svnfrontend/database/dboverview.cpp:128
 #, fuzzy, kde-format
 #| msgid ""
 #| "Realy clean cache for repository\n"
@@ -3068,12 +3068,19 @@ msgstr ""
 "本当にリポジトリ %1 に対するキャッシュをクリーンアップ\n"
 "しますか？"
 
-#: src/svnfrontend/database/dboverview.cpp:134
+#: src/svnfrontend/database/dboverview.cpp:128
 #, fuzzy, kde-format
 msgid "Clean repository cache"
 msgstr "リポジトリのキャッシュをクリーンアップ"
 
-#: src/svnfrontend/database/dboverview.cpp:150
+#. i18n: ectx: property (text), widget (QPushButton, m_DeleteRepositoryButton)
+#: src/svnfrontend/database/dboverview.cpp:144
+#: src/svnfrontend/database/dboverview.ui:59
+#, fuzzy, kde-format
+msgid "Delete repository"
+msgstr "リポジトリを削除"
+
+#: src/svnfrontend/database/dboverview.cpp:144
 #, fuzzy, kde-format
 #| msgid ""
 #| "Realy clean cache and data for repository\n"
@@ -3084,13 +3091,6 @@ msgid ""
 msgstr ""
 "本当にリポジトリ %1 に対するキャッシュやデータをクリーンアップ\n"
 "しますか？"
-
-#. i18n: ectx: property (text), widget (QPushButton, m_DeleteRepositoryButton)
-#: src/svnfrontend/database/dboverview.cpp:151
-#: src/svnfrontend/database/dboverview.ui:59
-#, fuzzy, kde-format
-msgid "Delete repository"
-msgstr "リポジトリを削除"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DBOverView)
 #: src/svnfrontend/database/dboverview.ui:6
@@ -3293,12 +3293,12 @@ msgctxt "@title:window"
 msgid "Add Property"
 msgstr "属性を追加"
 
-#: src/svnfrontend/editpropsdlg.cpp:44 src/svnfrontend/editpropsdlg.cpp:80
+#: src/svnfrontend/editpropsdlg.cpp:44 src/svnfrontend/editpropsdlg.cpp:84
 #, fuzzy, kde-format
 msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
 msgstr "<b>'native'</b>、<b>'LF'</b>、<b>'CR'</b>、<b>'CRLF'</b>のうちの一つ。"
 
-#: src/svnfrontend/editpropsdlg.cpp:45 src/svnfrontend/editpropsdlg.cpp:81
+#: src/svnfrontend/editpropsdlg.cpp:46 src/svnfrontend/editpropsdlg.cpp:86
 #, fuzzy, kde-format
 msgid ""
 "If present, make the file executable.<br/>This property can not be set on a "
@@ -3309,7 +3309,7 @@ msgstr ""
 "て設定できません。再帰的でない試みは失敗し、再帰的な試みによってフォルダの子"
 "ファイルにのみ属性が設定されます。"
 
-#: src/svnfrontend/editpropsdlg.cpp:49
+#: src/svnfrontend/editpropsdlg.cpp:51
 #, fuzzy, kde-format
 msgid ""
 "Keywords to be expanded into the contents of a file.<br/>They can be "
@@ -3329,7 +3329,7 @@ msgstr ""
 "<br><b>Revision/Rev/LastChangedRevision</b> オブジェクトが変更された最後のリ"
 "ビジョン。<br><b>Id</b> 前の4つのキーワードを圧縮した 概要。"
 
-#: src/svnfrontend/editpropsdlg.cpp:58
+#: src/svnfrontend/editpropsdlg.cpp:61
 #, fuzzy, kde-format
 msgid ""
 "Set this to any value (e.g. <b>'*'</b>) to enforce locking for this file.<br/"
@@ -3342,7 +3342,7 @@ msgstr ""
 "され、このことは編集したり変更をコミットする前にファイルのロックを手に入れな"
 "ければならないということを示します。"
 
-#: src/svnfrontend/editpropsdlg.cpp:62 src/svnfrontend/editpropsdlg.cpp:93
+#: src/svnfrontend/editpropsdlg.cpp:66 src/svnfrontend/editpropsdlg.cpp:100
 #, fuzzy, kde-format
 msgid ""
 "The mimetype of the file. Used to determine whether to merge the file and "
@@ -3354,7 +3354,7 @@ msgstr ""
 "mimetype を欠いている）は テキストとして扱われます。それ以外のすべてはバイナ"
 "リとして扱われます。"
 
-#: src/svnfrontend/editpropsdlg.cpp:87
+#: src/svnfrontend/editpropsdlg.cpp:93
 #, fuzzy, kde-format
 msgid ""
 "A newline separated list of module specifiers, each consisting of a relative "
@@ -3368,18 +3368,18 @@ msgstr ""
 "nobr><br><nobr><b>foo/bar -r 1234 http://example.com/repos/projectB</b></"
 "nobr>"
 
-#: src/svnfrontend/editpropsdlg.cpp:92
+#: src/svnfrontend/editpropsdlg.cpp:98
 #, fuzzy, kde-format
 msgid "A newline separated list of file patterns to ignore."
 msgstr "改行で区切られた、無視するファイルパターンのリスト。"
 
-#: src/svnfrontend/editpropsdlg.cpp:97
+#: src/svnfrontend/editpropsdlg.cpp:104
 #, fuzzy, kde-format
 msgid ""
 "Label text to show for the edit box where the user enters the issue number."
 msgstr "ユーザが問題番号を入力する編集ボックスに対して表示するラベルテキスト"
 
-#: src/svnfrontend/editpropsdlg.cpp:100
+#: src/svnfrontend/editpropsdlg.cpp:108
 #, fuzzy, kde-format
 msgid ""
 "URL pointing to the issue tracker. It must contain <b>%BUGID%</b> which gets "
@@ -3390,7 +3390,7 @@ msgstr ""
 "でいなければなりません。例えば:<br><nobr><b>http://example.com/mantis/view."
 "php?id=%BUGID%</b></nobr>"
 
-#: src/svnfrontend/editpropsdlg.cpp:103
+#: src/svnfrontend/editpropsdlg.cpp:112
 #, fuzzy, kde-format
 msgid ""
 "String which is appended to a log message when an issue number is entered. "
@@ -3400,7 +3400,7 @@ msgstr ""
 "問題番号が入力されたときにログメッセージに追加される文字列。文字列にはバグ問"
 "題番号で置き換えられる <b>%BUGID%</b> を含んでいなければなりません。"
 
-#: src/svnfrontend/editpropsdlg.cpp:106
+#: src/svnfrontend/editpropsdlg.cpp:116
 #, fuzzy, kde-format
 msgid ""
 "Set to <b>'yes'</b> if a warning shall be shown when no issue is entered in "
@@ -3411,7 +3411,7 @@ msgstr ""
 "<b>'yes'</b> に設定します。設定できる値:<br><b>'true'</b>/<b>'yes'</b> また"
 "は <b>'false'</b>/<b>'no'</b>。"
 
-#: src/svnfrontend/editpropsdlg.cpp:109
+#: src/svnfrontend/editpropsdlg.cpp:120
 #, fuzzy, kde-format
 msgid ""
 "Set to <b>'false'</b> if your bugtracking system has issues which are "
@@ -3421,7 +3421,7 @@ msgstr ""
 "バグ追跡システムに数によって参照されない問題があるならば <b>'false'</b> に設"
 "定します。<br>設定できる値: <b>'true'</b> または <b>'false'</b>。"
 
-#: src/svnfrontend/editpropsdlg.cpp:112
+#: src/svnfrontend/editpropsdlg.cpp:124
 #, fuzzy, kde-format
 msgid ""
 "Set to <b>'false'</b> if you want the bugtracking ID to be inserted at the "
@@ -3432,7 +3432,7 @@ msgstr ""
 "てください。標準設定は <b>'true'</b> で、これはバグ追跡 ID が ログメッセージ"
 "の後に追加されるということです。"
 
-#: src/svnfrontend/editpropsdlg.cpp:116
+#: src/svnfrontend/editpropsdlg.cpp:129
 #, fuzzy, kde-format
 msgid ""
 "Two regular expressions separated by a newline.<br/>The first expression is "
@@ -3443,12 +3443,12 @@ msgstr ""
 "るのに使われ、二番目の表現は その文字列から裸のバグ ID を抽出するのに使われま"
 "す。"
 
-#: src/svnfrontend/editpropsdlg.cpp:123
+#: src/svnfrontend/editpropsdlg.cpp:136
 #, fuzzy, kde-format
 msgid "Select or enter new property"
 msgstr "属性を削除"
 
-#: src/svnfrontend/editpropsdlg.cpp:148
+#: src/svnfrontend/editpropsdlg.cpp:160
 #, kde-format
 msgid "No help for this property available"
 msgstr ""
@@ -3549,8 +3549,8 @@ msgstr "属性"
 msgid "Value"
 msgstr "値"
 
-#: src/svnfrontend/fronthelpers/propertylist.cpp:109
-#: src/svnfrontend/propertiesdlg.cpp:114 src/svnfrontend/propertiesdlg.cpp:165
+#: src/svnfrontend/fronthelpers/propertylist.cpp:104
+#: src/svnfrontend/propertiesdlg.cpp:111 src/svnfrontend/propertiesdlg.cpp:162
 #, fuzzy, kde-format
 msgid ""
 "This property may not set by users.\n"
@@ -3559,14 +3559,14 @@ msgstr ""
 "この属性はユーザによって設定されたものではないかもしれません。\n"
 "これを拒否しています。"
 
-#: src/svnfrontend/fronthelpers/propertylist.cpp:109
-#: src/svnfrontend/propertiesdlg.cpp:114 src/svnfrontend/propertiesdlg.cpp:165
+#: src/svnfrontend/fronthelpers/propertylist.cpp:104
+#: src/svnfrontend/propertiesdlg.cpp:111 src/svnfrontend/propertiesdlg.cpp:162
 #, fuzzy, kde-format
 msgid "Protected property"
 msgstr "保護された属性"
 
-#: src/svnfrontend/fronthelpers/propertylist.cpp:114
-#: src/svnfrontend/propertiesdlg.cpp:118 src/svnfrontend/propertiesdlg.cpp:169
+#: src/svnfrontend/fronthelpers/propertylist.cpp:109
+#: src/svnfrontend/propertiesdlg.cpp:115 src/svnfrontend/propertiesdlg.cpp:166
 #, fuzzy, kde-format
 msgid ""
 "A property with that name exists.\n"
@@ -3575,8 +3575,8 @@ msgstr ""
 "その名前がついた属性が存在します。\n"
 "それを拒否しています。"
 
-#: src/svnfrontend/fronthelpers/propertylist.cpp:114
-#: src/svnfrontend/propertiesdlg.cpp:118 src/svnfrontend/propertiesdlg.cpp:169
+#: src/svnfrontend/fronthelpers/propertylist.cpp:109
+#: src/svnfrontend/propertiesdlg.cpp:115 src/svnfrontend/propertiesdlg.cpp:166
 #, fuzzy, kde-format
 msgid "Double property"
 msgstr "二重属性"
@@ -3589,7 +3589,7 @@ msgstr "リビジョン"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_startRevBox)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:12
-#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:209
+#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:205
 #, fuzzy, kde-format
 msgid "Start with revision"
 msgstr "リビジョン開始"
@@ -3648,13 +3648,13 @@ msgstr "数"
 msgid "START"
 msgstr "START"
 
-#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:62
+#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:58
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Select Revisions"
 msgstr "リビジョンを選択"
 
-#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:205
+#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:201
 #, fuzzy, kde-format
 msgid "Select revision"
 msgstr "リビジョンを選択"
@@ -3665,7 +3665,7 @@ msgstr "リビジョンを選択"
 msgid "-1"
 msgstr "-1"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:146
+#: src/svnfrontend/graphtree/revgraphview.cpp:144
 #, fuzzy, kde-format
 msgid ""
 "Could not run process \"%1\".\n"
@@ -3678,151 +3678,151 @@ msgstr ""
 "プロセスは以下のメッセージとともに停止しました:\n"
 "%2"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:335
+#: src/svnfrontend/graphtree/revgraphview.cpp:332
 #, fuzzy, kde-format
 msgid "Error running the graph layouting tool.\n"
 msgstr "グラフレイアウトツールを実行しているときにエラー。\n"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:336
+#: src/svnfrontend/graphtree/revgraphview.cpp:333
 #, fuzzy, kde-format
 msgid "Please check that 'dot' is installed (package GraphViz)."
 msgstr ""
 "「dot」がインストールされているか確認してください（パッケージ GraphViz）。"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:425
+#: src/svnfrontend/graphtree/revgraphview.cpp:422
 #, fuzzy, kde-format
 msgid "Deleted at revision %1"
 msgstr "リビジョン %1 で削除されました"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:428
+#: src/svnfrontend/graphtree/revgraphview.cpp:425
 #, fuzzy, kde-format
 msgid "Added at revision %1 as %2"
 msgstr "リビジョン %1 で %2 として追加されました"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:434
+#: src/svnfrontend/graphtree/revgraphview.cpp:429
 #, fuzzy, kde-format
 msgid "Copied to %1 at revision %2"
 msgstr "リビジョン %2 で %1 にコピーされました"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:437
+#: src/svnfrontend/graphtree/revgraphview.cpp:432
 #, fuzzy, kde-format
 msgid "Renamed to %1 at revision %2"
 msgstr "リビジョン %2 で %1 に名前変更されました"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:440
+#: src/svnfrontend/graphtree/revgraphview.cpp:435
 #, fuzzy, kde-format
 msgid "Modified at revision %1"
 msgstr "リビジョン %1 で変更されました"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:443
+#: src/svnfrontend/graphtree/revgraphview.cpp:438
 #, fuzzy, kde-format
 msgid "Replaced at revision %1"
 msgstr "リビジョン %1 で置き換えられました"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:446
+#: src/svnfrontend/graphtree/revgraphview.cpp:441
 #, fuzzy, kde-format
 msgid "Revision %1"
 msgstr "リビジョン %1"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:466
+#: src/svnfrontend/graphtree/revgraphview.cpp:461
 #, fuzzy, kde-format
 #| msgid "Could not open tempfile %1 for writing."
 msgid "Could not open temporary file %1 for writing."
 msgstr "書き込み用にファイル %1 を開くことができませんでした。"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:561
+#: src/svnfrontend/graphtree/revgraphview.cpp:554
 #, fuzzy, kde-format
 msgid "<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>"
 msgstr "<br>リビジョン: %1<br>作成者: %2<br>日付: %3<br>ログ: %4</html>"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:569
+#: src/svnfrontend/graphtree/revgraphview.cpp:557
 #, fuzzy, kde-format
 msgid "<b>Revision</b>%1%2%3"
 msgstr "<b>リビジョン</b>%1%2%3"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:570
+#: src/svnfrontend/graphtree/revgraphview.cpp:557
 #, fuzzy, kde-format
 msgid "<b>Author</b>%1%2%3"
 msgstr "<b>作成者</b>%1%2%3"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:571
+#: src/svnfrontend/graphtree/revgraphview.cpp:558
 #, fuzzy, kde-format
 msgid "<b>Date</b>%1%2%3"
 msgstr "<b>日付</b>%1%2%3"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:572
+#: src/svnfrontend/graphtree/revgraphview.cpp:558
 #, fuzzy, kde-format
 msgid "<b>Log</b>%1%2%3"
 msgstr "<b>ログ</b>%1%2%3"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:841
+#: src/svnfrontend/graphtree/revgraphview.cpp:833
 #, fuzzy, kde-format
 msgid "Diff to previous"
 msgstr "前との Diff"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:845
+#: src/svnfrontend/graphtree/revgraphview.cpp:836
 #, fuzzy, kde-format
 msgid "Diff to selected item"
 msgstr "選択した項目との Diff"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:848
-#: src/svnfrontend/svnlogdlgimp.cpp:515
+#: src/svnfrontend/graphtree/revgraphview.cpp:839
+#: src/svnfrontend/svnlogdlgimp.cpp:522
 #, fuzzy, kde-format
 msgid "Cat this version"
 msgstr "このバージョンを出力"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:851
+#: src/svnfrontend/graphtree/revgraphview.cpp:842
 #, fuzzy, kde-format
 msgid "Unselect item"
 msgstr "項目を選択解除"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:853
+#: src/svnfrontend/graphtree/revgraphview.cpp:844
 #, fuzzy, kde-format
 msgid "Select item"
 msgstr "項目を選択"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:856
+#: src/svnfrontend/graphtree/revgraphview.cpp:847
 #, fuzzy, kde-format
 msgid "Display details"
 msgstr "詳細を表示"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:859
+#: src/svnfrontend/graphtree/revgraphview.cpp:850
 #, fuzzy, kde-format
 msgid "Rotate counter-clockwise"
 msgstr "反時計回りに回転"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:860
+#: src/svnfrontend/graphtree/revgraphview.cpp:851
 #, fuzzy, kde-format
 msgid "Rotate clockwise"
 msgstr "時計回りに回転"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:866
-#: src/svnfrontend/graphtree/revgraphview.cpp:886
+#: src/svnfrontend/graphtree/revgraphview.cpp:857
+#: src/svnfrontend/graphtree/revgraphview.cpp:875
 #, fuzzy, kde-format
 #| msgid "Save tree as png"
 msgid "Save tree as PNG"
 msgstr "ツリーを png として保存"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:886
+#: src/svnfrontend/graphtree/revgraphview.cpp:875
 #, kde-format
 msgid "Image (*.png)"
 msgstr ""
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:94
-#: src/svnfrontend/svnactions.cpp:294
+#: src/svnfrontend/svnactions.cpp:315
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Logs"
 msgstr "ログを取得"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:94
-#: src/svnfrontend/svnactions.cpp:294
+#: src/svnfrontend/svnactions.cpp:316
 #, fuzzy, kde-format
 #| msgid "Getting logs - hit cancel for abort"
 msgid "Getting logs - hit Cancel for abort"
 msgstr "ログを取得しています - 中止するにはキャンセルを押してください"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:104
+#: src/svnfrontend/graphtree/revisiontree.cpp:105
 #, fuzzy, kde-format
 #| msgid "No logcache possible due broken database and networking not allowed."
 msgid "No log cache possible due broken database and networking not allowed."
@@ -3830,8 +3830,8 @@ msgstr ""
 "データベースが壊れネットワークが許可されていないのでログキャッシュは不可能で"
 "す。"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:104
-#: src/svnfrontend/graphtree/revisiontree.cpp:109
+#: src/svnfrontend/graphtree/revisiontree.cpp:105
+#: src/svnfrontend/graphtree/revisiontree.cpp:110
 #, fuzzy, kde-format
 msgid ""
 "Could not retrieve logs, reason:\n"
@@ -3840,25 +3840,25 @@ msgstr ""
 "ログを取得できませんでした、理由:\n"
 "%1"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:134
+#: src/svnfrontend/graphtree/revisiontree.cpp:139
 #, fuzzy, kde-format
 msgid "Scanning the logs for %1"
 msgstr "%1 に対するログをスキャンしています"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:134
+#: src/svnfrontend/graphtree/revisiontree.cpp:139
 #, fuzzy, kde-format
 msgid "Cancel"
 msgstr "キャンセル(&A)"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:135
+#: src/svnfrontend/graphtree/revisiontree.cpp:140
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Scanning logs"
 msgstr "ログをスキャンしています"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:224
-#: src/svnfrontend/graphtree/revisiontree.cpp:262
-#: src/svnfrontend/graphtree/revisiontree.cpp:311
+#: src/svnfrontend/graphtree/revisiontree.cpp:228
+#: src/svnfrontend/graphtree/revisiontree.cpp:265
+#: src/svnfrontend/graphtree/revisiontree.cpp:313
 #, fuzzy, kde-format
 msgid "%1<br>Check change entry %2 of %3"
 msgstr "%1<br>変更されたエントリ %3 のうち %2 を確認しています"
@@ -3881,29 +3881,29 @@ msgstr "行き先フォルダ："
 msgid "Clean logs"
 msgstr "ログをクリーンアップ"
 
-#: src/svnfrontend/importdir_logmsg.cpp:38
+#: src/svnfrontend/importdir_logmsg.cpp:37
 #, fuzzy, kde-format
 msgid "No ignore"
 msgstr "無視なし"
 
-#: src/svnfrontend/importdir_logmsg.cpp:39
+#: src/svnfrontend/importdir_logmsg.cpp:38
 #, fuzzy, kde-format
 msgid "If set, add files or directories that match ignore patterns."
 msgstr ""
 "もし設定されていれば、無視パターンにマッチするファイルやディレクトリを追加し"
 "ます。"
 
-#: src/svnfrontend/importdir_logmsg.cpp:44
+#: src/svnfrontend/importdir_logmsg.cpp:43
 #, fuzzy, kde-format
 msgid "Ignore unknown node types"
 msgstr "不明なノードの種類を無視"
 
-#: src/svnfrontend/importdir_logmsg.cpp:45
+#: src/svnfrontend/importdir_logmsg.cpp:44
 #, fuzzy, kde-format
 msgid "Should files with unknown node types be ignored"
 msgstr "不明なノードの種類を持ったファイルを無視するか"
 
-#: src/svnfrontend/importdir_logmsg.cpp:46
+#: src/svnfrontend/importdir_logmsg.cpp:45
 #, fuzzy, kde-format
 msgid ""
 "Ignore files of which the node type is unknown, such as device files and "
@@ -3911,12 +3911,12 @@ msgid ""
 msgstr ""
 "デバイスファイルやパイプのような、ノードの種類が不明なファイルを無視します。"
 
-#: src/svnfrontend/importdir_logmsg.cpp:80
+#: src/svnfrontend/importdir_logmsg.cpp:79
 #, fuzzy, kde-format
 msgid "(Last part)"
 msgstr "（最後の部分）"
 
-#: src/svnfrontend/importdir_logmsg.cpp:80
+#: src/svnfrontend/importdir_logmsg.cpp:79
 #, fuzzy, kde-format
 #| msgid "Create subdir %1 on import"
 msgid "Create subdirectory %1 on import"
@@ -4009,113 +4009,113 @@ msgstr ""
 msgid "Validate properties"
 msgstr "属性を変更"
 
-#: src/svnfrontend/maintreewidget.cpp:271
+#: src/svnfrontend/maintreewidget.cpp:268
 #, fuzzy, kde-format
 #| msgid "Networked URL to open but networking is disabled!"
 msgid "Networked URL to open but networking is disabled."
 msgstr "開く URL に接続しましたがネットワークが無効です！"
 
-#: src/svnfrontend/maintreewidget.cpp:497
+#: src/svnfrontend/maintreewidget.cpp:494
 #, fuzzy, kde-format
 msgid "History of item"
 msgstr "項目の履歴(&H)"
 
-#: src/svnfrontend/maintreewidget.cpp:498
-#: src/svnfrontend/maintreewidget.cpp:501
-#: src/svnfrontend/maintreewidget.cpp:505
+#: src/svnfrontend/maintreewidget.cpp:499
+#: src/svnfrontend/maintreewidget.cpp:507
+#: src/svnfrontend/maintreewidget.cpp:516
 #, fuzzy, kde-format
 msgid "History"
 msgstr "履歴"
 
-#: src/svnfrontend/maintreewidget.cpp:499
+#: src/svnfrontend/maintreewidget.cpp:500
 #, fuzzy, kde-format
 msgid "Displays the history log of selected item"
 msgstr "選択した項目の履歴ログを表示します"
 
-#: src/svnfrontend/maintreewidget.cpp:500
-#: src/svnfrontend/maintreewidget.cpp:504
+#: src/svnfrontend/maintreewidget.cpp:502
+#: src/svnfrontend/maintreewidget.cpp:511
 #, fuzzy, kde-format
 msgid "History of item ignoring copies"
 msgstr "コピーを無視した項目の履歴"
 
-#: src/svnfrontend/maintreewidget.cpp:502
-#: src/svnfrontend/maintreewidget.cpp:506
+#: src/svnfrontend/maintreewidget.cpp:508
+#: src/svnfrontend/maintreewidget.cpp:517
 #, fuzzy, kde-format
 msgid "Displays the history log of selected item without following copies"
 msgstr "コピーを追わずに選択した項目の履歴ログを表示します"
 
-#: src/svnfrontend/maintreewidget.cpp:508
+#: src/svnfrontend/maintreewidget.cpp:520
 #, fuzzy, kde-format
 msgid "Full revision tree"
 msgstr "完全リビジョンツリー(&F)"
 
-#: src/svnfrontend/maintreewidget.cpp:509
+#: src/svnfrontend/maintreewidget.cpp:525
 #, fuzzy, kde-format
 msgid "Shows history of item as linked tree"
 msgstr "項目の履歴を連結されたツリーとして表示します"
 
-#: src/svnfrontend/maintreewidget.cpp:510
+#: src/svnfrontend/maintreewidget.cpp:527
 #, fuzzy, kde-format
 msgid "Partial revision tree"
 msgstr "部分リビジョンツリー(&P)"
 
-#: src/svnfrontend/maintreewidget.cpp:511
+#: src/svnfrontend/maintreewidget.cpp:532
 #, fuzzy, kde-format
 msgid "Shows history of item as linked tree for a revision range"
 msgstr "リビジョンの範囲に対して項目の履歴を連結されたツリーとして表示します"
 
-#: src/svnfrontend/maintreewidget.cpp:513
-#: src/svnfrontend/maintreewidget.cpp:514
+#: src/svnfrontend/maintreewidget.cpp:535
+#: src/svnfrontend/maintreewidget.cpp:536
 #, fuzzy, kde-format
 msgid "Properties"
 msgstr "属性(&P)"
 
-#: src/svnfrontend/maintreewidget.cpp:515
+#: src/svnfrontend/maintreewidget.cpp:538
 #, fuzzy, kde-format
 msgid "Display Properties"
 msgstr "属性を表示"
 
-#: src/svnfrontend/maintreewidget.cpp:516
+#: src/svnfrontend/maintreewidget.cpp:544
 #, fuzzy, kde-format
 msgid "Display last changes"
 msgstr "最終変更を表示"
 
-#: src/svnfrontend/maintreewidget.cpp:517
+#: src/svnfrontend/maintreewidget.cpp:549
 #, fuzzy, kde-format
 msgid "Display last changes as difference to previous commit."
 msgstr "前のコミットとの違いとして最終変更を表示します。"
 
-#: src/svnfrontend/maintreewidget.cpp:518
+#: src/svnfrontend/maintreewidget.cpp:551
 #, fuzzy, kde-format
 msgid "Details"
 msgstr "詳細(&D)"
 
-#: src/svnfrontend/maintreewidget.cpp:519
+#: src/svnfrontend/maintreewidget.cpp:556
 #, fuzzy, kde-format
 msgid "Show details about selected item"
 msgstr "選択した項目についての詳細を表示します"
 
-#: src/svnfrontend/maintreewidget.cpp:520
+#: src/svnfrontend/maintreewidget.cpp:558
 #, fuzzy, kde-format
 msgid "Move"
 msgstr "移動"
 
-#: src/svnfrontend/maintreewidget.cpp:521
+#: src/svnfrontend/maintreewidget.cpp:563
 #, fuzzy, kde-format
 msgid "Moves or renames current item"
 msgstr "現在の項目を移動するか名前を変更します"
 
-#: src/svnfrontend/maintreewidget.cpp:523
+#: src/svnfrontend/maintreewidget.cpp:570
 #, fuzzy, kde-format
 msgid "Create a copy of current item"
 msgstr "現在の項目のコピーを作成します"
 
-#: src/svnfrontend/maintreewidget.cpp:524
+#: src/svnfrontend/maintreewidget.cpp:572
 #, fuzzy, kde-format
 msgid "Check for updates"
 msgstr "更新を確認(&K)"
 
-#: src/svnfrontend/maintreewidget.cpp:525
+#: src/svnfrontend/maintreewidget.cpp:577
 #, fuzzy, kde-format
 msgid ""
 "Check if current working copy has items with newer version in repository"
@@ -4123,18 +4123,18 @@ msgstr ""
 "現在の作業コピーに、リポジトリ内でより新しいバージョンのある項目があるかどう"
 "か調べます"
 
-#: src/svnfrontend/maintreewidget.cpp:527
+#: src/svnfrontend/maintreewidget.cpp:579
 #, fuzzy, kde-format
 msgid "Check updates"
 msgstr "更新を確認"
 
-#: src/svnfrontend/maintreewidget.cpp:530
+#: src/svnfrontend/maintreewidget.cpp:583
 #, fuzzy, kde-format
 msgid "Blame"
 msgstr "ブレイム(&B)"
 
-#: src/svnfrontend/maintreewidget.cpp:531
-#: src/svnfrontend/maintreewidget.cpp:534
+#: src/svnfrontend/maintreewidget.cpp:584
+#: src/svnfrontend/maintreewidget.cpp:592
 #, fuzzy, kde-format
 msgid ""
 "Output the content of specified files or URLs with revision and author "
@@ -4143,117 +4143,117 @@ msgstr ""
 "インラインでリビジョンや作成者情報とともに指定されたファイルや URL の中身を出"
 "力します。"
 
-#: src/svnfrontend/maintreewidget.cpp:533
+#: src/svnfrontend/maintreewidget.cpp:587
 #, fuzzy, kde-format
 msgid "Blame range"
 msgstr "ブレイム範囲(&G)"
 
-#: src/svnfrontend/maintreewidget.cpp:537
+#: src/svnfrontend/maintreewidget.cpp:596
 #, fuzzy, kde-format
 msgid "Cat head"
 msgstr "head を表示(&C)"
 
-#: src/svnfrontend/maintreewidget.cpp:538
+#: src/svnfrontend/maintreewidget.cpp:597
 #, fuzzy, kde-format
 msgid "Output the content of specified files or URLs."
 msgstr "指定されたファイルや URL の中身を出力します。"
 
-#: src/svnfrontend/maintreewidget.cpp:540
+#: src/svnfrontend/maintreewidget.cpp:600
 #, fuzzy, kde-format
 msgid "Cat revision..."
 msgstr "リビジョンを表示(&R)..."
 
-#: src/svnfrontend/maintreewidget.cpp:541
+#: src/svnfrontend/maintreewidget.cpp:605
 #, fuzzy, kde-format
 msgid "Output the content of specified files or URLs at specific revision."
 msgstr "特定のリビジョンにおける指定したファイルや URL の中身を出力します。"
 
-#: src/svnfrontend/maintreewidget.cpp:544
+#: src/svnfrontend/maintreewidget.cpp:609
 #, fuzzy, kde-format
 msgid "Lock current items"
 msgstr "現在の項目をロック(&L)"
 
-#: src/svnfrontend/maintreewidget.cpp:545
+#: src/svnfrontend/maintreewidget.cpp:614
 #, fuzzy, kde-format
 msgid "Try lock current item against changes from other users"
 msgstr "他のユーザに変更されないよう現在の項目をロックしようとします"
 
-#: src/svnfrontend/maintreewidget.cpp:547
+#: src/svnfrontend/maintreewidget.cpp:617
 #, fuzzy, kde-format
 msgid "Unlock current items"
 msgstr "現在の項目をロック解除(&U)"
 
-#: src/svnfrontend/maintreewidget.cpp:548
+#: src/svnfrontend/maintreewidget.cpp:622
 #, fuzzy, kde-format
 msgid "Free existing lock on current item"
 msgstr "現在の項目に対する既存のロックを開放します"
 
-#: src/svnfrontend/maintreewidget.cpp:552 src/svnfrontend/svnactions.cpp:648
+#: src/svnfrontend/maintreewidget.cpp:627 src/svnfrontend/svnactions.cpp:667
 #, fuzzy, kde-format
 msgid "New folder"
 msgstr "新規フォルダ"
 
-#: src/svnfrontend/maintreewidget.cpp:553
+#: src/svnfrontend/maintreewidget.cpp:632
 #, fuzzy, kde-format
 msgid "Create a new folder"
 msgstr "新規フォルダを作成します"
 
-#: src/svnfrontend/maintreewidget.cpp:554
+#: src/svnfrontend/maintreewidget.cpp:634
 #, fuzzy, kde-format
 msgid "Switch repository"
 msgstr "リポジトリを切り替え(&S)"
 
-#: src/svnfrontend/maintreewidget.cpp:555
+#: src/svnfrontend/maintreewidget.cpp:639
 #, fuzzy, kde-format
 msgid "Switch repository path of current working copy path (\"svn switch\")"
 msgstr ""
 "現在の作業コピーのパスのリポジトリのパスを切り替えます（「svn switch」）"
 
-#: src/svnfrontend/maintreewidget.cpp:558
+#: src/svnfrontend/maintreewidget.cpp:643
 #, fuzzy, kde-format
 #| msgid "Relocate current working copy url"
 msgid "Relocate current working copy URL"
 msgstr "現在の作業コピーの url を移動(&W)"
 
-#: src/svnfrontend/maintreewidget.cpp:559
+#: src/svnfrontend/maintreewidget.cpp:648
 #, fuzzy, kde-format
 #| msgid "Relocate url of current working copy path to other url"
 msgid "Relocate URL of current working copy path to other URL"
 msgstr "現在の作業コピーの url を他の url へ移動します"
 
-#: src/svnfrontend/maintreewidget.cpp:562
+#: src/svnfrontend/maintreewidget.cpp:652
 #, fuzzy, kde-format
 msgid "Check for unversioned items"
 msgstr "バージョン付けされていない項目を調べる(&F)"
 
-#: src/svnfrontend/maintreewidget.cpp:563
+#: src/svnfrontend/maintreewidget.cpp:657
 #, fuzzy, kde-format
 msgid "Unversioned"
 msgstr "バージョン付けされていない"
 
-#: src/svnfrontend/maintreewidget.cpp:564
+#: src/svnfrontend/maintreewidget.cpp:658
 #, fuzzy, kde-format
 msgid "Browse folder for unversioned items and add them if wanted."
 msgstr ""
 "バージョン付けされていない項目のためにフォルダを参照し追加したければそれを追"
 "加します。"
 
-#: src/svnfrontend/maintreewidget.cpp:567
+#: src/svnfrontend/maintreewidget.cpp:662
 #, fuzzy, kde-format
 msgid "Open repository of working copy"
 msgstr "作業コピーのリポジトリを開く(&O)"
 
-#: src/svnfrontend/maintreewidget.cpp:569
+#: src/svnfrontend/maintreewidget.cpp:667
 #, fuzzy, kde-format
 msgid "Opens the repository the current working copy was checked out from"
 msgstr "現在の作業コピーのチェックアウト元のリポジトリを開きます"
 
-#: src/svnfrontend/maintreewidget.cpp:571
+#: src/svnfrontend/maintreewidget.cpp:670
 #, fuzzy, kde-format
 msgid "Cleanup"
 msgstr "クリーンアップ"
 
-#: src/svnfrontend/maintreewidget.cpp:572
+#: src/svnfrontend/maintreewidget.cpp:675
 #, fuzzy, kde-format
 msgid ""
 "Recursively clean up the working copy, removing locks, resuming unfinished "
@@ -4262,122 +4262,122 @@ msgstr ""
 "再帰的に作業コピーをクリーンアップし、ロックを削除し、完了していない操作を再"
 "開するなどします。"
 
-#: src/svnfrontend/maintreewidget.cpp:573
+#: src/svnfrontend/maintreewidget.cpp:677
 #, fuzzy, kde-format
 msgid "Import folders into current"
 msgstr "フォルダを現在へインポート(&I)"
 
-#: src/svnfrontend/maintreewidget.cpp:575
+#: src/svnfrontend/maintreewidget.cpp:682
 #, fuzzy, kde-format
 #| msgid "Import folder content into current url"
 msgid "Import folder content into current URL"
 msgstr "フォルダの中身を現在の url へインポートします"
 
-#: src/svnfrontend/maintreewidget.cpp:579
+#: src/svnfrontend/maintreewidget.cpp:687
 #, fuzzy, kde-format
 msgid "Add selected files/dirs"
 msgstr "選択されたファイルやディレクトリを追加(&A)"
 
-#: src/svnfrontend/maintreewidget.cpp:580
+#: src/svnfrontend/maintreewidget.cpp:692
 #, fuzzy, kde-format
 msgid "Adding selected files and/or directories to repository"
 msgstr "選択されたファイルやディレクトリをリポジトリに追加しています"
 
-#: src/svnfrontend/maintreewidget.cpp:582
+#: src/svnfrontend/maintreewidget.cpp:695
 #, fuzzy, kde-format
 msgid "Add selected files/dirs recursive"
 msgstr "選択されたファイルやディレクトリを再帰的に追加"
 
-#: src/svnfrontend/maintreewidget.cpp:584
+#: src/svnfrontend/maintreewidget.cpp:700
 #, fuzzy, kde-format
 msgid ""
 "Adding selected files and/or directories to repository and all subitems of "
 "folders"
 msgstr "ファイル、ディレクトリやフォルダのサブ項目をリポジトリに追加しています"
 
-#: src/svnfrontend/maintreewidget.cpp:586
+#: src/svnfrontend/maintreewidget.cpp:703
 #, fuzzy, kde-format
 msgid "Delete selected files/dirs"
 msgstr "選択されたファイルやディレクトリを削除(&S)"
 
-#: src/svnfrontend/maintreewidget.cpp:588
+#: src/svnfrontend/maintreewidget.cpp:709
 #, fuzzy, kde-format
 msgid "Deleting selected files and/or directories from repository"
 msgstr "リポジトリから選択したファイルやディレクトリを削除しています"
 
-#: src/svnfrontend/maintreewidget.cpp:589
+#: src/svnfrontend/maintreewidget.cpp:711
 #, fuzzy, kde-format
 msgid "Delete folder"
 msgstr "属性を削除"
 
-#: src/svnfrontend/maintreewidget.cpp:590
+#: src/svnfrontend/maintreewidget.cpp:716
 #, fuzzy, kde-format
 msgid "Deleting selected directories from repository"
 msgstr "リポジトリから選択したファイルやディレクトリを削除しています"
 
-#: src/svnfrontend/maintreewidget.cpp:592
+#: src/svnfrontend/maintreewidget.cpp:719
 #, fuzzy, kde-format
 msgid "Revert current changes"
 msgstr "現在の変更を元に戻す(&R)"
 
-#: src/svnfrontend/maintreewidget.cpp:594
+#: src/svnfrontend/maintreewidget.cpp:726
 #, fuzzy, kde-format
 msgid "Mark resolved"
 msgstr "解消したとマークする(&M)"
 
-#: src/svnfrontend/maintreewidget.cpp:595
+#: src/svnfrontend/maintreewidget.cpp:731
 #, fuzzy, kde-format
 msgid "Marking files or dirs resolved"
 msgstr "ファイルやディレクトリを解決したとマークしています"
 
-#: src/svnfrontend/maintreewidget.cpp:597
+#: src/svnfrontend/maintreewidget.cpp:734
 #, fuzzy, kde-format
 msgid "Resolve conflicts"
 msgstr "衝突を解消(&E)"
 
-#: src/svnfrontend/maintreewidget.cpp:599
+#: src/svnfrontend/maintreewidget.cpp:740
 #, fuzzy, kde-format
 msgid "Ignore/Unignore current item"
 msgstr "現在の項目を無視する/しない(&I)"
 
-#: src/svnfrontend/maintreewidget.cpp:600
-#: src/svnfrontend/maintreewidget.cpp:601
+#: src/svnfrontend/maintreewidget.cpp:742
+#: src/svnfrontend/maintreewidget.cpp:748
 #, kde-format
 msgid "Add or Remove ignore pattern"
 msgstr ""
 
-#: src/svnfrontend/maintreewidget.cpp:603
-#: src/svnfrontend/maintreewidget.cpp:666
+#: src/svnfrontend/maintreewidget.cpp:755
+#: src/svnfrontend/maintreewidget.cpp:894
 #, fuzzy, kde-format
 msgid "Update to head"
 msgstr "head に更新"
 
-#: src/svnfrontend/maintreewidget.cpp:604
+#: src/svnfrontend/maintreewidget.cpp:760
 #, fuzzy, kde-format
 msgctxt "Menu item"
 msgid "Update"
 msgstr "更新"
 
-#: src/svnfrontend/maintreewidget.cpp:605
+#: src/svnfrontend/maintreewidget.cpp:762
 #, fuzzy, kde-format
 msgid "Update to revision..."
 msgstr "リビジョンに更新(&V)..."
 
-#: src/svnfrontend/maintreewidget.cpp:606
-#: src/svnfrontend/maintreewidget.cpp:607
-#: src/svnfrontend/maintreewidget.cpp:665 src/svnfrontend/svnactions.cpp:1009
+#: src/svnfrontend/maintreewidget.cpp:768
+#: src/svnfrontend/maintreewidget.cpp:773
+#: src/svnfrontend/maintreewidget.cpp:888 src/svnfrontend/svnactions.cpp:1015
 #, fuzzy, kde-format
 msgid "Commit"
 msgstr "コミット"
 
-#: src/svnfrontend/maintreewidget.cpp:609
-#: src/svnfrontend/maintreewidget.cpp:611
+#: src/svnfrontend/maintreewidget.cpp:776
+#: src/svnfrontend/maintreewidget.cpp:783
 #, fuzzy, kde-format
 msgid "Diff local changes"
 msgstr "ローカルの変更を Diff"
 
-#: src/svnfrontend/maintreewidget.cpp:610
-#: src/svnfrontend/maintreewidget.cpp:612
+#: src/svnfrontend/maintreewidget.cpp:781
+#: src/svnfrontend/maintreewidget.cpp:788
 #, fuzzy, kde-format
 #| msgid ""
 #| "Diff working copy against BASE (last checked out version) - doesn't "
@@ -4389,12 +4389,12 @@ msgstr ""
 "BASE（最後にチェックアウトしたバージョン）に対する作業コピーの Diff にはリポ"
 "ジトリへのアクセスが必要ありません"
 
-#: src/svnfrontend/maintreewidget.cpp:615
+#: src/svnfrontend/maintreewidget.cpp:791
 #, fuzzy, kde-format
 msgid "Diff against HEAD"
 msgstr "&HEAD に対して Diff"
 
-#: src/svnfrontend/maintreewidget.cpp:616
+#: src/svnfrontend/maintreewidget.cpp:796
 #, fuzzy, kde-format
 msgid ""
 "Diff working copy against HEAD (last checked in version)- requires access to "
@@ -4403,39 +4403,39 @@ msgstr ""
 "HEAD（最後にチェックインしたバージョン）に対して作業コピーを Diff するにはリ"
 "ポジトリへのアクセスが必要です"
 
-#: src/svnfrontend/maintreewidget.cpp:619
-#: src/svnfrontend/maintreewidget.cpp:622
+#: src/svnfrontend/maintreewidget.cpp:799
+#: src/svnfrontend/maintreewidget.cpp:806
 #, fuzzy, kde-format
 msgid "Diff items"
 msgstr "項目を Diff"
 
-#: src/svnfrontend/maintreewidget.cpp:620
-#: src/svnfrontend/maintreewidget.cpp:623
+#: src/svnfrontend/maintreewidget.cpp:804
+#: src/svnfrontend/maintreewidget.cpp:811
 #, fuzzy, kde-format
 msgid "Diff two items"
 msgstr "二つの項目を Diff します"
 
-#: src/svnfrontend/maintreewidget.cpp:627
+#: src/svnfrontend/maintreewidget.cpp:814
 #, fuzzy, kde-format
 msgid "Merge two revisions"
 msgstr "二つのリビジョンをマージ(&T)"
 
-#: src/svnfrontend/maintreewidget.cpp:628
+#: src/svnfrontend/maintreewidget.cpp:819
 #, fuzzy, kde-format
 msgid "Merge"
 msgstr "マージ"
 
-#: src/svnfrontend/maintreewidget.cpp:629
+#: src/svnfrontend/maintreewidget.cpp:820
 #, fuzzy, kde-format
 msgid "Merge two revisions of this entry into itself"
 msgstr "このエントリの二つのリビジョンをそれ自体へマージします"
 
-#: src/svnfrontend/maintreewidget.cpp:632
+#: src/svnfrontend/maintreewidget.cpp:823
 #, fuzzy, kde-format
 msgid "Merge..."
 msgstr "マージ(&M)..."
 
-#: src/svnfrontend/maintreewidget.cpp:633
+#: src/svnfrontend/maintreewidget.cpp:828
 #, fuzzy, kde-format
 #| msgid "Switch repository path of current working copy path (\"svn switch\")"
 msgid ""
@@ -4444,247 +4444,247 @@ msgid ""
 msgstr ""
 "現在の作業コピーのパスのリポジトリのパスを切り替えます（「svn switch」）"
 
-#: src/svnfrontend/maintreewidget.cpp:634
-#: src/svnfrontend/maintreewidget.cpp:1152
-#: src/svnfrontend/maintreewidget.cpp:1220
+#: src/svnfrontend/maintreewidget.cpp:829
+#: src/svnfrontend/maintreewidget.cpp:1391
+#: src/svnfrontend/maintreewidget.cpp:1458
 #, fuzzy, kde-format
 msgid "Open With..."
 msgstr "アプリケーションで開く..."
 
-#: src/svnfrontend/maintreewidget.cpp:638
+#: src/svnfrontend/maintreewidget.cpp:833
 #, fuzzy, kde-format
 msgid "Checkout current repository path"
 msgstr "現在のリポジトリのパスをチェックアウト(&C)"
 
-#: src/svnfrontend/maintreewidget.cpp:639
-#: src/svnfrontend/maintreewidget.cpp:647
+#: src/svnfrontend/maintreewidget.cpp:838
+#: src/svnfrontend/maintreewidget.cpp:854
 #, fuzzy, kde-format
 msgid "Checkout"
 msgstr "チェックアウト"
 
-#: src/svnfrontend/maintreewidget.cpp:641
+#: src/svnfrontend/maintreewidget.cpp:840
 #, fuzzy, kde-format
 msgid "Export current repository path"
 msgstr "現在のリポジトリのパスをエクスポート(&X)"
 
-#: src/svnfrontend/maintreewidget.cpp:642
+#: src/svnfrontend/maintreewidget.cpp:845
 #, fuzzy, kde-format
 msgid "Select browse revision"
 msgstr "ブラウズするリビジョンを選択(&S)"
 
-#: src/svnfrontend/maintreewidget.cpp:646 src/svnfrontend/svnactions.cpp:1619
-#: src/svnfrontend/svnactions.cpp:1625
+#: src/svnfrontend/maintreewidget.cpp:849 src/svnfrontend/svnactions.cpp:1641
+#: src/svnfrontend/svnactions.cpp:1648
 #, fuzzy, kde-format
 msgid "Checkout a repository"
 msgstr "リポジトリをチェックアウト"
 
-#: src/svnfrontend/maintreewidget.cpp:648
+#: src/svnfrontend/maintreewidget.cpp:856
 #, fuzzy, kde-format
 msgid "Export a repository"
 msgstr "リポジトリをエクスポート"
 
-#: src/svnfrontend/maintreewidget.cpp:649
+#: src/svnfrontend/maintreewidget.cpp:861
 #, fuzzy, kde-format
 msgid "Export"
 msgstr "エクスポート"
 
-#: src/svnfrontend/maintreewidget.cpp:650
+#: src/svnfrontend/maintreewidget.cpp:863
 #, fuzzy, kde-format
 msgid "Refresh view"
 msgstr "ビューを更新(&R)"
 
-#: src/svnfrontend/maintreewidget.cpp:651
+#: src/svnfrontend/maintreewidget.cpp:868
 #, fuzzy, kde-format
 msgid "Refresh"
 msgstr "更新"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DispSpecDiff)
-#: src/svnfrontend/maintreewidget.cpp:653 src/svnfrontend/svnlogdlg.ui:211
+#: src/svnfrontend/maintreewidget.cpp:871 src/svnfrontend/svnlogdlg.ui:211
 #, fuzzy, kde-format
 msgid "Diff revisions"
 msgstr "リビジョンを Diff"
 
-#: src/svnfrontend/maintreewidget.cpp:656
+#: src/svnfrontend/maintreewidget.cpp:878
 #, fuzzy, kde-format
 msgid "Unfold File Tree"
 msgstr "ファイルツリーを展開(&U)"
 
-#: src/svnfrontend/maintreewidget.cpp:657
+#: src/svnfrontend/maintreewidget.cpp:879
 #, fuzzy, kde-format
 msgid "Opens all branches of the file tree"
 msgstr "ファイルツリーのすべてのブランチを開きます"
 
-#: src/svnfrontend/maintreewidget.cpp:658
+#: src/svnfrontend/maintreewidget.cpp:880
 #, fuzzy, kde-format
 msgid "Fold File Tree"
 msgstr "ファイルツリーをたたむ(&F)"
 
-#: src/svnfrontend/maintreewidget.cpp:659
+#: src/svnfrontend/maintreewidget.cpp:881
 #, fuzzy, kde-format
 msgid "Closes all branches of the file tree"
 msgstr "ファイルツリーのすべてのブランチを閉じます"
 
-#: src/svnfrontend/maintreewidget.cpp:662
-#: src/svnfrontend/maintreewidget.cpp:839
-#: src/svnfrontend/maintreewidget.cpp:1788
-#: src/svnfrontend/maintreewidget.cpp:1804
+#: src/svnfrontend/maintreewidget.cpp:884
+#: src/svnfrontend/maintreewidget.cpp:1078
+#: src/svnfrontend/maintreewidget.cpp:2033
+#: src/svnfrontend/maintreewidget.cpp:2049
 #, fuzzy, kde-format
 msgid "Update log cache"
 msgstr "ログキャッシュを更新"
 
-#: src/svnfrontend/maintreewidget.cpp:663
+#: src/svnfrontend/maintreewidget.cpp:885
 #, fuzzy, kde-format
 msgid "Update the log cache for current repository"
 msgstr "現在のリポジトリに対するログキャッシュを更新します"
 
-#: src/svnfrontend/maintreewidget.cpp:667
+#: src/svnfrontend/maintreewidget.cpp:899
 #, fuzzy, kde-format
 #| msgid "Make operation recursive."
 msgid "Set property recursive"
 msgstr "操作を再帰的にします。"
 
-#: src/svnfrontend/maintreewidget.cpp:669
+#: src/svnfrontend/maintreewidget.cpp:902
 #, fuzzy, kde-format
 msgid "Settings for current repository"
 msgstr "現在のリポジトリに対する設定(&F)"
 
-#: src/svnfrontend/maintreewidget.cpp:841
-#: src/svnfrontend/maintreewidget.cpp:1799
+#: src/svnfrontend/maintreewidget.cpp:1080
+#: src/svnfrontend/maintreewidget.cpp:2044
 #, fuzzy, kde-format
 #| msgid "Stop updating the logcache"
 msgid "Stop updating the log cache"
 msgstr "ログキャッシュの更新を停止"
 
-#: src/svnfrontend/maintreewidget.cpp:1037
+#: src/svnfrontend/maintreewidget.cpp:1277
 #, fuzzy, kde-format
 #| msgid "Enter authentication info for"
 msgctxt "@title:window"
 msgid "Edit Pattern to Ignore for \"%1\""
 msgstr "以下に対する認証情報を入力"
 
-#: src/svnfrontend/maintreewidget.cpp:1314
-#: src/svnfrontend/maintreewidget.cpp:1358
+#: src/svnfrontend/maintreewidget.cpp:1555
+#: src/svnfrontend/maintreewidget.cpp:1598
 #, fuzzy, kde-format
 msgid "Nothing selected for unlock"
 msgstr "ロック解除するために選択されたものがありません"
 
-#: src/svnfrontend/maintreewidget.cpp:1318
+#: src/svnfrontend/maintreewidget.cpp:1559
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Lock Message"
 msgstr "ロックメッセージ"
 
-#: src/svnfrontend/maintreewidget.cpp:1325
+#: src/svnfrontend/maintreewidget.cpp:1566
 #, fuzzy, kde-format
 msgid "Steal lock?"
 msgstr "ロックを横取り？"
 
-#: src/svnfrontend/maintreewidget.cpp:1362
+#: src/svnfrontend/maintreewidget.cpp:1601
 #, fuzzy, kde-format
 msgid "Break lock or ignore missing locks?"
 msgstr "ロックを壊すか、欠けているロックを無視しますか？"
 
-#: src/svnfrontend/maintreewidget.cpp:1363
+#: src/svnfrontend/maintreewidget.cpp:1601
 #, fuzzy, kde-format
 msgid "Unlocking items"
 msgstr "項目のロックを解除しています"
 
-#: src/svnfrontend/maintreewidget.cpp:1650
+#: src/svnfrontend/maintreewidget.cpp:1895
 #, fuzzy, kde-format
 msgid "Nothing selected for delete"
 msgstr "削除するために選択されたものがありません"
 
-#: src/svnfrontend/maintreewidget.cpp:1821
+#: src/svnfrontend/maintreewidget.cpp:2066
 #, fuzzy, kde-format
 msgid "Automatic generated base layout by kdesvn"
 msgstr "kdesvn によって自動的に生成された基本レイアウト"
 
-#: src/svnfrontend/maintreewidget.cpp:1834
+#: src/svnfrontend/maintreewidget.cpp:2079
 #, fuzzy, kde-format
 #| msgid "May not make subdirs of a file"
 msgid "May not make subdirectories of a file"
 msgstr "ファイルのサブディレクトリは作れません"
 
-#: src/svnfrontend/maintreewidget.cpp:1943 src/svnfrontend/svnactions.cpp:2177
+#: src/svnfrontend/maintreewidget.cpp:2191 src/svnfrontend/svnactions.cpp:2238
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Merge"
 msgstr "マージ"
 
-#: src/svnfrontend/maintreewidget.cpp:1996
+#: src/svnfrontend/maintreewidget.cpp:2253
 #, fuzzy, kde-format
 msgid "Error getting entry to relocate"
 msgstr "移動するエントリを取得しているときにエラー"
 
-#: src/svnfrontend/maintreewidget.cpp:2002
+#: src/svnfrontend/maintreewidget.cpp:2259
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Relocate Path %1"
 msgstr "移動パス %1"
 
-#: src/svnfrontend/maintreewidget.cpp:2016 src/svnfrontend/svnactions.cpp:1618
-#: src/svnfrontend/svnactions.cpp:1870
+#: src/svnfrontend/maintreewidget.cpp:2273 src/svnfrontend/svnactions.cpp:1641
+#: src/svnfrontend/svnactions.cpp:1897
 #, kde-format
 msgid "Invalid url given!"
 msgstr ""
 
-#: src/svnfrontend/maintreewidget.cpp:2017
+#: src/svnfrontend/maintreewidget.cpp:2273
 #, fuzzy, kde-format
 msgid "Relocate path %1"
 msgstr "移動パス %1"
 
-#: src/svnfrontend/maintreewidget.cpp:2040
+#: src/svnfrontend/maintreewidget.cpp:2296
 #, fuzzy, kde-format
 #| msgid "Cannot import into multiple targets!"
 msgid "Cannot import into multiple targets"
 msgstr "複数の対象にインポートできません！"
 
-#: src/svnfrontend/maintreewidget.cpp:2054
+#: src/svnfrontend/maintreewidget.cpp:2310
 #, kde-format
 msgid "Import files from folder"
 msgstr ""
 
-#: src/svnfrontend/maintreewidget.cpp:2056
+#: src/svnfrontend/maintreewidget.cpp:2312
 #, fuzzy, kde-format
 #| msgid "Import log"
 msgid "Import file"
 msgstr "インポートログ"
 
-#: src/svnfrontend/maintreewidget.cpp:2078
+#: src/svnfrontend/maintreewidget.cpp:2334
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Import Log"
 msgstr "インポートログ"
 
-#: src/svnfrontend/maintreewidget.cpp:2136
+#: src/svnfrontend/maintreewidget.cpp:2392
 #, fuzzy, kde-format
 msgid "Could not retrieve repository of working copy."
 msgstr "作業コピーのリポジトリを取り出せませんでした。"
 
-#: src/svnfrontend/maintreewidget.cpp:2145
+#: src/svnfrontend/maintreewidget.cpp:2401
 #, fuzzy, kde-format
 msgid "Only in working copy possible."
 msgstr "作業コピー内のみで可能です。"
 
-#: src/svnfrontend/maintreewidget.cpp:2145
-#: src/svnfrontend/maintreewidget.cpp:2149
-#: src/svnfrontend/maintreewidget.cpp:2154
+#: src/svnfrontend/maintreewidget.cpp:2401
+#: src/svnfrontend/maintreewidget.cpp:2405
+#: src/svnfrontend/maintreewidget.cpp:2410
 #, fuzzy, kde-format
 msgid "Error"
 msgstr "エラー"
 
-#: src/svnfrontend/maintreewidget.cpp:2149
+#: src/svnfrontend/maintreewidget.cpp:2405
 #, fuzzy, kde-format
 msgid "Only on single folder possible"
 msgstr "単一のフォルダ上のみで可能です"
 
-#: src/svnfrontend/maintreewidget.cpp:2154
+#: src/svnfrontend/maintreewidget.cpp:2410
 #, fuzzy, kde-format
 #| msgid "Sorry - internal error!"
 msgid "Sorry - internal error"
 msgstr "すいません - 内部エラー！"
 
-#: src/svnfrontend/maintreewidget.cpp:2218
+#: src/svnfrontend/maintreewidget.cpp:2474
 #, fuzzy, kde-format
 #| msgid "Hold CTRL key while click on selected item for unselect"
 msgid "Hold Ctrl key while click on selected item for unselect"
@@ -4694,33 +4694,33 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QTreeView, m_LogTreeView)
 #. i18n: ectx: property (toolTip), widget (QTreeWidget, m_ChangedList)
-#: src/svnfrontend/maintreewidget.cpp:2221 src/svnfrontend/svnlogdlg.ui:114
+#: src/svnfrontend/maintreewidget.cpp:2477 src/svnfrontend/svnlogdlg.ui:114
 #: src/svnfrontend/svnlogdlg.ui:148
 #, fuzzy, kde-format
 msgid "See context menu for more actions"
 msgstr "更なる操作については項目上のコンテキストメニューを参照してください"
 
-#: src/svnfrontend/maintreewidget.cpp:2224
+#: src/svnfrontend/maintreewidget.cpp:2480
 #, fuzzy, kde-format
 msgid "Click for navigate"
 msgstr "ナビゲートするにはクリックしてください"
 
-#: src/svnfrontend/maintreewidget.cpp:2227
+#: src/svnfrontend/maintreewidget.cpp:2483
 #, fuzzy, kde-format
 msgid "Navigation"
 msgstr "ナビゲーション"
 
-#: src/svnfrontend/maintreewidget.cpp:2348
+#: src/svnfrontend/maintreewidget.cpp:2599
 #, fuzzy, kde-format
 msgid "Could not retrieve repository."
 msgstr "リポジトリを取得できませんでした。"
 
-#: src/svnfrontend/maintreewidget.cpp:2378
+#: src/svnfrontend/maintreewidget.cpp:2629
 #, kde-format
 msgid "Not yet implemented"
 msgstr ""
 
-#: src/svnfrontend/maintreewidget.cpp:2378
+#: src/svnfrontend/maintreewidget.cpp:2629
 #, fuzzy, kde-format
 #| msgid "Make operation recursive."
 msgid "Edit property recursively"
@@ -4853,7 +4853,7 @@ msgid ""
 "working copy"
 msgstr ""
 
-#: src/svnfrontend/mergedlg_impl.cpp:190
+#: src/svnfrontend/mergedlg_impl.cpp:194
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Enter Merge Range"
@@ -4869,54 +4869,54 @@ msgstr "メッセージ"
 msgid "%1 at revision %2"
 msgstr "リビジョン %2 での %1"
 
-#: src/svnfrontend/models/svnitemmodel.cpp:314
-#: src/svnfrontend/svnactions.cpp:726
+#: src/svnfrontend/models/svnitemmodel.cpp:317
+#: src/svnfrontend/svnactions.cpp:743
 #, fuzzy, kde-format
 msgid "Name"
 msgstr "名前"
 
-#: src/svnfrontend/models/svnitemmodel.cpp:316
+#: src/svnfrontend/models/svnitemmodel.cpp:319
 #, fuzzy, kde-format
 msgid "Status"
 msgstr "状態"
 
-#: src/svnfrontend/models/svnitemmodel.cpp:318
+#: src/svnfrontend/models/svnitemmodel.cpp:321
 #, fuzzy, kde-format
 msgid "Last changed Revision"
 msgstr "最終変更リビジョン"
 
-#: src/svnfrontend/models/svnitemmodel.cpp:320
-#: src/svnfrontend/svnactions.cpp:785
+#: src/svnfrontend/models/svnitemmodel.cpp:323
+#: src/svnfrontend/svnactions.cpp:802
 #, fuzzy, kde-format
 msgid "Last author"
 msgstr "最後の作成者"
 
-#: src/svnfrontend/models/svnitemmodel.cpp:322
+#: src/svnfrontend/models/svnitemmodel.cpp:325
 #, fuzzy, kde-format
 msgid "Last change date"
 msgstr "最終変更日付"
 
-#: src/svnfrontend/models/svnitemmodel.cpp:324
+#: src/svnfrontend/models/svnitemmodel.cpp:327
 #, fuzzy, kde-format
 msgid "Locked by"
 msgstr "ロックした人"
 
-#: src/svnfrontend/opencontextmenu.cpp:57
+#: src/svnfrontend/opencontextmenu.cpp:59
 #, fuzzy, kde-format
 msgid "Other..."
 msgstr "その他..."
 
-#: src/svnfrontend/propertiesdlg.cpp:83
+#: src/svnfrontend/propertiesdlg.cpp:80
 #, fuzzy, kde-format
 msgid "Undelete property"
 msgstr "属性を復活"
 
-#: src/svnfrontend/propertiesdlg.cpp:85
+#: src/svnfrontend/propertiesdlg.cpp:82
 #, fuzzy, kde-format
 msgid "Delete property"
 msgstr "属性を削除"
 
-#: src/svnfrontend/propertiesdlg.cpp:92
+#: src/svnfrontend/propertiesdlg.cpp:89
 #, fuzzy, kde-format
 msgid "Missing SVN link"
 msgstr "SVN リンクが無くなっています"
@@ -4945,649 +4945,649 @@ msgstr "属性を変更"
 msgid "Delete Property"
 msgstr "属性を削除"
 
-#: src/svnfrontend/stopdlg.cpp:195
+#: src/svnfrontend/stopdlg.cpp:193
 #, fuzzy, kde-format
 msgid "%p% of %1"
 msgstr "%1 のうち %p%"
 
-#: src/svnfrontend/stopdlg.cpp:203
+#: src/svnfrontend/stopdlg.cpp:201
 #, fuzzy, kde-format
 msgid "%1 of %2"
 msgstr "%2 のうち %1"
 
-#: src/svnfrontend/svnactions.cpp:186
+#: src/svnfrontend/svnactions.cpp:184
 #, fuzzy, kde-format
 msgid "Finished"
 msgstr "完了しました"
 
-#: src/svnfrontend/svnactions.cpp:332
+#: src/svnfrontend/svnactions.cpp:354
 #, fuzzy, kde-format
 msgid "Got no logs"
 msgstr "ログが何も取得できませんでした"
 
-#: src/svnfrontend/svnactions.cpp:456
+#: src/svnfrontend/svnactions.cpp:478
 #, fuzzy, kde-format
 msgid "Got no info."
 msgstr "情報が何も取得できませんでした。"
 
-#: src/svnfrontend/svnactions.cpp:493
+#: src/svnfrontend/svnactions.cpp:515
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "History of %1"
 msgstr "%1 の履歴"
 
-#: src/svnfrontend/svnactions.cpp:536
+#: src/svnfrontend/svnactions.cpp:556
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Annotate"
 msgstr "注釈"
 
-#: src/svnfrontend/svnactions.cpp:536
+#: src/svnfrontend/svnactions.cpp:556
 #, fuzzy, kde-format
 #| msgid "Annotate lines - hit cancel for abort"
 msgid "Annotate lines - hit Cancel for abort"
 msgstr "行を注釈 - 中止するにはキャンセルを押してください"
 
-#: src/svnfrontend/svnactions.cpp:544
+#: src/svnfrontend/svnactions.cpp:564
 #, fuzzy, kde-format
 msgid "Got no annotate"
 msgstr "注釈が何も取得できませんでした"
 
-#: src/svnfrontend/svnactions.cpp:563
+#: src/svnfrontend/svnactions.cpp:581
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Content Get"
 msgstr "内容"
 
-#: src/svnfrontend/svnactions.cpp:563
+#: src/svnfrontend/svnactions.cpp:581
 #, fuzzy, kde-format
 #| msgid "Getting content - hit cancel for abort"
 msgid "Getting content - hit Cancel for abort"
 msgstr "中身を取得しています - 中止するにはキャンセルを押してください"
 
-#: src/svnfrontend/svnactions.cpp:570
+#: src/svnfrontend/svnactions.cpp:588
 #, fuzzy, kde-format
 msgid "Error getting content"
 msgstr "中身を取得しているときにエラー"
 
-#: src/svnfrontend/svnactions.cpp:583
+#: src/svnfrontend/svnactions.cpp:601
 #, fuzzy, kde-format
 msgid "Error while open temporary file"
 msgstr "一時ファイルを開いているときにエラー"
 
-#: src/svnfrontend/svnactions.cpp:614
+#: src/svnfrontend/svnactions.cpp:632
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Content of %1"
 msgstr "%1 の中身"
 
-#: src/svnfrontend/svnactions.cpp:624
+#: src/svnfrontend/svnactions.cpp:642
 #, fuzzy, kde-format
 msgid "Got no content."
 msgstr "中身が何も取得できませんでした。"
 
-#: src/svnfrontend/svnactions.cpp:648
+#: src/svnfrontend/svnactions.cpp:667
 #, fuzzy, kde-format
 msgid "Enter folder name:"
 msgstr "フォルダ名を入力："
 
-#: src/svnfrontend/svnactions.cpp:687
+#: src/svnfrontend/svnactions.cpp:706
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Details"
 msgstr "詳細(&D)"
 
-#: src/svnfrontend/svnactions.cpp:687
+#: src/svnfrontend/svnactions.cpp:707
 #, fuzzy, kde-format
 #| msgid "Retrieving infos - hit cancel for abort"
 msgid "Retrieving information - hit Cancel for abort"
 msgstr "情報を取得しています - 中止するにはキャンセルを押してください"
 
-#: src/svnfrontend/svnactions.cpp:729
+#: src/svnfrontend/svnactions.cpp:746
 #, fuzzy, kde-format
 msgid "URL"
 msgstr "URL"
 
-#: src/svnfrontend/svnactions.cpp:731
+#: src/svnfrontend/svnactions.cpp:748
 #, fuzzy, kde-format
 #| msgid "Canonical repository url"
 msgid "Canonical repository URL"
 msgstr "基準リポジトリ url"
 
-#: src/svnfrontend/svnactions.cpp:734
+#: src/svnfrontend/svnactions.cpp:751
 #, fuzzy, kde-format
 msgid "Checksum"
 msgstr "チェックサム"
 
-#: src/svnfrontend/svnactions.cpp:737
+#: src/svnfrontend/svnactions.cpp:754
 #, fuzzy, kde-format
 msgid "Type"
 msgstr "種類"
 
-#: src/svnfrontend/svnactions.cpp:740
+#: src/svnfrontend/svnactions.cpp:757
 #, fuzzy, kde-format
 msgid "Absent"
 msgstr "不在"
 
-#: src/svnfrontend/svnactions.cpp:743
+#: src/svnfrontend/svnactions.cpp:760
 #, fuzzy, kde-format
 msgid "File"
 msgstr "ファイル"
 
-#: src/svnfrontend/svnactions.cpp:746
+#: src/svnfrontend/svnactions.cpp:763
 #, fuzzy, kde-format
 msgid "Folder"
 msgstr "フォルダ"
 
-#: src/svnfrontend/svnactions.cpp:750 src/svnfrontend/svnactions.cpp:779
+#: src/svnfrontend/svnactions.cpp:767 src/svnfrontend/svnactions.cpp:796
 #, fuzzy, kde-format
 msgid "Unknown"
 msgstr "不明"
 
-#: src/svnfrontend/svnactions.cpp:755
+#: src/svnfrontend/svnactions.cpp:772
 #, fuzzy, kde-format
 msgid "Size"
 msgstr "サイズ"
 
-#: src/svnfrontend/svnactions.cpp:764
+#: src/svnfrontend/svnactions.cpp:781
 #, fuzzy, kde-format
 msgid "Schedule"
 msgstr "スケジュール"
 
-#: src/svnfrontend/svnactions.cpp:767
+#: src/svnfrontend/svnactions.cpp:784
 #, fuzzy, kde-format
 msgid "Normal"
 msgstr "通常"
 
-#: src/svnfrontend/svnactions.cpp:770
+#: src/svnfrontend/svnactions.cpp:787
 #, fuzzy, kde-format
 msgid "Addition"
 msgstr "追加"
 
-#: src/svnfrontend/svnactions.cpp:773
+#: src/svnfrontend/svnactions.cpp:790
 #, fuzzy, kde-format
 msgid "Deletion"
 msgstr "削除"
 
-#: src/svnfrontend/svnactions.cpp:783
+#: src/svnfrontend/svnactions.cpp:800
 #, fuzzy, kde-format
 msgid "UUID"
 msgstr "UUID"
 
-#: src/svnfrontend/svnactions.cpp:787
+#: src/svnfrontend/svnactions.cpp:804
 #, fuzzy, kde-format
 msgid "Last committed"
 msgstr "最後のコミット"
 
-#: src/svnfrontend/svnactions.cpp:789
+#: src/svnfrontend/svnactions.cpp:806
 #, fuzzy, kde-format
 msgid "Last revision"
 msgstr "最後のリビジョン"
 
-#: src/svnfrontend/svnactions.cpp:791
+#: src/svnfrontend/svnactions.cpp:808
 #, fuzzy, kde-format
 msgid "Content last changed"
 msgstr "中身の最終変更"
 
-#: src/svnfrontend/svnactions.cpp:795
+#: src/svnfrontend/svnactions.cpp:812
 #, fuzzy, kde-format
 msgid "Property last changed"
 msgstr "最後に変更した属性"
 
-#: src/svnfrontend/svnactions.cpp:798
+#: src/svnfrontend/svnactions.cpp:815
 #, fuzzy, kde-format
 msgid "New version of conflicted file"
 msgstr "衝突したファイルの新しいバージョン"
 
-#: src/svnfrontend/svnactions.cpp:801
+#: src/svnfrontend/svnactions.cpp:818
 #, fuzzy, kde-format
 msgid "Property reject file"
 msgstr "属性が拒否したファイル"
 
-#: src/svnfrontend/svnactions.cpp:806
+#: src/svnfrontend/svnactions.cpp:822
 #, fuzzy, kde-format
 msgid "Copy from URL"
 msgstr "URL からのコピー"
 
-#: src/svnfrontend/svnactions.cpp:809 src/svnfrontend/svnactions.cpp:819
+#: src/svnfrontend/svnactions.cpp:825 src/svnfrontend/svnactions.cpp:832
 #, fuzzy, kde-format
 msgid "Lock token"
 msgstr "ロックトークン"
 
-#: src/svnfrontend/svnactions.cpp:810 src/svnfrontend/svnactions.cpp:820
+#: src/svnfrontend/svnactions.cpp:826 src/svnfrontend/svnactions.cpp:833
 #, fuzzy, kde-format
 msgid "Owner"
 msgstr "所有者"
 
-#: src/svnfrontend/svnactions.cpp:811 src/svnfrontend/svnactions.cpp:821
+#: src/svnfrontend/svnactions.cpp:827 src/svnfrontend/svnactions.cpp:834
 #, fuzzy, kde-format
 msgid "Locked on"
 msgstr "ロック日時"
 
-#: src/svnfrontend/svnactions.cpp:814 src/svnfrontend/svnactions.cpp:824
+#: src/svnfrontend/svnactions.cpp:828 src/svnfrontend/svnactions.cpp:835
 #, fuzzy, kde-format
 msgid "Lock comment"
 msgstr "ロックコメント"
 
-#: src/svnfrontend/svnactions.cpp:872
+#: src/svnfrontend/svnactions.cpp:882
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Infolist"
 msgstr "情報リスト"
 
-#: src/svnfrontend/svnactions.cpp:911
+#: src/svnfrontend/svnactions.cpp:921
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Applying Properties"
 msgstr "属性を表示"
 
-#: src/svnfrontend/svnactions.cpp:911
+#: src/svnfrontend/svnactions.cpp:922
 #, kde-format
 msgid "<center>Applying<br/>hit cancel for abort</center>"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:949
+#: src/svnfrontend/svnactions.cpp:958
 #, fuzzy, kde-format
 msgid "Could not change to folder %1\n"
 msgstr "フォルダ %1 に移動できませんでした\n"
 
-#: src/svnfrontend/svnactions.cpp:968
+#: src/svnfrontend/svnactions.cpp:976
 #, fuzzy, kde-format
 msgid "Not commit because networking is disabled"
 msgstr "ネットワークが無効なのでコミットしていません"
 
-#: src/svnfrontend/svnactions.cpp:990 src/svnfrontend/svnactions.cpp:2333
+#: src/svnfrontend/svnactions.cpp:999 src/svnfrontend/svnactions.cpp:2397
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Status / List"
 msgstr "状態とリスト"
 
-#: src/svnfrontend/svnactions.cpp:990 src/svnfrontend/svnactions.cpp:2333
+#: src/svnfrontend/svnactions.cpp:1000 src/svnfrontend/svnactions.cpp:2398
 #, fuzzy, kde-format
 msgid "Creating list / check status"
 msgstr "リストの作成と状態の確認"
 
-#: src/svnfrontend/svnactions.cpp:1012
+#: src/svnfrontend/svnactions.cpp:1018
 #, fuzzy, kde-format
 msgid "Delete and Commit"
 msgstr "削除とコミット"
 
-#: src/svnfrontend/svnactions.cpp:1014
+#: src/svnfrontend/svnactions.cpp:1020
 #, fuzzy, kde-format
 msgid "Add and Commit"
 msgstr "追加とコミット"
 
-#: src/svnfrontend/svnactions.cpp:1045
+#: src/svnfrontend/svnactions.cpp:1050
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Commit"
 msgstr "コミット"
 
-#: src/svnfrontend/svnactions.cpp:1045
+#: src/svnfrontend/svnactions.cpp:1050
 #, fuzzy, kde-format
 #| msgid "Commit - hit cancel for abort"
 msgid "Commit - hit Cancel for abort"
 msgstr "コミット- 中止するにはキャンセルを押してください"
 
-#: src/svnfrontend/svnactions.cpp:1071
+#: src/svnfrontend/svnactions.cpp:1077
 #, kde-format
 msgctxt "@title:window"
 msgid "Downloading"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1071
+#: src/svnfrontend/svnactions.cpp:1078
 #, fuzzy, kde-format
 #| msgid "Download - hit cancel for abort"
 msgid "Download - hit Cancel for abort"
 msgstr "ダウンロード - 中止するにはキャンセルを押してください"
 
-#: src/svnfrontend/svnactions.cpp:1098
+#: src/svnfrontend/svnactions.cpp:1104
 #, fuzzy, kde-format
 msgid "Can not do this diff because networking is disabled."
 msgstr "ネットワークが無効なのでこの diff を行えません。"
 
-#: src/svnfrontend/svnactions.cpp:1146
+#: src/svnfrontend/svnactions.cpp:1158
 #, fuzzy, kde-format
 msgid "Both entries seems to be the same, can not diff."
 msgstr "両方のエントリが同じようなので、diff できません。"
 
-#: src/svnfrontend/svnactions.cpp:1211
+#: src/svnfrontend/svnactions.cpp:1219
 #, fuzzy, kde-format
 msgid "Diff-process could not started, check command."
 msgstr "Diff プロセスが起動できませんでした。コマンドを確認してください。"
 
-#: src/svnfrontend/svnactions.cpp:1255 src/svnfrontend/svnactions.cpp:1308
+#: src/svnfrontend/svnactions.cpp:1278 src/svnfrontend/svnactions.cpp:1340
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Diffing"
 msgstr "項目を Diff"
 
-#: src/svnfrontend/svnactions.cpp:1255
+#: src/svnfrontend/svnactions.cpp:1278
 #, fuzzy, kde-format
 #| msgid "Diffing - hit cancel for abort"
 msgid "Diffing - hit Cancel for abort"
 msgstr "Diff しています - 中止するにはキャンセルを押してください"
 
-#: src/svnfrontend/svnactions.cpp:1268 src/svnfrontend/svnactions.cpp:1317
+#: src/svnfrontend/svnactions.cpp:1291 src/svnfrontend/svnactions.cpp:1350
 #, fuzzy, kde-format
 msgid "No difference to display"
 msgstr "表示する違いがありません"
 
-#: src/svnfrontend/svnactions.cpp:1308
+#: src/svnfrontend/svnactions.cpp:1341
 #, fuzzy, kde-format
 #| msgid "Diffing - hit cancel for abort"
 msgid "Diffing - hit cancel for abort"
 msgstr "Diff しています - 中止するにはキャンセルを押してください"
 
-#: src/svnfrontend/svnactions.cpp:1366
+#: src/svnfrontend/svnactions.cpp:1397
 #, fuzzy, kde-format
 #| msgid "Display-process could not started, check command."
 msgid "Display process could not started, check command."
 msgstr "表示プロセスが起動できませんでした。コマンドを確認してください。"
 
-#: src/svnfrontend/svnactions.cpp:1379
+#: src/svnfrontend/svnactions.cpp:1409
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Diff Display"
 msgstr "Diff 表示"
 
-#: src/svnfrontend/svnactions.cpp:1428
+#: src/svnfrontend/svnactions.cpp:1457
 #, fuzzy, kde-format
 #| msgid "Check updates"
 msgctxt "@title:window"
 msgid "Making update"
 msgstr "更新を確認"
 
-#: src/svnfrontend/svnactions.cpp:1428
+#: src/svnfrontend/svnactions.cpp:1458
 #, fuzzy, kde-format
 #| msgid "Making update - hit cancel for abort"
 msgid "Making update - hit Cancel for abort"
 msgstr "更新しています - 中止するにはキャンセルを押してください"
 
-#: src/svnfrontend/svnactions.cpp:1516
+#: src/svnfrontend/svnactions.cpp:1543
 #, fuzzy, kde-format
 msgid "Which files or directories should I add?"
 msgstr "どのファイルやディレクトリを追加しますか？"
 
-#: src/svnfrontend/svnactions.cpp:1523
+#: src/svnfrontend/svnactions.cpp:1550
 #, fuzzy, kde-format
 msgid "<center>The entry<br/>%1<br/>is versioned - break.</center>"
 msgstr ""
 "<center>エントリ <br>%1<br> はバージョンづけされています - 中止します。</"
 "center>"
 
-#: src/svnfrontend/svnactions.cpp:1551
+#: src/svnfrontend/svnactions.cpp:1574
 #, fuzzy, kde-format
 msgid "Delete from repository"
 msgstr "リポジトリから削除"
 
-#: src/svnfrontend/svnactions.cpp:1600
+#: src/svnfrontend/svnactions.cpp:1623
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Export a Repository"
 msgstr "リポジトリをエクスポート"
 
-#: src/svnfrontend/svnactions.cpp:1600
+#: src/svnfrontend/svnactions.cpp:1623
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Checkout a Repository"
 msgstr "リポジトリをチェックアウト"
 
-#: src/svnfrontend/svnactions.cpp:1619 src/svnfrontend/svnactions.cpp:1625
+#: src/svnfrontend/svnactions.cpp:1641 src/svnfrontend/svnactions.cpp:1648
 #, fuzzy, kde-format
 msgid "Export repository"
 msgstr "リポジトリをエクスポート"
 
-#: src/svnfrontend/svnactions.cpp:1624
+#: src/svnfrontend/svnactions.cpp:1647
 #, kde-format
 msgid "Invalid local path given!"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1652
+#: src/svnfrontend/svnactions.cpp:1667
 #, fuzzy, kde-format
 msgid "Exporting a file?"
 msgstr "ファイルをエクスポートしますか？"
 
-#: src/svnfrontend/svnactions.cpp:1652
+#: src/svnfrontend/svnactions.cpp:1667
 #, fuzzy, kde-format
 msgid "Checking out a file?"
 msgstr "ファイルをチェックアウトしますか？"
 
-#: src/svnfrontend/svnactions.cpp:1698
+#: src/svnfrontend/svnactions.cpp:1723
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Export"
 msgstr "エクスポート"
 
-#: src/svnfrontend/svnactions.cpp:1698
+#: src/svnfrontend/svnactions.cpp:1723
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Checkout"
 msgstr "チェックアウト"
 
-#: src/svnfrontend/svnactions.cpp:1698
+#: src/svnfrontend/svnactions.cpp:1724
 #, fuzzy, kde-format
 msgid "Exporting"
 msgstr "エクスポートしています"
 
-#: src/svnfrontend/svnactions.cpp:1698
+#: src/svnfrontend/svnactions.cpp:1724
 #, fuzzy, kde-format
 msgid "Checking out"
 msgstr "チェックアウトしています"
 
-#: src/svnfrontend/svnactions.cpp:1735
+#: src/svnfrontend/svnactions.cpp:1762
 #, fuzzy, kde-format
 msgid "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
 msgstr ""
 "<center>エントリ <br>%1<br> はバージョンづけされていません - 中止します。</"
 "center>"
 
-#: src/svnfrontend/svnactions.cpp:1768
+#: src/svnfrontend/svnactions.cpp:1794
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Revert"
 msgstr "取り消し"
 
-#: src/svnfrontend/svnactions.cpp:1768
+#: src/svnfrontend/svnactions.cpp:1794
 #, fuzzy, kde-format
 msgid "Reverting items"
 msgstr "項目を元に戻しています"
 
-#: src/svnfrontend/svnactions.cpp:1798 src/svnfrontend/svnactions.cpp:1860
+#: src/svnfrontend/svnactions.cpp:1823 src/svnfrontend/svnactions.cpp:1887
 #, fuzzy, kde-format
 #| msgid "Switch url"
 msgctxt "@title:window"
 msgid "Switch URL"
 msgstr "url を切り替え"
 
-#: src/svnfrontend/svnactions.cpp:1798
+#: src/svnfrontend/svnactions.cpp:1823
 #, fuzzy, kde-format
 #| msgid "Switching url"
 msgid "Switching URL"
 msgstr "url を切り替えています"
 
-#: src/svnfrontend/svnactions.cpp:1818
+#: src/svnfrontend/svnactions.cpp:1844
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Relocate Repository"
 msgstr "リポジトリを削除"
 
-#: src/svnfrontend/svnactions.cpp:1818
+#: src/svnfrontend/svnactions.cpp:1845
 #, fuzzy, kde-format
 msgid "Relocate repository to new URL"
 msgstr "リポジトリを新しい URL に移動"
 
-#: src/svnfrontend/svnactions.cpp:1841
+#: src/svnfrontend/svnactions.cpp:1868
 #, fuzzy, kde-format
 msgid "Can only switch one item at time"
 msgstr "一度に一つの項目だけ切り替えられます"
 
-#: src/svnfrontend/svnactions.cpp:1847
+#: src/svnfrontend/svnactions.cpp:1874
 #, fuzzy, kde-format
 msgid "Error getting entry to switch"
 msgstr "切り替えるエントリを取得しているときにエラー"
 
-#: src/svnfrontend/svnactions.cpp:1871
+#: src/svnfrontend/svnactions.cpp:1897
 #, fuzzy, kde-format
 #| msgid "Switch url"
 msgid "Switch URL"
 msgstr "url を切り替え"
 
-#: src/svnfrontend/svnactions.cpp:1889
+#: src/svnfrontend/svnactions.cpp:1914
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Cleanup"
 msgstr "クリーンアップ"
 
-#: src/svnfrontend/svnactions.cpp:1889
+#: src/svnfrontend/svnactions.cpp:1914
 #, fuzzy, kde-format
 msgid "Cleaning up folder"
 msgstr "フォルダーをクリーンアップしています"
 
-#: src/svnfrontend/svnactions.cpp:1906
+#: src/svnfrontend/svnactions.cpp:1930
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Resolve"
 msgstr "解消"
 
-#: src/svnfrontend/svnactions.cpp:1906
+#: src/svnfrontend/svnactions.cpp:1930
 #, fuzzy, kde-format
 msgid "Marking resolved"
 msgstr "解消したとマークしています"
 
-#: src/svnfrontend/svnactions.cpp:1938
+#: src/svnfrontend/svnactions.cpp:1961
 #, fuzzy, kde-format
 msgid "Could not retrieve conflict information - giving up."
 msgstr "衝突情報を取り出せませんでした - 断念しています。"
 
-#: src/svnfrontend/svnactions.cpp:1965
+#: src/svnfrontend/svnactions.cpp:1986
 #, fuzzy, kde-format
 msgid "Resolve-process could not started, check command."
 msgstr "解消プロセスを起動できませんでした。コマンドを確認してください。"
 
-#: src/svnfrontend/svnactions.cpp:1977
+#: src/svnfrontend/svnactions.cpp:1996
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Import"
 msgstr "インポート"
 
-#: src/svnfrontend/svnactions.cpp:1977
+#: src/svnfrontend/svnactions.cpp:1996
 #, fuzzy, kde-format
 msgid "Importing items"
 msgstr "項目をインポートしています"
 
-#: src/svnfrontend/svnactions.cpp:2001
+#: src/svnfrontend/svnactions.cpp:2025
 #, fuzzy, kde-format
 msgid "Nothing to merge."
 msgstr "マージするものがありません。"
 
-#: src/svnfrontend/svnactions.cpp:2005
+#: src/svnfrontend/svnactions.cpp:2029
 #, fuzzy, kde-format
 msgid "No destination to merge."
 msgstr "マージする先がありません"
 
-#: src/svnfrontend/svnactions.cpp:2024
+#: src/svnfrontend/svnactions.cpp:2048
 #, fuzzy, kde-format
 #| msgid "Both sources must be same type!"
 msgid "Both sources must be same type."
 msgstr "両方のソースは同じ種類でなければなりません！"
 
-#: src/svnfrontend/svnactions.cpp:2031
+#: src/svnfrontend/svnactions.cpp:2055
 #, fuzzy, kde-format
 #| msgid "Target for merge must same type like sources!"
 msgid "Target for merge must same type like sources."
 msgstr "マージの対象はソースと同じ種類でなければなりません！"
 
-#: src/svnfrontend/svnactions.cpp:2054
+#: src/svnfrontend/svnactions.cpp:2078
 #, fuzzy, kde-format
 #| msgid "Both entries seems to be the same, won't do a merge."
 msgid "Both entries seems to be the same, will not do a merge."
 msgstr "両方のエントリは同じようです。マージしません。"
 
-#: src/svnfrontend/svnactions.cpp:2118
+#: src/svnfrontend/svnactions.cpp:2156
 #, fuzzy, kde-format
 #| msgid "Merge-process could not started, check command."
 msgid "Merge process could not started, check command."
 msgstr "マージプロセスは起動できませんでした。コマンドを確認してください。"
 
-#: src/svnfrontend/svnactions.cpp:2177
+#: src/svnfrontend/svnactions.cpp:2238
 #, fuzzy, kde-format
 msgid "Merging items"
 msgstr "項目をマージしています"
 
-#: src/svnfrontend/svnactions.cpp:2204 src/svnfrontend/svnactions.cpp:2222
+#: src/svnfrontend/svnactions.cpp:2264 src/svnfrontend/svnactions.cpp:2281
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Move"
 msgstr "移動"
 
-#: src/svnfrontend/svnactions.cpp:2204
+#: src/svnfrontend/svnactions.cpp:2264
 #, fuzzy, kde-format
 #| msgid "Moving/Rename item "
 msgid "Moving/Rename item"
 msgstr "項目を移動/名前変更しています"
 
-#: src/svnfrontend/svnactions.cpp:2222
+#: src/svnfrontend/svnactions.cpp:2281
 #, fuzzy, kde-format
 msgid "Moving entries"
 msgstr "エントリを移動しています"
 
-#: src/svnfrontend/svnactions.cpp:2242 src/svnfrontend/svnactions.cpp:2257
+#: src/svnfrontend/svnactions.cpp:2301 src/svnfrontend/svnactions.cpp:2315
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Copy / Move"
 msgstr "コピーと移動"
 
-#: src/svnfrontend/svnactions.cpp:2242 src/svnfrontend/svnactions.cpp:2257
+#: src/svnfrontend/svnactions.cpp:2301 src/svnfrontend/svnactions.cpp:2315
 #, fuzzy, kde-format
 msgid "Copy or Moving entries"
 msgstr "エントリをコピーまたは移動します"
 
-#: src/svnfrontend/svnactions.cpp:2365
+#: src/svnfrontend/svnactions.cpp:2431
 #, fuzzy, kde-format
 msgid "No unversioned items found."
 msgstr "バージョン付けされていない項目は見つかりませんでした。"
 
-#: src/svnfrontend/svnactions.cpp:2369
+#: src/svnfrontend/svnactions.cpp:2435
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Add Unversioned Items"
 msgstr "バージョン付けされていない項目を追加"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
-#: src/svnfrontend/svnactions.cpp:2372 src/svnfrontend/svnlogdlg.ui:163
+#: src/svnfrontend/svnactions.cpp:2438 src/svnfrontend/svnlogdlg.ui:163
 #, fuzzy, kde-format
 msgid "Item"
 msgstr "項目"
 
-#: src/svnfrontend/svnactions.cpp:2492
+#: src/svnfrontend/svnactions.cpp:2553
 #, fuzzy, kde-format
 msgid "Found %1 modified item"
 msgid_plural "Found %1 modified items"
 msgstr[0] "変更した項目に対する色："
 
-#: src/svnfrontend/svnactions.cpp:2521
+#: src/svnfrontend/svnactions.cpp:2581
 #, fuzzy, kde-format
 msgid "Checking for updates finished"
 msgstr "更新の確認が完了しました"
 
-#: src/svnfrontend/svnactions.cpp:2523
+#: src/svnfrontend/svnactions.cpp:2583
 #, fuzzy, kde-format
 msgid "There are new items in repository"
 msgstr "リポジトリに新しい項目があります"
 
-#: src/svnfrontend/svnactions.cpp:2593
+#: src/svnfrontend/svnactions.cpp:2653
 #, fuzzy, kde-format
 #| msgid "Not filling logcache because networking is disabled"
 msgid "Not filling log cache because networking is disabled"
 msgstr "ネットワークが無効なのでログキャッシュを充填していません"
 
-#: src/svnfrontend/svnactions.cpp:2635
+#: src/svnfrontend/svnactions.cpp:2693
 #, fuzzy, kde-format
 msgid "Not checking for updates because networking is disabled"
 msgstr "ネットワークが無効なので更新の確認をしていません"
 
-#: src/svnfrontend/svnactions.cpp:2642
+#: src/svnfrontend/svnactions.cpp:2699
 #, fuzzy, kde-format
 msgid "Checking for updates started in background"
 msgstr "更新の確認がバックグラウンドで始まりました"
@@ -5710,7 +5710,7 @@ msgid "Copy from"
 msgstr "コピー元"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DispPrevButton)
-#: src/svnfrontend/svnlogdlg.ui:189 src/svnfrontend/svnlogdlgimp.cpp:510
+#: src/svnfrontend/svnlogdlg.ui:189 src/svnfrontend/svnlogdlgimp.cpp:517
 #, fuzzy, kde-format
 msgid "Diff previous"
 msgstr "前と Diff"
@@ -5728,7 +5728,7 @@ msgid "List entries"
 msgstr "エントリをリストアップ"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonBlame)
-#: src/svnfrontend/svnlogdlg.ui:249 src/svnfrontend/svnlogdlgimp.cpp:505
+#: src/svnfrontend/svnlogdlg.ui:249 src/svnfrontend/svnlogdlgimp.cpp:512
 #, fuzzy, kde-format
 msgid "Annotate"
 msgstr "注釈"
@@ -5757,43 +5757,43 @@ msgctxt "@title:window"
 msgid "SVN Log"
 msgstr "SVN ログ"
 
-#: src/svnfrontend/svnlogdlgimp.cpp:435
+#: src/svnfrontend/svnlogdlgimp.cpp:443
 #, fuzzy, kde-format
 msgid "Set version as right side of diff"
 msgstr "バージョンを diff の右側に設定"
 
-#: src/svnfrontend/svnlogdlgimp.cpp:441
+#: src/svnfrontend/svnlogdlgimp.cpp:449
 #, fuzzy, kde-format
 msgid "Set version as left side of diff"
 msgstr "バージョンを diff の左側に設定"
 
-#: src/svnfrontend/svnlogdlgimp.cpp:447
+#: src/svnfrontend/svnlogdlgimp.cpp:455
 #, fuzzy, kde-format
 msgid "Unset version for diff"
 msgstr "diff のためのバージョンを解除"
 
-#: src/svnfrontend/svnlogdlgimp.cpp:451
+#: src/svnfrontend/svnlogdlgimp.cpp:459
 #, fuzzy, kde-format
 #| msgid "Review items before commit"
 msgid "Revert this commit"
 msgstr "コミットする前に項目を再検討する(&R)"
 
-#: src/svnfrontend/svntreeview.cpp:113
+#: src/svnfrontend/svntreeview.cpp:111
 #, fuzzy, kde-format
 msgid "&Move Here"
 msgstr "ここに移動(&M)"
 
-#: src/svnfrontend/svntreeview.cpp:117
+#: src/svnfrontend/svntreeview.cpp:115
 #, fuzzy, kde-format
 msgid "&Copy Here"
 msgstr "ここにコピー(&C)"
 
-#: src/svnfrontend/svntreeview.cpp:119
+#: src/svnfrontend/svntreeview.cpp:117
 #, fuzzy, kde-format
 msgid "C&ancel"
 msgstr "キャンセル(&A)"
 
-#: src/urldlg.cpp:99
+#: src/urldlg.cpp:98
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Open"

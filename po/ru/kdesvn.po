@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-21 00:49+0000\n"
+"POT-Creation-Date: 2022-10-31 00:48+0000\n"
 "PO-Revision-Date: 2020-03-13 22:17+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -537,7 +537,7 @@ msgid "Inserted %v not cached log entries of %m."
 msgstr "Добавлены %v некэшированных записей журнала из %m."
 
 # BUGME: please clarify "may cancel pressed" --aspotashev
-#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:807
+#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:808
 #, kde-format
 msgid "Wrong or missing log (may cancel pressed)."
 msgstr ""
@@ -719,19 +719,19 @@ msgstr "В репозиторий записано %1"
 msgid "Copied %1 to %2"
 msgstr "Скопировано %1 в %2"
 
-#: src/kiosvn/kiosvn.cpp:827 src/svnfrontend/svnactions.cpp:1058
+#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1058
 #: src/svnfrontend/svnactions.cpp:2272
 #, kde-format
 msgid "Committed revision %1."
 msgstr "Изменения зафиксированы в ревизии %1."
 
-#: src/kiosvn/kiosvn.cpp:829
+#: src/kiosvn/kiosvn.cpp:830
 #, kde-format
 msgid "Nothing to commit."
 msgstr "Нет объектов для фиксации."
 
 # BUGME: action or statement? --aspotashev
-#: src/kiosvn/kiosvn.cpp:875
+#: src/kiosvn/kiosvn.cpp:876
 #, kde-format
 msgid "Empty logs"
 msgstr "Пустые журналы"

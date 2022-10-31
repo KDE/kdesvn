@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-21 00:49+0000\n"
+"POT-Creation-Date: 2022-10-31 00:48+0000\n"
 "PO-Revision-Date: 2022-04-09 19:25+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -519,7 +519,7 @@ msgstr "Výpisu dokončený."
 msgid "Inserted %v not cached log entries of %m."
 msgstr "Vložené %v položkách neuložených vo vyrovnávacej pamäti záznamu  %m."
 
-#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:807
+#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:808
 #, kde-format
 msgid "Wrong or missing log (may cancel pressed)."
 msgstr "Zlý alebo chýbajúci záznam (možno stlačené zrušiť)"
@@ -699,18 +699,18 @@ msgstr "Zapísané %1 do repozitára"
 msgid "Copied %1 to %2"
 msgstr "Skopírované %1 do %2"
 
-#: src/kiosvn/kiosvn.cpp:827 src/svnfrontend/svnactions.cpp:1058
+#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1058
 #: src/svnfrontend/svnactions.cpp:2272
 #, kde-format
 msgid "Committed revision %1."
 msgstr "Začlenená revízia %1."
 
-#: src/kiosvn/kiosvn.cpp:829
+#: src/kiosvn/kiosvn.cpp:830
 #, kde-format
 msgid "Nothing to commit."
 msgstr "Nič na začlenenie."
 
-#: src/kiosvn/kiosvn.cpp:875
+#: src/kiosvn/kiosvn.cpp:876
 #, kde-format
 msgid "Empty logs"
 msgstr "Prázdne záznamy"

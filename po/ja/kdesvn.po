@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-21 00:49+0000\n"
+"POT-Creation-Date: 2022-10-31 00:48+0000\n"
 "PO-Revision-Date: 2013-07-06 03:18-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -521,7 +521,7 @@ msgstr "ダンプが完了しました。"
 msgid "Inserted %v not cached log entries of %m."
 msgstr "%m のうちキャッシュされていないログエントリ %v が挿入されました"
 
-#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:807
+#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:808
 #, kde-format
 msgid "Wrong or missing log (may cancel pressed)."
 msgstr ""
@@ -702,18 +702,18 @@ msgstr "リポジトリへのパス："
 msgid "Copied %1 to %2"
 msgstr "リビジョン %2 で %1 にコピーされました"
 
-#: src/kiosvn/kiosvn.cpp:827 src/svnfrontend/svnactions.cpp:1058
+#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1058
 #: src/svnfrontend/svnactions.cpp:2272
 #, fuzzy, kde-format
 msgid "Committed revision %1."
 msgstr "リビジョン %1 をコミットしました。"
 
-#: src/kiosvn/kiosvn.cpp:829
+#: src/kiosvn/kiosvn.cpp:830
 #, fuzzy, kde-format
 msgid "Nothing to commit."
 msgstr "コミットするものがありません。"
 
-#: src/kiosvn/kiosvn.cpp:875
+#: src/kiosvn/kiosvn.cpp:876
 #, fuzzy, kde-format
 msgid "Empty logs"
 msgstr "空のログ"

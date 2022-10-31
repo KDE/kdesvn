@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-21 00:49+0000\n"
+"POT-Creation-Date: 2022-10-31 00:48+0000\n"
 "PO-Revision-Date: 2022-10-10 23:56+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -520,7 +520,7 @@ msgstr "Volcado finalizado."
 msgid "Inserted %v not cached log entries of %m."
 msgstr "Insertadas %v entradas de registro no cacheadas de %m."
 
-#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:807
+#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:808
 #, kde-format
 msgid "Wrong or missing log (may cancel pressed)."
 msgstr "Registro incorrecto o ausente (tal vez ha pulsado «Cancelar»)."
@@ -702,18 +702,18 @@ msgstr "Se ha escrito %1 en el repositorio"
 msgid "Copied %1 to %2"
 msgstr "Copiado %1 en %2"
 
-#: src/kiosvn/kiosvn.cpp:827 src/svnfrontend/svnactions.cpp:1058
+#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1058
 #: src/svnfrontend/svnactions.cpp:2272
 #, kde-format
 msgid "Committed revision %1."
 msgstr "Enviada la revisión %1."
 
-#: src/kiosvn/kiosvn.cpp:829
+#: src/kiosvn/kiosvn.cpp:830
 #, kde-format
 msgid "Nothing to commit."
 msgstr "No hay nada para enviar."
 
-#: src/kiosvn/kiosvn.cpp:875
+#: src/kiosvn/kiosvn.cpp:876
 #, kde-format
 msgid "Empty logs"
 msgstr "Vaciar registros"

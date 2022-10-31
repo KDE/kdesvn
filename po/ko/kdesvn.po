@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-21 00:49+0000\n"
+"POT-Creation-Date: 2022-10-31 00:48+0000\n"
 "PO-Revision-Date: 2022-05-15 22:21+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -516,7 +516,7 @@ msgstr "덤프 완료됨."
 msgid "Inserted %v not cached log entries of %m."
 msgstr "%m의 캐시되지 않은 로그 항목 %v개를 삽입했습니다."
 
-#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:807
+#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:808
 #, kde-format
 msgid "Wrong or missing log (may cancel pressed)."
 msgstr "잘못되었거나 누락된 로그 (누르면 취소될 수 있음)."
@@ -696,18 +696,18 @@ msgstr "저장소에 %1을(를) 기록함"
 msgid "Copied %1 to %2"
 msgstr "%1을(를) %2(으)로 복사함"
 
-#: src/kiosvn/kiosvn.cpp:827 src/svnfrontend/svnactions.cpp:1058
+#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1058
 #: src/svnfrontend/svnactions.cpp:2272
 #, kde-format
 msgid "Committed revision %1."
 msgstr "커밋한 리비전 %1."
 
-#: src/kiosvn/kiosvn.cpp:829
+#: src/kiosvn/kiosvn.cpp:830
 #, kde-format
 msgid "Nothing to commit."
 msgstr "커밋할 것이 없음."
 
-#: src/kiosvn/kiosvn.cpp:875
+#: src/kiosvn/kiosvn.cpp:876
 #, kde-format
 msgid "Empty logs"
 msgstr "빈 로그"

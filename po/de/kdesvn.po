@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-21 00:49+0000\n"
+"POT-Creation-Date: 2022-10-31 00:48+0000\n"
 "PO-Revision-Date: 2021-05-12 05:28+0200\n"
 "Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -528,7 +528,7 @@ msgstr "Abzug beendet."
 msgid "Inserted %v not cached log entries of %m."
 msgstr "%v von %m nicht zwischengespeicherten Protokolleinträgen eingefügt."
 
-#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:807
+#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:808
 #, kde-format
 msgid "Wrong or missing log (may cancel pressed)."
 msgstr "Fehlerhaftes oder fehlendes Protokoll, vielleicht Abbrechen gedrückt."
@@ -709,18 +709,18 @@ msgstr "%1 in das Repository geschrieben"
 msgid "Copied %1 to %2"
 msgstr "%1 nach %2 kopiert"
 
-#: src/kiosvn/kiosvn.cpp:827 src/svnfrontend/svnactions.cpp:1058
+#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1058
 #: src/svnfrontend/svnactions.cpp:2272
 #, kde-format
 msgid "Committed revision %1."
 msgstr "Revision %1 gesendet."
 
-#: src/kiosvn/kiosvn.cpp:829
+#: src/kiosvn/kiosvn.cpp:830
 #, kde-format
 msgid "Nothing to commit."
 msgstr "Nichts zu senden."
 
-#: src/kiosvn/kiosvn.cpp:875
+#: src/kiosvn/kiosvn.cpp:876
 #, kde-format
 msgid "Empty logs"
 msgstr "Leere Protokolle."

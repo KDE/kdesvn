@@ -120,6 +120,7 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 
 add_subdirectory(src)
 add_subdirectory(doc)
+kdoctools_install(po)
 
 configure_file(kdesvn-config.h.in kdesvn-config.h @ONLY)
 configure_file(Doxyfile.in Doxyfile @ONLY)

@@ -718,7 +718,7 @@ msgstr "Registre buit"
 #: src/ksvnwidgets/authdialogwidget.cpp:34
 #, kde-format
 msgid "Store password (into KDE Wallet)"
-msgstr "Guarda la contrasenya (a la cartera de KDE)"
+msgstr "Guarda la contrasenya (a dins de la cartera de KDE)"
 
 #: src/ksvnwidgets/authdialogwidget.cpp:35
 #, kde-format
@@ -2222,7 +2222,8 @@ msgstr "Inicia l'ompliment del cau de registres en obrir"
 #, kde-format
 msgid "When listing on working copies kdesvn may check for this property"
 msgstr ""
-"Mentre es llista a les còpies de treball, Kdesvn pot comprovar esta propietat"
+"Mentre es llista en les còpies de treball, Kdesvn pot comprovar esta "
+"propietat"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:46
@@ -2233,7 +2234,7 @@ msgid ""
 "items may get slow. So you should only switch on if you have repositories "
 "containing lot of such entries."
 msgstr ""
-"Mentre es llista a les còpies de treball, Kdesvn pot comprovar la propietat "
+"Mentre es llista en les còpies de treball, Kdesvn pot comprovar la propietat "
 "<tt>svn:needs-lock</tt>.<br>Però llistar/actualitzar carpetes que contenen "
 "una gran quantitat d'elements pot ser lent. Pel que només l'haureu d'activar "
 "si teniu repositoris que contenen una gran quantitat d'este tipus d'entrades."
@@ -2339,8 +2340,8 @@ msgstr ""
 msgid ""
 "When saving passwords, do it into KDE Wallet instead of Subversions storage?"
 msgstr ""
-"En guardar les contrasenyes, fer-ho a la cartera de KDE en lloc del rebost "
-"de Subversion?"
+"En guardar les contrasenyes, fer-ho a dins de la cartera de KDE en lloc del "
+"rebost de Subversion?"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_passwords_in_wallet)
 #: src/settings/subversion_settings.ui:122
@@ -2357,9 +2358,9 @@ msgid ""
 "like Subversion does but put it into an encrypted storage like KDE Wallet or "
 "do not save passwords.</p>"
 msgstr ""
-"<p>Indica si les contrasenyes establides al kdesvn s'hauran d'emmagatzemar a "
-"la cartera de KDE en lloc de l'emmagatzematge en text clar de Subversion.</"
-"p>\n"
+"<p>Indica si les contrasenyes establides al kdesvn s'hauran d'emmagatzemar "
+"en la cartera de KDE en lloc de l'emmagatzematge en text clar de Subversion."
+"</p>\n"
 "<p>Açò hauria de ser una mica més segur, ja que la cartera de KDE està "
 "(majoritàriament) encriptada amb una contrasenya. D'altra banda, caldrà que "
 "torneu a introduir les vostres contrasenyes amb els altres clients de "

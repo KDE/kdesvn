@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # Marta Rybczynska <kde-i18n@rybczynska.net>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-31 00:48+0000\n"
-"PO-Revision-Date: 2022-10-18 18:01+0200\n"
+"PO-Revision-Date: 2023-01-02 20:51+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3227,10 +3227,10 @@ msgid ""
 "how to serve it from Apache. A mimetype beginning with <b>'text/'</b> (or an "
 "absent mimetype) is treated as text. Anything else is treated as binary."
 msgstr ""
-"Typ mime pliku. Używany do określenia tego czy scalić plik i jak serwować go "
-"z Apache. Typ mime zaczynający się <b>'text/'</b> (lub nieobecnym typem "
-"mime) jest traktowany jako tekst. Cokolwiek innego jest traktowane jako dane "
-"binarne."
+"Rodzaj mime pliku. Używany do określenia tego czy scalić plik i jak "
+"udostępniać go z Apache. Rodzaj mime zaczynający się od <b>'text/'</b> (lub "
+"pustym rodzajem mime) jest traktowany jako tekst. Cokolwiek innego jest "
+"traktowane jako dane dwójkowe."
 
 #: src/svnfrontend/editpropsdlg.cpp:93
 #, kde-format

@@ -1,50 +1,81 @@
 <?xml version="1.0" ?>
 <!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-<!ENTITY % English "INCLUDE">
+<!ENTITY % German "INCLUDE">
 ]>
 
 <refentry lang="&language;" id='kdesvnaskpass1'>
 
 <refentryinfo>
-<title>kdesvnaskpass User's Manual</title>
-<author><personname>
-<firstname>Rajko</firstname>
-<surname>Albrecht</surname>
-</personname>
-<email>ral@alwins-world.de</email></author>
-<date>2016-05-22</date>
-<releaseinfo>kdesvn 2.1.0</releaseinfo>
+<title
+>kdesvnaskpass-Benutzerhandbuch</title>
+<author
+><personname
+> <firstname
+>Rajko</firstname
+> <surname
+>Albrecht</surname
+> </personname
+> <email
+>ral@alwins-world.de</email
+></author>
+<date
+>2016-05-22</date>
+<releaseinfo
+>kdesvn 2.1.0</releaseinfo>
 </refentryinfo>
 
 <refmeta>
-<refentrytitle><command>kdesvnaskpass</command></refentrytitle>
-<manvolnum>1</manvolnum>
+<refentrytitle
+><command
+>kdesvnaskpass</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
 </refmeta>
 
 <refnamediv>
-<refname><command>kdesvnaskpass</command></refname>
-<refpurpose>ssh-askpass for kdesvn</refpurpose>
+<refname
+><command
+>kdesvnaskpass</command
+></refname>
+<refpurpose
+>ssh-askpass für kdesvn</refpurpose>
 </refnamediv>
 
 <refsynopsisdiv id='synopsis'>
-<cmdsynopsis>
-    <command>kdesvnaskpass</command>
-    <arg choice="opt"><replaceable>prompt</replaceable></arg>
-</cmdsynopsis>
+<cmdsynopsis
+><command
+>kdesvnaskpass</command
+> <arg choice="opt"
+><replaceable
+>prompt</replaceable
+></arg
+> </cmdsynopsis>
 </refsynopsisdiv>
 
-<refsect1 id='description'><title>Description</title>
-<para>ssh-askpass for kdesvn</para>
+<refsect1 id='description'
+><title
+>Beschreibung</title>
+<para
+>ssh-askpass für kdesvn</para>
 </refsect1>
 
-<refsect1 id='options'><title>Options</title>
+<refsect1 id='options'
+><title
+>Optionen</title>
 
-<refsect2 id='ss_arguments'><title>Arguments:</title>
+<refsect2 id='ss_arguments'
+><title
+>Argumente:</title>
 <variablelist>
   <varlistentry>
-  <term><emphasis>prompt</emphasis></term>
+  <term
+><emphasis
+>prompt</emphasis
+></term>
   <listitem>
-<para>Prompt that is displayed to the user.</para>
+<para
+>Eingabeaufforderung, die dem Benutzer angezeigt wird.</para>
   </listitem>
   </varlistentry>
 </variablelist>
@@ -52,17 +83,25 @@
 
 </refsect1>
 
-<refsect1 id='see_also'><title>See Also</title>
+<refsect1 id='see_also'
+><title
+>Siehe auch</title>
 <simplelist>
-<member>Full user documentation is available through the &khelpcenter;. You can also enter the &URL;
-<emphasis>help:/kdesvn</emphasis> directly into &konqueror; or you can run <emphasis>`khelpcenter help:/kdesvn'</emphasis>
-from the command-line.</member>
+<member
+>Die vollständige Dokumentation finden Sie im KDE-Hilfezentrum Sie können auch <emphasis
+>help:/kdesvn/</emphasis
+> in die Adressleiste von &konqueror; eingeben oder <emphasis
+>`khelpcenter help:/kdesvn/'</emphasis
+> auf der Befehlszeile eingeben.</member>
 </simplelist>
 </refsect1>
 
-<refsect1 id='authors'><title>Authors</title>
-<literallayout>
-Rajko Albrecht &lt;ral@alwins-world.de&gt;
-</literallayout></refsect1>
+<refsect1 id='authors'
+><title
+>Autoren</title>
+<literallayout
+>Rajko Albrecht &lt;ral@alwins-world.de&gt;
+</literallayout
+></refsect1>
 </refentry>
 

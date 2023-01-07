@@ -1,93 +1,162 @@
 <?xml version="1.0" ?>
 <!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-<!ENTITY % English "INCLUDE">
+<!ENTITY % German "INCLUDE">
 ]>
 
 <refentry lang="&language;" id='kdesvn1'>
 <refentryinfo>
-<title>kdesvn User's Manual</title>
-<author><personname>
-<firstname>Rajko</firstname>
-<surname>Albrecht</surname>
-</personname>
-<email>ral@alwins-world.de</email></author>
-<date>2016-05-22</date>
-<releaseinfo>kdesvn 2.1.0</releaseinfo>
+<title
+>kdesvn-Benutzerhandbuch</title>
+<author
+><personname
+> <firstname
+>Rajko</firstname
+> <surname
+>Albrecht</surname
+> </personname
+> <email
+>ral@alwins-world.de</email
+></author>
+<date
+>2016-05-22</date>
+<releaseinfo
+>kdesvn 2.1.0</releaseinfo>
 </refentryinfo>
 
 <refmeta>
-<refentrytitle><command>kdesvn</command></refentrytitle>
-<manvolnum>1</manvolnum>
+<refentrytitle
+><command
+>kdesvn</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
 </refmeta>
 
 <refnamediv>
-<refname><command>kdesvn</command></refname>
-<refpurpose>A Subversion client by KDE (standalone application)</refpurpose>
+<refname
+><command
+>kdesvn</command
+></refname>
+<refpurpose
+>Ein Subversion-Client von KDE (eigenständige Anwendung)</refpurpose>
 </refnamediv>
 <!-- body begins here -->
 <refsynopsisdiv id='synopsis'>
-<cmdsynopsis>
-  <command>kdesvn</command>
-    <arg choice="opt"><replaceable>options</replaceable></arg>
-    <arg choice="plain"><replaceable>exec</replaceable></arg>
-    <arg choice="plain"><replaceable>&lt;command&gt;</replaceable></arg>
-    <arg choice="opt"><replaceable>URL</replaceable></arg>
-</cmdsynopsis>
+<cmdsynopsis
+><command
+>kdesvn</command
+> <arg choice="opt"
+><replaceable
+>options</replaceable
+></arg
+> <arg choice="plain"
+><replaceable
+>exec</replaceable
+></arg
+> <arg choice="plain"
+><replaceable
+>&lt;command&gt;</replaceable
+></arg
+> <arg choice="opt"
+><replaceable
+>URL</replaceable
+></arg
+> </cmdsynopsis>
 </refsynopsisdiv>
 
 
-<refsect1 id='description'><title>Description</title>
-<para>A Subversion client by KDE (standalone application)</para>
+<refsect1 id='description'
+><title
+>Beschreibung</title>
+<para
+>Ein Subversion-Client von KDE (eigenständige Anwendung)</para>
 </refsect1>
 
-<refsect1 id='options'><title>Options</title>
+<refsect1 id='options'
+><title
+>Optionen</title>
 
-<refsect2 id='ss_arguments'><title>Arguments:</title>
+<refsect2 id='ss_arguments'
+><title
+>Argumente:</title>
 <variablelist>
   <varlistentry>
-  <term><emphasis>exec</emphasis> &lt;command&gt;</term>
-  <listitem><para>Execute subversion command ("exec help" for more information, opens KDE Help Center)</para>
+  <term
+><emphasis
+>exec</emphasis
+> &lt;command&gt;</term>
+  <listitem
+><para
+>Subversion-Befehl ausführen (siehe "exec help" für weitere Informationen)</para>
   </listitem>
   </varlistentry>
   <varlistentry>
-  <term><emphasis>URL</emphasis></term>
+  <term
+><emphasis
+>URL</emphasis
+></term>
   <listitem>
-<para>Path to local working copy or a repository.</para>
+<para
+>Pfad zur lokalen Arbeitskopie oder einem Repository.</para>
   </listitem>
   </varlistentry>
 </variablelist>
 </refsect2>
 
-<refsect2 id='options2'><title>Options:</title>
+<refsect2 id='options2'
+><title
+>Optionen:</title>
 <variablelist>
   <varlistentry>
-  <term><option>-r startrev[:endrev]</option></term>
+  <term
+><option
+>-r startrev[:endrev]</option
+></term>
   <listitem>
-<para>Execute single subversion command on specific revision(-range)</para>
+<para
+>Einzelnen Subversion-Befehl auf der spezifizierten Revision oder Revisionsbereich ausführen</para>
   </listitem>
   </varlistentry>
   <varlistentry>
-  <term><option>-R</option></term>
+  <term
+><option
+>-R</option
+></term>
   <listitem>
-<para>Ask for revision when executing single command</para>
+<para
+>Nach Revision fragen, wenn ein einzelner Befehl ausgeführt wird</para>
   </listitem>
   </varlistentry>
   <varlistentry>
-  <term><option>-f</option></term>
+  <term
+><option
+>-f</option
+></term>
   <listitem>
-<para>Force operation</para>
+<para
+>Ausführung erzwingen</para>
   </listitem>
   </varlistentry>
   <varlistentry>
-  <term><option>-o &lt;file&gt;</option></term>
+  <term
+><option
+>-o &lt;file&gt;</option
+></term>
   <listitem>
-<para>Save output of subversion command (eg <quote>cat</quote>) into file &lt;file&gt;</para>
+<para
+>Ausgabe des Subversion-Befehls (z.B. <quote
+>cat</quote
+>) in Datei &lt;file&gt; speichern</para>
   </listitem>
   </varlistentry>
   <varlistentry>
-  <term><option>-l &lt;number&gt;</option></term>
+  <term
+><option
+>-l &lt;number&gt;</option
+></term>
   <listitem>
-<para>Limit log output to &lt;number&gt;</para>
+<para
+>Log-Ausgabe auf &lt;number&gt; beschränken</para>
   </listitem>
   </varlistentry>
 </variablelist>
@@ -96,25 +165,41 @@
 </refsect1>
 
 <refsect1 id='example'>
-<title>Example</title>
-<para>kdesvn file:///<replaceable>path/to/local/working/copy</replaceable></para>
-<para>kdesvn http://<replaceable>remote/svn/project/trunk</replaceable></para>
+<title
+>Beispiel</title>
+<para
+>kdesvn file:///<replaceable
+>path/to/local/working/copy</replaceable
+></para>
+<para
+>kdesvn http://<replaceable
+>remote/svn/project/trunk</replaceable
+></para>
 </refsect1>
 
 <refsect1 id='see_also'>
-<title>See Also</title>
+<title
+>Siehe auch</title>
 <simplelist>
-<member>Full user documentation is available through the &khelpcenter;. You can also enter the &URL;
-<emphasis>help:/kdesvn/</emphasis> directly into &konqueror; or you can run <emphasis>`khelpcenter help:/kdesvn/'</emphasis>
-from the command-line.</member>
-<member>kf5options(7)</member>
-<member>qt5options(7)</member>
+<member
+>Die vollständige Dokumentation finden Sie im KDE-Hilfezentrum Sie können auch <emphasis
+>help:/kdesvn/</emphasis
+> in die Adressleiste von &konqueror; eingeben oder <emphasis
+>`khelpcenter help:/kdesvn/'</emphasis
+> auf der Befehlszeile eingeben.</member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
 </simplelist>
 </refsect1>
 
-<refsect1 id='authors'><title>Authors</title>
-<literallayout>
-Rajko Albrecht &lt;ral@alwins-world.de&gt;
-</literallayout></refsect1>
+<refsect1 id='authors'
+><title
+>Autoren</title>
+<literallayout
+>Rajko Albrecht &lt;ral@alwins-world.de&gt;
+</literallayout
+></refsect1>
 </refentry>
 

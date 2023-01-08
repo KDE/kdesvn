@@ -48,7 +48,8 @@ int main(int, char **)
     std::cout << "List 1 " << dlist.size() << std::endl;
     Q_FOREACH (const svn::DirEntry &entry, dlist) {
         QDateTime dt(svn::DateTime(entry.time()).toQDateTime());
-        std::cout << entry.name().toUtf8().data() << " " << entry.lastAuthor().toUtf8().data() << " " << entry.size() << " " << dt.toTime_t() << std::endl;
+        std::cout << entry.name().toUtf8().data() << " " << entry.lastAuthor().toUtf8().data() << " " << entry.size() << " " << dt.toSecsSinceEpoch()
+                  << std::endl;
     }
     try {
         dlist = m_Svnclient->list(svn::Path(p), svn::Revision::HEAD, svn::Revision::HEAD, svn::DepthImmediates, false);
@@ -61,7 +62,8 @@ int main(int, char **)
     std::cout << "List 2 " << dlist.size() << std::endl;
     Q_FOREACH (const svn::DirEntry &entry, dlist) {
         QDateTime dt = svn::DateTime(entry.time()).toQDateTime();
-        std::cout << entry.name().toUtf8().data() << " " << entry.lastAuthor().toUtf8().data() << " " << entry.size() << " " << dt.toTime_t() << std::endl;
+        std::cout << entry.name().toUtf8().data() << " " << entry.lastAuthor().toUtf8().data() << " " << entry.size() << " " << dt.toSecsSinceEpoch()
+                  << std::endl;
     }
     std::cout << "================" << std::endl;
     svn::StatusEntries slist;

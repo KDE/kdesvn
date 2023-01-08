@@ -38,8 +38,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED 11)
 add_definitions(-DTRANSLATION_DOMAIN="kdesvn")
 
 include(KDEInstallDirs)
-include(KDECompilerSettings)
 include(KDECMakeSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+
 include(FeatureSummary)
 include(ECMInstallIcons)
 include(KDEClangFormat)

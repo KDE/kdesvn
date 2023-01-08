@@ -28,8 +28,6 @@
 #include <QDir>
 #include <klocalizedstring.h>
 
-static const char description[] = I18N_NOOP("A Subversion Client by KDE (standalone application)");
-
 int main(int argc, char **argv)
 {
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
@@ -40,7 +38,7 @@ int main(int argc, char **argv)
     KAboutData aboutData(QStringLiteral("kdesvn"),
                          i18n("kdesvn"),
                          QStringLiteral(KDESVN_VERSION),
-                         i18n(description),
+                         i18n("A Subversion Client by KDE (standalone application)"),
                          KAboutLicense::GPL,
                          i18n("(C) 2005-2009 Rajko Albrecht,\n(C) 2015-2019 Christian Ehrlicher"));
     aboutData.addAuthor(i18n("Rajko Albrecht"), i18n("Developer"), QStringLiteral("ral@alwins-world.de"));

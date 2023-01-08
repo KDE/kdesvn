@@ -16,13 +16,11 @@
  #   Free Software Foundation, Inc.,                                       #
  #   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         #
  ####
+
+cmake_minimum_required(VERSION 3.16.0)
+
 project(kdesvn)
 set(PACKAGENAME "${CMAKE_PROJECT_NAME}")
-cmake_minimum_required(VERSION 3.1.0)
-
-if(POLICY CMP0063)
-  cmake_policy(SET CMP0063 NEW) # Honor visibility properties for all target types (since cmake 3.3)
-endif()
 
 set(QT_MIN_VERSION "5.15.2")
 set(KF_MIN_VERSION "5.98.0")

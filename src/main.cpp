@@ -35,10 +35,6 @@ int main(int argc, char **argv)
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QApplication app(argc, argv);
     KLocalizedString::setApplicationDomain("kdesvn");
-    app.setApplicationName(QStringLiteral("kdesvn"));
-    app.setApplicationDisplayName(QStringLiteral("kdesvn"));
-    app.setOrganizationDomain(QStringLiteral("kde.org"));
-    app.setApplicationVersion(QStringLiteral(KDESVN_VERSION));
     app.setWindowIcon(QIcon::fromTheme(QStringLiteral("kdesvn"), app.windowIcon()));
 
     KAboutData aboutData(QStringLiteral("kdesvn"),

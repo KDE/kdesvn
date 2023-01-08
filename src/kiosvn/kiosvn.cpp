@@ -565,19 +565,11 @@ svn::Path kio_svnProtocol::makeSvnPath(const QUrl &url) const
 KIO::UDSEntry kio_svnProtocol::createUDSEntry(const QString &filename, const QString &user, long long int size, bool isdir, const QDateTime &mtime)
 {
     KIO::UDSEntry entry;
-#if KIO_VERSION <= QT_VERSION_CHECK(5, 48, 0)
-    entry.insert(KIO::UDSEntry::UDS_NAME, filename);
-    entry.insert(KIO::UDSEntry::UDS_FILE_TYPE, isdir ? S_IFDIR : S_IFREG);
-    entry.insert(KIO::UDSEntry::UDS_SIZE, size);
-    entry.insert(KIO::UDSEntry::UDS_MODIFICATION_TIME, mtime.toSecsSinceEpoch());
-    entry.insert(KIO::UDSEntry::UDS_USER, user);
-#else
     entry.fastInsert(KIO::UDSEntry::UDS_NAME, filename);
     entry.fastInsert(KIO::UDSEntry::UDS_FILE_TYPE, isdir ? S_IFDIR : S_IFREG);
     entry.fastInsert(KIO::UDSEntry::UDS_SIZE, size);
     entry.fastInsert(KIO::UDSEntry::UDS_MODIFICATION_TIME, mtime.toSecsSinceEpoch());
     entry.fastInsert(KIO::UDSEntry::UDS_USER, user);
-#endif
     return entry;
 }
 

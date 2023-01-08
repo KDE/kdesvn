@@ -23,7 +23,6 @@
  ***************************************************************************/
 #include <iostream>
 #include <qcoreapplication.h>
-#include <qsql.h>
 #include <qsqldatabase.h>
 #include <qstringlist.h>
 #include <qtextstream.h>

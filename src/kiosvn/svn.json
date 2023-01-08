@@ -1,0 +1,214 @@
+{
+    "KDE-KIO-Protocols": {
+        "ksvn": {
+            "Icon": "remote",
+            "defaultMimetype": "application/octet-stream",
+            "deleteRecursive": true,
+            "deleting": true,
+            "input": "none",
+            "linking": false,
+            "listing": [
+                "Name",
+                "Size",
+                "Date",
+                "Owner"
+            ],
+            "makedir": true,
+            "maxInstances": 5,
+            "moving": true,
+            "output": "filesystem",
+            "protocol": "ksvn",
+            "reading": true,
+            "writing": true
+        },
+        "ksvn+file": {
+            "Icon": "remote",
+            "defaultMimetype": "application/octet-stream",
+            "deleteRecursive": true,
+            "deleting": true,
+            "input": "none",
+            "linking": false,
+            "listing": [
+                "Name",
+                "Size",
+                "Date",
+                "Owner"
+            ],
+            "makedir": true,
+            "maxInstances": 5,
+            "moving": true,
+            "output": "filesystem",
+            "protocol": "ksvn+file",
+            "reading": true,
+            "writing": true
+        },
+        "ksvn+http": {
+            "Icon": "remote",
+            "defaultMimetype": "application/octet-stream",
+            "deleteRecursive": true,
+            "deleting": true,
+            "input": "none",
+            "linking": false,
+            "listing": [
+                "Name",
+                "Size",
+                "Date",
+                "Owner"
+            ],
+            "makedir": true,
+            "maxInstances": 5,
+            "moving": true,
+            "output": "filesystem",
+            "protocol": "ksvn+http",
+            "reading": true,
+            "writing": true
+        },
+        "ksvn+https": {
+            "Icon": "remote",
+            "defaultMimetype": "application/octet-stream",
+            "deleteRecursive": true,
+            "deleting": true,
+            "input": "none",
+            "linking": false,
+            "listing": [
+                "Name",
+                "Size",
+                "Date",
+                "Owner"
+            ],
+            "makedir": true,
+            "maxInstances": 5,
+            "moving": true,
+            "output": "filesystem",
+            "protocol": "ksvn+https",
+            "reading": true,
+            "writing": true
+        },
+        "ksvn+ssh": {
+            "Icon": "remote",
+            "defaultMimetype": "application/octet-stream",
+            "deleteRecursive": true,
+            "deleting": true,
+            "input": "none",
+            "linking": false,
+            "listing": [
+                "Name",
+                "Size",
+                "Date",
+                "Owner"
+            ],
+            "makedir": true,
+            "maxInstances": 5,
+            "moving": true,
+            "output": "filesystem",
+            "protocol": "ksvn+ssh",
+            "reading": true,
+            "writing": true
+        },
+        "svn": {
+            "Icon": "remote",
+            "defaultMimetype": "application/octet-stream",
+            "deleteRecursive": true,
+            "deleting": true,
+            "input": "none",
+            "linking": false,
+            "listing": [
+                "Name",
+                "Size",
+                "Date",
+                "Owner"
+            ],
+            "makedir": true,
+            "maxInstances": 5,
+            "moving": true,
+            "output": "filesystem",
+            "protocol": "svn",
+            "reading": true,
+            "writing": true
+        },
+        "svn+file": {
+            "Icon": "remote",
+            "defaultMimetype": "application/octet-stream",
+            "deleteRecursive": true,
+            "deleting": true,
+            "input": "none",
+            "linking": false,
+            "listing": [
+                "Name",
+                "Size",
+                "Date",
+                "Owner"
+            ],
+            "makedir": true,
+            "maxInstances": 5,
+            "moving": true,
+            "output": "filesystem",
+            "protocol": "svn+file",
+            "reading": true,
+            "writing": true
+        },
+        "svn+http": {
+            "Icon": "remote",
+            "defaultMimetype": "application/octet-stream",
+            "deleteRecursive": true,
+            "deleting": true,
+            "input": "none",
+            "linking": false,
+            "listing": [
+                "Name",
+                "Size",
+                "Date",
+                "Owner"
+            ],
+            "makedir": true,
+            "maxInstances": 5,
+            "moving": true,
+            "output": "filesystem",
+            "protocol": "svn+http",
+            "reading": true,
+            "writing": true
+        },
+        "svn+https": {
+            "Icon": "remote",
+            "defaultMimetype": "application/octet-stream",
+            "deleteRecursive": true,
+            "deleting": true,
+            "input": "none",
+            "linking": false,
+            "listing": [
+                "Name",
+                "Size",
+                "Date",
+                "Owner"
+            ],
+            "makedir": true,
+            "maxInstances": 5,
+            "moving": true,
+            "output": "filesystem",
+            "protocol": "svn+https",
+            "reading": true,
+            "writing": true
+        },
+        "svn+ssh": {
+            "Icon": "remote",
+            "defaultMimetype": "application/octet-stream",
+            "deleteRecursive": true,
+            "deleting": true,
+            "input": "none",
+            "linking": false,
+            "listing": [
+                "Name",
+                "Size",
+                "Date",
+                "Owner"
+            ],
+            "makedir": true,
+            "maxInstances": 5,
+            "moving": true,
+            "output": "filesystem",
+            "protocol": "svn+ssh",
+            "reading": true,
+            "writing": true
+        }
+    }
+}

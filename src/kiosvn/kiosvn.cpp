@@ -1145,3 +1145,12 @@ void kio_svnProtocol::stopOp(const QString &message)
 }
 
 } // namespace KIO
+
+// Pseudo plugin class to embed metadata
+class KIOPluginForMetaData : public QObject
+{
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.kde.kio.worker.svn" FILE "svn.json")
+};
+
+#include "kiosvn.moc"

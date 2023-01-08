@@ -48,10 +48,4 @@ set_target_properties(kio_ksvn
     PROPERTIES
     LINK_FLAG "${LINK_NO_UNDEFINED}")
 
-install(TARGETS kio_ksvn
-    LIBRARY DESTINATION ${KDE_INSTALL_PLUGINDIR} )
-
-file(GLOB PROTFILES *.protocol)
-
-install(FILES ${PROTFILES}
-    DESTINATION  ${KDE_INSTALL_KSERVICESDIR} )
+install(TARGETS kio_ksvn  DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/kio )

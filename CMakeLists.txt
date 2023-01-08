@@ -29,12 +29,6 @@ set(KDE_COMPILERSETTINGS_LEVEL "5.84.0")
 # Where to look for Findxxx.cmake modules
 find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_SOURCE_DIR}/src/svnqt/cmake)
-# Automatically include the current source and binary dirs
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-set(CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED 11)
 add_definitions(-DTRANSLATION_DOMAIN="kdesvn")
 
 include(KDEInstallDirs)

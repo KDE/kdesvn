@@ -6,6 +6,6 @@ macro(BUILD_TEST tname)
   endif()
   add_executable(${tname} ${${tname}-src})
   target_link_libraries(${tname} svnqt Qt::Core Qt::Sql)
-  add_test(${tname} ${CMAKE_CURRENT_BINARY_DIR}/${tname})
+  add_test(NAME ${tname} COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${tname})
 endmacro()
 

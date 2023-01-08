@@ -23,8 +23,8 @@ configure_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/testconfig.h.in
     ${CMAKE_CURRENT_BINARY_DIR}/testconfig.h
 )
-add_test(rmrepo "/bin/rm" "-rvf" "${CMAKE_CURRENT_BINARY_DIR}/repo")
-add_test(rmco "/bin/rm" "-rvf" "${CMAKE_CURRENT_BINARY_DIR}/co")
+add_test(NAME rmrepo COMMAND "/bin/rm" "-rvf" "${CMAKE_CURRENT_BINARY_DIR}/repo")
+add_test(NAME rmco COMMAND "/bin/rm" "-rvf" "${CMAKE_CURRENT_BINARY_DIR}/co")
 build_test(crepo)
 build_test(lsdir)
 build_test(ckpath)

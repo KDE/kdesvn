@@ -161,6 +161,7 @@ Q_DECL_EXPORT int kdemain(int argc, char **argv);
 
 int kdemain(int argc, char **argv)
 {
+    QCoreApplication app(argc, argv);
     QCoreApplication::setApplicationName(QLatin1String("kio_ksvn"));
     qCDebug(KDESVN_LOG) << "*** Starting kio_ksvn " << Qt::endl;
 

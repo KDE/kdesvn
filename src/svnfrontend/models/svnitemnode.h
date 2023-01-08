@@ -72,7 +72,7 @@ class SvnItemModelNodeDir final : public SvnItemModelNode
 public:
     SvnItemModelNodeDir(SvnActions *, MainTreeWidget *);
     SvnItemModelNodeDir(SvnItemModelNodeDir *_parent, SvnActions *, MainTreeWidget *);
-    virtual ~SvnItemModelNodeDir();
+    ~SvnItemModelNodeDir() override;
 
     // SvnItemModelNode
     bool NodeIsDir() const override;

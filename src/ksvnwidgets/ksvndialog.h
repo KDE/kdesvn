@@ -28,7 +28,7 @@ class KSvnDialog : public QDialog
     Q_OBJECT
 public:
     explicit KSvnDialog(const QString &configGroupName, QWidget *parent = nullptr);
-    ~KSvnDialog();
+    ~KSvnDialog() override;
 
 protected:
     void setDefaultButton(QPushButton *defaultButton);

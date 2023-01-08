@@ -29,7 +29,7 @@ class SubversionSettings_impl : public QWidget, public Ui::SubversionSettings
 
 public:
     explicit SubversionSettings_impl(QWidget *parent = nullptr);
-    ~SubversionSettings_impl();
+    ~SubversionSettings_impl() override;
     /*$PUBLIC_FUNCTIONS$*/
 
 public slots:

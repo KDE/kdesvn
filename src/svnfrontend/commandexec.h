@@ -40,7 +40,7 @@ class CommandExec : public QObject
     Q_OBJECT
 public:
     explicit CommandExec(QObject *parent);
-    ~CommandExec();
+    ~CommandExec() override;
     virtual int exec(const QCommandLineParser *parser);
 
 protected slots:

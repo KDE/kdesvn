@@ -27,7 +27,7 @@ class RevisiontreeSettingsDlg_impl : public QWidget, public Ui::RevisionTreeSett
     Q_OBJECT
 public:
     explicit RevisiontreeSettingsDlg_impl(QWidget *parent = nullptr);
-    ~RevisiontreeSettingsDlg_impl();
+    ~RevisiontreeSettingsDlg_impl() override;
 };
 
 #endif

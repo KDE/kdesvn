@@ -57,7 +57,7 @@ public:
     /**
      * Destructor
      */
-    ~kdesvnView();
+    ~kdesvnView() override;
 
     /**
      * Random 'get' function

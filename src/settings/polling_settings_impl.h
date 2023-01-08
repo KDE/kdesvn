@@ -29,7 +29,7 @@ class PollingSettings_impl : public QWidget, public Ui::PollingSettings
 
 public:
     explicit PollingSettings_impl(QWidget *parent = nullptr);
-    ~PollingSettings_impl();
+    ~PollingSettings_impl() override;
     /*$PUBLIC_FUNCTIONS$*/
 
 public slots:

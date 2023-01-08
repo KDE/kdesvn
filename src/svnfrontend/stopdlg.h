@@ -43,7 +43,7 @@ class StopDlg : public QDialog
     Q_OBJECT
 public:
     StopDlg(CContextListener *listener, QWidget *parent, const QString &caption, const QString &text);
-    ~StopDlg();
+    ~StopDlg() override;
 
 protected:
     int m_MinDuration;

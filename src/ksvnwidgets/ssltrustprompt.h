@@ -31,7 +31,7 @@ class SslTrustPrompt : public KSvnDialog
     Q_OBJECT
 private:
     explicit SslTrustPrompt(const QString &, const QString &text, QWidget *parent = nullptr);
-    ~SslTrustPrompt();
+    ~SslTrustPrompt() override;
 
 public:
     static bool sslTrust(const QString &host,

@@ -30,7 +30,7 @@ class LogChangePathItem : public QTreeWidgetItem
 {
 public:
     explicit LogChangePathItem(const svn::LogChangePathEntry &, QTreeWidget *view = nullptr);
-    virtual ~LogChangePathItem()
+    ~LogChangePathItem() override
     {
     }
 

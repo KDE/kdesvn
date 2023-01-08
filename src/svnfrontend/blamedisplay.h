@@ -36,7 +36,7 @@ class BlameDisplay : public KSvnDialog
     Q_OBJECT
 private:
     explicit BlameDisplay(const QString &what, const svn::AnnotatedFile &blame, SimpleLogCb *cb, QWidget *parent = nullptr);
-    ~BlameDisplay();
+    ~BlameDisplay() override;
 
     void setContent(const QString &what, const svn::AnnotatedFile &blame);
     void showCommit(BlameTreeItem *bti);

@@ -36,7 +36,7 @@ class EditPropsDlg : public KSvnDialog
     Q_OBJECT
 public:
     explicit EditPropsDlg(bool bAddMode, QWidget *parent = nullptr);
-    ~EditPropsDlg();
+    ~EditPropsDlg() override;
 
     QString propName() const;
     QString propValue() const;

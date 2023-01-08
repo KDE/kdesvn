@@ -62,7 +62,7 @@ public:
     enum ThreadType { checkupdatethread, fillcachethread, checkmodifiedthread };
 
     explicit SvnActions(ItemDisplay *parent, bool processes_blocked = false);
-    ~SvnActions();
+    ~SvnActions() override;
     void reInitClient();
     svn::ClientP svnclient();
     void prepareUpdate(bool ask);

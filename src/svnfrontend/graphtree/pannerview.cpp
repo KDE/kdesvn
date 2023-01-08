@@ -29,7 +29,7 @@ class GraphPanMark : public QGraphicsRectItem
 {
 public:
     GraphPanMark(QGraphicsItem *p = nullptr);
-    ~GraphPanMark();
+    ~GraphPanMark() override;
     int type() const override;
     void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
 };

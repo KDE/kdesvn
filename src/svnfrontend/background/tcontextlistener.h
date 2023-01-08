@@ -40,7 +40,7 @@ class ThreadContextListener : public CContextListener
 public:
     explicit ThreadContextListener(QObject *parent);
 
-    ~ThreadContextListener();
+    ~ThreadContextListener() override;
 
     // called from a thread != main thread
     bool contextGetLogin(const QString &realm, QString &username, QString &password, bool &maySave) override;

@@ -29,7 +29,7 @@ class CmdExecSettings_impl : public QWidget, public Ui::CmdExecSettings
 
 public:
     explicit CmdExecSettings_impl(QWidget *parent = nullptr);
-    ~CmdExecSettings_impl();
+    ~CmdExecSettings_impl() override;
     /*$PUBLIC_FUNCTIONS$*/
 
 public slots:

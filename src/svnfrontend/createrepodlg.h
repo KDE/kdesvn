@@ -34,7 +34,7 @@ class CreaterepoDlg : public KSvnDialog
     Q_OBJECT
 public:
     explicit CreaterepoDlg(QWidget *parent = nullptr);
-    ~CreaterepoDlg();
+    ~CreaterepoDlg() override;
     svn::repository::CreateRepoParameter parameter() const;
     bool createMain() const;
     QString targetDir() const;

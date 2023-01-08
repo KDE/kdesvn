@@ -54,7 +54,7 @@ public:
     /**
      * Default Destructor
      */
-    ~kdesvn();
+    ~kdesvn() override;
 
     void openBookmark(const KBookmark &bm, Qt::MouseButtons mb, Qt::KeyboardModifiers km) override;
     QUrl currentUrl() const override;

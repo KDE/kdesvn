@@ -38,10 +38,10 @@ public:
 
 private:
     explicit UrlDlg(QWidget *parent = nullptr);
-    ~UrlDlg();
+    ~UrlDlg() override;
 
 private slots:
-    void accept() override final;
+    void accept() final;
     void slotTextChanged(const QString &);
 
 private:

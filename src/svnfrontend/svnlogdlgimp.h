@@ -40,7 +40,7 @@ class SvnLogDlgImp : public QDialog, public Ui::LogDialog, public SimpleLogCb
     Q_OBJECT
 public:
     SvnLogDlgImp(SvnActions *ac, bool modal, QWidget *parent = nullptr);
-    ~SvnLogDlgImp();
+    ~SvnLogDlgImp() override;
     void dispLog(const svn::LogEntriesMapPtr &log, const QString &what, const QString &root, const svn::Revision &peg, const QString &pegUrl);
     void saveSize();
     bool getSingleLog(svn::LogEntry &t, const svn::Revision &r, const QString &what, const svn::Revision &peg, QString &root) override;

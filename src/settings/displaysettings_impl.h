@@ -27,7 +27,7 @@ class DisplaySettings_impl : public QWidget, public Ui::DisplaySettings
     Q_OBJECT
 public:
     explicit DisplaySettings_impl(QWidget *parent = nullptr);
-    ~DisplaySettings_impl();
+    ~DisplaySettings_impl() override;
 };
 
 #endif

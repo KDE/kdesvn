@@ -31,7 +31,7 @@ class DiffBrowser : public QTextBrowser
 
 public:
     explicit DiffBrowser(QWidget *parent = nullptr);
-    ~DiffBrowser();
+    ~DiffBrowser() override;
 
 public slots:
     void setText(const QByteArray &ex);

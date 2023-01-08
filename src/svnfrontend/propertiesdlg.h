@@ -38,7 +38,7 @@ class PropertiesDlg : public KSvnDialog
     Q_OBJECT
 public:
     PropertiesDlg(SvnItem *which, const svn::ClientP &aClient, const svn::Revision &aRev, QWidget *parent = nullptr);
-    ~PropertiesDlg();
+    ~PropertiesDlg() override;
 
     void changedItems(svn::PropertiesMap &toSet, QStringList &toDelete);
 

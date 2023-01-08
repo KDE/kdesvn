@@ -46,7 +46,7 @@ class SvnItemModel : public QAbstractItemModel
     Q_OBJECT
 public:
     explicit SvnItemModel(MainTreeWidget *display, QObject *parent = nullptr);
-    ~SvnItemModel();
+    ~SvnItemModel() override;
 
     void clear();
 

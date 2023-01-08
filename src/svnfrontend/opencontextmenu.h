@@ -33,7 +33,7 @@ class OpenContextmenu : public QMenu
     Q_OBJECT
 public:
     OpenContextmenu(const QUrl &aPath, const KService::List &aList, QWidget *parent);
-    ~OpenContextmenu();
+    ~OpenContextmenu() override;
 
 protected:
     QUrl m_Path;

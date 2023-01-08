@@ -36,7 +36,7 @@ class SshAgent : public QObject
 
 public:
     explicit SshAgent(QObject *parent = nullptr);
-    ~SshAgent();
+    ~SshAgent() override;
 
     bool querySshAgent();
     bool addSshIdentities(bool force = false);

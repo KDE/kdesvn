@@ -44,7 +44,7 @@ class KioByteStream : public svn::stream::SvnStream
 public:
     KioByteStream(StreamWrittenCb *, const QString &filename);
 
-    ~KioByteStream();
+    ~KioByteStream() override;
 
     bool isOk() const override;
     long write(const char *data, const unsigned long max) override;

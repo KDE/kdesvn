@@ -34,7 +34,7 @@ class KioListener : public svn::ContextListener
 {
 public:
     explicit KioListener(KIO::kio_svnProtocol *_par);
-    virtual ~KioListener();
+    ~KioListener() override;
 
     /* context-listener methods */
     bool contextGetLogin(const QString &realm, QString &username, QString &password, bool &maySave) override;

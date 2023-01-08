@@ -36,7 +36,7 @@ class GetInfoThread : public SvnThread
     Q_OBJECT
 public:
     explicit GetInfoThread(QObject *parent);
-    ~GetInfoThread();
+    ~GetInfoThread() override;
     void run() override;
     void cancelMe() override;
 

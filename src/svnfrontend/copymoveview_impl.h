@@ -29,7 +29,7 @@ class CopyMoveView_impl : public QWidget, public Ui::CopyMoveView
 
 public:
     CopyMoveView_impl(const QString &baseName, const QString &sourceName, bool move, QWidget *parent);
-    ~CopyMoveView_impl();
+    ~CopyMoveView_impl() override;
     QString newName() const;
     bool force() const;
     static QString getMoveCopyTo(bool *ok, bool move, const QString &old, const QString &base, QWidget *parent = nullptr);

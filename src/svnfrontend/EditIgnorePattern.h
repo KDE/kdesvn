@@ -34,7 +34,7 @@ class EditIgnorePattern : public QWidget, public Ui::EditIgnorePattern
 
 public:
     explicit EditIgnorePattern(QWidget *parent = nullptr);
-    ~EditIgnorePattern();
+    ~EditIgnorePattern() override;
 
     QStringList items() const;
     svn::Depth depth() const;

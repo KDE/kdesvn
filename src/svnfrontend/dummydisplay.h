@@ -29,7 +29,7 @@ class DummyDisplay : public ItemDisplay
 {
 public:
     DummyDisplay();
-    virtual ~DummyDisplay();
+    ~DummyDisplay() override;
     QWidget *realWidget() override;
     SvnItem *Selected() const override;
     SvnItemList SelectionList() const override;

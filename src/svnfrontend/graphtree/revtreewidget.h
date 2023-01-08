@@ -41,7 +41,7 @@ class RevTreeWidget : public QWidget
 
 public:
     RevTreeWidget(const svn::ClientP &cl, QWidget *parent = nullptr);
-    ~RevTreeWidget();
+    ~RevTreeWidget() override;
 
     QSplitter *m_Splitter;
     RevGraphView *m_RevGraphView;

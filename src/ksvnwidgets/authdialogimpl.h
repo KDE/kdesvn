@@ -30,7 +30,7 @@ class AuthDialogImpl : public QDialog
     Q_OBJECT
 public:
     AuthDialogImpl(const QString &realm, const QString &user, QWidget *parent = nullptr);
-    ~AuthDialogImpl();
+    ~AuthDialogImpl() override;
 
     QString Username() const;
     QString Password() const;

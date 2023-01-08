@@ -35,7 +35,7 @@ class CContextListener : public QObject, public svn::ContextListener
     Q_OBJECT
 public:
     explicit CContextListener(QObject *parent = nullptr);
-    ~CContextListener();
+    ~CContextListener() override;
 
     /* context-listener methods */
     bool contextGetLogin(const QString &realm, QString &username, QString &password, bool &maySave) override;

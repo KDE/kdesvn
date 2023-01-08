@@ -47,21 +47,21 @@ class kio_svnProtocol : public KIO::SlaveBase, public StreamWrittenCb
 {
 public:
     kio_svnProtocol(const QByteArray &pool_socket, const QByteArray &app_socket);
-    virtual ~kio_svnProtocol();
+    ~kio_svnProtocol() override;
     // KIO::SlaveBase
-    virtual void listDir(const QUrl &url) override;
-    virtual void stat(const QUrl &url) override;
-    virtual void get(const QUrl &url) override;
-    virtual void mkdir(const QUrl &url, int permissions) override;
-    virtual void put(const QUrl &url, int permissions, KIO::JobFlags flags) override;
-    virtual void rename(const QUrl &src, const QUrl &target, KIO::JobFlags flags) override;
-    virtual void del(const QUrl &url, bool isfile) override;
-    virtual void copy(const QUrl &src, const QUrl &dest, int permissions, KIO::JobFlags flags) override;
-    virtual void special(const QByteArray &data) override;
+    void listDir(const QUrl &url) override;
+    void stat(const QUrl &url) override;
+    void get(const QUrl &url) override;
+    void mkdir(const QUrl &url, int permissions) override;
+    void put(const QUrl &url, int permissions, KIO::JobFlags flags) override;
+    void rename(const QUrl &src, const QUrl &target, KIO::JobFlags flags) override;
+    void del(const QUrl &url, bool isfile) override;
+    void copy(const QUrl &src, const QUrl &dest, int permissions, KIO::JobFlags flags) override;
+    void special(const QByteArray &data) override;
     // StreamWrittenCb
-    virtual void streamWritten(const KIO::filesize_t current) override;
-    virtual void streamPushData(const QByteArray &streamData) override;
-    virtual void streamSendMime(const QMimeType &mt) override;
+    void streamWritten(const KIO::filesize_t current) override;
+    void streamPushData(const QByteArray &streamData) override;
+    void streamSendMime(const QMimeType &mt) override;
 
     void contextProgress(long long int current, long long int max);
     void listSendDirEntry(const svn::DirEntry &);

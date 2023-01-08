@@ -39,7 +39,7 @@ protected:
 
 public:
     explicit Commitmsg_impl(QWidget *parent = nullptr);
-    ~Commitmsg_impl();
+    ~Commitmsg_impl() override;
 
     QString getMessage() const;
     bool isKeeplocks() const;

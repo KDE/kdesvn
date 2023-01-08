@@ -32,7 +32,7 @@ class KdesvndListener : public svn::ContextListener
 
 public:
     explicit KdesvndListener(kdesvnd *p);
-    virtual ~KdesvndListener();
+    ~KdesvndListener() override;
     /* context-listener methods */
     bool contextGetLogin(const QString &realm, QString &username, QString &password, bool &maySave) override;
     bool contextGetSavedLogin(const QString &realm, QString &username, QString &password) override;
@@ -49,7 +49,7 @@ public:
 
     bool contextCancel() override;
     bool contextGetLogMessage(QString &msg, const svn::CommitItemList &) override;
-    virtual svn::ContextListener::SslServerTrustAnswer contextSslServerTrustPrompt(const SslServerTrustData &data, apr_uint32_t &acceptedFailures) override;
+    svn::ContextListener::SslServerTrustAnswer contextSslServerTrustPrompt(const SslServerTrustData &data, apr_uint32_t &acceptedFailures) override;
     bool contextSslClientCertPrompt(QString &certFile) override;
     bool contextLoadSslClientCertPw(QString &password, const QString &realm) override;
     bool contextSslClientCertPwPrompt(QString &password, const QString &realm, bool &maySave) override;

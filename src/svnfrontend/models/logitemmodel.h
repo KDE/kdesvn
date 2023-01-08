@@ -75,10 +75,10 @@ class SvnLogSortModel final : public QSortFilterProxyModel
 public:
     using QSortFilterProxyModel::QSortFilterProxyModel;
 
-    void setSourceModel(QAbstractItemModel *sourceModel) override final;
+    void setSourceModel(QAbstractItemModel *sourceModel) final;
 
 protected:
-    bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override final;
+    bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const final;
 
 private:
     SvnLogModel *m_sourceModel = nullptr;

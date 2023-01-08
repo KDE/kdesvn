@@ -39,7 +39,7 @@ class MainTreeWidget : public QWidget, public Ui::mainTreeWidget, public ItemDis
     Q_OBJECT
 public:
     explicit MainTreeWidget(KActionCollection *aCollection, QWidget *parent = nullptr, Qt::WindowFlags f = {});
-    ~MainTreeWidget();
+    ~MainTreeWidget() override;
 
     QWidget *realWidget() override;
     SvnItem *Selected() const override;

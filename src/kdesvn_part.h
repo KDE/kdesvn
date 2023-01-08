@@ -56,7 +56,7 @@ public:
     /**
      * Destructor
      */
-    ~kdesvnpart();
+    ~kdesvnpart() override;
     bool closeUrl() override;
 
 Q_SIGNALS:
@@ -108,7 +108,7 @@ class KdesvnBrowserExtension : public KParts::BrowserExtension
     Q_OBJECT
 public:
     explicit KdesvnBrowserExtension(kdesvnpart *);
-    ~KdesvnBrowserExtension();
+    ~KdesvnBrowserExtension() override;
 
 public slots:
     void properties();

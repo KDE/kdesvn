@@ -33,7 +33,7 @@ class RevertForm : public KSvnDialog
     Q_OBJECT
 public:
     explicit RevertForm(const QStringList &files, QWidget *parent = nullptr);
-    ~RevertForm();
+    ~RevertForm() override;
 
     svn::Depth getDepth() const;
 

@@ -102,6 +102,8 @@ kde_enable_exceptions()
 
 include_directories(
     ${CMAKE_BINARY_DIR}
+)
+include_directories(SYSTEM
     ${APR_INCLUDE_DIR}
     ${APU_INCLUDE_DIR}
     ${SUBVERSION_INCLUDE_DIR}

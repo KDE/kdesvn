@@ -43,6 +43,8 @@
 #include "svnqt/targets.h"
 #include "svnqt/url.h"
 
+#include <KMessageBox>
+#include <KMessageBox_KDESvnCompat>
 #include <kactioncollection.h>
 #include <kapplicationtrader.h>
 #include <kauthorized.h>
@@ -52,7 +54,6 @@
 #include <kio/jobuidelegatefactory.h>
 #include <kjobuidelegate.h>
 #include <kjobwidgets.h>
-#include <kmessagebox.h>
 #include <unistd.h>
 
 #include <QApplication>
@@ -1598,11 +1599,15 @@ void MainTreeWidget::slotUnlock()
         KMessageBox::error(this, i18n("Nothing selected for unlock"));
         return;
     }
-    KMessageBox::ButtonCode res = KMessageBox::questionYesNoCancel(this, i18n("Break lock or ignore missing locks?"), i18n("Unlocking items"));
+    KMessageBox::ButtonCode res = KMessageBox::questionTwoActionsCancel(this,
+                                                                        i18n("Break lock or ignore missing locks?"),
+                                                                        i18n("Unlocking items"),
+                                                                        KGuiItem(i18nc("@action:button", "Break Lock")),
+                                                                        KGuiItem(i18nc("@action:button", "Ignore")));
     if (res == KMessageBox::Cancel) {
         return;
     }
-    bool breakit = res == KMessageBox::Yes;
+    const bool breakit = (res == KMessageBox::PrimaryAction);
 
     QStringList displist;
     for (const SvnItem *item : lst) {

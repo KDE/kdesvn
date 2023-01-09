@@ -38,6 +38,7 @@
 
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <KMessageBox_KDESvnCompat>
 
 DbOverview::DbOverview(const svn::ClientP &aClient, QWidget *parent)
     : KSvnDialog(QLatin1String("db_overview_dlg"), parent)
@@ -124,9 +125,12 @@ QString DbOverview::selectedRepository() const
 
 void DbOverview::deleteCacheItems()
 {
-    KMessageBox::ButtonCode i =
-        KMessageBox::questionYesNo(this, i18n("Really clean cache for repository\n%1?", selectedRepository()), i18n("Clean repository cache"));
-    if (i != KMessageBox::Yes) {
+    KMessageBox::ButtonCode i = KMessageBox::questionTwoActions(this,
+                                                                i18n("Really clean cache for repository\n%1?", selectedRepository()),
+                                                                i18n("Clean repository cache"),
+                                                                KGuiItem(i18nc("@action:button", "Delete Cache")),
+                                                                KStandardGuiItem::cancel());
+    if (i != KMessageBox::PrimaryAction) {
         return;
     }
     try {
@@ -140,9 +144,12 @@ void DbOverview::deleteCacheItems()
 
 void DbOverview::deleteRepository()
 {
-    KMessageBox::ButtonCode i =
-        KMessageBox::questionYesNo(this, i18n("Really clean cache and data for repository\n%1?", selectedRepository()), i18n("Delete repository"));
-    if (i != KMessageBox::Yes) {
+    KMessageBox::ButtonCode i = KMessageBox::questionTwoActions(this,
+                                                                i18n("Really clean cache and data for repository\n%1?", selectedRepository()),
+                                                                i18n("Delete repository"),
+                                                                KGuiItem(i18nc("@action:button", "Delete Repository")),
+                                                                KStandardGuiItem::cancel());
+    if (i != KMessageBox::PrimaryAction) {
         return;
     }
     try {

@@ -368,7 +368,8 @@ void CContextListener::maySavePlaintext(svn_boolean_t *may_save_plaintext, const
     if (may_save_plaintext) {
         QString question = i18n("%1\nReally store password as plain text?", realmstring);
         QString head = i18n("Save password");
-        if (KMessageBox::questionYesNo(nullptr, question, head) == KMessageBox::Yes) {
+        KGuiItem contButton(i18nc("@action:button", "Store in Plain Text"));
+        if (KMessageBox::warningContinueCancel(nullptr, question, head, contButton) == KMessageBox::Continue) {
             *may_save_plaintext = true;
         } else {
             *may_save_plaintext = false;

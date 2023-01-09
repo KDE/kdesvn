@@ -26,6 +26,7 @@
 #include <KFindDialog>
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <KMessageBox_KDESvnCompat>
 #include <KStandardGuiItem>
 #include <QFileDialog>
 
@@ -167,25 +168,25 @@ void DiffBrowser::doSearch(const QString &to_find_string, bool back)
         }
         QWidget *_parent = m_srchdialog->isVisible() ? m_srchdialog : parentWidget();
         if (!back) {
-            KMessageBox::ButtonCode query = KMessageBox::questionYesNo(_parent,
-                                                                       i18n("End of document reached.\n"
-                                                                            "Continue from the beginning?"),
-                                                                       i18n("Find"),
-                                                                       KStandardGuiItem::yes(),
-                                                                       KStandardGuiItem::no());
-            if (query == KMessageBox::Yes) {
+            KMessageBox::ButtonCode query = KMessageBox::questionTwoActions(_parent,
+                                                                            i18n("End of document reached.\n"
+                                                                                 "Continue from the beginning?"),
+                                                                            i18n("Find"),
+                                                                            KStandardGuiItem::cont(),
+                                                                            KStandardGuiItem::cancel());
+            if (query == KMessageBox::PrimaryAction) {
                 moveCursor(QTextCursor::Start);
             } else {
                 break;
             }
         } else {
-            int query = KMessageBox::questionYesNo(_parent,
-                                                   i18n("Beginning of document reached.\n"
-                                                        "Continue from the end?"),
-                                                   i18n("Find"),
-                                                   KStandardGuiItem::yes(),
-                                                   KStandardGuiItem::no());
-            if (query == KMessageBox::Yes) {
+            int query = KMessageBox::questionTwoActions(_parent,
+                                                        i18n("Beginning of document reached.\n"
+                                                             "Continue from the end?"),
+                                                        i18n("Find"),
+                                                        KStandardGuiItem::cont(),
+                                                        KStandardGuiItem::cancel());
+            if (query == KMessageBox::PrimaryAction) {
                 moveCursor(QTextCursor::End);
             } else {
                 break;

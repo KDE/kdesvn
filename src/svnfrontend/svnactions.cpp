@@ -65,9 +65,10 @@
 
 #include <KApplicationTrader>
 #include <KIO/ApplicationLauncherJob>
+#include <KMessageBox>
+#include <KMessageBox_KDESvnCompat>
 #include <kconfig.h>
 #include <klocalizedstring.h>
-#include <kmessagebox.h>
 
 #include <QApplication>
 #include <QDesktopServices>
@@ -1571,8 +1572,13 @@ bool SvnActions::addItems(const svn::Paths &items, svn::Depth depth)
 
 bool SvnActions::makeDelete(const QStringList &w)
 {
-    KMessageBox::ButtonCode answer = KMessageBox::questionYesNoList(nullptr, i18n("Really delete these entries?"), w, i18n("Delete from repository"));
-    if (answer != KMessageBox::Yes) {
+    KMessageBox::ButtonCode answer = KMessageBox::warningTwoActionsList(nullptr,
+                                                                        i18n("Really delete these entries?"),
+                                                                        w,
+                                                                        i18n("Delete from repository"),
+                                                                        KStandardGuiItem::del(),
+                                                                        KStandardGuiItem::cancel());
+    if (answer != KMessageBox::PrimaryAction) {
         return false;
     }
     return makeDelete(svn::Targets::fromStringList(w));

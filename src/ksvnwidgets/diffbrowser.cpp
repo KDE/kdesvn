@@ -90,11 +90,6 @@ void DiffBrowser::saveDiff()
         return;
     }
     QFile tfile(saveTo);
-    if (tfile.exists()) {
-        if (KMessageBox::warningYesNo(QApplication::activeModalWidget(), i18n("File %1 exists - overwrite?", saveTo)) != KMessageBox::Yes) {
-            return;
-        }
-    }
     tfile.open(QIODevice::Truncate | QIODevice::WriteOnly | QIODevice::Unbuffered);
     tfile.write(m_content);
 }

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-31 00:48+0000\n"
+"POT-Creation-Date: 2023-01-09 00:58+0000\n"
 "PO-Revision-Date: 2022-12-19 10:30+0100\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -257,7 +257,7 @@ msgstr ""
 msgid "Original author and maintainer"
 msgstr "Ursprünglicher Autor und Betreuer"
 
-#: src/kdesvn_part.cpp:292 src/main.cpp:50 src/main.cpp:51
+#: src/kdesvn_part.cpp:292 src/main.cpp:44 src/main.cpp:45
 #, kde-format
 msgid "Developer"
 msgstr "Entwickler"
@@ -526,7 +526,7 @@ msgstr "Abzug beendet."
 msgid "Inserted %v not cached log entries of %m."
 msgstr "%v von %m nicht zwischengespeicherten Protokolleinträgen eingefügt."
 
-#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:808
+#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:801
 #, kde-format
 msgid "Wrong or missing log (may cancel pressed)."
 msgstr "Fehlerhaftes oder fehlendes Protokoll, vielleicht Abbrechen gedrückt."
@@ -645,80 +645,80 @@ msgstr "%1 wird gesetzt."
 msgid "Transmitting file data "
 msgstr "Dateidaten werden übertragen."
 
-#: src/kiosvn/kiosvn.cpp:297 src/kiosvn/kiosvn.cpp:351
-#: src/kiosvn/kiosvn.cpp:502
+#: src/kiosvn/kiosvn.cpp:298 src/kiosvn/kiosvn.cpp:352
+#: src/kiosvn/kiosvn.cpp:503
 #, kde-format
 msgid "Can only write on HEAD revision."
 msgstr "Es kann nur auf HEAD-Revision geschrieben werden."
 
-#: src/kiosvn/kiosvn.cpp:338
+#: src/kiosvn/kiosvn.cpp:339
 #, kde-format
 msgid "Renaming %1 to %2 successful"
 msgstr "%1 erfolgreich in %2 umbenannt"
 
-#: src/kiosvn/kiosvn.cpp:372
+#: src/kiosvn/kiosvn.cpp:373
 #, kde-format
 msgid "Overwriting existing items is disabled in settings."
 msgstr ""
 "Das Überschreiben bestehender Einträge ist in den Einstellungen deaktiviert."
 
-#: src/kiosvn/kiosvn.cpp:380
+#: src/kiosvn/kiosvn.cpp:381
 #, kde-format
 msgid "Start checking out to temporary folder"
 msgstr "Holen in einen temporären Ordner gestartet"
 
-#: src/kiosvn/kiosvn.cpp:383
+#: src/kiosvn/kiosvn.cpp:384
 #, kde-format
 msgid "Checking out %1"
 msgstr "%1 wird geholt"
 
-#: src/kiosvn/kiosvn.cpp:392
+#: src/kiosvn/kiosvn.cpp:393
 #, kde-format
 msgid "Temporary checkout done."
 msgstr "Temporäres Auslesen abgeschlossen."
 
-#: src/kiosvn/kiosvn.cpp:396
+#: src/kiosvn/kiosvn.cpp:397
 #, kde-format
 msgid "Could not write to existing item."
 msgstr "Auf bestehenden Eintrag kann nicht geschrieben werden."
 
-#: src/kiosvn/kiosvn.cpp:402
+#: src/kiosvn/kiosvn.cpp:403
 #, kde-format
 msgid "Could not open temporary file"
 msgstr "Temporäre Datei kann nicht geöffnet werden"
 
-#: src/kiosvn/kiosvn.cpp:425
+#: src/kiosvn/kiosvn.cpp:426
 #, kde-format
 msgid "Could not retrieve data for write."
 msgstr "Daten zum Schreiben können nicht abgerufen werden."
 
-#: src/kiosvn/kiosvn.cpp:433
+#: src/kiosvn/kiosvn.cpp:434
 #, kde-format
 msgid "Committing %1"
 msgstr "%1 wird übertragen"
 
-#: src/kiosvn/kiosvn.cpp:456
+#: src/kiosvn/kiosvn.cpp:457
 #, kde-format
 msgid "Wrote %1 to repository"
 msgstr "%1 in das Repository geschrieben"
 
-#: src/kiosvn/kiosvn.cpp:487
+#: src/kiosvn/kiosvn.cpp:488
 #, kde-format
 msgid "Copied %1 to %2"
 msgstr "%1 nach %2 kopiert"
 
-#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1058
+#: src/kiosvn/kiosvn.cpp:821 src/svnfrontend/svnactions.cpp:1058
 #: src/svnfrontend/svnactions.cpp:2272
 #, kde-format
 msgid "Committed revision %1."
 msgstr "Revision %1 gesendet."
 
-#: src/kiosvn/kiosvn.cpp:830
+#: src/kiosvn/kiosvn.cpp:823
 #, kde-format
 msgid "Nothing to commit."
 msgstr "Nichts zu senden."
 
-#: src/kiosvn/kiosvn.cpp:876
+#: src/kiosvn/kiosvn.cpp:869
 #, kde-format
 msgid "Empty logs"
 msgstr "Leere Protokolle."
@@ -1170,17 +1170,17 @@ msgstr "Fingerabdruck"
 msgid "Trust SSL certificate"
 msgstr "SSL-Zertifikat vertrauen"
 
-#: src/main.cpp:31
-#, kde-format
-msgid "A Subversion Client by KDE (standalone application)"
-msgstr "Ein Subversion-Client von KDE (eigenständige Anwendung)"
-
-#: src/main.cpp:45
+#: src/main.cpp:39
 #, kde-format
 msgid "kdesvn"
 msgstr "kdesvn"
 
-#: src/main.cpp:49
+#: src/main.cpp:41
+#, kde-format
+msgid "A Subversion Client by KDE (standalone application)"
+msgstr "Ein Subversion-Client von KDE (eigenständige Anwendung)"
+
+#: src/main.cpp:43
 #, kde-format
 msgid ""
 "(C) 2005-2009 Rajko Albrecht,\n"
@@ -1189,64 +1189,64 @@ msgstr ""
 "Copyright 2005–2009 Rajko Albrecht,\n"
 "Copyright 2015-2019 Christian Ehrlicher"
 
-#: src/main.cpp:50
+#: src/main.cpp:44
 #, kde-format
 msgid "Rajko Albrecht"
 msgstr "Rajko Albrecht"
 
-#: src/main.cpp:51
+#: src/main.cpp:45
 #, kde-format
 msgid "Christian Ehrlicher"
 msgstr "Christian Ehrlicher"
 
-#: src/main.cpp:56
+#: src/main.cpp:50
 #, kde-format
 msgid "Execute single Subversion command on specific revision(-range)"
 msgstr "Einzelnen Subversion-Befehl auf der spezifizierten Revision ausführen"
 
-#: src/main.cpp:56
+#: src/main.cpp:50
 #, kde-format
 msgid "startrev[:endrev]"
 msgstr "startrev[:endrev]"
 
-#: src/main.cpp:57
+#: src/main.cpp:51
 #, kde-format
 msgid "Ask for revision when executing single command"
 msgstr "Nach Revision fragen, wenn ein einzelner Befehl ausgeführt wird"
 
-#: src/main.cpp:58
+#: src/main.cpp:52
 #, kde-format
 msgid "Force operation"
 msgstr "Ausführung erzwingen"
 
-#: src/main.cpp:59
+#: src/main.cpp:53
 #, kde-format
 msgid "Save output of Subversion command (eg \"cat\") into file <file>"
 msgstr ""
 "Ausgabe des Subversion-Befehls (z.B. \"cat\") in Datei <Datei> speichern"
 
-#: src/main.cpp:59
+#: src/main.cpp:53
 #, kde-format
 msgid "<file>"
 msgstr "<Datei>"
 
-#: src/main.cpp:60
+#: src/main.cpp:54
 #, kde-format
 msgid "Limit log output to <number>"
 msgstr "Protokoll-Ausgabe auf <Zahl> beschränken"
 
-#: src/main.cpp:60
+#: src/main.cpp:54
 #, kde-format
 msgid "<number>"
 msgstr "<Nummer>"
 
-#: src/main.cpp:61
+#: src/main.cpp:55
 #, kde-format
 msgid "Execute Subversion command (\"exec help\" for more information)"
 msgstr ""
 "Subversion-Befehl ausführen (siehe \"exec help\" für weitere Informationen)"
 
-#: src/main.cpp:62
+#: src/main.cpp:56
 #, kde-format
 msgid "Document to open"
 msgstr "Zu öffnendes Dokument"

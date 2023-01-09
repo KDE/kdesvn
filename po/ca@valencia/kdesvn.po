@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-31 00:48+0000\n"
+"POT-Creation-Date: 2023-01-09 00:58+0000\n"
 "PO-Revision-Date: 2022-10-10 09:42+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -251,7 +251,7 @@ msgstr ""
 msgid "Original author and maintainer"
 msgstr "Autor original i mantenidor"
 
-#: src/kdesvn_part.cpp:292 src/main.cpp:50 src/main.cpp:51
+#: src/kdesvn_part.cpp:292 src/main.cpp:44 src/main.cpp:45
 #, kde-format
 msgid "Developer"
 msgstr "Desenvolupador"
@@ -519,7 +519,7 @@ msgstr "El bolcat ha finalitzat."
 msgid "Inserted %v not cached log entries of %m."
 msgstr "S'han introduït %v entrades fora del cau no històric de %m."
 
-#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:808
+#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:801
 #, kde-format
 msgid "Wrong or missing log (may cancel pressed)."
 msgstr "Registre incorrecte o falta (es pot cancel·lar prement)."
@@ -638,79 +638,79 @@ msgstr "S'està substituint %1."
 msgid "Transmitting file data "
 msgstr "S'estan transmetent les dades del fitxer "
 
-#: src/kiosvn/kiosvn.cpp:297 src/kiosvn/kiosvn.cpp:351
-#: src/kiosvn/kiosvn.cpp:502
+#: src/kiosvn/kiosvn.cpp:298 src/kiosvn/kiosvn.cpp:352
+#: src/kiosvn/kiosvn.cpp:503
 #, kde-format
 msgid "Can only write on HEAD revision."
 msgstr "Només es pot escriure sobre la revisió «HEAD»."
 
-#: src/kiosvn/kiosvn.cpp:338
+#: src/kiosvn/kiosvn.cpp:339
 #, kde-format
 msgid "Renaming %1 to %2 successful"
 msgstr "El canvi de nom «%1» a «%2» ha sigut un èxit"
 
-#: src/kiosvn/kiosvn.cpp:372
+#: src/kiosvn/kiosvn.cpp:373
 #, kde-format
 msgid "Overwriting existing items is disabled in settings."
 msgstr "Sobreescriure elements existents està desactivat en la configuració."
 
-#: src/kiosvn/kiosvn.cpp:380
+#: src/kiosvn/kiosvn.cpp:381
 #, kde-format
 msgid "Start checking out to temporary folder"
 msgstr "Comença a comprovar a la carpeta temporal"
 
-#: src/kiosvn/kiosvn.cpp:383
+#: src/kiosvn/kiosvn.cpp:384
 #, kde-format
 msgid "Checking out %1"
 msgstr "S'està comprovant %1"
 
-#: src/kiosvn/kiosvn.cpp:392
+#: src/kiosvn/kiosvn.cpp:393
 #, kde-format
 msgid "Temporary checkout done."
 msgstr "S'ha realitzat la comprovació temporal."
 
-#: src/kiosvn/kiosvn.cpp:396
+#: src/kiosvn/kiosvn.cpp:397
 #, kde-format
 msgid "Could not write to existing item."
 msgstr "No es pot escriure a un element existent."
 
-#: src/kiosvn/kiosvn.cpp:402
+#: src/kiosvn/kiosvn.cpp:403
 #, kde-format
 msgid "Could not open temporary file"
 msgstr "No es pot obrir un fitxer temporal"
 
-#: src/kiosvn/kiosvn.cpp:425
+#: src/kiosvn/kiosvn.cpp:426
 #, kde-format
 msgid "Could not retrieve data for write."
 msgstr "No es poden rebre dades per a escriure."
 
-#: src/kiosvn/kiosvn.cpp:433
+#: src/kiosvn/kiosvn.cpp:434
 #, kde-format
 msgid "Committing %1"
 msgstr "S'està publicant %1"
 
-#: src/kiosvn/kiosvn.cpp:456
+#: src/kiosvn/kiosvn.cpp:457
 #, kde-format
 msgid "Wrote %1 to repository"
 msgstr "S'ha escrit «%1» al repositori"
 
-#: src/kiosvn/kiosvn.cpp:487
+#: src/kiosvn/kiosvn.cpp:488
 #, kde-format
 msgid "Copied %1 to %2"
 msgstr "S'ha copiat «%1» a «%2»"
 
-#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1058
+#: src/kiosvn/kiosvn.cpp:821 src/svnfrontend/svnactions.cpp:1058
 #: src/svnfrontend/svnactions.cpp:2272
 #, kde-format
 msgid "Committed revision %1."
 msgstr "S'ha publicat la revisió %1."
 
-#: src/kiosvn/kiosvn.cpp:830
+#: src/kiosvn/kiosvn.cpp:823
 #, kde-format
 msgid "Nothing to commit."
 msgstr "Encara no hi ha res que s'haja de publicar."
 
-#: src/kiosvn/kiosvn.cpp:876
+#: src/kiosvn/kiosvn.cpp:869
 #, kde-format
 msgid "Empty logs"
 msgstr "Registre buit"
@@ -1160,18 +1160,18 @@ msgstr "Empremta digital"
 msgid "Trust SSL certificate"
 msgstr "Confiança del certificat SSL"
 
-#: src/main.cpp:31
+#: src/main.cpp:39
+#, kde-format
+msgid "kdesvn"
+msgstr "Kdesvn"
+
+#: src/main.cpp:41
 #, kde-format
 msgid "A Subversion Client by KDE (standalone application)"
 msgstr ""
 "Un client de Subversion, creat per la comunitat KDE (aplicació autònoma)"
 
-#: src/main.cpp:45
-#, kde-format
-msgid "kdesvn"
-msgstr "Kdesvn"
-
-#: src/main.cpp:49
+#: src/main.cpp:43
 #, kde-format
 msgid ""
 "(C) 2005-2009 Rajko Albrecht,\n"
@@ -1180,17 +1180,17 @@ msgstr ""
 "(C) 2005-2009 Rajko Albrecht,\n"
 "(C) 2015-2019 Christian Ehrlicher"
 
-#: src/main.cpp:50
+#: src/main.cpp:44
 #, kde-format
 msgid "Rajko Albrecht"
 msgstr "Rajko Albrecht"
 
-#: src/main.cpp:51
+#: src/main.cpp:45
 #, kde-format
 msgid "Christian Ehrlicher"
 msgstr "Christian Ehrlicher"
 
-#: src/main.cpp:56
+#: src/main.cpp:50
 #, kde-format
 msgid "Execute single Subversion command on specific revision(-range)"
 msgstr ""
@@ -1198,48 +1198,48 @@ msgstr ""
 "interval)"
 
 # skip-rule: t-2p_sp
-#: src/main.cpp:56
+#: src/main.cpp:50
 #, kde-format
 msgid "startrev[:endrev]"
 msgstr "rev_inici[:rev_final]"
 
-#: src/main.cpp:57
+#: src/main.cpp:51
 #, kde-format
 msgid "Ask for revision when executing single command"
 msgstr "Demana per la revisió quan s'execute una única ordre"
 
-#: src/main.cpp:58
+#: src/main.cpp:52
 #, kde-format
 msgid "Force operation"
 msgstr "Força l'operació"
 
-#: src/main.cpp:59
+#: src/main.cpp:53
 #, kde-format
 msgid "Save output of Subversion command (eg \"cat\") into file <file>"
 msgstr ""
 "Guarda l'eixida de l'ordre de Subversion (p. ex. «cat») dins del <fitxer>"
 
-#: src/main.cpp:59
+#: src/main.cpp:53
 #, kde-format
 msgid "<file>"
 msgstr "<fitxer>"
 
-#: src/main.cpp:60
+#: src/main.cpp:54
 #, kde-format
 msgid "Limit log output to <number>"
 msgstr "Limita l'eixida del registre a <número>"
 
-#: src/main.cpp:60
+#: src/main.cpp:54
 #, kde-format
 msgid "<number>"
 msgstr "<número>"
 
-#: src/main.cpp:61
+#: src/main.cpp:55
 #, kde-format
 msgid "Execute Subversion command (\"exec help\" for more information)"
 msgstr "Executa una ordre de Subversion (per a més informació «exec help»)"
 
-#: src/main.cpp:62
+#: src/main.cpp:56
 #, kde-format
 msgid "Document to open"
 msgstr "Document que s'ha d'obrir"

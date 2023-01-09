@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-31 00:48+0000\n"
+"POT-Creation-Date: 2023-01-09 00:58+0000\n"
 "PO-Revision-Date: 2013-07-06 03:18-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -250,7 +250,7 @@ msgstr "(C) 2005-2007 Rajko Albrecht"
 msgid "Original author and maintainer"
 msgstr "オリジナル作者とメンテナ"
 
-#: src/kdesvn_part.cpp:292 src/main.cpp:50 src/main.cpp:51
+#: src/kdesvn_part.cpp:292 src/main.cpp:44 src/main.cpp:45
 #, fuzzy, kde-format
 msgid "Developer"
 msgstr "開発者"
@@ -521,7 +521,7 @@ msgstr "ダンプが完了しました。"
 msgid "Inserted %v not cached log entries of %m."
 msgstr "%m のうちキャッシュされていないログエントリ %v が挿入されました"
 
-#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:808
+#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:801
 #, kde-format
 msgid "Wrong or missing log (may cancel pressed)."
 msgstr ""
@@ -640,80 +640,80 @@ msgstr "%1 を置換しています。"
 msgid "Transmitting file data "
 msgstr "ファイルデータを転送しています"
 
-#: src/kiosvn/kiosvn.cpp:297 src/kiosvn/kiosvn.cpp:351
-#: src/kiosvn/kiosvn.cpp:502
+#: src/kiosvn/kiosvn.cpp:298 src/kiosvn/kiosvn.cpp:352
+#: src/kiosvn/kiosvn.cpp:503
 #, fuzzy, kde-format
 #| msgid "Can only write on head revision!"
 msgid "Can only write on HEAD revision."
 msgstr "head リビジョンにだけ書き込めます！"
 
-#: src/kiosvn/kiosvn.cpp:338
+#: src/kiosvn/kiosvn.cpp:339
 #, kde-format
 msgid "Renaming %1 to %2 successful"
 msgstr ""
 
-#: src/kiosvn/kiosvn.cpp:372
+#: src/kiosvn/kiosvn.cpp:373
 #, fuzzy, kde-format
 msgid "Overwriting existing items is disabled in settings."
 msgstr "設定で既存の項目に対する上書きは無効です。"
 
-#: src/kiosvn/kiosvn.cpp:380
+#: src/kiosvn/kiosvn.cpp:381
 #, kde-format
 msgid "Start checking out to temporary folder"
 msgstr ""
 
-#: src/kiosvn/kiosvn.cpp:383
+#: src/kiosvn/kiosvn.cpp:384
 #, fuzzy, kde-format
 msgid "Checking out %1"
 msgstr "チェックアウトしています"
 
-#: src/kiosvn/kiosvn.cpp:392
+#: src/kiosvn/kiosvn.cpp:393
 #, kde-format
 msgid "Temporary checkout done."
 msgstr ""
 
-#: src/kiosvn/kiosvn.cpp:396
+#: src/kiosvn/kiosvn.cpp:397
 #, fuzzy, kde-format
 msgid "Could not write to existing item."
 msgstr "既存の項目に書き込めませんでした。"
 
-#: src/kiosvn/kiosvn.cpp:402
+#: src/kiosvn/kiosvn.cpp:403
 #, fuzzy, kde-format
 msgid "Could not open temporary file"
 msgstr "一時ファイルを開けませんでした"
 
-#: src/kiosvn/kiosvn.cpp:425
+#: src/kiosvn/kiosvn.cpp:426
 #, fuzzy, kde-format
 msgid "Could not retrieve data for write."
 msgstr "書き込むためのデータを取得できませんでした。"
 
-#: src/kiosvn/kiosvn.cpp:433
+#: src/kiosvn/kiosvn.cpp:434
 #, fuzzy, kde-format
 msgid "Committing %1"
 msgstr "コミットしています"
 
-#: src/kiosvn/kiosvn.cpp:456
+#: src/kiosvn/kiosvn.cpp:457
 #, fuzzy, kde-format
 msgid "Wrote %1 to repository"
 msgstr "リポジトリへのパス："
 
-#: src/kiosvn/kiosvn.cpp:487
+#: src/kiosvn/kiosvn.cpp:488
 #, fuzzy, kde-format
 msgid "Copied %1 to %2"
 msgstr "リビジョン %2 で %1 にコピーされました"
 
-#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1058
+#: src/kiosvn/kiosvn.cpp:821 src/svnfrontend/svnactions.cpp:1058
 #: src/svnfrontend/svnactions.cpp:2272
 #, fuzzy, kde-format
 msgid "Committed revision %1."
 msgstr "リビジョン %1 をコミットしました。"
 
-#: src/kiosvn/kiosvn.cpp:830
+#: src/kiosvn/kiosvn.cpp:823
 #, fuzzy, kde-format
 msgid "Nothing to commit."
 msgstr "コミットするものがありません。"
 
-#: src/kiosvn/kiosvn.cpp:876
+#: src/kiosvn/kiosvn.cpp:869
 #, fuzzy, kde-format
 msgid "Empty logs"
 msgstr "空のログ"
@@ -1170,82 +1170,82 @@ msgstr "フィンガープリント"
 msgid "Trust SSL certificate"
 msgstr "信頼済み ssl 認証"
 
-#: src/main.cpp:31
-#, fuzzy, kde-format
-msgid "A Subversion Client by KDE (standalone application)"
-msgstr "KDE 向けの Subversion クライアント（スタンドアロンアプリケーション）"
-
-#: src/main.cpp:45
+#: src/main.cpp:39
 #, fuzzy, kde-format
 msgid "kdesvn"
 msgstr "kdesvn"
 
-#: src/main.cpp:49
+#: src/main.cpp:41
+#, fuzzy, kde-format
+msgid "A Subversion Client by KDE (standalone application)"
+msgstr "KDE 向けの Subversion クライアント（スタンドアロンアプリケーション）"
+
+#: src/main.cpp:43
 #, fuzzy, kde-format
 msgid ""
 "(C) 2005-2009 Rajko Albrecht,\n"
 "(C) 2015-2019 Christian Ehrlicher"
 msgstr "(C) 2005-2007 Rajko Albrecht"
 
-#: src/main.cpp:50
+#: src/main.cpp:44
 #, fuzzy, kde-format
 msgid "Rajko Albrecht"
 msgstr "Rajko Albrecht"
 
-#: src/main.cpp:51
+#: src/main.cpp:45
 #, kde-format
 msgid "Christian Ehrlicher"
 msgstr ""
 
-#: src/main.cpp:56
+#: src/main.cpp:50
 #, fuzzy, kde-format
 #| msgid "Execute single subversion command on specific revision(-range)"
 msgid "Execute single Subversion command on specific revision(-range)"
 msgstr "特定のリビジョン（-範囲）について単一の subversion コマンドを実行する"
 
-#: src/main.cpp:56
+#: src/main.cpp:50
 #, kde-format
 msgid "startrev[:endrev]"
 msgstr ""
 
-#: src/main.cpp:57
+#: src/main.cpp:51
 #, fuzzy, kde-format
 msgid "Ask for revision when executing single command"
 msgstr "単一のコマンドを実行するときにリビジョンを尋ねる"
 
-#: src/main.cpp:58
+#: src/main.cpp:52
 #, fuzzy, kde-format
 msgid "Force operation"
 msgstr "操作を強制"
 
-#: src/main.cpp:59
+#: src/main.cpp:53
 #, fuzzy, kde-format
 #| msgid "Save output of subversion command (eg \"cat\") into file <file>"
 msgid "Save output of Subversion command (eg \"cat\") into file <file>"
 msgstr "subversion コマンド（例えば「cat」）の出力をファイル <file> に保存"
 
-#: src/main.cpp:59
+#: src/main.cpp:53
 #, kde-format
 msgid "<file>"
 msgstr ""
 
-#: src/main.cpp:60
+#: src/main.cpp:54
 #, fuzzy, kde-format
 msgid "Limit log output to <number>"
 msgstr "ログ出力を <number> に制限"
 
-#: src/main.cpp:60
+#: src/main.cpp:54
 #, fuzzy, kde-format
 msgid "<number>"
 msgstr "数"
 
-#: src/main.cpp:61
+#: src/main.cpp:55
 #, fuzzy, kde-format
 #| msgid "Execute subversion command (\"exec help\" for more information)"
 msgid "Execute Subversion command (\"exec help\" for more information)"
 msgstr "subversion コマンドを実行（更なる情報については「exec help」）"
 
-#: src/main.cpp:62
+#: src/main.cpp:56
 #, fuzzy, kde-format
 msgid "Document to open"
 msgstr "開く文書"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-31 00:48+0000\n"
+"POT-Creation-Date: 2023-01-09 00:58+0000\n"
 "PO-Revision-Date: 2022-12-29 17:01+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -259,7 +259,7 @@ msgstr "(C) 2005-2007 Rajko Albrecht"
 msgid "Original author and maintainer"
 msgstr "Autor inițial și menținător"
 
-#: src/kdesvn_part.cpp:292 src/main.cpp:50 src/main.cpp:51
+#: src/kdesvn_part.cpp:292 src/main.cpp:44 src/main.cpp:45
 #, kde-format
 msgid "Developer"
 msgstr "Dezvoltator"
@@ -536,7 +536,7 @@ msgstr "Dump terminat."
 msgid "Inserted %v not cached log entries of %m."
 msgstr "%v intrări din jurnal fără prestocare inserate pentru %m."
 
-#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:808
+#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:801
 #, kde-format
 msgid "Wrong or missing log (may cancel pressed)."
 msgstr ""
@@ -656,80 +656,80 @@ msgstr "Se înlocuiește"
 msgid "Transmitting file data "
 msgstr "Se transmite fișierul de date"
 
-#: src/kiosvn/kiosvn.cpp:297 src/kiosvn/kiosvn.cpp:351
-#: src/kiosvn/kiosvn.cpp:502
+#: src/kiosvn/kiosvn.cpp:298 src/kiosvn/kiosvn.cpp:352
+#: src/kiosvn/kiosvn.cpp:503
 #, fuzzy, kde-format
 #| msgid "Can only write on head revision!"
 msgid "Can only write on HEAD revision."
 msgstr "Poate scrie numai în revizia HEAD!"
 
-#: src/kiosvn/kiosvn.cpp:338
+#: src/kiosvn/kiosvn.cpp:339
 #, kde-format
 msgid "Renaming %1 to %2 successful"
 msgstr ""
 
-#: src/kiosvn/kiosvn.cpp:372
+#: src/kiosvn/kiosvn.cpp:373
 #, kde-format
 msgid "Overwriting existing items is disabled in settings."
 msgstr "Suprascrierea elementelor existente este dezactivată în configurări."
 
-#: src/kiosvn/kiosvn.cpp:380
+#: src/kiosvn/kiosvn.cpp:381
 #, kde-format
 msgid "Start checking out to temporary folder"
 msgstr ""
 
-#: src/kiosvn/kiosvn.cpp:383
+#: src/kiosvn/kiosvn.cpp:384
 #, fuzzy, kde-format
 msgid "Checking out %1"
 msgstr "Verificare"
 
-#: src/kiosvn/kiosvn.cpp:392
+#: src/kiosvn/kiosvn.cpp:393
 #, kde-format
 msgid "Temporary checkout done."
 msgstr ""
 
-#: src/kiosvn/kiosvn.cpp:396
+#: src/kiosvn/kiosvn.cpp:397
 #, kde-format
 msgid "Could not write to existing item."
 msgstr "Nu s-a putut scrie pe elementul existent."
 
-#: src/kiosvn/kiosvn.cpp:402
+#: src/kiosvn/kiosvn.cpp:403
 #, kde-format
 msgid "Could not open temporary file"
 msgstr "Nu s-a putut deschide fișierul temporar"
 
-#: src/kiosvn/kiosvn.cpp:425
+#: src/kiosvn/kiosvn.cpp:426
 #, kde-format
 msgid "Could not retrieve data for write."
 msgstr "Nu s-au putut prelua datele pentru scriere."
 
-#: src/kiosvn/kiosvn.cpp:433
+#: src/kiosvn/kiosvn.cpp:434
 #, fuzzy, kde-format
 msgid "Committing %1"
 msgstr "Comite"
 
-#: src/kiosvn/kiosvn.cpp:456
+#: src/kiosvn/kiosvn.cpp:457
 #, fuzzy, kde-format
 msgid "Wrote %1 to repository"
 msgstr "Calea către depozit:"
 
-#: src/kiosvn/kiosvn.cpp:487
+#: src/kiosvn/kiosvn.cpp:488
 #, fuzzy, kde-format
 msgid "Copied %1 to %2"
 msgstr "Copiat în %1 la revizia %2"
 
-#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1058
+#: src/kiosvn/kiosvn.cpp:821 src/svnfrontend/svnactions.cpp:1058
 #: src/svnfrontend/svnactions.cpp:2272
 #, kde-format
 msgid "Committed revision %1."
 msgstr "Revizie %1 propagată."
 
-#: src/kiosvn/kiosvn.cpp:830
+#: src/kiosvn/kiosvn.cpp:823
 #, kde-format
 msgid "Nothing to commit."
 msgstr "Nimic de comis."
 
-#: src/kiosvn/kiosvn.cpp:876
+#: src/kiosvn/kiosvn.cpp:869
 #, kde-format
 msgid "Empty logs"
 msgstr "Jurnale goale"
@@ -1188,85 +1188,85 @@ msgstr "Amprentă"
 msgid "Trust SSL certificate"
 msgstr "Certificat SSL de încredere"
 
-#: src/main.cpp:31
+#: src/main.cpp:39
+#, kde-format
+msgid "kdesvn"
+msgstr "kdesvn"
+
+#: src/main.cpp:41
 #, fuzzy, kde-format
 #| msgid "A Subversion Client for KDE (standalone application)"
 msgid "A Subversion Client by KDE (standalone application)"
 msgstr "Un client Subversion pentru KDE (aplicație autonomă)"
 
-#: src/main.cpp:45
-#, kde-format
-msgid "kdesvn"
-msgstr "kdesvn"
-
-#: src/main.cpp:49
+#: src/main.cpp:43
 #, fuzzy, kde-format
 msgid ""
 "(C) 2005-2009 Rajko Albrecht,\n"
 "(C) 2015-2019 Christian Ehrlicher"
 msgstr "(C) 2005-2007 Rajko Albrecht"
 
-#: src/main.cpp:50
+#: src/main.cpp:44
 #, kde-format
 msgid "Rajko Albrecht"
 msgstr "Rajko Albrecht"
 
-#: src/main.cpp:51
+#: src/main.cpp:45
 #, kde-format
 msgid "Christian Ehrlicher"
 msgstr ""
 
-#: src/main.cpp:56
+#: src/main.cpp:50
 #, fuzzy, kde-format
 #| msgid "Execute single subversion command on specific revision(-range)"
 msgid "Execute single Subversion command on specific revision(-range)"
 msgstr "Execută o singură comandă subversion pe o revizie(-interval) specifică"
 
-#: src/main.cpp:56
+#: src/main.cpp:50
 #, kde-format
 msgid "startrev[:endrev]"
 msgstr ""
 
-#: src/main.cpp:57
+#: src/main.cpp:51
 #, kde-format
 msgid "Ask for revision when executing single command"
 msgstr "Întreabă de revizie la executarea unei singure comenzi "
 
-#: src/main.cpp:58
+#: src/main.cpp:52
 #, kde-format
 msgid "Force operation"
 msgstr "Forțează operația"
 
-#: src/main.cpp:59
+#: src/main.cpp:53
 #, fuzzy, kde-format
 #| msgid "Save output of subversion command (eg \"cat\") into file <file>"
 msgid "Save output of Subversion command (eg \"cat\") into file <file>"
 msgstr "Salvează ieșirea comenzii subversion (ex: \"cat\") în fișierul <file>"
 
-#: src/main.cpp:59
+#: src/main.cpp:53
 #, kde-format
 msgid "<file>"
 msgstr ""
 
-#: src/main.cpp:60
+#: src/main.cpp:54
 #, kde-format
 msgid "Limit log output to <number>"
 msgstr "Limitează afișarea jurnalului la <number>"
 
-#: src/main.cpp:60
+#: src/main.cpp:54
 #, fuzzy, kde-format
 #| msgid "Number"
 msgid "<number>"
 msgstr "Număr"
 
-#: src/main.cpp:61
+#: src/main.cpp:55
 #, fuzzy, kde-format
 #| msgid "Execute subversion command (\"exec help\" for more information)"
 msgid "Execute Subversion command (\"exec help\" for more information)"
 msgstr ""
 "Execută o comandă subversion (\"exec help\" pentru mai multe informații)"
 
-#: src/main.cpp:62
+#: src/main.cpp:56
 #, kde-format
 msgid "Document to open"
 msgstr "Document de deschis"

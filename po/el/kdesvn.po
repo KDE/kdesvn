@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-31 00:48+0000\n"
+"POT-Creation-Date: 2023-01-09 00:58+0000\n"
 "PO-Revision-Date: 2021-10-13 10:45+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -254,7 +254,7 @@ msgstr ""
 msgid "Original author and maintainer"
 msgstr "Αρχικός συγγραφέας και συντηρητής"
 
-#: src/kdesvn_part.cpp:292 src/main.cpp:50 src/main.cpp:51
+#: src/kdesvn_part.cpp:292 src/main.cpp:44 src/main.cpp:45
 #, kde-format
 msgid "Developer"
 msgstr "Προγραμματιστής"
@@ -522,7 +522,7 @@ msgstr "Ολοκλήρωση της αντιγραφής."
 msgid "Inserted %v not cached log entries of %m."
 msgstr "Το εισηγμένο %v δεν αποθήκευσε καταγραφές του %m"
 
-#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:808
+#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:801
 #, kde-format
 msgid "Wrong or missing log (may cancel pressed)."
 msgstr ""
@@ -641,79 +641,79 @@ msgstr "Αντικατάσταση %1."
 msgid "Transmitting file data "
 msgstr "Μετάδοση δεδομένων αρχείου "
 
-#: src/kiosvn/kiosvn.cpp:297 src/kiosvn/kiosvn.cpp:351
-#: src/kiosvn/kiosvn.cpp:502
+#: src/kiosvn/kiosvn.cpp:298 src/kiosvn/kiosvn.cpp:352
+#: src/kiosvn/kiosvn.cpp:503
 #, kde-format
 msgid "Can only write on HEAD revision."
 msgstr "Εγγραφή μόνο στο HEAD revision."
 
-#: src/kiosvn/kiosvn.cpp:338
+#: src/kiosvn/kiosvn.cpp:339
 #, kde-format
 msgid "Renaming %1 to %2 successful"
 msgstr "Μετονομασία του %1 στο %2 επιτυχής"
 
-#: src/kiosvn/kiosvn.cpp:372
+#: src/kiosvn/kiosvn.cpp:373
 #, kde-format
 msgid "Overwriting existing items is disabled in settings."
 msgstr "Η αντικατάσταση υπαρκτών αντικειμένων είναι ανενεργή στις ρυθμίσεις."
 
-#: src/kiosvn/kiosvn.cpp:380
+#: src/kiosvn/kiosvn.cpp:381
 #, kde-format
 msgid "Start checking out to temporary folder"
 msgstr "Έναρξη λήψης (checking out) σε προσωρινό φάκελο"
 
-#: src/kiosvn/kiosvn.cpp:383
+#: src/kiosvn/kiosvn.cpp:384
 #, kde-format
 msgid "Checking out %1"
 msgstr "Checking out %1"
 
-#: src/kiosvn/kiosvn.cpp:392
+#: src/kiosvn/kiosvn.cpp:393
 #, kde-format
 msgid "Temporary checkout done."
 msgstr "Το προσωρινό checkout ολοκληρώθηκε."
 
-#: src/kiosvn/kiosvn.cpp:396
+#: src/kiosvn/kiosvn.cpp:397
 #, kde-format
 msgid "Could not write to existing item."
 msgstr "Αδυναμία εγγραφής σε υπαρκτό αντικείμενο."
 
-#: src/kiosvn/kiosvn.cpp:402
+#: src/kiosvn/kiosvn.cpp:403
 #, kde-format
 msgid "Could not open temporary file"
 msgstr "Αδυναμία ανοίγματος του προσωρινού αρχείου"
 
-#: src/kiosvn/kiosvn.cpp:425
+#: src/kiosvn/kiosvn.cpp:426
 #, kde-format
 msgid "Could not retrieve data for write."
 msgstr "Αδυναμία λήψης δεδομένων για εγγραφή."
 
-#: src/kiosvn/kiosvn.cpp:433
+#: src/kiosvn/kiosvn.cpp:434
 #, kde-format
 msgid "Committing %1"
 msgstr "Υποβολή του %1"
 
-#: src/kiosvn/kiosvn.cpp:456
+#: src/kiosvn/kiosvn.cpp:457
 #, kde-format
 msgid "Wrote %1 to repository"
 msgstr "Έγινε εγγραφή του %1 στο αποθετήριο"
 
-#: src/kiosvn/kiosvn.cpp:487
+#: src/kiosvn/kiosvn.cpp:488
 #, kde-format
 msgid "Copied %1 to %2"
 msgstr "Έγινε αντιγραφή του %1 στο %2"
 
-#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1058
+#: src/kiosvn/kiosvn.cpp:821 src/svnfrontend/svnactions.cpp:1058
 #: src/svnfrontend/svnactions.cpp:2272
 #, kde-format
 msgid "Committed revision %1."
 msgstr "Υποβληθείσα αναθεώρηση %1."
 
-#: src/kiosvn/kiosvn.cpp:830
+#: src/kiosvn/kiosvn.cpp:823
 #, kde-format
 msgid "Nothing to commit."
 msgstr "Τίποτα προς υποβολή"
 
-#: src/kiosvn/kiosvn.cpp:876
+#: src/kiosvn/kiosvn.cpp:869
 #, kde-format
 msgid "Empty logs"
 msgstr "Κενά αρχεία καταγραφών"
@@ -1166,17 +1166,17 @@ msgstr "Αποτύπωμα"
 msgid "Trust SSL certificate"
 msgstr "Εμπιστοσύνη στο SSL πιστοποιητικό"
 
-#: src/main.cpp:31
-#, kde-format
-msgid "A Subversion Client by KDE (standalone application)"
-msgstr "Ένας πελάτης Subversion από το KDE (αυτόνομη εφαρμογή)"
-
-#: src/main.cpp:45
+#: src/main.cpp:39
 #, kde-format
 msgid "kdesvn"
 msgstr "kdesvn"
 
-#: src/main.cpp:49
+#: src/main.cpp:41
+#, kde-format
+msgid "A Subversion Client by KDE (standalone application)"
+msgstr "Ένας πελάτης Subversion από το KDE (αυτόνομη εφαρμογή)"
+
+#: src/main.cpp:43
 #, kde-format
 msgid ""
 "(C) 2005-2009 Rajko Albrecht,\n"
@@ -1185,66 +1185,66 @@ msgstr ""
 "(C) 2005-2009 Rajko Albrecht,\n"
 "(C) 2015-2019 Christian Ehrlicher"
 
-#: src/main.cpp:50
+#: src/main.cpp:44
 #, kde-format
 msgid "Rajko Albrecht"
 msgstr "Rajko Albrecht"
 
-#: src/main.cpp:51
+#: src/main.cpp:45
 #, kde-format
 msgid "Christian Ehrlicher"
 msgstr "Christian Ehrlicher"
 
-#: src/main.cpp:56
+#: src/main.cpp:50
 #, kde-format
 msgid "Execute single Subversion command on specific revision(-range)"
 msgstr ""
 "Εκτέλεση απλής εντολής του Subversion σε συγκεκριμένη αναθεώρηση(-range)"
 
-#: src/main.cpp:56
+#: src/main.cpp:50
 #, kde-format
 msgid "startrev[:endrev]"
 msgstr "startrev[:endrev]"
 
-#: src/main.cpp:57
+#: src/main.cpp:51
 #, kde-format
 msgid "Ask for revision when executing single command"
 msgstr "Να ζητηθεί αναθεώρηση όταν εκτελείται μία απλή εντολή"
 
-#: src/main.cpp:58
+#: src/main.cpp:52
 #, kde-format
 msgid "Force operation"
 msgstr "Εξαναγκασμός ενέργειας"
 
-#: src/main.cpp:59
+#: src/main.cpp:53
 #, kde-format
 msgid "Save output of Subversion command (eg \"cat\") into file <file>"
 msgstr ""
 "Να αποθηκευθεί το αποτέλεσμα της εντολής του Subversion (πχ \"cat\") στο "
 "αρχείο <file>"
 
-#: src/main.cpp:59
+#: src/main.cpp:53
 #, kde-format
 msgid "<file>"
 msgstr "<file>"
 
-#: src/main.cpp:60
+#: src/main.cpp:54
 #, kde-format
 msgid "Limit log output to <number>"
 msgstr "Να περιοριστεί το αποτέλεσμα της καταγραφής στο <number>"
 
-#: src/main.cpp:60
+#: src/main.cpp:54
 #, kde-format
 msgid "<number>"
 msgstr "<number>"
 
-#: src/main.cpp:61
+#: src/main.cpp:55
 #, kde-format
 msgid "Execute Subversion command (\"exec help\" for more information)"
 msgstr ""
 "Εκτέλεση εντολής του Subversion (\"exec help\" για περισσότερες πληροφορίες)"
 
-#: src/main.cpp:62
+#: src/main.cpp:56
 #, kde-format
 msgid "Document to open"
 msgstr "Έγγραφο για άνοιγμα"

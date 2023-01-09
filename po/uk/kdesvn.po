@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-31 00:48+0000\n"
+"POT-Creation-Date: 2023-01-09 00:58+0000\n"
 "PO-Revision-Date: 2022-10-10 18:38+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -249,7 +249,7 @@ msgstr ""
 msgid "Original author and maintainer"
 msgstr "Перший автор і супровідник"
 
-#: src/kdesvn_part.cpp:292 src/main.cpp:50 src/main.cpp:51
+#: src/kdesvn_part.cpp:292 src/main.cpp:44 src/main.cpp:45
 #, kde-format
 msgid "Developer"
 msgstr "Розробник"
@@ -517,7 +517,7 @@ msgstr "Створення дампу завершено."
 msgid "Inserted %v not cached log entries of %m."
 msgstr "Вставлено %v некешованих записів журналу %m."
 
-#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:808
+#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:801
 #, kde-format
 msgid "Wrong or missing log (may cancel pressed)."
 msgstr "Помилковий журнал або журналу немає (можливо, натиснуто «Скасувати»)"
@@ -636,79 +636,79 @@ msgstr "Заміна %1."
 msgid "Transmitting file data "
 msgstr "Перенесення даних у файлах"
 
-#: src/kiosvn/kiosvn.cpp:297 src/kiosvn/kiosvn.cpp:351
-#: src/kiosvn/kiosvn.cpp:502
+#: src/kiosvn/kiosvn.cpp:298 src/kiosvn/kiosvn.cpp:352
+#: src/kiosvn/kiosvn.cpp:503
 #, kde-format
 msgid "Can only write on HEAD revision."
 msgstr "Запис можливий лише на основі модифікацій HEAD."
 
-#: src/kiosvn/kiosvn.cpp:338
+#: src/kiosvn/kiosvn.cpp:339
 #, kde-format
 msgid "Renaming %1 to %2 successful"
 msgstr "Успішно перейменовано %1 на %2"
 
-#: src/kiosvn/kiosvn.cpp:372
+#: src/kiosvn/kiosvn.cpp:373
 #, kde-format
 msgid "Overwriting existing items is disabled in settings."
 msgstr "Перезапис наявних елементів вимкнено у параметрах програми."
 
-#: src/kiosvn/kiosvn.cpp:380
+#: src/kiosvn/kiosvn.cpp:381
 #, kde-format
 msgid "Start checking out to temporary folder"
 msgstr "Починаємо отримання даних до тимчасової теки"
 
-#: src/kiosvn/kiosvn.cpp:383
+#: src/kiosvn/kiosvn.cpp:384
 #, kde-format
 msgid "Checking out %1"
 msgstr "Отримуємо %1"
 
-#: src/kiosvn/kiosvn.cpp:392
+#: src/kiosvn/kiosvn.cpp:393
 #, kde-format
 msgid "Temporary checkout done."
 msgstr "Створення тимчасової копії завершено."
 
-#: src/kiosvn/kiosvn.cpp:396
+#: src/kiosvn/kiosvn.cpp:397
 #, kde-format
 msgid "Could not write to existing item."
 msgstr "Не вдалося виконати запис до наявного елемента."
 
-#: src/kiosvn/kiosvn.cpp:402
+#: src/kiosvn/kiosvn.cpp:403
 #, kde-format
 msgid "Could not open temporary file"
 msgstr "Не вдалося відкрити тимчасовий файл"
 
-#: src/kiosvn/kiosvn.cpp:425
+#: src/kiosvn/kiosvn.cpp:426
 #, kde-format
 msgid "Could not retrieve data for write."
 msgstr "Не вдалося отримати дані для запису."
 
-#: src/kiosvn/kiosvn.cpp:433
+#: src/kiosvn/kiosvn.cpp:434
 #, kde-format
 msgid "Committing %1"
 msgstr "Надсилаємо %1"
 
-#: src/kiosvn/kiosvn.cpp:456
+#: src/kiosvn/kiosvn.cpp:457
 #, kde-format
 msgid "Wrote %1 to repository"
 msgstr "%1 записано до сховища"
 
-#: src/kiosvn/kiosvn.cpp:487
+#: src/kiosvn/kiosvn.cpp:488
 #, kde-format
 msgid "Copied %1 to %2"
 msgstr "%1 скопійовано до %2"
 
-#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1058
+#: src/kiosvn/kiosvn.cpp:821 src/svnfrontend/svnactions.cpp:1058
 #: src/svnfrontend/svnactions.cpp:2272
 #, kde-format
 msgid "Committed revision %1."
 msgstr "Модифікацію %1 записано до сховища."
 
-#: src/kiosvn/kiosvn.cpp:830
+#: src/kiosvn/kiosvn.cpp:823
 #, kde-format
 msgid "Nothing to commit."
 msgstr "Нема що внести у сховище."
 
-#: src/kiosvn/kiosvn.cpp:876
+#: src/kiosvn/kiosvn.cpp:869
 #, kde-format
 msgid "Empty logs"
 msgstr "Спорожнити журнали"
@@ -1165,17 +1165,17 @@ msgstr "Відбиток"
 msgid "Trust SSL certificate"
 msgstr "Довіра до сертифіката SSL"
 
-#: src/main.cpp:31
-#, kde-format
-msgid "A Subversion Client by KDE (standalone application)"
-msgstr "Клієнт Subversion від KDE (окрема програма)"
-
-#: src/main.cpp:45
+#: src/main.cpp:39
 #, kde-format
 msgid "kdesvn"
 msgstr "kdesvn"
 
-#: src/main.cpp:49
+#: src/main.cpp:41
+#, kde-format
+msgid "A Subversion Client by KDE (standalone application)"
+msgstr "Клієнт Subversion від KDE (окрема програма)"
+
+#: src/main.cpp:43
 #, kde-format
 msgid ""
 "(C) 2005-2009 Rajko Albrecht,\n"
@@ -1184,67 +1184,67 @@ msgstr ""
 "© Rajko Albrecht, 2005–2009,\n"
 "© Christian Ehrlicher, 2015–2019"
 
-#: src/main.cpp:50
+#: src/main.cpp:44
 #, kde-format
 msgid "Rajko Albrecht"
 msgstr "Rajko Albrecht"
 
-#: src/main.cpp:51
+#: src/main.cpp:45
 #, kde-format
 msgid "Christian Ehrlicher"
 msgstr "Christian Ehrlicher"
 
-#: src/main.cpp:56
+#: src/main.cpp:50
 #, kde-format
 msgid "Execute single Subversion command on specific revision(-range)"
 msgstr ""
 "Виконати окрему команду subversion над вказаною модифікацією (діапазоном "
 "модифікацій)."
 
-#: src/main.cpp:56
+#: src/main.cpp:50
 #, kde-format
 msgid "startrev[:endrev]"
 msgstr "почмод[:кінцмод]"
 
-#: src/main.cpp:57
+#: src/main.cpp:51
 #, kde-format
 msgid "Ask for revision when executing single command"
 msgstr "Запитати щодо модифікації під час виконання окремої команди"
 
-#: src/main.cpp:58
+#: src/main.cpp:52
 #, kde-format
 msgid "Force operation"
 msgstr "Примусове виконання"
 
-#: src/main.cpp:59
+#: src/main.cpp:53
 #, kde-format
 msgid "Save output of Subversion command (eg \"cat\") into file <file>"
 msgstr ""
 "Зберегти дані, виведені командою Subversion (наприклад «cat») до файла <file>"
 
-#: src/main.cpp:59
+#: src/main.cpp:53
 #, kde-format
 msgid "<file>"
 msgstr "<файл>"
 
-#: src/main.cpp:60
+#: src/main.cpp:54
 #, kde-format
 msgid "Limit log output to <number>"
 msgstr "Обмежити кількість записів у журналі значенням <number>"
 
-#: src/main.cpp:60
+#: src/main.cpp:54
 #, kde-format
 msgid "<number>"
 msgstr "<номер>"
 
-#: src/main.cpp:61
+#: src/main.cpp:55
 #, kde-format
 msgid "Execute Subversion command (\"exec help\" for more information)"
 msgstr ""
 "Виконати команду Subversion (віддайте команду «exec help», щоб дізнатися "
 "більше)"
 
-#: src/main.cpp:62
+#: src/main.cpp:56
 #, kde-format
 msgid "Document to open"
 msgstr "Документ, який слід відкрити"

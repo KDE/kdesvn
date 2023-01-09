@@ -140,7 +140,7 @@ svn::Revision KioSvnData::urlToRev(const QUrl &url)
 }
 
 kio_svnProtocol::kio_svnProtocol(const QByteArray &pool_socket, const QByteArray &app_socket)
-    : SlaveBase("kio_ksvn", pool_socket, app_socket)
+    : WorkerBase("kio_ksvn", pool_socket, app_socket)
     , StreamWrittenCb()
 {
     m_pData = new KioSvnData(this);
@@ -169,8 +169,8 @@ int kdemain(int argc, char **argv)
         qCDebug(KDESVN_LOG) << "Usage: kio_ksvn  protocol domain-socket1 domain-socket2" << Qt::endl;
         exit(-1);
     }
-    KIO::kio_svnProtocol slave(argv[2], argv[3]);
-    slave.dispatchLoop();
+    KIO::kio_svnProtocol worker(argv[2], argv[3]);
+    worker.dispatchLoop();
     qCDebug(KDESVN_LOG) << "*** kio_ksvn Done" << Qt::endl;
     return 0;
 }
@@ -192,7 +192,7 @@ void kio_svnProtocol::listSendDirEntry(const svn::DirEntry &direntry)
 /*!
     \fn kio_svnProtocol::listDir (const QUrl&url)
  */
-void kio_svnProtocol::listDir(const QUrl &url)
+KIO::WorkerResult kio_svnProtocol::listDir(const QUrl &url)
 {
     qCDebug(KDESVN_LOG) << "kio_svn::listDir(const QUrl& url) : " << url.url() << Qt::endl;
     m_pData->resetListener();
@@ -208,14 +208,13 @@ void kio_svnProtocol::listDir(const QUrl &url)
     } catch (const svn::ClientException &e) {
         QString ex = e.msg();
         qCDebug(KDESVN_LOG) << ex << Qt::endl;
-        extraError(KIO::ERR_WORKER_DEFINED, ex);
-        return;
+        return extraError(KIO::ERR_WORKER_DEFINED, ex);
     }
-    finished();
     qCDebug(KDESVN_LOG) << "Listing finished" << Qt::endl;
+    return KIO::WorkerResult::pass();
 }
 
-void kio_svnProtocol::stat(const QUrl &url)
+KIO::WorkerResult kio_svnProtocol::stat(const QUrl &url)
 {
     qCDebug(KDESVN_LOG) << "kio_svn::stat " << url << Qt::endl;
     m_pData->resetListener();
@@ -231,8 +230,7 @@ void kio_svnProtocol::stat(const QUrl &url)
     } catch (const svn::ClientException &e) {
         QString ex = e.msg();
         qCDebug(KDESVN_LOG) << ex << Qt::endl;
-        extraError(KIO::ERR_WORKER_DEFINED, ex);
-        return;
+        return extraError(KIO::ERR_WORKER_DEFINED, ex);
     }
 
     if (e.isEmpty()) {
@@ -251,14 +249,13 @@ void kio_svnProtocol::stat(const QUrl &url)
         }
     }
     statEntry(entry);
-    finished();
+    return KIO::WorkerResult::pass();
 }
 
-void kio_svnProtocol::get(const QUrl &url)
+KIO::WorkerResult kio_svnProtocol::get(const QUrl &url)
 {
     if (m_pData->m_Listener.contextCancel()) {
-        finished();
-        return;
+        return KIO::WorkerResult::pass();
     }
     svn::Revision rev = m_pData->urlToRev(url);
     if (rev == svn::Revision::UNDEFINED) {
@@ -278,15 +275,15 @@ void kio_svnProtocol::get(const QUrl &url)
         // dolphin / Konqueror try to get the content without check if it is a folder when listing a folder
         // which results in a lot of error messages via kio notify
         if (e.apr_err() != SVN_ERR_CLIENT_IS_DIRECTORY) {
-            extraError(KIO::ERR_WORKER_DEFINED, QStringLiteral("Subversion error ") + ex);
+            return extraError(KIO::ERR_WORKER_DEFINED, QStringLiteral("Subversion error ") + ex);
         }
-        return;
+        return KIO::WorkerResult::pass();
     }
     data(QByteArray()); // empty array means we're done sending the data
-    finished();
+    return KIO::WorkerResult::pass();
 }
 
-void kio_svnProtocol::mkdir(const QUrl &url, int)
+KIO::WorkerResult kio_svnProtocol::mkdir(const QUrl &url, int)
 {
     qCDebug(KDESVN_LOG) << "kio_svn::mkdir " << url << Qt::endl;
     m_pData->resetListener();
@@ -295,31 +292,28 @@ void kio_svnProtocol::mkdir(const QUrl &url, int)
         rev = svn::Revision::HEAD;
     }
     if (rev != svn::Revision::HEAD) {
-        extraError(KIO::ERR_WORKER_DEFINED, i18n("Can only write on HEAD revision."));
-        return;
+        return extraError(KIO::ERR_WORKER_DEFINED, i18n("Can only write on HEAD revision."));
     }
     m_pData->m_CurrentContext->setLogMessage(getDefaultLog());
     try {
         m_pData->m_Svnclient->mkdir(makeSvnPath(url), getDefaultLog());
     } catch (const svn::ClientException &e) {
-        extraError(KIO::ERR_WORKER_DEFINED, e.msg());
-        return;
+        return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
     }
-    finished();
+    return KIO::WorkerResult::pass();
 }
 
-void kio_svnProtocol::mkdir(const QList<QUrl> &urls, int)
+KIO::WorkerResult kio_svnProtocol::mkdir(const QList<QUrl> &urls, int)
 {
     try {
         m_pData->m_Svnclient->mkdir(svn::Targets::fromUrlList(urls, svn::Targets::UrlConversion::PreferLocalPath), getDefaultLog());
     } catch (const svn::ClientException &e) {
-        extraError(KIO::ERR_WORKER_DEFINED, e.msg());
-        return;
+        return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
     }
-    finished();
+    return KIO::WorkerResult::pass();
 }
 
-void kio_svnProtocol::rename(const QUrl &src, const QUrl &target, KIO::JobFlags flags)
+KIO::WorkerResult kio_svnProtocol::rename(const QUrl &src, const QUrl &target, KIO::JobFlags flags)
 {
     qCDebug(KDESVN_LOG) << "kio_svn::rename " << src << " to " << target << Qt::endl;
     m_pData->resetListener();
@@ -330,17 +324,15 @@ void kio_svnProtocol::rename(const QUrl &src, const QUrl &target, KIO::JobFlags 
         m_pData->m_Svnclient->move(svn::CopyParameter(makeSvnPath(src), makeSvnPath(target)));
     } catch (const svn::ClientException &e) {
         if (e.apr_err() == SVN_ERR_ENTRY_EXISTS) {
-            error(KIO::ERR_DIR_ALREADY_EXIST, e.msg());
-        } else {
-            extraError(KIO::ERR_WORKER_DEFINED, e.msg());
+            return KIO::WorkerResult::fail(KIO::ERR_DIR_ALREADY_EXIST, e.msg());
         }
-        return;
+        return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
     }
     notify(i18n("Renaming %1 to %2 successful", src.toDisplayString(), target.toDisplayString()));
-    finished();
+    return KIO::WorkerResult::pass();
 }
 
-void kio_svnProtocol::put(const QUrl &url, int permissions, KIO::JobFlags flags)
+KIO::WorkerResult kio_svnProtocol::put(const QUrl &url, int permissions, KIO::JobFlags flags)
 {
     Q_UNUSED(permissions);
     m_pData->resetListener();
@@ -349,8 +341,7 @@ void kio_svnProtocol::put(const QUrl &url, int permissions, KIO::JobFlags flags)
         rev = svn::Revision::HEAD;
     }
     if (rev != svn::Revision::HEAD) {
-        extraError(KIO::ERR_WORKER_DEFINED, i18n("Can only write on HEAD revision."));
-        return;
+        return extraError(KIO::ERR_WORKER_DEFINED, i18n("Can only write on HEAD revision."));
     }
     svn::Revision peg = rev;
     svn::InfoEntries e;
@@ -361,8 +352,7 @@ void kio_svnProtocol::put(const QUrl &url, int permissions, KIO::JobFlags flags)
         if (e.apr_err() == SVN_ERR_ENTRY_NOT_FOUND || e.apr_err() == SVN_ERR_RA_ILLEGAL_URL) {
             exists = false;
         } else {
-            extraError(KIO::ERR_WORKER_DEFINED, e.msg());
-            return;
+            return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
         }
     }
     QSharedPointer<QFile> tmpfile;
@@ -370,8 +360,7 @@ void kio_svnProtocol::put(const QUrl &url, int permissions, KIO::JobFlags flags)
     if (exists) {
         if (flags & KIO::Overwrite) {
             if (!supportOverwrite()) {
-                extraError(KIO::ERR_WORKER_DEFINED, i18n("Overwriting existing items is disabled in settings."));
-                return;
+                return extraError(KIO::ERR_WORKER_DEFINED, i18n("Overwriting existing items is disabled in settings."));
             }
             _codir = QSharedPointer<QTemporaryDir>(new QTemporaryDir);
             _codir->setAutoRemove(true);
@@ -386,23 +375,20 @@ void kio_svnProtocol::put(const QUrl &url, int permissions, KIO::JobFlags flags)
                 params.moduleName(path).destination(svn::Path(_codir->path())).revision(rev).peg(peg).depth(svn::DepthFiles);
                 m_pData->m_Svnclient->checkout(params);
             } catch (const svn::ClientException &e) {
-                extraError(KIO::ERR_WORKER_DEFINED, e.msg());
-                return;
+                return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
             }
             m_pData->dispWritten = false;
             stopOp(i18n("Temporary checkout done."));
             tmpfile = QSharedPointer<QFile>(new QFile(_codir->path() + url.fileName()));
             tmpfile->open(QIODevice::ReadWrite | QIODevice::Truncate);
         } else {
-            extraError(KIO::ERR_FILE_ALREADY_EXIST, i18n("Could not write to existing item."));
-            return;
+            return extraError(KIO::ERR_FILE_ALREADY_EXIST, i18n("Could not write to existing item."));
         }
     } else {
         QTemporaryFile *_tmpfile = new QTemporaryFile();
         if (!_tmpfile->open()) {
-            extraError(KIO::ERR_WORKER_DEFINED, i18n("Could not open temporary file"));
             delete _tmpfile;
-            return;
+            return extraError(KIO::ERR_WORKER_DEFINED, i18n("Could not open temporary file"));
         }
         tmpfile = QSharedPointer<QFile>(_tmpfile);
     }
@@ -423,8 +409,7 @@ void kio_svnProtocol::put(const QUrl &url, int permissions, KIO::JobFlags flags)
     tmpfile->flush();
 
     if (result != 0) {
-        error(KIO::ERR_ABORTED, i18n("Could not retrieve data for write."));
-        return;
+        return KIO::WorkerResult::fail(KIO::ERR_ABORTED, i18n("Could not retrieve data for write."));
     }
 
     totalSize(processed_size);
@@ -432,34 +417,32 @@ void kio_svnProtocol::put(const QUrl &url, int permissions, KIO::JobFlags flags)
     m_pData->dispWritten = true;
     registerToDaemon();
     startOp(processed_size, i18n("Committing %1", makeSvnPath(url).path()));
-    bool err = false;
     if (exists) {
         svn::CommitParameter commit_parameters;
         commit_parameters.targets(svn::Targets(tmpfile->fileName())).message(getDefaultLog()).depth(svn::DepthEmpty).keepLocks(false);
         try {
             m_pData->m_Svnclient->commit(commit_parameters);
         } catch (const svn::ClientException &e) {
-            extraError(KIO::ERR_WORKER_DEFINED, e.msg());
-            err = true;
+            m_pData->dispWritten = false;
+            return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
         }
     } else {
         try {
             m_pData->m_Svnclient->import(tmpfile->fileName(), svn::Url(makeSvnPath(url)), getDefaultLog(), svn::DepthEmpty, false, false);
         } catch (const svn::ClientException &e) {
             QString ex = e.msg();
-            extraError(KIO::ERR_WORKER_DEFINED, e.msg());
-            err = true;
             stopOp(ex);
+            m_pData->dispWritten = false;
+            return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
         }
     }
     m_pData->dispWritten = false;
-    if (!err) {
-        stopOp(i18n("Wrote %1 to repository", helpers::ByteToString(processed_size)));
-        finished();
-    }
+
+    stopOp(i18n("Wrote %1 to repository", helpers::ByteToString(processed_size)));
+    return KIO::WorkerResult::pass();
 }
 
-void kio_svnProtocol::copy(const QUrl &src, const QUrl &dest, int permissions, KIO::JobFlags flags)
+KIO::WorkerResult kio_svnProtocol::copy(const QUrl &src, const QUrl &dest, int permissions, KIO::JobFlags flags)
 {
     Q_UNUSED(permissions);
     Q_UNUSED(flags);
@@ -475,21 +458,19 @@ void kio_svnProtocol::copy(const QUrl &src, const QUrl &dest, int permissions, K
     try {
         m_pData->m_Svnclient->copy(makeSvnPath(src), rev, makeSvnPath(dest));
     } catch (const svn::ClientException &e) {
-        if (e.apr_err() == SVN_ERR_ENTRY_EXISTS) {
-            error(KIO::ERR_DIR_ALREADY_EXIST, e.msg());
-        } else {
-            extraError(KIO::ERR_WORKER_DEFINED, e.msg());
-        }
         qCDebug(KDESVN_LOG) << "kio_svn::copy aborted" << Qt::endl;
-        return;
+        if (e.apr_err() == SVN_ERR_ENTRY_EXISTS) {
+            return KIO::WorkerResult::fail(KIO::ERR_DIR_ALREADY_EXIST, e.msg());
+        }
+        return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
     }
     m_pData->dispProgress = false;
     qCDebug(KDESVN_LOG) << "kio_svn::copy finished" << Qt::endl;
     notify(i18n("Copied %1 to %2", makeSvnPath(src).path(), makeSvnPath(dest).path()));
-    finished();
+    return KIO::WorkerResult::pass();
 }
 
-void kio_svnProtocol::del(const QUrl &src, bool isfile)
+KIO::WorkerResult kio_svnProtocol::del(const QUrl &src, bool isfile)
 {
     Q_UNUSED(isfile);
     m_pData->resetListener();
@@ -500,20 +481,18 @@ void kio_svnProtocol::del(const QUrl &src, bool isfile)
         rev = svn::Revision::HEAD;
     }
     if (rev != svn::Revision::HEAD) {
-        extraError(KIO::ERR_WORKER_DEFINED, i18n("Can only write on HEAD revision."));
-        return;
+        return extraError(KIO::ERR_WORKER_DEFINED, i18n("Can only write on HEAD revision."));
     }
     m_pData->m_CurrentContext->setLogMessage(getDefaultLog());
     try {
         svn::Targets target(makeSvnPath(src));
         m_pData->m_Svnclient->remove(target, false);
     } catch (const svn::ClientException &e) {
-        extraError(KIO::ERR_WORKER_DEFINED, e.msg());
         qCDebug(KDESVN_LOG) << "kio_svn::del aborted" << Qt::endl;
-        return;
+        return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
     }
     qCDebug(KDESVN_LOG) << "kio_svn::del finished" << Qt::endl;
-    finished();
+    return KIO::WorkerResult::pass();
 }
 
 bool kio_svnProtocol::getLogMsg(QString &t)
@@ -573,7 +552,7 @@ KIO::UDSEntry kio_svnProtocol::createUDSEntry(const QString &filename, const QSt
     return entry;
 }
 
-void kio_svnProtocol::special(const QByteArray &data)
+KIO::WorkerResult kio_svnProtocol::special(const QByteArray &data)
 {
     qCDebug(KDESVN_LOG) << "kio_svnProtocol::special" << Qt::endl;
     QByteArray tmpData(data);
@@ -593,8 +572,7 @@ void kio_svnProtocol::special(const QByteArray &data)
         stream >> revkind;
         qCDebug(KDESVN_LOG) << "kio_svnProtocol CHECKOUT from " << repository.url() << " to " << wc.url() << " at " << revnumber << " or " << revkind
                             << Qt::endl;
-        checkout(repository, wc, revnumber, revkind);
-        break;
+        return checkout(repository, wc, revnumber, revkind);
     }
     case SVN_UPDATE: {
         QUrl wc;
@@ -604,8 +582,7 @@ void kio_svnProtocol::special(const QByteArray &data)
         stream >> revnumber;
         stream >> revkind;
         qCDebug(KDESVN_LOG) << "kio_svnProtocol UPDATE " << wc.url() << " at " << revnumber << " or " << revkind << Qt::endl;
-        update(wc, revnumber, revkind);
-        break;
+        return update(wc, revnumber, revkind);
     }
     case SVN_COMMIT: {
         QList<QUrl> wclist;
@@ -615,8 +592,7 @@ void kio_svnProtocol::special(const QByteArray &data)
             wclist << tmp;
         }
         qCDebug(KDESVN_LOG) << "kio_svnProtocol COMMIT" << Qt::endl;
-        commit(wclist);
-        break;
+        return commit(wclist);
     }
     case SVN_LOG: {
         qCDebug(KDESVN_LOG) << "kio_svnProtocol LOG" << Qt::endl;
@@ -632,23 +608,20 @@ void kio_svnProtocol::special(const QByteArray &data)
             stream >> tmp;
             targets << tmp;
         }
-        svnlog(revstart, revkindstart, revend, revkindend, targets);
-        break;
+        return svnlog(revstart, revkindstart, revend, revkindend, targets);
     }
     case SVN_IMPORT: {
         QUrl wc, repos;
         stream >> repos;
         stream >> wc;
         qCDebug(KDESVN_LOG) << "kio_ksvnProtocol IMPORT" << Qt::endl;
-        import(repos, wc);
-        break;
+        return import(repos, wc);
     }
     case SVN_ADD: {
         QUrl wc;
         qCDebug(KDESVN_LOG) << "kio_ksvnProtocol ADD" << Qt::endl;
         stream >> wc;
-        add(wc);
-        break;
+        return add(wc);
     }
     case SVN_DEL: {
         QList<QUrl> wclist;
@@ -657,8 +630,7 @@ void kio_svnProtocol::special(const QByteArray &data)
             stream >> tmp;
             wclist << tmp;
         }
-        wc_delete(wclist);
-        break;
+        return wc_delete(wclist);
     }
     case SVN_REVERT: {
         QList<QUrl> wclist;
@@ -668,8 +640,7 @@ void kio_svnProtocol::special(const QByteArray &data)
             wclist << tmp;
         }
         qCDebug(KDESVN_LOG) << "kio_svnProtocol REVERT" << Qt::endl;
-        revert(wclist);
-        break;
+        return revert(wclist);
     }
     case SVN_STATUS: {
         QUrl wc;
@@ -679,15 +650,13 @@ void kio_svnProtocol::special(const QByteArray &data)
         stream >> checkRepos;
         stream >> fullRecurse;
         qCDebug(KDESVN_LOG) << "kio_svnProtocol STATUS" << Qt::endl;
-        status(wc, checkRepos, fullRecurse);
-        break;
+        return status(wc, checkRepos, fullRecurse);
     }
     case SVN_MKDIR: {
         QList<QUrl> list;
         stream >> list;
         qCDebug(KDESVN_LOG) << "kio_svnProtocol MKDIR" << Qt::endl;
-        this->mkdir(list, 0);
-        break;
+        return this->mkdir(list, 0);
     }
     case SVN_RESOLVE: {
         QUrl url;
@@ -695,8 +664,7 @@ void kio_svnProtocol::special(const QByteArray &data)
         stream >> url;
         stream >> recurse;
         qCDebug(KDESVN_LOG) << "kio_svnProtocol RESOLVE" << Qt::endl;
-        wc_resolve(url, recurse);
-        break;
+        return wc_resolve(url, recurse);
     }
     case SVN_SWITCH: {
         QUrl wc, url;
@@ -709,8 +677,7 @@ void kio_svnProtocol::special(const QByteArray &data)
         stream >> revnumber;
         stream >> revkind;
         qCDebug(KDESVN_LOG) << "kio_svnProtocol SWITCH" << Qt::endl;
-        wc_switch(wc, url, recurse, revnumber, revkind);
-        break;
+        return wc_switch(wc, url, recurse, revnumber, revkind);
     }
     case SVN_DIFF: {
         QUrl url1, url2;
@@ -724,17 +691,16 @@ void kio_svnProtocol::special(const QByteArray &data)
         stream >> rev2;
         stream >> revkind2;
         stream >> recurse;
-        diff(url1, url2, rev1, revkind1, rev2, revkind2, recurse);
-        break;
+        return diff(url1, url2, rev1, revkind1, rev2, revkind2, recurse);
     }
     default: {
         qCDebug(KDESVN_LOG) << "Unknown special" << Qt::endl;
+        return KIO::WorkerResult::fail();
     }
     }
-    finished();
 }
 
-void kio_svnProtocol::update(const QUrl &url, int revnumber, const QString &revkind)
+KIO::WorkerResult kio_svnProtocol::update(const QUrl &url, int revnumber, const QString &revkind)
 {
     svn::Revision where(revnumber, revkind);
     m_pData->resetListener();
@@ -749,11 +715,12 @@ void kio_svnProtocol::update(const QUrl &url, int revnumber, const QString &revk
         _params.targets(p.path()).revision(revnumber).depth(svn::DepthInfinity).ignore_externals(false).allow_unversioned(false).sticky_depth(true);
         m_pData->m_Svnclient->update(_params);
     } catch (const svn::ClientException &e) {
-        extraError(KIO::ERR_WORKER_DEFINED, e.msg());
+        return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
     }
+    return KIO::WorkerResult::pass();
 }
 
-void kio_svnProtocol::status(const QUrl &wc, bool cR, bool rec)
+KIO::WorkerResult kio_svnProtocol::status(const QUrl &wc, bool cR, bool rec)
 {
     svn::StatusEntries dlist;
     svn::StatusParameter params(wc.path());
@@ -762,8 +729,7 @@ void kio_svnProtocol::status(const QUrl &wc, bool cR, bool rec)
         dlist = m_pData->m_Svnclient->status(
             params.depth(rec ? svn::DepthInfinity : svn::DepthEmpty).all(false).update(cR).noIgnore(false).revision(svn::Revision::UNDEFINED));
     } catch (const svn::ClientException &e) {
-        extraError(KIO::ERR_WORKER_DEFINED, e.msg());
-        return;
+        return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
     }
     qCDebug(KDESVN_LOG) << "Status got " << dlist.count() << " entries." << Qt::endl;
     for (const svn::StatusPtr &s : qAsConst(dlist)) {
@@ -781,26 +747,27 @@ void kio_svnProtocol::status(const QUrl &wc, bool cR, bool rec)
         setMetaData(cntStr + QLatin1String("rev"), QString::number(s->entry().cmtRev()));
         m_pData->m_Listener.incCounter();
     }
+    return KIO::WorkerResult::pass();
 }
 
-void kio_svnProtocol::commit(const QList<QUrl> &urls)
+KIO::WorkerResult kio_svnProtocol::commit(const QList<QUrl> &urls)
 {
     /// @todo replace with direct call to kdesvn?
     QString msg;
 
-    CON_DBUS;
+    CON_DBUS_VAL(KIO::WorkerResult::fail());
 
     QDBusReply<QStringList> res = kdesvndInterface.get_logmsg();
     if (!res.isValid()) {
         qWarning() << "Unexpected reply type";
-        return;
+        return KIO::WorkerResult::fail();
     }
     QStringList lt = res;
 
     if (lt.count() != 1) {
         msg = i18n("Wrong or missing log (may cancel pressed).");
         qCDebug(KDESVN_LOG) << msg << Qt::endl;
-        return;
+        return KIO::WorkerResult::fail();
     }
     msg = lt[0];
     svn::Revision nnum = svn::Revision::UNDEFINED;
@@ -813,7 +780,7 @@ void kio_svnProtocol::commit(const QList<QUrl> &urls)
     try {
         nnum = m_pData->m_Svnclient->commit(commit_parameters);
     } catch (const svn::ClientException &e) {
-        extraError(KIO::ERR_WORKER_DEFINED, e.msg());
+        return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
     }
     for (const auto &url : urls) {
         QString userstring;
@@ -834,9 +801,10 @@ void kio_svnProtocol::commit(const QList<QUrl> &urls)
         setMetaData(num + QLatin1String("string"), userstring);
         m_pData->m_Listener.incCounter();
     }
+    return KIO::WorkerResult::pass();
 }
 
-void kio_svnProtocol::checkout(const QUrl &src, const QUrl &target, const int rev, const QString &revstring)
+KIO::WorkerResult kio_svnProtocol::checkout(const QUrl &src, const QUrl &target, const int rev, const QString &revstring)
 {
     svn::Revision where(rev, revstring);
     try {
@@ -844,11 +812,12 @@ void kio_svnProtocol::checkout(const QUrl &src, const QUrl &target, const int re
         params.moduleName(makeSvnPath(src)).destination(target.path()).revision(where).peg(svn::Revision::UNDEFINED).depth(svn::DepthInfinity);
         m_pData->m_Svnclient->checkout(params);
     } catch (const svn::ClientException &e) {
-        extraError(KIO::ERR_WORKER_DEFINED, e.msg());
+        return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
     }
+    return KIO::WorkerResult::pass();
 }
 
-void kio_svnProtocol::svnlog(int revstart, const QString &revstringstart, int revend, const QString &revstringend, const QList<QUrl> &urls)
+KIO::WorkerResult kio_svnProtocol::svnlog(int revstart, const QString &revstringstart, int revend, const QString &revstringend, const QList<QUrl> &urls)
 {
     svn::Revision start(revstart, revstringstart);
     svn::Revision end(revend, revstringend);
@@ -860,8 +829,7 @@ void kio_svnProtocol::svnlog(int revstart, const QString &revstringstart, int re
         try {
             m_pData->m_Svnclient->log(params.targets(makeSvnPath(url)), logs);
         } catch (const svn::ClientException &e) {
-            extraError(KIO::ERR_WORKER_DEFINED, e.msg());
-            break;
+            return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
         }
         if (logs.isEmpty()) {
             const QString num(QString::number(m_pData->m_Listener.counter()).rightJustified(10, QLatin1Char('0')));
@@ -890,29 +858,32 @@ void kio_svnProtocol::svnlog(int revstart, const QString &revstringstart, int re
             }
         }
     }
+    return KIO::WorkerResult::pass();
 }
 
-void kio_svnProtocol::revert(const QList<QUrl> &urls)
+KIO::WorkerResult kio_svnProtocol::revert(const QList<QUrl> &urls)
 {
     try {
         m_pData->m_Svnclient->revert(svn::Targets::fromUrlList(urls, svn::Targets::UrlConversion::PreferLocalPath), svn::DepthEmpty);
     } catch (const svn::ClientException &e) {
-        extraError(KIO::ERR_WORKER_DEFINED, e.msg());
+        return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
     }
+    return KIO::WorkerResult::pass();
 }
 
-void kio_svnProtocol::wc_switch(const QUrl &wc, const QUrl &target, bool rec, int rev, const QString &revstring)
+KIO::WorkerResult kio_svnProtocol::wc_switch(const QUrl &wc, const QUrl &target, bool rec, int rev, const QString &revstring)
 {
     svn::Revision where(rev, revstring);
     svn::Path wc_path(wc.path());
     try {
         m_pData->m_Svnclient->doSwitch(wc_path, svn::Url(makeSvnPath(target)), where, rec ? svn::DepthInfinity : svn::DepthFiles);
     } catch (const svn::ClientException &e) {
-        extraError(KIO::ERR_WORKER_DEFINED, e.msg());
+        return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
     }
+    return KIO::WorkerResult::pass();
 }
 
-void kio_svnProtocol::diff(const QUrl &uri1, const QUrl &uri2, int rnum1, const QString &rstring1, int rnum2, const QString &rstring2, bool rec)
+KIO::WorkerResult kio_svnProtocol::diff(const QUrl &uri1, const QUrl &uri2, int rnum1, const QString &rstring1, int rnum2, const QString &rstring2, bool rec)
 {
     QByteArray ex;
     /// @todo read settings for diff (ignore contentype)
@@ -942,8 +913,7 @@ void kio_svnProtocol::diff(const QUrl &uri1, const QUrl &uri2, int rnum1, const 
         tdir.setAutoRemove(true);
         ex = m_pData->m_Svnclient->diff(_opts);
     } catch (const svn::ClientException &e) {
-        extraError(KIO::ERR_WORKER_DEFINED, e.msg());
-        return;
+        return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
     }
     QString out = QString::fromUtf8(ex);
     const QString num(QString::number(m_pData->m_Listener.counter()).rightJustified(10, QLatin1Char('0')));
@@ -952,55 +922,52 @@ void kio_svnProtocol::diff(const QUrl &uri1, const QUrl &uri2, int rnum1, const 
         setMetaData(num + QStringLiteral("diffresult"), stream.readLine());
         m_pData->m_Listener.incCounter();
     }
+    return KIO::WorkerResult::pass();
 }
 
-void kio_svnProtocol::import(const QUrl &repos, const QUrl &wc)
+KIO::WorkerResult kio_svnProtocol::import(const QUrl &repos, const QUrl &wc)
 {
     try {
         const svn::Path target = makeSvnPath(repos);
         const QString path = wc.path();
         m_pData->m_Svnclient->import(path, svn::Url(target), QString(), svn::DepthInfinity, false, false);
     } catch (const svn::ClientException &e) {
-        extraError(KIO::ERR_WORKER_DEFINED, e.msg());
-        return;
+        return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
     }
-    finished();
+    return KIO::WorkerResult::pass();
 }
 
-void kio_svnProtocol::add(const QUrl &wc)
+KIO::WorkerResult kio_svnProtocol::add(const QUrl &wc)
 {
     QString path = wc.path();
     try {
         /* rec */
         m_pData->m_Svnclient->add(svn::Path(path), svn::DepthInfinity);
     } catch (const svn::ClientException &e) {
-        extraError(KIO::ERR_WORKER_DEFINED, e.msg());
-        return;
+        return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
     }
-    finished();
+    return KIO::WorkerResult::pass();
 }
 
-void kio_svnProtocol::wc_delete(const QList<QUrl> &urls)
+KIO::WorkerResult kio_svnProtocol::wc_delete(const QList<QUrl> &urls)
 {
     try {
         m_pData->m_Svnclient->remove(svn::Targets::fromUrlList(urls, svn::Targets::UrlConversion::PreferLocalPath), false);
     } catch (const svn::ClientException &e) {
-        extraError(KIO::ERR_WORKER_DEFINED, e.msg());
-        return;
+        return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
     }
-    finished();
+    return KIO::WorkerResult::pass();
 }
 
-void kio_svnProtocol::wc_resolve(const QUrl &url, bool recurse)
+KIO::WorkerResult kio_svnProtocol::wc_resolve(const QUrl &url, bool recurse)
 {
     try {
         svn::Depth depth = recurse ? svn::DepthInfinity : svn::DepthEmpty;
         m_pData->m_Svnclient->resolve(url.path(), depth);
     } catch (const svn::ClientException &e) {
-        extraError(KIO::ERR_WORKER_DEFINED, e.msg());
-        return;
+        return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
     }
-    finished();
+    return KIO::WorkerResult::pass();
 }
 
 void kio_svnProtocol::streamWritten(const KIO::filesize_t current)
@@ -1082,13 +1049,14 @@ void kio_svnProtocol::notify(const QString &text)
     kdesvndInterface.notifyKioOperation(text);
 }
 
-void kio_svnProtocol::extraError(int _errid, const QString &text)
+KIO::WorkerResult kio_svnProtocol::extraError(int _errid, const QString &text)
 {
-    error(_errid, text);
+    const KIO::WorkerResult failResult = KIO::WorkerResult::fail(_errid, text);
     if (!text.isNull()) {
-        CON_DBUS;
+        CON_DBUS_VAL(failResult);
         kdesvndInterface.errorKioOperation(text);
     }
+    return failResult;
 }
 
 void kio_svnProtocol::registerToDaemon()

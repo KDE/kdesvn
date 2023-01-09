@@ -24,8 +24,7 @@
 
 #include <qstring.h>
 
-#include <kio/global.h>
-#include <kio/slavebase.h>
+#include <KIO/WorkerBase>
 
 #include <sys/stat.h>
 
@@ -43,21 +42,21 @@ class KioSvnData;
 /**
 @author Rajko Albrecht
 */
-class kio_svnProtocol : public KIO::SlaveBase, public StreamWrittenCb
+class kio_svnProtocol : public KIO::WorkerBase, public StreamWrittenCb
 {
 public:
     kio_svnProtocol(const QByteArray &pool_socket, const QByteArray &app_socket);
     ~kio_svnProtocol() override;
-    // KIO::SlaveBase
-    void listDir(const QUrl &url) override;
-    void stat(const QUrl &url) override;
-    void get(const QUrl &url) override;
-    void mkdir(const QUrl &url, int permissions) override;
-    void put(const QUrl &url, int permissions, KIO::JobFlags flags) override;
-    void rename(const QUrl &src, const QUrl &target, KIO::JobFlags flags) override;
-    void del(const QUrl &url, bool isfile) override;
-    void copy(const QUrl &src, const QUrl &dest, int permissions, KIO::JobFlags flags) override;
-    void special(const QByteArray &data) override;
+    // KIO::WorkerBase
+    KIO::WorkerResult listDir(const QUrl &url) override;
+    KIO::WorkerResult stat(const QUrl &url) override;
+    KIO::WorkerResult get(const QUrl &url) override;
+    KIO::WorkerResult mkdir(const QUrl &url, int permissions) override;
+    KIO::WorkerResult put(const QUrl &url, int permissions, KIO::JobFlags flags) override;
+    KIO::WorkerResult rename(const QUrl &src, const QUrl &target, KIO::JobFlags flags) override;
+    KIO::WorkerResult del(const QUrl &url, bool isfile) override;
+    KIO::WorkerResult copy(const QUrl &src, const QUrl &dest, int permissions, KIO::JobFlags flags) override;
+    KIO::WorkerResult special(const QByteArray &data) override;
     // StreamWrittenCb
     void streamWritten(const KIO::filesize_t current) override;
     void streamPushData(const QByteArray &streamData) override;
@@ -68,19 +67,20 @@ public:
     bool checkKioCancel() const;
 
 protected:
-    void checkout(const QUrl &src, const QUrl &target, const int rev, const QString &revstring);
-    void update(const QUrl &url, int revnumber, const QString &revkind);
-    void commit(const QList<QUrl> &urls);
-    void svnlog(int revstart, const QString &revstringstart, int revend, const QString &revstringend, const QList<QUrl> &urls);
-    void import(const QUrl &repos, const QUrl &wc);
-    void add(const QUrl &wc);
-    void wc_delete(const QList<QUrl> &urls);
-    void revert(const QList<QUrl> &urls);
-    void status(const QUrl &wc, bool cR, bool rec);
-    void mkdir(const QList<QUrl> &urls, int permissions);
-    void wc_resolve(const QUrl &url, bool recurse);
-    void wc_switch(const QUrl &wc, const QUrl &target, bool rec, int rev, const QString &revstring);
-    void diff(const QUrl &uri1, const QUrl &uri2, int rnum1, const QString &rstring1, int rnum2, const QString &rstring2, bool rec);
+    Q_REQUIRED_RESULT KIO::WorkerResult checkout(const QUrl &src, const QUrl &target, const int rev, const QString &revstring);
+    Q_REQUIRED_RESULT KIO::WorkerResult update(const QUrl &url, int revnumber, const QString &revkind);
+    Q_REQUIRED_RESULT KIO::WorkerResult commit(const QList<QUrl> &urls);
+    Q_REQUIRED_RESULT KIO::WorkerResult svnlog(int revstart, const QString &revstringstart, int revend, const QString &revstringend, const QList<QUrl> &urls);
+    Q_REQUIRED_RESULT KIO::WorkerResult import(const QUrl &repos, const QUrl &wc);
+    Q_REQUIRED_RESULT KIO::WorkerResult add(const QUrl &wc);
+    Q_REQUIRED_RESULT KIO::WorkerResult wc_delete(const QList<QUrl> &urls);
+    Q_REQUIRED_RESULT KIO::WorkerResult revert(const QList<QUrl> &urls);
+    Q_REQUIRED_RESULT KIO::WorkerResult status(const QUrl &wc, bool cR, bool rec);
+    Q_REQUIRED_RESULT KIO::WorkerResult mkdir(const QList<QUrl> &urls, int permissions);
+    Q_REQUIRED_RESULT KIO::WorkerResult wc_resolve(const QUrl &url, bool recurse);
+    Q_REQUIRED_RESULT KIO::WorkerResult wc_switch(const QUrl &wc, const QUrl &target, bool rec, int rev, const QString &revstring);
+    Q_REQUIRED_RESULT KIO::WorkerResult
+    diff(const QUrl &uri1, const QUrl &uri2, int rnum1, const QString &rstring1, int rnum2, const QString &rstring2, bool rec);
     /* looked on kio::svn from kdesdk */
     enum KSVN_METHOD {
         /* QUrl repository, QUrl target, int revnumber, QString revkind */
@@ -112,7 +112,7 @@ protected:
     };
 
     void notify(const QString &text);
-    void extraError(int _errid, const QString &text);
+    Q_REQUIRED_RESULT KIO::WorkerResult extraError(int _errid, const QString &text);
 
 private:
     KioSvnData *m_pData;

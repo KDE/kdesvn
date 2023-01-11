@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:58+0000\n"
-"PO-Revision-Date: 2022-10-11 19:28+0100\n"
+"PO-Revision-Date: 2023-01-10 10:43+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -2744,7 +2744,7 @@ msgstr "Gravar a senha"
 #, kde-format
 msgctxt "@action:button"
 msgid "Store in Plain Text"
-msgstr ""
+msgstr "Guardar em Texto Simples"
 
 #: src/svnfrontend/commandexec.cpp:206 src/svnfrontend/commandexec.cpp:321
 #: src/svnfrontend/graphtree/revgraphview.cpp:992
@@ -2983,11 +2983,10 @@ msgid "Clean repository cache"
 msgstr "Limpar a 'cache' do repositório"
 
 #: src/svnfrontend/database/dboverview.cpp:131
-#, fuzzy, kde-format
-#| msgid "Delete cache"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Cache"
-msgstr "Apagar a 'cache'"
+msgstr "Apagar a 'Cache'"
 
 #: src/svnfrontend/database/dboverview.cpp:148
 #, kde-format
@@ -3006,11 +3005,10 @@ msgid "Delete repository"
 msgstr "Apagar o repositório"
 
 #: src/svnfrontend/database/dboverview.cpp:150
-#, fuzzy, kde-format
-#| msgid "Delete repository"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Repository"
-msgstr "Apagar o repositório"
+msgstr "Apagar o Repositório"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DBOverView)
 #: src/svnfrontend/database/dboverview.ui:6
@@ -4507,11 +4505,10 @@ msgstr "A desbloquear os itens"
 #, kde-format
 msgctxt "@action:button"
 msgid "Break Lock"
-msgstr ""
+msgstr "Quebrar o Bloqueio"
 
 #: src/svnfrontend/maintreewidget.cpp:1606
-#, fuzzy, kde-format
-#| msgid "Ignore"
+#, kde-format
 msgctxt "@action:button"
 msgid "Ignore"
 msgstr "Ignorar"
@@ -5723,6 +5720,3 @@ msgstr "Abrir o repositório / cópia local"
 #, kde-format
 msgid "Open repository or working copy"
 msgstr "Abrir o repositório ou a cópia local"
-
-#~ msgid "File %1 exists - overwrite?"
-#~ msgstr "O ficheiro %1 já existe - sobrepor?"

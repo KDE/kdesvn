@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Emir SARI <emir_sari@icloud.com>, 2022.
+# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:58+0000\n"
-"PO-Revision-Date: 2022-12-11 20:06+0300\n"
+"PO-Revision-Date: 2023-01-10 20:50+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2698,7 +2698,7 @@ msgstr "Parolayı kaydet"
 #, kde-format
 msgctxt "@action:button"
 msgid "Store in Plain Text"
-msgstr ""
+msgstr "Düz Metin Olarak Depola"
 
 #: src/svnfrontend/commandexec.cpp:206 src/svnfrontend/commandexec.cpp:321
 #: src/svnfrontend/graphtree/revgraphview.cpp:992
@@ -2933,11 +2933,10 @@ msgid "Clean repository cache"
 msgstr "Depo önbelleğini temizle"
 
 #: src/svnfrontend/database/dboverview.cpp:131
-#, fuzzy, kde-format
-#| msgid "Delete cache"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Cache"
-msgstr "Önbelleği sil"
+msgstr "Önbelleği Sil"
 
 #: src/svnfrontend/database/dboverview.cpp:148
 #, kde-format
@@ -2956,11 +2955,10 @@ msgid "Delete repository"
 msgstr "Depoyu sil"
 
 #: src/svnfrontend/database/dboverview.cpp:150
-#, fuzzy, kde-format
-#| msgid "Delete repository"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Repository"
-msgstr "Depoyu sil"
+msgstr "Depoyu Sil"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DBOverView)
 #: src/svnfrontend/database/dboverview.ui:6
@@ -4439,11 +4437,10 @@ msgstr "Ögelerin kilidi açılıyor"
 #, kde-format
 msgctxt "@action:button"
 msgid "Break Lock"
-msgstr ""
+msgstr "Kilidi Kır"
 
 #: src/svnfrontend/maintreewidget.cpp:1606
-#, fuzzy, kde-format
-#| msgid "Ignore"
+#, kde-format
 msgctxt "@action:button"
 msgid "Ignore"
 msgstr "Yok Say"

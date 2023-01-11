@@ -1,16 +1,16 @@
 # Translation of kdesvn.po to Catalan (Valencian)
-# Copyright (C) 2006-2022 This_file_is_part_of_KDE
+# Copyright (C) 2006-2023 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2006, 2007, 2011, 2013, 2014, 2015, 2016, 2017, 2020, 2022.
-# Josep M. Ferrer <txemaq@gmail.com>, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Josep M. Ferrer <txemaq@gmail.com>, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:58+0000\n"
-"PO-Revision-Date: 2022-10-10 09:42+0200\n"
+"PO-Revision-Date: 2023-01-10 10:33+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -2731,7 +2731,7 @@ msgstr "Guarda la contrasenya"
 #, kde-format
 msgctxt "@action:button"
 msgid "Store in Plain Text"
-msgstr ""
+msgstr "Emmagatzema en text normal"
 
 #: src/svnfrontend/commandexec.cpp:206 src/svnfrontend/commandexec.cpp:321
 #: src/svnfrontend/graphtree/revgraphview.cpp:992
@@ -2973,11 +2973,10 @@ msgid "Clean repository cache"
 msgstr "Buida el cau del repositori"
 
 #: src/svnfrontend/database/dboverview.cpp:131
-#, fuzzy, kde-format
-#| msgid "Delete cache"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Cache"
-msgstr "Suprimix el cau"
+msgstr "Suprimix la memòria cau"
 
 #: src/svnfrontend/database/dboverview.cpp:148
 #, kde-format
@@ -2996,8 +2995,7 @@ msgid "Delete repository"
 msgstr "Suprimix el repositori"
 
 #: src/svnfrontend/database/dboverview.cpp:150
-#, fuzzy, kde-format
-#| msgid "Delete repository"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Repository"
 msgstr "Suprimix el repositori"
@@ -4502,11 +4500,10 @@ msgstr "Elements sense blocat"
 #, kde-format
 msgctxt "@action:button"
 msgid "Break Lock"
-msgstr ""
+msgstr "Trenca el blocat"
 
 #: src/svnfrontend/maintreewidget.cpp:1606
-#, fuzzy, kde-format
-#| msgid "Ignore"
+#, kde-format
 msgctxt "@action:button"
 msgid "Ignore"
 msgstr "Ignora"
@@ -5714,6 +5711,3 @@ msgstr "Obri un repositori/còpia de treball"
 #, kde-format
 msgid "Open repository or working copy"
 msgstr "Obri el repositori o còpia de treball"
-
-#~ msgid "File %1 exists - overwrite?"
-#~ msgstr "El fitxer %1 ja existix - Voleu sobreescriure'l?"

@@ -5,20 +5,20 @@
 # Mario Palomo Torrero <mariopal@gmail.com>, 2008, 2009.
 # Alvaro Soliverez <asoliverez@gmail.com>, 2010.
 # Javier Viñal <fjvinal@gmail.com>, 2013.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2022.
+# Eloy Cuadra <ecuadra@eloihr.net>, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:58+0000\n"
-"PO-Revision-Date: 2022-10-10 23:56+0200\n"
+"PO-Revision-Date: 2023-01-11 00:40+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.12.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -2736,7 +2736,7 @@ msgstr "Guardar la contraseña"
 #, kde-format
 msgctxt "@action:button"
 msgid "Store in Plain Text"
-msgstr ""
+msgstr "Guardar en texto sin formato"
 
 #: src/svnfrontend/commandexec.cpp:206 src/svnfrontend/commandexec.cpp:321
 #: src/svnfrontend/graphtree/revgraphview.cpp:992
@@ -2977,8 +2977,7 @@ msgid "Clean repository cache"
 msgstr "Borrar la caché del repositorio"
 
 #: src/svnfrontend/database/dboverview.cpp:131
-#, fuzzy, kde-format
-#| msgid "Delete cache"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Cache"
 msgstr "Borrar caché"
@@ -3000,8 +2999,7 @@ msgid "Delete repository"
 msgstr "Borrar repositorio"
 
 #: src/svnfrontend/database/dboverview.cpp:150
-#, fuzzy, kde-format
-#| msgid "Delete repository"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Repository"
 msgstr "Borrar repositorio"
@@ -4503,11 +4501,10 @@ msgstr "Desbloqueando elementos"
 #, kde-format
 msgctxt "@action:button"
 msgid "Break Lock"
-msgstr ""
+msgstr "Romper el bloqueo"
 
 #: src/svnfrontend/maintreewidget.cpp:1606
-#, fuzzy, kde-format
-#| msgid "Ignore"
+#, kde-format
 msgctxt "@action:button"
 msgid "Ignore"
 msgstr "Ignorar"

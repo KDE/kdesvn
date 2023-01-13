@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-31 00:48+0000\n"
+"POT-Creation-Date: 2023-01-10 00:58+0000\n"
 "PO-Revision-Date: 2022-10-30 09:32+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -251,7 +251,7 @@ msgstr ""
 msgid "Original author and maintainer"
 msgstr "Opphavsperson og vedlikehaldar"
 
-#: src/kdesvn_part.cpp:292 src/main.cpp:50 src/main.cpp:51
+#: src/kdesvn_part.cpp:292 src/main.cpp:44 src/main.cpp:45
 #, kde-format
 msgid "Developer"
 msgstr "Utviklar"
@@ -520,7 +520,7 @@ msgstr "Depotdump fullført."
 msgid "Inserted %v not cached log entries of %m."
 msgstr "Sette inn %v ikkje-mellomlagra loggoppføringar frå %m."
 
-#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:808
+#: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:768
 #, kde-format
 msgid "Wrong or missing log (may cancel pressed)."
 msgstr "Ugyldig eller manglade logg (kan skuldast brukaravbryting)."
@@ -639,79 +639,79 @@ msgstr "Byter ut %1."
 msgid "Transmitting file data "
 msgstr "Overfører fildata "
 
-#: src/kiosvn/kiosvn.cpp:297 src/kiosvn/kiosvn.cpp:351
-#: src/kiosvn/kiosvn.cpp:502
+#: src/kiosvn/kiosvn.cpp:295 src/kiosvn/kiosvn.cpp:344
+#: src/kiosvn/kiosvn.cpp:484
 #, kde-format
 msgid "Can only write on HEAD revision."
 msgstr "Kan berre skriva til HEAD-revisjon."
 
-#: src/kiosvn/kiosvn.cpp:338
+#: src/kiosvn/kiosvn.cpp:331
 #, kde-format
 msgid "Renaming %1 to %2 successful"
 msgstr "Endra namn frå %1 til %2"
 
-#: src/kiosvn/kiosvn.cpp:372
+#: src/kiosvn/kiosvn.cpp:363
 #, kde-format
 msgid "Overwriting existing items is disabled in settings."
 msgstr "Overskriving av eksisterande objekt er slått av i innstillingane."
 
-#: src/kiosvn/kiosvn.cpp:380
+#: src/kiosvn/kiosvn.cpp:370
 #, kde-format
 msgid "Start checking out to temporary folder"
 msgstr "Start utsjekking til mellombels mappe"
 
-#: src/kiosvn/kiosvn.cpp:383
+#: src/kiosvn/kiosvn.cpp:373
 #, kde-format
 msgid "Checking out %1"
 msgstr "Sjekkar ut %1"
 
-#: src/kiosvn/kiosvn.cpp:392
+#: src/kiosvn/kiosvn.cpp:381
 #, kde-format
 msgid "Temporary checkout done."
 msgstr "Mellombels utsjekking fullført."
 
-#: src/kiosvn/kiosvn.cpp:396
+#: src/kiosvn/kiosvn.cpp:385
 #, kde-format
 msgid "Could not write to existing item."
 msgstr "Klarte ikkje lagra til ekstisterande objekt."
 
-#: src/kiosvn/kiosvn.cpp:402
+#: src/kiosvn/kiosvn.cpp:391
 #, kde-format
 msgid "Could not open temporary file"
 msgstr "Klarte ikkje opna mellombels fil"
 
-#: src/kiosvn/kiosvn.cpp:425
+#: src/kiosvn/kiosvn.cpp:412
 #, kde-format
 msgid "Could not retrieve data for write."
 msgstr "Klarte ikkje henta data for skriving."
 
-#: src/kiosvn/kiosvn.cpp:433
+#: src/kiosvn/kiosvn.cpp:419
 #, kde-format
 msgid "Committing %1"
 msgstr "Melder inn %1"
 
-#: src/kiosvn/kiosvn.cpp:456
+#: src/kiosvn/kiosvn.cpp:441
 #, kde-format
 msgid "Wrote %1 to repository"
 msgstr "Lagra %1 til depot"
 
-#: src/kiosvn/kiosvn.cpp:487
+#: src/kiosvn/kiosvn.cpp:469
 #, kde-format
 msgid "Copied %1 to %2"
 msgstr "Kopierte %1 til %2"
 
-#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1058
-#: src/svnfrontend/svnactions.cpp:2272
+#: src/kiosvn/kiosvn.cpp:788 src/svnfrontend/svnactions.cpp:1059
+#: src/svnfrontend/svnactions.cpp:2278
 #, kde-format
 msgid "Committed revision %1."
 msgstr "Melde inn revisjon %1."
 
-#: src/kiosvn/kiosvn.cpp:830
+#: src/kiosvn/kiosvn.cpp:790
 #, kde-format
 msgid "Nothing to commit."
 msgstr "Ingenting å melda inn."
 
-#: src/kiosvn/kiosvn.cpp:876
+#: src/kiosvn/kiosvn.cpp:837
 #, kde-format
 msgid "Empty logs"
 msgstr "Tomme loggar"
@@ -887,7 +887,7 @@ msgid "Select text file to insert:"
 msgstr "Vel tekstfil for innsetjing:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DeleteForm)
-#: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1574
+#: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1576
 #, kde-format
 msgid "Really delete these entries?"
 msgstr "Er du sikker på at du vil sletta desse oppføringane?"
@@ -969,12 +969,12 @@ msgstr "Umiddelbar djupn"
 msgid "Infinity Depth (recurse)"
 msgstr "Uendeleg djupn (rekursivt)"
 
-#: src/ksvnwidgets/diffbrowser.cpp:50
+#: src/ksvnwidgets/diffbrowser.cpp:51
 #, kde-format
 msgid "Ctrl-F for search, F3 or Shift-F3 for search again."
 msgstr "«Ctrl + F» for søk, «F3» eller «Shift + F3» for søk på nytt."
 
-#: src/ksvnwidgets/diffbrowser.cpp:52
+#: src/ksvnwidgets/diffbrowser.cpp:53
 #, kde-format
 msgid ""
 "<b>Display differences between files</b><p>You may search inside text with "
@@ -985,22 +985,17 @@ msgstr ""
 "</p><p>Bruk «F3» for å søkja vidare og «Shift + F3» for å søkja bakover.</"
 "p><p>Du kan lagra (dei opphavlege) utdataa med «Ctrl + S».</p>"
 
-#: src/ksvnwidgets/diffbrowser.cpp:88
+#: src/ksvnwidgets/diffbrowser.cpp:89
 #, kde-format
 msgid "Save diff"
 msgstr "Lagra diff"
 
-#: src/ksvnwidgets/diffbrowser.cpp:88
+#: src/ksvnwidgets/diffbrowser.cpp:89
 #, kde-format
 msgid "Patch file (*.diff *.patch)"
 msgstr "Rettefil (*.diff *.patch)"
 
-#: src/ksvnwidgets/diffbrowser.cpp:94
-#, kde-format
-msgid "File %1 exists - overwrite?"
-msgstr "Fila %1 finst frå før. Vil du skriva over ho?"
-
-#: src/ksvnwidgets/diffbrowser.cpp:176
+#: src/ksvnwidgets/diffbrowser.cpp:172
 #, kde-format
 msgid ""
 "End of document reached.\n"
@@ -1009,12 +1004,12 @@ msgstr ""
 "Nådde slutten av dokumentet.\n"
 "Vil du halda fram frå starten?"
 
-#: src/ksvnwidgets/diffbrowser.cpp:178 src/ksvnwidgets/diffbrowser.cpp:190
+#: src/ksvnwidgets/diffbrowser.cpp:174 src/ksvnwidgets/diffbrowser.cpp:186
 #, kde-format
 msgid "Find"
 msgstr "Finn"
 
-#: src/ksvnwidgets/diffbrowser.cpp:188
+#: src/ksvnwidgets/diffbrowser.cpp:184
 #, kde-format
 msgid ""
 "Beginning of document reached.\n"
@@ -1047,7 +1042,7 @@ msgid "Entry"
 msgstr "Oppføring"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:35
-#: src/svnfrontend/maintreewidget.cpp:693
+#: src/svnfrontend/maintreewidget.cpp:694
 #, kde-format
 msgid "Add"
 msgstr "Legg til"
@@ -1055,15 +1050,15 @@ msgstr "Legg til"
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:39
 #: src/svnfrontend/ccontextlistener.cpp:67
 #: src/svnfrontend/copymoveview_impl.cpp:48
-#: src/svnfrontend/maintreewidget.cpp:565
+#: src/svnfrontend/maintreewidget.cpp:566
 #, kde-format
 msgid "Copy"
 msgstr "Kopier"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:43
 #: src/svnfrontend/ccontextlistener.cpp:68
-#: src/svnfrontend/maintreewidget.cpp:708
-#: src/svnfrontend/maintreewidget.cpp:717 src/svnfrontend/svnactions.cpp:1013
+#: src/svnfrontend/maintreewidget.cpp:709
+#: src/svnfrontend/maintreewidget.cpp:718 src/svnfrontend/svnactions.cpp:1014
 #, kde-format
 msgid "Delete"
 msgstr "Slett"
@@ -1074,7 +1069,7 @@ msgid "Modify (content or property)"
 msgstr "Endra (innhald eller eigenskap)"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:51
-#: src/svnfrontend/svnactions.cpp:793
+#: src/svnfrontend/svnactions.cpp:794
 #, kde-format
 msgid "Replace"
 msgstr "Byt ut"
@@ -1157,17 +1152,17 @@ msgstr "Fingeravtrykk"
 msgid "Trust SSL certificate"
 msgstr "Stol på SSL-sertifikat"
 
-#: src/main.cpp:31
-#, kde-format
-msgid "A Subversion Client by KDE (standalone application)"
-msgstr "Subversion-klient frå KDE (frittståande program)"
-
-#: src/main.cpp:45
+#: src/main.cpp:39
 #, kde-format
 msgid "kdesvn"
 msgstr "kdesvn"
 
-#: src/main.cpp:49
+#: src/main.cpp:41
+#, kde-format
+msgid "A Subversion Client by KDE (standalone application)"
+msgstr "Subversion-klient frå KDE (frittståande program)"
+
+#: src/main.cpp:43
 #, kde-format
 msgid ""
 "(C) 2005-2009 Rajko Albrecht,\n"
@@ -1176,62 +1171,62 @@ msgstr ""
 "© 2005–2009 Rajko Albrecht\n"
 "© 2015–2019 Christian Ehrlicher"
 
-#: src/main.cpp:50
+#: src/main.cpp:44
 #, kde-format
 msgid "Rajko Albrecht"
 msgstr "Rajko Albrecht"
 
-#: src/main.cpp:51
+#: src/main.cpp:45
 #, kde-format
 msgid "Christian Ehrlicher"
 msgstr "Christian Ehrlicher"
 
-#: src/main.cpp:56
+#: src/main.cpp:50
 #, kde-format
 msgid "Execute single Subversion command on specific revision(-range)"
 msgstr "Køyr enkel Subversion-kommando på valt revisjon(sintervall)"
 
-#: src/main.cpp:56
+#: src/main.cpp:50
 #, kde-format
 msgid "startrev[:endrev]"
 msgstr "startrev[:sluttrev]"
 
-#: src/main.cpp:57
+#: src/main.cpp:51
 #, kde-format
 msgid "Ask for revision when executing single command"
 msgstr "Spør etter revisjon ved køyring av enkeltkommando"
 
-#: src/main.cpp:58
+#: src/main.cpp:52
 #, kde-format
 msgid "Force operation"
 msgstr "Tving operasjon"
 
-#: src/main.cpp:59
+#: src/main.cpp:53
 #, kde-format
 msgid "Save output of Subversion command (eg \"cat\") into file <file>"
 msgstr "Lagra resultatet av Subversion-kommando (for «cat») til fila <fil>"
 
-#: src/main.cpp:59
+#: src/main.cpp:53
 #, kde-format
 msgid "<file>"
 msgstr "<fil>"
 
-#: src/main.cpp:60
+#: src/main.cpp:54
 #, kde-format
 msgid "Limit log output to <number>"
 msgstr "Avgrensa loggdata til <tal>"
 
-#: src/main.cpp:60
+#: src/main.cpp:54
 #, kde-format
 msgid "<number>"
 msgstr "<tal>"
 
-#: src/main.cpp:61
+#: src/main.cpp:55
 #, kde-format
 msgid "Execute Subversion command (\"exec help\" for more information)"
 msgstr "Køyr Subversion-kommando (skriv «exec help» for meir informasjon)"
 
-#: src/main.cpp:62
+#: src/main.cpp:56
 #, kde-format
 msgid "Document to open"
 msgstr "Dokument som skal opnast"
@@ -2704,11 +2699,17 @@ msgstr ""
 msgid "Save password"
 msgstr "Lagra passord"
 
+#: src/svnfrontend/ccontextlistener.cpp:371
+#, kde-format
+msgctxt "@action:button"
+msgid "Store in Plain Text"
+msgstr ""
+
 #: src/svnfrontend/commandexec.cpp:206 src/svnfrontend/commandexec.cpp:321
 #: src/svnfrontend/graphtree/revgraphview.cpp:992
-#: src/svnfrontend/maintreewidget.cpp:1232
-#: src/svnfrontend/maintreewidget.cpp:2392
-#: src/svnfrontend/maintreewidget.cpp:2599
+#: src/svnfrontend/maintreewidget.cpp:1233
+#: src/svnfrontend/maintreewidget.cpp:2397
+#: src/svnfrontend/maintreewidget.cpp:2604
 #, kde-format
 msgid "SVN Error"
 msgstr "SVN-feil"
@@ -2920,14 +2921,14 @@ msgstr ""
 msgid "Compatible to Subversion prior 1.8"
 msgstr "Kompatibel med Subversion tidlegare enn v1.8"
 
-#: src/svnfrontend/database/dboverview.cpp:112
+#: src/svnfrontend/database/dboverview.cpp:113
 #, kde-format
 msgid "Log cache holds %1 log entries and consumes %2 on disk."
 msgstr ""
 "Snøgglageret for loggmeldingar inneheld %1 oppføringar og tek opp %2 "
 "diskplass."
 
-#: src/svnfrontend/database/dboverview.cpp:128
+#: src/svnfrontend/database/dboverview.cpp:129
 #, kde-format
 msgid ""
 "Really clean cache for repository\n"
@@ -2936,19 +2937,18 @@ msgstr ""
 "Er du sikker på at du tømma snøgglageret for loggmeldingar for depotet\n"
 "%1?"
 
-#: src/svnfrontend/database/dboverview.cpp:128
+#: src/svnfrontend/database/dboverview.cpp:130
 #, kde-format
 msgid "Clean repository cache"
 msgstr "Tøm snøgglager for depotmeldingar"
 
-#. i18n: ectx: property (text), widget (QPushButton, m_DeleteRepositoryButton)
-#: src/svnfrontend/database/dboverview.cpp:144
-#: src/svnfrontend/database/dboverview.ui:59
+#: src/svnfrontend/database/dboverview.cpp:131
 #, kde-format
-msgid "Delete repository"
-msgstr "Slett depot"
+msgctxt "@action:button"
+msgid "Delete Cache"
+msgstr ""
 
-#: src/svnfrontend/database/dboverview.cpp:144
+#: src/svnfrontend/database/dboverview.cpp:148
 #, kde-format
 msgid ""
 "Really clean cache and data for repository\n"
@@ -2957,6 +2957,19 @@ msgstr ""
 "Er du sikker på at du tømma data og snøgglageret for loggmeldingar for "
 "depotet\n"
 "%1?"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DeleteRepositoryButton)
+#: src/svnfrontend/database/dboverview.cpp:149
+#: src/svnfrontend/database/dboverview.ui:59
+#, kde-format
+msgid "Delete repository"
+msgstr "Slett depot"
+
+#: src/svnfrontend/database/dboverview.cpp:150
+#, kde-format
+msgctxt "@action:button"
+msgid "Delete Repository"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DBOverView)
 #: src/svnfrontend/database/dboverview.ui:6
@@ -3670,14 +3683,14 @@ msgid "Image (*.png)"
 msgstr "Bilete (*.png)"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:94
-#: src/svnfrontend/svnactions.cpp:315
+#: src/svnfrontend/svnactions.cpp:316
 #, kde-format
 msgctxt "@title:window"
 msgid "Logs"
 msgstr "Loggar"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:94
-#: src/svnfrontend/svnactions.cpp:316
+#: src/svnfrontend/svnactions.cpp:317
 #, kde-format
 msgid "Getting logs - hit Cancel for abort"
 msgstr "Hentar logg – trykk «Avbryt» for å avbryta"
@@ -3864,129 +3877,129 @@ msgstr "Valider eigenskapar ved innlasting (berre for Subversion 1.7 og nyare)"
 msgid "Validate properties"
 msgstr "Valider eigenskapar"
 
-#: src/svnfrontend/maintreewidget.cpp:268
+#: src/svnfrontend/maintreewidget.cpp:269
 #, kde-format
 msgid "Networked URL to open but networking is disabled."
 msgstr "Skal opna nettverksadresse, men manglar nettilgang."
 
-#: src/svnfrontend/maintreewidget.cpp:494
+#: src/svnfrontend/maintreewidget.cpp:495
 #, kde-format
 msgid "History of item"
 msgstr "Loggmeldingar"
 
-#: src/svnfrontend/maintreewidget.cpp:499
-#: src/svnfrontend/maintreewidget.cpp:507
-#: src/svnfrontend/maintreewidget.cpp:516
+#: src/svnfrontend/maintreewidget.cpp:500
+#: src/svnfrontend/maintreewidget.cpp:508
+#: src/svnfrontend/maintreewidget.cpp:517
 #, kde-format
 msgid "History"
 msgstr "Logg"
 
-#: src/svnfrontend/maintreewidget.cpp:500
+#: src/svnfrontend/maintreewidget.cpp:501
 #, kde-format
 msgid "Displays the history log of selected item"
 msgstr "Vis loggen til det valde elementet"
 
-#: src/svnfrontend/maintreewidget.cpp:502
-#: src/svnfrontend/maintreewidget.cpp:511
+#: src/svnfrontend/maintreewidget.cpp:503
+#: src/svnfrontend/maintreewidget.cpp:512
 #, kde-format
 msgid "History of item ignoring copies"
 msgstr "Vis logg men ignorer kopiar"
 
-#: src/svnfrontend/maintreewidget.cpp:508
-#: src/svnfrontend/maintreewidget.cpp:517
+#: src/svnfrontend/maintreewidget.cpp:509
+#: src/svnfrontend/maintreewidget.cpp:518
 #, kde-format
 msgid "Displays the history log of selected item without following copies"
 msgstr "Viser loggen til det valde element, men ikkje følg kopiar"
 
-#: src/svnfrontend/maintreewidget.cpp:520
+#: src/svnfrontend/maintreewidget.cpp:521
 #, kde-format
 msgid "Full revision tree"
 msgstr "Fullt revisjonstre"
 
-#: src/svnfrontend/maintreewidget.cpp:525
+#: src/svnfrontend/maintreewidget.cpp:526
 #, kde-format
 msgid "Shows history of item as linked tree"
 msgstr "Vis loggen til elmentet som ei kopla tre"
 
-#: src/svnfrontend/maintreewidget.cpp:527
+#: src/svnfrontend/maintreewidget.cpp:528
 #, kde-format
 msgid "Partial revision tree"
 msgstr "Delvis revisjonstre"
 
-#: src/svnfrontend/maintreewidget.cpp:532
+#: src/svnfrontend/maintreewidget.cpp:533
 #, kde-format
 msgid "Shows history of item as linked tree for a revision range"
 msgstr "Vis loggen til element som eit kopla tre for eit revisjonsintervall"
 
-#: src/svnfrontend/maintreewidget.cpp:535
 #: src/svnfrontend/maintreewidget.cpp:536
+#: src/svnfrontend/maintreewidget.cpp:537
 #, kde-format
 msgid "Properties"
 msgstr "Eigenskapar"
 
-#: src/svnfrontend/maintreewidget.cpp:538
+#: src/svnfrontend/maintreewidget.cpp:539
 #, kde-format
 msgid "Display Properties"
 msgstr "Vis eigenskapar"
 
-#: src/svnfrontend/maintreewidget.cpp:544
+#: src/svnfrontend/maintreewidget.cpp:545
 #, kde-format
 msgid "Display last changes"
 msgstr "Vis siste endringar"
 
-#: src/svnfrontend/maintreewidget.cpp:549
+#: src/svnfrontend/maintreewidget.cpp:550
 #, kde-format
 msgid "Display last changes as difference to previous commit."
 msgstr "Vis siste endringar som ein differanse til førre innmelding."
 
-#: src/svnfrontend/maintreewidget.cpp:551
+#: src/svnfrontend/maintreewidget.cpp:552
 #, kde-format
 msgid "Details"
 msgstr "Detaljar"
 
-#: src/svnfrontend/maintreewidget.cpp:556
+#: src/svnfrontend/maintreewidget.cpp:557
 #, kde-format
 msgid "Show details about selected item"
 msgstr "Vis detajar om det valde elementet"
 
-#: src/svnfrontend/maintreewidget.cpp:558
+#: src/svnfrontend/maintreewidget.cpp:559
 #, kde-format
 msgid "Move"
 msgstr "Flytt"
 
-#: src/svnfrontend/maintreewidget.cpp:563
+#: src/svnfrontend/maintreewidget.cpp:564
 #, kde-format
 msgid "Moves or renames current item"
 msgstr "Flyttar eller endrar namn på gjeldande element"
 
-#: src/svnfrontend/maintreewidget.cpp:570
+#: src/svnfrontend/maintreewidget.cpp:571
 #, kde-format
 msgid "Create a copy of current item"
 msgstr "Lag ein kopi av det gjeldande elementet"
 
-#: src/svnfrontend/maintreewidget.cpp:572
+#: src/svnfrontend/maintreewidget.cpp:573
 #, kde-format
 msgid "Check for updates"
 msgstr "Sjå etter oppdateringar"
 
-#: src/svnfrontend/maintreewidget.cpp:577
+#: src/svnfrontend/maintreewidget.cpp:578
 #, kde-format
 msgid ""
 "Check if current working copy has items with newer version in repository"
 msgstr "Sjå om arbeidskopien har element i nyare versjon av depotet"
 
-#: src/svnfrontend/maintreewidget.cpp:579
+#: src/svnfrontend/maintreewidget.cpp:580
 #, kde-format
 msgid "Check updates"
 msgstr "Sjå etter oppdateringar"
 
-#: src/svnfrontend/maintreewidget.cpp:583
+#: src/svnfrontend/maintreewidget.cpp:584
 #, kde-format
 msgid "Blame"
 msgstr "Linjelogg"
 
-#: src/svnfrontend/maintreewidget.cpp:584
-#: src/svnfrontend/maintreewidget.cpp:592
+#: src/svnfrontend/maintreewidget.cpp:585
+#: src/svnfrontend/maintreewidget.cpp:593
 #, kde-format
 msgid ""
 "Output the content of specified files or URLs with revision and author "
@@ -3995,114 +4008,114 @@ msgstr ""
 "Vis innhaldet til valde filer eller adresser, med revisjons og "
 "forfattarinformasjon linje-for-linje."
 
-#: src/svnfrontend/maintreewidget.cpp:587
+#: src/svnfrontend/maintreewidget.cpp:588
 #, kde-format
 msgid "Blame range"
 msgstr "Revisjonsintervall"
 
-#: src/svnfrontend/maintreewidget.cpp:596
+#: src/svnfrontend/maintreewidget.cpp:597
 #, kde-format
 msgid "Cat head"
 msgstr "Vis innhald til HEAD"
 
-#: src/svnfrontend/maintreewidget.cpp:597
+#: src/svnfrontend/maintreewidget.cpp:598
 #, kde-format
 msgid "Output the content of specified files or URLs."
 msgstr "Vis inhaldet til dei valde filene eller adressene."
 
-#: src/svnfrontend/maintreewidget.cpp:600
+#: src/svnfrontend/maintreewidget.cpp:601
 #, kde-format
 msgid "Cat revision..."
 msgstr "Vis innhald i revisjon …"
 
-#: src/svnfrontend/maintreewidget.cpp:605
+#: src/svnfrontend/maintreewidget.cpp:606
 #, kde-format
 msgid "Output the content of specified files or URLs at specific revision."
 msgstr ""
 "Vis inhaldet til dei valde filene eller adressene for ein spesifikk revisjon."
 
-#: src/svnfrontend/maintreewidget.cpp:609
+#: src/svnfrontend/maintreewidget.cpp:610
 #, kde-format
 msgid "Lock current items"
 msgstr "Lås gjeldande element"
 
-#: src/svnfrontend/maintreewidget.cpp:614
+#: src/svnfrontend/maintreewidget.cpp:615
 #, kde-format
 msgid "Try lock current item against changes from other users"
 msgstr "Prøv å låsa gjeldande element mot endringar frå andre brukarar"
 
-#: src/svnfrontend/maintreewidget.cpp:617
+#: src/svnfrontend/maintreewidget.cpp:618
 #, kde-format
 msgid "Unlock current items"
 msgstr "Lås opp gjeldande element"
 
-#: src/svnfrontend/maintreewidget.cpp:622
+#: src/svnfrontend/maintreewidget.cpp:623
 #, kde-format
 msgid "Free existing lock on current item"
 msgstr "Fjern eksisterande lås på gjeldande element"
 
-#: src/svnfrontend/maintreewidget.cpp:627 src/svnfrontend/svnactions.cpp:667
+#: src/svnfrontend/maintreewidget.cpp:628 src/svnfrontend/svnactions.cpp:668
 #, kde-format
 msgid "New folder"
 msgstr "Ny mappe"
 
-#: src/svnfrontend/maintreewidget.cpp:632
+#: src/svnfrontend/maintreewidget.cpp:633
 #, kde-format
 msgid "Create a new folder"
 msgstr "Lag ny mappe"
 
-#: src/svnfrontend/maintreewidget.cpp:634
+#: src/svnfrontend/maintreewidget.cpp:635
 #, kde-format
 msgid "Switch repository"
 msgstr "Byt depot"
 
-#: src/svnfrontend/maintreewidget.cpp:639
+#: src/svnfrontend/maintreewidget.cpp:640
 #, kde-format
 msgid "Switch repository path of current working copy path (\"svn switch\")"
 msgstr "Byt adresse til depot for den gjeldande arbeidsmappa («svn switch»)"
 
-#: src/svnfrontend/maintreewidget.cpp:643
+#: src/svnfrontend/maintreewidget.cpp:644
 #, kde-format
 msgid "Relocate current working copy URL"
 msgstr "Flytt gjeldande adresse til arbeidskopi"
 
-#: src/svnfrontend/maintreewidget.cpp:648
+#: src/svnfrontend/maintreewidget.cpp:649
 #, kde-format
 msgid "Relocate URL of current working copy path to other URL"
 msgstr "Flytt gjeldande adresse til arbeidskopi til ei ny adresse"
 
-#: src/svnfrontend/maintreewidget.cpp:652
+#: src/svnfrontend/maintreewidget.cpp:653
 #, kde-format
 msgid "Check for unversioned items"
 msgstr "Sjå etter uversjonerte element"
 
-#: src/svnfrontend/maintreewidget.cpp:657
+#: src/svnfrontend/maintreewidget.cpp:658
 #, kde-format
 msgid "Unversioned"
 msgstr "Uversjonert"
 
-#: src/svnfrontend/maintreewidget.cpp:658
+#: src/svnfrontend/maintreewidget.cpp:659
 #, kde-format
 msgid "Browse folder for unversioned items and add them if wanted."
 msgstr ""
 "Bla gjennom mappe for uversjonerte element og legg dei til viss ønskjeleg."
 
-#: src/svnfrontend/maintreewidget.cpp:662
+#: src/svnfrontend/maintreewidget.cpp:663
 #, kde-format
 msgid "Open repository of working copy"
 msgstr "Opna depot til arbeidskopi"
 
-#: src/svnfrontend/maintreewidget.cpp:667
+#: src/svnfrontend/maintreewidget.cpp:668
 #, kde-format
 msgid "Opens the repository the current working copy was checked out from"
 msgstr "Opnar depotet som den gjeldande arbeidskopien vart sjekka ut frå"
 
-#: src/svnfrontend/maintreewidget.cpp:670
+#: src/svnfrontend/maintreewidget.cpp:671
 #, kde-format
 msgid "Cleanup"
 msgstr "Rydd opp"
 
-#: src/svnfrontend/maintreewidget.cpp:675
+#: src/svnfrontend/maintreewidget.cpp:676
 #, kde-format
 msgid ""
 "Recursively clean up the working copy, removing locks, resuming unfinished "
@@ -4111,32 +4124,32 @@ msgstr ""
 "Rydd opp arbeidskopien rekursivt, med fjerning av låsar, fullføring av "
 "ufullførte handlingar og anna."
 
-#: src/svnfrontend/maintreewidget.cpp:677
+#: src/svnfrontend/maintreewidget.cpp:678
 #, kde-format
 msgid "Import folders into current"
 msgstr "Importer mapper til gjeldande"
 
-#: src/svnfrontend/maintreewidget.cpp:682
+#: src/svnfrontend/maintreewidget.cpp:683
 #, kde-format
 msgid "Import folder content into current URL"
 msgstr "Importer mappeinnhald til gjeldande adresse"
 
-#: src/svnfrontend/maintreewidget.cpp:687
+#: src/svnfrontend/maintreewidget.cpp:688
 #, kde-format
 msgid "Add selected files/dirs"
 msgstr "Legg til valde filer/mapper"
 
-#: src/svnfrontend/maintreewidget.cpp:692
+#: src/svnfrontend/maintreewidget.cpp:693
 #, kde-format
 msgid "Adding selected files and/or directories to repository"
 msgstr "Legg til dei valde filene og/eller mappene til depotet"
 
-#: src/svnfrontend/maintreewidget.cpp:695
+#: src/svnfrontend/maintreewidget.cpp:696
 #, kde-format
 msgid "Add selected files/dirs recursive"
 msgstr "Legg til valde filer/mapper rekursivt"
 
-#: src/svnfrontend/maintreewidget.cpp:700
+#: src/svnfrontend/maintreewidget.cpp:701
 #, kde-format
 msgid ""
 "Adding selected files and/or directories to repository and all subitems of "
@@ -4145,89 +4158,89 @@ msgstr ""
 "Legg til dei valde filene og/eller mappene og alle undermapper/-filer til "
 "depotet"
 
-#: src/svnfrontend/maintreewidget.cpp:703
+#: src/svnfrontend/maintreewidget.cpp:704
 #, kde-format
 msgid "Delete selected files/dirs"
 msgstr "Slett valde filer/mapper"
 
-#: src/svnfrontend/maintreewidget.cpp:709
+#: src/svnfrontend/maintreewidget.cpp:710
 #, kde-format
 msgid "Deleting selected files and/or directories from repository"
 msgstr "Slettar dei valde filene og/eller mappene frå depotet"
 
-#: src/svnfrontend/maintreewidget.cpp:711
+#: src/svnfrontend/maintreewidget.cpp:712
 #, kde-format
 msgid "Delete folder"
 msgstr "Slett mappe"
 
-#: src/svnfrontend/maintreewidget.cpp:716
+#: src/svnfrontend/maintreewidget.cpp:717
 #, kde-format
 msgid "Deleting selected directories from repository"
 msgstr "Slettar dei valde mappene frå depotet"
 
-#: src/svnfrontend/maintreewidget.cpp:719
+#: src/svnfrontend/maintreewidget.cpp:720
 #, kde-format
 msgid "Revert current changes"
 msgstr "Tilbakestill gjeldande endringar"
 
-#: src/svnfrontend/maintreewidget.cpp:726
+#: src/svnfrontend/maintreewidget.cpp:727
 #, kde-format
 msgid "Mark resolved"
 msgstr "Merk som løyst"
 
-#: src/svnfrontend/maintreewidget.cpp:731
+#: src/svnfrontend/maintreewidget.cpp:732
 #, kde-format
 msgid "Marking files or dirs resolved"
 msgstr "Merkjer filer/mapper som løyst"
 
-#: src/svnfrontend/maintreewidget.cpp:734
+#: src/svnfrontend/maintreewidget.cpp:735
 #, kde-format
 msgid "Resolve conflicts"
 msgstr "Løys konfliktar"
 
-#: src/svnfrontend/maintreewidget.cpp:740
+#: src/svnfrontend/maintreewidget.cpp:741
 #, kde-format
 msgid "Ignore/Unignore current item"
 msgstr "Ignorer/avignorer gjeldande element"
 
-#: src/svnfrontend/maintreewidget.cpp:742
-#: src/svnfrontend/maintreewidget.cpp:748
+#: src/svnfrontend/maintreewidget.cpp:743
+#: src/svnfrontend/maintreewidget.cpp:749
 #, kde-format
 msgid "Add or Remove ignore pattern"
 msgstr "Legg til eller fjern ignoreringsmønster"
 
-#: src/svnfrontend/maintreewidget.cpp:755
-#: src/svnfrontend/maintreewidget.cpp:894
+#: src/svnfrontend/maintreewidget.cpp:756
+#: src/svnfrontend/maintreewidget.cpp:895
 #, kde-format
 msgid "Update to head"
 msgstr "Oppdater til HEAD"
 
-#: src/svnfrontend/maintreewidget.cpp:760
+#: src/svnfrontend/maintreewidget.cpp:761
 #, kde-format
 msgctxt "Menu item"
 msgid "Update"
 msgstr "Oppdater"
 
-#: src/svnfrontend/maintreewidget.cpp:762
+#: src/svnfrontend/maintreewidget.cpp:763
 #, kde-format
 msgid "Update to revision..."
 msgstr "Oppdater til revisjon …"
 
-#: src/svnfrontend/maintreewidget.cpp:768
-#: src/svnfrontend/maintreewidget.cpp:773
-#: src/svnfrontend/maintreewidget.cpp:888 src/svnfrontend/svnactions.cpp:1015
+#: src/svnfrontend/maintreewidget.cpp:769
+#: src/svnfrontend/maintreewidget.cpp:774
+#: src/svnfrontend/maintreewidget.cpp:889 src/svnfrontend/svnactions.cpp:1016
 #, kde-format
 msgid "Commit"
 msgstr "Meld inn"
 
-#: src/svnfrontend/maintreewidget.cpp:776
-#: src/svnfrontend/maintreewidget.cpp:783
+#: src/svnfrontend/maintreewidget.cpp:777
+#: src/svnfrontend/maintreewidget.cpp:784
 #, kde-format
 msgid "Diff local changes"
 msgstr "Vis diff for lokale endringar"
 
-#: src/svnfrontend/maintreewidget.cpp:781
-#: src/svnfrontend/maintreewidget.cpp:788
+#: src/svnfrontend/maintreewidget.cpp:782
+#: src/svnfrontend/maintreewidget.cpp:789
 #, kde-format
 msgid ""
 "Diff working copy against BASE (last checked out version) - does not require "
@@ -4236,12 +4249,12 @@ msgstr ""
 "Diff av arbeidskopi mot BASE (siste utsjekka versjon) – krev ikkje tilgang "
 "til depotet"
 
-#: src/svnfrontend/maintreewidget.cpp:791
+#: src/svnfrontend/maintreewidget.cpp:792
 #, kde-format
 msgid "Diff against HEAD"
 msgstr "Diff mot HEAD"
 
-#: src/svnfrontend/maintreewidget.cpp:796
+#: src/svnfrontend/maintreewidget.cpp:797
 #, kde-format
 msgid ""
 "Diff working copy against HEAD (last checked in version)- requires access to "
@@ -4250,39 +4263,39 @@ msgstr ""
 "Diff av arbeidskopi mot HEAD (sist innsjekka versjon) – krev tilgang til "
 "depotet"
 
-#: src/svnfrontend/maintreewidget.cpp:799
-#: src/svnfrontend/maintreewidget.cpp:806
+#: src/svnfrontend/maintreewidget.cpp:800
+#: src/svnfrontend/maintreewidget.cpp:807
 #, kde-format
 msgid "Diff items"
 msgstr "Vis diff mellom element"
 
-#: src/svnfrontend/maintreewidget.cpp:804
-#: src/svnfrontend/maintreewidget.cpp:811
+#: src/svnfrontend/maintreewidget.cpp:805
+#: src/svnfrontend/maintreewidget.cpp:812
 #, kde-format
 msgid "Diff two items"
 msgstr "Diff mellom to element"
 
-#: src/svnfrontend/maintreewidget.cpp:814
+#: src/svnfrontend/maintreewidget.cpp:815
 #, kde-format
 msgid "Merge two revisions"
 msgstr "Flett to revisjonar"
 
-#: src/svnfrontend/maintreewidget.cpp:819
+#: src/svnfrontend/maintreewidget.cpp:820
 #, kde-format
 msgid "Merge"
 msgstr "Flett"
 
-#: src/svnfrontend/maintreewidget.cpp:820
+#: src/svnfrontend/maintreewidget.cpp:821
 #, kde-format
 msgid "Merge two revisions of this entry into itself"
 msgstr "Flett to revisjonar av dette elementet med seg sjølv"
 
-#: src/svnfrontend/maintreewidget.cpp:823
+#: src/svnfrontend/maintreewidget.cpp:824
 #, kde-format
 msgid "Merge..."
 msgstr "Flett …"
 
-#: src/svnfrontend/maintreewidget.cpp:828
+#: src/svnfrontend/maintreewidget.cpp:829
 #, kde-format
 msgid ""
 "Merge repository path into current working copy path or current repository "
@@ -4291,273 +4304,285 @@ msgstr ""
 "Flett depotadresse til adressa til den gjeldande arbeidskopien eller den "
 "gjeldande depotadressa til eit mål"
 
-#: src/svnfrontend/maintreewidget.cpp:829
-#: src/svnfrontend/maintreewidget.cpp:1391
-#: src/svnfrontend/maintreewidget.cpp:1458
+#: src/svnfrontend/maintreewidget.cpp:830
+#: src/svnfrontend/maintreewidget.cpp:1392
+#: src/svnfrontend/maintreewidget.cpp:1459
 #, kde-format
 msgid "Open With..."
 msgstr "Opna med …"
 
-#: src/svnfrontend/maintreewidget.cpp:833
+#: src/svnfrontend/maintreewidget.cpp:834
 #, kde-format
 msgid "Checkout current repository path"
 msgstr "Sjekk ut gjeldande depotadresse"
 
-#: src/svnfrontend/maintreewidget.cpp:838
-#: src/svnfrontend/maintreewidget.cpp:854
+#: src/svnfrontend/maintreewidget.cpp:839
+#: src/svnfrontend/maintreewidget.cpp:855
 #, kde-format
 msgid "Checkout"
 msgstr "Sjekk ut"
 
-#: src/svnfrontend/maintreewidget.cpp:840
+#: src/svnfrontend/maintreewidget.cpp:841
 #, kde-format
 msgid "Export current repository path"
 msgstr "Eksporter gjeldande depotadresse"
 
-#: src/svnfrontend/maintreewidget.cpp:845
+#: src/svnfrontend/maintreewidget.cpp:846
 #, kde-format
 msgid "Select browse revision"
 msgstr "Vel revisjon å bla gjennom"
 
-#: src/svnfrontend/maintreewidget.cpp:849 src/svnfrontend/svnactions.cpp:1641
-#: src/svnfrontend/svnactions.cpp:1648
+#: src/svnfrontend/maintreewidget.cpp:850 src/svnfrontend/svnactions.cpp:1647
+#: src/svnfrontend/svnactions.cpp:1654
 #, kde-format
 msgid "Checkout a repository"
 msgstr "Sjekk ut eit depot"
 
-#: src/svnfrontend/maintreewidget.cpp:856
+#: src/svnfrontend/maintreewidget.cpp:857
 #, kde-format
 msgid "Export a repository"
 msgstr "Eksporter eit depot"
 
-#: src/svnfrontend/maintreewidget.cpp:861
+#: src/svnfrontend/maintreewidget.cpp:862
 #, kde-format
 msgid "Export"
 msgstr "Eksporter"
 
-#: src/svnfrontend/maintreewidget.cpp:863
+#: src/svnfrontend/maintreewidget.cpp:864
 #, kde-format
 msgid "Refresh view"
 msgstr "Frisk opp visinga"
 
-#: src/svnfrontend/maintreewidget.cpp:868
+#: src/svnfrontend/maintreewidget.cpp:869
 #, kde-format
 msgid "Refresh"
 msgstr "Frisk opp"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DispSpecDiff)
-#: src/svnfrontend/maintreewidget.cpp:871 src/svnfrontend/svnlogdlg.ui:211
+#: src/svnfrontend/maintreewidget.cpp:872 src/svnfrontend/svnlogdlg.ui:211
 #, kde-format
 msgid "Diff revisions"
 msgstr "Diff på revisjonar"
 
-#: src/svnfrontend/maintreewidget.cpp:878
+#: src/svnfrontend/maintreewidget.cpp:879
 #, kde-format
 msgid "Unfold File Tree"
 msgstr "Fald ut filtre"
 
-#: src/svnfrontend/maintreewidget.cpp:879
+#: src/svnfrontend/maintreewidget.cpp:880
 #, kde-format
 msgid "Opens all branches of the file tree"
 msgstr "Opnar alle greinene i filtreet"
 
-#: src/svnfrontend/maintreewidget.cpp:880
+#: src/svnfrontend/maintreewidget.cpp:881
 #, kde-format
 msgid "Fold File Tree"
 msgstr "Fald saman filtre"
 
-#: src/svnfrontend/maintreewidget.cpp:881
+#: src/svnfrontend/maintreewidget.cpp:882
 #, kde-format
 msgid "Closes all branches of the file tree"
 msgstr "Lukk alle greinene i filtreet"
 
-#: src/svnfrontend/maintreewidget.cpp:884
-#: src/svnfrontend/maintreewidget.cpp:1078
-#: src/svnfrontend/maintreewidget.cpp:2033
-#: src/svnfrontend/maintreewidget.cpp:2049
+#: src/svnfrontend/maintreewidget.cpp:885
+#: src/svnfrontend/maintreewidget.cpp:1079
+#: src/svnfrontend/maintreewidget.cpp:2038
+#: src/svnfrontend/maintreewidget.cpp:2054
 #, kde-format
 msgid "Update log cache"
 msgstr "Oppdater snøgglager for loggmeldingar"
 
-#: src/svnfrontend/maintreewidget.cpp:885
+#: src/svnfrontend/maintreewidget.cpp:886
 #, kde-format
 msgid "Update the log cache for current repository"
 msgstr "Oppdater snøgglaget for loggmeldingar for det gjeldande depotet"
 
-#: src/svnfrontend/maintreewidget.cpp:899
+#: src/svnfrontend/maintreewidget.cpp:900
 #, kde-format
 msgid "Set property recursive"
 msgstr "Set eigenskap rekursivt"
 
-#: src/svnfrontend/maintreewidget.cpp:902
+#: src/svnfrontend/maintreewidget.cpp:903
 #, kde-format
 msgid "Settings for current repository"
 msgstr "Innstillingar for gjeldande depot"
 
-#: src/svnfrontend/maintreewidget.cpp:1080
-#: src/svnfrontend/maintreewidget.cpp:2044
+#: src/svnfrontend/maintreewidget.cpp:1081
+#: src/svnfrontend/maintreewidget.cpp:2049
 #, kde-format
 msgid "Stop updating the log cache"
 msgstr "Stopp oppdatering av snøgglageret for loggmeldingar"
 
-#: src/svnfrontend/maintreewidget.cpp:1277
+#: src/svnfrontend/maintreewidget.cpp:1278
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Pattern to Ignore for \"%1\""
 msgstr "Rediger mønster å ignorera for «%1»"
 
-#: src/svnfrontend/maintreewidget.cpp:1555
-#: src/svnfrontend/maintreewidget.cpp:1598
+#: src/svnfrontend/maintreewidget.cpp:1556
+#: src/svnfrontend/maintreewidget.cpp:1599
 #, kde-format
 msgid "Nothing selected for unlock"
 msgstr "Ingenting er valt for opplåsing"
 
-#: src/svnfrontend/maintreewidget.cpp:1559
+#: src/svnfrontend/maintreewidget.cpp:1560
 #, kde-format
 msgctxt "@title:window"
 msgid "Lock Message"
 msgstr "Låsemelding"
 
-#: src/svnfrontend/maintreewidget.cpp:1566
+#: src/svnfrontend/maintreewidget.cpp:1567
 #, kde-format
 msgid "Steal lock?"
 msgstr "Vil du stela låsen?"
 
-#: src/svnfrontend/maintreewidget.cpp:1601
+#: src/svnfrontend/maintreewidget.cpp:1603
 #, kde-format
 msgid "Break lock or ignore missing locks?"
 msgstr "Vil du bryta låsen eller ignorera manglande låsar?"
 
-#: src/svnfrontend/maintreewidget.cpp:1601
+#: src/svnfrontend/maintreewidget.cpp:1604
 #, kde-format
 msgid "Unlocking items"
 msgstr "Låsar opp element"
 
-#: src/svnfrontend/maintreewidget.cpp:1895
+#: src/svnfrontend/maintreewidget.cpp:1605
+#, kde-format
+msgctxt "@action:button"
+msgid "Break Lock"
+msgstr ""
+
+#: src/svnfrontend/maintreewidget.cpp:1606
+#, kde-format
+msgctxt "@action:button"
+msgid "Ignore"
+msgstr ""
+
+#: src/svnfrontend/maintreewidget.cpp:1900
 #, kde-format
 msgid "Nothing selected for delete"
 msgstr "Ingenting er valt for sletting"
 
-#: src/svnfrontend/maintreewidget.cpp:2066
+#: src/svnfrontend/maintreewidget.cpp:2071
 #, kde-format
 msgid "Automatic generated base layout by kdesvn"
 msgstr "Grunnhierarki automatisk generert av Kdesvn"
 
-#: src/svnfrontend/maintreewidget.cpp:2079
+#: src/svnfrontend/maintreewidget.cpp:2084
 #, kde-format
 msgid "May not make subdirectories of a file"
 msgstr "Kan ikkje laga undermapper til ei fil"
 
-#: src/svnfrontend/maintreewidget.cpp:2191 src/svnfrontend/svnactions.cpp:2238
+#: src/svnfrontend/maintreewidget.cpp:2196 src/svnfrontend/svnactions.cpp:2244
 #, kde-format
 msgctxt "@title:window"
 msgid "Merge"
 msgstr "Flett"
 
-#: src/svnfrontend/maintreewidget.cpp:2253
+#: src/svnfrontend/maintreewidget.cpp:2258
 #, kde-format
 msgid "Error getting entry to relocate"
 msgstr "Feil ved henting av oppføring som skal flyttast"
 
-#: src/svnfrontend/maintreewidget.cpp:2259
+#: src/svnfrontend/maintreewidget.cpp:2264
 #, kde-format
 msgctxt "@title:window"
 msgid "Relocate Path %1"
 msgstr "Flytt adressa %1"
 
-#: src/svnfrontend/maintreewidget.cpp:2273 src/svnfrontend/svnactions.cpp:1641
-#: src/svnfrontend/svnactions.cpp:1897
+#: src/svnfrontend/maintreewidget.cpp:2278 src/svnfrontend/svnactions.cpp:1647
+#: src/svnfrontend/svnactions.cpp:1903
 #, kde-format
 msgid "Invalid url given!"
 msgstr "Ugyldig adresse"
 
-#: src/svnfrontend/maintreewidget.cpp:2273
+#: src/svnfrontend/maintreewidget.cpp:2278
 #, kde-format
 msgid "Relocate path %1"
 msgstr "Flytt adressa %1"
 
-#: src/svnfrontend/maintreewidget.cpp:2296
+#: src/svnfrontend/maintreewidget.cpp:2301
 #, kde-format
 msgid "Cannot import into multiple targets"
 msgstr "Kan ikkje importera til fleire mål"
 
-#: src/svnfrontend/maintreewidget.cpp:2310
+#: src/svnfrontend/maintreewidget.cpp:2315
 #, kde-format
 msgid "Import files from folder"
 msgstr "Importer filer frå mappe"
 
-#: src/svnfrontend/maintreewidget.cpp:2312
+#: src/svnfrontend/maintreewidget.cpp:2317
 #, kde-format
 msgid "Import file"
 msgstr "Importer fil"
 
-#: src/svnfrontend/maintreewidget.cpp:2334
+#: src/svnfrontend/maintreewidget.cpp:2339
 #, kde-format
 msgctxt "@title:window"
 msgid "Import Log"
 msgstr "Importer logg"
 
-#: src/svnfrontend/maintreewidget.cpp:2392
+#: src/svnfrontend/maintreewidget.cpp:2397
 #, kde-format
 msgid "Could not retrieve repository of working copy."
 msgstr "Klarte ikkje henta depot til arbeidskopien."
 
-#: src/svnfrontend/maintreewidget.cpp:2401
+#: src/svnfrontend/maintreewidget.cpp:2406
 #, kde-format
 msgid "Only in working copy possible."
 msgstr "Berre mogleg i arbeidskopi."
 
-#: src/svnfrontend/maintreewidget.cpp:2401
-#: src/svnfrontend/maintreewidget.cpp:2405
+#: src/svnfrontend/maintreewidget.cpp:2406
 #: src/svnfrontend/maintreewidget.cpp:2410
+#: src/svnfrontend/maintreewidget.cpp:2415
 #, kde-format
 msgid "Error"
 msgstr "Feil"
 
-#: src/svnfrontend/maintreewidget.cpp:2405
+#: src/svnfrontend/maintreewidget.cpp:2410
 #, kde-format
 msgid "Only on single folder possible"
 msgstr "Berre éi einskildmappe er mogleg"
 
-#: src/svnfrontend/maintreewidget.cpp:2410
+#: src/svnfrontend/maintreewidget.cpp:2415
 #, kde-format
 msgid "Sorry - internal error"
 msgstr "Intern feil"
 
-#: src/svnfrontend/maintreewidget.cpp:2474
+#: src/svnfrontend/maintreewidget.cpp:2479
 #, kde-format
 msgid "Hold Ctrl key while click on selected item for unselect"
 msgstr "Hald inne «Ctrl» når du trykkjer på element for å fjerna merking"
 
 #. i18n: ectx: property (toolTip), widget (QTreeView, m_LogTreeView)
 #. i18n: ectx: property (toolTip), widget (QTreeWidget, m_ChangedList)
-#: src/svnfrontend/maintreewidget.cpp:2477 src/svnfrontend/svnlogdlg.ui:114
+#: src/svnfrontend/maintreewidget.cpp:2482 src/svnfrontend/svnlogdlg.ui:114
 #: src/svnfrontend/svnlogdlg.ui:148
 #, kde-format
 msgid "See context menu for more actions"
 msgstr "Sjå kontekstmenyen for fleire handlingar"
 
-#: src/svnfrontend/maintreewidget.cpp:2480
+#: src/svnfrontend/maintreewidget.cpp:2485
 #, kde-format
 msgid "Click for navigate"
 msgstr "Trykk for å navigera"
 
-#: src/svnfrontend/maintreewidget.cpp:2483
+#: src/svnfrontend/maintreewidget.cpp:2488
 #, kde-format
 msgid "Navigation"
 msgstr "Navigering"
 
-#: src/svnfrontend/maintreewidget.cpp:2599
+#: src/svnfrontend/maintreewidget.cpp:2604
 #, kde-format
 msgid "Could not retrieve repository."
 msgstr "Klarte ikkje henta depot."
 
-#: src/svnfrontend/maintreewidget.cpp:2629
+#: src/svnfrontend/maintreewidget.cpp:2634
 #, kde-format
 msgid "Not yet implemented"
 msgstr "Ikkje implementert enno"
 
-#: src/svnfrontend/maintreewidget.cpp:2629
+#: src/svnfrontend/maintreewidget.cpp:2634
 #, kde-format
 msgid "Edit property recursively"
 msgstr "Rediger eigenskap rekursivt"
@@ -4712,7 +4737,7 @@ msgid "%1 at revision %2"
 msgstr "%1 på revisjon %2"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:317
-#: src/svnfrontend/svnactions.cpp:743
+#: src/svnfrontend/svnactions.cpp:744
 #, kde-format
 msgid "Name"
 msgstr "Namn"
@@ -4728,7 +4753,7 @@ msgid "Last changed Revision"
 msgstr "Siste endra revisjon"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:323
-#: src/svnfrontend/svnactions.cpp:802
+#: src/svnfrontend/svnactions.cpp:803
 #, kde-format
 msgid "Last author"
 msgstr "Siste forfattar"
@@ -4797,618 +4822,618 @@ msgstr "%p % of %1"
 msgid "%1 of %2"
 msgstr "%1 av %2"
 
-#: src/svnfrontend/svnactions.cpp:184
+#: src/svnfrontend/svnactions.cpp:185
 #, kde-format
 msgid "Finished"
 msgstr "Fullført"
 
-#: src/svnfrontend/svnactions.cpp:354
+#: src/svnfrontend/svnactions.cpp:355
 #, kde-format
 msgid "Got no logs"
 msgstr "Fekk ikkje nokon loggar"
 
-#: src/svnfrontend/svnactions.cpp:478
+#: src/svnfrontend/svnactions.cpp:479
 #, kde-format
 msgid "Got no info."
 msgstr "Fekk ikkje noko informasjon."
 
-#: src/svnfrontend/svnactions.cpp:515
+#: src/svnfrontend/svnactions.cpp:516
 #, kde-format
 msgctxt "@title:window"
 msgid "History of %1"
 msgstr "Logg til %1"
 
 # Viser resultatet av «svn blame», dvs. ei oversikt over kvar linje i fila + informasjon om når linja vart endra og av kven.
-#: src/svnfrontend/svnactions.cpp:556
+#: src/svnfrontend/svnactions.cpp:557
 #, kde-format
 msgctxt "@title:window"
 msgid "Annotate"
 msgstr "Vis linjelogg"
 
-#: src/svnfrontend/svnactions.cpp:556
+#: src/svnfrontend/svnactions.cpp:557
 #, kde-format
 msgid "Annotate lines - hit Cancel for abort"
 msgstr "Vis linjelogg – trykk «Avbryt» for å avbryta"
 
-#: src/svnfrontend/svnactions.cpp:564
+#: src/svnfrontend/svnactions.cpp:565
 #, kde-format
 msgid "Got no annotate"
 msgstr "Fekk ikkje nokon linjelogg"
 
-#: src/svnfrontend/svnactions.cpp:581
+#: src/svnfrontend/svnactions.cpp:582
 #, kde-format
 msgctxt "@title:window"
 msgid "Content Get"
 msgstr "Innhaldshenting"
 
-#: src/svnfrontend/svnactions.cpp:581
+#: src/svnfrontend/svnactions.cpp:582
 #, kde-format
 msgid "Getting content - hit Cancel for abort"
 msgstr "Hentar innhald – trykk «Avbryt» for å avbryta"
 
-#: src/svnfrontend/svnactions.cpp:588
+#: src/svnfrontend/svnactions.cpp:589
 #, kde-format
 msgid "Error getting content"
 msgstr "Feil ved henting av innhald"
 
-#: src/svnfrontend/svnactions.cpp:601
+#: src/svnfrontend/svnactions.cpp:602
 #, kde-format
 msgid "Error while open temporary file"
 msgstr "Feil ved opning av mellombels fil"
 
-#: src/svnfrontend/svnactions.cpp:632
+#: src/svnfrontend/svnactions.cpp:633
 #, kde-format
 msgctxt "@title:window"
 msgid "Content of %1"
 msgstr "Innhald i %1"
 
-#: src/svnfrontend/svnactions.cpp:642
+#: src/svnfrontend/svnactions.cpp:643
 #, kde-format
 msgid "Got no content."
 msgstr "Fekk ikkje noko innhald."
 
-#: src/svnfrontend/svnactions.cpp:667
+#: src/svnfrontend/svnactions.cpp:668
 #, kde-format
 msgid "Enter folder name:"
 msgstr "Skriv inn mappenamn:"
 
-#: src/svnfrontend/svnactions.cpp:706
+#: src/svnfrontend/svnactions.cpp:707
 #, kde-format
 msgctxt "@title:window"
 msgid "Details"
 msgstr "Detaljar"
 
-#: src/svnfrontend/svnactions.cpp:707
+#: src/svnfrontend/svnactions.cpp:708
 #, kde-format
 msgid "Retrieving information - hit Cancel for abort"
 msgstr "Hentar informasjon – trykk «Avbryt» for å avbryta"
 
-#: src/svnfrontend/svnactions.cpp:746
+#: src/svnfrontend/svnactions.cpp:747
 #, kde-format
 msgid "URL"
 msgstr "Adresse"
 
-#: src/svnfrontend/svnactions.cpp:748
+#: src/svnfrontend/svnactions.cpp:749
 #, kde-format
 msgid "Canonical repository URL"
 msgstr "Kaonisk depotadresse"
 
-#: src/svnfrontend/svnactions.cpp:751
+#: src/svnfrontend/svnactions.cpp:752
 #, kde-format
 msgid "Checksum"
 msgstr "Sjekksum"
 
-#: src/svnfrontend/svnactions.cpp:754
+#: src/svnfrontend/svnactions.cpp:755
 #, kde-format
 msgid "Type"
 msgstr "Type"
 
-#: src/svnfrontend/svnactions.cpp:757
+#: src/svnfrontend/svnactions.cpp:758
 #, kde-format
 msgid "Absent"
 msgstr "Manglar"
 
-#: src/svnfrontend/svnactions.cpp:760
+#: src/svnfrontend/svnactions.cpp:761
 #, kde-format
 msgid "File"
 msgstr "Fil"
 
-#: src/svnfrontend/svnactions.cpp:763
+#: src/svnfrontend/svnactions.cpp:764
 #, kde-format
 msgid "Folder"
 msgstr "Mappe"
 
-#: src/svnfrontend/svnactions.cpp:767 src/svnfrontend/svnactions.cpp:796
+#: src/svnfrontend/svnactions.cpp:768 src/svnfrontend/svnactions.cpp:797
 #, kde-format
 msgid "Unknown"
 msgstr "Ukjend"
 
-#: src/svnfrontend/svnactions.cpp:772
+#: src/svnfrontend/svnactions.cpp:773
 #, kde-format
 msgid "Size"
 msgstr "Storleik"
 
-#: src/svnfrontend/svnactions.cpp:781
+#: src/svnfrontend/svnactions.cpp:782
 #, kde-format
 msgid "Schedule"
 msgstr "Planlegg"
 
-#: src/svnfrontend/svnactions.cpp:784
+#: src/svnfrontend/svnactions.cpp:785
 #, kde-format
 msgid "Normal"
 msgstr "Vanleg"
 
-#: src/svnfrontend/svnactions.cpp:787
+#: src/svnfrontend/svnactions.cpp:788
 #, kde-format
 msgid "Addition"
 msgstr "Tilføying"
 
-#: src/svnfrontend/svnactions.cpp:790
+#: src/svnfrontend/svnactions.cpp:791
 #, kde-format
 msgid "Deletion"
 msgstr "Sletting"
 
-#: src/svnfrontend/svnactions.cpp:800
+#: src/svnfrontend/svnactions.cpp:801
 #, kde-format
 msgid "UUID"
 msgstr "UUID"
 
-#: src/svnfrontend/svnactions.cpp:804
+#: src/svnfrontend/svnactions.cpp:805
 #, kde-format
 msgid "Last committed"
 msgstr "Siste innmelding"
 
-#: src/svnfrontend/svnactions.cpp:806
+#: src/svnfrontend/svnactions.cpp:807
 #, kde-format
 msgid "Last revision"
 msgstr "Siste revisjon"
 
-#: src/svnfrontend/svnactions.cpp:808
+#: src/svnfrontend/svnactions.cpp:809
 #, kde-format
 msgid "Content last changed"
 msgstr "Innhald siste endra"
 
-#: src/svnfrontend/svnactions.cpp:812
+#: src/svnfrontend/svnactions.cpp:813
 #, kde-format
 msgid "Property last changed"
 msgstr "Eigenskap sist endra"
 
-#: src/svnfrontend/svnactions.cpp:815
+#: src/svnfrontend/svnactions.cpp:816
 #, kde-format
 msgid "New version of conflicted file"
 msgstr "Ny versjon av fil i konflikt"
 
-#: src/svnfrontend/svnactions.cpp:818
+#: src/svnfrontend/svnactions.cpp:819
 #, kde-format
 msgid "Property reject file"
 msgstr "Fil for avvist fletting"
 
-#: src/svnfrontend/svnactions.cpp:822
+#: src/svnfrontend/svnactions.cpp:823
 #, kde-format
 msgid "Copy from URL"
 msgstr "Kopier frå adresse"
 
-#: src/svnfrontend/svnactions.cpp:825 src/svnfrontend/svnactions.cpp:832
+#: src/svnfrontend/svnactions.cpp:826 src/svnfrontend/svnactions.cpp:833
 #, kde-format
 msgid "Lock token"
 msgstr "Låsepollett"
 
-#: src/svnfrontend/svnactions.cpp:826 src/svnfrontend/svnactions.cpp:833
+#: src/svnfrontend/svnactions.cpp:827 src/svnfrontend/svnactions.cpp:834
 #, kde-format
 msgid "Owner"
 msgstr "Eigar"
 
-#: src/svnfrontend/svnactions.cpp:827 src/svnfrontend/svnactions.cpp:834
+#: src/svnfrontend/svnactions.cpp:828 src/svnfrontend/svnactions.cpp:835
 #, kde-format
 msgid "Locked on"
 msgstr "Låst"
 
-#: src/svnfrontend/svnactions.cpp:828 src/svnfrontend/svnactions.cpp:835
+#: src/svnfrontend/svnactions.cpp:829 src/svnfrontend/svnactions.cpp:836
 #, kde-format
 msgid "Lock comment"
 msgstr "Låsekommentar"
 
-#: src/svnfrontend/svnactions.cpp:882
+#: src/svnfrontend/svnactions.cpp:883
 #, kde-format
 msgctxt "@title:window"
 msgid "Infolist"
 msgstr "Infoliste"
 
-#: src/svnfrontend/svnactions.cpp:921
+#: src/svnfrontend/svnactions.cpp:922
 #, kde-format
 msgctxt "@title:window"
 msgid "Applying Properties"
 msgstr "Tek i bruk eigenskapar"
 
-#: src/svnfrontend/svnactions.cpp:922
+#: src/svnfrontend/svnactions.cpp:923
 #, kde-format
 msgid "<center>Applying<br/>hit cancel for abort</center>"
 msgstr "<center>Tek i bruk<br/>Trykk «Avbryt» for å avbryta</center>"
 
-#: src/svnfrontend/svnactions.cpp:958
+#: src/svnfrontend/svnactions.cpp:959
 #, kde-format
 msgid "Could not change to folder %1\n"
 msgstr "Klarte ikkje byta til mappa %1\n"
 
-#: src/svnfrontend/svnactions.cpp:976
+#: src/svnfrontend/svnactions.cpp:977
 #, kde-format
 msgid "Not commit because networking is disabled"
 msgstr "Kan ikkje senda inn, grunna manglande nettilgang"
 
-#: src/svnfrontend/svnactions.cpp:999 src/svnfrontend/svnactions.cpp:2397
+#: src/svnfrontend/svnactions.cpp:1000 src/svnfrontend/svnactions.cpp:2403
 #, kde-format
 msgctxt "@title:window"
 msgid "Status / List"
 msgstr "Status / liste"
 
-#: src/svnfrontend/svnactions.cpp:1000 src/svnfrontend/svnactions.cpp:2398
+#: src/svnfrontend/svnactions.cpp:1001 src/svnfrontend/svnactions.cpp:2404
 #, kde-format
 msgid "Creating list / check status"
 msgstr "Lagar liste / kontroller status"
 
-#: src/svnfrontend/svnactions.cpp:1018
+#: src/svnfrontend/svnactions.cpp:1019
 #, kde-format
 msgid "Delete and Commit"
 msgstr "Slett og meld inn"
 
-#: src/svnfrontend/svnactions.cpp:1020
+#: src/svnfrontend/svnactions.cpp:1021
 #, kde-format
 msgid "Add and Commit"
 msgstr "Legg til og meld inn"
 
-#: src/svnfrontend/svnactions.cpp:1050
+#: src/svnfrontend/svnactions.cpp:1051
 #, kde-format
 msgctxt "@title:window"
 msgid "Commit"
 msgstr "Meld inn"
 
-#: src/svnfrontend/svnactions.cpp:1050
+#: src/svnfrontend/svnactions.cpp:1051
 #, kde-format
 msgid "Commit - hit Cancel for abort"
 msgstr "Melder inn – trykk «Avbryt» for å avbryta"
 
-#: src/svnfrontend/svnactions.cpp:1077
+#: src/svnfrontend/svnactions.cpp:1078
 #, kde-format
 msgctxt "@title:window"
 msgid "Downloading"
 msgstr "Lastar ned"
 
-#: src/svnfrontend/svnactions.cpp:1078
+#: src/svnfrontend/svnactions.cpp:1079
 #, kde-format
 msgid "Download - hit Cancel for abort"
 msgstr "Lastar ned – trykk «Avbryt» for å avbryta"
 
-#: src/svnfrontend/svnactions.cpp:1104
+#: src/svnfrontend/svnactions.cpp:1105
 #, kde-format
 msgid "Can not do this diff because networking is disabled."
 msgstr "Kan ikkje utføra diffen, på grunn av manglande nettilgang."
 
-#: src/svnfrontend/svnactions.cpp:1158
+#: src/svnfrontend/svnactions.cpp:1159
 #, kde-format
 msgid "Both entries seems to be the same, can not diff."
 msgstr "Begge oppføringane er heilt like. Kan ikkje laga diff."
 
-#: src/svnfrontend/svnactions.cpp:1219
+#: src/svnfrontend/svnactions.cpp:1220
 #, kde-format
 msgid "Diff-process could not started, check command."
 msgstr "Klarte ikkje starta diff-prosess. Kontroller kommandoen."
 
-#: src/svnfrontend/svnactions.cpp:1278 src/svnfrontend/svnactions.cpp:1340
+#: src/svnfrontend/svnactions.cpp:1279 src/svnfrontend/svnactions.cpp:1341
 #, kde-format
 msgctxt "@title:window"
 msgid "Diffing"
 msgstr "Køyrer diff"
 
-#: src/svnfrontend/svnactions.cpp:1278
+#: src/svnfrontend/svnactions.cpp:1279
 #, kde-format
 msgid "Diffing - hit Cancel for abort"
 msgstr "Køyrer diff – trykk «Avbryt» for å avbryta"
 
-#: src/svnfrontend/svnactions.cpp:1291 src/svnfrontend/svnactions.cpp:1350
+#: src/svnfrontend/svnactions.cpp:1292 src/svnfrontend/svnactions.cpp:1351
 #, kde-format
 msgid "No difference to display"
 msgstr "Finst ingen diff å visa"
 
-#: src/svnfrontend/svnactions.cpp:1341
+#: src/svnfrontend/svnactions.cpp:1342
 #, kde-format
 msgid "Diffing - hit cancel for abort"
 msgstr "Køyrer diff – trykk «Avbryt» for å avbryta"
 
-#: src/svnfrontend/svnactions.cpp:1397
+#: src/svnfrontend/svnactions.cpp:1398
 #, kde-format
 msgid "Display process could not started, check command."
 msgstr "Klarte ikkje starta visings­prosessen. Kontroller kommandoen."
 
-#: src/svnfrontend/svnactions.cpp:1409
+#: src/svnfrontend/svnactions.cpp:1410
 #, kde-format
 msgctxt "@title:window"
 msgid "Diff Display"
 msgstr "Diff-vising"
 
-#: src/svnfrontend/svnactions.cpp:1457
+#: src/svnfrontend/svnactions.cpp:1458
 #, kde-format
 msgctxt "@title:window"
 msgid "Making update"
 msgstr "Køyrer oppdatering"
 
-#: src/svnfrontend/svnactions.cpp:1458
+#: src/svnfrontend/svnactions.cpp:1459
 #, kde-format
 msgid "Making update - hit Cancel for abort"
 msgstr "Køyrer oppdatering – trykk «Avbryt» for å avbryta"
 
-#: src/svnfrontend/svnactions.cpp:1543
+#: src/svnfrontend/svnactions.cpp:1544
 #, kde-format
 msgid "Which files or directories should I add?"
 msgstr "Kva filer eller mapper vil du leggja til?"
 
-#: src/svnfrontend/svnactions.cpp:1550
+#: src/svnfrontend/svnactions.cpp:1551
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is versioned - break.</center>"
 msgstr "<center>Oppføringa<br/>%1<br/>er versjonert – avbryt.</center>"
 
-#: src/svnfrontend/svnactions.cpp:1574
+#: src/svnfrontend/svnactions.cpp:1578
 #, kde-format
 msgid "Delete from repository"
 msgstr "Slett frå depot"
 
-#: src/svnfrontend/svnactions.cpp:1623
+#: src/svnfrontend/svnactions.cpp:1629
 #, kde-format
 msgctxt "@title:window"
 msgid "Export a Repository"
 msgstr "Eksporter eit depot"
 
-#: src/svnfrontend/svnactions.cpp:1623
+#: src/svnfrontend/svnactions.cpp:1629
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout a Repository"
 msgstr "Sjekk ut eit depot"
 
-#: src/svnfrontend/svnactions.cpp:1641 src/svnfrontend/svnactions.cpp:1648
+#: src/svnfrontend/svnactions.cpp:1647 src/svnfrontend/svnactions.cpp:1654
 #, kde-format
 msgid "Export repository"
 msgstr "Eksporter depot"
 
-#: src/svnfrontend/svnactions.cpp:1647
+#: src/svnfrontend/svnactions.cpp:1653
 #, kde-format
 msgid "Invalid local path given!"
 msgstr "Ugyldig lokal adresse oppgjeven"
 
-#: src/svnfrontend/svnactions.cpp:1667
+#: src/svnfrontend/svnactions.cpp:1673
 #, kde-format
 msgid "Exporting a file?"
 msgstr "Fileksportering?"
 
-#: src/svnfrontend/svnactions.cpp:1667
+#: src/svnfrontend/svnactions.cpp:1673
 #, kde-format
 msgid "Checking out a file?"
 msgstr "Filutsjekking?"
 
-#: src/svnfrontend/svnactions.cpp:1723
+#: src/svnfrontend/svnactions.cpp:1729
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
 msgstr "Eksporter"
 
-#: src/svnfrontend/svnactions.cpp:1723
+#: src/svnfrontend/svnactions.cpp:1729
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout"
 msgstr "Sjekk ut"
 
-#: src/svnfrontend/svnactions.cpp:1724
+#: src/svnfrontend/svnactions.cpp:1730
 #, kde-format
 msgid "Exporting"
 msgstr "Eksporterer"
 
-#: src/svnfrontend/svnactions.cpp:1724
+#: src/svnfrontend/svnactions.cpp:1730
 #, kde-format
 msgid "Checking out"
 msgstr "Sjekkar ut"
 
-#: src/svnfrontend/svnactions.cpp:1762
+#: src/svnfrontend/svnactions.cpp:1768
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
 msgstr "<center>Oppføringa<br/>%1<br/>er ikkje versjonert – avbryt.</center>"
 
-#: src/svnfrontend/svnactions.cpp:1794
+#: src/svnfrontend/svnactions.cpp:1800
 #, kde-format
 msgctxt "@title:window"
 msgid "Revert"
 msgstr "Tilbakestill"
 
-#: src/svnfrontend/svnactions.cpp:1794
+#: src/svnfrontend/svnactions.cpp:1800
 #, kde-format
 msgid "Reverting items"
 msgstr "Tilbakestiller element"
 
-#: src/svnfrontend/svnactions.cpp:1823 src/svnfrontend/svnactions.cpp:1887
+#: src/svnfrontend/svnactions.cpp:1829 src/svnfrontend/svnactions.cpp:1893
 #, kde-format
 msgctxt "@title:window"
 msgid "Switch URL"
 msgstr "Byt depotadresse"
 
-#: src/svnfrontend/svnactions.cpp:1823
+#: src/svnfrontend/svnactions.cpp:1829
 #, kde-format
 msgid "Switching URL"
 msgstr "Byter depotadresse"
 
-#: src/svnfrontend/svnactions.cpp:1844
+#: src/svnfrontend/svnactions.cpp:1850
 #, kde-format
 msgctxt "@title:window"
 msgid "Relocate Repository"
 msgstr "Flytt depot"
 
-#: src/svnfrontend/svnactions.cpp:1845
+#: src/svnfrontend/svnactions.cpp:1851
 #, kde-format
 msgid "Relocate repository to new URL"
 msgstr "Flytt depot til ny adresse"
 
-#: src/svnfrontend/svnactions.cpp:1868
+#: src/svnfrontend/svnactions.cpp:1874
 #, kde-format
 msgid "Can only switch one item at time"
 msgstr "Kan berre byta eitt depot om gongen"
 
-#: src/svnfrontend/svnactions.cpp:1874
+#: src/svnfrontend/svnactions.cpp:1880
 #, kde-format
 msgid "Error getting entry to switch"
 msgstr "Feil ved henting av oppføring å byta"
 
-#: src/svnfrontend/svnactions.cpp:1897
+#: src/svnfrontend/svnactions.cpp:1903
 #, kde-format
 msgid "Switch URL"
 msgstr "Byt depotadresse"
 
-#: src/svnfrontend/svnactions.cpp:1914
+#: src/svnfrontend/svnactions.cpp:1920
 #, kde-format
 msgctxt "@title:window"
 msgid "Cleanup"
 msgstr "Rydd opp"
 
-#: src/svnfrontend/svnactions.cpp:1914
+#: src/svnfrontend/svnactions.cpp:1920
 #, kde-format
 msgid "Cleaning up folder"
 msgstr "Ryddar opp i mappe"
 
-#: src/svnfrontend/svnactions.cpp:1930
+#: src/svnfrontend/svnactions.cpp:1936
 #, kde-format
 msgctxt "@title:window"
 msgid "Resolve"
 msgstr "Løys konfliktar"
 
-#: src/svnfrontend/svnactions.cpp:1930
+#: src/svnfrontend/svnactions.cpp:1936
 #, kde-format
 msgid "Marking resolved"
 msgstr "Merkjer som løyst"
 
-#: src/svnfrontend/svnactions.cpp:1961
+#: src/svnfrontend/svnactions.cpp:1967
 #, kde-format
 msgid "Could not retrieve conflict information - giving up."
 msgstr "Klarte ikkje henta konfliktinformasjon – gjev opp."
 
-#: src/svnfrontend/svnactions.cpp:1986
+#: src/svnfrontend/svnactions.cpp:1992
 #, kde-format
 msgid "Resolve-process could not started, check command."
 msgstr "Klarte ikkje starta løyseprosess. Kontroller kommandoen."
 
-#: src/svnfrontend/svnactions.cpp:1996
+#: src/svnfrontend/svnactions.cpp:2002
 #, kde-format
 msgctxt "@title:window"
 msgid "Import"
 msgstr "Importer"
 
-#: src/svnfrontend/svnactions.cpp:1996
+#: src/svnfrontend/svnactions.cpp:2002
 #, kde-format
 msgid "Importing items"
 msgstr "Importerer element"
 
-#: src/svnfrontend/svnactions.cpp:2025
+#: src/svnfrontend/svnactions.cpp:2031
 #, kde-format
 msgid "Nothing to merge."
 msgstr "Ingenting å fletta."
 
-#: src/svnfrontend/svnactions.cpp:2029
+#: src/svnfrontend/svnactions.cpp:2035
 #, kde-format
 msgid "No destination to merge."
 msgstr "Manglar må å fletta."
 
-#: src/svnfrontend/svnactions.cpp:2048
+#: src/svnfrontend/svnactions.cpp:2054
 #, kde-format
 msgid "Both sources must be same type."
 msgstr "Begge kjeldene må vera av same type."
 
-#: src/svnfrontend/svnactions.cpp:2055
+#: src/svnfrontend/svnactions.cpp:2061
 #, kde-format
 msgid "Target for merge must same type like sources."
 msgstr "Målet for flettinga må vera av same typen som kjelda."
 
-#: src/svnfrontend/svnactions.cpp:2078
+#: src/svnfrontend/svnactions.cpp:2084
 #, kde-format
 msgid "Both entries seems to be the same, will not do a merge."
 msgstr ""
 "Begge oppføringane ser ut til å vera dei same. Vil ikkje utføra fletting."
 
-#: src/svnfrontend/svnactions.cpp:2156
+#: src/svnfrontend/svnactions.cpp:2162
 #, kde-format
 msgid "Merge process could not started, check command."
 msgstr "Klarte ikkje starta flette­prosess. Kontroller kommandoen."
 
-#: src/svnfrontend/svnactions.cpp:2238
+#: src/svnfrontend/svnactions.cpp:2244
 #, kde-format
 msgid "Merging items"
 msgstr "Flettar element"
 
-#: src/svnfrontend/svnactions.cpp:2264 src/svnfrontend/svnactions.cpp:2281
+#: src/svnfrontend/svnactions.cpp:2270 src/svnfrontend/svnactions.cpp:2287
 #, kde-format
 msgctxt "@title:window"
 msgid "Move"
 msgstr "Flytt"
 
-#: src/svnfrontend/svnactions.cpp:2264
+#: src/svnfrontend/svnactions.cpp:2270
 #, kde-format
 msgid "Moving/Rename item"
 msgstr "Flyttar / endrar namn på element"
 
-#: src/svnfrontend/svnactions.cpp:2281
+#: src/svnfrontend/svnactions.cpp:2287
 #, kde-format
 msgid "Moving entries"
 msgstr "Flyttar oppføringar"
 
-#: src/svnfrontend/svnactions.cpp:2301 src/svnfrontend/svnactions.cpp:2315
+#: src/svnfrontend/svnactions.cpp:2307 src/svnfrontend/svnactions.cpp:2321
 #, kde-format
 msgctxt "@title:window"
 msgid "Copy / Move"
 msgstr "Kopier / flytt"
 
-#: src/svnfrontend/svnactions.cpp:2301 src/svnfrontend/svnactions.cpp:2315
+#: src/svnfrontend/svnactions.cpp:2307 src/svnfrontend/svnactions.cpp:2321
 #, kde-format
 msgid "Copy or Moving entries"
 msgstr "Kopierer eller flyttar oppføringar"
 
-#: src/svnfrontend/svnactions.cpp:2431
+#: src/svnfrontend/svnactions.cpp:2437
 #, kde-format
 msgid "No unversioned items found."
 msgstr "Fann ikkje nokon uversjonerte element."
 
-#: src/svnfrontend/svnactions.cpp:2435
+#: src/svnfrontend/svnactions.cpp:2441
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Unversioned Items"
 msgstr "Legg til uversjonerte element"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
-#: src/svnfrontend/svnactions.cpp:2438 src/svnfrontend/svnlogdlg.ui:163
+#: src/svnfrontend/svnactions.cpp:2444 src/svnfrontend/svnlogdlg.ui:163
 #, kde-format
 msgid "Item"
 msgstr "Element"
 
-#: src/svnfrontend/svnactions.cpp:2553
+#: src/svnfrontend/svnactions.cpp:2559
 #, kde-format
 msgid "Found %1 modified item"
 msgid_plural "Found %1 modified items"
 msgstr[0] "Fann %1 endra element"
 msgstr[1] "Fann %1 endra element"
 
-#: src/svnfrontend/svnactions.cpp:2581
+#: src/svnfrontend/svnactions.cpp:2587
 #, kde-format
 msgid "Checking for updates finished"
 msgstr "Ferdig med å sjå etter oppdateringar"
 
-#: src/svnfrontend/svnactions.cpp:2583
+#: src/svnfrontend/svnactions.cpp:2589
 #, kde-format
 msgid "There are new items in repository"
 msgstr "Det finst nye element i depotet"
 
-#: src/svnfrontend/svnactions.cpp:2653
+#: src/svnfrontend/svnactions.cpp:2659
 #, kde-format
 msgid "Not filling log cache because networking is disabled"
 msgstr "Fyller ikkje mellomlager for logg, på grunn av manglande nettilgang."
 
-#: src/svnfrontend/svnactions.cpp:2693
+#: src/svnfrontend/svnactions.cpp:2699
 #, kde-format
 msgid "Not checking for updates because networking is disabled"
 msgstr "Ser ikkje etter oppdatering, på grunn av manglande nettilgang."
 
-#: src/svnfrontend/svnactions.cpp:2699
+#: src/svnfrontend/svnactions.cpp:2705
 #, kde-format
 msgid "Checking for updates started in background"
 msgstr "Søk etter oppdateringar vart starta i bakgrunnen"

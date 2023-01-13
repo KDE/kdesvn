@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:58+0000\n"
-"PO-Revision-Date: 2022-10-10 08:49+0200\n"
+"PO-Revision-Date: 2023-01-12 07:59+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -607,17 +607,17 @@ msgstr ""
 #: src/kiosvn/kiolistener.cpp:215
 #, kde-format
 msgid "Adding %1."
-msgstr ""
+msgstr "დამატება: %1."
 
 #: src/kiosvn/kiolistener.cpp:219
 #, kde-format
 msgid "Deleting %1."
-msgstr ""
+msgstr "წაშლა: %1."
 
 #: src/kiosvn/kiolistener.cpp:222
 #, kde-format
 msgid "Replacing %1."
-msgstr ""
+msgstr "ჩანაცვლება: %1."
 
 #: src/kiosvn/kiolistener.cpp:228
 #, kde-format
@@ -663,7 +663,7 @@ msgstr ""
 #: src/kiosvn/kiosvn.cpp:391
 #, kde-format
 msgid "Could not open temporary file"
-msgstr ""
+msgstr "დროებითი ფაილის გახსნის შეცდომა"
 
 #: src/kiosvn/kiosvn.cpp:412
 #, kde-format
@@ -1639,7 +1639,7 @@ msgstr ""
 #: src/settings/kdesvn_part.kcfg:13
 #, kde-format
 msgid "Size of the icons"
-msgstr ""
+msgstr "ხატულის ზომები"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:17
@@ -2450,7 +2450,7 @@ msgstr ""
 #: src/svnfrontend/ccontextlistener.cpp:94
 #, kde-format
 msgid "unchanged"
-msgstr ""
+msgstr "შეუცვლელი"
 
 #: src/svnfrontend/ccontextlistener.cpp:95
 #, kde-format
@@ -2745,11 +2745,10 @@ msgid "Clean repository cache"
 msgstr ""
 
 #: src/svnfrontend/database/dboverview.cpp:131
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Cache"
-msgstr "წაშლა"
+msgstr "კეშის წაშლა"
 
 #: src/svnfrontend/database/dboverview.cpp:148
 #, kde-format
@@ -2766,11 +2765,10 @@ msgid "Delete repository"
 msgstr ""
 
 #: src/svnfrontend/database/dboverview.cpp:150
-#, fuzzy, kde-format
-#| msgid "Repository"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Repository"
-msgstr "საცავი"
+msgstr "რეპოზიტორიის წაშლა"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DBOverView)
 #: src/svnfrontend/database/dboverview.ui:6
@@ -2822,7 +2820,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Settings for %1"
-msgstr ""
+msgstr "%1-ის მორგება"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: src/svnfrontend/database/dbsettings.ui:21
@@ -3178,7 +3176,7 @@ msgstr "თვისება"
 #: src/svnfrontend/fronthelpers/propertylist.cpp:44
 #, kde-format
 msgid "Value"
-msgstr ""
+msgstr "მნიშვნელობა"
 
 #: src/svnfrontend/fronthelpers/propertylist.cpp:104
 #: src/svnfrontend/propertiesdlg.cpp:111 src/svnfrontend/propertiesdlg.cpp:162
@@ -3212,7 +3210,7 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/rangeinput.ui:6
 #, kde-format
 msgid "Revisions"
-msgstr ""
+msgstr "რევიზიები"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_startRevBox)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:12
@@ -3235,13 +3233,13 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/rangeinput.ui:143
 #, kde-format
 msgid "WORKING"
-msgstr ""
+msgstr "ვმუშაობ"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_startNumberButton)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:56
 #, kde-format
 msgid "N&umber"
-msgstr ""
+msgstr "&რიცხვი"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_startHeadButton)
 #. i18n: ectx: property (text), widget (QRadioButton, m_stopHeadButton)
@@ -3249,13 +3247,13 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/rangeinput.ui:120
 #, kde-format
 msgid "HEAD"
-msgstr ""
+msgstr "HEAD"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_startStartButton)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:73
 #, kde-format
 msgid "S&TART"
-msgstr ""
+msgstr "&გაშვება"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_stopRevBox)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:85
@@ -3267,30 +3265,30 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/rangeinput.ui:93
 #, kde-format
 msgid "Number"
-msgstr ""
+msgstr "რიცხვი"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_stopStartButton)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:113
 #, kde-format
 msgid "START"
-msgstr ""
+msgstr "დასაწყისი"
 
 #: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:58
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Revisions"
-msgstr ""
+msgstr "აირჩიეთ რევიზიები"
 
 #: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:201
 #, kde-format
 msgid "Select revision"
-msgstr ""
+msgstr "აირჩიეთ რევიზია"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_RevisionButton)
 #: src/svnfrontend/fronthelpers/revisionbutton.ui:22
 #, kde-format
 msgid "-1"
-msgstr ""
+msgstr "-1"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:144
 #, kde-format
@@ -3344,7 +3342,7 @@ msgstr ""
 #: src/svnfrontend/graphtree/revgraphview.cpp:441
 #, kde-format
 msgid "Revision %1"
-msgstr ""
+msgstr "რევიზია %1"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:461
 #, kde-format
@@ -3359,22 +3357,22 @@ msgstr ""
 #: src/svnfrontend/graphtree/revgraphview.cpp:557
 #, kde-format
 msgid "<b>Revision</b>%1%2%3"
-msgstr ""
+msgstr "<b>რევიზია</b>%1%2%3"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:557
 #, kde-format
 msgid "<b>Author</b>%1%2%3"
-msgstr ""
+msgstr "<b>ავტორი</b>%1%2%3"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:558
 #, kde-format
 msgid "<b>Date</b>%1%2%3"
-msgstr ""
+msgstr "<b>თარიღი</b>%1%2%3"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:558
 #, kde-format
 msgid "<b>Log</b>%1%2%3"
-msgstr ""
+msgstr "<b>ჟურნალი</b>%1%2%3"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:833
 #, kde-format
@@ -3462,7 +3460,7 @@ msgstr ""
 #: src/svnfrontend/graphtree/revisiontree.cpp:139
 #, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "შეწყვეტა"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:140
 #, kde-format
@@ -3493,7 +3491,7 @@ msgstr "დანიშნულების საქაღალდე:"
 #: src/svnfrontend/hotcopydlg.ui:51
 #, kde-format
 msgid "Clean logs"
-msgstr ""
+msgstr "ჟურნალის გასუფთავება"
 
 #: src/svnfrontend/importdir_logmsg.cpp:37
 #, kde-format
@@ -3561,7 +3559,7 @@ msgstr "იგნორი"
 #: src/svnfrontend/loaddmpdlg.ui:50
 #, kde-format
 msgid "Default"
-msgstr ""
+msgstr "ნაგულისხმები"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_UsePre)
 #: src/svnfrontend/loaddmpdlg.ui:66
@@ -3703,7 +3701,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:559
 #, kde-format
 msgid "Move"
-msgstr ""
+msgstr "სვლა"
 
 #: src/svnfrontend/maintreewidget.cpp:564
 #, kde-format
@@ -3822,12 +3820,12 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:653
 #, kde-format
 msgid "Check for unversioned items"
-msgstr ""
+msgstr "უვერსიო ჩანაწერების შემოწმება"
 
 #: src/svnfrontend/maintreewidget.cpp:658
 #, kde-format
 msgid "Unversioned"
-msgstr ""
+msgstr "უვერსიო"
 
 #: src/svnfrontend/maintreewidget.cpp:659
 #, kde-format
@@ -4019,7 +4017,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:824
 #, kde-format
 msgid "Merge..."
-msgstr ""
+msgstr "შერწყმა..."
 
 #: src/svnfrontend/maintreewidget.cpp:829
 #, kde-format
@@ -4070,7 +4068,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:862
 #, kde-format
 msgid "Export"
-msgstr ""
+msgstr "ექსპორტი"
 
 #: src/svnfrontend/maintreewidget.cpp:864
 #, kde-format
@@ -4177,8 +4175,7 @@ msgid "Break Lock"
 msgstr ""
 
 #: src/svnfrontend/maintreewidget.cpp:1606
-#, fuzzy, kde-format
-#| msgid "Ignore"
+#, kde-format
 msgctxt "@action:button"
 msgid "Ignore"
 msgstr "იგნორი"
@@ -4688,7 +4685,7 @@ msgstr "დამატება"
 #: src/svnfrontend/svnactions.cpp:791
 #, kde-format
 msgid "Deletion"
-msgstr ""
+msgstr "წაშლა"
 
 #: src/svnfrontend/svnactions.cpp:801
 #, kde-format
@@ -4929,7 +4926,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
-msgstr ""
+msgstr "ექსპორტი"
 
 #: src/svnfrontend/svnactions.cpp:1729
 #, kde-format
@@ -5082,7 +5079,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Move"
-msgstr ""
+msgstr "სვლა"
 
 #: src/svnfrontend/svnactions.cpp:2270
 #, kde-format
@@ -5233,7 +5230,7 @@ msgstr ""
 #: src/svnfrontend/svnlogdlg.ui:18
 #, kde-format
 msgid "SVN Log"
-msgstr ""
+msgstr "SVN ჟურნალი"
 
 #. i18n: ectx: property (text), widget (QLabel, startLabel)
 #: src/svnfrontend/svnlogdlg.ui:31
@@ -5317,7 +5314,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "SVN Log"
-msgstr ""
+msgstr "SVN ჟურნალი"
 
 #: src/svnfrontend/svnlogdlgimp.cpp:443
 #, kde-format

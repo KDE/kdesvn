@@ -1,13 +1,13 @@
 # Translation of kdesvn to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Karl Ove Hufthammer <karl@huftis.org>, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # Øystein Steffensen-Alværvik <oysteins.omsetting@protonmail.com>, 2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:58+0000\n"
-"PO-Revision-Date: 2022-10-30 09:32+0100\n"
+"PO-Revision-Date: 2023-01-15 11:55+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.12.1\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -2703,7 +2703,7 @@ msgstr "Lagra passord"
 #, kde-format
 msgctxt "@action:button"
 msgid "Store in Plain Text"
-msgstr ""
+msgstr "Lagra som rein tekst"
 
 #: src/svnfrontend/commandexec.cpp:206 src/svnfrontend/commandexec.cpp:321
 #: src/svnfrontend/graphtree/revgraphview.cpp:992
@@ -2946,7 +2946,7 @@ msgstr "Tøm snøgglager for depotmeldingar"
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete Cache"
-msgstr ""
+msgstr "Tøm snøgglager"
 
 #: src/svnfrontend/database/dboverview.cpp:148
 #, kde-format
@@ -2969,7 +2969,7 @@ msgstr "Slett depot"
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete Repository"
-msgstr ""
+msgstr "Slett depot"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DBOverView)
 #: src/svnfrontend/database/dboverview.ui:6
@@ -4450,13 +4450,13 @@ msgstr "Låsar opp element"
 #, kde-format
 msgctxt "@action:button"
 msgid "Break Lock"
-msgstr ""
+msgstr "Bryt låsen"
 
 #: src/svnfrontend/maintreewidget.cpp:1606
 #, kde-format
 msgctxt "@action:button"
 msgid "Ignore"
-msgstr ""
+msgstr "Ignorer"
 
 #: src/svnfrontend/maintreewidget.cpp:1900
 #, kde-format

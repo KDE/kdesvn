@@ -1,14 +1,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Marcello Romani <marcello.romani@libero.it>, 2010.
-# Vincenzo Reale <smart2128vr@gmail.com>, 2013, 2015, 2016, 2017, 2018, 2019, 2020, 2022.
+# Vincenzo Reale <smart2128vr@gmail.com>, 2013, 2015, 2016, 2017, 2018, 2019, 2020, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:58+0000\n"
-"PO-Revision-Date: 2022-10-11 00:27+0200\n"
+"PO-Revision-Date: 2023-01-11 01:18+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2730,7 +2730,7 @@ msgstr "Salva la password"
 #, kde-format
 msgctxt "@action:button"
 msgid "Store in Plain Text"
-msgstr ""
+msgstr "Archivia in testo semplice"
 
 #: src/svnfrontend/commandexec.cpp:206 src/svnfrontend/commandexec.cpp:321
 #: src/svnfrontend/graphtree/revgraphview.cpp:992
@@ -2971,11 +2971,10 @@ msgid "Clean repository cache"
 msgstr "Pulisci la cache del deposito"
 
 #: src/svnfrontend/database/dboverview.cpp:131
-#, fuzzy, kde-format
-#| msgid "Delete cache"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Cache"
-msgstr "Elimina cache"
+msgstr "Elimina la cache"
 
 #: src/svnfrontend/database/dboverview.cpp:148
 #, kde-format
@@ -2994,8 +2993,7 @@ msgid "Delete repository"
 msgstr "Elimina il deposito"
 
 #: src/svnfrontend/database/dboverview.cpp:150
-#, fuzzy, kde-format
-#| msgid "Delete repository"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Repository"
 msgstr "Elimina il deposito"
@@ -4504,11 +4502,10 @@ msgstr "Sblocco degli elementi"
 #, kde-format
 msgctxt "@action:button"
 msgid "Break Lock"
-msgstr ""
+msgstr "Interrompi il blocco"
 
 #: src/svnfrontend/maintreewidget.cpp:1606
-#, fuzzy, kde-format
-#| msgid "Ignore"
+#, kde-format
 msgctxt "@action:button"
 msgid "Ignore"
 msgstr "Ignora"

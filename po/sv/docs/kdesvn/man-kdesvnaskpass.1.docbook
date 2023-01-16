@@ -1,0 +1,107 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Swedish "INCLUDE">
+]>
+
+<refentry lang="&language;" id='kdesvnaskpass1'>
+
+<refentryinfo>
+<title
+>Användarhandbok kdesvnaskpass</title>
+<author
+><personname
+> <firstname
+>Rajko</firstname
+> <surname
+>Albrecht</surname
+> </personname
+> <email
+>ral@alwins-world.de</email
+></author>
+<date
+>2016-05-22</date>
+<releaseinfo
+>kdesvn 2.1.0</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kdesvnaskpass</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kdesvnaskpass</command
+></refname>
+<refpurpose
+>ssh-askpass för KDESvn</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id='synopsis'>
+<cmdsynopsis
+><command
+>kdesvnaskpass</command
+> <arg choice="opt"
+><replaceable
+>fråga</replaceable
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1 id='description'
+><title
+>Beskrivning</title>
+<para
+>ssh-askpass för KDESvn</para>
+</refsect1>
+
+<refsect1 id='options'
+><title
+>Väljare</title>
+
+<refsect2 id='ss_arguments'
+><title
+>Argument:</title>
+<variablelist>
+  <varlistentry>
+  <term
+><emphasis
+>fråga</emphasis
+></term>
+  <listitem>
+<para
+>Fråga som visas för användaren.</para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</refsect2>
+
+</refsect1>
+
+<refsect1 id='see_also'
+><title
+>Se också</title>
+<simplelist>
+<member
+>Fullständig användardokumentation är tillgänglig via Hjälpcentralen. Det går också att mata in webbadressen <emphasis
+>help:/kdesvn</emphasis
+> direkt i &konqueror;, eller köra <emphasis
+>`khelpcenter help:/kdesvn'</emphasis
+> på kommandoraden.</member>
+</simplelist>
+</refsect1>
+
+<refsect1 id='authors'
+><title
+>Upphovsmän</title>
+<literallayout
+>Rajko Albrecht &lt;ral@alwins-world.de&gt;
+</literallayout
+></refsect1>
+</refentry>
+

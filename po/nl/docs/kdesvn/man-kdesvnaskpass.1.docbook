@@ -1,0 +1,107 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Dutch "INCLUDE">
+]>
+
+<refentry lang="&language;" id='kdesvnaskpass1'>
+
+<refentryinfo>
+<title
+>Gebruikershandleiding van kdesvnaskpass</title>
+<author
+><personname
+> <firstname
+>Rajko</firstname
+> <surname
+>Albrecht</surname
+> </personname
+> <email
+>ral@alwins-world.de</email
+></author>
+<date
+>2016-05-22</date>
+<releaseinfo
+>kdesvn 2.1.0</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kdesvnaskpass</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kdesvnaskpass</command
+></refname>
+<refpurpose
+>ssh-askpass voor kdesvn</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id='synopsis'>
+<cmdsynopsis
+><command
+>kdesvnaskpass</command
+> <arg choice="opt"
+><replaceable
+>prompt</replaceable
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1 id='description'
+><title
+>Beschrijving</title>
+<para
+>ssh-askpass voor kdesvn</para>
+</refsect1>
+
+<refsect1 id='options'
+><title
+>Opties</title>
+
+<refsect2 id='ss_arguments'
+><title
+>Argumenten:</title>
+<variablelist>
+  <varlistentry>
+  <term
+><emphasis
+>prompt</emphasis
+></term>
+  <listitem>
+<para
+>Aan gebruiker getoonde vraag voor wachtwoord</para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</refsect2>
+
+</refsect1>
+
+<refsect1 id='see_also'
+><title
+>Zie ook</title>
+<simplelist>
+<member
+>De volledige gebruikers documentatie is beschikbaar via het &khelpcenter;. U kunt ook de &URL; <emphasis
+>help:/kdesvn/</emphasis
+> direct in &konqueror; invoeren maar u kunt ook <emphasis
+>`khelpcenter help:/kdesvn/'</emphasis
+> van de commandoregel uitvoeren.</member>
+</simplelist>
+</refsect1>
+
+<refsect1 id='authors'
+><title
+>Auteurs</title>
+<literallayout
+>Rajko Albrecht &lt;ral@alwins-world.de&gt;
+</literallayout
+></refsect1>
+</refentry>
+

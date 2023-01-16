@@ -1,0 +1,5814 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: kdesvn\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-06-07 01:43+0000\n"
+"PO-Revision-Date: 2013-07-06 03:18-0700\n"
+"Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
+"Language-Team: Japanese <kde-jp@kde.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#, fuzzy, kde-format
+#| msgid "Issuer name"
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "発行者名"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+
+#: src/askpass/kdesvn-askpass.cpp:35
+#, fuzzy, kde-format
+msgid "kdesvnaskpass"
+msgstr "kdesvnaskpass"
+
+#: src/askpass/kdesvn-askpass.cpp:36
+#, fuzzy, kde-format
+msgid "ssh-askpass for kdesvn"
+msgstr "kdesvn に対する ssh-askpass"
+
+#: src/askpass/kdesvn-askpass.cpp:38
+#, fuzzy, kde-format
+msgid "Copyright (c) 2005-2009 Rajko Albrecht"
+msgstr "Copyright (c) 2005-2009 Rajko Albrecht"
+
+#: src/askpass/kdesvn-askpass.cpp:43
+#, fuzzy, kde-format
+msgid "Prompt"
+msgstr "プロンプト"
+
+#: src/askpass/kdesvn-askpass.cpp:55
+#, fuzzy, kde-format
+msgid "Please enter your password below."
+msgstr "下にパスワードを入力してください。"
+
+#: src/askpass/kdesvn-askpass.cpp:76
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Password"
+msgstr "パスワード："
+
+#: src/kdesvn.cpp:81
+#, fuzzy, kde-format
+msgid "&Bookmarks"
+msgstr "ブックマーク(&B)"
+
+#: src/kdesvn.cpp:109
+#, fuzzy, kde-format
+msgid "Create and open new repository"
+msgstr "新しいリポジトリを作成して開く(&C)"
+
+#: src/kdesvn.cpp:110
+#, fuzzy, kde-format
+#| msgid "Create and opens a new local subversion repository"
+msgid "Create and opens a new local Subversion repository"
+msgstr "新しいローカルの subversion リポジトリを作成して開きます"
+
+#: src/kdesvn.cpp:115
+#, fuzzy, kde-format
+msgid "Dump repository to file"
+msgstr "リポジトリをファイルにダンプ(&D)"
+
+#: src/kdesvn.cpp:116
+#, fuzzy, kde-format
+#| msgid "Dump a subversion repository to a file"
+msgid "Dump a Subversion repository to a file"
+msgstr "subversion リポジトリをファイルにダンプします"
+
+#: src/kdesvn.cpp:121
+#, fuzzy, kde-format
+msgid "Hotcopy a repository"
+msgstr "リポジトリをハードコピー(&H)"
+
+#: src/kdesvn.cpp:122
+#, fuzzy, kde-format
+#| msgid "Hotcopy a subversion repository to a new folder"
+msgid "Hotcopy a Subversion repository to a new folder"
+msgstr "subversion リポジトリを新しいフォルダにハードコピーします"
+
+#: src/kdesvn.cpp:127
+#, fuzzy, kde-format
+msgid "Load dump into repository"
+msgstr "リポジトリにダンプを読み込む(&L)"
+
+#: src/kdesvn.cpp:128
+#, fuzzy, kde-format
+msgid "Load a dump file into a repository."
+msgstr "リポジトリにダンプファイルを読み込みます。"
+
+#: src/kdesvn.cpp:133
+#, fuzzy, kde-format
+msgid "Add ssh identities to ssh-agent"
+msgstr "ssh-agent に ssh identity を追加(&A)"
+
+#: src/kdesvn.cpp:134
+#, fuzzy, kde-format
+msgid "Force add ssh-identities to ssh-agent for future use."
+msgstr "将来使うために ssh-agent に ssh-identity を強制的に追加します。"
+
+#: src/kdesvn.cpp:139
+#, fuzzy, kde-format
+msgid "Info about kdesvn part"
+msgstr "kdesvn part についての情報"
+
+#: src/kdesvn.cpp:140
+#, fuzzy, kde-format
+#| msgid "Shows info about the kdesvn plugin not the standalone app."
+msgid "Shows info about the kdesvn plugin and not the standalone application."
+msgstr ""
+"スタンドアロンアプリケーションではない kdesvn プラグインについての情報を表示"
+"します。"
+
+#: src/kdesvn.cpp:145
+#, fuzzy, kde-format
+msgid "Show database content"
+msgstr "データベースの中身を表示(&S)"
+
+#: src/kdesvn.cpp:146
+#, fuzzy, kde-format
+#| msgid "Show the content of logcache database"
+msgid "Show the content of log cache database"
+msgstr "ログキャッシュデータベースの中身を表示します"
+
+#: src/kdesvn.cpp:152
+#, fuzzy, kde-format
+#| msgid "Could not load the part:\n"
+msgid ""
+"Could not load the part:\n"
+"%1"
+msgstr "part を読み込めませんでした:\n"
+
+#: src/kdesvn.cpp:159
+#, fuzzy, kde-format
+#| msgid "Could not find our part"
+msgid ""
+"Could not find our part:\n"
+"%1"
+msgstr "part が見つかりませんでした"
+
+#: src/kdesvn.cpp:190
+#, fuzzy, kde-format
+#| msgid "Could not open url %1"
+msgid "Could not open URL %1"
+msgstr "url %1 を開けませんでした"
+
+#: src/kdesvn.cpp:222
+#, fuzzy, kde-format
+msgid "Recent opened URLs"
+msgstr "最近開いた URL"
+
+#: src/kdesvn.cpp:231
+#, fuzzy, kde-format
+msgid "Load last opened URL on start"
+msgstr "起動時に最後に開いた URL を読み込む(&L)"
+
+#: src/kdesvn.cpp:233
+#, fuzzy, kde-format
+#| msgid "Reload last opened url if no one is given on commandline"
+msgid "Reload last opened URL if no one is given on command line"
+msgstr ""
+"コマンドライン上で誰も与えられていなければ最後に開いた url を再読み込みします"
+
+#: src/kdesvn.cpp:316
+#, fuzzy, kde-format
+msgid "Ready"
+msgstr "待機中"
+
+#: src/kdesvn_part.cpp:156
+#, fuzzy, kde-format
+msgid "Logs follow node changes"
+msgstr "ログはノードの変化に従う(&F)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_ignored_files)
+#. i18n: ectx: label, entry, group (subversion)
+#: src/kdesvn_part.cpp:161 src/settings/display_settings.ui:57
+#: src/settings/kdesvn_part.kcfg:80
+#, fuzzy, kde-format
+msgid "Display ignored files"
+msgstr "無視されたファイルを表示する"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/kdesvn_part.cpp:166 src/settings/kdesvn_part.kcfg:84
+#, fuzzy, kde-format
+msgid "Display unknown files"
+msgstr "不明なファイルを表示(&U)"
+
+#: src/kdesvn_part.cpp:171
+#, fuzzy, kde-format
+msgid "Hide unchanged files"
+msgstr "変更されていないファイルを隠す(&H)"
+
+#: src/kdesvn_part.cpp:176
+#, fuzzy, kde-format
+msgid "Work online"
+msgstr "オンライン作業(&W)"
+
+#: src/kdesvn_part.cpp:183
+#, fuzzy, kde-format
+#| msgid "Configure %1..."
+msgid "Configure Kdesvn..."
+msgstr "%1 を設定..."
+
+#: src/kdesvn_part.cpp:187
+#, fuzzy, kde-format
+msgid "About kdesvn part"
+msgstr "kdesvn part について"
+
+#: src/kdesvn_part.cpp:191
+#, fuzzy, kde-format
+msgid "Kdesvn Handbook"
+msgstr "Kdesvn ハンドブック"
+
+#: src/kdesvn_part.cpp:281
+#, fuzzy, kde-format
+msgid ""
+"Built with Subversion library: %1\n"
+"Running Subversion library: %2"
+msgstr ""
+"右の Subversion ライブラリでビルドされました: %1\n"
+"右の Subversion ライブラリで動作しています: %2"
+
+#: src/kdesvn_part.cpp:284
+#, fuzzy, kde-format
+msgid "kdesvn Part"
+msgstr "kdesvn Part"
+
+#: src/kdesvn_part.cpp:286
+#, fuzzy, kde-format
+msgid "A Subversion Client by KDE (dynamic Part component)"
+msgstr "KDE 向けの Subversion クライアント（動的 Part コンポーネント）"
+
+#: src/kdesvn_part.cpp:288
+#, fuzzy, kde-format
+msgid ""
+"(C) 2005-2009 Rajko Albrecht,\n"
+"(C) 2015-2018 Christian Ehrlicher"
+msgstr "(C) 2005-2007 Rajko Albrecht"
+
+#: src/kdesvn_part.cpp:291
+#, fuzzy, kde-format
+msgid "Original author and maintainer"
+msgstr "オリジナル作者とメンテナ"
+
+#: src/kdesvn_part.cpp:292 src/main.cpp:46 src/main.cpp:47
+#, fuzzy, kde-format
+msgid "Developer"
+msgstr "開発者"
+
+#. i18n: ectx: Menu (subversion_general)
+#: src/kdesvn_part.cpp:331 src/kdesvn_part.rc:19
+#, fuzzy, kde-format
+msgid "General"
+msgstr "一般"
+
+#: src/kdesvn_part.cpp:331
+#, fuzzy, kde-format
+msgid "General Settings"
+msgstr "全般設定"
+
+#. i18n: ectx: Menu (subversion_main)
+#: src/kdesvn_part.cpp:333 src/kdesvn_part.rc:17 src/kdesvnui.rc:25
+#, fuzzy, kde-format
+msgid "Subversion"
+msgstr "Subversion"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, SubversionSettings)
+#: src/kdesvn_part.cpp:333 src/settings/subversion_settings.ui:6
+#, fuzzy, kde-format
+msgid "Subversion Settings"
+msgstr "Subversion 設定"
+
+#: src/kdesvn_part.cpp:335
+#, kde-format
+msgid "Timed jobs"
+msgstr ""
+
+#: src/kdesvn_part.cpp:335
+#, fuzzy, kde-format
+msgid "Settings for timed jobs"
+msgstr "%1 に対する設定"
+
+#: src/kdesvn_part.cpp:337
+#, fuzzy, kde-format
+msgid "Diff & Merge"
+msgstr "Diff & マージ"
+
+#: src/kdesvn_part.cpp:337
+#, fuzzy, kde-format
+msgid "Settings for diff and merge"
+msgstr "diff とマージに関する設定"
+
+#: src/kdesvn_part.cpp:339
+#, fuzzy, kde-format
+msgid "Colors"
+msgstr "色"
+
+#: src/kdesvn_part.cpp:339
+#, fuzzy, kde-format
+msgid "Color Settings"
+msgstr "色設定"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, RevisionTreeSettings)
+#: src/kdesvn_part.cpp:341 src/settings/revisiontree_settings.ui:6
+#, fuzzy, kde-format
+msgid "Revision tree Settings"
+msgstr "リビジョンツリー設定"
+
+#: src/kdesvn_part.cpp:341
+#, fuzzy, kde-format
+msgid "Revision tree"
+msgstr "リビジョンツリー"
+
+#: src/kdesvn_part.cpp:343
+#, fuzzy, kde-format
+#| msgid "Commandline"
+msgid "KIO / Command line"
+msgstr "コマンドライン"
+
+#: src/kdesvn_part.cpp:343
+#, fuzzy, kde-format
+#| msgid "Settings for commandline and KIO execution"
+msgid "Settings for command line and KIO execution"
+msgstr "コマンドラインと KIO 実行に関する設定"
+
+#. i18n: ectx: Menu (settings)
+#: src/kdesvn_part.rc:5
+#, fuzzy, kde-format
+msgid "Subversion settings"
+msgstr "Subversion 設定"
+
+#. i18n: ectx: Menu (quicksettings)
+#: src/kdesvn_part.rc:7 src/kdesvnui.rc:43
+#, fuzzy, kde-format
+msgid "Quick settings"
+msgstr "クイック設定(&Q)"
+
+#. i18n: ectx: Menu (subversion_working_copy)
+#: src/kdesvn_part.rc:49
+#, fuzzy, kde-format
+msgid "Working copy"
+msgstr "作業コピー(&W)"
+
+#. i18n: ectx: Menu (subversion_repo)
+#: src/kdesvn_part.rc:75
+#, fuzzy, kde-format
+msgid "Repository"
+msgstr "リポジトリ(&R)"
+
+#. i18n: ectx: Menu (generic_view)
+#: src/kdesvn_part.rc:82
+#, fuzzy, kde-format
+msgid "View"
+msgstr "表示(&V)"
+
+#. i18n: ectx: Menu (log_cache)
+#: src/kdesvn_part.rc:89
+#, fuzzy, kde-format
+#| msgid "Logcache"
+msgid "Log cache"
+msgstr "ログキャッシュ(&L)"
+
+#. i18n: ectx: Menu (help)
+#: src/kdesvn_part.rc:98 src/kdesvnui.rc:52
+#, fuzzy, kde-format
+msgid "&Help"
+msgstr "ヘルプ(&H)"
+
+#. i18n: ectx: Menu (local_context_single_conflicted)
+#. i18n: ectx: Menu (local_context_single_versioned)
+#. i18n: ectx: Menu (local_context_single_unversioned)
+#. i18n: ectx: Menu (local_context_multi)
+#: src/kdesvn_part.rc:106 src/kdesvn_part.rc:113 src/kdesvn_part.rc:154
+#: src/kdesvn_part.rc:162
+#, fuzzy, kde-format
+msgid "Actions"
+msgstr "アクション"
+
+#. i18n: ectx: ToolBar (subversionToolBar)
+#: src/kdesvn_part.rc:242 src/kdesvnui.rc:58
+#, fuzzy, kde-format
+msgid "Subversion toolbar"
+msgstr "Subversion ツールバー"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: src/kdesvn_part.rc:260 src/kdesvnui.rc:62
+#, fuzzy, kde-format
+msgid "Main Toolbar"
+msgstr "メインツールバー"
+
+#: src/kdesvnd/kdesvnd.cpp:252
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Enter Password for Realm %1"
+msgstr "アドレス %1 に対するパスワードを入力してください"
+
+#: src/kdesvnd/kdesvnd.cpp:268 src/svnfrontend/ccontextlistener.cpp:289
+#, fuzzy, kde-format
+msgid "Open a file with a #PKCS12 certificate"
+msgstr "#PKCS12 証明書でファイルを開く"
+
+#: src/kdesvnd/kdesvnd.cpp:359
+#, fuzzy, kde-format
+msgid "Current task"
+msgstr "現在の項目をロック(&L)"
+
+#: src/kdesvnd/kdesvnd.cpp:371
+#, kde-format
+msgid "Current transfer"
+msgstr ""
+
+#: src/kdesvnd/ksvnjobview.cpp:50
+#, kde-format
+msgid "bytes"
+msgstr ""
+
+#. i18n: ectx: Menu (file)
+#: src/kdesvnui.rc:4
+#, fuzzy, kde-format
+msgid "&File"
+msgstr "ファイル(&F)"
+
+#. i18n: ectx: Menu (subversion_admin)
+#: src/kdesvnui.rc:10
+#, fuzzy, kde-format
+msgid "Subversion Admin"
+msgstr "Subversion 管理"
+
+#. i18n: ectx: Menu (database_menu)
+#: src/kdesvnui.rc:30
+#, fuzzy, kde-format
+msgid "Database"
+msgstr "データベース(&D)"
+
+#. i18n: ectx: Menu (settings)
+#: src/kdesvnui.rc:35
+#, fuzzy, kde-format
+msgid "&Settings"
+msgstr "設定(&S)"
+
+#: src/kdesvnview.cpp:133 src/kdesvnview.cpp:167
+#, fuzzy, kde-format
+msgid "Repository opened"
+msgstr "リポジトリが開かれました"
+
+#: src/kdesvnview.cpp:173
+#, fuzzy, kde-format
+msgid "Could not open repository"
+msgstr "リポジトリを開けませんでした"
+
+#: src/kdesvnview.cpp:198
+#, fuzzy, kde-format
+msgid "No repository open"
+msgstr "どのリポジトリも開いていません"
+
+#: src/kdesvnview.cpp:258
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Hotcopy a Repository"
+msgstr "リポジトリをハードコピー(&H)"
+
+#: src/kdesvnview.cpp:276
+#, fuzzy, kde-format
+msgid "Hotcopy finished."
+msgstr "ハードコピーが完了しました。"
+
+#: src/kdesvnview.cpp:285
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Load a Repository From an svndump"
+msgstr "ダンプするリポジトリ："
+
+#: src/kdesvnview.cpp:335
+#, kde-format
+msgctxt "@title:window"
+msgid "Load Dump"
+msgstr ""
+
+#: src/kdesvnview.cpp:335
+#, fuzzy, kde-format
+msgid "Loading a dump into a repository."
+msgstr "リポジトリにダンプを読み込んでいます。"
+
+#: src/kdesvnview.cpp:337
+#, fuzzy, kde-format
+msgid "Loading dump finished."
+msgstr "ダンプの読み込みが完了しました。"
+
+#: src/kdesvnview.cpp:347
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Dump a Repository"
+msgstr "リポジトリをダンプ"
+
+#: src/kdesvnview.cpp:387
+#, kde-format
+msgctxt "@title:window"
+msgid "Dump"
+msgstr ""
+
+#: src/kdesvnview.cpp:387
+#, fuzzy, kde-format
+msgid "Dumping a repository"
+msgstr "リポジトリをダンプしています"
+
+#: src/kdesvnview.cpp:389
+#, fuzzy, kde-format
+msgid "Dump finished."
+msgstr "ダンプが完了しました。"
+
+#: src/kdesvnview.cpp:434
+#, fuzzy, kde-format
+msgid "Inserted %v not cached log entries of %m."
+msgstr "%m のうちキャッシュされていないログエントリ %v が挿入されました"
+
+#: src/kiosvn/kiolistener.cpp:66 src/kiosvn/kiosvn.cpp:811
+#, kde-format
+msgid "Wrong or missing log (may cancel pressed)."
+msgstr ""
+
+#: src/kiosvn/kiolistener.cpp:91
+#, fuzzy, kde-format
+msgid "A (bin) %1"
+msgstr "A（バイナリ）%1"
+
+#: src/kiosvn/kiolistener.cpp:93 src/kiosvn/kiolistener.cpp:129
+#, fuzzy, kde-format
+msgid "A %1"
+msgstr "A %1"
+
+#: src/kiosvn/kiolistener.cpp:102 src/kiosvn/kiolistener.cpp:125
+#, fuzzy, kde-format
+msgid "D %1"
+msgstr "D %1"
+
+#: src/kiosvn/kiolistener.cpp:105
+#, fuzzy, kde-format
+msgid "Restored %1."
+msgstr "%1 を復元しました。"
+
+#: src/kiosvn/kiolistener.cpp:108
+#, fuzzy, kde-format
+msgid "Reverted %1."
+msgstr "%1 を元に戻しました。"
+
+#: src/kiosvn/kiolistener.cpp:111
+#, fuzzy, kde-format
+msgid ""
+"Failed to revert %1.\n"
+"Try updating instead."
+msgstr ""
+"%1 の復元に失敗しました。\n"
+"代わりに、アップデートを試してください。"
+
+#: src/kiosvn/kiolistener.cpp:114
+#, fuzzy, kde-format
+msgid "Resolved conflicted state of %1."
+msgstr "%1 の衝突を解消しました。"
+
+#: src/kiosvn/kiolistener.cpp:118
+#, fuzzy, kde-format
+msgid "Skipped missing target %1."
+msgstr "紛失したターゲット %1 をスキップしました。"
+
+#: src/kiosvn/kiolistener.cpp:120
+#, fuzzy, kde-format
+msgid "Skipped %1."
+msgstr "%1 をスキップしました。"
+
+#: src/kiosvn/kiolistener.cpp:173
+#, fuzzy, kde-format
+msgid "Finished at revision %1."
+msgstr "リビジョン %1 で完了しました。"
+
+#: src/kiosvn/kiolistener.cpp:175
+#, fuzzy, kde-format
+msgid "Update finished."
+msgstr "更新が完了しました。"
+
+#: src/kiosvn/kiolistener.cpp:179
+#, fuzzy, kde-format
+msgid "Finished external at revision %1."
+msgstr "リビジョン %1 で外部が完了しました。"
+
+#: src/kiosvn/kiolistener.cpp:181
+#, fuzzy, kde-format
+msgid "Finished external."
+msgstr "外部が完了しました。"
+
+#: src/kiosvn/kiolistener.cpp:191
+#, fuzzy, kde-format
+msgid "Fetching external item into %1."
+msgstr "%1 に外部の項目を取得しています。"
+
+#: src/kiosvn/kiolistener.cpp:195
+#, fuzzy, kde-format
+msgid "Status against revision: %1."
+msgstr "リビジョン %1 に対するステータス。"
+
+#: src/kiosvn/kiolistener.cpp:199
+#, fuzzy, kde-format
+msgid "Performing status on external item at %1."
+msgstr "%1 の外部の項目のステータスを実行しています。"
+
+#: src/kiosvn/kiolistener.cpp:202
+#, fuzzy, kde-format
+msgid "Sending %1."
+msgstr "%1 を送信しています。"
+
+#: src/kiosvn/kiolistener.cpp:206
+#, fuzzy, kde-format
+msgid "Adding (bin) %1."
+msgstr "%1（バイナリ）を追加しています。"
+
+#: src/kiosvn/kiolistener.cpp:208
+#, fuzzy, kde-format
+msgid "Adding %1."
+msgstr "%1 を追加しています。"
+
+#: src/kiosvn/kiolistener.cpp:212
+#, fuzzy, kde-format
+msgid "Deleting %1."
+msgstr "%1 を削除しています。"
+
+#: src/kiosvn/kiolistener.cpp:215
+#, fuzzy, kde-format
+msgid "Replacing %1."
+msgstr "%1 を置換しています。"
+
+#: src/kiosvn/kiolistener.cpp:221
+#, fuzzy, kde-format
+msgid "Transmitting file data "
+msgstr "ファイルデータを転送しています"
+
+#: src/kiosvn/kiosvn.cpp:301 src/kiosvn/kiosvn.cpp:355
+#: src/kiosvn/kiosvn.cpp:507
+#, fuzzy, kde-format
+#| msgid "Can only write on head revision!"
+msgid "Can only write on HEAD revision."
+msgstr "head リビジョンにだけ書き込めます！"
+
+#: src/kiosvn/kiosvn.cpp:342
+#, kde-format
+msgid "Renaming %1 to %2 successful"
+msgstr ""
+
+#: src/kiosvn/kiosvn.cpp:376
+#, fuzzy, kde-format
+msgid "Overwriting existing items is disabled in settings."
+msgstr "設定で既存の項目に対する上書きは無効です。"
+
+#: src/kiosvn/kiosvn.cpp:384
+#, kde-format
+msgid "Start checking out to temporary folder"
+msgstr ""
+
+#: src/kiosvn/kiosvn.cpp:387
+#, fuzzy, kde-format
+msgid "Checking out %1"
+msgstr "チェックアウトしています"
+
+#: src/kiosvn/kiosvn.cpp:396
+#, kde-format
+msgid "Temporary checkout done."
+msgstr ""
+
+#: src/kiosvn/kiosvn.cpp:400
+#, fuzzy, kde-format
+msgid "Could not write to existing item."
+msgstr "既存の項目に書き込めませんでした。"
+
+#: src/kiosvn/kiosvn.cpp:406
+#, fuzzy, kde-format
+msgid "Could not open temporary file"
+msgstr "一時ファイルを開けませんでした"
+
+#: src/kiosvn/kiosvn.cpp:430
+#, fuzzy, kde-format
+msgid "Could not retrieve data for write."
+msgstr "書き込むためのデータを取得できませんでした。"
+
+#: src/kiosvn/kiosvn.cpp:438
+#, fuzzy, kde-format
+msgid "Committing %1"
+msgstr "コミットしています"
+
+#: src/kiosvn/kiosvn.cpp:461
+#, fuzzy, kde-format
+msgid "Wrote %1 to repository"
+msgstr "リポジトリへのパス："
+
+#: src/kiosvn/kiosvn.cpp:492
+#, fuzzy, kde-format
+msgid "Copied %1 to %2"
+msgstr "リビジョン %2 で %1 にコピーされました"
+
+#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1063
+#: src/svnfrontend/svnactions.cpp:2217
+#, fuzzy, kde-format
+msgid "Committed revision %1."
+msgstr "リビジョン %1 をコミットしました。"
+
+#: src/kiosvn/kiosvn.cpp:830
+#, fuzzy, kde-format
+msgid "Nothing to commit."
+msgstr "コミットするものがありません。"
+
+#: src/kiosvn/kiosvn.cpp:877
+#, fuzzy, kde-format
+msgid "Empty logs"
+msgstr "空のログ"
+
+#: src/ksvnwidgets/authdialogwidget.cpp:35
+#, fuzzy, kde-format
+#| msgid "Store passwords into KDE Wallet"
+msgid "Store password (into KDE Wallet)"
+msgstr "&KDE ウォレットの中へパスワードを保存する"
+
+#: src/ksvnwidgets/authdialogwidget.cpp:36
+#, fuzzy, kde-format
+#| msgid "into subversions simple storage"
+msgid "Store password (into Subversion' simple storage)"
+msgstr "subversion の単純な保存場所へ"
+
+#: src/ksvnwidgets/authdialogwidget.cpp:38
+#, fuzzy, kde-format
+#| msgid "Enter authentication info for"
+msgid "Enter authentication info for %1"
+msgstr "以下に対する認証情報を入力"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, AuthDialogWidget)
+#: src/ksvnwidgets/authdlg.ui:14
+#, fuzzy, kde-format
+msgid "Authentication"
+msgstr "認証"
+
+#. i18n: ectx: property (text), widget (QLabel, m_PasswordLabel)
+#: src/ksvnwidgets/authdlg.ui:32
+#, fuzzy, kde-format
+msgid "Password:"
+msgstr "パスワード："
+
+#. i18n: ectx: property (text), widget (QLabel, m_UsernameLabel)
+#: src/ksvnwidgets/authdlg.ui:52
+#, fuzzy, kde-format
+msgid "Username:"
+msgstr "ユーザ名："
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, CommitMessage)
+#: src/ksvnwidgets/commitmessage.ui:6
+#, fuzzy, kde-format
+#| msgid "Commitmessage"
+msgid "Commit Message"
+msgstr "コミットメッセージ"
+
+#. i18n: ectx: property (text), widget (QLabel, m_Reviewlabel)
+#: src/ksvnwidgets/commitmessage.ui:27
+#, fuzzy, kde-format
+msgid "Review affected items"
+msgstr "影響を受けたファイルを見直す"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_SelectAllButton)
+#: src/ksvnwidgets/commitmessage.ui:63
+#, fuzzy, kde-format
+msgid "Select all"
+msgstr "項目を選択"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_UnselectAllButton)
+#: src/ksvnwidgets/commitmessage.ui:70
+#, fuzzy, kde-format
+msgid "Unselect all"
+msgstr "項目を選択"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_HideNewItems)
+#: src/ksvnwidgets/commitmessage.ui:77 src/ksvnwidgets/commitmsg_impl.cpp:453
+#, fuzzy, kde-format
+msgid "Hide new items"
+msgstr "新しい項目を隠す"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_MarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:87
+#, fuzzy, kde-format
+msgid "Mark all new e.g. not versioned items for add and commit."
+msgstr ""
+"追加やコミットのためにすべての新しい（例えばバージョン付けされていない）項目"
+"をマークします。"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_MarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:90
+#, fuzzy, kde-format
+msgid "Select new items"
+msgstr "新しい項目を選択"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_UnmarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:97
+#, fuzzy, kde-format
+msgid "Unmark all unversioned items so they will be ignored."
+msgstr ""
+"無視されるようにバージョン付けされていないすべての項目のマークを解除します。"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_UnmarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:100
+#, fuzzy, kde-format
+msgid "Unselect new items"
+msgstr "新しい項目を選択解除"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_RevertItemButton)
+#: src/ksvnwidgets/commitmessage.ui:107
+#, fuzzy, kde-format
+msgid "Revert highlighted item"
+msgstr "強調表示されている項目を元に戻す"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_RevertItemButton)
+#: src/ksvnwidgets/commitmessage.ui:110
+#, fuzzy, kde-format
+msgid "Revert item"
+msgstr "項目を元に戻しています"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DiffItem)
+#: src/ksvnwidgets/commitmessage.ui:117
+#, fuzzy, kde-format
+msgid "Generates and display difference against repository of selected item"
+msgstr "選択した項目のリポジトリに対する違いを生成し表示"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DiffItem)
+#: src/ksvnwidgets/commitmessage.ui:120
+#, fuzzy, kde-format
+msgid "Diff item"
+msgstr "項目を Diff"
+
+#. i18n: ectx: property (text), widget (QLabel, m_HeadLabel)
+#: src/ksvnwidgets/commitmessage.ui:152
+#, fuzzy, kde-format
+msgid "Enter a log message"
+msgstr "ログメッセージを入力"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, m_LogHistory)
+#: src/ksvnwidgets/commitmessage.ui:184
+#, fuzzy, kde-format
+msgid "Last used log messages"
+msgstr "最後に使ったログメッセージ"
+
+#. i18n: ectx: property (text), widget (QLabel, m_LogLabel)
+#: src/ksvnwidgets/commitmessage.ui:199
+#, fuzzy, kde-format
+msgid "Or insert one of the last:"
+msgstr "または最後のものを挿入する："
+
+#. i18n: ectx: property (text), widget (QPushButton, m_insert_file_button)
+#: src/ksvnwidgets/commitmessage.ui:215
+#, fuzzy, kde-format
+#| msgid "Insert Textfile"
+msgid "Insert Text File..."
+msgstr "テキストファイルを挿入"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_keepLocksButton)
+#: src/ksvnwidgets/commitmessage.ui:226
+#, fuzzy, kde-format
+msgid "If checked commit will not release locks."
+msgstr "チェックすればコミットはロックを解除しません。"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_keepLocksButton)
+#: src/ksvnwidgets/commitmessage.ui:229
+#, fuzzy, kde-format
+msgid "Keep locks"
+msgstr "ロックを保つ"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:287
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Commit Log"
+msgstr "コミットログ"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:453
+#, fuzzy, kde-format
+msgid "Show new items"
+msgstr "新しい項目を選択"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:476
+#, fuzzy, kde-format
+#| msgid "Select textfile for insert"
+msgctxt "@title:window"
+msgid "Select Text File to Insert"
+msgstr "挿入するテキストファイルを選択"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:477
+#, fuzzy, kde-format
+#| msgid "Select textfile for insert"
+msgid "Select text file to insert:"
+msgstr "挿入するテキストファイルを選択"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, DeleteForm)
+#: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1560
+#, fuzzy, kde-format
+msgid "Really delete these entries?"
+msgstr "本当にこれらのエントリを削除しますか？"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_forceDelete)
+#: src/ksvnwidgets/deleteform.ui:23
+#, fuzzy, kde-format
+msgid "Force delete of changed items"
+msgstr "ローカルで変更された項目："
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_keepLocal)
+#: src/ksvnwidgets/deleteform.ui:30
+#, fuzzy, kde-format
+msgid "Keep local copies"
+msgstr "ロックを保つ"
+
+#. i18n: ectx: property (toolTip), widget (QComboBox, m_DepthCombo)
+#. i18n: ectx: property (statusTip), widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:29 src/ksvnwidgets/depthselector.ui:32
+#, fuzzy, kde-format
+msgid "Select depth of operation"
+msgstr "操作の深さを選択"
+
+#. i18n: ectx: property (whatsThis), widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:41
+#, fuzzy, kde-format
+msgid ""
+"<p ><b>Kind of depth</b>: </p>\n"
+"<p ><i>empty depth</i><br />\n"
+"Just the named directory, no entries. Updates will not pull in any files or "
+"subdirectories not already present. </p>\n"
+"<p><i>Files depth</i><br />Folder and its file children, but not subdirs. "
+"Updates will pull in any files not already present, but not subdirectories. "
+"</p>\n"
+"<p><i>Immediate depth</i><br />Folder and its entries. Updates will pull in "
+"any files or subdirectories not already present; those subdirectories "
+"entries will have depth-empty. </p>\n"
+"<p>\n"
+"<i>Infinity depth</i><br />Updates will pull in any files or subdirectories "
+"not already present; those subdirectories' this_dir entries will have depth-"
+"infinity.<br />Equivalent to the pre-1.5 default update behavior. </p>"
+msgstr ""
+"<p ><b>深さの種類</b>: </p>\n"
+"<p ><i>空の深さ</i><br />\n"
+"名前の付けられたディレクトリのみで、エントリなし。まだ存在しない、どのファイ"
+"ルやサブディレクトリも 更新は引き込みません。</p>\n"
+"<p><i>ファイルの深さ</i><br />フォルダとそのファイルの子だが、サブディレクト"
+"リではない。まだ存在しない、どのファイルも更新は引き込みますが、サブディレク"
+"トリにはしません。 </p>\n"
+"<p><i>直ぐの深さ</i><br />フォルダとそのエントリ。まだ存在しない、どのファイ"
+"ルやディレクトリも更新は引き込みます。これらのサブティレクトリのエントリは "
+"depth-empty を持ちます。</p>\n"
+"<p>\n"
+"<i>無限の深さ</i><br />まだ存在しない、どのファイルやサブディレクトリも更新は"
+"引き込みます。これらのサブディレクトリの this_dir エントリは depth-infinity "
+"を持ちます。<br />1.5 前の標準の更新における振る舞いに等しいです。</p>"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:45
+#, fuzzy, kde-format
+msgid "Empty Depth"
+msgstr "空の深さ"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:50
+#, fuzzy, kde-format
+msgid "Files Depth"
+msgstr "ファイルの深さ"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:55
+#, fuzzy, kde-format
+msgid "Immediate Depth"
+msgstr "直接の深さ"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:60
+#, fuzzy, kde-format
+msgid "Infinity Depth (recurse)"
+msgstr "無限の深さ（再帰）"
+
+#: src/ksvnwidgets/diffbrowser.cpp:50
+#, fuzzy, kde-format
+msgid "Ctrl-F for search, F3 or Shift-F3 for search again."
+msgstr "検索には Ctrl-F、再検索には F3 または Shift-F3。"
+
+#: src/ksvnwidgets/diffbrowser.cpp:51
+#, fuzzy, kde-format
+msgid ""
+"<b>Display differences between files</b><p>You may search inside text with "
+"Ctrl-F.</p><p>F3 for search forward again, Shift-F3 for search backward "
+"again.</p><p>You may save the (original) output with Ctrl-S.</p>"
+msgstr ""
+"<b>ファイル間の違いを表示する</b><p>Ctrl-F でテキスト内を検索できます。</"
+"p><p>前方再検索には F3、後方再検索には Shift-F3。</p><p>Ctrl-S で（元の）出力"
+"を保存できます。</p>"
+
+#: src/ksvnwidgets/diffbrowser.cpp:86
+#, kde-format
+msgid "Save diff"
+msgstr ""
+
+#: src/ksvnwidgets/diffbrowser.cpp:86
+#, kde-format
+msgid "Patch file (*.diff *.patch)"
+msgstr ""
+
+#: src/ksvnwidgets/diffbrowser.cpp:93
+#, fuzzy, kde-format
+msgid "File %1 exists - overwrite?"
+msgstr "ファイル %1 が存在します - 上書きしますか？"
+
+#: src/ksvnwidgets/diffbrowser.cpp:177
+#, fuzzy, kde-format
+msgid ""
+"End of document reached.\n"
+"Continue from the beginning?"
+msgstr ""
+"文書の末尾です。\n"
+"先頭から続けますか？"
+
+#: src/ksvnwidgets/diffbrowser.cpp:179 src/ksvnwidgets/diffbrowser.cpp:192
+#, fuzzy, kde-format
+msgid "Find"
+msgstr "検索"
+
+#: src/ksvnwidgets/diffbrowser.cpp:190
+#, fuzzy, kde-format
+msgid ""
+"Beginning of document reached.\n"
+"Continue from the end?"
+msgstr ""
+"文書の先頭です。\n"
+"末尾から続けますか？"
+
+#. i18n: ectx: property (text), widget (QLabel, m_Mainlabel)
+#: src/ksvnwidgets/encodingselector.ui:30
+#, fuzzy, kde-format
+msgid "Select encoding:"
+msgstr "エンコーディングを選択："
+
+#. i18n: ectx: property (text), item, widget (KComboBox, m_encodingList)
+#: src/ksvnwidgets/encodingselector.ui:44
+#, fuzzy, kde-format
+#| msgid "Default utf-8"
+msgid "Default UTF-8"
+msgstr "標準 utf-8"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
+#: src/ksvnwidgets/models/commitmodel.cpp:193 src/svnfrontend/svnlogdlg.ui:158
+#, fuzzy, kde-format
+msgid "Action"
+msgstr "アクション"
+
+#: src/ksvnwidgets/models/commitmodel.cpp:196
+#, fuzzy, kde-format
+msgid "Entry"
+msgstr "エントリ"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:33
+#: src/svnfrontend/maintreewidget.cpp:581
+#, fuzzy, kde-format
+msgid "Add"
+msgstr "追加"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:37
+#: src/svnfrontend/ccontextlistener.cpp:65
+#: src/svnfrontend/copymoveview_impl.cpp:49
+#: src/svnfrontend/maintreewidget.cpp:522
+#, fuzzy, kde-format
+msgid "Copy"
+msgstr "コピー"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:41
+#: src/svnfrontend/ccontextlistener.cpp:66
+#: src/svnfrontend/maintreewidget.cpp:587
+#: src/svnfrontend/maintreewidget.cpp:591 src/svnfrontend/svnactions.cpp:1017
+#, fuzzy, kde-format
+msgid "Delete"
+msgstr "削除"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:45
+#, fuzzy, kde-format
+msgid "Modify (content or property)"
+msgstr "変更（中身または属性）"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:49
+#: src/svnfrontend/svnactions.cpp:786
+#, fuzzy, kde-format
+msgid "Replace"
+msgstr "置換"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:53
+#, fuzzy, kde-format
+msgid "(Un)Lock"
+msgstr "ロック（解除）"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, RevertForm)
+#: src/ksvnwidgets/revertform.ui:14
+#, fuzzy, kde-format
+msgid "Revert entries"
+msgstr "エントリを元に戻す"
+
+#. i18n: ectx: property (text), widget (QLabel, m_headLine)
+#: src/ksvnwidgets/revertform.ui:20
+#, fuzzy, kde-format
+msgid "Really revert these entries to pristine state?"
+msgstr "本当にこれらのエントリを元の状態に戻しますか？"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:33
+#, fuzzy, kde-format
+msgid "Accept permanently"
+msgstr "永久に受け入れる"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:34
+#, fuzzy, kde-format
+msgid "Accept temporarily"
+msgstr "一時的に受け入れる"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:35
+#, fuzzy, kde-format
+msgid "Reject"
+msgstr "拒否"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:44
+#, fuzzy, kde-format
+msgid "Error validating server certificate for '%1'"
+msgstr "エラー「%1」に対するサーバ認証の検証"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:69
+#, fuzzy, kde-format
+msgid "Failure reasons"
+msgstr "失敗理由"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:77
+#, fuzzy, kde-format
+msgid "Realm"
+msgstr "領域"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:78
+#, fuzzy, kde-format
+msgid "Host"
+msgstr "ホスト"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:79
+#, fuzzy, kde-format
+msgid "Valid from"
+msgstr "有効期間開始"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:80
+#, fuzzy, kde-format
+msgid "Valid until"
+msgstr "有効期間終了"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:81
+#, fuzzy, kde-format
+msgid "Issuer name"
+msgstr "発行者名"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:82
+#, fuzzy, kde-format
+msgid "Fingerprint"
+msgstr "フィンガープリント"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, SslTrustPrompt)
+#: src/ksvnwidgets/ssltrustprompt.ui:14
+#, fuzzy, kde-format
+#| msgid "Trust ssl certificate"
+msgid "Trust SSL certificate"
+msgstr "信頼済み ssl 認証"
+
+#: src/main.cpp:32
+#, fuzzy, kde-format
+msgid "A Subversion Client by KDE (standalone application)"
+msgstr "KDE 向けの Subversion クライアント（スタンドアロンアプリケーション）"
+
+#: src/main.cpp:44
+#, fuzzy, kde-format
+msgid "kdesvn"
+msgstr "kdesvn"
+
+#: src/main.cpp:45
+#, fuzzy, kde-format
+msgid ""
+"(C) 2005-2009 Rajko Albrecht,\n"
+"(C) 2015-2019 Christian Ehrlicher"
+msgstr "(C) 2005-2007 Rajko Albrecht"
+
+#: src/main.cpp:46
+#, fuzzy, kde-format
+msgid "Rajko Albrecht"
+msgstr "Rajko Albrecht"
+
+#: src/main.cpp:47
+#, kde-format
+msgid "Christian Ehrlicher"
+msgstr ""
+
+#: src/main.cpp:54
+#, fuzzy, kde-format
+#| msgid "Execute single subversion command on specific revision(-range)"
+msgid "Execute single Subversion command on specific revision(-range)"
+msgstr "特定のリビジョン（-範囲）について単一の subversion コマンドを実行する"
+
+#: src/main.cpp:54
+#, kde-format
+msgid "startrev[:endrev]"
+msgstr ""
+
+#: src/main.cpp:55
+#, fuzzy, kde-format
+msgid "Ask for revision when executing single command"
+msgstr "単一のコマンドを実行するときにリビジョンを尋ねる"
+
+#: src/main.cpp:56
+#, fuzzy, kde-format
+msgid "Force operation"
+msgstr "操作を強制"
+
+#: src/main.cpp:57
+#, fuzzy, kde-format
+#| msgid "Save output of subversion command (eg \"cat\") into file <file>"
+msgid "Save output of Subversion command (eg \"cat\") into file <file>"
+msgstr "subversion コマンド（例えば「cat」）の出力をファイル <file> に保存"
+
+#: src/main.cpp:57
+#, kde-format
+msgid "<file>"
+msgstr ""
+
+#: src/main.cpp:58
+#, fuzzy, kde-format
+msgid "Limit log output to <number>"
+msgstr "ログ出力を <number> に制限"
+
+#: src/main.cpp:58
+#, fuzzy, kde-format
+msgid "<number>"
+msgstr "数"
+
+#: src/main.cpp:59
+#, fuzzy, kde-format
+#| msgid "Execute subversion command (\"exec help\" for more information)"
+msgid "Execute Subversion command (\"exec help\" for more information)"
+msgstr "subversion コマンドを実行（更なる情報については「exec help」）"
+
+#: src/main.cpp:60
+#, fuzzy, kde-format
+msgid "Document to open"
+msgstr "開く文書"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_cmdline_show_logwindow)
+#: src/settings/cmdexecsettings.ui:11
+#, fuzzy, kde-format
+msgid "Show a small window containing the log after command executed"
+msgstr "コマンドの実行後にログを含む小さなウィンドウを表示します"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_cmdline_show_logwindow)
+#: src/settings/cmdexecsettings.ui:14
+#, fuzzy, kde-format
+msgid "Show log after executing a command"
+msgstr "コマンドの実行後にログを表示(&S)"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/settings/cmdexecsettings.ui:23
+#, fuzzy, kde-format
+msgid "Minimum log lines to show:"
+msgstr "表示する最小ログ行："
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_cmdline_log_minline)
+#: src/settings/cmdexecsettings.ui:33
+#, fuzzy, kde-format
+#| msgid ""
+#| "The minimum a log output must contain before kdesvn shows a single "
+#| "logwindow"
+msgid ""
+"The minimum a log output must contain before kdesvn shows a single log window"
+msgstr ""
+"kdesvn が単一のログウィンドウを表示する前にログ出力が含まれていなければならな"
+"い最小値"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, kcfg_cmdline_log_minline)
+#: src/settings/cmdexecsettings.ui:39
+#, fuzzy, kde-format
+msgctxt "no limit"
+msgid "No minimum"
+msgstr "最小値なし"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_contextmenu)
+#: src/settings/cmdexecsettings.ui:51
+#, fuzzy, kde-format
+#| msgid ""
+#| "If set, kdesvn will not show a menu inside \"Action\" menu of konqueror"
+msgid "If set, kdesvn will not show a menu inside \"Action\" menu of Konqueror"
+msgstr ""
+"設定されていれば、kdesvn は konqueror の「アクション」メニュー内メニューを表"
+"示しません"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_contextmenu)
+#: src/settings/cmdexecsettings.ui:54
+#, fuzzy, kde-format
+#| msgid "Don't display contextmenu in Konqueror"
+msgid "Do not display context menu in Konqueror"
+msgstr "Konqueror 内のコンテキストメニューを表示しない(&T)"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
+#: src/settings/cmdexecsettings.ui:61
+#, fuzzy, kde-format
+#| msgid ""
+#| "If set, kdesvn will not show some extra actions inside \"Action\" menu of "
+#| "konqueror/dolphin"
+msgid ""
+"If set, kdesvn will not show some extra actions inside \"Action\" menu of "
+"Konqueror/Dolphin"
+msgstr ""
+"もし設定されていれば、kdesvn は konqueror や dolphin の「アクション」メニュー"
+"内に追加メニューを 表示しません"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
+#: src/settings/cmdexecsettings.ui:64
+#, fuzzy, kde-format
+#| msgid "Don't display entries in toplevel action menu"
+msgid "Do not display entries in toplevel action menu"
+msgstr "トップレベルのアクションメニューにエントリを表示しない(&E)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_kio_use_standard_logmsg)
+#: src/settings/cmdexecsettings.ui:71
+#, fuzzy, kde-format
+#| msgid "KIO operations use standard logmessage"
+msgid "KIO operations use standard log message"
+msgstr "&KIO 操作は標準ログメッセージを使う"
+
+#. i18n: ectx: property (text), widget (QLabel, stdLogmsgLabel)
+#: src/settings/cmdexecsettings.ui:80
+#, fuzzy, kde-format
+msgid "Standard message:"
+msgstr "標準メッセージ："
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_kio_can_overwrite)
+#: src/settings/cmdexecsettings.ui:98
+#, fuzzy, kde-format
+msgid "Can KIO overwrite existing files?"
+msgstr "既存のファイルを上書きできますか？"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_kio_can_overwrite)
+#: src/settings/cmdexecsettings.ui:103
+#, fuzzy, kde-format
+#| msgid ""
+#| "If this flag is set, you're have a simple write support for existing "
+#| "items. Eg. you can open files in your editor and save them direct without "
+#| "checking out them before (kdesvn will do it in background).\n"
+#| "\n"
+#| "Use this only if you're sure what you're doing!"
+msgid ""
+"If this flag is set, you will have a simple write support for existing "
+"items. E.g. you can open files in your editor and save them direct without "
+"checking out them before (kdesvn will do it in background).\n"
+"\n"
+"Use this only if you are sure what you are doing."
+msgstr ""
+"もしこのフラグが設定されていれば、既存の項目に対する単純な書き込みに対応しま"
+"す。 例えば、エディタでファイルを開いて、前もってそれらをチェックアウトせずに"
+"直接 保存できます（kdesvn はバックグラウンドでそれを行います）。\n"
+"\n"
+"自分が何をやっているのか本当に分かっているときだけ、これを使ってください！"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_kio_can_overwrite)
+#: src/settings/cmdexecsettings.ui:106
+#, fuzzy, kde-format
+msgid "KIO can overwrite"
+msgstr "K&IO は上書き可能"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_display_dockmsg)
+#: src/settings/cmdexecsettings.ui:113
+#, kde-format
+msgid ""
+"If set KIO shows in KDE's Plasma detailed information about current operation"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_dockmsg)
+#: src/settings/cmdexecsettings.ui:117
+#, kde-format
+msgid ""
+"<p>If set, the kdesvn KIO shows detailed messages in KDE's Plasma control "
+"area.<br/>\n"
+"Error messages of KIO will always displayed and can <i>not</i> switched off."
+"</p>"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_dockmsg)
+#: src/settings/cmdexecsettings.ui:120
+#, kde-format
+msgid "KIO shows progress messages"
+msgstr ""
+
+#: src/settings/cmdexecsettings_impl.cpp:27
+#, fuzzy, kde-format
+msgid " line(s)"
+msgstr "行"
+
+#. i18n: ectx: label, entry, group (general_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_content)
+#: src/settings/diffmergesettings.ui:11 src/settings/kdesvn_part.kcfg:29
+#, fuzzy, kde-format
+msgid "Diff ignores content type"
+msgstr "Diff はコンテンツタイプを無視する(&I)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_tree_diff_rec)
+#: src/settings/diffmergesettings.ui:18
+#: src/svnfrontend/graphtree/revgraphview.cpp:862
+#, fuzzy, kde-format
+#| msgid "Diff in revisiontree is recursive"
+msgid "Diff in revision tree is recursive"
+msgstr "リビジョンツリー内の Diff は再帰的"
+
+#. i18n: ectx: label, entry, group (general_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_spaces)
+#: src/settings/diffmergesettings.ui:25 src/settings/kdesvn_part.kcfg:33
+#, fuzzy, kde-format
+msgid "Diff ignores white space changes"
+msgstr "Diff は空白文字の変化を無視する(&W)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_all_white_spaces)
+#: src/settings/diffmergesettings.ui:32
+#, fuzzy, kde-format
+msgid "Diff ignores all white spaces"
+msgstr "Diff はすべての空白文字を無視する(&S)"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_external_diff)
+#: src/settings/diffmergesettings.ui:39
+#, fuzzy, kde-format
+msgid ""
+"If kdesvn should use an external diff display and/or generator. If not "
+"checked use internal display."
+msgstr ""
+"kdesvn が外部 diff 表示や作成プログラムを使うのか。チェックされていなければ内"
+"部表示を使います。"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_external_diff)
+#: src/settings/diffmergesettings.ui:42
+#, fuzzy, kde-format
+msgid "Use external diff display"
+msgstr "外部 diff 表示を使う(&U)"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_extern_merge_default)
+#: src/settings/diffmergesettings.ui:49
+#, fuzzy, kde-format
+#| msgid ""
+#| "Set if merge with external program is preferred and not subversions merge"
+msgid ""
+"Set if merge with external program is preferred and not Subversion's merge"
+msgstr ""
+"subversion のマージではなく外部プログラムによるマージを優先するか設定します"
+
+#. i18n: ectx: label, entry (extern_merge_default), group (diffmerge_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_extern_merge_default)
+#: src/settings/diffmergesettings.ui:52 src/settings/kdesvn_part.kcfg:158
+#, fuzzy, kde-format
+msgid "Prefer external merge program"
+msgstr "外部マージプログラムを選ぶ(&P)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_gitformat_default)
+#: src/settings/diffmergesettings.ui:59
+#, kde-format
+msgid "Use Git diff format"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (general_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_copies_as_add)
+#: src/settings/diffmergesettings.ui:66 src/settings/kdesvn_part.kcfg:45
+#, kde-format
+msgid "Show copies as add"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, resolveLabel)
+#: src/settings/diffmergesettings.ui:77
+#, fuzzy, kde-format
+msgid "Conflict resolver program:"
+msgstr "衝突解消プログラム："
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/settings/diffmergesettings.ui:90
+#, fuzzy, kde-format
+msgid "External merge program:"
+msgstr "外部のマージプログラム："
+
+#. i18n: ectx: property (toolTip), widget (KLineEdit, kcfg_conflict_resolver)
+#: src/settings/diffmergesettings.ui:115
+#, fuzzy, kde-format
+msgid "Setup an external program for conflict resolving"
+msgstr "衝突を解消するための外部プログラムを設定"
+
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_conflict_resolver)
+#: src/settings/diffmergesettings.ui:134
+#, fuzzy, no-c-format, kde-format
+msgid ""
+"<p>\n"
+"Enter how kdesvn should call the conflict resolver program. The form is\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;program&gt; &lt;programoptions&gt;</tt></b>\n"
+"</p>\n"
+"<p>\n"
+"Programoption may contain the place holders for substituting with "
+"filenames.\n"
+"</p>\n"
+"The substitutions means:<br>\n"
+"<b><tt>%o</tt></b> Old version<br>\n"
+"<b><tt>%m</tt></b> Mine or local edit version<br>\n"
+"<b><tt>%n</tt></b> Newest version<br>\n"
+"<b><tt>%t</tt></b> The target to save as, kdesvn will use the original file "
+"name for it.\n"
+"</p>\n"
+"<p>\n"
+"Default: <tt>kdiff3 %o %m %n -o %t</tt>\n"
+"</p>"
+msgstr ""
+"<p>\n"
+"kdesvn がどのように衝突の解消プログラムを呼ぶのかを入力します。形式は\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;プログラム&gt; &lt;プログラムのオプション&gt;</tt></b>\n"
+"</p>\n"
+"<p>\n"
+"プログラムオプションはファイル名で置き換えるプレースホルダーを含んでいてもい"
+"いです。\n"
+"</p>\n"
+"置き換えは以下のような意味を持っています:<br>\n"
+"<b><tt>%o</tt></b> 古いバージョン<br>\n"
+"<b><tt>%m</tt></b> 自分のものかローカルで編集したバージョン<br>\n"
+"<b><tt>%n</tt></b> 最新バージョン<br>\n"
+"<b><tt>%t</tt></b> 名前を付けて保存する対象で、kdesvn は元々のファイル名をそ"
+"のために使います。\n"
+"</p>\n"
+"<p>\n"
+"標準: <tt>kdiff3 %o %m %n -o %t</tt>\n"
+"</p>"
+
+#. i18n: ectx: property (text), widget (QLabel, mdiff_display_label)
+#: src/settings/diffmergesettings.ui:141
+#, fuzzy, kde-format
+msgid "External diff display:"
+msgstr "外部の diff 表示："
+
+#. i18n: ectx: property (toolTip), widget (KLineEdit, kcfg_external_merge_program)
+#: src/settings/diffmergesettings.ui:154
+#, fuzzy, kde-format
+msgid "Setup an external program for merging"
+msgstr "マージするための外部プログラムを設定"
+
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_external_merge_program)
+#: src/settings/diffmergesettings.ui:166
+#, fuzzy, no-c-format, kde-format
+msgid ""
+"<p>\n"
+"Enter how kdesvn should call the external merge program. The form is\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;program&gt; &lt;programoptions&gt; %s1 %s2 %t</tt></b>\n"
+"</p>\n"
+"The substitutions means:<br>\n"
+"<b><tt>%s1</tt></b> Source one for merge<br>\n"
+"<b><tt>%s2</tt></b> Source two for merge, if it was not set equal to source "
+"one but other revision<br>\n"
+"<b><tt>%t</tt></b> Local target for merge.\n"
+"</p>"
+msgstr ""
+"<p>\n"
+"kdesvn がどのように外部マージプログラムを呼ぶのかを入力します。形式は\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;プログラム&gt; &lt;プログラムオプション&gt; %s1 %s2 %t</tt></b>\n"
+"</p>\n"
+"置き換えは以下のような意味を持っています:<br>\n"
+"<b><tt>%s1</tt></b> マージするソース 1<br>\n"
+"<b><tt>%s2</tt></b> ソース 1 ではなく他のリビジョンと等しいように設定されてい"
+"れば、ソース 2<br>\n"
+"<b><tt>%t</tt></b> マージするローカルな対象。\n"
+"</p>"
+
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_external_diff_display)
+#: src/settings/diffmergesettings.ui:191
+#, fuzzy, no-c-format, kde-format
+msgid ""
+"<p align=\"left\">\n"
+"Enter an external program in form\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt; %f</tt>\n"
+"</p>\n"
+"or\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt;</tt>\n"
+"</p>\n"
+"or\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt; %s1 %s2</tt>\n"
+"</p>\n"
+"<br>\n"
+"If one between the first or the second form is used, svn itself generates "
+"the diff. %f will be replaced with a temporary filename. If %f is not "
+"given,\n"
+"the diff-display should be able to read data from stdin.\n"
+"<br>\n"
+"When %s1 and %s2 are given, kdesvn lets this display make the diff. For that "
+"it makes a temporary export or get (if needed) and fills out the parameters "
+"with the right values. %s1 will be filled with the content of the initial "
+"revision, %s2 with the final revision. On large recursive diffs this may get "
+"really slow.\n"
+"</p>"
+msgstr ""
+"<p align=\"left\">\n"
+"フォームに外部プログラムを入力します。\n"
+"<p align=\"center\">\n"
+"<tt>&lt;プログラム&gt; &lt;パラメータ&gt; %f</tt>\n"
+"</p>\n"
+"または\n"
+"<p align=\"center\">\n"
+"<tt>&lt;プログラム&gt; &lt;パラメータ&gt;</tt>\n"
+"</p>\n"
+"または\n"
+"<p align=\"center\">\n"
+"<tt>&lt;プログラム&gt; &lt;パラメータ&gt; %1 %2</tt>\n"
+"</p>\n"
+"<br>\n"
+"もし最初か二番目の形式を使うならば、svn 自体が diff を生成します。%f は一時"
+"ファイル名で置き換えられます。もし %f が与えられていなければ、\n"
+"diff 表示は標準入力からデータを読むことができるようにすべきです。\n"
+"<br>\n"
+"%1 と %2 が与えられているとき、kdesvn はこの表示に diff を作成させます。その"
+"ために kdesvn は一時エクスポートを行うかパラメータを正しい値で（必要ならば）"
+"取得し満たします。%1 は開始リビジョンの中身で満たされ、%2 は終了リビジョンの"
+"中身で満たされます。大きな再帰的 diff ではこれは非常に遅くなるかもしれませ"
+"ん！\n"
+"</p>"
+
+#. i18n: ectx: property (text), widget (QLabel, m_extern_hint)
+#: src/settings/diffmergesettings.ui:200
+#, fuzzy, kde-format
+msgid "see \"What's this\" for details"
+msgstr "詳細については「これは何？」を参照"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DispColorSettings)
+#: src/settings/dispcolor_settings.ui:6
+#, fuzzy, kde-format
+msgid "ColorSettings"
+msgstr "ColorSettings"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_colored_state)
+#: src/settings/dispcolor_settings.ui:14
+#, fuzzy, kde-format
+msgid "Mark changed and locked items colored"
+msgstr "変更やロックされた項目を色でマークする(&M)"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel5)
+#: src/settings/dispcolor_settings.ui:56
+#, fuzzy, kde-format
+msgid "Locked items:"
+msgstr "ロックされた項目："
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
+#: src/settings/dispcolor_settings.ui:76
+#, fuzzy, kde-format
+msgid "Not versioned items:"
+msgstr "バージョン付けされていない項目："
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#: src/settings/dispcolor_settings.ui:89
+#, fuzzy, kde-format
+msgid "Remote changed items:"
+msgstr "リモートで変更された項目："
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/settings/dispcolor_settings.ui:102
+#, fuzzy, kde-format
+msgid "Added items:"
+msgstr "追加された項目："
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel4)
+#: src/settings/dispcolor_settings.ui:115
+#, fuzzy, kde-format
+msgid "Deleted items:"
+msgstr "削除された項目："
+
+#. i18n: ectx: property (text), widget (QLabel, Conflicted_items_label)
+#: src/settings/dispcolor_settings.ui:156
+#, fuzzy, kde-format
+msgid "Conflicted items:"
+msgstr "衝突した項目："
+
+#. i18n: ectx: property (text), widget (QLabel, Missed_items_label)
+#: src/settings/dispcolor_settings.ui:169
+#, fuzzy, kde-format
+msgid "Missed items:"
+msgstr "失われた項目："
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#: src/settings/dispcolor_settings.ui:182
+#, fuzzy, kde-format
+msgid "Local changed items:"
+msgstr "ローカルで変更された項目："
+
+#. i18n: ectx: property (text), widget (QLabel, Need_lock_label_2)
+#: src/settings/dispcolor_settings.ui:195
+#, fuzzy, kde-format
+msgid "Item needs lock:"
+msgstr "ロックが必要な項目："
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DisplaySettings)
+#: src/settings/display_settings.ui:6
+#, fuzzy, kde-format
+msgid "Settings"
+msgstr "設定"
+
+#. i18n: ectx: property (text), widget (QLabel, m_ListIconsSize_label)
+#: src/settings/display_settings.ui:14
+#, fuzzy, kde-format
+msgid "Size of Listviewicons"
+msgstr "リストビューアイコンのサイズ"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_display_overlays)
+#: src/settings/display_settings.ui:24
+#, fuzzy, kde-format
+#| msgid "Mark subversion states with an overlayed icon"
+msgid "Mark Subversion states with an overlayed icon"
+msgstr "重ねられたアイコンで subversion の状態をマークする"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_overlays)
+#: src/settings/display_settings.ui:30
+#, fuzzy, kde-format
+#| msgid ""
+#| "<p align=\"left\">\n"
+#| "Mark an items with non-normal state with an overlayed icon. When you wish "
+#| "to\n"
+#| "see which items has newer items in repository you may have to set \"Check "
+#| "for updates on open\" in Subversion-Dialog.\n"
+#| "</p>"
+msgid ""
+"<p align=\"left\">\n"
+"Mark items with non-normal state with an overlayed icon. When you wish to\n"
+"see which items has newer items in repository you may have to set \"Check "
+"for updates on open\" in Subversion-Dialog.\n"
+"</p>"
+msgstr ""
+"<p align=\"left\">\n"
+"通常ではない状態で重ねられたアイコンによって項目をマークする。\n"
+"どの項目がリポジトリ内により新しい項目を持っているか知りたいときには"
+"Subversion ダイアログ内で「開くときに更新を確認」を設定する必要があるかもしれ"
+"ません。\n"
+"</p>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_overlays)
+#: src/settings/display_settings.ui:33
+#, fuzzy, kde-format
+msgid "Mark item status with icon overlay"
+msgstr "アイコンを重ねることで項目の状態をマークする(&M)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_case_sensitive_sort)
+#: src/settings/display_settings.ui:40
+#, fuzzy, kde-format
+#| msgid "Items sortorder is case sensitive"
+msgid "Items sorting order is case sensitive"
+msgstr "項目の並び順は大文字と小文字を区別する(&I)"
+
+#. i18n: ectx: property (text), widget (QLabel, m_MaxLogLabel)
+#: src/settings/display_settings.ui:47
+#, fuzzy, kde-format
+#| msgid "Maximum logmessages in history:"
+msgid "Maximum log messages in history:"
+msgstr "履歴内の最大ログメッセージ："
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_file_tips)
+#: src/settings/display_settings.ui:67
+#, fuzzy, kde-format
+msgid ""
+"Here you can control if, when moving the mouse over a file, you want to see "
+"a small popup window with additional information about that file"
+msgstr ""
+"マウスがファイル上を通過するときに、そのファイルについての追加情報を含む、小"
+"さなポップアップウィンドウを表示するのかを、ここで指定できます。"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_file_tips)
+#: src/settings/display_settings.ui:70
+#, fuzzy, kde-format
+msgid "Show file info"
+msgstr "ファイル情報を表示する(&S)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_colored_blame)
+#: src/settings/display_settings.ui:77
+#, fuzzy, kde-format
+msgid "Display colored annotate"
+msgstr "色の付いた注釈を表示する(&P)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_show_navigation_panel)
+#: src/settings/display_settings.ui:84
+#, fuzzy, kde-format
+msgid "Use navigation panel"
+msgstr "ナビゲーションパネルを使う(&U)"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:9
+#, fuzzy, kde-format
+#| msgid "Items sortorder is case sensitive"
+msgid "Set if items sortorder should be case sensitive or not"
+msgstr "項目の並び順は大文字と小文字を区別する(&I)"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:13
+#, fuzzy, kde-format
+#| msgid "Size of Listviewicons"
+msgid "Size of the icons"
+msgstr "リストビューアイコンのサイズ"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:17
+#, fuzzy, kde-format
+#| msgid "Show file info"
+msgid "Show file information in tooltip"
+msgstr "ファイル情報を表示する(&S)"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:21
+#, fuzzy, kde-format
+#| msgid "Setup an external program for merging"
+msgid "Use an external program for diff viewing/generating"
+msgstr "マージするための外部プログラムを設定"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:25
+#, fuzzy, kde-format
+#| msgid "Setup an external program for merging"
+msgid "Use external program for diff viewing"
+msgstr "マージするための外部プログラムを設定"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:37
+#, fuzzy, kde-format
+#| msgid "Diff ignores all white spaces"
+msgid "Diff ignores all white space"
+msgstr "Diff はすべての空白文字を無視する(&S)"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:41
+#, kde-format
+msgid "Show diff in Git format"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:49
+#, fuzzy, kde-format
+#| msgid "Last used log messages"
+msgid "Maximum number of log messages"
+msgstr "最後に使ったログメッセージ"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:53
+#, fuzzy, kde-format
+#| msgid "Display colored annotate"
+msgid "Display colored blame lines"
+msgstr "色の付いた注釈を表示する(&P)"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:68
+#, fuzzy, kde-format
+#| msgid "Display ignored files"
+msgid "Display icon overlays"
+msgstr "無視されたファイルを表示する"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:72
+#, fuzzy, kde-format
+#| msgid "Gain item info recursive"
+msgid "Get item information recursively"
+msgstr "再帰的に項目の情報を得る(&I)"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_review_commit)
+#: src/settings/kdesvn_part.kcfg:76 src/settings/subversion_settings.ui:174
+#, fuzzy, kde-format
+msgid "Review items before commit"
+msgstr "コミットする前に項目を再検討する(&R)"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:88
+#, fuzzy, kde-format
+#| msgid "Hide unchanged files"
+msgid "Hide versioned unchanged files"
+msgstr "変更されていないファイルを隠す(&H)"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_follows_nodes)
+#: src/settings/kdesvn_part.kcfg:92 src/settings/subversion_settings.ui:145
+#, fuzzy, kde-format
+msgid "Log follows node changes"
+msgstr "ログはノードの変化に従う(&L)"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_always_list_changed_files)
+#: src/settings/kdesvn_part.kcfg:96 src/settings/subversion_settings.ui:161
+#, fuzzy, kde-format
+#| msgid "Logs always reads list of changed files"
+msgid "Log always reads list of changed files"
+msgstr "ログは常に変更したファイルのリストを読む(&Y)"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:100
+#, fuzzy, kde-format
+#| msgid "Start check for updates when open a working copy"
+msgid "Start check for updates when open working copy"
+msgstr "作業コピーを開くときに更新を確認し始める(&S)"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:104
+#, kde-format
+msgid "Start caching latest logs on open or commit"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:108
+#, fuzzy, kde-format
+#| msgid "Get file details while remote listing"
+msgid "Get detailed information when making a remote listing"
+msgstr "リモートの一覧表にする間にファイルの詳細を得る(&G)"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:112
+#, fuzzy, kde-format
+#| msgid "Should kdesvn retrieves properties on selected item in repositories"
+msgid "Get properties on selected item on networked protocols"
+msgstr "kdesvn がリポジトリ内の選択された項目に付いての属性を取り出すか"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:116
+#, kde-format
+msgid "Use properties like bugtraq:url on repository listings"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:120
+#, fuzzy, kde-format
+#| msgid "Check if items has \"svn:needs-lock\" property set"
+msgid "Check for property svn:needs-lock on listings"
+msgstr "項目が「svn:needs-lock」属性セットをもっているかを調べる(&E)"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_store_passwords)
+#: src/settings/kdesvn_part.kcfg:124 src/settings/subversion_settings.ui:107
+#, fuzzy, kde-format
+msgid "Store passwords for remote connections"
+msgstr "リモート接続のためのパスワードを保存する(&P)"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:128
+#, fuzzy, kde-format
+#| msgid ""
+#| "When saving passwords, do it into KDE wallet instead of subversions "
+#| "storage?"
+msgid "Store passwords in KDE Wallet instead of Subversion' storage"
+msgstr ""
+"パスワードを保存するとき、subversion の保存場所の代わりに KDE ウォレットに保"
+"存するのか"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_password_cache)
+#: src/settings/kdesvn_part.kcfg:132 src/settings/subversion_settings.ui:138
+#, fuzzy, kde-format
+msgid "Use internal password cache"
+msgstr "内部パスワードキャッシュを使う(&U)"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:136
+#, kde-format
+msgid "Is networking enabled"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:140
+#, kde-format
+msgid "Local add results in modification instead of conflicts"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:144
+#, kde-format
+msgid "create any non-existent parent at depth=empty"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (diffmerge_items)
+#: src/settings/kdesvn_part.kcfg:150
+#, kde-format
+msgid "Which program to use for external merges"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (diffmerge_items)
+#: src/settings/kdesvn_part.kcfg:154
+#, kde-format
+msgid "Which program for resolving conflicts"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (display)
+#: src/settings/kdesvn_part.kcfg:164
+#, kde-format
+msgid "Display different then normal states colored"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (blame_dlg)
+#: src/settings/kdesvn_part.kcfg:197
+#, kde-format
+msgid "Locale for blame display"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:209
+#, fuzzy, kde-format
+#| msgid "Should kdesvn check content of logcache before starting the tree"
+msgid "Check status of log cache when starting revision tree"
+msgstr "ツリーを開始する前に kdesvn がログキャッシュの中身を確認するか"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/settings/kdesvn_part.kcfg:213 src/settings/revisiontree_settings.ui:129
+#, fuzzy, kde-format
+msgid "Direction of revision tree"
+msgstr "リビジョンツリーの方向"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:217
+#, fuzzy, kde-format
+#| msgid "Color for added items:"
+msgid "Color for added items"
+msgstr "追加した項目に対する色："
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:221
+#, fuzzy, kde-format
+#| msgid "Color for deleted items:"
+msgid "Color for deleted items"
+msgstr "削除した項目に対する色："
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:225
+#, fuzzy, kde-format
+#| msgid "Color for copied items:"
+msgid "Color for copied items"
+msgstr "コピーした項目に対する色："
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:229
+#, fuzzy, kde-format
+#| msgid "Color for renamed items:"
+msgid "Color for renamed items"
+msgstr "名前変更した項目に対する色："
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:233
+#, fuzzy, kde-format
+#| msgid "Color for modified items:"
+msgid "Color for modified items"
+msgstr "変更した項目に対する色："
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:237
+#, kde-format
+msgid "Height of detail view in tree widget"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:241
+#, fuzzy, kde-format
+#| msgid "Diff in revisiontree is recursive"
+msgid "Diffs from revision tree are recursive"
+msgstr "リビジョンツリー内の Diff は再帰的"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:247
+#, kde-format
+msgid "Should Konqueror not display context menus for kdesvn?"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:251
+#, fuzzy, kde-format
+#| msgid "Don't display entries in toplevel action menu"
+msgid "Should Konqueror not display kdesvn entries in main action menu?"
+msgstr "トップレベルのアクションメニューにエントリを表示しない(&E)"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:255
+#, fuzzy, kde-format
+#| msgid "Show log after executing a command"
+msgid "Show a small log window after executing a command."
+msgstr "コマンドの実行後にログを表示(&S)"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:259
+#, kde-format
+msgid "Log must contain at least lines to show"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:263
+#, fuzzy, kde-format
+#| msgid "KIO operations use standard logmessage"
+msgid "KIO::svn operations use a standard log message"
+msgstr "&KIO 操作は標準ログメッセージを使う"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:267
+#, kde-format
+msgid "The standard log message to use with KIO if not asking for it."
+msgstr ""
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:271
+#, kde-format
+msgid "Support overwrite for KIO module"
+msgstr ""
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:275
+#, kde-format
+msgid "Print progress messages in KDE dock area"
+msgstr ""
+
+#. i18n: ectx: whatsthis, entry, group (internals)
+#: src/settings/kdesvn_part.kcfg:294
+#, kde-format
+msgid ""
+"This value holds for log dialog which kind of log is used, its internal only."
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
+#: src/settings/polling_settings.ui:11
+#, fuzzy, kde-format
+msgid "Check modified items every"
+msgstr "変更した項目に対する色："
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/settings/polling_settings.ui:28 src/settings/polling_settings.ui:55
+#, fuzzy, kde-format
+msgid "minutes"
+msgstr "行"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_poll_updates)
+#: src/settings/polling_settings.ui:35
+#, kde-format
+msgid ""
+"If set check for updates on working copy when network is enabled on regular "
+"base"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_updates)
+#: src/settings/polling_settings.ui:38
+#, fuzzy, kde-format
+msgid "Check for updated items every"
+msgstr "更新を確認(&K)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:28
+#, fuzzy, kde-format
+msgid "Left to right"
+msgstr "左から右へ"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:33
+#, fuzzy, kde-format
+msgid "Bottom to top"
+msgstr "下から上へ"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:38
+#, fuzzy, kde-format
+msgid "Right to left"
+msgstr "右から左へ"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:43
+#, fuzzy, kde-format
+msgid "Top to bottom"
+msgstr "上から下へ"
+
+#. i18n: ectx: property (text), widget (QLabel, m_AddColorLabel)
+#: src/settings/revisiontree_settings.ui:51
+#, fuzzy, kde-format
+msgid "Color for added items:"
+msgstr "追加した項目に対する色："
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#: src/settings/revisiontree_settings.ui:77
+#, fuzzy, kde-format
+msgid "Color for copied items:"
+msgstr "コピーした項目に対する色："
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel4)
+#: src/settings/revisiontree_settings.ui:90
+#, fuzzy, kde-format
+msgid "Color for renamed items:"
+msgstr "名前変更した項目に対する色："
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel5)
+#: src/settings/revisiontree_settings.ui:103
+#, fuzzy, kde-format
+msgid "Color for modified items:"
+msgstr "変更した項目に対する色："
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#: src/settings/revisiontree_settings.ui:136
+#, fuzzy, kde-format
+msgid "Color for deleted items:"
+msgstr "削除した項目に対する色："
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_fill_cache_on_tree)
+#: src/settings/revisiontree_settings.ui:175
+#, fuzzy, kde-format
+#| msgid "Should kdesvn check content of logcache before starting the tree"
+msgid "Should kdesvn check content of log cache before starting the tree"
+msgstr "ツリーを開始する前に kdesvn がログキャッシュの中身を確認するか"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_fill_cache_on_tree)
+#: src/settings/revisiontree_settings.ui:180
+#, fuzzy, kde-format
+msgid ""
+"When starting the tree generation and reading data from log cache kdesvn may "
+"check for newer items in repository if network is enabled. \n"
+"\n"
+"But this may slow down tree generation so it is disabled by default."
+msgstr ""
+"ツリーを生成し始めてログキャッシュからデータを読み込んでいるときにネットワー"
+"クが有効であれば kdesvn はリポジトリ内のより新しい項目があるか調べられま"
+"す。\n"
+"\n"
+"しかしこれはツリーの生成を遅くするかもしればいので標準で無効です。"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_fill_cache_on_tree)
+#: src/settings/revisiontree_settings.ui:183
+#, fuzzy, kde-format
+#| msgid "Check logcache fill before reading tree"
+msgid "Check log cache fill before reading tree"
+msgstr "ツリーを読み込む前にキャッシュが満たされているか確認する(&L)"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_start_updates_check_on_open)
+#: src/settings/subversion_settings.ui:14
+#, fuzzy, kde-format
+msgid "Select if kdesvn should check for updates when open a working copy"
+msgstr "作業コピーを開くときに kdesvn が更新を確認するかを選択します"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_start_updates_check_on_open)
+#: src/settings/subversion_settings.ui:17
+#, fuzzy, kde-format
+msgid "Start check for updates when open a working copy"
+msgstr "作業コピーを開くときに更新を確認し始める(&S)"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_cache_on_open)
+#: src/settings/subversion_settings.ui:33
+#, fuzzy, kde-format
+#| msgid "Start refresh the logcache for repository when networking enabled"
+msgid "Start refresh the log cache for repository when networking enabled"
+msgstr "ネットワークが有効のときにリポジトリのログキャッシュを更新しはじめます"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_cache_on_open)
+#: src/settings/subversion_settings.ui:36
+#, fuzzy, kde-format
+msgid "Start fill log cache on open"
+msgstr "開いたときにログキャッシュを満たし始める"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_check_needslock)
+#: src/settings/subversion_settings.ui:43
+#, fuzzy, kde-format
+msgid "When listing on working copies kdesvn may check for this property"
+msgstr ""
+"作業コピーについて一覧表にするときに kdesvn はこの属性を調べるかもしれません"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_check_needslock)
+#: src/settings/subversion_settings.ui:46
+#, fuzzy, kde-format
+msgid ""
+"When listing on working copies kdesvn may check for <tt>svn:needs-lock</tt> "
+"property.<br>But due this listings/updating on folders containing lot of "
+"items may get slow. So you should only switch on if you have repositories "
+"containing lot of such entries."
+msgstr ""
+"作業コピーについて一覧表にするとき kdesvn は <tt>svn:needs-lock</tt> 属性を調"
+"べるかもしれません。<br>しかしこれにより多くの項目を含むフォルダについて一覧"
+"表にしたり更新したりするのが遅くなるかもしれません。そのためたくさんのそのよ"
+"うなエントリが含まれるリポジトリを持っているときのみ有効に切り替えるべきで"
+"す。"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_check_needslock)
+#: src/settings/subversion_settings.ui:49
+#, fuzzy, kde-format
+msgid "Check if items has \"svn:needs-lock\" property set"
+msgstr "項目が「svn:needs-lock」属性セットをもっているかを調べる(&E)"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
+#: src/settings/subversion_settings.ui:56
+#, fuzzy, kde-format
+msgid ""
+"Whether getting details about items when making listing on repositories or "
+"not"
+msgstr ""
+"リポジトリについて一覧表を作っている間に項目に付いての詳細を得るかどうか"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_details_on_remote_listing)
+#: src/settings/subversion_settings.ui:61
+#, fuzzy, kde-format
+#| msgid ""
+#| "<p align=\"left\">When checked, kdesvn get more detailed info about file "
+#| "items when making a listing to remote repositories. So you may see remote "
+#| "locks in overview.\n"
+#| "</p>\n"
+#| "<p align=\"left\"><i>Be careful: This may let listings REAL slow!</i></p>"
+msgid ""
+"<p align=\"left\">When checked, kdesvn get more detailed info about file "
+"items when making a listing to remote repositories. So you may see remote "
+"locks in overview.\n"
+"</p>\n"
+"<p align=\"left\"><i>Be careful: This may let listings REAL slow.</i></p>"
+msgstr ""
+"<p align=\"left\">チェックされているとき、kdesvn はリモートのリポジトリに一覧"
+"表を作成しているときにファイルについての詳細な情報を得ます。そのため一覧にリ"
+"モートのロックがわかるかもしれません。\n"
+"</p>\n"
+"<p align=\"left\"><i>注意してください: これにより一覧表にするのが本当に遅くな"
+"るかもしれません！</i></p>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_details_on_remote_listing)
+#: src/settings/subversion_settings.ui:64
+#, fuzzy, kde-format
+msgid "Get file details while remote listing"
+msgstr "リモートの一覧表にする間にファイルの詳細を得る(&G)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_info_recursive)
+#: src/settings/subversion_settings.ui:74
+#, fuzzy, kde-format
+msgid "Gain item info recursive"
+msgstr "再帰的に項目の情報を得る(&I)"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_properties_on_remote_items)
+#: src/settings/subversion_settings.ui:84
+#, fuzzy, kde-format
+msgid "Should kdesvn retrieves properties on selected item in repositories"
+msgstr "kdesvn がリポジトリ内の選択された項目に付いての属性を取り出すか"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
+#: src/settings/subversion_settings.ui:88
+#, fuzzy, kde-format
+#| msgid ""
+#| "When browsing kdesvn may try displaying properties below itemlist from a "
+#| "selected item. \n"
+#| "On networked repositories (eg., not opened via file:// protocol) this may "
+#| "get real slow. So if you have slow network connections or when browsing "
+#| "hangs often you should deactivate it."
+msgid ""
+"When browsing kdesvn may try displaying properties below itemlist from a "
+"selected item. \n"
+"On networked repositories (e.g., not opened via file:// protocol) this may "
+"get real slow. So if you have slow network connections or when browsing "
+"hangs often you should deactivate it."
+msgstr ""
+"kdesvn を見ることで選択した項目から項目リストの下に属性を表示するかもしれませ"
+"ん。\n"
+"ネットワークに接続されたリポジトリ（例えば、file:// プロトコルを通して開かれ"
+"ていない）上ではこれにより本当に遅くなるかもしれません。そのためネットワーク"
+"接続が遅いときや閲覧がしばしばハングするときにはこれを無効にすべきです。"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_properties_on_remote_items)
+#: src/settings/subversion_settings.ui:91
+#, fuzzy, kde-format
+msgid "Always get properties on networked repositories"
+msgstr "ネットワークに接続されたリポジトリ上の属性を常に得る(&W)"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_store_passwords)
+#: src/settings/subversion_settings.ui:101
+#, fuzzy, kde-format
+#| msgid "Should subversion store passwords in default"
+msgid "Should Subversion store passwords in default"
+msgstr "subversion が標準の方法でパスワードを保存するのか"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_store_passwords)
+#: src/settings/subversion_settings.ui:104
+#, fuzzy, kde-format
+#| msgid ""
+#| "Storing passwords is often a security problem. Kdesvn itself doesn't "
+#| "store any passwords, but the subversion itself inside the configuration "
+#| "area of subversion. If this area is readable from others you should not "
+#| "set it, but you may select for single non critical accounts inside the "
+#| "authentication dialog."
+msgid ""
+"Storing passwords is often a security problem. Kdesvn itself does not store "
+"any passwords, but the Subversion itself inside the configuration area of "
+"Subversion. If this area is readable from others you should not set it, but "
+"you may select for single non critical accounts inside the authentication "
+"dialog."
+msgstr ""
+"パスワードの保存はしばしばセキュリティ問題となります。Kdesvn 自体はどのパス"
+"ワードも保存しませんが、subversion 自体は subversion の設定領域内に保存しま"
+"す。もしこの領域が他人から読み取れるならば、これを設定すべきではありません"
+"が、認証ダイアログ内で単一の重要ではないアカウントついて選択してもよいです。"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_passwords_in_wallet)
+#: src/settings/subversion_settings.ui:117
+#, fuzzy, kde-format
+#| msgid ""
+#| "When saving passwords, do it into KDE wallet instead of subversions "
+#| "storage?"
+msgid ""
+"When saving passwords, do it into KDE Wallet instead of Subversions storage?"
+msgstr ""
+"パスワードを保存するとき、subversion の保存場所の代わりに KDE ウォレットに保"
+"存するのか"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_passwords_in_wallet)
+#: src/settings/subversion_settings.ui:122
+#, fuzzy, kde-format
+#| msgid ""
+#| "<p>Tells if your passwords set in kdesvn should stored into kde wallet "
+#| "instead of simple cleartext storage of subversion.</p>\n"
+#| "<p>This would be a little bit more secure 'cause KDE wallet is (mostly) "
+#| "encrypted with a password. On other hand you must re-enter your passwords "
+#| "with other subversion clients not accessing KDE wallet (eg. svn "
+#| "commandline itself, rapidsvn and so on).</p>\n"
+#| "<p>If you're HOME storage eg. subversions configfolder is on a network "
+#| "drive you should hard think about not storing passwords in a plain text "
+#| "file like subversion does but put it into an encrypted storage like kde "
+#| "wallet or don't save passwords.</p>"
+msgid ""
+"<p>Tells if your passwords set in kdesvn should stored into KDE Wallet "
+"instead of simple clear text storage of Subversion.</p>\n"
+"<p>This would be a little bit more secure because KDE Wallet is (mostly) "
+"encrypted with a password. On other hand you must re-enter your passwords "
+"with other Subversion clients not accessing KDE wallet (e.g. svn command "
+"line itself, rapidsvn and so on).</p>\n"
+"<p>If you are HOME storage e.g. Subversion's config folder is on a network "
+"drive you should hard think about not storing passwords in a plain text file "
+"like Subversion does but put it into an encrypted storage like KDE Wallet or "
+"do not save passwords.</p>"
+msgstr ""
+"<p>kdesvn 内に設定されたパスワードを単純な平文の subversion の保存ではなく "
+"kde ウォレットに保存するかどうかを表します。</p>\n"
+"<p>KDE ウォレットはパスワードによって（ほとんど）暗号化されているのでこれによ"
+"り少しだけセキュアになるでしょう。他方で KDE ウォレットにアクセスしない他の "
+"subversion クライアント（例えば svn コマンドライン自体、rapidsvn など）でパス"
+"ワードを再入力しなければなりません。</p>\n"
+"<p>もし HOME の保存場所（例えば subversion の設定フォルダ）がネットワークドラ"
+"イブ上にあるならば subversion が行うように平文のテキストファイル内にパスワー"
+"ドを保存せずに kde ウォレットのような暗号化された保存場所にそれを置くかパス"
+"ワードを保存しないということについて強く考えるべきです。</p>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_passwords_in_wallet)
+#: src/settings/subversion_settings.ui:125
+#, fuzzy, kde-format
+msgid "Store passwords into KDE Wallet"
+msgstr "&KDE ウォレットの中へパスワードを保存する"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_password_cache)
+#: src/settings/subversion_settings.ui:135
+#, fuzzy, kde-format
+msgid "Use an internal password cache"
+msgstr "内部パスワードキャッシュを使います"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_always_list_changed_files)
+#: src/settings/subversion_settings.ui:155
+#, fuzzy, kde-format
+msgid "Read detailed change lists"
+msgstr "詳細な変更リストを読みます"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_log_always_list_changed_files)
+#: src/settings/subversion_settings.ui:158
+#, fuzzy, kde-format
+#| msgid ""
+#| "Reading lists of changed files may sometimes a little bit slow down "
+#| "things. But if this feature is switched off, kdesvn may fail generating "
+#| "differences between nodechanges from within the logviewer."
+msgid ""
+"Reading lists of changed files may sometimes a little bit slow down things. "
+"But if this feature is switched off, kdesvn may fail generating differences "
+"between node changes from within the log viewer."
+msgstr ""
+"変更されたファイルのリストを読み込むことでときどき少しだけ遅くなるかもしれま"
+"せん。しかしこの機能を無効にするならば、kdesvn はログビュアー内でノード変更の"
+"間の違いを生成することに失敗するかもしれません。"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_review_commit)
+#: src/settings/subversion_settings.ui:171
+#, fuzzy, kde-format
+msgid "List items next commit will send or not"
+msgstr "次のコミットが送る項目をリストアップするかどうか"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_commit_hide_new)
+#: src/settings/subversion_settings.ui:184
+#, fuzzy, kde-format
+msgid "Should unversioned items displayed in commit dialog or not."
+msgstr ""
+"コミットダイアログにバージョン付けされていない項目を表示するのかどうか。"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_commit_hide_new)
+#: src/settings/subversion_settings.ui:187
+#, fuzzy, kde-format
+msgid "Hide new items in commit box"
+msgstr "コミットボックスの中の新しい項目を隠す(&N)"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_add_as_modification)
+#: src/settings/subversion_settings.ui:197
+#, kde-format
+msgid ""
+"<html><head/><body><p>If set, a local addition at the same path as an "
+"incoming addition of the same node kind results in a normal node with a "
+"possible local modification, instead of a tree conflict.</p></body></html>"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_add_as_modification)
+#: src/settings/subversion_settings.ui:200
+#, fuzzy, kde-format
+#| msgid "Modified state got conflicting mods."
+msgid "Update modifies instead of conflicts"
+msgstr "変更された状態は衝突モードになりました。"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_make_parents)
+#: src/settings/subversion_settings.ui:207
+#, kde-format
+msgid ""
+"<html><head/><body><p>If set, create any non-existent parent directories "
+"also by checking them out at depth=empty</p></body></html>"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_make_parents)
+#: src/settings/subversion_settings.ui:210
+#, kde-format
+msgid "Update makes missing parents"
+msgstr ""
+
+#: src/svnfrontend/background/fillcachethread.cpp:68
+#, fuzzy, kde-format
+#| msgid ""
+#| "Not filling logcache because it is disabled due setting for this "
+#| "repository."
+msgid ""
+"Not filling log cache because it is disabled due setting for this repository."
+msgstr ""
+"このリポジトリに対する設定により無効になっているのでログキャッシュを充填して"
+"いません"
+
+#: src/svnfrontend/background/fillcachethread.cpp:70
+#, fuzzy, kde-format
+#| msgid "Filling log cache in background"
+msgid "Filling log cache in background."
+msgstr "バックグラウンドでログキャッシュを充填しています"
+
+#: src/svnfrontend/background/fillcachethread.cpp:92
+#, fuzzy, kde-format
+msgid "Filling cache canceled."
+msgstr "キャッシュの充填がキャンセルされました。"
+
+#: src/svnfrontend/background/fillcachethread.cpp:107
+#, fuzzy, kde-format
+#| msgid "Cache filled up to revision %1"
+msgid "Cache filled up to revision %1."
+msgstr "リビジョン %1 までキャッシュが充填されました"
+
+#: src/svnfrontend/background/fillcachethread.cpp:114
+#, fuzzy, kde-format
+msgid "Filling log cache in background finished."
+msgstr "バックグラウンドでのログキャッシュの充填が完了しました。"
+
+#: src/svnfrontend/background/tcontextlistener.cpp:182
+#, fuzzy, kde-format
+msgid "%1 of %2 transferred."
+msgstr "%2 のうち %1 が転送されました。"
+
+#: src/svnfrontend/background/tcontextlistener.cpp:184
+#: src/svnfrontend/stopdlg.cpp:200
+#, fuzzy, kde-format
+msgid "%1 transferred."
+msgstr "%1 が転送されました。"
+
+#: src/svnfrontend/blamedisplay.cpp:195 src/svnfrontend/blamedisplay.cpp:207
+#, fuzzy, kde-format
+msgid "Log message for revision"
+msgstr "リビジョンに対するログメッセージ"
+
+#: src/svnfrontend/blamedisplay.cpp:200
+#, fuzzy, kde-format
+#| msgid "Goto line"
+msgid "Go to line"
+msgstr "行へ移動"
+
+#: src/svnfrontend/blamedisplay.cpp:333
+#, fuzzy, kde-format
+msgid "Show line"
+msgstr "行を表示"
+
+#: src/svnfrontend/blamedisplay.cpp:333
+#, fuzzy, kde-format
+msgid "Show line number"
+msgstr "行番号を表示"
+
+#: src/svnfrontend/blamedisplay.cpp:370
+#, fuzzy, kde-format
+#| msgid "Logmessage for revision %1"
+msgctxt "@title:window"
+msgid "Log Message for Revision %1"
+msgstr "リビジョン %1 に対するログメッセージ"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:40
+#, fuzzy, kde-format
+msgid "Line"
+msgstr "行"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:45
+#: src/svnfrontend/models/logitemmodel.cpp:175
+#, fuzzy, kde-format
+msgid "Revision"
+msgstr "リビジョン"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#. i18n: ectx: property (text), widget (QRadioButton, m_startDateButton)
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopDateButton)
+#: src/svnfrontend/blamedisplay.ui:50
+#: src/svnfrontend/fronthelpers/rangeinput.ui:46
+#: src/svnfrontend/fronthelpers/rangeinput.ui:130
+#: src/svnfrontend/models/logitemmodel.cpp:179
+#, fuzzy, kde-format
+msgid "Date"
+msgstr "日付"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:55
+#: src/svnfrontend/models/logitemmodel.cpp:177
+#, fuzzy, kde-format
+msgid "Author"
+msgstr "作成者"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:60
+#, fuzzy, kde-format
+msgid "Content"
+msgstr "内容"
+
+#: src/svnfrontend/ccontextlistener.cpp:64
+#, fuzzy, kde-format
+msgid "Add to revision control"
+msgstr "リビジョン管理に追加"
+
+#: src/svnfrontend/ccontextlistener.cpp:67
+#, fuzzy, kde-format
+msgid "Restore missing"
+msgstr "失われた項目を元に戻す"
+
+#: src/svnfrontend/ccontextlistener.cpp:68
+#, fuzzy, kde-format
+msgid "Revert"
+msgstr "取り消し"
+
+#: src/svnfrontend/ccontextlistener.cpp:69
+#, fuzzy, kde-format
+msgid "Revert failed"
+msgstr "元に戻すのに失敗しました"
+
+#: src/svnfrontend/ccontextlistener.cpp:70
+#, fuzzy, kde-format
+msgid "Resolved"
+msgstr "解消しました"
+
+#: src/svnfrontend/ccontextlistener.cpp:71
+#, fuzzy, kde-format
+msgid "Skip"
+msgstr "スキップ"
+
+#: src/svnfrontend/ccontextlistener.cpp:72 src/svnfrontend/svnitem.cpp:434
+#, fuzzy, kde-format
+msgid "Deleted"
+msgstr "削除されました"
+
+#: src/svnfrontend/ccontextlistener.cpp:73
+#, fuzzy, kde-format
+msgid "Added"
+msgstr "追加されました"
+
+#: src/svnfrontend/ccontextlistener.cpp:74
+#, fuzzy, kde-format
+msgid "Update"
+msgstr "更新"
+
+#: src/svnfrontend/ccontextlistener.cpp:75
+#, fuzzy, kde-format
+msgid "Update complete"
+msgstr "更新完了"
+
+#: src/svnfrontend/ccontextlistener.cpp:76
+#, fuzzy, kde-format
+msgid "Update external module"
+msgstr "外部モジュールを更新"
+
+#: src/svnfrontend/ccontextlistener.cpp:78
+#, fuzzy, kde-format
+msgid "Status on external"
+msgstr "外部についての状態"
+
+#: src/svnfrontend/ccontextlistener.cpp:79
+#, fuzzy, kde-format
+msgid "Commit Modified"
+msgstr "コミット 変更されました"
+
+#: src/svnfrontend/ccontextlistener.cpp:80
+#, fuzzy, kde-format
+msgid "Commit Added"
+msgstr "コミット 追加されました"
+
+#: src/svnfrontend/ccontextlistener.cpp:81
+#, fuzzy, kde-format
+msgid "Commit Deleted"
+msgstr "コミット 削除されました"
+
+#: src/svnfrontend/ccontextlistener.cpp:82
+#, fuzzy, kde-format
+msgid "Commit Replaced"
+msgstr "コミット 置換されました"
+
+#: src/svnfrontend/ccontextlistener.cpp:85
+#, fuzzy, kde-format
+msgid "Locking"
+msgstr "ロックしています"
+
+#: src/svnfrontend/ccontextlistener.cpp:86
+#, fuzzy, kde-format
+msgid "Unlocked"
+msgstr "ロック解除されました"
+
+#: src/svnfrontend/ccontextlistener.cpp:87
+#, fuzzy, kde-format
+msgid "Lock failed"
+msgstr "ロック失敗"
+
+#: src/svnfrontend/ccontextlistener.cpp:88
+#, fuzzy, kde-format
+msgid "Unlock failed"
+msgstr "ロック解除失敗"
+
+#: src/svnfrontend/ccontextlistener.cpp:94
+#, fuzzy, kde-format
+msgid "unchanged"
+msgstr "未変更"
+
+#: src/svnfrontend/ccontextlistener.cpp:95
+#, fuzzy, kde-format
+msgid "item wasn't present"
+msgstr "項目は存在しませんでした"
+
+#: src/svnfrontend/ccontextlistener.cpp:96
+#, fuzzy, kde-format
+msgid "unversioned item obstructed work"
+msgstr "バージョン付けされていない項目が作業を妨げました"
+
+#: src/svnfrontend/ccontextlistener.cpp:99
+#, fuzzy, kde-format
+msgid "Modified state had mods merged in."
+msgstr "変更された状態はマージされたモードになりました。"
+
+#: src/svnfrontend/ccontextlistener.cpp:100
+#, fuzzy, kde-format
+msgid "Modified state got conflicting mods."
+msgstr "変更された状態は衝突モードになりました。"
+
+#: src/svnfrontend/ccontextlistener.cpp:311
+#, fuzzy, kde-format
+msgid "Enter password for realm %1"
+msgstr "アドレス %1 に対するパスワードを入力してください"
+
+#: src/svnfrontend/ccontextlistener.cpp:342
+#, fuzzy, kde-format
+#| msgid ""
+#| "The certificate is not issued by a trusted authority. Use the fingerprint "
+#| "to validate the certificate manually!"
+msgid ""
+"The certificate is not issued by a trusted authority. Use the fingerprint to "
+"validate the certificate manually."
+msgstr ""
+"証明書が信頼された認証局によって発行されていません。手動で証明書を検証するた"
+"めにフィンガープリントを使ってください！"
+
+#: src/svnfrontend/ccontextlistener.cpp:345
+#, fuzzy, kde-format
+msgid "The certificate hostname does not match."
+msgstr "証明書のホスト名が一致しません。"
+
+#: src/svnfrontend/ccontextlistener.cpp:348
+#, fuzzy, kde-format
+msgid "The certificate is not yet valid."
+msgstr "証明書はまだ無効です。"
+
+#: src/svnfrontend/ccontextlistener.cpp:351
+#, fuzzy, kde-format
+msgid "The certificate has expired."
+msgstr "証明書は失効しています。"
+
+#: src/svnfrontend/ccontextlistener.cpp:354
+#, fuzzy, kde-format
+msgid "The certificate has an unknown error."
+msgstr "証明書には不明なエラーがあります。"
+
+#: src/svnfrontend/ccontextlistener.cpp:376
+#, fuzzy, kde-format
+#| msgid ""
+#| "%1\n"
+#| "Realy store password as plain text?"
+msgid ""
+"%1\n"
+"Really store password as plain text?"
+msgstr ""
+"%1\n"
+"本当にパスワードをプレーンテキストとして保存しますか？"
+
+#: src/svnfrontend/ccontextlistener.cpp:377
+#, fuzzy, kde-format
+msgid "Save password"
+msgstr "パスワードを保存"
+
+#: src/svnfrontend/commandexec.cpp:219
+#, fuzzy, kde-format
+msgid "Command \"%1\" not implemented or known"
+msgstr "コマンド「%1」は実装されていないか不明です"
+
+#: src/svnfrontend/commandexec.cpp:220 src/svnfrontend/commandexec.cpp:339
+#: src/svnfrontend/graphtree/revgraphview.cpp:1004
+#: src/svnfrontend/maintreewidget.cpp:992
+#: src/svnfrontend/maintreewidget.cpp:2137
+#: src/svnfrontend/maintreewidget.cpp:2349
+#, fuzzy, kde-format
+msgid "SVN Error"
+msgstr "SVN エラー"
+
+#: src/svnfrontend/commandexec.cpp:434
+#, fuzzy, kde-format
+#| msgid "\"GET\" requires output file!"
+msgid "\"GET\" requires output file"
+msgstr "「GET」は出力ファイルを必要とします！"
+
+#: src/svnfrontend/commandexec.cpp:621
+#, fuzzy, kde-format
+#| msgid "May only switch one url at time!"
+msgid "May only switch one URL at time"
+msgstr "一度に一つだけの url に切り替えられます！"
+
+#: src/svnfrontend/commandexec.cpp:625
+#, fuzzy, kde-format
+#| msgid "Switch only on working copies!"
+msgid "Switch only on working copies"
+msgstr "作業コピー上だけで切り替えます！"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, CopyMoveView)
+#: src/svnfrontend/copymoveview.ui:14
+#, fuzzy, kde-format
+msgid "Copy / Move"
+msgstr "コピーと移動"
+
+#. i18n: ectx: property (text), widget (QLabel, m_HeadOneLabel)
+#: src/svnfrontend/copymoveview.ui:20
+#, fuzzy, kde-format
+#| msgid "Rename/move"
+msgid "Rename"
+msgstr "名前変更と移動"
+
+#. i18n: ectx: property (text), widget (KSqueezedTextLabel, m_OldNameLabel)
+#. i18n: ectx: property (text), widget (KSqueezedTextLabel, m_PrefixLabel)
+#: src/svnfrontend/copymoveview.ui:33 src/svnfrontend/copymoveview.ui:58
+#, kde-format
+msgid "KSqueezedTextLabel"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, m_HeadTwoLabel)
+#: src/svnfrontend/copymoveview.ui:43
+#, fuzzy, kde-format
+msgid "to"
+msgstr "を"
+
+#: src/svnfrontend/copymoveview_impl.cpp:47
+#, fuzzy, kde-format
+msgid "Rename/move"
+msgstr "名前変更と移動"
+
+#: src/svnfrontend/copymoveview_impl.cpp:74
+#, fuzzy, kde-format
+#| msgid "Move/Rename file/dir"
+msgctxt "@title:window"
+msgid "Move/Rename File/Directory"
+msgstr "ファイルやディレクトリの移動と名前変更"
+
+#: src/svnfrontend/copymoveview_impl.cpp:74
+#, fuzzy, kde-format
+#| msgid "Copy file/dir"
+msgctxt "@title:window"
+msgid "Copy File/Directory"
+msgstr "ファイルやディレクトリのコピー"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, CreateRepoDlg)
+#: src/svnfrontend/createrepodlg.ui:14
+#, fuzzy, kde-format
+msgid "Create new repository"
+msgstr "新しいリポジトリを作成"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_DisableFsync)
+#: src/svnfrontend/createrepodlg.ui:22
+#, fuzzy, kde-format
+msgid "Disable fsync at commit (BDB only)"
+msgstr "コミット時の fsync を無効にする（BDB のみ）"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/svnfrontend/createrepodlg.ui:32
+#, fuzzy, kde-format
+msgid "Path to repository:"
+msgstr "リポジトリへのパス："
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:45
+#, fuzzy, kde-format
+msgid "Select type of storage"
+msgstr "保存の種類を選択"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:48
+#, fuzzy, kde-format
+msgid "Select the storage type of repository (FSFS or Berkely DB)"
+msgstr "リポジトリの保存の種類を選択する（FSFS または Berkely DB）"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:52
+#, fuzzy, kde-format
+msgid "FSFS"
+msgstr "FSFS"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:57
+#, fuzzy, kde-format
+msgid "BDB"
+msgstr "BDB"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_CreateMainDirs)
+#: src/svnfrontend/createrepodlg.ui:65
+#, fuzzy, kde-format
+#| msgid "Create trunk, tags and branches folder"
+msgid "Create trunk, tags and branches folders"
+msgstr "trunk、tags と branches フォルダを作成"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_CreateMainDirs)
+#: src/svnfrontend/createrepodlg.ui:68
+#, fuzzy, kde-format
+msgid ""
+"If this is set then the base layout (<tt>/trunk</tt>,<tt>/branches</tt> and "
+"<tt>/tags</tt>) will created after opening the fresh repository."
+msgstr ""
+"もしこれが設定されていれば、新規リポジトリを開いた後に基本レイアウト （<tt>/"
+"trunk</tt>、<tt>/branches</tt> と <tt>/tags</tt>）が作成されます。"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_CreateMainDirs)
+#: src/svnfrontend/createrepodlg.ui:71
+#, fuzzy, kde-format
+msgid "Create main folders"
+msgstr "メインフォルダを作成"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn16compat)
+#: src/svnfrontend/createrepodlg.ui:87
+#, fuzzy, kde-format
+#| msgid "Is created repository compatible to subversion prior 1.6"
+msgid "Is created repository compatible to Subversion prior 1.6"
+msgstr "作成されたリポジトリが subversion 1.6 以前と互換性があるか"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn16compat)
+#: src/svnfrontend/createrepodlg.ui:90
+#, fuzzy, kde-format
+#| msgid ""
+#| "If set, the repository created will compatible to subversion prior 1.5. "
+#| "This is only useful when svnqt is running with subversion 1.5 or above."
+msgid ""
+"If set, the repository created will compatible to Subversion prior 1.5. This "
+"is only useful when svnqt is running with Subversion 1.6 or above."
+msgstr ""
+"もし設定されていれば、作成されたリポジトリは subversion 1.5 以前と互換性を持"
+"ちます。これは svnqt が subversion 1.5 以上で動作しているときだけ役に立ちます"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_presvn16compat)
+#: src/svnfrontend/createrepodlg.ui:93
+#, fuzzy, kde-format
+#| msgid "Compatible to subversion prior 1.6"
+msgid "Compatible to Subversion prior 1.6"
+msgstr "subversion 1.6 以前と互換性がある"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_LogKeep)
+#: src/svnfrontend/createrepodlg.ui:113
+#, fuzzy, kde-format
+msgid "Disable automatic log file removal (BDB only)"
+msgstr "ログファイルの自動削除を無効にする（BDB のみ）"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#: src/svnfrontend/createrepodlg.ui:123
+#, fuzzy, kde-format
+msgid "Type of repository:"
+msgstr "リポジトリの種類："
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn15compat)
+#: src/svnfrontend/createrepodlg.ui:139
+#, fuzzy, kde-format
+#| msgid "Is created repository compatible to subversion prior 1.5"
+msgid "Is created repository compatible to Subversion prior 1.5"
+msgstr "作成されたリポジトリが subversion 1.5 以前と互換性があるか"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn15compat)
+#: src/svnfrontend/createrepodlg.ui:142
+#, fuzzy, kde-format
+#| msgid ""
+#| "If set, the repository created will compatible to subversion prior 1.5. "
+#| "This is only useful when svnqt is running with subversion 1.5 or above."
+msgid ""
+"If set, the repository created will compatible to Subversion prior 1.5. This "
+"is only useful when svnqt is running with Subversion 1.5 or above."
+msgstr ""
+"もし設定されていれば、作成されたリポジトリは subversion 1.5 以前と互換性を持"
+"ちます。これは svnqt が subversion 1.5 以上で動作しているときだけ役に立ちます"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_presvn15compat)
+#: src/svnfrontend/createrepodlg.ui:145
+#, fuzzy, kde-format
+#| msgid "Compatible to subversion prior 1.5"
+msgid "Compatible to Subversion prior 1.5"
+msgstr "subversion 1.5 以前と互換性がある"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn18compat)
+#: src/svnfrontend/createrepodlg.ui:162
+#, fuzzy, kde-format
+#| msgid "Is created repository compatible to subversion prior 1.6"
+msgid "Is created repository compatible to Subversion prior 1.8"
+msgstr "作成されたリポジトリが subversion 1.6 以前と互換性があるか"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn18compat)
+#: src/svnfrontend/createrepodlg.ui:165
+#, fuzzy, kde-format
+#| msgid ""
+#| "If set, the repository created will compatible to subversion prior 1.4. "
+#| "This is only useful when svnqt is running with subversion 1.4 or above."
+msgid ""
+"If set, the repository created will compatible to Subversion prior 1.4. This "
+"is only useful when svnqt is running with Subversion 1.8 or above."
+msgstr ""
+"もし設定されていれば、作成されたリポジトリは subversion 1.4 以前と互換性を持"
+"ちます。これは svnqt が subversion 1.4 以上で動作しているときだけ役に立ちます"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_presvn18compat)
+#: src/svnfrontend/createrepodlg.ui:168
+#, fuzzy, kde-format
+#| msgid "Compatible to subversion prior 1.6"
+msgid "Compatible to Subversion prior 1.8"
+msgstr "subversion 1.6 以前と互換性がある"
+
+#: src/svnfrontend/database/dboverview.cpp:117
+#, fuzzy, kde-format
+#| msgid "Log cache holds %1 logentries and consumes %2 on disk."
+msgid "Log cache holds %1 log entries and consumes %2 on disk."
+msgstr ""
+"ログキャッシュは %1 のログエントリを持ちディスク上に %2 消費しています。"
+
+#: src/svnfrontend/database/dboverview.cpp:133
+#, fuzzy, kde-format
+#| msgid ""
+#| "Realy clean cache for repository\n"
+#| "%1?"
+msgid ""
+"Really clean cache for repository\n"
+"%1?"
+msgstr ""
+"本当にリポジトリ %1 に対するキャッシュをクリーンアップ\n"
+"しますか？"
+
+#: src/svnfrontend/database/dboverview.cpp:134
+#, fuzzy, kde-format
+msgid "Clean repository cache"
+msgstr "リポジトリのキャッシュをクリーンアップ"
+
+#: src/svnfrontend/database/dboverview.cpp:150
+#, fuzzy, kde-format
+#| msgid ""
+#| "Realy clean cache and data for repository\n"
+#| "%1?"
+msgid ""
+"Really clean cache and data for repository\n"
+"%1?"
+msgstr ""
+"本当にリポジトリ %1 に対するキャッシュやデータをクリーンアップ\n"
+"しますか？"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DeleteRepositoryButton)
+#: src/svnfrontend/database/dboverview.cpp:151
+#: src/svnfrontend/database/dboverview.ui:59
+#, fuzzy, kde-format
+msgid "Delete repository"
+msgstr "リポジトリを削除"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, DBOverView)
+#: src/svnfrontend/database/dboverview.ui:6
+#, fuzzy, kde-format
+msgid "Overview about cache database content"
+msgstr "キャッシュのデータベースの中身についての概観"
+
+#. i18n: ectx: property (text), widget (QLabel, m_RepositoryLabel)
+#: src/svnfrontend/database/dboverview.ui:19
+#, fuzzy, kde-format
+msgid "Known repositories"
+msgstr "既知のリポジトリ"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteCacheButton)
+#. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteCacheButton)
+#: src/svnfrontend/database/dboverview.ui:40
+#: src/svnfrontend/database/dboverview.ui:43
+#, fuzzy, kde-format
+msgid "Delete cache entries for current selected repository"
+msgstr "現在選択したリポジトリのキャッシュエントリを削除します"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DeleteCacheButton)
+#: src/svnfrontend/database/dboverview.ui:46
+#, fuzzy, kde-format
+msgid "Delete cache"
+msgstr "キャッシュを削除(&D)"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteRepositoryButton)
+#. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteRepositoryButton)
+#: src/svnfrontend/database/dboverview.ui:53
+#: src/svnfrontend/database/dboverview.ui:56
+#, fuzzy, kde-format
+msgid "Delete all entries and settings for selected repository"
+msgstr "選択したリポジトリのすべてのデータと設定を削除します"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_SettingsButton)
+#: src/svnfrontend/database/dboverview.ui:66
+#, fuzzy, kde-format
+msgid "Repository Settings"
+msgstr "リポジトリの設定(&R)"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_StatisticButton)
+#: src/svnfrontend/database/dboverview.ui:73
+#, fuzzy, kde-format
+#| msgid "Settings for current repository"
+msgid "Statistics for repository"
+msgstr "現在のリポジトリに対する設定(&F)"
+
+#: src/svnfrontend/database/dbsettings.cpp:39
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Settings for %1"
+msgstr "%1 に対する設定"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: src/svnfrontend/database/dbsettings.ui:21
+#, fuzzy, kde-format
+#| msgid "Quick settings"
+msgid "Log cache settings"
+msgstr "クイック設定(&Q)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, dbcfg_noCacheUpdate)
+#: src/svnfrontend/database/dbsettings.ui:27
+#, fuzzy, kde-format
+#| msgid "Don't update logcache on open"
+msgid "Do not update log cache on open"
+msgstr "開いたときにログキャッシュを更新しない(&D)"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: src/svnfrontend/database/dbsettings.ui:40
+#, fuzzy, kde-format
+msgid "Prefixes to filter out in revision tree"
+msgstr "リビジョンツリー内で除去するためのプレフィックス"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#: src/svnfrontend/database/dbsettings.ui:58
+#, kde-format
+msgid "Log and statistics setting"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/svnfrontend/database/dbsettings.ui:70
+#, kde-format
+msgid "Hide logs containing following words"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_log_pattern)
+#: src/svnfrontend/database/dbsettings.ui:77
+#, kde-format
+msgid ""
+"This is a list which words/substrings a log entry must contain so it will be "
+"hidden from log and statistics"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/svnfrontend/database/dbsettings.ui:98
+#, kde-format
+msgid "Do not show commits from following users"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_userslog)
+#: src/svnfrontend/database/dbsettings.ui:105
+#, kde-format
+msgid ""
+"Do not display commits of listed users in log window and statistics view"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, dbcfg_filter_empty_author)
+#: src/svnfrontend/database/dbsettings.ui:115
+#, fuzzy, kde-format
+#| msgid "Don't display contextmenu in Konqueror"
+msgid "Do not display commits without author"
+msgstr "Konqueror 内のコンテキストメニューを表示しない(&T)"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DumpRepoDlg)
+#: src/svnfrontend/dumprepo_dlg.ui:14
+#, fuzzy, kde-format
+#| msgid "Dump a repository"
+msgid "Dump repository"
+msgstr "リポジトリをダンプ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_UseDeltas)
+#: src/svnfrontend/dumprepo_dlg.ui:35
+#, fuzzy, kde-format
+msgid "Use deltas"
+msgstr "差分を使う"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, m_StartNumber)
+#: src/svnfrontend/dumprepo_dlg.ui:54
+#, fuzzy, kde-format
+#| msgid "-1 for Start"
+msgid "-1 for START"
+msgstr "Start に対して -1"
+
+#. i18n: ectx: property (text), widget (QLabel, m_lblEnd)
+#: src/svnfrontend/dumprepo_dlg.ui:67
+#, fuzzy, kde-format
+msgid "End revision:"
+msgstr "終了リビジョン："
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_incrementalDump)
+#: src/svnfrontend/dumprepo_dlg.ui:94
+#, fuzzy, kde-format
+msgid "incremental Dump"
+msgstr "インクリメンタルダンプ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_Rangeonly)
+#: src/svnfrontend/dumprepo_dlg.ui:107
+#, fuzzy, kde-format
+msgid "Dump revision range"
+msgstr "リビジョン範囲をダンプ"
+
+#. i18n: ectx: property (text), widget (QLabel, m_OutfileLabel)
+#: src/svnfrontend/dumprepo_dlg.ui:117
+#, fuzzy, kde-format
+msgid "Dump into:"
+msgstr "ダンプ先："
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, m_EndNumber)
+#: src/svnfrontend/dumprepo_dlg.ui:136
+#, fuzzy, kde-format
+#| msgid "-1 for Head"
+msgid "-1 for HEAD"
+msgstr "Head に対して -1"
+
+#. i18n: ectx: property (text), widget (QLabel, m_lblStart)
+#: src/svnfrontend/dumprepo_dlg.ui:149
+#, fuzzy, kde-format
+msgid "Start revision:"
+msgstr "開始リビジョン："
+
+#. i18n: ectx: property (text), widget (QLabel, m_RepoLabel)
+#: src/svnfrontend/dumprepo_dlg.ui:162
+#, fuzzy, kde-format
+msgid "Repository to dump:"
+msgstr "ダンプするリポジトリ："
+
+#. i18n: ectx: property (text), widget (QLabel, m_PatternLabel)
+#: src/svnfrontend/editignorepattern.ui:17
+#, kde-format
+msgid "Patterns to add or remove:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RemoveCheckBox)
+#: src/svnfrontend/editignorepattern.ui:40
+#, kde-format
+msgid "Remove patterns"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, m_DepthLabel)
+#: src/svnfrontend/editignorepattern.ui:49
+#, fuzzy, kde-format
+#| msgid "No ignore"
+msgid "Depth for ignore"
+msgstr "無視なし"
+
+#: src/svnfrontend/editpropsdlg.cpp:32
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Add Property"
+msgstr "属性を追加"
+
+#: src/svnfrontend/editpropsdlg.cpp:47 src/svnfrontend/editpropsdlg.cpp:83
+#, fuzzy, kde-format
+msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
+msgstr "<b>'native'</b>、<b>'LF'</b>、<b>'CR'</b>、<b>'CRLF'</b>のうちの一つ。"
+
+#: src/svnfrontend/editpropsdlg.cpp:48 src/svnfrontend/editpropsdlg.cpp:84
+#, fuzzy, kde-format
+msgid ""
+"If present, make the file executable.<br/>This property can not be set on a "
+"directory. A non-recursive attempt will fail, and a recursive attempt will "
+"set the property only on the file children of the folder."
+msgstr ""
+"存在していれば、ファイルを実行可能にします。<br>この属性はディレクトリに対し"
+"て設定できません。再帰的でない試みは失敗し、再帰的な試みによってフォルダの子"
+"ファイルにのみ属性が設定されます。"
+
+#: src/svnfrontend/editpropsdlg.cpp:52
+#, fuzzy, kde-format
+msgid ""
+"Keywords to be expanded into the contents of a file.<br/>They can be "
+"inserted into documents by placing a keyword anchor which is formatted as "
+"$KeywordName$.<br/>Valid keywords are:<br/><b>URL/HeadURL</b> The URL for "
+"the head revision of the project.<br/><b>Author/LastChangedBy</b> The last "
+"person to change the file.<br/><b>Date/LastChangedDate</b> The date/time the "
+"object was last modified.<br/><b>Revision/Rev/LastChangedRevision</b> The "
+"last revision the object changed.<br/><b>Id</b> A compressed summary of the "
+"previous 4 keywords."
+msgstr ""
+"ファイルの中身に展開するキーワード。<br>$KeywordName$ のように フォーマットさ"
+"れたキーワードアンカーを置くことでドキュメントにそれらを挿入できます。 <br>有"
+"効なキーワードは：<br><b>URL/HeadURL</b> プロジェクトの head リビジョンに対す"
+"る URL。<br><b>Author/LastChangedBy</b> ファイルを変更した最後の人。"
+"<br><b>Date/LastChangedDate</b> オブジェクトが最後に変更された日時。"
+"<br><b>Revision/Rev/LastChangedRevision</b> オブジェクトが変更された最後のリ"
+"ビジョン。<br><b>Id</b> 前の4つのキーワードを圧縮した 概要。"
+
+#: src/svnfrontend/editpropsdlg.cpp:61
+#, fuzzy, kde-format
+msgid ""
+"Set this to any value (e.g. <b>'*'</b>) to enforce locking for this file.<br/"
+">The file will be set read-only when checked out or updated, indicating that "
+"a user must acquire a lock on the file before they can edit and commit "
+"changes."
+msgstr ""
+"このファイルに対するロックを強化するためにこれを任意の値（例えば <b>'*'</b>）"
+"に設定してください。<br>ファイルはチェックアウトや更新時に読み込み専用に設定"
+"され、このことは編集したり変更をコミットする前にファイルのロックを手に入れな"
+"ければならないということを示します。"
+
+#: src/svnfrontend/editpropsdlg.cpp:65 src/svnfrontend/editpropsdlg.cpp:96
+#, fuzzy, kde-format
+msgid ""
+"The mimetype of the file. Used to determine whether to merge the file and "
+"how to serve it from Apache. A mimetype beginning with <b>'text/'</b> (or an "
+"absent mimetype) is treated as text. Anything else is treated as binary."
+msgstr ""
+"ファイルの mimetype。ファイルをマージするのかどうかや Apache からそれをどのよ"
+"うに出すかを 決めるのに使われます。<b>'text/'</b> で始まる mimetype（または "
+"mimetype を欠いている）は テキストとして扱われます。それ以外のすべてはバイナ"
+"リとして扱われます。"
+
+#: src/svnfrontend/editpropsdlg.cpp:90
+#, fuzzy, kde-format
+msgid ""
+"A newline separated list of module specifiers, each consisting of a relative "
+"directory path, optional revision flags, and a URL. For example:<br/"
+"><nobr><b>foo http://example.com/repos/projectA</b></nobr><br/><nobr><b>foo/"
+"bar -r 1234 http://example.com/repos/projectB</b></nobr>"
+msgstr ""
+"改行で区切られた、モジュール指定子のリストで、それぞれが相対ディレクトリパ"
+"ス、オプションのリビジョンフラグと URL からなります。例えば："
+"<br><nobr><b>foo http://example.com/repos/projectA</b></"
+"nobr><br><nobr><b>foo/bar -r 1234 http://example.com/repos/projectB</b></"
+"nobr>"
+
+#: src/svnfrontend/editpropsdlg.cpp:95
+#, fuzzy, kde-format
+msgid "A newline separated list of file patterns to ignore."
+msgstr "改行で区切られた、無視するファイルパターンのリスト。"
+
+#: src/svnfrontend/editpropsdlg.cpp:100
+#, fuzzy, kde-format
+msgid ""
+"Label text to show for the edit box where the user enters the issue number."
+msgstr "ユーザが問題番号を入力する編集ボックスに対して表示するラベルテキスト"
+
+#: src/svnfrontend/editpropsdlg.cpp:103
+#, fuzzy, kde-format
+msgid ""
+"URL pointing to the issue tracker. It must contain <b>%BUGID%</b> which gets "
+"replaced with the bug issue number. Example:<br/><nobr><b>http://example.com/"
+"mantis/view.php?id=%BUGID%</b></nobr>"
+msgstr ""
+"問題トラッカーを指す URL。バグ問題番号で置き換えられる <b>%BUGID%</b> を含ん"
+"でいなければなりません。例えば:<br><nobr><b>http://example.com/mantis/view."
+"php?id=%BUGID%</b></nobr>"
+
+#: src/svnfrontend/editpropsdlg.cpp:106
+#, fuzzy, kde-format
+msgid ""
+"String which is appended to a log message when an issue number is entered. "
+"The string must contain <b>%BUGID%</b> which gets replaced with the bug "
+"issue number."
+msgstr ""
+"問題番号が入力されたときにログメッセージに追加される文字列。文字列にはバグ問"
+"題番号で置き換えられる <b>%BUGID%</b> を含んでいなければなりません。"
+
+#: src/svnfrontend/editpropsdlg.cpp:109
+#, fuzzy, kde-format
+msgid ""
+"Set to <b>'yes'</b> if a warning shall be shown when no issue is entered in "
+"the commit dialog. Possible values:<br/><b>'true'</b>/<b>'yes'</b> or "
+"<b>'false'</b>/<b>'no'</b>."
+msgstr ""
+"コミットダイアログに問題が入力されていないときに警告を表示するならば"
+"<b>'yes'</b> に設定します。設定できる値:<br><b>'true'</b>/<b>'yes'</b> また"
+"は <b>'false'</b>/<b>'no'</b>。"
+
+#: src/svnfrontend/editpropsdlg.cpp:112
+#, fuzzy, kde-format
+msgid ""
+"Set to <b>'false'</b> if your bugtracking system has issues which are "
+"referenced not by numbers.<br/>Possible values: <b>'true'</b> or <b>'false'</"
+"b>."
+msgstr ""
+"バグ追跡システムに数によって参照されない問題があるならば <b>'false'</b> に設"
+"定します。<br>設定できる値: <b>'true'</b> または <b>'false'</b>。"
+
+#: src/svnfrontend/editpropsdlg.cpp:115
+#, fuzzy, kde-format
+msgid ""
+"Set to <b>'false'</b> if you want the bugtracking ID to be inserted at the "
+"top of the log message. The default is <b>'true'</b> which means the "
+"bugtracking ID is appended to the log message."
+msgstr ""
+"ログメッセージの最初にバグ追跡 ID を挿入したいならば <b>'false'</b> に 設定し"
+"てください。標準設定は <b>'true'</b> で、これはバグ追跡 ID が ログメッセージ"
+"の後に追加されるということです。"
+
+#: src/svnfrontend/editpropsdlg.cpp:119
+#, fuzzy, kde-format
+msgid ""
+"Two regular expressions separated by a newline.<br/>The first expression is "
+"used to find a string referring to an issue, the second expression is used "
+"to extract the bare bug ID from that string."
+msgstr ""
+"改行で区切られた二つの正規表現。<br>最初の表現は 問題に言及する文字列を見つけ"
+"るのに使われ、二番目の表現は その文字列から裸のバグ ID を抽出するのに使われま"
+"す。"
+
+#: src/svnfrontend/editpropsdlg.cpp:126
+#, fuzzy, kde-format
+msgid "Select or enter new property"
+msgstr "属性を削除"
+
+#: src/svnfrontend/editpropsdlg.cpp:151
+#, kde-format
+msgid "No help for this property available"
+msgstr ""
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, EditPropsDlg)
+#: src/svnfrontend/editpropsdlg.ui:14
+#, fuzzy, kde-format
+msgid "Modify property"
+msgstr "属性を変更"
+
+#. i18n: ectx: property (text), widget (QLabel, m_NameLabel)
+#: src/svnfrontend/editpropsdlg.ui:22
+#, fuzzy, kde-format
+msgid "Property name:"
+msgstr "属性名："
+
+#. i18n: ectx: property (text), widget (QLabel, m_ValueLabel)
+#: src/svnfrontend/editpropsdlg.ui:46
+#, fuzzy, kde-format
+msgid "Property value:"
+msgstr "属性値："
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, helpButton)
+#: src/svnfrontend/editpropsdlg.ui:69
+#, fuzzy, kde-format
+msgid "Click for short info about pre-defined property name"
+msgstr "あらかじめ定義された属性名についての情報を得るにはクリック"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, CheckoutInfo)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:14
+#, fuzzy, kde-format
+msgid "Checkout info"
+msgstr "チェックアウト情報"
+
+#. i18n: ectx: property (text), widget (QLabel, m_TargetLabel)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:26
+#, fuzzy, kde-format
+msgid "Select target directory:"
+msgstr "エクスポート先ディレクトリを選択："
+
+#. i18n: ectx: property (text), widget (QLabel, m_UrlLabel)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:40
+#, fuzzy, kde-format
+msgid "Enter URL:"
+msgstr "URL を入力："
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_ignoreExternals)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:67
+#, fuzzy, kde-format
+msgid "Ignore externals while operation"
+msgstr "操作中は外部を無視"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_ignoreExternals)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:70
+#, fuzzy, kde-format
+msgid "Ignore externals"
+msgstr "外部を無視"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_overwriteButton)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:77
+#, fuzzy, kde-format
+#| msgid "May existing unversioned items ovewritten"
+msgid "May existing unversioned items overwritten"
+msgstr "既存のバージョン付けされていない項目が上書きされるかもしれません"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_overwriteButton)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:80
+#, fuzzy, kde-format
+msgid "Overwrite existing"
+msgstr "既存のファイルを上書き"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_IgnoreKeywords)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:93
+#, fuzzy, kde-format
+msgid "Ignore keywords"
+msgstr "外部を無視"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_CreateDirButton)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:110
+#, fuzzy, kde-format
+#| msgid "Append source url name to subfolder"
+msgid "Append source URL name to subfolder"
+msgstr "サブフォルダにソースの url 名を追加"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_ShowExplorer)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:120
+#, fuzzy, kde-format
+msgid "Open after job"
+msgstr "ジョブ後に開く"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:43
+#, fuzzy, kde-format
+msgid "Property"
+msgstr "属性"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:44
+#, fuzzy, kde-format
+msgid "Value"
+msgstr "値"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:110
+#: src/svnfrontend/propertiesdlg.cpp:120 src/svnfrontend/propertiesdlg.cpp:171
+#, fuzzy, kde-format
+msgid ""
+"This property may not set by users.\n"
+"Rejecting it."
+msgstr ""
+"この属性はユーザによって設定されたものではないかもしれません。\n"
+"これを拒否しています。"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:110
+#: src/svnfrontend/propertiesdlg.cpp:120 src/svnfrontend/propertiesdlg.cpp:171
+#, fuzzy, kde-format
+msgid "Protected property"
+msgstr "保護された属性"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:115
+#: src/svnfrontend/propertiesdlg.cpp:124 src/svnfrontend/propertiesdlg.cpp:175
+#, fuzzy, kde-format
+msgid ""
+"A property with that name exists.\n"
+"Rejecting it."
+msgstr ""
+"その名前がついた属性が存在します。\n"
+"それを拒否しています。"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:115
+#: src/svnfrontend/propertiesdlg.cpp:124 src/svnfrontend/propertiesdlg.cpp:175
+#, fuzzy, kde-format
+msgid "Double property"
+msgstr "二重属性"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, RangeInput)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:6
+#, fuzzy, kde-format
+msgid "Revisions"
+msgstr "リビジョン"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_startRevBox)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:12
+#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:209
+#, fuzzy, kde-format
+msgid "Start with revision"
+msgstr "リビジョン開始"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, m_startWorkingButton)
+#. i18n: ectx: property (toolTip), widget (QRadioButton, m_stopWorkingButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:23
+#: src/svnfrontend/fronthelpers/rangeinput.ui:140
+#, fuzzy, kde-format
+msgid "Select current working copy changes"
+msgstr "現在の作業コピーの変更を選択"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startWorkingButton)
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopWorkingButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:26
+#: src/svnfrontend/fronthelpers/rangeinput.ui:143
+#, fuzzy, kde-format
+msgid "WORKING"
+msgstr "WORKING"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startNumberButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:56
+#, fuzzy, kde-format
+msgid "N&umber"
+msgstr "数(&U)"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startHeadButton)
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopHeadButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:66
+#: src/svnfrontend/fronthelpers/rangeinput.ui:120
+#, fuzzy, kde-format
+msgid "HEAD"
+msgstr "HEAD"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startStartButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:73
+#, fuzzy, kde-format
+msgid "S&TART"
+msgstr "S&TART"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_stopRevBox)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:85
+#, fuzzy, kde-format
+msgid "Stop with revision"
+msgstr "リビジョン終了"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopNumberButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:93
+#, fuzzy, kde-format
+msgid "Number"
+msgstr "数"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopStartButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:113
+#, fuzzy, kde-format
+msgid "START"
+msgstr "START"
+
+#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:62
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Select Revisions"
+msgstr "リビジョンを選択"
+
+#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:205
+#, fuzzy, kde-format
+msgid "Select revision"
+msgstr "リビジョンを選択"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_RevisionButton)
+#: src/svnfrontend/fronthelpers/revisionbutton.ui:22
+#, fuzzy, kde-format
+msgid "-1"
+msgstr "-1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:146
+#, fuzzy, kde-format
+msgid ""
+"Could not run process \"%1\".\n"
+"\n"
+"Process stopped with message:\n"
+"%2"
+msgstr ""
+"プロセス \"%1\" を実行できませんでした。\n"
+"\n"
+"プロセスは以下のメッセージとともに停止しました:\n"
+"%2"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:335
+#, fuzzy, kde-format
+msgid "Error running the graph layouting tool.\n"
+msgstr "グラフレイアウトツールを実行しているときにエラー。\n"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:336
+#, fuzzy, kde-format
+msgid "Please check that 'dot' is installed (package GraphViz)."
+msgstr ""
+"「dot」がインストールされているか確認してください（パッケージ GraphViz）。"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:425
+#, fuzzy, kde-format
+msgid "Deleted at revision %1"
+msgstr "リビジョン %1 で削除されました"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:428
+#, fuzzy, kde-format
+msgid "Added at revision %1 as %2"
+msgstr "リビジョン %1 で %2 として追加されました"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:434
+#, fuzzy, kde-format
+msgid "Copied to %1 at revision %2"
+msgstr "リビジョン %2 で %1 にコピーされました"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:437
+#, fuzzy, kde-format
+msgid "Renamed to %1 at revision %2"
+msgstr "リビジョン %2 で %1 に名前変更されました"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:440
+#, fuzzy, kde-format
+msgid "Modified at revision %1"
+msgstr "リビジョン %1 で変更されました"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:443
+#, fuzzy, kde-format
+msgid "Replaced at revision %1"
+msgstr "リビジョン %1 で置き換えられました"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:446
+#, fuzzy, kde-format
+msgid "Revision %1"
+msgstr "リビジョン %1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:466
+#, fuzzy, kde-format
+#| msgid "Could not open tempfile %1 for writing."
+msgid "Could not open temporary file %1 for writing."
+msgstr "書き込み用にファイル %1 を開くことができませんでした。"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:561
+#, fuzzy, kde-format
+msgid "<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>"
+msgstr "<br>リビジョン: %1<br>作成者: %2<br>日付: %3<br>ログ: %4</html>"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:569
+#, fuzzy, kde-format
+msgid "<b>Revision</b>%1%2%3"
+msgstr "<b>リビジョン</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:570
+#, fuzzy, kde-format
+msgid "<b>Author</b>%1%2%3"
+msgstr "<b>作成者</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:571
+#, fuzzy, kde-format
+msgid "<b>Date</b>%1%2%3"
+msgstr "<b>日付</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:572
+#, fuzzy, kde-format
+msgid "<b>Log</b>%1%2%3"
+msgstr "<b>ログ</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:841
+#, fuzzy, kde-format
+msgid "Diff to previous"
+msgstr "前との Diff"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:845
+#, fuzzy, kde-format
+msgid "Diff to selected item"
+msgstr "選択した項目との Diff"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:848
+#: src/svnfrontend/svnlogdlgimp.cpp:515
+#, fuzzy, kde-format
+msgid "Cat this version"
+msgstr "このバージョンを出力"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:851
+#, fuzzy, kde-format
+msgid "Unselect item"
+msgstr "項目を選択解除"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:853
+#, fuzzy, kde-format
+msgid "Select item"
+msgstr "項目を選択"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:856
+#, fuzzy, kde-format
+msgid "Display details"
+msgstr "詳細を表示"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:859
+#, fuzzy, kde-format
+msgid "Rotate counter-clockwise"
+msgstr "反時計回りに回転"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:860
+#, fuzzy, kde-format
+msgid "Rotate clockwise"
+msgstr "時計回りに回転"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:866
+#: src/svnfrontend/graphtree/revgraphview.cpp:886
+#, fuzzy, kde-format
+#| msgid "Save tree as png"
+msgid "Save tree as PNG"
+msgstr "ツリーを png として保存"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:886
+#, kde-format
+msgid "Image (*.png)"
+msgstr ""
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:94
+#: src/svnfrontend/svnactions.cpp:294
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Logs"
+msgstr "ログを取得"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:94
+#: src/svnfrontend/svnactions.cpp:294
+#, fuzzy, kde-format
+#| msgid "Getting logs - hit cancel for abort"
+msgid "Getting logs - hit Cancel for abort"
+msgstr "ログを取得しています - 中止するにはキャンセルを押してください"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:104
+#, fuzzy, kde-format
+#| msgid "No logcache possible due broken database and networking not allowed."
+msgid "No log cache possible due broken database and networking not allowed."
+msgstr ""
+"データベースが壊れネットワークが許可されていないのでログキャッシュは不可能で"
+"す。"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:104
+#: src/svnfrontend/graphtree/revisiontree.cpp:109
+#, fuzzy, kde-format
+msgid ""
+"Could not retrieve logs, reason:\n"
+"%1"
+msgstr ""
+"ログを取得できませんでした、理由:\n"
+"%1"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:134
+#, fuzzy, kde-format
+msgid "Scanning the logs for %1"
+msgstr "%1 に対するログをスキャンしています"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:134
+#, fuzzy, kde-format
+msgid "Cancel"
+msgstr "キャンセル(&A)"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:135
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Scanning logs"
+msgstr "ログをスキャンしています"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:225
+#: src/svnfrontend/graphtree/revisiontree.cpp:263
+#: src/svnfrontend/graphtree/revisiontree.cpp:312
+#, fuzzy, kde-format
+msgid "%1<br>Check change entry %2 of %3"
+msgstr "%1<br>変更されたエントリ %3 のうち %2 を確認しています"
+
+#. i18n: ectx: property (text), widget (QLabel, m_Srclabel)
+#: src/svnfrontend/hotcopydlg.ui:11
+#, fuzzy, kde-format
+msgid "Repository to copy:"
+msgstr "コピーするリポジトリ："
+
+#. i18n: ectx: property (text), widget (QLabel, m_Destlabel)
+#: src/svnfrontend/hotcopydlg.ui:31
+#, fuzzy, kde-format
+msgid "Destination folder:"
+msgstr "行き先フォルダ："
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_Cleanlogs)
+#: src/svnfrontend/hotcopydlg.ui:51
+#, fuzzy, kde-format
+msgid "Clean logs"
+msgstr "ログをクリーンアップ"
+
+#: src/svnfrontend/importdir_logmsg.cpp:38
+#, fuzzy, kde-format
+msgid "No ignore"
+msgstr "無視なし"
+
+#: src/svnfrontend/importdir_logmsg.cpp:39
+#, fuzzy, kde-format
+msgid "If set, add files or directories that match ignore patterns."
+msgstr ""
+"もし設定されていれば、無視パターンにマッチするファイルやディレクトリを追加し"
+"ます。"
+
+#: src/svnfrontend/importdir_logmsg.cpp:44
+#, fuzzy, kde-format
+msgid "Ignore unknown node types"
+msgstr "不明なノードの種類を無視"
+
+#: src/svnfrontend/importdir_logmsg.cpp:45
+#, fuzzy, kde-format
+msgid "Should files with unknown node types be ignored"
+msgstr "不明なノードの種類を持ったファイルを無視するか"
+
+#: src/svnfrontend/importdir_logmsg.cpp:46
+#, fuzzy, kde-format
+msgid ""
+"Ignore files of which the node type is unknown, such as device files and "
+"pipes."
+msgstr ""
+"デバイスファイルやパイプのような、ノードの種類が不明なファイルを無視します。"
+
+#: src/svnfrontend/importdir_logmsg.cpp:80
+#, fuzzy, kde-format
+msgid "(Last part)"
+msgstr "（最後の部分）"
+
+#: src/svnfrontend/importdir_logmsg.cpp:80
+#, fuzzy, kde-format
+#| msgid "Create subdir %1 on import"
+msgid "Create subdirectory %1 on import"
+msgstr "インポート時にサブディレクトリ %1 を作成"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel4)
+#: src/svnfrontend/loaddmpdlg.ui:11
+#, fuzzy, kde-format
+msgid "Load into repository:"
+msgstr "リポジトリに読み込む："
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_UuidGroup)
+#: src/svnfrontend/loaddmpdlg.ui:24
+#, fuzzy, kde-format
+msgid "Uuid action"
+msgstr "Uuid アクション"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_UUidForce)
+#. i18n: ectx: property (text), widget (QCheckBox, m_ForceCheck)
+#: src/svnfrontend/loaddmpdlg.ui:30 src/svnfrontend/merge_dlg.ui:116
+#, fuzzy, kde-format
+msgid "Force"
+msgstr "強制"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_UUidIgnore)
+#: src/svnfrontend/loaddmpdlg.ui:40
+#, fuzzy, kde-format
+msgid "Ignore"
+msgstr "無視"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_UUidDefault)
+#: src/svnfrontend/loaddmpdlg.ui:50
+#, fuzzy, kde-format
+msgid "Default"
+msgstr "標準"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_UsePre)
+#: src/svnfrontend/loaddmpdlg.ui:66
+#, fuzzy, kde-format
+msgid "Use pre-commit hook"
+msgstr "コミット前のフックを使う"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_UsePost)
+#: src/svnfrontend/loaddmpdlg.ui:76
+#, fuzzy, kde-format
+msgid "Use post-commit hook"
+msgstr "コミット後のフックを使う"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, textLabel5)
+#. i18n: ectx: property (toolTip), widget (KLineEdit, m_Rootfolder)
+#: src/svnfrontend/loaddmpdlg.ui:86 src/svnfrontend/loaddmpdlg.ui:144
+#, fuzzy, kde-format
+#| msgid "Path to load the dump into (see contexthelp)"
+msgid "Path to load the dump into (see context help)"
+msgstr "ダンプを読み込むパス（コンテキストヘルプ参照）"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, textLabel5)
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, m_Rootfolder)
+#: src/svnfrontend/loaddmpdlg.ui:89 src/svnfrontend/loaddmpdlg.ui:147
+#, fuzzy, kde-format
+msgid ""
+"If not empty, load the dump into a specific folder instead into root of "
+"repository. This folder must exist before loading the dump."
+msgstr ""
+"空でなければ、リポジトリのルートの代わりにダンプを特定のフォルダへ読み込む。"
+"このフォルダはダンプを読み込む前に存在していなければならない。"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel5)
+#: src/svnfrontend/loaddmpdlg.ui:92
+#, fuzzy, kde-format
+msgid "Load into folder:"
+msgstr "フォルダに読み込み："
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#: src/svnfrontend/loaddmpdlg.ui:105
+#, fuzzy, kde-format
+msgid "Dump file:"
+msgstr "ファイルをダンプ："
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_validateProps)
+#: src/svnfrontend/loaddmpdlg.ui:118
+#, kde-format
+msgid "Validate the properties on load (only Subversion 1.7 or newer)"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_validateProps)
+#: src/svnfrontend/loaddmpdlg.ui:121
+#, fuzzy, kde-format
+#| msgid "Modify properties"
+msgid "Validate properties"
+msgstr "属性を変更"
+
+#: src/svnfrontend/maintreewidget.cpp:271
+#, fuzzy, kde-format
+#| msgid "Networked URL to open but networking is disabled!"
+msgid "Networked URL to open but networking is disabled."
+msgstr "開く URL に接続しましたがネットワークが無効です！"
+
+#: src/svnfrontend/maintreewidget.cpp:497
+#, fuzzy, kde-format
+msgid "History of item"
+msgstr "項目の履歴(&H)"
+
+#: src/svnfrontend/maintreewidget.cpp:498
+#: src/svnfrontend/maintreewidget.cpp:501
+#: src/svnfrontend/maintreewidget.cpp:505
+#, fuzzy, kde-format
+msgid "History"
+msgstr "履歴"
+
+#: src/svnfrontend/maintreewidget.cpp:499
+#, fuzzy, kde-format
+msgid "Displays the history log of selected item"
+msgstr "選択した項目の履歴ログを表示します"
+
+#: src/svnfrontend/maintreewidget.cpp:500
+#: src/svnfrontend/maintreewidget.cpp:504
+#, fuzzy, kde-format
+msgid "History of item ignoring copies"
+msgstr "コピーを無視した項目の履歴"
+
+#: src/svnfrontend/maintreewidget.cpp:502
+#: src/svnfrontend/maintreewidget.cpp:506
+#, fuzzy, kde-format
+msgid "Displays the history log of selected item without following copies"
+msgstr "コピーを追わずに選択した項目の履歴ログを表示します"
+
+#: src/svnfrontend/maintreewidget.cpp:508
+#, fuzzy, kde-format
+msgid "Full revision tree"
+msgstr "完全リビジョンツリー(&F)"
+
+#: src/svnfrontend/maintreewidget.cpp:509
+#, fuzzy, kde-format
+msgid "Shows history of item as linked tree"
+msgstr "項目の履歴を連結されたツリーとして表示します"
+
+#: src/svnfrontend/maintreewidget.cpp:510
+#, fuzzy, kde-format
+msgid "Partial revision tree"
+msgstr "部分リビジョンツリー(&P)"
+
+#: src/svnfrontend/maintreewidget.cpp:511
+#, fuzzy, kde-format
+msgid "Shows history of item as linked tree for a revision range"
+msgstr "リビジョンの範囲に対して項目の履歴を連結されたツリーとして表示します"
+
+#: src/svnfrontend/maintreewidget.cpp:513
+#: src/svnfrontend/maintreewidget.cpp:514
+#, fuzzy, kde-format
+msgid "Properties"
+msgstr "属性(&P)"
+
+#: src/svnfrontend/maintreewidget.cpp:515
+#, fuzzy, kde-format
+msgid "Display Properties"
+msgstr "属性を表示"
+
+#: src/svnfrontend/maintreewidget.cpp:516
+#, fuzzy, kde-format
+msgid "Display last changes"
+msgstr "最終変更を表示"
+
+#: src/svnfrontend/maintreewidget.cpp:517
+#, fuzzy, kde-format
+msgid "Display last changes as difference to previous commit."
+msgstr "前のコミットとの違いとして最終変更を表示します。"
+
+#: src/svnfrontend/maintreewidget.cpp:518
+#, fuzzy, kde-format
+msgid "Details"
+msgstr "詳細(&D)"
+
+#: src/svnfrontend/maintreewidget.cpp:519
+#, fuzzy, kde-format
+msgid "Show details about selected item"
+msgstr "選択した項目についての詳細を表示します"
+
+#: src/svnfrontend/maintreewidget.cpp:520
+#, fuzzy, kde-format
+msgid "Move"
+msgstr "移動"
+
+#: src/svnfrontend/maintreewidget.cpp:521
+#, fuzzy, kde-format
+msgid "Moves or renames current item"
+msgstr "現在の項目を移動するか名前を変更します"
+
+#: src/svnfrontend/maintreewidget.cpp:523
+#, fuzzy, kde-format
+msgid "Create a copy of current item"
+msgstr "現在の項目のコピーを作成します"
+
+#: src/svnfrontend/maintreewidget.cpp:524
+#, fuzzy, kde-format
+msgid "Check for updates"
+msgstr "更新を確認(&K)"
+
+#: src/svnfrontend/maintreewidget.cpp:525
+#, fuzzy, kde-format
+msgid ""
+"Check if current working copy has items with newer version in repository"
+msgstr ""
+"現在の作業コピーに、リポジトリ内でより新しいバージョンのある項目があるかどう"
+"か調べます"
+
+#: src/svnfrontend/maintreewidget.cpp:527
+#, fuzzy, kde-format
+msgid "Check updates"
+msgstr "更新を確認"
+
+#: src/svnfrontend/maintreewidget.cpp:530
+#, fuzzy, kde-format
+msgid "Blame"
+msgstr "ブレイム(&B)"
+
+#: src/svnfrontend/maintreewidget.cpp:531
+#: src/svnfrontend/maintreewidget.cpp:534
+#, fuzzy, kde-format
+msgid ""
+"Output the content of specified files or URLs with revision and author "
+"information in-line."
+msgstr ""
+"インラインでリビジョンや作成者情報とともに指定されたファイルや URL の中身を出"
+"力します。"
+
+#: src/svnfrontend/maintreewidget.cpp:533
+#, fuzzy, kde-format
+msgid "Blame range"
+msgstr "ブレイム範囲(&G)"
+
+#: src/svnfrontend/maintreewidget.cpp:537
+#, fuzzy, kde-format
+msgid "Cat head"
+msgstr "head を表示(&C)"
+
+#: src/svnfrontend/maintreewidget.cpp:538
+#, fuzzy, kde-format
+msgid "Output the content of specified files or URLs."
+msgstr "指定されたファイルや URL の中身を出力します。"
+
+#: src/svnfrontend/maintreewidget.cpp:540
+#, fuzzy, kde-format
+msgid "Cat revision..."
+msgstr "リビジョンを表示(&R)..."
+
+#: src/svnfrontend/maintreewidget.cpp:541
+#, fuzzy, kde-format
+msgid "Output the content of specified files or URLs at specific revision."
+msgstr "特定のリビジョンにおける指定したファイルや URL の中身を出力します。"
+
+#: src/svnfrontend/maintreewidget.cpp:544
+#, fuzzy, kde-format
+msgid "Lock current items"
+msgstr "現在の項目をロック(&L)"
+
+#: src/svnfrontend/maintreewidget.cpp:545
+#, fuzzy, kde-format
+msgid "Try lock current item against changes from other users"
+msgstr "他のユーザに変更されないよう現在の項目をロックしようとします"
+
+#: src/svnfrontend/maintreewidget.cpp:547
+#, fuzzy, kde-format
+msgid "Unlock current items"
+msgstr "現在の項目をロック解除(&U)"
+
+#: src/svnfrontend/maintreewidget.cpp:548
+#, fuzzy, kde-format
+msgid "Free existing lock on current item"
+msgstr "現在の項目に対する既存のロックを開放します"
+
+#: src/svnfrontend/maintreewidget.cpp:552 src/svnfrontend/svnactions.cpp:658
+#, fuzzy, kde-format
+msgid "New folder"
+msgstr "新規フォルダ"
+
+#: src/svnfrontend/maintreewidget.cpp:553
+#, fuzzy, kde-format
+msgid "Create a new folder"
+msgstr "新規フォルダを作成します"
+
+#: src/svnfrontend/maintreewidget.cpp:554
+#, fuzzy, kde-format
+msgid "Switch repository"
+msgstr "リポジトリを切り替え(&S)"
+
+#: src/svnfrontend/maintreewidget.cpp:555
+#, fuzzy, kde-format
+msgid "Switch repository path of current working copy path (\"svn switch\")"
+msgstr ""
+"現在の作業コピーのパスのリポジトリのパスを切り替えます（「svn switch」）"
+
+#: src/svnfrontend/maintreewidget.cpp:558
+#, fuzzy, kde-format
+#| msgid "Relocate current working copy url"
+msgid "Relocate current working copy URL"
+msgstr "現在の作業コピーの url を移動(&W)"
+
+#: src/svnfrontend/maintreewidget.cpp:559
+#, fuzzy, kde-format
+#| msgid "Relocate url of current working copy path to other url"
+msgid "Relocate URL of current working copy path to other URL"
+msgstr "現在の作業コピーの url を他の url へ移動します"
+
+#: src/svnfrontend/maintreewidget.cpp:562
+#, fuzzy, kde-format
+msgid "Check for unversioned items"
+msgstr "バージョン付けされていない項目を調べる(&F)"
+
+#: src/svnfrontend/maintreewidget.cpp:563
+#, fuzzy, kde-format
+msgid "Unversioned"
+msgstr "バージョン付けされていない"
+
+#: src/svnfrontend/maintreewidget.cpp:564
+#, fuzzy, kde-format
+msgid "Browse folder for unversioned items and add them if wanted."
+msgstr ""
+"バージョン付けされていない項目のためにフォルダを参照し追加したければそれを追"
+"加します。"
+
+#: src/svnfrontend/maintreewidget.cpp:567
+#, fuzzy, kde-format
+msgid "Open repository of working copy"
+msgstr "作業コピーのリポジトリを開く(&O)"
+
+#: src/svnfrontend/maintreewidget.cpp:569
+#, fuzzy, kde-format
+msgid "Opens the repository the current working copy was checked out from"
+msgstr "現在の作業コピーのチェックアウト元のリポジトリを開きます"
+
+#: src/svnfrontend/maintreewidget.cpp:571
+#, fuzzy, kde-format
+msgid "Cleanup"
+msgstr "クリーンアップ"
+
+#: src/svnfrontend/maintreewidget.cpp:572
+#, fuzzy, kde-format
+msgid ""
+"Recursively clean up the working copy, removing locks, resuming unfinished "
+"operations, etc."
+msgstr ""
+"再帰的に作業コピーをクリーンアップし、ロックを削除し、完了していない操作を再"
+"開するなどします。"
+
+#: src/svnfrontend/maintreewidget.cpp:573
+#, fuzzy, kde-format
+msgid "Import folders into current"
+msgstr "フォルダを現在へインポート(&I)"
+
+#: src/svnfrontend/maintreewidget.cpp:575
+#, fuzzy, kde-format
+#| msgid "Import folder content into current url"
+msgid "Import folder content into current URL"
+msgstr "フォルダの中身を現在の url へインポートします"
+
+#: src/svnfrontend/maintreewidget.cpp:579
+#, fuzzy, kde-format
+msgid "Add selected files/dirs"
+msgstr "選択されたファイルやディレクトリを追加(&A)"
+
+#: src/svnfrontend/maintreewidget.cpp:580
+#, fuzzy, kde-format
+msgid "Adding selected files and/or directories to repository"
+msgstr "選択されたファイルやディレクトリをリポジトリに追加しています"
+
+#: src/svnfrontend/maintreewidget.cpp:582
+#, fuzzy, kde-format
+msgid "Add selected files/dirs recursive"
+msgstr "選択されたファイルやディレクトリを再帰的に追加"
+
+#: src/svnfrontend/maintreewidget.cpp:584
+#, fuzzy, kde-format
+msgid ""
+"Adding selected files and/or directories to repository and all subitems of "
+"folders"
+msgstr "ファイル、ディレクトリやフォルダのサブ項目をリポジトリに追加しています"
+
+#: src/svnfrontend/maintreewidget.cpp:586
+#, fuzzy, kde-format
+msgid "Delete selected files/dirs"
+msgstr "選択されたファイルやディレクトリを削除(&S)"
+
+#: src/svnfrontend/maintreewidget.cpp:588
+#, fuzzy, kde-format
+msgid "Deleting selected files and/or directories from repository"
+msgstr "リポジトリから選択したファイルやディレクトリを削除しています"
+
+#: src/svnfrontend/maintreewidget.cpp:589
+#, fuzzy, kde-format
+msgid "Delete folder"
+msgstr "属性を削除"
+
+#: src/svnfrontend/maintreewidget.cpp:590
+#, fuzzy, kde-format
+msgid "Deleting selected directories from repository"
+msgstr "リポジトリから選択したファイルやディレクトリを削除しています"
+
+#: src/svnfrontend/maintreewidget.cpp:592
+#, fuzzy, kde-format
+msgid "Revert current changes"
+msgstr "現在の変更を元に戻す(&R)"
+
+#: src/svnfrontend/maintreewidget.cpp:594
+#, fuzzy, kde-format
+msgid "Mark resolved"
+msgstr "解消したとマークする(&M)"
+
+#: src/svnfrontend/maintreewidget.cpp:595
+#, fuzzy, kde-format
+msgid "Marking files or dirs resolved"
+msgstr "ファイルやディレクトリを解決したとマークしています"
+
+#: src/svnfrontend/maintreewidget.cpp:597
+#, fuzzy, kde-format
+msgid "Resolve conflicts"
+msgstr "衝突を解消(&E)"
+
+#: src/svnfrontend/maintreewidget.cpp:599
+#, fuzzy, kde-format
+msgid "Ignore/Unignore current item"
+msgstr "現在の項目を無視する/しない(&I)"
+
+#: src/svnfrontend/maintreewidget.cpp:600
+#: src/svnfrontend/maintreewidget.cpp:601
+#, kde-format
+msgid "Add or Remove ignore pattern"
+msgstr ""
+
+#: src/svnfrontend/maintreewidget.cpp:603
+#: src/svnfrontend/maintreewidget.cpp:666
+#, fuzzy, kde-format
+msgid "Update to head"
+msgstr "head に更新"
+
+#: src/svnfrontend/maintreewidget.cpp:604
+#, fuzzy, kde-format
+msgctxt "Menu item"
+msgid "Update"
+msgstr "更新"
+
+#: src/svnfrontend/maintreewidget.cpp:605
+#, fuzzy, kde-format
+msgid "Update to revision..."
+msgstr "リビジョンに更新(&V)..."
+
+#: src/svnfrontend/maintreewidget.cpp:606
+#: src/svnfrontend/maintreewidget.cpp:607
+#: src/svnfrontend/maintreewidget.cpp:665 src/svnfrontend/svnactions.cpp:1019
+#, fuzzy, kde-format
+msgid "Commit"
+msgstr "コミット"
+
+#: src/svnfrontend/maintreewidget.cpp:609
+#: src/svnfrontend/maintreewidget.cpp:611
+#, fuzzy, kde-format
+msgid "Diff local changes"
+msgstr "ローカルの変更を Diff"
+
+#: src/svnfrontend/maintreewidget.cpp:610
+#: src/svnfrontend/maintreewidget.cpp:612
+#, fuzzy, kde-format
+#| msgid ""
+#| "Diff working copy against BASE (last checked out version) - doesn't "
+#| "require access to repository"
+msgid ""
+"Diff working copy against BASE (last checked out version) - does not require "
+"access to repository"
+msgstr ""
+"BASE（最後にチェックアウトしたバージョン）に対する作業コピーの Diff にはリポ"
+"ジトリへのアクセスが必要ありません"
+
+#: src/svnfrontend/maintreewidget.cpp:615
+#, fuzzy, kde-format
+msgid "Diff against HEAD"
+msgstr "&HEAD に対して Diff"
+
+#: src/svnfrontend/maintreewidget.cpp:616
+#, fuzzy, kde-format
+msgid ""
+"Diff working copy against HEAD (last checked in version)- requires access to "
+"repository"
+msgstr ""
+"HEAD（最後にチェックインしたバージョン）に対して作業コピーを Diff するにはリ"
+"ポジトリへのアクセスが必要です"
+
+#: src/svnfrontend/maintreewidget.cpp:619
+#: src/svnfrontend/maintreewidget.cpp:622
+#, fuzzy, kde-format
+msgid "Diff items"
+msgstr "項目を Diff"
+
+#: src/svnfrontend/maintreewidget.cpp:620
+#: src/svnfrontend/maintreewidget.cpp:623
+#, fuzzy, kde-format
+msgid "Diff two items"
+msgstr "二つの項目を Diff します"
+
+#: src/svnfrontend/maintreewidget.cpp:627
+#, fuzzy, kde-format
+msgid "Merge two revisions"
+msgstr "二つのリビジョンをマージ(&T)"
+
+#: src/svnfrontend/maintreewidget.cpp:628
+#, fuzzy, kde-format
+msgid "Merge"
+msgstr "マージ"
+
+#: src/svnfrontend/maintreewidget.cpp:629
+#, fuzzy, kde-format
+msgid "Merge two revisions of this entry into itself"
+msgstr "このエントリの二つのリビジョンをそれ自体へマージします"
+
+#: src/svnfrontend/maintreewidget.cpp:632
+#, fuzzy, kde-format
+msgid "Merge..."
+msgstr "マージ(&M)..."
+
+#: src/svnfrontend/maintreewidget.cpp:633
+#, fuzzy, kde-format
+#| msgid "Switch repository path of current working copy path (\"svn switch\")"
+msgid ""
+"Merge repository path into current working copy path or current repository "
+"path into a target"
+msgstr ""
+"現在の作業コピーのパスのリポジトリのパスを切り替えます（「svn switch」）"
+
+#: src/svnfrontend/maintreewidget.cpp:634
+#: src/svnfrontend/maintreewidget.cpp:1152
+#: src/svnfrontend/maintreewidget.cpp:1220
+#, fuzzy, kde-format
+msgid "Open With..."
+msgstr "アプリケーションで開く..."
+
+#: src/svnfrontend/maintreewidget.cpp:638
+#, fuzzy, kde-format
+msgid "Checkout current repository path"
+msgstr "現在のリポジトリのパスをチェックアウト(&C)"
+
+#: src/svnfrontend/maintreewidget.cpp:639
+#: src/svnfrontend/maintreewidget.cpp:647
+#, fuzzy, kde-format
+msgid "Checkout"
+msgstr "チェックアウト"
+
+#: src/svnfrontend/maintreewidget.cpp:641
+#, fuzzy, kde-format
+msgid "Export current repository path"
+msgstr "現在のリポジトリのパスをエクスポート(&X)"
+
+#: src/svnfrontend/maintreewidget.cpp:642
+#, fuzzy, kde-format
+msgid "Select browse revision"
+msgstr "ブラウズするリビジョンを選択(&S)"
+
+#: src/svnfrontend/maintreewidget.cpp:646 src/svnfrontend/svnactions.cpp:1630
+#, fuzzy, kde-format
+msgid "Checkout a repository"
+msgstr "リポジトリをチェックアウト"
+
+#: src/svnfrontend/maintreewidget.cpp:648
+#, fuzzy, kde-format
+msgid "Export a repository"
+msgstr "リポジトリをエクスポート"
+
+#: src/svnfrontend/maintreewidget.cpp:649
+#, fuzzy, kde-format
+msgid "Export"
+msgstr "エクスポート"
+
+#: src/svnfrontend/maintreewidget.cpp:650
+#, fuzzy, kde-format
+msgid "Refresh view"
+msgstr "ビューを更新(&R)"
+
+#: src/svnfrontend/maintreewidget.cpp:651
+#, fuzzy, kde-format
+msgid "Refresh"
+msgstr "更新"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DispSpecDiff)
+#: src/svnfrontend/maintreewidget.cpp:653 src/svnfrontend/svnlogdlg.ui:211
+#, fuzzy, kde-format
+msgid "Diff revisions"
+msgstr "リビジョンを Diff"
+
+#: src/svnfrontend/maintreewidget.cpp:656
+#, fuzzy, kde-format
+msgid "Unfold File Tree"
+msgstr "ファイルツリーを展開(&U)"
+
+#: src/svnfrontend/maintreewidget.cpp:657
+#, fuzzy, kde-format
+msgid "Opens all branches of the file tree"
+msgstr "ファイルツリーのすべてのブランチを開きます"
+
+#: src/svnfrontend/maintreewidget.cpp:658
+#, fuzzy, kde-format
+msgid "Fold File Tree"
+msgstr "ファイルツリーをたたむ(&F)"
+
+#: src/svnfrontend/maintreewidget.cpp:659
+#, fuzzy, kde-format
+msgid "Closes all branches of the file tree"
+msgstr "ファイルツリーのすべてのブランチを閉じます"
+
+#: src/svnfrontend/maintreewidget.cpp:662
+#: src/svnfrontend/maintreewidget.cpp:839
+#: src/svnfrontend/maintreewidget.cpp:1789
+#: src/svnfrontend/maintreewidget.cpp:1805
+#, fuzzy, kde-format
+msgid "Update log cache"
+msgstr "ログキャッシュを更新"
+
+#: src/svnfrontend/maintreewidget.cpp:663
+#, fuzzy, kde-format
+msgid "Update the log cache for current repository"
+msgstr "現在のリポジトリに対するログキャッシュを更新します"
+
+#: src/svnfrontend/maintreewidget.cpp:667
+#, fuzzy, kde-format
+#| msgid "Make operation recursive."
+msgid "Set property recursive"
+msgstr "操作を再帰的にします。"
+
+#: src/svnfrontend/maintreewidget.cpp:669
+#, fuzzy, kde-format
+msgid "Settings for current repository"
+msgstr "現在のリポジトリに対する設定(&F)"
+
+#: src/svnfrontend/maintreewidget.cpp:841
+#: src/svnfrontend/maintreewidget.cpp:1800
+#, fuzzy, kde-format
+#| msgid "Stop updating the logcache"
+msgid "Stop updating the log cache"
+msgstr "ログキャッシュの更新を停止"
+
+#: src/svnfrontend/maintreewidget.cpp:1037
+#, fuzzy, kde-format
+#| msgid "Enter authentication info for"
+msgctxt "@title:window"
+msgid "Edit Pattern to Ignore for \"%1\""
+msgstr "以下に対する認証情報を入力"
+
+#: src/svnfrontend/maintreewidget.cpp:1314
+#: src/svnfrontend/maintreewidget.cpp:1358
+#, fuzzy, kde-format
+msgid "Nothing selected for unlock"
+msgstr "ロック解除するために選択されたものがありません"
+
+#: src/svnfrontend/maintreewidget.cpp:1318
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Lock Message"
+msgstr "ロックメッセージ"
+
+#: src/svnfrontend/maintreewidget.cpp:1325
+#, fuzzy, kde-format
+msgid "Steal lock?"
+msgstr "ロックを横取り？"
+
+#: src/svnfrontend/maintreewidget.cpp:1362
+#, fuzzy, kde-format
+msgid "Break lock or ignore missing locks?"
+msgstr "ロックを壊すか、欠けているロックを無視しますか？"
+
+#: src/svnfrontend/maintreewidget.cpp:1363
+#, fuzzy, kde-format
+msgid "Unlocking items"
+msgstr "項目のロックを解除しています"
+
+#: src/svnfrontend/maintreewidget.cpp:1650
+#, fuzzy, kde-format
+msgid "Nothing selected for delete"
+msgstr "削除するために選択されたものがありません"
+
+#: src/svnfrontend/maintreewidget.cpp:1822
+#, fuzzy, kde-format
+msgid "Automatic generated base layout by kdesvn"
+msgstr "kdesvn によって自動的に生成された基本レイアウト"
+
+#: src/svnfrontend/maintreewidget.cpp:1835
+#, fuzzy, kde-format
+#| msgid "May not make subdirs of a file"
+msgid "May not make subdirectories of a file"
+msgstr "ファイルのサブディレクトリは作れません"
+
+#: src/svnfrontend/maintreewidget.cpp:1944 src/svnfrontend/svnactions.cpp:2182
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Merge"
+msgstr "マージ"
+
+#: src/svnfrontend/maintreewidget.cpp:1997
+#, fuzzy, kde-format
+msgid "Error getting entry to relocate"
+msgstr "移動するエントリを取得しているときにエラー"
+
+#: src/svnfrontend/maintreewidget.cpp:2003
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Relocate Path %1"
+msgstr "移動パス %1"
+
+#: src/svnfrontend/maintreewidget.cpp:2017 src/svnfrontend/svnactions.cpp:1629
+#: src/svnfrontend/svnactions.cpp:1875
+#, kde-format
+msgid "Invalid url given!"
+msgstr ""
+
+#: src/svnfrontend/maintreewidget.cpp:2018
+#, fuzzy, kde-format
+msgid "Relocate path %1"
+msgstr "移動パス %1"
+
+#: src/svnfrontend/maintreewidget.cpp:2041
+#, fuzzy, kde-format
+#| msgid "Cannot import into multiple targets!"
+msgid "Cannot import into multiple targets"
+msgstr "複数の対象にインポートできません！"
+
+#: src/svnfrontend/maintreewidget.cpp:2055
+#, kde-format
+msgid "Import files from folder"
+msgstr ""
+
+#: src/svnfrontend/maintreewidget.cpp:2057
+#, fuzzy, kde-format
+#| msgid "Import log"
+msgid "Import file"
+msgstr "インポートログ"
+
+#: src/svnfrontend/maintreewidget.cpp:2079
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Import Log"
+msgstr "インポートログ"
+
+#: src/svnfrontend/maintreewidget.cpp:2137
+#, fuzzy, kde-format
+msgid "Could not retrieve repository of working copy."
+msgstr "作業コピーのリポジトリを取り出せませんでした。"
+
+#: src/svnfrontend/maintreewidget.cpp:2146
+#, fuzzy, kde-format
+msgid "Only in working copy possible."
+msgstr "作業コピー内のみで可能です。"
+
+#: src/svnfrontend/maintreewidget.cpp:2146
+#: src/svnfrontend/maintreewidget.cpp:2150
+#: src/svnfrontend/maintreewidget.cpp:2155
+#, fuzzy, kde-format
+msgid "Error"
+msgstr "エラー"
+
+#: src/svnfrontend/maintreewidget.cpp:2150
+#, fuzzy, kde-format
+msgid "Only on single folder possible"
+msgstr "単一のフォルダ上のみで可能です"
+
+#: src/svnfrontend/maintreewidget.cpp:2155
+#, fuzzy, kde-format
+#| msgid "Sorry - internal error!"
+msgid "Sorry - internal error"
+msgstr "すいません - 内部エラー！"
+
+#: src/svnfrontend/maintreewidget.cpp:2219
+#, fuzzy, kde-format
+#| msgid "Hold CTRL key while click on selected item for unselect"
+msgid "Hold Ctrl key while click on selected item for unselect"
+msgstr ""
+"非選択にするには選択した項目をクリックしている間 CTRL キーを押したままにしま"
+"す"
+
+#. i18n: ectx: property (toolTip), widget (QTreeView, m_LogTreeView)
+#. i18n: ectx: property (toolTip), widget (QTreeWidget, m_ChangedList)
+#: src/svnfrontend/maintreewidget.cpp:2222 src/svnfrontend/svnlogdlg.ui:114
+#: src/svnfrontend/svnlogdlg.ui:148
+#, fuzzy, kde-format
+msgid "See context menu for more actions"
+msgstr "更なる操作については項目上のコンテキストメニューを参照してください"
+
+#: src/svnfrontend/maintreewidget.cpp:2225
+#, fuzzy, kde-format
+msgid "Click for navigate"
+msgstr "ナビゲートするにはクリックしてください"
+
+#: src/svnfrontend/maintreewidget.cpp:2228
+#, fuzzy, kde-format
+msgid "Navigation"
+msgstr "ナビゲーション"
+
+#: src/svnfrontend/maintreewidget.cpp:2349
+#, fuzzy, kde-format
+msgid "Could not retrieve repository."
+msgstr "リポジトリを取得できませんでした。"
+
+#: src/svnfrontend/maintreewidget.cpp:2379
+#, kde-format
+msgid "Not yet implemented"
+msgstr ""
+
+#: src/svnfrontend/maintreewidget.cpp:2379
+#, fuzzy, kde-format
+#| msgid "Make operation recursive."
+msgid "Edit property recursively"
+msgstr "操作を再帰的にします。"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, MergeDlg)
+#: src/svnfrontend/merge_dlg.ui:14
+#, fuzzy, kde-format
+msgid "MergeSettings"
+msgstr "MergeSettings"
+
+#. i18n: ectx: property (text), widget (QLabel, m_SrcOneLabel)
+#: src/svnfrontend/merge_dlg.ui:22
+#, fuzzy, kde-format
+msgid "Source 1:"
+msgstr "ソース 1："
+
+#. i18n: ectx: property (text), widget (QLabel, m_SrcTwoLabel)
+#: src/svnfrontend/merge_dlg.ui:38
+#, fuzzy, kde-format
+msgid "Source 2:"
+msgstr "ソース 2："
+
+#. i18n: ectx: property (text), widget (QLabel, m_OutLabel)
+#: src/svnfrontend/merge_dlg.ui:54
+#, fuzzy, kde-format
+msgid "Output to:"
+msgstr "出力先："
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_MergeParameter)
+#: src/svnfrontend/merge_dlg.ui:72
+#, kde-format
+msgid "Merge parameter"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RecursiveCheck)
+#: src/svnfrontend/merge_dlg.ui:90
+#, fuzzy, kde-format
+msgid "Recursive"
+msgstr "再帰"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_RelatedCheck)
+#: src/svnfrontend/merge_dlg.ui:103
+#, fuzzy, kde-format
+msgid "Handle unrelated as related items"
+msgstr "関連していないものを関連した項目として扱う"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RelatedCheck)
+#: src/svnfrontend/merge_dlg.ui:106
+#, fuzzy, kde-format
+msgid "Ignore ancestry"
+msgstr "外部を無視"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_ForceCheck)
+#: src/svnfrontend/merge_dlg.ui:113
+#, fuzzy, kde-format
+msgid "Force delete on modified/unversioned items"
+msgstr "削除された/バージョン付けされていないものを強制的に削除"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_Reintegrate)
+#: src/svnfrontend/merge_dlg.ui:126
+#, kde-format
+msgid "lump-merge all of source URL's unmerged changes"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_Reintegrate)
+#: src/svnfrontend/merge_dlg.ui:132
+#, fuzzy, kde-format
+msgid "Reintegrate merge"
+msgstr "外部モジュールを更新"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_DryCheck)
+#: src/svnfrontend/merge_dlg.ui:139
+#, fuzzy, kde-format
+msgid "Just dry run without modifications"
+msgstr "変更なしでリハーサルだけ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_DryCheck)
+#: src/svnfrontend/merge_dlg.ui:142
+#, kde-format
+msgid "Dry run"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_RecordOnly)
+#: src/svnfrontend/merge_dlg.ui:152
+#, kde-format
+msgid "Only write mergeinfo"
+msgstr ""
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_RecordOnly)
+#: src/svnfrontend/merge_dlg.ui:155
+#, kde-format
+msgid ""
+"The merge is not actually performed, but the mergeinfo for the revisions "
+"which would have been merged is recorded in the working copy"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RecordOnly)
+#: src/svnfrontend/merge_dlg.ui:158
+#, kde-format
+msgid "Record only"
+msgstr ""
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_useExternMerge)
+#: src/svnfrontend/merge_dlg.ui:165
+#, fuzzy, kde-format
+#| msgid "Use external merge not subversions merge"
+msgid "Use external merge not Subversion's merge"
+msgstr "subversion の merge ではなく外部マージを使う"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_useExternMerge)
+#: src/svnfrontend/merge_dlg.ui:168
+#, fuzzy, kde-format
+msgid "Use external merge"
+msgstr "外部モジュールを更新"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_AllowMixedRev)
+#: src/svnfrontend/merge_dlg.ui:175
+#, kde-format
+msgid ""
+"If checked, allow merge into mixed revision working copy, otherwise raises "
+"error in that case"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_AllowMixedRev)
+#: src/svnfrontend/merge_dlg.ui:179
+#, kde-format
+msgid ""
+"Merge into mixed revision\n"
+"working copy"
+msgstr ""
+
+#: src/svnfrontend/mergedlg_impl.cpp:190
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Enter Merge Range"
+msgstr "マージ範囲を入力"
+
+#: src/svnfrontend/models/logitemmodel.cpp:181
+#, fuzzy, kde-format
+msgid "Message"
+msgstr "メッセージ"
+
+#: src/svnfrontend/models/logmodelhelper.cpp:43
+#, fuzzy, kde-format
+msgid "%1 at revision %2"
+msgstr "リビジョン %2 での %1"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:314
+#: src/svnfrontend/svnactions.cpp:736
+#, fuzzy, kde-format
+msgid "Name"
+msgstr "名前"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:316
+#, fuzzy, kde-format
+msgid "Status"
+msgstr "状態"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:318
+#, fuzzy, kde-format
+msgid "Last changed Revision"
+msgstr "最終変更リビジョン"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:320
+#: src/svnfrontend/svnactions.cpp:795
+#, fuzzy, kde-format
+msgid "Last author"
+msgstr "最後の作成者"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:322
+#, fuzzy, kde-format
+msgid "Last change date"
+msgstr "最終変更日付"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:324
+#, fuzzy, kde-format
+msgid "Locked by"
+msgstr "ロックした人"
+
+#: src/svnfrontend/opencontextmenu.cpp:60
+#, fuzzy, kde-format
+msgid "Other..."
+msgstr "その他..."
+
+#: src/svnfrontend/propertiesdlg.cpp:89
+#, fuzzy, kde-format
+msgid "Undelete property"
+msgstr "属性を復活"
+
+#: src/svnfrontend/propertiesdlg.cpp:91
+#, fuzzy, kde-format
+msgid "Delete property"
+msgstr "属性を削除"
+
+#: src/svnfrontend/propertiesdlg.cpp:98
+#, fuzzy, kde-format
+msgid "Missing SVN link"
+msgstr "SVN リンクが無くなっています"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, PropertiesDlg)
+#: src/svnfrontend/propertiesdlg.ui:14
+#, fuzzy, kde-format
+msgid "View and modify properties"
+msgstr "属性の表示と変更"
+
+#. i18n: ectx: property (text), widget (QPushButton, pbAdd)
+#: src/svnfrontend/propertiesdlg.ui:39
+#, fuzzy, kde-format
+msgid "Add Property"
+msgstr "属性を追加"
+
+#. i18n: ectx: property (text), widget (QPushButton, pbModify)
+#: src/svnfrontend/propertiesdlg.ui:46
+#, fuzzy, kde-format
+msgid "Modify Property"
+msgstr "属性を変更"
+
+#. i18n: ectx: property (text), widget (QPushButton, pbDelete)
+#: src/svnfrontend/propertiesdlg.ui:53
+#, fuzzy, kde-format
+msgid "Delete Property"
+msgstr "属性を削除"
+
+#: src/svnfrontend/stopdlg.cpp:195
+#, fuzzy, kde-format
+msgid "%p% of %1"
+msgstr "%1 のうち %p%"
+
+#: src/svnfrontend/stopdlg.cpp:203
+#, fuzzy, kde-format
+msgid "%1 of %2"
+msgstr "%2 のうち %1"
+
+#: src/svnfrontend/svnactions.cpp:186
+#, fuzzy, kde-format
+msgid "Finished"
+msgstr "完了しました"
+
+#: src/svnfrontend/svnactions.cpp:332
+#, fuzzy, kde-format
+msgid "Got no logs"
+msgstr "ログが何も取得できませんでした"
+
+#: src/svnfrontend/svnactions.cpp:457
+#, fuzzy, kde-format
+msgid "Got no info."
+msgstr "情報が何も取得できませんでした。"
+
+#: src/svnfrontend/svnactions.cpp:494
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "History of %1"
+msgstr "%1 の履歴"
+
+#: src/svnfrontend/svnactions.cpp:537
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Annotate"
+msgstr "注釈"
+
+#: src/svnfrontend/svnactions.cpp:537
+#, fuzzy, kde-format
+#| msgid "Annotate lines - hit cancel for abort"
+msgid "Annotate lines - hit Cancel for abort"
+msgstr "行を注釈 - 中止するにはキャンセルを押してください"
+
+#: src/svnfrontend/svnactions.cpp:545
+#, fuzzy, kde-format
+msgid "Got no annotate"
+msgstr "注釈が何も取得できませんでした"
+
+#: src/svnfrontend/svnactions.cpp:564
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Content Get"
+msgstr "内容"
+
+#: src/svnfrontend/svnactions.cpp:564
+#, fuzzy, kde-format
+#| msgid "Getting content - hit cancel for abort"
+msgid "Getting content - hit Cancel for abort"
+msgstr "中身を取得しています - 中止するにはキャンセルを押してください"
+
+#: src/svnfrontend/svnactions.cpp:571
+#, fuzzy, kde-format
+msgid "Error getting content"
+msgstr "中身を取得しているときにエラー"
+
+#: src/svnfrontend/svnactions.cpp:584
+#, fuzzy, kde-format
+msgid "Error while open temporary file"
+msgstr "一時ファイルを開いているときにエラー"
+
+#: src/svnfrontend/svnactions.cpp:624
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Content of %1"
+msgstr "%1 の中身"
+
+#: src/svnfrontend/svnactions.cpp:634
+#, fuzzy, kde-format
+msgid "Got no content."
+msgstr "中身が何も取得できませんでした。"
+
+#: src/svnfrontend/svnactions.cpp:658
+#, fuzzy, kde-format
+msgid "Enter folder name:"
+msgstr "フォルダ名を入力："
+
+#: src/svnfrontend/svnactions.cpp:697
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Details"
+msgstr "詳細(&D)"
+
+#: src/svnfrontend/svnactions.cpp:697
+#, fuzzy, kde-format
+#| msgid "Retrieving infos - hit cancel for abort"
+msgid "Retrieving information - hit Cancel for abort"
+msgstr "情報を取得しています - 中止するにはキャンセルを押してください"
+
+#: src/svnfrontend/svnactions.cpp:739
+#, fuzzy, kde-format
+msgid "URL"
+msgstr "URL"
+
+#: src/svnfrontend/svnactions.cpp:741
+#, fuzzy, kde-format
+#| msgid "Canonical repository url"
+msgid "Canonical repository URL"
+msgstr "基準リポジトリ url"
+
+#: src/svnfrontend/svnactions.cpp:744
+#, fuzzy, kde-format
+msgid "Checksum"
+msgstr "チェックサム"
+
+#: src/svnfrontend/svnactions.cpp:747
+#, fuzzy, kde-format
+msgid "Type"
+msgstr "種類"
+
+#: src/svnfrontend/svnactions.cpp:750
+#, fuzzy, kde-format
+msgid "Absent"
+msgstr "不在"
+
+#: src/svnfrontend/svnactions.cpp:753
+#, fuzzy, kde-format
+msgid "File"
+msgstr "ファイル"
+
+#: src/svnfrontend/svnactions.cpp:756
+#, fuzzy, kde-format
+msgid "Folder"
+msgstr "フォルダ"
+
+#: src/svnfrontend/svnactions.cpp:760 src/svnfrontend/svnactions.cpp:789
+#, fuzzy, kde-format
+msgid "Unknown"
+msgstr "不明"
+
+#: src/svnfrontend/svnactions.cpp:765
+#, fuzzy, kde-format
+msgid "Size"
+msgstr "サイズ"
+
+#: src/svnfrontend/svnactions.cpp:774
+#, fuzzy, kde-format
+msgid "Schedule"
+msgstr "スケジュール"
+
+#: src/svnfrontend/svnactions.cpp:777
+#, fuzzy, kde-format
+msgid "Normal"
+msgstr "通常"
+
+#: src/svnfrontend/svnactions.cpp:780
+#, fuzzy, kde-format
+msgid "Addition"
+msgstr "追加"
+
+#: src/svnfrontend/svnactions.cpp:783
+#, fuzzy, kde-format
+msgid "Deletion"
+msgstr "削除"
+
+#: src/svnfrontend/svnactions.cpp:793
+#, fuzzy, kde-format
+msgid "UUID"
+msgstr "UUID"
+
+#: src/svnfrontend/svnactions.cpp:797
+#, fuzzy, kde-format
+msgid "Last committed"
+msgstr "最後のコミット"
+
+#: src/svnfrontend/svnactions.cpp:799
+#, fuzzy, kde-format
+msgid "Last revision"
+msgstr "最後のリビジョン"
+
+#: src/svnfrontend/svnactions.cpp:801
+#, fuzzy, kde-format
+msgid "Content last changed"
+msgstr "中身の最終変更"
+
+#: src/svnfrontend/svnactions.cpp:805
+#, fuzzy, kde-format
+msgid "Property last changed"
+msgstr "最後に変更した属性"
+
+#: src/svnfrontend/svnactions.cpp:808
+#, fuzzy, kde-format
+msgid "New version of conflicted file"
+msgstr "衝突したファイルの新しいバージョン"
+
+#: src/svnfrontend/svnactions.cpp:811
+#, fuzzy, kde-format
+msgid "Property reject file"
+msgstr "属性が拒否したファイル"
+
+#: src/svnfrontend/svnactions.cpp:816
+#, fuzzy, kde-format
+msgid "Copy from URL"
+msgstr "URL からのコピー"
+
+#: src/svnfrontend/svnactions.cpp:819 src/svnfrontend/svnactions.cpp:829
+#, fuzzy, kde-format
+msgid "Lock token"
+msgstr "ロックトークン"
+
+#: src/svnfrontend/svnactions.cpp:820 src/svnfrontend/svnactions.cpp:830
+#, fuzzy, kde-format
+msgid "Owner"
+msgstr "所有者"
+
+#: src/svnfrontend/svnactions.cpp:821 src/svnfrontend/svnactions.cpp:831
+#, fuzzy, kde-format
+msgid "Locked on"
+msgstr "ロック日時"
+
+#: src/svnfrontend/svnactions.cpp:824 src/svnfrontend/svnactions.cpp:834
+#, fuzzy, kde-format
+msgid "Lock comment"
+msgstr "ロックコメント"
+
+#: src/svnfrontend/svnactions.cpp:882
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Infolist"
+msgstr "情報リスト"
+
+#: src/svnfrontend/svnactions.cpp:921
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Applying Properties"
+msgstr "属性を表示"
+
+#: src/svnfrontend/svnactions.cpp:921
+#, kde-format
+msgid "<center>Applying<br/>hit cancel for abort</center>"
+msgstr ""
+
+#: src/svnfrontend/svnactions.cpp:959
+#, fuzzy, kde-format
+msgid "Could not change to folder %1\n"
+msgstr "フォルダ %1 に移動できませんでした\n"
+
+#: src/svnfrontend/svnactions.cpp:978
+#, fuzzy, kde-format
+msgid "Not commit because networking is disabled"
+msgstr "ネットワークが無効なのでコミットしていません"
+
+#: src/svnfrontend/svnactions.cpp:1000 src/svnfrontend/svnactions.cpp:2338
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Status / List"
+msgstr "状態とリスト"
+
+#: src/svnfrontend/svnactions.cpp:1000 src/svnfrontend/svnactions.cpp:2338
+#, fuzzy, kde-format
+msgid "Creating list / check status"
+msgstr "リストの作成と状態の確認"
+
+#: src/svnfrontend/svnactions.cpp:1022
+#, fuzzy, kde-format
+msgid "Delete and Commit"
+msgstr "削除とコミット"
+
+#: src/svnfrontend/svnactions.cpp:1024
+#, fuzzy, kde-format
+msgid "Add and Commit"
+msgstr "追加とコミット"
+
+#: src/svnfrontend/svnactions.cpp:1055
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Commit"
+msgstr "コミット"
+
+#: src/svnfrontend/svnactions.cpp:1055
+#, fuzzy, kde-format
+#| msgid "Commit - hit cancel for abort"
+msgid "Commit - hit Cancel for abort"
+msgstr "コミット- 中止するにはキャンセルを押してください"
+
+#: src/svnfrontend/svnactions.cpp:1081
+#, kde-format
+msgctxt "@title:window"
+msgid "Downloading"
+msgstr ""
+
+#: src/svnfrontend/svnactions.cpp:1081
+#, fuzzy, kde-format
+#| msgid "Download - hit cancel for abort"
+msgid "Download - hit Cancel for abort"
+msgstr "ダウンロード - 中止するにはキャンセルを押してください"
+
+#: src/svnfrontend/svnactions.cpp:1108
+#, fuzzy, kde-format
+msgid "Can not do this diff because networking is disabled."
+msgstr "ネットワークが無効なのでこの diff を行えません。"
+
+#: src/svnfrontend/svnactions.cpp:1156
+#, fuzzy, kde-format
+msgid "Both entries seems to be the same, can not diff."
+msgstr "両方のエントリが同じようなので、diff できません。"
+
+#: src/svnfrontend/svnactions.cpp:1221
+#, fuzzy, kde-format
+msgid "Diff-process could not started, check command."
+msgstr "Diff プロセスが起動できませんでした。コマンドを確認してください。"
+
+#: src/svnfrontend/svnactions.cpp:1265 src/svnfrontend/svnactions.cpp:1318
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Diffing"
+msgstr "項目を Diff"
+
+#: src/svnfrontend/svnactions.cpp:1265
+#, fuzzy, kde-format
+#| msgid "Diffing - hit cancel for abort"
+msgid "Diffing - hit Cancel for abort"
+msgstr "Diff しています - 中止するにはキャンセルを押してください"
+
+#: src/svnfrontend/svnactions.cpp:1278 src/svnfrontend/svnactions.cpp:1327
+#, fuzzy, kde-format
+msgid "No difference to display"
+msgstr "表示する違いがありません"
+
+#: src/svnfrontend/svnactions.cpp:1318
+#, fuzzy, kde-format
+#| msgid "Diffing - hit cancel for abort"
+msgid "Diffing - hit cancel for abort"
+msgstr "Diff しています - 中止するにはキャンセルを押してください"
+
+#: src/svnfrontend/svnactions.cpp:1376
+#, fuzzy, kde-format
+#| msgid "Display-process could not started, check command."
+msgid "Display process could not started, check command."
+msgstr "表示プロセスが起動できませんでした。コマンドを確認してください。"
+
+#: src/svnfrontend/svnactions.cpp:1389
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Diff Display"
+msgstr "Diff 表示"
+
+#: src/svnfrontend/svnactions.cpp:1438
+#, fuzzy, kde-format
+#| msgid "Check updates"
+msgctxt "@title:window"
+msgid "Making update"
+msgstr "更新を確認"
+
+#: src/svnfrontend/svnactions.cpp:1438
+#, fuzzy, kde-format
+#| msgid "Making update - hit cancel for abort"
+msgid "Making update - hit Cancel for abort"
+msgstr "更新しています - 中止するにはキャンセルを押してください"
+
+#: src/svnfrontend/svnactions.cpp:1526
+#, fuzzy, kde-format
+msgid "Which files or directories should I add?"
+msgstr "どのファイルやディレクトリを追加しますか？"
+
+#: src/svnfrontend/svnactions.cpp:1533
+#, fuzzy, kde-format
+msgid "<center>The entry<br/>%1<br/>is versioned - break.</center>"
+msgstr ""
+"<center>エントリ <br>%1<br> はバージョンづけされています - 中止します。</"
+"center>"
+
+#: src/svnfrontend/svnactions.cpp:1562
+#, fuzzy, kde-format
+msgid "Delete from repository"
+msgstr "リポジトリから削除"
+
+#: src/svnfrontend/svnactions.cpp:1611
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Export a Repository"
+msgstr "リポジトリをエクスポート"
+
+#: src/svnfrontend/svnactions.cpp:1611
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Checkout a Repository"
+msgstr "リポジトリをチェックアウト"
+
+#: src/svnfrontend/svnactions.cpp:1630
+#, fuzzy, kde-format
+msgid "Export repository"
+msgstr "リポジトリをエクスポート"
+
+#: src/svnfrontend/svnactions.cpp:1657
+#, fuzzy, kde-format
+msgid "Exporting a file?"
+msgstr "ファイルをエクスポートしますか？"
+
+#: src/svnfrontend/svnactions.cpp:1657
+#, fuzzy, kde-format
+msgid "Checking out a file?"
+msgstr "ファイルをチェックアウトしますか？"
+
+#: src/svnfrontend/svnactions.cpp:1703
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Export"
+msgstr "エクスポート"
+
+#: src/svnfrontend/svnactions.cpp:1703
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Checkout"
+msgstr "チェックアウト"
+
+#: src/svnfrontend/svnactions.cpp:1703
+#, fuzzy, kde-format
+msgid "Exporting"
+msgstr "エクスポートしています"
+
+#: src/svnfrontend/svnactions.cpp:1703
+#, fuzzy, kde-format
+msgid "Checking out"
+msgstr "チェックアウトしています"
+
+#: src/svnfrontend/svnactions.cpp:1740
+#, fuzzy, kde-format
+msgid "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
+msgstr ""
+"<center>エントリ <br>%1<br> はバージョンづけされていません - 中止します。</"
+"center>"
+
+#: src/svnfrontend/svnactions.cpp:1773
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Revert"
+msgstr "取り消し"
+
+#: src/svnfrontend/svnactions.cpp:1773
+#, fuzzy, kde-format
+msgid "Reverting items"
+msgstr "項目を元に戻しています"
+
+#: src/svnfrontend/svnactions.cpp:1803 src/svnfrontend/svnactions.cpp:1865
+#, fuzzy, kde-format
+#| msgid "Switch url"
+msgctxt "@title:window"
+msgid "Switch URL"
+msgstr "url を切り替え"
+
+#: src/svnfrontend/svnactions.cpp:1803
+#, fuzzy, kde-format
+#| msgid "Switching url"
+msgid "Switching URL"
+msgstr "url を切り替えています"
+
+#: src/svnfrontend/svnactions.cpp:1823
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Relocate Repository"
+msgstr "リポジトリを削除"
+
+#: src/svnfrontend/svnactions.cpp:1823
+#, fuzzy, kde-format
+msgid "Relocate repository to new URL"
+msgstr "リポジトリを新しい URL に移動"
+
+#: src/svnfrontend/svnactions.cpp:1846
+#, fuzzy, kde-format
+msgid "Can only switch one item at time"
+msgstr "一度に一つの項目だけ切り替えられます"
+
+#: src/svnfrontend/svnactions.cpp:1852
+#, fuzzy, kde-format
+msgid "Error getting entry to switch"
+msgstr "切り替えるエントリを取得しているときにエラー"
+
+#: src/svnfrontend/svnactions.cpp:1876
+#, fuzzy, kde-format
+#| msgid "Switch url"
+msgid "Switch URL"
+msgstr "url を切り替え"
+
+#: src/svnfrontend/svnactions.cpp:1894
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Cleanup"
+msgstr "クリーンアップ"
+
+#: src/svnfrontend/svnactions.cpp:1894
+#, fuzzy, kde-format
+msgid "Cleaning up folder"
+msgstr "フォルダーをクリーンアップしています"
+
+#: src/svnfrontend/svnactions.cpp:1911
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Resolve"
+msgstr "解消"
+
+#: src/svnfrontend/svnactions.cpp:1911
+#, fuzzy, kde-format
+msgid "Marking resolved"
+msgstr "解消したとマークしています"
+
+#: src/svnfrontend/svnactions.cpp:1943
+#, fuzzy, kde-format
+msgid "Could not retrieve conflict information - giving up."
+msgstr "衝突情報を取り出せませんでした - 断念しています。"
+
+#: src/svnfrontend/svnactions.cpp:1970
+#, fuzzy, kde-format
+msgid "Resolve-process could not started, check command."
+msgstr "解消プロセスを起動できませんでした。コマンドを確認してください。"
+
+#: src/svnfrontend/svnactions.cpp:1982
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Import"
+msgstr "インポート"
+
+#: src/svnfrontend/svnactions.cpp:1982
+#, fuzzy, kde-format
+msgid "Importing items"
+msgstr "項目をインポートしています"
+
+#: src/svnfrontend/svnactions.cpp:2006
+#, fuzzy, kde-format
+msgid "Nothing to merge."
+msgstr "マージするものがありません。"
+
+#: src/svnfrontend/svnactions.cpp:2010
+#, fuzzy, kde-format
+msgid "No destination to merge."
+msgstr "マージする先がありません"
+
+#: src/svnfrontend/svnactions.cpp:2029
+#, fuzzy, kde-format
+#| msgid "Both sources must be same type!"
+msgid "Both sources must be same type."
+msgstr "両方のソースは同じ種類でなければなりません！"
+
+#: src/svnfrontend/svnactions.cpp:2036
+#, fuzzy, kde-format
+#| msgid "Target for merge must same type like sources!"
+msgid "Target for merge must same type like sources."
+msgstr "マージの対象はソースと同じ種類でなければなりません！"
+
+#: src/svnfrontend/svnactions.cpp:2059
+#, fuzzy, kde-format
+#| msgid "Both entries seems to be the same, won't do a merge."
+msgid "Both entries seems to be the same, will not do a merge."
+msgstr "両方のエントリは同じようです。マージしません。"
+
+#: src/svnfrontend/svnactions.cpp:2123
+#, fuzzy, kde-format
+#| msgid "Merge-process could not started, check command."
+msgid "Merge process could not started, check command."
+msgstr "マージプロセスは起動できませんでした。コマンドを確認してください。"
+
+#: src/svnfrontend/svnactions.cpp:2182
+#, fuzzy, kde-format
+msgid "Merging items"
+msgstr "項目をマージしています"
+
+#: src/svnfrontend/svnactions.cpp:2209 src/svnfrontend/svnactions.cpp:2227
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Move"
+msgstr "移動"
+
+#: src/svnfrontend/svnactions.cpp:2209
+#, fuzzy, kde-format
+#| msgid "Moving/Rename item "
+msgid "Moving/Rename item"
+msgstr "項目を移動/名前変更しています"
+
+#: src/svnfrontend/svnactions.cpp:2227
+#, fuzzy, kde-format
+msgid "Moving entries"
+msgstr "エントリを移動しています"
+
+#: src/svnfrontend/svnactions.cpp:2247 src/svnfrontend/svnactions.cpp:2262
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Copy / Move"
+msgstr "コピーと移動"
+
+#: src/svnfrontend/svnactions.cpp:2247 src/svnfrontend/svnactions.cpp:2262
+#, fuzzy, kde-format
+msgid "Copy or Moving entries"
+msgstr "エントリをコピーまたは移動します"
+
+#: src/svnfrontend/svnactions.cpp:2370
+#, fuzzy, kde-format
+msgid "No unversioned items found."
+msgstr "バージョン付けされていない項目は見つかりませんでした。"
+
+#: src/svnfrontend/svnactions.cpp:2374
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Add Unversioned Items"
+msgstr "バージョン付けされていない項目を追加"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
+#: src/svnfrontend/svnactions.cpp:2377 src/svnfrontend/svnlogdlg.ui:163
+#, fuzzy, kde-format
+msgid "Item"
+msgstr "項目"
+
+#: src/svnfrontend/svnactions.cpp:2497
+#, fuzzy, kde-format
+msgid "Found %1 modified item"
+msgid_plural "Found %1 modified items"
+msgstr[0] "変更した項目に対する色："
+
+#: src/svnfrontend/svnactions.cpp:2526
+#, fuzzy, kde-format
+msgid "Checking for updates finished"
+msgstr "更新の確認が完了しました"
+
+#: src/svnfrontend/svnactions.cpp:2528
+#, fuzzy, kde-format
+msgid "There are new items in repository"
+msgstr "リポジトリに新しい項目があります"
+
+#: src/svnfrontend/svnactions.cpp:2598
+#, fuzzy, kde-format
+#| msgid "Not filling logcache because networking is disabled"
+msgid "Not filling log cache because networking is disabled"
+msgstr "ネットワークが無効なのでログキャッシュを充填していません"
+
+#: src/svnfrontend/svnactions.cpp:2640
+#, fuzzy, kde-format
+msgid "Not checking for updates because networking is disabled"
+msgstr "ネットワークが無効なので更新の確認をしていません"
+
+#: src/svnfrontend/svnactions.cpp:2647
+#, fuzzy, kde-format
+msgid "Checking for updates started in background"
+msgstr "更新の確認がバックグラウンドで始まりました"
+
+#: src/svnfrontend/svnitem.cpp:405 src/svnfrontend/svnitem.cpp:418
+#, fuzzy, kde-format
+msgid "Not versioned"
+msgstr "バージョン付けされていません"
+
+#: src/svnfrontend/svnitem.cpp:408
+#, fuzzy, kde-format
+msgid "Added in repository"
+msgstr "リポジトリ内に追加しました"
+
+#: src/svnfrontend/svnitem.cpp:410
+#, fuzzy, kde-format
+msgid "Needs update"
+msgstr "更新が必要です"
+
+#: src/svnfrontend/svnitem.cpp:422
+#, fuzzy, kde-format
+msgid "Locally modified"
+msgstr "ローカルで変更"
+
+#: src/svnfrontend/svnitem.cpp:424
+#, fuzzy, kde-format
+msgid "Property modified"
+msgstr "属性が変更されました"
+
+#: src/svnfrontend/svnitem.cpp:428
+#, fuzzy, kde-format
+msgid "Locally added"
+msgstr "ローカルに追加"
+
+#: src/svnfrontend/svnitem.cpp:431
+#, fuzzy, kde-format
+msgid "Missing"
+msgstr "ありません"
+
+#: src/svnfrontend/svnitem.cpp:437
+#, fuzzy, kde-format
+msgid "Replaced"
+msgstr "置き換えられました"
+
+#: src/svnfrontend/svnitem.cpp:440
+#, fuzzy, kde-format
+msgid "Ignored"
+msgstr "無視されました"
+
+#: src/svnfrontend/svnitem.cpp:443
+#, fuzzy, kde-format
+msgid "External"
+msgstr "外部"
+
+#: src/svnfrontend/svnitem.cpp:447
+#, fuzzy, kde-format
+msgid "Conflict"
+msgstr "衝突"
+
+#: src/svnfrontend/svnitem.cpp:449
+#, fuzzy, kde-format
+msgid "Property conflicted"
+msgstr "属性が変更されました"
+
+#: src/svnfrontend/svnitem.cpp:453
+#, fuzzy, kde-format
+msgid "Merged"
+msgstr "マージされました"
+
+#: src/svnfrontend/svnitem.cpp:456
+#, fuzzy, kde-format
+msgid "Incomplete"
+msgstr "不完全"
+
+#: src/svnfrontend/svnitem.cpp:459
+#, kde-format
+msgid "Obstructed"
+msgstr ""
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, LogDialog)
+#: src/svnfrontend/svnlogdlg.ui:18
+#, fuzzy, kde-format
+msgid "SVN Log"
+msgstr "SVN ログ"
+
+#. i18n: ectx: property (text), widget (QLabel, startLabel)
+#: src/svnfrontend/svnlogdlg.ui:31
+#, fuzzy, kde-format
+msgid "Start revision"
+msgstr "開始リビジョン"
+
+#. i18n: ectx: property (text), widget (QLabel, endLabel)
+#: src/svnfrontend/svnlogdlg.ui:41
+#, fuzzy, kde-format
+msgid "End revision"
+msgstr "終了リビジョン"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_goButton)
+#: src/svnfrontend/svnlogdlg.ui:57
+#, fuzzy, kde-format
+msgid "Get Logs"
+msgstr "ログを取得"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_PrevFiftyButton)
+#: src/svnfrontend/svnlogdlg.ui:64
+#, fuzzy, kde-format
+msgid "Previous entries"
+msgstr "前のエントリ"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_NextFiftyButton)
+#: src/svnfrontend/svnlogdlg.ui:71
+#, fuzzy, kde-format
+msgid "Show from HEAD"
+msgstr "HEAD から表示"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
+#: src/svnfrontend/svnlogdlg.ui:168
+#, fuzzy, kde-format
+msgid "Copy from"
+msgstr "コピー元"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DispPrevButton)
+#: src/svnfrontend/svnlogdlg.ui:189 src/svnfrontend/svnlogdlgimp.cpp:510
+#, fuzzy, kde-format
+msgid "Diff previous"
+msgstr "前と Diff"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DispSpecDiff)
+#: src/svnfrontend/svnlogdlg.ui:208
+#, fuzzy, kde-format
+msgid "Select second revision with right mouse button"
+msgstr "右マウスボタンで二番目のリビジョンを選択"
+
+#. i18n: ectx: property (text), widget (QPushButton, buttonListFiles)
+#: src/svnfrontend/svnlogdlg.ui:230
+#, fuzzy, kde-format
+msgid "List entries"
+msgstr "エントリをリストアップ"
+
+#. i18n: ectx: property (text), widget (QPushButton, buttonBlame)
+#: src/svnfrontend/svnlogdlg.ui:249 src/svnfrontend/svnlogdlgimp.cpp:505
+#, fuzzy, kde-format
+msgid "Annotate"
+msgstr "注釈"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_pbHelp)
+#: src/svnfrontend/svnlogdlg.ui:275
+#, fuzzy, kde-format
+msgid "Help"
+msgstr "ヘルプ(&H)"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_pbClose)
+#: src/svnfrontend/svnlogdlg.ui:282
+#, kde-format
+msgid "Close"
+msgstr ""
+
+#: src/svnfrontend/svnlogdlgimp.cpp:109
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "SVN Log of %1"
+msgstr "%1 の SVN ログ"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:111
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "SVN Log"
+msgstr "SVN ログ"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:435
+#, fuzzy, kde-format
+msgid "Set version as right side of diff"
+msgstr "バージョンを diff の右側に設定"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:441
+#, fuzzy, kde-format
+msgid "Set version as left side of diff"
+msgstr "バージョンを diff の左側に設定"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:447
+#, fuzzy, kde-format
+msgid "Unset version for diff"
+msgstr "diff のためのバージョンを解除"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:451
+#, fuzzy, kde-format
+#| msgid "Review items before commit"
+msgid "Revert this commit"
+msgstr "コミットする前に項目を再検討する(&R)"
+
+#: src/svnfrontend/svntreeview.cpp:123
+#, fuzzy, kde-format
+msgid "&Move Here"
+msgstr "ここに移動(&M)"
+
+#: src/svnfrontend/svntreeview.cpp:127
+#, fuzzy, kde-format
+msgid "&Copy Here"
+msgstr "ここにコピー(&C)"
+
+#: src/svnfrontend/svntreeview.cpp:129
+#, fuzzy, kde-format
+msgid "C&ancel"
+msgstr "キャンセル(&A)"
+
+#: src/urldlg.cpp:99
+#, fuzzy, kde-format
+msgctxt "@title:window"
+msgid "Open"
+msgstr "開く"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, UrlDlg)
+#: src/urldlg.ui:14
+#, fuzzy, kde-format
+msgid "Open repository / working copy"
+msgstr "作業コピーのリポジトリを開く(&O)"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/urldlg.ui:20
+#, fuzzy, kde-format
+msgid "Open repository or working copy"
+msgstr "リポジトリまたは作業コピーを開く"

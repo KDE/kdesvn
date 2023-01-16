@@ -1,0 +1,205 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Swedish "INCLUDE">
+]>
+
+<refentry lang="&language;" id='kdesvn1'>
+<refentryinfo>
+<title
+>Användarhandbok kdesvn</title>
+<author
+><personname
+> <firstname
+>Rajko</firstname
+> <surname
+>Albrecht</surname
+> </personname
+> <email
+>ral@alwins-world.de</email
+></author>
+<date
+>2016-05-22</date>
+<releaseinfo
+>kdesvn 2.1.0</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kdesvn</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kdesvn</command
+></refname>
+<refpurpose
+>En Subversion-klient av KDE (fristående program)</refpurpose>
+</refnamediv>
+<!-- body begins here -->
+<refsynopsisdiv id='synopsis'>
+<cmdsynopsis
+><command
+>kdesvn</command
+> <arg choice="opt"
+><replaceable
+>väljare</replaceable
+></arg
+> <arg choice="plain"
+><replaceable
+>kör</replaceable
+></arg
+> <arg choice="plain"
+><replaceable
+>&lt;kommando&gt;</replaceable
+></arg
+> <arg choice="opt"
+><replaceable
+>webbadress</replaceable
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+
+<refsect1 id='description'
+><title
+>Beskrivning</title>
+<para
+>En Subversion-klient av KDE (fristående program)</para>
+</refsect1>
+
+<refsect1 id='options'
+><title
+>Väljare</title>
+
+<refsect2 id='ss_arguments'
+><title
+>Argument:</title>
+<variablelist>
+  <varlistentry>
+  <term
+><emphasis
+>exec</emphasis
+> &lt;kommando&gt;</term>
+  <listitem
+><para
+>Kör Subversion-kommando ("exec help" för mer information, visar KDE:s hjälpcentral)</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><emphasis
+>webbadress</emphasis
+></term>
+  <listitem>
+<para
+>Sökväg till lokal arbetskopia eller ett arkiv.</para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</refsect2>
+
+<refsect2 id='options2'
+><title
+>Väljare:</title>
+<variablelist>
+  <varlistentry>
+  <term
+><option
+>-r startver[:endver]</option
+></term>
+  <listitem>
+<para
+>Kör ett enstaka Subversion-kommando för en specifik version (eller intervall)</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-R</option
+></term>
+  <listitem>
+<para
+>Fråga efter version när enstaka kommando utförs</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-f</option
+></term>
+  <listitem>
+<para
+>Tvinga åtgärd</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-o &lt;fil&gt;</option
+></term>
+  <listitem>
+<para
+>Spara utmatning från Subversion-kommando (t.ex. <quote
+>cat</quote
+>) i filen &lt;fil&gt;</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-l &lt;nummer&gt;</option
+></term>
+  <listitem>
+<para
+>Begränsa loggutmatning till &lt;nummer&gt;</para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</refsect2>
+
+</refsect1>
+
+<refsect1 id='example'>
+<title
+>Exempel</title>
+<para
+>kdesvn file:///<replaceable
+>sökväg/till/lokal/arbetskopia</replaceable
+></para>
+<para
+>kdesvn http://<replaceable
+>remote/svn/projekt/trunk</replaceable
+></para>
+</refsect1>
+
+<refsect1 id='see_also'>
+<title
+>Se också</title>
+<simplelist>
+<member
+>Fullständig användardokumentation är tillgänglig via Hjälpcentralen. Det går också att skriva in webbadressen <emphasis
+>help:/kdesvn/</emphasis
+> direkt i &konqueror;, eller köra <emphasis
+>'khelpcenter help:/kdesvn/'</emphasis
+> på kommandoraden.</member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
+</simplelist>
+</refsect1>
+
+<refsect1 id='authors'
+><title
+>Upphovsmän</title>
+<literallayout
+>Rajko Albrecht &lt;ral@alwins-world.de&gt;
+</literallayout
+></refsect1>
+</refentry>
+

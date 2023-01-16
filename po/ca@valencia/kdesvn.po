@@ -1,0 +1,5691 @@
+# Translation of kdesvn.po to Catalan (Valencian)
+# Copyright (C) 2006-2022 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# Antoni Bella Pérez <antonibella5@yahoo.com>, 2006, 2007, 2011, 2013, 2014, 2015, 2016, 2017, 2020, 2022.
+# Josep M. Ferrer <txemaq@gmail.com>, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdesvn\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-06-07 01:43+0000\n"
+"PO-Revision-Date: 2022-09-07 19:28+0200\n"
+"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
+"Language: ca@valencia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.12.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Accelerator-Marker: &\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Antoni Bella"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "antonibella5@yahoo.com"
+
+#: src/askpass/kdesvn-askpass.cpp:35
+#, kde-format
+msgid "kdesvnaskpass"
+msgstr "Kdesvnaskpass"
+
+#: src/askpass/kdesvn-askpass.cpp:36
+#, kde-format
+msgid "ssh-askpass for kdesvn"
+msgstr "ssh-askpass per a Kdesvn"
+
+#: src/askpass/kdesvn-askpass.cpp:38
+#, kde-format
+msgid "Copyright (c) 2005-2009 Rajko Albrecht"
+msgstr "Copyright (c) 2005-2009 Rajko Albrecht"
+
+#: src/askpass/kdesvn-askpass.cpp:43
+#, kde-format
+msgid "Prompt"
+msgstr "Pregunta"
+
+#: src/askpass/kdesvn-askpass.cpp:55
+#, kde-format
+msgid "Please enter your password below."
+msgstr "Introduïu la vostra contrasenya davall."
+
+#: src/askpass/kdesvn-askpass.cpp:76
+#, kde-format
+msgctxt "@title:window"
+msgid "Password"
+msgstr "Contrasenya"
+
+#: src/kdesvn.cpp:81
+#, kde-format
+msgid "&Bookmarks"
+msgstr "&Adreces d'interés"
+
+#: src/kdesvn.cpp:109
+#, kde-format
+msgid "Create and open new repository"
+msgstr "Crea i obri un repositori nou"
+
+#: src/kdesvn.cpp:110
+#, kde-format
+msgid "Create and opens a new local Subversion repository"
+msgstr "Crea i obri un repositori local nou de Subversion"
+
+#: src/kdesvn.cpp:115
+#, kde-format
+msgid "Dump repository to file"
+msgstr "Bolca un repositori a un fitxer"
+
+#: src/kdesvn.cpp:116
+#, kde-format
+msgid "Dump a Subversion repository to a file"
+msgstr "Bolca un repositori de Subversion a un fitxer"
+
+#: src/kdesvn.cpp:121
+#, kde-format
+msgid "Hotcopy a repository"
+msgstr "Copia un repositori"
+
+#: src/kdesvn.cpp:122
+#, kde-format
+msgid "Hotcopy a Subversion repository to a new folder"
+msgstr "Copia un repositori de Subversion a una carpeta nova"
+
+#: src/kdesvn.cpp:127
+#, kde-format
+msgid "Load dump into repository"
+msgstr "Carrega un bolcat dintre d'un repositori"
+
+#: src/kdesvn.cpp:128
+#, kde-format
+msgid "Load a dump file into a repository."
+msgstr "Carrega un fitxer de bolcat dintre d'un repositori."
+
+#: src/kdesvn.cpp:133
+#, kde-format
+msgid "Add ssh identities to ssh-agent"
+msgstr "Afig les identitats ssh al ssh-agent"
+
+#: src/kdesvn.cpp:134
+#, kde-format
+msgid "Force add ssh-identities to ssh-agent for future use."
+msgstr "Força afegir les identitats ssh al ssh-agent per a usos futurs."
+
+#: src/kdesvn.cpp:139
+#, kde-format
+msgid "Info about kdesvn part"
+msgstr "Informació quant a la part Kdesvn"
+
+#: src/kdesvn.cpp:140
+#, kde-format
+msgid "Shows info about the kdesvn plugin and not the standalone application."
+msgstr ""
+"Mostra la informació sobre el connector de Kdesvn i no de l'aplicació en si."
+
+#: src/kdesvn.cpp:145
+#, kde-format
+msgid "Show database content"
+msgstr "Mostra el contingut de la base de dades"
+
+#: src/kdesvn.cpp:146
+#, kde-format
+msgid "Show the content of log cache database"
+msgstr "Mostra el contingut de la base de dades del cau de registre"
+
+#: src/kdesvn.cpp:152
+#, kde-format
+msgid ""
+"Could not load the part:\n"
+"%1"
+msgstr ""
+"No s'ha pogut carregar la part:\n"
+"%1"
+
+#: src/kdesvn.cpp:159
+#, kde-format
+msgid ""
+"Could not find our part:\n"
+"%1"
+msgstr ""
+"No s'ha pogut trobar la nostra part:\n"
+"%1"
+
+#: src/kdesvn.cpp:190
+#, kde-format
+msgid "Could not open URL %1"
+msgstr "No s'ha pogut obrir l'URL %1"
+
+#: src/kdesvn.cpp:222
+#, kde-format
+msgid "Recent opened URLs"
+msgstr "Els URL oberts recentment"
+
+#: src/kdesvn.cpp:231
+#, kde-format
+msgid "Load last opened URL on start"
+msgstr "A l'inici carrega l'últim URL obert"
+
+#: src/kdesvn.cpp:233
+#, kde-format
+msgid "Reload last opened URL if no one is given on command line"
+msgstr "Torna a carregar l'últim URL obert si no s'indica en la línia d'ordres"
+
+#: src/kdesvn.cpp:316
+#, kde-format
+msgid "Ready"
+msgstr "Llest"
+
+#: src/kdesvn_part.cpp:156
+#, kde-format
+msgid "Logs follow node changes"
+msgstr "Els registres seguixen els canvis de node"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_ignored_files)
+#. i18n: ectx: label, entry, group (subversion)
+#: src/kdesvn_part.cpp:161 src/settings/display_settings.ui:57
+#: src/settings/kdesvn_part.kcfg:80
+#, kde-format
+msgid "Display ignored files"
+msgstr "Mostra els fitxers ignorats"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/kdesvn_part.cpp:166 src/settings/kdesvn_part.kcfg:84
+#, kde-format
+msgid "Display unknown files"
+msgstr "Mostra els fitxers desconeguts"
+
+#: src/kdesvn_part.cpp:171
+#, kde-format
+msgid "Hide unchanged files"
+msgstr "Oculta els fitxers sense canvis"
+
+#: src/kdesvn_part.cpp:176
+#, kde-format
+msgid "Work online"
+msgstr "Treballa en línia"
+
+#: src/kdesvn_part.cpp:183
+#, kde-format
+msgid "Configure Kdesvn..."
+msgstr "Configura Kdesvn..."
+
+#: src/kdesvn_part.cpp:187
+#, kde-format
+msgid "About kdesvn part"
+msgstr "Quant a la part de Kdesvn"
+
+#: src/kdesvn_part.cpp:191
+#, kde-format
+msgid "Kdesvn Handbook"
+msgstr "Manual de Kdesvn"
+
+#: src/kdesvn_part.cpp:281
+#, kde-format
+msgid ""
+"Built with Subversion library: %1\n"
+"Running Subversion library: %2"
+msgstr ""
+"Construït amb la biblioteca de Subversion: %1\n"
+"S'està executant davall la biblioteca de Subversion: %2"
+
+#: src/kdesvn_part.cpp:284
+#, kde-format
+msgid "kdesvn Part"
+msgstr "Part de Kdesvn"
+
+#: src/kdesvn_part.cpp:286
+#, kde-format
+msgid "A Subversion Client by KDE (dynamic Part component)"
+msgstr ""
+"Un client de Subversion, creat per la comunitat KDE (component de Part "
+"dinàmica)"
+
+#: src/kdesvn_part.cpp:288
+#, kde-format
+msgid ""
+"(C) 2005-2009 Rajko Albrecht,\n"
+"(C) 2015-2018 Christian Ehrlicher"
+msgstr ""
+"(C) 2005-2009 Rajko Albrecht,\n"
+"(C) 2015-2018 Christian Ehrlicher"
+
+#: src/kdesvn_part.cpp:291
+#, kde-format
+msgid "Original author and maintainer"
+msgstr "Autor original i mantenidor"
+
+#: src/kdesvn_part.cpp:292 src/main.cpp:46 src/main.cpp:47
+#, kde-format
+msgid "Developer"
+msgstr "Desenvolupador"
+
+#. i18n: ectx: Menu (subversion_general)
+#: src/kdesvn_part.cpp:331 src/kdesvn_part.rc:19
+#, kde-format
+msgid "General"
+msgstr "General"
+
+#: src/kdesvn_part.cpp:331
+#, kde-format
+msgid "General Settings"
+msgstr "Configuració general"
+
+#. i18n: ectx: Menu (subversion_main)
+#: src/kdesvn_part.cpp:333 src/kdesvn_part.rc:17 src/kdesvnui.rc:25
+#, kde-format
+msgid "Subversion"
+msgstr "Subversion"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, SubversionSettings)
+#: src/kdesvn_part.cpp:333 src/settings/subversion_settings.ui:6
+#, kde-format
+msgid "Subversion Settings"
+msgstr "Configuració de Subversion"
+
+#: src/kdesvn_part.cpp:335
+#, kde-format
+msgid "Timed jobs"
+msgstr "Treballs programats"
+
+#: src/kdesvn_part.cpp:335
+#, kde-format
+msgid "Settings for timed jobs"
+msgstr "Configuració per als treballs programats"
+
+#: src/kdesvn_part.cpp:337
+#, kde-format
+msgid "Diff & Merge"
+msgstr "Diff i merge"
+
+#: src/kdesvn_part.cpp:337
+#, kde-format
+msgid "Settings for diff and merge"
+msgstr "Configuració per a «diff» i «merge»"
+
+#: src/kdesvn_part.cpp:339
+#, kde-format
+msgid "Colors"
+msgstr "Colors"
+
+#: src/kdesvn_part.cpp:339
+#, kde-format
+msgid "Color Settings"
+msgstr "Configuració del color"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, RevisionTreeSettings)
+#: src/kdesvn_part.cpp:341 src/settings/revisiontree_settings.ui:6
+#, kde-format
+msgid "Revision tree Settings"
+msgstr "Configuració de l'arbre de revisions"
+
+#: src/kdesvn_part.cpp:341
+#, kde-format
+msgid "Revision tree"
+msgstr "Arbre de revisions"
+
+#: src/kdesvn_part.cpp:343
+#, kde-format
+msgid "KIO / Command line"
+msgstr "KIO / Línia d'ordres"
+
+#: src/kdesvn_part.cpp:343
+#, kde-format
+msgid "Settings for command line and KIO execution"
+msgstr "Configuració per a la línia d'ordres i execució KIO"
+
+#. i18n: ectx: Menu (settings)
+#: src/kdesvn_part.rc:5
+#, kde-format
+msgid "Subversion settings"
+msgstr "Configuració de Subversion"
+
+#. i18n: ectx: Menu (quicksettings)
+#: src/kdesvn_part.rc:7 src/kdesvnui.rc:43
+#, kde-format
+msgid "Quick settings"
+msgstr "Opcions ràpides"
+
+#. i18n: ectx: Menu (subversion_working_copy)
+#: src/kdesvn_part.rc:49
+#, kde-format
+msgid "Working copy"
+msgstr "Còpia de treball"
+
+#. i18n: ectx: Menu (subversion_repo)
+#: src/kdesvn_part.rc:75
+#, kde-format
+msgid "Repository"
+msgstr "Repositori"
+
+#. i18n: ectx: Menu (generic_view)
+#: src/kdesvn_part.rc:82
+#, kde-format
+msgid "View"
+msgstr "Visualitza"
+
+#. i18n: ectx: Menu (log_cache)
+#: src/kdesvn_part.rc:89
+#, kde-format
+msgid "Log cache"
+msgstr "Cau del registre"
+
+#. i18n: ectx: Menu (help)
+#: src/kdesvn_part.rc:98 src/kdesvnui.rc:52
+#, kde-format
+msgid "&Help"
+msgstr "A&juda"
+
+#. i18n: ectx: Menu (local_context_single_conflicted)
+#. i18n: ectx: Menu (local_context_single_versioned)
+#. i18n: ectx: Menu (local_context_single_unversioned)
+#. i18n: ectx: Menu (local_context_multi)
+#: src/kdesvn_part.rc:106 src/kdesvn_part.rc:113 src/kdesvn_part.rc:154
+#: src/kdesvn_part.rc:162
+#, kde-format
+msgid "Actions"
+msgstr "Accions"
+
+#. i18n: ectx: ToolBar (subversionToolBar)
+#: src/kdesvn_part.rc:242 src/kdesvnui.rc:58
+#, kde-format
+msgid "Subversion toolbar"
+msgstr "Barra d'eines Subversion"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: src/kdesvn_part.rc:260 src/kdesvnui.rc:62
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Barra d'eines principal"
+
+#: src/kdesvnd/kdesvnd.cpp:252
+#, kde-format
+msgctxt "@title:window"
+msgid "Enter Password for Realm %1"
+msgstr "Introducció de la contrasenya per al domini %1"
+
+#: src/kdesvnd/kdesvnd.cpp:268 src/svnfrontend/ccontextlistener.cpp:289
+#, kde-format
+msgid "Open a file with a #PKCS12 certificate"
+msgstr "Obri un fitxer amb un certificat #PKCS12"
+
+#: src/kdesvnd/kdesvnd.cpp:359
+#, kde-format
+msgid "Current task"
+msgstr "Tasca actual"
+
+#: src/kdesvnd/kdesvnd.cpp:371
+#, kde-format
+msgid "Current transfer"
+msgstr "Transferència actual"
+
+#: src/kdesvnd/ksvnjobview.cpp:50
+#, kde-format
+msgid "bytes"
+msgstr "bytes"
+
+#. i18n: ectx: Menu (file)
+#: src/kdesvnui.rc:4
+#, kde-format
+msgid "&File"
+msgstr "Fi&txer"
+
+#. i18n: ectx: Menu (subversion_admin)
+#: src/kdesvnui.rc:10
+#, kde-format
+msgid "Subversion Admin"
+msgstr "Administració de Subversion"
+
+#. i18n: ectx: Menu (database_menu)
+#: src/kdesvnui.rc:30
+#, kde-format
+msgid "Database"
+msgstr "Base de dades"
+
+#. i18n: ectx: Menu (settings)
+#: src/kdesvnui.rc:35
+#, kde-format
+msgid "&Settings"
+msgstr "Con&figuració"
+
+#: src/kdesvnview.cpp:133 src/kdesvnview.cpp:167
+#, kde-format
+msgid "Repository opened"
+msgstr "Repositori obert"
+
+#: src/kdesvnview.cpp:173
+#, kde-format
+msgid "Could not open repository"
+msgstr "No s'ha pogut obrir el repositori"
+
+#: src/kdesvnview.cpp:198
+#, kde-format
+msgid "No repository open"
+msgstr "No hi ha cap repositori obert"
+
+#: src/kdesvnview.cpp:258
+#, kde-format
+msgctxt "@title:window"
+msgid "Hotcopy a Repository"
+msgstr "Copia un repositori"
+
+#: src/kdesvnview.cpp:276
+#, kde-format
+msgid "Hotcopy finished."
+msgstr "La còpia ha finalitzat."
+
+#: src/kdesvnview.cpp:285
+#, kde-format
+msgctxt "@title:window"
+msgid "Load a Repository From an svndump"
+msgstr "Carrega un repositori des d'un bolcat SVN"
+
+#: src/kdesvnview.cpp:335
+#, kde-format
+msgctxt "@title:window"
+msgid "Load Dump"
+msgstr "Càrrega d'un bolcat"
+
+#: src/kdesvnview.cpp:335
+#, kde-format
+msgid "Loading a dump into a repository."
+msgstr "S'està carregant un bolcat dintre d'un repositori."
+
+#: src/kdesvnview.cpp:337
+#, kde-format
+msgid "Loading dump finished."
+msgstr "La càrrega del bolcat ha finalitzat."
+
+#: src/kdesvnview.cpp:347
+#, kde-format
+msgctxt "@title:window"
+msgid "Dump a Repository"
+msgstr "Bolca un repositori"
+
+#: src/kdesvnview.cpp:387
+#, kde-format
+msgctxt "@title:window"
+msgid "Dump"
+msgstr "Bolcat"
+
+#: src/kdesvnview.cpp:387
+#, kde-format
+msgid "Dumping a repository"
+msgstr "S'està bolcant un repositori"
+
+#: src/kdesvnview.cpp:389
+#, kde-format
+msgid "Dump finished."
+msgstr "El bolcat ha finalitzat."
+
+#: src/kdesvnview.cpp:434
+#, kde-format
+msgid "Inserted %v not cached log entries of %m."
+msgstr "S'han introduït %v entrades fora del cau no històric de %m."
+
+#: src/kiosvn/kiolistener.cpp:66 src/kiosvn/kiosvn.cpp:811
+#, kde-format
+msgid "Wrong or missing log (may cancel pressed)."
+msgstr "Registre incorrecte o falta (es pot cancel·lar prement)."
+
+#: src/kiosvn/kiolistener.cpp:91
+#, kde-format
+msgid "A (bin) %1"
+msgstr "A (bin) %1"
+
+#: src/kiosvn/kiolistener.cpp:93 src/kiosvn/kiolistener.cpp:129
+#, kde-format
+msgid "A %1"
+msgstr "A %1"
+
+#: src/kiosvn/kiolistener.cpp:102 src/kiosvn/kiolistener.cpp:125
+#, kde-format
+msgid "D %1"
+msgstr "D %1"
+
+#: src/kiosvn/kiolistener.cpp:105
+#, kde-format
+msgid "Restored %1."
+msgstr "S'ha restaurat %1."
+
+#: src/kiosvn/kiolistener.cpp:108
+#, kde-format
+msgid "Reverted %1."
+msgstr "S'ha revertit %1."
+
+#: src/kiosvn/kiolistener.cpp:111
+#, kde-format
+msgid ""
+"Failed to revert %1.\n"
+"Try updating instead."
+msgstr ""
+"Falla en revertir %1.\n"
+"Proveu d'actualitzar."
+
+#: src/kiosvn/kiolistener.cpp:114
+#, kde-format
+msgid "Resolved conflicted state of %1."
+msgstr "S'ha resolt l'estat de conflicte de %1."
+
+#: src/kiosvn/kiolistener.cpp:118
+#, kde-format
+msgid "Skipped missing target %1."
+msgstr "S'ha ignorat l'objectiu no existent %1."
+
+#: src/kiosvn/kiolistener.cpp:120
+#, kde-format
+msgid "Skipped %1."
+msgstr "S'ha ignorat %1."
+
+#: src/kiosvn/kiolistener.cpp:173
+#, kde-format
+msgid "Finished at revision %1."
+msgstr "Finalitzada a la revisió %1."
+
+#: src/kiosvn/kiolistener.cpp:175
+#, kde-format
+msgid "Update finished."
+msgstr "Actualització finalitzada."
+
+#: src/kiosvn/kiolistener.cpp:179
+#, kde-format
+msgid "Finished external at revision %1."
+msgstr "Externa finalitzada a la revisió %1."
+
+#: src/kiosvn/kiolistener.cpp:181
+#, kde-format
+msgid "Finished external."
+msgstr "Externa finalitzada."
+
+#: src/kiosvn/kiolistener.cpp:191
+#, kde-format
+msgid "Fetching external item into %1."
+msgstr "S'està obtenint l'element extern en %1."
+
+#: src/kiosvn/kiolistener.cpp:195
+#, kde-format
+msgid "Status against revision: %1."
+msgstr "Estat respecte a la revisió: %1."
+
+#: src/kiosvn/kiolistener.cpp:199
+#, kde-format
+msgid "Performing status on external item at %1."
+msgstr "S'està comprovant l'estat de l'element extern a %1."
+
+#: src/kiosvn/kiolistener.cpp:202
+#, kde-format
+msgid "Sending %1."
+msgstr "S'està enviant %1."
+
+#: src/kiosvn/kiolistener.cpp:206
+#, kde-format
+msgid "Adding (bin) %1."
+msgstr "S'està afegint (bin) %1."
+
+#: src/kiosvn/kiolistener.cpp:208
+#, kde-format
+msgid "Adding %1."
+msgstr "S'està afegint %1."
+
+#: src/kiosvn/kiolistener.cpp:212
+#, kde-format
+msgid "Deleting %1."
+msgstr "S'està suprimint %1."
+
+#: src/kiosvn/kiolistener.cpp:215
+#, kde-format
+msgid "Replacing %1."
+msgstr "S'està substituint %1."
+
+#: src/kiosvn/kiolistener.cpp:221
+#, kde-format
+msgid "Transmitting file data "
+msgstr "S'estan transmetent les dades del fitxer "
+
+#: src/kiosvn/kiosvn.cpp:301 src/kiosvn/kiosvn.cpp:355
+#: src/kiosvn/kiosvn.cpp:507
+#, kde-format
+msgid "Can only write on HEAD revision."
+msgstr "Només es pot escriure sobre la revisió «HEAD»."
+
+#: src/kiosvn/kiosvn.cpp:342
+#, kde-format
+msgid "Renaming %1 to %2 successful"
+msgstr "El canvi de nom «%1» a «%2» ha sigut un èxit"
+
+#: src/kiosvn/kiosvn.cpp:376
+#, kde-format
+msgid "Overwriting existing items is disabled in settings."
+msgstr "Sobreescriure elements existents està desactivat en la configuració."
+
+#: src/kiosvn/kiosvn.cpp:384
+#, kde-format
+msgid "Start checking out to temporary folder"
+msgstr "Comença a comprovar a la carpeta temporal"
+
+#: src/kiosvn/kiosvn.cpp:387
+#, kde-format
+msgid "Checking out %1"
+msgstr "S'està comprovant %1"
+
+#: src/kiosvn/kiosvn.cpp:396
+#, kde-format
+msgid "Temporary checkout done."
+msgstr "S'ha realitzat la comprovació temporal."
+
+#: src/kiosvn/kiosvn.cpp:400
+#, kde-format
+msgid "Could not write to existing item."
+msgstr "No es pot escriure a un element existent."
+
+#: src/kiosvn/kiosvn.cpp:406
+#, kde-format
+msgid "Could not open temporary file"
+msgstr "No es pot obrir un fitxer temporal"
+
+#: src/kiosvn/kiosvn.cpp:430
+#, kde-format
+msgid "Could not retrieve data for write."
+msgstr "No es poden rebre dades per a escriure."
+
+#: src/kiosvn/kiosvn.cpp:438
+#, kde-format
+msgid "Committing %1"
+msgstr "S'està publicant %1"
+
+#: src/kiosvn/kiosvn.cpp:461
+#, kde-format
+msgid "Wrote %1 to repository"
+msgstr "S'ha escrit «%1» al repositori"
+
+#: src/kiosvn/kiosvn.cpp:492
+#, kde-format
+msgid "Copied %1 to %2"
+msgstr "S'ha copiat «%1» a «%2»"
+
+#: src/kiosvn/kiosvn.cpp:828 src/svnfrontend/svnactions.cpp:1063
+#: src/svnfrontend/svnactions.cpp:2217
+#, kde-format
+msgid "Committed revision %1."
+msgstr "S'ha publicat la revisió %1."
+
+#: src/kiosvn/kiosvn.cpp:830
+#, kde-format
+msgid "Nothing to commit."
+msgstr "Encara no hi ha res que s'haja de publicar."
+
+#: src/kiosvn/kiosvn.cpp:877
+#, kde-format
+msgid "Empty logs"
+msgstr "Registre buit"
+
+#: src/ksvnwidgets/authdialogwidget.cpp:35
+#, kde-format
+msgid "Store password (into KDE Wallet)"
+msgstr "Guarda la contrasenya (a dins de la cartera de KDE)"
+
+#: src/ksvnwidgets/authdialogwidget.cpp:36
+#, kde-format
+msgid "Store password (into Subversion' simple storage)"
+msgstr ""
+"Guarda la contrasenya (a dins de l'emmagatzematge senzill de Subversion)"
+
+#: src/ksvnwidgets/authdialogwidget.cpp:38
+#, kde-format
+msgid "Enter authentication info for %1"
+msgstr "Introduïu la informació d'autenticació per a %1"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, AuthDialogWidget)
+#: src/ksvnwidgets/authdlg.ui:14
+#, kde-format
+msgid "Authentication"
+msgstr "Autenticació"
+
+#. i18n: ectx: property (text), widget (QLabel, m_PasswordLabel)
+#: src/ksvnwidgets/authdlg.ui:32
+#, kde-format
+msgid "Password:"
+msgstr "Contrasenya:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_UsernameLabel)
+#: src/ksvnwidgets/authdlg.ui:52
+#, kde-format
+msgid "Username:"
+msgstr "Nom d'usuari:"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, CommitMessage)
+#: src/ksvnwidgets/commitmessage.ui:6
+#, kde-format
+msgid "Commit Message"
+msgstr "Missatge de publicació"
+
+#. i18n: ectx: property (text), widget (QLabel, m_Reviewlabel)
+#: src/ksvnwidgets/commitmessage.ui:27
+#, kde-format
+msgid "Review affected items"
+msgstr "Revisa els elements afectats"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_SelectAllButton)
+#: src/ksvnwidgets/commitmessage.ui:63
+#, kde-format
+msgid "Select all"
+msgstr "Selecciona-ho tot"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_UnselectAllButton)
+#: src/ksvnwidgets/commitmessage.ui:70
+#, kde-format
+msgid "Unselect all"
+msgstr "Desselecciona-ho tot"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_HideNewItems)
+#: src/ksvnwidgets/commitmessage.ui:77 src/ksvnwidgets/commitmsg_impl.cpp:453
+#, kde-format
+msgid "Hide new items"
+msgstr "Oculta els elements nous"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_MarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:87
+#, kde-format
+msgid "Mark all new e.g. not versioned items for add and commit."
+msgstr "Marca tots els elements p. ex. sense versió per a afegir i publicar."
+
+#. i18n: ectx: property (text), widget (QPushButton, m_MarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:90
+#, kde-format
+msgid "Select new items"
+msgstr "Selecciona els elements nous"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_UnmarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:97
+#, kde-format
+msgid "Unmark all unversioned items so they will be ignored."
+msgstr "Desmarca tots els elements sense versió perquè siguen ignorats."
+
+#. i18n: ectx: property (text), widget (QPushButton, m_UnmarkUnversioned)
+#: src/ksvnwidgets/commitmessage.ui:100
+#, kde-format
+msgid "Unselect new items"
+msgstr "Desselecciona els elements nous"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_RevertItemButton)
+#: src/ksvnwidgets/commitmessage.ui:107
+#, kde-format
+msgid "Revert highlighted item"
+msgstr "Revertix l'element ressaltat"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_RevertItemButton)
+#: src/ksvnwidgets/commitmessage.ui:110
+#, kde-format
+msgid "Revert item"
+msgstr "Revertix l'element"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DiffItem)
+#: src/ksvnwidgets/commitmessage.ui:117
+#, kde-format
+msgid "Generates and display difference against repository of selected item"
+msgstr ""
+"Genera i mostra les diferències contra el repositori de l'element seleccionat"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DiffItem)
+#: src/ksvnwidgets/commitmessage.ui:120
+#, kde-format
+msgid "Diff item"
+msgstr "Diferències de l'element"
+
+#. i18n: ectx: property (text), widget (QLabel, m_HeadLabel)
+#: src/ksvnwidgets/commitmessage.ui:152
+#, kde-format
+msgid "Enter a log message"
+msgstr "Introduïu un missatge de registre"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, m_LogHistory)
+#: src/ksvnwidgets/commitmessage.ui:184
+#, kde-format
+msgid "Last used log messages"
+msgstr "Últims missatges de registre utilitzats"
+
+#. i18n: ectx: property (text), widget (QLabel, m_LogLabel)
+#: src/ksvnwidgets/commitmessage.ui:199
+#, kde-format
+msgid "Or insert one of the last:"
+msgstr "O inseriu un dels últims:"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_insert_file_button)
+#: src/ksvnwidgets/commitmessage.ui:215
+#, kde-format
+msgid "Insert Text File..."
+msgstr "Inserix un fitxer de text..."
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_keepLocksButton)
+#: src/ksvnwidgets/commitmessage.ui:226
+#, kde-format
+msgid "If checked commit will not release locks."
+msgstr "Si està marcada, la publicació no amprarà els blocats."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_keepLocksButton)
+#: src/ksvnwidgets/commitmessage.ui:229
+#, kde-format
+msgid "Keep locks"
+msgstr "Mantín els blocats"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:287
+#, kde-format
+msgctxt "@title:window"
+msgid "Commit Log"
+msgstr "Registre de publicació"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:453
+#, kde-format
+msgid "Show new items"
+msgstr "Mostra els elements nous"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:476
+#, kde-format
+msgctxt "@title:window"
+msgid "Select Text File to Insert"
+msgstr "Seleccioneu un fitxer de text que s'haja d'inserir"
+
+#: src/ksvnwidgets/commitmsg_impl.cpp:477
+#, kde-format
+msgid "Select text file to insert:"
+msgstr "Seleccioneu un fitxer de text que s'ha d'inserir:"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, DeleteForm)
+#: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1560
+#, kde-format
+msgid "Really delete these entries?"
+msgstr "Segur que voleu suprimir estes entrades?"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_forceDelete)
+#: src/ksvnwidgets/deleteform.ui:23
+#, kde-format
+msgid "Force delete of changed items"
+msgstr "Força la supressió dels elements modificats"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_keepLocal)
+#: src/ksvnwidgets/deleteform.ui:30
+#, kde-format
+msgid "Keep local copies"
+msgstr "Conserva les còpies locals"
+
+#. i18n: ectx: property (toolTip), widget (QComboBox, m_DepthCombo)
+#. i18n: ectx: property (statusTip), widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:29 src/ksvnwidgets/depthselector.ui:32
+#, kde-format
+msgid "Select depth of operation"
+msgstr "Selecciona la profunditat de l'operació"
+
+#. i18n: ectx: property (whatsThis), widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:41
+#, kde-format
+msgid ""
+"<p ><b>Kind of depth</b>: </p>\n"
+"<p ><i>empty depth</i><br />\n"
+"Just the named directory, no entries. Updates will not pull in any files or "
+"subdirectories not already present. </p>\n"
+"<p><i>Files depth</i><br />Folder and its file children, but not subdirs. "
+"Updates will pull in any files not already present, but not subdirectories. "
+"</p>\n"
+"<p><i>Immediate depth</i><br />Folder and its entries. Updates will pull in "
+"any files or subdirectories not already present; those subdirectories "
+"entries will have depth-empty. </p>\n"
+"<p>\n"
+"<i>Infinity depth</i><br />Updates will pull in any files or subdirectories "
+"not already present; those subdirectories' this_dir entries will have depth-"
+"infinity.<br />Equivalent to the pre-1.5 default update behavior. </p>"
+msgstr ""
+"<p ><b>Tipus de profunditat</b>: </p>\n"
+"<p ><i>Profunditat buida</i><br />\n"
+"Només el directori indicat, sense les entrades. Les actualitzacions no "
+"obtindran les versions dels fitxers o subdirectoris que ja no estan "
+"presents. </p>\n"
+"<p><i>Profunditat dels fitxers</i><br />La carpeta i els seus fitxers fills, "
+"però no els subdirectoris. Les actualitzacions obtindran les versions dels "
+"fitxers que ja no estan presents, però sense els subdirectoris. </p>\n"
+"<p><i>Profunditat immediata</i><br />La carpeta i les seues entrades. Les "
+"actualitzacions obtindran les versions dels fitxers o subdirectoris que ja "
+"no estan presents. Estes entrades de subdirectoris tindran profunditat "
+"buida. </p>\n"
+"<p>\n"
+"<i>Profunditat infinita</i><br />Les actualitzacions obtindran les versions "
+"dels fitxers o subdirectoris que ja no estan presents. Estes entrades de "
+"subdirectoris «this_dir» tindran profunditat infinita.<br />És equivalent al "
+"comportament d'actualització predeterminat anterior al 1.5. </p>"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:45
+#, kde-format
+msgid "Empty Depth"
+msgstr "Profunditat buida"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:50
+#, kde-format
+msgid "Files Depth"
+msgstr "Profunditat dels fitxers"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:55
+#, kde-format
+msgid "Immediate Depth"
+msgstr "Profunditat immediata"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
+#: src/ksvnwidgets/depthselector.ui:60
+#, kde-format
+msgid "Infinity Depth (recurse)"
+msgstr "Profunditat infinita (recursiu)"
+
+#: src/ksvnwidgets/diffbrowser.cpp:50
+#, kde-format
+msgid "Ctrl-F for search, F3 or Shift-F3 for search again."
+msgstr "Ctrl-F per a buscar, F3 o Maj-F3 per a buscar una altra vegada."
+
+#: src/ksvnwidgets/diffbrowser.cpp:51
+#, kde-format
+msgid ""
+"<b>Display differences between files</b><p>You may search inside text with "
+"Ctrl-F.</p><p>F3 for search forward again, Shift-F3 for search backward "
+"again.</p><p>You may save the (original) output with Ctrl-S.</p>"
+msgstr ""
+"<b>Mostra les diferències entre els fitxers</b><p>Podeu buscar dins el text "
+"amb Ctrl-F.</p><p>F3 per a buscar de nou cap avant, Maj-F3 per a buscar de "
+"nou cap arrere.</p><p>Podeu guardar l'eixida (original) amb Ctrl-S.</p>"
+
+#: src/ksvnwidgets/diffbrowser.cpp:86
+#, kde-format
+msgid "Save diff"
+msgstr "Guarda diff"
+
+#: src/ksvnwidgets/diffbrowser.cpp:86
+#, kde-format
+msgid "Patch file (*.diff *.patch)"
+msgstr "Fitxers de pedaç (*.diff *.patch)"
+
+#: src/ksvnwidgets/diffbrowser.cpp:93
+#, kde-format
+msgid "File %1 exists - overwrite?"
+msgstr "El fitxer %1 ja existix - Voleu sobreescriure'l?"
+
+#: src/ksvnwidgets/diffbrowser.cpp:177
+#, kde-format
+msgid ""
+"End of document reached.\n"
+"Continue from the beginning?"
+msgstr ""
+"S'ha arribat al final del document.\n"
+"Voleu continuar des del començament?"
+
+#: src/ksvnwidgets/diffbrowser.cpp:179 src/ksvnwidgets/diffbrowser.cpp:192
+#, kde-format
+msgid "Find"
+msgstr "Busca"
+
+#: src/ksvnwidgets/diffbrowser.cpp:190
+#, kde-format
+msgid ""
+"Beginning of document reached.\n"
+"Continue from the end?"
+msgstr ""
+"S'ha arribat al principi del document.\n"
+"Voleu continuar des del final?"
+
+#. i18n: ectx: property (text), widget (QLabel, m_Mainlabel)
+#: src/ksvnwidgets/encodingselector.ui:30
+#, kde-format
+msgid "Select encoding:"
+msgstr "Escolliu la codificació:"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, m_encodingList)
+#: src/ksvnwidgets/encodingselector.ui:44
+#, kde-format
+msgid "Default UTF-8"
+msgstr "Predeterminat UTF-8"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
+#: src/ksvnwidgets/models/commitmodel.cpp:193 src/svnfrontend/svnlogdlg.ui:158
+#, kde-format
+msgid "Action"
+msgstr "Acció"
+
+#: src/ksvnwidgets/models/commitmodel.cpp:196
+#, kde-format
+msgid "Entry"
+msgstr "Entrada"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:33
+#: src/svnfrontend/maintreewidget.cpp:581
+#, kde-format
+msgid "Add"
+msgstr "Afig"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:37
+#: src/svnfrontend/ccontextlistener.cpp:65
+#: src/svnfrontend/copymoveview_impl.cpp:49
+#: src/svnfrontend/maintreewidget.cpp:522
+#, kde-format
+msgid "Copy"
+msgstr "Copia"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:41
+#: src/svnfrontend/ccontextlistener.cpp:66
+#: src/svnfrontend/maintreewidget.cpp:587
+#: src/svnfrontend/maintreewidget.cpp:591 src/svnfrontend/svnactions.cpp:1017
+#, kde-format
+msgid "Delete"
+msgstr "Suprimix"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:45
+#, kde-format
+msgid "Modify (content or property)"
+msgstr "Modifica (contingut o propietat)"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:49
+#: src/svnfrontend/svnactions.cpp:786
+#, kde-format
+msgid "Replace"
+msgstr "Substituïx"
+
+#: src/ksvnwidgets/models/commitmodelhelper.cpp:53
+#, kde-format
+msgid "(Un)Lock"
+msgstr "(Des)Bloqueja"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, RevertForm)
+#: src/ksvnwidgets/revertform.ui:14
+#, kde-format
+msgid "Revert entries"
+msgstr "Entrades revertides"
+
+#. i18n: ectx: property (text), widget (QLabel, m_headLine)
+#: src/ksvnwidgets/revertform.ui:20
+#, kde-format
+msgid "Really revert these entries to pristine state?"
+msgstr "Realment s'han de revertir estes entrades al seu estat original?"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:33
+#, kde-format
+msgid "Accept permanently"
+msgstr "Accepta permanentment"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:34
+#, kde-format
+msgid "Accept temporarily"
+msgstr "Accepta temporalment"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:35
+#, kde-format
+msgid "Reject"
+msgstr "Rebutja"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:44
+#, kde-format
+msgid "Error validating server certificate for '%1'"
+msgstr "Error mentre es validava el certificat del servidor per a «%1»"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:69
+#, kde-format
+msgid "Failure reasons"
+msgstr "Motius de la fallada"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:77
+#, kde-format
+msgid "Realm"
+msgstr "Domini"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:78
+#, kde-format
+msgid "Host"
+msgstr "Amfitrió"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:79
+#, kde-format
+msgid "Valid from"
+msgstr "Vàlid des de"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:80
+#, kde-format
+msgid "Valid until"
+msgstr "Vàlid fins"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:81
+#, kde-format
+msgid "Issuer name"
+msgstr "Nom de l'emissor"
+
+#: src/ksvnwidgets/ssltrustprompt.cpp:82
+#, kde-format
+msgid "Fingerprint"
+msgstr "Empremta digital"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, SslTrustPrompt)
+#: src/ksvnwidgets/ssltrustprompt.ui:14
+#, kde-format
+msgid "Trust SSL certificate"
+msgstr "Confiança del certificat SSL"
+
+#: src/main.cpp:32
+#, kde-format
+msgid "A Subversion Client by KDE (standalone application)"
+msgstr ""
+"Un client de Subversion, creat per la comunitat KDE (aplicació autònoma)"
+
+#: src/main.cpp:44
+#, kde-format
+msgid "kdesvn"
+msgstr "Kdesvn"
+
+#: src/main.cpp:45
+#, kde-format
+msgid ""
+"(C) 2005-2009 Rajko Albrecht,\n"
+"(C) 2015-2019 Christian Ehrlicher"
+msgstr ""
+"(C) 2005-2009 Rajko Albrecht,\n"
+"(C) 2015-2019 Christian Ehrlicher"
+
+#: src/main.cpp:46
+#, kde-format
+msgid "Rajko Albrecht"
+msgstr "Rajko Albrecht"
+
+#: src/main.cpp:47
+#, kde-format
+msgid "Christian Ehrlicher"
+msgstr "Christian Ehrlicher"
+
+#: src/main.cpp:54
+#, kde-format
+msgid "Execute single Subversion command on specific revision(-range)"
+msgstr ""
+"Executa una única ordre de Subversion sobre una revisió específica (o "
+"interval)"
+
+# skip-rule: t-2p_sp
+#: src/main.cpp:54
+#, kde-format
+msgid "startrev[:endrev]"
+msgstr "rev_inici[:rev_final]"
+
+#: src/main.cpp:55
+#, kde-format
+msgid "Ask for revision when executing single command"
+msgstr "Demana per la revisió quan s'execute una única ordre"
+
+#: src/main.cpp:56
+#, kde-format
+msgid "Force operation"
+msgstr "Força l'operació"
+
+#: src/main.cpp:57
+#, kde-format
+msgid "Save output of Subversion command (eg \"cat\") into file <file>"
+msgstr ""
+"Guarda l'eixida de l'ordre de Subversion (p. ex. «cat») dins del <fitxer>"
+
+#: src/main.cpp:57
+#, kde-format
+msgid "<file>"
+msgstr "<fitxer>"
+
+#: src/main.cpp:58
+#, kde-format
+msgid "Limit log output to <number>"
+msgstr "Limita l'eixida del registre a <número>"
+
+#: src/main.cpp:58
+#, kde-format
+msgid "<number>"
+msgstr "<número>"
+
+#: src/main.cpp:59
+#, kde-format
+msgid "Execute Subversion command (\"exec help\" for more information)"
+msgstr "Executa una ordre de Subversion (per a més informació «exec help»)"
+
+#: src/main.cpp:60
+#, kde-format
+msgid "Document to open"
+msgstr "Document que s'ha d'obrir"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_cmdline_show_logwindow)
+#: src/settings/cmdexecsettings.ui:11
+#, kde-format
+msgid "Show a small window containing the log after command executed"
+msgstr ""
+"Mostra una xicoteta finestra amb el registre després d'executar l'ordre"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_cmdline_show_logwindow)
+#: src/settings/cmdexecsettings.ui:14
+#, kde-format
+msgid "Show log after executing a command"
+msgstr "Mostra el registre després d'executar una ordre"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/settings/cmdexecsettings.ui:23
+#, kde-format
+msgid "Minimum log lines to show:"
+msgstr "Nombre mínim de línies de registre que s'han de mostrar:"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_cmdline_log_minline)
+#: src/settings/cmdexecsettings.ui:33
+#, kde-format
+msgid ""
+"The minimum a log output must contain before kdesvn shows a single log window"
+msgstr ""
+"El mínim que una eixida de registre haurà de contindre abans que Kdesvn "
+"mostre una finestra amb el registre"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, kcfg_cmdline_log_minline)
+#: src/settings/cmdexecsettings.ui:39
+#, kde-format
+msgctxt "no limit"
+msgid "No minimum"
+msgstr "Cap mínim"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_contextmenu)
+#: src/settings/cmdexecsettings.ui:51
+#, kde-format
+msgid "If set, kdesvn will not show a menu inside \"Action\" menu of Konqueror"
+msgstr ""
+"Si es marca, Kdesvn no mostrarà un submenú dins del menú «Accions» de "
+"Konqueror"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_contextmenu)
+#: src/settings/cmdexecsettings.ui:54
+#, kde-format
+msgid "Do not display context menu in Konqueror"
+msgstr "No mostrar menús contextuals en Konqueror"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
+#: src/settings/cmdexecsettings.ui:61
+#, kde-format
+msgid ""
+"If set, kdesvn will not show some extra actions inside \"Action\" menu of "
+"Konqueror/Dolphin"
+msgstr ""
+"Si es marca, Kdesvn no mostrarà accions extres dins del menú «Accions» de "
+"Konqueror/Dolphin"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
+#: src/settings/cmdexecsettings.ui:64
+#, kde-format
+msgid "Do not display entries in toplevel action menu"
+msgstr "No mostrar entrades en la part superior del menú «Accions»"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_kio_use_standard_logmsg)
+#: src/settings/cmdexecsettings.ui:71
+#, kde-format
+msgid "KIO operations use standard log message"
+msgstr ""
+"Les operacions «KIO» utilitzen l'estàndard per als missatges de registre"
+
+#. i18n: ectx: property (text), widget (QLabel, stdLogmsgLabel)
+#: src/settings/cmdexecsettings.ui:80
+#, kde-format
+msgid "Standard message:"
+msgstr "Missatge estàndard:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_kio_can_overwrite)
+#: src/settings/cmdexecsettings.ui:98
+#, kde-format
+msgid "Can KIO overwrite existing files?"
+msgstr "Pot KIO sobreescriure fitxers existents?"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_kio_can_overwrite)
+#: src/settings/cmdexecsettings.ui:103
+#, kde-format
+msgid ""
+"If this flag is set, you will have a simple write support for existing "
+"items. E.g. you can open files in your editor and save them direct without "
+"checking out them before (kdesvn will do it in background).\n"
+"\n"
+"Use this only if you are sure what you are doing."
+msgstr ""
+"Si s'establix esta etiqueta, tindreu un suport simple d'escriptura per als "
+"elements existents. Per exemple, podeu obrir fitxers al vostre editor i "
+"guardar directament sense verificar abans (Kdesvn ho farà en segon pla).\n"
+"\n"
+"Utilitzeu esta opció només si sabeu el que esteu fent."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_kio_can_overwrite)
+#: src/settings/cmdexecsettings.ui:106
+#, kde-format
+msgid "KIO can overwrite"
+msgstr "KIO pot sobreescriure"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_display_dockmsg)
+#: src/settings/cmdexecsettings.ui:113
+#, kde-format
+msgid ""
+"If set KIO shows in KDE's Plasma detailed information about current operation"
+msgstr ""
+"Si s'establix, KIO mostrarà informació detallada sobre l'operació actual en "
+"Plasma de KDE"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_dockmsg)
+#: src/settings/cmdexecsettings.ui:117
+#, kde-format
+msgid ""
+"<p>If set, the kdesvn KIO shows detailed messages in KDE's Plasma control "
+"area.<br/>\n"
+"Error messages of KIO will always displayed and can <i>not</i> switched off."
+"</p>"
+msgstr ""
+"<p>Si s'establix, KIO de Kdesvn mostrarà missatges detallats en l'àrea de "
+"control Plasma de KDE.<br/>\n"
+"Els missatges d'error de KIO es mostraran i <i>no</i> es poden desactivar. </"
+"p>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_dockmsg)
+#: src/settings/cmdexecsettings.ui:120
+#, kde-format
+msgid "KIO shows progress messages"
+msgstr "KIO mostra els missatges de progrés"
+
+#: src/settings/cmdexecsettings_impl.cpp:27
+#, kde-format
+msgid " line(s)"
+msgstr " línies"
+
+#. i18n: ectx: label, entry, group (general_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_content)
+#: src/settings/diffmergesettings.ui:11 src/settings/kdesvn_part.kcfg:29
+#, kde-format
+msgid "Diff ignores content type"
+msgstr "«diff» ignora el tipus de contingut"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_tree_diff_rec)
+#: src/settings/diffmergesettings.ui:18
+#: src/svnfrontend/graphtree/revgraphview.cpp:862
+#, kde-format
+msgid "Diff in revision tree is recursive"
+msgstr "«diff» en l'arbre de revisions serà recursiu"
+
+#. i18n: ectx: label, entry, group (general_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_spaces)
+#: src/settings/diffmergesettings.ui:25 src/settings/kdesvn_part.kcfg:33
+#, kde-format
+msgid "Diff ignores white space changes"
+msgstr "«diff» ignora els canvis en els espais en blanc"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_all_white_spaces)
+#: src/settings/diffmergesettings.ui:32
+#, kde-format
+msgid "Diff ignores all white spaces"
+msgstr "«diff» ignora tots els espais en blanc"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_external_diff)
+#: src/settings/diffmergesettings.ui:39
+#, kde-format
+msgid ""
+"If kdesvn should use an external diff display and/or generator. If not "
+"checked use internal display."
+msgstr ""
+"Si Kdesvn ha d'utilitzar un visor i/o generador extern per a les "
+"diferències. Si no es marca, s'utilitzarà el visor intern."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_external_diff)
+#: src/settings/diffmergesettings.ui:42
+#, kde-format
+msgid "Use external diff display"
+msgstr "Utilitza un visor extern de «diff»"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_extern_merge_default)
+#: src/settings/diffmergesettings.ui:49
+#, kde-format
+msgid ""
+"Set if merge with external program is preferred and not Subversion's merge"
+msgstr ""
+"Establix si es preferix fusionar amb un programa extern i no amb Subversion"
+
+#. i18n: ectx: label, entry (extern_merge_default), group (diffmerge_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_extern_merge_default)
+#: src/settings/diffmergesettings.ui:52 src/settings/kdesvn_part.kcfg:158
+#, kde-format
+msgid "Prefer external merge program"
+msgstr "Preferix un programa extern de «merge»"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_gitformat_default)
+#: src/settings/diffmergesettings.ui:59
+#, kde-format
+msgid "Use Git diff format"
+msgstr "Utilitza el format «diff» de Git"
+
+#. i18n: ectx: label, entry, group (general_items)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_copies_as_add)
+#: src/settings/diffmergesettings.ui:66 src/settings/kdesvn_part.kcfg:45
+#, kde-format
+msgid "Show copies as add"
+msgstr "Mostra les còpies com afegits"
+
+#. i18n: ectx: property (text), widget (QLabel, resolveLabel)
+#: src/settings/diffmergesettings.ui:77
+#, kde-format
+msgid "Conflict resolver program:"
+msgstr "Programa de resolució de conflictes:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/settings/diffmergesettings.ui:90
+#, kde-format
+msgid "External merge program:"
+msgstr "Programa extern de «merge»:"
+
+#. i18n: ectx: property (toolTip), widget (KLineEdit, kcfg_conflict_resolver)
+#: src/settings/diffmergesettings.ui:115
+#, kde-format
+msgid "Setup an external program for conflict resolving"
+msgstr "Configura un programa extern per a la resolució de conflictes"
+
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_conflict_resolver)
+#: src/settings/diffmergesettings.ui:134
+#, no-c-format, kde-format
+msgid ""
+"<p>\n"
+"Enter how kdesvn should call the conflict resolver program. The form is\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;program&gt; &lt;programoptions&gt;</tt></b>\n"
+"</p>\n"
+"<p>\n"
+"Programoption may contain the place holders for substituting with "
+"filenames.\n"
+"</p>\n"
+"The substitutions means:<br>\n"
+"<b><tt>%o</tt></b> Old version<br>\n"
+"<b><tt>%m</tt></b> Mine or local edit version<br>\n"
+"<b><tt>%n</tt></b> Newest version<br>\n"
+"<b><tt>%t</tt></b> The target to save as, kdesvn will use the original file "
+"name for it.\n"
+"</p>\n"
+"<p>\n"
+"Default: <tt>kdiff3 %o %m %n -o %t</tt>\n"
+"</p>"
+msgstr ""
+"<p>\n"
+"Introduïu com ha de cridar Kdesvn al programa de resolució de conflictes. La "
+"forma és\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;programa&gt; &lt;opcions_programa&gt;</tt></b>\n"
+"</p>\n"
+"<p>\n"
+"opcions_programa pot contindre reserves de lloc per a la substitució dels "
+"noms de fitxer.\n"
+"</p>\n"
+"Les substitucions signifiquen:<br>\n"
+"<b><tt>%o</tt></b> La versió antiga<br>\n"
+"<b><tt>%m</tt></b> La meua versió o versió local<br>\n"
+"<b><tt>%n</tt></b> La versió més recent<br>\n"
+"<b><tt>%t</tt></b> La destinació on guardar, Kdesvn utilitza el nom de "
+"fitxer original.\n"
+"</p>\n"
+"<p>\n"
+"Predeterminat: <tt>kdiff3 %o %m %n -o %t</tt>\n"
+"</p>"
+
+#. i18n: ectx: property (text), widget (QLabel, mdiff_display_label)
+#: src/settings/diffmergesettings.ui:141
+#, kde-format
+msgid "External diff display:"
+msgstr "Visor extern de «diff»:"
+
+#. i18n: ectx: property (toolTip), widget (KLineEdit, kcfg_external_merge_program)
+#: src/settings/diffmergesettings.ui:154
+#, kde-format
+msgid "Setup an external program for merging"
+msgstr "Establix un programa extern per a fusionar"
+
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_external_merge_program)
+#: src/settings/diffmergesettings.ui:166
+#, no-c-format, kde-format
+msgid ""
+"<p>\n"
+"Enter how kdesvn should call the external merge program. The form is\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;program&gt; &lt;programoptions&gt; %s1 %s2 %t</tt></b>\n"
+"</p>\n"
+"The substitutions means:<br>\n"
+"<b><tt>%s1</tt></b> Source one for merge<br>\n"
+"<b><tt>%s2</tt></b> Source two for merge, if it was not set equal to source "
+"one but other revision<br>\n"
+"<b><tt>%t</tt></b> Local target for merge.\n"
+"</p>"
+msgstr ""
+"<p>\n"
+"Introduïu com ha de cridar Kdesvn al programa extern de fusió. La forma és:\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;programa&gt; &lt;opcions_programa&gt; %s1 %s2 %t</tt></b>\n"
+"</p>\n"
+"Les substitucions signifiquen:<br>\n"
+"<b><tt>%s1</tt></b> La primera font que s'ha de fusionar<br>\n"
+"<b><tt>%s2</tt></b> La segona font que s'ha de fusionar, si no s'establix "
+"igual que la primera, sinó una altra revisió<br>\n"
+"<b><tt>%t</tt></b> Destinació local que es fusionarà.\n"
+"</p>"
+
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_external_diff_display)
+#: src/settings/diffmergesettings.ui:191
+#, no-c-format, kde-format
+msgid ""
+"<p align=\"left\">\n"
+"Enter an external program in form\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt; %f</tt>\n"
+"</p>\n"
+"or\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt;</tt>\n"
+"</p>\n"
+"or\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;param&gt; %s1 %s2</tt>\n"
+"</p>\n"
+"<br>\n"
+"If one between the first or the second form is used, svn itself generates "
+"the diff. %f will be replaced with a temporary filename. If %f is not "
+"given,\n"
+"the diff-display should be able to read data from stdin.\n"
+"<br>\n"
+"When %s1 and %s2 are given, kdesvn lets this display make the diff. For that "
+"it makes a temporary export or get (if needed) and fills out the parameters "
+"with the right values. %s1 will be filled with the content of the initial "
+"revision, %s2 with the final revision. On large recursive diffs this may get "
+"really slow.\n"
+"</p>"
+msgstr ""
+"<p align=\"left\">\n"
+"Introduïu un programa extern en la forma\n"
+"<p align=\"center\">\n"
+"<tt>&lt;programa&gt; &lt;paràmetres&gt; %f</tt>\n"
+"</p>\n"
+"o\n"
+"<p align=\"center\">\n"
+"<tt>&lt;programa&gt; &lt;paràmetres&gt;</tt>\n"
+"</p>\n"
+"o\n"
+"<p align=\"center\">\n"
+"<tt>&lt;programa&gt; &lt;paràmetres&gt; %s1 %s2</tt>\n"
+"</p>\n"
+"<br>\n"
+"Si s'utilitza la primera o segona forma, el mateix SVN generarà\n"
+"les diferències. %f serà substituït amb un nom de fitxer temporal.\n"
+"Si no s'indica %f, el lector de diferències hauria de poder llegir\n"
+"les dades des de l'estrada estàndard (stdin).\n"
+"<br>\n"
+"Quan s'indiquen %s1 i %s2, Kdesvn permet que este lector genere les "
+"diferències. Per a fer-ho, creeu una exportació temporal o obteniu-la (si és "
+"necessari) i empleneu els paràmetres amb els seus valors correctes. %s1 serà "
+"emplenat amb el contingut de la revisió inici, %s2 amb la revisió final. "
+"Sobre les diferències grans i recursives açò pot anar realment lent!\n"
+"</p>"
+
+#. i18n: ectx: property (text), widget (QLabel, m_extern_hint)
+#: src/settings/diffmergesettings.ui:200
+#, kde-format
+msgid "see \"What's this\" for details"
+msgstr "Per a més detalls veure «Què és açò?»"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DispColorSettings)
+#: src/settings/dispcolor_settings.ui:6
+#, kde-format
+msgid "ColorSettings"
+msgstr "Configuració del color"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_colored_state)
+#: src/settings/dispcolor_settings.ui:14
+#, kde-format
+msgid "Mark changed and locked items colored"
+msgstr "Marca amb colors els elements modificats i blocats"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel5)
+#: src/settings/dispcolor_settings.ui:56
+#, kde-format
+msgid "Locked items:"
+msgstr "Elements blocats:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
+#: src/settings/dispcolor_settings.ui:76
+#, kde-format
+msgid "Not versioned items:"
+msgstr "Elements sense versió:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#: src/settings/dispcolor_settings.ui:89
+#, kde-format
+msgid "Remote changed items:"
+msgstr "Elements canviats al remot:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/settings/dispcolor_settings.ui:102
+#, kde-format
+msgid "Added items:"
+msgstr "Elements afegits:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel4)
+#: src/settings/dispcolor_settings.ui:115
+#, kde-format
+msgid "Deleted items:"
+msgstr "Elements suprimits:"
+
+#. i18n: ectx: property (text), widget (QLabel, Conflicted_items_label)
+#: src/settings/dispcolor_settings.ui:156
+#, kde-format
+msgid "Conflicted items:"
+msgstr "Elements en conflicte:"
+
+#. i18n: ectx: property (text), widget (QLabel, Missed_items_label)
+#: src/settings/dispcolor_settings.ui:169
+#, kde-format
+msgid "Missed items:"
+msgstr "Elements perduts:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#: src/settings/dispcolor_settings.ui:182
+#, kde-format
+msgid "Local changed items:"
+msgstr "Elements canviats en local:"
+
+#. i18n: ectx: property (text), widget (QLabel, Need_lock_label_2)
+#: src/settings/dispcolor_settings.ui:195
+#, kde-format
+msgid "Item needs lock:"
+msgstr "Elements que necessiten blocat:"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DisplaySettings)
+#: src/settings/display_settings.ui:6
+#, kde-format
+msgid "Settings"
+msgstr "Configuració"
+
+#. i18n: ectx: property (text), widget (QLabel, m_ListIconsSize_label)
+#: src/settings/display_settings.ui:14
+#, kde-format
+msgid "Size of Listviewicons"
+msgstr "Mida de les icones de la vista en llista"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_display_overlays)
+#: src/settings/display_settings.ui:24
+#, kde-format
+msgid "Mark Subversion states with an overlayed icon"
+msgstr "Marca els estats de Subversion superposant una icona"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_overlays)
+#: src/settings/display_settings.ui:30
+#, kde-format
+msgid ""
+"<p align=\"left\">\n"
+"Mark items with non-normal state with an overlayed icon. When you wish to\n"
+"see which items has newer items in repository you may have to set \"Check "
+"for updates on open\" in Subversion-Dialog.\n"
+"</p>"
+msgstr ""
+"<p align=\"left\">\n"
+"Marca els elements amb un estat no normal superposant una icona.\n"
+"Quan es volen veure quins elements són nous en el repositori s'ha de marcar "
+"«Comprova actualitzacions en obrir» en el diàleg de Subversion.\n"
+"</p>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_overlays)
+#: src/settings/display_settings.ui:33
+#, kde-format
+msgid "Mark item status with icon overlay"
+msgstr "Marca l'estat de l'element superposant una icona"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_case_sensitive_sort)
+#: src/settings/display_settings.ui:40
+#, kde-format
+msgid "Items sorting order is case sensitive"
+msgstr "L'ordre dels elements distingix entre majúscules i minúscules"
+
+#. i18n: ectx: property (text), widget (QLabel, m_MaxLogLabel)
+#: src/settings/display_settings.ui:47
+#, kde-format
+msgid "Maximum log messages in history:"
+msgstr "Màxim de missatges de registre en l'historial:"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_file_tips)
+#: src/settings/display_settings.ui:67
+#, kde-format
+msgid ""
+"Here you can control if, when moving the mouse over a file, you want to see "
+"a small popup window with additional information about that file"
+msgstr ""
+"Ací podeu controlar si, en moure el ratolí damunt d'un fitxer, voleu veure "
+"una xicoteta finestra emergent amb informació addicional del fitxer"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_file_tips)
+#: src/settings/display_settings.ui:70
+#, kde-format
+msgid "Show file info"
+msgstr "Mostra la informació del fitxer"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_colored_blame)
+#: src/settings/display_settings.ui:77
+#, kde-format
+msgid "Display colored annotate"
+msgstr "Mostra les anotacions en color"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_show_navigation_panel)
+#: src/settings/display_settings.ui:84
+#, kde-format
+msgid "Use navigation panel"
+msgstr "Utilitza el quadro de navegació"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:9
+#, kde-format
+msgid "Set if items sortorder should be case sensitive or not"
+msgstr "Establix si l'ordre dels elements distingirà majúscules i minúscules"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:13
+#, kde-format
+msgid "Size of the icons"
+msgstr "Mida de les icones"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:17
+#, kde-format
+msgid "Show file information in tooltip"
+msgstr "Mostra la informació del fitxer en els consells"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:21
+#, kde-format
+msgid "Use an external program for diff viewing/generating"
+msgstr "Utilitza un programa extern per a veure/generar les diferències"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:25
+#, kde-format
+msgid "Use external program for diff viewing"
+msgstr "Utilitza un programa extern per a veure les diferències"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:37
+#, kde-format
+msgid "Diff ignores all white space"
+msgstr "«diff» ignora tots els espais en blanc"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:41
+#, kde-format
+msgid "Show diff in Git format"
+msgstr "Mostra les diferències en el format de Git"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:49
+#, kde-format
+msgid "Maximum number of log messages"
+msgstr "Nombre màxim de missatges de registre"
+
+#. i18n: ectx: label, entry, group (general_items)
+#: src/settings/kdesvn_part.kcfg:53
+#, kde-format
+msgid "Display colored blame lines"
+msgstr "Mostra les línies de responsabilitat en color"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:68
+#, kde-format
+msgid "Display icon overlays"
+msgstr "Mostra les icones superposades"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:72
+#, kde-format
+msgid "Get item information recursively"
+msgstr "Obtín la informació de l'element recursivament"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_review_commit)
+#: src/settings/kdesvn_part.kcfg:76 src/settings/subversion_settings.ui:174
+#, kde-format
+msgid "Review items before commit"
+msgstr "Revisa els elements abans de publicar-los"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:88
+#, kde-format
+msgid "Hide versioned unchanged files"
+msgstr "Oculta els fitxers sense modificar"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_follows_nodes)
+#: src/settings/kdesvn_part.kcfg:92 src/settings/subversion_settings.ui:145
+#, kde-format
+msgid "Log follows node changes"
+msgstr "El registre seguix els canvis de node"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_always_list_changed_files)
+#: src/settings/kdesvn_part.kcfg:96 src/settings/subversion_settings.ui:161
+#, kde-format
+msgid "Log always reads list of changed files"
+msgstr "El registre sempre llig la llista de fitxers canviats"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:100
+#, kde-format
+msgid "Start check for updates when open working copy"
+msgstr "Inicia la comprovació d'actualitzacions en obrir una còpia de treball"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:104
+#, kde-format
+msgid "Start caching latest logs on open or commit"
+msgstr "Inicia el cau dels darrers registres en obrir o publicar"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:108
+#, kde-format
+msgid "Get detailed information when making a remote listing"
+msgstr "Obtín informació detallada en fer un llistat remot"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:112
+#, kde-format
+msgid "Get properties on selected item on networked protocols"
+msgstr "Obtín les propietats d'un element seleccionat sobre protocols de xarxa"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:116
+#, kde-format
+msgid "Use properties like bugtraq:url on repository listings"
+msgstr ""
+"Utilitza les propietats com «bugtraq:url» en els llistats del repositori"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:120
+#, kde-format
+msgid "Check for property svn:needs-lock on listings"
+msgstr "Comprova les propietats com «svn:needs-lock» en els llistats"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_store_passwords)
+#: src/settings/kdesvn_part.kcfg:124 src/settings/subversion_settings.ui:107
+#, kde-format
+msgid "Store passwords for remote connections"
+msgstr "Guarda les contrasenyes per a les connexions remotes"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:128
+#, kde-format
+msgid "Store passwords in KDE Wallet instead of Subversion' storage"
+msgstr ""
+"Guarda les contrasenyes en la cartera de KDE en lloc del rebost de Subversion"
+
+#. i18n: ectx: label, entry, group (subversion)
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_password_cache)
+#: src/settings/kdesvn_part.kcfg:132 src/settings/subversion_settings.ui:138
+#, kde-format
+msgid "Use internal password cache"
+msgstr "Utilitza el cau de contrasenyes intern"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:136
+#, kde-format
+msgid "Is networking enabled"
+msgstr "És una xarxa activada"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:140
+#, kde-format
+msgid "Local add results in modification instead of conflicts"
+msgstr "Els afegits locals resulten en modificacions en comptes de conflictes"
+
+#. i18n: ectx: label, entry, group (subversion)
+#: src/settings/kdesvn_part.kcfg:144
+#, kde-format
+msgid "create any non-existent parent at depth=empty"
+msgstr "crea qualsevol pare inexistent a la profunditat=buida"
+
+#. i18n: ectx: label, entry, group (diffmerge_items)
+#: src/settings/kdesvn_part.kcfg:150
+#, kde-format
+msgid "Which program to use for external merges"
+msgstr "Quin programa utilitzar per a les fusions externes"
+
+#. i18n: ectx: label, entry, group (diffmerge_items)
+#: src/settings/kdesvn_part.kcfg:154
+#, kde-format
+msgid "Which program for resolving conflicts"
+msgstr "Quin programa utilitzar per a la resolució de conflictes"
+
+#. i18n: ectx: label, entry, group (display)
+#: src/settings/kdesvn_part.kcfg:164
+#, kde-format
+msgid "Display different then normal states colored"
+msgstr "Mostra en color els diferents estats més normals"
+
+#. i18n: ectx: label, entry, group (blame_dlg)
+#: src/settings/kdesvn_part.kcfg:197
+#, kde-format
+msgid "Locale for blame display"
+msgstr "Configuració regional per a visualitzar la responsabilitat"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:209
+#, kde-format
+msgid "Check status of log cache when starting revision tree"
+msgstr ""
+"Comprova l'estat del cau del registre quan s'inicie l'arbre de revisions"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/settings/kdesvn_part.kcfg:213 src/settings/revisiontree_settings.ui:129
+#, kde-format
+msgid "Direction of revision tree"
+msgstr "Directori de l'arbre de revisions"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:217
+#, kde-format
+msgid "Color for added items"
+msgstr "Color per als elements afegits"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:221
+#, kde-format
+msgid "Color for deleted items"
+msgstr "Color per als elements suprimits"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:225
+#, kde-format
+msgid "Color for copied items"
+msgstr "Color per als elements copiats"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:229
+#, kde-format
+msgid "Color for renamed items"
+msgstr "Color per als elements canviats de nom"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:233
+#, kde-format
+msgid "Color for modified items"
+msgstr "Color per als elements modificats"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:237
+#, kde-format
+msgid "Height of detail view in tree widget"
+msgstr "Alçària de la vista detallada al giny en arbre"
+
+#. i18n: ectx: label, entry, group (revision_tree)
+#: src/settings/kdesvn_part.kcfg:241
+#, kde-format
+msgid "Diffs from revision tree are recursive"
+msgstr "Les diferències des de l'arbre de revisions són recursives"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:247
+#, kde-format
+msgid "Should Konqueror not display context menus for kdesvn?"
+msgstr "Konqueror ha de mostrar menús contextuals per a Kdesvn?"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:251
+#, kde-format
+msgid "Should Konqueror not display kdesvn entries in main action menu?"
+msgstr ""
+"Konqueror no ha de mostrar les entrades de Kdesvn en el menú principal "
+"«Accions»?"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:255
+#, kde-format
+msgid "Show a small log window after executing a command."
+msgstr "Mostra una xicoteta finestra de registre després d'executar una ordre."
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:259
+#, kde-format
+msgid "Log must contain at least lines to show"
+msgstr "El registre ha de contindre almenys les línies que s'han de mostrar"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:263
+#, kde-format
+msgid "KIO::svn operations use a standard log message"
+msgstr ""
+"Les operacions «KIO::svn» utilitzen l'estàndard per als missatges de registre"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:267
+#, kde-format
+msgid "The standard log message to use with KIO if not asking for it."
+msgstr ""
+"El missatge de registre estàndard que s'utilitzarà amb «KIO» si es demana."
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:271
+#, kde-format
+msgid "Support overwrite for KIO module"
+msgstr "Dona suport per a sobreescriure al mòdul KIO"
+
+#. i18n: ectx: label, entry, group (cmdline)
+#: src/settings/kdesvn_part.kcfg:275
+#, kde-format
+msgid "Print progress messages in KDE dock area"
+msgstr "Imprimix els missatges de progrés en l'àrea de l'acoblador de KDE"
+
+#. i18n: ectx: whatsthis, entry, group (internals)
+#: src/settings/kdesvn_part.kcfg:294
+#, kde-format
+msgid ""
+"This value holds for log dialog which kind of log is used, its internal only."
+msgstr ""
+"Este valor s'aplica en el diàleg del registre, sobre el tipus utilitzat -"
+"només per a ús intern-."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
+#: src/settings/polling_settings.ui:11
+#, kde-format
+msgid "Check modified items every"
+msgstr "Comprova els elements modificats cada"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/settings/polling_settings.ui:28 src/settings/polling_settings.ui:55
+#, kde-format
+msgid "minutes"
+msgstr "minuts"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_poll_updates)
+#: src/settings/polling_settings.ui:35
+#, kde-format
+msgid ""
+"If set check for updates on working copy when network is enabled on regular "
+"base"
+msgstr ""
+"Si s'establix, es comprovarà regularment si hi ha actualitzacions en la "
+"còpia de treball, quan la xarxa estiga activa"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_updates)
+#: src/settings/polling_settings.ui:38
+#, kde-format
+msgid "Check for updated items every"
+msgstr "Comprova per a elements actualitzats cada"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:28
+#, kde-format
+msgid "Left to right"
+msgstr "D'esquerra a dreta"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:33
+#, kde-format
+msgid "Bottom to top"
+msgstr "De baix a dalt"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:38
+#, kde-format
+msgid "Right to left"
+msgstr "De dreta a esquerra"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
+#: src/settings/revisiontree_settings.ui:43
+#, kde-format
+msgid "Top to bottom"
+msgstr "De dalt a baix"
+
+#. i18n: ectx: property (text), widget (QLabel, m_AddColorLabel)
+#: src/settings/revisiontree_settings.ui:51
+#, kde-format
+msgid "Color for added items:"
+msgstr "Color per als elements afegits:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#: src/settings/revisiontree_settings.ui:77
+#, kde-format
+msgid "Color for copied items:"
+msgstr "Color per als elements copiats:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel4)
+#: src/settings/revisiontree_settings.ui:90
+#, kde-format
+msgid "Color for renamed items:"
+msgstr "Color per als elements canviats de nom:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel5)
+#: src/settings/revisiontree_settings.ui:103
+#, kde-format
+msgid "Color for modified items:"
+msgstr "Color per als elements modificats:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#: src/settings/revisiontree_settings.ui:136
+#, kde-format
+msgid "Color for deleted items:"
+msgstr "Color per als elements suprimits:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_fill_cache_on_tree)
+#: src/settings/revisiontree_settings.ui:175
+#, kde-format
+msgid "Should kdesvn check content of log cache before starting the tree"
+msgstr ""
+"Si Kdesvn ha de comprovar el contingut del cau del registre abans d'iniciar "
+"l'arbre"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_fill_cache_on_tree)
+#: src/settings/revisiontree_settings.ui:180
+#, kde-format
+msgid ""
+"When starting the tree generation and reading data from log cache kdesvn may "
+"check for newer items in repository if network is enabled. \n"
+"\n"
+"But this may slow down tree generation so it is disabled by default."
+msgstr ""
+"Quan s'inicia la generació de l'arbre i es lligen les dades des del cau de "
+"registre, Kdesvn podrà comprovar si hi ha elements nous al repositori si la "
+"xarxa està activada.\n"
+"\n"
+"Però açò pot retardar la generació de l'arbre, de manera predeterminada està "
+"desactivat."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_fill_cache_on_tree)
+#: src/settings/revisiontree_settings.ui:183
+#, kde-format
+msgid "Check log cache fill before reading tree"
+msgstr "Comprova l'ompliment del cau de registres abans de llegir l'arbre"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_start_updates_check_on_open)
+#: src/settings/subversion_settings.ui:14
+#, kde-format
+msgid "Select if kdesvn should check for updates when open a working copy"
+msgstr ""
+"Dirimix si Kdesvn haurà de comprovar per a actualitzacions quan òbriga una "
+"còpia de treball"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_start_updates_check_on_open)
+#: src/settings/subversion_settings.ui:17
+#, kde-format
+msgid "Start check for updates when open a working copy"
+msgstr "Inicia la comprovació d'actualitzacions en obrir una còpia de treball"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_cache_on_open)
+#: src/settings/subversion_settings.ui:33
+#, kde-format
+msgid "Start refresh the log cache for repository when networking enabled"
+msgstr ""
+"Inicia una actualització del cau del registre per al repositori quan la "
+"xarxa està activa"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_cache_on_open)
+#: src/settings/subversion_settings.ui:36
+#, kde-format
+msgid "Start fill log cache on open"
+msgstr "Inicia l'ompliment del cau de registres en obrir"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_check_needslock)
+#: src/settings/subversion_settings.ui:43
+#, kde-format
+msgid "When listing on working copies kdesvn may check for this property"
+msgstr ""
+"Mentre es llista en les còpies de treball, Kdesvn pot comprovar esta "
+"propietat"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_check_needslock)
+#: src/settings/subversion_settings.ui:46
+#, kde-format
+msgid ""
+"When listing on working copies kdesvn may check for <tt>svn:needs-lock</tt> "
+"property.<br>But due this listings/updating on folders containing lot of "
+"items may get slow. So you should only switch on if you have repositories "
+"containing lot of such entries."
+msgstr ""
+"Mentre es llista en les còpies de treball, Kdesvn pot comprovar la propietat "
+"<tt>svn:needs-lock</tt>.<br>Però llistar/actualitzar carpetes que contenen "
+"una gran quantitat d'elements pot ser lent. Pel que només l'haureu d'activar "
+"si teniu repositoris que contenen una gran quantitat d'este tipus d'entrades."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_check_needslock)
+#: src/settings/subversion_settings.ui:49
+#, kde-format
+msgid "Check if items has \"svn:needs-lock\" property set"
+msgstr "Comprova si els elements tenen establida la propietat «svn:needs-lock»"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
+#: src/settings/subversion_settings.ui:56
+#, kde-format
+msgid ""
+"Whether getting details about items when making listing on repositories or "
+"not"
+msgstr ""
+"Si cal obtindre els detalls sobre els elements quan es realitza un llistat "
+"sobre els repositoris"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_details_on_remote_listing)
+#: src/settings/subversion_settings.ui:61
+#, kde-format
+msgid ""
+"<p align=\"left\">When checked, kdesvn get more detailed info about file "
+"items when making a listing to remote repositories. So you may see remote "
+"locks in overview.\n"
+"</p>\n"
+"<p align=\"left\"><i>Be careful: This may let listings REAL slow.</i></p>"
+msgstr ""
+"<p align=\"left\">Quan està marcada, Kdesvn obté informació més detallada "
+"sobre els elements en realitzar un llistat sobre repositoris remots. Així es "
+"poden veure els blocats remots en el resum.\n"
+"</p>\n"
+"<p align=\"left\"><i>Precaució: Açò pot tornar el llistat MOLT lent.</i></p>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_details_on_remote_listing)
+#: src/settings/subversion_settings.ui:64
+#, kde-format
+msgid "Get file details while remote listing"
+msgstr "Obtín els detalls de fitxer en el llistat remot"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_info_recursive)
+#: src/settings/subversion_settings.ui:74
+#, kde-format
+msgid "Gain item info recursive"
+msgstr "Obtín la informació de l'element recursivament"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_properties_on_remote_items)
+#: src/settings/subversion_settings.ui:84
+#, kde-format
+msgid "Should kdesvn retrieves properties on selected item in repositories"
+msgstr ""
+"Kdesvn rebrà les propietats sobre l'element seleccionat en el repositori"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
+#: src/settings/subversion_settings.ui:88
+#, kde-format
+msgid ""
+"When browsing kdesvn may try displaying properties below itemlist from a "
+"selected item. \n"
+"On networked repositories (e.g., not opened via file:// protocol) this may "
+"get real slow. So if you have slow network connections or when browsing "
+"hangs often you should deactivate it."
+msgstr ""
+"En navegar, Kdesvn pot intentar mostrar les propietats davall la llista "
+"d'elements per a un element seleccionat.\n"
+"En els repositoris en la xarxa (p. ex., no oberts via el protocol file://), "
+"açò pot resultar molt lent. De manera que si teniu una connexió de xarxa "
+"lenta o quan la navegació es penja sovint haureu de desactivar-la."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_properties_on_remote_items)
+#: src/settings/subversion_settings.ui:91
+#, kde-format
+msgid "Always get properties on networked repositories"
+msgstr "Obtín sempre les propietats sobre els repositoris en la xarxa"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_store_passwords)
+#: src/settings/subversion_settings.ui:101
+#, kde-format
+msgid "Should Subversion store passwords in default"
+msgstr "Subversion emmagatzemarà de manera predeterminada les contrasenyes"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_store_passwords)
+#: src/settings/subversion_settings.ui:104
+#, kde-format
+msgid ""
+"Storing passwords is often a security problem. Kdesvn itself does not store "
+"any passwords, but the Subversion itself inside the configuration area of "
+"Subversion. If this area is readable from others you should not set it, but "
+"you may select for single non critical accounts inside the authentication "
+"dialog."
+msgstr ""
+"Guardar contrasenyes sovint és un problema de seguretat. Kdesvn no en guarda "
+"cap, de manera que ho fa Subversion dintre de la seua àrea de configuració. "
+"Si esta àrea és de lectura per a altra gent, no s'hauria de configurar açò, "
+"però ho podeu seleccionar per a comptes no crítics dins del diàleg "
+"d'autenticació."
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_passwords_in_wallet)
+#: src/settings/subversion_settings.ui:117
+#, kde-format
+msgid ""
+"When saving passwords, do it into KDE Wallet instead of Subversions storage?"
+msgstr ""
+"En guardar les contrasenyes, fer-ho a dins de la cartera de KDE en lloc del "
+"rebost de Subversion?"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_passwords_in_wallet)
+#: src/settings/subversion_settings.ui:122
+#, kde-format
+msgid ""
+"<p>Tells if your passwords set in kdesvn should stored into KDE Wallet "
+"instead of simple clear text storage of Subversion.</p>\n"
+"<p>This would be a little bit more secure because KDE Wallet is (mostly) "
+"encrypted with a password. On other hand you must re-enter your passwords "
+"with other Subversion clients not accessing KDE wallet (e.g. svn command "
+"line itself, rapidsvn and so on).</p>\n"
+"<p>If you are HOME storage e.g. Subversion's config folder is on a network "
+"drive you should hard think about not storing passwords in a plain text file "
+"like Subversion does but put it into an encrypted storage like KDE Wallet or "
+"do not save passwords.</p>"
+msgstr ""
+"<p>Indica si les contrasenyes establides al kdesvn s'hauran d'emmagatzemar "
+"en la cartera de KDE en lloc de l'emmagatzematge en text clar de Subversion."
+"</p>\n"
+"<p>Açò hauria de ser una mica més segur, ja que la cartera de KDE està "
+"(majoritàriament) encriptada amb una contrasenya. D'altra banda, caldrà que "
+"torneu a introduir les vostres contrasenyes amb els altres clients de "
+"Subversion que no accedisquen a la cartera de KDE (p. ex., la mateixa línia "
+"d'ordres, rapidsvn i així successivament).</p>\n"
+"<p>Si esteu emmagatzemant a HOME, i per exemple, la carpeta de configuració "
+"de Subversion es troba en una unitat de xarxa, haureu de pensar seriosament "
+"no emmagatzemar les contrasenyes en un fitxer de text net, com fa "
+"Subversion. No cal res més que posar-les en un emmagatzematge encriptat com "
+"la cartera de KDE o no guardar les contrasenyes.</p>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_passwords_in_wallet)
+#: src/settings/subversion_settings.ui:125
+#, kde-format
+msgid "Store passwords into KDE Wallet"
+msgstr "Guarda les contrasenyes en la cartera de KDE"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_password_cache)
+#: src/settings/subversion_settings.ui:135
+#, kde-format
+msgid "Use an internal password cache"
+msgstr "Utilitza un cau de contrasenyes intern"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_always_list_changed_files)
+#: src/settings/subversion_settings.ui:155
+#, kde-format
+msgid "Read detailed change lists"
+msgstr "Llig les llistes de canvis detallats"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_log_always_list_changed_files)
+#: src/settings/subversion_settings.ui:158
+#, kde-format
+msgid ""
+"Reading lists of changed files may sometimes a little bit slow down things. "
+"But if this feature is switched off, kdesvn may fail generating differences "
+"between node changes from within the log viewer."
+msgstr ""
+"Llegir les llistes de fitxers canviats a vegades pot alentir un xic les "
+"coses. Però si es desactiva esta característica, Kdesvn pot fallar en "
+"generar les diferències entre els canvis de node des de dintre del visor del "
+"registre."
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_review_commit)
+#: src/settings/subversion_settings.ui:171
+#, kde-format
+msgid "List items next commit will send or not"
+msgstr "Llista els elements de la següent publicació que seran o no enviats"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_commit_hide_new)
+#: src/settings/subversion_settings.ui:184
+#, kde-format
+msgid "Should unversioned items displayed in commit dialog or not."
+msgstr ""
+"S'han o no de mostrar els elements sense versió en el diàleg de publicació."
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_commit_hide_new)
+#: src/settings/subversion_settings.ui:187
+#, kde-format
+msgid "Hide new items in commit box"
+msgstr "Oculta els elements nous al quadro de publicació"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_add_as_modification)
+#: src/settings/subversion_settings.ui:197
+#, kde-format
+msgid ""
+"<html><head/><body><p>If set, a local addition at the same path as an "
+"incoming addition of the same node kind results in a normal node with a "
+"possible local modification, instead of a tree conflict.</p></body></html>"
+msgstr ""
+"<html><head/><body><p>Si s'establix, una addició local al mateix camí que "
+"una addició entrant de la mateixa classe de node, resultarà en un node "
+"normal amb una possible modificació local, en lloc d'un conflicte en l'arbre."
+"</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_add_as_modification)
+#: src/settings/subversion_settings.ui:200
+#, kde-format
+msgid "Update modifies instead of conflicts"
+msgstr "Una actualització modifica en lloc de generar conflictes"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_make_parents)
+#: src/settings/subversion_settings.ui:207
+#, kde-format
+msgid ""
+"<html><head/><body><p>If set, create any non-existent parent directories "
+"also by checking them out at depth=empty</p></body></html>"
+msgstr ""
+"<html><head/><body><p>Si s'establix, es crearà qualsevol directori pare no "
+"existent comprovant també la profunditat buida</p></body></html>"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_make_parents)
+#: src/settings/subversion_settings.ui:210
+#, kde-format
+msgid "Update makes missing parents"
+msgstr "Una actualització crea els elements pare que falten"
+
+#: src/svnfrontend/background/fillcachethread.cpp:68
+#, kde-format
+msgid ""
+"Not filling log cache because it is disabled due setting for this repository."
+msgstr ""
+"No s'està omplint el cau de registres, ja que està desactivat per este "
+"repositori."
+
+#: src/svnfrontend/background/fillcachethread.cpp:70
+#, kde-format
+msgid "Filling log cache in background."
+msgstr "S'està omplint el cau de registres en segon pla."
+
+#: src/svnfrontend/background/fillcachethread.cpp:92
+#, kde-format
+msgid "Filling cache canceled."
+msgstr "L'ompliment del cau s'ha cancel·lat."
+
+#: src/svnfrontend/background/fillcachethread.cpp:107
+#, kde-format
+msgid "Cache filled up to revision %1."
+msgstr "Cau plena fins a la revisió «%1»."
+
+#: src/svnfrontend/background/fillcachethread.cpp:114
+#, kde-format
+msgid "Filling log cache in background finished."
+msgstr "L'ompliment del cau de registres en segon pla ha finalitzat."
+
+#: src/svnfrontend/background/tcontextlistener.cpp:182
+#, kde-format
+msgid "%1 of %2 transferred."
+msgstr "S'han transferit %1 de %2."
+
+#: src/svnfrontend/background/tcontextlistener.cpp:184
+#: src/svnfrontend/stopdlg.cpp:200
+#, kde-format
+msgid "%1 transferred."
+msgstr "S'han transferit %1."
+
+#: src/svnfrontend/blamedisplay.cpp:195 src/svnfrontend/blamedisplay.cpp:207
+#, kde-format
+msgid "Log message for revision"
+msgstr "Missatge de registre per a la revisió"
+
+#: src/svnfrontend/blamedisplay.cpp:200
+#, kde-format
+msgid "Go to line"
+msgstr "Ves a la línia"
+
+#: src/svnfrontend/blamedisplay.cpp:333
+#, kde-format
+msgid "Show line"
+msgstr "Mostra línia"
+
+#: src/svnfrontend/blamedisplay.cpp:333
+#, kde-format
+msgid "Show line number"
+msgstr "Mostra número de línia"
+
+#: src/svnfrontend/blamedisplay.cpp:370
+#, kde-format
+msgctxt "@title:window"
+msgid "Log Message for Revision %1"
+msgstr "Missatge de registre per a la revisió %1"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:40
+#, kde-format
+msgid "Line"
+msgstr "Línia"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:45
+#: src/svnfrontend/models/logitemmodel.cpp:175
+#, kde-format
+msgid "Revision"
+msgstr "Revisió"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#. i18n: ectx: property (text), widget (QRadioButton, m_startDateButton)
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopDateButton)
+#: src/svnfrontend/blamedisplay.ui:50
+#: src/svnfrontend/fronthelpers/rangeinput.ui:46
+#: src/svnfrontend/fronthelpers/rangeinput.ui:130
+#: src/svnfrontend/models/logitemmodel.cpp:179
+#, kde-format
+msgid "Date"
+msgstr "Data"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:55
+#: src/svnfrontend/models/logitemmodel.cpp:177
+#, kde-format
+msgid "Author"
+msgstr "Autoria"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
+#: src/svnfrontend/blamedisplay.ui:60
+#, kde-format
+msgid "Content"
+msgstr "Contingut"
+
+#: src/svnfrontend/ccontextlistener.cpp:64
+#, kde-format
+msgid "Add to revision control"
+msgstr "S'afig a la revisió de control"
+
+#: src/svnfrontend/ccontextlistener.cpp:67
+#, kde-format
+msgid "Restore missing"
+msgstr "Es restaura el que falta"
+
+#: src/svnfrontend/ccontextlistener.cpp:68
+#, kde-format
+msgid "Revert"
+msgstr "Revertix"
+
+#: src/svnfrontend/ccontextlistener.cpp:69
+#, kde-format
+msgid "Revert failed"
+msgstr "L'acció de revertir ha fallat"
+
+#: src/svnfrontend/ccontextlistener.cpp:70
+#, kde-format
+msgid "Resolved"
+msgstr "S'ha resolt"
+
+#: src/svnfrontend/ccontextlistener.cpp:71
+#, kde-format
+msgid "Skip"
+msgstr "S'ha omés"
+
+#: src/svnfrontend/ccontextlistener.cpp:72 src/svnfrontend/svnitem.cpp:434
+#, kde-format
+msgid "Deleted"
+msgstr "S'ha suprimit"
+
+#: src/svnfrontend/ccontextlistener.cpp:73
+#, kde-format
+msgid "Added"
+msgstr "S'ha afegit"
+
+#: src/svnfrontend/ccontextlistener.cpp:74
+#, kde-format
+msgid "Update"
+msgstr "S'ha actualitzat"
+
+#: src/svnfrontend/ccontextlistener.cpp:75
+#, kde-format
+msgid "Update complete"
+msgstr "S'ha completat l'actualització de"
+
+#: src/svnfrontend/ccontextlistener.cpp:76
+#, kde-format
+msgid "Update external module"
+msgstr "S'ha actualitzat un mòdul extern"
+
+#: src/svnfrontend/ccontextlistener.cpp:78
+#, kde-format
+msgid "Status on external"
+msgstr "Estat sobre el repositori extern"
+
+#: src/svnfrontend/ccontextlistener.cpp:79
+#, kde-format
+msgid "Commit Modified"
+msgstr "S'ha modificat la publicació"
+
+#: src/svnfrontend/ccontextlistener.cpp:80
+#, kde-format
+msgid "Commit Added"
+msgstr "S'ha afegit la publicació"
+
+#: src/svnfrontend/ccontextlistener.cpp:81
+#, kde-format
+msgid "Commit Deleted"
+msgstr "S'ha suprimit la publicació"
+
+#: src/svnfrontend/ccontextlistener.cpp:82
+#, kde-format
+msgid "Commit Replaced"
+msgstr "S'ha substituït la publicació"
+
+#: src/svnfrontend/ccontextlistener.cpp:85
+#, kde-format
+msgid "Locking"
+msgstr "S'ha blocat"
+
+#: src/svnfrontend/ccontextlistener.cpp:86
+#, kde-format
+msgid "Unlocked"
+msgstr "S'ha desblocat"
+
+#: src/svnfrontend/ccontextlistener.cpp:87
+#, kde-format
+msgid "Lock failed"
+msgstr "L'acció de blocat ha fallat"
+
+#: src/svnfrontend/ccontextlistener.cpp:88
+#, kde-format
+msgid "Unlock failed"
+msgstr "L'acció de desblocat ha fallat"
+
+#: src/svnfrontend/ccontextlistener.cpp:94
+#, kde-format
+msgid "unchanged"
+msgstr "sense canvis"
+
+#: src/svnfrontend/ccontextlistener.cpp:95
+#, kde-format
+msgid "item wasn't present"
+msgstr "l'element no està present"
+
+#: src/svnfrontend/ccontextlistener.cpp:96
+#, kde-format
+msgid "unversioned item obstructed work"
+msgstr "l'element sense versió obstruïx la tasca"
+
+#: src/svnfrontend/ccontextlistener.cpp:99
+#, kde-format
+msgid "Modified state had mods merged in."
+msgstr "L'estat modificat té modificacions fusionades."
+
+#: src/svnfrontend/ccontextlistener.cpp:100
+#, kde-format
+msgid "Modified state got conflicting mods."
+msgstr "L'estat modificat té modificacions en conflicte."
+
+#: src/svnfrontend/ccontextlistener.cpp:311
+#, kde-format
+msgid "Enter password for realm %1"
+msgstr "Introduïu la contrasenya per al domini %1"
+
+#: src/svnfrontend/ccontextlistener.cpp:342
+#, kde-format
+msgid ""
+"The certificate is not issued by a trusted authority. Use the fingerprint to "
+"validate the certificate manually."
+msgstr ""
+"El certificat no ha sigut emés per una autoritat de confiança. Utilitzeu "
+"l'empremta digital per a validar el certificat manualment."
+
+#: src/svnfrontend/ccontextlistener.cpp:345
+#, kde-format
+msgid "The certificate hostname does not match."
+msgstr "El certificat no coincidix amb el nom de l'amfitrió."
+
+#: src/svnfrontend/ccontextlistener.cpp:348
+#, kde-format
+msgid "The certificate is not yet valid."
+msgstr "El certificat ja no és vàlid."
+
+#: src/svnfrontend/ccontextlistener.cpp:351
+#, kde-format
+msgid "The certificate has expired."
+msgstr "El certificat ha vençut."
+
+#: src/svnfrontend/ccontextlistener.cpp:354
+#, kde-format
+msgid "The certificate has an unknown error."
+msgstr "El certificat conté un error desconegut."
+
+#: src/svnfrontend/ccontextlistener.cpp:376
+#, kde-format
+msgid ""
+"%1\n"
+"Really store password as plain text?"
+msgstr ""
+"%1\n"
+"Cal emmagatzemar realment la contrasenya com a text net?"
+
+#: src/svnfrontend/ccontextlistener.cpp:377
+#, kde-format
+msgid "Save password"
+msgstr "Guarda la contrasenya"
+
+#: src/svnfrontend/commandexec.cpp:219
+#, kde-format
+msgid "Command \"%1\" not implemented or known"
+msgstr "L'ordre «%1» no està implementada o és desconeguda"
+
+#: src/svnfrontend/commandexec.cpp:220 src/svnfrontend/commandexec.cpp:339
+#: src/svnfrontend/graphtree/revgraphview.cpp:1004
+#: src/svnfrontend/maintreewidget.cpp:992
+#: src/svnfrontend/maintreewidget.cpp:2137
+#: src/svnfrontend/maintreewidget.cpp:2349
+#, kde-format
+msgid "SVN Error"
+msgstr "S'ha produït un error de SVN"
+
+#: src/svnfrontend/commandexec.cpp:434
+#, kde-format
+msgid "\"GET\" requires output file"
+msgstr "«GET» requerix fitxer d'eixida"
+
+#: src/svnfrontend/commandexec.cpp:621
+#, kde-format
+msgid "May only switch one URL at time"
+msgstr "Tan sols es pot canviar un URL alhora"
+
+#: src/svnfrontend/commandexec.cpp:625
+#, kde-format
+msgid "Switch only on working copies"
+msgstr "Tan sols es pot canviar sobre còpies de treball"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, CopyMoveView)
+#: src/svnfrontend/copymoveview.ui:14
+#, kde-format
+msgid "Copy / Move"
+msgstr "Copia / Mou"
+
+#. i18n: ectx: property (text), widget (QLabel, m_HeadOneLabel)
+#: src/svnfrontend/copymoveview.ui:20
+#, kde-format
+msgid "Rename"
+msgstr "Canvia el nom"
+
+#. i18n: ectx: property (text), widget (KSqueezedTextLabel, m_OldNameLabel)
+#. i18n: ectx: property (text), widget (KSqueezedTextLabel, m_PrefixLabel)
+#: src/svnfrontend/copymoveview.ui:33 src/svnfrontend/copymoveview.ui:58
+#, kde-format
+msgid "KSqueezedTextLabel"
+msgstr "KSqueezedTextLabel"
+
+#. i18n: ectx: property (text), widget (QLabel, m_HeadTwoLabel)
+#: src/svnfrontend/copymoveview.ui:43
+#, kde-format
+msgid "to"
+msgstr "a"
+
+#: src/svnfrontend/copymoveview_impl.cpp:47
+#, kde-format
+msgid "Rename/move"
+msgstr "Canvia el nom/mou"
+
+#: src/svnfrontend/copymoveview_impl.cpp:74
+#, kde-format
+msgctxt "@title:window"
+msgid "Move/Rename File/Directory"
+msgstr "Mou/Canvia el nom del fitxer/directori"
+
+#: src/svnfrontend/copymoveview_impl.cpp:74
+#, kde-format
+msgctxt "@title:window"
+msgid "Copy File/Directory"
+msgstr "Copia el fitxer/directori"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, CreateRepoDlg)
+#: src/svnfrontend/createrepodlg.ui:14
+#, kde-format
+msgid "Create new repository"
+msgstr "Crea un repositori nou"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_DisableFsync)
+#: src/svnfrontend/createrepodlg.ui:22
+#, kde-format
+msgid "Disable fsync at commit (BDB only)"
+msgstr "Desactiva el «fsync» en publicar (només BDB)"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel1)
+#: src/svnfrontend/createrepodlg.ui:32
+#, kde-format
+msgid "Path to repository:"
+msgstr "Camí al repositori:"
+
+#. i18n: ectx: property (toolTip), widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:45
+#, kde-format
+msgid "Select type of storage"
+msgstr "Selecciona el tipus de guardada"
+
+#. i18n: ectx: property (whatsThis), widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:48
+#, kde-format
+msgid "Select the storage type of repository (FSFS or Berkely DB)"
+msgstr ""
+"Seleccioneu el tipus de guardada del repositori (FSFS o DB de Berkeley)"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:52
+#, kde-format
+msgid "FSFS"
+msgstr "FSFS"
+
+#. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
+#: src/svnfrontend/createrepodlg.ui:57
+#, kde-format
+msgid "BDB"
+msgstr "BDB"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_CreateMainDirs)
+#: src/svnfrontend/createrepodlg.ui:65
+#, kde-format
+msgid "Create trunk, tags and branches folders"
+msgstr "Crea les carpetes «trunk», «tags» i «branches»"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_CreateMainDirs)
+#: src/svnfrontend/createrepodlg.ui:68
+#, kde-format
+msgid ""
+"If this is set then the base layout (<tt>/trunk</tt>,<tt>/branches</tt> and "
+"<tt>/tags</tt>) will created after opening the fresh repository."
+msgstr ""
+"Si s'establix açò, llavors la disposició base <tt>/trunk</tt>, <tt>/"
+"branches</tt> i <tt>/tags</tt> serà creada després d'obrir el repositori nou."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_CreateMainDirs)
+#: src/svnfrontend/createrepodlg.ui:71
+#, kde-format
+msgid "Create main folders"
+msgstr "Crea les carpetes principals"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn16compat)
+#: src/svnfrontend/createrepodlg.ui:87
+#, kde-format
+msgid "Is created repository compatible to Subversion prior 1.6"
+msgstr ""
+"S'ha creat un repositori compatible amb Subversion anterior a la versió 1.6"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn16compat)
+#: src/svnfrontend/createrepodlg.ui:90
+#, kde-format
+msgid ""
+"If set, the repository created will compatible to Subversion prior 1.5. This "
+"is only useful when svnqt is running with Subversion 1.6 or above."
+msgstr ""
+"Si s'establix, el repositori creat serà compatible amb Subversion anterior a "
+"la versió 1.5. Açò només és útil quan svnqt s'està executant amb Subversion "
+"1.6 o superior."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_presvn16compat)
+#: src/svnfrontend/createrepodlg.ui:93
+#, kde-format
+msgid "Compatible to Subversion prior 1.6"
+msgstr "Compatible amb Subversion anterior a la versió 1.6"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_LogKeep)
+#: src/svnfrontend/createrepodlg.ui:113
+#, kde-format
+msgid "Disable automatic log file removal (BDB only)"
+msgstr "Desactiva eliminació automàtica del fitxer de registre (només BDB)"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel2)
+#: src/svnfrontend/createrepodlg.ui:123
+#, kde-format
+msgid "Type of repository:"
+msgstr "Tipus de repositori:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn15compat)
+#: src/svnfrontend/createrepodlg.ui:139
+#, kde-format
+msgid "Is created repository compatible to Subversion prior 1.5"
+msgstr ""
+"S'ha creat un repositori compatible amb Subversion anterior a la versió 1.5"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn15compat)
+#: src/svnfrontend/createrepodlg.ui:142
+#, kde-format
+msgid ""
+"If set, the repository created will compatible to Subversion prior 1.5. This "
+"is only useful when svnqt is running with Subversion 1.5 or above."
+msgstr ""
+"Si s'establix, el repositori creat serà compatible amb Subversion anterior a "
+"la versió 1.5. Açò només és útil quan svnqt s'està executant amb Subversion "
+"1.5 o superior."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_presvn15compat)
+#: src/svnfrontend/createrepodlg.ui:145
+#, kde-format
+msgid "Compatible to Subversion prior 1.5"
+msgstr "Compatible amb Subversion anterior a la versió 1.5"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn18compat)
+#: src/svnfrontend/createrepodlg.ui:162
+#, kde-format
+msgid "Is created repository compatible to Subversion prior 1.8"
+msgstr ""
+"S'ha creat un repositori compatible amb Subversion anterior a la versió 1.8"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn18compat)
+#: src/svnfrontend/createrepodlg.ui:165
+#, kde-format
+msgid ""
+"If set, the repository created will compatible to Subversion prior 1.4. This "
+"is only useful when svnqt is running with Subversion 1.8 or above."
+msgstr ""
+"Si s'establix, el repositori creat serà compatible amb Subversion anterior a "
+"la versió 1.4. Açò només és útil quan svnqt s'està executant amb Subversion "
+"1.8 o superior."
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_presvn18compat)
+#: src/svnfrontend/createrepodlg.ui:168
+#, kde-format
+msgid "Compatible to Subversion prior 1.8"
+msgstr "Compatible amb Subversion anterior a la versió 1.8"
+
+#: src/svnfrontend/database/dboverview.cpp:117
+#, kde-format
+msgid "Log cache holds %1 log entries and consumes %2 on disk."
+msgstr "El cau de registres manté %1 entrades i consumix %2 en el disc."
+
+#: src/svnfrontend/database/dboverview.cpp:133
+#, kde-format
+msgid ""
+"Really clean cache for repository\n"
+"%1?"
+msgstr ""
+"S'ha buidat el cau per al repositori\n"
+"%1?"
+
+#: src/svnfrontend/database/dboverview.cpp:134
+#, kde-format
+msgid "Clean repository cache"
+msgstr "Buida el cau del repositori"
+
+#: src/svnfrontend/database/dboverview.cpp:150
+#, kde-format
+msgid ""
+"Really clean cache and data for repository\n"
+"%1?"
+msgstr ""
+"S'ha buidat el cau i les dades per al repositori\n"
+"%1?"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DeleteRepositoryButton)
+#: src/svnfrontend/database/dboverview.cpp:151
+#: src/svnfrontend/database/dboverview.ui:59
+#, kde-format
+msgid "Delete repository"
+msgstr "Suprimix el repositori"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, DBOverView)
+#: src/svnfrontend/database/dboverview.ui:6
+#, kde-format
+msgid "Overview about cache database content"
+msgstr "Informació sobre el contingut de la base de dades del cau"
+
+#. i18n: ectx: property (text), widget (QLabel, m_RepositoryLabel)
+#: src/svnfrontend/database/dboverview.ui:19
+#, kde-format
+msgid "Known repositories"
+msgstr "Repositoris coneguts"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteCacheButton)
+#. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteCacheButton)
+#: src/svnfrontend/database/dboverview.ui:40
+#: src/svnfrontend/database/dboverview.ui:43
+#, kde-format
+msgid "Delete cache entries for current selected repository"
+msgstr "Suprimix les entrades al cau per al repositori seleccionat"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DeleteCacheButton)
+#: src/svnfrontend/database/dboverview.ui:46
+#, kde-format
+msgid "Delete cache"
+msgstr "Suprimix el cau"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteRepositoryButton)
+#. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteRepositoryButton)
+#: src/svnfrontend/database/dboverview.ui:53
+#: src/svnfrontend/database/dboverview.ui:56
+#, kde-format
+msgid "Delete all entries and settings for selected repository"
+msgstr ""
+"Suprimix totes les entrades i la configuració per al repositori seleccionat"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_SettingsButton)
+#: src/svnfrontend/database/dboverview.ui:66
+#, kde-format
+msgid "Repository Settings"
+msgstr "Configuració del repositori"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_StatisticButton)
+#: src/svnfrontend/database/dboverview.ui:73
+#, kde-format
+msgid "Statistics for repository"
+msgstr "Estadístiques per al repositori"
+
+#: src/svnfrontend/database/dbsettings.cpp:39
+#, kde-format
+msgctxt "@title:window"
+msgid "Settings for %1"
+msgstr "Configuració per a %1"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: src/svnfrontend/database/dbsettings.ui:21
+#, kde-format
+msgid "Log cache settings"
+msgstr "Configuració de la memòria cau del registre"
+
+#. i18n: ectx: property (text), widget (QCheckBox, dbcfg_noCacheUpdate)
+#: src/svnfrontend/database/dbsettings.ui:27
+#, kde-format
+msgid "Do not update log cache on open"
+msgstr "No actualitzar el cau del registre en obrir"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: src/svnfrontend/database/dbsettings.ui:40
+#, kde-format
+msgid "Prefixes to filter out in revision tree"
+msgstr "Prefixos que s'han de filtrar en l'arbre de revisions"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#: src/svnfrontend/database/dbsettings.ui:58
+#, kde-format
+msgid "Log and statistics setting"
+msgstr "Configuració del registre i les estadístiques"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/svnfrontend/database/dbsettings.ui:70
+#, kde-format
+msgid "Hide logs containing following words"
+msgstr "Oculta els registres que continguen les paraules següents"
+
+#. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_log_pattern)
+#: src/svnfrontend/database/dbsettings.ui:77
+#, kde-format
+msgid ""
+"This is a list which words/substrings a log entry must contain so it will be "
+"hidden from log and statistics"
+msgstr ""
+"Esta és una llista de les paraules/subcadenes que haurà de contindre una "
+"entrada de registre perquè s'oculte al registre i a les estadístiques"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/svnfrontend/database/dbsettings.ui:98
+#, kde-format
+msgid "Do not show commits from following users"
+msgstr "No mostrar les publicacions dels usuaris següents"
+
+#. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_userslog)
+#: src/svnfrontend/database/dbsettings.ui:105
+#, kde-format
+msgid ""
+"Do not display commits of listed users in log window and statistics view"
+msgstr ""
+"No mostrar les publicacions dels usuaris llistats en la finestra del "
+"registre i en la vista de les estadístiques"
+
+#. i18n: ectx: property (text), widget (QCheckBox, dbcfg_filter_empty_author)
+#: src/svnfrontend/database/dbsettings.ui:115
+#, kde-format
+msgid "Do not display commits without author"
+msgstr "No mostrar les publicacions sense autor"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DumpRepoDlg)
+#: src/svnfrontend/dumprepo_dlg.ui:14
+#, kde-format
+msgid "Dump repository"
+msgstr "Bolca el repositori"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_UseDeltas)
+#: src/svnfrontend/dumprepo_dlg.ui:35
+#, kde-format
+msgid "Use deltas"
+msgstr "Utilitza deltes"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, m_StartNumber)
+#: src/svnfrontend/dumprepo_dlg.ui:54
+#, kde-format
+msgid "-1 for START"
+msgstr "-1 per a START"
+
+#. i18n: ectx: property (text), widget (QLabel, m_lblEnd)
+#: src/svnfrontend/dumprepo_dlg.ui:67
+#, kde-format
+msgid "End revision:"
+msgstr "Revisió final:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_incrementalDump)
+#: src/svnfrontend/dumprepo_dlg.ui:94
+#, kde-format
+msgid "incremental Dump"
+msgstr "Bolcat incremental"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_Rangeonly)
+#: src/svnfrontend/dumprepo_dlg.ui:107
+#, kde-format
+msgid "Dump revision range"
+msgstr "Bolca l'interval de revisions"
+
+#. i18n: ectx: property (text), widget (QLabel, m_OutfileLabel)
+#: src/svnfrontend/dumprepo_dlg.ui:117
+#, kde-format
+msgid "Dump into:"
+msgstr "Bolca dintre de:"
+
+#. i18n: ectx: property (toolTip), widget (QSpinBox, m_EndNumber)
+#: src/svnfrontend/dumprepo_dlg.ui:136
+#, kde-format
+msgid "-1 for HEAD"
+msgstr "-1 per a HEAD"
+
+#. i18n: ectx: property (text), widget (QLabel, m_lblStart)
+#: src/svnfrontend/dumprepo_dlg.ui:149
+#, kde-format
+msgid "Start revision:"
+msgstr "Revisió inici:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_RepoLabel)
+#: src/svnfrontend/dumprepo_dlg.ui:162
+#, kde-format
+msgid "Repository to dump:"
+msgstr "Repositori que s'ha de bolcar:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_PatternLabel)
+#: src/svnfrontend/editignorepattern.ui:17
+#, kde-format
+msgid "Patterns to add or remove:"
+msgstr "Patrons per a afegir o eliminar:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RemoveCheckBox)
+#: src/svnfrontend/editignorepattern.ui:40
+#, kde-format
+msgid "Remove patterns"
+msgstr "Elimina els patrons"
+
+#. i18n: ectx: property (text), widget (QLabel, m_DepthLabel)
+#: src/svnfrontend/editignorepattern.ui:49
+#, kde-format
+msgid "Depth for ignore"
+msgstr "Profunditat per a ignorar"
+
+#: src/svnfrontend/editpropsdlg.cpp:32
+#, kde-format
+msgctxt "@title:window"
+msgid "Add Property"
+msgstr "Afig una propietat"
+
+#: src/svnfrontend/editpropsdlg.cpp:47 src/svnfrontend/editpropsdlg.cpp:83
+#, kde-format
+msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
+msgstr "Un dels <b>'natius'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
+
+#: src/svnfrontend/editpropsdlg.cpp:48 src/svnfrontend/editpropsdlg.cpp:84
+#, kde-format
+msgid ""
+"If present, make the file executable.<br/>This property can not be set on a "
+"directory. A non-recursive attempt will fail, and a recursive attempt will "
+"set the property only on the file children of the folder."
+msgstr ""
+"Si està present, torna el fitxer com executable.<br/>Esta propietat no es "
+"pot establir sobre un directori. Un intent no recursiu fallarà, i un intent "
+"recursiu establirà la propietat tan sols en els fitxers fill de la carpeta."
+
+#: src/svnfrontend/editpropsdlg.cpp:52
+#, kde-format
+msgid ""
+"Keywords to be expanded into the contents of a file.<br/>They can be "
+"inserted into documents by placing a keyword anchor which is formatted as "
+"$KeywordName$.<br/>Valid keywords are:<br/><b>URL/HeadURL</b> The URL for "
+"the head revision of the project.<br/><b>Author/LastChangedBy</b> The last "
+"person to change the file.<br/><b>Date/LastChangedDate</b> The date/time the "
+"object was last modified.<br/><b>Revision/Rev/LastChangedRevision</b> The "
+"last revision the object changed.<br/><b>Id</b> A compressed summary of the "
+"previous 4 keywords."
+msgstr ""
+"Paraules clau que s'expandiran en el contingut d'un fitxer.<br/>Es poden "
+"inserir en els documents posant un ancoratge de paraula clau, el qual es "
+"dona format com a $NomClau$.<br/>Paraules clau vàlides són:<br/><b>URL/"
+"HeadURL</b> L'URL de la revisió «HEAD» del projecte.<br/><b>Author/"
+"LastChangedBy</b> L'última persona que ha canviat el fitxer.<br/><b>Date/"
+"LastChangedDate</b> La data/hora de l'últim objecte que ha sigut modificat."
+"<br/><b>Revision/Rev/LastChangedRevision</b> L'última revisió en la qual "
+"s'ha canviat l'objecte.<br/><b>Id</b> Un resum compacte de les 4 paraules "
+"clau anteriors."
+
+#: src/svnfrontend/editpropsdlg.cpp:61
+#, kde-format
+msgid ""
+"Set this to any value (e.g. <b>'*'</b>) to enforce locking for this file.<br/"
+">The file will be set read-only when checked out or updated, indicating that "
+"a user must acquire a lock on the file before they can edit and commit "
+"changes."
+msgstr ""
+"Establir açò a qualsevol valor (p. ex: <b>'*'</b>) per a forçar el blocat "
+"d'este fitxer.<br/>El fitxer serà establit com a només lectura quan es baixe "
+"o actualitze, indicant que un usuari primer haurà d'adquirir un blocat del "
+"fitxer abans de poder-lo editar i publicar els canvis."
+
+#: src/svnfrontend/editpropsdlg.cpp:65 src/svnfrontend/editpropsdlg.cpp:96
+#, kde-format
+msgid ""
+"The mimetype of the file. Used to determine whether to merge the file and "
+"how to serve it from Apache. A mimetype beginning with <b>'text/'</b> (or an "
+"absent mimetype) is treated as text. Anything else is treated as binary."
+msgstr ""
+"El tipus MIME del fitxer. S'utilitza per a determinar si fusionar el fitxer "
+"i com s'haurà de servir des d'Apache. Un tipus MIME que comence per "
+"<b>'text/'</b> (o un tipus MIME absent) és tractat com a text. Qualsevol "
+"altra cosa és tractada com a binari."
+
+#: src/svnfrontend/editpropsdlg.cpp:90
+#, kde-format
+msgid ""
+"A newline separated list of module specifiers, each consisting of a relative "
+"directory path, optional revision flags, and a URL. For example:<br/"
+"><nobr><b>foo http://example.com/repos/projectA</b></nobr><br/><nobr><b>foo/"
+"bar -r 1234 http://example.com/repos/projectB</b></nobr>"
+msgstr ""
+"Una llista separada per salts de línia amb els especificadors de mòdul, "
+"cadascun dels quals consistix d'un camí relatiu a un directori, etiquetes de "
+"revisió opcionals, i un URL. Per exemple: <br/><nobr><b>foo http://exemple."
+"com/repos/projecte_A</b></nobr><br/><nobr><b>foo/bar -r 1234 http://exemple."
+"com/repos/projecte_B</b></nobr>"
+
+#: src/svnfrontend/editpropsdlg.cpp:95
+#, kde-format
+msgid "A newline separated list of file patterns to ignore."
+msgstr ""
+"Una llista separada per salts de línia de patrons de fitxer que s'ignoraran."
+
+#: src/svnfrontend/editpropsdlg.cpp:100
+#, kde-format
+msgid ""
+"Label text to show for the edit box where the user enters the issue number."
+msgstr ""
+"Etiqueta de text per a mostrar en el quadro d'edició a on l'usuari introduïx "
+"el número d'incidència."
+
+#: src/svnfrontend/editpropsdlg.cpp:103
+#, kde-format
+msgid ""
+"URL pointing to the issue tracker. It must contain <b>%BUGID%</b> which gets "
+"replaced with the bug issue number. Example:<br/><nobr><b>http://example.com/"
+"mantis/view.php?id=%BUGID%</b></nobr>"
+msgstr ""
+"URL apuntant al seguidor d'incidències. Haurà de contindre <b>%BUGID%</b> el "
+"qual serà substituït amb el número d'error de la incidència. Exemple:<br/"
+"><nobr><b>http://exemple.com/mantis/view.php?id=%BUGID%</b></nobr>"
+
+#: src/svnfrontend/editpropsdlg.cpp:106
+#, kde-format
+msgid ""
+"String which is appended to a log message when an issue number is entered. "
+"The string must contain <b>%BUGID%</b> which gets replaced with the bug "
+"issue number."
+msgstr ""
+"Cadena que s'afig a un missatge de registre quan s'introduïx un número "
+"d'incidència. La cadena haurà de contindre <b>%BUGID%</b> el qual serà "
+"substituït pel número d'error de la incidència."
+
+#: src/svnfrontend/editpropsdlg.cpp:109
+#, kde-format
+msgid ""
+"Set to <b>'yes'</b> if a warning shall be shown when no issue is entered in "
+"the commit dialog. Possible values:<br/><b>'true'</b>/<b>'yes'</b> or "
+"<b>'false'</b>/<b>'no'</b>."
+msgstr ""
+"Establiu-ho a <b>«yes»</b> si s'ha de mostrar un avís quan no s'introduïx "
+"cap assumpte en el diàleg de publicació. Valors possibles:<br/><b>«true»</b>/"
+"<b>«yes»</b> o <b>«false»</b>/<b>«no»</b>."
+
+#: src/svnfrontend/editpropsdlg.cpp:112
+#, kde-format
+msgid ""
+"Set to <b>'false'</b> if your bugtracking system has issues which are "
+"referenced not by numbers.<br/>Possible values: <b>'true'</b> or <b>'false'</"
+"b>."
+msgstr ""
+"Establiu-ho a <b>«false»</b> si el vostre sistema de seguiment d'errors "
+"conté assumptes que no es referencien mitjançant números.<br/>Valors "
+"possibles: <b>«true»</b> o <b>«false»</b>."
+
+#: src/svnfrontend/editpropsdlg.cpp:115
+#, kde-format
+msgid ""
+"Set to <b>'false'</b> if you want the bugtracking ID to be inserted at the "
+"top of the log message. The default is <b>'true'</b> which means the "
+"bugtracking ID is appended to the log message."
+msgstr ""
+"Establiu-ho a <b>«false»</b> si voleu que l'ID del seguidor d'errors siga "
+"introduït a dalt del missatge de registre. El valor predeterminat és "
+"<b>«true»</b>, el qual significa que l'ID del seguidor d'errors s'afegirà al "
+"missatge de registre."
+
+#: src/svnfrontend/editpropsdlg.cpp:119
+#, kde-format
+msgid ""
+"Two regular expressions separated by a newline.<br/>The first expression is "
+"used to find a string referring to an issue, the second expression is used "
+"to extract the bare bug ID from that string."
+msgstr ""
+"Dues expressions regulars separades per una nova línia.<br/>La primera "
+"expressió s'utilitza per a trobar una cadena que es referix a una emissió, "
+"la segona expressió s'utilitza per a extraure l'ID de l'error en brut d'esta "
+"cadena."
+
+#: src/svnfrontend/editpropsdlg.cpp:126
+#, kde-format
+msgid "Select or enter new property"
+msgstr "Seleccioneu o introduïu una propietat nova"
+
+#: src/svnfrontend/editpropsdlg.cpp:151
+#, kde-format
+msgid "No help for this property available"
+msgstr "No hi ha ajuda disponible per a esta propietat"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, EditPropsDlg)
+#: src/svnfrontend/editpropsdlg.ui:14
+#, kde-format
+msgid "Modify property"
+msgstr "Modifica la propietat"
+
+#. i18n: ectx: property (text), widget (QLabel, m_NameLabel)
+#: src/svnfrontend/editpropsdlg.ui:22
+#, kde-format
+msgid "Property name:"
+msgstr "Nom de la propietat:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_ValueLabel)
+#: src/svnfrontend/editpropsdlg.ui:46
+#, kde-format
+msgid "Property value:"
+msgstr "Valor de la propietat:"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, helpButton)
+#: src/svnfrontend/editpropsdlg.ui:69
+#, kde-format
+msgid "Click for short info about pre-defined property name"
+msgstr ""
+"Fer clic per a obtindre una xicoteta informació quant al nom predefinit de "
+"la propietat"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, CheckoutInfo)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:14
+#, kde-format
+msgid "Checkout info"
+msgstr "Descarrega info"
+
+#. i18n: ectx: property (text), widget (QLabel, m_TargetLabel)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:26
+#, kde-format
+msgid "Select target directory:"
+msgstr "Seleccioneu directori de destinació:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_UrlLabel)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:40
+#, kde-format
+msgid "Enter URL:"
+msgstr "Introduïu un URL:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_ignoreExternals)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:67
+#, kde-format
+msgid "Ignore externals while operation"
+msgstr "Ignora les definicions externes durant l'operació"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_ignoreExternals)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:70
+#, kde-format
+msgid "Ignore externals"
+msgstr "Ignora les definicions externes"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_overwriteButton)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:77
+#, kde-format
+msgid "May existing unversioned items overwritten"
+msgstr "Poden existir elements sense versió sobreescrits"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_overwriteButton)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:80
+#, kde-format
+msgid "Overwrite existing"
+msgstr "Sobreescriu tot l'existent"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_IgnoreKeywords)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:93
+#, kde-format
+msgid "Ignore keywords"
+msgstr "Ignora les paraules clau"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_CreateDirButton)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:110
+#, kde-format
+msgid "Append source URL name to subfolder"
+msgstr "Crea a una subcarpeta amb el nom final de l'URL"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_ShowExplorer)
+#: src/svnfrontend/fronthelpers/checkoutinfo.ui:120
+#, kde-format
+msgid "Open after job"
+msgstr "Obri en finalitzar"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:43
+#, kde-format
+msgid "Property"
+msgstr "Propietat"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:44
+#, kde-format
+msgid "Value"
+msgstr "Valor"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:110
+#: src/svnfrontend/propertiesdlg.cpp:120 src/svnfrontend/propertiesdlg.cpp:171
+#, kde-format
+msgid ""
+"This property may not set by users.\n"
+"Rejecting it."
+msgstr ""
+"Esta propietat no la poden establir els usuaris.\n"
+"Es refusa."
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:110
+#: src/svnfrontend/propertiesdlg.cpp:120 src/svnfrontend/propertiesdlg.cpp:171
+#, kde-format
+msgid "Protected property"
+msgstr "Propietat protegida"
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:115
+#: src/svnfrontend/propertiesdlg.cpp:124 src/svnfrontend/propertiesdlg.cpp:175
+#, kde-format
+msgid ""
+"A property with that name exists.\n"
+"Rejecting it."
+msgstr ""
+"Ja existix una propietat amb este nom.\n"
+"Es refusa."
+
+#: src/svnfrontend/fronthelpers/propertylist.cpp:115
+#: src/svnfrontend/propertiesdlg.cpp:124 src/svnfrontend/propertiesdlg.cpp:175
+#, kde-format
+msgid "Double property"
+msgstr "Propietat doble"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, RangeInput)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:6
+#, kde-format
+msgid "Revisions"
+msgstr "Revisions"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_startRevBox)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:12
+#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:209
+#, kde-format
+msgid "Start with revision"
+msgstr "Comença amb la revisió"
+
+#. i18n: ectx: property (toolTip), widget (QRadioButton, m_startWorkingButton)
+#. i18n: ectx: property (toolTip), widget (QRadioButton, m_stopWorkingButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:23
+#: src/svnfrontend/fronthelpers/rangeinput.ui:140
+#, kde-format
+msgid "Select current working copy changes"
+msgstr "Selecciona els canvis en la còpia de treball actual"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startWorkingButton)
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopWorkingButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:26
+#: src/svnfrontend/fronthelpers/rangeinput.ui:143
+#, kde-format
+msgid "WORKING"
+msgstr "TREBALL"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startNumberButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:56
+#, kde-format
+msgid "N&umber"
+msgstr "Nú&mero"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startHeadButton)
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopHeadButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:66
+#: src/svnfrontend/fronthelpers/rangeinput.ui:120
+#, kde-format
+msgid "HEAD"
+msgstr "HEAD"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_startStartButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:73
+#, kde-format
+msgid "S&TART"
+msgstr "&COMENÇA"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_stopRevBox)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:85
+#, kde-format
+msgid "Stop with revision"
+msgstr "Para amb la revisió"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopNumberButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:93
+#, kde-format
+msgid "Number"
+msgstr "Número"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_stopStartButton)
+#: src/svnfrontend/fronthelpers/rangeinput.ui:113
+#, kde-format
+msgid "START"
+msgstr "COMENÇA"
+
+#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:62
+#, kde-format
+msgctxt "@title:window"
+msgid "Select Revisions"
+msgstr "Seleccioneu les revisions"
+
+#: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:205
+#, kde-format
+msgid "Select revision"
+msgstr "Tria la revisió"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_RevisionButton)
+#: src/svnfrontend/fronthelpers/revisionbutton.ui:22
+#, kde-format
+msgid "-1"
+msgstr "-1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:146
+#, kde-format
+msgid ""
+"Could not run process \"%1\".\n"
+"\n"
+"Process stopped with message:\n"
+"%2"
+msgstr ""
+"No s'ha pogut executar el procés «%1».\n"
+"\n"
+"El procés s'ha parat amb el següent missatge:\n"
+"%2"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:335
+#, kde-format
+msgid "Error running the graph layouting tool.\n"
+msgstr "Error mentre s'executava l'eina per a dibuixar el graf.\n"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:336
+#, kde-format
+msgid "Please check that 'dot' is installed (package GraphViz)."
+msgstr "Comproveu que «dot» està instal·lat (paquet GraphViz)."
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:425
+#, kde-format
+msgid "Deleted at revision %1"
+msgstr "Suprimit a la revisió %1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:428
+#, kde-format
+msgid "Added at revision %1 as %2"
+msgstr "Afegit a la revisió %1 com a %2"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:434
+#, kde-format
+msgid "Copied to %1 at revision %2"
+msgstr "Copiat a %1 a la revisió %2"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:437
+#, kde-format
+msgid "Renamed to %1 at revision %2"
+msgstr "Canviat el nom a %1 a la revisió %2"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:440
+#, kde-format
+msgid "Modified at revision %1"
+msgstr "Modificat a la revisió %1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:443
+#, kde-format
+msgid "Replaced at revision %1"
+msgstr "Substituït a la revisió %1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:446
+#, kde-format
+msgid "Revision %1"
+msgstr "Revisió %1"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:466
+#, kde-format
+msgid "Could not open temporary file %1 for writing."
+msgstr "No s'ha pogut obrir el fitxer temporal «%1» per a escriptura."
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:561
+#, kde-format
+msgid "<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>"
+msgstr "<br>Revisió: %1<br>Autoria: %2<br>Data: %3<br>Registre: %4</html>"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:569
+#, kde-format
+msgid "<b>Revision</b>%1%2%3"
+msgstr "<b>Revisió</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:570
+#, kde-format
+msgid "<b>Author</b>%1%2%3"
+msgstr "<b>Autoria</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:571
+#, kde-format
+msgid "<b>Date</b>%1%2%3"
+msgstr "<b>Data</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:572
+#, kde-format
+msgid "<b>Log</b>%1%2%3"
+msgstr "<b>Registre</b>%1%2%3"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:841
+#, kde-format
+msgid "Diff to previous"
+msgstr "Diff contra la revisió anterior"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:845
+#, kde-format
+msgid "Diff to selected item"
+msgstr "Diff contra l'element seleccionat"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:848
+#: src/svnfrontend/svnlogdlgimp.cpp:515
+#, kde-format
+msgid "Cat this version"
+msgstr "Bolca (cat) esta versió"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:851
+#, kde-format
+msgid "Unselect item"
+msgstr "Element sense seleccionar"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:853
+#, kde-format
+msgid "Select item"
+msgstr "Element seleccionat"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:856
+#, kde-format
+msgid "Display details"
+msgstr "Mostra els detalls"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:859
+#, kde-format
+msgid "Rotate counter-clockwise"
+msgstr "Gira cap a l'esquerra"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:860
+#, kde-format
+msgid "Rotate clockwise"
+msgstr "Gira cap a la dreta"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:866
+#: src/svnfrontend/graphtree/revgraphview.cpp:886
+#, kde-format
+msgid "Save tree as PNG"
+msgstr "Guarda l'arbre com a PNG"
+
+#: src/svnfrontend/graphtree/revgraphview.cpp:886
+#, kde-format
+msgid "Image (*.png)"
+msgstr "Imatge (*.png)"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:94
+#: src/svnfrontend/svnactions.cpp:294
+#, kde-format
+msgctxt "@title:window"
+msgid "Logs"
+msgstr "Registres"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:94
+#: src/svnfrontend/svnactions.cpp:294
+#, kde-format
+msgid "Getting logs - hit Cancel for abort"
+msgstr "S'estan obtenint els registres -premeu «Cancel·la» per a interrompre-"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:104
+#, kde-format
+msgid "No log cache possible due broken database and networking not allowed."
+msgstr ""
+"No hi ha cau de registres possible perquè la base de dades és defectuosa i "
+"que la xarxa no està permesa."
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:104
+#: src/svnfrontend/graphtree/revisiontree.cpp:109
+#, kde-format
+msgid ""
+"Could not retrieve logs, reason:\n"
+"%1"
+msgstr ""
+"No s'han pogut rebre els registres, motiu:\n"
+"%1"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:134
+#, kde-format
+msgid "Scanning the logs for %1"
+msgstr "S'estan escanejant els missatges de registre per a %1"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:134
+#, kde-format
+msgid "Cancel"
+msgstr "Cancel·la"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:135
+#, kde-format
+msgctxt "@title:window"
+msgid "Scanning logs"
+msgstr "S'estan escanejant els missatges de registre"
+
+#: src/svnfrontend/graphtree/revisiontree.cpp:225
+#: src/svnfrontend/graphtree/revisiontree.cpp:263
+#: src/svnfrontend/graphtree/revisiontree.cpp:312
+#, kde-format
+msgid "%1<br>Check change entry %2 of %3"
+msgstr "%1<br>Està comprovant els canvis en l'entrada %2 de %3"
+
+#. i18n: ectx: property (text), widget (QLabel, m_Srclabel)
+#: src/svnfrontend/hotcopydlg.ui:11
+#, kde-format
+msgid "Repository to copy:"
+msgstr "Repositori que s'ha de copiar:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_Destlabel)
+#: src/svnfrontend/hotcopydlg.ui:31
+#, kde-format
+msgid "Destination folder:"
+msgstr "Carpeta de destinació:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_Cleanlogs)
+#: src/svnfrontend/hotcopydlg.ui:51
+#, kde-format
+msgid "Clean logs"
+msgstr "Neteja els missatges de registre"
+
+#: src/svnfrontend/importdir_logmsg.cpp:38
+#, kde-format
+msgid "No ignore"
+msgstr "No ignorar"
+
+#: src/svnfrontend/importdir_logmsg.cpp:39
+#, kde-format
+msgid "If set, add files or directories that match ignore patterns."
+msgstr ""
+"Si està establida, s'afegiran els fitxers o directoris que coincidisquen amb "
+"els patrons que s'ignoraran."
+
+#: src/svnfrontend/importdir_logmsg.cpp:44
+#, kde-format
+msgid "Ignore unknown node types"
+msgstr "Ignora els tipus de node desconeguts"
+
+#: src/svnfrontend/importdir_logmsg.cpp:45
+#, kde-format
+msgid "Should files with unknown node types be ignored"
+msgstr "En cas de fitxers amb els tipus de node desconegut seran ignorats"
+
+#: src/svnfrontend/importdir_logmsg.cpp:46
+#, kde-format
+msgid ""
+"Ignore files of which the node type is unknown, such as device files and "
+"pipes."
+msgstr ""
+"Ignora els fitxers amb el tipus de node desconegut, com els fitxers de "
+"dispositius i canonades."
+
+#: src/svnfrontend/importdir_logmsg.cpp:80
+#, kde-format
+msgid "(Last part)"
+msgstr "(Última part)"
+
+#: src/svnfrontend/importdir_logmsg.cpp:80
+#, kde-format
+msgid "Create subdirectory %1 on import"
+msgstr "Crea el subdirectori «%1» sobre el qual importar"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel4)
+#: src/svnfrontend/loaddmpdlg.ui:11
+#, kde-format
+msgid "Load into repository:"
+msgstr "Carrega dintre del repositori:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_UuidGroup)
+#: src/svnfrontend/loaddmpdlg.ui:24
+#, kde-format
+msgid "Uuid action"
+msgstr "Acció UUID"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_UUidForce)
+#. i18n: ectx: property (text), widget (QCheckBox, m_ForceCheck)
+#: src/svnfrontend/loaddmpdlg.ui:30 src/svnfrontend/merge_dlg.ui:116
+#, kde-format
+msgid "Force"
+msgstr "Força"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_UUidIgnore)
+#: src/svnfrontend/loaddmpdlg.ui:40
+#, kde-format
+msgid "Ignore"
+msgstr "Ignora"
+
+#. i18n: ectx: property (text), widget (QRadioButton, m_UUidDefault)
+#: src/svnfrontend/loaddmpdlg.ui:50
+#, kde-format
+msgid "Default"
+msgstr "Predeterminat"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_UsePre)
+#: src/svnfrontend/loaddmpdlg.ui:66
+#, kde-format
+msgid "Use pre-commit hook"
+msgstr "Utilitza un procediment automàtic abans de la publicació"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_UsePost)
+#: src/svnfrontend/loaddmpdlg.ui:76
+#, kde-format
+msgid "Use post-commit hook"
+msgstr "Utilitza un procediment automàtic després de la publicació"
+
+#. i18n: ectx: property (toolTip), widget (QLabel, textLabel5)
+#. i18n: ectx: property (toolTip), widget (KLineEdit, m_Rootfolder)
+#: src/svnfrontend/loaddmpdlg.ui:86 src/svnfrontend/loaddmpdlg.ui:144
+#, kde-format
+msgid "Path to load the dump into (see context help)"
+msgstr "Camí cap al qual carregar el bolcat (vegeu l'ajuda contextual)"
+
+#. i18n: ectx: property (whatsThis), widget (QLabel, textLabel5)
+#. i18n: ectx: property (whatsThis), widget (KLineEdit, m_Rootfolder)
+#: src/svnfrontend/loaddmpdlg.ui:89 src/svnfrontend/loaddmpdlg.ui:147
+#, kde-format
+msgid ""
+"If not empty, load the dump into a specific folder instead into root of "
+"repository. This folder must exist before loading the dump."
+msgstr ""
+"Si no està buit, carrega el bolcat dintre d'una carpeta en concret en "
+"comptes de l'arrel del repositori. Esta carpeta haurà d'existir abans de "
+"carregar el bolcat."
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel5)
+#: src/svnfrontend/loaddmpdlg.ui:92
+#, kde-format
+msgid "Load into folder:"
+msgstr "Carrega dintre de la carpeta:"
+
+#. i18n: ectx: property (text), widget (QLabel, textLabel3)
+#: src/svnfrontend/loaddmpdlg.ui:105
+#, kde-format
+msgid "Dump file:"
+msgstr "Fitxer de bolcat:"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_validateProps)
+#: src/svnfrontend/loaddmpdlg.ui:118
+#, kde-format
+msgid "Validate the properties on load (only Subversion 1.7 or newer)"
+msgstr ""
+"Valida les propietats durant la càrrega (només amb Subversion 1.7 o "
+"posterior)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_validateProps)
+#: src/svnfrontend/loaddmpdlg.ui:121
+#, kde-format
+msgid "Validate properties"
+msgstr "Valida les propietats"
+
+#: src/svnfrontend/maintreewidget.cpp:271
+#, kde-format
+msgid "Networked URL to open but networking is disabled."
+msgstr "URL per a la xarxa que cal obrir, però la xarxa està desactivada."
+
+#: src/svnfrontend/maintreewidget.cpp:497
+#, kde-format
+msgid "History of item"
+msgstr "Historial de l'element"
+
+#: src/svnfrontend/maintreewidget.cpp:498
+#: src/svnfrontend/maintreewidget.cpp:501
+#: src/svnfrontend/maintreewidget.cpp:505
+#, kde-format
+msgid "History"
+msgstr "Historial"
+
+#: src/svnfrontend/maintreewidget.cpp:499
+#, kde-format
+msgid "Displays the history log of selected item"
+msgstr "Mostra el registre de l'historial de l'element seleccionat"
+
+#: src/svnfrontend/maintreewidget.cpp:500
+#: src/svnfrontend/maintreewidget.cpp:504
+#, kde-format
+msgid "History of item ignoring copies"
+msgstr "Historial de l'element ignorant les còpies"
+
+#: src/svnfrontend/maintreewidget.cpp:502
+#: src/svnfrontend/maintreewidget.cpp:506
+#, kde-format
+msgid "Displays the history log of selected item without following copies"
+msgstr ""
+"Mostra el registre de l'historial de l'element seleccionat sense seguir les "
+"còpies"
+
+#: src/svnfrontend/maintreewidget.cpp:508
+#, kde-format
+msgid "Full revision tree"
+msgstr "Arbre de revisions"
+
+#: src/svnfrontend/maintreewidget.cpp:509
+#, kde-format
+msgid "Shows history of item as linked tree"
+msgstr "Mostra l'historial de l'element com un arbre enllaçat"
+
+#: src/svnfrontend/maintreewidget.cpp:510
+#, kde-format
+msgid "Partial revision tree"
+msgstr "Arbre de revisions parcial"
+
+#: src/svnfrontend/maintreewidget.cpp:511
+#, kde-format
+msgid "Shows history of item as linked tree for a revision range"
+msgstr ""
+"Mostra l'historial de l'element com un arbre enllaçat per a un interval de "
+"revisions"
+
+#: src/svnfrontend/maintreewidget.cpp:513
+#: src/svnfrontend/maintreewidget.cpp:514
+#, kde-format
+msgid "Properties"
+msgstr "Propietats"
+
+#: src/svnfrontend/maintreewidget.cpp:515
+#, kde-format
+msgid "Display Properties"
+msgstr "Mostra les propietats"
+
+#: src/svnfrontend/maintreewidget.cpp:516
+#, kde-format
+msgid "Display last changes"
+msgstr "Mostra els últims canvis"
+
+#: src/svnfrontend/maintreewidget.cpp:517
+#, kde-format
+msgid "Display last changes as difference to previous commit."
+msgstr "Mostra els últims canvis com a diferències a la publicació anterior."
+
+#: src/svnfrontend/maintreewidget.cpp:518
+#, kde-format
+msgid "Details"
+msgstr "Detalls"
+
+#: src/svnfrontend/maintreewidget.cpp:519
+#, kde-format
+msgid "Show details about selected item"
+msgstr "Mostra els detalls sobre l'element seleccionat"
+
+#: src/svnfrontend/maintreewidget.cpp:520
+#, kde-format
+msgid "Move"
+msgstr "Mou"
+
+#: src/svnfrontend/maintreewidget.cpp:521
+#, kde-format
+msgid "Moves or renames current item"
+msgstr "Mou o canvia el nom de l'element actual"
+
+#: src/svnfrontend/maintreewidget.cpp:523
+#, kde-format
+msgid "Create a copy of current item"
+msgstr "Crea una còpia de l'element actual"
+
+#: src/svnfrontend/maintreewidget.cpp:524
+#, kde-format
+msgid "Check for updates"
+msgstr "Comprova si hi ha actualitzacions"
+
+#: src/svnfrontend/maintreewidget.cpp:525
+#, kde-format
+msgid ""
+"Check if current working copy has items with newer version in repository"
+msgstr ""
+"Mira si la còpia de treball té elements amb una versió més nova al repositori"
+
+#: src/svnfrontend/maintreewidget.cpp:527
+#, kde-format
+msgid "Check updates"
+msgstr "Comprova les actualitzacions"
+
+#: src/svnfrontend/maintreewidget.cpp:530
+#, kde-format
+msgid "Blame"
+msgstr "Responsabilitat"
+
+#: src/svnfrontend/maintreewidget.cpp:531
+#: src/svnfrontend/maintreewidget.cpp:534
+#, kde-format
+msgid ""
+"Output the content of specified files or URLs with revision and author "
+"information in-line."
+msgstr ""
+"Mostra el contingut dels fitxers o els URL indicats amb informació inclosa "
+"quant a la revisió i l'autor."
+
+#: src/svnfrontend/maintreewidget.cpp:533
+#, kde-format
+msgid "Blame range"
+msgstr "Qui va canviar la línia en l'interval"
+
+#: src/svnfrontend/maintreewidget.cpp:537
+#, kde-format
+msgid "Cat head"
+msgstr "Bolca (cat) el HEAD"
+
+#: src/svnfrontend/maintreewidget.cpp:538
+#, kde-format
+msgid "Output the content of specified files or URLs."
+msgstr "Mostra el contingut dels fitxers o els URL especificats."
+
+#: src/svnfrontend/maintreewidget.cpp:540
+#, kde-format
+msgid "Cat revision..."
+msgstr "Cat revisió..."
+
+#: src/svnfrontend/maintreewidget.cpp:541
+#, kde-format
+msgid "Output the content of specified files or URLs at specific revision."
+msgstr ""
+"Mostra el contingut dels fitxers o els URL especificats amb una versió "
+"específica."
+
+#: src/svnfrontend/maintreewidget.cpp:544
+#, kde-format
+msgid "Lock current items"
+msgstr "Bloca els elements actuals"
+
+#: src/svnfrontend/maintreewidget.cpp:545
+#, kde-format
+msgid "Try lock current item against changes from other users"
+msgstr ""
+"Intenta blocar l'element actual contra canvis realitzats per altres usuaris"
+
+#: src/svnfrontend/maintreewidget.cpp:547
+#, kde-format
+msgid "Unlock current items"
+msgstr "Desbloca els elements actuals"
+
+#: src/svnfrontend/maintreewidget.cpp:548
+#, kde-format
+msgid "Free existing lock on current item"
+msgstr "Allibera l'element actual dels blocats existents"
+
+#: src/svnfrontend/maintreewidget.cpp:552 src/svnfrontend/svnactions.cpp:658
+#, kde-format
+msgid "New folder"
+msgstr "Carpeta nova"
+
+#: src/svnfrontend/maintreewidget.cpp:553
+#, kde-format
+msgid "Create a new folder"
+msgstr "Crea una carpeta nova"
+
+#: src/svnfrontend/maintreewidget.cpp:554
+#, kde-format
+msgid "Switch repository"
+msgstr "Canvia el repositori"
+
+#: src/svnfrontend/maintreewidget.cpp:555
+#, kde-format
+msgid "Switch repository path of current working copy path (\"svn switch\")"
+msgstr ""
+"Canvia el camí del repositori de la còpia de treball actual («svn switch»)"
+
+#: src/svnfrontend/maintreewidget.cpp:558
+#, kde-format
+msgid "Relocate current working copy URL"
+msgstr "Torna a establir l'URL de la còpia de treball"
+
+#: src/svnfrontend/maintreewidget.cpp:559
+#, kde-format
+msgid "Relocate URL of current working copy path to other URL"
+msgstr "Torna a establir l'URL de la còpia de treball a un altre"
+
+#: src/svnfrontend/maintreewidget.cpp:562
+#, kde-format
+msgid "Check for unversioned items"
+msgstr "Comprova per a elements sense versió"
+
+#: src/svnfrontend/maintreewidget.cpp:563
+#, kde-format
+msgid "Unversioned"
+msgstr "Sense versió"
+
+#: src/svnfrontend/maintreewidget.cpp:564
+#, kde-format
+msgid "Browse folder for unversioned items and add them if wanted."
+msgstr ""
+"Busca en la carpeta elements sense versió i després els afig, si es vol."
+
+#: src/svnfrontend/maintreewidget.cpp:567
+#, kde-format
+msgid "Open repository of working copy"
+msgstr "Obri el repositori de la còpia de treball"
+
+#: src/svnfrontend/maintreewidget.cpp:569
+#, kde-format
+msgid "Opens the repository the current working copy was checked out from"
+msgstr "Obri el repositori des del qual s'ha extret la còpia de treball actual"
+
+#: src/svnfrontend/maintreewidget.cpp:571
+#, kde-format
+msgid "Cleanup"
+msgstr "Neteja"
+
+#: src/svnfrontend/maintreewidget.cpp:572
+#, kde-format
+msgid ""
+"Recursively clean up the working copy, removing locks, resuming unfinished "
+"operations, etc."
+msgstr ""
+"Neteja la còpia de treball recursivament, eliminant blocats, restaurant "
+"operacions no finalitzades, etc."
+
+#: src/svnfrontend/maintreewidget.cpp:573
+#, kde-format
+msgid "Import folders into current"
+msgstr "Importa les carpetes cap a l'actual"
+
+#: src/svnfrontend/maintreewidget.cpp:575
+#, kde-format
+msgid "Import folder content into current URL"
+msgstr "Importa el contingut de la carpeta cap a l'URL actual"
+
+#: src/svnfrontend/maintreewidget.cpp:579
+#, kde-format
+msgid "Add selected files/dirs"
+msgstr "Afig els fitxers/directoris seleccionats"
+
+#: src/svnfrontend/maintreewidget.cpp:580
+#, kde-format
+msgid "Adding selected files and/or directories to repository"
+msgstr "Afig els fitxers i/o directoris seleccionats al repositori"
+
+#: src/svnfrontend/maintreewidget.cpp:582
+#, kde-format
+msgid "Add selected files/dirs recursive"
+msgstr "Afig els fitxers/directoris seleccionats recursivament"
+
+#: src/svnfrontend/maintreewidget.cpp:584
+#, kde-format
+msgid ""
+"Adding selected files and/or directories to repository and all subitems of "
+"folders"
+msgstr ""
+"Afig els fitxers i/o directoris seleccionats al repositori i tots els "
+"subelements de les carpetes"
+
+#: src/svnfrontend/maintreewidget.cpp:586
+#, kde-format
+msgid "Delete selected files/dirs"
+msgstr "Suprimix els fitxers/directoris seleccionats"
+
+#: src/svnfrontend/maintreewidget.cpp:588
+#, kde-format
+msgid "Deleting selected files and/or directories from repository"
+msgstr "Suprimix els fitxers i/o directoris seleccionats del repositori"
+
+#: src/svnfrontend/maintreewidget.cpp:589
+#, kde-format
+msgid "Delete folder"
+msgstr "Suprimix la carpeta"
+
+#: src/svnfrontend/maintreewidget.cpp:590
+#, kde-format
+msgid "Deleting selected directories from repository"
+msgstr "Suprimix els directoris seleccionats del repositori"
+
+#: src/svnfrontend/maintreewidget.cpp:592
+#, kde-format
+msgid "Revert current changes"
+msgstr "Revertix els canvis actuals"
+
+#: src/svnfrontend/maintreewidget.cpp:594
+#, kde-format
+msgid "Mark resolved"
+msgstr "Marca com a resolt"
+
+#: src/svnfrontend/maintreewidget.cpp:595
+#, kde-format
+msgid "Marking files or dirs resolved"
+msgstr "Marca els fitxers o directoris resolts"
+
+#: src/svnfrontend/maintreewidget.cpp:597
+#, kde-format
+msgid "Resolve conflicts"
+msgstr "Resol els conflictes"
+
+#: src/svnfrontend/maintreewidget.cpp:599
+#, kde-format
+msgid "Ignore/Unignore current item"
+msgstr "Des/ignora l'element actual"
+
+#: src/svnfrontend/maintreewidget.cpp:600
+#: src/svnfrontend/maintreewidget.cpp:601
+#, kde-format
+msgid "Add or Remove ignore pattern"
+msgstr "Afig o elimina un patró que s'ha d'ignorar"
+
+#: src/svnfrontend/maintreewidget.cpp:603
+#: src/svnfrontend/maintreewidget.cpp:666
+#, kde-format
+msgid "Update to head"
+msgstr "Actualitza a HEAD"
+
+#: src/svnfrontend/maintreewidget.cpp:604
+#, kde-format
+msgctxt "Menu item"
+msgid "Update"
+msgstr "Actualitza"
+
+#: src/svnfrontend/maintreewidget.cpp:605
+#, kde-format
+msgid "Update to revision..."
+msgstr "Actualitza a la revisió..."
+
+#: src/svnfrontend/maintreewidget.cpp:606
+#: src/svnfrontend/maintreewidget.cpp:607
+#: src/svnfrontend/maintreewidget.cpp:665 src/svnfrontend/svnactions.cpp:1019
+#, kde-format
+msgid "Commit"
+msgstr "Publica"
+
+#: src/svnfrontend/maintreewidget.cpp:609
+#: src/svnfrontend/maintreewidget.cpp:611
+#, kde-format
+msgid "Diff local changes"
+msgstr "Diff dels canvis locals"
+
+#: src/svnfrontend/maintreewidget.cpp:610
+#: src/svnfrontend/maintreewidget.cpp:612
+#, kde-format
+msgid ""
+"Diff working copy against BASE (last checked out version) - does not require "
+"access to repository"
+msgstr ""
+"Diff de la còpia de treball contra «BASE» (última versió baixada) -no "
+"requerix accés al repositori-"
+
+#: src/svnfrontend/maintreewidget.cpp:615
+#, kde-format
+msgid "Diff against HEAD"
+msgstr "Diff contra HEAD"
+
+#: src/svnfrontend/maintreewidget.cpp:616
+#, kde-format
+msgid ""
+"Diff working copy against HEAD (last checked in version)- requires access to "
+"repository"
+msgstr ""
+"Diff entre la còpia de treball i «HEAD» (última versió baixada) -es requerix "
+"accés al repositori-"
+
+#: src/svnfrontend/maintreewidget.cpp:619
+#: src/svnfrontend/maintreewidget.cpp:622
+#, kde-format
+msgid "Diff items"
+msgstr "Diff dels elements"
+
+#: src/svnfrontend/maintreewidget.cpp:620
+#: src/svnfrontend/maintreewidget.cpp:623
+#, kde-format
+msgid "Diff two items"
+msgstr "Diff dos elements"
+
+#: src/svnfrontend/maintreewidget.cpp:627
+#, kde-format
+msgid "Merge two revisions"
+msgstr "Fusiona dues revisions"
+
+#: src/svnfrontend/maintreewidget.cpp:628
+#, kde-format
+msgid "Merge"
+msgstr "Fusiona"
+
+#: src/svnfrontend/maintreewidget.cpp:629
+#, kde-format
+msgid "Merge two revisions of this entry into itself"
+msgstr "Fusiona dues revisions d'esta entrada en si mateixa"
+
+#: src/svnfrontend/maintreewidget.cpp:632
+#, kde-format
+msgid "Merge..."
+msgstr "Fusiona..."
+
+#: src/svnfrontend/maintreewidget.cpp:633
+#, kde-format
+msgid ""
+"Merge repository path into current working copy path or current repository "
+"path into a target"
+msgstr ""
+"Fusiona el camí del repositori dins de la còpia de treball actual o en un "
+"objectiu"
+
+#: src/svnfrontend/maintreewidget.cpp:634
+#: src/svnfrontend/maintreewidget.cpp:1152
+#: src/svnfrontend/maintreewidget.cpp:1220
+#, kde-format
+msgid "Open With..."
+msgstr "Obri amb..."
+
+#: src/svnfrontend/maintreewidget.cpp:638
+#, kde-format
+msgid "Checkout current repository path"
+msgstr "Descarrega des del camí del repositori actual"
+
+#: src/svnfrontend/maintreewidget.cpp:639
+#: src/svnfrontend/maintreewidget.cpp:647
+#, kde-format
+msgid "Checkout"
+msgstr "Descarrega"
+
+#: src/svnfrontend/maintreewidget.cpp:641
+#, kde-format
+msgid "Export current repository path"
+msgstr "Exporta el camí del repositori actual"
+
+#: src/svnfrontend/maintreewidget.cpp:642
+#, kde-format
+msgid "Select browse revision"
+msgstr "Tria la revisió del navegador"
+
+#: src/svnfrontend/maintreewidget.cpp:646 src/svnfrontend/svnactions.cpp:1630
+#, kde-format
+msgid "Checkout a repository"
+msgstr "Descarrega un repositori"
+
+#: src/svnfrontend/maintreewidget.cpp:648
+#, kde-format
+msgid "Export a repository"
+msgstr "Exporta un repositori"
+
+#: src/svnfrontend/maintreewidget.cpp:649
+#, kde-format
+msgid "Export"
+msgstr "Exporta"
+
+#: src/svnfrontend/maintreewidget.cpp:650
+#, kde-format
+msgid "Refresh view"
+msgstr "Actualitza la vista"
+
+#: src/svnfrontend/maintreewidget.cpp:651
+#, kde-format
+msgid "Refresh"
+msgstr "Actualitza"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DispSpecDiff)
+#: src/svnfrontend/maintreewidget.cpp:653 src/svnfrontend/svnlogdlg.ui:211
+#, kde-format
+msgid "Diff revisions"
+msgstr "Revisions de «diff»"
+
+#: src/svnfrontend/maintreewidget.cpp:656
+#, kde-format
+msgid "Unfold File Tree"
+msgstr "Desplega l'arbre de fitxers"
+
+#: src/svnfrontend/maintreewidget.cpp:657
+#, kde-format
+msgid "Opens all branches of the file tree"
+msgstr "Obri totes les branques de l'arbre de fitxers"
+
+#: src/svnfrontend/maintreewidget.cpp:658
+#, kde-format
+msgid "Fold File Tree"
+msgstr "Plega l'arbre de fitxers"
+
+#: src/svnfrontend/maintreewidget.cpp:659
+#, kde-format
+msgid "Closes all branches of the file tree"
+msgstr "Tanca totes les branques de l'arbre de fitxers"
+
+#: src/svnfrontend/maintreewidget.cpp:662
+#: src/svnfrontend/maintreewidget.cpp:839
+#: src/svnfrontend/maintreewidget.cpp:1789
+#: src/svnfrontend/maintreewidget.cpp:1805
+#, kde-format
+msgid "Update log cache"
+msgstr "Actualitza el cau del registre"
+
+#: src/svnfrontend/maintreewidget.cpp:663
+#, kde-format
+msgid "Update the log cache for current repository"
+msgstr "Actualitza el cau del registre per al repositori actual"
+
+#: src/svnfrontend/maintreewidget.cpp:667
+#, kde-format
+msgid "Set property recursive"
+msgstr "Establix la propietat de forma recursiva"
+
+#: src/svnfrontend/maintreewidget.cpp:669
+#, kde-format
+msgid "Settings for current repository"
+msgstr "Configuració del repositori actual"
+
+#: src/svnfrontend/maintreewidget.cpp:841
+#: src/svnfrontend/maintreewidget.cpp:1800
+#, kde-format
+msgid "Stop updating the log cache"
+msgstr "Para l'actualització del cau del registre"
+
+#: src/svnfrontend/maintreewidget.cpp:1037
+#, kde-format
+msgctxt "@title:window"
+msgid "Edit Pattern to Ignore for \"%1\""
+msgstr "Edició del patró que s'ignorarà per a «%1»"
+
+#: src/svnfrontend/maintreewidget.cpp:1314
+#: src/svnfrontend/maintreewidget.cpp:1358
+#, kde-format
+msgid "Nothing selected for unlock"
+msgstr "No hi ha res seleccionat per a desblocar"
+
+#: src/svnfrontend/maintreewidget.cpp:1318
+#, kde-format
+msgctxt "@title:window"
+msgid "Lock Message"
+msgstr "Missatge de blocat"
+
+#: src/svnfrontend/maintreewidget.cpp:1325
+#, kde-format
+msgid "Steal lock?"
+msgstr "S'ha d'amprar el blocat?"
+
+#: src/svnfrontend/maintreewidget.cpp:1362
+#, kde-format
+msgid "Break lock or ignore missing locks?"
+msgstr "S'han de trencar els blocats o ignorar-los?"
+
+#: src/svnfrontend/maintreewidget.cpp:1363
+#, kde-format
+msgid "Unlocking items"
+msgstr "Elements sense blocat"
+
+#: src/svnfrontend/maintreewidget.cpp:1650
+#, kde-format
+msgid "Nothing selected for delete"
+msgstr "No hi ha res seleccionat per a suprimir"
+
+#: src/svnfrontend/maintreewidget.cpp:1822
+#, kde-format
+msgid "Automatic generated base layout by kdesvn"
+msgstr "Disposició base generada automàticament per Kdesvn"
+
+#: src/svnfrontend/maintreewidget.cpp:1835
+#, kde-format
+msgid "May not make subdirectories of a file"
+msgstr "No es poden crear subdirectoris d'un fitxer"
+
+#: src/svnfrontend/maintreewidget.cpp:1944 src/svnfrontend/svnactions.cpp:2182
+#, kde-format
+msgctxt "@title:window"
+msgid "Merge"
+msgstr "Fusió"
+
+#: src/svnfrontend/maintreewidget.cpp:1997
+#, kde-format
+msgid "Error getting entry to relocate"
+msgstr "Error mentre s'obtenia l'entrada per a tornar a situar"
+
+#: src/svnfrontend/maintreewidget.cpp:2003
+#, kde-format
+msgctxt "@title:window"
+msgid "Relocate Path %1"
+msgstr "Torna a situar en el camí %1"
+
+#: src/svnfrontend/maintreewidget.cpp:2017 src/svnfrontend/svnactions.cpp:1629
+#: src/svnfrontend/svnactions.cpp:1875
+#, kde-format
+msgid "Invalid url given!"
+msgstr "S'ha indicat un URL no vàlid!"
+
+#: src/svnfrontend/maintreewidget.cpp:2018
+#, kde-format
+msgid "Relocate path %1"
+msgstr "Torna a situar en el camí %1"
+
+#: src/svnfrontend/maintreewidget.cpp:2041
+#, kde-format
+msgid "Cannot import into multiple targets"
+msgstr "No s'ha pogut importar cap a múltiples destinacions"
+
+#: src/svnfrontend/maintreewidget.cpp:2055
+#, kde-format
+msgid "Import files from folder"
+msgstr "Importa els fitxers des de la carpeta"
+
+#: src/svnfrontend/maintreewidget.cpp:2057
+#, kde-format
+msgid "Import file"
+msgstr "Importa un fitxer"
+
+#: src/svnfrontend/maintreewidget.cpp:2079
+#, kde-format
+msgctxt "@title:window"
+msgid "Import Log"
+msgstr "Registre d'importació"
+
+#: src/svnfrontend/maintreewidget.cpp:2137
+#, kde-format
+msgid "Could not retrieve repository of working copy."
+msgstr "No s'ha pogut rebre el repositori de la còpia de treball."
+
+#: src/svnfrontend/maintreewidget.cpp:2146
+#, kde-format
+msgid "Only in working copy possible."
+msgstr "Tan sols és possible en la còpia de treball."
+
+#: src/svnfrontend/maintreewidget.cpp:2146
+#: src/svnfrontend/maintreewidget.cpp:2150
+#: src/svnfrontend/maintreewidget.cpp:2155
+#, kde-format
+msgid "Error"
+msgstr "S'ha produït un error"
+
+#: src/svnfrontend/maintreewidget.cpp:2150
+#, kde-format
+msgid "Only on single folder possible"
+msgstr "Tan sols és possible sobre una única carpeta"
+
+#: src/svnfrontend/maintreewidget.cpp:2155
+#, kde-format
+msgid "Sorry - internal error"
+msgstr "Ho sentim -error intern-"
+
+#: src/svnfrontend/maintreewidget.cpp:2219
+#, kde-format
+msgid "Hold Ctrl key while click on selected item for unselect"
+msgstr ""
+"Mantindre premuda la tecla Ctrl mentre feu clic en l'element seleccionat per "
+"a cancel·lar la selecció"
+
+#. i18n: ectx: property (toolTip), widget (QTreeView, m_LogTreeView)
+#. i18n: ectx: property (toolTip), widget (QTreeWidget, m_ChangedList)
+#: src/svnfrontend/maintreewidget.cpp:2222 src/svnfrontend/svnlogdlg.ui:114
+#: src/svnfrontend/svnlogdlg.ui:148
+#, kde-format
+msgid "See context menu for more actions"
+msgstr "Per a més accions veure el menú contextual"
+
+#: src/svnfrontend/maintreewidget.cpp:2225
+#, kde-format
+msgid "Click for navigate"
+msgstr "Feu clic per a navegar"
+
+#: src/svnfrontend/maintreewidget.cpp:2228
+#, kde-format
+msgid "Navigation"
+msgstr "Navegació"
+
+#: src/svnfrontend/maintreewidget.cpp:2349
+#, kde-format
+msgid "Could not retrieve repository."
+msgstr "No s'ha pogut rebre del repositori."
+
+#: src/svnfrontend/maintreewidget.cpp:2379
+#, kde-format
+msgid "Not yet implemented"
+msgstr "Encara no s'ha implementat"
+
+#: src/svnfrontend/maintreewidget.cpp:2379
+#, kde-format
+msgid "Edit property recursively"
+msgstr "Edita la propietat de forma recursiva"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, MergeDlg)
+#: src/svnfrontend/merge_dlg.ui:14
+#, kde-format
+msgid "MergeSettings"
+msgstr "Configuració de la fusió"
+
+#. i18n: ectx: property (text), widget (QLabel, m_SrcOneLabel)
+#: src/svnfrontend/merge_dlg.ui:22
+#, kde-format
+msgid "Source 1:"
+msgstr "Font 1:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_SrcTwoLabel)
+#: src/svnfrontend/merge_dlg.ui:38
+#, kde-format
+msgid "Source 2:"
+msgstr "Font 2:"
+
+#. i18n: ectx: property (text), widget (QLabel, m_OutLabel)
+#: src/svnfrontend/merge_dlg.ui:54
+#, kde-format
+msgid "Output to:"
+msgstr "Eixida a:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, m_MergeParameter)
+#: src/svnfrontend/merge_dlg.ui:72
+#, kde-format
+msgid "Merge parameter"
+msgstr "Paràmetres de la fusió"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RecursiveCheck)
+#: src/svnfrontend/merge_dlg.ui:90
+#, kde-format
+msgid "Recursive"
+msgstr "Recursiu"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_RelatedCheck)
+#: src/svnfrontend/merge_dlg.ui:103
+#, kde-format
+msgid "Handle unrelated as related items"
+msgstr "Gestiona els elements sense relacionar com a relacionats"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RelatedCheck)
+#: src/svnfrontend/merge_dlg.ui:106
+#, kde-format
+msgid "Ignore ancestry"
+msgstr "Ignora l'ascendència"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_ForceCheck)
+#: src/svnfrontend/merge_dlg.ui:113
+#, kde-format
+msgid "Force delete on modified/unversioned items"
+msgstr "Força la supressió dels elements modificats/sense versió"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_Reintegrate)
+#: src/svnfrontend/merge_dlg.ui:126
+#, kde-format
+msgid "lump-merge all of source URL's unmerged changes"
+msgstr "Fusiona en bloc tots els canvis sense fusionar de l'URL d'origen"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_Reintegrate)
+#: src/svnfrontend/merge_dlg.ui:132
+#, kde-format
+msgid "Reintegrate merge"
+msgstr "Reintegra la fusió"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_DryCheck)
+#: src/svnfrontend/merge_dlg.ui:139
+#, kde-format
+msgid "Just dry run without modifications"
+msgstr "Senzillament executa sense modificar"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_DryCheck)
+#: src/svnfrontend/merge_dlg.ui:142
+#, kde-format
+msgid "Dry run"
+msgstr "Simula"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_RecordOnly)
+#: src/svnfrontend/merge_dlg.ui:152
+#, kde-format
+msgid "Only write mergeinfo"
+msgstr "Escriu només la informació de la fusió"
+
+#. i18n: ectx: property (whatsThis), widget (QCheckBox, m_RecordOnly)
+#: src/svnfrontend/merge_dlg.ui:155
+#, kde-format
+msgid ""
+"The merge is not actually performed, but the mergeinfo for the revisions "
+"which would have been merged is recorded in the working copy"
+msgstr ""
+"La fusió no s'ha realitzat, però la informació de la fusió per a les "
+"revisions que s'havien de fusionar està enregistrada en la còpia de treball"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_RecordOnly)
+#: src/svnfrontend/merge_dlg.ui:158
+#, kde-format
+msgid "Record only"
+msgstr "Només grava"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_useExternMerge)
+#: src/svnfrontend/merge_dlg.ui:165
+#, kde-format
+msgid "Use external merge not Subversion's merge"
+msgstr "Utilitza una fusió externa i no la de Subversion"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_useExternMerge)
+#: src/svnfrontend/merge_dlg.ui:168
+#, kde-format
+msgid "Use external merge"
+msgstr "Utilitza una fusió externa"
+
+#. i18n: ectx: property (toolTip), widget (QCheckBox, m_AllowMixedRev)
+#: src/svnfrontend/merge_dlg.ui:175
+#, kde-format
+msgid ""
+"If checked, allow merge into mixed revision working copy, otherwise raises "
+"error in that case"
+msgstr ""
+"Si està marcada, permetrà fusionar dins d'una revisió de la còpia de treball "
+"barrejada, en cas contrari augmentarà els errors"
+
+#. i18n: ectx: property (text), widget (QCheckBox, m_AllowMixedRev)
+#: src/svnfrontend/merge_dlg.ui:179
+#, kde-format
+msgid ""
+"Merge into mixed revision\n"
+"working copy"
+msgstr ""
+"Fusiona dins d'una revisió de la\n"
+"còpia de treball barrejada"
+
+#: src/svnfrontend/mergedlg_impl.cpp:190
+#, kde-format
+msgctxt "@title:window"
+msgid "Enter Merge Range"
+msgstr "Introducció de l'interval de fusió"
+
+#: src/svnfrontend/models/logitemmodel.cpp:181
+#, kde-format
+msgid "Message"
+msgstr "Missatge"
+
+#: src/svnfrontend/models/logmodelhelper.cpp:43
+#, kde-format
+msgid "%1 at revision %2"
+msgstr "%1 a revisió %2"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:314
+#: src/svnfrontend/svnactions.cpp:736
+#, kde-format
+msgid "Name"
+msgstr "Nom"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:316
+#, kde-format
+msgid "Status"
+msgstr "Estat"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:318
+#, kde-format
+msgid "Last changed Revision"
+msgstr "Última revisió de canvi"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:320
+#: src/svnfrontend/svnactions.cpp:795
+#, kde-format
+msgid "Last author"
+msgstr "Últim autor"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:322
+#, kde-format
+msgid "Last change date"
+msgstr "Última data de canvi"
+
+#: src/svnfrontend/models/svnitemmodel.cpp:324
+#, kde-format
+msgid "Locked by"
+msgstr "Blocat per"
+
+#: src/svnfrontend/opencontextmenu.cpp:60
+#, kde-format
+msgid "Other..."
+msgstr "Altra..."
+
+#: src/svnfrontend/propertiesdlg.cpp:89
+#, kde-format
+msgid "Undelete property"
+msgstr "Propietat sense suprimir"
+
+#: src/svnfrontend/propertiesdlg.cpp:91
+#, kde-format
+msgid "Delete property"
+msgstr "Suprimix la propietat"
+
+#: src/svnfrontend/propertiesdlg.cpp:98
+#, kde-format
+msgid "Missing SVN link"
+msgstr "Falta l'enllaç SVN"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, PropertiesDlg)
+#: src/svnfrontend/propertiesdlg.ui:14
+#, kde-format
+msgid "View and modify properties"
+msgstr "Veure i modificar les propietats"
+
+#. i18n: ectx: property (text), widget (QPushButton, pbAdd)
+#: src/svnfrontend/propertiesdlg.ui:39
+#, kde-format
+msgid "Add Property"
+msgstr "Afig una propietat"
+
+#. i18n: ectx: property (text), widget (QPushButton, pbModify)
+#: src/svnfrontend/propertiesdlg.ui:46
+#, kde-format
+msgid "Modify Property"
+msgstr "Modifica la propietat"
+
+#. i18n: ectx: property (text), widget (QPushButton, pbDelete)
+#: src/svnfrontend/propertiesdlg.ui:53
+#, kde-format
+msgid "Delete Property"
+msgstr "Suprimix la propietat"
+
+#: src/svnfrontend/stopdlg.cpp:195
+#, kde-format
+msgid "%p% of %1"
+msgstr "%p% de %1"
+
+#: src/svnfrontend/stopdlg.cpp:203
+#, kde-format
+msgid "%1 of %2"
+msgstr "%1 de %2"
+
+#: src/svnfrontend/svnactions.cpp:186
+#, kde-format
+msgid "Finished"
+msgstr "Finalitzada"
+
+#: src/svnfrontend/svnactions.cpp:332
+#, kde-format
+msgid "Got no logs"
+msgstr "No s'han obtingut els missatges de registre"
+
+#: src/svnfrontend/svnactions.cpp:457
+#, kde-format
+msgid "Got no info."
+msgstr "No s'ha obtingut informació."
+
+#: src/svnfrontend/svnactions.cpp:494
+#, kde-format
+msgctxt "@title:window"
+msgid "History of %1"
+msgstr "Historial de %1"
+
+#: src/svnfrontend/svnactions.cpp:537
+#, kde-format
+msgctxt "@title:window"
+msgid "Annotate"
+msgstr "Anotacions"
+
+#: src/svnfrontend/svnactions.cpp:537
+#, kde-format
+msgid "Annotate lines - hit Cancel for abort"
+msgstr ""
+"S'estan recuperant les línies d'anotació -premeu «Cancel·la» per a "
+"interrompre-"
+
+#: src/svnfrontend/svnactions.cpp:545
+#, kde-format
+msgid "Got no annotate"
+msgstr "No s'ha rebut cap anotació"
+
+#: src/svnfrontend/svnactions.cpp:564
+#, kde-format
+msgctxt "@title:window"
+msgid "Content Get"
+msgstr "Obtenció del contingut"
+
+#: src/svnfrontend/svnactions.cpp:564
+#, kde-format
+msgid "Getting content - hit Cancel for abort"
+msgstr "S'està obtenint el contingut -premeu «Cancel·la» per a interrompre-"
+
+#: src/svnfrontend/svnactions.cpp:571
+#, kde-format
+msgid "Error getting content"
+msgstr "Error mentre s'obtenia el contingut"
+
+#: src/svnfrontend/svnactions.cpp:584
+#, kde-format
+msgid "Error while open temporary file"
+msgstr "S'ha produït un error en obrir un fitxer temporal"
+
+#: src/svnfrontend/svnactions.cpp:624
+#, kde-format
+msgctxt "@title:window"
+msgid "Content of %1"
+msgstr "Contingut de %1"
+
+#: src/svnfrontend/svnactions.cpp:634
+#, kde-format
+msgid "Got no content."
+msgstr "No s'ha obtingut el contingut."
+
+#: src/svnfrontend/svnactions.cpp:658
+#, kde-format
+msgid "Enter folder name:"
+msgstr "Introduïu el nom de carpeta:"
+
+#: src/svnfrontend/svnactions.cpp:697
+#, kde-format
+msgctxt "@title:window"
+msgid "Details"
+msgstr "Detalls"
+
+#: src/svnfrontend/svnactions.cpp:697
+#, kde-format
+msgid "Retrieving information - hit Cancel for abort"
+msgstr "S'està rebent la informació -premeu «Cancel·la» per a interrompre-"
+
+#: src/svnfrontend/svnactions.cpp:739
+#, kde-format
+msgid "URL"
+msgstr "URL"
+
+#: src/svnfrontend/svnactions.cpp:741
+#, kde-format
+msgid "Canonical repository URL"
+msgstr "URL canònic del repositori"
+
+#: src/svnfrontend/svnactions.cpp:744
+#, kde-format
+msgid "Checksum"
+msgstr "Suma de verificació"
+
+#: src/svnfrontend/svnactions.cpp:747
+#, kde-format
+msgid "Type"
+msgstr "Tipus"
+
+#: src/svnfrontend/svnactions.cpp:750
+#, kde-format
+msgid "Absent"
+msgstr "Absent"
+
+#: src/svnfrontend/svnactions.cpp:753
+#, kde-format
+msgid "File"
+msgstr "Fitxer"
+
+#: src/svnfrontend/svnactions.cpp:756
+#, kde-format
+msgid "Folder"
+msgstr "Carpeta"
+
+#: src/svnfrontend/svnactions.cpp:760 src/svnfrontend/svnactions.cpp:789
+#, kde-format
+msgid "Unknown"
+msgstr "Desconegut"
+
+#: src/svnfrontend/svnactions.cpp:765
+#, kde-format
+msgid "Size"
+msgstr "Mida"
+
+#: src/svnfrontend/svnactions.cpp:774
+#, kde-format
+msgid "Schedule"
+msgstr "Planificació"
+
+#: src/svnfrontend/svnactions.cpp:777
+#, kde-format
+msgid "Normal"
+msgstr "Normal"
+
+#: src/svnfrontend/svnactions.cpp:780
+#, kde-format
+msgid "Addition"
+msgstr "Suma"
+
+#: src/svnfrontend/svnactions.cpp:783
+#, kde-format
+msgid "Deletion"
+msgstr "Supressió"
+
+#: src/svnfrontend/svnactions.cpp:793
+#, kde-format
+msgid "UUID"
+msgstr "UUID"
+
+#: src/svnfrontend/svnactions.cpp:797
+#, kde-format
+msgid "Last committed"
+msgstr "Última publicació"
+
+#: src/svnfrontend/svnactions.cpp:799
+#, kde-format
+msgid "Last revision"
+msgstr "Última revisió"
+
+#: src/svnfrontend/svnactions.cpp:801
+#, kde-format
+msgid "Content last changed"
+msgstr "Últim contingut canviat"
+
+#: src/svnfrontend/svnactions.cpp:805
+#, kde-format
+msgid "Property last changed"
+msgstr "Última propietat canviada"
+
+#: src/svnfrontend/svnactions.cpp:808
+#, kde-format
+msgid "New version of conflicted file"
+msgstr "Versió nova del fitxer en conflicte"
+
+#: src/svnfrontend/svnactions.cpp:811
+#, kde-format
+msgid "Property reject file"
+msgstr "Propietat del fitxer refusat"
+
+#: src/svnfrontend/svnactions.cpp:816
+#, kde-format
+msgid "Copy from URL"
+msgstr "Copia des de l'URL"
+
+#: src/svnfrontend/svnactions.cpp:819 src/svnfrontend/svnactions.cpp:829
+#, kde-format
+msgid "Lock token"
+msgstr "Marca de blocat"
+
+#: src/svnfrontend/svnactions.cpp:820 src/svnfrontend/svnactions.cpp:830
+#, kde-format
+msgid "Owner"
+msgstr "Propietari"
+
+#: src/svnfrontend/svnactions.cpp:821 src/svnfrontend/svnactions.cpp:831
+#, kde-format
+msgid "Locked on"
+msgstr "Blocat sobre"
+
+#: src/svnfrontend/svnactions.cpp:824 src/svnfrontend/svnactions.cpp:834
+#, kde-format
+msgid "Lock comment"
+msgstr "Comentari de blocat"
+
+#: src/svnfrontend/svnactions.cpp:882
+#, kde-format
+msgctxt "@title:window"
+msgid "Infolist"
+msgstr "Llista informativa"
+
+#: src/svnfrontend/svnactions.cpp:921
+#, kde-format
+msgctxt "@title:window"
+msgid "Applying Properties"
+msgstr "Aplicació de les propietats"
+
+#: src/svnfrontend/svnactions.cpp:921
+#, kde-format
+msgid "<center>Applying<br/>hit cancel for abort</center>"
+msgstr ""
+"<center>S'estan aplicant<br/>premeu «Cancel·la» per a interrompre</center>"
+
+#: src/svnfrontend/svnactions.cpp:959
+#, kde-format
+msgid "Could not change to folder %1\n"
+msgstr "No s'ha pogut canviar a la carpeta %1\n"
+
+#: src/svnfrontend/svnactions.cpp:978
+#, kde-format
+msgid "Not commit because networking is disabled"
+msgstr "No s'ha publicat atés que la xarxa està desactivada"
+
+#: src/svnfrontend/svnactions.cpp:1000 src/svnfrontend/svnactions.cpp:2338
+#, kde-format
+msgctxt "@title:window"
+msgid "Status / List"
+msgstr "Estat / llista"
+
+#: src/svnfrontend/svnactions.cpp:1000 src/svnfrontend/svnactions.cpp:2338
+#, kde-format
+msgid "Creating list / check status"
+msgstr "S'està creant la llista / comprovant l'estat"
+
+#: src/svnfrontend/svnactions.cpp:1022
+#, kde-format
+msgid "Delete and Commit"
+msgstr "Suprimix i publica"
+
+#: src/svnfrontend/svnactions.cpp:1024
+#, kde-format
+msgid "Add and Commit"
+msgstr "Afig i publica"
+
+#: src/svnfrontend/svnactions.cpp:1055
+#, kde-format
+msgctxt "@title:window"
+msgid "Commit"
+msgstr "Publicació"
+
+#: src/svnfrontend/svnactions.cpp:1055
+#, kde-format
+msgid "Commit - hit Cancel for abort"
+msgstr "S'està publicant -premeu «Cancel·la» per a interrompre-"
+
+#: src/svnfrontend/svnactions.cpp:1081
+#, kde-format
+msgctxt "@title:window"
+msgid "Downloading"
+msgstr "Baixada"
+
+#: src/svnfrontend/svnactions.cpp:1081
+#, kde-format
+msgid "Download - hit Cancel for abort"
+msgstr "S'està baixant -premeu «Cancel·la» per a interrompre-"
+
+#: src/svnfrontend/svnactions.cpp:1108
+#, kde-format
+msgid "Can not do this diff because networking is disabled."
+msgstr "No s'ha pogut fer esta diferència atés que la xarxa està desactivada."
+
+#: src/svnfrontend/svnactions.cpp:1156
+#, kde-format
+msgid "Both entries seems to be the same, can not diff."
+msgstr "Ambdues entrades pareixen ser la mateixa, no s'ha pogut fer diff."
+
+#: src/svnfrontend/svnactions.cpp:1221
+#, kde-format
+msgid "Diff-process could not started, check command."
+msgstr ""
+"No s'ha pogut iniciar el processament de les diferències, comproveu l'ordre."
+
+#: src/svnfrontend/svnactions.cpp:1265 src/svnfrontend/svnactions.cpp:1318
+#, kde-format
+msgctxt "@title:window"
+msgid "Diffing"
+msgstr "Diferències"
+
+#: src/svnfrontend/svnactions.cpp:1265
+#, kde-format
+msgid "Diffing - hit Cancel for abort"
+msgstr "S'estan creant les diferències -premeu «Cancel·la» per a interrompre-"
+
+#: src/svnfrontend/svnactions.cpp:1278 src/svnfrontend/svnactions.cpp:1327
+#, kde-format
+msgid "No difference to display"
+msgstr "No hi ha diferències que s'hagen de mostrar"
+
+#: src/svnfrontend/svnactions.cpp:1318
+#, kde-format
+msgid "Diffing - hit cancel for abort"
+msgstr "S'estan creant les diferències -premeu «Cancel·la» per a interrompre-"
+
+#: src/svnfrontend/svnactions.cpp:1376
+#, kde-format
+msgid "Display process could not started, check command."
+msgstr "No s'ha pogut iniciar el procés de visualització, comproveu l'ordre."
+
+#: src/svnfrontend/svnactions.cpp:1389
+#, kde-format
+msgctxt "@title:window"
+msgid "Diff Display"
+msgstr "Vista de diff"
+
+#: src/svnfrontend/svnactions.cpp:1438
+#, kde-format
+msgctxt "@title:window"
+msgid "Making update"
+msgstr "Actualització"
+
+#: src/svnfrontend/svnactions.cpp:1438
+#, kde-format
+msgid "Making update - hit Cancel for abort"
+msgstr "S'està actualitzant -premeu «Cancel·la» per a interrompre-"
+
+#: src/svnfrontend/svnactions.cpp:1526
+#, kde-format
+msgid "Which files or directories should I add?"
+msgstr "Quins fitxers o directoris s'han d'afegir?"
+
+#: src/svnfrontend/svnactions.cpp:1533
+#, kde-format
+msgid "<center>The entry<br/>%1<br/>is versioned - break.</center>"
+msgstr "<center>L'entrada<br/>%1<br/>té versió -s'interromp-.</center>"
+
+#: src/svnfrontend/svnactions.cpp:1562
+#, kde-format
+msgid "Delete from repository"
+msgstr "Suprimix del repositori"
+
+#: src/svnfrontend/svnactions.cpp:1611
+#, kde-format
+msgctxt "@title:window"
+msgid "Export a Repository"
+msgstr "Exportació d'un repositori"
+
+#: src/svnfrontend/svnactions.cpp:1611
+#, kde-format
+msgctxt "@title:window"
+msgid "Checkout a Repository"
+msgstr "Baixada d'un repositori"
+
+#: src/svnfrontend/svnactions.cpp:1630
+#, kde-format
+msgid "Export repository"
+msgstr "Exporta el repositori"
+
+#: src/svnfrontend/svnactions.cpp:1657
+#, kde-format
+msgid "Exporting a file?"
+msgstr "Exportar un fitxer?"
+
+#: src/svnfrontend/svnactions.cpp:1657
+#, kde-format
+msgid "Checking out a file?"
+msgstr "Descarregar un fitxer?"
+
+#: src/svnfrontend/svnactions.cpp:1703
+#, kde-format
+msgctxt "@title:window"
+msgid "Export"
+msgstr "Exportació"
+
+#: src/svnfrontend/svnactions.cpp:1703
+#, kde-format
+msgctxt "@title:window"
+msgid "Checkout"
+msgstr "Descàrrega"
+
+#: src/svnfrontend/svnactions.cpp:1703
+#, kde-format
+msgid "Exporting"
+msgstr "S'està exportant"
+
+#: src/svnfrontend/svnactions.cpp:1703
+#, kde-format
+msgid "Checking out"
+msgstr "S'està baixant"
+
+#: src/svnfrontend/svnactions.cpp:1740
+#, kde-format
+msgid "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
+msgstr "<center>L'entrada<br/>%1<br/>no té versió -s'interromp-.</center>"
+
+#: src/svnfrontend/svnactions.cpp:1773
+#, kde-format
+msgctxt "@title:window"
+msgid "Revert"
+msgstr "Reversió"
+
+#: src/svnfrontend/svnactions.cpp:1773
+#, kde-format
+msgid "Reverting items"
+msgstr "Elements revertits"
+
+#: src/svnfrontend/svnactions.cpp:1803 src/svnfrontend/svnactions.cpp:1865
+#, kde-format
+msgctxt "@title:window"
+msgid "Switch URL"
+msgstr "Canviant l'URL"
+
+#: src/svnfrontend/svnactions.cpp:1803
+#, kde-format
+msgid "Switching URL"
+msgstr "S'està canviant l'URL"
+
+#: src/svnfrontend/svnactions.cpp:1823
+#, kde-format
+msgctxt "@title:window"
+msgid "Relocate Repository"
+msgstr "Tornant a localitzar el repositori"
+
+#: src/svnfrontend/svnactions.cpp:1823
+#, kde-format
+msgid "Relocate repository to new URL"
+msgstr "Torna a localitzar el repositori a l'URL nou"
+
+#: src/svnfrontend/svnactions.cpp:1846
+#, kde-format
+msgid "Can only switch one item at time"
+msgstr "Tan sols es pot canviar sobre un element alhora"
+
+#: src/svnfrontend/svnactions.cpp:1852
+#, kde-format
+msgid "Error getting entry to switch"
+msgstr "Error mentre s'obtenia l'entrada per al canvi"
+
+#: src/svnfrontend/svnactions.cpp:1876
+#, kde-format
+msgid "Switch URL"
+msgstr "Canvia l'URL"
+
+#: src/svnfrontend/svnactions.cpp:1894
+#, kde-format
+msgctxt "@title:window"
+msgid "Cleanup"
+msgstr "Neteja"
+
+#: src/svnfrontend/svnactions.cpp:1894
+#, kde-format
+msgid "Cleaning up folder"
+msgstr "S'està netejant la carpeta"
+
+#: src/svnfrontend/svnactions.cpp:1911
+#, kde-format
+msgctxt "@title:window"
+msgid "Resolve"
+msgstr "Resolució"
+
+#: src/svnfrontend/svnactions.cpp:1911
+#, kde-format
+msgid "Marking resolved"
+msgstr "S'estan marcant els resolts"
+
+#: src/svnfrontend/svnactions.cpp:1943
+#, kde-format
+msgid "Could not retrieve conflict information - giving up."
+msgstr "No s'ha pogut obtindre la informació del conflicte. Es renuncia."
+
+#: src/svnfrontend/svnactions.cpp:1970
+#, kde-format
+msgid "Resolve-process could not started, check command."
+msgstr "No s'ha pogut iniciar el procés de resolució, comproveu l'ordre."
+
+#: src/svnfrontend/svnactions.cpp:1982
+#, kde-format
+msgctxt "@title:window"
+msgid "Import"
+msgstr "Importació"
+
+#: src/svnfrontend/svnactions.cpp:1982
+#, kde-format
+msgid "Importing items"
+msgstr "S'estan important els elements"
+
+#: src/svnfrontend/svnactions.cpp:2006
+#, kde-format
+msgid "Nothing to merge."
+msgstr "No hi ha res per a fusionar."
+
+#: src/svnfrontend/svnactions.cpp:2010
+#, kde-format
+msgid "No destination to merge."
+msgstr "No hi ha destinació per a fusionar."
+
+#: src/svnfrontend/svnactions.cpp:2029
+#, kde-format
+msgid "Both sources must be same type."
+msgstr "Ambdues fonts han de ser del mateix tipus."
+
+#: src/svnfrontend/svnactions.cpp:2036
+#, kde-format
+msgid "Target for merge must same type like sources."
+msgstr "L'objectiu per a fusionar ha de ser del mateix tipus que les fonts."
+
+#: src/svnfrontend/svnactions.cpp:2059
+#, kde-format
+msgid "Both entries seems to be the same, will not do a merge."
+msgstr ""
+"Ambdues entrades pareixen ser la mateixa, no s'ha pogut fer la fusió (merge)."
+
+#: src/svnfrontend/svnactions.cpp:2123
+#, kde-format
+msgid "Merge process could not started, check command."
+msgstr "El procés de fusió (merge) no s'ha pogut iniciar, comproveu l'ordre."
+
+#: src/svnfrontend/svnactions.cpp:2182
+#, kde-format
+msgid "Merging items"
+msgstr "Fusiona elements"
+
+#: src/svnfrontend/svnactions.cpp:2209 src/svnfrontend/svnactions.cpp:2227
+#, kde-format
+msgctxt "@title:window"
+msgid "Move"
+msgstr "Moure"
+
+#: src/svnfrontend/svnactions.cpp:2209
+#, kde-format
+msgid "Moving/Rename item"
+msgstr "Mou/Canvia el nom d'un element"
+
+#: src/svnfrontend/svnactions.cpp:2227
+#, kde-format
+msgid "Moving entries"
+msgstr "Mou entrades"
+
+#: src/svnfrontend/svnactions.cpp:2247 src/svnfrontend/svnactions.cpp:2262
+#, kde-format
+msgctxt "@title:window"
+msgid "Copy / Move"
+msgstr "Copiar / Moure"
+
+#: src/svnfrontend/svnactions.cpp:2247 src/svnfrontend/svnactions.cpp:2262
+#, kde-format
+msgid "Copy or Moving entries"
+msgstr "Copia o mou entrades"
+
+#: src/svnfrontend/svnactions.cpp:2370
+#, kde-format
+msgid "No unversioned items found."
+msgstr "No s'han trobat elements sense versió."
+
+#: src/svnfrontend/svnactions.cpp:2374
+#, kde-format
+msgctxt "@title:window"
+msgid "Add Unversioned Items"
+msgstr "Afig elements sense versió"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
+#: src/svnfrontend/svnactions.cpp:2377 src/svnfrontend/svnlogdlg.ui:163
+#, kde-format
+msgid "Item"
+msgstr "Element"
+
+#: src/svnfrontend/svnactions.cpp:2497
+#, kde-format
+msgid "Found %1 modified item"
+msgid_plural "Found %1 modified items"
+msgstr[0] "S'ha trobat %1 element modificat"
+msgstr[1] "S'han trobat %1 elements modificats"
+
+#: src/svnfrontend/svnactions.cpp:2526
+#, kde-format
+msgid "Checking for updates finished"
+msgstr "La comprovació d'actualitzacions ha finalitzat"
+
+#: src/svnfrontend/svnactions.cpp:2528
+#, kde-format
+msgid "There are new items in repository"
+msgstr "Hi ha elements nous en el repositori"
+
+#: src/svnfrontend/svnactions.cpp:2598
+#, kde-format
+msgid "Not filling log cache because networking is disabled"
+msgstr ""
+"No s'està omplint el cau de registres, ja que la xarxa està desactivada"
+
+#: src/svnfrontend/svnactions.cpp:2640
+#, kde-format
+msgid "Not checking for updates because networking is disabled"
+msgstr ""
+"No s'ha comprovat per a actualitzacions, atés que la xarxa està desactivada"
+
+#: src/svnfrontend/svnactions.cpp:2647
+#, kde-format
+msgid "Checking for updates started in background"
+msgstr "La comprovació d'actualitzacions s'ha iniciat en segon pla"
+
+#: src/svnfrontend/svnitem.cpp:405 src/svnfrontend/svnitem.cpp:418
+#, kde-format
+msgid "Not versioned"
+msgstr "Sense versió"
+
+#: src/svnfrontend/svnitem.cpp:408
+#, kde-format
+msgid "Added in repository"
+msgstr "Afegit al repositori"
+
+#: src/svnfrontend/svnitem.cpp:410
+#, kde-format
+msgid "Needs update"
+msgstr "Necessita actualització"
+
+#: src/svnfrontend/svnitem.cpp:422
+#, kde-format
+msgid "Locally modified"
+msgstr "Modificat localment"
+
+#: src/svnfrontend/svnitem.cpp:424
+#, kde-format
+msgid "Property modified"
+msgstr "Propietat modificada"
+
+#: src/svnfrontend/svnitem.cpp:428
+#, kde-format
+msgid "Locally added"
+msgstr "Afegit localment"
+
+#: src/svnfrontend/svnitem.cpp:431
+#, kde-format
+msgid "Missing"
+msgstr "Falta"
+
+#: src/svnfrontend/svnitem.cpp:437
+#, kde-format
+msgid "Replaced"
+msgstr "Substituït"
+
+#: src/svnfrontend/svnitem.cpp:440
+#, kde-format
+msgid "Ignored"
+msgstr "Ignorat"
+
+#: src/svnfrontend/svnitem.cpp:443
+#, kde-format
+msgid "External"
+msgstr "Extern"
+
+#: src/svnfrontend/svnitem.cpp:447
+#, kde-format
+msgid "Conflict"
+msgstr "Conflicte"
+
+#: src/svnfrontend/svnitem.cpp:449
+#, kde-format
+msgid "Property conflicted"
+msgstr "Propietat en conflicte"
+
+#: src/svnfrontend/svnitem.cpp:453
+#, kde-format
+msgid "Merged"
+msgstr "Fusionat"
+
+#: src/svnfrontend/svnitem.cpp:456
+#, kde-format
+msgid "Incomplete"
+msgstr "No complet"
+
+#: src/svnfrontend/svnitem.cpp:459
+#, kde-format
+msgid "Obstructed"
+msgstr "Obstruït"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, LogDialog)
+#: src/svnfrontend/svnlogdlg.ui:18
+#, kde-format
+msgid "SVN Log"
+msgstr "Registre de SVN"
+
+#. i18n: ectx: property (text), widget (QLabel, startLabel)
+#: src/svnfrontend/svnlogdlg.ui:31
+#, kde-format
+msgid "Start revision"
+msgstr "Comença amb la revisió"
+
+#. i18n: ectx: property (text), widget (QLabel, endLabel)
+#: src/svnfrontend/svnlogdlg.ui:41
+#, kde-format
+msgid "End revision"
+msgstr "Finalitza amb la revisió"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_goButton)
+#: src/svnfrontend/svnlogdlg.ui:57
+#, kde-format
+msgid "Get Logs"
+msgstr "Obtín els registres"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_PrevFiftyButton)
+#: src/svnfrontend/svnlogdlg.ui:64
+#, kde-format
+msgid "Previous entries"
+msgstr "Entrades anteriors"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_NextFiftyButton)
+#: src/svnfrontend/svnlogdlg.ui:71
+#, kde-format
+msgid "Show from HEAD"
+msgstr "Mostra des de HEAD"
+
+#. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
+#: src/svnfrontend/svnlogdlg.ui:168
+#, kde-format
+msgid "Copy from"
+msgstr "Copia des de"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_DispPrevButton)
+#: src/svnfrontend/svnlogdlg.ui:189 src/svnfrontend/svnlogdlgimp.cpp:510
+#, kde-format
+msgid "Diff previous"
+msgstr "Diff anterior"
+
+#. i18n: ectx: property (toolTip), widget (QPushButton, m_DispSpecDiff)
+#: src/svnfrontend/svnlogdlg.ui:208
+#, kde-format
+msgid "Select second revision with right mouse button"
+msgstr "Seleccioneu la segona revisió amb el botó dret del ratolí"
+
+#. i18n: ectx: property (text), widget (QPushButton, buttonListFiles)
+#: src/svnfrontend/svnlogdlg.ui:230
+#, kde-format
+msgid "List entries"
+msgstr "Llista d'entrades"
+
+#. i18n: ectx: property (text), widget (QPushButton, buttonBlame)
+#: src/svnfrontend/svnlogdlg.ui:249 src/svnfrontend/svnlogdlgimp.cpp:505
+#, kde-format
+msgid "Annotate"
+msgstr "Anotacions"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_pbHelp)
+#: src/svnfrontend/svnlogdlg.ui:275
+#, kde-format
+msgid "Help"
+msgstr "Ajuda"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_pbClose)
+#: src/svnfrontend/svnlogdlg.ui:282
+#, kde-format
+msgid "Close"
+msgstr "Tanca"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:109
+#, kde-format
+msgctxt "@title:window"
+msgid "SVN Log of %1"
+msgstr "Registre SVN de %1"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:111
+#, kde-format
+msgctxt "@title:window"
+msgid "SVN Log"
+msgstr "Registre SVN"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:435
+#, kde-format
+msgid "Set version as right side of diff"
+msgstr "Indica la versió al costat dret de les diferències"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:441
+#, kde-format
+msgid "Set version as left side of diff"
+msgstr "Indica la versió al costat esquerre de les diferències"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:447
+#, kde-format
+msgid "Unset version for diff"
+msgstr "No indicar la versió en les diferències"
+
+#: src/svnfrontend/svnlogdlgimp.cpp:451
+#, kde-format
+msgid "Revert this commit"
+msgstr "Desfés esta publicació"
+
+#: src/svnfrontend/svntreeview.cpp:123
+#, kde-format
+msgid "&Move Here"
+msgstr "&Mou ací"
+
+#: src/svnfrontend/svntreeview.cpp:127
+#, kde-format
+msgid "&Copy Here"
+msgstr "&Copia ací"
+
+#: src/svnfrontend/svntreeview.cpp:129
+#, kde-format
+msgid "C&ancel"
+msgstr "C&ancel·la"
+
+#: src/urldlg.cpp:99
+#, kde-format
+msgctxt "@title:window"
+msgid "Open"
+msgstr "Obri"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, UrlDlg)
+#: src/urldlg.ui:14
+#, kde-format
+msgid "Open repository / working copy"
+msgstr "Obri un repositori/còpia de treball"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/urldlg.ui:20
+#, kde-format
+msgid "Open repository or working copy"
+msgstr "Obri el repositori o còpia de treball"

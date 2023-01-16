@@ -1,0 +1,107 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Ukrainian "INCLUDE">
+]>
+
+<refentry lang="&language;" id='kdesvnaskpass1'>
+
+<refentryinfo>
+<title
+>Інструкція користувача kdesvnaskpass</title>
+<author
+><personname
+> <firstname
+>Rajko</firstname
+> <surname
+>Albrecht</surname
+> </personname
+> <email
+>ral@alwins-world.de</email
+></author>
+<date
+>22 травня 2016 року</date>
+<releaseinfo
+>kdesvn 2.1.0</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kdesvnaskpass</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kdesvnaskpass</command
+></refname>
+<refpurpose
+>ssh-askpass для kdesvn</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id='synopsis'>
+<cmdsynopsis
+><command
+>kdesvnaskpass</command
+> <arg choice="opt"
+><replaceable
+>запит</replaceable
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1 id='description'
+><title
+>Опис</title>
+<para
+>ssh-askpass для kdesvn</para>
+</refsect1>
+
+<refsect1 id='options'
+><title
+>Параметри</title>
+
+<refsect2 id='ss_arguments'
+><title
+>Аргументи:</title>
+<variablelist>
+  <varlistentry>
+  <term
+><emphasis
+>запрошення</emphasis
+></term>
+  <listitem>
+<para
+>Запрошення, яке буде показано користувачеві.</para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</refsect2>
+
+</refsect1>
+
+<refsect1 id='see_also'
+><title
+>Також прочитайте</title>
+<simplelist>
+<member
+>З повним текстом документації користувача можна ознайомитися за допомогою Центру довідки KDE. Крім того, ви можете ввести адресу <emphasis
+>help:/kdesvn/</emphasis
+> безпосередньо до konqueror або віддати команду <emphasis
+>khelpcenter help:/kdesvn</emphasis
+> з командного рядка.</member>
+</simplelist>
+</refsect1>
+
+<refsect1 id='authors'
+><title
+>Автори</title>
+<literallayout
+>Rajko Albrecht &lt;ral@alwins-world.de&gt;
+</literallayout
+></refsect1>
+</refentry>
+

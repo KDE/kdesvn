@@ -1,0 +1,203 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Ukrainian "INCLUDE">
+]>
+
+<refentry lang="&language;" id='kdesvn1'>
+<refentryinfo>
+<title
+>Інструкція користувача kdesvn</title>
+<author
+><personname
+> <firstname
+>Rajko</firstname
+> <surname
+>Albrecht</surname
+> </personname
+> <email
+>ral@alwins-world.de</email
+></author>
+<date
+>22 травня 2016 року</date>
+<releaseinfo
+>kdesvn 2.1.0</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kdesvn</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kdesvn</command
+></refname>
+<refpurpose
+>Клієнт Subversion, створений розробниками KDE (окрема програма)</refpurpose>
+</refnamediv>
+<!-- body begins here -->
+<refsynopsisdiv id='synopsis'>
+<cmdsynopsis
+><command
+>kdesvn</command
+> <arg choice="opt"
+><replaceable
+>параметри</replaceable
+></arg
+> <arg choice="plain"
+><replaceable
+>exec</replaceable
+></arg
+> <arg choice="plain"
+><replaceable
+>&lt;команда&gt;</replaceable
+></arg
+> <arg choice="opt"
+><replaceable
+>адреса</replaceable
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+
+<refsect1 id='description'
+><title
+>Опис</title>
+<para
+>Клієнт Subversion, створений розробниками KDE (окрема програма)</para>
+</refsect1>
+
+<refsect1 id='options'
+><title
+>Параметри</title>
+
+<refsect2 id='ss_arguments'
+><title
+>Аргументи:</title>
+<variablelist>
+  <varlistentry>
+  <term
+><emphasis
+>exec</emphasis
+> &lt;команда&gt;</term>
+  <listitem
+><para
+>Виконати вказану команду subversion («exec help» щоб дізнатися більше, відкриває Центр довідки KDE)</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><emphasis
+>адреса</emphasis
+></term>
+  <listitem>
+<para
+>Шлях до локальної робочої копії або сховища.</para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</refsect2>
+
+<refsect2 id='options2'
+><title
+>Параметри:</title>
+<variablelist>
+  <varlistentry>
+  <term
+><option
+>-r початкова_модифікація[:кінцева_модифікація]</option
+></term>
+  <listitem>
+<para
+>Виконати окрему команду subversion над вказаною модифікацією (діапазоном модифікацій).</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-R</option
+></term>
+  <listitem>
+<para
+>Запитати щодо модифікації під час виконання окремої команди</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-f</option
+></term>
+  <listitem>
+<para
+>Примусове виконання</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-o &lt;файл&gt;</option
+></term>
+  <listitem>
+<para
+>Зберегти дані, виведені командою subversion (наприклад «cat») до файла &lt;файл&gt;</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-l &lt;число&gt;</option
+></term>
+  <listitem>
+<para
+>Обмежити кількість виведених повідомлень журналу до &lt;число&gt;</para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</refsect2>
+
+</refsect1>
+
+<refsect1 id='example'>
+<title
+>Приклад</title>
+<para
+>kdesvn file:///<replaceable
+>шлях/до/локальної/робочої/копії</replaceable
+></para>
+<para
+>kdesvn http://<replaceable
+>trunk/віддаленого/проєкту/svn</replaceable
+></para>
+</refsect1>
+
+<refsect1 id='see_also'>
+<title
+>Також прочитайте</title>
+<simplelist>
+<member
+>З повним текстом документації користувача можна ознайомитися за допомогою Центру довідки KDE. Крім того, ви можете ввести адресу <emphasis
+>help:/kdesvn/</emphasis
+> безпосередньо до konqueror або віддати команду <emphasis
+>khelpcenter help:/kdesvn/</emphasis
+> з командного рядка.</member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
+</simplelist>
+</refsect1>
+
+<refsect1 id='authors'
+><title
+>Автори</title>
+<literallayout
+>Rajko Albrecht &lt;ral@alwins-world.de&gt;
+</literallayout
+></refsect1>
+</refentry>
+

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:58+0000\n"
-"PO-Revision-Date: 2023-01-12 07:59+0100\n"
+"PO-Revision-Date: 2023-01-24 09:09+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -36,12 +36,12 @@ msgstr "kdesvnaskpass"
 #: src/askpass/kdesvn-askpass.cpp:38
 #, kde-format
 msgid "ssh-askpass for kdesvn"
-msgstr ""
+msgstr "ssh-askpass -ი kdesvn-სთვის"
 
 #: src/askpass/kdesvn-askpass.cpp:40
 #, kde-format
 msgid "Copyright (c) 2005-2009 Rajko Albrecht"
-msgstr ""
+msgstr "(c) 2005-2009 Rajko Albrecht, ყველა უფლება დაცულია"
 
 #: src/askpass/kdesvn-askpass.cpp:43
 #, kde-format
@@ -67,7 +67,7 @@ msgstr "&სანიშნეები"
 #: src/kdesvn.cpp:102
 #, kde-format
 msgid "Create and open new repository"
-msgstr ""
+msgstr "ახალი რეპოზიტორიის შექმნა და გახსნა"
 
 #: src/kdesvn.cpp:103
 #, kde-format
@@ -77,17 +77,17 @@ msgstr ""
 #: src/kdesvn.cpp:106
 #, kde-format
 msgid "Dump repository to file"
-msgstr ""
+msgstr "რეპოზიტორიის დამპი ფაილში"
 
 #: src/kdesvn.cpp:107
 #, kde-format
 msgid "Dump a Subversion repository to a file"
-msgstr ""
+msgstr "Subversion-ის რეპოზიტორიის დამპი ფაილში"
 
 #: src/kdesvn.cpp:110
 #, kde-format
 msgid "Hotcopy a repository"
-msgstr ""
+msgstr "რეპოზიტორიის ცხელი ასლი"
 
 #: src/kdesvn.cpp:111
 #, kde-format
@@ -97,7 +97,7 @@ msgstr ""
 #: src/kdesvn.cpp:114
 #, kde-format
 msgid "Load dump into repository"
-msgstr ""
+msgstr "დამპის რეპოზიტორიაში შეტვირთვა"
 
 #: src/kdesvn.cpp:115
 #, kde-format
@@ -117,7 +117,7 @@ msgstr ""
 #: src/kdesvn.cpp:122
 #, kde-format
 msgid "Info about kdesvn part"
-msgstr ""
+msgstr "ინფორმაცია kdesvn -ის შესახებ"
 
 #: src/kdesvn.cpp:123
 #, kde-format
@@ -127,7 +127,7 @@ msgstr ""
 #: src/kdesvn.cpp:126
 #, kde-format
 msgid "Show database content"
-msgstr ""
+msgstr "ბაზის შემცველობის ჩვენება"
 
 #: src/kdesvn.cpp:127
 #, kde-format
@@ -220,7 +220,7 @@ msgstr ""
 #: src/kdesvn_part.cpp:284
 #, kde-format
 msgid "kdesvn Part"
-msgstr ""
+msgstr "kdesvn -ის ნაწილი"
 
 #: src/kdesvn_part.cpp:286
 #, kde-format
@@ -306,7 +306,7 @@ msgstr ""
 #: src/kdesvn_part.cpp:333
 #, kde-format
 msgid "Revision tree"
-msgstr ""
+msgstr "რევიზიის ხე"
 
 #: src/kdesvn_part.cpp:335
 #, kde-format
@@ -322,13 +322,13 @@ msgstr ""
 #: src/kdesvn_part.rc:5
 #, kde-format
 msgid "Subversion settings"
-msgstr ""
+msgstr "Subversion -ის მორგება"
 
 #. i18n: ectx: Menu (quicksettings)
 #: src/kdesvn_part.rc:7 src/kdesvnui.rc:43
 #, kde-format
 msgid "Quick settings"
-msgstr ""
+msgstr "სწრაფი მორგება"
 
 #. i18n: ectx: Menu (subversion_working_copy)
 #: src/kdesvn_part.rc:49
@@ -374,7 +374,7 @@ msgstr "ქმედებები"
 #: src/kdesvn_part.rc:242 src/kdesvnui.rc:58
 #, kde-format
 msgid "Subversion toolbar"
-msgstr ""
+msgstr "Subversion -ის ზოლი"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: src/kdesvn_part.rc:260 src/kdesvnui.rc:62
@@ -396,12 +396,12 @@ msgstr ""
 #: src/kdesvnd/kdesvnd.cpp:336
 #, kde-format
 msgid "Current task"
-msgstr ""
+msgstr "მიმდინარე ამოცანა"
 
 #: src/kdesvnd/kdesvnd.cpp:348
 #, kde-format
 msgid "Current transfer"
-msgstr ""
+msgstr "მიმდინარე გადაცემა"
 
 #: src/kdesvnd/ksvnjobview.cpp:52
 #, kde-format
@@ -418,7 +418,7 @@ msgstr "&ფაილი"
 #: src/kdesvnui.rc:10
 #, kde-format
 msgid "Subversion Admin"
-msgstr ""
+msgstr "Subversion -ის ადმინი"
 
 #. i18n: ectx: Menu (database_menu)
 #: src/kdesvnui.rc:30
@@ -435,17 +435,17 @@ msgstr "&მორგება"
 #: src/kdesvnview.cpp:130 src/kdesvnview.cpp:164
 #, kde-format
 msgid "Repository opened"
-msgstr ""
+msgstr "რეპოზიტორია ღიაა"
 
 #: src/kdesvnview.cpp:170
 #, kde-format
 msgid "Could not open repository"
-msgstr ""
+msgstr "რეპოზიტორიის გახსნის შეცდომა"
 
 #: src/kdesvnview.cpp:195
 #, kde-format
 msgid "No repository open"
-msgstr ""
+msgstr "რეპოზიტორიია ღია არაა"
 
 #: src/kdesvnview.cpp:255
 #, kde-format
@@ -484,7 +484,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Dump a Repository"
-msgstr ""
+msgstr "რეპოზიტორიის დამპი"
 
 #: src/kdesvnview.cpp:384
 #, kde-format
@@ -495,12 +495,12 @@ msgstr "დამპი"
 #: src/kdesvnview.cpp:384
 #, kde-format
 msgid "Dumping a repository"
-msgstr ""
+msgstr "რეპოზიტორიის დამპი"
 
 #: src/kdesvnview.cpp:386
 #, kde-format
 msgid "Dump finished."
-msgstr ""
+msgstr "დამპი დასრულდა."
 
 #: src/kdesvnview.cpp:431
 #, kde-format
@@ -530,12 +530,12 @@ msgstr "D %1"
 #: src/kiosvn/kiolistener.cpp:115
 #, kde-format
 msgid "Restored %1."
-msgstr ""
+msgstr "%1 აღდგენილია."
 
 #: src/kiosvn/kiolistener.cpp:118
 #, kde-format
 msgid "Reverted %1."
-msgstr ""
+msgstr "%1 დაბრუნებულია."
 
 #: src/kiosvn/kiolistener.cpp:121
 #, kde-format
@@ -557,7 +557,7 @@ msgstr ""
 #: src/kiosvn/kiolistener.cpp:130
 #, kde-format
 msgid "Skipped %1."
-msgstr ""
+msgstr "%1 გამოტოვებულია."
 
 #: src/kiosvn/kiolistener.cpp:180
 #, kde-format
@@ -597,7 +597,7 @@ msgstr ""
 #: src/kiosvn/kiolistener.cpp:209
 #, kde-format
 msgid "Sending %1."
-msgstr ""
+msgstr "%1-ის გაგზავნა."
 
 #: src/kiosvn/kiolistener.cpp:213
 #, kde-format
@@ -694,12 +694,12 @@ msgstr ""
 #: src/kiosvn/kiosvn.cpp:790
 #, kde-format
 msgid "Nothing to commit."
-msgstr ""
+msgstr "დასაკომიტებელი არაფერია."
 
 #: src/kiosvn/kiosvn.cpp:837
 #, kde-format
 msgid "Empty logs"
-msgstr ""
+msgstr "ჟურნალების გასუფთავება"
 
 #: src/ksvnwidgets/authdialogwidget.cpp:34
 #, kde-format
@@ -732,7 +732,7 @@ msgstr ""
 #: src/ksvnwidgets/authdlg.ui:52
 #, kde-format
 msgid "Username:"
-msgstr ""
+msgstr "მომხმარებელი:"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, CommitMessage)
 #: src/ksvnwidgets/commitmessage.ui:6
@@ -857,24 +857,24 @@ msgstr ""
 #: src/ksvnwidgets/commitmsg_impl.cpp:455
 #, kde-format
 msgid "Show new items"
-msgstr ""
+msgstr "ახალი ელემენტების ჩვენება"
 
 #: src/ksvnwidgets/commitmsg_impl.cpp:478
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Text File to Insert"
-msgstr ""
+msgstr "აირჩიეთ ჩასასმელი ტექსტური ფაილი"
 
 #: src/ksvnwidgets/commitmsg_impl.cpp:479
 #, kde-format
 msgid "Select text file to insert:"
-msgstr ""
+msgstr "აირჩიეთ ჩასასმელი ტექსტური ფაილი:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DeleteForm)
 #: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1576
 #, kde-format
 msgid "Really delete these entries?"
-msgstr ""
+msgstr "მართლა წავშალო ეს ელემენტები?"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_forceDelete)
 #: src/ksvnwidgets/deleteform.ui:23
@@ -955,12 +955,12 @@ msgstr ""
 #: src/ksvnwidgets/diffbrowser.cpp:89
 #, kde-format
 msgid "Save diff"
-msgstr ""
+msgstr "სხვაობის შენახვა"
 
 #: src/ksvnwidgets/diffbrowser.cpp:89
 #, kde-format
 msgid "Patch file (*.diff *.patch)"
-msgstr ""
+msgstr "Patch ფაილი (*.diff *.patch)"
 
 #: src/ksvnwidgets/diffbrowser.cpp:172
 #, kde-format
@@ -985,13 +985,13 @@ msgstr ""
 #: src/ksvnwidgets/encodingselector.ui:30
 #, kde-format
 msgid "Select encoding:"
-msgstr ""
+msgstr "აირჩიეთ კოდირება:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_encodingList)
 #: src/ksvnwidgets/encodingselector.ui:44
 #, kde-format
 msgid "Default UTF-8"
-msgstr ""
+msgstr "ნაგულისხმები UTF-8"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
 #: src/ksvnwidgets/models/commitmodel.cpp:191 src/svnfrontend/svnlogdlg.ui:158
@@ -1029,7 +1029,7 @@ msgstr "წაშლა"
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:47
 #, kde-format
 msgid "Modify (content or property)"
-msgstr ""
+msgstr "შეცვლა (შეცველობა ან თვისება)"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:51
 #: src/svnfrontend/svnactions.cpp:794
@@ -1040,13 +1040,13 @@ msgstr "ჩანაცვლება"
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:55
 #, kde-format
 msgid "(Un)Lock"
-msgstr ""
+msgstr "(გან/და)ბლოკვა"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, RevertForm)
 #: src/ksvnwidgets/revertform.ui:14
 #, kde-format
 msgid "Revert entries"
-msgstr ""
+msgstr "ჩანაწერების დაბრუნება"
 
 #. i18n: ectx: property (text), widget (QLabel, m_headLine)
 #: src/ksvnwidgets/revertform.ui:20
@@ -1057,12 +1057,12 @@ msgstr ""
 #: src/ksvnwidgets/ssltrustprompt.cpp:33
 #, kde-format
 msgid "Accept permanently"
-msgstr ""
+msgstr "სამუდამოდ მიღება"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:34
 #, kde-format
 msgid "Accept temporarily"
-msgstr ""
+msgstr "დროებით მიღება"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:35
 #, kde-format
@@ -1077,7 +1077,7 @@ msgstr ""
 #: src/ksvnwidgets/ssltrustprompt.cpp:71
 #, kde-format
 msgid "Failure reasons"
-msgstr ""
+msgstr "წარუმატებლობის მიზეზები"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:79
 #, kde-format
@@ -1102,7 +1102,7 @@ msgstr "ვადა"
 #: src/ksvnwidgets/ssltrustprompt.cpp:83
 #, kde-format
 msgid "Issuer name"
-msgstr ""
+msgstr "გამომცემლის სახელი"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:84
 #, kde-format
@@ -1113,7 +1113,7 @@ msgstr "თითის ანაბეჭდი"
 #: src/ksvnwidgets/ssltrustprompt.ui:14
 #, kde-format
 msgid "Trust SSL certificate"
-msgstr ""
+msgstr "SSL სერტიფიკატის ნდობა"
 
 #: src/main.cpp:39
 #, kde-format
@@ -1135,7 +1135,7 @@ msgstr ""
 #: src/main.cpp:44
 #, kde-format
 msgid "Rajko Albrecht"
-msgstr ""
+msgstr "Rajko Albrecht"
 
 #: src/main.cpp:45
 #, kde-format
@@ -1222,7 +1222,7 @@ msgstr ""
 #, kde-format
 msgctxt "no limit"
 msgid "No minimum"
-msgstr ""
+msgstr "მინიმალურის გარეშე"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_contextmenu)
 #: src/settings/cmdexecsettings.ui:51
@@ -1260,7 +1260,7 @@ msgstr ""
 #: src/settings/cmdexecsettings.ui:80
 #, kde-format
 msgid "Standard message:"
-msgstr ""
+msgstr "სტანდარტული შეტყობინება:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_kio_can_overwrite)
 #: src/settings/cmdexecsettings.ui:98
@@ -1776,13 +1776,13 @@ msgstr ""
 #: src/settings/kdesvn_part.kcfg:132 src/settings/subversion_settings.ui:138
 #, kde-format
 msgid "Use internal password cache"
-msgstr ""
+msgstr "პაროლების შიდა კეშის გამოყენება"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:136
 #, kde-format
 msgid "Is networking enabled"
-msgstr ""
+msgstr "ჩართულია ქსელი"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:140
@@ -2297,12 +2297,12 @@ msgstr "ხაზზე გადასვლა"
 #: src/svnfrontend/blamedisplay.cpp:320
 #, kde-format
 msgid "Show line"
-msgstr ""
+msgstr "ხაზის ჩვენება"
 
 #: src/svnfrontend/blamedisplay.cpp:320
 #, kde-format
 msgid "Show line number"
-msgstr ""
+msgstr "ხაზის ნომრის ჩვენება"
 
 #: src/svnfrontend/blamedisplay.cpp:356
 #, kde-format
@@ -2355,7 +2355,7 @@ msgstr ""
 #: src/svnfrontend/ccontextlistener.cpp:69
 #, kde-format
 msgid "Restore missing"
-msgstr ""
+msgstr "ნაკლულის აღდგენა"
 
 #: src/svnfrontend/ccontextlistener.cpp:70
 #, kde-format
@@ -2529,7 +2529,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:2604
 #, kde-format
 msgid "SVN Error"
-msgstr ""
+msgstr "SVN შეცდომა"
 
 #: src/svnfrontend/commandexec.cpp:206
 #, kde-format
@@ -2627,13 +2627,13 @@ msgstr ""
 #: src/svnfrontend/createrepodlg.ui:52
 #, kde-format
 msgid "FSFS"
-msgstr ""
+msgstr "FSFS"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
 #: src/svnfrontend/createrepodlg.ui:57
 #, kde-format
 msgid "BDB"
-msgstr ""
+msgstr "BDB"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_CreateMainDirs)
 #: src/svnfrontend/createrepodlg.ui:65
@@ -2653,7 +2653,7 @@ msgstr ""
 #: src/svnfrontend/createrepodlg.ui:71
 #, kde-format
 msgid "Create main folders"
-msgstr ""
+msgstr "ძირითადი საქაღალდეების შექმნა"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn16compat)
 #: src/svnfrontend/createrepodlg.ui:87
@@ -2685,7 +2685,7 @@ msgstr ""
 #: src/svnfrontend/createrepodlg.ui:123
 #, kde-format
 msgid "Type of repository:"
-msgstr ""
+msgstr "რეპოზიტორიის ტიპი:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn15compat)
 #: src/svnfrontend/createrepodlg.ui:139
@@ -2762,7 +2762,7 @@ msgstr ""
 #: src/svnfrontend/database/dboverview.ui:59
 #, kde-format
 msgid "Delete repository"
-msgstr ""
+msgstr "რეპოზიტორიის წაშლა"
 
 #: src/svnfrontend/database/dboverview.cpp:150
 #, kde-format
@@ -2780,7 +2780,7 @@ msgstr ""
 #: src/svnfrontend/database/dboverview.ui:19
 #, kde-format
 msgid "Known repositories"
-msgstr ""
+msgstr "ცნობილი რეპოზიტორიები"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteCacheButton)
 #. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteCacheButton)
@@ -2794,7 +2794,7 @@ msgstr ""
 #: src/svnfrontend/database/dboverview.ui:46
 #, kde-format
 msgid "Delete cache"
-msgstr ""
+msgstr "კეშის წაშლა"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteRepositoryButton)
 #. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteRepositoryButton)
@@ -3077,7 +3077,7 @@ msgstr ""
 #: src/svnfrontend/editpropsdlg.cpp:136
 #, kde-format
 msgid "Select or enter new property"
-msgstr ""
+msgstr "აირჩიეთ ან შეიყვანეთ ახალი თვისება"
 
 #: src/svnfrontend/editpropsdlg.cpp:160
 #, kde-format
@@ -3466,7 +3466,7 @@ msgstr "შეწყვეტა"
 #, kde-format
 msgctxt "@title:window"
 msgid "Scanning logs"
-msgstr ""
+msgstr "ჟურნალების სკანირება"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:228
 #: src/svnfrontend/graphtree/revisiontree.cpp:265
@@ -4556,7 +4556,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "History of %1"
-msgstr ""
+msgstr "%1-ის ისტორია"
 
 #: src/svnfrontend/svnactions.cpp:557
 #, kde-format
@@ -4578,7 +4578,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Content Get"
-msgstr ""
+msgstr "შემცველობის მიღება"
 
 #: src/svnfrontend/svnactions.cpp:582
 #, kde-format
@@ -4588,7 +4588,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:589
 #, kde-format
 msgid "Error getting content"
-msgstr ""
+msgstr "შემცველობის მიღების შეცდომა"
 
 #: src/svnfrontend/svnactions.cpp:602
 #, kde-format
@@ -4604,7 +4604,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:643
 #, kde-format
 msgid "Got no content."
-msgstr ""
+msgstr "შემცველობის გარეშე."
 
 #: src/svnfrontend/svnactions.cpp:668
 #, kde-format
@@ -4894,7 +4894,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Export a Repository"
-msgstr ""
+msgstr "რეპოზიტორიის გატანა"
 
 #: src/svnfrontend/svnactions.cpp:1629
 #, kde-format

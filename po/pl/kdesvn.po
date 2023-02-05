@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-06-07 01:43+0000\n"
-"PO-Revision-Date: 2023-01-02 20:51+0100\n"
+"PO-Revision-Date: 2023-02-04 08:36+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2664,7 +2664,7 @@ msgstr "niezmienny"
 #: src/svnfrontend/ccontextlistener.cpp:95
 #, kde-format
 msgid "item wasn't present"
-msgstr "element był nieobecny"
+msgstr "rzecz nie istnieje"
 
 #: src/svnfrontend/ccontextlistener.cpp:96
 #, kde-format
@@ -3005,7 +3005,7 @@ msgstr "Usuń wpisy pamięci obecnie wybranego repozytorium"
 #: src/svnfrontend/database/dboverview.ui:46
 #, kde-format
 msgid "Delete cache"
-msgstr "Usuń pamięć"
+msgstr "Usuń pamięć podręczną"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteRepositoryButton)
 #. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteRepositoryButton)
@@ -4581,7 +4581,7 @@ msgstr "Kliknij, aby nawigować"
 #: src/svnfrontend/maintreewidget.cpp:2228
 #, kde-format
 msgid "Navigation"
-msgstr "Nawigacja"
+msgstr "Przemieszczanie się"
 
 #: src/svnfrontend/maintreewidget.cpp:2349
 #, kde-format

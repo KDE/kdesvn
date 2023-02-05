@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:58+0000\n"
-"PO-Revision-Date: 2023-01-02 20:51+0100\n"
+"PO-Revision-Date: 2023-02-04 08:36+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2650,7 +2650,7 @@ msgstr "niezmienny"
 #: src/svnfrontend/ccontextlistener.cpp:95
 #, kde-format
 msgid "item wasn't present"
-msgstr "element był nieobecny"
+msgstr "rzecz nie istnieje"
 
 #: src/svnfrontend/ccontextlistener.cpp:96
 #, kde-format
@@ -2719,7 +2719,7 @@ msgstr "Zapisz hasło"
 #, kde-format
 msgctxt "@action:button"
 msgid "Store in Plain Text"
-msgstr ""
+msgstr "Zapisz jako zwykły tekst"
 
 #: src/svnfrontend/commandexec.cpp:206 src/svnfrontend/commandexec.cpp:321
 #: src/svnfrontend/graphtree/revgraphview.cpp:992
@@ -2958,11 +2958,10 @@ msgid "Clean repository cache"
 msgstr "Wyczyść pamięć o repozytorium"
 
 #: src/svnfrontend/database/dboverview.cpp:131
-#, fuzzy, kde-format
-#| msgid "Delete cache"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Cache"
-msgstr "Usuń pamięć"
+msgstr "Usuń pamięć podręczną"
 
 #: src/svnfrontend/database/dboverview.cpp:148
 #, kde-format
@@ -2981,8 +2980,7 @@ msgid "Delete repository"
 msgstr "Usuń repozytorium"
 
 #: src/svnfrontend/database/dboverview.cpp:150
-#, fuzzy, kde-format
-#| msgid "Delete repository"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Repository"
 msgstr "Usuń repozytorium"
@@ -3011,7 +3009,7 @@ msgstr "Usuń wpisy pamięci obecnie wybranego repozytorium"
 #: src/svnfrontend/database/dboverview.ui:46
 #, kde-format
 msgid "Delete cache"
-msgstr "Usuń pamięć"
+msgstr "Usuń pamięć podręczną"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteRepositoryButton)
 #. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteRepositoryButton)
@@ -4478,11 +4476,10 @@ msgstr "Odblokowywanie elementów"
 #, kde-format
 msgctxt "@action:button"
 msgid "Break Lock"
-msgstr ""
+msgstr "Usuń blokadę"
 
 #: src/svnfrontend/maintreewidget.cpp:1606
-#, fuzzy, kde-format
-#| msgid "Ignore"
+#, kde-format
 msgctxt "@action:button"
 msgid "Ignore"
 msgstr "Pomiń"
@@ -4601,7 +4598,7 @@ msgstr "Kliknij, aby nawigować"
 #: src/svnfrontend/maintreewidget.cpp:2488
 #, kde-format
 msgid "Navigation"
-msgstr "Nawigacja"
+msgstr "Przemieszczanie się"
 
 #: src/svnfrontend/maintreewidget.cpp:2604
 #, kde-format

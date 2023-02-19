@@ -37,6 +37,7 @@ Name[tr]=kdesvn log (son 100)
 Name[uk]=Журнал kdesvn (останні 100 записів)
 Name[x-test]=xxkdesvn log (last 100)xx
 Name[zh_CN]=kdesvn 日志 (最后 100 条)
+Name[zh_TW]=kdesvn 紀錄（最近 100 個）
 Icon=kdesvnlog
 Exec=kdesvn exec -r HEAD:1 -l 100 log %U
 Comment=Displays the Subversion log
@@ -71,6 +72,7 @@ Comment[tr]=Subversion günlüğünü görüntüler
 Comment[uk]=Показує журнал Subversion
 Comment[x-test]=xxDisplays the Subversion logxx
 Comment[zh_CN]=显示 Subversion 日志
+Comment[zh_TW]=顯示 Subversion 紀錄
 
 [Desktop Action Checkout]
 Name=Checkout From Repository...
@@ -105,6 +107,7 @@ Name[tr]=Depodan Çıkış Yap...
 Name[uk]=Взяти зі сховища…
 Name[x-test]=xxCheckout From Repository...xx
 Name[zh_CN]=从仓库中检出...
+Name[zh_TW]=從版本庫簽出…
 Icon=kdesvncheckout
 Exec=kdesvn exec checkout %U
 Comment=Checkout out files from an existing repository into this folder.
@@ -139,6 +142,7 @@ Comment[tr]=Var olan bir depodan bu klasöre dosyaları çıkış yapın.
 Comment[uk]=Взяти файли з наявного сховища і покласти до цієї теки.
 Comment[x-test]=xxCheckout out files from an existing repository into this folder.xx
 Comment[zh_CN]=从已有仓库中检出文件并存放至此文件夹。
+Comment[zh_TW]=從一個現有的版本庫簽出檔案到這個資料夾。
 
 [Desktop Action Export]
 Name=Export...
@@ -174,6 +178,7 @@ Name[ug]=چىقار…
 Name[uk]=Експортувати…
 Name[x-test]=xxExport...xx
 Name[zh_CN]=导出...
+Name[zh_TW]=匯出…
 Icon=kdesvnexport
 Exec=kdesvn exec export %U
 Comment=Checkout out an unversioned copy of a tree from a repository
@@ -208,6 +213,7 @@ Comment[tr]=Sürümlendirilmemiş bir ağaç kopyasını bir depodan çıkış y
 Comment[uk]=Взяти зі сховища копію дерева без версій
 Comment[x-test]=xxCheckout out an unversioned copy of a tree from a repositoryxx
 Comment[zh_CN]=从仓库中检出无版本副本
+Comment[zh_TW]=從版本庫簽出一個檔案樹的無版控複本
 
 [Desktop Action Update]
 Name=Update (Kdesvn)
@@ -240,6 +246,7 @@ Name[tr]=Güncelle (KDESvn)
 Name[uk]=Оновити (Kdesvn)
 Name[x-test]=xxUpdate (Kdesvn)xx
 Name[zh_CN]=更新 (Kdesvn)
+Name[zh_TW]=更新 (Kdesvn)
 Icon=kdesvnupdate
 Exec=kdesvn exec update %U
 
@@ -273,6 +280,7 @@ Name[tr]=İşle (KDESvn)
 Name[uk]=Надіслати (Kdesvn)
 Name[x-test]=xxCommit (Kdesvn)xx
 Name[zh_CN]=提交 (Kdesvn)
+Name[zh_TW]=提交 (Kdesvn)
 Icon=kdesvncommit
 Exec=kdesvn exec commit %U
 
@@ -307,6 +315,7 @@ Name[tr]=Bir depodan çıkış yap...
 Name[uk]=Взяти зі сховища…
 Name[x-test]=xxCheckout from a repository...xx
 Name[zh_CN]=从仓库中检出...
+Name[zh_TW]=從版本庫簽出…
 Icon=kdesvncheckout
 Exec=kdesvn exec checkoutto %U
 Comment=Checkout out files from an existing repository into this folder.
@@ -341,6 +350,7 @@ Comment[tr]=Var olan bir depodan bu klasöre dosyaları çıkış yapın.
 Comment[uk]=Взяти файли з наявного сховища і покласти до цієї теки.
 Comment[x-test]=xxCheckout out files from an existing repository into this folder.xx
 Comment[zh_CN]=从已有仓库中检出文件并存放至此文件夹。
+Comment[zh_TW]=從一個現有的版本庫簽出檔案到這個資料夾。
 
 [Desktop Action Exportto]
 Name=Export from a Subversion repository...
@@ -374,6 +384,7 @@ Name[tr]=Bir Subversion deposundan dışa aktar...
 Name[uk]=Експортувати зі сховища Subversion…
 Name[x-test]=xxExport from a Subversion repository...xx
 Name[zh_CN]=从 Subversion 仓库导出...
+Name[zh_TW]=從 Subversion 版本庫匯出…
 Icon=kdesvnexport
 Exec=kdesvn exec exportto %U
 Comment=Checkout out an unversioned copy of a tree from a repository
@@ -408,3 +419,4 @@ Comment[tr]=Sürümlendirilmemiş bir ağaç kopyasını bir depodan çıkış y
 Comment[uk]=Взяти зі сховища копію дерева без версій
 Comment[x-test]=xxCheckout out an unversioned copy of a tree from a repositoryxx
 Comment[zh_CN]=从仓库中检出无版本副本
+Comment[zh_TW]=從版本庫簽出一個檔案樹的無版控複本

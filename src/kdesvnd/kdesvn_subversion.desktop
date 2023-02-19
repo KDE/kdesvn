@@ -33,6 +33,7 @@ X-KDE-Submenu[tr]=Subversion (kdesvn)
 X-KDE-Submenu[uk]=Subversion (kdesvn)
 X-KDE-Submenu[x-test]=xxSubversion (kdesvn)xx
 X-KDE-Submenu[zh_CN]=Subversion (kdesvn)
+X-KDE-Submenu[zh_TW]=Subversion (kdesvn)
 X-KDE-GetActionMenu=org.kde.kded5 /modules/kdesvnd org.kde.kdesvnd getActionMenu
 Actions=Log;Info;Add;Addnew;Delete;Revert;Rename;Import;Checkout;Switch;Merge;Blame;CreatePatch;Export;Diff;Update;Commit;Checkoutto;Exportto;Tree;
 
@@ -69,6 +70,7 @@ Name[tr]=Subversion günlügü (son 100)
 Name[uk]=Журнал Subversion (останні 100 записів)
 Name[x-test]=xxSubversion log (last 100)xx
 Name[zh_CN]=Subversion 日志 (最后 100 条)
+Name[zh_TW]=Subversion 紀錄（最近 100 個）
 Icon=kdesvnlog
 Exec=kdesvn exec -r HEAD:1 -l 100 log %U
 Comment=Displays the Subversion log
@@ -103,6 +105,7 @@ Comment[tr]=Subversion günlüğünü görüntüler
 Comment[uk]=Показує журнал Subversion
 Comment[x-test]=xxDisplays the Subversion logxx
 Comment[zh_CN]=显示 Subversion 日志
+Comment[zh_TW]=顯示 Subversion 紀錄
 
 [Desktop Action Info]
 Name=Detailed Subversion info
@@ -137,6 +140,7 @@ Name[tr]=Ayrıntılı Subversion bilgisi
 Name[uk]=Докладна інформація Subversion
 Name[x-test]=xxDetailed Subversion infoxx
 Name[zh_CN]=详细 Subversion 信息
+Name[zh_TW]=詳細 Subversion 資訊
 Icon=kdesvninfo
 Exec=kdesvn exec info %U
 
@@ -175,6 +179,7 @@ Name[ug]=خەزىنىگە قوشۇش
 Name[uk]=Додати до сховища
 Name[x-test]=xxAdd to Repositoryxx
 Name[zh_CN]=添加到仓库
+Name[zh_TW]=加入到版本庫
 Icon=kdesvnadd
 Exec=kdesvn exec add %U
 
@@ -210,6 +215,7 @@ Name[tr]=Sürümlendirilmemiş ögeleri denetle
 Name[uk]=Знайти елементи поза системою керування версіями
 Name[x-test]=xxCheck for unversioned itemsxx
 Name[zh_CN]=检查未设置版本的项目
+Name[zh_TW]=檢查未進版控的項目
 Icon=kdesvnaddrecursive
 Exec=kdesvn exec addnew %U
 
@@ -246,6 +252,7 @@ Name[tr]=Depodan Sil
 Name[uk]=Вилучити зі сховища
 Name[x-test]=xxDelete From Repositoryxx
 Name[zh_CN]=从仓库删除
+Name[zh_TW]=從版本庫刪除
 Icon=kdesvndelete
 Exec=kdesvn exec rm %U
 
@@ -282,6 +289,7 @@ Name[tr]=Yerel Değişiklikleri Geri Al
 Name[uk]=Повернути локальні зміни
 Name[x-test]=xxRevert Local Changesxx
 Name[zh_CN]=还原本地更改
+Name[zh_TW]=回復本機變更
 Icon=kdesvnreverse
 Exec=kdesvn exec revert %U
 Comment=Remove any changes made locally. Warning - this cannot be undone.
@@ -316,6 +324,7 @@ Comment[tr]=Yerel olarak yapılan tüm değişiklikleri kaldırır. Uyarı: Bu g
 Comment[uk]=Вилучити всі зміни, які було зроблено локально. Попередження: зміни буде вилучено назавжди.
 Comment[x-test]=xxRemove any changes made locally. Warning - this cannot be undone.xx
 Comment[zh_CN]=删除本地进行的任何更改。警告 - 此操作无法撤销。
+Comment[zh_TW]=移除所有本機的變更。警告 - 這個動作無法復原。
 
 [Desktop Action Rename]
 Name=Rename...
@@ -351,6 +360,7 @@ Name[ug]=ئات ئۆزگەرت…
 Name[uk]=Перейменувати…
 Name[x-test]=xxRename...xx
 Name[zh_CN]=重命名…
+Name[zh_TW]=重新命名…
 Icon=kdesvnmove
 Exec=kdesvn exec mv %U
 Comment=Rename a file locally and in the repository.  Use this rather than adding and deleting to rename a file.
@@ -385,6 +395,7 @@ Comment[tr]=Bir dosyayı yerel olarak ve depoda yeniden adlandır. Bir dosyayı 
 Comment[uk]=Перейменувати файл локально і в сховищі. Використовуйте замість додавання і вилучення файла, щоб його перейменувати.
 Comment[x-test]=xxRename a file locally and in the repository.  Use this rather than adding and deleting to rename a file.xx
 Comment[zh_CN]=在本地和仓库中重命名文件。使用此功能来取代对文件的添加和删除。
+Comment[zh_TW]=在本機和版本庫裡將檔案重新命名。用這個來重新命名檔案而非加入和刪除。
 
 [Desktop Action Import]
 Name=Import Repository
@@ -419,6 +430,7 @@ Name[tr]=Depoyu İçe Aktar
 Name[uk]=Імпортувати сховище
 Name[x-test]=xxImport Repositoryxx
 Name[zh_CN]=导入仓库
+Name[zh_TW]=匯入版本庫
 Icon=svn_import
 Exec=kio_svn_helper -i %U
 Comment=Put folder into an existing repository to put it under revision control.
@@ -453,6 +465,7 @@ Comment[tr]=Bir klasörü revizyon denetimi altına almak için var olan bir dep
 Comment[uk]=Вставити теку до наявного сховища, щоб уможливити для неї керування версіями.
 Comment[x-test]=xxPut folder into an existing repository to put it under revision control.xx
 Comment[zh_CN]=将文件夹放入现有仓库，使其受到版本控制。
+Comment[zh_TW]=將資料夾放進現有的版本庫來將其放在版本控制下。
 
 [Desktop Action Checkout]
 Name=Checkout From Repository...
@@ -487,6 +500,7 @@ Name[tr]=Depodan Çıkış Yap...
 Name[uk]=Взяти зі сховища…
 Name[x-test]=xxCheckout From Repository...xx
 Name[zh_CN]=从仓库中检出...
+Name[zh_TW]=從版本庫簽出…
 Icon=kdesvncheckout
 Exec=kdesvn exec checkout %U
 Comment=Checkout out files from an existing repository into this folder.
@@ -521,6 +535,7 @@ Comment[tr]=Var olan bir depodan bu klasöre dosyaları çıkış yapın.
 Comment[uk]=Взяти файли з наявного сховища і покласти до цієї теки.
 Comment[x-test]=xxCheckout out files from an existing repository into this folder.xx
 Comment[zh_CN]=从已有仓库中检出文件并存放至此文件夹。
+Comment[zh_TW]=從一個現有的版本庫簽出檔案到這個資料夾。
 
 [Desktop Action Switch]
 Name=Switch...
@@ -555,6 +570,7 @@ Name[tr]=Değiştir...
 Name[uk]=Перемкнути…
 Name[x-test]=xxSwitch...xx
 Name[zh_CN]=切换...
+Name[zh_TW]=切換…
 Icon=kdesvnswitch
 Comment=Switch given working copy to another branch
 Comment[az]=Verilmiş işlək nüsxəni başqa şöbəyə dəyişmək
@@ -588,6 +604,7 @@ Comment[tr]=Verilen çalışma kopyasını başka bir dala geçiş yapın
 Comment[uk]=Перемкнути поточну робочу копію на іншу гілку
 Comment[x-test]=xxSwitch given working copy to another branchxx
 Comment[zh_CN]=将工作副本切换到另外一个分支
+Comment[zh_TW]=切換提供的工作複本到另一個分支
 Exec=kdesvn exec switch %U
 
 [Desktop Action Merge]
@@ -624,6 +641,7 @@ Name[ug]=بىرىكتۈرۈش…
 Name[uk]=Об’єднати…
 Name[x-test]=xxMerge...xx
 Name[zh_CN]=合并...
+Name[zh_TW]=合併…
 Icon=kdesvnmerge
 Comment=Merge changes between this and another branch
 Comment[az]=Bu və başqa şöbə arasındakı dəyişiklikləri birləşdirmək
@@ -657,6 +675,7 @@ Comment[tr]=Bu ve başka bir dal arasındaki değişiklikleri birleştirin
 Comment[uk]=Об’єднати зміни в цій та іншій гілках
 Comment[x-test]=xxMerge changes between this and another branchxx
 Comment[zh_CN]=合并本地和另外一个分支的更改
+Comment[zh_TW]=合併這個分支和另一個分支間的變更
 Exec=kio_svn_helper -m %U
 
 [Desktop Action Blame]
@@ -692,6 +711,7 @@ Name[tr]=Suçla...
 Name[uk]=Визначити автора…
 Name[x-test]=xxBlame...xx
 Name[zh_CN]=问责...
+Name[zh_TW]=Blame…
 Icon=kdesvnblame
 Comment=See who wrote each line of the file and in what revision
 Comment[az]=Faylda hər sətrininin və hansı dəyişimdə kimin yazdığına baxmaq
@@ -725,6 +745,7 @@ Comment[tr]=Dosyanın her satırını kimin hangi revizyonda yazdığını gör�
 Comment[uk]=Подивитись, хто написав кожний рядок файла і у якій модифікації
 Comment[x-test]=xxSee who wrote each line of the file and in what revisionxx
 Comment[zh_CN]=查看谁在哪次修订中写了文件的哪一行
+Comment[zh_TW]=看檔案裡各行是誰在哪個修訂版寫的
 Exec=kdesvn exec blame %U
 
 [Desktop Action CreatePatch]
@@ -761,6 +782,7 @@ Name[ug]=ياماق قۇرۇش…
 Name[uk]=Створити латку…
 Name[x-test]=xxCreate Patch...xx
 Name[zh_CN]=创建补丁...
+Name[zh_TW]=建立修補檔…
 Exec=kio_svn_helper -p %U
 
 [Desktop Action Export]
@@ -797,6 +819,7 @@ Name[ug]=چىقار…
 Name[uk]=Експортувати…
 Name[x-test]=xxExport...xx
 Name[zh_CN]=导出...
+Name[zh_TW]=匯出…
 Icon=kdesvnexport
 Exec=kdesvn exec export %U
 Comment=Checkout out an unversioned copy of a tree from a repository
@@ -831,6 +854,7 @@ Comment[tr]=Sürümlendirilmemiş bir ağaç kopyasını bir depodan çıkış y
 Comment[uk]=Взяти зі сховища копію дерева без версій
 Comment[x-test]=xxCheckout out an unversioned copy of a tree from a repositoryxx
 Comment[zh_CN]=从仓库中检出无版本副本
+Comment[zh_TW]=從版本庫簽出一個檔案樹的無版控複本
 
 [Desktop Action Diff]
 Name=Diff (local)
@@ -865,6 +889,7 @@ Name[tr]=Diff (yerel)
 Name[uk]=Розбіжності (локальні)
 Name[x-test]=xxDiff (local)xx
 Name[zh_CN]=Diff (本地)
+Name[zh_TW]=比對差異（本機）
 Icon=kdesvndiff
 Exec=kdesvn exec diff %U
 Comment=Show local changes since last update
@@ -899,6 +924,7 @@ Comment[tr]=Son değişiklikten bu yana olan yerel değişiklikleri gösterin
 Comment[uk]=Показати локальні зміни з часу останнього оновлення
 Comment[x-test]=xxShow local changes since last updatexx
 Comment[zh_CN]=显示上次更新后本地的更改
+Comment[zh_TW]=顯示上次更新以來的本機變更
 
 [Desktop Action Update]
 Name=KDESvn Update
@@ -931,6 +957,7 @@ Name[tr]=KDESvn Güncelle
 Name[uk]=Оновлення KDESvn
 Name[x-test]=xxKDESvn Updatexx
 Name[zh_CN]=KDESvn 更新
+Name[zh_TW]=KDESvn 更新
 Icon=kdesvnupdate
 Exec=kdesvn exec update %U
 
@@ -964,6 +991,7 @@ Name[tr]=KDESvn İşle
 Name[uk]=Надсилання KDESvn
 Name[x-test]=xxKDESvn Commitxx
 Name[zh_CN]=KDESvn 提交
+Name[zh_TW]=KDESvn 提交
 Icon=kdesvncommit
 Exec=kdesvn exec commit %U
 
@@ -998,6 +1026,7 @@ Name[tr]=Bir depodan çıkış yap...
 Name[uk]=Взяти зі сховища…
 Name[x-test]=xxCheckout from a repository...xx
 Name[zh_CN]=从仓库中检出...
+Name[zh_TW]=從版本庫簽出…
 Icon=kdesvncheckout
 Exec=kdesvn exec checkoutto %U
 Comment=Checkout out files from an existing repository into this folder.
@@ -1032,6 +1061,7 @@ Comment[tr]=Var olan bir depodan bu klasöre dosyaları çıkış yapın.
 Comment[uk]=Взяти файли з наявного сховища і покласти до цієї теки.
 Comment[x-test]=xxCheckout out files from an existing repository into this folder.xx
 Comment[zh_CN]=从已有仓库中检出文件并存放至此文件夹。
+Comment[zh_TW]=從一個現有的版本庫簽出檔案到這個資料夾。
 
 [Desktop Action Exportto]
 Name=Export from a Subversion repository...
@@ -1065,6 +1095,7 @@ Name[tr]=Bir Subversion deposundan dışa aktar...
 Name[uk]=Експортувати зі сховища Subversion…
 Name[x-test]=xxExport from a Subversion repository...xx
 Name[zh_CN]=从 Subversion 仓库导出...
+Name[zh_TW]=從 Subversion 版本庫匯出…
 Icon=kdesvnexport
 Exec=kdesvn exec exportto %U
 Comment=Checkout out an unversioned copy of a tree from a repository
@@ -1099,6 +1130,7 @@ Comment[tr]=Sürümlendirilmemiş bir ağaç kopyasını bir depodan çıkış y
 Comment[uk]=Взяти зі сховища копію дерева без версій
 Comment[x-test]=xxCheckout out an unversioned copy of a tree from a repositoryxx
 Comment[zh_CN]=从仓库中检出无版本副本
+Comment[zh_TW]=從版本庫簽出一個檔案樹的無版控複本
 
 [Desktop Action Tree]
 Name=Display revision tree
@@ -1132,6 +1164,7 @@ Name[tr]=Revizyon ağacını görüntüle
 Name[uk]=Показати дерево модифікацій
 Name[x-test]=xxDisplay revision treexx
 Name[zh_CN]=显示修订树
+Name[zh_TW]=顯示修訂版樹狀圖
 Icon=kdesvnlog
 Exec=kdesvn exec tree %U
 Comment=Show complete revision tree
@@ -1165,3 +1198,4 @@ Comment[tr]=Tam revizyon ağacını görüntüle
 Comment[uk]=Показати повне дерево модифікацій
 Comment[x-test]=xxShow complete revision treexx
 Comment[zh_CN]=显示完整的修订树
+Comment[zh_TW]=顯示完整的修訂版樹狀圖

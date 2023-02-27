@@ -1,15 +1,15 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Steve Allewell <steve.allewell@gmail.com>, 2015, 2016, 2017, 2018, 2019, 2020, 2022.
+# Steve Allewell <steve.allewell@gmail.com>, 2015, 2016, 2017, 2018, 2019, 2020, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:58+0000\n"
-"PO-Revision-Date: 2022-12-31 15:32+0000\n"
+"PO-Revision-Date: 2023-02-26 23:18+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
-"Language-Team: English <kde-i18n-doc@kde.org>\n"
+"Language-Team: English <kde-l10n-en_gb@kde.org>\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2682,7 +2682,7 @@ msgstr "Save password"
 #, kde-format
 msgctxt "@action:button"
 msgid "Store in Plain Text"
-msgstr ""
+msgstr "Store in Plain Text"
 
 #: src/svnfrontend/commandexec.cpp:206 src/svnfrontend/commandexec.cpp:321
 #: src/svnfrontend/graphtree/revgraphview.cpp:992
@@ -2917,11 +2917,10 @@ msgid "Clean repository cache"
 msgstr "Clean repository cache"
 
 #: src/svnfrontend/database/dboverview.cpp:131
-#, fuzzy, kde-format
-#| msgid "Delete cache"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Cache"
-msgstr "Delete cache"
+msgstr "Delete Cache"
 
 #: src/svnfrontend/database/dboverview.cpp:148
 #, kde-format
@@ -2940,11 +2939,10 @@ msgid "Delete repository"
 msgstr "Delete repository"
 
 #: src/svnfrontend/database/dboverview.cpp:150
-#, fuzzy, kde-format
-#| msgid "Delete repository"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Repository"
-msgstr "Delete repository"
+msgstr "Delete Repository"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DBOverView)
 #: src/svnfrontend/database/dboverview.ui:6
@@ -4419,11 +4417,10 @@ msgstr "Unlocking items"
 #, kde-format
 msgctxt "@action:button"
 msgid "Break Lock"
-msgstr ""
+msgstr "Break Lock"
 
 #: src/svnfrontend/maintreewidget.cpp:1606
-#, fuzzy, kde-format
-#| msgid "Ignore"
+#, kde-format
 msgctxt "@action:button"
 msgid "Ignore"
 msgstr "Ignore"

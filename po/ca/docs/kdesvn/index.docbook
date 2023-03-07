@@ -280,7 +280,7 @@
 </sect2>
 <sect2>
 <title
->Publicar els canvis locals</title>
+>Cometre els canvis locals</title>
 <para
 >Marqueu l'entrada o entrades que voleu enviar i seleccioneu <menuchoice
 > <shortcut
@@ -294,13 +294,13 @@
 > <guisubmenu
 >Còpia de treball</guisubmenu
 > <guimenuitem
->Publica</guimenuitem
+>Comet</guimenuitem
 > </menuchoice
 > </para>
 <para
->Si intenteu publicar sense seleccionar cap element, el &kdesvn; utilitzarà l'element de nivell superior obert a la còpia de treball, &ead;, el mateix camí de la còpia de treball. </para>
+>Si intenteu cometre sense seleccionar cap element, el &kdesvn; utilitzarà l'element de nivell superior obert a la còpia de treball, &ead;, el mateix camí de la còpia de treball. </para>
 <para
->Aquesta operació sempre serà recursiva, vol dir que, si se selecciona una carpeta, el &kdesvn; sempre enviarà tots els elements modificats per sota seu. Quan amb la configuració vulgueu revisar tots els elements abans de publicar-los, el següent diàleg llistarà tots els elements que enviarà el &kdesvn;. És possible desmarcar els elements que no voleu enviar. En aquest cas, el &kdesvn; enviarà tots els elements ell sol, &ead;, de forma no recursiva. O podeu seleccionar els elements sense versió per afegir i publicar (si no estan marcats per a ser ignorats). De manera que podreu veure si hi ha elements nous que esteu oblidant. </para>
+>Aquesta operació sempre serà recursiva, vol dir que, si se selecciona una carpeta, el &kdesvn; sempre enviarà tots els elements modificats per sota seu. Quan amb la configuració vulgueu revisar tots els elements abans de cometre'ls, el següent diàleg llistarà tots els elements que enviarà el &kdesvn;. És possible desmarcar els elements que no voleu enviar. En aquest cas, el &kdesvn; enviarà tots els elements ell sol, &ead;, de forma no recursiva. O podeu seleccionar els elements sense versió per afegir i cometre (si no estan marcats per a ser ignorats). De manera que podreu veure si hi ha elements nous que esteu oblidant. </para>
 <para
 >Introduïu un missatge de registre que enviareu i premeu el botó <guibutton
 >D'acord</guibutton
@@ -336,7 +336,7 @@
 <title
 >Afegir i eliminar de la còpia de treball</title>
 <para
->Ambdues operacions requereixen dos passos: El primer és afegir o eliminar per a després publicar els canvis al repositori. Abans de publicar podreu desfer les ordres afegeix o elimina. </para>
+>Ambdues operacions requereixen dos passos: El primer és afegir o eliminar per a després cometre els canvis al repositori. Abans de cometre podreu desfer les ordres afegeix o elimina. </para>
 <sect3>
 <title
 >Afegir elements</title>
@@ -666,7 +666,7 @@
 ><guisubmenu
 >Marca com a resolt</guisubmenu
 ></menuchoice
->) en cas contrari no podreu publicar els vostres canvis. </para>
+>) en cas contrari no podreu cometre els vostres canvis. </para>
 </sect2>
 
 </sect1>
@@ -682,7 +682,7 @@
 >projecte TortoiseSVN</ulink
 > ha dissenyat un bonic sistema de propietats per integrar el <ulink url="http://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-dug-bugtracker.html"
 >seguidor d'errors (BugTracker)</ulink
-> a la IGU de Subversion. La versió actual del &kdesvn; no admet camps addicionals al quadre de publicació (vindrà més endavant) i no ho entén tot, a excepció de les següents propietats: </para>
+> a la IGU de Subversion. La versió actual del &kdesvn; no admet camps addicionals al quadre de comissió (vindrà més endavant) i no ho entén tot, a excepció de les següents propietats: </para>
 <para>
 <table id="bugtracker-properties">
 <title
@@ -865,7 +865,7 @@
 </term>
 <listitem
 ><para
->Aquesta entrada s'ha de blocar abans d'editar i publicar. Fins que no s'estableixi un blocat, el Subversion la mantindrà de només lectura. </para
+>Aquesta entrada s'ha de blocar abans d'editar i cometre. Fins que no s'estableixi un blocat, el Subversion la mantindrà de només lectura. </para
 ></listitem>
 </varlistentry>
 
@@ -920,7 +920,7 @@
 </term>
 <listitem
 ><para
->Aquesta entrada ha estat afegida localment al Subversion, però encara no s'ha publicat. </para
+>Aquesta entrada ha estat afegida localment al Subversion, però encara no s'ha comès. </para
 ></listitem>
 </varlistentry>
 
@@ -938,7 +938,7 @@
 </term>
 <listitem
 ><para
->Aquesta entrada ha estat suprimida localment de Subversion, però encara no s'ha publicat. </para
+>Aquesta entrada ha estat suprimida localment de Subversion, però encara no s'ha comès. </para
 ></listitem>
 </varlistentry>
 
@@ -975,7 +975,7 @@
 >No desar les contrasenyes</title>
 <para
 >La manera més segura, però de vegades maldestre amb les IGU com el &kdesvn;. En particular, els processos en segon pla del &kdesvn; sempre tornaran a demanar una contrasenya en el cas que el repositori hagi restringit l'accés de les operacions com actualització i estat. El mateix per a <quote
->publica</quote
+>comissió</quote
 > i així successivament. De manera que si no esteu desant les contrasenyes, haureu de desactivar <guilabel
 >Inicia la comprovació d'actualitzacions en obrir una còpia de treball</guilabel
 > i <link linkend="subversion-settings"
@@ -1002,7 +1002,7 @@
 >esvn</application
 > o el client de línia d'ordres original, el <application
 >svn</application
->. Si utilitzeu el client de línia d'ordres, sobretot per a descarregar o actualitzar, aquest no requerirà una contrasenya i el &kdesvn; hauria d'utilitzar el &kwallet5; per a publicar/moure/copiar. </para>
+>. Si utilitzeu el client de línia d'ordres, sobretot per a descarregar o actualitzar, aquest no requerirà una contrasenya i el &kdesvn; hauria d'utilitzar el &kwallet5; per a cometre/moure/copiar. </para>
 </sect2>
 <sect2>
 <title
@@ -1206,7 +1206,7 @@
 ><para
 >KURL::List urls</para>
 <para
->Els URL són una llista dels URL locals per publicar. Demanarà pel missatge de registre.</para>
+>Els URL són una llista dels URL locals per cometre. Demanarà pel missatge de registre.</para>
 </entry>
 <entry
 >Sí</entry>
@@ -1528,7 +1528,7 @@
 <entry
 >commit (o ci)</entry>
 <entry
->Publica els canvis de l'element al repositori.</entry>
+>Comet els canvis de l'element al repositori.</entry>
 <entry
 ></entry>
 </row>
@@ -1802,7 +1802,7 @@
 <para
 >Dins d'aquest diàleg podreu seleccionar les entrades de registre i obtenir les diferències entre elles. <example>
 <title
->Visualitza el registre de les últimes 20 publicacions</title>
+>Visualitza el registre de les últimes 20 comissions</title>
 <programlisting
 >kdesvn exec log -l 20 -r HEAD&#058;1 meu_fitxer.c
 </programlisting>
@@ -2009,21 +2009,21 @@
 <entry
 >El registre sempre llegeix la llista de fitxers canviats</entry>
 <entry
->L'ordre «log» pot llegir la llista de fitxers canviats en publicar. Això és útil, i en la majoria dels casos no provoca una càrrega significativa sobre el trànsit de dades.</entry>
+>L'ordre «log» pot llegir la llista de fitxers canviats en cometre. Això és útil, i en la majoria dels casos no provoca una càrrega significativa sobre el trànsit de dades.</entry>
 </row>
 
 <row>
 <entry
->Revisa els elements abans de publicar-los</entry>
+>Revisa els elements abans de cometre'ls</entry>
 <entry
->En fer una publicació, el &kdesvn; pot realitzar una comprovació del que farà. Per exemple, si hi ha elements sense versió que es poden afegir, llista d'elements canviats i operació actual a publicar. Això costarà més o menys depenent de l'arbre.</entry>
+>En fer una comissió, el &kdesvn; pot realitzar una comprovació del que farà. Per exemple, si hi ha elements sense versió que es poden afegir, llista d'elements canviats i operació actual a cometre. Això costarà més o menys depenent de l'arbre.</entry>
 </row>
 
 <row>
 <entry
->Oculta els elements nous al quadre de publicació</entry>
+>Oculta els elements nous al quadre de comissió</entry>
 <entry
->S'han o no de mostrar els elements sense versió en el diàleg de publicació.</entry>
+>S'han o no de mostrar els elements sense versió en el diàleg de comissió.</entry>
 </row>
 
 <row>
@@ -2339,7 +2339,7 @@ Revisions tree
 ><para
 >Si s'estableix <guilabel
 >Mostra el registre...</guilabel
->, quin serà el mínim de línies abans que es mostri un diàleg. Pel que podeu establir que aquesta finestra només es mostri quan es generi una sortida interessant (registre de publicacions i així successivament). </para
+>, quin serà el mínim de línies abans que es mostri un diàleg. Pel que podeu establir que aquesta finestra només es mostri quan es generi una sortida interessant (registre de comissions i així successivament). </para
 ></listitem>
 </varlistentry>
 
@@ -2658,7 +2658,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Crea una llista comentada sobre totes les publicacions. Això pot consumir temps!</para
+>Crea una llista comentada sobre totes les comissions. Això pot consumir temps!</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -2674,7 +2674,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Anota un interval de publicacions per a un fitxer.</para
+>Anota un interval de comissions per a un fitxer.</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -2690,7 +2690,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Mostra el contingut de l'última versió publicada d'aquesta entrada. (Pot ser diferent de la versió a la còpia de treball si es treballa en una CT!)</para
+>Mostra el contingut de l'última versió comesa d'aquesta entrada. (Pot ser diferent de la versió a la còpia de treball si es treballa en una CT!)</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -2756,7 +2756,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Suprimeix les entrades seleccionades. Si treballeu en una còpia de treball, després haureu de publicar les supressions.</para
+>Suprimeix les entrades seleccionades. Si treballeu en una còpia de treball, després haureu de cometre les supressions.</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -2906,12 +2906,12 @@ Revisions tree
 > <guisubmenu
 >Còpia de treball</guisubmenu
 > <guimenuitem
->Publica</guimenuitem
+>Comet</guimenuitem
 > </menuchoice
 ></term>
 <listitem
 ><para
->Publica els canvis dins de la còpia de treball pels elements seleccionats al repositori.</para
+>Comet els canvis dins de la còpia de treball pels elements seleccionats al repositori.</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -3079,7 +3079,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Neteja la còpia de treball i elimina els bloqueigs-(publica) si n'hi ha.</para
+>Neteja la còpia de treball i elimina els bloqueigs-(comet) si n'hi ha.</para
 ></listitem>
 </varlistentry>
 <varlistentry>

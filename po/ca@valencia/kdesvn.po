@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:58+0000\n"
-"PO-Revision-Date: 2023-01-10 10:33+0100\n"
+"PO-Revision-Date: 2023-03-06 15:41+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -687,7 +687,7 @@ msgstr "No es poden rebre dades per a escriure."
 #: src/kiosvn/kiosvn.cpp:419
 #, kde-format
 msgid "Committing %1"
-msgstr "S'està publicant %1"
+msgstr "S'està cometent %1"
 
 #: src/kiosvn/kiosvn.cpp:441
 #, kde-format
@@ -703,12 +703,12 @@ msgstr "S'ha copiat «%1» a «%2»"
 #: src/svnfrontend/svnactions.cpp:2278
 #, kde-format
 msgid "Committed revision %1."
-msgstr "S'ha publicat la revisió %1."
+msgstr "S'ha comés la revisió %1."
 
 #: src/kiosvn/kiosvn.cpp:790
 #, kde-format
 msgid "Nothing to commit."
-msgstr "Encara no hi ha res que s'haja de publicar."
+msgstr "Encara no hi ha res que s'haja de cometre."
 
 #: src/kiosvn/kiosvn.cpp:837
 #, kde-format
@@ -753,7 +753,7 @@ msgstr "Nom d'usuari:"
 #: src/ksvnwidgets/commitmessage.ui:6
 #, kde-format
 msgid "Commit Message"
-msgstr "Missatge de publicació"
+msgstr "Missatge de comissió"
 
 #. i18n: ectx: property (text), widget (QLabel, m_Reviewlabel)
 #: src/ksvnwidgets/commitmessage.ui:27
@@ -783,7 +783,7 @@ msgstr "Oculta els elements nous"
 #: src/ksvnwidgets/commitmessage.ui:87
 #, kde-format
 msgid "Mark all new e.g. not versioned items for add and commit."
-msgstr "Marca tots els elements p. ex. sense versió per a afegir i publicar."
+msgstr "Marca tots els elements p. ex. sense versió per a afegir i cometre."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_MarkUnversioned)
 #: src/ksvnwidgets/commitmessage.ui:90
@@ -856,7 +856,7 @@ msgstr "Inserix un fitxer de text..."
 #: src/ksvnwidgets/commitmessage.ui:226
 #, kde-format
 msgid "If checked commit will not release locks."
-msgstr "Si està marcada, la publicació no amprarà els blocats."
+msgstr "Si està marcada, la comissió no amprarà els blocats."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_keepLocksButton)
 #: src/ksvnwidgets/commitmessage.ui:229
@@ -868,7 +868,7 @@ msgstr "Mantín els blocats"
 #, kde-format
 msgctxt "@title:window"
 msgid "Commit Log"
-msgstr "Registre de publicació"
+msgstr "Registre de comissió"
 
 #: src/ksvnwidgets/commitmsg_impl.cpp:455
 #, kde-format
@@ -1832,7 +1832,7 @@ msgstr "Obtín la informació de l'element recursivament"
 #: src/settings/kdesvn_part.kcfg:76 src/settings/subversion_settings.ui:174
 #, kde-format
 msgid "Review items before commit"
-msgstr "Revisa els elements abans de publicar-los"
+msgstr "Revisa els elements abans de cometre'ls"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:88
@@ -1864,7 +1864,7 @@ msgstr "Inicia la comprovació d'actualitzacions en obrir una còpia de treball"
 #: src/settings/kdesvn_part.kcfg:104
 #, kde-format
 msgid "Start caching latest logs on open or commit"
-msgstr "Inicia el cau dels darrers registres en obrir o publicar"
+msgstr "Inicia el cau dels darrers registres en obrir o cometre"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:108
@@ -2402,20 +2402,20 @@ msgstr ""
 #: src/settings/subversion_settings.ui:171
 #, kde-format
 msgid "List items next commit will send or not"
-msgstr "Llista els elements de la següent publicació que seran o no enviats"
+msgstr "Llista els elements de la següent comissió que seran o no enviats"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:184
 #, kde-format
 msgid "Should unversioned items displayed in commit dialog or not."
 msgstr ""
-"S'han o no de mostrar els elements sense versió en el diàleg de publicació."
+"S'han o no de mostrar els elements sense versió en el diàleg de comissió."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:187
 #, kde-format
 msgid "Hide new items in commit box"
-msgstr "Oculta els elements nous al quadro de publicació"
+msgstr "Oculta els elements nous en el quadro de comissió"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_add_as_modification)
 #: src/settings/subversion_settings.ui:197
@@ -2617,22 +2617,22 @@ msgstr "Estat sobre el repositori extern"
 #: src/svnfrontend/ccontextlistener.cpp:81
 #, kde-format
 msgid "Commit Modified"
-msgstr "S'ha modificat la publicació"
+msgstr "S'ha modificat la comissió"
 
 #: src/svnfrontend/ccontextlistener.cpp:82
 #, kde-format
 msgid "Commit Added"
-msgstr "S'ha afegit la publicació"
+msgstr "S'ha afegit la comissió"
 
 #: src/svnfrontend/ccontextlistener.cpp:83
 #, kde-format
 msgid "Commit Deleted"
-msgstr "S'ha suprimit la publicació"
+msgstr "S'ha suprimit la comissió"
 
 #: src/svnfrontend/ccontextlistener.cpp:84
 #, kde-format
 msgid "Commit Replaced"
-msgstr "S'ha substituït la publicació"
+msgstr "S'ha substituït la comissió"
 
 #: src/svnfrontend/ccontextlistener.cpp:87
 #, kde-format
@@ -2814,7 +2814,7 @@ msgstr "Crea un repositori nou"
 #: src/svnfrontend/createrepodlg.ui:22
 #, kde-format
 msgid "Disable fsync at commit (BDB only)"
-msgstr "Desactiva el «fsync» en publicar (només BDB)"
+msgstr "Desactiva «fsync» en cometre (només BDB)"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: src/svnfrontend/createrepodlg.ui:32
@@ -3097,7 +3097,7 @@ msgstr ""
 #: src/svnfrontend/database/dbsettings.ui:98
 #, kde-format
 msgid "Do not show commits from following users"
-msgstr "No mostrar les publicacions dels usuaris següents"
+msgstr "No mostrar les comissions dels usuaris següents"
 
 #. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_userslog)
 #: src/svnfrontend/database/dbsettings.ui:105
@@ -3105,14 +3105,14 @@ msgstr "No mostrar les publicacions dels usuaris següents"
 msgid ""
 "Do not display commits of listed users in log window and statistics view"
 msgstr ""
-"No mostrar les publicacions dels usuaris llistats en la finestra del "
-"registre i en la vista de les estadístiques"
+"No mostrar les comissions dels usuaris llistats en la finestra del registre "
+"i en la vista de les estadístiques"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dbcfg_filter_empty_author)
 #: src/svnfrontend/database/dbsettings.ui:115
 #, kde-format
 msgid "Do not display commits without author"
-msgstr "No mostrar les publicacions sense autor"
+msgstr "No mostrar les comissions sense autor"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DumpRepoDlg)
 #: src/svnfrontend/dumprepo_dlg.ui:14
@@ -3247,7 +3247,7 @@ msgstr ""
 "Establir açò a qualsevol valor (p. ex: <b>'*'</b>) per a forçar el blocat "
 "d'este fitxer.<br/>El fitxer serà establit com a només lectura quan es baixe "
 "o actualitze, indicant que un usuari primer haurà d'adquirir un blocat del "
-"fitxer abans de poder-lo editar i publicar els canvis."
+"fitxer abans de poder-lo editar i cometre els canvis."
 
 #: src/svnfrontend/editpropsdlg.cpp:66 src/svnfrontend/editpropsdlg.cpp:100
 #, kde-format
@@ -3319,7 +3319,7 @@ msgid ""
 "<b>'false'</b>/<b>'no'</b>."
 msgstr ""
 "Establiu-ho a <b>«yes»</b> si s'ha de mostrar un avís quan no s'introduïx "
-"cap assumpte en el diàleg de publicació. Valors possibles:<br/><b>«true»</b>/"
+"cap assumpte en el diàleg de comissió. Valors possibles:<br/><b>«true»</b>/"
 "<b>«yes»</b> o <b>«false»</b>/<b>«no»</b>."
 
 #: src/svnfrontend/editpropsdlg.cpp:120
@@ -3866,13 +3866,13 @@ msgstr "Predeterminat"
 #: src/svnfrontend/loaddmpdlg.ui:66
 #, kde-format
 msgid "Use pre-commit hook"
-msgstr "Utilitza un procediment automàtic abans de la publicació"
+msgstr "Utilitza un procediment automàtic abans de la comissió"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_UsePost)
 #: src/svnfrontend/loaddmpdlg.ui:76
 #, kde-format
 msgid "Use post-commit hook"
-msgstr "Utilitza un procediment automàtic després de la publicació"
+msgstr "Utilitza un procediment automàtic després de la comissió"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, textLabel5)
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_Rootfolder)
@@ -3996,7 +3996,7 @@ msgstr "Mostra els últims canvis"
 #: src/svnfrontend/maintreewidget.cpp:550
 #, kde-format
 msgid "Display last changes as difference to previous commit."
-msgstr "Mostra els últims canvis com a diferències a la publicació anterior."
+msgstr "Mostra els últims canvis com a diferències a la comissió anterior."
 
 #: src/svnfrontend/maintreewidget.cpp:552
 #, kde-format
@@ -4281,7 +4281,7 @@ msgstr "Actualitza a la revisió..."
 #: src/svnfrontend/maintreewidget.cpp:889 src/svnfrontend/svnactions.cpp:1016
 #, kde-format
 msgid "Commit"
-msgstr "Publica"
+msgstr "Comet"
 
 #: src/svnfrontend/maintreewidget.cpp:777
 #: src/svnfrontend/maintreewidget.cpp:784
@@ -5033,7 +5033,7 @@ msgstr "UUID"
 #: src/svnfrontend/svnactions.cpp:805
 #, kde-format
 msgid "Last committed"
-msgstr "Última publicació"
+msgstr "Última comissió"
 
 #: src/svnfrontend/svnactions.cpp:807
 #, kde-format
@@ -5111,7 +5111,7 @@ msgstr "No s'ha pogut canviar a la carpeta %1\n"
 #: src/svnfrontend/svnactions.cpp:977
 #, kde-format
 msgid "Not commit because networking is disabled"
-msgstr "No s'ha publicat atés que la xarxa està desactivada"
+msgstr "No s'ha comés atés que la xarxa està desactivada"
 
 #: src/svnfrontend/svnactions.cpp:1000 src/svnfrontend/svnactions.cpp:2403
 #, kde-format
@@ -5127,23 +5127,23 @@ msgstr "S'està creant la llista / comprovant l'estat"
 #: src/svnfrontend/svnactions.cpp:1019
 #, kde-format
 msgid "Delete and Commit"
-msgstr "Suprimix i publica"
+msgstr "Suprimix i comet"
 
 #: src/svnfrontend/svnactions.cpp:1021
 #, kde-format
 msgid "Add and Commit"
-msgstr "Afig i publica"
+msgstr "Afig i comet"
 
 #: src/svnfrontend/svnactions.cpp:1051
 #, kde-format
 msgctxt "@title:window"
 msgid "Commit"
-msgstr "Publicació"
+msgstr "Comissió"
 
 #: src/svnfrontend/svnactions.cpp:1051
 #, kde-format
 msgid "Commit - hit Cancel for abort"
-msgstr "S'està publicant -premeu «Cancel·la» per a interrompre-"
+msgstr "S'està cometent -premeu «Cancel·la» per a interrompre-"
 
 #: src/svnfrontend/svnactions.cpp:1078
 #, kde-format
@@ -5677,7 +5677,7 @@ msgstr "No indicar la versió en les diferències"
 #: src/svnfrontend/svnlogdlgimp.cpp:459
 #, kde-format
 msgid "Revert this commit"
-msgstr "Desfés esta publicació"
+msgstr "Desfés esta comissió"
 
 #: src/svnfrontend/svntreeview.cpp:111
 #, kde-format

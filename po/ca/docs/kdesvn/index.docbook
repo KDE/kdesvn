@@ -250,7 +250,7 @@
 > <guisubmenu
 >General</guisubmenu
 > <guimenuitem
->Descarrega un repositori</guimenuitem
+>Extreu un repositori</guimenuitem
 > </menuchoice
 >. Dins el següent diàleg s'ha de seleccionar l'&URL; del repositori que voleu utilitzar, &pex;, quelcom com <literal
 >http://màquina_local/repos/meu_projecte</literal
@@ -260,7 +260,7 @@
 <para
 >Seleccioneu i/o creeu una carpeta local, on residirà la còpia de treball. </para>
 <para
->Finalment, però no menys important, la revisió a descarregar. Majoritàriament aquesta seria <quote
+>Finalment, però no menys important, la revisió a extreure. Majoritàriament aquesta seria <quote
 >HEAD</quote
 >. Això assegura que l'última versió emmagatzemada és la versió de referència. </para>
 <para
@@ -274,9 +274,9 @@
 > <guisubmenu
 >Repositori</guisubmenu
 > <guimenuitem
->Descarrega des del camí del repositori actual</guimenuitem
+>Extreu des del camí del repositori actual</guimenuitem
 > </menuchoice
-> i ompliu els diàlegs com s'ha descrit anteriorment. Només llavors es descarregarà el camí marcat. </para>
+> i ompliu els diàlegs com s'ha descrit anteriorment. Només llavors s'extraurà el camí marcat. </para>
 </sect2>
 <sect2>
 <title
@@ -1002,7 +1002,7 @@
 >esvn</application
 > o el client de línia d'ordres original, el <application
 >svn</application
->. Si utilitzeu el client de línia d'ordres, sobretot per a descarregar o actualitzar, aquest no requerirà una contrasenya i el &kdesvn; hauria d'utilitzar el &kwallet5; per a cometre/moure/copiar. </para>
+>. Si utilitzeu el client de línia d'ordres, sobretot per a extreure o actualitzar, aquest no requerirà una contrasenya i el &kdesvn; hauria d'utilitzar el &kwallet5; per a cometre/moure/copiar. </para>
 </sect2>
 <sect2>
 <title
@@ -1166,7 +1166,7 @@
 <para
 >L'objectiu <emphasis
 >no</emphasis
-> serà modificat, &pex;, però el contingut serà descarregat sense crear una subcarpeta! Per exemple, l'origen pot ser <filename
+> serà modificat, &pex;, però el contingut serà extret sense crear una subcarpeta! Per exemple, l'origen pot ser <filename
 >http://servidor/repositori/projecte/trunk</filename
 >, l'objectiu <filename
 >/home/usuari/projecte/</filename
@@ -1608,7 +1608,7 @@
 <entry
 >checkout (o co)</entry>
 <entry
->Descarrega el camí al repositori en un nou camí de la còpia de treball. Es preguntarà pel camí de la destinació i la revisió d'origen.</entry>
+>Extreu el camí al repositori en un nou camí de la còpia de treball. Es preguntarà pel camí de la destinació i la revisió d'origen.</entry>
 <entry
 ></entry>
 </row>
@@ -1616,7 +1616,7 @@
 <entry
 >checkoutto (o coto)</entry>
 <entry
->Descarrega el camí al repositori en un nou camí de la còpia de treball. Es preguntarà pel camí de l'origen i la revisió d'origen.</entry>
+>Extreu el camí al repositori en un nou camí de la còpia de treball. Es preguntarà pel camí de l'origen i la revisió d'origen.</entry>
 <entry
 ></entry>
 </row>
@@ -2037,7 +2037,7 @@
 <entry
 >Una actualització crea els elements pare que falten</entry>
 <entry
->Si s'estableix, es crearà qualsevol directori pare no existent comprovant també la profunditat buida.</entry>
+>Si s'estableix, es crearà qualsevol directori pare no existent extraient també la profunditat buida.</entry>
 </row>
 
 </tbody>
@@ -2390,7 +2390,7 @@ Revisions tree
 >KIO pot sobreescriure</term>
 <listitem
 ><para
->Si s'estableix aquesta etiqueta, tindreu un suport simple d'escriptura per als elements existents. &pex;, podeu obrir fitxers al vostre editor i desar directament sense verificar abans (el &kdesvn; ho farà en segon pla).</para>
+>Si s'estableix aquesta etiqueta, tindreu un suport simple d'escriptura per als elements existents. &pex;, podeu obrir fitxers al vostre editor i desar directament sense extreure'ls abans (el &kdesvn; ho farà en segon pla).</para>
 <para
 >Utilitzeu aquesta opció només si sabeu el que esteu fent. </para
 ></listitem>
@@ -2444,7 +2444,7 @@ Revisions tree
 <listitem
 ><para
 ><action
->Obre una còpia de treball local o un repositori prèviament descarregat.</action
+>Obre una còpia de treball local o un repositori prèviament extret.</action
 ></para
 ></listitem>
 </varlistentry>
@@ -2799,7 +2799,7 @@ Revisions tree
 > <guisubmenu
 >General</guisubmenu
 > <guimenuitem
->Descarrega un repositori</guimenuitem
+>Extreu un repositori</guimenuitem
 > </menuchoice
 ></term>
 <listitem
@@ -3111,7 +3111,7 @@ Revisions tree
 > <guisubmenu
 >Repositori</guisubmenu
 > <guimenuitem
->Descarrega des del camí del repositori actual</guimenuitem
+>Extreu des del camí del repositori actual</guimenuitem
 > </menuchoice
 ></term>
 <listitem

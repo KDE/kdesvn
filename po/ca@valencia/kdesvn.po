@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-06-07 01:43+0000\n"
-"PO-Revision-Date: 2023-03-08 15:56+0100\n"
+"PO-Revision-Date: 2023-03-09 15:06+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -666,17 +666,17 @@ msgstr "Sobreescriure elements existents està desactivat en la configuració."
 #: src/kiosvn/kiosvn.cpp:384
 #, kde-format
 msgid "Start checking out to temporary folder"
-msgstr "Comença a comprovar a la carpeta temporal"
+msgstr "Comença a extraure a la carpeta temporal"
 
 #: src/kiosvn/kiosvn.cpp:387
 #, kde-format
 msgid "Checking out %1"
-msgstr "S'està comprovant %1"
+msgstr "S'està extraent %1"
 
 #: src/kiosvn/kiosvn.cpp:396
 #, kde-format
 msgid "Temporary checkout done."
-msgstr "S'ha realitzat la comprovació temporal."
+msgstr "S'ha realitzat l'extracció temporal."
 
 #: src/kiosvn/kiosvn.cpp:400
 #, kde-format
@@ -1349,7 +1349,7 @@ msgid ""
 msgstr ""
 "Si s'establix esta etiqueta, tindreu un suport simple d'escriptura per als "
 "elements existents. Per exemple, podeu obrir fitxers al vostre editor i "
-"guardar directament sense verificar abans (Kdesvn ho farà en segon pla).\n"
+"guardar directament sense extraure'ls abans (Kdesvn ho farà en segon pla).\n"
 "\n"
 "Utilitzeu esta opció només si sabeu el que esteu fent."
 
@@ -2112,7 +2112,7 @@ msgstr ""
 #: src/settings/polling_settings.ui:38
 #, kde-format
 msgid "Check for updated items every"
-msgstr "Comprova per a elements actualitzats cada"
+msgstr "Comprova si hi ha elements actualitzats cada"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
 #: src/settings/revisiontree_settings.ui:28
@@ -2203,8 +2203,8 @@ msgstr "Comprova l'ompliment del cau de registres abans de llegir l'arbre"
 #, kde-format
 msgid "Select if kdesvn should check for updates when open a working copy"
 msgstr ""
-"Dirimix si Kdesvn haurà de comprovar per a actualitzacions quan òbriga una "
-"còpia de treball"
+"Selecciona si Kdesvn hauria de comprovar si hi ha actualitzacions quan "
+"òbriga una còpia de treball"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_start_updates_check_on_open)
 #: src/settings/subversion_settings.ui:17
@@ -2458,7 +2458,7 @@ msgid ""
 "also by checking them out at depth=empty</p></body></html>"
 msgstr ""
 "<html><head/><body><p>Si s'establix, es crearà qualsevol directori pare no "
-"existent comprovant també la profunditat buida</p></body></html>"
+"existent extraent-los també a la profunditat buida</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_make_parents)
 #: src/settings/subversion_settings.ui:210
@@ -3241,9 +3241,9 @@ msgid ""
 "changes."
 msgstr ""
 "Establir açò a qualsevol valor (p. ex: <b>'*'</b>) per a forçar el blocat "
-"d'este fitxer.<br/>El fitxer serà establit com a només lectura quan es baixe "
-"o actualitze, indicant que un usuari primer haurà d'adquirir un blocat del "
-"fitxer abans de poder-lo editar i cometre els canvis."
+"d'este fitxer.<br/>El fitxer serà establit com a només lectura quan "
+"s'extraga o actualitze, indicant que un usuari primer haurà d'adquirir un "
+"blocat del fitxer abans de poder-lo editar i cometre els canvis."
 
 #: src/svnfrontend/editpropsdlg.cpp:65 src/svnfrontend/editpropsdlg.cpp:96
 #, kde-format
@@ -3393,7 +3393,7 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:14
 #, kde-format
 msgid "Checkout info"
-msgstr "Descarrega info"
+msgstr "Informació de l'extracció"
 
 #. i18n: ectx: property (text), widget (QLabel, m_TargetLabel)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:26
@@ -4292,7 +4292,7 @@ msgid ""
 "Diff working copy against BASE (last checked out version) - does not require "
 "access to repository"
 msgstr ""
-"Diff de la còpia de treball contra «BASE» (última versió baixada) -no "
+"Diff de la còpia de treball contra «BASE» (última versió extreta) -no "
 "requerix accés al repositori-"
 
 #: src/svnfrontend/maintreewidget.cpp:615
@@ -4306,7 +4306,7 @@ msgid ""
 "Diff working copy against HEAD (last checked in version)- requires access to "
 "repository"
 msgstr ""
-"Diff entre la còpia de treball i «HEAD» (última versió baixada) -es requerix "
+"Diff entre la còpia de treball i «HEAD» (última versió extreta) -es requerix "
 "accés al repositori-"
 
 #: src/svnfrontend/maintreewidget.cpp:619
@@ -4360,13 +4360,13 @@ msgstr "Obri amb..."
 #: src/svnfrontend/maintreewidget.cpp:638
 #, kde-format
 msgid "Checkout current repository path"
-msgstr "Descarrega des del camí del repositori actual"
+msgstr "Extrau des del camí del repositori actual"
 
 #: src/svnfrontend/maintreewidget.cpp:639
 #: src/svnfrontend/maintreewidget.cpp:647
 #, kde-format
 msgid "Checkout"
-msgstr "Descarrega"
+msgstr "Extrau"
 
 #: src/svnfrontend/maintreewidget.cpp:641
 #, kde-format
@@ -4381,7 +4381,7 @@ msgstr "Tria la revisió del navegador"
 #: src/svnfrontend/maintreewidget.cpp:646 src/svnfrontend/svnactions.cpp:1630
 #, kde-format
 msgid "Checkout a repository"
-msgstr "Descarrega un repositori"
+msgstr "Extrau un repositori"
 
 #: src/svnfrontend/maintreewidget.cpp:648
 #, kde-format
@@ -5223,7 +5223,7 @@ msgstr "Exporteu un repositori"
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout a Repository"
-msgstr "Baixada d'un repositori"
+msgstr "Extracció d'un repositori"
 
 #: src/svnfrontend/svnactions.cpp:1630
 #, kde-format
@@ -5238,7 +5238,7 @@ msgstr "Exportar un fitxer?"
 #: src/svnfrontend/svnactions.cpp:1657
 #, kde-format
 msgid "Checking out a file?"
-msgstr "Descarregar un fitxer?"
+msgstr "Extraure un fitxer?"
 
 #: src/svnfrontend/svnactions.cpp:1703
 #, kde-format
@@ -5250,7 +5250,7 @@ msgstr "Exportació"
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout"
-msgstr "Descàrrega"
+msgstr "Extracció"
 
 #: src/svnfrontend/svnactions.cpp:1703
 #, kde-format
@@ -5260,7 +5260,7 @@ msgstr "S'està exportant"
 #: src/svnfrontend/svnactions.cpp:1703
 #, kde-format
 msgid "Checking out"
-msgstr "S'està baixant"
+msgstr "S'està extraent"
 
 #: src/svnfrontend/svnactions.cpp:1740
 #, kde-format
@@ -5465,7 +5465,8 @@ msgstr ""
 #, kde-format
 msgid "Not checking for updates because networking is disabled"
 msgstr ""
-"No s'ha comprovat per a actualitzacions, atés que la xarxa està desactivada"
+"No s'ha comprovat si hi ha actualitzacions, atés que la xarxa està "
+"desactivada"
 
 #: src/svnfrontend/svnactions.cpp:2647
 #, kde-format

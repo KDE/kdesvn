@@ -8,13 +8,13 @@
 # Rajko Albrecht <ral@alwins-world.de>, 2005, 2006, 2007, 2008, 2009, 2010.
 # Burkhard Lück <lueck@hube-lueck.de>, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021.
 # Markus Slopianka <markus.s@kdemail.net>, 2013.
-# Frederik Schwarzer <schwarzer@kde.org>, 2013, 2014, 2016, 2022.
+# Frederik Schwarzer <schwarzer@kde.org>, 2013, 2014, 2016, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:58+0000\n"
-"PO-Revision-Date: 2022-12-19 10:30+0100\n"
+"PO-Revision-Date: 2023-03-12 17:28+0100\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1770,7 +1770,7 @@ msgstr "Farbige Anmerkungen anzeigen"
 #: src/settings/display_settings.ui:84
 #, kde-format
 msgid "Use navigation panel"
-msgstr "Navigations-Bereich anzeigen"
+msgstr "Navigationsbereich anzeigen"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:9
@@ -2750,7 +2750,7 @@ msgstr "Passwort speichern"
 #, kde-format
 msgctxt "@action:button"
 msgid "Store in Plain Text"
-msgstr ""
+msgstr "Als einfachen Text speichern"
 
 #: src/svnfrontend/commandexec.cpp:206 src/svnfrontend/commandexec.cpp:321
 #: src/svnfrontend/graphtree/revgraphview.cpp:992
@@ -2992,8 +2992,7 @@ msgid "Clean repository cache"
 msgstr "Repository-Zwischenspeicher bereinigen"
 
 #: src/svnfrontend/database/dboverview.cpp:131
-#, fuzzy, kde-format
-#| msgid "Delete cache"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Cache"
 msgstr "Zwischenspeicher löschen"
@@ -3016,8 +3015,7 @@ msgid "Delete repository"
 msgstr "Repository löschen"
 
 #: src/svnfrontend/database/dboverview.cpp:150
-#, fuzzy, kde-format
-#| msgid "Delete repository"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Repository"
 msgstr "Repository löschen"
@@ -4525,8 +4523,7 @@ msgid "Break Lock"
 msgstr ""
 
 #: src/svnfrontend/maintreewidget.cpp:1606
-#, fuzzy, kde-format
-#| msgid "Ignore"
+#, kde-format
 msgctxt "@action:button"
 msgid "Ignore"
 msgstr "Ignorieren"

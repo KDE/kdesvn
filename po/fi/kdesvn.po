@@ -1,6 +1,6 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Tommi Nieminen <translator@legisign.org>, 2014, 2015, 2021.
+# Tommi Nieminen <translator@legisign.org>, 2014, 2015, 2021, 2023.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2014, 2015, 2016.
 #
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:58+0000\n"
-"PO-Revision-Date: 2021-01-13 22:16+0200\n"
+"PO-Revision-Date: 2023-03-22 15:18+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -5022,11 +5022,10 @@ msgid "Export"
 msgstr "Vie"
 
 #: src/svnfrontend/svnactions.cpp:1729
-#, fuzzy, kde-format
-#| msgid "Checkout"
+#, kde-format
 msgctxt "@title:window"
 msgid "Checkout"
-msgstr "Checkout"
+msgstr "Nouda"
 
 #: src/svnfrontend/svnactions.cpp:1730
 #, kde-format
@@ -5360,7 +5359,7 @@ msgstr ""
 #: src/svnfrontend/svnlogdlg.ui:168
 #, kde-format
 msgid "Copy from"
-msgstr ""
+msgstr "Kopioi lähteestä"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DispPrevButton)
 #: src/svnfrontend/svnlogdlg.ui:189 src/svnfrontend/svnlogdlgimp.cpp:517

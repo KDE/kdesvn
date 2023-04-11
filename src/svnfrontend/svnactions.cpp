@@ -1,6 +1,8 @@
 /***************************************************************************
  *   Copyright (C) 2005-2009 by Rajko Albrecht                             *
  *   ral@alwins-world.de                                                   *
+ *   Copyright (C) 2023 by Łukasz Wojniłowicz                              *
+ *   lukasz.wojnilowicz@gmail.com                                          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -990,6 +992,7 @@ bool SvnActions::makeCommit(const svn::Targets &targets)
         CommitActionEntries _check, _uncheck, _result;
         svn::StatusEntries _Cache;
         depth = svn::DepthEmpty;
+        QVector<QString> unversionedDirectories;
         svn::StatusParameter params;
         params.depth(svn::DepthInfinity).all(false).update(false).noIgnore(false).revision(svn::Revision::HEAD);
         /// @todo filter out double entries
@@ -999,19 +1002,45 @@ bool SvnActions::makeCommit(const svn::Targets &targets)
                              m_Data->m_ParentList->realWidget(),
                              i18nc("@title:window", "Status / List"),
                              i18n("Creating list / check status"));
-                _Cache = m_Data->m_Svnclient->status(params.path(tgt.path()));
+
+                /* Add unversioned directories by 'svn add' for 'svn status'
+                 * to be able to list unversioned files in them.
+                 */
+                bool containsUnversionedDirectory;
+                do {
+                    containsUnversionedDirectory = false;
+                    _Cache = m_Data->m_Svnclient->status(params.path(tgt.path()));
+                    for (const svn::StatusPtr &ptr : qAsConst(_Cache)) {
+                        if (!ptr->isVersioned()) {
+                            if (QFileInfo(ptr->entry().name()).isDir()) {
+                                m_Data->m_Svnclient->add(ptr->path(), svn::DepthEmpty, false, false, true);
+                                unversionedDirectories.append(ptr->path());
+                                containsUnversionedDirectory = true;
+                            }
+                        }
+                    }
+                } while (containsUnversionedDirectory);
+
             } catch (const svn::Exception &e) {
                 emit clientException(e.msg());
                 return false;
             }
             for (const svn::StatusPtr &ptr : qAsConst(_Cache)) {
                 const QString _p = ptr->path();
+                QVector<svn_wc_status_kind> nodeStatusesForCheck{svn_wc_status_modified,
+                                                                 svn_wc_status_added,
+                                                                 svn_wc_status_replaced,
+                                                                 svn_wc_status_deleted,
+                                                                 svn_wc_status_modified};
                 // check the node status, not the text status (it does not cover the prop status)
-                if (ptr->isRealVersioned()
-                    && (ptr->nodeStatus() == svn_wc_status_modified || ptr->nodeStatus() == svn_wc_status_added || ptr->nodeStatus() == svn_wc_status_replaced
-                        || ptr->nodeStatus() == svn_wc_status_deleted || ptr->nodeStatus() == svn_wc_status_modified)) {
+                if (ptr->isRealVersioned() && nodeStatusesForCheck.contains(ptr->nodeStatus())) {
                     if (ptr->nodeStatus() == svn_wc_status_deleted) {
                         _check.append(CommitActionEntry(_p, i18n("Delete"), CommitActionEntry::DELETE));
+                    } else if (unversionedDirectories.contains(ptr->path())) {
+                        /* Display "Add and Commit" (for the user),
+                         * but commit only, since we've already added the directory.
+                         */
+                        _uncheck.append(CommitActionEntry(_p, i18n("Add and Commit"), CommitActionEntry::COMMIT));
                     } else {
                         _check.append(CommitActionEntry(_p, i18n("Commit"), CommitActionEntry::COMMIT));
                     }
@@ -1023,6 +1052,37 @@ bool SvnActions::makeCommit(const svn::Targets &targets)
             }
         }
         msg = Commitmsg_impl::getLogmessage(_check, _uncheck, this, _result, &ok, &keeplocks, m_Data->m_ParentList->realWidget());
+
+        for (auto it = unversionedDirectories.crbegin(); it != unversionedDirectories.crend(); ++it) {
+            bool unversionedDirectoryAlreadyChecked = false;
+            for (auto i = 0; i < _result.size(); ++i) {
+                // Avoid partial matching of directory names.
+                QRegularExpression re(*it + "(/|$)");
+                if (re.match(_result.at(i).name()).hasMatch()) {
+                    for (auto j = i; j < _result.size(); ++j) {
+                        if (*it == _result.at(j).name()) {
+                            unversionedDirectoryAlreadyChecked = true;
+                            break;
+                        }
+                    }
+                    if (!unversionedDirectoryAlreadyChecked) {
+                        /* Add unversioned and unchecked directories of unversioned and checked files,
+                         * to prevent svn::Client:commit from reporting that they're missing.
+                         */
+                        _result.append(CommitActionEntry(*it, i18n("Add and Commit"), CommitActionEntry::COMMIT));
+                        unversionedDirectoryAlreadyChecked = true;
+                        break;
+                    }
+                }
+            }
+            if (!unversionedDirectoryAlreadyChecked || !ok) {
+                /* Remove unversioned and unchecked directories by 'svn remove'
+                 * so that they aren't commited by mistake.
+                 */
+                m_Data->m_Svnclient->remove(*it, false, true, svn::PropertiesMap());
+            }
+        }
+
         if (!ok || _result.isEmpty()) {
             return false;
         }

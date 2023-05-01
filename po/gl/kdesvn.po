@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-#
 # Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail.com>, 2016, 2017.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2023.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-06-07 01:43+0000\n"
-"PO-Revision-Date: 2019-11-03 13:31+0100\n"
+"PO-Revision-Date: 2023-04-30 11:43+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.11.70\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -938,7 +938,7 @@ msgid ""
 "not already present; those subdirectories' this_dir entries will have depth-"
 "infinity.<br />Equivalent to the pre-1.5 default update behavior. </p>"
 msgstr ""
-"<p ><b>Tipo de profuncidade</b>: </p>\n"
+"<p ><b>Tipo de profundidade</b>: </p>\n"
 "<p ><i>Profundidade baleira</i><br />\n"
 "Só o directorio indicado, sen entradas. As actualizacións non descargarán "
 "ficheiros ou cartafoles que non estean xa presentes.</p>\n"
@@ -948,7 +948,7 @@ msgstr ""
 "descargarán ningún cartafol que non estea xa presente. </p>\n"
 "<p><i>Profundidade inmediata</i><br /> O cartafol e as súas entradas. As "
 "actualizacións descargarán calquera ficheiro ou cartafol que non estea "
-"presente, pero os cartafoles terán profuncidade baleira.</p>\n"
+"presente, pero os cartafoles terán profundidade baleira.</p>\n"
 "<p>\n"
 "<i>Profundidade infinita</i><br /> As actualizacións descargarán calquera "
 "ficheiro ou cartafol que non estea xa presente, de maneira recursiva.<br /> "
@@ -1314,7 +1314,7 @@ msgstr ""
 #: src/settings/cmdexecsettings.ui:64
 #, kde-format
 msgid "Do not display entries in toplevel action menu"
-msgstr "Non mostrar entradas no menú de accíóns de primeiro nivel."
+msgstr "Non mostrar entradas no menú de accións de primeiro nivel."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_kio_use_standard_logmsg)
 #: src/settings/cmdexecsettings.ui:71
@@ -1615,8 +1615,8 @@ msgstr ""
 "de diferenzas deberá ser capaz de ler datos da entrada estándar.\n"
 "<br>\n"
 "Cando se indican %s1 e %s2, kdesvn deixa que o visor xere a diferenza. Para "
-"iso, kdesvn executa «export» (ou «get» se é necesario) de maneira termporal "
-"e completa os parámetros cos valores correspondentes. %s1 conterá a revisión "
+"iso, kdesvn executa «export» (ou «get» se é necesario) de maneira temporal e "
+"completa os parámetros cos valores correspondentes. %s1 conterá a revisión "
 "inicial, e %s2 a final. En diferenzas longas e recursivas, isto podería ser "
 "moi lento!\n"
 "</p>"
@@ -1631,7 +1631,7 @@ msgstr "consulte «Que é isto?» para máis información"
 #: src/settings/dispcolor_settings.ui:6
 #, kde-format
 msgid "ColorSettings"
-msgstr "ConfiguraciónDeCores"
+msgstr "Configuración de cores"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_colored_state)
 #: src/settings/dispcolor_settings.ui:14
@@ -2377,7 +2377,7 @@ msgstr ""
 "orde «svn», rapidsvn, etc.) terá que inserir de novo o contrasinal.</p>\n"
 "<p>Se o cartafol de configuración de Subversion está nunha unidade de rede, "
 "debería considerar seriamente non almacenar os contrasinais nun ficheiro de "
-"texto simple como fai Subversion, e usar un almacenamendo cifrado como o da "
+"texto simple como fai Subversion, e usar un almacenamento cifrado como o da "
 "carteira de KDE ou simplemente non almacenar os contrasinais.</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_passwords_in_wallet)
@@ -2645,7 +2645,7 @@ msgstr "Eliminouse a remisión"
 #: src/svnfrontend/ccontextlistener.cpp:82
 #, kde-format
 msgid "Commit Replaced"
-msgstr "Substituiuse a remisión"
+msgstr "Substituíuse a remisión"
 
 #: src/svnfrontend/ccontextlistener.cpp:85
 #, kde-format
@@ -3190,7 +3190,7 @@ msgstr "Retirar os padróns."
 #: src/svnfrontend/editignorepattern.ui:49
 #, kde-format
 msgid "Depth for ignore"
-msgstr "Profuncidade para ignorar"
+msgstr "Profundidade para ignorar"
 
 #: src/svnfrontend/editpropsdlg.cpp:32
 #, kde-format
@@ -3610,7 +3610,7 @@ msgstr "Eliminouse na revisión %1"
 #: src/svnfrontend/graphtree/revgraphview.cpp:428
 #, kde-format
 msgid "Added at revision %1 as %2"
-msgstr "Engadiouse na revisión %1 como %2"
+msgstr "Engadiuse na revisión %1 como %2"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:434
 #, kde-format
@@ -3630,7 +3630,7 @@ msgstr "Modificouse na revisión %1"
 #: src/svnfrontend/graphtree/revgraphview.cpp:443
 #, kde-format
 msgid "Replaced at revision %1"
-msgstr "Substituiuse na revisión %1"
+msgstr "Substituíuse na revisión %1"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:446
 #, kde-format
@@ -4595,8 +4595,8 @@ msgstr "Erro interno"
 #, kde-format
 msgid "Hold Ctrl key while click on selected item for unselect"
 msgstr ""
-"Manteña premida a tecla Ctrl mentre preme sobre o elemento seleccionado para "
-"anular a súa selección."
+"Manteña premida a tecla Ctrl mentres preme sobre o elemento seleccionado "
+"para anular a súa selección."
 
 #. i18n: ectx: property (toolTip), widget (QTreeView, m_LogTreeView)
 #. i18n: ectx: property (toolTip), widget (QTreeWidget, m_ChangedList)
@@ -5473,7 +5473,7 @@ msgstr "Hai elementos novos no repositorio"
 #, kde-format
 msgid "Not filling log cache because networking is disabled"
 msgstr ""
-"Non se encheou a caché do historial porque o uso da rede está desactivado."
+"Non se encheu a caché do historial porque o uso da rede está desactivado."
 
 #: src/svnfrontend/svnactions.cpp:2640
 #, kde-format

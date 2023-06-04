@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:58+0000\n"
-"PO-Revision-Date: 2023-05-15 22:42+0300\n"
+"PO-Revision-Date: 2023-06-04 02:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 23.07.70\n"
 "X-POOTLE-MTIME: 1502202338.000000\n"
 
 #, kde-format
@@ -967,7 +967,7 @@ msgstr "Sonsuzluk Derinliği (yinele)"
 #: src/ksvnwidgets/diffbrowser.cpp:51
 #, kde-format
 msgid "Ctrl-F for search, F3 or Shift-F3 for search again."
-msgstr "Aramak için Ctrl-F, yeniden aramak için F3 veya Shift-F3."
+msgstr "Aramak için Kontrol-F, yeniden aramak için F3 veya Üst Karakter-F3."
 
 #: src/ksvnwidgets/diffbrowser.cpp:53
 #, kde-format
@@ -976,9 +976,10 @@ msgid ""
 "Ctrl-F.</p><p>F3 for search forward again, Shift-F3 for search backward "
 "again.</p><p>You may save the (original) output with Ctrl-S.</p>"
 msgstr ""
-"<b>Dosyalar arasındaki farkları görüntüle</b><p>Metin içinde Ctrl-F ile "
+"<b>Dosyalar arasındaki farkları görüntüle</b><p>Metin içinde Kontrol-F ile "
 "arama yapabilirsiniz.</p><p>Tekrar ileri arama için F3, tekrar geri arama "
-"için Shift-F3.</p><p>Çıktıyı (asıl) Ctrl-S ile kaydedebilirsiniz.</p>"
+"için Üst Karakter-F3.</p><p>Çıktıyı (asıl) Kontrol-S ile kaydedebilirsiniz.</"
+"p>"
 
 #: src/ksvnwidgets/diffbrowser.cpp:89
 #, kde-format
@@ -1273,7 +1274,7 @@ msgstr "Ayarlıysa kdesvn Konqueror \"Eylem\" menüsü içinde bir menü göster
 #: src/settings/cmdexecsettings.ui:54
 #, kde-format
 msgid "Do not display context menu in Konqueror"
-msgstr "Konqueror'da içerik menüsü görüntüleme"
+msgstr "Konqueror'da bağlam menüsü görüntüleme"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
 #: src/settings/cmdexecsettings.ui:61
@@ -4540,7 +4541,8 @@ msgstr "Üzgünüm - dahili hata"
 #: src/svnfrontend/maintreewidget.cpp:2479
 #, kde-format
 msgid "Hold Ctrl key while click on selected item for unselect"
-msgstr "Seçimi bırakmak için Ctrl tuşuna basılı tutarak seçili ögeye tıklayın"
+msgstr ""
+"Seçimi bırakmak için Kontrol tuşuna basılı tutarak seçili ögeye tıklayın"
 
 #. i18n: ectx: property (toolTip), widget (QTreeView, m_LogTreeView)
 #. i18n: ectx: property (toolTip), widget (QTreeWidget, m_ChangedList)
@@ -4548,7 +4550,7 @@ msgstr "Seçimi bırakmak için Ctrl tuşuna basılı tutarak seçili ögeye tı
 #: src/svnfrontend/svnlogdlg.ui:148
 #, kde-format
 msgid "See context menu for more actions"
-msgstr "Daha fazla eylem için içerik menüsüne göz atın"
+msgstr "Daha fazla eylem için bağlam menüsüne göz atın"
 
 #: src/svnfrontend/maintreewidget.cpp:2485
 #, kde-format

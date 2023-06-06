@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-06-07 01:43+0000\n"
-"PO-Revision-Date: 2023-04-30 11:43+0200\n"
+"PO-Revision-Date: 2023-06-05 14:18+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3355,8 +3355,8 @@ msgid ""
 "to extract the bare bug ID from that string."
 msgstr ""
 "Dúas expresións regulares, unha en cada liña.<br/> A primeira expresión "
-"úsase para atopar unha cadea que fai referencia a unha incidencia, e a "
-"segunda para extraer o identificador do fallo de dita cadea."
+"úsase para atopar unha cadea que indica unha incidencia, e a segunda para "
+"extraer o identificador do fallo de dita cadea."
 
 #: src/svnfrontend/editpropsdlg.cpp:126
 #, kde-format
@@ -5386,7 +5386,7 @@ msgstr "Non indicou un destino para a fusión."
 #: src/svnfrontend/svnactions.cpp:2029
 #, kde-format
 msgid "Both sources must be same type."
-msgstr "Ambas orixes deben ser do mesmo tipo."
+msgstr "As dúas orixes deben ser do mesmo tipo."
 
 #: src/svnfrontend/svnactions.cpp:2036
 #, kde-format

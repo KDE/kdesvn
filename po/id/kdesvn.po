@@ -1,31 +1,32 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kdesvn package.
 # Linerly <linerly@protonmail.com>, 2022.
+# Wantoyèk <wantoyek@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:58+0000\n"
-"PO-Revision-Date: 2022-06-14 17:40+0700\n"
-"Last-Translator: Linerly <linerly@protonmail.com>\n"
+"PO-Revision-Date: 2023-06-08 04:27+0700\n"
+"Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Linerly"
+msgstr "Linerly,Wantoyèk"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "linerly@protonmail.com"
+msgstr "linerly@protonmail.com,wantoyek@gmail.com"
 
 #: src/askpass/kdesvn-askpass.cpp:36
 #, kde-format
@@ -137,15 +138,12 @@ msgid "Show the content of log cache database"
 msgstr "Tampilkan konten basis data cache catatan"
 
 #: src/kdesvn.cpp:134
-#, fuzzy, kde-format
-#| msgid ""
-#| "Could not load the part:\n"
-#| "%1"
+#, kde-format
 msgid ""
 "Could not load our part:\n"
 "%1"
 msgstr ""
-"Tidak dapat memuat bagian:\n"
+"Tidak dapat memuat bagian kita:\n"
 "%1"
 
 #: src/kdesvn.cpp:165
@@ -688,7 +686,7 @@ msgstr "Tidak bisa mendapatkan data untuk penulisan."
 #: src/kiosvn/kiosvn.cpp:419
 #, kde-format
 msgid "Committing %1"
-msgstr "Mengkomit %1"
+msgstr "Mengomit %1"
 
 #: src/kiosvn/kiosvn.cpp:441
 #, kde-format
@@ -704,7 +702,7 @@ msgstr "%1 disalin ke %2"
 #: src/svnfrontend/svnactions.cpp:2278
 #, kde-format
 msgid "Committed revision %1."
-msgstr "Mengkomit revisi %1."
+msgstr "Revisi terkomit %1."
 
 #: src/kiosvn/kiosvn.cpp:790
 #, kde-format
@@ -789,7 +787,7 @@ msgstr ""
 #: src/ksvnwidgets/commitmessage.ui:90
 #, kde-format
 msgid "Select new items"
-msgstr ""
+msgstr "Pilih item-item baru"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_UnmarkUnversioned)
 #: src/ksvnwidgets/commitmessage.ui:97
@@ -867,7 +865,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Commit Log"
-msgstr ""
+msgstr "Catatan Komit"
 
 #: src/ksvnwidgets/commitmsg_impl.cpp:455
 #, kde-format
@@ -987,7 +985,7 @@ msgstr ""
 #: src/ksvnwidgets/diffbrowser.cpp:174 src/ksvnwidgets/diffbrowser.cpp:186
 #, kde-format
 msgid "Find"
-msgstr ""
+msgstr "Temukan"
 
 #: src/ksvnwidgets/diffbrowser.cpp:184
 #, kde-format
@@ -1012,18 +1010,18 @@ msgstr ""
 #: src/ksvnwidgets/models/commitmodel.cpp:191 src/svnfrontend/svnlogdlg.ui:158
 #, kde-format
 msgid "Action"
-msgstr ""
+msgstr "Aksi"
 
 #: src/ksvnwidgets/models/commitmodel.cpp:194
 #, kde-format
 msgid "Entry"
-msgstr ""
+msgstr "Entri"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:35
 #: src/svnfrontend/maintreewidget.cpp:694
 #, kde-format
 msgid "Add"
-msgstr ""
+msgstr "Tambah"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:39
 #: src/svnfrontend/ccontextlistener.cpp:67
@@ -1031,7 +1029,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:566
 #, kde-format
 msgid "Copy"
-msgstr ""
+msgstr "Salin"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:43
 #: src/svnfrontend/ccontextlistener.cpp:68
@@ -1039,7 +1037,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:718 src/svnfrontend/svnactions.cpp:1014
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "Hapus"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:47
 #, kde-format
@@ -1050,7 +1048,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:794
 #, kde-format
 msgid "Replace"
-msgstr ""
+msgstr "Ganti"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:55
 #, kde-format
@@ -1082,7 +1080,7 @@ msgstr ""
 #: src/ksvnwidgets/ssltrustprompt.cpp:35
 #, kde-format
 msgid "Reject"
-msgstr ""
+msgstr "Apkir"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:46
 #, kde-format
@@ -1097,12 +1095,12 @@ msgstr ""
 #: src/ksvnwidgets/ssltrustprompt.cpp:79
 #, kde-format
 msgid "Realm"
-msgstr ""
+msgstr "Ranah"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:80
 #, kde-format
 msgid "Host"
-msgstr ""
+msgstr "Host"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:81
 #, kde-format
@@ -1122,7 +1120,7 @@ msgstr ""
 #: src/ksvnwidgets/ssltrustprompt.cpp:84
 #, kde-format
 msgid "Fingerprint"
-msgstr ""
+msgstr "Sidik Jari"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, SslTrustPrompt)
 #: src/ksvnwidgets/ssltrustprompt.ui:14
@@ -1133,7 +1131,7 @@ msgstr ""
 #: src/main.cpp:39
 #, kde-format
 msgid "kdesvn"
-msgstr ""
+msgstr "kdesvn"
 
 #: src/main.cpp:41
 #, kde-format
@@ -1146,6 +1144,8 @@ msgid ""
 "(C) 2005-2009 Rajko Albrecht,\n"
 "(C) 2015-2019 Christian Ehrlicher"
 msgstr ""
+"(C) 2005-2009 Rajko Albrecht,\n"
+"(C) 2015-2019 Christian Ehrlicher"
 
 #: src/main.cpp:44
 #, kde-format
@@ -1155,7 +1155,7 @@ msgstr ""
 #: src/main.cpp:45
 #, kde-format
 msgid "Christian Ehrlicher"
-msgstr ""
+msgstr "Christian Ehrlicher"
 
 #: src/main.cpp:50
 #, kde-format
@@ -1205,7 +1205,7 @@ msgstr ""
 #: src/main.cpp:56
 #, kde-format
 msgid "Document to open"
-msgstr ""
+msgstr "Dokumen untuk dibuka"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_cmdline_show_logwindow)
 #: src/settings/cmdexecsettings.ui:11
@@ -1575,7 +1575,7 @@ msgstr ""
 #: src/settings/display_settings.ui:6
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Pengaturan"
 
 #. i18n: ectx: property (text), widget (QLabel, m_ListIconsSize_label)
 #: src/settings/display_settings.ui:14
@@ -1625,6 +1625,9 @@ msgid ""
 "Here you can control if, when moving the mouse over a file, you want to see "
 "a small popup window with additional information about that file"
 msgstr ""
+"Di sini anda dapat mengendalikan apakah, ketika memindahkan mouse ke sebuah "
+"file, anda ingin melihat sebuah jendela sembul kecil dengan informasi "
+"tambahan tentang file tersebut"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_file_tips)
 #: src/settings/display_settings.ui:70
@@ -1956,7 +1959,7 @@ msgstr ""
 #: src/settings/polling_settings.ui:28 src/settings/polling_settings.ui:55
 #, kde-format
 msgid "minutes"
-msgstr ""
+msgstr "menit"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_poll_updates)
 #: src/settings/polling_settings.ui:35
@@ -1976,25 +1979,25 @@ msgstr ""
 #: src/settings/revisiontree_settings.ui:28
 #, kde-format
 msgid "Left to right"
-msgstr ""
+msgstr "Kiri ke kanan"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
 #: src/settings/revisiontree_settings.ui:33
 #, kde-format
 msgid "Bottom to top"
-msgstr ""
+msgstr "Bawah ke atas"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
 #: src/settings/revisiontree_settings.ui:38
 #, kde-format
 msgid "Right to left"
-msgstr ""
+msgstr "Kanan ke kiri"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
 #: src/settings/revisiontree_settings.ui:43
 #, kde-format
 msgid "Top to bottom"
-msgstr ""
+msgstr "Atas ke bawah"
 
 #. i18n: ectx: property (text), widget (QLabel, m_AddColorLabel)
 #: src/settings/revisiontree_settings.ui:51
@@ -2271,12 +2274,12 @@ msgstr ""
 #: src/svnfrontend/background/fillcachethread.cpp:76
 #, kde-format
 msgid "Filling log cache in background."
-msgstr ""
+msgstr "Pengisian cache catatan di latar belakang."
 
 #: src/svnfrontend/background/fillcachethread.cpp:98
 #, kde-format
 msgid "Filling cache canceled."
-msgstr ""
+msgstr "Pengisian cache dibatalkan."
 
 #: src/svnfrontend/background/fillcachethread.cpp:113
 #, kde-format
@@ -2286,7 +2289,7 @@ msgstr ""
 #: src/svnfrontend/background/fillcachethread.cpp:120
 #, kde-format
 msgid "Filling log cache in background finished."
-msgstr ""
+msgstr "Pengisian cache catatan di latar belakang selesai."
 
 #: src/svnfrontend/background/tcontextlistener.cpp:182
 #, kde-format
@@ -2307,7 +2310,7 @@ msgstr ""
 #: src/svnfrontend/blamedisplay.cpp:188
 #, kde-format
 msgid "Go to line"
-msgstr ""
+msgstr "Menuju ke baris"
 
 #: src/svnfrontend/blamedisplay.cpp:320
 #, kde-format
@@ -2329,14 +2332,14 @@ msgstr ""
 #: src/svnfrontend/blamedisplay.ui:40
 #, kde-format
 msgid "Line"
-msgstr ""
+msgstr "Baris"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #: src/svnfrontend/blamedisplay.ui:45
 #: src/svnfrontend/models/logitemmodel.cpp:173
 #, kde-format
 msgid "Revision"
-msgstr ""
+msgstr "Revisi"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #. i18n: ectx: property (text), widget (QRadioButton, m_startDateButton)
@@ -2347,20 +2350,20 @@ msgstr ""
 #: src/svnfrontend/models/logitemmodel.cpp:177
 #, kde-format
 msgid "Date"
-msgstr ""
+msgstr "Tanggal"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #: src/svnfrontend/blamedisplay.ui:55
 #: src/svnfrontend/models/logitemmodel.cpp:175
 #, kde-format
 msgid "Author"
-msgstr ""
+msgstr "Penulis"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #: src/svnfrontend/blamedisplay.ui:60
 #, kde-format
 msgid "Content"
-msgstr ""
+msgstr "Konten"
 
 #: src/svnfrontend/ccontextlistener.cpp:66
 #, kde-format
@@ -2375,7 +2378,7 @@ msgstr ""
 #: src/svnfrontend/ccontextlistener.cpp:70
 #, kde-format
 msgid "Revert"
-msgstr ""
+msgstr "Kembalikan"
 
 #: src/svnfrontend/ccontextlistener.cpp:71
 #, kde-format
@@ -2385,27 +2388,27 @@ msgstr ""
 #: src/svnfrontend/ccontextlistener.cpp:72
 #, kde-format
 msgid "Resolved"
-msgstr ""
+msgstr "Diselesaikan"
 
 #: src/svnfrontend/ccontextlistener.cpp:73
 #, kde-format
 msgid "Skip"
-msgstr ""
+msgstr "Lewati"
 
 #: src/svnfrontend/ccontextlistener.cpp:74 src/svnfrontend/svnitem.cpp:430
 #, kde-format
 msgid "Deleted"
-msgstr ""
+msgstr "Dihapus"
 
 #: src/svnfrontend/ccontextlistener.cpp:75
 #, kde-format
 msgid "Added"
-msgstr ""
+msgstr "Ditambahkan"
 
 #: src/svnfrontend/ccontextlistener.cpp:76
 #, kde-format
 msgid "Update"
-msgstr ""
+msgstr "Perbarui"
 
 #: src/svnfrontend/ccontextlistener.cpp:77
 #, kde-format
@@ -2465,7 +2468,7 @@ msgstr ""
 #: src/svnfrontend/ccontextlistener.cpp:94
 #, kde-format
 msgid "unchanged"
-msgstr ""
+msgstr "tak diubah"
 
 #: src/svnfrontend/ccontextlistener.cpp:95
 #, kde-format
@@ -2490,7 +2493,7 @@ msgstr ""
 #: src/svnfrontend/ccontextlistener.cpp:304
 #, kde-format
 msgid "Enter password for realm %1"
-msgstr ""
+msgstr "Masukkan kata sandi untuk ranah %1"
 
 #: src/svnfrontend/ccontextlistener.cpp:335
 #, kde-format
@@ -2576,20 +2579,20 @@ msgstr ""
 #: src/svnfrontend/copymoveview.ui:20
 #, kde-format
 msgid "Rename"
-msgstr ""
+msgstr "Ubah nama"
 
 #. i18n: ectx: property (text), widget (KSqueezedTextLabel, m_OldNameLabel)
 #. i18n: ectx: property (text), widget (KSqueezedTextLabel, m_PrefixLabel)
 #: src/svnfrontend/copymoveview.ui:33 src/svnfrontend/copymoveview.ui:58
 #, kde-format
 msgid "KSqueezedTextLabel"
-msgstr ""
+msgstr "KSqueezedTextLabel"
 
 #. i18n: ectx: property (text), widget (QLabel, m_HeadTwoLabel)
 #: src/svnfrontend/copymoveview.ui:43
 #, kde-format
 msgid "to"
-msgstr ""
+msgstr "ke"
 
 #: src/svnfrontend/copymoveview_impl.cpp:46
 #, kde-format
@@ -2780,11 +2783,10 @@ msgid "Delete repository"
 msgstr ""
 
 #: src/svnfrontend/database/dboverview.cpp:150
-#, fuzzy, kde-format
-#| msgid "Repository"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Repository"
-msgstr "Repositori"
+msgstr "Hapus Repositori"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DBOverView)
 #: src/svnfrontend/database/dboverview.ui:6
@@ -2836,7 +2838,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Settings for %1"
-msgstr ""
+msgstr "Pengaturan untuk %1"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: src/svnfrontend/database/dbsettings.ui:21
@@ -2977,7 +2979,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Property"
-msgstr ""
+msgstr "Tambahkan Properti"
 
 #: src/svnfrontend/editpropsdlg.cpp:44 src/svnfrontend/editpropsdlg.cpp:84
 #, kde-format
@@ -3128,7 +3130,7 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:14
 #, kde-format
 msgid "Checkout info"
-msgstr ""
+msgstr "Info pemeriksaan"
 
 #. i18n: ectx: property (text), widget (QLabel, m_TargetLabel)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:26
@@ -3140,7 +3142,7 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:40
 #, kde-format
 msgid "Enter URL:"
-msgstr ""
+msgstr "Masukkan URL:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_ignoreExternals)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:67
@@ -3187,12 +3189,12 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/propertylist.cpp:43
 #, kde-format
 msgid "Property"
-msgstr ""
+msgstr "Properti"
 
 #: src/svnfrontend/fronthelpers/propertylist.cpp:44
 #, kde-format
 msgid "Value"
-msgstr ""
+msgstr "Nilai"
 
 #: src/svnfrontend/fronthelpers/propertylist.cpp:104
 #: src/svnfrontend/propertiesdlg.cpp:111 src/svnfrontend/propertiesdlg.cpp:162
@@ -3249,13 +3251,13 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/rangeinput.ui:143
 #, kde-format
 msgid "WORKING"
-msgstr ""
+msgstr "BEKERJA"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_startNumberButton)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:56
 #, kde-format
 msgid "N&umber"
-msgstr ""
+msgstr "N&omor"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_startHeadButton)
 #. i18n: ectx: property (text), widget (QRadioButton, m_stopHeadButton)
@@ -3263,13 +3265,13 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/rangeinput.ui:120
 #, kde-format
 msgid "HEAD"
-msgstr ""
+msgstr "KEPALA"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_startStartButton)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:73
 #, kde-format
 msgid "S&TART"
-msgstr ""
+msgstr "&MULAI"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_stopRevBox)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:85
@@ -3281,13 +3283,13 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/rangeinput.ui:93
 #, kde-format
 msgid "Number"
-msgstr ""
+msgstr "Nomor"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_stopStartButton)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:113
 #, kde-format
 msgid "START"
-msgstr ""
+msgstr "MULAI"
 
 #: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:58
 #, kde-format
@@ -3358,7 +3360,7 @@ msgstr ""
 #: src/svnfrontend/graphtree/revgraphview.cpp:441
 #, kde-format
 msgid "Revision %1"
-msgstr ""
+msgstr "Revisi %1"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:461
 #, kde-format
@@ -3373,22 +3375,22 @@ msgstr ""
 #: src/svnfrontend/graphtree/revgraphview.cpp:557
 #, kde-format
 msgid "<b>Revision</b>%1%2%3"
-msgstr ""
+msgstr "<b>Revisi</b>%1%2%3"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:557
 #, kde-format
 msgid "<b>Author</b>%1%2%3"
-msgstr ""
+msgstr "<b>Penulis</b>%1%2%3"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:558
 #, kde-format
 msgid "<b>Date</b>%1%2%3"
-msgstr ""
+msgstr "<b>Tanggal</b>%1%2%3"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:558
 #, kde-format
 msgid "<b>Log</b>%1%2%3"
-msgstr ""
+msgstr "<b>Catatan</b>%1%2%3"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:833
 #, kde-format
@@ -3414,7 +3416,7 @@ msgstr ""
 #: src/svnfrontend/graphtree/revgraphview.cpp:844
 #, kde-format
 msgid "Select item"
-msgstr ""
+msgstr "Pilih item"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:847
 #, kde-format
@@ -3424,12 +3426,12 @@ msgstr ""
 #: src/svnfrontend/graphtree/revgraphview.cpp:850
 #, kde-format
 msgid "Rotate counter-clockwise"
-msgstr ""
+msgstr "Rotasikan lawan-arah-jarum-jam"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:851
 #, kde-format
 msgid "Rotate clockwise"
-msgstr ""
+msgstr "Rotasikan searah jarum jam"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:857
 #: src/svnfrontend/graphtree/revgraphview.cpp:875
@@ -3476,7 +3478,7 @@ msgstr ""
 #: src/svnfrontend/graphtree/revisiontree.cpp:139
 #, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "Batal"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:140
 #, kde-format
@@ -3501,7 +3503,7 @@ msgstr ""
 #: src/svnfrontend/hotcopydlg.ui:31
 #, kde-format
 msgid "Destination folder:"
-msgstr ""
+msgstr "Folder tujuan:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_Cleanlogs)
 #: src/svnfrontend/hotcopydlg.ui:51
@@ -3563,19 +3565,19 @@ msgstr ""
 #: src/svnfrontend/loaddmpdlg.ui:30 src/svnfrontend/merge_dlg.ui:116
 #, kde-format
 msgid "Force"
-msgstr ""
+msgstr "Paksa"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_UUidIgnore)
 #: src/svnfrontend/loaddmpdlg.ui:40
 #, kde-format
 msgid "Ignore"
-msgstr ""
+msgstr "Abaikan"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_UUidDefault)
 #: src/svnfrontend/loaddmpdlg.ui:50
 #, kde-format
 msgid "Default"
-msgstr ""
+msgstr "Bawaan"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_UsePre)
 #: src/svnfrontend/loaddmpdlg.ui:66
@@ -3644,7 +3646,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:517
 #, kde-format
 msgid "History"
-msgstr ""
+msgstr "Histori"
 
 #: src/svnfrontend/maintreewidget.cpp:501
 #, kde-format
@@ -3687,7 +3689,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:537
 #, kde-format
 msgid "Properties"
-msgstr ""
+msgstr "Properti"
 
 #: src/svnfrontend/maintreewidget.cpp:539
 #, kde-format
@@ -3707,7 +3709,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:552
 #, kde-format
 msgid "Details"
-msgstr ""
+msgstr "Detail"
 
 #: src/svnfrontend/maintreewidget.cpp:557
 #, kde-format
@@ -3717,7 +3719,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:559
 #, kde-format
 msgid "Move"
-msgstr ""
+msgstr "Pindah"
 
 #: src/svnfrontend/maintreewidget.cpp:564
 #, kde-format
@@ -3732,7 +3734,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:573
 #, kde-format
 msgid "Check for updates"
-msgstr ""
+msgstr "Cek pembaharuan"
 
 #: src/svnfrontend/maintreewidget.cpp:578
 #, kde-format
@@ -3748,7 +3750,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:584
 #, kde-format
 msgid "Blame"
-msgstr ""
+msgstr "Lihat Perubahan"
 
 #: src/svnfrontend/maintreewidget.cpp:585
 #: src/svnfrontend/maintreewidget.cpp:593
@@ -3806,7 +3808,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:628 src/svnfrontend/svnactions.cpp:668
 #, kde-format
 msgid "New folder"
-msgstr ""
+msgstr "Folder baru"
 
 #: src/svnfrontend/maintreewidget.cpp:633
 #, kde-format
@@ -3836,12 +3838,12 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:653
 #, kde-format
 msgid "Check for unversioned items"
-msgstr ""
+msgstr "Periksa item yang belum diversikan"
 
 #: src/svnfrontend/maintreewidget.cpp:658
 #, kde-format
 msgid "Unversioned"
-msgstr ""
+msgstr "Tak berversi"
 
 #: src/svnfrontend/maintreewidget.cpp:659
 #, kde-format
@@ -3861,7 +3863,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:671
 #, kde-format
 msgid "Cleanup"
-msgstr ""
+msgstr "Pembersihan"
 
 #: src/svnfrontend/maintreewidget.cpp:676
 #, kde-format
@@ -3915,7 +3917,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:712
 #, kde-format
 msgid "Delete folder"
-msgstr ""
+msgstr "Hapus folder"
 
 #: src/svnfrontend/maintreewidget.cpp:717
 #, kde-format
@@ -3963,19 +3965,19 @@ msgstr ""
 #, kde-format
 msgctxt "Menu item"
 msgid "Update"
-msgstr ""
+msgstr "Perbarui"
 
 #: src/svnfrontend/maintreewidget.cpp:763
 #, kde-format
 msgid "Update to revision..."
-msgstr ""
+msgstr "Perbarui untuk revisi..."
 
 #: src/svnfrontend/maintreewidget.cpp:769
 #: src/svnfrontend/maintreewidget.cpp:774
 #: src/svnfrontend/maintreewidget.cpp:889 src/svnfrontend/svnactions.cpp:1016
 #, kde-format
 msgid "Commit"
-msgstr ""
+msgstr "Komit"
 
 #: src/svnfrontend/maintreewidget.cpp:777
 #: src/svnfrontend/maintreewidget.cpp:784
@@ -4023,7 +4025,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:820
 #, kde-format
 msgid "Merge"
-msgstr ""
+msgstr "Gabung"
 
 #: src/svnfrontend/maintreewidget.cpp:821
 #, kde-format
@@ -4033,7 +4035,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:824
 #, kde-format
 msgid "Merge..."
-msgstr ""
+msgstr "Gabung..."
 
 #: src/svnfrontend/maintreewidget.cpp:829
 #, kde-format
@@ -4047,7 +4049,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:1459
 #, kde-format
 msgid "Open With..."
-msgstr ""
+msgstr "Buka Dengan..."
 
 #: src/svnfrontend/maintreewidget.cpp:834
 #, kde-format
@@ -4058,7 +4060,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:855
 #, kde-format
 msgid "Checkout"
-msgstr ""
+msgstr "Pemeriksaan"
 
 #: src/svnfrontend/maintreewidget.cpp:841
 #, kde-format
@@ -4074,7 +4076,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:1654
 #, kde-format
 msgid "Checkout a repository"
-msgstr ""
+msgstr "Pemeriksaan repositori"
 
 #: src/svnfrontend/maintreewidget.cpp:857
 #, kde-format
@@ -4084,17 +4086,17 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:862
 #, kde-format
 msgid "Export"
-msgstr ""
+msgstr "Ekspor"
 
 #: src/svnfrontend/maintreewidget.cpp:864
 #, kde-format
 msgid "Refresh view"
-msgstr ""
+msgstr "Segarkan tampilan"
 
 #: src/svnfrontend/maintreewidget.cpp:869
 #, kde-format
 msgid "Refresh"
-msgstr ""
+msgstr "Segarkan"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DispSpecDiff)
 #: src/svnfrontend/maintreewidget.cpp:872 src/svnfrontend/svnlogdlg.ui:211
@@ -4194,7 +4196,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Ignore"
-msgstr ""
+msgstr "Abaikan"
 
 #: src/svnfrontend/maintreewidget.cpp:1900
 #, kde-format
@@ -4215,7 +4217,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Merge"
-msgstr ""
+msgstr "Gabung"
 
 #: src/svnfrontend/maintreewidget.cpp:2258
 #, kde-format
@@ -4275,7 +4277,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:2415
 #, kde-format
 msgid "Error"
-msgstr ""
+msgstr "Galat"
 
 #: src/svnfrontend/maintreewidget.cpp:2410
 #, kde-format
@@ -4308,7 +4310,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:2488
 #, kde-format
 msgid "Navigation"
-msgstr ""
+msgstr "Navigasi"
 
 #: src/svnfrontend/maintreewidget.cpp:2604
 #, kde-format
@@ -4335,19 +4337,19 @@ msgstr ""
 #: src/svnfrontend/merge_dlg.ui:22
 #, kde-format
 msgid "Source 1:"
-msgstr ""
+msgstr "Sumber 1:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_SrcTwoLabel)
 #: src/svnfrontend/merge_dlg.ui:38
 #, kde-format
 msgid "Source 2:"
-msgstr ""
+msgstr "Sumber 2:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_OutLabel)
 #: src/svnfrontend/merge_dlg.ui:54
 #, kde-format
 msgid "Output to:"
-msgstr ""
+msgstr "Output ke:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_MergeParameter)
 #: src/svnfrontend/merge_dlg.ui:72
@@ -4359,7 +4361,7 @@ msgstr ""
 #: src/svnfrontend/merge_dlg.ui:90
 #, kde-format
 msgid "Recursive"
-msgstr ""
+msgstr "Rekursif"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_RelatedCheck)
 #: src/svnfrontend/merge_dlg.ui:103
@@ -4460,7 +4462,7 @@ msgstr ""
 #: src/svnfrontend/models/logitemmodel.cpp:179
 #, kde-format
 msgid "Message"
-msgstr ""
+msgstr "Pesan"
 
 #: src/svnfrontend/models/logmodelhelper.cpp:43
 #, kde-format
@@ -4471,38 +4473,38 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:744
 #, kde-format
 msgid "Name"
-msgstr ""
+msgstr "Nama"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:319
 #, kde-format
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:321
 #, kde-format
 msgid "Last changed Revision"
-msgstr ""
+msgstr "Perubahan Revisi terakhir"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:323
 #: src/svnfrontend/svnactions.cpp:803
 #, kde-format
 msgid "Last author"
-msgstr ""
+msgstr "Penulis terakhir"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:325
 #, kde-format
 msgid "Last change date"
-msgstr ""
+msgstr "Tanggal perubahan terakhir"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:327
 #, kde-format
 msgid "Locked by"
-msgstr ""
+msgstr "Dikunci oleh"
 
 #: src/svnfrontend/opencontextmenu.cpp:59
 #, kde-format
 msgid "Other..."
-msgstr ""
+msgstr "Lainnya..."
 
 #: src/svnfrontend/propertiesdlg.cpp:80
 #, kde-format
@@ -4529,7 +4531,7 @@ msgstr ""
 #: src/svnfrontend/propertiesdlg.ui:39
 #, kde-format
 msgid "Add Property"
-msgstr ""
+msgstr "Tambahkan Properti"
 
 #. i18n: ectx: property (text), widget (QPushButton, pbModify)
 #: src/svnfrontend/propertiesdlg.ui:46
@@ -4551,12 +4553,12 @@ msgstr ""
 #: src/svnfrontend/stopdlg.cpp:201
 #, kde-format
 msgid "%1 of %2"
-msgstr ""
+msgstr "%1 dari %2"
 
 #: src/svnfrontend/svnactions.cpp:185
 #, kde-format
 msgid "Finished"
-msgstr ""
+msgstr "Selesai"
 
 #: src/svnfrontend/svnactions.cpp:355
 #, kde-format
@@ -4578,7 +4580,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Annotate"
-msgstr ""
+msgstr "Anotasi"
 
 #: src/svnfrontend/svnactions.cpp:557
 #, kde-format
@@ -4625,13 +4627,13 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:668
 #, kde-format
 msgid "Enter folder name:"
-msgstr ""
+msgstr "Masukkan nama folder:"
 
 #: src/svnfrontend/svnactions.cpp:707
 #, kde-format
 msgctxt "@title:window"
 msgid "Details"
-msgstr ""
+msgstr "Detail"
 
 #: src/svnfrontend/svnactions.cpp:708
 #, kde-format
@@ -4641,7 +4643,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:747
 #, kde-format
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: src/svnfrontend/svnactions.cpp:749
 #, kde-format
@@ -4651,12 +4653,12 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:752
 #, kde-format
 msgid "Checksum"
-msgstr ""
+msgstr "Checksum"
 
 #: src/svnfrontend/svnactions.cpp:755
 #, kde-format
 msgid "Type"
-msgstr ""
+msgstr "Tipe"
 
 #: src/svnfrontend/svnactions.cpp:758
 #, kde-format
@@ -4666,57 +4668,57 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:761
 #, kde-format
 msgid "File"
-msgstr ""
+msgstr "File"
 
 #: src/svnfrontend/svnactions.cpp:764
 #, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "Folder"
 
 #: src/svnfrontend/svnactions.cpp:768 src/svnfrontend/svnactions.cpp:797
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "Tak diketahui"
 
 #: src/svnfrontend/svnactions.cpp:773
 #, kde-format
 msgid "Size"
-msgstr ""
+msgstr "Ukuran"
 
 #: src/svnfrontend/svnactions.cpp:782
 #, kde-format
 msgid "Schedule"
-msgstr ""
+msgstr "Jadwal"
 
 #: src/svnfrontend/svnactions.cpp:785
 #, kde-format
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: src/svnfrontend/svnactions.cpp:788
 #, kde-format
 msgid "Addition"
-msgstr ""
+msgstr "Penambahan"
 
 #: src/svnfrontend/svnactions.cpp:791
 #, kde-format
 msgid "Deletion"
-msgstr ""
+msgstr "Penghapusan"
 
 #: src/svnfrontend/svnactions.cpp:801
 #, kde-format
 msgid "UUID"
-msgstr ""
+msgstr "UUID"
 
 #: src/svnfrontend/svnactions.cpp:805
 #, kde-format
 msgid "Last committed"
-msgstr ""
+msgstr "Terakhir dikomit"
 
 #: src/svnfrontend/svnactions.cpp:807
 #, kde-format
 msgid "Last revision"
-msgstr ""
+msgstr "Revisi terakhir"
 
 #: src/svnfrontend/svnactions.cpp:809
 #, kde-format
@@ -4751,7 +4753,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:827 src/svnfrontend/svnactions.cpp:834
 #, kde-format
 msgid "Owner"
-msgstr ""
+msgstr "Pemilik"
 
 #: src/svnfrontend/svnactions.cpp:828 src/svnfrontend/svnactions.cpp:835
 #, kde-format
@@ -4804,29 +4806,29 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:1019
 #, kde-format
 msgid "Delete and Commit"
-msgstr ""
+msgstr "Hapus dan Komit"
 
 #: src/svnfrontend/svnactions.cpp:1021
 #, kde-format
 msgid "Add and Commit"
-msgstr ""
+msgstr "Tambahkan dan Komit"
 
 #: src/svnfrontend/svnactions.cpp:1051
 #, kde-format
 msgctxt "@title:window"
 msgid "Commit"
-msgstr ""
+msgstr "Komit"
 
 #: src/svnfrontend/svnactions.cpp:1051
 #, kde-format
 msgid "Commit - hit Cancel for abort"
-msgstr ""
+msgstr "Komit - tekan Batal untuk membatalkan"
 
 #: src/svnfrontend/svnactions.cpp:1078
 #, kde-format
 msgctxt "@title:window"
 msgid "Downloading"
-msgstr ""
+msgstr "Mengunduh"
 
 #: src/svnfrontend/svnactions.cpp:1079
 #, kde-format
@@ -4904,7 +4906,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:1578
 #, kde-format
 msgid "Delete from repository"
-msgstr ""
+msgstr "Hapus dari repositori"
 
 #: src/svnfrontend/svnactions.cpp:1629
 #, kde-format
@@ -4916,7 +4918,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout a Repository"
-msgstr ""
+msgstr "Pemeriksaan repositori"
 
 #: src/svnfrontend/svnactions.cpp:1647 src/svnfrontend/svnactions.cpp:1654
 #, kde-format
@@ -4942,18 +4944,18 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
-msgstr ""
+msgstr "Ekspor"
 
 #: src/svnfrontend/svnactions.cpp:1729
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout"
-msgstr ""
+msgstr "Pemeriksaan"
 
 #: src/svnfrontend/svnactions.cpp:1730
 #, kde-format
 msgid "Exporting"
-msgstr ""
+msgstr "Pengeksporan"
 
 #: src/svnfrontend/svnactions.cpp:1730
 #, kde-format
@@ -4969,7 +4971,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Revert"
-msgstr ""
+msgstr "Kembalikan"
 
 #: src/svnfrontend/svnactions.cpp:1800
 #, kde-format
@@ -5017,7 +5019,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Cleanup"
-msgstr ""
+msgstr "Pembersihan"
 
 #: src/svnfrontend/svnactions.cpp:1920
 #, kde-format
@@ -5028,7 +5030,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Resolve"
-msgstr ""
+msgstr "Menyelesaikan"
 
 #: src/svnfrontend/svnactions.cpp:1936
 #, kde-format
@@ -5049,7 +5051,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Import"
-msgstr ""
+msgstr "Impor"
 
 #: src/svnfrontend/svnactions.cpp:2002
 #, kde-format
@@ -5095,7 +5097,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Move"
-msgstr ""
+msgstr "Pindah"
 
 #: src/svnfrontend/svnactions.cpp:2270
 #, kde-format
@@ -5133,7 +5135,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:2444 src/svnfrontend/svnlogdlg.ui:163
 #, kde-format
 msgid "Item"
-msgstr ""
+msgstr "Butir"
 
 #: src/svnfrontend/svnactions.cpp:2559
 #, kde-format
@@ -5155,7 +5157,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:2659
 #, kde-format
 msgid "Not filling log cache because networking is disabled"
-msgstr ""
+msgstr "Tidak mengisi cache catatan karena jaringan telah dinonfungsikan"
 
 #: src/svnfrontend/svnactions.cpp:2699
 #, kde-format
@@ -5200,7 +5202,7 @@ msgstr ""
 #: src/svnfrontend/svnitem.cpp:427
 #, kde-format
 msgid "Missing"
-msgstr ""
+msgstr "'Hilang"
 
 #: src/svnfrontend/svnitem.cpp:433
 #, kde-format
@@ -5210,17 +5212,17 @@ msgstr ""
 #: src/svnfrontend/svnitem.cpp:436
 #, kde-format
 msgid "Ignored"
-msgstr ""
+msgstr "Diabaikan"
 
 #: src/svnfrontend/svnitem.cpp:439
 #, kde-format
 msgid "External"
-msgstr ""
+msgstr "Eksternal"
 
 #: src/svnfrontend/svnitem.cpp:443
 #, kde-format
 msgid "Conflict"
-msgstr ""
+msgstr "Konflik"
 
 #: src/svnfrontend/svnitem.cpp:445
 #, kde-format
@@ -5235,7 +5237,7 @@ msgstr ""
 #: src/svnfrontend/svnitem.cpp:452
 #, kde-format
 msgid "Incomplete"
-msgstr ""
+msgstr "Belum selesai"
 
 #: src/svnfrontend/svnitem.cpp:455
 #, kde-format
@@ -5246,7 +5248,7 @@ msgstr ""
 #: src/svnfrontend/svnlogdlg.ui:18
 #, kde-format
 msgid "SVN Log"
-msgstr ""
+msgstr "Log SVN"
 
 #. i18n: ectx: property (text), widget (QLabel, startLabel)
 #: src/svnfrontend/svnlogdlg.ui:31
@@ -5306,19 +5308,19 @@ msgstr ""
 #: src/svnfrontend/svnlogdlg.ui:249 src/svnfrontend/svnlogdlgimp.cpp:512
 #, kde-format
 msgid "Annotate"
-msgstr ""
+msgstr "Anotasi"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_pbHelp)
 #: src/svnfrontend/svnlogdlg.ui:275
 #, kde-format
 msgid "Help"
-msgstr ""
+msgstr "Bantuan"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_pbClose)
 #: src/svnfrontend/svnlogdlg.ui:282
 #, kde-format
 msgid "Close"
-msgstr ""
+msgstr "Tutup"
 
 #: src/svnfrontend/svnlogdlgimp.cpp:109
 #, kde-format
@@ -5330,7 +5332,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "SVN Log"
-msgstr ""
+msgstr "Log SVN"
 
 #: src/svnfrontend/svnlogdlgimp.cpp:443
 #, kde-format
@@ -5350,28 +5352,28 @@ msgstr ""
 #: src/svnfrontend/svnlogdlgimp.cpp:459
 #, kde-format
 msgid "Revert this commit"
-msgstr ""
+msgstr "Kembalikan komit ini"
 
 #: src/svnfrontend/svntreeview.cpp:111
 #, kde-format
 msgid "&Move Here"
-msgstr ""
+msgstr "&Pindah Sini"
 
 #: src/svnfrontend/svntreeview.cpp:115
 #, kde-format
 msgid "&Copy Here"
-msgstr ""
+msgstr "&Salin Sini"
 
 #: src/svnfrontend/svntreeview.cpp:117
 #, kde-format
 msgid "C&ancel"
-msgstr ""
+msgstr "&Batal"
 
 #: src/urldlg.cpp:98
 #, kde-format
 msgctxt "@title:window"
 msgid "Open"
-msgstr ""
+msgstr "Buka"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, UrlDlg)
 #: src/urldlg.ui:14

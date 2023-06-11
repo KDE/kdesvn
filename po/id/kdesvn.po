@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:58+0000\n"
-"PO-Revision-Date: 2023-06-08 04:27+0700\n"
+"PO-Revision-Date: 2023-06-10 22:43+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
 "Language: id\n"
@@ -135,7 +135,7 @@ msgstr "Tampilkan konten basis data"
 #: src/kdesvn.cpp:127
 #, kde-format
 msgid "Show the content of log cache database"
-msgstr "Tampilkan konten basis data cache catatan"
+msgstr "Tampilkan konten basis data cache log"
 
 #: src/kdesvn.cpp:134
 #, kde-format
@@ -176,7 +176,7 @@ msgstr "Siap"
 #: src/kdesvn_part.cpp:155
 #, kde-format
 msgid "Logs follow node changes"
-msgstr "Catatan ikut perubahan node"
+msgstr "Log ikut perubahan node"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_ignored_files)
 #. i18n: ectx: label, entry, group (subversion)
@@ -291,12 +291,12 @@ msgstr "Pengaturan untuk tugas berjangka waktu"
 #: src/kdesvn_part.cpp:331
 #, kde-format
 msgid "Diff & Merge"
-msgstr "Diff & Gabung"
+msgstr "Perbedaan & Penggabungan"
 
 #: src/kdesvn_part.cpp:331
 #, kde-format
 msgid "Settings for diff and merge"
-msgstr "Pengaturan untuk diff dan gabung"
+msgstr "Pengaturan untuk perbedaan dan penggabungan"
 
 #: src/kdesvn_part.cpp:332
 #, kde-format
@@ -312,12 +312,12 @@ msgstr "Pengaturan Warna"
 #: src/kdesvn_part.cpp:333 src/settings/revisiontree_settings.ui:6
 #, kde-format
 msgid "Revision tree Settings"
-msgstr "Pengaturan pohon revisi"
+msgstr "Pengaturan ranting revisi"
 
 #: src/kdesvn_part.cpp:333
 #, kde-format
 msgid "Revision tree"
-msgstr "Pohon revisi"
+msgstr "Ranting revisi"
 
 #: src/kdesvn_part.cpp:335
 #, kde-format
@@ -345,7 +345,7 @@ msgstr "Pengaturan cepat"
 #: src/kdesvn_part.rc:49
 #, kde-format
 msgid "Working copy"
-msgstr "Salinan yang bekerja"
+msgstr "Salinan kerja"
 
 #. i18n: ectx: Menu (subversion_repo)
 #: src/kdesvn_part.rc:75
@@ -363,7 +363,7 @@ msgstr "Tampilkan"
 #: src/kdesvn_part.rc:89
 #, kde-format
 msgid "Log cache"
-msgstr "Catatan cache"
+msgstr "Cache log"
 
 #. i18n: ectx: Menu (help)
 #: src/kdesvn_part.rc:98 src/kdesvnui.rc:52
@@ -385,7 +385,7 @@ msgstr "Tindakan"
 #: src/kdesvn_part.rc:242 src/kdesvnui.rc:58
 #, kde-format
 msgid "Subversion toolbar"
-msgstr "Bilah alat Subversion"
+msgstr "Bilah Alat Subversion"
 
 #. i18n: ectx: ToolBar (mainToolBar)
 #: src/kdesvn_part.rc:260 src/kdesvnui.rc:62
@@ -516,12 +516,12 @@ msgstr "Pembuangan selesai."
 #: src/kdesvnview.cpp:431
 #, kde-format
 msgid "Inserted %v not cached log entries of %m."
-msgstr "Entri catatan %m yang dimasukkan bukan cache dari %m."
+msgstr "%v yang disisipkan bukan entri log yang di-cache %m."
 
 #: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:768
 #, kde-format
 msgid "Wrong or missing log (may cancel pressed)."
-msgstr "Catatan salah atau hilang (mungkin kepencet batal)."
+msgstr "Log salah atau hilang (mungkin kepencet batal)."
 
 #: src/kiosvn/kiolistener.cpp:102
 #, kde-format
@@ -686,7 +686,7 @@ msgstr "Tidak bisa mendapatkan data untuk penulisan."
 #: src/kiosvn/kiosvn.cpp:419
 #, kde-format
 msgid "Committing %1"
-msgstr "Mengomit %1"
+msgstr "Menyerahkan %1"
 
 #: src/kiosvn/kiosvn.cpp:441
 #, kde-format
@@ -702,17 +702,17 @@ msgstr "%1 disalin ke %2"
 #: src/svnfrontend/svnactions.cpp:2278
 #, kde-format
 msgid "Committed revision %1."
-msgstr "Revisi terkomit %1."
+msgstr "Revisi diserahkan %1."
 
 #: src/kiosvn/kiosvn.cpp:790
 #, kde-format
 msgid "Nothing to commit."
-msgstr "Tidak ada untuk dikomit."
+msgstr "Tidak ada untuk diserahkan."
 
 #: src/kiosvn/kiosvn.cpp:837
 #, kde-format
 msgid "Empty logs"
-msgstr "Catatan kosong"
+msgstr "Log kosong"
 
 #: src/ksvnwidgets/authdialogwidget.cpp:34
 #, kde-format
@@ -751,7 +751,7 @@ msgstr "Nama pengguna:"
 #: src/ksvnwidgets/commitmessage.ui:6
 #, kde-format
 msgid "Commit Message"
-msgstr "Pesan Komit"
+msgstr "Serahkan Pesan"
 
 #. i18n: ectx: property (text), widget (QLabel, m_Reviewlabel)
 #: src/ksvnwidgets/commitmessage.ui:27
@@ -823,7 +823,7 @@ msgstr ""
 #: src/ksvnwidgets/commitmessage.ui:120
 #, kde-format
 msgid "Diff item"
-msgstr ""
+msgstr "Perbedaan item"
 
 #. i18n: ectx: property (text), widget (QLabel, m_HeadLabel)
 #: src/ksvnwidgets/commitmessage.ui:152
@@ -865,7 +865,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Commit Log"
-msgstr "Catatan Komit"
+msgstr "Log Serahan"
 
 #: src/ksvnwidgets/commitmsg_impl.cpp:455
 #, kde-format
@@ -1053,7 +1053,7 @@ msgstr "Ganti"
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:55
 #, kde-format
 msgid "(Un)Lock"
-msgstr ""
+msgstr "(Buka)Kunci"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, RevertForm)
 #: src/ksvnwidgets/revertform.ui:14
@@ -1217,13 +1217,13 @@ msgstr ""
 #: src/settings/cmdexecsettings.ui:14
 #, kde-format
 msgid "Show log after executing a command"
-msgstr ""
+msgstr "Tampilkan log setelah mengeksekusi sebuah perintah"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: src/settings/cmdexecsettings.ui:23
 #, kde-format
 msgid "Minimum log lines to show:"
-msgstr ""
+msgstr "Minimum baris log yang mau ditampilkan:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_cmdline_log_minline)
 #: src/settings/cmdexecsettings.ui:33
@@ -1249,7 +1249,7 @@ msgstr ""
 #: src/settings/cmdexecsettings.ui:54
 #, kde-format
 msgid "Do not display context menu in Konqueror"
-msgstr ""
+msgstr "Jangan tampilkan menu konteks di Konqueror"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
 #: src/settings/cmdexecsettings.ui:61
@@ -1263,19 +1263,19 @@ msgstr ""
 #: src/settings/cmdexecsettings.ui:64
 #, kde-format
 msgid "Do not display entries in toplevel action menu"
-msgstr ""
+msgstr "Jangan tampilkan entri-entri di menu aksi toplevel"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_kio_use_standard_logmsg)
 #: src/settings/cmdexecsettings.ui:71
 #, kde-format
 msgid "KIO operations use standard log message"
-msgstr ""
+msgstr "Operasi KIO menggunakan pesan log standar"
 
 #. i18n: ectx: property (text), widget (QLabel, stdLogmsgLabel)
 #: src/settings/cmdexecsettings.ui:80
 #, kde-format
 msgid "Standard message:"
-msgstr ""
+msgstr "Pesan standar:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_kio_can_overwrite)
 #: src/settings/cmdexecsettings.ui:98
@@ -1298,7 +1298,7 @@ msgstr ""
 #: src/settings/cmdexecsettings.ui:106
 #, kde-format
 msgid "KIO can overwrite"
-msgstr ""
+msgstr "KIO bisa menimpa"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_display_dockmsg)
 #: src/settings/cmdexecsettings.ui:113
@@ -1321,7 +1321,7 @@ msgstr ""
 #: src/settings/cmdexecsettings.ui:120
 #, kde-format
 msgid "KIO shows progress messages"
-msgstr ""
+msgstr "KIO menampilkan pesan progres"
 
 #: src/settings/cmdexecsettings_impl.cpp:27
 #, kde-format
@@ -1333,27 +1333,27 @@ msgstr ""
 #: src/settings/diffmergesettings.ui:11 src/settings/kdesvn_part.kcfg:29
 #, kde-format
 msgid "Diff ignores content type"
-msgstr ""
+msgstr "Perbedaan mengabaikan tipe konten"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_tree_diff_rec)
 #: src/settings/diffmergesettings.ui:18
 #: src/svnfrontend/graphtree/revgraphview.cpp:853
 #, kde-format
 msgid "Diff in revision tree is recursive"
-msgstr ""
+msgstr "Perbedaan dalam ranting revisi adalah rekursif"
 
 #. i18n: ectx: label, entry, group (general_items)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_spaces)
 #: src/settings/diffmergesettings.ui:25 src/settings/kdesvn_part.kcfg:33
 #, kde-format
 msgid "Diff ignores white space changes"
-msgstr ""
+msgstr "Perbedaan mengabaikan perubahan spasi putih"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_all_white_spaces)
 #: src/settings/diffmergesettings.ui:32
 #, kde-format
 msgid "Diff ignores all white spaces"
-msgstr ""
+msgstr "Perbedaan mengabaikan semua spasi putih"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_external_diff)
 #: src/settings/diffmergesettings.ui:39
@@ -1367,7 +1367,7 @@ msgstr ""
 #: src/settings/diffmergesettings.ui:42
 #, kde-format
 msgid "Use external diff display"
-msgstr ""
+msgstr "Gunakan tampilan perbedaan eksternal"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_extern_merge_default)
 #: src/settings/diffmergesettings.ui:49
@@ -1381,32 +1381,32 @@ msgstr ""
 #: src/settings/diffmergesettings.ui:52 src/settings/kdesvn_part.kcfg:158
 #, kde-format
 msgid "Prefer external merge program"
-msgstr ""
+msgstr "Lebih suka program penggabungan eksternal"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_gitformat_default)
 #: src/settings/diffmergesettings.ui:59
 #, kde-format
 msgid "Use Git diff format"
-msgstr ""
+msgstr "Gunakan format perbedaan Git"
 
 #. i18n: ectx: label, entry, group (general_items)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_copies_as_add)
 #: src/settings/diffmergesettings.ui:66 src/settings/kdesvn_part.kcfg:45
 #, kde-format
 msgid "Show copies as add"
-msgstr ""
+msgstr "Tampilkan salinan sebagai tambah"
 
 #. i18n: ectx: property (text), widget (QLabel, resolveLabel)
 #: src/settings/diffmergesettings.ui:77
 #, kde-format
 msgid "Conflict resolver program:"
-msgstr ""
+msgstr "Program penuntas konflik:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: src/settings/diffmergesettings.ui:90
 #, kde-format
 msgid "External merge program:"
-msgstr ""
+msgstr "Program penggabungan eksternal"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, kcfg_conflict_resolver)
 #: src/settings/diffmergesettings.ui:115
@@ -1443,7 +1443,7 @@ msgstr ""
 #: src/settings/diffmergesettings.ui:141
 #, kde-format
 msgid "External diff display:"
-msgstr ""
+msgstr "Tampilan perbedaan eksternal:"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, kcfg_external_merge_program)
 #: src/settings/diffmergesettings.ui:154
@@ -1503,7 +1503,7 @@ msgstr ""
 #: src/settings/diffmergesettings.ui:200
 #, kde-format
 msgid "see \"What's this\" for details"
-msgstr ""
+msgstr "lihat \"Apakah ini\" untuk lebih jelasnya"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DispColorSettings)
 #: src/settings/dispcolor_settings.ui:6
@@ -1515,61 +1515,61 @@ msgstr ""
 #: src/settings/dispcolor_settings.ui:14
 #, kde-format
 msgid "Mark changed and locked items colored"
-msgstr ""
+msgstr "Tanda warna item-item yang dikunci dan diubah"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel5)
 #: src/settings/dispcolor_settings.ui:56
 #, kde-format
 msgid "Locked items:"
-msgstr ""
+msgstr "Item-item yang dikunci:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
 #: src/settings/dispcolor_settings.ui:76
 #, kde-format
 msgid "Not versioned items:"
-msgstr ""
+msgstr "Item-item yang tidak berversi:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: src/settings/dispcolor_settings.ui:89
 #, kde-format
 msgid "Remote changed items:"
-msgstr ""
+msgstr "Item-item yang diubah jarak jauh:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: src/settings/dispcolor_settings.ui:102
 #, kde-format
 msgid "Added items:"
-msgstr ""
+msgstr "Item-item yang ditambahkan:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: src/settings/dispcolor_settings.ui:115
 #, kde-format
 msgid "Deleted items:"
-msgstr ""
+msgstr "Item-item yang dihapus:"
 
 #. i18n: ectx: property (text), widget (QLabel, Conflicted_items_label)
 #: src/settings/dispcolor_settings.ui:156
 #, kde-format
 msgid "Conflicted items:"
-msgstr ""
+msgstr "Item-item yang berkonflik:"
 
 #. i18n: ectx: property (text), widget (QLabel, Missed_items_label)
 #: src/settings/dispcolor_settings.ui:169
 #, kde-format
 msgid "Missed items:"
-msgstr ""
+msgstr "Item-item yang hilang:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: src/settings/dispcolor_settings.ui:182
 #, kde-format
 msgid "Local changed items:"
-msgstr ""
+msgstr "Item-item yang diubah lokal:"
 
 #. i18n: ectx: property (text), widget (QLabel, Need_lock_label_2)
 #: src/settings/dispcolor_settings.ui:195
 #, kde-format
 msgid "Item needs lock:"
-msgstr ""
+msgstr "Item yang memerlukan kunci:"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DisplaySettings)
 #: src/settings/display_settings.ui:6
@@ -1581,7 +1581,7 @@ msgstr "Pengaturan"
 #: src/settings/display_settings.ui:14
 #, kde-format
 msgid "Size of Listviewicons"
-msgstr ""
+msgstr "Ukuran ikon tampilan daftar"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_display_overlays)
 #: src/settings/display_settings.ui:24
@@ -1604,19 +1604,19 @@ msgstr ""
 #: src/settings/display_settings.ui:33
 #, kde-format
 msgid "Mark item status with icon overlay"
-msgstr ""
+msgstr "Tandai status item dengan hamparan ikon"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_case_sensitive_sort)
 #: src/settings/display_settings.ui:40
 #, kde-format
 msgid "Items sorting order is case sensitive"
-msgstr ""
+msgstr "Urutan pengurutan item-item adalah sensitif huruf"
 
 #. i18n: ectx: property (text), widget (QLabel, m_MaxLogLabel)
 #: src/settings/display_settings.ui:47
 #, kde-format
 msgid "Maximum log messages in history:"
-msgstr ""
+msgstr "Maksimum pesan log dalam histori:"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_file_tips)
 #: src/settings/display_settings.ui:67
@@ -1633,19 +1633,19 @@ msgstr ""
 #: src/settings/display_settings.ui:70
 #, kde-format
 msgid "Show file info"
-msgstr ""
+msgstr "Tampilkan informasi file"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_colored_blame)
 #: src/settings/display_settings.ui:77
 #, kde-format
 msgid "Display colored annotate"
-msgstr ""
+msgstr "Tampilan anotasi berwarna"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_show_navigation_panel)
 #: src/settings/display_settings.ui:84
 #, kde-format
 msgid "Use navigation panel"
-msgstr ""
+msgstr "Gunakan panel navigasi"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:9
@@ -1657,7 +1657,7 @@ msgstr ""
 #: src/settings/kdesvn_part.kcfg:13
 #, kde-format
 msgid "Size of the icons"
-msgstr ""
+msgstr "Ukuran ikon-ikon"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:17
@@ -1681,19 +1681,19 @@ msgstr ""
 #: src/settings/kdesvn_part.kcfg:37
 #, kde-format
 msgid "Diff ignores all white space"
-msgstr ""
+msgstr "Perbedaan mengabaikan semua spasi putih"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:41
 #, kde-format
 msgid "Show diff in Git format"
-msgstr ""
+msgstr "Tampilkan perbedaan dalam format Git"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:49
 #, kde-format
 msgid "Maximum number of log messages"
-msgstr ""
+msgstr "Jumlah maksimum pesan log"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:53
@@ -1718,7 +1718,7 @@ msgstr ""
 #: src/settings/kdesvn_part.kcfg:76 src/settings/subversion_settings.ui:174
 #, kde-format
 msgid "Review items before commit"
-msgstr ""
+msgstr "Ulas item-item sebelum diserahkan"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:88
@@ -1731,32 +1731,32 @@ msgstr ""
 #: src/settings/kdesvn_part.kcfg:92 src/settings/subversion_settings.ui:145
 #, kde-format
 msgid "Log follows node changes"
-msgstr ""
+msgstr "Log ikut perubahan node"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_always_list_changed_files)
 #: src/settings/kdesvn_part.kcfg:96 src/settings/subversion_settings.ui:161
 #, kde-format
 msgid "Log always reads list of changed files"
-msgstr ""
+msgstr "Log selalu membaca daftar file-file yang diubah"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:100
 #, kde-format
 msgid "Start check for updates when open working copy"
-msgstr ""
+msgstr "Mulai periksa pembaruan ketika membuka salinan kerja"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:104
 #, kde-format
 msgid "Start caching latest logs on open or commit"
-msgstr ""
+msgstr "Mulai men-cache log terakhir saat buka atau serahkan"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:108
 #, kde-format
 msgid "Get detailed information when making a remote listing"
-msgstr ""
+msgstr "Dapatkan informasi terperinci ketika membuat daftar jarak jauh"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:112
@@ -1781,7 +1781,7 @@ msgstr ""
 #: src/settings/kdesvn_part.kcfg:124 src/settings/subversion_settings.ui:107
 #, kde-format
 msgid "Store passwords for remote connections"
-msgstr ""
+msgstr "Simpan kata sandi untuk koneksi jarak jauh"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:128
@@ -1794,7 +1794,7 @@ msgstr ""
 #: src/settings/kdesvn_part.kcfg:132 src/settings/subversion_settings.ui:138
 #, kde-format
 msgid "Use internal password cache"
-msgstr ""
+msgstr "Gunakan cache kata sandi internal"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:136
@@ -1849,37 +1849,37 @@ msgstr ""
 #: src/settings/kdesvn_part.kcfg:213 src/settings/revisiontree_settings.ui:129
 #, kde-format
 msgid "Direction of revision tree"
-msgstr ""
+msgstr "Arah ranting revisi"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:217
 #, kde-format
 msgid "Color for added items"
-msgstr ""
+msgstr "Warna untuk item-item yang ditambahkan"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:221
 #, kde-format
 msgid "Color for deleted items"
-msgstr ""
+msgstr "Warna untuk item-item yang dihapus"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:225
 #, kde-format
 msgid "Color for copied items"
-msgstr ""
+msgstr "Warna untuk item-item yang disalin"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:229
 #, kde-format
 msgid "Color for renamed items"
-msgstr ""
+msgstr "Warna untuk item-item yang diubah namanya"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:233
 #, kde-format
 msgid "Color for modified items"
-msgstr ""
+msgstr "Warna untuk item-item yang dimodifikasi"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:237
@@ -1952,7 +1952,7 @@ msgstr ""
 #: src/settings/polling_settings.ui:11
 #, kde-format
 msgid "Check modified items every"
-msgstr ""
+msgstr "Periksa item-item yang dimodif setiap"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -1973,7 +1973,7 @@ msgstr ""
 #: src/settings/polling_settings.ui:38
 #, kde-format
 msgid "Check for updated items every"
-msgstr ""
+msgstr "Periksa item-item yang diperbarui setiap"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
 #: src/settings/revisiontree_settings.ui:28
@@ -2003,31 +2003,31 @@ msgstr "Atas ke bawah"
 #: src/settings/revisiontree_settings.ui:51
 #, kde-format
 msgid "Color for added items:"
-msgstr ""
+msgstr "Warna untuk item-item yang ditambahkan:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: src/settings/revisiontree_settings.ui:77
 #, kde-format
 msgid "Color for copied items:"
-msgstr ""
+msgstr "Warna untuk item-item yang disalin:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: src/settings/revisiontree_settings.ui:90
 #, kde-format
 msgid "Color for renamed items:"
-msgstr ""
+msgstr "Warna untuk item-item yang diubah namanya:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel5)
 #: src/settings/revisiontree_settings.ui:103
 #, kde-format
 msgid "Color for modified items:"
-msgstr ""
+msgstr "Warna untuk item-item yang dimodifikasi:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: src/settings/revisiontree_settings.ui:136
 #, kde-format
 msgid "Color for deleted items:"
-msgstr ""
+msgstr "Warna untuk item-item yang dihapus:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_fill_cache_on_tree)
 #: src/settings/revisiontree_settings.ui:175
@@ -2049,7 +2049,7 @@ msgstr ""
 #: src/settings/revisiontree_settings.ui:183
 #, kde-format
 msgid "Check log cache fill before reading tree"
-msgstr ""
+msgstr "Periksa isi cache log sebelum membaca ranting"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_start_updates_check_on_open)
 #: src/settings/subversion_settings.ui:14
@@ -2061,7 +2061,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:17
 #, kde-format
 msgid "Start check for updates when open a working copy"
-msgstr ""
+msgstr "Mulai periksa pembaruan ketika membuka sebuah salinan kerja"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:33
@@ -2073,7 +2073,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:36
 #, kde-format
 msgid "Start fill log cache on open"
-msgstr ""
+msgstr "Mulai isi cache log saat membuka"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:43
@@ -2095,7 +2095,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:49
 #, kde-format
 msgid "Check if items has \"svn:needs-lock\" property set"
-msgstr ""
+msgstr "Periksa jika item memiliki set properti \"svn:needs-lock\""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:56
@@ -2120,13 +2120,13 @@ msgstr ""
 #: src/settings/subversion_settings.ui:64
 #, kde-format
 msgid "Get file details while remote listing"
-msgstr ""
+msgstr "Dapatkan rincian file ketika mendaftar jarak jauh"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_info_recursive)
 #: src/settings/subversion_settings.ui:74
 #, kde-format
 msgid "Gain item info recursive"
-msgstr ""
+msgstr "Dapatkan info item secara rekursif"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:84
@@ -2149,7 +2149,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:91
 #, kde-format
 msgid "Always get properties on networked repositories"
-msgstr ""
+msgstr "Selalu dapatkan properti saat repositori berada dalam jaringan"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:101
@@ -2195,7 +2195,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:125
 #, kde-format
 msgid "Store passwords into KDE Wallet"
-msgstr ""
+msgstr "Simpan kata sandi ke dalam KDE Wallet"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_password_cache)
 #: src/settings/subversion_settings.ui:135
@@ -2207,7 +2207,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:155
 #, kde-format
 msgid "Read detailed change lists"
-msgstr ""
+msgstr "Baca daftar ubahan terperinci"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_log_always_list_changed_files)
 #: src/settings/subversion_settings.ui:158
@@ -2222,19 +2222,21 @@ msgstr ""
 #: src/settings/subversion_settings.ui:171
 #, kde-format
 msgid "List items next commit will send or not"
-msgstr ""
+msgstr "Daftar item-item serahan selanjutnya akan dikirim atau tidak"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:184
 #, kde-format
 msgid "Should unversioned items displayed in commit dialog or not."
 msgstr ""
+"Seharusnya item-item yang tak diversikan ditampilkan dalam dialog serahan "
+"atau tidak."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:187
 #, kde-format
 msgid "Hide new items in commit box"
-msgstr ""
+msgstr "Sembunyikan item-item baru dalam kotak serahan"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_add_as_modification)
 #: src/settings/subversion_settings.ui:197
@@ -2249,7 +2251,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:200
 #, kde-format
 msgid "Update modifies instead of conflicts"
-msgstr ""
+msgstr "Perbarui modifikasi sebagai gantinya konflik"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_make_parents)
 #: src/settings/subversion_settings.ui:207
@@ -2263,18 +2265,20 @@ msgstr ""
 #: src/settings/subversion_settings.ui:210
 #, kde-format
 msgid "Update makes missing parents"
-msgstr ""
+msgstr "Perbarui membuat orang tua hilang"
 
 #: src/svnfrontend/background/fillcachethread.cpp:74
 #, kde-format
 msgid ""
 "Not filling log cache because it is disabled due setting for this repository."
 msgstr ""
+"Tidak mengisi cache log karena dinonfungsikan pada pengaturan untuk "
+"repositori ini."
 
 #: src/svnfrontend/background/fillcachethread.cpp:76
 #, kde-format
 msgid "Filling log cache in background."
-msgstr "Pengisian cache catatan di latar belakang."
+msgstr "Pengisian cache log di latar belakang."
 
 #: src/svnfrontend/background/fillcachethread.cpp:98
 #, kde-format
@@ -2289,7 +2293,7 @@ msgstr ""
 #: src/svnfrontend/background/fillcachethread.cpp:120
 #, kde-format
 msgid "Filling log cache in background finished."
-msgstr "Pengisian cache catatan di latar belakang selesai."
+msgstr "Pengisian cache log di latar belakang selesai."
 
 #: src/svnfrontend/background/tcontextlistener.cpp:182
 #, kde-format
@@ -2428,22 +2432,22 @@ msgstr ""
 #: src/svnfrontend/ccontextlistener.cpp:81
 #, kde-format
 msgid "Commit Modified"
-msgstr ""
+msgstr "Serahan Dimodifikasi"
 
 #: src/svnfrontend/ccontextlistener.cpp:82
 #, kde-format
 msgid "Commit Added"
-msgstr ""
+msgstr "Serahan Ditambahkan"
 
 #: src/svnfrontend/ccontextlistener.cpp:83
 #, kde-format
 msgid "Commit Deleted"
-msgstr ""
+msgstr "Serahan Dihapus"
 
 #: src/svnfrontend/ccontextlistener.cpp:84
 #, kde-format
 msgid "Commit Replaced"
-msgstr ""
+msgstr "Serahan Diganti"
 
 #: src/svnfrontend/ccontextlistener.cpp:87
 #, kde-format
@@ -3390,7 +3394,7 @@ msgstr "<b>Tanggal</b>%1%2%3"
 #: src/svnfrontend/graphtree/revgraphview.cpp:558
 #, kde-format
 msgid "<b>Log</b>%1%2%3"
-msgstr "<b>Catatan</b>%1%2%3"
+msgstr "<b>Log</b>%1%2%3"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:833
 #, kde-format
@@ -3421,7 +3425,7 @@ msgstr "Pilih item"
 #: src/svnfrontend/graphtree/revgraphview.cpp:847
 #, kde-format
 msgid "Display details"
-msgstr ""
+msgstr "Tampilan rinci"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:850
 #, kde-format
@@ -3709,12 +3713,12 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:552
 #, kde-format
 msgid "Details"
-msgstr "Detail"
+msgstr "Rincian"
 
 #: src/svnfrontend/maintreewidget.cpp:557
 #, kde-format
 msgid "Show details about selected item"
-msgstr ""
+msgstr "Tampilkan rincian tentang item yang dipilih"
 
 #: src/svnfrontend/maintreewidget.cpp:559
 #, kde-format
@@ -3977,7 +3981,7 @@ msgstr "Perbarui untuk revisi..."
 #: src/svnfrontend/maintreewidget.cpp:889 src/svnfrontend/svnactions.cpp:1016
 #, kde-format
 msgid "Commit"
-msgstr "Komit"
+msgstr "Serahkan"
 
 #: src/svnfrontend/maintreewidget.cpp:777
 #: src/svnfrontend/maintreewidget.cpp:784
@@ -4009,7 +4013,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:807
 #, kde-format
 msgid "Diff items"
-msgstr ""
+msgstr "Perbedaan item"
 
 #: src/svnfrontend/maintreewidget.cpp:805
 #: src/svnfrontend/maintreewidget.cpp:812
@@ -4025,7 +4029,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:820
 #, kde-format
 msgid "Merge"
-msgstr "Gabung"
+msgstr "Gabungkan"
 
 #: src/svnfrontend/maintreewidget.cpp:821
 #, kde-format
@@ -4035,7 +4039,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:824
 #, kde-format
 msgid "Merge..."
-msgstr "Gabung..."
+msgstr "Gabungkan..."
 
 #: src/svnfrontend/maintreewidget.cpp:829
 #, kde-format
@@ -4145,13 +4149,13 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:903
 #, kde-format
 msgid "Settings for current repository"
-msgstr ""
+msgstr "Pengaturan untuk repositori saat ini"
 
 #: src/svnfrontend/maintreewidget.cpp:1081
 #: src/svnfrontend/maintreewidget.cpp:2049
 #, kde-format
 msgid "Stop updating the log cache"
-msgstr ""
+msgstr "Hentikan pembaruan cache log"
 
 #: src/svnfrontend/maintreewidget.cpp:1278
 #, kde-format
@@ -4217,7 +4221,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Merge"
-msgstr "Gabung"
+msgstr "Gabungkan"
 
 #: src/svnfrontend/maintreewidget.cpp:2258
 #, kde-format
@@ -4633,7 +4637,7 @@ msgstr "Masukkan nama folder:"
 #, kde-format
 msgctxt "@title:window"
 msgid "Details"
-msgstr "Detail"
+msgstr "Rincian"
 
 #: src/svnfrontend/svnactions.cpp:708
 #, kde-format
@@ -4648,7 +4652,7 @@ msgstr "URL"
 #: src/svnfrontend/svnactions.cpp:749
 #, kde-format
 msgid "Canonical repository URL"
-msgstr ""
+msgstr "URL repositori canonical"
 
 #: src/svnfrontend/svnactions.cpp:752
 #, kde-format
@@ -4713,7 +4717,7 @@ msgstr "UUID"
 #: src/svnfrontend/svnactions.cpp:805
 #, kde-format
 msgid "Last committed"
-msgstr "Terakhir dikomit"
+msgstr "Terakhir diserahkan"
 
 #: src/svnfrontend/svnactions.cpp:807
 #, kde-format
@@ -4806,23 +4810,23 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:1019
 #, kde-format
 msgid "Delete and Commit"
-msgstr "Hapus dan Komit"
+msgstr "Hapus dan Serahkan"
 
 #: src/svnfrontend/svnactions.cpp:1021
 #, kde-format
 msgid "Add and Commit"
-msgstr "Tambahkan dan Komit"
+msgstr "Tambahkan dan Serahkan"
 
 #: src/svnfrontend/svnactions.cpp:1051
 #, kde-format
 msgctxt "@title:window"
 msgid "Commit"
-msgstr "Komit"
+msgstr "Serahkan"
 
 #: src/svnfrontend/svnactions.cpp:1051
 #, kde-format
 msgid "Commit - hit Cancel for abort"
-msgstr "Komit - tekan Batal untuk membatalkan"
+msgstr "Serahkan - tekan Batal untuk membatalkan"
 
 #: src/svnfrontend/svnactions.cpp:1078
 #, kde-format
@@ -5123,7 +5127,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:2437
 #, kde-format
 msgid "No unversioned items found."
-msgstr ""
+msgstr "Tidak ada item belum diversikan yang ditemukan"
 
 #: src/svnfrontend/svnactions.cpp:2441
 #, kde-format
@@ -5135,14 +5139,14 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:2444 src/svnfrontend/svnlogdlg.ui:163
 #, kde-format
 msgid "Item"
-msgstr "Butir"
+msgstr "Item"
 
 #: src/svnfrontend/svnactions.cpp:2559
 #, kde-format
 msgid "Found %1 modified item"
 msgid_plural "Found %1 modified items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ditemukan %1 item dimodifikasi"
+msgstr[1] "Ditemukan %1 item dimodifikasi"
 
 #: src/svnfrontend/svnactions.cpp:2587
 #, kde-format
@@ -5157,7 +5161,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:2659
 #, kde-format
 msgid "Not filling log cache because networking is disabled"
-msgstr "Tidak mengisi cache catatan karena jaringan telah dinonfungsikan"
+msgstr "Tidak mengisi cache log karena jaringan telah dinonfungsikan"
 
 #: src/svnfrontend/svnactions.cpp:2699
 #, kde-format
@@ -5232,7 +5236,7 @@ msgstr ""
 #: src/svnfrontend/svnitem.cpp:449
 #, kde-format
 msgid "Merged"
-msgstr ""
+msgstr "Digabungkan"
 
 #: src/svnfrontend/svnitem.cpp:452
 #, kde-format
@@ -5352,7 +5356,7 @@ msgstr ""
 #: src/svnfrontend/svnlogdlgimp.cpp:459
 #, kde-format
 msgid "Revert this commit"
-msgstr "Kembalikan komit ini"
+msgstr "Kembalikan serahan ini"
 
 #: src/svnfrontend/svntreeview.cpp:111
 #, kde-format

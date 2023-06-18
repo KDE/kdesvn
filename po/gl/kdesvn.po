@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-10 00:58+0000\n"
-"PO-Revision-Date: 2023-06-05 14:18+0200\n"
+"PO-Revision-Date: 2023-06-17 13:27+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1091,8 +1091,7 @@ msgstr "Reverter as entradas"
 #: src/ksvnwidgets/revertform.ui:20
 #, kde-format
 msgid "Really revert these entries to pristine state?"
-msgstr ""
-"Está seguro de que quere restabelecer estas estradas ao seu estado limpo?"
+msgstr "Seguro que quere restabelecer as estradas ao seu estado limpo?"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:33
 #, kde-format
@@ -1545,7 +1544,7 @@ msgstr ""
 "<p align=\"center\">\n"
 "<b><tt>&lt;programa&gt; &lt;opcións do programa&gt; %s1 %s2 %t</tt></b>\n"
 "</p>\n"
-"Os códigos de substitución son:<br>\n"
+"Códigos de substitución:<br>\n"
 "<b><tt>%s1</tt></b> é a primeira fonte para fusionar.<br>\n"
 "<b><tt>%s2</tt></b> é a segunda fonte para fusionar, se é unha revisión "
 "distinta da primeira fonte.<br>\n"
@@ -3325,9 +3324,9 @@ msgid ""
 "<b>'false'</b>/<b>'no'</b>."
 msgstr ""
 "Usar o valor <b>'yes'</b> para mostrar un aviso cando non se insire ningunha "
-"incidencia no diálogo de remisión. Os posíbeis valores son:<br/> <b>'true'</"
-"b>/<b>'yes'</b> (mostrar o aviso) ou <b>'false'</b>/<b>'no'</b> (non mostrar "
-"o aviso)."
+"incidencia no diálogo de remisión. Posíbeis valores:<br/> <b>'true'</b>/"
+"<b>'yes'</b> (mostrar o aviso) ou <b>'false'</b>/<b>'no'</b> (non mostrar o "
+"aviso)."
 
 #: src/svnfrontend/editpropsdlg.cpp:120
 #, kde-format

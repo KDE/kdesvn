@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-10 00:58+0000\n"
+"POT-Creation-Date: 2023-07-04 00:50+0000\n"
 "PO-Revision-Date: 2023-02-24 21:24+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -718,8 +718,8 @@ msgstr "Calea către depozit:"
 msgid "Copied %1 to %2"
 msgstr "Copiat în %1 la revizia %2"
 
-#: src/kiosvn/kiosvn.cpp:788 src/svnfrontend/svnactions.cpp:1059
-#: src/svnfrontend/svnactions.cpp:2278
+#: src/kiosvn/kiosvn.cpp:788 src/svnfrontend/svnactions.cpp:1119
+#: src/svnfrontend/svnactions.cpp:2338
 #, kde-format
 msgid "Committed revision %1."
 msgstr "Revizie %1 propagată."
@@ -915,7 +915,7 @@ msgid "Select text file to insert:"
 msgstr "Selectați fișierul text pentru inserare"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DeleteForm)
-#: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1576
+#: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1636
 #, kde-format
 msgid "Really delete these entries?"
 msgstr "Chiar doriți să ștergeți aceste intrări?"
@@ -1088,7 +1088,7 @@ msgstr "Copiază"
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:43
 #: src/svnfrontend/ccontextlistener.cpp:68
 #: src/svnfrontend/maintreewidget.cpp:709
-#: src/svnfrontend/maintreewidget.cpp:718 src/svnfrontend/svnactions.cpp:1014
+#: src/svnfrontend/maintreewidget.cpp:718 src/svnfrontend/svnactions.cpp:1038
 #, kde-format
 msgid "Delete"
 msgstr "Șterge"
@@ -1099,7 +1099,7 @@ msgid "Modify (content or property)"
 msgstr "Modifică (proprietate sau conținut)"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:51
-#: src/svnfrontend/svnactions.cpp:794
+#: src/svnfrontend/svnactions.cpp:796
 #, kde-format
 msgid "Replace"
 msgstr "Înlocuit"
@@ -3950,7 +3950,7 @@ msgid "Image (*.png)"
 msgstr ""
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:94
-#: src/svnfrontend/svnactions.cpp:316
+#: src/svnfrontend/svnactions.cpp:318
 #, fuzzy, kde-format
 #| msgid "Get Logs"
 msgctxt "@title:window"
@@ -3958,7 +3958,7 @@ msgid "Logs"
 msgstr "Recuperează jurnalele"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:94
-#: src/svnfrontend/svnactions.cpp:317
+#: src/svnfrontend/svnactions.cpp:319
 #, fuzzy, kde-format
 #| msgid "Getting logs - hit cancel for abort"
 msgid "Getting logs - hit Cancel for abort"
@@ -4338,7 +4338,7 @@ msgstr "Deblochează elementele curente"
 msgid "Free existing lock on current item"
 msgstr "Deblochează elemntul curent"
 
-#: src/svnfrontend/maintreewidget.cpp:628 src/svnfrontend/svnactions.cpp:668
+#: src/svnfrontend/maintreewidget.cpp:628 src/svnfrontend/svnactions.cpp:670
 #, kde-format
 msgid "New folder"
 msgstr "Dosar nou"
@@ -4515,7 +4515,7 @@ msgstr "Actualizare la revizia..."
 
 #: src/svnfrontend/maintreewidget.cpp:769
 #: src/svnfrontend/maintreewidget.cpp:774
-#: src/svnfrontend/maintreewidget.cpp:889 src/svnfrontend/svnactions.cpp:1016
+#: src/svnfrontend/maintreewidget.cpp:889 src/svnfrontend/svnactions.cpp:1045
 #, kde-format
 msgid "Commit"
 msgstr "Comite"
@@ -4621,8 +4621,8 @@ msgstr "Exportă calea depozitului curent"
 msgid "Select browse revision"
 msgstr "Alegeți revizia de răsfoit"
 
-#: src/svnfrontend/maintreewidget.cpp:850 src/svnfrontend/svnactions.cpp:1647
-#: src/svnfrontend/svnactions.cpp:1654
+#: src/svnfrontend/maintreewidget.cpp:850 src/svnfrontend/svnactions.cpp:1707
+#: src/svnfrontend/svnactions.cpp:1714
 #, kde-format
 msgid "Checkout a repository"
 msgstr "Verifică un depozit"
@@ -4768,7 +4768,7 @@ msgstr "Generare de dispunere de bază automată de către kdesvn"
 msgid "May not make subdirectories of a file"
 msgstr "Nu poate crea subdirectoare la un fișier"
 
-#: src/svnfrontend/maintreewidget.cpp:2196 src/svnfrontend/svnactions.cpp:2244
+#: src/svnfrontend/maintreewidget.cpp:2196 src/svnfrontend/svnactions.cpp:2304
 #, fuzzy, kde-format
 #| msgid "Merge"
 msgctxt "@title:window"
@@ -4787,8 +4787,8 @@ msgctxt "@title:window"
 msgid "Relocate Path %1"
 msgstr "Restabilește calea %1"
 
-#: src/svnfrontend/maintreewidget.cpp:2278 src/svnfrontend/svnactions.cpp:1647
-#: src/svnfrontend/svnactions.cpp:1903
+#: src/svnfrontend/maintreewidget.cpp:2278 src/svnfrontend/svnactions.cpp:1707
+#: src/svnfrontend/svnactions.cpp:1963
 #, kde-format
 msgid "Invalid url given!"
 msgstr ""
@@ -5037,7 +5037,7 @@ msgid "%1 at revision %2"
 msgstr "%1 la revizia %2"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:317
-#: src/svnfrontend/svnactions.cpp:744
+#: src/svnfrontend/svnactions.cpp:746
 #, kde-format
 msgid "Name"
 msgstr "Denumire"
@@ -5053,7 +5053,7 @@ msgid "Last changed Revision"
 msgstr "Reviziile ultimei modificări"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:323
-#: src/svnfrontend/svnactions.cpp:803
+#: src/svnfrontend/svnactions.cpp:805
 #, kde-format
 msgid "Last author"
 msgstr "Ultimul autor"
@@ -5125,619 +5125,620 @@ msgstr "%p% din %1"
 msgid "%1 of %2"
 msgstr "%1 din %2"
 
-#: src/svnfrontend/svnactions.cpp:185
+#: src/svnfrontend/svnactions.cpp:187
 #, kde-format
 msgid "Finished"
 msgstr "Terminat"
 
-#: src/svnfrontend/svnactions.cpp:355
+#: src/svnfrontend/svnactions.cpp:357
 #, kde-format
 msgid "Got no logs"
 msgstr "Nici o intrare de jurnal obținută"
 
-#: src/svnfrontend/svnactions.cpp:479
+#: src/svnfrontend/svnactions.cpp:481
 #, kde-format
 msgid "Got no info."
 msgstr "Nici o informație obținută"
 
-#: src/svnfrontend/svnactions.cpp:516
+#: src/svnfrontend/svnactions.cpp:518
 #, fuzzy, kde-format
 #| msgid "History of %1"
 msgctxt "@title:window"
 msgid "History of %1"
 msgstr "Istoricul lui %1"
 
-#: src/svnfrontend/svnactions.cpp:557
+#: src/svnfrontend/svnactions.cpp:559
 #, fuzzy, kde-format
 #| msgid "Annotate"
 msgctxt "@title:window"
 msgid "Annotate"
 msgstr "Adnotare"
 
-#: src/svnfrontend/svnactions.cpp:557
+#: src/svnfrontend/svnactions.cpp:559
 #, fuzzy, kde-format
 #| msgid "Annotate lines - hit cancel for abort"
 msgid "Annotate lines - hit Cancel for abort"
 msgstr "Adnotare de linii - anulați pentru abandonare"
 
-#: src/svnfrontend/svnactions.cpp:565
+#: src/svnfrontend/svnactions.cpp:567
 #, kde-format
 msgid "Got no annotate"
 msgstr "Nici o adnotare obținută"
 
-#: src/svnfrontend/svnactions.cpp:582
+#: src/svnfrontend/svnactions.cpp:584
 #, fuzzy, kde-format
 #| msgid "Content"
 msgctxt "@title:window"
 msgid "Content Get"
 msgstr "Conținut"
 
-#: src/svnfrontend/svnactions.cpp:582
+#: src/svnfrontend/svnactions.cpp:584
 #, fuzzy, kde-format
 #| msgid "Getting content - hit cancel for abort"
 msgid "Getting content - hit Cancel for abort"
 msgstr "Preluare conținut - anulați pentru abandonare"
 
-#: src/svnfrontend/svnactions.cpp:589
+#: src/svnfrontend/svnactions.cpp:591
 #, kde-format
 msgid "Error getting content"
 msgstr "Eroare la preluarea conținutului"
 
-#: src/svnfrontend/svnactions.cpp:602
+#: src/svnfrontend/svnactions.cpp:604
 #, kde-format
 msgid "Error while open temporary file"
 msgstr "Eroare la deschiderea fișierului temporar"
 
-#: src/svnfrontend/svnactions.cpp:633
+#: src/svnfrontend/svnactions.cpp:635
 #, fuzzy, kde-format
 #| msgid "Content of %1"
 msgctxt "@title:window"
 msgid "Content of %1"
 msgstr "Conținutul lui %1"
 
-#: src/svnfrontend/svnactions.cpp:643
+#: src/svnfrontend/svnactions.cpp:645
 #, kde-format
 msgid "Got no content."
 msgstr "Nici un conținut obținut."
 
-#: src/svnfrontend/svnactions.cpp:668
+#: src/svnfrontend/svnactions.cpp:670
 #, kde-format
 msgid "Enter folder name:"
 msgstr "Introduceți denumirea dosarului:"
 
-#: src/svnfrontend/svnactions.cpp:707
+#: src/svnfrontend/svnactions.cpp:709
 #, fuzzy, kde-format
 #| msgid "Details"
 msgctxt "@title:window"
 msgid "Details"
 msgstr "Detalii"
 
-#: src/svnfrontend/svnactions.cpp:708
+#: src/svnfrontend/svnactions.cpp:710
 #, fuzzy, kde-format
 #| msgid "Retrieving infos - hit cancel for abort"
 msgid "Retrieving information - hit Cancel for abort"
 msgstr "Preluare informații - anulați pentru abandonare"
 
-#: src/svnfrontend/svnactions.cpp:747
+#: src/svnfrontend/svnactions.cpp:749
 #, kde-format
 msgid "URL"
 msgstr "URL"
 
-#: src/svnfrontend/svnactions.cpp:749
+#: src/svnfrontend/svnactions.cpp:751
 #, fuzzy, kde-format
 #| msgid "Canonical repository url"
 msgid "Canonical repository URL"
 msgstr "URL canonic al depozitului"
 
-#: src/svnfrontend/svnactions.cpp:752
+#: src/svnfrontend/svnactions.cpp:754
 #, kde-format
 msgid "Checksum"
 msgstr "Sumă de control"
 
-#: src/svnfrontend/svnactions.cpp:755
+#: src/svnfrontend/svnactions.cpp:757
 #, kde-format
 msgid "Type"
 msgstr "Tip"
 
-#: src/svnfrontend/svnactions.cpp:758
+#: src/svnfrontend/svnactions.cpp:760
 #, kde-format
 msgid "Absent"
 msgstr "Absent"
 
-#: src/svnfrontend/svnactions.cpp:761
+#: src/svnfrontend/svnactions.cpp:763
 #, kde-format
 msgid "File"
 msgstr "Fișier"
 
-#: src/svnfrontend/svnactions.cpp:764
+#: src/svnfrontend/svnactions.cpp:766
 #, kde-format
 msgid "Folder"
 msgstr "Dosar"
 
-#: src/svnfrontend/svnactions.cpp:768 src/svnfrontend/svnactions.cpp:797
+#: src/svnfrontend/svnactions.cpp:770 src/svnfrontend/svnactions.cpp:799
 #, kde-format
 msgid "Unknown"
 msgstr "Necunoscut"
 
-#: src/svnfrontend/svnactions.cpp:773
+#: src/svnfrontend/svnactions.cpp:775
 #, kde-format
 msgid "Size"
 msgstr "Mărime"
 
-#: src/svnfrontend/svnactions.cpp:782
+#: src/svnfrontend/svnactions.cpp:784
 #, kde-format
 msgid "Schedule"
 msgstr "Planificat"
 
-#: src/svnfrontend/svnactions.cpp:785
+#: src/svnfrontend/svnactions.cpp:787
 #, kde-format
 msgid "Normal"
 msgstr "Normal"
 
-#: src/svnfrontend/svnactions.cpp:788
+#: src/svnfrontend/svnactions.cpp:790
 #, kde-format
 msgid "Addition"
 msgstr "Adăugire"
 
-#: src/svnfrontend/svnactions.cpp:791
+#: src/svnfrontend/svnactions.cpp:793
 #, kde-format
 msgid "Deletion"
 msgstr "Ștergere"
 
-#: src/svnfrontend/svnactions.cpp:801
+#: src/svnfrontend/svnactions.cpp:803
 #, kde-format
 msgid "UUID"
 msgstr "UUID"
 
-#: src/svnfrontend/svnactions.cpp:805
+#: src/svnfrontend/svnactions.cpp:807
 #, kde-format
 msgid "Last committed"
 msgstr "Ultima propagare"
 
-#: src/svnfrontend/svnactions.cpp:807
+#: src/svnfrontend/svnactions.cpp:809
 #, kde-format
 msgid "Last revision"
 msgstr "Ultima revizie"
 
-#: src/svnfrontend/svnactions.cpp:809
+#: src/svnfrontend/svnactions.cpp:811
 #, kde-format
 msgid "Content last changed"
 msgstr "Ultima modificare de conținut"
 
-#: src/svnfrontend/svnactions.cpp:813
+#: src/svnfrontend/svnactions.cpp:815
 #, kde-format
 msgid "Property last changed"
 msgstr "Ultima modificare de proprietate"
 
-#: src/svnfrontend/svnactions.cpp:816
+#: src/svnfrontend/svnactions.cpp:818
 #, kde-format
 msgid "New version of conflicted file"
 msgstr "Noua versiune a fișierului în conflict"
 
-#: src/svnfrontend/svnactions.cpp:819
+#: src/svnfrontend/svnactions.cpp:821
 #, kde-format
 msgid "Property reject file"
 msgstr "Proprietate respinsă"
 
-#: src/svnfrontend/svnactions.cpp:823
+#: src/svnfrontend/svnactions.cpp:825
 #, kde-format
 msgid "Copy from URL"
 msgstr "Copiază din URL"
 
-#: src/svnfrontend/svnactions.cpp:826 src/svnfrontend/svnactions.cpp:833
+#: src/svnfrontend/svnactions.cpp:828 src/svnfrontend/svnactions.cpp:835
 #, kde-format
 msgid "Lock token"
 msgstr "Blochează jetonul"
 
-#: src/svnfrontend/svnactions.cpp:827 src/svnfrontend/svnactions.cpp:834
+#: src/svnfrontend/svnactions.cpp:829 src/svnfrontend/svnactions.cpp:836
 #, kde-format
 msgid "Owner"
 msgstr "Proprietar"
 
-#: src/svnfrontend/svnactions.cpp:828 src/svnfrontend/svnactions.cpp:835
+#: src/svnfrontend/svnactions.cpp:830 src/svnfrontend/svnactions.cpp:837
 #, kde-format
 msgid "Locked on"
 msgstr "Blocat"
 
-#: src/svnfrontend/svnactions.cpp:829 src/svnfrontend/svnactions.cpp:836
+#: src/svnfrontend/svnactions.cpp:831 src/svnfrontend/svnactions.cpp:838
 #, kde-format
 msgid "Lock comment"
 msgstr "Comentariu de blocare"
 
-#: src/svnfrontend/svnactions.cpp:883
+#: src/svnfrontend/svnactions.cpp:885
 #, fuzzy, kde-format
 #| msgid "Infolist"
 msgctxt "@title:window"
 msgid "Infolist"
 msgstr "Listă de informații"
 
-#: src/svnfrontend/svnactions.cpp:922
+#: src/svnfrontend/svnactions.cpp:924
 #, fuzzy, kde-format
 #| msgid "Display Properties"
 msgctxt "@title:window"
 msgid "Applying Properties"
 msgstr "Afișează proprietățile"
 
-#: src/svnfrontend/svnactions.cpp:923
+#: src/svnfrontend/svnactions.cpp:925
 #, kde-format
 msgid "<center>Applying<br/>hit cancel for abort</center>"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:959
+#: src/svnfrontend/svnactions.cpp:961
 #, kde-format
 msgid "Could not change to folder %1\n"
 msgstr "Nu s-a putut schimba pe dosarul %1\n"
 
-#: src/svnfrontend/svnactions.cpp:977
+#: src/svnfrontend/svnactions.cpp:979
 #, kde-format
 msgid "Not commit because networking is disabled"
 msgstr "Nu s-a propagat pentru că rețeaua este dezactivată"
 
-#: src/svnfrontend/svnactions.cpp:1000 src/svnfrontend/svnactions.cpp:2403
+#: src/svnfrontend/svnactions.cpp:1003 src/svnfrontend/svnactions.cpp:2463
 #, fuzzy, kde-format
 #| msgid "Status / List"
 msgctxt "@title:window"
 msgid "Status / List"
 msgstr "Stare / Listă"
 
-#: src/svnfrontend/svnactions.cpp:1001 src/svnfrontend/svnactions.cpp:2404
+#: src/svnfrontend/svnactions.cpp:1004 src/svnfrontend/svnactions.cpp:2464
 #, kde-format
 msgid "Creating list / check status"
 msgstr "Creare listă / verificare stare"
 
-#: src/svnfrontend/svnactions.cpp:1019
-#, kde-format
-msgid "Delete and Commit"
-msgstr "Șterge și comite"
-
-#: src/svnfrontend/svnactions.cpp:1021
+#: src/svnfrontend/svnactions.cpp:1043 src/svnfrontend/svnactions.cpp:1050
+#: src/svnfrontend/svnactions.cpp:1072
 #, kde-format
 msgid "Add and Commit"
 msgstr "Adaugă și comite"
 
-#: src/svnfrontend/svnactions.cpp:1051
+#: src/svnfrontend/svnactions.cpp:1048
+#, kde-format
+msgid "Delete and Commit"
+msgstr "Șterge și comite"
+
+#: src/svnfrontend/svnactions.cpp:1111
 #, fuzzy, kde-format
 #| msgid "Commit"
 msgctxt "@title:window"
 msgid "Commit"
 msgstr "Comite"
 
-#: src/svnfrontend/svnactions.cpp:1051
+#: src/svnfrontend/svnactions.cpp:1111
 #, fuzzy, kde-format
 #| msgid "Commit - hit cancel for abort"
 msgid "Commit - hit Cancel for abort"
 msgstr "Propagare - anulați pentru abandonare"
 
-#: src/svnfrontend/svnactions.cpp:1078
+#: src/svnfrontend/svnactions.cpp:1138
 #, kde-format
 msgctxt "@title:window"
 msgid "Downloading"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1079
+#: src/svnfrontend/svnactions.cpp:1139
 #, fuzzy, kde-format
 #| msgid "Download - hit cancel for abort"
 msgid "Download - hit Cancel for abort"
 msgstr "Descărcare - anulați pentru abandonare"
 
-#: src/svnfrontend/svnactions.cpp:1105
+#: src/svnfrontend/svnactions.cpp:1165
 #, kde-format
 msgid "Can not do this diff because networking is disabled."
 msgstr "Nu se poate diferenția pentru că rețeaua este dezactivată."
 
-#: src/svnfrontend/svnactions.cpp:1159
+#: src/svnfrontend/svnactions.cpp:1219
 #, kde-format
 msgid "Both entries seems to be the same, can not diff."
 msgstr "Ambele intrări par a fi identice, nu se pot diferenția."
 
-#: src/svnfrontend/svnactions.cpp:1220
+#: src/svnfrontend/svnactions.cpp:1280
 #, kde-format
 msgid "Diff-process could not started, check command."
 msgstr "Procesul de diferențiere nu poate fi lansat, verificați comanda."
 
-#: src/svnfrontend/svnactions.cpp:1279 src/svnfrontend/svnactions.cpp:1341
+#: src/svnfrontend/svnactions.cpp:1339 src/svnfrontend/svnactions.cpp:1401
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Diffing"
 msgstr "Diferențiază elemente"
 
-#: src/svnfrontend/svnactions.cpp:1279
+#: src/svnfrontend/svnactions.cpp:1339
 #, fuzzy, kde-format
 #| msgid "Diffing - hit cancel for abort"
 msgid "Diffing - hit Cancel for abort"
 msgstr "Diferențiere - anulați pentru abandonare"
 
-#: src/svnfrontend/svnactions.cpp:1292 src/svnfrontend/svnactions.cpp:1351
+#: src/svnfrontend/svnactions.cpp:1352 src/svnfrontend/svnactions.cpp:1411
 #, kde-format
 msgid "No difference to display"
 msgstr "Nici o diferență de afișat."
 
-#: src/svnfrontend/svnactions.cpp:1342
+#: src/svnfrontend/svnactions.cpp:1402
 #, fuzzy, kde-format
 #| msgid "Diffing - hit cancel for abort"
 msgid "Diffing - hit cancel for abort"
 msgstr "Diferențiere - anulați pentru abandonare"
 
-#: src/svnfrontend/svnactions.cpp:1398
+#: src/svnfrontend/svnactions.cpp:1458
 #, fuzzy, kde-format
 #| msgid "Display-process could not started, check command."
 msgid "Display process could not started, check command."
 msgstr "Procesul de afișare nu a putut fi lansat, verificați comanda."
 
-#: src/svnfrontend/svnactions.cpp:1410
+#: src/svnfrontend/svnactions.cpp:1470
 #, fuzzy, kde-format
 #| msgid "Diff display"
 msgctxt "@title:window"
 msgid "Diff Display"
 msgstr "Afișor de diferențe"
 
-#: src/svnfrontend/svnactions.cpp:1458
+#: src/svnfrontend/svnactions.cpp:1518
 #, fuzzy, kde-format
 #| msgid "Check updates"
 msgctxt "@title:window"
 msgid "Making update"
 msgstr "Verificare actualizări"
 
-#: src/svnfrontend/svnactions.cpp:1459
+#: src/svnfrontend/svnactions.cpp:1519
 #, fuzzy, kde-format
 #| msgid "Making update - hit cancel for abort"
 msgid "Making update - hit Cancel for abort"
 msgstr "Actualizare - anulați pentru abandonare"
 
-#: src/svnfrontend/svnactions.cpp:1544
+#: src/svnfrontend/svnactions.cpp:1604
 #, kde-format
 msgid "Which files or directories should I add?"
 msgstr "Care fișiere și dosare trebuiesc adăugate?"
 
-#: src/svnfrontend/svnactions.cpp:1551
+#: src/svnfrontend/svnactions.cpp:1611
 #, fuzzy, kde-format
 #| msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
 msgid "<center>The entry<br/>%1<br/>is versioned - break.</center>"
 msgstr "<center>Intrarea<br>%1<br>este versionată - întrerupere.</center>"
 
-#: src/svnfrontend/svnactions.cpp:1578
+#: src/svnfrontend/svnactions.cpp:1638
 #, kde-format
 msgid "Delete from repository"
 msgstr "Șterge din depozit"
 
-#: src/svnfrontend/svnactions.cpp:1629
+#: src/svnfrontend/svnactions.cpp:1689
 #, fuzzy, kde-format
 #| msgid "Export a repository"
 msgctxt "@title:window"
 msgid "Export a Repository"
 msgstr "Exportă un depozit"
 
-#: src/svnfrontend/svnactions.cpp:1629
+#: src/svnfrontend/svnactions.cpp:1689
 #, fuzzy, kde-format
 #| msgid "Checkout a repository"
 msgctxt "@title:window"
 msgid "Checkout a Repository"
 msgstr "Verifică un depozit"
 
-#: src/svnfrontend/svnactions.cpp:1647 src/svnfrontend/svnactions.cpp:1654
+#: src/svnfrontend/svnactions.cpp:1707 src/svnfrontend/svnactions.cpp:1714
 #, kde-format
 msgid "Export repository"
 msgstr "Exportă depozitul"
 
-#: src/svnfrontend/svnactions.cpp:1653
+#: src/svnfrontend/svnactions.cpp:1713
 #, kde-format
 msgid "Invalid local path given!"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1673
+#: src/svnfrontend/svnactions.cpp:1733
 #, kde-format
 msgid "Exporting a file?"
 msgstr "Exportați un fișier?"
 
-#: src/svnfrontend/svnactions.cpp:1673
+#: src/svnfrontend/svnactions.cpp:1733
 #, kde-format
 msgid "Checking out a file?"
 msgstr "Verificați un fișier?"
 
-#: src/svnfrontend/svnactions.cpp:1729
+#: src/svnfrontend/svnactions.cpp:1789
 #, fuzzy, kde-format
 #| msgid "Export"
 msgctxt "@title:window"
 msgid "Export"
 msgstr "Exportă"
 
-#: src/svnfrontend/svnactions.cpp:1729
+#: src/svnfrontend/svnactions.cpp:1789
 #, fuzzy, kde-format
 #| msgid "Checkout"
 msgctxt "@title:window"
 msgid "Checkout"
 msgstr "Preluare"
 
-#: src/svnfrontend/svnactions.cpp:1730
+#: src/svnfrontend/svnactions.cpp:1790
 #, kde-format
 msgid "Exporting"
 msgstr "Exportare"
 
-#: src/svnfrontend/svnactions.cpp:1730
+#: src/svnfrontend/svnactions.cpp:1790
 #, kde-format
 msgid "Checking out"
 msgstr "Verificare"
 
-#: src/svnfrontend/svnactions.cpp:1768
+#: src/svnfrontend/svnactions.cpp:1828
 #, fuzzy, kde-format
 #| msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
 msgid "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
 msgstr "<center>Intrarea<br>%1<br>nu este versionată - întrerupere.</center>"
 
-#: src/svnfrontend/svnactions.cpp:1800
+#: src/svnfrontend/svnactions.cpp:1860
 #, fuzzy, kde-format
 #| msgid "Revert"
 msgctxt "@title:window"
 msgid "Revert"
 msgstr "Revenire la starea inițială"
 
-#: src/svnfrontend/svnactions.cpp:1800
+#: src/svnfrontend/svnactions.cpp:1860
 #, kde-format
 msgid "Reverting items"
 msgstr "Se restaurează elementele la starea lor inițială"
 
-#: src/svnfrontend/svnactions.cpp:1829 src/svnfrontend/svnactions.cpp:1893
+#: src/svnfrontend/svnactions.cpp:1889 src/svnfrontend/svnactions.cpp:1953
 #, fuzzy, kde-format
 #| msgid "Switch url"
 msgctxt "@title:window"
 msgid "Switch URL"
 msgstr "Schimbare URL"
 
-#: src/svnfrontend/svnactions.cpp:1829
+#: src/svnfrontend/svnactions.cpp:1889
 #, fuzzy, kde-format
 #| msgid "Switching url"
 msgid "Switching URL"
 msgstr "Schimbare de URL"
 
-#: src/svnfrontend/svnactions.cpp:1850
+#: src/svnfrontend/svnactions.cpp:1910
 #, fuzzy, kde-format
 #| msgid "Delete repository"
 msgctxt "@title:window"
 msgid "Relocate Repository"
 msgstr "Șterge depozitul"
 
-#: src/svnfrontend/svnactions.cpp:1851
+#: src/svnfrontend/svnactions.cpp:1911
 #, kde-format
 msgid "Relocate repository to new URL"
 msgstr "Restabilește depozitul la noua adresă URL"
 
-#: src/svnfrontend/svnactions.cpp:1874
+#: src/svnfrontend/svnactions.cpp:1934
 #, kde-format
 msgid "Can only switch one item at time"
 msgstr "Elementele pot fi schimbate pe rînd"
 
-#: src/svnfrontend/svnactions.cpp:1880
+#: src/svnfrontend/svnactions.cpp:1940
 #, kde-format
 msgid "Error getting entry to switch"
 msgstr "Eroare la schimbarea intrării"
 
-#: src/svnfrontend/svnactions.cpp:1903
+#: src/svnfrontend/svnactions.cpp:1963
 #, fuzzy, kde-format
 #| msgid "Switch url"
 msgid "Switch URL"
 msgstr "Schimbare URL"
 
-#: src/svnfrontend/svnactions.cpp:1920
+#: src/svnfrontend/svnactions.cpp:1980
 #, fuzzy, kde-format
 #| msgid "Cleanup"
 msgctxt "@title:window"
 msgid "Cleanup"
 msgstr "Curăță"
 
-#: src/svnfrontend/svnactions.cpp:1920
+#: src/svnfrontend/svnactions.cpp:1980
 #, kde-format
 msgid "Cleaning up folder"
 msgstr "Curățare de dosar"
 
-#: src/svnfrontend/svnactions.cpp:1936
+#: src/svnfrontend/svnactions.cpp:1996
 #, fuzzy, kde-format
 #| msgid "Resolve"
 msgctxt "@title:window"
 msgid "Resolve"
 msgstr "Rezolvă"
 
-#: src/svnfrontend/svnactions.cpp:1936
+#: src/svnfrontend/svnactions.cpp:1996
 #, kde-format
 msgid "Marking resolved"
 msgstr "Marchează ca rezolvat"
 
-#: src/svnfrontend/svnactions.cpp:1967
+#: src/svnfrontend/svnactions.cpp:2027
 #, kde-format
 msgid "Could not retrieve conflict information - giving up."
 msgstr "Nu se pot prelua detaliile conflictului - se renunță."
 
-#: src/svnfrontend/svnactions.cpp:1992
+#: src/svnfrontend/svnactions.cpp:2052
 #, kde-format
 msgid "Resolve-process could not started, check command."
 msgstr "Procesul de rezolvare nu a putut fi lansat, verificați comanda."
 
-#: src/svnfrontend/svnactions.cpp:2002
+#: src/svnfrontend/svnactions.cpp:2062
 #, fuzzy, kde-format
 #| msgid "Import"
 msgctxt "@title:window"
 msgid "Import"
 msgstr "Importă"
 
-#: src/svnfrontend/svnactions.cpp:2002
+#: src/svnfrontend/svnactions.cpp:2062
 #, kde-format
 msgid "Importing items"
 msgstr "Importare elemente"
 
-#: src/svnfrontend/svnactions.cpp:2031
+#: src/svnfrontend/svnactions.cpp:2091
 #, kde-format
 msgid "Nothing to merge."
 msgstr "Nimic de fuzionat."
 
-#: src/svnfrontend/svnactions.cpp:2035
+#: src/svnfrontend/svnactions.cpp:2095
 #, kde-format
 msgid "No destination to merge."
 msgstr "Nici o destinație de fuzionat."
 
-#: src/svnfrontend/svnactions.cpp:2054
+#: src/svnfrontend/svnactions.cpp:2114
 #, fuzzy, kde-format
 #| msgid "Both sources must be same type!"
 msgid "Both sources must be same type."
 msgstr "Ambele surse trebuie să fie de același tip!"
 
-#: src/svnfrontend/svnactions.cpp:2061
+#: src/svnfrontend/svnactions.cpp:2121
 #, fuzzy, kde-format
 #| msgid "Target for merge must same type like sources!"
 msgid "Target for merge must same type like sources."
 msgstr "Destinația fuzionării trebuie să fie de același tip cu sursele!"
 
-#: src/svnfrontend/svnactions.cpp:2084
+#: src/svnfrontend/svnactions.cpp:2144
 #, fuzzy, kde-format
 #| msgid "Both entries seems to be the same, won't do a merge."
 msgid "Both entries seems to be the same, will not do a merge."
 msgstr "Ambele surse par a fi identice, nu se fuzionează."
 
-#: src/svnfrontend/svnactions.cpp:2162
+#: src/svnfrontend/svnactions.cpp:2222
 #, fuzzy, kde-format
 #| msgid "Merge-process could not started, check command."
 msgid "Merge process could not started, check command."
 msgstr "Procesul de fuzionare nu poate fi lansat, verificați comanda."
 
-#: src/svnfrontend/svnactions.cpp:2244
+#: src/svnfrontend/svnactions.cpp:2304
 #, kde-format
 msgid "Merging items"
 msgstr "Fuzionare elemente"
 
-#: src/svnfrontend/svnactions.cpp:2270 src/svnfrontend/svnactions.cpp:2287
+#: src/svnfrontend/svnactions.cpp:2330 src/svnfrontend/svnactions.cpp:2347
 #, fuzzy, kde-format
 #| msgid "Move"
 msgctxt "@title:window"
 msgid "Move"
 msgstr "Mută"
 
-#: src/svnfrontend/svnactions.cpp:2270
+#: src/svnfrontend/svnactions.cpp:2330
 #, fuzzy, kde-format
 #| msgid "Moving/Rename item "
 msgid "Moving/Rename item"
 msgstr "Mută/Redenumește element"
 
-#: src/svnfrontend/svnactions.cpp:2287
+#: src/svnfrontend/svnactions.cpp:2347
 #, kde-format
 msgid "Moving entries"
 msgstr "Mutare intrări"
 
-#: src/svnfrontend/svnactions.cpp:2307 src/svnfrontend/svnactions.cpp:2321
+#: src/svnfrontend/svnactions.cpp:2367 src/svnfrontend/svnactions.cpp:2381
 #, fuzzy, kde-format
 #| msgid "Copy / Move"
 msgctxt "@title:window"
 msgid "Copy / Move"
 msgstr "Copiază / Mută"
 
-#: src/svnfrontend/svnactions.cpp:2307 src/svnfrontend/svnactions.cpp:2321
+#: src/svnfrontend/svnactions.cpp:2367 src/svnfrontend/svnactions.cpp:2381
 #, kde-format
 msgid "Copy or Moving entries"
 msgstr "Copiază sau mută intrări"
 
-#: src/svnfrontend/svnactions.cpp:2437
+#: src/svnfrontend/svnactions.cpp:2497
 #, kde-format
 msgid "No unversioned items found."
 msgstr "Nici un element neversionat găsit."
 
-#: src/svnfrontend/svnactions.cpp:2441
+#: src/svnfrontend/svnactions.cpp:2501
 #, fuzzy, kde-format
 #| msgid "Add unversioned items"
 msgctxt "@title:window"
@@ -5745,12 +5746,12 @@ msgid "Add Unversioned Items"
 msgstr "Adaugă elementele neversionate"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
-#: src/svnfrontend/svnactions.cpp:2444 src/svnfrontend/svnlogdlg.ui:163
+#: src/svnfrontend/svnactions.cpp:2504 src/svnfrontend/svnlogdlg.ui:163
 #, kde-format
 msgid "Item"
 msgstr "Element"
 
-#: src/svnfrontend/svnactions.cpp:2559
+#: src/svnfrontend/svnactions.cpp:2619
 #, fuzzy, kde-format
 msgid "Found %1 modified item"
 msgid_plural "Found %1 modified items"
@@ -5758,17 +5759,17 @@ msgstr[0] "Culoarea pentru elementele modificate:"
 msgstr[1] "Culoarea pentru elementele modificate:"
 msgstr[2] "Culoarea pentru elementele modificate:"
 
-#: src/svnfrontend/svnactions.cpp:2587
+#: src/svnfrontend/svnactions.cpp:2647
 #, kde-format
 msgid "Checking for updates finished"
 msgstr "Verificare de actualizări terminată"
 
-#: src/svnfrontend/svnactions.cpp:2589
+#: src/svnfrontend/svnactions.cpp:2649
 #, kde-format
 msgid "There are new items in repository"
 msgstr "Noi elemente sunt disponibile în depozit"
 
-#: src/svnfrontend/svnactions.cpp:2659
+#: src/svnfrontend/svnactions.cpp:2719
 #, fuzzy, kde-format
 #| msgid "Not filling logcache because networking is disabled"
 msgid "Not filling log cache because networking is disabled"
@@ -5776,13 +5777,13 @@ msgstr ""
 "Nu s-a putut completa jurnalul de prestocare pentru că rețeaua este "
 "dezactivată"
 
-#: src/svnfrontend/svnactions.cpp:2699
+#: src/svnfrontend/svnactions.cpp:2759
 #, kde-format
 msgid "Not checking for updates because networking is disabled"
 msgstr ""
 "Nu s-au putut verifica actualizările pentru că rețeaua este dezactivată."
 
-#: src/svnfrontend/svnactions.cpp:2705
+#: src/svnfrontend/svnactions.cpp:2765
 #, kde-format
 msgid "Checking for updates started in background"
 msgstr "Verificarea actualizărilor lansată în fundal"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-10 00:58+0000\n"
+"POT-Creation-Date: 2023-07-04 00:50+0000\n"
 "PO-Revision-Date: 2023-01-11 07:41+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -697,8 +697,8 @@ msgstr "%1 zapisano v skladišče"
 msgid "Copied %1 to %2"
 msgstr "%1 kopirano v %2"
 
-#: src/kiosvn/kiosvn.cpp:788 src/svnfrontend/svnactions.cpp:1059
-#: src/svnfrontend/svnactions.cpp:2278
+#: src/kiosvn/kiosvn.cpp:788 src/svnfrontend/svnactions.cpp:1119
+#: src/svnfrontend/svnactions.cpp:2338
 #, kde-format
 msgid "Committed revision %1."
 msgstr "Uveljavljena predelava %1."
@@ -884,7 +884,7 @@ msgid "Select text file to insert:"
 msgstr "Izberi besedilno datoteko za vstavitev:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DeleteForm)
-#: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1576
+#: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1636
 #, kde-format
 msgid "Really delete these entries?"
 msgstr "Ali ste prepričani, da želite izbrisati te vnose?"
@@ -1056,7 +1056,7 @@ msgstr "Kopiraj"
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:43
 #: src/svnfrontend/ccontextlistener.cpp:68
 #: src/svnfrontend/maintreewidget.cpp:709
-#: src/svnfrontend/maintreewidget.cpp:718 src/svnfrontend/svnactions.cpp:1014
+#: src/svnfrontend/maintreewidget.cpp:718 src/svnfrontend/svnactions.cpp:1038
 #, kde-format
 msgid "Delete"
 msgstr "Izbriši"
@@ -1067,7 +1067,7 @@ msgid "Modify (content or property)"
 msgstr "Spremeni (vsebino ali lastnost)"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:51
-#: src/svnfrontend/svnactions.cpp:794
+#: src/svnfrontend/svnactions.cpp:796
 #, kde-format
 msgid "Replace"
 msgstr "Zamenjaj"
@@ -3685,14 +3685,14 @@ msgid "Image (*.png)"
 msgstr "Slika (*.png)"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:94
-#: src/svnfrontend/svnactions.cpp:316
+#: src/svnfrontend/svnactions.cpp:318
 #, kde-format
 msgctxt "@title:window"
 msgid "Logs"
 msgstr "Dnevniki"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:94
-#: src/svnfrontend/svnactions.cpp:317
+#: src/svnfrontend/svnactions.cpp:319
 #, kde-format
 msgid "Getting logs - hit Cancel for abort"
 msgstr "Pridobivanje dnevnikov - kliknite na Prekliči za prekinitev"
@@ -4059,7 +4059,7 @@ msgstr "Odkleni trenutne predmete"
 msgid "Free existing lock on current item"
 msgstr "Odstrani obstoječ zaklep s trenutnega predmeta"
 
-#: src/svnfrontend/maintreewidget.cpp:628 src/svnfrontend/svnactions.cpp:668
+#: src/svnfrontend/maintreewidget.cpp:628 src/svnfrontend/svnactions.cpp:670
 #, kde-format
 msgid "New folder"
 msgstr "Nova mapa"
@@ -4231,7 +4231,7 @@ msgstr "Posodobi na predelavo ..."
 
 #: src/svnfrontend/maintreewidget.cpp:769
 #: src/svnfrontend/maintreewidget.cpp:774
-#: src/svnfrontend/maintreewidget.cpp:889 src/svnfrontend/svnactions.cpp:1016
+#: src/svnfrontend/maintreewidget.cpp:889 src/svnfrontend/svnactions.cpp:1045
 #, kde-format
 msgid "Commit"
 msgstr "Uveljavi"
@@ -4335,8 +4335,8 @@ msgstr "Izvozi trenutno pot skladišča"
 msgid "Select browse revision"
 msgstr "Izberite predelavo za brskanje"
 
-#: src/svnfrontend/maintreewidget.cpp:850 src/svnfrontend/svnactions.cpp:1647
-#: src/svnfrontend/svnactions.cpp:1654
+#: src/svnfrontend/maintreewidget.cpp:850 src/svnfrontend/svnactions.cpp:1707
+#: src/svnfrontend/svnactions.cpp:1714
 #, kde-format
 msgid "Checkout a repository"
 msgstr "Prevzemi skladišče"
@@ -4476,7 +4476,7 @@ msgstr "Samodejno ustvarjen osnovni razpored"
 msgid "May not make subdirectories of a file"
 msgstr "Ni mogoče ustvariti podmap datoteke"
 
-#: src/svnfrontend/maintreewidget.cpp:2196 src/svnfrontend/svnactions.cpp:2244
+#: src/svnfrontend/maintreewidget.cpp:2196 src/svnfrontend/svnactions.cpp:2304
 #, kde-format
 msgctxt "@title:window"
 msgid "Merge"
@@ -4493,8 +4493,8 @@ msgctxt "@title:window"
 msgid "Relocate Path %1"
 msgstr "Spremeni naslov poti %1"
 
-#: src/svnfrontend/maintreewidget.cpp:2278 src/svnfrontend/svnactions.cpp:1647
-#: src/svnfrontend/svnactions.cpp:1903
+#: src/svnfrontend/maintreewidget.cpp:2278 src/svnfrontend/svnactions.cpp:1707
+#: src/svnfrontend/svnactions.cpp:1963
 #, kde-format
 msgid "Invalid url given!"
 msgstr "Podan neveljaven URL!"
@@ -4740,7 +4740,7 @@ msgid "%1 at revision %2"
 msgstr "%1 ob predelavi %2"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:317
-#: src/svnfrontend/svnactions.cpp:744
+#: src/svnfrontend/svnactions.cpp:746
 #, kde-format
 msgid "Name"
 msgstr "Ime"
@@ -4756,7 +4756,7 @@ msgid "Last changed Revision"
 msgstr "Nazadnje spremenjena predelava"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:323
-#: src/svnfrontend/svnactions.cpp:803
+#: src/svnfrontend/svnactions.cpp:805
 #, kde-format
 msgid "Last author"
 msgstr "Zadnji avtor"
@@ -4825,589 +4825,590 @@ msgstr "%p % od %1"
 msgid "%1 of %2"
 msgstr "%1 od %2"
 
-#: src/svnfrontend/svnactions.cpp:185
+#: src/svnfrontend/svnactions.cpp:187
 #, kde-format
 msgid "Finished"
 msgstr "Zaključeno"
 
-#: src/svnfrontend/svnactions.cpp:355
+#: src/svnfrontend/svnactions.cpp:357
 #, kde-format
 msgid "Got no logs"
 msgstr "Ni dnevnikov"
 
-#: src/svnfrontend/svnactions.cpp:479
+#: src/svnfrontend/svnactions.cpp:481
 #, kde-format
 msgid "Got no info."
 msgstr "Ni podatkov."
 
-#: src/svnfrontend/svnactions.cpp:516
+#: src/svnfrontend/svnactions.cpp:518
 #, kde-format
 msgctxt "@title:window"
 msgid "History of %1"
 msgstr "Zgodovina %1"
 
-#: src/svnfrontend/svnactions.cpp:557
+#: src/svnfrontend/svnactions.cpp:559
 #, kde-format
 msgctxt "@title:window"
 msgid "Annotate"
 msgstr "Zabeleži"
 
-#: src/svnfrontend/svnactions.cpp:557
+#: src/svnfrontend/svnactions.cpp:559
 #, kde-format
 msgid "Annotate lines - hit Cancel for abort"
 msgstr "Zabeleži vrstice - kliknite Prekliči za prekinitev"
 
-#: src/svnfrontend/svnactions.cpp:565
+#: src/svnfrontend/svnactions.cpp:567
 #, kde-format
 msgid "Got no annotate"
 msgstr "Ni zabeležk"
 
-#: src/svnfrontend/svnactions.cpp:582
+#: src/svnfrontend/svnactions.cpp:584
 #, kde-format
 msgctxt "@title:window"
 msgid "Content Get"
 msgstr "Pridobivanje vsebine"
 
-#: src/svnfrontend/svnactions.cpp:582
+#: src/svnfrontend/svnactions.cpp:584
 #, kde-format
 msgid "Getting content - hit Cancel for abort"
 msgstr "Pridobivanje vsebine - kliknite na Prekliči za prekinitev"
 
-#: src/svnfrontend/svnactions.cpp:589
+#: src/svnfrontend/svnactions.cpp:591
 #, kde-format
 msgid "Error getting content"
 msgstr "Napaka med pridobivanjem vsebine"
 
-#: src/svnfrontend/svnactions.cpp:602
+#: src/svnfrontend/svnactions.cpp:604
 #, kde-format
 msgid "Error while open temporary file"
 msgstr "Napaka med odpiranjem začasne datoteke"
 
-#: src/svnfrontend/svnactions.cpp:633
+#: src/svnfrontend/svnactions.cpp:635
 #, kde-format
 msgctxt "@title:window"
 msgid "Content of %1"
 msgstr "Vsebina %1"
 
-#: src/svnfrontend/svnactions.cpp:643
+#: src/svnfrontend/svnactions.cpp:645
 #, kde-format
 msgid "Got no content."
 msgstr "Ni vsebine."
 
-#: src/svnfrontend/svnactions.cpp:668
+#: src/svnfrontend/svnactions.cpp:670
 #, kde-format
 msgid "Enter folder name:"
 msgstr "Vnesite ime mape:"
 
-#: src/svnfrontend/svnactions.cpp:707
+#: src/svnfrontend/svnactions.cpp:709
 #, kde-format
 msgctxt "@title:window"
 msgid "Details"
 msgstr "Podrobnosti"
 
-#: src/svnfrontend/svnactions.cpp:708
+#: src/svnfrontend/svnactions.cpp:710
 #, kde-format
 msgid "Retrieving information - hit Cancel for abort"
 msgstr "Pridobivanje podatkov - kliknite na Prekliči za prekinitev"
 
-#: src/svnfrontend/svnactions.cpp:747
+#: src/svnfrontend/svnactions.cpp:749
 #, kde-format
 msgid "URL"
 msgstr "Naslov URL"
 
-#: src/svnfrontend/svnactions.cpp:749
+#: src/svnfrontend/svnactions.cpp:751
 #, kde-format
 msgid "Canonical repository URL"
 msgstr "Naslov URL skladišča"
 
-#: src/svnfrontend/svnactions.cpp:752
+#: src/svnfrontend/svnactions.cpp:754
 #, kde-format
 msgid "Checksum"
 msgstr "Nadzorna vsota"
 
-#: src/svnfrontend/svnactions.cpp:755
+#: src/svnfrontend/svnactions.cpp:757
 #, kde-format
 msgid "Type"
 msgstr "Vrsta"
 
-#: src/svnfrontend/svnactions.cpp:758
+#: src/svnfrontend/svnactions.cpp:760
 #, kde-format
 msgid "Absent"
 msgstr "Odsotno"
 
-#: src/svnfrontend/svnactions.cpp:761
+#: src/svnfrontend/svnactions.cpp:763
 #, kde-format
 msgid "File"
 msgstr "Datoteka"
 
-#: src/svnfrontend/svnactions.cpp:764
+#: src/svnfrontend/svnactions.cpp:766
 #, kde-format
 msgid "Folder"
 msgstr "Mapa"
 
-#: src/svnfrontend/svnactions.cpp:768 src/svnfrontend/svnactions.cpp:797
+#: src/svnfrontend/svnactions.cpp:770 src/svnfrontend/svnactions.cpp:799
 #, kde-format
 msgid "Unknown"
 msgstr "Neznano"
 
-#: src/svnfrontend/svnactions.cpp:773
+#: src/svnfrontend/svnactions.cpp:775
 #, kde-format
 msgid "Size"
 msgstr "Velikost"
 
-#: src/svnfrontend/svnactions.cpp:782
+#: src/svnfrontend/svnactions.cpp:784
 #, kde-format
 msgid "Schedule"
 msgstr "Razpored"
 
-#: src/svnfrontend/svnactions.cpp:785
+#: src/svnfrontend/svnactions.cpp:787
 #, kde-format
 msgid "Normal"
 msgstr "Običajno"
 
-#: src/svnfrontend/svnactions.cpp:788
+#: src/svnfrontend/svnactions.cpp:790
 #, kde-format
 msgid "Addition"
 msgstr "Dodajanje"
 
-#: src/svnfrontend/svnactions.cpp:791
+#: src/svnfrontend/svnactions.cpp:793
 #, kde-format
 msgid "Deletion"
 msgstr "Brisanje"
 
-#: src/svnfrontend/svnactions.cpp:801
+#: src/svnfrontend/svnactions.cpp:803
 #, kde-format
 msgid "UUID"
 msgstr "UUID"
 
-#: src/svnfrontend/svnactions.cpp:805
+#: src/svnfrontend/svnactions.cpp:807
 #, kde-format
 msgid "Last committed"
 msgstr "Nazadnje uveljavljeno"
 
-#: src/svnfrontend/svnactions.cpp:807
+#: src/svnfrontend/svnactions.cpp:809
 #, kde-format
 msgid "Last revision"
 msgstr "Zadnja predelava"
 
-#: src/svnfrontend/svnactions.cpp:809
+#: src/svnfrontend/svnactions.cpp:811
 #, kde-format
 msgid "Content last changed"
 msgstr "Vsebina nazadnje spremenjena"
 
-#: src/svnfrontend/svnactions.cpp:813
+#: src/svnfrontend/svnactions.cpp:815
 #, kde-format
 msgid "Property last changed"
 msgstr "Lastnost nazadnje spremenjena"
 
-#: src/svnfrontend/svnactions.cpp:816
+#: src/svnfrontend/svnactions.cpp:818
 #, kde-format
 msgid "New version of conflicted file"
 msgstr "Nova različica datoteke v sporu"
 
-#: src/svnfrontend/svnactions.cpp:819
+#: src/svnfrontend/svnactions.cpp:821
 #, kde-format
 msgid "Property reject file"
 msgstr "Datoteka za zavrnitev lastnosti"
 
-#: src/svnfrontend/svnactions.cpp:823
+#: src/svnfrontend/svnactions.cpp:825
 #, kde-format
 msgid "Copy from URL"
 msgstr "Kopiraj iz naslova URL"
 
-#: src/svnfrontend/svnactions.cpp:826 src/svnfrontend/svnactions.cpp:833
+#: src/svnfrontend/svnactions.cpp:828 src/svnfrontend/svnactions.cpp:835
 #, kde-format
 msgid "Lock token"
 msgstr "Žeton zaklepa"
 
-#: src/svnfrontend/svnactions.cpp:827 src/svnfrontend/svnactions.cpp:834
+#: src/svnfrontend/svnactions.cpp:829 src/svnfrontend/svnactions.cpp:836
 #, kde-format
 msgid "Owner"
 msgstr "Lastnik"
 
-#: src/svnfrontend/svnactions.cpp:828 src/svnfrontend/svnactions.cpp:835
+#: src/svnfrontend/svnactions.cpp:830 src/svnfrontend/svnactions.cpp:837
 #, kde-format
 msgid "Locked on"
 msgstr "Zaklenjeno"
 
-#: src/svnfrontend/svnactions.cpp:829 src/svnfrontend/svnactions.cpp:836
+#: src/svnfrontend/svnactions.cpp:831 src/svnfrontend/svnactions.cpp:838
 #, kde-format
 msgid "Lock comment"
 msgstr "Opomba zaklepa"
 
-#: src/svnfrontend/svnactions.cpp:883
+#: src/svnfrontend/svnactions.cpp:885
 #, kde-format
 msgctxt "@title:window"
 msgid "Infolist"
 msgstr "Seznam podrobnosti"
 
-#: src/svnfrontend/svnactions.cpp:922
+#: src/svnfrontend/svnactions.cpp:924
 #, kde-format
 msgctxt "@title:window"
 msgid "Applying Properties"
 msgstr "Uveljavljanje lastnosti"
 
-#: src/svnfrontend/svnactions.cpp:923
+#: src/svnfrontend/svnactions.cpp:925
 #, kde-format
 msgid "<center>Applying<br/>hit cancel for abort</center>"
 msgstr "<center>Uveljavljanje<br/>kliknite Prekliči za prekinitev</center>"
 
-#: src/svnfrontend/svnactions.cpp:959
+#: src/svnfrontend/svnactions.cpp:961
 #, kde-format
 msgid "Could not change to folder %1\n"
 msgstr "Ni se bilo mogoče premakniti v mapo %1\n"
 
-#: src/svnfrontend/svnactions.cpp:977
+#: src/svnfrontend/svnactions.cpp:979
 #, kde-format
 msgid "Not commit because networking is disabled"
 msgstr "Uveljavitev ni mogoča, ker je omrežje onemogočeno"
 
-#: src/svnfrontend/svnactions.cpp:1000 src/svnfrontend/svnactions.cpp:2403
+#: src/svnfrontend/svnactions.cpp:1003 src/svnfrontend/svnactions.cpp:2463
 #, kde-format
 msgctxt "@title:window"
 msgid "Status / List"
 msgstr "Stanje/izpis"
 
-#: src/svnfrontend/svnactions.cpp:1001 src/svnfrontend/svnactions.cpp:2404
+#: src/svnfrontend/svnactions.cpp:1004 src/svnfrontend/svnactions.cpp:2464
 #, kde-format
 msgid "Creating list / check status"
 msgstr "Ustvarjanje seznama/preverjanje stanja"
 
-#: src/svnfrontend/svnactions.cpp:1019
-#, kde-format
-msgid "Delete and Commit"
-msgstr "Izbriši in uveljavi"
-
-#: src/svnfrontend/svnactions.cpp:1021
+#: src/svnfrontend/svnactions.cpp:1043 src/svnfrontend/svnactions.cpp:1050
+#: src/svnfrontend/svnactions.cpp:1072
 #, kde-format
 msgid "Add and Commit"
 msgstr "Dodaj in uveljavi"
 
-#: src/svnfrontend/svnactions.cpp:1051
+#: src/svnfrontend/svnactions.cpp:1048
+#, kde-format
+msgid "Delete and Commit"
+msgstr "Izbriši in uveljavi"
+
+#: src/svnfrontend/svnactions.cpp:1111
 #, kde-format
 msgctxt "@title:window"
 msgid "Commit"
 msgstr "Uveljavi"
 
-#: src/svnfrontend/svnactions.cpp:1051
+#: src/svnfrontend/svnactions.cpp:1111
 #, kde-format
 msgid "Commit - hit Cancel for abort"
 msgstr "Uveljavljanje - kliknite Prekliči za prekinitev"
 
-#: src/svnfrontend/svnactions.cpp:1078
+#: src/svnfrontend/svnactions.cpp:1138
 #, kde-format
 msgctxt "@title:window"
 msgid "Downloading"
 msgstr "Prejemanje"
 
-#: src/svnfrontend/svnactions.cpp:1079
+#: src/svnfrontend/svnactions.cpp:1139
 #, kde-format
 msgid "Download - hit Cancel for abort"
 msgstr "Prejemanje - kliknite Prekliči za prekinitev"
 
-#: src/svnfrontend/svnactions.cpp:1105
+#: src/svnfrontend/svnactions.cpp:1165
 #, kde-format
 msgid "Can not do this diff because networking is disabled."
 msgstr "Te razlike ni mogoče prejeti, ker je omrežje onemogočeno."
 
-#: src/svnfrontend/svnactions.cpp:1159
+#: src/svnfrontend/svnactions.cpp:1219
 #, kde-format
 msgid "Both entries seems to be the same, can not diff."
 msgstr "Ni razlik, ker sta oba vnosa enaka."
 
-#: src/svnfrontend/svnactions.cpp:1220
+#: src/svnfrontend/svnactions.cpp:1280
 #, kde-format
 msgid "Diff-process could not started, check command."
 msgstr "Opravila diff ni bilo mogoče zagnati, preverite ukaz."
 
-#: src/svnfrontend/svnactions.cpp:1279 src/svnfrontend/svnactions.cpp:1341
+#: src/svnfrontend/svnactions.cpp:1339 src/svnfrontend/svnactions.cpp:1401
 #, kde-format
 msgctxt "@title:window"
 msgid "Diffing"
 msgstr "Ustvarjanje razlik"
 
-#: src/svnfrontend/svnactions.cpp:1279
+#: src/svnfrontend/svnactions.cpp:1339
 #, kde-format
 msgid "Diffing - hit Cancel for abort"
 msgstr "Ustvarjanje razlik - kliknite Prekliči za prekinitev"
 
-#: src/svnfrontend/svnactions.cpp:1292 src/svnfrontend/svnactions.cpp:1351
+#: src/svnfrontend/svnactions.cpp:1352 src/svnfrontend/svnactions.cpp:1411
 #, kde-format
 msgid "No difference to display"
 msgstr "Ni razlik za prikaz"
 
-#: src/svnfrontend/svnactions.cpp:1342
+#: src/svnfrontend/svnactions.cpp:1402
 #, kde-format
 msgid "Diffing - hit cancel for abort"
 msgstr "Ustvarjanje razlik - kliknite Prekliči za prekinitev"
 
-#: src/svnfrontend/svnactions.cpp:1398
+#: src/svnfrontend/svnactions.cpp:1458
 #, kde-format
 msgid "Display process could not started, check command."
 msgstr "Opravila za prikaz ni bilo mogoče zagnati, preverite ukaz."
 
-#: src/svnfrontend/svnactions.cpp:1410
+#: src/svnfrontend/svnactions.cpp:1470
 #, kde-format
 msgctxt "@title:window"
 msgid "Diff Display"
 msgstr "Prikaz razlik"
 
-#: src/svnfrontend/svnactions.cpp:1458
+#: src/svnfrontend/svnactions.cpp:1518
 #, kde-format
 msgctxt "@title:window"
 msgid "Making update"
 msgstr "Izvajanje posodobitev"
 
-#: src/svnfrontend/svnactions.cpp:1459
+#: src/svnfrontend/svnactions.cpp:1519
 #, kde-format
 msgid "Making update - hit Cancel for abort"
 msgstr "Izvajanje posodobitev - kliknite Prekliči za prekinitev"
 
-#: src/svnfrontend/svnactions.cpp:1544
+#: src/svnfrontend/svnactions.cpp:1604
 #, kde-format
 msgid "Which files or directories should I add?"
 msgstr "Katere datoteke ali mape naj bodo dodane?"
 
-#: src/svnfrontend/svnactions.cpp:1551
+#: src/svnfrontend/svnactions.cpp:1611
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is versioned - break.</center>"
 msgstr "<center>Vnos<br/>%1<br/>ima različico - prekinjanje.</center>"
 
-#: src/svnfrontend/svnactions.cpp:1578
+#: src/svnfrontend/svnactions.cpp:1638
 #, kde-format
 msgid "Delete from repository"
 msgstr "Izbriši iz skladišča"
 
-#: src/svnfrontend/svnactions.cpp:1629
+#: src/svnfrontend/svnactions.cpp:1689
 #, kde-format
 msgctxt "@title:window"
 msgid "Export a Repository"
 msgstr "Izvozi skladišče"
 
-#: src/svnfrontend/svnactions.cpp:1629
+#: src/svnfrontend/svnactions.cpp:1689
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout a Repository"
 msgstr "Prevzemi skladišče"
 
-#: src/svnfrontend/svnactions.cpp:1647 src/svnfrontend/svnactions.cpp:1654
+#: src/svnfrontend/svnactions.cpp:1707 src/svnfrontend/svnactions.cpp:1714
 #, kde-format
 msgid "Export repository"
 msgstr "Izvozi skladišče"
 
-#: src/svnfrontend/svnactions.cpp:1653
+#: src/svnfrontend/svnactions.cpp:1713
 #, kde-format
 msgid "Invalid local path given!"
 msgstr "Podana neveljavna lokalna pot!"
 
-#: src/svnfrontend/svnactions.cpp:1673
+#: src/svnfrontend/svnactions.cpp:1733
 #, kde-format
 msgid "Exporting a file?"
 msgstr "Izvozim datoteko?"
 
-#: src/svnfrontend/svnactions.cpp:1673
+#: src/svnfrontend/svnactions.cpp:1733
 #, kde-format
 msgid "Checking out a file?"
 msgstr "Prevzamem datoteko?"
 
-#: src/svnfrontend/svnactions.cpp:1729
+#: src/svnfrontend/svnactions.cpp:1789
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
 msgstr "Izvozi"
 
-#: src/svnfrontend/svnactions.cpp:1729
+#: src/svnfrontend/svnactions.cpp:1789
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout"
 msgstr "Prevzemi"
 
-#: src/svnfrontend/svnactions.cpp:1730
+#: src/svnfrontend/svnactions.cpp:1790
 #, kde-format
 msgid "Exporting"
 msgstr "Izvažanje"
 
-#: src/svnfrontend/svnactions.cpp:1730
+#: src/svnfrontend/svnactions.cpp:1790
 #, kde-format
 msgid "Checking out"
 msgstr "Prevzemanje"
 
-#: src/svnfrontend/svnactions.cpp:1768
+#: src/svnfrontend/svnactions.cpp:1828
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
 msgstr "<center>Vnos<br/>%1<br/>nima različice - prekinjanje.</center>"
 
-#: src/svnfrontend/svnactions.cpp:1800
+#: src/svnfrontend/svnactions.cpp:1860
 #, kde-format
 msgctxt "@title:window"
 msgid "Revert"
 msgstr "Povrni"
 
-#: src/svnfrontend/svnactions.cpp:1800
+#: src/svnfrontend/svnactions.cpp:1860
 #, kde-format
 msgid "Reverting items"
 msgstr "Poteka povrnitev predmetov"
 
-#: src/svnfrontend/svnactions.cpp:1829 src/svnfrontend/svnactions.cpp:1893
+#: src/svnfrontend/svnactions.cpp:1889 src/svnfrontend/svnactions.cpp:1953
 #, kde-format
 msgctxt "@title:window"
 msgid "Switch URL"
 msgstr "Preklopi URL"
 
-#: src/svnfrontend/svnactions.cpp:1829
+#: src/svnfrontend/svnactions.cpp:1889
 #, kde-format
 msgid "Switching URL"
 msgstr "Preklapljanje naslova URL"
 
-#: src/svnfrontend/svnactions.cpp:1850
+#: src/svnfrontend/svnactions.cpp:1910
 #, kde-format
 msgctxt "@title:window"
 msgid "Relocate Repository"
 msgstr "Spremeni naslov skladišča"
 
-#: src/svnfrontend/svnactions.cpp:1851
+#: src/svnfrontend/svnactions.cpp:1911
 #, kde-format
 msgid "Relocate repository to new URL"
 msgstr "Spremeni naslov URL skladišča"
 
-#: src/svnfrontend/svnactions.cpp:1874
+#: src/svnfrontend/svnactions.cpp:1934
 #, kde-format
 msgid "Can only switch one item at time"
 msgstr "Naenkrat lahko preklopite le en predmet"
 
-#: src/svnfrontend/svnactions.cpp:1880
+#: src/svnfrontend/svnactions.cpp:1940
 #, kde-format
 msgid "Error getting entry to switch"
 msgstr "Napaka med pridobivanjem vnosa za preklop"
 
-#: src/svnfrontend/svnactions.cpp:1903
+#: src/svnfrontend/svnactions.cpp:1963
 #, kde-format
 msgid "Switch URL"
 msgstr "Preklopi URL"
 
-#: src/svnfrontend/svnactions.cpp:1920
+#: src/svnfrontend/svnactions.cpp:1980
 #, kde-format
 msgctxt "@title:window"
 msgid "Cleanup"
 msgstr "Počisti"
 
-#: src/svnfrontend/svnactions.cpp:1920
+#: src/svnfrontend/svnactions.cpp:1980
 #, kde-format
 msgid "Cleaning up folder"
 msgstr "Čiščenje mape"
 
-#: src/svnfrontend/svnactions.cpp:1936
+#: src/svnfrontend/svnactions.cpp:1996
 #, kde-format
 msgctxt "@title:window"
 msgid "Resolve"
 msgstr "Razreši"
 
-#: src/svnfrontend/svnactions.cpp:1936
+#: src/svnfrontend/svnactions.cpp:1996
 #, kde-format
 msgid "Marking resolved"
 msgstr "Označevanje kot razrešeno"
 
-#: src/svnfrontend/svnactions.cpp:1967
+#: src/svnfrontend/svnactions.cpp:2027
 #, kde-format
 msgid "Could not retrieve conflict information - giving up."
 msgstr "Ni bilo mogoče pridobiti podatkov o sporih - prekinjanje."
 
-#: src/svnfrontend/svnactions.cpp:1992
+#: src/svnfrontend/svnactions.cpp:2052
 #, kde-format
 msgid "Resolve-process could not started, check command."
 msgstr "Opravila za razrešitev ni bilo mogoče zagnati, preverite ukaz."
 
-#: src/svnfrontend/svnactions.cpp:2002
+#: src/svnfrontend/svnactions.cpp:2062
 #, kde-format
 msgctxt "@title:window"
 msgid "Import"
 msgstr "Uvozi"
 
-#: src/svnfrontend/svnactions.cpp:2002
+#: src/svnfrontend/svnactions.cpp:2062
 #, kde-format
 msgid "Importing items"
 msgstr "Uvažanje predmetov"
 
-#: src/svnfrontend/svnactions.cpp:2031
+#: src/svnfrontend/svnactions.cpp:2091
 #, kde-format
 msgid "Nothing to merge."
 msgstr "Nič ni za združiti."
 
-#: src/svnfrontend/svnactions.cpp:2035
+#: src/svnfrontend/svnactions.cpp:2095
 #, kde-format
 msgid "No destination to merge."
 msgstr "Ni cilja za združitev."
 
-#: src/svnfrontend/svnactions.cpp:2054
+#: src/svnfrontend/svnactions.cpp:2114
 #, kde-format
 msgid "Both sources must be same type."
 msgstr "Oba vira morata biti iste vrste."
 
-#: src/svnfrontend/svnactions.cpp:2061
+#: src/svnfrontend/svnactions.cpp:2121
 #, kde-format
 msgid "Target for merge must same type like sources."
 msgstr "Cilj za združitev mora biti iste vrste kot vira."
 
-#: src/svnfrontend/svnactions.cpp:2084
+#: src/svnfrontend/svnactions.cpp:2144
 #, kde-format
 msgid "Both entries seems to be the same, will not do a merge."
 msgstr "Oba vnosa sta enaka, zato ne bo združitve."
 
-#: src/svnfrontend/svnactions.cpp:2162
+#: src/svnfrontend/svnactions.cpp:2222
 #, kde-format
 msgid "Merge process could not started, check command."
 msgstr "Opravila za združitev ni bilo mogoče zagnati, preverite ukaz."
 
-#: src/svnfrontend/svnactions.cpp:2244
+#: src/svnfrontend/svnactions.cpp:2304
 #, kde-format
 msgid "Merging items"
 msgstr "Združevanje predmetov"
 
-#: src/svnfrontend/svnactions.cpp:2270 src/svnfrontend/svnactions.cpp:2287
+#: src/svnfrontend/svnactions.cpp:2330 src/svnfrontend/svnactions.cpp:2347
 #, kde-format
 msgctxt "@title:window"
 msgid "Move"
 msgstr "Premakni"
 
-#: src/svnfrontend/svnactions.cpp:2270
+#: src/svnfrontend/svnactions.cpp:2330
 #, kde-format
 msgid "Moving/Rename item"
 msgstr "Premikanje/preimenovanje predmeta"
 
-#: src/svnfrontend/svnactions.cpp:2287
+#: src/svnfrontend/svnactions.cpp:2347
 #, kde-format
 msgid "Moving entries"
 msgstr "Premikanje vnosov"
 
-#: src/svnfrontend/svnactions.cpp:2307 src/svnfrontend/svnactions.cpp:2321
+#: src/svnfrontend/svnactions.cpp:2367 src/svnfrontend/svnactions.cpp:2381
 #, kde-format
 msgctxt "@title:window"
 msgid "Copy / Move"
 msgstr "Kopiraj/premakni"
 
-#: src/svnfrontend/svnactions.cpp:2307 src/svnfrontend/svnactions.cpp:2321
+#: src/svnfrontend/svnactions.cpp:2367 src/svnfrontend/svnactions.cpp:2381
 #, kde-format
 msgid "Copy or Moving entries"
 msgstr "Kopiraj ali premakni vnose"
 
-#: src/svnfrontend/svnactions.cpp:2437
+#: src/svnfrontend/svnactions.cpp:2497
 #, kde-format
 msgid "No unversioned items found."
 msgstr "Ni najdenih predmetov brez različic."
 
-#: src/svnfrontend/svnactions.cpp:2441
+#: src/svnfrontend/svnactions.cpp:2501
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Unversioned Items"
 msgstr "Dodaj predmete brez različic"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
-#: src/svnfrontend/svnactions.cpp:2444 src/svnfrontend/svnlogdlg.ui:163
+#: src/svnfrontend/svnactions.cpp:2504 src/svnfrontend/svnlogdlg.ui:163
 #, kde-format
 msgid "Item"
 msgstr "Predmet"
 
-#: src/svnfrontend/svnactions.cpp:2559
+#: src/svnfrontend/svnactions.cpp:2619
 #, kde-format
 msgid "Found %1 modified item"
 msgid_plural "Found %1 modified items"
@@ -5416,28 +5417,28 @@ msgstr[1] "Najden %1 spremenjen predmet"
 msgstr[2] "Najdena %1 spremenjena predmeta"
 msgstr[3] "Najdeni %1 spremenjeni predmeti"
 
-#: src/svnfrontend/svnactions.cpp:2587
+#: src/svnfrontend/svnactions.cpp:2647
 #, kde-format
 msgid "Checking for updates finished"
 msgstr "Preverjanje za posodobitvami zaključeno"
 
-#: src/svnfrontend/svnactions.cpp:2589
+#: src/svnfrontend/svnactions.cpp:2649
 #, kde-format
 msgid "There are new items in repository"
 msgstr "V skladišču so novi predmeti"
 
-#: src/svnfrontend/svnactions.cpp:2659
+#: src/svnfrontend/svnactions.cpp:2719
 #, kde-format
 msgid "Not filling log cache because networking is disabled"
 msgstr ""
 "Ustvarjanje predpomnilnikov dnevnikov ni mogoče, ker je omrežje onemogočeno"
 
-#: src/svnfrontend/svnactions.cpp:2699
+#: src/svnfrontend/svnactions.cpp:2759
 #, kde-format
 msgid "Not checking for updates because networking is disabled"
 msgstr "Preverjanje za posodobitvami ni mogoče, ker je omrežje onemogočeno"
 
-#: src/svnfrontend/svnactions.cpp:2705
+#: src/svnfrontend/svnactions.cpp:2765
 #, kde-format
 msgid "Checking for updates started in background"
 msgstr "Preverjanje za posodobitvami se je začelo v ozadju"

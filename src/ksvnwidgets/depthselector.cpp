@@ -62,3 +62,5 @@ void DepthSelector::hideDepth(bool hide)
 {
     m_ui->m_DepthCombo->setHidden(hide);
 }
+
+#include "moc_depthselector.cpp"

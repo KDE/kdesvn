@@ -35,3 +35,5 @@ void DiffMergeSettings_impl::diffDispChanged(bool how)
 {
     kcfg_external_diff_display->setEnabled(how);
 }
+
+#include "moc_diffmergesettings_impl.cpp"

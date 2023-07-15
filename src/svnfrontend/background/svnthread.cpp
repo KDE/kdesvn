@@ -80,3 +80,5 @@ void SvnThread::itemInfo(const QString &what, svn::InfoEntry &target, const svn:
         target = _e[0];
     }
 }
+
+#include "moc_svnthread.cpp"

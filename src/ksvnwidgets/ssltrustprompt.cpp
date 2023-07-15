@@ -92,3 +92,5 @@ bool SslTrustPrompt::sslTrust(const QString &host,
     *ok = (i == QDialogButtonBox::Yes || i == QDialogButtonBox::No);
     return *ok;
 }
+
+#include "moc_ssltrustprompt.cpp"

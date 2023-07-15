@@ -230,3 +230,5 @@ void ThreadContextListener::event_contextNotify(const QString &msg)
 {
     CContextListener::contextNotify(msg);
 }
+
+#include "moc_tcontextlistener.cpp"

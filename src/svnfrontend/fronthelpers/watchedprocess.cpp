@@ -118,3 +118,5 @@ void WatchedProcess::appendTempDir(const QString &aDir)
 {
     m_Data->_tempDirs.append(aDir);
 }
+
+#include "moc_watchedprocess.cpp"

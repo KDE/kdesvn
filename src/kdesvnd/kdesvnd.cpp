@@ -387,3 +387,5 @@ void kdesvnd::setKioStatus(qulonglong kioid, int status, const QString &message)
 }
 
 #include "kdesvnd.moc"
+
+#include "moc_kdesvnd.cpp"

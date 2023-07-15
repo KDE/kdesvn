@@ -111,3 +111,5 @@ QUrl UrlDlg::getUrl(QWidget *parent)
     delete dlg;
     return ret;
 }
+
+#include "moc_urldlg.cpp"

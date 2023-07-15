@@ -3031,3 +3031,5 @@ bool SvnActions::threadRunning(ThreadType which) const
     }
     return false;
 }
+
+#include "moc_svnactions.cpp"

@@ -186,3 +186,5 @@ bool CheckoutInfo_impl::ignoreExternals() const
 {
     return m_ignoreExternals->isChecked();
 }
+
+#include "moc_checkoutinfo_impl.cpp"

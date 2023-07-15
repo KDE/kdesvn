@@ -29,3 +29,5 @@ SubversionSettings_impl::SubversionSettings_impl(QWidget *parent)
 SubversionSettings_impl::~SubversionSettings_impl()
 {
 }
+
+#include "moc_subversionsettings_impl.cpp"

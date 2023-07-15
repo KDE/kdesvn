@@ -53,3 +53,5 @@ bool AuthDialogWidget::maySave() const
 {
     return m_StorePasswordButton->isChecked();
 }
+
+#include "moc_authdialogwidget.cpp"

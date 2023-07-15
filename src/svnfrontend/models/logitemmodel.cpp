@@ -267,3 +267,5 @@ bool SvnLogSortModel::lessThan(const QModelIndex &source_left, const QModelIndex
     }
     return QSortFilterProxyModel::lessThan(source_left, source_right);
 }
+
+#include "moc_logitemmodel.cpp"

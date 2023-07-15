@@ -921,3 +921,5 @@ void SvnItemModel::slotNotifyMessage(const QString &msg)
 {
     qCDebug(KDESVN_LOG) << msg;
 }
+
+#include "moc_svnitemmodel.cpp"

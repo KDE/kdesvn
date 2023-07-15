@@ -421,3 +421,5 @@ void BlameDisplay::slotTextCodecChanged(const QString &what)
         }
     }
 }
+
+#include "moc_blamedisplay.cpp"

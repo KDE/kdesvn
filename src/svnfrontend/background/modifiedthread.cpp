@@ -51,3 +51,5 @@ void CheckModifiedThread::run()
     }
     emit checkModifiedFinished();
 }
+
+#include "moc_modifiedthread.cpp"

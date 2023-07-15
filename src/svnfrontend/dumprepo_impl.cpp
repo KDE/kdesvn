@@ -89,3 +89,5 @@ int DumpRepo_impl::endNumber() const
 {
     return useNumbers() ? m_EndNumber->value() : -1;
 }
+
+#include "moc_dumprepo_impl.cpp"

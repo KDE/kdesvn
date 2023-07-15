@@ -241,3 +241,5 @@ void MergeDlg_impl::reintegrateToggled(bool how)
         m_RelatedCheck->setChecked(false);
     }
 }
+
+#include "moc_mergedlg_impl.cpp"

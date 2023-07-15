@@ -45,3 +45,5 @@ bool EditIgnorePattern::unignore() const
 {
     return m_RemoveCheckBox->isChecked();
 }
+
+#include "moc_EditIgnorePattern.cpp"

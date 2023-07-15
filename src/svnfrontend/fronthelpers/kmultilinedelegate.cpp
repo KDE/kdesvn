@@ -60,3 +60,5 @@ QSize KMultilineDelegate::sizeHint(const QStyleOptionViewItem &option, const QMo
     }
     return s;
 }
+
+#include "moc_kmultilinedelegate.cpp"

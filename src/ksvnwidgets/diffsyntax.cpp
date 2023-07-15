@@ -81,3 +81,5 @@ void DiffSyntax::highlightBlock(const QString &aText)
         setFormat(idx + 1, aText.length() - idx - 1, format); // only spaces in this range
     }
 }
+
+#include "moc_diffsyntax.cpp"

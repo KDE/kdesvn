@@ -121,3 +121,5 @@ void FillCacheThread::run()
         emit fillCacheFinished();
     }
 }
+
+#include "moc_fillcachethread.cpp"

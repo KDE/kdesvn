@@ -41,3 +41,5 @@ svn::Depth RevertForm::getDepth() const
 {
     return m_ui->m_DepthSelect->getDepth();
 }
+
+#include "moc_revertform.cpp"

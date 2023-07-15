@@ -33,3 +33,5 @@ CmdExecSettings_impl::CmdExecSettings_impl(QWidget *parent)
 CmdExecSettings_impl::~CmdExecSettings_impl()
 {
 }
+
+#include "moc_cmdexecsettings_impl.cpp"

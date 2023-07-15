@@ -136,3 +136,5 @@ svn::repository::CreateRepoParameter CreaterepoDlg::parameter() const
     params.bdbautologremove(!m_ui->m_LogKeep->isChecked());
     return params;
 }
+
+#include "moc_createrepodlg.cpp"

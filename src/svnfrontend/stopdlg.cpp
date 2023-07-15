@@ -206,3 +206,5 @@ void StopDlg::slotNetProgres(long long int current, long long int max)
         QCoreApplication::processEvents();
     }
 }
+
+#include "moc_stopdlg.cpp"

@@ -150,3 +150,5 @@ bool Propertylist::checkExisting(const QString &aName, QTreeWidgetItem *it)
     }
     return false;
 }
+
+#include "moc_propertylist.cpp"

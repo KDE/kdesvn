@@ -29,3 +29,5 @@ PollingSettings_impl::PollingSettings_impl(QWidget *parent)
 PollingSettings_impl::~PollingSettings_impl()
 {
 }
+
+#include "moc_polling_settings_impl.cpp"

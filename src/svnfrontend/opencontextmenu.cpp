@@ -81,3 +81,5 @@ void OpenContextmenu::slotOpenWith()
     job->setUiDelegate(KIO::createDefaultJobUiDelegate(KJobUiDelegate::AutoErrorHandlingEnabled, parentWidget()));
     job->start();
 }
+
+#include "moc_opencontextmenu.cpp"

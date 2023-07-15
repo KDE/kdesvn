@@ -2633,3 +2633,5 @@ void MainTreeWidget::slotDirRecProperty()
     }
     KMessageBox::information(this, i18n("Not yet implemented"), i18n("Edit property recursively"));
 }
+
+#include "moc_maintreewidget.cpp"

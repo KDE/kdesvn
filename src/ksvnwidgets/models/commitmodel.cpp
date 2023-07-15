@@ -304,3 +304,5 @@ void CommitFilterModel::hideItems(bool bHide, CommitActionEntry::ACTION_TYPE aTy
 /*************************
  * end CommitFilterModel *
  *************************/
+
+#include "moc_commitmodel.cpp"

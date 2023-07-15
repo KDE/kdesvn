@@ -98,3 +98,5 @@ void KSvnSimpleOkDialog::onHelpRequested()
 {
     KHelpClient::invokeHelp(m_helpContext, QLatin1String("kdesvn"));
 }
+
+#include "moc_ksvndialog.cpp"

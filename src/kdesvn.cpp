@@ -417,3 +417,5 @@ void kdesvn::slotExtraStatus(const QString &message)
     statusBar()->clearMessage();
     statusBar()->showMessage(message);
 }
+
+#include "moc_kdesvn.cpp"

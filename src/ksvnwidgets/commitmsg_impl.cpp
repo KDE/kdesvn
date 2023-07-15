@@ -534,3 +534,5 @@ void Commitmsg_impl::slotCurrentItemChanged(const QModelIndex &current)
     m_RevertItemButton->setEnabled(bDiffRevertEnabled);
     m_DiffItem->setEnabled(bDiffRevertEnabled);
 }
+
+#include "moc_commitmsg_impl.cpp"

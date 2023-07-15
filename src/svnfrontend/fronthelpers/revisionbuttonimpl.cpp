@@ -48,3 +48,5 @@ void RevisionButtonImpl::setNoWorking(bool how)
 {
     m_noWorking = how;
 }
+
+#include "moc_revisionbuttonimpl.cpp"

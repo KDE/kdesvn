@@ -230,3 +230,5 @@ bool SshAgent::startSshAgent()
 
     return ok;
 }
+
+#include "moc_sshagent.cpp"

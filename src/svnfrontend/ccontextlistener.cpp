@@ -401,3 +401,5 @@ void CContextListener::extraNotify(const QString &path, svn_wc_notify_action_t a
         break;
     }
 }
+
+#include "moc_ccontextlistener.cpp"

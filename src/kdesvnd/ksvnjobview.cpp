@@ -51,3 +51,5 @@ void KsvnJobView::setTotal(qlonglong amount)
     m_max = amount;
     setTotalAmount(amount, i18n("bytes"));
 }
+
+#include "moc_ksvnjobview.cpp"

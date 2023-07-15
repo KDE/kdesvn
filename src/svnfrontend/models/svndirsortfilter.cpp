@@ -33,3 +33,5 @@ int SvnDirSortFilterProxy::columnCount(const QModelIndex &parent) const
     Q_UNUSED(parent);
     return 1;
 }
+
+#include "moc_svndirsortfilter.cpp"

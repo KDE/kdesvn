@@ -374,3 +374,5 @@ void kdesvnpart::showDbStatus()
 }
 
 #include "kdesvn_part.moc"
+
+#include "moc_kdesvn_part.cpp"

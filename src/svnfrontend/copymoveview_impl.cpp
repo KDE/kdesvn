@@ -86,3 +86,5 @@ QString CopyMoveView_impl::getMoveCopyTo(bool *ok, bool move, const QString &old
     delete dlg;
     return nName;
 }
+
+#include "moc_copymoveview_impl.cpp"

@@ -28,3 +28,5 @@ RevisiontreeSettingsDlg_impl::RevisiontreeSettingsDlg_impl(QWidget *parent)
 RevisiontreeSettingsDlg_impl::~RevisiontreeSettingsDlg_impl()
 {
 }
+
+#include "moc_revisiontreesettingsdlg_impl.cpp"

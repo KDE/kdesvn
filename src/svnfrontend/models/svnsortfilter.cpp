@@ -69,3 +69,5 @@ void SvnSortFilterProxy::setShowFilter(svnmodel::ItemTypeFlag fl)
     m_ShowFilter = fl;
     invalidateFilter();
 }
+
+#include "moc_svnsortfilter.cpp"

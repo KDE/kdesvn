@@ -83,3 +83,5 @@ void DbSettings::showSettings(const QString &repository, QWidget *parent)
     dlg->exec();
     delete dlg;
 }
+
+#include "moc_dbsettings.cpp"

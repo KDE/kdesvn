@@ -455,3 +455,5 @@ void kdesvnView::onCustomLogWindowContextMenuRequested(const QPoint &pos)
     menu->exec(m_LogWindow->mapToGlobal(pos));
     delete menu;
 }
+
+#include "moc_kdesvnview.cpp"

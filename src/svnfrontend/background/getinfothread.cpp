@@ -121,3 +121,5 @@ void GetInfoThread::clearNodes()
     QMutexLocker ml(&m_QueueLock);
     m_NodeQueue.clear();
 }
+
+#include "moc_getinfothread.cpp"

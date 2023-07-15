@@ -194,3 +194,5 @@ void EditPropsDlg::setPropValue(const QString &v)
 {
     m_ui->m_ValueEdit->setText(v);
 }
+
+#include "moc_editpropsdlg.cpp"

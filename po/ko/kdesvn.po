@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kdesvn package.
 # JungHee Lee <daemul72@gmail.com>, 2019.
-# Shinjo Park <kde@peremen.name>, 2019, 2020, 2022.
+# Shinjo Park <kde@peremen.name>, 2019, 2020, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-04 00:50+0000\n"
-"PO-Revision-Date: 2022-05-15 22:21+0200\n"
+"PO-Revision-Date: 2023-07-25 00:56+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -135,10 +135,7 @@ msgid "Show the content of log cache database"
 msgstr "로그 캐시 데이터베이스의 내용 표시"
 
 #: src/kdesvn.cpp:134
-#, fuzzy, kde-format
-#| msgid ""
-#| "Could not load the part:\n"
-#| "%1"
+#, kde-format
 msgid ""
 "Could not load our part:\n"
 "%1"
@@ -2680,7 +2677,7 @@ msgstr "암호 저장"
 #, kde-format
 msgctxt "@action:button"
 msgid "Store in Plain Text"
-msgstr ""
+msgstr "일반 텍스트로 저장"
 
 #: src/svnfrontend/commandexec.cpp:206 src/svnfrontend/commandexec.cpp:321
 #: src/svnfrontend/graphtree/revgraphview.cpp:992
@@ -2913,8 +2910,7 @@ msgid "Clean repository cache"
 msgstr "저장소 캐시 지우기"
 
 #: src/svnfrontend/database/dboverview.cpp:131
-#, fuzzy, kde-format
-#| msgid "Delete cache"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Cache"
 msgstr "캐시 삭제"
@@ -2934,8 +2930,7 @@ msgid "Delete repository"
 msgstr "저장소 삭제"
 
 #: src/svnfrontend/database/dboverview.cpp:150
-#, fuzzy, kde-format
-#| msgid "Delete repository"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Repository"
 msgstr "저장소 삭제"
@@ -4404,11 +4399,10 @@ msgstr "항목 잠금 해제 중"
 #, kde-format
 msgctxt "@action:button"
 msgid "Break Lock"
-msgstr ""
+msgstr "잠금 깨기"
 
 #: src/svnfrontend/maintreewidget.cpp:1606
-#, fuzzy, kde-format
-#| msgid "Ignore"
+#, kde-format
 msgctxt "@action:button"
 msgid "Ignore"
 msgstr "무시"

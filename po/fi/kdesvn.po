@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-06-07 01:43+0000\n"
-"PO-Revision-Date: 2023-03-22 15:18+0200\n"
+"PO-Revision-Date: 2023-07-25 16:29+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -107,12 +107,12 @@ msgstr "Lataa vedostiedosto versionhallintaan."
 #: src/kdesvn.cpp:133
 #, kde-format
 msgid "Add ssh identities to ssh-agent"
-msgstr ""
+msgstr "Lisää SSH-henkilöydet SSH-agentille"
 
 #: src/kdesvn.cpp:134
 #, kde-format
 msgid "Force add ssh-identities to ssh-agent for future use."
-msgstr ""
+msgstr "Pakota lisäämään SSH-henkilöydet SSH-agentille vastaisuudessa."
 
 #: src/kdesvn.cpp:139
 #, kde-format
@@ -665,22 +665,22 @@ msgstr ""
 #: src/kiosvn/kiosvn.cpp:384
 #, kde-format
 msgid "Start checking out to temporary folder"
-msgstr ""
+msgstr "Aloitetaan nouto väliaikaiskansioon"
 
 #: src/kiosvn/kiosvn.cpp:387
 #, kde-format
 msgid "Checking out %1"
-msgstr ""
+msgstr "Noudetaan %1"
 
 #: src/kiosvn/kiosvn.cpp:396
 #, kde-format
 msgid "Temporary checkout done."
-msgstr ""
+msgstr "Väliaikaisnouto valmis."
 
 #: src/kiosvn/kiosvn.cpp:400
 #, kde-format
 msgid "Could not write to existing item."
-msgstr ""
+msgstr "Olemassa olevaa kohdetta ei voitu kirjoittaa."
 
 #: src/kiosvn/kiosvn.cpp:406
 #, kde-format
@@ -690,7 +690,7 @@ msgstr "Ei voitu avata tilapäistä tiedostoa"
 #: src/kiosvn/kiosvn.cpp:430
 #, kde-format
 msgid "Could not retrieve data for write."
-msgstr ""
+msgstr "Kirjoitettavaa dataa ei saatu noudettua."
 
 #: src/kiosvn/kiosvn.cpp:438
 #, kde-format
@@ -817,13 +817,13 @@ msgstr "Poista uusien tietueiden merkinnät"
 #: src/ksvnwidgets/commitmessage.ui:107
 #, kde-format
 msgid "Revert highlighted item"
-msgstr ""
+msgstr "Palauta korostettu kohde"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_RevertItemButton)
 #: src/ksvnwidgets/commitmessage.ui:110
 #, kde-format
 msgid "Revert item"
-msgstr ""
+msgstr "Palauta kohde"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_DiffItem)
 #: src/ksvnwidgets/commitmessage.ui:117
@@ -899,7 +899,7 @@ msgstr "Valitse lisättävä tekstitiedosto:"
 #: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1560
 #, kde-format
 msgid "Really delete these entries?"
-msgstr ""
+msgstr "Poistetaanko nämä tietueet varmasti?"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_forceDelete)
 #: src/ksvnwidgets/deleteform.ui:23
@@ -1083,13 +1083,13 @@ msgstr "Lukitse/avaa lukitus"
 #: src/ksvnwidgets/revertform.ui:14
 #, kde-format
 msgid "Revert entries"
-msgstr ""
+msgstr "Palauta tietueet"
 
 #. i18n: ectx: property (text), widget (QLabel, m_headLine)
 #: src/ksvnwidgets/revertform.ui:20
 #, kde-format
 msgid "Really revert these entries to pristine state?"
-msgstr ""
+msgstr "Palautetaanko nämä tietueet varmasti koskemattomaan tilaansa?"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:33
 #, kde-format
@@ -1291,7 +1291,7 @@ msgstr ""
 #: src/settings/cmdexecsettings.ui:64
 #, kde-format
 msgid "Do not display entries in toplevel action menu"
-msgstr ""
+msgstr "Älä näytä tietueita ylimmän tason toimintovalikossa"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_kio_use_standard_logmsg)
 #: src/settings/cmdexecsettings.ui:71
@@ -1321,6 +1321,11 @@ msgid ""
 "\n"
 "Use this only if you are sure what you are doing."
 msgstr ""
+"Jos tämä lippu on asetettu, olemassa oleville kohteille on yksinkertainen "
+"kirjoitustuki. Tiedostot voi avata esim. muokkaimeen ja tallentaa ne suoraan "
+"noutamatta niitä ensin (kdesvn tekee sen taustalla).\n"
+"\n"
+"Käytä tätä vain, jos varmasti tiedät, mitä teet."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_kio_can_overwrite)
 #: src/settings/cmdexecsettings.ui:106
@@ -1430,7 +1435,7 @@ msgstr "Käytä Gitin diff-muotoa"
 #: src/settings/diffmergesettings.ui:66 src/settings/kdesvn_part.kcfg:45
 #, kde-format
 msgid "Show copies as add"
-msgstr ""
+msgstr "Näytä kopiot lisäyksinä"
 
 #. i18n: ectx: property (text), widget (QLabel, resolveLabel)
 #: src/settings/diffmergesettings.ui:77
@@ -1504,7 +1509,7 @@ msgstr "Ulkoinen diff-näkymä:"
 #: src/settings/diffmergesettings.ui:154
 #, kde-format
 msgid "Setup an external program for merging"
-msgstr ""
+msgstr "Aseta yhdistämiseen ulkoinen ohjelma"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_external_merge_program)
 #: src/settings/diffmergesettings.ui:166
@@ -1558,7 +1563,7 @@ msgstr ""
 #: src/settings/diffmergesettings.ui:200
 #, kde-format
 msgid "see \"What's this\" for details"
-msgstr ""
+msgstr "katso ”Mikä tämä on” -toiminnolla lisätietoa"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DispColorSettings)
 #: src/settings/dispcolor_settings.ui:6
@@ -1693,7 +1698,7 @@ msgstr "Näytä tiedoston tiedot"
 #: src/settings/display_settings.ui:77
 #, kde-format
 msgid "Display colored annotate"
-msgstr ""
+msgstr "Näytä värilliset merkinnät"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_show_navigation_panel)
 #: src/settings/display_settings.ui:84
@@ -1705,7 +1710,7 @@ msgstr "Käytä navigointipaneelia"
 #: src/settings/kdesvn_part.kcfg:9
 #, kde-format
 msgid "Set if items sortorder should be case sensitive or not"
-msgstr ""
+msgstr "Valitse, tulisiko lajiteltaessa erottaa pien- ja suuraakkoset"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:13
@@ -1717,19 +1722,19 @@ msgstr "Kuvakkeiden koko"
 #: src/settings/kdesvn_part.kcfg:17
 #, kde-format
 msgid "Show file information in tooltip"
-msgstr ""
+msgstr "Näytä tiedoston tiedot työkaluvihjeessä"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:21
 #, kde-format
 msgid "Use an external program for diff viewing/generating"
-msgstr ""
+msgstr "Käytä erojen katseluun ja tarkistamiseen ulkoista ohjelmaa"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:25
 #, kde-format
 msgid "Use external program for diff viewing"
-msgstr ""
+msgstr "Käytä erojen katseluun ulkoista ohjelmaa"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:37
@@ -1753,7 +1758,7 @@ msgstr "Lokiviestien enimmäismäärä"
 #: src/settings/kdesvn_part.kcfg:53
 #, kde-format
 msgid "Display colored blame lines"
-msgstr ""
+msgstr "Näytä värilliset moiterivit"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:68
@@ -1792,31 +1797,33 @@ msgstr "Loki seuraa solmumuutoksia"
 #: src/settings/kdesvn_part.kcfg:96 src/settings/subversion_settings.ui:161
 #, kde-format
 msgid "Log always reads list of changed files"
-msgstr ""
+msgstr "Loki lukee aina muuttuneiden tiedostojen luettelon"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:100
 #, kde-format
 msgid "Start check for updates when open working copy"
-msgstr ""
+msgstr "Aloita päivitysten tarkistaminen työkopiota avattaessa"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:104
 #, kde-format
 msgid "Start caching latest logs on open or commit"
 msgstr ""
+"Aloita viimeisimpien lokien vieminen välimuistiin avattaessa tai "
+"toimitettaessa"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:108
 #, kde-format
 msgid "Get detailed information when making a remote listing"
-msgstr ""
+msgstr "Nouda etäkansiota lueteltaessa tarkat tiedot"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:112
 #, kde-format
 msgid "Get properties on selected item on networked protocols"
-msgstr ""
+msgstr "Nouda verkkoyhteyskäytännöissä valitun kohteen ominaisuudet"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:116
@@ -2191,7 +2198,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:84
 #, kde-format
 msgid "Should kdesvn retrieves properties on selected item in repositories"
-msgstr ""
+msgstr "Tulisiko kdesvn:n noutaa valitun kohteen ominaisuudet lähteistä"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:88
@@ -2677,7 +2684,7 @@ msgstr "Luo uusi tietovarasto"
 #: src/svnfrontend/createrepodlg.ui:22
 #, kde-format
 msgid "Disable fsync at commit (BDB only)"
-msgstr ""
+msgstr "Poista fsyncin käyttö toimitettaessa (vain BDB)"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: src/svnfrontend/createrepodlg.ui:32
@@ -2727,7 +2734,7 @@ msgstr ""
 #: src/svnfrontend/createrepodlg.ui:71
 #, kde-format
 msgid "Create main folders"
-msgstr ""
+msgstr "Luo pääkansiot"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn16compat)
 #: src/svnfrontend/createrepodlg.ui:87
@@ -2779,13 +2786,15 @@ msgstr ""
 #: src/svnfrontend/createrepodlg.ui:145
 #, kde-format
 msgid "Compatible to Subversion prior 1.5"
-msgstr ""
+msgstr "Yhteensopiva Subversion 1.5:tä vanhempien versioiden kanssa"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn18compat)
 #: src/svnfrontend/createrepodlg.ui:162
 #, kde-format
 msgid "Is created repository compatible to Subversion prior 1.8"
 msgstr ""
+"Onko luotu varasto yhteensopiva Subversionin 1.8:aa vanhempien versioiden "
+"kanssa"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn18compat)
 #: src/svnfrontend/createrepodlg.ui:165
@@ -2799,7 +2808,7 @@ msgstr ""
 #: src/svnfrontend/createrepodlg.ui:168
 #, kde-format
 msgid "Compatible to Subversion prior 1.8"
-msgstr ""
+msgstr "Yhteensopiva Subversionin 1.8:aa vanhempien versioiden kanssa"
 
 #: src/svnfrontend/database/dboverview.cpp:117
 #, kde-format
@@ -2987,7 +2996,7 @@ msgstr ""
 #: src/svnfrontend/dumprepo_dlg.ui:136
 #, kde-format
 msgid "-1 for HEAD"
-msgstr ""
+msgstr "–1 = HEAD"
 
 #. i18n: ectx: property (text), widget (QLabel, m_lblStart)
 #: src/svnfrontend/dumprepo_dlg.ui:149
@@ -3011,7 +3020,7 @@ msgstr ""
 #: src/svnfrontend/editignorepattern.ui:40
 #, kde-format
 msgid "Remove patterns"
-msgstr ""
+msgstr "Poista kuviot"
 
 #. i18n: ectx: property (text), widget (QLabel, m_DepthLabel)
 #: src/svnfrontend/editignorepattern.ui:49
@@ -3198,7 +3207,7 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:70
 #, kde-format
 msgid "Ignore externals"
-msgstr ""
+msgstr "Sivuuta ulkoiset"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_overwriteButton)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:77
@@ -3252,7 +3261,7 @@ msgstr ""
 #: src/svnfrontend/propertiesdlg.cpp:120 src/svnfrontend/propertiesdlg.cpp:171
 #, kde-format
 msgid "Protected property"
-msgstr ""
+msgstr "Havaittu ominaisuus"
 
 #: src/svnfrontend/fronthelpers/propertylist.cpp:115
 #: src/svnfrontend/propertiesdlg.cpp:124 src/svnfrontend/propertiesdlg.cpp:175
@@ -3261,6 +3270,8 @@ msgid ""
 "A property with that name exists.\n"
 "Rejecting it."
 msgstr ""
+"Tämän niminen ominaisuus on olemassa.\n"
+"Hylätään se."
 
 #: src/svnfrontend/fronthelpers/propertylist.cpp:115
 #: src/svnfrontend/propertiesdlg.cpp:124 src/svnfrontend/propertiesdlg.cpp:175
@@ -3272,14 +3283,14 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/rangeinput.ui:6
 #, kde-format
 msgid "Revisions"
-msgstr ""
+msgstr "Versiot"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_startRevBox)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:12
 #: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:209
 #, kde-format
 msgid "Start with revision"
-msgstr ""
+msgstr "Aloita versiosta"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, m_startWorkingButton)
 #. i18n: ectx: property (toolTip), widget (QRadioButton, m_stopWorkingButton)
@@ -3378,12 +3389,12 @@ msgstr "Tarkista, että ”dot” on asennettu (kuuluu GraphViz-pakettiin)."
 #: src/svnfrontend/graphtree/revgraphview.cpp:425
 #, kde-format
 msgid "Deleted at revision %1"
-msgstr ""
+msgstr "Poistettu versiossa %1"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:428
 #, kde-format
 msgid "Added at revision %1 as %2"
-msgstr ""
+msgstr "Lisätty versioon %1 nimellä %2"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:434
 #, kde-format
@@ -3393,17 +3404,17 @@ msgstr ""
 #: src/svnfrontend/graphtree/revgraphview.cpp:437
 #, kde-format
 msgid "Renamed to %1 at revision %2"
-msgstr ""
+msgstr "Nimeksi muutettu %1 versiossa %2"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:440
 #, kde-format
 msgid "Modified at revision %1"
-msgstr ""
+msgstr "Muutettu versiossa %1"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:443
 #, kde-format
 msgid "Replaced at revision %1"
-msgstr ""
+msgstr "Korvattu versiossa %1"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:446
 #, kde-format
@@ -3443,12 +3454,12 @@ msgstr "<b>Loki</b>%1%2%3"
 #: src/svnfrontend/graphtree/revgraphview.cpp:841
 #, kde-format
 msgid "Diff to previous"
-msgstr ""
+msgstr "Erot edelliseen"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:845
 #, kde-format
 msgid "Diff to selected item"
-msgstr ""
+msgstr "Erot valittuun kohteeseen"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:848
 #: src/svnfrontend/svnlogdlgimp.cpp:515
@@ -3610,7 +3621,7 @@ msgstr ""
 #: src/svnfrontend/loaddmpdlg.ui:24
 #, kde-format
 msgid "Uuid action"
-msgstr ""
+msgstr "UUID-toiminto"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_UUidForce)
 #. i18n: ectx: property (text), widget (QCheckBox, m_ForceCheck)
@@ -3663,13 +3674,13 @@ msgstr ""
 #: src/svnfrontend/loaddmpdlg.ui:92
 #, kde-format
 msgid "Load into folder:"
-msgstr ""
+msgstr "Lataa kansioon:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: src/svnfrontend/loaddmpdlg.ui:105
 #, kde-format
 msgid "Dump file:"
-msgstr ""
+msgstr "Vedostiedosto:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_validateProps)
 #: src/svnfrontend/loaddmpdlg.ui:118
@@ -3930,12 +3941,12 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:573
 #, kde-format
 msgid "Import folders into current"
-msgstr ""
+msgstr "Tuo kansiot nykyiseen"
 
 #: src/svnfrontend/maintreewidget.cpp:575
 #, kde-format
 msgid "Import folder content into current URL"
-msgstr ""
+msgstr "Tuo kansion sisältö nykyiseen verkko-osoitteeseen"
 
 #: src/svnfrontend/maintreewidget.cpp:579
 #, kde-format
@@ -3962,7 +3973,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:586
 #, kde-format
 msgid "Delete selected files/dirs"
-msgstr ""
+msgstr "Poista valitut tiedostot tai kansiot"
 
 #: src/svnfrontend/maintreewidget.cpp:588
 #, kde-format
@@ -4234,7 +4245,7 @@ msgstr "Varastetaanko lukko?"
 #: src/svnfrontend/maintreewidget.cpp:1362
 #, kde-format
 msgid "Break lock or ignore missing locks?"
-msgstr ""
+msgstr "Murretaanko lukko vai sivuutetaanko puuttuvat lukitukset?"
 
 #: src/svnfrontend/maintreewidget.cpp:1363
 #, kde-format
@@ -4257,8 +4268,7 @@ msgid "May not make subdirectories of a file"
 msgstr ""
 
 #: src/svnfrontend/maintreewidget.cpp:1944 src/svnfrontend/svnactions.cpp:2182
-#, fuzzy, kde-format
-#| msgid "Merge"
+#, kde-format
 msgctxt "@title:window"
 msgid "Merge"
 msgstr "Yhdistä"
@@ -4293,7 +4303,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:2055
 #, kde-format
 msgid "Import files from folder"
-msgstr ""
+msgstr "Tuo tiedostot kansiosta"
 
 #: src/svnfrontend/maintreewidget.cpp:2057
 #, kde-format
@@ -4309,12 +4319,12 @@ msgstr "Tuo loki"
 #: src/svnfrontend/maintreewidget.cpp:2137
 #, kde-format
 msgid "Could not retrieve repository of working copy."
-msgstr ""
+msgstr "Ei voitu noutaa työkopion varastoa"
 
 #: src/svnfrontend/maintreewidget.cpp:2146
 #, kde-format
 msgid "Only in working copy possible."
-msgstr ""
+msgstr "Mahdollista vain työkopiossa."
 
 #: src/svnfrontend/maintreewidget.cpp:2146
 #: src/svnfrontend/maintreewidget.cpp:2150
@@ -4326,12 +4336,12 @@ msgstr "Virhe"
 #: src/svnfrontend/maintreewidget.cpp:2150
 #, kde-format
 msgid "Only on single folder possible"
-msgstr ""
+msgstr "Mahdollista vain yksittäisessä kansiossa"
 
 #: src/svnfrontend/maintreewidget.cpp:2155
 #, kde-format
 msgid "Sorry - internal error"
-msgstr ""
+msgstr "Pahoittelut – sisäinen virhe"
 
 #: src/svnfrontend/maintreewidget.cpp:2219
 #, kde-format
@@ -4795,7 +4805,7 @@ msgstr "Kopioi verkko-osoitteesta"
 #: src/svnfrontend/svnactions.cpp:819 src/svnfrontend/svnactions.cpp:829
 #, kde-format
 msgid "Lock token"
-msgstr ""
+msgstr "Lukitse merkki"
 
 #: src/svnfrontend/svnactions.cpp:820 src/svnfrontend/svnactions.cpp:830
 #, kde-format
@@ -4972,15 +4982,14 @@ msgid "Checkout a Repository"
 msgstr "Poista tietovarasto"
 
 #: src/svnfrontend/svnactions.cpp:1630
-#, fuzzy, kde-format
-#| msgid "Type of repository:"
+#, kde-format
 msgid "Export repository"
-msgstr "Tietovaraston tyyppi:"
+msgstr "Vie varasto"
 
 #: src/svnfrontend/svnactions.cpp:1657
 #, kde-format
 msgid "Exporting a file?"
-msgstr ""
+msgstr "Viedäänkö tiedostoa?"
 
 #: src/svnfrontend/svnactions.cpp:1657
 #, kde-format
@@ -5023,7 +5032,7 @@ msgstr "Palauta"
 #: src/svnfrontend/svnactions.cpp:1773
 #, kde-format
 msgid "Reverting items"
-msgstr ""
+msgstr "Palautetaan kohteita"
 
 #: src/svnfrontend/svnactions.cpp:1803 src/svnfrontend/svnactions.cpp:1865
 #, kde-format
@@ -5123,7 +5132,7 @@ msgstr "Lähteiden oltava samaa tyyppiä."
 #: src/svnfrontend/svnactions.cpp:2036
 #, kde-format
 msgid "Target for merge must same type like sources."
-msgstr "Yhdistämisen kohteen oltava samaa tyyppiä kuin lähde."
+msgstr "Yhdistämisen kohteen oltava samaa tyyppiä kuin lähteiden."
 
 #: src/svnfrontend/svnactions.cpp:2059
 #, kde-format
@@ -5319,13 +5328,13 @@ msgstr "Nouda lokit"
 #: src/svnfrontend/svnlogdlg.ui:64
 #, kde-format
 msgid "Previous entries"
-msgstr ""
+msgstr "Edelliset tietueet"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_NextFiftyButton)
 #: src/svnfrontend/svnlogdlg.ui:71
 #, kde-format
 msgid "Show from HEAD"
-msgstr ""
+msgstr "Näytä HEADistä"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
 #: src/svnfrontend/svnlogdlg.ui:168
@@ -5399,7 +5408,7 @@ msgstr ""
 #: src/svnfrontend/svnlogdlgimp.cpp:451
 #, kde-format
 msgid "Revert this commit"
-msgstr ""
+msgstr "Palauta tämä toimitus"
 
 #: src/svnfrontend/svntreeview.cpp:123
 #, kde-format

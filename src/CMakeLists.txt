@@ -31,6 +31,8 @@ set(kdesvnsrc
     kdesvn.cpp
     main.cpp
     urldlg.cpp
+
+    kdesvn.qrc
 )
 
 # Sets the icon on Windows and OSX
@@ -53,6 +55,8 @@ endif()
 set(partsrc
     kdesvn_part.cpp
     kdesvnview.cpp
+
+    kdesvn_part.qrc
 )
 
 set(partsrc ${partsrc} kdesvn_part.h kdesvnview.h)
@@ -106,8 +110,6 @@ install(TARGETS kdesvn kdesvnaskpass
     ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 # the resources
-install(FILES kdesvnui.rc DESTINATION ${KDE_INSTALL_KXMLGUIDIR}/kdesvn)
-install(FILES kdesvn_part.rc DESTINATION ${KDE_INSTALL_KXMLGUIDIR}/kdesvn)
 install(FILES org.kde.kdesvn.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 install(FILES org.kde.kdesvn.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES kdesvnpart.desktop  DESTINATION ${KDE_INSTALL_KSERVICESDIR})

@@ -141,13 +141,13 @@ msgid ""
 "Could not load our part:\n"
 "%1"
 msgstr ""
-"Non se puido cargar o noso compoñente:\n"
+"Non foi posíbel cargar o noso compoñente:\n"
 "%1"
 
 #: src/kdesvn.cpp:165
 #, kde-format
 msgid "Could not open URL %1"
-msgstr "Non se puido abrir o URL %1"
+msgstr "Non foi posíbel abrir o URL %1"
 
 #: src/kdesvn.cpp:197
 #, kde-format
@@ -447,7 +447,7 @@ msgstr "Abriuse o repositorio."
 #: src/kdesvnview.cpp:170
 #, kde-format
 msgid "Could not open repository"
-msgstr "Non se puido abrir o repositorio."
+msgstr "Non foi posíbel abrir o repositorio."
 
 #: src/kdesvnview.cpp:195
 #, kde-format
@@ -550,7 +550,7 @@ msgid ""
 "Failed to revert %1.\n"
 "Try updating instead."
 msgstr ""
-"Non se puido reverter %1.\n"
+"Non foi posíbel reverter %1.\n"
 "Probe a actualizar no seu lugar."
 
 #: src/kiosvn/kiolistener.cpp:124
@@ -591,7 +591,7 @@ msgstr "Completouse o externo."
 #: src/kiosvn/kiolistener.cpp:198
 #, kde-format
 msgid "Fetching external item into %1."
-msgstr "Estase a obter o elemento externo en %1."
+msgstr "Obtendo o elemento externo en %1."
 
 #: src/kiosvn/kiolistener.cpp:202
 #, kde-format
@@ -601,7 +601,7 @@ msgstr "Estado contra a revisión: %1."
 #: src/kiosvn/kiolistener.cpp:206
 #, kde-format
 msgid "Performing status on external item at %1."
-msgstr "Estase a calcular o estado do elemento externo en %1."
+msgstr "Calculando o estado do elemento externo en %1."
 
 #: src/kiosvn/kiolistener.cpp:209
 #, kde-format
@@ -611,17 +611,17 @@ msgstr "Enviando %1."
 #: src/kiosvn/kiolistener.cpp:213
 #, kde-format
 msgid "Adding (bin) %1."
-msgstr "Estase a engadir (binario) %1."
+msgstr "Engadindo (binario) %1."
 
 #: src/kiosvn/kiolistener.cpp:215
 #, kde-format
 msgid "Adding %1."
-msgstr "Estase a engadir %1."
+msgstr "Engadindo %1."
 
 #: src/kiosvn/kiolistener.cpp:219
 #, kde-format
 msgid "Deleting %1."
-msgstr "Estase a eliminar %1."
+msgstr "Eliminando %1."
 
 #: src/kiosvn/kiolistener.cpp:222
 #, kde-format
@@ -669,17 +669,17 @@ msgstr "Completouse a obtención temporal."
 #: src/kiosvn/kiosvn.cpp:385
 #, kde-format
 msgid "Could not write to existing item."
-msgstr "Non se puido escribir sobre un elemento existente."
+msgstr "Non foi posíbel escribir sobre un elemento existente."
 
 #: src/kiosvn/kiosvn.cpp:391
 #, kde-format
 msgid "Could not open temporary file"
-msgstr "Non se puido abrir o ficheiro temporal"
+msgstr "Non foi posíbel abrir o ficheiro temporal"
 
 #: src/kiosvn/kiosvn.cpp:412
 #, kde-format
 msgid "Could not retrieve data for write."
-msgstr "Non se puideron obter os datos para escribir."
+msgstr "Non foi posíbel obter os datos para escribir."
 
 #: src/kiosvn/kiosvn.cpp:419
 #, kde-format
@@ -3588,7 +3588,7 @@ msgid ""
 "Process stopped with message:\n"
 "%2"
 msgstr ""
-"Non se puido executar o proceso «%1».\n"
+"Non foi posíbel executar o proceso «%1».\n"
 "\n"
 "O proceso detívose coa seguinte mensaxe:\n"
 "%2"
@@ -3641,7 +3641,7 @@ msgstr "Revisión %1"
 #: src/svnfrontend/graphtree/revgraphview.cpp:461
 #, kde-format
 msgid "Could not open temporary file %1 for writing."
-msgstr "Non se puido abrir o ficheiro temporal %1 para escribir."
+msgstr "Non foi posíbel abrir o ficheiro temporal %1 para escribir."
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:554
 #, kde-format
@@ -3747,7 +3747,7 @@ msgid ""
 "Could not retrieve logs, reason:\n"
 "%1"
 msgstr ""
-"Non se puido obter o historial polo seguinte motivo:\n"
+"Non foi posíbel obter o historial polo seguinte motivo:\n"
 "%1"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:139
@@ -4560,7 +4560,7 @@ msgstr "Cambiar de lugar a ruta %1"
 #: src/svnfrontend/maintreewidget.cpp:2301
 #, kde-format
 msgid "Cannot import into multiple targets"
-msgstr "Non se pode importar para varios destinos"
+msgstr "Non é posíbel importar para varios destinos"
 
 #: src/svnfrontend/maintreewidget.cpp:2315
 #, kde-format
@@ -4581,7 +4581,7 @@ msgstr "Importar o rexistro"
 #: src/svnfrontend/maintreewidget.cpp:2397
 #, kde-format
 msgid "Could not retrieve repository of working copy."
-msgstr "Non se puido obter o repositorio da copia de traballo."
+msgstr "Non foi posíbel obter o repositorio da copia de traballo."
 
 #: src/svnfrontend/maintreewidget.cpp:2406
 #, kde-format
@@ -4633,7 +4633,7 @@ msgstr "Navegación"
 #: src/svnfrontend/maintreewidget.cpp:2604
 #, kde-format
 msgid "Could not retrieve repository."
-msgstr "Non se puido obter o repositorio."
+msgstr "Non foi posíbel obter o repositorio."
 
 #: src/svnfrontend/maintreewidget.cpp:2634
 #, kde-format
@@ -5114,7 +5114,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:961
 #, kde-format
 msgid "Could not change to folder %1\n"
-msgstr "Non se puido cambiar ao cartafol %1\n"
+msgstr "Non foi posíbel cambiar ao cartafol %1\n"
 
 #: src/svnfrontend/svnactions.cpp:979
 #, kde-format
@@ -5169,7 +5169,7 @@ msgstr "Descargar (prema «Cancelar» para interromper)"
 #, kde-format
 msgid "Can not do this diff because networking is disabled."
 msgstr ""
-"Non se poden xerar as diferenzas porque o uso da rede está desactivado."
+"Non é posíbel xerar as diferenzas porque o uso da rede está desactivado."
 
 #: src/svnfrontend/svnactions.cpp:1219
 #, kde-format
@@ -5180,7 +5180,7 @@ msgstr "Ambas entradas parecen idénticas, non se poden xerar as diferenzas."
 #, kde-format
 msgid "Diff-process could not started, check command."
 msgstr ""
-"Non se puido iniciar o proceso de xeración de diferenzas, revise a orde."
+"Non foi posíbel iniciar o proceso de xeración de diferenzas, revise a orde."
 
 #: src/svnfrontend/svnactions.cpp:1339 src/svnfrontend/svnactions.cpp:1401
 #, kde-format
@@ -5206,7 +5206,7 @@ msgstr "Xerando as diferenzas. Prema «Cancelar» para interromper a operación.
 #: src/svnfrontend/svnactions.cpp:1458
 #, kde-format
 msgid "Display process could not started, check command."
-msgstr "Non se puido iniciar o proceso de visualización, revise a orde."
+msgstr "Non foi posíbel iniciar o proceso de visualización, revise a orde."
 
 #: src/svnfrontend/svnactions.cpp:1470
 #, kde-format
@@ -5374,13 +5374,13 @@ msgstr "Marcando como resolto"
 #: src/svnfrontend/svnactions.cpp:2027
 #, kde-format
 msgid "Could not retrieve conflict information - giving up."
-msgstr "Non se puido obter a información sobre o conflito; abandónase."
+msgstr "Non foi posíbel obter a información sobre o conflito; abandónase."
 
 #: src/svnfrontend/svnactions.cpp:2052
 #, kde-format
 msgid "Resolve-process could not started, check command."
 msgstr ""
-"Non se puido iniciar o proceso de resolución do conflito, revise a orde."
+"Non foi posíbel iniciar o proceso de resolución do conflito, revise a orde."
 
 #: src/svnfrontend/svnactions.cpp:2062
 #, kde-format
@@ -5421,7 +5421,7 @@ msgstr "Ambas entradas parecen idénticas, non se fusionarán."
 #: src/svnfrontend/svnactions.cpp:2222
 #, kde-format
 msgid "Merge process could not started, check command."
-msgstr "Non se puido iniciar o proceso de fusión, revise a orde."
+msgstr "Non foi posíbel iniciar o proceso de fusión, revise a orde."
 
 #: src/svnfrontend/svnactions.cpp:2304
 #, kde-format

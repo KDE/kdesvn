@@ -43,12 +43,6 @@ target_link_libraries(kded_kdesvnd
     KF5::Notifications
 )
 
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_subversion.desktop
-    DESTINATION ${KDE_INSTALL_KSERVICESDIR}/ServiceMenus)
-
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/kdesvn_subversion_toplevel.desktop
-    DESTINATION ${KDE_INSTALL_KSERVICESDIR}/ServiceMenus)
-
 install(FILES org.kde.kdesvnd.xml DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR} RENAME kf5_org.kde.kdesvnd.xml)
 
 configure_file(org.kde.kdesvnd.service.in ${CMAKE_CURRENT_BINARY_DIR}/org.kde.kdesvnd.service)

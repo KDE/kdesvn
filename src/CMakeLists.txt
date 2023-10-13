@@ -71,6 +71,7 @@ add_subdirectory(kdesvnd)
 add_subdirectory(kiosvn)
 add_subdirectory(pics)
 add_subdirectory(icons)
+add_subdirectory(fileitemactions)
 
 add_executable(kdesvn ${kdesvnsrc})
 

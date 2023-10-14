@@ -2514,7 +2514,7 @@ msgstr "Missatge de registre per a la revisió"
 #: src/svnfrontend/blamedisplay.cpp:200
 #, kde-format
 msgid "Go to line"
-msgstr "Ves a la línia"
+msgstr "Ves fins a la línia"
 
 #: src/svnfrontend/blamedisplay.cpp:333
 #, kde-format
@@ -2829,7 +2829,7 @@ msgstr "Desactiva «fsync» en cometre (només BDB)"
 #: src/svnfrontend/createrepodlg.ui:32
 #, kde-format
 msgid "Path to repository:"
-msgstr "Camí al repositori:"
+msgstr "Camí cap al repositori:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_FilesystemSelector)
 #: src/svnfrontend/createrepodlg.ui:45
@@ -3293,9 +3293,9 @@ msgid ""
 "replaced with the bug issue number. Example:<br/><nobr><b>http://example.com/"
 "mantis/view.php?id=%BUGID%</b></nobr>"
 msgstr ""
-"URL apuntant al seguidor d'incidències. Haurà de contindre <b>%BUGID%</b> el "
-"qual serà substituït amb el número d'error de la incidència. Exemple:<br/"
-"><nobr><b>http://exemple.com/mantis/view.php?id=%BUGID%</b></nobr>"
+"URL apuntant cap al seguidor d'incidències. Haurà de contindre <b>%BUGID%</"
+"b> el qual serà substituït amb el número d'error de la incidència. Exemple:"
+"<br/><nobr><b>http://exemple.com/mantis/view.php?id=%BUGID%</b></nobr>"
 
 #: src/svnfrontend/editpropsdlg.cpp:106
 #, kde-format
@@ -3919,7 +3919,7 @@ msgstr "Valida les propietats"
 #: src/svnfrontend/maintreewidget.cpp:271
 #, kde-format
 msgid "Networked URL to open but networking is disabled."
-msgstr "URL per a la xarxa que cal obrir, però la xarxa està desactivada."
+msgstr "URL cap a la xarxa que cal obrir, però la xarxa està desactivada."
 
 #: src/svnfrontend/maintreewidget.cpp:497
 #, kde-format

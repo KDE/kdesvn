@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-04 00:50+0000\n"
+"POT-Creation-Date: 2023-10-22 00:44+0000\n"
 "PO-Revision-Date: 2021-10-13 10:45+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -58,6 +58,128 @@ msgstr "Παρακαλώ εισάγετε τον κωδικό πρόσβασης
 msgctxt "@title:window"
 msgid "Password"
 msgstr "Κωδικός πρόσβασης"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:51
+#, fuzzy, kde-format
+#| msgid "Checkout a repository"
+msgid "Checkout From Repository..."
+msgstr "Checkout ενός αποθετηρίου"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:54
+#, fuzzy, kde-format
+#| msgid "Export"
+msgid "Export..."
+msgstr "Εξαγωγή"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:57
+#, kde-format
+msgid "Update (Kdesvn)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:60
+#, fuzzy, kde-format
+#| msgid "Commit Added"
+msgid "Commit (Kdesvn)"
+msgstr "Υποβολή προσθήκης"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:63
+#, kde-format
+msgid "kdesvn log (last 100)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:66
+#, fuzzy, kde-format
+#| msgid "Export a repository"
+msgid "Export from a Subversion repository..."
+msgstr "Εξαγωγή ενός αποθετηρίου"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:69
+#, fuzzy, kde-format
+#| msgid "Checkout a repository"
+msgid "Checkout from a repository..."
+msgstr "Checkout ενός αποθετηρίου"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:74
+#, fuzzy, kde-format
+#| msgid "Subversion Admin"
+msgid "Detailed Subversion info"
+msgstr "Subversion Admin"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:77
+#, fuzzy, kde-format
+#| msgid "Added in repository"
+msgid "Add to Repository"
+msgstr "Προστέθηκε στο αποθετήριο"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:80
+#: src/svnfrontend/maintreewidget.cpp:653
+#, kde-format
+msgid "Check for unversioned items"
+msgstr "Έλεγχος για αντικείμενα χωρίς έκδοση"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:83
+#, fuzzy, kde-format
+#| msgid "Delete from repository"
+msgid "Delete From Repository"
+msgstr "Διαγραφή από το αποθετήριο"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:86
+#, fuzzy, kde-format
+#| msgid "Revert current changes"
+msgid "Revert Local Changes"
+msgstr "Επαναφορά στην αρχική κατάσταση"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:89
+#, fuzzy, kde-format
+#| msgid "Rename"
+msgid "Rename..."
+msgstr "Μετονομασία"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:92
+#, fuzzy, kde-format
+#| msgid "Export a repository"
+msgid "Import Repository"
+msgstr "Εξαγωγή ενός αποθετηρίου"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:97
+#, kde-format
+msgid "Switch..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:100
+#: src/svnfrontend/maintreewidget.cpp:824
+#, kde-format
+msgid "Merge..."
+msgstr "Συγχώνευση..."
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:105
+#, fuzzy, kde-format
+#| msgid "Blame"
+msgid "Blame..."
+msgstr "Blame"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:108
+#, kde-format
+msgid "Create Patch..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:113
+#, fuzzy, kde-format
+#| msgid "Diff local changes"
+msgid "Diff (local)"
+msgstr "Diff αλλαγών τοπικά"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:116
+#, fuzzy, kde-format
+#| msgid "Full revision tree"
+msgid "Display revision tree"
+msgstr "Πλήρες δέντρο αναθεώρησης"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:127
+#, fuzzy, kde-format
+#| msgid "Subversion Admin"
+msgid "Subversion (kdesvn)"
+msgstr "Subversion Admin"
 
 #: src/kdesvn.cpp:79
 #, kde-format
@@ -4176,11 +4298,6 @@ msgid "Relocate URL of current working copy path to other URL"
 msgstr ""
 "Μεταφορά του URL της διαδρομής του τρέχοντος αντιγράφου εργασίας σε άλλο URL"
 
-#: src/svnfrontend/maintreewidget.cpp:653
-#, kde-format
-msgid "Check for unversioned items"
-msgstr "Έλεγχος για αντικείμενα χωρίς έκδοση"
-
 #: src/svnfrontend/maintreewidget.cpp:658
 #, kde-format
 msgid "Unversioned"
@@ -4384,11 +4501,6 @@ msgstr "Συγχώνευση"
 #, kde-format
 msgid "Merge two revisions of this entry into itself"
 msgstr "Συγχώνευση δυο αναθεωρήσεων αυτής της καταχώρησης με αυτήν την ίδια"
-
-#: src/svnfrontend/maintreewidget.cpp:824
-#, kde-format
-msgid "Merge..."
-msgstr "Συγχώνευση..."
 
 #: src/svnfrontend/maintreewidget.cpp:829
 #, kde-format

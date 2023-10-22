@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-04 00:50+0000\n"
+"POT-Creation-Date: 2023-10-22 00:44+0000\n"
 "PO-Revision-Date: 2023-08-31 19:34+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -58,6 +58,131 @@ msgstr "Lütfen parolanızı aşağıya girin."
 msgctxt "@title:window"
 msgid "Password"
 msgstr "Parola"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:51
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Checkout a Repository"
+msgid "Checkout From Repository..."
+msgstr "Bir Depoyu Çıkış Yap"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:54
+#, fuzzy, kde-format
+#| msgid "Export"
+msgid "Export..."
+msgstr "Dışa aktar"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:57
+#, kde-format
+msgid "Update (Kdesvn)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:60
+#, fuzzy, kde-format
+#| msgid "Commit Added"
+msgid "Commit (Kdesvn)"
+msgstr "İşleme Eklendi"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:63
+#, kde-format
+msgid "kdesvn log (last 100)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:66
+#, fuzzy, kde-format
+#| msgid "Export a repository"
+msgid "Export from a Subversion repository..."
+msgstr "Bir depoyu dışa aktar"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:69
+#, fuzzy, kde-format
+#| msgid "Checkout a repository"
+msgid "Checkout from a repository..."
+msgstr "Bir depoyu çıkış yap"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:74
+#, fuzzy, kde-format
+#| msgid "Subversion Admin"
+msgid "Detailed Subversion info"
+msgstr "Subversion Yöneticisi"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:77
+#, fuzzy, kde-format
+#| msgid "Added in repository"
+msgid "Add to Repository"
+msgstr "Depoda eklendi"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:80
+#: src/svnfrontend/maintreewidget.cpp:653
+#, kde-format
+msgid "Check for unversioned items"
+msgstr "Sürümlendirilmemiş ögeleri denetle"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:83
+#, fuzzy, kde-format
+#| msgid "Delete from repository"
+msgid "Delete From Repository"
+msgstr "Depodan sil"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:86
+#, fuzzy, kde-format
+#| msgid "Revert current changes"
+msgid "Revert Local Changes"
+msgstr "Mevcut değişiklikleri geri al"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:89
+#, fuzzy, kde-format
+#| msgid "Rename"
+msgid "Rename..."
+msgstr "Yeniden adlandır"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:92
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Export a Repository"
+msgid "Import Repository"
+msgstr "Bir Depo Dışa Aktar"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:97
+#, fuzzy, kde-format
+#| msgid "Switch URL"
+msgid "Switch..."
+msgstr "URL Değiştir"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:100
+#: src/svnfrontend/maintreewidget.cpp:824
+#, kde-format
+msgid "Merge..."
+msgstr "Birleştir..."
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:105
+#, fuzzy, kde-format
+#| msgid "Blame"
+msgid "Blame..."
+msgstr "Suçla"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:108
+#, kde-format
+msgid "Create Patch..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:113
+#, fuzzy, kde-format
+#| msgid "Diff local changes"
+msgid "Diff (local)"
+msgstr "Yerel değişikliklerin farkını al"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:116
+#, fuzzy, kde-format
+#| msgid "Full revision tree"
+msgid "Display revision tree"
+msgstr "Tam revizyon ağacı"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:127
+#, fuzzy, kde-format
+#| msgid "Subversion Admin"
+msgid "Subversion (kdesvn)"
+msgstr "Subversion Yöneticisi"
 
 #: src/kdesvn.cpp:79
 #, kde-format
@@ -4074,11 +4199,6 @@ msgstr "Mevcut çalışma kopyası URL'sini yeniden konumlandır"
 msgid "Relocate URL of current working copy path to other URL"
 msgstr "Mevcut çalışma kopyası yolunu başka bir URL'ye konumlandır"
 
-#: src/svnfrontend/maintreewidget.cpp:653
-#, kde-format
-msgid "Check for unversioned items"
-msgstr "Sürümlendirilmemiş ögeleri denetle"
-
 #: src/svnfrontend/maintreewidget.cpp:658
 #, kde-format
 msgid "Unversioned"
@@ -4278,11 +4398,6 @@ msgstr "Birleştir"
 #, kde-format
 msgid "Merge two revisions of this entry into itself"
 msgstr "Bu girdinin iki revizyonunu kendine birleştir"
-
-#: src/svnfrontend/maintreewidget.cpp:824
-#, kde-format
-msgid "Merge..."
-msgstr "Birleştir..."
 
 #: src/svnfrontend/maintreewidget.cpp:829
 #, kde-format

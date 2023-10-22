@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-04 00:50+0000\n"
+"POT-Creation-Date: 2023-10-22 00:44+0000\n"
 "PO-Revision-Date: 2023-03-04 23:31+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -57,6 +57,130 @@ msgstr "Prosím, zadejte níže své heslo."
 msgctxt "@title:window"
 msgid "Password"
 msgstr "Heslo"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:51
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Checkout a Repository"
+msgid "Checkout From Repository..."
+msgstr "Stáhnout repozitář"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:54
+#, fuzzy, kde-format
+#| msgid "Export"
+msgid "Export..."
+msgstr "Exportovat"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:57
+#, kde-format
+msgid "Update (Kdesvn)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:60
+#, fuzzy, kde-format
+#| msgid "Commit Added"
+msgid "Commit (Kdesvn)"
+msgstr "Commit přidán"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:63
+#, kde-format
+msgid "kdesvn log (last 100)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:66
+#, fuzzy, kde-format
+#| msgid "Dump a Subversion repository to a file"
+msgid "Export from a Subversion repository..."
+msgstr "Vypsat repozitář Subversion do souboru"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:69
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Checkout a Repository"
+msgid "Checkout from a repository..."
+msgstr "Stáhnout repozitář"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:74
+#, fuzzy, kde-format
+#| msgid "Subversion Admin"
+msgid "Detailed Subversion info"
+msgstr "Správce Subversion"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:77
+#, fuzzy, kde-format
+#| msgid "Repository"
+msgid "Add to Repository"
+msgstr "Repozitář"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:80
+#: src/svnfrontend/maintreewidget.cpp:653
+#, kde-format
+msgid "Check for unversioned items"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:83
+#, fuzzy, kde-format
+#| msgid "Delete from repository"
+msgid "Delete From Repository"
+msgstr "Smazat z repozitáře"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:86
+#, kde-format
+msgid "Revert Local Changes"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:89
+#, fuzzy, kde-format
+#| msgid "Rename"
+msgid "Rename..."
+msgstr "Přejmenovat"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:92
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Export a Repository"
+msgid "Import Repository"
+msgstr "Exportovat repozitář"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:97
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Switch URL"
+msgid "Switch..."
+msgstr "Přepnout URL"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:100
+#: src/svnfrontend/maintreewidget.cpp:824
+#, kde-format
+msgid "Merge..."
+msgstr "Sloučit..."
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:105
+#, kde-format
+msgid "Blame..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:108
+#, kde-format
+msgid "Create Patch..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:113
+#, kde-format
+msgid "Diff (local)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:116
+#, fuzzy, kde-format
+#| msgid "Revision tree"
+msgid "Display revision tree"
+msgstr "Strom změn"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:127
+#, fuzzy, kde-format
+#| msgid "Subversion Admin"
+msgid "Subversion (kdesvn)"
+msgstr "Správce Subversion"
 
 #: src/kdesvn.cpp:79
 #, kde-format
@@ -3832,11 +3956,6 @@ msgstr ""
 msgid "Relocate URL of current working copy path to other URL"
 msgstr ""
 
-#: src/svnfrontend/maintreewidget.cpp:653
-#, kde-format
-msgid "Check for unversioned items"
-msgstr ""
-
 #: src/svnfrontend/maintreewidget.cpp:658
 #, kde-format
 msgid "Unversioned"
@@ -4028,11 +4147,6 @@ msgstr "Sloučit"
 #, kde-format
 msgid "Merge two revisions of this entry into itself"
 msgstr ""
-
-#: src/svnfrontend/maintreewidget.cpp:824
-#, kde-format
-msgid "Merge..."
-msgstr "Sloučit..."
 
 #: src/svnfrontend/maintreewidget.cpp:829
 #, kde-format

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-04 00:50+0000\n"
+"POT-Creation-Date: 2023-10-22 00:44+0000\n"
 "PO-Revision-Date: 2017-06-25 15:15+0200\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -61,6 +61,124 @@ msgstr ""
 msgctxt "@title:window"
 msgid "Password"
 msgstr "Slaptažodis"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:51
+#, fuzzy, kde-format
+msgid "Checkout From Repository..."
+msgstr "Ištrinti iš saugyklos"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:54
+#, fuzzy, kde-format
+#| msgid "Export"
+msgid "Export..."
+msgstr "Eksportuoti"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:57
+#, kde-format
+msgid "Update (Kdesvn)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:60
+#, fuzzy, kde-format
+#| msgid "Commit Message"
+msgid "Commit (Kdesvn)"
+msgstr "Įkėlimo pranešimas"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:63
+#, kde-format
+msgid "kdesvn log (last 100)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:66
+#, fuzzy, kde-format
+#| msgid "Export a repository"
+msgid "Export from a Subversion repository..."
+msgstr "Eksportuoti saugyklą"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:69
+#, fuzzy, kde-format
+msgid "Checkout from a repository..."
+msgstr "Ištrinti iš saugyklos"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:74
+#, fuzzy, kde-format
+msgid "Detailed Subversion info"
+msgstr "Suderinama su subversion iki 1.4"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:77
+#, fuzzy, kde-format
+#| msgid "Added in repository"
+msgid "Add to Repository"
+msgstr "Pridėtas saugykloje"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:80
+#: src/svnfrontend/maintreewidget.cpp:653
+#, kde-format
+msgid "Check for unversioned items"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:83
+#, fuzzy, kde-format
+#| msgid "Delete from repository"
+msgid "Delete From Repository"
+msgstr "Ištrinti iš saugyklos"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:86
+#, fuzzy, kde-format
+#| msgid "Revert current changes"
+msgid "Revert Local Changes"
+msgstr "Atstatyti dabartinius pakeitimus"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:89
+#, fuzzy, kde-format
+#| msgid "Rename"
+msgid "Rename..."
+msgstr "Pervadinti"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:92
+#, fuzzy, kde-format
+#| msgid "Export a repository"
+msgid "Import Repository"
+msgstr "Eksportuoti saugyklą"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:97
+#, kde-format
+msgid "Switch..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:100
+#: src/svnfrontend/maintreewidget.cpp:824
+#, kde-format
+msgid "Merge..."
+msgstr "Sulieti..."
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:105
+#, fuzzy, kde-format
+#| msgid "Blame"
+msgid "Blame..."
+msgstr "Komentarai apie eilutes"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:108
+#, kde-format
+msgid "Create Patch..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:113
+#, kde-format
+msgid "Diff (local)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:116
+#, fuzzy, kde-format
+#| msgid "Full revision tree"
+msgid "Display revision tree"
+msgstr "Pilnas pakeitimų medis"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:127
+#, fuzzy, kde-format
+#| msgid "Subversion"
+msgid "Subversion (kdesvn)"
+msgstr "Subversion"
 
 #: src/kdesvn.cpp:79
 #, kde-format
@@ -3887,11 +4005,6 @@ msgstr ""
 msgid "Relocate URL of current working copy path to other URL"
 msgstr ""
 
-#: src/svnfrontend/maintreewidget.cpp:653
-#, kde-format
-msgid "Check for unversioned items"
-msgstr ""
-
 #: src/svnfrontend/maintreewidget.cpp:658
 #, fuzzy, kde-format
 msgid "Unversioned"
@@ -4085,11 +4198,6 @@ msgstr "Sulieti"
 #, kde-format
 msgid "Merge two revisions of this entry into itself"
 msgstr ""
-
-#: src/svnfrontend/maintreewidget.cpp:824
-#, kde-format
-msgid "Merge..."
-msgstr "Sulieti..."
 
 #: src/svnfrontend/maintreewidget.cpp:829
 #, kde-format

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-04 00:50+0000\n"
+"POT-Creation-Date: 2023-10-22 00:44+0000\n"
 "PO-Revision-Date: 2023-02-03 20:30+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -57,6 +57,131 @@ msgstr "請在下方輸入您的密碼。"
 msgctxt "@title:window"
 msgid "Password"
 msgstr "密碼"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:51
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Checkout a Repository"
+msgid "Checkout From Repository..."
+msgstr "簽出版本庫"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:54
+#, fuzzy, kde-format
+#| msgid "Export"
+msgid "Export..."
+msgstr "匯出"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:57
+#, kde-format
+msgid "Update (Kdesvn)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:60
+#, fuzzy, kde-format
+#| msgid "Commit Added"
+msgid "Commit (Kdesvn)"
+msgstr "提交已加入項目"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:63
+#, kde-format
+msgid "kdesvn log (last 100)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:66
+#, fuzzy, kde-format
+#| msgid "Export a repository"
+msgid "Export from a Subversion repository..."
+msgstr "匯出版本庫"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:69
+#, fuzzy, kde-format
+#| msgid "Checkout a repository"
+msgid "Checkout from a repository..."
+msgstr "簽出版本庫"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:74
+#, fuzzy, kde-format
+#| msgid "Subversion Admin"
+msgid "Detailed Subversion info"
+msgstr "Subversion 管理"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:77
+#, fuzzy, kde-format
+#| msgid "Added in repository"
+msgid "Add to Repository"
+msgstr "已在版本庫加入"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:80
+#: src/svnfrontend/maintreewidget.cpp:653
+#, kde-format
+msgid "Check for unversioned items"
+msgstr "檢查未進版控的項目"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:83
+#, fuzzy, kde-format
+#| msgid "Delete from repository"
+msgid "Delete From Repository"
+msgstr "從版本庫刪除"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:86
+#, fuzzy, kde-format
+#| msgid "Revert current changes"
+msgid "Revert Local Changes"
+msgstr "回復目前的變更"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:89
+#, fuzzy, kde-format
+#| msgid "Rename"
+msgid "Rename..."
+msgstr "重新命名"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:92
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Export a Repository"
+msgid "Import Repository"
+msgstr "匯出版本庫"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:97
+#, fuzzy, kde-format
+#| msgid "Switch URL"
+msgid "Switch..."
+msgstr "切換網址"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:100
+#: src/svnfrontend/maintreewidget.cpp:824
+#, kde-format
+msgid "Merge..."
+msgstr "合併…"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:105
+#, fuzzy, kde-format
+#| msgid "Blame"
+msgid "Blame..."
+msgstr "Blame"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:108
+#, kde-format
+msgid "Create Patch..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:113
+#, fuzzy, kde-format
+#| msgid "Diff local changes"
+msgid "Diff (local)"
+msgstr "顯示本機變更"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:116
+#, fuzzy, kde-format
+#| msgid "Full revision tree"
+msgid "Display revision tree"
+msgstr "完整修訂版檔案樹"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:127
+#, fuzzy, kde-format
+#| msgid "Subversion Admin"
+msgid "Subversion (kdesvn)"
+msgstr "Subversion 管理"
 
 #: src/kdesvn.cpp:79
 #, kde-format
@@ -3996,11 +4121,6 @@ msgstr "遷移目前工作複本網址"
 msgid "Relocate URL of current working copy path to other URL"
 msgstr "遷移目前工作複本路徑的網址到另一個網址"
 
-#: src/svnfrontend/maintreewidget.cpp:653
-#, kde-format
-msgid "Check for unversioned items"
-msgstr "檢查未進版控的項目"
-
 #: src/svnfrontend/maintreewidget.cpp:658
 #, kde-format
 msgid "Unversioned"
@@ -4193,11 +4313,6 @@ msgstr "合併"
 #, kde-format
 msgid "Merge two revisions of this entry into itself"
 msgstr "合併這個條目的兩個修訂版到它自己身上"
-
-#: src/svnfrontend/maintreewidget.cpp:824
-#, kde-format
-msgid "Merge..."
-msgstr "合併…"
 
 #: src/svnfrontend/maintreewidget.cpp:829
 #, kde-format

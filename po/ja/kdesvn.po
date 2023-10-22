@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-04 00:50+0000\n"
+"POT-Creation-Date: 2023-10-22 00:44+0000\n"
 "PO-Revision-Date: 2013-07-06 03:18-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -55,6 +55,115 @@ msgstr "下にパスワードを入力してください。"
 msgctxt "@title:window"
 msgid "Password"
 msgstr "パスワード："
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:51
+#, fuzzy, kde-format
+msgid "Checkout From Repository..."
+msgstr "リポジトリをチェックアウト"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:54
+#, fuzzy, kde-format
+msgid "Export..."
+msgstr "エクスポート"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:57
+#, kde-format
+msgid "Update (Kdesvn)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:60
+#, fuzzy, kde-format
+msgid "Commit (Kdesvn)"
+msgstr "コミット 追加されました"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:63
+#, kde-format
+msgid "kdesvn log (last 100)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:66
+#, fuzzy, kde-format
+msgid "Export from a Subversion repository..."
+msgstr "リポジトリをエクスポート"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:69
+#, fuzzy, kde-format
+msgid "Checkout from a repository..."
+msgstr "リポジトリをチェックアウト"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:74
+#, fuzzy, kde-format
+msgid "Detailed Subversion info"
+msgstr "Subversion 管理"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:77
+#, fuzzy, kde-format
+msgid "Add to Repository"
+msgstr "リポジトリ内に追加しました"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:80
+#: src/svnfrontend/maintreewidget.cpp:653
+#, fuzzy, kde-format
+msgid "Check for unversioned items"
+msgstr "バージョン付けされていない項目を調べる(&F)"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:83
+#, fuzzy, kde-format
+msgid "Delete From Repository"
+msgstr "リポジトリから削除"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:86
+#, fuzzy, kde-format
+msgid "Revert Local Changes"
+msgstr "現在の変更を元に戻す(&R)"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:89
+#, fuzzy, kde-format
+#| msgid "Rename/move"
+msgid "Rename..."
+msgstr "名前変更と移動"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:92
+#, fuzzy, kde-format
+msgid "Import Repository"
+msgstr "リポジトリをエクスポート"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:97
+#, fuzzy, kde-format
+#| msgid "Switch url"
+msgid "Switch..."
+msgstr "url を切り替え"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:100
+#: src/svnfrontend/maintreewidget.cpp:824
+#, fuzzy, kde-format
+msgid "Merge..."
+msgstr "マージ(&M)..."
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:105
+#, fuzzy, kde-format
+msgid "Blame..."
+msgstr "ブレイム(&B)"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:108
+#, kde-format
+msgid "Create Patch..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:113
+#, fuzzy, kde-format
+msgid "Diff (local)"
+msgstr "ローカルの変更を Diff"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:116
+#, fuzzy, kde-format
+msgid "Display revision tree"
+msgstr "完全リビジョンツリー(&F)"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:127
+#, fuzzy, kde-format
+msgid "Subversion (kdesvn)"
+msgstr "Subversion 管理"
 
 #: src/kdesvn.cpp:79
 #, fuzzy, kde-format
@@ -4234,11 +4343,6 @@ msgstr "現在の作業コピーの url を移動(&W)"
 msgid "Relocate URL of current working copy path to other URL"
 msgstr "現在の作業コピーの url を他の url へ移動します"
 
-#: src/svnfrontend/maintreewidget.cpp:653
-#, fuzzy, kde-format
-msgid "Check for unversioned items"
-msgstr "バージョン付けされていない項目を調べる(&F)"
-
 #: src/svnfrontend/maintreewidget.cpp:658
 #, fuzzy, kde-format
 msgid "Unversioned"
@@ -4442,11 +4546,6 @@ msgstr "マージ"
 #, fuzzy, kde-format
 msgid "Merge two revisions of this entry into itself"
 msgstr "このエントリの二つのリビジョンをそれ自体へマージします"
-
-#: src/svnfrontend/maintreewidget.cpp:824
-#, fuzzy, kde-format
-msgid "Merge..."
-msgstr "マージ(&M)..."
 
 #: src/svnfrontend/maintreewidget.cpp:829
 #, fuzzy, kde-format

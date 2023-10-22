@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-04 00:50+0000\n"
+"POT-Creation-Date: 2023-10-22 00:44+0000\n"
 "PO-Revision-Date: 2013-07-13 18:39+0200\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -58,6 +58,113 @@ msgstr "Adja meg a jelszót az alábbi mezőben."
 msgctxt "@title:window"
 msgid "Password"
 msgstr "Jelszó"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:51
+#, kde-format
+msgid "Checkout From Repository..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:54
+#, kde-format
+msgid "Export..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:57
+#, kde-format
+msgid "Update (Kdesvn)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:60
+#, kde-format
+msgid "Commit (Kdesvn)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:63
+#, kde-format
+msgid "kdesvn log (last 100)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:66
+#, kde-format
+msgid "Export from a Subversion repository..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:69
+#, kde-format
+msgid "Checkout from a repository..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:74
+#, kde-format
+msgid "Detailed Subversion info"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:77
+#, kde-format
+msgid "Add to Repository"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:80
+#: src/svnfrontend/maintreewidget.cpp:653
+#, kde-format
+msgid "Check for unversioned items"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:83
+#, kde-format
+msgid "Delete From Repository"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:86
+#, kde-format
+msgid "Revert Local Changes"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:89
+#, kde-format
+msgid "Rename..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:92
+#, kde-format
+msgid "Import Repository"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:97
+#, kde-format
+msgid "Switch..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:100
+#: src/svnfrontend/maintreewidget.cpp:824
+#, kde-format
+msgid "Merge..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:105
+#, kde-format
+msgid "Blame..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:108
+#, kde-format
+msgid "Create Patch..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:113
+#, kde-format
+msgid "Diff (local)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:116
+#, kde-format
+msgid "Display revision tree"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:127
+#, kde-format
+msgid "Subversion (kdesvn)"
+msgstr ""
 
 #: src/kdesvn.cpp:79
 #, kde-format
@@ -3817,11 +3924,6 @@ msgstr ""
 msgid "Relocate URL of current working copy path to other URL"
 msgstr ""
 
-#: src/svnfrontend/maintreewidget.cpp:653
-#, kde-format
-msgid "Check for unversioned items"
-msgstr ""
-
 #: src/svnfrontend/maintreewidget.cpp:658
 #, kde-format
 msgid "Unversioned"
@@ -4012,11 +4114,6 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:821
 #, kde-format
 msgid "Merge two revisions of this entry into itself"
-msgstr ""
-
-#: src/svnfrontend/maintreewidget.cpp:824
-#, kde-format
-msgid "Merge..."
 msgstr ""
 
 #: src/svnfrontend/maintreewidget.cpp:829

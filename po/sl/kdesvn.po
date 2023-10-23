@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-22 00:44+0000\n"
-"PO-Revision-Date: 2023-01-11 07:41+0100\n"
+"PO-Revision-Date: 2023-10-22 07:50+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.2.2\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
+"X-Generator: Poedit 3.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -61,57 +61,49 @@ msgid "Password"
 msgstr "Geslo"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:51
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Checkout a Repository"
+#, kde-format
 msgid "Checkout From Repository..."
-msgstr "Prevzemi skladišče"
+msgstr "Prevzemi iz skladišča..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:54
-#, fuzzy, kde-format
-#| msgid "Export"
+#, kde-format
 msgid "Export..."
-msgstr "Izvozi"
+msgstr "Izvozi..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:57
 #, kde-format
 msgid "Update (Kdesvn)"
-msgstr ""
+msgstr "Posodobi (Kdesvn)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:60
-#, fuzzy, kde-format
-#| msgid "Commit Added"
+#, kde-format
 msgid "Commit (Kdesvn)"
-msgstr "Uveljavi dodane"
+msgstr "Uveljavi (Kdesvn)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:63
 #, kde-format
 msgid "kdesvn log (last 100)"
-msgstr ""
+msgstr "dnevnik kdesvn (zadnjih 100)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:66
-#, fuzzy, kde-format
-#| msgid "Export a repository"
+#, kde-format
 msgid "Export from a Subversion repository..."
-msgstr "Izvozi skladišče"
+msgstr "Izvozi iz skladišča Subversion..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:69
-#, fuzzy, kde-format
-#| msgid "Checkout a repository"
+#, kde-format
 msgid "Checkout from a repository..."
-msgstr "Prevzemi skladišče"
+msgstr "Prevzemi iz skladišča..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:74
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Detailed Subversion info"
-msgstr "Skrbnik za Subversion"
+msgstr "Podrobne informacije o Subversion"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:77
-#, fuzzy, kde-format
-#| msgid "Added in repository"
+#, kde-format
 msgid "Add to Repository"
-msgstr "Dodano v skladišče"
+msgstr "Dodaj v skladišče"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:80
 #: src/svnfrontend/maintreewidget.cpp:653
@@ -120,35 +112,29 @@ msgid "Check for unversioned items"
 msgstr "Preveri za predmeti brez različic"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:83
-#, fuzzy, kde-format
-#| msgid "Delete from repository"
+#, kde-format
 msgid "Delete From Repository"
 msgstr "Izbriši iz skladišča"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:86
-#, fuzzy, kde-format
-#| msgid "Revert current changes"
+#, kde-format
 msgid "Revert Local Changes"
-msgstr "Povrni trenutne spremembe"
+msgstr "Povrni lokalne spremembe"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:89
-#, fuzzy, kde-format
-#| msgid "Rename"
+#, kde-format
 msgid "Rename..."
-msgstr "Preimenuj"
+msgstr "Preimenuj..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:92
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Export a Repository"
+#, kde-format
 msgid "Import Repository"
-msgstr "Izvozi skladišče"
+msgstr "Uvozi skladišče"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:97
-#, fuzzy, kde-format
-#| msgid "Switch URL"
+#, kde-format
 msgid "Switch..."
-msgstr "Preklopi URL"
+msgstr "Preklopi..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:100
 #: src/svnfrontend/maintreewidget.cpp:824
@@ -157,33 +143,29 @@ msgid "Merge..."
 msgstr "Združi ..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:105
-#, fuzzy, kde-format
-#| msgid "Blame"
+#, kde-format
 msgid "Blame..."
-msgstr "Odgovornost"
+msgstr "Odgovornost..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:108
 #, kde-format
 msgid "Create Patch..."
-msgstr ""
+msgstr "Ustvari popravek..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:113
-#, fuzzy, kde-format
-#| msgid "Diff local changes"
+#, kde-format
 msgid "Diff (local)"
-msgstr "Razlika s krajevnimi spremembami"
+msgstr "Razlika (lokalna)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:116
-#, fuzzy, kde-format
-#| msgid "Full revision tree"
+#, kde-format
 msgid "Display revision tree"
-msgstr "Polno drevo predelav"
+msgstr "Prikaži drevo predelav"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:127
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Subversion (kdesvn)"
-msgstr "Skrbnik za Subversion"
+msgstr "Subversion (Kdesvn)"
 
 #: src/kdesvn.cpp:79
 #, kde-format
@@ -353,7 +335,7 @@ msgstr ""
 #: src/kdesvn_part.cpp:284
 #, kde-format
 msgid "kdesvn Part"
-msgstr "Sestavni del kdesvn"
+msgstr "kdesvn Part"
 
 #: src/kdesvn_part.cpp:286
 #, kde-format

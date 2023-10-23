@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-06-07 01:43+0000\n"
-"PO-Revision-Date: 2023-09-03 21:50+0200\n"
+"PO-Revision-Date: 2023-10-22 13:48+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.0\n"
+"X-Generator: Lokalize 23.08.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -557,7 +557,7 @@ msgstr "Restaurado %1."
 #: src/kiosvn/kiolistener.cpp:108
 #, kde-format
 msgid "Reverted %1."
-msgstr "Revertido %1."
+msgstr "Se ha revertido %1."
 
 #: src/kiosvn/kiolistener.cpp:111
 #, kde-format
@@ -565,7 +565,7 @@ msgid ""
 "Failed to revert %1.\n"
 "Try updating instead."
 msgstr ""
-"Fallo al revertir %1.\n"
+"No se ha podido revertir %1.\n"
 "Intente actualizar."
 
 #: src/kiosvn/kiolistener.cpp:114
@@ -2591,7 +2591,7 @@ msgstr "Revertir"
 #: src/svnfrontend/ccontextlistener.cpp:69
 #, kde-format
 msgid "Revert failed"
-msgstr "Revertir ha fallado"
+msgstr "No se ha podido revertir"
 
 #: src/svnfrontend/ccontextlistener.cpp:70
 #, kde-format
@@ -2768,12 +2768,12 @@ msgstr "«GET» necesita un archivo de salida"
 #: src/svnfrontend/commandexec.cpp:621
 #, kde-format
 msgid "May only switch one URL at time"
-msgstr "Solo se debe cambiar un URL cada vez"
+msgstr "Solo se debe reubicar una URL cada vez"
 
 #: src/svnfrontend/commandexec.cpp:625
 #, kde-format
 msgid "Switch only on working copies"
-msgstr "Cambiar solo en copias de trabajo"
+msgstr "Reubicar solo en las copias de trabajo"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, CopyMoveView)
 #: src/svnfrontend/copymoveview.ui:14
@@ -3229,7 +3229,7 @@ msgstr ""
 "Las palabras clave que se sustituirán en el contenido de un archivo.<br/>Se "
 "pueden insertar en los documentos poniendo una marca de palabra clave, que "
 "tiene el formato $NombrePalabraClave$.<br/>Las palabras clave válidas son:"
-"<br/><b>URL/HeadURL</b> El URL de la revisión HEAD del proyecto.<br/"
+"<br/><b>URL/HeadURL</b> La URL de la revisión HEAD del proyecto.<br/"
 "><b>Author/LastChangedBy</b> La última persona que modificó el archivo.<br/"
 "><b>Date/LastChangedDate</b> La fecha y hora de la última modificación del "
 "objeto.<br/><b>Revision/Rev/LastChangedRevision</b> La última revisión en la "
@@ -3271,7 +3271,7 @@ msgid ""
 msgstr ""
 "Una lista separadas por saltos de línea con los especificadores de módulos. "
 "Cada uno de ellos consiste en una ruta relativa a un directorio, indicadores "
-"de revisión (opcional) y un URL. Por ejemplo:<br/><nobr><b>foo http://"
+"de revisión (opcional) y una URL. Por ejemplo:<br/><nobr><b>foo http://"
 "ejemplo.com/repos/proyectoA</b></nobr><br/><nobr><b>foo/bar -r 1234 http://"
 "ejemplo.com/repos/projectoB</b></nobr>"
 
@@ -3444,7 +3444,7 @@ msgstr "Ignorar palabras clave"
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:110
 #, kde-format
 msgid "Append source URL name to subfolder"
-msgstr "Añadir el nombre del URL de origen a la subcarpeta"
+msgstr "Añadir el nombre de la URL de origen a la subcarpeta"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_ShowExplorer)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:120
@@ -3919,7 +3919,7 @@ msgstr "Validar propiedades"
 #: src/svnfrontend/maintreewidget.cpp:271
 #, kde-format
 msgid "Networked URL to open but networking is disabled."
-msgstr "Se ha pedido abrir un URL de red, pero la red no está activada."
+msgstr "Se ha solicitado abrir una URL de red, pero la red no está activada."
 
 #: src/svnfrontend/maintreewidget.cpp:497
 #, kde-format
@@ -4048,8 +4048,8 @@ msgid ""
 "Output the content of specified files or URLs with revision and author "
 "information in-line."
 msgstr ""
-"Mostrar el contenido de los archivos o URL indicados con información en cada "
-"línea sobre la revisión y el autor."
+"Mostrar el contenido de los archivos o URL que se indican con información en "
+"cada línea sobre la revisión y el autor."
 
 #: src/svnfrontend/maintreewidget.cpp:533
 #, kde-format
@@ -4064,7 +4064,7 @@ msgstr "Volcar HEAD"
 #: src/svnfrontend/maintreewidget.cpp:538
 #, kde-format
 msgid "Output the content of specified files or URLs."
-msgstr "Mostrar el contenido de archivos o URL indicados."
+msgstr "Mostrar el contenido de archivos o URL que se indican."
 
 #: src/svnfrontend/maintreewidget.cpp:540
 #, kde-format
@@ -4075,7 +4075,7 @@ msgstr "Volcar revisión..."
 #, kde-format
 msgid "Output the content of specified files or URLs at specific revision."
 msgstr ""
-"Mostrar el contenido de los archivos o URL indicados en una determinada "
+"Mostrar el contenido de los archivos o URL que se indican en una determinada "
 "revisión."
 
 #: src/svnfrontend/maintreewidget.cpp:544
@@ -4113,24 +4113,24 @@ msgstr "Crear una nueva carpeta"
 #: src/svnfrontend/maintreewidget.cpp:554
 #, kde-format
 msgid "Switch repository"
-msgstr "Cambiar el repositorio"
+msgstr "Reubicar el repositorio"
 
 #: src/svnfrontend/maintreewidget.cpp:555
 #, kde-format
 msgid "Switch repository path of current working copy path (\"svn switch\")"
 msgstr ""
-"Cambiar la ruta del repositorio de la ruta de la copia de trabajo actual "
+"Reubicar la ruta del repositorio de la ruta de la copia de trabajo actual "
 "(«svn switch»)"
 
 #: src/svnfrontend/maintreewidget.cpp:558
 #, kde-format
 msgid "Relocate current working copy URL"
-msgstr "Reubicar el URL de la copia de trabajo actual"
+msgstr "Reubicar la URL de la copia de trabajo actual"
 
 #: src/svnfrontend/maintreewidget.cpp:559
 #, kde-format
 msgid "Relocate URL of current working copy path to other URL"
-msgstr "Reubicar la ruta del URL de la copia de trabajo actual a otro URL"
+msgstr "Reubicar la URL de la ruta de la copia de trabajo actual a otra URL"
 
 #: src/svnfrontend/maintreewidget.cpp:562
 #, kde-format
@@ -4174,12 +4174,12 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:573
 #, kde-format
 msgid "Import folders into current"
-msgstr "Importar carpetas en el URL actual"
+msgstr "Importar carpetas en la actual"
 
 #: src/svnfrontend/maintreewidget.cpp:575
 #, kde-format
 msgid "Import folder content into current URL"
-msgstr "Importar el contenido de la carpeta en el URL actual"
+msgstr "Importar el contenido de la carpeta en la URL actual"
 
 #: src/svnfrontend/maintreewidget.cpp:579
 #, kde-format
@@ -4228,7 +4228,7 @@ msgstr "Borrando los directorios seleccionados del repositorio"
 #: src/svnfrontend/maintreewidget.cpp:592
 #, kde-format
 msgid "Revert current changes"
-msgstr "Deshacer los cambios actuales"
+msgstr "Revertir los cambios actuales"
 
 #: src/svnfrontend/maintreewidget.cpp:594
 #, kde-format
@@ -4528,7 +4528,7 @@ msgstr "Reubicar la ruta %1"
 #: src/svnfrontend/svnactions.cpp:1875
 #, kde-format
 msgid "Invalid url given!"
-msgstr "Se ha proporcionado un URL no válido."
+msgstr "Se ha indicado una URL no válida."
 
 #: src/svnfrontend/maintreewidget.cpp:2018
 #, kde-format
@@ -4681,7 +4681,7 @@ msgstr "Forzar el borrado de elementos modificados o sin versión"
 #: src/svnfrontend/merge_dlg.ui:126
 #, kde-format
 msgid "lump-merge all of source URL's unmerged changes"
-msgstr "Agrupar y fusionar todos los cambios sin fusionar del URL de origen"
+msgstr "Agrupar y fusionar todos los cambios sin fusionar de la URL de origen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_Reintegrate)
 #: src/svnfrontend/merge_dlg.ui:132
@@ -4950,7 +4950,7 @@ msgstr "URL"
 #: src/svnfrontend/svnactions.cpp:741
 #, kde-format
 msgid "Canonical repository URL"
-msgstr "URL canónico del repositorio"
+msgstr "URL canónica del repositorio"
 
 #: src/svnfrontend/svnactions.cpp:744
 #, kde-format
@@ -5045,7 +5045,7 @@ msgstr "Archivo rechazado por propiedad"
 #: src/svnfrontend/svnactions.cpp:816
 #, kde-format
 msgid "Copy from URL"
-msgstr "Copiar desde URL"
+msgstr "Copiar de URL"
 
 #: src/svnfrontend/svnactions.cpp:819 src/svnfrontend/svnactions.cpp:829
 #, kde-format
@@ -5307,7 +5307,7 @@ msgstr "Solo se puede reubicar un elemento cada vez"
 #: src/svnfrontend/svnactions.cpp:1852
 #, kde-format
 msgid "Error getting entry to switch"
-msgstr "Error al obtener la entrada a reubicar"
+msgstr "Error al obtener la entrada que se debe reubicar"
 
 #: src/svnfrontend/svnactions.cpp:1876
 #, kde-format

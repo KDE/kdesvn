@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-22 00:44+0000\n"
-"PO-Revision-Date: 2023-01-25 05:58+0100\n"
+"PO-Revision-Date: 2023-10-23 05:58+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -60,56 +60,49 @@ msgid "Password"
 msgstr "პაროლი"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:51
-#, fuzzy, kde-format
-#| msgid "Could not open repository"
+#, kde-format
 msgid "Checkout From Repository..."
-msgstr "რეპოზიტორიის გახსნის შეცდომა"
+msgstr "რეპოზიტორიიდან გამოთხოვა..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:54
-#, fuzzy, kde-format
-#| msgid "Export"
+#, kde-format
 msgid "Export..."
-msgstr "ექსპორტი"
+msgstr "გატანა..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:57
 #, kde-format
 msgid "Update (Kdesvn)"
-msgstr ""
+msgstr "განახლება (Kdesvn)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:60
-#, fuzzy, kde-format
-#| msgid "Commit Message"
+#, kde-format
 msgid "Commit (Kdesvn)"
-msgstr "კომიტის კომენტარი"
+msgstr "კომიტი (Kdesvn)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:63
 #, kde-format
 msgid "kdesvn log (last 100)"
-msgstr ""
+msgstr "kdesvn -ის ჟურნალი (ბოლო100)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:66
-#, fuzzy, kde-format
-#| msgid "Dump a Subversion repository to a file"
+#, kde-format
 msgid "Export from a Subversion repository..."
-msgstr "Subversion-ის რეპოზიტორიის დამპი ფაილში"
+msgstr "Subversion -ის რეპოზიტორიიდან გატანა..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:69
-#, fuzzy, kde-format
-#| msgid "Hotcopy a repository"
+#, kde-format
 msgid "Checkout from a repository..."
-msgstr "რეპოზიტორიის ცხელი ასლი"
+msgstr "რეპოზიტორიიდან გამოთხოვა..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:74
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Detailed Subversion info"
-msgstr "Subversion -ის ადმინი"
+msgstr "Subversion -ის დეტალური ინფორმაცია"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:77
-#, fuzzy, kde-format
-#| msgid "Repository"
+#, kde-format
 msgid "Add to Repository"
-msgstr "საცავი"
+msgstr "რეპოზიტორიაში ჩამატება"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:80
 #: src/svnfrontend/maintreewidget.cpp:653
@@ -118,32 +111,29 @@ msgid "Check for unversioned items"
 msgstr "უვერსიო ჩანაწერების შემოწმება"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:83
-#, fuzzy, kde-format
-#| msgid "Delete repository"
+#, kde-format
 msgid "Delete From Repository"
-msgstr "რეპოზიტორიის წაშლა"
+msgstr "რეპოზიტორიიდან წაშლა"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:86
 #, kde-format
 msgid "Revert Local Changes"
-msgstr ""
+msgstr "ლოკალური ცვლილებების დაბრუნება"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:89
 #, kde-format
 msgid "Rename..."
-msgstr ""
+msgstr "სახელის გადარქმევა..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:92
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Export a Repository"
+#, kde-format
 msgid "Import Repository"
-msgstr "რეპოზიტორიის გატანა"
+msgstr "რეპოზიტორიის შემოტანა"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:97
 #, kde-format
 msgid "Switch..."
-msgstr ""
+msgstr "გადართვა..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:100
 #: src/svnfrontend/maintreewidget.cpp:824
@@ -152,32 +142,29 @@ msgid "Merge..."
 msgstr "შერწყმა..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:105
-#, fuzzy, kde-format
-#| msgid "Blame"
+#, kde-format
 msgid "Blame..."
-msgstr "პასუხისმგებლობა"
+msgstr "პასუხისმგებლობა..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:108
 #, kde-format
 msgid "Create Patch..."
-msgstr ""
+msgstr "პაჩის შექმნა..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:113
 #, kde-format
 msgid "Diff (local)"
-msgstr ""
+msgstr "სხვაობა (ლოკალური)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:116
-#, fuzzy, kde-format
-#| msgid "Revision tree"
+#, kde-format
 msgid "Display revision tree"
-msgstr "რევიზიის ხე"
+msgstr "რევიზიის ხის ჩვენება"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:127
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Subversion (kdesvn)"
-msgstr "Subversion -ის ადმინი"
+msgstr "Subversion (kdesvn)"
 
 #: src/kdesvn.cpp:79
 #, kde-format
@@ -192,7 +179,7 @@ msgstr "ახალი რეპოზიტორიის შექმნა 
 #: src/kdesvn.cpp:103
 #, kde-format
 msgid "Create and opens a new local Subversion repository"
-msgstr ""
+msgstr "ქმნის და გახსნის ახალ ლოკალურ Subversion-ის რეპოზიტორიას"
 
 #: src/kdesvn.cpp:106
 #, kde-format
@@ -2452,7 +2439,7 @@ msgstr "რევიზია"
 #: src/svnfrontend/models/logitemmodel.cpp:177
 #, kde-format
 msgid "Date"
-msgstr ""
+msgstr "თარიღი"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #: src/svnfrontend/blamedisplay.ui:55
@@ -2515,7 +2502,7 @@ msgstr "განახლება"
 #: src/svnfrontend/ccontextlistener.cpp:77
 #, kde-format
 msgid "Update complete"
-msgstr ""
+msgstr "განახლება დასრულდა"
 
 #: src/svnfrontend/ccontextlistener.cpp:78
 #, kde-format
@@ -2550,7 +2537,7 @@ msgstr ""
 #: src/svnfrontend/ccontextlistener.cpp:87
 #, kde-format
 msgid "Locking"
-msgstr ""
+msgstr "დაბლოკვა"
 
 #: src/svnfrontend/ccontextlistener.cpp:88
 #, kde-format
@@ -2681,7 +2668,7 @@ msgstr ""
 #: src/svnfrontend/copymoveview.ui:20
 #, kde-format
 msgid "Rename"
-msgstr ""
+msgstr "გადარქმევა"
 
 #. i18n: ectx: property (text), widget (KSqueezedTextLabel, m_OldNameLabel)
 #. i18n: ectx: property (text), widget (KSqueezedTextLabel, m_PrefixLabel)
@@ -2694,12 +2681,12 @@ msgstr "KSqueezedTextLabel"
 #: src/svnfrontend/copymoveview.ui:43
 #, kde-format
 msgid "to"
-msgstr ""
+msgstr "სადამდე"
 
 #: src/svnfrontend/copymoveview_impl.cpp:46
 #, kde-format
 msgid "Rename/move"
-msgstr ""
+msgstr "გადარქმევა/გადატანა"
 
 #: src/svnfrontend/copymoveview_impl.cpp:70
 #, kde-format
@@ -3518,7 +3505,7 @@ msgstr ""
 #: src/svnfrontend/graphtree/revgraphview.cpp:844
 #, kde-format
 msgid "Select item"
-msgstr ""
+msgstr "აირჩიეთ ელემენტი"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:847
 #, kde-format
@@ -3528,7 +3515,7 @@ msgstr ""
 #: src/svnfrontend/graphtree/revgraphview.cpp:850
 #, kde-format
 msgid "Rotate counter-clockwise"
-msgstr ""
+msgstr "საათის საწინააღმდეგო მიმართულებით შემობრუნება"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:851
 #, kde-format
@@ -4412,7 +4399,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:2634
 #, kde-format
 msgid "Not yet implemented"
-msgstr ""
+msgstr "განხორციელებული არაა"
 
 #: src/svnfrontend/maintreewidget.cpp:2634
 #, kde-format
@@ -4429,19 +4416,19 @@ msgstr ""
 #: src/svnfrontend/merge_dlg.ui:22
 #, kde-format
 msgid "Source 1:"
-msgstr ""
+msgstr "წყარო 1:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_SrcTwoLabel)
 #: src/svnfrontend/merge_dlg.ui:38
 #, kde-format
 msgid "Source 2:"
-msgstr ""
+msgstr "წყარო 2:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_OutLabel)
 #: src/svnfrontend/merge_dlg.ui:54
 #, kde-format
 msgid "Output to:"
-msgstr ""
+msgstr "გამოტანა:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_MergeParameter)
 #: src/svnfrontend/merge_dlg.ui:72
@@ -4645,7 +4632,7 @@ msgstr ""
 #: src/svnfrontend/stopdlg.cpp:201
 #, kde-format
 msgid "%1 of %2"
-msgstr ""
+msgstr "%1 %2-დან"
 
 #: src/svnfrontend/svnactions.cpp:187
 #, kde-format
@@ -5053,7 +5040,7 @@ msgstr "გატანა"
 #: src/svnfrontend/svnactions.cpp:1790
 #, kde-format
 msgid "Checking out"
-msgstr ""
+msgstr "ჩამოწერა"
 
 #: src/svnfrontend/svnactions.cpp:1828
 #, kde-format

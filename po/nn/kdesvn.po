@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-04 00:50+0000\n"
+"POT-Creation-Date: 2023-10-22 00:44+0000\n"
 "PO-Revision-Date: 2023-01-15 11:55+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -61,6 +61,113 @@ msgstr "Skriv inn passordet nedanfor."
 msgctxt "@title:window"
 msgid "Password"
 msgstr "Passord"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:51
+#, kde-format
+msgid "Checkout From Repository..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:54
+#, kde-format
+msgid "Export..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:57
+#, kde-format
+msgid "Update (Kdesvn)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:60
+#, kde-format
+msgid "Commit (Kdesvn)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:63
+#, kde-format
+msgid "kdesvn log (last 100)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:66
+#, kde-format
+msgid "Export from a Subversion repository..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:69
+#, kde-format
+msgid "Checkout from a repository..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:74
+#, kde-format
+msgid "Detailed Subversion info"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:77
+#, kde-format
+msgid "Add to Repository"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:80
+#: src/svnfrontend/maintreewidget.cpp:653
+#, kde-format
+msgid "Check for unversioned items"
+msgstr "Sjå etter uversjonerte element"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:83
+#, kde-format
+msgid "Delete From Repository"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:86
+#, kde-format
+msgid "Revert Local Changes"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:89
+#, kde-format
+msgid "Rename..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:92
+#, kde-format
+msgid "Import Repository"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:97
+#, kde-format
+msgid "Switch..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:100
+#: src/svnfrontend/maintreewidget.cpp:824
+#, kde-format
+msgid "Merge..."
+msgstr "Flett …"
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:105
+#, kde-format
+msgid "Blame..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:108
+#, kde-format
+msgid "Create Patch..."
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:113
+#, kde-format
+msgid "Diff (local)"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:116
+#, kde-format
+msgid "Display revision tree"
+msgstr ""
+
+#: src/fileitemactions/kdesvnactionsplugin.cpp:127
+#, kde-format
+msgid "Subversion (kdesvn)"
+msgstr ""
 
 #: src/kdesvn.cpp:79
 #, kde-format
@@ -4084,11 +4191,6 @@ msgstr "Flytt gjeldande adresse til arbeidskopi"
 msgid "Relocate URL of current working copy path to other URL"
 msgstr "Flytt gjeldande adresse til arbeidskopi til ei ny adresse"
 
-#: src/svnfrontend/maintreewidget.cpp:653
-#, kde-format
-msgid "Check for unversioned items"
-msgstr "Sjå etter uversjonerte element"
-
 #: src/svnfrontend/maintreewidget.cpp:658
 #, kde-format
 msgid "Unversioned"
@@ -4289,11 +4391,6 @@ msgstr "Flett"
 #, kde-format
 msgid "Merge two revisions of this entry into itself"
 msgstr "Flett to revisjonar av dette elementet med seg sjølv"
-
-#: src/svnfrontend/maintreewidget.cpp:824
-#, kde-format
-msgid "Merge..."
-msgstr "Flett …"
 
 #: src/svnfrontend/maintreewidget.cpp:829
 #, kde-format

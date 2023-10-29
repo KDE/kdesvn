@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail.com>, 2016, 2017.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2023.
+# SPDX-FileCopyrightText: 2023 Adrián Chaves (Gallaecio)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-22 00:44+0000\n"
-"PO-Revision-Date: 2023-09-03 13:22+0200\n"
+"PO-Revision-Date: 2023-10-28 10:44+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -60,57 +60,49 @@ msgid "Password"
 msgstr "Contrasinal"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:51
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Checkout a Repository"
+#, kde-format
 msgid "Checkout From Repository..."
-msgstr "Descargar un repositorio"
+msgstr "Obter do repositorio…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:54
-#, fuzzy, kde-format
-#| msgid "Export"
+#, kde-format
 msgid "Export..."
-msgstr "Exportar"
+msgstr "Exportar…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:57
 #, kde-format
 msgid "Update (Kdesvn)"
-msgstr ""
+msgstr "Actualizar con Kdesvn"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:60
-#, fuzzy, kde-format
-#| msgid "Commit Added"
+#, kde-format
 msgid "Commit (Kdesvn)"
-msgstr "Engadiuse a remisión"
+msgstr "Remitir con Kdesvn"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:63
 #, kde-format
 msgid "kdesvn log (last 100)"
-msgstr ""
+msgstr "Historial de kdesvn (últimos 100)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:66
-#, fuzzy, kde-format
-#| msgid "Export a repository"
+#, kde-format
 msgid "Export from a Subversion repository..."
-msgstr "Exportar un repositorio"
+msgstr "Exportar dun repositorio de Subversion…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:69
-#, fuzzy, kde-format
-#| msgid "Checkout a repository"
+#, kde-format
 msgid "Checkout from a repository..."
-msgstr "Descargar un repositorio"
+msgstr "Obter dun repositorio…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:74
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Detailed Subversion info"
-msgstr "Administrador de Subversion"
+msgstr "Información detallada de Subversion"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:77
-#, fuzzy, kde-format
-#| msgid "Added in repository"
+#, kde-format
 msgid "Add to Repository"
-msgstr "Engadido no repositorio"
+msgstr "Engadir ao repositorio"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:80
 #: src/svnfrontend/maintreewidget.cpp:653
@@ -119,35 +111,29 @@ msgid "Check for unversioned items"
 msgstr "Comprobar se hai elementos alleos"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:83
-#, fuzzy, kde-format
-#| msgid "Delete from repository"
+#, kde-format
 msgid "Delete From Repository"
 msgstr "Eliminar do repositorio"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:86
-#, fuzzy, kde-format
-#| msgid "Revert current changes"
+#, kde-format
 msgid "Revert Local Changes"
-msgstr "Anular os cambios actuais"
+msgstr "Anular os cambios locais"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:89
-#, fuzzy, kde-format
-#| msgid "Rename"
+#, kde-format
 msgid "Rename..."
-msgstr "Renomear"
+msgstr "Renomear…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:92
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Export a Repository"
+#, kde-format
 msgid "Import Repository"
-msgstr "Exportar un repositorio"
+msgstr "Importar un repositorio"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:97
-#, fuzzy, kde-format
-#| msgid "Switch URL"
+#, kde-format
 msgid "Switch..."
-msgstr "Cambiar o URL"
+msgstr "Cambiar…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:100
 #: src/svnfrontend/maintreewidget.cpp:824
@@ -156,33 +142,29 @@ msgid "Merge..."
 msgstr "Fusionar…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:105
-#, fuzzy, kde-format
-#| msgid "Blame"
+#, kde-format
 msgid "Blame..."
-msgstr "Autorías"
+msgstr "Autorías…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:108
 #, kde-format
 msgid "Create Patch..."
-msgstr ""
+msgstr "Crear un parche…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:113
-#, fuzzy, kde-format
-#| msgid "Diff local changes"
+#, kde-format
 msgid "Diff (local)"
-msgstr "Diferenzas cos cambios locais"
+msgstr "Diferenzas (local)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:116
-#, fuzzy, kde-format
-#| msgid "Full revision tree"
+#, kde-format
 msgid "Display revision tree"
-msgstr "Árbore de revisións completa"
+msgstr "Amosar a árbore de revisións"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:127
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Subversion (kdesvn)"
-msgstr "Administrador de Subversion"
+msgstr "Subversion (kdesvn)"
 
 #: src/kdesvn.cpp:79
 #, kde-format

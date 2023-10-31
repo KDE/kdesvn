@@ -12,15 +12,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-06-07 01:43+0000\n"
-"PO-Revision-Date: 2021-01-11 18:28+0100\n"
-"Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
+"PO-Revision-Date: 2023-10-29 19:28+0100\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.2\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -1897,7 +1897,7 @@ msgstr "Utiliser des propriétés comme « bugtraq:url » lors du listage du d
 #: src/settings/kdesvn_part.kcfg:120
 #, kde-format
 msgid "Check for property svn:needs-lock on listings"
-msgstr "Vérifier la propriété svn:needs-lock lors des listages"
+msgstr "Vérifier la propriété « svn:needs-lock » lors des listages"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_store_passwords)
@@ -2362,17 +2362,17 @@ msgid ""
 "like Subversion does but put it into an encrypted storage like KDE Wallet or "
 "do not save passwords.</p>"
 msgstr ""
-"<p>Indique si vos mots de passes saisis dans kdesvn doivent être enregistrés "
+"<p>Indique si vos mots de passe saisis dans kdesvn doivent être enregistrés "
 "dans le portefeuille KDE plutôt qu'en texte clair dans Subversion.</p><p>La "
 "sécurité est améliorée car le portefeuille KDE est généralement chiffré avec "
 "un mot de passe. D'un autre côté vous devrez ressaisir vos mots de passe "
 "avec d'autres clients Subversion qui n'ont pas accès au portefeuille KDE "
 "(tel svn en ligne de commande, rapidsvn etc.).</p><p>Si vous êtes en "
-"stockage HOME, c'est-à-dire que que votre dossier de configuration "
+"stockage « HOME », c'est-à-dire que que votre dossier de configuration "
 "Subversion est sur un disque réseau, vous devriez réfléchir sérieusement à "
 "ne pas enregistrer des mots de passe dans un fichier texte en clair comme le "
 "fait Subversion, mais à les mettre dans un stockage chiffré comme le "
-"portefeuille KDE, ou ne pas enregistrer les mots de passe du tout.</p>"
+"portefeuille KDE ou ne pas enregistrer les mots de passe du tout.</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_passwords_in_wallet)
 #: src/settings/subversion_settings.ui:125
@@ -2853,7 +2853,7 @@ msgstr "BDB"
 #: src/svnfrontend/createrepodlg.ui:65
 #, kde-format
 msgid "Create trunk, tags and branches folders"
-msgstr "Créer les dossiers trunk, tags et branches"
+msgstr "Créer les dossiers « trunk », « tags » et « branches »"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_CreateMainDirs)
 #: src/svnfrontend/createrepodlg.ui:68
@@ -3290,8 +3290,8 @@ msgid ""
 "replaced with the bug issue number. Example:<br/><nobr><b>http://example.com/"
 "mantis/view.php?id=%BUGID%</b></nobr>"
 msgstr ""
-"URL pointant vers le système de suivi de bugs. Elle doit contenir <b>%BUGID"
-"%</b>qui sera remplacé par le numéro de rapport de bug. Exemple : <br/"
+"URL pointant vers le système de suivi de bogues. Elle doit contenir <b>%BUGID"
+"%</b>qui sera remplacé par le numéro de rapport de bogue. Exemple : <br/"
 "><nobr><b>http://example.com/mantis/view.php?id=%BUGID%</b></nobr>"
 
 #: src/svnfrontend/editpropsdlg.cpp:106
@@ -3514,7 +3514,7 @@ msgstr "Choisir les changements de la copie de travail courante"
 #: src/svnfrontend/fronthelpers/rangeinput.ui:143
 #, kde-format
 msgid "WORKING"
-msgstr "WORKING"
+msgstr "EN COURS"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_startNumberButton)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:56

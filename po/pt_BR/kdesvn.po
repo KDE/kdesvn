@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:38+0000\n"
-"PO-Revision-Date: 2023-02-14 10:54-0300\n"
+"PO-Revision-Date: 2023-11-14 11:20-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
-"Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
+"Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -61,57 +61,49 @@ msgid "Password"
 msgstr "Senha"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:51
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Checkout a Repository"
+#, kde-format
 msgid "Checkout From Repository..."
-msgstr "Baixar um repositório"
+msgstr "Baixar de um repositório..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:54
-#, fuzzy, kde-format
-#| msgid "Export"
+#, kde-format
 msgid "Export..."
-msgstr "Exportar"
+msgstr "Exportar..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:57
 #, kde-format
 msgid "Update (Kdesvn)"
-msgstr ""
+msgstr "Atualizar (Kdesvn)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:60
-#, fuzzy, kde-format
-#| msgid "Commit Added"
+#, kde-format
 msgid "Commit (Kdesvn)"
-msgstr "Enviar os adicionados"
+msgstr "Enviar (Kdesvn)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:63
 #, kde-format
 msgid "kdesvn log (last 100)"
-msgstr ""
+msgstr "Registros do kdesvn (últimos 100)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:66
-#, fuzzy, kde-format
-#| msgid "Export a repository"
+#, kde-format
 msgid "Export from a Subversion repository..."
-msgstr "Exportar um repositório"
+msgstr "Exportar de um repositório repositório Subversion..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:69
-#, fuzzy, kde-format
-#| msgid "Checkout a repository"
+#, kde-format
 msgid "Checkout from a repository..."
-msgstr "Baixar um repositório"
+msgstr "Baixar de um repositório..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:74
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Detailed Subversion info"
-msgstr "Administração do Subversion"
+msgstr "Informações detalhadas do Subversion"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:77
-#, fuzzy, kde-format
-#| msgid "Added in repository"
+#, kde-format
 msgid "Add to Repository"
-msgstr "Adicionado no repositório"
+msgstr "Adicionar no repositório"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:80
 #: src/svnfrontend/maintreewidget.cpp:653
@@ -120,35 +112,29 @@ msgid "Check for unversioned items"
 msgstr "Verificar por itens sem controle de versão"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:83
-#, fuzzy, kde-format
-#| msgid "Delete from repository"
+#, kde-format
 msgid "Delete From Repository"
 msgstr "Excluir do repositório"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:86
-#, fuzzy, kde-format
-#| msgid "Revert current changes"
+#, kde-format
 msgid "Revert Local Changes"
-msgstr "Reverter as alterações atuais"
+msgstr "Reverter as alterações locais"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:89
-#, fuzzy, kde-format
-#| msgid "Rename"
+#, kde-format
 msgid "Rename..."
-msgstr "Renomear"
+msgstr "Renomear..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:92
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Export a Repository"
+#, kde-format
 msgid "Import Repository"
-msgstr "Exportar um repositório"
+msgstr "Importar repositório"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:97
-#, fuzzy, kde-format
-#| msgid "Switch URL"
+#, kde-format
 msgid "Switch..."
-msgstr "Mudar de URL"
+msgstr "Mudar..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:100
 #: src/svnfrontend/maintreewidget.cpp:824
@@ -157,33 +143,29 @@ msgid "Merge..."
 msgstr "Mesclar..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:105
-#, fuzzy, kde-format
-#| msgid "Blame"
+#, kde-format
 msgid "Blame..."
-msgstr "Culpar"
+msgstr "Culpar..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:108
 #, kde-format
 msgid "Create Patch..."
-msgstr ""
+msgstr "Criar correção..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:113
-#, fuzzy, kde-format
-#| msgid "Diff local changes"
+#, kde-format
 msgid "Diff (local)"
-msgstr "Diferenças das alterações locais"
+msgstr "Diferenças (local)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:116
-#, fuzzy, kde-format
-#| msgid "Full revision tree"
+#, kde-format
 msgid "Display revision tree"
-msgstr "Árvore de revisão completa"
+msgstr "Mostrar árvore de revisão"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:127
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Subversion (kdesvn)"
-msgstr "Administração do Subversion"
+msgstr "Subversion (Kdesvn)"
 
 #: src/kdesvn.cpp:79
 #, kde-format
@@ -307,13 +289,13 @@ msgstr "Os registros seguem as mudanças dos nós"
 #: src/settings/kdesvn_part.kcfg:80
 #, kde-format
 msgid "Display ignored files"
-msgstr "Exibir os arquivos ignorados"
+msgstr "Mostrar os arquivos ignorados"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/kdesvn_part.cpp:165 src/settings/kdesvn_part.kcfg:84
 #, kde-format
 msgid "Display unknown files"
-msgstr "Exibir os arquivos desconhecidos"
+msgstr "Mostrar os arquivos desconhecidos"
 
 #: src/kdesvn_part.cpp:170
 #, kde-format
@@ -480,7 +462,7 @@ msgstr "Repositório"
 #: src/kdesvn_part.rc:82
 #, kde-format
 msgid "View"
-msgstr "Exibir"
+msgstr "Mostrar"
 
 #. i18n: ectx: Menu (log_cache)
 #: src/kdesvn_part.rc:89
@@ -2627,12 +2609,12 @@ msgstr "Ir para a linha"
 #: src/svnfrontend/blamedisplay.cpp:320
 #, kde-format
 msgid "Show line"
-msgstr "Exibir linha"
+msgstr "Mostrar linha"
 
 #: src/svnfrontend/blamedisplay.cpp:320
 #, kde-format
 msgid "Show line number"
-msgstr "Exibir o número da linha"
+msgstr "Mostrar o número da linha"
 
 #: src/svnfrontend/blamedisplay.cpp:356
 #, kde-format
@@ -3815,7 +3797,7 @@ msgstr "Selecionar item"
 #: src/svnfrontend/graphtree/revgraphview.cpp:847
 #, kde-format
 msgid "Display details"
-msgstr "Exibir detalhes"
+msgstr "Mostrar detalhes"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:850
 #, kde-format
@@ -4104,12 +4086,12 @@ msgstr "Propriedades"
 #: src/svnfrontend/maintreewidget.cpp:539
 #, kde-format
 msgid "Display Properties"
-msgstr "Exibir propriedades"
+msgstr "Mostrar propriedades"
 
 #: src/svnfrontend/maintreewidget.cpp:545
 #, kde-format
 msgid "Display last changes"
-msgstr "Exibir as últimas alterações"
+msgstr "Mostrar as últimas alterações"
 
 #: src/svnfrontend/maintreewidget.cpp:550
 #, kde-format
@@ -4124,7 +4106,7 @@ msgstr "Detalhes"
 #: src/svnfrontend/maintreewidget.cpp:557
 #, kde-format
 msgid "Show details about selected item"
-msgstr "Exibir os detalhes sobre o item selecionado"
+msgstr "Mostrar os detalhes sobre o item selecionado"
 
 #: src/svnfrontend/maintreewidget.cpp:559
 #, kde-format
@@ -4949,7 +4931,7 @@ msgstr "Falta o link do SVN"
 #: src/svnfrontend/propertiesdlg.ui:14
 #, kde-format
 msgid "View and modify properties"
-msgstr "Exibir e modificar as propriedades"
+msgstr "Mostrar e modificar as propriedades"
 
 #. i18n: ectx: property (text), widget (QPushButton, pbAdd)
 #: src/svnfrontend/propertiesdlg.ui:39

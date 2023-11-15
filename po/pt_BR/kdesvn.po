@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # André Marcelo Alvarenga <alvarenga@kde.org>, 2013, 2014, 2015, 2016.
-# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2016, 2017, 2018, 2019, 2020, 2021.
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2016, 2017, 2018, 2019, 2020, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-06-07 01:43+0000\n"
-"PO-Revision-Date: 2021-05-06 14:50-0300\n"
+"PO-Revision-Date: 2023-11-14 11:20-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -191,13 +191,13 @@ msgstr "Os registros seguem as mudanças dos nós"
 #: src/settings/kdesvn_part.kcfg:80
 #, kde-format
 msgid "Display ignored files"
-msgstr "Exibir os arquivos ignorados"
+msgstr "Mostrar os arquivos ignorados"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/kdesvn_part.cpp:166 src/settings/kdesvn_part.kcfg:84
 #, kde-format
 msgid "Display unknown files"
-msgstr "Exibir os arquivos desconhecidos"
+msgstr "Mostrar os arquivos desconhecidos"
 
 #: src/kdesvn_part.cpp:171
 #, kde-format
@@ -364,7 +364,7 @@ msgstr "Repositório"
 #: src/kdesvn_part.rc:82
 #, kde-format
 msgid "View"
-msgstr "Exibir"
+msgstr "Mostrar"
 
 #. i18n: ectx: Menu (log_cache)
 #: src/kdesvn_part.rc:89
@@ -2516,12 +2516,12 @@ msgstr "Ir para a linha"
 #: src/svnfrontend/blamedisplay.cpp:333
 #, kde-format
 msgid "Show line"
-msgstr "Exibir linha"
+msgstr "Mostrar linha"
 
 #: src/svnfrontend/blamedisplay.cpp:333
 #, kde-format
 msgid "Show line number"
-msgstr "Exibir o número da linha"
+msgstr "Mostrar o número da linha"
 
 #: src/svnfrontend/blamedisplay.cpp:370
 #, kde-format
@@ -3686,7 +3686,7 @@ msgstr "Selecionar item"
 #: src/svnfrontend/graphtree/revgraphview.cpp:856
 #, kde-format
 msgid "Display details"
-msgstr "Exibir detalhes"
+msgstr "Mostrar detalhes"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:859
 #, kde-format
@@ -3975,12 +3975,12 @@ msgstr "Propriedades"
 #: src/svnfrontend/maintreewidget.cpp:515
 #, kde-format
 msgid "Display Properties"
-msgstr "Exibir propriedades"
+msgstr "Mostrar propriedades"
 
 #: src/svnfrontend/maintreewidget.cpp:516
 #, kde-format
 msgid "Display last changes"
-msgstr "Exibir as últimas alterações"
+msgstr "Mostrar as últimas alterações"
 
 #: src/svnfrontend/maintreewidget.cpp:517
 #, kde-format
@@ -3995,7 +3995,7 @@ msgstr "Detalhes"
 #: src/svnfrontend/maintreewidget.cpp:519
 #, kde-format
 msgid "Show details about selected item"
-msgstr "Exibir os detalhes sobre o item selecionado"
+msgstr "Mostrar os detalhes sobre o item selecionado"
 
 #: src/svnfrontend/maintreewidget.cpp:520
 #, kde-format
@@ -4817,7 +4817,7 @@ msgstr "Falta o link do SVN"
 #: src/svnfrontend/propertiesdlg.ui:14
 #, kde-format
 msgid "View and modify properties"
-msgstr "Exibir e modificar as propriedades"
+msgstr "Mostrar e modificar as propriedades"
 
 #. i18n: ectx: property (text), widget (QPushButton, pbAdd)
 #: src/svnfrontend/propertiesdlg.ui:39

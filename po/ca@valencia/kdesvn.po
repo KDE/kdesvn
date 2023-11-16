@@ -865,7 +865,7 @@ msgstr "Inserix un fitxer de text..."
 #: src/ksvnwidgets/commitmessage.ui:226
 #, kde-format
 msgid "If checked commit will not release locks."
-msgstr "Si està marcada, la comissió no amprarà els blocats."
+msgstr "Si se selecciona, la comissió no amprarà els blocats."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_keepLocksButton)
 #: src/ksvnwidgets/commitmessage.ui:229
@@ -1294,7 +1294,7 @@ msgstr "Cap mínim"
 #, kde-format
 msgid "If set, kdesvn will not show a menu inside \"Action\" menu of Konqueror"
 msgstr ""
-"Si es marca, Kdesvn no mostrarà un submenú dins del menú «Accions» de "
+"Si se selecciona, Kdesvn no mostrarà un submenú dins del menú «Accions» de "
 "Konqueror"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_contextmenu)
@@ -1310,8 +1310,8 @@ msgid ""
 "If set, kdesvn will not show some extra actions inside \"Action\" menu of "
 "Konqueror/Dolphin"
 msgstr ""
-"Si es marca, Kdesvn no mostrarà accions extres dins del menú «Accions» de "
-"Konqueror/Dolphin"
+"Si se selecciona, Kdesvn no mostrarà accions addicionals dins del menú "
+"«Accions» de Konqueror o Dolphin"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
 #: src/settings/cmdexecsettings.ui:64
@@ -1429,7 +1429,7 @@ msgid ""
 "checked use internal display."
 msgstr ""
 "Si Kdesvn ha d'utilitzar un visor i/o generador extern per a les "
-"diferències. Si no es marca, s'utilitzarà el visor intern."
+"diferències. Si no se selecciona, s'utilitzarà el visor intern."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_external_diff)
 #: src/settings/diffmergesettings.ui:42
@@ -1726,8 +1726,8 @@ msgid ""
 msgstr ""
 "<p align=\"left\">\n"
 "Marca els elements amb un estat no normal superposant una icona.\n"
-"Quan es volen veure quins elements són nous en el repositori s'ha de marcar "
-"«Comprova actualitzacions en obrir» en el diàleg de Subversion.\n"
+"Quan es volen veure quins elements són nous en el repositori s'ha de "
+"seleccionar «Comprova actualitzacions en obrir» en el diàleg de Subversion.\n"
 "</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_overlays)
@@ -2275,9 +2275,9 @@ msgid ""
 "</p>\n"
 "<p align=\"left\"><i>Be careful: This may let listings REAL slow.</i></p>"
 msgstr ""
-"<p align=\"left\">Quan està marcada, Kdesvn obté informació més detallada "
-"sobre els elements en realitzar un llistat sobre repositoris remots. Així es "
-"poden veure els blocats remots en el resum.\n"
+"<p align=\"left\">Quan se selecciona, Kdesvn obtindrà informació més "
+"detallada sobre els elements en realitzar un llistat sobre repositoris "
+"remots. Així es poden veure els blocats remots en el resum.\n"
 "</p>\n"
 "<p align=\"left\"><i>Precaució: Açò pot tornar el llistat MOLT lent.</i></p>"
 
@@ -4742,8 +4742,8 @@ msgid ""
 "If checked, allow merge into mixed revision working copy, otherwise raises "
 "error in that case"
 msgstr ""
-"Si està marcada, permetrà fusionar dins d'una revisió de la còpia de treball "
-"barrejada, en cas contrari augmentarà els errors"
+"Si se selecciona, permetrà fusionar dins d'una revisió de la còpia de "
+"treball barrejada, en cas contrari augmentarà els errors"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_AllowMixedRev)
 #: src/svnfrontend/merge_dlg.ui:179

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:38+0000\n"
-"PO-Revision-Date: 2023-10-21 13:54\n"
+"PO-Revision-Date: 2023-11-19 03:40\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -64,10 +64,9 @@ msgid "Checkout From Repository..."
 msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:54
-#, fuzzy, kde-format
-#| msgid "Export"
+#, kde-format
 msgid "Export..."
-msgstr "导出"
+msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:57
 #, kde-format
@@ -75,10 +74,9 @@ msgid "Update (Kdesvn)"
 msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:60
-#, fuzzy, kde-format
-#| msgid "Commit Message"
+#, kde-format
 msgid "Commit (Kdesvn)"
-msgstr "提交消息"
+msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:63
 #, kde-format
@@ -91,22 +89,19 @@ msgid "Export from a Subversion repository..."
 msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:69
-#, fuzzy, kde-format
-#| msgid "Dumping a repository"
+#, kde-format
 msgid "Checkout from a repository..."
-msgstr "转储存储库"
+msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:74
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Detailed Subversion info"
-msgstr "Subversion 管理"
+msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:77
-#, fuzzy, kde-format
-#| msgid "Repository"
+#, kde-format
 msgid "Add to Repository"
-msgstr "仓库"
+msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:80
 #: src/svnfrontend/maintreewidget.cpp:653
@@ -115,11 +110,9 @@ msgid "Check for unversioned items"
 msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:83
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Dump a Repository"
+#, kde-format
 msgid "Delete From Repository"
-msgstr "转储存储库"
+msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:86
 #, kde-format
@@ -127,17 +120,14 @@ msgid "Revert Local Changes"
 msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:89
-#, fuzzy, kde-format
-#| msgid "Rename"
+#, kde-format
 msgid "Rename..."
-msgstr "重命名"
+msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:92
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Dump a Repository"
+#, kde-format
 msgid "Import Repository"
-msgstr "转储存储库"
+msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:97
 #, kde-format
@@ -151,10 +141,9 @@ msgid "Merge..."
 msgstr "合并..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:105
-#, fuzzy, kde-format
-#| msgid "Blame"
+#, kde-format
 msgid "Blame..."
-msgstr "惩罚"
+msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:108
 #, kde-format
@@ -172,10 +161,9 @@ msgid "Display revision tree"
 msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:127
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Subversion (kdesvn)"
-msgstr "Subversion 管理"
+msgstr ""
 
 #: src/kdesvn.cpp:79
 #, kde-format
@@ -3541,7 +3529,7 @@ msgstr ""
 #: src/svnfrontend/graphtree/revgraphview.cpp:851
 #, kde-format
 msgid "Rotate clockwise"
-msgstr "顺时针旋转"
+msgstr "旋转 (顺时针)"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:857
 #: src/svnfrontend/graphtree/revgraphview.cpp:875

@@ -1,21 +1,21 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2023.
+# SPDX-FileCopyrightText: 2023 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:38+0000\n"
-"PO-Revision-Date: 2023-02-03 20:30+0900\n"
+"PO-Revision-Date: 2023-12-02 20:14+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
-"Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: Traditional Chinese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -59,57 +59,49 @@ msgid "Password"
 msgstr "密碼"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:51
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Checkout a Repository"
+#, kde-format
 msgid "Checkout From Repository..."
-msgstr "簽出版本庫"
+msgstr "從版本庫簽出…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:54
-#, fuzzy, kde-format
-#| msgid "Export"
+#, kde-format
 msgid "Export..."
-msgstr "匯出"
+msgstr "匯出…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:57
 #, kde-format
 msgid "Update (Kdesvn)"
-msgstr ""
+msgstr "更新 (Kdesvn)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:60
-#, fuzzy, kde-format
-#| msgid "Commit Added"
+#, kde-format
 msgid "Commit (Kdesvn)"
-msgstr "提交已加入項目"
+msgstr "提交 (Kdesvn)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:63
 #, kde-format
 msgid "kdesvn log (last 100)"
-msgstr ""
+msgstr "kdesvn log (最後 100 個)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:66
-#, fuzzy, kde-format
-#| msgid "Export a repository"
+#, kde-format
 msgid "Export from a Subversion repository..."
-msgstr "匯出版本庫"
+msgstr "從 Subversion 版本庫匯出…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:69
-#, fuzzy, kde-format
-#| msgid "Checkout a repository"
+#, kde-format
 msgid "Checkout from a repository..."
-msgstr "簽出版本庫"
+msgstr "從 Subversion 版本庫簽出…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:74
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Detailed Subversion info"
-msgstr "Subversion 管理"
+msgstr "Subversion 詳細資訊"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:77
-#, fuzzy, kde-format
-#| msgid "Added in repository"
+#, kde-format
 msgid "Add to Repository"
-msgstr "已在版本庫加入"
+msgstr "加入至版本庫"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:80
 #: src/svnfrontend/maintreewidget.cpp:653
@@ -118,35 +110,29 @@ msgid "Check for unversioned items"
 msgstr "檢查未進版控的項目"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:83
-#, fuzzy, kde-format
-#| msgid "Delete from repository"
+#, kde-format
 msgid "Delete From Repository"
 msgstr "從版本庫刪除"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:86
-#, fuzzy, kde-format
-#| msgid "Revert current changes"
+#, kde-format
 msgid "Revert Local Changes"
-msgstr "回復目前的變更"
+msgstr "回復本機變更"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:89
-#, fuzzy, kde-format
-#| msgid "Rename"
+#, kde-format
 msgid "Rename..."
-msgstr "重新命名"
+msgstr "重新命名…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:92
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Export a Repository"
+#, kde-format
 msgid "Import Repository"
-msgstr "匯出版本庫"
+msgstr "匯入版本庫"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:97
-#, fuzzy, kde-format
-#| msgid "Switch URL"
+#, kde-format
 msgid "Switch..."
-msgstr "切換網址"
+msgstr "切換…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:100
 #: src/svnfrontend/maintreewidget.cpp:824
@@ -155,33 +141,29 @@ msgid "Merge..."
 msgstr "合併…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:105
-#, fuzzy, kde-format
-#| msgid "Blame"
+#, kde-format
 msgid "Blame..."
-msgstr "Blame"
+msgstr "Blame…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:108
 #, kde-format
 msgid "Create Patch..."
-msgstr ""
+msgstr "建立修補檔案…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:113
-#, fuzzy, kde-format
-#| msgid "Diff local changes"
+#, kde-format
 msgid "Diff (local)"
-msgstr "顯示本機變更"
+msgstr "差異（本機）"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:116
-#, fuzzy, kde-format
-#| msgid "Full revision tree"
+#, kde-format
 msgid "Display revision tree"
-msgstr "完整修訂版檔案樹"
+msgstr "顯示修訂版檔案樹"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:127
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Subversion (kdesvn)"
-msgstr "Subversion 管理"
+msgstr "Subversion (kdesvn)"
 
 #: src/kdesvn.cpp:79
 #, kde-format

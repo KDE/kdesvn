@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:38+0000\n"
+"POT-Creation-Date: 2023-12-04 00:42+0000\n"
 "PO-Revision-Date: 2023-12-02 20:14+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -2008,8 +2008,9 @@ msgstr "用哪個程式來解決衝突"
 
 #. i18n: ectx: label, entry, group (display)
 #: src/settings/kdesvn_part.kcfg:164
-#, kde-format
-msgid "Display different then normal states colored"
+#, fuzzy, kde-format
+#| msgid "Display different then normal states colored"
+msgid "Display other than normal states colored"
 msgstr "以不同的顏色顯示非正常的狀態"
 
 #. i18n: ectx: label, entry, group (blame_dlg)

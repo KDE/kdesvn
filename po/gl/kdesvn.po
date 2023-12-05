@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-04 00:42+0000\n"
+"POT-Creation-Date: 2023-12-05 00:42+0000\n"
 "PO-Revision-Date: 2023-10-28 10:44+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -2166,9 +2166,13 @@ msgstr "Amosar mensaxes de progreso na área de notificación de KDE"
 
 #. i18n: ectx: whatsthis, entry, group (internals)
 #: src/settings/kdesvn_part.kcfg:294
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "This value holds for log dialog which kind of log is used, its internal "
+#| "only."
 msgid ""
-"This value holds for log dialog which kind of log is used, its internal only."
+"This value holds for log dialog which kind of log is used, it is internal "
+"only."
 msgstr ""
 "Este valor contén o tipo de historial do diálogo do historial. Úsase só de "
 "maneira interna."

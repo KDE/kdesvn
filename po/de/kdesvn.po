@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-04 00:42+0000\n"
+"POT-Creation-Date: 2023-12-05 00:42+0000\n"
 "PO-Revision-Date: 2023-03-12 17:28+0100\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -2208,9 +2208,13 @@ msgstr "Fortschrittsmeldungen in der Kontrollleiste anzeigen"
 
 #. i18n: ectx: whatsthis, entry, group (internals)
 #: src/settings/kdesvn_part.kcfg:294
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "This value holds for log dialog which kind of log is used, its internal "
+#| "only."
 msgid ""
-"This value holds for log dialog which kind of log is used, its internal only."
+"This value holds for log dialog which kind of log is used, it is internal "
+"only."
 msgstr ""
 "Dieser Wert definiert für den Protokolldialog, welche Art von Protokoll "
 "verwendet wird. Nur intern benutzt."

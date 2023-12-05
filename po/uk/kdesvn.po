@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-04 00:42+0000\n"
-"PO-Revision-Date: 2023-10-22 09:06+0300\n"
+"POT-Creation-Date: 2023-12-05 00:42+0000\n"
+"PO-Revision-Date: 2023-12-04 08:27+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -2062,8 +2062,7 @@ msgstr "Програма для розв’язування конфліктів
 
 #. i18n: ectx: label, entry, group (display)
 #: src/settings/kdesvn_part.kcfg:164
-#, fuzzy, kde-format
-#| msgid "Display different then normal states colored"
+#, kde-format
 msgid "Display other than normal states colored"
 msgstr "Показувати стани, відмінні від звичайного, кольором"
 
@@ -2183,9 +2182,13 @@ msgstr "Виводити повідомлення щодо поступу до �
 
 #. i18n: ectx: whatsthis, entry, group (internals)
 #: src/settings/kdesvn_part.kcfg:294
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "This value holds for log dialog which kind of log is used, its internal "
+#| "only."
 msgid ""
-"This value holds for log dialog which kind of log is used, its internal only."
+"This value holds for log dialog which kind of log is used, it is internal "
+"only."
 msgstr ""
 "У цьому параметрі зберігається тип журналу для діалогового вікна журналу, "
 "лише для внутрішнього використання."

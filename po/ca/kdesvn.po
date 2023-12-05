@@ -4,20 +4,20 @@
 # version 3 or later versions approved by the membership of KDE e.V.
 #
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2006, 2007, 2011, 2013, 2014, 2015, 2016, 2017, 2020, 2022.
-# SPDX-FileCopyrightText: 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Josep M. Ferrer <txemaq@gmail.com>
+# Josep M. Ferrer <txemaq@gmail.com>, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-04 00:42+0000\n"
-"PO-Revision-Date: 2023-10-22 09:53+0200\n"
+"POT-Creation-Date: 2023-12-05 00:42+0000\n"
+"PO-Revision-Date: 2023-12-04 11:11+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -2048,10 +2048,9 @@ msgstr "Quin programa usar per a la resolució de conflictes"
 
 #. i18n: ectx: label, entry, group (display)
 #: src/settings/kdesvn_part.kcfg:164
-#, fuzzy, kde-format
-#| msgid "Display different then normal states colored"
+#, kde-format
 msgid "Display other than normal states colored"
-msgstr "Mostra en color els diferents estats més normals"
+msgstr "Mostra en color els diferents estats excepte el normal"
 
 #. i18n: ectx: label, entry, group (blame_dlg)
 #: src/settings/kdesvn_part.kcfg:197
@@ -2168,9 +2167,13 @@ msgstr "Imprimeix els missatges de progrés a l'àrea de l'acoblador del KDE"
 
 #. i18n: ectx: whatsthis, entry, group (internals)
 #: src/settings/kdesvn_part.kcfg:294
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "This value holds for log dialog which kind of log is used, its internal "
+#| "only."
 msgid ""
-"This value holds for log dialog which kind of log is used, its internal only."
+"This value holds for log dialog which kind of log is used, it is internal "
+"only."
 msgstr ""
 "Aquest valor s'aplica al diàleg del registre, sobre el tipus usat -només per "
 "a ús intern-."

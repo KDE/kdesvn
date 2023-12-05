@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-04 00:42+0000\n"
+"POT-Creation-Date: 2023-12-05 00:42+0000\n"
 "PO-Revision-Date: 2023-08-07 23:41+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -2161,9 +2161,13 @@ msgstr "KDE 독 영역에 진행 메시지 표시"
 
 #. i18n: ectx: whatsthis, entry, group (internals)
 #: src/settings/kdesvn_part.kcfg:294
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "This value holds for log dialog which kind of log is used, its internal "
+#| "only."
 msgid ""
-"This value holds for log dialog which kind of log is used, its internal only."
+"This value holds for log dialog which kind of log is used, it is internal "
+"only."
 msgstr ""
 "이 값은 로그 대화 상자에서 표시할 로그 종류를 나타내는 내부 전용 값입니다."
 

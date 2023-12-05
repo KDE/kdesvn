@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-04 00:42+0000\n"
-"PO-Revision-Date: 2023-10-23 12:46+0300\n"
+"POT-Creation-Date: 2023-12-05 00:42+0000\n"
+"PO-Revision-Date: 2023-12-04 20:06+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -2038,10 +2038,9 @@ msgstr "Çatışmaları çözmek için hangi program"
 
 #. i18n: ectx: label, entry, group (display)
 #: src/settings/kdesvn_part.kcfg:164
-#, fuzzy, kde-format
-#| msgid "Display different then normal states colored"
+#, kde-format
 msgid "Display other than normal states colored"
-msgstr "Normalden farklı durumları renkli göster"
+msgstr "Normalden başka durumları renkli göster"
 
 #. i18n: ectx: label, entry, group (blame_dlg)
 #: src/settings/kdesvn_part.kcfg:197
@@ -2155,9 +2154,13 @@ msgstr "İlerleme iletilerini KDE kilit alanında yazdır"
 
 #. i18n: ectx: whatsthis, entry, group (internals)
 #: src/settings/kdesvn_part.kcfg:294
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "This value holds for log dialog which kind of log is used, its internal "
+#| "only."
 msgid ""
-"This value holds for log dialog which kind of log is used, its internal only."
+"This value holds for log dialog which kind of log is used, it is internal "
+"only."
 msgstr ""
 "Bu değer, günlük penceresi için ne tür günlük kullanıldığını tutar, yalnızca "
 "içsel."

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-04 00:42+0000\n"
-"PO-Revision-Date: 2023-12-03 21:14+0100\n"
+"POT-Creation-Date: 2023-12-05 00:42+0000\n"
+"PO-Revision-Date: 2023-12-04 14:32+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -2032,136 +2032,142 @@ msgstr "Kiun programon por solvi konfliktojn"
 #: src/settings/kdesvn_part.kcfg:164
 #, kde-format
 msgid "Display other than normal states colored"
-msgstr ""
+msgstr "Montri malsamajn ol normalajn statojn kolorigitaj"
 
 #. i18n: ectx: label, entry, group (blame_dlg)
 #: src/settings/kdesvn_part.kcfg:197
 #, kde-format
 msgid "Locale for blame display"
-msgstr ""
+msgstr "Lokaĵaro por montro de kulpigo"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:209
 #, kde-format
 msgid "Check status of log cache when starting revision tree"
-msgstr ""
+msgstr "Kontroli staton de protokolo-kaŝmemoro dum komencado de reviziarbo"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/settings/kdesvn_part.kcfg:213 src/settings/revisiontree_settings.ui:129
 #, kde-format
 msgid "Direction of revision tree"
-msgstr ""
+msgstr "Direkto de revizia arbo"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:217
 #, kde-format
 msgid "Color for added items"
-msgstr ""
+msgstr "Koloro por aldonitaj eroj"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:221
 #, kde-format
 msgid "Color for deleted items"
-msgstr ""
+msgstr "Koloro por forigitaj eroj"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:225
 #, kde-format
 msgid "Color for copied items"
-msgstr ""
+msgstr "Koloro por kopiitaj eroj"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:229
 #, kde-format
 msgid "Color for renamed items"
-msgstr ""
+msgstr "Koloro por alinomitaj eroj"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:233
 #, kde-format
 msgid "Color for modified items"
-msgstr ""
+msgstr "Koloro por modifitaj eroj"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:237
 #, kde-format
 msgid "Height of detail view in tree widget"
-msgstr ""
+msgstr "Alteco de detala vido en arba fenestraĵo"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:241
 #, kde-format
 msgid "Diffs from revision tree are recursive"
-msgstr ""
+msgstr "Diferencoj de revizia arbo estas rikuraj"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:247
 #, kde-format
 msgid "Should Konqueror not display context menus for kdesvn?"
-msgstr ""
+msgstr "Ĉu Konqueror ne devus montri kuntekstajn menuojn por kdesvn?"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:251
 #, kde-format
 msgid "Should Konqueror not display kdesvn entries in main action menu?"
-msgstr ""
+msgstr "Ĉu Konqueror ne montru kdesvn-enskribojn en ĉefa agmenuo?"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:255
 #, kde-format
 msgid "Show a small log window after executing a command."
-msgstr ""
+msgstr "Montri malgrandan protokolfenestron post efektivigo de komando."
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:259
 #, kde-format
 msgid "Log must contain at least lines to show"
-msgstr ""
+msgstr "Protokolo devas enhavi almenaŭ tiom da linioj por montri"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:263
 #, kde-format
 msgid "KIO::svn operations use a standard log message"
-msgstr ""
+msgstr "KIO::svn-operacioj uzas norman protokolmesaĝon"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:267
 #, kde-format
 msgid "The standard log message to use with KIO if not asking for it."
-msgstr ""
+msgstr "La norma protokolmesaĝo uzenda kun KIO se ne alpetata."
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:271
 #, kde-format
 msgid "Support overwrite for KIO module"
-msgstr ""
+msgstr "Subteni anstataŭigon por KIO-modulo"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:275
 #, kde-format
 msgid "Print progress messages in KDE dock area"
-msgstr ""
+msgstr "Presi progresajn mesaĝojn en KDE-doka areo"
 
 #. i18n: ectx: whatsthis, entry, group (internals)
 #: src/settings/kdesvn_part.kcfg:294
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "This value holds for log dialog which kind of log is used, its internal "
+#| "only."
 msgid ""
-"This value holds for log dialog which kind of log is used, its internal only."
+"This value holds for log dialog which kind of log is used, it is internal "
+"only."
 msgstr ""
+"Ĉi tiu valoro enhavas la protokolspecon por protokoldialogo, ĝi estas nur "
+"por interna uzo."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
 #: src/settings/polling_settings.ui:11
 #, kde-format
 msgid "Check modified items every"
-msgstr ""
+msgstr "Kontroli pri modifitaj eroj ĉiujn"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/settings/polling_settings.ui:28 src/settings/polling_settings.ui:55
 #, kde-format
 msgid "minutes"
-msgstr ""
+msgstr "minutojn"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_poll_updates)
 #: src/settings/polling_settings.ui:35
@@ -2170,72 +2176,76 @@ msgid ""
 "If set check for updates on working copy when network is enabled on regular "
 "base"
 msgstr ""
+"Se fiksite, kontroli ĝisdatigojn pri laborkopio kiam reto estas ebligita sur "
+"regula bazo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_updates)
 #: src/settings/polling_settings.ui:38
 #, kde-format
 msgid "Check for updated items every"
-msgstr ""
+msgstr "Kontroli por ĝisdatigitaj eroj ĉiujn"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
 #: src/settings/revisiontree_settings.ui:28
 #, kde-format
 msgid "Left to right"
-msgstr ""
+msgstr "De maldekstre al dekstre"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
 #: src/settings/revisiontree_settings.ui:33
 #, kde-format
 msgid "Bottom to top"
-msgstr ""
+msgstr "Malsupre al supro"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
 #: src/settings/revisiontree_settings.ui:38
 #, kde-format
 msgid "Right to left"
-msgstr ""
+msgstr "Dekstre al maldekstre"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
 #: src/settings/revisiontree_settings.ui:43
 #, kde-format
 msgid "Top to bottom"
-msgstr ""
+msgstr "De supre al sube"
 
 #. i18n: ectx: property (text), widget (QLabel, m_AddColorLabel)
 #: src/settings/revisiontree_settings.ui:51
 #, kde-format
 msgid "Color for added items:"
-msgstr ""
+msgstr "Koloro por aldonitaj eroj:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: src/settings/revisiontree_settings.ui:77
 #, kde-format
 msgid "Color for copied items:"
-msgstr ""
+msgstr "Koloro por kopiitaj eroj:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: src/settings/revisiontree_settings.ui:90
 #, kde-format
 msgid "Color for renamed items:"
-msgstr ""
+msgstr "Koloro por renomitaj eroj:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel5)
 #: src/settings/revisiontree_settings.ui:103
 #, kde-format
 msgid "Color for modified items:"
-msgstr ""
+msgstr "Koloro por modifitaj eroj:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: src/settings/revisiontree_settings.ui:136
 #, kde-format
 msgid "Color for deleted items:"
-msgstr ""
+msgstr "Koloro por forigitaj eroj:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_fill_cache_on_tree)
 #: src/settings/revisiontree_settings.ui:175
 #, kde-format
 msgid "Should kdesvn check content of log cache before starting the tree"
 msgstr ""
+"Ĉu kdesvn devus kontroli enhavon de protokolo-kaŝmemoro antaŭ ol komenci la "
+"arbon"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_fill_cache_on_tree)
 #: src/settings/revisiontree_settings.ui:180
@@ -2246,42 +2256,52 @@ msgid ""
 "\n"
 "But this may slow down tree generation so it is disabled by default."
 msgstr ""
+"Komencante la arbogeneradon kaj legante datumojn el protokolo-kaŝmemoro, "
+"kdesvn povas kontroli por pli novaj eroj en deponejo se reto estas "
+"ebligita.\n"
+"\n"
+"Sed ĉi tio povas malrapidigi arbogeneradon do ĝi estas malŝaltita defaŭlte."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_fill_cache_on_tree)
 #: src/settings/revisiontree_settings.ui:183
 #, kde-format
 msgid "Check log cache fill before reading tree"
-msgstr ""
+msgstr "Kontroli protokolan kaŝmemorplenigon antaŭ ol legi arbon"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_start_updates_check_on_open)
 #: src/settings/subversion_settings.ui:14
 #, kde-format
 msgid "Select if kdesvn should check for updates when open a working copy"
 msgstr ""
+"Elektu ĉu kdesvn devus kontroli por ĝisdatigoj kiam malfermas funkciantan "
+"kopion"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_start_updates_check_on_open)
 #: src/settings/subversion_settings.ui:17
 #, kde-format
 msgid "Start check for updates when open a working copy"
-msgstr ""
+msgstr "Komenci kontrolon pri ĝisdatigoj kiam malfermante laborkopion"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:33
 #, kde-format
 msgid "Start refresh the log cache for repository when networking enabled"
 msgstr ""
+"Komenci refreŝigi la protokolkaŝmemoron por deponejo kiam retkonekto estas "
+"ŝaltita"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:36
 #, kde-format
 msgid "Start fill log cache on open"
-msgstr ""
+msgstr "Komenci plenigi protokolan kaŝmemoron je malfermiĝo"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:43
 #, kde-format
 msgid "When listing on working copies kdesvn may check for this property"
 msgstr ""
+"Kiam kdesvn listigas pri laborkopioj, ĝi povus kontroli ĉi tiun proprecon"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:46
@@ -2292,12 +2312,16 @@ msgid ""
 "items may get slow. So you should only switch on if you have repositories "
 "containing lot of such entries."
 msgstr ""
+"Kiam kdesvn listigas pri laborkopioj, ĝi povas kontroli la proprecon <tt>svn:"
+"needs-lock</tt>.<br>Sed ĉar ĉi tiu listigo/ĝisdatigo de dosierujoj "
+"enhavantaj multajn aĵojn povas malrapidiĝi, do vi devus ŝalti nur se vi "
+"havas deponejojn enhavantajn multajn tiajn enskribojn."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:49
 #, kde-format
 msgid "Check if items has \"svn:needs-lock\" property set"
-msgstr ""
+msgstr "Kontroli ĉu eroj havas proprecon \"svn:needs-lock\" fiksita"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:56
@@ -2305,7 +2329,7 @@ msgstr ""
 msgid ""
 "Whether getting details about items when making listing on repositories or "
 "not"
-msgstr ""
+msgstr "Ĉu ricevi detalojn pri eroj dum enlistigo sur deponejoj aŭ ne"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:61
@@ -2317,24 +2341,30 @@ msgid ""
 "</p>\n"
 "<p align=\"left\"><i>Be careful: This may let listings REAL slow.</i></p>"
 msgstr ""
+"<p align=\"left\">Kiam markite, kdesvn ricevas pli detalajn informojn pri "
+"dosieraj eroj dum listo de foraj deponejoj. Do vi eble vidos forajn "
+"riglilojn en superrigardo.\n"
+"</p>\n"
+"<p align=\"left\"><i>Atentu: Ĉi tio eble kaŭzos listigon VERE malrapidiĝi.</"
+"i></p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:64
 #, kde-format
 msgid "Get file details while remote listing"
-msgstr ""
+msgstr "Akiri dosierdetalojn dum fora listo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_info_recursive)
 #: src/settings/subversion_settings.ui:74
 #, kde-format
 msgid "Gain item info recursive"
-msgstr ""
+msgstr "Akiri ero-informojn rikure"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:84
 #, kde-format
 msgid "Should kdesvn retrieves properties on selected item in repositories"
-msgstr ""
+msgstr "Ĉu kdesvn reakiras ecojn de elektita elemento en deponejoj"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:88
@@ -2346,18 +2376,23 @@ msgid ""
 "get real slow. So if you have slow network connections or when browsing "
 "hangs often you should deactivate it."
 msgstr ""
+"Trarigardante kdesvn povas provi montri ecojn sub eronlisto de elektita "
+"ero. \n"
+"Ĉe interretaj deponejoj (ekz., ne malfermitaj per protokolo file://) tio "
+"povas malrapidiĝi. Do se vi havas malrapidajn retajn konektojn aŭ kiam "
+"retumado ofte interrompas, vi devus malaktivigi ĝin."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:91
 #, kde-format
 msgid "Always get properties on networked repositories"
-msgstr ""
+msgstr "Ĉiam akiri proprecojn en interretaj deponejoj"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:101
 #, kde-format
 msgid "Should Subversion store passwords in default"
-msgstr ""
+msgstr "Ĉu Subversion devus konservi pasvortojn defaŭlte"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:104
@@ -2369,6 +2404,10 @@ msgid ""
 "you may select for single non critical accounts inside the authentication "
 "dialog."
 msgstr ""
+"Konservi pasvortojn ofte estas sekureca problemo. Kdesvn mem konservas "
+"neniujn pasvortojn, sed la Subversion mem ene de la agorda areo de "
+"Subversion. Se ĉi tiu areo estas legebla de aliaj, vi ne agordu ĝin, sed vi "
+"povas elekti por unuopaj nekritikaj kontoj ene de la aŭtentikiga dialogo."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_passwords_in_wallet)
 #: src/settings/subversion_settings.ui:117
@@ -2376,6 +2415,8 @@ msgstr ""
 msgid ""
 "When saving passwords, do it into KDE Wallet instead of Subversions storage?"
 msgstr ""
+"Konservante pasvortojn, ĉu fari ĝin en KDE-monujo anstataŭ konservadon de "
+"Subversions?"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_passwords_in_wallet)
 #: src/settings/subversion_settings.ui:122
@@ -2392,24 +2433,34 @@ msgid ""
 "like Subversion does but put it into an encrypted storage like KDE Wallet or "
 "do not save passwords.</p>"
 msgstr ""
+"<p>Diras ĉu viaj pasvortoj fiksitaj en kdesvn devus konserviĝi en KDE-Monujo "
+"anstataŭ simpla klarteksta konservado de Subversion.</p>\n"
+"<p>Ĉi tio estus iom pli sekura ĉar KDE-Monujo estas (plejparte) ĉifrita per "
+"pasvorto. Aliflanke vi devas reenigi viajn pasvortojn kun aliaj Subversion-"
+"klientoj ne alirantaj KDE-monujon (ekz. svn komandlinio mem, rapidsvn kaj "
+"tiel plu).</p>\n"
+"<p>Se vi estas HEJMA konservado ekz. La agorda dosierujo de Subversion estas "
+"en retdisko, kiun vi devas pensi pri ne konservi pasvortojn en simpla teksta "
+"dosiero kiel Subversion, sed meti ĝin en ĉifritan konservadon kiel KDE-"
+"Monujo aŭ ne konservi pasvortojn.</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_passwords_in_wallet)
 #: src/settings/subversion_settings.ui:125
 #, kde-format
 msgid "Store passwords into KDE Wallet"
-msgstr ""
+msgstr "Konservi pasvortojn en KDE-Monujo"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_password_cache)
 #: src/settings/subversion_settings.ui:135
 #, kde-format
 msgid "Use an internal password cache"
-msgstr ""
+msgstr "Uzi internan pasvortan kaŝmemoron"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_always_list_changed_files)
 #: src/settings/subversion_settings.ui:155
 #, kde-format
 msgid "Read detailed change lists"
-msgstr ""
+msgstr "Legi detalajn ŝanĝlistojn"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_log_always_list_changed_files)
 #: src/settings/subversion_settings.ui:158
@@ -2419,24 +2470,27 @@ msgid ""
 "But if this feature is switched off, kdesvn may fail generating differences "
 "between node changes from within the log viewer."
 msgstr ""
+"Legi listojn de ŝanĝitaj dosieroj povas foje iomete malrapidigi aferojn. Sed "
+"se ĉi tiu funkcio estas malŝaltita, kdesvn povas malsukcesi generi "
+"diferencojn inter nodaj ŝanĝoj de ene de la protokolo-spektilo."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_review_commit)
 #: src/settings/subversion_settings.ui:171
 #, kde-format
 msgid "List items next commit will send or not"
-msgstr ""
+msgstr "Listigi erojn kiujn venonta enmeto sendos aŭ ne"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:184
 #, kde-format
 msgid "Should unversioned items displayed in commit dialog or not."
-msgstr ""
+msgstr "Ĉu neversionitaj eroj montriĝas en commit dialogo aŭ ne."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:187
 #, kde-format
 msgid "Hide new items in commit box"
-msgstr ""
+msgstr "Kaŝi novajn erojn en enmeto-skatolo"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_add_as_modification)
 #: src/settings/subversion_settings.ui:197
@@ -2446,12 +2500,15 @@ msgid ""
 "incoming addition of the same node kind results in a normal node with a "
 "possible local modification, instead of a tree conflict.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Se agordita, loka aldono ĉe la sama vojo kiel "
+"envenanta aldono de la sama noda speco rezultigas normalan nodon kun ebla "
+"loka modifo, anstataŭe de arba konflikto.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_add_as_modification)
 #: src/settings/subversion_settings.ui:200
 #, kde-format
 msgid "Update modifies instead of conflicts"
-msgstr ""
+msgstr "Ĝisdatigo modifas anstataŭ konfliktojn"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_make_parents)
 #: src/settings/subversion_settings.ui:207
@@ -2460,88 +2517,92 @@ msgid ""
 "<html><head/><body><p>If set, create any non-existent parent directories "
 "also by checking them out at depth=empty</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Se agordita, krei neekzistantajn gepatrajn dosierujojn "
+"ankaŭ kontrolante ilin ĉe depth=empty</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_make_parents)
 #: src/settings/subversion_settings.ui:210
 #, kde-format
 msgid "Update makes missing parents"
-msgstr ""
+msgstr "Ĝisdatigo faras mankantajn gepatrojn"
 
 #: src/svnfrontend/background/fillcachethread.cpp:74
 #, kde-format
 msgid ""
 "Not filling log cache because it is disabled due setting for this repository."
 msgstr ""
+"Ne plenigante protokolkaŝmemoron ĉar ĝi estas malŝaltita pro agordo por ĉi "
+"tiu deponejo."
 
 #: src/svnfrontend/background/fillcachethread.cpp:76
 #, kde-format
 msgid "Filling log cache in background."
-msgstr ""
+msgstr "Plenigi protokolon en la fono."
 
 #: src/svnfrontend/background/fillcachethread.cpp:98
 #, kde-format
 msgid "Filling cache canceled."
-msgstr ""
+msgstr "Plenigado de kaŝmemoro nuligita."
 
 #: src/svnfrontend/background/fillcachethread.cpp:113
 #, kde-format
 msgid "Cache filled up to revision %1."
-msgstr ""
+msgstr "Kaŝmemoro pleniĝis ĝis revizio %1."
 
 #: src/svnfrontend/background/fillcachethread.cpp:120
 #, kde-format
 msgid "Filling log cache in background finished."
-msgstr ""
+msgstr "Plenigi protokolon en la fono finiĝis."
 
 #: src/svnfrontend/background/tcontextlistener.cpp:182
 #, kde-format
 msgid "%1 of %2 transferred."
-msgstr ""
+msgstr "%1 el %2 translokiĝis."
 
 #: src/svnfrontend/background/tcontextlistener.cpp:184
 #: src/svnfrontend/stopdlg.cpp:198
 #, kde-format
 msgid "%1 transferred."
-msgstr ""
+msgstr "%1 translokigita."
 
 #: src/svnfrontend/blamedisplay.cpp:184 src/svnfrontend/blamedisplay.cpp:194
 #, kde-format
 msgid "Log message for revision"
-msgstr ""
+msgstr "Protokolmesaĝo por revizio"
 
 #: src/svnfrontend/blamedisplay.cpp:188
 #, kde-format
 msgid "Go to line"
-msgstr ""
+msgstr "Iri al linio"
 
 #: src/svnfrontend/blamedisplay.cpp:320
 #, kde-format
 msgid "Show line"
-msgstr ""
+msgstr "Montri linion"
 
 #: src/svnfrontend/blamedisplay.cpp:320
 #, kde-format
 msgid "Show line number"
-msgstr ""
+msgstr "Montri linionumeron"
 
 #: src/svnfrontend/blamedisplay.cpp:356
 #, kde-format
 msgctxt "@title:window"
 msgid "Log Message for Revision %1"
-msgstr ""
+msgstr "Protokolmesaĝo por Revizio %1"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #: src/svnfrontend/blamedisplay.ui:40
 #, kde-format
 msgid "Line"
-msgstr ""
+msgstr "Linio"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #: src/svnfrontend/blamedisplay.ui:45
 #: src/svnfrontend/models/logitemmodel.cpp:173
 #, kde-format
 msgid "Revision"
-msgstr ""
+msgstr "Revizio"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #. i18n: ectx: property (text), widget (QRadioButton, m_startDateButton)
@@ -2552,150 +2613,150 @@ msgstr ""
 #: src/svnfrontend/models/logitemmodel.cpp:177
 #, kde-format
 msgid "Date"
-msgstr ""
+msgstr "Dato"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #: src/svnfrontend/blamedisplay.ui:55
 #: src/svnfrontend/models/logitemmodel.cpp:175
 #, kde-format
 msgid "Author"
-msgstr ""
+msgstr "Aŭtoro"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #: src/svnfrontend/blamedisplay.ui:60
 #, kde-format
 msgid "Content"
-msgstr ""
+msgstr "Enhavo"
 
 #: src/svnfrontend/ccontextlistener.cpp:66
 #, kde-format
 msgid "Add to revision control"
-msgstr ""
+msgstr "Aldoni al reviziokontrolo"
 
 #: src/svnfrontend/ccontextlistener.cpp:69
 #, kde-format
 msgid "Restore missing"
-msgstr ""
+msgstr "Restarigo mankas"
 
 #: src/svnfrontend/ccontextlistener.cpp:70
 #, kde-format
 msgid "Revert"
-msgstr ""
+msgstr "Reiri"
 
 #: src/svnfrontend/ccontextlistener.cpp:71
 #, kde-format
 msgid "Revert failed"
-msgstr ""
+msgstr "Malfari malsukcesis"
 
 #: src/svnfrontend/ccontextlistener.cpp:72
 #, kde-format
 msgid "Resolved"
-msgstr ""
+msgstr "Solvita"
 
 #: src/svnfrontend/ccontextlistener.cpp:73
 #, kde-format
 msgid "Skip"
-msgstr ""
+msgstr "Preterlasi"
 
 #: src/svnfrontend/ccontextlistener.cpp:74 src/svnfrontend/svnitem.cpp:430
 #, kde-format
 msgid "Deleted"
-msgstr ""
+msgstr "Forigita"
 
 #: src/svnfrontend/ccontextlistener.cpp:75
 #, kde-format
 msgid "Added"
-msgstr ""
+msgstr "Aldonita"
 
 #: src/svnfrontend/ccontextlistener.cpp:76
 #, kde-format
 msgid "Update"
-msgstr ""
+msgstr "Ĝisdatigo"
 
 #: src/svnfrontend/ccontextlistener.cpp:77
 #, kde-format
 msgid "Update complete"
-msgstr ""
+msgstr "Ĝisdatigo kompleta"
 
 #: src/svnfrontend/ccontextlistener.cpp:78
 #, kde-format
 msgid "Update external module"
-msgstr ""
+msgstr "Ĝisdatigi 'external' modulon"
 
 #: src/svnfrontend/ccontextlistener.cpp:80
 #, kde-format
 msgid "Status on external"
-msgstr ""
+msgstr "Statuso pri external"
 
 #: src/svnfrontend/ccontextlistener.cpp:81
 #, kde-format
 msgid "Commit Modified"
-msgstr ""
+msgstr "Enmeti Modifitojn"
 
 #: src/svnfrontend/ccontextlistener.cpp:82
 #, kde-format
 msgid "Commit Added"
-msgstr ""
+msgstr "Enmeti Aldonitojn"
 
 #: src/svnfrontend/ccontextlistener.cpp:83
 #, kde-format
 msgid "Commit Deleted"
-msgstr ""
+msgstr "Enmeti Forigitojn"
 
 #: src/svnfrontend/ccontextlistener.cpp:84
 #, kde-format
 msgid "Commit Replaced"
-msgstr ""
+msgstr "Enmeto Anstataŭitojn"
 
 #: src/svnfrontend/ccontextlistener.cpp:87
 #, kde-format
 msgid "Locking"
-msgstr ""
+msgstr "Ŝlosado"
 
 #: src/svnfrontend/ccontextlistener.cpp:88
 #, kde-format
 msgid "Unlocked"
-msgstr ""
+msgstr "Malŝlosita"
 
 #: src/svnfrontend/ccontextlistener.cpp:89
 #, kde-format
 msgid "Lock failed"
-msgstr ""
+msgstr "Ŝlosado malsukcesis"
 
 #: src/svnfrontend/ccontextlistener.cpp:90
 #, kde-format
 msgid "Unlock failed"
-msgstr ""
+msgstr "Malŝloso malsukcesis"
 
 #: src/svnfrontend/ccontextlistener.cpp:94
 #, kde-format
 msgid "unchanged"
-msgstr ""
+msgstr "senŝanĝe"
 
 #: src/svnfrontend/ccontextlistener.cpp:95
 #, kde-format
 msgid "item wasn't present"
-msgstr ""
+msgstr "ero ne ĉeestis"
 
 #: src/svnfrontend/ccontextlistener.cpp:96
 #, kde-format
 msgid "unversioned item obstructed work"
-msgstr ""
+msgstr "neversiita ero malhelpis laboron"
 
 #: src/svnfrontend/ccontextlistener.cpp:99
 #, kde-format
 msgid "Modified state had mods merged in."
-msgstr ""
+msgstr "Modifita stato havis modifojn enfanditajn."
 
 #: src/svnfrontend/ccontextlistener.cpp:100
 #, kde-format
 msgid "Modified state got conflicting mods."
-msgstr ""
+msgstr "Modifita stato ricevis konfliktajn modifojn."
 
 #: src/svnfrontend/ccontextlistener.cpp:304
 #, kde-format
 msgid "Enter password for realm %1"
-msgstr ""
+msgstr "Enigi pasvorton por sfero %1"
 
 #: src/svnfrontend/ccontextlistener.cpp:335
 #, kde-format
@@ -2703,26 +2764,28 @@ msgid ""
 "The certificate is not issued by a trusted authority. Use the fingerprint to "
 "validate the certificate manually."
 msgstr ""
+"La atestilo ne estas eldonita de fidinda aŭtoritato. Uzu la fingrospuron por "
+"validigi la atestilon permane."
 
 #: src/svnfrontend/ccontextlistener.cpp:338
 #, kde-format
 msgid "The certificate hostname does not match."
-msgstr ""
+msgstr "La atestila gastiga nomo ne kongruas."
 
 #: src/svnfrontend/ccontextlistener.cpp:341
 #, kde-format
 msgid "The certificate is not yet valid."
-msgstr ""
+msgstr "La atestilo ankoraŭ ne validas."
 
 #: src/svnfrontend/ccontextlistener.cpp:344
 #, kde-format
 msgid "The certificate has expired."
-msgstr ""
+msgstr "La atestilo eksvalidiĝis."
 
 #: src/svnfrontend/ccontextlistener.cpp:347
 #, kde-format
 msgid "The certificate has an unknown error."
-msgstr ""
+msgstr "La atestilo havas nekonatan eraron."
 
 #: src/svnfrontend/ccontextlistener.cpp:369
 #, kde-format
@@ -2730,17 +2793,19 @@ msgid ""
 "%1\n"
 "Really store password as plain text?"
 msgstr ""
+"%1\n"
+"Ĉu vere konservi pasvorton kiel simpla teksto?"
 
 #: src/svnfrontend/ccontextlistener.cpp:370
 #, kde-format
 msgid "Save password"
-msgstr ""
+msgstr "Konservi pasvorton"
 
 #: src/svnfrontend/ccontextlistener.cpp:371
 #, kde-format
 msgctxt "@action:button"
 msgid "Store in Plain Text"
-msgstr ""
+msgstr "Konservi en Klara Teksto"
 
 #: src/svnfrontend/commandexec.cpp:206 src/svnfrontend/commandexec.cpp:321
 #: src/svnfrontend/graphtree/revgraphview.cpp:992
@@ -2749,117 +2814,117 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:2604
 #, kde-format
 msgid "SVN Error"
-msgstr ""
+msgstr "SVN-eraro"
 
 #: src/svnfrontend/commandexec.cpp:206
 #, kde-format
 msgid "Command \"%1\" not implemented or known"
-msgstr ""
+msgstr "Komando \"%1\" ne efektivigita aŭ konata"
 
 #: src/svnfrontend/commandexec.cpp:408
 #, kde-format
 msgid "\"GET\" requires output file"
-msgstr ""
+msgstr "\"GET\" postulas eligdosieron"
 
 #: src/svnfrontend/commandexec.cpp:589
 #, kde-format
 msgid "May only switch one URL at time"
-msgstr ""
+msgstr "Povas ŝanĝi nur unu URL samtempe"
 
 #: src/svnfrontend/commandexec.cpp:593
 #, kde-format
 msgid "Switch only on working copies"
-msgstr ""
+msgstr "Ŝalti nur je laborkopioj"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, CopyMoveView)
 #: src/svnfrontend/copymoveview.ui:14
 #, kde-format
 msgid "Copy / Move"
-msgstr ""
+msgstr "Kopii / Movi"
 
 #. i18n: ectx: property (text), widget (QLabel, m_HeadOneLabel)
 #: src/svnfrontend/copymoveview.ui:20
 #, kde-format
 msgid "Rename"
-msgstr ""
+msgstr "Alinomi"
 
 #. i18n: ectx: property (text), widget (KSqueezedTextLabel, m_OldNameLabel)
 #. i18n: ectx: property (text), widget (KSqueezedTextLabel, m_PrefixLabel)
 #: src/svnfrontend/copymoveview.ui:33 src/svnfrontend/copymoveview.ui:58
 #, kde-format
 msgid "KSqueezedTextLabel"
-msgstr ""
+msgstr "KSqueezedTextLabel"
 
 #. i18n: ectx: property (text), widget (QLabel, m_HeadTwoLabel)
 #: src/svnfrontend/copymoveview.ui:43
 #, kde-format
 msgid "to"
-msgstr ""
+msgstr "al"
 
 #: src/svnfrontend/copymoveview_impl.cpp:46
 #, kde-format
 msgid "Rename/move"
-msgstr ""
+msgstr "Alinomi/movi"
 
 #: src/svnfrontend/copymoveview_impl.cpp:70
 #, kde-format
 msgctxt "@title:window"
 msgid "Move/Rename File/Directory"
-msgstr ""
+msgstr "Movu/Alinomi Dosieron/Dosierujon"
 
 #: src/svnfrontend/copymoveview_impl.cpp:70
 #, kde-format
 msgctxt "@title:window"
 msgid "Copy File/Directory"
-msgstr ""
+msgstr "Kopii Dosieron/Dosierujon"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, CreateRepoDlg)
 #: src/svnfrontend/createrepodlg.ui:14
 #, kde-format
 msgid "Create new repository"
-msgstr ""
+msgstr "Krei novan deponejon"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_DisableFsync)
 #: src/svnfrontend/createrepodlg.ui:22
 #, kde-format
 msgid "Disable fsync at commit (BDB only)"
-msgstr ""
+msgstr "Malebligi fsync ĉe enmeto (nur BDB)"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: src/svnfrontend/createrepodlg.ui:32
 #, kde-format
 msgid "Path to repository:"
-msgstr ""
+msgstr "Vojo al deponejo:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_FilesystemSelector)
 #: src/svnfrontend/createrepodlg.ui:45
 #, kde-format
 msgid "Select type of storage"
-msgstr ""
+msgstr "Elekti specon de konservado"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, m_FilesystemSelector)
 #: src/svnfrontend/createrepodlg.ui:48
 #, kde-format
 msgid "Select the storage type of repository (FSFS or Berkely DB)"
-msgstr ""
+msgstr "Elekti la konservejan tipon de deponejo (FSFS aŭ Berkeley DB)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
 #: src/svnfrontend/createrepodlg.ui:52
 #, kde-format
 msgid "FSFS"
-msgstr ""
+msgstr "FSFS"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
 #: src/svnfrontend/createrepodlg.ui:57
 #, kde-format
 msgid "BDB"
-msgstr ""
+msgstr "BDB"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_CreateMainDirs)
 #: src/svnfrontend/createrepodlg.ui:65
 #, kde-format
 msgid "Create trunk, tags and branches folders"
-msgstr ""
+msgstr "Krei trunk, tags kaj branches dosierujojn"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_CreateMainDirs)
 #: src/svnfrontend/createrepodlg.ui:68
@@ -2868,18 +2933,20 @@ msgid ""
 "If this is set then the base layout (<tt>/trunk</tt>,<tt>/branches</tt> and "
 "<tt>/tags</tt>) will created after opening the fresh repository."
 msgstr ""
+"Se ĉi tio estas agordita tiam la baza aranĝo (<tt>/trunk</tt>,<tt>/branches</"
+"tt> kaj <tt>/tags</tt>) kreiĝos post malfermi la freŝan deponejon."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_CreateMainDirs)
 #: src/svnfrontend/createrepodlg.ui:71
 #, kde-format
 msgid "Create main folders"
-msgstr ""
+msgstr "Krei ĉefajn dosierujojn"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn16compat)
 #: src/svnfrontend/createrepodlg.ui:87
 #, kde-format
 msgid "Is created repository compatible to Subversion prior 1.6"
-msgstr ""
+msgstr "Estas kreita deponejo kongrua kun Subversion antaŭ 1.6"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn16compat)
 #: src/svnfrontend/createrepodlg.ui:90
@@ -2888,30 +2955,32 @@ msgid ""
 "If set, the repository created will compatible to Subversion prior 1.5. This "
 "is only useful when svnqt is running with Subversion 1.6 or above."
 msgstr ""
+"Se agordita, la deponejo kreita estos kongrua kun Subversion antaŭ 1.5. Ĉi "
+"tio utilas nur kiam svnqt funkcias kun Subversion 1.6 aŭ pli."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_presvn16compat)
 #: src/svnfrontend/createrepodlg.ui:93
 #, kde-format
 msgid "Compatible to Subversion prior 1.6"
-msgstr ""
+msgstr "Kongrua al Subversion antaŭ 1.6"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_LogKeep)
 #: src/svnfrontend/createrepodlg.ui:113
 #, kde-format
 msgid "Disable automatic log file removal (BDB only)"
-msgstr ""
+msgstr "Malebligi aŭtomatan forigon de protokoldosieroj (nur BDB)"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: src/svnfrontend/createrepodlg.ui:123
 #, kde-format
 msgid "Type of repository:"
-msgstr ""
+msgstr "Tipo de deponejo:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn15compat)
 #: src/svnfrontend/createrepodlg.ui:139
 #, kde-format
 msgid "Is created repository compatible to Subversion prior 1.5"
-msgstr ""
+msgstr "Estas kreita deponejo kongrua kun Subversion antaŭ 1.5"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn15compat)
 #: src/svnfrontend/createrepodlg.ui:142
@@ -2920,18 +2989,20 @@ msgid ""
 "If set, the repository created will compatible to Subversion prior 1.5. This "
 "is only useful when svnqt is running with Subversion 1.5 or above."
 msgstr ""
+"Se agordita, la deponejo kreita estos kongrua kun Subversion antaŭ 1.5. Ĉi "
+"tio utilas nur kiam svnqt funkcias kun Subversion 1.5 aŭ pli."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_presvn15compat)
 #: src/svnfrontend/createrepodlg.ui:145
 #, kde-format
 msgid "Compatible to Subversion prior 1.5"
-msgstr ""
+msgstr "Kongrua al Subversion antaŭ 1.5"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn18compat)
 #: src/svnfrontend/createrepodlg.ui:162
 #, kde-format
 msgid "Is created repository compatible to Subversion prior 1.8"
-msgstr ""
+msgstr "Estas kreita deponejo kongrua kun Subversion antaŭ 1.8"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn18compat)
 #: src/svnfrontend/createrepodlg.ui:165
@@ -2940,17 +3011,19 @@ msgid ""
 "If set, the repository created will compatible to Subversion prior 1.4. This "
 "is only useful when svnqt is running with Subversion 1.8 or above."
 msgstr ""
+"Se agordita, la deponejo kreita estos kongrua kun Subversion antaŭ 1.4. Ĉi "
+"tio utilas nur kiam svnqt funkcias kun Subversion 1.8 aŭ pli."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_presvn18compat)
 #: src/svnfrontend/createrepodlg.ui:168
 #, kde-format
 msgid "Compatible to Subversion prior 1.8"
-msgstr ""
+msgstr "Kongrua al Subversion antaŭ 1.8"
 
 #: src/svnfrontend/database/dboverview.cpp:113
 #, kde-format
 msgid "Log cache holds %1 log entries and consumes %2 on disk."
-msgstr ""
+msgstr "Protokola kaŝmemoro enhavas %1 protokolojn kaj konsumas %2 sur disko."
 
 #: src/svnfrontend/database/dboverview.cpp:129
 #, kde-format
@@ -2958,17 +3031,19 @@ msgid ""
 "Really clean cache for repository\n"
 "%1?"
 msgstr ""
+"Ĉu vere purigi kaŝmemoron por deponejo\n"
+"%1?"
 
 #: src/svnfrontend/database/dboverview.cpp:130
 #, kde-format
 msgid "Clean repository cache"
-msgstr ""
+msgstr "Purigi deponejan kaŝmemoron"
 
 #: src/svnfrontend/database/dboverview.cpp:131
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete Cache"
-msgstr ""
+msgstr "Forigi Kaŝmemoron"
 
 #: src/svnfrontend/database/dboverview.cpp:148
 #, kde-format
@@ -2976,31 +3051,33 @@ msgid ""
 "Really clean cache and data for repository\n"
 "%1?"
 msgstr ""
+"Ĉu vere purigi kaŝmemoron kaj datumojn por deponejo\n"
+"%1?"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DeleteRepositoryButton)
 #: src/svnfrontend/database/dboverview.cpp:149
 #: src/svnfrontend/database/dboverview.ui:59
 #, kde-format
 msgid "Delete repository"
-msgstr ""
+msgstr "Forigi deponejon"
 
 #: src/svnfrontend/database/dboverview.cpp:150
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete Repository"
-msgstr ""
+msgstr "Forigi Deponejon"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DBOverView)
 #: src/svnfrontend/database/dboverview.ui:6
 #, kde-format
 msgid "Overview about cache database content"
-msgstr ""
+msgstr "Superrigardo pri konserva datumbaza enhavo"
 
 #. i18n: ectx: property (text), widget (QLabel, m_RepositoryLabel)
 #: src/svnfrontend/database/dboverview.ui:19
 #, kde-format
 msgid "Known repositories"
-msgstr ""
+msgstr "Konataj deponejoj"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteCacheButton)
 #. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteCacheButton)
@@ -3008,13 +3085,13 @@ msgstr ""
 #: src/svnfrontend/database/dboverview.ui:43
 #, kde-format
 msgid "Delete cache entries for current selected repository"
-msgstr ""
+msgstr "Forigi kaŝmemorajn enskribojn por nuna elektita deponejo"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DeleteCacheButton)
 #: src/svnfrontend/database/dboverview.ui:46
 #, kde-format
 msgid "Delete cache"
-msgstr ""
+msgstr "Forigi kaŝmemoron"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteRepositoryButton)
 #. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteRepositoryButton)
@@ -3022,55 +3099,55 @@ msgstr ""
 #: src/svnfrontend/database/dboverview.ui:56
 #, kde-format
 msgid "Delete all entries and settings for selected repository"
-msgstr ""
+msgstr "Forigi ĉiujn enskribojn kaj agordojn por elektita deponejo"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_SettingsButton)
 #: src/svnfrontend/database/dboverview.ui:66
 #, kde-format
 msgid "Repository Settings"
-msgstr ""
+msgstr "Deponejo Agordoj"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_StatisticButton)
 #: src/svnfrontend/database/dboverview.ui:73
 #, kde-format
 msgid "Statistics for repository"
-msgstr ""
+msgstr "Statistiko por deponejo"
 
 #: src/svnfrontend/database/dbsettings.cpp:39
 #, kde-format
 msgctxt "@title:window"
 msgid "Settings for %1"
-msgstr ""
+msgstr "Agordoj por %1"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: src/svnfrontend/database/dbsettings.ui:21
 #, kde-format
 msgid "Log cache settings"
-msgstr ""
+msgstr "Protokoli kaŝmemorajn agordojn"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dbcfg_noCacheUpdate)
 #: src/svnfrontend/database/dbsettings.ui:27
 #, kde-format
 msgid "Do not update log cache on open"
-msgstr ""
+msgstr "Ne ĝisdatigi protokolkaŝmemoron je malfermo"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: src/svnfrontend/database/dbsettings.ui:40
 #, kde-format
 msgid "Prefixes to filter out in revision tree"
-msgstr ""
+msgstr "Prefiksoj por filtri en reviziarbo"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: src/svnfrontend/database/dbsettings.ui:58
 #, kde-format
 msgid "Log and statistics setting"
-msgstr ""
+msgstr "Protokola kaj statistika agordo"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/svnfrontend/database/dbsettings.ui:70
 #, kde-format
 msgid "Hide logs containing following words"
-msgstr ""
+msgstr "Kaŝi protokolojn enhavante sekvajn vortojn"
 
 #. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_log_pattern)
 #: src/svnfrontend/database/dbsettings.ui:77
@@ -3079,12 +3156,14 @@ msgid ""
 "This is a list which words/substrings a log entry must contain so it will be "
 "hidden from log and statistics"
 msgstr ""
+"Ĉi tio estas listo, kiujn vortoj/subĉenoj devas enhavi protokol-enskribon, "
+"por ke ĝi estos kaŝita de protokolo kaj statistiko."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/svnfrontend/database/dbsettings.ui:98
 #, kde-format
 msgid "Do not show commits from following users"
-msgstr ""
+msgstr "Ne montri enmetojn de sekvaj uzantoj"
 
 #. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_userslog)
 #: src/svnfrontend/database/dbsettings.ui:105
@@ -3092,101 +3171,103 @@ msgstr ""
 msgid ""
 "Do not display commits of listed users in log window and statistics view"
 msgstr ""
+"Ne montri enmetojn de listigitaj uzantoj en protokolo-fenestro kaj "
+"statistika vido"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dbcfg_filter_empty_author)
 #: src/svnfrontend/database/dbsettings.ui:115
 #, kde-format
 msgid "Do not display commits without author"
-msgstr ""
+msgstr "Ne montri commits sen aŭtoro"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DumpRepoDlg)
 #: src/svnfrontend/dumprepo_dlg.ui:14
 #, kde-format
 msgid "Dump repository"
-msgstr ""
+msgstr "Dump-deponejo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_UseDeltas)
 #: src/svnfrontend/dumprepo_dlg.ui:35
 #, kde-format
 msgid "Use deltas"
-msgstr ""
+msgstr "Uzi deltojn"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, m_StartNumber)
 #: src/svnfrontend/dumprepo_dlg.ui:54
 #, kde-format
 msgid "-1 for START"
-msgstr ""
+msgstr "-1 por KOMENCO"
 
 #. i18n: ectx: property (text), widget (QLabel, m_lblEnd)
 #: src/svnfrontend/dumprepo_dlg.ui:67
 #, kde-format
 msgid "End revision:"
-msgstr ""
+msgstr "Fini revizion:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_incrementalDump)
 #: src/svnfrontend/dumprepo_dlg.ui:94
 #, kde-format
 msgid "incremental Dump"
-msgstr ""
+msgstr "pliiga Dump"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_Rangeonly)
 #: src/svnfrontend/dumprepo_dlg.ui:107
 #, kde-format
 msgid "Dump revision range"
-msgstr ""
+msgstr "Dump revizia gamo"
 
 #. i18n: ectx: property (text), widget (QLabel, m_OutfileLabel)
 #: src/svnfrontend/dumprepo_dlg.ui:117
 #, kde-format
 msgid "Dump into:"
-msgstr ""
+msgstr "Elĵeti en:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, m_EndNumber)
 #: src/svnfrontend/dumprepo_dlg.ui:136
 #, kde-format
 msgid "-1 for HEAD"
-msgstr ""
+msgstr "-1 por HEAD"
 
 #. i18n: ectx: property (text), widget (QLabel, m_lblStart)
 #: src/svnfrontend/dumprepo_dlg.ui:149
 #, kde-format
 msgid "Start revision:"
-msgstr ""
+msgstr "Komenca revizio:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_RepoLabel)
 #: src/svnfrontend/dumprepo_dlg.ui:162
 #, kde-format
 msgid "Repository to dump:"
-msgstr ""
+msgstr "Deponejo por elĵeti:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_PatternLabel)
 #: src/svnfrontend/editignorepattern.ui:17
 #, kde-format
 msgid "Patterns to add or remove:"
-msgstr ""
+msgstr "Ŝablonoj por aldoni aŭ forigi:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_RemoveCheckBox)
 #: src/svnfrontend/editignorepattern.ui:40
 #, kde-format
 msgid "Remove patterns"
-msgstr ""
+msgstr "Forigi ŝablonojn"
 
 #. i18n: ectx: property (text), widget (QLabel, m_DepthLabel)
 #: src/svnfrontend/editignorepattern.ui:49
 #, kde-format
 msgid "Depth for ignore"
-msgstr ""
+msgstr "Profundo por ignorado"
 
 #: src/svnfrontend/editpropsdlg.cpp:32
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Property"
-msgstr ""
+msgstr "Aldoni Proprecon"
 
 #: src/svnfrontend/editpropsdlg.cpp:44 src/svnfrontend/editpropsdlg.cpp:84
 #, kde-format
 msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
-msgstr ""
+msgstr "Unu el <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
 
 #: src/svnfrontend/editpropsdlg.cpp:46 src/svnfrontend/editpropsdlg.cpp:86
 #, kde-format
@@ -3195,6 +3276,9 @@ msgid ""
 "directory. A non-recursive attempt will fail, and a recursive attempt will "
 "set the property only on the file children of the folder."
 msgstr ""
+"Se ĉeestas, igi la dosieron plenumebla.<br/>Ĉi tiu propreco ne povas esti "
+"agordita en dosierujo. Ne-rikura provo malsukcesos, kaj rikura provo "
+"starigos la proprecon nur sur la dosierfilojn de la dosierujo."
 
 #: src/svnfrontend/editpropsdlg.cpp:51
 #, kde-format
@@ -3208,6 +3292,14 @@ msgid ""
 "last revision the object changed.<br/><b>Id</b> A compressed summary of the "
 "previous 4 keywords."
 msgstr ""
+"Ŝlosilvortoj esti vastigitaj en la enhavon de dosiero.<br/>Ili povas esti "
+"enmetitaj en dokumentojn metante ŝlosilvorton kiu estas formatita kiel "
+"$KeywordName$.<br/>Validaj ŝlosilvortoj estas:<br/><b>URL /HeadURL</b> La "
+"URL por la ĉefrevizio de la projekto.<br/><b>Author/LastChangedBy</b> La "
+"lasta persono por ŝanĝi la dosieron.<br/><b>Dato/LastChangedDate</b> b> La "
+"dato/tempo, kiam la objekto estis laste modifita.<br/><b>Revision/Rev/"
+"LastChangedRevision</b> La lasta revizio, kiun la objekto ŝanĝiĝis.<br/"
+"><b>Id</b> Kunpremita resumo el la antaŭaj 4 ŝlosilvortoj."
 
 #: src/svnfrontend/editpropsdlg.cpp:61
 #, kde-format
@@ -3217,6 +3309,10 @@ msgid ""
 "a user must acquire a lock on the file before they can edit and commit "
 "changes."
 msgstr ""
+"Agordu ĉi tion al iu ajn valoro (ekz. <b>'*'</b>) por devigi ŝlosadon por ĉi "
+"tiu dosiero.<br/>La dosiero estos agordita nurlegebla kiam kontrolita aŭ "
+"ĝisdatigita, indikante ke uzanto devas akiri ŝlosu la dosieron antaŭ ol ili "
+"povas redakti kaj fari ŝanĝojn."
 
 #: src/svnfrontend/editpropsdlg.cpp:66 src/svnfrontend/editpropsdlg.cpp:100
 #, kde-format
@@ -3225,6 +3321,10 @@ msgid ""
 "how to serve it from Apache. A mimetype beginning with <b>'text/'</b> (or an "
 "absent mimetype) is treated as text. Anything else is treated as binary."
 msgstr ""
+"La mimespeco de la dosiero. Uzita por determini ĉu kunfandi la dosieron kaj "
+"kiel servi ĝin de Apache. Mimtipo komencanta per <b>'teksto/'</b> (aŭ "
+"forestanta mime-tipo) estas traktata kiel teksto. Ĉio alia estas traktata "
+"kiel binara."
 
 #: src/svnfrontend/editpropsdlg.cpp:93
 #, kde-format
@@ -3234,17 +3334,23 @@ msgid ""
 "><nobr><b>foo http://example.com/repos/projectA</b></nobr><br/><nobr><b>foo/"
 "bar -r 1234 http://example.com/repos/projectB</b></nobr>"
 msgstr ""
+"Novlinie apartigita listo de modulspecifiloj, ĉiu konsistante el relativa "
+"dosiervojo, laŭvolaj revizioflagoj, kaj URL. Ekzemple:<br/><nobr><b>foo "
+"http://example.com/repos/projectA</b></nobr><br/><nobr><b>foo/bar -r 1234 "
+"http://example.com/repos/projectB</b></nobr>"
 
 #: src/svnfrontend/editpropsdlg.cpp:98
 #, kde-format
 msgid "A newline separated list of file patterns to ignore."
-msgstr ""
+msgstr "Novlinie disigita listo de dosierŝablonoj por ignori."
 
 #: src/svnfrontend/editpropsdlg.cpp:104
 #, kde-format
 msgid ""
 "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
+"Etikedu tekston por montri por la redakta skatolo, kie la uzanto enigas la "
+"numeron de la afero."
 
 #: src/svnfrontend/editpropsdlg.cpp:108
 #, kde-format
@@ -3253,6 +3359,9 @@ msgid ""
 "replaced with the bug issue number. Example:<br/><nobr><b>http://example.com/"
 "mantis/view.php?id=%BUGID%</b></nobr>"
 msgstr ""
+"URL montranta al la temo-spurilo. Ĝi devas enhavi <b>%BUGID%</b> kiu estas "
+"anstataŭigita per la numero de cimproblemo. Ekzemplo:<br/><nobr><b>http://"
+"example.com/mantis/view.php?id=%BUGID%</b></nobr>"
 
 #: src/svnfrontend/editpropsdlg.cpp:112
 #, kde-format
@@ -3261,6 +3370,9 @@ msgid ""
 "The string must contain <b>%BUGID%</b> which gets replaced with the bug "
 "issue number."
 msgstr ""
+"Ŝnuro kiu estas almetita al protokolo-mesaĝo kiam temo-numero estas enigita. "
+"La ĉeno devas enhavi <b>%BUGID%</b> kiu estas anstataŭigita per la numero de "
+"cimproblemo."
 
 #: src/svnfrontend/editpropsdlg.cpp:116
 #, kde-format
@@ -3269,6 +3381,9 @@ msgid ""
 "the commit dialog. Possible values:<br/><b>'true'</b>/<b>'yes'</b> or "
 "<b>'false'</b>/<b>'no'</b>."
 msgstr ""
+"Agordu al <b>'yes'</b> se averto estos montrita kiam neniu problemo estas "
+"enigita en la dialogo de kompromiso. Eblaj valoroj:<br/><b>'true'</b>/"
+"<b>'yes'</b> aŭ <b>'false'</b>/<b>'no'</b> ."
 
 #: src/svnfrontend/editpropsdlg.cpp:120
 #, kde-format
@@ -3277,6 +3392,9 @@ msgid ""
 "referenced not by numbers.<br/>Possible values: <b>'true'</b> or <b>'false'</"
 "b>."
 msgstr ""
+"Agordu al <b>'false'</b> se via erarspura sistemo havas raportojn, kiuj "
+"estas referencitaj ne per ciferoj.<br/>Eblaj valoroj: <b>'true'</b> aŭ "
+"<b>'false'</b>."
 
 #: src/svnfrontend/editpropsdlg.cpp:124
 #, kde-format
@@ -3285,6 +3403,9 @@ msgid ""
 "top of the log message. The default is <b>'true'</b> which means the "
 "bugtracking ID is appended to the log message."
 msgstr ""
+"Agordu al <b>'false'</b> se vi volas, ke la erarspura ID estu enmetita ĉe la "
+"supro de la protokolo-mesaĝo. La defaŭlta estas <b>'true'</b> kio signifas "
+"ke la erarspura ID estas almetita al la protokolo-mesaĝo."
 
 #: src/svnfrontend/editpropsdlg.cpp:129
 #, kde-format
@@ -3293,40 +3414,43 @@ msgid ""
 "used to find a string referring to an issue, the second expression is used "
 "to extract the bare bug ID from that string."
 msgstr ""
+"Du regulaj esprimoj apartigitaj per novlinio.<br/>La unua esprimo estas "
+"uzata por trovi ĉenon referentan al problemo, la dua esprimo estas uzata por "
+"ĉerpi la nudan cimidentigilon el tiu ĉeno."
 
 #: src/svnfrontend/editpropsdlg.cpp:136
 #, kde-format
 msgid "Select or enter new property"
-msgstr ""
+msgstr "Elekti aŭ enigu novan proprecon"
 
 #: src/svnfrontend/editpropsdlg.cpp:160
 #, kde-format
 msgid "No help for this property available"
-msgstr ""
+msgstr "Neniu helpo disponebla por ĉi tiu propreco"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, EditPropsDlg)
 #: src/svnfrontend/editpropsdlg.ui:14
 #, kde-format
 msgid "Modify property"
-msgstr ""
+msgstr "Modifi proprecon"
 
 #. i18n: ectx: property (text), widget (QLabel, m_NameLabel)
 #: src/svnfrontend/editpropsdlg.ui:22
 #, kde-format
 msgid "Property name:"
-msgstr ""
+msgstr "Propreca nomo:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_ValueLabel)
 #: src/svnfrontend/editpropsdlg.ui:46
 #, kde-format
 msgid "Property value:"
-msgstr ""
+msgstr "Propreca valoro:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, helpButton)
 #: src/svnfrontend/editpropsdlg.ui:69
 #, kde-format
 msgid "Click for short info about pre-defined property name"
-msgstr ""
+msgstr "Klaku por mallongaj informoj pri antaŭdifinita proprecnomo"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, CheckoutInfo)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:14

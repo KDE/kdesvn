@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-04 00:42+0000\n"
-"PO-Revision-Date: 2023-11-04 08:57+0100\n"
+"POT-Creation-Date: 2023-12-05 00:42+0000\n"
+"PO-Revision-Date: 2023-12-04 21:30+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
-"X-Generator: Lokalize 23.08.1\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2023,7 +2023,7 @@ msgstr "Krajevno dodajanje povzroči spremembo in ne spora"
 #: src/settings/kdesvn_part.kcfg:144
 #, kde-format
 msgid "create any non-existent parent at depth=empty"
-msgstr "Ob depth=empty ustvari tudi neobstoječe nadrejene"
+msgstr "ustvari neobstoječi nadrejeni element na globini=prazno"
 
 #. i18n: ectx: label, entry, group (diffmerge_items)
 #: src/settings/kdesvn_part.kcfg:150
@@ -2039,10 +2039,9 @@ msgstr "Kateri zunanji program naj bo uporabljen za razreševanje sporov"
 
 #. i18n: ectx: label, entry, group (display)
 #: src/settings/kdesvn_part.kcfg:164
-#, fuzzy, kde-format
-#| msgid "Display different then normal states colored"
+#, kde-format
 msgid "Display other than normal states colored"
-msgstr "Obarvaj neobičajna stanja"
+msgstr "Prikaži neobičajna stanja obarvano"
 
 #. i18n: ectx: label, entry, group (blame_dlg)
 #: src/settings/kdesvn_part.kcfg:197
@@ -2159,9 +2158,13 @@ msgstr "Prikaži sporočila napredka v pultu KDE"
 
 #. i18n: ectx: whatsthis, entry, group (internals)
 #: src/settings/kdesvn_part.kcfg:294
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "This value holds for log dialog which kind of log is used, its internal "
+#| "only."
 msgid ""
-"This value holds for log dialog which kind of log is used, its internal only."
+"This value holds for log dialog which kind of log is used, it is internal "
+"only."
 msgstr ""
 "Ta notranja vrednost določa, kateri dnevnik se uporablja v pogovornem oknu "
 "dnevnikov."
@@ -3223,7 +3226,7 @@ msgstr "Končna predelava:"
 #: src/svnfrontend/dumprepo_dlg.ui:94
 #, kde-format
 msgid "incremental Dump"
-msgstr "Naraščajoči izpis"
+msgstr "naraščajoči izpis"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_Rangeonly)
 #: src/svnfrontend/dumprepo_dlg.ui:107
@@ -4747,7 +4750,8 @@ msgstr ""
 #: src/svnfrontend/merge_dlg.ui:126
 #, kde-format
 msgid "lump-merge all of source URL's unmerged changes"
-msgstr "Izvedi 'lump-merge' za vse nezdružene spremembe naslova URL vira"
+msgstr ""
+"Izvedi vsesplošno združevanje vseh nezdruženih sprememb naslova URL vira"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_Reintegrate)
 #: src/svnfrontend/merge_dlg.ui:132

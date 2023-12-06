@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-05 00:42+0000\n"
-"PO-Revision-Date: 2023-12-04 11:11+0100\n"
+"PO-Revision-Date: 2023-12-05 12:54+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -2167,16 +2167,13 @@ msgstr "Imprimeix els missatges de progrés a l'àrea de l'acoblador del KDE"
 
 #. i18n: ectx: whatsthis, entry, group (internals)
 #: src/settings/kdesvn_part.kcfg:294
-#, fuzzy, kde-format
-#| msgid ""
-#| "This value holds for log dialog which kind of log is used, its internal "
-#| "only."
+#, kde-format
 msgid ""
 "This value holds for log dialog which kind of log is used, it is internal "
 "only."
 msgstr ""
-"Aquest valor s'aplica al diàleg del registre, sobre el tipus usat -només per "
-"a ús intern-."
+"Aquest valor s'aplica al diàleg del registre, sobre el tipus de registre "
+"usat. Només per a ús intern."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
 #: src/settings/polling_settings.ui:11

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-05 00:42+0000\n"
-"PO-Revision-Date: 2023-12-04 21:30+0100\n"
+"PO-Revision-Date: 2023-12-05 06:49+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -2158,16 +2158,13 @@ msgstr "Prikaži sporočila napredka v pultu KDE"
 
 #. i18n: ectx: whatsthis, entry, group (internals)
 #: src/settings/kdesvn_part.kcfg:294
-#, fuzzy, kde-format
-#| msgid ""
-#| "This value holds for log dialog which kind of log is used, its internal "
-#| "only."
+#, kde-format
 msgid ""
 "This value holds for log dialog which kind of log is used, it is internal "
 "only."
 msgstr ""
-"Ta notranja vrednost določa, kateri dnevnik se uporablja v pogovornem oknu "
-"dnevnikov."
+"Ta vrednost velja za pogovorno okno dnevnika, katera vrsta dnevnika se "
+"uporablja, je samo interna."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
 #: src/settings/polling_settings.ui:11
@@ -4750,8 +4747,7 @@ msgstr ""
 #: src/svnfrontend/merge_dlg.ui:126
 #, kde-format
 msgid "lump-merge all of source URL's unmerged changes"
-msgstr ""
-"Izvedi vsesplošno združevanje vseh nezdruženih sprememb naslova URL vira"
+msgstr "združi vse nezdružene spremembe URL virov"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_Reintegrate)
 #: src/svnfrontend/merge_dlg.ui:132

@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-05 00:42+0000\n"
-"PO-Revision-Date: 2023-12-05 11:45+0100\n"
+"PO-Revision-Date: 2023-12-07 10:43+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -2167,16 +2167,13 @@ msgstr ""
 
 #. i18n: ectx: whatsthis, entry, group (internals)
 #: src/settings/kdesvn_part.kcfg:294
-#, fuzzy, kde-format
-#| msgid ""
-#| "This value holds for log dialog which kind of log is used, its internal "
-#| "only."
+#, kde-format
 msgid ""
 "This value holds for log dialog which kind of log is used, it is internal "
 "only."
 msgstr ""
-"Cette valeur mémorise le type de messages utilisé pour la boîte de dialogue "
-"des messages (interne au programme seulement)."
+"Cette valeur mémorise le type de rapport utilisé pour la boîte de dialogue "
+"de rapports. Ceci est uniquement pour usage interne."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
 #: src/settings/polling_settings.ui:11

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-05 00:42+0000\n"
-"PO-Revision-Date: 2023-12-02 20:14+0900\n"
+"PO-Revision-Date: 2023-12-24 04:01+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: Traditional Chinese\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2008,10 +2008,9 @@ msgstr "用哪個程式來解決衝突"
 
 #. i18n: ectx: label, entry, group (display)
 #: src/settings/kdesvn_part.kcfg:164
-#, fuzzy, kde-format
-#| msgid "Display different then normal states colored"
+#, kde-format
 msgid "Display other than normal states colored"
-msgstr "以不同的顏色顯示非正常的狀態"
+msgstr "以顏色標記非正常的狀態"
 
 #. i18n: ectx: label, entry, group (blame_dlg)
 #: src/settings/kdesvn_part.kcfg:197
@@ -2124,10 +2123,7 @@ msgstr "將進度訊息印至 KDE dock 區域"
 
 #. i18n: ectx: whatsthis, entry, group (internals)
 #: src/settings/kdesvn_part.kcfg:294
-#, fuzzy, kde-format
-#| msgid ""
-#| "This value holds for log dialog which kind of log is used, its internal "
-#| "only."
+#, kde-format
 msgid ""
 "This value holds for log dialog which kind of log is used, it is internal "
 "only."

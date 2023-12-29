@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-05 00:42+0000\n"
+"POT-Creation-Date: 2023-12-29 00:42+0000\n"
 "PO-Revision-Date: 2021-10-13 10:45+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -2353,8 +2353,9 @@ msgstr "Να ξεκινάει ο έλεγχος ενημερώσεων όταν 
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:33
-#, kde-format
-msgid "Start refresh the log cache for repository when networking enabled"
+#, fuzzy, kde-format
+#| msgid "Start refresh the log cache for repository when networking enabled"
+msgid "Start refreshing the log cache for repository when networking enabled"
 msgstr ""
 "Να ξεκινάει η ανανέωση της τοπικής καταγραφής για το αποθετήριο όταν η "
 "δικτύωση είναι ενεργή"
@@ -2375,12 +2376,17 @@ msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:46
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "When listing on working copies kdesvn may check for <tt>svn:needs-lock</"
+#| "tt> property.<br>But due this listings/updating on folders containing lot "
+#| "of items may get slow. So you should only switch on if you have "
+#| "repositories containing lot of such entries."
 msgid ""
 "When listing on working copies kdesvn may check for <tt>svn:needs-lock</tt> "
-"property.<br>But due this listings/updating on folders containing lot of "
-"items may get slow. So you should only switch on if you have repositories "
-"containing lot of such entries."
+"property.<br>However, on folders containing lots of items this listing/"
+"updating may get slow. Therefore, you should only switch on if you have "
+"repositories containing many such entries."
 msgstr ""
 "Με τη λίστα των τοπικών αντιγράφων το kdesvn μπορεί να ελέγξει την ιδιότητα "
 "<tt>svn:needs-lock</tt>.<br>Αλλά εξαιτίας της παρουσίασης/ενημέρωσης σε "
@@ -2390,29 +2396,39 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:49
-#, kde-format
-msgid "Check if items has \"svn:needs-lock\" property set"
+#, fuzzy, kde-format
+#| msgid "Check if items has \"svn:needs-lock\" property set"
+msgid "Check if items have \"svn:needs-lock\" property set"
 msgstr "Έλεγχος αν τα αντικείμενα έχουν ενεργή την ιδιότητα \"svn:needs-lock\""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:56
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Whether getting details about items when making listing on repositories "
+#| "or not"
 msgid ""
-"Whether getting details about items when making listing on repositories or "
-"not"
+"Whether to retrieve details about items when making listing on repositories"
 msgstr ""
 "Αν θα γίνεται ή όχι ανάκτηση λεπτομερειών για τα αντικείμενα όταν "
 "κατασκευάζεται η λίστα από τα αποθετήρια"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:61
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "<p align=\"left\">When checked, kdesvn get more detailed info about file "
+#| "items when making a listing to remote repositories. So you may see remote "
+#| "locks in overview.\n"
+#| "</p>\n"
+#| "<p align=\"left\"><i>Be careful: This may let listings REAL slow.</i></p>"
 msgid ""
-"<p align=\"left\">When checked, kdesvn get more detailed info about file "
-"items when making a listing to remote repositories. So you may see remote "
-"locks in overview.\n"
+"<p align=\"left\">When checked, kdesvn fetches more detailed info about file "
+"items when making a listing to remote repositories so that you may see "
+"remote locks in overview.\n"
 "</p>\n"
-"<p align=\"left\"><i>Be careful: This may let listings REAL slow.</i></p>"
+"<p align=\"left\"><i>Be careful: This may let listings become REAL slow.</"
+"i></p>"
 msgstr ""
 "<p align=\"left\">Αν επιλεγεί, το kdesvn ανακτά περισσότερο λεπτομερείς "
 "πληροφορίες για αρχεία όταν κατασκευάζει τη λίστα από τα απομακρυσμένα "
@@ -2430,24 +2446,32 @@ msgstr "Ανάκτηση λεπτομερειών αρχείων με την α�
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_info_recursive)
 #: src/settings/subversion_settings.ui:74
-#, kde-format
-msgid "Gain item info recursive"
-msgstr "Πληροφορίες αντικειμένων αναδρομικά"
+#, fuzzy, kde-format
+#| msgid "Get item information recursively"
+msgid "Get item info recursively"
+msgstr "Η ανάκτηση πληροφοριών να γίνει αναδρομικά"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:84
-#, kde-format
-msgid "Should kdesvn retrieves properties on selected item in repositories"
+#, fuzzy, kde-format
+#| msgid "Should kdesvn retrieves properties on selected item in repositories"
+msgid "Should kdesvn retrieve properties on selected item in repositories"
 msgstr "Να ανακτά το kdesvn ιδιότητες σε επιλεγμένα αντικείμενα αποθετηρίων"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:88
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "When browsing kdesvn may try displaying properties below itemlist from a "
+#| "selected item. \n"
+#| "On networked repositories (e.g., not opened via file:// protocol) this "
+#| "may get real slow. So if you have slow network connections or when "
+#| "browsing hangs often you should deactivate it."
 msgid ""
-"When browsing kdesvn may try displaying properties below itemlist from a "
+"When browsing, kdesvn may try displaying properties below itemlist from a "
 "selected item. \n"
 "On networked repositories (e.g., not opened via file:// protocol) this may "
-"get real slow. So if you have slow network connections or when browsing "
+"get very slow. Thus, if you have slow network connections or when browsing "
 "hangs often you should deactivate it."
 msgstr ""
 "Με την περιήγηση στο kdesvn ίσως επιχειρηθεί η εμφάνιση ιδιοτήτων από ένα "
@@ -2465,8 +2489,9 @@ msgstr "Πάντα να ανακτώνται οι ιδιότητες σε δικ
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:101
-#, kde-format
-msgid "Should Subversion store passwords in default"
+#, fuzzy, kde-format
+#| msgid "Should Subversion store passwords in default"
+msgid "Should Subversion store passwords by default"
 msgstr "Να αποθηκεύει το Subversion κωδικούς πρόσβασης στο προκαθορισμένο"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_store_passwords)
@@ -2562,8 +2587,9 @@ msgstr "Η επόμενη υποβολή της λίστας των αντικε
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:184
-#, kde-format
-msgid "Should unversioned items displayed in commit dialog or not."
+#, fuzzy, kde-format
+#| msgid "Should unversioned items displayed in commit dialog or not."
+msgid "Should unversioned items be displayed in commit dialog or not."
 msgstr "Τα χωρίς έκδοση αντικείμενα να εμφανίζονται στο διάλογο υποβολής ή όχι"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_commit_hide_new)
@@ -2587,8 +2613,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_add_as_modification)
 #: src/settings/subversion_settings.ui:200
-#, kde-format
-msgid "Update modifies instead of conflicts"
+#, fuzzy, kde-format
+#| msgid "Update modifies instead of conflicts"
+msgid "Update modifies instead of creating conflicts"
 msgstr "Η ενημέρωση τροποποιεί αντί να συγκρούεται"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_make_parents)
@@ -5909,6 +5936,9 @@ msgstr "Άνοιγμα του αποθετηρίου του αντιγράφου
 #, kde-format
 msgid "Open repository or working copy"
 msgstr "Άνοιγμα αποθετηρίου ή αντιγράφου εργασίας"
+
+#~ msgid "Gain item info recursive"
+#~ msgstr "Πληροφορίες αντικειμένων αναδρομικά"
 
 #~ msgid "File %1 exists - overwrite?"
 #~ msgstr "Το αρχείο %1 υπάρχει ήδη - να αντικατασταθεί;"

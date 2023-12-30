@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-29 00:42+0000\n"
-"PO-Revision-Date: 2023-12-05 06:49+0100\n"
+"PO-Revision-Date: 2023-12-29 19:21+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
 "X-Generator: Poedit 3.4.1\n"
 
 #, kde-format
@@ -2292,12 +2292,11 @@ msgstr "Ob odprtju delovne kopije zaženi preverjanje za posodobitvami"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:33
-#, fuzzy, kde-format
-#| msgid "Start refresh the log cache for repository when networking enabled"
+#, kde-format
 msgid "Start refreshing the log cache for repository when networking enabled"
 msgstr ""
-"Če je omrežje omogočeno, zaženi osveževanje predpomnilnika dnevnikov za "
-"skladišče"
+"Zaženi osveževanje predpomnilnika dnevnikov za skladišče, ko je omrežje "
+"omogočeno"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:36
@@ -2314,50 +2313,39 @@ msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:46
-#, fuzzy, kde-format
-#| msgid ""
-#| "When listing on working copies kdesvn may check for <tt>svn:needs-lock</"
-#| "tt> property.<br>But due this listings/updating on folders containing lot "
-#| "of items may get slow. So you should only switch on if you have "
-#| "repositories containing lot of such entries."
+#, kde-format
 msgid ""
 "When listing on working copies kdesvn may check for <tt>svn:needs-lock</tt> "
 "property.<br>However, on folders containing lots of items this listing/"
 "updating may get slow. Therefore, you should only switch on if you have "
 "repositories containing many such entries."
 msgstr ""
-"Ob izpisu predmetov delovne kopije lahko kdesvn preveri za lastnostjo "
-"<tt>svn:needs-lock</tt>.<br>Če mape vsebujejo veliko predmetov, lahko to "
-"privede do upočasnitev, zato je priporočeno, da to vklopite le za skladišča, "
-"ki imajo veliko teh vnosov."
+"Pri izpisovanju delovnih kopij lahko kdesvn preveri lastnost <tt>svn:needs-"
+"lock</tt>.<br>Vendar pa je lahko v mapah, ki vsebujejo veliko elementov, to "
+"izpisovanje/posodabljanje počasno. Zato vklopite le, če imate skladišča, ki "
+"vsebujejo veliko takih vnosov.\n"
+"​"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:49
-#, fuzzy, kde-format
-#| msgid "Check if items has \"svn:needs-lock\" property set"
+#, kde-format
 msgid "Check if items have \"svn:needs-lock\" property set"
-msgstr "Preveri, če imajo predmeti nastavljeno lastnost »svn:needs-lock«"
+msgstr ""
+"Preveri ali imajo elementi nastavljeno lastnost \"svn:needs-lock\"\n"
+"​"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:56
-#, fuzzy, kde-format
-#| msgid ""
-#| "Whether getting details about items when making listing on repositories "
-#| "or not"
+#, kde-format
 msgid ""
 "Whether to retrieve details about items when making listing on repositories"
 msgstr ""
-"Ali naj se ob izpisu predmetov iz skladišč pridobijo tudi njihove podrobnosti"
+"Ali naj se pridobijo podrobnosti o elementih pri izdelavi seznama o "
+"skladiščih"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:61
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p align=\"left\">When checked, kdesvn get more detailed info about file "
-#| "items when making a listing to remote repositories. So you may see remote "
-#| "locks in overview.\n"
-#| "</p>\n"
-#| "<p align=\"left\"><i>Be careful: This may let listings REAL slow.</i></p>"
+#, kde-format
 msgid ""
 "<p align=\"left\">When checked, kdesvn fetches more detailed info about file "
 "items when making a listing to remote repositories so that you may see "
@@ -2366,12 +2354,12 @@ msgid ""
 "<p align=\"left\"><i>Be careful: This may let listings become REAL slow.</"
 "i></p>"
 msgstr ""
-"<p align=\"left\">Če je označeno, bo ob izpisu predmetov oddaljenih skladišč "
-"kdesvn pridobil dodatne podrobnosti o predmetih. V pregledu boste tako lahko "
-"videli oddaljene zaklepe.\n"
+"<p align=\"left\">Ko je označeno, kdesvn pridobi podrobnejše informacije o "
+"elementih datoteke, ko ustvarja seznam v oddaljenih skladiščih, tako da "
+"lahko vidite oddaljena zaklepanja v pregledu.\n"
 "</p>\n"
-"<p align=\"left\"><i>Opozorilo: to lahko močno upočasni izpis predmetov.</"
-"i></p>"
+"<p align=\"left\"><i>Bodite previdni: zaradi tega lahko seznami postanejo "
+"RES počasni.</i></p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:64
@@ -2381,27 +2369,19 @@ msgstr "Ob izpisu oddaljenih predmetov pridobi podrobne podatke"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_info_recursive)
 #: src/settings/subversion_settings.ui:74
-#, fuzzy, kde-format
-#| msgid "Get item information recursively"
+#, kde-format
 msgid "Get item info recursively"
-msgstr "Podrobnosti o predmetu pridobi rekurzivno"
+msgstr "Rekurzivno pridobivanje informacij o predmetu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:84
-#, fuzzy, kde-format
-#| msgid "Should kdesvn retrieves properties on selected item in repositories"
+#, kde-format
 msgid "Should kdesvn retrieve properties on selected item in repositories"
 msgstr "Ali naj kdesvn pridobi lastnosti izbranih predmetov v skladiščih"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:88
-#, fuzzy, kde-format
-#| msgid ""
-#| "When browsing kdesvn may try displaying properties below itemlist from a "
-#| "selected item. \n"
-#| "On networked repositories (e.g., not opened via file:// protocol) this "
-#| "may get real slow. So if you have slow network connections or when "
-#| "browsing hangs often you should deactivate it."
+#, kde-format
 msgid ""
 "When browsing, kdesvn may try displaying properties below itemlist from a "
 "selected item. \n"
@@ -2413,7 +2393,7 @@ msgstr ""
 "pod seznamom predmetov. \n"
 "Na omrežnih skladiščih (tistih, ki niso odprta preko protokola file://) je "
 "lahko to zelo počasno. Če imate počasno omrežno povezavo ali pa se brskanje "
-"pogosto zatika, je priporočljivo, da to možnost onemogočite."
+"pogosto zatika, je bolje, da to možnost onemogočite."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:91
@@ -2423,8 +2403,7 @@ msgstr "Vedno pridobi lastnosti izbranega predmeta za omrežna skladišča"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:101
-#, fuzzy, kde-format
-#| msgid "Should Subversion store passwords in default"
+#, kde-format
 msgid "Should Subversion store passwords by default"
 msgstr "Ali naj Subversion privzeto shranjuje gesla"
 
@@ -2513,12 +2492,11 @@ msgstr "Ali naj bodo prikazani predmeti naslednje uveljavitve"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:184
-#, fuzzy, kde-format
-#| msgid "Should unversioned items displayed in commit dialog or not."
+#, kde-format
 msgid "Should unversioned items be displayed in commit dialog or not."
 msgstr ""
 "Ali naj bodo predmeti brez različic prikazani v pogovornem oknu za "
-"uveljavitev."
+"uveljavitev ali ne."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:187
@@ -2540,10 +2518,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_add_as_modification)
 #: src/settings/subversion_settings.ui:200
-#, fuzzy, kde-format
-#| msgid "Update modifies instead of conflicts"
+#, kde-format
 msgid "Update modifies instead of creating conflicts"
-msgstr "Posodobitev spremeni in ne povzroči spora"
+msgstr "Posodobitev spreminja namesto da ustvarja konflikte"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_make_parents)
 #: src/settings/subversion_settings.ui:207

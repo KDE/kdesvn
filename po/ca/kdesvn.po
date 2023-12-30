@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-29 00:42+0000\n"
-"PO-Revision-Date: 2023-12-05 12:54+0100\n"
+"PO-Revision-Date: 2023-12-29 09:08+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -703,7 +703,7 @@ msgstr "Externa finalitzada."
 #: src/kiosvn/kiolistener.cpp:198
 #, kde-format
 msgid "Fetching external item into %1."
-msgstr "S'està obtenint l'element extern en %1."
+msgstr "S'està recuperant l'element extern en %1."
 
 #: src/kiosvn/kiolistener.cpp:202
 #, kde-format
@@ -962,13 +962,13 @@ msgstr "Insereix un fitxer de text..."
 #: src/ksvnwidgets/commitmessage.ui:226
 #, kde-format
 msgid "If checked commit will not release locks."
-msgstr "Si està marcada, la comissió no manllevarà els blocats."
+msgstr "Si està marcada, la comissió no manllevarà els blocatges."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_keepLocksButton)
 #: src/ksvnwidgets/commitmessage.ui:229
 #, kde-format
 msgid "Keep locks"
-msgstr "Mantén els blocats"
+msgstr "Mantén els blocatges"
 
 #: src/ksvnwidgets/commitmsg_impl.cpp:289
 #, kde-format
@@ -1784,7 +1784,7 @@ msgstr "Elements canviats en local:"
 #: src/settings/dispcolor_settings.ui:195
 #, kde-format
 msgid "Item needs lock:"
-msgstr "Elements que necessiten blocat:"
+msgstr "Elements que necessiten blocatge:"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DisplaySettings)
 #: src/settings/display_settings.ui:6
@@ -2304,12 +2304,11 @@ msgstr "Inicia la comprovació d'actualitzacions en obrir una còpia de treball"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:33
-#, fuzzy, kde-format
-#| msgid "Start refresh the log cache for repository when networking enabled"
+#, kde-format
 msgid "Start refreshing the log cache for repository when networking enabled"
 msgstr ""
-"Inicia una actualització del cau del registre per al repositori quan la "
-"xarxa està activa"
+"Inicia una actualització de la memòria cau del registre per al repositori "
+"quan la xarxa està activa"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:36
@@ -2327,12 +2326,7 @@ msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:46
-#, fuzzy, kde-format
-#| msgid ""
-#| "When listing on working copies kdesvn may check for <tt>svn:needs-lock</"
-#| "tt> property.<br>But due this listings/updating on folders containing lot "
-#| "of items may get slow. So you should only switch on if you have "
-#| "repositories containing lot of such entries."
+#, kde-format
 msgid ""
 "When listing on working copies kdesvn may check for <tt>svn:needs-lock</tt> "
 "property.<br>However, on folders containing lots of items this listing/"
@@ -2340,40 +2334,30 @@ msgid ""
 "repositories containing many such entries."
 msgstr ""
 "Mentre es llista a les còpies de treball, el Kdesvn pot comprovar la "
-"propietat <tt>svn:needs-lock</tt>.<br>Però llistar/actualitzar carpetes que "
-"contenen una gran quantitat d'elements pot ser lent. Pel que només l'haureu "
-"d'activar si teniu repositoris que contenen una gran quantitat d'aquest "
-"tipus d'entrades."
+"propietat <tt>svn:needs-lock</tt>.<br>Tanmateix, llistar/actualitzar "
+"carpetes que contenen una gran quantitat d'elements pot ser lent. Per tant, "
+"només l'haureu d'activar si teniu repositoris que contenen aquesta mena "
+"d'entrades."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:49
-#, fuzzy, kde-format
-#| msgid "Check if items has \"svn:needs-lock\" property set"
+#, kde-format
 msgid "Check if items have \"svn:needs-lock\" property set"
 msgstr ""
 "Comprova si els elements tenen establerta la propietat «svn:needs-lock»"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:56
-#, fuzzy, kde-format
-#| msgid ""
-#| "Whether getting details about items when making listing on repositories "
-#| "or not"
+#, kde-format
 msgid ""
 "Whether to retrieve details about items when making listing on repositories"
 msgstr ""
-"Si cal obtenir els detalls sobre els elements quan es realitza un llistat "
+"Si cal recuperar els detalls sobre els elements quan es realitza un llistat "
 "sobre els repositoris"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:61
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p align=\"left\">When checked, kdesvn get more detailed info about file "
-#| "items when making a listing to remote repositories. So you may see remote "
-#| "locks in overview.\n"
-#| "</p>\n"
-#| "<p align=\"left\"><i>Be careful: This may let listings REAL slow.</i></p>"
+#, kde-format
 msgid ""
 "<p align=\"left\">When checked, kdesvn fetches more detailed info about file "
 "items when making a listing to remote repositories so that you may see "
@@ -2382,11 +2366,12 @@ msgid ""
 "<p align=\"left\"><i>Be careful: This may let listings become REAL slow.</"
 "i></p>"
 msgstr ""
-"<p align=\"left\">Quan està marcat, Kdesvn obté informació més detallada "
-"sobre els elements en realitzar un llistat sobre repositoris remots. Així es "
-"poden veure els blocats remots en el resum.\n"
+"<p align=\"left\">Quan està marcat, Kdesvn recupera informació més detallada "
+"sobre els elements en realitzar un llistat sobre repositoris remots, de "
+"manera que es poden veure els blocatges remots en el resum.\n"
 "</p>\n"
-"<p align=\"left\"><i>Precaució: Això pot tornar el llistat MOLT lent.</i></p>"
+"<p align=\"left\"><i>Precaució: Això pot fer que els llistats esdevinguin "
+"MOLT lents.</i></p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:64
@@ -2396,28 +2381,21 @@ msgstr "Obtén els detalls de fitxer en el llistat remot"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_info_recursive)
 #: src/settings/subversion_settings.ui:74
-#, fuzzy, kde-format
-#| msgid "Get item information recursively"
+#, kde-format
 msgid "Get item info recursively"
 msgstr "Obtén la informació de l'element recursivament"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:84
-#, fuzzy, kde-format
-#| msgid "Should kdesvn retrieves properties on selected item in repositories"
+#, kde-format
 msgid "Should kdesvn retrieve properties on selected item in repositories"
 msgstr ""
-"El Kdesvn rebrà les propietats sobre l'element seleccionat en el repositori"
+"El Kdesvn recuperarà les propietats sobre l'element seleccionat en el "
+"repositori"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:88
-#, fuzzy, kde-format
-#| msgid ""
-#| "When browsing kdesvn may try displaying properties below itemlist from a "
-#| "selected item. \n"
-#| "On networked repositories (e.g., not opened via file:// protocol) this "
-#| "may get real slow. So if you have slow network connections or when "
-#| "browsing hangs often you should deactivate it."
+#, kde-format
 msgid ""
 "When browsing, kdesvn may try displaying properties below itemlist from a "
 "selected item. \n"
@@ -2428,8 +2406,8 @@ msgstr ""
 "En navegar, el Kdesvn pot intentar mostrar les propietats sota la llista "
 "d'elements per a un element seleccionat.\n"
 "En els repositoris a la xarxa (p. ex., no oberts via el protocol file://), "
-"això pot resultar molt lent. De manera que si teniu una connexió de xarxa "
-"lenta o quan la navegació es penja sovint haureu de desactivar-la."
+"això pot resultar molt lent. Per tant, si teniu una connexió de xarxa lenta "
+"o quan la navegació es penja sovint, haureu de desactivar-la."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:91
@@ -2439,8 +2417,7 @@ msgstr "Obtén sempre les propietats sobre els repositoris a la xarxa"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:101
-#, fuzzy, kde-format
-#| msgid "Should Subversion store passwords in default"
+#, kde-format
 msgid "Should Subversion store passwords by default"
 msgstr "El Subversion emmagatzemarà de manera predeterminada les contrasenyes"
 
@@ -2537,8 +2514,7 @@ msgstr "Llista els elements de la següent comissió que seran o no enviats"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:184
-#, fuzzy, kde-format
-#| msgid "Should unversioned items displayed in commit dialog or not."
+#, kde-format
 msgid "Should unversioned items be displayed in commit dialog or not."
 msgstr ""
 "S'han o no de mostrar els elements sense versió en el diàleg de comissió."
@@ -2564,10 +2540,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_add_as_modification)
 #: src/settings/subversion_settings.ui:200
-#, fuzzy, kde-format
-#| msgid "Update modifies instead of conflicts"
+#, kde-format
 msgid "Update modifies instead of creating conflicts"
-msgstr "Una actualització modifica en lloc de generar conflictes"
+msgstr "Una actualització modifica en lloc de crear conflictes"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_make_parents)
 #: src/settings/subversion_settings.ui:207
@@ -2780,12 +2755,12 @@ msgstr "S'ha desblocat"
 #: src/svnfrontend/ccontextlistener.cpp:89
 #, kde-format
 msgid "Lock failed"
-msgstr "L'acció de blocat ha fallat"
+msgstr "L'acció de blocatge ha fallat"
 
 #: src/svnfrontend/ccontextlistener.cpp:90
 #, kde-format
 msgid "Unlock failed"
-msgstr "L'acció de desblocat ha fallat"
+msgstr "L'acció de desblocatge ha fallat"
 
 #: src/svnfrontend/ccontextlistener.cpp:94
 #, kde-format
@@ -3379,10 +3354,10 @@ msgid ""
 "a user must acquire a lock on the file before they can edit and commit "
 "changes."
 msgstr ""
-"Establir això a qualsevol valor (p. ex: <b>'*'</b>) per a forçar el blocat "
+"Establir això a qualsevol valor (p. ex: <b>'*'</b>) per a forçar el blocatge "
 "d'aquest fitxer.<br/>El fitxer serà establert com a només lectura quan "
 "s'extregui o actualitzi, indicant que un usuari primer haurà d'adquirir un "
-"blocat del fitxer abans de poder-lo editar i cometre els canvis."
+"blocatge del fitxer abans de poder-lo editar i cometre els canvis."
 
 #: src/svnfrontend/editpropsdlg.cpp:66 src/svnfrontend/editpropsdlg.cpp:100
 #, kde-format
@@ -4235,7 +4210,7 @@ msgstr "Desbloca els elements actuals"
 #: src/svnfrontend/maintreewidget.cpp:623
 #, kde-format
 msgid "Free existing lock on current item"
-msgstr "Allibera l'element actual dels blocats existents"
+msgstr "Allibera l'element actual dels blocatges existents"
 
 #: src/svnfrontend/maintreewidget.cpp:628 src/svnfrontend/svnactions.cpp:670
 #, kde-format
@@ -4300,7 +4275,7 @@ msgid ""
 "Recursively clean up the working copy, removing locks, resuming unfinished "
 "operations, etc."
 msgstr ""
-"Neteja la còpia de treball recursivament, eliminant blocats, restaurant "
+"Neteja la còpia de treball recursivament, eliminant blocatges, restaurant "
 "operacions no finalitzades, etc."
 
 #: src/svnfrontend/maintreewidget.cpp:678
@@ -4603,28 +4578,28 @@ msgstr "No hi ha res seleccionat per a desblocar"
 #, kde-format
 msgctxt "@title:window"
 msgid "Lock Message"
-msgstr "Missatge de blocat"
+msgstr "Missatge de blocatge"
 
 #: src/svnfrontend/maintreewidget.cpp:1567
 #, kde-format
 msgid "Steal lock?"
-msgstr "S'ha de manllevar el blocat?"
+msgstr "S'ha de manllevar el blocatge?"
 
 #: src/svnfrontend/maintreewidget.cpp:1603
 #, kde-format
 msgid "Break lock or ignore missing locks?"
-msgstr "S'han de trencar els blocats o ignorar-los?"
+msgstr "S'han de trencar els blocatges o ignorar-los?"
 
 #: src/svnfrontend/maintreewidget.cpp:1604
 #, kde-format
 msgid "Unlocking items"
-msgstr "Elements sense blocat"
+msgstr "Elements sense blocatge"
 
 #: src/svnfrontend/maintreewidget.cpp:1605
 #, kde-format
 msgctxt "@action:button"
 msgid "Break Lock"
-msgstr "Trenca el blocat"
+msgstr "Trenca el blocatge"
 
 #: src/svnfrontend/maintreewidget.cpp:1606
 #, kde-format
@@ -5192,7 +5167,7 @@ msgstr "Copia des de l'URL"
 #: src/svnfrontend/svnactions.cpp:828 src/svnfrontend/svnactions.cpp:835
 #, kde-format
 msgid "Lock token"
-msgstr "Marca de blocat"
+msgstr "Marca de blocatge"
 
 #: src/svnfrontend/svnactions.cpp:829 src/svnfrontend/svnactions.cpp:836
 #, kde-format
@@ -5202,12 +5177,12 @@ msgstr "Propietari"
 #: src/svnfrontend/svnactions.cpp:830 src/svnfrontend/svnactions.cpp:837
 #, kde-format
 msgid "Locked on"
-msgstr "Blocat sobre"
+msgstr "Blocatge sobre"
 
 #: src/svnfrontend/svnactions.cpp:831 src/svnfrontend/svnactions.cpp:838
 #, kde-format
 msgid "Lock comment"
-msgstr "Comentari de blocat"
+msgstr "Comentari de blocatge"
 
 #: src/svnfrontend/svnactions.cpp:885
 #, kde-format

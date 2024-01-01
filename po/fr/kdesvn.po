@@ -12,15 +12,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-29 00:42+0000\n"
-"PO-Revision-Date: 2023-12-07 10:43+0100\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
+"PO-Revision-Date: 2023-12-30 09:57+0100\n"
+"Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -2302,11 +2302,10 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:33
-#, fuzzy, kde-format
-#| msgid "Start refresh the log cache for repository when networking enabled"
+#, kde-format
 msgid "Start refreshing the log cache for repository when networking enabled"
 msgstr ""
-"Commencer à rafraîchir le cache des messages du dépôt quand le réseau est "
+"Commencer à rafraîchir le cache des journaux du dépôt quand le réseau est "
 "activé"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_cache_on_open)
@@ -2344,10 +2343,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:49
-#, fuzzy, kde-format
-#| msgid "Check if items has \"svn:needs-lock\" property set"
+#, kde-format
 msgid "Check if items have \"svn:needs-lock\" property set"
-msgstr "Vérifier si l'élément a la propriété svn:needs-lock validée"
+msgstr "Vérifier si des éléments ont défini la propriété « svn:needs-lock »"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:56
@@ -2392,19 +2390,17 @@ msgstr "Obtenir les détails de fichier en faisant un listage à distance"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_info_recursive)
 #: src/settings/subversion_settings.ui:74
-#, fuzzy, kde-format
-#| msgid "Get item information recursively"
+#, kde-format
 msgid "Get item info recursively"
-msgstr "Obtenir les informations de l'élément récursivement"
+msgstr "Obtenir les informations sur les éléments de façon récursive"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:84
-#, fuzzy, kde-format
-#| msgid "Should kdesvn retrieves properties on selected item in repositories"
+#, kde-format
 msgid "Should kdesvn retrieve properties on selected item in repositories"
 msgstr ""
-"kdesvn doit-il accéder aux propriétés de l'élément sélectionné dans les "
-"dépôts"
+"Kdesvn doit-il accéder aux propriétés de l'élément sélectionné dans les "
+"dépôts ?"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:88
@@ -2436,10 +2432,9 @@ msgstr "Toujours obtenir les propriétés sur les dépôts en réseau"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:101
-#, fuzzy, kde-format
-#| msgid "Should Subversion store passwords in default"
+#, kde-format
 msgid "Should Subversion store passwords by default"
-msgstr "Subversion doit-il enregistrer les mots de passe par défaut"
+msgstr "Subversion doit-il enregistrer les mots de passe par défaut ?"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:104
@@ -2532,12 +2527,11 @@ msgstr "Lister les éléments que la prochaine publication enverra ou pas"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:184
-#, fuzzy, kde-format
-#| msgid "Should unversioned items displayed in commit dialog or not."
+#, kde-format
 msgid "Should unversioned items be displayed in commit dialog or not."
 msgstr ""
 "Les éléments non versionnés doivent-ils être affichés dans la boîte de "
-"dialogue de publication ou pas ?"
+"dialogue de validation ou pas ?"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:187
@@ -2560,10 +2554,10 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_add_as_modification)
 #: src/settings/subversion_settings.ui:200
-#, fuzzy, kde-format
-#| msgid "Update modifies instead of conflicts"
+#, kde-format
 msgid "Update modifies instead of creating conflicts"
-msgstr "Une mise à jour effectue les modifications plutôt qu'entrer en conflit"
+msgstr ""
+"Une mise à jour effectue des modifications plutôt que de créer des conflits"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_make_parents)
 #: src/settings/subversion_settings.ui:207

@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-29 00:42+0000\n"
-"PO-Revision-Date: 2023-12-30 09:57+0100\n"
+"PO-Revision-Date: 2023-12-31 10:53+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -2323,12 +2323,7 @@ msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:46
-#, fuzzy, kde-format
-#| msgid ""
-#| "When listing on working copies kdesvn may check for <tt>svn:needs-lock</"
-#| "tt> property.<br>But due this listings/updating on folders containing lot "
-#| "of items may get slow. So you should only switch on if you have "
-#| "repositories containing lot of such entries."
+#, kde-format
 msgid ""
 "When listing on working copies kdesvn may check for <tt>svn:needs-lock</tt> "
 "property.<br>However, on folders containing lots of items this listing/"
@@ -2336,10 +2331,10 @@ msgid ""
 "repositories containing many such entries."
 msgstr ""
 "Lors du listage des copies de travail, kdesvn peut vérifier la propriété "
-"<tt>svn:needs-lock</tt>.<br/>Mais ainsi le listage ou la mise à jour des "
-"dossiers contenant de nombreux éléments peut devenir lent. Aussi vous ne "
-"devriez activer cette option que si vous avez des dépôts contenant beaucoup "
-"de telles entrées."
+"<tt>svn:needs-lock</tt>.<br>Cependant, pour les dossiers contenant de "
+"nombreux éléments, cette mise à jour / listage peut devenir lent. Aussi, "
+"vous ne devriez activer cette option que si vous avez des dépôts contenant "
+"beaucoup de telles entrées."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:49

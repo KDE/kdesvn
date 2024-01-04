@@ -4,7 +4,7 @@
 # Sebastien Renard <renard@kde.org>, 2013.
 # Vincent PINON <vpinon@april.org>, 2014.
 # Simon Depiets <sdepiets@gmail.com>, 2018, 2019, 2020.
-# SPDX-FileCopyrightText: 2021, 2022, 2023 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2021, 2022, 2023, 2024 Xavier Besnard <xavier.besnard@kde.org>
 # Xavier Besnard <xavier.besnard@kde.org>, 2023.
 #
 msgid ""
@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-29 00:42+0000\n"
-"PO-Revision-Date: 2023-12-31 10:53+0100\n"
+"PO-Revision-Date: 2024-01-02 11:53+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -2344,25 +2344,16 @@ msgstr "Vérifier si des éléments ont défini la propriété « svn:needs-loc
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:56
-#, fuzzy, kde-format
-#| msgid ""
-#| "Whether getting details about items when making listing on repositories "
-#| "or not"
+#, kde-format
 msgid ""
 "Whether to retrieve details about items when making listing on repositories"
 msgstr ""
-"S'il faut ou non obtenir des détails à propos des éléments en listant les "
-"dépôts"
+"Définit s'il faut ou non obtenir des détails à propos des éléments en "
+"listant le contenu des dépôts"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:61
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p align=\"left\">When checked, kdesvn get more detailed info about file "
-#| "items when making a listing to remote repositories. So you may see remote "
-#| "locks in overview.\n"
-#| "</p>\n"
-#| "<p align=\"left\"><i>Be careful: This may let listings REAL slow.</i></p>"
+#, kde-format
 msgid ""
 "<p align=\"left\">When checked, kdesvn fetches more detailed info about file "
 "items when making a listing to remote repositories so that you may see "
@@ -2372,10 +2363,11 @@ msgid ""
 "i></p>"
 msgstr ""
 "<p align=\"left\">Si l'option est activée, kdesvn obtient des informations "
-"plus détaillées à propos des éléments fichiers en faisant la liste des "
-"dépôts à distance. Ainsi vous pouvez avoir une vue générale des verrous à "
-"distance.</p><p align=\"left\"><i>Prudence : ceci peut rendre le listage "
-"TRÈS lent</i></p>"
+"plus détaillées à propos des éléments de fichiers en faisant la liste des "
+"dépôts distants. Ainsi, vous pouvez avoir une vue générale des verrous à "
+"distance.</p> \n"
+"<p align=\"left\"><i>Prudence : ceci peut rendre la réalisation des listes "
+"TRÈS lente.</i></p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:64
@@ -2399,13 +2391,7 @@ msgstr ""
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:88
-#, fuzzy, kde-format
-#| msgid ""
-#| "When browsing kdesvn may try displaying properties below itemlist from a "
-#| "selected item. \n"
-#| "On networked repositories (e.g., not opened via file:// protocol) this "
-#| "may get real slow. So if you have slow network connections or when "
-#| "browsing hangs often you should deactivate it."
+#, kde-format
 msgid ""
 "When browsing, kdesvn may try displaying properties below itemlist from a "
 "selected item. \n"
@@ -2413,11 +2399,12 @@ msgid ""
 "get very slow. Thus, if you have slow network connections or when browsing "
 "hangs often you should deactivate it."
 msgstr ""
-"En navigant kdesvn peut chercher à afficher les propriétés sous la liste des "
-"éléments depuis un élément sélectionné.\n"
-"Sur les dépôts en réseau (typiquement ouverts autrement que par le protocole "
-"file://) ceci peut devenir très lent. Ainsi si vous avez des connexions "
-"lentes ou que la navigation se gèle souvent vous devriez le désactiver."
+"Lors de sa navigation, kdesvn peut tenter d'afficher les propriétés sous la "
+"liste des éléments depuis un élément sélectionné.\n"
+"Sur les dépôts en réseau (Typiquement ouverts autrement que par le protocole "
+"« file:// »), ceci peut devenir très lent. Ainsi, si vous avez des "
+"connexions lentes ou que la navigation se gèle souvent vous devriez "
+"désactiver ce mode."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:91

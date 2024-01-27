@@ -244,7 +244,7 @@
 >), però a través d'una xarxa, això no és possible. </para>
 </caution>
 <para
->Primer de tot, haureu de crear una còpia de treball del repositori. Per fer-ho, seleccioneu <menuchoice
+>Primer de tot, haureu de crear una còpia de treball del repositori. Per a fer-ho, seleccioneu <menuchoice
 > <guimenu
 >Subversion</guimenu
 > <guisubmenu
@@ -300,11 +300,11 @@
 <para
 >Si intenteu cometre sense seleccionar cap element, el &kdesvn; utilitzarà l'element de nivell superior obert a la còpia de treball, &ead;, el mateix camí de la còpia de treball. </para>
 <para
->Aquesta operació sempre serà recursiva, vol dir que, si se selecciona una carpeta, el &kdesvn; sempre enviarà tots els elements modificats per sota seu. Quan amb la configuració vulgueu revisar tots els elements abans de cometre'ls, el següent diàleg llistarà tots els elements que enviarà el &kdesvn;. És possible desmarcar els elements que no voleu enviar. En aquest cas, el &kdesvn; enviarà tots els elements ell sol, &ead;, de forma no recursiva. O podeu seleccionar els elements sense versió per afegir i cometre (si no estan marcats per a ser ignorats). De manera que podreu veure si hi ha elements nous que esteu oblidant. </para>
+>Aquesta operació sempre serà recursiva, vol dir que, si se selecciona una carpeta, el &kdesvn; sempre enviarà tots els elements modificats per sota seu. Quan amb la configuració vulgueu revisar tots els elements abans de cometre'ls, el següent diàleg llistarà tots els elements que enviarà el &kdesvn;. És possible desmarcar els elements que no voleu enviar. En aquest cas, el &kdesvn; enviarà tots els elements ell sol, &ead;, de forma no recursiva. O podeu seleccionar els elements sense versió per a afegir i cometre (si no estan marcats per a ser ignorats). De manera que podreu veure si hi ha elements nous que esteu oblidant. </para>
 <para
 >Introduïu un missatge de registre que enviareu i premeu el botó <guibutton
 >D'acord</guibutton
-> per iniciar la transferència. </para>
+> i la transferència s'iniciarà. </para>
 </sect2>
 <sect2>
 <title
@@ -320,7 +320,7 @@
 > <guimenuitem
 >Actualitza a HEAD</guimenuitem
 > </menuchoice
->. Això actualitzarà a la versió més recent. Per obtenir una revisió específica, seleccioneu <menuchoice
+>. Això actualitzarà a la versió més recent. Per a obtenir una revisió específica, seleccioneu <menuchoice
 > <guimenu
 >Subversion</guimenu
 > <guisubmenu
@@ -394,7 +394,7 @@
 > </menuchoice
 >, apareixerà un diàleg on es llistaran tots els elements sense versió. Premeu el botó <guibutton
 >D'acord</guibutton
-> per afegir tots els elements marcats a la còpia de treball, els elements que no vulgueu amb versió hauran d'estar desmarcats. </para
+> per a afegir tots els elements marcats a la còpia de treball, els elements que no vulgueu amb versió hauran d'estar desmarcats. </para
 ></listitem>
 </varlistentry>
 
@@ -528,7 +528,7 @@
 </sect3>
 <sect3>
 <title
->Seleccionar la carpeta per importar amb el navegador de fitxers</title>
+>Seleccionar la carpeta per a importar amb el navegador de fitxers</title>
 <para
 >Marqueu la carpeta en la qual voleu importar una carpeta nova. A continuació, seleccioneu <menuchoice
 > <guimenu
@@ -611,7 +611,7 @@
 <title
 >Usar un programa extern per a fusionar</title>
 <para
->Vegeu <xref linkend="diffmerge-settings"/> per obtenir més detalls sobre com configurar l'eina de fusió externa. El &kdesvn; generarà la línia d'ordres com es descriu allà. Abans, feu el següent: </para>
+>Vegeu <xref linkend="diffmerge-settings"/> per a obtenir més detalls sobre com configurar l'eina de fusió externa. El &kdesvn; generarà la línia d'ordres com es descriu allà. Abans, feu el següent: </para>
 <para>
 <orderedlist>
 
@@ -680,7 +680,7 @@
 <para
 >El <ulink url="http://tortoisesvn.tigris.org/"
 >projecte TortoiseSVN</ulink
-> ha dissenyat un bonic sistema de propietats per integrar el <ulink url="http://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-dug-bugtracker.html"
+> ha dissenyat un bonic sistema de propietats per a integrar el <ulink url="http://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-dug-bugtracker.html"
 >seguidor d'errors (BugTracker)</ulink
 > a la IGU de Subversion. La versió actual del &kdesvn; no admet camps addicionals al quadre de comissió (vindrà més endavant) i no ho entén tot, a excepció de les següents propietats: </para>
 <para>
@@ -722,11 +722,11 @@
 <para
 >Conté una o dues expressions regulars, separades per un salt de línia.</para>
 <para
->Si només s'estableix una expressió, llavors l'ID de l'error haurà de concordar amb els grups de la cadena de l'expressió regular. Si s'estableixen dues expressions, llavors la primera expressió s'utilitzarà per trobar una cadena que es relacioni amb l'ID de l'error, però pot contenir més que l'ID de l'error (&pex;, <quote
+>Si només s'estableix una expressió, llavors l'ID de l'error haurà de concordar amb els grups de la cadena de l'expressió regular. Si s'estableixen dues expressions, llavors la primera expressió s'utilitzarà per a trobar una cadena que es relacioni amb l'ID de l'error, però pot contenir més que l'ID de l'error (&pex;, <quote
 >Issue #123</quote
 > o <quote
 >resolves issue 123</quote
->). La segona expressió s'utilitza per extreure l'ID real de l'error de la cadena extreta amb la primera expressió.</para>
+>). La segona expressió s'utilitza per a extreure l'ID real de l'error de la cadena extreta amb la primera expressió.</para>
 <para
 >Si us plau, aneu amb compte amb els espais no desitjats després de l'expressió regular i no oblideu els claudàtors a la descripció del número.</para>
 </entry>
@@ -796,7 +796,7 @@
 <para
 >El &kdesvn; pot utilitzar un cau intern del registre per a algunes operacions. Majorment s'utilitza per a l'<link linkend="revision-tree"
 >arbre de revisions</link
->, però també per veure el registre simplificat en el mode fora de línia. Els caus estan organitzats com a bases de dades <application
+>, però també per a veure el registre simplificat en el mode fora de línia. Els caus estan organitzats com a bases de dades <application
 >SQLite</application
 > emmagatzemades a <filename class="directory"
 >$HOME/.sqvnqt/logcache</filename
@@ -806,7 +806,7 @@
 >Les bases de dades poden fer-se grans! Pel que podeu desactivar l'actualització automàtica del cau del registre a les opcions de configuració. </para>
 </warning>
 <para
->Podeu simplement eliminar una base de dades, llavors el registre al cau serà reiniciat per aquest repositori (i no l'arbre de revisions!), però si es desactiva l'ompliment automàtic del cau, en la propera obertura d'aquest repositori o una còpia de treball associada, el cau serà omplert de nou. </para>
+>Podeu simplement eliminar una base de dades, llavors el registre al cau serà reiniciat per aquest repositori (i no l'arbre de revisions!), però si es desactiva l'ompliment automàtic del cau, en la pròxima obertura d'aquest repositori o una còpia de treball associada, el cau serà omplert de nou. </para>
 <sect2>
 <title
 >Mode desconnectat</title>
@@ -956,7 +956,7 @@
 </term>
 <listitem
 ><para
->Aquesta entrada o una entrada de sota -si és una carpeta-, té conflictes per resoldre amb l'última actualització. </para
+>Aquesta entrada o una entrada de sota -si és una carpeta-, té conflictes per a resoldre amb l'última actualització. </para
 ></listitem>
 </varlistentry>
 
@@ -1014,7 +1014,7 @@
 <title
 >Cas especial de «svn+ssh»</title>
 <para
->Quan s'utilitza el Subversion a través de svn+ssh, l'emmagatzematge de la contrasenya es farà a través de ssh i ssh-agent. Per fer això, cal tenir accés a la màquina i repositori remots. Si voleu emmagatzemar quelcom, haureu d'utilitzar l'autenticació de clau pública de ssh, no l'autenticació per contrasenya. (De fet, ssh prefereix l'autenticació per clau pública). Per fer això, cal posar la vostra clau pública ssh en l'objectiu, &pex;, al sistema del repositori. Les contrasenyes ssh mai seran manejades per l'emmagatzematge de contrasenyes de Subversion, el &kwallet5; o el cau intern de contrasenyes. </para>
+>Quan s'utilitza el Subversion a través de svn+ssh, l'emmagatzematge de la contrasenya es farà a través de ssh i ssh-agent. Per a fer això, cal tenir accés a la màquina i repositori remots. Si voleu emmagatzemar alguna cosa, haureu d'utilitzar l'autenticació de clau pública de ssh, no l'autenticació per contrasenya. (De fet, ssh prefereix l'autenticació per clau pública). Per a fer això, cal posar la vostra clau pública ssh en l'objectiu, &pex;, al sistema del repositori. Les contrasenyes ssh mai seran manejades per l'emmagatzematge de contrasenyes de Subversion, el &kwallet5; o el cau intern de contrasenyes. </para>
 <para
 >Si no voleu que se us demani la contrasenya de la vostra clau SSH, podeu utilitzar el <application
 >ssh-agent</application
@@ -1073,7 +1073,7 @@
 ></filename
 > haurà d'apuntar al començament d'un repositori diferent de la mateixa aplicació o de la KPart. Es pot navegar per les còpies de treball amb el &konqueror;. </para>
 <para
->Per navegar a una revisió específica, podeu annexar la consulta <link linkend="revision-syntax"
+>Per a navegar a una revisió específica, podeu annexar la consulta <link linkend="revision-syntax"
 ><quote
 >?rev=<replaceable
 >revisió</replaceable
@@ -1206,7 +1206,7 @@
 ><para
 >KURL::List urls</para>
 <para
->Els URL són una llista dels URL locals per cometre. Demanarà pel missatge de registre.</para>
+>Els URL són una llista dels URL locals per a cometre. Demanarà pel missatge de registre.</para>
 </entry>
 <entry
 >Sí</entry>
@@ -1348,7 +1348,7 @@
 <title
 >Valors retornats</title>
 <para
->Els valors retornats es poden indicar a través de les metadades, Per a més detalls, vegeu la documentació de l'API. </para>
+>Els valors retornats es poden indicar a través de les metadades. Per a més detalls, vegeu la documentació de l'API. </para>
 <para>
 <table id="kio-ksvn-metadata">
 <title
@@ -2257,7 +2257,7 @@
 <title
 >Programa de resolució de conflictes</title>
 <para
->Podeu utilitzar un programa extern com el &kdiff3; per resoldre els conflictes, el valor predeterminat és <command
+>Podeu utilitzar un programa extern com el &kdiff3; per a resoldre els conflictes, el valor predeterminat és <command
 >kdiff3 %o %m %n -o %t</command
 >. </para>
 <sect3>
@@ -2460,7 +2460,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Es tracta d'una drecera per obrir els repositoris oberts recentment. En fer clic sobre aquest element, s'obrirà una llista al costat del menú amb les diverses còpies de treball o repositoris locals oberts més recentment. En fer clic sobre un element específic, aquest s'obrirà en el &kdesvn;. </para
+>Es tracta d'una drecera per a obrir els repositoris oberts recentment. En fer clic sobre aquest element, s'obrirà una llista al costat del menú amb les diverses còpies de treball o repositoris locals oberts més recentment. En fer clic sobre un element específic, aquest s'obrirà en el &kdesvn;. </para
 ></listitem>
 </varlistentry>
 
@@ -3195,7 +3195,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->El registre s'emmagatzema al cau i s'utilitza per a visualitzar l'arbre de revisions d'un repositori. Depenent de la connexió a Internet, la mida del repositori de Subversion i la longitud de l'historial pot ser molt gran. Per tant podreu deixar d'actualitzar el cau utilitzant aquesta acció. </para
+>El registre s'emmagatzema al cau i s'utilitza per a visualitzar l'arbre de revisions d'un repositori. Depenent de la connexió a Internet, la mida del repositori de Subversion i la longitud de l'historial pot ser molt gran. Per tant, podreu deixar d'actualitzar el cau utilitzant aquesta acció. </para
 ></listitem>
 </varlistentry>
 
@@ -3245,7 +3245,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Mostra un diàleg per adaptar les opcions de configuració del cau, registres i estadístiques. </para
+>Mostra un diàleg per a adaptar les opcions de configuració del cau, registres i estadístiques. </para
 ></listitem>
 </varlistentry>
 </variablelist>
@@ -3330,7 +3330,7 @@ Revisions tree
 </term
 ><listitem>
 <para
->Utilitzeu aquesta acció per mostrar només els fitxers modificats i proporcionar un resum clar i concís.</para>
+>Utilitzeu aquesta acció per a mostrar només els fitxers modificats i proporcionar un resum clar i concís.</para>
 </listitem>
 </varlistentry>
 

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-06-07 01:43+0000\n"
-"PO-Revision-Date: 2024-01-21 14:17\n"
+"PO-Revision-Date: 2024-02-05 11:44\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -1837,7 +1837,7 @@ msgstr ""
 #: src/settings/kdesvn_part.kcfg:164
 #, kde-format
 msgid "Display different then normal states colored"
-msgstr ""
+msgstr "显示不同于正常状态的颜色"
 
 #. i18n: ectx: label, entry, group (blame_dlg)
 #: src/settings/kdesvn_part.kcfg:197
@@ -1953,7 +1953,7 @@ msgstr ""
 #, kde-format
 msgid ""
 "This value holds for log dialog which kind of log is used, its internal only."
-msgstr ""
+msgstr "此值控制日志对话框使用哪种类型的日志，它只是内部的。"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
 #: src/settings/polling_settings.ui:11
@@ -2074,7 +2074,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:33
 #, kde-format
 msgid "Start refresh the log cache for repository when networking enabled"
-msgstr ""
+msgstr "启用网络时开始刷新资源库的日志缓存"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:36
@@ -2097,12 +2097,15 @@ msgid ""
 "items may get slow. So you should only switch on if you have repositories "
 "containing lot of such entries."
 msgstr ""
+"当在工作副本上列出时，kdesvn可能会检查 <tt>svn:nes-lock</tt> 属性。<br>但由于"
+"此工作，包含大量项目的文件夹可能会变慢。 所以您只能在拥有包含大量此类条目的仓"
+"库时开启。"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:49
 #, kde-format
 msgid "Check if items has \"svn:needs-lock\" property set"
-msgstr ""
+msgstr "检查项目是否有\"svn:nes-lock\"属性"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:56

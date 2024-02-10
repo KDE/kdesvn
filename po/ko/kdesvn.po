@@ -1,14 +1,14 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdesvn package.
 # JungHee Lee <daemul72@gmail.com>, 2019.
-# Shinjo Park <kde@peremen.name>, 2019, 2020, 2022, 2023.
+# SPDX-FileCopyrightText: 2019, 2020, 2022, 2023, 2024 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-06-07 01:43+0000\n"
-"PO-Revision-Date: 2023-08-07 23:41+0200\n"
+"PO-Revision-Date: 2024-02-09 23:37+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2254,7 +2254,7 @@ msgstr "재귀적으로 항목 정보 가져오기"
 #: src/settings/subversion_settings.ui:84
 #, kde-format
 msgid "Should kdesvn retrieves properties on selected item in repositories"
-msgstr "kdesvn이 저장소에서 선택한 항목의 속성을 검색해야 합니다."
+msgstr "kdesvn이 저장소에서 선택한 항목의 속성을 검색할지 여부입니다"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:88

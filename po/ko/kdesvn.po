@@ -1,14 +1,14 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdesvn package.
 # JungHee Lee <daemul72@gmail.com>, 2019.
-# Shinjo Park <kde@peremen.name>, 2019, 2020, 2022, 2023.
+# SPDX-FileCopyrightText: 2019, 2020, 2022, 2023, 2024 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-29 00:42+0000\n"
-"PO-Revision-Date: 2023-08-07 23:41+0200\n"
+"PO-Revision-Date: 2024-02-09 23:37+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -60,57 +60,49 @@ msgid "Password"
 msgstr "암호"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:51
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Checkout a Repository"
+#, kde-format
 msgid "Checkout From Repository..."
-msgstr "저장소 체크아웃"
+msgstr "저장소에서 체크아웃..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:54
-#, fuzzy, kde-format
-#| msgid "Export"
+#, kde-format
 msgid "Export..."
-msgstr "내보내기"
+msgstr "내보내기..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:57
 #, kde-format
 msgid "Update (Kdesvn)"
-msgstr ""
+msgstr "업데이트(Kdesvn)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:60
-#, fuzzy, kde-format
-#| msgid "Commit Added"
+#, kde-format
 msgid "Commit (Kdesvn)"
-msgstr "커밋 추가됨"
+msgstr "커밋(Kdesvn)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:63
 #, kde-format
 msgid "kdesvn log (last 100)"
-msgstr ""
+msgstr "kdesvn 로그(마지막 100개)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:66
-#, fuzzy, kde-format
-#| msgid "Export a repository"
+#, kde-format
 msgid "Export from a Subversion repository..."
-msgstr "저장소 내보내기"
+msgstr "Subversion 저장소에서 내보내기..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:69
-#, fuzzy, kde-format
-#| msgid "Checkout a repository"
+#, kde-format
 msgid "Checkout from a repository..."
-msgstr "저장소 체크아웃"
+msgstr "저장소에서 체크아웃..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:74
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Detailed Subversion info"
-msgstr "Subversion 관리자"
+msgstr "자세한 Subversion 정보"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:77
-#, fuzzy, kde-format
-#| msgid "Added in repository"
+#, kde-format
 msgid "Add to Repository"
-msgstr "저장소에 추가됨"
+msgstr "저장소에 추가"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:80
 #: src/svnfrontend/maintreewidget.cpp:653
@@ -119,35 +111,29 @@ msgid "Check for unversioned items"
 msgstr "리비전 관리에 포함되지 않은 항목 확인"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:83
-#, fuzzy, kde-format
-#| msgid "Delete from repository"
+#, kde-format
 msgid "Delete From Repository"
 msgstr "저장소에서 삭제"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:86
-#, fuzzy, kde-format
-#| msgid "Revert current changes"
+#, kde-format
 msgid "Revert Local Changes"
-msgstr "현재 변경 사항 되돌리기"
+msgstr "로컬 변경 사항 되돌리기"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:89
-#, fuzzy, kde-format
-#| msgid "Rename"
+#, kde-format
 msgid "Rename..."
-msgstr "이름 바꾸기"
+msgstr "이름 바꾸기..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:92
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Export a Repository"
+#, kde-format
 msgid "Import Repository"
-msgstr "저장소 내보내기"
+msgstr "저장소 가져오기"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:97
-#, fuzzy, kde-format
-#| msgid "Switch URL"
+#, kde-format
 msgid "Switch..."
-msgstr "URL 전환"
+msgstr "바꾸기..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:100
 #: src/svnfrontend/maintreewidget.cpp:824
@@ -156,33 +142,29 @@ msgid "Merge..."
 msgstr "합치기..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:105
-#, fuzzy, kde-format
-#| msgid "Blame"
+#, kde-format
 msgid "Blame..."
-msgstr "블레임"
+msgstr "작성자 보기..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:108
 #, kde-format
 msgid "Create Patch..."
-msgstr ""
+msgstr "패치 만들기..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:113
-#, fuzzy, kde-format
-#| msgid "Diff local changes"
+#, kde-format
 msgid "Diff (local)"
-msgstr "로컬 변경 사항 차이 보기"
+msgstr "Diff(로컬)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:116
-#, fuzzy, kde-format
-#| msgid "Full revision tree"
+#, kde-format
 msgid "Display revision tree"
-msgstr "전체 리비전 트리"
+msgstr "리비전 트리 표시"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:127
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Subversion (kdesvn)"
-msgstr "Subversion 관리자"
+msgstr "Subversion(kdesvn)"
 
 #: src/kdesvn.cpp:79
 #, kde-format
@@ -2045,8 +2027,7 @@ msgstr "충돌을 해결하는 프로그램"
 
 #. i18n: ectx: label, entry, group (display)
 #: src/settings/kdesvn_part.kcfg:164
-#, fuzzy, kde-format
-#| msgid "Display different then normal states colored"
+#, kde-format
 msgid "Display other than normal states colored"
 msgstr "색상이 지정된 일반 상태와 다른 상태로 표시"
 
@@ -2161,10 +2142,7 @@ msgstr "KDE 독 영역에 진행 메시지 표시"
 
 #. i18n: ectx: whatsthis, entry, group (internals)
 #: src/settings/kdesvn_part.kcfg:294
-#, fuzzy, kde-format
-#| msgid ""
-#| "This value holds for log dialog which kind of log is used, its internal "
-#| "only."
+#, kde-format
 msgid ""
 "This value holds for log dialog which kind of log is used, it is internal "
 "only."
@@ -2294,8 +2272,7 @@ msgstr "작업 사본을 열 때 업데이트 확인 시작"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:33
-#, fuzzy, kde-format
-#| msgid "Start refresh the log cache for repository when networking enabled"
+#, kde-format
 msgid "Start refreshing the log cache for repository when networking enabled"
 msgstr "네트워크를 사용할 수 있을 때 저장소 로그 캐시 새로 고침 시작"
 
@@ -2313,12 +2290,7 @@ msgstr "작업 사본 목록을 표시할 때 kdesvn에서 이 속성을 확인�
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:46
-#, fuzzy, kde-format
-#| msgid ""
-#| "When listing on working copies kdesvn may check for <tt>svn:needs-lock</"
-#| "tt> property.<br>But due this listings/updating on folders containing lot "
-#| "of items may get slow. So you should only switch on if you have "
-#| "repositories containing lot of such entries."
+#, kde-format
 msgid ""
 "When listing on working copies kdesvn may check for <tt>svn:needs-lock</tt> "
 "property.<br>However, on folders containing lots of items this listing/"
@@ -2326,36 +2298,26 @@ msgid ""
 "repositories containing many such entries."
 msgstr ""
 "작업 사본 목록을 표시할 때 kdesvn에서는 <tt>svn:needs-lock</tt> 속성을 확인"
-"할 수 있습니다. 이 속성을 확인한다면 많은 항목이 들어 있는 폴더의 항목 확인/"
-"업데이트 시 느려질 수 있습니다. 해당 속성이 설정된 항목이 많은 저장소에서 작"
-"업할 경우에만 이 설정을 사용하십시오."
+"할 수 있습니다.<br>그러나 많은 항목이 들어 있는 폴더의 항목 확인/업데이트 시 "
+"느려질 수 있습니다. 해당 속성이 설정된 항목이 많은 저장소에서 작업할 경우에"
+"만 이 설정을 사용하십시오."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:49
-#, fuzzy, kde-format
-#| msgid "Check if items has \"svn:needs-lock\" property set"
+#, kde-format
 msgid "Check if items have \"svn:needs-lock\" property set"
 msgstr "\"svn:needs-lock\" 속성이 설정되어 있는지 확인"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:56
-#, fuzzy, kde-format
-#| msgid ""
-#| "Whether getting details about items when making listing on repositories "
-#| "or not"
+#, kde-format
 msgid ""
 "Whether to retrieve details about items when making listing on repositories"
 msgstr "저장소 목록을 만들 때 항목에 대한 세부 정보를 가져올지 여부 확인"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:61
-#, fuzzy, kde-format
-#| msgid ""
-#| "<p align=\"left\">When checked, kdesvn get more detailed info about file "
-#| "items when making a listing to remote repositories. So you may see remote "
-#| "locks in overview.\n"
-#| "</p>\n"
-#| "<p align=\"left\"><i>Be careful: This may let listings REAL slow.</i></p>"
+#, kde-format
 msgid ""
 "<p align=\"left\">When checked, kdesvn fetches more detailed info about file "
 "items when making a listing to remote repositories so that you may see "
@@ -2378,27 +2340,19 @@ msgstr "원격 목록 작성 시 파일 세부 정보 가져오기"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_info_recursive)
 #: src/settings/subversion_settings.ui:74
-#, fuzzy, kde-format
-#| msgid "Get item information recursively"
+#, kde-format
 msgid "Get item info recursively"
 msgstr "재귀적으로 항목 정보 얻기"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:84
-#, fuzzy, kde-format
-#| msgid "Should kdesvn retrieves properties on selected item in repositories"
+#, kde-format
 msgid "Should kdesvn retrieve properties on selected item in repositories"
-msgstr "kdesvn이 저장소에서 선택한 항목의 속성을 검색해야 합니다."
+msgstr "kdesvn이 저장소에서 선택한 항목의 속성을 검색할지 여부입니다"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:88
-#, fuzzy, kde-format
-#| msgid ""
-#| "When browsing kdesvn may try displaying properties below itemlist from a "
-#| "selected item. \n"
-#| "On networked repositories (e.g., not opened via file:// protocol) this "
-#| "may get real slow. So if you have slow network connections or when "
-#| "browsing hangs often you should deactivate it."
+#, kde-format
 msgid ""
 "When browsing, kdesvn may try displaying properties below itemlist from a "
 "selected item. \n"
@@ -2420,8 +2374,7 @@ msgstr "항상 네트워크에 있는 저장소에서 속성 가져오기"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:101
-#, fuzzy, kde-format
-#| msgid "Should Subversion store passwords in default"
+#, kde-format
 msgid "Should Subversion store passwords by default"
 msgstr "Subversion에 암호를 저장할지 여부"
 
@@ -2510,8 +2463,7 @@ msgstr "다음 커밋 시 보낼 항목 목록 표시"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:184
-#, fuzzy, kde-format
-#| msgid "Should unversioned items displayed in commit dialog or not."
+#, kde-format
 msgid "Should unversioned items be displayed in commit dialog or not."
 msgstr ""
 "리비전 관리에 포함되지 않은 항목을 커밋 대화 상자에 표시할지 여부입니다."
@@ -2536,8 +2488,7 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_add_as_modification)
 #: src/settings/subversion_settings.ui:200
-#, fuzzy, kde-format
-#| msgid "Update modifies instead of conflicts"
+#, kde-format
 msgid "Update modifies instead of creating conflicts"
 msgstr "업데이트는 충돌 대신 수정"
 

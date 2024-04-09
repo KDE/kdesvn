@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Andrej Mernik <andrejm@ubuntu.si>, 2016, 2017, 2018.
-# SPDX-FileCopyrightText: 2020, 2022, 2023 Matjaž Jeran <matjaz.jeran@amis.net>
+# SPDX-FileCopyrightText: 2020, 2022, 2023, 2024 Matjaž Jeran <matjaz.jeran@amis.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-29 00:42+0000\n"
-"PO-Revision-Date: 2023-12-29 19:21+0100\n"
+"PO-Revision-Date: 2024-04-08 07:26+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -73,12 +73,12 @@ msgstr "Izvozi..."
 #: src/fileitemactions/kdesvnactionsplugin.cpp:57
 #, kde-format
 msgid "Update (Kdesvn)"
-msgstr "Posodobi (Kdesvn)"
+msgstr "Posodobi (svn up)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:60
 #, kde-format
 msgid "Commit (Kdesvn)"
-msgstr "Uveljavi (Kdesvn)"
+msgstr "Uveljavi (svn co)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:63
 #, kde-format
@@ -170,7 +170,7 @@ msgstr "Subversion (Kdesvn)"
 #: src/kdesvn.cpp:79
 #, kde-format
 msgid "&Bookmarks"
-msgstr "&Zaznamki"
+msgstr "Zaznamki"
 
 #: src/kdesvn.cpp:102
 #, kde-format
@@ -475,7 +475,7 @@ msgstr "Predpomnilnik dnevnikov"
 #: src/kdesvn_part.rc:98 src/kdesvnui.rc:52
 #, kde-format
 msgid "&Help"
-msgstr "&Pomoč"
+msgstr "Pomoč"
 
 #. i18n: ectx: Menu (local_context_single_conflicted)
 #. i18n: ectx: Menu (local_context_single_versioned)
@@ -529,7 +529,7 @@ msgstr "bajtov"
 #: src/kdesvnui.rc:4
 #, kde-format
 msgid "&File"
-msgstr "&Datoteka"
+msgstr "Datoteka"
 
 #. i18n: ectx: Menu (subversion_admin)
 #: src/kdesvnui.rc:10

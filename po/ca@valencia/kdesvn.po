@@ -213,7 +213,7 @@ msgstr "Treballa en línia"
 #: src/kdesvn_part.cpp:183
 #, kde-format
 msgid "Configure Kdesvn..."
-msgstr "Configura Kdesvn..."
+msgstr "Configura Kdesvn…"
 
 #: src/kdesvn_part.cpp:187
 #, kde-format
@@ -859,13 +859,13 @@ msgstr "O inseriu un dels últims:"
 #: src/ksvnwidgets/commitmessage.ui:215
 #, kde-format
 msgid "Insert Text File..."
-msgstr "Inserix un fitxer de text..."
+msgstr "Inserix un fitxer de text…"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_keepLocksButton)
 #: src/ksvnwidgets/commitmessage.ui:226
 #, kde-format
 msgid "If checked commit will not release locks."
-msgstr "Si se selecciona, la comissió no amprarà els blocatges."
+msgstr "Si està marcada, la comissió no amprarà els blocatges."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_keepLocksButton)
 #: src/ksvnwidgets/commitmessage.ui:229
@@ -1294,7 +1294,7 @@ msgstr "Cap mínim"
 #, kde-format
 msgid "If set, kdesvn will not show a menu inside \"Action\" menu of Konqueror"
 msgstr ""
-"Si se selecciona, Kdesvn no mostrarà un submenú dins del menú «Accions» de "
+"Si està marcada, Kdesvn no mostrarà un submenú dins del menú «Accions» de "
 "Konqueror"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_contextmenu)
@@ -1310,7 +1310,7 @@ msgid ""
 "If set, kdesvn will not show some extra actions inside \"Action\" menu of "
 "Konqueror/Dolphin"
 msgstr ""
-"Si se selecciona, Kdesvn no mostrarà accions addicionals dins del menú "
+"Si està marcada, Kdesvn no mostrarà accions addicionals dins del menú "
 "«Accions» de Konqueror o Dolphin"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
@@ -1429,7 +1429,7 @@ msgid ""
 "checked use internal display."
 msgstr ""
 "Si Kdesvn ha d'utilitzar un visor i/o generador extern per a les "
-"diferències. Si no se selecciona, s'utilitzarà el visor intern."
+"diferències. Si no està marcada, s'utilitzarà el visor intern."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_external_diff)
 #: src/settings/diffmergesettings.ui:42
@@ -1726,8 +1726,8 @@ msgid ""
 msgstr ""
 "<p align=\"left\">\n"
 "Marca els elements amb un estat no normal superposant una icona.\n"
-"Quan es volen veure quins elements són nous en el repositori s'ha de "
-"seleccionar «Comprova actualitzacions en obrir» en el diàleg de Subversion.\n"
+"Quan es volen veure quins elements són nous en el repositori s'ha de marcar "
+"«Comprova actualitzacions en obrir» en el diàleg de Subversion.\n"
 "</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_overlays)
@@ -2275,9 +2275,9 @@ msgid ""
 "</p>\n"
 "<p align=\"left\"><i>Be careful: This may let listings REAL slow.</i></p>"
 msgstr ""
-"<p align=\"left\">Quan se selecciona, Kdesvn obtindrà informació més "
-"detallada sobre els elements en realitzar un llistat sobre repositoris "
-"remots. Així es poden veure els blocats remots en el resum.\n"
+"<p align=\"left\">Quan es marca, Kdesvn obté informació més detallada sobre "
+"els elements en realitzar un llistat sobre repositoris remots. Així es poden "
+"veure els blocats remots en el resum.\n"
 "</p>\n"
 "<p align=\"left\"><i>Precaució: Açò pot tornar el llistat MOLT lent.</i></p>"
 
@@ -4070,7 +4070,7 @@ msgstr "Mostra el contingut dels fitxers o els URL especificats."
 #: src/svnfrontend/maintreewidget.cpp:540
 #, kde-format
 msgid "Cat revision..."
-msgstr "Cat revisió..."
+msgstr "Cat revisió…"
 
 #: src/svnfrontend/maintreewidget.cpp:541
 #, kde-format
@@ -4271,7 +4271,7 @@ msgstr "Actualitza"
 #: src/svnfrontend/maintreewidget.cpp:605
 #, kde-format
 msgid "Update to revision..."
-msgstr "Actualitza a la revisió..."
+msgstr "Actualitza a la revisió…"
 
 #: src/svnfrontend/maintreewidget.cpp:606
 #: src/svnfrontend/maintreewidget.cpp:607
@@ -4340,7 +4340,7 @@ msgstr "Fusiona dues revisions d'esta entrada en si mateixa"
 #: src/svnfrontend/maintreewidget.cpp:632
 #, kde-format
 msgid "Merge..."
-msgstr "Fusiona..."
+msgstr "Fusiona…"
 
 #: src/svnfrontend/maintreewidget.cpp:633
 #, kde-format
@@ -4356,7 +4356,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:1220
 #, kde-format
 msgid "Open With..."
-msgstr "Obri amb..."
+msgstr "Obri amb…"
 
 #: src/svnfrontend/maintreewidget.cpp:638
 #, kde-format
@@ -4606,7 +4606,7 @@ msgstr "Feu clic per a navegar"
 #: src/svnfrontend/maintreewidget.cpp:2228
 #, kde-format
 msgid "Navigation"
-msgstr "Navegació"
+msgstr "Navegueu"
 
 #: src/svnfrontend/maintreewidget.cpp:2349
 #, kde-format
@@ -4742,8 +4742,8 @@ msgid ""
 "If checked, allow merge into mixed revision working copy, otherwise raises "
 "error in that case"
 msgstr ""
-"Si se selecciona, permetrà fusionar dins d'una revisió de la còpia de "
-"treball barrejada, en cas contrari augmentarà els errors"
+"Si està marcada, permetrà fusionar dins d'una revisió de la còpia de treball "
+"barrejada, en cas contrari augmentarà els errors"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_AllowMixedRev)
 #: src/svnfrontend/merge_dlg.ui:179
@@ -4806,7 +4806,7 @@ msgstr "Blocat per"
 #: src/svnfrontend/opencontextmenu.cpp:60
 #, kde-format
 msgid "Other..."
-msgstr "Altra..."
+msgstr "Altra…"
 
 #: src/svnfrontend/propertiesdlg.cpp:89
 #, kde-format
@@ -5007,7 +5007,7 @@ msgstr "Suma"
 #: src/svnfrontend/svnactions.cpp:783
 #, kde-format
 msgid "Deletion"
-msgstr "Supressió"
+msgstr "Suprimiu"
 
 #: src/svnfrontend/svnactions.cpp:793
 #, kde-format

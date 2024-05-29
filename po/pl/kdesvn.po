@@ -17,7 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 23.08.4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1070,7 +1069,7 @@ msgstr "Najbliższa głębokość"
 #: src/ksvnwidgets/depthselector.ui:60
 #, kde-format
 msgid "Infinity Depth (recurse)"
-msgstr "Nieskończona głębokość (wgłąb)"
+msgstr "Nieskończona głębokość (rekursywnie)"
 
 #: src/ksvnwidgets/diffbrowser.cpp:51
 #, kde-format
@@ -1228,7 +1227,7 @@ msgstr "Dziedzina"
 #: src/ksvnwidgets/ssltrustprompt.cpp:80
 #, kde-format
 msgid "Host"
-msgstr "Host"
+msgstr "Gospodarz"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:81
 #, kde-format
@@ -1923,7 +1922,7 @@ msgstr "Wyświetl nakładające ikony"
 #: src/settings/kdesvn_part.kcfg:72
 #, kde-format
 msgid "Get item information recursively"
-msgstr "Pobierz szczegóły o rzeczy wgłąb"
+msgstr "Pobierz informacje o elemencie rekursywnie"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_review_commit)
@@ -2783,7 +2782,7 @@ msgstr ""
 #: src/svnfrontend/ccontextlistener.cpp:338
 #, kde-format
 msgid "The certificate hostname does not match."
-msgstr "Nazwa hosta certyfikatu nie pasuje."
+msgstr "Nazwa gospodarza certyfikatu nie pasuje."
 
 #: src/svnfrontend/ccontextlistener.cpp:341
 #, kde-format
@@ -4267,7 +4266,7 @@ msgstr "Dodawanie wybranych plików/katalogów do repozytorium"
 #: src/svnfrontend/maintreewidget.cpp:696
 #, kde-format
 msgid "Add selected files/dirs recursive"
-msgstr "Dodaj zaznaczone pliki/katalogi wgłąb"
+msgstr "Dodaj wybrane pliki/katalogi rekursywnie"
 
 #: src/svnfrontend/maintreewidget.cpp:701
 #, kde-format
@@ -4461,7 +4460,7 @@ msgstr "Wyeksportuj repozytorium"
 #: src/svnfrontend/maintreewidget.cpp:862
 #, kde-format
 msgid "Export"
-msgstr "Wyeksportuj"
+msgstr "Eksportuj"
 
 #: src/svnfrontend/maintreewidget.cpp:864
 #, kde-format
@@ -4515,7 +4514,7 @@ msgstr "Uaktualnij pamięć dziennika dla bieżącego repozytorium"
 #: src/svnfrontend/maintreewidget.cpp:900
 #, kde-format
 msgid "Set property recursive"
-msgstr "Ustaw właściwość wgłąb"
+msgstr "Ustaw właściwość rekursywnie"
 
 #: src/svnfrontend/maintreewidget.cpp:903
 #, kde-format
@@ -4701,7 +4700,7 @@ msgstr "Jeszcze niezaimplementowane"
 #: src/svnfrontend/maintreewidget.cpp:2634
 #, kde-format
 msgid "Edit property recursively"
-msgstr "Edytuj właściwość wgłąb"
+msgstr "Edytuj właściwość rekursywnie"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, MergeDlg)
 #: src/svnfrontend/merge_dlg.ui:14
@@ -5327,7 +5326,7 @@ msgstr "Pobieranie wersji wyjściowej pliku?"
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
-msgstr "Wyeksportuj"
+msgstr "Eksportuj"
 
 #: src/svnfrontend/svnactions.cpp:1789
 #, kde-format
@@ -5436,7 +5435,7 @@ msgstr "Nie można uruchomić procesu rozwiązywania, sprawdź polecenie."
 #, kde-format
 msgctxt "@title:window"
 msgid "Import"
-msgstr "Zaimportuj"
+msgstr "Importuj"
 
 #: src/svnfrontend/svnactions.cpp:2062
 #, kde-format

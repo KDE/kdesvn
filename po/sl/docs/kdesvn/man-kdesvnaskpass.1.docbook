@@ -1,0 +1,107 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Slovenian "INCLUDE">
+]>
+
+<refentry lang="&language;" id='kdesvnaskpass1'>
+
+<refentryinfo>
+<title
+>Uporabniški priročnik kdesvnaskpass</title>
+<author
+><personname
+> <firstname
+>Rajko</firstname
+> <surname
+>Albrecht</surname
+> </personname
+> <email
+>ral@alwins-world.de</email
+></author>
+<date
+>22.05.2016</date>
+<releaseinfo
+>kdesvn 2.1.0</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kdesvnaskpass</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kdesvnaskpass</command
+></refname>
+<refpurpose
+>ssh-askpass for kdesvn</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id='synopsis'>
+<cmdsynopsis
+><command
+>kdesvnaskpass</command
+> <arg choice="opt"
+><replaceable
+>prompt</replaceable
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1 id='description'
+><title
+>Opis</title>
+<para
+>ssh-askpass for kdesvn</para>
+</refsect1>
+
+<refsect1 id='options'
+><title
+>Možnosti</title>
+
+<refsect2 id='ss_arguments'
+><title
+>Argumenti:</title>
+<variablelist>
+  <varlistentry>
+  <term
+><emphasis
+>prompt</emphasis
+></term>
+  <listitem>
+<para
+>Poziv, ki se prikaže uporabniku.</para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</refsect2>
+
+</refsect1>
+
+<refsect1 id='see_also'
+><title
+>Poglejte tudi</title>
+<simplelist>
+<member
+>Celotna uporabniška dokumentacija je na voljo v &khelpcenter;. Vnesete lahko tudi &URL; <emphasis
+>help:/kdesvn</emphasis
+> neposredno v &konqueror; lahko pa zaženete <emphasis
+>`khelpcenter help:/kdesvn'</emphasis
+> iz ukazne vrstice.</member>
+</simplelist>
+</refsect1>
+
+<refsect1 id='authors'
+><title
+>Avtorji</title>
+<literallayout
+>Rajko Albrecht &lt;ral@alwins-world.de&gt;
+</literallayout
+></refsect1>
+</refentry>
+

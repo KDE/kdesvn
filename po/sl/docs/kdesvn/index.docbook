@@ -1,0 +1,3505 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kdesvn "<application
+>kdesvn</application
+>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY Rajko.Albrecht '<personname
+><firstname
+>Rajko</firstname
+><surname
+>Albrecht</surname
+></personname
+>'>
+  <!ENTITY Rajko.Albrecht.mail '<email
+>ral@alwins-world.de</email
+>'>
+  <!ENTITY % Slovenian "INCLUDE"
+><!-- change language only here -->
+]>
+
+<book lang="&language;">
+
+<bookinfo>
+<title
+>&kdesvn; Priročnik</title>
+
+<authorgroup>
+<author
+><firstname
+>Rajko</firstname
+> <surname
+>Albrecht</surname
+> <affiliation
+> <address
+>&Rajko.Albrecht.mail;</address>
+</affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>Matjaž</firstname
+><surname
+>Jeran</surname
+><affiliation
+><address
+><email
+>matjaz.jeran@amis.net</email
+></address
+></affiliation
+><contrib
+>Prevod</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2005</year>
+<year
+>2008</year>
+<holder
+>&Rajko.Albrecht;</holder>
+</copyright>
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>22.05.2016</date>
+<releaseinfo
+>kdesvn 2.0</releaseinfo>
+
+<abstract>
+<para
+>&kdesvn; - subverzivni odjemalec &kde;. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdesvn</keyword>
+<keyword
+>subversion</keyword>
+<keyword
+>sistem za nadzor različic</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Uvod</title>
+
+<para
+>&kdesvn; je <ulink url="http://subversion.apache.org/"
+>odjemalec za subversion</ulink
+> &kde;. </para>
+<para
+>Morali bi imeti nekaj znanja o samem programu subversion, vendar upajmo, da je večina elementov razumljivih. </para>
+<para
+>Poročila o napakah in želje po funkcijah lahko pošljete prek <ulink url="https://bugs.kde.org/"
+>&kde; Sistem za sledenje napakam</ulink
+>. </para>
+
+<sect1 id="kdesvn-terms">
+<title
+>Pogoji</title>
+<para
+>Če ste seznanjeni s sistemi za nadzor revizij, lahko to preskočite - ali preberete in popravite avtorja ;) </para>
+<para>
+<variablelist>
+<varlistentry>
+<term
+>Repozitorij</term>
+<listitem
+><para
+>Centralna shramba podatkov. To je lahko baza podatkov ali ploski datotečni sistem. Brez posebnih odjemalcev ne morete brati podatkov v njem. Za repozitorije Subversion &kdesvn; je taka stranka. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Delovna kopija</term>
+<listitem
+><para
+>Ravna kopija repozitorija v lokalnem datotečnem sistemu. To se uporablja kot vsak običajni upravljalnik datotek, urejanje datotek in tako naprej. RCS-informacije, ki jih lahko preberete z odjemalci, kot je &kdesvn;. </para>
+<para
+>Ne pozabite, da subversion ne ve ničesar o KIO, zato mora biti delovna kopija na območju, kamor lahko doseže brez posebnega protokola, &eg; <quote
+>fish://</quote
+> ali kaj takega ni mogoče. </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>WebDav</term>
+<listitem
+><para
+>WebDav je protokol, ki vam omogoča spreminjanje datotek na oddaljenem spletnem strežniku. Subversion je posebna vrsta WebDAV, ko se do repozitorijev dostopa prek spletnega strežnika. Pri običajni uporabi je to samo za branje. S posebnimi konfiguracijami lahko dobite WebDAV z omogočenim branjem in pisanjem, do katerega lahko dostopate prek specializiranega brskalnika. &kdesvn; NI odjemalec webdav, ampak &konqueror; je prek protokola <quote
+>webdav://</quote
+>. Toda z &kdesvn; lahko brskate po drevesu različic repozitorija (prek <quote
+>http://</quote
+>) </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect1>
+</chapter>
+
+<chapter id="using-kdesvn">
+<title
+>Uporaba &kdesvn;</title>
+<sect1 id="kdesvn-features">
+<title
+>&kdesvn; Lastnosti</title>
+<para
+>&kdesvn; razume naslednje protokole za brskanje po repozitorijih: <variablelist>
+
+<varlistentry>
+<term
+>http</term>
+<listitem
+><para
+>Standardni protokol spletnega brskalnika. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>https</term>
+<listitem
+><para
+>Standardni šifrirani protokol spletnega brskalnika. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+http</term>
+<listitem
+><para
+>Standardni protokol spletnega brskalnika. Lahko se uporablja za dovolitev &konqueror; samodejni klic &kdesvn;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+https</term>
+<listitem
+><para
+>Standardni šifrirani protokol spletnega brskalnika. Lahko se uporablja za dovolitev &konqueror; samodejni klic &kdesvn;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+datoteka</term>
+<listitem
+><para
+>Protokol lokalnega repozitorija. Lahko se uporablja za dovolitev &konqueror; samodejni klic &kdesvn;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn</term>
+<listitem
+><para
+>Lastni protokol strežnika Subversion. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+ssh</term>
+<listitem
+><para
+>Subversion nad ssh. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>mapa</term>
+<listitem
+><para
+>Neposreden dostop do repozitorija. &kdesvn; preveri, ali je podana pot repozitorij ali delovna kopija, in jo odpre v pravem načinu. Za subversion  <filename class="directory"
+>file:///dir</filename
+> in <filename class="directory"
+>/dir</filename
+> nista enaka! </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+<para
+>Ta seznam se lahko uporablja tudi za &URL;, podane za <link linkend="kdesvn-commandline"
+>ukazno vrstico</link
+>. </para>
+</sect1>
+<sect1 id="first_steps">
+<title
+>Začenši s subversion in &kdesvn;</title>
+<para
+>Ta razdelek je večinoma namenjen začetnikom, ki niso seznanjeni s programom subversion, in pojasnjuje, kako delujejo subversion oz. sistemi za nadzor različic (<acronym
+>RCS</acronym
+>). </para>
+
+<sect2>
+<title
+>Ustvarjanje delovne kopije</title>
+<caution>
+<para
+>Delovne kopije MORAJO biti dostopne po lokalnih poteh. Subversion ne ve ničesar o psevdo datotečnih sistemih, kot sta <filename class="directory"
+>smb://</filename
+> ali <filename class="directory"
+>fish://</filename
+>. &kdesvn; prevede nekatere od njih, če je mogoče (na primer <filename class="directory"
+>system:/home</filename
+>), vendar to ni mogoče prek omrežja. </para>
+</caution>
+<para
+>Najprej morate ustvariti delovno kopijo vašega repozitorija. Za to izberite <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guimenuitem
+>Preveri repozitorij</guimenuitem
+> </menuchoice
+>. V naslednjem pogovornem oknu morate izbrati &URL; repozitorija, ki ga želite uporabiti, &eg; nekaj takega kot <literal
+>http://localhost/repos/myproject</literal
+>. Možne so tudi podmape repozitorija, npr. <literal
+>http://localhost/repos/myproject/trunk</literal
+> ali podobno. </para>
+<para
+>Izberite in/ali ustvarite lokalno mapo, kjer naj bo delovna kopija. </para>
+<para
+>Nenazadnje, revizija blagajne. Večinoma bi to moralo biti <quote
+>GLAVA</quote
+>. To zagotavlja, da je zadnja shranjena različica navedena različica. </para>
+<para
+>Po kliku na <guibutton
+>V redu</guibutton
+> &kdesvn; bo ustvaril vašo novo delovno kopijo in (če je bilo polje označeno) jo odpre. </para>
+<para
+>Ko ste odprli repozitorij za brskanje, lahko označite mapo in nato izberete <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Repozitorij</guisubmenu
+> <guimenuitem
+>Preveri trenutno pot repozitorija</guimenuitem
+> </menuchoice
+> in izpolnite pogovorna okna, kot je opisano zgoraj. Nato bo odjavljena le označena pot. </para>
+</sect2>
+<sect2>
+<title
+>Izvajanje lokalnih sprememb</title>
+<para
+>Označite vnos ali vnose, ki jih želite poslati, in izberite <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>#</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Subversion</guimenu 
+> <guisubmenu
+>Delovna kopija</guisubmenu
+> <guimenuitem
+>Potrdi</guimenuitem
+> </menuchoice
+> </para>
+<para
+>Če poskusite potrditi, če ni izbran noben element, &kdesvn; uporablja najvišji element odprte delovne kopije, &ie; samo pot delovne kopije. </para>
+<para
+>Ta operacija je vedno rekurzivna, kar pomeni, da če izberete mapo &kdesvn; vedno pošljite vse spremenjene elemente pod njim. Ko nastavite, da želite pregledati vse elemente pred objavo v naslednjem pogovornem oknu, vsi elementi &kdesvn; bi poslali so navedeni. Tam lahko odznačite predmete, ki jih ne želite poslati. V tem primeru &kdesvn; pošlje vse elemente sam, &ie; ne rekurzivno. Lahko pa izberete elemente brez različic za dodajanje in objavo (če niso označeni za prezrtje). Tako boste morda videli, ali obstajajo novejši predmeti, ki ste jih pozabili. </para>
+<para
+>Vnesite dnevniško sporočilo, kaj pošiljate in pritisnite <guibutton
+>V redu</guibutton
+> in prenos se začne. </para>
+</sect2>
+<sect2>
+<title
+>Posodobi delovno kopijo</title>
+<para
+>To vam prinese lokalno delovno kopijo v sinhronizacijo z repozitorijem. Lahko nastavite, da &kdesvn; preverja odpiranje delovne kopije za novejše/spremenjene elemente v repozitoriju. To deluje v ozadju in medtem lahko delate z &kdesvn;. Ko je to končano, so označeni elementi z novejšimi različicami ali mape z elementi, kjer so spodaj novejši elementi. </para>
+<para
+>Če želite pridobiti spremembe, izberite <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Delovna kopija</guisubmenu
+> <guimenuitem
+>Posodobitev na glavo</guimenuitem
+> </menuchoice
+>. To bo posodobilo na najnovejšo različico. Če želite pridobiti določeno revizijo, izberite <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Delovna kopija</guisubmenu
+> <guimenuitem
+>Posodobitev na revizijo</guimenuitem
+> </menuchoice
+> in izberite revizijo, ki jo želite v naslednje polje. </para>
+<para
+>Če ni izbrana nobena postavka, bo posodobitev izvedena na celotni odprti delovni kopiji, drugače pa le rekurzivno na izbranih postavkah. </para>
+</sect2>
+<sect2>
+<title
+>Dodajanje in brisanje iz delovne kopije</title>
+<para
+>Obe operaciji zahtevata dva koraka: najprej dodajanje ali brisanje in nato objavo teh sprememb v repozitorij. Preden potrdite, lahko razveljavite dodajanje ali brisanje. </para>
+<sect3>
+<title
+>Dodajte elemente</title>
+<para
+>Dodajanje elementov v delovno kopijo je mogoče na tri načine: <variablelist>
+<varlistentry>
+<term
+>Izberite elemente brez različic in jih dodajte</term>
+<listitem
+><para
+>Kopiraj s &konqueror; ali katero koli drugo orodje v območje delovne kopije. Pojdite skozi seznam, jih označite in izberite <menuchoice
+> <shortcut
+><keycombo action="simul"
+><keycap
+>Vstavi</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Deluje kopiraj</guisubmenu
+> <guimenuitem
+>Dodaj izbrane datoteke/imenike</guimenuitem
+> </menuchoice
+>. Ko želite dodati nove mape z vsemi podpostavkami, izberite <menuchoice
+> <shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Vstavi</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Delovna kopija</guisubmenu
+> <guimenuitem
+>Rekurzivno dodaj izbrane datoteke/imenike</guimenuitem
+> </menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Preverite in dodajte rekurzivno</term>
+<listitem
+><para
+>Lahko preverite, ali so kje v delovni kopiji elementi brez različic. Po izbiri <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Delovna kopija</guisubmenu
+> <guimenuitem
+>Preveri elemente brez različic</guimenuitem
+> </menuchoice
+> se prikaže pogovorno okno, kjer so navedeni vsi elementi brez različic. Če pritisnete <guibutton
+>V redu</guibutton
+>, dodate vse označene elemente v delovno kopijo, elemente, za katere ne želite, da imajo različico, morate prej odznačiti. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Povleci in spusti</term>
+<listitem
+><para
+>Označi v &konqueror;ju ali katere koli druge združljive elemente brskalnika datotek, ki jih želite dodati, in jih povlecite v &kdesvn;. Lahko jih spustite v mape znotraj odprte delovne kopije in nato &kdesvn; vanjo kopirajte izpuščene predmete in jih dodajte. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para
+></sect3>
+<sect3>
+<title
+>Brisanje elementov iz delovne kopije in razveljavitev različice</title>
+<para
+>Brisanje elementov je vedno rekurzivno. Na primer, ko izbrišete mapo, bodo izbrisani tudi vsi podpostavki. Označite, kar želite, in izberite menijsko postavko <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guimenuitem
+>Izbriši izbrane datoteke/imenike</guimenuitem
+> </menuchoice
+>. Elementi bodo brez različic in odstranjeni z diska. </para>
+</sect3>
+</sect2>
+
+<sect2 id="logdisplay">
+<title
+>Prikaz dnevnikov</title>
+<para
+>Prikaz dnevnika se lahko začne s <keycombo action="simul"
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+>, ko je v pregledu označen en ali noben element. Odvisno od vaših nastavitev (glejte <xref linkend="subversion-settings" xreflabel="settings"/>) &kdesvn; pridobi nekaj dnevniških vnosov, ki se začnejo na <quote
+>HEAD</quote
+>, in jih prikaže. </para>
+<sect3  id="logdisplay-dlg">
+<title
+>Pogovorno okno za prikaz dnevnika</title>
+<para
+>Na levi strani vidite seznam vnosov v dnevnik, ki jih je pridobil &kdesvn;. Dnevniško sporočilo je skrajšano na eno vrstico, da se prilega. Ob označevanju vnosa se v zgornjem desnem oknu prikaže celotno sporočilo dnevnika. V spodnjem desnem oknu boste videli seznam spremenjenih datotek. Ta okna se prikažejo <emphasis
+>samo</emphasis
+>, če je ta seznam pridobljen, odvisno od vaših nastavitev. </para>
+<para
+>Z gumbi na vrhu lahko izberete drug obseg dnevnikov za prikaz. <important
+><para
+>Ta obseg se kliče brez predhodne omejitve, zato bodite previdni pri uporabi te funkcije v velikih repozitorijih.</para
+></important>
+
+</para>
+<para
+>Gumbi na dnu pogovornega okna vedno delujejo na elementu, izbranem za dnevnik, ne na elementu, izbranem na seznamu spremenjenih datotek. Torej, ko tam izberete <guibutton
+>Razlik pred prejšnjim</guibutton
+>, naredi razliko med vsemi spremenjenimi postavkami v tej reviziji, če so enakovredne ali pod vnosom v subversion, izbranim prej za pridobivanje dnevnikov. Enako za <guibutton
+>Revizije razlik</guibutton
+>. </para>
+<para
+><guibutton
+>Opomba</guibutton
+> seveda deluje samo, če je element, ki ga želite prijaviti, datoteka. </para>
+<para
+>Na vseh vnosih seznama (oba seznama) imate omogočen kontekstni meni za nekatere dodatne operacije. Na levem seznamu je to <guimenuitem
+>Nastavi različico kot levo stran diff</guimenuitem
+> (&ie; začetna revizija) in <guimenuitem
+>Nastavi različico kot desno stran diff</guimenuitem
+> (&ie; konec ali cilj diff, v poenotil del, označen z <computeroutput
+>+++</computeroutput
+>). Če ste izbrali te revizije, so označene z majhnimi puščicami. </para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="working-with-repositories">
+<title
+>Delo na repozitorijih</title>
+<para
+>Preprosto brskanje po repozitoriju lahko opravite v &konqueror;, &dolphin; ali podobni brskalniki datotek: odprite URL s protokolom, opisanim v <xref linkend="kdesvn-features" xreflabel="Features"/> (različice, ki se začnejo z <quote
+>k</quote
+>), in prikazali bodo vsebino. Tako lahko delujejo preproste operacije, kot so kopiranje, premikanje in brisanje. Pri dodajanju poizvedbe <quote
+>?rev=<replaceable
+>xxx</replaceable
+></quote
+> seznam izvira iz določene revizije. Format revizijske poizvedbe je opisan v <xref linkend="revision-syntax"/>, nekaj več informacij o KIO::ksvn je v <xref linkend="kdesvn-kio"/> </para>
+<para
+>Vsa dela, razen <guimenuitem
+>Kopiraj</guimenuitem
+>, se lahko izvajajo samo med brskanjem na reviziji HEAD. </para>
+<sect2>
+<title
+>Obnavljanje izbrisanih predmetov</title>
+<para
+>Pri programu subversion je obnavljanje izbrisanih elementov operacija kopiranja elementa pri določeni reviziji. Ko torej načrtujete obnovitev repozitorija pogleda pri reviziji, preden je bil element izbrisan. Izberite <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Repozitorij</guisubmenu
+> <guimenuitem
+>Izberite prebrskaj revizijo</guimenuitem
+> </menuchoice
+> in vnesite želeno revizijo. Zdaj &kdesvn; prikaže vsebino tega izraza. Označite vnos, ki ga želite obnoviti, izberite <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guimenuitem
+>Kopiraj</guimenuitem
+> </menuchoice
+>. Znotraj naslednjega pogovornega okna je cilj vedno na GLAVNI reviziji, vir je na reviziji, ki ste jo izbrali za brskanje. Vnesite pot in kliknite <guibutton
+>V redu</guibutton
+> in kopiranje se začne. Po uspešnem kopiranju preklopite brskanje nazaj na GLAVNO revizijo in obnovljeni element bi se moral prikazati. </para>
+</sect2>
+<sect2>
+<title
+>Uvažanje map</title>
+<para
+>Zaradi omejitev samega programa subversion se lahko uvozijo samo mape, ne posamezne datoteke. </para>
+<sect3>
+<title
+>Z povleci in spusti</title>
+<para
+>V katerem koli združljivem upravitelju datotek označite mapo, ki jo želite uvoziti, in jo povlecite na vnos mape v &kdesvn; kamor ga želite uvoziti. </para>
+</sect3>
+<sect3>
+<title
+>Izberite mapo za uvoz z brskalnikom imenikov</title>
+<para
+>Označite mapo, v katero želite uvoziti novo mapo. Nato izberite <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guimenuitem
+>Uvozi mape v trenutno</guimenuitem
+> </menuchoice
+> in izberite želeno mapo. </para>
+</sect3>
+</sect2>
+</sect1>
+<sect1 id="operations">
+<title
+>Druge operacije</title>
+<sect2 id="merging-items">
+<title
+>Spoji</title>
+<para
+>Odprite repozitorij ali delovno kopijo, označite element, ki ga želite združiti, in izberite <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guisubmenu
+>Združi</guisubmenu
+> </menuchoice
+>. V naslednje pogovorno okno vnesite želene vrednosti. Če se odpre iz repozitorija, se izvor 1 in izvor 2 zapolnita, ko se odpre znotraj delovne kopije, se cilj zapolni s trenutno izbrano postavko. Ravnanje s tem parametrom je nekoliko drugačno pri uporabi notranje diff subversion ali zunanjega programa za spajanje, kot je &kdiff3;. Cilj mora biti VEDNO lokalna mapa ali datoteka. Med zunanjim in notranjim spajanjem lahko preklapljate s potrditvenim poljem <guilabel
+>Uporabi zunanje spajanje</guilabel
+>. </para>
+<sect3>
+<title
+>Notranje spajanje</title>
+<para
+>Pomen je natanko tak kot znotraj lastnega orodja ukazne vrstice subversion. Ko sta vir1 in vir2 enaka, se morata začetna in končna revizija razlikovati. Če viri niso enaki, je začetna revizija dodeljena viru1, končna revizija pa viru2. Cilj MORA biti delovna kopija, sicer bo program subversion poslal sporočilo o napaki. </para>
+<para
+>Potrditvena polja imajo naslednje pomene: <variablelist>
+
+<varlistentry>
+<term
+>Rekurzivno</term>
+<listitem
+><para
+>Pri delu z mapami izvajajte vse operacije rekurzivno. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Nepovezane obravnavajte kot povezane elemente</term>
+<listitem
+><para
+>Če je nastavljeno, se bodo nepovezani elementi razlikovali, kot da bi bili povezani. V nasprotnem primeru bo subversion odstranil eno stran in jo znova dodal na drugo stran. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Vsili brisanje spremenjenih elementov/nerazličic</term>
+<listitem
+><para
+>Če ni nastavljeno in bi spajanje zahtevalo brisanje spremenjene postavke ali postavke brez različic, spajanje v subversion ne uspe. V nasprotnem primeru bodo ti elementi izbrisani. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Samo suhi tek brez sprememb</term>
+<listitem
+><para
+>Če je nastavljeno, subversion pošilja le obvestila, kaj bi storila, vendar ne spreminja delovne kopije. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+</sect3>
+<sect3>
+<title
+>Uporaba zunanjega programa za spajanje</title>
+<para
+>Glejte <xref linkend="diffmerge-settings"/> za podrobnosti o nastavitvi zunanjega orodja za spajanje. &kdesvn; ustvari ukazno vrstico, kot je tam opisano. Preden naredi naslednje: </para>
+<para>
+<orderedlist>
+
+<listitem
+><para
+>Dodeli začetno revizijo kot revizijo viru 1 in končno revizijo viru 2. Nato preveri, ali sta različna (pot in/ali revizija). Če je odgovor pritrdilen, gre za trosmerno spajanje, drugače pa preprosto spajanje od vira do cilja. Če vir 2 pustimo prazen, gre tudi za preprosto spajanje. </para
+></listitem>
+
+<listitem
+><para
+>Izvozite v začasno mapo. Če gre za preprosto spajanje samo vira 1 na začetni reviziji, drugače pa oba vira s svojimi revizijami. Če je element datoteka in ne mapa, dobite vsebino pri določeni reviziji. </para
+></listitem>
+
+<listitem>
+<para
+>Generirajte klic svojemu zunanjemu programu združevanja, ko nastavite v <link linkend="diffmerge-settings"
+>Nastavitve</link
+>. Izhod napake bo prikazan v oknu dnevnika, da boste lahko videli, kaj gre narobe (če je šlo kaj narobe). </para>
+</listitem>
+</orderedlist
+>Za razliko od cilja notranjega združevanja lahko ravna mapa/datoteka ni pod nadzorom različic, ker zunanja orodja za to ne skrbijo. </para>
+<para
+>Če rekurzivno ni nastavljeno, se izvoz izvede kot ravni izvoz. Bodite previdni: ko to počnete z delovnimi kopijami, zunanje <emphasis
+>ne</emphasis
+> bodo izvožene. </para>
+</sect3>
+</sect2>
+
+<sect2 id="op-resolve">
+<title
+>Reševanje konfliktov</title>
+<para
+>&kdesvn; sam po sebi nima modula za reševanje sporov, vendar lahko uporabite zunanjo programsko opremo znotraj &kdesvn;. V <xref linkend="extern-resolve-setup"/> je opis, kako nastaviti to aplikacijo. </para>
+<para
+>Ko označujete element s statusom, nastavljenim na <quote
+>v sporu</quote
+> (na takšnih elementih boste v pogledu seznama videli rdeč križec), lahko izberete <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Delovna kopija</guisubmenu
+> <guisubmenu
+>Reši spor</guisubmenu
+> </menuchoice
+>. ali znotraj kontekstnega menija <guimenuitem
+>Reši spor</guimenuitem
+> (samo pri elementih v sporu) &kdesvn; zdaj zažene program, ki ste ga nastavili (ali privzetega). Ko končate to opravilo, označite element kot razrešen (<menuchoice
+><guimenu
+>Subversion</guimenu
+><guisubmenu
+>Delovna kopija</guisubmenu
+><guisubmenu
+>Označi razrešeno</guisubmenu
+></menuchoice
+>), sicer ne boste mogli da potrdite svoje spremembe. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="used-properties">
+<title
+>Lastnosti, ki jih uporablja &kdesvn; za konfiguracijo</title>
+<sect2>
+<title
+>Integracija Bugtrackerja</title>
+<para
+><ulink url="http://tortoisesvn.tigris.org/"
+>Projekt TortoiseSVN</ulink
+> je oblikoval lep sistem lastnosti <ulink url="http://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn- dug-bugtracker.html"
+> za integracijo sledilnika napak</ulink
+> v GUI subversion. Trenutna različica &kdesvn; ne podpira dodatnih polj v polju za potrditev (bo sledilo kasneje) in ne razume vseh razen naslednjih lastnosti: </para>
+<para>
+<table id="bugtracker-properties">
+<title
+>Lastnosti integracije Bugtrackerja</title>
+<tgroup cols="3">
+
+<thead>
+<row>
+<entry
+>Lastnina</entry>
+<entry
+>Opis</entry>
+<entry
+>Primer</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><literal
+>bugtraq:url</literal
+></entry>
+<entry
+>Vsebuje &URL; v sledilnik hroščev. Vsebovati mora oznako <literal
+>%BUGID%</literal
+>.</entry>
+<entry
+>https://bugs.kde.org/show_bug.cgi?id=%BUGID%</entry>
+</row>
+
+<row>
+<entry
+><literal
+>bugtraq:logregex</literal
+></entry>
+<entry>
+<para
+>Vsebuje enega ali dva regularna izraza, ločena z novo vrstico.</para>
+<para
+>Če je nastavljen samo en izraz, se morajo goli ID-ji napak ujemati v skupinah niza regularnega izraza. Če sta nastavljena dva izraza, se prvi izraz uporabi za iskanje niza, ki se nanaša na ID hrošča, vendar lahko vsebuje več kot samo ID hrošča (&eg; <quote
+>Težava #123</quote
+> ali <quote
+>odpravlja težavo 123</quote
+>). Drugi izraz se nato uporabi za ekstrahiranje golega ID-ja hrošča iz niza, ekstrahiranega s prvim izrazom.</para>
+<para
+>Pazite na nezaželene presledke za regularnim izrazom in ne pozabite na oklepaje okoli opisa številke.</para>
+</entry>
+<entry>
+<para
+>Eno (uporabno s TRAC): </para>
+<programlisting
+>#(\d+)
+</programlisting>
+<para
+>Zdaj bodo vse številke, kot je <replaceable
+>#190</replaceable
+>, razčlenjene in prevedene v &URL; v izpisu dnevnika. </para>
+<para
+>Dva izraza: </para>
+<programlisting
+>[Ii]težava #?(\d+)(,? ?#(\d+))*
+(\d+)
+</programlisting>
+<important>
+  <title
+>Ne pozabite</title>
+  <para
+>Pazite na bele prostore za <literal
+>(\d+)</literal
+>! To je ena najpogostejših napak, zaradi katere se ti izrazi ne ujemajo! </para>
+</important>
+</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</para>
+<para
+>V lokalnih odprtih repozitorijih (&ie;. protokol <filename class="directory"
+>file://</filename
+>) in na delovnih kopijah bodo te lastnosti iskale navzgor od odprte mape, dokler ne bodo najdene ali dokler ni dosežena najvišja raven programa subversion. V repozitorijih, odprtih prek omrežja (vsi razen protokola <filename class="directory"
+>file://</filename
+>), se išče le v sami odprti mapi. </para>
+<para
+>Podpora za več nizov teh lastnosti lahko sledi pozneje (&eg; v podmapi dodatne vrednosti za druge sledilnike &etc;), vendar bi v večini primerov moralo zadostovati ocenjevanje povezav posameznega sledilnika. </para>
+</sect2>
+</sect1>
+
+<sect1 id="revision-tree">
+<title
+>Revizijsko drevo</title>
+<para
+>Revizijsko drevo poskuša prikazati celotno zgodovino postavke, tako da lahko uporabnik dobi boljši občutek o zgodovini postavke. Pregledati mora celoten dnevnik repozitorija, ker zahteva nekaj informacij, ki jih subversion ne daje (in mislim, da jih ne bo). Ker to povzroči veliko prometa, revizijsko drevo vedno uporablja notranji <link linkend="logcache-descr"
+>predpomnilnik dnevnika</link
+>. </para>
+<sect2>
+<title
+>Zahteve</title>
+<para
+>Revizijsko drevo se ustvari prek <application
+>pike</application
+>. Za delujoče revizijsko drevo mora biti nameščen paket <application
+>graphviz</application
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="logcache-descr">
+<title
+>Notranji predpomnilnik dnevnika</title>
+<para
+>&kdesvn; lahko za nekatere operacije uporablja notranji predpomnilnik dnevnika. Večinoma se uporablja za <link linkend="revision-tree"
+>drevo revizij</link
+>, vendar tudi pri ogledu poenostavljenega dnevnika v načinu brez povezave. Predpomnilniki so organizirani kot zbirke podatkov <application
+>SQLite</application
+>, shranjene v <filename class="directory"
+>$HOME/.sqvnqt/logcache</filename
+>. Vsaka oštevilčena datoteka je shramba za drugi repozitorij. </para>
+<warning>
+  <para
+>Baze podatkov lahko postanejo velike! Zato lahko v nastavitvah onemogočite samodejno posodabljanje predpomnilnika dnevnika. </para>
+</warning>
+<para
+>Bazo podatkov lahko preprosto odstranite, potem za ta repozitorij ne bo vrnjen predpomnjeni dnevnik (in ne drevo revizij!), toda ko ne onemogočite samodejnega polnjenja predpomnilnika ob naslednjem odprtju tega repozitorija ali njegove povezane delovne kopije, bo predpomnilnik ponovno napolniti. </para>
+<sect2>
+<title
+>Način brez povezave</title>
+<para
+>&kdesvn; lahko deluje brez dostopa do omrežja, &ie; lahko izklopite dostop do omrežja za &kdesvn;. To je lahko uporabno pri delu brez omrežja, kot na prenosnikih. V takih primerih &kdesvn; vedno dobi dnevnike iz notranjega predpomnilnika. Ta dnevnik je zaradi tehničnih razlogov zmanjšan na osnovne funkcije, zato se predpomnjeni dnevnik lahko (vendar ne mora) razlikovati od pravega dnevnika. Različnost pomeni, da ne bo prikazal vseh operacij kopiranja, tudi če je nastavljen <guilabel
+>Dnevnik sledi spremembam vozlišča</guilabel
+>.</para>
+</sect2>
+<sect2>
+<title
+>Predpomnilnik dnevnika in drevo revizij</title>
+<para
+>Revizijsko drevo bo uporabljalo samo predpomnilnik dnevnika, ker mora drugače vedno znova dobiti dnevnike. <emphasis
+>Ne bo</emphasis
+> osvežil predpomnilnika dnevnika (vendar se to lahko spremeni v kasnejših izdajah). </para>
+</sect2>
+</sect1>
+
+<sect1 id="overlay-meaning">
+<title
+>Pomen prekrivanja ikon</title>
+<para
+>Vnosi so lahko označeni s prekritimi ikonami, če niso v <quote
+>normalnem</quote
+> stanju. <variablelist>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnlocked.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Zaklenjeno</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Ta vnos je zaklenjen. V zadnjem stolpcu je naveden lastnik ključavnice. Nastavite lahko, če &kdesvn; bi moral preveriti tudi zaklenjene elemente v repozitoriju. Vendar bodite previdni: odvisno od vrste strežnika lahko to traja dolgo! </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnneedlock.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Potrebno zaklenjeno</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Ta vnos mora biti zaklenjen pred urejanjem in objavo. Dokler ne nastavite zaklepanja, subversion ostane samo za branje. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnupdates.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Posodobitve</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Ta vnos ali - če je mapa - spodnji vnos ima novejšo različico v repozitoriju. </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnmodified.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Spremenjeno</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Ta vnos ali - če je mapa - spodnji vnos je bil spremenjen na lokalnem disku. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnadded.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>dodana prekrivka</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Ta vnos je lokalno dodan v subversion, vendar še ni potrjen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvndeleted.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>prekrivanje izbrisano</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Ta vnos je lokalno izbrisan iz subversion, vendar še ni bil potrjen. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnconflicted.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>prekrivanje izbrisano</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Ta vnos (ali vnos spodaj, če je mapa) je dobil spore, ki jih je treba rešiti z zadnjo posodobitvijo. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect1>
+
+<sect1 id="kdesvn-passwords">
+<title
+>&kdesvn; in gesla</title>
+<para
+>&kdesvn;/subversion lahko shranjuje gesla. Shranjevanje gesel je vedno varnostno tveganje, vendar lahko omogoči večjo uporabnost grafičnega vmesnika. </para>
+<sect2>
+<title
+>Gesla se ne shranjujejo</title>
+<para
+>Najbolj varen način, vendar včasih nepriročen z GUI-ji, kot je &kdesvn;. Zlasti procesi v ozadju &kdesvn; bi vedno zahteval geslo, če ima repozitorij omejen dostop za bralne operacije, kot sta posodobitev in stanje. Enako za <quote
+>commit</quote
+> in tako naprej. Torej, če ne shranjujete gesel, onemogočite <guilabel 
+>Začni preverjanje posodobitev, ko odprete delovno kopijo</guilabel
+> in <link linkend="subversion-settings"
+>tako naprej</link
+>. </para>
+</sect2>
+<sect2>
+<title
+>Shranjevanje gesel v &kwallet5;</title>
+<para
+>Zavarovano shranjevanje gesel, ki ga uporablja veliko &kde; programi, kot je &kmail; in &konqueror;. Če shranjujete gesla in večinoma uporabljate &kdesvn; to bi morali uporabiti. Pazite, da šifrirana shramba ni zelo varna shramba. Podrobnosti glejte <ulink url="help:/kwallet5"
+>&kwallet5; dokumentacija</ulink
+>. </para>
+</sect2>
+<sect2>
+<title
+>Shranjevanje v lastno shrambo gesel subversion</title>
+<para
+>To ni priporočljivo, ker so gesla shranjena kot čisto besedilo! Ne verjameš? Oglejte si datoteke v <filename class="directory"
+>~/.subversion/auth/svn.simple</filename
+>. To uporabite le, če pogosto uporabljate druge odjemalce kot &kdesvn; kot je <application
+>rapidsvn</application
+> ali <application
+>esvn</application
+> ali izvirni odjemalec ukazne vrstice <application
+>svn</application
+>. Če odjemalca ukazne vrstice uporabljate večinoma za nakupe ali posodobitve, ki ne zahtevajo gesla in &kdesvn; za objavo/premaknitev/kopiranje uporabite &kwallet5; namesto tega. </para>
+</sect2>
+<sect2>
+<title
+>Notranji predpomnilnik gesel</title>
+<para
+>Lahko aktivirate notranji predpomnilnik gesel, ki bo hranil gesla, dokler &kdesvn; teče v pomnilniku. Torej ne smete dvakrat vnesti gesla, tudi če ga niste shranili v denarnico. </para>
+</sect2>
+<sect2>
+<title
+>Poseben primer svn+ssh</title>
+<para
+>Pri uporabi programa subversion prek svn+ssh lahko shranjevanje gesel izvedete prek ssh in ssh-agenta. Za to morate imeti dostop ssh do oddaljenega računalnika in repozitorija. Ko želite nekaj shraniti, morate uporabiti avtentikacijo javnega ključa ssh, ne avtentikacije z geslom. (Pravzaprav ima ssh raje avtentikacijo z javnim ključem). Za to morate postaviti svoj javni ključ ssh na cilj, &eg;. sistem repozitorija. Gesla SSH nikoli ne bodo obravnavana shrambo gesel subversion ali &kwallet5; ali notranjega predpomnilnika gesel. </para>
+<para
+>Če ne želite, da vas vprašamo za geslo vašega ključa SSH, lahko uporabite <application
+>ssh-agent</application
+> z izbiro menija <menuchoice
+><guimenu
+> Subversion </guimenu
+> <guimenuitem
+>Dodaj ssh identitete za ssh-agent</guimenuitem
+></menuchoice
+> lahko shranite svoje geslo s ključem SSH za vašo trenutno sejo, tako da vam ni potrebno nadaljnje vnašanje gesla. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="kdesvn-kio">
+<title
+>&konqueror;, KIO, &kdesvn;</title>
+<sect1 id="kdesvn-kio-desc">
+<title
+>Opis</title>
+<para
+>Od različice 0.7.0 &kdesvn; prihaja z nekaterimi moduli, ki integrirajo nekatere ukaze neposredno v &konqueror; meniji. <variablelist>
+<varlistentry>
+<term
+>KIO protokoli</term>
+<listitem
+><para
+>Implementira obdelovalce za naslednje protokole:</para>
+<itemizedlist>
+<listitem
+><para
+>ksvn+http</para
+></listitem>
+<listitem
+><para
+>ksvn+https</para
+></listitem>
+<listitem
+><para
+>ksvn+datoteka</para
+></listitem>
+<listitem
+><para
+>ksvn+ssh</para
+></listitem>
+<listitem
+><para
+>ksvn</para
+></listitem>
+</itemizedlist>
+
+<para
+>Ti protokoli so zasnovani samo za repozitorije, ne za delovne kopije. Na primer, <filename class="directory"
+>ksvn+file:///<replaceable
+>path</replaceable
+></filename
+> mora kazati na začetek repozitorija, ki ni aplikacija sama ali KPart. Delovne kopije lahko brskate s &konqueror;. </para>
+<para
+>Za brskanje pri določeni reviziji lahko dodate poizvedbo <link linkend="revision-syntax"
+><quote
+>?rev=<replaceable
+>revision</replaceable
+></quote
+></link
+>na &URL;. </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Kontekstni meniji</term>
+<listitem
+><para
+>&kdesvn; namesti kontekstne menije za &konqueror;. Ogledate si jih lahko z desnim klikom miške v oknu brskalnika (samo v standardnem pogledu, ne v katerem koli KPartu), tako da je mogoče večino uporabljenih dejanj izvajati neposredno iz &konqueror;ja (ali kateri koli drug upravljalnik datotek, ki bere kontekstne menije &konqueror;, kot je &dolphin;). To se izvede s klicem <link linkend="kdesvn-commandline"
+>različice ukazne vrstice &kdesvn;</link
+>. </para>
+</listitem>
+</varlistentry>
+</variablelist>
+</para>
+<sect2>
+<title
+>Uporaba KIO zunaj &konqueror;ja - primer</title>
+<para
+>Vsaka aplikacija, ki uporablja knjižnico KIO, lahko uporablja te protokole. Tako bi bilo mogoče pridobiti vse razlike med dvema revizijama z &kdiff3; brez globokega znanja. </para>
+<para>
+<example>
+<title
+>Pridobivanje razlik med revizijami z &kdiff3; in KIO::ksvn</title>
+<programlisting
+>kdiff3 \
+  ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=423127 \
+  ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=455064
+</programlisting>
+<para
+>Naj &kdiff3; natisni vse razlike med dvema revizijama. </para>
+<para>
+<note>
+  <para
+>Uporaba tega znotraj &kdesvn; (razlikovanje dveh revizij) je VELIKO hitrejši, ker se uporabljajo notranji mehanizmi programa subversion. </para>
+</note>
+</para>
+</example>
+</para>
+</sect2>
+</sect1>
+<sect1 id="kio-svn-special">
+<title
+>Informacije za programerje o KIO::ksvn</title>
+<note
+><para
+>To lahko preskočite, če vas programiranje KIO ne zanima.</para
+></note>
+<para
+>KIO::ksvn::special pozna naslednje operacije. </para>
+<sect2>
+<title
+>Seznam ukazov</title>
+<para>
+<table id="kio-svn-special-commands">
+  <title
+>Pregled ukazov za <literal
+>KIO::ksvn::special</literal
+></title>
+<tgroup cols="4">
+
+<thead>
+<row>
+<entry
+>Ime ukaza</entry>
+<entry
+>Številčni ID</entry>
+<entry
+>Seznam parametrov</entry>
+<entry
+>Implementirano v trenutni različici?</entry>
+</row>
+</thead>
+
+<tbody>
+
+<row>
+<entry
+>Preveri</entry>
+<entry
+>1</entry>
+<entry>
+<para
+>Repozitorij KURL, cilj KURL, int revnumber, QString revkind </para>
+<para
+>Cilj <emphasis
+>ne</emphasis
+> bo spremenjen, &eg; vendar bo vsebina odjavljena brez ustvarjanja podmape! Na primer, vir je lahko <filename
+>http://server/repos/project/trunk</filename
+>, cilj <filename
+>/home/user/proj/</filename
+>, potem bo vsebina debla prekopirana v <filename
+>/home/user/proj/</filename
+> ne <filename
+>/home/user/proj/trunk/</filename
+>! </para>
+</entry>
+<entry
+>Da</entry>
+</row>
+
+<row>
+<entry
+>Nadgradnja</entry>
+<entry
+>2</entry>
+<entry
+><para
+>KURL url, int revnum, QString revstring</para>
+<para
+>Če je revnum &lt; 0 revstring je razčlenjen. Format revstring je opisan v <link linkend="revision-syntax"
+>Dodatku</link
+>. </para>
+</entry>
+<entry
+>Da</entry>
+</row>
+
+<row>
+<entry
+>Zaveži se</entry>
+<entry
+>3</entry>
+<entry
+><para
+>KURL::Seznam URL-jev</para>
+<para
+>urls je seznam lokalnih url-jev za objavo. Zahteval bo sporočilo dnevnika.</para>
+</entry>
+<entry
+>Da</entry>
+</row>
+
+<row>
+<entry
+>Dnevnik</entry>
+<entry
+>4</entry>
+<entry>
+<para
+>int startrevnumber, QString startrevstring, int endrevnumber, QString endrevstring, KURL::List </para>
+<para
+>To uporabljajte previdno - to lahko povzroči veliko podatkov. </para>
+</entry>
+<entry
+>Da</entry>
+</row>
+
+<row>
+<entry
+>Uvozi</entry>
+<entry
+>5</entry>
+<entry
+>Ciljni repozitorij KURL, izvorna pot KURL</entry>
+<entry
+>Da</entry>
+</row>
+
+<row>
+<entry
+>Dodaj</entry>
+<entry
+>6</entry>
+<entry
+>KURL</entry>
+<entry
+>Da</entry>
+</row>
+
+<row>
+<entry
+>Izbriši</entry>
+<entry
+>7</entry>
+<entry
+>KURL::Seznam</entry>
+<entry
+>Da</entry>
+</row>
+
+<row>
+<entry
+>Povrni</entry>
+<entry
+>8</entry>
+<entry
+><para
+>KURL::Seznam</para>
+<para
+>Povratek v KIO je vedno nerekurziven, brez vprašanj (klicna aplikacija mora to storiti sama)</para>
+</entry>
+<entry
+>Da</entry>
+</row>
+
+<row>
+<entry
+>Stanje</entry>
+<entry
+>9</entry>
+<entry
+><para
+>Postavka KURL, bool checkRepos, bool rekurzija</para>
+<para
+>item - element, katerega podatke je treba preveriti, checkRepos - preveri, ali so v repozitoriju novejše različice, recurse - ali preveriti rekurzivno ali ne.</para>
+</entry>
+<entry
+>Da</entry>
+</row>
+
+<row>
+<entry
+>Mkdir</entry>
+<entry
+>10</entry>
+<entry
+>KURL::Seznam</entry>
+<entry
+>Da</entry>
+</row>
+
+<row>
+<entry
+>Razreši</entry>
+<entry
+>11</entry>
+<entry
+>KURL, bool rekurzivno</entry>
+<entry
+>Da</entry>
+</row>
+
+<row>
+<entry
+>Stikalo</entry>
+<entry
+>12</entry>
+<entry
+>KURL work_copy_path, KURL new_repository_url, bool recursive,int revnumber, QString revkind</entry>
+<entry
+>Da</entry>
+</row>
+
+<row>
+<entry
+>Razl</entry>
+<entry
+>13</entry>
+<entry>
+<para
+>URL uri1, KURL uri2, int r1, QString rstring1, int r2, QString rstring 2, bool rekurzivno</para>
+<para
+>Za razliko med datoteko repozitorija /// in URL-ji delovne kopije za nastavitev delovne kopije brez protokola!</para>
+</entry>
+<entry
+>Da</entry>
+</row>
+</tbody>
+
+</tgroup>
+</table>
+
+</para>
+</sect2>
+<sect2>
+<title
+>Povratne vrednosti</title>
+<para
+>Povratne vrednosti so lahko podane prek metapodatkov, za podrobnosti glejte apidoc. </para>
+<para>
+<table id="kio-ksvn-metadata">
+<title
+>Vsebina metapodatkov</title>
+<tgroup cols="2">
+
+<thead>
+<row>
+<entry
+>Ključ</entry>
+<entry
+>Možna vrednost</entry>
+</row>
+</thead>
+
+<tbody>
+
+<row>
+<entry
+>pot</entry>
+<entry
+>Pot do dejanja elementa, na kateri je bilo izvedeno, npr. podani url</entry>
+</row>
+
+<row>
+<entry
+>ukrepanje</entry>
+<entry
+>Vrsta številskega dejanja</entry>
+</row>
+
+<row>
+<entry
+>prijazen</entry>
+<entry
+>vrsta predmeta (večinoma mapa ali datoteka)</entry>
+</row>
+
+<row>
+<entry
+>mime_t</entry>
+<entry
+>Subversion mimetype elementa</entry>
+</row>
+
+<row>
+<entry
+>vsebino</entry>
+<entry
+>Stanje vsebine (vrednost subversion)</entry>
+</row>
+
+<row>
+<entry
+>prop</entry>
+<entry
+>Stanje lastnosti (vrednost subversion)</entry>
+</row>
+
+<row>
+<entry
+>rev</entry>
+<entry
+>Nastala revizija ali revizija, ki je bila obdelana</entry>
+</row>
+
+<row>
+<entry
+>vrvica</entry>
+<entry
+>Notranje definirano človeku berljivo sporočilo.</entry>
+</row>
+
+<row>
+<entry
+>prijavljeno dejanje</entry>
+<entry
+>Subversion definiran niz dejanj na elementu (A,M,D)</entry>
+</row>
+<row>
+<entry
+>loggedcopyfrompath</entry>
+<entry
+>Če je kopirano s katere poti? (lahko prazno)</entry>
+</row>
+<row>
+<entry
+>zabeležena kopija iz revizije</entry>
+<entry
+>Če je kopirano, pri kateri reviziji? (lahko &lt; 0)</entry>
+</row>
+<row>
+<entry
+>loggedpath</entry>
+<entry
+>Na kateri posamezni poti so nastavljeni vnosi zabeleženo dejanje in tako naprej. (pot je nastavljena na klicni url)</entry>
+</row>
+<row>
+<entry
+>diffresult</entry>
+<entry
+>vrstica razlike izhoda</entry>
+</row>
+</tbody>
+
+</tgroup>
+</table>
+
+</para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="kdesvn-commandline">
+<title
+>Uporaba &kdesvn; prek ukazne vrstice</title>
+<sect1 id="kdesvn-commandline-overview">
+<title
+>Pregled</title>
+<para
+>Nekatere subverzivne operacije se lahko uporabljajo prek ukazne vrstice, &eg; kot standardni odjemalec ukazne vrstice, vendar interakcija uporabnika poteka prek <acronym
+>UI</acronym
+>. Standardna sintaksa je <userinput
+>kdesvn exec <replaceable
+>ukaz</replaceable
+> <replaceable
+>parameter</replaceable
+> <replaceable
+>url</replaceable
+></userinput
+>. </para>
+<para
+>Če ena sama revizija na enem &URL; če želite, ga lahko nastavite kot parameter &URL; <programlisting
+>svn://your-server/path-to-repository/item?rev=&lt;your-rev&gt;</programlisting
+> To bo prepisalo možnost <option
+>-r &lt;rev&gt;</option
+>. </para>
+<para
+>Revizija je lahko podana kot številka ali ena od <option
+>HEAD</option
+> ali <option
+>BASE</option
+> ali kot oblika datuma, kot je {YYYY-MM-DD}. </para>
+</sect1>
+<sect1 id="kdesvn-command-list">
+<title
+>Seznam ukazov</title>
+<para
+>Če je v naslednjem pregledu kot možni parameter <option
+>-r <replaceable
+>revision</replaceable
+></option
+> podan, je ta revizija lahko nastavljena kot <userinput
+><replaceable
+>url</replaceable
+>?rev=<replaceable
+> revizija</replaceable
+></userinput
+>. <table id="svn-commands-table">
+<title
+>Subverzivni ukazi</title>
+<tgroup cols="3">
+
+<thead>
+<row>
+<entry
+>Ukaz</entry>
+<entry
+>Pomen</entry>
+<entry
+>Sprejete možnosti</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+<entry
+>zaveži (ali ci)</entry>
+<entry
+>potrdi spremembe postavke v repozitorij</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>dnevnik</entry>
+<entry
+>Natisnite dnevnik predmeta</entry>
+<entry
+>-r startrevision:endrevision -l limit_display</entry>
+</row>
+<row>
+<entry
+>mačka</entry>
+<entry
+>Prikaz vsebine predmeta</entry>
+<entry
+>-r revizija </entry>
+</row>
+<row>
+<entry
+>kopija (ali cp)</entry>
+<entry
+>Kopirajte element znotraj delovne kopije ali repozitorija. Če cilj ni podan, &kdesvn; bo pozval.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>premakni (ali mv, preimenuj)</entry>
+<entry
+>Premakni/preimenuj element znotraj delovne kopije ali repozitorija. Če cilj ni podan, bo &kdesvn; pozval.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>dobi</entry>
+<entry
+>Pridobite vsebino predmeta in ga shranite</entry>
+<entry
+>--r revision -o &lt;outputfile&gt; (izhod je obvezen!)</entry>
+</row>
+<row>
+<entry
+>očitati (ali označiti)</entry>
+<entry
+>datoteka z opombami</entry>
+<entry
+>-r startrevision:endrevision</entry>
+</row>
+<row>
+<entry
+>posodobitev</entry>
+<entry
+>Posodobi element v delovni kopiji</entry>
+<entry
+>-r revizija</entry>
+</row>
+<row>
+<entry
+>diff</entry>
+<entry
+>Razlikuje dve reviziji postavke ali razlikuje dve postavki pri določeni reviziji</entry>
+<entry
+>-r startrev:endrev</entry>
+</row>
+<row>
+<entry
+>info</entry>
+<entry
+>Podrobne informacije o predmetu</entry>
+<entry
+>-r revizija</entry>
+</row>
+<row>
+<entry
+>checkout (ali co)</entry>
+<entry
+>Prevzemi pot repozitorija v novo pot delovne kopije. Zahtevana bo revizija ciljne poti in vira.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>checkoutto (ali coto)</entry>
+<entry
+>Prevzemi pot repozitorija v novo pot delovne kopije. Zahtevana bo razlika med izvorno potjo in izvorno revizijo.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>export</entry>
+<entry
+>Izvozi pot repozitorija ali delovne kopije v imenik. Zahtevana bo revizija ciljne poti in vira.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>exportto</entry>
+<entry
+>Izvozi pot repozitorija ali delovne kopije v imenik. Zahtevana bo izvorna pot in revizija vira.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>izbriši (del, odstrani, rm)</entry>
+<entry
+>izbrišite url(-e) iz repozitorija ali delovne kopije.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>dodaj</entry>
+<entry
+>dodaj &URL; v delovno kopijo. &URL; mora pripadati delovni kopiji (to ni uvoz!)</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>povrni (ali razveljavi)</entry>
+<entry
+>razveljavljene trenutne spremembe delovne kopije. Lahko se uporablja samo na URL-jih delovne kopije!</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>preveri novo (ali dodaj novo)</entry>
+<entry
+>preveri dani &URL; za nove postavke brez različic in jih po želji dodajte v delovno kopijo.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>drevo</entry>
+<entry
+>prikaže revizijsko drevo postavke (samo prvi argument), če &URL; če je podano <quote
+>?rev=<replaceable
+>xxx</replaceable
+></quote
+>, je ta revizija peg-revizija.</entry>
+<entry
+>-r startrev:endrev</entry>
+</row>
+<row>
+<entry
+>zaklepanje</entry>
+<entry
+>zakleni url(-e), če je podana <option
+>-f</option
+>, so obstoječe ključavnice pokvarjene.</entry>
+<entry
+>-f</entry>
+</row>
+<row>
+<entry
+>unlock</entry>
+<entry
+>odkleni url(-e), če je podana <option
+>-f</option
+>, se zaklepanje, ki ni v lasti, zlomljen ali pa se zaklepanje, ki ne obstaja, prezre.</entry>
+<entry
+>-f</entry>
+</row>
+<row>
+<entry
+>pomoč</entry>
+<entry
+>prikaže to stran</entry>
+<entry
+></entry>
+</row>
+</tbody>
+</tgroup>
+
+</table>
+
+<table id="parameter-list">
+<title
+>Parameter za subversion ukaze</title>
+<tgroup cols="3">
+<thead>
+<row>
+<entry
+>Parameter</entry>
+<entry
+>Možne vrednosti</entry>
+<entry
+>dovoljeno za</entry>
+</row>
+</thead>
+<tbody>
+<row>
+  <entry
+><option
+>-r</option
+></entry>
+<entry
+><replaceable
+>revision</replaceable
+> ali <replaceable
+>startrev:endrev</replaceable
+></entry>
+<entry
+>vse razen commit</entry>
+</row>
+<row>
+  <entry
+><option
+>-R</option
+></entry>
+<entry
+>(brez)</entry>
+<entry
+>vse razen commit</entry>
+</row>
+<row>
+<entry
+><option
+>-o</option
+></entry>
+<entry
+><replaceable
+>ime datoteke</replaceable
+></entry>
+<entry
+>dobi</entry>
+</row>
+<row>
+<entry
+><option
+>-l</option
+></entry>
+<entry
+><replaceable
+>število</replaceable
+></entry>
+<entry
+>dnevnik</entry>
+</row>
+<row>
+<entry
+><option
+>-f</option
+></entry>
+<entry
+>(brez)</entry>
+<entry
+>(un-)lock</entry>
+</row>
+
+</tbody>
+</tgroup>
+</table>
+
+</para>
+<sect2>
+  <title
+>Ukaz <quote
+>log</quote
+></title>
+<para
+>Ukaz dnevnika prikaže pogovorno okno, ki vsebuje dnevnik danega &URL;. S subversion 1.2 ali novejšo sprejme omejitev, &ie;. koliko vnosov mora prikazati. </para>
+<para
+>Znotraj tega pogovornega okna lahko izberete vnose v dnevnik in si ogledate razlike med njimi. <example>
+<title
+>Prikaži zadnjih 20 dnevnikov objave</title>
+<programlisting
+>kdesvn exec log -l 20 -r HEAD&#058;1 myfile.c
+</programlisting>
+<para
+>Pazite na vrstni red revizije: želite iti od GLAVE do ZAČETKA za ZADNJI. Zato morate dati revizijo HEAD kot izhodišče, sicer bi dobili prvih 20 vnosov.</para>
+</example>
+</para>
+</sect2>
+<sect2>
+  <title
+>Ukaz <quote
+>diff</quote
+></title>
+<para
+>Dobite razlike med revizijami postavke ali med dvema postavkama znotraj iste delovne kopije ali repozitorija. Ko razlikujete revizije postavke, so lahko revizije podane kot <option
+>-r <replaceable
+>STARTREV</replaceable
+>:<replaceable
+>ENDREV</replaceable
+></option
+>. Pri razlikovanju postavke znotraj delovne kopije brez kakršnih koli revizij natisne razliko glede na repozitorij. <example>
+<title
+>Natisni razliko glede na repozitorij, &ie; lokalne spremembe</title>
+<programlisting
+>kdesvn exec diff myfile.c
+</programlisting>
+</example>
+<example>
+<title
+>Natisni razliko med revizijami</title>
+<programlisting
+>kdesvn exec diff -r 21:20 myfile.c
+</programlisting>
+</example>
+</para>
+<para
+>Pri razlikovanju med dvema elementoma se lahko &URL; predmetov. &eg;: <programlisting
+>http://server/path/item?rev=HEAD</programlisting>
+<example>
+<title
+>Razlikovanje med dvema označenima različicama</title>
+<programlisting
+>kdesvn exec diff http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_2 http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_3
+</programlisting>
+</example>
+</para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="setup">
+<title
+>Nastavitve</title>
+<para
+>Nastavitve lahko spremenite v pogovornem oknu za nastavitev. Ločene so v nekaj podoken. </para>
+<sect1 id="general-settings">
+<title
+>Splošno</title>
+<para>
+<informaltable id="General-setup-items">
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+>Velikost ikon za ogled seznama</entry>
+<entry
+>Kako velike (kvadratne) naj bodo ikone v pogledu glavnega seznama</entry>
+</row>
+<row>
+<entry
+>Pokaži informacije o datoteki</entry>
+<entry
+>Če se ob premikanju miške nad element prikaže majhen namig</entry>
+</row>
+<row>
+<entry
+>Označi status elementa s prekrivno ikono</entry>
+<entry
+>Ko postavka ni v normalnem stanju subversion, lahko dobi prekrivanje. (Glejte <xref linkend="overlay-meaning"/>)</entry>
+</row>
+<row>
+<entry
+>Vrstni red razvrščanja elementov razlikuje med velikimi in malimi črkami</entry>
+<entry
+>Če je vrstni red v glavnem oknu občutljiv na velike in male črke ali ne, &ie;. če <quote
+>a</quote
+> ni enak <quote
+>A</quote
+>.</entry>
+</row>
+<row>
+<entry
+>Prikaži prezrte datoteke</entry>
+<entry
+>Prikaži elemente, ki so v programu subversion označeni za prezrtje ali ne.</entry>
+</row>
+<row>
+<entry
+>Največje število dnevniških sporočil v zgodovini</entry>
+<entry
+>Koliko dnevniških sporočil &kdesvn; bi se moral spomniti.</entry>
+</row>
+<row>
+<entry
+>Prikaži barvno opombo</entry>
+<entry
+>Za opombe uporabite barve, določene v pogovornem oknu z nastavitvami.</entry>
+</row>
+<row>
+<entry
+>Uporabite navigacijsko ploščo</entry>
+<entry
+>Preklopi prikaz drevesnega pogleda repozitorija.</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</para>
+</sect1>
+
+<sect1 id="subversion-timedjobs-settings">
+<title
+>Subversion in nastavitve časovno določenih opravil</title>
+
+<table id="subversion-settings">
+<title
+>Subversion</title>
+<tgroup cols="2">
+
+<tbody>
+
+<row>
+<entry
+>Zaženite preverjanje posodobitev, ko odprete delovno kopijo</entry>
+<entry
+>Ko odprete delovno kopijo, zaženite preverjanje posodobitev v ozadju</entry>
+</row>
+<row>
+<entry
+>Začni izpolnjevati predpomnilnik dnevnika ob odprtju</entry>
+<entry
+>Če je nastavljen &kdesvn; začnite (ponovno) polniti predpomnilnik dnevnika, ko odprete repozitorij ali delovno kopijo, če repozitorij &URL; ni dodeljeno lokalno (<filename class="directory"
+>file://</filename
+>)</entry>
+</row>
+<row>
+  <entry
+>Preverite, ali ima element nastavljen <quote
+>svn:need-lock</quote
+></entry>
+<entry
+>V delovnih kopijah preverite, ali ima element nastavljeno to lastnost, in če je, prikaže posebno prekrivno ikono. Če to nastavite, lahko povzročite, da bodo seznami zelo počasni.</entry>
+</row>
+<row>
+<entry
+>Pridobite podrobnosti o datoteki med oddaljenim seznamom</entry>
+<entry
+>Ko je označeno, &kdesvn; pridobi podrobnejše informacije o elementih datotek, ko ustvarjate seznam v oddaljenih repozitorijih. Tako boste morda videli oddaljene ključavnice v pregledu. Bodite previdni: zaradi tega se bodo seznami RESNIČNO upočasnili!</entry>
+</row>
+
+<row>
+<entry
+>Rekurzivno pridobivanje informacij</entry>
+<entry
+>Ko je aktiviran, bo <command
+>info</command
+> v mapah pridobil informacije o vseh spodnjih elementih, kar je lahko zelo počasno.</entry>
+</row>
+
+<row>
+<entry
+>Shranite gesla za oddaljene povezave</entry>
+<entry
+>Shranjevanje gesel je pogosto varnostna težava. Subversion shrani svoja gesla v ravno datoteko, &ie; gesla v navadnem besedilu! Zato bodite previdni pri nastavitvi te zastavice in si oglejte tudi naslednji vnos. Ta element pravi le, če je shranjevanje gesel privzeto, ga lahko spremenite za določena področja znotraj prijavnega pogovornega okna.</entry>
+</row>
+
+<row>
+<entry
+>Shrani gesla v listnico KDE Wallet</entry>
+<entry
+>Pri shranjevanju gesel je datoteka z navadnim besedilom iz subversion varnostna luknja. &kdesvn; jih lahko shrani v šifrirano &kde; listnico (začenši z različico 0.12.0) in jih uporabite. Po drugi strani pa jih drugi odjemalci programa subversion ne morejo prebrati, zato jih morate vnesti tudi, če uporabljate orodja, kot je orodje ukazne vrstice <application
+>svn</application
+> ali <application
+>rapidsvn</application
+>. Dokler subversion ne šifrira shranjevanja gesel, morate o tem dvakrat premisliti.</entry>
+</row>
+
+<row>
+<entry
+>Uporabi notranji predpomnilnik gesel</entry>
+<entry
+>Ko geslo ni shranjeno, obstojni &kdesvn; ga lahko zadrži, dokler &kdesvn; konča, zato vam ga morda ne bo treba znova vnesti za vsako operacijo. Ta predpomnilnik ni nikoli obstojen, &ie; ne bo nikjer shranjeno.</entry>
+</row>
+
+<row>
+<entry
+>Dnevnik sledi spremembam vozlišča</entry>
+<entry
+>Če je označeno, dnevnik sledi operacijam kopiranja.</entry>
+</row>
+
+<row>
+<entry
+>Dnevnik vedno prebere seznam spremenjenih datotek</entry>
+<entry
+>Ukaz log lahko prebere seznam spremenjenih datotek v potrditvi. To je uporabno in v večini primerov ne stane resnično več prometa.</entry>
+</row>
+
+<row>
+<entry
+>Preglej elemente pred potrjevanjem</entry>
+<entry
+>Ko izvajate potrjevanje &kdesvn; lahko preveri, kaj storiti. Na primer, če so spodaj elementi brez različic, ki jih je mogoče dodati, se spremenijo elementi seznama in trenutna operacija se potrdi. To stane odvisno od drevesa več ali manj časa.</entry>
+</row>
+
+<row>
+<entry
+>Skrij nove elemente v polju za objavo</entry>
+<entry
+>Ali naj bodo elementi brez različic prikazani v pogovornem oknu za objavo ali ne.</entry>
+</row>
+
+<row>
+<entry
+>Posodobitev spreminja namesto konfliktov</entry>
+<entry
+>Če je nastavljeno, lokalni dodatek na isti poti kot dohodni dodatek iste vrste vozlišča povzroči običajno vozlišče z možno lokalno spremembo namesto konflikta drevesa.</entry>
+</row>
+
+<row>
+<entry
+>Posodobitev naredi manjkajoče starše</entry>
+<entry
+>Če je nastavljeno, ustvarite vse neobstoječe nadrejene imenike tudi tako, da jih preverite na depth=empty</entry>
+</row>
+
+</tbody>
+
+</tgroup>
+</table>
+
+<table id="timejobs-settings">
+<title
+>Časovno določena delovna mesta</title>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+><para
+>Preverite spremenjene elemente vsakih N sekund</para
+> <para
+>Preverite posodobljene elemente vsakih N sekund</para
+></entry>
+<entry
+>Če je nastavljeno, preveri posodobitve ali spremenjene elemente v delovni kopiji, ko je omrežje redno omogočeno</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="diffmerge-settings">
+<title
+>Diff &amp; Spoji</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>Diff ignorira vrsto vsebine</term>
+<listitem
+><para
+>Zanimivo samo, če so razlike narejene s programom subversion. Ko je nastavljen, subversion diff prezre tip vsebine vnosov. V nasprotnem primeru ne bo izpisal razlik iz binarnih datotek. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Diff v revizijskem drevesu je rekurziven</term>
+<listitem
+><para
+>Ko so nastavljene, so razlike, narejene znotraj drevesnega pogleda revizij, rekurzivne kot v vseh drugih primerih. V nasprotnem primeru so prikazane samo spremembe, ki pripadajo elementom te mape. Kako je to narejeno, je odvisno od tega, kako dovolite ustvarjanje razlik (iz samega programa  subversion ali iz zunanjih ogledovalnikov). </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Diff ignorira spremembe belega prostora</term>
+<listitem>
+<para
+>Ignoriraj spremembe v količini belega prostora (možnost <option
+>-b</option
+> do <application
+>diff</application
+>) </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Diff ignorira vse bele prostore</term>
+<listitem>
+  <para
+>Prezri vse bele prostore (možnost <option
+>-w</option
+> za diff)</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Prednost dajte zunanjemu programu združevanja</term>
+<listitem>
+<para
+>Nastavite, ali je prednostno spajanje z zunanjim programom in ne spajanje Subversion</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Uporabite format Git diff</term>
+<listitem>
+<para
+></para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Prikaži kopije kot dodatek</term>
+<listitem>
+<para
+></para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+<sect2>
+<title
+>Uporabi zunanji diff display</title>
+<para
+>Izbere zunanjo aplikacijo za prikaz razlik. Privzeto je &kompare;. </para>
+</sect2>
+<sect2>
+<title
+>Zunanji prikaz dif</title>
+<para
+>Določa, kaj &kdesvn; uporablja za zunanji prikaz razlik in kako se bo imenoval. Obstajajo trije načini: </para>
+<para>
+<variablelist>
+<varlistentry>
+<term
+>&lt;program&gt; &lt;parameter&gt;</term>
+<listitem
+><para
+>Razlika bo ustvarjena s subversion in vnesena neposredno v standardni vnos zunanjega programa (&ie; začasne datoteke niso potrebne) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>&lt;program&gt; &lt;parameter&gt; %f</term>
+<listitem
+><para
+>Razlika bo ustvarjena s subversion, shranjena v začasno datoteko in parameter <option
+>%f</option
+> bo nadomeščen s tem imenom datoteke. To lahko uporabite na primer s preprostim klicem <application
+>less</application
+> ali pregledovalnika besedila. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>&lt;program&gt; &lt;parameter&gt; %1 %2</term>
+<listitem
+><para
+>&kdesvn; naj zunanji program naredi razliko. %1 in %2 bosta zamenjana z zahtevanimi vrednostmi (imeni datotek ali map). &kdesvn; shrani vsebino za primerjavo v začasnem okolju (ko mape izvede <quote
+>izvoz</quote
+>, ko posamezno datoteko, naredi <quote
+>cat</quote
+>), ko je to potrebno, in počisti, ko zapre zunanji program ali se sam zapre. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Prednost dajte zunanjemu programu združevanja</term>
+<listitem
+><para
+>Izberite, ali naj bo v pogovornem oknu za spajanje <guilabel
+>Uporabi zunanje spajanje</guilabel
+> označeno ali ne kot privzeto.</para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect2>
+<sect2>
+<title
+>Zunanji program za spajanje</title>
+<para
+>Nastavite program in možnosti za uporabo, ko vgrajeno spajanje subversion ni zaželeno. Privzeta vrednost je <command
+>kdiff3 %s1 %s2 %t</command
+>. Vrstni red nadomestnih spremenljivk ni pomemben in lahko so tam večkrat, &eg; kot <literal
+>kdiff3 -o %t %s1 %s2 %t</literal
+>. Te stvari so testirane samo z <application
+>meld</application
+> in &kdiff3;. Pomislite, da zunanji programi večinoma ne vedo ničesar o parametru subversion <command
+>ignore</command
+>, zato lahko pokažejo veliko več od pričakovanega. </para>
+<sect3>
+<title
+>Zamenjave spremenljivk za zunanji združevalni program</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>%s1</term>
+<listitem
+><para
+>Zamenjano z virom številka ena. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>%s2</term>
+<listitem
+><para
+>Zamenjano z virom številka dve. Če je to prazno ali je to enako izvirniku in sta začetna in končna revizija enaki, bo ta spremenljivka preskočena. Zato bodite previdni pri nastavljanju ukaznih vrstic, kot je <command
+>xxdiff --title1 %s1 --title2 %s2 %s1 %s2 %t</command
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>%t</term>
+<listitem
+><para
+>Zamenjano s ciljem. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect3>
+</sect2>
+<sect2 id="extern-resolve-setup">
+<title
+>Program za reševanje konfliktov</title>
+<para
+>Uporabite lahko zunanji program, kot je &kdiff3; privzeto je za reševanje konfliktov <command
+>kdiff3 %o %m %n -o %t</command
+>. </para>
+<sect3>
+<title
+>Zamenjava spremenljivke za zunanjega razreševalnika konfliktov</title>
+<para
+>V oklepaju za vsakim opisom je primer, kako bi program subversion klical datoteke. Te možnosti so zasnovane za &kdiff3;, ker je to trenutno edina aplikacija, ki podpira vse parametre, potrebne za dobro reševanje konfliktov. <variablelist>
+<varlistentry>
+<term
+>%o ali %l</term>
+<listitem
+><para
+>Stara (lokalna, leva) različica. To pomeni nižjo številko revizije, &ie; izhodišče konfliktnih sprememb. (<filename
+>foo.cc.r2</filename
+>) </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%m ali %w</term>
+<listitem
+><para
+>Moja (delovna) različica datoteke, &ie; kaj ste spremenili glede na staro različico. (<filename
+>foo.cc.mine</filename
+>) </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%n ali %r</term>
+<listitem
+><para
+>Nova (oddaljena, desna) različica datoteke. Na primer različica, ki jo je naredil nekdo drug. (<filename
+>foo.cc.r3</filename
+>) </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%t</term>
+<listitem
+><para
+>Ime cilja, &eg; ime izvora. Za &kdiff3; (kot primer) bi bilo to ime za parametrom <option
+>-o</option
+> (= izhodna datoteka). (<filename
+>foo.cc</filename
+>) </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect3>
+</sect2>
+</sect1>
+<!--FIXME
+Colors
+
+Revisions tree
+-->
+<sect1 id="kio-cmdline-settings">
+<title
+>KIO / ukazna vrstica</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>Prikaži dnevnik po izvedbi ukaza</term>
+<listitem
+><para
+>Če se odpre pogovorno okno z dnevnikom zadnjega ukaza subversion, ko je bil ta izveden prek ukazne vrstice ali &konqueror; akcijski meni. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Najmanjše število vrstic dnevnika za prikaz</term>
+<listitem
+><para
+>Če je <guilabel
+>Pokaži dnevnik ...</guilabel
+> nastavljen, kolikšno je najmanjše število vrstic, preden se prikaže takšno pogovorno okno. Tako lahko nastavite, da bo takšno okno prikazano le, ko je ustvarjen zanimiv rezultat (dnevnik potrditve in tako naprej) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Ne prikaži kontekstnega menija v &konqueror;</term>
+<listitem
+><para
+>Če je nastavljeno, ni vnosa menija dejanj za &kdesvn; je narejen v &konqueror;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Ne prikazuj vnosov v meniju dejanj na najvišji ravni</term>
+<listitem
+><para
+>Če je nastavljen, kdesvn ne bo prikazal nekaterih dodatnih dejanj v meniju <guimenuitem
+>Dejanje</guimenuitem
+> v &konqueror; ali &dolphin;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Operacije KIO uporabljajo standardno dnevniško sporočilo</term>
+<listitem
+><para
+>Pri izvajanju operacij na repozitoriju preko &kdesvn; KIO protokol znotraj &konqueror; (&ie; <quote
+>ksvn+...</quote
+> protokoli) pri velikih operacijah, kot je premikanje ali kopiranje map &kdesvn; zahteval sporočilo dnevnika za vsak element. To je vedenje &konqueror;. Ko je ta možnost nastavljena, bo implementacija KIO iz &kdesvn; ne bo zahteval sporočila dnevnika, temveč bo nastavil standardno sporočilo dnevnika. Ta zastavica ni za operacije iz &kdesvn; meni dejanj za &konqueror; ampak samo kopiranje/premaknitev/mkdir/brisanje, narejeno s &konqueror; ali druge upravitelje datotek na KIO-url. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Standardno sporočilo</term>
+<listitem
+><para
+>Sporočilo &kdesvn; KIO bi moral nastaviti operacije znotraj &konqueror; ko je zgornja zastavica nastavljena. Privzeto je <guilabel
+>Revizija narejena z &kdesvn; KIO</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>KIO lahko prepiše</term>
+<listitem
+><para
+>Če je ta zastavica nastavljena, boste imeli preprosto podporo za pisanje za obstoječe elemente. &eg; datoteke lahko odprete v svojem urejevalniku in jih neposredno shranite, ne da bi jih prej preverili (&kdesvn; bo to naredil v ozadju).</para>
+<para
+>Uporabite to le, če ste prepričani, kaj počnete. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>KIO prikazuje sporočila o napredku</term>
+<listitem
+><para
+>Če je nastavljen, KIO prikaže v plazmi KDE podrobne informacije o trenutnem delovanju. Sporočila o napakah KIO bodo vedno prikazana in jih <emphasis
+>ni</emphasis
+> mogoče izklopiti. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect1>
+</chapter>
+
+<chapter id="commands">
+<title
+>Referenca ukazov</title>
+
+<sect1 id="kdesvn-mainwindow">
+<title
+>&kdesvn; Glavno okno</title>
+
+<sect2>
+<title
+>Meni Datoteka</title>
+<para>
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Odpri</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Odpre lokalno delovno kopijo ali predhodno predan repozitorij</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Nedavno odprti url-ji</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>To je bližnjica za odpiranje nedavno odprtih repozitorijev. S klikom na to postavko se ob strani menija odpre seznam z več nazadnje odprtimi lokalnimi delovnimi kopijami ali repozitoriji. S klikom na določen element se odpre v &kdesvn; </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Nova</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Odprite okno z novim pojavkom &kdesvn;</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Skrbnik za Subversion</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Elementi menija z skrbniškimi nalogami za repozitorije subversion, kot so: <simplelist
+> <member
+>Ustvari in odpri novo repozitorij</member
+> <member
+>Prenesi repozitorij v datoteko</member
+> <member
+>Hotcopy repozitorij</member
+> <member
+>Naloži dump into repository</member
+> </simplelist
+> Za več informacij preberite izpis <command
+>svnadmin --help</command
+> </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Zapri</guimenuitem
+> </menuchoice>
+</term>
+<listitem
+><para
+><action
+>Zapri</action
+> trenutno odprti repozitorij ali delovno kopijo</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Zapri</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Zapusti</action
+> &kdesvn;</para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect2>
+<sect2>
+<title
+>Meni zaznamkov</title>
+<para
+>Glejte <ulink url="help:/konqueror/bookmarks.html"
+>&konqueror; help</ulink
+>. </para>
+</sect2>
+
+<sect2 id="kdesvn-subversion-menu">
+<title
+>Meni Subversion</title>
+
+<variablelist id="subversion-general">
+<title
+>Splošne dejavnosti subversion</title>
+<varlistentry>
+<term>
+<menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guimenuitem
+>Zgodovina elementa</guimenuitem
+> </menuchoice
+></term>
+<listitem>
+<para
+><action
+>Prikaži</action
+> življenjski dnevnik trenutno izbranega elementa. Bodite previdni, ta seznam je lahko res velik!</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; &Shift;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guimenuitem
+>Zgodovina elementov, ki ignorirajo kopije ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Prikaže dnevnik zgodovine izbranega elementa brez naslednjih kopij.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>I</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guimenuitem
+>Podrobnosti</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Prikaže podrobne informacije o izbranih elementih</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guimenuitem
+>Krivda</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Naredi označen seznam za vse prijave. To lahko vzame čas!</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guimenuitem
+>Obseg krivde</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Označite obseg potrditev za datoteko.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guimenuitem
+>Mačja glava</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Prikazuje vsebino zadnje odobrene različice tega vnosa. (Lahko se razlikuje od različice delovne kopije, če delate na WC!)</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>F2</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guimenuitem
+>Premakni</guimenuitem 
+> </menuchoice
+></term>
+<listitem
+><para
+>Premakni ali preimenuj element znotraj delovne kopije ali v repozitoriju</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guimenuitem
+>Kopiraj</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Kopirajte element znotraj delovne kopije ali v repozitorij</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Del</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guimenuitem
+>Izbriši izbrane datoteke/ imeniki</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Izbriši izbrane vnose. Če delate v delovni kopiji, morate naknadno potrditi brisanje.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guimenuitem
+>Nova mapa</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ustvari novo mapo.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guimenuitem
+>Uvozi mape v trenutno</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Izberite mape, ki jih želite uvoziti v trenutno izbrani imenik</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guimenuitem
+>Preveri repozitorij</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ustvari novo delovno kopijo repozitorija</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guimenuitem
+>Izvoz repozitorija</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Izvozi repozitorij v datotečni sistem, &ie;. ustvari čisto revizijsko drevo brez informacij subversion. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guimenuitem
+>Zakleni trenutne elemente</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Označite trenutne elemente kot zaklenjene. Pred uporabo tega preberite priročnik za subversion! </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Splošno</guisubmenu
+> <guimenuitem
+>Odkleni trenutne elemente</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Odstranite ključavnice na trenutnih elementih. Pred uporabo tega preberite priročnik za subversion! </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-workingcopy">
+<title
+>Delovna kopija</title>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Delovna kopija</guisubmenu
+> <guimenuitem
+>Posodobitev na glavo</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Posodobite delovno kopijo na HEAD repozitorija</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Delovna kopija</guisubmenu
+> <guimenuitem
+>Posodobitev na revizijo...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Posodobi delovno kopijo na določeno revizijo repozitorija</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>#</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Delovna kopija</guisubmenu
+> <guimenuitem
+>Potrdi</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Spremembe znotraj delovne kopije za izbrane postavke potrdite v repozitorij.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Delovna kopija</guisubmenu
+> <guimenuitem
+>Razl. lokalne spremembe</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Prikaži lokalne spremembe kot diff-izhod (brez dostopa do omrežja). To je razlika le do zadnjega stanja, v katerega je bila posodobljena delovna kopija, ne glede na različico v repozitoriju.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Delovna kopija</guisubmenu
+> <guimenuitem
+>Razl. proti HEAD</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Diffova trenutna delovna kopija glede na glavo repozitorija.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Delovna kopija</guisubmenu
+> <guimenuitem
+>Lastnosti </guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ogled/urejanje lastnosti, dodeljenih trenutnemu vnosu.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Vstavi</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Delovna kopija</guisubmenu
+> <guimenuitem
+>Dodaj izbrane datoteke /dirs</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Dodajte izbrane datoteke in/ali mape v nadzor različic.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Delovna kopija</guisubmenu
+> <guimenuitem
+>Povrni trenutne spremembe</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Povrni spremembe v delovni kopiji in posodobitve na zadnje posodobljeno stanje.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Delovna kopija</guisubmenu
+> <guimenuitem
+>Označi rešeno</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Označite konfliktne elemente kot nekonfliktne in odstranite povezane datoteke.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Delovna kopija</guisubmenu
+> <guimenuitem
+>Spoji dve reviziji</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Spoji dve reviziji vnosov v delovno kopijo.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Delovna kopija</guisubmenu
+> <guimenuitem
+>Prezri/Odprezri trenutni element</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Uredite lastnost nadrejene mape trenutnega elementa, tako da bo izbrani element označen kot prezrt, če ni nastavljen, sicer ga odstranite s seznama prezrtih.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Delovna kopija</guisubmenu
+> <guimenuitem
+>Čiščenje</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Počistite delovno kopijo in odstranite (potrjene) ključavnice, če so</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Delovna kopija</guisubmenu
+> <guimenuitem
+>Preklopi repozitorij</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Preklopi koren trenutne delovne kopije.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-repository">
+<title
+>Repozitorij</title>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Repozitorij</guisubmenu
+> <guimenuitem
+>Preveri trenutno pot repozitorija</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ustvari delovno kopijo iz trenutno izbranega vnosa, če je imenik.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Repozitorij</guisubmenu
+> <guimenuitem
+>Izvoz trenutne poti repozitorija</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ustvari čisto kopijo v lokalnem datotečnem sistemu iz trenutno izbranega vnosa, če je imenik.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-view">
+<title
+>Ogled dejanj</title>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>F5</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Pogled</guisubmenu
+> <guimenuitem
+>Osveži pogled</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Osveži</action
+> trenutno stanje vseh prikazanih elementov. To bo navedlo vse elemente, ki so zahtevani za prikaz v trenutnem stanju. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Pogled</guisubmenu
+> <guimenuitem
+>Razgrni drevo datotek / Zloži drevo datotek</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Razširi ali strni drevesni pogled repozitorija. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Predpomnilnik dnevnika</guisubmenu
+> <guimenuitem
+>Ustavi posodabljanje predpomnilnika dnevnika</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Dnevnik je predpomnjen in se uporablja za prikaz revizijskega drevesa repozitorija. Odvisno od internetne povezave, velikosti subverzivnega repozitorija in dolžine zgodovine lahko to traja veliko časa. Zato lahko s tem dejanjem ustavite posodabljanje predpomnilnika. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guimenuitem
+>Dodaj identitete ssh ssh-agentu</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Shrani svoje geslo s ključem SSH za svojo trenutno sejo, tako da vam ni potrebno nadaljnje vnašanje gesla. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="kdesvn-database-menu">
+<title
+>Meni baze podatkov</title>
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Baza podatkov</guimenu
+> <guimenuitem
+>Prikaži vsebino baze podatkov</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Prikaže pregled vsebine baze podatkov predpomnilnika za znane repozitorije in omogoča brisanje predpomnilnika ali repozitorija ter dostop do nastavitev repozitorija. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Baza podatkov</guimenu
+> <guimenuitem
+>Nastavitve za trenutni repozitorij</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Prikaži pogovorno okno za prilagajanje nastavitev za predpomnilnik, dnevnike in statistiko. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Meni Nastavitve in pomoč</title>
+<para
+>Poleg običajnih &kde; Elementi menija <guimenu
+>Nastavitve</guimenu
+> in <guimenu
+>Pomoč</guimenu
+>, opisani v <ulink url="help:/fundamentals/ui.html#menus-settings"
+>meniju z nastavitvami</ulink
+> in <ulink url="help:/fundamentals/ui.html#menus-help"
+>Meni Pomoč</ulink
+> programa &kde; Osnove &kdesvn; ta dodatni menijski vnos:</para>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Nastavitve</guimenu
+> <guimenuitem
+>Hitre nastavitve</guimenuitem
+> </menuchoice
+></term>
+<listitem>
+
+<variablelist>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Naloži zadnji odprt URL ob začetku</guimenuitem>
+</term
+><listitem>
+<para
+>Znova naloži nazadnje odprti URL, če v ukazni vrstici ni podanega nobenega.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Dnevniki sledijo spremembam vozlišča</guimenuitem>
+</term
+><listitem>
+<para
+><!--FIXME What does this option do? --></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Prikaži prezrte datoteke</guimenuitem>
+</term
+><listitem>
+<para
+>Prikaži elemente, ki so v Subversion označeni za prezrtje ali ne.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Prikaži neznane datoteke</guimenuitem>
+</term
+><listitem>
+<para
+>Prikaži datoteke, ki niso bile dodane v repozitorij subversion.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Skrij nespremenjene datoteke</guimenuitem>
+</term
+><listitem>
+<para
+>S tem dejanjem prikažete samo spremenjene datoteke in zagotovite jasen in jedrnat pregled.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Delaj na spletu</guimenuitem>
+</term
+><listitem>
+<para
+>Če delate brez povezave, se predpomnilnik dnevnika ne bo posodobil, zato se lahko predpomnjeni dnevnik razlikuje od pravega dnevnika.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+</sect1>
+</chapter>
+<chapter id="credits-and-license">
+<title
+>Zasluge in licenca ter zahvala</title>
+<para
+>Avtorske pravice programa 2005-2009 &Rajko.Albrecht; &Rajko.Albrecht.mail; </para>
+<para
+>Najlepša hvala sodelujočim: </para>
+<itemizedlist>
+<listitem
+><para
+>Andreas Richter <email
+>ar@oszine.de</email
+> - za prenos svnqt na qt4</para>
+</listitem>
+<listitem
+><para
+>Michael Biebl <email
+>biebl@teco.edu</email
+> - za veliko pomoči, idej, izvedbe in namigov.</para>
+</listitem>
+<listitem
+><para
+>Bram Schoenmakers <email
+>bramschoenmakers@kde.nl</email
+> - za namige, specifične za &kde;, nizozemski prevod, čiščenje moje kode.</para>
+</listitem>
+</itemizedlist>
+<para
+>In hvala vsem ostalim prevajalcem (nikoli si nisem mislil, da tako hitro dobim tako veliko prevodov!) in za vse vaše pozitivne in negativne povratne informacije. Zelo je pomagalo. </para>
+<para
+>Če želite svoj prevod za &kdesvn; in morda potrebujete pomoč, preberite na <ulink url="http://l10n.kde.org/"
+>&kde; Stran za lokalizacijo</ulink
+> ali vprašajte na <ulink url="mailto:kde-i18n-doc@kde.org"
+><email
+>kde-i18n-doc@kde.org</email
+> poštni seznam</ulink
+>. </para>
+<para
+>Dokumentacija avtorsko zaščitena 2005-2006 &Rajko.Albrecht; &Rajko.Albrecht.mail; </para>
+<para
+>Prevod: Matjaž Jeran <email
+>matjaz.jeran@amis.net</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+<appendix id="revision-syntax">
+<title
+>Sintaksa za revizije</title>
+<para
+>Revizije so lahko podane v enaki obliki kot za standardnega odjemalca <application
+>svn</application
+>. To pomeni: številka, ključna beseda ali datum. </para>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>Številka</term>
+<listitem
+><para
+>Število, večje ali enako -1. -1 pomeni <quote
+>nedoločeno revizijo</quote
+>, 0 je začetek. Običajno teh številk ne bi smeli uporabljati (večina operacij s tem ne uspe). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Ključna beseda</term>
+<listitem
+><para
+>Eden od <itemizedlist>
+
+<listitem
+><para
+>HEAD (GLAVA) </para
+></listitem>
+
+<listitem
+><para
+>BASE (BAZA) </para
+></listitem>
+
+<listitem
+><para
+>COMMITED (POTRJEN) </para
+></listitem>
+
+<listitem
+><para
+>PREV </para
+></listitem>
+
+<listitem
+><para
+>START </para
+></listitem>
+
+<listitem
+><para
+>WORKING (DELOVNI) </para
+></listitem>
+
+</itemizedlist>
+
+</para>
+<para
+>Ključne besede razlikujejo med velikimi in malimi črkami! Na primer, glava ni isto kot GLAVA. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Datum</term>
+<listitem
+><para
+>Datum v obliki {LLLL-MM-DD}. Mora biti pravi MM ali DD - &eg; 2005-1-1 mora biti zapisano kot {2005-01-01}. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+<para
+>Dodajanje določene revizije &URL; bo vedno narejen prek <quote
+>?rev=<replaceable
+>revizije</replaceable
+></quote
+>. </para>
+</appendix>
+
+&documentation.index;
+</book>

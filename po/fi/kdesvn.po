@@ -1,6 +1,6 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Tommi Nieminen <translator@legisign.org>, 2014, 2015, 2021, 2023.
+# SPDX-FileCopyrightText: 2014, 2015, 2021, 2023, 2024 Tommi Nieminen <translator@legisign.org>
 # Lasse Liehu <lasse.liehu@gmail.com>, 2014, 2015, 2016.
 #
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-29 00:42+0000\n"
-"PO-Revision-Date: 2023-07-25 16:29+0300\n"
+"PO-Revision-Date: 2024-10-29 19:54+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -60,16 +60,14 @@ msgid "Password"
 msgstr "Salasana"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:51
-#, fuzzy, kde-format
-#| msgid "Delete repository"
+#, kde-format
 msgid "Checkout From Repository..."
-msgstr "Poista tietovarasto"
+msgstr "Nouda tietovarastosta…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:54
-#, fuzzy, kde-format
-#| msgid "Export"
+#, kde-format
 msgid "Export..."
-msgstr "Vie"
+msgstr "Vie…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:57
 #, kde-format
@@ -77,10 +75,9 @@ msgid "Update (Kdesvn)"
 msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:60
-#, fuzzy, kde-format
-#| msgid "Commit Added"
+#, kde-format
 msgid "Commit (Kdesvn)"
-msgstr "Toimita lisätyt"
+msgstr "Toimita (Kdesvn)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:63
 #, kde-format
@@ -88,28 +85,24 @@ msgid "kdesvn log (last 100)"
 msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:66
-#, fuzzy, kde-format
-#| msgid "Export a repository"
+#, kde-format
 msgid "Export from a Subversion repository..."
-msgstr "Vie varastoon"
+msgstr "Vie Subversion-tietovarastosta…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:69
-#, fuzzy, kde-format
-#| msgid "Delete repository"
+#, kde-format
 msgid "Checkout from a repository..."
-msgstr "Poista tietovarasto"
+msgstr "Nouda tietovarastosta…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:74
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Detailed Subversion info"
-msgstr "Subversion-ylläpitäjä"
+msgstr "Yksityiskohtainen Subversion-tieto"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:77
-#, fuzzy, kde-format
-#| msgid "Added in repository"
+#, kde-format
 msgid "Add to Repository"
-msgstr "Lisätty tietovarastoon"
+msgstr "Lisää tietovarastoon"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:80
 #: src/svnfrontend/maintreewidget.cpp:653
@@ -118,35 +111,29 @@ msgid "Check for unversioned items"
 msgstr "Tarkista versioimattomat tietueet"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:83
-#, fuzzy, kde-format
-#| msgid "Delete from repository"
+#, kde-format
 msgid "Delete From Repository"
 msgstr "Poista tietovarastosta"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:86
-#, fuzzy, kde-format
-#| msgid "Local changed items:"
+#, kde-format
 msgid "Revert Local Changes"
-msgstr "Muuttuneet paikalliset tietueet:"
+msgstr "Palauta paikalliset muutokset"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:89
-#, fuzzy, kde-format
-#| msgid "Rename"
+#, kde-format
 msgid "Rename..."
-msgstr "Muuta nimeä"
+msgstr "Muuta nimeä…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:92
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Export a Repository"
+#, kde-format
 msgid "Import Repository"
-msgstr "Vie varasto"
+msgstr "Tuo tietovarasto…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:97
-#, fuzzy, kde-format
-#| msgid "Switch URL"
+#, kde-format
 msgid "Switch..."
-msgstr "Vaihda verkko-osoitetta"
+msgstr "Vaihda…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:100
 #: src/svnfrontend/maintreewidget.cpp:824
@@ -155,10 +142,9 @@ msgid "Merge..."
 msgstr "Yhdistä…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:105
-#, fuzzy, kde-format
-#| msgid "Blame"
+#, kde-format
 msgid "Blame..."
-msgstr "Moiti"
+msgstr "Moiti…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:108
 #, kde-format
@@ -171,16 +157,14 @@ msgid "Diff (local)"
 msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:116
-#, fuzzy, kde-format
-#| msgid "Full revision tree"
+#, kde-format
 msgid "Display revision tree"
-msgstr "Täydellinen versiopuu"
+msgstr "Näytä versiopuu"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:127
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Subversion (kdesvn)"
-msgstr "Subversion-ylläpitäjä"
+msgstr "Subversion (Kdesvn)"
 
 #: src/kdesvn.cpp:79
 #, kde-format
@@ -258,10 +242,7 @@ msgid "Show the content of log cache database"
 msgstr "Näytä lokivälimuistitietokannan sisältö"
 
 #: src/kdesvn.cpp:134
-#, fuzzy, kde-format
-#| msgid ""
-#| "Could not load the part:\n"
-#| "%1"
+#, kde-format
 msgid ""
 "Could not load our part:\n"
 "%1"
@@ -594,11 +575,10 @@ msgid "Hotcopy finished."
 msgstr ""
 
 #: src/kdesvnview.cpp:282
-#, fuzzy, kde-format
-#| msgid "Load a repository from a svndump"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load a Repository From an svndump"
-msgstr "Lataa versionhallinta svn-vedoksesta"
+msgstr "Lataa tietovarasto svn-vedoksesta"
 
 #: src/kdesvnview.cpp:332
 #, kde-format
@@ -2244,10 +2224,9 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:33
-#, fuzzy, kde-format
-#| msgid "Not filling log cache because networking is disabled"
+#, kde-format
 msgid "Start refreshing the log cache for repository when networking enabled"
-msgstr "Ei täytetä lokivälimuistia, koska verkko ei ole käytössä"
+msgstr "Ala virkistää tietovaraston lokivälimuistia verkon tultua käyttöön"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:36
@@ -2304,17 +2283,15 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_info_recursive)
 #: src/settings/subversion_settings.ui:74
-#, fuzzy, kde-format
-#| msgid "Get item information recursively"
+#, kde-format
 msgid "Get item info recursively"
 msgstr "Nouda kohteen tiedot rekursiivisesti"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:84
-#, fuzzy, kde-format
-#| msgid "Should kdesvn retrieves properties on selected item in repositories"
+#, kde-format
 msgid "Should kdesvn retrieve properties on selected item in repositories"
-msgstr "Tulisiko kdesvn:n noutaa valitun kohteen ominaisuudet lähteistä"
+msgstr "Tulisiko kdesvn:n noutaa valitun kohteen ominaisuudet tietovarastoista"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:88
@@ -2408,8 +2385,7 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:184
-#, fuzzy, kde-format
-#| msgid "Should unversioned items displayed in commit dialog or not."
+#, kde-format
 msgid "Should unversioned items be displayed in commit dialog or not."
 msgstr "Tulisiko toimitusikkunassa näyttää versioimattomat kohteet."
 
@@ -4975,17 +4951,17 @@ msgstr "Toteutetaan ominaisuuksia"
 #: src/svnfrontend/svnactions.cpp:925
 #, kde-format
 msgid "<center>Applying<br/>hit cancel for abort</center>"
-msgstr ""
+msgstr "<center>Otetaan käyttöön<br/>keskeytä painamalla Peru</center>"
 
 #: src/svnfrontend/svnactions.cpp:961
 #, kde-format
 msgid "Could not change to folder %1\n"
-msgstr ""
+msgstr "Ei voitu vaihtaa kansioon %1\n"
 
 #: src/svnfrontend/svnactions.cpp:979
 #, kde-format
 msgid "Not commit because networking is disabled"
-msgstr ""
+msgstr "Ei toimitusta, koska verkko ei ole käytössä"
 
 #: src/svnfrontend/svnactions.cpp:1003 src/svnfrontend/svnactions.cpp:2463
 #, fuzzy, kde-format
@@ -5078,7 +5054,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Diff Display"
-msgstr ""
+msgstr "Eroavuusnäkymä"
 
 #: src/svnfrontend/svnactions.cpp:1518
 #, fuzzy, kde-format
@@ -5090,17 +5066,17 @@ msgstr "Tarkista päivitykset"
 #: src/svnfrontend/svnactions.cpp:1519
 #, kde-format
 msgid "Making update - hit Cancel for abort"
-msgstr ""
+msgstr "Päivitetään – keskeytä painamalla Peru"
 
 #: src/svnfrontend/svnactions.cpp:1604
 #, kde-format
 msgid "Which files or directories should I add?"
-msgstr ""
+msgstr "Mitkä tiedostot tai kansiot lisätään?"
 
 #: src/svnfrontend/svnactions.cpp:1611
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is versioned - break.</center>"
-msgstr ""
+msgstr "<center>Tietue<br/>%1<br/>on versioitu: keskeytys.</center>"
 
 #: src/svnfrontend/svnactions.cpp:1638
 #, kde-format
@@ -5138,7 +5114,7 @@ msgstr "Viedäänkö tiedostoa?"
 #: src/svnfrontend/svnactions.cpp:1733
 #, kde-format
 msgid "Checking out a file?"
-msgstr ""
+msgstr "Noudetaanko tiedosto?"
 
 #: src/svnfrontend/svnactions.cpp:1789
 #, kde-format
@@ -5160,12 +5136,12 @@ msgstr "Viedään"
 #: src/svnfrontend/svnactions.cpp:1790
 #, kde-format
 msgid "Checking out"
-msgstr ""
+msgstr "Noudetaan"
 
 #: src/svnfrontend/svnactions.cpp:1828
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
-msgstr ""
+msgstr "<center>Tietue<br/>%1<br/>ei ole versioitu: keskeytys.</center>"
 
 #: src/svnfrontend/svnactions.cpp:1860
 #, kde-format
@@ -5198,7 +5174,7 @@ msgstr "Siirrä varasto"
 #: src/svnfrontend/svnactions.cpp:1911
 #, kde-format
 msgid "Relocate repository to new URL"
-msgstr ""
+msgstr "Siirrä tietovarasto uuteen verkko-osoitteeseen"
 
 #: src/svnfrontend/svnactions.cpp:1934
 #, kde-format

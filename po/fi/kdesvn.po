@@ -1,6 +1,6 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Tommi Nieminen <translator@legisign.org>, 2014, 2015, 2021, 2023.
+# SPDX-FileCopyrightText: 2014, 2015, 2021, 2023, 2024 Tommi Nieminen <translator@legisign.org>
 # Lasse Liehu <lasse.liehu@gmail.com>, 2014, 2015, 2016.
 #
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-06-07 01:43+0000\n"
-"PO-Revision-Date: 2023-07-25 16:29+0300\n"
+"PO-Revision-Date: 2024-10-29 19:54+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -477,11 +477,10 @@ msgid "Hotcopy finished."
 msgstr ""
 
 #: src/kdesvnview.cpp:285
-#, fuzzy, kde-format
-#| msgid "Load a repository from a svndump"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load a Repository From an svndump"
-msgstr "Lataa versionhallinta svn-vedoksesta"
+msgstr "Lataa tietovarasto svn-vedoksesta"
 
 #: src/kdesvnview.cpp:335
 #, kde-format
@@ -4837,17 +4836,17 @@ msgstr "Toteutetaan ominaisuuksia"
 #: src/svnfrontend/svnactions.cpp:921
 #, kde-format
 msgid "<center>Applying<br/>hit cancel for abort</center>"
-msgstr ""
+msgstr "<center>Otetaan käyttöön<br/>keskeytä painamalla Peru</center>"
 
 #: src/svnfrontend/svnactions.cpp:959
 #, kde-format
 msgid "Could not change to folder %1\n"
-msgstr ""
+msgstr "Ei voitu vaihtaa kansioon %1\n"
 
 #: src/svnfrontend/svnactions.cpp:978
 #, kde-format
 msgid "Not commit because networking is disabled"
-msgstr ""
+msgstr "Ei toimitusta, koska verkko ei ole käytössä"
 
 #: src/svnfrontend/svnactions.cpp:1000 src/svnfrontend/svnactions.cpp:2338
 #, fuzzy, kde-format
@@ -4939,7 +4938,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Diff Display"
-msgstr ""
+msgstr "Eroavuusnäkymä"
 
 #: src/svnfrontend/svnactions.cpp:1438
 #, fuzzy, kde-format
@@ -4951,17 +4950,17 @@ msgstr "Tarkista päivitykset"
 #: src/svnfrontend/svnactions.cpp:1438
 #, kde-format
 msgid "Making update - hit Cancel for abort"
-msgstr ""
+msgstr "Päivitetään – keskeytä painamalla Peru"
 
 #: src/svnfrontend/svnactions.cpp:1526
 #, kde-format
 msgid "Which files or directories should I add?"
-msgstr ""
+msgstr "Mitkä tiedostot tai kansiot lisätään?"
 
 #: src/svnfrontend/svnactions.cpp:1533
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is versioned - break.</center>"
-msgstr ""
+msgstr "<center>Tietue<br/>%1<br/>on versioitu: keskeytys.</center>"
 
 #: src/svnfrontend/svnactions.cpp:1562
 #, kde-format
@@ -4994,7 +4993,7 @@ msgstr "Viedäänkö tiedostoa?"
 #: src/svnfrontend/svnactions.cpp:1657
 #, kde-format
 msgid "Checking out a file?"
-msgstr ""
+msgstr "Noudetaanko tiedosto?"
 
 #: src/svnfrontend/svnactions.cpp:1703
 #, kde-format
@@ -5016,12 +5015,12 @@ msgstr "Viedään"
 #: src/svnfrontend/svnactions.cpp:1703
 #, kde-format
 msgid "Checking out"
-msgstr ""
+msgstr "Noudetaan"
 
 #: src/svnfrontend/svnactions.cpp:1740
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
-msgstr ""
+msgstr "<center>Tietue<br/>%1<br/>ei ole versioitu: keskeytys.</center>"
 
 #: src/svnfrontend/svnactions.cpp:1773
 #, kde-format
@@ -5054,7 +5053,7 @@ msgstr "Siirrä varasto"
 #: src/svnfrontend/svnactions.cpp:1823
 #, kde-format
 msgid "Relocate repository to new URL"
-msgstr ""
+msgstr "Siirrä tietovarasto uuteen verkko-osoitteeseen"
 
 #: src/svnfrontend/svnactions.cpp:1846
 #, kde-format

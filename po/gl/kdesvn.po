@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-29 00:42+0000\n"
-"PO-Revision-Date: 2024-12-15 10:36+0100\n"
+"PO-Revision-Date: 2024-12-17 23:03+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -82,7 +82,7 @@ msgstr "Remitir con Kdesvn"
 #: src/fileitemactions/kdesvnactionsplugin.cpp:63
 #, kde-format
 msgid "kdesvn log (last 100)"
-msgstr "Historial de kdesvn (últimos 100)"
+msgstr "Rexistro de kdesvn (últimos 100)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:66
 #, kde-format
@@ -240,7 +240,7 @@ msgstr "Amosar o contido da base de datos"
 #: src/kdesvn.cpp:127
 #, kde-format
 msgid "Show the content of log cache database"
-msgstr "Mostra o contido da base de datos da caché do historial."
+msgstr "Amosa o contido da base de datos da caché do rexistro."
 
 #: src/kdesvn.cpp:134
 #, kde-format
@@ -279,7 +279,7 @@ msgstr "Listo"
 #: src/kdesvn_part.cpp:155
 #, kde-format
 msgid "Logs follow node changes"
-msgstr "O historial lista os cambios dos nodos."
+msgstr "O rexistro lista os cambios dos nodos."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_ignored_files)
 #. i18n: ectx: label, entry, group (subversion)
@@ -337,7 +337,7 @@ msgstr "Compoñente de kdesvn"
 #: src/kdesvn_part.cpp:286
 #, kde-format
 msgid "A Subversion Client by KDE (dynamic Part component)"
-msgstr "Un cliente de Subversion fornecido por KDE (compoñente dinámico)."
+msgstr "Un cliente de Subversion de KDE (compoñente dinámico)."
 
 #: src/kdesvn_part.cpp:288
 #, kde-format
@@ -466,7 +466,7 @@ msgstr "Ver"
 #: src/kdesvn_part.rc:89
 #, kde-format
 msgid "Log cache"
-msgstr "Caché do historial"
+msgstr "Caché do rexistro"
 
 #. i18n: ectx: Menu (help)
 #: src/kdesvn_part.rc:98 src/kdesvnui.rc:52
@@ -619,7 +619,7 @@ msgstr "Completouse o envorcado."
 #: src/kdesvnview.cpp:431
 #, kde-format
 msgid "Inserted %v not cached log entries of %m."
-msgstr "Inseríronse %v entradas do historial de %m que non están na caché."
+msgstr "Inseríronse %v entradas do rexistro de %m que non están na caché."
 
 #: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:768
 #, kde-format
@@ -817,7 +817,7 @@ msgstr "Nada para remitir."
 #: src/kiosvn/kiosvn.cpp:837
 #, kde-format
 msgid "Empty logs"
-msgstr "Baleirar o historial"
+msgstr "Baleirar os rexistros"
 
 #: src/ksvnwidgets/authdialogwidget.cpp:34
 #, kde-format
@@ -944,7 +944,7 @@ msgstr "Insira unha mensaxe de rexistro"
 #: src/ksvnwidgets/commitmessage.ui:184
 #, kde-format
 msgid "Last used log messages"
-msgstr "Últimas mensaxes de historial usadas"
+msgstr "Últimas mensaxes de rexistro usadas."
 
 #. i18n: ectx: property (text), widget (QLabel, m_LogLabel)
 #: src/ksvnwidgets/commitmessage.ui:199
@@ -1268,7 +1268,7 @@ msgstr "kdesvn"
 #: src/main.cpp:41
 #, kde-format
 msgid "A Subversion Client by KDE (standalone application)"
-msgstr "Un cliente de Subversion fornecido por KDE (aplicación independente)"
+msgstr "Un cliente de Subversion de KDE (aplicación independente)"
 
 #: src/main.cpp:43
 #, kde-format
@@ -1325,7 +1325,7 @@ msgstr "<ficheiro>"
 #: src/main.cpp:54
 #, kde-format
 msgid "Limit log output to <number>"
-msgstr "Limitar a saída do historial ao número <number>."
+msgstr "Limitar a saída do rexistro ao número <number>."
 
 #: src/main.cpp:54
 #, kde-format
@@ -1347,19 +1347,19 @@ msgstr "Documento para abrir"
 #: src/settings/cmdexecsettings.ui:11
 #, kde-format
 msgid "Show a small window containing the log after command executed"
-msgstr "Amosar unha pequena xanela co historial despois de executar a orde."
+msgstr "Amosar unha pequena xanela co rexistro despois de executar a orde."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_cmdline_show_logwindow)
 #: src/settings/cmdexecsettings.ui:14
 #, kde-format
 msgid "Show log after executing a command"
-msgstr "Amosar o historial despois de executar a orde."
+msgstr "Amosar o rexistro despois de executar a orde."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: src/settings/cmdexecsettings.ui:23
 #, kde-format
 msgid "Minimum log lines to show:"
-msgstr "Número mínimo de liñas do historial para amosar:"
+msgstr "Número mínimo de liñas do rexistro para amosar:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_cmdline_log_minline)
 #: src/settings/cmdexecsettings.ui:33
@@ -1367,8 +1367,8 @@ msgstr "Número mínimo de liñas do historial para amosar:"
 msgid ""
 "The minimum a log output must contain before kdesvn shows a single log window"
 msgstr ""
-"O número mínimo de liñas que debe conter a saída dun historial para que "
-"kdesvn amose unha xanela de historial."
+"O número mínimo de liñas que debe conter a saída dun rexistro para que "
+"kdesvn amose unha xanela de rexistro."
 
 #. i18n: ectx: property (specialValueText), widget (QSpinBox, kcfg_cmdline_log_minline)
 #: src/settings/cmdexecsettings.ui:39
@@ -1411,7 +1411,7 @@ msgstr "Non amosar entradas no menú de accións de primeiro nivel."
 #: src/settings/cmdexecsettings.ui:71
 #, kde-format
 msgid "KIO operations use standard log message"
-msgstr "As operacións de KIO usan mensaxes estándar do historial."
+msgstr "As operacións de KIO usan mensaxes estándar do rexistro."
 
 #. i18n: ectx: property (text), widget (QLabel, stdLogmsgLabel)
 #: src/settings/cmdexecsettings.ui:80
@@ -1789,6 +1789,7 @@ msgstr "O elemento ten que bloquearse:"
 msgid "Settings"
 msgstr "Configuración"
 
+# skip-rule: trasno-icon_reverse
 #. i18n: ectx: property (text), widget (QLabel, m_ListIconsSize_label)
 #: src/settings/display_settings.ui:14
 #, kde-format
@@ -1910,7 +1911,7 @@ msgstr "Amosar a diferenza no formato de Git"
 #: src/settings/kdesvn_part.kcfg:49
 #, kde-format
 msgid "Maximum number of log messages"
-msgstr "Número máximo de mensaxes do historial"
+msgstr "Número máximo de mensaxes do rexistro."
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:53
@@ -1948,14 +1949,14 @@ msgstr "Agochar os ficheiros do repositorio sen cambios."
 #: src/settings/kdesvn_part.kcfg:92 src/settings/subversion_settings.ui:145
 #, kde-format
 msgid "Log follows node changes"
-msgstr "O historial segue os cambios de nodo"
+msgstr "O rexistro segue os cambios de nodo."
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_always_list_changed_files)
 #: src/settings/kdesvn_part.kcfg:96 src/settings/subversion_settings.ui:161
 #, kde-format
 msgid "Log always reads list of changed files"
-msgstr "O historial sempre le a lista de ficheiros cambiados"
+msgstr "O rexistro sempre le a lista de ficheiros cambiados."
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:100
@@ -1967,7 +1968,7 @@ msgstr "Comprobar se hai actualizacións ao abrir a copia de traballo"
 #: src/settings/kdesvn_part.kcfg:104
 #, kde-format
 msgid "Start caching latest logs on open or commit"
-msgstr "Comezar a gardar na caché o historial máis recente ao abrir ou remitir"
+msgstr "Comezar a gardar na caché o rexistro máis recente ao abrir ou remitir."
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:108
@@ -2062,7 +2063,7 @@ msgstr "Configuración rexional para as liñas de autorías"
 #, kde-format
 msgid "Check status of log cache when starting revision tree"
 msgstr ""
-"Comprobar o estado da caché do historial ao comezar a árbore de revisións"
+"Comprobar o estado da caché do rexistro ao comezar a árbore de revisións."
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -2131,25 +2132,25 @@ msgstr ""
 #: src/settings/kdesvn_part.kcfg:255
 #, kde-format
 msgid "Show a small log window after executing a command."
-msgstr "Amosar unha xanela pequena co historial despois de executar a orde."
+msgstr "Amosar unha xanela pequena co rexistro despois de executar a orde."
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:259
 #, kde-format
 msgid "Log must contain at least lines to show"
-msgstr "O historial debe conter liñas para amosar"
+msgstr "O rexistro debe conter liñas para amosar"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:263
 #, kde-format
 msgid "KIO::svn operations use a standard log message"
-msgstr "As operacións de KIO::svn usan mensaxes estándar do historial."
+msgstr "As operacións de KIO::svn usan mensaxes estándar do rexistro."
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:267
 #, kde-format
 msgid "The standard log message to use with KIO if not asking for it."
-msgstr "A mensaxe estándar do historial para usar con KIO se non se solicita."
+msgstr "A mensaxe estándar do rexistro para usar con KIO se non se solicita."
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:271
@@ -2170,7 +2171,7 @@ msgid ""
 "This value holds for log dialog which kind of log is used, it is internal "
 "only."
 msgstr ""
-"Este valor contén o tipo de historial do diálogo do historial. Úsase só de "
+"Este valor contén o tipo de rexistro do diálogo de rexistros. Úsase só de "
 "maneira interna."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
@@ -2261,7 +2262,7 @@ msgstr "Cor dos elementos eliminados:"
 #, kde-format
 msgid "Should kdesvn check content of log cache before starting the tree"
 msgstr ""
-"Debería kdesvn comprobar o contido da caché do historial antes de comezar a "
+"Debería kdesvn comprobar o contido da caché do rexistro antes de comezar a "
 "árbore?"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_fill_cache_on_tree)
@@ -2273,7 +2274,7 @@ msgid ""
 "\n"
 "But this may slow down tree generation so it is disabled by default."
 msgstr ""
-"Ao comezar a xeración da árbore e a ler datos da caché do historial, kdesvn "
+"Ao comezar a xeración da árbore e a ler datos da caché do rexistro, kdesvn "
 "podería comprobar se hai elementos novos no repositorio, sempre que o uso da "
 "rede estea activado.\n"
 "\n"
@@ -2284,7 +2285,7 @@ msgstr ""
 #: src/settings/revisiontree_settings.ui:183
 #, kde-format
 msgid "Check log cache fill before reading tree"
-msgstr "Comprobar o contido da caché do historial antes de ler a árbore."
+msgstr "Comprobar o contido da caché do rexistro antes de ler a árbore."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_start_updates_check_on_open)
 #: src/settings/subversion_settings.ui:14
@@ -2305,14 +2306,14 @@ msgstr "Comprobar se hai actualizacións ao abrir a copia de traballo."
 #, kde-format
 msgid "Start refreshing the log cache for repository when networking enabled"
 msgstr ""
-"Comezar a actualizar a caché do historial do repositorio cando o uso da rede "
+"Comezar a actualizar a caché do rexistro do repositorio cando o uso da rede "
 "estea activado."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:36
 #, kde-format
 msgid "Start fill log cache on open"
-msgstr "Comezar a encher a caché do historial ao abrir."
+msgstr "Comezar a encher a caché do rexistro ao abrir."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:43
@@ -2388,6 +2389,7 @@ msgid "Should kdesvn retrieve properties on selected item in repositories"
 msgstr ""
 "Debería kdesvn obter propiedades do elemento seleccionado no repositorio."
 
+# skip-rule: trasno-file
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:88
 #, kde-format
@@ -2499,7 +2501,7 @@ msgid ""
 msgstr ""
 "Ler as listas dos ficheiros cambiados pode reducir a velocidade das "
 "operacións. Pero se desmarca esta opción, kdesvn podería fallar ao xerar as "
-"diferenzas entre cambios dun nodo desde o visor do historial."
+"diferenzas entre cambios dun nodo desde o visor do rexistro."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_review_commit)
 #: src/settings/subversion_settings.ui:171
@@ -2561,13 +2563,13 @@ msgstr "Actualizar xera pais que faltan."
 msgid ""
 "Not filling log cache because it is disabled due setting for this repository."
 msgstr ""
-"Non se encherá a caché do historial porque está desactivada na configuración "
+"Non se encherá a caché do rexistro porque está desactivada na configuración "
 "para o repositorio."
 
 #: src/svnfrontend/background/fillcachethread.cpp:76
 #, kde-format
 msgid "Filling log cache in background."
-msgstr "Enchendo a caché do historial en segundo plano."
+msgstr "Enchendo a caché do rexistro en segundo plano."
 
 #: src/svnfrontend/background/fillcachethread.cpp:98
 #, kde-format
@@ -2582,7 +2584,7 @@ msgstr "A caché encheuse ata a revisión %1."
 #: src/svnfrontend/background/fillcachethread.cpp:120
 #, kde-format
 msgid "Filling log cache in background finished."
-msgstr "Completouse a enchedura da caché do historial en segundo plano."
+msgstr "Completouse a enchedura da caché do rexistro en segundo plano."
 
 #: src/svnfrontend/background/tcontextlistener.cpp:182
 #, kde-format
@@ -3003,7 +3005,7 @@ msgstr "Compatíbel con versións de Subversion anteriores á 1.6."
 #: src/svnfrontend/createrepodlg.ui:113
 #, kde-format
 msgid "Disable automatic log file removal (BDB only)"
-msgstr "Desactivar a eliminación automática do ficheiro do historial (só BDB)."
+msgstr "Desactivar a eliminación automática do ficheiro do rexistro (só BDB)."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: src/svnfrontend/createrepodlg.ui:123
@@ -3064,7 +3066,7 @@ msgstr "Compatíbel con versións de Subversion anteriores á 1.8."
 #: src/svnfrontend/database/dboverview.cpp:113
 #, kde-format
 msgid "Log cache holds %1 log entries and consumes %2 on disk."
-msgstr "A caché do historial contén %1 entradas e consume %2 de almacenamento."
+msgstr "A caché do rexistro contén %1 entradas e consume %2 de almacenamento."
 
 #: src/svnfrontend/database/dboverview.cpp:129
 #, kde-format
@@ -3165,13 +3167,13 @@ msgstr "Configuración de %1"
 #: src/svnfrontend/database/dbsettings.ui:21
 #, kde-format
 msgid "Log cache settings"
-msgstr "Configuración da caché do historial"
+msgstr "Configuración da caché do rexistro"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dbcfg_noCacheUpdate)
 #: src/svnfrontend/database/dbsettings.ui:27
 #, kde-format
 msgid "Do not update log cache on open"
-msgstr "Non actualizar a caché do historial ao abrir."
+msgstr "Non actualizar a caché do rexistro ao abrir."
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: src/svnfrontend/database/dbsettings.ui:40
@@ -3183,7 +3185,7 @@ msgstr "Prefixos para excluír na árbore de revisións"
 #: src/svnfrontend/database/dbsettings.ui:58
 #, kde-format
 msgid "Log and statistics setting"
-msgstr "Configuración do historial e das estatísticas"
+msgstr "Configuración do rexistro e das estatísticas"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/svnfrontend/database/dbsettings.ui:70
@@ -3198,9 +3200,9 @@ msgid ""
 "This is a list which words/substrings a log entry must contain so it will be "
 "hidden from log and statistics"
 msgstr ""
-"Esta é unha lista de palabra ou subcadeas que as entradas do historial poden "
-"conter. Se unha entrada do historial contén unha delas, a entrada agóchase "
-"do historial e das estatísticas."
+"Esta é unha lista de palabra ou subcadeas que as entradas do rexistro poden "
+"conter. Se unha entrada do rexistro contén unha delas, a entrada agóchase do "
+"rexistro e das estatísticas."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/svnfrontend/database/dbsettings.ui:98
@@ -3214,8 +3216,8 @@ msgstr "Non amosar remisións dos seguintes usuarios"
 msgid ""
 "Do not display commits of listed users in log window and statistics view"
 msgstr ""
-"Non amosar as remisións dos usuarios listados na xanela do historial nin na "
-"vista de estatísticas."
+"Non amosar as remisións das persoas usuarias listadas na xanela do rexistro "
+"nin na vista de estatísticas."
 
 #. i18n: ectx: property (text), widget (QCheckBox, dbcfg_filter_empty_author)
 #: src/svnfrontend/database/dbsettings.ui:115
@@ -3840,13 +3842,13 @@ msgstr "Rexistros"
 #: src/svnfrontend/svnactions.cpp:319
 #, kde-format
 msgid "Getting logs - hit Cancel for abort"
-msgstr "Obtendo o historial. Prema «Cancelar» para interromper a operación."
+msgstr "Obtendo os rexistros. Prema «Cancelar» para interromper a operación."
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:105
 #, kde-format
 msgid "No log cache possible due broken database and networking not allowed."
 msgstr ""
-"Non é posíbel gardar o historial na caché porque a base de datos está danada "
+"Non é posíbel gardar o rexistro na caché porque a base de datos está danada "
 "e non se permite usar a rede."
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:105
@@ -3856,13 +3858,13 @@ msgid ""
 "Could not retrieve logs, reason:\n"
 "%1"
 msgstr ""
-"Non foi posíbel obter o historial polo seguinte motivo:\n"
+"Non foi posíbel obter os rexistros polo seguinte motivo:\n"
 "%1"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:139
 #, kde-format
 msgid "Scanning the logs for %1"
-msgstr "Analizando o historial de %1"
+msgstr "Buscando %1 nos rexistros."
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:139
 #, kde-format
@@ -3894,11 +3896,12 @@ msgstr "Repositorio para copiar:"
 msgid "Destination folder:"
 msgstr "Cartafol de destino:"
 
+# skip-rule: trasno-clean
 #. i18n: ectx: property (text), widget (QCheckBox, m_Cleanlogs)
 #: src/svnfrontend/hotcopydlg.ui:51
 #, kde-format
 msgid "Clean logs"
-msgstr "Limpar o historial"
+msgstr "Borrar os rexistros."
 
 #: src/svnfrontend/importdir_logmsg.cpp:37
 #, kde-format
@@ -4545,12 +4548,12 @@ msgstr "Pecha todas as gallas da árbore de ficheiros"
 #: src/svnfrontend/maintreewidget.cpp:2054
 #, kde-format
 msgid "Update log cache"
-msgstr "Actualizar a caché do historial"
+msgstr "Actualizar a caché do rexistro."
 
 #: src/svnfrontend/maintreewidget.cpp:886
 #, kde-format
 msgid "Update the log cache for current repository"
-msgstr "Actualizar a caché do historial para o repositorio actual"
+msgstr "Actualizar a caché do rexistro para o repositorio actual."
 
 #: src/svnfrontend/maintreewidget.cpp:900
 #, kde-format
@@ -4566,7 +4569,7 @@ msgstr "Configuración do repositorio actual"
 #: src/svnfrontend/maintreewidget.cpp:2049
 #, kde-format
 msgid "Stop updating the log cache"
-msgstr "Deter a actualización da caché do historial"
+msgstr "Deter a actualización da caché do rexistro."
 
 #: src/svnfrontend/maintreewidget.cpp:1278
 #, kde-format
@@ -5592,7 +5595,7 @@ msgstr "Hai elementos novos no repositorio"
 #, kde-format
 msgid "Not filling log cache because networking is disabled"
 msgstr ""
-"Non se encheu a caché do historial porque o uso da rede está desactivado."
+"Non se encheu a caché do rexistro porque o uso da rede está desactivado."
 
 #: src/svnfrontend/svnactions.cpp:2759
 #, kde-format
@@ -5684,7 +5687,7 @@ msgstr "Obstruída"
 #: src/svnfrontend/svnlogdlg.ui:18
 #, kde-format
 msgid "SVN Log"
-msgstr "Historial de SVN"
+msgstr "Rexistro de SVN"
 
 #. i18n: ectx: property (text), widget (QLabel, startLabel)
 #: src/svnfrontend/svnlogdlg.ui:31
@@ -5702,7 +5705,7 @@ msgstr "Revisión final"
 #: src/svnfrontend/svnlogdlg.ui:57
 #, kde-format
 msgid "Get Logs"
-msgstr "Obter o historial"
+msgstr "Obter os rexistros"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_PrevFiftyButton)
 #: src/svnfrontend/svnlogdlg.ui:64

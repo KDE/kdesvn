@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail.com>, 2016, 2017.
-# SPDX-FileCopyrightText: 2023, 2024 Adrián Chaves (Gallaecio)
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Adrián Chaves (Gallaecio)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-29 00:42+0000\n"
-"PO-Revision-Date: 2024-12-19 22:55+0100\n"
+"PO-Revision-Date: 2025-01-06 20:50+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -2431,11 +2431,10 @@ msgid ""
 "dialog."
 msgstr ""
 "Almacenar os contrasinais adoita ser un problema de seguridade. O propio "
-"kdesvn non almacena ningún contrasinal, pero o Subversion que contén si que "
-"as pode gardar na súa zona de configuración. Se outros usuarios teñen acceso "
-"de lectura a esta zona, non debería marcar esta opción, pero podería "
-"seleccionala no diálogo de autenticación para contas específicas que non "
-"sexan importantes."
+"Kdesvn non almacena ningún contrasinal, pero o Subversion que contén si que "
+"as pode gardar na súa zona de configuración. Se outros usuarios poden ler "
+"esta zona, non debería marcar esta opción, pero podería seleccionala no "
+"diálogo de autenticación para contas específicas que non sexan importantes."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_passwords_in_wallet)
 #: src/settings/subversion_settings.ui:117

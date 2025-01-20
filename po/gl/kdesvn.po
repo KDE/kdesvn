@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-29 00:42+0000\n"
-"PO-Revision-Date: 2025-01-12 16:34+0100\n"
+"PO-Revision-Date: 2025-01-19 12:36+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -4802,6 +4802,7 @@ msgid "Force delete on modified/unversioned items"
 msgstr ""
 "Forzar a eliminación de elementos modificador ou alleos ao repositorio."
 
+# skip-rule: trasno-undo_reverse
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_Reintegrate)
 #: src/svnfrontend/merge_dlg.ui:126
 #, kde-format

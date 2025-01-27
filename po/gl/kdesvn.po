@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-29 00:42+0000\n"
-"PO-Revision-Date: 2025-01-19 12:36+0100\n"
+"PO-Revision-Date: 2025-01-26 21:17+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1017,6 +1017,7 @@ msgstr "Manter as copias locais."
 msgid "Select depth of operation"
 msgstr "Seleccione a profundidade da operación."
 
+# skip-rule: trasno-download_reverse
 #. i18n: ectx: property (whatsThis), widget (QComboBox, m_DepthCombo)
 #: src/ksvnwidgets/depthselector.ui:41
 #, kde-format
@@ -1425,6 +1426,7 @@ msgstr "Mensaxe estándar:"
 msgid "Can KIO overwrite existing files?"
 msgstr "Pode KIO sobrescribir ficheiros existentes?"
 
+# skip-rule: trasno-download_reverse
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_kio_can_overwrite)
 #: src/settings/cmdexecsettings.ui:103
 #, kde-format
@@ -2541,6 +2543,7 @@ msgstr ""
 msgid "Update modifies instead of creating conflicts"
 msgstr "Actualizar xera modificacións en vez de conflitos."
 
+# skip-rule: trasno-download_reverse
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_make_parents)
 #: src/settings/subversion_settings.ui:207
 #, kde-format
@@ -3349,6 +3352,7 @@ msgstr ""
 "revisión que cambiou o obxecto.<br/> <b>Id</b>, un resumo comprimido do "
 "resto de palabras clave."
 
+# skip-rule: trasno-download_reverse
 #: src/svnfrontend/editpropsdlg.cpp:61
 #, kde-format
 msgid ""
@@ -3503,6 +3507,7 @@ msgid "Click for short info about pre-defined property name"
 msgstr ""
 "Prema para obter información breve sobre o nome de propiedade predefinido."
 
+# skip-rule: trasno-download_reverse
 #. i18n: ectx: property (windowTitle), widget (QWidget, CheckoutInfo)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:14
 #, kde-format
@@ -4267,6 +4272,7 @@ msgstr ""
 msgid "Open repository of working copy"
 msgstr "Abrir o repositorio da copia de traballo"
 
+# skip-rule: trasno-download_reverse
 #: src/svnfrontend/maintreewidget.cpp:668
 #, kde-format
 msgid "Opens the repository the current working copy was checked out from"
@@ -4401,6 +4407,7 @@ msgstr "Remitir"
 msgid "Diff local changes"
 msgstr "Diferenzas cos cambios locais"
 
+# skip-rule: trasno-download_reverse
 #: src/svnfrontend/maintreewidget.cpp:782
 #: src/svnfrontend/maintreewidget.cpp:789
 #, kde-format
@@ -4469,6 +4476,7 @@ msgstr ""
 msgid "Open With..."
 msgstr "Abrir con…"
 
+# skip-rule: trasno-download_reverse
 #: src/svnfrontend/maintreewidget.cpp:834
 #, kde-format
 msgid "Checkout current repository path"
@@ -4490,6 +4498,7 @@ msgstr "Exportar a ruta actual do repositorio"
 msgid "Select browse revision"
 msgstr "Seleccionar a revisión para examinar"
 
+# skip-rule: trasno-download_reverse
 #: src/svnfrontend/maintreewidget.cpp:850 src/svnfrontend/svnactions.cpp:1707
 #: src/svnfrontend/svnactions.cpp:1714
 #, kde-format
@@ -5351,6 +5360,7 @@ msgctxt "@title:window"
 msgid "Export a Repository"
 msgstr "Exportar un repositorio"
 
+# skip-rule: trasno-download_reverse
 #: src/svnfrontend/svnactions.cpp:1689
 #, kde-format
 msgctxt "@title:window"
@@ -5372,6 +5382,7 @@ msgstr "A ruta local é incorrecta!"
 msgid "Exporting a file?"
 msgstr "Exportar un ficheiro?"
 
+# skip-rule: trasno-download_reverse
 #: src/svnfrontend/svnactions.cpp:1733
 #, kde-format
 msgid "Checking out a file?"
@@ -5394,6 +5405,7 @@ msgstr "Obter"
 msgid "Exporting"
 msgstr "Exportando"
 
+# skip-rule: trasno-download_reverse
 #: src/svnfrontend/svnactions.cpp:1790
 #, kde-format
 msgid "Checking out"

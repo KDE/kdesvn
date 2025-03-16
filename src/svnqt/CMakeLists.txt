@@ -101,7 +101,7 @@ endif()
 target_link_libraries(svnqt
     PUBLIC
         ${SUBVERSION_ALL_LIBS}
-        KF5::ConfigCore
+        KF6::ConfigCore
         Qt::Core
         Qt::Sql
 )

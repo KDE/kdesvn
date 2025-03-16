@@ -128,11 +128,11 @@ add_library(svnfrontend STATIC ${svnfrontendsrc} ${frontend_ui_sources} ${hdr})
 
 target_link_libraries(svnfrontend
     PRIVATE
-        KF5::IconThemes
+        KF6::IconThemes
     PUBLIC
-        KF5::ItemViews
-        KF5::JobWidgets
-        KF5::Service
+        KF6::ItemViews
+        KF6::JobWidgets
+        KF6::Service
         ksvnwidgets
         svnqt
 )

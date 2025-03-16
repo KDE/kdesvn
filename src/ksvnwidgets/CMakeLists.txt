@@ -74,15 +74,15 @@ target_link_libraries(ksvnwidgets
     PRIVATE
         kdesvnhelpers
         kdesvncfgreader
-        KF5::Wallet
+        KF6::Wallet
     PUBLIC
         svnqt
         Qt::Widgets
-        KF5::Completion
-        KF5::ConfigWidgets
-        KF5::I18n
-        KF5::KIOWidgets
-        KF5::Parts
-        KF5::TextWidgets
-        KF5::XmlGui
+        KF6::Completion
+        KF6::ConfigWidgets
+        KF6::I18n
+        KF6::KIOWidgets
+        KF6::Parts
+        KF6::TextWidgets
+        KF6::XmlGui
 )

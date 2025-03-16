@@ -28,7 +28,7 @@ set(kded_kdesvnd_src
 
 qt_add_dbus_adaptor( kded_kdesvnd_src org.kde.kdesvnd.xml kdesvnd.h kdesvnd)
 
-kcoreaddons_add_plugin(kded_kdesvnd INSTALL_NAMESPACE "kf5/kded" SOURCES ${kded_kdesvnd_src})
+kcoreaddons_add_plugin(kded_kdesvnd INSTALL_NAMESPACE "kf6/kded" SOURCES ${kded_kdesvnd_src})
 set_target_properties(kded_kdesvnd PROPERTIES
     OUTPUT_NAME kdesvnd
 )
@@ -39,8 +39,8 @@ target_link_libraries(kded_kdesvnd
     kdesvncfgreader
     svnqt
     Qt::DBus
-    KF5::DBusAddons
-    KF5::Notifications
+    KF6::DBusAddons
+    KF6::Notifications
 )
 
 install(FILES org.kde.kdesvnd.xml DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR} RENAME kf5_org.kde.kdesvnd.xml)

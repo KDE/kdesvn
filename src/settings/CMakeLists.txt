@@ -21,7 +21,7 @@ kconfig_add_kcfg_files(cfgsrc
     kdesvnsettings.kcfgc)
 add_library(kdesvncfgreader STATIC ${cfgsrc})
 target_link_libraries(kdesvncfgreader
-    KF5::ConfigGui
+    KF6::ConfigGui
 )
 
 ki18n_wrap_ui(settings_ui_sources
@@ -51,9 +51,9 @@ target_link_libraries(settingsdlgs
     PRIVATE
         kdesvncfgreader
     PUBLIC
-        KF5::WidgetsAddons
-        KF5::Completion
-        KF5::I18n
+        KF6::WidgetsAddons
+        KF6::Completion
+        KF6::I18n
 )
 target_include_directories(settingsdlgs
     PUBLIC

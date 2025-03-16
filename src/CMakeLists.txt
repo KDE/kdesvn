@@ -75,9 +75,12 @@ add_subdirectory(fileitemactions)
 
 add_executable(kdesvn ${kdesvnsrc})
 
-kcoreaddons_add_plugin(kdesvnpart SOURCES ${partsrc} INSTALL_NAMESPACE "kf5/parts")
+kcoreaddons_add_plugin(kdesvnpart SOURCES ${partsrc} INSTALL_NAMESPACE "kf6/parts")
 
-kcoreaddons_desktop_to_json(kdesvnpart kdesvnpart.desktop)
+# TODO: Re-enable the desktop icon.
+# See also https://phabricator.kde.org/T14564 for some hints
+# And also re-enable the installation of the icon below.
+#kcoreaddons_desktop_to_json(kdesvnpart kdesvnpart.desktop)
 
 target_link_libraries(kdesvnpart
     svnfrontend
@@ -94,14 +97,14 @@ set_target_properties(kdesvnpart
     LINK_FLAGS "${APR_EXTRA_LDFLAGS} ${APU_EXTRA_LDFLAGS} ${LINK_NO_UNDEFINED}")
 
 target_link_libraries(kdesvnaskpass
-    KF5::CoreAddons
-    KF5::I18n
-    KF5::WidgetsAddons
-    KF5::Wallet
+    KF6::CoreAddons
+    KF6::I18n
+    KF6::WidgetsAddons
+    KF6::Wallet
 )
 target_link_libraries(kdesvn
-    KF5::Parts
-    KF5::Bookmarks
+    KF6::Parts
+    KF6::Bookmarks
     kdesvnhelpers
     svnfrontend
     svnbackground
@@ -113,5 +116,6 @@ install(TARGETS kdesvn kdesvnaskpass
 # the resources
 install(FILES org.kde.kdesvn.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 install(FILES org.kde.kdesvn.desktop DESTINATION ${KDE_INSTALL_APPDIR})
-install(FILES kdesvnpart.desktop  DESTINATION ${KDE_INSTALL_KSERVICESDIR})
+# TODO See the TODO above...
+#install(FILES kdesvnpart.desktop  DESTINATION ${KDE_INSTALL_KSERVICESDIR})
 install(FILES kdesvn.notifyrc DESTINATION ${KDE_INSTALL_DATADIR}/kdesvn)

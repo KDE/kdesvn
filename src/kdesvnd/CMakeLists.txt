@@ -43,7 +43,7 @@ target_link_libraries(kded_kdesvnd
     KF6::Notifications
 )
 
-install(FILES org.kde.kdesvnd.xml DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR} RENAME kf5_org.kde.kdesvnd.xml)
+install(FILES org.kde.kdesvnd.xml DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR} RENAME kf6_org.kde.kdesvnd.xml)
 
 configure_file(org.kde.kdesvnd.service.in ${CMAKE_CURRENT_BINARY_DIR}/org.kde.kdesvnd.service)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.kde.kdesvnd.service DESTINATION ${KDE_INSTALL_DBUSSERVICEDIR})

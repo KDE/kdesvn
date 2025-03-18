@@ -302,4 +302,14 @@
    </hints>
   </connection>
  </connections>
+ <slots>
+  <slot>startNumberToggled(bool)</slot>
+  <slot>startHeadToggled(bool)</slot>
+  <slot>startBaseToggled(bool)</slot>
+  <slot>stopBaseToggled(bool)</slot>
+  <slot>stopHeadToggled(bool)</slot>
+  <slot>stopNumberToggled(bool)</slot>
+  <slot>stopDateToggled(bool)</slot>
+  <slot>startDateToggled(bool)</slot>
+ </slots>
 </ui>

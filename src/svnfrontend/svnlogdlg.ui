@@ -530,5 +530,11 @@
   <slot>slotCustomContextMenu(QPoint)</slot>
   <slot>slotPrevFifty()</slot>
   <slot>slotBeginHead()</slot>
+  <slot>slotDispPrevious()</slot>
+  <slot>slotDispSelected()</slot>
+  <slot>slotRevisionSelected()</slot>
+  <slot>slotGetLogs()</slot>
+  <slot>slotBlameItem()</slot>
+  <slot>slotHelpRequested()</slot>
  </slots>
 </ui>

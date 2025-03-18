@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>RevisionButton</class>
- <widget class="QWidget" name="RevisionButton" >
-  <property name="geometry" >
+ <widget class="QWidget" name="RevisionButton">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,23 +10,23 @@
     <height>28</height>
    </rect>
   </property>
-  <layout class="QHBoxLayout" >
-   <property name="spacing" >
+  <layout class="QHBoxLayout">
+   <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin" >
+   <property name="margin" stdset="0">
     <number>0</number>
    </property>
    <item>
-    <widget class="QPushButton" name="m_RevisionButton" >
-     <property name="text" >
+    <widget class="QPushButton" name="m_RevisionButton">
+     <property name="text">
       <string>-1</string>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
- <layoutdefault spacing="6" margin="11" />
+ <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections>
   <connection>
@@ -34,15 +35,18 @@
    <receiver>RevisionButton</receiver>
    <slot>askRevision()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>20</x>
      <y>20</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>20</x>
      <y>20</y>
     </hint>
    </hints>
   </connection>
  </connections>
+ <slots>
+  <slot>askRevision()</slot>
+ </slots>
 </ui>

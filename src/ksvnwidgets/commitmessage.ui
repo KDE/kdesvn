@@ -443,5 +443,10 @@
   <slot>slotItemDoubleClicked(QModelIndex)</slot>
   <slot>slotSelectAll()</slot>
   <slot>slotUnselectAll()</slot>
+  <slot>slotMarkUnversioned()</slot>
+  <slot>slotUnmarkUnversioned()</slot>
+  <slot>slotDiffSelected()</slot>
+  <slot>hideNewItems(bool)</slot>
+  <slot>insertFile()</slot>
  </slots>
 </ui>

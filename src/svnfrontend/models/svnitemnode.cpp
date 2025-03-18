@@ -172,7 +172,7 @@ char SvnItemModelNodeDir::sortChar() const
     return 1;
 }
 
-SvnItemModelNode *SvnItemModelNodeDir::findPath(const QVector<QStringRef> &parts)
+SvnItemModelNode *SvnItemModelNodeDir::findPath(const QVector<QString> &parts)
 {
     for (auto &child : m_Children) {
         if (child->shortName() == parts[0]) {

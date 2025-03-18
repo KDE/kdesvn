@@ -69,7 +69,7 @@ public:
 
 private:
     static QString getLogmessageInternal(Commitmsg_impl *ptr, bool *ok, svn::Depth *rec, bool *keep_locks, CommitActionEntries *result, QWidget *parent);
-protected Q_SLOTS:
+protected slots:
     void slotHistoryActivated(int);
     void slotUnmarkUnversioned();
     void slotDiffSelected();
@@ -99,7 +99,7 @@ protected:
     CommitModel *m_CurrentModel;
     CommitFilterModel *m_SortModel;
 
-Q_SIGNALS:
+signals:
     void makeDiff(const QString &, const svn::Revision &, const QString &, const svn::Revision &, QWidget *);
     void sigRevertItem(const QStringList &);
 };

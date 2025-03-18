@@ -82,7 +82,7 @@ public:
     const QVector<SvnItemModelNode *> &childList() const;
     SvnItemModelNode *child(int row) const;
 
-    SvnItemModelNode *findPath(const QVector<QStringRef> &parts);
+    SvnItemModelNode *findPath(const QVector<QString> &parts);
     int indexOf(const QString &fullPath) const;
 
     bool contains(const QString &fullName) const;

@@ -211,7 +211,7 @@ void Commitmsg_impl::initHistory()
         if (historyEntry.length() <= 40) {
             m_LogHistory->addItem(historyEntry);
         } else {
-            m_LogHistory->addItem(historyEntry.leftRef(37) + QStringLiteral("..."));
+            m_LogHistory->addItem(historyEntry.left(37) + QStringLiteral("..."));
         }
     }
     if (!sLastMessage.isEmpty()) {

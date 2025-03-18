@@ -35,6 +35,7 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 
+#include <QElapsedTimer>
 #include <QProgressDialog>
 #include <QWidget>
 
@@ -54,7 +55,7 @@ public:
 
     long max_rev, min_rev;
     QProgressDialog *progress;
-    QTime m_stopTick;
+    QElapsedTimer m_stopTick;
 
     QWidget *dlgParent;
     RevTreeWidget *m_TreeDisplay;

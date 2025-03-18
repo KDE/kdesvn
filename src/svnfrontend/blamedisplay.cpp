@@ -32,12 +32,12 @@
 
 #include <QAction>
 #include <QBrush>
+#include <QElapsedTimer>
 #include <QFontDatabase>
 #include <QInputDialog>
 #include <QMap>
 #include <QPushButton>
 #include <QTextCodec>
-#include <QTime>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <QTreeWidgetItemIterator>
@@ -149,7 +149,7 @@ void BlameTreeItem::display()
         setTextAlignment(COL_REV, Qt::AlignRight | Qt::AlignVCenter);
         setText(COL_REV, QString::number(m_Content.revision()));
         if (m_Content.date().isValid()) {
-            setText(COL_DATE, m_Content.date().toString(Qt::SystemLocaleShortDate));
+            setText(COL_DATE, QLocale::system().toString(m_Content.date(), QLocale::ShortFormat));
         }
     }
     setText(COL_LINENR, QString::number(m_Content.lineNumber() + 1));
@@ -226,7 +226,7 @@ void BlameDisplay::setContent(const QString &what, const svn::AnnotatedFile &bla
     int b = 0;
     uint colinc = 0;
 
-    QTime t;
+    QElapsedTimer t;
     t.start();
     QList<QTreeWidgetItem *> _list;
     _list.reserve(blame.size());

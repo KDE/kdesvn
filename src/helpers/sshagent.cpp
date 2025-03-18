@@ -168,7 +168,7 @@ void SshAgent::slotProcessExited(int exitCode, QProcess::ExitStatus exitStatus)
 
     const QRegExp bashPidRx(QStringLiteral("SSH_AGENT_PID=(\\d*).*"));
     const QRegExp bashSockRx(QStringLiteral("SSH_AUTH_SOCK=(.*\\.\\d*);.*"));
-    const QStringList m_outputLines = m_Output.split(QLatin1Char('\n'), QString::SkipEmptyParts);
+    const QStringList m_outputLines = m_Output.split(QLatin1Char('\n'), Qt::SkipEmptyParts);
 
     for (const auto &outputLine : m_outputLines) {
         if (m_pid.isEmpty()) {

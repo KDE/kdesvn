@@ -87,8 +87,9 @@ bool Url::isValid(const QString &url)
                                                              QLatin1String("ksvn+https"),
                                                              QLatin1String("ksvn+file")};
     const QString urlTest(url);
+    // TODO: Use QUrl::scheme()
     for (const QLatin1String &schema : VALID_SCHEMAS) {
-        const QStringRef urlComp = urlTest.leftRef(schema.size());
+        const QString urlComp = urlTest.left(schema.size());
 
         if (schema == urlComp) {
             return true;

@@ -247,9 +247,9 @@ int CommandExec::exec(const QCommandLineParser *parser)
                 tmp = tmpurl.path();
             }
         }
-        const QVector<QStringRef> l = tmp.splitRef(QLatin1Char('?'), QString::SkipEmptyParts);
+        const QVector<QString> l = tmp.split(QLatin1Char('?'), Qt::SkipEmptyParts);
         if (!l.isEmpty()) {
-            tmp = l.first().toString();
+            tmp = l.first();
         }
         while (tmp.endsWith(QLatin1Char('/'))) {
             tmp.chop(1);
@@ -543,13 +543,13 @@ void CommandExec::slotCmd_addnew()
 bool CommandExec::scanRevision()
 {
     const QString revstring = m_pCPart->parser->value(QStringLiteral("r"));
-    const QVector<QStringRef> revl = revstring.splitRef(QLatin1Char(':'), QString::SkipEmptyParts);
+    const QVector<QString> revl = revstring.split(QLatin1Char(':'), Qt::SkipEmptyParts);
     if (revl.isEmpty()) {
         return false;
     }
-    m_pCPart->start = revl[0].toString();
+    m_pCPart->start = revl[0];
     if (revl.count() > 1) {
-        m_pCPart->end = revl[1].toString();
+        m_pCPart->end = revl[1];
     }
     m_pCPart->rev_set = true;
     return true;

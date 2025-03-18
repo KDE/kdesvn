@@ -49,11 +49,11 @@ SvnLogModelNode::SvnLogModelNode(const svn::LogEntry &_entry)
     , _realName(QString())
     , _date(svn::DateTime(_entry.date).toQDateTime())
 {
-    const QVector<QStringRef> sp = _entry.message.splitRef(QLatin1Char('\n'));
+    const QVector<QString> sp = _entry.message.split(QLatin1Char('\n'));
     if (sp.isEmpty()) {
         _shortMessage = _entry.message;
     } else {
-        _shortMessage = sp.at(0).toString();
+        _shortMessage = sp.at(0);
     }
 }
 

@@ -134,7 +134,7 @@ EditPropsDlg::EditPropsDlg(bool bAddMode, QWidget *parent)
     m_ui->m_NameEdit->setHistoryItems(fileProperties, true);
 
     m_ui->m_NameEdit->setToolTip(i18n("Select or enter new property"));
-    connect(m_ui->m_NameEdit, QOverload<const QString &>::of(&KHistoryComboBox::activated), this, &EditPropsDlg::updateToolTip);
+    connect(m_ui->m_NameEdit, &KHistoryComboBox::textActivated, this, &EditPropsDlg::updateToolTip);
 }
 
 EditPropsDlg::~EditPropsDlg()

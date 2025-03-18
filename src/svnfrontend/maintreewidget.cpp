@@ -221,9 +221,9 @@ bool MainTreeWidget::openUrl(const QUrl &url, bool noReinit)
     _url.setScheme(proto);
 
     const QString baseUriString = _url.url(QUrl::StripTrailingSlash);
-    const QVector<QStringRef> s = baseUriString.splitRef(QLatin1Char('?'));
+    const QVector<QString> s = baseUriString.split(QLatin1Char('?'));
     if (s.size() > 1) {
-        setBaseUri(s.first().toString());
+        setBaseUri(s.first());
     } else {
         setBaseUri(baseUriString);
     }

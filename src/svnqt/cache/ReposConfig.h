@@ -35,7 +35,8 @@
 #include <QVariant>
 
 #include "svnqt/svnqt_defines.h"
-#include <ConversionCheck>
+// TODO Try to get this back alive
+// #include <ConversionCheck>
 
 namespace svn
 {
@@ -84,7 +85,7 @@ inline void ReposConfig::setValue(const QString &repository, const QString &key,
 template<typename T>
 inline void ReposConfig::writeCheck(const QString &repository, const QString &key, const T &value)
 {
-    ConversionCheck::to_QVariant<T>();
+    // ConversionCheck::to_QVariant<T>();
     setValue(repository, key, QVariant::fromValue(value));
 }
 
@@ -97,8 +98,8 @@ inline void ReposConfig::setValue(const QString &repository, const QString &key,
 template<typename T>
 inline void ReposConfig::writeListCheck(const QString &repository, const QString &key, const QList<T> &list)
 {
-    ConversionCheck::to_QVariant<T>();
-    ConversionCheck::to_QString<T>();
+    // ConversionCheck::to_QVariant<T>();
+    // ConversionCheck::to_QString<T>();
     QVariantList data;
     for (const T &value : list)
         data.append(qVariantFromValue(value));

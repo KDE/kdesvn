@@ -23,7 +23,7 @@
 
 #include "kdesvn-config.h"
 
-#include <kparts/browserextension.h>
+#include <kparts/navigationextension.h>
 #include <kparts/readonlypart.h>
 #include <kparts/readwritepart.h>
 #include <kparts/statusbarextension.h>
@@ -103,7 +103,7 @@ protected slots:
 
 class KCmdLineArgs;
 
-class KdesvnBrowserExtension : public KParts::BrowserExtension
+class KdesvnBrowserExtension : public KParts::NavigationExtension
 {
     Q_OBJECT
 public:

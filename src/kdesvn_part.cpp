@@ -45,7 +45,8 @@
 #include <ktoggleaction.h>
 #include <kxmlguifactory.h>
 
-K_PLUGIN_CLASS_WITH_JSON(kdesvnpart, "kdesvnpart.json")
+// TODO Revive the kdesvnpart
+// K_PLUGIN_CLASS_WITH_JSON(kdesvnpart, "kdesvnpart.json")
 
 static const char version[] = KDESVN_VERSION;
 
@@ -258,7 +259,7 @@ bool kdesvnpart::closeUrl()
 }
 
 KdesvnBrowserExtension::KdesvnBrowserExtension(kdesvnpart *p)
-    : KParts::BrowserExtension(p)
+    : KParts::NavigationExtension(p)
 {
 }
 

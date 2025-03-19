@@ -30,7 +30,6 @@
 #include <KProcess>
 
 #include <QContextMenuEvent>
-#include <QDesktopWidget>
 #include <QFileDialog>
 #include <QFontDatabase>
 #include <QGraphicsScene>
@@ -38,8 +37,9 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPixmap>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QResizeEvent>
+#include <QScreen>
 #include <QScrollBar>
 #include <QTemporaryFile>
 #include <QTransform>
@@ -150,7 +150,7 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
         return;
     }
     // remove line breaks when lines to long
-    QRegExp endslash("\\\\\\n");
+    QRegularExpression endslash("\\\\\\n");
     m_dotOutput.remove(endslash);
     double scale = 1.0;
     double dotWidth = 1.0, dotHeight = 1.0;
@@ -183,13 +183,13 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
             int w = qRound(scaleX * dotWidth);
             int h = qRound(scaleY * dotHeight);
             m_xMargin = 50;
-            const QDesktopWidget *dw = QApplication::desktop();
-            if (w < dw->width()) {
-                m_xMargin += (dw->width() - w) / 2;
+            const QSize size = QApplication::primaryScreen()->availableSize();
+            if (w < size.width()) {
+                m_xMargin += (size.width() - w) / 2;
             }
             m_yMargin = 50;
-            if (h < dw->height()) {
-                m_yMargin += (dw->height() - h) / 2;
+            if (h < size.height()) {
+                m_yMargin += (size.height() - h) / 2;
             }
             m_Scene = new QGraphicsScene(0.0, 0.0, qreal(w + 2 * m_xMargin), qreal(h + 2 * m_yMargin));
             m_Scene->setBackgroundBrush(Qt::white);
@@ -506,7 +506,7 @@ void RevGraphView::dumpRevtree()
                    << " " << it1.value().targets[j].key << " [fontsize=" << _fontsize << ",fontname=\"" << f.family() << "\",style=\"solid\"];\n";
         }
     }
-    stream << "}\n" << flush;
+    stream << "}\n" << Qt::flush;
     m_renderProcess = new KProcess;
     m_renderProcess->setEnv("LANG", "C");
     *m_renderProcess << "dot";
@@ -524,19 +524,19 @@ QString RevGraphView::toolTip(const QString &_nodename, bool full) const
     if (it == m_Tree.constEnd()) {
         return res;
     }
-    const QVector<QStringRef> sp = it.value().Message.splitRef(QLatin1Char('\n'));
+    const QVector<QString> sp = it.value().Message.split(QLatin1Char('\n'));
     QString sm;
     if (sp.isEmpty()) {
         sm = it.value().Message;
     } else {
         if (!full) {
-            sm = sp[0].toString() + QLatin1String("...");
+            sm = sp[0] + QLatin1String("...");
         } else {
             for (int j = 0; j < sp.count(); ++j) {
                 if (j > 0) {
                     sm += QLatin1String("<br/>");
                 }
-                sm += sp[j].toString();
+                sm += sp[j];
             }
         }
     }

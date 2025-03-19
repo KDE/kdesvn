@@ -78,6 +78,8 @@ target_link_libraries(ksvnwidgets
     PUBLIC
         svnqt
         Qt::Widgets
+        Qt::Core5Compat
+        KF6::Codecs
         KF6::Completion
         KF6::ConfigWidgets
         KF6::I18n

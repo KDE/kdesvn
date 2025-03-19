@@ -105,6 +105,7 @@ target_link_libraries(kdesvnaskpass
 target_link_libraries(kdesvn
     KF6::Parts
     KF6::Bookmarks
+    KF6::BookmarksWidgets
     kdesvnhelpers
     svnfrontend
     svnbackground

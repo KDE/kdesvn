@@ -359,12 +359,12 @@ void kdesvnd::unRegisterKioFeedback(qulonglong kioid)
 
 void kdesvnd::notifyKioOperation(const QString &text)
 {
-    KNotification::event(QLatin1String("kdesvn-kio"), text, QPixmap(), nullptr, KNotification::CloseOnTimeout, QLatin1String("kdesvn"));
+    KNotification::event(QLatin1String("kdesvn-kio"), text, QPixmap(), KNotification::CloseOnTimeout, QLatin1String("kdesvn"));
 }
 
 void kdesvnd::errorKioOperation(const QString &text)
 {
-    KNotification::event(KNotification::Error, text, QPixmap(), nullptr, KNotification::CloseOnTimeout);
+    KNotification::event(KNotification::Error, text, QPixmap(), KNotification::CloseOnTimeout);
 }
 
 void kdesvnd::setKioStatus(qulonglong kioid, int status, const QString &message)

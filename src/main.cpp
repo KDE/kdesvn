@@ -58,10 +58,12 @@ int main(int argc, char **argv)
     parser.process(app);
     aboutData.processCommandLine(&parser);
 
+    // TODO Try to re-enable session management
     // see if we are starting with session management
-    if (app.isSessionRestored()) {
+    /*if (app.isSessionRestored()) {
         RESTORE(kdesvn);
-    } else {
+    } else*/
+    {
         // no session.. just start up normally
         if (parser.positionalArguments().isEmpty()) {
             kdesvn *widget = new kdesvn;

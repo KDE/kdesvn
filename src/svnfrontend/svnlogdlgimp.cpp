@@ -93,11 +93,11 @@ void SvnLogDlgImp::dispLog(const svn::LogEntriesMapPtr &log, const QString &what
             QString reg;
             s = m_Actions->searchProperty(reg, QStringLiteral("bugtraq:logregex"), pegUrl, peg, true);
             if (!s.isNull() && !reg.isEmpty()) {
-                const QVector<QStringRef> s1 = reg.splitRef(QLatin1Char('\n'));
+                const QVector<QString> s1 = reg.split(QLatin1Char('\n'));
                 if (!s1.isEmpty()) {
-                    _r1.setPattern(s1.at(0).toString());
+                    _r1.setPattern(s1.at(0));
                     if (s1.size() > 1) {
-                        _r2.setPattern(s1.at(1).toString());
+                        _r2.setPattern(s1.at(1));
                     }
                 }
             }
@@ -167,18 +167,20 @@ QString SvnLogDlgImp::genReplace(const QString &r1match)
 
     while (pos > -1) {
         oldpos = pos + count;
-        pos = r1match.indexOf(_r2, pos + count);
+        // TODO This is a tough one. Figure out the intention first
+        // pos = r1match.indexOf(_r2, pos + count);
+        pos = -1;
         if (pos == -1) {
             break;
         }
         count = _r2.matchedLength();
-        res += r1match.midRef(oldpos, pos - oldpos);
+        res += r1match.mid(oldpos, pos - oldpos);
         QString sub = r1match.mid(pos, count);
         QString _url = _bugurl;
         _url.replace(QStringLiteral("%BUGID%"), sub);
         res += anf + _url + mid + sub + end;
     }
-    res += r1match.midRef(oldpos);
+    res += r1match.mid(oldpos);
     return res;
 }
 

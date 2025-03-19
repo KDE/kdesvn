@@ -81,13 +81,20 @@ void DateTime::setAprTime(apr_time_t aTime)
     m_time.setTimeSpec(Qt::LocalTime);
 }
 
+QString DateTime::toString() const
+{
+    return QLocale::system().toString(m_time, QLocale::ShortFormat);
+}
+
 QString DateTime::toString(const QString &format) const
 {
     return m_time.toString(format);
 }
 
+/*
 QString DateTime::toString(Qt::DateFormat f) const
 {
     return m_time.toString(f);
 }
+*/
 } // namespace svn

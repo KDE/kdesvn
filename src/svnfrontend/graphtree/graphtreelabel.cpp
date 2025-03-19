@@ -209,7 +209,7 @@ int GraphMark::type() const
 
 void GraphMark::paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *)
 {
-    if (option->levelOfDetail < .5) {
+    if (option->levelOfDetailFromTransform(p->worldTransform()) < .5) {
         QRadialGradient g(rect().center(), rect().width() / 3);
         g.setColorAt(0.0, Qt::gray);
         g.setColorAt(1.0, Qt::white);

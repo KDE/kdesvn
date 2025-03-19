@@ -51,7 +51,7 @@ GraphPanMark::~GraphPanMark()
 
 void GraphPanMark::paint(QPainter *p, const QStyleOptionGraphicsItem *option, QWidget *w)
 {
-    if (option->levelOfDetail < .5) {
+    if (option->levelOfDetailFromTransform(p->worldTransform()) < .5) {
         QGraphicsRectItem::paint(p, option, w);
     }
 }

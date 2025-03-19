@@ -26,6 +26,7 @@
 #include <QString>
 
 class CContextListenerData;
+class KLocalizedString;
 
 /**
 @author Rajko Albrecht
@@ -90,8 +91,8 @@ Q_SIGNALS:
 
 protected:
     static const int smax_actionstring;
-    static const char *action_strings[];
-    static const char *notify_state_strings[];
+    static const KLocalizedString action_strings[];
+    static const KLocalizedString notify_state_strings[];
     CContextListenerData *m_Data;
 
 private:

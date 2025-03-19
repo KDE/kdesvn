@@ -63,48 +63,49 @@ CContextListenerData::~CContextListenerData()
 
 const int CContextListener::smax_actionstring = svn_wc_notify_failed_unlock + 1;
 
-const char *CContextListener::action_strings[] = {I18N_NOOP("Add to revision control"),
-                                                  I18N_NOOP("Copy"),
-                                                  I18N_NOOP("Delete"),
-                                                  I18N_NOOP("Restore missing"),
-                                                  I18N_NOOP("Revert"),
-                                                  I18N_NOOP("Revert failed"),
-                                                  I18N_NOOP("Resolved"),
-                                                  I18N_NOOP("Skip"),
-                                                  I18N_NOOP("Deleted"),
-                                                  I18N_NOOP("Added"),
-                                                  I18N_NOOP("Update"), // svn_wc_notify_update_update
-                                                  I18N_NOOP("Update complete"),
-                                                  I18N_NOOP("Update external module"),
-                                                  nullptr, // status completed - will not send is just noisy
-                                                  I18N_NOOP("Status on external"), // svn_wc_notify_status_external
-                                                  I18N_NOOP("Commit Modified"),
-                                                  I18N_NOOP("Commit Added"),
-                                                  I18N_NOOP("Commit Deleted"),
-                                                  I18N_NOOP("Commit Replaced"),
-                                                  nullptr, // tx delta -> making ticks instead
-                                                  nullptr, // svn_wc_notify_blame_revision - using ticks
-                                                  I18N_NOOP("Locking"),
-                                                  I18N_NOOP("Unlocked"),
-                                                  I18N_NOOP("Lock failed"),
-                                                  I18N_NOOP("Unlock failed")};
+const KLocalizedString CContextListener::action_strings[] = {ki18n("Add to revision control"),
+                                                             ki18n("Copy"),
+                                                             ki18n("Delete"),
+                                                             ki18n("Restore missing"),
+                                                             ki18n("Revert"),
+                                                             ki18n("Revert failed"),
+                                                             ki18n("Resolved"),
+                                                             ki18n("Skip"),
+                                                             ki18n("Deleted"),
+                                                             ki18n("Added"),
+                                                             ki18n("Update"), // svn_wc_notify_update_update
+                                                             ki18n("Update complete"),
+                                                             ki18n("Update external module"),
+                                                             KLocalizedString(), // status completed - will not send is just noisy
+                                                             ki18n("Status on external"), // svn_wc_notify_status_external
+                                                             ki18n("Commit Modified"),
+                                                             ki18n("Commit Added"),
+                                                             ki18n("Commit Deleted"),
+                                                             ki18n("Commit Replaced"),
+                                                             KLocalizedString(), // tx delta -> making ticks instead
+                                                             KLocalizedString(), // svn_wc_notify_blame_revision - using ticks
+                                                             ki18n("Locking"),
+                                                             ki18n("Unlocked"),
+                                                             ki18n("Lock failed"),
+                                                             ki18n("Unlock failed")};
 
-const char *CContextListener::notify_state_strings[] = {nullptr, // = 0
-                                                        nullptr,
-                                                        I18N_NOOP("unchanged"),
-                                                        I18N_NOOP("item wasn't present"),
-                                                        I18N_NOOP("unversioned item obstructed work"),
-                                                        // I18N_NOOP("Pristine state was modified."), // should send a signal with path instead of message?
-                                                        nullptr,
-                                                        I18N_NOOP("Modified state had mods merged in."),
-                                                        I18N_NOOP("Modified state got conflicting mods.")};
+const KLocalizedString CContextListener::notify_state_strings[] = {
+    KLocalizedString(), // = 0
+    KLocalizedString(),
+    ki18n("unchanged"),
+    ki18n("item wasn't present"),
+    ki18n("unversioned item obstructed work"),
+    // ki18n("Pristine state was modified."), // should send a signal with path instead of message?
+    KLocalizedString(),
+    ki18n("Modified state had mods merged in."),
+    ki18n("Modified state got conflicting mods.")};
 
 QString CContextListener::NotifyAction(svn_wc_notify_action_t action)
 {
     if (action >= smax_actionstring || action < 0) {
         return QString();
     }
-    return (action_strings[action] == nullptr) ? QString() : i18n(action_strings[action]);
+    return (action_strings[action].isEmpty()) ? QString() : action_strings[action].toString();
 }
 
 QString CContextListener::NotifyState(svn_wc_notify_state_t state)
@@ -112,7 +113,7 @@ QString CContextListener::NotifyState(svn_wc_notify_state_t state)
     if (state > svn_wc_notify_state_conflicted || state < 0) {
         return QString();
     }
-    return (notify_state_strings[state] == nullptr) ? QString() : i18n(notify_state_strings[state]);
+    return (notify_state_strings[state].isEmpty()) ? QString() : notify_state_strings[state].toString();
 }
 
 CContextListener::CContextListener(QObject *parent)

@@ -23,10 +23,10 @@
 
 #include "kdesvn-config.h"
 
-#include <KBookmarks/KBookmarkActionMenu>
-#include <KBookmarks/KBookmarkManager>
-#include <KBookmarks/KBookmarkMenu>
-#include <KBookmarks/KBookmarkOwner>
+#include <kbookmarkactionmenu.h>
+#include <kbookmarkmanager.h>
+#include <kbookmarkmenu.h>
+#include <kbookmarkowner.h>
 #include <kparts/mainwindow.h>
 #include <kparts/readonlypart.h>
 

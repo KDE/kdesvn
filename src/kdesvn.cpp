@@ -27,6 +27,7 @@
 #include <QApplication>
 #include <QDir>
 #include <QMenuBar>
+#include <QPointer>
 #include <QStatusBar>
 #include <QTimer>
 
@@ -69,18 +70,19 @@ kdesvn::kdesvn()
     // and a status bar
     statusBar()->show();
 
-    QDir bookmarkDir(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
+    QDir bookmarkDir(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation));
     if (!bookmarkDir.exists()) {
         bookmarkDir.mkpath(bookmarkDir.absolutePath());
     }
 
     m_bookmarkFile = bookmarkDir.absolutePath() + QLatin1String("/bookmarks.xml");
-    m_BookmarkManager = KBookmarkManager::managerForExternalFile(m_bookmarkFile);
+    m_BookmarkManager = new KBookmarkManager(m_bookmarkFile);
     m_BookmarksActionmenu = new KBookmarkActionMenu(m_BookmarkManager->root(), i18n("&Bookmarks"), this);
 
     actionCollection()->addAction(QStringLiteral("bookmarks"), m_BookmarksActionmenu);
     m_Bookmarkactions = new KActionCollection(static_cast<QWidget *>(this));
-    m_pBookmarkMenu = new KBookmarkMenu(m_BookmarkManager, this, m_BookmarksActionmenu->menu(), m_Bookmarkactions);
+    // TODO Revive the associated action collection
+    m_pBookmarkMenu = new KBookmarkMenu(m_BookmarkManager, this, m_BookmarksActionmenu->menu() /*, m_Bookmarkactions*/);
     m_pBookmarkMenu->setParent(this); // clear when kdesvn window gets destroyed
 
     // this routine will find and load our Part.  it finds the Part by

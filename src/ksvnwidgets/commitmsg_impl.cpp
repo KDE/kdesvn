@@ -207,7 +207,7 @@ void Commitmsg_impl::initHistory()
         }
     }
     QStringList::const_iterator it;
-    for (const QString &historyEntry : qAsConst(sLogHistory)) {
+    for (const QString &historyEntry : std::as_const(sLogHistory)) {
         if (historyEntry.length() <= 40) {
             m_LogHistory->addItem(historyEntry);
         } else {

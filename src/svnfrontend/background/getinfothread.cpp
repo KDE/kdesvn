@@ -97,7 +97,7 @@ void GetInfoThread::appendNode(SvnItemModelNode *node)
     }
     QMutexLocker ml(&m_QueueLock);
     bool found = false;
-    for (const SvnItemModelNode *qNode : qAsConst(m_NodeQueue)) {
+    for (const SvnItemModelNode *qNode : std::as_const(m_NodeQueue)) {
         if (qNode->fullName() == node->fullName()) {
             found = true;
             break;

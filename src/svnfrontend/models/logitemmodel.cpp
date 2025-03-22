@@ -57,7 +57,7 @@ void SvnLogModel::setLogData(const svn::LogEntriesMapPtr &log, const QString &na
 
     m_data.reserve(log->count());
     beginInsertRows(QModelIndex(), 0, log->count() - 1);
-    for (const svn::LogEntry &entry : qAsConst(*log)) {
+    for (const svn::LogEntry &entry : std::as_const(*log)) {
         SvnLogModelNodePtr np(new SvnLogModelNode(entry));
         m_data.append(np);
         if (entry.revision > m_max) {

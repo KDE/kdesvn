@@ -1010,7 +1010,7 @@ bool SvnActions::makeCommit(const svn::Targets &targets)
                 do {
                     containsUnversionedDirectory = false;
                     _Cache = m_Data->m_Svnclient->status(params.path(tgt.path()));
-                    for (const svn::StatusPtr &ptr : qAsConst(_Cache)) {
+                    for (const svn::StatusPtr &ptr : std::as_const(_Cache)) {
                         if (!ptr->isVersioned()) {
                             if (QFileInfo(ptr->entry().name()).isDir()) {
                                 m_Data->m_Svnclient->add(ptr->path(), svn::DepthEmpty, false, false, true);
@@ -1025,7 +1025,7 @@ bool SvnActions::makeCommit(const svn::Targets &targets)
                 emit clientException(e.msg());
                 return false;
             }
-            for (const svn::StatusPtr &ptr : qAsConst(_Cache)) {
+            for (const svn::StatusPtr &ptr : std::as_const(_Cache)) {
                 const QString _p = ptr->path();
                 QVector<svn_wc_status_kind> nodeStatusesForCheck{svn_wc_status_modified,
                                                                  svn_wc_status_added,
@@ -1088,7 +1088,7 @@ bool SvnActions::makeCommit(const svn::Targets &targets)
         }
         svn::Paths _add, _commit, _delete;
         depth = svn::DepthInfinity;
-        for (const CommitActionEntry &entry : qAsConst(_result)) {
+        for (const CommitActionEntry &entry : std::as_const(_result)) {
             _commit.append(entry.name());
             if (entry.type() == CommitActionEntry::ADD_COMMIT) {
                 _add.append(entry.name());
@@ -2486,7 +2486,7 @@ void SvnActions::checkAddItems(const QString &path, bool print_error_box)
     if (!makeStatus(path, dlist, where, true, true, false, false)) {
         return;
     }
-    for (const auto &entry : qAsConst(dlist)) {
+    for (const auto &entry : std::as_const(dlist)) {
         if (!entry->isVersioned()) {
             rlist.append(entry);
             displist.append(entry->path());
@@ -2502,7 +2502,7 @@ void SvnActions::checkAddItems(const QString &path, bool print_error_box)
         dlg->setWithCancelButton();
         QTreeWidget *ptr(new QTreeWidget(dlg));
         ptr->headerItem()->setText(0, i18n("Item"));
-        for (const QString &text : qAsConst(displist)) {
+        for (const QString &text : std::as_const(displist)) {
             QTreeWidgetItem *n = new QTreeWidgetItem(ptr);
             n->setText(0, text);
             n->setCheckState(0, Qt::Checked);

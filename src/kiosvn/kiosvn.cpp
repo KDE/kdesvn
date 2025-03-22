@@ -732,7 +732,7 @@ KIO::WorkerResult kio_svnProtocol::status(const QUrl &wc, bool cR, bool rec)
         return extraError(KIO::ERR_WORKER_DEFINED, e.msg());
     }
     qCDebug(KDESVN_LOG) << "Status got " << dlist.count() << " entries." << Qt::endl;
-    for (const svn::StatusPtr &s : qAsConst(dlist)) {
+    for (const svn::StatusPtr &s : std::as_const(dlist)) {
         if (!s) {
             continue;
         }
@@ -839,7 +839,7 @@ KIO::WorkerResult kio_svnProtocol::svnlog(int revstart, const QString &revstring
             continue;
         }
 
-        for (const svn::LogEntry &logEntry : qAsConst(logs)) {
+        for (const svn::LogEntry &logEntry : std::as_const(logs)) {
             const QString num(QString::number(m_pData->m_Listener.counter()).rightJustified(10, QLatin1Char('0')));
             setMetaData(num + QStringLiteral("path"), url.path());
             setMetaData(num + QStringLiteral("rev"), QString::number(logEntry.revision));

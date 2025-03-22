@@ -29,10 +29,10 @@ public:
     ~ProcessData()
     {
         QStringList::iterator it2;
-        for (const QString &fn : qAsConst(_tempFiles)) {
+        for (const QString &fn : std::as_const(_tempFiles)) {
             QFile::remove(fn);
         }
-        for (const QString &dir : qAsConst(_tempDirs)) {
+        for (const QString &dir : std::as_const(_tempDirs)) {
             QDir(dir).removeRecursively();
         }
     }

@@ -1295,7 +1295,7 @@ void MainTreeWidget::recAddIgnore(SvnItem *item)
     if (!m_Data->m_Model->svnWrapper()->makeStatus(item->fullName(), res, start, _d, true /* all entries */, false, false)) {
         return;
     }
-    for (const svn::StatusPtr &ptr : qAsConst(res)) {
+    for (const svn::StatusPtr &ptr : std::as_const(res)) {
         if (!ptr->isRealVersioned() || ptr->entry().kind() != svn_node_dir) {
             continue;
         }

@@ -98,7 +98,7 @@ public:
         apr_array_header_t *ranges = apr_array_make(pool, m_ranges.size(), sizeof(svn_opt_revision_range_t *));
         svn_opt_revision_range_t *range;
 
-        for (const RevisionRange &rr : qAsConst(m_ranges)) {
+        for (const RevisionRange &rr : std::as_const(m_ranges)) {
             range = (svn_opt_revision_range_t *)apr_palloc(pool, sizeof(*range));
             range->start = *rr.first.revision();
             range->end = *rr.second.revision();

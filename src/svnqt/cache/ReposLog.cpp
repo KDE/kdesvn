@@ -269,7 +269,7 @@ bool svn::cache::ReposLog::checkFill(svn::Revision &start, svn::Revision &end, b
         }
 
         DatabaseLocker l(&m_Database);
-        for (const LogEntry &le : qAsConst(_internal)) {
+        for (const LogEntry &le : std::as_const(_internal)) {
             _insertLogEntry(le);
             if (cp && cp->getListener()) {
                 // cp->getListener()->contextProgress(++icount,_internal.size());

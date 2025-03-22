@@ -836,7 +836,7 @@ bool SvnItemModel::refreshDirnode(SvnItemModelNodeDir *node, bool check_empty, b
     for (int i = 0; i < node->m_Children.size(); ++i) {
         const SvnItemModelNode *n = node->m_Children[i];
         bool found = false;
-        for (const auto &entry : qAsConst(dlist)) {
+        for (const auto &entry : std::as_const(dlist)) {
             if (entry->path() == n->fullName()) {
                 found = true;
                 break;

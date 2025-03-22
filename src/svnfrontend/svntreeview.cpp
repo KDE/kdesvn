@@ -76,7 +76,7 @@ void SvnTreeView::dropEvent(QDropEvent *event)
 
     QAbstractProxyModel *proxyModel = static_cast<QAbstractProxyModel *>(model());
 
-    const QModelIndex index = indexAt(event->pos());
+    const QModelIndex index = indexAt(event->position().toPoint());
     const QModelIndex index2(index.isValid() ? proxyModel->mapToSource(index) : QModelIndex());
 
     QMap<QString, QString> metaMap;

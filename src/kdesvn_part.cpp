@@ -52,7 +52,8 @@ static const char version[] = KDESVN_VERSION;
 kdesvnpart::kdesvnpart(QWidget *parentWidget, QObject *parent, const KPluginMetaData &metadata, const QVariantList &args)
     : KParts::ReadOnlyPart(parent)
 {
-    Q_UNUSED(args);
+    Q_UNUSED(args)
+    Q_UNUSED(metadata)
     init(parentWidget, false);
 }
 

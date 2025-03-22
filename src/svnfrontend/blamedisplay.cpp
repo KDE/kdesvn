@@ -306,7 +306,7 @@ void BlameDisplay::setContent(const QString &what, const svn::AnnotatedFile &bla
         }
     }
     m_ui->m_BlameTree->addTopLevelItems(_list);
-    qDebug("Time elapsed: %d ms", t.elapsed());
+    qDebug() << "Time elapsed:" << t.elapsed() << "ms";
     m_ui->m_BlameTree->resizeColumnToContents(COL_REV);
     m_ui->m_BlameTree->resizeColumnToContents(COL_DATE);
     m_ui->m_BlameTree->resizeColumnToContents(COL_AUT);

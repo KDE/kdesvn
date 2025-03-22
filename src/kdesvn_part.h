@@ -49,8 +49,9 @@ public:
     /**
      * Default constructor
      */
-    kdesvnpart(QWidget *parentWidget, QObject *parent, const QVariantList &args = QVariantList());
+    kdesvnpart(QWidget *parentWidget, QObject *parent, const KPluginMetaData &metadata, const QVariantList &args = QVariantList());
 
+    // TODO Check if we need this overloaded constructor
     kdesvnpart(QWidget *parentWidget, QObject *parent, bool ownapp, const QVariantList &args = QVariantList());
 
     /**

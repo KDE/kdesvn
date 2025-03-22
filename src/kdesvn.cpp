@@ -88,7 +88,7 @@ kdesvn::kdesvn()
     // this routine will find and load our Part.  it finds the Part by
     // name which is a bad idea usually.. but it's alright in this
     // case since our Part is made for this Shell
-    KPluginMetaData md(QStringLiteral("kf5/parts/kdesvnpart"));
+    KPluginMetaData md(QStringLiteral("kf6/parts/kdesvnpart"));
     const auto result = KPluginFactory::instantiatePlugin<KParts::ReadOnlyPart>(md, this);
     if (result) {
         m_part = result.plugin;

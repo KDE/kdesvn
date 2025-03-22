@@ -45,12 +45,11 @@
 #include <ktoggleaction.h>
 #include <kxmlguifactory.h>
 
-// TODO Revive the kdesvnpart
-// K_PLUGIN_CLASS_WITH_JSON(kdesvnpart, "kdesvnpart.json")
+K_PLUGIN_CLASS_WITH_JSON(kdesvnpart, "kdesvnpart.json")
 
 static const char version[] = KDESVN_VERSION;
 
-kdesvnpart::kdesvnpart(QWidget *parentWidget, QObject *parent, const QVariantList &args)
+kdesvnpart::kdesvnpart(QWidget *parentWidget, QObject *parent, const KPluginMetaData &metadata, const QVariantList &args)
     : KParts::ReadOnlyPart(parent)
 {
     Q_UNUSED(args);

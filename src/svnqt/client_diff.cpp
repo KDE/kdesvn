@@ -59,7 +59,7 @@ QByteArray Client_impl::diff_peg(const DiffParameter &options)
     DiffData ddata(options.tmpPath(), options.path1(), options.rev1(), options.path1(), options.rev2());
 
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
-    error = svn_client_diff_peg6(
+    error = svn_client_diff_peg7(
 #else
     error = svn_client_diff_peg5(
 #endif
@@ -82,6 +82,7 @@ QByteArray Client_impl::diff_peg(const DiffParameter &options)
         false, // TODO: properties_only
 #endif
         options.git_diff_format(),
+        options.pretty_print_merge_info(),
         APR_LOCALE_CHARSET,
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
         ddata.outStream(),
@@ -115,7 +116,7 @@ QByteArray Client_impl::diff(const DiffParameter &options)
     DiffData ddata(options.tmpPath(), options.path1(), options.rev1(), options.path2(), options.rev2());
 
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
-    error = svn_client_diff6(_options,
+    error = svn_client_diff7(_options,
 #else
     error = svn_client_diff5(_options,
 #endif
@@ -137,6 +138,7 @@ QByteArray Client_impl::diff(const DiffParameter &options)
                              false, // TODO: properties_only
 #endif
                              options.git_diff_format(),
+                             options.pretty_print_merge_info(),
                              APR_LOCALE_CHARSET,
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
                              ddata.outStream(),

@@ -90,6 +90,7 @@ public:
         , _ignore_contenttype(false)
         , _copies_as_adds(false)
         , _git_diff_format(false)
+        , _pretty_print_merge_info(true)
     {
     }
 
@@ -109,6 +110,7 @@ public:
     // subversion 1.7
     bool _copies_as_adds;
     bool _git_diff_format;
+    bool _pretty_print_merge_info;
 };
 
 DiffParameter::DiffParameter()
@@ -136,6 +138,7 @@ GETSETSI(DiffParameter, bool, _ignore_contenttype, ignoreContentType)
 GETSETSI(DiffParameter, bool, _noDiffDeleted, noDiffDeleted)
 GETSETSI(DiffParameter, bool, _copies_as_adds, copies_as_adds)
 GETSETSI(DiffParameter, bool, _git_diff_format, git_diff_format)
+GETSETSI(DiffParameter, bool, _pretty_print_merge_info, pretty_print_merge_info)
 
 struct StatusParameterData {
     StatusParameterData(const Path &path)

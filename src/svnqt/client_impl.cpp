@@ -94,11 +94,12 @@ apr_hash_t *Client_impl::map2hash(const PropertiesMap &aMap, const Pool &pool)
 bool Client_impl::RepoHasCapability(const Path &repository, Capability capability)
 {
     svn_error_t *error = nullptr;
-    Pool pool;
+    Pool resultPool;
+    Pool scratchPool;
 
     svn_ra_session_t *session = nullptr;
     // todo svn 1.8: svn_client_open_ra_session2
-    error = svn_client_open_ra_session(&session, repository.cstr(), *m_context, pool);
+    error = svn_client_open_ra_session2(&session, repository.cstr(), nullptr, *m_context, resultPool, scratchPool);
     if (error != nullptr) {
         throw ClientException(error);
     }
@@ -123,7 +124,7 @@ bool Client_impl::RepoHasCapability(const Path &repository, Capability capabilit
         return false;
     }
     svn_boolean_t has = 0;
-    error = svn_ra_has_capability(session, &has, capa, pool);
+    error = svn_ra_has_capability(session, &has, capa, resultPool);
     if (error != nullptr) {
         throw ClientException(error);
     }

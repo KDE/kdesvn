@@ -75,7 +75,9 @@ void Client_impl::get(const Path &path, const QString &target, const Revision &r
 svn_error_t *Client_impl::internal_cat(const Path &path, const Revision &revision, const Revision &peg_revision, svn::stream::SvnStream &buffer)
 {
     Pool pool;
-    return svn_client_cat2(buffer, path.path().toUtf8(), peg_revision.revision(), revision.revision(), *m_context, pool);
+    Pool scratch_pool;
+    apr_hash_t *props = nullptr;
+    return svn_client_cat3(&props, buffer, path.path().toUtf8(), peg_revision.revision(), revision.revision(), true, *m_context, pool, scratch_pool);
 }
 
 }

@@ -192,6 +192,19 @@ public:
      */
     bool git_diff_format() const;
 
+    //! Pretty-printing the merge infos.
+    /*!
+     * \since subversion  1.8
+     * \sa svn_client_diff_peg7,svn_client_diff7
+     */
+    DiffParameter &pretty_print_merge_info(bool value);
+    //! Pretty-printing the merge infos.
+    /*!
+     * \since subversion  1.8
+     * \sa svn_client_diff_peg7,svn_client_diff7
+     */
+    bool pretty_print_merge_info() const;
+
     //! show copies as new add
     /*!
      * \since subversion  1.7

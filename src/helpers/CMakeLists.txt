@@ -30,6 +30,7 @@ set(helperssrc
 )
 
 add_library(kdesvnhelpers STATIC ${helperssrc} ${hdr})
+set_target_properties(kdesvnhelpers PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_include_directories(kdesvnhelpers
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/../

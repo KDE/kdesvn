@@ -20,6 +20,7 @@
 kconfig_add_kcfg_files(cfgsrc
     kdesvnsettings.kcfgc)
 add_library(kdesvncfgreader STATIC ${cfgsrc})
+set_target_properties(kdesvncfgreader PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(kdesvncfgreader
     KF6::ConfigGui
 )
@@ -47,6 +48,7 @@ set(settings_sources
 file(GLOB hdr RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.h")
 
 add_library(settingsdlgs STATIC ${settings_ui_sources} ${settings_sources} ${hdr})
+set_target_properties(settingsdlgs PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(settingsdlgs
     PRIVATE
         kdesvncfgreader

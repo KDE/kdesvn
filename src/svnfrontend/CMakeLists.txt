@@ -125,6 +125,7 @@ ki18n_wrap_ui(frontend_ui_sources ${svnfrontendui})
 add_subdirectory(background)
 
 add_library(svnfrontend STATIC ${svnfrontendsrc} ${frontend_ui_sources} ${hdr})
+set_target_properties(svnfrontend PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 target_link_libraries(svnfrontend
     PRIVATE

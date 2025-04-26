@@ -65,6 +65,7 @@ qt_add_dbus_interfaces(ksvnwidgetsrc ${KJOBWIDGETS_DBUS_INTERFACES_DIR}/kf6_org.
 qt_add_dbus_interfaces(ksvnwidgetsrc ${KJOBWIDGETS_DBUS_INTERFACES_DIR}/kf6_org.kde.JobView.xml)
 
 add_library(ksvnwidgets STATIC ${kdesvn_shared_ui} ${ksvnwidgetsrc} ${ksvnwidgethdr})
+set_target_properties(ksvnwidgets PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_include_directories(ksvnwidgets
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/../

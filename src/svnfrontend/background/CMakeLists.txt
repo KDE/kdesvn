@@ -31,9 +31,8 @@ set (backgroundsrc
     threadcontextlistenerdata.h
     )
 
-add_library(svnbackground STATIC
-    ${backgroundsrc}
-)
+add_library(svnbackground STATIC ${backgroundsrc} )
+set_target_properties(svnbackground PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 target_link_libraries(svnbackground
     Qt::Core

@@ -82,6 +82,7 @@ configure_file(
     @ONLY)
 
 add_library(svnqt STATIC ${SOURCES})
+set_target_properties(svnqt PROPERTIES POSITION_INDEPENDENT_CODE ON)
 if(WIN32)
     target_compile_definitions(svnqt PUBLIC _USE_32BIT_TIME_T)
 endif()

@@ -69,7 +69,7 @@ public:
 
 private:
     static QString getLogmessageInternal(Commitmsg_impl *ptr, bool *ok, svn::Depth *rec, bool *keep_locks, CommitActionEntries *result, QWidget *parent);
-protected slots:
+protected Q_SLOTS:
     void slotHistoryActivated(int);
     void slotUnmarkUnversioned();
     void slotDiffSelected();

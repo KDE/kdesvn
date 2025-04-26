@@ -48,13 +48,8 @@ find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     Wallet WidgetsAddons XmlGui
 )
 
-set(QT_MODULES Core DBus Gui Sql Widgets Xml)
-if (QT_MAJOR_VERSION STREQUAL "6")
-    # TODO Try to drop the qt5 compatibility by reworking the deprecated things (mostly QRegExp)
-    list(APPEND QT_MODULES Core5Compat)
-endif()
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED COMPONENTS
-    ${QT_MODULES}
+find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS
+    Core DBus Gui Sql Widgets Xml Core5Compat
 )
 
 # Set the version

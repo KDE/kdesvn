@@ -4,7 +4,7 @@
 # Sebastien Renard <renard@kde.org>, 2013.
 # Vincent PINON <vpinon@april.org>, 2014.
 # Simon Depiets <sdepiets@gmail.com>, 2018, 2019, 2020.
-# SPDX-FileCopyrightText: 2021, 2022, 2023, 2024 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2021, 2022, 2023, 2024, 2025 Xavier Besnard <xavier.besnard@kde.org>
 # Xavier Besnard <xavier.besnard@kde.org>, 2023.
 #
 msgid ""
@@ -12,15 +12,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-29 00:42+0000\n"
-"PO-Revision-Date: 2024-01-02 11:53+0100\n"
+"PO-Revision-Date: 2025-05-13 11:48+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
-"Language-Team: French <kde-francophone@kde.org>\n"
+"Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 25.04.1\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -640,7 +640,7 @@ msgstr "Message erroné ou manquant (annulation possible)."
 #: src/kiosvn/kiolistener.cpp:102
 #, kde-format
 msgid "A (bin) %1"
-msgstr "A (bin) %1"
+msgstr "A (binaire) %1"
 
 #: src/kiosvn/kiolistener.cpp:104 src/kiosvn/kiolistener.cpp:139
 #, kde-format
@@ -1343,7 +1343,8 @@ msgstr "<numéro>"
 #, kde-format
 msgid "Execute Subversion command (\"exec help\" for more information)"
 msgstr ""
-"Exécuter une commande Subversion (« exec help » pour plus d'informations)"
+"Exécuter une commande Subversion (Veuillez saisir « exec help » pour plus "
+"d'informations)"
 
 #: src/main.cpp:56
 #, kde-format
@@ -3365,10 +3366,10 @@ msgid ""
 "how to serve it from Apache. A mimetype beginning with <b>'text/'</b> (or an "
 "absent mimetype) is treated as text. Anything else is treated as binary."
 msgstr ""
-"Le type MIME du fichier. Utilisé pour déterminer s'il faut fusionner le "
-"fichier et comment le serveur Apache doit le diffuser. Un type MIME "
-"commençant par <b>'text/'</b> (ou un type absent) est traité comme du texte. "
-"N'importe quoi d'autre est traité comme binaire."
+"Le type « MIME » du fichier. Utilisé pour déterminer s'il faut fusionner le "
+"fichier et comment le serveur Apache doit le diffuser. Un type « MIME » "
+"commençant par « <b>text/</b> » (Ou un type absent) est traité comme du "
+"texte. N'importe quoi d'autre est traité comme du binaire."
 
 #: src/svnfrontend/editpropsdlg.cpp:93
 #, kde-format
@@ -3429,7 +3430,8 @@ msgid ""
 msgstr ""
 "Choisissez <b>'yes'</b> si un avertissement doit être affiché quand aucun "
 "rapport n'est saisi dans la boîte de dialogue de publication. Valeurs "
-"possibles :<br/><b>'true'</b>/<b>'yes'</b> ou <b>'false'</b>/<b>'no'</b>."
+"possibles : « <br/><b>True</b> »  /« <b>Yes</b> » ou « <b>False</b> » / "
+"« <b>No</b> »."
 
 #: src/svnfrontend/editpropsdlg.cpp:120
 #, kde-format
@@ -3438,9 +3440,9 @@ msgid ""
 "referenced not by numbers.<br/>Possible values: <b>'true'</b> or <b>'false'</"
 "b>."
 msgstr ""
-"Choisissez <b>'false'</b> i votre système de suivi de bugs ne référence pas "
-"les rapports par des numéros.<br/>Valeurs possibles : <b>'true'</b> ou "
-"<b>'false'</b>."
+"Sélectionnez « <b>False</b> » si votre système de suivi de bogues ne "
+"référence pas les rapports par des numéros.<br/>Valeurs possibles : "
+"« <b>True</b> » ou « <b>False</b> »."
 
 #: src/svnfrontend/editpropsdlg.cpp:124
 #, kde-format
@@ -3449,9 +3451,9 @@ msgid ""
 "top of the log message. The default is <b>'true'</b> which means the "
 "bugtracking ID is appended to the log message."
 msgstr ""
-"Choisissez <b>'false'</b> si vous voulez que l'identifiant de suivi de bug "
-"soit inséré en haut du message. La valeur par défaut est <b>'true'</b> "
-"signifiant que l'identifiant est inséré à la fin du message."
+"Sélectionnez « <b>False</b> » si vous voulez que l'identifiant de suivi de "
+"bogue soit inséré en haut du message. La valeur par défaut est « <b>True</"
+"b> » signifiant que l'identifiant est inséré à la fin du message."
 
 #: src/svnfrontend/editpropsdlg.cpp:129
 #, kde-format
@@ -4240,7 +4242,7 @@ msgstr ""
 #, kde-format
 msgid "Relocate current working copy URL"
 msgstr ""
-"Changer l'URL du dépôt de référence (relocate) de la copie de travail "
+"Modifier l'URL du dépôt de référence (relocate) de la copie de travail "
 "courante"
 
 #: src/svnfrontend/maintreewidget.cpp:649

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-29 00:42+0000\n"
+"POT-Creation-Date: 2025-05-23 00:45+0000\n"
 "PO-Revision-Date: 2024-08-20 08:47+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -165,82 +165,82 @@ msgstr "Zobrazí strom verzí"
 msgid "Subversion (kdesvn)"
 msgstr "Subversion (kdesvn)"
 
-#: src/kdesvn.cpp:79
+#: src/kdesvn.cpp:80
 #, kde-format
 msgid "&Bookmarks"
 msgstr "&Záložky"
 
-#: src/kdesvn.cpp:102
+#: src/kdesvn.cpp:104
 #, kde-format
 msgid "Create and open new repository"
 msgstr "Vytvořit a otevřít nový repozitář"
 
-#: src/kdesvn.cpp:103
+#: src/kdesvn.cpp:105
 #, kde-format
 msgid "Create and opens a new local Subversion repository"
 msgstr "Vytvořit a otevřít nový místní repozitář Subversion"
 
-#: src/kdesvn.cpp:106
+#: src/kdesvn.cpp:108
 #, kde-format
 msgid "Dump repository to file"
 msgstr "Vypsat repozitář do souboru"
 
-#: src/kdesvn.cpp:107
+#: src/kdesvn.cpp:109
 #, kde-format
 msgid "Dump a Subversion repository to a file"
 msgstr "Vypsat repozitář Subversion do souboru"
 
-#: src/kdesvn.cpp:110
+#: src/kdesvn.cpp:112
 #, kde-format
 msgid "Hotcopy a repository"
 msgstr "Horká kopie repozitáře"
 
-#: src/kdesvn.cpp:111
+#: src/kdesvn.cpp:113
 #, kde-format
 msgid "Hotcopy a Subversion repository to a new folder"
 msgstr "Vytvoří kopii repozitáře Subversion v nové složce"
 
-#: src/kdesvn.cpp:114
+#: src/kdesvn.cpp:116
 #, kde-format
 msgid "Load dump into repository"
 msgstr ""
 
-#: src/kdesvn.cpp:115
+#: src/kdesvn.cpp:117
 #, kde-format
 msgid "Load a dump file into a repository."
 msgstr ""
 
-#: src/kdesvn.cpp:118
+#: src/kdesvn.cpp:120
 #, kde-format
 msgid "Add ssh identities to ssh-agent"
 msgstr "Přidat identity SSH do agenta SSH"
 
-#: src/kdesvn.cpp:119
+#: src/kdesvn.cpp:121
 #, kde-format
 msgid "Force add ssh-identities to ssh-agent for future use."
 msgstr "Vynutí přidání identit SSH k agentovi SSH pro budoucí použití."
 
-#: src/kdesvn.cpp:122
+#: src/kdesvn.cpp:124
 #, kde-format
 msgid "Info about kdesvn part"
 msgstr "Informace o součásti kdesvn"
 
-#: src/kdesvn.cpp:123
+#: src/kdesvn.cpp:125
 #, kde-format
 msgid "Shows info about the kdesvn plugin and not the standalone application."
 msgstr "Zobrazit informace o modulu kdesvn a nikoli o samostatném programu."
 
-#: src/kdesvn.cpp:126
+#: src/kdesvn.cpp:128
 #, kde-format
 msgid "Show database content"
 msgstr "Zobrazit obsah databáze"
 
-#: src/kdesvn.cpp:127
+#: src/kdesvn.cpp:129
 #, kde-format
 msgid "Show the content of log cache database"
 msgstr "Zobrazit obsah databáze pro vyrovnávací paměť zápisu"
 
-#: src/kdesvn.cpp:134
+#: src/kdesvn.cpp:136
 #, kde-format
 msgid ""
 "Could not load our part:\n"
@@ -249,78 +249,78 @@ msgstr ""
 "Nelze načíst vlastní součást:\n"
 "%1"
 
-#: src/kdesvn.cpp:165
+#: src/kdesvn.cpp:167
 #, kde-format
 msgid "Could not open URL %1"
 msgstr "Nelze otevřít adresu (URL) %1"
 
-#: src/kdesvn.cpp:197
+#: src/kdesvn.cpp:199
 #, kde-format
 msgid "Recent opened URLs"
 msgstr "Naposledy otevřené URL"
 
-#: src/kdesvn.cpp:206
+#: src/kdesvn.cpp:208
 #, kde-format
 msgid "Load last opened URL on start"
 msgstr "Načíst naposledy otevřené URL při spuštění"
 
-#: src/kdesvn.cpp:208
+#: src/kdesvn.cpp:210
 #, kde-format
 msgid "Reload last opened URL if no one is given on command line"
 msgstr ""
 "Znovu načíst naposledy otevřené URL, když není v příkazovém řádku zadáno "
 "žádné jiné"
 
-#: src/kdesvn.cpp:291
+#: src/kdesvn.cpp:293
 #, kde-format
 msgid "Ready"
 msgstr "Připraven"
 
-#: src/kdesvn_part.cpp:155
+#: src/kdesvn_part.cpp:156
 #, kde-format
 msgid "Logs follow node changes"
 msgstr "Zápisy sledují změny uzlů"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_ignored_files)
 #. i18n: ectx: label, entry, group (subversion)
-#: src/kdesvn_part.cpp:160 src/settings/display_settings.ui:57
+#: src/kdesvn_part.cpp:161 src/settings/display_settings.ui:57
 #: src/settings/kdesvn_part.kcfg:80
 #, kde-format
 msgid "Display ignored files"
 msgstr "Zobrazit ignorované soubory"
 
 #. i18n: ectx: label, entry, group (subversion)
-#: src/kdesvn_part.cpp:165 src/settings/kdesvn_part.kcfg:84
+#: src/kdesvn_part.cpp:166 src/settings/kdesvn_part.kcfg:84
 #, kde-format
 msgid "Display unknown files"
 msgstr "Zobrazit neznámé soubory"
 
-#: src/kdesvn_part.cpp:170
+#: src/kdesvn_part.cpp:171
 #, kde-format
 msgid "Hide unchanged files"
 msgstr "Skrýt nezměněné soubory"
 
-#: src/kdesvn_part.cpp:175
+#: src/kdesvn_part.cpp:176
 #, kde-format
 msgid "Work online"
 msgstr "Pracovat online"
 
-#: src/kdesvn_part.cpp:182
+#: src/kdesvn_part.cpp:183
 #, kde-format
 msgid "Configure Kdesvn..."
 msgstr "Nastavit Kdesvn..."
 
-#: src/kdesvn_part.cpp:186
+#: src/kdesvn_part.cpp:187
 #, kde-format
 msgid "About kdesvn part"
 msgstr "O kdesvn-part"
 
-#: src/kdesvn_part.cpp:190
+#: src/kdesvn_part.cpp:191
 #, kde-format
 msgid "Kdesvn Handbook"
 msgstr "Příručka ke kdesvn"
 
-#: src/kdesvn_part.cpp:281
+#: src/kdesvn_part.cpp:282
 #, kde-format
 msgid ""
 "Built with Subversion library: %1\n"
@@ -329,17 +329,17 @@ msgstr ""
 "Sestaveno s pomocí knihovny Subversion: %1\n"
 "Běží s knihovnou Subversion: %2"
 
-#: src/kdesvn_part.cpp:284
+#: src/kdesvn_part.cpp:285
 #, kde-format
 msgid "kdesvn Part"
 msgstr "kdesvn-part"
 
-#: src/kdesvn_part.cpp:286
+#: src/kdesvn_part.cpp:287
 #, kde-format
 msgid "A Subversion Client by KDE (dynamic Part component)"
 msgstr "Klient Subversion od KDE (dynamická součást)"
 
-#: src/kdesvn_part.cpp:288
+#: src/kdesvn_part.cpp:289
 #, kde-format
 msgid ""
 "(C) 2005-2009 Rajko Albrecht,\n"
@@ -348,86 +348,86 @@ msgstr ""
 "(C) 2005-2009 Rajko Albrecht,\n"
 "(C) 2015-2018 Christian Ehrlicher"
 
-#: src/kdesvn_part.cpp:291
+#: src/kdesvn_part.cpp:292
 #, kde-format
 msgid "Original author and maintainer"
 msgstr "Původní autor a správce"
 
-#: src/kdesvn_part.cpp:292 src/main.cpp:44 src/main.cpp:45
+#: src/kdesvn_part.cpp:293 src/main.cpp:43 src/main.cpp:44
 #, kde-format
 msgid "Developer"
 msgstr "Vývojář"
 
 #. i18n: ectx: Menu (subversion_general)
-#: src/kdesvn_part.cpp:328 src/kdesvn_part.rc:19
+#: src/kdesvn_part.cpp:329 src/kdesvn_part.rc:19
 #, kde-format
 msgid "General"
 msgstr "Obecné"
 
-#: src/kdesvn_part.cpp:328
+#: src/kdesvn_part.cpp:329
 #, kde-format
 msgid "General Settings"
 msgstr "Obecná nastavení"
 
 #. i18n: ectx: Menu (subversion_main)
-#: src/kdesvn_part.cpp:329 src/kdesvn_part.rc:17 src/kdesvnui.rc:25
+#: src/kdesvn_part.cpp:330 src/kdesvn_part.rc:17 src/kdesvnui.rc:25
 #, kde-format
 msgid "Subversion"
 msgstr "Subversion"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SubversionSettings)
-#: src/kdesvn_part.cpp:329 src/settings/subversion_settings.ui:6
+#: src/kdesvn_part.cpp:330 src/settings/subversion_settings.ui:6
 #, kde-format
 msgid "Subversion Settings"
 msgstr "Nastavení Subversion"
 
-#: src/kdesvn_part.cpp:330
+#: src/kdesvn_part.cpp:331
 #, kde-format
 msgid "Timed jobs"
 msgstr ""
 
-#: src/kdesvn_part.cpp:330
+#: src/kdesvn_part.cpp:331
 #, kde-format
 msgid "Settings for timed jobs"
 msgstr ""
 
-#: src/kdesvn_part.cpp:331
+#: src/kdesvn_part.cpp:332
 #, kde-format
 msgid "Diff & Merge"
 msgstr "Diff a sloučení"
 
-#: src/kdesvn_part.cpp:331
+#: src/kdesvn_part.cpp:332
 #, kde-format
 msgid "Settings for diff and merge"
 msgstr "Nastavení pro diff a sloučení"
 
-#: src/kdesvn_part.cpp:332
+#: src/kdesvn_part.cpp:333
 #, kde-format
 msgid "Colors"
 msgstr "Barvy"
 
-#: src/kdesvn_part.cpp:332
+#: src/kdesvn_part.cpp:333
 #, kde-format
 msgid "Color Settings"
 msgstr "Nastavení barev"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, RevisionTreeSettings)
-#: src/kdesvn_part.cpp:333 src/settings/revisiontree_settings.ui:6
+#: src/kdesvn_part.cpp:334 src/settings/revisiontree_settings.ui:6
 #, kde-format
 msgid "Revision tree Settings"
 msgstr "Nastavení stromu změn"
 
-#: src/kdesvn_part.cpp:333
+#: src/kdesvn_part.cpp:334
 #, kde-format
 msgid "Revision tree"
 msgstr "Strom změn"
 
-#: src/kdesvn_part.cpp:335
+#: src/kdesvn_part.cpp:336
 #, kde-format
 msgid "KIO / Command line"
 msgstr "KIO / Příkazový řádek"
 
-#: src/kdesvn_part.cpp:337
+#: src/kdesvn_part.cpp:338
 #, kde-format
 msgid "Settings for command line and KIO execution"
 msgstr "Nastavení pro příkazový řádek a spuštění KIO"
@@ -502,7 +502,7 @@ msgctxt "@title:window"
 msgid "Enter Password for Realm %1"
 msgstr "Zadejte heslo pro oblast %1"
 
-#: src/kdesvnd/kdesvnd.cpp:249 src/svnfrontend/ccontextlistener.cpp:283
+#: src/kdesvnd/kdesvnd.cpp:249 src/svnfrontend/ccontextlistener.cpp:284
 #, kde-format
 msgid "Open a file with a #PKCS12 certificate"
 msgstr "Otevřít soubor s certifikátem #PKCS12."
@@ -1233,17 +1233,17 @@ msgstr "Otisk"
 msgid "Trust SSL certificate"
 msgstr "Důvěřovat certifikátu SSL"
 
-#: src/main.cpp:39
+#: src/main.cpp:38
 #, kde-format
 msgid "kdesvn"
 msgstr "kdesvn"
 
-#: src/main.cpp:41
+#: src/main.cpp:40
 #, kde-format
 msgid "A Subversion Client by KDE (standalone application)"
 msgstr "Klient Subversion od KDE (samostatná aplikace)"
 
-#: src/main.cpp:43
+#: src/main.cpp:42
 #, kde-format
 msgid ""
 "(C) 2005-2009 Rajko Albrecht,\n"
@@ -1252,62 +1252,62 @@ msgstr ""
 "(C) 2005-2009 Rajko Albrecht,\n"
 "(C) 2015-2019 Christian Ehrlicher"
 
-#: src/main.cpp:44
+#: src/main.cpp:43
 #, kde-format
 msgid "Rajko Albrecht"
 msgstr "Rajko Albrecht"
 
-#: src/main.cpp:45
+#: src/main.cpp:44
 #, kde-format
 msgid "Christian Ehrlicher"
 msgstr "Christian Ehrlicher"
 
-#: src/main.cpp:50
+#: src/main.cpp:49
 #, kde-format
 msgid "Execute single Subversion command on specific revision(-range)"
 msgstr ""
 
-#: src/main.cpp:50
+#: src/main.cpp:49
 #, kde-format
 msgid "startrev[:endrev]"
 msgstr ""
 
-#: src/main.cpp:51
+#: src/main.cpp:50
 #, kde-format
 msgid "Ask for revision when executing single command"
 msgstr ""
 
-#: src/main.cpp:52
+#: src/main.cpp:51
 #, kde-format
 msgid "Force operation"
 msgstr "Vynutit operaci"
 
-#: src/main.cpp:53
+#: src/main.cpp:52
 #, kde-format
 msgid "Save output of Subversion command (eg \"cat\") into file <file>"
 msgstr ""
 
-#: src/main.cpp:53
+#: src/main.cpp:52
 #, kde-format
 msgid "<file>"
 msgstr "<soubor>"
 
-#: src/main.cpp:54
+#: src/main.cpp:53
 #, kde-format
 msgid "Limit log output to <number>"
 msgstr ""
 
-#: src/main.cpp:54
+#: src/main.cpp:53
 #, kde-format
 msgid "<number>"
 msgstr "<number>"
 
-#: src/main.cpp:55
+#: src/main.cpp:54
 #, kde-format
 msgid "Execute Subversion command (\"exec help\" for more information)"
 msgstr ""
 
-#: src/main.cpp:56
+#: src/main.cpp:55
 #, kde-format
 msgid "Document to open"
 msgstr "Dokument k otevření"
@@ -2570,76 +2570,76 @@ msgstr "Uzamčení selhalo"
 msgid "Unlock failed"
 msgstr "Odemčení selhalo"
 
-#: src/svnfrontend/ccontextlistener.cpp:94
+#: src/svnfrontend/ccontextlistener.cpp:95
 #, kde-format
 msgid "unchanged"
 msgstr "nezměněno"
 
-#: src/svnfrontend/ccontextlistener.cpp:95
+#: src/svnfrontend/ccontextlistener.cpp:96
 #, kde-format
 msgid "item wasn't present"
 msgstr ""
 
-#: src/svnfrontend/ccontextlistener.cpp:96
+#: src/svnfrontend/ccontextlistener.cpp:97
 #, kde-format
 msgid "unversioned item obstructed work"
 msgstr ""
 
-#: src/svnfrontend/ccontextlistener.cpp:99
+#: src/svnfrontend/ccontextlistener.cpp:100
 #, kde-format
 msgid "Modified state had mods merged in."
 msgstr ""
 
-#: src/svnfrontend/ccontextlistener.cpp:100
+#: src/svnfrontend/ccontextlistener.cpp:101
 #, kde-format
 msgid "Modified state got conflicting mods."
 msgstr ""
 
-#: src/svnfrontend/ccontextlistener.cpp:304
+#: src/svnfrontend/ccontextlistener.cpp:305
 #, kde-format
 msgid "Enter password for realm %1"
 msgstr "Zadejte heslo pro oblast %1"
 
-#: src/svnfrontend/ccontextlistener.cpp:335
+#: src/svnfrontend/ccontextlistener.cpp:336
 #, kde-format
 msgid ""
 "The certificate is not issued by a trusted authority. Use the fingerprint to "
 "validate the certificate manually."
 msgstr ""
 
-#: src/svnfrontend/ccontextlistener.cpp:338
+#: src/svnfrontend/ccontextlistener.cpp:339
 #, kde-format
 msgid "The certificate hostname does not match."
 msgstr ""
 
-#: src/svnfrontend/ccontextlistener.cpp:341
+#: src/svnfrontend/ccontextlistener.cpp:342
 #, kde-format
 msgid "The certificate is not yet valid."
 msgstr ""
 
-#: src/svnfrontend/ccontextlistener.cpp:344
+#: src/svnfrontend/ccontextlistener.cpp:345
 #, kde-format
 msgid "The certificate has expired."
 msgstr "Certifikát vypršel."
 
-#: src/svnfrontend/ccontextlistener.cpp:347
+#: src/svnfrontend/ccontextlistener.cpp:348
 #, kde-format
 msgid "The certificate has an unknown error."
 msgstr ""
 
-#: src/svnfrontend/ccontextlistener.cpp:369
+#: src/svnfrontend/ccontextlistener.cpp:370
 #, kde-format
 msgid ""
 "%1\n"
 "Really store password as plain text?"
 msgstr ""
 
-#: src/svnfrontend/ccontextlistener.cpp:370
+#: src/svnfrontend/ccontextlistener.cpp:371
 #, kde-format
 msgid "Save password"
 msgstr "Uložit heslo"
 
-#: src/svnfrontend/ccontextlistener.cpp:371
+#: src/svnfrontend/ccontextlistener.cpp:372
 #, kde-format
 msgctxt "@action:button"
 msgid "Store in Plain Text"
@@ -3408,7 +3408,7 @@ msgid "Select revision"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, m_RevisionButton)
-#: src/svnfrontend/fronthelpers/revisionbutton.ui:22
+#: src/svnfrontend/fronthelpers/revisionbutton.ui:23
 #, kde-format
 msgid "-1"
 msgstr "-1"
@@ -3508,7 +3508,7 @@ msgid "Diff to selected item"
 msgstr ""
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:839
-#: src/svnfrontend/svnlogdlgimp.cpp:522
+#: src/svnfrontend/svnlogdlgimp.cpp:524
 #, kde-format
 msgid "Cat this version"
 msgstr ""
@@ -3549,51 +3549,51 @@ msgstr ""
 msgid "Image (*.png)"
 msgstr "Obrázek (*.png)"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:94
+#: src/svnfrontend/graphtree/revisiontree.cpp:95
 #: src/svnfrontend/svnactions.cpp:318
 #, kde-format
 msgctxt "@title:window"
 msgid "Logs"
 msgstr "Záznamy"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:94
+#: src/svnfrontend/graphtree/revisiontree.cpp:95
 #: src/svnfrontend/svnactions.cpp:319
 #, kde-format
 msgid "Getting logs - hit Cancel for abort"
 msgstr ""
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:105
+#: src/svnfrontend/graphtree/revisiontree.cpp:106
 #, kde-format
 msgid "No log cache possible due broken database and networking not allowed."
 msgstr ""
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:105
-#: src/svnfrontend/graphtree/revisiontree.cpp:110
+#: src/svnfrontend/graphtree/revisiontree.cpp:106
+#: src/svnfrontend/graphtree/revisiontree.cpp:111
 #, kde-format
 msgid ""
 "Could not retrieve logs, reason:\n"
 "%1"
 msgstr ""
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:139
+#: src/svnfrontend/graphtree/revisiontree.cpp:140
 #, kde-format
 msgid "Scanning the logs for %1"
 msgstr ""
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:139
+#: src/svnfrontend/graphtree/revisiontree.cpp:140
 #, kde-format
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:140
+#: src/svnfrontend/graphtree/revisiontree.cpp:141
 #, kde-format
 msgctxt "@title:window"
 msgid "Scanning logs"
 msgstr ""
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:228
-#: src/svnfrontend/graphtree/revisiontree.cpp:265
-#: src/svnfrontend/graphtree/revisiontree.cpp:313
+#: src/svnfrontend/graphtree/revisiontree.cpp:229
+#: src/svnfrontend/graphtree/revisiontree.cpp:266
+#: src/svnfrontend/graphtree/revisiontree.cpp:314
 #, kde-format
 msgid "%1<br>Check change entry %2 of %3"
 msgstr ""
@@ -5385,7 +5385,7 @@ msgid "Copy from"
 msgstr "Kopírovat z"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DispPrevButton)
-#: src/svnfrontend/svnlogdlg.ui:189 src/svnfrontend/svnlogdlgimp.cpp:517
+#: src/svnfrontend/svnlogdlg.ui:189 src/svnfrontend/svnlogdlgimp.cpp:519
 #, kde-format
 msgid "Diff previous"
 msgstr ""
@@ -5403,7 +5403,7 @@ msgid "List entries"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonBlame)
-#: src/svnfrontend/svnlogdlg.ui:249 src/svnfrontend/svnlogdlgimp.cpp:512
+#: src/svnfrontend/svnlogdlg.ui:249 src/svnfrontend/svnlogdlgimp.cpp:514
 #, kde-format
 msgid "Annotate"
 msgstr "Poznamenat"
@@ -5432,22 +5432,22 @@ msgctxt "@title:window"
 msgid "SVN Log"
 msgstr "Záznam SVN"
 
-#: src/svnfrontend/svnlogdlgimp.cpp:443
+#: src/svnfrontend/svnlogdlgimp.cpp:445
 #, kde-format
 msgid "Set version as right side of diff"
 msgstr ""
 
-#: src/svnfrontend/svnlogdlgimp.cpp:449
+#: src/svnfrontend/svnlogdlgimp.cpp:451
 #, kde-format
 msgid "Set version as left side of diff"
 msgstr ""
 
-#: src/svnfrontend/svnlogdlgimp.cpp:455
+#: src/svnfrontend/svnlogdlgimp.cpp:457
 #, kde-format
 msgid "Unset version for diff"
 msgstr ""
 
-#: src/svnfrontend/svnlogdlgimp.cpp:459
+#: src/svnfrontend/svnlogdlgimp.cpp:461
 #, kde-format
 msgid "Revert this commit"
 msgstr ""

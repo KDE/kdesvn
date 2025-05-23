@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-29 00:42+0000\n"
+"POT-Creation-Date: 2025-05-23 00:45+0000\n"
 "PO-Revision-Date: 2013-07-06 03:18-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -165,70 +165,70 @@ msgstr "完全リビジョンツリー(&F)"
 msgid "Subversion (kdesvn)"
 msgstr "Subversion 管理"
 
-#: src/kdesvn.cpp:79
+#: src/kdesvn.cpp:80
 #, fuzzy, kde-format
 msgid "&Bookmarks"
 msgstr "ブックマーク(&B)"
 
-#: src/kdesvn.cpp:102
+#: src/kdesvn.cpp:104
 #, fuzzy, kde-format
 msgid "Create and open new repository"
 msgstr "新しいリポジトリを作成して開く(&C)"
 
-#: src/kdesvn.cpp:103
+#: src/kdesvn.cpp:105
 #, fuzzy, kde-format
 #| msgid "Create and opens a new local subversion repository"
 msgid "Create and opens a new local Subversion repository"
 msgstr "新しいローカルの subversion リポジトリを作成して開きます"
 
-#: src/kdesvn.cpp:106
+#: src/kdesvn.cpp:108
 #, fuzzy, kde-format
 msgid "Dump repository to file"
 msgstr "リポジトリをファイルにダンプ(&D)"
 
-#: src/kdesvn.cpp:107
+#: src/kdesvn.cpp:109
 #, fuzzy, kde-format
 #| msgid "Dump a subversion repository to a file"
 msgid "Dump a Subversion repository to a file"
 msgstr "subversion リポジトリをファイルにダンプします"
 
-#: src/kdesvn.cpp:110
+#: src/kdesvn.cpp:112
 #, fuzzy, kde-format
 msgid "Hotcopy a repository"
 msgstr "リポジトリをハードコピー(&H)"
 
-#: src/kdesvn.cpp:111
+#: src/kdesvn.cpp:113
 #, fuzzy, kde-format
 #| msgid "Hotcopy a subversion repository to a new folder"
 msgid "Hotcopy a Subversion repository to a new folder"
 msgstr "subversion リポジトリを新しいフォルダにハードコピーします"
 
-#: src/kdesvn.cpp:114
+#: src/kdesvn.cpp:116
 #, fuzzy, kde-format
 msgid "Load dump into repository"
 msgstr "リポジトリにダンプを読み込む(&L)"
 
-#: src/kdesvn.cpp:115
+#: src/kdesvn.cpp:117
 #, fuzzy, kde-format
 msgid "Load a dump file into a repository."
 msgstr "リポジトリにダンプファイルを読み込みます。"
 
-#: src/kdesvn.cpp:118
+#: src/kdesvn.cpp:120
 #, fuzzy, kde-format
 msgid "Add ssh identities to ssh-agent"
 msgstr "ssh-agent に ssh identity を追加(&A)"
 
-#: src/kdesvn.cpp:119
+#: src/kdesvn.cpp:121
 #, fuzzy, kde-format
 msgid "Force add ssh-identities to ssh-agent for future use."
 msgstr "将来使うために ssh-agent に ssh-identity を強制的に追加します。"
 
-#: src/kdesvn.cpp:122
+#: src/kdesvn.cpp:124
 #, fuzzy, kde-format
 msgid "Info about kdesvn part"
 msgstr "kdesvn part についての情報"
 
-#: src/kdesvn.cpp:123
+#: src/kdesvn.cpp:125
 #, fuzzy, kde-format
 #| msgid "Shows info about the kdesvn plugin not the standalone app."
 msgid "Shows info about the kdesvn plugin and not the standalone application."
@@ -236,18 +236,18 @@ msgstr ""
 "スタンドアロンアプリケーションではない kdesvn プラグインについての情報を表示"
 "します。"
 
-#: src/kdesvn.cpp:126
+#: src/kdesvn.cpp:128
 #, fuzzy, kde-format
 msgid "Show database content"
 msgstr "データベースの中身を表示(&S)"
 
-#: src/kdesvn.cpp:127
+#: src/kdesvn.cpp:129
 #, fuzzy, kde-format
 #| msgid "Show the content of logcache database"
 msgid "Show the content of log cache database"
 msgstr "ログキャッシュデータベースの中身を表示します"
 
-#: src/kdesvn.cpp:134
+#: src/kdesvn.cpp:136
 #, fuzzy, kde-format
 #| msgid "Could not load the part:\n"
 msgid ""
@@ -255,80 +255,80 @@ msgid ""
 "%1"
 msgstr "part を読み込めませんでした:\n"
 
-#: src/kdesvn.cpp:165
+#: src/kdesvn.cpp:167
 #, fuzzy, kde-format
 #| msgid "Could not open url %1"
 msgid "Could not open URL %1"
 msgstr "url %1 を開けませんでした"
 
-#: src/kdesvn.cpp:197
+#: src/kdesvn.cpp:199
 #, fuzzy, kde-format
 msgid "Recent opened URLs"
 msgstr "最近開いた URL"
 
-#: src/kdesvn.cpp:206
+#: src/kdesvn.cpp:208
 #, fuzzy, kde-format
 msgid "Load last opened URL on start"
 msgstr "起動時に最後に開いた URL を読み込む(&L)"
 
-#: src/kdesvn.cpp:208
+#: src/kdesvn.cpp:210
 #, fuzzy, kde-format
 #| msgid "Reload last opened url if no one is given on commandline"
 msgid "Reload last opened URL if no one is given on command line"
 msgstr ""
 "コマンドライン上で誰も与えられていなければ最後に開いた url を再読み込みします"
 
-#: src/kdesvn.cpp:291
+#: src/kdesvn.cpp:293
 #, fuzzy, kde-format
 msgid "Ready"
 msgstr "待機中"
 
-#: src/kdesvn_part.cpp:155
+#: src/kdesvn_part.cpp:156
 #, fuzzy, kde-format
 msgid "Logs follow node changes"
 msgstr "ログはノードの変化に従う(&F)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_ignored_files)
 #. i18n: ectx: label, entry, group (subversion)
-#: src/kdesvn_part.cpp:160 src/settings/display_settings.ui:57
+#: src/kdesvn_part.cpp:161 src/settings/display_settings.ui:57
 #: src/settings/kdesvn_part.kcfg:80
 #, fuzzy, kde-format
 msgid "Display ignored files"
 msgstr "無視されたファイルを表示する"
 
 #. i18n: ectx: label, entry, group (subversion)
-#: src/kdesvn_part.cpp:165 src/settings/kdesvn_part.kcfg:84
+#: src/kdesvn_part.cpp:166 src/settings/kdesvn_part.kcfg:84
 #, fuzzy, kde-format
 msgid "Display unknown files"
 msgstr "不明なファイルを表示(&U)"
 
-#: src/kdesvn_part.cpp:170
+#: src/kdesvn_part.cpp:171
 #, fuzzy, kde-format
 msgid "Hide unchanged files"
 msgstr "変更されていないファイルを隠す(&H)"
 
-#: src/kdesvn_part.cpp:175
+#: src/kdesvn_part.cpp:176
 #, fuzzy, kde-format
 msgid "Work online"
 msgstr "オンライン作業(&W)"
 
-#: src/kdesvn_part.cpp:182
+#: src/kdesvn_part.cpp:183
 #, fuzzy, kde-format
 #| msgid "Configure %1..."
 msgid "Configure Kdesvn..."
 msgstr "%1 を設定..."
 
-#: src/kdesvn_part.cpp:186
+#: src/kdesvn_part.cpp:187
 #, fuzzy, kde-format
 msgid "About kdesvn part"
 msgstr "kdesvn part について"
 
-#: src/kdesvn_part.cpp:190
+#: src/kdesvn_part.cpp:191
 #, fuzzy, kde-format
 msgid "Kdesvn Handbook"
 msgstr "Kdesvn ハンドブック"
 
-#: src/kdesvn_part.cpp:281
+#: src/kdesvn_part.cpp:282
 #, fuzzy, kde-format
 msgid ""
 "Built with Subversion library: %1\n"
@@ -337,104 +337,104 @@ msgstr ""
 "右の Subversion ライブラリでビルドされました: %1\n"
 "右の Subversion ライブラリで動作しています: %2"
 
-#: src/kdesvn_part.cpp:284
+#: src/kdesvn_part.cpp:285
 #, fuzzy, kde-format
 msgid "kdesvn Part"
 msgstr "kdesvn Part"
 
-#: src/kdesvn_part.cpp:286
+#: src/kdesvn_part.cpp:287
 #, fuzzy, kde-format
 msgid "A Subversion Client by KDE (dynamic Part component)"
 msgstr "KDE 向けの Subversion クライアント（動的 Part コンポーネント）"
 
-#: src/kdesvn_part.cpp:288
+#: src/kdesvn_part.cpp:289
 #, fuzzy, kde-format
 msgid ""
 "(C) 2005-2009 Rajko Albrecht,\n"
 "(C) 2015-2018 Christian Ehrlicher"
 msgstr "(C) 2005-2007 Rajko Albrecht"
 
-#: src/kdesvn_part.cpp:291
+#: src/kdesvn_part.cpp:292
 #, fuzzy, kde-format
 msgid "Original author and maintainer"
 msgstr "オリジナル作者とメンテナ"
 
-#: src/kdesvn_part.cpp:292 src/main.cpp:44 src/main.cpp:45
+#: src/kdesvn_part.cpp:293 src/main.cpp:43 src/main.cpp:44
 #, fuzzy, kde-format
 msgid "Developer"
 msgstr "開発者"
 
 #. i18n: ectx: Menu (subversion_general)
-#: src/kdesvn_part.cpp:328 src/kdesvn_part.rc:19
+#: src/kdesvn_part.cpp:329 src/kdesvn_part.rc:19
 #, fuzzy, kde-format
 msgid "General"
 msgstr "一般"
 
-#: src/kdesvn_part.cpp:328
+#: src/kdesvn_part.cpp:329
 #, fuzzy, kde-format
 msgid "General Settings"
 msgstr "全般設定"
 
 #. i18n: ectx: Menu (subversion_main)
-#: src/kdesvn_part.cpp:329 src/kdesvn_part.rc:17 src/kdesvnui.rc:25
+#: src/kdesvn_part.cpp:330 src/kdesvn_part.rc:17 src/kdesvnui.rc:25
 #, fuzzy, kde-format
 msgid "Subversion"
 msgstr "Subversion"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SubversionSettings)
-#: src/kdesvn_part.cpp:329 src/settings/subversion_settings.ui:6
+#: src/kdesvn_part.cpp:330 src/settings/subversion_settings.ui:6
 #, fuzzy, kde-format
 msgid "Subversion Settings"
 msgstr "Subversion 設定"
 
-#: src/kdesvn_part.cpp:330
+#: src/kdesvn_part.cpp:331
 #, kde-format
 msgid "Timed jobs"
 msgstr ""
 
-#: src/kdesvn_part.cpp:330
+#: src/kdesvn_part.cpp:331
 #, fuzzy, kde-format
 msgid "Settings for timed jobs"
 msgstr "%1 に対する設定"
 
-#: src/kdesvn_part.cpp:331
+#: src/kdesvn_part.cpp:332
 #, fuzzy, kde-format
 msgid "Diff & Merge"
 msgstr "Diff & マージ"
 
-#: src/kdesvn_part.cpp:331
+#: src/kdesvn_part.cpp:332
 #, fuzzy, kde-format
 msgid "Settings for diff and merge"
 msgstr "diff とマージに関する設定"
 
-#: src/kdesvn_part.cpp:332
+#: src/kdesvn_part.cpp:333
 #, fuzzy, kde-format
 msgid "Colors"
 msgstr "色"
 
-#: src/kdesvn_part.cpp:332
+#: src/kdesvn_part.cpp:333
 #, fuzzy, kde-format
 msgid "Color Settings"
 msgstr "色設定"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, RevisionTreeSettings)
-#: src/kdesvn_part.cpp:333 src/settings/revisiontree_settings.ui:6
+#: src/kdesvn_part.cpp:334 src/settings/revisiontree_settings.ui:6
 #, fuzzy, kde-format
 msgid "Revision tree Settings"
 msgstr "リビジョンツリー設定"
 
-#: src/kdesvn_part.cpp:333
+#: src/kdesvn_part.cpp:334
 #, fuzzy, kde-format
 msgid "Revision tree"
 msgstr "リビジョンツリー"
 
-#: src/kdesvn_part.cpp:335
+#: src/kdesvn_part.cpp:336
 #, fuzzy, kde-format
 #| msgid "Commandline"
 msgid "KIO / Command line"
 msgstr "コマンドライン"
 
-#: src/kdesvn_part.cpp:337
+#: src/kdesvn_part.cpp:338
 #, fuzzy, kde-format
 #| msgid "Settings for commandline and KIO execution"
 msgid "Settings for command line and KIO execution"
@@ -511,7 +511,7 @@ msgctxt "@title:window"
 msgid "Enter Password for Realm %1"
 msgstr "アドレス %1 に対するパスワードを入力してください"
 
-#: src/kdesvnd/kdesvnd.cpp:249 src/svnfrontend/ccontextlistener.cpp:283
+#: src/kdesvnd/kdesvnd.cpp:249 src/svnfrontend/ccontextlistener.cpp:284
 #, fuzzy, kde-format
 msgid "Open a file with a #PKCS12 certificate"
 msgstr "#PKCS12 証明書でファイルを開く"
@@ -1274,82 +1274,82 @@ msgstr "フィンガープリント"
 msgid "Trust SSL certificate"
 msgstr "信頼済み ssl 認証"
 
-#: src/main.cpp:39
+#: src/main.cpp:38
 #, fuzzy, kde-format
 msgid "kdesvn"
 msgstr "kdesvn"
 
-#: src/main.cpp:41
+#: src/main.cpp:40
 #, fuzzy, kde-format
 msgid "A Subversion Client by KDE (standalone application)"
 msgstr "KDE 向けの Subversion クライアント（スタンドアロンアプリケーション）"
 
-#: src/main.cpp:43
+#: src/main.cpp:42
 #, fuzzy, kde-format
 msgid ""
 "(C) 2005-2009 Rajko Albrecht,\n"
 "(C) 2015-2019 Christian Ehrlicher"
 msgstr "(C) 2005-2007 Rajko Albrecht"
 
-#: src/main.cpp:44
+#: src/main.cpp:43
 #, fuzzy, kde-format
 msgid "Rajko Albrecht"
 msgstr "Rajko Albrecht"
 
-#: src/main.cpp:45
+#: src/main.cpp:44
 #, kde-format
 msgid "Christian Ehrlicher"
 msgstr ""
 
-#: src/main.cpp:50
+#: src/main.cpp:49
 #, fuzzy, kde-format
 #| msgid "Execute single subversion command on specific revision(-range)"
 msgid "Execute single Subversion command on specific revision(-range)"
 msgstr "特定のリビジョン（-範囲）について単一の subversion コマンドを実行する"
 
-#: src/main.cpp:50
+#: src/main.cpp:49
 #, kde-format
 msgid "startrev[:endrev]"
 msgstr ""
 
-#: src/main.cpp:51
+#: src/main.cpp:50
 #, fuzzy, kde-format
 msgid "Ask for revision when executing single command"
 msgstr "単一のコマンドを実行するときにリビジョンを尋ねる"
 
-#: src/main.cpp:52
+#: src/main.cpp:51
 #, fuzzy, kde-format
 msgid "Force operation"
 msgstr "操作を強制"
 
-#: src/main.cpp:53
+#: src/main.cpp:52
 #, fuzzy, kde-format
 #| msgid "Save output of subversion command (eg \"cat\") into file <file>"
 msgid "Save output of Subversion command (eg \"cat\") into file <file>"
 msgstr "subversion コマンド（例えば「cat」）の出力をファイル <file> に保存"
 
-#: src/main.cpp:53
+#: src/main.cpp:52
 #, kde-format
 msgid "<file>"
 msgstr ""
 
-#: src/main.cpp:54
+#: src/main.cpp:53
 #, fuzzy, kde-format
 msgid "Limit log output to <number>"
 msgstr "ログ出力を <number> に制限"
 
-#: src/main.cpp:54
+#: src/main.cpp:53
 #, fuzzy, kde-format
 msgid "<number>"
 msgstr "数"
 
-#: src/main.cpp:55
+#: src/main.cpp:54
 #, fuzzy, kde-format
 #| msgid "Execute subversion command (\"exec help\" for more information)"
 msgid "Execute Subversion command (\"exec help\" for more information)"
 msgstr "subversion コマンドを実行（更なる情報については「exec help」）"
 
-#: src/main.cpp:56
+#: src/main.cpp:55
 #, fuzzy, kde-format
 msgid "Document to open"
 msgstr "開く文書"
@@ -2841,37 +2841,37 @@ msgstr "ロック失敗"
 msgid "Unlock failed"
 msgstr "ロック解除失敗"
 
-#: src/svnfrontend/ccontextlistener.cpp:94
+#: src/svnfrontend/ccontextlistener.cpp:95
 #, fuzzy, kde-format
 msgid "unchanged"
 msgstr "未変更"
 
-#: src/svnfrontend/ccontextlistener.cpp:95
+#: src/svnfrontend/ccontextlistener.cpp:96
 #, fuzzy, kde-format
 msgid "item wasn't present"
 msgstr "項目は存在しませんでした"
 
-#: src/svnfrontend/ccontextlistener.cpp:96
+#: src/svnfrontend/ccontextlistener.cpp:97
 #, fuzzy, kde-format
 msgid "unversioned item obstructed work"
 msgstr "バージョン付けされていない項目が作業を妨げました"
 
-#: src/svnfrontend/ccontextlistener.cpp:99
+#: src/svnfrontend/ccontextlistener.cpp:100
 #, fuzzy, kde-format
 msgid "Modified state had mods merged in."
 msgstr "変更された状態はマージされたモードになりました。"
 
-#: src/svnfrontend/ccontextlistener.cpp:100
+#: src/svnfrontend/ccontextlistener.cpp:101
 #, fuzzy, kde-format
 msgid "Modified state got conflicting mods."
 msgstr "変更された状態は衝突モードになりました。"
 
-#: src/svnfrontend/ccontextlistener.cpp:304
+#: src/svnfrontend/ccontextlistener.cpp:305
 #, fuzzy, kde-format
 msgid "Enter password for realm %1"
 msgstr "アドレス %1 に対するパスワードを入力してください"
 
-#: src/svnfrontend/ccontextlistener.cpp:335
+#: src/svnfrontend/ccontextlistener.cpp:336
 #, fuzzy, kde-format
 #| msgid ""
 #| "The certificate is not issued by a trusted authority. Use the fingerprint "
@@ -2883,27 +2883,27 @@ msgstr ""
 "証明書が信頼された認証局によって発行されていません。手動で証明書を検証するた"
 "めにフィンガープリントを使ってください！"
 
-#: src/svnfrontend/ccontextlistener.cpp:338
+#: src/svnfrontend/ccontextlistener.cpp:339
 #, fuzzy, kde-format
 msgid "The certificate hostname does not match."
 msgstr "証明書のホスト名が一致しません。"
 
-#: src/svnfrontend/ccontextlistener.cpp:341
+#: src/svnfrontend/ccontextlistener.cpp:342
 #, fuzzy, kde-format
 msgid "The certificate is not yet valid."
 msgstr "証明書はまだ無効です。"
 
-#: src/svnfrontend/ccontextlistener.cpp:344
+#: src/svnfrontend/ccontextlistener.cpp:345
 #, fuzzy, kde-format
 msgid "The certificate has expired."
 msgstr "証明書は失効しています。"
 
-#: src/svnfrontend/ccontextlistener.cpp:347
+#: src/svnfrontend/ccontextlistener.cpp:348
 #, fuzzy, kde-format
 msgid "The certificate has an unknown error."
 msgstr "証明書には不明なエラーがあります。"
 
-#: src/svnfrontend/ccontextlistener.cpp:369
+#: src/svnfrontend/ccontextlistener.cpp:370
 #, fuzzy, kde-format
 #| msgid ""
 #| "%1\n"
@@ -2915,12 +2915,12 @@ msgstr ""
 "%1\n"
 "本当にパスワードをプレーンテキストとして保存しますか？"
 
-#: src/svnfrontend/ccontextlistener.cpp:370
+#: src/svnfrontend/ccontextlistener.cpp:371
 #, fuzzy, kde-format
 msgid "Save password"
 msgstr "パスワードを保存"
 
-#: src/svnfrontend/ccontextlistener.cpp:371
+#: src/svnfrontend/ccontextlistener.cpp:372
 #, kde-format
 msgctxt "@action:button"
 msgid "Store in Plain Text"
@@ -3784,7 +3784,7 @@ msgid "Select revision"
 msgstr "リビジョンを選択"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_RevisionButton)
-#: src/svnfrontend/fronthelpers/revisionbutton.ui:22
+#: src/svnfrontend/fronthelpers/revisionbutton.ui:23
 #, fuzzy, kde-format
 msgid "-1"
 msgstr "-1"
@@ -3890,7 +3890,7 @@ msgid "Diff to selected item"
 msgstr "選択した項目との Diff"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:839
-#: src/svnfrontend/svnlogdlgimp.cpp:522
+#: src/svnfrontend/svnlogdlgimp.cpp:524
 #, fuzzy, kde-format
 msgid "Cat this version"
 msgstr "このバージョンを出力"
@@ -3932,21 +3932,21 @@ msgstr "ツリーを png として保存"
 msgid "Image (*.png)"
 msgstr ""
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:94
+#: src/svnfrontend/graphtree/revisiontree.cpp:95
 #: src/svnfrontend/svnactions.cpp:318
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Logs"
 msgstr "ログを取得"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:94
+#: src/svnfrontend/graphtree/revisiontree.cpp:95
 #: src/svnfrontend/svnactions.cpp:319
 #, fuzzy, kde-format
 #| msgid "Getting logs - hit cancel for abort"
 msgid "Getting logs - hit Cancel for abort"
 msgstr "ログを取得しています - 中止するにはキャンセルを押してください"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:105
+#: src/svnfrontend/graphtree/revisiontree.cpp:106
 #, fuzzy, kde-format
 #| msgid "No logcache possible due broken database and networking not allowed."
 msgid "No log cache possible due broken database and networking not allowed."
@@ -3954,8 +3954,8 @@ msgstr ""
 "データベースが壊れネットワークが許可されていないのでログキャッシュは不可能で"
 "す。"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:105
-#: src/svnfrontend/graphtree/revisiontree.cpp:110
+#: src/svnfrontend/graphtree/revisiontree.cpp:106
+#: src/svnfrontend/graphtree/revisiontree.cpp:111
 #, fuzzy, kde-format
 msgid ""
 "Could not retrieve logs, reason:\n"
@@ -3964,25 +3964,25 @@ msgstr ""
 "ログを取得できませんでした、理由:\n"
 "%1"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:139
+#: src/svnfrontend/graphtree/revisiontree.cpp:140
 #, fuzzy, kde-format
 msgid "Scanning the logs for %1"
 msgstr "%1 に対するログをスキャンしています"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:139
+#: src/svnfrontend/graphtree/revisiontree.cpp:140
 #, fuzzy, kde-format
 msgid "Cancel"
 msgstr "キャンセル(&A)"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:140
+#: src/svnfrontend/graphtree/revisiontree.cpp:141
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Scanning logs"
 msgstr "ログをスキャンしています"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:228
-#: src/svnfrontend/graphtree/revisiontree.cpp:265
-#: src/svnfrontend/graphtree/revisiontree.cpp:313
+#: src/svnfrontend/graphtree/revisiontree.cpp:229
+#: src/svnfrontend/graphtree/revisiontree.cpp:266
+#: src/svnfrontend/graphtree/revisiontree.cpp:314
 #, fuzzy, kde-format
 msgid "%1<br>Check change entry %2 of %3"
 msgstr "%1<br>変更されたエントリ %3 のうち %2 を確認しています"
@@ -5837,7 +5837,7 @@ msgid "Copy from"
 msgstr "コピー元"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DispPrevButton)
-#: src/svnfrontend/svnlogdlg.ui:189 src/svnfrontend/svnlogdlgimp.cpp:517
+#: src/svnfrontend/svnlogdlg.ui:189 src/svnfrontend/svnlogdlgimp.cpp:519
 #, fuzzy, kde-format
 msgid "Diff previous"
 msgstr "前と Diff"
@@ -5855,7 +5855,7 @@ msgid "List entries"
 msgstr "エントリをリストアップ"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonBlame)
-#: src/svnfrontend/svnlogdlg.ui:249 src/svnfrontend/svnlogdlgimp.cpp:512
+#: src/svnfrontend/svnlogdlg.ui:249 src/svnfrontend/svnlogdlgimp.cpp:514
 #, fuzzy, kde-format
 msgid "Annotate"
 msgstr "注釈"
@@ -5884,22 +5884,22 @@ msgctxt "@title:window"
 msgid "SVN Log"
 msgstr "SVN ログ"
 
-#: src/svnfrontend/svnlogdlgimp.cpp:443
+#: src/svnfrontend/svnlogdlgimp.cpp:445
 #, fuzzy, kde-format
 msgid "Set version as right side of diff"
 msgstr "バージョンを diff の右側に設定"
 
-#: src/svnfrontend/svnlogdlgimp.cpp:449
+#: src/svnfrontend/svnlogdlgimp.cpp:451
 #, fuzzy, kde-format
 msgid "Set version as left side of diff"
 msgstr "バージョンを diff の左側に設定"
 
-#: src/svnfrontend/svnlogdlgimp.cpp:455
+#: src/svnfrontend/svnlogdlgimp.cpp:457
 #, fuzzy, kde-format
 msgid "Unset version for diff"
 msgstr "diff のためのバージョンを解除"
 
-#: src/svnfrontend/svnlogdlgimp.cpp:459
+#: src/svnfrontend/svnlogdlgimp.cpp:461
 #, fuzzy, kde-format
 #| msgid "Review items before commit"
 msgid "Revert this commit"

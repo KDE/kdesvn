@@ -109,9 +109,7 @@
 ><para
 >Una còpia plana d'un repositori en el sistema de fitxers local. Aquesta s'utilitza amb qualsevol gestor de fitxers normal, edició dels fitxers, &etc; La informació RCS -sistema de control de revisions- es pot llegir amb clients com el &kdesvn;. </para>
 <para
->Recordeu que el Subversion no sap res sobre el KIO, de manera que la còpia de treball haurà de residir en una àrea on es pugui arribar sense cap protocol específic, &pex; <quote
->fish://</quote
-> o potser no serà possible. </para>
+>Recordeu que el Subversion no sap res sobre el KIO, de manera que la còpia de treball haurà de residir en una àrea on es pugui arribar sense cap protocol específic, &pex; «fish://» o potser no serà possible. </para>
 </listitem>
 </varlistentry>
 <varlistentry>
@@ -119,11 +117,7 @@
 >WebDav</term>
 <listitem
 ><para
->El WebDav és un protocol que permet modificar els fitxers en un servidor web remot. El Subversion és un tipus especial de WebDav quan s'accedeix als repositoris a través d'un servidor web. L'ús normal d'aquest és de només lectura. Amb configuracions especials, podreu activar-hi la lectura-escriptura amb un navegador especialitzat. El &kdesvn; no és un client de WebDav, sí el &konqueror; a través del protocol <quote
->webdav://</quote
->. Però amb el &kdesvn; podreu navegar a través de l'arbre de versions d'un repositori (mitjançant <quote
->http://</quote
->). </para
+>El WebDav és un protocol que permet modificar els fitxers en un servidor web remot. El Subversion és un tipus especial de WebDav quan s'accedeix als repositoris a través d'un servidor web. L'ús normal d'aquest és de només lectura. Amb configuracions especials, podreu activar-hi la lectura-escriptura amb un navegador especialitzat. El &kdesvn; no és un client de WebDav, sí el &konqueror; a través del protocol «webdav://». Però amb el &kdesvn; podreu navegar a través de l'arbre de versions d'un repositori (mitjançant «http://»). </para
 ></listitem>
 </varlistentry>
 </variablelist>
@@ -260,9 +254,7 @@
 <para
 >Seleccioneu i/o creeu una carpeta local, on residirà la còpia de treball. </para>
 <para
->Finalment, però no menys important, la revisió a extreure. Majoritàriament aquesta seria <quote
->HEAD</quote
->. Això assegura que l'última versió emmagatzemada és la versió de referència. </para>
+>Finalment, però no menys important, la revisió a extreure. Majoritàriament aquesta seria «HEAD». Això assegura que l'última versió emmagatzemada és la versió de referència. </para>
 <para
 >Després feu clic a <guibutton
 >D'acord</guibutton
@@ -433,9 +425,7 @@
 >&Ctrl;<keycap
 >L</keycap
 ></keycombo
-> quan un o cap element està marcat en el resum. Depenent de les vostres opcions de configuració (vegeu <xref linkend="subversion-settings" xreflabel="settings"/>), el &kdesvn; recuperarà algunes entrades del registre que comencin amb <quote
->HEAD</quote
-> i les mostrarà. </para>
+> quan un o cap element està marcat en el resum. Depenent de les vostres opcions de configuració (vegeu <xref linkend="subversion-settings" xreflabel="settings"/>), el &kdesvn; recuperarà algunes entrades del registre que comencin amb «HEAD» i les mostrarà. </para>
 <sect3  id="logdisplay-dlg">
 <title
 >El diàleg que mostra el registre</title>
@@ -474,13 +464,9 @@
 <title
 >Treballar en els repositoris</title>
 <para
->La navegació senzilla del repositori pot fer-se dins del &konqueror;, &dolphin; o un navegador de fitxers similar: Obriu un URL amb el protocol descrit a <xref linkend="kdesvn-features" xreflabel="Features"/> (les variants que comencen amb <quote
->k</quote
->) i es mostrarà el contingut. Per tant, les operacions senzilles com copiar, moure i eliminar poden funcionar. En annexar una consulta com <quote
->?rev=<replaceable
+>La navegació senzilla del repositori pot fer-se dins del &konqueror;, &dolphin; o un navegador de fitxers similar: Obriu un URL amb el protocol descrit a <xref linkend="kdesvn-features" xreflabel="Features"/> (les variants que comencen amb «k») i es mostrarà el contingut. Per tant, les operacions senzilles com copiar, moure i eliminar poden funcionar. En annexar una consulta com «?rev=<replaceable
 >xxx</replaceable
-></quote
->, la llista provindrà d'una revisió específica. El format de consulta de la revisió es descriu a <xref linkend="revision-syntax"/>, alguna informació més sobre el KIO::ksvn es troba al <xref linkend="kdesvn-kio"/> </para>
+>», la llista provindrà d'una revisió específica. El format de consulta de la revisió es descriu a <xref linkend="revision-syntax"/>, alguna informació més sobre el KIO::ksvn es troba al <xref linkend="kdesvn-kio"/> </para>
 <para
 >Funciona tot, excepte <guimenuitem
 >Copia</guimenuitem
@@ -646,9 +632,7 @@
 <para
 >El &kdesvn; en si, no té un mòdul per a la resolució de conflictes, però pot utilitzar programari extern des de dins. A <xref linkend="extern-resolve-setup"/> trobareu una descripció sobre com configurar aquesta aplicació. </para>
 <para
->En marcar un element amb l'estat establert a <quote
->conflicte</quote
-> (veureu una creu vermella a la vista de llista) podreu seleccionar <menuchoice
+>En marcar un element amb l'estat establert a «conflicte» (veureu una creu vermella a la vista de llista) podreu seleccionar <menuchoice
 > <guimenu
 >Subversion</guimenu
 > <guisubmenu
@@ -722,11 +706,7 @@
 <para
 >Conté una o dues expressions regulars, separades per un salt de línia.</para>
 <para
->Si només s'estableix una expressió, llavors l'ID de l'error haurà de concordar amb els grups de la cadena de l'expressió regular. Si s'estableixen dues expressions, llavors la primera expressió s'utilitzarà per a trobar una cadena que es relacioni amb l'ID de l'error, però pot contenir més que l'ID de l'error (&pex;, <quote
->Issue #123</quote
-> o <quote
->resolves issue 123</quote
->). La segona expressió s'utilitza per a extreure l'ID real de l'error de la cadena extreta amb la primera expressió.</para>
+>Si només s'estableix una expressió, llavors l'ID de l'error haurà de concordar amb els grups de la cadena de l'expressió regular. Si s'estableixen dues expressions, llavors la primera expressió s'utilitzarà per a trobar una cadena que es relacioni amb l'ID de l'error, però pot contenir més que l'ID de l'error (&pex;, «Issue #123» o «resolves issue 123»). La segona expressió s'utilitza per a extreure l'ID real de l'error de la cadena extreta amb la primera expressió.</para>
 <para
 >Si us plau, aneu amb compte amb els espais no desitjats després de l'expressió regular i no oblideu els claudàtors a la descripció del número.</para>
 </entry>
@@ -829,9 +809,7 @@
 <title
 >Significat de les icones superposades</title>
 <para
->Les entrades poden estar marcades amb icones superposades quan no es trobin en l'estat <quote
->normal</quote
->. <variablelist>
+>Les entrades poden estar marcades amb icones superposades quan no es trobin en l'estat «normal». <variablelist>
 
 <varlistentry>
 <term
@@ -974,9 +952,7 @@
 <title
 >No desar les contrasenyes</title>
 <para
->La manera més segura, però de vegades maldestre amb les IGU com el &kdesvn;. En particular, els processos en segon pla del &kdesvn; sempre tornaran a demanar una contrasenya en el cas que el repositori hagi restringit l'accés de les operacions com actualització i estat. El mateix per a <quote
->comissió</quote
-> i així successivament. De manera que si no esteu desant les contrasenyes, haureu de desactivar <guilabel
+>La manera més segura, però de vegades maldestre amb les IGU com el &kdesvn;. En particular, els processos en segon pla del &kdesvn; sempre tornaran a demanar una contrasenya en el cas que el repositori hagi restringit l'accés de les operacions com actualització i estat. El mateix per a «comissió» i així successivament. De manera que si no esteu desant les contrasenyes, haureu de desactivar <guilabel
 >Inicia la comprovació d'actualitzacions en obrir una còpia de treball</guilabel
 > i <link linkend="subversion-settings"
 >així successivament</link
@@ -1074,11 +1050,9 @@
 > haurà d'apuntar al començament d'un repositori diferent de la mateixa aplicació o de la KPart. Es pot navegar per les còpies de treball amb el &konqueror;. </para>
 <para
 >Per a navegar a una revisió específica, podeu annexar la consulta <link linkend="revision-syntax"
-><quote
->?rev=<replaceable
+>«?rev=<replaceable
 >revisió</replaceable
-></quote
-></link
+>»</link
 > a l'&URL;. </para>
 </listitem>
 </varlistentry>
@@ -1672,11 +1646,9 @@
 <entry
 >tree</entry>
 <entry
->Mostra un arbre de les revisions de l'element (només el primer argument), si l'&URL; amb el <quote
->?rev=<replaceable
+>Mostra un arbre de les revisions de l'element (només el primer argument), si l'&URL; amb el «?rev=<replaceable
 >xxx</replaceable
-></quote
-> indicat, aquesta revisió serà la revisió de referència.</entry>
+>» indicat, aquesta revisió serà la revisió de referència.</entry>
 <entry
 >-r rev_inici:rev_final</entry>
 </row>
@@ -1794,9 +1766,7 @@
 </para>
 <sect2>
   <title
->L'ordre <quote
->log</quote
-></title>
+>L'ordre «log»</title>
 <para
 >L'ordre «log» mostra un diàleg que conté el registre de l'&URL; indicat. Amb el Subversion 1.2 o posterior, aquesta accepta un límit, &ead;, el nombre d'entrades que s'han de mostrar. </para>
 <para
@@ -1813,9 +1783,7 @@
 </sect2>
 <sect2>
   <title
->L'ordre <quote
->diff</quote
-></title>
+>L'ordre «diff»</title>
 <para
 >Obtindreu les diferències entre les revisions d'un element o entre dos elements dins de la mateixa còpia de treball o repositori. Quan feu el diff en les revisions d'un element, les revisions es poden indicar com <option
 >-r <replaceable
@@ -1887,11 +1855,7 @@
 <entry
 >L'ordre dels elements distingeix majúscules i minúscules</entry>
 <entry
->Si l'ordre de classificació a la finestra principal distingeix o no les majúscules i minúscules, &ead;, si <quote
->a</quote
-> és igual que <quote
->A</quote
->.</entry>
+>Si l'ordre de classificació a la finestra principal distingeix o no les majúscules i minúscules, &ead;, si «a» és igual que «A».</entry>
 </row>
 <row>
 <entry
@@ -1951,9 +1915,7 @@
 </row>
 <row>
   <entry
->Comprova si els elements tenen establerta la propietat <quote
->svn:needs-lock</quote
-></entry>
+>Comprova si els elements tenen establerta la propietat «svn:needs-lock»</entry>
 <entry
 >Comprova a les còpies de treball si un element té aquesta propietat establerta i en cas afirmatiu, mostra una icona superposada especial. Establir aquesta opció pot alentir considerablement el llistat dels elements.</entry>
 </row>
@@ -2180,11 +2142,7 @@
 >&lt;programa&gt; &lt;paràmetre&gt; %1 %2</term>
 <listitem
 ><para
->El &kdesvn; deixarà que el programa extern faci les diferències. %1 i %2 seran substituïts pels valors requerits (noms de fitxer o de carpeta). El &kdesvn; emmagatzemarà el contingut per a comparar en un entorn temporal (quan les carpetes fan una <quote
->exportació</quote
->, quan una sola fila, fa un <quote
->cat</quote
->) quan sigui necessari i netejarà després de tancar el programa extern o ell. </para
+>El &kdesvn; deixarà que el programa extern faci les diferències. %1 i %2 seran substituïts pels valors requerits (noms de fitxer o de carpeta). El &kdesvn; emmagatzemarà el contingut per a comparar en un entorn temporal (quan les carpetes fan una «exportació», quan una sola fila, fa un «cat») quan sigui necessari i netejarà després de tancar el programa extern o ell. </para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -2368,9 +2326,7 @@ Revisions tree
 >Les operacions KIO usen l'estàndard per als missatges de registre</term>
 <listitem
 ><para
->En realitzar operacions en un repositori a través del protocol KIO del &kdesvn; des de dins del &konqueror; (&ead;, els protocols, <quote
->ksvn+...</quote
->) sobre operacions grans com moure o copiar carpetes, el &kdesvn; demanarà un missatge de registre per a cada element. Aquest és un comportament del &konqueror;. Quan s'estableix aquesta opció, la implementació KIO del &kdesvn; no demanarà un missatge de registre, sinó que n'establirà un d'estàndard. Aquesta etiqueta no fa per a les operacions del menú d'accions del &kdesvn; pel &konqueror;, sinó que només copia/mou/creadir/suprimeix amb el &konqueror; o altres gestors de fitxers en un URL en format KIO. </para
+>En realitzar operacions en un repositori a través del protocol KIO del &kdesvn; des de dins del &konqueror; (&ead;, els protocols, «ksvn+...») sobre operacions grans com moure o copiar carpetes, el &kdesvn; demanarà un missatge de registre per a cada element. Aquest és un comportament del &konqueror;. Quan s'estableix aquesta opció, la implementació KIO del &kdesvn; no demanarà un missatge de registre, sinó que n'establirà un d'estàndard. Aquesta etiqueta no fa per a les operacions del menú d'accions del &kdesvn; pel &konqueror;, sinó que només copia/mou/creadir/suprimeix amb el &konqueror; o altres gestors de fitxers en un URL en format KIO. </para
 ></listitem>
 </varlistentry>
 
@@ -3414,9 +3370,7 @@ Revisions tree
 >Número</term>
 <listitem
 ><para
->Un número més gran o igual que -1. El -1 significa <quote
->revisió sense especificar</quote
->, 0 és el començament. Normalment, aquests números no s'han d'utilitzar (la majoria de les operacions fallaran). </para
+>Un número més gran o igual que -1. El -1 significa «revisió sense especificar», 0 és el començament. Normalment, aquests números no s'han d'utilitzar (la majoria de les operacions fallaran). </para
 ></listitem>
 </varlistentry>
 
@@ -3478,11 +3432,9 @@ Revisions tree
 
 </para>
 <para
->En afegir una revisió específica a un &URL; sempre es farà <quote
->?rev=<replaceable
+>En afegir una revisió específica a un &URL; sempre es farà «?rev=<replaceable
 >revisió</replaceable
-></quote
->. </para>
+>». </para>
 </appendix>
 
 &documentation.index;

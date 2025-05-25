@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-23 00:45+0000\n"
-"PO-Revision-Date: 2025-05-24 00:47+0200\n"
+"PO-Revision-Date: 2025-05-24 10:39+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -199,7 +199,7 @@ msgstr "რეპოზიტორიის ცხელი ასლი"
 #: src/kdesvn.cpp:113
 #, kde-format
 msgid "Hotcopy a Subversion repository to a new folder"
-msgstr ""
+msgstr "Subversion-ის რეპოზიტორიის ცხელი ასლი ახალ საქაღალდეში"
 
 #: src/kdesvn.cpp:116
 #, kde-format
@@ -220,6 +220,8 @@ msgstr "ssh იდენტიფიკატორების დამატ�
 #, kde-format
 msgid "Force add ssh-identities to ssh-agent for future use."
 msgstr ""
+"ssh იდენტიფიკატორების ნაძალადევი დამატება ssh-agent-ში მომავალში "
+"გამოსაყენებლად."
 
 #: src/kdesvn.cpp:124
 #, kde-format
@@ -230,6 +232,8 @@ msgstr "ინფორმაცია kdesvn -ის შესახებ"
 #, kde-format
 msgid "Shows info about the kdesvn plugin and not the standalone application."
 msgstr ""
+"აჩვენებს ინფორმაციას kdesvn-ის დამატების შესახებ და არა დამოუკიდებელი "
+"აპლიკაციის შესახებ."
 
 #: src/kdesvn.cpp:128
 #, kde-format
@@ -269,6 +273,8 @@ msgstr "ბოლოს გახსნილი URL-ის ჩატვირ�
 #, kde-format
 msgid "Reload last opened URL if no one is given on command line"
 msgstr ""
+"თუ ბრძანების სტრიქონში მითითებული არაა, თავიდან გაიხსნება ბოლოს ჩატვირთული "
+"URL"
 
 #: src/kdesvn.cpp:293
 #, kde-format
@@ -278,7 +284,7 @@ msgstr "მზადაა"
 #: src/kdesvn_part.cpp:156
 #, kde-format
 msgid "Logs follow node changes"
-msgstr ""
+msgstr "ჟურნალები მიჰყვება კვანძის ცვლილებებს"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_ignored_files)
 #. i18n: ectx: label, entry, group (subversion)
@@ -325,6 +331,8 @@ msgid ""
 "Built with Subversion library: %1\n"
 "Running Subversion library: %2"
 msgstr ""
+"აგებულია Subversion-ის ბიბლიოთეკით: %1\n"
+"გაშვებულია Subversion-ის ბიბლიოთეკით: %2"
 
 #: src/kdesvn_part.cpp:285
 #, kde-format
@@ -334,7 +342,7 @@ msgstr "kdesvn -ის ნაწილი"
 #: src/kdesvn_part.cpp:287
 #, kde-format
 msgid "A Subversion Client by KDE (dynamic Part component)"
-msgstr ""
+msgstr "Subversion -ის კლიენტი KDE-სგან (დინამიკური ნაწილის კომპონენტი)"
 
 #: src/kdesvn_part.cpp:289
 #, kde-format
@@ -660,7 +668,7 @@ msgstr ""
 #: src/kiosvn/kiolistener.cpp:124
 #, kde-format
 msgid "Resolved conflicted state of %1."
-msgstr ""
+msgstr "გადაწყვეტილია კონფლიქტი %1."
 
 #: src/kiosvn/kiolistener.cpp:128
 #, kde-format
@@ -685,7 +693,7 @@ msgstr "განახლება დასრულდა."
 #: src/kiosvn/kiolistener.cpp:186
 #, kde-format
 msgid "Finished external at revision %1."
-msgstr ""
+msgstr "დასრულდა გარე რევიზიასთან %1."
 
 #: src/kiosvn/kiolistener.cpp:188
 #, kde-format
@@ -705,7 +713,7 @@ msgstr "სტატუსი რევიზიამდე: %1."
 #: src/kiosvn/kiolistener.cpp:206
 #, kde-format
 msgid "Performing status on external item at %1."
-msgstr ""
+msgstr "სტატუსის მიღება გარე ელემენტისთვის %1."
 
 #: src/kiosvn/kiolistener.cpp:209
 #, kde-format
@@ -741,37 +749,37 @@ msgstr "ფაილის მონაცემების გადაცე�
 #: src/kiosvn/kiosvn.cpp:484
 #, kde-format
 msgid "Can only write on HEAD revision."
-msgstr ""
+msgstr "ჩაწერა, მხოლოდ, HEAD რევიზიაზეა შესაძლებელი."
 
 #: src/kiosvn/kiosvn.cpp:331
 #, kde-format
 msgid "Renaming %1 to %2 successful"
-msgstr ""
+msgstr "%1-ის სახელის გადარქმევა %2-ზე წარმატებით დასრულდა"
 
 #: src/kiosvn/kiosvn.cpp:363
 #, kde-format
 msgid "Overwriting existing items is disabled in settings."
-msgstr ""
+msgstr "არსებული ელემენტების თავზე გადაწერა გამორთულია პარამეტრებში."
 
 #: src/kiosvn/kiosvn.cpp:370
 #, kde-format
 msgid "Start checking out to temporary folder"
-msgstr ""
+msgstr "დაწყებულია გამოთხოვა დროებით საქაღალდეში"
 
 #: src/kiosvn/kiosvn.cpp:373
 #, kde-format
 msgid "Checking out %1"
-msgstr ""
+msgstr "%1-ის გამოთხოვა"
 
 #: src/kiosvn/kiosvn.cpp:381
 #, kde-format
 msgid "Temporary checkout done."
-msgstr ""
+msgstr "დროებითი გამოთხოვა მზადაა."
 
 #: src/kiosvn/kiosvn.cpp:385
 #, kde-format
 msgid "Could not write to existing item."
-msgstr ""
+msgstr "ვერ ჩავწერე არსებულ ელემენტში."
 
 #: src/kiosvn/kiosvn.cpp:391
 #, kde-format
@@ -781,7 +789,7 @@ msgstr "დროებითი ფაილის გახსნის შე
 #: src/kiosvn/kiosvn.cpp:412
 #, kde-format
 msgid "Could not retrieve data for write."
-msgstr ""
+msgstr "ვერ მივიღე ჩასაწერი მონაცემები."
 
 #: src/kiosvn/kiosvn.cpp:419
 #, kde-format
@@ -802,7 +810,7 @@ msgstr "%1 დაკოპირდა %2-ზე"
 #: src/svnfrontend/svnactions.cpp:2338
 #, kde-format
 msgid "Committed revision %1."
-msgstr ""
+msgstr "გადაცემულია რევიზია %1."
 
 #: src/kiosvn/kiosvn.cpp:790
 #, kde-format
@@ -817,17 +825,17 @@ msgstr "ჟურნალების გასუფთავება"
 #: src/ksvnwidgets/authdialogwidget.cpp:34
 #, kde-format
 msgid "Store password (into KDE Wallet)"
-msgstr ""
+msgstr "პაროლის დამახსოვრება (KDE-ის საფულეში)"
 
 #: src/ksvnwidgets/authdialogwidget.cpp:35
 #, kde-format
 msgid "Store password (into Subversion' simple storage)"
-msgstr ""
+msgstr "პაროლის დამახსოვრება (Subversion-ის მარტივ საცავში)"
 
 #: src/ksvnwidgets/authdialogwidget.cpp:37
 #, kde-format
 msgid "Enter authentication info for %1"
-msgstr ""
+msgstr "შეიყვანეთ ავთენტიკაციის ინფორმაცია %1-სთვის"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, AuthDialogWidget)
 #: src/ksvnwidgets/authdlg.ui:14
@@ -857,7 +865,7 @@ msgstr "კომიტის კომენტარი"
 #: src/ksvnwidgets/commitmessage.ui:27
 #, kde-format
 msgid "Review affected items"
-msgstr ""
+msgstr "შეცვლილი ელემენტების სია"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_SelectAllButton)
 #: src/ksvnwidgets/commitmessage.ui:63
@@ -882,6 +890,8 @@ msgstr "ახალი ელემენტების დამალვა"
 #, kde-format
 msgid "Mark all new e.g. not versioned items for add and commit."
 msgstr ""
+"ყველა ახალი მაგ: ვერსიის არმქონე ელემენტების მონიშვნა დამატებისა და "
+"გადაცემისთვის."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_MarkUnversioned)
 #: src/ksvnwidgets/commitmessage.ui:90
@@ -894,6 +904,8 @@ msgstr "ახალი ელემენტების მონიშვნ�
 #, kde-format
 msgid "Unmark all unversioned items so they will be ignored."
 msgstr ""
+"ყველა ვერსიის არმქონე ელემენტის მონიშვნის მოხსნა, ასე რომ ისინი გამოტოვებული "
+"იქნება."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_UnmarkUnversioned)
 #: src/ksvnwidgets/commitmessage.ui:100
@@ -905,7 +917,7 @@ msgstr "ახალი ელემენტების მონიშვნ�
 #: src/ksvnwidgets/commitmessage.ui:107
 #, kde-format
 msgid "Revert highlighted item"
-msgstr ""
+msgstr "გამოკვეთილი ელემენტის დაბრუნება"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_RevertItemButton)
 #: src/ksvnwidgets/commitmessage.ui:110
@@ -917,7 +929,7 @@ msgstr "ელემენტის დაბრუნება"
 #: src/ksvnwidgets/commitmessage.ui:117
 #, kde-format
 msgid "Generates and display difference against repository of selected item"
-msgstr ""
+msgstr "ქმნის და აჩვენებს სხვაობებს მონიშნული ელემენტის რეპოზიტორიის მიმართ"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DiffItem)
 #: src/ksvnwidgets/commitmessage.ui:120
@@ -953,7 +965,7 @@ msgstr "ტექსტური ფაილის ჩასმა..."
 #: src/ksvnwidgets/commitmessage.ui:226
 #, kde-format
 msgid "If checked commit will not release locks."
-msgstr ""
+msgstr "თუ ჩართულია, გადაცემა არ მოხსნის ბლოკებს."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_keepLocksButton)
 #: src/ksvnwidgets/commitmessage.ui:229
@@ -1055,7 +1067,7 @@ msgstr "უსასრულო სიღრმე (რეკურსია)"
 #: src/ksvnwidgets/diffbrowser.cpp:51
 #, kde-format
 msgid "Ctrl-F for search, F3 or Shift-F3 for search again."
-msgstr ""
+msgstr "Ctrl-F ძებნისთვის, F3 ან Shift-F3 კიდევ ერთხელ ძებნისთვის."
 
 #: src/ksvnwidgets/diffbrowser.cpp:53
 #, kde-format
@@ -1081,6 +1093,8 @@ msgid ""
 "End of document reached.\n"
 "Continue from the beginning?"
 msgstr ""
+"მიღწეულია ფაილის ბოლო.\n"
+"გავაგრძელო დასაწყისიდან?"
 
 #: src/ksvnwidgets/diffbrowser.cpp:174 src/ksvnwidgets/diffbrowser.cpp:186
 #, kde-format
@@ -1093,6 +1107,8 @@ msgid ""
 "Beginning of document reached.\n"
 "Continue from the end?"
 msgstr ""
+"მიღწეულია ფაილის დასაწყისი.\n"
+"გავაგრძელო ბოლოდან?"
 
 #. i18n: ectx: property (text), widget (QLabel, m_Mainlabel)
 #: src/ksvnwidgets/encodingselector.ui:30
@@ -1165,7 +1181,7 @@ msgstr "ჩანაწერების დაბრუნება"
 #: src/ksvnwidgets/revertform.ui:20
 #, kde-format
 msgid "Really revert these entries to pristine state?"
-msgstr ""
+msgstr "მართლა დავაბრუნო ეს ჩანაწერები ხელუხლებელ მდგომარეობაში?"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:33
 #, kde-format
@@ -1185,7 +1201,7 @@ msgstr "უარყოფა"
 #: src/ksvnwidgets/ssltrustprompt.cpp:46
 #, kde-format
 msgid "Error validating server certificate for '%1'"
-msgstr ""
+msgstr "სერვისის სერტიფიკატის გადამოწმების შეცდომა '%1'-სთვის"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:71
 #, kde-format
@@ -1236,7 +1252,7 @@ msgstr "kdesvn"
 #: src/main.cpp:40
 #, kde-format
 msgid "A Subversion Client by KDE (standalone application)"
-msgstr ""
+msgstr "Subversion-ის კლიენტი KDE-სგან (დამოუკიდებელი აპლიკაცია)"
 
 #: src/main.cpp:42
 #, kde-format
@@ -1260,7 +1276,7 @@ msgstr "Christian Ehrlicher"
 #: src/main.cpp:49
 #, kde-format
 msgid "Execute single Subversion command on specific revision(-range)"
-msgstr ""
+msgstr "ერთი Subversion-ის ბრძანების შესრულება მითითებულ რევიზიაზე(-დიაპაზონი)"
 
 #: src/main.cpp:49
 #, kde-format
@@ -1270,7 +1286,7 @@ msgstr "საწყ_რევ:[:ბოლო_რევ]"
 #: src/main.cpp:50
 #, kde-format
 msgid "Ask for revision when executing single command"
-msgstr ""
+msgstr "რევიზიის მოთხოვნა ერთი ბრძანების შესრულებისას"
 
 #: src/main.cpp:51
 #, kde-format
@@ -1280,7 +1296,7 @@ msgstr "ნაძალადევი შესრულება"
 #: src/main.cpp:52
 #, kde-format
 msgid "Save output of Subversion command (eg \"cat\") into file <file>"
-msgstr ""
+msgstr "Subversion-ის ბრძანების (მაგ: 'cat') გამოტანის შენახვა ფაილში <file>"
 
 #: src/main.cpp:52
 #, kde-format
@@ -1290,7 +1306,7 @@ msgstr "<file>"
 #: src/main.cpp:53
 #, kde-format
 msgid "Limit log output to <number>"
-msgstr ""
+msgstr "ჟურნალის გამოტანის შეზღუდვა <number>-მდე"
 
 #: src/main.cpp:53
 #, kde-format
@@ -1301,6 +1317,7 @@ msgstr "<number>"
 #, kde-format
 msgid "Execute Subversion command (\"exec help\" for more information)"
 msgstr ""
+"Subversion-ის ბრძანების შესრულება (მეტი ინფორმაციისთვის იხილეთ \"exec help\")"
 
 #: src/main.cpp:55
 #, kde-format
@@ -1311,7 +1328,7 @@ msgstr "გასახსნელი დოკუმენტი"
 #: src/settings/cmdexecsettings.ui:11
 #, kde-format
 msgid "Show a small window containing the log after command executed"
-msgstr ""
+msgstr "ბრძანების შესრულების შემდეგ ჟურნალის შემცველი პატარა ფანჯრის ჩვენება"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_cmdline_show_logwindow)
 #: src/settings/cmdexecsettings.ui:14
@@ -1331,6 +1348,8 @@ msgstr "ნაჩვენები ჟურნალის მინიმა�
 msgid ""
 "The minimum a log output must contain before kdesvn shows a single log window"
 msgstr ""
+"მინიმუმი, რომელსაც უნდა შეიცავდეს ჟურნალი, სანამ kdesvn ერთი ჟურნალის "
+"ფანჯარას გაჩვნეებთ"
 
 #. i18n: ectx: property (specialValueText), widget (QSpinBox, kcfg_cmdline_log_minline)
 #: src/settings/cmdexecsettings.ui:39
@@ -1343,13 +1362,13 @@ msgstr "მინიმალურის გარეშე"
 #: src/settings/cmdexecsettings.ui:51
 #, kde-format
 msgid "If set, kdesvn will not show a menu inside \"Action\" menu of Konqueror"
-msgstr ""
+msgstr "თუ დაყენებულია, kdesvn არ გამოჩნდება Konqueror-ის \"ქმედების\" მენიუში"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_contextmenu)
 #: src/settings/cmdexecsettings.ui:54
 #, kde-format
 msgid "Do not display context menu in Konqueror"
-msgstr ""
+msgstr "არ აჩვენო კონტექსტური მენიუ Konqueror-ში"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
 #: src/settings/cmdexecsettings.ui:61
@@ -1358,18 +1377,20 @@ msgid ""
 "If set, kdesvn will not show some extra actions inside \"Action\" menu of "
 "Konqueror/Dolphin"
 msgstr ""
+"თუ დაყენებულია, kdesvn არ გამოაჩენს დამატებით ქმედებებს Konqueror/Dolphin-ის "
+"\"ქმედებების\" მენიუში"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
 #: src/settings/cmdexecsettings.ui:64
 #, kde-format
 msgid "Do not display entries in toplevel action menu"
-msgstr ""
+msgstr "არ აჩვენო პუნქტები უმაღლესი ქმედების მენიუში"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_kio_use_standard_logmsg)
 #: src/settings/cmdexecsettings.ui:71
 #, kde-format
 msgid "KIO operations use standard log message"
-msgstr ""
+msgstr "KIO-ის ოპერაციები სტანდარტული ჟურნალის შეტყობინებებს იყენებს"
 
 #. i18n: ectx: property (text), widget (QLabel, stdLogmsgLabel)
 #: src/settings/cmdexecsettings.ui:80
@@ -1381,7 +1402,7 @@ msgstr "სტანდარტული შეტყობინება:"
 #: src/settings/cmdexecsettings.ui:98
 #, kde-format
 msgid "Can KIO overwrite existing files?"
-msgstr ""
+msgstr "შეუძლია KIO-ს, გადააწეროს თავზე არსებულ ფაილებს?"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_kio_can_overwrite)
 #: src/settings/cmdexecsettings.ui:103
@@ -1421,7 +1442,7 @@ msgstr ""
 #: src/settings/cmdexecsettings.ui:120
 #, kde-format
 msgid "KIO shows progress messages"
-msgstr ""
+msgstr "KIO აჩვენებს მიმდინარეობის შეტყობინებებს"
 
 #: src/settings/cmdexecsettings_impl.cpp:27
 #, kde-format
@@ -1447,13 +1468,13 @@ msgstr "Diff რევიზიის ხეში რეკურსიულ�
 #: src/settings/diffmergesettings.ui:25 src/settings/kdesvn_part.kcfg:33
 #, kde-format
 msgid "Diff ignores white space changes"
-msgstr ""
+msgstr "სხვაობა გამოტოვებს თეთრი ჰარეს ცვლილებებს"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_all_white_spaces)
 #: src/settings/diffmergesettings.ui:32
 #, kde-format
 msgid "Diff ignores all white spaces"
-msgstr ""
+msgstr "სხვაობა გამოტოვებს ყველა თეთრ ჰარეს"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_external_diff)
 #: src/settings/diffmergesettings.ui:39
@@ -1467,7 +1488,7 @@ msgstr ""
 #: src/settings/diffmergesettings.ui:42
 #, kde-format
 msgid "Use external diff display"
-msgstr ""
+msgstr "სხვა პროგრამის გამოყენება სხვაობის საჩვენებლად"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_extern_merge_default)
 #: src/settings/diffmergesettings.ui:49
@@ -1512,7 +1533,7 @@ msgstr "გარე შერწყმის პროგრამა:"
 #: src/settings/diffmergesettings.ui:115
 #, kde-format
 msgid "Setup an external program for conflict resolving"
-msgstr ""
+msgstr "გარე პროგრამის მორგება კონფლიქტების გადასაჭრელად"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_conflict_resolver)
 #: src/settings/diffmergesettings.ui:134
@@ -1543,13 +1564,13 @@ msgstr ""
 #: src/settings/diffmergesettings.ui:141
 #, kde-format
 msgid "External diff display:"
-msgstr ""
+msgstr "სხვაობების საჩვენებელი პროგრამა:"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, kcfg_external_merge_program)
 #: src/settings/diffmergesettings.ui:154
 #, kde-format
 msgid "Setup an external program for merging"
-msgstr ""
+msgstr "მოირგეთ გარე პროგრამა შერწყმისთვის"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_external_merge_program)
 #: src/settings/diffmergesettings.ui:166
@@ -1603,7 +1624,7 @@ msgstr ""
 #: src/settings/diffmergesettings.ui:200
 #, kde-format
 msgid "see \"What's this\" for details"
-msgstr ""
+msgstr "დეტალებისთვის იხილეთ \"რა არის ეს\""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DispColorSettings)
 #: src/settings/dispcolor_settings.ui:6
@@ -1615,7 +1636,7 @@ msgstr "ColorSettings"
 #: src/settings/dispcolor_settings.ui:14
 #, kde-format
 msgid "Mark changed and locked items colored"
-msgstr ""
+msgstr "შეცვლილი და დაბლოკილი ელემენტების დანიშვნა ფერებით"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel5)
 #: src/settings/dispcolor_settings.ui:56
@@ -1627,13 +1648,13 @@ msgstr "დაბლოკილი ელემენტი:"
 #: src/settings/dispcolor_settings.ui:76
 #, kde-format
 msgid "Not versioned items:"
-msgstr ""
+msgstr "ვერსიის არმქონე ელემენტები:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: src/settings/dispcolor_settings.ui:89
 #, kde-format
 msgid "Remote changed items:"
-msgstr ""
+msgstr "დაშორებულად შეცვლილი ელემენტები:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: src/settings/dispcolor_settings.ui:102
@@ -1681,13 +1702,13 @@ msgstr "&მორგება"
 #: src/settings/display_settings.ui:14
 #, kde-format
 msgid "Size of Listviewicons"
-msgstr ""
+msgstr "სიის ხატულების ზომა"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_display_overlays)
 #: src/settings/display_settings.ui:24
 #, kde-format
 msgid "Mark Subversion states with an overlayed icon"
-msgstr ""
+msgstr "Subversion-ის მდგომარეობის დანიშვნა ხატულათი"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_overlays)
 #: src/settings/display_settings.ui:30
@@ -1704,7 +1725,7 @@ msgstr ""
 #: src/settings/display_settings.ui:33
 #, kde-format
 msgid "Mark item status with icon overlay"
-msgstr ""
+msgstr "ელემენტის სტატუსის დანიშვნა ხატულით"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_case_sensitive_sort)
 #: src/settings/display_settings.ui:40
@@ -1751,6 +1772,8 @@ msgstr "ნავიგაციის პანელის გამოყე�
 #, kde-format
 msgid "Set if items sortorder should be case sensitive or not"
 msgstr ""
+"იქნება თუ არა ელემენტების დალაგების მიმდევრობა დამოკიდებული დიდ და პატარა "
+"ასოებზე"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:13
@@ -1762,131 +1785,131 @@ msgstr "ხატულის ზომები"
 #: src/settings/kdesvn_part.kcfg:17
 #, kde-format
 msgid "Show file information in tooltip"
-msgstr ""
+msgstr "ფაილის ინფორმაციის ჩვენება მინიშნებაში"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:21
 #, kde-format
 msgid "Use an external program for diff viewing/generating"
-msgstr ""
+msgstr "გარე პროგრამის გამოყენება სხვაობის სანახავად/გენერაციისთვის"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:25
 #, kde-format
 msgid "Use external program for diff viewing"
-msgstr ""
+msgstr "გარე პროგრამის გამოყენება სხვაობის სანახავად"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:37
 #, kde-format
 msgid "Diff ignores all white space"
-msgstr ""
+msgstr "სხვაობა გამოტოვებს ყველა თეთრ ჰარეს"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:41
 #, kde-format
 msgid "Show diff in Git format"
-msgstr ""
+msgstr "სხვაობის ჩვენება Git-ის ფორმატში"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:49
 #, kde-format
 msgid "Maximum number of log messages"
-msgstr ""
+msgstr "ჟურნალის შეტყობინებების მაქსიმალური რაოდენობა"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:53
 #, kde-format
 msgid "Display colored blame lines"
-msgstr ""
+msgstr "ფერადი ანოტაციების ჩვენება"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:68
 #, kde-format
 msgid "Display icon overlays"
-msgstr ""
+msgstr "ხატულებით გადაფარვის ჩვენება"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:72
 #, kde-format
 msgid "Get item information recursively"
-msgstr ""
+msgstr "ელემენტის ინფორმაციის მიღება რეკურსიულად"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_review_commit)
 #: src/settings/kdesvn_part.kcfg:76 src/settings/subversion_settings.ui:174
 #, kde-format
 msgid "Review items before commit"
-msgstr ""
+msgstr "ელემენტების გადახედვა მათ გადაცემამდე"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:88
 #, kde-format
 msgid "Hide versioned unchanged files"
-msgstr ""
+msgstr "ვერსიის მქონე უცვლელი ფაილების დამალვა"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_follows_nodes)
 #: src/settings/kdesvn_part.kcfg:92 src/settings/subversion_settings.ui:145
 #, kde-format
 msgid "Log follows node changes"
-msgstr ""
+msgstr "ჟურნალები მიჰყვება კვანძის ცვლილებებს"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_always_list_changed_files)
 #: src/settings/kdesvn_part.kcfg:96 src/settings/subversion_settings.ui:161
 #, kde-format
 msgid "Log always reads list of changed files"
-msgstr ""
+msgstr "ჟურნალი ყოველთვის წაიკითხავს შეცვლილი ფაილების სიას"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:100
 #, kde-format
 msgid "Start check for updates when open working copy"
-msgstr ""
+msgstr "განახლებების შემოწმების დაწყება სამუშაო ასლის გახსნისას"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:104
 #, kde-format
 msgid "Start caching latest logs on open or commit"
-msgstr ""
+msgstr "უახლესი ჟურნალების დაკეშვის დაწყება გახსნისას ან გადაცემისას"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:108
 #, kde-format
 msgid "Get detailed information when making a remote listing"
-msgstr ""
+msgstr "დეტალური ინფორმაციის მიღება დაშორებული ჩამონათვლის შექმნისას"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:112
 #, kde-format
 msgid "Get properties on selected item on networked protocols"
-msgstr ""
+msgstr "მოხდება თუ არა ქსელში მდებარე ელემენტების თვისებების მიღება"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:116
 #, kde-format
 msgid "Use properties like bugtraq:url on repository listings"
-msgstr ""
+msgstr "bugtraq:url-ის მსგავსი თვისებების გამოყენება რეპოზიტორიის სიებზე"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:120
 #, kde-format
 msgid "Check for property svn:needs-lock on listings"
-msgstr ""
+msgstr "შემოწმება, არსებობს თუ არა თვისება svn:needs-lock სიებზე"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/kdesvn_part.kcfg:124 src/settings/subversion_settings.ui:107
 #, kde-format
 msgid "Store passwords for remote connections"
-msgstr ""
+msgstr "პაროლების შენახვა დაშორებული კავშირებისთვის"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:128
 #, kde-format
 msgid "Store passwords in KDE Wallet instead of Subversion' storage"
-msgstr ""
+msgstr "პაროლების შენახვა KDE-ის საფულეში Subversion-ის საცავის მაგიერ"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_password_cache)
@@ -1905,31 +1928,31 @@ msgstr "ჩართულია ქსელი"
 #: src/settings/kdesvn_part.kcfg:140
 #, kde-format
 msgid "Local add results in modification instead of conflicts"
-msgstr ""
+msgstr "ლოკალური დამატება გამოიწვევს ცვლილებას კონფლიქტის მაგიერ"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:144
 #, kde-format
 msgid "create any non-existent parent at depth=empty"
-msgstr ""
+msgstr "ყველა არარსებული მშობლის შექმნა ცარიელი სიღრმისას"
 
 #. i18n: ectx: label, entry, group (diffmerge_items)
 #: src/settings/kdesvn_part.kcfg:150
 #, kde-format
 msgid "Which program to use for external merges"
-msgstr ""
+msgstr "რომელი პროგრამა გამოიყენება გარე შერწყმისთვის"
 
 #. i18n: ectx: label, entry, group (diffmerge_items)
 #: src/settings/kdesvn_part.kcfg:154
 #, kde-format
 msgid "Which program for resolving conflicts"
-msgstr ""
+msgstr "რომელი პროგრამა გამოიყენება კონფლიქტების გადასაჭრელად"
 
 #. i18n: ectx: label, entry, group (display)
 #: src/settings/kdesvn_part.kcfg:164
 #, kde-format
 msgid "Display other than normal states colored"
-msgstr ""
+msgstr "ნორმალურის გარდა ყველა მდგომარეობის ფერადად ჩვენება"
 
 #. i18n: ectx: label, entry, group (blame_dlg)
 #: src/settings/kdesvn_part.kcfg:197
@@ -1941,7 +1964,7 @@ msgstr "ლოკალი დანაშაულის საჩვენე�
 #: src/settings/kdesvn_part.kcfg:209
 #, kde-format
 msgid "Check status of log cache when starting revision tree"
-msgstr ""
+msgstr "ჟურნალის კეშის სტატუსის შემოწმება რევიზიის ხის დაწყებისას"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -1984,61 +2007,62 @@ msgstr "ფერი შეცვლილი ელემენტების�
 #: src/settings/kdesvn_part.kcfg:237
 #, kde-format
 msgid "Height of detail view in tree widget"
-msgstr ""
+msgstr "დეტალური ხედის სიმაღლე ხის ვიჯეტში"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:241
 #, kde-format
 msgid "Diffs from revision tree are recursive"
-msgstr ""
+msgstr "სხვაობები რევიზიის ხიდან რეკურსიულია"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:247
 #, kde-format
 msgid "Should Konqueror not display context menus for kdesvn?"
-msgstr ""
+msgstr "არ გნებავთ Konqueror-ის კონტექსტურ მენიუებში kdesvn-ის ჩვენება?"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:251
 #, kde-format
 msgid "Should Konqueror not display kdesvn entries in main action menu?"
 msgstr ""
+"Konqueror-მა არ უნდა აჩვენოს kdesvn-ის ჩანაწერები ქმედებების მთავარ მენიუში?"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:255
 #, kde-format
 msgid "Show a small log window after executing a command."
-msgstr ""
+msgstr "პატარა ჟურნალის ფანჯრის ჩვენება ბრძანების შესრულების შემდეგ."
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:259
 #, kde-format
 msgid "Log must contain at least lines to show"
-msgstr ""
+msgstr "ჟურნალი სულ ცოტა ამდენ ხაზს უნდა შეიცავდეს საჩენებლად"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:263
 #, kde-format
 msgid "KIO::svn operations use a standard log message"
-msgstr ""
+msgstr "KIO::svn ოპერაციები სტანდარტული ჟურნალის შეტყობინებას იყენებენ"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:267
 #, kde-format
 msgid "The standard log message to use with KIO if not asking for it."
-msgstr ""
+msgstr "სტანდარტული ჟურნალის შეტყობინება KIO-სთვის, თუ მას არ გეკითხებით."
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:271
 #, kde-format
 msgid "Support overwrite for KIO module"
-msgstr ""
+msgstr "თავზე გადაწერის მხარდაჭერა KIO-ის მოდულისთვის"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:275
 #, kde-format
 msgid "Print progress messages in KDE dock area"
-msgstr ""
+msgstr "მიმდინარეობის შეტყობინებების გამოტანა KDE-ის დოკის ალაგზე"
 
 #. i18n: ectx: whatsthis, entry, group (internals)
 #: src/settings/kdesvn_part.kcfg:294
@@ -2052,7 +2076,7 @@ msgstr ""
 #: src/settings/polling_settings.ui:11
 #, kde-format
 msgid "Check modified items every"
-msgstr ""
+msgstr "შეცვლილი ელემენტების შემოწმება ყოველ"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -2149,7 +2173,7 @@ msgstr ""
 #: src/settings/revisiontree_settings.ui:183
 #, kde-format
 msgid "Check log cache fill before reading tree"
-msgstr ""
+msgstr "ჟურნალის კეშის შევსების შემოწმება ხის წაკითხვამდე"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_start_updates_check_on_open)
 #: src/settings/subversion_settings.ui:14
@@ -2161,7 +2185,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:17
 #, kde-format
 msgid "Start check for updates when open a working copy"
-msgstr ""
+msgstr "განახლებების შემოწმების დაწყება სამუშაო ასლის გახნისას"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:33
@@ -2173,7 +2197,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:36
 #, kde-format
 msgid "Start fill log cache on open"
-msgstr ""
+msgstr "ჟურნალის კეშის შევსების დაწყება გახსნისას"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:43
@@ -2196,6 +2220,7 @@ msgstr ""
 #, kde-format
 msgid "Check if items have \"svn:needs-lock\" property set"
 msgstr ""
+"შემოწმება, არის თუ არა ელემენტებზე დაყენებული თვისება \"svn:needs-lock\""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:56
@@ -2220,7 +2245,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:64
 #, kde-format
 msgid "Get file details while remote listing"
-msgstr ""
+msgstr "ფაილის დეტალების მიღება დაშორებული ჩამონათვლის მიღებისას"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_info_recursive)
 #: src/settings/subversion_settings.ui:74
@@ -2249,13 +2274,13 @@ msgstr ""
 #: src/settings/subversion_settings.ui:91
 #, kde-format
 msgid "Always get properties on networked repositories"
-msgstr ""
+msgstr "თვისებების ყოველთვის მიღება ქსელურ რეპოზიტორიებზე"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:101
 #, kde-format
 msgid "Should Subversion store passwords by default"
-msgstr ""
+msgstr "უნდა დაიმახსოვროს თუ არა Subversion-მა პაროლები ნაგულისხმევად"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:104
@@ -2295,7 +2320,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:125
 #, kde-format
 msgid "Store passwords into KDE Wallet"
-msgstr ""
+msgstr "პაროლების შენახვა KDE-ის საფულეში"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_password_cache)
 #: src/settings/subversion_settings.ui:135
@@ -2323,6 +2348,7 @@ msgstr ""
 #, kde-format
 msgid "List items next commit will send or not"
 msgstr ""
+"იქნება თუ არა ჩამოთვლილი ელემენტები, რომლებსაც შემდეგი გადაცემა გააგზავნის"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:184
@@ -2334,7 +2360,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:187
 #, kde-format
 msgid "Hide new items in commit box"
-msgstr ""
+msgstr "ახალი ელემენტების დამალვა გადაცემის ფანჯარაში"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_add_as_modification)
 #: src/settings/subversion_settings.ui:197
@@ -2349,7 +2375,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:200
 #, kde-format
 msgid "Update modifies instead of creating conflicts"
-msgstr ""
+msgstr "განახლება ცვლის კონფლიქტების შექმნის მაგიერ"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_make_parents)
 #: src/settings/subversion_settings.ui:207
@@ -2363,7 +2389,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:210
 #, kde-format
 msgid "Update makes missing parents"
-msgstr ""
+msgstr "არარსებული მშობლების შექმნა განახლებისას"
 
 #: src/svnfrontend/background/fillcachethread.cpp:74
 #, kde-format
@@ -2384,12 +2410,12 @@ msgstr "კეშის შევსება გაუქმდა."
 #: src/svnfrontend/background/fillcachethread.cpp:113
 #, kde-format
 msgid "Cache filled up to revision %1."
-msgstr ""
+msgstr "კეში სავსეა რევიზიამდე %1."
 
 #: src/svnfrontend/background/fillcachethread.cpp:120
 #, kde-format
 msgid "Filling log cache in background finished."
-msgstr ""
+msgstr "ჟურნალის კეშის შევსება ფონურად დასრულდა."
 
 #: src/svnfrontend/background/tcontextlistener.cpp:182
 #, kde-format
@@ -2578,17 +2604,17 @@ msgstr "ელემენტი წარმოდგენილი არ ი
 #: src/svnfrontend/ccontextlistener.cpp:97
 #, kde-format
 msgid "unversioned item obstructed work"
-msgstr ""
+msgstr "უვერსიო ელემენტები მუშაობას ხელს უშლის"
 
 #: src/svnfrontend/ccontextlistener.cpp:100
 #, kde-format
 msgid "Modified state had mods merged in."
-msgstr ""
+msgstr "შეცვლილ მდგომარეობას აქვს ცვლილებები შერწყმული."
 
 #: src/svnfrontend/ccontextlistener.cpp:101
 #, kde-format
 msgid "Modified state got conflicting mods."
-msgstr ""
+msgstr "შეცვლილ მდგომარეობას აქვს კონფლიქტის მქონე ცვლილებები."
 
 #: src/svnfrontend/ccontextlistener.cpp:305
 #, kde-format
@@ -2601,6 +2627,8 @@ msgid ""
 "The certificate is not issued by a trusted authority. Use the fingerprint to "
 "validate the certificate manually."
 msgstr ""
+"სერტიფიკატი არაა გაცემული სანდო ორგანოს მიერ. გამოიყენეთ თითის ანაბეჭდი, რომ "
+"სერტიფიკატის გადამოწმება ხელით მოახდინოთ."
 
 #: src/svnfrontend/ccontextlistener.cpp:339
 #, kde-format
@@ -2620,7 +2648,7 @@ msgstr "სერტიფიკატი ვადაგასულია."
 #: src/svnfrontend/ccontextlistener.cpp:348
 #, kde-format
 msgid "The certificate has an unknown error."
-msgstr ""
+msgstr "სერტიფიკატზე აღმოჩენილია უცნობი შეცდომა."
 
 #: src/svnfrontend/ccontextlistener.cpp:370
 #, kde-format
@@ -2628,6 +2656,8 @@ msgid ""
 "%1\n"
 "Really store password as plain text?"
 msgstr ""
+"%1\n"
+"მართლა დავიმახსოვრო პაროლი უბრალო ტექსტის სახით?"
 
 #: src/svnfrontend/ccontextlistener.cpp:371
 #, kde-format
@@ -2662,12 +2692,12 @@ msgstr "\"GET\"-ს გამოსატანი ფაილი სჭირ�
 #: src/svnfrontend/commandexec.cpp:589
 #, kde-format
 msgid "May only switch one URL at time"
-msgstr ""
+msgstr "ერთდროულად, მხოლოდ, ერთი URL-ის გადართვა შეგიძლიათ"
 
 #: src/svnfrontend/commandexec.cpp:593
 #, kde-format
 msgid "Switch only on working copies"
-msgstr ""
+msgstr "გადართვა, მხოლოდ, მუშა ასლებზე"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, CopyMoveView)
 #: src/svnfrontend/copymoveview.ui:14
@@ -2721,7 +2751,7 @@ msgstr "ახალი რეპოზიტორიის შექმნა"
 #: src/svnfrontend/createrepodlg.ui:22
 #, kde-format
 msgid "Disable fsync at commit (BDB only)"
-msgstr ""
+msgstr "fsync-ის გამორთვა კომიტისას (მხოლოდ BDB)"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: src/svnfrontend/createrepodlg.ui:32
@@ -2739,7 +2769,7 @@ msgstr "აირჩიეთ საცავის ტიპი"
 #: src/svnfrontend/createrepodlg.ui:48
 #, kde-format
 msgid "Select the storage type of repository (FSFS or Berkely DB)"
-msgstr ""
+msgstr "აირჩიეთ რეპოზიტორიის საცავის ტიპი (FSFS ან Berkley DB)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
 #: src/svnfrontend/createrepodlg.ui:52
@@ -2757,7 +2787,7 @@ msgstr "BDB"
 #: src/svnfrontend/createrepodlg.ui:65
 #, kde-format
 msgid "Create trunk, tags and branches folders"
-msgstr ""
+msgstr "შეიქმნება საქაღალდეები trunk, tags და branches"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_CreateMainDirs)
 #: src/svnfrontend/createrepodlg.ui:68
@@ -2778,6 +2808,8 @@ msgstr "ძირითადი საქაღალდეების შე�
 #, kde-format
 msgid "Is created repository compatible to Subversion prior 1.6"
 msgstr ""
+"იქნება თუ არა შექმნილი რეპოზიტორია თავსებადი Subversion-ის 1.6 და უფრო ძველ "
+"ვერსიასთან"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn16compat)
 #: src/svnfrontend/createrepodlg.ui:90
@@ -2797,7 +2829,7 @@ msgstr "თავსებადია Subversion 1.6-მდე"
 #: src/svnfrontend/createrepodlg.ui:113
 #, kde-format
 msgid "Disable automatic log file removal (BDB only)"
-msgstr ""
+msgstr "ჟურნალის ფაილის ავტომატური წაშლის გამორთვა (მხოლოდ BDB-სთან ერთად)"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: src/svnfrontend/createrepodlg.ui:123
@@ -2810,6 +2842,8 @@ msgstr "რეპოზიტორიის ტიპი:"
 #, kde-format
 msgid "Is created repository compatible to Subversion prior 1.5"
 msgstr ""
+"იქნება თუ არა შექმნილი რეპოზიტორია თავსებადი Subversion-ის 1.5 და უფრო ძველ "
+"ვერსიასთან"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn15compat)
 #: src/svnfrontend/createrepodlg.ui:142
@@ -2830,6 +2864,8 @@ msgstr "თავსებადია Subversion 1.5-მდე"
 #, kde-format
 msgid "Is created repository compatible to Subversion prior 1.8"
 msgstr ""
+"იქნება თუ არა შექმნილი რეპოზიტორია თავსებადი Subversion-ის 1.8 და უფრო ძველ "
+"ვერსიასთან"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn18compat)
 #: src/svnfrontend/createrepodlg.ui:165
@@ -2848,7 +2884,7 @@ msgstr "თავსებადია Subversion 1.8-მდე"
 #: src/svnfrontend/database/dboverview.cpp:113
 #, kde-format
 msgid "Log cache holds %1 log entries and consumes %2 on disk."
-msgstr ""
+msgstr "ჟურნალის კეში შეიცავს %1 ჩანაწერს და დისკზე იკავებს %2."
 
 #: src/svnfrontend/database/dboverview.cpp:129
 #, kde-format
@@ -2856,6 +2892,8 @@ msgid ""
 "Really clean cache for repository\n"
 "%1?"
 msgstr ""
+"მართლა გავასუფთავო კეში რეპოზიტორიისთვის\n"
+"%1?"
 
 #: src/svnfrontend/database/dboverview.cpp:130
 #, kde-format
@@ -2894,7 +2932,7 @@ msgstr "რეპოზიტორიის წაშლა"
 #: src/svnfrontend/database/dboverview.ui:6
 #, kde-format
 msgid "Overview about cache database content"
-msgstr ""
+msgstr "გადახედვა კეშის მონაცემთა ბაზის შემცველობის შესახებ"
 
 #. i18n: ectx: property (text), widget (QLabel, m_RepositoryLabel)
 #: src/svnfrontend/database/dboverview.ui:19
@@ -2908,7 +2946,7 @@ msgstr "ცნობილი რეპოზიტორიები"
 #: src/svnfrontend/database/dboverview.ui:43
 #, kde-format
 msgid "Delete cache entries for current selected repository"
-msgstr ""
+msgstr "კეშის ჩანაწერების წაშლა მიმდინარე მონიშნული რეპოზიტორიისთვის"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DeleteCacheButton)
 #: src/svnfrontend/database/dboverview.ui:46
@@ -2922,7 +2960,7 @@ msgstr "კეშის წაშლა"
 #: src/svnfrontend/database/dboverview.ui:56
 #, kde-format
 msgid "Delete all entries and settings for selected repository"
-msgstr ""
+msgstr "ყველა ჩანაწერის და პარამეტრის წაშლა მონიშნული რეპოზიტორიისთვის"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_SettingsButton)
 #: src/svnfrontend/database/dboverview.ui:66
@@ -2952,25 +2990,25 @@ msgstr "ჟურნალის კეშის პარამეტრებ�
 #: src/svnfrontend/database/dbsettings.ui:27
 #, kde-format
 msgid "Do not update log cache on open"
-msgstr ""
+msgstr "არ განაახლო ჟურნალის კეში გახსნისას"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: src/svnfrontend/database/dbsettings.ui:40
 #, kde-format
 msgid "Prefixes to filter out in revision tree"
-msgstr ""
+msgstr "რევიზიის ხის გასაფილტრი პრეფიქსები"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: src/svnfrontend/database/dbsettings.ui:58
 #, kde-format
 msgid "Log and statistics setting"
-msgstr ""
+msgstr "ჟურნალის და სტატისტიკის პარამეტრები"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/svnfrontend/database/dbsettings.ui:70
 #, kde-format
 msgid "Hide logs containing following words"
-msgstr ""
+msgstr "დაიმალება შემდეგ სიტყვების შემცველი ჟურნალები"
 
 #. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_log_pattern)
 #: src/svnfrontend/database/dbsettings.ui:77
@@ -2984,7 +3022,7 @@ msgstr ""
 #: src/svnfrontend/database/dbsettings.ui:98
 #, kde-format
 msgid "Do not show commits from following users"
-msgstr ""
+msgstr "არ მაჩვენო კომიტები შემდეგი მომხმარებლებისგან"
 
 #. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_userslog)
 #: src/svnfrontend/database/dbsettings.ui:105
@@ -2997,7 +3035,7 @@ msgstr ""
 #: src/svnfrontend/database/dbsettings.ui:115
 #, kde-format
 msgid "Do not display commits without author"
-msgstr ""
+msgstr "არ მაჩვენო კომიტები ავტორის გარეშე"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DumpRepoDlg)
 #: src/svnfrontend/dumprepo_dlg.ui:14
@@ -3138,7 +3176,7 @@ msgstr ""
 #: src/svnfrontend/editpropsdlg.cpp:98
 #, kde-format
 msgid "A newline separated list of file patterns to ignore."
-msgstr ""
+msgstr "გამოტოვების შაბლონების ახალი ხაზით გამოტოვებული სახელების სია."
 
 #: src/svnfrontend/editpropsdlg.cpp:104
 #, kde-format
@@ -3227,6 +3265,8 @@ msgstr "თვისების მნიშვნელობა:"
 #, kde-format
 msgid "Click for short info about pre-defined property name"
 msgstr ""
+"დააწკაპუნეთ მოკლე ინფორმაციის მისაღებად წინასწარ აღწერილი თვისების სახელის "
+"შესახებ"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, CheckoutInfo)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:14
@@ -3262,7 +3302,7 @@ msgstr "გარეების გამოტოვება"
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:77
 #, kde-format
 msgid "May existing unversioned items overwritten"
-msgstr ""
+msgstr "შეიძლება თუ არა არსებული უვერსიო ელემენტების თავსე გადაწერა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_overwriteButton)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:80
@@ -3280,7 +3320,7 @@ msgstr "საკვანძო სიტყვების გამოტო�
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:110
 #, kde-format
 msgid "Append source URL name to subfolder"
-msgstr ""
+msgstr "წყარო URL-ის სახელი მიწერა ქვესაქაღალდისთვის"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_ShowExplorer)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:120
@@ -3305,6 +3345,8 @@ msgid ""
 "This property may not set by users.\n"
 "Rejecting it."
 msgstr ""
+"ამ თვისებას მომხმარებლები ვერ დააყენებენ.\n"
+"ის უარყოფილია."
 
 #: src/svnfrontend/fronthelpers/propertylist.cpp:104
 #: src/svnfrontend/propertiesdlg.cpp:111 src/svnfrontend/propertiesdlg.cpp:162
@@ -3319,6 +3361,8 @@ msgid ""
 "A property with that name exists.\n"
 "Rejecting it."
 msgstr ""
+"თვისება ამ სახელით უკვე არსებობს.\n"
+"ის უარყოფილია."
 
 #: src/svnfrontend/fronthelpers/propertylist.cpp:109
 #: src/svnfrontend/propertiesdlg.cpp:115 src/svnfrontend/propertiesdlg.cpp:166
@@ -3418,6 +3462,10 @@ msgid ""
 "Process stopped with message:\n"
 "%2"
 msgstr ""
+"ვერ გავუშვი პროცესი \"%1\".\n"
+"\n"
+"პროცესი გაჩერდა შეტყობინებით:\n"
+"%2"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:332
 #, kde-format
@@ -3472,7 +3520,7 @@ msgstr "ვერ გავხსენი დროებითი ფაილ
 #: src/svnfrontend/graphtree/revgraphview.cpp:554
 #, kde-format
 msgid "<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>"
-msgstr ""
+msgstr "<br>რევიზია: %1<br>ავტორი: %2<br>თარიღი: %3<br>ჟურნალი: %4</html>"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:557
 #, kde-format
@@ -3557,12 +3605,14 @@ msgstr "ჟურნალი"
 #: src/svnfrontend/svnactions.cpp:319
 #, kde-format
 msgid "Getting logs - hit Cancel for abort"
-msgstr ""
+msgstr "ჟურნალის მიღება - დააჭირეთ გაუქმებას შესაწყვეტად"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:106
 #, kde-format
 msgid "No log cache possible due broken database and networking not allowed."
 msgstr ""
+"ჟურნალის კეში შეუძლებელია გაფუჭებული მონაცემთა ბაზის გამო და ქსელი დაშვებული "
+"არაა."
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:106
 #: src/svnfrontend/graphtree/revisiontree.cpp:111
@@ -3571,11 +3621,13 @@ msgid ""
 "Could not retrieve logs, reason:\n"
 "%1"
 msgstr ""
+"ჟურნალის მიღება შეუძლებელია. მიზეზი:\n"
+"%1"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:140
 #, kde-format
 msgid "Scanning the logs for %1"
-msgstr ""
+msgstr "მიმდინარეობს ჟურნალის სკანირება %1-სთვის"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:140
 #, kde-format
@@ -3593,7 +3645,7 @@ msgstr "ჟურნალების სკანირება"
 #: src/svnfrontend/graphtree/revisiontree.cpp:314
 #, kde-format
 msgid "%1<br>Check change entry %2 of %3"
-msgstr ""
+msgstr "%1<br>მოწმდება ცვლილების ჩაწერი %2 %3-დან"
 
 #. i18n: ectx: property (text), widget (QLabel, m_Srclabel)
 #: src/svnfrontend/hotcopydlg.ui:11
@@ -3622,16 +3674,18 @@ msgstr "გამოტოვების გარეშე"
 #, kde-format
 msgid "If set, add files or directories that match ignore patterns."
 msgstr ""
+"თუ დაყენებულია, დამატებული იქნება ფაილები, ან საქაღალდეები, რომლებიც "
+"გამოტოვების შაბლონს აკმაყოფილებს."
 
 #: src/svnfrontend/importdir_logmsg.cpp:43
 #, kde-format
 msgid "Ignore unknown node types"
-msgstr ""
+msgstr "უცნობი კვანძის ტიპების იგნორი"
 
 #: src/svnfrontend/importdir_logmsg.cpp:44
 #, kde-format
 msgid "Should files with unknown node types be ignored"
-msgstr ""
+msgstr "დაიგნორდება თუ არა უცნობი კვანძის ტიპის მქონე ფაილები"
 
 #: src/svnfrontend/importdir_logmsg.cpp:45
 #, kde-format
@@ -3639,6 +3693,8 @@ msgid ""
 "Ignore files of which the node type is unknown, such as device files and "
 "pipes."
 msgstr ""
+"იმ ფაილების გამოტოვება, რომლისთვისაც კვანძის ტიპი უცნობია. მაგალითად "
+"კომინიკაციის არხები და მოწყობილობის ფაილები."
 
 #: src/svnfrontend/importdir_logmsg.cpp:79
 #, kde-format
@@ -3685,20 +3741,20 @@ msgstr "ნაგულისხმები"
 #: src/svnfrontend/loaddmpdlg.ui:66
 #, kde-format
 msgid "Use pre-commit hook"
-msgstr ""
+msgstr "pre-commit hook-ის გამოყენება"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_UsePost)
 #: src/svnfrontend/loaddmpdlg.ui:76
 #, kde-format
 msgid "Use post-commit hook"
-msgstr ""
+msgstr "post-commit hook-ის გამოყენება"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, textLabel5)
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_Rootfolder)
 #: src/svnfrontend/loaddmpdlg.ui:86 src/svnfrontend/loaddmpdlg.ui:144
 #, kde-format
 msgid "Path to load the dump into (see context help)"
-msgstr ""
+msgstr "ბილიკი დამპის ჩასატვირთად (იხილეთ კონტექსტური დახმარება)"
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, textLabel5)
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, m_Rootfolder)
@@ -3713,7 +3769,7 @@ msgstr ""
 #: src/svnfrontend/loaddmpdlg.ui:92
 #, kde-format
 msgid "Load into folder:"
-msgstr "ჩატვირთვა საქაღალდეში"
+msgstr "ჩატვირთვა საქაღალდეში:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: src/svnfrontend/loaddmpdlg.ui:105
@@ -3726,6 +3782,7 @@ msgstr "დამპის ფაილი:"
 #, kde-format
 msgid "Validate the properties on load (only Subversion 1.7 or newer)"
 msgstr ""
+"თვისებების ვალიდაცია ჩატვირთვისას (მხოლოდ Subversion 1.7, ან უფრო ახალი)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_validateProps)
 #: src/svnfrontend/loaddmpdlg.ui:121
@@ -3736,7 +3793,7 @@ msgstr "თვისებების გადამოწმება"
 #: src/svnfrontend/maintreewidget.cpp:269
 #, kde-format
 msgid "Networked URL to open but networking is disabled."
-msgstr ""
+msgstr "მოთხოვნილია ქსელური URL-ის გახსნა, მაგრამ ქსელი გამორთულია."
 
 #: src/svnfrontend/maintreewidget.cpp:495
 #, kde-format
@@ -3753,19 +3810,19 @@ msgstr "ისტორია"
 #: src/svnfrontend/maintreewidget.cpp:501
 #, kde-format
 msgid "Displays the history log of selected item"
-msgstr ""
+msgstr "აჩვენებს მონიშნული ელემენტის ისტორიის ჟურნალს"
 
 #: src/svnfrontend/maintreewidget.cpp:503
 #: src/svnfrontend/maintreewidget.cpp:512
 #, kde-format
 msgid "History of item ignoring copies"
-msgstr ""
+msgstr "ელემენტის ისტორია ასლების გამოტოვებით"
 
 #: src/svnfrontend/maintreewidget.cpp:509
 #: src/svnfrontend/maintreewidget.cpp:518
 #, kde-format
 msgid "Displays the history log of selected item without following copies"
-msgstr ""
+msgstr "აჩვენებს მონიშნული ელემენტის ისტორიის ჟურნალს ასლების არჩათვლით"
 
 #: src/svnfrontend/maintreewidget.cpp:521
 #, kde-format
@@ -3775,7 +3832,7 @@ msgstr "სრული რევიზიის ხე"
 #: src/svnfrontend/maintreewidget.cpp:526
 #, kde-format
 msgid "Shows history of item as linked tree"
-msgstr ""
+msgstr "ელემენტის ისტორიის ჩვენება მიბმული ხის სახით"
 
 #: src/svnfrontend/maintreewidget.cpp:528
 #, kde-format
@@ -3785,7 +3842,7 @@ msgstr "ნაწილობრივი რევიზიის ხე"
 #: src/svnfrontend/maintreewidget.cpp:533
 #, kde-format
 msgid "Shows history of item as linked tree for a revision range"
-msgstr ""
+msgstr "ელემენტის ისტორიის ჩვენება მიბმული ხის სახით რევიზიის შუალედისთვის"
 
 #: src/svnfrontend/maintreewidget.cpp:536
 #: src/svnfrontend/maintreewidget.cpp:537
@@ -3806,7 +3863,7 @@ msgstr "ბოლო ცვლილებების ჩვენება"
 #: src/svnfrontend/maintreewidget.cpp:550
 #, kde-format
 msgid "Display last changes as difference to previous commit."
-msgstr ""
+msgstr "ბოლო ცვლილებების ჩვენება წინა გადაცემასთან შედარებთ ცვლილებების სახით."
 
 #: src/svnfrontend/maintreewidget.cpp:552
 #, kde-format
@@ -3861,6 +3918,8 @@ msgid ""
 "Output the content of specified files or URLs with revision and author "
 "information in-line."
 msgstr ""
+"მითითებული ფაილების ან ბმულების შემცველობის გამოტანა რევიზიის და ავტორის "
+"სახელის ხაზშივე ჩვენებით."
 
 #: src/svnfrontend/maintreewidget.cpp:588
 #, kde-format
@@ -3875,7 +3934,7 @@ msgstr "ბოლო ვერსიის გამოტანა"
 #: src/svnfrontend/maintreewidget.cpp:598
 #, kde-format
 msgid "Output the content of specified files or URLs."
-msgstr ""
+msgstr "მითითებული ფაილების, ან ბმულების შემცველობის გამოტანა."
 
 #: src/svnfrontend/maintreewidget.cpp:601
 #, kde-format
@@ -3886,6 +3945,7 @@ msgstr "რევიზიის გამოტანა..."
 #, kde-format
 msgid "Output the content of specified files or URLs at specific revision."
 msgstr ""
+"მითითებული ფაილების ან ბმულების მითითებული რევიზიის შემცველობის გამოტანა."
 
 #: src/svnfrontend/maintreewidget.cpp:610
 #, kde-format
@@ -3895,7 +3955,7 @@ msgstr "მიმდინარე ელემენტების დაბ�
 #: src/svnfrontend/maintreewidget.cpp:615
 #, kde-format
 msgid "Try lock current item against changes from other users"
-msgstr ""
+msgstr "მიმდინარე ელემენტის დაბლოკვის ცდა სხვა მომხმარებლების ცვლილებებისგან"
 
 #: src/svnfrontend/maintreewidget.cpp:618
 #, kde-format
@@ -3905,7 +3965,7 @@ msgstr "მიმდინარე ელემენტების გან�
 #: src/svnfrontend/maintreewidget.cpp:623
 #, kde-format
 msgid "Free existing lock on current item"
-msgstr ""
+msgstr "მიმდინარე ელემენტზე არსებული ბლოკის მოხსნა"
 
 #: src/svnfrontend/maintreewidget.cpp:628 src/svnfrontend/svnactions.cpp:670
 #, kde-format
@@ -3926,16 +3986,17 @@ msgstr "რეპოზიტორიის გადართვა"
 #, kde-format
 msgid "Switch repository path of current working copy path (\"svn switch\")"
 msgstr ""
+"ამჟამად მუშა ასლის ბილიკის რეპოზიტორიის ბილიკის გადართვა (\"svn switch\")"
 
 #: src/svnfrontend/maintreewidget.cpp:644
 #, kde-format
 msgid "Relocate current working copy URL"
-msgstr ""
+msgstr "ამჟამად მუშა ასლის ბმულის გადაადგილება"
 
 #: src/svnfrontend/maintreewidget.cpp:649
 #, kde-format
 msgid "Relocate URL of current working copy path to other URL"
-msgstr ""
+msgstr "ამჟამად მუშა ასლის ბილიკის ბმულის გადაადგილება სხვა URL-ზე"
 
 #: src/svnfrontend/maintreewidget.cpp:658
 #, kde-format
@@ -3945,7 +4006,7 @@ msgstr "უვერსიო"
 #: src/svnfrontend/maintreewidget.cpp:659
 #, kde-format
 msgid "Browse folder for unversioned items and add them if wanted."
-msgstr ""
+msgstr "საქაღალდეში უვერსიო ელემენტების ძებნა და მათი დამატება, თუ სასურველია."
 
 #: src/svnfrontend/maintreewidget.cpp:663
 #, kde-format
@@ -3955,7 +4016,7 @@ msgstr "სამუშაო ასლის რეპოზიტორიი�
 #: src/svnfrontend/maintreewidget.cpp:668
 #, kde-format
 msgid "Opens the repository the current working copy was checked out from"
-msgstr ""
+msgstr "გახსნის რეპოზიტორიას, საიდანაც მიმდინარე მუშა ასლის გამოთხოვა მოხდა"
 
 #: src/svnfrontend/maintreewidget.cpp:671
 #, kde-format
@@ -3968,6 +4029,8 @@ msgid ""
 "Recursively clean up the working copy, removing locks, resuming unfinished "
 "operations, etc."
 msgstr ""
+"მუშა ასლის რეკურსიული გასუფთავება, ბლოკების წაშლა, დაუსრულებელი ოპერაციების "
+"გაგრძელება და ა.შ."
 
 #: src/svnfrontend/maintreewidget.cpp:678
 #, kde-format
@@ -4034,7 +4097,7 @@ msgstr "გადაწყვეტილად მონიშვნა"
 #: src/svnfrontend/maintreewidget.cpp:732
 #, kde-format
 msgid "Marking files or dirs resolved"
-msgstr ""
+msgstr "ფაილების ან საქაღალდეების ამოხსნილად მონიშვნა"
 
 #: src/svnfrontend/maintreewidget.cpp:735
 #, kde-format
@@ -4127,7 +4190,7 @@ msgstr "შერწყმა"
 #: src/svnfrontend/maintreewidget.cpp:821
 #, kde-format
 msgid "Merge two revisions of this entry into itself"
-msgstr ""
+msgstr "ამ ჩანაწერის ორი რევიზიის შერწყმა ერთმანეთში"
 
 #: src/svnfrontend/maintreewidget.cpp:829
 #, kde-format
@@ -4146,7 +4209,7 @@ msgstr "გამხსნელი პროგრამა…"
 #: src/svnfrontend/maintreewidget.cpp:834
 #, kde-format
 msgid "Checkout current repository path"
-msgstr ""
+msgstr "მიმდინარე რეპოზიტორიის ბილიკის გამოთხოვა"
 
 #: src/svnfrontend/maintreewidget.cpp:839
 #: src/svnfrontend/maintreewidget.cpp:855
@@ -4227,7 +4290,7 @@ msgstr "ჟურნალის კეშის განახლება"
 #: src/svnfrontend/maintreewidget.cpp:886
 #, kde-format
 msgid "Update the log cache for current repository"
-msgstr ""
+msgstr "ჟურნალის კეშის განახლება მიმდინარე რეპოზიტორიისთვის"
 
 #: src/svnfrontend/maintreewidget.cpp:900
 #, kde-format
@@ -4298,12 +4361,12 @@ msgstr "წასაშლელად მონიშნული არაფ�
 #: src/svnfrontend/maintreewidget.cpp:2071
 #, kde-format
 msgid "Automatic generated base layout by kdesvn"
-msgstr ""
+msgstr "ავტომატურად შექმნილი საბაზისო განლაგება kdesvn-სგან"
 
 #: src/svnfrontend/maintreewidget.cpp:2084
 #, kde-format
 msgid "May not make subdirectories of a file"
-msgstr ""
+msgstr "ფაილის ქვესაქაღალდეების შექმნა შეუძლებელია"
 
 #: src/svnfrontend/maintreewidget.cpp:2196 src/svnfrontend/svnactions.cpp:2304
 #, kde-format
@@ -4357,12 +4420,12 @@ msgstr "ჟურნალის შემოტანა"
 #: src/svnfrontend/maintreewidget.cpp:2397
 #, kde-format
 msgid "Could not retrieve repository of working copy."
-msgstr ""
+msgstr "მუშა ასლის რეპოზიტორიის მიღება შეუძლებელია."
 
 #: src/svnfrontend/maintreewidget.cpp:2406
 #, kde-format
 msgid "Only in working copy possible."
-msgstr ""
+msgstr "შესაძლებელია, მხოლოდ, მუშა ასლში."
 
 #: src/svnfrontend/maintreewidget.cpp:2406
 #: src/svnfrontend/maintreewidget.cpp:2410
@@ -4374,17 +4437,18 @@ msgstr "შეცდომა"
 #: src/svnfrontend/maintreewidget.cpp:2410
 #, kde-format
 msgid "Only on single folder possible"
-msgstr ""
+msgstr "შესაძლებელია, მხოლოდ, ერთ საქაღალდეზე"
 
 #: src/svnfrontend/maintreewidget.cpp:2415
 #, kde-format
 msgid "Sorry - internal error"
-msgstr ""
+msgstr "უკაცრავად - შიდა შეცდომა"
 
 #: src/svnfrontend/maintreewidget.cpp:2479
 #, kde-format
 msgid "Hold Ctrl key while click on selected item for unselect"
 msgstr ""
+"მონიშვნის მოსახსნელად მონიშნულ ელემენტზე დაწკაპუნებისას Ctri ღილაკი გეჭიროთ"
 
 #. i18n: ectx: property (toolTip), widget (QTreeView, m_LogTreeView)
 #. i18n: ectx: property (toolTip), widget (QTreeWidget, m_ChangedList)
@@ -4392,7 +4456,7 @@ msgstr ""
 #: src/svnfrontend/svnlogdlg.ui:148
 #, kde-format
 msgid "See context menu for more actions"
-msgstr ""
+msgstr "მეტი ქმედებისთვის იხილეთ კონტექსტური მენიუ"
 
 #: src/svnfrontend/maintreewidget.cpp:2485
 #, kde-format
@@ -4459,7 +4523,7 @@ msgstr "რეკურსიული"
 #: src/svnfrontend/merge_dlg.ui:103
 #, kde-format
 msgid "Handle unrelated as related items"
-msgstr ""
+msgstr "დამუშავება არაა დაკავშირებული როგორც დაკავშირებული ობიექტები"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_RelatedCheck)
 #: src/svnfrontend/merge_dlg.ui:106
@@ -4471,7 +4535,7 @@ msgstr "წინაპრების გამოტოვება"
 #: src/svnfrontend/merge_dlg.ui:113
 #, kde-format
 msgid "Force delete on modified/unversioned items"
-msgstr ""
+msgstr "შეცვლილი/უვერსიო ელემენტების ნაძალადევი წაშლა"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_Reintegrate)
 #: src/svnfrontend/merge_dlg.ui:126
@@ -4483,7 +4547,7 @@ msgstr ""
 #: src/svnfrontend/merge_dlg.ui:132
 #, kde-format
 msgid "Reintegrate merge"
-msgstr ""
+msgstr "შერწყმების თავიდან დაკავშირება"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_DryCheck)
 #: src/svnfrontend/merge_dlg.ui:139
@@ -4501,7 +4565,7 @@ msgstr "მშრალი გაშვება"
 #: src/svnfrontend/merge_dlg.ui:152
 #, kde-format
 msgid "Only write mergeinfo"
-msgstr ""
+msgstr "მხოლოდ შერწყმის ინფორმაციის ჩასწერა"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_RecordOnly)
 #: src/svnfrontend/merge_dlg.ui:155
@@ -4521,7 +4585,7 @@ msgstr "მხოლოდ ჩაწერა"
 #: src/svnfrontend/merge_dlg.ui:165
 #, kde-format
 msgid "Use external merge not Subversion's merge"
-msgstr ""
+msgstr "გარე შერწყმის გამოყენება Subversion-ის შერწყმის მაგიერ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useExternMerge)
 #: src/svnfrontend/merge_dlg.ui:168
@@ -4544,12 +4608,14 @@ msgid ""
 "Merge into mixed revision\n"
 "working copy"
 msgstr ""
+"შერწყმა შერეულ რევიზიაში\n"
+"მუშა ასლი"
 
 #: src/svnfrontend/mergedlg_impl.cpp:194
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter Merge Range"
-msgstr ""
+msgstr "შეიყვანეთ შერწყმის შუალედი"
 
 #: src/svnfrontend/models/logitemmodel.cpp:179
 #, kde-format
@@ -4559,7 +4625,7 @@ msgstr "შეტყობინება"
 #: src/svnfrontend/models/logmodelhelper.cpp:43
 #, kde-format
 msgid "%1 at revision %2"
-msgstr ""
+msgstr "%1 რევიზიაზე %2"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:317
 #: src/svnfrontend/svnactions.cpp:746
@@ -4575,7 +4641,7 @@ msgstr "სტატუსი"
 #: src/svnfrontend/models/svnitemmodel.cpp:321
 #, kde-format
 msgid "Last changed Revision"
-msgstr ""
+msgstr "ბოლო შეცვლილი რევიზია"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:323
 #: src/svnfrontend/svnactions.cpp:805
@@ -4591,7 +4657,7 @@ msgstr "უკანასკნელი ცვლილების თარ�
 #: src/svnfrontend/models/svnitemmodel.cpp:327
 #, kde-format
 msgid "Locked by"
-msgstr ""
+msgstr "ბლოკის ავტორი"
 
 #: src/svnfrontend/opencontextmenu.cpp:59
 #, kde-format
@@ -4601,23 +4667,23 @@ msgstr "სხვა..."
 #: src/svnfrontend/propertiesdlg.cpp:80
 #, kde-format
 msgid "Undelete property"
-msgstr ""
+msgstr "თვისების წაშლის გაუქმება"
 
 #: src/svnfrontend/propertiesdlg.cpp:82
 #, kde-format
 msgid "Delete property"
-msgstr ""
+msgstr "თვისების წაშლა"
 
 #: src/svnfrontend/propertiesdlg.cpp:89
 #, kde-format
 msgid "Missing SVN link"
-msgstr ""
+msgstr "აკლია SVN ბმული"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, PropertiesDlg)
 #: src/svnfrontend/propertiesdlg.ui:14
 #, kde-format
 msgid "View and modify properties"
-msgstr ""
+msgstr "თვისებების დათვალიერება და შეცვლა"
 
 #. i18n: ectx: property (text), widget (QPushButton, pbAdd)
 #: src/svnfrontend/propertiesdlg.ui:39
@@ -4629,18 +4695,18 @@ msgstr "თვისების დამატება"
 #: src/svnfrontend/propertiesdlg.ui:46
 #, kde-format
 msgid "Modify Property"
-msgstr ""
+msgstr "თვისების შეცვლა"
 
 #. i18n: ectx: property (text), widget (QPushButton, pbDelete)
 #: src/svnfrontend/propertiesdlg.ui:53
 #, kde-format
 msgid "Delete Property"
-msgstr ""
+msgstr "თვისების წაშლა"
 
 #: src/svnfrontend/stopdlg.cpp:193
 #, kde-format
 msgid "%p% of %1"
-msgstr ""
+msgstr "%p% %1-დან"
 
 #: src/svnfrontend/stopdlg.cpp:201
 #, kde-format
@@ -4655,12 +4721,12 @@ msgstr "დასრულებულია"
 #: src/svnfrontend/svnactions.cpp:357
 #, kde-format
 msgid "Got no logs"
-msgstr ""
+msgstr "ჟურნალის გარეშე"
 
 #: src/svnfrontend/svnactions.cpp:481
 #, kde-format
 msgid "Got no info."
-msgstr ""
+msgstr "ინფორმაციის გარეშე."
 
 #: src/svnfrontend/svnactions.cpp:518
 #, kde-format
@@ -4677,12 +4743,12 @@ msgstr "ანოტაცია"
 #: src/svnfrontend/svnactions.cpp:559
 #, kde-format
 msgid "Annotate lines - hit Cancel for abort"
-msgstr ""
+msgstr "ხაზების ანოტაცია - დააჭირეთ გაუქმებას შესაწყვეტად"
 
 #: src/svnfrontend/svnactions.cpp:567
 #, kde-format
 msgid "Got no annotate"
-msgstr ""
+msgstr "ანოტაციის გარეშე"
 
 #: src/svnfrontend/svnactions.cpp:584
 #, kde-format
@@ -4693,7 +4759,7 @@ msgstr "შემცველობის მიღება"
 #: src/svnfrontend/svnactions.cpp:584
 #, kde-format
 msgid "Getting content - hit Cancel for abort"
-msgstr ""
+msgstr "შემცველობის მიღება - დააჭირეთ გაუქმებას შესაწყვეტად"
 
 #: src/svnfrontend/svnactions.cpp:591
 #, kde-format
@@ -4703,13 +4769,13 @@ msgstr "შემცველობის მიღების შეცდო�
 #: src/svnfrontend/svnactions.cpp:604
 #, kde-format
 msgid "Error while open temporary file"
-msgstr ""
+msgstr "შეცდომა დროებითი ფაილის გახსნისას"
 
 #: src/svnfrontend/svnactions.cpp:635
 #, kde-format
 msgctxt "@title:window"
 msgid "Content of %1"
-msgstr ""
+msgstr "%1-ის შემცველობა"
 
 #: src/svnfrontend/svnactions.cpp:645
 #, kde-format
@@ -4730,7 +4796,7 @@ msgstr "დეტალები"
 #: src/svnfrontend/svnactions.cpp:710
 #, kde-format
 msgid "Retrieving information - hit Cancel for abort"
-msgstr ""
+msgstr "ინფორმაციის მიღება - დააჭირეთ გაუქმებას შესაწყვეტად"
 
 #: src/svnfrontend/svnactions.cpp:749
 #, kde-format
@@ -4740,7 +4806,7 @@ msgstr "ვებ-მისამართი"
 #: src/svnfrontend/svnactions.cpp:751
 #, kde-format
 msgid "Canonical repository URL"
-msgstr ""
+msgstr "კანონიკური რეპოზიტორიის URL"
 
 #: src/svnfrontend/svnactions.cpp:754
 #, kde-format
@@ -4805,42 +4871,42 @@ msgstr "UUID"
 #: src/svnfrontend/svnactions.cpp:807
 #, kde-format
 msgid "Last committed"
-msgstr ""
+msgstr "ბოლოს გადაცემული"
 
 #: src/svnfrontend/svnactions.cpp:809
 #, kde-format
 msgid "Last revision"
-msgstr ""
+msgstr "ბოლო რევიზია"
 
 #: src/svnfrontend/svnactions.cpp:811
 #, kde-format
 msgid "Content last changed"
-msgstr ""
+msgstr "ბოლოს შეცვლილი შემცველობა"
 
 #: src/svnfrontend/svnactions.cpp:815
 #, kde-format
 msgid "Property last changed"
-msgstr ""
+msgstr "ბოლოს შეცვლილი თვისება"
 
 #: src/svnfrontend/svnactions.cpp:818
 #, kde-format
 msgid "New version of conflicted file"
-msgstr ""
+msgstr "კონფლიქტის მქონე ფაილის ახალი ვერსია"
 
 #: src/svnfrontend/svnactions.cpp:821
 #, kde-format
 msgid "Property reject file"
-msgstr ""
+msgstr "თვისების უარყოფის ფაილი"
 
 #: src/svnfrontend/svnactions.cpp:825
 #, kde-format
 msgid "Copy from URL"
-msgstr ""
+msgstr "კოპირება ბმულიდან"
 
 #: src/svnfrontend/svnactions.cpp:828 src/svnfrontend/svnactions.cpp:835
 #, kde-format
 msgid "Lock token"
-msgstr ""
+msgstr "ტოკენის ბლოკი"
 
 #: src/svnfrontend/svnactions.cpp:829 src/svnfrontend/svnactions.cpp:836
 #, kde-format
@@ -4850,61 +4916,62 @@ msgstr "მფლობელი"
 #: src/svnfrontend/svnactions.cpp:830 src/svnfrontend/svnactions.cpp:837
 #, kde-format
 msgid "Locked on"
-msgstr ""
+msgstr "დაიბლოკა"
 
 #: src/svnfrontend/svnactions.cpp:831 src/svnfrontend/svnactions.cpp:838
 #, kde-format
 msgid "Lock comment"
-msgstr ""
+msgstr "დაბლოკვის კომენტარი"
 
 #: src/svnfrontend/svnactions.cpp:885
 #, kde-format
 msgctxt "@title:window"
 msgid "Infolist"
-msgstr ""
+msgstr "ინფორმაციის სია"
 
 #: src/svnfrontend/svnactions.cpp:924
 #, kde-format
 msgctxt "@title:window"
 msgid "Applying Properties"
-msgstr ""
+msgstr "თვისებების გადატარება"
 
 #: src/svnfrontend/svnactions.cpp:925
 #, kde-format
 msgid "<center>Applying<br/>hit cancel for abort</center>"
 msgstr ""
+"<center>მიმდინარეობს გადატარება<br/>დააჭირეთ გაუქმებას შესაწყვეტად</center>"
 
 #: src/svnfrontend/svnactions.cpp:961
 #, kde-format
 msgid "Could not change to folder %1\n"
-msgstr ""
+msgstr "ვერ გადავედი საქაღალდეში %1\n"
 
 #: src/svnfrontend/svnactions.cpp:979
 #, kde-format
 msgid "Not commit because networking is disabled"
-msgstr ""
+msgstr "გადაცემული არაა, რადგან ქსელი გათიშულია"
 
 #: src/svnfrontend/svnactions.cpp:1003 src/svnfrontend/svnactions.cpp:2463
 #, kde-format
 msgctxt "@title:window"
 msgid "Status / List"
-msgstr ""
+msgstr "სტატუსი / სია"
 
 #: src/svnfrontend/svnactions.cpp:1004 src/svnfrontend/svnactions.cpp:2464
 #, kde-format
 msgid "Creating list / check status"
-msgstr ""
+msgstr "სიის შექმნა / სტატუსის შემოწმება"
 
 #: src/svnfrontend/svnactions.cpp:1043 src/svnfrontend/svnactions.cpp:1050
 #: src/svnfrontend/svnactions.cpp:1072
 #, kde-format
 msgid "Add and Commit"
-msgstr ""
+msgstr "დამატება და გადაცემა"
 
 #: src/svnfrontend/svnactions.cpp:1048
 #, kde-format
 msgid "Delete and Commit"
-msgstr ""
+msgstr "წაშლა და გადაცემა"
 
 #: src/svnfrontend/svnactions.cpp:1111
 #, kde-format
@@ -4915,7 +4982,7 @@ msgstr "გადაცემა"
 #: src/svnfrontend/svnactions.cpp:1111
 #, kde-format
 msgid "Commit - hit Cancel for abort"
-msgstr ""
+msgstr "გადაცემა - დააჭირეთ გაუქმებას შესაწყვეტად"
 
 #: src/svnfrontend/svnactions.cpp:1138
 #, kde-format
@@ -4926,80 +4993,80 @@ msgstr "გადმოწერა"
 #: src/svnfrontend/svnactions.cpp:1139
 #, kde-format
 msgid "Download - hit Cancel for abort"
-msgstr ""
+msgstr "გადმოწერა - დააჭირეთ გაუქმებას შესაწყვეტად"
 
 #: src/svnfrontend/svnactions.cpp:1165
 #, kde-format
 msgid "Can not do this diff because networking is disabled."
-msgstr ""
+msgstr "ამას სხვაობას ვერ ვუზამ, რადგან ქსელი გათიშულია."
 
 #: src/svnfrontend/svnactions.cpp:1219
 #, kde-format
 msgid "Both entries seems to be the same, can not diff."
-msgstr ""
+msgstr "როგორც ჩანს, ორივე ერთია, სხვაობის გარეშე."
 
 #: src/svnfrontend/svnactions.cpp:1280
 #, kde-format
 msgid "Diff-process could not started, check command."
-msgstr ""
+msgstr "სხვაობის პროცესის გაშვება შეუძლებელია. შეამოწმეთ ბრძანება."
 
 #: src/svnfrontend/svnactions.cpp:1339 src/svnfrontend/svnactions.cpp:1401
 #, kde-format
 msgctxt "@title:window"
 msgid "Diffing"
-msgstr ""
+msgstr "სხვაობების დადგენა"
 
 #: src/svnfrontend/svnactions.cpp:1339
 #, kde-format
 msgid "Diffing - hit Cancel for abort"
-msgstr ""
+msgstr "სხვაობების დადგენა - დააჭირეთ გაუქმებას შესაწყვეტად"
 
 #: src/svnfrontend/svnactions.cpp:1352 src/svnfrontend/svnactions.cpp:1411
 #, kde-format
 msgid "No difference to display"
-msgstr ""
+msgstr "საჩვენებელი სხვაობების გარეშე"
 
 #: src/svnfrontend/svnactions.cpp:1402
 #, kde-format
 msgid "Diffing - hit cancel for abort"
-msgstr ""
+msgstr "სხვაობების დადგენა - დააჭირეთ გაუქმებას შესაწყვეტად"
 
 #: src/svnfrontend/svnactions.cpp:1458
 #, kde-format
 msgid "Display process could not started, check command."
-msgstr ""
+msgstr "ჩვენების პროცესის გაშვება შეუძლებელია. შეამოწმეთ ბრძანება."
 
 #: src/svnfrontend/svnactions.cpp:1470
 #, kde-format
 msgctxt "@title:window"
 msgid "Diff Display"
-msgstr ""
+msgstr "სხვაობის ჩვენენება"
 
 #: src/svnfrontend/svnactions.cpp:1518
 #, kde-format
 msgctxt "@title:window"
 msgid "Making update"
-msgstr ""
+msgstr "მიმდინარეობს განახლება"
 
 #: src/svnfrontend/svnactions.cpp:1519
 #, kde-format
 msgid "Making update - hit Cancel for abort"
-msgstr ""
+msgstr "განახლება - დააჭირეთ გაუქმებას აბორტისთვის"
 
 #: src/svnfrontend/svnactions.cpp:1604
 #, kde-format
 msgid "Which files or directories should I add?"
-msgstr ""
+msgstr "რომელი ფაილები, ან საქაღალდეები დავამატო?"
 
 #: src/svnfrontend/svnactions.cpp:1611
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is versioned - break.</center>"
-msgstr ""
+msgstr "<center>ჩანაწერს<br/>%1<br/>ვერსიები აქვს - გაჩერება.</center>"
 
 #: src/svnfrontend/svnactions.cpp:1638
 #, kde-format
 msgid "Delete from repository"
-msgstr ""
+msgstr "რეპოზიტორიიდან წაშლა"
 
 #: src/svnfrontend/svnactions.cpp:1689
 #, kde-format
@@ -5011,27 +5078,27 @@ msgstr "რეპოზიტორიის გატანა"
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout a Repository"
-msgstr ""
+msgstr "რეპოზიტორიიდან გამოთხოვა"
 
 #: src/svnfrontend/svnactions.cpp:1707 src/svnfrontend/svnactions.cpp:1714
 #, kde-format
 msgid "Export repository"
-msgstr ""
+msgstr "რეპოზიტორიის გატანა"
 
 #: src/svnfrontend/svnactions.cpp:1713
 #, kde-format
 msgid "Invalid local path given!"
-msgstr ""
+msgstr "მითითებული ლოკალური ბილიკი არასწორია!"
 
 #: src/svnfrontend/svnactions.cpp:1733
 #, kde-format
 msgid "Exporting a file?"
-msgstr ""
+msgstr "გაგაქვთ ფაილი?"
 
 #: src/svnfrontend/svnactions.cpp:1733
 #, kde-format
 msgid "Checking out a file?"
-msgstr ""
+msgstr "ითხოვთ ფაილს?"
 
 #: src/svnfrontend/svnactions.cpp:1789
 #, kde-format
@@ -5058,7 +5125,7 @@ msgstr "ჩამოწერა"
 #: src/svnfrontend/svnactions.cpp:1828
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
-msgstr ""
+msgstr "<center>ჩანაწერს<br/>%1<br/>ვერსიები არ აქვს - გაჩერება.</center>"
 
 #: src/svnfrontend/svnactions.cpp:1860
 #, kde-format
@@ -5069,44 +5136,44 @@ msgstr "დაბრუნება"
 #: src/svnfrontend/svnactions.cpp:1860
 #, kde-format
 msgid "Reverting items"
-msgstr ""
+msgstr "ელემენტების დაბრუნება"
 
 #: src/svnfrontend/svnactions.cpp:1889 src/svnfrontend/svnactions.cpp:1953
 #, kde-format
 msgctxt "@title:window"
 msgid "Switch URL"
-msgstr ""
+msgstr "ბმულის გადართვა"
 
 #: src/svnfrontend/svnactions.cpp:1889
 #, kde-format
 msgid "Switching URL"
-msgstr ""
+msgstr "მიმდინარეობს ბმულის გადართვა"
 
 #: src/svnfrontend/svnactions.cpp:1910
 #, kde-format
 msgctxt "@title:window"
 msgid "Relocate Repository"
-msgstr ""
+msgstr "რეპოზიტორიის გადატანა"
 
 #: src/svnfrontend/svnactions.cpp:1911
 #, kde-format
 msgid "Relocate repository to new URL"
-msgstr ""
+msgstr "რეპოზიტორიის გადატანა ახალ URL-ზე"
 
 #: src/svnfrontend/svnactions.cpp:1934
 #, kde-format
 msgid "Can only switch one item at time"
-msgstr ""
+msgstr "ერთდროულად, მხოლოდ, ერთი ელემენტის გადართვა შეგიძლიათ"
 
 #: src/svnfrontend/svnactions.cpp:1940
 #, kde-format
 msgid "Error getting entry to switch"
-msgstr ""
+msgstr "შეცდომა შეცვლაზე შესვლისას"
 
 #: src/svnfrontend/svnactions.cpp:1963
 #, kde-format
 msgid "Switch URL"
-msgstr ""
+msgstr "ბმულის გადართვა"
 
 #: src/svnfrontend/svnactions.cpp:1980
 #, kde-format
@@ -5117,7 +5184,7 @@ msgstr "გასუფთავება"
 #: src/svnfrontend/svnactions.cpp:1980
 #, kde-format
 msgid "Cleaning up folder"
-msgstr ""
+msgstr "საქაღალდის გასუფთავება"
 
 #: src/svnfrontend/svnactions.cpp:1996
 #, kde-format
@@ -5128,17 +5195,17 @@ msgstr "გადაჭრა"
 #: src/svnfrontend/svnactions.cpp:1996
 #, kde-format
 msgid "Marking resolved"
-msgstr ""
+msgstr "მონიშვნა გადაწყვეტილად"
 
 #: src/svnfrontend/svnactions.cpp:2027
 #, kde-format
 msgid "Could not retrieve conflict information - giving up."
-msgstr ""
+msgstr "ვერ მივიღე კონფლიქტის ინფორმაცია - შევეშვი."
 
 #: src/svnfrontend/svnactions.cpp:2052
 #, kde-format
 msgid "Resolve-process could not started, check command."
-msgstr ""
+msgstr "ამოხსნის პროცესის გაშვება შეუძლებელია. შეამოწმეთ ბრძანება."
 
 #: src/svnfrontend/svnactions.cpp:2062
 #, kde-format
@@ -5149,42 +5216,42 @@ msgstr "შემოტანა"
 #: src/svnfrontend/svnactions.cpp:2062
 #, kde-format
 msgid "Importing items"
-msgstr ""
+msgstr "მიმდინარეობს ელემენტების შემოტანა"
 
 #: src/svnfrontend/svnactions.cpp:2091
 #, kde-format
 msgid "Nothing to merge."
-msgstr ""
+msgstr "შესარწყმელი არაფერია."
 
 #: src/svnfrontend/svnactions.cpp:2095
 #, kde-format
 msgid "No destination to merge."
-msgstr ""
+msgstr "შერწყმის სამიზნის გარეშე."
 
 #: src/svnfrontend/svnactions.cpp:2114
 #, kde-format
 msgid "Both sources must be same type."
-msgstr ""
+msgstr "ორივე წყარო იგივე ტიპის უნდა იყოს."
 
 #: src/svnfrontend/svnactions.cpp:2121
 #, kde-format
 msgid "Target for merge must same type like sources."
-msgstr ""
+msgstr "შერწყმის სამიზნე წყაროების ტიპის უნდა იყოს."
 
 #: src/svnfrontend/svnactions.cpp:2144
 #, kde-format
 msgid "Both entries seems to be the same, will not do a merge."
-msgstr ""
+msgstr "როგორც ჩანს, ორივე ერთია, სხვაობის გარეშე. შერწყმა არ მოხდება."
 
 #: src/svnfrontend/svnactions.cpp:2222
 #, kde-format
 msgid "Merge process could not started, check command."
-msgstr ""
+msgstr "შერწყმის პროცესის გაშვება შეუძლებელია. შეამოწმეთ ბრძანება."
 
 #: src/svnfrontend/svnactions.cpp:2304
 #, kde-format
 msgid "Merging items"
-msgstr ""
+msgstr "მიმდინარეობს ელემენტების შერწყმა"
 
 #: src/svnfrontend/svnactions.cpp:2330 src/svnfrontend/svnactions.cpp:2347
 #, kde-format
@@ -5195,34 +5262,34 @@ msgstr "სვლა"
 #: src/svnfrontend/svnactions.cpp:2330
 #, kde-format
 msgid "Moving/Rename item"
-msgstr ""
+msgstr "ელემენტის გადატანა/სახელის გადარქმევა"
 
 #: src/svnfrontend/svnactions.cpp:2347
 #, kde-format
 msgid "Moving entries"
-msgstr ""
+msgstr "მიმდინარეობს ელემენტების გადატანა"
 
 #: src/svnfrontend/svnactions.cpp:2367 src/svnfrontend/svnactions.cpp:2381
 #, kde-format
 msgctxt "@title:window"
 msgid "Copy / Move"
-msgstr ""
+msgstr "კოპირება / გადატანა"
 
 #: src/svnfrontend/svnactions.cpp:2367 src/svnfrontend/svnactions.cpp:2381
 #, kde-format
 msgid "Copy or Moving entries"
-msgstr ""
+msgstr "მიმდინარეობს ელემენტების კოპირება ან გადატანა"
 
 #: src/svnfrontend/svnactions.cpp:2497
 #, kde-format
 msgid "No unversioned items found."
-msgstr ""
+msgstr "ვერსიის გარეშე ელემენტები აღმოჩენილი არაა."
 
 #: src/svnfrontend/svnactions.cpp:2501
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Unversioned Items"
-msgstr ""
+msgstr "უვერსიო ელემენტების დამატება"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
 #: src/svnfrontend/svnactions.cpp:2504 src/svnfrontend/svnlogdlg.ui:163
@@ -5234,63 +5301,63 @@ msgstr "ელემენტი"
 #, kde-format
 msgid "Found %1 modified item"
 msgid_plural "Found %1 modified items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "აღმოჩენილია %1 შეცვლილი ელემენტი"
+msgstr[1] "აღმოჩენილია %1 შეცვლილი ელემენტი"
 
 #: src/svnfrontend/svnactions.cpp:2647
 #, kde-format
 msgid "Checking for updates finished"
-msgstr ""
+msgstr "განახლებების შემოწმება დასრულდა"
 
 #: src/svnfrontend/svnactions.cpp:2649
 #, kde-format
 msgid "There are new items in repository"
-msgstr ""
+msgstr "რეპოზიტორიაში არსებობს ახალი ელემენტები"
 
 #: src/svnfrontend/svnactions.cpp:2719
 #, kde-format
 msgid "Not filling log cache because networking is disabled"
-msgstr ""
+msgstr "ჟურნალის კეში არ შეივსება, რადგან ქსელი გათიშულია"
 
 #: src/svnfrontend/svnactions.cpp:2759
 #, kde-format
 msgid "Not checking for updates because networking is disabled"
-msgstr ""
+msgstr "განახლებები არ შემოწმდება, რადგან ქსელი გათიშულია"
 
 #: src/svnfrontend/svnactions.cpp:2765
 #, kde-format
 msgid "Checking for updates started in background"
-msgstr ""
+msgstr "განახლებების შემოწმება ფონურად მოხდება"
 
 #: src/svnfrontend/svnitem.cpp:401 src/svnfrontend/svnitem.cpp:414
 #, kde-format
 msgid "Not versioned"
-msgstr ""
+msgstr "უვერსიო"
 
 #: src/svnfrontend/svnitem.cpp:404
 #, kde-format
 msgid "Added in repository"
-msgstr ""
+msgstr "დაემატა რეპოზიტორიაში"
 
 #: src/svnfrontend/svnitem.cpp:406
 #, kde-format
 msgid "Needs update"
-msgstr ""
+msgstr "საჭიროებს განახლებას"
 
 #: src/svnfrontend/svnitem.cpp:418
 #, kde-format
 msgid "Locally modified"
-msgstr ""
+msgstr "ლოკალურად შეცვლილი"
 
 #: src/svnfrontend/svnitem.cpp:420
 #, kde-format
 msgid "Property modified"
-msgstr ""
+msgstr "თვისება შეიცვალა"
 
 #: src/svnfrontend/svnitem.cpp:424
 #, kde-format
 msgid "Locally added"
-msgstr ""
+msgstr "ლოკალურად დამატებული"
 
 #: src/svnfrontend/svnitem.cpp:427
 #, kde-format
@@ -5320,7 +5387,7 @@ msgstr "კონფლიქტი"
 #: src/svnfrontend/svnitem.cpp:445
 #, kde-format
 msgid "Property conflicted"
-msgstr ""
+msgstr "კონფლიქტური თვისება"
 
 #: src/svnfrontend/svnitem.cpp:449
 #, kde-format
@@ -5335,7 +5402,7 @@ msgstr "არასრული"
 #: src/svnfrontend/svnitem.cpp:455
 #, kde-format
 msgid "Obstructed"
-msgstr ""
+msgstr "განადგურებულია"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, LogDialog)
 #: src/svnfrontend/svnlogdlg.ui:18
@@ -5347,31 +5414,31 @@ msgstr "SVN ჟურნალი"
 #: src/svnfrontend/svnlogdlg.ui:31
 #, kde-format
 msgid "Start revision"
-msgstr ""
+msgstr "საწყისი რევიზია"
 
 #. i18n: ectx: property (text), widget (QLabel, endLabel)
 #: src/svnfrontend/svnlogdlg.ui:41
 #, kde-format
 msgid "End revision"
-msgstr ""
+msgstr "ბოლო რევიზია"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_goButton)
 #: src/svnfrontend/svnlogdlg.ui:57
 #, kde-format
 msgid "Get Logs"
-msgstr ""
+msgstr "ჟურნალის მიღება"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_PrevFiftyButton)
 #: src/svnfrontend/svnlogdlg.ui:64
 #, kde-format
 msgid "Previous entries"
-msgstr ""
+msgstr "წინა ჩანაწერები"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_NextFiftyButton)
 #: src/svnfrontend/svnlogdlg.ui:71
 #, kde-format
 msgid "Show from HEAD"
-msgstr ""
+msgstr "ჩვენება HEAD-დან"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
 #: src/svnfrontend/svnlogdlg.ui:168
@@ -5383,13 +5450,13 @@ msgstr "კოპირება"
 #: src/svnfrontend/svnlogdlg.ui:189 src/svnfrontend/svnlogdlgimp.cpp:519
 #, kde-format
 msgid "Diff previous"
-msgstr ""
+msgstr "შედარება წინასთან"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_DispSpecDiff)
 #: src/svnfrontend/svnlogdlg.ui:208
 #, kde-format
 msgid "Select second revision with right mouse button"
-msgstr ""
+msgstr "აირჩიეთ მეორე რევიზია თაგუნას მარჯვენა ღილაკით"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonListFiles)
 #: src/svnfrontend/svnlogdlg.ui:230
@@ -5419,7 +5486,7 @@ msgstr "დაკეტვა"
 #, kde-format
 msgctxt "@title:window"
 msgid "SVN Log of %1"
-msgstr ""
+msgstr "SVN-ის ჟურნალი %1-სთვის"
 
 #: src/svnfrontend/svnlogdlgimp.cpp:111
 #, kde-format
@@ -5430,17 +5497,17 @@ msgstr "SVN ჟურნალი"
 #: src/svnfrontend/svnlogdlgimp.cpp:445
 #, kde-format
 msgid "Set version as right side of diff"
-msgstr ""
+msgstr "ვერსიის დაყენება შედარების მარჯვენა ნაწილის მიხედვით"
 
 #: src/svnfrontend/svnlogdlgimp.cpp:451
 #, kde-format
 msgid "Set version as left side of diff"
-msgstr ""
+msgstr "ვერსიის დაყენება შედარების მარცხენა ნაწილის მიხედვით"
 
 #: src/svnfrontend/svnlogdlgimp.cpp:457
 #, kde-format
 msgid "Unset version for diff"
-msgstr ""
+msgstr "ვერსიის მოხსნა შემოწმებისთვის"
 
 #: src/svnfrontend/svnlogdlgimp.cpp:461
 #, kde-format
@@ -5472,10 +5539,10 @@ msgstr "გახსნა"
 #: src/urldlg.ui:14
 #, kde-format
 msgid "Open repository / working copy"
-msgstr ""
+msgstr "რეპოზიტორიის / მუშა ასლის გახსნა"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/urldlg.ui:20
 #, kde-format
 msgid "Open repository or working copy"
-msgstr ""
+msgstr "რეპოზიტორიის ან მუშა ასლის გახსნა"

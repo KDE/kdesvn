@@ -1,17 +1,17 @@
-# translation of kdesvn.pot to Spanish
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Spanish translations for kdesvn.po package.
+# Copyright (C) 2008-2025 This file is copyright:
+# This file is distributed under the same license as the kdesvn package.
 #
-# Mario Palomo Torrero <mariopal@gmail.com>, 2008, 2009.
-# Alvaro Soliverez <asoliverez@gmail.com>, 2010.
-# Javier Viñal <fjvinal@gmail.com>, 2013.
-# SPDX-FileCopyrightText: 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2023 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2008, 2009 Mario Palomo Torrero <mariopal@gmail.com>
+# SPDX-FileCopyrightText: 2010 Alvaro Soliverez <asoliverez@gmail.com>
+# SPDX-FileCopyrightText: 2013 Javier Viñal <fjvinal@gmail.com>
+# SPDX-FileCopyrightText: 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2023, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: es\n"
+"Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-06-07 01:43+0000\n"
-"PO-Revision-Date: 2023-10-22 13:48+0200\n"
+"PO-Revision-Date: 2025-06-10 00:43+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -216,7 +216,7 @@ msgstr "Trabajar con conexión"
 #: src/kdesvn_part.cpp:183
 #, kde-format
 msgid "Configure Kdesvn..."
-msgstr "Configurar Kdesvn..."
+msgstr "Configurar Kdesvn…"
 
 #: src/kdesvn_part.cpp:187
 #, kde-format
@@ -864,7 +864,7 @@ msgstr "O inserte uno de los últimos:"
 #: src/ksvnwidgets/commitmessage.ui:215
 #, kde-format
 msgid "Insert Text File..."
-msgstr "Insertar archivo de texto..."
+msgstr "Insertar archivo de texto…"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_keepLocksButton)
 #: src/ksvnwidgets/commitmessage.ui:226
@@ -4069,7 +4069,7 @@ msgstr "Mostrar el contenido de archivos o URL que se indican."
 #: src/svnfrontend/maintreewidget.cpp:540
 #, kde-format
 msgid "Cat revision..."
-msgstr "Volcar revisión..."
+msgstr "Volcar revisión…"
 
 #: src/svnfrontend/maintreewidget.cpp:541
 #, kde-format
@@ -4271,7 +4271,7 @@ msgstr "Actualizar"
 #: src/svnfrontend/maintreewidget.cpp:605
 #, kde-format
 msgid "Update to revision..."
-msgstr "Actualizar a la revisión..."
+msgstr "Actualizar a la revisión…"
 
 #: src/svnfrontend/maintreewidget.cpp:606
 #: src/svnfrontend/maintreewidget.cpp:607
@@ -4340,7 +4340,7 @@ msgstr "Fusionar dos revisiones de esta entrada en sí misma"
 #: src/svnfrontend/maintreewidget.cpp:632
 #, kde-format
 msgid "Merge..."
-msgstr "Fusionar..."
+msgstr "Fusionar…"
 
 #: src/svnfrontend/maintreewidget.cpp:633
 #, kde-format
@@ -4356,7 +4356,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:1220
 #, kde-format
 msgid "Open With..."
-msgstr "Abrir con..."
+msgstr "Abrir con…"
 
 #: src/svnfrontend/maintreewidget.cpp:638
 #, kde-format
@@ -4806,7 +4806,7 @@ msgstr "Bloqueado por"
 #: src/svnfrontend/opencontextmenu.cpp:60
 #, kde-format
 msgid "Other..."
-msgstr "Otro..."
+msgstr "Otro…"
 
 #: src/svnfrontend/propertiesdlg.cpp:89
 #, kde-format
@@ -5685,83 +5685,3 @@ msgstr "Abrir repositorio o copia de trabajo"
 #, kde-format
 msgid "Open repository or working copy"
 msgstr "Abrir repositorio o copia de trabajo"
-
-#~ msgid ""
-#~ "(C) 2005-2009 Rajko Albrecht,\n"
-#~ "(C) 2015-2016 Christian Ehrlicher"
-#~ msgstr ""
-#~ "© 2005-2009 Rajko Albrecht,\n"
-#~ "© 2015-2016 Christian Ehrlicher"
-
-#~ msgid "Add property"
-#~ msgstr "Añadir propiedad"
-
-#~ msgid ""
-#~ "This value computes how case sensitive string ordering will made.\n"
-#~ "Never overwrite the default computed value unless you know what you are "
-#~ "doing."
-#~ msgstr ""
-#~ "Este valor indica cómo se ordenan las cadenas que diferencian entre "
-#~ "mayúsculas y minúsculas.\n"
-#~ "No modifique nunca el valor indicado por omisión a menos que sepa lo que "
-#~ "está haciendo."
-
-#~ msgid "Check if current locale is case sensitive or not"
-#~ msgstr ""
-#~ "Comprobar si la configuración local actual distingue entre mayúsculas y "
-#~ "minúsculas"
-
-#~ msgid "Make operation recursive"
-#~ msgstr "Realizar la operación de forma recursiva"
-
-#~ msgid "Old version of conflicted file"
-#~ msgstr "Antigua versión del archivo con conflictos"
-
-#~ msgid "Working version of conflicted file"
-#~ msgstr "Versión de trabajo del archivo con conflictos"
-
-#~ msgid "Clear"
-#~ msgstr "Borrar todo"
-
-#~ msgid "Is created repository compatible to Subversion prior 1.4"
-#~ msgstr ""
-#~ "Se ha creado un repositorio compatible con Subversion anterior a 1.4"
-
-#~ msgid "Compatible to Subversion prior 1.4"
-#~ msgstr "Compatible con Subversion anterior a 1.4"
-
-#~ msgid "Edit property"
-#~ msgstr "Editar la propiedad"
-
-#~ msgid "Cannot import remote URLs"
-#~ msgstr "No se pueden importar URL remotas"
-
-#~ msgid "Set/add property recursive"
-#~ msgstr "Fija o añade la propiedad de forma recursiva"
-
-#~ msgid "Modify properties"
-#~ msgstr "Modificar propiedades"
-
-#~ msgid "List of properties set"
-#~ msgstr "Lista del conjunto de propiedades"
-
-#~ msgid "Target for merge must be local."
-#~ msgstr "El objetivo de la fusión debe ser local."
-
-#~ msgid "Issue-Number"
-#~ msgstr "Número de incidencia"
-
-#~ msgid "DiffMergeSettings"
-#~ msgstr "DiffMergeSettings"
-
-#~ msgid "RevisionButton"
-#~ msgstr "RevisionButton"
-
-#~ msgid "this long text"
-#~ msgstr "este largo texto"
-
-#~ msgid "/there/"
-#~ msgstr "/ahí/"
-
-#~ msgid "Relocate URL"
-#~ msgstr "Reubicar URL"

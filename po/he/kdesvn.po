@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-23 00:45+0000\n"
-"PO-Revision-Date: 2025-05-28 10:17+0300\n"
+"PO-Revision-Date: 2025-06-10 06:11+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -5093,223 +5093,223 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:1940
 #, kde-format
 msgid "Error getting entry to switch"
-msgstr ""
+msgstr "שגיאה בקבלת רשומה להחלפה"
 
 #: src/svnfrontend/svnactions.cpp:1963
 #, kde-format
 msgid "Switch URL"
-msgstr ""
+msgstr "החלפת כתובת"
 
 #: src/svnfrontend/svnactions.cpp:1980
 #, kde-format
 msgctxt "@title:window"
 msgid "Cleanup"
-msgstr ""
+msgstr "ניקוי"
 
 #: src/svnfrontend/svnactions.cpp:1980
 #, kde-format
 msgid "Cleaning up folder"
-msgstr ""
+msgstr "התיקייה עוברת ניקיון"
 
 #: src/svnfrontend/svnactions.cpp:1996
 #, kde-format
 msgctxt "@title:window"
 msgid "Resolve"
-msgstr ""
+msgstr "פתירה"
 
 #: src/svnfrontend/svnactions.cpp:1996
 #, kde-format
 msgid "Marking resolved"
-msgstr ""
+msgstr "מסומן כפתור"
 
 #: src/svnfrontend/svnactions.cpp:2027
 #, kde-format
 msgid "Could not retrieve conflict information - giving up."
-msgstr ""
+msgstr "לא ניתן למשוך את פרטי הסתירה - מוותר."
 
 #: src/svnfrontend/svnactions.cpp:2052
 #, kde-format
 msgid "Resolve-process could not started, check command."
-msgstr ""
+msgstr "לא ניתן להתחיל את תהליך הפתרון, נא לבדוק את הפקודה."
 
 #: src/svnfrontend/svnactions.cpp:2062
 #, kde-format
 msgctxt "@title:window"
 msgid "Import"
-msgstr ""
+msgstr "ייבוא"
 
 #: src/svnfrontend/svnactions.cpp:2062
 #, kde-format
 msgid "Importing items"
-msgstr ""
+msgstr "ייבוא פריטים"
 
 #: src/svnfrontend/svnactions.cpp:2091
 #, kde-format
 msgid "Nothing to merge."
-msgstr ""
+msgstr "אין מה למזג."
 
 #: src/svnfrontend/svnactions.cpp:2095
 #, kde-format
 msgid "No destination to merge."
-msgstr ""
+msgstr "אין יעד למיזוג."
 
 #: src/svnfrontend/svnactions.cpp:2114
 #, kde-format
 msgid "Both sources must be same type."
-msgstr ""
+msgstr "שני המקורות חייבים להיות מאותו הסוג."
 
 #: src/svnfrontend/svnactions.cpp:2121
 #, kde-format
 msgid "Target for merge must same type like sources."
-msgstr ""
+msgstr "היעד למיזוג חייב להיות מאותו הסוג כמו המקורות."
 
 #: src/svnfrontend/svnactions.cpp:2144
 #, kde-format
 msgid "Both entries seems to be the same, will not do a merge."
-msgstr ""
+msgstr "נראה ששתי הרשומות זהות, לא יתבצע מיזוג."
 
 #: src/svnfrontend/svnactions.cpp:2222
 #, kde-format
 msgid "Merge process could not started, check command."
-msgstr ""
+msgstr "לא ניתן להפעיל את תהליך המיזוג, נא לבדוק את הפקודה."
 
 #: src/svnfrontend/svnactions.cpp:2304
 #, kde-format
 msgid "Merging items"
-msgstr ""
+msgstr "מיזוג פריטים"
 
 #: src/svnfrontend/svnactions.cpp:2330 src/svnfrontend/svnactions.cpp:2347
 #, kde-format
 msgctxt "@title:window"
 msgid "Move"
-msgstr ""
+msgstr "העברה"
 
 #: src/svnfrontend/svnactions.cpp:2330
 #, kde-format
 msgid "Moving/Rename item"
-msgstr ""
+msgstr "העברת/שינוי שם פריט"
 
 #: src/svnfrontend/svnactions.cpp:2347
 #, kde-format
 msgid "Moving entries"
-msgstr ""
+msgstr "העברת רשומות"
 
 #: src/svnfrontend/svnactions.cpp:2367 src/svnfrontend/svnactions.cpp:2381
 #, kde-format
 msgctxt "@title:window"
 msgid "Copy / Move"
-msgstr ""
+msgstr "העתקה / העברה"
 
 #: src/svnfrontend/svnactions.cpp:2367 src/svnfrontend/svnactions.cpp:2381
 #, kde-format
 msgid "Copy or Moving entries"
-msgstr ""
+msgstr "העתקה או העברה של רשומות"
 
 #: src/svnfrontend/svnactions.cpp:2497
 #, kde-format
 msgid "No unversioned items found."
-msgstr ""
+msgstr "לא נמצאו פריטים שלא מתועדים לגרסה."
 
 #: src/svnfrontend/svnactions.cpp:2501
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Unversioned Items"
-msgstr ""
+msgstr "הוספת פריטים שלא מתועדים לגרסה"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
 #: src/svnfrontend/svnactions.cpp:2504 src/svnfrontend/svnlogdlg.ui:163
 #, kde-format
 msgid "Item"
-msgstr ""
+msgstr "פריט"
 
 #: src/svnfrontend/svnactions.cpp:2619
 #, kde-format
 msgid "Found %1 modified item"
 msgid_plural "Found %1 modified items"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "נמצא פריט שהשתנה"
+msgstr[1] "נמצאו שני פריטים שהשתנו"
+msgstr[2] "נמצאו %1 פריטים שהשתנו"
+msgstr[3] "נמצאו %1 פריטים שהשתנו"
 
 #: src/svnfrontend/svnactions.cpp:2647
 #, kde-format
 msgid "Checking for updates finished"
-msgstr ""
+msgstr "איתור עדכונים הושלם"
 
 #: src/svnfrontend/svnactions.cpp:2649
 #, kde-format
 msgid "There are new items in repository"
-msgstr ""
+msgstr "יש פריטים חדשים במאגר"
 
 #: src/svnfrontend/svnactions.cpp:2719
 #, kde-format
 msgid "Not filling log cache because networking is disabled"
-msgstr ""
+msgstr "מטמון היומן לא מתמלא כיוון שהתקשורת מושבתת"
 
 #: src/svnfrontend/svnactions.cpp:2759
 #, kde-format
 msgid "Not checking for updates because networking is disabled"
-msgstr ""
+msgstr "לא מתבצעת בדיקת עדכונים כי התקשורת מושבתת"
 
 #: src/svnfrontend/svnactions.cpp:2765
 #, kde-format
 msgid "Checking for updates started in background"
-msgstr ""
+msgstr "בדיקת עדכונים החלה ברקע"
 
 #: src/svnfrontend/svnitem.cpp:401 src/svnfrontend/svnitem.cpp:414
 #, kde-format
 msgid "Not versioned"
-msgstr ""
+msgstr "לא מתועד לגרסה"
 
 #: src/svnfrontend/svnitem.cpp:404
 #, kde-format
 msgid "Added in repository"
-msgstr ""
+msgstr "נוסף במאגר"
 
 #: src/svnfrontend/svnitem.cpp:406
 #, kde-format
 msgid "Needs update"
-msgstr ""
+msgstr "דורש עדכון"
 
 #: src/svnfrontend/svnitem.cpp:418
 #, kde-format
 msgid "Locally modified"
-msgstr ""
+msgstr "השתנה מקומית"
 
 #: src/svnfrontend/svnitem.cpp:420
 #, kde-format
 msgid "Property modified"
-msgstr ""
+msgstr "המאפיין השתנה"
 
 #: src/svnfrontend/svnitem.cpp:424
 #, kde-format
 msgid "Locally added"
-msgstr ""
+msgstr "נוסף מקומית"
 
 #: src/svnfrontend/svnitem.cpp:427
 #, kde-format
 msgid "Missing"
-msgstr ""
+msgstr "חסר"
 
 #: src/svnfrontend/svnitem.cpp:433
 #, kde-format
 msgid "Replaced"
-msgstr ""
+msgstr "הוחלף"
 
 #: src/svnfrontend/svnitem.cpp:436
 #, kde-format
 msgid "Ignored"
-msgstr ""
+msgstr "נפסח"
 
 #: src/svnfrontend/svnitem.cpp:439
 #, kde-format
 msgid "External"
-msgstr ""
+msgstr "חיצוני"
 
 #: src/svnfrontend/svnitem.cpp:443
 #, kde-format
 msgid "Conflict"
-msgstr ""
+msgstr "סתירה"
 
 #: src/svnfrontend/svnitem.cpp:445
 #, kde-format
@@ -5319,12 +5319,12 @@ msgstr ""
 #: src/svnfrontend/svnitem.cpp:449
 #, kde-format
 msgid "Merged"
-msgstr ""
+msgstr "ממוזג"
 
 #: src/svnfrontend/svnitem.cpp:452
 #, kde-format
 msgid "Incomplete"
-msgstr ""
+msgstr "חלקי"
 
 #: src/svnfrontend/svnitem.cpp:455
 #, kde-format
@@ -5335,141 +5335,141 @@ msgstr ""
 #: src/svnfrontend/svnlogdlg.ui:18
 #, kde-format
 msgid "SVN Log"
-msgstr ""
+msgstr "יומן SVN"
 
 #. i18n: ectx: property (text), widget (QLabel, startLabel)
 #: src/svnfrontend/svnlogdlg.ui:31
 #, kde-format
 msgid "Start revision"
-msgstr ""
+msgstr "מהדורה התחלתית"
 
 #. i18n: ectx: property (text), widget (QLabel, endLabel)
 #: src/svnfrontend/svnlogdlg.ui:41
 #, kde-format
 msgid "End revision"
-msgstr ""
+msgstr "מהדורה סופית"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_goButton)
 #: src/svnfrontend/svnlogdlg.ui:57
 #, kde-format
 msgid "Get Logs"
-msgstr ""
+msgstr "משיכת יומנים"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_PrevFiftyButton)
 #: src/svnfrontend/svnlogdlg.ui:64
 #, kde-format
 msgid "Previous entries"
-msgstr ""
+msgstr "רשומות קודמות"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_NextFiftyButton)
 #: src/svnfrontend/svnlogdlg.ui:71
 #, kde-format
 msgid "Show from HEAD"
-msgstr ""
+msgstr "הצגה מ־HEAD"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
 #: src/svnfrontend/svnlogdlg.ui:168
 #, kde-format
 msgid "Copy from"
-msgstr ""
+msgstr "העתקה מ־"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DispPrevButton)
 #: src/svnfrontend/svnlogdlg.ui:189 src/svnfrontend/svnlogdlgimp.cpp:519
 #, kde-format
 msgid "Diff previous"
-msgstr ""
+msgstr "הבדל מול קודם"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_DispSpecDiff)
 #: src/svnfrontend/svnlogdlg.ui:208
 #, kde-format
 msgid "Select second revision with right mouse button"
-msgstr ""
+msgstr "אפשר לבחור את המהדורה השנייה עם הלחצן הימני בעכבר"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonListFiles)
 #: src/svnfrontend/svnlogdlg.ui:230
 #, kde-format
 msgid "List entries"
-msgstr ""
+msgstr "הצגת רשומות"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonBlame)
 #: src/svnfrontend/svnlogdlg.ui:249 src/svnfrontend/svnlogdlgimp.cpp:514
 #, kde-format
 msgid "Annotate"
-msgstr ""
+msgstr "פירוש"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_pbHelp)
 #: src/svnfrontend/svnlogdlg.ui:275
 #, kde-format
 msgid "Help"
-msgstr ""
+msgstr "עזרה"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_pbClose)
 #: src/svnfrontend/svnlogdlg.ui:282
 #, kde-format
 msgid "Close"
-msgstr ""
+msgstr "סגירה"
 
 #: src/svnfrontend/svnlogdlgimp.cpp:109
 #, kde-format
 msgctxt "@title:window"
 msgid "SVN Log of %1"
-msgstr ""
+msgstr "יומן SVN של %1"
 
 #: src/svnfrontend/svnlogdlgimp.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "SVN Log"
-msgstr ""
+msgstr "יומן SVN"
 
 #: src/svnfrontend/svnlogdlgimp.cpp:445
 #, kde-format
 msgid "Set version as right side of diff"
-msgstr ""
+msgstr "הגדרת גרסה כצד הימני של ההבדלים"
 
 #: src/svnfrontend/svnlogdlgimp.cpp:451
 #, kde-format
 msgid "Set version as left side of diff"
-msgstr ""
+msgstr "הגדרת גרסה כצד השמאלי של ההבדלים"
 
 #: src/svnfrontend/svnlogdlgimp.cpp:457
 #, kde-format
 msgid "Unset version for diff"
-msgstr ""
+msgstr "ביטול הגדרת גרסה להבדלים"
 
 #: src/svnfrontend/svnlogdlgimp.cpp:461
 #, kde-format
 msgid "Revert this commit"
-msgstr ""
+msgstr "שחזור הקיבוע הזה"
 
 #: src/svnfrontend/svntreeview.cpp:111
 #, kde-format
 msgid "&Move Here"
-msgstr ""
+msgstr "הע&ברה לכאן"
 
 #: src/svnfrontend/svntreeview.cpp:115
 #, kde-format
 msgid "&Copy Here"
-msgstr ""
+msgstr "העתקה ל&כאן"
 
 #: src/svnfrontend/svntreeview.cpp:117
 #, kde-format
 msgid "C&ancel"
-msgstr ""
+msgstr "&ביטול"
 
 #: src/urldlg.cpp:98
 #, kde-format
 msgctxt "@title:window"
 msgid "Open"
-msgstr ""
+msgstr "פתיחה"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, UrlDlg)
 #: src/urldlg.ui:14
 #, kde-format
 msgid "Open repository / working copy"
-msgstr ""
+msgstr "פתיחת מאגר / עותק עבודה"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/urldlg.ui:20
 #, kde-format
 msgid "Open repository or working copy"
-msgstr ""
+msgstr "פתיחת מאגר או עותק עבודה"

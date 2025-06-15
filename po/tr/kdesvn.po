@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-23 00:45+0000\n"
-"PO-Revision-Date: 2025-03-08 00:05+0300\n"
-"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
+"PO-Revision-Date: 2025-06-14 18:01+0300\n"
+"Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.03.70\n"
+"X-Generator: Lokalize 25.04.2\n"
 "X-POOTLE-MTIME: 1502202338.000000\n"
 
 #, kde-format
@@ -62,12 +62,12 @@ msgstr "Parola"
 #: src/fileitemactions/kdesvnactionsplugin.cpp:51
 #, kde-format
 msgid "Checkout From Repository..."
-msgstr "Depodan Çıkış Yap..."
+msgstr "Depodan Çıkış Yap…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:54
 #, kde-format
 msgid "Export..."
-msgstr "Dışa Aktar..."
+msgstr "Dışa Aktar…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:57
 #, kde-format
@@ -87,12 +87,12 @@ msgstr "kdesvn günlüğü (son 100)"
 #: src/fileitemactions/kdesvnactionsplugin.cpp:66
 #, kde-format
 msgid "Export from a Subversion repository..."
-msgstr "Bir SVN Deposundan Dışa Aktar..."
+msgstr "Bir SVN Deposundan Dışa Aktar…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:69
 #, kde-format
 msgid "Checkout from a repository..."
-msgstr "Bir Depodan Çıkış Yap..."
+msgstr "Bir Depodan Çıkış Yap…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:74
 #, kde-format
@@ -123,7 +123,7 @@ msgstr "Yerel Değişiklikleri Geri Al"
 #: src/fileitemactions/kdesvnactionsplugin.cpp:89
 #, kde-format
 msgid "Rename..."
-msgstr "Yeniden Adlandır..."
+msgstr "Yeniden Adlandır…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:92
 #, kde-format
@@ -133,23 +133,23 @@ msgstr "Depo İçe Aktar"
 #: src/fileitemactions/kdesvnactionsplugin.cpp:97
 #, kde-format
 msgid "Switch..."
-msgstr "Geçiş Yap..."
+msgstr "Geçiş Yap…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:100
 #: src/svnfrontend/maintreewidget.cpp:824
 #, kde-format
 msgid "Merge..."
-msgstr "Birleştir..."
+msgstr "Birleştir…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:105
 #, kde-format
 msgid "Blame..."
-msgstr "Suçla..."
+msgstr "Suçla…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:108
 #, kde-format
 msgid "Create Patch..."
-msgstr "Yama Oluştur..."
+msgstr "Yama Oluştur…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:113
 #, kde-format
@@ -214,7 +214,7 @@ msgstr "Bir döküm dosyasını depoya yükle."
 #: src/kdesvn.cpp:120
 #, kde-format
 msgid "Add ssh identities to ssh-agent"
-msgstr "ssh-agent'a SSH Kimliklerini Ekle"
+msgstr "ssh-agent’a SSH Kimliklerini Ekle"
 
 #: src/kdesvn.cpp:121
 #, kde-format
@@ -253,23 +253,23 @@ msgstr ""
 #: src/kdesvn.cpp:167
 #, kde-format
 msgid "Could not open URL %1"
-msgstr "%1 URL'si açılamadı"
+msgstr "%1 URL’si açılamadı"
 
 #: src/kdesvn.cpp:199
 #, kde-format
 msgid "Recent opened URLs"
-msgstr "Son Açılan URL'ler"
+msgstr "Son Açılan URL’ler"
 
 #: src/kdesvn.cpp:208
 #, kde-format
 msgid "Load last opened URL on start"
-msgstr "Başlangıçta son açılan URL'yi yükle"
+msgstr "Başlangıçta son açılan URL’yi yükle"
 
 #: src/kdesvn.cpp:210
 #, kde-format
 msgid "Reload last opened URL if no one is given on command line"
 msgstr ""
-"Komut satırından hiçbir şey verilmemişse son açılan URL'yi tekrar yükle"
+"Komut satırından hiçbir şey verilmemişse son açılan URL’yi yeniden yükle"
 
 #: src/kdesvn.cpp:293
 #, kde-format
@@ -308,7 +308,7 @@ msgstr "Çevrimiçi çalış"
 #: src/kdesvn_part.cpp:183
 #, kde-format
 msgid "Configure Kdesvn..."
-msgstr "Kdesvn'i Yapılandır..."
+msgstr "Kdesvn’i Yapılandır…"
 
 #: src/kdesvn_part.cpp:187
 #, kde-format
@@ -576,7 +576,7 @@ msgstr "Canlı kopya tamamlandı."
 #, kde-format
 msgctxt "@title:window"
 msgid "Load a Repository From an svndump"
-msgstr "Bir svndump'tan Depo Yükle"
+msgstr "Bir svndump’tan Depo Yükle"
 
 #: src/kdesvnview.cpp:332
 #, kde-format
@@ -619,7 +619,7 @@ msgstr "Döküm tamamlandı."
 #: src/kdesvnview.cpp:431
 #, kde-format
 msgid "Inserted %v not cached log entries of %m."
-msgstr "%m'nin %v önbelleklenmemiş günlük kaydı eklendi."
+msgstr "%m ögesinin %v önbelleklenmemiş günlük kaydı eklendi."
 
 #: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:768
 #, kde-format
@@ -663,7 +663,7 @@ msgstr ""
 #: src/kiosvn/kiolistener.cpp:124
 #, kde-format
 msgid "Resolved conflicted state of %1."
-msgstr "%1 çatışma durumu çözüldü."
+msgstr "%1 çakışma durumu çözüldü."
 
 #: src/kiosvn/kiolistener.cpp:128
 #, kde-format
@@ -749,7 +749,7 @@ msgstr "Yalnızca HEAD revizyonuna yazılabilir."
 #: src/kiosvn/kiosvn.cpp:331
 #, kde-format
 msgid "Renaming %1 to %2 successful"
-msgstr "%1 - %2 yeniden adlandırması başarılı"
+msgstr "%1 → %2 yeniden adlandırması başarılı"
 
 #: src/kiosvn/kiosvn.cpp:363
 #, kde-format
@@ -825,12 +825,12 @@ msgstr "Parolayı sakla (KDE Cüzdanına)"
 #: src/ksvnwidgets/authdialogwidget.cpp:35
 #, kde-format
 msgid "Store password (into Subversion' simple storage)"
-msgstr "Parolayı sakla (Subversion'un basit deposuna)"
+msgstr "Parolayı depola (Subversion’un basit deposuna)"
 
 #: src/ksvnwidgets/authdialogwidget.cpp:37
 #, kde-format
 msgid "Enter authentication info for %1"
-msgstr "%1 için kimlik dorğulama bilgisi girin"
+msgstr "%1 için kimlik doğrulama bilgisi gir"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, AuthDialogWidget)
 #: src/ksvnwidgets/authdlg.ui:14
@@ -951,7 +951,7 @@ msgstr "Veya sondakilerden birini ekle:"
 #: src/ksvnwidgets/commitmessage.ui:215
 #, kde-format
 msgid "Insert Text File..."
-msgstr "Metin Dosyası Ekle..."
+msgstr "Metin Dosyası Ekle…"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_keepLocksButton)
 #: src/ksvnwidgets/commitmessage.ui:226
@@ -1212,7 +1212,7 @@ msgstr "Reddet"
 #: src/ksvnwidgets/ssltrustprompt.cpp:46
 #, kde-format
 msgid "Error validating server certificate for '%1'"
-msgstr "'%1' için sunucu sertifikası doğrulamada hata"
+msgstr "“%1” için sunucu sertifikası doğrulamada hata"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:71
 #, kde-format
@@ -1308,7 +1308,7 @@ msgstr "İşlemi zorla"
 #: src/main.cpp:52
 #, kde-format
 msgid "Save output of Subversion command (eg \"cat\") into file <file>"
-msgstr "Subversion komutu çıktısını (örn \"cat\") <file> dosyasına kaydet"
+msgstr "Subversion komutu çıktısını (örn. “cat”) <file> dosyasına kaydet"
 
 #: src/main.cpp:52
 #, kde-format
@@ -1328,7 +1328,7 @@ msgstr "<number>"
 #: src/main.cpp:54
 #, kde-format
 msgid "Execute Subversion command (\"exec help\" for more information)"
-msgstr "Subversion komutunu çalıştır (daha fazla bilgi için \"exec help\" )"
+msgstr "Subversion komutunu çalıştır (daha fazla bilgi için “exec help”)"
 
 #: src/main.cpp:55
 #, kde-format
@@ -1375,13 +1375,13 @@ msgstr "Asgari yok"
 #: src/settings/cmdexecsettings.ui:51
 #, kde-format
 msgid "If set, kdesvn will not show a menu inside \"Action\" menu of Konqueror"
-msgstr "Ayarlıysa kdesvn Konqueror \"Eylem\" menüsü içinde bir menü göstermez"
+msgstr "Ayarlıysa kdesvn, Konqueror “Eylem” menüsü içinde bir menü göstermez"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_contextmenu)
 #: src/settings/cmdexecsettings.ui:54
 #, kde-format
 msgid "Do not display context menu in Konqueror"
-msgstr "Konqueror'da bağlam menüsü görüntüleme"
+msgstr "Konqueror’un bağlam menüsünde görüntüleme"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
 #: src/settings/cmdexecsettings.ui:61
@@ -1390,8 +1390,8 @@ msgid ""
 "If set, kdesvn will not show some extra actions inside \"Action\" menu of "
 "Konqueror/Dolphin"
 msgstr ""
-"Ayarlıysa kdesvn Konqueror/Dolphin'in \"Eylem\" menüsü içinde bazı ek "
-"eylemleri göstermez"
+"Ayarlıysa kdesvn, Konqueror/Dolphin’in “Eylem” menüsü içinde bazı ek "
+"eylemleri göstermez."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
 #: src/settings/cmdexecsettings.ui:64
@@ -1445,8 +1445,8 @@ msgstr "KIO üzerine yazabilir"
 msgid ""
 "If set KIO shows in KDE's Plasma detailed information about current operation"
 msgstr ""
-"Ayarlanmışsa KIO, KDE'nin Plasma'sında geçerli işlemle ilgili ayrıntılı "
-"bilgi gösterir"
+"Ayarlanmışsa KIO, KDE’nin Plasma’sında geçerli işlemle ilgili ayrıntılı "
+"bilgi gösterir."
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_dockmsg)
 #: src/settings/cmdexecsettings.ui:117
@@ -1457,7 +1457,7 @@ msgid ""
 "Error messages of KIO will always displayed and can <i>not</i> switched off."
 "</p>"
 msgstr ""
-"<p>Ayarlıysa kdesvn KIO KDE'nin Plasma denetim alanında ayrıntılı iletiler "
+"<p>Ayarlıysa kdesvn KIO KDE’nin Plasma denetim alanında ayrıntılı iletiler "
 "gösterir.<br/>\n"
 "KIO hata iletileri her zaman görüntülenir ve <i>kapatılamaz</i>.</p>"
 
@@ -1521,8 +1521,8 @@ msgstr "Dış fark görüntüleyicisi kullan"
 msgid ""
 "Set if merge with external program is preferred and not Subversion's merge"
 msgstr ""
-"Subversion'un değil de harici bir birleştirme programı tercih ediliyorsa "
-"ayarlayın"
+"Subversion’un değil de dış bir birleştirme programı tercih ediliyorsa "
+"ayarlayın."
 
 #. i18n: ectx: label, entry (extern_merge_default), group (diffmerge_items)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_extern_merge_default)
@@ -1560,7 +1560,7 @@ msgstr "Dış birleştirme programı:"
 #: src/settings/diffmergesettings.ui:115
 #, kde-format
 msgid "Setup an external program for conflict resolving"
-msgstr "Çatışma çözmek için harici bir program ayarlayın"
+msgstr "Çakışma çözmek için dış bir program ayarlayın"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_conflict_resolver)
 #: src/settings/diffmergesettings.ui:134
@@ -1587,13 +1587,13 @@ msgid ""
 "</p>"
 msgstr ""
 "<p>\n"
-"Kdesvn'nin çatışma çözücü programı nasıl çözmesi gerektiğini girin. Biçim şu "
+"Kdesvn’nin çakışma çözücü programı nasıl çözmesi gerektiğini girin. Biçim şu "
 "şekildedir\n"
 "<p align=\"center\">\n"
 "<b><tt>&lt;program&gt; &lt;programseçenekleri&gt;</tt></b>\n"
 "</p>\n"
 "<p>\n"
-"Programseçenekleri dosya isimlerinin yerini tutacak yer tutucuları "
+"Program seçenekleri, dosya adlarının yerini tutacak yer tutucuları "
 "içerebilir.\n"
 "</p>\n"
 "Yer değiştirmelerin anlamı:<br>\n"
@@ -1635,7 +1635,7 @@ msgid ""
 "</p>"
 msgstr ""
 "<p>\n"
-"Kdesvn'nin dış birleştirme programını nasıl çalıştıracağını girin. Biçim "
+"Kdesvn’nin dış birleştirme programını nasıl çalıştıracağını girin. Biçim "
 "şöyledir\n"
 "<p align=\"center\">\n"
 "<b><tt>&lt;program&gt; &lt;programseçenekleri&gt; %s1 %s2 %t</tt></b>\n"
@@ -1693,7 +1693,7 @@ msgstr ""
 "<br>\n"
 "İlk ve ikinci biçimden biri kullanılırsa svn kendisi farkı üretir. %f geçici "
 "bir dosya adıyla değiştirilir. %f verilmemişse\n"
-"fark-görüntüleyici stdin'den veri okuyabilmelidir.\n"
+"fark-görüntüleyici stdin’den veri okuyabilmelidir.\n"
 "<br>\n"
 "%s1 ve %s2 verildiğinde, kdesvn bu görünümün farkı yapmasına izin verir. "
 "Bunun için geçici bir dışa aktarım veya alma (gerekiyorsa) yapar ve "
@@ -1706,7 +1706,7 @@ msgstr ""
 #: src/settings/diffmergesettings.ui:200
 #, kde-format
 msgid "see \"What's this\" for details"
-msgstr "Ayrıntılar için \"Bu nedir\"e bakın"
+msgstr "Ayrıntılar için “Bu Nedir?”e bakın"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DispColorSettings)
 #: src/settings/dispcolor_settings.ui:6
@@ -1803,11 +1803,10 @@ msgid ""
 "</p>"
 msgstr ""
 "<p align=\"left\">\n"
-"Normal olmayan durumdaki ögeleri bir kaplama simgeyle işaretle. Depoda "
-"hangi\n"
-"ögelerin daha yeni ögelere sahip olduğunu görmek istediğinizde, Subversion "
-"İletişim Penceresinde \"Açıkken güncellemeleri denetle\" ayarlamanız "
-"gerekebilir.\n"
+"Normal olmayan durumdaki ögeleri bir kaplama simgeyle imleyin. Depoda hangi "
+"ögelerin daha yeni ögelere sahip olduğunu görmek istediinizde, Subversion "
+"iletişim kutusunda “Başlangıçta güncellemeleri denetle” seçeneğini "
+"ayarlamanız gerekebilir.\n"
 "</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_overlays)
@@ -2016,7 +2015,7 @@ msgstr "Ağ etkin mi"
 #: src/settings/kdesvn_part.kcfg:140
 #, kde-format
 msgid "Local add results in modification instead of conflicts"
-msgstr "Çatışmalar yerine değiştirmelerde sonuçları yerel ekle"
+msgstr "Çakışmalar yerine değiştirmelerde sonuçları yerel ekle"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:144
@@ -2034,7 +2033,7 @@ msgstr "Harici birleştirmeler için kullanılacak program"
 #: src/settings/kdesvn_part.kcfg:154
 #, kde-format
 msgid "Which program for resolving conflicts"
-msgstr "Çatışmaları çözmek için hangi program"
+msgstr "Çakışmaları çözmek için hangi program kullanılmalı"
 
 #. i18n: ectx: label, entry, group (display)
 #: src/settings/kdesvn_part.kcfg:164
@@ -2323,7 +2322,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:49
 #, kde-format
 msgid "Check if items have \"svn:needs-lock\" property set"
-msgstr "Ögelerin \"svn:needs-lock\" özelliği ayarlıysa işaretle"
+msgstr "Ögelerin “svn:needs-lock” özelliği ayarlıysa işaretle"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:56
@@ -2369,7 +2368,7 @@ msgstr "Öge bilgisini özyineli olarak al"
 #, kde-format
 msgid "Should kdesvn retrieve properties on selected item in repositories"
 msgstr ""
-"Kdesvn'nin depolardaki seçili öge için özellikleri getirip getirmeyeceği"
+"Kdesvn’nin depolardaki seçili öge için özellikleri getirip getirmeyeceği"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:88
@@ -2397,7 +2396,7 @@ msgstr "Ağlı depolarda her zaman özellikleri al"
 #: src/settings/subversion_settings.ui:101
 #, kde-format
 msgid "Should Subversion store passwords by default"
-msgstr "Subversion'un öntanımlı olarak parolaları kaydedip kaydetmeyeceği"
+msgstr "Subversion’un öntanımlı olarak parolaları kaydedip kaydetmeyeceği"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:104
@@ -2410,8 +2409,8 @@ msgid ""
 "dialog."
 msgstr ""
 "Parolaları kaydetmek genellikle güvenlik problemidir. Kdesvn kendisi parola "
-"kaydetmez, Subversion'un yapılandırma alanında Subversion içinde kaydeder. "
-"Bu alan diğerleri tarafından okunabilirse ayarlamamalısınız, ama kimlik "
+"kaydetmez, Subversion’un yapılandırma alanında Subversion içinde kaydeder. "
+"Bu alan diğerleri tarafından okunabilirse ayarlamamalısınız; ancak kimlik "
 "doğrulama iletişim penceresinde tek tek kritik olmayan hesaplar için "
 "seçebillirsiniz."
 
@@ -2508,7 +2507,7 @@ msgid ""
 msgstr ""
 "<html><head/><body><p>Ayarlanmışsa aynı yola aynı düğüm türünde gelen "
 "eklemeyle yapılan yerel bir ekleme muhtemel yerel değişikliği olan bir "
-"normal düğüm sonucu verir, ağaç çatışması değil.</p></body></html>"
+"normal düğüm sonucu verir, ağaç çakışması değil.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_add_as_modification)
 #: src/settings/subversion_settings.ui:200
@@ -2823,12 +2822,12 @@ msgstr "SVN Hatası"
 #: src/svnfrontend/commandexec.cpp:206
 #, kde-format
 msgid "Command \"%1\" not implemented or known"
-msgstr "\"%1\" komutu uygulanmamış veya bilinmiyor"
+msgstr "“%1” komutu uygulanmamış veya bilinmiyor"
 
 #: src/svnfrontend/commandexec.cpp:408
 #, kde-format
 msgid "\"GET\" requires output file"
-msgstr "\"GET\" çıktı dosyası gerektirir"
+msgstr "“GET” çıktı dosyası gerektirir"
 
 #: src/svnfrontend/commandexec.cpp:589
 #, kde-format
@@ -2892,7 +2891,7 @@ msgstr "Yeni Depo Oluştur"
 #: src/svnfrontend/createrepodlg.ui:22
 #, kde-format
 msgid "Disable fsync at commit (BDB only)"
-msgstr "İşlemede fsync'i kapat (yalnız BDB)"
+msgstr "İşlemede fsync’i kapat (yalnız BDB)"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: src/svnfrontend/createrepodlg.ui:32
@@ -3200,7 +3199,7 @@ msgstr "Farkları kullan"
 #: src/svnfrontend/dumprepo_dlg.ui:54
 #, kde-format
 msgid "-1 for START"
-msgstr "BAŞLANGIÇ için -1"
+msgstr "START için −1"
 
 #. i18n: ectx: property (text), widget (QLabel, m_lblEnd)
 #: src/svnfrontend/dumprepo_dlg.ui:67
@@ -3230,7 +3229,7 @@ msgstr "Şuraya dök:"
 #: src/svnfrontend/dumprepo_dlg.ui:136
 #, kde-format
 msgid "-1 for HEAD"
-msgstr "HEAD için -1"
+msgstr "HEAD için −1"
 
 #. i18n: ectx: property (text), widget (QLabel, m_lblStart)
 #: src/svnfrontend/dumprepo_dlg.ui:149
@@ -3271,8 +3270,7 @@ msgstr "Özellik Ekle"
 #: src/svnfrontend/editpropsdlg.cpp:44 src/svnfrontend/editpropsdlg.cpp:84
 #, kde-format
 msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
-msgstr ""
-"<b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b> değerlerinden biri."
+msgstr "<b>native</b>, <b>LF</b>, <b>CR</b>, <b>CRLF</b> değerlerinden biri."
 
 #: src/svnfrontend/editpropsdlg.cpp:46 src/svnfrontend/editpropsdlg.cpp:86
 #, kde-format
@@ -3314,7 +3312,7 @@ msgid ""
 "changes."
 msgstr ""
 "Bu dosya için kilitlemeyi zorlamak için bunu herhangi bir değere ayarlayın "
-"(örn. <b>'*'</b>).<br/>Dosya çıkış yapıldığında veya güncellendiğinde "
+"(örn. <b>*</b>).<br/>Dosya çıkış yapıldığında veya güncellendiğinde "
 "saltokunur olarak ayarlanarak kullanıcının dosya üstünde değişiklik yapmadan "
 "ve değişiklik işlemeden bir kilit alması gerektiğini gösterir."
 
@@ -3325,8 +3323,8 @@ msgid ""
 "how to serve it from Apache. A mimetype beginning with <b>'text/'</b> (or an "
 "absent mimetype) is treated as text. Anything else is treated as binary."
 msgstr ""
-"Dosyanın türü. Dosyanın birleştirilip birleştirilmeyeceğini ve Apache'den "
-"nasıl sunulacağını belirlemede kullanılır. <b>'text/'</b> ile başlayan bir "
+"Dosyanın türü. Dosyanın birleştirilip birleştirilmeyeceğini ve Apache’den "
+"nasıl sunulacağını belirlemede kullanılır. <b>text/</b> ile başlayan bir "
 "dosya türüne (veya boş) metin olarak yaklaşılır. Bunun dışındaki herşey "
 "ikiliktir."
 
@@ -3338,7 +3336,7 @@ msgid ""
 "><nobr><b>foo http://example.com/repos/projectA</b></nobr><br/><nobr><b>foo/"
 "bar -r 1234 http://example.com/repos/projectB</b></nobr>"
 msgstr ""
-"Her biri göreceli dizin yolu, isteğe bağlı revizyon bayrağı ve bir URL'den "
+"Her biri göreceli dizin yolu, isteğe bağlı revizyon bayrağı ve bir URL’den "
 "oluşan yen satırla ayrılmış modül belirtici listesi. Örneğin: <br/"
 "><nobr><b>foo http://example.com/repos/projectA</b></nobr><br/><nobr><b>foo/"
 "bar -r 1234 http://example.com/repos/projectB</b></nobr>"
@@ -3386,8 +3384,8 @@ msgid ""
 "<b>'false'</b>/<b>'no'</b>."
 msgstr ""
 "İşleme iletişim penceresinde sorun girilmediğinde uyarı gösterilsin "
-"istiyorsanız <b>'yes'</b> olarak ayarlayın. Olası değerler:<br/><b>'true'</"
-"b>/<b>'yes'</b> veya <b>'false'</b>/<b>'no'</b>."
+"istiyorsanız <b>yes</b> olarak ayarlayın. Olası değerler:<br/><b>true</b>/"
+"<b>yes</b> veya <b>false</b>/<b>no</b>."
 
 #: src/svnfrontend/editpropsdlg.cpp:120
 #, kde-format
@@ -3397,8 +3395,8 @@ msgid ""
 "b>."
 msgstr ""
 "İşleme iletişim penceresine bir sorun girilmediğinde uyarı gösterilmesini "
-"istiyorsanız <b>'yes'</b> olarak ayarlayın. Olası değerler:<br/><b>'true'</"
-"b>/<b>'yes'</b> veya <b>'false'</b>/<b>'no'</b>."
+"istiyorsanız <b>'yes'</b> olarak ayarlayın. Olası değerler:<br/><b>true</b>/"
+"<b>yes</b> veya <b>false</b>/<b>no</b>."
 
 #: src/svnfrontend/editpropsdlg.cpp:124
 #, kde-format
@@ -3408,8 +3406,8 @@ msgid ""
 "bugtracking ID is appended to the log message."
 msgstr ""
 "Hata izleme kimliğinin günlük iletisinin üstüne eklenmesini istiyorsanız "
-"<b>'false'</b> olarak ayarlayın. Öntanımlı değer hata izleme kimliğinin "
-"günlük iletisine ekleneceği anlamına gelen <b>'true'</b> değeridir."
+"<b>false</b> olarak ayarlayın. Öntanımlı değer hata izleme kimliğinin günlük "
+"iletisine ekleneceği anlamına gelen <b>true</b> değeridir."
 
 #: src/svnfrontend/editpropsdlg.cpp:129
 #, kde-format
@@ -3454,7 +3452,7 @@ msgstr "Özellik değeri:"
 #: src/svnfrontend/editpropsdlg.ui:69
 #, kde-format
 msgid "Click for short info about pre-defined property name"
-msgstr "Ön-tanımlı özellik ismiyle ilgili kısa bilgi için tıklayın"
+msgstr "Öntanımlı özellik adıyla ilgili kısa bilgi için tıklayın"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, CheckoutInfo)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:14
@@ -3640,7 +3638,7 @@ msgstr "Revizyon seç"
 #: src/svnfrontend/fronthelpers/revisionbutton.ui:23
 #, kde-format
 msgid "-1"
-msgstr "-1"
+msgstr "−1"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:144
 #, kde-format
@@ -3650,7 +3648,7 @@ msgid ""
 "Process stopped with message:\n"
 "%2"
 msgstr ""
-"\"%1\" süreci çalıştırılamadı.\n"
+"“%1” süreci çalıştırılamadı.\n"
 "\n"
 "Süreç şu iletiyle durdu:\n"
 "%2"
@@ -3663,7 +3661,7 @@ msgstr "Grafik düzen aracı çalıştırırken hata.\n"
 #: src/svnfrontend/graphtree/revgraphview.cpp:333
 #, kde-format
 msgid "Please check that 'dot' is installed (package GraphViz)."
-msgstr "Lütfen 'dot'un kurulup kurulmadığını denetleyin (GraphViz paketi)."
+msgstr "Lütfen “dot”un kurulup kurulmadığını denetleyin (GraphViz paketi)."
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:422
 #, kde-format
@@ -3744,7 +3742,7 @@ msgstr "Seçili ögeyle fark"
 #: src/svnfrontend/svnlogdlgimp.cpp:524
 #, kde-format
 msgid "Cat this version"
-msgstr "Bu sürümü birleştir"
+msgstr "Bu Sürümü cat Yap"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:842
 #, kde-format
@@ -3793,7 +3791,7 @@ msgstr "Günlükler"
 #: src/svnfrontend/svnactions.cpp:319
 #, kde-format
 msgid "Getting logs - hit Cancel for abort"
-msgstr "Günlükler alınıyor - vazgeçmek için İptal'e bas"
+msgstr "Günlükler alınıyor — vazgeçmek için İptal’e basın"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:106
 #, kde-format
@@ -4104,7 +4102,7 @@ msgid ""
 "Output the content of specified files or URLs with revision and author "
 "information in-line."
 msgstr ""
-"Belirtilen dosyaların veya URL'lerin içeriklerini revizyon ve yazar bilgisi "
+"Belirtilen dosyaların veya URL’lerin içeriklerini revizyon ve yazar bilgisi "
 "ile satır içi çıktıla."
 
 #: src/svnfrontend/maintreewidget.cpp:588
@@ -4115,23 +4113,23 @@ msgstr "Suçlama erimi"
 #: src/svnfrontend/maintreewidget.cpp:597
 #, kde-format
 msgid "Cat head"
-msgstr "Head'i Listele"
+msgstr "HEAD’i cat Yap"
 
 #: src/svnfrontend/maintreewidget.cpp:598
 #, kde-format
 msgid "Output the content of specified files or URLs."
-msgstr "Belirtilen dosyaların veya URL'lerin içeriğini çıktıla."
+msgstr "Belirtilen dosyaların veya URL’lerin içeriğini çıktılayın."
 
 #: src/svnfrontend/maintreewidget.cpp:601
 #, kde-format
 msgid "Cat revision..."
-msgstr "Revizyonu cat yap..."
+msgstr "Revizyonu cat Yap…"
 
 #: src/svnfrontend/maintreewidget.cpp:606
 #, kde-format
 msgid "Output the content of specified files or URLs at specific revision."
 msgstr ""
-"Belirtilen dosyaların veya URL'lerin içeriğini belirli revizyonda çıktıla."
+"Belirtilen bir revizyondaki dosyaların veya URL’lerin içeriğini çıktılayın."
 
 #: src/svnfrontend/maintreewidget.cpp:610
 #, kde-format
@@ -4171,17 +4169,17 @@ msgstr "Depo Değiştir"
 #: src/svnfrontend/maintreewidget.cpp:640
 #, kde-format
 msgid "Switch repository path of current working copy path (\"svn switch\")"
-msgstr "Geçerli çalışma kopyası yolunun depo yolunu değiştir (\"svn switch\")"
+msgstr "Geçerli çalışma kopyası yolunun depo yolunu değiştir (“svn switch”)"
 
 #: src/svnfrontend/maintreewidget.cpp:644
 #, kde-format
 msgid "Relocate current working copy URL"
-msgstr "Geçerli Çalışma Kopyası URL'sini Yeniden Konumlandır"
+msgstr "Geçerli Çalışma Kopyası URL’sini Yeniden Konumlandır"
 
 #: src/svnfrontend/maintreewidget.cpp:649
 #, kde-format
 msgid "Relocate URL of current working copy path to other URL"
-msgstr "Geçerli çalışma kopyası yolunu başka bir URL'ye konumlandır"
+msgstr "Geçerli çalışma kopyası yolunu başka bir URL’ye konumlandır"
 
 #: src/svnfrontend/maintreewidget.cpp:658
 #, kde-format
@@ -4226,7 +4224,7 @@ msgstr "Geçerliye Klasörler İçe Aktar"
 #: src/svnfrontend/maintreewidget.cpp:683
 #, kde-format
 msgid "Import folder content into current URL"
-msgstr "Geçerli URL'ye Klasör İçeriği İçe Aktar"
+msgstr "Geçerli URL’ye Klasör İçeriği İçe Aktar"
 
 #: src/svnfrontend/maintreewidget.cpp:688
 #, kde-format
@@ -4289,7 +4287,7 @@ msgstr "Dosyalar veya dizinler çözüldü olarak işaretleniyor"
 #: src/svnfrontend/maintreewidget.cpp:735
 #, kde-format
 msgid "Resolve conflicts"
-msgstr "Çatışmaları çöz"
+msgstr "Çakışmaları çöz"
 
 #: src/svnfrontend/maintreewidget.cpp:741
 #, kde-format
@@ -4306,7 +4304,7 @@ msgstr "Yok sayma kalıbı Ekle veya Kaldır"
 #: src/svnfrontend/maintreewidget.cpp:895
 #, kde-format
 msgid "Update to head"
-msgstr "Head'e Güncelle"
+msgstr "HEAD’e Güncelle"
 
 #: src/svnfrontend/maintreewidget.cpp:761
 #, kde-format
@@ -4317,7 +4315,7 @@ msgstr "Güncelle"
 #: src/svnfrontend/maintreewidget.cpp:763
 #, kde-format
 msgid "Update to revision..."
-msgstr "Revizyona Güncelle..."
+msgstr "Revizyona Güncelle…"
 
 #: src/svnfrontend/maintreewidget.cpp:769
 #: src/svnfrontend/maintreewidget.cpp:774
@@ -4339,7 +4337,7 @@ msgid ""
 "Diff working copy against BASE (last checked out version) - does not require "
 "access to repository"
 msgstr ""
-"Çalışma kopyası ile BASE (son çıkış yapılan sürüm) farkını al - depoya "
+"Çalışma kopyası ile BASE (son çıkış yapılan sürüm) farkını al — depoya "
 "erişim gerektirmez"
 
 #: src/svnfrontend/maintreewidget.cpp:792
@@ -4353,7 +4351,7 @@ msgid ""
 "Diff working copy against HEAD (last checked in version)- requires access to "
 "repository"
 msgstr ""
-"Çalışma kopyası ile HEAD (son denetlenen sürüm) farkını al - depoya erişim "
+"Çalışma kopyası ile HEAD (son denetlenen sürüm) farkını al — depoya erişim "
 "gerektirir"
 
 #: src/svnfrontend/maintreewidget.cpp:800
@@ -4397,7 +4395,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:1459
 #, kde-format
 msgid "Open With..."
-msgstr "Birlikte Aç..."
+msgstr "Birlikte Aç…"
 
 #: src/svnfrontend/maintreewidget.cpp:834
 #, kde-format
@@ -4505,7 +4503,7 @@ msgstr "Günlük önbelleğini güncellemeyi durdur"
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Pattern to Ignore for \"%1\""
-msgstr "\"%1\" Yok Sayma Kalıbını Düzenle"
+msgstr "“%1” Yok Sayma Kalıbını Düzenle"
 
 #: src/svnfrontend/maintreewidget.cpp:1556
 #: src/svnfrontend/maintreewidget.cpp:1599
@@ -4635,7 +4633,7 @@ msgstr "Yalnızca tek klasörde olanaklıdır"
 #: src/svnfrontend/maintreewidget.cpp:2415
 #, kde-format
 msgid "Sorry - internal error"
-msgstr "Üzgünüm - içsel hata"
+msgstr "Üzgünüm — içsel hata"
 
 #: src/svnfrontend/maintreewidget.cpp:2479
 #, kde-format
@@ -4734,7 +4732,7 @@ msgstr "Değiştirilmiş/sürümlendirilmemiş ögelerde silmeyi zorla"
 #: src/svnfrontend/merge_dlg.ui:126
 #, kde-format
 msgid "lump-merge all of source URL's unmerged changes"
-msgstr "Kaynak URL'nin tüm birleştirilmemiş değişikliklerini birleştir"
+msgstr "Kaynak URL’nin tüm birleştirilmemiş değişikliklerini birleştir"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_Reintegrate)
 #: src/svnfrontend/merge_dlg.ui:132
@@ -4780,7 +4778,7 @@ msgstr "Yalnızca kaydet"
 #: src/svnfrontend/merge_dlg.ui:165
 #, kde-format
 msgid "Use external merge not Subversion's merge"
-msgstr "Subversion'un değil harici birleştirmeyi kullan"
+msgstr "Subversion’un değil de dış bir birleştirmeyi kullan"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useExternMerge)
 #: src/svnfrontend/merge_dlg.ui:168
@@ -4859,7 +4857,7 @@ msgstr "Kilitleyen"
 #: src/svnfrontend/opencontextmenu.cpp:59
 #, kde-format
 msgid "Other..."
-msgstr "Diğer..."
+msgstr "Diğer…"
 
 #: src/svnfrontend/propertiesdlg.cpp:80
 #, kde-format
@@ -4940,7 +4938,7 @@ msgstr "Bilgi Notu Ekle"
 #: src/svnfrontend/svnactions.cpp:559
 #, kde-format
 msgid "Annotate lines - hit Cancel for abort"
-msgstr "Satırlara bilgi notu ekle - vazgeçmek için İptal'e bas"
+msgstr "Satırlara bilgi notu ekle — vazgeçmek için İptal’e basın"
 
 #: src/svnfrontend/svnactions.cpp:567
 #, kde-format
@@ -4956,7 +4954,7 @@ msgstr "İçerik Al"
 #: src/svnfrontend/svnactions.cpp:584
 #, kde-format
 msgid "Getting content - hit Cancel for abort"
-msgstr "İçerik alınıyor - vazgeçmek için İptal'e bas"
+msgstr "İçerik alınıyor — vazgeçmek için İptal’e basın"
 
 #: src/svnfrontend/svnactions.cpp:591
 #, kde-format
@@ -4993,7 +4991,7 @@ msgstr "Ayrıntılar"
 #: src/svnfrontend/svnactions.cpp:710
 #, kde-format
 msgid "Retrieving information - hit Cancel for abort"
-msgstr "Bilgi alınıyor - vazgeçmek için İptal'e bas"
+msgstr "Bilgi alınıyor — vazgeçmek için İptal’e basın"
 
 #: src/svnfrontend/svnactions.cpp:749
 #, kde-format
@@ -5003,7 +5001,7 @@ msgstr "URL"
 #: src/svnfrontend/svnactions.cpp:751
 #, kde-format
 msgid "Canonical repository URL"
-msgstr "Meşru depo URL'si"
+msgstr "Meşru depo URL’si"
 
 #: src/svnfrontend/svnactions.cpp:754
 #, kde-format
@@ -5098,7 +5096,7 @@ msgstr "Özellik dosya çıkarma"
 #: src/svnfrontend/svnactions.cpp:825
 #, kde-format
 msgid "Copy from URL"
-msgstr "URL'den kopyala"
+msgstr "URL’den kopyala"
 
 #: src/svnfrontend/svnactions.cpp:828 src/svnfrontend/svnactions.cpp:835
 #, kde-format
@@ -5135,7 +5133,7 @@ msgstr "Özellikler Uygulanıyor"
 #: src/svnfrontend/svnactions.cpp:925
 #, kde-format
 msgid "<center>Applying<br/>hit cancel for abort</center>"
-msgstr "<center>Uygulanıyor<br/>vazgeçmek için İptal'e bas</center>"
+msgstr "<center>Uygulanıyor<br/>Vazgeçmek için İptal’e basın</center>"
 
 #: src/svnfrontend/svnactions.cpp:961
 #, kde-format
@@ -5178,7 +5176,7 @@ msgstr "İşle"
 #: src/svnfrontend/svnactions.cpp:1111
 #, kde-format
 msgid "Commit - hit Cancel for abort"
-msgstr "İşle - vazgeçmek için İptal'e bas"
+msgstr "İşleniyor — vazgeçmek için İptal’e basın"
 
 #: src/svnfrontend/svnactions.cpp:1138
 #, kde-format
@@ -5189,7 +5187,7 @@ msgstr "İndiriliyor"
 #: src/svnfrontend/svnactions.cpp:1139
 #, kde-format
 msgid "Download - hit Cancel for abort"
-msgstr "İndiriliyor - vazgeçmek için İptal'e bas"
+msgstr "İndiriliyor — vazgeçmek için İptal’e basın"
 
 #: src/svnfrontend/svnactions.cpp:1165
 #, kde-format
@@ -5215,7 +5213,7 @@ msgstr "Karşılaştırılıyor"
 #: src/svnfrontend/svnactions.cpp:1339
 #, kde-format
 msgid "Diffing - hit Cancel for abort"
-msgstr "Karşılaştırılıyor - vazgeçmek için İptal'e bas"
+msgstr "Karşılaştırılıyor — vazgeçmek için İptal’e basın"
 
 #: src/svnfrontend/svnactions.cpp:1352 src/svnfrontend/svnactions.cpp:1411
 #, kde-format
@@ -5225,7 +5223,7 @@ msgstr "Gösterilecek fark yok"
 #: src/svnfrontend/svnactions.cpp:1402
 #, kde-format
 msgid "Diffing - hit cancel for abort"
-msgstr "Karşılaştırılıyor - vazgeçmek için İptal'e bas"
+msgstr "Karşılaştırılıyor — vazgeçmek için İptal’e basın"
 
 #: src/svnfrontend/svnactions.cpp:1458
 #, kde-format
@@ -5247,7 +5245,7 @@ msgstr "Güncelleme Yapılıyor"
 #: src/svnfrontend/svnactions.cpp:1519
 #, kde-format
 msgid "Making update - hit Cancel for abort"
-msgstr "Güncelleme yapılıyor - vazgeçmek için İptal'e bas"
+msgstr "Güncelleme yapılıyor — vazgeçmek için İptal’e basın"
 
 #: src/svnfrontend/svnactions.cpp:1604
 #, kde-format
@@ -5257,7 +5255,7 @@ msgstr "Hangi dizin ve dosyaları eklemeliyim?"
 #: src/svnfrontend/svnactions.cpp:1611
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is versioned - break.</center>"
-msgstr "<center><br/>%1<br/> girdisi sürümlendirilmiş - kes.</center>"
+msgstr "<center><br/>%1<br/> girdisi sürümlendirilmiş — kes.</center>"
 
 #: src/svnfrontend/svnactions.cpp:1638
 #, kde-format
@@ -5321,7 +5319,7 @@ msgstr "Çıkış yapılıyor"
 #: src/svnfrontend/svnactions.cpp:1828
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
-msgstr "<center><br/>%1<br/> girdisi sürümlendirilmemiş - kes.</center>"
+msgstr "<center><br/>%1<br/> girdisi sürümlendirilmemiş — kes.</center>"
 
 #: src/svnfrontend/svnactions.cpp:1860
 #, kde-format
@@ -5354,7 +5352,7 @@ msgstr "Depoyu Yeniden Konumlandır"
 #: src/svnfrontend/svnactions.cpp:1911
 #, kde-format
 msgid "Relocate repository to new URL"
-msgstr "Depoyu yeni URL'ye konumlandır"
+msgstr "Depoyu yeni URL’ye konumlandır"
 
 #: src/svnfrontend/svnactions.cpp:1934
 #, kde-format
@@ -5396,7 +5394,7 @@ msgstr "Çözüldü olarak işaretleniyor"
 #: src/svnfrontend/svnactions.cpp:2027
 #, kde-format
 msgid "Could not retrieve conflict information - giving up."
-msgstr "Çatışma bilgisi alınamadı - vaz geçiliyor."
+msgstr "Çakışma bilgisi alınamadı — vazgeçiliyor."
 
 #: src/svnfrontend/svnactions.cpp:2052
 #, kde-format
@@ -5578,7 +5576,7 @@ msgstr "Harici"
 #: src/svnfrontend/svnitem.cpp:443
 #, kde-format
 msgid "Conflict"
-msgstr "Çatışma"
+msgstr "Çakışma"
 
 #: src/svnfrontend/svnitem.cpp:445
 #, kde-format
@@ -5634,7 +5632,7 @@ msgstr "Önceki Girdiler"
 #: src/svnfrontend/svnlogdlg.ui:71
 #, kde-format
 msgid "Show from HEAD"
-msgstr "HEAD'den Göster"
+msgstr "HEAD’den Göster"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
 #: src/svnfrontend/svnlogdlg.ui:168

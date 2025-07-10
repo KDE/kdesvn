@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-23 00:45+0000\n"
-"PO-Revision-Date: 2025-06-19 13:02+0300\n"
+"PO-Revision-Date: 2025-07-07 18:55+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4557,12 +4557,12 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:746
 #, kde-format
 msgid "Name"
-msgstr ""
+msgstr "שם"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:319
 #, kde-format
 msgid "Status"
-msgstr ""
+msgstr "מצב"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:321
 #, kde-format
@@ -4583,12 +4583,12 @@ msgstr ""
 #: src/svnfrontend/models/svnitemmodel.cpp:327
 #, kde-format
 msgid "Locked by"
-msgstr ""
+msgstr "ננעל על ידי"
 
 #: src/svnfrontend/opencontextmenu.cpp:59
 #, kde-format
 msgid "Other..."
-msgstr ""
+msgstr "אחר…"
 
 #: src/svnfrontend/propertiesdlg.cpp:80
 #, kde-format
@@ -4603,46 +4603,46 @@ msgstr ""
 #: src/svnfrontend/propertiesdlg.cpp:89
 #, kde-format
 msgid "Missing SVN link"
-msgstr ""
+msgstr "חסר קישור SVN"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, PropertiesDlg)
 #: src/svnfrontend/propertiesdlg.ui:14
 #, kde-format
 msgid "View and modify properties"
-msgstr ""
+msgstr "הצגת ועריכת מאפיינים"
 
 #. i18n: ectx: property (text), widget (QPushButton, pbAdd)
 #: src/svnfrontend/propertiesdlg.ui:39
 #, kde-format
 msgid "Add Property"
-msgstr ""
+msgstr "הוספת מאפיין"
 
 #. i18n: ectx: property (text), widget (QPushButton, pbModify)
 #: src/svnfrontend/propertiesdlg.ui:46
 #, kde-format
 msgid "Modify Property"
-msgstr ""
+msgstr "עריכת מאפיין"
 
 #. i18n: ectx: property (text), widget (QPushButton, pbDelete)
 #: src/svnfrontend/propertiesdlg.ui:53
 #, kde-format
 msgid "Delete Property"
-msgstr ""
+msgstr "מחיקת מאפיין"
 
 #: src/svnfrontend/stopdlg.cpp:193
 #, kde-format
 msgid "%p% of %1"
-msgstr ""
+msgstr "%p% מתוך %1"
 
 #: src/svnfrontend/stopdlg.cpp:201
 #, kde-format
 msgid "%1 of %2"
-msgstr ""
+msgstr "%1 מתוך %2"
 
 #: src/svnfrontend/svnactions.cpp:187
 #, kde-format
 msgid "Finished"
-msgstr ""
+msgstr "הסתיים"
 
 #: src/svnfrontend/svnactions.cpp:357
 #, kde-format
@@ -4658,7 +4658,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "History of %1"
-msgstr ""
+msgstr "ההיסטוריה של %1"
 
 #: src/svnfrontend/svnactions.cpp:559
 #, kde-format
@@ -4837,7 +4837,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:829 src/svnfrontend/svnactions.cpp:836
 #, kde-format
 msgid "Owner"
-msgstr ""
+msgstr "בעלות"
 
 #: src/svnfrontend/svnactions.cpp:830 src/svnfrontend/svnactions.cpp:837
 #, kde-format
@@ -4859,7 +4859,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Applying Properties"
-msgstr ""
+msgstr "מאפיינים חלים"
 
 #: src/svnfrontend/svnactions.cpp:925
 #, kde-format
@@ -4869,7 +4869,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:961
 #, kde-format
 msgid "Could not change to folder %1\n"
-msgstr ""
+msgstr "לא ניתן לעבור לתיקייה %1\n"
 
 #: src/svnfrontend/svnactions.cpp:979
 #, kde-format
@@ -4880,7 +4880,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Status / List"
-msgstr ""
+msgstr "מצב / רשימה"
 
 #: src/svnfrontend/svnactions.cpp:1004 src/svnfrontend/svnactions.cpp:2464
 #, kde-format
@@ -4891,18 +4891,18 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:1072
 #, kde-format
 msgid "Add and Commit"
-msgstr ""
+msgstr "הוספה וקיבוע"
 
 #: src/svnfrontend/svnactions.cpp:1048
 #, kde-format
 msgid "Delete and Commit"
-msgstr ""
+msgstr "מחיקה וקיבוע"
 
 #: src/svnfrontend/svnactions.cpp:1111
 #, kde-format
 msgctxt "@title:window"
 msgid "Commit"
-msgstr ""
+msgstr "קיבוע"
 
 #: src/svnfrontend/svnactions.cpp:1111
 #, kde-format
@@ -4913,7 +4913,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Downloading"
-msgstr ""
+msgstr "הורדה"
 
 #: src/svnfrontend/svnactions.cpp:1139
 #, kde-format
@@ -4981,7 +4981,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:1604
 #, kde-format
 msgid "Which files or directories should I add?"
-msgstr ""
+msgstr "אילו קבצים או תיקיות יש להוסיף?"
 
 #: src/svnfrontend/svnactions.cpp:1611
 #, kde-format
@@ -4991,61 +4991,61 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:1638
 #, kde-format
 msgid "Delete from repository"
-msgstr ""
+msgstr "מחיקה ממאגר"
 
 #: src/svnfrontend/svnactions.cpp:1689
 #, kde-format
 msgctxt "@title:window"
 msgid "Export a Repository"
-msgstr ""
+msgstr "ייצוא מאגר"
 
 #: src/svnfrontend/svnactions.cpp:1689
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout a Repository"
-msgstr ""
+msgstr "שליפת מאגר"
 
 #: src/svnfrontend/svnactions.cpp:1707 src/svnfrontend/svnactions.cpp:1714
 #, kde-format
 msgid "Export repository"
-msgstr ""
+msgstr "ייצוא מאגר"
 
 #: src/svnfrontend/svnactions.cpp:1713
 #, kde-format
 msgid "Invalid local path given!"
-msgstr ""
+msgstr "סופק נתיב מקומי שגוי!"
 
 #: src/svnfrontend/svnactions.cpp:1733
 #, kde-format
 msgid "Exporting a file?"
-msgstr ""
+msgstr "לייצא קובץ?"
 
 #: src/svnfrontend/svnactions.cpp:1733
 #, kde-format
 msgid "Checking out a file?"
-msgstr ""
+msgstr "משכת קובץ?"
 
 #: src/svnfrontend/svnactions.cpp:1789
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
-msgstr ""
+msgstr "ייצוא"
 
 #: src/svnfrontend/svnactions.cpp:1789
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout"
-msgstr ""
+msgstr "משיכה"
 
 #: src/svnfrontend/svnactions.cpp:1790
 #, kde-format
 msgid "Exporting"
-msgstr ""
+msgstr "מתבצע ייצוא"
 
 #: src/svnfrontend/svnactions.cpp:1790
 #, kde-format
 msgid "Checking out"
-msgstr ""
+msgstr "מתבצעת משיכה"
 
 #: src/svnfrontend/svnactions.cpp:1828
 #, kde-format
@@ -5056,12 +5056,12 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Revert"
-msgstr ""
+msgstr "הסגה"
 
 #: src/svnfrontend/svnactions.cpp:1860
 #, kde-format
 msgid "Reverting items"
-msgstr ""
+msgstr "פריטים נסוגים"
 
 #: src/svnfrontend/svnactions.cpp:1889 src/svnfrontend/svnactions.cpp:1953
 #, kde-format

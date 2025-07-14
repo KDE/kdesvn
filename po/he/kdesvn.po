@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-23 00:45+0000\n"
-"PO-Revision-Date: 2025-07-07 18:55+0300\n"
+"PO-Revision-Date: 2025-07-11 16:57+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 25.04.2\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4812,12 +4812,12 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:815
 #, kde-format
 msgid "Property last changed"
-msgstr ""
+msgstr "שינוי אחרון של המאפיין"
 
 #: src/svnfrontend/svnactions.cpp:818
 #, kde-format
 msgid "New version of conflicted file"
-msgstr ""
+msgstr "גרסה חדשה של קובץ עם סתירה"
 
 #: src/svnfrontend/svnactions.cpp:821
 #, kde-format
@@ -4827,12 +4827,12 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:825
 #, kde-format
 msgid "Copy from URL"
-msgstr ""
+msgstr "העתקה מכתובת"
 
 #: src/svnfrontend/svnactions.cpp:828 src/svnfrontend/svnactions.cpp:835
 #, kde-format
 msgid "Lock token"
-msgstr ""
+msgstr "אסימון נעילה"
 
 #: src/svnfrontend/svnactions.cpp:829 src/svnfrontend/svnactions.cpp:836
 #, kde-format
@@ -4842,12 +4842,12 @@ msgstr "בעלות"
 #: src/svnfrontend/svnactions.cpp:830 src/svnfrontend/svnactions.cpp:837
 #, kde-format
 msgid "Locked on"
-msgstr ""
+msgstr "ננעל ב־"
 
 #: src/svnfrontend/svnactions.cpp:831 src/svnfrontend/svnactions.cpp:838
 #, kde-format
 msgid "Lock comment"
-msgstr ""
+msgstr "הערת נעילה"
 
 #: src/svnfrontend/svnactions.cpp:885
 #, kde-format
@@ -4874,7 +4874,7 @@ msgstr "לא ניתן לעבור לתיקייה %1\n"
 #: src/svnfrontend/svnactions.cpp:979
 #, kde-format
 msgid "Not commit because networking is disabled"
-msgstr ""
+msgstr "אין קיבוע כי התקשורת מושבתת"
 
 #: src/svnfrontend/svnactions.cpp:1003 src/svnfrontend/svnactions.cpp:2463
 #, kde-format
@@ -4885,7 +4885,7 @@ msgstr "מצב / רשימה"
 #: src/svnfrontend/svnactions.cpp:1004 src/svnfrontend/svnactions.cpp:2464
 #, kde-format
 msgid "Creating list / check status"
-msgstr ""
+msgstr "נוצרת רשימה / המצב נבדק"
 
 #: src/svnfrontend/svnactions.cpp:1043 src/svnfrontend/svnactions.cpp:1050
 #: src/svnfrontend/svnactions.cpp:1072
@@ -4907,7 +4907,7 @@ msgstr "קיבוע"
 #: src/svnfrontend/svnactions.cpp:1111
 #, kde-format
 msgid "Commit - hit Cancel for abort"
-msgstr ""
+msgstr "מתקבע - יש ללחוץ ביטול כדי להפסיק"
 
 #: src/svnfrontend/svnactions.cpp:1138
 #, kde-format
@@ -4918,22 +4918,22 @@ msgstr "הורדה"
 #: src/svnfrontend/svnactions.cpp:1139
 #, kde-format
 msgid "Download - hit Cancel for abort"
-msgstr ""
+msgstr "הורדה - יש ללחוץ ביטול כדי להפסיק"
 
 #: src/svnfrontend/svnactions.cpp:1165
 #, kde-format
 msgid "Can not do this diff because networking is disabled."
-msgstr ""
+msgstr "אי אפשר לבצע את ההבדלים האלה כי התקשורת מושבתת."
 
 #: src/svnfrontend/svnactions.cpp:1219
 #, kde-format
 msgid "Both entries seems to be the same, can not diff."
-msgstr ""
+msgstr "שתי הרשומות נראות זהות, אי אפשר למצוא הבדלים."
 
 #: src/svnfrontend/svnactions.cpp:1280
 #, kde-format
 msgid "Diff-process could not started, check command."
-msgstr ""
+msgstr "לא ניתן להפעיל את תהליך ההבדלים, נא לבדוק את הפקודה."
 
 #: src/svnfrontend/svnactions.cpp:1339 src/svnfrontend/svnactions.cpp:1401
 #, kde-format

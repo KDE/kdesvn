@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-23 00:45+0000\n"
-"PO-Revision-Date: 2025-07-17 21:59+0300\n"
+"PO-Revision-Date: 2025-07-24 11:31+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -4160,27 +4160,27 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:1714
 #, kde-format
 msgid "Checkout a repository"
-msgstr ""
+msgstr "שליפת מאגר"
 
 #: src/svnfrontend/maintreewidget.cpp:857
 #, kde-format
 msgid "Export a repository"
-msgstr ""
+msgstr "ייצוא מאגר"
 
 #: src/svnfrontend/maintreewidget.cpp:862
 #, kde-format
 msgid "Export"
-msgstr ""
+msgstr "ייצוא"
 
 #: src/svnfrontend/maintreewidget.cpp:864
 #, kde-format
 msgid "Refresh view"
-msgstr ""
+msgstr "ריענון תצוגה"
 
 #: src/svnfrontend/maintreewidget.cpp:869
 #, kde-format
 msgid "Refresh"
-msgstr ""
+msgstr "ריענון"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DispSpecDiff)
 #: src/svnfrontend/maintreewidget.cpp:872 src/svnfrontend/svnlogdlg.ui:211
@@ -4258,12 +4258,12 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:1567
 #, kde-format
 msgid "Steal lock?"
-msgstr ""
+msgstr "לחטוף נעילה?"
 
 #: src/svnfrontend/maintreewidget.cpp:1603
 #, kde-format
 msgid "Break lock or ignore missing locks?"
-msgstr ""
+msgstr "לשבור או להתעלם מהנעילות החסרות?"
 
 #: src/svnfrontend/maintreewidget.cpp:1604
 #, kde-format
@@ -4280,12 +4280,12 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Ignore"
-msgstr ""
+msgstr "התעלמות"
 
 #: src/svnfrontend/maintreewidget.cpp:1900
 #, kde-format
 msgid "Nothing selected for delete"
-msgstr ""
+msgstr "לא נבחר שום דבר למחיקה."
 
 #: src/svnfrontend/maintreewidget.cpp:2071
 #, kde-format
@@ -4301,7 +4301,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Merge"
-msgstr ""
+msgstr "מיזוג"
 
 #: src/svnfrontend/maintreewidget.cpp:2258
 #, kde-format
@@ -4318,7 +4318,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:1963
 #, kde-format
 msgid "Invalid url given!"
-msgstr ""
+msgstr "סופקה כתובת שגויה!"
 
 #: src/svnfrontend/maintreewidget.cpp:2278
 #, kde-format
@@ -4333,18 +4333,18 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:2315
 #, kde-format
 msgid "Import files from folder"
-msgstr ""
+msgstr "ייבוא קבצים מתיקייה"
 
 #: src/svnfrontend/maintreewidget.cpp:2317
 #, kde-format
 msgid "Import file"
-msgstr ""
+msgstr "ייבוא קובץ"
 
 #: src/svnfrontend/maintreewidget.cpp:2339
 #, kde-format
 msgctxt "@title:window"
 msgid "Import Log"
-msgstr ""
+msgstr "ייבוא יומן"
 
 #: src/svnfrontend/maintreewidget.cpp:2397
 #, kde-format
@@ -4361,17 +4361,17 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:2415
 #, kde-format
 msgid "Error"
-msgstr ""
+msgstr "שגיאה"
 
 #: src/svnfrontend/maintreewidget.cpp:2410
 #, kde-format
 msgid "Only on single folder possible"
-msgstr ""
+msgstr "אפשר רק לתיקייה אחת"
 
 #: src/svnfrontend/maintreewidget.cpp:2415
 #, kde-format
 msgid "Sorry - internal error"
-msgstr ""
+msgstr "שגיאה פנימית - סליחה"
 
 #: src/svnfrontend/maintreewidget.cpp:2479
 #, kde-format
@@ -4394,7 +4394,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:2488
 #, kde-format
 msgid "Navigation"
-msgstr ""
+msgstr "ניווט"
 
 #: src/svnfrontend/maintreewidget.cpp:2604
 #, kde-format
@@ -4404,7 +4404,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:2634
 #, kde-format
 msgid "Not yet implemented"
-msgstr ""
+msgstr "לא מומש עדיין"
 
 #: src/svnfrontend/maintreewidget.cpp:2634
 #, kde-format
@@ -4421,19 +4421,19 @@ msgstr ""
 #: src/svnfrontend/merge_dlg.ui:22
 #, kde-format
 msgid "Source 1:"
-msgstr ""
+msgstr "מקור 1:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_SrcTwoLabel)
 #: src/svnfrontend/merge_dlg.ui:38
 #, kde-format
 msgid "Source 2:"
-msgstr ""
+msgstr "מקור 2:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_OutLabel)
 #: src/svnfrontend/merge_dlg.ui:54
 #, kde-format
 msgid "Output to:"
-msgstr ""
+msgstr "פלט אל:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_MergeParameter)
 #: src/svnfrontend/merge_dlg.ui:72
@@ -4519,7 +4519,7 @@ msgstr ""
 #: src/svnfrontend/merge_dlg.ui:168
 #, kde-format
 msgid "Use external merge"
-msgstr ""
+msgstr "להשתמש במיזוג חיצוני"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_AllowMixedRev)
 #: src/svnfrontend/merge_dlg.ui:175
@@ -4546,7 +4546,7 @@ msgstr ""
 #: src/svnfrontend/models/logitemmodel.cpp:179
 #, kde-format
 msgid "Message"
-msgstr ""
+msgstr "הודעה"
 
 #: src/svnfrontend/models/logmodelhelper.cpp:43
 #, kde-format
@@ -4573,12 +4573,12 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:805
 #, kde-format
 msgid "Last author"
-msgstr ""
+msgstr "יוצר/ת אחרונים"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:325
 #, kde-format
 msgid "Last change date"
-msgstr ""
+msgstr "תאריך השינוי האחרון"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:327
 #, kde-format
@@ -4593,12 +4593,12 @@ msgstr "אחר…"
 #: src/svnfrontend/propertiesdlg.cpp:80
 #, kde-format
 msgid "Undelete property"
-msgstr ""
+msgstr "ביטול מחיקת מאפיין"
 
 #: src/svnfrontend/propertiesdlg.cpp:82
 #, kde-format
 msgid "Delete property"
-msgstr ""
+msgstr "מחיקת מאפיין"
 
 #: src/svnfrontend/propertiesdlg.cpp:89
 #, kde-format
@@ -4647,12 +4647,12 @@ msgstr "הסתיים"
 #: src/svnfrontend/svnactions.cpp:357
 #, kde-format
 msgid "Got no logs"
-msgstr ""
+msgstr "לא התקבלו יומנים"
 
 #: src/svnfrontend/svnactions.cpp:481
 #, kde-format
 msgid "Got no info."
-msgstr ""
+msgstr "לא התקבל מידע."
 
 #: src/svnfrontend/svnactions.cpp:518
 #, kde-format
@@ -4664,60 +4664,60 @@ msgstr "ההיסטוריה של %1"
 #, kde-format
 msgctxt "@title:window"
 msgid "Annotate"
-msgstr ""
+msgstr "פירוש"
 
 #: src/svnfrontend/svnactions.cpp:559
 #, kde-format
 msgid "Annotate lines - hit Cancel for abort"
-msgstr ""
+msgstr "פירוש שורות - אפשר ללחוץ על ביטול כדי להפסיק"
 
 #: src/svnfrontend/svnactions.cpp:567
 #, kde-format
 msgid "Got no annotate"
-msgstr ""
+msgstr "לא התקבל פירוש"
 
 #: src/svnfrontend/svnactions.cpp:584
 #, kde-format
 msgctxt "@title:window"
 msgid "Content Get"
-msgstr ""
+msgstr "משיכת תוכן"
 
 #: src/svnfrontend/svnactions.cpp:584
 #, kde-format
 msgid "Getting content - hit Cancel for abort"
-msgstr ""
+msgstr "התוכן מתקבל - אפשר ללחוץ על ביטול לכדי להפסיק"
 
 #: src/svnfrontend/svnactions.cpp:591
 #, kde-format
 msgid "Error getting content"
-msgstr ""
+msgstr "שגיאה בקבלת תוכן"
 
 #: src/svnfrontend/svnactions.cpp:604
 #, kde-format
 msgid "Error while open temporary file"
-msgstr ""
+msgstr "שגיאה במהלך פתיחת קובץ זמני"
 
 #: src/svnfrontend/svnactions.cpp:635
 #, kde-format
 msgctxt "@title:window"
 msgid "Content of %1"
-msgstr ""
+msgstr "התוכן של %1"
 
 #: src/svnfrontend/svnactions.cpp:645
 #, kde-format
 msgid "Got no content."
-msgstr ""
+msgstr "לא התקבל תוכן."
 
 #: src/svnfrontend/svnactions.cpp:670
 #, kde-format
 msgid "Enter folder name:"
-msgstr ""
+msgstr "נא למלא שם תיקייה:"
 
 #: src/svnfrontend/svnactions.cpp:709
 #, kde-format
 msgctxt "@title:window"
 msgid "Details"
-msgstr ""
+msgstr "פרטים"
 
 #: src/svnfrontend/svnactions.cpp:710
 #, kde-format
@@ -4727,7 +4727,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:749
 #, kde-format
 msgid "URL"
-msgstr ""
+msgstr "כתובת"
 
 #: src/svnfrontend/svnactions.cpp:751
 #, kde-format
@@ -4737,77 +4737,77 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:754
 #, kde-format
 msgid "Checksum"
-msgstr ""
+msgstr "סיכום ביקורת"
 
 #: src/svnfrontend/svnactions.cpp:757
 #, kde-format
 msgid "Type"
-msgstr ""
+msgstr "סוג"
 
 #: src/svnfrontend/svnactions.cpp:760
 #, kde-format
 msgid "Absent"
-msgstr ""
+msgstr "חסר"
 
 #: src/svnfrontend/svnactions.cpp:763
 #, kde-format
 msgid "File"
-msgstr ""
+msgstr "קובץ"
 
 #: src/svnfrontend/svnactions.cpp:766
 #, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "תיקייה"
 
 #: src/svnfrontend/svnactions.cpp:770 src/svnfrontend/svnactions.cpp:799
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "לא ידוע"
 
 #: src/svnfrontend/svnactions.cpp:775
 #, kde-format
 msgid "Size"
-msgstr ""
+msgstr "גודל"
 
 #: src/svnfrontend/svnactions.cpp:784
 #, kde-format
 msgid "Schedule"
-msgstr ""
+msgstr "תזמון"
 
 #: src/svnfrontend/svnactions.cpp:787
 #, kde-format
 msgid "Normal"
-msgstr ""
+msgstr "רגיל"
 
 #: src/svnfrontend/svnactions.cpp:790
 #, kde-format
 msgid "Addition"
-msgstr ""
+msgstr "תוספת"
 
 #: src/svnfrontend/svnactions.cpp:793
 #, kde-format
 msgid "Deletion"
-msgstr ""
+msgstr "מחיק"
 
 #: src/svnfrontend/svnactions.cpp:803
 #, kde-format
 msgid "UUID"
-msgstr ""
+msgstr "מזהה ייחודי"
 
 #: src/svnfrontend/svnactions.cpp:807
 #, kde-format
 msgid "Last committed"
-msgstr ""
+msgstr "קיבוע אחרון"
 
 #: src/svnfrontend/svnactions.cpp:809
 #, kde-format
 msgid "Last revision"
-msgstr ""
+msgstr "מהדורה אחרונה"
 
 #: src/svnfrontend/svnactions.cpp:811
 #, kde-format
 msgid "Content last changed"
-msgstr ""
+msgstr "שינוי תוכן אחרון"
 
 #: src/svnfrontend/svnactions.cpp:815
 #, kde-format

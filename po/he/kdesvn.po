@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-23 00:45+0000\n"
-"PO-Revision-Date: 2025-07-24 11:31+0300\n"
+"PO-Revision-Date: 2025-07-25 11:24+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -3302,7 +3302,7 @@ msgstr ""
 #: src/svnfrontend/propertiesdlg.cpp:111 src/svnfrontend/propertiesdlg.cpp:162
 #, kde-format
 msgid "Protected property"
-msgstr ""
+msgstr "מאפיין מוגן"
 
 #: src/svnfrontend/fronthelpers/propertylist.cpp:109
 #: src/svnfrontend/propertiesdlg.cpp:115 src/svnfrontend/propertiesdlg.cpp:166
@@ -3311,25 +3311,27 @@ msgid ""
 "A property with that name exists.\n"
 "Rejecting it."
 msgstr ""
+"כבר קיים מאפיין בשם הזה.\n"
+"הוא נדחה."
 
 #: src/svnfrontend/fronthelpers/propertylist.cpp:109
 #: src/svnfrontend/propertiesdlg.cpp:115 src/svnfrontend/propertiesdlg.cpp:166
 #, kde-format
 msgid "Double property"
-msgstr ""
+msgstr "מאפיין כפול"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, RangeInput)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:6
 #, kde-format
 msgid "Revisions"
-msgstr ""
+msgstr "מהדורות"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_startRevBox)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:12
 #: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:205
 #, kde-format
 msgid "Start with revision"
-msgstr ""
+msgstr "התחלה עם מהדורה"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, m_startWorkingButton)
 #. i18n: ectx: property (toolTip), widget (QRadioButton, m_stopWorkingButton)
@@ -3337,7 +3339,7 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/rangeinput.ui:140
 #, kde-format
 msgid "Select current working copy changes"
-msgstr ""
+msgstr "בחירת השינויים בעותק העבודה הנוכחי"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_startWorkingButton)
 #. i18n: ectx: property (text), widget (QRadioButton, m_stopWorkingButton)
@@ -3345,13 +3347,13 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/rangeinput.ui:143
 #, kde-format
 msgid "WORKING"
-msgstr ""
+msgstr "בעבודה"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_startNumberButton)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:56
 #, kde-format
 msgid "N&umber"
-msgstr ""
+msgstr "מ&ספר"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_startHeadButton)
 #. i18n: ectx: property (text), widget (QRadioButton, m_stopHeadButton)
@@ -3359,48 +3361,48 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/rangeinput.ui:120
 #, kde-format
 msgid "HEAD"
-msgstr ""
+msgstr "כותרת"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_startStartButton)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:73
 #, kde-format
 msgid "S&TART"
-msgstr ""
+msgstr "הת&חלה"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_stopRevBox)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:85
 #, kde-format
 msgid "Stop with revision"
-msgstr ""
+msgstr "עצירה עם מהדורה"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_stopNumberButton)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:93
 #, kde-format
 msgid "Number"
-msgstr ""
+msgstr "מספר"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_stopStartButton)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:113
 #, kde-format
 msgid "START"
-msgstr ""
+msgstr "התחלה"
 
 #: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:58
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Revisions"
-msgstr ""
+msgstr "בחירת מהדורות"
 
 #: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:201
 #, kde-format
 msgid "Select revision"
-msgstr ""
+msgstr "בחירת מהדורה"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_RevisionButton)
 #: src/svnfrontend/fronthelpers/revisionbutton.ui:23
 #, kde-format
 msgid "-1"
-msgstr ""
+msgstr "‎-1"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:144
 #, kde-format
@@ -3410,31 +3412,35 @@ msgid ""
 "Process stopped with message:\n"
 "%2"
 msgstr ""
+"לא ניתן להריץ את התהליך „%1”.\n"
+"\n"
+"התהליך נעצר עם ההודעה:\n"
+"%2"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:332
 #, kde-format
 msgid "Error running the graph layouting tool.\n"
-msgstr ""
+msgstr "שגיאה בהרצת כלי עימוד התרשימים.\n"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:333
 #, kde-format
 msgid "Please check that 'dot' is installed (package GraphViz)."
-msgstr ""
+msgstr "נא לבדוק ש־‚dot’ מותקנת (חבילת GraphViz)."
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:422
 #, kde-format
 msgid "Deleted at revision %1"
-msgstr ""
+msgstr "נמחק במהדורה %1"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:425
 #, kde-format
 msgid "Added at revision %1 as %2"
-msgstr ""
+msgstr "נוסף במהדורה %1 בתור %2"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:429
 #, kde-format
 msgid "Copied to %1 at revision %2"
-msgstr ""
+msgstr "הועתק אל %1 במהדורה %2"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:432
 #, kde-format
@@ -3444,57 +3450,57 @@ msgstr ""
 #: src/svnfrontend/graphtree/revgraphview.cpp:435
 #, kde-format
 msgid "Modified at revision %1"
-msgstr ""
+msgstr "השתנה במהדורה %1"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:438
 #, kde-format
 msgid "Replaced at revision %1"
-msgstr ""
+msgstr "הוחלף במהדורה %1"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:441
 #, kde-format
 msgid "Revision %1"
-msgstr ""
+msgstr "מהדורה %1"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:461
 #, kde-format
 msgid "Could not open temporary file %1 for writing."
-msgstr ""
+msgstr "לא ניתן לכתוב את הקובץ הזמני %1 לכתיבה."
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:554
 #, kde-format
 msgid "<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>"
-msgstr ""
+msgstr "<br>מהודרה: %1<br>יוצר/ת: %2<br>תאריך: %3<br>יומן: %4</html>"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:557
 #, kde-format
 msgid "<b>Revision</b>%1%2%3"
-msgstr ""
+msgstr "<b>מהדורה</b>%1%2%3"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:557
 #, kde-format
 msgid "<b>Author</b>%1%2%3"
-msgstr ""
+msgstr "<b>יוצר/ת</b>%1%2%3"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:558
 #, kde-format
 msgid "<b>Date</b>%1%2%3"
-msgstr ""
+msgstr "<b>תאריך</b>%1%2%3"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:558
 #, kde-format
 msgid "<b>Log</b>%1%2%3"
-msgstr ""
+msgstr "<b>יומן</b>%1%2%3"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:833
 #, kde-format
 msgid "Diff to previous"
-msgstr ""
+msgstr "תיעוד הבדלים מול הקודם"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:836
 #, kde-format
 msgid "Diff to selected item"
-msgstr ""
+msgstr "תיעוד הבדלים מול הפריט הנבחר"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:839
 #: src/svnfrontend/svnlogdlgimp.cpp:524
@@ -3505,51 +3511,51 @@ msgstr ""
 #: src/svnfrontend/graphtree/revgraphview.cpp:842
 #, kde-format
 msgid "Unselect item"
-msgstr ""
+msgstr "ביטול בחירת פריט"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:844
 #, kde-format
 msgid "Select item"
-msgstr ""
+msgstr "בחירת פריט"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:847
 #, kde-format
 msgid "Display details"
-msgstr ""
+msgstr "הצגת פרטים"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:850
 #, kde-format
 msgid "Rotate counter-clockwise"
-msgstr ""
+msgstr "סיבוב נגד כיוון השעון"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:851
 #, kde-format
 msgid "Rotate clockwise"
-msgstr ""
+msgstr "סיבוב עם כיוון השעון"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:857
 #: src/svnfrontend/graphtree/revgraphview.cpp:875
 #, kde-format
 msgid "Save tree as PNG"
-msgstr ""
+msgstr "שמירת עצים כ־PNG"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:875
 #, kde-format
 msgid "Image (*.png)"
-msgstr ""
+msgstr "תמונה (‎*.png)"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:95
 #: src/svnfrontend/svnactions.cpp:318
 #, kde-format
 msgctxt "@title:window"
 msgid "Logs"
-msgstr ""
+msgstr "יומנים"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:95
 #: src/svnfrontend/svnactions.cpp:319
 #, kde-format
 msgid "Getting logs - hit Cancel for abort"
-msgstr ""
+msgstr "היומנים מתקבלים - לחיצה על ביטול תפסיק"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:106
 #, kde-format
@@ -4669,7 +4675,7 @@ msgstr "פירוש"
 #: src/svnfrontend/svnactions.cpp:559
 #, kde-format
 msgid "Annotate lines - hit Cancel for abort"
-msgstr "פירוש שורות - אפשר ללחוץ על ביטול כדי להפסיק"
+msgstr "פירוש שורות - לחיצה על ביטול תפסיק"
 
 #: src/svnfrontend/svnactions.cpp:567
 #, kde-format
@@ -4685,7 +4691,7 @@ msgstr "משיכת תוכן"
 #: src/svnfrontend/svnactions.cpp:584
 #, kde-format
 msgid "Getting content - hit Cancel for abort"
-msgstr "התוכן מתקבל - אפשר ללחוץ על ביטול לכדי להפסיק"
+msgstr "התוכן מתקבל - לחיצה על ביטול תפסיק"
 
 #: src/svnfrontend/svnactions.cpp:591
 #, kde-format
@@ -4722,7 +4728,7 @@ msgstr "פרטים"
 #: src/svnfrontend/svnactions.cpp:710
 #, kde-format
 msgid "Retrieving information - hit Cancel for abort"
-msgstr ""
+msgstr "מתקבל מידע - לחיצה על ביטול תפסיק"
 
 #: src/svnfrontend/svnactions.cpp:749
 #, kde-format
@@ -4864,7 +4870,7 @@ msgstr "מאפיינים חלים"
 #: src/svnfrontend/svnactions.cpp:925
 #, kde-format
 msgid "<center>Applying<br/>hit cancel for abort</center>"
-msgstr ""
+msgstr "<center>מוחל<br/>לחיצה על ביטול תפסיק</center>"
 
 #: src/svnfrontend/svnactions.cpp:961
 #, kde-format
@@ -4907,7 +4913,7 @@ msgstr "קיבוע"
 #: src/svnfrontend/svnactions.cpp:1111
 #, kde-format
 msgid "Commit - hit Cancel for abort"
-msgstr "מתקבע - יש ללחוץ ביטול כדי להפסיק"
+msgstr "מתקבע - לחיצה על ביטול תפסיק"
 
 #: src/svnfrontend/svnactions.cpp:1138
 #, kde-format
@@ -4918,7 +4924,7 @@ msgstr "הורדה"
 #: src/svnfrontend/svnactions.cpp:1139
 #, kde-format
 msgid "Download - hit Cancel for abort"
-msgstr "הורדה - יש ללחוץ ביטול כדי להפסיק"
+msgstr "הורדה - לחיצה על ביטול תפסיק"
 
 #: src/svnfrontend/svnactions.cpp:1165
 #, kde-format
@@ -4944,7 +4950,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:1339
 #, kde-format
 msgid "Diffing - hit Cancel for abort"
-msgstr ""
+msgstr "ההבדלים מתועדים - לחיצה על ביטול תפסיק"
 
 #: src/svnfrontend/svnactions.cpp:1352 src/svnfrontend/svnactions.cpp:1411
 #, kde-format
@@ -4954,7 +4960,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:1402
 #, kde-format
 msgid "Diffing - hit cancel for abort"
-msgstr ""
+msgstr "ההבדלים מתועדים - לחיצה על ביטול תפסיק"
 
 #: src/svnfrontend/svnactions.cpp:1458
 #, kde-format
@@ -4976,7 +4982,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:1519
 #, kde-format
 msgid "Making update - hit Cancel for abort"
-msgstr "מתבצע עדכון - יש ללחוץ על „ביטול” כדי לבטל לגמרי"
+msgstr "מתבצע עדכון - לחיצה על ביטול תפסיק"
 
 #: src/svnfrontend/svnactions.cpp:1604
 #, kde-format

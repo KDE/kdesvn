@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-23 00:45+0000\n"
-"PO-Revision-Date: 2025-08-06 15:07+0300\n"
+"PO-Revision-Date: 2025-08-14 11:28+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -2626,13 +2626,13 @@ msgstr ""
 #: src/svnfrontend/ccontextlistener.cpp:371
 #, kde-format
 msgid "Save password"
-msgstr ""
+msgstr "שמירת הסיסמה"
 
 #: src/svnfrontend/ccontextlistener.cpp:372
 #, kde-format
 msgctxt "@action:button"
 msgid "Store in Plain Text"
-msgstr ""
+msgstr "אחסון בטקסט פשוט"
 
 #: src/svnfrontend/commandexec.cpp:206 src/svnfrontend/commandexec.cpp:321
 #: src/svnfrontend/graphtree/revgraphview.cpp:992
@@ -2641,17 +2641,17 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:2604
 #, kde-format
 msgid "SVN Error"
-msgstr ""
+msgstr "שגיאת SVN"
 
 #: src/svnfrontend/commandexec.cpp:206
 #, kde-format
 msgid "Command \"%1\" not implemented or known"
-msgstr ""
+msgstr "הפקודה „%1” לא ממומשת או שאינה ידועה"
 
 #: src/svnfrontend/commandexec.cpp:408
 #, kde-format
 msgid "\"GET\" requires output file"
-msgstr ""
+msgstr "„GET” דורש קובץ פלט"
 
 #: src/svnfrontend/commandexec.cpp:589
 #, kde-format
@@ -2667,13 +2667,13 @@ msgstr ""
 #: src/svnfrontend/copymoveview.ui:14
 #, kde-format
 msgid "Copy / Move"
-msgstr ""
+msgstr "העתקה / העברה"
 
 #. i18n: ectx: property (text), widget (QLabel, m_HeadOneLabel)
 #: src/svnfrontend/copymoveview.ui:20
 #, kde-format
 msgid "Rename"
-msgstr ""
+msgstr "שינוי שם"
 
 #. i18n: ectx: property (text), widget (KSqueezedTextLabel, m_OldNameLabel)
 #. i18n: ectx: property (text), widget (KSqueezedTextLabel, m_PrefixLabel)
@@ -2691,25 +2691,25 @@ msgstr ""
 #: src/svnfrontend/copymoveview_impl.cpp:46
 #, kde-format
 msgid "Rename/move"
-msgstr ""
+msgstr "שינוי שם/העברה"
 
 #: src/svnfrontend/copymoveview_impl.cpp:70
 #, kde-format
 msgctxt "@title:window"
 msgid "Move/Rename File/Directory"
-msgstr ""
+msgstr "העברה/שינוי שם קובץ/תיקייה"
 
 #: src/svnfrontend/copymoveview_impl.cpp:70
 #, kde-format
 msgctxt "@title:window"
 msgid "Copy File/Directory"
-msgstr ""
+msgstr "העתקת קובץ/תיקייה"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, CreateRepoDlg)
 #: src/svnfrontend/createrepodlg.ui:14
 #, kde-format
 msgid "Create new repository"
-msgstr ""
+msgstr "יצירת מאגר חדש"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_DisableFsync)
 #: src/svnfrontend/createrepodlg.ui:22
@@ -2721,37 +2721,37 @@ msgstr ""
 #: src/svnfrontend/createrepodlg.ui:32
 #, kde-format
 msgid "Path to repository:"
-msgstr ""
+msgstr "נתיב למאגר:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_FilesystemSelector)
 #: src/svnfrontend/createrepodlg.ui:45
 #, kde-format
 msgid "Select type of storage"
-msgstr ""
+msgstr "נא לבחור את סוג האחסון"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, m_FilesystemSelector)
 #: src/svnfrontend/createrepodlg.ui:48
 #, kde-format
 msgid "Select the storage type of repository (FSFS or Berkely DB)"
-msgstr ""
+msgstr "נא לבחור את סוג אחסון המאגר (FSFS או Berkley DB)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
 #: src/svnfrontend/createrepodlg.ui:52
 #, kde-format
 msgid "FSFS"
-msgstr ""
+msgstr "FSFS"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
 #: src/svnfrontend/createrepodlg.ui:57
 #, kde-format
 msgid "BDB"
-msgstr ""
+msgstr "BDB"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_CreateMainDirs)
 #: src/svnfrontend/createrepodlg.ui:65
 #, kde-format
 msgid "Create trunk, tags and branches folders"
-msgstr ""
+msgstr "יצירת התיקיות trunk,‏ tags ו־branches"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_CreateMainDirs)
 #: src/svnfrontend/createrepodlg.ui:68
@@ -2765,7 +2765,7 @@ msgstr ""
 #: src/svnfrontend/createrepodlg.ui:71
 #, kde-format
 msgid "Create main folders"
-msgstr ""
+msgstr "יצירת תיקיות ראשיות"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn16compat)
 #: src/svnfrontend/createrepodlg.ui:87
@@ -2785,19 +2785,19 @@ msgstr ""
 #: src/svnfrontend/createrepodlg.ui:93
 #, kde-format
 msgid "Compatible to Subversion prior 1.6"
-msgstr ""
+msgstr "תואם ל־Subversion טרום 1.6"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_LogKeep)
 #: src/svnfrontend/createrepodlg.ui:113
 #, kde-format
 msgid "Disable automatic log file removal (BDB only)"
-msgstr ""
+msgstr "השבתת הסרת יומנים אוטומטית (BDB בלבד)"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: src/svnfrontend/createrepodlg.ui:123
 #, kde-format
 msgid "Type of repository:"
-msgstr ""
+msgstr "סוג המאגר:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn15compat)
 #: src/svnfrontend/createrepodlg.ui:139
@@ -4280,7 +4280,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Break Lock"
-msgstr ""
+msgstr "שבירת הנעילה"
 
 #: src/svnfrontend/maintreewidget.cpp:1606
 #, kde-format
@@ -4312,13 +4312,13 @@ msgstr "מיזוג"
 #: src/svnfrontend/maintreewidget.cpp:2258
 #, kde-format
 msgid "Error getting entry to relocate"
-msgstr ""
+msgstr "שגיאה במשיכת הרשומה להצבה מחדש"
 
 #: src/svnfrontend/maintreewidget.cpp:2264
 #, kde-format
 msgctxt "@title:window"
 msgid "Relocate Path %1"
-msgstr ""
+msgstr "הצבה מחדש של הנתיב %1"
 
 #: src/svnfrontend/maintreewidget.cpp:2278 src/svnfrontend/svnactions.cpp:1707
 #: src/svnfrontend/svnactions.cpp:1963
@@ -4329,12 +4329,12 @@ msgstr "סופקה כתובת שגויה!"
 #: src/svnfrontend/maintreewidget.cpp:2278
 #, kde-format
 msgid "Relocate path %1"
-msgstr ""
+msgstr "הצבה מחדש של הנתיב %1"
 
 #: src/svnfrontend/maintreewidget.cpp:2301
 #, kde-format
 msgid "Cannot import into multiple targets"
-msgstr ""
+msgstr "לא ניתן לייבא למגוון יעדים"
 
 #: src/svnfrontend/maintreewidget.cpp:2315
 #, kde-format
@@ -4355,12 +4355,12 @@ msgstr "ייבוא יומן"
 #: src/svnfrontend/maintreewidget.cpp:2397
 #, kde-format
 msgid "Could not retrieve repository of working copy."
-msgstr ""
+msgstr "לא ניתן למשוך את המאגר של העותק בעבודה."
 
 #: src/svnfrontend/maintreewidget.cpp:2406
 #, kde-format
 msgid "Only in working copy possible."
-msgstr ""
+msgstr "אפשרי רק בעותק העבודה."
 
 #: src/svnfrontend/maintreewidget.cpp:2406
 #: src/svnfrontend/maintreewidget.cpp:2410
@@ -4382,7 +4382,7 @@ msgstr "שגיאה פנימית - סליחה"
 #: src/svnfrontend/maintreewidget.cpp:2479
 #, kde-format
 msgid "Hold Ctrl key while click on selected item for unselect"
-msgstr ""
+msgstr "יש להחזיק Ctrl תוך כדי לחיצה על פריט נבחר לביטול בחירה"
 
 #. i18n: ectx: property (toolTip), widget (QTreeView, m_LogTreeView)
 #. i18n: ectx: property (toolTip), widget (QTreeWidget, m_ChangedList)
@@ -4390,12 +4390,12 @@ msgstr ""
 #: src/svnfrontend/svnlogdlg.ui:148
 #, kde-format
 msgid "See context menu for more actions"
-msgstr ""
+msgstr "יש לעיין בתפריט ההקשר לפעולות נוספות"
 
 #: src/svnfrontend/maintreewidget.cpp:2485
 #, kde-format
 msgid "Click for navigate"
-msgstr ""
+msgstr "לחיצה לניווט"
 
 #: src/svnfrontend/maintreewidget.cpp:2488
 #, kde-format
@@ -4463,7 +4463,7 @@ msgstr ""
 #: src/svnfrontend/merge_dlg.ui:106
 #, kde-format
 msgid "Ignore ancestry"
-msgstr ""
+msgstr "התעלמות משושלת"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_ForceCheck)
 #: src/svnfrontend/merge_dlg.ui:113
@@ -4481,25 +4481,25 @@ msgstr ""
 #: src/svnfrontend/merge_dlg.ui:132
 #, kde-format
 msgid "Reintegrate merge"
-msgstr ""
+msgstr "שילוב מיזוג מחדש"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_DryCheck)
 #: src/svnfrontend/merge_dlg.ui:139
 #, kde-format
 msgid "Just dry run without modifications"
-msgstr ""
+msgstr "פשוט הרצה על יבש בלי שינויים"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_DryCheck)
 #: src/svnfrontend/merge_dlg.ui:142
 #, kde-format
 msgid "Dry run"
-msgstr ""
+msgstr "הרצה על יבש"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_RecordOnly)
 #: src/svnfrontend/merge_dlg.ui:152
 #, kde-format
 msgid "Only write mergeinfo"
-msgstr ""
+msgstr "רק לכתוב את mergeinfo (פרטי מיזוג)"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_RecordOnly)
 #: src/svnfrontend/merge_dlg.ui:155
@@ -4508,18 +4508,20 @@ msgid ""
 "The merge is not actually performed, but the mergeinfo for the revisions "
 "which would have been merged is recorded in the working copy"
 msgstr ""
+"המיזוג לא מבוצע בפועל, אבל ה־mergeinfo של המהדורות שאמור היה להיות ממוזג "
+"מתועד בעותק העבודה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_RecordOnly)
 #: src/svnfrontend/merge_dlg.ui:158
 #, kde-format
 msgid "Record only"
-msgstr ""
+msgstr "לתעד בלבד"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_useExternMerge)
 #: src/svnfrontend/merge_dlg.ui:165
 #, kde-format
 msgid "Use external merge not Subversion's merge"
-msgstr ""
+msgstr "להשתמש במיזוג חיצוני ולא בזה של Subversion"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useExternMerge)
 #: src/svnfrontend/merge_dlg.ui:168
@@ -4534,6 +4536,8 @@ msgid ""
 "If checked, allow merge into mixed revision working copy, otherwise raises "
 "error in that case"
 msgstr ""
+"אם האפשרות מסומנת, לאפשר מיזוג לתוך המהדורה של העותק הפעיל, אחרת תקפוץ שגיאה "
+"במקרה שכזה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_AllowMixedRev)
 #: src/svnfrontend/merge_dlg.ui:179

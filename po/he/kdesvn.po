@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-23 00:45+0000\n"
-"PO-Revision-Date: 2025-08-14 11:28+0300\n"
+"PO-Revision-Date: 2025-08-15 16:27+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -3958,7 +3958,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:671
 #, kde-format
 msgid "Cleanup"
-msgstr ""
+msgstr "ניקוי"
 
 #: src/svnfrontend/maintreewidget.cpp:676
 #, kde-format
@@ -3970,17 +3970,17 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:678
 #, kde-format
 msgid "Import folders into current"
-msgstr ""
+msgstr "ייבוא תייקות לתוך הנוכחית"
 
 #: src/svnfrontend/maintreewidget.cpp:683
 #, kde-format
 msgid "Import folder content into current URL"
-msgstr ""
+msgstr "ייבוא תוכן התיקייה לכתובת הנוכחית"
 
 #: src/svnfrontend/maintreewidget.cpp:688
 #, kde-format
 msgid "Add selected files/dirs"
-msgstr ""
+msgstr "הוספת הקבצים/התיקיות הנבחרים"
 
 #: src/svnfrontend/maintreewidget.cpp:693
 #, kde-format
@@ -4060,19 +4060,19 @@ msgstr ""
 #, kde-format
 msgctxt "Menu item"
 msgid "Update"
-msgstr ""
+msgstr "עדכון"
 
 #: src/svnfrontend/maintreewidget.cpp:763
 #, kde-format
 msgid "Update to revision..."
-msgstr ""
+msgstr "עדכון למהדורה…"
 
 #: src/svnfrontend/maintreewidget.cpp:769
 #: src/svnfrontend/maintreewidget.cpp:774
 #: src/svnfrontend/maintreewidget.cpp:889 src/svnfrontend/svnactions.cpp:1045
 #, kde-format
 msgid "Commit"
-msgstr ""
+msgstr "קיבוע"
 
 #: src/svnfrontend/maintreewidget.cpp:777
 #: src/svnfrontend/maintreewidget.cpp:784
@@ -4091,7 +4091,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:792
 #, kde-format
 msgid "Diff against HEAD"
-msgstr ""
+msgstr "הבדל מול הכותרת (HEAD)"
 
 #: src/svnfrontend/maintreewidget.cpp:797
 #, kde-format
@@ -4104,23 +4104,23 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:807
 #, kde-format
 msgid "Diff items"
-msgstr ""
+msgstr "הבדל בין פריטים"
 
 #: src/svnfrontend/maintreewidget.cpp:805
 #: src/svnfrontend/maintreewidget.cpp:812
 #, kde-format
 msgid "Diff two items"
-msgstr ""
+msgstr "הבדל בין שני פריטים"
 
 #: src/svnfrontend/maintreewidget.cpp:815
 #, kde-format
 msgid "Merge two revisions"
-msgstr ""
+msgstr "מיזוג שתי מהדורות"
 
 #: src/svnfrontend/maintreewidget.cpp:820
 #, kde-format
 msgid "Merge"
-msgstr ""
+msgstr "מיזוג"
 
 #: src/svnfrontend/maintreewidget.cpp:821
 #, kde-format
@@ -4139,28 +4139,28 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:1459
 #, kde-format
 msgid "Open With..."
-msgstr ""
+msgstr "פתיחה עם…"
 
 #: src/svnfrontend/maintreewidget.cpp:834
 #, kde-format
 msgid "Checkout current repository path"
-msgstr ""
+msgstr "משיכת נתיב המאגר הנוכחי"
 
 #: src/svnfrontend/maintreewidget.cpp:839
 #: src/svnfrontend/maintreewidget.cpp:855
 #, kde-format
 msgid "Checkout"
-msgstr ""
+msgstr "משיכה"
 
 #: src/svnfrontend/maintreewidget.cpp:841
 #, kde-format
 msgid "Export current repository path"
-msgstr ""
+msgstr "ייצוא נתיב המאגר הנוכחי"
 
 #: src/svnfrontend/maintreewidget.cpp:846
 #, kde-format
 msgid "Select browse revision"
-msgstr ""
+msgstr "בחירת מהדורה לעיון"
 
 #: src/svnfrontend/maintreewidget.cpp:850 src/svnfrontend/svnactions.cpp:1707
 #: src/svnfrontend/svnactions.cpp:1714
@@ -4192,27 +4192,27 @@ msgstr "ריענון"
 #: src/svnfrontend/maintreewidget.cpp:872 src/svnfrontend/svnlogdlg.ui:211
 #, kde-format
 msgid "Diff revisions"
-msgstr ""
+msgstr "הבדל בין מהדורות"
 
 #: src/svnfrontend/maintreewidget.cpp:879
 #, kde-format
 msgid "Unfold File Tree"
-msgstr ""
+msgstr "פריסת עץ התיקיות"
 
 #: src/svnfrontend/maintreewidget.cpp:880
 #, kde-format
 msgid "Opens all branches of the file tree"
-msgstr ""
+msgstr "פתיחת כל הענפים של עץ הקבצים"
 
 #: src/svnfrontend/maintreewidget.cpp:881
 #, kde-format
 msgid "Fold File Tree"
-msgstr ""
+msgstr "קיפול עץ התיקיות"
 
 #: src/svnfrontend/maintreewidget.cpp:882
 #, kde-format
 msgid "Closes all branches of the file tree"
-msgstr ""
+msgstr "סגירת כל הענפים של עץ הקבצים"
 
 #: src/svnfrontend/maintreewidget.cpp:885
 #: src/svnfrontend/maintreewidget.cpp:1079
@@ -4220,22 +4220,22 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:2054
 #, kde-format
 msgid "Update log cache"
-msgstr ""
+msgstr "עדכון מטמון היומן"
 
 #: src/svnfrontend/maintreewidget.cpp:886
 #, kde-format
 msgid "Update the log cache for current repository"
-msgstr ""
+msgstr "עדכון מטמון היומן למאגר הנוכחי"
 
 #: src/svnfrontend/maintreewidget.cpp:900
 #, kde-format
 msgid "Set property recursive"
-msgstr ""
+msgstr "הגדרת מאפיין בנסיגה"
 
 #: src/svnfrontend/maintreewidget.cpp:903
 #, kde-format
 msgid "Settings for current repository"
-msgstr ""
+msgstr "הגדרות למאגר הנוכחי"
 
 #: src/svnfrontend/maintreewidget.cpp:1081
 #: src/svnfrontend/maintreewidget.cpp:2049
@@ -4247,19 +4247,19 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Pattern to Ignore for \"%1\""
-msgstr ""
+msgstr "עריכת תבנית להתעלמות עבור „%1”"
 
 #: src/svnfrontend/maintreewidget.cpp:1556
 #: src/svnfrontend/maintreewidget.cpp:1599
 #, kde-format
 msgid "Nothing selected for unlock"
-msgstr ""
+msgstr "לא נבחר שום דבר לשחרור"
 
 #: src/svnfrontend/maintreewidget.cpp:1560
 #, kde-format
 msgctxt "@title:window"
 msgid "Lock Message"
-msgstr ""
+msgstr "הודעת נעילה"
 
 #: src/svnfrontend/maintreewidget.cpp:1567
 #, kde-format
@@ -4274,7 +4274,7 @@ msgstr "לשבור או להתעלם מהנעילות החסרות?"
 #: src/svnfrontend/maintreewidget.cpp:1604
 #, kde-format
 msgid "Unlocking items"
-msgstr ""
+msgstr "נעילת פריטים משוחררת"
 
 #: src/svnfrontend/maintreewidget.cpp:1605
 #, kde-format
@@ -4405,7 +4405,7 @@ msgstr "ניווט"
 #: src/svnfrontend/maintreewidget.cpp:2604
 #, kde-format
 msgid "Could not retrieve repository."
-msgstr ""
+msgstr "לא ניתן למשוך את המאגר."
 
 #: src/svnfrontend/maintreewidget.cpp:2634
 #, kde-format
@@ -4415,7 +4415,7 @@ msgstr "לא מומש עדיין"
 #: src/svnfrontend/maintreewidget.cpp:2634
 #, kde-format
 msgid "Edit property recursively"
-msgstr ""
+msgstr "עריכת מאפיין בנסיגה"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, MergeDlg)
 #: src/svnfrontend/merge_dlg.ui:14
@@ -4832,7 +4832,7 @@ msgstr "גרסה חדשה של קובץ עם סתירה"
 #: src/svnfrontend/svnactions.cpp:821
 #, kde-format
 msgid "Property reject file"
-msgstr ""
+msgstr "קובץ דחיית מאפיינים"
 
 #: src/svnfrontend/svnactions.cpp:825
 #, kde-format
@@ -4863,7 +4863,7 @@ msgstr "הערת נעילה"
 #, kde-format
 msgctxt "@title:window"
 msgid "Infolist"
-msgstr ""
+msgstr "רשימת פרטים"
 
 #: src/svnfrontend/svnactions.cpp:924
 #, kde-format
@@ -4949,7 +4949,7 @@ msgstr "לא ניתן להפעיל את תהליך ההבדלים, נא לבדו
 #, kde-format
 msgctxt "@title:window"
 msgid "Diffing"
-msgstr ""
+msgstr "ההבדלים מחושבים"
 
 #: src/svnfrontend/svnactions.cpp:1339
 #, kde-format
@@ -4969,19 +4969,19 @@ msgstr "ההבדלים מתועדים - לחיצה על ביטול תפסיק"
 #: src/svnfrontend/svnactions.cpp:1458
 #, kde-format
 msgid "Display process could not started, check command."
-msgstr ""
+msgstr "לא ניתן להפעיל את תהליך התצוגה, נא לבדוק את הפקודה."
 
 #: src/svnfrontend/svnactions.cpp:1470
 #, kde-format
 msgctxt "@title:window"
 msgid "Diff Display"
-msgstr ""
+msgstr "הצגת הבדלים"
 
 #: src/svnfrontend/svnactions.cpp:1518
 #, kde-format
 msgctxt "@title:window"
 msgid "Making update"
-msgstr ""
+msgstr "עריכת עדכון"
 
 #: src/svnfrontend/svnactions.cpp:1519
 #, kde-format
@@ -5324,7 +5324,7 @@ msgstr "סתירה"
 #: src/svnfrontend/svnitem.cpp:445
 #, kde-format
 msgid "Property conflicted"
-msgstr ""
+msgstr "המאפיין סותר"
 
 #: src/svnfrontend/svnitem.cpp:449
 #, kde-format

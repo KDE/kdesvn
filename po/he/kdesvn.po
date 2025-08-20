@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-23 00:45+0000\n"
-"PO-Revision-Date: 2025-08-15 16:27+0300\n"
+"PO-Revision-Date: 2025-08-19 19:36+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -4037,24 +4037,24 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:735
 #, kde-format
 msgid "Resolve conflicts"
-msgstr ""
+msgstr "פתרון סתירות"
 
 #: src/svnfrontend/maintreewidget.cpp:741
 #, kde-format
 msgid "Ignore/Unignore current item"
-msgstr ""
+msgstr "התעלמות/ביטול התעלמות של הפריט הנוכחי"
 
 #: src/svnfrontend/maintreewidget.cpp:743
 #: src/svnfrontend/maintreewidget.cpp:749
 #, kde-format
 msgid "Add or Remove ignore pattern"
-msgstr ""
+msgstr "הוספת או הסרת תבניות התעלמות"
 
 #: src/svnfrontend/maintreewidget.cpp:756
 #: src/svnfrontend/maintreewidget.cpp:895
 #, kde-format
 msgid "Update to head"
-msgstr ""
+msgstr "עדכון לראש (head)"
 
 #: src/svnfrontend/maintreewidget.cpp:761
 #, kde-format
@@ -4078,7 +4078,7 @@ msgstr "קיבוע"
 #: src/svnfrontend/maintreewidget.cpp:784
 #, kde-format
 msgid "Diff local changes"
-msgstr ""
+msgstr "הבדלים בשינויים המקומיים"
 
 #: src/svnfrontend/maintreewidget.cpp:782
 #: src/svnfrontend/maintreewidget.cpp:789
@@ -4087,6 +4087,7 @@ msgid ""
 "Diff working copy against BASE (last checked out version) - does not require "
 "access to repository"
 msgstr ""
+"הבדלים בין העותק בעבודה מול BASE (הגרסה האחרונה שנמשכה)- דורש גישה למאגר"
 
 #: src/svnfrontend/maintreewidget.cpp:792
 #, kde-format
@@ -4099,6 +4100,7 @@ msgid ""
 "Diff working copy against HEAD (last checked in version)- requires access to "
 "repository"
 msgstr ""
+"הבדלים בין העותק בעבודה מול HEAD (הגרסה האחרונה שנמסרה)- דורש גישה למאגר"
 
 #: src/svnfrontend/maintreewidget.cpp:800
 #: src/svnfrontend/maintreewidget.cpp:807
@@ -4125,14 +4127,14 @@ msgstr "מיזוג"
 #: src/svnfrontend/maintreewidget.cpp:821
 #, kde-format
 msgid "Merge two revisions of this entry into itself"
-msgstr ""
+msgstr "מיזוג שתי מהדורות של הרשומה הזאת לתוך עצמה"
 
 #: src/svnfrontend/maintreewidget.cpp:829
 #, kde-format
 msgid ""
 "Merge repository path into current working copy path or current repository "
 "path into a target"
-msgstr ""
+msgstr "מיזוג נתיב מאגר לנתיב העותק הנוכחי בעבודה או נתיב המאגר הנוכחי ליעד"
 
 #: src/svnfrontend/maintreewidget.cpp:830
 #: src/svnfrontend/maintreewidget.cpp:1392
@@ -4241,7 +4243,7 @@ msgstr "הגדרות למאגר הנוכחי"
 #: src/svnfrontend/maintreewidget.cpp:2049
 #, kde-format
 msgid "Stop updating the log cache"
-msgstr ""
+msgstr "לעצור את עדכון מטמון היומן"
 
 #: src/svnfrontend/maintreewidget.cpp:1278
 #, kde-format
@@ -4296,12 +4298,12 @@ msgstr "לא נבחר שום דבר למחיקה."
 #: src/svnfrontend/maintreewidget.cpp:2071
 #, kde-format
 msgid "Automatic generated base layout by kdesvn"
-msgstr ""
+msgstr "פריסת בסיס שנוצרה אוטומטית על ידי kdesvn"
 
 #: src/svnfrontend/maintreewidget.cpp:2084
 #, kde-format
 msgid "May not make subdirectories of a file"
-msgstr ""
+msgstr "עלול שלא ליצור תת־תיקיות של קובץ"
 
 #: src/svnfrontend/maintreewidget.cpp:2196 src/svnfrontend/svnactions.cpp:2304
 #, kde-format
@@ -4421,7 +4423,7 @@ msgstr "עריכת מאפיין בנסיגה"
 #: src/svnfrontend/merge_dlg.ui:14
 #, kde-format
 msgid "MergeSettings"
-msgstr ""
+msgstr "הגדרות מיזוג"
 
 #. i18n: ectx: property (text), widget (QLabel, m_SrcOneLabel)
 #: src/svnfrontend/merge_dlg.ui:22
@@ -4445,19 +4447,19 @@ msgstr "פלט אל:"
 #: src/svnfrontend/merge_dlg.ui:72
 #, kde-format
 msgid "Merge parameter"
-msgstr ""
+msgstr "מיזוג משתנה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_RecursiveCheck)
 #: src/svnfrontend/merge_dlg.ui:90
 #, kde-format
 msgid "Recursive"
-msgstr ""
+msgstr "רקורסיבי"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_RelatedCheck)
 #: src/svnfrontend/merge_dlg.ui:103
 #, kde-format
 msgid "Handle unrelated as related items"
-msgstr ""
+msgstr "טיפול בפריטים לא קשורים כקשורים"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_RelatedCheck)
 #: src/svnfrontend/merge_dlg.ui:106
@@ -4546,6 +4548,8 @@ msgid ""
 "Merge into mixed revision\n"
 "working copy"
 msgstr ""
+"מיזוג לתוך עותק עבודה\n"
+"עם מהדורה מעורבבת"
 
 #: src/svnfrontend/mergedlg_impl.cpp:194
 #, kde-format

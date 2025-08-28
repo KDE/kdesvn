@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-23 00:45+0000\n"
-"PO-Revision-Date: 2025-08-19 19:36+0300\n"
+"PO-Revision-Date: 2025-08-27 10:46+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -3739,67 +3739,67 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:495
 #, kde-format
 msgid "History of item"
-msgstr ""
+msgstr "היסטוריה של פריט"
 
 #: src/svnfrontend/maintreewidget.cpp:500
 #: src/svnfrontend/maintreewidget.cpp:508
 #: src/svnfrontend/maintreewidget.cpp:517
 #, kde-format
 msgid "History"
-msgstr ""
+msgstr "היסטוריה"
 
 #: src/svnfrontend/maintreewidget.cpp:501
 #, kde-format
 msgid "Displays the history log of selected item"
-msgstr ""
+msgstr "הצגת יומן ההיסטוריה של הפריט הנבחר"
 
 #: src/svnfrontend/maintreewidget.cpp:503
 #: src/svnfrontend/maintreewidget.cpp:512
 #, kde-format
 msgid "History of item ignoring copies"
-msgstr ""
+msgstr "היסטוריה של הפריט תוך התעלמות מעותקים"
 
 #: src/svnfrontend/maintreewidget.cpp:509
 #: src/svnfrontend/maintreewidget.cpp:518
 #, kde-format
 msgid "Displays the history log of selected item without following copies"
-msgstr ""
+msgstr "הצגת יומן ההיסטוריה של הפריט הנבחר ללא העותקים הבאים"
 
 #: src/svnfrontend/maintreewidget.cpp:521
 #, kde-format
 msgid "Full revision tree"
-msgstr ""
+msgstr "עץ מהדורות מלא"
 
 #: src/svnfrontend/maintreewidget.cpp:526
 #, kde-format
 msgid "Shows history of item as linked tree"
-msgstr ""
+msgstr "הצגת היסטוריה של פריט כעץ מקושר"
 
 #: src/svnfrontend/maintreewidget.cpp:528
 #, kde-format
 msgid "Partial revision tree"
-msgstr ""
+msgstr "עץ מהדורות חלקי"
 
 #: src/svnfrontend/maintreewidget.cpp:533
 #, kde-format
 msgid "Shows history of item as linked tree for a revision range"
-msgstr ""
+msgstr "הצגת היסטוריה של פריט כעץ מקושר לטווח מהדורות"
 
 #: src/svnfrontend/maintreewidget.cpp:536
 #: src/svnfrontend/maintreewidget.cpp:537
 #, kde-format
 msgid "Properties"
-msgstr ""
+msgstr "מאפיינים"
 
 #: src/svnfrontend/maintreewidget.cpp:539
 #, kde-format
 msgid "Display Properties"
-msgstr ""
+msgstr "הצגת מאפיינים"
 
 #: src/svnfrontend/maintreewidget.cpp:545
 #, kde-format
 msgid "Display last changes"
-msgstr ""
+msgstr "הצגת השינויים האחרונים"
 
 #: src/svnfrontend/maintreewidget.cpp:550
 #, kde-format
@@ -3809,32 +3809,32 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:552
 #, kde-format
 msgid "Details"
-msgstr ""
+msgstr "פרטים"
 
 #: src/svnfrontend/maintreewidget.cpp:557
 #, kde-format
 msgid "Show details about selected item"
-msgstr ""
+msgstr "הצגת פרטים על הפריט הנבחר"
 
 #: src/svnfrontend/maintreewidget.cpp:559
 #, kde-format
 msgid "Move"
-msgstr ""
+msgstr "העברה"
 
 #: src/svnfrontend/maintreewidget.cpp:564
 #, kde-format
 msgid "Moves or renames current item"
-msgstr ""
+msgstr "העברה או שינוי שם של הפריט הנוכחי"
 
 #: src/svnfrontend/maintreewidget.cpp:571
 #, kde-format
 msgid "Create a copy of current item"
-msgstr ""
+msgstr "יצירת עותק של הפריט הנוכחי"
 
 #: src/svnfrontend/maintreewidget.cpp:573
 #, kde-format
 msgid "Check for updates"
-msgstr ""
+msgstr "איתור עדכונים"
 
 #: src/svnfrontend/maintreewidget.cpp:578
 #, kde-format
@@ -3845,12 +3845,12 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:580
 #, kde-format
 msgid "Check updates"
-msgstr ""
+msgstr "איתור עדכונים"
 
 #: src/svnfrontend/maintreewidget.cpp:584
 #, kde-format
 msgid "Blame"
-msgstr ""
+msgstr "אשמה"
 
 #: src/svnfrontend/maintreewidget.cpp:585
 #: src/svnfrontend/maintreewidget.cpp:593
@@ -3863,7 +3863,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:588
 #, kde-format
 msgid "Blame range"
-msgstr ""
+msgstr "טווח אשמה"
 
 #: src/svnfrontend/maintreewidget.cpp:597
 #, kde-format
@@ -3888,47 +3888,47 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:610
 #, kde-format
 msgid "Lock current items"
-msgstr ""
+msgstr "לנעול את הפריטים הנוכחיים"
 
 #: src/svnfrontend/maintreewidget.cpp:615
 #, kde-format
 msgid "Try lock current item against changes from other users"
-msgstr ""
+msgstr "לנסות לנעול את הפריט הנוכחי מפני שינויים של משתמשים אחרים"
 
 #: src/svnfrontend/maintreewidget.cpp:618
 #, kde-format
 msgid "Unlock current items"
-msgstr ""
+msgstr "שחרור נעילה של פריטים נוכחיים"
 
 #: src/svnfrontend/maintreewidget.cpp:623
 #, kde-format
 msgid "Free existing lock on current item"
-msgstr ""
+msgstr "שחרור נעילה קיימת על פריט נוכחי"
 
 #: src/svnfrontend/maintreewidget.cpp:628 src/svnfrontend/svnactions.cpp:670
 #, kde-format
 msgid "New folder"
-msgstr ""
+msgstr "תיקייה חדשה"
 
 #: src/svnfrontend/maintreewidget.cpp:633
 #, kde-format
 msgid "Create a new folder"
-msgstr ""
+msgstr "יצירת תיקייה חדשה"
 
 #: src/svnfrontend/maintreewidget.cpp:635
 #, kde-format
 msgid "Switch repository"
-msgstr ""
+msgstr "החלפת מאגר"
 
 #: src/svnfrontend/maintreewidget.cpp:640
 #, kde-format
 msgid "Switch repository path of current working copy path (\"svn switch\")"
-msgstr ""
+msgstr "החלפת נתיב המאגר של נתיב העותק בעבודה הנוכחי („svn switch”)"
 
 #: src/svnfrontend/maintreewidget.cpp:644
 #, kde-format
 msgid "Relocate current working copy URL"
-msgstr ""
+msgstr "הצבה מחדש של כתובת העותק בעבודה"
 
 #: src/svnfrontend/maintreewidget.cpp:649
 #, kde-format
@@ -3938,7 +3938,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:658
 #, kde-format
 msgid "Unversioned"
-msgstr ""
+msgstr "לא מתועד במאגר"
 
 #: src/svnfrontend/maintreewidget.cpp:659
 #, kde-format
@@ -3985,12 +3985,12 @@ msgstr "הוספת הקבצים/התיקיות הנבחרים"
 #: src/svnfrontend/maintreewidget.cpp:693
 #, kde-format
 msgid "Adding selected files and/or directories to repository"
-msgstr ""
+msgstr "הוספת הקבצים ו/או התיקיות הנבחרים למאגר"
 
 #: src/svnfrontend/maintreewidget.cpp:696
 #, kde-format
 msgid "Add selected files/dirs recursive"
-msgstr ""
+msgstr "הוספת הקבצים/התיקיות הנבחרים באופן גורף"
 
 #: src/svnfrontend/maintreewidget.cpp:701
 #, kde-format
@@ -4002,37 +4002,37 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:704
 #, kde-format
 msgid "Delete selected files/dirs"
-msgstr ""
+msgstr "מחיקת הקבצים/התיקיות הנבחרים"
 
 #: src/svnfrontend/maintreewidget.cpp:710
 #, kde-format
 msgid "Deleting selected files and/or directories from repository"
-msgstr ""
+msgstr "מחיקת הקבצים ו/או התיקיות הנבחרים מהמאגר"
 
 #: src/svnfrontend/maintreewidget.cpp:712
 #, kde-format
 msgid "Delete folder"
-msgstr ""
+msgstr "מחיקת תיקייה"
 
 #: src/svnfrontend/maintreewidget.cpp:717
 #, kde-format
 msgid "Deleting selected directories from repository"
-msgstr ""
+msgstr "מחיקת התיקיות הנבחרות מהמאגר"
 
 #: src/svnfrontend/maintreewidget.cpp:720
 #, kde-format
 msgid "Revert current changes"
-msgstr ""
+msgstr "הסגת השינויים הנוכחיים"
 
 #: src/svnfrontend/maintreewidget.cpp:727
 #, kde-format
 msgid "Mark resolved"
-msgstr ""
+msgstr "סימון כפתור"
 
 #: src/svnfrontend/maintreewidget.cpp:732
 #, kde-format
 msgid "Marking files or dirs resolved"
-msgstr ""
+msgstr "סימון הקבצים או התיקיות כפתורים"
 
 #: src/svnfrontend/maintreewidget.cpp:735
 #, kde-format
@@ -4471,7 +4471,7 @@ msgstr "התעלמות משושלת"
 #: src/svnfrontend/merge_dlg.ui:113
 #, kde-format
 msgid "Force delete on modified/unversioned items"
-msgstr ""
+msgstr "אילוץ מחיקה של פריטים שהשתנו/אינם מתועדים כגרסה"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_Reintegrate)
 #: src/svnfrontend/merge_dlg.ui:126

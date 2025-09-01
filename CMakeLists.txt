@@ -22,8 +22,8 @@ cmake_minimum_required(VERSION 3.16.0)
 project(kdesvn)
 set(PACKAGENAME "${CMAKE_PROJECT_NAME}")
 
-set(QT_MIN_VERSION "5.15.2")
-set(KF_MIN_VERSION "5.98.0")
+set(QT_MIN_VERSION "6.5")
+set(KF_MIN_VERSION "6.0")
 set(KDE_COMPILERSETTINGS_LEVEL "5.84.0")
 
 # Where to look for Findxxx.cmake modules

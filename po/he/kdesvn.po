@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-23 00:45+0000\n"
-"PO-Revision-Date: 2025-08-27 10:46+0300\n"
+"PO-Revision-Date: 2025-08-31 14:43+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -2956,13 +2956,13 @@ msgstr ""
 #: src/svnfrontend/database/dbsettings.ui:58
 #, kde-format
 msgid "Log and statistics setting"
-msgstr ""
+msgstr "הגדרות יומן וסטטיסטיקה"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/svnfrontend/database/dbsettings.ui:70
 #, kde-format
 msgid "Hide logs containing following words"
-msgstr ""
+msgstr "הסתרת יומנים שמכילים את המילים הבאות"
 
 #. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_log_pattern)
 #: src/svnfrontend/database/dbsettings.ui:77
@@ -2976,7 +2976,7 @@ msgstr ""
 #: src/svnfrontend/database/dbsettings.ui:98
 #, kde-format
 msgid "Do not show commits from following users"
-msgstr ""
+msgstr "לא להציג קיבועים מהמשתמשים הבאים"
 
 #. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_userslog)
 #: src/svnfrontend/database/dbsettings.ui:105
@@ -2989,13 +2989,13 @@ msgstr ""
 #: src/svnfrontend/database/dbsettings.ui:115
 #, kde-format
 msgid "Do not display commits without author"
-msgstr ""
+msgstr "לא להציג קיבועים בלי תיעוד יוצר/ת"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DumpRepoDlg)
 #: src/svnfrontend/dumprepo_dlg.ui:14
 #, kde-format
 msgid "Dump repository"
-msgstr ""
+msgstr "הטלת מאגר"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_UseDeltas)
 #: src/svnfrontend/dumprepo_dlg.ui:35
@@ -3013,7 +3013,7 @@ msgstr ""
 #: src/svnfrontend/dumprepo_dlg.ui:67
 #, kde-format
 msgid "End revision:"
-msgstr ""
+msgstr "מהדורה סופית:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_incrementalDump)
 #: src/svnfrontend/dumprepo_dlg.ui:94
@@ -3031,7 +3031,7 @@ msgstr ""
 #: src/svnfrontend/dumprepo_dlg.ui:117
 #, kde-format
 msgid "Dump into:"
-msgstr ""
+msgstr "היטל לתוך:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, m_EndNumber)
 #: src/svnfrontend/dumprepo_dlg.ui:136
@@ -3043,37 +3043,37 @@ msgstr ""
 #: src/svnfrontend/dumprepo_dlg.ui:149
 #, kde-format
 msgid "Start revision:"
-msgstr ""
+msgstr "מהדורה התחלתית:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_RepoLabel)
 #: src/svnfrontend/dumprepo_dlg.ui:162
 #, kde-format
 msgid "Repository to dump:"
-msgstr ""
+msgstr "מאגר להטלה:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_PatternLabel)
 #: src/svnfrontend/editignorepattern.ui:17
 #, kde-format
 msgid "Patterns to add or remove:"
-msgstr ""
+msgstr "תבניות להוספה או הסרה:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_RemoveCheckBox)
 #: src/svnfrontend/editignorepattern.ui:40
 #, kde-format
 msgid "Remove patterns"
-msgstr ""
+msgstr "הסרת תבניות"
 
 #. i18n: ectx: property (text), widget (QLabel, m_DepthLabel)
 #: src/svnfrontend/editignorepattern.ui:49
 #, kde-format
 msgid "Depth for ignore"
-msgstr ""
+msgstr "עומק להתעלמות"
 
 #: src/svnfrontend/editpropsdlg.cpp:32
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Property"
-msgstr ""
+msgstr "הוספת מאפיין"
 
 #: src/svnfrontend/editpropsdlg.cpp:44 src/svnfrontend/editpropsdlg.cpp:84
 #, kde-format

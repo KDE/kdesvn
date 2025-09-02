@@ -46,7 +46,7 @@ public:
     bool StartOnly() const;
     void setHeadDefault();
 
-protected slots:
+protected Q_SLOTS:
     void onHelp();
     void stopHeadToggled(bool);
     void stopBaseToggled(bool);

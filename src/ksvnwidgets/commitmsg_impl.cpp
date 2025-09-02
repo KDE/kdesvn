@@ -361,7 +361,7 @@ void Commitmsg_impl::slotDiffSelected()
         return;
     }
     QString what = ptr->actionEntry().name();
-    emit makeDiff(what, svn::Revision::BASE, what, svn::Revision::WORKING, parentWidget());
+    Q_EMIT makeDiff(what, svn::Revision::BASE, what, svn::Revision::WORKING, parentWidget());
 }
 
 void Commitmsg_impl::slotRevertSelected()
@@ -371,7 +371,7 @@ void Commitmsg_impl::slotRevertSelected()
         return;
     }
     QStringList what(ptr->actionEntry().name());
-    emit sigRevertItem(what);
+    Q_EMIT sigRevertItem(what);
 }
 
 CommitModelNodePtr Commitmsg_impl::currentCommitItem(int column)

@@ -51,7 +51,7 @@ public:
     void hideOverwrite(bool hide);
     void hideIgnoreKeywords(bool hide);
     bool ignoreKeywords() const;
-protected slots:
+protected Q_SLOTS:
     void urlChanged(const QString &);
 };
 

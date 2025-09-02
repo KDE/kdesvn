@@ -89,7 +89,7 @@ public Q_SLOTS:
     void loadRescent(const QUrl &);
     void load(const QUrl &, bool);
 
-private slots:
+private Q_SLOTS:
     void fileOpen();
     void fileNew();
     void fileClose();

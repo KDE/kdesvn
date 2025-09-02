@@ -77,12 +77,12 @@ bool WatchedProcess::autoDelete() const
 
 void WatchedProcess::slotError(QProcess::ProcessError error_code)
 {
-    emit error(error_code, this);
+    Q_EMIT error(error_code, this);
 }
 
 void WatchedProcess::slotFinished(int exitCode, QProcess::ExitStatus exitStatus)
 {
-    emit finished(exitCode, exitStatus, this);
+    Q_EMIT finished(exitCode, exitStatus, this);
     if (m_Data->_autoDelete) {
         m_Data->_autoDelete = false;
         deleteLater();
@@ -91,22 +91,22 @@ void WatchedProcess::slotFinished(int exitCode, QProcess::ExitStatus exitStatus)
 
 void WatchedProcess::WatchedProcess::slotReadyReadStandardError()
 {
-    emit dataStderrRead(readAllStandardError(), this);
+    Q_EMIT dataStderrRead(readAllStandardError(), this);
 }
 
 void WatchedProcess::slotReadyReadStandardOutput()
 {
-    emit dataStdoutRead(readAllStandardOutput(), this);
+    Q_EMIT dataStdoutRead(readAllStandardOutput(), this);
 }
 
 void WatchedProcess::slotStarted()
 {
-    emit started(this);
+    Q_EMIT started(this);
 }
 
 void WatchedProcess::slotStateChanged(QProcess::ProcessState state)
 {
-    emit stateChanged(state, this);
+    Q_EMIT stateChanged(state, this);
 }
 
 void WatchedProcess::appendTempFile(const QString &aFile)

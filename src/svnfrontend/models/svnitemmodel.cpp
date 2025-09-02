@@ -492,7 +492,7 @@ void SvnItemModel::fetchMore(const QModelIndex &parent)
         return;
     }
     if (checkDirs(node->fullName(), node) > 0) {
-        emit itemsFetched(parent);
+        Q_EMIT itemsFetched(parent);
     }
 }
 
@@ -555,7 +555,7 @@ bool SvnItemModel::dropUrls(const QList<QUrl> &data, Qt::DropAction action, int 
     if (action == Qt::LinkAction) {
         return false;
     }
-    emit urlDropped(data, action, parent, intern);
+    Q_EMIT urlDropped(data, action, parent, intern);
     return true;
 }
 
@@ -622,7 +622,7 @@ void SvnItemModel::emitDataChangedRow(const QModelIndex &idx)
 {
     const auto colS(index(idx.row(), 0, idx.parent()));
     const auto colE(index(idx.row(), columnCount() - 1, idx.parent()));
-    emit dataChanged(colS, colE);
+    Q_EMIT dataChanged(colS, colE);
 }
 
 SvnItemModelNode *SvnItemModel::findPath(const svn::Path &_p)
@@ -765,7 +765,7 @@ bool SvnItemModel::checkRootNode()
         m_Data->m_rootNode->setStat(m_Data->m_SvnActions->svnclient()->singleStatus(m_Data->m_Display->baseUri(), false, m_Data->m_Display->baseRevision()));
     } catch (const svn::ClientException &e) {
         m_Data->m_rootNode->setStat(svn::StatusPtr(new svn::Status));
-        emit clientException(e.msg());
+        Q_EMIT clientException(e.msg());
         return false;
     }
     return true;
@@ -881,7 +881,7 @@ bool SvnItemModel::refreshDirnode(SvnItemModelNodeDir *node, bool check_empty, b
     // after so we don't recurse about it.
     insertDirs(node, dlist);
     if (!dlist.isEmpty()) {
-        emit itemsFetched(m_Data->indexForNode(node));
+        Q_EMIT itemsFetched(m_Data->indexForNode(node));
     }
     return true;
 }

@@ -140,10 +140,10 @@ bool CContextListener::contextGetSavedLogin(const QString &realm, QString &usern
     if (!Kdesvnsettings::passwords_in_wallet()) {
         return true;
     }
-    emit waitShow(true);
+    Q_EMIT waitShow(true);
     PwStorage::self()->getLogin(realm, username, password);
     PwStorage::self()->setCachedLogin(realm, username, password);
-    emit waitShow(false);
+    Q_EMIT waitShow(false);
     /* the return value isn't interesting to us... */
     return true;
 }
@@ -152,8 +152,8 @@ bool CContextListener::contextGetLogin(const QString &realm, QString &username, 
 {
     bool ret = false;
     maySave = false;
-    emit waitShow(true);
-    emit sendNotify(realm);
+    Q_EMIT waitShow(true);
+    Q_EMIT sendNotify(realm);
     QPointer<AuthDialogImpl> auth(new AuthDialogImpl(realm, username));
     if (auth->exec() == QDialog::Accepted) {
         username = auth->Username();
@@ -168,16 +168,16 @@ bool CContextListener::contextGetLogin(const QString &realm, QString &username, 
         ret = true;
     }
     delete auth;
-    emit waitShow(false);
+    Q_EMIT waitShow(false);
     return ret;
 }
 
 void CContextListener::contextNotify(const QString &aMsg)
 {
     if (aMsg.isEmpty()) {
-        emit tickProgress();
+        Q_EMIT tickProgress();
     } else {
-        emit sendNotify(aMsg);
+        Q_EMIT sendNotify(aMsg);
     }
 }
 
@@ -223,7 +223,7 @@ void CContextListener::contextNotify(const svn_wc_notify_t *action)
 
 void CContextListener::sendTick()
 {
-    emit tickProgress();
+    Q_EMIT tickProgress();
 }
 
 bool CContextListener::contextCancel()
@@ -243,12 +243,12 @@ bool CContextListener::contextCancel()
 bool CContextListener::contextGetLogMessage(QString &msg, const svn::CommitItemList &items)
 {
     bool isOk = false;
-    emit waitShow(true);
+    Q_EMIT waitShow(true);
     QString logMessage = Commitmsg_impl::getLogmessage(items, &isOk, nullptr, nullptr, nullptr);
     if (isOk) {
         msg = logMessage;
     }
-    emit waitShow(false);
+    Q_EMIT waitShow(false);
     return isOk;
 }
 
@@ -258,7 +258,7 @@ svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTru
     CursorStack cs(Qt::ArrowCursor);
 
     bool ok, saveit;
-    emit waitShow(true);
+    Q_EMIT waitShow(true);
     if (!SslTrustPrompt::sslTrust(data.hostname,
                                   data.fingerprint,
                                   data.validFrom,
@@ -270,7 +270,7 @@ svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTru
                                   &saveit)) {
         return DONT_ACCEPT;
     }
-    emit waitShow(false);
+    Q_EMIT waitShow(false);
     if (!saveit) {
         return ACCEPT_TEMPORARILY;
     }
@@ -280,9 +280,9 @@ svn::ContextListener::SslServerTrustAnswer CContextListener::contextSslServerTru
 bool CContextListener::contextSslClientCertPrompt(QString &certFile)
 {
     qCDebug(KDESVN_LOG) << certFile << Qt::endl;
-    emit waitShow(true);
+    Q_EMIT waitShow(true);
     QString afile = QFileDialog::getOpenFileName(nullptr, i18n("Open a file with a #PKCS12 certificate"));
-    emit waitShow(false);
+    Q_EMIT waitShow(false);
     if (afile.isEmpty()) {
         return false;
     }
@@ -299,7 +299,7 @@ bool CContextListener::contextLoadSslClientCertPw(QString &password, const QStri
 bool CContextListener::contextSslClientCertPwPrompt(QString &password, const QString &realm, bool &maysave)
 {
     maysave = false;
-    emit waitShow(true);
+    Q_EMIT waitShow(true);
     QString npass;
     QPointer<KPasswordDialog> dlg(new KPasswordDialog(nullptr));
     dlg->setPrompt(i18n("Enter password for realm %1", realm));
@@ -311,7 +311,7 @@ bool CContextListener::contextSslClientCertPwPrompt(QString &password, const QSt
     bool keepPw = (dlg ? dlg->keepPassword() : false);
     delete dlg;
 
-    emit waitShow(false);
+    Q_EMIT waitShow(false);
     if (res != QDialog::Accepted) {
         return false;
     }
@@ -360,12 +360,12 @@ QString CContextListener::translate(const QString &what)
  */
 void CContextListener::contextProgress(long long int current, long long int max)
 {
-    emit netProgress(current, max);
+    Q_EMIT netProgress(current, max);
 }
 
 void CContextListener::maySavePlaintext(svn_boolean_t *may_save_plaintext, const QString &realmstring)
 {
-    emit waitShow(true);
+    Q_EMIT waitShow(true);
     if (may_save_plaintext) {
         QString question = i18n("%1\nReally store password as plain text?", realmstring);
         QString head = i18n("Save password");
@@ -376,7 +376,7 @@ void CContextListener::maySavePlaintext(svn_boolean_t *may_save_plaintext, const
             *may_save_plaintext = false;
         }
     }
-    emit waitShow(false);
+    Q_EMIT waitShow(false);
 }
 
 const QStringList &CContextListener::updatedItems() const

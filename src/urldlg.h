@@ -40,7 +40,7 @@ private:
     explicit UrlDlg(QWidget *parent = nullptr);
     ~UrlDlg() override;
 
-private slots:
+private Q_SLOTS:
     void accept() final;
     void slotTextChanged(const QString &);
 

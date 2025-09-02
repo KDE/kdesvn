@@ -35,13 +35,13 @@ public:
     static QString getMoveCopyTo(bool *ok, bool move, const QString &old, const QString &base, QWidget *parent = nullptr);
     /*$PUBLIC_FUNCTIONS$*/
 
-public slots:
+public Q_SLOTS:
     /*$PUBLIC_SLOTS$*/
 
 protected:
     /*$PROTECTED_FUNCTIONS$*/
 
-protected slots:
+protected Q_SLOTS:
     /*$PROTECTED_SLOTS$*/
 
 protected:

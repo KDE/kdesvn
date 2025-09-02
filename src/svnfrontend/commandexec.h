@@ -43,7 +43,7 @@ public:
     ~CommandExec() override;
     virtual int exec(const QCommandLineParser *parser);
 
-protected slots:
+protected Q_SLOTS:
     virtual void clientException(const QString &);
     virtual void slotNotifyMessage(const QString &);
     virtual void slotCmd_log();
@@ -69,7 +69,7 @@ protected slots:
     virtual void slotCmd_lock();
     virtual void slotCmd_unlock();
 
-signals:
+Q_SIGNALS:
     void executeMe();
 
 protected:
@@ -82,7 +82,7 @@ protected:
 private:
     pCPart *m_pCPart;
 
-protected slots:
+protected Q_SLOTS:
     void slotCmd_switch();
 };
 

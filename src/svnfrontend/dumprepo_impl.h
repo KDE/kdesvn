@@ -34,7 +34,7 @@ public:
     bool useNumbers() const;
     int startNumber() const;
     int endNumber() const;
-protected slots:
+protected Q_SLOTS:
     void slotDumpRange(bool);
 };
 

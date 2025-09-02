@@ -128,7 +128,7 @@ void Propertylist::slotItemChanged(QTreeWidgetItem *_item, int col)
         if (item->currentName() != item->startName()) {
             dels.push_back(item->startName());
         }
-        emit sigSetProperty(pm, dels, m_current);
+        Q_EMIT sigSetProperty(pm, dels, m_current);
     }
 }
 

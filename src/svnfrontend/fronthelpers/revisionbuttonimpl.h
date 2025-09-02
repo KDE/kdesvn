@@ -41,9 +41,9 @@ protected:
     svn::Revision m_Rev;
     bool m_noWorking;
 
-public slots:
+public Q_SLOTS:
     void askRevision();
-signals:
+Q_SIGNALS:
     void revisionChanged();
 };
 

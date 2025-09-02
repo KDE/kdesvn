@@ -45,7 +45,7 @@ public:
     void saveSize();
     bool getSingleLog(svn::LogEntry &t, const svn::Revision &r, const QString &what, const svn::Revision &peg, QString &root) override;
 
-signals:
+Q_SIGNALS:
     void makeDiff(const QString &, const svn::Revision &, const QString &, const svn::Revision &, QWidget *);
     void makeCat(const svn::Revision &, const QString &, const QString &, const svn::Revision &, QWidget *);
 
@@ -54,7 +54,7 @@ protected:
     void keyReleaseEvent(QKeyEvent *e) override;
     void showEvent(QShowEvent *e) override;
 
-protected slots:
+protected Q_SLOTS:
     void slotDispPrevious();
     void slotDispSelected();
     void slotRevisionSelected();
@@ -77,7 +77,7 @@ private:
 
     QRegExp _r1, _r2;
 
-protected slots:
+protected Q_SLOTS:
     void slotListEntries();
     void slotChangedPathContextMenu(const QPoint &);
     void slotSingleDoubleClicked(QTreeWidgetItem *, int);

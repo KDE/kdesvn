@@ -76,7 +76,7 @@ bool ThreadContextListener::contextGetLogin(const QString &realm, QString &usern
     m_Data->bReturnValue = false;
 
     // call event_contextGetLogin() in main thread, wait until finished due to BlockingQueuedConnection
-    emit signal_contextGetLogin();
+    Q_EMIT signal_contextGetLogin();
 
     username = m_Data->m_slogin_data.user;
     password = m_Data->m_slogin_data.password;
@@ -95,7 +95,7 @@ bool ThreadContextListener::contextGetSavedLogin(const QString &realm, QString &
     m_Data->bReturnValue = false;
 
     // call event_contextGetSavedLogin() in main thread, wait until finished due to BlockingQueuedConnection
-    emit signal_contextGetSavedLogin();
+    Q_EMIT signal_contextGetSavedLogin();
 
     username = m_Data->m_slogin_data.user;
     password = m_Data->m_slogin_data.password;
@@ -110,7 +110,7 @@ bool ThreadContextListener::contextGetLogMessage(QString &msg, const svn::Commit
     m_Data->bReturnValue = false;
 
     // call event_contextGetLogMessage() in main thread, wait until finished due to BlockingQueuedConnection
-    emit signal_contextGetLogMessage();
+    Q_EMIT signal_contextGetLogMessage();
 
     msg = m_Data->m_slog_message.msg;
     return m_Data->bReturnValue;
@@ -124,7 +124,7 @@ bool ThreadContextListener::contextSslClientCertPrompt(QString &certFile)
     m_Data->bReturnValue = false;
 
     // call event_contextSslClientCertPrompt() in main thread, wait until finished due to BlockingQueuedConnection
-    emit signal_contextSslClientCertPrompt();
+    Q_EMIT signal_contextSslClientCertPrompt();
 
     certFile = m_Data->m_scert_file.certfile;
     return m_Data->bReturnValue;
@@ -139,7 +139,7 @@ bool ThreadContextListener::contextSslClientCertPwPrompt(QString &password, cons
     m_Data->bReturnValue = false;
 
     // call event_contextSslClientCertPrompt() in main thread, wait until finished due to BlockingQueuedConnection
-    emit signal_contextSslClientCertPwPrompt();
+    Q_EMIT signal_contextSslClientCertPwPrompt();
 
     password = m_Data->m_scert_pw.password;
     maySave = m_Data->m_scert_pw.maysave;
@@ -156,7 +156,7 @@ svn::ContextListener::SslServerTrustAnswer ThreadContextListener::contextSslServ
     m_Data->bReturnValue = false;
 
     // call event_contextSslClientCertPrompt() in main thread, wait until finished due to BlockingQueuedConnection
-    emit signal_contextSslServerTrustPrompt();
+    Q_EMIT signal_contextSslServerTrustPrompt();
 
     return m_Data->m_strust_answer.sslTrustAnswer;
 }
@@ -164,7 +164,7 @@ svn::ContextListener::SslServerTrustAnswer ThreadContextListener::contextSslServ
 void ThreadContextListener::contextNotify(const QString &aMsg)
 {
     // call event_contextNotify() in main thread
-    emit signal_contextNotify(aMsg);
+    Q_EMIT signal_contextNotify(aMsg);
 }
 
 /*!
@@ -183,12 +183,12 @@ void ThreadContextListener::contextProgress(long long int current, long long int
     } else {
         msg = i18n("%1 transferred.", s1);
     }
-    emit signal_contextNotify(msg);
+    Q_EMIT signal_contextNotify(msg);
 }
 
 void ThreadContextListener::sendTick()
 {
-    emit signal_contextNotify(QString());
+    Q_EMIT signal_contextNotify(QString());
 }
 
 /* methods below may only called from mainthread! (via signal/slot) */

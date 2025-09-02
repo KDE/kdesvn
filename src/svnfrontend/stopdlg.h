@@ -67,16 +67,16 @@ protected:
     void showEvent(QShowEvent *e) override;
     void hideEvent(QHideEvent *e) override;
 
-public slots:
+public Q_SLOTS:
     virtual void slotTick();
     virtual void slotWait(bool);
     virtual void slotExtraMessage(const QString &);
 
-protected slots:
+protected Q_SLOTS:
     virtual void slotAutoShow();
     virtual void slotCancel();
     virtual void slotNetProgres(long long int, long long int);
-signals:
+Q_SIGNALS:
     void sigCancel(bool how);
 };
 

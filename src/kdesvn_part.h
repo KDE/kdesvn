@@ -64,7 +64,7 @@ Q_SIGNALS:
     void refreshTree();
     void settingsChanged();
 
-public slots:
+public Q_SLOTS:
     virtual void slotDispPopup(const QString &, QWidget **target);
     virtual void slotFileProperties();
     bool openUrl(const QUrl &) override;
@@ -81,7 +81,7 @@ protected:
 
     void init(QWidget *parentWidget, bool full);
 
-protected slots:
+protected Q_SLOTS:
     virtual void slotLogFollowNodes(bool);
     virtual void slotDisplayIgnored(bool);
     virtual void slotDisplayUnkown(bool);
@@ -94,10 +94,10 @@ private:
     kdesvnView *m_view;
     KdesvnBrowserExtension *m_browserExt;
 
-protected slots:
+protected Q_SLOTS:
     void slotSettingsChanged(const QString &);
 
-protected slots:
+protected Q_SLOTS:
     virtual void slotHideUnchanged(bool);
     virtual void slotEnableNetwork(bool);
 };
@@ -111,7 +111,7 @@ public:
     explicit KdesvnBrowserExtension(kdesvnpart *);
     ~KdesvnBrowserExtension() override;
 
-public slots:
+public Q_SLOTS:
     void properties();
 };
 

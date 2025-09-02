@@ -757,7 +757,7 @@ void RevGraphView::mouseDoubleClickEvent(QMouseEvent *e)
             return;
         }
         makeSelected(i);
-        emit dispDetails(toolTip((i)->nodename(), true));
+        Q_EMIT dispDetails(toolTip((i)->nodename(), true));
     }
 }
 
@@ -922,7 +922,7 @@ void RevGraphView::contextMenuEvent(QContextMenuEvent *e)
         break;
     case 403:
         if (i) {
-            emit dispDetails(toolTip(i->nodename(), true));
+            Q_EMIT dispDetails(toolTip(i->nodename(), true));
         }
         break;
     default:
@@ -942,7 +942,7 @@ void RevGraphView::makeCat(GraphTreeLabel *_l)
     }
     svn::Revision tr(it.value().rev);
     QString tp = m_basePath + it.value().name;
-    emit makeCat(tr, tp, it.value().name, tr, QApplication::activeModalWidget());
+    Q_EMIT makeCat(tr, tp, it.value().name, tr, QApplication::activeModalWidget());
 }
 
 void RevGraphView::makeDiffPrev(GraphTreeLabel *_l)
@@ -976,9 +976,9 @@ void RevGraphView::makeDiff(const QString &n1, const QString &n2)
     svn::Revision tr(it.value().rev);
     QString tp = m_basePath + it.value().name;
     if (Kdesvnsettings::tree_diff_rec()) {
-        emit makeRecDiff(sp, sr, tp, tr, QApplication::activeModalWidget());
+        Q_EMIT makeRecDiff(sp, sr, tp, tr, QApplication::activeModalWidget());
     } else {
-        emit makeNorecDiff(sp, sr, tp, tr, QApplication::activeModalWidget());
+        Q_EMIT makeNorecDiff(sp, sr, tp, tr, QApplication::activeModalWidget());
     }
 }
 

@@ -49,7 +49,7 @@ void CheckModifiedThread::run()
     } catch (const svn::Exception &e) {
         m_SvnContextListener->contextNotify(e.msg());
     }
-    emit checkModifiedFinished();
+    Q_EMIT checkModifiedFinished();
 }
 
 #include "moc_modifiedthread.cpp"

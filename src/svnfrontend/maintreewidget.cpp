@@ -209,7 +209,7 @@ bool MainTreeWidget::openUrl(const QUrl &url, bool noReinit)
     CursorStack a;
     m_Data->m_Model->svnWrapper()->killallThreads();
     clear();
-    emit sigProplist(svn::PathPropertiesMapListPtr(new svn::PathPropertiesMapList()), false, false, QString());
+    Q_EMIT sigProplist(svn::PathPropertiesMapListPtr(new svn::PathPropertiesMapList()), false, false, QString());
 
     if (!noReinit) {
         m_Data->m_Model->svnWrapper()->reInitClient();
@@ -267,8 +267,8 @@ bool MainTreeWidget::openUrl(const QUrl &url, bool noReinit)
                 setNetworked(false);
                 clear();
                 KMessageBox::error(this, i18n("Networked URL to open but networking is disabled."));
-                emit changeCaption(QString());
-                emit sigUrlOpened(false);
+                Q_EMIT changeCaption(QString());
+                Q_EMIT sigUrlOpened(false);
                 return false;
             }
         }
@@ -323,9 +323,9 @@ bool MainTreeWidget::openUrl(const QUrl &url, bool noReinit)
     qCDebug(KDESVN_LOG) << "Starting cache " << _counttime.elapsed();
     _counttime.restart();
 #endif
-    emit changeCaption(baseUri());
-    emit sigUrlOpened(result);
-    emit sigUrlChanged(baseUriAsUrl());
+    Q_EMIT changeCaption(baseUri());
+    Q_EMIT sigUrlOpened(result);
+    Q_EMIT sigUrlChanged(baseUriAsUrl());
 #ifdef DEBUG_TIMER
     qCDebug(KDESVN_LOG) << "Fired signals " << _counttime.elapsed();
     _counttime.restart();
@@ -1109,9 +1109,9 @@ void MainTreeWidget::closeMe()
     setWorkingCopy(false);
     setBaseUri(QString());
 
-    emit changeCaption(QString());
-    emit sigUrlOpened(false);
-    emit sigUrlChanged(QUrl());
+    Q_EMIT changeCaption(QString());
+    Q_EMIT sigUrlOpened(false);
+    Q_EMIT sigUrlChanged(QUrl());
 
     enableActions();
     m_Data->m_Model->svnWrapper()->reInitClient();
@@ -1218,7 +1218,7 @@ void MainTreeWidget::slotCheckModified()
 
 void MainTreeWidget::slotNotifyMessage(const QString &what)
 {
-    emit sigLogMessage(what);
+    Q_EMIT sigLogMessage(what);
     QCoreApplication::processEvents();
 }
 
@@ -1229,7 +1229,7 @@ void MainTreeWidget::readSupportData()
 
 void MainTreeWidget::slotClientException(const QString &what)
 {
-    emit sigLogMessage(what);
+    Q_EMIT sigLogMessage(what);
     KMessageBox::error(QApplication::activeModalWidget(), what, i18n("SVN Error"));
 }
 
@@ -1442,7 +1442,7 @@ void MainTreeWidget::execContextMenu(const SvnItemList &l)
 
     // qDebug("menuname: %s", qPrintable(menuname));
     QWidget *target;
-    emit sigShowPopup(menuname, &target);
+    Q_EMIT sigShowPopup(menuname, &target);
     QMenu *popup = static_cast<QMenu *>(target);
     if (!popup) {
         return;
@@ -1511,7 +1511,7 @@ void MainTreeWidget::slotSelectBrowsingRevision()
         m_Data->m_remoteRevision = range.first;
         clear();
         m_Data->m_Model->checkDirs(baseUri(), nullptr);
-        emit changeCaption(baseUri() + QLatin1Char('@') + range.first.toString());
+        Q_EMIT changeCaption(baseUri() + QLatin1Char('@') + range.first.toString());
     }
 }
 
@@ -1822,12 +1822,12 @@ void MainTreeWidget::dispProperties(bool force)
     svn::PathPropertiesMapListPtr pm;
     SvnItem *k = Selected();
     if (!k || !k->isRealVersioned()) {
-        emit sigProplist(svn::PathPropertiesMapListPtr(), false, false, QString(""));
+        Q_EMIT sigProplist(svn::PathPropertiesMapListPtr(), false, false, QString(""));
         return;
     }
     svn::Revision rev(isWorkingCopy() ? svn::Revision::WORKING : baseRevision());
     pm = m_Data->m_Model->svnWrapper()->propList(k->fullName(), rev, cache_Only);
-    emit sigProplist(pm, isWorkingCopy(), k->isDir(), k->fullName());
+    Q_EMIT sigProplist(pm, isWorkingCopy(), k->isDir(), k->fullName());
 }
 
 void MainTreeWidget::slotCat()
@@ -2396,7 +2396,7 @@ void MainTreeWidget::slotChangeToRepository()
     if (i.reposRoot().isEmpty()) {
         KMessageBox::error(QApplication::activeModalWidget(), i18n("Could not retrieve repository of working copy."), i18n("SVN Error"));
     } else {
-        emit sigSwitchUrl(i.reposRoot());
+        Q_EMIT sigSwitchUrl(i.reposRoot());
     }
 }
 
@@ -2503,7 +2503,7 @@ void MainTreeWidget::slotDirSelectionChanged(const QItemSelection &_item, const 
         if (item) {
             const QString repoBasePath = baseUri();
             const QString relativePath = item->fullName().mid(repoBasePath.lastIndexOf('/') + 1);
-            emit changeCaption(relativePath);
+            Q_EMIT changeCaption(relativePath);
         }
 
     } else {

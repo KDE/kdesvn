@@ -36,7 +36,7 @@ public:
     QString repository() const;
     QString parentPath() const;
 
-public slots:
+public Q_SLOTS:
 };
 
 #endif

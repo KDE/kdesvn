@@ -33,7 +33,7 @@ public:
     explicit DiffBrowser(QWidget *parent = nullptr);
     ~DiffBrowser() override;
 
-public slots:
+public Q_SLOTS:
     void setText(const QByteArray &ex);
     void saveDiff();
     void slotTextCodecChanged(const QString &);
@@ -53,7 +53,7 @@ protected:
 
     void printContent();
 
-protected slots:
+protected Q_SLOTS:
     virtual void search_slot();
     virtual void searchagain_slot();
     virtual void searchagainback_slot();

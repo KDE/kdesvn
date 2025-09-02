@@ -88,18 +88,18 @@ public:
     void setBasePath(const QString &);
     void dumpRevtree();
 
-signals:
+Q_SIGNALS:
     void dispDetails(const QString &);
     void makeCat(const svn::Revision &, const QString &, const QString &, const svn::Revision &, QWidget *);
     void makeNorecDiff(const QString &, const svn::Revision &, const QString &, const svn::Revision &, QWidget *);
     void makeRecDiff(const QString &, const svn::Revision &, const QString &, const svn::Revision &, QWidget *);
 
-public slots:
+public Q_SLOTS:
     virtual void zoomRectMoved(qreal, qreal);
     virtual void zoomRectMoveFinished();
     virtual void slotClientException(const QString &what);
 
-protected slots:
+protected Q_SLOTS:
     virtual void readDotOutput();
     virtual void dotExit(int, QProcess::ExitStatus);
 

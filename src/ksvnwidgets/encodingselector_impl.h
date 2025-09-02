@@ -35,7 +35,7 @@ public:
 protected Q_SLOTS:
     virtual void itemActivated(int);
 
-signals:
+Q_SIGNALS:
     void TextCodecChanged(const QString &);
 };
 

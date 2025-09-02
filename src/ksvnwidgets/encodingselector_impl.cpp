@@ -40,9 +40,9 @@ void EncodingSelector_impl::setCurrentEncoding(const QString &cur)
 void EncodingSelector_impl::itemActivated(int which)
 {
     if (which == 0) {
-        emit TextCodecChanged(QString());
+        Q_EMIT TextCodecChanged(QString());
     } else {
-        emit TextCodecChanged(m_encodingList->currentText());
+        Q_EMIT TextCodecChanged(m_encodingList->currentText());
     }
 }
 

@@ -39,7 +39,7 @@ public:
     void updateCurrentRect();
     virtual void setScene(QGraphicsScene *sc);
 
-signals:
+Q_SIGNALS:
     void zoomRectMoved(qreal dx, qreal dy);
     void zoomRectMoveFinished();
 

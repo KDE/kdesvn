@@ -53,12 +53,12 @@ protected:
     QVBoxLayout *RevTreeWidgetLayout;
     QTextBrowser *m_Detailstext;
 
-signals:
+Q_SIGNALS:
     void makeCat(const svn::Revision &, const QString &, const QString &, const svn::Revision &, QWidget *);
     void makeNorecDiff(const QString &, const svn::Revision &, const QString &, const svn::Revision &, QWidget *);
     void makeRecDiff(const QString &, const svn::Revision &, const QString &, const svn::Revision &, QWidget *);
 
-protected slots:
+protected Q_SLOTS:
     virtual void setDetailText(const QString &);
 };
 

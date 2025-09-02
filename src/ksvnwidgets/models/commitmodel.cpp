@@ -261,7 +261,7 @@ bool CommitModelCheckitem::setData(const QModelIndex &index, const QVariant &val
         bool nv = value.toInt() > 0;
         _l->setChecked(nv);
         if (old != nv) {
-            emit dataChanged(index, index, {Qt::CheckStateRole});
+            Q_EMIT dataChanged(index, index, {Qt::CheckStateRole});
         }
         return old != nv;
     }

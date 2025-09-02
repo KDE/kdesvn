@@ -374,7 +374,7 @@ void kdesvn::optionsConfigureKeys()
  */
 void kdesvn::closeEvent(QCloseEvent *ev)
 {
-    emit sigSavestate();
+    Q_EMIT sigSavestate();
     if (m_part) {
         KConfigGroup cs(KSharedConfig::openConfig(), "startup");
         cs.writeEntry("lastURL", m_part->url().toString(QUrl::FullyEncoded));

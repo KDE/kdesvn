@@ -92,6 +92,7 @@ add_definitions(-DQT_DEPRECATED_WARNINGS)
 add_definitions(-DQT_STRICT_ITERATORS)
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050900)
 add_definitions(-DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
+add_definitions(-DQT_NO_KEYWORDS)
 
 # include(MacroEnsureVersion)
 include(FindSubversion)

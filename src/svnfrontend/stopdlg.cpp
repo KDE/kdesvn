@@ -144,7 +144,7 @@ void StopDlg::slotAutoShow()
 void StopDlg::slotCancel()
 {
     mCancelled = true;
-    emit sigCancel(true);
+    Q_EMIT sigCancel(true);
 }
 
 void StopDlg::slotTick()

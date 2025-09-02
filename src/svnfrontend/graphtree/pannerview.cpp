@@ -108,7 +108,7 @@ void PannerView::mouseMoveEvent(QMouseEvent *e)
 {
     if (m_Moving) {
         QPointF sPos = mapToScene(e->pos());
-        emit zoomRectMoved(sPos.x() - m_ZoomRect.center().x(), sPos.y() - m_ZoomRect.center().y());
+        Q_EMIT zoomRectMoved(sPos.x() - m_ZoomRect.center().x(), sPos.y() - m_ZoomRect.center().y());
 
         m_LastPos = e->pos();
     }
@@ -122,7 +122,7 @@ void PannerView::mousePressEvent(QMouseEvent *e)
     if (m_ZoomRect.isValid()) {
         QPointF sPos = mapToScene(e->pos());
         if (!m_ZoomRect.contains(sPos)) {
-            emit zoomRectMoved(sPos.x() - m_ZoomRect.center().x(), sPos.y() - m_ZoomRect.center().y());
+            Q_EMIT zoomRectMoved(sPos.x() - m_ZoomRect.center().x(), sPos.y() - m_ZoomRect.center().y());
         }
         m_Moving = true;
         m_LastPos = e->pos();
@@ -135,7 +135,7 @@ void PannerView::mousePressEvent(QMouseEvent *e)
 void PannerView::mouseReleaseEvent(QMouseEvent *)
 {
     m_Moving = false;
-    emit zoomRectMoveFinished();
+    Q_EMIT zoomRectMoveFinished();
 }
 
 /*!

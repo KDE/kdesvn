@@ -250,7 +250,7 @@ void SvnLogDlgImp::slotDispPrevious()
 
     const QString s(_base + k->realName());
     const QString e(_base + p->realName());
-    emit makeDiff(e, p->revision(), s, k->revision(), this);
+    Q_EMIT makeDiff(e, p->revision(), s, k->revision(), this);
 }
 
 /*!
@@ -272,7 +272,7 @@ void SvnLogDlgImp::slotDispSelected()
     SvnLogModelNodePtr m_first = m_CurrentModel->indexNode(m_CurrentModel->index(m_CurrentModel->leftRow()));
     SvnLogModelNodePtr m_second = m_CurrentModel->indexNode(m_CurrentModel->index(m_CurrentModel->rightRow()));
     if (m_first && m_second) {
-        emit makeDiff(_base + m_first->realName(), m_first->revision(), _base + m_second->realName(), m_second->revision(), this);
+        Q_EMIT makeDiff(_base + m_first->realName(), m_first->revision(), _base + m_second->realName(), m_second->revision(), this);
     }
 }
 
@@ -538,11 +538,11 @@ void SvnLogDlgImp::slotChangedPathContextMenu(const QPoint &e)
     }
     case 102: {
         const svn_revnum_t prev = item->revision() > 0 ? item->revision() : rev - 1;
-        emit makeDiff(_base + source, prev, _base + name, rev, this);
+        Q_EMIT makeDiff(_base + source, prev, _base + name, rev, this);
         break;
     }
     case 103: {
-        emit makeCat(rev, _base + source, source, rev, QApplication::activeModalWidget());
+        Q_EMIT makeCat(rev, _base + source, source, rev, QApplication::activeModalWidget());
     }
     default:
         break;

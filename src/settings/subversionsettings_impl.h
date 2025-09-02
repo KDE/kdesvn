@@ -32,13 +32,13 @@ public:
     ~SubversionSettings_impl() override;
     /*$PUBLIC_FUNCTIONS$*/
 
-public slots:
+public Q_SLOTS:
     /*$PUBLIC_SLOTS$*/
 
 protected:
     /*$PROTECTED_FUNCTIONS$*/
 
-protected slots:
+protected Q_SLOTS:
     /*$PROTECTED_SLOTS$*/
 };
 

@@ -33,7 +33,7 @@ void RevisionButtonImpl::setRevision(const svn::Revision &aRev)
 {
     m_Rev = aRev;
     m_RevisionButton->setText(m_Rev.toString());
-    emit revisionChanged();
+    Q_EMIT revisionChanged();
 }
 
 void RevisionButtonImpl::askRevision()

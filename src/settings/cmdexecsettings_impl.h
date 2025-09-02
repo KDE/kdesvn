@@ -32,11 +32,11 @@ public:
     ~CmdExecSettings_impl() override;
     /*$PUBLIC_FUNCTIONS$*/
 
-public slots:
+public Q_SLOTS:
     /*$PUBLIC_SLOTS$*/
 
 protected:
-protected slots:
+protected Q_SLOTS:
     /*$PROTECTED_SLOTS$*/
 };
 

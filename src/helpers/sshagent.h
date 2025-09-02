@@ -55,7 +55,7 @@ public:
         return m_authSock;
     }
 
-private slots:
+private Q_SLOTS:
     void slotProcessExited(int exitCode, QProcess::ExitStatus exitStatus);
     void slotReceivedStdout();
 

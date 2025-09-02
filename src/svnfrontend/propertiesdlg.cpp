@@ -87,7 +87,7 @@ void PropertiesDlg::initItem()
 {
     if (!m_Client) {
         QString ex = i18n("Missing SVN link");
-        emit clientException(ex);
+        Q_EMIT clientException(ex);
         return;
     }
     svn::Path what(m_Item->fullName());
@@ -95,7 +95,7 @@ void PropertiesDlg::initItem()
     try {
         propList = m_Client->proplist(what, m_Rev, m_Rev);
     } catch (const svn::ClientException &e) {
-        emit clientException(e.msg());
+        Q_EMIT clientException(e.msg());
         return;
     }
     m_ui->tvPropertyList->displayList(propList, true, m_Item->isDir(), m_Item->fullName());

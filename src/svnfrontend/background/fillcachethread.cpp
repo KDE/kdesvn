@@ -87,7 +87,7 @@ void FillCacheThread::run()
             qlonglong _max = j - i;
             qlonglong _cur = 0;
 
-            emit fillCacheStatus(_cur, _max);
+            Q_EMIT fillCacheStatus(_cur, _max);
 
             if (i < j) {
                 for (; i < j; i += 200) {
@@ -102,7 +102,7 @@ void FillCacheThread::run()
                     if (latestCache == rl.latestCachedRev()) {
                         break;
                     }
-                    emit fillCacheStatus(_cur > _max ? _max : _cur, _max);
+                    Q_EMIT fillCacheStatus(_cur > _max ? _max : _cur, _max);
 
                     latestCache = rl.latestCachedRev();
                 }
@@ -118,7 +118,7 @@ void FillCacheThread::run()
     }
     if (!breakit) {
         m_SvnContextListener->contextNotify(i18n("Filling log cache in background finished."));
-        emit fillCacheFinished();
+        Q_EMIT fillCacheFinished();
     }
 }
 

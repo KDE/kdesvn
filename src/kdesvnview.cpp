@@ -126,7 +126,7 @@ void kdesvnView::slotUrlChanged(const QUrl &url)
 {
     m_currentUrl = url;
     slotSetTitle(url.toString());
-    emit sigUrlChanged(url);
+    Q_EMIT sigUrlChanged(url);
     slotOnURL(i18n("Repository opened"));
 }
 
@@ -176,13 +176,13 @@ bool kdesvnView::openUrl(const QUrl &url)
 
 void kdesvnView::slotOnURL(const QString &url)
 {
-    emit signalChangeStatusbar(url);
+    Q_EMIT signalChangeStatusbar(url);
 }
 
 void kdesvnView::slotSetTitle(const QString &title)
 {
-    // emit signalChangeCaption(title);
-    emit setWindowCaption(title);
+    // Q_EMIT signalChangeCaption(title);
+    Q_EMIT setWindowCaption(title);
 }
 
 /*!
@@ -197,7 +197,7 @@ void kdesvnView::closeMe()
 
 void kdesvnView::slotDispPopup(const QString &item, QWidget **target)
 {
-    emit sigShowPopup(item, target);
+    Q_EMIT sigShowPopup(item, target);
 }
 
 /*!
@@ -245,7 +245,7 @@ void kdesvnView::slotCreateRepo()
     delete dlg;
     openUrl(path);
     if (createdirs) {
-        emit sigMakeBaseDirs();
+        Q_EMIT sigMakeBaseDirs();
     }
 }
 
@@ -410,7 +410,7 @@ void kdesvnView::sendError(const QString &aMsg)
 bool kdesvnView::isCanceld()
 {
     if (!m_ReposCancel) {
-        emit tickProgress();
+        Q_EMIT tickProgress();
         return false;
     }
     return true;

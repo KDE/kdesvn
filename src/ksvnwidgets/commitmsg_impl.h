@@ -99,7 +99,7 @@ protected:
     CommitModel *m_CurrentModel;
     CommitFilterModel *m_SortModel;
 
-signals:
+Q_SIGNALS:
     void makeDiff(const QString &, const svn::Revision &, const QString &, const svn::Revision &, QWidget *);
     void sigRevertItem(const QStringList &);
 };

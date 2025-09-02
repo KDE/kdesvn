@@ -113,7 +113,7 @@ bool kdesvnpart::openFile()
 {
     m_view->openUrl(url());
     // just for fun, set the status bar
-    emit setStatusBarText(url().toString());
+    Q_EMIT setStatusBarText(url().toString());
 
     return true;
 }
@@ -128,11 +128,11 @@ bool kdesvnpart::openUrl(const QUrl &aUrl)
         return false;
     }
     setUrl(_url);
-    emit started(nullptr);
+    Q_EMIT started(nullptr);
     bool ret = m_view->openUrl(url());
     if (ret) {
-        emit completed();
-        emit setWindowCaption(url().toString());
+        Q_EMIT completed();
+        Q_EMIT setWindowCaption(url().toString());
     }
     return ret;
 }
@@ -216,7 +216,7 @@ void kdesvnpart::slotDisplayIgnored(bool how)
 {
     Kdesvnsettings::setDisplay_ignored_files(how);
     Kdesvnsettings::self()->save();
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 }
 
 /*!
@@ -226,7 +226,7 @@ void kdesvnpart::slotDisplayUnkown(bool how)
 {
     Kdesvnsettings::setDisplay_unknown_files(how);
     Kdesvnsettings::self()->save();
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 }
 
 /*!
@@ -236,14 +236,14 @@ void kdesvnpart::slotHideUnchanged(bool how)
 {
     Kdesvnsettings::setHide_unchanged_files(how);
     Kdesvnsettings::self()->save();
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 }
 
 void kdesvnpart::slotEnableNetwork(bool how)
 {
     Kdesvnsettings::setNetwork_on(how);
     Kdesvnsettings::self()->save();
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 }
 
 /*!
@@ -254,7 +254,7 @@ bool kdesvnpart::closeUrl()
     KParts::ReadOnlyPart::closeUrl();
     setUrl(QUrl());
     m_view->closeMe();
-    emit setWindowCaption(QString());
+    Q_EMIT setWindowCaption(QString());
     return true;
 }
 
@@ -363,7 +363,7 @@ void kdesvnpart::slotSettingsChanged(const QString &)
         ((KToggleAction *)temp)->setChecked(kdesvnpart_Prefs::self()->mdisp_unknown_files);
     }
 #endif
-    emit settingsChanged();
+    Q_EMIT settingsChanged();
 }
 
 void kdesvnpart::showDbStatus()

@@ -24,7 +24,7 @@ set(PACKAGENAME "${CMAKE_PROJECT_NAME}")
 
 set(QT_MIN_VERSION "6.5")
 set(KF_MIN_VERSION "6.0")
-set(KDE_COMPILERSETTINGS_LEVEL "5.84.0")
+set(KDE_COMPILERSETTINGS_LEVEL "6.0")
 
 # Where to look for Findxxx.cmake modules
 find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
@@ -80,18 +80,8 @@ if(TESTINGBUILD)
     add_definitions(-DDEBUG_TIMER=1)
 endif()
 
-add_definitions(-DQT_USE_QSTRINGBUILDER)
-add_definitions(-DQT_NO_CAST_TO_ASCII)
-add_definitions(-DQT_NO_CAST_FROM_ASCII)
-add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
-add_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
-# kde headers still use Q_FOREACH... :(
-# add_definitions(-DQT_NO_FOREACH)
 add_definitions(-DQT_DEPRECATED_WARNINGS)
-add_definitions(-DQT_STRICT_ITERATORS)
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050900)
-add_definitions(-DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
-add_definitions(-DQT_NO_KEYWORDS)
 
 # include(MacroEnsureVersion)
 include(FindSubversion)

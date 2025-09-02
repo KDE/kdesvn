@@ -896,7 +896,7 @@ msgstr "Marca tots els elements p. ex., sense versió per a afegir i cometre."
 #: src/ksvnwidgets/commitmessage.ui:90
 #, kde-format
 msgid "Select new items"
-msgstr "Selecciona els elements nous"
+msgstr "Tria els elements nous"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_UnmarkUnversioned)
 #: src/ksvnwidgets/commitmessage.ui:97
@@ -986,12 +986,12 @@ msgstr "Mostra els elements nous"
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Text File to Insert"
-msgstr "Seleccioneu un fitxer de text que s'haja d'inserir"
+msgstr "Trieu un fitxer de text que s'haja d'inserir"
 
 #: src/ksvnwidgets/commitmsg_impl.cpp:479
 #, kde-format
 msgid "Select text file to insert:"
-msgstr "Seleccioneu un fitxer de text que s'ha d'inserir:"
+msgstr "Trieu un fitxer de text que s'ha d'inserir:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DeleteForm)
 #: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1636
@@ -1016,7 +1016,7 @@ msgstr "Conserva les còpies locals"
 #: src/ksvnwidgets/depthselector.ui:29 src/ksvnwidgets/depthselector.ui:32
 #, kde-format
 msgid "Select depth of operation"
-msgstr "Selecciona la profunditat de l'operació"
+msgstr "Tria la profunditat de l'operació"
 
 #. i18n: ectx: property (whatsThis), widget (QComboBox, m_DepthCombo)
 #: src/ksvnwidgets/depthselector.ui:41
@@ -2301,8 +2301,8 @@ msgstr "Comprova l'ompliment del cau de registres abans de llegir l'arbre"
 #, kde-format
 msgid "Select if kdesvn should check for updates when open a working copy"
 msgstr ""
-"Selecciona si Kdesvn hauria de comprovar si hi ha actualitzacions quan "
-"òbriga una còpia de treball"
+"Tria si Kdesvn hauria de comprovar si hi ha actualitzacions quan òbriga una "
+"còpia de treball"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_start_updates_check_on_open)
 #: src/settings/subversion_settings.ui:17
@@ -2939,14 +2939,13 @@ msgstr "Camí cap al repositori:"
 #: src/svnfrontend/createrepodlg.ui:45
 #, kde-format
 msgid "Select type of storage"
-msgstr "Selecciona el tipus de guardada"
+msgstr "Tria el tipus de guardada"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, m_FilesystemSelector)
 #: src/svnfrontend/createrepodlg.ui:48
 #, kde-format
 msgid "Select the storage type of repository (FSFS or Berkely DB)"
-msgstr ""
-"Seleccioneu el tipus de guardada del repositori (FSFS o DB de Berkeley)"
+msgstr "Trieu el tipus de guardada del repositori (FSFS o DB de Berkeley)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
 #: src/svnfrontend/createrepodlg.ui:52
@@ -3473,7 +3472,7 @@ msgstr ""
 #: src/svnfrontend/editpropsdlg.cpp:136
 #, kde-format
 msgid "Select or enter new property"
-msgstr "Seleccioneu o introduïu una propietat nova"
+msgstr "Trieu o introduïu una propietat nova"
 
 #: src/svnfrontend/editpropsdlg.cpp:160
 #, kde-format
@@ -3516,7 +3515,7 @@ msgstr "Informació de l'extracció"
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:26
 #, kde-format
 msgid "Select target directory:"
-msgstr "Seleccioneu directori de destinació:"
+msgstr "Trieu el directori de destinació:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_UrlLabel)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:40
@@ -3627,7 +3626,7 @@ msgstr "Comença amb la revisió"
 #: src/svnfrontend/fronthelpers/rangeinput.ui:140
 #, kde-format
 msgid "Select current working copy changes"
-msgstr "Selecciona els canvis en la còpia de treball actual"
+msgstr "Tria els canvis en la còpia de treball actual"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_startWorkingButton)
 #. i18n: ectx: property (text), widget (QRadioButton, m_stopWorkingButton)
@@ -3679,7 +3678,7 @@ msgstr "COMENÇA"
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Revisions"
-msgstr "Seleccioneu les revisions"
+msgstr "Trieu les revisions"
 
 #: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:201
 #, kde-format
@@ -5727,7 +5726,7 @@ msgstr "Diff anterior"
 #: src/svnfrontend/svnlogdlg.ui:208
 #, kde-format
 msgid "Select second revision with right mouse button"
-msgstr "Seleccioneu la segona revisió amb el botó dret del ratolí"
+msgstr "Trieu la segona revisió amb el botó dret del ratolí"
 
 #. i18n: ectx: property (text), widget (QPushButton, buttonListFiles)
 #: src/svnfrontend/svnlogdlg.ui:230

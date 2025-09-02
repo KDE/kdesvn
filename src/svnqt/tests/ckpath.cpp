@@ -26,15 +26,17 @@
 #include <iostream>
 #include <qstring.h>
 
+using namespace Qt::StringLiterals;
+
 int main(int, char **)
 {
-    svn::Path pa("/test/foo/bar/");
-    if (pa.path() != QString("/test/foo/bar")) {
+    svn::Path pa(u"/test/foo/bar/"_s);
+    if (pa.path() != "/test/foo/bar"_L1) {
         std::cout << "No cleanup of components" << std::endl;
         return -1;
     }
     pa.removeLast();
-    if (pa.path() != QString("/test/foo")) {
+    if (pa.path() != "/test/foo"_L1) {
         std::cout << "removeLast didn't work." << std::endl;
         return -1;
     }

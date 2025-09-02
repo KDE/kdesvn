@@ -35,8 +35,8 @@ int main(int, char **)
     svn::ClientP m_Svnclient = svn::Client::getobject(m_CurrentContext);
 
     svn::DirEntries dlist;
-    QString p = QString("file://%1").arg(TESTREPOPATH);
-    QString l = QString("%1").arg(TESTCOPATH);
+    QString p = QStringLiteral("file://" TESTREPOPATH);
+    QString l = QStringLiteral(TESTCOPATH);
 
     try {
         dlist = m_Svnclient->list(svn::Path(p), svn::Revision::HEAD, svn::Revision::HEAD, svn::DepthInfinity, true);
@@ -46,7 +46,7 @@ int main(int, char **)
         return -1;
     }
     std::cout << "List 1 " << dlist.size() << std::endl;
-    Q_FOREACH (const svn::DirEntry &entry, dlist) {
+    for (const svn::DirEntry &entry : std::as_const(dlist)) {
         QDateTime dt(svn::DateTime(entry.time()).toQDateTime());
         std::cout << entry.name().toUtf8().data() << " " << entry.lastAuthor().toUtf8().data() << " " << entry.size() << " " << dt.toSecsSinceEpoch()
                   << std::endl;
@@ -60,7 +60,7 @@ int main(int, char **)
     }
     std::cout << "================" << std::endl;
     std::cout << "List 2 " << dlist.size() << std::endl;
-    Q_FOREACH (const svn::DirEntry &entry, dlist) {
+    for (const svn::DirEntry &entry : std::as_const(dlist)) {
         QDateTime dt = svn::DateTime(entry.time()).toQDateTime();
         std::cout << entry.name().toUtf8().data() << " " << entry.lastAuthor().toUtf8().data() << " " << entry.size() << " " << dt.toSecsSinceEpoch()
                   << std::endl;

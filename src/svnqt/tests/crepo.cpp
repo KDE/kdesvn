@@ -35,6 +35,8 @@
 #include <qstringlist.h>
 #include <unistd.h>
 
+using namespace Qt::StringLiterals;
+
 class Listener : public svn::repository::RepositoryListener
 {
 public:
@@ -60,11 +62,11 @@ public:
 
 int main(int, char **)
 {
-    QString p = TESTREPOPATH;
+    QString p = QStringLiteral(TESTREPOPATH);
     Listener ls;
     svn::repository::Repository rp(&ls);
     try {
-        rp.CreateOpen(svn::repository::CreateRepoParameter().path(p).fstype("fsfs"));
+        rp.CreateOpen(svn::repository::CreateRepoParameter().path(p).fstype(u"fsfs"_s));
     } catch (const svn::ClientException &e) {
         QString ex = e.msg();
         std::cout << ex.toUtf8().data() << std::endl;
@@ -75,7 +77,7 @@ int main(int, char **)
     TestListener tl;
     svn::ContextP m_CurrentContext(new svn::Context);
     m_CurrentContext->setListener(&tl);
-    p = "file://" + p;
+    p = "file://"_L1 + p;
 
     m_Svnclient->setContext(m_CurrentContext);
     svn::Paths s;
@@ -86,7 +88,7 @@ int main(int, char **)
     cparams.moduleName(p).destination(QString::fromLatin1(TESTCOPATH)).revision(svn::Revision::HEAD).peg(svn::Revision::HEAD).depth(svn::DepthInfinity);
 
     try {
-        m_Svnclient->mkdir(svn::Targets(s), "Test mkdir");
+        m_Svnclient->mkdir(svn::Targets(s), u"Test mkdir"_s);
         m_Svnclient->checkout(cparams);
     } catch (const svn::ClientException &e) {
         QString ex = e.msg();

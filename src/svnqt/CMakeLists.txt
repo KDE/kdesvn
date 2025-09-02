@@ -124,12 +124,12 @@ if(WIN32)
 endif()
 
 # Just a small linking test
-if(KDE4_BUILD_TESTS)
+if(BUILD_TESTING)
     add_executable(testlink testmain.cpp)
     target_link_libraries(testlink svnqt)
 endif()
 
-if(KDE4_BUILD_TESTS)
+if(BUILD_TESTING)
   add_subdirectory(tests)
   add_subdirectory(cache/test)
 endif()

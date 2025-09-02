@@ -40,6 +40,8 @@
 #include <QSqlError>
 #include <QSqlQuery>
 
+using namespace Qt::StringLiterals;
+
 int main(int argc, char **argv)
 {
     QCoreApplication app(argc, argv);
@@ -50,14 +52,14 @@ int main(int argc, char **argv)
     QStringList list;
     QStringList::Iterator it;
     // goes into "self" of logcache
-    new svn::cache::LogCache(TESTDBPATH);
+    new svn::cache::LogCache(QStringLiteral(TESTDBPATH));
     list = QSqlDatabase::drivers();
     it = list.begin();
     while (it != list.end()) {
         std::cout << qPrintable(*it) << std::endl;
         ++it;
     }
-    svn::cache::ReposLog rl(m_Svnclient, "svn://anonsvn.kde.org/home/kde/");
+    svn::cache::ReposLog rl(m_Svnclient, u"svn://anonsvn.kde.org/home/kde/"_s);
     QSqlDatabase db = rl.Database();
     if (!db.isValid()) {
         std::cerr << "No database object." << std::endl;
@@ -85,7 +87,7 @@ int main(int argc, char **argv)
         return 3;
     }
 
-    svn::Revision r("{2014-09-27}");
+    svn::Revision r(u"{2014-09-27}"_s);
     const svn::Revision rNumber = rl.date2numberRev(r);
     std::cout << qPrintable(r.toString()) << " -> " << rNumber.revnum() << std::endl;
     if (rNumber.revnum() != 1400899) {
@@ -105,7 +107,7 @@ int main(int argc, char **argv)
         return 5;
     }
     QSqlQuery q(db);
-    QString stmt("insert into logentries(revision,date,author,message) values ('101','1122591406','alwin','copy and moving works now in basic form')");
+    QString stmt = u"insert into logentries(revision,date,author,message) values ('101','1122591406','alwin','copy and moving works now in basic form')"_s;
     if (!q.exec(stmt)) {
         std::cerr << "\nSelf: \n" << qPrintable(q.lastError().text()) << std::endl;
         return 6;
@@ -126,15 +128,12 @@ int main(int argc, char **argv)
     }
     std::cout << "Count: " << lm.count() << std::endl;
 
-    QStringList s;
-    s << "a"
-      << "b"
-      << "c";
+    QStringList s = {u"a"_s, u"b"_s, u"c"_s};
 
-    svn::cache::ReposConfig::self()->setValue("http://www.alwins-world.de/repos/kdesvn", "bommel", s);
-    list = svn::cache::ReposConfig::self()->readEntry("http://www.alwins-world.de/repos/kdesvn", "bommel", QStringList());
+    svn::cache::ReposConfig::self()->setValue(u"http://www.alwins-world.de/repos/kdesvn"_s, u"bommel"_s, s);
+    list = svn::cache::ReposConfig::self()->readEntry(u"http://www.alwins-world.de/repos/kdesvn"_s, u"bommel"_s, QStringList());
     std::cout << "Value: ";
-    foreach (const QString &entry, list) {
+    for (const QString &entry : std::as_const(list)) {
         std::cout << qPrintable(entry) << ",";
     }
     std::cout << std::endl;

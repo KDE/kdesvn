@@ -82,9 +82,7 @@ endif()
 
 add_definitions(-DQT_USE_QSTRINGBUILDER)
 add_definitions(-DQT_NO_CAST_TO_ASCII)
-# not (yet) possible
-#add_definitions(-DQT_NO_CAST_FROM_ASCII)
-add_definitions(-DQT_RESTRICTED_CAST_FROM_ASCII)
+add_definitions(-DQT_NO_CAST_FROM_ASCII)
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 # kde headers still use Q_FOREACH... :(
 # add_definitions(-DQT_NO_FOREACH)

@@ -27,6 +27,8 @@
 #include "svnqt/cache/ReposConfig.h"
 #include <QPointer>
 
+using namespace Qt::StringLiterals;
+
 DbSettings::DbSettings(const QString &repository, QWidget *parent)
     : KSvnDialog(QLatin1String("db_settings_dlg"), parent)
     , m_repository(repository)
@@ -47,11 +49,11 @@ DbSettings::~DbSettings()
 
 void DbSettings::init()
 {
-    m_ui->dbcfg_exclude_box->setItems(svn::cache::ReposConfig::self()->readEntry(m_repository, "tree_exclude_list", QStringList()));
-    m_ui->dbcfg_exclude_userslog->setItems(svn::cache::ReposConfig::self()->readEntry(m_repository, "exclude_log_users", QStringList()));
-    m_ui->dbcfg_exclude_log_pattern->setItems(svn::cache::ReposConfig::self()->readEntry(m_repository, "exclude_log_pattern", QStringList()));
-    m_ui->dbcfg_noCacheUpdate->setChecked(svn::cache::ReposConfig::self()->readEntry(m_repository, "no_update_cache", false));
-    m_ui->dbcfg_filter_empty_author->setChecked(svn::cache::ReposConfig::self()->readEntry(m_repository, "filter_empty_author", false));
+    m_ui->dbcfg_exclude_box->setItems(svn::cache::ReposConfig::self()->readEntry(m_repository, u"tree_exclude_list"_s, QStringList()));
+    m_ui->dbcfg_exclude_userslog->setItems(svn::cache::ReposConfig::self()->readEntry(m_repository, u"exclude_log_users"_s, QStringList()));
+    m_ui->dbcfg_exclude_log_pattern->setItems(svn::cache::ReposConfig::self()->readEntry(m_repository, u"exclude_log_pattern"_s, QStringList()));
+    m_ui->dbcfg_noCacheUpdate->setChecked(svn::cache::ReposConfig::self()->readEntry(m_repository, u"no_update_cache"_s, false));
+    m_ui->dbcfg_filter_empty_author->setChecked(svn::cache::ReposConfig::self()->readEntry(m_repository, u"filter_empty_author"_s, false));
 }
 
 void DbSettings::store_list(KEditListWidget *which, const QString &key)
@@ -69,11 +71,11 @@ void DbSettings::store_list(KEditListWidget *which, const QString &key)
 
 void DbSettings::accept()
 {
-    store_list(m_ui->dbcfg_exclude_box, "tree_exclude_list");
-    store_list(m_ui->dbcfg_exclude_userslog, "exclude_log_users");
-    store_list(m_ui->dbcfg_exclude_log_pattern, "exclude_log_pattern");
-    svn::cache::ReposConfig::self()->setValue(m_repository, "no_update_cache", m_ui->dbcfg_noCacheUpdate->isChecked());
-    svn::cache::ReposConfig::self()->setValue(m_repository, "filter_empty_author", m_ui->dbcfg_filter_empty_author->isChecked());
+    store_list(m_ui->dbcfg_exclude_box, u"tree_exclude_list"_s);
+    store_list(m_ui->dbcfg_exclude_userslog, u"exclude_log_users"_s);
+    store_list(m_ui->dbcfg_exclude_log_pattern, u"exclude_log_pattern"_s);
+    svn::cache::ReposConfig::self()->setValue(m_repository, u"no_update_cache"_s, m_ui->dbcfg_noCacheUpdate->isChecked());
+    svn::cache::ReposConfig::self()->setValue(m_repository, u"filter_empty_author"_s, m_ui->dbcfg_filter_empty_author->isChecked());
     KSvnDialog::accept();
 }
 

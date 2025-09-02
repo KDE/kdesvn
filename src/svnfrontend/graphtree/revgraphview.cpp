@@ -46,6 +46,8 @@
 
 #include <math.h>
 
+using namespace Qt::StringLiterals;
+
 #define LABEL_WIDTH 160
 #define LABEL_HEIGHT 90
 
@@ -142,7 +144,7 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
     }
     if (exitStatus != QProcess::NormalExit || exitcode != 0) {
         QString error = i18n("Could not run process \"%1\".\n\nProcess stopped with message:\n%2",
-                             m_renderProcess->program().join(" "),
+                             m_renderProcess->program().join(' '_L1),
                              QString::fromLocal8Bit(m_renderProcess->readAllStandardError()));
         showText(error);
         delete m_renderProcess;
@@ -150,7 +152,7 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
         return;
     }
     // remove line breaks when lines to long
-    QRegularExpression endslash("\\\\\\n");
+    QRegularExpression endslash(u"\\\\\\n"_s);
     m_dotOutput.remove(endslash);
     double scale = 1.0;
     double dotWidth = 1.0, dotHeight = 1.0;
@@ -195,7 +197,7 @@ void RevGraphView::dotExit(int exitcode, QProcess::ExitStatus exitStatus)
             m_Scene->setBackgroundBrush(Qt::white);
             continue;
         }
-        if (m_dotTmpFile && (cmd != "node") && (cmd != "edge")) {
+        if (m_dotTmpFile && (cmd != "node"_L1) && (cmd != "edge"_L1)) {
             qWarning() << "Ignoring unknown command '" << cmd << "' from dot (" << m_dotTmpFile->fileName() << ":" << lineno << ")" << Qt::endl;
             continue;
         }
@@ -472,7 +474,7 @@ void RevGraphView::dumpRevtree()
     stream << "digraph \"callgraph\" {\n";
     stream << "  bgcolor=\"transparent\";\n";
     int dir = Kdesvnsettings::tree_direction();
-    stream << QString("  rankdir=\"");
+    stream << "  rankdir=\"";
     switch (dir) {
     case 3:
         stream << "TB";
@@ -508,9 +510,9 @@ void RevGraphView::dumpRevtree()
     }
     stream << "}\n" << Qt::flush;
     m_renderProcess = new KProcess;
-    m_renderProcess->setEnv("LANG", "C");
-    *m_renderProcess << "dot";
-    *m_renderProcess << m_dotTmpFile->fileName() << "-Tplain";
+    m_renderProcess->setEnv(u"LANG"_s, u"C"_s);
+    *m_renderProcess << u"dot"_s;
+    *m_renderProcess << m_dotTmpFile->fileName() << u"-Tplain"_s;
     connect(m_renderProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &RevGraphView::dotExit);
     connect(m_renderProcess, &QProcess::readyReadStandardOutput, this, &RevGraphView::readDotOutput);
     m_renderProcess->setOutputChannelMode(KProcess::SeparateChannels);
@@ -542,7 +544,7 @@ QString RevGraphView::toolTip(const QString &_nodename, bool full) const
     }
     if (!full && sm.length() > 50) {
         sm.truncate(47);
-        sm += "...";
+        sm += "..."_L1;
     }
     static QLatin1String csep("</td><td>");
     static QLatin1String rend("</td></tr>");

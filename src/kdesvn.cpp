@@ -50,6 +50,8 @@
 #include <kcrash.h>
 #endif
 
+using namespace Qt::StringLiterals;
+
 kdesvn::kdesvn()
     : KParts::MainWindow()
     , KBookmarkOwner()
@@ -175,7 +177,7 @@ void kdesvn::load(const QUrl &url, bool addRescent)
             }
         }
         if (rac) {
-            KConfigGroup cg(KSharedConfig::openConfig(), "recent_files");
+            KConfigGroup cg(KSharedConfig::openConfig(), u"recent_files"_s);
             rac->saveEntries(cg);
         }
     }
@@ -194,7 +196,7 @@ void kdesvn::setupActions()
     KRecentFilesAction *rac = KStandardAction::openRecent(this, SLOT(loadRescent(QUrl)), actionCollection());
     if (rac) {
         rac->setMaxItems(8);
-        KConfigGroup cg(KSharedConfig::openConfig(), "recent_files");
+        KConfigGroup cg(KSharedConfig::openConfig(), u"recent_files"_s);
         rac->loadEntries(cg);
         rac->setText(i18n("Recent opened URLs"));
     }
@@ -208,7 +210,7 @@ void kdesvn::setupActions()
     toggletemp = new KToggleAction(i18n("Load last opened URL on start"), this);
     actionCollection()->addAction(QStringLiteral("toggle_load_last_url"), toggletemp);
     toggletemp->setToolTip(i18n("Reload last opened URL if no one is given on command line"));
-    KConfigGroup cs(KSharedConfig::openConfig(), "startup");
+    KConfigGroup cs(KSharedConfig::openConfig(), u"startup"_s);
     toggletemp->setChecked(cs.readEntry("load_last_on_start", false));
     connect(toggletemp, &QAction::toggled, this, &kdesvn::slotLoadLast);
 }
@@ -376,7 +378,7 @@ void kdesvn::closeEvent(QCloseEvent *ev)
 {
     Q_EMIT sigSavestate();
     if (m_part) {
-        KConfigGroup cs(KSharedConfig::openConfig(), "startup");
+        KConfigGroup cs(KSharedConfig::openConfig(), u"startup"_s);
         cs.writeEntry("lastURL", m_part->url().toString(QUrl::FullyEncoded));
         cs.sync();
     }
@@ -388,7 +390,7 @@ void kdesvn::closeEvent(QCloseEvent *ev)
  */
 void kdesvn::checkReload()
 {
-    KConfigGroup cs(KSharedConfig::openConfig(), "startup");
+    KConfigGroup cs(KSharedConfig::openConfig(), u"startup"_s);
     if (!cs.readEntry("load_last_on_start", false)) {
         return;
     }
@@ -404,7 +406,7 @@ void kdesvn::checkReload()
  */
 void kdesvn::slotLoadLast(bool how)
 {
-    KConfigGroup cs(KSharedConfig::openConfig(), "startup");
+    KConfigGroup cs(KSharedConfig::openConfig(), u"startup"_s);
     cs.writeEntry("load_last_on_start", how);
     cs.sync();
 }

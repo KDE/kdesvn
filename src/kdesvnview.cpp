@@ -45,6 +45,8 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 
+using namespace Qt::StringLiterals;
+
 kdesvnView::kdesvnView(KActionCollection *aCollection, QWidget *parent, bool full)
     : QWidget(parent)
     , svn::repository::RepositoryListener()
@@ -91,7 +93,7 @@ kdesvnView::kdesvnView(KActionCollection *aCollection, QWidget *parent, bool ful
 
     connect(this, &kdesvnView::sigMakeBaseDirs, m_TreeWidget, &MainTreeWidget::slotMkBaseDirs);
 
-    KConfigGroup cs(Kdesvnsettings::self()->config(), "kdesvn-mainlayout");
+    KConfigGroup cs(Kdesvnsettings::self()->config(), u"kdesvn-mainlayout"_s);
     QByteArray t1 = cs.readEntry("split1", QByteArray());
     if (!t1.isEmpty()) {
         m_Splitter->restoreState(t1);
@@ -115,7 +117,7 @@ kdesvnView::~kdesvnView()
 
 void kdesvnView::slotSavestate()
 {
-    KConfigGroup cs(Kdesvnsettings::self()->config(), "kdesvn-mainlayout");
+    KConfigGroup cs(Kdesvnsettings::self()->config(), u"kdesvn-mainlayout"_s);
     cs.writeEntry("split1", m_Splitter->saveState());
     if (m_infoSplitter) {
         cs.writeEntry("infosplit", m_infoSplitter->saveState());

@@ -26,6 +26,8 @@
 
 #include <KLocalizedString>
 
+using namespace Qt::StringLiterals;
+
 // FillCacheThread
 FillCacheThread::FillCacheThread(QObject *_parent, const QString &aPath, bool startup)
     : SvnThread(_parent)
@@ -70,7 +72,7 @@ void FillCacheThread::run()
         if (m_what.isEmpty() || svn::Url::isLocal(m_what)) {
             return;
         }
-        if (m_startup && svn::cache::ReposConfig::self()->readEntry(m_what, "no_update_cache", false)) {
+        if (m_startup && svn::cache::ReposConfig::self()->readEntry(m_what, u"no_update_cache"_s, false)) {
             m_SvnContextListener->contextNotify(i18n("Not filling log cache because it is disabled due setting for this repository."));
         } else {
             m_SvnContextListener->contextNotify(i18n("Filling log cache in background."));

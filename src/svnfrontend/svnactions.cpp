@@ -92,6 +92,9 @@
 
 /// @todo has to be removed for a real fix of ticket #613
 #include <svn_config.h>
+
+using namespace Qt::StringLiterals;
+
 // wait not longer than 10 seconds for a thread
 #define MAX_THREAD_WAITTIME 10000
 
@@ -1057,7 +1060,7 @@ bool SvnActions::makeCommit(const svn::Targets &targets)
             bool unversionedDirectoryAlreadyChecked = false;
             for (auto i = 0; i < _result.size(); ++i) {
                 // Avoid partial matching of directory names.
-                QRegularExpression re(*it + "(/|$)");
+                QRegularExpression re(*it + "(/|$)"_L1);
                 if (re.match(_result.at(i).name()).hasMatch()) {
                     for (auto j = i; j < _result.size(); ++j) {
                         if (*it == _result.at(j).name()) {

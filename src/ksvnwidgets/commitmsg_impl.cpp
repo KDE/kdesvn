@@ -37,6 +37,8 @@
 #include <QStringList>
 #include <QTemporaryFile>
 
+using namespace Qt::StringLiterals;
+
 #define MAX_MESSAGE_HISTORY 10
 
 QStringList Commitmsg_impl::sLogHistory = QStringList();
@@ -190,7 +192,7 @@ void Commitmsg_impl::initHistory()
 {
     if (smax_message_history == 0xFFFF) {
         smax_message_history = Kdesvnsettings::max_log_messages();
-        KConfigGroup cs(Kdesvnsettings::self()->config(), "log_messages");
+        KConfigGroup cs(Kdesvnsettings::self()->config(), u"log_messages"_s);
         QString s;
         int current = 0;
         QString key = QStringLiteral("log_%0").arg(current);
@@ -239,7 +241,7 @@ void Commitmsg_impl::saveHistory(bool canceld)
         if (sLogHistory.size() > smax_message_history) {
             sLogHistory.removeLast();
         }
-        KConfigGroup cs(Kdesvnsettings::self()->config(), "log_messages");
+        KConfigGroup cs(Kdesvnsettings::self()->config(), u"log_messages"_s);
         for (int i = 0; i < sLogHistory.size(); ++i) {
             cs.writeEntry(QStringLiteral("log_%0").arg(i), sLogHistory[i]);
         }

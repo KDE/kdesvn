@@ -39,6 +39,8 @@
 #include <QProgressDialog>
 #include <QWidget>
 
+using namespace Qt::StringLiterals;
+
 #define INTERNALCOPY 1
 #define INTERNALRENAME 2
 
@@ -89,7 +91,7 @@ bool RtreeData::getLogs(const QString &reposRoot, const svn::Revision &startr, c
     }
     svn::LogParameter params;
     params.targets(reposRoot).revisionRange(endr, startr).peg(startr).limit(0).discoverChangedPathes(true).strictNodeHistory(false);
-    const svn::StringArray ex(svn::cache::ReposConfig::self()->readEntry(reposRoot, "tree_exclude_list", QStringList()));
+    const svn::StringArray ex(svn::cache::ReposConfig::self()->readEntry(reposRoot, u"tree_exclude_list"_s, QStringList()));
     try {
         CursorStack a(Qt::BusyCursor);
         StopDlg sdlg(m_Listener, dlgParent, i18nc("@title:window", "Logs"), i18n("Getting logs - hit Cancel for abort"));
@@ -457,7 +459,7 @@ bool RevisionTree::bottomUpScan(long startrev, unsigned recurse, const QString &
                             /* cvs import - copy and deletion at same revision.
                              * CVS sucks.
                              */
-                            n1 = uniqueNodeName(j, "D_" + path);
+                            n1 = uniqueNodeName(j, "D_"_L1 + path);
                         }
                         if (lastrev > 0) {
                             m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].targets.append(RevGraphView::targetData(n1, FORWARDENTRY.action));
@@ -481,7 +483,7 @@ bool RevisionTree::bottomUpScan(long startrev, unsigned recurse, const QString &
                             /* cvs import - copy and deletion at same revision.
                              * CVS sucks.
                              */
-                            n1 = uniqueNodeName(j, "D_" + path);
+                            n1 = uniqueNodeName(j, "D_"_L1 + path);
                         }
                         if (lastrev > 0) {
                             m_Data->m_TreeDisplay->m_RevGraphView->m_Tree[n2].targets.append(RevGraphView::targetData(n1, FORWARDENTRY.action));

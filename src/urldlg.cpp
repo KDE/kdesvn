@@ -28,6 +28,8 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
+using namespace Qt::StringLiterals;
+
 UrlDlg::UrlDlg(QWidget *parent)
     : QDialog(parent)
     , m_urlRequester(nullptr)
@@ -39,7 +41,7 @@ UrlDlg::UrlDlg(QWidget *parent)
 
     KHistoryComboBox *combo = new KHistoryComboBox(this);
     combo->setDuplicatesEnabled(false);
-    KConfigGroup kc = KSharedConfig::openConfig()->group("Open-repository settings");
+    KConfigGroup kc = KSharedConfig::openConfig()->group(u"Open-repository settings"_s);
     int max = kc.readEntry(QLatin1String("Maximum history"), 15);
     combo->setMaxCount(max);
     const QStringList list = kc.readEntry(QLatin1String("History"), QStringList());
@@ -72,7 +74,7 @@ void UrlDlg::accept()
     KHistoryComboBox *combo = static_cast<KHistoryComboBox *>(m_urlRequester->comboBox());
     if (combo) {
         combo->addToHistory(m_urlRequester->url().url());
-        KConfigGroup kc = KSharedConfig::openConfig()->group("Open-repository settings");
+        KConfigGroup kc = KSharedConfig::openConfig()->group(u"Open-repository settings"_s);
         kc.writeEntry(QLatin1String("History"), combo->historyItems());
         kc.sync();
     }

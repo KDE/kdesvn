@@ -27,6 +27,8 @@
 
 #include <KLocalizedString>
 
+using namespace Qt::StringLiterals;
+
 MergeDlg_impl::MergeDlg_impl(QWidget *parent, bool src1, bool src2, bool out, bool record_only, bool reintegrate)
     : QWidget(parent)
     , Ui::MergeDlg()
@@ -143,7 +145,7 @@ QString MergeDlg_impl::Src1() const
 {
     QUrl uri(m_SrcOneInput->url());
     const QString proto = svn::Url::transformProtokoll(uri.scheme());
-    if (proto == QLatin1String("file") && !m_SrcOneInput->url().scheme().startsWith("ksvn+file:")) {
+    if (proto == QLatin1String("file") && !m_SrcOneInput->url().scheme().startsWith("ksvn+file:"_L1)) {
         return uri.toLocalFile();
     }
 
@@ -158,7 +160,7 @@ QString MergeDlg_impl::Src2() const
     }
     QUrl uri(m_SrcTwoInput->url());
     const QString proto = svn::Url::transformProtokoll(uri.scheme());
-    if (proto == QLatin1String("file") && !m_SrcTwoInput->url().scheme().startsWith("ksvn+file:")) {
+    if (proto == QLatin1String("file") && !m_SrcTwoInput->url().scheme().startsWith("ksvn+file:"_L1)) {
         return uri.toLocalFile();
     }
 

@@ -39,6 +39,8 @@
 #include <QTextStream>
 #include <QUrlQuery>
 
+using namespace Qt::StringLiterals;
+
 class pCPart
 {
 public:
@@ -273,24 +275,24 @@ int CommandExec::exec(const QCommandLineParser *parser)
     }
 
     if (!no_revision) {
-        if (m_pCPart->parser->isSet("R")) {
+        if (m_pCPart->parser->isSet(u"R"_s)) {
             m_pCPart->ask_revision = true;
             if (!askRevision()) {
                 return 0;
             }
-        } else if (m_pCPart->parser->isSet("r")) {
+        } else if (m_pCPart->parser->isSet(u"r"_s)) {
             scanRevision();
         }
     }
 
-    m_pCPart->force = check_force && m_pCPart->parser->isSet("f");
+    m_pCPart->force = check_force && m_pCPart->parser->isSet(u"f"_s);
 
-    if (m_pCPart->parser->isSet("o")) {
+    if (m_pCPart->parser->isSet(u"o"_s)) {
         m_pCPart->outfile_set = true;
-        m_pCPart->outfile = m_pCPart->parser->value("o");
+        m_pCPart->outfile = m_pCPart->parser->value(u"o"_s);
     }
-    if (m_pCPart->parser->isSet("l")) {
-        QString s = m_pCPart->parser->value("l");
+    if (m_pCPart->parser->isSet(u"l"_s)) {
+        QString s = m_pCPart->parser->value(u"l"_s);
         m_pCPart->log_limit = s.toInt();
         if (m_pCPart->log_limit < 0) {
             m_pCPart->log_limit = 0;
@@ -561,7 +563,7 @@ void CommandExec::slotNotifyMessage(const QString &msg)
     if (Kdesvnsettings::self()->cmdline_show_logwindow()) {
         ++m_lastMessagesLines;
         if (!m_lastMessages.isEmpty()) {
-            m_lastMessages.append("\n");
+            m_lastMessages.append('\n'_L1);
         }
         m_lastMessages.append(msg);
     }

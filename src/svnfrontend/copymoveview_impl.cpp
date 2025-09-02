@@ -23,6 +23,8 @@
 
 #include <KLocalizedString>
 
+using namespace Qt::StringLiterals;
+
 CopyMoveView_impl::CopyMoveView_impl(const QString &baseName, const QString &sourceName, bool move, QWidget *parent)
     : QWidget(parent)
 {
@@ -33,7 +35,7 @@ CopyMoveView_impl::CopyMoveView_impl(const QString &baseName, const QString &sou
         m_BaseName += QLatin1Char('/');
     }
     m_PrefixLabel->setText(m_BaseName);
-    m_OldNameLabel->setText("<b>" + sourceName + "</b>");
+    m_OldNameLabel->setText("<b>"_L1 + sourceName + "</b>"_L1);
     m_OldName = sourceName;
     if (m_BaseName.length() > 0) {
         QString t = m_OldName.right(m_OldName.length() - m_BaseName.length());

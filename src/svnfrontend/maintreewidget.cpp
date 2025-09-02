@@ -62,6 +62,8 @@
 #include <QTimer>
 #include <QUrlQuery>
 
+using namespace Qt::StringLiterals;
+
 class MainTreeWidgetData
 {
 public:
@@ -1067,7 +1069,7 @@ void MainTreeWidget::enableActions()
     enableAction(QStringLiteral("make_revisions_cat"), isopen && !single_dir && single);
     enableAction(QStringLiteral("switch_browse_revision"), !isWorkingCopy() && isopen);
     enableAction(QStringLiteral("make_check_updates"), isWorkingCopy() && isopen && remote_enabled);
-    enableAction(QStringLiteral("openwith"), KAuthorized::authorizeAction("openwith") && single && !single_dir);
+    enableAction(QStringLiteral("openwith"), KAuthorized::authorizeAction(u"openwith"_s) && single && !single_dir);
     enableAction(QStringLiteral("show_repository_settings"), isopen);
 
     enableAction(QStringLiteral("repo_statistic"), isopen);
@@ -1410,33 +1412,33 @@ void MainTreeWidget::execContextMenu(const SvnItemList &l)
     QString menuname;
 
     if (!isopen) {
-        menuname = "empty";
+        menuname = u"empty"_s;
     } else if (isWorkingCopy()) {
-        menuname = "local";
+        menuname = u"local"_s;
     } else {
-        menuname = "remote";
+        menuname = u"remote"_s;
     }
     if (l.isEmpty()) {
-        menuname += "_general";
+        menuname += "_general"_L1;
     } else if (l.count() > 1) {
-        menuname += "_context_multi";
+        menuname += "_context_multi"_L1;
     } else {
-        menuname += "_context_single";
+        menuname += "_context_single"_L1;
         if (isWorkingCopy()) {
             if (l.at(0)->isRealVersioned()) {
                 if (l.at(0)->isConflicted()) {
-                    menuname += "_conflicted";
+                    menuname += "_conflicted"_L1;
                 } else {
-                    menuname += "_versioned";
+                    menuname += "_versioned"_L1;
                     if (l.at(0)->isDir()) {
-                        menuname += "_dir";
+                        menuname += "_dir"_L1;
                     }
                 }
             } else {
-                menuname += "_unversioned";
+                menuname += "_unversioned"_L1;
             }
         } else if (l.at(0)->isDir()) {
-            menuname += "_dir";
+            menuname += "_dir"_L1;
         }
     }
 
@@ -1698,7 +1700,7 @@ void MainTreeWidget::slotDiffRevisions()
     }
 
     if (!k) {
-        what = (isWorkingCopy() ? "." : baseUri());
+        what = (isWorkingCopy() ? u"."_s : baseUri());
     } else {
         what = relativePath(k);
     }
@@ -1822,7 +1824,7 @@ void MainTreeWidget::dispProperties(bool force)
     svn::PathPropertiesMapListPtr pm;
     SvnItem *k = Selected();
     if (!k || !k->isRealVersioned()) {
-        Q_EMIT sigProplist(svn::PathPropertiesMapListPtr(), false, false, QString(""));
+        Q_EMIT sigProplist(svn::PathPropertiesMapListPtr(), false, false, QString());
         return;
     }
     svn::Revision rev(isWorkingCopy() ? svn::Revision::WORKING : baseRevision());
@@ -2502,7 +2504,7 @@ void MainTreeWidget::slotDirSelectionChanged(const QItemSelection &_item, const 
         auto item = m_Data->m_Model->nodeForIndex(_t);
         if (item) {
             const QString repoBasePath = baseUri();
-            const QString relativePath = item->fullName().mid(repoBasePath.lastIndexOf('/') + 1);
+            const QString relativePath = item->fullName().mid(repoBasePath.lastIndexOf('/'_L1) + 1);
             Q_EMIT changeCaption(relativePath);
         }
 

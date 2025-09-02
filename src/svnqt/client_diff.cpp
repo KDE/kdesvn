@@ -64,11 +64,11 @@ QByteArray Client_impl::diff_peg(const DiffParameter &options)
     error = svn_client_diff_peg5(
 #endif
         _options,
-        options.path1().cstr(),
+        options.path1().toUtf8().constData(),
         options.peg(),
         ddata.r1().revision(),
         ddata.r2().revision(),
-        options.relativeTo().length() > 0 ? options.relativeTo().cstr() : QByteArray(/*0*/),
+        options.relativeTo().length() > 0 ? options.relativeTo().toUtf8().constData() : nullptr,
         internal::DepthToSvn(options.depth()),
         options.ignoreAncestry(),
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)
@@ -120,11 +120,11 @@ QByteArray Client_impl::diff(const DiffParameter &options)
 #else
     error = svn_client_diff5(_options,
 #endif
-                             options.path1().cstr(),
+                             options.path1().toUtf8().constData(),
                              ddata.r1().revision(),
-                             options.path2().cstr(),
+                             options.path2().toUtf8().constData(),
                              ddata.r2().revision(),
-                             options.relativeTo().length() > 0 ? options.relativeTo().cstr() : QByteArray(/*0*/),
+                             options.relativeTo().length() > 0 ? options.relativeTo().toUtf8().constData() : nullptr,
                              internal::DepthToSvn(options.depth()),
                              options.ignoreAncestry(),
 #if SVN_API_VERSION >= SVN_VERSION_CHECK(1, 8, 0)

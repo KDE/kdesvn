@@ -53,9 +53,14 @@ Url::Url(const svn::Path &url)
 {
 }
 
+QByteArray Url::toUtf8() const
+{
+    return m_url.toUtf8();
+}
+
 QByteArray Url::cstr() const
 {
-    return m_url.cstr();
+    return toUtf8();
 }
 
 /* static helpers */

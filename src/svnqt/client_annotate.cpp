@@ -64,7 +64,7 @@ void Client_impl::annotate(AnnotatedFile &target, const AnnotateParameter &param
 {
     Pool pool;
     svn_error_t *error;
-    error = svn_client_blame5(params.path().cstr(),
+    error = svn_client_blame5(params.path().toUtf8().constData(),
                               params.pegRevision().revision(),
                               params.revisionRange().first,
                               params.revisionRange().second,

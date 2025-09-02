@@ -74,7 +74,7 @@ static svn_error_t *commit_callback2(const svn_commit_info_t *commit_info, void 
     mBaton *m_baton = (mBaton *)baton;
     ContextP m_context = m_baton->m_context;
     if (!m_context) {
-        return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
+        return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8().constData());
     }
     svn_client_ctx_t *ctx = m_context->ctx();
     if (ctx && ctx->cancel_func) {
@@ -94,8 +94,8 @@ Revision Client_impl::checkout(const CheckoutParameter &parameters)
     svn_revnum_t revnum = 0;
     svn_error_t *error = nullptr;
     error = svn_client_checkout3(&revnum,
-                                 parameters.moduleName().cstr(),
-                                 parameters.destination().cstr(),
+                                 parameters.moduleName().toUtf8().constData(),
+                                 parameters.destination().toUtf8().constData(),
                                  parameters.peg().revision(),
                                  parameters.revision().revision(),
                                  internal::DepthToSvn(parameters.depth()),
@@ -138,7 +138,7 @@ void Client_impl::add(const Path &path, svn::Depth depth, bool force, bool no_ig
 {
     Pool pool;
     // todo svn 1.8: svn_client_add5
-    svn_error_t *error = svn_client_add4(path.cstr(), internal::DepthToSvn(depth), force, no_ignore, add_parents, *m_context, pool);
+    svn_error_t *error = svn_client_add4(path.toUtf8().constData(), internal::DepthToSvn(depth), force, no_ignore, add_parents, *m_context, pool);
     if (error != nullptr) {
         throw ClientException(error);
     }
@@ -221,7 +221,7 @@ Revision Client_impl::copy(const CopyParameter &parameter)
     // not using .array() 'cause some extra information is needed for copy
     for (const Path &path : parameter.srcPath().targets()) {
         svn_client_copy_source_t *source = (svn_client_copy_source_t *)apr_palloc(pool, sizeof(svn_client_copy_source_t));
-        source->path = apr_pstrdup(pool, path.path().toUtf8());
+        source->path = apr_pstrdup(pool, path.toUtf8().constData());
         source->revision = parameter.srcRevision().revision();
         source->peg_revision = parameter.pegRevision().revision();
         APR_ARRAY_PUSH(sources, svn_client_copy_source_t *) = source;
@@ -230,7 +230,7 @@ Revision Client_impl::copy(const CopyParameter &parameter)
     _baton.m_context = m_context;
 
     svn_error_t *error = svn_client_copy6(sources,
-                                          parameter.destination().cstr(),
+                                          parameter.destination().toUtf8().constData(),
                                           parameter.asChild(),
                                           parameter.makeParent(),
                                           parameter.ignoreExternal(),
@@ -259,7 +259,7 @@ svn::Revision Client_impl::move(const CopyParameter &parameter)
     mBaton _baton;
     _baton.m_context = m_context;
     svn_error_t *error = svn_client_move6(parameter.srcPath().array(pool),
-                                          parameter.destination().cstr(),
+                                          parameter.destination().toUtf8().constData(),
                                           parameter.asChild(),
                                           parameter.makeParent(),
                                           map2hash(parameter.properties(), pool),
@@ -304,7 +304,7 @@ void Client_impl::cleanup(const Path &path)
     Pool subPool;
     apr_pool_t *apr_pool = subPool.pool();
 
-    svn_error_t *error = svn_client_cleanup(path.cstr(), *m_context, apr_pool);
+    svn_error_t *error = svn_client_cleanup(path.toUtf8().constData(), *m_context, apr_pool);
 
     if (error != nullptr) {
         throw ClientException(error);
@@ -315,7 +315,7 @@ void Client_impl::resolve(const Path &path, Depth depth, const ConflictResult &r
 {
     Pool pool;
     const svn_wc_conflict_result_t *aResult = resolution.result(pool);
-    svn_error_t *error = svn_client_resolve(path.cstr(), internal::DepthToSvn(depth), aResult->choice, *m_context, pool);
+    svn_error_t *error = svn_client_resolve(path.toUtf8().constData(), internal::DepthToSvn(depth), aResult->choice, *m_context, pool);
 
     if (error != nullptr) {
         throw ClientException(error);
@@ -335,8 +335,8 @@ Revision Client_impl::doExport(const CheckoutParameter &params)
         _neol = _neolBA.constData();
     }
     svn_error_t *error = svn_client_export5(&revnum,
-                                            params.moduleName().cstr(),
-                                            params.destination().cstr(),
+                                            params.moduleName().toUtf8().constData(),
+                                            params.destination().toUtf8().constData(),
                                             params.peg().revision(),
                                             params.revision().revision(),
                                             params.overWrite(),
@@ -365,8 +365,8 @@ Revision Client_impl::doSwitch(const Path &path,
     Pool pool;
     svn_revnum_t revnum = 0;
     svn_error_t *error = svn_client_switch3(&revnum,
-                                            path.cstr(),
-                                            url.cstr(),
+                                            path.toUtf8().constData(),
+                                            url.toUtf8().constData(),
                                             peg.revision(),
                                             revision.revision(),
                                             internal::DepthToSvn(depth),
@@ -397,8 +397,8 @@ Revision Client_impl::import(const Path &path,
     // todo svn 1.8: svn_client_import5
     mBaton _baton;
     _baton.m_context = m_context;
-    svn_error_t *error = svn_client_import4(path.cstr(),
-                                            importRepository.cstr(),
+    svn_error_t *error = svn_client_import4(path.toUtf8().constData(),
+                                            importRepository.toUtf8().constData(),
                                             internal::DepthToSvn(depth),
                                             no_ignore,
                                             no_unknown_nodetype,
@@ -421,7 +421,8 @@ void Client_impl::relocate(const Path &path, const Url &from_url, const Url &to_
 {
     Q_UNUSED(recurse);
     Pool pool;
-    svn_error_t *error = svn_client_relocate2(path.cstr(), from_url.cstr(), to_url.cstr(), ignore_externals, *m_context, pool);
+    svn_error_t *error =
+        svn_client_relocate2(path.toUtf8().constData(), from_url.toUtf8().constData(), to_url.toUtf8().constData(), ignore_externals, *m_context, pool);
 
     if (error != nullptr) {
         throw ClientException(error);

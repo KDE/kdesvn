@@ -66,11 +66,11 @@ void Path::init(const QString &path)
         QByteArray int_path = path.toUtf8();
 
         if (Url::isValid(path)) {
-            if (!svn_path_is_uri_safe(int_path)) {
-                int_path = svn_path_uri_encode(int_path, pool);
+            if (!svn_path_is_uri_safe(int_path.constData())) {
+                int_path = svn_path_uri_encode(int_path.constData(), pool);
             }
         } else {
-            int_path = svn_dirent_internal_style(int_path, pool.pool());
+            int_path = svn_dirent_internal_style(int_path.constData(), pool.pool());
         }
 
         m_path = QString::fromUtf8(int_path);
@@ -90,9 +90,14 @@ const QString &Path::path() const
     return m_path;
 }
 
-const QByteArray Path::cstr() const
+QByteArray Path::toUtf8() const
 {
     return m_path.toUtf8();
+}
+
+const QByteArray Path::cstr() const
+{
+    return toUtf8();
 }
 
 bool Path::isSet() const
@@ -108,12 +113,12 @@ void Path::addComponent(const QString &_component)
         component.chop(1);
     }
     if (Url::isValid(m_path)) {
-        const char *newPath = svn_path_url_add_component2(m_path.toUtf8(), component.toUtf8(), pool);
+        const char *newPath = svn_path_url_add_component2(m_path.toUtf8().constData(), component.toUtf8().constData(), pool);
         m_path = QString::fromUtf8(newPath);
     } else {
-        svn_stringbuf_t *pathStringbuf = svn_stringbuf_create(m_path.toUtf8(), pool);
+        svn_stringbuf_t *pathStringbuf = svn_stringbuf_create(m_path.toUtf8().constData(), pool);
 
-        svn_path_add_component(pathStringbuf, component.toUtf8());
+        svn_path_add_component(pathStringbuf, component.toUtf8().constData());
         m_path = QString::fromUtf8(pathStringbuf->data);
     }
 }
@@ -124,7 +129,7 @@ void Path::removeLast()
     if (m_path.length() <= 1) {
         m_path.clear();
     }
-    svn_stringbuf_t *pathStringbuf = svn_stringbuf_create(m_path.toUtf8(), pool);
+    svn_stringbuf_t *pathStringbuf = svn_stringbuf_create(m_path.toUtf8().constData(), pool);
     svn_path_remove_component(pathStringbuf);
     m_path = QString::fromUtf8(pathStringbuf->data);
 }
@@ -136,7 +141,7 @@ void Path::parsePeg(const QString &pathorurl, Path &_path, svn::Revision &_peg)
     svn_opt_revision_t pegr;
 
     Pool pool;
-    svn_error_t *error = svn_opt_parse_path(&pegr, &truepath, _buf, pool);
+    svn_error_t *error = svn_opt_parse_path(&pegr, &truepath, _buf.constData(), pool);
     if (error != nullptr) {
         throw ClientException(error);
     }
@@ -156,7 +161,7 @@ QString Path::native() const
         return m_path;
     }
     Pool pool;
-    return QString::fromUtf8(svn_dirent_local_style(m_path.toUtf8(), pool));
+    return QString::fromUtf8(svn_dirent_local_style(m_path.toUtf8().constData(), pool));
 }
 
 }

@@ -352,7 +352,7 @@ QStringList CContextListener::failure2Strings(apr_uint32_t acceptedFailures)
 
 QString CContextListener::translate(const QString &what)
 {
-    return i18n(what.toLocal8Bit());
+    return i18n(what.toLocal8Bit().constData());
 }
 
 /*!

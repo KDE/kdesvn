@@ -73,7 +73,7 @@ apr_array_header_t *Targets::array(const Pool &pool) const
     apr_array_header_t *apr_targets = apr_array_make(apr_pool, m_targets.size(), sizeof(const char *));
 
     for (const svn::Path &tgt : m_targets) {
-        const QByteArray s = tgt.path().toUtf8();
+        const QByteArray s = tgt.toUtf8().constData();
         char *t2 = apr_pstrndup(apr_pool, s.data(), s.size());
         (*((const char **)apr_array_push(apr_targets))) = t2;
     }

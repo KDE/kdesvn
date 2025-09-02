@@ -61,7 +61,7 @@ static svn_error_t *ProplistReceiver(void *baton, const char *path, apr_hash_t *
 
     ContextP l_context = _baton->m_context;
     if (!l_context) {
-        return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
+        return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8().constData());
     }
     svn_client_ctx_t *ctx = l_context->ctx();
     if (ctx && ctx->cancel_func) {
@@ -82,7 +82,7 @@ PathPropertiesMapListPtr Client_impl::proplist(const Path &path, const Revision 
     baton.m_context = m_context;
     baton.resultlist = path_prop_map_list;
     // todo svn 1.8: svn_client_proplist4
-    svn_error_t *error = svn_client_proplist3(path.cstr(),
+    svn_error_t *error = svn_client_proplist3(path.toUtf8().constData(),
                                               peg.revision(),
                                               revision.revision(),
                                               internal::DepthToSvn(depth),
@@ -107,8 +107,8 @@ Client_impl::propget(const QString &propName, const Path &path, const Revision &
     svn_revnum_t actual = svn_revnum_t(-1);
     // todo svn 1.8: svn_client_propget5
     svn_error_t *error = svn_client_propget4(&props,
-                                             propName.toUtf8(),
-                                             path.cstr(),
+                                             propName.toUtf8().constData(),
+                                             path.toUtf8().constData(),
                                              peg.revision(),
                                              revision.revision(),
                                              &actual,
@@ -148,15 +148,15 @@ void Client_impl::propset(const PropertiesParameter &params)
     if (params.propertyValue().isNull()) {
         propval = nullptr;
     } else {
-        propval = svn_string_create(params.propertyValue().toUtf8(), pool);
+        propval = svn_string_create(params.propertyValue().toUtf8().constData(), pool);
     }
 
     svn_error_t *error = nullptr;
-    const QByteArray tgtTmp = params.path().cstr();
-    if (svn_path_is_url(tgtTmp)) {
-        error = svn_client_propset_remote(params.propertyName().toUtf8(),
+    const QByteArray tgtTmp = params.path().toUtf8().constData();
+    if (svn_path_is_url(tgtTmp.constData())) {
+        error = svn_client_propset_remote(params.propertyName().toUtf8().constData(),
                                           propval,
-                                          tgtTmp,
+                                          tgtTmp.constData(),
                                           params.skipCheck(),
                                           params.revision(),
                                           map2hash(params.revisionProperties(), pool),
@@ -166,8 +166,8 @@ void Client_impl::propset(const PropertiesParameter &params)
                                           pool);
     } else {
         apr_array_header_t *targets = apr_array_make(pool, 1, sizeof(const char *));
-        APR_ARRAY_PUSH(targets, const char *) = tgtTmp;
-        error = svn_client_propset_local(params.propertyName().toUtf8(),
+        APR_ARRAY_PUSH(targets, const char *) = tgtTmp.constData();
+        error = svn_client_propset_local(params.propertyName().toUtf8().constData(),
                                          propval,
                                          targets,
                                          internal::DepthToSvn(params.depth()),
@@ -202,7 +202,7 @@ QPair<qlonglong, PropertiesMap> Client_impl::revproplist(const Path &path, const
 
     apr_hash_t *props;
     svn_revnum_t revnum;
-    svn_error_t *error = svn_client_revprop_list(&props, path.cstr(), revision.revision(), &revnum, *m_context, pool);
+    svn_error_t *error = svn_client_revprop_list(&props, path.toUtf8().constData(), revision.revision(), &revnum, *m_context, pool);
     if (error != nullptr) {
         throw ClientException(error);
     }
@@ -237,7 +237,8 @@ QPair<qlonglong, QString> Client_impl::revpropget(const QString &propName, const
 
     svn_string_t *propval;
     svn_revnum_t revnum;
-    svn_error_t *error = svn_client_revprop_get(propName.toUtf8(), &propval, path.cstr(), revision.revision(), &revnum, *m_context, pool);
+    svn_error_t *error =
+        svn_client_revprop_get(propName.toUtf8().constData(), &propval, path.toUtf8().constData(), revision.revision(), &revnum, *m_context, pool);
     if (error != nullptr) {
         throw ClientException(error);
     }
@@ -254,15 +255,16 @@ qlonglong Client_impl::revpropset(const PropertiesParameter &param)
 {
     Pool pool;
 
-    const svn_string_t *propval = param.propertyValue().isNull() ? nullptr : svn_string_create(param.propertyValue().toUtf8(), pool);
+    const svn_string_t *propval = param.propertyValue().isNull() ? nullptr : svn_string_create(param.propertyValue().toUtf8().constData(), pool);
 
     svn_revnum_t revnum;
 
-    const svn_string_t *oldpropval = param.propertyOriginalValue().isNull() ? nullptr : svn_string_create(param.propertyOriginalValue().toUtf8(), pool);
-    svn_error_t *error = svn_client_revprop_set2(param.propertyName().toUtf8(),
+    const svn_string_t *oldpropval =
+        param.propertyOriginalValue().isNull() ? nullptr : svn_string_create(param.propertyOriginalValue().toUtf8().constData(), pool);
+    svn_error_t *error = svn_client_revprop_set2(param.propertyName().toUtf8().constData(),
                                                  propval,
                                                  oldpropval,
-                                                 param.path().cstr(),
+                                                 param.path().toUtf8().constData(),
                                                  param.revision().revision(),
                                                  &revnum,
                                                  param.force(),
@@ -281,10 +283,10 @@ qlonglong Client_impl::revpropdel(const QString &propName, const Path &path, con
     Pool pool;
 
     svn_revnum_t revnum;
-    svn_error_t *error = svn_client_revprop_set2(propName.toUtf8(),
+    svn_error_t *error = svn_client_revprop_set2(propName.toUtf8().constData(),
                                                  nullptr, // value = NULL
                                                  nullptr,
-                                                 path.cstr(),
+                                                 path.toUtf8().constData(),
                                                  revision.revision(),
                                                  &revnum,
                                                  false,

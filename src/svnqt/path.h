@@ -71,9 +71,15 @@ public:
     const QString &path() const;
 
     /**
-     * @return Path string as c string
+     * @return Path string as a utf-8 byte-array
      */
-    const QByteArray cstr() const;
+    QByteArray toUtf8() const;
+
+    /**
+     * @return Path string as c string
+     * @deprecated use toByteArray instead
+     */
+    [[deprecated]] const QByteArray cstr() const;
 
     /**
      * check whether a path is set. Right now

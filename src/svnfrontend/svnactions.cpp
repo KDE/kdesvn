@@ -640,7 +640,7 @@ void SvnActions::slotMakeCat(const svn::Revision &start, const QString &what, co
         ptr->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
         ptr->setWordWrapMode(QTextOption::NoWrap);
         ptr->setReadOnly(true);
-        ptr->setText(QString::fromUtf8(co, co.size()));
+        ptr->setText(QString::fromUtf8(co));
         dlg->addWidget(ptr);
         dlg->exec();
         delete dlg;
@@ -1433,8 +1433,7 @@ void SvnActions::dispDiff(const QByteArray &ex)
                 tfile.setAutoRemove(false);
                 tfile.open();
                 fname_used = true;
-                QDataStream ds(&tfile);
-                ds.writeRawData(ex, ex.size());
+                tfile.write(ex);
                 *proc << tfile.fileName();
                 proc->appendTempFile(tfile.fileName());
                 tfile.close();

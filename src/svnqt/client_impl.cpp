@@ -64,7 +64,7 @@ void Client_impl::setContext(const ContextP &context)
 void Client_impl::url2Revision(const QString &revstring, Revision &start, Revision &end)
 {
     Pool pool;
-    int n = svn_opt_parse_revision(start, end, revstring.toUtf8(), pool);
+    int n = svn_opt_parse_revision(start, end, revstring.toUtf8().constData(), pool);
 
     if (n < 0) {
         start = Revision::UNDEFINED;
@@ -99,7 +99,7 @@ bool Client_impl::RepoHasCapability(const Path &repository, Capability capabilit
 
     svn_ra_session_t *session = nullptr;
     // todo svn 1.8: svn_client_open_ra_session2
-    error = svn_client_open_ra_session2(&session, repository.cstr(), nullptr, *m_context, resultPool, scratchPool);
+    error = svn_client_open_ra_session2(&session, repository.toUtf8().constData(), nullptr, *m_context, resultPool, scratchPool);
     if (error != nullptr) {
         throw ClientException(error);
     }

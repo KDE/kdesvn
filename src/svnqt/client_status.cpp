@@ -125,7 +125,7 @@ static svn_error_t *InfoEntryFunc(void *baton, const char *path, const svn_clien
         /* check every loop for cancel of operation */
         ContextP l_context = seb->m_Context;
         if (!l_context) {
-            return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
+            return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8().constData());
         }
         svn_client_ctx_t *ctx = l_context->ctx();
         if (ctx && ctx->cancel_func) {
@@ -145,7 +145,7 @@ static svn_error_t *StatusEntriesFunc(void *baton, const char *path, const svn_c
         /* check every loop for cancel of operation */
         ContextP l_context = seb->m_Context;
         if (!l_context) {
-            return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
+            return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8().constData());
         }
         svn_client_ctx_t *ctx = l_context->ctx();
         if (ctx && ctx->cancel_func) {
@@ -169,7 +169,7 @@ static StatusEntries localStatus(const StatusParameter &params, const ContextP &
 
     error = svn_client_status5(&revnum,
                                *context,
-                               params.path().path().toUtf8(),
+                               params.path().toUtf8().constData(),
                                rev,
                                internal::DepthToSvn(params.depth()), // see svn::Depth
                                params.all(), // get all not only interesting
@@ -231,7 +231,7 @@ static StatusPtr localSingleStatus(const Path &path, const ContextP &context, bo
 
     error = svn_client_status5(&revnum,
                                *context,
-                               path.path().toUtf8(),
+                               path.toUtf8().constData(),
                                rev,
                                svn_depth_empty, // not recurse
                                true, // get all not only interesting
@@ -307,15 +307,15 @@ InfoEntries Client_impl::info(const Path &_p, Depth depth, const Revision &rev, 
     svn_opt_revision_t pegr;
     const char *truepath = nullptr;
     bool internal_peg = false;
-    QByteArray _buf = _p.cstr();
+    QByteArray _buf = _p.toUtf8();
 
-    error = svn_opt_parse_path(&pegr, &truepath, _buf, pool);
+    error = svn_opt_parse_path(&pegr, &truepath, _buf.constData(), pool);
     checkErrorThrow(error);
     if (!truepath) {
         throw ClientException("no path given!");
     }
     if (peg_revision.kind() == svn_opt_revision_unspecified) {
-        if ((svn_path_is_url(_p.cstr())) && (pegr.kind == svn_opt_revision_unspecified)) {
+        if ((svn_path_is_url(_p.toUtf8().constData())) && (pegr.kind == svn_opt_revision_unspecified)) {
             pegr.kind = svn_opt_revision_head;
             internal_peg = true;
         }

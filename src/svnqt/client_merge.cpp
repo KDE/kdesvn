@@ -42,9 +42,9 @@ void Client_impl::merge_reintegrate(const MergeParameter &parameters)
 {
     Pool pool;
     svn_error_t *error = nullptr;
-    error = svn_client_merge_reintegrate(parameters.path1().cstr(),
+    error = svn_client_merge_reintegrate(parameters.path1().toUtf8().constData(),
                                          parameters.peg().revision(),
-                                         parameters.localPath().cstr(),
+                                         parameters.localPath().toUtf8().constData(),
                                          parameters.dry_run(),
                                          parameters.merge_options().array(pool),
                                          *m_context,
@@ -62,11 +62,11 @@ void Client_impl::merge(const MergeParameter &parameters)
         merge_reintegrate(parameters);
     } else {
         // todo svn 1.8: svn_client_merge5
-        error = svn_client_merge4(parameters.path1().cstr(),
+        error = svn_client_merge4(parameters.path1().toUtf8().constData(),
                                   parameters.revision1().revision(),
-                                  parameters.path2().cstr(),
+                                  parameters.path2().toUtf8().constData(),
                                   parameters.revision2().revision(),
-                                  parameters.localPath().cstr(),
+                                  parameters.localPath().toUtf8().constData(),
                                   internal::DepthToSvn(parameters.depth()),
                                   !parameters.notice_ancestry(),
                                   parameters.force(),
@@ -89,10 +89,10 @@ void Client_impl::merge_peg(const MergeParameter &parameters)
     internal::RevisionRangesToHash _rhash(parameters.revisions());
 
     // todo svn 1.8: svn_client_merge_peg5
-    svn_error_t *error = svn_client_merge_peg4(parameters.path1().cstr(),
+    svn_error_t *error = svn_client_merge_peg4(parameters.path1().toUtf8().constData(),
                                                _rhash.array(pool),
                                                parameters.peg(),
-                                               parameters.localPath().cstr(),
+                                               parameters.localPath().toUtf8().constData(),
                                                internal::DepthToSvn(parameters.depth()),
                                                !parameters.notice_ancestry(),
                                                parameters.force(),

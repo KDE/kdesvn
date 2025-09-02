@@ -127,8 +127,8 @@ public:
         for (auto it = _map.begin(); it != _map.end(); ++it) {
             const QByteArray s = it.value().toUtf8();
             const QByteArray n = it.key().toUtf8();
-            const char *propval = apr_pstrndup(pool, s, s.size());
-            const char *propname = apr_pstrndup(pool, n, n.size());
+            const char *propval = apr_pstrndup(pool, s.constData(), s.size());
+            const char *propname = apr_pstrndup(pool, n.constData(), n.size());
             apr_hash_set(hash, propname, APR_HASH_KEY_STRING, propval);
         }
         return hash;

@@ -76,7 +76,7 @@ DirEntries Client_impl::list(const Path &pathOrUrl, const Revision &revision, co
     Pool pool;
     // todo svn 1.8: svn_client_list3
     _baton.context = m_context;
-    svn_error_t *error = svn_client_list2(pathOrUrl.cstr(),
+    svn_error_t *error = svn_client_list2(pathOrUrl.toUtf8().constData(),
                                           peg,
                                           revision,
                                           svn::internal::DepthToSvn(depth),

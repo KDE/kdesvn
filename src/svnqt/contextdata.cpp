@@ -281,12 +281,12 @@ const QString &ContextData::configDir() const
 svn_error_t *ContextData::getContextData(void *baton, ContextData **data)
 {
     if (baton == nullptr)
-        return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "invalid baton").toUtf8());
+        return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "invalid baton").toUtf8().constData());
 
     ContextData *data_ = static_cast<ContextData *>(baton);
 
     if (data_->listener == nullptr)
-        return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "invalid listener").toUtf8());
+        return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "invalid listener").toUtf8().constData());
 
     *data = data_;
     return SVN_NO_ERROR;
@@ -306,8 +306,8 @@ void ContextData::setLogin(const QString &usr, const QString &pwd)
     username = usr;
     password = pwd;
     svn_auth_baton_t *ab = m_ctx->auth_baton;
-    svn_auth_set_parameter(ab, SVN_AUTH_PARAM_DEFAULT_USERNAME, username.toUtf8());
-    svn_auth_set_parameter(ab, SVN_AUTH_PARAM_DEFAULT_PASSWORD, password.toUtf8());
+    svn_auth_set_parameter(ab, SVN_AUTH_PARAM_DEFAULT_USERNAME, username.toUtf8().constData());
+    svn_auth_set_parameter(ab, SVN_AUTH_PARAM_DEFAULT_PASSWORD, password.toUtf8().constData());
 }
 
 void ContextData::setLogMessage(const QString &msg)
@@ -616,7 +616,7 @@ void ContextData::reset()
 
 svn_error_t *ContextData::generate_cancel_error()
 {
-    return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8());
+    return svn_error_create(SVN_ERR_CANCELLED, nullptr, QCoreApplication::translate("svnqt", "Cancelled by user.").toUtf8().constData());
 }
 
 void ContextData::onProgress(apr_off_t progress, apr_off_t total, void *baton, apr_pool_t *)

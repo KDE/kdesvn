@@ -54,7 +54,15 @@ public:
     /** Destructor */
     ~Url() = default;
 
-    QByteArray cstr() const;
+    /**
+     * Url as a utf-8 byte array
+     */
+    QByteArray toUtf8() const;
+
+    /**
+     * @deprecated Use toByteArray instead
+     */
+    [[deprecated]] QByteArray cstr() const;
 
     /**
      * Checks if @a url is valid

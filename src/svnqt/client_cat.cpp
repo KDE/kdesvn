@@ -77,7 +77,7 @@ svn_error_t *Client_impl::internal_cat(const Path &path, const Revision &revisio
     Pool pool;
     Pool scratch_pool;
     apr_hash_t *props = nullptr;
-    return svn_client_cat3(&props, buffer, path.path().toUtf8(), peg_revision.revision(), revision.revision(), true, *m_context, pool, scratch_pool);
+    return svn_client_cat3(&props, buffer, path.toUtf8().constData(), peg_revision.revision(), revision.revision(), true, *m_context, pool, scratch_pool);
 }
 
 }

@@ -62,24 +62,24 @@ void DiffData::init()
 #if SVN_API_VERSION < SVN_VERSION_CHECK(1, 8, 0)
     svn_error_t *error;
     Pool scratchPool;
-    error = svn_io_open_unique_file3(&m_outFile, &m_outFileName, m_tmpPath.path().toUtf8(), svn_io_file_del_on_pool_cleanup, m_Pool, scratchPool);
+    error = svn_io_open_unique_file3(&m_outFile, &m_outFileName, m_tmpPath.toUtf8().constData(), svn_io_file_del_on_pool_cleanup, m_Pool, scratchPool);
 
     if (error != 0) {
         clean();
         throw ClientException(error);
     }
-    error = svn_io_open_unique_file3(&m_errFile, &m_errFileName, m_tmpPath.path().toUtf8(), svn_io_file_del_on_pool_cleanup, m_Pool, scratchPool);
+    error = svn_io_open_unique_file3(&m_errFile, &m_errFileName, m_tmpPath.toUtf8().constData(), svn_io_file_del_on_pool_cleanup, m_Pool, scratchPool);
     if (error != 0) {
         clean();
         throw ClientException(error);
     }
 #endif
-    if (svn_path_is_url(m_p1.cstr())) {
+    if (svn_path_is_url(m_p1.toUtf8().constData())) {
         m_url_is_present = true;
     } else {
         m_working_copy_present = true;
     }
-    if (svn_path_is_url(m_p2.cstr())) {
+    if (svn_path_is_url(m_p2.toUtf8().constData())) {
         m_url_is_present = true;
     } else {
         m_working_copy_present = true;

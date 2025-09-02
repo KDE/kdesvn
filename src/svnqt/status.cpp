@@ -75,7 +75,7 @@ void Status_private::setPath(const QString &aPath)
     if (!Url::isValid(aPath)) {
         m_Path = aPath;
     } else {
-        const char *int_path = svn_path_uri_decode(aPath.toUtf8(), pool.pool());
+        const char *int_path = svn_path_uri_decode(aPath.toUtf8().constData(), pool.pool());
         m_Path = QString::fromUtf8(int_path);
     }
 }

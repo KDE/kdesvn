@@ -74,7 +74,7 @@ svn_error_t *SvnStream_private::stream_read(void *baton, char *data, apr_size_t 
 
     if (res < 0) {
         *len = 0;
-        return svn_error_create(SVN_ERR_MALFORMED_FILE, nullptr, b->lastError().toUtf8());
+        return svn_error_create(SVN_ERR_MALFORMED_FILE, nullptr, b->lastError().toUtf8().constData());
     }
     *len = res;
     return SVN_NO_ERROR;
@@ -94,7 +94,7 @@ svn_error_t *SvnStream_private::stream_write(void *baton, const char *data, apr_
     long res = b->isOk() ? b->write(data, *len) : -1;
     if (res < 0) {
         *len = 0;
-        return svn_error_create(SVN_ERR_MALFORMED_FILE, nullptr, b->lastError().toUtf8());
+        return svn_error_create(SVN_ERR_MALFORMED_FILE, nullptr, b->lastError().toUtf8().constData());
     }
     *len = res;
     return SVN_NO_ERROR;

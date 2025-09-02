@@ -102,7 +102,7 @@ void Revision::assign(const QString &revstring)
     } else if (!revstring.isNull()) {
         Pool pool;
         svn_opt_revision_t endrev;
-        svn_opt_parse_revision(&m_revision, &endrev, revstring.toUtf8(), pool);
+        svn_opt_parse_revision(&m_revision, &endrev, revstring.toUtf8().constData(), pool);
     }
 }
 

@@ -4,8 +4,10 @@ macro(BUILD_TEST tname)
   if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${tname}.h)
         set(${tname}-src ${${tname}-src} ${tname}.h)
   endif()
-  add_executable(${tname} ${${tname}-src})
-  target_link_libraries(${tname} svnqt Qt::Core Qt::Sql)
-  add_test(NAME ${tname} COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${tname})
+  ecm_add_test(
+    ${${tname}-src}
+    TEST_NAME ${tname}
+    LINK_LIBRARIES svnqt Qt::Core Qt::Sql
+  )
 endmacro()
 

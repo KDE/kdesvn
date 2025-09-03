@@ -62,7 +62,7 @@ Targets::Targets(const QString &target)
 
 Targets::Targets(const Path &target)
 {
-    if (!target.cstr().isEmpty()) {
+    if (!target.path().isEmpty()) {
         m_targets.push_back(target);
     }
 }

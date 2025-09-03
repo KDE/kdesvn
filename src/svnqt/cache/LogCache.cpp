@@ -413,7 +413,7 @@ void LogCache::setupMainDb()
         if (!list.contains(SQLSTATUS())) {
             mainDB.transaction();
             if (q.exec(QLatin1String("CREATE TABLE \"") + SQLSTATUS() + QLatin1String("\" (\"key\" TEXT PRIMARY KEY NOT NULL, \"value\" TEXT);"))) {
-                q.exec(QLatin1String("INSERT INTO \"") + SQLSTATUS() + QLatin1String("\" (key,value) values(\"version\",\"0\");"));
+                q.exec(QLatin1String("INSERT INTO \"") + SQLSTATUS() + QLatin1String("\" (key,value) values('version','0');"));
             }
             mainDB.commit();
         }
@@ -465,7 +465,7 @@ int LogCache::databaseVersion() const
     if (!mainDB.isValid()) {
         return -1;
     }
-    static const QString _qs(QLatin1String("select value from \"") + SQLSTATUS() + QLatin1String("\" WHERE \"key\" = \"version\""));
+    static const QString _qs(QLatin1String("select value from \"") + SQLSTATUS() + QLatin1String("\" WHERE \"key\" = 'version'"));
     QSqlQuery cur(mainDB);
     cur.prepare(_qs);
     if (!cur.exec()) {

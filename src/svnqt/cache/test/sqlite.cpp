@@ -87,7 +87,7 @@ int main(int argc, char **argv)
         return 3;
     }
 
-    svn::Revision r(u"{2014-09-27}"_s);
+    svn::Revision r(u"{2014-09-26 19:11:45 +0000}"_s);
     const svn::Revision rNumber = rl.date2numberRev(r);
     std::cout << qPrintable(r.toString()) << " -> " << rNumber.revnum() << std::endl;
     if (rNumber.revnum() != 1400899) {

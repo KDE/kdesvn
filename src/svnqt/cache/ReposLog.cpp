@@ -158,7 +158,7 @@ qlonglong svn::cache::ReposLog::count() const
     if (_q.isActive() && _q.next()) {
         // qDebug("Sel result: %s",_q.value(0).toString().toUtf8().data());
         v = _q.value(0);
-        if (v.canConvert(QVariant::LongLong)) {
+        if (v.canConvert(QMetaType{QMetaType::LongLong})) {
             bool ok = false;
             _r = v.toLongLong(&ok);
             if (ok) {
@@ -203,7 +203,7 @@ qlonglong svn::cache::ReposLog::itemCount() const
     if (_q.isActive() && _q.next()) {
         // qDebug("Sel result: %s",_q.value(0).toString().toUtf8().data());
         v = _q.value(0);
-        if (v.canConvert(QVariant::LongLong)) {
+        if (v.canConvert(QMetaType{QMetaType::LongLong})) {
             bool ok = false;
             _r = v.toLongLong(&ok);
             if (ok) {

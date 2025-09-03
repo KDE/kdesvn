@@ -34,6 +34,8 @@
 // apr
 #include <apr_date.h>
 
+#include <QTimeZone>
+
 namespace svn
 {
 DateTime::DateTime()
@@ -78,7 +80,7 @@ void DateTime::setAprTime(apr_time_t aTime)
     } else {
         m_time = QDateTime::fromMSecsSinceEpoch(aTime / 1000); // microsec -> millisec
     }
-    m_time.setTimeSpec(Qt::LocalTime);
+    m_time.setTimeZone(QTimeZone{QTimeZone::LocalTime});
 }
 
 QString DateTime::toString() const

@@ -255,7 +255,7 @@ bool CommitModelCheckitem::setData(const QModelIndex &index, const QVariant &val
     if (index.column() != ItemColumn() || role != Qt::CheckStateRole || !index.isValid() || index.row() >= m_List.count()) {
         return CommitModel::setData(index, value, role);
     }
-    if (value.type() == QVariant::Int) {
+    if (value.typeId() == QMetaType::Int) {
         CommitModelNodePtr _l = m_List.at(index.row());
         bool old = _l->checked();
         bool nv = value.toInt() > 0;

@@ -117,39 +117,39 @@ QVariant ReposConfigPrivate::convertToQVariant(const QByteArray &value, const QV
     // if a type handler is added here you must add a QVConversions definition
     // to conversion_check.h, or ConversionCheck::to_QVariant will not allow
     // readEntry<T> to convert to QVariant.
-    switch (aDefault.type()) {
-    case QVariant::Invalid:
+    switch (aDefault.typeId()) {
+    case QMetaType::UnknownType:
         return QVariant();
-    case QVariant::String:
+    case QMetaType::QString:
         // this should return the raw string not the dollar expanded string.
         // imho if processed string is wanted should call
         // readEntry(key, QString) not readEntry(key, QVariant)
         return QString::fromUtf8(value);
-    case QVariant::List:
-    case QVariant::StringList:
+    case QMetaType::QVariantList:
+    case QMetaType::QStringList:
         return deserializeList(value);
-    case QVariant::ByteArray:
+    case QMetaType::QByteArray:
         return value;
-    case QVariant::Bool: {
+    case QMetaType::Bool: {
         const QByteArray lower(value.toLower());
         if (lower == "false" || lower == "no" || lower == "off" || lower == "0") {
             return false;
         }
         return true;
     }
-    case QVariant::Double:
+    case QMetaType::Double:
     case QMetaType::Float:
-    case QVariant::Int:
-    case QVariant::UInt:
-    case QVariant::LongLong:
-    case QVariant::ULongLong: {
+    case QMetaType::Int:
+    case QMetaType::UInt:
+    case QMetaType::LongLong:
+    case QMetaType::ULongLong: {
         QVariant tmp = value;
-        if (!tmp.convert(aDefault.type())) {
+        if (!tmp.convert(aDefault.metaType())) {
             tmp = aDefault;
         }
         return tmp;
     }
-    case QVariant::DateTime: {
+    case QMetaType::QDateTime: {
         const QVector<int> list = asIntVec(value);
         if (list.count() != 6) {
             return aDefault;
@@ -162,7 +162,7 @@ QVariant ReposConfigPrivate::convertToQVariant(const QByteArray &value, const QV
         }
         return dt;
     }
-    case QVariant::Date: {
+    case QMetaType::QDate: {
         QVector<int> list = asIntVec(value);
         if (list.count() == 6) {
             list = list.mid(0, 3); // don't break config files that stored QDate as QDateTime
@@ -201,27 +201,27 @@ ReposConfig::ReposConfig()
 void ReposConfig::setValue(const QString &repository, const QString &key, const QVariant &value)
 {
     QByteArray data;
-    switch (value.type()) {
-    case QVariant::Invalid:
+    switch (value.typeId()) {
+    case QMetaType::UnknownType:
         break;
-    case QVariant::ByteArray:
+    case QMetaType::QByteArray:
         data = value.toByteArray();
         break;
-    case QVariant::String:
-    case QVariant::Int:
-    case QVariant::UInt:
-    case QVariant::Double:
+    case QMetaType::QString:
+    case QMetaType::Int:
+    case QMetaType::UInt:
+    case QMetaType::Double:
     case QMetaType::Float:
-    case QVariant::Bool:
-    case QVariant::LongLong:
-    case QVariant::ULongLong:
+    case QMetaType::Bool:
+    case QMetaType::LongLong:
+    case QMetaType::ULongLong:
         data = value.toString().toUtf8();
         break;
-    case QVariant::List:
-    case QVariant::StringList:
+    case QMetaType::QVariantList:
+    case QMetaType::QStringList:
         setValue(repository, key, value.toList());
         return;
-    case QVariant::Date: {
+    case QMetaType::QDate: {
         QVariantList list;
         const QDate date = value.toDate();
 
@@ -232,7 +232,7 @@ void ReposConfig::setValue(const QString &repository, const QString &key, const 
         setValue(repository, key, list);
         return;
     }
-    case QVariant::DateTime: {
+    case QMetaType::QDateTime: {
         QVariantList list;
         const QDateTime rDateTime = value.toDateTime();
 
@@ -269,7 +269,7 @@ void ReposConfig::setValue(const QString &repository, const QString &key, const 
     QList<QByteArray> data;
 
     for (const QVariant &v : list) {
-        if (v.type() == QVariant::ByteArray) {
+        if (v.typeId() == QMetaType::QByteArray) {
             data << v.toByteArray();
         } else {
             data << v.toString().toUtf8();

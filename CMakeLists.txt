@@ -32,6 +32,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${CMAKE_SOURCE_DIR
 add_definitions(-DTRANSLATION_DOMAIN="kdesvn")
 
 include(ECMAddTests)
+include(ECMDeprecationSettings)
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
@@ -81,8 +82,7 @@ if(TESTINGBUILD)
     add_definitions(-DDEBUG_TIMER=1)
 endif()
 
-add_definitions(-DQT_DEPRECATED_WARNINGS)
-add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050900)
+ecm_set_disabled_deprecation_versions(QT 5.9 KF 6.0)
 
 # include(MacroEnsureVersion)
 include(FindSubversion)

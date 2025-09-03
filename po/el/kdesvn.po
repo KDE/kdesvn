@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-23 00:45+0000\n"
+"POT-Creation-Date: 2025-09-03 00:46+0000\n"
 "PO-Revision-Date: 2021-10-13 10:45+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -112,7 +112,7 @@ msgid "Add to Repository"
 msgstr "Προστέθηκε στο αποθετήριο"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:80
-#: src/svnfrontend/maintreewidget.cpp:653
+#: src/svnfrontend/maintreewidget.cpp:655
 #, kde-format
 msgid "Check for unversioned items"
 msgstr "Έλεγχος για αντικείμενα χωρίς έκδοση"
@@ -147,7 +147,7 @@ msgid "Switch..."
 msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:100
-#: src/svnfrontend/maintreewidget.cpp:824
+#: src/svnfrontend/maintreewidget.cpp:826
 #, kde-format
 msgid "Merge..."
 msgstr "Συγχώνευση..."
@@ -181,86 +181,86 @@ msgstr "Πλήρες δέντρο αναθεώρησης"
 msgid "Subversion (kdesvn)"
 msgstr "Subversion Admin"
 
-#: src/kdesvn.cpp:80
+#: src/kdesvn.cpp:82
 #, kde-format
 msgid "&Bookmarks"
 msgstr "&Σελιδοδείκτες"
 
-#: src/kdesvn.cpp:104
+#: src/kdesvn.cpp:106
 #, kde-format
 msgid "Create and open new repository"
 msgstr "Δημιουργία και άνοιγμα νέου αποθετηρίου"
 
-#: src/kdesvn.cpp:105
+#: src/kdesvn.cpp:107
 #, kde-format
 msgid "Create and opens a new local Subversion repository"
 msgstr "Δημιουργεί και ανοίγει ένα νέο τοπικό αποθετήριο Subversion"
 
-#: src/kdesvn.cpp:108
+#: src/kdesvn.cpp:110
 #, kde-format
 msgid "Dump repository to file"
 msgstr "Dump αποθετηρίου σε αρχείο"
 
-#: src/kdesvn.cpp:109
+#: src/kdesvn.cpp:111
 #, kde-format
 msgid "Dump a Subversion repository to a file"
 msgstr "Dump ενός αποθετηρίου Subversion σε ένα αρχείο"
 
-#: src/kdesvn.cpp:112
+#: src/kdesvn.cpp:114
 #, kde-format
 msgid "Hotcopy a repository"
 msgstr "Hotcopy ενός αποθετηρίου"
 
-#: src/kdesvn.cpp:113
+#: src/kdesvn.cpp:115
 #, kde-format
 msgid "Hotcopy a Subversion repository to a new folder"
 msgstr "Hotcopy ενός αποθετηρίου Subversion σε ένα νέο φάκελο"
 
-#: src/kdesvn.cpp:116
+#: src/kdesvn.cpp:118
 #, kde-format
 msgid "Load dump into repository"
 msgstr "Φόρτωση ενός dump σε ένα αποθετήριο"
 
-#: src/kdesvn.cpp:117
+#: src/kdesvn.cpp:119
 #, kde-format
 msgid "Load a dump file into a repository."
 msgstr "Φόρτωση ενός αρχείου dump σε ένα αποθετήριο."
 
-#: src/kdesvn.cpp:120
+#: src/kdesvn.cpp:122
 #, kde-format
 msgid "Add ssh identities to ssh-agent"
 msgstr "Προσθήκη των ssh ταυτοτήτων στο ssh-agent"
 
-#: src/kdesvn.cpp:121
+#: src/kdesvn.cpp:123
 #, kde-format
 msgid "Force add ssh-identities to ssh-agent for future use."
 msgstr "Εξαναγκασμός προσθήκης των ταυτοτήτων ssh για μελλοντική χρήση."
 
-#: src/kdesvn.cpp:124
+#: src/kdesvn.cpp:126
 #, kde-format
 msgid "Info about kdesvn part"
 msgstr "Πληροφορίες σχετικά με το τμήμα kdesvn"
 
-#: src/kdesvn.cpp:125
+#: src/kdesvn.cpp:127
 #, kde-format
 msgid "Shows info about the kdesvn plugin and not the standalone application."
 msgstr ""
 "Εμφανίζει πληροφορίες σχετικά με το πρόσθετο kdesvn και όχι την αυτόνομη "
 "εφαρμογή."
 
-#: src/kdesvn.cpp:128
+#: src/kdesvn.cpp:130
 #, kde-format
 msgid "Show database content"
 msgstr "Εμφάνιση του περιεχομένου της βάσης δεδομένων"
 
-#: src/kdesvn.cpp:129
+#: src/kdesvn.cpp:131
 #, kde-format
 msgid "Show the content of log cache database"
 msgstr ""
 "Εμφάνιση του περιεχομένου της βάσης δεδομένων της λανθάνουσας μνήμης "
 "καταγραφών"
 
-#: src/kdesvn.cpp:136
+#: src/kdesvn.cpp:138
 #, fuzzy, kde-format
 #| msgid ""
 #| "Could not load the part:\n"
@@ -272,29 +272,29 @@ msgstr ""
 "Αδυναμία φόρτωσης του τμήματος:\n"
 "%1"
 
-#: src/kdesvn.cpp:167
+#: src/kdesvn.cpp:169
 #, kde-format
 msgid "Could not open URL %1"
 msgstr "Αδυναμία ανοίγματος του URL %1"
 
-#: src/kdesvn.cpp:199
+#: src/kdesvn.cpp:201
 #, kde-format
 msgid "Recent opened URLs"
 msgstr "Πρόσφατα ανοιγμένα URL"
 
-#: src/kdesvn.cpp:208
+#: src/kdesvn.cpp:210
 #, kde-format
 msgid "Load last opened URL on start"
 msgstr "Φόρτωση του τελευταία ανοιγμένου URL στην εκκίνηση"
 
-#: src/kdesvn.cpp:210
+#: src/kdesvn.cpp:212
 #, kde-format
 msgid "Reload last opened URL if no one is given on command line"
 msgstr ""
 "Επαναφόρτωση του τελευταία ανοιγμένου URL αν δεν δοθεί κάποιο στη γραμμή "
 "εντολών"
 
-#: src/kdesvn.cpp:293
+#: src/kdesvn.cpp:295
 #, kde-format
 msgid "Ready"
 msgstr "Έτοιμο"
@@ -569,77 +569,77 @@ msgstr "Βάση δεδομένων"
 msgid "&Settings"
 msgstr "&Ρυθμίσεις"
 
-#: src/kdesvnview.cpp:130 src/kdesvnview.cpp:164
+#: src/kdesvnview.cpp:132 src/kdesvnview.cpp:166
 #, kde-format
 msgid "Repository opened"
 msgstr "Αποθετήριο ανοιχτό"
 
-#: src/kdesvnview.cpp:170
+#: src/kdesvnview.cpp:172
 #, kde-format
 msgid "Could not open repository"
 msgstr "Αδυναμία ανοίγματος του αποθετηρίου"
 
-#: src/kdesvnview.cpp:195
+#: src/kdesvnview.cpp:197
 #, kde-format
 msgid "No repository open"
 msgstr "Κανένα αποθετήριο ανοιχτό"
 
-#: src/kdesvnview.cpp:255
+#: src/kdesvnview.cpp:257
 #, kde-format
 msgctxt "@title:window"
 msgid "Hotcopy a Repository"
 msgstr "Hotcopy ενός αποθετηρίου"
 
-#: src/kdesvnview.cpp:273
+#: src/kdesvnview.cpp:275
 #, kde-format
 msgid "Hotcopy finished."
 msgstr "Hotcopy ολοκληρώθηκε."
 
-#: src/kdesvnview.cpp:282
+#: src/kdesvnview.cpp:284
 #, kde-format
 msgctxt "@title:window"
 msgid "Load a Repository From an svndump"
 msgstr "Φόρτωση αποθετηρίου από ένα svndump"
 
-#: src/kdesvnview.cpp:332
+#: src/kdesvnview.cpp:334
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Dump"
 msgstr "Φόρτωση αρχείου Dump"
 
-#: src/kdesvnview.cpp:332
+#: src/kdesvnview.cpp:334
 #, kde-format
 msgid "Loading a dump into a repository."
 msgstr "Φόρτωση ενός αρχείου dump σε ένα αποθετήριο."
 
-#: src/kdesvnview.cpp:334
+#: src/kdesvnview.cpp:336
 #, kde-format
 msgid "Loading dump finished."
 msgstr "Η φόρτωση του dump ολοκληρώθηκε."
 
-#: src/kdesvnview.cpp:344
+#: src/kdesvnview.cpp:346
 #, kde-format
 msgctxt "@title:window"
 msgid "Dump a Repository"
 msgstr "Αντιγραφή ενός αποθετηρίου"
 
-#: src/kdesvnview.cpp:384
+#: src/kdesvnview.cpp:386
 #, kde-format
 msgctxt "@title:window"
 msgid "Dump"
 msgstr "Dump"
 
-#: src/kdesvnview.cpp:384
+#: src/kdesvnview.cpp:386
 #, kde-format
 msgid "Dumping a repository"
 msgstr "Αντιγραφή ενός αποθετηρίου"
 
-#: src/kdesvnview.cpp:386
+#: src/kdesvnview.cpp:388
 #, kde-format
 msgid "Dump finished."
 msgstr "Ολοκλήρωση της αντιγραφής."
 
-#: src/kdesvnview.cpp:431
+#: src/kdesvnview.cpp:433
 #, kde-format
 msgid "Inserted %v not cached log entries of %m."
 msgstr "Το εισηγμένο %v δεν αποθήκευσε καταγραφές του %m"
@@ -824,8 +824,8 @@ msgstr "Έγινε εγγραφή του %1 στο αποθετήριο"
 msgid "Copied %1 to %2"
 msgstr "Έγινε αντιγραφή του %1 στο %2"
 
-#: src/kiosvn/kiosvn.cpp:788 src/svnfrontend/svnactions.cpp:1119
-#: src/svnfrontend/svnactions.cpp:2338
+#: src/kiosvn/kiosvn.cpp:788 src/svnfrontend/svnactions.cpp:1122
+#: src/svnfrontend/svnactions.cpp:2340
 #, kde-format
 msgid "Committed revision %1."
 msgstr "Υποβληθείσα αναθεώρηση %1."
@@ -898,7 +898,7 @@ msgid "Unselect all"
 msgstr "Αποεπιλογή όλων"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_HideNewItems)
-#: src/ksvnwidgets/commitmessage.ui:77 src/ksvnwidgets/commitmsg_impl.cpp:455
+#: src/ksvnwidgets/commitmessage.ui:77 src/ksvnwidgets/commitmsg_impl.cpp:457
 #, kde-format
 msgid "Hide new items"
 msgstr "Απόκρυψη νέων αντικειμένων"
@@ -993,30 +993,30 @@ msgstr "Αν επιλεγεί, η υποβολή (commit) δεν θα απελε
 msgid "Keep locks"
 msgstr "Διατήρηση κλειδωμάτων"
 
-#: src/ksvnwidgets/commitmsg_impl.cpp:289
+#: src/ksvnwidgets/commitmsg_impl.cpp:291
 #, kde-format
 msgctxt "@title:window"
 msgid "Commit Log"
 msgstr "Καταγραφή υποβολής"
 
-#: src/ksvnwidgets/commitmsg_impl.cpp:455
+#: src/ksvnwidgets/commitmsg_impl.cpp:457
 #, kde-format
 msgid "Show new items"
 msgstr "Εμφάνιση νέων αντικειμένων"
 
-#: src/ksvnwidgets/commitmsg_impl.cpp:478
+#: src/ksvnwidgets/commitmsg_impl.cpp:480
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Text File to Insert"
 msgstr "Επιλογή αρχείου κειμένου προς εισαγωγή"
 
-#: src/ksvnwidgets/commitmsg_impl.cpp:479
+#: src/ksvnwidgets/commitmsg_impl.cpp:481
 #, kde-format
 msgid "Select text file to insert:"
 msgstr "Επιλογή αρχείου κειμένου προς εισαγωγή:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DeleteForm)
-#: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1636
+#: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1638
 #, kde-format
 msgid "Really delete these entries?"
 msgstr "Θέλετε πράγματι να διαγράψετε αυτές τις καταχωρήσεις;"
@@ -1173,23 +1173,23 @@ msgid "Entry"
 msgstr "Καταχώρηση"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:35
-#: src/svnfrontend/maintreewidget.cpp:694
+#: src/svnfrontend/maintreewidget.cpp:696
 #, kde-format
 msgid "Add"
 msgstr "Προσθήκη"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:39
 #: src/svnfrontend/ccontextlistener.cpp:67
-#: src/svnfrontend/copymoveview_impl.cpp:48
-#: src/svnfrontend/maintreewidget.cpp:566
+#: src/svnfrontend/copymoveview_impl.cpp:50
+#: src/svnfrontend/maintreewidget.cpp:568
 #, kde-format
 msgid "Copy"
 msgstr "Αντιγραφή"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:43
 #: src/svnfrontend/ccontextlistener.cpp:68
-#: src/svnfrontend/maintreewidget.cpp:709
-#: src/svnfrontend/maintreewidget.cpp:718 src/svnfrontend/svnactions.cpp:1038
+#: src/svnfrontend/maintreewidget.cpp:711
+#: src/svnfrontend/maintreewidget.cpp:720 src/svnfrontend/svnactions.cpp:1041
 #, kde-format
 msgid "Delete"
 msgstr "Διαγραφή"
@@ -1200,7 +1200,7 @@ msgid "Modify (content or property)"
 msgstr "Τροποποίηση (περιεχομένου ή ιδιότητας)"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:51
-#: src/svnfrontend/svnactions.cpp:796
+#: src/svnfrontend/svnactions.cpp:799
 #, kde-format
 msgid "Replace"
 msgstr "Αντικατάσταση"
@@ -1517,7 +1517,7 @@ msgstr "Η Diff αγνοεί τον τύπο του περιεχομένου"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_tree_diff_rec)
 #: src/settings/diffmergesettings.ui:18
-#: src/svnfrontend/graphtree/revgraphview.cpp:853
+#: src/svnfrontend/graphtree/revgraphview.cpp:855
 #, kde-format
 msgid "Diff in revision tree is recursive"
 msgstr "Η Diff στο δένδρο των αναθεωρήσεων είναι αναδρομική"
@@ -2634,7 +2634,7 @@ msgstr ""
 msgid "Update makes missing parents"
 msgstr "Η ενημέρωση δημιουργεί έλλειψη σε γονείς"
 
-#: src/svnfrontend/background/fillcachethread.cpp:74
+#: src/svnfrontend/background/fillcachethread.cpp:76
 #, kde-format
 msgid ""
 "Not filling log cache because it is disabled due setting for this repository."
@@ -2642,22 +2642,22 @@ msgstr ""
 "Δεν έγινε πλήρωση της λανθάνουσας μνήμης καταγραφών διότι είναι "
 "απενεργοποιημένη από τις ρυθμίσεις του αποθετηρίου."
 
-#: src/svnfrontend/background/fillcachethread.cpp:76
+#: src/svnfrontend/background/fillcachethread.cpp:78
 #, kde-format
 msgid "Filling log cache in background."
 msgstr "Πλήρωση της λανθάνουσας μνήμης καταγραφών στο παρασκήνιο."
 
-#: src/svnfrontend/background/fillcachethread.cpp:98
+#: src/svnfrontend/background/fillcachethread.cpp:100
 #, kde-format
 msgid "Filling cache canceled."
 msgstr "Η πλήρωση της λανθάνουσας μνήμης ακυρώθηκε."
 
-#: src/svnfrontend/background/fillcachethread.cpp:113
+#: src/svnfrontend/background/fillcachethread.cpp:115
 #, kde-format
 msgid "Cache filled up to revision %1."
 msgstr "Έγινε πλήρωση της λανθάνουσας μνήμης μέχρι την αναθεώρηση %1."
 
-#: src/svnfrontend/background/fillcachethread.cpp:120
+#: src/svnfrontend/background/fillcachethread.cpp:122
 #, kde-format
 msgid "Filling log cache in background finished."
 msgstr ""
@@ -2916,31 +2916,31 @@ msgctxt "@action:button"
 msgid "Store in Plain Text"
 msgstr ""
 
-#: src/svnfrontend/commandexec.cpp:206 src/svnfrontend/commandexec.cpp:321
-#: src/svnfrontend/graphtree/revgraphview.cpp:992
-#: src/svnfrontend/maintreewidget.cpp:1233
-#: src/svnfrontend/maintreewidget.cpp:2397
-#: src/svnfrontend/maintreewidget.cpp:2604
+#: src/svnfrontend/commandexec.cpp:208 src/svnfrontend/commandexec.cpp:323
+#: src/svnfrontend/graphtree/revgraphview.cpp:994
+#: src/svnfrontend/maintreewidget.cpp:1235
+#: src/svnfrontend/maintreewidget.cpp:2399
+#: src/svnfrontend/maintreewidget.cpp:2606
 #, kde-format
 msgid "SVN Error"
 msgstr "Σφάλμα SVN"
 
-#: src/svnfrontend/commandexec.cpp:206
+#: src/svnfrontend/commandexec.cpp:208
 #, kde-format
 msgid "Command \"%1\" not implemented or known"
 msgstr "Η εντολή «%1» δεν έχει υλοποιηθεί ή είναι άγνωστη"
 
-#: src/svnfrontend/commandexec.cpp:408
+#: src/svnfrontend/commandexec.cpp:410
 #, kde-format
 msgid "\"GET\" requires output file"
 msgstr "Η εντολή «GET» απαιτεί ένα αρχείο εξόδου"
 
-#: src/svnfrontend/commandexec.cpp:589
+#: src/svnfrontend/commandexec.cpp:591
 #, kde-format
 msgid "May only switch one URL at time"
 msgstr "Μπορεί να γίνει η αλλαγή μόνο ενός URL κάθε φορά"
 
-#: src/svnfrontend/commandexec.cpp:593
+#: src/svnfrontend/commandexec.cpp:595
 #, kde-format
 msgid "Switch only on working copies"
 msgstr "Εναλλαγή μόνο στα αντίγραφα εργασίας"
@@ -2970,18 +2970,18 @@ msgstr "KSqueezedTextLabel"
 msgid "to"
 msgstr "σε"
 
-#: src/svnfrontend/copymoveview_impl.cpp:46
+#: src/svnfrontend/copymoveview_impl.cpp:48
 #, kde-format
 msgid "Rename/move"
 msgstr "Μετονομασία/μετακίνηση"
 
-#: src/svnfrontend/copymoveview_impl.cpp:70
+#: src/svnfrontend/copymoveview_impl.cpp:72
 #, kde-format
 msgctxt "@title:window"
 msgid "Move/Rename File/Directory"
 msgstr "Μετακίνηση/Μετονομασία αρχείου/καταλόγου"
 
-#: src/svnfrontend/copymoveview_impl.cpp:70
+#: src/svnfrontend/copymoveview_impl.cpp:72
 #, kde-format
 msgctxt "@title:window"
 msgid "Copy File/Directory"
@@ -3236,7 +3236,7 @@ msgstr "Ρυθμίσεις αποθετηρίου"
 msgid "Statistics for repository"
 msgstr "Στατιστικά αποθετηρίου"
 
-#: src/svnfrontend/database/dbsettings.cpp:39
+#: src/svnfrontend/database/dbsettings.cpp:41
 #, kde-format
 msgctxt "@title:window"
 msgid "Settings for %1"
@@ -3770,7 +3770,7 @@ msgstr "Επιλογή αναθεώρησης"
 msgid "-1"
 msgstr "-1"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:144
+#: src/svnfrontend/graphtree/revgraphview.cpp:146
 #, kde-format
 msgid ""
 "Could not run process \"%1\".\n"
@@ -3783,158 +3783,158 @@ msgstr ""
 "Η διεργασία διακόπηκε με μήνυμα:\n"
 "%2"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:332
+#: src/svnfrontend/graphtree/revgraphview.cpp:334
 #, kde-format
 msgid "Error running the graph layouting tool.\n"
 msgstr ""
 "Σφάλμα κατά την εκτέλεση του εργαλείου δημιουργίας διάταξης γραφήματος.\n"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:333
+#: src/svnfrontend/graphtree/revgraphview.cpp:335
 #, kde-format
 msgid "Please check that 'dot' is installed (package GraphViz)."
 msgstr "Παρακαλώ ελέγξτε ότι το «dot» είναι εγκατεστημένο (πακέτο GraphViz)."
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:422
+#: src/svnfrontend/graphtree/revgraphview.cpp:424
 #, kde-format
 msgid "Deleted at revision %1"
 msgstr "Διεγράφη στην αναθεώρηση %1"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:425
+#: src/svnfrontend/graphtree/revgraphview.cpp:427
 #, kde-format
 msgid "Added at revision %1 as %2"
 msgstr "Προστέθηκε στην αναθεώρηση %1 ως %2"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:429
+#: src/svnfrontend/graphtree/revgraphview.cpp:431
 #, kde-format
 msgid "Copied to %1 at revision %2"
 msgstr "Έγινε αντιγραφή στο %1 στην αναθεώρηση %2"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:432
+#: src/svnfrontend/graphtree/revgraphview.cpp:434
 #, kde-format
 msgid "Renamed to %1 at revision %2"
 msgstr "Έγινε μετονομασία σε %1 στην αναθεώρηση %2"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:435
+#: src/svnfrontend/graphtree/revgraphview.cpp:437
 #, kde-format
 msgid "Modified at revision %1"
 msgstr "Έγινε τροποποίηση στην αναθεώρηση %1"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:438
+#: src/svnfrontend/graphtree/revgraphview.cpp:440
 #, kde-format
 msgid "Replaced at revision %1"
 msgstr "Έγινε αντικατάσταση στην αναθεώρηση %1"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:441
+#: src/svnfrontend/graphtree/revgraphview.cpp:443
 #, kde-format
 msgid "Revision %1"
 msgstr "Αναθεώρηση %1"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:461
+#: src/svnfrontend/graphtree/revgraphview.cpp:463
 #, kde-format
 msgid "Could not open temporary file %1 for writing."
 msgstr "Αδυναμία ανοίγματος του προσωρινού αρχείου %1 για εγγραφή."
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:554
+#: src/svnfrontend/graphtree/revgraphview.cpp:556
 #, kde-format
 msgid "<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>"
 msgstr ""
 "<br>Αναθεώρηση: %1<br>Συγγραφέας: %2<br>Ημερομηνία: %3<br>Καταγραφή: %4</"
 "html>"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:557
+#: src/svnfrontend/graphtree/revgraphview.cpp:559
 #, kde-format
 msgid "<b>Revision</b>%1%2%3"
 msgstr "<b>Αναθεώρηση</b>%1%2%3"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:557
+#: src/svnfrontend/graphtree/revgraphview.cpp:559
 #, kde-format
 msgid "<b>Author</b>%1%2%3"
 msgstr "<b>Συγγραφέας</b>%1%2%3"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:558
+#: src/svnfrontend/graphtree/revgraphview.cpp:560
 #, kde-format
 msgid "<b>Date</b>%1%2%3"
 msgstr "<b>Ημερομηνία</b>%1%2%3"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:558
+#: src/svnfrontend/graphtree/revgraphview.cpp:560
 #, kde-format
 msgid "<b>Log</b>%1%2%3"
 msgstr "<b>Καταγραφή</b>%1%2%3"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:833
+#: src/svnfrontend/graphtree/revgraphview.cpp:835
 #, kde-format
 msgid "Diff to previous"
 msgstr "Diff με το προηγούμενο"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:836
+#: src/svnfrontend/graphtree/revgraphview.cpp:838
 #, kde-format
 msgid "Diff to selected item"
 msgstr "Diff με το επιλεγμένο αντικείμενο"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:839
+#: src/svnfrontend/graphtree/revgraphview.cpp:841
 #: src/svnfrontend/svnlogdlgimp.cpp:524
 #, kde-format
 msgid "Cat this version"
 msgstr "Εμφάνιση αυτής της έκδοσης"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:842
+#: src/svnfrontend/graphtree/revgraphview.cpp:844
 #, kde-format
 msgid "Unselect item"
 msgstr "Αποεπιλογή αντικειμένου"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:844
+#: src/svnfrontend/graphtree/revgraphview.cpp:846
 #, kde-format
 msgid "Select item"
 msgstr "Επιλογή αντικειμένου"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:847
+#: src/svnfrontend/graphtree/revgraphview.cpp:849
 #, kde-format
 msgid "Display details"
 msgstr "Εμφάνιση λεπτομερειών"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:850
+#: src/svnfrontend/graphtree/revgraphview.cpp:852
 #, kde-format
 msgid "Rotate counter-clockwise"
 msgstr "Περιστροφή αριστερόστροφα"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:851
+#: src/svnfrontend/graphtree/revgraphview.cpp:853
 #, kde-format
 msgid "Rotate clockwise"
 msgstr "Περιστροφή προς τα δεξιά"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:857
-#: src/svnfrontend/graphtree/revgraphview.cpp:875
+#: src/svnfrontend/graphtree/revgraphview.cpp:859
+#: src/svnfrontend/graphtree/revgraphview.cpp:877
 #, kde-format
 msgid "Save tree as PNG"
 msgstr "Αποθήκευση δένδρου ως PNG"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:875
+#: src/svnfrontend/graphtree/revgraphview.cpp:877
 #, kde-format
 msgid "Image (*.png)"
 msgstr "Εικόνα (*.png)"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:95
-#: src/svnfrontend/svnactions.cpp:318
+#: src/svnfrontend/graphtree/revisiontree.cpp:97
+#: src/svnfrontend/svnactions.cpp:321
 #, kde-format
 msgctxt "@title:window"
 msgid "Logs"
 msgstr "Καταγραφές (Logs)"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:95
-#: src/svnfrontend/svnactions.cpp:319
+#: src/svnfrontend/graphtree/revisiontree.cpp:97
+#: src/svnfrontend/svnactions.cpp:322
 #, kde-format
 msgid "Getting logs - hit Cancel for abort"
 msgstr "Λήψη καταγραφών - πατήστε «Ακύρωση» για να εγκαταλείψετε"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:106
+#: src/svnfrontend/graphtree/revisiontree.cpp:108
 #, kde-format
 msgid "No log cache possible due broken database and networking not allowed."
 msgstr ""
 "Οι προσωρινές καταγραφές δεν είναι εφικτές εξαιτίας καταστροφής της βάσης "
 "δεδομένων και της δικτύωσης να μην επιτρέπεται."
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:106
-#: src/svnfrontend/graphtree/revisiontree.cpp:111
+#: src/svnfrontend/graphtree/revisiontree.cpp:108
+#: src/svnfrontend/graphtree/revisiontree.cpp:113
 #, kde-format
 msgid ""
 "Could not retrieve logs, reason:\n"
@@ -3943,25 +3943,25 @@ msgstr ""
 "Αδυναμία ανάκτησης καταγραφών, αιτία:\n"
 "%1"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:140
+#: src/svnfrontend/graphtree/revisiontree.cpp:142
 #, kde-format
 msgid "Scanning the logs for %1"
 msgstr "Σάρωση των καταγραφών για %1"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:140
+#: src/svnfrontend/graphtree/revisiontree.cpp:142
 #, kde-format
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:141
+#: src/svnfrontend/graphtree/revisiontree.cpp:143
 #, kde-format
 msgctxt "@title:window"
 msgid "Scanning logs"
 msgstr "Σάρωση καταγραφών"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:229
-#: src/svnfrontend/graphtree/revisiontree.cpp:266
-#: src/svnfrontend/graphtree/revisiontree.cpp:314
+#: src/svnfrontend/graphtree/revisiontree.cpp:231
+#: src/svnfrontend/graphtree/revisiontree.cpp:268
+#: src/svnfrontend/graphtree/revisiontree.cpp:316
 #, kde-format
 msgid "%1<br>Check change entry %2 of %3"
 msgstr "%1<br>Έλεγχος αλλαγών %2 από %3"
@@ -4111,116 +4111,116 @@ msgstr "Επιβεβαίωση των ιδιοτήτων στη φόρτωση (
 msgid "Validate properties"
 msgstr "Επιβεβαίωση ιδιοτήτων"
 
-#: src/svnfrontend/maintreewidget.cpp:269
+#: src/svnfrontend/maintreewidget.cpp:271
 #, kde-format
 msgid "Networked URL to open but networking is disabled."
 msgstr "URL δικτύου προς άνοιγμα, αλλά το δίκτυο είναι απενεργοποιημένο."
 
-#: src/svnfrontend/maintreewidget.cpp:495
+#: src/svnfrontend/maintreewidget.cpp:497
 #, kde-format
 msgid "History of item"
 msgstr "Ιστορικό αντικειμένου"
 
-#: src/svnfrontend/maintreewidget.cpp:500
-#: src/svnfrontend/maintreewidget.cpp:508
-#: src/svnfrontend/maintreewidget.cpp:517
+#: src/svnfrontend/maintreewidget.cpp:502
+#: src/svnfrontend/maintreewidget.cpp:510
+#: src/svnfrontend/maintreewidget.cpp:519
 #, kde-format
 msgid "History"
 msgstr "Ιστορικό"
 
-#: src/svnfrontend/maintreewidget.cpp:501
+#: src/svnfrontend/maintreewidget.cpp:503
 #, kde-format
 msgid "Displays the history log of selected item"
 msgstr "Εμφανίζει το ιστορικό καταγραφών για το επιλεγμένο αντικείμενο"
 
-#: src/svnfrontend/maintreewidget.cpp:503
-#: src/svnfrontend/maintreewidget.cpp:512
+#: src/svnfrontend/maintreewidget.cpp:505
+#: src/svnfrontend/maintreewidget.cpp:514
 #, kde-format
 msgid "History of item ignoring copies"
 msgstr "Ιστορικό αντικειμένου αγνόηση αντιγραφών"
 
-#: src/svnfrontend/maintreewidget.cpp:509
-#: src/svnfrontend/maintreewidget.cpp:518
+#: src/svnfrontend/maintreewidget.cpp:511
+#: src/svnfrontend/maintreewidget.cpp:520
 #, kde-format
 msgid "Displays the history log of selected item without following copies"
 msgstr ""
 "Εμφανίζει το ιστορικό καταγραφών του επιλεγμένου αντικειμένου χωρίς να "
 "ακολουθούν οι αντιγραφές"
 
-#: src/svnfrontend/maintreewidget.cpp:521
+#: src/svnfrontend/maintreewidget.cpp:523
 #, kde-format
 msgid "Full revision tree"
 msgstr "Πλήρες δέντρο αναθεώρησης"
 
-#: src/svnfrontend/maintreewidget.cpp:526
+#: src/svnfrontend/maintreewidget.cpp:528
 #, kde-format
 msgid "Shows history of item as linked tree"
 msgstr "Εμφανίζει το ιστορικό του αντικειμένου ως δέντρο δεσμού"
 
-#: src/svnfrontend/maintreewidget.cpp:528
+#: src/svnfrontend/maintreewidget.cpp:530
 #, kde-format
 msgid "Partial revision tree"
 msgstr "Μερικό δέντρο αναθεώρησης"
 
-#: src/svnfrontend/maintreewidget.cpp:533
+#: src/svnfrontend/maintreewidget.cpp:535
 #, kde-format
 msgid "Shows history of item as linked tree for a revision range"
 msgstr ""
 "Εμφανίζει το ιστορικό του αντικειμένου ως δέντρου δεσμών για ένα εύρος "
 "αναθεωρήσεων"
 
-#: src/svnfrontend/maintreewidget.cpp:536
-#: src/svnfrontend/maintreewidget.cpp:537
+#: src/svnfrontend/maintreewidget.cpp:538
+#: src/svnfrontend/maintreewidget.cpp:539
 #, kde-format
 msgid "Properties"
 msgstr "Ιδιότητες"
 
-#: src/svnfrontend/maintreewidget.cpp:539
+#: src/svnfrontend/maintreewidget.cpp:541
 #, kde-format
 msgid "Display Properties"
 msgstr "Εμφάνιση ιδιοτήτων"
 
-#: src/svnfrontend/maintreewidget.cpp:545
+#: src/svnfrontend/maintreewidget.cpp:547
 #, kde-format
 msgid "Display last changes"
 msgstr "Εμφάνιση τελευταίων αλλαγών"
 
-#: src/svnfrontend/maintreewidget.cpp:550
+#: src/svnfrontend/maintreewidget.cpp:552
 #, kde-format
 msgid "Display last changes as difference to previous commit."
 msgstr "Εμφάνιση των τελευταίων αλλαγών ως diff με την προηγούμενη υποβολή."
 
-#: src/svnfrontend/maintreewidget.cpp:552
+#: src/svnfrontend/maintreewidget.cpp:554
 #, kde-format
 msgid "Details"
 msgstr "Λεπτομέρειες"
 
-#: src/svnfrontend/maintreewidget.cpp:557
+#: src/svnfrontend/maintreewidget.cpp:559
 #, kde-format
 msgid "Show details about selected item"
 msgstr "Εμφάνιση λεπτομερειών για το επιλεγμένο αντικείμενο"
 
-#: src/svnfrontend/maintreewidget.cpp:559
+#: src/svnfrontend/maintreewidget.cpp:561
 #, kde-format
 msgid "Move"
 msgstr "Μετακίνηση"
 
-#: src/svnfrontend/maintreewidget.cpp:564
+#: src/svnfrontend/maintreewidget.cpp:566
 #, kde-format
 msgid "Moves or renames current item"
 msgstr "Μετακίνηση ή μετονομασία του τρέχοντος αντικειμένου"
 
-#: src/svnfrontend/maintreewidget.cpp:571
+#: src/svnfrontend/maintreewidget.cpp:573
 #, kde-format
 msgid "Create a copy of current item"
 msgstr "Δημιουργία ενός αντιγράφου για το τρέχον αντικείμενο"
 
-#: src/svnfrontend/maintreewidget.cpp:573
+#: src/svnfrontend/maintreewidget.cpp:575
 #, kde-format
 msgid "Check for updates"
 msgstr "Έλεγχος ενημερώσεων"
 
-#: src/svnfrontend/maintreewidget.cpp:578
+#: src/svnfrontend/maintreewidget.cpp:580
 #, kde-format
 msgid ""
 "Check if current working copy has items with newer version in repository"
@@ -4228,18 +4228,18 @@ msgstr ""
 "Έλεγχος αν υπάρχουν νέες ενημερώσεις στο αποθετήριο για το τρέχον αντίγραφο "
 "εργασίας"
 
-#: src/svnfrontend/maintreewidget.cpp:580
+#: src/svnfrontend/maintreewidget.cpp:582
 #, kde-format
 msgid "Check updates"
 msgstr "Έλεγχος ενημερώσεων"
 
-#: src/svnfrontend/maintreewidget.cpp:584
+#: src/svnfrontend/maintreewidget.cpp:586
 #, kde-format
 msgid "Blame"
 msgstr "Blame"
 
-#: src/svnfrontend/maintreewidget.cpp:585
-#: src/svnfrontend/maintreewidget.cpp:593
+#: src/svnfrontend/maintreewidget.cpp:587
+#: src/svnfrontend/maintreewidget.cpp:595
 #, kde-format
 msgid ""
 "Output the content of specified files or URLs with revision and author "
@@ -4248,118 +4248,118 @@ msgstr ""
 "Εμφανίζει το περιεχόμενο των καθορισμένων αρχείων ή URL με τις πληροφορίες "
 "αναθεώρησης και συγγραφέα εμβόλιμα."
 
-#: src/svnfrontend/maintreewidget.cpp:588
+#: src/svnfrontend/maintreewidget.cpp:590
 #, kde-format
 msgid "Blame range"
 msgstr "Blame εύρος"
 
-#: src/svnfrontend/maintreewidget.cpp:597
+#: src/svnfrontend/maintreewidget.cpp:599
 #, kde-format
 msgid "Cat head"
 msgstr "Εμφάνιση HEAD"
 
-#: src/svnfrontend/maintreewidget.cpp:598
+#: src/svnfrontend/maintreewidget.cpp:600
 #, kde-format
 msgid "Output the content of specified files or URLs."
 msgstr "Εμφανίζει το περιεχόμενο των καθορισμένων αρχείων ή URL."
 
-#: src/svnfrontend/maintreewidget.cpp:601
+#: src/svnfrontend/maintreewidget.cpp:603
 #, kde-format
 msgid "Cat revision..."
 msgstr "Εμφάνιση αναθεώρησης..."
 
-#: src/svnfrontend/maintreewidget.cpp:606
+#: src/svnfrontend/maintreewidget.cpp:608
 #, kde-format
 msgid "Output the content of specified files or URLs at specific revision."
 msgstr ""
 "Το περιεχόμενο των καθορισμένων αρχείων ή URL για μια συγκεκριμένη "
 "αναθεώρηση."
 
-#: src/svnfrontend/maintreewidget.cpp:610
+#: src/svnfrontend/maintreewidget.cpp:612
 #, kde-format
 msgid "Lock current items"
 msgstr "Κλείδωμα τρεχόντων αντικειμένων"
 
-#: src/svnfrontend/maintreewidget.cpp:615
+#: src/svnfrontend/maintreewidget.cpp:617
 #, kde-format
 msgid "Try lock current item against changes from other users"
 msgstr ""
 "Προσπάθεια κλειδώματος του τρέχοντος αντικείμενου ενάντια στις αλλαγές άλλων "
 "χρηστών"
 
-#: src/svnfrontend/maintreewidget.cpp:618
+#: src/svnfrontend/maintreewidget.cpp:620
 #, kde-format
 msgid "Unlock current items"
 msgstr "Ξεκλείδωμα των τρεχόντων αντικειμένων"
 
-#: src/svnfrontend/maintreewidget.cpp:623
+#: src/svnfrontend/maintreewidget.cpp:625
 #, kde-format
 msgid "Free existing lock on current item"
 msgstr "Ξεκλείδωμα του τρέχοντος αντικειμένου"
 
-#: src/svnfrontend/maintreewidget.cpp:628 src/svnfrontend/svnactions.cpp:670
+#: src/svnfrontend/maintreewidget.cpp:630 src/svnfrontend/svnactions.cpp:673
 #, kde-format
 msgid "New folder"
 msgstr "Νέος φάκελος"
 
-#: src/svnfrontend/maintreewidget.cpp:633
+#: src/svnfrontend/maintreewidget.cpp:635
 #, kde-format
 msgid "Create a new folder"
 msgstr "Δημιουργία νέου φακέλου"
 
-#: src/svnfrontend/maintreewidget.cpp:635
+#: src/svnfrontend/maintreewidget.cpp:637
 #, kde-format
 msgid "Switch repository"
 msgstr "Εναλλαγή αποθετηρίου"
 
-#: src/svnfrontend/maintreewidget.cpp:640
+#: src/svnfrontend/maintreewidget.cpp:642
 #, kde-format
 msgid "Switch repository path of current working copy path (\"svn switch\")"
 msgstr ""
 "Εναλλαγή διαδρομής αποθετηρίου της τρέχουσας διαδρομής αντιγράφου εργασίας "
 "(«svn switch»)"
 
-#: src/svnfrontend/maintreewidget.cpp:644
+#: src/svnfrontend/maintreewidget.cpp:646
 #, kde-format
 msgid "Relocate current working copy URL"
 msgstr "Μεταφορά του URL του τρέχοντος αντιγράφου εργασίας"
 
-#: src/svnfrontend/maintreewidget.cpp:649
+#: src/svnfrontend/maintreewidget.cpp:651
 #, kde-format
 msgid "Relocate URL of current working copy path to other URL"
 msgstr ""
 "Μεταφορά του URL της διαδρομής του τρέχοντος αντιγράφου εργασίας σε άλλο URL"
 
-#: src/svnfrontend/maintreewidget.cpp:658
+#: src/svnfrontend/maintreewidget.cpp:660
 #, kde-format
 msgid "Unversioned"
 msgstr "Χωρίς έκδοση"
 
-#: src/svnfrontend/maintreewidget.cpp:659
+#: src/svnfrontend/maintreewidget.cpp:661
 #, kde-format
 msgid "Browse folder for unversioned items and add them if wanted."
 msgstr ""
 "Περιήγηση στο φάκελο για αντικείμενα χωρίς έκδοση και προσθήκη αυτών αν "
 "είναι επιθυμητό."
 
-#: src/svnfrontend/maintreewidget.cpp:663
+#: src/svnfrontend/maintreewidget.cpp:665
 #, kde-format
 msgid "Open repository of working copy"
 msgstr "Άνοιγμα του αποθετηρίου του αντιγράφου εργασίας"
 
-#: src/svnfrontend/maintreewidget.cpp:668
+#: src/svnfrontend/maintreewidget.cpp:670
 #, kde-format
 msgid "Opens the repository the current working copy was checked out from"
 msgstr ""
 "Ανοίγει το αποθετήριο του τρέχοντος αντιγράφου εργασίας από το οποίο έγινε "
 "checkout"
 
-#: src/svnfrontend/maintreewidget.cpp:671
+#: src/svnfrontend/maintreewidget.cpp:673
 #, kde-format
 msgid "Cleanup"
 msgstr "Καθαρισμός"
 
-#: src/svnfrontend/maintreewidget.cpp:676
+#: src/svnfrontend/maintreewidget.cpp:678
 #, kde-format
 msgid ""
 "Recursively clean up the working copy, removing locks, resuming unfinished "
@@ -4368,32 +4368,32 @@ msgstr ""
 "Αναδρομικός καθαρισμός του αντιγράφου εργασίας, αφαίρεση κλειδωμάτων, "
 "επαναφορά ημιτελών εργασιών, κλπ."
 
-#: src/svnfrontend/maintreewidget.cpp:678
+#: src/svnfrontend/maintreewidget.cpp:680
 #, kde-format
 msgid "Import folders into current"
 msgstr "Εισαγωγή φακέλων στο τρέχον"
 
-#: src/svnfrontend/maintreewidget.cpp:683
+#: src/svnfrontend/maintreewidget.cpp:685
 #, kde-format
 msgid "Import folder content into current URL"
 msgstr "Εισαγωγή του περιεχομένου του φακέλου στο τρέχον URL"
 
-#: src/svnfrontend/maintreewidget.cpp:688
+#: src/svnfrontend/maintreewidget.cpp:690
 #, kde-format
 msgid "Add selected files/dirs"
 msgstr "Προσθήκη των επιλεγμένων αρχείων/καταλόγων"
 
-#: src/svnfrontend/maintreewidget.cpp:693
+#: src/svnfrontend/maintreewidget.cpp:695
 #, kde-format
 msgid "Adding selected files and/or directories to repository"
 msgstr "Προσθήκη των επιλεγμένων αρχείων ή/και καταλόγων στο αποθετήριο"
 
-#: src/svnfrontend/maintreewidget.cpp:696
+#: src/svnfrontend/maintreewidget.cpp:698
 #, kde-format
 msgid "Add selected files/dirs recursive"
 msgstr "Προσθήκη των επιλεγμένων αρχείων/καταλόγων αναδρομικά"
 
-#: src/svnfrontend/maintreewidget.cpp:701
+#: src/svnfrontend/maintreewidget.cpp:703
 #, kde-format
 msgid ""
 "Adding selected files and/or directories to repository and all subitems of "
@@ -4402,89 +4402,89 @@ msgstr ""
 "Προσθήκη των επιλεγμένων αρχείων ή/και καταλόγων στο αποθετήριο και όλων των "
 "υποαντικειμένων στους φακέλων"
 
-#: src/svnfrontend/maintreewidget.cpp:704
+#: src/svnfrontend/maintreewidget.cpp:706
 #, kde-format
 msgid "Delete selected files/dirs"
 msgstr "Διαγραφή των επιλεγμένων αρχείων/καταλόγων"
 
-#: src/svnfrontend/maintreewidget.cpp:710
+#: src/svnfrontend/maintreewidget.cpp:712
 #, kde-format
 msgid "Deleting selected files and/or directories from repository"
 msgstr "Διαγραφή των επιλεγμένων αρχείων ή/και καταλόγων από το αποθετήριο"
 
-#: src/svnfrontend/maintreewidget.cpp:712
+#: src/svnfrontend/maintreewidget.cpp:714
 #, kde-format
 msgid "Delete folder"
 msgstr "Διαγραφή φακέλου"
 
-#: src/svnfrontend/maintreewidget.cpp:717
+#: src/svnfrontend/maintreewidget.cpp:719
 #, kde-format
 msgid "Deleting selected directories from repository"
 msgstr "Διαγραφή των επιλεγμένων καταλόγων από το αποθετήριο"
 
-#: src/svnfrontend/maintreewidget.cpp:720
+#: src/svnfrontend/maintreewidget.cpp:722
 #, kde-format
 msgid "Revert current changes"
 msgstr "Επαναφορά στην αρχική κατάσταση"
 
-#: src/svnfrontend/maintreewidget.cpp:727
+#: src/svnfrontend/maintreewidget.cpp:729
 #, kde-format
 msgid "Mark resolved"
 msgstr "Σημείωση ως επιλυμένο"
 
-#: src/svnfrontend/maintreewidget.cpp:732
+#: src/svnfrontend/maintreewidget.cpp:734
 #, kde-format
 msgid "Marking files or dirs resolved"
 msgstr "Σημείωση αρχείων ή καταλόγων ως επιλυμένα"
 
-#: src/svnfrontend/maintreewidget.cpp:735
+#: src/svnfrontend/maintreewidget.cpp:737
 #, kde-format
 msgid "Resolve conflicts"
 msgstr "Επίλυση συγκρούσεων"
 
-#: src/svnfrontend/maintreewidget.cpp:741
+#: src/svnfrontend/maintreewidget.cpp:743
 #, kde-format
 msgid "Ignore/Unignore current item"
 msgstr "Αγνόηση/συμπερίληψη του τρέχοντος αντικειμένου"
 
-#: src/svnfrontend/maintreewidget.cpp:743
-#: src/svnfrontend/maintreewidget.cpp:749
+#: src/svnfrontend/maintreewidget.cpp:745
+#: src/svnfrontend/maintreewidget.cpp:751
 #, kde-format
 msgid "Add or Remove ignore pattern"
 msgstr "Προσθήκη ή διαγραφή μοτίβου παράλειψης"
 
-#: src/svnfrontend/maintreewidget.cpp:756
-#: src/svnfrontend/maintreewidget.cpp:895
+#: src/svnfrontend/maintreewidget.cpp:758
+#: src/svnfrontend/maintreewidget.cpp:897
 #, kde-format
 msgid "Update to head"
 msgstr "Ενημέρωση από head"
 
-#: src/svnfrontend/maintreewidget.cpp:761
+#: src/svnfrontend/maintreewidget.cpp:763
 #, kde-format
 msgctxt "Menu item"
 msgid "Update"
 msgstr "Ενημέρωση"
 
-#: src/svnfrontend/maintreewidget.cpp:763
+#: src/svnfrontend/maintreewidget.cpp:765
 #, kde-format
 msgid "Update to revision..."
 msgstr "Ενημέρωση στην αναθεώρηση..."
 
-#: src/svnfrontend/maintreewidget.cpp:769
-#: src/svnfrontend/maintreewidget.cpp:774
-#: src/svnfrontend/maintreewidget.cpp:889 src/svnfrontend/svnactions.cpp:1045
+#: src/svnfrontend/maintreewidget.cpp:771
+#: src/svnfrontend/maintreewidget.cpp:776
+#: src/svnfrontend/maintreewidget.cpp:891 src/svnfrontend/svnactions.cpp:1048
 #, kde-format
 msgid "Commit"
 msgstr "Υποβολή"
 
-#: src/svnfrontend/maintreewidget.cpp:777
-#: src/svnfrontend/maintreewidget.cpp:784
+#: src/svnfrontend/maintreewidget.cpp:779
+#: src/svnfrontend/maintreewidget.cpp:786
 #, kde-format
 msgid "Diff local changes"
 msgstr "Diff αλλαγών τοπικά"
 
-#: src/svnfrontend/maintreewidget.cpp:782
-#: src/svnfrontend/maintreewidget.cpp:789
+#: src/svnfrontend/maintreewidget.cpp:784
+#: src/svnfrontend/maintreewidget.cpp:791
 #, kde-format
 msgid ""
 "Diff working copy against BASE (last checked out version) - does not require "
@@ -4493,12 +4493,12 @@ msgstr ""
 "Diff του αντιγράφου εργασίας με το BASE (τελευταίο checkout) - δεν "
 "απαιτείται πρόσβαση στο αποθετήριο"
 
-#: src/svnfrontend/maintreewidget.cpp:792
+#: src/svnfrontend/maintreewidget.cpp:794
 #, kde-format
 msgid "Diff against HEAD"
 msgstr "Diff με HEAD"
 
-#: src/svnfrontend/maintreewidget.cpp:797
+#: src/svnfrontend/maintreewidget.cpp:799
 #, kde-format
 msgid ""
 "Diff working copy against HEAD (last checked in version)- requires access to "
@@ -4507,34 +4507,34 @@ msgstr ""
 "Diff του αντιγράφου εργασίας με το HEAD (τελευταίο checkout) - απαιτείται "
 "πρόσβαση στο αποθετήριο"
 
-#: src/svnfrontend/maintreewidget.cpp:800
-#: src/svnfrontend/maintreewidget.cpp:807
+#: src/svnfrontend/maintreewidget.cpp:802
+#: src/svnfrontend/maintreewidget.cpp:809
 #, kde-format
 msgid "Diff items"
 msgstr "Diff των αντικειμένων"
 
-#: src/svnfrontend/maintreewidget.cpp:805
-#: src/svnfrontend/maintreewidget.cpp:812
+#: src/svnfrontend/maintreewidget.cpp:807
+#: src/svnfrontend/maintreewidget.cpp:814
 #, kde-format
 msgid "Diff two items"
 msgstr "Diff των δυο αντικειμένων"
 
-#: src/svnfrontend/maintreewidget.cpp:815
+#: src/svnfrontend/maintreewidget.cpp:817
 #, kde-format
 msgid "Merge two revisions"
 msgstr "Συγχώνευση δυο αναθεωρήσεων"
 
-#: src/svnfrontend/maintreewidget.cpp:820
+#: src/svnfrontend/maintreewidget.cpp:822
 #, kde-format
 msgid "Merge"
 msgstr "Συγχώνευση"
 
-#: src/svnfrontend/maintreewidget.cpp:821
+#: src/svnfrontend/maintreewidget.cpp:823
 #, kde-format
 msgid "Merge two revisions of this entry into itself"
 msgstr "Συγχώνευση δυο αναθεωρήσεων αυτής της καταχώρησης με αυτήν την ίδια"
 
-#: src/svnfrontend/maintreewidget.cpp:829
+#: src/svnfrontend/maintreewidget.cpp:831
 #, kde-format
 msgid ""
 "Merge repository path into current working copy path or current repository "
@@ -4543,254 +4543,254 @@ msgstr ""
 "Συγχώνευση της διαδρομής του αποθετηρίου στην τρέχουσα διαδρομή του "
 "αντιγράφου εργασίας ή του τρέχοντος αποθετηρίου σε έναν προορισμό"
 
-#: src/svnfrontend/maintreewidget.cpp:830
-#: src/svnfrontend/maintreewidget.cpp:1392
-#: src/svnfrontend/maintreewidget.cpp:1459
+#: src/svnfrontend/maintreewidget.cpp:832
+#: src/svnfrontend/maintreewidget.cpp:1394
+#: src/svnfrontend/maintreewidget.cpp:1461
 #, kde-format
 msgid "Open With..."
 msgstr "Άνοιγμα με..."
 
-#: src/svnfrontend/maintreewidget.cpp:834
+#: src/svnfrontend/maintreewidget.cpp:836
 #, kde-format
 msgid "Checkout current repository path"
 msgstr "Checkout της διαδρομής του τρέχοντος αποθετηρίου"
 
-#: src/svnfrontend/maintreewidget.cpp:839
-#: src/svnfrontend/maintreewidget.cpp:855
+#: src/svnfrontend/maintreewidget.cpp:841
+#: src/svnfrontend/maintreewidget.cpp:857
 #, kde-format
 msgid "Checkout"
 msgstr "Checkout"
 
-#: src/svnfrontend/maintreewidget.cpp:841
+#: src/svnfrontend/maintreewidget.cpp:843
 #, kde-format
 msgid "Export current repository path"
 msgstr "Εξαγωγή της διαδρομής του τρέχοντος αποθετηρίου"
 
-#: src/svnfrontend/maintreewidget.cpp:846
+#: src/svnfrontend/maintreewidget.cpp:848
 #, kde-format
 msgid "Select browse revision"
 msgstr "Επιλέξτε την αναθεώρηση για περιήγηση"
 
-#: src/svnfrontend/maintreewidget.cpp:850 src/svnfrontend/svnactions.cpp:1707
-#: src/svnfrontend/svnactions.cpp:1714
+#: src/svnfrontend/maintreewidget.cpp:852 src/svnfrontend/svnactions.cpp:1709
+#: src/svnfrontend/svnactions.cpp:1716
 #, kde-format
 msgid "Checkout a repository"
 msgstr "Checkout ενός αποθετηρίου"
 
-#: src/svnfrontend/maintreewidget.cpp:857
+#: src/svnfrontend/maintreewidget.cpp:859
 #, kde-format
 msgid "Export a repository"
 msgstr "Εξαγωγή ενός αποθετηρίου"
 
-#: src/svnfrontend/maintreewidget.cpp:862
+#: src/svnfrontend/maintreewidget.cpp:864
 #, kde-format
 msgid "Export"
 msgstr "Εξαγωγή"
 
-#: src/svnfrontend/maintreewidget.cpp:864
+#: src/svnfrontend/maintreewidget.cpp:866
 #, kde-format
 msgid "Refresh view"
 msgstr "Ανανέωση προβολής"
 
-#: src/svnfrontend/maintreewidget.cpp:869
+#: src/svnfrontend/maintreewidget.cpp:871
 #, kde-format
 msgid "Refresh"
 msgstr "Ανανέωση"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DispSpecDiff)
-#: src/svnfrontend/maintreewidget.cpp:872 src/svnfrontend/svnlogdlg.ui:211
+#: src/svnfrontend/maintreewidget.cpp:874 src/svnfrontend/svnlogdlg.ui:211
 #, kde-format
 msgid "Diff revisions"
 msgstr "Diff αναθεωρήσεων"
 
-#: src/svnfrontend/maintreewidget.cpp:879
+#: src/svnfrontend/maintreewidget.cpp:881
 #, kde-format
 msgid "Unfold File Tree"
 msgstr "Ξετύλιγμα δέντρου αρχείων"
 
-#: src/svnfrontend/maintreewidget.cpp:880
+#: src/svnfrontend/maintreewidget.cpp:882
 #, kde-format
 msgid "Opens all branches of the file tree"
 msgstr "Ανοίγει όλους τους κλάδους του δέντρου αρχείων"
 
-#: src/svnfrontend/maintreewidget.cpp:881
+#: src/svnfrontend/maintreewidget.cpp:883
 #, kde-format
 msgid "Fold File Tree"
 msgstr "Τύλιγμα δέντρου αρχείων"
 
-#: src/svnfrontend/maintreewidget.cpp:882
+#: src/svnfrontend/maintreewidget.cpp:884
 #, kde-format
 msgid "Closes all branches of the file tree"
 msgstr "Κλείνει όλους τους κλάδους του δέντρου αρχείων"
 
-#: src/svnfrontend/maintreewidget.cpp:885
-#: src/svnfrontend/maintreewidget.cpp:1079
-#: src/svnfrontend/maintreewidget.cpp:2038
-#: src/svnfrontend/maintreewidget.cpp:2054
+#: src/svnfrontend/maintreewidget.cpp:887
+#: src/svnfrontend/maintreewidget.cpp:1081
+#: src/svnfrontend/maintreewidget.cpp:2040
+#: src/svnfrontend/maintreewidget.cpp:2056
 #, kde-format
 msgid "Update log cache"
 msgstr "Ενημέρωση της λανθάνουσας μνήμης καταγραφών"
 
-#: src/svnfrontend/maintreewidget.cpp:886
+#: src/svnfrontend/maintreewidget.cpp:888
 #, kde-format
 msgid "Update the log cache for current repository"
 msgstr "Ενημέρωση της λανθάνουσας μνήμης καταγραφών για το τρέχον αποθετήριο"
 
-#: src/svnfrontend/maintreewidget.cpp:900
+#: src/svnfrontend/maintreewidget.cpp:902
 #, kde-format
 msgid "Set property recursive"
 msgstr "Ρύθμιση ιδιότητας αναδρομικά"
 
-#: src/svnfrontend/maintreewidget.cpp:903
+#: src/svnfrontend/maintreewidget.cpp:905
 #, kde-format
 msgid "Settings for current repository"
 msgstr "Ρυθμίσεις για το τρέχον αποθετήριο"
 
-#: src/svnfrontend/maintreewidget.cpp:1081
-#: src/svnfrontend/maintreewidget.cpp:2049
+#: src/svnfrontend/maintreewidget.cpp:1083
+#: src/svnfrontend/maintreewidget.cpp:2051
 #, kde-format
 msgid "Stop updating the log cache"
 msgstr "Διακοπή ενημέρωσης της λανθάνουσας μνήμης καταγραφών"
 
-#: src/svnfrontend/maintreewidget.cpp:1278
+#: src/svnfrontend/maintreewidget.cpp:1280
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Pattern to Ignore for \"%1\""
 msgstr "Μοτίβο επεξεργασίας για παράλειψη για το \"%1\""
 
-#: src/svnfrontend/maintreewidget.cpp:1556
-#: src/svnfrontend/maintreewidget.cpp:1599
+#: src/svnfrontend/maintreewidget.cpp:1558
+#: src/svnfrontend/maintreewidget.cpp:1601
 #, kde-format
 msgid "Nothing selected for unlock"
 msgstr "Τίποτα δεν έχει επιλεγεί για να ξεκλειδώσετε"
 
-#: src/svnfrontend/maintreewidget.cpp:1560
+#: src/svnfrontend/maintreewidget.cpp:1562
 #, kde-format
 msgctxt "@title:window"
 msgid "Lock Message"
 msgstr "Κλείδωμα μηνύματος"
 
-#: src/svnfrontend/maintreewidget.cpp:1567
+#: src/svnfrontend/maintreewidget.cpp:1569
 #, kde-format
 msgid "Steal lock?"
 msgstr "Σπάσιμο κλειδώματος;"
 
-#: src/svnfrontend/maintreewidget.cpp:1603
+#: src/svnfrontend/maintreewidget.cpp:1605
 #, kde-format
 msgid "Break lock or ignore missing locks?"
 msgstr "Σπάσιμο κλειδώματος ή αγνόηση των ελλιπών κλειδωμάτων;"
 
-#: src/svnfrontend/maintreewidget.cpp:1604
+#: src/svnfrontend/maintreewidget.cpp:1606
 #, kde-format
 msgid "Unlocking items"
 msgstr "Ξεκλείδωμα αντικειμένων"
 
-#: src/svnfrontend/maintreewidget.cpp:1605
+#: src/svnfrontend/maintreewidget.cpp:1607
 #, kde-format
 msgctxt "@action:button"
 msgid "Break Lock"
 msgstr ""
 
-#: src/svnfrontend/maintreewidget.cpp:1606
+#: src/svnfrontend/maintreewidget.cpp:1608
 #, fuzzy, kde-format
 #| msgid "Ignore"
 msgctxt "@action:button"
 msgid "Ignore"
 msgstr "Αγνόηση"
 
-#: src/svnfrontend/maintreewidget.cpp:1900
+#: src/svnfrontend/maintreewidget.cpp:1902
 #, kde-format
 msgid "Nothing selected for delete"
 msgstr "Τίποτα δεν έχει επιλεγεί για διαγραφή"
 
-#: src/svnfrontend/maintreewidget.cpp:2071
+#: src/svnfrontend/maintreewidget.cpp:2073
 #, kde-format
 msgid "Automatic generated base layout by kdesvn"
 msgstr "Αυτόματη δημιουργία της βασικής διάταξης από το kdesvn"
 
-#: src/svnfrontend/maintreewidget.cpp:2084
+#: src/svnfrontend/maintreewidget.cpp:2086
 #, kde-format
 msgid "May not make subdirectories of a file"
 msgstr "Δεν είναι δυνατή η δημιουργία υποκαταλόγων σε αρχείο"
 
-#: src/svnfrontend/maintreewidget.cpp:2196 src/svnfrontend/svnactions.cpp:2304
+#: src/svnfrontend/maintreewidget.cpp:2198 src/svnfrontend/svnactions.cpp:2306
 #, kde-format
 msgctxt "@title:window"
 msgid "Merge"
 msgstr "Συγχώνευση"
 
-#: src/svnfrontend/maintreewidget.cpp:2258
+#: src/svnfrontend/maintreewidget.cpp:2260
 #, kde-format
 msgid "Error getting entry to relocate"
 msgstr "Σφάλμα στην καταχώρηση προς μετακίνηση"
 
-#: src/svnfrontend/maintreewidget.cpp:2264
+#: src/svnfrontend/maintreewidget.cpp:2266
 #, kde-format
 msgctxt "@title:window"
 msgid "Relocate Path %1"
 msgstr "Μεταφορά διαδρομής %1"
 
-#: src/svnfrontend/maintreewidget.cpp:2278 src/svnfrontend/svnactions.cpp:1707
-#: src/svnfrontend/svnactions.cpp:1963
+#: src/svnfrontend/maintreewidget.cpp:2280 src/svnfrontend/svnactions.cpp:1709
+#: src/svnfrontend/svnactions.cpp:1965
 #, kde-format
 msgid "Invalid url given!"
 msgstr "Δόθηκε μη έγκυρο url!"
 
-#: src/svnfrontend/maintreewidget.cpp:2278
+#: src/svnfrontend/maintreewidget.cpp:2280
 #, kde-format
 msgid "Relocate path %1"
 msgstr "Μεταφορά διαδρομής %1"
 
-#: src/svnfrontend/maintreewidget.cpp:2301
+#: src/svnfrontend/maintreewidget.cpp:2303
 #, kde-format
 msgid "Cannot import into multiple targets"
 msgstr "Αδύνατη η εισαγωγή σε πολλαπλούς προορισμούς"
 
-#: src/svnfrontend/maintreewidget.cpp:2315
+#: src/svnfrontend/maintreewidget.cpp:2317
 #, kde-format
 msgid "Import files from folder"
 msgstr ""
 
-#: src/svnfrontend/maintreewidget.cpp:2317
+#: src/svnfrontend/maintreewidget.cpp:2319
 #, kde-format
 msgid "Import file"
 msgstr "Εισαγωγή αρχείου"
 
-#: src/svnfrontend/maintreewidget.cpp:2339
+#: src/svnfrontend/maintreewidget.cpp:2341
 #, fuzzy, kde-format
 #| msgid "Import log"
 msgctxt "@title:window"
 msgid "Import Log"
 msgstr "Εισαγωγή καταγραφής"
 
-#: src/svnfrontend/maintreewidget.cpp:2397
+#: src/svnfrontend/maintreewidget.cpp:2399
 #, kde-format
 msgid "Could not retrieve repository of working copy."
 msgstr "Αδυναμία ανάκτησης του αποθετηρίου του αντιγράφου εργασίας."
 
-#: src/svnfrontend/maintreewidget.cpp:2406
+#: src/svnfrontend/maintreewidget.cpp:2408
 #, kde-format
 msgid "Only in working copy possible."
 msgstr "Δυνατό μόνο σε ένα αντίγραφο εργασίας."
 
-#: src/svnfrontend/maintreewidget.cpp:2406
-#: src/svnfrontend/maintreewidget.cpp:2410
-#: src/svnfrontend/maintreewidget.cpp:2415
+#: src/svnfrontend/maintreewidget.cpp:2408
+#: src/svnfrontend/maintreewidget.cpp:2412
+#: src/svnfrontend/maintreewidget.cpp:2417
 #, kde-format
 msgid "Error"
 msgstr "Σφάλμα"
 
-#: src/svnfrontend/maintreewidget.cpp:2410
+#: src/svnfrontend/maintreewidget.cpp:2412
 #, kde-format
 msgid "Only on single folder possible"
 msgstr "Δυνατό μόνο σε ένα φάκελο"
 
-#: src/svnfrontend/maintreewidget.cpp:2415
+#: src/svnfrontend/maintreewidget.cpp:2417
 #, kde-format
 msgid "Sorry - internal error"
 msgstr "Λυπάμαι - εσωτερικό σφάλμα"
 
-#: src/svnfrontend/maintreewidget.cpp:2479
+#: src/svnfrontend/maintreewidget.cpp:2481
 #, kde-format
 msgid "Hold Ctrl key while click on selected item for unselect"
 msgstr ""
@@ -4799,33 +4799,33 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QTreeView, m_LogTreeView)
 #. i18n: ectx: property (toolTip), widget (QTreeWidget, m_ChangedList)
-#: src/svnfrontend/maintreewidget.cpp:2482 src/svnfrontend/svnlogdlg.ui:114
+#: src/svnfrontend/maintreewidget.cpp:2484 src/svnfrontend/svnlogdlg.ui:114
 #: src/svnfrontend/svnlogdlg.ui:148
 #, kde-format
 msgid "See context menu for more actions"
 msgstr "Δείτε στο σχετικό μενού για περισσότερες ενέργειες"
 
-#: src/svnfrontend/maintreewidget.cpp:2485
+#: src/svnfrontend/maintreewidget.cpp:2487
 #, kde-format
 msgid "Click for navigate"
 msgstr "Κλικ για πλοήγηση"
 
-#: src/svnfrontend/maintreewidget.cpp:2488
+#: src/svnfrontend/maintreewidget.cpp:2490
 #, kde-format
 msgid "Navigation"
 msgstr "Πλοήγηση"
 
-#: src/svnfrontend/maintreewidget.cpp:2604
+#: src/svnfrontend/maintreewidget.cpp:2606
 #, kde-format
 msgid "Could not retrieve repository."
 msgstr "Αδύνατη η ανάκτηση του αποθετηρίου."
 
-#: src/svnfrontend/maintreewidget.cpp:2634
+#: src/svnfrontend/maintreewidget.cpp:2636
 #, kde-format
 msgid "Not yet implemented"
 msgstr ""
 
-#: src/svnfrontend/maintreewidget.cpp:2634
+#: src/svnfrontend/maintreewidget.cpp:2636
 #, fuzzy, kde-format
 #| msgid "Make operation recursive."
 msgid "Edit property recursively"
@@ -4957,7 +4957,7 @@ msgid ""
 "working copy"
 msgstr ""
 
-#: src/svnfrontend/mergedlg_impl.cpp:194
+#: src/svnfrontend/mergedlg_impl.cpp:196
 #, fuzzy, kde-format
 #| msgid "Enter merge range"
 msgctxt "@title:window"
@@ -4975,7 +4975,7 @@ msgid "%1 at revision %2"
 msgstr "%1 στην αναθεώρηση %2"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:317
-#: src/svnfrontend/svnactions.cpp:746
+#: src/svnfrontend/svnactions.cpp:749
 #, kde-format
 msgid "Name"
 msgstr "Όνομα"
@@ -4991,7 +4991,7 @@ msgid "Last changed Revision"
 msgstr "Τελευταία τροποποιημένη αναθεώρηση"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:323
-#: src/svnfrontend/svnactions.cpp:805
+#: src/svnfrontend/svnactions.cpp:808
 #, kde-format
 msgid "Last author"
 msgstr "Τελευταίος συγγραφέας"
@@ -5063,605 +5063,605 @@ msgstr ""
 msgid "%1 of %2"
 msgstr "%1 από %2"
 
-#: src/svnfrontend/svnactions.cpp:187
+#: src/svnfrontend/svnactions.cpp:190
 #, kde-format
 msgid "Finished"
 msgstr "Ολοκληρώθηκε"
 
-#: src/svnfrontend/svnactions.cpp:357
+#: src/svnfrontend/svnactions.cpp:360
 #, kde-format
 msgid "Got no logs"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:481
+#: src/svnfrontend/svnactions.cpp:484
 #, kde-format
 msgid "Got no info."
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:518
+#: src/svnfrontend/svnactions.cpp:521
 #, fuzzy, kde-format
 #| msgid "History of %1"
 msgctxt "@title:window"
 msgid "History of %1"
 msgstr "Ιστορικό του %1"
 
-#: src/svnfrontend/svnactions.cpp:559
+#: src/svnfrontend/svnactions.cpp:562
 #, fuzzy, kde-format
 #| msgid "Annotate"
 msgctxt "@title:window"
 msgid "Annotate"
 msgstr "Σημείωση"
 
-#: src/svnfrontend/svnactions.cpp:559
+#: src/svnfrontend/svnactions.cpp:562
 #, fuzzy, kde-format
 #| msgid "Getting logs - hit cancel for abort"
 msgid "Annotate lines - hit Cancel for abort"
 msgstr "Λήψη καταγραφών - πατήστε «ακύρωση» για να εγκαταλείψετε"
 
-#: src/svnfrontend/svnactions.cpp:567
+#: src/svnfrontend/svnactions.cpp:570
 #, kde-format
 msgid "Got no annotate"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:584
+#: src/svnfrontend/svnactions.cpp:587
 #, fuzzy, kde-format
 #| msgid "Content"
 msgctxt "@title:window"
 msgid "Content Get"
 msgstr "Περιεχόμενο"
 
-#: src/svnfrontend/svnactions.cpp:584
+#: src/svnfrontend/svnactions.cpp:587
 #, fuzzy, kde-format
 #| msgid "Getting logs - hit cancel for abort"
 msgid "Getting content - hit Cancel for abort"
 msgstr "Λήψη καταγραφών - πατήστε «ακύρωση» για να εγκαταλείψετε"
 
-#: src/svnfrontend/svnactions.cpp:591
+#: src/svnfrontend/svnactions.cpp:594
 #, kde-format
 msgid "Error getting content"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:604
+#: src/svnfrontend/svnactions.cpp:607
 #, kde-format
 msgid "Error while open temporary file"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:635
+#: src/svnfrontend/svnactions.cpp:638
 #, fuzzy, kde-format
 #| msgid "Content"
 msgctxt "@title:window"
 msgid "Content of %1"
 msgstr "Περιεχόμενο"
 
-#: src/svnfrontend/svnactions.cpp:645
+#: src/svnfrontend/svnactions.cpp:648
 #, kde-format
 msgid "Got no content."
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:670
+#: src/svnfrontend/svnactions.cpp:673
 #, kde-format
 msgid "Enter folder name:"
 msgstr "Εισάγετε το όνομα φακέλου:"
 
-#: src/svnfrontend/svnactions.cpp:709
+#: src/svnfrontend/svnactions.cpp:712
 #, fuzzy, kde-format
 #| msgid "Details"
 msgctxt "@title:window"
 msgid "Details"
 msgstr "Λεπτομέρειες"
 
-#: src/svnfrontend/svnactions.cpp:710
+#: src/svnfrontend/svnactions.cpp:713
 #, fuzzy, kde-format
 #| msgid "Getting logs - hit cancel for abort"
 msgid "Retrieving information - hit Cancel for abort"
 msgstr "Λήψη καταγραφών - πατήστε «ακύρωση» για να εγκαταλείψετε"
 
-#: src/svnfrontend/svnactions.cpp:749
+#: src/svnfrontend/svnactions.cpp:752
 #, kde-format
 msgid "URL"
 msgstr "URL"
 
-#: src/svnfrontend/svnactions.cpp:751
+#: src/svnfrontend/svnactions.cpp:754
 #, fuzzy, kde-format
 #| msgid "Clean repository cache"
 msgid "Canonical repository URL"
 msgstr "Καθαρισμός της λανθάνουσας μνήμης του αποθετηρίου"
 
-#: src/svnfrontend/svnactions.cpp:754
+#: src/svnfrontend/svnactions.cpp:757
 #, kde-format
 msgid "Checksum"
 msgstr "Άθροισμα ελέγχου"
 
-#: src/svnfrontend/svnactions.cpp:757
+#: src/svnfrontend/svnactions.cpp:760
 #, kde-format
 msgid "Type"
 msgstr "Τύπος"
 
-#: src/svnfrontend/svnactions.cpp:760
+#: src/svnfrontend/svnactions.cpp:763
 #, kde-format
 msgid "Absent"
 msgstr "Δεν υπάρχει"
 
-#: src/svnfrontend/svnactions.cpp:763
+#: src/svnfrontend/svnactions.cpp:766
 #, kde-format
 msgid "File"
 msgstr "Αρχείο"
 
-#: src/svnfrontend/svnactions.cpp:766
+#: src/svnfrontend/svnactions.cpp:769
 #, kde-format
 msgid "Folder"
 msgstr "Φάκελος"
 
-#: src/svnfrontend/svnactions.cpp:770 src/svnfrontend/svnactions.cpp:799
+#: src/svnfrontend/svnactions.cpp:773 src/svnfrontend/svnactions.cpp:802
 #, kde-format
 msgid "Unknown"
 msgstr "Άγνωστο"
 
-#: src/svnfrontend/svnactions.cpp:775
+#: src/svnfrontend/svnactions.cpp:778
 #, kde-format
 msgid "Size"
 msgstr "Μέγεθος"
 
-#: src/svnfrontend/svnactions.cpp:784
+#: src/svnfrontend/svnactions.cpp:787
 #, kde-format
 msgid "Schedule"
 msgstr "Προγραμματισμός"
 
-#: src/svnfrontend/svnactions.cpp:787
+#: src/svnfrontend/svnactions.cpp:790
 #, kde-format
 msgid "Normal"
 msgstr "Κανονικό"
 
-#: src/svnfrontend/svnactions.cpp:790
+#: src/svnfrontend/svnactions.cpp:793
 #, kde-format
 msgid "Addition"
 msgstr "Προσθήκη"
 
-#: src/svnfrontend/svnactions.cpp:793
+#: src/svnfrontend/svnactions.cpp:796
 #, kde-format
 msgid "Deletion"
 msgstr "Διαγραφή"
 
-#: src/svnfrontend/svnactions.cpp:803
+#: src/svnfrontend/svnactions.cpp:806
 #, kde-format
 msgid "UUID"
 msgstr "UUID"
 
-#: src/svnfrontend/svnactions.cpp:807
+#: src/svnfrontend/svnactions.cpp:810
 #, kde-format
 msgid "Last committed"
 msgstr "Τελευταία υποβολή"
 
-#: src/svnfrontend/svnactions.cpp:809
+#: src/svnfrontend/svnactions.cpp:812
 #, kde-format
 msgid "Last revision"
 msgstr "Τελευταία αναθεώρηση"
 
-#: src/svnfrontend/svnactions.cpp:811
+#: src/svnfrontend/svnactions.cpp:814
 #, kde-format
 msgid "Content last changed"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:815
+#: src/svnfrontend/svnactions.cpp:818
 #, kde-format
 msgid "Property last changed"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:818
+#: src/svnfrontend/svnactions.cpp:821
 #, kde-format
 msgid "New version of conflicted file"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:821
+#: src/svnfrontend/svnactions.cpp:824
 #, kde-format
 msgid "Property reject file"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:825
+#: src/svnfrontend/svnactions.cpp:828
 #, kde-format
 msgid "Copy from URL"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:828 src/svnfrontend/svnactions.cpp:835
+#: src/svnfrontend/svnactions.cpp:831 src/svnfrontend/svnactions.cpp:838
 #, kde-format
 msgid "Lock token"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:829 src/svnfrontend/svnactions.cpp:836
+#: src/svnfrontend/svnactions.cpp:832 src/svnfrontend/svnactions.cpp:839
 #, kde-format
 msgid "Owner"
 msgstr "Ιδιοκτήτης"
 
-#: src/svnfrontend/svnactions.cpp:830 src/svnfrontend/svnactions.cpp:837
+#: src/svnfrontend/svnactions.cpp:833 src/svnfrontend/svnactions.cpp:840
 #, kde-format
 msgid "Locked on"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:831 src/svnfrontend/svnactions.cpp:838
+#: src/svnfrontend/svnactions.cpp:834 src/svnfrontend/svnactions.cpp:841
 #, kde-format
 msgid "Lock comment"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:885
+#: src/svnfrontend/svnactions.cpp:888
 #, kde-format
 msgctxt "@title:window"
 msgid "Infolist"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:924
+#: src/svnfrontend/svnactions.cpp:927
 #, fuzzy, kde-format
 #| msgid "Display Properties"
 msgctxt "@title:window"
 msgid "Applying Properties"
 msgstr "Εμφάνιση ιδιοτήτων"
 
-#: src/svnfrontend/svnactions.cpp:925
+#: src/svnfrontend/svnactions.cpp:928
 #, kde-format
 msgid "<center>Applying<br/>hit cancel for abort</center>"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:961
+#: src/svnfrontend/svnactions.cpp:964
 #, kde-format
 msgid "Could not change to folder %1\n"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:979
+#: src/svnfrontend/svnactions.cpp:982
 #, kde-format
 msgid "Not commit because networking is disabled"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1003 src/svnfrontend/svnactions.cpp:2463
+#: src/svnfrontend/svnactions.cpp:1006 src/svnfrontend/svnactions.cpp:2465
 #, fuzzy, kde-format
 #| msgid "Status"
 msgctxt "@title:window"
 msgid "Status / List"
 msgstr "Κατάσταση"
 
-#: src/svnfrontend/svnactions.cpp:1004 src/svnfrontend/svnactions.cpp:2464
+#: src/svnfrontend/svnactions.cpp:1007 src/svnfrontend/svnactions.cpp:2466
 #, kde-format
 msgid "Creating list / check status"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1043 src/svnfrontend/svnactions.cpp:1050
-#: src/svnfrontend/svnactions.cpp:1072
+#: src/svnfrontend/svnactions.cpp:1046 src/svnfrontend/svnactions.cpp:1053
+#: src/svnfrontend/svnactions.cpp:1075
 #, kde-format
 msgid "Add and Commit"
 msgstr "Προσθήκη και υποβολή"
 
-#: src/svnfrontend/svnactions.cpp:1048
+#: src/svnfrontend/svnactions.cpp:1051
 #, kde-format
 msgid "Delete and Commit"
 msgstr "Διαγραφή και υποβολή"
 
-#: src/svnfrontend/svnactions.cpp:1111
+#: src/svnfrontend/svnactions.cpp:1114
 #, fuzzy, kde-format
 #| msgid "Commit"
 msgctxt "@title:window"
 msgid "Commit"
 msgstr "Υποβολή"
 
-#: src/svnfrontend/svnactions.cpp:1111
+#: src/svnfrontend/svnactions.cpp:1114
 #, kde-format
 msgid "Commit - hit Cancel for abort"
 msgstr "Υποβολή - πατήστε Ακύρωση για να εγκατάλειψη"
 
-#: src/svnfrontend/svnactions.cpp:1138
+#: src/svnfrontend/svnactions.cpp:1141
 #, kde-format
 msgctxt "@title:window"
 msgid "Downloading"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1139
+#: src/svnfrontend/svnactions.cpp:1142
 #, kde-format
 msgid "Download - hit Cancel for abort"
 msgstr "Λήψη - πατήστε Ακύρωση για εγκατάλειψη"
 
-#: src/svnfrontend/svnactions.cpp:1165
+#: src/svnfrontend/svnactions.cpp:1168
 #, kde-format
 msgid "Can not do this diff because networking is disabled."
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1219
+#: src/svnfrontend/svnactions.cpp:1222
 #, kde-format
 msgid "Both entries seems to be the same, can not diff."
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1280
+#: src/svnfrontend/svnactions.cpp:1283
 #, kde-format
 msgid "Diff-process could not started, check command."
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1339 src/svnfrontend/svnactions.cpp:1401
+#: src/svnfrontend/svnactions.cpp:1342 src/svnfrontend/svnactions.cpp:1404
 #, fuzzy, kde-format
 #| msgid "Diff item"
 msgctxt "@title:window"
 msgid "Diffing"
 msgstr "Diff αντικειμένου"
 
-#: src/svnfrontend/svnactions.cpp:1339
+#: src/svnfrontend/svnactions.cpp:1342
 #, kde-format
 msgid "Diffing - hit Cancel for abort"
 msgstr "Πραγματοποιείται Diff - πατήστε Ακύρωση για εγκατάλειψη"
 
-#: src/svnfrontend/svnactions.cpp:1352 src/svnfrontend/svnactions.cpp:1411
+#: src/svnfrontend/svnactions.cpp:1355 src/svnfrontend/svnactions.cpp:1414
 #, kde-format
 msgid "No difference to display"
 msgstr "Δεν υπάρχουν διαφορές προς εμφάνιση"
 
-#: src/svnfrontend/svnactions.cpp:1402
+#: src/svnfrontend/svnactions.cpp:1405
 #, fuzzy, kde-format
 #| msgid "Diffing - hit Cancel for abort"
 msgid "Diffing - hit cancel for abort"
 msgstr "Πραγματοποιείται Diff - πατήστε Ακύρωση για εγκατάλειψη"
 
-#: src/svnfrontend/svnactions.cpp:1458
+#: src/svnfrontend/svnactions.cpp:1460
 #, kde-format
 msgid "Display process could not started, check command."
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1470
+#: src/svnfrontend/svnactions.cpp:1472
 #, fuzzy, kde-format
 #| msgid "Diff display"
 msgctxt "@title:window"
 msgid "Diff Display"
 msgstr "Εμφάνιση diff"
 
-#: src/svnfrontend/svnactions.cpp:1518
+#: src/svnfrontend/svnactions.cpp:1520
 #, fuzzy, kde-format
 #| msgid "Check updates"
 msgctxt "@title:window"
 msgid "Making update"
 msgstr "Έλεγχος ενημερώσεων"
 
-#: src/svnfrontend/svnactions.cpp:1519
+#: src/svnfrontend/svnactions.cpp:1521
 #, kde-format
 msgid "Making update - hit Cancel for abort"
 msgstr "Γίνεται ενημέρωση - πατήστε Ακύρωση εγκατάλειψη"
 
-#: src/svnfrontend/svnactions.cpp:1604
+#: src/svnfrontend/svnactions.cpp:1606
 #, kde-format
 msgid "Which files or directories should I add?"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1611
+#: src/svnfrontend/svnactions.cpp:1613
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is versioned - break.</center>"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1638
+#: src/svnfrontend/svnactions.cpp:1640
 #, kde-format
 msgid "Delete from repository"
 msgstr "Διαγραφή από το αποθετήριο"
 
-#: src/svnfrontend/svnactions.cpp:1689
+#: src/svnfrontend/svnactions.cpp:1691
 #, fuzzy, kde-format
 #| msgid "Export a repository"
 msgctxt "@title:window"
 msgid "Export a Repository"
 msgstr "Εξαγωγή ενός αποθετηρίου"
 
-#: src/svnfrontend/svnactions.cpp:1689
+#: src/svnfrontend/svnactions.cpp:1691
 #, fuzzy, kde-format
 #| msgid "Checkout a repository"
 msgctxt "@title:window"
 msgid "Checkout a Repository"
 msgstr "Checkout ενός αποθετηρίου"
 
-#: src/svnfrontend/svnactions.cpp:1707 src/svnfrontend/svnactions.cpp:1714
+#: src/svnfrontend/svnactions.cpp:1709 src/svnfrontend/svnactions.cpp:1716
 #, kde-format
 msgid "Export repository"
 msgstr "Εξαγωγή ενός αποθετηρίου"
 
-#: src/svnfrontend/svnactions.cpp:1713
+#: src/svnfrontend/svnactions.cpp:1715
 #, kde-format
 msgid "Invalid local path given!"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1733
+#: src/svnfrontend/svnactions.cpp:1735
 #, kde-format
 msgid "Exporting a file?"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1733
+#: src/svnfrontend/svnactions.cpp:1735
 #, kde-format
 msgid "Checking out a file?"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1789
+#: src/svnfrontend/svnactions.cpp:1791
 #, fuzzy, kde-format
 #| msgid "Export"
 msgctxt "@title:window"
 msgid "Export"
 msgstr "Εξαγωγή"
 
-#: src/svnfrontend/svnactions.cpp:1789
+#: src/svnfrontend/svnactions.cpp:1791
 #, fuzzy, kde-format
 #| msgid "Checkout"
 msgctxt "@title:window"
 msgid "Checkout"
 msgstr "Checkout"
 
-#: src/svnfrontend/svnactions.cpp:1790
+#: src/svnfrontend/svnactions.cpp:1792
 #, kde-format
 msgid "Exporting"
 msgstr "Εξαγωγή"
 
-#: src/svnfrontend/svnactions.cpp:1790
+#: src/svnfrontend/svnactions.cpp:1792
 #, kde-format
 msgid "Checking out"
 msgstr "Checking out"
 
-#: src/svnfrontend/svnactions.cpp:1828
+#: src/svnfrontend/svnactions.cpp:1830
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1860
+#: src/svnfrontend/svnactions.cpp:1862
 #, fuzzy, kde-format
 #| msgid "Revert"
 msgctxt "@title:window"
 msgid "Revert"
 msgstr "Επαναφορά"
 
-#: src/svnfrontend/svnactions.cpp:1860
+#: src/svnfrontend/svnactions.cpp:1862
 #, kde-format
 msgid "Reverting items"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1889 src/svnfrontend/svnactions.cpp:1953
+#: src/svnfrontend/svnactions.cpp:1891 src/svnfrontend/svnactions.cpp:1955
 #, kde-format
 msgctxt "@title:window"
 msgid "Switch URL"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1889
+#: src/svnfrontend/svnactions.cpp:1891
 #, kde-format
 msgid "Switching URL"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1910
+#: src/svnfrontend/svnactions.cpp:1912
 #, fuzzy, kde-format
 #| msgid "Delete repository"
 msgctxt "@title:window"
 msgid "Relocate Repository"
 msgstr "Διαγραφή αποθετηρίου"
 
-#: src/svnfrontend/svnactions.cpp:1911
+#: src/svnfrontend/svnactions.cpp:1913
 #, kde-format
 msgid "Relocate repository to new URL"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1934
+#: src/svnfrontend/svnactions.cpp:1936
 #, kde-format
 msgid "Can only switch one item at time"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1940
+#: src/svnfrontend/svnactions.cpp:1942
 #, kde-format
 msgid "Error getting entry to switch"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1963
+#: src/svnfrontend/svnactions.cpp:1965
 #, kde-format
 msgid "Switch URL"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1980
+#: src/svnfrontend/svnactions.cpp:1982
 #, fuzzy, kde-format
 #| msgid "Cleanup"
 msgctxt "@title:window"
 msgid "Cleanup"
 msgstr "Καθαρισμός"
 
-#: src/svnfrontend/svnactions.cpp:1980
+#: src/svnfrontend/svnactions.cpp:1982
 #, kde-format
 msgid "Cleaning up folder"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:1996
+#: src/svnfrontend/svnactions.cpp:1998
 #, fuzzy, kde-format
 #| msgid "Resolve"
 msgctxt "@title:window"
 msgid "Resolve"
 msgstr "Επίλυση"
 
-#: src/svnfrontend/svnactions.cpp:1996
+#: src/svnfrontend/svnactions.cpp:1998
 #, kde-format
 msgid "Marking resolved"
 msgstr "Σημείωση ως επιλυμένο"
 
-#: src/svnfrontend/svnactions.cpp:2027
+#: src/svnfrontend/svnactions.cpp:2029
 #, kde-format
 msgid "Could not retrieve conflict information - giving up."
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:2052
+#: src/svnfrontend/svnactions.cpp:2054
 #, kde-format
 msgid "Resolve-process could not started, check command."
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:2062
+#: src/svnfrontend/svnactions.cpp:2064
 #, fuzzy, kde-format
 #| msgid "Import"
 msgctxt "@title:window"
 msgid "Import"
 msgstr "Εισαγωγή"
 
-#: src/svnfrontend/svnactions.cpp:2062
+#: src/svnfrontend/svnactions.cpp:2064
 #, kde-format
 msgid "Importing items"
 msgstr "Εισαγωγή αντικειμένων"
 
-#: src/svnfrontend/svnactions.cpp:2091
+#: src/svnfrontend/svnactions.cpp:2093
 #, kde-format
 msgid "Nothing to merge."
 msgstr "Τίποτα προς συγχώνευση."
 
-#: src/svnfrontend/svnactions.cpp:2095
+#: src/svnfrontend/svnactions.cpp:2097
 #, kde-format
 msgid "No destination to merge."
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:2114
+#: src/svnfrontend/svnactions.cpp:2116
 #, kde-format
 msgid "Both sources must be same type."
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:2121
+#: src/svnfrontend/svnactions.cpp:2123
 #, kde-format
 msgid "Target for merge must same type like sources."
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:2144
+#: src/svnfrontend/svnactions.cpp:2146
 #, kde-format
 msgid "Both entries seems to be the same, will not do a merge."
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:2222
+#: src/svnfrontend/svnactions.cpp:2224
 #, kde-format
 msgid "Merge process could not started, check command."
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:2304
+#: src/svnfrontend/svnactions.cpp:2306
 #, kde-format
 msgid "Merging items"
 msgstr "Συγχώνευση αντικειμένων"
 
-#: src/svnfrontend/svnactions.cpp:2330 src/svnfrontend/svnactions.cpp:2347
+#: src/svnfrontend/svnactions.cpp:2332 src/svnfrontend/svnactions.cpp:2349
 #, fuzzy, kde-format
 #| msgid "Move"
 msgctxt "@title:window"
 msgid "Move"
 msgstr "Μετακίνηση"
 
-#: src/svnfrontend/svnactions.cpp:2330
+#: src/svnfrontend/svnactions.cpp:2332
 #, kde-format
 msgid "Moving/Rename item"
 msgstr "Μετακίνηση/μετονομασία αντικειμένου"
 
-#: src/svnfrontend/svnactions.cpp:2347
+#: src/svnfrontend/svnactions.cpp:2349
 #, kde-format
 msgid "Moving entries"
 msgstr "Μετακίνηση καταχωρήσεων"
 
-#: src/svnfrontend/svnactions.cpp:2367 src/svnfrontend/svnactions.cpp:2381
+#: src/svnfrontend/svnactions.cpp:2369 src/svnfrontend/svnactions.cpp:2383
 #, fuzzy, kde-format
 #| msgid "Copy / Move"
 msgctxt "@title:window"
 msgid "Copy / Move"
 msgstr "Αντιγραφή / Μετακίνηση"
 
-#: src/svnfrontend/svnactions.cpp:2367 src/svnfrontend/svnactions.cpp:2381
+#: src/svnfrontend/svnactions.cpp:2369 src/svnfrontend/svnactions.cpp:2383
 #, kde-format
 msgid "Copy or Moving entries"
 msgstr "Αντιγραφή ή μετακίνηση καταχωρήσεων"
 
-#: src/svnfrontend/svnactions.cpp:2497
+#: src/svnfrontend/svnactions.cpp:2499
 #, kde-format
 msgid "No unversioned items found."
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:2501
+#: src/svnfrontend/svnactions.cpp:2503
 #, fuzzy, kde-format
 #| msgid "Not versioned items:"
 msgctxt "@title:window"
@@ -5669,12 +5669,12 @@ msgid "Add Unversioned Items"
 msgstr "Αντικείμενα χωρίς έκδοση:"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
-#: src/svnfrontend/svnactions.cpp:2504 src/svnfrontend/svnlogdlg.ui:163
+#: src/svnfrontend/svnactions.cpp:2506 src/svnfrontend/svnlogdlg.ui:163
 #, kde-format
 msgid "Item"
 msgstr "Αντικείμενο"
 
-#: src/svnfrontend/svnactions.cpp:2619
+#: src/svnfrontend/svnactions.cpp:2621
 #, fuzzy, kde-format
 #| msgid "Color for modified items:"
 msgid "Found %1 modified item"
@@ -5682,17 +5682,17 @@ msgid_plural "Found %1 modified items"
 msgstr[0] "Χρώμα για τα αντικείμενα που έχουν τροποποιηθεί:"
 msgstr[1] "Χρώμα για τα αντικείμενα που έχουν τροποποιηθεί:"
 
-#: src/svnfrontend/svnactions.cpp:2647
+#: src/svnfrontend/svnactions.cpp:2649
 #, kde-format
 msgid "Checking for updates finished"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:2649
+#: src/svnfrontend/svnactions.cpp:2651
 #, kde-format
 msgid "There are new items in repository"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:2719
+#: src/svnfrontend/svnactions.cpp:2721
 #, fuzzy, kde-format
 #| msgid ""
 #| "Not filling logcache because it is disabled due setting for this "
@@ -5702,12 +5702,12 @@ msgstr ""
 "Δεν έγινε πλήρωση της λανθάνουσας μνήμης καταγραφών διότι είναι "
 "απενεργοποιημένη από τις ρυθμίσεις του αποθετηρίου."
 
-#: src/svnfrontend/svnactions.cpp:2759
+#: src/svnfrontend/svnactions.cpp:2761
 #, kde-format
 msgid "Not checking for updates because networking is disabled"
 msgstr ""
 
-#: src/svnfrontend/svnactions.cpp:2765
+#: src/svnfrontend/svnactions.cpp:2767
 #, kde-format
 msgid "Checking for updates started in background"
 msgstr "Ο έλεγχος ενημερώσεων ξεκίνησε στο παρασκήνιο"
@@ -5917,7 +5917,7 @@ msgstr "&Αντιγραφή εδώ"
 msgid "C&ancel"
 msgstr "&Ακύρωση"
 
-#: src/urldlg.cpp:98
+#: src/urldlg.cpp:100
 #, fuzzy, kde-format
 #| msgid "Open"
 msgctxt "@title:window"

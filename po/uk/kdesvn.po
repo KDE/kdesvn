@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-23 00:45+0000\n"
+"POT-Creation-Date: 2025-09-03 00:46+0000\n"
 "PO-Revision-Date: 2023-12-29 08:39+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -107,7 +107,7 @@ msgid "Add to Repository"
 msgstr "Додати до сховища"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:80
-#: src/svnfrontend/maintreewidget.cpp:653
+#: src/svnfrontend/maintreewidget.cpp:655
 #, kde-format
 msgid "Check for unversioned items"
 msgstr "Знайти елементи поза системою керування версіями"
@@ -138,7 +138,7 @@ msgid "Switch..."
 msgstr "Перемкнутися…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:100
-#: src/svnfrontend/maintreewidget.cpp:824
+#: src/svnfrontend/maintreewidget.cpp:826
 #, kde-format
 msgid "Merge..."
 msgstr "Об’єднати…"
@@ -168,82 +168,82 @@ msgstr "Показати дерево модифікацій"
 msgid "Subversion (kdesvn)"
 msgstr "Subversion (kdesvn)"
 
-#: src/kdesvn.cpp:80
+#: src/kdesvn.cpp:82
 #, kde-format
 msgid "&Bookmarks"
 msgstr "&Закладки"
 
-#: src/kdesvn.cpp:104
+#: src/kdesvn.cpp:106
 #, kde-format
 msgid "Create and open new repository"
 msgstr "Створити і відкрити нове сховище"
 
-#: src/kdesvn.cpp:105
+#: src/kdesvn.cpp:107
 #, kde-format
 msgid "Create and opens a new local Subversion repository"
 msgstr "Створити і відкрити нове локальне сховище Subversion"
 
-#: src/kdesvn.cpp:108
+#: src/kdesvn.cpp:110
 #, kde-format
 msgid "Dump repository to file"
 msgstr "Створити дамп сховища у файлі"
 
-#: src/kdesvn.cpp:109
+#: src/kdesvn.cpp:111
 #, kde-format
 msgid "Dump a Subversion repository to a file"
 msgstr "Створити дамп сховища Subversion у файлі"
 
-#: src/kdesvn.cpp:112
+#: src/kdesvn.cpp:114
 #, kde-format
 msgid "Hotcopy a repository"
 msgstr "Скопіювати сховище"
 
-#: src/kdesvn.cpp:113
+#: src/kdesvn.cpp:115
 #, kde-format
 msgid "Hotcopy a Subversion repository to a new folder"
 msgstr "Скопіювати сховище Subversion до нової теки"
 
-#: src/kdesvn.cpp:116
+#: src/kdesvn.cpp:118
 #, kde-format
 msgid "Load dump into repository"
 msgstr "Завантажити дамп до сховища"
 
-#: src/kdesvn.cpp:117
+#: src/kdesvn.cpp:119
 #, kde-format
 msgid "Load a dump file into a repository."
 msgstr "Завантажити файл дампу до сховища"
 
-#: src/kdesvn.cpp:120
+#: src/kdesvn.cpp:122
 #, kde-format
 msgid "Add ssh identities to ssh-agent"
 msgstr "Додати профілі ssh до ssh-agent"
 
-#: src/kdesvn.cpp:121
+#: src/kdesvn.cpp:123
 #, kde-format
 msgid "Force add ssh-identities to ssh-agent for future use."
 msgstr "Примусово додати профілі ssh до ssh-agent для подальшого використання."
 
-#: src/kdesvn.cpp:124
+#: src/kdesvn.cpp:126
 #, kde-format
 msgid "Info about kdesvn part"
 msgstr "Дані щодо компонента kdesvn"
 
-#: src/kdesvn.cpp:125
+#: src/kdesvn.cpp:127
 #, kde-format
 msgid "Shows info about the kdesvn plugin and not the standalone application."
 msgstr "Показати дані щодо додатка kdesvn, а не окремої програми."
 
-#: src/kdesvn.cpp:128
+#: src/kdesvn.cpp:130
 #, kde-format
 msgid "Show database content"
 msgstr "Показати вміст бази даних"
 
-#: src/kdesvn.cpp:129
+#: src/kdesvn.cpp:131
 #, kde-format
 msgid "Show the content of log cache database"
 msgstr "Показати вміст бази даних кешу журналу"
 
-#: src/kdesvn.cpp:136
+#: src/kdesvn.cpp:138
 #, kde-format
 msgid ""
 "Could not load our part:\n"
@@ -252,29 +252,29 @@ msgstr ""
 "Не вдалося завантажити нашу частину:\n"
 "%1"
 
-#: src/kdesvn.cpp:167
+#: src/kdesvn.cpp:169
 #, kde-format
 msgid "Could not open URL %1"
 msgstr "Не вдалося відкрити адресу %1"
 
-#: src/kdesvn.cpp:199
+#: src/kdesvn.cpp:201
 #, kde-format
 msgid "Recent opened URLs"
 msgstr "Нещодавно відкриті адреси"
 
-#: src/kdesvn.cpp:208
+#: src/kdesvn.cpp:210
 #, kde-format
 msgid "Load last opened URL on start"
 msgstr "Завантажувати останню відкриту адресу після запуску"
 
-#: src/kdesvn.cpp:210
+#: src/kdesvn.cpp:212
 #, kde-format
 msgid "Reload last opened URL if no one is given on command line"
 msgstr ""
 "Перезавантажувати останню відкриту адресу, якщо у командному рядку не "
 "вказано іншої адреси"
 
-#: src/kdesvn.cpp:293
+#: src/kdesvn.cpp:295
 #, kde-format
 msgid "Ready"
 msgstr "Готово"
@@ -549,77 +549,77 @@ msgstr "База даних"
 msgid "&Settings"
 msgstr "П&араметри"
 
-#: src/kdesvnview.cpp:130 src/kdesvnview.cpp:164
+#: src/kdesvnview.cpp:132 src/kdesvnview.cpp:166
 #, kde-format
 msgid "Repository opened"
 msgstr "Сховище відкрито"
 
-#: src/kdesvnview.cpp:170
+#: src/kdesvnview.cpp:172
 #, kde-format
 msgid "Could not open repository"
 msgstr "Не вдалося відкрити сховище"
 
-#: src/kdesvnview.cpp:195
+#: src/kdesvnview.cpp:197
 #, kde-format
 msgid "No repository open"
 msgstr "Не відкрито жодного сховища"
 
-#: src/kdesvnview.cpp:255
+#: src/kdesvnview.cpp:257
 #, kde-format
 msgctxt "@title:window"
 msgid "Hotcopy a Repository"
 msgstr "Копіювання сховища"
 
-#: src/kdesvnview.cpp:273
+#: src/kdesvnview.cpp:275
 #, kde-format
 msgid "Hotcopy finished."
 msgstr "Копіювання завершено."
 
-#: src/kdesvnview.cpp:282
+#: src/kdesvnview.cpp:284
 #, kde-format
 msgctxt "@title:window"
 msgid "Load a Repository From an svndump"
 msgstr "Завантаження сховища з svndump"
 
-#: src/kdesvnview.cpp:332
+#: src/kdesvnview.cpp:334
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Dump"
 msgstr "Завантажити дамп"
 
-#: src/kdesvnview.cpp:332
+#: src/kdesvnview.cpp:334
 #, kde-format
 msgid "Loading a dump into a repository."
 msgstr "Завантажуємо дамп до сховища."
 
-#: src/kdesvnview.cpp:334
+#: src/kdesvnview.cpp:336
 #, kde-format
 msgid "Loading dump finished."
 msgstr "Завантажування дампу завершено."
 
-#: src/kdesvnview.cpp:344
+#: src/kdesvnview.cpp:346
 #, kde-format
 msgctxt "@title:window"
 msgid "Dump a Repository"
 msgstr "Створення дампу сховища"
 
-#: src/kdesvnview.cpp:384
+#: src/kdesvnview.cpp:386
 #, kde-format
 msgctxt "@title:window"
 msgid "Dump"
 msgstr "Дамп"
 
-#: src/kdesvnview.cpp:384
+#: src/kdesvnview.cpp:386
 #, kde-format
 msgid "Dumping a repository"
 msgstr "Створюємо дамп сховища"
 
-#: src/kdesvnview.cpp:386
+#: src/kdesvnview.cpp:388
 #, kde-format
 msgid "Dump finished."
 msgstr "Створення дампу завершено."
 
-#: src/kdesvnview.cpp:431
+#: src/kdesvnview.cpp:433
 #, kde-format
 msgid "Inserted %v not cached log entries of %m."
 msgstr "Вставлено %v некешованих записів журналу %m."
@@ -804,8 +804,8 @@ msgstr "%1 записано до сховища"
 msgid "Copied %1 to %2"
 msgstr "%1 скопійовано до %2"
 
-#: src/kiosvn/kiosvn.cpp:788 src/svnfrontend/svnactions.cpp:1119
-#: src/svnfrontend/svnactions.cpp:2338
+#: src/kiosvn/kiosvn.cpp:788 src/svnfrontend/svnactions.cpp:1122
+#: src/svnfrontend/svnactions.cpp:2340
 #, kde-format
 msgid "Committed revision %1."
 msgstr "Модифікацію %1 записано до сховища."
@@ -878,7 +878,7 @@ msgid "Unselect all"
 msgstr "Зняти позначення з усього"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_HideNewItems)
-#: src/ksvnwidgets/commitmessage.ui:77 src/ksvnwidgets/commitmsg_impl.cpp:455
+#: src/ksvnwidgets/commitmessage.ui:77 src/ksvnwidgets/commitmsg_impl.cpp:457
 #, kde-format
 msgid "Hide new items"
 msgstr "Приховати нові елементи"
@@ -973,30 +973,30 @@ msgstr "Якщо позначено, надсилання змін не знім
 msgid "Keep locks"
 msgstr "Зберігати блокування"
 
-#: src/ksvnwidgets/commitmsg_impl.cpp:289
+#: src/ksvnwidgets/commitmsg_impl.cpp:291
 #, kde-format
 msgctxt "@title:window"
 msgid "Commit Log"
 msgstr "Журнал внесків"
 
-#: src/ksvnwidgets/commitmsg_impl.cpp:455
+#: src/ksvnwidgets/commitmsg_impl.cpp:457
 #, kde-format
 msgid "Show new items"
 msgstr "Показати нові елементи"
 
-#: src/ksvnwidgets/commitmsg_impl.cpp:478
+#: src/ksvnwidgets/commitmsg_impl.cpp:480
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Text File to Insert"
 msgstr "Виберіть текстовий файл для вставлення"
 
-#: src/ksvnwidgets/commitmsg_impl.cpp:479
+#: src/ksvnwidgets/commitmsg_impl.cpp:481
 #, kde-format
 msgid "Select text file to insert:"
 msgstr "Виберіть текстовий файл для вставлення:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DeleteForm)
-#: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1636
+#: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1638
 #, kde-format
 msgid "Really delete these entries?"
 msgstr "Справді вилучити ці записи?"
@@ -1157,23 +1157,23 @@ msgid "Entry"
 msgstr "Запис"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:35
-#: src/svnfrontend/maintreewidget.cpp:694
+#: src/svnfrontend/maintreewidget.cpp:696
 #, kde-format
 msgid "Add"
 msgstr "Додати"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:39
 #: src/svnfrontend/ccontextlistener.cpp:67
-#: src/svnfrontend/copymoveview_impl.cpp:48
-#: src/svnfrontend/maintreewidget.cpp:566
+#: src/svnfrontend/copymoveview_impl.cpp:50
+#: src/svnfrontend/maintreewidget.cpp:568
 #, kde-format
 msgid "Copy"
 msgstr "Копіювати"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:43
 #: src/svnfrontend/ccontextlistener.cpp:68
-#: src/svnfrontend/maintreewidget.cpp:709
-#: src/svnfrontend/maintreewidget.cpp:718 src/svnfrontend/svnactions.cpp:1038
+#: src/svnfrontend/maintreewidget.cpp:711
+#: src/svnfrontend/maintreewidget.cpp:720 src/svnfrontend/svnactions.cpp:1041
 #, kde-format
 msgid "Delete"
 msgstr "Вилучити"
@@ -1184,7 +1184,7 @@ msgid "Modify (content or property)"
 msgstr "Змінити (вміст або властивість)"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:51
-#: src/svnfrontend/svnactions.cpp:796
+#: src/svnfrontend/svnactions.cpp:799
 #, kde-format
 msgid "Replace"
 msgstr "Замінити"
@@ -1498,7 +1498,7 @@ msgstr "Під час порівняння ігнорувати бінарні �
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_tree_diff_rec)
 #: src/settings/diffmergesettings.ui:18
-#: src/svnfrontend/graphtree/revgraphview.cpp:853
+#: src/svnfrontend/graphtree/revgraphview.cpp:855
 #, kde-format
 msgid "Diff in revision tree is recursive"
 msgstr "Порівняння у дереві модифікацій є рекурсивним"
@@ -2571,29 +2571,29 @@ msgstr ""
 msgid "Update makes missing parents"
 msgstr "Оновлення створює батьківські елементи, яких не вистачає"
 
-#: src/svnfrontend/background/fillcachethread.cpp:74
+#: src/svnfrontend/background/fillcachethread.cpp:76
 #, kde-format
 msgid ""
 "Not filling log cache because it is disabled due setting for this repository."
 msgstr ""
 "Не заповнюємо кеш журналу, оскільки цю можливість вимкнено на рівні сховища."
 
-#: src/svnfrontend/background/fillcachethread.cpp:76
+#: src/svnfrontend/background/fillcachethread.cpp:78
 #, kde-format
 msgid "Filling log cache in background."
 msgstr "Заповнення кешу журналу у фоновому режимі."
 
-#: src/svnfrontend/background/fillcachethread.cpp:98
+#: src/svnfrontend/background/fillcachethread.cpp:100
 #, kde-format
 msgid "Filling cache canceled."
 msgstr "Заповнення кешу скасовано."
 
-#: src/svnfrontend/background/fillcachethread.cpp:113
+#: src/svnfrontend/background/fillcachethread.cpp:115
 #, kde-format
 msgid "Cache filled up to revision %1."
 msgstr "Кеш заповнено до модифікації %1."
 
-#: src/svnfrontend/background/fillcachethread.cpp:120
+#: src/svnfrontend/background/fillcachethread.cpp:122
 #, kde-format
 msgid "Filling log cache in background finished."
 msgstr "Заповнення кешу журналу у фоновому режимі завершено."
@@ -2851,31 +2851,31 @@ msgctxt "@action:button"
 msgid "Store in Plain Text"
 msgstr "Зберегти як звичайний текст"
 
-#: src/svnfrontend/commandexec.cpp:206 src/svnfrontend/commandexec.cpp:321
-#: src/svnfrontend/graphtree/revgraphview.cpp:992
-#: src/svnfrontend/maintreewidget.cpp:1233
-#: src/svnfrontend/maintreewidget.cpp:2397
-#: src/svnfrontend/maintreewidget.cpp:2604
+#: src/svnfrontend/commandexec.cpp:208 src/svnfrontend/commandexec.cpp:323
+#: src/svnfrontend/graphtree/revgraphview.cpp:994
+#: src/svnfrontend/maintreewidget.cpp:1235
+#: src/svnfrontend/maintreewidget.cpp:2399
+#: src/svnfrontend/maintreewidget.cpp:2606
 #, kde-format
 msgid "SVN Error"
 msgstr "Помилка SVN"
 
-#: src/svnfrontend/commandexec.cpp:206
+#: src/svnfrontend/commandexec.cpp:208
 #, kde-format
 msgid "Command \"%1\" not implemented or known"
 msgstr "Команду «%1» не реалізовано у програмі або ця команда є помилковою"
 
-#: src/svnfrontend/commandexec.cpp:408
+#: src/svnfrontend/commandexec.cpp:410
 #, kde-format
 msgid "\"GET\" requires output file"
 msgstr "Для «GET» потрібна назва вихідного файла"
 
-#: src/svnfrontend/commandexec.cpp:589
+#: src/svnfrontend/commandexec.cpp:591
 #, kde-format
 msgid "May only switch one URL at time"
 msgstr "Перемикати адреси можна лише одна за одною"
 
-#: src/svnfrontend/commandexec.cpp:593
+#: src/svnfrontend/commandexec.cpp:595
 #, kde-format
 msgid "Switch only on working copies"
 msgstr "Перемикатися лише на робочі копії"
@@ -2905,18 +2905,18 @@ msgstr "KSqueezedTextLabel"
 msgid "to"
 msgstr "до"
 
-#: src/svnfrontend/copymoveview_impl.cpp:46
+#: src/svnfrontend/copymoveview_impl.cpp:48
 #, kde-format
 msgid "Rename/move"
 msgstr "Перейменувати/Пересунути"
 
-#: src/svnfrontend/copymoveview_impl.cpp:70
+#: src/svnfrontend/copymoveview_impl.cpp:72
 #, kde-format
 msgctxt "@title:window"
 msgid "Move/Rename File/Directory"
 msgstr "Пересунути або перейменувати файл чи каталог"
 
-#: src/svnfrontend/copymoveview_impl.cpp:70
+#: src/svnfrontend/copymoveview_impl.cpp:72
 #, kde-format
 msgctxt "@title:window"
 msgid "Copy File/Directory"
@@ -3161,7 +3161,7 @@ msgstr "Параметри сховища"
 msgid "Statistics for repository"
 msgstr "Статистичні дані щодо сховища"
 
-#: src/svnfrontend/database/dbsettings.cpp:39
+#: src/svnfrontend/database/dbsettings.cpp:41
 #, kde-format
 msgctxt "@title:window"
 msgid "Settings for %1"
@@ -3697,7 +3697,7 @@ msgstr "Виберіть модифікацію"
 msgid "-1"
 msgstr "-1"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:144
+#: src/svnfrontend/graphtree/revgraphview.cpp:146
 #, kde-format
 msgid ""
 "Could not run process \"%1\".\n"
@@ -3710,155 +3710,155 @@ msgstr ""
 "Обробку зупинено з таким повідомленням:\n"
 "%2"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:332
+#: src/svnfrontend/graphtree/revgraphview.cpp:334
 #, kde-format
 msgid "Error running the graph layouting tool.\n"
 msgstr "Помилка під час запуску інструмента компонування графу.\n"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:333
+#: src/svnfrontend/graphtree/revgraphview.cpp:335
 #, kde-format
 msgid "Please check that 'dot' is installed (package GraphViz)."
 msgstr "Перевірте, чи встановлено «dot» (з пакунка GraphViz)."
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:422
+#: src/svnfrontend/graphtree/revgraphview.cpp:424
 #, kde-format
 msgid "Deleted at revision %1"
 msgstr "Вилучено у модифікації %1"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:425
+#: src/svnfrontend/graphtree/revgraphview.cpp:427
 #, kde-format
 msgid "Added at revision %1 as %2"
 msgstr "Додано у модифікації %1 як %2"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:429
+#: src/svnfrontend/graphtree/revgraphview.cpp:431
 #, kde-format
 msgid "Copied to %1 at revision %2"
 msgstr "Скопійовано до %1 у модифікації %2"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:432
+#: src/svnfrontend/graphtree/revgraphview.cpp:434
 #, kde-format
 msgid "Renamed to %1 at revision %2"
 msgstr "Перейменовано на %1 у модифікації %2"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:435
+#: src/svnfrontend/graphtree/revgraphview.cpp:437
 #, kde-format
 msgid "Modified at revision %1"
 msgstr "Змінено у модифікації %1"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:438
+#: src/svnfrontend/graphtree/revgraphview.cpp:440
 #, kde-format
 msgid "Replaced at revision %1"
 msgstr "Замінено у модифікації %1"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:441
+#: src/svnfrontend/graphtree/revgraphview.cpp:443
 #, kde-format
 msgid "Revision %1"
 msgstr "Модифікація %1"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:461
+#: src/svnfrontend/graphtree/revgraphview.cpp:463
 #, kde-format
 msgid "Could not open temporary file %1 for writing."
 msgstr "Не вдалося відкрити тимчасовий файл «%1» для запису."
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:554
+#: src/svnfrontend/graphtree/revgraphview.cpp:556
 #, kde-format
 msgid "<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>"
 msgstr "<br>Модифікація: %1<br>Автор: %2<br>Дата: %3<br>Журнал: %4</html>"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:557
+#: src/svnfrontend/graphtree/revgraphview.cpp:559
 #, kde-format
 msgid "<b>Revision</b>%1%2%3"
 msgstr "<b>Модифікація</b>%1%2%3"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:557
+#: src/svnfrontend/graphtree/revgraphview.cpp:559
 #, kde-format
 msgid "<b>Author</b>%1%2%3"
 msgstr "<b>Автор</b>%1%2%3"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:558
+#: src/svnfrontend/graphtree/revgraphview.cpp:560
 #, kde-format
 msgid "<b>Date</b>%1%2%3"
 msgstr "<b>Дата</b>%1%2%3"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:558
+#: src/svnfrontend/graphtree/revgraphview.cpp:560
 #, kde-format
 msgid "<b>Log</b>%1%2%3"
 msgstr "<b>Журнал</b>%1%2%3"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:833
+#: src/svnfrontend/graphtree/revgraphview.cpp:835
 #, kde-format
 msgid "Diff to previous"
 msgstr "Відмінність від попередньої"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:836
+#: src/svnfrontend/graphtree/revgraphview.cpp:838
 #, kde-format
 msgid "Diff to selected item"
 msgstr "Відмінність від позначеного елемента"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:839
+#: src/svnfrontend/graphtree/revgraphview.cpp:841
 #: src/svnfrontend/svnlogdlgimp.cpp:524
 #, kde-format
 msgid "Cat this version"
 msgstr "Отримати цю версію"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:842
+#: src/svnfrontend/graphtree/revgraphview.cpp:844
 #, kde-format
 msgid "Unselect item"
 msgstr "Зняти позначення з елемента"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:844
+#: src/svnfrontend/graphtree/revgraphview.cpp:846
 #, kde-format
 msgid "Select item"
 msgstr "Позначити елемент"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:847
+#: src/svnfrontend/graphtree/revgraphview.cpp:849
 #, kde-format
 msgid "Display details"
 msgstr "Показати подробиці"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:850
+#: src/svnfrontend/graphtree/revgraphview.cpp:852
 #, kde-format
 msgid "Rotate counter-clockwise"
 msgstr "Обернути проти годинникової стрілки"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:851
+#: src/svnfrontend/graphtree/revgraphview.cpp:853
 #, kde-format
 msgid "Rotate clockwise"
 msgstr "Обернути за годинниковою стрілкою"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:857
-#: src/svnfrontend/graphtree/revgraphview.cpp:875
+#: src/svnfrontend/graphtree/revgraphview.cpp:859
+#: src/svnfrontend/graphtree/revgraphview.cpp:877
 #, kde-format
 msgid "Save tree as PNG"
 msgstr "Зберегти дерево у форматі PNG"
 
-#: src/svnfrontend/graphtree/revgraphview.cpp:875
+#: src/svnfrontend/graphtree/revgraphview.cpp:877
 #, kde-format
 msgid "Image (*.png)"
 msgstr "зображення (*.png)"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:95
-#: src/svnfrontend/svnactions.cpp:318
+#: src/svnfrontend/graphtree/revisiontree.cpp:97
+#: src/svnfrontend/svnactions.cpp:321
 #, kde-format
 msgctxt "@title:window"
 msgid "Logs"
 msgstr "Журнал"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:95
-#: src/svnfrontend/svnactions.cpp:319
+#: src/svnfrontend/graphtree/revisiontree.cpp:97
+#: src/svnfrontend/svnactions.cpp:322
 #, kde-format
 msgid "Getting logs - hit Cancel for abort"
 msgstr "Отримання журналу. Натисніть «Скасувати», щоб перервати."
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:106
+#: src/svnfrontend/graphtree/revisiontree.cpp:108
 #, kde-format
 msgid "No log cache possible due broken database and networking not allowed."
 msgstr ""
 "Кешування журналу неможливе через пошкодження бази даних і недоступність "
 "мережі."
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:106
-#: src/svnfrontend/graphtree/revisiontree.cpp:111
+#: src/svnfrontend/graphtree/revisiontree.cpp:108
+#: src/svnfrontend/graphtree/revisiontree.cpp:113
 #, kde-format
 msgid ""
 "Could not retrieve logs, reason:\n"
@@ -3867,25 +3867,25 @@ msgstr ""
 "Не вдалося отримати журнал, причина:\n"
 "%1"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:140
+#: src/svnfrontend/graphtree/revisiontree.cpp:142
 #, kde-format
 msgid "Scanning the logs for %1"
 msgstr "Скануємо журнал щодо %1"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:140
+#: src/svnfrontend/graphtree/revisiontree.cpp:142
 #, kde-format
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:141
+#: src/svnfrontend/graphtree/revisiontree.cpp:143
 #, kde-format
 msgctxt "@title:window"
 msgid "Scanning logs"
 msgstr "Сканування журналу"
 
-#: src/svnfrontend/graphtree/revisiontree.cpp:229
-#: src/svnfrontend/graphtree/revisiontree.cpp:266
-#: src/svnfrontend/graphtree/revisiontree.cpp:314
+#: src/svnfrontend/graphtree/revisiontree.cpp:231
+#: src/svnfrontend/graphtree/revisiontree.cpp:268
+#: src/svnfrontend/graphtree/revisiontree.cpp:316
 #, kde-format
 msgid "%1<br>Check change entry %2 of %3"
 msgstr "%1<br>Перевірка зміненого запису %2 з %3"
@@ -4035,114 +4035,114 @@ msgstr ""
 msgid "Validate properties"
 msgstr "Перевіряти властивості"
 
-#: src/svnfrontend/maintreewidget.cpp:269
+#: src/svnfrontend/maintreewidget.cpp:271
 #, kde-format
 msgid "Networked URL to open but networking is disabled."
 msgstr "Наказано відкрити адресу у мережі, але роботу у мережі вимкнено."
 
-#: src/svnfrontend/maintreewidget.cpp:495
+#: src/svnfrontend/maintreewidget.cpp:497
 #, kde-format
 msgid "History of item"
 msgstr "Журнал елемента"
 
-#: src/svnfrontend/maintreewidget.cpp:500
-#: src/svnfrontend/maintreewidget.cpp:508
-#: src/svnfrontend/maintreewidget.cpp:517
+#: src/svnfrontend/maintreewidget.cpp:502
+#: src/svnfrontend/maintreewidget.cpp:510
+#: src/svnfrontend/maintreewidget.cpp:519
 #, kde-format
 msgid "History"
 msgstr "Журнал"
 
-#: src/svnfrontend/maintreewidget.cpp:501
+#: src/svnfrontend/maintreewidget.cpp:503
 #, kde-format
 msgid "Displays the history log of selected item"
 msgstr "Показати журнал для позначеного елемента"
 
-#: src/svnfrontend/maintreewidget.cpp:503
-#: src/svnfrontend/maintreewidget.cpp:512
+#: src/svnfrontend/maintreewidget.cpp:505
+#: src/svnfrontend/maintreewidget.cpp:514
 #, kde-format
 msgid "History of item ignoring copies"
 msgstr "Журнал елемента без дій з копіювання"
 
-#: src/svnfrontend/maintreewidget.cpp:509
-#: src/svnfrontend/maintreewidget.cpp:518
+#: src/svnfrontend/maintreewidget.cpp:511
+#: src/svnfrontend/maintreewidget.cpp:520
 #, kde-format
 msgid "Displays the history log of selected item without following copies"
 msgstr "Показати записи журналу для позначеного елемента без його копіювання"
 
-#: src/svnfrontend/maintreewidget.cpp:521
+#: src/svnfrontend/maintreewidget.cpp:523
 #, kde-format
 msgid "Full revision tree"
 msgstr "Повне дерево модифікацій"
 
-#: src/svnfrontend/maintreewidget.cpp:526
+#: src/svnfrontend/maintreewidget.cpp:528
 #, kde-format
 msgid "Shows history of item as linked tree"
 msgstr "Показати журнал елемента у вигляді лінійного списку"
 
-#: src/svnfrontend/maintreewidget.cpp:528
+#: src/svnfrontend/maintreewidget.cpp:530
 #, kde-format
 msgid "Partial revision tree"
 msgstr "Часткове дерево модифікацій"
 
-#: src/svnfrontend/maintreewidget.cpp:533
+#: src/svnfrontend/maintreewidget.cpp:535
 #, kde-format
 msgid "Shows history of item as linked tree for a revision range"
 msgstr ""
 "Показати журнал елемента у вигляді лінійного списку для діапазону модифікацій"
 
-#: src/svnfrontend/maintreewidget.cpp:536
-#: src/svnfrontend/maintreewidget.cpp:537
+#: src/svnfrontend/maintreewidget.cpp:538
+#: src/svnfrontend/maintreewidget.cpp:539
 #, kde-format
 msgid "Properties"
 msgstr "Властивості"
 
-#: src/svnfrontend/maintreewidget.cpp:539
+#: src/svnfrontend/maintreewidget.cpp:541
 #, kde-format
 msgid "Display Properties"
 msgstr "Показати властивості"
 
-#: src/svnfrontend/maintreewidget.cpp:545
+#: src/svnfrontend/maintreewidget.cpp:547
 #, kde-format
 msgid "Display last changes"
 msgstr "Показати останні зміни"
 
-#: src/svnfrontend/maintreewidget.cpp:550
+#: src/svnfrontend/maintreewidget.cpp:552
 #, kde-format
 msgid "Display last changes as difference to previous commit."
 msgstr ""
 "Показувати найсвіжіші зміни як відмінність від попередньої модифікації."
 
-#: src/svnfrontend/maintreewidget.cpp:552
+#: src/svnfrontend/maintreewidget.cpp:554
 #, kde-format
 msgid "Details"
 msgstr "Подробиці"
 
-#: src/svnfrontend/maintreewidget.cpp:557
+#: src/svnfrontend/maintreewidget.cpp:559
 #, kde-format
 msgid "Show details about selected item"
 msgstr "Показати подробиці щодо позначеного елемента"
 
-#: src/svnfrontend/maintreewidget.cpp:559
+#: src/svnfrontend/maintreewidget.cpp:561
 #, kde-format
 msgid "Move"
 msgstr "Пересунути"
 
-#: src/svnfrontend/maintreewidget.cpp:564
+#: src/svnfrontend/maintreewidget.cpp:566
 #, kde-format
 msgid "Moves or renames current item"
 msgstr "Пересуває або перейменовує поточний елемент"
 
-#: src/svnfrontend/maintreewidget.cpp:571
+#: src/svnfrontend/maintreewidget.cpp:573
 #, kde-format
 msgid "Create a copy of current item"
 msgstr "Створити копію поточного елемента"
 
-#: src/svnfrontend/maintreewidget.cpp:573
+#: src/svnfrontend/maintreewidget.cpp:575
 #, kde-format
 msgid "Check for updates"
 msgstr "Перевірити оновлення"
 
-#: src/svnfrontend/maintreewidget.cpp:578
+#: src/svnfrontend/maintreewidget.cpp:580
 #, kde-format
 msgid ""
 "Check if current working copy has items with newer version in repository"
@@ -4150,18 +4150,18 @@ msgstr ""
 "Перевірити, чи є у поточній робочій копії елементи з новішою версією, ніж "
 "елементи у сховищі"
 
-#: src/svnfrontend/maintreewidget.cpp:580
+#: src/svnfrontend/maintreewidget.cpp:582
 #, kde-format
 msgid "Check updates"
 msgstr "Перевірити поновлення"
 
-#: src/svnfrontend/maintreewidget.cpp:584
+#: src/svnfrontend/maintreewidget.cpp:586
 #, kde-format
 msgid "Blame"
 msgstr "Визначити автора"
 
-#: src/svnfrontend/maintreewidget.cpp:585
-#: src/svnfrontend/maintreewidget.cpp:593
+#: src/svnfrontend/maintreewidget.cpp:587
+#: src/svnfrontend/maintreewidget.cpp:595
 #, kde-format
 msgid ""
 "Output the content of specified files or URLs with revision and author "
@@ -4170,113 +4170,113 @@ msgstr ""
 "Вивести вміст вказаних файлів або дані за вказаними адресами з вбудованими "
 "даними щодо модифікацій і авторів."
 
-#: src/svnfrontend/maintreewidget.cpp:588
+#: src/svnfrontend/maintreewidget.cpp:590
 #, kde-format
 msgid "Blame range"
 msgstr "Визначення авторства у діапазоні"
 
-#: src/svnfrontend/maintreewidget.cpp:597
+#: src/svnfrontend/maintreewidget.cpp:599
 #, kde-format
 msgid "Cat head"
 msgstr "Отримати HEAD"
 
-#: src/svnfrontend/maintreewidget.cpp:598
+#: src/svnfrontend/maintreewidget.cpp:600
 #, kde-format
 msgid "Output the content of specified files or URLs."
 msgstr "Вивести вміст вказаних файлів або дані за вказаними адресами."
 
-#: src/svnfrontend/maintreewidget.cpp:601
+#: src/svnfrontend/maintreewidget.cpp:603
 #, kde-format
 msgid "Cat revision..."
 msgstr "Отримати модифікацію…"
 
-#: src/svnfrontend/maintreewidget.cpp:606
+#: src/svnfrontend/maintreewidget.cpp:608
 #, kde-format
 msgid "Output the content of specified files or URLs at specific revision."
 msgstr ""
 "Вивести вміст вказаних файлів або дані за вказаними адресами для певної "
 "модифікації."
 
-#: src/svnfrontend/maintreewidget.cpp:610
+#: src/svnfrontend/maintreewidget.cpp:612
 #, kde-format
 msgid "Lock current items"
 msgstr "Заблокувати поточні елементи"
 
-#: src/svnfrontend/maintreewidget.cpp:615
+#: src/svnfrontend/maintreewidget.cpp:617
 #, kde-format
 msgid "Try lock current item against changes from other users"
 msgstr ""
 "Спробувати заблокувати поточний елемент від внесення змін іншими "
 "користувачами"
 
-#: src/svnfrontend/maintreewidget.cpp:618
+#: src/svnfrontend/maintreewidget.cpp:620
 #, kde-format
 msgid "Unlock current items"
 msgstr "Розблокувати поточні елементи"
 
-#: src/svnfrontend/maintreewidget.cpp:623
+#: src/svnfrontend/maintreewidget.cpp:625
 #, kde-format
 msgid "Free existing lock on current item"
 msgstr "Звільнити поточний елемент від блокування"
 
-#: src/svnfrontend/maintreewidget.cpp:628 src/svnfrontend/svnactions.cpp:670
+#: src/svnfrontend/maintreewidget.cpp:630 src/svnfrontend/svnactions.cpp:673
 #, kde-format
 msgid "New folder"
 msgstr "Нова тека"
 
-#: src/svnfrontend/maintreewidget.cpp:633
+#: src/svnfrontend/maintreewidget.cpp:635
 #, kde-format
 msgid "Create a new folder"
 msgstr "Створити теку"
 
-#: src/svnfrontend/maintreewidget.cpp:635
+#: src/svnfrontend/maintreewidget.cpp:637
 #, kde-format
 msgid "Switch repository"
 msgstr "Перемкнути сховище"
 
-#: src/svnfrontend/maintreewidget.cpp:640
+#: src/svnfrontend/maintreewidget.cpp:642
 #, kde-format
 msgid "Switch repository path of current working copy path (\"svn switch\")"
 msgstr "Перемкнути шлях для поточної робочої копії («svn switch»)"
 
-#: src/svnfrontend/maintreewidget.cpp:644
+#: src/svnfrontend/maintreewidget.cpp:646
 #, kde-format
 msgid "Relocate current working copy URL"
 msgstr "Змінити адресу поточної робочої копії"
 
-#: src/svnfrontend/maintreewidget.cpp:649
+#: src/svnfrontend/maintreewidget.cpp:651
 #, kde-format
 msgid "Relocate URL of current working copy path to other URL"
 msgstr "Змінити адресу поточної робочої копії на іншу адресу"
 
-#: src/svnfrontend/maintreewidget.cpp:658
+#: src/svnfrontend/maintreewidget.cpp:660
 #, kde-format
 msgid "Unversioned"
 msgstr "Поза керуванням версіями"
 
-#: src/svnfrontend/maintreewidget.cpp:659
+#: src/svnfrontend/maintreewidget.cpp:661
 #, kde-format
 msgid "Browse folder for unversioned items and add them if wanted."
 msgstr ""
 "Знайдіть у теці елементи поза керуванням версіями і додайте їх, якщо це "
 "потрібно."
 
-#: src/svnfrontend/maintreewidget.cpp:663
+#: src/svnfrontend/maintreewidget.cpp:665
 #, kde-format
 msgid "Open repository of working copy"
 msgstr "Відкрити сховище робочої копії"
 
-#: src/svnfrontend/maintreewidget.cpp:668
+#: src/svnfrontend/maintreewidget.cpp:670
 #, kde-format
 msgid "Opens the repository the current working copy was checked out from"
 msgstr "Відкриває сховище, звідки було скопійовано дані поточної робочої копії"
 
-#: src/svnfrontend/maintreewidget.cpp:671
+#: src/svnfrontend/maintreewidget.cpp:673
 #, kde-format
 msgid "Cleanup"
 msgstr "Очищення"
 
-#: src/svnfrontend/maintreewidget.cpp:676
+#: src/svnfrontend/maintreewidget.cpp:678
 #, kde-format
 msgid ""
 "Recursively clean up the working copy, removing locks, resuming unfinished "
@@ -4285,32 +4285,32 @@ msgstr ""
 "Рекурсивно очищує робочу копію, вилучає блокування, відновлює виконання "
 "незавершених дій тощо."
 
-#: src/svnfrontend/maintreewidget.cpp:678
+#: src/svnfrontend/maintreewidget.cpp:680
 #, kde-format
 msgid "Import folders into current"
 msgstr "Імпортувати теки до поточної"
 
-#: src/svnfrontend/maintreewidget.cpp:683
+#: src/svnfrontend/maintreewidget.cpp:685
 #, kde-format
 msgid "Import folder content into current URL"
 msgstr "Імпортувати вміст тек до поточної адреси"
 
-#: src/svnfrontend/maintreewidget.cpp:688
+#: src/svnfrontend/maintreewidget.cpp:690
 #, kde-format
 msgid "Add selected files/dirs"
 msgstr "Додати позначені файли або каталоги"
 
-#: src/svnfrontend/maintreewidget.cpp:693
+#: src/svnfrontend/maintreewidget.cpp:695
 #, kde-format
 msgid "Adding selected files and/or directories to repository"
 msgstr "Додавання позначених файлів і/або каталогів до сховища"
 
-#: src/svnfrontend/maintreewidget.cpp:696
+#: src/svnfrontend/maintreewidget.cpp:698
 #, kde-format
 msgid "Add selected files/dirs recursive"
 msgstr "Додати позначені файли або каталоги рекурсивно"
 
-#: src/svnfrontend/maintreewidget.cpp:701
+#: src/svnfrontend/maintreewidget.cpp:703
 #, kde-format
 msgid ""
 "Adding selected files and/or directories to repository and all subitems of "
@@ -4319,89 +4319,89 @@ msgstr ""
 "Додавання позначених файлів і/або каталогів до сховища разом з усіма "
 "піделементами у теках"
 
-#: src/svnfrontend/maintreewidget.cpp:704
+#: src/svnfrontend/maintreewidget.cpp:706
 #, kde-format
 msgid "Delete selected files/dirs"
 msgstr "Вилучити позначені файли або каталоги"
 
-#: src/svnfrontend/maintreewidget.cpp:710
+#: src/svnfrontend/maintreewidget.cpp:712
 #, kde-format
 msgid "Deleting selected files and/or directories from repository"
 msgstr "Вилучення позначених файлів і/або каталогів зі сховища"
 
-#: src/svnfrontend/maintreewidget.cpp:712
+#: src/svnfrontend/maintreewidget.cpp:714
 #, kde-format
 msgid "Delete folder"
 msgstr "Вилучити теку"
 
-#: src/svnfrontend/maintreewidget.cpp:717
+#: src/svnfrontend/maintreewidget.cpp:719
 #, kde-format
 msgid "Deleting selected directories from repository"
 msgstr "Вилучення позначених каталогів зі сховища"
 
-#: src/svnfrontend/maintreewidget.cpp:720
+#: src/svnfrontend/maintreewidget.cpp:722
 #, kde-format
 msgid "Revert current changes"
 msgstr "Скасувати поточні зміни"
 
-#: src/svnfrontend/maintreewidget.cpp:727
+#: src/svnfrontend/maintreewidget.cpp:729
 #, kde-format
 msgid "Mark resolved"
 msgstr "Позначити як розв’язане"
 
-#: src/svnfrontend/maintreewidget.cpp:732
+#: src/svnfrontend/maintreewidget.cpp:734
 #, kde-format
 msgid "Marking files or dirs resolved"
 msgstr "Позначення конфліктів у файлах або каталогах як таких, які розв’язано"
 
-#: src/svnfrontend/maintreewidget.cpp:735
+#: src/svnfrontend/maintreewidget.cpp:737
 #, kde-format
 msgid "Resolve conflicts"
 msgstr "Розв’язати конфлікти"
 
-#: src/svnfrontend/maintreewidget.cpp:741
+#: src/svnfrontend/maintreewidget.cpp:743
 #, kde-format
 msgid "Ignore/Unignore current item"
 msgstr "Ігнорувати або скасувати ігнорування поточного елемента"
 
-#: src/svnfrontend/maintreewidget.cpp:743
-#: src/svnfrontend/maintreewidget.cpp:749
+#: src/svnfrontend/maintreewidget.cpp:745
+#: src/svnfrontend/maintreewidget.cpp:751
 #, kde-format
 msgid "Add or Remove ignore pattern"
 msgstr "Додати або вилучити зразок ігнорування"
 
-#: src/svnfrontend/maintreewidget.cpp:756
-#: src/svnfrontend/maintreewidget.cpp:895
+#: src/svnfrontend/maintreewidget.cpp:758
+#: src/svnfrontend/maintreewidget.cpp:897
 #, kde-format
 msgid "Update to head"
 msgstr "Оновити до HEAD"
 
-#: src/svnfrontend/maintreewidget.cpp:761
+#: src/svnfrontend/maintreewidget.cpp:763
 #, kde-format
 msgctxt "Menu item"
 msgid "Update"
 msgstr "Оновити"
 
-#: src/svnfrontend/maintreewidget.cpp:763
+#: src/svnfrontend/maintreewidget.cpp:765
 #, kde-format
 msgid "Update to revision..."
 msgstr "Оновити до модифікації…"
 
-#: src/svnfrontend/maintreewidget.cpp:769
-#: src/svnfrontend/maintreewidget.cpp:774
-#: src/svnfrontend/maintreewidget.cpp:889 src/svnfrontend/svnactions.cpp:1045
+#: src/svnfrontend/maintreewidget.cpp:771
+#: src/svnfrontend/maintreewidget.cpp:776
+#: src/svnfrontend/maintreewidget.cpp:891 src/svnfrontend/svnactions.cpp:1048
 #, kde-format
 msgid "Commit"
 msgstr "Надіслати"
 
-#: src/svnfrontend/maintreewidget.cpp:777
-#: src/svnfrontend/maintreewidget.cpp:784
+#: src/svnfrontend/maintreewidget.cpp:779
+#: src/svnfrontend/maintreewidget.cpp:786
 #, kde-format
 msgid "Diff local changes"
 msgstr "Різниця для локальних змін"
 
-#: src/svnfrontend/maintreewidget.cpp:782
-#: src/svnfrontend/maintreewidget.cpp:789
+#: src/svnfrontend/maintreewidget.cpp:784
+#: src/svnfrontend/maintreewidget.cpp:791
 #, kde-format
 msgid ""
 "Diff working copy against BASE (last checked out version) - does not require "
@@ -4410,12 +4410,12 @@ msgstr ""
 "Порівняти робочу копію з BASE (останньою отриманою модифікацією). Не "
 "потребує доступу до сховища."
 
-#: src/svnfrontend/maintreewidget.cpp:792
+#: src/svnfrontend/maintreewidget.cpp:794
 #, kde-format
 msgid "Diff against HEAD"
 msgstr "Різниця для HEAD"
 
-#: src/svnfrontend/maintreewidget.cpp:797
+#: src/svnfrontend/maintreewidget.cpp:799
 #, kde-format
 msgid ""
 "Diff working copy against HEAD (last checked in version)- requires access to "
@@ -4424,34 +4424,34 @@ msgstr ""
 "Порівняти робочу копію з HEAD (останньою вивантаженою версією). Потребує "
 "доступу до сховища."
 
-#: src/svnfrontend/maintreewidget.cpp:800
-#: src/svnfrontend/maintreewidget.cpp:807
+#: src/svnfrontend/maintreewidget.cpp:802
+#: src/svnfrontend/maintreewidget.cpp:809
 #, kde-format
 msgid "Diff items"
 msgstr "Різниця між елементами"
 
-#: src/svnfrontend/maintreewidget.cpp:805
-#: src/svnfrontend/maintreewidget.cpp:812
+#: src/svnfrontend/maintreewidget.cpp:807
+#: src/svnfrontend/maintreewidget.cpp:814
 #, kde-format
 msgid "Diff two items"
 msgstr "Різниця між двома елементами"
 
-#: src/svnfrontend/maintreewidget.cpp:815
+#: src/svnfrontend/maintreewidget.cpp:817
 #, kde-format
 msgid "Merge two revisions"
 msgstr "Об’єднати дві модифікації"
 
-#: src/svnfrontend/maintreewidget.cpp:820
+#: src/svnfrontend/maintreewidget.cpp:822
 #, kde-format
 msgid "Merge"
 msgstr "Об’єднати"
 
-#: src/svnfrontend/maintreewidget.cpp:821
+#: src/svnfrontend/maintreewidget.cpp:823
 #, kde-format
 msgid "Merge two revisions of this entry into itself"
 msgstr "Об’єднати дві модифікації цього запису до самого запису"
 
-#: src/svnfrontend/maintreewidget.cpp:829
+#: src/svnfrontend/maintreewidget.cpp:831
 #, kde-format
 msgid ""
 "Merge repository path into current working copy path or current repository "
@@ -4460,252 +4460,252 @@ msgstr ""
 "Об’єднати шлях сховища зі шляхом поточної робочої копії або поточним шляхом "
 "сховища до вказаного призначення"
 
-#: src/svnfrontend/maintreewidget.cpp:830
-#: src/svnfrontend/maintreewidget.cpp:1392
-#: src/svnfrontend/maintreewidget.cpp:1459
+#: src/svnfrontend/maintreewidget.cpp:832
+#: src/svnfrontend/maintreewidget.cpp:1394
+#: src/svnfrontend/maintreewidget.cpp:1461
 #, kde-format
 msgid "Open With..."
 msgstr "Відкрити за допомогою…"
 
-#: src/svnfrontend/maintreewidget.cpp:834
+#: src/svnfrontend/maintreewidget.cpp:836
 #, kde-format
 msgid "Checkout current repository path"
 msgstr "Отримати дані за поточним шляхом сховища"
 
-#: src/svnfrontend/maintreewidget.cpp:839
-#: src/svnfrontend/maintreewidget.cpp:855
+#: src/svnfrontend/maintreewidget.cpp:841
+#: src/svnfrontend/maintreewidget.cpp:857
 #, kde-format
 msgid "Checkout"
 msgstr "Отримати"
 
-#: src/svnfrontend/maintreewidget.cpp:841
+#: src/svnfrontend/maintreewidget.cpp:843
 #, kde-format
 msgid "Export current repository path"
 msgstr "Експортувати поточний шлях сховища"
 
-#: src/svnfrontend/maintreewidget.cpp:846
+#: src/svnfrontend/maintreewidget.cpp:848
 #, kde-format
 msgid "Select browse revision"
 msgstr "Вибрати модифікацію для навігації"
 
-#: src/svnfrontend/maintreewidget.cpp:850 src/svnfrontend/svnactions.cpp:1707
-#: src/svnfrontend/svnactions.cpp:1714
+#: src/svnfrontend/maintreewidget.cpp:852 src/svnfrontend/svnactions.cpp:1709
+#: src/svnfrontend/svnactions.cpp:1716
 #, kde-format
 msgid "Checkout a repository"
 msgstr "Отримати зі сховища"
 
-#: src/svnfrontend/maintreewidget.cpp:857
+#: src/svnfrontend/maintreewidget.cpp:859
 #, kde-format
 msgid "Export a repository"
 msgstr "Експортувати сховище"
 
-#: src/svnfrontend/maintreewidget.cpp:862
+#: src/svnfrontend/maintreewidget.cpp:864
 #, kde-format
 msgid "Export"
 msgstr "Експортувати"
 
-#: src/svnfrontend/maintreewidget.cpp:864
+#: src/svnfrontend/maintreewidget.cpp:866
 #, kde-format
 msgid "Refresh view"
 msgstr "Освіжити перегляд"
 
-#: src/svnfrontend/maintreewidget.cpp:869
+#: src/svnfrontend/maintreewidget.cpp:871
 #, kde-format
 msgid "Refresh"
 msgstr "Поновити"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DispSpecDiff)
-#: src/svnfrontend/maintreewidget.cpp:872 src/svnfrontend/svnlogdlg.ui:211
+#: src/svnfrontend/maintreewidget.cpp:874 src/svnfrontend/svnlogdlg.ui:211
 #, kde-format
 msgid "Diff revisions"
 msgstr "Порівняти модифікації"
 
-#: src/svnfrontend/maintreewidget.cpp:879
+#: src/svnfrontend/maintreewidget.cpp:881
 #, kde-format
 msgid "Unfold File Tree"
 msgstr "Розгорнути файлове дерево"
 
-#: src/svnfrontend/maintreewidget.cpp:880
+#: src/svnfrontend/maintreewidget.cpp:882
 #, kde-format
 msgid "Opens all branches of the file tree"
 msgstr "Відкриває усі гілки файлового дерева"
 
-#: src/svnfrontend/maintreewidget.cpp:881
+#: src/svnfrontend/maintreewidget.cpp:883
 #, kde-format
 msgid "Fold File Tree"
 msgstr "Згорнути файлове дерево"
 
-#: src/svnfrontend/maintreewidget.cpp:882
+#: src/svnfrontend/maintreewidget.cpp:884
 #, kde-format
 msgid "Closes all branches of the file tree"
 msgstr "Закриває усі гілки файлового дерева"
 
-#: src/svnfrontend/maintreewidget.cpp:885
-#: src/svnfrontend/maintreewidget.cpp:1079
-#: src/svnfrontend/maintreewidget.cpp:2038
-#: src/svnfrontend/maintreewidget.cpp:2054
+#: src/svnfrontend/maintreewidget.cpp:887
+#: src/svnfrontend/maintreewidget.cpp:1081
+#: src/svnfrontend/maintreewidget.cpp:2040
+#: src/svnfrontend/maintreewidget.cpp:2056
 #, kde-format
 msgid "Update log cache"
 msgstr "Оновити кеш журналу"
 
-#: src/svnfrontend/maintreewidget.cpp:886
+#: src/svnfrontend/maintreewidget.cpp:888
 #, kde-format
 msgid "Update the log cache for current repository"
 msgstr "Оновити кеш журналу для поточного сховища"
 
-#: src/svnfrontend/maintreewidget.cpp:900
+#: src/svnfrontend/maintreewidget.cpp:902
 #, kde-format
 msgid "Set property recursive"
 msgstr "Встановити властивість рекурсивно"
 
-#: src/svnfrontend/maintreewidget.cpp:903
+#: src/svnfrontend/maintreewidget.cpp:905
 #, kde-format
 msgid "Settings for current repository"
 msgstr "Параметри поточного сховища"
 
-#: src/svnfrontend/maintreewidget.cpp:1081
-#: src/svnfrontend/maintreewidget.cpp:2049
+#: src/svnfrontend/maintreewidget.cpp:1083
+#: src/svnfrontend/maintreewidget.cpp:2051
 #, kde-format
 msgid "Stop updating the log cache"
 msgstr "Припинити оновлення кешу журналу"
 
-#: src/svnfrontend/maintreewidget.cpp:1278
+#: src/svnfrontend/maintreewidget.cpp:1280
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Pattern to Ignore for \"%1\""
 msgstr "Редагування зразка для ігнорування у «%1»"
 
-#: src/svnfrontend/maintreewidget.cpp:1556
-#: src/svnfrontend/maintreewidget.cpp:1599
+#: src/svnfrontend/maintreewidget.cpp:1558
+#: src/svnfrontend/maintreewidget.cpp:1601
 #, kde-format
 msgid "Nothing selected for unlock"
 msgstr "Нічого не позначено для розблокування"
 
-#: src/svnfrontend/maintreewidget.cpp:1560
+#: src/svnfrontend/maintreewidget.cpp:1562
 #, kde-format
 msgctxt "@title:window"
 msgid "Lock Message"
 msgstr "Повідомлення блокування"
 
-#: src/svnfrontend/maintreewidget.cpp:1567
+#: src/svnfrontend/maintreewidget.cpp:1569
 #, kde-format
 msgid "Steal lock?"
 msgstr "Заволодіти блокуванням?"
 
-#: src/svnfrontend/maintreewidget.cpp:1603
+#: src/svnfrontend/maintreewidget.cpp:1605
 #, kde-format
 msgid "Break lock or ignore missing locks?"
 msgstr "Скасувати блокування чи ігнорувати пропущені блокування?"
 
-#: src/svnfrontend/maintreewidget.cpp:1604
+#: src/svnfrontend/maintreewidget.cpp:1606
 #, kde-format
 msgid "Unlocking items"
 msgstr "Розблоковуємо елементи"
 
-#: src/svnfrontend/maintreewidget.cpp:1605
+#: src/svnfrontend/maintreewidget.cpp:1607
 #, kde-format
 msgctxt "@action:button"
 msgid "Break Lock"
 msgstr "Зламати блокування"
 
-#: src/svnfrontend/maintreewidget.cpp:1606
+#: src/svnfrontend/maintreewidget.cpp:1608
 #, kde-format
 msgctxt "@action:button"
 msgid "Ignore"
 msgstr "Ігнорувати"
 
-#: src/svnfrontend/maintreewidget.cpp:1900
+#: src/svnfrontend/maintreewidget.cpp:1902
 #, kde-format
 msgid "Nothing selected for delete"
 msgstr "Для вилучення нічого не позначено"
 
-#: src/svnfrontend/maintreewidget.cpp:2071
+#: src/svnfrontend/maintreewidget.cpp:2073
 #, kde-format
 msgid "Automatic generated base layout by kdesvn"
 msgstr "Базове компонування, автоматично створене kdesvn"
 
-#: src/svnfrontend/maintreewidget.cpp:2084
+#: src/svnfrontend/maintreewidget.cpp:2086
 #, kde-format
 msgid "May not make subdirectories of a file"
 msgstr "Не можна створювати підкаталогів з файла"
 
-#: src/svnfrontend/maintreewidget.cpp:2196 src/svnfrontend/svnactions.cpp:2304
+#: src/svnfrontend/maintreewidget.cpp:2198 src/svnfrontend/svnactions.cpp:2306
 #, kde-format
 msgctxt "@title:window"
 msgid "Merge"
 msgstr "Об’єднання"
 
-#: src/svnfrontend/maintreewidget.cpp:2258
+#: src/svnfrontend/maintreewidget.cpp:2260
 #, kde-format
 msgid "Error getting entry to relocate"
 msgstr "Помилка під час спроби отримати запис для пересування"
 
-#: src/svnfrontend/maintreewidget.cpp:2264
+#: src/svnfrontend/maintreewidget.cpp:2266
 #, kde-format
 msgctxt "@title:window"
 msgid "Relocate Path %1"
 msgstr "Пересування шляху %1"
 
-#: src/svnfrontend/maintreewidget.cpp:2278 src/svnfrontend/svnactions.cpp:1707
-#: src/svnfrontend/svnactions.cpp:1963
+#: src/svnfrontend/maintreewidget.cpp:2280 src/svnfrontend/svnactions.cpp:1709
+#: src/svnfrontend/svnactions.cpp:1965
 #, kde-format
 msgid "Invalid url given!"
 msgstr "Вказано некоректну адресу!"
 
-#: src/svnfrontend/maintreewidget.cpp:2278
+#: src/svnfrontend/maintreewidget.cpp:2280
 #, kde-format
 msgid "Relocate path %1"
 msgstr "Пересування шляху %1"
 
-#: src/svnfrontend/maintreewidget.cpp:2301
+#: src/svnfrontend/maintreewidget.cpp:2303
 #, kde-format
 msgid "Cannot import into multiple targets"
 msgstr "Не можна імпортувати до декількох призначень"
 
-#: src/svnfrontend/maintreewidget.cpp:2315
+#: src/svnfrontend/maintreewidget.cpp:2317
 #, kde-format
 msgid "Import files from folder"
 msgstr "Імпортувати файли з теки"
 
-#: src/svnfrontend/maintreewidget.cpp:2317
+#: src/svnfrontend/maintreewidget.cpp:2319
 #, kde-format
 msgid "Import file"
 msgstr "Імпортувати файл"
 
-#: src/svnfrontend/maintreewidget.cpp:2339
+#: src/svnfrontend/maintreewidget.cpp:2341
 #, kde-format
 msgctxt "@title:window"
 msgid "Import Log"
 msgstr "Імпортування журналу"
 
-#: src/svnfrontend/maintreewidget.cpp:2397
+#: src/svnfrontend/maintreewidget.cpp:2399
 #, kde-format
 msgid "Could not retrieve repository of working copy."
 msgstr "Не вдалося отримати сховище робочої копії."
 
-#: src/svnfrontend/maintreewidget.cpp:2406
+#: src/svnfrontend/maintreewidget.cpp:2408
 #, kde-format
 msgid "Only in working copy possible."
 msgstr "Можливе лише для робочої копії"
 
-#: src/svnfrontend/maintreewidget.cpp:2406
-#: src/svnfrontend/maintreewidget.cpp:2410
-#: src/svnfrontend/maintreewidget.cpp:2415
+#: src/svnfrontend/maintreewidget.cpp:2408
+#: src/svnfrontend/maintreewidget.cpp:2412
+#: src/svnfrontend/maintreewidget.cpp:2417
 #, kde-format
 msgid "Error"
 msgstr "Помилка"
 
-#: src/svnfrontend/maintreewidget.cpp:2410
+#: src/svnfrontend/maintreewidget.cpp:2412
 #, kde-format
 msgid "Only on single folder possible"
 msgstr "Можливе лише для окремих тек"
 
-#: src/svnfrontend/maintreewidget.cpp:2415
+#: src/svnfrontend/maintreewidget.cpp:2417
 #, kde-format
 msgid "Sorry - internal error"
 msgstr "Вибачте: внутрішня помилка"
 
-#: src/svnfrontend/maintreewidget.cpp:2479
+#: src/svnfrontend/maintreewidget.cpp:2481
 #, kde-format
 msgid "Hold Ctrl key while click on selected item for unselect"
 msgstr ""
@@ -4714,33 +4714,33 @@ msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QTreeView, m_LogTreeView)
 #. i18n: ectx: property (toolTip), widget (QTreeWidget, m_ChangedList)
-#: src/svnfrontend/maintreewidget.cpp:2482 src/svnfrontend/svnlogdlg.ui:114
+#: src/svnfrontend/maintreewidget.cpp:2484 src/svnfrontend/svnlogdlg.ui:114
 #: src/svnfrontend/svnlogdlg.ui:148
 #, kde-format
 msgid "See context menu for more actions"
 msgstr "Пункти додаткових дій можна знайти у контекстному меню"
 
-#: src/svnfrontend/maintreewidget.cpp:2485
+#: src/svnfrontend/maintreewidget.cpp:2487
 #, kde-format
 msgid "Click for navigate"
 msgstr "Клацніть, щоб перейти"
 
-#: src/svnfrontend/maintreewidget.cpp:2488
+#: src/svnfrontend/maintreewidget.cpp:2490
 #, kde-format
 msgid "Navigation"
 msgstr "Навігація"
 
-#: src/svnfrontend/maintreewidget.cpp:2604
+#: src/svnfrontend/maintreewidget.cpp:2606
 #, kde-format
 msgid "Could not retrieve repository."
 msgstr "Не вдалося отримати сховище."
 
-#: src/svnfrontend/maintreewidget.cpp:2634
+#: src/svnfrontend/maintreewidget.cpp:2636
 #, kde-format
 msgid "Not yet implemented"
 msgstr "Ще не реалізовано"
 
-#: src/svnfrontend/maintreewidget.cpp:2634
+#: src/svnfrontend/maintreewidget.cpp:2636
 #, kde-format
 msgid "Edit property recursively"
 msgstr "Редагування властивості рекурсивно"
@@ -4880,7 +4880,7 @@ msgstr ""
 "Об’єднати до робочої копії\n"
 "із сумішшю версій"
 
-#: src/svnfrontend/mergedlg_impl.cpp:194
+#: src/svnfrontend/mergedlg_impl.cpp:196
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter Merge Range"
@@ -4897,7 +4897,7 @@ msgid "%1 at revision %2"
 msgstr "%1, модифікація %2"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:317
-#: src/svnfrontend/svnactions.cpp:746
+#: src/svnfrontend/svnactions.cpp:749
 #, kde-format
 msgid "Name"
 msgstr "Назва"
@@ -4913,7 +4913,7 @@ msgid "Last changed Revision"
 msgstr "Остання модифікація"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:323
-#: src/svnfrontend/svnactions.cpp:805
+#: src/svnfrontend/svnactions.cpp:808
 #, kde-format
 msgid "Last author"
 msgstr "Останній автор"
@@ -4982,602 +4982,602 @@ msgstr "%p% з %1"
 msgid "%1 of %2"
 msgstr "%1 з %2"
 
-#: src/svnfrontend/svnactions.cpp:187
+#: src/svnfrontend/svnactions.cpp:190
 #, kde-format
 msgid "Finished"
 msgstr "Виконання дії завершено"
 
-#: src/svnfrontend/svnactions.cpp:357
+#: src/svnfrontend/svnactions.cpp:360
 #, kde-format
 msgid "Got no logs"
 msgstr "Немає ніяких повідомлень журналу"
 
-#: src/svnfrontend/svnactions.cpp:481
+#: src/svnfrontend/svnactions.cpp:484
 #, kde-format
 msgid "Got no info."
 msgstr "Немає ніякої інформації."
 
-#: src/svnfrontend/svnactions.cpp:518
+#: src/svnfrontend/svnactions.cpp:521
 #, kde-format
 msgctxt "@title:window"
 msgid "History of %1"
 msgstr "Журнал %1"
 
-#: src/svnfrontend/svnactions.cpp:559
+#: src/svnfrontend/svnactions.cpp:562
 #, kde-format
 msgctxt "@title:window"
 msgid "Annotate"
 msgstr "Анотувати"
 
-#: src/svnfrontend/svnactions.cpp:559
+#: src/svnfrontend/svnactions.cpp:562
 #, kde-format
 msgid "Annotate lines - hit Cancel for abort"
 msgstr "Анотування рядків. Натисніть «Скасувати», щоб перервати."
 
-#: src/svnfrontend/svnactions.cpp:567
+#: src/svnfrontend/svnactions.cpp:570
 #, kde-format
 msgid "Got no annotate"
 msgstr "Не отримано жодних анотацій"
 
-#: src/svnfrontend/svnactions.cpp:584
+#: src/svnfrontend/svnactions.cpp:587
 #, kde-format
 msgctxt "@title:window"
 msgid "Content Get"
 msgstr "Отримання даних"
 
-#: src/svnfrontend/svnactions.cpp:584
+#: src/svnfrontend/svnactions.cpp:587
 #, kde-format
 msgid "Getting content - hit Cancel for abort"
 msgstr "Отримання даних. Натисніть «Скасувати», щоб перервати."
 
-#: src/svnfrontend/svnactions.cpp:591
+#: src/svnfrontend/svnactions.cpp:594
 #, kde-format
 msgid "Error getting content"
 msgstr "Помилка під час отримання даних"
 
-#: src/svnfrontend/svnactions.cpp:604
+#: src/svnfrontend/svnactions.cpp:607
 #, kde-format
 msgid "Error while open temporary file"
 msgstr "Помилка під час спроби відкрити тимчасовий файл"
 
-#: src/svnfrontend/svnactions.cpp:635
+#: src/svnfrontend/svnactions.cpp:638
 #, kde-format
 msgctxt "@title:window"
 msgid "Content of %1"
 msgstr "Дані %1"
 
-#: src/svnfrontend/svnactions.cpp:645
+#: src/svnfrontend/svnactions.cpp:648
 #, kde-format
 msgid "Got no content."
 msgstr "Не отримано жодних даних."
 
-#: src/svnfrontend/svnactions.cpp:670
+#: src/svnfrontend/svnactions.cpp:673
 #, kde-format
 msgid "Enter folder name:"
 msgstr "Введіть назву теки:"
 
-#: src/svnfrontend/svnactions.cpp:709
+#: src/svnfrontend/svnactions.cpp:712
 #, kde-format
 msgctxt "@title:window"
 msgid "Details"
 msgstr "Подробиці"
 
-#: src/svnfrontend/svnactions.cpp:710
+#: src/svnfrontend/svnactions.cpp:713
 #, kde-format
 msgid "Retrieving information - hit Cancel for abort"
 msgstr "Отримання інформації. Натисніть «Скасувати», щоб перервати."
 
-#: src/svnfrontend/svnactions.cpp:749
+#: src/svnfrontend/svnactions.cpp:752
 #, kde-format
 msgid "URL"
 msgstr "URL"
 
-#: src/svnfrontend/svnactions.cpp:751
+#: src/svnfrontend/svnactions.cpp:754
 #, kde-format
 msgid "Canonical repository URL"
 msgstr "Канонічна адреса сховища"
 
-#: src/svnfrontend/svnactions.cpp:754
+#: src/svnfrontend/svnactions.cpp:757
 #, kde-format
 msgid "Checksum"
 msgstr "Контрольна сума"
 
-#: src/svnfrontend/svnactions.cpp:757
+#: src/svnfrontend/svnactions.cpp:760
 #, kde-format
 msgid "Type"
 msgstr "Тип"
 
-#: src/svnfrontend/svnactions.cpp:760
+#: src/svnfrontend/svnactions.cpp:763
 #, kde-format
 msgid "Absent"
 msgstr "Відсутній"
 
-#: src/svnfrontend/svnactions.cpp:763
+#: src/svnfrontend/svnactions.cpp:766
 #, kde-format
 msgid "File"
 msgstr "Файл"
 
-#: src/svnfrontend/svnactions.cpp:766
+#: src/svnfrontend/svnactions.cpp:769
 #, kde-format
 msgid "Folder"
 msgstr "Тека"
 
-#: src/svnfrontend/svnactions.cpp:770 src/svnfrontend/svnactions.cpp:799
+#: src/svnfrontend/svnactions.cpp:773 src/svnfrontend/svnactions.cpp:802
 #, kde-format
 msgid "Unknown"
 msgstr "невідомий"
 
-#: src/svnfrontend/svnactions.cpp:775
+#: src/svnfrontend/svnactions.cpp:778
 #, kde-format
 msgid "Size"
 msgstr "Розмір"
 
-#: src/svnfrontend/svnactions.cpp:784
+#: src/svnfrontend/svnactions.cpp:787
 #, kde-format
 msgid "Schedule"
 msgstr "Розклад"
 
-#: src/svnfrontend/svnactions.cpp:787
+#: src/svnfrontend/svnactions.cpp:790
 #, kde-format
 msgid "Normal"
 msgstr "Звичайна"
 
-#: src/svnfrontend/svnactions.cpp:790
+#: src/svnfrontend/svnactions.cpp:793
 #, kde-format
 msgid "Addition"
 msgstr "Додавання"
 
-#: src/svnfrontend/svnactions.cpp:793
+#: src/svnfrontend/svnactions.cpp:796
 #, kde-format
 msgid "Deletion"
 msgstr "Вилучення"
 
-#: src/svnfrontend/svnactions.cpp:803
+#: src/svnfrontend/svnactions.cpp:806
 #, kde-format
 msgid "UUID"
 msgstr "UUID"
 
-#: src/svnfrontend/svnactions.cpp:807
+#: src/svnfrontend/svnactions.cpp:810
 #, kde-format
 msgid "Last committed"
 msgstr "Останнє надсилання"
 
-#: src/svnfrontend/svnactions.cpp:809
+#: src/svnfrontend/svnactions.cpp:812
 #, kde-format
 msgid "Last revision"
 msgstr "Остання модифікація"
 
-#: src/svnfrontend/svnactions.cpp:811
+#: src/svnfrontend/svnactions.cpp:814
 #, kde-format
 msgid "Content last changed"
 msgstr "Востаннє змінено дані"
 
-#: src/svnfrontend/svnactions.cpp:815
+#: src/svnfrontend/svnactions.cpp:818
 #, kde-format
 msgid "Property last changed"
 msgstr "Востаннє змінено властивість"
 
-#: src/svnfrontend/svnactions.cpp:818
+#: src/svnfrontend/svnactions.cpp:821
 #, kde-format
 msgid "New version of conflicted file"
 msgstr "Нова версія конфліктного файла"
 
-#: src/svnfrontend/svnactions.cpp:821
+#: src/svnfrontend/svnactions.cpp:824
 #, kde-format
 msgid "Property reject file"
 msgstr "Заборона надсилання файла"
 
-#: src/svnfrontend/svnactions.cpp:825
+#: src/svnfrontend/svnactions.cpp:828
 #, kde-format
 msgid "Copy from URL"
 msgstr "Копіювати за адреси"
 
-#: src/svnfrontend/svnactions.cpp:828 src/svnfrontend/svnactions.cpp:835
+#: src/svnfrontend/svnactions.cpp:831 src/svnfrontend/svnactions.cpp:838
 #, kde-format
 msgid "Lock token"
 msgstr "Заблокувати ключ"
 
-#: src/svnfrontend/svnactions.cpp:829 src/svnfrontend/svnactions.cpp:836
+#: src/svnfrontend/svnactions.cpp:832 src/svnfrontend/svnactions.cpp:839
 #, kde-format
 msgid "Owner"
 msgstr "Власник"
 
-#: src/svnfrontend/svnactions.cpp:830 src/svnfrontend/svnactions.cpp:837
+#: src/svnfrontend/svnactions.cpp:833 src/svnfrontend/svnactions.cpp:840
 #, kde-format
 msgid "Locked on"
 msgstr "Заблоковано"
 
-#: src/svnfrontend/svnactions.cpp:831 src/svnfrontend/svnactions.cpp:838
+#: src/svnfrontend/svnactions.cpp:834 src/svnfrontend/svnactions.cpp:841
 #, kde-format
 msgid "Lock comment"
 msgstr "Коментар щодо блокування"
 
-#: src/svnfrontend/svnactions.cpp:885
+#: src/svnfrontend/svnactions.cpp:888
 #, kde-format
 msgctxt "@title:window"
 msgid "Infolist"
 msgstr "Інформаційний список"
 
-#: src/svnfrontend/svnactions.cpp:924
+#: src/svnfrontend/svnactions.cpp:927
 #, kde-format
 msgctxt "@title:window"
 msgid "Applying Properties"
 msgstr "Застосування властивостей"
 
-#: src/svnfrontend/svnactions.cpp:925
+#: src/svnfrontend/svnactions.cpp:928
 #, kde-format
 msgid "<center>Applying<br/>hit cancel for abort</center>"
 msgstr "<center>Застосовуємо<br/>Натисніть «Скасувати», щоб перервати</center>"
 
-#: src/svnfrontend/svnactions.cpp:961
+#: src/svnfrontend/svnactions.cpp:964
 #, kde-format
 msgid "Could not change to folder %1\n"
 msgstr "Не вдалося перейти до теки %1\n"
 
-#: src/svnfrontend/svnactions.cpp:979
+#: src/svnfrontend/svnactions.cpp:982
 #, kde-format
 msgid "Not commit because networking is disabled"
 msgstr "Не надіслано, оскільки вимкнено роботу у мережі"
 
-#: src/svnfrontend/svnactions.cpp:1003 src/svnfrontend/svnactions.cpp:2463
+#: src/svnfrontend/svnactions.cpp:1006 src/svnfrontend/svnactions.cpp:2465
 #, kde-format
 msgctxt "@title:window"
 msgid "Status / List"
 msgstr "Стан/Список"
 
-#: src/svnfrontend/svnactions.cpp:1004 src/svnfrontend/svnactions.cpp:2464
+#: src/svnfrontend/svnactions.cpp:1007 src/svnfrontend/svnactions.cpp:2466
 #, kde-format
 msgid "Creating list / check status"
 msgstr "Створення списку або перевірка стану"
 
-#: src/svnfrontend/svnactions.cpp:1043 src/svnfrontend/svnactions.cpp:1050
-#: src/svnfrontend/svnactions.cpp:1072
+#: src/svnfrontend/svnactions.cpp:1046 src/svnfrontend/svnactions.cpp:1053
+#: src/svnfrontend/svnactions.cpp:1075
 #, kde-format
 msgid "Add and Commit"
 msgstr "Додати і надіслати"
 
-#: src/svnfrontend/svnactions.cpp:1048
+#: src/svnfrontend/svnactions.cpp:1051
 #, kde-format
 msgid "Delete and Commit"
 msgstr "Вилучити і надіслати"
 
-#: src/svnfrontend/svnactions.cpp:1111
+#: src/svnfrontend/svnactions.cpp:1114
 #, kde-format
 msgctxt "@title:window"
 msgid "Commit"
 msgstr "Внесок"
 
-#: src/svnfrontend/svnactions.cpp:1111
+#: src/svnfrontend/svnactions.cpp:1114
 #, kde-format
 msgid "Commit - hit Cancel for abort"
 msgstr "Надсилаємо. Натисніть «Скасувати», щоб перервати."
 
-#: src/svnfrontend/svnactions.cpp:1138
+#: src/svnfrontend/svnactions.cpp:1141
 #, kde-format
 msgctxt "@title:window"
 msgid "Downloading"
 msgstr "Отримання"
 
-#: src/svnfrontend/svnactions.cpp:1139
+#: src/svnfrontend/svnactions.cpp:1142
 #, kde-format
 msgid "Download - hit Cancel for abort"
 msgstr "Отримуємо дані. Натисніть «Скасувати», щоб перервати."
 
-#: src/svnfrontend/svnactions.cpp:1165
+#: src/svnfrontend/svnactions.cpp:1168
 #, kde-format
 msgid "Can not do this diff because networking is disabled."
 msgstr "Визначення цієї різниці неможливе, оскільки вимкнено роботу у мережі."
 
-#: src/svnfrontend/svnactions.cpp:1219
+#: src/svnfrontend/svnactions.cpp:1222
 #, kde-format
 msgid "Both entries seems to be the same, can not diff."
 msgstr "Здається, елементи є однаковими, різницю визначити не вдалося."
 
-#: src/svnfrontend/svnactions.cpp:1280
+#: src/svnfrontend/svnactions.cpp:1283
 #, kde-format
 msgid "Diff-process could not started, check command."
 msgstr ""
 "Процес порівняння не вдалося запустити. Перевірте, чи правильно вказано "
 "команду."
 
-#: src/svnfrontend/svnactions.cpp:1339 src/svnfrontend/svnactions.cpp:1401
+#: src/svnfrontend/svnactions.cpp:1342 src/svnfrontend/svnactions.cpp:1404
 #, kde-format
 msgctxt "@title:window"
 msgid "Diffing"
 msgstr "Порівняємо"
 
-#: src/svnfrontend/svnactions.cpp:1339
+#: src/svnfrontend/svnactions.cpp:1342
 #, kde-format
 msgid "Diffing - hit Cancel for abort"
 msgstr "Порівнюємо. Натисніть «Скасувати», щоб перервати."
 
-#: src/svnfrontend/svnactions.cpp:1352 src/svnfrontend/svnactions.cpp:1411
+#: src/svnfrontend/svnactions.cpp:1355 src/svnfrontend/svnactions.cpp:1414
 #, kde-format
 msgid "No difference to display"
 msgstr "Немає відмінностей для показу"
 
-#: src/svnfrontend/svnactions.cpp:1402
+#: src/svnfrontend/svnactions.cpp:1405
 #, kde-format
 msgid "Diffing - hit cancel for abort"
 msgstr "Порівнюємо. Натисніть «Скасувати», щоб перервати."
 
-#: src/svnfrontend/svnactions.cpp:1458
+#: src/svnfrontend/svnactions.cpp:1460
 #, kde-format
 msgid "Display process could not started, check command."
 msgstr ""
 "Процес показу не вдалося запустити. Перевірте, чи правильно вказано команду."
 
-#: src/svnfrontend/svnactions.cpp:1470
+#: src/svnfrontend/svnactions.cpp:1472
 #, kde-format
 msgctxt "@title:window"
 msgid "Diff Display"
 msgstr "Показ різниці"
 
-#: src/svnfrontend/svnactions.cpp:1518
+#: src/svnfrontend/svnactions.cpp:1520
 #, kde-format
 msgctxt "@title:window"
 msgid "Making update"
 msgstr "Оновлення"
 
-#: src/svnfrontend/svnactions.cpp:1519
+#: src/svnfrontend/svnactions.cpp:1521
 #, kde-format
 msgid "Making update - hit Cancel for abort"
 msgstr "Виконуємо оновлення. Натисніть «Скасувати», щоб перервати."
 
-#: src/svnfrontend/svnactions.cpp:1604
+#: src/svnfrontend/svnactions.cpp:1606
 #, kde-format
 msgid "Which files or directories should I add?"
 msgstr "Які файли або каталоги слід додати?"
 
-#: src/svnfrontend/svnactions.cpp:1611
+#: src/svnfrontend/svnactions.cpp:1613
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is versioned - break.</center>"
 msgstr ""
 "<center>Запис<br/>%1<br/>вже перебуває під керуванням версіями — дію не "
 "виконано.</center>"
 
-#: src/svnfrontend/svnactions.cpp:1638
+#: src/svnfrontend/svnactions.cpp:1640
 #, kde-format
 msgid "Delete from repository"
 msgstr "Вилучити зі сховища"
 
-#: src/svnfrontend/svnactions.cpp:1689
+#: src/svnfrontend/svnactions.cpp:1691
 #, kde-format
 msgctxt "@title:window"
 msgid "Export a Repository"
 msgstr "Експортування сховища"
 
-#: src/svnfrontend/svnactions.cpp:1689
+#: src/svnfrontend/svnactions.cpp:1691
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout a Repository"
 msgstr "Отримання зі сховища"
 
-#: src/svnfrontend/svnactions.cpp:1707 src/svnfrontend/svnactions.cpp:1714
+#: src/svnfrontend/svnactions.cpp:1709 src/svnfrontend/svnactions.cpp:1716
 #, kde-format
 msgid "Export repository"
 msgstr "Експортувати сховище"
 
-#: src/svnfrontend/svnactions.cpp:1713
+#: src/svnfrontend/svnactions.cpp:1715
 #, kde-format
 msgid "Invalid local path given!"
 msgstr "Вказано некоректний локальний шлях!"
 
-#: src/svnfrontend/svnactions.cpp:1733
+#: src/svnfrontend/svnactions.cpp:1735
 #, kde-format
 msgid "Exporting a file?"
 msgstr "Експортуємо файл?"
 
-#: src/svnfrontend/svnactions.cpp:1733
+#: src/svnfrontend/svnactions.cpp:1735
 #, kde-format
 msgid "Checking out a file?"
 msgstr "Отримуємо файл?"
 
-#: src/svnfrontend/svnactions.cpp:1789
+#: src/svnfrontend/svnactions.cpp:1791
 #, kde-format
 msgctxt "@title:window"
 msgid "Export"
 msgstr "Експортувати"
 
-#: src/svnfrontend/svnactions.cpp:1789
+#: src/svnfrontend/svnactions.cpp:1791
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout"
 msgstr "Отримання"
 
-#: src/svnfrontend/svnactions.cpp:1790
+#: src/svnfrontend/svnactions.cpp:1792
 #, kde-format
 msgid "Exporting"
 msgstr "Експортування"
 
-#: src/svnfrontend/svnactions.cpp:1790
+#: src/svnfrontend/svnactions.cpp:1792
 #, kde-format
 msgid "Checking out"
 msgstr "Отримання"
 
-#: src/svnfrontend/svnactions.cpp:1828
+#: src/svnfrontend/svnactions.cpp:1830
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
 msgstr ""
 "<center>Запис<br/>%1<br/>не перебуває під керуванням версіями — дію не "
 "виконано.</center>"
 
-#: src/svnfrontend/svnactions.cpp:1860
+#: src/svnfrontend/svnactions.cpp:1862
 #, kde-format
 msgctxt "@title:window"
 msgid "Revert"
 msgstr "Скасовування"
 
-#: src/svnfrontend/svnactions.cpp:1860
+#: src/svnfrontend/svnactions.cpp:1862
 #, kde-format
 msgid "Reverting items"
 msgstr "Відновлюємо попередній стан елементів"
 
-#: src/svnfrontend/svnactions.cpp:1889 src/svnfrontend/svnactions.cpp:1953
+#: src/svnfrontend/svnactions.cpp:1891 src/svnfrontend/svnactions.cpp:1955
 #, kde-format
 msgctxt "@title:window"
 msgid "Switch URL"
 msgstr "Перемкнути адресу"
 
-#: src/svnfrontend/svnactions.cpp:1889
+#: src/svnfrontend/svnactions.cpp:1891
 #, kde-format
 msgid "Switching URL"
 msgstr "Перемикаємо адресу"
 
-#: src/svnfrontend/svnactions.cpp:1910
+#: src/svnfrontend/svnactions.cpp:1912
 #, kde-format
 msgctxt "@title:window"
 msgid "Relocate Repository"
 msgstr "Перенести сховище"
 
-#: src/svnfrontend/svnactions.cpp:1911
+#: src/svnfrontend/svnactions.cpp:1913
 #, kde-format
 msgid "Relocate repository to new URL"
 msgstr "Пересунути сховище до нової адреси"
 
-#: src/svnfrontend/svnactions.cpp:1934
+#: src/svnfrontend/svnactions.cpp:1936
 #, kde-format
 msgid "Can only switch one item at time"
 msgstr "Можна перемикати лише по одному елементу за раз"
 
-#: src/svnfrontend/svnactions.cpp:1940
+#: src/svnfrontend/svnactions.cpp:1942
 #, kde-format
 msgid "Error getting entry to switch"
 msgstr "Помилка під час отримання запису для перемикання"
 
-#: src/svnfrontend/svnactions.cpp:1963
+#: src/svnfrontend/svnactions.cpp:1965
 #, kde-format
 msgid "Switch URL"
 msgstr "Перемкнути адресу"
 
-#: src/svnfrontend/svnactions.cpp:1980
+#: src/svnfrontend/svnactions.cpp:1982
 #, kde-format
 msgctxt "@title:window"
 msgid "Cleanup"
 msgstr "Очищення"
 
-#: src/svnfrontend/svnactions.cpp:1980
+#: src/svnfrontend/svnactions.cpp:1982
 #, kde-format
 msgid "Cleaning up folder"
 msgstr "Очищуємо теку"
 
-#: src/svnfrontend/svnactions.cpp:1996
+#: src/svnfrontend/svnactions.cpp:1998
 #, kde-format
 msgctxt "@title:window"
 msgid "Resolve"
 msgstr "Розв'язування"
 
-#: src/svnfrontend/svnactions.cpp:1996
+#: src/svnfrontend/svnactions.cpp:1998
 #, kde-format
 msgid "Marking resolved"
 msgstr "Позначення розв’язано"
 
-#: src/svnfrontend/svnactions.cpp:2027
+#: src/svnfrontend/svnactions.cpp:2029
 #, kde-format
 msgid "Could not retrieve conflict information - giving up."
 msgstr "Не вдалося отримати дані щодо конфлікту — перериваємо обробку."
 
-#: src/svnfrontend/svnactions.cpp:2052
+#: src/svnfrontend/svnactions.cpp:2054
 #, kde-format
 msgid "Resolve-process could not started, check command."
 msgstr ""
 "Процес розв’язування конфліктів не вдалося запустити. Перевірте, чи "
 "правильно вказано команду."
 
-#: src/svnfrontend/svnactions.cpp:2062
+#: src/svnfrontend/svnactions.cpp:2064
 #, kde-format
 msgctxt "@title:window"
 msgid "Import"
 msgstr "Імпортування"
 
-#: src/svnfrontend/svnactions.cpp:2062
+#: src/svnfrontend/svnactions.cpp:2064
 #, kde-format
 msgid "Importing items"
 msgstr "Імпортуємо елементи"
 
-#: src/svnfrontend/svnactions.cpp:2091
+#: src/svnfrontend/svnactions.cpp:2093
 #, kde-format
 msgid "Nothing to merge."
 msgstr "Нічого об’єднувати"
 
-#: src/svnfrontend/svnactions.cpp:2095
+#: src/svnfrontend/svnactions.cpp:2097
 #, kde-format
 msgid "No destination to merge."
 msgstr "Немає файла-призначення для об’єднання."
 
-#: src/svnfrontend/svnactions.cpp:2114
+#: src/svnfrontend/svnactions.cpp:2116
 #, kde-format
 msgid "Both sources must be same type."
 msgstr "Джерела об’єднання мають належати до одного типу."
 
-#: src/svnfrontend/svnactions.cpp:2121
+#: src/svnfrontend/svnactions.cpp:2123
 #, kde-format
 msgid "Target for merge must same type like sources."
 msgstr ""
 "Результат об’єднання має належати до одного типу з джерелами об’єднання."
 
-#: src/svnfrontend/svnactions.cpp:2144
+#: src/svnfrontend/svnactions.cpp:2146
 #, kde-format
 msgid "Both entries seems to be the same, will not do a merge."
 msgstr "Здається, елементи є однаковими, — нічого об’єднувати."
 
-#: src/svnfrontend/svnactions.cpp:2222
+#: src/svnfrontend/svnactions.cpp:2224
 #, kde-format
 msgid "Merge process could not started, check command."
 msgstr ""
 "Процес об’єднання не вдалося запустити. Перевірте, чи правильно вказано "
 "команду."
 
-#: src/svnfrontend/svnactions.cpp:2304
+#: src/svnfrontend/svnactions.cpp:2306
 #, kde-format
 msgid "Merging items"
 msgstr "Об’єднуємо елементи"
 
-#: src/svnfrontend/svnactions.cpp:2330 src/svnfrontend/svnactions.cpp:2347
+#: src/svnfrontend/svnactions.cpp:2332 src/svnfrontend/svnactions.cpp:2349
 #, kde-format
 msgctxt "@title:window"
 msgid "Move"
 msgstr "Пересування"
 
-#: src/svnfrontend/svnactions.cpp:2330
+#: src/svnfrontend/svnactions.cpp:2332
 #, kde-format
 msgid "Moving/Rename item"
 msgstr "Пересуваємо або перейменовуємо елемент"
 
-#: src/svnfrontend/svnactions.cpp:2347
+#: src/svnfrontend/svnactions.cpp:2349
 #, kde-format
 msgid "Moving entries"
 msgstr "Пересуваємо записи"
 
-#: src/svnfrontend/svnactions.cpp:2367 src/svnfrontend/svnactions.cpp:2381
+#: src/svnfrontend/svnactions.cpp:2369 src/svnfrontend/svnactions.cpp:2383
 #, kde-format
 msgctxt "@title:window"
 msgid "Copy / Move"
 msgstr "Копіювання або пересування"
 
-#: src/svnfrontend/svnactions.cpp:2367 src/svnfrontend/svnactions.cpp:2381
+#: src/svnfrontend/svnactions.cpp:2369 src/svnfrontend/svnactions.cpp:2383
 #, kde-format
 msgid "Copy or Moving entries"
 msgstr "Копіювання або пересування записів"
 
-#: src/svnfrontend/svnactions.cpp:2497
+#: src/svnfrontend/svnactions.cpp:2499
 #, kde-format
 msgid "No unversioned items found."
 msgstr "Елементів поза керуванням версіями не знайдено."
 
-#: src/svnfrontend/svnactions.cpp:2501
+#: src/svnfrontend/svnactions.cpp:2503
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Unversioned Items"
 msgstr "Додавання елементів поза керуванням версіями"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
-#: src/svnfrontend/svnactions.cpp:2504 src/svnfrontend/svnlogdlg.ui:163
+#: src/svnfrontend/svnactions.cpp:2506 src/svnfrontend/svnlogdlg.ui:163
 #, kde-format
 msgid "Item"
 msgstr "Елемент"
 
-#: src/svnfrontend/svnactions.cpp:2619
+#: src/svnfrontend/svnactions.cpp:2621
 #, kde-format
 msgid "Found %1 modified item"
 msgid_plural "Found %1 modified items"
@@ -5586,27 +5586,27 @@ msgstr[1] "Знайдено %1 змінених елементи"
 msgstr[2] "Знайдено %1 змінених елементів"
 msgstr[3] "Знайдено один змінений елемент"
 
-#: src/svnfrontend/svnactions.cpp:2647
+#: src/svnfrontend/svnactions.cpp:2649
 #, kde-format
 msgid "Checking for updates finished"
 msgstr "Перевірку наявності оновлень завершено"
 
-#: src/svnfrontend/svnactions.cpp:2649
+#: src/svnfrontend/svnactions.cpp:2651
 #, kde-format
 msgid "There are new items in repository"
 msgstr "У сховищі є нові елементи"
 
-#: src/svnfrontend/svnactions.cpp:2719
+#: src/svnfrontend/svnactions.cpp:2721
 #, kde-format
 msgid "Not filling log cache because networking is disabled"
 msgstr "Кеш журналу не заповнено, оскільки вимкнено роботу у мережі"
 
-#: src/svnfrontend/svnactions.cpp:2759
+#: src/svnfrontend/svnactions.cpp:2761
 #, kde-format
 msgid "Not checking for updates because networking is disabled"
 msgstr "Не виконуємо пошук оновлень, оскільки роботу у мережі вимкнено"
 
-#: src/svnfrontend/svnactions.cpp:2765
+#: src/svnfrontend/svnactions.cpp:2767
 #, kde-format
 msgid "Checking for updates started in background"
 msgstr "Розпочато пошук оновлень у фоновому режимі"
@@ -5811,7 +5811,7 @@ msgstr "С&копіювати сюди"
 msgid "C&ancel"
 msgstr "&Скасувати"
 
-#: src/urldlg.cpp:98
+#: src/urldlg.cpp:100
 #, kde-format
 msgctxt "@title:window"
 msgid "Open"

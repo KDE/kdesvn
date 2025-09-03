@@ -60,7 +60,7 @@ public:
     QByteArray toUtf8() const;
 
     /**
-     * @deprecated Use toByteArray instead
+     * @deprecated Use toUtf8 instead
      */
     [[deprecated]] QByteArray cstr() const;
 

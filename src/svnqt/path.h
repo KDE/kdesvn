@@ -77,7 +77,7 @@ public:
 
     /**
      * @return Path string as c string
-     * @deprecated use toByteArray instead
+     * @deprecated use toUtf8 instead
      */
     [[deprecated]] const QByteArray cstr() const;
 

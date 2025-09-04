@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-03 00:46+0000\n"
-"PO-Revision-Date: 2025-08-31 14:43+0300\n"
+"PO-Revision-Date: 2025-09-02 15:27+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -2026,13 +2026,13 @@ msgstr ""
 #: src/settings/kdesvn_part.kcfg:271
 #, kde-format
 msgid "Support overwrite for KIO module"
-msgstr ""
+msgstr "תמיכה בדריסה למודול KIO"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:275
 #, kde-format
 msgid "Print progress messages in KDE dock area"
-msgstr ""
+msgstr "להציג הודעת התקדמות באזור המעגן של KDE"
 
 #. i18n: ectx: whatsthis, entry, group (internals)
 #: src/settings/kdesvn_part.kcfg:294
@@ -2046,14 +2046,14 @@ msgstr ""
 #: src/settings/polling_settings.ui:11
 #, kde-format
 msgid "Check modified items every"
-msgstr ""
+msgstr "לבדוק אם יש פריטים עדכניים כל"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/settings/polling_settings.ui:28 src/settings/polling_settings.ui:55
 #, kde-format
 msgid "minutes"
-msgstr ""
+msgstr "דקות"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_poll_updates)
 #: src/settings/polling_settings.ui:35
@@ -2067,61 +2067,61 @@ msgstr ""
 #: src/settings/polling_settings.ui:38
 #, kde-format
 msgid "Check for updated items every"
-msgstr ""
+msgstr "לבדוק אם עודכנו פריטים כל"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
 #: src/settings/revisiontree_settings.ui:28
 #, kde-format
 msgid "Left to right"
-msgstr ""
+msgstr "משמאל לימין"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
 #: src/settings/revisiontree_settings.ui:33
 #, kde-format
 msgid "Bottom to top"
-msgstr ""
+msgstr "מלמטה למעלה"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
 #: src/settings/revisiontree_settings.ui:38
 #, kde-format
 msgid "Right to left"
-msgstr ""
+msgstr "מימין לשמאל"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
 #: src/settings/revisiontree_settings.ui:43
 #, kde-format
 msgid "Top to bottom"
-msgstr ""
+msgstr "מלמעלה למטה"
 
 #. i18n: ectx: property (text), widget (QLabel, m_AddColorLabel)
 #: src/settings/revisiontree_settings.ui:51
 #, kde-format
 msgid "Color for added items:"
-msgstr ""
+msgstr "צבע לפריטים שנוספו:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: src/settings/revisiontree_settings.ui:77
 #, kde-format
 msgid "Color for copied items:"
-msgstr ""
+msgstr "צבע לפריטים מועתקים:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: src/settings/revisiontree_settings.ui:90
 #, kde-format
 msgid "Color for renamed items:"
-msgstr ""
+msgstr "צבע לפריטים ששמם שונה:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel5)
 #: src/settings/revisiontree_settings.ui:103
 #, kde-format
 msgid "Color for modified items:"
-msgstr ""
+msgstr "צבע לפריטים שהשתנו:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: src/settings/revisiontree_settings.ui:136
 #, kde-format
 msgid "Color for deleted items:"
-msgstr ""
+msgstr "צבע לפריטים שנמחקו:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_fill_cache_on_tree)
 #: src/settings/revisiontree_settings.ui:175
@@ -3109,6 +3109,9 @@ msgid ""
 "a user must acquire a lock on the file before they can edit and commit "
 "changes."
 msgstr ""
+"יש להגדיר את זה לכל ערך שהוא (למשל: <b>'*'</b>) כדי לאכוף נעילה על הקובץ הזה."
+"<br/>הקובץ הזה יוגדר לקריאה בלבד בעת שליפה או עדכון, ומציין שעל המשתמש לתפוס "
+"נעילה על הקובץ לפני ביצוע עריכה או קיבוע שינויים."
 
 #: src/svnfrontend/editpropsdlg.cpp:66 src/svnfrontend/editpropsdlg.cpp:100
 #, kde-format
@@ -3224,31 +3227,31 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:14
 #, kde-format
 msgid "Checkout info"
-msgstr ""
+msgstr "פרטי שליפה"
 
 #. i18n: ectx: property (text), widget (QLabel, m_TargetLabel)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:26
 #, kde-format
 msgid "Select target directory:"
-msgstr ""
+msgstr "בחירת תיקיית יעד:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_UrlLabel)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:40
 #, kde-format
 msgid "Enter URL:"
-msgstr ""
+msgstr "נא למלא כתובת:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_ignoreExternals)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:67
 #, kde-format
 msgid "Ignore externals while operation"
-msgstr ""
+msgstr "התעלמות מחיצוניים בזמן הפעולה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_ignoreExternals)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:70
 #, kde-format
 msgid "Ignore externals"
-msgstr ""
+msgstr "התעלמות מחיצוניים"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_overwriteButton)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:77
@@ -3260,7 +3263,7 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:80
 #, kde-format
 msgid "Overwrite existing"
-msgstr ""
+msgstr "לדרוס את הקיימים"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_IgnoreKeywords)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:93
@@ -3272,13 +3275,13 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:110
 #, kde-format
 msgid "Append source URL name to subfolder"
-msgstr ""
+msgstr "הוספת שם כתובת המקור לתת־התיקייה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_ShowExplorer)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:120
 #, kde-format
 msgid "Open after job"
-msgstr ""
+msgstr "לפתוח לאחר המשימה"
 
 #: src/svnfrontend/fronthelpers/propertylist.cpp:43
 #, kde-format
@@ -3840,7 +3843,7 @@ msgstr "איתור עדכונים"
 #, kde-format
 msgid ""
 "Check if current working copy has items with newer version in repository"
-msgstr ""
+msgstr "לבדוק אם לעותק העבודה יש פריט עם גרסה חדשה יותר במאגר"
 
 #: src/svnfrontend/maintreewidget.cpp:582
 #, kde-format
@@ -3948,12 +3951,12 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:665
 #, kde-format
 msgid "Open repository of working copy"
-msgstr ""
+msgstr "פתיחת מאגר עותק העבודה"
 
 #: src/svnfrontend/maintreewidget.cpp:670
 #, kde-format
 msgid "Opens the repository the current working copy was checked out from"
-msgstr ""
+msgstr "פתיחת המאגר שעותק העבודה נשלף ממנו"
 
 #: src/svnfrontend/maintreewidget.cpp:673
 #, kde-format
@@ -3966,6 +3969,8 @@ msgid ""
 "Recursively clean up the working copy, removing locks, resuming unfinished "
 "operations, etc."
 msgstr ""
+"לנקות את עותק העבודה באופן יסודי, להסיר נעילות להמשיך פעולות שלא הסתיימו "
+"וכו׳."
 
 #: src/svnfrontend/maintreewidget.cpp:680
 #, kde-format

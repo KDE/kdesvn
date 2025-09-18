@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-03 00:46+0000\n"
-"PO-Revision-Date: 2025-09-04 08:28+0300\n"
+"PO-Revision-Date: 2025-09-17 11:50+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -2920,37 +2920,37 @@ msgstr ""
 #: src/svnfrontend/database/dboverview.ui:66
 #, kde-format
 msgid "Repository Settings"
-msgstr ""
+msgstr "הגדרות מאגר"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_StatisticButton)
 #: src/svnfrontend/database/dboverview.ui:73
 #, kde-format
 msgid "Statistics for repository"
-msgstr ""
+msgstr "סטטיסטיקה למאגר"
 
 #: src/svnfrontend/database/dbsettings.cpp:41
 #, kde-format
 msgctxt "@title:window"
 msgid "Settings for %1"
-msgstr ""
+msgstr "הגדרות עבור %1"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: src/svnfrontend/database/dbsettings.ui:21
 #, kde-format
 msgid "Log cache settings"
-msgstr ""
+msgstr "הגדרות מטמון יומן"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dbcfg_noCacheUpdate)
 #: src/svnfrontend/database/dbsettings.ui:27
 #, kde-format
 msgid "Do not update log cache on open"
-msgstr ""
+msgstr "לא לעדכן את מטמון היומן בפתיחה"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: src/svnfrontend/database/dbsettings.ui:40
 #, kde-format
 msgid "Prefixes to filter out in revision tree"
-msgstr ""
+msgstr "קידומות לסינון בעץ המהדורות"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: src/svnfrontend/database/dbsettings.ui:58
@@ -3215,7 +3215,7 @@ msgstr ""
 #: src/svnfrontend/editpropsdlg.ui:46
 #, kde-format
 msgid "Property value:"
-msgstr ""
+msgstr "ערך מאפיין:"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, helpButton)
 #: src/svnfrontend/editpropsdlg.ui:69
@@ -3286,12 +3286,12 @@ msgstr "לפתוח לאחר המשימה"
 #: src/svnfrontend/fronthelpers/propertylist.cpp:43
 #, kde-format
 msgid "Property"
-msgstr ""
+msgstr "מאפיין"
 
 #: src/svnfrontend/fronthelpers/propertylist.cpp:44
 #, kde-format
 msgid "Value"
-msgstr ""
+msgstr "ערך"
 
 #: src/svnfrontend/fronthelpers/propertylist.cpp:104
 #: src/svnfrontend/propertiesdlg.cpp:111 src/svnfrontend/propertiesdlg.cpp:162
@@ -3572,22 +3572,24 @@ msgid ""
 "Could not retrieve logs, reason:\n"
 "%1"
 msgstr ""
+"לא ניתן למשוך את היומנים, סיבה:\n"
+"%1"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:142
 #, kde-format
 msgid "Scanning the logs for %1"
-msgstr ""
+msgstr "היומנים של %1 נסרקים"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:142
 #, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "ביטול"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:143
 #, kde-format
 msgctxt "@title:window"
 msgid "Scanning logs"
-msgstr ""
+msgstr "היומנים נסרקים"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:231
 #: src/svnfrontend/graphtree/revisiontree.cpp:268
@@ -3600,13 +3602,13 @@ msgstr ""
 #: src/svnfrontend/hotcopydlg.ui:11
 #, kde-format
 msgid "Repository to copy:"
-msgstr ""
+msgstr "מאגר להעתקה:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_Destlabel)
 #: src/svnfrontend/hotcopydlg.ui:31
 #, kde-format
 msgid "Destination folder:"
-msgstr ""
+msgstr "תיקיית יעד:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_Cleanlogs)
 #: src/svnfrontend/hotcopydlg.ui:51

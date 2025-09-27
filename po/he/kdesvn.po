@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-03 00:46+0000\n"
-"PO-Revision-Date: 2025-09-17 11:50+0300\n"
+"PO-Revision-Date: 2025-09-25 14:16+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -2388,7 +2388,7 @@ msgstr ""
 #: src/svnfrontend/background/tcontextlistener.cpp:182
 #, kde-format
 msgid "%1 of %2 transferred."
-msgstr ""
+msgstr "הועברו %1 מתוך %2."
 
 #: src/svnfrontend/background/tcontextlistener.cpp:184
 #: src/svnfrontend/stopdlg.cpp:198
@@ -3728,7 +3728,7 @@ msgstr "קובץ היטל:"
 #: src/svnfrontend/loaddmpdlg.ui:118
 #, kde-format
 msgid "Validate the properties on load (only Subversion 1.7 or newer)"
-msgstr ""
+msgstr "לאמת את המאפיינים בעת הטעינה (רק מ־Subversion 1.7 ואילך)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_validateProps)
 #: src/svnfrontend/loaddmpdlg.ui:121
@@ -3739,7 +3739,7 @@ msgstr "אימות מאפיינים"
 #: src/svnfrontend/maintreewidget.cpp:271
 #, kde-format
 msgid "Networked URL to open but networking is disabled."
-msgstr ""
+msgstr "כתובת רשת לפתיחה אבל הרשת מושבתת."
 
 #: src/svnfrontend/maintreewidget.cpp:497
 #, kde-format
@@ -3809,7 +3809,7 @@ msgstr "הצגת השינויים האחרונים"
 #: src/svnfrontend/maintreewidget.cpp:552
 #, kde-format
 msgid "Display last changes as difference to previous commit."
-msgstr ""
+msgstr "הצגת השינויים האחרונים כהבדל מול הקיבוע האחרון."
 
 #: src/svnfrontend/maintreewidget.cpp:554
 #, kde-format
@@ -3864,6 +3864,7 @@ msgid ""
 "Output the content of specified files or URLs with revision and author "
 "information in-line."
 msgstr ""
+"להוציא את תוכן הקבצים או הכתובות שצוינו עם פרטי מהדורה ויוצרים כחלק מהשורה."
 
 #: src/svnfrontend/maintreewidget.cpp:590
 #, kde-format
@@ -3948,7 +3949,7 @@ msgstr "לא מתועד במאגר"
 #: src/svnfrontend/maintreewidget.cpp:661
 #, kde-format
 msgid "Browse folder for unversioned items and add them if wanted."
-msgstr ""
+msgstr "לעיין בתיקייה לאיתור פריטים בלתי מתועדים ולהוסיף אותם לפי הצורך."
 
 #: src/svnfrontend/maintreewidget.cpp:665
 #, kde-format
@@ -5351,7 +5352,7 @@ msgstr "חלקי"
 #: src/svnfrontend/svnitem.cpp:455
 #, kde-format
 msgid "Obstructed"
-msgstr ""
+msgstr "משובש"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, LogDialog)
 #: src/svnfrontend/svnlogdlg.ui:18

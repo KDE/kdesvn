@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-03 00:46+0000\n"
-"PO-Revision-Date: 2025-09-25 14:16+0300\n"
+"PO-Revision-Date: 2025-09-27 22:47+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -3192,24 +3192,24 @@ msgstr ""
 #: src/svnfrontend/editpropsdlg.cpp:136
 #, kde-format
 msgid "Select or enter new property"
-msgstr ""
+msgstr "נא לבחור או למלא מאפיין חדש"
 
 #: src/svnfrontend/editpropsdlg.cpp:160
 #, kde-format
 msgid "No help for this property available"
-msgstr ""
+msgstr "אין עזרה למאפיין הזה"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, EditPropsDlg)
 #: src/svnfrontend/editpropsdlg.ui:14
 #, kde-format
 msgid "Modify property"
-msgstr ""
+msgstr "עריכת מאפיין"
 
 #. i18n: ectx: property (text), widget (QLabel, m_NameLabel)
 #: src/svnfrontend/editpropsdlg.ui:22
 #, kde-format
 msgid "Property name:"
-msgstr ""
+msgstr "שם מאפיין:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_ValueLabel)
 #: src/svnfrontend/editpropsdlg.ui:46
@@ -3300,6 +3300,8 @@ msgid ""
 "This property may not set by users.\n"
 "Rejecting it."
 msgstr ""
+"משתמשים לא יכולים להגדיר את המאפיין הזה.\n"
+"הוא נדחה."
 
 #: src/svnfrontend/fronthelpers/propertylist.cpp:104
 #: src/svnfrontend/propertiesdlg.cpp:111 src/svnfrontend/propertiesdlg.cpp:162
@@ -3448,7 +3450,7 @@ msgstr "הועתק אל %1 במהדורה %2"
 #: src/svnfrontend/graphtree/revgraphview.cpp:434
 #, kde-format
 msgid "Renamed to %1 at revision %2"
-msgstr ""
+msgstr "השם השתנה ל־%1 במהדורה %2"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:437
 #, kde-format
@@ -3563,7 +3565,7 @@ msgstr "היומנים מתקבלים - לחיצה על ביטול תפסיק"
 #: src/svnfrontend/graphtree/revisiontree.cpp:108
 #, kde-format
 msgid "No log cache possible due broken database and networking not allowed."
-msgstr ""
+msgstr "אי אפשר לעיין במטמון היומנים עקב מסד נתונים פגום וסירוב גישה לרשת."
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:108
 #: src/svnfrontend/graphtree/revisiontree.cpp:113
@@ -3596,7 +3598,7 @@ msgstr "היומנים נסרקים"
 #: src/svnfrontend/graphtree/revisiontree.cpp:316
 #, kde-format
 msgid "%1<br>Check change entry %2 of %3"
-msgstr ""
+msgstr "%1<br>נבדקת רשומת שינוי %2 מתוך %3"
 
 #. i18n: ectx: property (text), widget (QLabel, m_Srclabel)
 #: src/svnfrontend/hotcopydlg.ui:11
@@ -3614,7 +3616,7 @@ msgstr "תיקיית יעד:"
 #: src/svnfrontend/hotcopydlg.ui:51
 #, kde-format
 msgid "Clean logs"
-msgstr ""
+msgstr "פינוי יומנים"
 
 #: src/svnfrontend/importdir_logmsg.cpp:37
 #, kde-format

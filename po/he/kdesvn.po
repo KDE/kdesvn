@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-03 00:46+0000\n"
-"PO-Revision-Date: 2025-09-27 22:47+0300\n"
+"PO-Revision-Date: 2025-09-29 13:07+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3636,14 +3636,14 @@ msgstr ""
 #: src/svnfrontend/importdir_logmsg.cpp:44
 #, kde-format
 msgid "Should files with unknown node types be ignored"
-msgstr ""
+msgstr "האם קבצים שסוג הנקודה שלהם לא ידוע יזכו להתעלמות"
 
 #: src/svnfrontend/importdir_logmsg.cpp:45
 #, kde-format
 msgid ""
 "Ignore files of which the node type is unknown, such as device files and "
 "pipes."
-msgstr ""
+msgstr "התעלמות מקבצים שבהם סוג הנקודה לא ידוע כגון קובצי התקנים וצינוריות."
 
 #: src/svnfrontend/importdir_logmsg.cpp:79
 #, kde-format
@@ -3713,6 +3713,8 @@ msgid ""
 "If not empty, load the dump into a specific folder instead into root of "
 "repository. This folder must exist before loading the dump."
 msgstr ""
+"אם לא ריק, לטעון את ההיטל לתיקייה מסוימת במקום לראש המאגר. התיקייה הזאת "
+"חייבת להיות קיימת לפני טעינת ההיטל."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel5)
 #: src/svnfrontend/loaddmpdlg.ui:92

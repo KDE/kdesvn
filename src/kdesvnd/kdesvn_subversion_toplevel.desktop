@@ -7,6 +7,7 @@ Actions=Checkout;Export;Update;Commit;Log;Exportto;Checkoutto;
 
 [Desktop Action Log]
 Name=kdesvn log (last 100)
+Name[ar]=سجل اس في ان لكيدي (آخر 100)
 Name[az]=kdesvn jurnalı (son 100)
 Name[bs]=kdesvn dnevnik (zadnjih 100)
 Name[ca]=Registre del kdesvn (últims 100)
@@ -41,6 +42,7 @@ Name[zh_TW]=kdesvn 紀錄（最近 100 個）
 Icon=kdesvnlog
 Exec=kdesvn exec -r HEAD:1 -l 100 log %U
 Comment=Displays the Subversion log
+Comment[ar]=اعرض سجل سبفيرجن
 Comment[az]=Subversion jurnalını göstərir
 Comment[bs]=Prikazi Subverzije zapisnik
 Comment[ca]=Mostra el registre de Subversion
@@ -76,6 +78,7 @@ Comment[zh_TW]=顯示 Subversion 紀錄
 
 [Desktop Action Checkout]
 Name=Checkout From Repository...
+Name[ar]=اسحب من المستودع...
 Name[az]=Repazitoriyadan almaq...
 Name[bs]=Izdvoji iz spremišta...
 Name[ca]=Extracció des del repositori...
@@ -111,6 +114,7 @@ Name[zh_TW]=從版本庫簽出…
 Icon=kdesvncheckout
 Exec=kdesvn exec checkout %U
 Comment=Checkout out files from an existing repository into this folder.
+Comment[ar]=اسحب ملفات من مستودع موجود إلى هذا المجلد.
 Comment[az]=Faylları bu qovluq daxilindəki mövcud repazitoriyadan almaq
 Comment[bs]=Izdvoji izlazne datoteke sa postojećeg spremišta u ovaj direktorij.
 Comment[ca]=Extreu fitxers des d'un repositori existent dins d'aquesta carpeta.
@@ -146,6 +150,7 @@ Comment[zh_TW]=從一個現有的版本庫簽出檔案到這個資料夾。
 
 [Desktop Action Export]
 Name=Export...
+Name[ar]=صدّر...
 Name[az]=İxrac etmək...
 Name[bs]=Izvezi...
 Name[ca]=Exporta...
@@ -182,6 +187,7 @@ Name[zh_TW]=匯出…
 Icon=kdesvnexport
 Exec=kdesvn exec export %U
 Comment=Checkout out an unversioned copy of a tree from a repository
+Comment[ar]=اسحب نسخة غير منقّحة لشجرة من مستودع
 Comment[az]=AArdıcıllığın versiyalanmamış nüsxəsini repazitoriyadan almaq
 Comment[bs]=Izvezi bezverzijsku kopiju stabla iz repozitorija
 Comment[ca]=Extreu una còpia sense versió d'un arbre des del repositori
@@ -217,6 +223,7 @@ Comment[zh_TW]=從版本庫簽出一個檔案樹的無版控複本
 
 [Desktop Action Update]
 Name=Update (Kdesvn)
+Name[ar]=حدّث (اس في ان لكيدي)
 Name[az]=Yenilənmə (Kdesvn)
 Name[bs]=Azuriranje(Kdesvn)
 Name[ca]=Actualitza (Kdesvn)
@@ -252,6 +259,7 @@ Exec=kdesvn exec update %U
 
 [Desktop Action Commit]
 Name=Commit (Kdesvn)
+Name[ar]=أَلزِم (اس في ان لكيدي)
 Name[az]=Göndərmək (Kdesvn)
 Name[bs]=Izvrsiti (Kdesvn)
 Name[ca]=Comet (Kdesvn)
@@ -286,6 +294,7 @@ Exec=kdesvn exec commit %U
 
 [Desktop Action Checkoutto]
 Name=Checkout from a repository...
+Name[ar]=اسحب من مستودع...
 Name[az]=Repazitoriyadan almaq...
 Name[bs]=Izdvoji iz spremišta...
 Name[ca]=Extracció des d'un repositori...
@@ -319,6 +328,7 @@ Name[zh_TW]=從版本庫簽出…
 Icon=kdesvncheckout
 Exec=kdesvn exec checkoutto %U
 Comment=Checkout out files from an existing repository into this folder.
+Comment[ar]=اسحب ملفات من مستودع موجود إلى هذا المجلد.
 Comment[az]=Faylları bu qovluq daxilindəki mövcud repazitoriyadan almaq
 Comment[bs]=Izdvoji izlazne datoteke sa postojećeg spremišta u ovaj direktorij.
 Comment[ca]=Extreu fitxers des d'un repositori existent dins d'aquesta carpeta.
@@ -354,6 +364,7 @@ Comment[zh_TW]=從一個現有的版本庫簽出檔案到這個資料夾。
 
 [Desktop Action Exportto]
 Name=Export from a Subversion repository...
+Name[ar]=صدّر من مستودع سبفيرجن...
 Name[az]=Subversion repazitoriyasından almaq...
 Name[bs]=Izvoz iz Subversion repozitorija...
 Name[ca]=Exporta des d'un repositori de Subversion...
@@ -388,6 +399,7 @@ Name[zh_TW]=從 Subversion 版本庫匯出…
 Icon=kdesvnexport
 Exec=kdesvn exec exportto %U
 Comment=Checkout out an unversioned copy of a tree from a repository
+Comment[ar]=اسحب نسخة غير منقّحة لشجرة من مستودع
 Comment[az]=AArdıcıllığın versiyalanmamış nüsxəsini repazitoriyadan almaq
 Comment[bs]=Izvezi bezverzijsku kopiju stabla iz repozitorija
 Comment[ca]=Extreu una còpia sense versió d'un arbre des del repositori

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-03 00:46+0000\n"
-"PO-Revision-Date: 2025-10-15 20:47+0300\n"
+"PO-Revision-Date: 2025-10-28 15:30+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3150,6 +3150,9 @@ msgid ""
 "replaced with the bug issue number. Example:<br/><nobr><b>http://example.com/"
 "mantis/view.php?id=%BUGID%</b></nobr>"
 msgstr ""
+"כתובת שמפנה למערכת המעקב אחר תקלות. היא חייבת להכיל <b>%BUGID%</b> שיוחלף "
+"במספר התקלה. למשל:<br/><nobr><b>https://example.com/mantis/view.php?id=%BUGID"
+"%</b></nobr>"
 
 #: src/svnfrontend/editpropsdlg.cpp:112
 #, kde-format
@@ -3158,6 +3161,8 @@ msgid ""
 "The string must contain <b>%BUGID%</b> which gets replaced with the bug "
 "issue number."
 msgstr ""
+"מחרוזת שנוספת להודעת יומן כשנכנס מספר תקלה. המחרוזת חייבת להכיל את הביטוי<b>"
+"%BUGID%</b> שיוחלף במספר הזיהוי של התקלה."
 
 #: src/svnfrontend/editpropsdlg.cpp:116
 #, kde-format

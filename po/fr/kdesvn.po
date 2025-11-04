@@ -1810,7 +1810,7 @@ msgstr ""
 "<p align=\"left\">Marquer les éléments avec un qui n'ont pas un état normal "
 "avec une icône superposée. Si vous voulez avoir un aperçu quels éléments ont "
 "des versions plus récentes dans le dépôt vous devriez activer l'option "
-"« Vérifier les mises à jour à l'ouverture » dans la boîte de dialogue "
+"« Vérifier les mises à jour à l'ouverture » dans la boite de dialogue "
 "Subversion.</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_overlays)
@@ -2173,7 +2173,7 @@ msgid ""
 "This value holds for log dialog which kind of log is used, it is internal "
 "only."
 msgstr ""
-"Cette valeur mémorise le type de rapport utilisé pour la boîte de dialogue "
+"Cette valeur mémorise le type de rapport utilisé pour la boite de dialogue "
 "de rapports. Ceci est uniquement pour usage interne."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
@@ -2433,7 +2433,7 @@ msgstr ""
 "Kdesvn lui-même n'enregistre aucun mot de passe, mais Subversion peut le "
 "faire dans sa zone de configuration. Si cette zone est lisible par autrui, "
 "vous ne devriez pas l'activer, mais vous pouvez le faire pour des comptes "
-"isolés non critiques dans la boîte de dialogue d'identification."
+"isolés non critiques dans la boite de dialogue d'identification."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_passwords_in_wallet)
 #: src/settings/subversion_settings.ui:117
@@ -2513,14 +2513,14 @@ msgstr "Lister les éléments que la prochaine publication enverra ou pas"
 #, kde-format
 msgid "Should unversioned items be displayed in commit dialog or not."
 msgstr ""
-"Les éléments non versionnés doivent-ils être affichés dans la boîte de "
+"Les éléments non versionnés doivent-ils être affichés dans la boite de "
 "dialogue de validation ou pas ?"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:187
 #, kde-format
 msgid "Hide new items in commit box"
-msgstr "Cacher les nouveaux éléments dans la boîte de publication"
+msgstr "Cacher les nouveaux éléments dans la boite de publication"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_add_as_modification)
 #: src/settings/subversion_settings.ui:197
@@ -3200,7 +3200,7 @@ msgid ""
 "This is a list which words/substrings a log entry must contain so it will be "
 "hidden from log and statistics"
 msgstr ""
-"C'est une liste des les mots ou chaînes qu'une entrée doit contenir pour "
+"C'est une liste des les mots ou chaines qu'une entrée doit contenir pour "
 "être masqué dans les messages et les statistiques"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -3396,7 +3396,7 @@ msgstr ""
 msgid ""
 "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
-"Étiquette texte à afficher dans la boîte d'édition où l'utilisateur saisit "
+"Étiquette texte à afficher dans la boite d'édition où l'utilisateur saisit "
 "le numéro de rapport."
 
 #: src/svnfrontend/editpropsdlg.cpp:108
@@ -3429,7 +3429,7 @@ msgid ""
 "<b>'false'</b>/<b>'no'</b>."
 msgstr ""
 "Choisissez <b>'yes'</b> si un avertissement doit être affiché quand aucun "
-"rapport n'est saisi dans la boîte de dialogue de publication. Valeurs "
+"rapport n'est saisi dans la boite de dialogue de publication. Valeurs "
 "possibles : « <br/><b>True</b> »  /« <b>Yes</b> » ou « <b>False</b> » / "
 "« <b>No</b> »."
 
@@ -3463,8 +3463,8 @@ msgid ""
 "to extract the bare bug ID from that string."
 msgstr ""
 "Deux expressions rationnelles séparées par un retour à la ligne.<br/>La "
-"première est utilisée pour trouver une chaîne se référant à un rapport, la "
-"seconde pour extraire l'identifiant de bug depuis cette chaîne."
+"première est utilisée pour trouver une chaine se référant à un rapport, la "
+"seconde pour extraire l'identifiant de bug depuis cette chaine."
 
 #: src/svnfrontend/editpropsdlg.cpp:136
 #, kde-format

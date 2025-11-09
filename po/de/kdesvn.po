@@ -8,20 +8,21 @@
 # SPDX-FileCopyrightText: 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021 Burkhard Lück <lueck@hube-lueck.de>
 # SPDX-FileCopyrightText: 2013 Markus Slopianka <markus.s@kdemail.net>
 # SPDX-FileCopyrightText: 2013, 2014, 2016, 2022, 2023 Frederik Schwarzer <schwarzer@kde.org>
+# SPDX-FileCopyrightText: 2025 Alexander Becker <alex-at-kde-l10n-de@freenet.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-03 00:46+0000\n"
-"PO-Revision-Date: 2023-03-12 17:28+0100\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"PO-Revision-Date: 2025-11-08 18:46+0100\n"
+"Last-Translator: Alexander Becker <alex-at-kde-l10n-de@freenet.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -41,22 +42,22 @@ msgstr "kdesvnaskpass"
 #: src/askpass/kdesvn-askpass.cpp:38
 #, kde-format
 msgid "ssh-askpass for kdesvn"
-msgstr "ssh-askpass für kdesvn."
+msgstr "ssh-askpass für kdesvn"
 
 #: src/askpass/kdesvn-askpass.cpp:40
 #, kde-format
 msgid "Copyright (c) 2005-2009 Rajko Albrecht"
-msgstr "Copyright © 2005–2009 Rajko Albrecht"
+msgstr "© 2005–2009 Rajko Albrecht"
 
 #: src/askpass/kdesvn-askpass.cpp:43
 #, kde-format
 msgid "Prompt"
-msgstr "Prompt"
+msgstr "Eingabeaufforderung"
 
 #: src/askpass/kdesvn-askpass.cpp:55
 #, kde-format
 msgid "Please enter your password below."
-msgstr "Bitte geben Sie Ihr Passwort ein."
+msgstr "Bitte geben Sie Ihr Passwort unten ein."
 
 #: src/askpass/kdesvn-askpass.cpp:75
 #, kde-format
@@ -65,57 +66,49 @@ msgid "Password"
 msgstr "Passwort"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:51
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Checkout a Repository"
+#, kde-format
 msgid "Checkout From Repository..."
-msgstr "Auslesen eines Repositorys"
+msgstr "Aus einem Repository auschecken …"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:54
-#, fuzzy, kde-format
-#| msgid "Export"
+#, kde-format
 msgid "Export..."
-msgstr "Exportieren"
+msgstr "Exportieren …"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:57
 #, kde-format
 msgid "Update (Kdesvn)"
-msgstr ""
+msgstr "Aktualisieren (kdesvn)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:60
-#, fuzzy, kde-format
-#| msgid "Commit Added"
+#, kde-format
 msgid "Commit (Kdesvn)"
-msgstr "Hinzugefügte einspielen"
+msgstr "Einspielen (kdesvn)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:63
 #, kde-format
 msgid "kdesvn log (last 100)"
-msgstr ""
+msgstr "kdesvn-Protokoll (letzte 100)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:66
-#, fuzzy, kde-format
-#| msgid "Export a repository"
+#, kde-format
 msgid "Export from a Subversion repository..."
-msgstr "Repository exportieren"
+msgstr "Aus einem Subversion-Repository exportieren …"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:69
-#, fuzzy, kde-format
-#| msgid "Checkout a repository"
+#, kde-format
 msgid "Checkout from a repository..."
-msgstr "Auslesen eines Repositorys"
+msgstr "Aus einem Repository auschecken …"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:74
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Detailed Subversion info"
-msgstr "Subversion-Admin"
+msgstr "Ausführliche Subversion-Informationen"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:77
-#, fuzzy, kde-format
-#| msgid "Added in repository"
+#, kde-format
 msgid "Add to Repository"
-msgstr "Im Repository hinzugefügt"
+msgstr "Zum Repository hinzufügen"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:80
 #: src/svnfrontend/maintreewidget.cpp:655
@@ -124,70 +117,60 @@ msgid "Check for unversioned items"
 msgstr "Nach nicht versionierten Einträgen suchen"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:83
-#, fuzzy, kde-format
-#| msgid "Delete from repository"
+#, kde-format
 msgid "Delete From Repository"
-msgstr "Aus Repository löschen"
+msgstr "Aus dem Repository löschen"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:86
-#, fuzzy, kde-format
-#| msgid "Revert current changes"
+#, kde-format
 msgid "Revert Local Changes"
-msgstr "Aktuelle Änderungen zurücknehmen"
+msgstr "Lokale Änderungen zurücknehmen"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:89
-#, fuzzy, kde-format
-#| msgid "Rename"
+#, kde-format
 msgid "Rename..."
-msgstr "Umbenennen"
+msgstr "Umbenennen …"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:92
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Export a Repository"
+#, kde-format
 msgid "Import Repository"
-msgstr "Repository exportieren"
+msgstr "Repository importieren"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:97
-#, fuzzy, kde-format
-#| msgid "Switch URL"
+#, kde-format
 msgid "Switch..."
-msgstr "URL wechseln"
+msgstr "Wechseln …"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:100
 #: src/svnfrontend/maintreewidget.cpp:826
 #, kde-format
 msgid "Merge..."
-msgstr "Zusammenführen ..."
+msgstr "Zusammenführen …"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:105
-#, fuzzy, kde-format
-#| msgid "Blame"
+#, kde-format
 msgid "Blame..."
-msgstr "Blame"
+msgstr "Blame …"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:108
 #, kde-format
 msgid "Create Patch..."
-msgstr ""
+msgstr "Patch erstellen …"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:113
-#, fuzzy, kde-format
-#| msgid "Diff local changes"
+#, kde-format
 msgid "Diff (local)"
 msgstr "Lokale Änderungen anzeigen"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:116
-#, fuzzy, kde-format
-#| msgid "Full revision tree"
+#, kde-format
 msgid "Display revision tree"
-msgstr "Kompletter Revisionsbaum"
+msgstr "Revisionsbaum anzeigen"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:127
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Subversion (kdesvn)"
-msgstr "Subversion-Admin"
+msgstr "Subversion (kdesvn)"
 
 #: src/kdesvn.cpp:82
 #, kde-format
@@ -202,7 +185,7 @@ msgstr "Neues Repository erstellen und öffnen"
 #: src/kdesvn.cpp:107
 #, kde-format
 msgid "Create and opens a new local Subversion repository"
-msgstr "Erzeugt und öffnet ein neues lokales Subversion-Repository"
+msgstr "Ein neues lokales Subversion-Repository erstellen und öffnen"
 
 #: src/kdesvn.cpp:110
 #, kde-format
@@ -212,7 +195,7 @@ msgstr "Repository in eine Datei archivieren"
 #: src/kdesvn.cpp:111
 #, kde-format
 msgid "Dump a Subversion repository to a file"
-msgstr "Archiviert ein Subversion-Repository in eine Datei"
+msgstr "Ein Subversion-Repository in eine Datei archivieren"
 
 #: src/kdesvn.cpp:114
 #, kde-format
@@ -222,7 +205,8 @@ msgstr "Hotcopy eines Repositorys"
 #: src/kdesvn.cpp:115
 #, kde-format
 msgid "Hotcopy a Subversion repository to a new folder"
-msgstr "Erstellt eine Kopie eines Subversion-Repositorys in einem neuen Ordner"
+msgstr ""
+"Eine Kopie eines Subversion-Repositorys in einem neuen Ordner erstellen"
 
 #: src/kdesvn.cpp:118
 #, kde-format
@@ -232,19 +216,19 @@ msgstr "Abzug in ein Repository laden"
 #: src/kdesvn.cpp:119
 #, kde-format
 msgid "Load a dump file into a repository."
-msgstr "Lädt ein Abzugsdatei in ein Repository"
+msgstr "Eine Abzugsdatei in ein Repository laden."
 
 #: src/kdesvn.cpp:122
 #, kde-format
 msgid "Add ssh identities to ssh-agent"
-msgstr "SSH-Identitäten zum SSH-Agenten hinzufügen"
+msgstr "SSH-Identitäten zu „ssh-agent“ hinzufügen"
 
 #: src/kdesvn.cpp:123
 #, kde-format
 msgid "Force add ssh-identities to ssh-agent for future use."
 msgstr ""
-"Erzwingt das Hinzufügen der SSH-Identitäten zum SSH-Agenten für zukünftige "
-"Nutzung."
+"Die SSH-Identitäten werden zum Programm „ssh-agent“ für zukünftige Nutzung "
+"hinzugefügt."
 
 #: src/kdesvn.cpp:126
 #, kde-format
@@ -255,8 +239,8 @@ msgstr "Info über kdesvn-Part"
 #, kde-format
 msgid "Shows info about the kdesvn plugin and not the standalone application."
 msgstr ""
-"Zeigt Informationen über das kdesvn-Modul und nicht über die "
-"Einzelapplikation."
+"Zeigt Informationen über das kdesvn-Modul (nicht über die eigenständige "
+"Anwendung)."
 
 #: src/kdesvn.cpp:130
 #, kde-format
@@ -266,7 +250,7 @@ msgstr "Inhalt der Datenbank anzeigen"
 #: src/kdesvn.cpp:131
 #, kde-format
 msgid "Show the content of log cache database"
-msgstr "Zeigt den Inhalt der Datenbank für den Protokoll-Zwischenspeicher"
+msgstr "Den Inhalt der Datenbank des Protokoll-Zwischenspeichers anzeigen"
 
 #: src/kdesvn.cpp:138
 #, kde-format
@@ -296,8 +280,8 @@ msgstr "Zuletzt geöffnete URL beim Starten öffnen"
 #, kde-format
 msgid "Reload last opened URL if no one is given on command line"
 msgstr ""
-"Zuletzt geöffnete URL erneut laden, wenn keine andere auf der Befehlszeile "
-"angegeben wurde."
+"Zuletzt geöffnete URL erneut laden, wenn keine andere in der Befehlszeile "
+"angegeben wurde"
 
 #: src/kdesvn.cpp:295
 #, kde-format
@@ -336,17 +320,17 @@ msgstr "Online arbeiten"
 #: src/kdesvn_part.cpp:183
 #, kde-format
 msgid "Configure Kdesvn..."
-msgstr "Kdesvn einrichten..."
+msgstr "kdesvn einrichten …"
 
 #: src/kdesvn_part.cpp:187
 #, kde-format
 msgid "About kdesvn part"
-msgstr "Über kdesvn-Part"
+msgstr "Über kdesvn-Modul"
 
 #: src/kdesvn_part.cpp:191
 #, kde-format
 msgid "Kdesvn Handbook"
-msgstr "Kdesvn-Handbuch"
+msgstr "kdesvn-Handbuch"
 
 #: src/kdesvn_part.cpp:282
 #, kde-format
@@ -360,7 +344,7 @@ msgstr ""
 #: src/kdesvn_part.cpp:285
 #, kde-format
 msgid "kdesvn Part"
-msgstr "kdesvn-Part"
+msgstr "kdesvn-Modul"
 
 #: src/kdesvn_part.cpp:287
 #, kde-format
@@ -373,8 +357,8 @@ msgid ""
 "(C) 2005-2009 Rajko Albrecht,\n"
 "(C) 2015-2018 Christian Ehrlicher"
 msgstr ""
-"Copyright 2005–2009 Rajko Albrecht,\n"
-"Copyright 2015-2018 Christian Ehrlicher"
+"© 2005–2009 Rajko Albrecht,\n"
+"© 2015–2018 Christian Ehrlicher"
 
 #: src/kdesvn_part.cpp:292
 #, kde-format
@@ -417,17 +401,17 @@ msgstr "Zeitlich festgelegte Aufträge"
 #: src/kdesvn_part.cpp:331
 #, kde-format
 msgid "Settings for timed jobs"
-msgstr "Einstellungen zeitlich festgelegte Jobs"
+msgstr "Einstellungen für zeitlich festgelegte Aufträge"
 
 #: src/kdesvn_part.cpp:332
 #, kde-format
 msgid "Diff & Merge"
-msgstr "Vergleich & Zusammenführen"
+msgstr "Vergleichen & Zusammenführen"
 
 #: src/kdesvn_part.cpp:332
 #, kde-format
 msgid "Settings for diff and merge"
-msgstr "Einstellungen für Vergleich und Zusammenführen"
+msgstr "Einstellungen für Vergleichen und Zusammenführen"
 
 #: src/kdesvn_part.cpp:333
 #, kde-format
@@ -451,12 +435,14 @@ msgid "Revision tree"
 msgstr "Revisionsbaum"
 
 #: src/kdesvn_part.cpp:336
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "KIO / Command line"
 msgid "KIO / Command line"
 msgstr "Ein-/Ausgabemodul / Befehlszeile"
 
 #: src/kdesvn_part.cpp:338
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Settings for command line and KIO execution"
 msgid "Settings for command line and KIO execution"
 msgstr ""
 "Einstellungen für die Ausführung per Befehlszeile und Ein-/Ausgabemodule"
@@ -539,7 +525,7 @@ msgstr "Eine Datei mit einem #PKCS12-Zertifikat öffnen"
 #: src/kdesvnd/kdesvnd.cpp:336
 #, kde-format
 msgid "Current task"
-msgstr "Aktuelle Aufgabe"
+msgstr "Aktueller Auftrag"
 
 #: src/kdesvnd/kdesvnd.cpp:348
 #, kde-format
@@ -602,7 +588,9 @@ msgid "Hotcopy finished."
 msgstr "Hotcopy beendet."
 
 #: src/kdesvnview.cpp:284
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Load a Repository From an svndump"
 msgctxt "@title:window"
 msgid "Load a Repository From an svndump"
 msgstr "Lädt einen SVN-Abzug in ein Repository:"
@@ -616,7 +604,7 @@ msgstr "Abzug laden"
 #: src/kdesvnview.cpp:334
 #, kde-format
 msgid "Loading a dump into a repository."
-msgstr "Es wird ein Abzug in ein Repository geladen."
+msgstr "Ein Abzug wird in ein Repository geladen."
 
 #: src/kdesvnview.cpp:336
 #, kde-format
@@ -638,7 +626,7 @@ msgstr "Abzug erstellen"
 #: src/kdesvnview.cpp:386
 #, kde-format
 msgid "Dumping a repository"
-msgstr "Es wird ein Abzug eines Repositorys erstellt"
+msgstr "Ein Abzug eines Repositorys wird erstellt"
 
 #: src/kdesvnview.cpp:388
 #, kde-format
@@ -985,7 +973,7 @@ msgstr "Oder einen der letzten verwenden:"
 #: src/ksvnwidgets/commitmessage.ui:215
 #, kde-format
 msgid "Insert Text File..."
-msgstr "Textdatei einfügen ..."
+msgstr "Textdatei einfügen …"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_keepLocksButton)
 #: src/ksvnwidgets/commitmessage.ui:226
@@ -1305,8 +1293,8 @@ msgid ""
 "(C) 2005-2009 Rajko Albrecht,\n"
 "(C) 2015-2019 Christian Ehrlicher"
 msgstr ""
-"Copyright 2005–2009 Rajko Albrecht,\n"
-"Copyright 2015-2019 Christian Ehrlicher"
+"© 2005–2009 Rajko Albrecht,\n"
+"© 2015–2019 Christian Ehrlicher"
 
 #: src/main.cpp:43
 #, kde-format
@@ -1394,7 +1382,7 @@ msgstr "Minimale Anzahl anzuzeigender Protokoll-Zeilen:"
 msgid ""
 "The minimum a log output must contain before kdesvn shows a single log window"
 msgstr ""
-"Die minimale Anzahl von Zeilen die ein Protokoll enthalten muss, bevor "
+"Die minimale Anzahl von Zeilen, die ein Protokoll enthalten muss, bevor "
 "kdesvn ein einzelnes Protokoll-Fenster anzeigt."
 
 #. i18n: ectx: property (specialValueText), widget (QSpinBox, kcfg_cmdline_log_minline)
@@ -4247,7 +4235,7 @@ msgstr "Ausgabe des Inhalts von angegebenen Dateien oder URLs."
 #: src/svnfrontend/maintreewidget.cpp:603
 #, kde-format
 msgid "Cat revision..."
-msgstr "Revision ausgeben ..."
+msgstr "Revision ausgeben …"
 
 #: src/svnfrontend/maintreewidget.cpp:608
 #, kde-format
@@ -4445,7 +4433,7 @@ msgstr "Aktualisieren"
 #: src/svnfrontend/maintreewidget.cpp:765
 #, kde-format
 msgid "Update to revision..."
-msgstr "Auf Revision aktualisieren ..."
+msgstr "Auf Revision aktualisieren …"
 
 #: src/svnfrontend/maintreewidget.cpp:771
 #: src/svnfrontend/maintreewidget.cpp:776
@@ -4525,7 +4513,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:1461
 #, kde-format
 msgid "Open With..."
-msgstr "Öffnen mit ..."
+msgstr "Öffnen mit …"
 
 #: src/svnfrontend/maintreewidget.cpp:836
 #, kde-format
@@ -4588,7 +4576,7 @@ msgstr "Dateibaum ausklappen"
 #: src/svnfrontend/maintreewidget.cpp:882
 #, kde-format
 msgid "Opens all branches of the file tree"
-msgstr "Öffnet alle Verzweigungen des Dateibaums"
+msgstr "Öffnet alle Zweige des Dateibaums"
 
 #: src/svnfrontend/maintreewidget.cpp:883
 #, kde-format
@@ -4598,7 +4586,7 @@ msgstr "Dateibaum einklappen"
 #: src/svnfrontend/maintreewidget.cpp:884
 #, kde-format
 msgid "Closes all branches of the file tree"
-msgstr "Schließt alle Verzweigungen des Dateibaums"
+msgstr "Schließt alle Zweige des Dateibaums"
 
 #: src/svnfrontend/maintreewidget.cpp:887
 #: src/svnfrontend/maintreewidget.cpp:1081
@@ -4991,7 +4979,7 @@ msgstr "Gesperrt von"
 #: src/svnfrontend/opencontextmenu.cpp:59
 #, kde-format
 msgid "Other..."
-msgstr "Andere ..."
+msgstr "Andere …"
 
 #: src/svnfrontend/propertiesdlg.cpp:80
 #, kde-format

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-03 00:46+0000\n"
-"PO-Revision-Date: 2025-10-31 14:56+0200\n"
+"PO-Revision-Date: 2025-11-10 14:37+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 25.08.2\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2289,7 +2289,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:125
 #, kde-format
 msgid "Store passwords into KDE Wallet"
-msgstr ""
+msgstr "אחסון סיסמאות בארנק של KDE"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_password_cache)
 #: src/settings/subversion_settings.ui:135
@@ -2328,7 +2328,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:187
 #, kde-format
 msgid "Hide new items in commit box"
-msgstr ""
+msgstr "הסתרת פריטים חדשים בתיבת קיבוע"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_add_as_modification)
 #: src/settings/subversion_settings.ui:197
@@ -2399,41 +2399,41 @@ msgstr ""
 #: src/svnfrontend/blamedisplay.cpp:184 src/svnfrontend/blamedisplay.cpp:194
 #, kde-format
 msgid "Log message for revision"
-msgstr ""
+msgstr "הודעת יומן למהדורה"
 
 #: src/svnfrontend/blamedisplay.cpp:188
 #, kde-format
 msgid "Go to line"
-msgstr ""
+msgstr "מעבר לשורה"
 
 #: src/svnfrontend/blamedisplay.cpp:320
 #, kde-format
 msgid "Show line"
-msgstr ""
+msgstr "הצגת שורה"
 
 #: src/svnfrontend/blamedisplay.cpp:320
 #, kde-format
 msgid "Show line number"
-msgstr ""
+msgstr "הצגת מספר שורה"
 
 #: src/svnfrontend/blamedisplay.cpp:356
 #, kde-format
 msgctxt "@title:window"
 msgid "Log Message for Revision %1"
-msgstr ""
+msgstr "הודעת יומן למהדורה %1"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #: src/svnfrontend/blamedisplay.ui:40
 #, kde-format
 msgid "Line"
-msgstr ""
+msgstr "שורה"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #: src/svnfrontend/blamedisplay.ui:45
 #: src/svnfrontend/models/logitemmodel.cpp:173
 #, kde-format
 msgid "Revision"
-msgstr ""
+msgstr "מהדורה"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #. i18n: ectx: property (text), widget (QRadioButton, m_startDateButton)
@@ -2444,30 +2444,30 @@ msgstr ""
 #: src/svnfrontend/models/logitemmodel.cpp:177
 #, kde-format
 msgid "Date"
-msgstr ""
+msgstr "תאריך"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #: src/svnfrontend/blamedisplay.ui:55
 #: src/svnfrontend/models/logitemmodel.cpp:175
 #, kde-format
 msgid "Author"
-msgstr ""
+msgstr "יוצר/ת"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #: src/svnfrontend/blamedisplay.ui:60
 #, kde-format
 msgid "Content"
-msgstr ""
+msgstr "תוכן"
 
 #: src/svnfrontend/ccontextlistener.cpp:66
 #, kde-format
 msgid "Add to revision control"
-msgstr ""
+msgstr "הוספה לבקרת מהדורות"
 
 #: src/svnfrontend/ccontextlistener.cpp:69
 #, kde-format
 msgid "Restore missing"
-msgstr ""
+msgstr "שחזור חסרים"
 
 #: src/svnfrontend/ccontextlistener.cpp:70
 #, kde-format
@@ -2817,13 +2817,13 @@ msgstr ""
 #: src/svnfrontend/createrepodlg.ui:145
 #, kde-format
 msgid "Compatible to Subversion prior 1.5"
-msgstr ""
+msgstr "תואם ל־Subversion טרום 1.5"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn18compat)
 #: src/svnfrontend/createrepodlg.ui:162
 #, kde-format
 msgid "Is created repository compatible to Subversion prior 1.8"
-msgstr ""
+msgstr "האם המאגר שנוצר תואם ל־Subversion טרום 1.8"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn18compat)
 #: src/svnfrontend/createrepodlg.ui:165
@@ -2837,7 +2837,7 @@ msgstr ""
 #: src/svnfrontend/createrepodlg.ui:168
 #, kde-format
 msgid "Compatible to Subversion prior 1.8"
-msgstr ""
+msgstr "תואם ל־Subversion טרום 1.8"
 
 #: src/svnfrontend/database/dboverview.cpp:113
 #, kde-format

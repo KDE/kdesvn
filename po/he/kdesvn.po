@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-03 00:46+0000\n"
-"PO-Revision-Date: 2025-11-11 08:58+0200\n"
+"PO-Revision-Date: 2025-11-16 15:47+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -2850,6 +2850,8 @@ msgid ""
 "Really clean cache for repository\n"
 "%1?"
 msgstr ""
+"לפנות את המטמון למאגר\n"
+"%1?"
 
 #: src/svnfrontend/database/dboverview.cpp:130
 #, kde-format
@@ -2973,6 +2975,8 @@ msgid ""
 "This is a list which words/substrings a log entry must contain so it will be "
 "hidden from log and statistics"
 msgstr ""
+"זאת רשימה של אילו מילים/תת־מחרוזות חייבת להכיל שורת יומן כדי שתוסתר מהיומן "
+"ומהסטטיסטיקה"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/svnfrontend/database/dbsettings.ui:98
@@ -2985,7 +2989,7 @@ msgstr "לא להציג קיבועים מהמשתמשים הבאים"
 #, kde-format
 msgid ""
 "Do not display commits of listed users in log window and statistics view"
-msgstr ""
+msgstr "לא להציג קיבועים של המשתמשים המופיעים בחלון היומן ובתצוגת הסטטיסטיקה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dbcfg_filter_empty_author)
 #: src/svnfrontend/database/dbsettings.ui:115
@@ -3195,6 +3199,9 @@ msgid ""
 "used to find a string referring to an issue, the second expression is used "
 "to extract the bare bug ID from that string."
 msgstr ""
+"שני ביטויים רגולריים מופרדים בשורה חדשה.<br/>הביטוי הראשון משמש לאיתור "
+"מחרוזת שקשורה בתקלה, הביטוי השני משמש לחילוץ מזהה התקלה הפשוט מתוך המחרוזת "
+"הזאת."
 
 #: src/svnfrontend/editpropsdlg.cpp:136
 #, kde-format
@@ -3228,7 +3235,7 @@ msgstr "ערך מאפיין:"
 #: src/svnfrontend/editpropsdlg.ui:69
 #, kde-format
 msgid "Click for short info about pre-defined property name"
-msgstr ""
+msgstr "לחיצה תציג פרטים מקוצרים על שם מאפיין שהוגדר מראש"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, CheckoutInfo)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:14
@@ -3276,7 +3283,7 @@ msgstr "לדרוס את הקיימים"
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:93
 #, kde-format
 msgid "Ignore keywords"
-msgstr ""
+msgstr "התעלמות ממילות מפתח"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_CreateDirButton)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:110
@@ -3633,7 +3640,7 @@ msgstr ""
 #: src/svnfrontend/importdir_logmsg.cpp:38
 #, kde-format
 msgid "If set, add files or directories that match ignore patterns."
-msgstr ""
+msgstr "אם הוגדר, להוסיף קבצים או תיקיות שעונים על תבניות ההחרגה."
 
 #: src/svnfrontend/importdir_logmsg.cpp:43
 #, kde-format

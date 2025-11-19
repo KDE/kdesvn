@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2025-11-16 15:47+0200\n"
+"PO-Revision-Date: 2025-11-18 08:59+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -1168,27 +1168,27 @@ msgstr ""
 #: src/ksvnwidgets/ssltrustprompt.cpp:33
 #, kde-format
 msgid "Accept permanently"
-msgstr ""
+msgstr "קבלה לצמיתות"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:34
 #, kde-format
 msgid "Accept temporarily"
-msgstr ""
+msgstr "קבלה באופן זמני"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:35
 #, kde-format
 msgid "Reject"
-msgstr ""
+msgstr "דחייה"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:46
 #, kde-format
 msgid "Error validating server certificate for '%1'"
-msgstr ""
+msgstr "שגיאה באימות אישור עבור השרת ‚%1’"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:71
 #, kde-format
 msgid "Failure reasons"
-msgstr ""
+msgstr "סיבות לכשל"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:79
 #, kde-format
@@ -1198,7 +1198,7 @@ msgstr ""
 #: src/ksvnwidgets/ssltrustprompt.cpp:80
 #, kde-format
 msgid "Host"
-msgstr ""
+msgstr "מארח"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:81
 #, kde-format
@@ -1213,28 +1213,28 @@ msgstr "תקף עד"
 #: src/ksvnwidgets/ssltrustprompt.cpp:83
 #, kde-format
 msgid "Issuer name"
-msgstr ""
+msgstr "שם המנפיק"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:84
 #, kde-format
 msgid "Fingerprint"
-msgstr ""
+msgstr "טביעת אצבע"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, SslTrustPrompt)
 #: src/ksvnwidgets/ssltrustprompt.ui:14
 #, kde-format
 msgid "Trust SSL certificate"
-msgstr ""
+msgstr "מתן אמון באישור SSL"
 
 #: src/main.cpp:38
 #, kde-format
 msgid "kdesvn"
-msgstr ""
+msgstr "kdesvn"
 
 #: src/main.cpp:40
 #, kde-format
 msgid "A Subversion Client by KDE (standalone application)"
-msgstr ""
+msgstr "לקוח Subversion מבית KDE (יישום עצמאי)"
 
 #: src/main.cpp:42
 #, kde-format
@@ -1242,21 +1242,23 @@ msgid ""
 "(C) 2005-2009 Rajko Albrecht,\n"
 "(C) 2015-2019 Christian Ehrlicher"
 msgstr ""
+"‏(C) 2005‏-2009 רייקו אלברכט,\n"
+"‏(C) 2015‏-2019 כריסטיאן ארלישר"
 
 #: src/main.cpp:43
 #, kde-format
 msgid "Rajko Albrecht"
-msgstr ""
+msgstr "רייקו אלברכט"
 
 #: src/main.cpp:44
 #, kde-format
 msgid "Christian Ehrlicher"
-msgstr ""
+msgstr "כריסטיאן ארלישר"
 
 #: src/main.cpp:49
 #, kde-format
 msgid "Execute single Subversion command on specific revision(-range)"
-msgstr ""
+msgstr "הרצת פקודת Subversion בודדת על מהדורה(-טווח) מסוימים"
 
 #: src/main.cpp:49
 #, kde-format
@@ -1266,32 +1268,32 @@ msgstr ""
 #: src/main.cpp:50
 #, kde-format
 msgid "Ask for revision when executing single command"
-msgstr ""
+msgstr "לבקש מהדורה בעת הרצת פקודה בודדת"
 
 #: src/main.cpp:51
 #, kde-format
 msgid "Force operation"
-msgstr ""
+msgstr "אילוץ פעולה"
 
 #: src/main.cpp:52
 #, kde-format
 msgid "Save output of Subversion command (eg \"cat\") into file <file>"
-msgstr ""
+msgstr "לשמור את פלט פקודת ה־Subversion (למשל: „cat”) לתוך הקובץ <קובץ>"
 
 #: src/main.cpp:52
 #, kde-format
 msgid "<file>"
-msgstr ""
+msgstr "<קובץ>"
 
 #: src/main.cpp:53
 #, kde-format
 msgid "Limit log output to <number>"
-msgstr ""
+msgstr "הגבלת פלט היומן ל<מספר>"
 
 #: src/main.cpp:53
 #, kde-format
 msgid "<number>"
-msgstr ""
+msgstr "<מספר>"
 
 #: src/main.cpp:54
 #, kde-format
@@ -1301,7 +1303,7 @@ msgstr ""
 #: src/main.cpp:55
 #, kde-format
 msgid "Document to open"
-msgstr ""
+msgstr "מסמך לפתיחה"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_cmdline_show_logwindow)
 #: src/settings/cmdexecsettings.ui:11
@@ -1319,7 +1321,7 @@ msgstr ""
 #: src/settings/cmdexecsettings.ui:23
 #, kde-format
 msgid "Minimum log lines to show:"
-msgstr ""
+msgstr "הכמות המזערית של שורות יומן להצגה:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_cmdline_log_minline)
 #: src/settings/cmdexecsettings.ui:33
@@ -1333,7 +1335,7 @@ msgstr ""
 #, kde-format
 msgctxt "no limit"
 msgid "No minimum"
-msgstr ""
+msgstr "אין כמות מזערית"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_contextmenu)
 #: src/settings/cmdexecsettings.ui:51
@@ -1345,7 +1347,7 @@ msgstr ""
 #: src/settings/cmdexecsettings.ui:54
 #, kde-format
 msgid "Do not display context menu in Konqueror"
-msgstr ""
+msgstr "לא להציג תפריט הקשר ב־Konqueror"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
 #: src/settings/cmdexecsettings.ui:61
@@ -1359,25 +1361,25 @@ msgstr ""
 #: src/settings/cmdexecsettings.ui:64
 #, kde-format
 msgid "Do not display entries in toplevel action menu"
-msgstr ""
+msgstr "לא להציג רשומות בתפריט הפעולות ברמה העליונה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_kio_use_standard_logmsg)
 #: src/settings/cmdexecsettings.ui:71
 #, kde-format
 msgid "KIO operations use standard log message"
-msgstr ""
+msgstr "פעולות KIO משתמשות בהודעות יומן רגילות"
 
 #. i18n: ectx: property (text), widget (QLabel, stdLogmsgLabel)
 #: src/settings/cmdexecsettings.ui:80
 #, kde-format
 msgid "Standard message:"
-msgstr ""
+msgstr "הודעות רגילות:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_kio_can_overwrite)
 #: src/settings/cmdexecsettings.ui:98
 #, kde-format
 msgid "Can KIO overwrite existing files?"
-msgstr ""
+msgstr "האם KIO יכול לשכתב קבצים קיימים?"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_kio_can_overwrite)
 #: src/settings/cmdexecsettings.ui:103
@@ -1394,7 +1396,7 @@ msgstr ""
 #: src/settings/cmdexecsettings.ui:106
 #, kde-format
 msgid "KIO can overwrite"
-msgstr ""
+msgstr "‏KIO יכול לכתוב"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_display_dockmsg)
 #: src/settings/cmdexecsettings.ui:113
@@ -1726,13 +1728,13 @@ msgstr ""
 #: src/settings/display_settings.ui:70
 #, kde-format
 msgid "Show file info"
-msgstr ""
+msgstr "הצגת פרטי קובץ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_colored_blame)
 #: src/settings/display_settings.ui:77
 #, kde-format
 msgid "Display colored annotate"
-msgstr ""
+msgstr "הצגת פירוש בצבעים"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_show_navigation_panel)
 #: src/settings/display_settings.ui:84
@@ -1745,18 +1747,20 @@ msgstr "להשתמש בלוח ניווט"
 #, kde-format
 msgid "Set if items sortorder should be case sensitive or not"
 msgstr ""
+"הגדרה האם סדר המיון (sortorder) צריך להתחשב באותיות קטנות גדולות (רישיות) או "
+"לא"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:13
 #, kde-format
 msgid "Size of the icons"
-msgstr ""
+msgstr "גודל הסמלים"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:17
 #, kde-format
 msgid "Show file information in tooltip"
-msgstr ""
+msgstr "הצגת הפרטים בחלונית הצצה"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:21
@@ -1774,64 +1778,64 @@ msgstr "להשתמש בתוכנית חיצונית להצגת הבדלים"
 #: src/settings/kdesvn_part.kcfg:37
 #, kde-format
 msgid "Diff ignores all white space"
-msgstr ""
+msgstr "ההבדלים מתעלמים מכל סוגי הרווחים"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:41
 #, kde-format
 msgid "Show diff in Git format"
-msgstr ""
+msgstr "הצגת הבדלים בתצורת Git"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:49
 #, kde-format
 msgid "Maximum number of log messages"
-msgstr ""
+msgstr "מספר ההודעות המרבי ביומן"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:53
 #, kde-format
 msgid "Display colored blame lines"
-msgstr ""
+msgstr "הצגת שורות אשמה בצבע"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:68
 #, kde-format
 msgid "Display icon overlays"
-msgstr ""
+msgstr "הצגת שכבת סמלי על"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:72
 #, kde-format
 msgid "Get item information recursively"
-msgstr ""
+msgstr "קבלת פרטי הפריט בנסיגה"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_review_commit)
 #: src/settings/kdesvn_part.kcfg:76 src/settings/subversion_settings.ui:174
 #, kde-format
 msgid "Review items before commit"
-msgstr ""
+msgstr "לסקור פריט לפני קיבועו"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:88
 #, kde-format
 msgid "Hide versioned unchanged files"
-msgstr ""
+msgstr "הסתרת קבצים מתועדים שלא השתנו"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_follows_nodes)
 #: src/settings/kdesvn_part.kcfg:92 src/settings/subversion_settings.ui:145
 #, kde-format
 msgid "Log follows node changes"
-msgstr ""
+msgstr "היומן עוקב אחר השינויים במפרקים"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_always_list_changed_files)
 #: src/settings/kdesvn_part.kcfg:96 src/settings/subversion_settings.ui:161
 #, kde-format
 msgid "Log always reads list of changed files"
-msgstr ""
+msgstr "היומן תמיד קורא את רשימת הקבצים שהשתנו"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:100
@@ -1874,13 +1878,13 @@ msgstr ""
 #: src/settings/kdesvn_part.kcfg:124 src/settings/subversion_settings.ui:107
 #, kde-format
 msgid "Store passwords for remote connections"
-msgstr ""
+msgstr "אחסון סיסמאות לחיבורים מרוחקים"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:128
 #, kde-format
 msgid "Store passwords in KDE Wallet instead of Subversion' storage"
-msgstr ""
+msgstr "אחסון סיסמאות בארנק של KDE במקום באחסון של Subversion"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_password_cache)
@@ -1893,7 +1897,7 @@ msgstr "להשתמש במטמון סיסמאות פנימי"
 #: src/settings/kdesvn_part.kcfg:136
 #, kde-format
 msgid "Is networking enabled"
-msgstr ""
+msgstr "האם התקשורת פעילה"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:140
@@ -2243,13 +2247,13 @@ msgstr ""
 #: src/settings/subversion_settings.ui:91
 #, kde-format
 msgid "Always get properties on networked repositories"
-msgstr ""
+msgstr "תמיד לקבל מאפיינים על מאגרים שמקושרים ברשת"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:101
 #, kde-format
 msgid "Should Subversion store passwords by default"
-msgstr ""
+msgstr "האם על Subversion לאחסן סיסמאות כברירת מחדל"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:104
@@ -2261,6 +2265,10 @@ msgid ""
 "you may select for single non critical accounts inside the authentication "
 "dialog."
 msgstr ""
+"אחסון סיסמאות היא בדרך כלל בעיית אבטחה. Kdesvn עצמו לא מאחסן סיסמאות, אלא "
+"Subversion עצמו בתוך אזור ההגדרות של Subversion. אם האזור הזה נגיש לאחרים "
+"עדיף לא להגדיר אותו, אך ניתן לבחור חשבונות בודדים לא משמעותיים בחלונית "
+"האימות."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_passwords_in_wallet)
 #: src/settings/subversion_settings.ui:117
@@ -2301,7 +2309,7 @@ msgstr "להשתמש במטמון סיסמאות פנימי"
 #: src/settings/subversion_settings.ui:155
 #, kde-format
 msgid "Read detailed change lists"
-msgstr ""
+msgstr "הצגת רשימות השינויים המפורטות"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_log_always_list_changed_files)
 #: src/settings/subversion_settings.ui:158
@@ -2316,7 +2324,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:171
 #, kde-format
 msgid "List items next commit will send or not"
-msgstr ""
+msgstr "הצגת פריטים שהקיבוע הבא ישלח או לא"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:184
@@ -2368,17 +2376,17 @@ msgstr ""
 #: src/svnfrontend/background/fillcachethread.cpp:78
 #, kde-format
 msgid "Filling log cache in background."
-msgstr ""
+msgstr "יומן המטמון מתמלא ברקע."
 
 #: src/svnfrontend/background/fillcachethread.cpp:100
 #, kde-format
 msgid "Filling cache canceled."
-msgstr ""
+msgstr "מילוי המטמון בוטל."
 
 #: src/svnfrontend/background/fillcachethread.cpp:115
 #, kde-format
 msgid "Cache filled up to revision %1."
-msgstr ""
+msgstr "המטמון התמלא עד מהדורה %1."
 
 #: src/svnfrontend/background/fillcachethread.cpp:122
 #, kde-format
@@ -2394,7 +2402,7 @@ msgstr "הועברו %1 מתוך %2."
 #: src/svnfrontend/stopdlg.cpp:198
 #, kde-format
 msgid "%1 transferred."
-msgstr ""
+msgstr "%1 הועבר."
 
 #: src/svnfrontend/blamedisplay.cpp:184 src/svnfrontend/blamedisplay.cpp:194
 #, kde-format
@@ -2599,7 +2607,7 @@ msgstr ""
 #: src/svnfrontend/ccontextlistener.cpp:339
 #, kde-format
 msgid "The certificate hostname does not match."
-msgstr ""
+msgstr "שם המארח של האישור לא תואם."
 
 #: src/svnfrontend/ccontextlistener.cpp:342
 #, kde-format
@@ -2656,12 +2664,12 @@ msgstr "„GET” דורש קובץ פלט"
 #: src/svnfrontend/commandexec.cpp:591
 #, kde-format
 msgid "May only switch one URL at time"
-msgstr ""
+msgstr "יכול להחליף רק כתובת אחת כל פעם"
 
 #: src/svnfrontend/commandexec.cpp:595
 #, kde-format
 msgid "Switch only on working copies"
-msgstr ""
+msgstr "להחליף רק בעותקי עבודה"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, CopyMoveView)
 #: src/svnfrontend/copymoveview.ui:14

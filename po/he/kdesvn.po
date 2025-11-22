@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2025-11-20 18:44+0200\n"
+"PO-Revision-Date: 2025-11-21 13:11+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -1619,73 +1619,73 @@ msgstr ""
 #: src/settings/dispcolor_settings.ui:56
 #, kde-format
 msgid "Locked items:"
-msgstr ""
+msgstr "פריטים נעולים:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
 #: src/settings/dispcolor_settings.ui:76
 #, kde-format
 msgid "Not versioned items:"
-msgstr ""
+msgstr "פריטים לא מתועדים:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: src/settings/dispcolor_settings.ui:89
 #, kde-format
 msgid "Remote changed items:"
-msgstr ""
+msgstr "הסרת פריטים שהשתנו:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: src/settings/dispcolor_settings.ui:102
 #, kde-format
 msgid "Added items:"
-msgstr ""
+msgstr "פריטים שנוספו:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: src/settings/dispcolor_settings.ui:115
 #, kde-format
 msgid "Deleted items:"
-msgstr ""
+msgstr "פריטים שנמחקו:"
 
 #. i18n: ectx: property (text), widget (QLabel, Conflicted_items_label)
 #: src/settings/dispcolor_settings.ui:156
 #, kde-format
 msgid "Conflicted items:"
-msgstr ""
+msgstr "פריטים סותרים:"
 
 #. i18n: ectx: property (text), widget (QLabel, Missed_items_label)
 #: src/settings/dispcolor_settings.ui:169
 #, kde-format
 msgid "Missed items:"
-msgstr ""
+msgstr "פריטים חסרים:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: src/settings/dispcolor_settings.ui:182
 #, kde-format
 msgid "Local changed items:"
-msgstr ""
+msgstr "פריטים שהשתנו מקומית:"
 
 #. i18n: ectx: property (text), widget (QLabel, Need_lock_label_2)
 #: src/settings/dispcolor_settings.ui:195
 #, kde-format
 msgid "Item needs lock:"
-msgstr ""
+msgstr "פריט שדורש נעילה:"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DisplaySettings)
 #: src/settings/display_settings.ui:6
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "הגדרות"
 
 #. i18n: ectx: property (text), widget (QLabel, m_ListIconsSize_label)
 #: src/settings/display_settings.ui:14
 #, kde-format
 msgid "Size of Listviewicons"
-msgstr ""
+msgstr "גודל סמלי תצוגת רשומה"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_display_overlays)
 #: src/settings/display_settings.ui:24
 #, kde-format
 msgid "Mark Subversion states with an overlayed icon"
-msgstr ""
+msgstr "סימון מצבי Subversion עם סמלי חיווי"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_overlays)
 #: src/settings/display_settings.ui:30
@@ -1702,19 +1702,19 @@ msgstr ""
 #: src/settings/display_settings.ui:33
 #, kde-format
 msgid "Mark item status with icon overlay"
-msgstr ""
+msgstr "סימון מצב הפריט עם סמל חיווי"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_case_sensitive_sort)
 #: src/settings/display_settings.ui:40
 #, kde-format
 msgid "Items sorting order is case sensitive"
-msgstr ""
+msgstr "סדר הפריטים תלוי רישיות"
 
 #. i18n: ectx: property (text), widget (QLabel, m_MaxLogLabel)
 #: src/settings/display_settings.ui:47
 #, kde-format
 msgid "Maximum log messages in history:"
-msgstr ""
+msgstr "כמות ההודעות המרבית בהיסטוריה:"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_file_tips)
 #: src/settings/display_settings.ui:67
@@ -1723,6 +1723,8 @@ msgid ""
 "Here you can control if, when moving the mouse over a file, you want to see "
 "a small popup window with additional information about that file"
 msgstr ""
+"כאן ניתן לשלוט, בעת מעבר עם העכבר מעל קובץ, האם להציג חלונית קטנה עם מידע "
+"נוסף על הקובץ הזה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_file_tips)
 #: src/settings/display_settings.ui:70
@@ -1841,7 +1843,7 @@ msgstr "היומן תמיד קורא את רשימת הקבצים שהשתנו"
 #: src/settings/kdesvn_part.kcfg:100
 #, kde-format
 msgid "Start check for updates when open working copy"
-msgstr ""
+msgstr "להתחיל לבדוק אם יש עדכונים בעותק העבודה הפעיל"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:104
@@ -1859,7 +1861,7 @@ msgstr ""
 #: src/settings/kdesvn_part.kcfg:112
 #, kde-format
 msgid "Get properties on selected item on networked protocols"
-msgstr ""
+msgstr "קבלת פרטים על פריט נבחר בפרוטוקולי תקשורת"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:116
@@ -1903,13 +1905,13 @@ msgstr "האם התקשורת פעילה"
 #: src/settings/kdesvn_part.kcfg:140
 #, kde-format
 msgid "Local add results in modification instead of conflicts"
-msgstr ""
+msgstr "הוספת תוצאות מקומית בשינויים במקום בסתירות"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:144
 #, kde-format
 msgid "create any non-existent parent at depth=empty"
-msgstr ""
+msgstr "יצירת  הורה לא קיים ב־depth=empty (עומק=ריק)"
 
 #. i18n: ectx: label, entry, group (diffmerge_items)
 #: src/settings/kdesvn_part.kcfg:150
@@ -1933,13 +1935,13 @@ msgstr ""
 #: src/settings/kdesvn_part.kcfg:197
 #, kde-format
 msgid "Locale for blame display"
-msgstr ""
+msgstr "שפה לתצוגת אשמה"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:209
 #, kde-format
 msgid "Check status of log cache when starting revision tree"
-msgstr ""
+msgstr "לבדוק את מצב היומן כשעץ המהדורות מתחיל"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #. i18n: ectx: property (text), widget (QLabel, label)

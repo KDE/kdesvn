@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2025-11-21 13:11+0200\n"
+"PO-Revision-Date: 2025-11-25 10:40+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -2195,7 +2195,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:49
 #, kde-format
 msgid "Check if items have \"svn:needs-lock\" property set"
-msgstr ""
+msgstr "לבדוק אם מוגדר לפריטים המאפיין „svn:needs-lock”"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:56
@@ -2220,19 +2220,19 @@ msgstr ""
 #: src/settings/subversion_settings.ui:64
 #, kde-format
 msgid "Get file details while remote listing"
-msgstr ""
+msgstr "קבלת פריט הקובץ תוך הצגת הקבצים המרוחקים"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_info_recursive)
 #: src/settings/subversion_settings.ui:74
 #, kde-format
 msgid "Get item info recursively"
-msgstr ""
+msgstr "קבלת פרטי פריט בנסיגה/רקורסיה"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:84
 #, kde-format
 msgid "Should kdesvn retrieve properties on selected item in repositories"
-msgstr ""
+msgstr "האם על kdesvn למשוך מאפיינים על פריט נבחר במאגרים"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:88
@@ -2393,7 +2393,7 @@ msgstr "המטמון התמלא עד מהדורה %1."
 #: src/svnfrontend/background/fillcachethread.cpp:122
 #, kde-format
 msgid "Filling log cache in background finished."
-msgstr ""
+msgstr "מילוי יומן המטמון ברקע הסתיים."
 
 #: src/svnfrontend/background/tcontextlistener.cpp:182
 #, kde-format
@@ -2605,6 +2605,8 @@ msgid ""
 "The certificate is not issued by a trusted authority. Use the fingerprint to "
 "validate the certificate manually."
 msgstr ""
+"האישור לא הונפק על ידי רשות אמינה. יש להשתמש בטביעת האצבע כדי לתקף את האישור "
+"ידנית."
 
 #: src/svnfrontend/ccontextlistener.cpp:339
 #, kde-format

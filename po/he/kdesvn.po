@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2025-11-25 10:40+0200\n"
+"PO-Revision-Date: 2025-11-28 23:15+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -1445,13 +1445,13 @@ msgstr ""
 #: src/settings/diffmergesettings.ui:25 src/settings/kdesvn_part.kcfg:33
 #, kde-format
 msgid "Diff ignores white space changes"
-msgstr ""
+msgstr "ההבדלים מתעלמים משינויים ברווחים"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_all_white_spaces)
 #: src/settings/diffmergesettings.ui:32
 #, kde-format
 msgid "Diff ignores all white spaces"
-msgstr ""
+msgstr "ההבדלים מתעלמים מכל סוגי הרווחים"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_external_diff)
 #: src/settings/diffmergesettings.ui:39
@@ -1479,7 +1479,7 @@ msgstr ""
 #: src/settings/diffmergesettings.ui:52 src/settings/kdesvn_part.kcfg:158
 #, kde-format
 msgid "Prefer external merge program"
-msgstr ""
+msgstr "העדפת תוכנית מיזוג חיצונית"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_gitformat_default)
 #: src/settings/diffmergesettings.ui:59
@@ -1492,19 +1492,19 @@ msgstr "להשתמש בתבנית הבדלים של Git"
 #: src/settings/diffmergesettings.ui:66 src/settings/kdesvn_part.kcfg:45
 #, kde-format
 msgid "Show copies as add"
-msgstr ""
+msgstr "הצגת עותקים כהוספה"
 
 #. i18n: ectx: property (text), widget (QLabel, resolveLabel)
 #: src/settings/diffmergesettings.ui:77
 #, kde-format
 msgid "Conflict resolver program:"
-msgstr ""
+msgstr "תוכנית לפתרון סתירות:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: src/settings/diffmergesettings.ui:90
 #, kde-format
 msgid "External merge program:"
-msgstr ""
+msgstr "תוכנית מיזוג חיצונית:"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, kcfg_conflict_resolver)
 #: src/settings/diffmergesettings.ui:115
@@ -1541,13 +1541,13 @@ msgstr ""
 #: src/settings/diffmergesettings.ui:141
 #, kde-format
 msgid "External diff display:"
-msgstr ""
+msgstr "תצוגת הבדלים חיצונית:"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, kcfg_external_merge_program)
 #: src/settings/diffmergesettings.ui:154
 #, kde-format
 msgid "Setup an external program for merging"
-msgstr ""
+msgstr "הגדרת תוכנית חיצונית למיזוג"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_external_merge_program)
 #: src/settings/diffmergesettings.ui:166
@@ -1601,7 +1601,7 @@ msgstr ""
 #: src/settings/diffmergesettings.ui:200
 #, kde-format
 msgid "see \"What's this\" for details"
-msgstr ""
+msgstr "ר׳ „מה זה” לפרטים נוספים"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DispColorSettings)
 #: src/settings/dispcolor_settings.ui:6

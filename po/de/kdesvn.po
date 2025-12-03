@@ -1,9 +1,3 @@
-# translation of de.po to Deutsch
-# Einige Standardübersetzungen müssen noch festgelegt werden:
-# udate: update, erneuern
-# entry, item: Eintrag, item
-# blame: Anmerkungen
-# merge: zusammenführen
 # SPDX-FileCopyrightText: 2005, 2006, 2007, 2008, 2009, 2010 Rajko Albrecht <ral@alwins-world.de>
 # SPDX-FileCopyrightText: 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021 Burkhard Lück <lueck@hube-lueck.de>
 # SPDX-FileCopyrightText: 2013 Markus Slopianka <markus.s@kdemail.net>
@@ -14,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:19+0000\n"
-"PO-Revision-Date: 2025-11-08 18:46+0100\n"
+"PO-Revision-Date: 2025-11-28 19:36+0100\n"
 "Last-Translator: Alexander Becker <alex-at-kde-l10n-de@freenet.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -73,43 +67,43 @@ msgstr "&Lesezeichen"
 #: src/kdesvn.cpp:109
 #, kde-format
 msgid "Create and open new repository"
-msgstr "Neues Repository erstellen und öffnen"
+msgstr "Neues Projektarchiv erstellen und öffnen"
 
 #: src/kdesvn.cpp:110
 #, kde-format
 msgid "Create and opens a new local Subversion repository"
-msgstr "Ein neues lokales Subversion-Repository erstellen und öffnen"
+msgstr "Ein neues lokales Subversion-Projektarchiv erstellen und öffnen"
 
 #: src/kdesvn.cpp:115
 #, kde-format
 msgid "Dump repository to file"
-msgstr "Repository in eine Datei archivieren"
+msgstr "Auszugsdatei eines Projektarchivs erstellen"
 
 #: src/kdesvn.cpp:116
 #, kde-format
 msgid "Dump a Subversion repository to a file"
-msgstr "Ein Subversion-Repository in eine Datei archivieren"
+msgstr "Eine Auszugsdatei eines Subversion-Projektarchivs erstellen"
 
 #: src/kdesvn.cpp:121
 #, kde-format
 msgid "Hotcopy a repository"
-msgstr "Hotcopy eines Repositorys"
+msgstr "Hotcopy eines Projektarchivs"
 
 #: src/kdesvn.cpp:122
 #, kde-format
 msgid "Hotcopy a Subversion repository to a new folder"
 msgstr ""
-"Eine Kopie eines Subversion-Repositorys in einem neuen Ordner erstellen"
+"Eine Kopie eines Subversion-Projektarchivs in einem neuen Ordner erstellen"
 
 #: src/kdesvn.cpp:127
 #, kde-format
 msgid "Load dump into repository"
-msgstr "Abzug in ein Repository laden"
+msgstr "Auszug in ein Projektarchiv laden"
 
 #: src/kdesvn.cpp:128
 #, kde-format
 msgid "Load a dump file into a repository."
-msgstr "Eine Abzugsdatei in ein Repository laden."
+msgstr "Inhalt einer Auszugsdatei in ein Projektarchiv laden."
 
 #: src/kdesvn.cpp:133
 #, kde-format
@@ -337,17 +331,15 @@ msgid "Revision tree"
 msgstr "Revisionsbaum"
 
 #: src/kdesvn_part.cpp:343
-#, fuzzy, kde-format
-#| msgid "KIO / Command line"
+#, kde-format
 msgid "KIO / Command line"
 msgstr "Ein-/Ausgabemodul / Befehlszeile"
 
 #: src/kdesvn_part.cpp:343
-#, fuzzy, kde-format
-#| msgid "Settings for command line and KIO execution"
+#, kde-format
 msgid "Settings for command line and KIO execution"
 msgstr ""
-"Einstellungen für die Ausführung per Befehlszeile und Ein-/Ausgabemodule"
+"Einstellungen für die Ausführung per Befehlszeile oder per Ein-/Ausgabemodul"
 
 #. i18n: ectx: Menu (settings)
 #: src/kdesvn_part.rc:5
@@ -371,7 +363,7 @@ msgstr "Arbeitskopie"
 #: src/kdesvn_part.rc:75
 #, kde-format
 msgid "Repository"
-msgstr "Repository"
+msgstr "Projektarchiv"
 
 #. i18n: ectx: Menu (generic_view)
 #: src/kdesvn_part.rc:82
@@ -466,23 +458,23 @@ msgstr "&Einstellungen"
 #: src/kdesvnview.cpp:133 src/kdesvnview.cpp:167
 #, kde-format
 msgid "Repository opened"
-msgstr "Repository geöffnet"
+msgstr "Projektarchiv geöffnet"
 
 #: src/kdesvnview.cpp:173
 #, kde-format
 msgid "Could not open repository"
-msgstr "Repository kann nicht geöffnet werden"
+msgstr "Projektarchiv kann nicht geöffnet werden"
 
 #: src/kdesvnview.cpp:198
 #, kde-format
 msgid "No repository open"
-msgstr "Kein Repository geöffnet"
+msgstr "Kein Projektarchiv geöffnet"
 
 #: src/kdesvnview.cpp:258
 #, kde-format
 msgctxt "@title:window"
 msgid "Hotcopy a Repository"
-msgstr "Hotcopy eines Repositorys"
+msgstr "Hotcopy eines Projektarchivs"
 
 #: src/kdesvnview.cpp:276
 #, kde-format
@@ -490,50 +482,48 @@ msgid "Hotcopy finished."
 msgstr "Hotcopy beendet."
 
 #: src/kdesvnview.cpp:285
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Load a Repository From an svndump"
+#, kde-format
 msgctxt "@title:window"
 msgid "Load a Repository From an svndump"
-msgstr "Lädt einen SVN-Abzug in ein Repository:"
+msgstr "Ein Projektarchiv aus einem svndump-Auszug laden"
 
 #: src/kdesvnview.cpp:335
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Dump"
-msgstr "Abzug laden"
+msgstr "Auszug laden"
 
 #: src/kdesvnview.cpp:335
 #, kde-format
 msgid "Loading a dump into a repository."
-msgstr "Ein Abzug wird in ein Repository geladen."
+msgstr "Ein Auszug wird in ein Projektarchiv geladen."
 
 #: src/kdesvnview.cpp:337
 #, kde-format
 msgid "Loading dump finished."
-msgstr "Laden des Abzugs beendet."
+msgstr "Laden des Auszugs beendet."
 
 #: src/kdesvnview.cpp:347
 #, kde-format
 msgctxt "@title:window"
 msgid "Dump a Repository"
-msgstr "Abzug eines Repositorys erstellen"
+msgstr "Auszug eines Projektarchivs erstellen"
 
 #: src/kdesvnview.cpp:387
 #, kde-format
 msgctxt "@title:window"
 msgid "Dump"
-msgstr "Abzug erstellen"
+msgstr "Auszug erstellen"
 
 #: src/kdesvnview.cpp:387
 #, kde-format
 msgid "Dumping a repository"
-msgstr "Ein Abzug eines Repositorys wird erstellt"
+msgstr "Ein Auszug eines Projektarchivs wird erstellt"
 
 #: src/kdesvnview.cpp:389
 #, kde-format
 msgid "Dump finished."
-msgstr "Abzug beendet."
+msgstr "Auszugserstellung beendet."
 
 #: src/kdesvnview.cpp:434
 #, kde-format
@@ -577,7 +567,7 @@ msgid ""
 "Try updating instead."
 msgstr ""
 "%1 kann nicht rückgängig gemacht werden.\n"
-"Versuchen Sie stattdessen \"Aktualisierung\"."
+"Versuchen Sie stattdessen zu aktualisieren."
 
 #: src/kiosvn/kiolistener.cpp:114
 #, kde-format
@@ -652,12 +642,12 @@ msgstr "%1 wird gelöscht."
 #: src/kiosvn/kiolistener.cpp:215
 #, kde-format
 msgid "Replacing %1."
-msgstr "%1 wird gesetzt."
+msgstr "%1 wird ersetzt."
 
 #: src/kiosvn/kiolistener.cpp:221
 #, kde-format
 msgid "Transmitting file data "
-msgstr "Dateidaten werden übertragen."
+msgstr "Dateidaten werden übertragen "
 
 #: src/kiosvn/kiosvn.cpp:301 src/kiosvn/kiosvn.cpp:355
 #: src/kiosvn/kiosvn.cpp:507
@@ -679,22 +669,22 @@ msgstr ""
 #: src/kiosvn/kiosvn.cpp:384
 #, kde-format
 msgid "Start checking out to temporary folder"
-msgstr "Holen in einen temporären Ordner gestartet"
+msgstr "Auschecken in einen temporären Ordner starten"
 
 #: src/kiosvn/kiosvn.cpp:387
 #, kde-format
 msgid "Checking out %1"
-msgstr "%1 wird geholt"
+msgstr "%1 wird ausgecheckt"
 
 #: src/kiosvn/kiosvn.cpp:396
 #, kde-format
 msgid "Temporary checkout done."
-msgstr "Temporäres Auslesen abgeschlossen."
+msgstr "Temporäres Auschecken abgeschlossen."
 
 #: src/kiosvn/kiosvn.cpp:400
 #, kde-format
 msgid "Could not write to existing item."
-msgstr "Auf bestehenden Eintrag kann nicht geschrieben werden."
+msgstr "Bestehender Eintrag kann nicht überschrieben werden."
 
 #: src/kiosvn/kiosvn.cpp:406
 #, kde-format
@@ -709,12 +699,12 @@ msgstr "Daten zum Schreiben können nicht abgerufen werden."
 #: src/kiosvn/kiosvn.cpp:438
 #, kde-format
 msgid "Committing %1"
-msgstr "%1 wird übertragen"
+msgstr "%1 wird eingespielt"
 
 #: src/kiosvn/kiosvn.cpp:461
 #, kde-format
 msgid "Wrote %1 to repository"
-msgstr "%1 in das Repository geschrieben"
+msgstr "%1 in das Projektarchiv geschrieben"
 
 #: src/kiosvn/kiosvn.cpp:492
 #, kde-format
@@ -725,27 +715,27 @@ msgstr "%1 nach %2 kopiert"
 #: src/svnfrontend/svnactions.cpp:2217
 #, kde-format
 msgid "Committed revision %1."
-msgstr "Revision %1 gesendet."
+msgstr "Revision %1 wurde eingespielt."
 
 #: src/kiosvn/kiosvn.cpp:830
 #, kde-format
 msgid "Nothing to commit."
-msgstr "Nichts zu senden."
+msgstr "Nichts einzuspielen."
 
 #: src/kiosvn/kiosvn.cpp:877
 #, kde-format
 msgid "Empty logs"
-msgstr "Leere Protokolle."
+msgstr "Leere Protokolle"
 
 #: src/ksvnwidgets/authdialogwidget.cpp:35
 #, kde-format
 msgid "Store password (into KDE Wallet)"
-msgstr "Passwort im Passwortspeicher speichern"
+msgstr "Passwort im KDE-Passwortspeicher speichern"
 
 #: src/ksvnwidgets/authdialogwidget.cpp:36
 #, kde-format
 msgid "Store password (into Subversion' simple storage)"
-msgstr "Passwort in Subversions einfacher Ablage speichern"
+msgstr "Passwort in einfacher Subversion-Ablage speichern"
 
 #: src/ksvnwidgets/authdialogwidget.cpp:38
 #, kde-format
@@ -774,7 +764,7 @@ msgstr "Benutzername:"
 #: src/ksvnwidgets/commitmessage.ui:6
 #, kde-format
 msgid "Commit Message"
-msgstr "Übergabemeldung"
+msgstr "Einspielnachricht"
 
 #. i18n: ectx: property (text), widget (QLabel, m_Reviewlabel)
 #: src/ksvnwidgets/commitmessage.ui:27
@@ -805,7 +795,7 @@ msgstr "Neue Einträge ausblenden"
 #, kde-format
 msgid "Mark all new e.g. not versioned items for add and commit."
 msgstr ""
-"Alle neuen, d.h. nicht versionierten Einträge, zum Hinzufügen und Übertragen "
+"Alle neuen (auch nicht versionierten) Einträge zum Hinzufügen und Einspielen "
 "markieren."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_MarkUnversioned)
@@ -819,14 +809,14 @@ msgstr "Neue Einträge auswählen"
 #, kde-format
 msgid "Unmark all unversioned items so they will be ignored."
 msgstr ""
-"Entferne Markierung für alle nicht versionierten Einträge, so dass sie "
+"Markierung für alle nicht versionierten Einträge entfernen, sodass sie "
 "ignoriert werden."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_UnmarkUnversioned)
 #: src/ksvnwidgets/commitmessage.ui:100
 #, kde-format
 msgid "Unselect new items"
-msgstr "Markierung neuer Einträge entfernen"
+msgstr "Auswahl neuer Einträge rückgängig machen"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_RevertItemButton)
 #: src/ksvnwidgets/commitmessage.ui:107
@@ -845,31 +835,31 @@ msgstr "Eintrag rückgängig machen"
 #, kde-format
 msgid "Generates and display difference against repository of selected item"
 msgstr ""
-"Zeigt Unterschiede zwischen dem ausgewählten Eintrag und dem Repository an"
+"Zeigt Unterschiede zwischen dem ausgewählten Eintrag und dem Projektarchiv an"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DiffItem)
 #: src/ksvnwidgets/commitmessage.ui:120
 #, kde-format
 msgid "Diff item"
-msgstr "Unterschied des Eintrages"
+msgstr "Unterschiede des Eintrags"
 
 #. i18n: ectx: property (text), widget (QLabel, m_HeadLabel)
 #: src/ksvnwidgets/commitmessage.ui:152
 #, kde-format
 msgid "Enter a log message"
-msgstr "Einen Protokoll-Eintrag eingeben"
+msgstr "Eine Protokollnachricht eingeben"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_LogHistory)
 #: src/ksvnwidgets/commitmessage.ui:184
 #, kde-format
 msgid "Last used log messages"
-msgstr "Zuletzt verwendete Protokoll-Meldungen"
+msgstr "Zuletzt verwendete Protokollnachrichten"
 
 #. i18n: ectx: property (text), widget (QLabel, m_LogLabel)
 #: src/ksvnwidgets/commitmessage.ui:199
 #, kde-format
 msgid "Or insert one of the last:"
-msgstr "Oder einen der letzten verwenden:"
+msgstr "Oder eine der letzten verwenden:"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_insert_file_button)
 #: src/ksvnwidgets/commitmessage.ui:215
@@ -887,13 +877,13 @@ msgstr "Falls markiert, wird das Einspielen die Sperren nicht lösen."
 #: src/ksvnwidgets/commitmessage.ui:229
 #, kde-format
 msgid "Keep locks"
-msgstr "Sperren erhalten"
+msgstr "Sperren behalten"
 
 #: src/ksvnwidgets/commitmsg_impl.cpp:287
 #, kde-format
 msgctxt "@title:window"
 msgid "Commit Log"
-msgstr "Einspiel-Protokoll"
+msgstr "Einspielprotokoll"
 
 #: src/ksvnwidgets/commitmsg_impl.cpp:453
 #, kde-format
@@ -1015,7 +1005,7 @@ msgstr ""
 #: src/ksvnwidgets/diffbrowser.cpp:86
 #, kde-format
 msgid "Save diff"
-msgstr "Diff speichern "
+msgstr "Vergleich speichern"
 
 #: src/ksvnwidgets/diffbrowser.cpp:86
 #, kde-format
@@ -1025,7 +1015,7 @@ msgstr "Patch-Datei (*.diff *.patch)"
 #: src/ksvnwidgets/diffbrowser.cpp:93
 #, kde-format
 msgid "File %1 exists - overwrite?"
-msgstr "Die Datei %1 existiert bereits - überschreiben?"
+msgstr "Die Datei %1 existiert bereits – überschreiben?"
 
 #: src/ksvnwidgets/diffbrowser.cpp:177
 #, kde-format
@@ -1304,14 +1294,14 @@ msgstr "Kein Minimum"
 #, kde-format
 msgid "If set, kdesvn will not show a menu inside \"Action\" menu of Konqueror"
 msgstr ""
-"Falls gesetzt, wird kdesvn kein Menü innerhalb des \"Aktionen\"-Menüs der "
-"KDE-Dateiverwaltung anzeigen."
+"Wenn aktiviert, wird kdesvn kein Untermenü innerhalb des „Aktionen“-Menüs "
+"von Konqueror anzeigen."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_contextmenu)
 #: src/settings/cmdexecsettings.ui:54
 #, kde-format
 msgid "Do not display context menu in Konqueror"
-msgstr "Kein Kontextmenü in der KDE-Dateiverwaltung anzeigen"
+msgstr "Kein Kontextmenü in Konqueror anzeigen"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
 #: src/settings/cmdexecsettings.ui:61
@@ -1320,8 +1310,8 @@ msgid ""
 "If set, kdesvn will not show some extra actions inside \"Action\" menu of "
 "Konqueror/Dolphin"
 msgstr ""
-"Falls gesetzt, wird kdesvn kein Menü innerhalb des \"Aktionen\"-Menüs von "
-"Konqueror oder Dolphin anzeigen."
+"Wenn aktiviert, wird kdesvn einige zusätzliche Aktionen innerhalb des "
+"„Aktionen“-Menüs von Konqueror oder Dolphin nicht anzeigen."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
 #: src/settings/cmdexecsettings.ui:64
@@ -1334,7 +1324,7 @@ msgstr "Keine Einträge im obersten \"Aktionen\"-Kontextmenü anzeigen"
 #, kde-format
 msgid "KIO operations use standard log message"
 msgstr ""
-"Ein-/Ausgabemodul-Operationen verwenden eine Standard-Protokoll-Meldung"
+"Ein-/Ausgabemodul-Operationen verwenden eine Standard-Protokollnachricht"
 
 #. i18n: ectx: property (text), widget (QLabel, stdLogmsgLabel)
 #: src/settings/cmdexecsettings.ui:80
@@ -1360,7 +1350,7 @@ msgid ""
 msgstr ""
 "Falls dieses Flag gesetzt ist, haben Sie eine einfache Schreibunterstützung "
 "für bestehende Eintrage. D. h., Sie können Dateien im Editor öffnen und "
-"direkt ohne vorheriges Auslesen speichern (kdesvn macht dies im "
+"direkt ohne vorheriges Auschecken speichern (kdesvn macht dies im "
 "Hintergrund).\n"
 "\n"
 "Nutzen Sie das nur wenn Sie sich sicher sind, welche Auswirkungen die "
@@ -1378,7 +1368,7 @@ msgstr "Ein-/Ausgabemodul kann überschreiben"
 msgid ""
 "If set KIO shows in KDE's Plasma detailed information about current operation"
 msgstr ""
-"Ist dies aktiviert, werden ausführliche Nachrichten des Ein-/Ausgabemodul "
+"Ist dies aktiviert, werden ausführliche Nachrichten des Ein-/Ausgabemoduls "
 "über den aktuellen Vorgang in den Plasma-Benachrichtigungen angezeigt"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_dockmsg)
@@ -1390,8 +1380,8 @@ msgid ""
 "Error messages of KIO will always displayed and can <i>not</i> switched off."
 "</p>"
 msgstr ""
-"<p>Ist dies aktiviert, werden ausführliche Nachrichten des Ein-/Ausgabemodul "
-"in den Plasma-Benachrichtigungen angezeigt.<br/>\n"
+"<p>Ist dies aktiviert, werden ausführliche Nachrichten des Ein-/"
+"Ausgabemoduls in den Plasma-Benachrichtigungen angezeigt.<br/>\n"
 "Fehlermeldungen des Ein-/Ausgabemoduls werden immer angezeigt und können "
 "<i>nicht</i> abgeschaltet werden.</p>"
 
@@ -1411,27 +1401,27 @@ msgstr " Zeile(n)"
 #: src/settings/diffmergesettings.ui:11 src/settings/kdesvn_part.kcfg:29
 #, kde-format
 msgid "Diff ignores content type"
-msgstr "Diff ignoriert den Inhaltstyp"
+msgstr "Vergleich ignoriert den Inhaltstyp"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_tree_diff_rec)
 #: src/settings/diffmergesettings.ui:18
 #: src/svnfrontend/graphtree/revgraphview.cpp:862
 #, kde-format
 msgid "Diff in revision tree is recursive"
-msgstr "Diff im Revisionsbaum ist rekursiv"
+msgstr "Vergleich im Revisionsbaum ist rekursiv"
 
 #. i18n: ectx: label, entry, group (general_items)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_spaces)
 #: src/settings/diffmergesettings.ui:25 src/settings/kdesvn_part.kcfg:33
 #, kde-format
 msgid "Diff ignores white space changes"
-msgstr "Diff ignoriert Änderungen der Leerzeichen"
+msgstr "Vergleich ignoriert Änderungen bei Leerraum"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_all_white_spaces)
 #: src/settings/diffmergesettings.ui:32
 #, kde-format
 msgid "Diff ignores all white spaces"
-msgstr "Diff ignoriert alle Leerzeichen"
+msgstr "Vergleich ignoriert alle Leerzeichen"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_external_diff)
 #: src/settings/diffmergesettings.ui:39
@@ -1447,7 +1437,7 @@ msgstr ""
 #: src/settings/diffmergesettings.ui:42
 #, kde-format
 msgid "Use external diff display"
-msgstr "Externe Diff-Anzeige verwenden"
+msgstr "Externe Vergleichsanzeige verwenden"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_extern_merge_default)
 #: src/settings/diffmergesettings.ui:49
@@ -1469,7 +1459,7 @@ msgstr "Externes Zusammenführen bevorzugen"
 #: src/settings/diffmergesettings.ui:59
 #, kde-format
 msgid "Use Git diff format"
-msgstr "diff-Format von Git verwenden"
+msgstr "Vergleichsformat von Git verwenden"
 
 #. i18n: ectx: label, entry, group (general_items)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_copies_as_add)
@@ -1535,18 +1525,18 @@ msgstr ""
 "<b><tt>%m</tt></b> Lokal editierte Version<br>\n"
 "<b><tt>%n</tt></b> Neueste Version.\n"
 "<br>\n"
-"<b><tt>%t</tt></b> Das Ziel zum speichern,es wird der ursprüngliche "
-"Dateiname dafür benutzt.\n"
+"<b><tt>%t</tt></b> Das Ziel zum Speichern unter, kdesvn wird dafür den Namen "
+"der Originaldatei verwenden.\n"
 "</p>\n"
 "<p>\n"
-"Voreingestellt:<tt>kdiff3 %o %m %n -o %t</tt>\n"
+"Voreinstellung: <tt>kdiff3 %o %m %n -o %t</tt>\n"
 "</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, mdiff_display_label)
 #: src/settings/diffmergesettings.ui:141
 #, kde-format
 msgid "External diff display:"
-msgstr "Externe Diff-Anzeige:"
+msgstr "Externe Vergleichsanzeige:"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, kcfg_external_merge_program)
 #: src/settings/diffmergesettings.ui:154
@@ -1626,10 +1616,10 @@ msgstr ""
 "<p align=\"center\">\n"
 "<tt>&lt;Programm&gt; &lt;Parameter&gt; %s1 %s2</tt>\n"
 "an.</p> <br>\n"
-"Falls die erste oder zweite Form genutzt wird, wird Subversion selber die "
-"Unterschiede generieren. %f wird mit einem temporären Dateinamen ersetzt. "
-"Falls %f nicht angegeben wurde, muss die Anzeige der Unterschiede in der "
-"Lage sein, Daten von der Standardeingabe zu lesen.\n"
+"Falls die erste oder zweite Form genutzt wird, wird Subversion selbst nach "
+"Unterschieden suchen. %f wird mit einem temporären Dateinamen ersetzt. Falls "
+"%f nicht angegeben wurde, muss die Anzeige der Unterschiede in der Lage "
+"sein, Daten von der Standardeingabe zu lesen.\n"
 "<br>\n"
 "Falls %s1 und %s2 angegeben wurden, wird die Anzeige der Unterschiede durch "
 "kdesvn erzeugt. Dafür wird ein temporärer Export oder Get (falls benötigt) "
@@ -1672,7 +1662,7 @@ msgstr "Nicht versionierte Einträge:"
 #: src/settings/dispcolor_settings.ui:89
 #, kde-format
 msgid "Remote changed items:"
-msgstr "Entfernt geänderte Einträge:"
+msgstr "Fern geänderte Einträge:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: src/settings/dispcolor_settings.ui:102
@@ -1739,10 +1729,10 @@ msgid ""
 "</p>"
 msgstr ""
 "<p align=\"left\">\n"
-"Markiert einen Eintrag mit einem nicht normalen Status mit einem "
-"überlagerten Symbol. Falls Sie sehen wollen, welche Einträge neuere "
-"Versionen im Repository haben, müssen Sie „Aktualisierungs-Überprüfung beim "
-"Öffnen einer Arbeitskopie starten“ in den Einstellungen aktivieren.\n"
+"Markiert Einträge mit einem nicht normalen Status mit einem überlagerten "
+"Symbol. Falls Sie sehen möchten, welche Einträge neuere Versionen im "
+"Projektarchiv haben, müssen Sie „Beim Öffnen einer Arbeitskopie auf "
+"Aktualisierungen prüfen“ in den Einstellungen aktivieren.\n"
 "</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_overlays)
@@ -1761,7 +1751,7 @@ msgstr "Sortierreihenfolge beachtet Groß-/Kleinschreibung"
 #: src/settings/display_settings.ui:47
 #, kde-format
 msgid "Maximum log messages in history:"
-msgstr "Maximale Anzahl der Protokoll-Meldungen im Verlauf:"
+msgstr "Maximale Anzahl der Protokollnachrichten im Verlauf:"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_file_tips)
 #: src/settings/display_settings.ui:67
@@ -1813,9 +1803,7 @@ msgstr "Datei-Infos in Kurzinfos anzeigen"
 #: src/settings/kdesvn_part.kcfg:21
 #, kde-format
 msgid "Use an external program for diff viewing/generating"
-msgstr ""
-"Externes Programms zur Anzeige von Unterschieden und zum Zusammenführen "
-"verwenden"
+msgstr "Externes Programm für Suche und Anzeige von Unterschieden verwenden"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:25
@@ -1827,31 +1815,31 @@ msgstr "Externes Programms zur Anzeige von Unterschieden verwenden"
 #: src/settings/kdesvn_part.kcfg:37
 #, kde-format
 msgid "Diff ignores all white space"
-msgstr "Diff ignoriert alle Leerzeichen"
+msgstr "Vergleich ignoriert alle Leerzeichen"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:41
 #, kde-format
 msgid "Show diff in Git format"
-msgstr "diff im Git-Format anzeigen"
+msgstr "Vergleich im Git-Format anzeigen"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:49
 #, kde-format
 msgid "Maximum number of log messages"
-msgstr "Maximale Anzahl der Protokoll-Nachrichten"
+msgstr "Maximale Anzahl der Protokollnachrichten"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:53
 #, kde-format
 msgid "Display colored blame lines"
-msgstr "Farbige Blame-Linien anzeigen"
+msgstr "Farbige Nachforschungszeilen anzeigen"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:68
 #, kde-format
 msgid "Display icon overlays"
-msgstr "ignorierte Dateien anzeigen"
+msgstr "Symbolüberlagerungen anzeigen"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:72
@@ -1890,7 +1878,7 @@ msgstr "Protokolle lesen immer die Liste der geänderten Einträge"
 #: src/settings/kdesvn_part.kcfg:100
 #, kde-format
 msgid "Start check for updates when open working copy"
-msgstr "Aktualisierungs-Überprüfung beim Öffnen einer Arbeitskopie starten"
+msgstr "Beim Öffnen der Arbeitskopie auf Aktualisierungen prüfen"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:104
@@ -1917,20 +1905,21 @@ msgstr "Eigenschaften ausgewählter Einträge bei Netzwerkprotokollen ermitteln"
 #, kde-format
 msgid "Use properties like bugtraq:url on repository listings"
 msgstr ""
-"Eigenschaften wie „bugtraq:url“ für das Auflisten von Repositorys verwenden"
+"Eigenschaften wie „bugtraq:url“ für das Auflisten von Projektarchiven "
+"verwenden"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:120
 #, kde-format
 msgid "Check for property svn:needs-lock on listings"
-msgstr "Überprüfung auf die Eigenschaft \"svn::needs-lock\" beim Auflisten"
+msgstr "Überprüfung auf die Eigenschaft „svn::needs-lock“ beim Auflisten"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/kdesvn_part.kcfg:124 src/settings/subversion_settings.ui:107
 #, kde-format
 msgid "Store passwords for remote connections"
-msgstr "Passwörter für entfernte Verbindungen speichern"
+msgstr "Passwörter für ferne Verbindungen speichern"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:128
@@ -1950,13 +1939,13 @@ msgstr "Internen Passwort-Zwischenspeicher verwenden"
 #: src/settings/kdesvn_part.kcfg:136
 #, kde-format
 msgid "Is networking enabled"
-msgstr "Ist das Netzwerk ist aktiviert"
+msgstr "Ist Netzwerk aktiviert"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:140
 #, kde-format
 msgid "Local add results in modification instead of conflicts"
-msgstr "Lokales Hinzufügen führt zu Änderung anstatt von Konflikten"
+msgstr "Lokales Hinzufügen führt zu Änderung statt zu Konflikten"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:144
@@ -1987,7 +1976,7 @@ msgstr "Abweichungen vom normalen Zustand farbig anzeigen"
 #: src/settings/kdesvn_part.kcfg:197
 #, kde-format
 msgid "Locale for blame display"
-msgstr "Lokalisierung der Blame-Anzeige"
+msgstr "Lokalisierung der Nachforschungsanzeige"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:209
@@ -2043,7 +2032,7 @@ msgstr "Höhe der Detailansicht im Baumelement"
 #: src/settings/kdesvn_part.kcfg:241
 #, kde-format
 msgid "Diffs from revision tree are recursive"
-msgstr "Diffs im Revisionsbaum sind rekursiv"
+msgstr "Vergleiche im Revisionsbaum sind rekursiv"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:247
@@ -2077,7 +2066,7 @@ msgstr ""
 #: src/settings/kdesvn_part.kcfg:263
 #, kde-format
 msgid "KIO::svn operations use a standard log message"
-msgstr "KIO::svn-Operationen benutzen eine Standard-Protokoll-Meldung"
+msgstr "KIO::svn-Operationen benutzen eine Standard-Protokollnachricht"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:267
@@ -2105,8 +2094,8 @@ msgstr "Fortschrittsmeldungen in der Kontrollleiste anzeigen"
 msgid ""
 "This value holds for log dialog which kind of log is used, its internal only."
 msgstr ""
-"Dieser Wert definiert für den Protokolldialog, welche Art von Protokoll "
-"verwendet wird. Nur intern benutzt."
+"Nur für interne Nutzung: Dieser Wert legt für den Protokolldialog fest, "
+"welche Art von Protokoll verwendet wird."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
 #: src/settings/polling_settings.ui:11
@@ -2128,7 +2117,7 @@ msgid ""
 "If set check for updates on working copy when network is enabled on regular "
 "base"
 msgstr ""
-"Falls gesetzt, wird regelmäßig auf Aktualisierungen in der Arbeitskopie "
+"Wenn aktiviert, wird regelmäßig auf Aktualisierungen in der Arbeitskopie "
 "geprüft, falls das Netzwerk aktiviert wurde"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_updates)
@@ -2196,8 +2185,8 @@ msgstr "Farbe für gelöschte Einträge:"
 #, kde-format
 msgid "Should kdesvn check content of log cache before starting the tree"
 msgstr ""
-"Soll kdesvn den Inhalte des Protokoll-Zwischenspeichers überprüfen, bevor "
-"die Baumgenerierung gestartet wird"
+"Soll kdesvn die Inhalte des Protokoll-Zwischenspeichers überprüfen, bevor "
+"die Baumerzeugung gestartet wird?"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_fill_cache_on_tree)
 #: src/settings/revisiontree_settings.ui:180
@@ -2208,11 +2197,11 @@ msgid ""
 "\n"
 "But this may slow down tree generation so it is disabled by default."
 msgstr ""
-"Beim Starten der Baumgenerierung und beim Auslesen des Protokoll-"
-"Zwischenspeichers kann das Repository von kdesvn nach neueren Einträgen "
+"Beim Starten der Baumerzeugung und beim Auslesen des Protokoll-"
+"Zwischenspeichers kann das Projektarchiv von kdesvn nach neueren Einträgen "
 "durchsucht werden, wenn das Netzwerk aktiviert ist. \n"
 "\n"
-"Dies kann allerdings die Baumgenerierung verlangsamen, deshalb ist es "
+"Dies kann allerdings die Baumerzeugung verlangsamen, deshalb ist es "
 "standardmäßig abgeschaltet."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_fill_cache_on_tree)
@@ -2233,21 +2222,21 @@ msgstr ""
 #: src/settings/subversion_settings.ui:17
 #, kde-format
 msgid "Start check for updates when open a working copy"
-msgstr "Aktualisierungs-Überprüfung beim Öffnen einer Arbeitskopie starten"
+msgstr "Beim Öffnen einer Arbeitskopie auf Aktualisierungen prüfen"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:33
 #, kde-format
 msgid "Start refresh the log cache for repository when networking enabled"
 msgstr ""
-"Erneuern des Protokoll-Zwischenspeicher für ein Repository starten, falls "
-"Netzwerkzugriff aktiviert ist."
+"Aktualisierung des Protokoll-Zwischenspeichers für ein Projektarchiv "
+"starten, falls Netzwerkzugriff aktiviert ist"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:36
 #, kde-format
 msgid "Start fill log cache on open"
-msgstr "Protokoll-Zwischenspeicher nach dem Öffnen füllen"
+msgstr "Protokoll-Zwischenspeicher beim Öffnen füllen"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:43
@@ -2265,16 +2254,18 @@ msgid ""
 "items may get slow. So you should only switch on if you have repositories "
 "containing lot of such entries."
 msgstr ""
-"Beim Listen von Arbeitskopien kann kdesvn auf die <tt>svn:needs-lock</tt>-"
-"Eigenschaft prüfen.<br>Aber dadurch kann das Auflisten/Erneuern von Ordnern "
-"mit vielen Einträgen sehr langsam werden. Deshalb sollten Sie diese Option "
-"nur verwenden, wenn Sie Repositorys mit vielen solchen Einträgen haben."
+"Beim Auflisten in Arbeitskopien kann kdesvn auf die <tt>svn:needs-lock</tt>-"
+"Eigenschaft prüfen.<br>Dadurch kann jedoch das Auflisten/Aktualisieren von "
+"Ordnern mit vielen Einträgen sehr langsam werden. Deshalb sollte diese "
+"Option nur dann verwendet werden, wenn Sie Projektarchive mit vielen "
+"Einträgen mit dieser Eigenschaft verwenden."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:49
 #, kde-format
 msgid "Check if items has \"svn:needs-lock\" property set"
-msgstr "Prüfen ob Eintrag die Eigenschaft \"svn::needs-lock\" gesetzt hat"
+msgstr ""
+"Prüfen, ob die Eigenschaft „svn::needs-lock“ für Einträge festgelegt wurde"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:56
@@ -2283,8 +2274,8 @@ msgid ""
 "Whether getting details about items when making listing on repositories or "
 "not"
 msgstr ""
-"Ob Details über Einträge beim Auflisten in Repositorys geholt werden sollen "
-"oder nicht."
+"Ob Details über Einträge beim Auflisten von Projektarchiven geholt werden "
+"sollen oder nicht"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:61
@@ -2296,12 +2287,12 @@ msgid ""
 "</p>\n"
 "<p align=\"left\"><i>Be careful: This may let listings REAL slow.</i></p>"
 msgstr ""
-"<p align=\"left\">Wenn aktiviert, holt kdesvn detailliertere Informationen "
-"über Dateieinträge, wenn es eine Liste in entfernten Repositorys erstellt. "
-"So können Sie entfernten Sperren in der Übersicht erkennen.\n"
+"<p align=\"left\">Wenn dies aktiviert ist, holt kdesvn beim Auflisten in "
+"fernen Projektarchiven detailliertere Informationen über Dateieinträge. Auf "
+"diese Weise können Fernsperren in der Übersicht erkannt werden.\n"
 "</p>\n"
-"<p align=\"left\"><i>Seien Sie vorsichtig: Dies kann Listen sehr langsam "
-"werden lassen.</i></p>"
+"<p align=\"left\"><i>Vorsicht: Dies kann die Auflistung sehr langsam werden "
+"lassen.</i></p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:64
@@ -2320,7 +2311,8 @@ msgstr "Eintragsinformationen rekursiv holen"
 #, kde-format
 msgid "Should kdesvn retrieves properties on selected item in repositories"
 msgstr ""
-"Soll kdesvn die Eigenschaften ausgewählter Einträge in Repositorys ermitteln."
+"Ob kdesvn die Eigenschaften ausgewählter Einträge in Projektarchiven "
+"ermitteln soll"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:88
@@ -2332,18 +2324,17 @@ msgid ""
 "get real slow. So if you have slow network connections or when browsing "
 "hangs often you should deactivate it."
 msgstr ""
-"Beim Durchsuchen kann Kdesvn versuchen, die Eigenschaften des ausgewählten "
-"Eintrags unterhalb der Eintragsliste anzuzeigen. In netzwerkbasierten "
-"Repositorys (die nicht mit dem file:// - Protokoll geöffnet wurden) kann "
-"dies sehr langsam werden. Dass heisst, wenn Sie ein langsame "
-"Netzwerkverbindung haben oder das Durchsuchen oftmals hängt, dann sollten "
-"sie diese Option deaktivieren."
+"Beim Durchsuchen kann kdesvn versuchen, die Eigenschaften des ausgewählten "
+"Eintrags unterhalb der Eintragsliste anzuzeigen. Bei fernen Projektarchiven, "
+"welche nicht mit dem „file://“-Protokoll geöffnet wurden, kann dies sehr "
+"langsam werden. Wenn Sie eine langsame Netzwerkverbindung haben oder das "
+"Durchsuchen oftmals lange dauert, dann sollten Sie diese Option deaktivieren."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:91
 #, kde-format
 msgid "Always get properties on networked repositories"
-msgstr "Immer die Eigenschaften in netzwerkbasierten Repositorys ermitteln"
+msgstr "Immer die Eigenschaften in netzwerkbasierten Projektarchiven ermitteln"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:101
@@ -2361,8 +2352,8 @@ msgid ""
 "you may select for single non critical accounts inside the authentication "
 "dialog."
 msgstr ""
-"Das Speichern von Passwörtern ist oftmals ein Sicherheitsproblem. Kdesvn "
-"selber speichert keinerlei Passwörter, jedoch Subversion innerhalb seiner "
+"Das Speichern von Passwörtern ist oftmals ein Sicherheitsproblem. kdesvn "
+"selbst speichert keinerlei Passwörter, jedoch Subversion innerhalb seiner "
 "Konfiguration. Falls diese Konfiguration von anderen lesbar ist, sollten Sie "
 "diese Option nicht setzen, aber Sie können es für einzelne, nicht kritische "
 "Zugänge innerhalb des Authentifizierungsdialogs einstellen."
@@ -2428,10 +2419,10 @@ msgid ""
 "But if this feature is switched off, kdesvn may fail generating differences "
 "between node changes from within the log viewer."
 msgstr ""
-"Das Lesen der Listen der geänderten Dateien ist mitunter etwas langsam aber "
-"wenn diese Funktion abgeschaltet ist, ist Kdesvn mitunter nicht in der Lage, "
-"Differenzen zwischen Knotenänderungen innerhalb des Protokoll-Betrachters zu "
-"generieren."
+"Das Lesen der Listen der geänderten Dateien ist mitunter etwas langsam. Aber "
+"wenn diese Funktion deaktiviert ist, ist kdesvn mitunter nicht in der Lage, "
+"Unterschiede zwischen Knotenänderungen innerhalb des Protokollbetrachters zu "
+"finden."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_review_commit)
 #: src/settings/subversion_settings.ui:171
@@ -2445,14 +2436,14 @@ msgstr ""
 #, kde-format
 msgid "Should unversioned items displayed in commit dialog or not."
 msgstr ""
-"Sollen nicht versionierte Einträge im Übertragungsdialog angezeigt werden "
+"Ob nicht versionierte Einträge im Einspieldialog angezeigt werden sollen "
 "oder nicht."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:187
 #, kde-format
 msgid "Hide new items in commit box"
-msgstr "Neue Einträge in Übertragungsdialog ausblenden"
+msgstr "Neue Einträge im Einspieldialog ausblenden"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_add_as_modification)
 #: src/settings/subversion_settings.ui:197
@@ -2481,7 +2472,7 @@ msgid ""
 "also by checking them out at depth=empty</p></body></html>"
 msgstr ""
 "<html><head/><body><p>Ist dies aktiviert, werden auch mit der Option "
-"„depth=empty“ alle nicht vorhandenen übergeordneten Ordner beim Auslesen "
+"„depth=empty“ alle nicht vorhandenen übergeordneten Ordner beim Auschecken "
 "erstellt</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_make_parents)
@@ -2495,8 +2486,8 @@ msgstr "Aktualisierung erstellt fehlende übergeordnete Einträge"
 msgid ""
 "Not filling log cache because it is disabled due setting for this repository."
 msgstr ""
-"Protokoll-Zwischenspeicher wird nicht gefüllt, weil es für dieses Repository "
-"in den Einstellungen deaktiviert wurde."
+"Protokoll-Zwischenspeicher wird nicht gefüllt, weil es für dieses "
+"Projektarchiv in den Einstellungen deaktiviert wurde."
 
 #: src/svnfrontend/background/fillcachethread.cpp:70
 #, kde-format
@@ -2532,7 +2523,7 @@ msgstr "%1 übertragen."
 #: src/svnfrontend/blamedisplay.cpp:195 src/svnfrontend/blamedisplay.cpp:207
 #, kde-format
 msgid "Log message for revision"
-msgstr "Protokoll-Meldung für diese Revision"
+msgstr "Protokollnachricht für diese Revision"
 
 #: src/svnfrontend/blamedisplay.cpp:200
 #, kde-format
@@ -2553,7 +2544,7 @@ msgstr "Zeilennummern anzeigen"
 #, kde-format
 msgctxt "@title:window"
 msgid "Log Message for Revision %1"
-msgstr "Protokoll-Nachricht für Revision %1"
+msgstr "Protokollnachricht für Revision %1"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #: src/svnfrontend/blamedisplay.ui:40
@@ -2840,19 +2831,19 @@ msgstr "Datei/Ordner kopieren"
 #: src/svnfrontend/createrepodlg.ui:14
 #, kde-format
 msgid "Create new repository"
-msgstr "Neues Repository erstellen"
+msgstr "Neues Projektarchiv erstellen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_DisableFsync)
 #: src/svnfrontend/createrepodlg.ui:22
 #, kde-format
 msgid "Disable fsync at commit (BDB only)"
-msgstr "\"fsync\" für jede Übertragungstransaktion deaktivieren (nur BDB)"
+msgstr "„fsync“ für Einspielen deaktivieren (nur BDB)"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: src/svnfrontend/createrepodlg.ui:32
 #, kde-format
 msgid "Path to repository:"
-msgstr "Pfad zum Repository:"
+msgstr "Pfad zum Projektarchiv:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_FilesystemSelector)
 #: src/svnfrontend/createrepodlg.ui:45
@@ -2864,7 +2855,7 @@ msgstr "Speichertyp wählen"
 #: src/svnfrontend/createrepodlg.ui:48
 #, kde-format
 msgid "Select the storage type of repository (FSFS or Berkely DB)"
-msgstr "Speichertyp des Repositorys wählen (FSFS oder Berkely-DB)"
+msgstr "Speichertyp des Projektarchivs wählen (FSFS oder Berkely-DB)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
 #: src/svnfrontend/createrepodlg.ui:52
@@ -2892,8 +2883,8 @@ msgid ""
 "If this is set then the base layout (<tt>/trunk</tt>,<tt>/branches</tt> and "
 "<tt>/tags</tt>) will created after opening the fresh repository."
 msgstr ""
-"Falls gesetzt, wird das Basislayout (<tt>/trunk</tt>, <tt>/branches</tt> und "
-"<tt>/tags</tt>) nach dem Öffnen des neuen Repositorys erstellt."
+"Wenn aktiviert, wird das Basislayout (<tt>/trunk</tt>, <tt>/branches</tt> "
+"und <tt>/tags</tt>) nach dem Öffnen des neuen Projektarchivs erstellt."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_CreateMainDirs)
 #: src/svnfrontend/createrepodlg.ui:71
@@ -2905,7 +2896,8 @@ msgstr "Hauptordner erstellen"
 #: src/svnfrontend/createrepodlg.ui:87
 #, kde-format
 msgid "Is created repository compatible to Subversion prior 1.6"
-msgstr "Ist das erstellte Repository kompatibel zu Subversion vor Version 1.6"
+msgstr ""
+"Ist das erstellte Projektarchiv kompatibel zu Subversion vor Version 1.6"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn16compat)
 #: src/svnfrontend/createrepodlg.ui:90
@@ -2914,9 +2906,9 @@ msgid ""
 "If set, the repository created will compatible to Subversion prior 1.5. This "
 "is only useful when svnqt is running with Subversion 1.6 or above."
 msgstr ""
-"Falls gesetzt, wird das erstellte Repository kompatibel zu Subversion vor "
-"Version 1.5 sein. Dies ist nur sinnvoll, wenn svnqt mit Subversion 1.6 oder "
-"neuer läuft."
+"Wenn aktiviert, wird das erstellte Projektarchiv kompatibel zu Subversion "
+"vor Version 1.5 sein. Dies ist nur sinnvoll, wenn svnqt mit Subversion 1.6 "
+"oder neuer läuft."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_presvn16compat)
 #: src/svnfrontend/createrepodlg.ui:93
@@ -2934,13 +2926,14 @@ msgstr "Automatische Entfernung der Protokolldatei deaktivieren (nur BDB)"
 #: src/svnfrontend/createrepodlg.ui:123
 #, kde-format
 msgid "Type of repository:"
-msgstr "Typ des Repositorys:"
+msgstr "Typ des Projektarchivs:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn15compat)
 #: src/svnfrontend/createrepodlg.ui:139
 #, kde-format
 msgid "Is created repository compatible to Subversion prior 1.5"
-msgstr "Ist das erstellte Repository kompatibel zu Subversion vor Version 1.5"
+msgstr ""
+"Ist das erstellte Projektarchiv kompatibel zu Subversion vor Version 1.5"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn15compat)
 #: src/svnfrontend/createrepodlg.ui:142
@@ -2949,9 +2942,9 @@ msgid ""
 "If set, the repository created will compatible to Subversion prior 1.5. This "
 "is only useful when svnqt is running with Subversion 1.5 or above."
 msgstr ""
-"Falls gesetzt, wird das erstellte Repository kompatibel zu Subversion vor "
-"Version 1.5 sein. Dies ist nur sinnvoll, wenn svnqt mit Subversion 1.5 oder "
-"neuer läuft."
+"Wenn aktiviert, wird das erstellte Projektarchiv kompatibel zu Subversion "
+"vor Version 1.5 sein. Dies ist nur sinnvoll, wenn svnqt mit Subversion 1.5 "
+"oder neuer läuft."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_presvn15compat)
 #: src/svnfrontend/createrepodlg.ui:145
@@ -2963,7 +2956,8 @@ msgstr "Kompatibel zu Subversion vor Version 1.5"
 #: src/svnfrontend/createrepodlg.ui:162
 #, kde-format
 msgid "Is created repository compatible to Subversion prior 1.8"
-msgstr "Ist das erstellte Repository kompatibel zu Subversion vor Version 1.8"
+msgstr ""
+"Ist das erstellte Projektarchiv kompatibel zu Subversion vor Version 1.8"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn18compat)
 #: src/svnfrontend/createrepodlg.ui:165
@@ -2972,9 +2966,9 @@ msgid ""
 "If set, the repository created will compatible to Subversion prior 1.4. This "
 "is only useful when svnqt is running with Subversion 1.8 or above."
 msgstr ""
-"Falls gesetzt, wird das erstellte Repository kompatibel zu Subversion vor "
-"Version 1.4 sein. Dies ist nur sinnvoll, wenn svnqt mit Subversion 1.8 oder "
-"neuer läuft."
+"Wenn aktiviert, wird das erstellte Projektarchiv kompatibel zu Subversion "
+"vor Version 1.4 sein. Dies ist nur sinnvoll, wenn svnqt mit Subversion 1.8 "
+"oder neuer läuft."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_presvn18compat)
 #: src/svnfrontend/createrepodlg.ui:168
@@ -2986,8 +2980,8 @@ msgstr "Kompatibel zu Subversion vor Version 1.8"
 #, kde-format
 msgid "Log cache holds %1 log entries and consumes %2 on disk."
 msgstr ""
-" Protokolldatei--Zwischenspeicher enthält %1 Protokolleinträge und belegt %2 "
-"auf der Festplatte."
+"Protokoll-Zwischenspeicher enthält %1 Protokolleinträge und belegt %2 auf "
+"der Festplatte."
 
 #: src/svnfrontend/database/dboverview.cpp:133
 #, kde-format
@@ -2995,14 +2989,14 @@ msgid ""
 "Really clean cache for repository\n"
 "%1?"
 msgstr ""
-"Zwischenspeicher für Repository\n"
+"Zwischenspeicher für Projektarchiv\n"
 "%1\n"
 "wirklich bereinigen?"
 
 #: src/svnfrontend/database/dboverview.cpp:134
 #, kde-format
 msgid "Clean repository cache"
-msgstr "Repository-Zwischenspeicher bereinigen"
+msgstr "Projektarchiv-Zwischenspeicher bereinigen"
 
 #: src/svnfrontend/database/dboverview.cpp:150
 #, kde-format
@@ -3010,7 +3004,7 @@ msgid ""
 "Really clean cache and data for repository\n"
 "%1?"
 msgstr ""
-"Sollen Zwischenspeicher und Daten für das Repository\n"
+"Sollen Zwischenspeicher und Daten für das Projektarchiv\n"
 "%1\n"
 "wirklich gelöscht werden?"
 
@@ -3019,7 +3013,7 @@ msgstr ""
 #: src/svnfrontend/database/dboverview.ui:59
 #, kde-format
 msgid "Delete repository"
-msgstr "Repository löschen"
+msgstr "Projektarchiv löschen"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DBOverView)
 #: src/svnfrontend/database/dboverview.ui:6
@@ -3031,7 +3025,7 @@ msgstr "Übersicht über den Inhalt der Datenbank für den Zwischenspeicher"
 #: src/svnfrontend/database/dboverview.ui:19
 #, kde-format
 msgid "Known repositories"
-msgstr "Bekannte Repositorys"
+msgstr "Bekannte Projektarchive"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteCacheButton)
 #. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteCacheButton)
@@ -3039,7 +3033,7 @@ msgstr "Bekannte Repositorys"
 #: src/svnfrontend/database/dboverview.ui:43
 #, kde-format
 msgid "Delete cache entries for current selected repository"
-msgstr "Zwischenspeichereinträge für aktuell gewähltes Repository löschen"
+msgstr "Zwischenspeichereinträge für aktuell gewähltes Projektarchiv löschen"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DeleteCacheButton)
 #: src/svnfrontend/database/dboverview.ui:46
@@ -3053,19 +3047,19 @@ msgstr "Zwischenspeicher löschen"
 #: src/svnfrontend/database/dboverview.ui:56
 #, kde-format
 msgid "Delete all entries and settings for selected repository"
-msgstr "Alle Einträge und Einstellungen für ausgewähltes Repository löschen"
+msgstr "Alle Einträge und Einstellungen für ausgewähltes Projektarchiv löschen"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_SettingsButton)
 #: src/svnfrontend/database/dboverview.ui:66
 #, kde-format
 msgid "Repository Settings"
-msgstr "Repository-Einstellungen"
+msgstr "Projektarchiv-Einstellungen"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_StatisticButton)
 #: src/svnfrontend/database/dboverview.ui:73
 #, kde-format
 msgid "Statistics for repository"
-msgstr "Statistik für das Repository"
+msgstr "Statistik für das Projektarchiv"
 
 #: src/svnfrontend/database/dbsettings.cpp:39
 #, kde-format
@@ -3138,7 +3132,7 @@ msgstr "Einspielungen ohne Autor-Informationen nicht anzeigen"
 #: src/svnfrontend/dumprepo_dlg.ui:14
 #, kde-format
 msgid "Dump repository"
-msgstr "Abzug (Dump) eines Repositorys erzeugen"
+msgstr "Auszug eines Projektarchivs erstellen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_UseDeltas)
 #: src/svnfrontend/dumprepo_dlg.ui:35
@@ -3162,19 +3156,19 @@ msgstr "End-Revision:"
 #: src/svnfrontend/dumprepo_dlg.ui:94
 #, kde-format
 msgid "incremental Dump"
-msgstr "Inkrementeller Abzug"
+msgstr "Inkrementeller Auszug"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_Rangeonly)
 #: src/svnfrontend/dumprepo_dlg.ui:107
 #, kde-format
 msgid "Dump revision range"
-msgstr "Revisions-Bereich archivieren"
+msgstr "Auszug eines Revisions-Bereichs"
 
 #. i18n: ectx: property (text), widget (QLabel, m_OutfileLabel)
 #: src/svnfrontend/dumprepo_dlg.ui:117
 #, kde-format
 msgid "Dump into:"
-msgstr "Archivieren nach:"
+msgstr "Auszug nach:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, m_EndNumber)
 #: src/svnfrontend/dumprepo_dlg.ui:136
@@ -3192,7 +3186,7 @@ msgstr "Start-Revision:"
 #: src/svnfrontend/dumprepo_dlg.ui:162
 #, kde-format
 msgid "Repository to dump:"
-msgstr "Zu archivierendes Repository:"
+msgstr "Projektarchiv zur Auszugerstellung:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_PatternLabel)
 #: src/svnfrontend/editignorepattern.ui:17
@@ -3204,7 +3198,7 @@ msgstr "Muster zum Hinzufügen oder Entfernen:"
 #: src/svnfrontend/editignorepattern.ui:40
 #, kde-format
 msgid "Remove patterns"
-msgstr "Muster entfernen"
+msgstr "Muster zum Entfernen"
 
 #. i18n: ectx: property (text), widget (QLabel, m_DepthLabel)
 #: src/svnfrontend/editignorepattern.ui:49
@@ -3331,7 +3325,7 @@ msgid ""
 "The string must contain <b>%BUGID%</b> which gets replaced with the bug "
 "issue number."
 msgstr ""
-"Zeichenfolge, die zu einer Protokoll-Meldung hinzugefügt wird, wenn eine "
+"Zeichenfolge, die zu einer Protokollnachricht hinzugefügt wird, wenn eine "
 "Fehlernummer angegeben wurde. Die Zeichenfolge muss <b>%BUGID%</b> "
 "enthalten, was durch die Fehlernummer ersetzt wird."
 
@@ -3343,9 +3337,9 @@ msgid ""
 "the commit dialog. Possible values:<br/><b>'true'</b>/<b>'yes'</b> or "
 "<b>'false'</b>/<b>'no'</b>."
 msgstr ""
-"Setzen Sie dies auf <b>yes</b>, falls eine Warnung angezeigt werden soll, "
-"falls kein Eintrag im Einspiel-Dialog angegeben wurde. Mögliche Werte:<br/"
-"><b>true</b>/<b>yes</b> und <b>false</b>/<b>no</b>."
+"Setzen Sie dies auf <b>'yes'</b>, wenn eine Warnung angezeigt werden soll, "
+"falls kein Eintrag im Einspieldialog angegeben wurde. Mögliche Werte:<br/"
+"><b>'true'</b>/<b>'yes'</b> und <b>'false'</b>/<b>'no'</b>."
 
 #: src/svnfrontend/editpropsdlg.cpp:112
 #, kde-format
@@ -3366,7 +3360,7 @@ msgid ""
 "bugtracking ID is appended to the log message."
 msgstr ""
 "Setzen Sie dies auf <b>false</b>, falls die ID der Fehlerdatenbank am Anfang "
-"der Protokoll-Meldung eingefügt werden soll. Der Standard ist <b>true</b>, "
+"der Protokollnachricht eingefügt werden soll. Der Standard ist <b>true</b>, "
 "was bedeutet, dass die ID des Fehlers an die Meldung angehängt wird."
 
 #: src/svnfrontend/editpropsdlg.cpp:119
@@ -3419,7 +3413,7 @@ msgstr "Klick für eine Kurzinfo über vordefinierten Eigenschaftsnamen"
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:14
 #, kde-format
 msgid "Checkout info"
-msgstr "Auslese-Informationen"
+msgstr "Informationen des Auscheckens"
 
 #. i18n: ectx: property (text), widget (QLabel, m_TargetLabel)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:26
@@ -3752,7 +3746,7 @@ msgstr "Protokolle"
 #: src/svnfrontend/svnactions.cpp:294
 #, kde-format
 msgid "Getting logs - hit Cancel for abort"
-msgstr "Protokolle werden abgeholt - „Abbrechen“ zum Unterbrechen drücken"
+msgstr "Protokolle werden abgeholt – „Abbrechen“ zum Unterbrechen drücken"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:104
 #, kde-format
@@ -3798,7 +3792,7 @@ msgstr "%1<br>Änderungseintrag %2 von %3 wird überprüft"
 #: src/svnfrontend/hotcopydlg.ui:11
 #, kde-format
 msgid "Repository to copy:"
-msgstr "Repository zum Kopieren:"
+msgstr "Projektarchiv, das kopiert werden soll:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_Destlabel)
 #: src/svnfrontend/hotcopydlg.ui:31
@@ -3821,8 +3815,8 @@ msgstr "Nicht ignorieren"
 #, kde-format
 msgid "If set, add files or directories that match ignore patterns."
 msgstr ""
-"Falls gesetzt, werden Dateien und Ordner hinzugefügt, die dem Ignoriere-"
-"Muster entsprechen."
+"Wenn aktiviert, werden Dateien und Ordner hinzugefügt, die dem "
+"Ignoriermuster entsprechen."
 
 #: src/svnfrontend/importdir_logmsg.cpp:44
 #, kde-format
@@ -3856,7 +3850,7 @@ msgstr "Unterordner %1 beim Import erstellen"
 #: src/svnfrontend/loaddmpdlg.ui:11
 #, kde-format
 msgid "Load into repository:"
-msgstr "In Repository laden:"
+msgstr "In Projektarchiv laden:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_UuidGroup)
 #: src/svnfrontend/loaddmpdlg.ui:24
@@ -3900,7 +3894,7 @@ msgstr "Post-Commit-Hook verwenden"
 #: src/svnfrontend/loaddmpdlg.ui:86 src/svnfrontend/loaddmpdlg.ui:144
 #, kde-format
 msgid "Path to load the dump into (see context help)"
-msgstr "Pfad zum Hineinladen des Abzugs (siehe Kontexthilfe)"
+msgstr "Pfad zum Laden des Auszugs (siehe Kontexthilfe)"
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, textLabel5)
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, m_Rootfolder)
@@ -3910,21 +3904,21 @@ msgid ""
 "If not empty, load the dump into a specific folder instead into root of "
 "repository. This folder must exist before loading the dump."
 msgstr ""
-"Ist hier ein Pfad eingetragen, wird der Abzug in den angegebenen Ordner "
-"anstatt in den Basisordner des Repositorys. Dieser Ordner muss vorhanden "
-"sein, bevor der Abzug geladen wird."
+"Ist hier ein Pfad eingetragen, wird der Auszug in den angegebenen Ordner "
+"anstatt in den Basisordner des Projektarchivs geladen. Dieser Ordner muss "
+"vorhanden sein, bevor der Auszug geladen wird."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel5)
 #: src/svnfrontend/loaddmpdlg.ui:92
 #, kde-format
 msgid "Load into folder:"
-msgstr "In den Ordner laden:"
+msgstr "In Ordner laden:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: src/svnfrontend/loaddmpdlg.ui:105
 #, kde-format
 msgid "Dump file:"
-msgstr "Dump-Datei:"
+msgstr "Auszugsdatei:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_validateProps)
 #: src/svnfrontend/loaddmpdlg.ui:118
@@ -4052,7 +4046,7 @@ msgid ""
 "Check if current working copy has items with newer version in repository"
 msgstr ""
 "Überprüfen, ob die aktuelle Arbeitskopie Einträge mit neueren Versionen im "
-"Repository hat."
+"Projektarchiv hat."
 
 #: src/svnfrontend/maintreewidget.cpp:527
 #, kde-format
@@ -4062,7 +4056,7 @@ msgstr "Nach Aktualisierungen suchen"
 #: src/svnfrontend/maintreewidget.cpp:530
 #, kde-format
 msgid "Blame"
-msgstr "Blame"
+msgstr "Nachforschen"
 
 #: src/svnfrontend/maintreewidget.cpp:531
 #: src/svnfrontend/maintreewidget.cpp:534
@@ -4077,7 +4071,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:533
 #, kde-format
 msgid "Blame range"
-msgstr "Blame für Bereich"
+msgstr "Bereich zum Nachforschen"
 
 #: src/svnfrontend/maintreewidget.cpp:537
 #, kde-format
@@ -4136,12 +4130,12 @@ msgstr "Erstellt einen neuen Ordner"
 #: src/svnfrontend/maintreewidget.cpp:554
 #, kde-format
 msgid "Switch repository"
-msgstr "Repository wechseln"
+msgstr "Projektarchiv wechseln"
 
 #: src/svnfrontend/maintreewidget.cpp:555
 #, kde-format
 msgid "Switch repository path of current working copy path (\"svn switch\")"
-msgstr "Wechseln des Repository-Pfads der Arbeitskopie (\"svn switch\")"
+msgstr "Wechseln des Projektarchiv-Pfads der Arbeitskopie (\"svn switch\")"
 
 #: src/svnfrontend/maintreewidget.cpp:558
 #, kde-format
@@ -4173,13 +4167,14 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:567
 #, kde-format
 msgid "Open repository of working copy"
-msgstr "Repository der Arbeitskopie öffnen"
+msgstr "Projektarchiv der Arbeitskopie öffnen"
 
 #: src/svnfrontend/maintreewidget.cpp:569
 #, kde-format
 msgid "Opens the repository the current working copy was checked out from"
 msgstr ""
-"Öffnet das Repository, von dem die aktuelle Arbeitskopie ausgelesen wurde."
+"Öffnet das Projektarchiv, von dem die aktuelle Arbeitskopie ausgecheckt "
+"wurde."
 
 #: src/svnfrontend/maintreewidget.cpp:571
 #, kde-format
@@ -4213,7 +4208,8 @@ msgstr "Ausgewählte Dateien/Ordner hinzufügen"
 #: src/svnfrontend/maintreewidget.cpp:580
 #, kde-format
 msgid "Adding selected files and/or directories to repository"
-msgstr "Ausgewählte Dateien und/oder Ordner werden zum Repository hinzugefügt"
+msgstr ""
+"Ausgewählte Dateien und/oder Ordner werden zum Projektarchiv hinzugefügt"
 
 #: src/svnfrontend/maintreewidget.cpp:582
 #, kde-format
@@ -4226,8 +4222,8 @@ msgid ""
 "Adding selected files and/or directories to repository and all subitems of "
 "folders"
 msgstr ""
-"Fügt ausgewählte Dateien und/oder Ordner sowie alle untergeordneten Einträge "
-"zum Repository hinzu."
+"Ausgewählte Dateien und/oder Ordner sowie alle untergeordnete Einträge "
+"werden zum Projektarchiv hinzugefügt"
 
 #: src/svnfrontend/maintreewidget.cpp:586
 #, kde-format
@@ -4237,7 +4233,8 @@ msgstr "Ausgewählte Dateien/Ordner löschen"
 #: src/svnfrontend/maintreewidget.cpp:588
 #, kde-format
 msgid "Deleting selected files and/or directories from repository"
-msgstr "Löscht ausgewählte Dateien und/oder Ordner aus dem Repository"
+msgstr ""
+"Ausgewählte Dateien und/oder Ordner werden aus dem Projektarchiv gelöscht"
 
 #: src/svnfrontend/maintreewidget.cpp:589
 #, kde-format
@@ -4247,7 +4244,7 @@ msgstr "Ordner löschen"
 #: src/svnfrontend/maintreewidget.cpp:590
 #, kde-format
 msgid "Deleting selected directories from repository"
-msgstr "Ausgewählte Ordner werden aus dem Repository gelöscht"
+msgstr "Ausgewählte Ordner werden aus dem Projektarchiv gelöscht"
 
 #: src/svnfrontend/maintreewidget.cpp:592
 #, kde-format
@@ -4317,8 +4314,8 @@ msgid ""
 "Diff working copy against BASE (last checked out version) - does not require "
 "access to repository"
 msgstr ""
-"Unterschied der Arbeitskopie zu BASE (letzte ausgelesene Version) - benötigt "
-"keinen Zugriff auf das Repository."
+"Arbeitskopie und BASE (zuletzt ausgecheckte Version) vergleichen – benötigt "
+"keinen Zugriff auf das Projektarchiv"
 
 #: src/svnfrontend/maintreewidget.cpp:615
 #, kde-format
@@ -4331,8 +4328,8 @@ msgid ""
 "Diff working copy against HEAD (last checked in version)- requires access to "
 "repository"
 msgstr ""
-"Arbeitskopie und HEAD (letzte eingespielte Version) vergleichen - benötigt "
-"Zugriff auf das Repository."
+"Arbeitskopie und HEAD (letzte eingespielte Version) vergleichen – benötigt "
+"Zugriff auf das Projektarchiv"
 
 #: src/svnfrontend/maintreewidget.cpp:619
 #: src/svnfrontend/maintreewidget.cpp:622
@@ -4372,8 +4369,8 @@ msgid ""
 "Merge repository path into current working copy path or current repository "
 "path into a target"
 msgstr ""
-"Repository-Pfad in aktuellen Pfad der Arbeitskopie oder aktuellen Repository-"
-"Pfad in ein Ziel zusammenführen"
+"Projektarchiv-Pfad in aktuellen Pfad der Arbeitskopie oder aktuellen "
+"Projektarchiv-Pfad in ein Ziel zusammenführen"
 
 #: src/svnfrontend/maintreewidget.cpp:634
 #: src/svnfrontend/maintreewidget.cpp:1152
@@ -4385,18 +4382,18 @@ msgstr "Öffnen mit …"
 #: src/svnfrontend/maintreewidget.cpp:638
 #, kde-format
 msgid "Checkout current repository path"
-msgstr "Aktuellen Repository-Pfad auslesen"
+msgstr "Aktuellen Projektarchiv-Pfad auschecken"
 
 #: src/svnfrontend/maintreewidget.cpp:639
 #: src/svnfrontend/maintreewidget.cpp:647
 #, kde-format
 msgid "Checkout"
-msgstr "Auslesen"
+msgstr "Auschecken"
 
 #: src/svnfrontend/maintreewidget.cpp:641
 #, kde-format
 msgid "Export current repository path"
-msgstr "Aktuellen Repository-Pfad exportieren"
+msgstr "Aktuellen Projektarchiv-Pfad exportieren"
 
 #: src/svnfrontend/maintreewidget.cpp:642
 #, kde-format
@@ -4406,12 +4403,12 @@ msgstr "Revision zum Durchsehen auswählen"
 #: src/svnfrontend/maintreewidget.cpp:646 src/svnfrontend/svnactions.cpp:1630
 #, kde-format
 msgid "Checkout a repository"
-msgstr "Auslesen eines Repositorys"
+msgstr "Ein Projektarchiv auschecken"
 
 #: src/svnfrontend/maintreewidget.cpp:648
 #, kde-format
 msgid "Export a repository"
-msgstr "Repository exportieren"
+msgstr "Ein Projektarchiv exportieren"
 
 #: src/svnfrontend/maintreewidget.cpp:649
 #, kde-format
@@ -4465,7 +4462,8 @@ msgstr "Protokoll-Zwischenspeicher aktualisieren"
 #: src/svnfrontend/maintreewidget.cpp:663
 #, kde-format
 msgid "Update the log cache for current repository"
-msgstr "Protokoll-Zwischenspeicher für das aktuelle Repository aktualisieren"
+msgstr ""
+"Protokoll-Zwischenspeicher für das aktuelle Projektarchiv aktualisieren"
 
 #: src/svnfrontend/maintreewidget.cpp:667
 #, kde-format
@@ -4475,7 +4473,7 @@ msgstr "Eigenschaft rekursiv setzen"
 #: src/svnfrontend/maintreewidget.cpp:669
 #, kde-format
 msgid "Settings for current repository"
-msgstr "Einstellungen für das aktuelle Repository"
+msgstr "Einstellungen für das aktuelle Projektarchiv"
 
 #: src/svnfrontend/maintreewidget.cpp:841
 #: src/svnfrontend/maintreewidget.cpp:1800
@@ -4509,12 +4507,12 @@ msgstr "Sperre übernehmen?"
 #: src/svnfrontend/maintreewidget.cpp:1362
 #, kde-format
 msgid "Break lock or ignore missing locks?"
-msgstr "Sperrung brechen oder fehlende Sperrung ignorieren?"
+msgstr "Sperre aufbrechen oder fehlende Sperren ignorieren?"
 
 #: src/svnfrontend/maintreewidget.cpp:1363
 #, kde-format
 msgid "Unlocking items"
-msgstr "Einträge entsperren"
+msgstr "Einträge werden entsperrt"
 
 #: src/svnfrontend/maintreewidget.cpp:1650
 #, kde-format
@@ -4583,7 +4581,7 @@ msgstr "Import-Protokoll"
 #: src/svnfrontend/maintreewidget.cpp:2137
 #, kde-format
 msgid "Could not retrieve repository of working copy."
-msgstr "Das Repository der Arbeitskopie kann nicht ermittelt werden."
+msgstr "Projektarchiv der Arbeitskopie kann nicht ermittelt werden."
 
 #: src/svnfrontend/maintreewidget.cpp:2146
 #, kde-format
@@ -4635,7 +4633,7 @@ msgstr "Navigation"
 #: src/svnfrontend/maintreewidget.cpp:2349
 #, kde-format
 msgid "Could not retrieve repository."
-msgstr "Repository kann nicht ermittelt werden"
+msgstr "Projektarchiv kann nicht ermittelt werden."
 
 #: src/svnfrontend/maintreewidget.cpp:2379
 #, kde-format
@@ -4651,7 +4649,7 @@ msgstr "Eigenschaft rekursiv bearbeiten"
 #: src/svnfrontend/merge_dlg.ui:14
 #, kde-format
 msgid "MergeSettings"
-msgstr "MergeSettings"
+msgstr "Einstellungen für Zusammenführen"
 
 #. i18n: ectx: property (text), widget (QLabel, m_SrcOneLabel)
 #: src/svnfrontend/merge_dlg.ui:22
@@ -4914,7 +4912,7 @@ msgstr "Anmerkungen"
 #: src/svnfrontend/svnactions.cpp:537
 #, kde-format
 msgid "Annotate lines - hit Cancel for abort"
-msgstr "Anmerkungen für Zeilen - \"Abbruch\" zum Unterbrechen drücken"
+msgstr "Anmerkungen für Zeilen – \"Abbruch\" zum Unterbrechen drücken"
 
 #: src/svnfrontend/svnactions.cpp:545
 #, kde-format
@@ -4930,7 +4928,7 @@ msgstr "Inhalt abholen"
 #: src/svnfrontend/svnactions.cpp:564
 #, kde-format
 msgid "Getting content - hit Cancel for abort"
-msgstr "Inhalt wird abgeholt - \"Abbruch\" zum Unterbrechen drücken"
+msgstr "Inhalt wird abgeholt – \"Abbruch\" zum Unterbrechen drücken"
 
 #: src/svnfrontend/svnactions.cpp:571
 #, kde-format
@@ -4967,7 +4965,7 @@ msgstr "Details"
 #: src/svnfrontend/svnactions.cpp:697
 #, kde-format
 msgid "Retrieving information - hit Cancel for abort"
-msgstr "Informationen werden abgeholt - \"Abbruch\" zum Unterbrechen drücken"
+msgstr "Informationen werden abgeholt – \"Abbruch\" zum Unterbrechen drücken"
 
 #: src/svnfrontend/svnactions.cpp:739
 #, kde-format
@@ -4977,7 +4975,7 @@ msgstr "URL"
 #: src/svnfrontend/svnactions.cpp:741
 #, kde-format
 msgid "Canonical repository URL"
-msgstr "Autorisierte URL des Repositorys"
+msgstr "Autorisierte URL des Projektarchivs"
 
 #: src/svnfrontend/svnactions.cpp:744
 #, kde-format
@@ -5121,7 +5119,7 @@ msgstr "Es kann nicht in den Ordner „%1“ gewechselt werden\n"
 #: src/svnfrontend/svnactions.cpp:978
 #, kde-format
 msgid "Not commit because networking is disabled"
-msgstr "Keine Übertragung, weil Netzwerkzugriff deaktiviert ist"
+msgstr "Kein Einspielen, weil Netzwerkzugriff deaktiviert ist"
 
 #: src/svnfrontend/svnactions.cpp:1000 src/svnfrontend/svnactions.cpp:2338
 #, kde-format
@@ -5153,7 +5151,7 @@ msgstr "Einspielen"
 #: src/svnfrontend/svnactions.cpp:1055
 #, kde-format
 msgid "Commit - hit Cancel for abort"
-msgstr "Einspielen - \"Abbruch\" zum Unterbrechen drücken"
+msgstr "Einspielen – \"Abbruch\" zum Unterbrechen drücken"
 
 #: src/svnfrontend/svnactions.cpp:1081
 #, kde-format
@@ -5164,7 +5162,7 @@ msgstr "Herunterladen"
 #: src/svnfrontend/svnactions.cpp:1081
 #, kde-format
 msgid "Download - hit Cancel for abort"
-msgstr "Herunterladen - \"Abbruch\" zum Unterbrechen drücken"
+msgstr "Herunterladen – \"Abbruch\" zum Unterbrechen drücken"
 
 #: src/svnfrontend/svnactions.cpp:1108
 #, kde-format
@@ -5183,28 +5181,28 @@ msgstr ""
 #, kde-format
 msgid "Diff-process could not started, check command."
 msgstr ""
-"Der Diff-Prozess kann nicht gestartet werden, überprüfen Sie den Befehl."
+"Der Vergleichsprozess kann nicht gestartet werden, überprüfen Sie den Befehl."
 
 #: src/svnfrontend/svnactions.cpp:1265 src/svnfrontend/svnactions.cpp:1318
 #, kde-format
 msgctxt "@title:window"
 msgid "Diffing"
-msgstr "Unterschied wird generiert"
+msgstr "Vergleich wird durchgeführt"
 
 #: src/svnfrontend/svnactions.cpp:1265
 #, kde-format
 msgid "Diffing - hit Cancel for abort"
-msgstr "Unterschied werden generiert - \"Abbruch\" zum Unterbrechen drücken"
+msgstr "Vergleich wird durchgeführt – zum Abbrechen „Abbruch“ drücken"
 
 #: src/svnfrontend/svnactions.cpp:1278 src/svnfrontend/svnactions.cpp:1327
 #, kde-format
 msgid "No difference to display"
-msgstr "Keine Unterschiede zum Darstellen."
+msgstr "Keine Unterschiede anzuzeigen"
 
 #: src/svnfrontend/svnactions.cpp:1318
 #, kde-format
 msgid "Diffing - hit cancel for abort"
-msgstr "Unterschiede werden generiert - „Abbruch“ zum Unterbrechen drücken"
+msgstr "Vergleich wird durchgeführt – zum Abbrechen „Abbruch“ drücken"
 
 #: src/svnfrontend/svnactions.cpp:1376
 #, kde-format
@@ -5216,7 +5214,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Diff Display"
-msgstr "Diff-Anzeige"
+msgstr "Vergleichsanzeige"
 
 #: src/svnfrontend/svnactions.cpp:1438
 #, kde-format
@@ -5227,7 +5225,7 @@ msgstr "Aktualisierung wird durchgeführt"
 #: src/svnfrontend/svnactions.cpp:1438
 #, kde-format
 msgid "Making update - hit Cancel for abort"
-msgstr "Aktualisierung - \"Abbruch\" zum Unterbrechen drücken"
+msgstr "Aktualisierung – \"Abbruch\" zum Unterbrechen drücken"
 
 #: src/svnfrontend/svnactions.cpp:1526
 #, kde-format
@@ -5237,29 +5235,29 @@ msgstr "Welche Dateien oder Ordner sollen hinzugefügt werden?"
 #: src/svnfrontend/svnactions.cpp:1533
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is versioned - break.</center>"
-msgstr "<center>Der Eintrag<br/>%1<br/>ist versioniert - Abbruch.</center>"
+msgstr "<center>Der Eintrag<br/>%1<br/>ist versioniert – Abbruch.</center>"
 
 #: src/svnfrontend/svnactions.cpp:1562
 #, kde-format
 msgid "Delete from repository"
-msgstr "Aus Repository löschen"
+msgstr "Aus Projektarchiv löschen"
 
 #: src/svnfrontend/svnactions.cpp:1611
 #, kde-format
 msgctxt "@title:window"
 msgid "Export a Repository"
-msgstr "Repository exportieren"
+msgstr "Ein Projektarchiv exportieren"
 
 #: src/svnfrontend/svnactions.cpp:1611
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout a Repository"
-msgstr "Auslesen eines Repositorys"
+msgstr "Ein Projektarchiv auschecken"
 
 #: src/svnfrontend/svnactions.cpp:1630
 #, kde-format
 msgid "Export repository"
-msgstr "Repository exportieren"
+msgstr "Projektarchiv exportieren"
 
 #: src/svnfrontend/svnactions.cpp:1657
 #, kde-format
@@ -5269,7 +5267,7 @@ msgstr "Eine Datei exportieren?"
 #: src/svnfrontend/svnactions.cpp:1657
 #, kde-format
 msgid "Checking out a file?"
-msgstr "Eine Datei auslesen?"
+msgstr "Eine Datei auschecken?"
 
 #: src/svnfrontend/svnactions.cpp:1703
 #, kde-format
@@ -5281,7 +5279,7 @@ msgstr "Exportieren"
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout"
-msgstr "Auslesen"
+msgstr "Auschecken"
 
 #: src/svnfrontend/svnactions.cpp:1703
 #, kde-format
@@ -5291,7 +5289,7 @@ msgstr "Wird exportiert"
 #: src/svnfrontend/svnactions.cpp:1703
 #, kde-format
 msgid "Checking out"
-msgstr "Wird ausgelesen"
+msgstr "Wird ausgecheckt"
 
 #: src/svnfrontend/svnactions.cpp:1740
 #, kde-format
@@ -5325,12 +5323,12 @@ msgstr "URL wird gewechselt"
 #, kde-format
 msgctxt "@title:window"
 msgid "Relocate Repository"
-msgstr "Repository-URL ändern"
+msgstr "Projektarchiv verschieben"
 
 #: src/svnfrontend/svnactions.cpp:1823
 #, kde-format
 msgid "Relocate repository to new URL"
-msgstr "URL eines Repositorys ändern"
+msgstr "URL eines Projektarchivs ändern"
 
 #: src/svnfrontend/svnactions.cpp:1846
 #, kde-format
@@ -5372,7 +5370,7 @@ msgstr "Als aufgelöst markieren"
 #: src/svnfrontend/svnactions.cpp:1943
 #, kde-format
 msgid "Could not retrieve conflict information - giving up."
-msgstr "Konfliktinformationen können nicht abgeholt werden - Abbruch."
+msgstr "Konfliktinformationen können nicht abgeholt werden – Abbruch."
 
 #: src/svnfrontend/svnactions.cpp:1970
 #, kde-format
@@ -5489,7 +5487,7 @@ msgstr "Test auf Aktualisierungen beendet"
 #: src/svnfrontend/svnactions.cpp:2528
 #, kde-format
 msgid "There are new items in repository"
-msgstr "Es existieren neue Einträge im Repository."
+msgstr "Es existieren neue Einträge im Projektarchiv"
 
 #: src/svnfrontend/svnactions.cpp:2598
 #, kde-format
@@ -5517,7 +5515,7 @@ msgstr "Nicht versioniert"
 #: src/svnfrontend/svnitem.cpp:408
 #, kde-format
 msgid "Added in repository"
-msgstr "Im Repository hinzugefügt"
+msgstr "Im Projektarchiv hinzugefügt"
 
 #: src/svnfrontend/svnitem.cpp:410
 #, kde-format
@@ -5630,7 +5628,7 @@ msgstr "Kopiert von"
 #: src/svnfrontend/svnlogdlg.ui:189 src/svnfrontend/svnlogdlgimp.cpp:510
 #, kde-format
 msgid "Diff previous"
-msgstr "Mit Vorherigen vergleichen"
+msgstr "Mit Vorgänger vergleichen"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_DispSpecDiff)
 #: src/svnfrontend/svnlogdlg.ui:208
@@ -5660,7 +5658,7 @@ msgstr "Hilfe"
 #: src/svnfrontend/svnlogdlg.ui:282
 #, kde-format
 msgid "Close"
-msgstr "Schliessen"
+msgstr "Schließen"
 
 #: src/svnfrontend/svnlogdlgimp.cpp:109
 #, kde-format
@@ -5677,17 +5675,17 @@ msgstr "SVN-Protokoll"
 #: src/svnfrontend/svnlogdlgimp.cpp:435
 #, kde-format
 msgid "Set version as right side of diff"
-msgstr "Version als rechte Seite für Diff setzen"
+msgstr "Version als rechte Seite für Vergleich festlegen"
 
 #: src/svnfrontend/svnlogdlgimp.cpp:441
 #, kde-format
 msgid "Set version as left side of diff"
-msgstr "Version als linke Seite für Diff setzen"
+msgstr "Version als linke Seite für Vergleich festlegen"
 
 #: src/svnfrontend/svnlogdlgimp.cpp:447
 #, kde-format
 msgid "Unset version for diff"
-msgstr "Auswahl für Diff rückgängig machen"
+msgstr "Auswahl für Vergleich zurücknehmen"
 
 #: src/svnfrontend/svnlogdlgimp.cpp:451
 #, kde-format
@@ -5719,13 +5717,13 @@ msgstr "Öffnen"
 #: src/urldlg.ui:14
 #, kde-format
 msgid "Open repository / working copy"
-msgstr "Repository/Arbeitskopie öffnen"
+msgstr "Projektarchiv/Arbeitskopie öffnen"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/urldlg.ui:20
 #, kde-format
 msgid "Open repository or working copy"
-msgstr "Repository oder Arbeitskopie öffnen"
+msgstr "Projektarchiv oder Arbeitskopie öffnen"
 
 #~ msgid ""
 #~ "(C) 2005-2009 Rajko Albrecht,\n"

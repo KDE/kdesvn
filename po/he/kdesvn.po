@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2025-12-01 22:39+0200\n"
+"PO-Revision-Date: 2025-12-02 14:48+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -179,7 +179,7 @@ msgstr "יצירת ופתיחת מאגר חדש"
 #: src/kdesvn.cpp:107
 #, kde-format
 msgid "Create and opens a new local Subversion repository"
-msgstr ""
+msgstr "יצירה ופתיחה של מאגר Subversion מקומי חדש"
 
 #: src/kdesvn.cpp:110
 #, kde-format
@@ -268,12 +268,12 @@ msgstr "טעינת הכתובת האחרונה שנפתחה עם העלייה"
 #: src/kdesvn.cpp:212
 #, kde-format
 msgid "Reload last opened URL if no one is given on command line"
-msgstr ""
+msgstr "לרענן את הכתובת האחרונה שנפתחה אם לא סופק שום דבר דרך שורת הפקודות"
 
 #: src/kdesvn.cpp:295
 #, kde-format
 msgid "Ready"
-msgstr ""
+msgstr "בהמתנה"
 
 #: src/kdesvn_part.cpp:156
 #, kde-format
@@ -1148,13 +1148,13 @@ msgstr "מחיקה"
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:47
 #, kde-format
 msgid "Modify (content or property)"
-msgstr ""
+msgstr "שינוי (תוכן או מאפיין)"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:51
 #: src/svnfrontend/svnactions.cpp:799
 #, kde-format
 msgid "Replace"
-msgstr ""
+msgstr "החלפה"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:55
 #, kde-format
@@ -1427,12 +1427,12 @@ msgstr ""
 #: src/settings/cmdexecsettings.ui:120
 #, kde-format
 msgid "KIO shows progress messages"
-msgstr ""
+msgstr "KIO מציג הודעות התקדמות"
 
 #: src/settings/cmdexecsettings_impl.cpp:27
 #, kde-format
 msgid " line(s)"
-msgstr ""
+msgstr " שורה/ות"
 
 #. i18n: ectx: label, entry, group (general_items)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_content)
@@ -1518,7 +1518,7 @@ msgstr "תוכנית מיזוג חיצונית:"
 #: src/settings/diffmergesettings.ui:115
 #, kde-format
 msgid "Setup an external program for conflict resolving"
-msgstr ""
+msgstr "הגדרת תוכנית חיצונית לפתרון סתירות"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_conflict_resolver)
 #: src/settings/diffmergesettings.ui:134
@@ -2169,7 +2169,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:17
 #, kde-format
 msgid "Start check for updates when open a working copy"
-msgstr ""
+msgstr "להתחיל לבדוק אם יש עדכונים בעותק העבודה הפעיל"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:33
@@ -2340,7 +2340,7 @@ msgstr "הצגת פריטים שהקיבוע הבא ישלח או לא"
 #: src/settings/subversion_settings.ui:184
 #, kde-format
 msgid "Should unversioned items be displayed in commit dialog or not."
-msgstr ""
+msgstr "האם פריטים שמחוץ לתיעוד יוצגו בחלונית הקיבוע או לא."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:187
@@ -2642,6 +2642,8 @@ msgid ""
 "%1\n"
 "Really store password as plain text?"
 msgstr ""
+"%1\n"
+"לאחסן את הסיסמה בטקסט פשוט?"
 
 #: src/svnfrontend/ccontextlistener.cpp:371
 #, kde-format
@@ -2700,13 +2702,13 @@ msgstr "שינוי שם"
 #: src/svnfrontend/copymoveview.ui:33 src/svnfrontend/copymoveview.ui:58
 #, kde-format
 msgid "KSqueezedTextLabel"
-msgstr ""
+msgstr "KSqueezedTextLabel"
 
 #. i18n: ectx: property (text), widget (QLabel, m_HeadTwoLabel)
 #: src/svnfrontend/copymoveview.ui:43
 #, kde-format
 msgid "to"
-msgstr ""
+msgstr "אל"
 
 #: src/svnfrontend/copymoveview_impl.cpp:48
 #, kde-format
@@ -2780,6 +2782,8 @@ msgid ""
 "If this is set then the base layout (<tt>/trunk</tt>,<tt>/branches</tt> and "
 "<tt>/tags</tt>) will created after opening the fresh repository."
 msgstr ""
+"אם האפשרות הזאת מוגדרת אז הפריסה הבסיסית (<tt>‎/trunk</tt>,‏<tt>‎/branches</tt> "
+"ו־<tt>‎/tags</tt>) תיווצר אחרי פתיחת מאגר חדש מאפס."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_CreateMainDirs)
 #: src/svnfrontend/createrepodlg.ui:71
@@ -2791,7 +2795,7 @@ msgstr "יצירת תיקיות ראשיות"
 #: src/svnfrontend/createrepodlg.ui:87
 #, kde-format
 msgid "Is created repository compatible to Subversion prior 1.6"
-msgstr ""
+msgstr "האם המאגר שנוצר תואם ל־Subversion טרום 1.6"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn16compat)
 #: src/svnfrontend/createrepodlg.ui:90
@@ -2800,6 +2804,8 @@ msgid ""
 "If set, the repository created will compatible to Subversion prior 1.5. This "
 "is only useful when svnqt is running with Subversion 1.6 or above."
 msgstr ""
+"אם מוגדר, המאגר שנוצר יהיה תואם ל־Subversion בגרסאות שלפני 1.5. שימושי רק כש־"
+"svnqt רץ עם Subversion 1.6 ומעלה."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_presvn16compat)
 #: src/svnfrontend/createrepodlg.ui:93
@@ -2823,7 +2829,7 @@ msgstr "סוג המאגר:"
 #: src/svnfrontend/createrepodlg.ui:139
 #, kde-format
 msgid "Is created repository compatible to Subversion prior 1.5"
-msgstr ""
+msgstr "האם המאגר שנוצר תואם ל־Subversion טרום 1.5"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn15compat)
 #: src/svnfrontend/createrepodlg.ui:142
@@ -2832,6 +2838,8 @@ msgid ""
 "If set, the repository created will compatible to Subversion prior 1.5. This "
 "is only useful when svnqt is running with Subversion 1.5 or above."
 msgstr ""
+"אם מוגדר, המאגר שנוצר יהיה תואם ל־Subversion בגרסאות שלפני 1.5. שימושי רק כש־"
+"svnqt רץ עם Subversion 1.5 ומעלה."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_presvn15compat)
 #: src/svnfrontend/createrepodlg.ui:145
@@ -2852,6 +2860,8 @@ msgid ""
 "If set, the repository created will compatible to Subversion prior 1.4. This "
 "is only useful when svnqt is running with Subversion 1.8 or above."
 msgstr ""
+"אם מוגדר, המאגר שנוצר יהיה תואם ל־Subversion בגרסאות שלפני 1.4. שימושי רק כש־"
+"svnqt רץ עם Subversion 1.8 ומעלה."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_presvn18compat)
 #: src/svnfrontend/createrepodlg.ui:168
@@ -2862,7 +2872,7 @@ msgstr "תואם ל־Subversion טרום 1.8"
 #: src/svnfrontend/database/dboverview.cpp:113
 #, kde-format
 msgid "Log cache holds %1 log entries and consumes %2 on disk."
-msgstr ""
+msgstr "מטמון היומן מחזיק %1 רשומות יומן וצורך %2 מהכונן."
 
 #: src/svnfrontend/database/dboverview.cpp:129
 #, kde-format

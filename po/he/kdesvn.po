@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2025-12-02 14:48+0200\n"
+"PO-Revision-Date: 2025-12-04 09:33+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -1615,13 +1615,13 @@ msgstr "ר׳ „מה זה” לפרטים נוספים"
 #: src/settings/dispcolor_settings.ui:6
 #, kde-format
 msgid "ColorSettings"
-msgstr ""
+msgstr "הגדרות צבע"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_colored_state)
 #: src/settings/dispcolor_settings.ui:14
 #, kde-format
 msgid "Mark changed and locked items colored"
-msgstr ""
+msgstr "סימון פריטים שהשתנו או נעולים בצבע"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel5)
 #: src/settings/dispcolor_settings.ui:56
@@ -1863,7 +1863,7 @@ msgstr ""
 #: src/settings/kdesvn_part.kcfg:108
 #, kde-format
 msgid "Get detailed information when making a remote listing"
-msgstr ""
+msgstr "קבלת מידע מפורט בעת שליפת תיעוד מרוחק"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:112
@@ -1937,7 +1937,7 @@ msgstr "איזו תוכנית פותרת סתירות"
 #: src/settings/kdesvn_part.kcfg:164
 #, kde-format
 msgid "Display other than normal states colored"
-msgstr ""
+msgstr "הצגת מצבים שאינם רגילים בצבע"
 
 #. i18n: ectx: label, entry, group (blame_dlg)
 #: src/settings/kdesvn_part.kcfg:197
@@ -2141,7 +2141,7 @@ msgstr "צבע לפריטים שנמחקו:"
 #: src/settings/revisiontree_settings.ui:175
 #, kde-format
 msgid "Should kdesvn check content of log cache before starting the tree"
-msgstr ""
+msgstr "האם על kdesvn לבדוק את תוכן יומן המטמון לפני התחלת העץ"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_fill_cache_on_tree)
 #: src/settings/revisiontree_settings.ui:180
@@ -2181,13 +2181,13 @@ msgstr ""
 #: src/settings/subversion_settings.ui:36
 #, kde-format
 msgid "Start fill log cache on open"
-msgstr ""
+msgstr "התחלת מילוי מטמון היומן עם הפתיחה"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:43
 #, kde-format
 msgid "When listing on working copies kdesvn may check for this property"
-msgstr ""
+msgstr "בעת הצגת עותקי עבודה kdesvn עשוי לבקש את המאפיין הזה"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:46

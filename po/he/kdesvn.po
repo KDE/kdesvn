@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2025-12-09 09:59+0200\n"
+"PO-Revision-Date: 2025-12-11 09:02+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -1857,7 +1857,7 @@ msgstr "להתחיל לבדוק אם יש עדכונים בעותק העבודה
 #: src/settings/kdesvn_part.kcfg:104
 #, kde-format
 msgid "Start caching latest logs on open or commit"
-msgstr ""
+msgstr "להתחיל לשמור במטמון את היומנים האחרונים בפתיחה או קיבוע"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:108
@@ -2157,7 +2157,7 @@ msgstr ""
 #: src/settings/revisiontree_settings.ui:183
 #, kde-format
 msgid "Check log cache fill before reading tree"
-msgstr ""
+msgstr "לבדוק את מילוי מטמון היומן בטרם קריאת העץ"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_start_updates_check_on_open)
 #: src/settings/subversion_settings.ui:14
@@ -3156,6 +3156,9 @@ msgid ""
 "how to serve it from Apache. A mimetype beginning with <b>'text/'</b> (or an "
 "absent mimetype) is treated as text. Anything else is treated as binary."
 msgstr ""
+"סוג תוכן/MIME הקובץ. משמש לקבוע האם למזג את הקובץ ואיך להגיש אותו מ־Apache. "
+"סוג תוכן שמתחיל ב־<b>‚text/‎’</b> (או שסוג התוכן חסר) נחשב לטקסט. כל דבר אחר "
+"נחשב לבינרי."
 
 #: src/svnfrontend/editpropsdlg.cpp:93
 #, kde-format

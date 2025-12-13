@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kdesvn package.
 #
-# Kheyyam Gojayev <xxmn77@gmail.com>, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2023, 2025 Kheyyam Gojayev <xxmn77@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2023-01-14 23:44+0400\n"
+"PO-Revision-Date: 2025-12-13 02:10+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
 "Language: az\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -59,17 +59,14 @@ msgid "Password"
 msgstr "Şifrə"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:51
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Checkout a Repository"
+#, kde-format
 msgid "Checkout From Repository..."
-msgstr "Repazitoriyadan almaq"
+msgstr "Repozitoriyadan iş nüsxəsini almaq..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:54
-#, fuzzy, kde-format
-#| msgid "Export"
+#, kde-format
 msgid "Export..."
-msgstr "İxrac etmək"
+msgstr "İxrac etmək..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:57
 #, kde-format
@@ -77,39 +74,34 @@ msgid "Update (Kdesvn)"
 msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:60
-#, fuzzy, kde-format
-#| msgid "Commit Added"
+#, kde-format
 msgid "Commit (Kdesvn)"
-msgstr "Göndəriş əlavə edildi"
+msgstr "Göndəriş təsdiqi (Kdesvn)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:63
 #, kde-format
 msgid "kdesvn log (last 100)"
-msgstr ""
+msgstr "kdesvn jurnalı (son 100)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:66
-#, fuzzy, kde-format
-#| msgid "Export a repository"
+#, kde-format
 msgid "Export from a Subversion repository..."
-msgstr "Repazitoriyanı ixrac etmək"
+msgstr "Subversion repozitoriyasından ixrac etmək..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:69
-#, fuzzy, kde-format
-#| msgid "Checkout a repository"
+#, kde-format
 msgid "Checkout from a repository..."
-msgstr "Repazitoriyadan almaq"
+msgstr "Repozitoriyadan iş nüsxəsini almaq..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:74
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Detailed Subversion info"
-msgstr "Subversion İnzibatçısı"
+msgstr "Ətraflı Subversion məlumatı"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:77
-#, fuzzy, kde-format
-#| msgid "Added in repository"
+#, kde-format
 msgid "Add to Repository"
-msgstr "Repazitoriyaya əlavə edildi"
+msgstr "Repozitoriyaya əlavə etmək"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:80
 #: src/svnfrontend/maintreewidget.cpp:655
@@ -118,35 +110,29 @@ msgid "Check for unversioned items"
 msgstr "Versiyalanmamış elementləri yoxlamaq"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:83
-#, fuzzy, kde-format
-#| msgid "Delete from repository"
+#, kde-format
 msgid "Delete From Repository"
-msgstr "Repazitoriyadan silmək"
+msgstr "Repozitoriyadan silmək"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:86
-#, fuzzy, kde-format
-#| msgid "Revert current changes"
+#, kde-format
 msgid "Revert Local Changes"
-msgstr "Cari dəyişikliklərin geri qaytarılması"
+msgstr "Yerli dəyişiklikləri geri qaytarmaq"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:89
-#, fuzzy, kde-format
-#| msgid "Rename"
+#, kde-format
 msgid "Rename..."
 msgstr "Yenidən adlandırmaq"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:92
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Export a Repository"
+#, kde-format
 msgid "Import Repository"
-msgstr "Repazitoriyaya ixrac etmək"
+msgstr "Repozitoriyanı idxal etmək"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:97
-#, fuzzy, kde-format
-#| msgid "Switch URL"
+#, kde-format
 msgid "Switch..."
-msgstr "URL arası keçid"
+msgstr "Keçid etmək..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:100
 #: src/svnfrontend/maintreewidget.cpp:826
@@ -155,33 +141,29 @@ msgid "Merge..."
 msgstr "Birləşmə..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:105
-#, fuzzy, kde-format
-#| msgid "Blame"
+#, kde-format
 msgid "Blame..."
-msgstr "Sətiri dəyişənin kimliyi"
+msgstr "Dəyişiklik edən..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:108
 #, kde-format
 msgid "Create Patch..."
-msgstr ""
+msgstr "Yol yaradın..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:113
-#, fuzzy, kde-format
-#| msgid "Diff local changes"
+#, kde-format
 msgid "Diff (local)"
-msgstr "Yerli dəyişiklikləri müqayisə etmək"
+msgstr "Fərq (yerli)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:116
-#, fuzzy, kde-format
-#| msgid "Full revision tree"
+#, kde-format
 msgid "Display revision tree"
-msgstr "Bütöv dəyişim ardıcıllığı"
+msgstr "Dəyişmə ardıcıllığını göstərmək"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:127
-#, fuzzy, kde-format
-#| msgid "Subversion Admin"
+#, kde-format
 msgid "Subversion (kdesvn)"
-msgstr "Subversion İnzibatçısı"
+msgstr "Subversion (kdesvn)"
 
 #: src/kdesvn.cpp:82
 #, kde-format
@@ -793,7 +775,7 @@ msgstr "%1 alındı"
 #: src/kiosvn/kiosvn.cpp:381
 #, kde-format
 msgid "Temporary checkout done."
-msgstr "Müvəqqəti nüsxənin alınması başa çatdı."
+msgstr "Müvəqqəti iş nüsxəsinin alınması başa çatdı."
 
 #: src/kiosvn/kiosvn.cpp:385
 #, kde-format
@@ -2067,10 +2049,9 @@ msgstr "Ziddiyətləri həll etmək üçün xarici proqramı"
 
 #. i18n: ectx: label, entry, group (display)
 #: src/settings/kdesvn_part.kcfg:164
-#, fuzzy, kde-format
-#| msgid "Display different then normal states colored"
+#, kde-format
 msgid "Display other than normal states colored"
-msgstr "Normaldan fərqlənən vəziyyəti rəngli göstərmək"
+msgstr "Normaldan fərqli rənglənmə vəziyyətini göstərmək"
 
 #. i18n: ectx: label, entry, group (blame_dlg)
 #: src/settings/kdesvn_part.kcfg:197
@@ -2188,16 +2169,13 @@ msgstr "Əməliyyatın gedişini KDE bildirişində göstərmək"
 
 #. i18n: ectx: whatsthis, entry, group (internals)
 #: src/settings/kdesvn_part.kcfg:294
-#, fuzzy, kde-format
-#| msgid ""
-#| "This value holds for log dialog which kind of log is used, its internal "
-#| "only."
+#, kde-format
 msgid ""
 "This value holds for log dialog which kind of log is used, it is internal "
 "only."
 msgstr ""
-"Bu parametrdə jurnalın dialoq pəncərəsi üçün jurnalın növü saxlanılır, bu "
-"yalnız daxili istifadə üçündür"
+"Bu dəyər jurnal növü istifadə olunan jurnal dialoqu üçün yararlıdır, bu "
+"yalnız daxilidir."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
 #: src/settings/polling_settings.ui:11
@@ -2550,10 +2528,10 @@ msgstr "Növbəti göndərilşdə elementlər siyahısı çıxarılsın ya yox"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:184
-#, fuzzy, kde-format
-#| msgid "Should unversioned items displayed in commit dialog or not."
+#, kde-format
 msgid "Should unversioned items be displayed in commit dialog or not."
-msgstr "Göndəriş dialoqunda versiyalanmamış elementlər görünsün ya yox."
+msgstr ""
+"Göndərişi təsdiqləmə dialoqunda versiyalanmamış elementlər görünsün ya yox."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:187
@@ -2576,10 +2554,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_add_as_modification)
 #: src/settings/subversion_settings.ui:200
-#, fuzzy, kde-format
-#| msgid "Update modifies instead of conflicts"
+#, kde-format
 msgid "Update modifies instead of creating conflicts"
-msgstr "Yenilənmə, ziddiyyətlər əvəzinə dəyişiklik yaradır"
+msgstr "Yenilənmə, ziddiyyətlər yaratmaq əvəzinə dəyişdirir"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_make_parents)
 #: src/settings/subversion_settings.ui:207
@@ -3540,7 +3517,7 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:14
 #, kde-format
 msgid "Checkout info"
-msgstr "Repazitoriyadan çıxarılma məlumatları"
+msgstr "Repozitoriyadan iş nüsxəsini alınması məlumatları"
 
 #. i18n: ectx: property (text), widget (QLabel, m_TargetLabel)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:26
@@ -4496,13 +4473,13 @@ msgstr "Bununla açmaq..."
 #: src/svnfrontend/maintreewidget.cpp:836
 #, kde-format
 msgid "Checkout current repository path"
-msgstr "Cari repazitoriya yolunu almaq"
+msgstr "Cari repozitoriya yolu əldə etmək"
 
 #: src/svnfrontend/maintreewidget.cpp:841
 #: src/svnfrontend/maintreewidget.cpp:857
 #, kde-format
 msgid "Checkout"
-msgstr "Almaq"
+msgstr "İş nüsxəsini almaq"
 
 #: src/svnfrontend/maintreewidget.cpp:843
 #, kde-format
@@ -5403,7 +5380,7 @@ msgstr "İxrac etmək"
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout"
-msgstr "Almaq"
+msgstr "İş nüsxəsini almaq"
 
 #: src/svnfrontend/svnactions.cpp:1792
 #, kde-format

@@ -3,16 +3,6 @@
   <!ENTITY kdesvn "<application
 >kdesvn</application
 >">
-  <!ENTITY kwallet "<application
->KWallet</application
->">
-  <!ENTITY kdiff3 "<application
->KDiff3</application
->">
-  <!ENTITY kappname "&kdesvn;"
-><!-- Do *not* replace kappname-->
-  <!ENTITY package "kde-module"
-><!-- kdebase, kdeadmin, etc -->
   <!ENTITY % addindex "IGNORE">
   <!ENTITY Rajko.Albrecht '<personname
 ><firstname
@@ -26,19 +16,9 @@
 >'>
   <!ENTITY % Brazilian-Portuguese "INCLUDE"
 ><!-- change language only here -->
-
-
-  <!-- Do not define any other entities; instead, use the entities
-       from kde-genent.entities and $LANG/user.entities. -->
 ]>
-<!-- ................................................................ -->
-
-<!-- The language must NOT be changed here. -->
 
 <book lang="&language;">
-
-<!-- This header contains all of the meta-information for the document such
-as Authors, publish date, the abstract, and Keywords -->
 
 <bookinfo>
 <title
@@ -80,34 +60,18 @@ as Authors, publish date, the abstract, and Keywords -->
 <holder
 >&Rajko.Albrecht;</holder>
 </copyright>
-<!-- Translators: put here the copyright notice of the translation -->
-<!-- Put here the FDL notice.  Read the explanation in fdl-notice.docbook
-     and in the FDL itself on how to use it. -->
 <legalnotice
 >&FDLNotice;</legalnotice>
 
-<!-- Date and version information of the documentation
-Don't forget to include this last date and this last revision number, we
-need them for translation coordination !
-Please respect the format of the date (YYYY-MM-DD) and of the version
-(V.MM.LL), it could be used by automation scripts.
-Do NOT change these in the translation. -->
-
 <date
->05/07/2013</date>
+>22/05/2016</date>
 <releaseinfo
->0.4</releaseinfo>
-
-<!-- Abstract about this handbook -->
+>kdesvn 2.0</releaseinfo>
 
 <abstract>
 <para
->&kdesvn; - um cliente subversion para o &kde;. </para>
+>&kdesvn; - um cliente subversion do &kde;. </para>
 </abstract>
-
-<!-- This is a set of Keywords for indexing by search engines.
-Please at least include KDE, the KDE package it is in, the name
- of your application, and a few relevant keywords. -->
 
 <keywordset>
 <keyword
@@ -122,28 +86,14 @@ Please at least include KDE, the KDE package it is in, the name
 
 </bookinfo>
 
-<!-- The contents of the documentation begin here.  Label
-each chapter so with the id attribute. This is necessary for two reasons: it
-allows you to easily reference the chapter from other chapters of your
-document, and if there is no ID, the name of the generated HTML files will vary
-from time to time making it hard to manage for maintainers and for the CVS
-system. Any chapter labeled (OPTIONAL) may be left out at the author's
-discretion. Other chapters should not be left out in order to maintain a
-consistent documentation style across all KDE apps. -->
-
 <chapter id="introduction">
 <title
 >Introdução</title>
 
-<!-- The introduction chapter contains a brief introduction for the
-application that explains what it does and where to report
-problems. Basically a long version of the abstract.  Don't include a
-revision history. (see installation appendix comment) -->
-
 <para
->O &kdesvn; é um <ulink url="http://subversion.tigris.org/"
+>O &kdesvn; é um <ulink url="http://subversion.apache.org/"
 >cliente subversion</ulink
-> para o &kde;. </para>
+> do &kde;. </para>
 <para
 >Você precisar ter algum conhecimento sobre o subversion, mas, felizmente, a maioria dos itens são autoexplicativos. </para>
 <para
@@ -263,9 +213,7 @@ revision history. (see installation appendix comment) -->
 >(k)svn+ssh</term>
 <listitem
 ><para
->Subversion sobre SSH. Veja as <link linkend="faq"
->Perguntas frequentes</link
-> para obter alguns detalhes especiais deste protocolo. </para
+>Subversion sobre SSH. </para
 ></listitem>
 </varlistentry>
 
@@ -512,12 +460,12 @@ revision history. (see installation appendix comment) -->
 <para
 >Com os botões acima você poderá selecionar outro intervalo de registros para mostrar. <important
 ><para
->Este intervalo é chamado sem qualquer limite prévio e, por isso, você precisa ter cuidado com repositórios grandes.</para
+>Este intervalo é chamado sem qualquer limite prévio e, por isso, você precisa ser cuidadoso com repositórios grandes.</para
 ></important>
 
 </para>
 <para
->Os botões abaixo mostram sempre o trabalho sobre o item selecionado para registro, não sobre o item selecionado na lista de arquivos alterados. Por isso, quando clicar em <guibutton
+>Os botões na parte inferior do diálogo mostram sempre o trabalho sobre o item selecionado para registro, não sobre o item selecionado na lista de arquivos alterados. Por isso, quando clicar em <guibutton
 >Diferenças para o anterior</guibutton
 >, será apresentada a diferença de todos os itens alterados nesta revisão, caso sejam equivalentes ou estejam abaixo do item subversion selecionado para obter os registros anteriores. O mesmo acontece para o <guibutton
 >Diferenças entre as revisões</guibutton
@@ -536,8 +484,7 @@ revision history. (see installation appendix comment) -->
 >). Se tiver selecionado estas revisões, elas aparecerão marcadas com algumas pequenas setas. </para>
 </sect3>
 </sect2>
-</sect1
->	
+</sect1>
 
 <sect1 id="working-with-repositories">
 <title
@@ -700,8 +647,8 @@ revision history. (see installation appendix comment) -->
 >Configurações</link
 >. O resultado do erro será apresentado na janela de registro, para que você possa ver o que está acontecendo de errado (se algo estiver errado). </para>
 </listitem>
-</orderedlist>
-Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do controle de versões não aparecerá porque as ferramentas externas irão ignorá-lo. </para>
+</orderedlist
+>Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do controle de versões não aparecerá porque as ferramentas externas irão ignorá-lo. </para>
 <para
 >Se a opção recursiva não estiver definida, a exportação é feita como uma exportação plana. Cuidado: Ao fazer isso com cópias de trabalho, os itens externos <emphasis
 >não</emphasis
@@ -861,8 +808,7 @@ Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do co
 </sect2>
 </sect1>
 
-<sect1 id="logcache-descr"
-> 
+<sect1 id="logcache-descr">
 <title
 >Cache interno do registro</title>
 <para
@@ -883,7 +829,7 @@ Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do co
 <title
 >Modo desconectado</title>
 <para
->O &kdesvn; poderá funcionar sem acesso à rede, &ie;, você pode desconectar-se da rede para usá-lo. Isso pode ser útil quando estiver trabalhando sem rede, como ocorre às vezes com notebooks. Nesses casos, o &kdesvn; sempre irá obter o histórico do cache interno. Até o momento (23/06/2008), esse registro está reduzido às funções básicas por razões técnicas, e o histórico em cache pode (mas não deve) ser diferente do registro real. Será diferente na medida que não mostrará todas as operações de cópia, mesmo que a opção <guilabel
+>O &kdesvn; poderá funcionar sem acesso à rede, &ie;, você pode desconectar-se da rede para usá-lo. Isso pode ser útil quando estiver trabalhando sem rede, como ocorre às vezes com notebooks. Nesses casos, o &kdesvn; sempre irá obter o histórico do cache interno. Este registro está reduzido às funções básicas por razões técnicas, e o histórico em cache pode (mas não deve) ser diferente do registro real. Será diferente na medida que não mostrará todas as operações de cópia, mesmo que a opção <guilabel
 >O registro segue as alterações de nós</guilabel
 > esteja assinalada.</para>
 </sect2>
@@ -1056,10 +1002,10 @@ Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do co
 </sect2>
 <sect2>
 <title
->Armazenamento de senhas no &kwallet;</title>
+>Armazenamento de senhas no &kwallet5;</title>
 <para
->O armazenamento de senhas seguro, usado por vários programas do &kde;, como o &kmail; e o &konqueror;. Se estiver salvando senhas e usar principalmente o &kdesvn;, deveria usar esta opção. Lembre-se de que o armazenamento criptografado não é totalmente seguro. Para mais detalhes, consulte a <ulink url="help:/kwallet"
->documentação do &kwallet;</ulink
+>O armazenamento de senhas seguro, usado por vários programas do &kde;, como o &kmail; e o &konqueror;. Se estiver salvando senhas e usar principalmente o &kdesvn;, deveria usar esta opção. Lembre-se de que o armazenamento criptografado não é totalmente seguro. Para mais detalhes, consulte a <ulink url="help:/kwallet5"
+>documentação do &kwallet5;</ulink
 >. </para>
 </sect2>
 <sect2>
@@ -1074,7 +1020,7 @@ Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do co
 >esvn</application
 > ou o cliente de linha de comando <application
 >svn</application
->. Se estiver usando o cliente de linha de comando, principalmente para baixar ou fazer atualizações que não precisam de uma senha, e o &kdesvn; para enviar/mover/copiar, deveria usar o &kwallet;. </para>
+>. Se estiver usando o cliente de linha de comando, principalmente para baixar ou fazer atualizações que não precisam de uma senha, e o &kdesvn; para enviar/mover/copiar, deveria usar o &kwallet5;. </para>
 </sect2>
 <sect2>
 <title
@@ -1086,7 +1032,7 @@ Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do co
 <title
 >Caso especial do svn+ssh</title>
 <para
->Se usar o subversion com svn+ssh, o armazenamento das senhas poderá ser feito com o ssh e o ssh-agent. Para isso, você precisa ter acesso de ssh à máquina e repositório remotos. Quando quiser armazenar algo, deverá usar a autenticação com chave pública do ssh, não a autenticação com senha (de fato, o ssh prefere a autenticação com chave pública). Para isso, você deve colocar a sua chave pública de ssh no destino, &eg;, o sistema do repositório. As senhas do SSH nunca serão tratadas pelo armazenamento de senhas do subversion, pelo &kwallet; ou pelo cache de senhas interno. </para>
+>Se usar o subversion com svn+ssh, o armazenamento das senhas poderá ser feito com o ssh e o ssh-agent. Para isso, você precisa ter acesso de ssh à máquina e repositório remotos. Quando quiser armazenar algo, deverá usar a autenticação com chave pública do ssh, não a autenticação com senha (de fato, o ssh prefere a autenticação com chave pública). Para isso, você deve colocar a sua chave pública de ssh no destino, &eg;, o sistema do repositório. As senhas do SSH nunca serão tratadas pelo armazenamento de senhas do subversion, pelo &kwallet5; ou pelo cache de senhas interno. </para>
 <para
 >Se não quiser que a senha da sua chave de SSH seja solicitada, poderá usar o <application
 >ssh-agent</application
@@ -1137,14 +1083,7 @@ Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do co
 >ksvn</para
 ></listitem>
 </itemizedlist>
-<para
->O mesmo também pode ser dito para o <quote
->svn+...</quote
->, mas a partir do &kde; 3.4, o kdesdk tem o seu próprio KIO SVN chamado <quote
->svn+http</quote
-> &etc; Sendo assim, os pacotes estão organizados dessa forma - ou o <quote
->svn+...</quote
-> deveria vir como um pacote extra para instalação, caso o kdesdk não o tenha instalado. </para>
+
 <para
 >Estes protocolos foram projetados apenas para repositórios, não para cópias de trabalho. Por exemplo, o <filename class="directory"
 >ksvn+file:///<replaceable
@@ -1177,7 +1116,7 @@ Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do co
 <title
 >Uso do KIO fora do &konqueror; - um exemplo</title>
 <para
->Todos os aplicativos baseados no &kde; podem usar esses protocolos. Assim, seria possível obter todas as diferenças entre duas revisões com o &kdiff3; sem nenhum conhecimento profundo. </para>
+>Todos os aplicativos que usam a biblioteca KIO podem usar esses protocolos. Assim, seria possível obter todas as diferenças entre duas revisões com o &kdiff3; sem nenhum conhecimento profundo. </para>
 <para>
 <example>
 <title
@@ -1207,9 +1146,7 @@ Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do co
 >Você pode ignorar isto se não estiver interessado em programação com o KIO.</para
 ></note>
 <para
->O KIO::ksvn::special reconhece as operações a seguir, que são feitas de forma quase igual à existente no KIO do kdesdk. Assim, por exemplo, o <application
->KDevelop</application
-> pode usá-lo se o kdesdk não estiver instalado, mas usa o &kdesvn;::KIO::svn. </para>
+>KIO::ksvn::special conhece as seguintes operações. </para>
 <sect2>
 <title
 >Lista de comandos</title>
@@ -1245,7 +1182,17 @@ Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do co
 <para
 >KURL repositório, KURL destino, int numRevisao, QString tipoRevisao </para>
 <para
->O destino NÃO será modificado, mas o conteúdo será baixado sem criar uma subpasta! Por exemplo, a origem poderá estar em http://servidor/repos/projeto/trunk, o destino em /home/usuario/projeto/ e o conteúdo de 'trunk' será copiado para /home/usuario/projeto/ e não para /home/usuario/projeto/trunk/! </para>
+>O destino <emphasis
+>NÃO</emphasis
+> será modificado, &eg;, mas o conteúdo será baixado sem criar uma subpasta! Por exemplo, a origem poderá estar em <filename
+>http://servidor/repos/projeto/trunk</filename
+>, o destino em <filename
+>/home/usuario/projeto/</filename
+> e o conteúdo de 'trunk' será copiado para <filename
+>/home/usuario/projeto/</filename
+> e não para <filename
+>/home/usuario/projeto/trunk/</filename
+>! </para>
 </entry>
 <entry
 >Sim</entry>
@@ -1542,7 +1489,7 @@ Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do co
 <para
 >Algumas operações do subversion podem ser usadas através da linha de comando, &eg;, como um cliente normal de linha de comando, mas a interação com o usuário é feita através da <acronym
 >interface gráfica</acronym
-> do &kde;. A sintaxe padrão é <userinput
+>. A sintaxe padrão é <userinput
 >kdesvn exec <replaceable
 >comando</replaceable
 > <replaceable
@@ -1976,6 +1923,18 @@ Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do co
 <entry
 >Quantas mensagens de registro o &kdesvn; deverá lembrar.</entry>
 </row>
+<row>
+<entry
+>Exibir anotações coloridas</entry>
+<entry
+>Usa as cores definidas na caixa de diálogo de configurações para as anotações.</entry>
+</row>
+<row>
+<entry
+>Usar o painel de navegação</entry>
+<entry
+>Alternar a exibição da árvore de visualização do repositório.</entry>
+</row>
 </tbody>
 </tgroup>
 </informaltable>
@@ -1983,11 +1942,13 @@ Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do co
 </para>
 </sect1>
 
-<sect1 id="subversion-settings">
+<sect1 id="subversion-timedjobs-settings">
 <title
->Configurações do Subversion</title>
-<para>
-<informaltable id="subversion-settings-table">
+>Configurações do Subversion e de tarefas agendadas</title>
+
+<table id="subversion-settings">
+<title
+>Subversion</title>
 <tgroup cols="2">
 
 <tbody>
@@ -2000,7 +1961,7 @@ Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do co
 </row>
 <row>
 <entry
->Iniciar o preenchimento da cache ao abrir</entry>
+>Iniciar o preenchimento do cache ao abrir</entry>
 <entry
 >Se estiver ativo, o &kdesvn; começa a preencher o cache do registro ao abrir um repositório ou cópia de trabalho, caso a &URL; do repositório não estiver atribuída como local (<filename class="directory"
 >file://</filename
@@ -2076,12 +2037,51 @@ Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do co
 >Ao efetuar um commit, o &kdesvn; poderá verificar o que fazer. Por exemplo, se tiver itens sem-versão que possam ser adicionados, os itens da lista mudam e a operação atual irá enviar essas modificações. Isso irá custar, dependendo da estrutura, mais ou menos tempo.</entry>
 </row>
 
+<row>
+<entry
+>Ocultar os novos itens na janela de envio</entry>
+<entry
+>Se os itens não-adicionados deverão aparecer na caixa de diálogo de envio ou não.</entry>
+</row>
+
+<row>
+<entry
+>A atualização modifica em vez de gerar conflitos</entry>
+<entry
+>Se estiver assinalado, uma adição local na mesma pasta que uma adição recebida sobre o mesmo nó irá resultar em um nó normal, com uma possível modificação local, em vez de um conflito estrutural.</entry>
+</row>
+
+<row>
+<entry
+>A atualização cria os itens pais que faltam</entry>
+<entry
+>Se estiver assinalado, cria as pastas-pai inexistentes, extraindo-os também com profundidade=vazia</entry>
+</row>
+
 </tbody>
 
 </tgroup>
-</informaltable>
+</table>
 
-</para>
+<table id="timejobs-settings">
+<title
+>Tarefas agendadas</title>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+><para
+>Procurar por itens modificados a cada N segundos</para
+> <para
+>Procurar por itens atualizados a cada N segundos</para
+></entry>
+<entry
+>Se configurado, verifica regularmente se há atualizações ou itens modificados na cópia de trabalho quando a rede estiver ativada</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
 </sect1>
 
 <sect1 id="diffmerge-settings">
@@ -2127,6 +2127,30 @@ Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do co
 >Ignora todos os espaços em branco (opção <option
 >-w</option
 > do diff)</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Preferir um programa de mesclagem externo</term>
+<listitem>
+<para
+>Ative se for preferível mesclar com um programa externo em vez do Subversion</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Usar o formato de diferenças do Git</term>
+<listitem>
+<para
+></para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Mostrar as cópias como adições</term>
+<listitem>
+<para
+></para>
 </listitem>
 </varlistentry>
 </variablelist>
@@ -2304,6 +2328,11 @@ Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do co
 </sect3>
 </sect2>
 </sect1>
+<!--FIXME
+Colors
+
+Revisions tree
+-->
 <sect1 id="kio-cmdline-settings">
 <title
 >KIO/linha de comando</title>
@@ -2341,6 +2370,17 @@ Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do co
 
 <varlistentry>
 <term
+>Não mostrar os itens no menu de ação do topo</term>
+<listitem
+><para
+>Se configurado, o kdesvn não exibirá algumas ações extras dentro do menu <guimenuitem
+>Ação</guimenuitem
+> do &konqueror; ou &dolphin;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
 >As operações do KIO usam a mensagem de registro padrão</term>
 <listitem
 ><para
@@ -2361,6 +2401,28 @@ Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do co
 ></listitem>
 </varlistentry>
 
+<varlistentry>
+<term
+>O KIO pode sobrescrever</term>
+<listitem
+><para
+>Se esta opção estiver ativa, você terá suporte de gravação simples para os itens existentes. Por exemplo, você pode abrir arquivos no seu editor e salvá-los diretamente sem precisar obtê-los previamente (o &kdesvn; fará isso em segundo plano).</para>
+<para
+>Use isso somente se tiver certeza do que está fazendo. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>O KIO mostra as mensagens de progresso</term>
+<listitem
+><para
+>Se ativado, o KIO mostra no Plasma do KDE informações detalhadas sobre a operação atual. As mensagens de erro do KIO serão sempre exibidas e <emphasis
+>não</emphasis
+> podem ser desativadas. </para
+></listitem>
+</varlistentry>
+
 </variablelist>
 
 </para>
@@ -2370,12 +2432,6 @@ Nas diferenças com um destino de mesclagem interno, um arquivo/pasta fora do co
 <chapter id="commands">
 <title
 >Referência de comandos</title>
-
-<!-- (OPTIONAL, BUT RECOMMENDED) This chapter should list all of the
-application windows and their menubar and toolbar commands for easy reference.
-Also include any keys that have a special function but have no equivalent in the
-menus or toolbars. This may not be necessary for small apps or apps with no tool
-or menu bars. -->
 
 <sect1 id="kdesvn-mainwindow">
 <title
@@ -2408,6 +2464,72 @@ or menu bars. -->
 ></para
 ></listitem>
 </varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>URLs abertas recentemente</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Este é um atalho para abrir repositórios abertos recentemente. Clicar neste item abre uma lista ao lado do menu com várias das cópias de trabalho locais ou repositórios abertos mais recentemente. Clicar em um item específico o abrirá no &kdesvn; </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Novo</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Abra uma janela com uma nova instância do &kdesvn;</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arquivo</guimenu
+> <guimenuitem
+>Administrar Subversion</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Itens de menu com tarefas administrativas para repositórios Subversion, como: <simplelist
+> <member
+>Criar e abrir novo repositório</member
+> <member
+> Descarregar repositório para arquivo</member
+> <member
+>Copiar repositório</member
+> <member
+>Carregar despejo no repositório</member
+> </simplelist
+> Para mais informações, consulte a saída de <command
+>svnadmin --help</command
+> </para>
+</listitem>
+</varlistentry>
+
 <varlistentry>
 <term>
 <menuchoice
@@ -2463,41 +2585,14 @@ or menu bars. -->
 >Ajuda do &konqueror;</ulink
 >. </para>
 </sect2>
+
 <sect2 id="kdesvn-subversion-menu">
 <title
 >Menu Subversion</title>
-<variablelist>
 
-<varlistentry>
-<term
-><menuchoice
-><shortcut
-><keycombo action="simul"
-><keycap
->F5</keycap
-></keycombo
-></shortcut
-> <guimenu
->Subversion</guimenu
-> <guisubmenu
->Exibir</guisubmenu
-> <guimenuitem
->Atualizar a visualização</guimenuitem
-> </menuchoice
-></term>
-<listitem
-><para
-><action
->Atualiza</action
-> o status atual de todos os itens apresentados. Isto irá apresentar todos os itens com o status atual. </para
-></listitem>
-
-</varlistentry>
-</variablelist>
-<sect3>
+<variablelist id="subversion-general">
 <title
 >Ações gerais do subversion</title>
-<variablelist>
 <varlistentry>
 <term>
 <menuchoice
@@ -2777,11 +2872,10 @@ or menu bars. -->
 ></listitem>
 </varlistentry>
 </variablelist>
-</sect3>
-<sect3>
+
+<variablelist id="subversion-workingcopy">
 <title
 >Cópia de trabalho</title>
-<variablelist>
 <varlistentry>
 <term
 ><menuchoice
@@ -3021,11 +3115,10 @@ or menu bars. -->
 ></listitem>
 </varlistentry>
 </variablelist>
-</sect3>
-<sect3>
+
+<variablelist id="subversion-repository">
 <title
 >Repositório</title>
-<variablelist>
 <varlistentry>
 <term
 ><menuchoice
@@ -3059,148 +3152,270 @@ or menu bars. -->
 ></listitem>
 </varlistentry>
 </variablelist>
-</sect3>
-</sect2>
-<sect2>
-<title
->O menu Ajuda</title>
-&help.menu.documentation; </sect2>
 
-<sect2 id="kdesvn-svntoolbar">
+<variablelist id="subversion-view">
 <title
->Barra de ferramentas Subversion</title>
-<variablelist>
+>Exibir ações</title>
 <varlistentry>
-<term>
-<guibutton
->Abrir</guibutton>
-</term>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>F5</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Exibir</guisubmenu
+> <guimenuitem
+>Atualizar a visualização</guimenuitem
+> </menuchoice
+></term>
 <listitem
 ><para
->Abre uma cópia de trabalho local</para
+><action
+>Atualiza</action
+> o status atual de todos os itens apresentados. Isto irá apresentar todos os itens com o status atual. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Exibir</guisubmenu
+> <guimenuitem
+>Expandir árvore de arquivos / Recolher árvore de arquivos</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Expande ou recolhe a visualização em árvore do repositório. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Cache de registro</guisubmenu
+> <guimenuitem
+>Parar atualização do cache de registro</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>O registro (log) é armazenado em cache e usado para exibir a árvore de revisões de um repositório. Dependendo da conexão com a Internet, do tamanho do repositório Subversion e da extensão do histórico, isso pode levar muito tempo. Portanto, você pode interromper a atualização do cache usando esta ação. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guimenuitem
+>Adicionar identidades ssh ao ssh-agent</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Armazena a senha da sua chave SSH para a sessão atual, para que não seja necessário digitá-la novamente. </para
 ></listitem>
 </varlistentry>
 </variablelist>
 </sect2>
 
+<sect2 id="kdesvn-database-menu">
+<title
+>Menu Banco de dados</title>
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Banco de dados</guimenu
+> <guimenuitem
+>Mostrar conteúdo do banco de dados</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Exibe uma visão geral do conteúdo do banco de dados em cache para repositórios conhecidos e permite excluir o cache ou o repositório, além de acessar as configurações do repositório. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Banco de dados</guimenu
+> <guimenuitem
+>Configurações para o repositório atual</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Exibir uma caixa de diálogo para adaptar as configurações de cache, registros e estatísticas. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Menus Configurações e Ajuda</title>
+<para
+>Além dos itens de menu <guimenu
+>Configurações</guimenu
+> e <guimenu
+>Ajuda</guimenu
+> comuns do &kde; descritos em <ulink url="help:/fundamentals/menus.html#menus-settings"
+>Menu Configurações</ulink
+> e <ulink url="help:/fundamentals/menus.html#menus-help"
+>Menu Ajuda</ulink
+> dos Fundamentos do &kde;, o &kdesvn; possui esta entrada de menu adicional:</para>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Configurações</guimenu
+> <guimenuitem
+>Configurações rápidas</guimenuitem
+> </menuchoice
+></term>
+<listitem>
+
+<variablelist>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Carregar a última URL aberta ao iniciar</guimenuitem>
+</term
+><listitem>
+<para
+>Recarrega a última URL aberta se nenhuma for indicada na linha de comando.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Os registros seguem as mudanças dos nós</guimenuitem>
+</term
+><listitem>
+<para
+><!--FIXME What does this option do? --></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Exibir os arquivos ignorados</guimenuitem>
+</term
+><listitem>
+<para
+>Mostrar os itens marcados no subversion para serem ignorados ou não.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Mostrar os arquivos desconhecidos</guimenuitem>
+</term
+><listitem>
+<para
+>Exibe arquivos que não foram adicionados ao repositório Subversion.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Ocultar os arquivos não alterados</guimenuitem>
+</term
+><listitem>
+<para
+>Use esta ação para mostrar apenas os arquivos alterados e fornecer uma visão geral clara e concisa.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Trabalhar online</guimenuitem>
+</term
+><listitem>
+<para
+>Ao trabalhar offline, o cache de logs não será atualizado; portanto, o log em cache pode ser diferente do log real.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
 </sect1>
 </chapter>
-
-<chapter id="faq">
+<chapter id="credits-and-license">
 <title
->Perguntas e respostas</title>
-
-<!-- (OPTIONAL but recommended) This chapter should include all of the silly
-(and not-so-silly) newbie questions that fill up your mailbox. This chapter
-should be reserved for BRIEF questions and answers! If one question uses more
-than a page or so then it should probably be part of the
-"Using this Application" chapter instead. You should use links to
-cross-reference questions to the parts of your documentation that answer them.
-This is also a great place to provide pointers to other FAQ's if your users
-must do some complicated configuration on other programs in order for your
-application work. -->
-
-<!--
-&reporting.bugs;
-&updating.documentation;
--->
-
-<qandaset id="faqlist">
-<qandaentry>
-<question>
+>Créditos, licença e agradecimentos</title>
 <para
->Ao usar o protocolo (k)svn+ssh, ele sempre solicita a senha novamente. Por que?</para>
-</question>
-<answer>
+>Direitos autorais do programa 2005-2009 &Rajko.Albrecht; &Rajko.Albrecht.mail; </para>
 <para
->O <quote
->problema</quote
-> é o próprio ssh. O subversion cria para cada comando um túnel para o repositório. Cada um desses túneis é uma nova conexão ssh. Do mesmo modo, cada conexão ssh deve ser autenticada. Isto pode ser resolvido se você armazenar a sua identidade pública local na máquina que contém o repositório. Se a sua identidade pública tiver uma senha, o <application
->ssh-agent</application
-> será consultado (se estiver instalado). </para>
+>Muito obrigado aos contribuidores: </para>
+<itemizedlist>
+<listitem
+><para
+>Andreas Richter <email
+>ar@oszine.de</email
+> - pelo porte ao Qt4 do svnqt</para>
+</listitem>
+<listitem
+><para
+>Michael Biebl <email
+>biebl@teco.edu</email
+> - pela ajuda, várias ideias, implementações e dicas.</para>
+</listitem>
+<listitem
+><para
+>Bram Schoenmakers <email
+>bramschoenmakers@kde.nl</email
+> - pelas dicas específicas do &kde;, tradução ao holandês e limpeza do meu código.</para>
+</listitem>
+</itemizedlist>
 <para
->Quando estiver executando um ssh-agent antes de iniciar o &kdesvn;, você deve adicionar a sua identidade ao cache do programa. O &kdesvn; não irá modificar por razões de segurança e sempre solicitará a sua senha novamente. (Leia a <ulink url="man:ssh-add"
->Página de Manual do ssh-add</ulink
->) </para>
-</answer>
-</qandaentry>
-<qandaentry>
-<question>
+>E obrigado para todos os outros tradutores (nunca imaginei ter tantas traduções em tão pouco tempo!) e por todos os comentários positivos e negativos. Isto ajudou muito. </para>
 <para
->A solicitação da senha para o (k)svn+ssh aparece no terminal quando o &kdesvn; é iniciado a partir dele. Como desativo isso?</para>
-</question>
-<answer>
-<para
->Não pode ser desativado, pois é uma característica do próprio ssh-agent. Quando vê que tem um terminal, ele solicita a senha no terminal e não em uma janela do X como o kdesvnaskpass. (Leia a <ulink url="man:ssh-add"
->Página de Manual do ssh-add</ulink
->). </para>
-</answer>
-</qandaentry>
-<qandaentry>
-<question>
-<para
->Como posso indicar uma porta ou usuário diferente no protocolo svn+ssh?</para>
-</question>
-<answer>
-<para
->Você pode usar um item no <filename class="directory"
->$HOME/.ssh/config</filename
->. Consulte a sintaxe exata na <ulink url="man:ssh_config"
->Página de Manual de Configuração do SSH</ulink
->. </para>
-</answer>
-</qandaentry>
-<qandaentry>
-<question>
-<para
->Ao verificar a existência de atualizações, o &kdesvn; não mostra nada, mas eu sei que existem itens mais recentes!</para>
-</question>
-<answer>
-<para
->As atualizações só poderão ser apresentadas se a versão do subversion do servidor remoto também for 1.2. Por exemplo, parece que o repositório funciona com o subversion &lt;1.2. Não há planos para que o &kdesvn; faça ele mesmo essa verificação recursiva - isso não faz sentido. Peça para atualizar o repositório para uma versão mais recente do subversion. </para>
-</answer>
-</qandaentry>
-<qandaentry>
-<question>
-  <para
->Ao iniciar o &kdesvn;, ele apresenta uma caixa de diálogo <quote
->Não foi possível encontrar o nosso componente</quote
-> e mostra uma janela vazia. Por que?</para>
-</question>
-<answer>
-<para
->Existem muitas razões para explicar porque o programa não conseguiu carregar. Isto normalmente acontece quando você mesmo compila as bibliotecas do subversion. Nesse caso, você pode querer ler este <ulink url="http://kdesvn.alwins-world.de/ticket/128"
->relatório de erro</ulink
+>Se quiser enviar a sua própria tradução para o &kdesvn; e precisar de ajuda, leia a <ulink url="http://l10n.kde.org/"
+>página de Localização do &kde;</ulink
+> ou pergunte na lista de discussão <ulink url="mailto:kde-i18n-doc@kde.org"
+><email
+>kde-i18n-doc@kde.org</email
+></ulink
 >. </para>
 <para
->Outra coisa relevante pode ser o esquecimento da indicação da variável libsuffix em sistemas de 64 bits durante a compilação. Como tal, o componente será instalado em <filename class="directory"
->$PREFIX/lib</filename
-> em vez de <filename class="directory"
->$PREFIX/lib64</filename
->. Por isso, indique <option
->-DLIB_SUFFIX=64</option
-> como parâmetro do <command
->cmake</command
->. </para>
+>Direitos autorais da documentação 2005-2006 &Rajko.Albrecht; &Rajko.Albrecht.mail; </para>
 <para
->Se não resolver o seu problema, você poderá tentar isto no terminal:</para>
-<programlisting
->export LD_PRELOAD=/usr/lib/kde4/libkdesvnpart.so
-  kdesvn
-  unset LD_PRELOAD
-</programlisting>
-<para
->(O local do <filename class="directory"
->/usr/lib/kde4</filename
-> depende obviamente do seu sistema. Verifique onde está instalado) </para>
-<para
->Você deve ver um grande conjunto de mensagens com o motivo do porque o carregamento da <filename
->libkdesvnpart.so</filename
-> não é possível. Isso pode ajudá-lo a resolver seu problema. </para>
-</answer>
-</qandaentry>
-</qandaset>
-</chapter>
+>Tradução de André Marcelo Alvarenga <email
+>alvarenga@kde.org</email
+></para
+> &underFDL; &underGPL; </chapter>
 
 <appendix id="revision-syntax">
 <title
@@ -3286,171 +3501,6 @@ application work. -->
 >revisão</replaceable
 ></quote
 >. </para>
-</appendix>
-
-<appendix id="further">
-<title
->Mais informações</title>
-<sect1>
-<title
->Comunicando erros, sugestões e críticas</title>
-<para
->Os relatórios de erro e solicitação de novas funcionalidades poderão ser criados em <ulink url="https://bugs.kde.org/"
->&kde; Bugtracking System</ulink
-> (Sistema de Gerenciamento de Erros do &kde;). </para>
-<!--
-<para>
-An overview for the mailing lists for &kdesvn; you may get in the <ulink url="http://lists.alwins-world.de/mailman/listinfo"
->mailinglist overview</ulink
->.
-</para>
--->
-</sect1>
-<sect1 id="credits-and-license">
-<!-- Include credits for the programmers, documentation writers, and
-contributors here. The license for your software should then be included below
-the credits with a reference to the appropriate license file included in the KDE
-distribution. -->
-<title
->Créditos, licença e agradecimentos</title>
-<para
->Direitos autorais do programa 2005-2006 &Rajko.Albrecht; &Rajko.Albrecht.mail; </para>
-<para
->Muito obrigado aos contribuidores: </para>
-<itemizedlist>
-<listitem
-><para
->Andreas Richter <email
->ar@oszine.de</email
-> - pelo porte ao Qt4 do svnqt</para>
-</listitem>
-<listitem
-><para
->Michael Biebl <email
->biebl@teco.edu</email
-> - pela ajuda, várias ideias, implementações e dicas.</para>
-</listitem>
-<listitem
-><para
->Bram Schoenmakers <email
->bramschoenmakers@kde.nl</email
-> - pelas dicas específicas do &kde;, tradução ao holandês e limpeza do meu código.</para>
-</listitem>
-</itemizedlist>
-<para
->E obrigado para todos os outros tradutores (nunca imaginei ter tantas traduções em tão pouco tempo!) e por todos os comentários positivos e negativos. Isto ajudou muito. </para>
-<para
->Se quiser enviar a sua própria tradução para o &kdesvn; e precisar de ajuda, leia a <ulink url="http://l10n.kde.org/"
->página de Localização do &kde;</ulink
-> ou pergunte na lista de discussão <ulink url="mailto:kde-i18n-doc@kde.org"
-><email
->kde-i18n-doc@kde.org</email
-></ulink
->. </para>
-<para
->Direitos autorais da documentação 2005-2006 &Rajko.Albrecht; &Rajko.Albrecht.mail; </para>
-<para
->Tradução de André Marcelo Alvarenga <email
->alvarenga@kde.org</email
-></para
-> 
-&underFDL; &underGPL; </sect1>
-
-</appendix>
-
-<appendix id="installation">
-<title
->Instalação</title>
-
-<sect1 id="getting-kdesvn">
-<title
->Como obter o &kdesvn;</title>
-
-<para
->O &kdesvn; propriamente dito poderá ser encontrado na <ulink url="https://projects.kde.org/kdesvn/downloads/"
-> área de downloads do &kdesvn;</ulink
->. </para>
-<para
->Você poderá obter a <ulink url="https://projects.kde.org/kdesvn/repository/"
->última versão no repositório</ulink
-> para saber o que está acontecendo. </para>
-<para
->A página Web deste projeto encontra-se <ulink url="https://projects.kde.org/kdesvn"
->aqui</ulink
-> </para>
-</sect1>
-
-<sect1 id="requirements">
-<title
->Requisitos</title>
-
-<!--
-List any special requirements for your application here. This should include:
-.Libraries or other software that is not included in kdesupport,
-kdelibs, or kdebase.
-.Hardware requirements like amount of RAM, disk space, graphics card
-capabilities, screen resolution, special expansion cards, &etc;
-.Operating systems the app will run on. If your app is designed only for a
-specific OS, (you wrote a graphical LILO configurator for example) put this
-information here.
--->
-
-<para
->Você precisa ter instalado o Subversion 1.5 ou posterior e no mínimo o &kde;. NÃO há suporte para o Subversion anterior ao 1.5! </para>
-<para
->O Subversion pode ser encontrado na <ulink url="http://subversion.tigris.org"
->sua página Web</ulink
->, mas a sua distribuição já deve ter os pacotes para o seu sistema. </para>
-<!-- For a list of updates, you may refer to the application web site
-or the ChangeLog file, or ... -->
-<para
->Você pode encontrar uma lista de alterações <ulink url="https://projects.kde.org/kdesvn/activity"
->nesta página</ulink
->. </para>
-</sect1>
-
-<sect1 id="compilation">
-<title
->Compilação e instalação</title>
-<para
->O &kdesvn; precisa de pelo menos o cmake 2.8 para compilar (não há suporte para o automake). As seguintes etapas funcionam com os pacotes da distribuição ou do repositório. Descompacte o pacote ou faça um clone do repositório e mude para a pasta de origem resultante. </para>
-<para>
-<screen
-><prompt
->%</prompt
-> <userinput
-><command
->mkdir</command
-> build</userinput>
-<prompt
->%</prompt
-> <userinput
-><command
->cd</command
-> build</userinput>
-<prompt
->%</prompt
-> <userinput
-><command
->cmake</command
-> ../ -DCMAKE_INSTALL_PREFIX=`kde-config --prefix` -DCMAKE_BUILD_TYPE=Release</userinput>
-<prompt
->%</prompt
-> <userinput
-><command
->make</command
-></userinput>
-<prompt
->%</prompt
-> <userinput
-><command
->make</command
-> install</userinput
->
-</screen>
-</para>
-</sect1>
-
 </appendix>
 
 &documentation.index;

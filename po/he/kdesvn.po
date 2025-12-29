@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2025-12-24 18:32+0200\n"
+"PO-Revision-Date: 2025-12-28 10:18+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -707,7 +707,7 @@ msgstr "מצב כנגד מהדורה: %1."
 #: src/kiosvn/kiolistener.cpp:206
 #, kde-format
 msgid "Performing status on external item at %1."
-msgstr ""
+msgstr "מתבצעת הערכת מצב (status) על פריט חיצוני ב־%1."
 
 #: src/kiosvn/kiolistener.cpp:209
 #, kde-format
@@ -907,7 +907,7 @@ msgstr "ביטול בחירת פריטים חדשים"
 #: src/ksvnwidgets/commitmessage.ui:107
 #, kde-format
 msgid "Revert highlighted item"
-msgstr ""
+msgstr "שחזור הפריט המודגש"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_RevertItemButton)
 #: src/ksvnwidgets/commitmessage.ui:110
@@ -919,7 +919,7 @@ msgstr "שחזור פריט"
 #: src/ksvnwidgets/commitmessage.ui:117
 #, kde-format
 msgid "Generates and display difference against repository of selected item"
-msgstr ""
+msgstr "יצירת והצגת הבדלים של הפריט הנבחר כנגד המאגר"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DiffItem)
 #: src/ksvnwidgets/commitmessage.ui:120
@@ -1159,7 +1159,7 @@ msgstr "החלפה"
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:55
 #, kde-format
 msgid "(Un)Lock"
-msgstr ""
+msgstr "נעילה/שחרור"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, RevertForm)
 #: src/ksvnwidgets/revertform.ui:14
@@ -1201,7 +1201,7 @@ msgstr "סיבות לכשל"
 #: src/ksvnwidgets/ssltrustprompt.cpp:79
 #, kde-format
 msgid "Realm"
-msgstr ""
+msgstr "תחום"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:80
 #, kde-format
@@ -2077,6 +2077,7 @@ msgid ""
 "This value holds for log dialog which kind of log is used, it is internal "
 "only."
 msgstr ""
+"הערך הזה מחזיק איזה סוג של יומן יהיה בשימוש בחלונית יומן, הוא פנימי בלבד."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
 #: src/settings/polling_settings.ui:11

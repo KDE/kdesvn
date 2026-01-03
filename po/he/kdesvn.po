@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2025-12-28 10:18+0200\n"
+"PO-Revision-Date: 2025-12-31 14:22+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -768,7 +768,7 @@ msgstr "מתבצעת משיכה של %1"
 #: src/kiosvn/kiosvn.cpp:381
 #, kde-format
 msgid "Temporary checkout done."
-msgstr ""
+msgstr "בוצעה שליפה זמנית."
 
 #: src/kiosvn/kiosvn.cpp:385
 #, kde-format
@@ -883,7 +883,7 @@ msgstr "הסתרת פריטים חדשים"
 #: src/ksvnwidgets/commitmessage.ui:87
 #, kde-format
 msgid "Mark all new e.g. not versioned items for add and commit."
-msgstr ""
+msgstr "לסמן את כל הפריטים החדשים, כלומר אלו שלא מתועדים, להוספה וקיבוע."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_MarkUnversioned)
 #: src/ksvnwidgets/commitmessage.ui:90
@@ -895,7 +895,7 @@ msgstr "בחירת פריטים חדשים"
 #: src/ksvnwidgets/commitmessage.ui:97
 #, kde-format
 msgid "Unmark all unversioned items so they will be ignored."
-msgstr ""
+msgstr "לבטל את סימון כל הפריטים שאינם מתועדים כדי להתעלם מהם."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_UnmarkUnversioned)
 #: src/ksvnwidgets/commitmessage.ui:100
@@ -3231,6 +3231,9 @@ msgid ""
 "the commit dialog. Possible values:<br/><b>'true'</b>/<b>'yes'</b> or "
 "<b>'false'</b>/<b>'no'</b>."
 msgstr ""
+"יש להגדיר ל<b>‚yes’</b> (כן) אם אמורה להופיע אזהרה כשלא נוספה בעיה לחלונית "
+"הקיבוע. הערכים האפשריים הם:<br/><b>‚true’</b>/<b>‚yes’</b> (חיובי/כן) או "
+"<b>‚false’</b>/<b>‚no’</b> (שלילי/לא)."
 
 #: src/svnfrontend/editpropsdlg.cpp:120
 #, kde-format

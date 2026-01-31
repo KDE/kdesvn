@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-01-20 07:53+0200\n"
+"PO-Revision-Date: 2026-01-30 08:22+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -1442,14 +1442,14 @@ msgstr " שורה/ות"
 #: src/settings/diffmergesettings.ui:11 src/settings/kdesvn_part.kcfg:29
 #, kde-format
 msgid "Diff ignores content type"
-msgstr ""
+msgstr "בדיקת הבדלים מתעלמת מסוג התוכן"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_tree_diff_rec)
 #: src/settings/diffmergesettings.ui:18
 #: src/svnfrontend/graphtree/revgraphview.cpp:855
 #, kde-format
 msgid "Diff in revision tree is recursive"
-msgstr ""
+msgstr "בדיקת הבדלים בעץ המהדורות הוא נסוג/רקורסיבי"
 
 #. i18n: ectx: label, entry, group (general_items)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_spaces)
@@ -1471,6 +1471,8 @@ msgid ""
 "If kdesvn should use an external diff display and/or generator. If not "
 "checked use internal display."
 msgstr ""
+"האם על kdesvn להשתמש בתצוגת/יצרנית הבדלים חיצונית. אם לא מסומן ייעשה שימוש "
+"בתצוגה הפנימית."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_external_diff)
 #: src/settings/diffmergesettings.ui:42
@@ -1484,6 +1486,7 @@ msgstr "להשתמש בתצוגת הבדלים חיצונית"
 msgid ""
 "Set if merge with external program is preferred and not Subversion's merge"
 msgstr ""
+"להגדיר האם עדיף לבצע מיזוג עם תוכנית חיצונית במקום המיזוג של Subversion"
 
 #. i18n: ectx: label, entry (extern_merge_default), group (diffmerge_items)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_extern_merge_default)
@@ -2189,7 +2192,7 @@ msgstr "לבדוק את מילוי מטמון היומן בטרם קריאת ה�
 #: src/settings/subversion_settings.ui:14
 #, kde-format
 msgid "Select if kdesvn should check for updates when open a working copy"
-msgstr ""
+msgstr "בחירה האם על kdesvn לבדוק אם יש עדכונים עם פתיחת עותק העבודה הפעיל"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_start_updates_check_on_open)
 #: src/settings/subversion_settings.ui:17
@@ -2201,7 +2204,7 @@ msgstr "להתחיל לבדוק אם יש עדכונים בעותק העבודה
 #: src/settings/subversion_settings.ui:33
 #, kde-format
 msgid "Start refreshing the log cache for repository when networking enabled"
-msgstr ""
+msgstr "התחלת ריענון מטמון היומן של המאגר כשהתקשורת פעילה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:36

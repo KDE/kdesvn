@@ -1,13 +1,12 @@
 # Translation of kdesvn to Norwegian Bokmål
 #
-# SPDX-FileCopyrightText: 2026 Kjetil Sorlund <translate@sorlund.no>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:19+0000\n"
-"PO-Revision-Date: 2026-01-28 16:55+0100\n"
+"PO-Revision-Date: 2026-02-07 00:03+0100\n"
 "Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
 "Language: nb\n"
@@ -15,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.12.1\n"
+"X-Generator: Lokalize 25.12.2\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -142,6 +141,8 @@ msgid ""
 "Could not load the part:\n"
 "%1"
 msgstr ""
+"Kunne ikke laste programdelen:\n"
+"%1"
 
 #: src/kdesvn.cpp:159
 #, kde-format
@@ -149,6 +150,8 @@ msgid ""
 "Could not find our part:\n"
 "%1"
 msgstr ""
+"Fant ikke programdelen vår:\n"
+"%1"
 
 #: src/kdesvn.cpp:190
 #, kde-format
@@ -1000,7 +1003,7 @@ msgstr "Rettefil (*.diff *.patch)"
 #: src/ksvnwidgets/diffbrowser.cpp:93
 #, kde-format
 msgid "File %1 exists - overwrite?"
-msgstr ""
+msgstr "Filen %1 finnes allerede. Vil du overskrive den?"
 
 #: src/ksvnwidgets/diffbrowser.cpp:177
 #, kde-format
@@ -1813,7 +1816,7 @@ msgstr "Største antall loggmeldinger"
 #: src/settings/kdesvn_part.kcfg:53
 #, kde-format
 msgid "Display colored blame lines"
-msgstr "Vis farget logg over ansvarlige"
+msgstr "Vis fargelagt linjelogg"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:68
@@ -1944,13 +1947,13 @@ msgstr "Hvilket program skal brukes for konfliktløsning"
 #: src/settings/kdesvn_part.kcfg:164
 #, kde-format
 msgid "Display different then normal states colored"
-msgstr ""
+msgstr "Fargelegg stadier som avviker fra de normale"
 
 #. i18n: ectx: label, entry, group (blame_dlg)
 #: src/settings/kdesvn_part.kcfg:197
 #, kde-format
 msgid "Locale for blame display"
-msgstr "Landsinnstilling for visning av ansvarlige"
+msgstr "Landsinnstilling for visning av linjelogg"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:209
@@ -2064,6 +2067,8 @@ msgstr "Vis framdriftsmeldinger i systemkurven"
 msgid ""
 "This value holds for log dialog which kind of log is used, its internal only."
 msgstr ""
+"Denne verdien inneholder hvilken type logg som skal brukes i loggvinduer. "
+"Det er bare internt."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
 #: src/settings/polling_settings.ui:11
@@ -2194,6 +2199,8 @@ msgstr "Se etter oppdateringer når du åpner en arbeidskopi"
 #, kde-format
 msgid "Start refresh the log cache for repository when networking enabled"
 msgstr ""
+"Start oppdatering av loggmellomlager for et depot når nettverk er "
+"tilgjengelig"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:36
@@ -2216,12 +2223,16 @@ msgid ""
 "items may get slow. So you should only switch on if you have repositories "
 "containing lot of such entries."
 msgstr ""
+"Ved opplisting av arbeidskopier kan kdesvn se etter egenskapen <tt>svn:needs-"
+"lock</tt>. Siden denne opplistingen/oppdateringen utføres på mapper med "
+"mange elementer kan prosessen gå tregt. Du bør bare skru på denne funksjonen "
+"dersom du har mange depoter som inneholder mange slike oppføringer."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:49
 #, kde-format
 msgid "Check if items has \"svn:needs-lock\" property set"
-msgstr ""
+msgstr "Sjekk om elementer har «svn:needs-lock»-egenskapen aktivert"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:56
@@ -2229,7 +2240,7 @@ msgstr ""
 msgid ""
 "Whether getting details about items when making listing on repositories or "
 "not"
-msgstr ""
+msgstr "Om det skal hentes detaljer om elementene ved opplasting av depot."
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:61
@@ -2241,6 +2252,12 @@ msgid ""
 "</p>\n"
 "<p align=\"left\"><i>Be careful: This may let listings REAL slow.</i></p>"
 msgstr ""
+"<p align=\"left\">Når det er krysset av her vil kdesvn hente flere detaljer "
+"om filoppføringene ved listering av eksterne depot slik at du kan se "
+"fjernlåser i oversikten.\n"
+"</p>\n"
+"<p align=\"left\"><i>Vær forsiktig: Dette kan føre til at prosessen tar "
+"SKIKKELIG lang tid.</i></p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:64
@@ -2252,13 +2269,13 @@ msgstr "Hent fildetaljer ved fjernlisting"
 #: src/settings/subversion_settings.ui:74
 #, kde-format
 msgid "Gain item info recursive"
-msgstr ""
+msgstr "Hent elementinformasjon rekursivt"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:84
 #, kde-format
 msgid "Should kdesvn retrieves properties on selected item in repositories"
-msgstr ""
+msgstr "Skal kdesvn hente egenskapene for valgte oppføringer fra depotene"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:88
@@ -2270,6 +2287,11 @@ msgid ""
 "get real slow. So if you have slow network connections or when browsing "
 "hangs often you should deactivate it."
 msgstr ""
+"Når du ser gjennom kan kdesvn prøve å vise egenskapene under "
+"listeoppføringen for en valgt oppføring.\n"
+"På depot på nettverket (f.eks. ikke åpnet via file://-protokollen) kan dette "
+"gå skikkelig sakte. Derfor; om du har en treg nettverkstilkobling eller om "
+"det henger ofte når du ser gjennom bør du deaktivere det."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:91
@@ -2281,7 +2303,7 @@ msgstr "Hent alltid egenskapene på nettverksdepot"
 #: src/settings/subversion_settings.ui:101
 #, kde-format
 msgid "Should Subversion store passwords in default"
-msgstr ""
+msgstr "Skal Subversion lagre passord som standard"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:104
@@ -2374,7 +2396,7 @@ msgstr "List opp elementer som skal sendes eller ikke på neste innmelding"
 #: src/settings/subversion_settings.ui:184
 #, kde-format
 msgid "Should unversioned items displayed in commit dialog or not."
-msgstr ""
+msgstr "Skal uversjonerte elementer vises i innmeldingsvinduet eller ikke."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:187
@@ -2398,7 +2420,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:200
 #, kde-format
 msgid "Update modifies instead of conflicts"
-msgstr ""
+msgstr "Oppdatering modifiserer i stedet for konflikter"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_make_parents)
 #: src/settings/subversion_settings.ui:207
@@ -3967,7 +3989,7 @@ msgstr "Sjekk oppdateringer"
 #: src/svnfrontend/maintreewidget.cpp:530
 #, kde-format
 msgid "Blame"
-msgstr "Linjeansvarlig"
+msgstr "Linjelogg"
 
 #: src/svnfrontend/maintreewidget.cpp:531
 #: src/svnfrontend/maintreewidget.cpp:534

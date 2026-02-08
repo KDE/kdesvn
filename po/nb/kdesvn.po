@@ -1,13 +1,12 @@
 # Translation of kdesvn to Norwegian Bokmål
 #
-# SPDX-FileCopyrightText: 2026 Kjetil Sorlund <translate@sorlund.no>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-01-28 16:55+0100\n"
+"PO-Revision-Date: 2026-02-07 00:03+0100\n"
 "Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
 "Language: nb\n"
@@ -15,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.12.1\n"
+"X-Generator: Lokalize 25.12.2\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -146,7 +145,7 @@ msgstr "Flett …"
 #: src/fileitemactions/kdesvnactionsplugin.cpp:105
 #, kde-format
 msgid "Blame..."
-msgstr "Ansvarlige …"
+msgstr "Linjelogg …"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:108
 #, kde-format
@@ -1909,7 +1908,7 @@ msgstr "Største antall loggmeldinger"
 #: src/settings/kdesvn_part.kcfg:53
 #, kde-format
 msgid "Display colored blame lines"
-msgstr "Vis farget logg over ansvarlige"
+msgstr "Vis fargelagt linjelogg"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:68
@@ -2046,7 +2045,7 @@ msgstr "Fargelegg stadier som avviker fra de normale"
 #: src/settings/kdesvn_part.kcfg:197
 #, kde-format
 msgid "Locale for blame display"
-msgstr "Landsinnstilling for visning av ansvarlige"
+msgstr "Landsinnstilling for visning av linjelogg"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:209
@@ -4103,7 +4102,7 @@ msgstr "Sjekk oppdateringer"
 #: src/svnfrontend/maintreewidget.cpp:586
 #, kde-format
 msgid "Blame"
-msgstr "Linjeansvarlig"
+msgstr "Linjelogg"
 
 #: src/svnfrontend/maintreewidget.cpp:587
 #: src/svnfrontend/maintreewidget.cpp:595

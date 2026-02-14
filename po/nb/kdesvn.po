@@ -1,12 +1,11 @@
 # Translation of kdesvn to Norwegian Bokmål
 #
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:19+0000\n"
-"PO-Revision-Date: 2026-02-07 00:03+0100\n"
+"PO-Revision-Date: 2026-02-08 00:13+0100\n"
 "Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
 "Language: nb\n"
@@ -2346,11 +2345,11 @@ msgid ""
 msgstr ""
 "<p>Velg om du vil lagre passord brukt i kdesvn i KDE-lommeboken i stedet for "
 "enkel klartekstlagring i Subversion.</p>\n"
-"</p>Det er litt sikrere å lagre i KDE-lommeboka fordi den er (for det meste) "
+"<p>Det er litt sikrere å lagre i KDE-lommeboka fordi den er (for det meste) "
 "kryptert med et passord. Ulempen er at du må skrive inn passordet på nytt i "
 "andre Subversion-klienter som ikke har tilgang til KDE-lommeboken (f.eks. "
 "den kommandolinjebaserte svn-klienten, RapidSVN m.fl.)</p>\n"
-"</p>Dersom oppsettsfilen til Subversion er på en nettverksstasjon bør du "
+"<p>Dersom oppsettsfilen til Subversion er på en nettverksstasjon bør du "
 "tenke deg nøye om før du velger å lagre passord i klartekst slik Subversion "
 "gjør og heller velge en kryptert lagringstype som KDE-lommeboken eller ikke "
 "lagre passord.</p>"
@@ -3279,7 +3278,7 @@ msgid ""
 msgstr ""
 "Sett til <b>«yes»</b> dersom det skal vises en advarsel dersom det ikke "
 "oppgis et feilrapportnummer i innmeldingsvinduet. Mulige verdier:<br/"
-"><b>«true»</b>/<b>«yes»</b> eller <b>«false»<</b>/<b>«no»</b>."
+"><b>«true»</b>/<b>«yes»</b> eller <b>«false»</b>/<b>«no»</b>."
 
 #: src/svnfrontend/editpropsdlg.cpp:112
 #, kde-format

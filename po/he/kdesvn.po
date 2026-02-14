@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-01-30 08:22+0200\n"
+"PO-Revision-Date: 2026-02-13 17:53+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -3072,7 +3072,7 @@ msgstr "להשתמש בשינויים"
 #: src/svnfrontend/dumprepo_dlg.ui:54
 #, kde-format
 msgid "-1 for START"
-msgstr ""
+msgstr "‏‎-1 ל־START (התחלה)"
 
 #. i18n: ectx: property (text), widget (QLabel, m_lblEnd)
 #: src/svnfrontend/dumprepo_dlg.ui:67
@@ -3102,7 +3102,7 @@ msgstr "היטל לתוך:"
 #: src/svnfrontend/dumprepo_dlg.ui:136
 #, kde-format
 msgid "-1 for HEAD"
-msgstr ""
+msgstr "‏‎-1 לכותרת (HEAD)"
 
 #. i18n: ectx: property (text), widget (QLabel, m_lblStart)
 #: src/svnfrontend/dumprepo_dlg.ui:149
@@ -3197,6 +3197,10 @@ msgid ""
 "><nobr><b>foo http://example.com/repos/projectA</b></nobr><br/><nobr><b>foo/"
 "bar -r 1234 http://example.com/repos/projectB</b></nobr>"
 msgstr ""
+"רשימה מופרדת ירידות שורה של צייני מודולים, כל אחד מהם מכיל נתיב תיקייה יחסי, "
+"דגלוני מהדורה כרשות, וכתובת. למשל:<br/><nobr><b>foo http://example.com/repos/"
+"projectA</b></nobr><br/><nobr><b>foo/bar -r 1234 http://example.com/repos/"
+"projectB</b></nobr>"
 
 #: src/svnfrontend/editpropsdlg.cpp:98
 #, kde-format
@@ -3248,6 +3252,9 @@ msgid ""
 "referenced not by numbers.<br/>Possible values: <b>'true'</b> or <b>'false'</"
 "b>."
 msgstr ""
+"להגדיר ל־<b>‚false’</b> (שלילי) אם במערכת מעקב התקלות שלך יש תקלות שמסומנות "
+"במחרוזת עם תווים שאינן ספרות.<br/>ערכים אפשריים: <b>‚true’</b> (חיובי) או "
+"<b>‚false’</b> (שלילי)."
 
 #: src/svnfrontend/editpropsdlg.cpp:124
 #, kde-format

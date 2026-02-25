@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-02-08 00:13+0100\n"
+"PO-Revision-Date: 2026-02-23 23:10+0100\n"
 "Last-Translator: Kjetil Sorlund <translate@sorlund.no>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
 "Language: nb\n"
@@ -1035,9 +1035,9 @@ msgid ""
 msgstr ""
 "<p ><b>Velg dybdetype</b>: </p>\n"
 "<p ><i>Tom dybde</i><br />\n"
-"Bare den valgte mappen uten filer. Oppdateringer vil ikke hente inn filer "
+"Bare den valgte mappa uten filer. Oppdateringer vil ikke hente inn filer "
 "eller mapper som ikke allerede er sjekket ut.</p>\n"
-"<p><i>Fildybde</i><br />Mappen og filer i denne denne, men ikke undermapper. "
+"<p><i>Fildybde</i><br />Mappa og filer i denne denne, men ikke undermapper. "
 "Oppdateringer vil hente eventuelle nye filer, men ikke undermapper.</p>\n"
 "<p><i>Umiddelbar dybde</i><br />Mapper, filer og undermapper. Oppdateringer "
 "vil hente inn eventuelle nye filer og undermapper, men undermappene vil ha "
@@ -1688,7 +1688,7 @@ msgstr ""
 "<tt>&lt;program&gt; &lt;param&gt; %s1 %s2</tt>\n"
 "</p>\n"
 "<br>\n"
-"Dersom en av de to første formatene er brukt vil «svn» generere diff-filen "
+"Dersom en av de to første formatene er brukt vil «svn» generere diff-fila "
 "selv.  Plassholderen «%f» vil bli erstattet med et midlertidig filnavn. "
 "Dersom «%f» ikke er angitt,\n"
 "må programmet kunne lese data fra standard innkilde.\n"
@@ -1833,7 +1833,7 @@ msgid ""
 "a small popup window with additional information about that file"
 msgstr ""
 "Her kan du bestemme om du vil se et lite oppsprettsvindu med mer informasjon "
-"om fila når musepekeren flyttes over den filen"
+"om fila når musepekeren flyttes over den fila"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_file_tips)
 #: src/settings/display_settings.ui:70
@@ -2442,10 +2442,10 @@ msgstr ""
 "kryptert med et passord. Ulempen er at du må skrive inn passordet på nytt i "
 "andre Subversion-klienter som ikke har tilgang til KDE-lommeboken (f.eks. "
 "den kommandolinjebaserte svn-klienten, RapidSVN m.fl.)</p>\n"
-"<p>Dersom oppsettsfilen til Subversion er på en nettverksstasjon bør du "
-"tenke deg nøye om før du velger å lagre passord i klartekst slik Subversion "
-"gjør og heller velge en kryptert lagringstype som KDE-lommeboken eller ikke "
-"lagre passord.</p>"
+"<p>Dersom oppsettsfila til Subversion er på en nettverksstasjon bør du tenke "
+"deg nøye om før du velger å lagre passord i klartekst slik Subversion gjør "
+"og heller velge en kryptert lagringstype som KDE-lommeboken eller ikke lagre "
+"passord.</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_passwords_in_wallet)
 #: src/settings/subversion_settings.ui:125
@@ -3286,7 +3286,7 @@ msgid ""
 msgstr ""
 "Gjør kjørbar dersom tilstede.<br/>Denne egenskapen kan ikke settes på en "
 "mappe. Et ikke-rekursivt forsøk vil feile og et rekursivt forsøk vil sette "
-"egenskapen kun på filene i mappen."
+"egenskapen kun på filene i mappa."
 
 #: src/svnfrontend/editpropsdlg.cpp:51
 #, kde-format
@@ -3304,10 +3304,10 @@ msgstr ""
 "dokumenter ved å plassere et nøkkelordanker som er formatert som $KeywordName"
 "$.<br/>Gyldige nøkkelord er:<br/><b>URL/HeadURL</b> Nettadressen til HEAD-"
 "revisjonen til prosjektet.<br/><b>Author/LastChangedBy</b> Den siste "
-"personen som endret filen.<br/><b>Date/LastChangedDate</b> Datoen og "
-"klokkeslettet filen sist ble endret.<br/><b>Revision/Rev/"
-"LastChangedRevision</b> Den siste revisjonen der filen ble endret.<br/"
-"><b>Id</b> Et komprimert sammendrag av de 4 andre nøkkelordene."
+"personen som endret fila.<br/><b>Date/LastChangedDate</b> Datoen og "
+"klokkeslettet fila sist ble endret.<br/><b>Revision/Rev/LastChangedRevision</"
+"b> Den siste revisjonen der fila ble endret.<br/><b>Id</b> Et komprimert "
+"sammendrag av de 4 andre nøkkelordene."
 
 #: src/svnfrontend/editpropsdlg.cpp:61
 #, kde-format
@@ -3318,9 +3318,9 @@ msgid ""
 "changes."
 msgstr ""
 "Sett denne til hva som helst (f.eks. <b>«*»</b>) for å tvinge låsing av "
-"denne filen.<br/>Filen blir merket som skrivebeskyttet ved utsjekking  eller "
-"oppdatering, noe som indikerer at en bruker må låse filen før de kan "
-"redigere og melde inn endringer."
+"denne fila.<br/>Fila blir merket som skrivebeskyttet ved utsjekking  eller "
+"oppdatering, noe som indikerer at en bruker må låse fila før de kan redigere "
+"og melde inn endringer."
 
 #: src/svnfrontend/editpropsdlg.cpp:66 src/svnfrontend/editpropsdlg.cpp:100
 #, kde-format
@@ -3329,7 +3329,7 @@ msgid ""
 "how to serve it from Apache. A mimetype beginning with <b>'text/'</b> (or an "
 "absent mimetype) is treated as text. Anything else is treated as binary."
 msgstr ""
-"MIME-typen til filen. Brukt for å bestemme om filen skal flettes og hvordan "
+"MIME-typen til fila. Brukt for å bestemme om fila skal flettes og hvordan "
 "den skal serveres fra Apache. En MIME-type som begynner med <b>«text/»</b> "
 "(eller mangler MIME-type) blir håndtert som tekst. Alt annet håndteres som "
 "binærformat."
@@ -3412,8 +3412,8 @@ msgid ""
 "bugtracking ID is appended to the log message."
 msgstr ""
 "Sett til <b>«false»</b> dersom du vil at feilsøkings-IDen skal settes inn på "
-"toppen av loggmeldingen. Standard er <b>«true»</b> som betyr at feilsøkings-"
-"IDen blir lagt til på slutten av loggmeldingen."
+"toppen av loggmeldinga. Standard er <b>«true»</b> som betyr at feilsøkings-"
+"IDen blir lagt til på slutten av loggmeldinga."
 
 #: src/svnfrontend/editpropsdlg.cpp:129
 #, kde-format
@@ -3656,7 +3656,7 @@ msgid ""
 msgstr ""
 "Kan ikke kjøre prosessen «%1»,\n"
 "\n"
-"Prosessen stoppet med meldingen:\n"
+"Prosessen stoppet med meldinga:\n"
 "%2"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:334
@@ -3944,7 +3944,7 @@ msgstr "Bruk «etterinnmeldings»-krok"
 #: src/svnfrontend/loaddmpdlg.ui:86 src/svnfrontend/loaddmpdlg.ui:144
 #, kde-format
 msgid "Path to load the dump into (see context help)"
-msgstr "Sti der dumpfilen skal lagres (se konteksthjelp)"
+msgstr "Sti der dumpfila skal lagres (se konteksthjelp)"
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, textLabel5)
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, m_Rootfolder)
@@ -3954,8 +3954,8 @@ msgid ""
 "If not empty, load the dump into a specific folder instead into root of "
 "repository. This folder must exist before loading the dump."
 msgstr ""
-"Dersom feltet ikke er tomt skal dumfilen lagres i den oppgitte mappen i "
-"stedet for på rotnivå i depotet. Denne mappen må finnes fra før."
+"Dersom feltet ikke er tomt skal dumpfila lagres i den oppgitte mappa i "
+"stedet for på rotnivå i depotet. Denne mappa må finnes fra før."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel5)
 #: src/svnfrontend/loaddmpdlg.ui:92
@@ -4178,7 +4178,7 @@ msgstr "Bytt depot"
 #: src/svnfrontend/maintreewidget.cpp:642
 #, kde-format
 msgid "Switch repository path of current working copy path (\"svn switch\")"
-msgstr "Bytt depot-sti for gjeldende arbeidskopimappen («svn switch»)"
+msgstr "Bytt depot-sti for gjeldende arbeidskopimappa («svn switch»)"
 
 #: src/svnfrontend/maintreewidget.cpp:646
 #, kde-format
@@ -5146,7 +5146,7 @@ msgstr "<center>Tar i bruk<br/>trykk «Avbryt» for avbryte</center>"
 #: src/svnfrontend/svnactions.cpp:964
 #, kde-format
 msgid "Could not change to folder %1\n"
-msgstr "Klarte ikke å bytte til mappen %1\n"
+msgstr "Klarte ikke å bytte til mappa %1\n"
 
 #: src/svnfrontend/svnactions.cpp:982
 #, kde-format
@@ -5714,7 +5714,7 @@ msgstr "Fravelg versjonen fra diff"
 #: src/svnfrontend/svnlogdlgimp.cpp:461
 #, kde-format
 msgid "Revert this commit"
-msgstr "Tilbakestill denne innmeldingen"
+msgstr "Tilbakestill denne innmeldinga"
 
 #: src/svnfrontend/svntreeview.cpp:111
 #, kde-format

@@ -3289,7 +3289,7 @@ msgid ""
 "directory. A non-recursive attempt will fail, and a recursive attempt will "
 "set the property only on the file children of the folder."
 msgstr ""
-"Ak je k dispozícii, urobiť súbor spustiteľným. <br> Túto vlastnosť nie je "
+"Ak je k dispozícii, urobiť súbor spustiteľným. <br/> Túto vlastnosť nie je "
 "možné nastaviť pre adresár. Nerekurzívny pokus zlyhá a rekurzívny pokus "
 "nastaví vlastnosť iba na súborových potomkoch priečinku."
 
@@ -3305,14 +3305,14 @@ msgid ""
 "last revision the object changed.<br/><b>Id</b> A compressed summary of the "
 "previous 4 keywords."
 msgstr ""
-"Kľúčové slová, ktoré by mali byť rozvinuté do obsahov súborov.<br>Môžu byť "
+"Kľúčové slová, ktoré by mali byť rozvinuté do obsahov súborov.<br/>Môžu byť "
 "vložené do dokumentov umiestnením kotvy kľúčového slova, ktorá má tvar "
-"$KeywordName$.<br> Platné kľúčové slová sú: <br><b>URL/HeadURL</b> URL pre "
-"revíziu head projektu.<br><b>Author/LastChangedBy</b> Posledná osoba, ktorá "
-"zmenila súbor.<br><b>Date/LastChangedDate</b> Dátum/čas, kedy bol objekt "
-"naposledy upravený.<br><b>Revision/Rev/LastChangedRevision</b> Posledná "
-"revízia, keď sa zmenil objekt.<br><b>Id</b> Stručný súhrn predchádzajúcich 4 "
-"kľúčových slov."
+"$KeywordName$.<br/> Platné kľúčové slová sú: <br/><b>URL/HeadURL</b> URL pre "
+"revíziu head projektu.<br/><b>Author/LastChangedBy</b> Posledná osoba, ktorá "
+"zmenila súbor.<br/><b>Date/LastChangedDate</b> Dátum/čas, kedy bol objekt "
+"naposledy upravený.<br/><b>Revision/Rev/LastChangedRevision</b> Posledná "
+"revízia, keď sa zmenil objekt.<br/><b>Id</b> Stručný súhrn predchádzajúcich "
+"4 kľúčových slov."
 
 #: src/svnfrontend/editpropsdlg.cpp:61
 #, kde-format
@@ -3323,7 +3323,7 @@ msgid ""
 "changes."
 msgstr ""
 "Nastaviť na akúkoľvek hodnotu (napr. <b>'*'</b>) pre vynútenie zamykania "
-"tohoto súboru.<br> Súbor bude nastavený iba na čítanie pri overení alebo "
+"tohoto súboru.<br/> Súbor bude nastavený iba na čítanie pri overení alebo "
 "aktualizácií, čo znamená, že používateľ musí získať zámok na súbore predtým, "
 "než môže upraviť a začleniť zmeny."
 
@@ -3348,9 +3348,8 @@ msgid ""
 msgstr ""
 "Novým riadkom oddelený zoznam modulových špecifikácií, z ktorých každá sa "
 "skladá z relatívnej cesty k adresáru, voliteľných revízne značky a URL. "
-"Napríklad: <br><nobr><b>foo http://example.com/repos/projectA</b></"
-"nobr><br><nobr><b>foo/bar -r 1234 http://example.com/repos/projectB</b></"
-"nobr>"
+"Napríklad: <br/><nobr><b>foo http://example.com/repos/projectA</b></nobr><br/"
+"><nobr><b>foo/bar -r 1234 http://example.com/repos/projectB</b></nobr>"
 
 #: src/svnfrontend/editpropsdlg.cpp:98
 #, kde-format
@@ -3373,7 +3372,7 @@ msgid ""
 "mantis/view.php?id=%BUGID%</b></nobr>"
 msgstr ""
 "Adresa URL ukazujúca na sledovanie problémov. Musí obsahovať <b>%BUGID%</b>, "
-"čo je nahradené s číslom chyba problému. Napríklad:<br><nobr><b>http://"
+"čo je nahradené s číslom chyba problému. Napríklad:<br/><nobr><b>http://"
 "example.com/mantis/view.php?id=%BUGID%</b></nobr>"
 
 #: src/svnfrontend/editpropsdlg.cpp:112
@@ -3393,9 +3392,10 @@ msgid ""
 "the commit dialog. Possible values:<br/><b>'true'</b>/<b>'yes'</b> or "
 "<b>'false'</b>/<b>'no'</b>."
 msgstr ""
-"Nastavte na <b>\"áno\"</b>, ak by sa malo zobraziť upozornenie, keď nie je "
-"zadaná žiadna položka v dialógovom okne začlenenia. Možné hodnoty:<br><b>"
-"\"pravda\"</b>/<b>\"áno\"</b> alebo <b>\"nepravda\"</b>/<b>\"nie\"</b>."
+"Nastavte na <b>\\\"áno\\\"</b>, ak by sa malo zobraziť upozornenie, keď nie "
+"je zadaná žiadna položka v dialógovom okne začlenenia. Možné hodnoty:<br/><b>"
+"\\\"pravda\\\"</b>/<b>\\\"áno\\\"</b> alebo <b>\\\"nepravda\\\"</b>/<b>\\"
+"\"nie\\\"</b>."
 
 #: src/svnfrontend/editpropsdlg.cpp:120
 #, kde-format
@@ -5146,7 +5146,7 @@ msgstr "Aplikovanie vlastností"
 #: src/svnfrontend/svnactions.cpp:928
 #, kde-format
 msgid "<center>Applying<br/>hit cancel for abort</center>"
-msgstr "<center>Použitie<br>stlačte zrušiť pre prerušenie</center>"
+msgstr "<center>Použitie<br/>stlačte zrušiť pre prerušenie</center>"
 
 #: src/svnfrontend/svnactions.cpp:964
 #, kde-format
@@ -5268,7 +5268,7 @@ msgstr "Ktoré súbory alebo adresáre by som mal pridať?"
 #: src/svnfrontend/svnactions.cpp:1613
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is versioned - break.</center>"
-msgstr "<center>Položka<br>%1<br>má verziu - prerušenie.</center>"
+msgstr "<center>Položka<br/>%1<br/>má verziu - prerušenie.</center>"
 
 #: src/svnfrontend/svnactions.cpp:1640
 #, kde-format
@@ -5332,7 +5332,7 @@ msgstr "Overovanie"
 #: src/svnfrontend/svnactions.cpp:1830
 #, kde-format
 msgid "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
-msgstr "<center>Položka<br>%1<br>je bez verzie - prerušenie.</center>"
+msgstr "<center>Položka<br/>%1<br/>je bez verzie - prerušenie.</center>"
 
 #: src/svnfrontend/svnactions.cpp:1862
 #, kde-format

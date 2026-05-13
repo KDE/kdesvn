@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-04-30 14:08+0300\n"
+"PO-Revision-Date: 2026-05-12 10:51+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -1415,6 +1415,7 @@ msgstr "‏KIO יכול לכתוב"
 msgid ""
 "If set KIO shows in KDE's Plasma detailed information about current operation"
 msgstr ""
+"אם האפשרות מוגדרת, KIO יציג מידע מפורט על הפעולה הנוכחית בפלזמה מבית KDE"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_dockmsg)
 #: src/settings/cmdexecsettings.ui:117
@@ -1425,6 +1426,9 @@ msgid ""
 "Error messages of KIO will always displayed and can <i>not</i> switched off."
 "</p>"
 msgstr ""
+"<p>אם האפשרות מוגדרת ה־KIO של kdesvn מציג הודעות מפורטות באזור הבקרה של "
+"פלזמה מבית KDE.<br/>\n"
+"הודעות השגיאה של KIO תמיד תופענה ו<i>אי אפשר</i> לכבות אותן.</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_dockmsg)
 #: src/settings/cmdexecsettings.ui:120

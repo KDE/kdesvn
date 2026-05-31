@@ -32,6 +32,7 @@
 #ifndef SVNQT_TARGETS_H
 #define SVNQT_TARGETS_H
 
+#include <svnqt/path.h>
 #include <svnqt/svnqt_defines.h>
 #include <svnqt/svnqttypes.h>
 

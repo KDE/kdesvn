@@ -8,39 +8,40 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2013-09-08 07:05+0900\n"
-"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+"PO-Revision-Date: 2026-05-31 18:07-0400\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "ئابدۇقادىر ئابلىز, غەيرەت كەنجى"
+msgstr "ئابدۇقادىر ئابلىز، غەيرەت كەنجى"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "sahran.ug@gmail.com,  gheyret@gmail.com"
+msgstr "sahranbay@gmail.com, gheyret@gmail.com"
 
 #: src/askpass/kdesvn-askpass.cpp:36
 #, kde-format
 msgid "kdesvnaskpass"
-msgstr ""
+msgstr "kdesvnaskpass"
 
 #: src/askpass/kdesvn-askpass.cpp:38
 #, kde-format
 msgid "ssh-askpass for kdesvn"
-msgstr ""
+msgstr "kdesvn نىڭ ssh-askpass ى"
 
 #: src/askpass/kdesvn-askpass.cpp:40
 #, kde-format
 msgid "Copyright (c) 2005-2009 Rajko Albrecht"
-msgstr ""
+msgstr "نەشر ھوقۇقىغا ئىگە (c) 2005-2009 Rajko Albrecht"
 
 #: src/askpass/kdesvn-askpass.cpp:43
 #, kde-format
@@ -50,37 +51,33 @@ msgstr "ئەسكەرت"
 #: src/askpass/kdesvn-askpass.cpp:55
 #, kde-format
 msgid "Please enter your password below."
-msgstr "تۆۋەندىكى يەرگە ئىمنى كىرگۈزۈڭ."
+msgstr "تۆۋەندە ئىم كىرگۈزۈڭ."
 
 #: src/askpass/kdesvn-askpass.cpp:75
-#, fuzzy, kde-format
-#| msgid "Password"
+#, kde-format
 msgctxt "@title:window"
 msgid "Password"
 msgstr "ئىم"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:51
-#, fuzzy, kde-format
-#| msgid "Repository"
+#, kde-format
 msgid "Checkout From Repository..."
-msgstr "خەزىنە"
+msgstr "خەزىنىدىن تەكشۈرىدۇ…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:54
-#, fuzzy, kde-format
-#| msgid "Export"
+#, kde-format
 msgid "Export..."
-msgstr "ئېكسپورت قىل"
+msgstr "چىقار…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:57
 #, kde-format
 msgid "Update (Kdesvn)"
-msgstr ""
+msgstr "يېڭىلا (Kdesvn)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:60
-#, fuzzy, kde-format
-#| msgid "Commit Message"
+#, kde-format
 msgid "Commit (Kdesvn)"
-msgstr "تاپشۇرۇش ئۇچۇرى:"
+msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:63
 #, kde-format
@@ -88,16 +85,14 @@ msgid "kdesvn log (last 100)"
 msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:66
-#, fuzzy, kde-format
-#| msgid "Repository"
+#, kde-format
 msgid "Export from a Subversion repository..."
-msgstr "خەزىنە"
+msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:69
-#, fuzzy, kde-format
-#| msgid "Repository"
+#, kde-format
 msgid "Checkout from a repository..."
-msgstr "خەزىنە"
+msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:74
 #, kde-format
@@ -105,10 +100,9 @@ msgid "Detailed Subversion info"
 msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:77
-#, fuzzy, kde-format
-#| msgid "Repository"
+#, kde-format
 msgid "Add to Repository"
-msgstr "خەزىنە"
+msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:80
 #: src/svnfrontend/maintreewidget.cpp:655
@@ -117,10 +111,9 @@ msgid "Check for unversioned items"
 msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:83
-#, fuzzy, kde-format
-#| msgid "Repository"
+#, kde-format
 msgid "Delete From Repository"
-msgstr "خەزىنە"
+msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:86
 #, kde-format
@@ -128,16 +121,14 @@ msgid "Revert Local Changes"
 msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:89
-#, fuzzy, kde-format
-#| msgid "Rename"
+#, kde-format
 msgid "Rename..."
-msgstr "ئات ئۆزگەرت"
+msgstr "ئات ئۆزگەرت…"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:92
-#, fuzzy, kde-format
-#| msgid "Repository"
+#, kde-format
 msgid "Import Repository"
-msgstr "خەزىنە"
+msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:97
 #, kde-format
@@ -166,21 +157,19 @@ msgid "Diff (local)"
 msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:116
-#, fuzzy, kde-format
-#| msgid "Display Properties"
+#, kde-format
 msgid "Display revision tree"
-msgstr "كۆرسىتىش خاسلىقى"
+msgstr ""
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:127
-#, fuzzy, kde-format
-#| msgid "Subversion"
+#, kde-format
 msgid "Subversion (kdesvn)"
-msgstr "Subversion"
+msgstr ""
 
 #: src/kdesvn.cpp:82
 #, kde-format
 msgid "&Bookmarks"
-msgstr "خەتكۈچلەر(&B)"
+msgstr "خەتكۈچ(&B)"
 
 #: src/kdesvn.cpp:106
 #, kde-format
@@ -360,7 +349,7 @@ msgstr ""
 #: src/kdesvn_part.cpp:293 src/main.cpp:43 src/main.cpp:44
 #, kde-format
 msgid "Developer"
-msgstr "ئىجادىيەتچى"
+msgstr "ئىجادكار"
 
 #. i18n: ectx: Menu (subversion_general)
 #: src/kdesvn_part.cpp:329 src/kdesvn_part.rc:19
@@ -377,7 +366,7 @@ msgstr "ئادەتتىكى تەڭشەك"
 #: src/kdesvn_part.cpp:330 src/kdesvn_part.rc:17 src/kdesvnui.rc:25
 #, kde-format
 msgid "Subversion"
-msgstr "Subversion"
+msgstr "تارماق نەشرى"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SubversionSettings)
 #: src/kdesvn_part.cpp:330 src/settings/subversion_settings.ui:6
@@ -408,7 +397,7 @@ msgstr ""
 #: src/kdesvn_part.cpp:333
 #, kde-format
 msgid "Colors"
-msgstr "رەڭلەر"
+msgstr "رەڭ"
 
 #: src/kdesvn_part.cpp:333
 #, kde-format
@@ -486,7 +475,7 @@ msgstr "ياردەم(&H)"
 #: src/kdesvn_part.rc:162
 #, kde-format
 msgid "Actions"
-msgstr "مەشغۇلاتلار"
+msgstr "مەشغۇلات"
 
 #. i18n: ectx: ToolBar (subversionToolBar)
 #: src/kdesvn_part.rc:242 src/kdesvnui.rc:58
@@ -524,7 +513,7 @@ msgstr ""
 #: src/kdesvnd/ksvnjobview.cpp:52
 #, kde-format
 msgid "bytes"
-msgstr ""
+msgstr "بايت"
 
 #. i18n: ectx: Menu (file)
 #: src/kdesvnui.rc:4
@@ -566,11 +555,10 @@ msgid "No repository open"
 msgstr ""
 
 #: src/kdesvnview.cpp:257
-#, fuzzy, kde-format
-#| msgid "Repository"
+#, kde-format
 msgctxt "@title:window"
 msgid "Hotcopy a Repository"
-msgstr "خەزىنە"
+msgstr ""
 
 #: src/kdesvnview.cpp:275
 #, kde-format
@@ -600,17 +588,16 @@ msgid "Loading dump finished."
 msgstr ""
 
 #: src/kdesvnview.cpp:346
-#, fuzzy, kde-format
-#| msgid "Repository"
+#, kde-format
 msgctxt "@title:window"
 msgid "Dump a Repository"
-msgstr "خەزىنە"
+msgstr ""
 
 #: src/kdesvnview.cpp:386
 #, kde-format
 msgctxt "@title:window"
 msgid "Dump"
-msgstr ""
+msgstr "ئالماشتۇرۇپ ساقلاش"
 
 #: src/kdesvnview.cpp:386
 #, kde-format
@@ -640,7 +627,7 @@ msgstr ""
 #: src/kiosvn/kiolistener.cpp:104 src/kiosvn/kiolistener.cpp:139
 #, kde-format
 msgid "A %1"
-msgstr "A %1"
+msgstr ""
 
 #: src/kiosvn/kiolistener.cpp:112 src/kiosvn/kiolistener.cpp:135
 #, kde-format
@@ -742,7 +729,7 @@ msgstr "%1 نى ئالماشتۇرۇۋاتىدۇ."
 #: src/kiosvn/kiolistener.cpp:228
 #, kde-format
 msgid "Transmitting file data "
-msgstr "ھۆججەتنىڭ سانلىق-مەلۇماتلىرىنى يوللاۋاتىدۇ "
+msgstr "ھۆججەتنىڭ سانلىق مەلۇماتلىرىنى يوللاۋاتىدۇ "
 
 #: src/kiosvn/kiosvn.cpp:295 src/kiosvn/kiosvn.cpp:344
 #: src/kiosvn/kiosvn.cpp:484
@@ -783,7 +770,7 @@ msgstr ""
 #: src/kiosvn/kiosvn.cpp:391
 #, kde-format
 msgid "Could not open temporary file"
-msgstr ""
+msgstr "ۋاقىتلىق ھۆججەتنى ئاچالمايدۇ"
 
 #: src/kiosvn/kiosvn.cpp:412
 #, kde-format
@@ -858,7 +845,7 @@ msgstr "ئىشلەتكۈچى ئاتى:"
 #: src/ksvnwidgets/commitmessage.ui:6
 #, kde-format
 msgid "Commit Message"
-msgstr "تاپشۇرۇش ئۇچۇرى:"
+msgstr "تاپشۇرۇش ئۇچۇرى"
 
 #. i18n: ectx: property (text), widget (QLabel, m_Reviewlabel)
 #: src/ksvnwidgets/commitmessage.ui:27
@@ -874,10 +861,9 @@ msgstr "ھەممىنى تاللا"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_UnselectAllButton)
 #: src/ksvnwidgets/commitmessage.ui:70
-#, fuzzy, kde-format
-#| msgid "Select all"
+#, kde-format
 msgid "Unselect all"
-msgstr "ھەممىنى تاللا"
+msgstr "ھەممىنى تاللىما"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_HideNewItems)
 #: src/ksvnwidgets/commitmessage.ui:77 src/ksvnwidgets/commitmsg_impl.cpp:457
@@ -953,10 +939,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, m_insert_file_button)
 #: src/ksvnwidgets/commitmessage.ui:215
-#, fuzzy, kde-format
-#| msgid "Insert Text File"
+#, kde-format
 msgid "Insert Text File..."
-msgstr "تېكىست ھۆججەت قىستۇر"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_keepLocksButton)
 #: src/ksvnwidgets/commitmessage.ui:226
@@ -971,11 +956,10 @@ msgid "Keep locks"
 msgstr ""
 
 #: src/ksvnwidgets/commitmsg_impl.cpp:291
-#, fuzzy, kde-format
-#| msgid "Commit"
+#, kde-format
 msgctxt "@title:window"
 msgid "Commit Log"
-msgstr "تاپشۇر(_C)"
+msgstr ""
 
 #: src/ksvnwidgets/commitmsg_impl.cpp:457
 #, kde-format
@@ -1210,7 +1194,7 @@ msgstr "ساھە"
 #: src/ksvnwidgets/ssltrustprompt.cpp:80
 #, kde-format
 msgid "Host"
-msgstr "ماشىنا"
+msgstr "مۇلازىمېتىر"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:81
 #, kde-format
@@ -1301,10 +1285,9 @@ msgid "Limit log output to <number>"
 msgstr ""
 
 #: src/main.cpp:53
-#, fuzzy, kde-format
-#| msgid "Number"
+#, kde-format
 msgid "<number>"
-msgstr "نومۇرى"
+msgstr "<تەرتىپ نومۇرى>"
 
 #: src/main.cpp:54
 #, kde-format
@@ -1433,11 +1416,9 @@ msgid "KIO shows progress messages"
 msgstr ""
 
 #: src/settings/cmdexecsettings_impl.cpp:27
-#, fuzzy, kde-format
-#| msgid " line"
-#| msgid_plural " lines"
+#, kde-format
 msgid " line(s)"
-msgstr " سىزىقلار"
+msgstr ""
 
 #. i18n: ectx: label, entry, group (general_items)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_content)
@@ -1686,7 +1667,7 @@ msgstr ""
 #: src/settings/display_settings.ui:6
 #, kde-format
 msgid "Settings"
-msgstr "تەڭشەكلەر"
+msgstr "تەڭشەك"
 
 #. i18n: ectx: property (text), widget (QLabel, m_ListIconsSize_label)
 #: src/settings/display_settings.ui:14
@@ -2233,10 +2214,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_info_recursive)
 #: src/settings/subversion_settings.ui:74
-#, fuzzy, kde-format
-#| msgid "Edit property"
+#, kde-format
 msgid "Get item info recursively"
-msgstr "خاسلىقنى تەھرىرلەيدۇ"
+msgstr ""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:84
@@ -2467,7 +2447,7 @@ msgstr "چېسلا"
 #: src/svnfrontend/models/logitemmodel.cpp:175
 #, kde-format
 msgid "Author"
-msgstr "ئاپتور"
+msgstr "يازغۇچى"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #: src/svnfrontend/blamedisplay.ui:60
@@ -2503,7 +2483,7 @@ msgstr "ھەل قىلىندى"
 #: src/svnfrontend/ccontextlistener.cpp:73
 #, kde-format
 msgid "Skip"
-msgstr "ئۆتكۈزۈۋەت"
+msgstr "ئاتلا"
 
 #: src/svnfrontend/ccontextlistener.cpp:74 src/svnfrontend/svnitem.cpp:430
 #, kde-format
@@ -2696,7 +2676,7 @@ msgstr "ئات ئۆزگەرت"
 #: src/svnfrontend/copymoveview.ui:33 src/svnfrontend/copymoveview.ui:58
 #, kde-format
 msgid "KSqueezedTextLabel"
-msgstr ""
+msgstr "KSqueezedTextLabel"
 
 #. i18n: ectx: property (text), widget (QLabel, m_HeadTwoLabel)
 #: src/svnfrontend/copymoveview.ui:43
@@ -2873,11 +2853,10 @@ msgid "Clean repository cache"
 msgstr ""
 
 #: src/svnfrontend/database/dboverview.cpp:131
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Cache"
-msgstr "ئۆچۈر"
+msgstr ""
 
 #: src/svnfrontend/database/dboverview.cpp:148
 #, kde-format
@@ -2894,11 +2873,10 @@ msgid "Delete repository"
 msgstr ""
 
 #: src/svnfrontend/database/dboverview.cpp:150
-#, fuzzy, kde-format
-#| msgid "Repository"
+#, kde-format
 msgctxt "@action:button"
 msgid "Delete Repository"
-msgstr "خەزىنە"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DBOverView)
 #: src/svnfrontend/database/dboverview.ui:6
@@ -2947,8 +2925,7 @@ msgid "Statistics for repository"
 msgstr ""
 
 #: src/svnfrontend/database/dbsettings.cpp:41
-#, fuzzy, kde-format
-#| msgid "Settings for %1"
+#, kde-format
 msgctxt "@title:window"
 msgid "Settings for %1"
 msgstr "«%1» نىڭ تەڭشىكى"
@@ -3089,8 +3066,7 @@ msgid "Depth for ignore"
 msgstr ""
 
 #: src/svnfrontend/editpropsdlg.cpp:32
-#, fuzzy, kde-format
-#| msgid "Add property"
+#, kde-format
 msgctxt "@title:window"
 msgid "Add Property"
 msgstr "خاسلىق قوش"
@@ -3207,10 +3183,9 @@ msgid ""
 msgstr ""
 
 #: src/svnfrontend/editpropsdlg.cpp:136
-#, fuzzy, kde-format
-#| msgid "Property"
+#, kde-format
 msgid "Select or enter new property"
-msgstr "خاسلىق"
+msgstr ""
 
 #: src/svnfrontend/editpropsdlg.cpp:160
 #, kde-format
@@ -3285,10 +3260,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_IgnoreKeywords)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:93
-#, fuzzy, kde-format
-#| msgid "Ignored"
+#, kde-format
 msgid "Ignore keywords"
-msgstr "پەرۋا قىلمىدى"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_CreateDirButton)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:110
@@ -3408,11 +3382,10 @@ msgid "START"
 msgstr ""
 
 #: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:58
-#, fuzzy, kde-format
-#| msgid "Revision"
+#, kde-format
 msgctxt "@title:window"
 msgid "Select Revisions"
-msgstr "تۈزىتىلمە"
+msgstr ""
 
 #: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:201
 #, kde-format
@@ -3423,7 +3396,7 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/revisionbutton.ui:23
 #, kde-format
 msgid "-1"
-msgstr "-1"
+msgstr ""
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:146
 #, kde-format
@@ -3566,7 +3539,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Logs"
-msgstr ""
+msgstr "خاتىرىلەر"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:97
 #: src/svnfrontend/svnactions.cpp:322
@@ -3593,10 +3566,9 @@ msgid "Scanning the logs for %1"
 msgstr ""
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:142
-#, fuzzy, kde-format
-#| msgid "C&ancel"
+#, kde-format
 msgid "Cancel"
-msgstr "ۋاز كەچ(&A)"
+msgstr "ۋاز كەچ"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:143
 #, kde-format
@@ -3764,7 +3736,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:519
 #, kde-format
 msgid "History"
-msgstr "ئىز"
+msgstr "تارىخ"
 
 #: src/svnfrontend/maintreewidget.cpp:503
 #, kde-format
@@ -3827,7 +3799,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:554
 #, kde-format
 msgid "Details"
-msgstr "تەپسىلاتلار"
+msgstr "تەپسىلاتى"
 
 #: src/svnfrontend/maintreewidget.cpp:559
 #, kde-format
@@ -4075,8 +4047,7 @@ msgid "Update to head"
 msgstr ""
 
 #: src/svnfrontend/maintreewidget.cpp:763
-#, fuzzy, kde-format
-#| msgid "Update"
+#, kde-format
 msgctxt "Menu item"
 msgid "Update"
 msgstr "يېڭىلا"
@@ -4139,7 +4110,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:822
 #, kde-format
 msgid "Merge"
-msgstr "بىرىكتۈر"
+msgstr "بىرلەشتۈر"
 
 #: src/svnfrontend/maintreewidget.cpp:823
 #, kde-format
@@ -4158,7 +4129,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:1461
 #, kde-format
 msgid "Open With..."
-msgstr "بۇنىڭدا ئېچىش…"
+msgstr "ئاچقۇز…"
 
 #: src/svnfrontend/maintreewidget.cpp:836
 #, kde-format
@@ -4169,7 +4140,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:857
 #, kde-format
 msgid "Checkout"
-msgstr "Checkout"
+msgstr "تەكشۈر"
 
 #: src/svnfrontend/maintreewidget.cpp:843
 #, kde-format
@@ -4195,12 +4166,12 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:864
 #, kde-format
 msgid "Export"
-msgstr "ئېكسپورت قىل"
+msgstr "چىقار"
 
 #: src/svnfrontend/maintreewidget.cpp:866
 #, kde-format
 msgid "Refresh view"
-msgstr ""
+msgstr "كۆرۈنۈشنى يېڭىلايدۇ"
 
 #: src/svnfrontend/maintreewidget.cpp:871
 #, kde-format
@@ -4275,11 +4246,10 @@ msgid "Nothing selected for unlock"
 msgstr ""
 
 #: src/svnfrontend/maintreewidget.cpp:1562
-#, fuzzy, kde-format
-#| msgid "Message"
+#, kde-format
 msgctxt "@title:window"
 msgid "Lock Message"
-msgstr "ئۇچۇر"
+msgstr ""
 
 #: src/svnfrontend/maintreewidget.cpp:1569
 #, kde-format
@@ -4303,8 +4273,7 @@ msgid "Break Lock"
 msgstr ""
 
 #: src/svnfrontend/maintreewidget.cpp:1608
-#, fuzzy, kde-format
-#| msgid "Ignore"
+#, kde-format
 msgctxt "@action:button"
 msgid "Ignore"
 msgstr "پەرۋا قىلما"
@@ -4325,11 +4294,10 @@ msgid "May not make subdirectories of a file"
 msgstr ""
 
 #: src/svnfrontend/maintreewidget.cpp:2198 src/svnfrontend/svnactions.cpp:2306
-#, fuzzy, kde-format
-#| msgid "Merge"
+#, kde-format
 msgctxt "@title:window"
 msgid "Merge"
-msgstr "بىرىكتۈر"
+msgstr "بىرلەشتۈر"
 
 #: src/svnfrontend/maintreewidget.cpp:2260
 #, kde-format
@@ -4369,11 +4337,10 @@ msgid "Import file"
 msgstr ""
 
 #: src/svnfrontend/maintreewidget.cpp:2341
-#, fuzzy, kde-format
-#| msgid "Import"
+#, kde-format
 msgctxt "@title:window"
 msgid "Import Log"
-msgstr "ئىمپورت قىل"
+msgstr ""
 
 #: src/svnfrontend/maintreewidget.cpp:2399
 #, kde-format
@@ -4436,10 +4403,9 @@ msgid "Not yet implemented"
 msgstr ""
 
 #: src/svnfrontend/maintreewidget.cpp:2636
-#, fuzzy, kde-format
-#| msgid "Edit property"
+#, kde-format
 msgid "Edit property recursively"
-msgstr "خاسلىقنى تەھرىرلەيدۇ"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, MergeDlg)
 #: src/svnfrontend/merge_dlg.ui:14
@@ -4475,7 +4441,7 @@ msgstr ""
 #: src/svnfrontend/merge_dlg.ui:90
 #, kde-format
 msgid "Recursive"
-msgstr "چوڭقۇرلاش"
+msgstr "قايتىلانما"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_RelatedCheck)
 #: src/svnfrontend/merge_dlg.ui:103
@@ -4568,11 +4534,10 @@ msgid ""
 msgstr ""
 
 #: src/svnfrontend/mergedlg_impl.cpp:196
-#, fuzzy, kde-format
-#| msgid "Enter folder name:"
+#, kde-format
 msgctxt "@title:window"
 msgid "Enter Merge Range"
-msgstr "قىسقۇچ ئاتىنى كىرگۈزۈڭ:"
+msgstr ""
 
 #: src/svnfrontend/models/logitemmodel.cpp:179
 #, kde-format
@@ -4644,24 +4609,21 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, pbAdd)
 #: src/svnfrontend/propertiesdlg.ui:39
-#, fuzzy, kde-format
-#| msgid "Add property"
+#, kde-format
 msgid "Add Property"
 msgstr "خاسلىق قوش"
 
 #. i18n: ectx: property (text), widget (QPushButton, pbModify)
 #: src/svnfrontend/propertiesdlg.ui:46
-#, fuzzy, kde-format
-#| msgid "Edit property"
+#, kde-format
 msgid "Modify Property"
-msgstr "خاسلىقنى تەھرىرلەيدۇ"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, pbDelete)
 #: src/svnfrontend/propertiesdlg.ui:53
-#, fuzzy, kde-format
-#| msgid "Property"
+#, kde-format
 msgid "Delete Property"
-msgstr "خاسلىق"
+msgstr ""
 
 #: src/svnfrontend/stopdlg.cpp:193
 #, kde-format
@@ -4671,7 +4633,7 @@ msgstr ""
 #: src/svnfrontend/stopdlg.cpp:201
 #, kde-format
 msgid "%1 of %2"
-msgstr "%2 نىڭ %1"
+msgstr "%1 / %2"
 
 #: src/svnfrontend/svnactions.cpp:190
 #, kde-format
@@ -4689,17 +4651,16 @@ msgid "Got no info."
 msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:521
-#, fuzzy, kde-format
-#| msgid "History"
+#, kde-format
 msgctxt "@title:window"
 msgid "History of %1"
-msgstr "ئىز"
+msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:562
 #, kde-format
 msgctxt "@title:window"
 msgid "Annotate"
-msgstr ""
+msgstr "ئىزاھ"
 
 #: src/svnfrontend/svnactions.cpp:562
 #, kde-format
@@ -4712,11 +4673,10 @@ msgid "Got no annotate"
 msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:587
-#, fuzzy, kde-format
-#| msgid "Content"
+#, kde-format
 msgctxt "@title:window"
 msgid "Content Get"
-msgstr "مەزمۇن"
+msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:587
 #, kde-format
@@ -4734,11 +4694,10 @@ msgid "Error while open temporary file"
 msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:638
-#, fuzzy, kde-format
-#| msgid "Content"
+#, kde-format
 msgctxt "@title:window"
 msgid "Content of %1"
-msgstr "مەزمۇن"
+msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:648
 #, kde-format
@@ -4748,14 +4707,13 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:673
 #, kde-format
 msgid "Enter folder name:"
-msgstr "قىسقۇچ ئاتىنى كىرگۈزۈڭ:"
+msgstr "قىسقۇچ ئاتى كىرگۈزۈلىدۇ:"
 
 #: src/svnfrontend/svnactions.cpp:712
-#, fuzzy, kde-format
-#| msgid "Details"
+#, kde-format
 msgctxt "@title:window"
 msgid "Details"
-msgstr "تەپسىلاتلار"
+msgstr "تەپسىلاتى"
 
 #: src/svnfrontend/svnactions.cpp:713
 #, kde-format
@@ -4765,7 +4723,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:752
 #, kde-format
 msgid "URL"
-msgstr "URL"
+msgstr "تور ئادرېسى"
 
 #: src/svnfrontend/svnactions.cpp:754
 #, kde-format
@@ -4780,7 +4738,7 @@ msgstr "يىغىندا تەكشۈر"
 #: src/svnfrontend/svnactions.cpp:760
 #, kde-format
 msgid "Type"
-msgstr "تىپى"
+msgstr "تۈرى"
 
 #: src/svnfrontend/svnactions.cpp:763
 #, kde-format
@@ -4800,7 +4758,7 @@ msgstr "قىسقۇچ"
 #: src/svnfrontend/svnactions.cpp:773 src/svnfrontend/svnactions.cpp:802
 #, kde-format
 msgid "Unknown"
-msgstr "نامەلۇم"
+msgstr "يوچۇن"
 
 #: src/svnfrontend/svnactions.cpp:778
 #, kde-format
@@ -4815,7 +4773,7 @@ msgstr "كۈنتەرتىپ"
 #: src/svnfrontend/svnactions.cpp:790
 #, kde-format
 msgid "Normal"
-msgstr "نورمال"
+msgstr "ئادەتتىكى"
 
 #: src/svnfrontend/svnactions.cpp:793
 #, kde-format
@@ -4875,7 +4833,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:832 src/svnfrontend/svnactions.cpp:839
 #, kde-format
 msgid "Owner"
-msgstr "ئىگىسى"
+msgstr "ئىگىدار"
 
 #: src/svnfrontend/svnactions.cpp:833 src/svnfrontend/svnactions.cpp:840
 #, kde-format
@@ -4894,11 +4852,10 @@ msgid "Infolist"
 msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:927
-#, fuzzy, kde-format
-#| msgid "Display Properties"
+#, kde-format
 msgctxt "@title:window"
 msgid "Applying Properties"
-msgstr "كۆرسىتىش خاسلىقى"
+msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:928
 #, kde-format
@@ -4916,11 +4873,10 @@ msgid "Not commit because networking is disabled"
 msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:1006 src/svnfrontend/svnactions.cpp:2465
-#, fuzzy, kde-format
-#| msgid "Status"
+#, kde-format
 msgctxt "@title:window"
 msgid "Status / List"
-msgstr "ھالىتى"
+msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:1007 src/svnfrontend/svnactions.cpp:2466
 #, kde-format
@@ -4939,8 +4895,7 @@ msgid "Delete and Commit"
 msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:1114
-#, fuzzy, kde-format
-#| msgid "Commit"
+#, kde-format
 msgctxt "@title:window"
 msgid "Commit"
 msgstr "تاپشۇر(_C)"
@@ -4954,7 +4909,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Downloading"
-msgstr ""
+msgstr "چۈشۈرۈۋاتىدۇ"
 
 #: src/svnfrontend/svnactions.cpp:1142
 #, kde-format
@@ -5035,24 +4990,21 @@ msgid "Delete from repository"
 msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:1691
-#, fuzzy, kde-format
-#| msgid "Repository"
+#, kde-format
 msgctxt "@title:window"
 msgid "Export a Repository"
-msgstr "خەزىنە"
+msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:1691
-#, fuzzy, kde-format
-#| msgid "Repository"
+#, kde-format
 msgctxt "@title:window"
 msgid "Checkout a Repository"
-msgstr "خەزىنە"
+msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:1709 src/svnfrontend/svnactions.cpp:1716
-#, fuzzy, kde-format
-#| msgid "Repository"
+#, kde-format
 msgid "Export repository"
-msgstr "خەزىنە"
+msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:1715
 #, kde-format
@@ -5070,23 +5022,21 @@ msgid "Checking out a file?"
 msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:1791
-#, fuzzy, kde-format
-#| msgid "Export"
+#, kde-format
 msgctxt "@title:window"
 msgid "Export"
-msgstr "ئېكسپورت قىل"
+msgstr "چىقار"
 
 #: src/svnfrontend/svnactions.cpp:1791
-#, fuzzy, kde-format
-#| msgid "Checkout"
+#, kde-format
 msgctxt "@title:window"
 msgid "Checkout"
-msgstr "Checkout"
+msgstr "تەكشۈر"
 
 #: src/svnfrontend/svnactions.cpp:1792
 #, kde-format
 msgid "Exporting"
-msgstr "ئېكسپورت قىلىش"
+msgstr "چىقىرىۋاتىدۇ"
 
 #: src/svnfrontend/svnactions.cpp:1792
 #, kde-format
@@ -5099,8 +5049,7 @@ msgid "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
 msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:1862
-#, fuzzy, kde-format
-#| msgid "Revert"
+#, kde-format
 msgctxt "@title:window"
 msgid "Revert"
 msgstr "ئەسلىگە ياندۇر"
@@ -5122,11 +5071,10 @@ msgid "Switching URL"
 msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:1912
-#, fuzzy, kde-format
-#| msgid "Repository"
+#, kde-format
 msgctxt "@title:window"
 msgid "Relocate Repository"
-msgstr "خەزىنە"
+msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:1913
 #, kde-format
@@ -5149,8 +5097,7 @@ msgid "Switch URL"
 msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:1982
-#, fuzzy, kde-format
-#| msgid "Cleanup"
+#, kde-format
 msgctxt "@title:window"
 msgid "Cleanup"
 msgstr "تازىلا"
@@ -5161,11 +5108,10 @@ msgid "Cleaning up folder"
 msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:1998
-#, fuzzy, kde-format
-#| msgid "Resolve"
+#, kde-format
 msgctxt "@title:window"
 msgid "Resolve"
-msgstr "تەھلىل"
+msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:1998
 #, kde-format
@@ -5183,11 +5129,10 @@ msgid "Resolve-process could not started, check command."
 msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:2064
-#, fuzzy, kde-format
-#| msgid "Import"
+#, kde-format
 msgctxt "@title:window"
 msgid "Import"
-msgstr "ئىمپورت قىل"
+msgstr "ئەكىر"
 
 #: src/svnfrontend/svnactions.cpp:2064
 #, kde-format
@@ -5230,8 +5175,7 @@ msgid "Merging items"
 msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:2332 src/svnfrontend/svnactions.cpp:2349
-#, fuzzy, kde-format
-#| msgid "Move"
+#, kde-format
 msgctxt "@title:window"
 msgid "Move"
 msgstr "يۆتكە"
@@ -5263,11 +5207,10 @@ msgid "No unversioned items found."
 msgstr ""
 
 #: src/svnfrontend/svnactions.cpp:2503
-#, fuzzy, kde-format
-#| msgid "Unversioned"
+#, kde-format
 msgctxt "@title:window"
 msgid "Add Unversioned Items"
-msgstr "نەشرسىز"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
 #: src/svnfrontend/svnactions.cpp:2506 src/svnfrontend/svnlogdlg.ui:163
@@ -5362,10 +5305,9 @@ msgid "Conflict"
 msgstr "توقۇنۇش"
 
 #: src/svnfrontend/svnitem.cpp:445
-#, fuzzy, kde-format
-#| msgid "Property name:"
+#, kde-format
 msgid "Property conflicted"
-msgstr "قۇرۇلۇش ئاتى:"
+msgstr ""
 
 #: src/svnfrontend/svnitem.cpp:449
 #, kde-format
@@ -5386,7 +5328,7 @@ msgstr ""
 #: src/svnfrontend/svnlogdlg.ui:18
 #, kde-format
 msgid "SVN Log"
-msgstr ""
+msgstr "SVN خاتىرە"
 
 #. i18n: ectx: property (text), widget (QLabel, startLabel)
 #: src/svnfrontend/svnlogdlg.ui:31
@@ -5446,20 +5388,19 @@ msgstr ""
 #: src/svnfrontend/svnlogdlg.ui:249 src/svnfrontend/svnlogdlgimp.cpp:514
 #, kde-format
 msgid "Annotate"
-msgstr ""
+msgstr "ئىزاھ"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_pbHelp)
 #: src/svnfrontend/svnlogdlg.ui:275
-#, fuzzy, kde-format
-#| msgid "&Help"
+#, kde-format
 msgid "Help"
-msgstr "ياردەم(&H)"
+msgstr "ياردەم"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_pbClose)
 #: src/svnfrontend/svnlogdlg.ui:282
 #, kde-format
 msgid "Close"
-msgstr ""
+msgstr "ياپ"
 
 #: src/svnfrontend/svnlogdlgimp.cpp:109
 #, kde-format
@@ -5471,7 +5412,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "SVN Log"
-msgstr ""
+msgstr "SVN خاتىرە"
 
 #: src/svnfrontend/svnlogdlgimp.cpp:445
 #, kde-format
@@ -5509,8 +5450,7 @@ msgid "C&ancel"
 msgstr "ۋاز كەچ(&A)"
 
 #: src/urldlg.cpp:100
-#, fuzzy, kde-format
-#| msgid "Open"
+#, kde-format
 msgctxt "@title:window"
 msgid "Open"
 msgstr "ئاچ"

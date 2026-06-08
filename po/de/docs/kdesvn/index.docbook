@@ -110,10 +110,10 @@
 <variablelist>
 <varlistentry>
 <term
->Projektarchiv</term>
+>Repository</term>
 <listitem
 ><para
->Zentraler Speicher von Daten. Das kann eine Datenbank oder ein flaches Dateisystem sein. Ohne besondere Programme können Sie die Daten darin darin nicht lesen. Für Subversion-Projektarchive ist &kdesvn; so ein Programm. </para
+>Zentraler Speicher von Daten. Das kann eine Datenbank oder ein flaches Dateisystem sein. Ohne besondere Programme können Sie die Daten darin darin nicht lesen. Für Subversion-Repositorien is &kdesvn; so ein Programm. </para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -121,7 +121,7 @@
 >Arbeitskopie</term>
 <listitem
 ><para
->Eine flache Kopie eines Projektarchivs auf einem lokalen Dateisystem. Diese kann mit jeder Dateiverwaltung verwendet und bearbeitet werden. Informationen des Versionsverwaltungssystems können mit Programmen wie &kdesvn; gelesen werden. </para>
+>Eine flache Kopie eines Repositorys auf einem lokalen Dateisystem. Dies kann mit jeder Dateiverwaltung benutzt und bearbeitet werden. Informationen des Versionsverwaltungssystems können mit Programmen wie &kdesvn; gelesen werden. </para>
 <para
 >Denken Sie daran, dass Subversion nicht über Ein-/Ausgabemodule weiß, daher muss eine Arbeitskopie ohne ein spezielles Protokoll erreichbar sein, &eg; <quote
 >fish://</quote
@@ -133,9 +133,9 @@
 >WebDAV</term>
 <listitem
 ><para
->WebDAV ist ein Protokoll, mit dem Sie Dateien auf einem entfernten Webserver bearbeiten können. Subversion ist eine besondere Art von WebDAV, wenn über einen Webserver auf Projektarchive zugegriffen wird, normalerweise nur lesbar. Mit speziellen Einstellungen können Sie Schreib- und Lesezugriff mit WebDAV erhalten und dann mit speziellen Browsern darauf zugreifen. &kdesvn; ist kein WebDAV-Dienstprogramm, aber &konqueror; kann das Protokoll <quote
+>WebDav ist ein Protokoll, mit dem Sie Dateien auf einem entfernten Webserver bearbeiten können. Subversion ist eine besondere Art von WebDav, wenn über einen Webserver auf Repositorien zugegriffen wird, normalerweise nur lesbar. Mit speziellen Einstellungen können Sie Schreib- und Lesezugriff mit WebDav erhalten und dann mit speziellen Browsern darauf zugreifen. &kdesvn; ist kein WebDav-Dienstprogramm, aber &konqueror; kann das Protokoll <quote
 >webdav://</quote
-> verwenden. Mit &kdesvn; können Sie den Versionsbaum eines Projektarchivs über das Protokoll <quote
+> verwenden. Aber mit &kdesvn; können Sie den Versionsbaum eines Repositorys über das Protokoll <quote
 >http://</quote
 > durchsehen. </para
 ></listitem>
@@ -152,7 +152,7 @@
 <title
 >Leistungsmerkmale von &kdesvn;</title>
 <para
->&kdesvn; verwendet folgende Protokolle für das Durchsuchen von Projektarchiven: <variablelist>
+>&kdesvn; benutzt folgende Protokolle für das Browsen in Repositorien: <variablelist>
 
 <varlistentry>
 <term
@@ -195,7 +195,7 @@
 >(k)svn+file</term>
 <listitem
 ><para
->Protokoll für lokale Projektarchive. Kann verwendet werden, damit &konqueror; automatisch &kdesvn; aufruft. </para
+>Protokoll für lokale Repositorien. Kann benutzt werden, damit &konqueror; automatisch &kdesvn; aufruft. </para
 ></listitem>
 </varlistentry>
 
@@ -222,7 +222,7 @@
 >file</term>
 <listitem
 ><para
->Direkter Zugriff auf das Projektarchiv. &kdesvn; überprüft, ob ein angegebener Pfad ein Projektarchiv oder eine Arbeitskopie ist und öffnet den Pfad im richtigen Modus. Für Subversion gibt es Unterschiede zwischen <filename class="directory"
+>Direkter Zugriff auf das Repository. &kdesvn; überprüft, ob ein angegebener Pfad ein Repository oder eine Arbeitskopie ist und öffnet den Pfad im richtigen Modus. Für Subversion gibt es Unterschiede zwischen <filename class="directory"
 >file:///dir</filename
 > und <filename class="directory"
 >/dir</filename
@@ -258,23 +258,23 @@
 >, aber das funktioniert nicht über ein Netzwerk. </para>
 </caution>
 <para
->Als erstes müssen Sie eine Arbeitskopie Ihres Projektarchivs erstellen. Dazu wählen Sie <menuchoice
+>Als erstes müssen Sie eine Arbeitskopie Ihres Repositorys erstellen. Dazu wählen Sie <menuchoice
 > <guimenu
 >Subversion</guimenu
 > <guisubmenu
 >Allgemein</guisubmenu
 > <guimenuitem
->Ein Projektarchiv auschecken</guimenuitem
+>Auslesen eines Repositorys</guimenuitem
 > </menuchoice
->. Im folgenden Dialog müssen Sie die &URL; des Projektarchivs &eg; <literal
+>. Im folgenden Dialog müssen Sie eine &URL; des Repositorys &eg; <literal
 >http://localhost/repos/myproject</literal
-> eingeben. Auch Unterordner eines Projektarchivs &eg; <literal
+> eingeben. Auch Unterordner eines Repositorys &eg; <literal
 >http://localhost/repos/myproject/trunk</literal
 > sind möglich. </para>
 <para
 >Wählen oder erstellen Sie einen lokalen Ordner, in dem die Arbeitskopie gespeichert wird. </para>
 <para
->Dann müssen Sie noch die Revision zum Auschecken wählen. Meistens wird das <quote
+>Dann müssen Sie noch die Revision zum Auslesen wählen. Meistens wird das <quote
 >HEAD</quote
 > sein. Damit haben Sie die neueste Version referenziert. </para>
 <para
@@ -282,15 +282,15 @@
 >OK</guibutton
 > geklickt haben, erstellt &kdesvn; Ihre neue Arbeitskopie und wird sie öffnen, wenn diese Einstellung aktiviert ist. </para>
 <para
->Wenn Sie ein Projektarchiv zum Durchsehen geöffnet haben, können Sie einen Ordner markieren, dann <menuchoice
+>Wenn Sie ein Repository zum Durchsehen geöffnet haben, können Sie einen Ordner markieren, dann <menuchoice
 > <guimenu
 >Subversion</guimenu
 > <guisubmenu
->Projektarchiv</guisubmenu
+>Repository</guisubmenu
 > <guimenuitem
->Aktuellen Projektarchiv-Pfad auschecken</guimenuitem
+>Aktuellen Repository-Pfad auslesen</guimenuitem
 > </menuchoice
-> wählen und den Dialog wie oben beschrieben ausfüllen. Dann wird nur der markierte Pfad ausgecheckt. </para>
+> wählen und den Dialog wie oben beschrieben ausfüllen. Dann wird nur der markierte Pfad ausgelesen. </para>
 </sect2>
 <sect2>
 <title
@@ -324,7 +324,7 @@
 <title
 >Arbeitskopie aktualisieren</title>
 <para
->Dies gleicht Ihre lokale Arbeitskopie mit dem Projektarchiv ab. Sie können &kdesvn; so einrichten, dass beim Öffnen einer Arbeitskopie die Überprüfung auf neuere bzw. geänderte Einträge durchgeführt wird. Dies geschieht im Hintergrund und Sie können in der Zwischenzeit bereits mit &kdesvn; arbeiten. Wenn die Überprüfung abgeschlossen ist, werden alle Einträge mit neueren Versionen und alle Ordner, die neuere Einträge enthalten, markiert. </para>
+>Dies gleicht Ihre lokale Arbeitskopie mit dem Repository ab. Sie können &kdesvn; so einstellen, dass beim Öffnen einer Arbeitskopie die Überprüfung auf neuere bzw. geänderte Einträge durchgeführt wird. Dies geschieht im Hintergrund und Sie können in der Zwischenzeit mit &kdesvn; bereits arbeiten. Wenn die Überprüfung abgeschlossen ist, werden alle Einträge mit neueren Versionen und alle Ordner, die neuere Einträge enthalten, markiert. </para>
 <para
 >Um die Änderungen zu holen, wählen Sie <menuchoice
 > <guimenu
@@ -334,7 +334,7 @@
 > <guimenuitem
 >Auf HEAD-Revision aktualisieren</guimenuitem
 > </menuchoice
->. Damit wird Ihre Arbeitskopie auf die neueste Version im Projektarchiv aktualisiert. Möchten Sie eine bestimmte Revision holen, wählen Sie <menuchoice
+>. Damit wird Ihre Arbeitskopie auf die neueste Version im Repository aktualisiert. Möchten Sie eine bestimmte Revision holen, wählen Sie <menuchoice
 > <guimenu
 >Subversion</guimenu
 > <guisubmenu
@@ -350,7 +350,7 @@
 <title
 >Hinzufügen und Löschen in der Arbeitskopie</title>
 <para
->Für beide Operationen sind zwei Schritte erforderlich: Zuerst Hinzufügen oder Löschen und dann das Einspielen der Änderungen ins Projektarchiv. Vor dem Einspielen können Sie das Hinzufügen oder Löschen zurücknehmen. </para>
+>Für beide Operationen sind zwei Schritte erforderlich: Zuerst hinzufügen oder löschen und dann die Änderungen ins Repository einspielen. Vor dem Einspielen können Sie das Hinzufügen oder Löschen zurücknehmen. </para>
 <sect3>
 <title
 >Einträge hinzufügen</title>
@@ -454,20 +454,20 @@
 <title
 >Dialog Protokollanzeige</title>
 <para
->Auf der linken Seite sehen Sie die Liste mit den von &kdesvn; abgeholten Protokoll-Einträgen. Die Protokollnachrichten sind gekürzt, so dass sie in eine Zeile passen. Die vollständige Nachricht erscheint im oberen rechten Fenster, wenn ein Eintrag markiert ist. Im rechten unteren Fenster sehen Sie eine Liste der geänderten Dateien. Diese Fenster erschien <emphasis
+>Auf der linken Seite sehen Sie die Liste mit den von &kdesvn; abgeholten Protokoll-Einträgen. Die Protokoll-Meldungen sind gekürzt, so dass sie in eine Zeile passen. Die vollständige Meldung erscheint im oberen rechten Fenster, wenn ein Eintrag markiert ist. Im rechten unteren Fenster sehen Sie eine Liste der geänderten Dateien. Diese Fenster erschien <emphasis
 >nur</emphasis
 >, wenn die Liste abhängig von Ihren Einstellungen geholt wird. </para>
 <para
 >Mit den Knöpfen oben können Sie einen anderen Bereich des Protokolls zur Anzeige auswählen. <important
 ><para
->Dieser Bereich wird ohne voreingestellte Begrenzung verwendet, daher sollten Sie bei großen Projektarchiven damit vorsichtig sein.</para
+>Dieser Bereich wird ohne voreingestellte Begrenzung benutzt, daher sollten Sie bei großen Repositorys damit vorsichtig sein.</para
 ></important>
 
 </para>
 <para
->Die unten angezeigten Knöpfe arbeiten immer mit dem im Protokoll ausgewählten Eintrag, nicht mit dem in der Liste der geänderten Dateien ausgewählten. Wenn Sie <guibutton
->Mit Vorgänger vergleichen</guibutton
-> anklicken, wird der Vergleich für alle geänderten Einträge in dieser Revision angezeigt, wenn sie gleich oder unterhalb des Subversions-Eintrags liegen, der vorher für das Abholen des Protokolle ausgewählt wurde. Das gleiche gilt für die Funktion <guibutton
+>Die unten angezeigten Knöpfe funktionieren nur für ausgewählte Einträge im Protokoll, nicht für Einträge, die in der Liste der geänderten Dateien markiert sind. Wenn Sie <guibutton
+>Mit Vorherigen vergleichen</guibutton
+> wird der Unterschied für alle geänderten Einträge in dieser Revision  angezeigt, wenn sie gleich oder unterhalb des Subversions-Eintrags liegen, der vorher für das Abholen des Protokolle ausgewählt wurde. Das gleiche gilt für die Funktion <guibutton
 >Revisionen vergleichen</guibutton
 >. </para>
 <para
@@ -476,10 +476,10 @@
 > funktionieren natürlich nur, wenn es sich um eine Datei handelt. </para>
 <para
 >Für alle Listeneinträge in beiden Listen gibt es ein Kontextmenü mit einigen zusätzlichen Aktionen. In der linken Liste ist dies <guimenuitem
->Version als linke Seite für Vergleich festlegen</guimenuitem
+>Version als linke Seite für Diff setzen</guimenuitem
 >, &ie; als Start-Revision und <guimenuitem
->Version als rechte Seite für Verglecih festlegen</guimenuitem
->, &ie; als End-Revision oder Ziel für Vergleich, das ist im „Unified Diff“ der mit <computeroutput
+>Version als rechte Seite für Diff setzen</guimenuitem
+>, &ie; als End-Revision oder Ziel für Diff, das ist im „Unified Diff“ der mit <computeroutput
 >+++</computeroutput
 > markierte Teil. Wenn Sie Revisionen für diese beiden Aktionen auswählen, werden Sie mit kleinen Pfeilen markiert. </para>
 </sect3>
@@ -488,9 +488,9 @@
 
 <sect1 id="working-with-repositories">
 <title
->Arbeiten mit Projektarchiven</title>
+>Arbeiten mit Repositorien</title>
 <para
->Das Durchsehen eines Projektarchivs kann mit &konqueror;, &dolphin; oder anderen Dateiverwaltungsprogramm erfolgen: Öffnen Sie eine URL mit dem in <xref linkend="kdesvn-features" xreflabel="Features"/> beschriebenen Protokoll (die Varianten mit <quote
+>Das Durchsehen eines Repositorys kann mit &konqueror;, &dolphin; oder anderen Dateiverwaltungsprogramm erfolgen: Öffnen Sie eine URL mit dem in <xref linkend="kdesvn-features" xreflabel="Features"/> beschriebenen Protokoll (die Varianten mit <quote
 >k</quote
 > am Anfang). Dann wird der Inhalt angezeigt. Dann können einfache Operationen wie Kopieren, Verschieben oder Löschen ausgeführt werden. Wird eine Abfrage wie <quote
 >?rev=<replaceable
@@ -505,15 +505,15 @@
 <title
 >Gelöschte Einträge wiederherstellen</title>
 <para
->In Subversion ist das Wiederherstellen eines gelöschten Eintrags tatsächlich das Kopieren dieses Eintrags von einer früheren Revision. Wenn Sie einen Eintrag wiederherstellen möchten, laden Sie eine Ansicht des Projektarchivs mit einer Version bevor der Eintrag gelöscht wurde. Dazu wählen Sie <menuchoice
+>In Subversion ist das Wiederherstellen eines gelöschten Eintrags tatsächlich das Kopieren dieses Eintrags von einer früheren Revision. Wenn Sie einen Eintrag wiederherstellen möchten, laden Sie eine Ansicht des Repository mit einer Version bevor der Eintrag gelöscht wurde. Dazu wählen Sie <menuchoice
 > <guimenu
 >Subversion</guimenu
 > <guisubmenu
->Projektarchiv</guisubmenu
+>Repository</guisubmenu
 > <guimenuitem
 >Revision zum Durchsehen auswählen</guimenuitem
 > </menuchoice
-> und geben die gewünschte Revision ein. Dann zeigt &kdesvn; den Inhalt des Projektarchivs mit dieser Revision an. Markieren Sie den Eintrag, den Sie wiederherstellen möchten, und wählen Sie <menuchoice
+> und geben die gewünschte Revision ein. Dann zeigt &kdesvn; den Inhalt des Repository mit dieser Revision an. Markieren Sie den Eintrag, den Sie wiederherstellen möchten, und wählen Sie <menuchoice
 > <shortcut
 > <keycombo action="simul"
 >&Ctrl;<keycap
@@ -565,7 +565,7 @@
 <title
 >Zusammenführen</title>
 <para
->Öffnen Sie ein Projektarchiv oder eine Arbeitskopie, markieren Sie den gewünschten Eintrag zum Zusammenführen und wählen Sie <menuchoice
+>Öffnen Sie ein Repository oder eine Arbeitskopie, markieren Sie den gewünschten Eintrag zum Zusammenführen und wählen Sie <menuchoice
 > <guimenu
 >Subversion</guimenu
 > <guisubmenu
@@ -573,7 +573,7 @@
 > <guisubmenu
 >Zusammenführen</guisubmenu
 > </menuchoice
->. Geben Sie im dann geöffneten Dialog die nötigen Werte ein. Wurde dieser Dialog von einem Projektarchiv aus geöffnet, dann sind die Angaben für Quelle 1 und Quelle 2 bereits ausgefüllt. Beim Öffnen aus einer Arbeitskopie ist das Ziel mit dem ausgewählten Eintrag ausgefüllt. Die Behandlung dieser Parameter ist für den internen Vergleich von Subversion anders als für ein externes Programm wie &kdiff3;. Als Ziel muss immer ein lokaler Ordner oder eine lokale Datei angegeben werden. Sie können zwischen intern und extern mit dem Ankreuzfeld <guilabel
+>. Geben Sie im dann geöffneten Dialog die nötigen Werte ein. Wurde dieser Dialog von einem Repository aus geöffnet, dann sind die Angaben für Quelle 1 und Quelle 2 bereits ausgefüllt. Beim Öffnen aus einer Arbeitskopie ist das Ziel mit dem ausgewählten Eintrag ausgefüllt. Die Behandlung dieser Parameter ist für das interne Diff von Subversion anders als für ein externes Programm wie &kdiff3;. Als Ziel muss immer ein lokaler Ordner oder eine lokale Datei angegeben werden. Sie können zwischen intern und extern mit dem Ankreuzfeld <guilabel
 >Externes Zusammenführen verwenden</guilabel
 > wechseln. </para>
 <sect3>
@@ -598,7 +598,7 @@
 >Behandelt nicht zugehörige als zugehörige Einträge</term>
 <listitem
 ><para
->Ist dies aktiv, werden bei der Suche nach Unterschieden nicht zugehörige wie zugehörige Einträge behandelt. Ansonsten entfernt Subversion eine Seite und fügt sie auf der anderen Seite wieder hinzu. </para
+>Ist dies aktiv, werden nicht zugehörige wie zugehörige Einträge bei der Generierung des Unterschieds behandelt. Ansonsten entfernt Subversion eine Seite und fügt sie auf der anderen Seite wieder hinzu. </para
 ></listitem>
 </varlistentry>
 
@@ -648,7 +648,7 @@
 > festgelegt. Die Fehlerausgabe wird im Protokollfenster angezeigt, so dass Sie mögliche Fehler erkennen können. </para>
 </listitem>
 </orderedlist
->Im Unterschied zum internen Zusammenführen kann das Ziel ein flacher Ordner oder eine Datei sein, die sich nicht unter Versionskontrolle befindet, da externe Programme dies nicht beachten. </para>
+>Im Unterschied zum internen Zusammenführen kann das Ziel eine flacher Ordner oder Datei sein, die sich nicht unter Versionskontrolle befindet, da externe Programme dies nicht beachten. </para>
 <para
 >Ist rekursiv nicht aktiviert, wird der Export als flacher Export ausgeführt. Beachte Sie, dass dabei Externals der Arbeitskopie <emphasis
 >nicht</emphasis
@@ -775,9 +775,9 @@
 </table>
 </para>
 <para
->Bei lokal geöffneten Projektarchiven, &ie; mit dem Protokoll <filename class="directory"
+>Bei lokal geöffneten Repositorien, &ie; mit dem Protokoll <filename class="directory"
 >file://</filename
->, und bei Arbeitskopien werden diese Eigenschaften vom geöffneten Ordner aufwärts gesucht, bis Sie gefunden wurden oder die oberste Ebene des Revisionsbaums erreicht ist. Bei Projektarchiven, die über das Netzwerk geöffnet wurden, &ie; alle außer dem Protokoll <filename class="directory"
+>, und bei Arbeitskopien werden diese Eigenschaften vom geöffneten Ordner aufwärts gesucht, bis Sie gefunden wurden oder die oberste Ebene des Revisionsbaums erreicht ist. Bei Repositorien, die über das Netzwerk geöffnet wurden, &ie; alle außer dem Protokoll <filename class="directory"
 >file://</filename
 >, wird nur im geöffneten Ordner selbst gesucht. </para>
 <para
@@ -789,7 +789,7 @@
 <title
 >Der Revisionsbaum</title>
 <para
->Im Revisionsbaum wird der vollständige Verlauf eines Eintrag angezeigt, so dass Sie einen besseren Überblick über den Verlauf erhalten. Dazu muss das vollständige Protokoll des Projektarchivs eingelesen werden, weil für den Revisionsbaum einige Informationen nötig sind, die von Subversion nicht bereitgestellt werden. Da durch diesen Prozess ein erheblicher Netzwerkverkehr erzeugt wird, wird für den Revisionsbaum immer der interne <link linkend="logcache-descr"
+>Im Revisionsbaum wird der vollständige Verlauf eines Eintrag angezeigt, so dass Sie einen besseren Überblick über den Verlauf erhalten. Dazu muss das vollständige Protokoll des Repository eingelesen werden, weil für den Revisionsbaum einige Informationen nötig sind, die von Subversion nicht bereitgestellt werden. Da durch diesen Prozess ein erheblicher Netzwerkverkehr erzeugt wird, wird für den Revisionsbaum immer der interne <link linkend="logcache-descr"
 >Protokoll-Zwischenspeicher</link
 > benutzt. </para>
 <sect2>
@@ -814,13 +814,13 @@
 >SQLite</application
 >-Datenbanken im Ordner <filename class="directory"
 >$HOME/.sqvnqt/logcache</filename
-> gespeichert. Jede nummerierte Datei ist die Datenbank für ein einzelnes Projektarchiv. </para>
+> gespeichert. Jede nummerierte Datei ist die Datenbank für ein einzelnes Repository. </para>
 <warning>
   <para
 >Die Datenbanken können sehr groß werden. Daher sollten Sie die automatische Aktualisierung des Protokoll-Zwischenspeichers in den Einstellungen abschalten. </para>
 </warning>
 <para
->Eine Datenbank können Sie einfach löschen, dann gibt es kein gespeichertes Protokoll und keinen Revisionsbaum für dieses Projektarchiv. Ist das automatische Füllen des Zwischenspeichers nicht deaktiviert, wird beim nächsten Öffnen dieses Projektarchivs oder der zugehörigen Arbeitskopie der Zwischenspeicher wieder gefüllt. </para>
+>Eine Datenbank können Sie einfach löschen, dann gibt es kein gespeichertes Protokoll und keinen Revisionsbaum für dieses Repository. Ist das automatisch Füllen des Zwischenspeichers nicht abgeschaltet, wird beim nächsten Öffnen dieses Repository oder der zugehörigen Arbeitskopie der Zwischenspeicher wieder gefüllt. </para>
 <sect2>
 <title
 >Offline-Modus</title>
@@ -861,7 +861,7 @@
 </term>
 <listitem
 ><para
->Dieser Eintrag ist gesperrt. In der letzten Spalte wird der Eigentümer der Sperre aufgeführt. Sie können &kdesvn; so einrichten, dass es Projektarchive auch auf gesperrte Einträge überprüft. Bedenken Sie aber, dass dies abhängig vom Server lange dauern kann. </para
+>Dieser Eintrag ist gesperrt. In der letzten Spalte wird der Eigentümer der Sperre aufgeführt. Sie können &kdesvn; so einstellen, dass es auch Repositorien auf gesperrte Einträge überprüft. Bedenken Sie aber, dass dies abhängig vom Server lange dauern kann. </para
 ></listitem>
 </varlistentry>
 
@@ -897,7 +897,7 @@
 </term>
 <listitem
 ><para
->Dieser Eintrag oder bei einem Ordner ein Eintrag darin hat eine neuere Version im Projektarchiv. </para
+>Dieser Eintrag oder bei einem Ordner ein Eintrag darin hat eine neuere Version im Repository. </para
 ></listitem>
 </varlistentry>
 
@@ -988,10 +988,10 @@
 <title
 >Kein Speichern von Passwörtern</title>
 <para
->Der sicherste Weg, aber mit grafischen Bedienungsoberflächen wie &kdesvn; ziemlich umständlich. Besonders der Hintergrundprozess von &kdesvn; würde in diesem Fall immer nach dem Passwort fragen, wenn das Projektarchiv einen eingeschränkten Zugriff für lesende Operationen wie Aktualisierung und Status hat. Das gleiche gilt für das <quote
+>Der sicherste Weg, aber mit grafische Bedienungsoberflächen wie &kdesvn; ziemlich umständlich. Besonders der Hintergrundprozess von &kdesvn; fragt dann immer nach dem Passwort, wenn das Repository einen eingeschränkten Zugriff für lesende Operationen wie Aktualisierung und Status hat. Das gleich gilt für das <quote
 >Einspielen</quote
 >. Wenn Sie die Passwörter nicht speichern, sollten Sie die Einstellung <guilabel
->Beim Öffnen einer Arbeitskopie auf Aktualisierungen prüfen</guilabel
+>Aktualisierungs-Überprüfung beim Öffnen einer Arbeitskopie starten</guilabel
 > und weitere <link linkend="subversion-settings"
 >Einstellungen</link
 > nicht verwenden. </para>
@@ -1016,7 +1016,7 @@
 >esvn</application
 > oder das originale Befehlszeilenprogramm <application
 >svn</application
-> verwenden. Sie sollten das Befehlszeilenprogramm nur für das Auschecken und Aktualisierungen verwenden, die beide kein Passwort erfordern. Zum Einspielen, Kopieren und Verschieben benutzen Sie dann &kdesvn; mit der Speicherung des Passworts in &kwallet5;. </para>
+> verwenden. Sie sollten das Befehlszeilenprogramm nur für das Auslesen und Aktualisierungen verwenden, die beide kein Passwort erfordern. Zum Einspielen, Kopieren und Verschieben benutzen Sie dann &kdesvn; mit der Speicherung des Passworts in &kwallet5;. </para>
 </sect2>
 <sect2>
 <title
@@ -1028,7 +1028,7 @@
 <title
 >Sonderfall „svn+ssh“</title>
 <para
->Wenn Sie Subversion mit „svn+ssh“ verwenden, kann das Speichern von Passwörtern mit SSH und „ssh-agent“ erfolgen. Dazu brauchen Sie Zugriff zum entfernten Rechner und dem Projektarchiv über SSH. Bei Schreibvorgängen sollten Sie die Authentifizierung mittels öffentlichem Schlüssel der Authentifizierung mittels Passwort vorziehen. Dazu müssen Sie Ihren öffentlichen SSH-Schlüssel auf dem Zielsystem mit dem Projektarchiv ablegen. SSH-Passwörter werden nicht vom Subversion-Passwortspeicher, von &kwallet5; oder vom internen  Passwortspeicher verwaltet. </para>
+>Wenn Sie Subversion mit „svn+ssh“ benutzen, kann das Speichern von Passwörtern mit SSH und ssh-agent erfolgen. Dazu brauchen Sie Zugriff zum entfernten Rechner und dem Repository über SSH. Beim Speichern sollten Sie die Authentifizierung mit dem öffentlichen Schlüssel. Dazu müssen Sie Ihren öffentlichen SSH-Schlüssel auf dem Zielsystem mit dem Repository ablegen. SSH-Passwörter werden nicht vom Subversion-Passwortspeicher, von &kwallet5; oder vom internen  Passwortspeicher behandelt. </para>
 <para
 >Möchten Sie nicht nach dem Passwort für Ihren SSH-Schlüssel gefragt werden, können Sie das Programm <application
 >ssh-agent</application
@@ -1081,11 +1081,11 @@
 </itemizedlist>
 
 <para
->Diese Protokolle wurden für Projektarchive, nicht für Arbeitskopien, entwickelt. Beispielsweise muss <filename class="directory"
+>Diese Protokoll wurden für Repositorys, nicht für Arbeitskopien entwickelt. <filename class="directory"
 >ksvn+file:///<replaceable
 >path</replaceable
 ></filename
-> auf den Anfang eines Projektarchivs zeigen, im Unterschied zur Anwendung selbst oder zum KPart-Modul. Arbeitskopien können mit &konqueror; durchsucht werden. </para>
+> zum Beispiel muss auf dem Anfang eines Repositorys zeigen, verschieden in der Anwendung selbst oder in KPart. Arbeitskopien können mit &konqueror; durchgesehen werden. </para>
 <para
 >Um eine bestimmte Revision durchzusehen, können Sie<link linkend="revision-syntax"
 ><quote
@@ -1116,7 +1116,7 @@
 <para>
 <example>
 <title
->Unterschiede zwischen Revisionen mit &kdiff3; und KIO::ksvn ermitteln</title>
+>Unterschiede zwischen Revisionen  mit &kdiff3; und KIO::ksvn ermitteln</title>
 <programlisting
 >kdiff3 \
   ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=423127 \
@@ -1127,7 +1127,7 @@
 <para>
 <note>
   <para
->Verwenden Sie dies innerhalb von &kdesvn; (Vergleich zweier Revisionen) – es ist erheblich schneller, da die internen Mechanismen von Subversion benutzt werden. </para>
+>Verwenden Sie dies innerhalb &kdesvn; (Unterschied zwischen zwei Revisionen) ist erheblich schneller, da die internen Mechanismen von Subversion benutzt werden. </para>
 </note>
 </para>
 </example>
@@ -1171,7 +1171,7 @@
 
 <row>
 <entry
->Auschecken</entry>
+>Auslesen</entry>
 <entry
 >1</entry>
 <entry>
@@ -1180,7 +1180,7 @@
 <para
 >Das „target“ wird <emphasis
 >nicht</emphasis
-> verändert, aber &eg; der Inhalt wird ausgecheckt, ohne einen Unterordner zu erzeugen. Wenn zum Beispiel als „source“ <filename
+> verändert, aber &eg; der Inhalt wird ausgelesen, ohne einen Unterordner zu erzeugen. Wenn zum Beispiel als „source“ <filename
 >http://server/repos/project/trunk</filename
 > und als „target“ <filename
 >/home/user/proj/</filename
@@ -1220,7 +1220,7 @@
 ><para
 >KURL::List urls</para>
 <para
->urls ist eine Liste von lokalen Adressen zum Einspielen. Die Protokollnachricht wird abgefragt.</para>
+>urls ist eine Liste von lokalen Adressen zum Einspielen. Die Protokoll-Nachricht wird abgefragt.</para>
 </entry>
 <entry
 >Ja</entry>
@@ -1298,7 +1298,7 @@
 ><para
 >KURL item, bool checkRepos, bool recurse</para>
 <para
->item – Eintrag, über den Informationen geholt werden sollen, checkRepos – überprüft, ob es neuere Versionen im Projektarchiv gibt, recurse – Ob rekursiv überprüft werden soll oder nicht.</para>
+>item - Eintrag, über den Informationen geholt werden, checkRepos - überprüft, ob es neuere Versionen im Repository gibt, recurse - Ob rekursiv überprüft werden soll oder nicht..</para>
 </entry>
 <entry
 >Ja</entry>
@@ -1339,14 +1339,14 @@
 
 <row>
 <entry
->Vergleich</entry>
+>Diff</entry>
 <entry
 >13</entry>
 <entry>
 <para
 >URL uri1, KURL uri2, int r1, QString rstring1, int r2, QString rstring 2, bool recursive</para>
 <para
->Für den Vergleich eines Projektarchivs „file:///“ mit der Arbeitskopie richten Sie die URLs der Arbeitskopie ohne Protokoll ein.</para>
+>Für den Unterschied zwischen Repository „file:///“ und der Arbeitskopie richten Sie die URLs der Arbeitskopie ohne Protokoll ein. </para>
 </entry>
 <entry
 >Ja</entry>
@@ -1462,7 +1462,7 @@
 </row>
 <row>
 <entry
->Vergleichsergebnisse</entry>
+>diffresult</entry>
 <entry
 >Eine Zeile mit Ausgabe des Unterschieds</entry>
 </row>
@@ -1540,7 +1540,7 @@
 <entry
 >commit (oder ci)</entry>
 <entry
->Änderungen an Einträgen ins Projektarchiv einspielen</entry>
+>Änderungen an Einträgen ins Repository einspielen</entry>
 <entry
 ></entry>
 </row>
@@ -1564,7 +1564,7 @@
 <entry
 >copy (oder cp)</entry>
 <entry
->Kopiert Einträge in einer Arbeitskopie oder einem Projektarchiv. Ist das Ziel nicht angegeben, wird es von &kdesvn; abgefragt.</entry>
+>Kopiert Einträge in einer Arbeitskopie oder Repository. Ist das Ziel nicht angegeben, wird es von &kdesvn; abgefragt.</entry>
 <entry
 ></entry>
 </row>
@@ -1572,7 +1572,7 @@
 <entry
 >move (oder mv, rename)</entry>
 <entry
->Verschieben oder Umbenennen von Einträgen in einer Arbeitskopie oder einem Projektarchiv. Ist das Ziel nicht angegeben, wird es von &kdesvn; abgefragt.</entry>
+>Verschieben oder Umbenennen von Einträgen in einer Arbeitskopie oder Repository. Ist das Ziel nicht angegeben, wird es von &kdesvn; abgefragt.</entry>
 <entry
 ></entry>
 </row>
@@ -1602,9 +1602,9 @@
 </row>
 <row>
 <entry
->Vergleich</entry>
+>diff</entry>
 <entry
->Vergleich zweier Revisionen eines Eintrags oder Vergleich zweier Einträge einer angegebenen Revision</entry>
+>Unterschied zweier Revisionen eines Eintrags oder der Unterschied zweier Einträge von angegebenen Revisionen</entry>
 <entry
 >-r startrev:endrev</entry>
 </row>
@@ -1620,7 +1620,7 @@
 <entry
 >checkout (oder co)</entry>
 <entry
->Auschecken eines Projektarchiv-Pfads in einen Ordner der neuen Arbeitskopie. Der Zielpfad und die Quellrevision werden abgefragt.</entry>
+>Auslesen eines Repository-Pfads in einen Pfad zu einer neuen Arbeitskopie. Der Zielpfad und die Quell-Revision werden abgefragt.</entry>
 <entry
 ></entry>
 </row>
@@ -1628,7 +1628,7 @@
 <entry
 >checkoutto (oder coto)</entry>
 <entry
->Auschecken eines Projektarchiv-Pfads in einen Ordner der neuen Arbeitskopie. Der Unterschied zwischen dem Quellpfad und der Quellrevision wird abgefragt.</entry>
+>Auslesen eines Repository-Pfads in einen Pfad zu einer neuen Arbeitskopie. Der Unterschied zwischen dem Quell-Pfad und der Quell-Revision wird abgefragt.</entry>
 <entry
 ></entry>
 </row>
@@ -1636,7 +1636,7 @@
 <entry
 >export</entry>
 <entry
->Export eines Projektarchiv-Pfads oder eines Pfad einer Arbeitskopie in einen Ordner. Der Zielpfad und die Quell-Revision werden abgefragt.</entry>
+>Export eines Repository-Pfads oder eines Pfad einer Arbeitskopie in einen Ordner. Der Zielpfad und die Quell-Revision werden abgefragt.</entry>
 <entry
 ></entry>
 </row>
@@ -1644,7 +1644,7 @@
 <entry
 >exportto</entry>
 <entry
->Export eines Projektarchiv-Pfads oder eines Pfad einer Arbeitskopie in einen Ordner. Der Quell-Pfad und die Quell-Revision werden abgefragt.</entry>
+>Export eines Repository-Pfads oder eines Pfad einer Arbeitskopie in einen Ordner. Der Quell-Pfad und die Quell-Revision werden abgefragt.</entry>
 <entry
 ></entry>
 </row>
@@ -1814,7 +1814,7 @@
 <para
 >In diesem Dialog können Sie Protokolleinträge auswählen und sich die Unterschiede dazwischen anzeigen lassen. <example>
 <title
->Die letzten 20 Einspielprotokolle anzeigen</title>
+>Die letzten 20 Einspiel-Protokolle anzeigen</title>
 <programlisting
 >kdesvn exec log -l 20 -r HEAD&#058;1 myfile.c
 </programlisting>
@@ -1829,15 +1829,15 @@
 >diff</quote
 ></title>
 <para
->Sie erhalten die Unterschiede zwischen Revisionen für einen Eintrag oder zwischen zwei Einträgen in derselben Arbeitskopie oder demselben Projektarchiv. Beim Abfragen des Unterschieds für einen Eintrag sollten die Revisionen als <option
+>Sie erhalten die Unterschiede zwischen Revisionen für einen Eintrag oder zwischen zwei Einträgen in derselben Arbeitskopie oder demselben Repository. Beim Abfragen des Unterschieds für einen Eintrag sollten die Revisionen als <option
 >-r <replaceable
 >STARTREV</replaceable
 >:<replaceable
 >ENDREV</replaceable
 ></option
-> angegeben werden. Beim Abfragen des Unterschieds für einen Eintrag in einer Arbeitskopie ohne Angabe von Revisionen wird der Unterschied zum Projektarchiv ausgegeben. <example>
+> angegeben werden. Beim Abfragen des Unterschieds für einen Eintrag in einer Arbeitskopie ohne Angabe von Revisionen wird der Unterschied zum Repository ausgegeben. <example>
 <title
->Gibt die Unterschiede zum Projektarchiv &ie; lokale Änderungen aus</title>
+>Gibt die Unterschiede zum Repository &ie; lokale Änderungen aus</title>
 <programlisting
 >kdesvn exec diff myfile.c
 </programlisting>
@@ -1855,7 +1855,7 @@
 >http://server/path/item?rev=HEAD</programlisting>
 <example>
 <title
->Vergleich zweier markierter Versionen</title>
+>Unterschied zwischen markierten Versionen</title>
 <programlisting
 >kdesvn exec diff http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_2 http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_3
 </programlisting>
@@ -1913,7 +1913,7 @@
 </row>
 <row>
 <entry
->Maximale Anzahl der Protokollnachrichten im Verlauf</entry>
+>Maximale Anzahl der Protokoll-Meldungen im Verlauf</entry>
 <entry
 >Anzahl der Protokollnachrichten, die in &kdesvn; behalten werden.</entry>
 </row>
@@ -1927,7 +1927,7 @@
 <entry
 >Navigations-Bereich anzeigen</entry>
 <entry
->Schaltet die Anzeige der Baumansicht des Projektarchivs ein und aus.</entry>
+>Schaltet die Anzeige der Baumansicht des Repository ein und aus.</entry>
 </row>
 </tbody>
 </tgroup>
@@ -1957,7 +1957,7 @@
 <entry
 >Log-Zwischenspeicher nach dem Öffnen füllen</entry>
 <entry
->Ist dies aktiv, startet &kdesvn; das Füllen des Protokoll-Zwischenspeichers, wenn ein Projektarchiv oder eine Arbeitskopie geöffnet wird und die Projektarchiv-&URL; nicht lokal zugewiesen ist (<filename class="directory"
+>Ist dies aktiv, startet &kdesvn; das Füllen des Protokoll-Zwischenspeichers, wenn ein Repository oder eine Arbeitskopie geöffnet wird und die Repository-&URL; nicht lokal zugewiesen ist (<filename class="directory"
 >file://</filename
 >)</entry>
 </row>
@@ -1973,7 +1973,7 @@
 <entry
 >Details bei Fernabfragen holen</entry>
 <entry
->Wenn aktiviert, holt &kdesvn; detailliertere Informationen über Dateieinträge beim Auflisten in entfernten Projektarchiven. So können Sie Sperren in der Übersicht erkennen. Seien Sie vorsichtig: Dies kann das Auflisten sehr langsam werden lassen.</entry>
+>Wenn aktiviert, holt &kdesvn; detailliertere Informationen über Dateieinträge, wenn es eine Liste in entfernten Repositorys erstellt. So können Sie Sperren in der Übersicht erkennen. Seien Sie vorsichtig: Dies kann Listen sehr langsam werden lassen.</entry>
 </row>
 
 <row>
@@ -2014,7 +2014,7 @@
 <entry
 >Protokolle folgen Knotenänderungen</entry>
 <entry
->Ist dies aktiviert, folgen die Protokolle Kopieroperationen.</entry>
+>Ist dies aktiviert, folgen die Protokolle Kopier-Operationen.</entry>
 </row>
 
 <row>
@@ -2049,7 +2049,7 @@
 <entry
 >Aktualisierung erstellt fehlende übergeordnete Einträge</entry>
 <entry
->Ist dies aktiviert, werden auch mit der Option „depth=empty“ alle nicht vorhandenen übergeordneten Ordner beim Auschecken erstellt</entry>
+>Ist dies aktiviert, werden auch mit der Option „depth=empty“ alle nicht vorhandenen übergeordneten Ordner beim Auslesen erstellt</entry>
 </row>
 
 </tbody>
@@ -2070,7 +2070,7 @@
 >Auf aktualisierte Einträge prüfen alle N Sekunden</para
 ></entry>
 <entry
->Wenn aktiviert, wird regelmäßig auf Aktualisierungen oder Änderungen in der Arbeitskopie geprüft, falls das Netzwerk aktiviert wurde</entry>
+>Falls gesetzt, wird regelmäßig auf Aktualisierungen oder Änderungen in der Arbeitskopie geprüft, falls das Netzwerk aktiviert wurde</entry>
 </row>
 </tbody>
 </tgroup>
@@ -2080,30 +2080,30 @@
 
 <sect1 id="diffmerge-settings">
 <title
->Vergleichen &amp; Zusammenführen</title>
+>Vergleich &amp; Zusammenführen</title>
 <para>
 <variablelist>
 
 <varlistentry>
 <term
->Vergleich ignoriert den Inhaltstyp</term>
+>Diff ignoriert den Inhaltstyp</term>
 <listitem
 ><para
->Nur wichtig, wenn der Vergleich von Subversion selbst durchgeführt wird. Ist dies aktiviert, ignoriert Subversion beim Vergleichen den Inhaltstyp von Einträgen. Anderenfalls werden keine Vergleiche von binären Dateien durchgeführt. </para
+>Nur wichtig, wenn der Unterschied mit Subversion selbst erstellt wird. Ist dies aktiviert, dann ignoriert Subversion beim Unterschied den Inhaltstyp von Einträgen. Ansonsten werden keine Unterschiede von binären Dateien erstellt. </para
 ></listitem>
 </varlistentry>
 
 <varlistentry>
 <term
->Vergleich im Revisionsbaum ist rekursiv</term>
+>Diff im Revisionsbaum ist rekursiv</term>
 <listitem
 ><para
->Ist dies aktiviert, werden Vergleiche in der Revisionsbaum-Ansicht rekursiv (wie in allen anderen Fällen auch) durchgeführt. Anderenfalls werden nur Änderungen an Einträgen in diesem Ordner angezeigt. Abhängig von Ihren Einstellungen wird der Vergleich von Subversion selbst oder mittels externer Programme durchgeführt. </para
+>Ist dies aktiviert, werden Unterschiede in der Ansicht des Revisionsbaums rekursiv wie in allen anderen Fällen auch durchgeführt. Ansonsten werden nur Änderungen an Einträgen in diesem Ordner angezeigt. Abhängig von Ihren Einstellungen wird der Unterschied mit Subversion selbst oder mit externen Programmen erzeugt. </para
 ></listitem>
 </varlistentry>
 <varlistentry>
 <term
->Vergleich ignoriert Änderungen der Leerzeichen</term>
+>Diff ignoriert Änderungen der Leerzeichen</term>
 <listitem>
 <para
 >Ignoriert Änderungen bei der Anzahl von Leerzeichen (Einstellung <option
@@ -2115,7 +2115,7 @@
 </varlistentry>
 <varlistentry>
 <term
->Vergleich ignoriert alle Leerzeichen</term>
+>Diff ignoriert alle Leerzeichen</term>
 <listitem>
   <para
 >Ignoriert alle Leerzeichen (Option <option
@@ -2128,12 +2128,12 @@
 >Externes Zusammenführen bevorzugen</term>
 <listitem>
 <para
->Dies sollte aktiviert werden, falls das Zusammenführen mit einem externen Programm bevorzugt wird und nicht durch Subversion ausgeführt werden soll</para>
+>Dies sollte gesetzt werden, falls das Zusammenführen mit einem externen Programm bevorzugt wird und nicht durch Subversion ausgeführt werden soll</para>
 </listitem>
 </varlistentry>
 <varlistentry>
 <term
->Vergleichsformat von Git verwenden</term>
+>diff-Format von Git verwenden</term>
 <listitem>
 <para
 ></para>
@@ -2152,15 +2152,15 @@
 </para>
 <sect2>
 <title
->Externe Vergleichsanzeige verwenden</title>
+>Externe Diff-Anzeige verwenden</title>
 <para
 >Wählt eine externe Anwendung zur Anzeige von Unterschieden. Voreinstellung ist &kompare;. </para>
 </sect2>
 <sect2>
 <title
->Externe Vergleichsanzeige</title>
+>Externe Diff-Anzeige</title>
 <para
->Definiert, welches externe Programm &kdesvn; für die Anzeige von Unterschieden verwenden soll und wie das Programm aufgerufen wird. Es gibt hier drei Möglichkeiten: </para>
+>Definiert, welches Programm &kdesvn; für die externe Anzeige von Unterschieden benutzt und wie das Programm aufgerufen wird. Es gibt hier drei Möglichkeiten: </para>
 <para>
 <variablelist>
 <varlistentry>
@@ -2168,7 +2168,7 @@
 >&lt;program&gt; &lt;parameter&gt;</term>
 <listitem
 ><para
->Subversion sucht nach Unterschieden und leitet sie direkt in die Standardeingabe des externen Programms, &ie; es werden keine temporären Dateien benötigt. </para
+>Der Unterschied wird mit Subversion generiert und direkt in die Standardeingabe des externen Programms geleitet, &ie; es werden keine temporären Dateien gebraucht. </para
 ></listitem>
 </varlistentry>
 
@@ -2177,9 +2177,9 @@
 >&lt;program&gt; &lt;parameter&gt; %f</term>
 <listitem
 ><para
->Subversion sucht nach Unterschieden und speichert sie in eine temporäre Datei. Der Parameter <option
+>Der Unterschied wird mit Subversion generiert und in eine temporäre Datei gespeichert. Der Parameter <option
 >%f</option
-> wird durch deren Dateinamen ersetzt. Dies kann zum Beispiel in einem einfachen Aufruf von <application
+> wird durch den Dateinamen ersetzt. Dies kann zum Beispiel in einem einfachen Aufruf von <application
 >less</application
 > oder einem Textbetrachter benutzt werden. </para
 ></listitem>
@@ -2190,7 +2190,7 @@
 >&lt;program&gt; &lt;parameter&gt; %1 %2</term>
 <listitem
 ><para
->&kdesvn; benutzt das externe Programm für die Suche nach Unterschieden. %1 und %2 wird mit den erforderlichen Werten, Dateinamen oder Ordnernamen, ersetzt. &kdesvn; speichert den Inhalt zum Vergleichen in einer temporären Umgebung (bei Ordnern wird ein <quote
+>&kdesvn; benutzt das externe Programm für die Generierung des Unterschieds. %1 und %2 wird mit den erforderlichen Werten, Dateinamen oder Ordnernamen, ersetzt. &kdesvn; speichert den Inhalt zum Vergleichen in einer temporären Umgebung (bei Ordnern wird ein <quote
 >export</quote
 >, bei einer einzelnen Datei wird ein <quote
 >cat</quote
@@ -2348,7 +2348,7 @@ Revisions tree
 <listitem
 ><para
 >Wenn <guilabel
->Protokoll anzeigen …</guilabel
+>Protokoll anzeigen ...</guilabel
 > eingestellt ist, ist dies die Mindestanzahl an Zeilen, ehe der Dialog angezeigt wird. Sie sollten dies so einstellen, dass das Fenster nur dann angezeigt wird, wenn eine interessante Ausgabe generiert wurde wie zum Beispiel ein Protokoll vom Einspielen. </para
 ></listitem>
 </varlistentry>
@@ -2367,18 +2367,18 @@ Revisions tree
 >Keine Einträge im obersten "Aktionen"-Kontextmenü anzeigen</term>
 <listitem
 ><para
->Wenn aktiviert, wird kdesvn kein Untermenü innerhalb des <guimenuitem
+>Falls gesetzt, wird kdesvn kein Menü innerhalb des <guimenuitem
 >Aktionen</guimenuitem
->-Menüs von &konqueror; oder &dolphin; anzeigen.</para
+>-Menüs von &konqueror; oder &dolphin; anzeigen.;.</para
 ></listitem>
 </varlistentry>
 
 <varlistentry>
 <term
->KIO-Operationen verwenden eine Standard-Protokollnachricht</term>
+>KIO-Operationen verwenden eine Standard-Protokoll-Meldung</term>
 <listitem
 ><para
->Wenn Operationen für ein Projektarchiv mit dem &kdesvn;-KIO-Protokoll von &konqueror; aus (&ie;, <quote
+>Wenn Operationen für ein Repository mit dem &kdesvn;-KIO-Protokoll von &konqueror; aus (&ie;, <quote
 >ksvn+...</quote
 > -Protokoll) ausgeführt werden, würde &kdesvn; bei großen Operationen wie Kopieren oder Verschieben von Ordnern nach einer Protokollmeldung für jeden einzelnen Eintrag fragen. Dies ist das Verhalten von &konqueror;. Ist diese Einstellung aktiv, wird die KIO-Implementation von &kdesvn; eine Standard-Protokollmeldung benutzen. Diese Einstellung wird nicht für Operationen aus dem &kdesvn;-Aktionsmenü für &konqueror; benutzt, aber nur für copy/move/mkdir/delete ausgeführt mit &konqueror; oder anderen Dateiverwaltungen an einer KIO-url. </para
 ></listitem>
@@ -2454,7 +2454,7 @@ Revisions tree
 <listitem
 ><para
 ><action
->Öffnet eine lokale Arbeitskopie oder ein vorher ausgechecktes Projektarchiv.</action
+>Öffnet eine lokale Arbeitskopie oder ein vorher geladenes Repository.</action
 ></para
 ></listitem>
 </varlistentry>
@@ -2470,7 +2470,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->In diesem Untermenü finden Sie die zuletzt geöffneten Projektarchive oder lokalen Arbeitskopien. Klicken Sie auf einen Eintrag in der Liste, um ihn in &kdesvn; zu laden. </para
+>In diesem Untermenü finden Sie die zuletzt geöffneten Repository oder lokalen Arbeitskopien. Klicken Sie auf einen Eintrag in der Liste, um ihn in &kdesvn; zuz laden..  </para
 ></listitem>
 </varlistentry>
 
@@ -2508,15 +2508,15 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Menüeinträge mit Verwaltungsaufgaben für ein Subversion-Projektarchiv wie:<simplelist
+>Menüeinträge mit Verwaltungsaufgaben für ein Subversion-Repository wie:<simplelist
 > <member
->Neues Projektarchiv erstellen oder öffnen</member
+>Neues Repository erstellen oder öffnen</member
 > <member
->Auszugsdatei eines Projektarchivs erstellen</member
+>Repository in eine Datei archivieren</member
 > <member
->Hotcopy eines Projektarchivs</member
+>Hotcopy eines Repositorys</member
 > <member
->Auszug in ein Projektarchiv laden</member
+>Abzug in ein Repository laden</member
 > </simplelist
 > Weitere Informationen finden Sie in der Ausgabe von <command
 >svnadmin --help</command
@@ -2543,7 +2543,7 @@ Revisions tree
 ><para
 ><action
 >Schließt</action
-> das gerade geöffnete Projektarchiv oder die Arbeitskopie</para
+> das gerade geöffnete Repository oder die Arbeitskopie</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -2663,7 +2663,7 @@ Revisions tree
 > <guisubmenu
 >Allgemein</guisubmenu
 > <guimenuitem
->Nachforschen</guimenuitem
+>Blame</guimenuitem
 > </menuchoice
 ></term>
 <listitem
@@ -2679,7 +2679,7 @@ Revisions tree
 > <guisubmenu
 >Allgemein</guisubmenu
 > <guimenuitem
->Bereich zum Nachforschen</guimenuitem
+>Blame für Bereich</guimenuitem
 > </menuchoice
 ></term>
 <listitem
@@ -2722,7 +2722,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Eintrag in einer Arbeitskopie oder in einem Projektarchiv verschieben oder umbenennen</para
+>Eintrag in einer Arbeitskopie oder in einem Repository verschieben oder Umbenennen</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -2744,7 +2744,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Kopiert einen Eintrag in einer Arbeitskopie oder einem Projektarchiv</para
+>Kopiert einen Eintrag in einer Arbeitskopie oder einem Repository</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -2809,12 +2809,12 @@ Revisions tree
 > <guisubmenu
 >Allgemein</guisubmenu
 > <guimenuitem
->Ein Projektarchiv auschecken</guimenuitem
+>Auslesen eines Repositorys</guimenuitem
 > </menuchoice
 ></term>
 <listitem
 ><para
->Erstellt eine neue Arbeitskopie eines Projektarchivs</para
+>Erstellt eine neue Arbeitskopie eines Repositorys</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -2825,12 +2825,12 @@ Revisions tree
 > <guisubmenu
 >Allgemein</guisubmenu
 > <guimenuitem
->Ein Projektarchiv exportieren</guimenuitem
+>Repository exportieren</guimenuitem
 > </menuchoice
 ></term>
 <listitem
 ><para
->Exportiert ein Projektarchiv in ein Dateisystem, &ie; erstellt einen aufgeräumten Revisionsbaum ohne Subversion-Informationen. </para
+>Exportiert ein Repository in ein Dateisystem, &ie; erstellt einen aufgeräumten Revisionsbaum ohne Subversion-Informationen. </para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -2883,7 +2883,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Aktualisiert die Arbeitskopie auf die neueste Version (HEAD) des Projektarchivs</para
+>Aktualisiert die Arbeitskopie auf die neueste Version (HEAD) des Repositorys</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -2894,12 +2894,12 @@ Revisions tree
 > <guisubmenu
 >Arbeitskopie</guisubmenu
 > <guimenuitem
->Auf Revision aktualisieren …</guimenuitem
+>Auf Revision aktualisieren ...</guimenuitem
 > </menuchoice
 ></term>
 <listitem
 ><para
->Aktualisiert die Arbeitskopie auf eine bestimmte Version des Projektarchivs</para
+>Aktualisiert die Arbeitskopie auf eine bestimmte Version des Repositorys</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -2921,7 +2921,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Spielt Änderungen in der Arbeitskopie für ausgewählte Einträge in das Projektarchiv ein.</para
+>Spielt Änderungen in der Arbeitskopie für ausgewählte Einträge in das Repository ein.</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -2943,7 +2943,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Zeigt die lokalen Änderungen als Vergleichsausgabe ohne Netzwerkzugriff. Dies ist nur der Unterschied zum letzten aktualisierten Stand der Arbeitskopie, nicht zur Version im Projektarchiv.</para
+>Zeigt die lokalen Änderungen als Diff-Ausgabe ohne Netzwerkzugriff. Dies ist nur der Unterschied zum letzten aktualisierten Stand der Arbeitskopie, nicht zur Version im Repository.</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -2965,7 +2965,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Zeigt die Unterschiede der Arbeitskopie zu HEAD im Projektarchiv.</para
+>Zeigt die Unterschiede der Arbeitskopie zu HEAD im Repository.</para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -3100,7 +3100,7 @@ Revisions tree
 > <guisubmenu
 >Arbeitskopie</guisubmenu
 > <guimenuitem
->Projektarchiv wechseln</guimenuitem
+>Repository wechseln</guimenuitem
 > </menuchoice
 ></term>
 <listitem
@@ -3112,16 +3112,16 @@ Revisions tree
 
 <variablelist id="subversion-repository">
 <title
->Projektarchiv</title>
+>Repository</title>
 <varlistentry>
 <term
 ><menuchoice
 ><guimenu
 >Subversion</guimenu
 > <guisubmenu
->Projektarchiv</guisubmenu
+>Repository</guisubmenu
 > <guimenuitem
->Aktuellen Projektarchiv-Pfad auschecken</guimenuitem
+>Aktuellen Repository-Pfad auslesen</guimenuitem
 > </menuchoice
 ></term>
 <listitem
@@ -3135,9 +3135,9 @@ Revisions tree
 ><guimenu
 >Subversion</guimenu
 > <guisubmenu
->Projektarchiv</guisubmenu
+>Repository</guisubmenu
 > <guimenuitem
->Aktuellen Projektarchiv-Pfad exportieren</guimenuitem
+>Aktuellen Repository-Pfad exportieren</guimenuitem
 > </menuchoice
 ></term>
 <listitem
@@ -3188,7 +3188,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Baumansicht des Projektarchivs ein- bzw. ausklappen </para
+>Baumansicht des Repository ein- bzw. ausklappen </para
 ></listitem>
 </varlistentry>
 
@@ -3205,7 +3205,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Das Protokoll wird zwischengespeichert und zur Anzeige des Revisionsbaums eines Projektarchivs benutzt. Abhängig von der Internetverbindung, der Größe des Subversion-Projektarchivs, und der Größe des Verlaufs kann diese Aktion länger dauern. Daher können Sie mit dieser Aktion die Aktualisierung abbrechen. </para
+>Das Protokoll wird zwischengespeichert und zur Anzeige des Revisionsbaums eines Repository benutzt. Abhängig von der Internetverbindung, der Größe des Subversion-Repository, und der Größe des Verlaufs kann diese Aktion länger dauern. Daher können Sie mit dieser Aktion die Aktualisierung abbrechen. </para
 ></listitem>
 </varlistentry>
 
@@ -3241,7 +3241,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Zeigt eine Übersicht des zwischengespeicherten Inhalt der Datenbank für bekannte Projektarchive. Der Zwischenspeicher oder das Projektarchiv können gelöscht und die Einstellungen eines Projektarchivs können geändert werden. </para
+>Zeigt eine Übersicht des zwischengespeicherten Inhalt der Datenbank für bekannte Repository. Der Zwischenspeicher oder das Repository können gelöscht und die Einstellungen eines Repository können geändert werden. </para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -3250,7 +3250,7 @@ Revisions tree
 ><guimenu
 >Datenbank</guimenu
 ><guimenuitem
->Einstellungen für das aktuelle Projektarchiv</guimenuitem
+>Einstellungen für das aktuelle Repository</guimenuitem
 > </menuchoice
 ></term>
 <listitem
@@ -3329,7 +3329,7 @@ Revisions tree
 </term
 ><listitem>
 <para
->Dateien anzeigen, die nicht zum Subversion-Projektarchiv hinzugefügt wurden.</para>
+>Dateien anzeigen, die nicht zum Subversion-Archiv hinzugefügt wurden.</para>
 </listitem>
 </varlistentry>
 

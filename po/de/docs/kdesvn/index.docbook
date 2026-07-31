@@ -177,7 +177,7 @@
 >(k)svn+http</term>
 <listitem
 ><para
->Standard-Protokoll für Webbrowser. Kann benutzt werden, damit &konqueror; automatisch &kdesvn; aufruft. </para
+>Standard-Protokoll für Webbrowser. Kann verwendet werden, damit &konqueror; automatisch &kdesvn; aufruft. </para
 ></listitem>
 </varlistentry>
 
@@ -186,7 +186,7 @@
 >(k)svn+https</term>
 <listitem
 ><para
->Verschlüsseltes Standard-Protokoll für Webbrowser. Kann benutzt werden, damit &konqueror; automatisch &kdesvn; aufruft. </para
+>Verschlüsseltes Standard-Protokoll für Webbrowser. Kann verwendet werden, damit &konqueror; automatisch &kdesvn; aufruft. </para
 ></listitem>
 </varlistentry>
 
@@ -314,7 +314,7 @@
 <para
 >Haben Sie bei dieser Aktion keinen Eintrag ausgewählt, verwendet &kdesvn; das oberste Element der geöffneten Arbeitskopie, &ie; den Pfad zur Arbeitskopie selbst. </para>
 <para
->Dieser Vorgang ist immer rekursiv, d. h. wenn ein Ordner ausgewählt ist, werden immer alle darunterliegenden geänderten Einträge gesendet. Haben Sie eingestellt, dass vor dem Einspielen alle Einträge überprüft werden sollen, werden im folgenden Dialog alle zu sendenden Einträge aufgelistet. Dann können Sie die Markierung für Einträge entfernen, die nicht gesendet werden sollen. In diesem Fall werden alle Einträge einzeln und nicht rekursiv gesendet. Sie können auch nicht versionierte Einträge zum Hinzufügen und Einspielen auswählen, wenn Sie nicht als ignoriert markiert sind. So können Sie erkennen, ob es neuere Einträge gibt, die Sie vergessen haben. </para>
+>Dieser Vorgang ist immer rekursiv, d. h. wenn ein Ordner ausgewählt ist, werden immer alle darunterliegenden geänderten Einträge gesendet. Haben Sie eingestellt, dass vor dem Einspielen alle Einträge überprüft werden sollen, werden im folgenden Dialog alle zu sendenden Einträge aufgelistet. Dann können Sie die Markierung für Einträge entfernen, die nicht gesendet werden sollen. In diesem Fall werden alle Einträge einzeln und nicht rekursiv gesendet. Sie können auch nicht versionierte Einträge zum Hinzufügen und Einspielen auswählen, wenn Sie nicht als ignoriert markiert sind. So können Sie erkennen, ob es neuere Einträge gibt, die Sie vergessen haben. </para>
 <para
 >Geben Sie einen Kommentar über die eingespielten Änderungen, drücken Sie auf <guibutton
 >OK</guibutton
@@ -680,14 +680,14 @@
 ><guisubmenu
 >Als gelöst markieren</guisubmenu
 ></menuchoice
-> benutzen, ansonsten können Sie Ihre Änderungen nicht einspielen. </para>
+> verwenden, ansonsten können Sie Ihre Änderungen nicht einspielen. </para>
 </sect2>
 
 </sect1>
 
 <sect1 id="used-properties">
 <title
->Von &kdesvn; benutzte Eigenschaften für die Einrichtung</title>
+>Von &kdesvn; verwendete Eigenschaften für die Einrichtung</title>
 <sect2>
 <title
 >Einbindung des Fehlerverfolgungssystems</title>
@@ -791,7 +791,7 @@
 <para
 >Im Revisionsbaum wird der vollständige Verlauf eines Eintrag angezeigt, so dass Sie einen besseren Überblick über den Verlauf erhalten. Dazu muss das vollständige Protokoll des Projektarchivs eingelesen werden, weil für den Revisionsbaum einige Informationen nötig sind, die von Subversion nicht bereitgestellt werden. Da durch diesen Prozess ein erheblicher Netzwerkverkehr erzeugt wird, wird für den Revisionsbaum immer der interne <link linkend="logcache-descr"
 >Protokoll-Zwischenspeicher</link
-> benutzt. </para>
+> verwendet. </para>
 <sect2>
 <title
 >Systemanforderungen</title>
@@ -1000,7 +1000,7 @@
 <title
 >Passwörter in &kwallet5; speichern</title>
 <para
->Dieser sichere Passwortspeicher wird von vielen &kde;-Programmen wie &kmail; und &konqueror; verwendet. Wenn Sie Ihr Passwort speichern möchten und meistens &kdesvn; verwenden, sollten Sie ebenfalls &kwallet5; benutzen. Einzelheiten dazu finden Sie im <ulink url="help:/kwallet"
+>Dieser sichere Passwortspeicher wird von vielen &kde;-Programmen wie &kmail; und &konqueror; verwendet. Wenn Sie Ihr Passwort speichern möchten und meistens &kdesvn; verwenden, sollten Sie ebenfalls &kwallet5; verwenden. Einzelheiten dazu finden Sie im <ulink url="help:/kwallet"
 >Handbuch zu &kwallet5;</ulink
 > </para>
 </sect2>
@@ -1016,7 +1016,7 @@
 >esvn</application
 > oder das originale Befehlszeilenprogramm <application
 >svn</application
-> verwenden. Sie sollten das Befehlszeilenprogramm nur für das Auschecken und Aktualisierungen verwenden, die beide kein Passwort erfordern. Zum Einspielen, Kopieren und Verschieben benutzen Sie dann &kdesvn; mit der Speicherung des Passworts in &kwallet5;. </para>
+> verwenden. Sie sollten das Befehlszeilenprogramm nur für das Auschecken und Aktualisierungen verwenden, die beide kein Passwort erfordern. Zum Einspielen, Kopieren und Verschieben verwenden Sie dann &kdesvn; mit der Speicherung des Passworts in &kwallet5;. </para>
 </sect2>
 <sect2>
 <title
@@ -1028,11 +1028,11 @@
 <title
 >Sonderfall „svn+ssh“</title>
 <para
->Wenn Sie Subversion mit „svn+ssh“ verwenden, kann das Speichern von Passwörtern mit SSH und „ssh-agent“ erfolgen. Dazu brauchen Sie Zugriff zum entfernten Rechner und dem Projektarchiv über SSH. Bei Schreibvorgängen sollten Sie die Authentifizierung mittels öffentlichem Schlüssel der Authentifizierung mittels Passwort vorziehen. Dazu müssen Sie Ihren öffentlichen SSH-Schlüssel auf dem Zielsystem mit dem Projektarchiv ablegen. SSH-Passwörter werden nicht vom Subversion-Passwortspeicher, von &kwallet5; oder vom internen  Passwortspeicher verwaltet. </para>
+>Wenn Sie Subversion mit „svn+ssh“ verwenden, kann das Speichern von Passwörtern mit SSH und „ssh-agent“ erfolgen. Dazu benötigen Sie Zugriff zum entfernten Rechner und dem Projektarchiv über SSH. Bei Schreibvorgängen sollten Sie die Authentifizierung mittels öffentlichem Schlüssel der Authentifizierung mittels Passwort vorziehen. Dazu müssen Sie Ihren öffentlichen SSH-Schlüssel auf dem Zielsystem mit dem Projektarchiv ablegen. SSH-Passwörter werden nicht vom Subversion-Passwortspeicher, von &kwallet5; oder vom internen  Passwortspeicher verwaltet. </para>
 <para
 >Möchten Sie nicht nach dem Passwort für Ihren SSH-Schlüssel gefragt werden, können Sie das Programm <application
 >ssh-agent</application
-> benutzen, indem Sie im Menü <menuchoice
+> verwenden, indem Sie im Menü <menuchoice
 ><guimenu
 >Subversion</guimenu
 > <guimenuitem
@@ -1112,7 +1112,7 @@
 <title
 >Anwendung der Ein-/Ausgabemodule außerhalb von &konqueror; - ein Beispiel</title>
 <para
->Jedes Programm, das die Ein-Ausgabemodul-Bibliothek verwendet, kann diese Protokolle benutzen. Daher ist es möglich, mit &kdiff3; alle Unterschiede zwischen zwei Revisionen ohne tiefere Kenntnisse zu erhalten. </para>
+>Jedes Programm, das die Ein-Ausgabemodul-Bibliothek verwendet, kann diese Protokolle verwenden. Daher ist es möglich, mit &kdiff3; alle Unterschiede zwischen zwei Revisionen ohne tiefere Kenntnisse zu erhalten. </para>
 <para>
 <example>
 <title
@@ -1127,7 +1127,7 @@
 <para>
 <note>
   <para
->Verwenden Sie dies innerhalb von &kdesvn; (Vergleich zweier Revisionen) – es ist erheblich schneller, da die internen Mechanismen von Subversion benutzt werden. </para>
+>Verwenden Sie dies innerhalb von &kdesvn; (Vergleich zweier Revisionen) – es ist erheblich schneller, da die internen Mechanismen von Subversion verwendet werden. </para>
 </note>
 </para>
 </example>
@@ -1668,7 +1668,7 @@
 <entry
 >revert (oder undo)</entry>
 <entry
->Nimmt aktuelle Änderungen an der Arbeitskopie zurück. Kann nur mit URLs für Arbeitskopien benutzt werden</entry>
+>Nimmt aktuelle Änderungen an der Arbeitskopie zurück. Kann nur mit URLs für Arbeitskopien verwendet werden</entry>
 <entry
 ></entry>
 </row>
@@ -1996,11 +1996,11 @@
 <entry
 >Passwörter in der KDE-Passwortverwaltung speichern</entry>
 <entry
->Beim Speichern von Passwörter ist die Klartextdatei von Subversion ein Sicherheitsrisiko. &kdesvn; kann seit Version 0.12.0 Passwörter stattdessen im verschlüsselten &kde;-Passwortspeicher ablegen und diesen zu verwenden. Andererseits können andere Subversion-Programme benutzt werden, die den Passwortspeicher nicht lesen können. Daher müssen Sie in diesen Fällen die Passwörter wieder eingeben, wenn Sie Programme wie <application
+>Beim Speichern von Passwörter ist die Klartextdatei von Subversion ein Sicherheitsrisiko. &kdesvn; kann seit Version 0.12.0 Passwörter stattdessen im verschlüsselten &kde;-Passwortspeicher ablegen und diesen zu verwenden. Andererseits können andere Subversion-Programme verwendet werden, die den Passwortspeicher nicht lesen können. Daher müssen Sie in diesen Fällen die Passwörter wieder eingeben, wenn Sie Programme wie <application
 >svn</application
 > oder <application
 >rapidsvn</application
-> benutzen. Solange Subversion Passwörter nicht verschlüsselt speichert, sollten Sie hier vorsichtig sein.</entry>
+> verwenden. Solange Subversion Passwörter nicht verschlüsselt speichert, sollten Sie hier vorsichtig sein.</entry>
 </row>
 
 <row>
@@ -2181,7 +2181,7 @@
 >%f</option
 > wird durch deren Dateinamen ersetzt. Dies kann zum Beispiel in einem einfachen Aufruf von <application
 >less</application
-> oder einem Textbetrachter benutzt werden. </para
+> oder einem Textbetrachter verwendet werden. </para
 ></listitem>
 </varlistentry>
 
@@ -2190,7 +2190,7 @@
 >&lt;program&gt; &lt;parameter&gt; %1 %2</term>
 <listitem
 ><para
->&kdesvn; benutzt das externe Programm für die Suche nach Unterschieden. %1 und %2 wird mit den erforderlichen Werten, Dateinamen oder Ordnernamen, ersetzt. &kdesvn; speichert den Inhalt zum Vergleichen in einer temporären Umgebung (bei Ordnern wird ein <quote
+>&kdesvn; verwendet das externe Programm für die Suche nach Unterschieden. %1 und %2 wird mit den erforderlichen Werten, Dateinamen oder Ordnernamen, ersetzt. &kdesvn; speichert den Inhalt zum Vergleichen in einer temporären Umgebung (bei Ordnern wird ein <quote
 >export</quote
 >, bei einer einzelnen Datei wird ein <quote
 >cat</quote
@@ -2267,7 +2267,7 @@
 <title
 >Programm zur Konfliktlösung</title>
 <para
->Sie können ein externes Programm wie &kdiff3; zur Auflösung von Konflikten benutzen, der Standard Befehl lautet <command
+>Sie können ein externes Programm wie &kdiff3; zur Auflösung von Konflikten verwenden, der Standard Befehl lautet <command
 >kdiff3 %o %m %n -o %t</command
 >. </para>
 <sect3>
@@ -2380,7 +2380,7 @@ Revisions tree
 ><para
 >Wenn Operationen für ein Projektarchiv mit dem &kdesvn;-KIO-Protokoll von &konqueror; aus (&ie;, <quote
 >ksvn+...</quote
-> -Protokoll) ausgeführt werden, würde &kdesvn; bei großen Operationen wie Kopieren oder Verschieben von Ordnern nach einer Protokollmeldung für jeden einzelnen Eintrag fragen. Dies ist das Verhalten von &konqueror;. Ist diese Einstellung aktiv, wird die KIO-Implementation von &kdesvn; eine Standard-Protokollmeldung benutzen. Diese Einstellung wird nicht für Operationen aus dem &kdesvn;-Aktionsmenü für &konqueror; benutzt, aber nur für copy/move/mkdir/delete ausgeführt mit &konqueror; oder anderen Dateiverwaltungen an einer KIO-url. </para
+> -Protokoll) ausgeführt werden, würde &kdesvn; bei großen Operationen wie Kopieren oder Verschieben von Ordnern nach einer Protokollmeldung für jeden einzelnen Eintrag fragen. Dies ist das Verhalten von &konqueror;. Ist diese Einstellung aktiv, wird die KIO-Implementation von &kdesvn; eine Standard-Protokollmeldung verwenden. Diese Einstellung wird nicht für Operationen aus dem &kdesvn;-Aktionsmenü für &konqueror; verwendet, aber nur für copy/move/mkdir/delete ausgeführt mit &konqueror; oder anderen Dateiverwaltungen an einer KIO-url. </para
 ></listitem>
 </varlistentry>
 
@@ -2846,7 +2846,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Markiert den aktuellen Eintrag als gesperrt. Lesen Sie das Handbuch zu Subversion, ehe Sie diese Funktion benutzen. </para
+>Markiert den aktuellen Eintrag als gesperrt. Lesen Sie das Handbuch zu Subversion, ehe Sie diese Funktion verwenden. </para
 ></listitem>
 </varlistentry>
 <varlistentry>
@@ -2862,7 +2862,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Entfernt Sperren von aktuellen Einträgen. Lesen Sie das Handbuch zu Subversion, ehe Sie diese Funktion benutzen. </para
+>Entfernt Sperren von aktuellen Einträgen. Lesen Sie das Handbuch zu Subversion, ehe Sie diese Funktion verwenden. </para
 ></listitem>
 </varlistentry>
 </variablelist>
@@ -3205,7 +3205,7 @@ Revisions tree
 ></term>
 <listitem
 ><para
->Das Protokoll wird zwischengespeichert und zur Anzeige des Revisionsbaums eines Projektarchivs benutzt. Abhängig von der Internetverbindung, der Größe des Subversion-Projektarchivs, und der Größe des Verlaufs kann diese Aktion länger dauern. Daher können Sie mit dieser Aktion die Aktualisierung abbrechen. </para
+>Das Protokoll wird zwischengespeichert und zur Anzeige des Revisionsbaums eines Projektarchivs verwendet. Abhängig von der Internetverbindung, der Größe des Subversion-Projektarchivs, und der Größe des Verlaufs kann diese Aktion länger dauern. Daher können Sie mit dieser Aktion die Aktualisierung abbrechen. </para
 ></listitem>
 </varlistentry>
 
@@ -3340,7 +3340,7 @@ Revisions tree
 </term
 ><listitem>
 <para
->Benutzen Sie diese Aktion, um nur geänderte Dateien anzuzeigen, so dass eine einfache und kurzgefasste Übersicht entsteht.</para>
+>Verwenden Sie diese Aktion, um nur geänderte Dateien anzuzeigen, so dass eine einfache und kurzgefasste Übersicht entsteht.</para>
 </listitem>
 </varlistentry>
 
@@ -3428,7 +3428,7 @@ Revisions tree
 ><para
 >Eine Nummer größer oder gleich -1. -1 bedeutet <quote
 >nicht spezifizierte Revision</quote
->, 0 ist die erste Revision. Normalerweise sollten Sie dies nicht benutzen, da die meisten Operationen damit fehlschlagen. </para
+>, 0 ist die erste Revision. Normalerweise sollten Sie dies nicht verwenden, da die meisten Operationen damit fehlschlagen. </para
 ></listitem>
 </varlistentry>
 
@@ -3482,7 +3482,7 @@ Revisions tree
 >Datum</term>
 <listitem
 ><para
->Datum im Format {YYYY-MM-DD}. Es muss MM oder DD benutzt werden, &eg; für 2005-1-1 muss {2005-01-01} angegeben werden. </para
+>Datum im Format {YYYY-MM-DD}. Es muss MM oder DD verwendet werden, &eg; für 2005-1-1 muss {2005-01-01} angegeben werden. </para
 ></listitem>
 </varlistentry>
 

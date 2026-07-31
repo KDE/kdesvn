@@ -1320,7 +1320,7 @@ msgstr "Ausführung erzwingen"
 #, kde-format
 msgid "Save output of Subversion command (eg \"cat\") into file <file>"
 msgstr ""
-"Ausgabe des Subversion-Befehls (z.B. \"cat\") in Datei <Datei> speichern"
+"Ausgabe des Subversion-Befehls (z. B. \"cat\") in Datei <Datei> speichern"
 
 #: src/main.cpp:52
 #, kde-format
@@ -1442,7 +1442,7 @@ msgid ""
 "Use this only if you are sure what you are doing."
 msgstr ""
 "Falls dieses Flag gesetzt ist, haben Sie eine einfache Schreibunterstützung "
-"für bestehende Eintrage. D. h., Sie können Dateien im Editor öffnen und "
+"für bestehende Eintrage. d. h., Sie können Dateien im Editor öffnen und "
 "direkt ohne vorheriges Auschecken speichern (kdesvn macht dies im "
 "Hintergrund).\n"
 "\n"
@@ -1523,8 +1523,8 @@ msgid ""
 "If kdesvn should use an external diff display and/or generator. If not "
 "checked use internal display."
 msgstr ""
-"Soll kdesvn eine externe Unterschiedsanzeige und/oder Generator benutzen. "
-"Falls nicht gesetzt, wird die interne Anzeige benutzt."
+"Soll kdesvn eine externe Unterschiedsanzeige und/oder Generator verwenden. "
+"Falls nicht gesetzt, wird die interne Anzeige verwendet."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_external_diff)
 #: src/settings/diffmergesettings.ui:42
@@ -1611,7 +1611,7 @@ msgstr ""
 "</p>\n"
 "</p>\n"
 "In den Optionen können Platzhalter für die Ersetzung durch Dateinamen "
-"benutzt werden.\n"
+"verwendet werden.\n"
 "</p>\n"
 "Die Ersetzungen bedeuten:<br>\n"
 "<b><tt>%o</tt></b> Alte Version<br>\n"
@@ -2159,7 +2159,7 @@ msgstr ""
 #: src/settings/kdesvn_part.kcfg:263
 #, kde-format
 msgid "KIO::svn operations use a standard log message"
-msgstr "KIO::svn-Operationen benutzen eine Standard-Protokollnachricht"
+msgstr "KIO::svn-Operationen verwenden eine Standard-Protokollnachricht"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:267
@@ -2479,7 +2479,7 @@ msgstr ""
 "<p>Dies ist etwas sicherer, weil der KDE-Passwortspeicher (meistens) mit "
 "einem Passwort verschlüsselt ist. Auf der anderen Seite müssen Sie ihre "
 "Passwörter bei Subversion-Clients erneut eingeben, die keinen Zugriff auf "
-"den KDE-Passwortspeicher haben (z. B. die Befehlszeile für SVN selbst, "
+"den KDE-Passwortspeicher haben (z. B. die Befehlszeile für SVN selbst, "
 "RapidSVN usw.)</p>\n"
 "<p>Falls Ihr persönlicher Ordner und somit die Einrichtungsdatei von "
 "Subversion auf einem Netzwerklaufwerk liegt,  sollten Ihre Passwörter nicht "
@@ -2814,7 +2814,7 @@ msgid ""
 "validate the certificate manually."
 msgstr ""
 "Das Zertifikat wurde von keiner vertrauenswürdigen Autorität bestätigt. "
-"Benutzen Sie den Fingerabdruck, um das Zertifikat manuell zu überprüfen."
+"Verwenden Sie den Fingerabdruck, um das Zertifikat manuell zu überprüfen."
 
 #: src/svnfrontend/ccontextlistener.cpp:339
 #, kde-format
@@ -3250,7 +3250,7 @@ msgstr "Auszug eines Projektarchivs erstellen"
 #: src/svnfrontend/dumprepo_dlg.ui:35
 #, kde-format
 msgid "Use deltas"
-msgstr "Deltas benutzen"
+msgstr "Deltas verwenden"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, m_StartNumber)
 #: src/svnfrontend/dumprepo_dlg.ui:54
@@ -3372,7 +3372,7 @@ msgid ""
 "a user must acquire a lock on the file before they can edit and commit "
 "changes."
 msgstr ""
-"Auf einen beliebigen Wert (z. B. <b>*</b>) setzen, um ein Sperren der Datei "
+"Auf einen beliebigen Wert (z. B. <b>*</b>) setzen, um ein Sperren der Datei "
 "zu erzwingen.<br/>Diese Datei wird auf Nur-Lesen gesetzt, wenn ausgelesen, "
 "oder erneuert, um zu markieren, dass der Benutzer eine Sperre anfordern "
 "muss, bevor er bearbeiten oder Änderungen einspielen kann."
@@ -3385,7 +3385,7 @@ msgid ""
 "how to serve it from Apache. A mimetype beginning with <b>'text/'</b> (or an "
 "absent mimetype) is treated as text. Anything else is treated as binary."
 msgstr ""
-"Der MIME-Typ der Datei. Wird benutzt, um herauszufinden, wie die Datei "
+"Der MIME-Typ der Datei. Wird verwendet, um herauszufinden, wie die Datei "
 "zusammengeführt werden soll und wie sie vom Server ausgeliefert wird. Ein "
 "MIME-Typ der mit <b>'text'/</b> beginnt (oder ein fehlender MIME-Typ) wird "
 "als Text behandelt, alles andere als Binärdatei."
@@ -3946,7 +3946,7 @@ msgid ""
 "Ignore files of which the node type is unknown, such as device files and "
 "pipes."
 msgstr ""
-"Dateien ignorieren, deren Type unbekannt ist, z. b. Gerätedateien oder Pipes."
+"Dateien ignorieren, deren Type unbekannt ist, z. B. Gerätedateien oder Pipes."
 
 #: src/svnfrontend/importdir_logmsg.cpp:79
 #, kde-format

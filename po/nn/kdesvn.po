@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-07-05 17:21+0200\n"
+"PO-Revision-Date: 2026-08-03 19:52+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.04.3\n"
+"X-Generator: Lokalize 26.11.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -65,47 +65,47 @@ msgstr "Passord"
 #: src/fileitemactions/kdesvnactionsplugin.cpp:51
 #, kde-format
 msgid "Checkout From Repository..."
-msgstr ""
+msgstr "Sjekk ut frå depot …"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:54
 #, kde-format
 msgid "Export..."
-msgstr ""
+msgstr "Eksporter …"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:57
 #, kde-format
 msgid "Update (Kdesvn)"
-msgstr ""
+msgstr "Oppdater (Kdesvn)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:60
 #, kde-format
 msgid "Commit (Kdesvn)"
-msgstr ""
+msgstr "Meld inn (Kdesvn)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:63
 #, kde-format
 msgid "kdesvn log (last 100)"
-msgstr ""
+msgstr "Kdesvn-logg (siste 100)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:66
 #, kde-format
 msgid "Export from a Subversion repository..."
-msgstr ""
+msgstr "Eksporter frå Subversion-depot …"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:69
 #, kde-format
 msgid "Checkout from a repository..."
-msgstr ""
+msgstr "Sjekk ut frå depot …"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:74
 #, kde-format
 msgid "Detailed Subversion info"
-msgstr ""
+msgstr "Detaljert Subversion-info"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:77
 #, kde-format
 msgid "Add to Repository"
-msgstr ""
+msgstr "Legg til depot"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:80
 #: src/svnfrontend/maintreewidget.cpp:655
@@ -116,27 +116,27 @@ msgstr "Sjå etter uversjonerte element"
 #: src/fileitemactions/kdesvnactionsplugin.cpp:83
 #, kde-format
 msgid "Delete From Repository"
-msgstr ""
+msgstr "Slett frå depot"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:86
 #, kde-format
 msgid "Revert Local Changes"
-msgstr ""
+msgstr "Tilbakestill lokale endringar"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:89
 #, kde-format
 msgid "Rename..."
-msgstr ""
+msgstr "Endra namn …"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:92
 #, kde-format
 msgid "Import Repository"
-msgstr ""
+msgstr "Importer depot"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:97
 #, kde-format
 msgid "Switch..."
-msgstr ""
+msgstr "Byt …"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:100
 #: src/svnfrontend/maintreewidget.cpp:826
@@ -147,27 +147,27 @@ msgstr "Flett …"
 #: src/fileitemactions/kdesvnactionsplugin.cpp:105
 #, kde-format
 msgid "Blame..."
-msgstr ""
+msgstr "Skuld på …"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:108
 #, kde-format
 msgid "Create Patch..."
-msgstr ""
+msgstr "Lag endringsfil …"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:113
 #, kde-format
 msgid "Diff (local)"
-msgstr ""
+msgstr "Diff (lokal)"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:116
 #, kde-format
 msgid "Display revision tree"
-msgstr ""
+msgstr "Vis revisjonstre"
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:127
 #, kde-format
 msgid "Subversion (kdesvn)"
-msgstr ""
+msgstr "Subversion (kdesvn)"
 
 #: src/kdesvn.cpp:82
 #, kde-format
@@ -2040,7 +2040,7 @@ msgstr "Kva program som skal brukast for løysing av konfliktar"
 #: src/settings/kdesvn_part.kcfg:164
 #, kde-format
 msgid "Display other than normal states colored"
-msgstr ""
+msgstr "Vis ikkjenormale tilstandar fargelagde"
 
 #. i18n: ectx: label, entry, group (blame_dlg)
 #: src/settings/kdesvn_part.kcfg:197
@@ -2161,6 +2161,8 @@ msgid ""
 "This value holds for log dialog which kind of log is used, it is internal "
 "only."
 msgstr ""
+"Denne verdien inneheld informasjon kva type logg som vert brukt i "
+"loggvindauget. Han er berre for intern bruk."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
 #: src/settings/polling_settings.ui:11
@@ -2291,7 +2293,7 @@ msgstr "Sjå etter oppdatering ved opning av arbeidskopi"
 #: src/settings/subversion_settings.ui:33
 #, kde-format
 msgid "Start refreshing the log cache for repository when networking enabled"
-msgstr ""
+msgstr "Start oppdatering av snøgglageret for depotet når det finst nettilgang"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:36
@@ -2320,7 +2322,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:49
 #, kde-format
 msgid "Check if items have \"svn:needs-lock\" property set"
-msgstr ""
+msgstr "Sjå om element har «svn:needs-lock»-eigenskapen definert"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:56
@@ -2328,6 +2330,7 @@ msgstr ""
 msgid ""
 "Whether to retrieve details about items when making listing on repositories"
 msgstr ""
+"Om det skal hentast inn informasjon om element ved opplasting av depot."
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:61
@@ -2340,6 +2343,12 @@ msgid ""
 "<p align=\"left\"><i>Be careful: This may let listings become REAL slow.</"
 "i></p>"
 msgstr ""
+"<p align=\"left\">Når der er kryssa av her, vil Kdesvn henta meir detaljert "
+"informasjon om filer og mapper ved listing av eksterne depot. Du ser kanskje "
+"fjernlåsar i oversiktsvisinga.\n"
+"</p>\n"
+"<p align=\"left\"><i>Ver forsiktig: Dette kan gjera opplistinga SVÆRT treg.</"
+"i></p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:64
@@ -2351,13 +2360,13 @@ msgstr "Hent filinformasjon ved ekstern listing"
 #: src/settings/subversion_settings.ui:74
 #, kde-format
 msgid "Get item info recursively"
-msgstr ""
+msgstr "Hent elementinformasjon rekursivt"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:84
 #, kde-format
 msgid "Should kdesvn retrieve properties on selected item in repositories"
-msgstr ""
+msgstr "Skal Kdesvn henta eigenskapar på dei valde elementa i depot"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:88
@@ -2380,7 +2389,7 @@ msgstr "Hent alltid eigenskapar for nettverksdepot"
 #: src/settings/subversion_settings.ui:101
 #, kde-format
 msgid "Should Subversion store passwords by default"
-msgstr ""
+msgstr "Skal Subversion lagra passord som standard"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:104
@@ -2471,7 +2480,7 @@ msgstr "List opp element som den neste innmeldinga vil senda eller ikkje"
 #: src/settings/subversion_settings.ui:184
 #, kde-format
 msgid "Should unversioned items be displayed in commit dialog or not."
-msgstr ""
+msgstr "Skal uversjonerte element visast i innmeldingsvindauget."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:187
@@ -2496,7 +2505,7 @@ msgstr ""
 #: src/settings/subversion_settings.ui:200
 #, kde-format
 msgid "Update modifies instead of creating conflicts"
-msgstr ""
+msgstr "Oppdatering endrar i staden for å laga konfliktar"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_make_parents)
 #: src/settings/subversion_settings.ui:207

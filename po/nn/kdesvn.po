@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-08-03 19:52+0200\n"
+"PO-Revision-Date: 2026-08-04 20:11+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -2317,6 +2317,10 @@ msgid ""
 "updating may get slow. Therefore, you should only switch on if you have "
 "repositories containing many such entries."
 msgstr ""
+"Ved opplisting av arbeidskopiar kan Kdesvn kontrollera eigenskapen <tt>svn:"
+"needs-lock</tt>.<br>Med opplisting/oppdatering av mapper med mange "
+"underelement kan då gå tregt. Så du bør berre slå på denne eigenskapen om du "
+"har depot med mange slike oppføringar."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:49
@@ -2378,6 +2382,11 @@ msgid ""
 "get very slow. Thus, if you have slow network connections or when browsing "
 "hangs often you should deactivate it."
 msgstr ""
+"Når du ser gjennom depot, kan Kdesvn prøva å visa eigenskapar under "
+"elementlista for eit valt element.\n"
+"For nettverksdepot (dvs. ikkje opna via «file://»-protokollen) kan dette gå "
+"svært tregt. Viss du har eit tregt nettverkssamband eller vising av depotet "
+"ofte låsar seg, bør du slå av denne funksjonen."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:91

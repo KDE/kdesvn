@@ -174,12 +174,12 @@ msgstr "&علامات"
 #: src/kdesvn.cpp:106
 #, kde-format
 msgid "Create and open new repository"
-msgstr "اِنْشِئ وافتح مستودعاً جديداً"
+msgstr "اِنْشِئ وافتح مستودعًا جديدًا"
 
 #: src/kdesvn.cpp:107
 #, kde-format
 msgid "Create and opens a new local Subversion repository"
-msgstr "اِنْشِئ وافتح مستودع Subversion محلياً جديداً"
+msgstr "اِنْشِئ وافتح مستودع Subversion محليًا جديدًا"
 
 #: src/kdesvn.cpp:110
 #, kde-format
@@ -194,12 +194,12 @@ msgstr "اِفْرُغ مستودع Subversion إلى ملف"
 #: src/kdesvn.cpp:114
 #, kde-format
 msgid "Hotcopy a repository"
-msgstr "اِنْسَخْ مستودعاً نسخاً ساخناً"
+msgstr "اِنْسَخْ مستودعًا نسخًا ساخنًا"
 
 #: src/kdesvn.cpp:115
 #, kde-format
 msgid "Hotcopy a Subversion repository to a new folder"
-msgstr "اِنْسَخْ مستودع Subversion نسخاً ساخناً إلى مجلد جديد"
+msgstr "اِنْسَخْ مستودع Subversion نسخًا ساخنًا إلى مجلد جديد"
 
 #: src/kdesvn.cpp:118
 #, kde-format
@@ -258,7 +258,7 @@ msgstr "لَمْ أَسْتَطِعْ فتح الوصلة %1"
 #: src/kdesvn.cpp:201
 #, kde-format
 msgid "Recent opened URLs"
-msgstr "الوصلات المفتوحة مؤخراً"
+msgstr "الوصلات المفتوحة مؤخرًا"
 
 #: src/kdesvn.cpp:210
 #, kde-format
@@ -504,7 +504,7 @@ msgstr "أَدْخِل كلمة مرور لنطاق %1"
 #: src/kdesvnd/kdesvnd.cpp:249 src/svnfrontend/ccontextlistener.cpp:284
 #, kde-format
 msgid "Open a file with a #PKCS12 certificate"
-msgstr "اِفْتَح ملفاً بشهادة #PKCS12"
+msgstr "اِفْتَح ملفًا بشهادة #PKCS12"
 
 #: src/kdesvnd/kdesvnd.cpp:336
 #, kde-format
@@ -564,7 +564,7 @@ msgstr "لا مستودع مفتوح"
 #, kde-format
 msgctxt "@title:window"
 msgid "Hotcopy a Repository"
-msgstr "اِنْسَخْ مستودعاً نسخاً ساخناً"
+msgstr "اِنْسَخْ مستودعًا نسخًا ساخنًا"
 
 #: src/kdesvnview.cpp:275
 #, kde-format
@@ -575,7 +575,7 @@ msgstr "اِنْتَهَى النسخ الساخن."
 #, kde-format
 msgctxt "@title:window"
 msgid "Load a Repository From an svndump"
-msgstr "اِحْمِل مستودعاً من svndump"
+msgstr "اِحْمِل مستودعًا من svndump"
 
 #: src/kdesvnview.cpp:334
 #, kde-format
@@ -597,7 +597,7 @@ msgstr "اِنْتَهَى تحميل المَفْرُوغ."
 #, kde-format
 msgctxt "@title:window"
 msgid "Dump a Repository"
-msgstr "اِفْرُغ مستودعاً"
+msgstr "اِفْرُغ مستودعًا"
 
 #: src/kdesvnview.cpp:386
 #, kde-format
@@ -657,7 +657,7 @@ msgid ""
 "Try updating instead."
 msgstr ""
 "فَشِل الرجوع عن %1.\n"
-"حاوِل التحديث بدلاً من ذلك."
+"حاوِل التحديث بدلًا من ذلك."
 
 #: src/kiosvn/kiolistener.cpp:124
 #, kde-format
@@ -937,7 +937,7 @@ msgstr "أَدْخِل رسالة سجل"
 #: src/ksvnwidgets/commitmessage.ui:184
 #, kde-format
 msgid "Last used log messages"
-msgstr "رسائل السجل المستخدمة أخيراً"
+msgstr "رسائل السجل المستخدمة أخيرًا"
 
 #. i18n: ectx: property (text), widget (QLabel, m_LogLabel)
 #: src/ksvnwidgets/commitmessage.ui:199
@@ -978,18 +978,18 @@ msgstr "اِعْرِض العناصر الجديدة"
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Text File to Insert"
-msgstr "اِخْتَر ملفاً نصياً للإضافة"
+msgstr "اِخْتَر ملفًا نصيًا للإضافة"
 
 #: src/ksvnwidgets/commitmsg_impl.cpp:481
 #, kde-format
 msgid "Select text file to insert:"
-msgstr "اِخْتَر ملفاً نصياً للإضافة:"
+msgstr "اِخْتَر ملفًا نصيًا للإضافة:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DeleteForm)
 #: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1638
 #, kde-format
 msgid "Really delete these entries?"
-msgstr "أَحْقاً تُرِيد حذف هذه الإدخالات؟"
+msgstr "أَحْقًا تُرِيد حذف هذه الإدخالات؟"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_forceDelete)
 #: src/ksvnwidgets/deleteform.ui:23
@@ -1032,15 +1032,15 @@ msgstr ""
 "<p ><b>نوع العمق</b>: </p>\n"
 "<p ><i>عمق فارغ</i><br />\n"
 "المجلد المسمّى فقط، لا إدخالات. التحديثات لا تسحب أي ملفات أو مجلدات فرعية "
-"غير موجودة أصلاً. </p>\n"
+"غير موجودة أصلًا. </p>\n"
 "<p><i>عمق الملفات</i><br />المجلد وأبناؤه من الملفات، لكن ليس المجلدات "
-"الفرعية. التحديثات تسحب أي ملفات غير موجودة أصلاً، لكن ليس المجلدات الفرعية. "
+"الفرعية. التحديثات تسحب أي ملفات غير موجودة أصلًا، لكن ليس المجلدات الفرعية. "
 "</p>\n"
 "<p><i>عمق فوري</i><br />المجلد وإدخالاته. التحديثات تسحب أي ملفات أو مجلدات "
-"فرعية غير موجودة أصلاً؛ إدخالات المجلدات الفرعية تلك ستكون بعمق فارغ. </p>\n"
+"فرعية غير موجودة أصلًا؛ إدخالات المجلدات الفرعية تلك ستكون بعمق فارغ. </p>\n"
 "<p>\n"
 "<i>عمق لانهائي</i><br />التحديثات تسحب أي ملفات أو مجلدات فرعية غير موجودة "
-"أصلاً؛ إدخالات \"هذا المجلد\" في المجلدات الفرعية تلك ستكون بعمق لانهائي.<br /"
+"أصلًا؛ إدخالات \"هذا المجلد\" في المجلدات الفرعية تلك ستكون بعمق لانهائي.<br /"
 ">مكافئ لسلوك التحديث المبدئي قبل 1.5. </p>"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
@@ -1187,7 +1187,7 @@ msgstr "اِرْجِع عن الإدخالات"
 #: src/ksvnwidgets/revertform.ui:20
 #, kde-format
 msgid "Really revert these entries to pristine state?"
-msgstr "أَحْقاً تُرِيد إرجاع هذه الإدخالات إلى حالة نقية؟"
+msgstr "أَحْقًا تُرِيد إرجاع هذه الإدخالات إلى حالة نقية؟"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:33
 #, kde-format
@@ -1419,10 +1419,10 @@ msgid ""
 "Use this only if you are sure what you are doing."
 msgstr ""
 "إن ضُبِطَت هذه العلامة، سَيَكُون لديك دعم كتابة بسيط للعناصر الموجودة. على سبيل "
-"المثال، اِسْتَطِعْ فتح ملفات في محررك واحفظها مباشرة دون سحبها مسبقاً (kdesvn "
+"المثال، اِسْتَطِعْ فتح ملفات في محررك واحفظها مباشرة دون سحبها مسبقًا (kdesvn "
 "سَيَقُوم بذلك في الخلفية).\n"
 "\n"
-"اِسْتَخْدِم هذا فقط إن كُنْت متأكداً مما تَفْعَل."
+"اِسْتَخْدِم هذا فقط إن كُنْت متأكدًا مما تَفْعَل."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_kio_can_overwrite)
 #: src/settings/cmdexecsettings.ui:106
@@ -1447,7 +1447,7 @@ msgid ""
 "</p>"
 msgstr ""
 "<p>إن ضُبِط، KIO kdesvn يَعْرِض رسائل مفصّلة في منطقة تحكم بلازما KDE.<br/>\n"
-"رسائل خطأ KIO تَعْرَض دائماً و<i>لا يُمْكِن</i> إيقاف تشغيلها.</p>"
+"رسائل خطأ KIO تَعْرَض دائمًا و<i>لا يُمْكِن</i> إيقاف تشغيلها.</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_dockmsg)
 #: src/settings/cmdexecsettings.ui:120
@@ -1901,7 +1901,7 @@ msgstr "اعرض تراكب الأيقونات"
 #: src/settings/kdesvn_part.kcfg:72
 #, kde-format
 msgid "Get item information recursively"
-msgstr "اطلب معلومات العنصر تكرارياً"
+msgstr "اطلب معلومات العنصر تكراريًا"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_review_commit)
@@ -1928,7 +1928,7 @@ msgstr "السجل يتبع تغييرات العقد"
 #: src/settings/kdesvn_part.kcfg:96 src/settings/subversion_settings.ui:161
 #, kde-format
 msgid "Log always reads list of changed files"
-msgstr "السجل آلياً يقرأ قائمة الملفات المغيّرة"
+msgstr "السجل آليًا يقرأ قائمة الملفات المغيّرة"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:100
@@ -1977,7 +1977,7 @@ msgstr "اخزن كلمات المرور للاتصالات عن بعد"
 #: src/settings/kdesvn_part.kcfg:128
 #, kde-format
 msgid "Store passwords in KDE Wallet instead of Subversion' storage"
-msgstr "اخزن كلمات المرور في محفظة كيدي بدلاً من تخزين Subversion"
+msgstr "اخزن كلمات المرور في محفظة كيدي بدلًا من تخزين Subversion"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_password_cache)
@@ -1996,7 +1996,7 @@ msgstr "هل الشبكة ممكنة"
 #: src/settings/kdesvn_part.kcfg:140
 #, kde-format
 msgid "Local add results in modification instead of conflicts"
-msgstr "الإضافة المحلية تؤدي لتعديل بدلاً من التعارضات"
+msgstr "الإضافة المحلية تؤدي لتعديل بدلًا من التعارضات"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:144
@@ -2240,7 +2240,7 @@ msgstr ""
 "عند بدء توليد الشجرة وقراءة البيانات من خبيئة السجل قد يفحص اس في ان لكيدي "
 "العناصر الأحدث في المستودع إذا كانت الشبكة ممكنة. \n"
 "\n"
-"لكن هذا قد يبطئ توليد الشجرة لذلك هو معطّل مبدئياً."
+"لكن هذا قد يبطئ توليد الشجرة لذلك هو معطّل مبدئيًا."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_fill_cache_on_tree)
 #: src/settings/revisiontree_settings.ui:183
@@ -2316,7 +2316,7 @@ msgid ""
 "<p align=\"left\"><i>Be careful: This may let listings become REAL slow.</"
 "i></p>"
 msgstr ""
-"<p align=\"left\">عند التحديد، اس في ان لكيدي يجلب معلومات أكثر تفصيلاً عن "
+"<p align=\"left\">عند التحديد، اس في ان لكيدي يجلب معلومات أكثر تفصيلًا عن "
 "عناصر الملفات عند عمل قائمة للمستودعات البعيدة لكي تستطيع رؤية الأقفال "
 "البعيدة في النظرة العامة.\n"
 "</p>\n"
@@ -2332,7 +2332,7 @@ msgstr "اطلب تفاصيل الملف أثناء عمل قائمة عن بع�
 #: src/settings/subversion_settings.ui:74
 #, kde-format
 msgid "Get item info recursively"
-msgstr "اطلب معلومات العنصر تكرارياً"
+msgstr "اطلب معلومات العنصر تكراريًا"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:84
@@ -2361,13 +2361,13 @@ msgstr ""
 #: src/settings/subversion_settings.ui:91
 #, kde-format
 msgid "Always get properties on networked repositories"
-msgstr "آلياً اطلب الخصائص على المستودعات الشبكية"
+msgstr "آليًا اطلب الخصائص على المستودعات الشبكية"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:101
 #, kde-format
 msgid "Should Subversion store passwords by default"
-msgstr "هل يجب على Subversion تخزين كلمات المرور مبدئياً"
+msgstr "هل يجب على Subversion تخزين كلمات المرور مبدئيًا"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:104
@@ -2379,7 +2379,7 @@ msgid ""
 "you may select for single non critical accounts inside the authentication "
 "dialog."
 msgstr ""
-"تخزين كلمات المرور هو غالباً مشكلة أمنية. اس في ان لكيدي نفسه لا يخزن أي "
+"تخزين كلمات المرور هو غالبًا مشكلة أمنية. اس في ان لكيدي نفسه لا يخزن أي "
 "كلمات مرور، ولكن Subversion نفسه داخل منطقة إعداد Subversion. إذا كانت هذه "
 "المنطقة قابلة للقراءة من الآخرين يجب ألا تضبطها، ولكن قد تختار لحسابات فردية "
 "غير حرجة داخل حوار الاستيثاق."
@@ -2389,7 +2389,7 @@ msgstr ""
 #, kde-format
 msgid ""
 "When saving passwords, do it into KDE Wallet instead of Subversions storage?"
-msgstr "عند حفظ كلمات المرور، افعل ذلك في محفظة كيدي بدلاً من تخزين Subversion؟"
+msgstr "عند حفظ كلمات المرور، افعل ذلك في محفظة كيدي بدلًا من تخزين Subversion؟"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_passwords_in_wallet)
 #: src/settings/subversion_settings.ui:122
@@ -2407,8 +2407,8 @@ msgid ""
 "do not save passwords.</p>"
 msgstr ""
 "<p>يخبر ما إذا كان يجب تخزين كلمات المرور المضبوطة في اس في ان لكيدي في "
-"محفظة كيدي بدلاً من تخزين نص واضح بسيط في Subversion.</p>\n"
-"<p>قد يكون هذا أكثر أمانًا قليلاً لأن محفظة كيدي (في الغالب) مُعمّاة بكلمة مرور. "
+"محفظة كيدي بدلًا من تخزين نص واضح بسيط في Subversion.</p>\n"
+"<p>قد يكون هذا أكثر أمانًا قليلًا لأن محفظة كيدي (في الغالب) مُعمّاة بكلمة مرور. "
 "من ناحية أخرى يجب عليك إعادة إدخال كلمات المرور الخاصة بك مع عملاء "
 "Subversion الآخرين الذين لا يصلون إلى محفظة كيدي (مثل سطر أوامر svn نفسه، "
 "rapidsvn وما إلى ذلك).</p>\n"
@@ -2442,7 +2442,7 @@ msgid ""
 "But if this feature is switched off, kdesvn may fail generating differences "
 "between node changes from within the log viewer."
 msgstr ""
-"قد تبطئ قراءة قوائم الملفات المغيّرة الأمور قليلاً أحياناً. ولكن إذا عُطّلت هذه "
+"قد تبطئ قراءة قوائم الملفات المغيّرة الأمور قليلًا أحيانًا. ولكن إذا عُطّلت هذه "
 "الميزة، قد يفشل اس في ان لكيدي في توليد الفروقات بين تغييرات العقد من داخل "
 "عارض السجل."
 
@@ -2473,14 +2473,14 @@ msgid ""
 "possible local modification, instead of a tree conflict.</p></body></html>"
 msgstr ""
 "<html><head/><body><p>إذا ضُبط، تؤدي الإضافة المحلية في نفس المسار مثل إضافة "
-"واردة من نفس نوع العقدة إلى عقدة عادية مع تعديل محلي محتمل، بدلاً من تعارض "
+"واردة من نفس نوع العقدة إلى عقدة عادية مع تعديل محلي محتمل، بدلًا من تعارض "
 "شجرة.</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_add_as_modification)
 #: src/settings/subversion_settings.ui:200
 #, kde-format
 msgid "Update modifies instead of creating conflicts"
-msgstr "التحديث يعدّل بدلاً من إنشاء تعارضات"
+msgstr "التحديث يعدّل بدلًا من إنشاء تعارضات"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_make_parents)
 #: src/settings/subversion_settings.ui:207
@@ -2706,7 +2706,7 @@ msgstr "غير معدل"
 #: src/svnfrontend/ccontextlistener.cpp:96
 #, kde-format
 msgid "item wasn't present"
-msgstr "العنصر لم يكن موجوداً"
+msgstr "العنصر لم يكن موجودًا"
 
 #: src/svnfrontend/ccontextlistener.cpp:97
 #, kde-format
@@ -2734,7 +2734,7 @@ msgid ""
 "The certificate is not issued by a trusted authority. Use the fingerprint to "
 "validate the certificate manually."
 msgstr ""
-"لم تصدر الشهادة من سلطة موثوقة. استخدم بصمة الإصبع للتحقق من الشهادة يدوياً."
+"لم تصدر الشهادة من سلطة موثوقة. استخدم بصمة الإصبع للتحقق من الشهادة يدويًا."
 
 #: src/svnfrontend/ccontextlistener.cpp:339
 #, kde-format
@@ -2763,7 +2763,7 @@ msgid ""
 "Really store password as plain text?"
 msgstr ""
 "%1\n"
-"هل تخزن كلمة المرور كنص عادي حقاً؟"
+"هل تخزن كلمة المرور كنص عادي حقًا؟"
 
 #: src/svnfrontend/ccontextlistener.cpp:371
 #, kde-format
@@ -3000,7 +3000,7 @@ msgid ""
 "Really clean cache for repository\n"
 "%1?"
 msgstr ""
-"هل حقاً نظّف خبيئة المستودع\n"
+"هل حقًا نظّف خبيئة المستودع\n"
 "%1؟"
 
 #: src/svnfrontend/database/dboverview.cpp:130
@@ -3020,7 +3020,7 @@ msgid ""
 "Really clean cache and data for repository\n"
 "%1?"
 msgstr ""
-"هل حقاً نظّف الخبيئة والبيانات للمستودع\n"
+"هل حقًا نظّف الخبيئة والبيانات للمستودع\n"
 "%1؟"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DeleteRepositoryButton)
@@ -3245,7 +3245,7 @@ msgid ""
 "directory. A non-recursive attempt will fail, and a recursive attempt will "
 "set the property only on the file children of the folder."
 msgstr ""
-"إن وجد، اجعل الملف قابلاً للتنفيذ.<br/>لا اضبِط هذه الخاصية على دليل. محاولة "
+"إن وجد، اجعل الملف قابلًا للتنفيذ.<br/>لا اضبِط هذه الخاصية على دليل. محاولة "
 "غير تكرارية ستفشل، ومحاولة تكرارية ستضْبط الخاصية فقط على الملفات الفرعية "
 "للدليل."
 
@@ -3277,7 +3277,7 @@ msgid ""
 "changes."
 msgstr ""
 "اضبِط هذا لأي قيمة (مثل <b>'*'</b>) لفرض القفل لهذا الملف.<br/>سيضبَط الملف "
-"كقراءة فقط عند سحبه أو تحديثه، مما يدل على أن المستخدم يجب أن يكتسب قفلاً على "
+"كقراءة فقط عند سحبه أو تحديثه، مما يدل على أن المستخدم يجب أن يكتسب قفلًا على "
 "الملف قبل أن يحرر ويلتزم بالتغييرات."
 
 #: src/svnfrontend/editpropsdlg.cpp:66 src/svnfrontend/editpropsdlg.cpp:100
@@ -3410,7 +3410,7 @@ msgstr "قيمة الخاصية:"
 #: src/svnfrontend/editpropsdlg.ui:69
 #, kde-format
 msgid "Click for short info about pre-defined property name"
-msgstr "انقر لمعلومات قصيرة حول اسم الخاصية المعرَّفَة مسبقاً"
+msgstr "انقر لمعلومات قصيرة حول اسم الخاصية المعرَّفَة مسبقًا"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, CheckoutInfo)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:14
@@ -3904,8 +3904,8 @@ msgid ""
 "If not empty, load the dump into a specific folder instead into root of "
 "repository. This folder must exist before loading the dump."
 msgstr ""
-"إن لم يكن فارغاً، حمِّل الإفراغ إلى مجلد محدد بدلاً من جذر المستودع. يجب أن يكون "
-"هذا المجلد موجوداً قبل تحميل الإفراغ."
+"إن لم يكن فارغًا، حمِّل الإفراغ إلى مجلد محدد بدلًا من جذر المستودع. يجب أن يكون "
+"هذا المجلد موجودًا قبل تحميل الإفراغ."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel5)
 #: src/svnfrontend/loaddmpdlg.ui:92
@@ -3957,7 +3957,7 @@ msgstr "اعرض سجل الخط الزمني للعنصر المحدد"
 #: src/svnfrontend/maintreewidget.cpp:514
 #, kde-format
 msgid "History of item ignoring copies"
-msgstr "الخط الزمني للعنصر متجاهلاً النسخ"
+msgstr "الخط الزمني للعنصر متجاهلًا النسخ"
 
 #: src/svnfrontend/maintreewidget.cpp:511
 #: src/svnfrontend/maintreewidget.cpp:520
@@ -4145,7 +4145,7 @@ msgstr "غير مزوّد بنسخ"
 #: src/svnfrontend/maintreewidget.cpp:661
 #, kde-format
 msgid "Browse folder for unversioned items and add them if wanted."
-msgstr "استعرِض المجلد بحثاً عن عناصر غير منقحة وأضِفها إذا أردت."
+msgstr "استعرِض المجلد بحثًا عن عناصر غير منقحة وأضِفها إذا أردت."
 
 #: src/svnfrontend/maintreewidget.cpp:665
 #, kde-format
@@ -4168,7 +4168,7 @@ msgid ""
 "Recursively clean up the working copy, removing locks, resuming unfinished "
 "operations, etc."
 msgstr ""
-"نظِّف نسخة العمل تكرارياً، أزِل الأقفال، واستأنِف العمليات غير المكتملة، إلخ."
+"نظِّف نسخة العمل تكراريًا، أزِل الأقفال، واستأنِف العمليات غير المكتملة، إلخ."
 
 #: src/svnfrontend/maintreewidget.cpp:680
 #, kde-format
@@ -4193,7 +4193,7 @@ msgstr "أضِف الملفات و/أو الأدلة المحددة إلى ال�
 #: src/svnfrontend/maintreewidget.cpp:698
 #, kde-format
 msgid "Add selected files/dirs recursive"
-msgstr "أضِف الملفات/الأدلة المحددة تكرارياً"
+msgstr "أضِف الملفات/الأدلة المحددة تكراريًا"
 
 #: src/svnfrontend/maintreewidget.cpp:703
 #, kde-format
@@ -4291,7 +4291,7 @@ msgid ""
 "Diff working copy against BASE (last checked out version) - does not require "
 "access to repository"
 msgstr ""
-"فرق نسخة العمل مقابل BASE (آخر نسخة مسحوبة) - لا يتطلب وصولاً إلى المستودع"
+"فرق نسخة العمل مقابل BASE (آخر نسخة مسحوبة) - لا يتطلب وصولًا إلى المستودع"
 
 #: src/svnfrontend/maintreewidget.cpp:794
 #, kde-format
@@ -4303,7 +4303,7 @@ msgstr "فرق مقابل الرأس"
 msgid ""
 "Diff working copy against HEAD (last checked in version)- requires access to "
 "repository"
-msgstr "فرق نسخة العمل مقابل الرأس (آخر نسخة أُودِعت) - يتطلب وصولاً إلى المستودع"
+msgstr "فرق نسخة العمل مقابل الرأس (آخر نسخة أُودِعت) - يتطلب وصولًا إلى المستودع"
 
 #: src/svnfrontend/maintreewidget.cpp:802
 #: src/svnfrontend/maintreewidget.cpp:809

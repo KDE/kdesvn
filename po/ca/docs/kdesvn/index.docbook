@@ -990,7 +990,7 @@
 <title
 >Cas especial de «svn+ssh»</title>
 <para
->Quan s'utilitza el Subversion a través de svn+ssh, l'emmagatzematge de la contrasenya es farà a través de ssh i ssh-agent. Per a fer això, cal tenir accés a la màquina i repositori remots. Si voleu emmagatzemar alguna cosa, haureu d'utilitzar l'autenticació de clau pública de ssh, no l'autenticació per contrasenya. (De fet, ssh prefereix l'autenticació per clau pública). Per a fer això, cal posar la vostra clau pública ssh en l'objectiu, &pex;, al sistema del repositori. Les contrasenyes ssh mai seran manejades per l'emmagatzematge de contrasenyes de Subversion, el &kwallet5; o el cau intern de contrasenyes. </para>
+>Quan s'utilitza el Subversion a través de svn+ssh, l'emmagatzematge de la contrasenya es farà a través de ssh i ssh-agent. Per a fer això, cal tenir accés a la màquina i repositori remots. Si voleu emmagatzemar alguna cosa, haureu d'utilitzar l'autenticació de clau pública de ssh, no l'autenticació amb contrasenya. (De fet, ssh prefereix l'autenticació amb clau pública). Per a fer això, cal posar la vostra clau pública ssh en l'objectiu, &pex;, al sistema del repositori. Les contrasenyes ssh mai seran manejades per l'emmagatzematge de contrasenyes de Subversion, el &kwallet5; o el cau intern de contrasenyes. </para>
 <para
 >Si no voleu que se us demani la contrasenya de la vostra clau SSH, podeu utilitzar el <application
 >ssh-agent</application

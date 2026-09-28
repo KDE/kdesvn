@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025, 2026 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022-2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-03-09 21:45+0300\n"
+"PO-Revision-Date: 2026-09-27 19:05+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.12.2\n"
+"X-Generator: Lokalize 26.08.0\n"
 "X-POOTLE-MTIME: 1502202338.000000\n"
 
 #, kde-format
@@ -1848,7 +1848,7 @@ msgstr "Dosya bilgisini göster"
 #: src/settings/display_settings.ui:77
 #, kde-format
 msgid "Display colored annotate"
-msgstr "Renkli bilgi notları görüntüle"
+msgstr "Renkli ek açıklamalar görüntüle"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_show_navigation_panel)
 #: src/settings/display_settings.ui:84
@@ -4933,17 +4933,17 @@ msgstr "%1 Geçmişi"
 #, kde-format
 msgctxt "@title:window"
 msgid "Annotate"
-msgstr "Bilgi Notu Ekle"
+msgstr "Ek Açıklama Ekle"
 
 #: src/svnfrontend/svnactions.cpp:562
 #, kde-format
 msgid "Annotate lines - hit Cancel for abort"
-msgstr "Satırlara bilgi notu ekle — vazgeçmek için İptal’e basın"
+msgstr "Satırlara ek açıklama ekleniyor — vazgeçmek için İptal’e basın"
 
 #: src/svnfrontend/svnactions.cpp:570
 #, kde-format
 msgid "Got no annotate"
-msgstr "Bilgi notu alınamadı"
+msgstr "Ek açıklama alınamadı"
 
 #: src/svnfrontend/svnactions.cpp:587
 #, kde-format
@@ -5662,7 +5662,7 @@ msgstr "Girdileri Listele"
 #: src/svnfrontend/svnlogdlg.ui:249 src/svnfrontend/svnlogdlgimp.cpp:514
 #, kde-format
 msgid "Annotate"
-msgstr "Bilgi Notu Ekle"
+msgstr "Ek Açıklama Ekle"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_pbHelp)
 #: src/svnfrontend/svnlogdlg.ui:275

@@ -227,7 +227,7 @@ msgstr "Загрузить дамп в репозиторий"
 #: src/kdesvn.cpp:122
 #, kde-format
 msgid "Add ssh identities to ssh-agent"
-msgstr "Добавить учётные записи SSH в клиент SSH"
+msgstr "Добавить ключи SSH в ssh-agent"
 
 #: src/kdesvn.cpp:123
 #, kde-format
@@ -4065,7 +4065,7 @@ msgstr "Отображает журнал событий выбранного э
 #: src/svnfrontend/maintreewidget.cpp:514
 #, kde-format
 msgid "History of item ignoring copies"
-msgstr "История игнорированных копий объекта"
+msgstr "Журнал объекта без учёта копий"
 
 #: src/svnfrontend/maintreewidget.cpp:511
 #: src/svnfrontend/maintreewidget.cpp:520
@@ -4261,7 +4261,8 @@ msgstr "Неверсированный"
 #: src/svnfrontend/maintreewidget.cpp:661
 #, kde-format
 msgid "Browse folder for unversioned items and add them if wanted."
-msgstr "Обзор папки для неверсированных элементов и добавить их, если нужно."
+msgstr ""
+"Найти в папке объекты без контроля версий и при необходимости добавить их."
 
 #: src/svnfrontend/maintreewidget.cpp:665
 #, kde-format
@@ -4300,7 +4301,7 @@ msgstr "Импортировать содержимое папки в текущ
 #: src/svnfrontend/maintreewidget.cpp:690
 #, kde-format
 msgid "Add selected files/dirs"
-msgstr "Добавить выбранные файлы/каталоги"
+msgstr "Добавить выбранные файлы/папки"
 
 #: src/svnfrontend/maintreewidget.cpp:695
 #, kde-format
@@ -4310,7 +4311,7 @@ msgstr "Добавляем выбранные файлы и/или катало�
 #: src/svnfrontend/maintreewidget.cpp:698
 #, kde-format
 msgid "Add selected files/dirs recursive"
-msgstr "Добавить выбранные рекурсивные файлы/каталоги"
+msgstr "Добавить выбранные файлы/папки рекурсивно"
 
 #: src/svnfrontend/maintreewidget.cpp:703
 #, kde-format
@@ -4348,7 +4349,7 @@ msgstr "Откатить текущие изменения"
 #: src/svnfrontend/maintreewidget.cpp:729
 #, kde-format
 msgid "Mark resolved"
-msgstr "Отмечать разрешенные"
+msgstr "Отметить как разрешённый"
 
 #: src/svnfrontend/maintreewidget.cpp:734
 #, kde-format
@@ -4562,7 +4563,7 @@ msgstr "Установить свойство рекурсивно..."
 #: src/svnfrontend/maintreewidget.cpp:905
 #, kde-format
 msgid "Settings for current repository"
-msgstr "Настройки для текущего репозитория"
+msgstr "Параметры текущего репозитория"
 
 #: src/svnfrontend/maintreewidget.cpp:1083
 #: src/svnfrontend/maintreewidget.cpp:2051

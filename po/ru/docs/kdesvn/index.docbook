@@ -1,0 +1,3503 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kdesvn "<application
+>kdesvn</application
+>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY Rajko.Albrecht '<personname
+><firstname
+>Rajko</firstname
+><surname
+>Albrecht</surname
+></personname
+>'>
+  <!ENTITY Rajko.Albrecht.mail '<email
+>ral@alwins-world.de</email
+>'>
+  <!ENTITY % Russian "INCLUDE"
+><!-- change language only here -->
+]>
+
+<book lang="&language;">
+
+<bookinfo>
+<title
+>Руководство пользователя &kdesvn;</title>
+
+<authorgroup>
+<author
+><firstname
+>Rajko</firstname
+> <surname
+>Albrecht</surname
+> <affiliation
+> <address
+>&Rajko.Albrecht.mail;</address>
+</affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>Александр</firstname
+><surname
+>Яворский</surname
+><affiliation
+><address
+><email
+>kekcuha@gmail.com</email
+></address
+></affiliation
+><contrib
+>Перевод на русский</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2005</year>
+<year
+>2008</year>
+<holder
+>&Rajko.Albrecht;</holder>
+</copyright>
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>22 мая 2016 г.</date>
+<releaseinfo
+>kdesvn 2.0</releaseinfo>
+
+<abstract>
+<para
+>&kdesvn; — клиент Subversion от &kde;. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdesvn</keyword>
+<keyword
+>subversion</keyword>
+<keyword
+>система управления версиями</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Введение</title>
+
+<para
+>&kdesvn; — <ulink url="http://subversion.apache.org/"
+>клиент Subversion</ulink
+> от &kde;. </para>
+<para
+>Следует иметь некоторые знания о самом Subversion, но, будем надеяться, большинство пунктов не требует пояснений. </para>
+<para
+>Сообщения об ошибках и пожелания по улучшению можно отправлять через <ulink url="https://bugs.kde.org/"
+>систему отслеживания ошибок &kde;</ulink
+>. </para>
+
+<sect1 id="kdesvn-terms">
+<title
+>Термины</title>
+<para
+>Если вы знакомы с системами управления версиями, можете пропустить этот раздел — или прочитать и исправить автора ;) </para>
+<para>
+<variablelist>
+<varlistentry>
+<term
+>Репозиторий</term>
+<listitem
+><para
+>Центральное хранилище данных. Это может быть база данных или обычная файловая система. Без специальных клиентов прочитать находящиеся в нём данные невозможно. Для репозиториев Subversion таким клиентом является &kdesvn;. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Рабочая копия</term>
+<listitem
+><para
+>Копия репозитория в локальной файловой системе. С ней работают как в обычном файловом менеджере: редактируют файлы и так далее. Сведения системы управления версиями читаются клиентами, например &kdesvn;. </para>
+<para
+>Следует помнить, что subversion ничего не знает о KIO, поэтому рабочая копия должна находиться в области, доступной без использования специального протокола, например, <quote
+>fish://</quote
+> или подобное невозможно. </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>WebDAV</term>
+<listitem
+><para
+>WebDAV — протокол, позволяющий изменять файлы на удалённом веб-сервере. Доступ к репозиториям Subversion через веб-сервер — особый вид WebDAV. Обычно он открыт только для чтения; при особой настройке можно получить WebDAV с доступом на чтение и запись, к которому обращаются специальным браузером. &kdesvn; НЕ является клиентом WebDAV, а &konqueror; является — через протокол <quote
+>webdav://</quote
+>. Но с помощью &kdesvn; можно просматривать дерево ревизий репозитория (через <quote
+>http://</quote
+>). </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect1>
+</chapter>
+
+<chapter id="using-kdesvn">
+<title
+>Использование &kdesvn;</title>
+<sect1 id="kdesvn-features">
+<title
+>Возможности &kdesvn;</title>
+<para
+>&kdesvn; поддерживает следующие протоколы для просмотра репозиториев: <variablelist>
+
+<varlistentry>
+<term
+>http</term>
+<listitem
+><para
+>Стандартный протокол веб-браузера. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>https</term>
+<listitem
+><para
+>Стандартный шифрованный протокол веб-браузера. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+http</term>
+<listitem
+><para
+>Стандартный протокол веб-браузера. Позволяет &konqueror; автоматически вызывать &kdesvn;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+https</term>
+<listitem
+><para
+>Стандартный шифрованный протокол веб-браузера. Позволяет &konqueror; автоматически вызывать &kdesvn;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+file</term>
+<listitem
+><para
+>Протокол локального репозитория. Позволяет &konqueror; автоматически вызывать &kdesvn;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn</term>
+<listitem
+><para
+>Собственный серверный протокол Subversion. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+ssh</term>
+<listitem
+><para
+>Subversion по SSH. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>file</term>
+<listitem
+><para
+>Прямой доступ к репозиторию. &kdesvn; проверяет, является ли указанный путь репозиторием или рабочей копией, и открывает его в нужном режиме. Для Subversion <filename class="directory"
+>file:///dir</filename
+> и <filename class="directory"
+>/dir</filename
+> — не одно и то же! </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+<para
+>Этот список можно также использовать для &URL;, задаваемых в <link linkend="kdesvn-commandline"
+>командной строке</link
+>. </para>
+</sect1>
+<sect1 id="first_steps">
+<title
+>Начало работы с Subversion и &kdesvn;</title>
+<para
+>Этот раздел предназначен в основном для начинающих, не знакомых с Subversion, и объясняет, как работают Subversion и/или системы управления версиями (<acronym
+>RCS</acronym
+>). </para>
+
+<sect2>
+<title
+>Создание рабочей копии</title>
+<caution>
+<para
+>Рабочие копии ДОЛЖНЫ быть доступны по локальным путям. Subversion ничего не знает о псевдофайловых системах, таких как <filename class="directory"
+>smb://</filename
+> или <filename class="directory"
+>fish://</filename
+>. &kdesvn; преобразует некоторые из них, если это возможно (например, <filename class="directory"
+>system:/home</filename
+>), но по сети это невозможно. </para>
+</caution>
+<para
+>Прежде всего нужно создать рабочую копию репозитория. Для этого выберите <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guimenuitem
+>Получить из репозитория</guimenuitem
+> </menuchoice
+>. В открывшемся диалоговом окне укажите &URL; нужного репозитория, например <literal
+>http://localhost/repos/myproject</literal
+>. Можно указать и вложенную папку репозитория, например <literal
+>http://localhost/repos/myproject/trunk</literal
+>. </para>
+<para
+>Выберите и (или) создайте локальную папку, в которой должна находиться рабочая копия. </para>
+<para
+>И наконец, ревизия для извлечения. Обычно это <quote
+>HEAD</quote
+>: тогда извлекается последняя сохранённая версия. </para>
+<para
+>После нажатия кнопки <guibutton
+>ОК</guibutton
+> &kdesvn; создаст новую рабочую копию и (если флажок был установлен) откроет её. </para>
+<para
+>Открыв репозиторий для просмотра, можно отметить папку, выбрать <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Репозиторий</guisubmenu
+> <guimenuitem
+>Получить текущий путь к репозиторию</guimenuitem
+> </menuchoice
+> и заполнить диалоговые окна, как описано выше. Тогда будет извлечён только отмеченный путь. </para>
+</sect2>
+<sect2>
+<title
+>Фиксация локальных изменений</title>
+<para
+>Отметьте запись или записи, которые нужно отправить, и выберите <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>#</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guimenuitem
+>Фиксация</guimenuitem
+> </menuchoice
+> </para>
+<para
+>Если попытаться выполнить фиксацию, когда ни один элемент не выбран, &kdesvn; использует самый верхний элемент открытой рабочей копии, то есть сам путь рабочей копии. </para>
+<para
+>Эта операция всегда рекурсивна, то есть при выборе папки &kdesvn; всегда отправляет все изменённые элементы, находящиеся в ней. Если задать просмотр всех элементов перед фиксацией, в следующем диалоговом окне будут перечислены все элементы, которые &kdesvn; собирается отправить. Там можно снять метки с элементов, которые не нужно отправлять. В этом случае &kdesvn; отправляет элементы по отдельности, то есть нерекурсивно. Или можно выбрать элементы, не находящиеся под управлением версий, для добавления и фиксации (если они не помечены как игнорируемые). Так можно увидеть, не забыты ли новые элементы. </para>
+<para
+>Введите сообщение журнала о том, что отправляете, и нажмите кнопку <guibutton
+>ОК</guibutton
+> — передача начнётся. </para>
+</sect2>
+<sect2>
+<title
+>Обновление рабочей копии</title>
+<para
+>Обновление синхронизирует локальную рабочую копию с репозиторием. Можно настроить &kdesvn; так, чтобы при открытии рабочей копии он проверял репозиторий на наличие новых или изменённых объектов. Проверка идёт в фоне, и тем временем можно продолжать работу с &kdesvn;. По её окончании помечаются объекты, у которых есть более новые ревизии, и папки, в которых есть такие объекты. </para>
+<para
+>Чтобы получить изменения, выберите <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guimenuitem
+>Обновить до ведущей ревизии</guimenuitem
+> </menuchoice
+>: рабочая копия будет обновлена до последней ревизии. Чтобы получить определённую ревизию, выберите <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guimenuitem
+>Обновить до ревизии</guimenuitem
+> </menuchoice
+> и укажите нужную ревизию в открывшемся окне. </para>
+<para
+>Если ни один элемент не выбран, обновление выполняется для всей открытой рабочей копии, иначе — только рекурсивно для выбранных элементов. </para>
+</sect2>
+<sect2>
+<title
+>Добавление и удаление в рабочей копии</title>
+<para
+>Обе операции выполняются в два этапа: сначала добавление или удаление, затем фиксация этих изменений в репозитории. До фиксации можно отменить добавление или удаление. </para>
+<sect3>
+<title
+>Добавление объектов</title>
+<para
+>Добавить объекты в рабочую копию можно тремя способами: <variablelist>
+<varlistentry>
+<term
+>Выбрать объекты без контроля версий и добавить их</term>
+<listitem
+><para
+>Скопируйте файлы в рабочую копию с помощью &konqueror; или любого другого средства. Найдите их в списке, отметьте и выберите <menuchoice
+> <shortcut
+><keycombo action="simul"
+><keycap
+>Insert</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guimenuitem
+>Добавить выбранные файлы/папки</guimenuitem
+> </menuchoice
+>. Чтобы добавить новые папки со всем содержимым, выберите <menuchoice
+> <shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Insert</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guimenuitem
+>Добавить выбранные файлы/папки рекурсивно</guimenuitem
+> </menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Проверка и рекурсивное добавление</term>
+<listitem
+><para
+>Можно проверить, нет ли в рабочей копии объектов без контроля версий. После выбора <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guimenuitem
+>Все ли объекты под контролем версий?</guimenuitem
+> </menuchoice
+> откроется диалоговое окно со списком всех таких объектов. Кнопка <guibutton
+>ОК</guibutton
+> добавляет в рабочую копию все отмеченные объекты; с тех, которые не нужно ставить под контроль версий, отметку следует снять заранее. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Перетаскивание</term>
+<listitem
+><para
+>Отметьте в &konqueror; или любом другом совместимом файловом менеджере элементы, которые нужно добавить, и перетащите их в &kdesvn;. Можно отпустить их на папках внутри открытой рабочей копии, и тогда &kdesvn; скопирует перетащенные элементы в эту папку и добавит их. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para
+></sect3>
+<sect3>
+<title
+>Удаление объектов из рабочей копии и из-под контроля версий</title>
+<para
+>Удаление всегда рекурсивно: например, при удалении папки удаляются и все вложенные объекты. Отметьте нужные объекты и выберите пункт меню <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guimenuitem
+>Удалить выбранные файлы/папки</guimenuitem
+> </menuchoice
+>. Объекты будут сняты с контроля версий и удалены с диска. </para>
+</sect3>
+</sect2>
+
+<sect2 id="logdisplay">
+<title
+>Просмотр журнала</title>
+<para
+>Журнал открывается комбинацией клавиш <keycombo action="simul"
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+>, когда в списке отмечен один объект или не отмечено ни одного. В зависимости от параметров (см. <xref linkend="subversion-settings" xreflabel="settings"/>) &kdesvn; получает несколько записей журнала, начиная с <quote
+>HEAD</quote
+>, и показывает их. </para>
+<sect3  id="logdisplay-dlg">
+<title
+>Диалоговое окно журнала</title>
+<para
+>Слева показывается список записей журнала, полученных &kdesvn;. Каждое сообщение журнала сокращено до одной строки. Полное сообщение показывается в правом верхнем окне при выборе записи, а в правом нижнем — список изменённых файлов. Эти окна появляются <emphasis
+>только</emphasis
+> в том случае, если этот список загружается, что зависит от параметров. </para>
+<para
+>Кнопки в верхней части позволяют выбрать другой диапазон журналов для показа. <important
+><para
+>Этот диапазон запрашивается без предварительного ограничения, поэтому при использовании этой возможности на больших репозиториях следует соблюдать осторожность.</para
+></important>
+
+</para>
+<para
+>Кнопки внизу диалогового окна всегда действуют на объект, для которого открыт журнал, а не на объект, выбранный в списке изменённых файлов. Поэтому кнопка <guibutton
+>Сравнить с предыдущей</guibutton
+> выводит различия для всех изменённых в этой ревизии объектов, совпадающих с объектом, для которого получен журнал, или вложенных в него. То же относится к кнопке <guibutton
+>Сравнить ревизии</guibutton
+>. </para>
+<para
+>Кнопка <guibutton
+>Комментировать</guibutton
+>, разумеется, работает, только если журнал открыт для файла. </para>
+<para
+>У записей обоих списков есть контекстное меню с дополнительными действиями. В левом списке это <guimenuitem
+>Установить версию как левую сторону для сравнения</guimenuitem
+> (то есть начальная ревизия) и <guimenuitem
+>Установить версию как правую сторону для сравнения</guimenuitem
+> (то есть конечная ревизия; в унифицированном формате — часть, помеченная <computeroutput
+>+++</computeroutput
+>). Выбранные ревизии помечаются маленькими стрелками. </para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="working-with-repositories">
+<title
+>Работа с репозиториями</title>
+<para
+>Просто просматривать репозиторий можно в &konqueror;, &dolphin; и подобных файловых менеджерах: откройте URL с протоколом, описанным в <xref linkend="kdesvn-features" xreflabel="Features"/> (варианты, начинающиеся с <quote
+>k</quote
+>), и будет показано содержимое репозитория. Работают и простые действия — копирование, перемещение и удаление. Если добавить к адресу запрос <quote
+>?rev=<replaceable
+>xxx</replaceable
+></quote
+>, список будет показан для указанной ревизии. Формат запроса ревизии описан в <xref linkend="revision-syntax"/>, подробнее о KIO::ksvn — в <xref linkend="kdesvn-kio"/>. </para>
+<para
+>Все действия, кроме <guimenuitem
+>Копировать</guimenuitem
+>, выполняются только при просмотре ревизии HEAD. </para>
+<sect2>
+<title
+>Восстановление удалённых объектов</title>
+<para
+>В Subversion восстановление удалённого объекта — это копирование объекта из определённой ревизии. Поэтому для восстановления откройте репозиторий в ревизии, предшествующей удалению. Выберите <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Репозиторий</guisubmenu
+> <guimenuitem
+>Выберите ревизию для просмотра</guimenuitem
+> </menuchoice
+> и введите нужную ревизию: &kdesvn; покажет содержимое репозитория на тот момент. Отметьте объект, который нужно восстановить, и выберите <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guimenuitem
+>Копировать</guimenuitem
+> </menuchoice
+>. В открывшемся диалоговом окне назначение всегда относится к ревизии HEAD, а источник — к ревизии, выбранной для просмотра. Укажите путь и нажмите <guibutton
+>ОК</guibutton
+> — начнётся копирование. После успешного копирования переключите просмотр обратно на ревизию HEAD: восстановленный объект должен появиться. </para>
+</sect2>
+<sect2>
+<title
+>Импорт папок</title>
+<para
+>Из-за ограничений самого Subversion импортировать можно только папки, а не отдельные файлы. </para>
+<sect3>
+<title
+>С помощью перетаскивания</title>
+<para
+>Отметьте в любом совместимом файловом менеджере папку, которую нужно импортировать, и перетащите её на ту папку в &kdesvn;, куда её нужно импортировать. </para>
+</sect3>
+<sect3>
+<title
+>Выбор папки для импорта в окне выбора папки</title>
+<para
+>Отметьте папку, в которую нужно импортировать новую папку. Затем выберите <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guimenuitem
+>Импортировать папки в текущий</guimenuitem
+> </menuchoice
+> и укажите нужную папку. </para>
+</sect3>
+</sect2>
+</sect1>
+<sect1 id="operations">
+<title
+>Другие операции</title>
+<sect2 id="merging-items">
+<title
+>Слияние</title>
+<para
+>Откройте репозиторий или рабочую копию, отметьте объект для слияния и выберите <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guisubmenu
+>Слияние</guisubmenu
+> </menuchoice
+>. В открывшемся диалоговом окне введите нужные значения. Если окно открыто из репозитория, заполнены поля источника 1 и источника 2; если из рабочей копии — поле назначения заполняется выбранным объектом. Обработка этих параметров немного различается при встроенном сравнении Subversion и при внешней программе слияния, такой как &kdiff3;. Назначением ВСЕГДА должна быть локальная папка или файл. Переключаться между внешним и встроенным слиянием можно флажком <guilabel
+>Использовать внешнее слияние</guilabel
+>. </para>
+<sect3>
+<title
+>Внутреннее слияние</title>
+<para
+>Значения те же, что и в собственной программе командной строки Subversion. Если источник 1 и источник 2 совпадают, начальная и конечная ревизии должны различаться. Если источники не совпадают, начальная ревизия относится к источнику 1, а конечная — к источнику 2. Назначение ДОЛЖНО быть рабочей копией, иначе Subversion выдаст сообщение об ошибке. </para>
+<para
+>Флажки имеют следующие значения: <variablelist>
+
+<varlistentry>
+<term
+>Рекурсивно</term>
+<listitem
+><para
+>Выполнять все операции рекурсивно при работе с папками. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Обработка несвязанных объектов как связанных</term>
+<listitem
+><para
+>Если включено, несвязанные элементы будут сравниваться так, как если бы они были связаны. В противном случае Subversion удалит элемент с одной стороны и снова добавит его с другой стороны. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Принудительно удалять изменённые объекты и объекты без контроля версий</term>
+<listitem
+><para
+>Если параметр не включён и при слиянии требуется удаление изменённого элемента или элемента без управления версиями, слияние Subversion завершается ошибкой. В противном случае эти элементы будут удалены. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Пробный прогон без внесения изменений</term>
+<listitem
+><para
+>Если включено, Subversion только уведомляет о том, что было бы сделано, но не изменяет рабочую копию. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+</sect3>
+<sect3>
+<title
+>Использование внешней программы для слияния</title>
+<para
+>Подробнее о настройке внешнего инструмента слияния см. в <xref linkend="diffmerge-settings"/>. &kdesvn; формирует командную строку так, как описано там. Перед этим выполняется следующее: </para>
+<para>
+<orderedlist>
+
+<listitem
+><para
+>Начальная ревизия относится к источнику 1, конечная — к источнику 2. Затем проверяется, различаются ли они (путём и/или ревизией). Если да, выполняется трёхстороннее слияние, иначе — простое слияние источника с назначением. Если источник 2 не указан, слияние тоже простое. </para
+></listitem>
+
+<listitem
+><para
+>Выполняется экспорт во временную папку: при простом слиянии — только источника 1 в начальной ревизии, иначе — обоих источников в их ревизиях. Если объект — файл, а не папка, берётся его содержимое в указанной ревизии. </para
+></listitem>
+
+<listitem>
+<para
+>Формируется вызов внешней программы слияния так, как задано в <link linkend="diffmerge-settings"
+>параметрах</link
+>. Сообщения об ошибках показываются в окне журнала, так что можно увидеть, что пошло не так (если что-то пошло не так). </para>
+</listitem>
+</orderedlist
+>В отличие от внутреннего слияния, целевой объект может быть обычной папкой или файлом без управления версиями, поскольку внешние инструменты не обращают на это внимания. </para>
+<para
+>Если флажок <quote
+>Рекурсивно</quote
+> не установлен, экспорт выполняется без вложенных папок. Внимание: в этом случае внешние ссылки рабочих копий (externals) экспортированы <emphasis
+>не</emphasis
+> будут. </para>
+</sect3>
+</sect2>
+
+<sect2 id="op-resolve">
+<title
+>Разрешение конфликтов</title>
+<para
+>В самом &kdesvn; нет модуля для разрешения конфликтов, но можно использовать внешнее программное обеспечение из &kdesvn;. В <xref linkend="extern-resolve-setup"/> описано, как настроить это приложение. </para>
+<para
+>Выбрав объект в состоянии <quote
+>конфликт</quote
+> (у таких объектов в списке показывается красный крестик), можно выбрать <menuchoice
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guisubmenu
+>Разрешить конфликт</guisubmenu
+> </menuchoice
+> или пункт контекстного меню <guimenuitem
+>Разрешить конфликт</guimenuitem
+> (есть только у конфликтующих объектов). &kdesvn; запустит настроенную программу (или программу по умолчанию). Закончив, отметьте объект как разрешённый (<menuchoice
+><guimenu
+>Subversion</guimenu
+><guisubmenu
+>Рабочая копия</guisubmenu
+><guisubmenu
+>Отметить как разрешённый</guisubmenu
+></menuchoice
+>), иначе зафиксировать изменения не удастся. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="used-properties">
+<title
+>Свойства, используемые &kdesvn; для настройки</title>
+<sect2>
+<title
+>Интеграция с системой отслеживания ошибок</title>
+<para
+>Проект <ulink url="http://tortoisesvn.tigris.org/"
+>TortoiseSVN</ulink
+> разработал удобную систему свойств <ulink url="http://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-dug-bugtracker.html"
+>для интеграции системы отслеживания ошибок</ulink
+> в графический интерфейс Subversion. Текущая версия &kdesvn; не поддерживает дополнительные поля в окне фиксации (появится позже) и не понимает ничего, кроме следующих свойств: </para>
+<para>
+<table id="bugtracker-properties">
+<title
+>Свойства интеграции с системой отслеживания ошибок</title>
+<tgroup cols="3">
+
+<thead>
+<row>
+<entry
+>Свойство</entry>
+<entry
+>Описание</entry>
+<entry
+>Пример</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><literal
+>bugtraq:url</literal
+></entry>
+<entry
+>Содержит &URL; системы отслеживания ошибок. Должен содержать маркер <literal
+>%BUGID%</literal
+>.</entry>
+<entry
+>https://bugs.kde.org/show_bug.cgi?id=%BUGID%</entry>
+</row>
+
+<row>
+<entry
+><literal
+>bugtraq:logregex</literal
+></entry>
+<entry>
+<para
+>Содержит одно или два регулярных выражения, разделённых символом новой строки.</para>
+<para
+>Если задано только одно выражение, то идентификаторы ошибок в чистом виде должны сопоставляться с группами строки регулярного выражения. Если задано два выражения, то первое выражение используется для поиска строки, связанной с идентификатором ошибки, но которая может содержать не только идентификатор ошибки (например, <quote
+>Issue #123</quote
+> или <quote
+>resolves issue 123</quote
+>). Второе выражение затем используется для извлечения идентификатора ошибки в чистом виде из строки, извлечённой с помощью первого выражения.</para>
+<para
+>Не допускайте лишних пробелов после регулярного выражения и не забудьте про скобки вокруг описания числа.</para>
+</entry>
+<entry>
+<para
+>Одно выражение (подходит для TRAC): </para>
+<programlisting
+>#(\d+)
+</programlisting>
+<para
+>Теперь все числа вида <replaceable
+>#190</replaceable
+> будут распознаваться и преобразовываться в &URL; в выводе журнала. </para>
+<para
+>Два выражения: </para>
+<programlisting
+>[Ii]ssue #?(\d+)(,? ?#(\d+))*
+(\d+)
+</programlisting>
+<important>
+  <title
+>Помните</title>
+  <para
+>Обратите внимание на пробелы после <literal
+>(\d+)</literal
+>! Это одна из самых распространённых ошибок, из-за которых эти выражения не совпадают! </para>
+</important>
+</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</para>
+<para
+>В локально открытых репозиториях (то есть по протоколу <filename class="directory"
+>file://</filename
+>) и в рабочих копиях поиск этих свойств выполняется вверх от открытой папки, пока они не будут найдены или пока не будет достигнут верхний уровень Subversion. В репозиториях, открытых по сети (во всех, кроме протокола <filename class="directory"
+>file://</filename
+>), поиск выполняется только в самой открытой папке. </para>
+<para
+>Поддержка нескольких наборов этих свойств, возможно, появится позже (например, дополнительные значения для других систем отслеживания ошибок во вложенной папке и т. д.), но в большинстве случаев достаточно обработки одиночных ссылок системы отслеживания ошибок. </para>
+</sect2>
+</sect1>
+
+<sect1 id="revision-tree">
+<title
+>Дерево ревизий</title>
+<para
+>Дерево ревизий пытается показать всю историю объекта, чтобы у пользователя сложилось более полное представление о ней. Для этого приходится сканировать весь журнал репозитория, поскольку требуются сведения, которые Subversion не предоставляет (и, полагаю, не будет). Так как это создаёт большой объём трафика, дерево ревизий всегда использует внутренний <link linkend="logcache-descr"
+>кэш журнала</link
+>. </para>
+<sect2>
+<title
+>Требования</title>
+<para
+>Дерево ревизий строится программой <application
+>dot</application
+>, поэтому для него должен быть установлен пакет <application
+>graphviz</application
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="logcache-descr">
+<title
+>Внутренний кэш журнала</title>
+<para
+>Для некоторых операций &kdesvn; использует внутренний кэш журнала. В основном он применяется для <link linkend="revision-tree"
+>дерева ревизий</link
+>, а также при просмотре упрощённого журнала в автономном режиме. Кэши организованы в виде баз данных <application
+>SQLite</application
+>, хранящихся в <filename class="directory"
+>$HOME/.sqvnqt/logcache</filename
+>. Каждый пронумерованный файл — хранилище отдельного репозитория. </para>
+<warning>
+  <para
+>Базы данных могут стать большими! Поэтому автоматическое обновление кэша журнала можно отключить в параметрах. </para>
+</warning>
+<para
+>Базу данных можно просто удалить: тогда для этого репозитория не будет кэшированного журнала (и дерева ревизий!). Но если не отключить автоматическое заполнение кэша, при следующем открытии этого репозитория или его рабочей копии кэш заполнится заново. </para>
+<sect2>
+<title
+>Автономный режим</title>
+<para
+>&kdesvn; может работать без доступа к сети, то есть доступ к сети для &kdesvn; можно отключить. Это полезно, например, на ноутбуке без сети. В этом случае &kdesvn; всегда берёт журналы из внутреннего кэша. По техническим причинам такой журнал содержит только основные сведения и может отличаться от настоящего: в нём показываются не все операции копирования, даже если установлен флажок <guilabel
+>Отслеживать и сохранять в журнале изменения узла</guilabel
+>.</para>
+</sect2>
+<sect2>
+<title
+>Кэш журнала и дерево ревизий</title>
+<para
+>Дерево ревизий использует только кэш журнала, иначе ему пришлось бы каждый раз заново получать журналы. Кэш журнала оно <emphasis
+>не</emphasis
+> обновляет (в следующих выпусках это может измениться). </para>
+</sect2>
+</sect1>
+
+<sect1 id="overlay-meaning">
+<title
+>Значение наложений на значки</title>
+<para
+>Записи могут помечаться наложенными значками, если они не находятся в <quote
+>обычном</quote
+> состоянии. <variablelist>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnlocked.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Заблокировано</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Эта запись заблокирована. В последнем столбце указан владелец блокировки. Можно настроить, должен ли &kdesvn; также проверять заблокированные элементы в репозитории. Но осторожно: в зависимости от типа сервера это может занять много времени! </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnneedlock.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Требуется блокировка</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Перед редактированием и фиксацией запись необходимо заблокировать. Пока блокировка не установлена, Subversion оставляет её доступной только для чтения. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnupdates.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Есть обновления</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>У этой записи или — если это папка — записи внутри неё есть более новая ревизия в репозитории. </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnmodified.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Изменено</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Эта запись — или, если это папка, запись внутри неё — была изменена на локальном диске. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnadded.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Добавлено</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Эта запись добавлена локально в Subversion, но ещё не зафиксирована. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvndeleted.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Удалено</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>Эта запись удалена локально из Subversion, но ещё не зафиксирована. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnconflicted.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>Удалено</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>У этой записи (или у записи ниже, если это папка) после последнего обновления возникли конфликты, которые нужно разрешить. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect1>
+
+<sect1 id="kdesvn-passwords">
+<title
+>&kdesvn; и пароли</title>
+<para
+>&kdesvn;/subversion умеет сохранять пароли. Сохранение паролей всегда связано с риском для безопасности, но может сделать графический интерфейс удобнее. </para>
+<sect2>
+<title
+>Без сохранения паролей</title>
+<para
+>Самый безопасный способ, но с графическими программами вроде &kdesvn; иногда неудобный. В частности, фоновые процессы &kdesvn; будут постоянно запрашивать пароль, если доступ к репозиторию для операций чтения, таких как обновление и проверка состояния, ограничен. То же относится к фиксации и другим операциям. Поэтому, если пароли не сохраняются, следует отключить <guilabel
+>Начинать проверку обновлений при открытии рабочей копии</guilabel
+> и <link linkend="subversion-settings"
+>другие подобные параметры</link
+>. </para>
+</sect2>
+<sect2>
+<title
+>Сохранение паролей в &kwallet5;</title>
+<para
+>Защищённое хранилище паролей, используемое многими программами &kde;, такими как &kmail; и &konqueror;. Если пароли сохраняются и в основном используется &kdesvn;, следует выбрать этот вариант. Учтите, что шифрованное хранилище не является высокозащищённым. Подробнее см. в <ulink url="help:/kwallet5"
+>документации &kwallet5;</ulink
+>. </para>
+</sect2>
+<sect2>
+<title
+>Сохранение в собственном хранилище паролей Subversion</title>
+<para
+>Это не рекомендуется, так как пароли хранятся в виде открытого текста! Не верите? Загляните в файлы в <filename class="directory"
+>~/.subversion/auth/svn.simple</filename
+>. Используйте это только в том случае, если часто пользуетесь другими клиентами, отличными от &kdesvn;, такими как <application
+>rapidsvn</application
+>, <application
+>esvn</application
+> или оригинальный клиент командной строки <application
+>svn</application
+>. Если клиент командной строки применяется в основном для извлечения или обновления, не требующих пароля, а &kdesvn; — для фиксации, перемещения и копирования, вместо этого следует использовать &kwallet5;. </para>
+</sect2>
+<sect2>
+<title
+>Внутренний кэш паролей</title>
+<para
+>Можно включить внутренний кэш паролей, который хранит пароли в памяти, пока работает &kdesvn;. Тогда пароль не придётся вводить дважды, даже если он не сохранён в бумажнике. </para>
+</sect2>
+<sect2>
+<title
+>Особый случай svn+ssh</title>
+<para
+>При использовании Subversion через svn+ssh сохранение паролей может выполняться посредством ssh и ssh-agent. Для этого требуется доступ по ssh к удалённому компьютеру и репозиторию. Если требуется что-то сохранить, следует использовать аутентификацию ssh по открытому ключу, а не по паролю. (На самом деле ssh предпочитает аутентификацию по открытому ключу.) Для этого нужно поместить свой открытый ключ ssh на целевой системе, например, на компьютере с репозиторием. Пароли SSH никогда не обрабатываются хранилищем паролей Subversion, &kwallet5; или внутренним кэшем паролей. </para>
+<para
+>Чтобы не вводить каждый раз пароль ключа SSH, можно использовать <application
+>ssh-agent</application
+>: пункт меню <menuchoice
+><guimenu
+>Subversion</guimenu
+> <guimenuitem
+>Добавить ключи SSH в ssh-agent</guimenuitem
+></menuchoice
+> сохраняет пароль ключа SSH на текущий сеанс, и вводить его больше не потребуется. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="kdesvn-kio">
+<title
+>&konqueror;, KIO, &kdesvn;</title>
+<sect1 id="kdesvn-kio-desc">
+<title
+>Описание</title>
+<para
+>Начиная с версии 0.7.0, &kdesvn; включает несколько модулей, встраивающих некоторые команды непосредственно в меню &konqueror;. <variablelist>
+<varlistentry>
+<term
+>Протоколы KIO</term>
+<listitem
+><para
+>Реализует обработчики для следующих протоколов:</para>
+<itemizedlist>
+<listitem
+><para
+>ksvn+http</para
+></listitem>
+<listitem
+><para
+>ksvn+https</para
+></listitem>
+<listitem
+><para
+>ksvn+file</para
+></listitem>
+<listitem
+><para
+>ksvn+ssh</para
+></listitem>
+<listitem
+><para
+>ksvn</para
+></listitem>
+</itemizedlist>
+
+<para
+>Эти протоколы предназначены только для репозиториев, а не для рабочих копий. Например, <filename class="directory"
+>ksvn+file:///<replaceable
+>path</replaceable
+></filename
+> должен указывать на корень репозитория, в отличие от самого приложения или KPart. Рабочие копии просматриваются в &konqueror;. </para>
+<para
+>Чтобы просматривать определённую ревизию, добавьте к &URL; запрос <link linkend="revision-syntax"
+><quote
+>?rev=<replaceable
+>revision</replaceable
+></quote
+></link
+>. </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Контекстные меню</term>
+<listitem
+><para
+>&kdesvn; устанавливает контекстные меню для &konqueror;. Они открываются щелчком правой кнопкой мыши в окне файлового менеджера (только в обычном режиме просмотра, не в KPart), так что самые частые действия можно выполнять прямо из &konqueror; (или любого другого файлового менеджера, который читает контекстные меню &konqueror;, например &dolphin;). Для этого вызывается <link linkend="kdesvn-commandline"
+>&kdesvn; в режиме командной строки</link
+>. </para>
+</listitem>
+</varlistentry>
+</variablelist>
+</para>
+<sect2>
+<title
+>Использование KIO вне &konqueror; — пример</title>
+<para
+>Эти протоколы доступны любому приложению, использующему библиотеку KIO. Например, получить все различия между двумя ревизиями можно в &kdiff3;, не вникая в подробности. </para>
+<para>
+<example>
+<title
+>Получение различий между ревизиями с помощью &kdiff3; и KIO::ksvn</title>
+<programlisting
+>kdiff3 \
+  ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=423127 \
+  ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=455064
+</programlisting>
+<para
+>&kdiff3; покажет все различия между двумя ревизиями. </para>
+<para>
+<note>
+  <para
+>Использование этого в &kdesvn; (сравнение двух ревизий) НАМНОГО быстрее, поскольку используются внутренние механизмы Subversion. </para>
+</note>
+</para>
+</example>
+</para>
+</sect2>
+</sect1>
+<sect1 id="kio-svn-special">
+<title
+>Информация для программистов о KIO::ksvn</title>
+<note
+><para
+>Этот раздел можно пропустить, если программирование KIO не представляет интереса.</para
+></note>
+<para
+>KIO::ksvn::special поддерживает следующие операции. </para>
+<sect2>
+<title
+>Список команд</title>
+<para>
+<table id="kio-svn-special-commands">
+  <title
+>Обзор команд для <literal
+>KIO::ksvn::special</literal
+></title>
+<tgroup cols="4">
+
+<thead>
+<row>
+<entry
+>Имя команды</entry>
+<entry
+>Числовой идентификатор</entry>
+<entry
+>Список параметров</entry>
+<entry
+>Реализовано в текущей версии?</entry>
+</row>
+</thead>
+
+<tbody>
+
+<row>
+<entry
+>Извлечение</entry>
+<entry
+>1</entry>
+<entry>
+<para
+>KURL repository, KURL target, int revnumber, QString revkind </para>
+<para
+>Путь назначения <emphasis
+>не</emphasis
+> изменяется: содержимое извлекается без создания вложенной папки! Например, если источник — <filename
+>http://server/repos/project/trunk</filename
+>, а назначение — <filename
+>/home/user/proj/</filename
+>, то содержимое trunk будет скопировано в <filename
+>/home/user/proj/</filename
+>, а не в <filename
+>/home/user/proj/trunk/</filename
+>! </para>
+</entry>
+<entry
+>Да</entry>
+</row>
+
+<row>
+<entry
+>Обновление</entry>
+<entry
+>2</entry>
+<entry
+><para
+>KURL url, int revnum, QString revstring</para>
+<para
+>Если revnum &lt; 0, выполняется разбор строки ревизии. Формат строки ревизии описан в <link linkend="revision-syntax"
+>Приложении</link
+>. </para>
+</entry>
+<entry
+>Да</entry>
+</row>
+
+<row>
+<entry
+>Фиксация</entry>
+<entry
+>3</entry>
+<entry
+><para
+>KURL::List urls</para>
+<para
+>urls — список локальных URL для фиксации. Будет запрошено сообщение журнала.</para>
+</entry>
+<entry
+>Да</entry>
+</row>
+
+<row>
+<entry
+>Журнал</entry>
+<entry
+>4</entry>
+<entry>
+<para
+>int startrevnumber, QString startrevstring, int endrevnumber, QString endrevstring, KURL::List </para>
+<para
+>Используйте с осторожностью — это может создать большой объём данных. </para>
+</entry>
+<entry
+>Да</entry>
+</row>
+
+<row>
+<entry
+>Импорт</entry>
+<entry
+>5</entry>
+<entry
+>KURL targetrepository, KURL sourcepath</entry>
+<entry
+>Да</entry>
+</row>
+
+<row>
+<entry
+>Добавить</entry>
+<entry
+>6</entry>
+<entry
+>KURL</entry>
+<entry
+>Да</entry>
+</row>
+
+<row>
+<entry
+>Удаление</entry>
+<entry
+>7</entry>
+<entry
+>KURL::List</entry>
+<entry
+>Да</entry>
+</row>
+
+<row>
+<entry
+>Откат</entry>
+<entry
+>8</entry>
+<entry
+><para
+>KURL::List</para>
+<para
+>Откат в KIO всегда нерекурсивный, без запросов (вызывающее приложение должно выполнять его самостоятельно)</para>
+</entry>
+<entry
+>Да</entry>
+</row>
+
+<row>
+<entry
+>Состояние</entry>
+<entry
+>9</entry>
+<entry
+><para
+>KURL item, bool checkRepos, bool recurse</para>
+<para
+>item — объект, сведения о котором нужно проверить; checkRepos — проверять наличие более новых ревизий в репозитории; recurse — проверять рекурсивно или нет.</para>
+</entry>
+<entry
+>Да</entry>
+</row>
+
+<row>
+<entry
+>Создание папки</entry>
+<entry
+>10</entry>
+<entry
+>KURL::List</entry>
+<entry
+>Да</entry>
+</row>
+
+<row>
+<entry
+>Разрешение конфликта</entry>
+<entry
+>11</entry>
+<entry
+>KURL, bool recursive</entry>
+<entry
+>Да</entry>
+</row>
+
+<row>
+<entry
+>Переключение</entry>
+<entry
+>12</entry>
+<entry
+>KURL working_copy_path, KURL new_repository_url, bool recursive, int revnumber, QString revkind</entry>
+<entry
+>Да</entry>
+</row>
+
+<row>
+<entry
+>Различия</entry>
+<entry
+>13</entry>
+<entry>
+<para
+>URL uri1, KURL uri2, int r1, QString rstring1, int r2, QString rstring 2, bool recursive</para>
+<para
+>Чтобы отличать репозиторий file:/// от рабочей копии, указывайте адреса рабочих копий без протокола!</para>
+</entry>
+<entry
+>Да</entry>
+</row>
+</tbody>
+
+</tgroup>
+</table>
+
+</para>
+</sect2>
+<sect2>
+<title
+>Возвращаемые значения</title>
+<para
+>Возвращаемые значения могут задаваться через метаданные, подробности см. в apidoc. </para>
+<para>
+<table id="kio-ksvn-metadata">
+<title
+>Содержимое метаданных</title>
+<tgroup cols="2">
+
+<thead>
+<row>
+<entry
+>Ключ</entry>
+<entry
+>Возможное значение</entry>
+</row>
+</thead>
+
+<tbody>
+
+<row>
+<entry
+>path</entry>
+<entry
+>Путь объекта, над которым выполнено действие, например заданный URL</entry>
+</row>
+
+<row>
+<entry
+>action</entry>
+<entry
+>Числовой тип действия</entry>
+</row>
+
+<row>
+<entry
+>kind</entry>
+<entry
+>Тип объекта (обычно папка или файл)</entry>
+</row>
+
+<row>
+<entry
+>mime_t</entry>
+<entry
+>Тип MIME объекта по данным Subversion</entry>
+</row>
+
+<row>
+<entry
+>content</entry>
+<entry
+>Состояние содержимого (значение Subversion)</entry>
+</row>
+
+<row>
+<entry
+>prop</entry>
+<entry
+>Состояние свойств (значение Subversion)</entry>
+</row>
+
+<row>
+<entry
+>rev</entry>
+<entry
+>Результирующая ревизия или ревизия, с которой ведётся работа</entry>
+</row>
+
+<row>
+<entry
+>string</entry>
+<entry
+>Внутренне заданное удобочитаемое сообщение.</entry>
+</row>
+
+<row>
+<entry
+>loggedaction</entry>
+<entry
+>Определённая Subversion строка действия для элемента (A,M,D)</entry>
+</row>
+<row>
+<entry
+>loggedcopyfrompath</entry>
+<entry
+>Путь, откуда скопировано (может быть пустым)</entry>
+</row>
+<row>
+<entry
+>loggedcopyfromrevision</entry>
+<entry
+>Ревизия, из которой скопировано (может быть &lt; 0)</entry>
+</row>
+<row>
+<entry
+>loggedpath</entry>
+<entry
+>Путь, к которому относятся записи loggedaction и другие (совпадает с вызванным URL).</entry>
+</row>
+<row>
+<entry
+>diffresult</entry>
+<entry
+>строка вывода различий</entry>
+</row>
+</tbody>
+
+</tgroup>
+</table>
+
+</para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="kdesvn-commandline">
+<title
+>Использование &kdesvn; из командной строки</title>
+<sect1 id="kdesvn-commandline-overview">
+<title
+>Обзор</title>
+<para
+>Некоторые операции Subversion можно выполнять из командной строки, как в обычном консольном клиенте, но взаимодействие с пользователем идёт через графический интерфейс. Синтаксис: <userinput
+>kdesvn exec <replaceable
+>command</replaceable
+> <replaceable
+>parameter</replaceable
+> <replaceable
+>url</replaceable
+></userinput
+>. </para>
+<para
+>Если требуется одна ревизия для одного &URL;, её можно задать как параметр &URL; <programlisting
+>svn://your-server/path-to-repository/item?rev=&lt;your-rev&gt;</programlisting
+> Это переопределит параметр <option
+>-r &lt;rev&gt;</option
+>. </para>
+<para
+>Ревизию можно задать числом, одним из значений <option
+>HEAD</option
+> или <option
+>BASE</option
+> либо в формате даты, например {YYYY-MM-DD}. </para>
+</sect1>
+<sect1 id="kdesvn-command-list">
+<title
+>Список команд</title>
+<para
+>Если в таблице ниже для команды указан параметр <option
+>-r <replaceable
+>revision</replaceable
+></option
+>, ревизию можно задать и как <userinput
+><replaceable
+>url</replaceable
+>?rev=<replaceable
+>the-revision</replaceable
+></userinput
+>. <table id="svn-commands-table">
+<title
+>Команды Subversion</title>
+<tgroup cols="3">
+
+<thead>
+<row>
+<entry
+>Команда</entry>
+<entry
+>Значение</entry>
+<entry
+>Принимаемые параметры</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+<entry
+>commit (или ci)</entry>
+<entry
+>Фиксирует изменения объекта в репозитории.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>log</entry>
+<entry
+>Выводит журнал объекта.</entry>
+<entry
+>-r startrevision:endrevision -l limit_display</entry>
+</row>
+<row>
+<entry
+>cat</entry>
+<entry
+>Показывает содержимое объекта.</entry>
+<entry
+>-r revision </entry>
+</row>
+<row>
+<entry
+>copy (или cp)</entry>
+<entry
+>Копирует объект внутри рабочей копии или репозитория. Если назначение не указано, &kdesvn; его запросит.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>move (или mv, rename)</entry>
+<entry
+>Перемещает или переименовывает объект внутри рабочей копии или репозитория. Если назначение не указано, &kdesvn; его запросит.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>get</entry>
+<entry
+>Получает содержимое объекта и сохраняет его.</entry>
+<entry
+>-r revision -o &lt;outputfile&gt; (параметр -o обязателен!)</entry>
+</row>
+<row>
+<entry
+>blame (или annotate)</entry>
+<entry
+>Выводит файл с комментариями об авторстве строк.</entry>
+<entry
+>-r startrevision:endrevision</entry>
+</row>
+<row>
+<entry
+>update</entry>
+<entry
+>Обновляет объект в рабочей копии.</entry>
+<entry
+>-r revision</entry>
+</row>
+<row>
+<entry
+>diff</entry>
+<entry
+>Сравнивает две ревизии объекта или два объекта в определённой ревизии.</entry>
+<entry
+>-r startrev:endrev</entry>
+</row>
+<row>
+<entry
+>info</entry>
+<entry
+>Выводит подробные сведения об объекте.</entry>
+<entry
+>-r revision</entry>
+</row>
+<row>
+<entry
+>checkout (или co)</entry>
+<entry
+>Извлекает путь репозитория в новую рабочую копию. Будут запрошены путь назначения и ревизия источника.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>checkoutto (или coto)</entry>
+<entry
+>Извлекает путь репозитория в новую рабочую копию. Будут запрошены путь источника и его ревизия.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>export</entry>
+<entry
+>Экспортирует путь репозитория или рабочей копии в папку. Будут запрошены путь назначения и ревизия источника.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>exportto</entry>
+<entry
+>Экспортирует путь репозитория или рабочей копии в папку. Будут запрошены путь источника и его ревизия.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>delete (del, remove, rm)</entry>
+<entry
+>Удаляет URL из репозитория или рабочей копии.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>add</entry>
+<entry
+>Добавляет &URL; в рабочую копию. &URL; должен принадлежать рабочей копии (это не импорт!).</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>revert (или undo)</entry>
+<entry
+>Отменяет текущие изменения в рабочей копии. Применяется только к URL рабочих копий!</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>checknew (или addnew)</entry>
+<entry
+>Ищет в указанном &URL; новые объекты без контроля версий и при необходимости добавляет их в рабочую копию.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>tree</entry>
+<entry
+>Показывает дерево ревизий объекта (только для первого аргумента); если в &URL; указан <quote
+>?rev=<replaceable
+>xxx</replaceable
+></quote
+>, эта ревизия считается опорной (peg revision).</entry>
+<entry
+>-r startrev:endrev</entry>
+</row>
+<row>
+<entry
+>lock</entry>
+<entry
+>Блокирует URL; с параметром <option
+>-f</option
+> существующие блокировки снимаются.</entry>
+<entry
+>-f</entry>
+</row>
+<row>
+<entry
+>unlock</entry>
+<entry
+>Снимает блокировку с URL; с параметром <option
+>-f</option
+> снимаются и чужие блокировки, а несуществующие пропускаются.</entry>
+<entry
+>-f</entry>
+</row>
+<row>
+<entry
+>help</entry>
+<entry
+>Показывает эту страницу.</entry>
+<entry
+></entry>
+</row>
+</tbody>
+</tgroup>
+
+</table>
+
+<table id="parameter-list">
+<title
+>Параметры команд Subversion</title>
+<tgroup cols="3">
+<thead>
+<row>
+<entry
+>Параметр</entry>
+<entry
+>Возможные значения</entry>
+<entry
+>Для команд</entry>
+</row>
+</thead>
+<tbody>
+<row>
+  <entry
+><option
+>-r</option
+></entry>
+<entry
+><replaceable
+>revision</replaceable
+> или <replaceable
+>startrev:endrev</replaceable
+></entry>
+<entry
+>все, кроме commit</entry>
+</row>
+<row>
+  <entry
+><option
+>-R</option
+></entry>
+<entry
+>(нет)</entry>
+<entry
+>все, кроме commit</entry>
+</row>
+<row>
+<entry
+><option
+>-o</option
+></entry>
+<entry
+><replaceable
+>filename</replaceable
+></entry>
+<entry
+>get</entry>
+</row>
+<row>
+<entry
+><option
+>-l</option
+></entry>
+<entry
+><replaceable
+>number</replaceable
+></entry>
+<entry
+>log</entry>
+</row>
+<row>
+<entry
+><option
+>-f</option
+></entry>
+<entry
+>(нет)</entry>
+<entry
+>lock, unlock</entry>
+</row>
+
+</tbody>
+</tgroup>
+</table>
+
+</para>
+<sect2>
+  <title
+>Команда <quote
+>log</quote
+></title>
+<para
+>Команда log показывает диалоговое окно, содержащее журнал указанного &URL;. В Subversion 1.2 и выше она принимает ограничение, то есть сколько записей нужно показать. </para>
+<para
+>В этом диалоговом окне можно выбрать записи журнала и получить различия между ними. <example>
+<title
+>Последние 20 записей журнала</title>
+<programlisting
+>kdesvn exec log -l 20 -r HEAD&#058;1 myfile.c
+</programlisting>
+<para
+>Обратите внимание на порядок ревизий: чтобы получить последние, нужно идти от HEAD к START. Поэтому в качестве начальной точки следует указать ревизию HEAD, иначе будут получены первые 20 записей.</para>
+</example>
+</para>
+</sect2>
+<sect2>
+  <title
+>Команда <quote
+>diff</quote
+></title>
+<para
+>Команда выводит различия между ревизиями объекта или между двумя объектами одной рабочей копии или репозитория. При сравнении ревизий объекта они задаются как <option
+>-r <replaceable
+>STARTREV</replaceable
+>:<replaceable
+>ENDREV</replaceable
+></option
+>. Если для объекта рабочей копии ревизии не указаны, выводятся различия с репозиторием. <example>
+<title
+>Различия с репозиторием, то есть локальные изменения</title>
+<programlisting
+>kdesvn exec diff myfile.c
+</programlisting>
+</example>
+<example>
+<title
+>Различия между ревизиями</title>
+<programlisting
+>kdesvn exec diff -r 21:20 myfile.c
+</programlisting>
+</example>
+</para>
+<para
+>При сравнении двух объектов ревизии можно добавить к их &URL;, например: <programlisting
+>http://server/path/item?rev=HEAD</programlisting>
+<example>
+<title
+>Сравнение двух версий по меткам</title>
+<programlisting
+>kdesvn exec diff http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_2 http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_3
+</programlisting>
+</example>
+</para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="setup">
+<title
+>Параметры</title>
+<para
+>Параметры изменяются в диалоговом окне настройки, которое разделено на несколько страниц. </para>
+<sect1 id="general-settings">
+<title
+>Общие</title>
+<para>
+<informaltable id="General-setup-items">
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+>Размер значков в списке</entry>
+<entry
+>Задаёт размер квадратных значков в основном списке</entry>
+</row>
+<row>
+<entry
+>Показать информацию о файле</entry>
+<entry
+>Показывать небольшую всплывающую подсказку при наведении указателя мыши на элемент</entry>
+</row>
+<row>
+<entry
+>Отметка состояния объекта наложенным значком</entry>
+<entry
+>Если элемент не находится в обычном состоянии Subversion, для него может показываться наложение. (См. <xref linkend="overlay-meaning"/>)</entry>
+</row>
+<row>
+<entry
+>Учитывать регистр при сортировке</entry>
+<entry
+>Учитывается ли регистр при сортировке в главном окне, то есть различаются ли <quote
+>a</quote
+> и <quote
+>A</quote
+>.</entry>
+</row>
+<row>
+<entry
+>Показ игнорируемых файлов</entry>
+<entry
+>Показывать элементы, отмеченные в Subversion для игнорирования, или нет.</entry>
+</row>
+<row>
+<entry
+>Максимальное число сообщений журнала в истории</entry>
+<entry
+>Количество сообщений журнала, которое должно запоминать &kdesvn;.</entry>
+</row>
+<row>
+<entry
+>Цветные комментарии</entry>
+<entry
+>Использовать для комментариев цвета, заданные в диалоговом окне настройки</entry>
+</row>
+<row>
+<entry
+>Использовать панель навигации</entry>
+<entry
+>Переключать показ дерева репозитория.</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</para>
+</sect1>
+
+<sect1 id="subversion-timedjobs-settings">
+<title
+>Параметры Subversion и заданий по расписанию</title>
+
+<table id="subversion-settings">
+<title
+>Subversion</title>
+<tgroup cols="2">
+
+<tbody>
+
+<row>
+<entry
+>Начинать проверку обновлений при открытии рабочей копии</entry>
+<entry
+>При открытии рабочей копии запускать проверку обновлений в фоновом режиме</entry>
+</row>
+<row>
+<entry
+>Начинать заполнение кэша журнала при открытии</entry>
+<entry
+>Если включено, &kdesvn; при открытии репозитория или рабочей копии начинает (заново) заполнять кэш журнала, если URL-адрес репозитория не является локальным (<filename class="directory"
+>file://</filename
+>)</entry>
+</row>
+<row>
+  <entry
+>Проверять, установлено ли у элементов свойство <quote
+>svn:needs-lock</quote
+></entry>
+<entry
+>Проверяет в рабочих копиях, задано ли у элемента это свойство, и, если да, показывает специальный наложенный значок. Установка этого параметра может сильно замедлить вывод списков.</entry>
+</row>
+<row>
+<entry
+>Запрашивать подробные сведения о файлах при просмотре удалённого репозитория</entry>
+<entry
+>Если этот флажок установлен, &kdesvn; получает более подробные сведения об элементах файлов при формировании списка для удалённых репозиториев. Так можно увидеть удалённые блокировки в обзоре. Внимание: это может очень сильно замедлить формирование списков!</entry>
+</row>
+
+<row>
+<entry
+>Получать информацию об объекте рекурсивно</entry>
+<entry
+>При включении команда <command
+>info</command
+> для папок будет получать сведения обо всех вложенных элементах; это может работать очень медленно.</entry>
+</row>
+
+<row>
+<entry
+>Сохранять пароли для удалённых подключений</entry>
+<entry
+>Сохранение паролей часто является проблемой безопасности. Subversion сохраняет пароли в обычном файле, то есть пароли в открытом виде! Поэтому устанавливайте этот флажок осторожно и смотрите также следующую запись. Этот пункт указывает лишь, сохраняются ли пароли по умолчанию; изменить это для отдельных областей можно в диалоговом окне входа.</entry>
+</row>
+
+<row>
+<entry
+>Сохранять пароли в бумажнике KDE</entry>
+<entry
+>Если пароли сохраняются, открытый текстовый файл Subversion — брешь в безопасности. &kdesvn; (начиная с версии 0.12.0) умеет вместо этого сохранять их в зашифрованный бумажник &kde; и брать их оттуда. Но другие клиенты Subversion прочитать их не могут, поэтому при работе с программой командной строки <application
+>svn</application
+> или <application
+>rapidsvn</application
+> пароли придётся вводить. Пока Subversion не шифрует хранилище паролей, стоит дважды подумать.</entry>
+</row>
+
+<row>
+<entry
+>Использовать внутренний кэш для паролей</entry>
+<entry
+>Если пароль не сохраняется постоянно, &kdesvn; может хранить его до своего завершения, поэтому его не придётся вводить заново при каждой операции. Этот кэш никогда не сохраняется, то есть он нигде не записывается.</entry>
+</row>
+
+<row>
+<entry
+>Записывать в журнал изменения узла</entry>
+<entry
+>Если этот флажок установлен, операции копирования записываются в журнал.</entry>
+</row>
+
+<row>
+<entry
+>Всегда считывать список изменённых файлов для журнала</entry>
+<entry
+>Команда log позволяет считывать список файлов, изменённых в фиксации. Это удобно и в большинстве случаев почти не требует дополнительного трафика.</entry>
+</row>
+
+<row>
+<entry
+>Просмотр элементов перед фиксацией</entry>
+<entry
+>Перед фиксацией &kdesvn; может проверить, что именно будет сделано: например, показать вложенные объекты без контроля версий, которые можно добавить, и изменённые объекты, которые будут зафиксированы. В зависимости от размера дерева это занимает больше или меньше времени.</entry>
+</row>
+
+<row>
+<entry
+>Скрывать новые элементы в окне фиксации</entry>
+<entry
+>Показывать ли объекты без контроля версий в диалоговом окне фиксации.</entry>
+</row>
+
+<row>
+<entry
+>Изменять при обновлении вместо создания конфликта</entry>
+<entry
+>Если включено, локальное добавление по тому же пути, что и поступающее добавление узла того же типа, приводит к появлению обычного узла с возможным локальным изменением, а не к конфликту дерева.</entry>
+</row>
+
+<row>
+<entry
+>Создавать отсутствующие родительские объекты при обновлении</entry>
+<entry
+>Если этот флажок установлен, создавать все отсутствующие родительские папки, также извлекая их с параметром depth=empty.</entry>
+</row>
+
+</tbody>
+
+</tgroup>
+</table>
+
+<table id="timejobs-settings">
+<title
+>Задания по расписанию</title>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+><para
+>Проверять изменённые объекты каждые N секунд</para
+> <para
+>Проверять обновлённые объекты каждые N секунд</para
+></entry>
+<entry
+>Если включено, регулярно проверять наличие обновлений или изменённых элементов в рабочей копии при включённой сети</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="diffmerge-settings">
+<title
+>Сравнение и слияние</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>При сравнении игнорировать тип содержимого</term>
+<listitem
+><para
+>Имеет смысл только при создании различий самим Subversion. Если включено, команда subversion diff игнорирует тип содержимого записей. В противном случае различия двоичных файлов не выводятся. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Рекурсивное сравнение в дереве ревизий</term>
+<listitem
+><para
+>Если включено, различия, создаваемые в представлении дерева ревизий, также становятся рекурсивными, как и во всех остальных случаях. Иначе показываются только изменения, относящиеся к элементам этой папки. То, как это делается, зависит от способа создания различий (самим Subversion или внешними программами просмотра). </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Игнорирование изменений пробельных символов при сравнении</term>
+<listitem>
+<para
+>Игнорировать изменения в количестве пробельных символов (параметр <option
+>-b</option
+> программы <application
+>diff</application
+>) </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Игнорировать все пробельные символы при сравнении</term>
+<listitem>
+  <para
+>Игнорировать все пробельные символы (параметр <option
+>-w</option
+> команды diff)</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Использовать внешнюю программу для слияния</term>
+<listitem>
+<para
+>Установите флажок, если слияние внешней программой предпочтительнее встроенного слияния Subversion.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Использовать формат различий как в Git</term>
+<listitem>
+<para
+></para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Показывать скопированные объекты как добавленные</term>
+<listitem>
+<para
+></para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+<sect2>
+<title
+>Использовать внешнюю программу просмотра различий</title>
+<para
+>Выбирает внешнее приложение для показа различий. По умолчанию — &kompare;. </para>
+</sect2>
+<sect2>
+<title
+>Внешняя программа просмотра различий</title>
+<para
+>Определяет, что &kdesvn; использует для внешнего показа различий и как он будет вызываться. Возможны три способа: </para>
+<para>
+<variablelist>
+<varlistentry>
+<term
+>&lt;программа&gt; &lt;параметр&gt;</term>
+<listitem
+><para
+>Различия будут созданы с помощью Subversion и напрямую переданы на стандартный ввод внешней программы (то есть временные файлы не нужны) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>&lt;программа&gt; &lt;параметр&gt; %f</term>
+<listitem
+><para
+>Различия будут созданы с помощью Subversion, сохранены во временный файл, а параметр <option
+>%f</option
+> будет заменён именем этого файла. Это можно использовать, например, при простом вызове <application
+>less</application
+> или программы просмотра текста. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>&lt;программа&gt; &lt;параметр&gt; %1 %2</term>
+<listitem
+><para
+>&kdesvn; позволяет внешней программе создавать различия. Вместо %1 и %2 будут подставлены требуемые значения (имена файлов или папок). При необходимости &kdesvn; сохраняет содержимое для сравнения во временном окружении (для папок выполняется <quote
+>export</quote
+>, для отдельного файла — <quote
+>cat</quote
+>) и удаляет его после закрытия внешней программы или самого &kdesvn;. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>Использовать внешнюю программу для слияния</term>
+<listitem
+><para
+>Устанавливать ли по умолчанию флажок <guilabel
+>Использовать внешнее слияние</guilabel
+> в диалоговом окне слияния.</para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect2>
+<sect2>
+<title
+>Внешняя программа для слияния</title>
+<para
+>Настройка программы и параметров для использования, когда встроенное слияние Subversion не требуется. По умолчанию — <command
+>kdiff3 %s1 %s2 %t</command
+>. Порядок переменных подстановки не важен, и они могут встречаться более одного раза, например, <literal
+>kdiff3 -o %t %s1 %s2 %t</literal
+>. Всё это проверено только с <application
+>meld</application
+> и &kdiff3;. Следует учитывать, что внешние программы в большинстве случаев ничего не знают о параметре <command
+>ignore</command
+> Subversion, поэтому могут показать гораздо больше, чем ожидалось. </para>
+<sect3>
+<title
+>Подстановка переменных для внешней программы слияния</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>%s1</term>
+<listitem
+><para
+>Заменяется на источник номер один. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>%s2</term>
+<listitem
+><para
+>Заменяется вторым источником. Если переменная пуста или совпадает с первым источником, а начальная и конечная ревизии совпадают, она будет пропущена. Поэтому соблюдайте осторожность при настройке командных строк вида <command
+>xxdiff --title1 %s1 --title2 %s2 %s1 %s2 %t</command
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>%t</term>
+<listitem
+><para
+>Заменяется на целевой объект. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect3>
+</sect2>
+<sect2 id="extern-resolve-setup">
+<title
+>Программа разрешения конфликтов</title>
+<para
+>Для разрешения конфликтов допускается использовать внешнюю программу, например &kdiff3;. По умолчанию используется <command
+>kdiff3 %o %m %n -o %t</command
+>. </para>
+<sect3>
+<title
+>Подстановка переменных для внешнего средства разрешения конфликтов</title>
+<para
+>В скобках после каждого описания приведён пример того, как Subversion вызывает файлы. Эти параметры предназначены для &kdiff3;, поскольку в настоящее время это единственное приложение, поддерживающее всё необходимое для успешного разрешения конфликтов. <variablelist>
+<varlistentry>
+<term
+>%o или %l</term>
+<listitem
+><para
+>Старая (локальная, левая) версия. Это меньший номер ревизии, то есть исходная точка конфликтующих изменений. (<filename
+>foo.cc.r2</filename
+>) </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%m или %w</term>
+<listitem
+><para
+>Моя (рабочая) версия файла, то есть то, что было изменено относительно старой версии. (<filename
+>foo.cc.mine</filename
+>) </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%n или %r</term>
+<listitem
+><para
+>Новая (удалённая, правая) версия файла. Например, версия, созданная кем-то другим. (<filename
+>foo.cc.r3</filename
+>) </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%t</term>
+<listitem
+><para
+>Имя назначения, то есть исходное имя файла. Для &kdiff3;, например, это имя после параметра <option
+>-o</option
+> (файл вывода). (<filename
+>foo.cc</filename
+>) </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect3>
+</sect2>
+</sect1>
+<!--FIXME
+Colors
+
+Revisions tree
+-->
+<sect1 id="kio-cmdline-settings">
+<title
+>KIO / командная строка</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>Показывать журнал после выполнения команды</term>
+<listitem
+><para
+>Открывать ли диалоговое окно с журналом последней команды Subversion, если она выполнена из командной строки или из меню действий &konqueror;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Минимальное количество строк журнала для показа</term>
+<listitem
+><para
+>Если установлен флажок <guilabel
+>Показывать журнал…</guilabel
+>, задаётся минимальное число строк, после которого будет показано это диалоговое окно. Так можно задать, чтобы окно показывалось только при появлении интересного вывода (журнал фиксации и т. п.). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Не показывать контекстное меню в &konqueror;</term>
+<listitem
+><para
+>Если включено, в &konqueror; не создаётся пункт меню действий для &kdesvn;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Не показывать пункты в меню верхнего уровня «Действия»</term>
+<listitem
+><para
+>Если включено, kdesvn не будет показывать некоторые дополнительные действия в меню <guimenuitem
+>Действия</guimenuitem
+> &konqueror; или &dolphin;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Использовать для операций KIO стандартное сообщение журнала</term>
+<listitem
+><para
+>При выполнении операций с репозиторием по протоколу KIO &kdesvn; из &konqueror; (то есть по протоколам <quote
+>ksvn+...</quote
+>) при больших операциях, таких как перемещение или копирование папок, &kdesvn; запрашивает сообщение журнала для каждого элемента. Это поведение &konqueror;. Если этот параметр включён, реализация KIO в &kdesvn; не запрашивает сообщение журнала, а устанавливает стандартное сообщение журнала. Этот флажок действует не для операций из меню действий &kdesvn; для &konqueror;, а только для копирования, перемещения, создания папки и удаления, выполняемых с помощью &konqueror; или других файловых менеджеров по URL-адресу KIO. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Стандартное сообщение</term>
+<listitem
+><para
+>Сообщение, которое должен устанавливать &kdesvn; KIO при выполнении операций из &konqueror;, если установлен указанный выше флажок. По умолчанию — <guilabel
+>Ревизия, созданная с помощью &kdesvn; KIO</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Перезапись средствами KIO</term>
+<listitem
+><para
+>Если флажок установлен, существующие объекты можно просто записывать: например, открыть файл в редакторе и сохранить его напрямую, без предварительного извлечения (&kdesvn; сделает это в фоне).</para>
+<para
+>Использовать только при полной уверенности в своих действиях. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Показывать сообщения о ходе операций при использовании модулей KIO</term>
+<listitem
+><para
+>Если включено, KIO показывает в Plasma подробные сведения о текущей операции. Сообщения об ошибках KIO показываются всегда, и их <emphasis
+>нельзя</emphasis
+> отключить. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect1>
+</chapter>
+
+<chapter id="commands">
+<title
+>Список команд</title>
+
+<sect1 id="kdesvn-mainwindow">
+<title
+>Главное окно &kdesvn;</title>
+
+<sect2>
+<title
+>Меню «Файл»</title>
+<para>
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Открыть</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Открывает локальную рабочую копию или репозиторий.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Последние открытые адреса URL</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Быстрый доступ к недавно открытым репозиториям. Этот пункт открывает сбоку от меню список последних открытых локальных рабочих копий и репозиториев; щелчок по элементу списка открывает его в &kdesvn;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Создать</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Открывает окно с новым экземпляром &kdesvn;.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Администрирование</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Пункты меню с задачами администрирования репозиториев Subversion, например: <simplelist
+> <member
+>Создать и открыть новый репозиторий</member
+> <member
+>Выгрузить репозиторий в файл</member
+> <member
+>Создать горячую копию репозитория</member
+> <member
+>Загрузить дамп в репозиторий</member
+> </simplelist
+> Дополнительные сведения приведены в выводе команды <command
+>svnadmin --help</command
+>. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Закрыть</guimenuitem
+> </menuchoice>
+</term>
+<listitem
+><para
+><action
+>Закрывает</action
+> открытый репозиторий или рабочую копию.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Выход</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Завершает работу</action
+> &kdesvn;</para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect2>
+<sect2>
+<title
+>Меню «Закладки»</title>
+<para
+>См. <ulink url="help:/konqueror/bookmarks.html"
+>справку &konqueror;</ulink
+>. </para>
+</sect2>
+
+<sect2 id="kdesvn-subversion-menu">
+<title
+>Меню Subversion</title>
+
+<variablelist id="subversion-general">
+<title
+>Общие действия Subversion</title>
+<varlistentry>
+<term>
+<menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guimenuitem
+>Журнал объекта</guimenuitem
+> </menuchoice
+></term>
+<listitem>
+<para
+><action
+>Показывает</action
+> журнал выбранного объекта за всё время его существования. Внимание: этот список может быть очень большим!</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; &Shift;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guimenuitem
+>Журнал объекта без учёта копий…</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Показывает журнал истории выбранного элемента без отслеживания копий.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>I</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guimenuitem
+>Подробности</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Показывает подробные сведения о выбранных элементах</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guimenuitem
+>Кто менял строки</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Показывает, кто и в какой фиксации менял каждую строку. Это может занять много времени!</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guimenuitem
+>Кто менял строки в диапазоне</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Показывает авторство строк файла для диапазона фиксаций.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guimenuitem
+>Просмотреть последнюю версию</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Показывает содержимое последней зафиксированной версии этой записи. (Может отличаться от версии рабочей копии, если работа ведётся с рабочей копией!)</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>F2</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guimenuitem
+>Переместить</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Перемещает или переименовывает объект в рабочей копии или в репозитории.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guimenuitem
+>Копировать</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Копирует объект в рабочей копии или в репозитории.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Del</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guimenuitem
+>Удалить выбранные файлы/папки</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Удаляет выбранные элементы. При работе в рабочей копии необходимо после этого зафиксировать удаления.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guimenuitem
+>Создать папку</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Создаёт новую папку.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guimenuitem
+>Импортировать папки в текущий</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Выбирает папки для импорта в выбранную папку.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guimenuitem
+>Получить из репозитория</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Создаёт новую рабочую копию репозитория.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guimenuitem
+>Экспортировать репозиторий</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Экспортирует репозиторий в файловую систему, то есть создаёт чистое дерево ревизий без информации Subversion. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guimenuitem
+>Заблокировать выбранные объекты</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Блокирует выбранные объекты. Перед этим прочитайте руководство по Subversion! </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Основное</guisubmenu
+> <guimenuitem
+>Разблокировать выбранные объекты</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Снимает блокировку с выбранных объектов. Перед этим прочитайте руководство по Subversion! </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-workingcopy">
+<title
+>Рабочая копия</title>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guimenuitem
+>Обновить до ведущей ревизии</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Обновляет рабочую копию до ревизии HEAD репозитория.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guimenuitem
+>Обновить до ревизии…</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Обновляет рабочую копию до указанной ревизии репозитория.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>#</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guimenuitem
+>Фиксация</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Фиксирует в репозитории изменения выбранных объектов рабочей копии.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guimenuitem
+>Сравнить локально</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Показывает локальные изменения в виде различий (без доступа к сети). Сравнение ведётся с состоянием, до которого рабочая копия была обновлена в последний раз, а не с ревизией в репозитории.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guimenuitem
+>Сравнить с HEAD</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Сравнивает рабочую копию с ревизией HEAD репозитория.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guimenuitem
+>Свойства</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Показывает и изменяет свойства выбранного объекта.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Insert</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guimenuitem
+>Добавить выбранные файлы/папки</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Ставит выбранные файлы и папки под контроль версий.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guimenuitem
+>Откатить текущие изменения</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Отменяет изменения в рабочей копии и возвращает её к состоянию последнего обновления.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guimenuitem
+>Отметить как разрешённый</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Снимает с объектов отметку о конфликте и удаляет связанные с ним файлы.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guimenuitem
+>Слияние двух ревизий</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Выполняет слияние двух ревизий объектов в рабочую копию.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guimenuitem
+>Игнорировать/не игнорировать текущий объект</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Изменяет свойство родительской папки так, что выбранный объект помечается как игнорируемый, если он таким не был, и наоборот — убирается из списка игнорируемых.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guimenuitem
+>Очистка</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Очищает рабочую копию и снимает оставшиеся блокировки (в том числе от прерванной фиксации).</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Рабочая копия</guisubmenu
+> <guimenuitem
+>Переключить репозиторий</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Переключает текущую рабочую копию на другой адрес в репозитории.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-repository">
+<title
+>Репозиторий</title>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Репозиторий</guisubmenu
+> <guimenuitem
+>Получить текущий путь к репозиторию</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Создаёт рабочую копию из выбранной папки.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Репозиторий</guisubmenu
+> <guimenuitem
+>Экспортировать текущий путь к репозиторию</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Создаёт в локальной файловой системе чистую копию выбранной папки.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-view">
+<title
+>Действия просмотра</title>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>F5</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Вид</guisubmenu
+> <guimenuitem
+>Обновить вид</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Обновляет</action
+> состояние всех показанных объектов. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Вид</guisubmenu
+> <guimenuitem
+>Развернуть дерево файлов / Свернуть дерево файлов</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Разворачивает или сворачивает дерево репозитория. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>Кэш журнала</guisubmenu
+> <guimenuitem
+>Остановить обновление кэша журнала</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Журнал кэшируется и используется для показа дерева ревизий репозитория. В зависимости от подключения к Интернету, размера репозитория Subversion и длины истории это может занять много времени. Поэтому с помощью этого действия можно остановить обновление кэша. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guimenuitem
+>Добавить ключи SSH в ssh-agent</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Сохраняет пароль ключа SSH на время текущего сеанса, чтобы не вводить его повторно. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="kdesvn-database-menu">
+<title
+>Меню «База данных»</title>
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>База данных</guimenu
+> <guimenuitem
+>Показать содержимое базы данных</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Показывает обзор содержимого базы данных кэша известных репозиториев и позволяет удалить кэш или репозиторий, а также открыть параметры репозитория. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>База данных</guimenu
+> <guimenuitem
+>Параметры текущего репозитория</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Открывает диалоговое окно параметров кэша, журналов и статистики. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>Меню «Настройка» и «Справка»</title>
+<para
+>Помимо общих пунктов меню <guimenu
+>Настройка</guimenu
+> и <guimenu
+>Справка</guimenu
+> &kde;, описанных в разделах <ulink url="help:/fundamentals/ui.html#menus-settings"
+>Меню «Настройка»</ulink
+> и <ulink url="help:/fundamentals/ui.html#menus-help"
+>Меню «Справка»</ulink
+> документа «Основы &kde;», в &kdesvn; есть дополнительный пункт:</para>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Настройка</guimenu
+> <guimenuitem
+>Быстрая настройка</guimenuitem
+> </menuchoice
+></term>
+<listitem>
+
+<variablelist>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Загружать последний открытый адрес при запуске</guimenuitem>
+</term
+><listitem>
+<para
+>Открывает последний открытый адрес, если адрес не указан в командной строке.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Журналы отслеживают изменения узла</guimenuitem>
+</term
+><listitem>
+<para
+><!--FIXME What does this option do? --></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Показать игнорируемые файлы</guimenuitem>
+</term
+><listitem>
+<para
+>Показывать элементы, отмеченные в Subversion для игнорирования, или нет.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Показ неизвестных файлов</guimenuitem>
+</term
+><listitem>
+<para
+>Показывать файлы, не добавленные в репозиторий Subversion.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Скрывать файлы без изменений</guimenuitem>
+</term
+><listitem>
+<para
+>Это действие позволяет показывать только изменённые файлы и даёт чёткий и краткий обзор.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>Работа в сети</guimenuitem>
+</term
+><listitem>
+<para
+>В автономном режиме кэш журнала не обновляется, поэтому кэшированный журнал может отличаться от настоящего.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+</sect1>
+</chapter>
+<chapter id="credits-and-license">
+<title
+>Авторские права, лицензия и благодарности</title>
+<para
+>Авторские права на программу, 2005–2009 &Rajko.Albrecht; &Rajko.Albrecht.mail; </para>
+<para
+>Большое спасибо всем, кто внёс свой вклад: </para>
+<itemizedlist>
+<listitem
+><para
+>Andreas Richter <email
+>ar@oszine.de</email
+> — за портирование svnqt на Qt4</para>
+</listitem>
+<listitem
+><para
+>Michael Biebl <email
+>biebl@teco.edu</email
+> — за большую помощь, идеи, реализацию и подсказки.</para>
+</listitem>
+<listitem
+><para
+>Bram Schoenmakers <email
+>bramschoenmakers@kde.nl</email
+> — за советы по &kde;, перевод на нидерландский язык и приведение в порядок моего кода.</para>
+</listitem>
+</itemizedlist>
+<para
+>Спасибо и всем остальным переводчикам (никогда не думал, что так быстро получу столько переводов!), и всем за отзывы — и положительные, и отрицательные. Они очень помогли. </para>
+<para
+>Если требуется собственный перевод &kdesvn; и нужна помощь, читайте далее на <ulink url="http://l10n.kde.org/"
+>странице локализации &kde;</ulink
+> или задайте вопрос в <ulink url="mailto:kde-i18n-doc@kde.org"
+>списке рассылки <email
+>kde-i18n-doc@kde.org</email
+></ulink
+>. </para>
+<para
+>Авторские права на документацию, 2005–2006 &Rajko.Albrecht; &Rajko.Albrecht.mail; </para>
+<para
+>Перевод на русский — Александр Яворский<email
+>kekcuha@gmail.com</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+<appendix id="revision-syntax">
+<title
+>Синтаксис ревизий</title>
+<para
+>Ревизии можно задать в том же виде, что и для стандартного клиента <application
+>svn</application
+>. Это означает: номер, ключевое слово или дата. </para>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>Номер</term>
+<listitem
+><para
+>Число, большее или равное -1. Значение -1 означает <quote
+>неуказанная ревизия</quote
+>, 0 — начало. Обычно эти числа не следует использовать (большинство операций с ними завершится ошибкой). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Ключевое слово</term>
+<listitem
+><para
+>Один из <itemizedlist>
+
+<listitem
+><para
+>HEAD </para
+></listitem>
+
+<listitem
+><para
+>BASE </para
+></listitem>
+
+<listitem
+><para
+>COMMITED </para
+></listitem>
+
+<listitem
+><para
+>PREV </para
+></listitem>
+
+<listitem
+><para
+>START </para
+></listitem>
+
+<listitem
+><para
+>WORKING </para
+></listitem>
+
+</itemizedlist>
+
+</para>
+<para
+>Ключевые слова чувствительны к регистру! Например, head и HEAD — не одно и то же. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Дата</term>
+<listitem
+><para
+>Дата в формате {ГГГГ-ММ-ДД}. Значения ММ и ДД должны быть двузначными — например, 2005-1-1 нужно записать как {2005-01-01}. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+<para
+>Добавление определённой ревизии к &URL; всегда выполняется с помощью <quote
+>?rev=<replaceable
+>ревизия</replaceable
+></quote
+>. </para>
+</appendix>
+
+&documentation.index;
+</book>

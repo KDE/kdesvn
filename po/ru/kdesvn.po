@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:19+0000\n"
-"PO-Revision-Date: 2020-03-13 22:17+0300\n"
+"PO-Revision-Date: 2026-09-28 19:08+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -1856,17 +1856,15 @@ msgstr "Максимальное количество записей в журн
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:53
-#, fuzzy, kde-format
-#| msgid "Display colored annotate"
+#, kde-format
 msgid "Display colored blame lines"
-msgstr "Показать цветную аннотацию"
+msgstr "Раскраска строк с указанием автора"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:68
-#, fuzzy, kde-format
-#| msgid "Display ignored files"
+#, kde-format
 msgid "Display icon overlays"
-msgstr "Показать игнорируемый файлы"
+msgstr "Использовать значки-наложений"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:72
@@ -1883,10 +1881,9 @@ msgstr "Просмотр элементов перед фиксацией"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:88
-#, fuzzy, kde-format
-#| msgid "Hide unchanged files"
+#, kde-format
 msgid "Hide versioned unchanged files"
-msgstr "Спрятать не изменившиеся файлы"
+msgstr "Скрыть неизменённые файлы из репозитория"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_follows_nodes)
@@ -1912,7 +1909,7 @@ msgstr "Начинать проверку обновлений при откры
 #: src/settings/kdesvn_part.kcfg:104
 #, kde-format
 msgid "Start caching latest logs on open or commit"
-msgstr ""
+msgstr "Кэширование последних журналов при открытии или фиксации"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:108
@@ -1922,23 +1919,21 @@ msgstr "Запрашивать подробные сведения о файла
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:112
-#, fuzzy, kde-format
-#| msgid "Should kdesvn retrieves properties on selected item in repositories"
+#, kde-format
 msgid "Get properties on selected item on networked protocols"
-msgstr "Должен ли kdesvn извлекает свойства выбранного элемента в репозиториях"
+msgstr "Получение свойств выбранного элемента по сетевым протоколам"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:116
 #, kde-format
 msgid "Use properties like bugtraq:url on repository listings"
-msgstr ""
+msgstr "Использовать свойства вроде bugtraq:url в списках репозиториев"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:120
-#, fuzzy, kde-format
-#| msgid "Check if items has \"svn:needs-lock\" property set"
+#, kde-format
 msgid "Check for property svn:needs-lock on listings"
-msgstr "Проверьте, имеют ли элементы настройки \"svn:needs-lock\""
+msgstr "Проверка наличия свойства svn:needs-lock в списках"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_store_passwords)
@@ -1949,12 +1944,9 @@ msgstr "Сохранять пароль для соединений"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:128
-#, fuzzy, kde-format
-#| msgid ""
-#| "When saving passwords, do it into KDE wallet instead of subversions "
-#| "storage?"
+#, kde-format
 msgid "Store passwords in KDE Wallet instead of Subversion' storage"
-msgstr "При сохранении пароля, сохранять в KDE Wallet вместо Subversion?"
+msgstr "Хранить пароли в KDE Wallet вместо хранилища Subversion"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_password_cache)
@@ -1967,51 +1959,49 @@ msgstr "Использовать внутренний кэш для пароле
 #: src/settings/kdesvn_part.kcfg:136
 #, kde-format
 msgid "Is networking enabled"
-msgstr ""
+msgstr "Использовать сетевые соединения"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:140
 #, kde-format
 msgid "Local add results in modification instead of conflicts"
-msgstr ""
+msgstr "Локальное добавление приводит к изменению вместо конфликта"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:144
 #, kde-format
 msgid "create any non-existent parent at depth=empty"
-msgstr ""
+msgstr "Создать все отсутствующие родительские каталоги с глубиной=empty"
 
 #. i18n: ectx: label, entry, group (diffmerge_items)
 #: src/settings/kdesvn_part.kcfg:150
 #, kde-format
 msgid "Which program to use for external merges"
-msgstr ""
+msgstr "Приложение для внешнего слияния"
 
 #. i18n: ectx: label, entry, group (diffmerge_items)
 #: src/settings/kdesvn_part.kcfg:154
 #, kde-format
 msgid "Which program for resolving conflicts"
-msgstr ""
+msgstr "Программа для разрешения конфликтов"
 
 #. i18n: ectx: label, entry, group (display)
 #: src/settings/kdesvn_part.kcfg:164
 #, kde-format
 msgid "Display different then normal states colored"
-msgstr ""
+msgstr "Показывать цветом состояния, отличные от обычных"
 
 #. i18n: ectx: label, entry, group (blame_dlg)
 #: src/settings/kdesvn_part.kcfg:197
 #, kde-format
 msgid "Locale for blame display"
-msgstr ""
+msgstr "Язык для отображения аннотации"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:209
-#, fuzzy, kde-format
-#| msgid "Should kdesvn check content of logcache before starting the tree"
+#, kde-format
 msgid "Check status of log cache when starting revision tree"
-msgstr ""
-"Должен ли kdesvn проверять содержимое кэша журнала перед запуском дерева"
+msgstr "Проверять состояние кэша журнала при запуске дерева ревизий"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -2066,21 +2056,19 @@ msgstr "Сравнение с деревом ревизии рекурсивно
 #: src/settings/kdesvn_part.kcfg:247
 #, kde-format
 msgid "Should Konqueror not display context menus for kdesvn?"
-msgstr ""
+msgstr "Отключить контекстные меню kdesvn в Konqueror?"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:251
-#, fuzzy, kde-format
-#| msgid "Don't display entries in toplevel action menu"
+#, kde-format
 msgid "Should Konqueror not display kdesvn entries in main action menu?"
-msgstr "Не отображать записи в меню верхнего уровня действия"
+msgstr "Не отображать записи kdesvn в главном меню действий Konqueror?"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:255
-#, fuzzy, kde-format
-#| msgid "Show log after executing a command"
+#, kde-format
 msgid "Show a small log window after executing a command."
-msgstr "Показать журнал после выполнения команды"
+msgstr "Показывать небольшое окно журнала после выполнения команды."
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:259
@@ -2090,16 +2078,17 @@ msgstr "Минимальное количество строк журнала д
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:263
-#, fuzzy, kde-format
-#| msgid "KIO operations use standard logmessage"
+#, kde-format
 msgid "KIO::svn operations use a standard log message"
-msgstr "KIO-операции используют стандартное сообщение журнала"
+msgstr "Для операций KIO:svn использовать стандартное сообщение для журнала"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:267
 #, kde-format
 msgid "The standard log message to use with KIO if not asking for it."
 msgstr ""
+"Стандартное сообщение журнала для использования с KIO, если запрос не "
+"выполняется."
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:271
@@ -2111,7 +2100,7 @@ msgstr "Поддержка перезаписи модулем KIO"
 #: src/settings/kdesvn_part.kcfg:275
 #, kde-format
 msgid "Print progress messages in KDE dock area"
-msgstr ""
+msgstr "Вывод сообщений о ходе выполнения в док-области KDE"
 
 #. i18n: ectx: whatsthis, entry, group (internals)
 #: src/settings/kdesvn_part.kcfg:294
@@ -2119,6 +2108,8 @@ msgstr ""
 msgid ""
 "This value holds for log dialog which kind of log is used, its internal only."
 msgstr ""
+"Это значение определяет, какой вид журнала используется в диалоге журнала. "
+"Только для внутреннего использования."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
 #: src/settings/polling_settings.ui:11
@@ -2462,6 +2453,10 @@ msgid ""
 "incoming addition of the same node kind results in a normal node with a "
 "possible local modification, instead of a tree conflict.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>При включении локальное добавление по тому же пути, "
+"что и входящее добавление того же типа узла, приводит к созданию обычного "
+"узла с возможной локальной модификацией вместо конфликта дерева.</p></body></"
+"html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_add_as_modification)
 #: src/settings/subversion_settings.ui:200
@@ -2476,6 +2471,8 @@ msgid ""
 "<html><head/><body><p>If set, create any non-existent parent directories "
 "also by checking them out at depth=empty</p></body></html>"
 msgstr ""
+"<html><head/><body><p>При включении создаются все отсутствующие родительские "
+"каталоги путём их извлечения с глубиной empty</p></body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_make_parents)
 #: src/settings/subversion_settings.ui:210
@@ -3101,6 +3098,8 @@ msgid ""
 "This is a list which words/substrings a log entry must contain so it will be "
 "hidden from log and statistics"
 msgstr ""
+"Список слов или подстрок, которые должны содержаться в записи журнала для её "
+"скрытия из журнала и статистики"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/svnfrontend/database/dbsettings.ui:98
@@ -3115,6 +3114,7 @@ msgstr ""
 msgid ""
 "Do not display commits of listed users in log window and statistics view"
 msgstr ""
+"Скрывать фиксации перечисленных пользователей в окне журнала и статистике"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dbcfg_filter_empty_author)
 #: src/svnfrontend/database/dbsettings.ui:115
@@ -3450,10 +3450,9 @@ msgstr "Игнорировать ключевые слова"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_CreateDirButton)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:110
-#, fuzzy, kde-format
-#| msgid "Append source url name to subfolder"
+#, kde-format
 msgid "Append source URL name to subfolder"
-msgstr "Добавить имя источника url для вложенной папки"
+msgstr "Добавить имя исходного URL во вложенную папку"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_ShowExplorer)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:120
@@ -3741,11 +3740,11 @@ msgid "Getting logs - hit Cancel for abort"
 msgstr "Получение журналов (операцию можно прервать, нажав «Отмена»)"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:104
-#, fuzzy, kde-format
-#| msgid "No logcache possible due broken database and networking not allowed."
+#, kde-format
 msgid "No log cache possible due broken database and networking not allowed."
 msgstr ""
-"Нет возможного кэша журнала из-за сломанной базы данных и недопустимой сети."
+"Не удалось использовать кэш журнала из-за повреждённой базы данных и запрета "
+"сетевых подключений."
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:104
 #: src/svnfrontend/graphtree/revisiontree.cpp:109
@@ -3924,16 +3923,14 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_validateProps)
 #: src/svnfrontend/loaddmpdlg.ui:121
-#, fuzzy, kde-format
-#| msgid "Modify properties"
+#, kde-format
 msgid "Validate properties"
-msgstr "Изменить свойства"
+msgstr "Проверять свойства"
 
 #: src/svnfrontend/maintreewidget.cpp:271
-#, fuzzy, kde-format
-#| msgid "Networked URL to open but networking is disabled!"
+#, kde-format
 msgid "Networked URL to open but networking is disabled."
-msgstr "Сетевой URL, чтобы открыть, но сеть отключена!"
+msgstr "Сетевой адрес для открытия, но сетевые возможности отключены."
 
 #: src/svnfrontend/maintreewidget.cpp:497
 #, kde-format
@@ -4561,8 +4558,7 @@ msgid "Import file"
 msgstr "Импорт файла"
 
 #: src/svnfrontend/maintreewidget.cpp:2079
-#, fuzzy, kde-format
-#| msgid "Import log"
+#, kde-format
 msgctxt "@title:window"
 msgid "Import Log"
 msgstr "Импорт журнала"
@@ -4590,18 +4586,15 @@ msgid "Only on single folder possible"
 msgstr "Это возможно только в единичном каталоге"
 
 #: src/svnfrontend/maintreewidget.cpp:2155
-#, fuzzy, kde-format
-#| msgid "Sorry - internal error!"
+#, kde-format
 msgid "Sorry - internal error"
-msgstr "Извините - внутренняя ошибка!"
+msgstr "Внутренняя ошибка"
 
 #: src/svnfrontend/maintreewidget.cpp:2219
-#, fuzzy, kde-format
-#| msgid "Hold CTRL key while click on selected item for unselect"
+#, kde-format
 msgid "Hold Ctrl key while click on selected item for unselect"
 msgstr ""
-"Удерживайте клавишу CTRL при нажатии на выбранном объекте для отмены "
-"выделения"
+"Для отмены выбора элемента удерживайте клавишу Ctrl и щёлкните по нему."
 
 #. i18n: ectx: property (toolTip), widget (QTreeView, m_LogTreeView)
 #. i18n: ectx: property (toolTip), widget (QTreeWidget, m_ChangedList)
@@ -4755,6 +4748,8 @@ msgid ""
 "If checked, allow merge into mixed revision working copy, otherwise raises "
 "error in that case"
 msgstr ""
+"Разрешить слияние в рабочую копию со смешанными ревизиями; иначе в этом "
+"случае будет выдана ошибка"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_AllowMixedRev)
 #: src/svnfrontend/merge_dlg.ui:179
@@ -5093,7 +5088,7 @@ msgstr "Применение свойств"
 #: src/svnfrontend/svnactions.cpp:921
 #, kde-format
 msgid "<center>Applying<br/>hit cancel for abort</center>"
-msgstr ""
+msgstr "<center>Применение<br/>для отмены нажмите «Отмена»</center>"
 
 #: src/svnfrontend/svnactions.cpp:959
 #, kde-format
@@ -5185,10 +5180,9 @@ msgid "Diffing - hit cancel for abort"
 msgstr "Идёт сравнение (операцию можно прервать, нажав «Отмена»)"
 
 #: src/svnfrontend/svnactions.cpp:1376
-#, fuzzy, kde-format
-#| msgid "Display-process could not started, check command."
+#, kde-format
 msgid "Display process could not started, check command."
-msgstr "Процесс отображения невозможно запустить, проверьте команду."
+msgstr "Не удалось запустить процесс отображения, проверьте команду."
 
 #: src/svnfrontend/svnactions.cpp:1389
 #, kde-format
@@ -5213,12 +5207,11 @@ msgid "Which files or directories should I add?"
 msgstr "Какие файлы и каталоги следует добавить?"
 
 #: src/svnfrontend/svnactions.cpp:1533
-#, fuzzy, kde-format
-#| msgid "<center>The entry<br>%1<br>is versioned - break.</center>"
+#, kde-format
 msgid "<center>The entry<br/>%1<br/>is versioned - break.</center>"
 msgstr ""
-"<center>На объект <br>%1<br>распространяется контроль версий - действие "
-"прервано.</center>"
+"<center>Запись<br/>%1<br/>уже находится под управлением версий — прервать.</"
+"center>"
 
 #: src/svnfrontend/svnactions.cpp:1562
 #, kde-format
@@ -5275,12 +5268,11 @@ msgid "Checking out"
 msgstr "Получение"
 
 #: src/svnfrontend/svnactions.cpp:1740
-#, fuzzy, kde-format
-#| msgid "<center>The entry<br>%1<br>is not versioned - break.</center>"
+#, kde-format
 msgid "<center>The entry<br/>%1<br/>is not versioned - break.</center>"
 msgstr ""
-"<center>На объект <br>%1<br> не распространяется контроль версий - действие "
-"прервано.</center>"
+"<center>Запись<br/>%1<br/>не находится под управлением версий — прервать.</"
+"center>"
 
 #: src/svnfrontend/svnactions.cpp:1773
 #, kde-format
@@ -5442,11 +5434,10 @@ msgid "No unversioned items found."
 msgstr "Не найдено неверсированных элементов."
 
 #: src/svnfrontend/svnactions.cpp:2374
-#, fuzzy, kde-format
-#| msgid "Add unversioned items"
+#, kde-format
 msgctxt "@title:window"
 msgid "Add Unversioned Items"
-msgstr "Добавить неверсированные элементы"
+msgstr "Добавление неучтённых элементов"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
 #: src/svnfrontend/svnactions.cpp:2377 src/svnfrontend/svnlogdlg.ui:163
@@ -5455,14 +5446,13 @@ msgid "Item"
 msgstr "Объект"
 
 #: src/svnfrontend/svnactions.cpp:2497
-#, fuzzy, kde-format
-#| msgid "Found %1 modified items"
+#, kde-format
 msgid "Found %1 modified item"
 msgid_plural "Found %1 modified items"
-msgstr[0] "Найден %1 измененный элемент"
-msgstr[1] "Найден %1 измененный элемент"
-msgstr[2] "Найден %1 измененный элемент"
-msgstr[3] ""
+msgstr[0] "Найден %1 изменённый элемент"
+msgstr[1] "Найдено %1 изменённых элемента"
+msgstr[2] "Найдено %1 изменённых элементов"
+msgstr[3] "Найден %1 изменённый элемент"
 
 #: src/svnfrontend/svnactions.cpp:2526
 #, kde-format
@@ -5475,10 +5465,9 @@ msgid "There are new items in repository"
 msgstr "Есть новые элементы в репозитории"
 
 #: src/svnfrontend/svnactions.cpp:2598
-#, fuzzy, kde-format
-#| msgid "Not filling logcache because networking is disabled"
+#, kde-format
 msgid "Not filling log cache because networking is disabled"
-msgstr "Не заполняется кэш журнала из-за того, что сеть отключена"
+msgstr "Кэш журнала не заполняется, так как сеть отключена"
 
 #: src/svnfrontend/svnactions.cpp:2640
 #, kde-format

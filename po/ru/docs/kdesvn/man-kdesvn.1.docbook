@@ -1,0 +1,205 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Russian "INCLUDE">
+]>
+
+<refentry lang="&language;" id='kdesvn1'>
+<refentryinfo>
+<title
+>Руководство пользователя kdesvn</title>
+<author
+><personname
+> <firstname
+>Rajko</firstname
+> <surname
+>Albrecht</surname
+> </personname
+> <email
+>ral@alwins-world.de</email
+></author>
+<date
+>22 мая 2016 г.</date>
+<releaseinfo
+>kdesvn 2.1.0</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kdesvn</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kdesvn</command
+></refname>
+<refpurpose
+>Клиент Subversion от KDE (отдельное приложение)</refpurpose>
+</refnamediv>
+<!-- body begins here -->
+<refsynopsisdiv id='synopsis'>
+<cmdsynopsis
+><command
+>kdesvn</command
+> <arg choice="opt"
+><replaceable
+>параметры</replaceable
+></arg
+> <arg choice="plain"
+><replaceable
+>exec</replaceable
+></arg
+> <arg choice="plain"
+><replaceable
+>&lt;команда&gt;</replaceable
+></arg
+> <arg choice="opt"
+><replaceable
+>URL</replaceable
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+
+<refsect1 id='description'
+><title
+>Описание</title>
+<para
+>Клиент Subversion от KDE (отдельное приложение)</para>
+</refsect1>
+
+<refsect1 id='options'
+><title
+>Параметры</title>
+
+<refsect2 id='ss_arguments'
+><title
+>Аргументы:</title>
+<variablelist>
+  <varlistentry>
+  <term
+><emphasis
+>exec</emphasis
+> &lt;команда&gt;</term>
+  <listitem
+><para
+>Выполнить команду Subversion («exec help» открывает справку в Центре справки KDE).</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><emphasis
+>URL</emphasis
+></term>
+  <listitem>
+<para
+>Путь к локальной рабочей копии или репозиторию.</para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</refsect2>
+
+<refsect2 id='options2'
+><title
+>Параметры:</title>
+<variablelist>
+  <varlistentry>
+  <term
+><option
+>-r startrev[:endrev]</option
+></term>
+  <listitem>
+<para
+>Выполняет одну команду Subversion для указанной ревизии (диапазона ревизий).</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-R</option
+></term>
+  <listitem>
+<para
+>Запрашивает ревизию при выполнении одной команды.</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-f</option
+></term>
+  <listitem>
+<para
+>Принудительное выполнение.</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-o &lt;файл&gt;</option
+></term>
+  <listitem>
+<para
+>Сохраняет вывод команды Subversion (например, <quote
+>cat</quote
+>) в файл &lt;файл&gt;.</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-l &lt;число&gt;</option
+></term>
+  <listitem>
+<para
+>Ограничивает вывод журнала указанным &lt;числом&gt; записей.</para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</refsect2>
+
+</refsect1>
+
+<refsect1 id='example'>
+<title
+>Пример</title>
+<para
+>kdesvn file:///<replaceable
+>путь/к/локальной/рабочей/копии</replaceable
+></para>
+<para
+>kdesvn http://<replaceable
+>remote/svn/project/trunk</replaceable
+></para>
+</refsect1>
+
+<refsect1 id='see_also'>
+<title
+>Смотрите также</title>
+<simplelist>
+<member
+>Полная документация пользователя доступна в &khelpcenter;. Адрес &URL; <emphasis
+>help:/kdesvn/</emphasis
+> можно также ввести непосредственно в &konqueror; или выполнить команду <emphasis
+>`khelpcenter help:/kdesvn/'</emphasis
+> из командной строки.</member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
+</simplelist>
+</refsect1>
+
+<refsect1 id='authors'
+><title
+>Авторы</title>
+<literallayout
+>Rajko Albrecht &lt;ral@alwins-world.de&gt;
+</literallayout
+></refsect1>
+</refentry>
+

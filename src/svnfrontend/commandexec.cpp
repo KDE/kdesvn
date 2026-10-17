@@ -300,7 +300,8 @@ int CommandExec::exec(const QCommandLineParser *parser)
     }
 
     Q_EMIT executeMe();
-    if (Kdesvnsettings::self()->cmdline_show_logwindow() && m_lastMessagesLines >= Kdesvnsettings::self()->cmdline_log_minline()) {
+    if (Kdesvnsettings::self()->cmdline_show_logwindow() && !m_lastMessages.isEmpty() && // Don't bring up the summary screen if there is no summary to show
+        m_lastMessagesLines >= Kdesvnsettings::self()->cmdline_log_minline()) {
         QPointer<KSvnSimpleOkDialog> dlg(new KSvnSimpleOkDialog(QStringLiteral("kdesvn_cmd_log"), QApplication::activeModalWidget()));
         QTextBrowser *ptr = new QTextBrowser(dlg);
         ptr->setText(m_lastMessages);

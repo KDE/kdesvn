@@ -1,31 +1,32 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # SPDX-FileCopyrightText: 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Vit Pelcak <vit@pelcak.org>
+# SPDX-FileCopyrightText: 2026 Libor Filípek <libor.filipek@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:19+0000\n"
-"PO-Revision-Date: 2024-08-20 08:47+0200\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-11-05 00:47+0100\n"
+"Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Poedit 3.10\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Vít Pelčák,Pavel Fric"
+msgstr "Vít Pelčák,Pavel Fric,Libor Filípek"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "vit@pelcak.org,pavelfric@seznam.cz"
+msgstr "vit@pelcak.org,pavelfric@seznam.cz,libor.filipek@gmail.com"
 
 #: src/askpass/kdesvn-askpass.cpp:35
 #, kde-format
@@ -35,7 +36,7 @@ msgstr "kdesvnaskpass"
 #: src/askpass/kdesvn-askpass.cpp:36
 #, kde-format
 msgid "ssh-askpass for kdesvn"
-msgstr "ssh-askpass pro kdesvn."
+msgstr "ssh-askpass pro kdesvn"
 
 #: src/askpass/kdesvn-askpass.cpp:38
 #, kde-format
@@ -96,12 +97,12 @@ msgstr "Vytvoří kopii repozitáře Subversion v nové složce"
 #: src/kdesvn.cpp:127
 #, kde-format
 msgid "Load dump into repository"
-msgstr ""
+msgstr "Načíst výpis do úložiště"
 
 #: src/kdesvn.cpp:128
 #, kde-format
 msgid "Load a dump file into a repository."
-msgstr ""
+msgstr "Načíst soubor výpisu do úložiště."
 
 #: src/kdesvn.cpp:133
 #, kde-format
@@ -220,7 +221,7 @@ msgstr "O kdesvn-part"
 #: src/kdesvn_part.cpp:191
 #, kde-format
 msgid "Kdesvn Handbook"
-msgstr "Příručka ke kdesvn"
+msgstr "Příručka Kdesvn"
 
 #: src/kdesvn_part.cpp:281
 #, kde-format
@@ -286,12 +287,12 @@ msgstr "Nastavení Subversion"
 #: src/kdesvn_part.cpp:335
 #, kde-format
 msgid "Timed jobs"
-msgstr ""
+msgstr "Plánované úlohy"
 
 #: src/kdesvn_part.cpp:335
 #, kde-format
 msgid "Settings for timed jobs"
-msgstr ""
+msgstr "Nastavení plánovaných úloh"
 
 #: src/kdesvn_part.cpp:337
 #, kde-format
@@ -407,7 +408,7 @@ msgstr "Zadejte heslo pro oblast %1"
 #: src/kdesvnd/kdesvnd.cpp:268 src/svnfrontend/ccontextlistener.cpp:289
 #, kde-format
 msgid "Open a file with a #PKCS12 certificate"
-msgstr "Otevřít soubor s certifikátem #PKCS12."
+msgstr "Otevřít soubor s certifikátem #PKCS12"
 
 #: src/kdesvnd/kdesvnd.cpp:359
 #, kde-format
@@ -472,7 +473,7 @@ msgstr "Horká kopie repozitáře"
 #: src/kdesvnview.cpp:276
 #, kde-format
 msgid "Hotcopy finished."
-msgstr "Hotcopy dokončena."
+msgstr "Horká kopie dokončena."
 
 #: src/kdesvnview.cpp:285
 #, kde-format
@@ -484,34 +485,34 @@ msgstr "Načíst repozitář ze svndump"
 #, kde-format
 msgctxt "@title:window"
 msgid "Load Dump"
-msgstr ""
+msgstr "Načíst výpis"
 
 #: src/kdesvnview.cpp:335
 #, kde-format
 msgid "Loading a dump into a repository."
-msgstr ""
+msgstr "Načítání výpisu do repozitáře."
 
 #: src/kdesvnview.cpp:337
 #, kde-format
 msgid "Loading dump finished."
-msgstr ""
+msgstr "Načítání výpisu dokončeno."
 
 #: src/kdesvnview.cpp:347
 #, kde-format
 msgctxt "@title:window"
 msgid "Dump a Repository"
-msgstr ""
+msgstr "Výpis repozitáře"
 
 #: src/kdesvnview.cpp:387
 #, kde-format
 msgctxt "@title:window"
 msgid "Dump"
-msgstr ""
+msgstr "Výpis"
 
 #: src/kdesvnview.cpp:387
 #, kde-format
 msgid "Dumping a repository"
-msgstr "Vypisuji repozitář"
+msgstr "Vypisování repozitáře"
 
 #: src/kdesvnview.cpp:389
 #, kde-format
@@ -521,12 +522,12 @@ msgstr "Vypisování dokončeno."
 #: src/kdesvnview.cpp:434
 #, kde-format
 msgid "Inserted %v not cached log entries of %m."
-msgstr ""
+msgstr "Vloženo %v neukložených záznamů z %m."
 
 #: src/kiosvn/kiolistener.cpp:66 src/kiosvn/kiosvn.cpp:811
 #, kde-format
 msgid "Wrong or missing log (may cancel pressed)."
-msgstr ""
+msgstr "Chybný nebo chybějící záznam (může zrušit stisknuté tlačítko)."
 
 #: src/kiosvn/kiolistener.cpp:91
 #, kde-format
@@ -585,7 +586,7 @@ msgstr ""
 #: src/kiosvn/kiolistener.cpp:175
 #, kde-format
 msgid "Update finished."
-msgstr ""
+msgstr "Aktualizace dokončena."
 
 #: src/kiosvn/kiolistener.cpp:179
 #, kde-format
@@ -600,7 +601,7 @@ msgstr ""
 #: src/kiosvn/kiolistener.cpp:191
 #, kde-format
 msgid "Fetching external item into %1."
-msgstr "Získávám externí položku do %1."
+msgstr "Získávání externí položky do %1."
 
 #: src/kiosvn/kiolistener.cpp:195
 #, kde-format
@@ -610,22 +611,22 @@ msgstr "Stav oproti revizi: %1."
 #: src/kiosvn/kiolistener.cpp:199
 #, kde-format
 msgid "Performing status on external item at %1."
-msgstr "Zjišťuji stav externí položky na %1."
+msgstr "Zjišťování stavu externí položky na %1."
 
 #: src/kiosvn/kiolistener.cpp:202
 #, kde-format
 msgid "Sending %1."
-msgstr "Posílám %1."
+msgstr "Odesílání %1."
 
 #: src/kiosvn/kiolistener.cpp:206
 #, kde-format
 msgid "Adding (bin) %1."
-msgstr "Přidávám (bin) %1."
+msgstr "Přidávání (bin) %1."
 
 #: src/kiosvn/kiolistener.cpp:208
 #, kde-format
 msgid "Adding %1."
-msgstr "Přidávám %1"
+msgstr "Přidávání %1."
 
 #: src/kiosvn/kiolistener.cpp:212
 #, kde-format
@@ -635,7 +636,7 @@ msgstr "Mažu %1."
 #: src/kiosvn/kiolistener.cpp:215
 #, kde-format
 msgid "Replacing %1."
-msgstr "Nahrazuji %1."
+msgstr "Nahrazování %1."
 
 #: src/kiosvn/kiolistener.cpp:221
 #, kde-format
@@ -691,7 +692,7 @@ msgstr ""
 #: src/kiosvn/kiosvn.cpp:438
 #, kde-format
 msgid "Committing %1"
-msgstr ""
+msgstr "Odesílání commitu %1..."
 
 #: src/kiosvn/kiosvn.cpp:461
 #, kde-format
@@ -707,17 +708,17 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:2217
 #, kde-format
 msgid "Committed revision %1."
-msgstr "Odeslána revize %1."
+msgstr "Odeslán commit revize %1."
 
 #: src/kiosvn/kiosvn.cpp:830
 #, kde-format
 msgid "Nothing to commit."
-msgstr "Nic k odeslání."
+msgstr "Nic k odeslání commitu."
 
 #: src/kiosvn/kiosvn.cpp:877
 #, kde-format
 msgid "Empty logs"
-msgstr "Vyprázdnit záznamy"
+msgstr "Vymazat záznamy"
 
 #: src/ksvnwidgets/authdialogwidget.cpp:35
 #, kde-format
@@ -756,7 +757,7 @@ msgstr "Uživatelské jméno:"
 #: src/ksvnwidgets/commitmessage.ui:6
 #, kde-format
 msgid "Commit Message"
-msgstr "Commmit zpráva"
+msgstr "Zpráva commitu"
 
 #. i18n: ectx: property (text), widget (QLabel, m_Reviewlabel)
 #: src/ksvnwidgets/commitmessage.ui:27
@@ -1071,7 +1072,7 @@ msgstr ""
 #: src/ksvnwidgets/revertform.ui:14
 #, kde-format
 msgid "Revert entries"
-msgstr "Vrátit položky "
+msgstr "Vrátit položky"
 
 #. i18n: ectx: property (text), widget (QLabel, m_headLine)
 #: src/ksvnwidgets/revertform.ui:20
@@ -1249,7 +1250,7 @@ msgstr ""
 #, kde-format
 msgctxt "no limit"
 msgid "No minimum"
-msgstr ""
+msgstr "Žádné minimum"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_contextmenu)
 #: src/settings/cmdexecsettings.ui:51
@@ -1638,7 +1639,7 @@ msgid ""
 "a small popup window with additional information about that file"
 msgstr ""
 "Zde můžete nastavit, zda si při ukázaní myší na soubor přejete zobrazit malé "
-"okno s podrobnými informacemi o daném souboru."
+"okno s podrobnými informacemi o daném souboru"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_file_tips)
 #: src/settings/display_settings.ui:70
@@ -2419,7 +2420,7 @@ msgstr "Přidáno"
 #: src/svnfrontend/ccontextlistener.cpp:74
 #, kde-format
 msgid "Update"
-msgstr "Aktualizovat"
+msgstr "Aktualizace"
 
 #: src/svnfrontend/ccontextlistener.cpp:75
 #, kde-format
@@ -2578,7 +2579,7 @@ msgstr ""
 #: src/svnfrontend/copymoveview.ui:14
 #, kde-format
 msgid "Copy / Move"
-msgstr ""
+msgstr "Kopírovat / Přesunout"
 
 #. i18n: ectx: property (text), widget (QLabel, m_HeadOneLabel)
 #: src/svnfrontend/copymoveview.ui:20
@@ -2696,7 +2697,7 @@ msgstr ""
 #: src/svnfrontend/createrepodlg.ui:93
 #, kde-format
 msgid "Compatible to Subversion prior 1.6"
-msgstr ""
+msgstr "Kompatibilní s verzemi Subversion staršími než 1.6"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_LogKeep)
 #: src/svnfrontend/createrepodlg.ui:113
@@ -2728,7 +2729,7 @@ msgstr ""
 #: src/svnfrontend/createrepodlg.ui:145
 #, kde-format
 msgid "Compatible to Subversion prior 1.5"
-msgstr ""
+msgstr "Kompatibilní s verzemi Subversion staršími než 1.5"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn18compat)
 #: src/svnfrontend/createrepodlg.ui:162
@@ -2805,7 +2806,7 @@ msgstr ""
 #: src/svnfrontend/database/dboverview.ui:46
 #, kde-format
 msgid "Delete cache"
-msgstr ""
+msgstr "Smazat mezipaměť"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteRepositoryButton)
 #. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteRepositoryButton)
@@ -3099,7 +3100,7 @@ msgstr ""
 #: src/svnfrontend/editpropsdlg.ui:14
 #, kde-format
 msgid "Modify property"
-msgstr ""
+msgstr "Změnit vlastnost"
 
 #. i18n: ectx: property (text), widget (QLabel, m_NameLabel)
 #: src/svnfrontend/editpropsdlg.ui:22
@@ -3244,7 +3245,7 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/rangeinput.ui:143
 #, kde-format
 msgid "WORKING"
-msgstr ""
+msgstr "Pracuje se"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_startNumberButton)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:56
@@ -3258,13 +3259,13 @@ msgstr "Čís&lo"
 #: src/svnfrontend/fronthelpers/rangeinput.ui:120
 #, kde-format
 msgid "HEAD"
-msgstr ""
+msgstr "HEAD"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_startStartButton)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:73
 #, kde-format
 msgid "S&TART"
-msgstr ""
+msgstr "Spus&tit"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_stopRevBox)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:85
@@ -3282,7 +3283,7 @@ msgstr "Číslo"
 #: src/svnfrontend/fronthelpers/rangeinput.ui:113
 #, kde-format
 msgid "START"
-msgstr ""
+msgstr "Spustit"
 
 #: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:62
 #, kde-format
@@ -3358,7 +3359,7 @@ msgstr "Revize %1"
 #: src/svnfrontend/graphtree/revgraphview.cpp:466
 #, kde-format
 msgid "Could not open temporary file %1 for writing."
-msgstr ""
+msgstr "Nelze otevřít dočasný soubor %1 pro zápis."
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:561
 #, kde-format
@@ -3743,7 +3744,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:530
 #, kde-format
 msgid "Blame"
-msgstr ""
+msgstr "Blame"
 
 #: src/svnfrontend/maintreewidget.cpp:531
 #: src/svnfrontend/maintreewidget.cpp:534
@@ -3831,12 +3832,12 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:562
 #, kde-format
 msgid "Check for unversioned items"
-msgstr ""
+msgstr "Zkontrolovat položky bez verze"
 
 #: src/svnfrontend/maintreewidget.cpp:563
 #, kde-format
 msgid "Unversioned"
-msgstr ""
+msgstr "Neverzováno"
 
 #: src/svnfrontend/maintreewidget.cpp:564
 #, kde-format
@@ -3952,18 +3953,18 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:666
 #, kde-format
 msgid "Update to head"
-msgstr "Aktualizovat na head"
+msgstr "Aktualizace na head"
 
 #: src/svnfrontend/maintreewidget.cpp:604
 #, kde-format
 msgctxt "Menu item"
 msgid "Update"
-msgstr "Aktualizovat"
+msgstr "Aktualizace"
 
 #: src/svnfrontend/maintreewidget.cpp:605
 #, kde-format
 msgid "Update to revision..."
-msgstr "Povýšit na revizi..."
+msgstr "Aktualizovat na revizi..."
 
 #: src/svnfrontend/maintreewidget.cpp:606
 #: src/svnfrontend/maintreewidget.cpp:607
@@ -4053,7 +4054,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:647
 #, kde-format
 msgid "Checkout"
-msgstr "Checkout"
+msgstr "Načíst"
 
 #: src/svnfrontend/maintreewidget.cpp:641
 #, kde-format
@@ -4068,12 +4069,12 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:646 src/svnfrontend/svnactions.cpp:1630
 #, kde-format
 msgid "Checkout a repository"
-msgstr ""
+msgstr "Načíst repozitář"
 
 #: src/svnfrontend/maintreewidget.cpp:648
 #, kde-format
 msgid "Export a repository"
-msgstr ""
+msgstr "Exportovat repozitář"
 
 #: src/svnfrontend/maintreewidget.cpp:649
 #, kde-format
@@ -4214,7 +4215,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:1875
 #, kde-format
 msgid "Invalid url given!"
-msgstr "Neplatné URL."
+msgstr "Neplatná URL!"
 
 #: src/svnfrontend/maintreewidget.cpp:2018
 #, kde-format
@@ -4470,7 +4471,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:795
 #, kde-format
 msgid "Last author"
-msgstr ""
+msgstr "Poslední autor"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:322
 #, kde-format
@@ -4495,7 +4496,7 @@ msgstr ""
 #: src/svnfrontend/propertiesdlg.cpp:91
 #, kde-format
 msgid "Delete property"
-msgstr ""
+msgstr "Smazat vlastnost"
 
 #: src/svnfrontend/propertiesdlg.cpp:98
 #, kde-format
@@ -4756,7 +4757,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Applying Properties"
-msgstr "Aplikuji vlastnosti"
+msgstr "Aplikování vlastnosti"
 
 #: src/svnfrontend/svnactions.cpp:921
 #, kde-format
@@ -4798,7 +4799,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Commit"
-msgstr "Odeslat"
+msgstr "Commit"
 
 #: src/svnfrontend/svnactions.cpp:1055
 #, kde-format
@@ -4809,7 +4810,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Downloading"
-msgstr "Stahuji"
+msgstr "Stahování"
 
 #: src/svnfrontend/svnactions.cpp:1081
 #, kde-format
@@ -4899,7 +4900,7 @@ msgstr "Exportovat repozitář"
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout a Repository"
-msgstr "Stáhnout repozitář"
+msgstr "Načíst repozitář"
 
 #: src/svnfrontend/svnactions.cpp:1630
 #, kde-format
@@ -4926,7 +4927,7 @@ msgstr "Exportovat"
 #, kde-format
 msgctxt "@title:window"
 msgid "Checkout"
-msgstr "Checkout"
+msgstr "Načíst"
 
 #: src/svnfrontend/svnactions.cpp:1703
 #, kde-format
@@ -4989,7 +4990,7 @@ msgstr ""
 #: src/svnfrontend/svnactions.cpp:1876
 #, kde-format
 msgid "Switch URL"
-msgstr ""
+msgstr "Přepnout URL"
 
 #: src/svnfrontend/svnactions.cpp:1894
 #, kde-format
@@ -5285,7 +5286,7 @@ msgstr ""
 #: src/svnfrontend/svnlogdlg.ui:249 src/svnfrontend/svnlogdlgimp.cpp:505
 #, kde-format
 msgid "Annotate"
-msgstr "Poznamenat"
+msgstr "Anotace"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_pbHelp)
 #: src/svnfrontend/svnlogdlg.ui:275

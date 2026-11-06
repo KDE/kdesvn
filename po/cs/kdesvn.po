@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-11-05 00:47+0100\n"
+"PO-Revision-Date: 2026-11-06 00:12+0100\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -679,7 +679,7 @@ msgstr "Přeskočeno %1."
 #: src/kiosvn/kiolistener.cpp:180
 #, kde-format
 msgid "Finished at revision %1."
-msgstr ""
+msgstr "Dokončeno na revizi %1."
 
 #: src/kiosvn/kiolistener.cpp:182
 #, kde-format
@@ -689,12 +689,12 @@ msgstr "Aktualizace dokončena."
 #: src/kiosvn/kiolistener.cpp:186
 #, kde-format
 msgid "Finished external at revision %1."
-msgstr ""
+msgstr "Dokončeno externě na revizi %1."
 
 #: src/kiosvn/kiolistener.cpp:188
 #, kde-format
 msgid "Finished external."
-msgstr ""
+msgstr "Dokončeno externě."
 
 #: src/kiosvn/kiolistener.cpp:198
 #, kde-format
@@ -729,7 +729,7 @@ msgstr "Přidávání %1."
 #: src/kiosvn/kiolistener.cpp:219
 #, kde-format
 msgid "Deleting %1."
-msgstr "Mažu %1."
+msgstr "Mazání %1."
 
 #: src/kiosvn/kiolistener.cpp:222
 #, kde-format
@@ -745,37 +745,37 @@ msgstr "Odesílají se data souborů "
 #: src/kiosvn/kiosvn.cpp:484
 #, kde-format
 msgid "Can only write on HEAD revision."
-msgstr ""
+msgstr "Lze zapisovat pouze do revize HEAD."
 
 #: src/kiosvn/kiosvn.cpp:331
 #, kde-format
 msgid "Renaming %1 to %2 successful"
-msgstr ""
+msgstr "Přejmenování %1 na %2 proběhlo úspěšně"
 
 #: src/kiosvn/kiosvn.cpp:363
 #, kde-format
 msgid "Overwriting existing items is disabled in settings."
-msgstr ""
+msgstr "V nastaveních je zakázáno přepisování stávajících položek."
 
 #: src/kiosvn/kiosvn.cpp:370
 #, kde-format
 msgid "Start checking out to temporary folder"
-msgstr ""
+msgstr "Začít načítat do dočasné složky"
 
 #: src/kiosvn/kiosvn.cpp:373
 #, kde-format
 msgid "Checking out %1"
-msgstr ""
+msgstr "Načítání %1"
 
 #: src/kiosvn/kiosvn.cpp:381
 #, kde-format
 msgid "Temporary checkout done."
-msgstr ""
+msgstr "Dočasné načtení hotovo."
 
 #: src/kiosvn/kiosvn.cpp:385
 #, kde-format
 msgid "Could not write to existing item."
-msgstr ""
+msgstr "Nelze zapisovat do existující položky."
 
 #: src/kiosvn/kiosvn.cpp:391
 #, kde-format
@@ -785,22 +785,22 @@ msgstr "Nelze otevřít dočasný soubor"
 #: src/kiosvn/kiosvn.cpp:412
 #, kde-format
 msgid "Could not retrieve data for write."
-msgstr ""
+msgstr "Nepodařilo se načíst data pro zápis."
 
 #: src/kiosvn/kiosvn.cpp:419
 #, kde-format
 msgid "Committing %1"
-msgstr "Odesílání commitu %1..."
+msgstr "Odesílání commitu %1"
 
 #: src/kiosvn/kiosvn.cpp:441
 #, kde-format
 msgid "Wrote %1 to repository"
-msgstr ""
+msgstr "%1 zapsáno do repozitáře"
 
 #: src/kiosvn/kiosvn.cpp:469
 #, kde-format
 msgid "Copied %1 to %2"
-msgstr ""
+msgstr "%1 zkopírováno do %2"
 
 #: src/kiosvn/kiosvn.cpp:788 src/svnfrontend/svnactions.cpp:1122
 #: src/svnfrontend/svnactions.cpp:2340
@@ -821,17 +821,17 @@ msgstr "Vymazat záznamy"
 #: src/ksvnwidgets/authdialogwidget.cpp:34
 #, kde-format
 msgid "Store password (into KDE Wallet)"
-msgstr ""
+msgstr "Uložit heslo (do KDE Wallet)"
 
 #: src/ksvnwidgets/authdialogwidget.cpp:35
 #, kde-format
 msgid "Store password (into Subversion' simple storage)"
-msgstr ""
+msgstr "Uložit heslo (do jednoduchého úložiště Subversion)"
 
 #: src/ksvnwidgets/authdialogwidget.cpp:37
 #, kde-format
 msgid "Enter authentication info for %1"
-msgstr ""
+msgstr "Zadejte přihlašovací údaje pro %1"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, AuthDialogWidget)
 #: src/ksvnwidgets/authdlg.ui:14
@@ -861,7 +861,7 @@ msgstr "Zpráva commitu"
 #: src/ksvnwidgets/commitmessage.ui:27
 #, kde-format
 msgid "Review affected items"
-msgstr ""
+msgstr "Zkontrolovat dotčené položky"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_SelectAllButton)
 #: src/ksvnwidgets/commitmessage.ui:63
@@ -886,6 +886,8 @@ msgstr "Skrýt nové položky"
 #, kde-format
 msgid "Mark all new e.g. not versioned items for add and commit."
 msgstr ""
+"Označit všechny nové položky (např. ty, které nemají verzi) pro přidání a "
+"odeslání commitu."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_MarkUnversioned)
 #: src/ksvnwidgets/commitmessage.ui:90
@@ -897,19 +899,19 @@ msgstr "Vybrat nové položky"
 #: src/ksvnwidgets/commitmessage.ui:97
 #, kde-format
 msgid "Unmark all unversioned items so they will be ignored."
-msgstr ""
+msgstr "Zrušit označení všech položek bez verzí, aby byly ignorovány."
 
 #. i18n: ectx: property (text), widget (QPushButton, m_UnmarkUnversioned)
 #: src/ksvnwidgets/commitmessage.ui:100
 #, kde-format
 msgid "Unselect new items"
-msgstr ""
+msgstr "Zrušit výběr nových položek"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_RevertItemButton)
 #: src/ksvnwidgets/commitmessage.ui:107
 #, kde-format
 msgid "Revert highlighted item"
-msgstr ""
+msgstr "Vrátit zvýrazněnou položku"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_RevertItemButton)
 #: src/ksvnwidgets/commitmessage.ui:110
@@ -921,31 +923,31 @@ msgstr "Vrátit položku"
 #: src/ksvnwidgets/commitmessage.ui:117
 #, kde-format
 msgid "Generates and display difference against repository of selected item"
-msgstr ""
+msgstr "Vygeneruje a zobrazí rozdíly vybrané položky oproti repozitáři"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DiffItem)
 #: src/ksvnwidgets/commitmessage.ui:120
 #, kde-format
 msgid "Diff item"
-msgstr ""
+msgstr "Diff položky"
 
 #. i18n: ectx: property (text), widget (QLabel, m_HeadLabel)
 #: src/ksvnwidgets/commitmessage.ui:152
 #, kde-format
 msgid "Enter a log message"
-msgstr ""
+msgstr "Zadejte zprávu záznamu"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_LogHistory)
 #: src/ksvnwidgets/commitmessage.ui:184
 #, kde-format
 msgid "Last used log messages"
-msgstr ""
+msgstr "Poslední použitá zpráva záznamu"
 
 #. i18n: ectx: property (text), widget (QLabel, m_LogLabel)
 #: src/ksvnwidgets/commitmessage.ui:199
 #, kde-format
 msgid "Or insert one of the last:"
-msgstr ""
+msgstr "Nebo vložte jednu z posledních:"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_insert_file_button)
 #: src/ksvnwidgets/commitmessage.ui:215
@@ -957,7 +959,7 @@ msgstr "Vložit textový soubor..."
 #: src/ksvnwidgets/commitmessage.ui:226
 #, kde-format
 msgid "If checked commit will not release locks."
-msgstr ""
+msgstr "Pokud je zaškrtnuto, příkaz commit neuvolní zámky."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_keepLocksButton)
 #: src/ksvnwidgets/commitmessage.ui:229
@@ -969,7 +971,7 @@ msgstr "Ponechat zámky"
 #, kde-format
 msgctxt "@title:window"
 msgid "Commit Log"
-msgstr ""
+msgstr "Záznam commitu"
 
 #: src/ksvnwidgets/commitmsg_impl.cpp:457
 #, kde-format
@@ -980,37 +982,37 @@ msgstr "Zobrazit nové položky"
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Text File to Insert"
-msgstr ""
+msgstr "Vyberte textový soubor k vložení"
 
 #: src/ksvnwidgets/commitmsg_impl.cpp:481
 #, kde-format
 msgid "Select text file to insert:"
-msgstr ""
+msgstr "Vyberte textový soubor k vložení:"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, DeleteForm)
 #: src/ksvnwidgets/deleteform.ui:14 src/svnfrontend/svnactions.cpp:1638
 #, kde-format
 msgid "Really delete these entries?"
-msgstr ""
+msgstr "Opravdu chcete tyto položky smazat?"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_forceDelete)
 #: src/ksvnwidgets/deleteform.ui:23
 #, kde-format
 msgid "Force delete of changed items"
-msgstr ""
+msgstr "Vynutit odstranění změněných položek"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_keepLocal)
 #: src/ksvnwidgets/deleteform.ui:30
 #, kde-format
 msgid "Keep local copies"
-msgstr ""
+msgstr "Zachovat místní kopie"
 
 #. i18n: ectx: property (toolTip), widget (QComboBox, m_DepthCombo)
 #. i18n: ectx: property (statusTip), widget (QComboBox, m_DepthCombo)
 #: src/ksvnwidgets/depthselector.ui:29 src/ksvnwidgets/depthselector.ui:32
 #, kde-format
 msgid "Select depth of operation"
-msgstr ""
+msgstr "Vyberte hloubku činnosti"
 
 #. i18n: ectx: property (whatsThis), widget (QComboBox, m_DepthCombo)
 #: src/ksvnwidgets/depthselector.ui:41
@@ -1031,35 +1033,50 @@ msgid ""
 "not already present; those subdirectories' this_dir entries will have depth-"
 "infinity.<br />Equivalent to the pre-1.5 default update behavior. </p>"
 msgstr ""
+"<p ><b>Typ hloubky</b>: </p>\n"
+"<p ><i>prázdná hloubka</i><br />\n"
+"Pouze pojmenovaný adresář, žádné položky. Aktualizace nezahrnou žádné "
+"soubory ani podadresáře, které dosud neexistují. </p>\n"
+"<p><i>Hloubka souborů</i><br />Složka a její podřízené soubory, ale nikoli "
+"podsložky. Aktualizace stáhnou všechny soubory, které dosud nejsou přítomny, "
+"ale nikoli podsložky. </p>\n"
+"<p><i>Bezprostřední hloubka</i><br />Složka a její položky. Aktualizace "
+"stáhnou všechny soubory nebo podsložky, které dosud nejsou přítomny; položky "
+"těchto podsložek budou mít prázdnou hloubku. </p>\n"
+"<p>\n"
+"<i>Nekonečná hloubka</i><br />Aktualizace stáhnou všechny soubory nebo "
+"podadresáře, které dosud neexistují; položky this_dir těchto podadresářů "
+"budou mít nekonečnou hloubku.<br />Odpovídá výchozímu chování aktualizace "
+"před verzí 1.5. </p>"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
 #: src/ksvnwidgets/depthselector.ui:45
 #, kde-format
 msgid "Empty Depth"
-msgstr ""
+msgstr "Prázdná hloubka"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
 #: src/ksvnwidgets/depthselector.ui:50
 #, kde-format
 msgid "Files Depth"
-msgstr ""
+msgstr "Hloubka souborů"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
 #: src/ksvnwidgets/depthselector.ui:55
 #, kde-format
 msgid "Immediate Depth"
-msgstr ""
+msgstr "Bezprostřední hloubka"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
 #: src/ksvnwidgets/depthselector.ui:60
 #, kde-format
 msgid "Infinity Depth (recurse)"
-msgstr ""
+msgstr "Nekonečná hloubka (rekurzivní)"
 
 #: src/ksvnwidgets/diffbrowser.cpp:51
 #, kde-format
 msgid "Ctrl-F for search, F3 or Shift-F3 for search again."
-msgstr ""
+msgstr "Ctrl-F pro vyhledávání, F3 nebo Shift-F3 pro opakované vyhledávání."
 
 #: src/ksvnwidgets/diffbrowser.cpp:53
 #, kde-format
@@ -1068,6 +1085,10 @@ msgid ""
 "Ctrl-F.</p><p>F3 for search forward again, Shift-F3 for search backward "
 "again.</p><p>You may save the (original) output with Ctrl-S.</p>"
 msgstr ""
+"<b>Zobrazit rozdíly mezi soubory</b><p>V textu můžete vyhledávat pomocí "
+"klávesové zkratky Ctrl-F.</p><p>Klávesou F3 můžete vyhledávat dopředu, "
+"klávesovou zkratkou Shift-F3 zpět.</p><p>Pomocí klávesové zkratky Ctrl-S "
+"můžete uložit (původní) výstup.</p>"
 
 #: src/ksvnwidgets/diffbrowser.cpp:89
 #, kde-format
@@ -1077,7 +1098,7 @@ msgstr "Uložit diff"
 #: src/ksvnwidgets/diffbrowser.cpp:89
 #, kde-format
 msgid "Patch file (*.diff *.patch)"
-msgstr "Soubor s patchem (*.diff *.patch)"
+msgstr "Soubor se záplatou (*.diff, *.patch)"
 
 #: src/ksvnwidgets/diffbrowser.cpp:172
 #, kde-format
@@ -1099,12 +1120,14 @@ msgid ""
 "Beginning of document reached.\n"
 "Continue from the end?"
 msgstr ""
+"Byl dosažen začátek dokumentu.\n"
+"Chcete pokračovat od konce?"
 
 #. i18n: ectx: property (text), widget (QLabel, m_Mainlabel)
 #: src/ksvnwidgets/encodingselector.ui:30
 #, kde-format
 msgid "Select encoding:"
-msgstr ""
+msgstr "Vyberte kódování:"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_encodingList)
 #: src/ksvnwidgets/encodingselector.ui:44
@@ -1148,7 +1171,7 @@ msgstr "Smazat"
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:47
 #, kde-format
 msgid "Modify (content or property)"
-msgstr ""
+msgstr "Změnit (obsah nebo vlastnost)"
 
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:51
 #: src/svnfrontend/svnactions.cpp:799
@@ -1159,7 +1182,7 @@ msgstr "Nahradit"
 #: src/ksvnwidgets/models/commitmodelhelper.cpp:55
 #, kde-format
 msgid "(Un)Lock"
-msgstr ""
+msgstr "Zamknout/Odemknout"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, RevertForm)
 #: src/ksvnwidgets/revertform.ui:14
@@ -1171,7 +1194,7 @@ msgstr "Vrátit položky"
 #: src/ksvnwidgets/revertform.ui:20
 #, kde-format
 msgid "Really revert these entries to pristine state?"
-msgstr ""
+msgstr "Opravdu chcete tyto položky vrátit do původního stavu?"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:33
 #, kde-format
@@ -1191,7 +1214,7 @@ msgstr "Odmítnout"
 #: src/ksvnwidgets/ssltrustprompt.cpp:46
 #, kde-format
 msgid "Error validating server certificate for '%1'"
-msgstr ""
+msgstr "Chyba při ověřování certifikátu serveru pro '%1'"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:71
 #, kde-format
@@ -1221,7 +1244,7 @@ msgstr "Platný do"
 #: src/ksvnwidgets/ssltrustprompt.cpp:83
 #, kde-format
 msgid "Issuer name"
-msgstr ""
+msgstr "Název vydavatele"
 
 #: src/ksvnwidgets/ssltrustprompt.cpp:84
 #, kde-format
@@ -1267,16 +1290,17 @@ msgstr "Christian Ehrlicher"
 #, kde-format
 msgid "Execute single Subversion command on specific revision(-range)"
 msgstr ""
+"Spustit jeden příkaz Subversion pro konkrétní revizi (nebo rozsah revizí)"
 
 #: src/main.cpp:49
 #, kde-format
 msgid "startrev[:endrev]"
-msgstr ""
+msgstr "startrev[:endrev]"
 
 #: src/main.cpp:50
 #, kde-format
 msgid "Ask for revision when executing single command"
-msgstr ""
+msgstr "Požádat o revizi při provádění jednotlivého příkazu"
 
 #: src/main.cpp:51
 #, kde-format
@@ -1286,17 +1310,17 @@ msgstr "Vynutit operaci"
 #: src/main.cpp:52
 #, kde-format
 msgid "Save output of Subversion command (eg \"cat\") into file <file>"
-msgstr ""
+msgstr "Uložit výstup příkazu Subversion (např. \"cat\") do souboru <file>"
 
 #: src/main.cpp:52
 #, kde-format
 msgid "<file>"
-msgstr "<soubor>"
+msgstr "<file>"
 
 #: src/main.cpp:53
 #, kde-format
 msgid "Limit log output to <number>"
-msgstr ""
+msgstr "Omezit výstup záznamu na <number>"
 
 #: src/main.cpp:53
 #, kde-format
@@ -1307,6 +1331,8 @@ msgstr "<number>"
 #, kde-format
 msgid "Execute Subversion command (\"exec help\" for more information)"
 msgstr ""
+"Spustit příkaz Subversion (další informace najdete pomocí příkazu \"exec help"
+"\")"
 
 #: src/main.cpp:55
 #, kde-format
@@ -1317,19 +1343,19 @@ msgstr "Dokument k otevření"
 #: src/settings/cmdexecsettings.ui:11
 #, kde-format
 msgid "Show a small window containing the log after command executed"
-msgstr ""
+msgstr "Zobrazit malé okno se záznamem po provedení příkazu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_cmdline_show_logwindow)
 #: src/settings/cmdexecsettings.ui:14
 #, kde-format
 msgid "Show log after executing a command"
-msgstr ""
+msgstr "Zobrazit záznam po provedení příkazu"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: src/settings/cmdexecsettings.ui:23
 #, kde-format
 msgid "Minimum log lines to show:"
-msgstr ""
+msgstr "Minimální počet řádků záznamu k zobrazení:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, kcfg_cmdline_log_minline)
 #: src/settings/cmdexecsettings.ui:33
@@ -1337,6 +1363,8 @@ msgstr ""
 msgid ""
 "The minimum a log output must contain before kdesvn shows a single log window"
 msgstr ""
+"Minimální obsah výstupu záznamu, který musí být k dispozici, aby kdesvn "
+"zobrazil jedno okno protokolu"
 
 #. i18n: ectx: property (specialValueText), widget (QSpinBox, kcfg_cmdline_log_minline)
 #: src/settings/cmdexecsettings.ui:39
@@ -1350,12 +1378,14 @@ msgstr "Žádné minimum"
 #, kde-format
 msgid "If set, kdesvn will not show a menu inside \"Action\" menu of Konqueror"
 msgstr ""
+"Je-li nastaveno, kdesvn nezobrazí nabídku v rámci nabídky \"Akce\" v "
+"Konqueroru"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_contextmenu)
 #: src/settings/cmdexecsettings.ui:54
 #, kde-format
 msgid "Do not display context menu in Konqueror"
-msgstr ""
+msgstr "Nezobrazovat kontextovou nabídku v Konqueroru"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
 #: src/settings/cmdexecsettings.ui:61
@@ -1364,30 +1394,32 @@ msgid ""
 "If set, kdesvn will not show some extra actions inside \"Action\" menu of "
 "Konqueror/Dolphin"
 msgstr ""
+"Je-li nastaveno, kdesvn nebude v nabídce \"Akce\" prohlížeče Konqueror/"
+"Dolphin zobrazovat některé doplňkové akce"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_no_konqueror_toplevelmenu)
 #: src/settings/cmdexecsettings.ui:64
 #, kde-format
 msgid "Do not display entries in toplevel action menu"
-msgstr ""
+msgstr "Nezobrazovat položky v hlavní nabídce akcí"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_kio_use_standard_logmsg)
 #: src/settings/cmdexecsettings.ui:71
 #, kde-format
 msgid "KIO operations use standard log message"
-msgstr ""
+msgstr "Operace KIO používají standardní zprávy záznamu"
 
 #. i18n: ectx: property (text), widget (QLabel, stdLogmsgLabel)
 #: src/settings/cmdexecsettings.ui:80
 #, kde-format
 msgid "Standard message:"
-msgstr ""
+msgstr "Standardní zpráva:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_kio_can_overwrite)
 #: src/settings/cmdexecsettings.ui:98
 #, kde-format
 msgid "Can KIO overwrite existing files?"
-msgstr ""
+msgstr "Může KIO přepsat stávající soubory?"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_kio_can_overwrite)
 #: src/settings/cmdexecsettings.ui:103
@@ -1399,12 +1431,18 @@ msgid ""
 "\n"
 "Use this only if you are sure what you are doing."
 msgstr ""
+"Je-li tento příznak nastaven, budete mít k dispozici jednoduchou podporu "
+"zápisu do stávajících položek. Můžete například otevřít soubory v editoru a "
+"uložit je přímo, aniž byste je předtím museli odebrat (kdesvn to provede na "
+"pozadí).\n"
+"\n"
+"Tuto funkci používejte pouze v případě, že si jste jisti, co děláte."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_kio_can_overwrite)
 #: src/settings/cmdexecsettings.ui:106
 #, kde-format
 msgid "KIO can overwrite"
-msgstr ""
+msgstr "KIO může přepisovat"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_display_dockmsg)
 #: src/settings/cmdexecsettings.ui:113
@@ -1412,6 +1450,8 @@ msgstr ""
 msgid ""
 "If set KIO shows in KDE's Plasma detailed information about current operation"
 msgstr ""
+"Je-li nastaveno, zobrazuje KIO v prostředí KDE Plasma podrobné informace o "
+"aktuální operaci"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_dockmsg)
 #: src/settings/cmdexecsettings.ui:117
@@ -1422,44 +1462,47 @@ msgid ""
 "Error messages of KIO will always displayed and can <i>not</i> switched off."
 "</p>"
 msgstr ""
+"<p>Je-li nastaveno, KIO kdesvn zobrazuje podrobné zprávy v ovládacím panelu "
+"KDE Plasma.<br/>\n"
+"Chybové zprávy KIO se vždy zobrazují a nelze je <i>vypnout</i>.</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_dockmsg)
 #: src/settings/cmdexecsettings.ui:120
 #, kde-format
 msgid "KIO shows progress messages"
-msgstr ""
+msgstr "KIO zobrazuje zprávy o průběhu"
 
 #: src/settings/cmdexecsettings_impl.cpp:27
 #, kde-format
 msgid " line(s)"
-msgstr ""
+msgstr " řádků"
 
 #. i18n: ectx: label, entry, group (general_items)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_content)
 #: src/settings/diffmergesettings.ui:11 src/settings/kdesvn_part.kcfg:29
 #, kde-format
 msgid "Diff ignores content type"
-msgstr ""
+msgstr "Diff ignoruje typ obsahu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_tree_diff_rec)
 #: src/settings/diffmergesettings.ui:18
 #: src/svnfrontend/graphtree/revgraphview.cpp:855
 #, kde-format
 msgid "Diff in revision tree is recursive"
-msgstr ""
+msgstr "Diff ve stromu revizí je rekurzivní"
 
 #. i18n: ectx: label, entry, group (general_items)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_spaces)
 #: src/settings/diffmergesettings.ui:25 src/settings/kdesvn_part.kcfg:33
 #, kde-format
 msgid "Diff ignores white space changes"
-msgstr ""
+msgstr "Diff ignoruje změny v mezerách"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_ignore_all_white_spaces)
 #: src/settings/diffmergesettings.ui:32
 #, kde-format
 msgid "Diff ignores all white spaces"
-msgstr ""
+msgstr "Diff ignoruje všechny mezery"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_external_diff)
 #: src/settings/diffmergesettings.ui:39
@@ -1468,12 +1511,14 @@ msgid ""
 "If kdesvn should use an external diff display and/or generator. If not "
 "checked use internal display."
 msgstr ""
+"Zda má kdesvn používat externí nástroj pro zobrazení a/nebo generování "
+"rozdílů. Pokud není zaškrtnuto, použije se interní zobrazení."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_external_diff)
 #: src/settings/diffmergesettings.ui:42
 #, kde-format
 msgid "Use external diff display"
-msgstr ""
+msgstr "Použít zobrazení externího nástroje diff"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_extern_merge_default)
 #: src/settings/diffmergesettings.ui:49
@@ -1481,44 +1526,46 @@ msgstr ""
 msgid ""
 "Set if merge with external program is preferred and not Subversion's merge"
 msgstr ""
+"Nastavte tuto možnost, pokud dáváte přednost sloučení pomocí externího "
+"programu namísto sloučení v Subversion"
 
 #. i18n: ectx: label, entry (extern_merge_default), group (diffmerge_items)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_extern_merge_default)
 #: src/settings/diffmergesettings.ui:52 src/settings/kdesvn_part.kcfg:158
 #, kde-format
 msgid "Prefer external merge program"
-msgstr ""
+msgstr "Upřednostnit externí program pro sloučení"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_gitformat_default)
 #: src/settings/diffmergesettings.ui:59
 #, kde-format
 msgid "Use Git diff format"
-msgstr "Použít pro rozdíly formát Git"
+msgstr "Pro rozdíly použít formát Git"
 
 #. i18n: ectx: label, entry, group (general_items)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_diff_copies_as_add)
 #: src/settings/diffmergesettings.ui:66 src/settings/kdesvn_part.kcfg:45
 #, kde-format
 msgid "Show copies as add"
-msgstr ""
+msgstr "Zobrazit kopie jako přidané"
 
 #. i18n: ectx: property (text), widget (QLabel, resolveLabel)
 #: src/settings/diffmergesettings.ui:77
 #, kde-format
 msgid "Conflict resolver program:"
-msgstr ""
+msgstr "Program pro řešení konfliktů:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: src/settings/diffmergesettings.ui:90
 #, kde-format
 msgid "External merge program:"
-msgstr ""
+msgstr "Externí program pro slučování:"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, kcfg_conflict_resolver)
 #: src/settings/diffmergesettings.ui:115
 #, kde-format
 msgid "Setup an external program for conflict resolving"
-msgstr ""
+msgstr "Nastavení externího programu pro řešení konfliktů"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_conflict_resolver)
 #: src/settings/diffmergesettings.ui:134
@@ -1544,18 +1591,38 @@ msgid ""
 "Default: <tt>kdiff3 %o %m %n -o %t</tt>\n"
 "</p>"
 msgstr ""
+"<p>\n"
+"Zadejte, jakým způsobem má kdesvn spouštět program pro řešení konfliktů. "
+"Formát je následující:\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;program&gt; &lt;volbyprogramu&gt;</tt></b>\n"
+"</p>\n"
+"<p>\n"
+"Volby programu mohou obsahovat zástupné symboly pro nahrazení názvy "
+"souborů.\n"
+"</p>\n"
+"Nahrazení znamená:<br>\n"
+"<b><tt>%o</tt></b> Stará verze<br>\n"
+"<b><tt>%m</tt></b> Moje nebo lokální upravená verze<br>\n"
+"<b><tt>%n</tt></b> Nejnovější verze<br>\n"
+"<b><tt>%t</tt></b> Cíl pro uložení; kdesvn pro něj použije původní název "
+"souboru.\n"
+"</p>\n"
+"<p>\n"
+"Výchozí nastavení: <tt>kdiff3 %o %m %n -o %t</tt>\n"
+"</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, mdiff_display_label)
 #: src/settings/diffmergesettings.ui:141
 #, kde-format
 msgid "External diff display:"
-msgstr ""
+msgstr "Zobrazení externího nástroje diff:"
 
 #. i18n: ectx: property (toolTip), widget (KLineEdit, kcfg_external_merge_program)
 #: src/settings/diffmergesettings.ui:154
 #, kde-format
 msgid "Setup an external program for merging"
-msgstr ""
+msgstr "Nastavení externího programu pro slučování"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_external_merge_program)
 #: src/settings/diffmergesettings.ui:166
@@ -1573,6 +1640,18 @@ msgid ""
 "<b><tt>%t</tt></b> Local target for merge.\n"
 "</p>"
 msgstr ""
+"<p>\n"
+"Zadejte, jak má kdesvn volat externí program pro slučování. Formát je "
+"následující:\n"
+"<p align=\"center\">\n"
+"<b><tt>&lt;program&gt; &lt;volbyprogramu&gt; %s1 %s2 %t</tt></b>\n"
+"</p>\n"
+"Tyto zástupné znaky znamenají:<br>\n"
+"<b><tt>%s1</tt></b> První zdroj pro sloučení<br>\n"
+"<b><tt>%s2</tt></b> Druhý zdroj pro sloučení, pokud nebyl nastaven stejně "
+"jako první zdroj, ale jako jiná revize<br>\n"
+"<b><tt>%t</tt></b> Lokální cíl pro sloučení.\n"
+"</p>"
 
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, kcfg_external_diff_display)
 #: src/settings/diffmergesettings.ui:191
@@ -1604,6 +1683,30 @@ msgid ""
 "really slow.\n"
 "</p>"
 msgstr ""
+"<p align=\"left\">\n"
+"Zadejte externí program v následujícím formátu\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;parametr&gt; %f</tt>\n"
+"</p>\n"
+"nebo\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;parametr&gt;</tt>\n"
+"</p>\n"
+"nebo\n"
+"<p align=\"center\">\n"
+"<tt>&lt;program&gt; &lt;parametr&gt; %s1 %s2</tt>\n"
+"</p>\n"
+"<br>\n"
+"Pokud se použije první nebo druhá forma, svn sám vygeneruje rozdíl. %f bude "
+"nahrazeno dočasným názvem souboru. Pokud %f není zadáno,\n"
+"měl by program zobrazující rozdíly umět číst data ze standardního vstupu.\n"
+"<br>\n"
+"Jsou-li zadány %s1 a %s2, kdesvn nechá toto zobrazení vytvořit diff. Za "
+"tímto účelem provede dočasný export nebo get (je-li to nutné) a vyplní "
+"parametry správnými hodnotami. %s1 bude vyplněno obsahem počáteční revize, "
+"%s2 obsahem konečné revize. U velkých rekurzivních rozdílů to může být velmi "
+"pomalé.\n"
+"</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, m_extern_hint)
 #: src/settings/diffmergesettings.ui:200
@@ -1615,67 +1718,67 @@ msgstr "podrobnosti najdete v \"Co je toto?\""
 #: src/settings/dispcolor_settings.ui:6
 #, kde-format
 msgid "ColorSettings"
-msgstr ""
+msgstr "Nastavení barev"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_colored_state)
 #: src/settings/dispcolor_settings.ui:14
 #, kde-format
 msgid "Mark changed and locked items colored"
-msgstr ""
+msgstr "Označit barevně změněné a uzamčené položky"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel5)
 #: src/settings/dispcolor_settings.ui:56
 #, kde-format
 msgid "Locked items:"
-msgstr "Zamknuté položky:"
+msgstr "Uzamčené položky:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2_2)
 #: src/settings/dispcolor_settings.ui:76
 #, kde-format
 msgid "Not versioned items:"
-msgstr ""
+msgstr "Položky bez verzí:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: src/settings/dispcolor_settings.ui:89
 #, kde-format
 msgid "Remote changed items:"
-msgstr ""
+msgstr "Dálkově změněné položky:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: src/settings/dispcolor_settings.ui:102
 #, kde-format
 msgid "Added items:"
-msgstr ""
+msgstr "Přidané položky:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: src/settings/dispcolor_settings.ui:115
 #, kde-format
 msgid "Deleted items:"
-msgstr ""
+msgstr "Smazané položky:"
 
 #. i18n: ectx: property (text), widget (QLabel, Conflicted_items_label)
 #: src/settings/dispcolor_settings.ui:156
 #, kde-format
 msgid "Conflicted items:"
-msgstr ""
+msgstr "Konfliktní položky:"
 
 #. i18n: ectx: property (text), widget (QLabel, Missed_items_label)
 #: src/settings/dispcolor_settings.ui:169
 #, kde-format
 msgid "Missed items:"
-msgstr ""
+msgstr "Chybějící položky:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: src/settings/dispcolor_settings.ui:182
 #, kde-format
 msgid "Local changed items:"
-msgstr ""
+msgstr "Lokálně změněné položky:"
 
 #. i18n: ectx: property (text), widget (QLabel, Need_lock_label_2)
 #: src/settings/dispcolor_settings.ui:195
 #, kde-format
 msgid "Item needs lock:"
-msgstr ""
+msgstr "Položka vyžadující uzamčení:"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DisplaySettings)
 #: src/settings/display_settings.ui:6
@@ -1687,13 +1790,13 @@ msgstr "Nastavení"
 #: src/settings/display_settings.ui:14
 #, kde-format
 msgid "Size of Listviewicons"
-msgstr ""
+msgstr "Velikost ikon v zobrazení seznamu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_display_overlays)
 #: src/settings/display_settings.ui:24
 #, kde-format
 msgid "Mark Subversion states with an overlayed icon"
-msgstr ""
+msgstr "Označit stavy Subversion pomocí překryvné ikony"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_overlays)
 #: src/settings/display_settings.ui:30
@@ -1705,24 +1808,31 @@ msgid ""
 "for updates on open\" in Subversion-Dialog.\n"
 "</p>"
 msgstr ""
+"<p align=\"left\">\n"
+"Položky, které se nenacházejí v normálním stavu, označit překryvnou ikonou. "
+"Pokud chcete\n"
+"zjistit, u kterých položek jsou v úložišti k dispozici novější verze, možná "
+"budete muset v dialogovém okně Subversion nastavit možnost \"Zkontrolovat "
+"aktualizace při otevření\".\n"
+"</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_display_overlays)
 #: src/settings/display_settings.ui:33
 #, kde-format
 msgid "Mark item status with icon overlay"
-msgstr ""
+msgstr "Označit stav položky pomocí překryvné ikony"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_case_sensitive_sort)
 #: src/settings/display_settings.ui:40
 #, kde-format
 msgid "Items sorting order is case sensitive"
-msgstr ""
+msgstr "Při řazení položek rozlišovat velká a malá písmena"
 
 #. i18n: ectx: property (text), widget (QLabel, m_MaxLogLabel)
 #: src/settings/display_settings.ui:47
 #, kde-format
 msgid "Maximum log messages in history:"
-msgstr ""
+msgstr "Maximální počet zpráv záznamu v historii:"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_display_file_tips)
 #: src/settings/display_settings.ui:67
@@ -1744,217 +1854,220 @@ msgstr "Zobrazit informace o souboru"
 #: src/settings/display_settings.ui:77
 #, kde-format
 msgid "Display colored annotate"
-msgstr ""
+msgstr "Zobrazit barevné poznámky"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_show_navigation_panel)
 #: src/settings/display_settings.ui:84
 #, kde-format
 msgid "Use navigation panel"
-msgstr ""
+msgstr "Použít navigační panel"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:9
 #, kde-format
 msgid "Set if items sortorder should be case sensitive or not"
 msgstr ""
+"Nastavit, zda se při řazení položek mají rozlišovat velká a malá písmena"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:13
 #, kde-format
 msgid "Size of the icons"
-msgstr ""
+msgstr "Velikost ikon"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:17
 #, kde-format
 msgid "Show file information in tooltip"
-msgstr ""
+msgstr "Zobrazit informace o souboru v popisku"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:21
 #, kde-format
 msgid "Use an external program for diff viewing/generating"
-msgstr ""
+msgstr "K prohlížení a generování rozdílů použít externí program"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:25
 #, kde-format
 msgid "Use external program for diff viewing"
-msgstr ""
+msgstr "Použít externí program pro prohlížení rozdílů"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:37
 #, kde-format
 msgid "Diff ignores all white space"
-msgstr ""
+msgstr "Diff ignoruje všechny mezery"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:41
 #, kde-format
 msgid "Show diff in Git format"
-msgstr ""
+msgstr "Zobrazit rozdíly ve formátu Git"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:49
 #, kde-format
 msgid "Maximum number of log messages"
-msgstr ""
+msgstr "Maximální počet zpráv záznamů"
 
 #. i18n: ectx: label, entry, group (general_items)
 #: src/settings/kdesvn_part.kcfg:53
 #, kde-format
 msgid "Display colored blame lines"
-msgstr ""
+msgstr "Zobrazit barevně řádky s označením odpovědnosti"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:68
 #, kde-format
 msgid "Display icon overlays"
-msgstr ""
+msgstr "Zobrazit překryvné ikony"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:72
 #, kde-format
 msgid "Get item information recursively"
-msgstr ""
+msgstr "Získat informace o položkách rekurzivně"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_review_commit)
 #: src/settings/kdesvn_part.kcfg:76 src/settings/subversion_settings.ui:174
 #, kde-format
 msgid "Review items before commit"
-msgstr ""
+msgstr "Zkontrolovat položky před odesláním commitu"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:88
 #, kde-format
 msgid "Hide versioned unchanged files"
-msgstr ""
+msgstr "Skrýt nezměněné soubory s verzí"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_follows_nodes)
 #: src/settings/kdesvn_part.kcfg:92 src/settings/subversion_settings.ui:145
 #, kde-format
 msgid "Log follows node changes"
-msgstr ""
+msgstr "Záznam sleduje změny uzlů"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_always_list_changed_files)
 #: src/settings/kdesvn_part.kcfg:96 src/settings/subversion_settings.ui:161
 #, kde-format
 msgid "Log always reads list of changed files"
-msgstr ""
+msgstr "Záznam vždy obsahuje seznam změněných souborů"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:100
 #, kde-format
 msgid "Start check for updates when open working copy"
-msgstr ""
+msgstr "Zkontrolovat aktualizace při otevření pracovní kopie"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:104
 #, kde-format
 msgid "Start caching latest logs on open or commit"
 msgstr ""
+"Začít ukládat nejnovější záznamy do mezipaměti při otevření nebo potvrzení "
+"změn"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:108
 #, kde-format
 msgid "Get detailed information when making a remote listing"
-msgstr ""
+msgstr "Získat podrobné informace při vytváření vzdáleného seznamu"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:112
 #, kde-format
 msgid "Get properties on selected item on networked protocols"
-msgstr ""
+msgstr "Získat vlastnosti vybrané položky v síťových protokolech"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:116
 #, kde-format
 msgid "Use properties like bugtraq:url on repository listings"
-msgstr ""
+msgstr "V seznamech repozitářů používat vlastnosti jako bugtraq:url"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:120
 #, kde-format
 msgid "Check for property svn:needs-lock on listings"
-msgstr ""
+msgstr "Zkontrolovat, zda položky obsahují vlastnost svn:needs-lock"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/kdesvn_part.kcfg:124 src/settings/subversion_settings.ui:107
 #, kde-format
 msgid "Store passwords for remote connections"
-msgstr ""
+msgstr "Uložit hesla pro vzdálená připojení"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:128
 #, kde-format
 msgid "Store passwords in KDE Wallet instead of Subversion' storage"
-msgstr ""
+msgstr "Ukládat hesla do KDE Wallet namísto úložiště Subversion"
 
 #. i18n: ectx: label, entry, group (subversion)
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_use_password_cache)
 #: src/settings/kdesvn_part.kcfg:132 src/settings/subversion_settings.ui:138
 #, kde-format
 msgid "Use internal password cache"
-msgstr ""
+msgstr "Použít interní mezipaměť hesel"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:136
 #, kde-format
 msgid "Is networking enabled"
-msgstr ""
+msgstr "Je povoleno připojení"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:140
 #, kde-format
 msgid "Local add results in modification instead of conflicts"
-msgstr ""
+msgstr "Lokální přidání vede k úpravě namísto konfliktu"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:144
 #, kde-format
 msgid "create any non-existent parent at depth=empty"
-msgstr ""
+msgstr "vytvořit jakýkoli neexistující nadřazený prvek na úrovni depth=empty"
 
 #. i18n: ectx: label, entry, group (diffmerge_items)
 #: src/settings/kdesvn_part.kcfg:150
 #, kde-format
 msgid "Which program to use for external merges"
-msgstr ""
+msgstr "Který program použít pro externí slučování"
 
 #. i18n: ectx: label, entry, group (diffmerge_items)
 #: src/settings/kdesvn_part.kcfg:154
 #, kde-format
 msgid "Which program for resolving conflicts"
-msgstr ""
+msgstr "Který program použít k řešení konfliktů"
 
 #. i18n: ectx: label, entry, group (display)
 #: src/settings/kdesvn_part.kcfg:164
 #, kde-format
 msgid "Display other than normal states colored"
-msgstr ""
+msgstr "Zobrazit jiné než normální stavy barevně"
 
 #. i18n: ectx: label, entry, group (blame_dlg)
 #: src/settings/kdesvn_part.kcfg:197
 #, kde-format
 msgid "Locale for blame display"
-msgstr ""
+msgstr "Národní nastavení pro zobrazení odpovědnosti"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:209
 #, kde-format
 msgid "Check status of log cache when starting revision tree"
-msgstr ""
+msgstr "Zkontrolovat stav mezipaměti záznamu při spuštění stromu revizí"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/settings/kdesvn_part.kcfg:213 src/settings/revisiontree_settings.ui:129
 #, kde-format
 msgid "Direction of revision tree"
-msgstr ""
+msgstr "Směr stromu revizí"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:217
@@ -1990,55 +2103,56 @@ msgstr "Barva pro změněné položky"
 #: src/settings/kdesvn_part.kcfg:237
 #, kde-format
 msgid "Height of detail view in tree widget"
-msgstr ""
+msgstr "Výška zobrazení detailů ve widgetu stromu"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:241
 #, kde-format
 msgid "Diffs from revision tree are recursive"
-msgstr ""
+msgstr "Rozdíly ze stromu revizí jsou rekurzivní"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:247
 #, kde-format
 msgid "Should Konqueror not display context menus for kdesvn?"
-msgstr ""
+msgstr "Neměl by Konqueror zobrazovat kontextové nabídky pro kdesvn?"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:251
 #, kde-format
 msgid "Should Konqueror not display kdesvn entries in main action menu?"
-msgstr ""
+msgstr "Neměl by Konqueror zobrazovat položky kdesvn v hlavní nabídce akcí?"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:255
 #, kde-format
 msgid "Show a small log window after executing a command."
-msgstr ""
+msgstr "Po provedení příkazu zobrazit malé okno se záznamem."
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:259
 #, kde-format
 msgid "Log must contain at least lines to show"
-msgstr ""
+msgstr "Záznam musí obsahovat alespoň řádky, aby se zobrazil"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:263
 #, kde-format
 msgid "KIO::svn operations use a standard log message"
-msgstr ""
+msgstr "Operace KIO::svn používají standardní zprávu záznamu"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:267
 #, kde-format
 msgid "The standard log message to use with KIO if not asking for it."
 msgstr ""
+"Standardní zpráva záznamu, která se má použít v KIO, pokud není zadána jiná."
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:271
 #, kde-format
 msgid "Support overwrite for KIO module"
-msgstr ""
+msgstr "Podpora přepisování pro modul KIO"
 
 #. i18n: ectx: label, entry, group (cmdline)
 #: src/settings/kdesvn_part.kcfg:275

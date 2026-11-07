@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-11-06 00:12+0100\n"
+"PO-Revision-Date: 2026-11-07 00:46+0100\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -144,7 +144,7 @@ msgstr "Sloučit..."
 #: src/fileitemactions/kdesvnactionsplugin.cpp:105
 #, kde-format
 msgid "Blame..."
-msgstr "Blame..."
+msgstr "Autor a revize..."
 
 #: src/fileitemactions/kdesvnactionsplugin.cpp:108
 #, kde-format
@@ -1915,7 +1915,7 @@ msgstr "Maximální počet zpráv záznamů"
 #: src/settings/kdesvn_part.kcfg:53
 #, kde-format
 msgid "Display colored blame lines"
-msgstr "Zobrazit barevně řádky s označením odpovědnosti"
+msgstr "Zobrazit barevně řádky s označením autora a revize"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:68
@@ -2054,7 +2054,7 @@ msgstr "Zobrazit jiné než normální stavy barevně"
 #: src/settings/kdesvn_part.kcfg:197
 #, kde-format
 msgid "Locale for blame display"
-msgstr "Národní nastavení pro zobrazení odpovědnosti"
+msgstr "Národní nastavení pro zobrazení autora a revize"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #: src/settings/kdesvn_part.kcfg:209
@@ -2158,7 +2158,7 @@ msgstr "Podpora přepisování pro modul KIO"
 #: src/settings/kdesvn_part.kcfg:275
 #, kde-format
 msgid "Print progress messages in KDE dock area"
-msgstr ""
+msgstr "Zobrazovat hlášení o průběhu v oblasti doku v KDE"
 
 #. i18n: ectx: whatsthis, entry, group (internals)
 #: src/settings/kdesvn_part.kcfg:294
@@ -2167,12 +2167,14 @@ msgid ""
 "This value holds for log dialog which kind of log is used, it is internal "
 "only."
 msgstr ""
+"Tato hodnota se vztahuje na dialogové okno pro nastavení záznamu, které "
+"určuje, jaký typ záznamu se použije; slouží pouze pro interní účely."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_modified)
 #: src/settings/polling_settings.ui:11
 #, kde-format
 msgid "Check modified items every"
-msgstr ""
+msgstr "Zkontrolovat změněné položky každých"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -2188,12 +2190,14 @@ msgid ""
 "If set check for updates on working copy when network is enabled on regular "
 "base"
 msgstr ""
+"Pokud je tato možnost nastavena, bude se pravidelně kontrolovat, zda jsou k "
+"dispozici aktualizace v pracovní kopii, pokud je zapnuto síťové připojení"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_poll_updates)
 #: src/settings/polling_settings.ui:38
 #, kde-format
 msgid "Check for updated items every"
-msgstr ""
+msgstr "Zkontrolovat, zda jsou k dispozici nové položky každých"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_tree_direction)
 #: src/settings/revisiontree_settings.ui:28
@@ -2254,6 +2258,7 @@ msgstr "Barva pro smazané položky:"
 #, kde-format
 msgid "Should kdesvn check content of log cache before starting the tree"
 msgstr ""
+"Měl by kdesvn před spuštěním stromu zkontrolovat obsah mezipaměti záznamů"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_fill_cache_on_tree)
 #: src/settings/revisiontree_settings.ui:180
@@ -2264,42 +2269,54 @@ msgid ""
 "\n"
 "But this may slow down tree generation so it is disabled by default."
 msgstr ""
+"Při spuštění generování stromu a čtení dat z mezipaměti záznamu může kdesvn "
+"zkontrolovat, zda v úložišti nejsou novější položky, pokud je povoleno "
+"síťové připojení. \n"
+"\n"
+"To však může zpomalit generování stromu, a proto je tato funkce ve výchozím "
+"nastavení vypnutá."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_fill_cache_on_tree)
 #: src/settings/revisiontree_settings.ui:183
 #, kde-format
 msgid "Check log cache fill before reading tree"
-msgstr ""
+msgstr "Před čtením stromu zkontrolovat zaplnění mezipaměti záznamu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_start_updates_check_on_open)
 #: src/settings/subversion_settings.ui:14
 #, kde-format
 msgid "Select if kdesvn should check for updates when open a working copy"
 msgstr ""
+"Zvolit, zda má kdesvn při otevření pracovní kopie kontrolovat dostupnost "
+"aktualizací"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_start_updates_check_on_open)
 #: src/settings/subversion_settings.ui:17
 #, kde-format
 msgid "Start check for updates when open a working copy"
-msgstr ""
+msgstr "Při otevření pracovní kopie spustit kontrolu aktualizací"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:33
 #, kde-format
 msgid "Start refreshing the log cache for repository when networking enabled"
 msgstr ""
+"Začít aktualizovat mezipaměť záznamů pro repozitář, pokud je povoleno síťové "
+"připojení"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:36
 #, kde-format
 msgid "Start fill log cache on open"
-msgstr ""
+msgstr "Spustit ukládání do mezipaměti záznamu při otevření"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:43
 #, kde-format
 msgid "When listing on working copies kdesvn may check for this property"
 msgstr ""
+"Při přidávání položek do pracovních kopií může kdesvn tuto vlastnost "
+"zkontrolovat"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:46
@@ -2310,19 +2327,24 @@ msgid ""
 "updating may get slow. Therefore, you should only switch on if you have "
 "repositories containing many such entries."
 msgstr ""
+"Při zobrazování seznamu v pracovních kopiích může kdesvn kontrolovat "
+"vlastnost <tt>svn:needs-lock</tt>.<br>U složek obsahujících velké množství "
+"položek však může být tento proces zobrazení/aktualizace pomalý. Proto byste "
+"tuto funkci měli zapnout pouze v případě, že máte repozitáře obsahující "
+"mnoho takových záznamů."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:49
 #, kde-format
 msgid "Check if items have \"svn:needs-lock\" property set"
-msgstr ""
+msgstr "Zkontrolovat, zda mají položky nastavenou vlastnost \"svn:needs-lock\""
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:56
 #, kde-format
 msgid ""
 "Whether to retrieve details about items when making listing on repositories"
-msgstr ""
+msgstr "Zda při vytváření výpisu v repozitářích načíst podrobnosti o položkách"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:61
@@ -2335,12 +2357,17 @@ msgid ""
 "<p align=\"left\"><i>Be careful: This may let listings become REAL slow.</"
 "i></p>"
 msgstr ""
+"<p align=\"left\">Je-li tato volba zaškrtnuta, program kdesvn při vytváření "
+"výpisu souborů ve vzdálených repozitářích načte podrobnější informace o "
+"jednotlivých položkách, takže v přehledu uvidíte i vzdálené zámky.\n"
+"</p>\n"
+"<p align=\"left\"><i>Pozor: Výpisy se tím mohou výrazně zpomalit.</i></p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_details_on_remote_listing)
 #: src/settings/subversion_settings.ui:64
 #, kde-format
 msgid "Get file details while remote listing"
-msgstr ""
+msgstr "Získání podrobností o souborech při vzdáleném výpisu"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_info_recursive)
 #: src/settings/subversion_settings.ui:74
@@ -2352,7 +2379,7 @@ msgstr "Získat informace o položce rekurzivně"
 #: src/settings/subversion_settings.ui:84
 #, kde-format
 msgid "Should kdesvn retrieve properties on selected item in repositories"
-msgstr ""
+msgstr "Má kdesvn načíst vlastnosti vybrané položky v repozitářích"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:88
@@ -2364,18 +2391,24 @@ msgid ""
 "get very slow. Thus, if you have slow network connections or when browsing "
 "hangs often you should deactivate it."
 msgstr ""
+"Při procházení může kdesvn zkusit zobrazit vlastnosti vybrané položky pod "
+"seznamem položek. \n"
+"U síťových úložišť (tj. těch, která nejsou otevřena prostřednictvím "
+"protokolu file://) může být tento proces velmi pomalý. Pokud tedy máte "
+"pomalé síťové připojení nebo se procházení často zasekává, měli byste tuto "
+"funkci deaktivovat."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_properties_on_remote_items)
 #: src/settings/subversion_settings.ui:91
 #, kde-format
 msgid "Always get properties on networked repositories"
-msgstr ""
+msgstr "Vždy načítat vlastnosti ze síťových úložišť"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:101
 #, kde-format
 msgid "Should Subversion store passwords by default"
-msgstr ""
+msgstr "Měl by Subversion ve výchozím nastavení ukládat hesla"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:104
@@ -2387,13 +2420,18 @@ msgid ""
 "you may select for single non critical accounts inside the authentication "
 "dialog."
 msgstr ""
+"Ukládání hesel často představuje bezpečnostní riziko. Samotný Kdesvn žádná "
+"hesla neukládá, ale Subversion je ukládá ve své konfigurační oblasti. Pokud "
+"je tato oblast přístupná ostatním uživatelům, neměli byste ji nastavovat, "
+"ale v dialogovém okně pro ověřování můžete vybrat jednotlivé účty, které "
+"nejsou kriticky důležité."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_passwords_in_wallet)
 #: src/settings/subversion_settings.ui:117
 #, kde-format
 msgid ""
 "When saving passwords, do it into KDE Wallet instead of Subversions storage?"
-msgstr ""
+msgstr "Ukládat hesla raději do KDE Wallet než do úložiště Subversion?"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_passwords_in_wallet)
 #: src/settings/subversion_settings.ui:122
@@ -2410,24 +2448,34 @@ msgid ""
 "like Subversion does but put it into an encrypted storage like KDE Wallet or "
 "do not save passwords.</p>"
 msgstr ""
+"<p>Uvádí, zda by se hesla nastavená v kdesvn měla ukládat do KDE Wallet "
+"namísto prostého uložení v čistém textu, jak to dělá Subversion.</p>\n"
+"<p>Toto řešení by bylo o něco bezpečnější, protože KDE Wallet je (většinou) "
+"šifrováno heslem. Na druhou stranu budete muset hesla zadávat znovu v jiných "
+"klientech Subversion, které nemají přístup ke KDE Wallet (např. v samotném "
+"příkazovém řádku svn, v rapidsvn atd.).</p>\n"
+"<p>Pokud máte úložiště HOME, tj. konfigurační složku Subversion, na síťovém "
+"disku, měli byste se vážně zamyslet nad tím, zda hesla neukládat do souboru "
+"v prostém textu, jak to dělá Subversion, ale uložit je do šifrovaného "
+"úložiště, jako je KDE Wallet, nebo hesla neukládat vůbec.</p>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_passwords_in_wallet)
 #: src/settings/subversion_settings.ui:125
 #, kde-format
 msgid "Store passwords into KDE Wallet"
-msgstr ""
+msgstr "Uložit hesla do KDE Wallet"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_use_password_cache)
 #: src/settings/subversion_settings.ui:135
 #, kde-format
 msgid "Use an internal password cache"
-msgstr ""
+msgstr "Použít interní mezipaměť hesel"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_always_list_changed_files)
 #: src/settings/subversion_settings.ui:155
 #, kde-format
 msgid "Read detailed change lists"
-msgstr ""
+msgstr "Načíst podrobné seznamy změn"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_log_always_list_changed_files)
 #: src/settings/subversion_settings.ui:158
@@ -2437,24 +2485,28 @@ msgid ""
 "But if this feature is switched off, kdesvn may fail generating differences "
 "between node changes from within the log viewer."
 msgstr ""
+"Načítání seznamů změněných souborů může někdy proces trochu zpomalit. Pokud "
+"je však tato funkce vypnutá, může kdesvn selhat při generování rozdílů mezi "
+"změnami uzlů přímo v prohlížeči záznamu."
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_review_commit)
 #: src/settings/subversion_settings.ui:171
 #, kde-format
 msgid "List items next commit will send or not"
-msgstr ""
+msgstr "Seznam položek, které budou nebo nebudou odeslány v příštím commitu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:184
 #, kde-format
 msgid "Should unversioned items be displayed in commit dialog or not."
 msgstr ""
+"Zobrazovat položky bez verzí v dialogovém okně pro potvrzení změn, či nikoli."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_commit_hide_new)
 #: src/settings/subversion_settings.ui:187
 #, kde-format
 msgid "Hide new items in commit box"
-msgstr ""
+msgstr "Skrýt nové položky v okně commitu"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_add_as_modification)
 #: src/settings/subversion_settings.ui:197
@@ -2464,12 +2516,16 @@ msgid ""
 "incoming addition of the same node kind results in a normal node with a "
 "possible local modification, instead of a tree conflict.</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Je-li tato možnost nastavena, vede lokální přidání na "
+"stejné cestě jako příchozí přidání uzlu stejného typu k vytvoření normálního "
+"uzlu s možnou lokální úpravou, namísto ke konfliktům ve stromu.</p></body></"
+"html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_add_as_modification)
 #: src/settings/subversion_settings.ui:200
 #, kde-format
 msgid "Update modifies instead of creating conflicts"
-msgstr ""
+msgstr "Aktualizace provádí úpravy namísto vytváření konfliktů"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_update_make_parents)
 #: src/settings/subversion_settings.ui:207
@@ -2478,54 +2534,59 @@ msgid ""
 "<html><head/><body><p>If set, create any non-existent parent directories "
 "also by checking them out at depth=empty</p></body></html>"
 msgstr ""
+"<html><head/><body><p>Je-li tato volba nastavena, vytvoří se i neexistující "
+"nadřazené adresáře tak, že se zkontrolují s parametrem depth=empty</p></"
+"body></html>"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_update_make_parents)
 #: src/settings/subversion_settings.ui:210
 #, kde-format
 msgid "Update makes missing parents"
-msgstr ""
+msgstr "Aktualizace způsobuje zmizení nadřazených prvků"
 
 #: src/svnfrontend/background/fillcachethread.cpp:76
 #, kde-format
 msgid ""
 "Not filling log cache because it is disabled due setting for this repository."
 msgstr ""
+"Mezipaměť záznamů se nenaplňuje, protože je v nastavení tohoto repozitáře "
+"deaktivována."
 
 #: src/svnfrontend/background/fillcachethread.cpp:78
 #, kde-format
 msgid "Filling log cache in background."
-msgstr ""
+msgstr "Na pozadí se zaplňuje mezipaměť záznamů."
 
 #: src/svnfrontend/background/fillcachethread.cpp:100
 #, kde-format
 msgid "Filling cache canceled."
-msgstr ""
+msgstr "Zaplňování mezipaměti zrušeno."
 
 #: src/svnfrontend/background/fillcachethread.cpp:115
 #, kde-format
 msgid "Cache filled up to revision %1."
-msgstr ""
+msgstr "Mezipaměť se zaplnila až po revizi %1."
 
 #: src/svnfrontend/background/fillcachethread.cpp:122
 #, kde-format
 msgid "Filling log cache in background finished."
-msgstr ""
+msgstr "Zaplnění mezipaměti záznamů na pozadí bylo dokončeno."
 
 #: src/svnfrontend/background/tcontextlistener.cpp:182
 #, kde-format
 msgid "%1 of %2 transferred."
-msgstr ""
+msgstr "%1 z %2 přeneseno."
 
 #: src/svnfrontend/background/tcontextlistener.cpp:184
 #: src/svnfrontend/stopdlg.cpp:198
 #, kde-format
 msgid "%1 transferred."
-msgstr ""
+msgstr "%1 přeneseno."
 
 #: src/svnfrontend/blamedisplay.cpp:184 src/svnfrontend/blamedisplay.cpp:194
 #, kde-format
 msgid "Log message for revision"
-msgstr ""
+msgstr "Zpráva záznamu pro revizi"
 
 #: src/svnfrontend/blamedisplay.cpp:188
 #, kde-format
@@ -2535,24 +2596,24 @@ msgstr "Přejít na řádek"
 #: src/svnfrontend/blamedisplay.cpp:320
 #, kde-format
 msgid "Show line"
-msgstr ""
+msgstr "Zobrazit řádek"
 
 #: src/svnfrontend/blamedisplay.cpp:320
 #, kde-format
 msgid "Show line number"
-msgstr ""
+msgstr "Zobrazit číslo řádku"
 
 #: src/svnfrontend/blamedisplay.cpp:356
 #, kde-format
 msgctxt "@title:window"
 msgid "Log Message for Revision %1"
-msgstr ""
+msgstr "Zpráva záznamu pro revizi %1"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #: src/svnfrontend/blamedisplay.ui:40
 #, kde-format
 msgid "Line"
-msgstr "Čára"
+msgstr "Řádek"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_BlameTree)
 #: src/svnfrontend/blamedisplay.ui:45
@@ -2588,12 +2649,12 @@ msgstr "Obsah"
 #: src/svnfrontend/ccontextlistener.cpp:66
 #, kde-format
 msgid "Add to revision control"
-msgstr ""
+msgstr "Přidat do správy revizí"
 
 #: src/svnfrontend/ccontextlistener.cpp:69
 #, kde-format
 msgid "Restore missing"
-msgstr ""
+msgstr "Obnovit chybějící"
 
 #: src/svnfrontend/ccontextlistener.cpp:70
 #, kde-format
@@ -2603,7 +2664,7 @@ msgstr "Vrátit zpět"
 #: src/svnfrontend/ccontextlistener.cpp:71
 #, kde-format
 msgid "Revert failed"
-msgstr ""
+msgstr "Vrácení zpět se nezdařilo"
 
 #: src/svnfrontend/ccontextlistener.cpp:72
 #, kde-format
@@ -2638,12 +2699,12 @@ msgstr "Aktualizace dokončena"
 #: src/svnfrontend/ccontextlistener.cpp:78
 #, kde-format
 msgid "Update external module"
-msgstr ""
+msgstr "Aktualizace externího modulu"
 
 #: src/svnfrontend/ccontextlistener.cpp:80
 #, kde-format
 msgid "Status on external"
-msgstr ""
+msgstr "Stav na externím"
 
 #: src/svnfrontend/ccontextlistener.cpp:81
 #, kde-format
@@ -2658,12 +2719,12 @@ msgstr "Commit přidán"
 #: src/svnfrontend/ccontextlistener.cpp:83
 #, kde-format
 msgid "Commit Deleted"
-msgstr ""
+msgstr "Commit smazán"
 
 #: src/svnfrontend/ccontextlistener.cpp:84
 #, kde-format
 msgid "Commit Replaced"
-msgstr ""
+msgstr "Commit nahrazen"
 
 #: src/svnfrontend/ccontextlistener.cpp:87
 #, kde-format
@@ -2693,22 +2754,22 @@ msgstr "nezměněno"
 #: src/svnfrontend/ccontextlistener.cpp:96
 #, kde-format
 msgid "item wasn't present"
-msgstr ""
+msgstr "položka nebyla k dispozici"
 
 #: src/svnfrontend/ccontextlistener.cpp:97
 #, kde-format
 msgid "unversioned item obstructed work"
-msgstr ""
+msgstr "položka bez verze znemožnila práci"
 
 #: src/svnfrontend/ccontextlistener.cpp:100
 #, kde-format
 msgid "Modified state had mods merged in."
-msgstr ""
+msgstr "Do upraveného stavu byly začleněny změny."
 
 #: src/svnfrontend/ccontextlistener.cpp:101
 #, kde-format
 msgid "Modified state got conflicting mods."
-msgstr ""
+msgstr "Upravený stav obsahuje změny, které jsou ve vzájemném rozporu."
 
 #: src/svnfrontend/ccontextlistener.cpp:305
 #, kde-format
@@ -2721,16 +2782,18 @@ msgid ""
 "The certificate is not issued by a trusted authority. Use the fingerprint to "
 "validate the certificate manually."
 msgstr ""
+"Certifikát nebyl vydán důvěryhodnou certifikační autoritou. K ručnímu "
+"ověření certifikátu použijte jeho otisk."
 
 #: src/svnfrontend/ccontextlistener.cpp:339
 #, kde-format
 msgid "The certificate hostname does not match."
-msgstr ""
+msgstr "Název hostitele v certifikátu se neshoduje."
 
 #: src/svnfrontend/ccontextlistener.cpp:342
 #, kde-format
 msgid "The certificate is not yet valid."
-msgstr ""
+msgstr "Certifikát zatím není platný."
 
 #: src/svnfrontend/ccontextlistener.cpp:345
 #, kde-format
@@ -2740,7 +2803,7 @@ msgstr "Certifikát vypršel."
 #: src/svnfrontend/ccontextlistener.cpp:348
 #, kde-format
 msgid "The certificate has an unknown error."
-msgstr ""
+msgstr "V certifikátu se vyskytla neznámá chyba."
 
 #: src/svnfrontend/ccontextlistener.cpp:370
 #, kde-format
@@ -2748,6 +2811,8 @@ msgid ""
 "%1\n"
 "Really store password as plain text?"
 msgstr ""
+"%1\n"
+"Opravdu chcete uložit heslo jako prostý text?"
 
 #: src/svnfrontend/ccontextlistener.cpp:371
 #, kde-format
@@ -2767,27 +2832,27 @@ msgstr "Ukládat v prostém textu"
 #: src/svnfrontend/maintreewidget.cpp:2606
 #, kde-format
 msgid "SVN Error"
-msgstr ""
+msgstr "Chyba SVN"
 
 #: src/svnfrontend/commandexec.cpp:208
 #, kde-format
 msgid "Command \"%1\" not implemented or known"
-msgstr ""
+msgstr "Příkaz \"%1\" není implementován nebo není znám"
 
 #: src/svnfrontend/commandexec.cpp:410
 #, kde-format
 msgid "\"GET\" requires output file"
-msgstr ""
+msgstr "\"GET\" vyžaduje výstupní soubor"
 
 #: src/svnfrontend/commandexec.cpp:591
 #, kde-format
 msgid "May only switch one URL at time"
-msgstr ""
+msgstr "Lze přepnout vždy pouze jednu URL adresu"
 
 #: src/svnfrontend/commandexec.cpp:595
 #, kde-format
 msgid "Switch only on working copies"
-msgstr ""
+msgstr "Přepínat pouze na pracovních kopiích"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, CopyMoveView)
 #: src/svnfrontend/copymoveview.ui:14
@@ -2817,19 +2882,19 @@ msgstr "do"
 #: src/svnfrontend/copymoveview_impl.cpp:48
 #, kde-format
 msgid "Rename/move"
-msgstr ""
+msgstr "Rename/move"
 
 #: src/svnfrontend/copymoveview_impl.cpp:72
 #, kde-format
 msgctxt "@title:window"
 msgid "Move/Rename File/Directory"
-msgstr ""
+msgstr "Move/Rename File/Directory"
 
 #: src/svnfrontend/copymoveview_impl.cpp:72
 #, kde-format
 msgctxt "@title:window"
 msgid "Copy File/Directory"
-msgstr ""
+msgstr "Copy File/Directory"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, CreateRepoDlg)
 #: src/svnfrontend/createrepodlg.ui:14
@@ -2841,43 +2906,43 @@ msgstr "Vytvořit nový repozitář"
 #: src/svnfrontend/createrepodlg.ui:22
 #, kde-format
 msgid "Disable fsync at commit (BDB only)"
-msgstr ""
+msgstr "Zakázat fsync při commitu (pouze BDB)"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel1)
 #: src/svnfrontend/createrepodlg.ui:32
 #, kde-format
 msgid "Path to repository:"
-msgstr ""
+msgstr "Cesta k repozitáři:"
 
 #. i18n: ectx: property (toolTip), widget (KComboBox, m_FilesystemSelector)
 #: src/svnfrontend/createrepodlg.ui:45
 #, kde-format
 msgid "Select type of storage"
-msgstr ""
+msgstr "Vybrat typ úložiště"
 
 #. i18n: ectx: property (whatsThis), widget (KComboBox, m_FilesystemSelector)
 #: src/svnfrontend/createrepodlg.ui:48
 #, kde-format
 msgid "Select the storage type of repository (FSFS or Berkely DB)"
-msgstr ""
+msgstr "Vyberte typ úložiště repozitáře (FSFS nebo Berkeley DB)"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
 #: src/svnfrontend/createrepodlg.ui:52
 #, kde-format
 msgid "FSFS"
-msgstr ""
+msgstr "FSFS"
 
 #. i18n: ectx: property (text), item, widget (KComboBox, m_FilesystemSelector)
 #: src/svnfrontend/createrepodlg.ui:57
 #, kde-format
 msgid "BDB"
-msgstr ""
+msgstr "BDB"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_CreateMainDirs)
 #: src/svnfrontend/createrepodlg.ui:65
 #, kde-format
 msgid "Create trunk, tags and branches folders"
-msgstr ""
+msgstr "Vytvořit složky trunk, tags a branches"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_CreateMainDirs)
 #: src/svnfrontend/createrepodlg.ui:68
@@ -2886,18 +2951,21 @@ msgid ""
 "If this is set then the base layout (<tt>/trunk</tt>,<tt>/branches</tt> and "
 "<tt>/tags</tt>) will created after opening the fresh repository."
 msgstr ""
+"Je-li tato možnost nastavena, po otevření nového repozitáře se vytvoří "
+"základní struktura (<tt>/trunk</tt>, <tt>/branches</tt> a <tt>/tags</tt>)."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_CreateMainDirs)
 #: src/svnfrontend/createrepodlg.ui:71
 #, kde-format
 msgid "Create main folders"
-msgstr ""
+msgstr "Vytvořit hlavní složky"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn16compat)
 #: src/svnfrontend/createrepodlg.ui:87
 #, kde-format
 msgid "Is created repository compatible to Subversion prior 1.6"
 msgstr ""
+"Vytvořený repozitář je kompatibilní se Subversion starším než verze 1.6"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn16compat)
 #: src/svnfrontend/createrepodlg.ui:90
@@ -2906,30 +2974,34 @@ msgid ""
 "If set, the repository created will compatible to Subversion prior 1.5. This "
 "is only useful when svnqt is running with Subversion 1.6 or above."
 msgstr ""
+"Pokud je tato volba nastavena, vytvořené repozitář bude kompatibilní se "
+"Subversion ve verzi starší než 1.5. To má smysl pouze v případě, že svnqt "
+"běží se Subversion 1.6 nebo novější."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_presvn16compat)
 #: src/svnfrontend/createrepodlg.ui:93
 #, kde-format
 msgid "Compatible to Subversion prior 1.6"
-msgstr "Kompatibilní s verzemi Subversion staršími než 1.6"
+msgstr "Kompatibilní se Subversion starší než verze 1.6"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_LogKeep)
 #: src/svnfrontend/createrepodlg.ui:113
 #, kde-format
 msgid "Disable automatic log file removal (BDB only)"
-msgstr ""
+msgstr "Zakázat automatické mazání souborů záznamu (pouze BDB)"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel2)
 #: src/svnfrontend/createrepodlg.ui:123
 #, kde-format
 msgid "Type of repository:"
-msgstr ""
+msgstr "Typ repozitáře:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn15compat)
 #: src/svnfrontend/createrepodlg.ui:139
 #, kde-format
 msgid "Is created repository compatible to Subversion prior 1.5"
 msgstr ""
+"Vytvořený repozitář je kompatibilní se Subversion starším než verze 1.5"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn15compat)
 #: src/svnfrontend/createrepodlg.ui:142
@@ -2938,18 +3010,22 @@ msgid ""
 "If set, the repository created will compatible to Subversion prior 1.5. This "
 "is only useful when svnqt is running with Subversion 1.5 or above."
 msgstr ""
+"Pokud je tato volba nastavena, vytvořené repozitář bude kompatibilní se "
+"Subversion ve verzi starší než 1.5. To má smysl pouze v případě, že svnqt "
+"běží se Subversion 1.5 nebo novější."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_presvn15compat)
 #: src/svnfrontend/createrepodlg.ui:145
 #, kde-format
 msgid "Compatible to Subversion prior 1.5"
-msgstr "Kompatibilní s verzemi Subversion staršími než 1.5"
+msgstr "Kompatibilní se Subversion starší než verze 1.5"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_presvn18compat)
 #: src/svnfrontend/createrepodlg.ui:162
 #, kde-format
 msgid "Is created repository compatible to Subversion prior 1.8"
 msgstr ""
+"Vytvořený repozitář je kompatibilní se Subversion starším než verze 1.8"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_presvn18compat)
 #: src/svnfrontend/createrepodlg.ui:165
@@ -2958,17 +3034,21 @@ msgid ""
 "If set, the repository created will compatible to Subversion prior 1.4. This "
 "is only useful when svnqt is running with Subversion 1.8 or above."
 msgstr ""
+"Pokud je tato volba nastavena, vytvořené repozitář bude kompatibilní se "
+"Subversion ve verzi starší než 1.4. To má smysl pouze v případě, že svnqt "
+"běží se Subversion 1.8 nebo novější."
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_presvn18compat)
 #: src/svnfrontend/createrepodlg.ui:168
 #, kde-format
 msgid "Compatible to Subversion prior 1.8"
-msgstr "Kompatibilní se Subversion verze před 1.8"
+msgstr "Kompatibilní se Subversion před verzí 1.8"
 
 #: src/svnfrontend/database/dboverview.cpp:113
 #, kde-format
 msgid "Log cache holds %1 log entries and consumes %2 on disk."
 msgstr ""
+"Mezipaměť záznamů obsahuje %1 záznamů protokolu a zabírá %2 místa na disku."
 
 #: src/svnfrontend/database/dboverview.cpp:129
 #, kde-format
@@ -2976,11 +3056,13 @@ msgid ""
 "Really clean cache for repository\n"
 "%1?"
 msgstr ""
+"Opravdu vymazat mezipaměť repozitáře\n"
+"%1?"
 
 #: src/svnfrontend/database/dboverview.cpp:130
 #, kde-format
 msgid "Clean repository cache"
-msgstr ""
+msgstr "Vymazat mezipaměť repozitáře"
 
 #: src/svnfrontend/database/dboverview.cpp:131
 #, kde-format
@@ -2994,13 +3076,15 @@ msgid ""
 "Really clean cache and data for repository\n"
 "%1?"
 msgstr ""
+"Opravdu vymazat mezipaměť a data repozitáře\n"
+"%1?"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DeleteRepositoryButton)
 #: src/svnfrontend/database/dboverview.cpp:149
 #: src/svnfrontend/database/dboverview.ui:59
 #, kde-format
 msgid "Delete repository"
-msgstr "Smazat z repozitáře"
+msgstr "Smazat repozitář"
 
 #: src/svnfrontend/database/dboverview.cpp:150
 #, kde-format
@@ -3012,13 +3096,13 @@ msgstr "Smazat repozitář"
 #: src/svnfrontend/database/dboverview.ui:6
 #, kde-format
 msgid "Overview about cache database content"
-msgstr ""
+msgstr "Přehled obsahu databáze mezipaměti"
 
 #. i18n: ectx: property (text), widget (QLabel, m_RepositoryLabel)
 #: src/svnfrontend/database/dboverview.ui:19
 #, kde-format
 msgid "Known repositories"
-msgstr ""
+msgstr "Známé repozitáře"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteCacheButton)
 #. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteCacheButton)
@@ -3026,7 +3110,7 @@ msgstr ""
 #: src/svnfrontend/database/dboverview.ui:43
 #, kde-format
 msgid "Delete cache entries for current selected repository"
-msgstr ""
+msgstr "Odstranit položky mezipaměti pro aktuálně vybraný repozitář"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DeleteCacheButton)
 #: src/svnfrontend/database/dboverview.ui:46
@@ -3040,7 +3124,7 @@ msgstr "Smazat mezipaměť"
 #: src/svnfrontend/database/dboverview.ui:56
 #, kde-format
 msgid "Delete all entries and settings for selected repository"
-msgstr ""
+msgstr "Smazat všechny položky a nastavení pro vybraný repozitář"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_SettingsButton)
 #: src/svnfrontend/database/dboverview.ui:66
@@ -3052,7 +3136,7 @@ msgstr "Nastavení repozitáře"
 #: src/svnfrontend/database/dboverview.ui:73
 #, kde-format
 msgid "Statistics for repository"
-msgstr ""
+msgstr "Statistiky repozitáře"
 
 #: src/svnfrontend/database/dbsettings.cpp:41
 #, kde-format
@@ -3064,31 +3148,31 @@ msgstr "Nastavení pro %1"
 #: src/svnfrontend/database/dbsettings.ui:21
 #, kde-format
 msgid "Log cache settings"
-msgstr ""
+msgstr "Nastavení mezipaměti záznamů"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dbcfg_noCacheUpdate)
 #: src/svnfrontend/database/dbsettings.ui:27
 #, kde-format
 msgid "Do not update log cache on open"
-msgstr ""
+msgstr "Při otevření neaktualizovat mezipaměť záznamu"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: src/svnfrontend/database/dbsettings.ui:40
 #, kde-format
 msgid "Prefixes to filter out in revision tree"
-msgstr ""
+msgstr "Prefixy, které je třeba ve stromu revizí odfiltrovat"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_2)
 #: src/svnfrontend/database/dbsettings.ui:58
 #, kde-format
 msgid "Log and statistics setting"
-msgstr ""
+msgstr "Nastavení záznamů a statistik"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/svnfrontend/database/dbsettings.ui:70
 #, kde-format
 msgid "Hide logs containing following words"
-msgstr ""
+msgstr "Skrýt záznamy obsahující následující slova"
 
 #. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_log_pattern)
 #: src/svnfrontend/database/dbsettings.ui:77
@@ -3097,12 +3181,14 @@ msgid ""
 "This is a list which words/substrings a log entry must contain so it will be "
 "hidden from log and statistics"
 msgstr ""
+"Toto je seznam slov a podřetězců, které musí položka záznamu obsahovat, aby "
+"byla skryta v záznamu a statistikách"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/svnfrontend/database/dbsettings.ui:98
 #, kde-format
 msgid "Do not show commits from following users"
-msgstr ""
+msgstr "Nezobrazovat commity od následujících uživatelů"
 
 #. i18n: ectx: property (toolTip), widget (KEditListWidget, dbcfg_exclude_userslog)
 #: src/svnfrontend/database/dbsettings.ui:105
@@ -3110,90 +3196,92 @@ msgstr ""
 msgid ""
 "Do not display commits of listed users in log window and statistics view"
 msgstr ""
+"Nezobrazovat commity uvedených uživatelů v okně záznamu a v přehledu "
+"statistik"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dbcfg_filter_empty_author)
 #: src/svnfrontend/database/dbsettings.ui:115
 #, kde-format
 msgid "Do not display commits without author"
-msgstr ""
+msgstr "Nezobrazovat commity bez autora"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DumpRepoDlg)
 #: src/svnfrontend/dumprepo_dlg.ui:14
 #, kde-format
 msgid "Dump repository"
-msgstr ""
+msgstr "Výpis repozitáře"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_UseDeltas)
 #: src/svnfrontend/dumprepo_dlg.ui:35
 #, kde-format
 msgid "Use deltas"
-msgstr ""
+msgstr "Použít rozdíly"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, m_StartNumber)
 #: src/svnfrontend/dumprepo_dlg.ui:54
 #, kde-format
 msgid "-1 for START"
-msgstr ""
+msgstr "-1 pro START"
 
 #. i18n: ectx: property (text), widget (QLabel, m_lblEnd)
 #: src/svnfrontend/dumprepo_dlg.ui:67
 #, kde-format
 msgid "End revision:"
-msgstr ""
+msgstr "Konec revize:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_incrementalDump)
 #: src/svnfrontend/dumprepo_dlg.ui:94
 #, kde-format
 msgid "incremental Dump"
-msgstr ""
+msgstr "přírůstkový výpis"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_Rangeonly)
 #: src/svnfrontend/dumprepo_dlg.ui:107
 #, kde-format
 msgid "Dump revision range"
-msgstr ""
+msgstr "Rozsah výpisu revize"
 
 #. i18n: ectx: property (text), widget (QLabel, m_OutfileLabel)
 #: src/svnfrontend/dumprepo_dlg.ui:117
 #, kde-format
 msgid "Dump into:"
-msgstr ""
+msgstr "Výpis do:"
 
 #. i18n: ectx: property (toolTip), widget (QSpinBox, m_EndNumber)
 #: src/svnfrontend/dumprepo_dlg.ui:136
 #, kde-format
 msgid "-1 for HEAD"
-msgstr ""
+msgstr "-1 pro HEAD"
 
 #. i18n: ectx: property (text), widget (QLabel, m_lblStart)
 #: src/svnfrontend/dumprepo_dlg.ui:149
 #, kde-format
 msgid "Start revision:"
-msgstr ""
+msgstr "Začátek revize:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_RepoLabel)
 #: src/svnfrontend/dumprepo_dlg.ui:162
 #, kde-format
 msgid "Repository to dump:"
-msgstr ""
+msgstr "Repozitář pro výpis:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_PatternLabel)
 #: src/svnfrontend/editignorepattern.ui:17
 #, kde-format
 msgid "Patterns to add or remove:"
-msgstr ""
+msgstr "Vzory, které je třeba přidat nebo odstranit:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_RemoveCheckBox)
 #: src/svnfrontend/editignorepattern.ui:40
 #, kde-format
 msgid "Remove patterns"
-msgstr ""
+msgstr "Odstranit vzory"
 
 #. i18n: ectx: property (text), widget (QLabel, m_DepthLabel)
 #: src/svnfrontend/editignorepattern.ui:49
 #, kde-format
 msgid "Depth for ignore"
-msgstr ""
+msgstr "Hloubka pro ignorování"
 
 #: src/svnfrontend/editpropsdlg.cpp:32
 #, kde-format
@@ -3204,7 +3292,7 @@ msgstr "Přidat vlastnost"
 #: src/svnfrontend/editpropsdlg.cpp:44 src/svnfrontend/editpropsdlg.cpp:84
 #, kde-format
 msgid "One of <b>'native'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
-msgstr ""
+msgstr "Jeden z <b>'nativní'</b>, <b>'LF'</b>, <b>'CR'</b>, <b>'CRLF'</b>."
 
 #: src/svnfrontend/editpropsdlg.cpp:46 src/svnfrontend/editpropsdlg.cpp:86
 #, kde-format
@@ -3213,6 +3301,9 @@ msgid ""
 "directory. A non-recursive attempt will fail, and a recursive attempt will "
 "set the property only on the file children of the folder."
 msgstr ""
+"Pokud soubor existuje, nastavit jej jako spustitelný.<br/>Tuto vlastnost "
+"nelze nastavit u adresáře. Nerekurzivní pokus selže a rekurzivní pokus "
+"nastaví tuto vlastnost pouze u podřízených souborů v daném adresáři."
 
 #: src/svnfrontend/editpropsdlg.cpp:51
 #, kde-format
@@ -3226,6 +3317,13 @@ msgid ""
 "last revision the object changed.<br/><b>Id</b> A compressed summary of the "
 "previous 4 keywords."
 msgstr ""
+"Klíčová slova, která se mají rozbalit do obsahu souboru.<br/>Do dokumentů je "
+"lze vložit pomocí kotvy klíčového slova ve formátu $KeywordName$.<br/>Platná "
+"klíčová slova jsou:<br/><b>URL/HeadURL</b> URL hlavní revize projektu.<br/"
+"><b>Author/LastChangedBy</b> Poslední osoba, která soubor změnila.<br/"
+"><b>Date/LastChangedDate</b> Datum a čas poslední úpravy objektu.<br/"
+"><b>Revision/Rev/LastChangedRevision</b> Poslední revize, ve které byl "
+"objekt změněn.<br/><b>Id</b> Zkrácený souhrn předchozích 4 klíčových slov."
 
 #: src/svnfrontend/editpropsdlg.cpp:61
 #, kde-format
@@ -3235,6 +3333,10 @@ msgid ""
 "a user must acquire a lock on the file before they can edit and commit "
 "changes."
 msgstr ""
+"Nastavte tuto hodnotu na libovolnou hodnotu (např. <b>‚*‘</b>), chcete-li "
+"pro tento soubor vynutit zámek.<br/>Soubor bude při odhlášení nebo "
+"aktualizaci nastaven jako pouze pro čtení, což znamená, že uživatel musí "
+"nejprve získat zámek souboru, než bude moci provádět úpravy a potvrdit změny."
 
 #: src/svnfrontend/editpropsdlg.cpp:66 src/svnfrontend/editpropsdlg.cpp:100
 #, kde-format
@@ -3243,6 +3345,10 @@ msgid ""
 "how to serve it from Apache. A mimetype beginning with <b>'text/'</b> (or an "
 "absent mimetype) is treated as text. Anything else is treated as binary."
 msgstr ""
+"Mimetyp souboru. Slouží k určení, zda má být soubor sloučen a jakým způsobem "
+"má být poskytován prostřednictvím Apache. Mimetyp začínající <b>'text/'</b> "
+"(nebo chybějící mimetyp) je považován za textový. Všechny ostatní případy "
+"jsou považovány za binární."
 
 #: src/svnfrontend/editpropsdlg.cpp:93
 #, kde-format
@@ -3252,17 +3358,25 @@ msgid ""
 "><nobr><b>foo http://example.com/repos/projectA</b></nobr><br/><nobr><b>foo/"
 "bar -r 1234 http://example.com/repos/projectB</b></nobr>"
 msgstr ""
+"Seznam specifikátorů modulů oddělených znakem nového řádku, z nichž každý se "
+"skládá z relativní cesty k adresáři, volitelných příznaků revize a adresy "
+"URL. Například: <br/><nobr><b>foo http://example.com/repos/projectA</b></"
+"nobr><br/><nobr><b>foo/bar -r 1234 http://example.com/repos/projectB</b></"
+"nobr>"
 
 #: src/svnfrontend/editpropsdlg.cpp:98
 #, kde-format
 msgid "A newline separated list of file patterns to ignore."
 msgstr ""
+"Seznam vzorů souborů, které mají být ignorovány, oddělený znaky nového řádku."
 
 #: src/svnfrontend/editpropsdlg.cpp:104
 #, kde-format
 msgid ""
 "Label text to show for the edit box where the user enters the issue number."
 msgstr ""
+"Text popisku, který se má zobrazit u editačního pole, do kterého uživatel "
+"zadává číslo problému."
 
 #: src/svnfrontend/editpropsdlg.cpp:108
 #, kde-format
@@ -3271,6 +3385,9 @@ msgid ""
 "replaced with the bug issue number. Example:<br/><nobr><b>http://example.com/"
 "mantis/view.php?id=%BUGID%</b></nobr>"
 msgstr ""
+"URL odkazující na systém pro sledování chyb. Musí obsahovat <b>%BUGID%</b>, "
+"kde %BUGID% je číslo chyby. Příklad: <br/><nobr><b>http://example.com/mantis/"
+"view.php?id=%BUGID%</b></nobr>"
 
 #: src/svnfrontend/editpropsdlg.cpp:112
 #, kde-format
@@ -3279,6 +3396,8 @@ msgid ""
 "The string must contain <b>%BUGID%</b> which gets replaced with the bug "
 "issue number."
 msgstr ""
+"Řetězec, který se připojí k záznamu v protokolu při zadání čísla chyby. "
+"Řetězec musí obsahovat <b>%BUGID%</b>, což bude nahrazeno číslem chyby."
 
 #: src/svnfrontend/editpropsdlg.cpp:116
 #, kde-format
@@ -3287,6 +3406,9 @@ msgid ""
 "the commit dialog. Possible values:<br/><b>'true'</b>/<b>'yes'</b> or "
 "<b>'false'</b>/<b>'no'</b>."
 msgstr ""
+"Nastavte na <b>'yes'</b>, pokud se má zobrazit varování, když v dialogovém "
+"okně pro potvrzení není zadán žádný popis. Možné hodnoty:<br/><b>'true'</b>/"
+"<b>'yes'</b> nebo <b>'false'</b>/<b>'no'</b>."
 
 #: src/svnfrontend/editpropsdlg.cpp:120
 #, kde-format
@@ -3295,6 +3417,9 @@ msgid ""
 "referenced not by numbers.<br/>Possible values: <b>'true'</b> or <b>'false'</"
 "b>."
 msgstr ""
+"Nastavte na <b>'false'</b>, pokud váš systém pro sledování chyb obsahuje "
+"chyby, které nejsou označeny čísly.<br/>Možné hodnoty: <b>'true'</b> nebo "
+"<b>'false'</b>."
 
 #: src/svnfrontend/editpropsdlg.cpp:124
 #, kde-format
@@ -3303,6 +3428,9 @@ msgid ""
 "top of the log message. The default is <b>'true'</b> which means the "
 "bugtracking ID is appended to the log message."
 msgstr ""
+"Nastavte na <b>'false'</b>, pokud chcete, aby bylo ID sledování chyby "
+"vloženo na začátek záznamu v protokolu. Výchozí hodnota je <b>'true'</b>, "
+"což znamená, že ID sledování chyby je připojeno na konec záznamu v protokolu."
 
 #: src/svnfrontend/editpropsdlg.cpp:129
 #, kde-format
@@ -3311,6 +3439,9 @@ msgid ""
 "used to find a string referring to an issue, the second expression is used "
 "to extract the bare bug ID from that string."
 msgstr ""
+"Dva regulární výrazy oddělené znakem nového řádku.<br/>První výraz slouží k "
+"vyhledání řetězce odkazujícího na problém, druhý výraz slouží k extrakci "
+"samotného ID chyby z tohoto řetězce."
 
 #: src/svnfrontend/editpropsdlg.cpp:136
 #, kde-format
@@ -3320,7 +3451,7 @@ msgstr "Vyberte nebo zadejte novou vlastnost"
 #: src/svnfrontend/editpropsdlg.cpp:160
 #, kde-format
 msgid "No help for this property available"
-msgstr ""
+msgstr "Pro tuto vlastnost není k dispozici žádná nápověda"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, EditPropsDlg)
 #: src/svnfrontend/editpropsdlg.ui:14
@@ -3345,18 +3476,19 @@ msgstr "Hodnota vlastnosti:"
 #, kde-format
 msgid "Click for short info about pre-defined property name"
 msgstr ""
+"Kliknutím zobrazíte stručné informace o názvu předdefinované vlastnosti"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, CheckoutInfo)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:14
 #, kde-format
 msgid "Checkout info"
-msgstr ""
+msgstr "Info o načtení"
 
 #. i18n: ectx: property (text), widget (QLabel, m_TargetLabel)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:26
 #, kde-format
 msgid "Select target directory:"
-msgstr ""
+msgstr "Vybrat cílový adresář:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_UrlLabel)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:40
@@ -3970,7 +4102,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:586
 #, kde-format
 msgid "Blame"
-msgstr "Blame"
+msgstr "Autor a revize"
 
 #: src/svnfrontend/maintreewidget.cpp:587
 #: src/svnfrontend/maintreewidget.cpp:595
@@ -3983,7 +4115,7 @@ msgstr ""
 #: src/svnfrontend/maintreewidget.cpp:590
 #, kde-format
 msgid "Blame range"
-msgstr ""
+msgstr "Rozsah pro označení autora a revize"
 
 #: src/svnfrontend/maintreewidget.cpp:599
 #, kde-format

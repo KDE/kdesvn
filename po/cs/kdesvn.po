@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-11-07 00:46+0100\n"
+"PO-Revision-Date: 2026-11-07 10:56+0100\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 3.10\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2704,7 +2704,7 @@ msgstr "Aktualizace externího modulu"
 #: src/svnfrontend/ccontextlistener.cpp:80
 #, kde-format
 msgid "Status on external"
-msgstr "Stav na externím"
+msgstr "Stav na externím prvku"
 
 #: src/svnfrontend/ccontextlistener.cpp:81
 #, kde-format
@@ -3500,25 +3500,25 @@ msgstr "Zadejte URL:"
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:67
 #, kde-format
 msgid "Ignore externals while operation"
-msgstr ""
+msgstr "Ignorovat externí prvky při operacích"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_ignoreExternals)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:70
 #, kde-format
 msgid "Ignore externals"
-msgstr ""
+msgstr "Ignorovat externí prvky"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_overwriteButton)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:77
 #, kde-format
 msgid "May existing unversioned items overwritten"
-msgstr ""
+msgstr "Přepsat existující položky bez verzí"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_overwriteButton)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:80
 #, kde-format
 msgid "Overwrite existing"
-msgstr ""
+msgstr "Přepsat existující"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_IgnoreKeywords)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:93
@@ -3530,13 +3530,13 @@ msgstr "Ignorovat klíčová slova"
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:110
 #, kde-format
 msgid "Append source URL name to subfolder"
-msgstr ""
+msgstr "Připojit název zdrojové URL k názvu podsložky"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_ShowExplorer)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:120
 #, kde-format
 msgid "Open after job"
-msgstr ""
+msgstr "Otevřít po úloze"
 
 #: src/svnfrontend/fronthelpers/propertylist.cpp:43
 #, kde-format
@@ -3555,12 +3555,14 @@ msgid ""
 "This property may not set by users.\n"
 "Rejecting it."
 msgstr ""
+"Tuto vlastnost nemohou nastavit uživatelé.\n"
+"Odmítnuto."
 
 #: src/svnfrontend/fronthelpers/propertylist.cpp:104
 #: src/svnfrontend/propertiesdlg.cpp:111 src/svnfrontend/propertiesdlg.cpp:162
 #, kde-format
 msgid "Protected property"
-msgstr ""
+msgstr "Chráněná vlastnost"
 
 #: src/svnfrontend/fronthelpers/propertylist.cpp:109
 #: src/svnfrontend/propertiesdlg.cpp:115 src/svnfrontend/propertiesdlg.cpp:166
@@ -3569,12 +3571,14 @@ msgid ""
 "A property with that name exists.\n"
 "Rejecting it."
 msgstr ""
+"Objekt s tímto názvem již existuje.\n"
+"Odmítnuto."
 
 #: src/svnfrontend/fronthelpers/propertylist.cpp:109
 #: src/svnfrontend/propertiesdlg.cpp:115 src/svnfrontend/propertiesdlg.cpp:166
 #, kde-format
 msgid "Double property"
-msgstr ""
+msgstr "Dvojitá vlastnost"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, RangeInput)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:6
@@ -3587,7 +3591,7 @@ msgstr "Revize"
 #: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:205
 #, kde-format
 msgid "Start with revision"
-msgstr ""
+msgstr "Spustit s revizí"
 
 #. i18n: ectx: property (toolTip), widget (QRadioButton, m_startWorkingButton)
 #. i18n: ectx: property (toolTip), widget (QRadioButton, m_stopWorkingButton)
@@ -3595,7 +3599,7 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/rangeinput.ui:140
 #, kde-format
 msgid "Select current working copy changes"
-msgstr ""
+msgstr "Vybrat změny v aktuální pracovní kopii"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_startWorkingButton)
 #. i18n: ectx: property (text), widget (QRadioButton, m_stopWorkingButton)
@@ -3603,7 +3607,7 @@ msgstr ""
 #: src/svnfrontend/fronthelpers/rangeinput.ui:143
 #, kde-format
 msgid "WORKING"
-msgstr "Pracuje se"
+msgstr "WORKING"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_startNumberButton)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:56
@@ -3623,13 +3627,13 @@ msgstr "HEAD"
 #: src/svnfrontend/fronthelpers/rangeinput.ui:73
 #, kde-format
 msgid "S&TART"
-msgstr "Spus&tit"
+msgstr "S&TART"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_stopRevBox)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:85
 #, kde-format
 msgid "Stop with revision"
-msgstr ""
+msgstr "Zastavit s revizí"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_stopNumberButton)
 #: src/svnfrontend/fronthelpers/rangeinput.ui:93
@@ -3641,18 +3645,18 @@ msgstr "Číslo"
 #: src/svnfrontend/fronthelpers/rangeinput.ui:113
 #, kde-format
 msgid "START"
-msgstr "Spustit"
+msgstr "START"
 
 #: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:58
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Revisions"
-msgstr ""
+msgstr "Vybrat revize"
 
 #: src/svnfrontend/fronthelpers/rangeinput_impl.cpp:201
 #, kde-format
 msgid "Select revision"
-msgstr ""
+msgstr "Vybrat revizi"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_RevisionButton)
 #: src/svnfrontend/fronthelpers/revisionbutton.ui:23
@@ -3668,6 +3672,10 @@ msgid ""
 "Process stopped with message:\n"
 "%2"
 msgstr ""
+"Nelze spustit proces \"%1\".\n"
+"\n"
+"Proces byl zastaven se zprávou:\n"
+"%2"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:334
 #, kde-format
@@ -3682,32 +3690,32 @@ msgstr "Prosím, ujistěte se, že 'dot' je nainstalován (balíček GraphViz)."
 #: src/svnfrontend/graphtree/revgraphview.cpp:424
 #, kde-format
 msgid "Deleted at revision %1"
-msgstr ""
+msgstr "Smazáno v revizi %1"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:427
 #, kde-format
 msgid "Added at revision %1 as %2"
-msgstr ""
+msgstr "Přidáno v revizi %1 jako %2"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:431
 #, kde-format
 msgid "Copied to %1 at revision %2"
-msgstr ""
+msgstr "Zkopírováno do %1 v revizi %2"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:434
 #, kde-format
 msgid "Renamed to %1 at revision %2"
-msgstr ""
+msgstr "Přejmenováno na %1 v revizi %2"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:437
 #, kde-format
 msgid "Modified at revision %1"
-msgstr ""
+msgstr "Upraveno v revizi %1"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:440
 #, kde-format
 msgid "Replaced at revision %1"
-msgstr ""
+msgstr "Nahrazeno v revizi %1"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:443
 #, kde-format
@@ -3722,7 +3730,7 @@ msgstr "Nelze otevřít dočasný soubor %1 pro zápis."
 #: src/svnfrontend/graphtree/revgraphview.cpp:556
 #, kde-format
 msgid "<br>Revision: %1<br>Author: %2<br>Date: %3<br>Log: %4</html>"
-msgstr ""
+msgstr "<br>Revize: %1<br>Autor: %2<br>Datum: %3<br>Záznam: %4</html>"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:559
 #, kde-format
@@ -3747,18 +3755,18 @@ msgstr "<b>Záznam</b>%1%2%3"
 #: src/svnfrontend/graphtree/revgraphview.cpp:835
 #, kde-format
 msgid "Diff to previous"
-msgstr ""
+msgstr "Rozdíl oproti předchozí"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:838
 #, kde-format
 msgid "Diff to selected item"
-msgstr ""
+msgstr "Rozdíl oproti vybrané položce"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:841
 #: src/svnfrontend/svnlogdlgimp.cpp:524
 #, kde-format
 msgid "Cat this version"
-msgstr ""
+msgstr "Zobrazit tuto verzi"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:844
 #, kde-format
@@ -3789,7 +3797,7 @@ msgstr "Otočit ve směru hodinových ručiček"
 #: src/svnfrontend/graphtree/revgraphview.cpp:877
 #, kde-format
 msgid "Save tree as PNG"
-msgstr ""
+msgstr "Uložit strom jako PNG"
 
 #: src/svnfrontend/graphtree/revgraphview.cpp:877
 #, kde-format
@@ -3807,12 +3815,14 @@ msgstr "Záznamy"
 #: src/svnfrontend/svnactions.cpp:322
 #, kde-format
 msgid "Getting logs - hit Cancel for abort"
-msgstr ""
+msgstr "Načítání záznamů – pro přerušení stiskněte tlačítko Zrušit"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:108
 #, kde-format
 msgid "No log cache possible due broken database and networking not allowed."
 msgstr ""
+"Záložní kopie záznamů není možná kvůli poškozené databázi a síťové připojení "
+"není povoleno."
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:108
 #: src/svnfrontend/graphtree/revisiontree.cpp:113
@@ -3821,11 +3831,13 @@ msgid ""
 "Could not retrieve logs, reason:\n"
 "%1"
 msgstr ""
+"Nelze načíst záznamy, důvod:\n"
+"%1"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:142
 #, kde-format
 msgid "Scanning the logs for %1"
-msgstr ""
+msgstr "Prohledávání záznamů pro %1"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:142
 #, kde-format
@@ -3836,20 +3848,20 @@ msgstr "Zrušit"
 #, kde-format
 msgctxt "@title:window"
 msgid "Scanning logs"
-msgstr ""
+msgstr "Prohledávání záznamů"
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:231
 #: src/svnfrontend/graphtree/revisiontree.cpp:268
 #: src/svnfrontend/graphtree/revisiontree.cpp:316
 #, kde-format
 msgid "%1<br>Check change entry %2 of %3"
-msgstr ""
+msgstr "%1<br>Ověřit položku změny %2 z %3"
 
 #. i18n: ectx: property (text), widget (QLabel, m_Srclabel)
 #: src/svnfrontend/hotcopydlg.ui:11
 #, kde-format
 msgid "Repository to copy:"
-msgstr ""
+msgstr "Repozitář, který chcete zkopírovat:"
 
 #. i18n: ectx: property (text), widget (QLabel, m_Destlabel)
 #: src/svnfrontend/hotcopydlg.ui:31
@@ -3861,27 +3873,29 @@ msgstr "Cílová složka:"
 #: src/svnfrontend/hotcopydlg.ui:51
 #, kde-format
 msgid "Clean logs"
-msgstr ""
+msgstr "Vymazat záznamy"
 
 #: src/svnfrontend/importdir_logmsg.cpp:37
 #, kde-format
 msgid "No ignore"
-msgstr ""
+msgstr "Neignorovat"
 
 #: src/svnfrontend/importdir_logmsg.cpp:38
 #, kde-format
 msgid "If set, add files or directories that match ignore patterns."
 msgstr ""
+"Je-li tato volba nastavena, přidají se soubory nebo adresáře, které "
+"odpovídají vzorům pro ignorování."
 
 #: src/svnfrontend/importdir_logmsg.cpp:43
 #, kde-format
 msgid "Ignore unknown node types"
-msgstr ""
+msgstr "Ignorovat neznámé typy uzlů"
 
 #: src/svnfrontend/importdir_logmsg.cpp:44
 #, kde-format
 msgid "Should files with unknown node types be ignored"
-msgstr ""
+msgstr "Ignorovat soubory s neznámými typy uzlů"
 
 #: src/svnfrontend/importdir_logmsg.cpp:45
 #, kde-format
@@ -3889,28 +3903,30 @@ msgid ""
 "Ignore files of which the node type is unknown, such as device files and "
 "pipes."
 msgstr ""
+"Soubory, u nichž není znám typ uzlu, jako jsou například soubory zařízení a "
+"potrubí, se mají ignorovat."
 
 #: src/svnfrontend/importdir_logmsg.cpp:79
 #, kde-format
 msgid "(Last part)"
-msgstr ""
+msgstr "(poslední část)"
 
 #: src/svnfrontend/importdir_logmsg.cpp:79
 #, kde-format
 msgid "Create subdirectory %1 on import"
-msgstr ""
+msgstr "Při importu vytvořit podadresář %1"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel4)
 #: src/svnfrontend/loaddmpdlg.ui:11
 #, kde-format
 msgid "Load into repository:"
-msgstr ""
+msgstr "Načíst do úložiště:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, m_UuidGroup)
 #: src/svnfrontend/loaddmpdlg.ui:24
 #, kde-format
 msgid "Uuid action"
-msgstr ""
+msgstr "Akce uuid"
 
 #. i18n: ectx: property (text), widget (QRadioButton, m_UUidForce)
 #. i18n: ectx: property (text), widget (QCheckBox, m_ForceCheck)
@@ -3935,20 +3951,20 @@ msgstr "Výchozí"
 #: src/svnfrontend/loaddmpdlg.ui:66
 #, kde-format
 msgid "Use pre-commit hook"
-msgstr ""
+msgstr "Použít pre-commit hook"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_UsePost)
 #: src/svnfrontend/loaddmpdlg.ui:76
 #, kde-format
 msgid "Use post-commit hook"
-msgstr ""
+msgstr "Použít post-commit hook"
 
 #. i18n: ectx: property (toolTip), widget (QLabel, textLabel5)
 #. i18n: ectx: property (toolTip), widget (KLineEdit, m_Rootfolder)
 #: src/svnfrontend/loaddmpdlg.ui:86 src/svnfrontend/loaddmpdlg.ui:144
 #, kde-format
 msgid "Path to load the dump into (see context help)"
-msgstr ""
+msgstr "Cesta, do které se má výpis načíst (viz kontextová nápověda)"
 
 #. i18n: ectx: property (whatsThis), widget (QLabel, textLabel5)
 #. i18n: ectx: property (whatsThis), widget (KLineEdit, m_Rootfolder)
@@ -3958,18 +3974,20 @@ msgid ""
 "If not empty, load the dump into a specific folder instead into root of "
 "repository. This folder must exist before loading the dump."
 msgstr ""
+"Pokud není prázdná, nahrát zálohu do konkrétní složky namísto do kořenového "
+"adresáře úložiště. Tato složka musí existovat již před nahráním zálohy."
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel5)
 #: src/svnfrontend/loaddmpdlg.ui:92
 #, kde-format
 msgid "Load into folder:"
-msgstr ""
+msgstr "Načíst do složky:"
 
 #. i18n: ectx: property (text), widget (QLabel, textLabel3)
 #: src/svnfrontend/loaddmpdlg.ui:105
 #, kde-format
 msgid "Dump file:"
-msgstr ""
+msgstr "Soubor výpisu:"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_validateProps)
 #: src/svnfrontend/loaddmpdlg.ui:118

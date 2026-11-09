@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-11-07 10:56+0100\n"
+"PO-Revision-Date: 2026-11-09 00:18+0100\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 26.08.3\n"
+"X-Generator: Poedit 3.10\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -3993,23 +3993,23 @@ msgstr "Soubor výpisu:"
 #: src/svnfrontend/loaddmpdlg.ui:118
 #, kde-format
 msgid "Validate the properties on load (only Subversion 1.7 or newer)"
-msgstr ""
+msgstr "Ověřit vlastnosti při načtení (pouze Subversion 1.7 nebo novější)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_validateProps)
 #: src/svnfrontend/loaddmpdlg.ui:121
 #, kde-format
 msgid "Validate properties"
-msgstr ""
+msgstr "Ověřit vlastnosti"
 
 #: src/svnfrontend/maintreewidget.cpp:271
 #, kde-format
 msgid "Networked URL to open but networking is disabled."
-msgstr ""
+msgstr "Síťová adresa URL k otevření, ale síťové připojení je deaktivováno."
 
 #: src/svnfrontend/maintreewidget.cpp:497
 #, kde-format
 msgid "History of item"
-msgstr ""
+msgstr "Historie položky"
 
 #: src/svnfrontend/maintreewidget.cpp:502
 #: src/svnfrontend/maintreewidget.cpp:510
@@ -4021,39 +4021,41 @@ msgstr "Historie"
 #: src/svnfrontend/maintreewidget.cpp:503
 #, kde-format
 msgid "Displays the history log of selected item"
-msgstr ""
+msgstr "Zobrazí protokol historie vybrané položky"
 
 #: src/svnfrontend/maintreewidget.cpp:505
 #: src/svnfrontend/maintreewidget.cpp:514
 #, kde-format
 msgid "History of item ignoring copies"
-msgstr ""
+msgstr "Historie položky ignorující kopie"
 
 #: src/svnfrontend/maintreewidget.cpp:511
 #: src/svnfrontend/maintreewidget.cpp:520
 #, kde-format
 msgid "Displays the history log of selected item without following copies"
-msgstr ""
+msgstr "Zobrazí protokol historie vybrané položky bez následujících kopií"
 
 #: src/svnfrontend/maintreewidget.cpp:523
 #, kde-format
 msgid "Full revision tree"
-msgstr ""
+msgstr "Kompletní strom revizí"
 
 #: src/svnfrontend/maintreewidget.cpp:528
 #, kde-format
 msgid "Shows history of item as linked tree"
-msgstr ""
+msgstr "Zobrazuje historii položky ve formě propojeného stromu"
 
 #: src/svnfrontend/maintreewidget.cpp:530
 #, kde-format
 msgid "Partial revision tree"
-msgstr ""
+msgstr "Částečný strom revizí"
 
 #: src/svnfrontend/maintreewidget.cpp:535
 #, kde-format
 msgid "Shows history of item as linked tree for a revision range"
 msgstr ""
+"Zobrazuje historii položky ve formě propojeného stromu pro dané revizní "
+"období"
 
 #: src/svnfrontend/maintreewidget.cpp:538
 #: src/svnfrontend/maintreewidget.cpp:539
@@ -4069,12 +4071,12 @@ msgstr "Zobrazit vlastnosti"
 #: src/svnfrontend/maintreewidget.cpp:547
 #, kde-format
 msgid "Display last changes"
-msgstr ""
+msgstr "Zobrazit poslední změny"
 
 #: src/svnfrontend/maintreewidget.cpp:552
 #, kde-format
 msgid "Display last changes as difference to previous commit."
-msgstr ""
+msgstr "Zobrazit poslední změny jako rozdíly oproti předchozímu commitu."
 
 #: src/svnfrontend/maintreewidget.cpp:554
 #, kde-format
@@ -4084,7 +4086,7 @@ msgstr "Podrobnosti"
 #: src/svnfrontend/maintreewidget.cpp:559
 #, kde-format
 msgid "Show details about selected item"
-msgstr ""
+msgstr "Zobrazit podrobnosti o vybrané položce"
 
 #: src/svnfrontend/maintreewidget.cpp:561
 #, kde-format
@@ -4094,12 +4096,12 @@ msgstr "Přesunout"
 #: src/svnfrontend/maintreewidget.cpp:566
 #, kde-format
 msgid "Moves or renames current item"
-msgstr ""
+msgstr "Přesune nebo přejmenuje aktuální položku"
 
 #: src/svnfrontend/maintreewidget.cpp:573
 #, kde-format
 msgid "Create a copy of current item"
-msgstr ""
+msgstr "Vytvořit kopii aktuální položky"
 
 #: src/svnfrontend/maintreewidget.cpp:575
 #, kde-format
@@ -4111,11 +4113,13 @@ msgstr "Zkontrolovat aktualizace"
 msgid ""
 "Check if current working copy has items with newer version in repository"
 msgstr ""
+"Zkontrolovat, zda aktuální pracovní kopie obsahuje položky, jejichž novější "
+"verze se nachází v úložišti"
 
 #: src/svnfrontend/maintreewidget.cpp:582
 #, kde-format
 msgid "Check updates"
-msgstr ""
+msgstr "Zkontrolovat aktualizace"
 
 #: src/svnfrontend/maintreewidget.cpp:586
 #, kde-format
@@ -4129,6 +4133,8 @@ msgid ""
 "Output the content of specified files or URLs with revision and author "
 "information in-line."
 msgstr ""
+"Zobrazí obsah zadaných souborů nebo URL adres spolu s informacemi o revizi a "
+"autorovi přímo v textu."
 
 #: src/svnfrontend/maintreewidget.cpp:590
 #, kde-format
@@ -4138,42 +4144,43 @@ msgstr "Rozsah pro označení autora a revize"
 #: src/svnfrontend/maintreewidget.cpp:599
 #, kde-format
 msgid "Cat head"
-msgstr ""
+msgstr "Zobrazit obsah"
 
 #: src/svnfrontend/maintreewidget.cpp:600
 #, kde-format
 msgid "Output the content of specified files or URLs."
-msgstr ""
+msgstr "Zobrazit obsah zadaných souborů nebo URL adres."
 
 #: src/svnfrontend/maintreewidget.cpp:603
 #, kde-format
 msgid "Cat revision..."
-msgstr ""
+msgstr "Zobrazit revizi..."
 
 #: src/svnfrontend/maintreewidget.cpp:608
 #, kde-format
 msgid "Output the content of specified files or URLs at specific revision."
-msgstr ""
+msgstr "Zobrazit obsah zadaných souborů nebo URL adres v konkrétní revizi."
 
 #: src/svnfrontend/maintreewidget.cpp:612
 #, kde-format
 msgid "Lock current items"
-msgstr ""
+msgstr "Uzamknout aktuální položky"
 
 #: src/svnfrontend/maintreewidget.cpp:617
 #, kde-format
 msgid "Try lock current item against changes from other users"
 msgstr ""
+"Zkusit zabránit ostatním uživatelům v úpravách aktuálně vybrané položky"
 
 #: src/svnfrontend/maintreewidget.cpp:620
 #, kde-format
 msgid "Unlock current items"
-msgstr ""
+msgstr "Odemknout aktuální položky"
 
 #: src/svnfrontend/maintreewidget.cpp:625
 #, kde-format
 msgid "Free existing lock on current item"
-msgstr ""
+msgstr "Uvolnit stávající zámek na aktuální položce"
 
 #: src/svnfrontend/maintreewidget.cpp:630 src/svnfrontend/svnactions.cpp:673
 #, kde-format
@@ -4188,22 +4195,22 @@ msgstr "Vytvořit novou složku"
 #: src/svnfrontend/maintreewidget.cpp:637
 #, kde-format
 msgid "Switch repository"
-msgstr ""
+msgstr "Přepnout repozitář"
 
 #: src/svnfrontend/maintreewidget.cpp:642
 #, kde-format
 msgid "Switch repository path of current working copy path (\"svn switch\")"
-msgstr ""
+msgstr "Přepnout cestu k úložišti aktuální pracovní kopie (\"svn switch\")"
 
 #: src/svnfrontend/maintreewidget.cpp:646
 #, kde-format
 msgid "Relocate current working copy URL"
-msgstr ""
+msgstr "Změnit URL adresu aktuální pracovní kopie"
 
 #: src/svnfrontend/maintreewidget.cpp:651
 #, kde-format
 msgid "Relocate URL of current working copy path to other URL"
-msgstr ""
+msgstr "Přesunout URL cesty aktuální pracovní kopie na jinou URL"
 
 #: src/svnfrontend/maintreewidget.cpp:660
 #, kde-format
@@ -4214,16 +4221,17 @@ msgstr "Neverzováno"
 #, kde-format
 msgid "Browse folder for unversioned items and add them if wanted."
 msgstr ""
+"Projít složku a vyhledat položky bez verzí a v případě potřeby je přidat."
 
 #: src/svnfrontend/maintreewidget.cpp:665
 #, kde-format
 msgid "Open repository of working copy"
-msgstr ""
+msgstr "Otevřít repozitář pracovní kopie"
 
 #: src/svnfrontend/maintreewidget.cpp:670
 #, kde-format
 msgid "Opens the repository the current working copy was checked out from"
-msgstr ""
+msgstr "Otevře repozitář, ze kterého byla aktuální pracovní kopie stažena"
 
 #: src/svnfrontend/maintreewidget.cpp:673
 #, kde-format
@@ -4236,16 +4244,18 @@ msgid ""
 "Recursively clean up the working copy, removing locks, resuming unfinished "
 "operations, etc."
 msgstr ""
+"Rekurzivně vyčistit pracovní kopii, odstranit zámky, dokončit nedokončené "
+"operace atd."
 
 #: src/svnfrontend/maintreewidget.cpp:680
 #, kde-format
 msgid "Import folders into current"
-msgstr ""
+msgstr "Importovat složky do aktuální složky"
 
 #: src/svnfrontend/maintreewidget.cpp:685
 #, kde-format
 msgid "Import folder content into current URL"
-msgstr ""
+msgstr "Importovat obsah složky do aktuální URL"
 
 #: src/svnfrontend/maintreewidget.cpp:690
 #, kde-format
@@ -4255,12 +4265,12 @@ msgstr "Přidat vybrané soubory/adresáře"
 #: src/svnfrontend/maintreewidget.cpp:695
 #, kde-format
 msgid "Adding selected files and/or directories to repository"
-msgstr ""
+msgstr "Přidání vybraných souborů a/nebo adresářů do úložiště"
 
 #: src/svnfrontend/maintreewidget.cpp:698
 #, kde-format
 msgid "Add selected files/dirs recursive"
-msgstr ""
+msgstr "Přidat vybrané soubory/adresáře rekurzivně"
 
 #: src/svnfrontend/maintreewidget.cpp:703
 #, kde-format
@@ -4268,6 +4278,8 @@ msgid ""
 "Adding selected files and/or directories to repository and all subitems of "
 "folders"
 msgstr ""
+"Přidání vybraných souborů a/nebo adresářů do úložiště včetně všech podprvků "
+"složek"
 
 #: src/svnfrontend/maintreewidget.cpp:706
 #, kde-format
@@ -4277,7 +4289,7 @@ msgstr "Smazat označené soubory/adresáře"
 #: src/svnfrontend/maintreewidget.cpp:712
 #, kde-format
 msgid "Deleting selected files and/or directories from repository"
-msgstr ""
+msgstr "Smazání vybraných souborů a/nebo adresářů z úložiště"
 
 #: src/svnfrontend/maintreewidget.cpp:714
 #, kde-format
@@ -4287,12 +4299,12 @@ msgstr "Smazat složku"
 #: src/svnfrontend/maintreewidget.cpp:719
 #, kde-format
 msgid "Deleting selected directories from repository"
-msgstr ""
+msgstr "Smazání vybraných adresářů z úložiště"
 
 #: src/svnfrontend/maintreewidget.cpp:722
 #, kde-format
 msgid "Revert current changes"
-msgstr ""
+msgstr "Vrátit aktuální změny"
 
 #: src/svnfrontend/maintreewidget.cpp:729
 #, kde-format
@@ -4302,7 +4314,7 @@ msgstr "Označit vyřešené"
 #: src/svnfrontend/maintreewidget.cpp:734
 #, kde-format
 msgid "Marking files or dirs resolved"
-msgstr ""
+msgstr "Označení souborů nebo adresářů vyřešeno"
 
 #: src/svnfrontend/maintreewidget.cpp:737
 #, kde-format
@@ -4312,13 +4324,13 @@ msgstr "Vyřešit konflikty"
 #: src/svnfrontend/maintreewidget.cpp:743
 #, kde-format
 msgid "Ignore/Unignore current item"
-msgstr ""
+msgstr "Ignorovat/Zrušit ignorování aktuální položky"
 
 #: src/svnfrontend/maintreewidget.cpp:745
 #: src/svnfrontend/maintreewidget.cpp:751
 #, kde-format
 msgid "Add or Remove ignore pattern"
-msgstr ""
+msgstr "Přidat nebo odebrat vzor pro ignorování"
 
 #: src/svnfrontend/maintreewidget.cpp:758
 #: src/svnfrontend/maintreewidget.cpp:897
@@ -4348,7 +4360,7 @@ msgstr "Commit"
 #: src/svnfrontend/maintreewidget.cpp:786
 #, kde-format
 msgid "Diff local changes"
-msgstr ""
+msgstr "Porovnat lokální změny"
 
 #: src/svnfrontend/maintreewidget.cpp:784
 #: src/svnfrontend/maintreewidget.cpp:791
@@ -4357,11 +4369,13 @@ msgid ""
 "Diff working copy against BASE (last checked out version) - does not require "
 "access to repository"
 msgstr ""
+"Porovnání pracovní kopie s BASE (poslední staženou verzí) – nevyžaduje "
+"přístup k repozitáři"
 
 #: src/svnfrontend/maintreewidget.cpp:794
 #, kde-format
 msgid "Diff against HEAD"
-msgstr ""
+msgstr "Porovnat s HEAD"
 
 #: src/svnfrontend/maintreewidget.cpp:799
 #, kde-format
@@ -4369,18 +4383,20 @@ msgid ""
 "Diff working copy against HEAD (last checked in version)- requires access to "
 "repository"
 msgstr ""
+"Porovnání pracovní kopie s HEAD (poslední zapsaná verze) – vyžaduje přístup "
+"k repozitáři"
 
 #: src/svnfrontend/maintreewidget.cpp:802
 #: src/svnfrontend/maintreewidget.cpp:809
 #, kde-format
 msgid "Diff items"
-msgstr ""
+msgstr "Rozdíly v položkách"
 
 #: src/svnfrontend/maintreewidget.cpp:807
 #: src/svnfrontend/maintreewidget.cpp:814
 #, kde-format
 msgid "Diff two items"
-msgstr ""
+msgstr "Rozdíly mezi dvěma položkami"
 
 #: src/svnfrontend/maintreewidget.cpp:817
 #, kde-format
@@ -4395,7 +4411,7 @@ msgstr "Sloučit"
 #: src/svnfrontend/maintreewidget.cpp:823
 #, kde-format
 msgid "Merge two revisions of this entry into itself"
-msgstr ""
+msgstr "Sloučit dvě revize tohoto vstupu do jednoho"
 
 #: src/svnfrontend/maintreewidget.cpp:831
 #, kde-format
@@ -4403,6 +4419,8 @@ msgid ""
 "Merge repository path into current working copy path or current repository "
 "path into a target"
 msgstr ""
+"Sloučit cestu k repozitáři s cestou k aktuální pracovní kopii nebo cestu k "
+"aktuálnímu repozitáři s cestou k cíli"
 
 #: src/svnfrontend/maintreewidget.cpp:832
 #: src/svnfrontend/maintreewidget.cpp:1394
@@ -4414,7 +4432,7 @@ msgstr "Otevřít pomocí..."
 #: src/svnfrontend/maintreewidget.cpp:836
 #, kde-format
 msgid "Checkout current repository path"
-msgstr ""
+msgstr "Načíst aktuální cestu k repozitáři"
 
 #: src/svnfrontend/maintreewidget.cpp:841
 #: src/svnfrontend/maintreewidget.cpp:857
@@ -4425,12 +4443,12 @@ msgstr "Načíst"
 #: src/svnfrontend/maintreewidget.cpp:843
 #, kde-format
 msgid "Export current repository path"
-msgstr ""
+msgstr "Exportovat aktuální cestu k repozitáři"
 
 #: src/svnfrontend/maintreewidget.cpp:848
 #, kde-format
 msgid "Select browse revision"
-msgstr ""
+msgstr "Vybrat revizi (procházet)"
 
 #: src/svnfrontend/maintreewidget.cpp:852 src/svnfrontend/svnactions.cpp:1709
 #: src/svnfrontend/svnactions.cpp:1716
@@ -4462,7 +4480,7 @@ msgstr "Obnovit"
 #: src/svnfrontend/maintreewidget.cpp:874 src/svnfrontend/svnlogdlg.ui:211
 #, kde-format
 msgid "Diff revisions"
-msgstr ""
+msgstr "Rozdíly v revizích"
 
 #: src/svnfrontend/maintreewidget.cpp:881
 #, kde-format
@@ -4490,61 +4508,61 @@ msgstr "Zavře všechny části stromu souborů"
 #: src/svnfrontend/maintreewidget.cpp:2056
 #, kde-format
 msgid "Update log cache"
-msgstr ""
+msgstr "Aktualizovat mezipaměť záznamu"
 
 #: src/svnfrontend/maintreewidget.cpp:888
 #, kde-format
 msgid "Update the log cache for current repository"
-msgstr ""
+msgstr "Aktualizovat mezipaměť záznamu pro aktuální repozitář"
 
 #: src/svnfrontend/maintreewidget.cpp:902
 #, kde-format
 msgid "Set property recursive"
-msgstr ""
+msgstr "Nastavit vlastnost rekurzivně"
 
 #: src/svnfrontend/maintreewidget.cpp:905
 #, kde-format
 msgid "Settings for current repository"
-msgstr ""
+msgstr "Nastavení pro aktuální repozitář"
 
 #: src/svnfrontend/maintreewidget.cpp:1083
 #: src/svnfrontend/maintreewidget.cpp:2051
 #, kde-format
 msgid "Stop updating the log cache"
-msgstr ""
+msgstr "Zastavit aktualizaci mezipaměti záznamu"
 
 #: src/svnfrontend/maintreewidget.cpp:1280
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Pattern to Ignore for \"%1\""
-msgstr ""
+msgstr "Upravit vzor, který se má u \"%1\" ignorovat"
 
 #: src/svnfrontend/maintreewidget.cpp:1558
 #: src/svnfrontend/maintreewidget.cpp:1601
 #, kde-format
 msgid "Nothing selected for unlock"
-msgstr ""
+msgstr "Není vybráno nic k odemčení"
 
 #: src/svnfrontend/maintreewidget.cpp:1562
 #, kde-format
 msgctxt "@title:window"
 msgid "Lock Message"
-msgstr ""
+msgstr "Uzamknout zprávu"
 
 #: src/svnfrontend/maintreewidget.cpp:1569
 #, kde-format
 msgid "Steal lock?"
-msgstr ""
+msgstr "Porušit zámek?"
 
 #: src/svnfrontend/maintreewidget.cpp:1605
 #, kde-format
 msgid "Break lock or ignore missing locks?"
-msgstr ""
+msgstr "Porušit zámek, nebo ignorovat chybějící zámky?"
 
 #: src/svnfrontend/maintreewidget.cpp:1606
 #, kde-format
 msgid "Unlocking items"
-msgstr ""
+msgstr "Odemykání položek"
 
 #: src/svnfrontend/maintreewidget.cpp:1607
 #, kde-format
@@ -4561,17 +4579,17 @@ msgstr "Ignorovat"
 #: src/svnfrontend/maintreewidget.cpp:1902
 #, kde-format
 msgid "Nothing selected for delete"
-msgstr ""
+msgstr "Není vybráno nic ke smazání"
 
 #: src/svnfrontend/maintreewidget.cpp:2073
 #, kde-format
 msgid "Automatic generated base layout by kdesvn"
-msgstr ""
+msgstr "Automaticky vygenerované základní rozvržení pomocí kdesvn"
 
 #: src/svnfrontend/maintreewidget.cpp:2086
 #, kde-format
 msgid "May not make subdirectories of a file"
-msgstr ""
+msgstr "Nesmí se vytvářet podadresáře souboru"
 
 #: src/svnfrontend/maintreewidget.cpp:2198 src/svnfrontend/svnactions.cpp:2306
 #, kde-format
@@ -4582,13 +4600,13 @@ msgstr "Sloučit"
 #: src/svnfrontend/maintreewidget.cpp:2260
 #, kde-format
 msgid "Error getting entry to relocate"
-msgstr ""
+msgstr "Došlo k chybě při načítání položky k přesunutí"
 
 #: src/svnfrontend/maintreewidget.cpp:2266
 #, kde-format
 msgctxt "@title:window"
 msgid "Relocate Path %1"
-msgstr ""
+msgstr "Změnit cestu %1"
 
 #: src/svnfrontend/maintreewidget.cpp:2280 src/svnfrontend/svnactions.cpp:1709
 #: src/svnfrontend/svnactions.cpp:1965
@@ -4599,17 +4617,17 @@ msgstr "Neplatná URL!"
 #: src/svnfrontend/maintreewidget.cpp:2280
 #, kde-format
 msgid "Relocate path %1"
-msgstr ""
+msgstr "Změnit cestu %1"
 
 #: src/svnfrontend/maintreewidget.cpp:2303
 #, kde-format
 msgid "Cannot import into multiple targets"
-msgstr ""
+msgstr "Nelze importovat do více cílů"
 
 #: src/svnfrontend/maintreewidget.cpp:2317
 #, kde-format
 msgid "Import files from folder"
-msgstr ""
+msgstr "Importovat soubory ze složky"
 
 #: src/svnfrontend/maintreewidget.cpp:2319
 #, kde-format
@@ -4620,17 +4638,17 @@ msgstr "Importovat soubor"
 #, kde-format
 msgctxt "@title:window"
 msgid "Import Log"
-msgstr ""
+msgstr "Importovat záznam"
 
 #: src/svnfrontend/maintreewidget.cpp:2399
 #, kde-format
 msgid "Could not retrieve repository of working copy."
-msgstr ""
+msgstr "Nepodařilo se načíst repozitář pracovní kopie."
 
 #: src/svnfrontend/maintreewidget.cpp:2408
 #, kde-format
 msgid "Only in working copy possible."
-msgstr ""
+msgstr "Toto je možné pouze v pracovní kopii."
 
 #: src/svnfrontend/maintreewidget.cpp:2408
 #: src/svnfrontend/maintreewidget.cpp:2412
@@ -4642,17 +4660,18 @@ msgstr "Chyba"
 #: src/svnfrontend/maintreewidget.cpp:2412
 #, kde-format
 msgid "Only on single folder possible"
-msgstr ""
+msgstr "Toto lze provést pouze u jedné složky"
 
 #: src/svnfrontend/maintreewidget.cpp:2417
 #, kde-format
 msgid "Sorry - internal error"
-msgstr ""
+msgstr "Omlouváme se – došlo k interní chybě"
 
 #: src/svnfrontend/maintreewidget.cpp:2481
 #, kde-format
 msgid "Hold Ctrl key while click on selected item for unselect"
 msgstr ""
+"Chcete-li zrušit výběr, podržte klávesu Ctrl a klikněte na vybranou položku"
 
 #. i18n: ectx: property (toolTip), widget (QTreeView, m_LogTreeView)
 #. i18n: ectx: property (toolTip), widget (QTreeWidget, m_ChangedList)
@@ -4660,12 +4679,12 @@ msgstr ""
 #: src/svnfrontend/svnlogdlg.ui:148
 #, kde-format
 msgid "See context menu for more actions"
-msgstr ""
+msgstr "Další možnosti najdete v kontextové nabídce"
 
 #: src/svnfrontend/maintreewidget.cpp:2487
 #, kde-format
 msgid "Click for navigate"
-msgstr ""
+msgstr "Klikněte pro ovládání"
 
 #: src/svnfrontend/maintreewidget.cpp:2490
 #, kde-format
@@ -4675,7 +4694,7 @@ msgstr "Ovládání"
 #: src/svnfrontend/maintreewidget.cpp:2606
 #, kde-format
 msgid "Could not retrieve repository."
-msgstr ""
+msgstr "Nepodařilo se načíst repozitář."
 
 #: src/svnfrontend/maintreewidget.cpp:2636
 #, kde-format
@@ -4685,13 +4704,13 @@ msgstr "Není implementováno"
 #: src/svnfrontend/maintreewidget.cpp:2636
 #, kde-format
 msgid "Edit property recursively"
-msgstr ""
+msgstr "Upravit vlastnost rekurzivně"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, MergeDlg)
 #: src/svnfrontend/merge_dlg.ui:14
 #, kde-format
 msgid "MergeSettings"
-msgstr ""
+msgstr "Nastavení sloučení"
 
 #. i18n: ectx: property (text), widget (QLabel, m_SrcOneLabel)
 #: src/svnfrontend/merge_dlg.ui:22
@@ -4715,7 +4734,7 @@ msgstr "Výstup do:"
 #: src/svnfrontend/merge_dlg.ui:72
 #, kde-format
 msgid "Merge parameter"
-msgstr ""
+msgstr "Parametr sloučení"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_RecursiveCheck)
 #: src/svnfrontend/merge_dlg.ui:90
@@ -4727,49 +4746,49 @@ msgstr "Rekurzivně"
 #: src/svnfrontend/merge_dlg.ui:103
 #, kde-format
 msgid "Handle unrelated as related items"
-msgstr ""
+msgstr "Zpracovat nesouvisející položky jako související"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_RelatedCheck)
 #: src/svnfrontend/merge_dlg.ui:106
 #, kde-format
 msgid "Ignore ancestry"
-msgstr ""
+msgstr "Ignorovat původ"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_ForceCheck)
 #: src/svnfrontend/merge_dlg.ui:113
 #, kde-format
 msgid "Force delete on modified/unversioned items"
-msgstr ""
+msgstr "Vynutit smazání u upravených/neverzovaných položek"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_Reintegrate)
 #: src/svnfrontend/merge_dlg.ui:126
 #, kde-format
 msgid "lump-merge all of source URL's unmerged changes"
-msgstr ""
+msgstr "hromadně sloučit všechny nesloučené změny ze zdrojových URL adres"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_Reintegrate)
 #: src/svnfrontend/merge_dlg.ui:132
 #, kde-format
 msgid "Reintegrate merge"
-msgstr ""
+msgstr "Znovu začlenit sloučení"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_DryCheck)
 #: src/svnfrontend/merge_dlg.ui:139
 #, kde-format
 msgid "Just dry run without modifications"
-msgstr ""
+msgstr "Prostě si to vyzkoušejte bez úprav"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_DryCheck)
 #: src/svnfrontend/merge_dlg.ui:142
 #, kde-format
 msgid "Dry run"
-msgstr ""
+msgstr "Zkouška bez úprav"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_RecordOnly)
 #: src/svnfrontend/merge_dlg.ui:152
 #, kde-format
 msgid "Only write mergeinfo"
-msgstr ""
+msgstr "Zapsat pouze informace o sloučení"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, m_RecordOnly)
 #: src/svnfrontend/merge_dlg.ui:155
@@ -4778,24 +4797,26 @@ msgid ""
 "The merge is not actually performed, but the mergeinfo for the revisions "
 "which would have been merged is recorded in the working copy"
 msgstr ""
+"Ke sloučení ve skutečnosti nedojde, ale informace o sloučení (mergeinfo) pro "
+"revize, které by byly sloučeny, se zaznamenají do pracovní kopie"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_RecordOnly)
 #: src/svnfrontend/merge_dlg.ui:158
 #, kde-format
 msgid "Record only"
-msgstr ""
+msgstr "Pouze záznam"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_useExternMerge)
 #: src/svnfrontend/merge_dlg.ui:165
 #, kde-format
 msgid "Use external merge not Subversion's merge"
-msgstr ""
+msgstr "Použít externí sloučení, nikoli sloučení v Subversion"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_useExternMerge)
 #: src/svnfrontend/merge_dlg.ui:168
 #, kde-format
 msgid "Use external merge"
-msgstr ""
+msgstr "Použít externí sloučení"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, m_AllowMixedRev)
 #: src/svnfrontend/merge_dlg.ui:175
@@ -4804,6 +4825,8 @@ msgid ""
 "If checked, allow merge into mixed revision working copy, otherwise raises "
 "error in that case"
 msgstr ""
+"Je-li zaškrtnuto, povolí se sloučení do pracovní kopie se smíšenými "
+"revizemi; v opačném případě se v takovém případě vygeneruje chyba"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_AllowMixedRev)
 #: src/svnfrontend/merge_dlg.ui:179
@@ -4812,12 +4835,14 @@ msgid ""
 "Merge into mixed revision\n"
 "working copy"
 msgstr ""
+"Sloučit do smíšené revize\n"
+"pracovní kopie"
 
 #: src/svnfrontend/mergedlg_impl.cpp:196
 #, kde-format
 msgctxt "@title:window"
 msgid "Enter Merge Range"
-msgstr ""
+msgstr "Zadat rozsah pro sloučení"
 
 #: src/svnfrontend/models/logitemmodel.cpp:179
 #, kde-format
@@ -4844,7 +4869,7 @@ msgstr "Stav"
 #: src/svnfrontend/models/svnitemmodel.cpp:321
 #, kde-format
 msgid "Last changed Revision"
-msgstr ""
+msgstr "Poslední změněná revize"
 
 #: src/svnfrontend/models/svnitemmodel.cpp:323
 #: src/svnfrontend/svnactions.cpp:808
@@ -4860,7 +4885,7 @@ msgstr "Datum poslední změny"
 #: src/svnfrontend/models/svnitemmodel.cpp:327
 #, kde-format
 msgid "Locked by"
-msgstr ""
+msgstr "Uzamčeno"
 
 #: src/svnfrontend/opencontextmenu.cpp:59
 #, kde-format
@@ -4870,7 +4895,7 @@ msgstr "Jiný..."
 #: src/svnfrontend/propertiesdlg.cpp:80
 #, kde-format
 msgid "Undelete property"
-msgstr ""
+msgstr "Zrušit smazání vlastnosti"
 
 #: src/svnfrontend/propertiesdlg.cpp:82
 #, kde-format
@@ -4880,13 +4905,13 @@ msgstr "Smazat vlastnost"
 #: src/svnfrontend/propertiesdlg.cpp:89
 #, kde-format
 msgid "Missing SVN link"
-msgstr ""
+msgstr "Chybějící odkaz SVN"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, PropertiesDlg)
 #: src/svnfrontend/propertiesdlg.ui:14
 #, kde-format
 msgid "View and modify properties"
-msgstr ""
+msgstr "Zobrazit a upravit vlastnosti"
 
 #. i18n: ectx: property (text), widget (QPushButton, pbAdd)
 #: src/svnfrontend/propertiesdlg.ui:39
@@ -4924,55 +4949,55 @@ msgstr "Dokončeno"
 #: src/svnfrontend/svnactions.cpp:360
 #, kde-format
 msgid "Got no logs"
-msgstr ""
+msgstr "Nejsou žádné záznamy"
 
 #: src/svnfrontend/svnactions.cpp:484
 #, kde-format
 msgid "Got no info."
-msgstr ""
+msgstr "Nejsou žádné informace."
 
 #: src/svnfrontend/svnactions.cpp:521
 #, kde-format
 msgctxt "@title:window"
 msgid "History of %1"
-msgstr ""
+msgstr "Historie %1"
 
 #: src/svnfrontend/svnactions.cpp:562
 #, kde-format
 msgctxt "@title:window"
 msgid "Annotate"
-msgstr "Poznamenat"
+msgstr "Poznámka"
 
 #: src/svnfrontend/svnactions.cpp:562
 #, kde-format
 msgid "Annotate lines - hit Cancel for abort"
-msgstr ""
+msgstr "Označit řádky – pro zrušení stiskněte tlačítko Zrušit"
 
 #: src/svnfrontend/svnactions.cpp:570
 #, kde-format
 msgid "Got no annotate"
-msgstr ""
+msgstr "Nejsou žádné poznámky"
 
 #: src/svnfrontend/svnactions.cpp:587
 #, kde-format
 msgctxt "@title:window"
 msgid "Content Get"
-msgstr ""
+msgstr "Načíst obsah"
 
 #: src/svnfrontend/svnactions.cpp:587
 #, kde-format
 msgid "Getting content - hit Cancel for abort"
-msgstr ""
+msgstr "Načítání obsahu – pro zrušení stiskněte tlačítko Zrušit"
 
 #: src/svnfrontend/svnactions.cpp:594
 #, kde-format
 msgid "Error getting content"
-msgstr ""
+msgstr "Došlo k chybě při načítání obsahu"
 
 #: src/svnfrontend/svnactions.cpp:607
 #, kde-format
 msgid "Error while open temporary file"
-msgstr ""
+msgstr "Došlo k chybě při otevírání dočasného souboru"
 
 #: src/svnfrontend/svnactions.cpp:638
 #, kde-format
@@ -4983,7 +5008,7 @@ msgstr "Obsah %1"
 #: src/svnfrontend/svnactions.cpp:648
 #, kde-format
 msgid "Got no content."
-msgstr ""
+msgstr "Není žádný obsah."
 
 #: src/svnfrontend/svnactions.cpp:673
 #, kde-format
@@ -4999,7 +5024,7 @@ msgstr "Podrobnosti"
 #: src/svnfrontend/svnactions.cpp:713
 #, kde-format
 msgid "Retrieving information - hit Cancel for abort"
-msgstr ""
+msgstr "Načítání informací – pro zrušení stiskněte tlačítko Zrušit"
 
 #: src/svnfrontend/svnactions.cpp:752
 #, kde-format
@@ -5009,7 +5034,7 @@ msgstr "URL"
 #: src/svnfrontend/svnactions.cpp:754
 #, kde-format
 msgid "Canonical repository URL"
-msgstr ""
+msgstr "Kanonická adresa URL repozitáře"
 
 #: src/svnfrontend/svnactions.cpp:757
 #, kde-format
@@ -5074,42 +5099,42 @@ msgstr "UUID"
 #: src/svnfrontend/svnactions.cpp:810
 #, kde-format
 msgid "Last committed"
-msgstr ""
+msgstr "Poslední commit"
 
 #: src/svnfrontend/svnactions.cpp:812
 #, kde-format
 msgid "Last revision"
-msgstr ""
+msgstr "Poslední revize"
 
 #: src/svnfrontend/svnactions.cpp:814
 #, kde-format
 msgid "Content last changed"
-msgstr ""
+msgstr "Poslední změněný obsah"
 
 #: src/svnfrontend/svnactions.cpp:818
 #, kde-format
 msgid "Property last changed"
-msgstr ""
+msgstr "Poslední změněná vlastnost"
 
 #: src/svnfrontend/svnactions.cpp:821
 #, kde-format
 msgid "New version of conflicted file"
-msgstr ""
+msgstr "Nová verze souboru s konfliktem"
 
 #: src/svnfrontend/svnactions.cpp:824
 #, kde-format
 msgid "Property reject file"
-msgstr ""
+msgstr "Soubor s odmítnutými vlastnostmi"
 
 #: src/svnfrontend/svnactions.cpp:828
 #, kde-format
 msgid "Copy from URL"
-msgstr ""
+msgstr "Kopírovat z URL"
 
 #: src/svnfrontend/svnactions.cpp:831 src/svnfrontend/svnactions.cpp:838
 #, kde-format
 msgid "Lock token"
-msgstr ""
+msgstr "Uzamknout token"
 
 #: src/svnfrontend/svnactions.cpp:832 src/svnfrontend/svnactions.cpp:839
 #, kde-format
@@ -5119,18 +5144,18 @@ msgstr "Vlastník"
 #: src/svnfrontend/svnactions.cpp:833 src/svnfrontend/svnactions.cpp:840
 #, kde-format
 msgid "Locked on"
-msgstr ""
+msgstr "Uzamčeno"
 
 #: src/svnfrontend/svnactions.cpp:834 src/svnfrontend/svnactions.cpp:841
 #, kde-format
 msgid "Lock comment"
-msgstr ""
+msgstr "Komentář uzamčení"
 
 #: src/svnfrontend/svnactions.cpp:888
 #, kde-format
 msgctxt "@title:window"
 msgid "Infolist"
-msgstr ""
+msgstr "Infolist"
 
 #: src/svnfrontend/svnactions.cpp:927
 #, kde-format
@@ -5141,17 +5166,17 @@ msgstr "Aplikování vlastnosti"
 #: src/svnfrontend/svnactions.cpp:928
 #, kde-format
 msgid "<center>Applying<br/>hit cancel for abort</center>"
-msgstr ""
+msgstr "<center>Aplikování<br/>pro zrušení stiskněte tlačítko Zrušit</center>"
 
 #: src/svnfrontend/svnactions.cpp:964
 #, kde-format
 msgid "Could not change to folder %1\n"
-msgstr ""
+msgstr "Nelze přejít do složky %1\n"
 
 #: src/svnfrontend/svnactions.cpp:982
 #, kde-format
 msgid "Not commit because networking is disabled"
-msgstr ""
+msgstr "Není možné odeslat commit, protože je deaktivována síťová komunikace"
 
 #: src/svnfrontend/svnactions.cpp:1006 src/svnfrontend/svnactions.cpp:2465
 #, kde-format
@@ -5162,18 +5187,18 @@ msgstr "Stav / Seznam"
 #: src/svnfrontend/svnactions.cpp:1007 src/svnfrontend/svnactions.cpp:2466
 #, kde-format
 msgid "Creating list / check status"
-msgstr ""
+msgstr "Vytvoření seznamu / kontrola stavu"
 
 #: src/svnfrontend/svnactions.cpp:1046 src/svnfrontend/svnactions.cpp:1053
 #: src/svnfrontend/svnactions.cpp:1075
 #, kde-format
 msgid "Add and Commit"
-msgstr ""
+msgstr "Přidat a odeslat commit"
 
 #: src/svnfrontend/svnactions.cpp:1051
 #, kde-format
 msgid "Delete and Commit"
-msgstr ""
+msgstr "Smazat a odeslat commit"
 
 #: src/svnfrontend/svnactions.cpp:1114
 #, kde-format
@@ -5184,7 +5209,7 @@ msgstr "Commit"
 #: src/svnfrontend/svnactions.cpp:1114
 #, kde-format
 msgid "Commit - hit Cancel for abort"
-msgstr ""
+msgstr "Commit - pro zrušení stiskněte tlačítko Zrušit"
 
 #: src/svnfrontend/svnactions.cpp:1141
 #, kde-format
@@ -5195,65 +5220,65 @@ msgstr "Stahování"
 #: src/svnfrontend/svnactions.cpp:1142
 #, kde-format
 msgid "Download - hit Cancel for abort"
-msgstr ""
+msgstr "Stáhnout - pro zrušení stiskněte tlačítko Zrušit"
 
 #: src/svnfrontend/svnactions.cpp:1168
 #, kde-format
 msgid "Can not do this diff because networking is disabled."
-msgstr ""
+msgstr "Tuto změnu nelze provést, protože je deaktivována síťová komunikace."
 
 #: src/svnfrontend/svnactions.cpp:1222
 #, kde-format
 msgid "Both entries seems to be the same, can not diff."
-msgstr ""
+msgstr "Obě položky se zdají být stejné, nelze je porovnat."
 
 #: src/svnfrontend/svnactions.cpp:1283
 #, kde-format
 msgid "Diff-process could not started, check command."
-msgstr ""
+msgstr "Proces Diff se nepodařilo spustit, zkontrolujte příkaz."
 
 #: src/svnfrontend/svnactions.cpp:1342 src/svnfrontend/svnactions.cpp:1404
 #, kde-format
 msgctxt "@title:window"
 msgid "Diffing"
-msgstr ""
+msgstr "Porovnání"
 
 #: src/svnfrontend/svnactions.cpp:1342
 #, kde-format
 msgid "Diffing - hit Cancel for abort"
-msgstr ""
+msgstr "Porovnání - pro zrušení stiskněte tlačítko Zrušit"
 
 #: src/svnfrontend/svnactions.cpp:1355 src/svnfrontend/svnactions.cpp:1414
 #, kde-format
 msgid "No difference to display"
-msgstr ""
+msgstr "Žádný rozdíl k zobrazení"
 
 #: src/svnfrontend/svnactions.cpp:1405
 #, kde-format
 msgid "Diffing - hit cancel for abort"
-msgstr ""
+msgstr "Porovnání - pro zrušení stiskněte tlačítko Zrušit"
 
 #: src/svnfrontend/svnactions.cpp:1460
 #, kde-format
 msgid "Display process could not started, check command."
-msgstr ""
+msgstr "Proces zobrazení se nepodařilo spustit, zkontrolujte příkaz."
 
 #: src/svnfrontend/svnactions.cpp:1472
 #, kde-format
 msgctxt "@title:window"
 msgid "Diff Display"
-msgstr ""
+msgstr "Zobrazit rozdíl"
 
 #: src/svnfrontend/svnactions.cpp:1520
 #, kde-format
 msgctxt "@title:window"
 msgid "Making update"
-msgstr ""
+msgstr "Provádění aktualizace"
 
 #: src/svnfrontend/svnactions.cpp:1521
 #, kde-format
 msgid "Making update - hit Cancel for abort"
-msgstr ""
+msgstr "Provádění aktualizace - pro zrušení stiskněte tlačítko Zrušit"
 
 #: src/svnfrontend/svnactions.cpp:1606
 #, kde-format

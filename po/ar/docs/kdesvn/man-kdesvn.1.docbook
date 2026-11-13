@@ -1,0 +1,205 @@
+<?xml version="1.0" ?>
+<!DOCTYPE refentry PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+<!ENTITY % Arabic "INCLUDE">
+]>
+
+<refentry lang="&language;" id='kdesvn1'>
+<refentryinfo>
+<title
+>دليل مستخدم اس في ان لكيدي</title>
+<author
+><personname
+> <firstname
+>Rajko</firstname
+> <surname
+>Albrecht</surname
+> </personname
+> <email
+>ral@alwins-world.de</email
+></author>
+<date
+>2016-05-22</date>
+<releaseinfo
+>اس في ان لكيدي 2.1.0</releaseinfo>
+</refentryinfo>
+
+<refmeta>
+<refentrytitle
+><command
+>kdesvn</command
+></refentrytitle>
+<manvolnum
+>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname
+><command
+>kdesvn</command
+></refname>
+<refpurpose
+>عميل سبفيرشن من كيدي (تطبيق مستقل)</refpurpose>
+</refnamediv>
+<!-- body begins here -->
+<refsynopsisdiv id='synopsis'>
+<cmdsynopsis
+><command
+>kdesvn</command
+> <arg choice="opt"
+><replaceable
+>خيارات</replaceable
+></arg
+> <arg choice="plain"
+><replaceable
+>نفّذ</replaceable
+></arg
+> <arg choice="plain"
+><replaceable
+>&lt;أمر&gt;</replaceable
+></arg
+> <arg choice="opt"
+><replaceable
+>URL</replaceable
+></arg
+> </cmdsynopsis>
+</refsynopsisdiv>
+
+
+<refsect1 id='description'
+><title
+>الوصف</title>
+<para
+>عميل سبفيرشن من كيدي (تطبيق مستقل)</para>
+</refsect1>
+
+<refsect1 id='options'
+><title
+>خيارات</title>
+
+<refsect2 id='ss_arguments'
+><title
+>المعاملات:</title>
+<variablelist>
+  <varlistentry>
+  <term
+><emphasis
+>exec</emphasis
+> &lt;أمر&gt;</term>
+  <listitem
+><para
+>نفّذ أمر سابفيرجن (اكتب "exec help" لمزيد من المعلومات، يفتح مركز مساعدة كيدي)</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><emphasis
+>رابط</emphasis
+></term>
+  <listitem>
+<para
+>المسار إلى نسخة العمل المحلية أو مستودع.</para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</refsect2>
+
+<refsect2 id='options2'
+><title
+>الخيارات:</title>
+<variablelist>
+  <varlistentry>
+  <term
+><option
+>-r startrev[:endrev]</option
+></term>
+  <listitem>
+<para
+>نَفِّذ أمر Subversion واحد على تنقيح (نطاق تنقيحات) محدد</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-R</option
+></term>
+  <listitem>
+<para
+>اِسْأَل عن تنقيح عند تنفيذ أمر واحد</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-f</option
+></term>
+  <listitem>
+<para
+>أَجْبِر على العملية</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-o &lt;file&gt;</option
+></term>
+  <listitem>
+<para
+>احفظ مخرجات أمر سابفيرجن (مثل <quote
+>cat</quote
+>) في ملف &lt;ملف&gt;</para>
+  </listitem>
+  </varlistentry>
+  <varlistentry>
+  <term
+><option
+>-l &lt;number&gt;</option
+></term>
+  <listitem>
+<para
+>اقتصر مخرجات السجل على &lt;عدد&gt;</para>
+  </listitem>
+  </varlistentry>
+</variablelist>
+</refsect2>
+
+</refsect1>
+
+<refsect1 id='example'>
+<title
+>مثال</title>
+<para
+>kdesvn file:///<replaceable
+>path/to/local/working/copy</replaceable
+></para>
+<para
+>kdesvn http://<replaceable
+>remote/svn/project/trunk</replaceable
+></para>
+</refsect1>
+
+<refsect1 id='see_also'>
+<title
+>انظر أيضًا</title>
+<simplelist>
+<member
+>وثائق المستخدم الكاملة متاحة عبر &khelpcenter;. يمكنك أيضًا إدخال &URL; <emphasis
+>help:/kdesvn/</emphasis
+> مباشرة في &konqueror; أو تشغيل <emphasis
+>`khelpcenter help:/kdesvn/'</emphasis
+> من سطر الأوامر.</member>
+<member
+>kf5options(7)</member>
+<member
+>qt5options(7)</member>
+</simplelist>
+</refsect1>
+
+<refsect1 id='authors'
+><title
+>المؤلفون</title>
+<literallayout
+>Rajko Albrecht &lt;ral@alwins-world.de&gt;
+</literallayout
+></refsect1>
+</refentry>
+

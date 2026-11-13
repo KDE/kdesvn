@@ -1,0 +1,3498 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kdesvn "<application
+>kdesvn</application
+>">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY Rajko.Albrecht '<personname
+><firstname
+>Rajko</firstname
+><surname
+>Albrecht</surname
+></personname
+>'>
+  <!ENTITY Rajko.Albrecht.mail '<email
+>ral@alwins-world.de</email
+>'>
+  <!ENTITY % Arabic "INCLUDE"
+><!-- change language only here -->
+]>
+
+<book lang="&language;">
+
+<bookinfo>
+<title
+>دليل اس في ان لكيدي</title>
+
+<authorgroup>
+<author
+><firstname
+>Rajko</firstname
+> <surname
+>Albrecht</surname
+> <affiliation
+> <address
+>&Rajko.Albrecht.mail;</address>
+</affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>زايد</firstname
+><surname
+>السعيدي</surname
+><affiliation
+><address
+><email
+>zayed.alsaidi@gmail.com</email
+></address
+></affiliation
+><contrib
+>التّرجمة العربيّة</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2005</year>
+<year
+>2008</year>
+<holder
+>&Rajko.Albrecht;</holder>
+</copyright>
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2016-05-22</date>
+<releaseinfo
+>اس في ان لكيدي 2.0</releaseinfo>
+
+<abstract>
+<para
+>اس في ان لكيدي - عميل سابفيرجن من &kde;. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>كيدي</keyword>
+<keyword
+>اس في ان لكيدي</keyword>
+<keyword
+>subversion</keyword>
+<keyword
+>نظام تحكم بالمراجعات</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>مقدمة</title>
+
+<para
+>اس في ان لكيدي هو <ulink url="http://subversion.apache.org/"
+>عميل سابفيرجن</ulink
+> من &kde;. </para>
+<para
+>يجب أن تكون لديك بعض المعرفة عن سابفيرجن نفسه، لكن آمل أن معظم العناصر واضحة بذاتها. </para>
+<para
+>يمكنك إرسال تقارير الأخطاء وطلبات الميزات عبر <ulink url="https://bugs.kde.org/"
+>نظام تتبع الأخطاء في &kde;</ulink
+>. </para>
+
+<sect1 id="kdesvn-terms">
+<title
+>المصطلحات</title>
+<para
+>إذا كنت معتادًا على أنظمة التحكم بالمراجعات، يمكنك تخطي ذلك - أو القراءة وتصحيح المؤلف ;) </para>
+<para>
+<variablelist>
+<varlistentry>
+<term
+>المستودع</term>
+<listitem
+><para
+>مخزن مركزي للبيانات. قد يكون قاعدة بيانات أو نظام ملفات مسطح. بدون عملاء خاصين، لا يمكنك قراءة البيانات فيه. بالنسبة لمستودعات سابفيرجن، اس في ان لكيدي هو مثل هذا العميل. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>نسخة العمل</term>
+<listitem
+><para
+>نسخة مسطحة من مستودع على نظام الملفات المحلي. تُستخدم مثل أي مدير ملفات عادي، لتحرير الملفات وما إلى ذلك. يمكنك قراءة معلومات نظام التحكم بالمراجعات باستخدام عملاء مثل اس في ان لكيدي. </para>
+<para
+>تذكر أن سابفيرجن لا يعرف شيئًا عن KIO، لذا يجب أن توجد نسخة العمل في منطقة يمكن الوصول إليها دون أي بروتوكول محدد، مثل <quote
+>fish://</quote
+> أو ما شابه غير ممكن. </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>WebDav</term>
+<listitem
+><para
+>WebDav هو بروتوكول يتيح لك تعديل الملفات على خادم ويب بعيد. سابفيرجن هو نوع خاص من WebDAV عند الوصول إلى المستودعات عبر خادم ويب. في الاستخدام العادي، هذا للقراءة فقط. مع إعدادات خاصة، قد تحصل على WebDAV للقراءة والكتابة يمكن الوصول إليه عبر متصفح متخصص. اس في ان لكيدي ليس عميل webdav، لكن &konqueror; هو عبر بروتوكول <quote
+>webdav://</quote
+>. لكن مع اس في ان لكيدي، يمكنك تصفح شجرة الإصدارات لمستودع (عبر <quote
+>http://</quote
+>) </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect1>
+</chapter>
+
+<chapter id="using-kdesvn">
+<title
+>استخدام اس في ان لكيدي</title>
+<sect1 id="kdesvn-features">
+<title
+>ميزات اس في ان لكيدي</title>
+<para
+>يدعم اس في ان لكيدي البروتوكولات التالية لتصفح المستودعات: <variablelist>
+
+<varlistentry>
+<term
+>http</term>
+<listitem
+><para
+>بروتوكول متصفح ويب قياسي. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>https</term>
+<listitem
+><para
+>بروتوكول متصفح ويب قياسي مشفر. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+http</term>
+<listitem
+><para
+>بروتوكول متصفح ويب قياسي. قد يُستخدم لجعل &konqueror; يستدعي اس في ان لكيدي آليًا. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+https</term>
+<listitem
+><para
+>بروتوكول متصفح ويب قياسي مشفر. قد يُستخدم لجعل &konqueror; يستدعي اس في ان لكيدي آليًا. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+file</term>
+<listitem
+><para
+>بروتوكول مستودع محلي. قد يُستخدم لجعل &konqueror; يستدعي اس في ان لكيدي آليًا. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn</term>
+<listitem
+><para
+>بروتوكول خادم سابفيرجن الخاص. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>(k)svn+ssh</term>
+<listitem
+><para
+>سابفيرجن عبر ssh. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>file</term>
+<listitem
+><para
+>وصول مباشر إلى المستودع. يتحقق اس في ان لكيدي مما إذا كان المسار المعطى مستودعًا أم نسخة عمل ويفتحه في الوضع المناسب. بالنسبة لسابفيرجن، <filename class="directory"
+>file:///dir</filename
+> و <filename class="directory"
+>/dir</filename
+> ليسا نفس الشيء! </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+<para
+>قد تُستخدم هذه القائمة لعناوين &URL; المعطاة لـ <link linkend="kdesvn-commandline"
+>سطر الأوامر</link
+> أيضًا. </para>
+</sect1>
+<sect1 id="first_steps">
+<title
+>البدء مع سابفيرجن و اس في ان لكيدي</title>
+<para
+>هذا القسم مخصص غالبًا للمبتدئين غير المعتادين على سابفيرجن ويشرح كيفية عمل سابفيرجن و/أو أنظمة التحكم بالمراجعات (<acronym
+>RCS</acronym
+>). </para>
+
+<sect2>
+<title
+>إنشاء نسخة عمل</title>
+<caution>
+<para
+>يجب أن تكون نسخ العمل قابلة للوصول عبر مسارات محلية. لا يعرف سابفيرجن شيئًا عن أنظمة الملفات الزائفة مثل <filename class="directory"
+>smb://</filename
+> أو <filename class="directory"
+>fish://</filename
+>. يترجم اس في ان لكيدي بعضها إذا أمكن (مثل <filename class="directory"
+>system:/home</filename
+>) لكنه غير ممكن عبر شبكة. </para>
+</caution>
+<para
+>أولًا، يجب إنشاء نسخة عمل من مستودعك. لذلك اختر <menuchoice
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guimenuitem
+>سحب مستودع</guimenuitem
+> </menuchoice
+>. داخل الحوار التالي، يجب تحديد &URL; المستودع الذي تريد استخدامه، مثل <literal
+>http://localhost/repos/myproject</literal
+>. المجلدات الفرعية للمستودع ممكنة أيضًا، مثل <literal
+>http://localhost/repos/myproject/trunk</literal
+> أو ما شابه. </para>
+<para
+>حدد و/أو أنشئ مجلدًا محليًا حيث يجب أن توجد نسخة العمل. </para>
+<para
+>أخيرًا وليس آخرًا، المراجعة المراد سحبها. غالبًا يجب أن تكون <quote
+>HEAD</quote
+>. هذا يضمن أن آخر إصدار مخزّن هو الإصدار المرجعي. </para>
+<para
+>بعد النقر على <guibutton
+>موافق</guibutton
+>، سينشئ اس في ان لكيدي نسخة العمل الجديدة و (إذا تم تحديد المربع) يفتحها. </para>
+<para
+>عندما تفتح مستودعًا للتصفح، يمكنك وضع علامة على مجلد ثم اختيار <menuchoice
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>مستودع</guisubmenu
+> <guimenuitem
+>سحب مسار المستودع الحالي</guimenuitem
+> </menuchoice
+> وملء الحوارات كما هو موصوف أعلاه. عندها سيُسحب المسار المحدد فقط. </para>
+</sect2>
+<sect2>
+<title
+>جارٍ إيداع التغييرات المحلية</title>
+<para
+>علّم المدخل أو المدخلات التي تريد إرسالها واختر <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>#</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>نسخة العمل</guisubmenu
+> <guimenuitem
+>إيداع</guimenuitem
+> </menuchoice
+> </para>
+<para
+>إذا حاولت الإيداع دون تحديد أي عنصر، يستخدم اس في ان لكيدي العنصر الأعلى في نسخة العمل المفتوحة، أي مسار نسخة العمل نفسه. </para>
+<para
+>هذه العملية تكرارية دائمًا، أي إذا حددت مجلدًا، يرسل اس في ان لكيدي جميع العناصر المتغيرة تحته. عند ضبط مراجعة جميع العناصر قبل الإيداع في الحوار التالي، تُدرج جميع العناصر التي سيرسلها اس في ان لكيدي. هناك يمكنك إلغاء تحديد العناصر التي لا تريد إرسالها. في هذه الحالة، يرسل اس في ان لكيدي العناصر منفردة، أي غير تكرارية. أو يمكنك تحديد عناصر غير مُرقّمة للإضافة والإيداع (إذا لم تكن مُعلّمة للتجاهل). لذا يمكنك رؤية ما إذا كانت هناك عناصر جديدة نسيتها. </para>
+<para
+>أدخل رسالة سجلّ لما ترسله واضغط <guibutton
+>موافق</guibutton
+> ليبدأ النقل. </para>
+</sect2>
+<sect2>
+<title
+>تحديث نسخة العمل</title>
+<para
+>هذا يجعل نسخة العمل المحلية متزامنة مع المستودع. يمكنك ضبط أن اس في ان لكيدي يتحقق عند فتح نسخة عمل من العناصر الأحدث/المعدلة في المستودع. يعمل هذا في الخلفية ويمكنك العمل مع اس في ان لكيدي في الوقت نفسه. عند الانتهاء، تُعلّم العناصر ذات الإصدارات الأحدث أو المجلدات التي تحتوي على عناصر أحدث تحتها. </para>
+<para
+>لاسترداد التغييرات، اختر <menuchoice
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>نسخة العمل</guisubmenu
+> <guimenuitem
+>تحديث إلى الأحدث</guimenuitem
+> </menuchoice
+>. هذا يُحدّث إلى أحدث إصدار. إذا أردت الحصول على مراجعة محددة، اختر <menuchoice
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>نسخة العمل</guisubmenu
+> <guimenuitem
+>تحديث إلى مراجعة</guimenuitem
+> </menuchoice
+> واختر المراجعة التي تريدها في المربع التالي. </para>
+<para
+>إذا لم يُحدد أي عنصر، سيتم التحديث على نسخة العمل المفتوحة بأكملها، وإلا فقط على العناصر المحددة بشكل تكرار. </para>
+</sect2>
+<sect2>
+<title
+>إضافة وحذف من نسخة العمل</title>
+<para
+>تتطلب كلتا العمليتين خطوتين: أولًا إضافة أو حذف، ثم إيداع تلك التغييرات إلى المستودع. قبل الإيداع، يمكنك التراجع عن الإضافة أو الحذف. </para>
+<sect3>
+<title
+>إضافة عناصر</title>
+<para
+>يمكن إضافة عناصر إلى نسخة العمل بثلاث طرق: <variablelist>
+<varlistentry>
+<term
+>حدد العناصر غير المُرقّمة وأضفها</term>
+<listitem
+><para
+>انسخ باستخدام &konqueror; أو أي أداة أخرى إلى منطقة نسخة العمل. تصفح القائمة، وعلّمها، واختر <menuchoice
+> <shortcut
+><keycombo action="simul"
+><keycap
+>إدراج</keycap
+></keycombo
+></shortcut
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>نسخة العمل</guisubmenu
+> <guimenuitem
+>إضافة الملفات/المجلدات المحددة</guimenuitem
+> </menuchoice
+>. عندما تريد إضافة مجلدات جديدة مع جميع العناصر الفرعية، اختر <menuchoice
+> <shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>إدراج</keycap
+></keycombo
+></shortcut
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>نسخة العمل</guisubmenu
+> <guimenuitem
+>إضافة الملفات/المجلدات المحددة بشكل تكرار</guimenuitem
+> </menuchoice
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>تحقق وأضف بشكل تكرار</term>
+<listitem
+><para
+>يمكنك التحقق مما إذا كانت هناك عناصر غير مُرقّمة في مكان ما في نسخة العمل. بعد اختيار <menuchoice
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>نسخة العمل</guisubmenu
+> <guimenuitem
+>تحقق من العناصر غير المُرقّمة</guimenuitem
+> </menuchoice
+> يظهر حوار تُدرج فيه جميع العناصر غير المُرقّمة. الضغط على <guibutton
+>موافق</guibutton
+> يضيف جميع العناصر المُعلّمة إلى نسخة العمل، والعناصر التي لا تريد ترقيمها يجب إلغاء تحديدها قبل ذلك. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>سحب وإفلات</term>
+<listitem
+><para
+>علّم في &konqueror; أو أي متصفح ملفات متوافق آخر العناصر التي تريد إضافتها واسحبها إلى اس في ان لكيدي. يمكنك إفلاتها على المجلدات داخل نسخة العمل المفتوحة، ثم ينسخ اس في ان لكيدي العناصر المُسقطة إليها ويضيفها. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para
+></sect3>
+<sect3>
+<title
+>حذف عناصر من نسخة العمل وإلغاء الترقيم</title>
+<para
+>حذف العناصر دائمًا تكرار. على سبيل المثال، عند حذف مجلد، تُحذف جميع العناصر الفرعية أيضًا. علّم ما تريد واختر عنصر القائمة <menuchoice
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guimenuitem
+>حذف الملفات/المجلدات المحددة</guimenuitem
+> </menuchoice
+>. ستُلغى ترقيم العناصر وتُزال من القرص. </para>
+</sect3>
+</sect2>
+
+<sect2 id="logdisplay">
+<title
+>عرض السجلات</title>
+<para
+>يمكن بدء عرض السجل بـ <keycombo action="simul"
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+> عند تحديد عنصر واحد أو لا شيء في النظرة العامة. بناءً على إعداداتك (انظر <xref linkend="subversion-settings" xreflabel="الإعدادات"/>) يسترجع اس في ان لكيدي بعض مدخلات السجل بدءًا من <quote
+>HEAD</quote
+> ويعرضها. </para>
+<sect3  id="logdisplay-dlg">
+<title
+>حوار عرض السجل</title>
+<para
+>على الجانب الأيسر ترى قائمة مدخلات السجل التي استرجعها اس في ان لكيدي. تُختصر رسالة السجل إلى سطر واحد لتناسب. تظهر رسالة السجل الكاملة في النافذة العلوية اليمنى عند تحديد مدخل. في النافذة السفلية اليمنى ترى قائمة الملفات المتغيرة. تظهر هذه النوافذ <emphasis
+>فقط</emphasis
+> إذا جُلبت هذه القائمة، بناءً على إعداداتك. </para>
+<para
+>باستخدام الأزرار في الأعلى يمكنك تحديد نطاق آخر من السجلات لعرضه. <important
+><para
+>يُسمى هذا النطاق دون أي حد مسبق، لذا كن حذرًا عند استخدام هذه الميزة على مستودعات كبيرة.</para
+></important>
+
+</para>
+<para
+>تعمل الأزرار في أسفل الحوار دائمًا على العنصر المحدد للسجل، وليس على العنصر المحدد في قائمة الملفات المتغيرة. لذا عند اختيار <guibutton
+>فرق مع السابق</guibutton
+> هناك، يُنشئ الفرق على جميع العناصر المتغيرة في هذه المراجعة إذا كانت مكافئة أو أسفل مدخل سابفيرجن المحدد سابقًا لاسترجاع السجلات. نفس الشيء لـ <guibutton
+>فرق المراجعات</guibutton
+>. </para>
+<para
+><guibutton
+>تعليق توضيحي</guibutton
+> يعمل بالطبع فقط إذا كان العنصر المسجل ملفًا. </para>
+<para
+>على جميع مدخلات القائمة (كلا القائمتين) لديك قائمة سياق مفعلة لبعض العمليات الإضافية. في القائمة اليسرى هذا هو <guimenuitem
+>تعيين الإصدار كجانب أيسر للفرق</guimenuitem
+> (أي مراجعة البداية) و<guimenuitem
+>تعيين الإصدار كجانب أيمن للفرق</guimenuitem
+> (أي نهاية أو هدف الفرق، في الموحد الجزء المُعلّم بـ <computeroutput
+>+++</computeroutput
+>). إذا حددت هذه المراجعات، تُعلّم بأسهم صغيرة. </para>
+</sect3>
+</sect2>
+</sect1>
+
+<sect1 id="working-with-repositories">
+<title
+>العمل على المستودعات</title>
+<para
+>يمكن تصفح المستودع البسيط ضمن &konqueror; أو &dolphin; أو متصفحات ملفات مشابهة: افتح رابطًا بالبروتوكول الموصوف في <xref linkend="kdesvn-features" xreflabel="الميزات"/> (البدائل التي تبدأ بـ <quote
+>k</quote
+>) وستعرض المحتوى. لذا قد تعمل العمليات البسيطة كالنسخ والنقل والحذف. عند إضافة استعلام <quote
+>?rev=<replaceable
+>xxx</replaceable
+></quote
+>، يأتي السرد من مراجعة محددة. تنسيق استعلام المراجعة موصوف في <xref linkend="revision-syntax"/>، ومزيد من المعلومات حول KIO::ksvn موجودة في <xref linkend="kdesvn-kio"/> </para>
+<para
+>جميع الأعمال باستثناء <guimenuitem
+>نسخ</guimenuitem
+> لا يمكن إجراؤها إلا عند التصفح في مراجعة HEAD. </para>
+<sect2>
+<title
+>استعادة العناصر المحذوفة</title>
+<para
+>في سابفيرجن، استعادة العناصر المحذوفة هي عملية نسخ لعنصر في مراجعة محددة. لذا عند التخطيط للاستعادة، اعرض المستودع في مراجعة قبل حذف العنصر. اختر <menuchoice
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>مستودع</guisubmenu
+> <guimenuitem
+>اختر مراجعة التصفح</guimenuitem
+> </menuchoice
+> وأدخل المراجعة المطلوبة. الآن يعرض اس في ان لكيدي المحتوى في هذا الوقت. حدد المدخل الذي تريد استعادته، اختر <menuchoice
+> <shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guimenuitem
+>نسخ</guimenuitem
+> </menuchoice
+>. في الحوار التالي، الهدف دائمًا في مراجعة HEAD، والمصدر في المراجعة التي اخترتها للتصفح. املأ المسار وانقر <guibutton
+>موافق</guibutton
+> وتبدأ النسخ. بعد النسخ الناجح، حوّل التصفح عائدًا إلى مراجعة HEAD ويجب أن يظهر العنصر المستعاد. </para>
+</sect2>
+<sect2>
+<title
+>استيراد المجلدات</title>
+<para
+>بسبب قيود سابفيرجن نفسها، يمكن استيراد المجلدات فقط، وليس الملفات المفردة. </para>
+<sect3>
+<title
+>بالسحب والإفلات</title>
+<para
+>حدد في أي مدير ملفات متوافق المجلد الذي تريد استيراده واسحبه إلى مدخل المجلد في اس في ان لكيدي حيث تريد استيراده. </para>
+</sect3>
+<sect3>
+<title
+>اختر مجلدًا للاستيراد باستخدام متصفح الدليل</title>
+<para
+>حدد المجلد الذي تريد استيراد مجلد جديد إليه. ثم اختر <menuchoice
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guimenuitem
+>استيراد المجلدات إلى الحالي</guimenuitem
+> </menuchoice
+> واختر المجلد المطلوب. </para>
+</sect3>
+</sect2>
+</sect1>
+<sect1 id="operations">
+<title
+>عمليات أخرى</title>
+<sect2 id="merging-items">
+<title
+>ادمج</title>
+<para
+>افتح المستودع أو نسخة العمل، حدد العنصر الذي تريد دمجه واختر <menuchoice
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guisubmenu
+>دمج</guisubmenu
+> </menuchoice
+>. أدخل في الحوار التالي القيم المطلوبة. إذا فتح من المستودع، يُملأ المصدر 1 والمصدر 2، وعند الفتح من نسخة العمل، يُملأ الهدف بالعنصر المحدد حاليًا. معالجة هذه المعلمة تختلف قليلًا بين استخدام الفرق الداخلي لسابفيرجن أو برنامج دمج خارجي مثل &kdiff3;. الهدف يجب أن يكون دائمًا مجلدًا أو ملفًا محليًا. يمكنك التبديل بين الدمج الخارجي أو الداخلي باستخدام خانة الاختيار <guilabel
+>استخدام دمج خارجي</guilabel
+>. </para>
+<sect3>
+<title
+>الدمج الداخلي</title>
+<para
+>المعنى مماثل تمامًا لأداة سطر الأوامر الخاصة بسابفيرجن. عندما يكون المصدر1 والمصدر2 متساويين، يجب أن تختلف مراجعة البداية والنهاية. إذا لم تكن المصادر متساوية، تُسند مراجعة البداية إلى المصدر1 ومراجعة النهاية إلى المصدر2. الهدف يجب أن يكون نسخة عمل وإلا سيرسل سابفيرجن رسالة خطأ. </para>
+<para
+>خانات الاختيار لها المعاني التالية: <variablelist>
+
+<varlistentry>
+<term
+>تكراريّ</term>
+<listitem
+><para
+>نفذ جميع العمليات بشكل تكراري عند العمل مع المجلدات. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>عالج العناصر غير المرتبطة كأنها مرتبطة</term>
+<listitem
+><para
+>إذا ضُبط، ستُقارن العناصر غير المرتبطة كما لو كانت مرتبطة. وإلا سيزيل سابفيرجن جانبًا ويضيفه من الجانب الآخر مرة أخرى. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>افرض الحذف على العناصر المعدلة/غير المفوترة</term>
+<listitem
+><para
+>إذا لم يُضبط وكان الدمج يتطلب حذف عنصر معدّل أو غير مراقب، يفشل دمج سابفيرجن. وإلا ستُحذف هذه العناصر. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>جرِّب تشغيلًا مبدئيًا بدون تعديلات</term>
+<listitem
+><para
+>إذا ضُبط، يرسل سابفيرجن إشعارات فقط بما سيفعله لكنه لا يعدّل نسخة العمل. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+</sect3>
+<sect3>
+<title
+>استخدام برنامج خارجي للدمج</title>
+<para
+>انظر <xref linkend="diffmerge-settings"/> للتفاصيل حول كيفية إعداد أداة الدمج الخارجية. يولد اس في ان لكيدي سطر الأوامر كما هو موصوف هناك. قبل ذلك يفعل التالي: </para>
+<para>
+<orderedlist>
+
+<listitem
+><para
+>أسند مراجعة البداية إلى المصدر 1 ومراجعة النهاية إلى المصدر 2. ثم تحقق مما إذا كانا مختلفين (المسار و/أو المراجعة). إذا كان الجواب نعم، فهو دمج ثلاثي الاتجاهات وإلا دمج بسيط من المصدر إلى الهدف. إذا تُرك المصدر 2 فارغًا، فهو دمج بسيط أيضًا. </para
+></listitem>
+
+<listitem
+><para
+>اصنع تصديرًا إلى مجلد مؤقت. إذا كان دمجًا بسيطًا، فقط المصدر 1 في مراجعة البداية، وإلا كلا المصدرين بمراجعاتهما. إذا كان العنصر ملفًا وليس مجلدًا، فاحصل على المحتوى في مراجعة محددة. </para
+></listitem>
+
+<listitem>
+<para
+>ولد الاستدعاء لبرنامج الدمج الخارجي كما أعددته في <link linkend="diffmerge-settings"
+>الإعدادات</link
+>. سيُعرض مخرج الأخطاء في نافذة السجل لذا قد ترى ما يحدث خطأ (إذا حدث شيء خطأ). </para>
+</listitem>
+</orderedlist
+>على عكس الدمج الداخلي، قد يكون الهدف مجلدًا/ملفًا مسطحًا غير خاضع لمراقبة الإصدارات لأن الأدوات الخارجية لا تهتم بذلك. </para>
+<para
+>إذا لم يُضبط التكراري، يُجرى التصدير كتصدير مسطح. كن حذرًا: عند فعل ذلك مع نسخ عمل، لن تُصدر الخارجيات <emphasis
+>لن</emphasis
+> تُصدر. </para>
+</sect3>
+</sect2>
+
+<sect2 id="op-resolve">
+<title
+>حل التعارضات</title>
+<para
+>اس في ان لكيدي نفسه ليس لديه وحدة لحل التعارضات لكن يمكنك استخدام برنامج خارجي من داخل اس في ان لكيدي. في <xref linkend="extern-resolve-setup"/> يوجد وصف لكيفية إعداد هذا التطبيق. </para>
+<para
+>عند تحديد عنصر بحالة مضبوطة على <quote
+>متعارض</quote
+> (سترى علامة حمراء في عرض القائمة على هذه العناصر) يمكنك اختيار <menuchoice
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>نسخة العمل</guisubmenu
+> <guisubmenu
+>حل التعارض</guisubmenu
+> </menuchoice
+> أو من قائمة السياق <guimenuitem
+>حل التعارض</guimenuitem
+> (فقط على العناصر المتعارضة). يبدأ اس في ان لكيدي الآن البرنامج الذي أعددته (أو البرنامج المبدئي). بعد إنهاء هذه المهمة، يجب أن تضع علامة على العنصر كحل (<menuchoice
+><guimenu
+>سابفيرجن</guimenu
+><guisubmenu
+>نسخة العمل</guisubmenu
+><guisubmenu
+>وضع علامة كحل</guisubmenu
+></menuchoice
+>) وإلا لن تتمكن من إيداع تغييراتك. </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="used-properties">
+<title
+>الخصائص المستخدمة بواسطة اس في ان لكيدي للتكوين</title>
+<sect2>
+<title
+>دمج متعقب الأخطاء</title>
+<para
+>صمم مشروع <ulink url="http://tortoisesvn.tigris.org/"
+>TortoiseSVN</ulink
+> نظام خصائص رائعًا <ulink url="http://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-dug-bugtracker.html"
+>لدمج متعقب الأخطاء</ulink
+> في واجهة سابفيرجن الرسومية. لا يدعم الإصدار الحالي من اس في ان لكيدي الحقول الإضافية في مربع الإيداع (سيُضاف لاحقًا) ولا يفهم جميع الخصائص التالية: </para>
+<para>
+<table id="bugtracker-properties">
+<title
+>خصائص دمج متعقب الأخطاء</title>
+<tgroup cols="3">
+
+<thead>
+<row>
+<entry
+>الخاصية</entry>
+<entry
+>الوصف</entry>
+<entry
+>مثال</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><literal
+>bugtraq:url</literal
+></entry>
+<entry
+>يحمل &URL; لمتعقب الأخطاء. يجب أن يحتوي على علامة <literal
+>%BUGID%</literal
+>.</entry>
+<entry
+>https://bugs.kde.org/show_bug.cgi?id=%BUGID%</entry>
+</row>
+
+<row>
+<entry
+><literal
+>bugtraq:logregex</literal
+></entry>
+<entry>
+<para
+>يحتوي على تعبيرين منتظمين أو تعبير واحد، مفصولين بسطر جديد.</para>
+<para
+>إذا وُضع تعبير واحد فقط، فيجب مطابقة معرفات الأخطاء المجردة في مجموعات سلسلة التعبير المنتظم. إذا وُضع تعبيران، فيُستخدم التعبير الأول للعثور على سلسلة تتعلق بمعرف الخطأ ولكنها قد تحتوي على أكثر من مجرد معرف الخطأ (مثل <quote
+>المسألة #123</quote
+> أو <quote
+>يحل المسألة 123</quote
+>). ثم يُستخدم التعبير الثاني لاستخراج معرف الخطأ المجرد من السلسلة المستخرجة بالتعبير الأول.</para>
+<para
+>يرجى الانتباه إلى عدم وجود مسافات غير مرغوب فيها بعد التعبير المنتظم، ولا تنس الأقواس حول وصف الرقم.</para>
+</entry>
+<entry>
+<para
+>مفرد (قابل للاستخدام مع TRAC): </para>
+<programlisting
+>#(\d+)
+</programlisting>
+<para
+>الآن سيُحلل كل رقم مثل <replaceable
+>#190</replaceable
+> ويُترجم إلى &URL; في مخرجات السجل. </para>
+<para
+>تعبيران: </para>
+<programlisting
+>[Ii]ssue #?(\d+)(,? ?#(\d+))*\n(\d+)
+</programlisting>
+<important>
+  <title
+>تذكّر</title>
+  <para
+>انتبه إلى المسافات البيضاء بعد <literal
+>(\d+)</literal
+>! هذا أحد الأخطاء الأكثر شيوعًا التي تسبب عدم تطابق هذه التعبيرات! </para>
+</important>
+</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</para>
+<para
+>في المستودعات المفتوحة محليًا (أي بروتوكول <filename class="directory"
+>file://</filename
+>) وفي نسخ العمل، سيُبحث عن هذه الخصائص صعودًا من المجلد المفتوح حتى العثور عليها أو الوصول إلى المستوى الأعلى لسابفيرجن. في المستودعات المفتوحة عبر الشبكة (جميعها باستثناء بروتوكول <filename class="directory"
+>file://</filename
+>) يُبحث فقط في المجلد المفتوح نفسه. </para>
+<para
+>قد يُضاف دعم لمجموعات متعددة من هذه الخصائص لاحقًا (مثل في مجلد فرعي قيم إضافية لمتعقب آخر إلخ…) ولكن في معظم الحالات يجب أن يكون تقييم روابط المتعقب الفردية كافيًا. </para>
+</sect2>
+</sect1>
+
+<sect1 id="revision-tree">
+<title
+>شجرة المراجعات</title>
+<para
+>تحاول شجرة المراجعات عرض التاريخ الكامل لعنصر ما ليحصل المستخدم على فكرة أفضل عن تاريخ العنصر. يجب أن تمسح السجل الكامل للمستودع لأنها تتطلب بعض المعلومات التي لا يوفرها سابفيرجن (وأعتقد أنه لن يوفرها). نظرًا لأن هذا ينتج حركة مرور كبيرة، تستخدم شجرة المراجعات دائمًا <link linkend="logcache-descr"
+>خبيئة السجل</link
+> الداخلية. </para>
+<sect2>
+<title
+>المتطلبات</title>
+<para
+>تُنشأ شجرة المراجعات عبر <application
+>dot</application
+>. لذا لشجرة مراجعات عاملة، يجب تثبيت حزمة <application
+>graphviz</application
+>. </para>
+</sect2>
+</sect1>
+
+<sect1 id="logcache-descr">
+<title
+>خبيئة السجل الداخلية</title>
+<para
+>قد يستخدم اس في ان لكيدي خبيئة سجل داخلية لبعض العمليات. تُستخدم غالبًا لـ <link linkend="revision-tree"
+>شجرة المراجعات</link
+> ولكن أيضًا عند عرض سجل مبسط في وضع عدم الاتصال. تُنظم الخبئيات كقواعد بيانات <application
+>SQLite</application
+> مخزنة في <filename class="directory"
+>$HOME/.sqvnqt/logcache</filename
+>. كل ملف مرقم هو مخزن لمستودع مختلف. </para>
+<warning>
+  <para
+>قد تصبح قواعد البيانات كبيرة! لذا يمكنك تعطيل التحديث الآلي لخبيئة السجل في الإعدادات. </para>
+</warning>
+<para
+>يمكنك ببساطة إزالة قاعدة بيانات، فلن يُعاد سجل مخبأ لذلك المستودع (ولا شجرة مراجعات!) ولكن عندما لا تعطل التعبئة الآلية للخبيئة عند الفتح التالي لهذا المستودع أو نسخة عمل مرتبطة به، ستُعاد تعبئة الخبيئة مرة أخرى. </para>
+<sect2>
+<title
+>وضع عدم الاتّصال</title>
+<para
+>قد يعمل اس في ان لكيدي دون وصول إلى الشبكة، أي يمكنك إيقاف تشغيل الوصول إلى الشبكة لـ اس في ان لكيدي. قد يكون هذا مفيدًا عند العمل دون شبكة مثل أجهزة الكمبيوتر المحمولة. في هذه الحالات، يحصل اس في ان لكيدي دائمًا على السجلات من الخبيئة الداخلية. هذا السجل مختزل إلى وظائف أساسية لأسباب تقنية، لذا قد يختلف السجل المخبأ (ولكن ليس بالضرورة) عن السجل الحقيقي. يعني الاختلاف أنه لن يعرض جميع عمليات النسخ حتى لو وُضع <guilabel
+>يتابع السجل تغييرات العقدة</guilabel
+>.</para>
+</sect2>
+<sect2>
+<title
+>خبيئة السجل وشجرة المراجعات</title>
+<para
+>ستستخدم شجرة المراجعات خبيئة السجل فقط لأنها وإلا يجب أن تحصل دائمًا على السجلات مرة أخرى. لن <emphasis
+>تحدّث</emphasis
+> خبيئة السجل (ولكن قد يتغير هذا في الإصدارات اللاحقة). </para>
+</sect2>
+</sect1>
+
+<sect1 id="overlay-meaning">
+<title
+>معنى التراكبات الأيقونية</title>
+<para
+>قد تُوسم الإدخالات بأيقونات متراكبة عندما لا تكون في حالة <quote
+>عادية</quote
+>. <variablelist>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnlocked.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>مقفل</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>هذا الإدخال مقفل. في العمود الأخير يُدرج مالك القفل. يمكنك ضبط ما إذا كان اس في ان لكيدي يجب أن يتحقق من العناصر المقفلة في المستودع أيضًا. ولكن كن حذرًا: اعتمادًا على نوع الخادم، قد يستغرق هذا وقتًا طويلًا! </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnneedlock.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>يحتاج إلى قفل</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>يجب قفل هذا المدخل قبل التحرير والإيداع. حتى لا تضبط قفلًا، يبقيه سابفيرجن للقراءة فقط. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnupdates.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>التّحديثات</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>هذا المدخل أو - إذا كان مجلدًا - مدخل تحته له إصدار أحدث في المستودع. </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnmodified.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>معدّل</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>هذا المدخل أو - إذا كان مجلدًا - مدخل تحته تغير على القرص المحلي. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnadded.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>تراكب مضاف</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>هذا المدخل مضاف محليًا إلى سابفيرجن لكنه لم يُودع بعد. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvndeleted.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>تراكب محذوف</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>هذا المدخل محذوف محليًا من سابفيرجن لكنه لم يُودع بعد. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><inlinemediaobject>
+<imageobject>
+<imagedata fileref="hi128-filesys-kdesvnconflicted.png" format="PNG"/>
+</imageobject>
+<textobject>
+<phrase
+>تراكب محذوف</phrase>
+</textobject>
+</inlinemediaobject>
+</term>
+<listitem
+><para
+>هذا المدخل (أو مدخل تحته إذا كان مجلدًا) لديه تعارضات لحلها مع آخر تحديث. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect1>
+
+<sect1 id="kdesvn-passwords">
+<title
+>اس في ان لكيدي وكلمات السر</title>
+<para
+>اس في ان لكيدي/سابفيرجن قادر على حفظ كلمات السر. حفظ كلمات السر هو دائمًا خطر أمني، لكنه قد يجعل الواجهة الرسومية أكثر قابلية للاستخدام. </para>
+<sect2>
+<title
+>عدم حفظ كلمات السر</title>
+<para
+>الطريقة الأكثر أمانًا، لكنها أحيانًا غير مريحة مع واجهات المستخدم الرسومية مثل اس في ان لكيدي. بخاصة العمليات الخلفية لـ اس في ان لكيدي ستطلب دائمًا كلمة سر في حال كان المستودع لديه وصول مقيد لعمليات القراءة مثل التحديث والحالة. نفس الشيء لـ <quote
+>الإيداع</quote
+> وهكذا. لذا إذا كنت لا تحفظ كلمات السر، يجب عليك تعطيل <guilabel
+>بدء التحقق من التحديثات عند فتح نسخة عمل</guilabel
+> و<link linkend="subversion-settings"
+>هكذا</link
+>. </para>
+</sect2>
+<sect2>
+<title
+>حفظ كلمات السر في &kwallet5;</title>
+<para
+>تخزين كلمات مرور آمن تستخدمه الكثير من برامج &kde; مثل &kmail; و&konqueror;. إذا كنت تحفظ كلمات السر وتستخدم اس في ان لكيدي غالبًا، يجب عليك استخدام هذا. انتبه أن التخزين المشفر ليس تخزينًا عالي الأمان. التفاصيل انظر <ulink url="help:/kwallet5"
+>توثيق &kwallet5;</ulink
+>. </para>
+</sect2>
+<sect2>
+<title
+>الحفظ في تخزين كلمات السر الخاص بسابفيرجن</title>
+<para
+>هذا غير موصى به لأن كلمات السر تُخزن كنص واضح! لا تصدق؟ ألق نظرة على الملفات في <filename class="directory"
+>~/.subversion/auth/svn.simple</filename
+>. يجب عليك استخدام هذا فقط إذا كنت تستخدم عملاء آخرين غير اس في ان لكيدي بكثرة مثل <application
+>rapidsvn</application
+> أو <application
+>esvn</application
+> أو عميل سطر الأوامر الأصلي <application
+>svn</application
+>. إذا كنت تستخدم عميل سطر الأوامر غالبًا للسحبات أو التحديثات التي لا تتطلب كلمة سر واس في ان لكيدي للإيداع/النقل/النسخ، يجب عليك استخدام &kwallet5; بدلًا من ذلك. </para>
+</sect2>
+<sect2>
+<title
+>خبيئة كلمات السر الداخلية</title>
+<para
+>يمكنك تفعيل خبيئة كلمات مرور داخلية ستحتفظ بكلمات السر طالما اس في ان لكيدي قيد التشغيل في الذاكرة. لذا لن تضطر لإدخال كلمة سر مرتين حتى لو لم تحفظها في المحفظة. </para>
+</sect2>
+<sect2>
+<title
+>حالة خاصة svn+ssh</title>
+<para
+>عند استخدام سابفيرجن عبر svn+ssh، قد يتم تخزين كلمة السر عبر ssh ووكيل ssh. لهذا يجب أن يكون لديك وصول ssh إلى الجهاز البعيد والمستودع. عندما تريد تخزين شيء، يجب عليك استخدام استيثاق المفتاح العام لـ ssh، وليس استيثاق كلمة المرور. (في الواقع يفضل ssh استيثاق المفتاح العام). لهذا يجب عليك وضع مفتاحك العام لـ ssh على الهدف، مثلًا، نظام المستودع. كلمات مرور ssh لن تُعالج أبدًا بواسطة تخزين كلمات مرور سابفيرجن أو &kwallet5; أو خبيئة كلمات السر الداخلية. </para>
+<para
+>إذا كنت لا تريد أن تُسأل عن كلمة سر مفتاح SSH الخاص بك، يمكنك استخدام <application
+>وكيل ssh</application
+>، باختيار القائمة <menuchoice
+><guimenu
+> سابفيرجن </guimenu
+> <guimenuitem
+>إضافة هويات ssh إلى وكيل ssh</guimenuitem
+></menuchoice
+> يمكنك تخزين كلمة سر مفتاح SSH الخاص بك لجلسة عملك الحالية بحيث لا حاجة لإدخال كلمة سرك مرة أخرى. </para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="kdesvn-kio">
+<title
+>&konqueror;، KIO، اس في ان لكيدي</title>
+<sect1 id="kdesvn-kio-desc">
+<title
+>الوصف</title>
+<para
+>اعتبارًا من الإصدار 0.7.0 من اس في ان لكيدي، يأتي مع بعض الوحدات التي تدمج بعض الأوامر مباشرة في قوائم &konqueror;. <variablelist>
+<varlistentry>
+<term
+>بروتوكولات KIO</term>
+<listitem
+><para
+>تنفذ معالجات للبروتوكولات التالية:</para>
+<itemizedlist>
+<listitem
+><para
+>ksvn+http</para
+></listitem>
+<listitem
+><para
+>ksvn+https</para
+></listitem>
+<listitem
+><para
+>ksvn+file</para
+></listitem>
+<listitem
+><para
+>ksvn+ssh</para
+></listitem>
+<listitem
+><para
+>ksvn</para
+></listitem>
+</itemizedlist>
+
+<para
+>هذه البروتوكولات مصممة فقط للمستودعات، وليس للنسخ العاملة. على سبيل المثال، <filename class="directory"
+>ksvn+file:///<replaceable
+>مسار</replaceable
+></filename
+> يجب أن يشير إلى بداية مستودع مختلف عن التطبيق نفسه أو KPart. يمكن تصفح النسخ العاملة باستخدام &konqueror;. </para>
+<para
+>للتصفح في مراجعة محددة، يمكنك إضافة الاستعلام <link linkend="revision-syntax"
+><quote
+>?rev=<replaceable
+>مراجعة</replaceable
+></quote
+></link
+> إلى &URL;. </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>قوائم السياق</term>
+<listitem
+><para
+>يثبت اس في ان لكيدي قوائم سياق لـ &konqueror;. يمكن رؤيتها بالنقر بزر الفأرة الأيمن في نافذة المتصفح (فقط في العرض القياسي، وليس أي KPart) لذا من الممكن القيام بأكثر الإجراءات استخدامًا مباشرة من داخل &konqueror; (أو أي مدير ملفات آخر يقرأ قوائم سياق &konqueror; مثل &dolphin;). يتم ذلك عبر استدعاء <link linkend="kdesvn-commandline"
+>نسخة سطر الأوامر من اس في ان لكيدي</link
+>. </para>
+</listitem>
+</varlistentry>
+</variablelist>
+</para>
+<sect2>
+<title
+>استخدام KIO خارج &konqueror; - مثال</title>
+<para
+>كل تطبيق يستخدم مكتبة KIO قد يستخدم هذه البروتوكولات. لذا سيكون من الممكن استرداد جميع الفروق بين مراجعتين باستخدام &kdiff3; دون أي معرفة عميقة. </para>
+<para>
+<example>
+<title
+>استرداد الفروق بين المراجعات باستخدام &kdiff3; وKIO::ksvn</title>
+<programlisting
+>kdiff3 \
+  ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=423127 \
+  ksvn://anonsvn.kde.org/home/kde/trunk/KDE/arts?rev=455064
+</programlisting>
+<para
+>دع &kdiff3; يطبع جميع الفروق بين مراجعتين. </para>
+<para>
+<note>
+  <para
+>استخدام هذا داخل اس في ان لكيدي (مقارنة مراجعتين) أسرع بكثير لأن الآليات الداخلية لـ subversion تُستخدم. </para>
+</note>
+</para>
+</example>
+</para>
+</sect2>
+</sect1>
+<sect1 id="kio-svn-special">
+<title
+>معلومات المبرمجين حول KIO::ksvn</title>
+<note
+><para
+>يمكنك تخطي هذا إذا لم تكن مهتمًا ببرمجة KIO.</para
+></note>
+<para
+>KIO::ksvn::special يعرف العمليات التالية. </para>
+<sect2>
+<title
+>قائمة الأوامر</title>
+<para>
+<table id="kio-svn-special-commands">
+  <title
+>نظرة عامة على الأوامر لـ <literal
+>KIO::ksvn::special</literal
+></title>
+<tgroup cols="4">
+
+<thead>
+<row>
+<entry
+>اسم الأمر</entry>
+<entry
+>المعرف الرقمي</entry>
+<entry
+>قائمة المعاملات</entry>
+<entry
+>مُطبَّق في الإصدار الحالي؟</entry>
+</row>
+</thead>
+
+<tbody>
+
+<row>
+<entry
+>اسحب</entry>
+<entry
+>1</entry>
+<entry>
+<para
+>KURL مستودع، KURL هدف، int رقم_مراجعة، QString نوع_مراجعة </para>
+<para
+>الهدف <emphasis
+>لن</emphasis
+> يُعدَّل، مثلًا، ولكن المحتوى سيُسحب دون إنشاء مجلد فرعي! على سبيل المثال، قد يكون المصدر <filename
+>http://server/repos/project/trunk</filename
+>، الهدف <filename
+>/home/user/proj/</filename
+> ثم محتويات trunk ستُنسخ إلى <filename
+>/home/user/proj/</filename
+> وليس <filename
+>/home/user/proj/trunk/</filename
+>! </para>
+</entry>
+<entry
+>Yes</entry>
+</row>
+
+<row>
+<entry
+>حدّث</entry>
+<entry
+>2</entry>
+<entry
+><para
+>KURL رابط، int رقم_مراجعة، QString سلسلة_مراجعة</para>
+<para
+>إذا كان رقم_مراجعة &lt; 0، فسيُحلَّل سلسلة_مراجعة. تنسيق سلسلة_مراجعة موصوف في <link linkend="revision-syntax"
+>الملحق</link
+>. </para>
+</entry>
+<entry
+>Yes</entry>
+</row>
+
+<row>
+<entry
+>أوْدِعْ</entry>
+<entry
+>3</entry>
+<entry
+><para
+>KURL::List روابط</para>
+<para
+>الروابط هي قائمة من الروابط المحلية للإيداع. سيُطلب رسالة سجل.</para>
+</entry>
+<entry
+>Yes</entry>
+</row>
+
+<row>
+<entry
+>سجل</entry>
+<entry
+>4</entry>
+<entry>
+<para
+>int رقم_مراجعة_بداية، QString سلسلة_مراجعة_بداية، int رقم_مراجعة_نهاية، QString سلسلة_مراجعة_نهاية، KURL::List </para>
+<para
+>استخدم هذا بحذر - قد يُنتج الكثير من البيانات. </para>
+</entry>
+<entry
+>Yes</entry>
+</row>
+
+<row>
+<entry
+>استورد</entry>
+<entry
+>5</entry>
+<entry
+>KURL مستودع_هدف، KURL مسار_مصدر</entry>
+<entry
+>Yes</entry>
+</row>
+
+<row>
+<entry
+>أضف</entry>
+<entry
+>6</entry>
+<entry
+>KURL</entry>
+<entry
+>Yes</entry>
+</row>
+
+<row>
+<entry
+>Del</entry>
+<entry
+>7</entry>
+<entry
+>KURL::List</entry>
+<entry
+>Yes</entry>
+</row>
+
+<row>
+<entry
+>اعكس</entry>
+<entry
+>8</entry>
+<entry
+><para
+>KURL::List</para>
+<para
+>التراجع في KIO دائمًا غير تكراري، لا أسئلة (التطبيق المستدعِي يجب أن يفعلها بنفسه)</para>
+</entry>
+<entry
+>Yes</entry>
+</row>
+
+<row>
+<entry
+>الحالة</entry>
+<entry
+>9</entry>
+<entry
+><para
+>KURL عنصر، bool تحقق_مستودع، bool تكراري</para>
+<para
+>العنصر - العنصر الذي يجب فحص معلوماته، تحقق_مستودع - تحقق من وجود إصدارات أحدث في المستودع، تكراري - سواء للفحص تكراريًا أم لا.</para>
+</entry>
+<entry
+>Yes</entry>
+</row>
+
+<row>
+<entry
+>إنشاء مجلد</entry>
+<entry
+>10</entry>
+<entry
+>KURL::List</entry>
+<entry
+>Yes</entry>
+</row>
+
+<row>
+<entry
+>حُلّ</entry>
+<entry
+>11</entry>
+<entry
+>KURL، bool تكراري</entry>
+<entry
+>Yes</entry>
+</row>
+
+<row>
+<entry
+>بدّل</entry>
+<entry
+>12</entry>
+<entry
+>KURL مسار_نسخة_عمل، KURL رابط_مستودع_جديد، bool تكراري، int رقم_مراجعة، QString نوع_مراجعة</entry>
+<entry
+>Yes</entry>
+</row>
+
+<row>
+<entry
+>الفرق</entry>
+<entry
+>13</entry>
+<entry>
+<para
+>KURL رابط1، KURL رابط2، int r1، QString سلسلة1، int r2، QString سلسلة2، bool تكراري</para>
+<para
+>للحصول على الفرق بين ملف مستودع file:/// ونسخة عمل، اضبط روابط نسخة العمل بدون بروتوكول!</para>
+</entry>
+<entry
+>Yes</entry>
+</row>
+</tbody>
+
+</tgroup>
+</table>
+
+</para>
+</sect2>
+<sect2>
+<title
+>القيم المُرجعة</title>
+<para
+>قيم الإرجاع قد تُعطى عبر البيانات الوصفية، انظر توثيق API للتفاصيل. </para>
+<para>
+<table id="kio-ksvn-metadata">
+<title
+>محتوى البيانات الوصفية</title>
+<tgroup cols="2">
+
+<thead>
+<row>
+<entry
+>المفتاح</entry>
+<entry
+>قيمة محتملة</entry>
+</row>
+</thead>
+
+<tbody>
+
+<row>
+<entry
+>path</entry>
+<entry
+>مسار العنصر الذي نُفذ الإجراء عليه، مثل عنوان url معطى</entry>
+</row>
+
+<row>
+<entry
+>action</entry>
+<entry
+>نوع الإجراء الرقمي</entry>
+</row>
+
+<row>
+<entry
+>kind</entry>
+<entry
+>نوع العنصر (غالبًا مجلد أو ملف)</entry>
+</row>
+
+<row>
+<entry
+>mime_t</entry>
+<entry
+>نوع MIME الفرعي للعنصر في Subversion</entry>
+</row>
+
+<row>
+<entry
+>content</entry>
+<entry
+>حالة المحتوى (قيمة Subversion)</entry>
+</row>
+
+<row>
+<entry
+>prop</entry>
+<entry
+>حالة الخصائص (قيمة Subversion)</entry>
+</row>
+
+<row>
+<entry
+>rev</entry>
+<entry
+>المراجعة الناتجة أو المراجعة التي عُمل عليها</entry>
+</row>
+
+<row>
+<entry
+>string</entry>
+<entry
+>رسالة داخلية محددة قابلة للقراءة البشرية.</entry>
+</row>
+
+<row>
+<entry
+>loggedaction</entry>
+<entry
+>سلسلة الإجراء المحددة من Subversion على العنصر (A, M, D)</entry>
+</row>
+<row>
+<entry
+>loggedcopyfrompath</entry>
+<entry
+>إذا نُسخ من أي مسار؟ (قد يكون فارغًا)</entry>
+</row>
+<row>
+<entry
+>loggedcopyfromrevision</entry>
+<entry
+>إذا نُسخ في أي مراجعة؟ (قد تكون &lt; 0)</entry>
+</row>
+<row>
+<entry
+>loggedpath</entry>
+<entry
+>على أي مسار فردي تُعيّن الإجراءات المسجلة للعنصر وغيرها. (المسار معيّن إلى عنوان url المستدعِي)</entry>
+</row>
+<row>
+<entry
+>diffresult</entry>
+<entry
+>سطر من مخرجات الفرق</entry>
+</row>
+</tbody>
+
+</tgroup>
+</table>
+
+</para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="kdesvn-commandline">
+<title
+>استخدام اس في ان لكيدي عبر سطر الأوامر</title>
+<sect1 id="kdesvn-commandline-overview">
+<title
+>نظرة عامة</title>
+<para
+>قد تُستخدم بعض عمليات Subversion عبر سطر الأوامر، مثل عميل سطر أوامر قياسي ولكن التفاعل مع المستخدم يتم عبر <acronym
+>UI</acronym
+>. الصيغة القياسية هي <userinput
+>kdesvn exec <replaceable
+>command</replaceable
+> <replaceable
+>parameter</replaceable
+> <replaceable
+>url</replaceable
+></userinput
+>. </para>
+<para
+>إذا أُريد مراجعة واحدة على &URL; واحد، فقد تُعيّن كمعامل للـ &URL; <programlisting
+>svn://your-server/path-to-repository/item?rev=&lt;your-rev&gt;</programlisting
+> سيؤدي هذا إلى تجاوز الخيار <option
+>-r &lt;rev&gt;</option
+>. </para>
+<para
+>قد تُعطى المراجعة كرقم أو كأحد <option
+>HEAD</option
+> أو <option
+>BASE</option
+> أو كصيغة تاريخ مثل {YYYY-MM-DD}. </para>
+</sect1>
+<sect1 id="kdesvn-command-list">
+<title
+>قائمة الأوامر</title>
+<para
+>إذا وُرد في النظرة العامة التالية كمعامل محتمل <option
+>-r <replaceable
+>revision</replaceable
+></option
+>، فقد تُعيّن هذه المراجعة كـ <userinput
+><replaceable
+>url</replaceable
+>?rev=<replaceable
+>the-revision</replaceable
+></userinput
+>. <table id="svn-commands-table">
+<title
+>أوامر Subversion</title>
+<tgroup cols="3">
+
+<thead>
+<row>
+<entry
+>الأمر</entry>
+<entry
+>معنى</entry>
+<entry
+>الخيارات المقبولة</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+<entry
+>commit (أو ci)</entry>
+<entry
+>أرسل تغييرات العنصر إلى المستودع</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>log</entry>
+<entry
+>اطبع سجل العنصر</entry>
+<entry
+>-r مراجعة_بداية:مراجعة_نهاية -l حد_العرض</entry>
+</row>
+<row>
+<entry
+>cat</entry>
+<entry
+>اعرض محتوى العنصر</entry>
+<entry
+>-r revision </entry>
+</row>
+<row>
+<entry
+>copy (أو cp)</entry>
+<entry
+>انسخ العنصر داخل نسخة العمل أو المستودع. إذا لم يُعطَ الهدف، سيطلب اس في ان لكيدي.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>move (أو mv, rename)</entry>
+<entry
+>انقل/أعد تسمية عنصر داخل نسخة العمل أو المستودع. إذا لم يُعطَ الهدف، سيطلب اس في ان لكيدي ذلك.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>get</entry>
+<entry
+>احصل على محتوى العنصر واحفظه</entry>
+<entry
+>-r مراجعة -o &lt;ملف_مخرج&gt; (المخرج مطلوب!)</entry>
+</row>
+<row>
+<entry
+>لوم (أو تعليق توضيحي)</entry>
+<entry
+>علق على الملف توضيحيًا</entry>
+<entry
+>-r startrevision:endrevision</entry>
+</row>
+<row>
+<entry
+>update</entry>
+<entry
+>حدّث العنصر في نسخة العمل</entry>
+<entry
+>-r revision</entry>
+</row>
+<row>
+<entry
+>diff</entry>
+<entry
+>فرق بين مراجعتين لعنصر أو فرق بين عنصرين عند مراجعة محددة</entry>
+<entry
+>-r startrev:endrev</entry>
+</row>
+<row>
+<entry
+>info</entry>
+<entry
+>معلومات مفصلة عن العنصر</entry>
+<entry
+>-r revision</entry>
+</row>
+<row>
+<entry
+>سحب (أو co)</entry>
+<entry
+>اسحب مسار المستودع إلى مسار نسخة عمل جديد. سيُطلب مسار الهدف ومراجعة المصدر.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>سحب إلى (أو coto)</entry>
+<entry
+>اسحب مسار المستودع إلى مسار نسخة عمل جديد. سيُطلب الفرق بين مسار المصدر ومراجعة المصدر.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>export</entry>
+<entry
+>صدّر مسار المستودع أو نسخة العمل إلى دليل. سيُطلب مسار الهدف ومراجعة المصدر.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>exportto</entry>
+<entry
+>صدّر مسار المستودع أو نسخة العمل إلى دليل. سيُطلب مسار المصدر ومراجعة المصدر.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>delete (del, remove, rm)</entry>
+<entry
+>احذف عنوان/عناوين URL من المستودع أو نسخة العمل.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>add</entry>
+<entry
+>أضف &URL; إلى نسخة العمل. يجب أن ينتمي &URL; إلى نسخة عمل (ليس استيرادًا!)</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>تراجع (أو إلغاء)</entry>
+<entry
+>ألغِ التغييرات الحالية على نسخة العمل. قد يُستخدم فقط على عناوين URL لنسخة العمل!</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>تحقق من الجديد (أو أضف الجديد)</entry>
+<entry
+>تحقق في &URL; المعطى من عناصر جديدة غير مُرقّمة وأضفها إلى نسخة العمل إذا رغبت.</entry>
+<entry
+></entry>
+</row>
+<row>
+<entry
+>tree</entry>
+<entry
+>يعرض شجرة المراجعات للعنصر (الوسيطة الأولى فقط)، إذا أُعطي &URL; مع <quote
+>?rev=<replaceable
+>xxx</replaceable
+></quote
+>، فهذه المراجعة هي مراجعة الوتد.</entry>
+<entry
+>-r startrev:endrev</entry>
+</row>
+<row>
+<entry
+>lock</entry>
+<entry
+>اقفل عنوان/عناوين URL، إذا أُعطي <option
+>-f</option
+> فتُكسر الأقفال الموجودة.</entry>
+<entry
+>-f</entry>
+</row>
+<row>
+<entry
+>unlock</entry>
+<entry
+>افتح عنوان/عناوين URL، إذا أُعطي <option
+>-f</option
+> فتُكسر الأقفال غير المملوكة أو تُتجاهل الأقفال غير الموجودة.</entry>
+<entry
+>-f</entry>
+</row>
+<row>
+<entry
+>help</entry>
+<entry
+>يعرض هذه الصفحة</entry>
+<entry
+></entry>
+</row>
+</tbody>
+</tgroup>
+
+</table>
+
+<table id="parameter-list">
+<title
+>وسيط لأوامر سابفيرجن</title>
+<tgroup cols="3">
+<thead>
+<row>
+<entry
+>المُعامِل</entry>
+<entry
+>القيم الممكنة</entry>
+<entry
+>مسموح به لـ</entry>
+</row>
+</thead>
+<tbody>
+<row>
+  <entry
+><option
+>-r</option
+></entry>
+<entry
+><replaceable
+>مراجعة</replaceable
+> أو <replaceable
+>بداية_مراجعة:نهاية_مراجعة</replaceable
+></entry>
+<entry
+>الكل عدا الالتزام</entry>
+</row>
+<row>
+  <entry
+><option
+>-R</option
+></entry>
+<entry
+>(لا شيء)</entry>
+<entry
+>الكل عدا الالتزام</entry>
+</row>
+<row>
+<entry
+><option
+>-o</option
+></entry>
+<entry
+><replaceable
+>اسم الملفّ</replaceable
+></entry>
+<entry
+>get</entry>
+</row>
+<row>
+<entry
+><option
+>-l</option
+></entry>
+<entry
+><replaceable
+>عدد</replaceable
+></entry>
+<entry
+>log</entry>
+</row>
+<row>
+<entry
+><option
+>-f</option
+></entry>
+<entry
+>(لا شيء)</entry>
+<entry
+>(إلغاء) القفل</entry>
+</row>
+
+</tbody>
+</tgroup>
+</table>
+
+</para>
+<sect2>
+  <title
+>أمر <quote
+>السجل</quote
+></title>
+<para
+>يعرض أمر السجل حوارًا يحتوي على سجل &URL; المعطى. مع سابفيرجن 1.2 أو أحدث يقبل حدًا، أي عدد الإدخالات التي يجب عرضها. </para>
+<para
+>داخل ذلك الحوار يمكنك تحديد إدخالات السجل والحصول على الفروقات بينها. <example>
+<title
+>اعرض آخر 20 سجل تأكيد</title>
+<programlisting
+>kdesvn exec log -l 20 -r HEAD&#058;1 myfile.c
+</programlisting>
+<para
+>انتبه لترتيب المراجعة: تريد الانتقال من HEAD إلى START للحصول على الأخيرة. لذا يجب إعطاء مراجعة HEAD كنقطة بداية، وإلا ستحصل على أول 20 إدخالًا.</para>
+</example>
+</para>
+</sect2>
+<sect2>
+  <title
+>أمر <quote
+>diff</quote
+></title>
+<para
+>تحصل على الفروقات بين مراجعات عنصر أو بين عنصرين داخل نفس النسخة العاملة أو المستودع. عند مقارنة مراجعات عنصر، يمكن إعطاء المراجعات كـ <option
+>-r <replaceable
+>STARTREV</replaceable
+>:<replaceable
+>ENDREV</replaceable
+></option
+>. عند مقارنة عنصر داخل نسخة عاملة دون أي مراجعات يطبع الفرق مقابل المستودع. <example>
+<title
+>اطبع الفرق مقابل المستودع، أي التغييرات المحلية</title>
+<programlisting
+>kdesvn exec diff myfile.c
+</programlisting>
+</example>
+<example>
+<title
+>اطبع الفرق بين المراجعات</title>
+<programlisting
+>kdesvn exec diff -r 21:20 myfile.c
+</programlisting>
+</example>
+</para>
+<para
+>عند مقارنة عنصرين يمكن إلحاق المراجعات بـ &URL; للعناصر. مثلًا: <programlisting
+>http://server/path/item?rev=HEAD</programlisting>
+<example>
+<title
+>مقارنة نسختين موسومتين</title>
+<programlisting
+>kdesvn exec diff http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_2 http://www.alwins-world.de/repos/kdesvn/tags/rel_0_6_3
+</programlisting>
+</example>
+</para>
+</sect2>
+</sect1>
+</chapter>
+
+<chapter id="setup">
+<title
+>إعدادات</title>
+<para
+>يمكن تغيير الإعدادات من حوار الإعداد. وهي مقسمة إلى عدة حوارات فرعية. </para>
+<sect1 id="general-settings">
+<title
+>عامّ</title>
+<para>
+<informaltable id="General-setup-items">
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+>حجم أيقونات عرض القائمة</entry>
+<entry
+>كم يجب أن يكون حجم الأيقونات (مربعة) في عرض القائمة الرئيسية</entry>
+</row>
+<row>
+<entry
+>اِعرِض معلومات الملف</entry>
+<entry
+>إذا كان يجب ظهور تلميح صغير عند تحريك الماوس فوق عنصر</entry>
+</row>
+<row>
+<entry
+>علّم حالة العنصر بتراكب الأيقونات</entry>
+<entry
+>عندما لا يكون عنصر في حالة سابفيرجن عادية قد يحصل على تراكب. (انظر <xref linkend="overlay-meaning"/>)</entry>
+</row>
+<row>
+<entry
+>تسلسل فرز العناصر حساس لحالة الأحرف</entry>
+<entry
+>إذا كان ترتيب الفرز في النافذة الرئيسية حساسًا لحالة الأحرف أم لا، أي إذا كان <quote
+>a</quote
+> لا يساوي <quote
+>A</quote
+>.</entry>
+</row>
+<row>
+<entry
+>اِعْرِض الملفات المتجاهلة</entry>
+<entry
+>أظهر العناصر المحددة في سابفيرجن للتجاهل أم لا.</entry>
+</row>
+<row>
+<entry
+>الحد الأقصى لرسائل السجل في السجل الخط الزمني</entry>
+<entry
+>كم عدد رسائل السجل التي يجب أن يتذكرها اس في ان لكيدي.</entry>
+</row>
+<row>
+<entry
+>اعرض التذييل الملوّن</entry>
+<entry
+>استخدم الألوان المعرفة في حوار الإعداد للتعليقات التوضيحية.</entry>
+</row>
+<row>
+<entry
+>استخدم لوحة الملاحة</entry>
+<entry
+>بدّل عرض شجرة المستودع.</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</para>
+</sect1>
+
+<sect1 id="subversion-timedjobs-settings">
+<title
+>إعدادات سابفيرجن والمهام الموقوتة</title>
+
+<table id="subversion-settings">
+<title
+>Subversion</title>
+<tgroup cols="2">
+
+<tbody>
+
+<row>
+<entry
+>ابدأ فحص التحديثات عند فتح نسخة عمل</entry>
+<entry
+>عند فتح نسخة عاملة ابدأ فحص التحديثات في الخلفية</entry>
+</row>
+<row>
+<entry
+>ابدأ تعبئة خبيئة السجل عند الفتح</entry>
+<entry
+>إذا تم الضبط يبدأ اس في ان لكيدي (إعادة) ملء خبيئة السجل عند فتح مستودع أو نسخة عاملة إذا لم يكن &URL; المستودع معينًا محليًا (<filename class="directory"
+>file://</filename
+>)</entry>
+</row>
+<row>
+  <entry
+>تحقق مما إذا كان للعناصر <quote
+>svn:needs-lock</quote
+> مضبوطًا</entry>
+<entry
+>تحقق في النسخ العاملة إذا كان لعنصر هذه الخاصية مضبوطة وإذا كان الأمر كذلك، اعرض أيقونة متراكبة خاصة. ضبط هذا قد يجعل القوائم بطيئة جدًا.</entry>
+</row>
+<row>
+<entry
+>اطلب تفاصيل الملف أثناء عمل قائمة عن بعد</entry>
+<entry
+>عند التحديد، يحصل اس في ان لكيدي على معلومات أكثر تفصيلًا عن عناصر الملفات عند عمل قائمة للمستودعات البعيدة. لذا قد ترى الأقفال البعيدة في النظرة العامة. كن حذرًا: هذا قد يجعل القوائم بطيئة جدًا!</entry>
+</row>
+
+<row>
+<entry
+>الكسب معلومات العنصر تكراريًا</entry>
+<entry
+>عند التفعيل، سيجلب الأمر <command
+>info</command
+> على المجلدات معلومات حول جميع العناصر أدناه، وقد يكون بطيئًا جدًا.</entry>
+</row>
+
+<row>
+<entry
+>اخزن كلمات السر للاتصالات عن بعد</entry>
+<entry
+>تخزين كلمات السر غالبًا ما يكون مشكلة أمنية. يخزن Subversion كلمات مروره في ملف مسطح، أي كلمات السر بنص عادي! لذا كن حذرًا عند ضبط هذه العلامة وانظر أيضًا إلى المدخل التالي. يشير هذا العنصر فقط إلى ما إذا كان حفظ كلمات المرور هو المبدئي، ويمكنك تغييره لنطاقات محددة داخل حوار تسجيل الدخول.</entry>
+</row>
+
+<row>
+<entry
+>اخزن كلمات السر في محفظة كيدي</entry>
+<entry
+>عند حفظ كلمات السر، يُعد الملف النصي العادي من Subversion ثغرة أمنية. يستطيع اس في ان لكيدي حفظها في محفظة &kde; المشفرة بدلًا من ذلك (بدءًا من الإصدار 0.12.0) واستخدامها. من ناحية أخرى، لا تستطيع عملاء Subversion الآخرون قراءتها، لذا يجب إدخالها إذا استخدمت أدوات مثل أداة سطر الأوامر <application
+>svn</application
+> أو <application
+>rapidsvn</application
+>. طالما أن Subversion لا يشفر تخزين كلمة السر، يجب أن تفكر مرتين في ذلك.</entry>
+</row>
+
+<row>
+<entry
+>استخدم خبيئة كلمات مرور داخلية</entry>
+<entry
+>عندما لا تُخزن كلمة السر بشكل دائم، قد يحتفظ بها اس في ان لكيدي حتى ينتهي اس في ان لكيدي، لذا قد لا تحتاج إلى إدخالها مرة أخرى لكل عملية. هذه الخبيئة ليست دائمة أبدًا، أي لن تُحفظ في أي مكان.</entry>
+</row>
+
+<row>
+<entry
+>السجل يتبع تغييرات العقد</entry>
+<entry
+>إذا فُعِّل، يتبع السجل عمليات النسخ.</entry>
+</row>
+
+<row>
+<entry
+>السجل آليًا يقرأ قائمة الملفات المغيّرة</entry>
+<entry
+>قد يقرأ أمر السجل قائمة الملفات المتغيرة في الالتزام. هذا مفيد وفي معظم الحالات لا يكلف حركة مرور حقيقية إضافية.</entry>
+</row>
+
+<row>
+<entry
+>راجع العناصر قبل الإيداع</entry>
+<entry
+>عند القيام بالالتزام، قد يقوم اس في ان لكيدي بفحص ما يجب فعله. على سبيل المثال، إذا كانت هناك عناصر غير مرقمة أسفل قد تُضاف، قائمة العناصر المتغيرة والعملية الحالية ستلتزم. هذا يكلف وقتًا يعتمد على الشجرة أكثر أو أقل.</entry>
+</row>
+
+<row>
+<entry
+>اخفِ العناصر الجديدة في مربع الإيداع</entry>
+<entry
+>هل يجب عرض العناصر غير ذات التنقيح في حوار الإيداع أم لا.</entry>
+</row>
+
+<row>
+<entry
+>التحديث يعدّل بدلًا من التعارضات</entry>
+<entry
+>إذا ضُبط، تؤدي الإضافة المحلية في نفس المسار مثل إضافة واردة من نفس نوع العقدة إلى عقدة عادية مع تعديل محلي محتمل، بدلًا من تعارض شجرة.</entry>
+</row>
+
+<row>
+<entry
+>التحديث ينشئ الآباء المفقودين</entry>
+<entry
+>إذا ضُبط، أنشئ أي مجلدات والد غير موجودة عبر فحصها أيضًا على عمق=فارغ</entry>
+</row>
+
+</tbody>
+
+</tgroup>
+</table>
+
+<table id="timejobs-settings">
+<title
+>المهام الموقوتة</title>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry
+><para
+>افحص العناصر المعدلة كل N ثانية</para
+> <para
+>افحص العناصر المحدثة كل N ثانية</para
+></entry>
+<entry
+>إذا ضُبط، افحص التحديثات أو العناصر المعدلة في النسخة العاملة عند تمكين الشبكة بشكل منتظم</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="diffmerge-settings">
+<title
+>الفرق والدمج</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>المقارنة تتجاهل نوع المحتوى</term>
+<listitem
+><para
+>مثير للاهتمام فقط عند عمل الفروق مع Subversion نفسه. عند الضبط، يتجاهل فرق Subversion نوع محتوى المدخلات. وإلا لن يُخرج فروقًا من الملفات الثنائية. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>المقارنة في شجرة التنقيحات هي تكرارية</term>
+<listitem
+><para
+>عند الضبط، تُصنع الفروق من داخل عرض شجرة المراجعة بشكل تكراري كما في جميع الحالات الأخرى. وإلا تُظهر فقط التغييرات التي تخص عناصر ذلك المجلد. كيفية ذلك تعتمد على كيفية توليد الفروق (من Subversion نفسه أو من عارضين خارجيين). </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>المقارنة تتجاهل تغييرات المسافات البيضاء</term>
+<listitem>
+<para
+>تجاهل التغييرات في كمية المسافات البيضاء (الخيار <option
+>-b</option
+> للأمر <application
+>diff</application
+>) </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>المقارنة تتجاهل كل المسافات البيضاء</term>
+<listitem>
+  <para
+>تجاهل جميع المسافات البيضاء (الخيار <option
+>-w</option
+> للأمر diff)</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>فضّل برنامج دمج خارجي</term>
+<listitem>
+<para
+>اضبط إذا كان دمج ببرنامج خارجي مفضّل وليس دمج Subversion</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>استخدم صيغة مقارنة غيت</term>
+<listitem>
+<para
+></para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+>اعرض النسخ كإضافة</term>
+<listitem>
+<para
+></para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+<sect2>
+<title
+>استخدم شاشة مقارنة خارجية</title>
+<para
+>يختار تطبيقًا خارجيًا لعرض الفروق. المبدئي هو &kompare;. </para>
+</sect2>
+<sect2>
+<title
+>شاشة مقارنة خارجية</title>
+<para
+>يحدد ما يستخدمه اس في ان لكيدي للعرض الخارجي للفروق وكيف سيُستدعى. هناك ثلاث طرق: </para>
+<para>
+<variablelist>
+<varlistentry>
+<term
+>&lt;program&gt; &lt;parameter&gt;</term>
+<listitem
+><para
+>سيُولد الفرق مع Subversion ويُوضع مباشرة في المدخل القياسي للبرنامج الخارجي (أي، لا حاجة لملفات مؤقتة) </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>&lt;program&gt; &lt;parameter&gt; %f</term>
+<listitem
+><para
+>سيُولد الفرق مع Subversion، ويُحفظ في ملف مؤقت، وسيُستبدل الوسيط <option
+>%f</option
+> باسم ذلك الملف. قد يُستخدم هذا، على سبيل المثال، مع استدعاء بسيط لـ <application
+>less</application
+> أو عارض نصوص. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>&lt;program&gt; &lt;parameter&gt; %1 %2</term>
+<listitem
+><para
+>يترك اس في ان لكيدي البرنامج الخارجي يصنع الفرق. سيُستبدل %1 و %2 بالقيم المطلوبة (أسماء ملفات أو أسماء مجلدات). يخزن اس في ان لكيدي المحتوى للمقارنة في بيئة مؤقتة (عندما تصدر المجلدات، وعندما يكون ملفًا واحدًا، يقوم بـ cat) عند الحاجة وينظف بعد إغلاق البرنامج الخارجي أو إغلاق نفسه. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>فضّل برنامج دمج خارجي</term>
+<listitem
+><para
+>اختر ما إذا كان في حوار الدمج يجب تفعيل <guilabel
+>استخدام دمج خارجي</guilabel
+> أم لا كمبدئي.</para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect2>
+<sect2>
+<title
+>برنامج دمج خارجي</title>
+<para
+>اضبط البرنامج والخيارات للاستخدام عندما لا يُراد الدمج المدمج في Subversion. المبدئي هو <command
+>kdiff3 %s1 %s2 %t</command
+>. ترتيب متغيرات الاستبدال ليس مهمًا، وقد تكون موجودة أكثر من مرة، مثل <literal
+>kdiff3 -o %t %s1 %s2 %t</literal
+>. هذا الشيء اختُبر فقط مع <application
+>meld</application
+> و &kdiff3;. فكر في أن البرامج الخارجية غالبًا لا تعرف شيئًا عن وسيط <command
+>ignore</command
+> في Subversion لذا قد تظهر أكثر بكثير مما هو متوقع. </para>
+<sect3>
+<title
+>استبدالات المتغيرات لبرنامج الدمج الخارجي</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>%s1</term>
+<listitem
+><para
+>يُستبدل بالمصدر رقم واحد. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>%s2</term>
+<listitem
+><para
+>يُستبدل بالمصدر رقم اثنين. إذا كان هذا فارغًا أو مساويًا للمصدر واحد وكانت مراجعة البداية والنهاية متطابقة، سيُتجاوز هذا المتغير. لذا كن حذرًا عند ضبط أوامر مثل <command
+>xxdiff --title1 %s1 --title2 %s2 %s1 %s2 %t</command
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>%t</term>
+<listitem
+><para
+>يُستبدل بالهدف. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect3>
+</sect2>
+<sect2 id="extern-resolve-setup">
+<title
+>برنامج حل التعارضات</title>
+<para
+>يمكنك استخدام برنامج خارجي مثل &kdiff3; لحل التعارضات، المبدئي هو <command
+>kdiff3 %o %m %n -o %t</command
+>. </para>
+<sect3>
+<title
+>تعويض المتغيرات لحل النزاعات الخارجية</title>
+<para
+>بين قوسين بعد كل وصف مثال عن كيفية استدعاء سابفيرجن للملفات. صُممت هذه الخيارات لـ&kdiff3;، لأنه حاليًا التطبيق الوحيد الذي يدعم جميع المعلمات اللازمة لحل النزاعات بشكل جيد. <variablelist>
+<varlistentry>
+<term
+>%o أو %l</term>
+<listitem
+><para
+>الإصدار القديم (محلي، يسار). يعني رقم المراجعة الأدنى، أي نقطة بداية التغييرات المتعارضة. (<filename
+>foo.cc.r2</filename
+>) </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%m أو %w</term>
+<listitem
+><para
+>إصدار الملف الخاص بي (العامل)، أي ما غيرته مقابل الإصدار القديم. (<filename
+>foo.cc.mine</filename
+>) </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%n أو %r</term>
+<listitem
+><para
+>الإصدار الجديد (بعيد، يمين) للملف. مثلًا، إصدار قام به شخص آخر. (<filename
+>foo.cc.r3</filename
+>) </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+>%t</term>
+<listitem
+><para
+>اسم الهدف، مثل الاسم الأصلي. بالنسبة لـ&kdiff3; (كمثال) سيكون هذا الاسم بعد المعامل <option
+>-o</option
+> (= ملف الإخراج). (<filename
+>foo.cc</filename
+>) </para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect3>
+</sect2>
+</sect1>
+<!--FIXME
+Colors
+
+Revisions tree
+-->
+<sect1 id="kio-cmdline-settings">
+<title
+>KIO / سطر الأوامر</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>اِعْرِض السجل بعد تنفيذ أمر</term>
+<listitem
+><para
+>هل يجب فتح حوار مع سجل آخر أمر سابفيرجن عند تنفيذه عبر سطر الأوامر أو قائمة إجراءات &konqueror;. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>الحد الأدنى من أسطر السجل لِلْعَرْض</term>
+<listitem
+><para
+>إذا ضُبط <guilabel
+>إظهار السجل...</guilabel
+>، فما هو الحد الأدنى لعدد الأسطر قبل ظهور هذا الحوار. لذا يمكنك ضبطه بحيث تظهر النافذة فقط عند إنشاء مخرجات مهمة (سجل الإيداع وما شابه). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>لا تَعْرِض قائمة السياق في كنكرر</term>
+<listitem
+><para
+>إذا ضُبط، فلن يُنشأ أي إدخال قائمة إجراءات لـاس في ان لكيدي في &konqueror;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>لا تَعْرِض إدخالات في قائمة إجراءات المستوى الأعلى</term>
+<listitem
+><para
+>إذا ضُبط، فلن يُظهر اس في ان لكيدي بعض الإجراءات الإضافية داخل قائمة <guimenuitem
+>إجراء</guimenuitem
+> في &konqueror; أو &dolphin;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>عمليات KIO تَسْتَخْدِم رسالة سجل قياسية</term>
+<listitem
+><para
+>عند إجراء عمليات على مستودع عبر بروتوكول KIO الخاص بـاس في ان لكيدي من داخل &konqueror; (أي بروتوكولات <quote
+>ksvn+...</quote
+>) في عمليات كبيرة مثل نقل أو نسخ المجلدات، سيطلب اس في ان لكيدي رسالة سجل لكل عنصر. هذا سلوك &konqueror;. عند ضبط هذا الخيار، لن يطلب تطبيق KIO من اس في ان لكيدي رسالة سجل بل سيضبط رسالة سجل قياسية. هذه العلامة ليست لعمليات قائمة إجراءات اس في ان لكيدي لـ&konqueror; بل فقط للنسخ/النقل/إنشاء المجلدات/الحذف التي تُجرى باستخدام &konqueror; أو مديري ملفات آخرين على عنوان KIO. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>الرسالة القياسية</term>
+<listitem
+><para
+>الرسالة التي يجب أن يضبطها KIO الخاص بـاس في ان لكيدي على العمليات من داخل &konqueror; عند ضبط العلامة أعلاه. المبدئي هو <guilabel
+>مراجعة أُجريت مع KIO الخاص بـاس في ان لكيدي</guilabel
+>. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>KIO يَسْتَطِيع الكتابة فوق</term>
+<listitem
+><para
+>إذا ضُبطت هذه العلامة، سيكون لديك دعم كتابة بسيط للعناصر الموجودة. مثلًا، يمكنك فتح ملفات في محررك وحفظها مباشرة دون سحبها مسبقًا (سيقوم اس في ان لكيدي بذلك في الخلفية).</para>
+<para
+>استخدم هذا فقط إذا كنت متأكدًا مما تفعله. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>KIO يَعْرِض رسائل تقدم</term>
+<listitem
+><para
+>إذا ضُبط، يُظهر KIO في بلازما كيدي معلومات مفصلة عن العملية الحالية. ستُعرض رسائل الخطأ الخاصة بـKIO دائمًا ولا يمكن إيقاف تشغيلها. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+</sect1>
+</chapter>
+
+<chapter id="commands">
+<title
+>مرجع الأوامر</title>
+
+<sect1 id="kdesvn-mainwindow">
+<title
+>النافذة الرئيسة لـاس في ان لكيدي</title>
+
+<sect2>
+<title
+>قائمة ملف</title>
+<para>
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>افتح</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>افتح نسخة عمل محلية أو مستودعًا سبق سحبه</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>عناوين URL مفتوحة حديثًا</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>هذا اختصار لفتح المستودعات المفتوحة حديثًا. النقر على هذا العنصر يفتح قائمة إلى جانب القائمة بعدة من أحدث نسخ العمل المحلية أو المستودعات المفتوحة. النقر على عنصر معين سيفتحه في اس في ان لكيدي </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>جديد</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>افتح نافذة بمثيل جديد من اس في ان لكيدي</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>إدارة سابفيرجن</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>عناصر قائمة بمهام إدارية لمستودعات سابفيرجن مثل: <simplelist
+> <member
+>إنشاء وفتح مستودع جديد</member
+> <member
+>تفريغ المستودع إلى ملف</member
+> <member
+>نسخ ساخن لمستودع</member
+> <member
+>تحميل التفريغ إلى المستودع</member
+> </simplelist
+> لمزيد من المعلومات، اقرأ مخرجات <command
+>svnadmin --help</command
+> </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>أغلق</guimenuitem
+> </menuchoice>
+</term>
+<listitem
+><para
+><action
+>أغلق</action
+> المستودع أو نسخة العمل المفتوحة حاليًا</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>أنهِ</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>يُنهي</action
+> اس في ان لكيدي</para
+></listitem>
+</varlistentry>
+</variablelist>
+</para>
+</sect2>
+<sect2>
+<title
+>قائمة العلامات المرجعية</title>
+<para
+>انظر <ulink url="help:/konqueror/bookmarks.html"
+>مساعدة &konqueror;</ulink
+>. </para>
+</sect2>
+
+<sect2 id="kdesvn-subversion-menu">
+<title
+>قائمة سابفيرجن</title>
+
+<variablelist id="subversion-general">
+<title
+>إجراءات سبفرجن العامة</title>
+<varlistentry>
+<term>
+<menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>سبفرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guimenuitem
+>تاريخ العنصر</guimenuitem
+> </menuchoice
+></term>
+<listitem>
+<para
+><action
+>اعرض</action
+> سجل كامل للعنصر المحدد حاليًا. كن حذرًا، قد تكون هذه القائمة كبيرة جدًا!</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; &Shift;<keycap
+>L</keycap
+></keycombo
+></shortcut
+> <guimenu
+>سبفرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guimenuitem
+>تاريخ العنصر متجاهلًا النسخ...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>اعرض سجل الخط الزمني للعنصر المحدد بدون تتبع النسخ.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>I</keycap
+></keycombo
+></shortcut
+> <guimenu
+>سبفرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guimenuitem
+>تفاصيل</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>يعرض معلومات مفصلة عن العنصر(العناصر) المحددة</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سبفرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guimenuitem
+>لوم</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>ينشئ قائمة مشروحة بكل الإيداعات. قد يستغرق ذلك وقتًا!</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سبفرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guimenuitem
+>نطاق اللوم</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>أشرح نطاقًا من الإيداعات لملف.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سبفرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guimenuitem
+>رأس القط</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>يعرض محتوى آخر نسخة مرسلة من ذلك المدخل. (قد يختلف عن نسخة نسخة العمل إذا كنت تعمل على نسخة عمل!)</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>F2</keycap
+></keycombo
+></shortcut
+> <guimenu
+>سبفرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guimenuitem
+>نقل</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>انقل أو أعد تسمية عنصر داخل نسخة العمل أو في المستودع</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>C</keycap
+></keycombo
+></shortcut
+> <guimenu
+>سبفرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guimenuitem
+>نسخ</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>انسخ عنصرًا داخل نسخة العمل أو في المستودع</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>Del</keycap
+></keycombo
+></shortcut
+> <guimenu
+>سبفرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guimenuitem
+>احذف الملفات/المجلدات المحددة</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>احذف المدخلات المحددة. إذا كنت تعمل في نسخة عمل، يجب عليك إيداع حذفك لاحقًا.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سبفرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guimenuitem
+>مجلد جديد</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>أنشئ مجلدًّا جديدًا.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سبفرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guimenuitem
+>استيراد مجلدات إلى الحالي</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>اختر المجلدات التي تريد استيرادها إلى الدليل المحدد حاليًا</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سبفرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guimenuitem
+>سحب مستودع</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>ينشئ نسخة عمل جديدة من مستودع</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سبفرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guimenuitem
+>تصدير مستودع</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>يصدر مستودعًا إلى نظام الملفات، أي ينشئ شجرة مراجعة نظيفة دون معلومات سبفرجن. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سبفرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guimenuitem
+>اقفل العناصر الحالية</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>أشر العناصر الحالية كمقفلة. اقرأ دليل سبفرجن قبل استخدام هذا! </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سبفرجن</guimenu
+> <guisubmenu
+>عام</guisubmenu
+> <guimenuitem
+>أفتح العناصر الحالية</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>أزل الأقفال عن العناصر الحالية. اقرأ دليل سبفرجن قبل استخدام هذا! </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-workingcopy">
+<title
+>نسخة العمل</title>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سبفرجن</guimenu
+> <guisubmenu
+>نسخة العمل</guisubmenu
+> <guimenuitem
+>حدّث إلى الرأس</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>حدّث النسخة العاملة إلى HEAD من المستودع</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>نسخة عاملة</guisubmenu
+> <guimenuitem
+>حدّث إلى مراجعة...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>حدّث النسخة العاملة إلى مراجعة محددة من المستودع</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>#</keycap
+></keycombo
+></shortcut
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>نسخة عاملة</guisubmenu
+> <guimenuitem
+>أودع</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>أودع التغييرات داخل النسخة العاملة للعناصر المحددة إلى المستودع.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>D</keycap
+></keycombo
+></shortcut
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>نسخة عاملة</guisubmenu
+> <guimenuitem
+>فرق التغييرات المحلية</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>اعرض التغييرات المحلية كمخرجات فرق (بدون وصول شبكي). هذا هو الفرق فقط إلى آخر حالة حُدّثت إليها النسخة العاملة، وليس مقابل الإصدار في المستودع.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>H</keycap
+></keycombo
+></shortcut
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>نسخة عاملة</guisubmenu
+> <guimenuitem
+>فرق مقابل HEAD</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>فرق النسخة العاملة الحالية مقابل HEAD من المستودع.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>نسخة عاملة</guisubmenu
+> <guimenuitem
+>خصائص</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>اعرض/حرّر الخصائص المخصصة للمدخل الحالي.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>إدراج</keycap
+></keycombo
+></shortcut
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>نسخة عاملة</guisubmenu
+> <guimenuitem
+>أضف الملفات/المجلدات المحددة</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>أضف الملفات و/أو المجلدات المحددة إلى التحكم بالإصدارات.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>نسخة عاملة</guisubmenu
+> <guimenuitem
+>ارجع التغييرات الحالية</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>ارجع التغييرات التي أُجريت في النسخة العاملة وحدّث إلى آخر حالة محدثة.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>نسخة عاملة</guisubmenu
+> <guimenuitem
+>علّم كمحلول</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>علّم العناصر المتضاربة كغير متضاربة وأزل الملفات المرتبطة.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>نسخة عاملة</guisubmenu
+> <guimenuitem
+>ادمج مراجعتين</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>ادمج مراجعتين من المدخلات في النسخة العاملة.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>نسخة عاملة</guisubmenu
+> <guimenuitem
+>تجاهل/إلغاء تجاهل العنصر الحالي</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>حرّر خاصية المجلد الأب للعنصر الحالي بحيث يُعلّم العنصر المحدد كمُتجاهَل إن لم يكن مضبوطًا، وإلا أزله من قائمة التجاهل.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>نسخة عاملة</guisubmenu
+> <guimenuitem
+>نظّف</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>نظّف النسخة العاملة وأزل الأقفال (للإيداع) إن وُجدت</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>نسخة عاملة</guisubmenu
+> <guimenuitem
+>بدّل المستودع</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>بدّل جذر النسخة العاملة الحالية.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-repository">
+<title
+>المستودع</title>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>مستودع</guisubmenu
+> <guimenuitem
+>سحب مسار المستودع الحالي</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>أنشئ نسخة عاملة من المدخل المحدد الحالي إن كان دليلًا.</para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>مستودع</guisubmenu
+> <guimenuitem
+>صدّر مسار المستودع الحالي</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>أنشئ نسخة نظيفة على نظام الملفات المحلي من المدخل المحدد الحالي إن كان دليلًا.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist id="subversion-view">
+<title
+>إجراءات العرض</title>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+><keycap
+>F5</keycap
+></keycombo
+></shortcut
+> <guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>عرض</guisubmenu
+> <guimenuitem
+>تحديث العرض</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>تحديث</action
+> الحالة الراهنة لجميع العناصر المعروضة. سيؤدي هذا إلى سرد كل عنصر مطلوب عرضه بالحالة الراهنة. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Subversion</guimenu
+> <guisubmenu
+>عرض</guisubmenu
+> <guimenuitem
+>توسيع شجرة الملفات / طي شجرة الملفات</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>توسيع أو طي عرض شجرة المستودع. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سابفيرجن</guimenu
+> <guisubmenu
+>خبيئة السجل</guisubmenu
+> <guimenuitem
+>أوقف تحديث خبيئة السجل</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>يُخبَّأ السجل ويُستخدم لعرض شجرة المراجعات لمستودع. اعتمادًا على اتصال الإنترنت وحجم مستودع سابفيرجن وطول السجل، قد يستغرق هذا وقتًا طويلًا. لذلك يمكنك إيقاف تحديث الخبيئة باستخدام هذا الإجراء. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>سابفيرجن</guimenu
+> <guimenuitem
+>أضف هويات ssh إلى وكيل ssh</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>خزّن كلمة سر مفتاح SSH الخاص بك للجلسة الحالية بحيث لا تحتاج إلى إدخال كلمة السر مرة أخرى. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</sect2>
+
+<sect2 id="kdesvn-database-menu">
+<title
+>قائمة قاعدة البيانات</title>
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>قاعدة بيانات</guimenu
+> <guimenuitem
+>اعرض محتوى قاعدة البيانات</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>يعرض نظرة عامة عن محتوى قاعدة بيانات الخبيئة للمستودعات المعروفة ويسمح بحذف الخبيئة أو المستودع والوصول إلى إعدادات المستودع. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>قاعدة بيانات</guimenu
+> <guimenuitem
+>إعدادات المستودع الحالي</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>يعرض حوارًا لتكييف إعدادات الخبيئة والسجلات والإحصائيات. </para
+></listitem>
+</varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+<title
+>قائمة الإعدادات والمساعدة</title>
+<para
+>بالإضافة إلى عناصر القائمة الشائعة في &kde; <guimenu
+>إعدادات</guimenu
+> و<guimenu
+>مساعدة</guimenu
+> الموضحة في <ulink url="help:/fundamentals/ui.html#menus-settings"
+>قائمة الإعدادات</ulink
+> و<ulink url="help:/fundamentals/ui.html#menus-help"
+>قائمة المساعدة</ulink
+> من أساسيات &kde; اس في ان لكيدي، يوجد إدخال القائمة الإضافي هذا:</para>
+<variablelist>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>إعدادات</guimenu
+> <guimenuitem
+>إعدادات سريعة</guimenuitem
+> </menuchoice
+></term>
+<listitem>
+
+<variablelist>
+
+<varlistentry>
+<term>
+<guimenuitem
+>اِحْمِل آخر وصلة مفتوحة عند البَدء</guimenuitem>
+</term
+><listitem>
+<para
+>أَعِدْ تحميل آخر وصلة مفتوحة إن لم يُعْطَ أيّ واحدة في سطر الأوامر.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>السجلات تَتْبَع تغييرات العقدة</guimenuitem>
+</term
+><listitem>
+<para
+><!--FIXME What does this option do? --></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>اِعْرِض الملفات المتجاهلة</guimenuitem>
+</term
+><listitem>
+<para
+>أظهر العناصر الموسومة في سابفيرجن للتجاهل أو لا.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>اِعْرِض الملفات المجهولة</guimenuitem>
+</term
+><listitem>
+<para
+>أظهر الملفات غير المضافة إلى مستودع سابفيرجن.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>أَخْفِ الملفات غير المتغيرة</guimenuitem>
+</term
+><listitem>
+<para
+>استخدم هذا الإجراء لإظهار الملفات المعدلة فقط وتوفير نظرة عامة واضحة وموجزة.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<guimenuitem
+>اعمل متّصلًا</guimenuitem>
+</term
+><listitem>
+<para
+>عند العمل دون اتصال، لن تُحدَّث خبيئة السجل، لذلك قد يختلف السجل المخبأ عن السجل الحقيقي.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect2>
+
+</sect1>
+</chapter>
+<chapter id="credits-and-license">
+<title
+>الاعتمادات والترخيص والشكر</title>
+<para
+>حقوق برنامج 2005-2009 &Rajko.Albrecht; &Rajko.Albrecht.mail; </para>
+<para
+>شكر جزيل للمساهمين: </para>
+<itemizedlist>
+<listitem
+><para
+>أندرياس ريختر <email
+>ar@oszine.de</email
+> - لمنفذ كيوت 4 لـ svnqt</para>
+</listitem>
+<listitem
+><para
+>مايكل بيبل <email
+>biebl@teco.edu</email
+> - للكثير من المساعدة والأفكار والتنفيذ والتلميحات.</para>
+</listitem>
+<listitem
+><para
+>برام شوينماكرز <email
+>bramschoenmakers@kde.nl</email
+> - للتلميحات الخاصة بـ &kde; والترجمة الهولندية وتنظيف الكود الخاص بي.</para>
+</listitem>
+</itemizedlist>
+<para
+>وشكر لجميع المترجمين الآخرين (لم أعتقد أبدًا أنني سأحصل على هذا العدد الكبير من الترجمات بهذه السرعة!) ولجميع ملاحظاتكم الإيجابية والسلبية. لقد ساعدت كثيرًا. </para>
+<para
+>إذا كنت تريد ترجمتك الخاصة لـ اس في ان لكيدي وقد تحتاج إلى مساعدة، فيرجى القراءة في <ulink url="http://l10n.kde.org/"
+>صفحة التعريب لـ &kde;</ulink
+> أو السؤال في <ulink url="mailto:kde-i18n-doc@kde.org"
+><email
+>kde-i18n-doc@kde.org</email
+> القائمة البريدية</ulink
+>. </para>
+<para
+>حقوق التوثيق 2005-2006 &Rajko.Albrecht; &Rajko.Albrecht.mail; </para>
+<para
+>الترجمة: زايد السعيدي <email
+>zayed.alsaidi@gmail.com</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+<appendix id="revision-syntax">
+<title
+>صياغة المراجعات</title>
+<para
+>يمكن إعطاء المراجعات بنفس الصيغة المستخدمة في عميل <application
+>svn</application
+> القياسي. وهذا يعني: رقم أو كلمة مفتاحية أو تاريخ. </para>
+<para>
+<variablelist>
+
+<varlistentry>
+<term
+>عدد</term>
+<listitem
+><para
+>رقم أكبر من أو يساوي -1. -1 تعني <quote
+>مراجعة غير محددة</quote
+>، و0 هي البداية. عادةً، لا ينبغي استخدام هذه الأرقام (معظم العمليات ستفشل بها). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>كلمة المفتاح</term>
+<listitem
+><para
+>أحد ما <itemizedlist>
+
+<listitem
+><para
+>رأس </para
+></listitem>
+
+<listitem
+><para
+>BASE </para
+></listitem>
+
+<listitem
+><para
+>مُودعة </para
+></listitem>
+
+<listitem
+><para
+>سابق </para
+></listitem>
+
+<listitem
+><para
+>ابدأ </para
+></listitem>
+
+<listitem
+><para
+>يعمل </para
+></listitem>
+
+</itemizedlist>
+
+</para>
+<para
+>الكلمات المفتاحية حساسة لحالة الأحرف! على سبيل المثال، head ليس مثل HEAD. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>التاريخ</term>
+<listitem
+><para
+>تاريخ بالصيغة {YYYY-MM-DD}. يجب أن يكون MM أو DD حقيقيين - مثلًا 2005-1-1 يجب كتابته كـ {2005-01-01}. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</para>
+<para
+>إلحاق مراجعة محددة بـ &URL; سيتم دائمًا عبر <quote
+>?rev=<replaceable
+>مراجعة</replaceable
+></quote
+>. </para>
+</appendix>
+
+&documentation.index;
+</book>

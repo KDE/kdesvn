@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-09-27 19:05+0300\n"
+"PO-Revision-Date: 2026-11-19 19:31+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 26.08.0\n"
+"X-Generator: Lokalize 26.08.2\n"
 "X-POOTLE-MTIME: 1502202338.000000\n"
 
 #, kde-format
@@ -239,7 +239,7 @@ msgstr "Veri Tabanı İçeriğini Göster"
 #: src/kdesvn.cpp:131
 #, kde-format
 msgid "Show the content of log cache database"
-msgstr "Günlük kaydı önbelleği veri tabanı içeriğini göster"
+msgstr "Günlük kaydı ön belleği veri tabanı içeriğini göster"
 
 #: src/kdesvn.cpp:138
 #, kde-format
@@ -466,7 +466,7 @@ msgstr "Görünüm"
 #: src/kdesvn_part.rc:89
 #, kde-format
 msgid "Log cache"
-msgstr "Günlük Önbelleği"
+msgstr "Günlük Ön Belleği"
 
 #. i18n: ectx: Menu (help)
 #: src/kdesvn_part.rc:98 src/kdesvnui.rc:52
@@ -619,7 +619,7 @@ msgstr "Döküm tamamlandı."
 #: src/kdesvnview.cpp:433
 #, kde-format
 msgid "Inserted %v not cached log entries of %m."
-msgstr "%m ögesinin %v önbelleklenmemiş günlük kaydı eklendi."
+msgstr "%m ögesinin %v ön belleğe alınmamış günlük kaydı eklendi."
 
 #: src/kiosvn/kiolistener.cpp:71 src/kiosvn/kiosvn.cpp:768
 #, kde-format
@@ -1959,7 +1959,7 @@ msgstr "Çalışan kopya açıldığında güncellemeleri denetime başla"
 #: src/settings/kdesvn_part.kcfg:104
 #, kde-format
 msgid "Start caching latest logs on open or commit"
-msgstr "Açma veya işlemede son günlükleri önbelleğe almaya başla"
+msgstr "Açma veya işlemede son günlükleri ön belleğe almaya başla"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:108
@@ -2003,7 +2003,7 @@ msgstr "Parolaları Subversion depolamasında değil KDE Cüzdanında sakla"
 #: src/settings/kdesvn_part.kcfg:132 src/settings/subversion_settings.ui:138
 #, kde-format
 msgid "Use internal password cache"
-msgstr "Dahili parola önbelleği kullan"
+msgstr "Dahili parola ön belleği kullan"
 
 #. i18n: ectx: label, entry, group (subversion)
 #: src/settings/kdesvn_part.kcfg:136
@@ -2052,7 +2052,7 @@ msgstr "Suçlama görüntüsü için yerel"
 #, kde-format
 msgid "Check status of log cache when starting revision tree"
 msgstr ""
-"Revizyon ağacını başlatırken günlük kaydı önbelleğinin durumunu denetle"
+"Revizyon ağacını başlatırken günlük kaydı ön belleğinin durumunu denetle"
 
 #. i18n: ectx: label, entry, group (revision_tree)
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -2249,7 +2249,7 @@ msgstr "Silinen ögelerin rengi:"
 #, kde-format
 msgid "Should kdesvn check content of log cache before starting the tree"
 msgstr ""
-"Kdesvn, ağacı başlatmadan önce günlük önbelleğinin içeriğini denetlemeli mi"
+"Kdesvn, ağacı başlatmadan önce günlük ön belleğinin içeriğini denetlemeli mi"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_fill_cache_on_tree)
 #: src/settings/revisiontree_settings.ui:180
@@ -2260,16 +2260,16 @@ msgid ""
 "\n"
 "But this may slow down tree generation so it is disabled by default."
 msgstr ""
-"Ağaç üretmeye başlarken ve günlük önbelleğinden veri okurken kdesvn ağ "
+"Ağaç üretmeye başlarken ve günlük ön belleğinden veri okurken kdesvn ağ "
 "etkinse depodaki yeni ögeleri denetleyebilir. \n"
 "\n"
-"Ama bu ağaç üretimini yavaşlatabilir; bu yüzden ötanımlı olarak kapalıdır."
+"Ama bu ağaç üretimini yavaşlatabilir; bu yüzden varsayılan olarak kapalıdır."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_fill_cache_on_tree)
 #: src/settings/revisiontree_settings.ui:183
 #, kde-format
 msgid "Check log cache fill before reading tree"
-msgstr "Ağacı okumadan önce günlük önbelleği doluluğunu denetle"
+msgstr "Ağacı okumadan önce günlük ön belleği doluluğunu denetle"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_start_updates_check_on_open)
 #: src/settings/subversion_settings.ui:14
@@ -2288,13 +2288,13 @@ msgstr "Bir çalışma kopyası açarken güncellemeleri denetlemeye başla"
 #: src/settings/subversion_settings.ui:33
 #, kde-format
 msgid "Start refreshing the log cache for repository when networking enabled"
-msgstr "Ağ etkinken depo için günlük önbelleğini yenilemeyi başlat"
+msgstr "Ağ etkinken depo için günlük ön belleğini yenilemeyi başlat"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_log_cache_on_open)
 #: src/settings/subversion_settings.ui:36
 #, kde-format
 msgid "Start fill log cache on open"
-msgstr "Açarken günlük önbelleğini doldurmaya başla"
+msgstr "Açarken günlük ön belleğini doldurmaya başla"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_check_needslock)
 #: src/settings/subversion_settings.ui:43
@@ -2457,7 +2457,7 @@ msgstr "Parolaları KDE Cüzdanında sakla"
 #: src/settings/subversion_settings.ui:135
 #, kde-format
 msgid "Use an internal password cache"
-msgstr "Dahili bir parola önbelleği kullan"
+msgstr "Dahili bir parola ön belleği kullan"
 
 #. i18n: ectx: property (toolTip), widget (QCheckBox, kcfg_log_always_list_changed_files)
 #: src/settings/subversion_settings.ui:155
@@ -2535,27 +2535,27 @@ msgstr "Güncelleme eksik üstleri yapar"
 #, kde-format
 msgid ""
 "Not filling log cache because it is disabled due setting for this repository."
-msgstr "Günlük önbelleği bu deponun ayarları gereğince doldurulmuyor."
+msgstr "Günlük ön belleği bu deponun ayarları gereğince doldurulmuyor."
 
 #: src/svnfrontend/background/fillcachethread.cpp:78
 #, kde-format
 msgid "Filling log cache in background."
-msgstr "Günlük önbelleği arka planda dolduruluyor."
+msgstr "Günlük ön belleği arka planda dolduruluyor."
 
 #: src/svnfrontend/background/fillcachethread.cpp:100
 #, kde-format
 msgid "Filling cache canceled."
-msgstr "Önbellek doldurma iptal edildi."
+msgstr "Ön bellek doldurma iptal edildi."
 
 #: src/svnfrontend/background/fillcachethread.cpp:115
 #, kde-format
 msgid "Cache filled up to revision %1."
-msgstr "Önbellek, %1 revizyonuna kadar dolduruldu."
+msgstr "Ön bellek, %1 revizyonuna kadar dolduruldu."
 
 #: src/svnfrontend/background/fillcachethread.cpp:122
 #, kde-format
 msgid "Filling log cache in background finished."
-msgstr "Günlük önbelleğinin arka planda doldurulması tamamlandı."
+msgstr "Günlük ön belleğinin arka planda doldurulması tamamlandı."
 
 #: src/svnfrontend/background/tcontextlistener.cpp:182
 #, kde-format
@@ -3026,7 +3026,7 @@ msgstr "1.8 öncesi Subversion ile uyumlu"
 #: src/svnfrontend/database/dboverview.cpp:113
 #, kde-format
 msgid "Log cache holds %1 log entries and consumes %2 on disk."
-msgstr "Günlük önbelleği %1 kayıt girdisi tutuyor ve diskte %2 yer kaplıyor."
+msgstr "Günlük ön belleği %1 kayıt girdisi tutuyor ve diskte %2 yer kaplıyor."
 
 #: src/svnfrontend/database/dboverview.cpp:129
 #, kde-format
@@ -3034,19 +3034,19 @@ msgid ""
 "Really clean cache for repository\n"
 "%1?"
 msgstr ""
-"Şu depo için önbellek gerçekten temizlensin mi\n"
+"Şu depo için ön bellek gerçekten temizlensin mi\n"
 "%1?"
 
 #: src/svnfrontend/database/dboverview.cpp:130
 #, kde-format
 msgid "Clean repository cache"
-msgstr "Depo önbelleğini temizle"
+msgstr "Depo ön belleğini temizle"
 
 #: src/svnfrontend/database/dboverview.cpp:131
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete Cache"
-msgstr "Önbelleği Sil"
+msgstr "Ön belleği Sil"
 
 #: src/svnfrontend/database/dboverview.cpp:148
 #, kde-format
@@ -3054,7 +3054,7 @@ msgid ""
 "Really clean cache and data for repository\n"
 "%1?"
 msgstr ""
-"Şu depo için önbellek ve veri gerçekten temizlensin mi\n"
+"Şu depo için ön bellek ve veri gerçekten temizlensin mi\n"
 "%1?"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DeleteRepositoryButton)
@@ -3074,7 +3074,7 @@ msgstr "Depoyu Sil"
 #: src/svnfrontend/database/dboverview.ui:6
 #, kde-format
 msgid "Overview about cache database content"
-msgstr "Önbellek veri tabanı içeriği hakkında genel görünüm"
+msgstr "Ön bellek veri tabanı içeriği hakkında genel görünüm"
 
 #. i18n: ectx: property (text), widget (QLabel, m_RepositoryLabel)
 #: src/svnfrontend/database/dboverview.ui:19
@@ -3088,13 +3088,13 @@ msgstr "Bilinen depolar"
 #: src/svnfrontend/database/dboverview.ui:43
 #, kde-format
 msgid "Delete cache entries for current selected repository"
-msgstr "Geçerli Seçili Depo için Önbellek Girdilerini Sil"
+msgstr "Geçerli Seçili Depo Ön Bellek Girdilerini Sil"
 
 #. i18n: ectx: property (text), widget (QPushButton, m_DeleteCacheButton)
 #: src/svnfrontend/database/dboverview.ui:46
 #, kde-format
 msgid "Delete cache"
-msgstr "Önbelleği Sil"
+msgstr "Ön Belleği Sil"
 
 #. i18n: ectx: property (toolTip), widget (QPushButton, m_DeleteRepositoryButton)
 #. i18n: ectx: property (statusTip), widget (QPushButton, m_DeleteRepositoryButton)
@@ -3126,13 +3126,13 @@ msgstr "%1 Ayarları"
 #: src/svnfrontend/database/dbsettings.ui:21
 #, kde-format
 msgid "Log cache settings"
-msgstr "Günlük önbelleği ayarları"
+msgstr "Günlük Ön Belleği Ayarları"
 
 #. i18n: ectx: property (text), widget (QCheckBox, dbcfg_noCacheUpdate)
 #: src/svnfrontend/database/dbsettings.ui:27
 #, kde-format
 msgid "Do not update log cache on open"
-msgstr "Açarken günlük önbelleğini güncelleme"
+msgstr "Açarken günlük ön belleğini güncelleme"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: src/svnfrontend/database/dbsettings.ui:40
@@ -3796,7 +3796,7 @@ msgstr "Günlükler alınıyor — vazgeçmek için İptal’e basın"
 #: src/svnfrontend/graphtree/revisiontree.cpp:108
 #, kde-format
 msgid "No log cache possible due broken database and networking not allowed."
-msgstr "Veri tabanı ve ağa izin verilmediğinden uygun günlük önbelleği yok."
+msgstr "Veri tabanı ve ağa izin verilmediğinden uygun günlük ön belleği yok."
 
 #: src/svnfrontend/graphtree/revisiontree.cpp:108
 #: src/svnfrontend/graphtree/revisiontree.cpp:113
@@ -4476,12 +4476,12 @@ msgstr "Dosya ağacının tüm dallarını kapatır"
 #: src/svnfrontend/maintreewidget.cpp:2056
 #, kde-format
 msgid "Update log cache"
-msgstr "Günlük Önbelleğini Güncelle"
+msgstr "Günlük Ön Belleğini Güncelle"
 
 #: src/svnfrontend/maintreewidget.cpp:888
 #, kde-format
 msgid "Update the log cache for current repository"
-msgstr "Geçerli depo için günlük önbelleğini güncelle"
+msgstr "Geçerli depo için günlük ön belleğini güncelle"
 
 #: src/svnfrontend/maintreewidget.cpp:902
 #, kde-format
@@ -4497,7 +4497,7 @@ msgstr "Geçerli Depo Ayarları"
 #: src/svnfrontend/maintreewidget.cpp:2051
 #, kde-format
 msgid "Stop updating the log cache"
-msgstr "Günlük önbelleğini güncellemeyi durdur"
+msgstr "Günlük ön belleğini güncellemeyi durdur"
 
 #: src/svnfrontend/maintreewidget.cpp:1280
 #, kde-format
@@ -5511,7 +5511,7 @@ msgstr "Depoda yeni ögeler var"
 #: src/svnfrontend/svnactions.cpp:2721
 #, kde-format
 msgid "Not filling log cache because networking is disabled"
-msgstr "Ağ kapalı olduğundan günlük önbelleği doldurulmuyor"
+msgstr "Ağ kapalı olduğundan günlük ön belleği doldurulmuyor"
 
 #: src/svnfrontend/svnactions.cpp:2761
 #, kde-format

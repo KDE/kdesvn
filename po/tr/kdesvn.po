@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdesvn\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:54+0000\n"
-"PO-Revision-Date: 2026-11-19 19:31+0300\n"
+"PO-Revision-Date: 2026-11-23 18:14+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -1044,7 +1044,7 @@ msgstr ""
 "<p>\n"
 "<i>Sonsuzluk derinliği</i><br />Güncellemeler zaten var olmayan tüm "
 "dosyaları ve alt dizinleri getirir; bu alt dizinlerin this_dir girdileri "
-"sonsuz derinliğe sahip olur.<br />1.5-öncesi öntanımlı güncelleme "
+"sonsuz derinliğe sahip olur.<br />1.5-öncesi varsayılan güncelleme "
 "davranışına eşittir. </p>"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, m_DepthCombo)
@@ -1131,7 +1131,7 @@ msgstr "Kodlamayı seç:"
 #: src/ksvnwidgets/encodingselector.ui:44
 #, kde-format
 msgid "Default UTF-8"
-msgstr "Öntanımlı UTF-8"
+msgstr "Varsayılan UTF-8"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, m_ChangedList)
 #: src/ksvnwidgets/models/commitmodel.cpp:191 src/svnfrontend/svnlogdlg.ui:158
@@ -1603,7 +1603,7 @@ msgstr ""
 "<b><tt>%t</tt></b> Kaydedilecek hedef, kdesvn asıl dosya adını kullanır.\n"
 "</p>\n"
 "<p>\n"
-"Öntanımlı: <tt>kdiff3 %o %m %n -o %t</tt>\n"
+"Varsayılan: <tt>kdiff3 %o %m %n -o %t</tt>\n"
 "</p>"
 
 #. i18n: ectx: property (text), widget (QLabel, mdiff_display_label)
@@ -2396,7 +2396,7 @@ msgstr "Ağlı depolarda her zaman özellikleri al"
 #: src/settings/subversion_settings.ui:101
 #, kde-format
 msgid "Should Subversion store passwords by default"
-msgstr "Subversion’un öntanımlı olarak parolaları kaydedip kaydetmeyeceği"
+msgstr "Subversion’un varsayılan olarak parolaları kaydedip kaydetmeyeceği"
 
 #. i18n: ectx: property (whatsThis), widget (QCheckBox, kcfg_store_passwords)
 #: src/settings/subversion_settings.ui:104
@@ -3406,8 +3406,8 @@ msgid ""
 "bugtracking ID is appended to the log message."
 msgstr ""
 "Hata izleme kimliğinin günlük iletisinin üstüne eklenmesini istiyorsanız "
-"<b>false</b> olarak ayarlayın. Öntanımlı değer hata izleme kimliğinin günlük "
-"iletisine ekleneceği anlamına gelen <b>true</b> değeridir."
+"<b>false</b> olarak ayarlayın. Varsayılan değer hata izleme kimliğinin "
+"günlük iletisine ekleneceği anlamına gelen <b>true</b> değeridir."
 
 #: src/svnfrontend/editpropsdlg.cpp:129
 #, kde-format
@@ -3452,7 +3452,7 @@ msgstr "Özellik değeri:"
 #: src/svnfrontend/editpropsdlg.ui:69
 #, kde-format
 msgid "Click for short info about pre-defined property name"
-msgstr "Öntanımlı özellik adıyla ilgili kısa bilgi için tıklayın"
+msgstr "Varsayılan özellik adıyla ilgili kısa bilgi için tıklayın"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, CheckoutInfo)
 #: src/svnfrontend/fronthelpers/checkoutinfo.ui:14
@@ -3917,7 +3917,7 @@ msgstr "Yok Say"
 #: src/svnfrontend/loaddmpdlg.ui:50
 #, kde-format
 msgid "Default"
-msgstr "Öntanımlı"
+msgstr "Varsayılan"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_UsePre)
 #: src/svnfrontend/loaddmpdlg.ui:66
